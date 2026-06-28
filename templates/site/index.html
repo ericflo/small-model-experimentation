@@ -68,7 +68,7 @@
             <label class="control search-field">
               <span>Search</span>
               <svg class="search-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-              <input id="globalSearch" type="search" autocomplete="off" placeholder="selector, compiler, memory, smoke command…">
+              <input id="globalSearch" type="search" autocomplete="off" placeholder="selector, compiler, memory, smoke-test command…">
             </label>
             <label class="control">
               <span>Program</span>
@@ -104,7 +104,7 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Corpus map</p>
-                <h3>Programs by weight &amp; readiness</h3>
+                <h3>Programs by size &amp; readiness</h3>
               </div>
             </div>
             <div id="programNetwork" class="visual network-visual"></div>
@@ -180,13 +180,13 @@
         <div class="section-heading">
           <p class="eyebrow">Curation work</p>
           <h2>What needs attention before reuse</h2>
-          <p class="sub">Anchor-ready experiments can be cited and built on directly. The rest carry specific, named curation gaps.</p>
+          <p class="sub">Anchor-ready experiments can be cited and built on directly. The rest carry specific, named curation needs.</p>
         </div>
         <div class="split-layout">
           <div class="tool-panel sticky-side">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">Top gaps</p>
+                <p class="eyebrow">Top needs</p>
                 <h3>Curation needs across the corpus</h3>
               </div>
             </div>
@@ -265,7 +265,7 @@
               <div id="extensionChart" class="visual"></div>
             </div>
           </div>
-          <div class="tool-panel">
+          <div class="tool-panel sticky-side">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Narrative</p>
@@ -279,9 +279,15 @@
     </main>
 
     <footer class="site-footer">
-      <span class="gen-stamp" id="footerStamp">Generated research atlas</span>
-      <span>A self-contained map built from the repository knowledgebase.</span>
-      <a id="footerRepo" href="#">View the repository ↗</a>
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <p class="footer-title">Small Model Experimentation</p>
+          <p class="gen-stamp" id="footerStamp">Generated research atlas</p>
+        </div>
+      </div>
+      <p class="footer-note">A self-contained map built from the repository knowledgebase — programs, experiments, claims, the future queue, and curation readiness.</p>
+      <a id="footerRepo" class="footer-link" href="#">View the repository ↗</a>
     </footer>
 
     <div id="drawerScrim" class="scrim"></div>

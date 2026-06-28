@@ -24,7 +24,7 @@
   --line-inv: #39475a;
 
   /* Signal palette — semantic, used consistently everywhere */
-  --teal: #0c7a84;
+  --teal: #0a666e;
   --blue: #2b5fae;
   --green: #2c7d54;
   --amber: #b9720f;
@@ -656,6 +656,8 @@ tbody td {
 tbody tr { cursor: pointer; transition: background 100ms ease; }
 tbody tr:hover { background: var(--surface-tint); }
 tbody tr:last-child td { border-bottom: none; }
+.row-open { display: block; width: 100%; text-align: left; background: none; border: none; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+.row-open:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
 .cell-id { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--ink); word-break: break-word; }
 .cell-title { display: block; margin-top: 2px; color: var(--muted); font-size: 0.82rem; }
 .col-progs { white-space: nowrap; }
@@ -671,15 +673,16 @@ tbody tr:last-child td { border-bottom: none; }
   font-size: 0.72rem;
   font-weight: 500;
   white-space: nowrap;
+  color: var(--ink-soft); /* AA text; status hue carried by the dot */
 }
-.status-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-.status-tag.ready { color: var(--green); }
-.status-tag.notready { color: var(--amber); }
+.status-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dot, currentColor); }
+.status-tag.ready { --dot: var(--green); }
+.status-tag.notready { --dot: var(--amber); }
 
 /* ============================================================================
    Queue board
    ========================================================================== */
-.queue-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.queue-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .queue-column {
   min-width: 0;
   display: flex;
@@ -777,10 +780,10 @@ tbody tr:last-child td { border-bottom: none; }
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--status-color, var(--muted));
-  background: color-mix(in srgb, var(--status-color, var(--muted)) 13%, var(--surface));
+  color: var(--ink-soft); /* AA text; hue carried by the dot + tint, not the label */
+  background: color-mix(in srgb, var(--status-color, var(--muted)) 14%, var(--surface));
 }
-.status-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--status-color, var(--muted)); }
 .claim-card h3 { margin: 0; font-size: 1.04rem; line-height: 1.2; }
 .claim-card .claim-summary { margin: 8px 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
 
@@ -936,6 +939,7 @@ tbody tr:last-child td { border-bottom: none; }
   transition: opacity 110ms ease;
 }
 .tooltip.visible { opacity: 1; }
+.tooltip.below { transform: translate(-50%, 0); }
 .tooltip strong { font-family: var(--mono); font-size: 0.76rem; }
 .tooltip .tip-meta { color: #aeb9c6; font-family: var(--mono); font-size: 0.72rem; }
 
@@ -959,22 +963,32 @@ tbody tr:last-child td { border-bottom: none; }
 /* ============================================================================
    Footer
    ========================================================================== */
+/* dark colophon — bookends the page against the dark corpus map (dark -> light -> dark) */
 .site-footer {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px 32px;
+  gap: 18px 40px;
   align-items: center;
   justify-content: space-between;
-  padding: 28px var(--pad-edge);
-  border-top: 1px solid var(--line);
-  background: var(--paper-deep);
+  padding: 36px var(--pad-edge);
+  background: var(--ink);
+  color: var(--inkInv);
   font-family: var(--mono);
-  font-size: 0.76rem;
-  color: var(--muted);
+  font-size: 0.78rem;
 }
-.site-footer a { color: var(--teal); text-decoration: none; }
-.site-footer a:hover { text-decoration: underline; }
-.site-footer .gen-stamp { color: var(--faint); }
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.footer-brand .brand-mark { box-shadow: inset 0 0 0 2px var(--ink), 0 0 0 1px var(--line-inv); }
+.footer-brand .brand-mark::after { background: var(--ink); box-shadow: inset 0 0 0 1.5px var(--inkInv); }
+.footer-brand .brand-mark::before {
+  background:
+    linear-gradient(90deg, transparent calc(50% - 0.75px), var(--inkInv) calc(50% - 0.75px) calc(50% + 0.75px), transparent calc(50% + 0.75px)),
+    linear-gradient(0deg, transparent calc(50% - 0.75px), var(--inkInv) calc(50% - 0.75px) calc(50% + 0.75px), transparent calc(50% + 0.75px));
+}
+.footer-title { margin: 0; font-family: var(--display); font-weight: 700; font-size: 0.95rem; color: var(--inkInv); letter-spacing: -0.01em; }
+.footer-note { margin: 0; max-width: 46ch; color: var(--faintInv); line-height: 1.5; }
+.gen-stamp { color: var(--faintInv); margin: 1px 0 0; }
+.footer-link { color: var(--inkInv); text-decoration: none; border-bottom: 1px solid var(--line-inv); padding-bottom: 2px; white-space: nowrap; }
+.footer-link:hover { border-bottom-color: var(--inkInv); }
 
 /* ============================================================================
    Round-2 additions: a11y, signature surface, rail, cross-links, polish
@@ -1043,8 +1057,26 @@ tbody tr:last-child td { border-bottom: none; }
 }
 .metric-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent, var(--teal)) 45%, var(--line)); }
 .metric-card .metric-help { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.metric-go { color: var(--accent, var(--teal)); opacity: 0; transform: translateX(-4px); transition: opacity 130ms ease, transform 130ms ease; font-weight: 700; }
-.metric-card:hover .metric-go, .metric-card:focus-visible .metric-go { opacity: 1; transform: translateX(0); }
+.metric-go {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent, var(--teal));
+  opacity: 0.55;
+  transition: opacity 130ms ease, transform 130ms ease;
+}
+.metric-card:hover .metric-go, .metric-card:focus-visible .metric-go { opacity: 1; transform: translateX(2px); }
+.metric-of {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
 
 /* ---- Sticky filter rail -------------------------------------------------- */
 .filter-rail {

@@ -3,7 +3,7 @@
 const DATA = JSON.parse(document.getElementById("site-data").textContent);
 
 const COLORS = {
-  teal: "#0c7a84",
+  teal: "#0a666e",
   blue: "#2b5fae",
   green: "#1f8a4d",
   amber: "#b9720f",
@@ -34,10 +34,11 @@ const STATUS_COLORS = {
 };
 
 /* 11 muted, mutually distinct categorical hues for programs (lower saturation than the
-   status signals; identity is reinforced by node initials + the legend, not color alone). */
+   status signals; identity is reinforced by node initials + the legend, not color alone).
+   Tuned so text-on-white (CTAs) and white-on-fill (code badges) both clear WCAG AA. */
 const PROGRAM_PALETTE = [
-  "#3d6fa6", "#2a8c82", "#6d5bb0", "#b3578a", "#a8762f", "#5e9440",
-  "#3f93a8", "#a7644a", "#7d8a36", "#9c4f9c", "#566b86"
+  "#3d6fa6", "#1f7068", "#6d5bb0", "#a44a7e", "#8a5f26", "#4a7a33",
+  "#2f7888", "#a7644a", "#646f2b", "#9c4f9c", "#455468"
 ];
 
 /* Lowercase minor words for display title-case; fix a few corpus spellings. */
@@ -53,6 +54,12 @@ function humanizeTitle(value) {
       return word;
     })
     .join("");
+}
+
+/* Clean a corpus title for display: drop the generator's trailing " Experiment",
+   then apply display title-casing. */
+function cleanTitle(value) {
+  return humanizeTitle(String(value || "").replace(/\s+Experiment$/i, ""));
 }
 
 /* Map raw kebab/snake tokens to readable phrases for end users. */
@@ -149,7 +156,10 @@ function listText(items) { return (items || []).join(", "); }
 function textBlob(item) {
   return Object.values(item).flatMap((v) => (Array.isArray(v) ? v : [v])).join(" ").toLowerCase();
 }
-function matchesSearch(item) { return !state.search || textBlob(item).includes(state.search.toLowerCase()); }
+function matchesSearch(item) {
+  const q = state.search.trim().toLowerCase();
+  return !q || textBlob(item).includes(q);
+}
 function matchesProgram(item, field = "programs") {
   if (state.program === "all") return true;
   return splitList(item[field]).includes(state.program);
@@ -176,12 +186,17 @@ function text(content, attrs = {}) {
 
 /* ---------------------------------------------------------------- tooltip */
 function showTooltip(event, html) {
-  els.tooltip.innerHTML = html;
+  const tip = els.tooltip;
+  tip.innerHTML = html;
+  tip.classList.add("visible");
   const pad = 12;
-  let x = event.clientX, y = event.clientY;
-  els.tooltip.style.left = `${Math.min(window.innerWidth - pad, Math.max(pad, x))}px`;
-  els.tooltip.style.top = `${y}px`;
-  els.tooltip.classList.add("visible");
+  const rect = tip.getBoundingClientRect();
+  const halfW = rect.width / 2;
+  const x = Math.min(window.innerWidth - halfW - pad, Math.max(halfW + pad, event.clientX));
+  const below = event.clientY - rect.height - 16 < pad; // flip below when no room above
+  tip.classList.toggle("below", below);
+  tip.style.left = `${x}px`;
+  tip.style.top = `${event.clientY + (below ? 16 : 0)}px`;
 }
 function hideTooltip() { els.tooltip.classList.remove("visible"); }
 function attachTooltip(el, html) {
@@ -242,7 +257,8 @@ function syncControls() {
   [els.program, els.programTop].forEach((c) => c && (c.value = state.program));
   [els.ready, els.readyTop].forEach((c) => c && (c.value = state.ready));
   [els.need, els.needTop].forEach((c) => c && (c.value = state.need));
-  [els.search, els.searchTop].forEach((c) => c && (c.value = state.search));
+  // never overwrite the field the user is typing in (it strips spaces / moves the caret)
+  [els.search, els.searchTop].forEach((c) => { if (c && c !== document.activeElement) c.value = state.search; });
 }
 
 function setProgram(id) {
@@ -256,7 +272,8 @@ function setSearch(value) { state.search = value; syncControls(); render(); }
 
 /* ---------------------------------------------------------------- drawer */
 let lastFocused = null;
-function openDrawer(eyebrow, title, lead, rows, extra = "") {
+let openingFromHistory = false; // true while opening from popstate/deep-link (don't push)
+function openDrawer(eyebrow, title, lead, rows, extra = "", hash = "") {
   lastFocused = document.activeElement;
   const detail = rows
     .filter((r) => r[1] !== undefined && r[1] !== "" && r[1] !== null)
@@ -275,6 +292,10 @@ function openDrawer(eyebrow, title, lead, rows, extra = "") {
   els.drawer.setAttribute("aria-hidden", "false");
   setBackgroundInert(true);
   els.drawerClose.focus();
+  // make the open entity a shareable URL + let Back/Forward close/reopen it
+  if (hash && !openingFromHistory) {
+    try { history.pushState({ drawer: 1 }, "", `${location.pathname}${location.search}#${hash}`); } catch (_) {}
+  }
 }
 function closeDrawer() {
   if (!els.drawer.classList.contains("open")) return;
@@ -284,6 +305,19 @@ function closeDrawer() {
   els.drawer.setAttribute("aria-hidden", "true");
   setBackgroundInert(false);
   if (lastFocused && lastFocused.focus) lastFocused.focus();
+  // drop the entity hash so the URL reflects "no drawer" (no extra history entry)
+  if (location.hash && /^#(exp|claim|queue|program)\//.test(location.hash)) {
+    try { history.replaceState(null, "", `${location.pathname}${location.search}`); } catch (_) {}
+  }
+}
+function openEntityFromHash(h) {
+  const slash = h.indexOf("/");
+  if (slash < 0) return;
+  const kind = h.slice(0, slash), id = h.slice(slash + 1);
+  if (kind === "exp" && experimentById.has(id)) openExperiment(experimentById.get(id));
+  else if (kind === "claim") { const c = DATA.claims.find((x) => x.id === id); if (c) openClaim(c); }
+  else if (kind === "queue") { const i = DATA.queue.find((x) => x.id === id); if (i) openQueue(i); }
+  else if (kind === "program" && programById.has(id)) openProgram(programById.get(id));
 }
 function setBackgroundInert(on) {
   ["main", ".topbar", ".site-footer", "#filterRail"].forEach((sel) => {
@@ -305,10 +339,7 @@ function renderHero() {
   const s = DATA.summary;
   document.getElementById("heroStamp").textContent =
     `Generated ${DATA.generated_at} · ${formatNumber(s.experiments)} experiments indexed`;
-  document.getElementById("heroLede").innerHTML =
-    `<b>${formatNumber(s.experiments)} experiments</b> across <b>${formatNumber(s.programs)} research programs</b>, ` +
-    `with <b>${formatNumber(s.claims)} shared claims</b> and <b>${formatNumber(s.future_proposals)} queued probes</b> — ` +
-    `indexed, cross-linked, and explorable from one page.`;
+  // Lede stays evergreen (the live counts live in the metric ledger, which reacts to filters).
   const repo = DATA.repo.github;
   document.getElementById("footerRepo").href = repo;
   document.getElementById("footerStamp").textContent = `Generated ${DATA.generated_at}`;
@@ -356,7 +387,7 @@ function updateFilterStatus() {
   els.filterStatus.textContent = active
     ? "Scoping the atlas — remove a chip to widen."
     : "Filters scope every panel below.";
-  if (els.reset) els.reset.hidden = !active;
+  [els.reset, els.resetTop].forEach((b) => b && (b.hidden = !active));
   // rail chips (with clear-all) and hero chips (compact)
   if (els.filterChips) {
     els.filterChips.innerHTML = active ? chipMarkup(chips, true) : '<span class="chips-empty">No filters active</span>';
@@ -378,31 +409,58 @@ function gotoSection(id) {
 const METRICS = [
   { label: "Experiments", key: "experiments", help: "Self-contained experiment folders", color: COLORS.teal, action: () => gotoSection("experiments") },
   { label: "Programs", key: "programs", help: "Durable lines of inquiry", color: COLORS.ink, action: () => gotoSection("programs") },
-  { label: "Anchor-ready", key: "anchor_ready", help: "Citeable and reusable as-is", color: COLORS.green, action: () => { setReady("yes"); gotoSection("readiness"); } },
-  { label: "Needs curation", key: "needs_curation", help: "Not yet anchor-ready", color: COLORS.amber, action: () => { setReady("no"); gotoSection("readiness"); } },
+  { label: "Anchor-ready", key: "anchor_ready", help: "Citeable and reusable as-is", color: COLORS.green, filters: true, action: () => { setReady("yes"); gotoSection("readiness"); } },
+  { label: "Needs curation", key: "needs_curation", help: "Not yet anchor-ready", color: COLORS.amber, filters: true, action: () => { setReady("no"); gotoSection("readiness"); } },
   { label: "Future queue", key: "future_proposals", help: "Structured next probes", color: COLORS.blue, action: () => gotoSection("queue") },
   { label: "Claims", key: "claims", help: "Shared evidence statements", color: COLORS.violet, action: () => gotoSection("claims") },
   { label: "Files indexed", key: "total_files", help: "Tracked corpus files", color: COLORS.ink, action: () => gotoSection("artifacts") },
   { label: "Tracked size", key: "total_size_bytes", help: "Repository-local footprint", color: COLORS.ink, isBytes: true, action: () => gotoSection("artifacts") }
 ];
 
+/* live value for a metric over the current filter scope */
+function metricValue(key) {
+  const fexp = filteredExperiments();
+  switch (key) {
+    case "experiments": return fexp.length;
+    case "programs": return new Set(fexp.flatMap((e) => e.programs || [])).size;
+    case "anchor_ready": return fexp.filter((e) => e.anchor_ready === "yes").length;
+    case "needs_curation": return fexp.filter((e) => e.anchor_ready !== "yes").length;
+    case "future_proposals": return filteredQueue().length;
+    case "claims": return filteredClaims().length;
+    case "total_files": return fexp.reduce((a, e) => a + Number(e.total_files || 0), 0);
+    case "total_size_bytes": return fexp.reduce((a, e) => a + Number(e.total_size_bytes || 0), 0);
+    default: return 0;
+  }
+}
+
 function renderMetrics() {
-  const s = DATA.summary;
   document.getElementById("metricGrid").innerHTML = METRICS
-    .map((m, i) => {
-      const raw = s[m.key];
-      const value = m.isBytes ? formatBytes(raw).n : formatNumber(raw);
-      const unit = m.isBytes ? formatBytes(raw).unit : "";
-      return `
-      <button class="metric-card" type="button" data-metric="${i}" style="--accent:${m.color};--i:${i}">
+    .map((m, i) => `
+      <button class="metric-card${m.filters ? " is-filter" : ""}" type="button" data-metric="${i}" style="--accent:${m.color};--i:${i}">
         <span class="eyebrow">${escapeHtml(m.label)}</span>
-        <span class="metric-value">${escapeHtml(value)}${unit ? `<span class="unit">${escapeHtml(unit)}</span>` : ""}</span>
-        <span class="metric-help">${escapeHtml(m.help)}<span class="metric-go" aria-hidden="true">→</span></span>
-      </button>`;
-    })
+        <span class="metric-value" data-mv="${i}"></span>
+        <span class="metric-help">${escapeHtml(m.help)}<span class="metric-go" aria-hidden="true">${m.filters ? "filter →" : "view →"}</span></span>
+      </button>`)
     .join("");
   document.querySelectorAll("[data-metric]").forEach((card) => {
     card.addEventListener("click", () => METRICS[Number(card.getAttribute("data-metric"))].action());
+  });
+  updateMetrics();
+}
+
+/* Update the metric values to the filtered scope; show "of total" when filtered. */
+function updateMetrics() {
+  const s = DATA.summary;
+  const filtering = filtersActive();
+  METRICS.forEach((m, i) => {
+    const node = document.querySelector(`[data-mv="${i}"]`);
+    if (!node) return;
+    const total = m.key === "programs" ? DATA.programs.length : s[m.key];
+    const v = filtering ? metricValue(m.key) : total;
+    const value = m.isBytes ? formatBytes(v) : { n: formatNumber(v), unit: "" };
+    const showOf = filtering && v !== total;
+    node.innerHTML = `${escapeHtml(value.n)}${value.unit ? `<span class="unit">${escapeHtml(value.unit)}</span>` : ""}` +
+      (showOf ? `<span class="metric-of">of ${escapeHtml(m.isBytes ? formatBytes(total).n + " " + formatBytes(total).unit : formatNumber(total))}</span>` : "");
   });
 }
 
@@ -442,7 +500,7 @@ function programNetwork(fstats, fcount) {
   const stats = fstats || programStats(DATA.experiments);
   const W = 760, H = 446, cx = W / 2, cy = H / 2 - 6, ringR = 156;
   const progs = PROGRAMS_BY_SIZE;
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Corpus map: research programs sized by experiments, ring shows percent anchor-ready" });
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Corpus map: research programs sized by experiments, ring shows percent anchor-ready" });
 
   [ringR + 46, ringR, ringR - 56].forEach((r) => {
     chart.appendChild(svg("circle", { cx, cy, r, fill: "none", stroke: COLORS.lineInv, "stroke-width": 1, opacity: 0.5 }));
@@ -524,7 +582,8 @@ function donutChart(experiments) {
   const target = document.getElementById("readinessDonut");
   clear(target);
   const exp = experiments || DATA.experiments;
-  const total = exp.length || 1;
+  if (!exp.length) { target.innerHTML = '<div class="empty-state" style="padding:40px 16px">No experiments in this view.</div>'; return; }
+  const total = exp.length;
   const ready = exp.filter((e) => e.anchor_ready === "yes").length;
   const needs = Math.max(0, total - ready);
   const pct = Math.round((ready / total) * 100);
@@ -560,7 +619,7 @@ function scatterPlot() {
   const plotW = W - left - right, plotH = H - top - bottom;
   const n = rows.length;
   const bw = Math.max(1.5, plotW / n - 1);
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Files per experiment, sorted", preserveAspectRatio: "xMinYMin meet" });
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Files per experiment, sorted", preserveAspectRatio: "xMinYMin meet" });
   // baseline
   chart.appendChild(svg("line", { x1: left, y1: H - bottom, x2: W - right, y2: H - bottom, stroke: COLORS.line }));
   rows.forEach((e, i) => {
@@ -595,13 +654,15 @@ function ellipsize(str, maxWidth, fontPx) {
   return str.slice(0, Math.max(1, maxChars - 1)).trimEnd() + "…";
 }
 
-/* choose ink/white text by the luminance of a hex fill blended with white at `alpha` */
+/* choose ink/white text for a hex fill blended onto white at `alpha`, using true
+   WCAG relative luminance; white only on genuinely dark cells so values stay AA-legible. */
 function readableText(hex, alpha) {
   const h = hex.replace("#", "");
-  const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+  const lin = (v) => { const c = v / 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
   const mix = (c) => c * alpha + 255 * (1 - alpha);
-  const lum = (0.2126 * mix(r) + 0.7152 * mix(g) + 0.0722 * mix(b)) / 255;
-  return lum < 0.56 ? "#ffffff" : COLORS.ink;
+  const r = mix(parseInt(h.slice(0, 2), 16)), g = mix(parseInt(h.slice(2, 4), 16)), b = mix(parseInt(h.slice(4, 6), 16));
+  const lum = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+  return lum < 0.18 ? "#ffffff" : COLORS.ink;
 }
 
 function programHeatmap(fstats) {
@@ -623,19 +684,22 @@ function programHeatmap(fstats) {
   const H = top + progs.length * rowH + 6;
   const maxes = {};
   metrics.forEach((m) => { maxes[m.key] = Math.max(1, ...data.map((d) => d.v[m.key])); });
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Program scorecard: experiments, percent ready, queued, claims", preserveAspectRatio: "xMinYMin meet" });
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Program scorecard: experiments, percent ready, queued, claims", preserveAspectRatio: "xMinYMin meet" });
+  const filtering = filtersActive();
   metrics.forEach((m, ci) => {
     chart.appendChild(text(m.label, { x: labelW + ci * cellW + cellW / 2, y: 18, "text-anchor": "middle", class: "axis-label" }));
   });
   data.forEach(({ p, v }, ri) => {
     const y = top + ri * rowH;
     const active = state.program === p.id;
+    const rowG = svg("g", {}); // dim programs with nothing in the current view
+    if (filtering && v.exp === 0) rowG.setAttribute("opacity", "0.4");
     if (active) chart.appendChild(svg("rect", { x: 0, y: y - 1, width: W, height: rowH, fill: COLORS.tint, rx: 5 }));
-    chart.appendChild(svg("rect", { x: 0, y: y + rowH / 2 - 7, width: 5, height: 14, rx: 2, fill: programColor(p.id) }));
+    rowG.appendChild(svg("rect", { x: 0, y: y + rowH / 2 - 7, width: 5, height: 14, rx: 2, fill: programColor(p.id) }));
     const full = titleForProgram(p.id);
     const label = text(ellipsize(full, labelW - gutter - 14, fontPx), { x: 12, y: y + rowH / 2 + 3.5, class: "chart-label", style: `font-size:${fontPx}px` });
     label.appendChild(svg("title", {}, [document.createTextNode(full)]));
-    chart.appendChild(label);
+    rowG.appendChild(label);
     metrics.forEach((m, ci) => {
       const value = v[m.key];
       const ratio = m.mode === "ratio" ? value / Math.max(1, v.expTotal) : value / maxes[m.key];
@@ -650,13 +714,14 @@ function programHeatmap(fstats) {
       const valLabel = m.mode === "ratio" ? `${Math.round(ratio * 100)}% (${formatNumber(value)}/${formatNumber(v.expTotal)})` : formatNumber(value);
       attachTooltip(cell, `<strong>${escapeHtml(full)}</strong><br><span class="tip-meta">${m.label}: ${valLabel}</span>`);
       onActivate(cell, () => setProgram(p.id));
-      chart.appendChild(cell);
+      rowG.appendChild(cell);
       const shown = m.mode === "ratio" ? (v.expTotal ? `${Math.round(ratio * 100)}%` : "—") : formatNumber(value);
-      chart.appendChild(text(shown, {
+      rowG.appendChild(text(shown, {
         x: cellX + cellW / 2, y: y + rowH / 2 + 4, "text-anchor": "middle",
         class: "chart-value", style: `fill:${readableText(m.color, alpha)}`
       }));
     });
+    chart.appendChild(rowG);
   });
   target.appendChild(chart);
 }
@@ -670,12 +735,15 @@ function claimGraph() {
   if (!claims.length) { target.innerHTML = '<div class="empty-state">No claims yet.</div>'; return; }
   const W = 620, labelW = 270, gutter = 12, fontPx = 9.5, top = 56, rowH = 30, colW = (W - labelW) / claims.length;
   const H = top + progs.length * rowH + 8;
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Claims linked to programs matrix", preserveAspectRatio: "xMinYMin meet" });
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Claims linked to programs matrix" });
+  const visibleClaims = new Set(filteredClaims().map((c) => c.id));
+  const dimClaim = (c) => visibleClaims.size && !visibleClaims.has(c.id);
   // column headers (claim ids, status dot above)
   claims.forEach((c, ci) => {
     const x = labelW + ci * colW + colW / 2;
-    chart.appendChild(svg("circle", { cx: x, cy: 18, r: 6, fill: STATUS_COLORS[c.status] || COLORS.violet }));
-    const t = text(c.id, { x, y: 44, "text-anchor": "middle", class: "chart-value",
+    const op = dimClaim(c) ? 0.25 : 1;
+    chart.appendChild(svg("circle", { cx: x, cy: 18, r: 6, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op }));
+    const t = text(c.id, { x, y: 44, "text-anchor": "middle", class: "chart-value", opacity: op,
       tabindex: 0, role: "button", "aria-label": `Claim ${c.id}: ${c.title}, ${humanizeStatus(c.status)}`, style: "cursor:pointer" });
     onActivate(t, () => openClaim(c));
     attachTooltip(t, `<strong>${escapeHtml(c.id)}: ${escapeHtml(c.title)}</strong><br><span class="tip-meta">${escapeHtml(humanizeStatus(c.status))}</span>`);
@@ -683,22 +751,26 @@ function claimGraph() {
   });
   progs.forEach((p, ri) => {
     const y = top + ri * rowH;
-    chart.appendChild(svg("rect", { x: 0, y: y + rowH / 2 - 7, width: 5, height: 14, rx: 2, fill: programColor(p.id) }));
+    const activeRow = state.program === p.id;
+    if (activeRow) chart.appendChild(svg("rect", { x: 0, y: y - 1, width: W, height: rowH, fill: COLORS.tint, rx: 5 }));
+    const rowDim = state.program !== "all" && !activeRow ? 0.4 : 1;
+    chart.appendChild(svg("rect", { x: 0, y: y + rowH / 2 - 7, width: 5, height: 14, rx: 2, fill: programColor(p.id), opacity: rowDim }));
     const full = titleForProgram(p.id);
-    const lbl = text(ellipsize(full, labelW - gutter - 14, fontPx), { x: 12, y: y + rowH / 2 + 3.5, class: "chart-label", style: `font-size:${fontPx}px` });
+    const lbl = text(ellipsize(full, labelW - gutter - 14, fontPx), { x: 12, y: y + rowH / 2 + 3.5, class: "chart-label", opacity: rowDim, style: `font-size:${fontPx}px` });
     lbl.appendChild(svg("title", {}, [document.createTextNode(full)]));
     chart.appendChild(lbl);
     claims.forEach((c, ci) => {
       const linked = splitList(c.programs).includes(p.id);
       const x = labelW + ci * colW + colW / 2;
+      const op = Math.min(rowDim, dimClaim(c) ? 0.25 : 1);
       if (linked) {
-        const dot = svg("circle", { cx: x, cy: y + rowH / 2, r: 6.5, fill: STATUS_COLORS[c.status] || COLORS.violet,
+        const dot = svg("circle", { cx: x, cy: y + rowH / 2, r: 6.5, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op,
           tabindex: 0, role: "button", "aria-label": `${c.id} relates to ${titleForProgram(p.id)}: ${c.title}`, style: "cursor:pointer" });
         attachTooltip(dot, `<strong>${escapeHtml(c.id)}</strong> ↔ <strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${escapeHtml(c.title)}</span>`);
         onActivate(dot, () => openClaim(c));
         chart.appendChild(dot);
       } else {
-        chart.appendChild(svg("circle", { cx: x, cy: y + rowH / 2, r: 2, fill: COLORS.line }));
+        chart.appendChild(svg("circle", { cx: x, cy: y + rowH / 2, r: 2, fill: COLORS.line, opacity: op }));
       }
     });
   });
@@ -721,7 +793,7 @@ function renderClaimStatusLegend() {
 function renderPrograms() {
   const rows = filteredPrograms();
   const host = document.getElementById("programCards");
-  if (!rows.length) { host.innerHTML = '<div class="empty-state">No programs match this filter.</div>'; return; }
+  if (!rows.length) { host.innerHTML = emptyState("No programs match the active filters."); wireEmptyReset(); return; }
   host.innerHTML = rows.map((p) => {
     const active = state.program === p.id;
     return `
@@ -740,7 +812,7 @@ function renderPrograms() {
       </div>
       <div class="card-actions">
         <span class="card-cta">${active ? "Filtering — click to clear" : "Filter to this program"}</span>
-        <button class="text-link details-btn" type="button" data-details="${escapeHtml(p.id)}">Charter <span class="arr">→</span></button>
+        <button class="text-link details-btn" type="button" data-details="${escapeHtml(p.id)}">Details <span class="arr">→</span></button>
       </div>
     </article>`;
   }).join("");
@@ -765,7 +837,7 @@ function openProgram(p) {
   ], `<div class="drawer-actions">
         <button class="btn-primary" type="button" id="drawerFilterBtn">Filter the atlas to this program</button>
         <a class="text-link" href="${repoLink(p.path)}">Open charter on GitHub <span class="arr">→</span></a>
-      </div>`);
+      </div>`, `program/${p.id}`);
   const btn = document.getElementById("drawerFilterBtn");
   if (btn) btn.addEventListener("click", () => { closeDrawer(); setProgram(p.id); gotoSection("experiments"); });
 }
@@ -807,8 +879,8 @@ function renderExperiments() {
     return `<th data-sort="${c.key}" aria-sort="${ariaSort}"><button type="button" class="th-btn">${c.label}<span class="sort-caret${isSorted ? " on" : ""}">${caret}</span></button></th>`;
   }).join("");
   const body = shown.map((e) => `
-    <tr data-experiment="${escapeHtml(e.id)}" tabindex="0" aria-label="${escapeHtml(e.id)} — open details">
-      <td data-label="Experiment"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(e.title)}</span></td>
+    <tr data-experiment="${escapeHtml(e.id)}">
+      <td data-label="Experiment"><button class="row-open" type="button" aria-label="${escapeHtml(e.id)} — open details"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(cleanTitle(e.title))}</span></button></td>
       <td class="col-progs" data-label="Programs" title="${escapeHtml(e.programs.map(titleForProgram).join(", "))}"><span class="prog-dots">${e.programs.map((id) => `<span class="prog-dot" style="background:${programColor(id)}"></span>`).join("")}${e.programs.length > 1 ? `<span class="prog-count">${e.programs.length}</span>` : ""}</span></td>
       <td data-label="Ready"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Ready" : "Needs curation"}</span></td>
       <td class="col-mono" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
@@ -825,8 +897,10 @@ function renderExperiments() {
       renderExperiments();
     });
   });
+  const openRow = (el) => openExperiment(experimentById.get(el.closest("[data-experiment]").getAttribute("data-experiment")));
+  document.querySelectorAll("#experimentTable .row-open").forEach((btn) => btn.addEventListener("click", () => openRow(btn)));
   document.querySelectorAll("#experimentTable [data-experiment]").forEach((tr) => {
-    onActivate(tr, () => openExperiment(experimentById.get(tr.getAttribute("data-experiment"))));
+    tr.addEventListener("click", (e) => { if (e.target.closest(".row-open")) return; openRow(tr); });
   });
   wireEmptyReset();
 }
@@ -841,7 +915,7 @@ function wireEmptyReset() {
 function openExperiment(e) {
   if (!e) return;
   const hasSmoke = e.smoke_command && !["no", "none", ""].includes(String(e.smoke_command).toLowerCase());
-  openDrawer("Experiment", e.title, e.summary, [
+  openDrawer("Experiment", cleanTitle(e.title), e.summary, [
     ["Id", `<span class="mono-val">${escapeHtml(e.id)}</span>`],
     ["Programs", e.programs.map((id) => programPill(id)).join(" ")],
     ["Status", `<span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span>`],
@@ -855,7 +929,7 @@ function openExperiment(e) {
       ${e.primary_readme ? `<a class="text-link" href="${repoLink(e.primary_readme)}">README <span class="arr">→</span></a>` : ""}
       ${e.primary_report ? `<a class="text-link" href="${repoLink(e.primary_report)}">Report <span class="arr">→</span></a>` : ""}
       <a class="text-link" href="${repoLink(e.path)}">Folder <span class="arr">→</span></a>
-    </div>`);
+    </div>`, `exp/${e.id}`);
 }
 
 /* ---------------------------------------------------------------- queue board */
@@ -872,26 +946,29 @@ function renderQueue() {
     const items = rows.filter((i) => i.priority === pr);
     const meta = QUEUE_META[pr] || { color: COLORS.muted, meaning: "" };
     const cards = items.length ? items.map((item) => `
-      <article class="queue-card" data-queue="${escapeHtml(item.id)}" tabindex="0" role="button" aria-label="${escapeHtml(item.title)}" style="border-left:3px solid ${meta.color}">
+      <article class="queue-card" data-queue="${escapeHtml(item.id)}" tabindex="0" role="button" aria-label="${escapeHtml(cleanTitle(item.title))}" style="border-left:3px solid ${meta.color}">
         <div class="meta-line"><span>${escapeHtml(humanizeStatus(item.status))}</span><span class="effort-chip">${escapeHtml(humanizeStatus(item.effort))} effort</span></div>
-        <h4>${escapeHtml(item.title)}</h4>
+        <h4>${escapeHtml(cleanTitle(item.title))}</h4>
         <p class="question">${escapeHtml(item.question)}</p>
         <div class="pill-row">${(item.programs || []).slice(0, 3).map((id) => programPill(id)).join("")}</div>
-      </article>`).join("") : '<div class="queue-empty">No matching proposals.</div>';
+      </article>`).join("") : '<div class="queue-empty">No matching probes.</div>';
     return `<div class="queue-column" style="--col-color:${meta.color}">
       <div class="queue-col-head"><h3>${pr}</h3><span class="count">${items.length}</span><span class="meaning">${meta.meaning}</span></div>
       ${cards}
     </div>`;
   }).join("");
   document.querySelectorAll("[data-queue]").forEach((card) => {
-    onActivate(card, () => openQueue(DATA.queue.find((i) => i.id === card.getAttribute("data-queue"))));
+    onActivate(card, (e) => {
+      if (e && e.target.closest("[data-program-pill]")) return; // let the pill cross-link
+      openQueue(DATA.queue.find((i) => i.id === card.getAttribute("data-queue")));
+    });
   });
 }
 
 function openQueue(item) {
   if (!item) return;
   const meta = QUEUE_META[item.priority] || {};
-  openDrawer(`Queue · ${item.priority}${meta.meaning ? " · " + meta.meaning : ""}`, item.title, item.question, [
+  openDrawer(`Queue · ${item.priority}${meta.meaning ? " · " + meta.meaning : ""}`, cleanTitle(item.title), item.question, [
     ["Queue id", `<span class="mono-val">${escapeHtml(item.id)}</span>`],
     ["Priority", `${escapeHtml(item.priority)} · ${escapeHtml(humanizeStatus(item.status))} · ${escapeHtml(humanizeStatus(item.effort))} effort`],
     ["Programs", (item.programs || []).map((id) => programPill(id)).join(" ")],
@@ -901,14 +978,14 @@ function openQueue(item) {
     ["Failure signal", escapeHtml(item.failure_signal)],
     ["Expected artifacts", listText(item.expected_artifacts) ? escapeHtml(listText(item.expected_artifacts)) : ""],
     ["Next step", escapeHtml(item.next_step)]
-  ], item.source ? `<div class="drawer-section-label">Open</div><a class="text-link" href="${repoLink(item.source)}">Source on GitHub <span class="arr">→</span></a>` : "");
+  ], item.source ? `<div class="drawer-section-label">Open</div><a class="text-link" href="${repoLink(item.source)}">Source on GitHub <span class="arr">→</span></a>` : "", `queue/${item.id}`);
 }
 
 /* ---------------------------------------------------------------- claims */
 function renderClaims() {
   const claims = filteredClaims();
   const host = document.getElementById("claimCards");
-  if (!claims.length) { host.innerHTML = '<div class="empty-state">No claims match this filter.</div>'; return; }
+  if (!claims.length) { host.innerHTML = emptyState("No claims match the active filters."); wireEmptyReset(); return; }
   host.innerHTML = claims.map((c) => {
     const color = STATUS_COLORS[c.status] || COLORS.violet;
     return `<article class="claim-card" data-claim="${escapeHtml(c.id)}" tabindex="0" role="button" aria-label="Claim ${escapeHtml(c.id)}: ${escapeHtml(c.title)}" style="--accent:${color}">
@@ -922,7 +999,10 @@ function renderClaims() {
     </article>`;
   }).join("");
   host.querySelectorAll("[data-claim]").forEach((card) => {
-    onActivate(card, () => openClaim(DATA.claims.find((c) => c.id === card.getAttribute("data-claim"))));
+    onActivate(card, (e) => {
+      if (e && e.target.closest("[data-program-pill]")) return; // let the pill cross-link
+      openClaim(DATA.claims.find((c) => c.id === card.getAttribute("data-claim")));
+    });
   });
 }
 
@@ -934,7 +1014,7 @@ function openClaim(c) {
     ["Programs", splitList(c.programs).map((id) => programPill(id)).join(" ")],
     ["Evidence", escapeHtml(c.evidence)],
     ["Implication", escapeHtml(c.implication)]
-  ], `<div class="drawer-section-label">Open</div><a class="text-link" href="${repoLink("knowledge/claims/index.md")}">Claim ledger on GitHub <span class="arr">→</span></a>`);
+  ], `<div class="drawer-section-label">Open</div><a class="text-link" href="${repoLink("knowledge/claims/index.md")}">Claim ledger on GitHub <span class="arr">→</span></a>`, `claim/${c.id}`);
 }
 
 /* ---------------------------------------------------------------- narrative */
@@ -948,7 +1028,7 @@ function renderNarrative() {
     <article class="narrative-card">
       <h3>${escapeHtml(title)}</h3>
       <p>${escapeHtml(body || "Open the source document for current notes.")}</p>
-      <a class="text-link" href="${repoLink(path)}">Open source <span class="arr">→</span></a>
+      <a class="text-link" href="${repoLink(path)}">Open document <span class="arr">→</span></a>
     </article>`).join("");
 }
 
@@ -980,10 +1060,13 @@ function renderCharts() {
   barChart("needsChart", needRows.length ? needRows : DATA.charts.needs.map((r) => ({ ...r, label: humanizeToken(r.id) })), { label: "curation needs", labelW: 190, color: COLORS.rose, empty: "No curation gaps in this view." });
   const runRows = countRows(exp, (e) => e.run_surface);
   barChart("runSurfaceChart", runRows, { label: "run surfaces", labelW: 170, rowH: 30, color: COLORS.teal, empty: "No experiments in this view." });
-  const prioOrder = { P0: 0, P1: 1, P2: 2 };
-  const prioRows = DATA.charts.queue_priority.slice().sort((a, b) => (prioOrder[a.id] ?? 9) - (prioOrder[b.id] ?? 9));
+  // priority mix reacts to the active filter (consistent with the queue board)
+  const fq = filteredQueue();
+  const prioCounts = { P0: 0, P1: 0, P2: 0 };
+  fq.forEach((i) => { if (prioCounts[i.priority] != null) prioCounts[i.priority] += 1; });
+  const prioRows = ["P0", "P1", "P2"].map((id) => ({ id, value: prioCounts[id] }));
   barChart("queuePriorityChart", prioRows, {
-    label: "queue priorities", labelW: 50, rowH: 34,
+    label: "queue priorities", labelW: 50, rowH: 34, empty: "No queued probes in this view.",
     colors: { P0: COLORS.rose, P1: COLORS.amber, P2: COLORS.blue }
   });
   barChart("artifactKindChart", DATA.charts.artifact_kinds.map((r) => ({ ...r, label: humanizeToken(r.id) })), { label: "artifact manifest kinds", labelW: 130, color: COLORS.violet });
@@ -993,11 +1076,40 @@ function renderCharts() {
 /* ---------------------------------------------------------------- render */
 function render() {
   updateFilterStatus();
+  updateMetrics();
   renderPrograms();
   renderExperiments();
   renderQueue();
   renderClaims();
   renderCharts();
+  syncURL();
+}
+
+/* Mirror filter state into ?query so a filtered view is shareable/deep-linkable
+   (the section #hash is left untouched). Wrapped for file:// where history may throw. */
+function syncURL() {
+  const params = new URLSearchParams();
+  if (state.program !== "all") params.set("program", state.program);
+  if (state.ready !== "all") params.set("ready", state.ready);
+  if (state.need !== "all") params.set("need", state.need);
+  if (state.search) params.set("q", state.search);
+  const qs = params.toString();
+  try {
+    history.replaceState(null, "", `${location.pathname}${qs ? "?" + qs : ""}${location.hash}`);
+  } catch (_) { /* file:// or sandboxed: ignore */ }
+}
+
+function seedStateFromURL() {
+  let params;
+  try { params = new URLSearchParams(location.search); } catch (_) { return; }
+  const program = params.get("program");
+  if (program && (program === "all" || programById.has(program))) state.program = program;
+  const ready = params.get("ready");
+  if (ready === "yes" || ready === "no") state.ready = ready;
+  const need = params.get("need");
+  if (need) state.need = need;
+  const q = params.get("q");
+  if (q) state.search = q;
 }
 
 /* ---------------------------------------------------------------- scroll spy */
@@ -1026,7 +1138,7 @@ function resetFilters() {
 
 let searchTimer = null;
 function onSearchInput(value) {
-  state.search = value.trim();
+  state.search = value; // keep raw (incl. spaces); trimmed only at compare time
   syncControls();
   clearTimeout(searchTimer);
   searchTimer = setTimeout(render, 110);
@@ -1051,6 +1163,16 @@ function bindEvents() {
     if (els.drawer.classList.contains("open")) closeDrawer();
     state.program = id; syncControls(); render();
     gotoSection("experiments");
+  });
+
+  // Back/Forward: close the drawer, or (re)open the entity the URL points to
+  window.addEventListener("popstate", () => {
+    const h = decodeURIComponent(location.hash.replace(/^#/, ""));
+    if (/^(exp|claim|queue|program)\//.test(h)) {
+      openingFromHistory = true; openEntityFromHash(h); openingFromHistory = false;
+    } else if (els.drawer.classList.contains("open")) {
+      closeDrawer();
+    }
   });
 
   document.addEventListener("keydown", (e) => {
@@ -1097,8 +1219,16 @@ renderHero();
 renderFilters();
 renderMetrics();
 renderNarrative();
+seedStateFromURL();
+syncControls();
 bindEvents();
 setupScrollSpy();
 setupFilterRail();
 setupMotion();
 render();
+
+// deep-link: open the entity drawer if the URL points at one
+(() => {
+  const h = decodeURIComponent(location.hash.replace(/^#/, ""));
+  if (/^(exp|claim|queue|program)\//.test(h)) { openingFromHistory = true; openEntityFromHash(h); openingFromHistory = false; }
+})();
