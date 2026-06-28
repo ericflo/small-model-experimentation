@@ -44,6 +44,12 @@ Regenerate them with:
 make catalog
 ```
 
+Before committing, run the full gate:
+
+```bash
+make check
+```
+
 ## Updating Program Files
 
 Hand-edit program files when a result changes direction:

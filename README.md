@@ -13,6 +13,7 @@ The imported prototype corpus is seed evidence and working examples. It is not t
 - [docs/agent_handbook.md](docs/agent_handbook.md) for future agents.
 - [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md) before adding a new experiment.
 - [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md) before adding a new line of inquiry.
+- [docs/quality_gates.md](docs/quality_gates.md) for the checks that protect the repository shape.
 
 ## Layout
 
@@ -48,8 +49,7 @@ make new-experiment EXPERIMENT=multimodal_table_probe PROGRAM=multimodal_small_m
 Regenerate indexes after changing experiments or programs:
 
 ```bash
-make catalog
-make validate
+make check
 ```
 
 Do not check trained adapter directories into git. Use external artifact manifests for adapters and large model outputs.

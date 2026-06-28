@@ -32,8 +32,7 @@ make new-program PROGRAM=<program-id> TITLE="<Title>" FOCUS="<one-sentence focus
 Then fill in the generated files and run:
 
 ```bash
-make catalog
-make validate
+make check
 ```
 
 ## Maintain A Program

@@ -57,5 +57,8 @@ Repository-level maintenance scripts. They must stay dependency-light so future 
 
 - `build_knowledgebase.py`: regenerate generated catalogs and indexes.
 - `validate_repository.py`: check repository invariants.
+- `check_markdown_links.py`: check local links in navigation and knowledge surfaces.
+- `check_python_syntax.py`: compile maintenance scripts without cache artifacts.
+- `check_repository_text.py`: scan for stale framing and temporary scaffold residue.
 - `scaffold_research_program.py`: create a new program directory and registry entry.
 - `scaffold_experiment.py`: create a new experiment attached to one or more programs.

@@ -141,7 +141,7 @@ def main() -> int:
     append_registry(program_id, title, focus, seed_tags, seed_experiments)
 
     print(f"created research program: research_programs/{program_id}")
-    print("next: fill charter/backlog/evidence, then run make catalog && make validate")
+    print("next: fill charter/backlog/evidence, then run make check")
     return 0
 
 

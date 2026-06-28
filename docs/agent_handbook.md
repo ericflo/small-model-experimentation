@@ -33,5 +33,5 @@ Do not rewrite old experiment outputs to make a cleaner story. Add an interpreta
 - README states the question, setup, run command, result, and artifacts.
 - Reports separate deployable evidence from oracle/hidden evaluation.
 - Controls and ablations are named clearly.
-- `make catalog` and `make validate` pass.
+- `make check` passes.
 - Owning program evidence/backlog and `knowledge/synthesis.md` or a claim page are updated when the result changes future priorities.

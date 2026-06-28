@@ -16,4 +16,4 @@ The two imported tracks are seed evidence. The knowledgebase is organized around
 - [tag_index.md](tag_index.md): generated topic index.
 - [artifact_index.md](artifact_index.md): generated artifact inventory.
 
-Generated files should be refreshed with `make catalog`, not hand-edited.
+Generated files should be refreshed with `make catalog`, not hand-edited. Run `make check` before committing so generated indexes and validation stay aligned.

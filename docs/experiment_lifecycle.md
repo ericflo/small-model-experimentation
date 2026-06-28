@@ -55,8 +55,7 @@ Put derived outputs under `analysis/` and final narrative under `reports/`. Pres
 Run:
 
 ```bash
-make catalog
-make validate
+make check
 ```
 
 Then update the human knowledge pages when the result changes strategy.

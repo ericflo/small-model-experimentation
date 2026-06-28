@@ -9,6 +9,7 @@ This repository is a compounding research system. The current experiments are ex
 3. Read [knowledge/synthesis.md](knowledge/synthesis.md).
 4. Use [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
 5. Before adding work, read [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
+6. Use [docs/quality_gates.md](docs/quality_gates.md) to understand what `make check` enforces.
 
 ## Non-Negotiables
 
@@ -17,7 +18,7 @@ This repository is a compounding research system. The current experiments are ex
 - Attach every new experiment to a research program, or create a new program.
 - Preserve negative results and failed controls; they are part of the map.
 - Update program evidence and shared synthesis when a result changes strategy.
-- Run `make catalog` and `make validate` before committing.
+- Run `make check` before committing.
 
 ## When Starting A New Experiment
 

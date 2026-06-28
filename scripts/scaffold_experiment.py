@@ -40,7 +40,7 @@ def registry_ids() -> set[str]:
 
 def write_metadata(exp_dir: Path, experiment_id: str, title: str, summary: str, tags: list[str], programs: list[str]) -> None:
     lines = [
-        "# Generated starter metadata. Run make catalog after adding artifacts.",
+        "# Generated starter metadata. Run make check after adding artifacts.",
         f"id: {yaml_scalar(experiment_id)}",
         f"title: {yaml_scalar(title)}",
         'source_track: "new"',
@@ -181,7 +181,7 @@ def main() -> int:
     (exp_dir / "src" / "README.md").write_text("# Source\n\nPut experiment-local code here.\n", encoding="utf-8")
 
     print(f"created experiment: experiments/{experiment_id}")
-    print("next: implement the smoke path, update program evidence/backlog, then run make catalog && make validate")
+    print("next: implement the smoke path, update program evidence/backlog, then run make check")
     return 0
 
 

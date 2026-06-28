@@ -1,15 +1,43 @@
-.PHONY: catalog validate check new-program new-experiment
+PYTHON ?= python3
+GENERATED_PATHS := \
+	experiments/*/metadata.yaml \
+	knowledge/artifact_index.md \
+	knowledge/experiment_catalog.csv \
+	knowledge/experiment_catalog.md \
+	knowledge/experiment_manifest.json \
+	knowledge/readme_coverage.md \
+	knowledge/research_program_index.csv \
+	knowledge/research_program_index.md \
+	knowledge/source_tracks.csv \
+	knowledge/source_tracks.md \
+	knowledge/tag_index.md
+
+.PHONY: catalog validate py-compile check-links check-text generated-clean lint check new-program new-experiment
 
 catalog:
-	python3 scripts/build_knowledgebase.py
+	$(PYTHON) scripts/build_knowledgebase.py
 
 validate:
-	python3 scripts/validate_repository.py
+	$(PYTHON) scripts/validate_repository.py
 
-check: catalog validate
+py-compile:
+	$(PYTHON) scripts/check_python_syntax.py
+
+check-links:
+	$(PYTHON) scripts/check_markdown_links.py
+
+check-text:
+	$(PYTHON) scripts/check_repository_text.py
+
+generated-clean:
+	git diff --exit-code -- $(GENERATED_PATHS)
+
+lint: py-compile check-links check-text
+
+check: catalog generated-clean validate lint
 
 new-program:
-	python3 scripts/scaffold_research_program.py "$(PROGRAM)" --title "$(TITLE)" --focus "$(FOCUS)" $(EXTRA_ARGS)
+	$(PYTHON) scripts/scaffold_research_program.py "$(PROGRAM)" --title "$(TITLE)" --focus "$(FOCUS)" $(EXTRA_ARGS)
 
 new-experiment:
-	python3 scripts/scaffold_experiment.py "$(EXPERIMENT)" --program "$(PROGRAM)" --title "$(TITLE)" --summary "$(SUMMARY)" $(EXTRA_ARGS)
+	$(PYTHON) scripts/scaffold_experiment.py "$(EXPERIMENT)" --program "$(PROGRAM)" --title "$(TITLE)" --summary "$(SUMMARY)" $(EXTRA_ARGS)

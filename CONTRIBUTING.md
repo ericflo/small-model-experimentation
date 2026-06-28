@@ -6,7 +6,7 @@
 2. Run `make new-program PROGRAM=<program-id> TITLE="<Title>" FOCUS="<one-sentence focus>"`.
 3. Fill in `charter.md`, `backlog.md`, and `evidence.md`.
 4. Check the new entry in `research_programs/registry.yaml`.
-5. Run `make catalog` and `make validate`.
+5. Run `make check`.
 
 A new program should be broad enough to host multiple future experiments and specific enough that progress can be recognized.
 
@@ -18,7 +18,7 @@ A new program should be broad enough to host multiple future experiments and spe
 4. Fill in the README before running the full experiment.
 5. Add a cheap smoke run and record how to run it.
 6. Put code, data, runs, analysis, and reports inside the experiment folder.
-7. Run `make catalog` and `make validate`.
+7. Run `make check`.
 
 ## Report A Result
 
