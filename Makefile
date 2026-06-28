@@ -1,4 +1,5 @@
 PYTHON ?= python3
+SITE_DIR ?= site
 GENERATED_PATHS := \
 	experiments/*/metadata.yaml \
 	knowledge/artifact_index.md \
@@ -20,7 +21,7 @@ GENERATED_PATHS := \
 	knowledge/source_tracks.md \
 	knowledge/tag_index.md
 
-.PHONY: catalog validate py-compile check-links check-text generated-clean lint check related new-program new-experiment from-queue
+.PHONY: catalog validate py-compile check-links check-text generated-clean lint site site-check check related new-program new-experiment from-queue
 
 catalog:
 	$(PYTHON) scripts/build_knowledgebase.py
@@ -42,7 +43,13 @@ generated-clean:
 
 lint: py-compile check-links check-text
 
-check: catalog generated-clean validate lint
+site: catalog
+	$(PYTHON) scripts/build_site.py --out $(SITE_DIR)
+
+site-check: site
+	$(PYTHON) scripts/check_site.py "$(SITE_DIR)"
+
+check: catalog generated-clean validate lint site-check
 
 related:
 	$(PYTHON) scripts/find_related.py "$(QUERY)" $(EXTRA_ARGS)

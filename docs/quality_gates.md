@@ -13,6 +13,7 @@
 - Compiles repository maintenance scripts without writing cache files.
 - Keeps the related-work discovery script available for idea routing.
 - Keeps the queue-to-experiment scaffold command available.
+- Builds and validates the generated static research atlas.
 - Checks local markdown links in navigation and knowledge surfaces.
 - Scans for stale repository framing and temporary scaffold residue.
 - Requires GitHub workflow, issue, and pull request templates to stay present.

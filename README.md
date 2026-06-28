@@ -14,6 +14,7 @@ The imported prototype corpus is seed evidence and working examples. It is not t
 - [knowledge/claims/index.md](knowledge/claims/index.md) for structured claims with evidence links.
 - [knowledge/synthesis.md](knowledge/synthesis.md) for cross-program claims and current strategic read.
 - [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) for the full experiment inventory.
+- The generated research atlas is published by GitHub Pages from `.github/workflows/pages.yml`.
 - [docs/agent_handbook.md](docs/agent_handbook.md) for future agents.
 - [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md) before adding a new experiment.
 - [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md) before adding a new line of inquiry.
@@ -58,6 +59,13 @@ Regenerate indexes after changing experiments or programs:
 
 ```bash
 make check
+```
+
+Build the interactive website locally:
+
+```bash
+make site-check
+python3 -m http.server 8000 --directory site
 ```
 
 Do not check trained adapter directories into git. Use external artifact manifests for adapters and large model outputs.

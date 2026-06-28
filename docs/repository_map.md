@@ -66,7 +66,13 @@ Repository-level maintenance scripts. They must stay dependency-light so future 
 - `check_markdown_links.py`: check local links in navigation and knowledge surfaces.
 - `check_python_syntax.py`: compile maintenance scripts without cache artifacts.
 - `check_repository_text.py`: scan for stale framing and temporary scaffold residue.
+- `build_site.py`: generate the interactive static research atlas from knowledgebase data.
+- `check_site.py`: validate the generated site bundle.
 - `find_related.py`: route rough ideas to related programs, claims, and experiments.
 - `scaffold_from_queue.py`: create an experiment scaffold from a structured future queue item.
 - `scaffold_research_program.py`: create a new program directory and registry entry.
 - `scaffold_experiment.py`: create a new experiment attached to one or more programs.
+
+## `templates/site/`
+
+Source templates for the generated static research atlas. The generated `site/` directory is ignored locally and rebuilt by GitHub Pages on push.

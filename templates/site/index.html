@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Small Model Experimentation Atlas</title>
+    <meta name="description" content="Interactive research atlas generated from the small-model experimentation repository knowledgebase.">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <p class="eyebrow">Generated Research Atlas</p>
+          <h1>Small Model Experimentation</h1>
+        </div>
+      </div>
+      <nav class="topnav" aria-label="Primary">
+        <a href="#overview">Overview</a>
+        <a href="#programs">Programs</a>
+        <a href="#experiments">Experiments</a>
+        <a href="#readiness">Readiness</a>
+        <a href="#queue">Future Queue</a>
+        <a href="#claims">Claims</a>
+        <a href="#artifacts">Artifacts</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="overview" class="band hero-band">
+        <div class="hero-copy">
+          <p class="eyebrow">Data-driven, not image-driven</p>
+          <h2>One live map for the experiment corpus, shared claims, future work, and curation gaps.</h2>
+          <p class="lede">
+            This site is generated from the repository knowledgebase: experiment catalogs, readiness matrices,
+            claims, artifact manifests, research programs, and the future experiment queue.
+          </p>
+          <div class="global-controls" aria-label="Global filters">
+            <label>
+              <span>Search</span>
+              <input id="globalSearch" type="search" placeholder="selector, compiler, memory, smoke, artifact...">
+            </label>
+            <label>
+              <span>Program</span>
+              <select id="programFilter"></select>
+            </label>
+            <label>
+              <span>Readiness</span>
+              <select id="readyFilter">
+                <option value="all">All experiments</option>
+                <option value="yes">Anchor-ready</option>
+                <option value="no">Needs curation</option>
+              </select>
+            </label>
+            <label>
+              <span>Curation need</span>
+              <select id="needFilter"></select>
+            </label>
+          </div>
+        </div>
+        <div id="metricGrid" class="metric-grid" aria-label="Portfolio metrics"></div>
+      </section>
+
+      <section class="band chart-strip" aria-label="Portfolio charts">
+        <div class="tool-panel wide">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Portfolio Map</p>
+              <h2>Programs, Experiments, And Future Work</h2>
+            </div>
+            <button id="resetFilters" class="icon-button" type="button" title="Reset filters">Reset</button>
+          </div>
+          <div id="programNetwork" class="visual network-visual"></div>
+        </div>
+        <div class="tool-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Readiness</p>
+              <h2>Anchor Status</h2>
+            </div>
+          </div>
+          <div id="readinessDonut" class="visual donut-visual"></div>
+        </div>
+        <div class="tool-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Queue</p>
+              <h2>Priority Mix</h2>
+            </div>
+          </div>
+          <div id="queuePriorityChart" class="visual compact-chart"></div>
+        </div>
+      </section>
+
+      <section id="programs" class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Research Programs</p>
+          <h2>Durable Lines Of Inquiry</h2>
+        </div>
+        <div id="programCards" class="program-grid"></div>
+      </section>
+
+      <section id="experiments" class="band muted-band">
+        <div class="section-heading inline-heading">
+          <div>
+            <p class="eyebrow">Experiment Explorer</p>
+            <h2>Search, Filter, And Inspect The Corpus</h2>
+          </div>
+          <div id="experimentCount" class="result-count"></div>
+        </div>
+        <div class="explorer-layout">
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Distribution</p>
+                <h2>Size And Surface</h2>
+              </div>
+            </div>
+            <div id="experimentScatter" class="visual scatter-visual"></div>
+            <div id="runSurfaceChart" class="visual compact-chart"></div>
+          </div>
+          <div class="tool-panel table-panel">
+            <div id="experimentTable"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="readiness" class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Curation Work</p>
+          <h2>What Needs Attention Before Reuse</h2>
+        </div>
+        <div class="split-layout">
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Needs</p>
+                <h2>Top Curation Gaps</h2>
+              </div>
+            </div>
+            <div id="needsChart" class="visual bar-visual"></div>
+          </div>
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Program Heatmap</p>
+                <h2>Readiness By Program</h2>
+              </div>
+            </div>
+            <div id="programHeatmap" class="visual heatmap-visual"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="queue" class="band muted-band">
+        <div class="section-heading inline-heading">
+          <div>
+            <p class="eyebrow">Future Experiment Queue</p>
+            <h2>Structured Launchpad For New Work</h2>
+          </div>
+          <div id="queueCount" class="result-count"></div>
+        </div>
+        <div id="queueBoard" class="queue-board"></div>
+      </section>
+
+      <section id="claims" class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Claims And Evidence</p>
+          <h2>Shared Knowledge Under Test</h2>
+        </div>
+        <div class="split-layout">
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Evidence Graph</p>
+                <h2>Claims Linked To Programs</h2>
+              </div>
+            </div>
+            <div id="claimGraph" class="visual network-visual small-network"></div>
+          </div>
+          <div id="claimCards" class="claim-list"></div>
+        </div>
+      </section>
+
+      <section id="artifacts" class="band muted-band">
+        <div class="section-heading">
+          <p class="eyebrow">Artifacts</p>
+          <h2>Manifests, File Types, And Repository Shape</h2>
+        </div>
+        <div class="artifact-grid">
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Manifest Types</p>
+                <h2>Artifact Coverage</h2>
+              </div>
+            </div>
+            <div id="artifactKindChart" class="visual bar-visual"></div>
+          </div>
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">File Extensions</p>
+                <h2>Corpus Texture</h2>
+              </div>
+            </div>
+            <div id="extensionChart" class="visual bar-visual"></div>
+          </div>
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Narrative</p>
+                <h2>Generated From Shared Memory</h2>
+              </div>
+            </div>
+            <div id="narrativeCards" class="narrative-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside id="detailDrawer" class="drawer" aria-hidden="true" aria-label="Details">
+      <button id="drawerClose" class="drawer-close" type="button" title="Close details">Close</button>
+      <div id="drawerContent"></div>
+    </aside>
+    <div id="tooltip" class="tooltip" role="status" aria-live="polite"></div>
+
+    <script id="site-data" type="application/json">__SITE_DATA__</script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
