@@ -11,6 +11,13 @@ tags:
   - "policy"
   - "small-model"
   - "verification"
+research_programs:
+  - "evidence_conditioned_selection"
+  - "interpretability_and_diagnostics"
+  - "operator_and_skill_inventories"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
+  - "reliability_and_safety"
 top_level_dirs:
   - "configs"
   - "data"
@@ -29,5 +36,5 @@ file_counts:
   py: 10
   yaml: 1
 total_files: 61
-total_size_bytes: 18966456
+total_size_bytes: 18966686
 generated_on: "2026-06-28"

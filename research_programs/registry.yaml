@@ -1,0 +1,111 @@
+# Hand-curated durable research lines. Current experiments are seed evidence, not a closed taxonomy.
+programs:
+  - id: "structured_execution_and_compilers"
+    title: "Structured Execution And Compilers"
+    charter: "research_programs/structured_execution_and_compilers/charter.md"
+    focus: "Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers."
+    seed_tags: ["abi", "execution", "latent-state"]
+    seed_experiments:
+      - "qwen_structural_latent_compiler_expansion"
+      - "qwen_compiler_multiseed_reattribution"
+      - "qwen_typed_bytecode_expert_iteration"
+      - "latent_executor"
+      - "structured_slot_initializer_ladder"
+  - id: "evidence_conditioned_selection"
+    title: "Evidence-Conditioned Selection"
+    charter: "research_programs/evidence_conditioned_selection/charter.md"
+    focus: "Turn candidate-pool coverage into deployable decisions under visible evidence."
+    seed_tags: ["coverage", "verification", "counterexamples"]
+    seed_experiments:
+      - "qwen35_4b_retrieval_adapt_verify_scale"
+      - "qwen35_4b_foofah_selective_program_fallback"
+      - "qwen35_4b_foofah_program_ensemble_consensus"
+      - "qwen35_4b_independent_retrieval_consensus"
+  - id: "active_evidence_acquisition"
+    title: "Active Evidence Acquisition"
+    charter: "research_programs/active_evidence_acquisition/charter.md"
+    focus: "Choose or synthesize the next visible example, probe, test, or trace that collapses uncertainty."
+    seed_tags: ["active-learning"]
+    seed_experiments:
+      - "qwen_active_example_acquisition"
+      - "qwen35_4b_active_counterexample_trace_selection"
+      - "qwen35_4b_adaptive_evidence_budget_policy"
+      - "qwen35_4b_learned_active_trace_policy"
+  - id: "algorithmic_memory_and_retrieval"
+    title: "Algorithmic Memory And Retrieval"
+    charter: "research_programs/algorithmic_memory_and_retrieval/charter.md"
+    focus: "Use libraries of verified algorithms, examples, traces, skills, or failures as reusable memory."
+    seed_tags: ["memory"]
+    seed_experiments:
+      - "qwen_verified_skill_memory_rag"
+      - "qwen35_4b_verified_algorithm_retrieval_adaptation"
+      - "qwen35_4b_retrieval_adapt_verify_scale"
+      - "learned_sparse_slot_executor"
+  - id: "operator_and_skill_inventories"
+    title: "Operator And Skill Inventories"
+    charter: "research_programs/operator_and_skill_inventories/charter.md"
+    focus: "Grow, search, shortlist, compose, and stress-test reusable operator and skill banks."
+    seed_tags: ["operator-search"]
+    seed_experiments:
+      - "qwen35_4b_operator_inventory_search_pilot"
+      - "qwen35_4b_operator_inventory_scaling_stress"
+      - "qwen35_4b_inventory_shortlister_training"
+      - "qwen35_4b_joint_shortlister_ladder"
+  - id: "posttraining_and_adaptation"
+    title: "Posttraining And Adaptation"
+    charter: "research_programs/posttraining_and_adaptation/charter.md"
+    focus: "Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms."
+    seed_tags: ["lora", "distillation", "policy"]
+    seed_experiments:
+      - "qwen35_4b_constrained_coverage_dpo"
+      - "qwen35_4b_offline_hard_negative_coverage_dpo"
+      - "qwen35_4b_live_tool_dagger"
+      - "qwen35_4b_oracle_process_grpo"
+  - id: "process_control_and_tool_use"
+    title: "Process Control And Tool Use"
+    charter: "research_programs/process_control_and_tool_use/charter.md"
+    focus: "Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions."
+    seed_tags: ["tools", "policy"]
+    seed_experiments:
+      - "qwen35_4b_adaptive_tool_controller"
+      - "qwen35_4b_tool_state_policy_lora"
+      - "qwen35_4b_live_tool_dagger"
+      - "qwen35_4b_adaptive_evidence_budget_policy"
+  - id: "benchmark_generalization"
+    title: "Benchmark Generalization"
+    charter: "research_programs/benchmark_generalization/charter.md"
+    focus: "Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks."
+    seed_tags: ["bridge", "curriculum", "table-transform"]
+    seed_experiments:
+      - "factor_recombination_ladder"
+      - "feature_factorized_rule_diversity"
+      - "targeted_bridge_allocation"
+      - "qwen35_4b_sketch_coverage_shift_probe"
+  - id: "interpretability_and_diagnostics"
+    title: "Interpretability And Diagnostics"
+    charter: "research_programs/interpretability_and_diagnostics/charter.md"
+    focus: "Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations."
+    seed_tags: ["verification"]
+    seed_experiments:
+      - "qwen_structural_compiler_attribution_ablation"
+      - "qwen35_4b_opsd_pressure_locality_audit"
+      - "qwen35_4b_reliability_exec_opsd_audit"
+      - "qwen_full_table_consistency_reranker"
+  - id: "reliability_and_safety"
+    title: "Reliability And Safety"
+    charter: "research_programs/reliability_and_safety/charter.md"
+    focus: "Improve precision, abstention, robustness, reproducibility, and safe artifact handling."
+    seed_tags: ["verification", "counterexamples"]
+    seed_experiments:
+      - "qwen35_4b_reliability_exec_opsd_audit"
+      - "qwen35_4b_real_sample_verify_commit"
+      - "qwen35_4b_oracle_distilled_semantic_verifier"
+      - "qwen_readable_candidate_verifier"
+  - id: "collective_experimentation_infrastructure"
+    title: "Collective Experimentation Infrastructure"
+    charter: "research_programs/collective_experimentation_infrastructure/charter.md"
+    focus: "Make the repository itself better at spawning, comparing, validating, and remembering many independent lines."
+    seed_tags: ["experiment"]
+    seed_experiments:
+      - "qwen_compiler_multiseed_reattribution"
+      - "qwen35_4b_sampler_portfolio_scheduler"

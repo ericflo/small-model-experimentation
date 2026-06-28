@@ -10,6 +10,10 @@ tags:
   - "coverage"
   - "memory"
   - "repair"
+research_programs:
+  - "algorithmic_memory_and_retrieval"
+  - "benchmark_generalization"
+  - "evidence_conditioned_selection"
 top_level_dirs:
   - "configs"
   - "data"
@@ -28,5 +32,5 @@ file_counts:
   py: 5
   yaml: 1
 total_files: 53
-total_size_bytes: 19626518
+total_size_bytes: 19626644
 generated_on: "2026-06-28"

@@ -1,71 +1,74 @@
-# Research Roadmap
+# Research Portfolio Roadmap
 
-## Priority 1: Evidence-Conditioned Selection
+This roadmap is organized around programs, not imported tracks. It should help future agents decide what to do next and when to open new lines.
 
-Goal: convert candidate-pool coverage into deployable accuracy.
+## Portfolio Priority 1: Build Selection Science
 
-Suggested experiments:
+Program: [Evidence-Conditioned Selection](../research_programs/evidence_conditioned_selection/charter.md)
 
-- counterexample generation for visible-pass hidden-wrong candidates,
-- independent implementation consensus across retrieved algorithms,
-- verifier training on public-test-augmented evidence,
-- abstaining selectors that optimize precision before recall,
-- selector calibration under held-out families and longer horizons.
+Why: candidate pools often contain hidden-correct outputs, but weak visible evidence causes wrong commits.
 
-Best prior anchors:
+Next work:
 
-- [qwen35_4b_retrieval_adapt_verify_scale](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md)
-- [qwen35_4b_foofah_selective_program_fallback](../experiments/qwen35_4b_foofah_selective_program_fallback/reports/report.md)
-- [qwen35_4b_operator_inventory_search_pilot](../experiments/qwen35_4b_operator_inventory_search_pilot/reports/qwen35_4b_operator_inventory_search_pilot_report.md)
+- visible-only selector benchmarks with abstention,
+- generated counterexample evidence without hidden expected answers,
+- independent implementation consensus,
+- deployable-gap scorecards for every oracle-ceiling result.
 
-## Priority 2: Structured Compiler Scaling
+## Portfolio Priority 2: Compare Structured Representations
 
-Goal: scale typed-slot, latent-register, and executable-ABI compilers while preserving generalization and paraphrase consistency.
+Program: [Structured Execution And Compilers](../research_programs/structured_execution_and_compilers/charter.md)
 
-Suggested experiments:
+Why: structured execution is promising, but the causal contribution of typed slots, latent state, bytecode, curricula, and state supervision is still underexplored.
 
-- replicate high-performing structural compiler runs across seeds,
-- add harder length and compositional splits,
-- compare direct program text, latent slots, and typed bytecode under identical data,
-- measure failure modes by step, operator, and state prefix.
+Next work:
 
-Best prior anchors:
+- one shared suite comparing direct text programs, typed bytecode, latent slots, and differentiable executors,
+- multi-seed replication of strongest compiler results,
+- harder length, paraphrase, and family shifts.
 
-- [qwen_structural_latent_compiler_expansion](../experiments/qwen_structural_latent_compiler_expansion/reports/structural_latent_compiler_expansion_report.md)
-- [qwen_compiler_multiseed_reattribution](../experiments/qwen_compiler_multiseed_reattribution/reports/qwen_compiler_multiseed_reattribution_report.md)
-- [qwen_typed_bytecode_expert_iteration](../experiments/qwen_typed_bytecode_expert_iteration/reports/qwen_typed_bytecode_expert_iteration_paper.md)
+## Portfolio Priority 3: Make Memory Useful
 
-## Priority 3: Operator And Skill Inventories
+Programs:
 
-Goal: make library growth useful without letting retrieval noise dominate.
+- [Algorithmic Memory And Retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md)
+- [Operator And Skill Inventories](../research_programs/operator_and_skill_inventories/charter.md)
 
-Suggested experiments:
+Why: memory and inventories can add coverage, but naive prompt memory can hurt.
 
-- train shortlisters over larger operator banks,
-- active operator disambiguation with generated inputs,
-- retrieval plus verified consensus rather than single retrieved skill cards,
-- inventory coverage stress tests with held-out primitives.
+Next work:
 
-Best prior anchors:
+- memory as constraints/tests/candidates instead of only context,
+- operator-card and skill-card schemas,
+- shortlisters for larger banks,
+- active disambiguation for type-colliding primitives.
 
-- [qwen35_4b_operator_inventory_search_pilot](../experiments/qwen35_4b_operator_inventory_search_pilot/reports/qwen35_4b_operator_inventory_search_pilot_report.md)
-- [qwen_verified_skill_memory_rag](../experiments/qwen_verified_skill_memory_rag/reports/qwen_verified_skill_memory_rag_report.md)
-- [qwen35_4b_inventory_shortlister_training](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
+## Portfolio Priority 4: Couple Evidence Acquisition To Decisions
 
-## Priority 4: Active Evidence Acquisition
+Programs:
 
-Goal: ask for or synthesize the few examples/tests that collapse the right uncertainty.
+- [Active Evidence Acquisition](../research_programs/active_evidence_acquisition/charter.md)
+- [Process Control And Tool Use](../research_programs/process_control_and_tool_use/charter.md)
 
-Suggested experiments:
+Why: evidence gathering should optimize downstream decisions under budget.
 
-- active example selection with learned uncertainty rather than simple disagreement,
-- generated tests with expected-output-free agreement checks,
-- budgeted evidence policies trained on visible-only features,
-- family-specific acquisition policies for date/time and numeric transforms.
+Next work:
 
-Best prior anchors:
+- STOP/MORE and commit/repair controllers,
+- expected-output-free probes,
+- family-aware acquisition policies,
+- tool-state transfer across substrates.
 
-- [qwen_active_example_acquisition](../experiments/qwen_active_example_acquisition/reports/qwen_active_example_acquisition_report.md)
-- [qwen35_4b_adaptive_evidence_budget_policy](../experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md)
-- [qwen35_4b_active_counterexample_trace_selection](../experiments/qwen35_4b_active_counterexample_trace_selection/reports/qwen35_4b_active_counterexample_trace_selection_report.md)
+## Portfolio Priority 5: Make The Repository Better At Research
 
+Program: [Collective Experimentation Infrastructure](../research_programs/collective_experimentation_infrastructure/charter.md)
+
+Why: the project should produce many future lines without losing prior lessons.
+
+Next work:
+
+- claim/evidence ledgers,
+- program-level scorecards,
+- stronger metadata schemas,
+- issue/backlog templates for hypotheses,
+- validation gates for hidden-label boundaries and artifact manifests.

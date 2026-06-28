@@ -9,6 +9,9 @@ summary: "Standalone experiment for independent-retrieval consensus selection on
 tags:
   - "memory"
   - "small-model"
+research_programs:
+  - "algorithmic_memory_and_retrieval"
+  - "evidence_conditioned_selection"
 top_level_dirs:
   - "configs"
   - "data"
@@ -26,5 +29,5 @@ file_counts:
   py: 10
   yaml: 1
 total_files: 37
-total_size_bytes: 2752235
+total_size_bytes: 2752330
 generated_on: "2026-06-28"

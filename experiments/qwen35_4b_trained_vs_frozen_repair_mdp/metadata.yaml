@@ -12,6 +12,11 @@ tags:
   - "policy"
   - "repair"
   - "small-model"
+research_programs:
+  - "algorithmic_memory_and_retrieval"
+  - "evidence_conditioned_selection"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +32,5 @@ file_counts:
   py: 14
   yaml: 1
 total_files: 72
-total_size_bytes: 11079951
+total_size_bytes: 11080115
 generated_on: "2026-06-28"

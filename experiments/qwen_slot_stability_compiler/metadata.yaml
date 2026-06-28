@@ -10,6 +10,8 @@ tags:
   - "abi"
   - "latent-state"
   - "small-model"
+research_programs:
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -24,5 +26,5 @@ file_counts:
   py: 2
   yaml: 1
 total_files: 36
-total_size_bytes: 760186
+total_size_bytes: 760246
 generated_on: "2026-06-28"

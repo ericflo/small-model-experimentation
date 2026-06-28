@@ -1,27 +1,44 @@
 # Agent Operating Guide
 
-This repository is a compounding research memory. Optimize for preserving experiment autonomy while making findings easier to compare, reuse, and challenge.
+This repository is a compounding research system. The current experiments are examples and seed evidence; your job is to extend the frontier while preserving what has already been learned.
 
 ## First Pass
 
-1. Read [README.md](README.md).
-2. Read [knowledge/synthesis.md](knowledge/synthesis.md).
-3. Use [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) and [knowledge/tag_index.md](knowledge/tag_index.md) to find relevant prior work.
-4. Before adding or changing experiments, read [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md) and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
+1. Read [research_programs/README.md](research_programs/README.md).
+2. Read [knowledge/research_program_index.md](knowledge/research_program_index.md).
+3. Read [knowledge/synthesis.md](knowledge/synthesis.md).
+4. Use [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
+5. Before adding work, read [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
 
 ## Non-Negotiables
 
+- Treat the imported tracks as prototypes, not as the repo boundary.
 - Keep experiments self-contained under `experiments/<id>/`.
-- Update the knowledgebase when a result changes what future work should believe.
+- Attach every new experiment to a research program, or create a new program.
 - Preserve negative results and failed controls; they are part of the map.
-- Record enough detail that another agent can rerun, audit, or extend the experiment.
+- Update program evidence and shared synthesis when a result changes strategy.
 - Run `make catalog` and `make validate` before committing.
 
-## When Starting a New Experiment
+## When Starting A New Experiment
 
-Copy `templates/experiment/` into `experiments/<new-id>/`, fill in the README, and make the smallest runnable smoke path first. Add controls early enough that a positive-looking result can be falsified.
+Pick the program first. If no program fits, create one with:
+
+```bash
+make new-program PROGRAM=<program_id> TITLE="<Title>" FOCUS="<one-sentence focus>"
+```
+
+Then create the experiment with:
+
+```bash
+make new-experiment EXPERIMENT=<experiment_id> PROGRAM=<program_id> TITLE="<Title>"
+```
+
+Fill in the README, make the smallest runnable smoke path real, and only then run expensive work.
+
+## When Starting A New Program
+
+Create `research_programs/<program-id>/` with a charter, backlog, and evidence ledger. Add it to `research_programs/registry.yaml`; `make new-program` does the mechanical pieces. The charter must explain why the program is not just a variant of an existing line.
 
 ## When Editing Imported Work
 
 Prefer additive notes in `README.md`, `experiment_log.md`, `analysis/`, or `reports/`. Do not rewrite historical outputs unless you are regenerating them from code and can explain the change.
-

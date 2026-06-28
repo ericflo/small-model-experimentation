@@ -10,6 +10,9 @@ tags:
   - "execution"
   - "lora"
   - "repair"
+research_programs:
+  - "posttraining_and_adaptation"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +30,5 @@ file_counts:
   txt: 1
   yaml: 1
 total_files: 106
-total_size_bytes: 12555808
+total_size_bytes: 12555902
 generated_on: "2026-06-28"

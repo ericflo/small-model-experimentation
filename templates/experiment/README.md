@@ -1,5 +1,11 @@
 # Experiment Title
 
+## Research Program
+
+- Program:
+- Program question:
+- Prior anchors:
+
 ## Question
 
 What specific uncertainty does this experiment resolve?
@@ -17,6 +23,7 @@ State the mechanism you expect to work and why it should beat the baseline.
 - Controls:
 - Primary metric:
 - Oracle-only metrics:
+- Hidden-label boundary:
 
 ## Run
 
@@ -40,6 +47,12 @@ Fill this after the run. Separate deployable evidence from oracle/hidden evaluat
 
 What changed after this result? What is now more likely, less likely, or still unknown?
 
+## Knowledgebase Update
+
+- Program evidence updated:
+- Program backlog updated:
+- Claim ledger updated:
+
 ## Artifacts
 
 - `src/`
@@ -49,4 +62,3 @@ What changed after this result? What is now more likely, less likely, or still u
 - `runs/`
 - `analysis/`
 - `reports/`
-

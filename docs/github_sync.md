@@ -8,7 +8,7 @@ Routine sync:
 make catalog
 make validate
 git status --short
-git add README.md AGENTS.md CONTRIBUTING.md Makefile .gitignore .gitattributes docs knowledge scripts templates experiments
+git add README.md AGENTS.md CONTRIBUTING.md Makefile .gitignore .gitattributes docs knowledge research_programs scripts templates experiments
 git commit -m "Update experiment knowledgebase"
 git push
 ```

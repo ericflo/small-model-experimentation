@@ -8,6 +8,8 @@ primary_report: "experiments/rule_family_diversity_scaling/reports/rule_family_d
 summary: "This directory contains the small, download-friendly artifacts for a standalone rule-family diversity scaling experiment."
 tags:
   - "experiment"
+research_programs:
+  - "collective_experimentation_infrastructure"
 top_level_dirs:
   - "configs"
   - "data"
@@ -24,5 +26,5 @@ file_counts:
   py: 4
   yaml: 1
 total_files: 54
-total_size_bytes: 14769526
+total_size_bytes: 14769593
 generated_on: "2026-06-28"

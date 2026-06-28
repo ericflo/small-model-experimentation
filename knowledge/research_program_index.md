@@ -1,0 +1,631 @@
+# Research Program Index
+
+Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
+
+- Programs: 11
+- Experiments: 155
+
+## Structured Execution And Compilers
+
+Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
+
+- Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
+- Assigned experiments: 113
+
+### Seed Evidence
+
+- `latent_executor`: [README](../experiments/latent_executor/README.md)
+- `qwen_compiler_multiseed_reattribution`: [README](../experiments/qwen_compiler_multiseed_reattribution/README.md)
+- `qwen_structural_latent_compiler_expansion`: [README](../experiments/qwen_structural_latent_compiler_expansion/README.md)
+- `qwen_typed_bytecode_expert_iteration`: [README](../experiments/qwen_typed_bytecode_expert_iteration/README.md)
+- `structured_slot_initializer_ladder`: [README](../experiments/structured_slot_initializer_ladder/README.md)
+
+### Assigned Experiments
+
+- `adaptive_cognitive_kernel` (track-y): [README](../experiments/adaptive_cognitive_kernel/README.md)
+- `belief_filter_executor` (track-y): [README](../experiments/belief_filter_executor/README.md)
+- `cyclic_transition_ladder` (track-y): [README](../experiments/cyclic_transition_ladder/README.md)
+- `dense_latent_query_executor` (track-y): [README](../experiments/dense_latent_query_executor/README.md)
+- `dense_supervision_ladder` (track-y): [README](../experiments/dense_supervision_ladder/README.md)
+- `dense_teacher_distillation` (track-y): [README](../experiments/dense_teacher_distillation/README.md)
+- `end_to_end_structured_slot_executor` (track-y): [README](../experiments/end_to_end_structured_slot_executor/README.md)
+- `execution_conditioned_repair` (track-z): [README](../experiments/execution_conditioned_repair/README.md)
+- `joint_register_executor` (track-y): [README](../experiments/joint_register_executor/README.md)
+- `latent_executor` (track-y): [README](../experiments/latent_executor/README.md)
+- `learned_sparse_slot_executor` (track-y): [README](../experiments/learned_sparse_slot_executor/README.md)
+- `query_filter_executor` (track-y): [README](../experiments/query_filter_executor/README.md)
+- `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
+- `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` (track-z): [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md)
+- `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
+- `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
+- `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
+- `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
+- `qwen35_4b_foofah_direct_vs_abi` (track-z): [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md)
+- `qwen35_4b_foofah_ephemeral_program_induction` (track-z): [README](../experiments/qwen35_4b_foofah_ephemeral_program_induction/README.md)
+- `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_foofah_program_repair_agent` (track-z): [README](../experiments/qwen35_4b_foofah_program_repair_agent/README.md)
+- `qwen35_4b_foofah_program_strategy_portfolio` (track-z): [README](../experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md)
+- `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
+- `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
+- `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
+- `qwen35_4b_joint_shortlister_ladder` (track-z): [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md)
+- `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
+- `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
+- `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_prefix_value_guided_search` (track-z): [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md)
+- `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
+- `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
+- `qwen35_4b_transform_abi_compiler_pilot` (track-z): [README](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md)
+- `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
+- `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
+- `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
+- `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
+- `qwen_budgeted_action_value_compiler` (track-y): [README](../experiments/qwen_budgeted_action_value_compiler/README.md)
+- `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
+- `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
+- `qwen_checkpoint_scheduled_state_compiler` (track-y): [README](../experiments/qwen_checkpoint_scheduled_state_compiler/README.md)
+- `qwen_compiler_multiseed_reattribution` (track-y): [README](../experiments/qwen_compiler_multiseed_reattribution/README.md)
+- `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)
+- `qwen_compositional_curriculum_abi` (track-y): [README](../experiments/qwen_compositional_curriculum_abi/README.md)
+- `qwen_constrained_abi_parser` (track-y): [README](../experiments/qwen_constrained_abi_parser/README.md)
+- `qwen_context_trace_verifier` (track-y): [README](../experiments/qwen_context_trace_verifier/README.md)
+- `qwen_counterexample_guided_ephemeral_program` (track-y): [README](../experiments/qwen_counterexample_guided_ephemeral_program/README.md)
+- `qwen_counterfactual_episodic_icl` (track-y): [README](../experiments/qwen_counterfactual_episodic_icl/README.md)
+- `qwen_counterfactual_trace_preference_distillation` (track-y): [README](../experiments/qwen_counterfactual_trace_preference_distillation/README.md)
+- `qwen_crystallized_trace_abi_tournament` (track-y): [README](../experiments/qwen_crystallized_trace_abi_tournament/README.md)
+- `qwen_dense_state_dagger_vm_agent` (track-y): [README](../experiments/qwen_dense_state_dagger_vm_agent/README.md)
+- `qwen_disagreement_probe_program_induction` (track-y): [README](../experiments/qwen_disagreement_probe_program_induction/README.md)
+- `qwen_extrapolation_bound_abi` (track-y): [README](../experiments/qwen_extrapolation_bound_abi/README.md)
+- `qwen_fuyu_vm_grpo_echo` (track-y): [README](../experiments/qwen_fuyu_vm_grpo_echo/README.md)
+- `qwen_hidden_vm_curriculum_repair` (track-y): [README](../experiments/qwen_hidden_vm_curriculum_repair/README.md)
+- `qwen_hidden_vm_mixed_domains` (track-y): [README](../experiments/qwen_hidden_vm_mixed_domains/README.md)
+- `qwen_hidden_vm_onpolicy_canonical_repair` (track-y): [README](../experiments/qwen_hidden_vm_onpolicy_canonical_repair/README.md)
+- `qwen_inpolicy_vm_echo_distillation` (track-y): [README](../experiments/qwen_inpolicy_vm_echo_distillation/README.md)
+- `qwen_iterative_repair_policy` (track-y): [README](../experiments/qwen_iterative_repair_policy/README.md)
+- `qwen_large_abi_nested_compiler` (track-y): [README](../experiments/qwen_large_abi_nested_compiler/README.md)
+- `qwen_latent_beam_program_compiler` (track-y): [README](../experiments/qwen_latent_beam_program_compiler/README.md)
+- `qwen_learned_repair_verifier` (track-y): [README](../experiments/qwen_learned_repair_verifier/README.md)
+- `qwen_lora_parser_compiler` (track-y): [README](../experiments/qwen_lora_parser_compiler/README.md)
+- `qwen_lora_typed_bytecode_trace_compiler` (track-y): [README](../experiments/qwen_lora_typed_bytecode_trace_compiler/README.md)
+- `qwen_mixed_domain_trace_verifier` (track-y): [README](../experiments/qwen_mixed_domain_trace_verifier/README.md)
+- `qwen_noisy_row_program_crystallizer` (track-y): [README](../experiments/qwen_noisy_row_program_crystallizer/README.md)
+- `qwen_numeric_copy_compiler` (track-y): [README](../experiments/qwen_numeric_copy_compiler/README.md)
+- `qwen_onpolicy_repair_compiler` (track-y): [README](../experiments/qwen_onpolicy_repair_compiler/README.md)
+- `qwen_prefix_state_process_verifier` (track-y): [README](../experiments/qwen_prefix_state_process_verifier/README.md)
+- `qwen_program_only_executable_abi` (track-y): [README](../experiments/qwen_program_only_executable_abi/README.md)
+- `qwen_progressive_repair_compiler` (track-y): [README](../experiments/qwen_progressive_repair_compiler/README.md)
+- `qwen_public_prose_abi_gate` (track-y): [README](../experiments/qwen_public_prose_abi_gate/README.md)
+- `qwen_python_shaped_silent_executor` (track-y): [README](../experiments/qwen_python_shaped_silent_executor/README.md)
+- `qwen_readable_candidate_verifier` (track-y): [README](../experiments/qwen_readable_candidate_verifier/README.md)
+- `qwen_real_task_abi_coverage_gate` (track-y): [README](../experiments/qwen_real_task_abi_coverage_gate/README.md)
+- `qwen_recurrent_vm_repair_policy` (track-y): [README](../experiments/qwen_recurrent_vm_repair_policy/README.md)
+- `qwen_recursive_ephemeral_program_induction` (track-y): [README](../experiments/qwen_recursive_ephemeral_program_induction/README.md)
+- `qwen_register_structured_runtime` (track-y): [README](../experiments/qwen_register_structured_runtime/README.md)
+- `qwen_register_token_latent_compiler` (track-y): [README](../experiments/qwen_register_token_latent_compiler/README.md)
+- `qwen_register_trace_refiner` (track-y): [README](../experiments/qwen_register_trace_refiner/README.md)
+- `qwen_search_augmented_rollout_distillation` (track-y): [README](../experiments/qwen_search_augmented_rollout_distillation/README.md)
+- `qwen_semantic_prefix_value_model` (track-y): [README](../experiments/qwen_semantic_prefix_value_model/README.md)
+- `qwen_shared_parser_compiler` (track-y): [README](../experiments/qwen_shared_parser_compiler/README.md)
+- `qwen_slot_repair_distillation` (track-y): [README](../experiments/qwen_slot_repair_distillation/README.md)
+- `qwen_slot_stability_compiler` (track-y): [README](../experiments/qwen_slot_stability_compiler/README.md)
+- `qwen_span_free_compiler` (track-y): [README](../experiments/qwen_span_free_compiler/README.md)
+- `qwen_state_ladder_compiler` (track-y): [README](../experiments/qwen_state_ladder_compiler/README.md)
+- `qwen_structural_compiler_attribution_ablation` (track-y): [README](../experiments/qwen_structural_compiler_attribution_ablation/README.md)
+- `qwen_structural_latent_compiler_expansion` (track-y): [README](../experiments/qwen_structural_latent_compiler_expansion/README.md)
+- `qwen_structured_bridge` (track-y): [README](../experiments/qwen_structured_bridge/README.md)
+- `qwen_tail_repair_stability_critic` (track-y): [README](../experiments/qwen_tail_repair_stability_critic/README.md)
+- `qwen_teacher_distilled_slot_compiler` (track-y): [README](../experiments/qwen_teacher_distilled_slot_compiler/README.md)
+- `qwen_trace_bootstrap_retention` (track-y): [README](../experiments/qwen_trace_bootstrap_retention/README.md)
+- `qwen_trace_procedure_depth_stress` (track-y): [README](../experiments/qwen_trace_procedure_depth_stress/README.md)
+- `qwen_typed_bytecode_expert_iteration` (track-y): [README](../experiments/qwen_typed_bytecode_expert_iteration/README.md)
+- `qwen_verifier_guided_slot_repair` (track-y): [README](../experiments/qwen_verifier_guided_slot_repair/README.md)
+- `qwen_vm_agent_echo_qlora` (track-y): [README](../experiments/qwen_vm_agent_echo_qlora/README.md)
+- `qwen_vm_echo_trace_distillation` (track-y): [README](../experiments/qwen_vm_echo_trace_distillation/README.md)
+- `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)
+- `sampled_query_filter_executor` (track-y): [README](../experiments/sampled_query_filter_executor/README.md)
+- `sparse_support_memory_executor` (track-y): [README](../experiments/sparse_support_memory_executor/README.md)
+- `structured_slot_initializer_ladder` (track-y): [README](../experiments/structured_slot_initializer_ladder/README.md)
+
+## Evidence-Conditioned Selection
+
+Turn candidate-pool coverage into deployable decisions under visible evidence.
+
+- Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
+- Assigned experiments: 53
+
+### Seed Evidence
+
+- `qwen35_4b_foofah_program_ensemble_consensus`: [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_foofah_selective_program_fallback`: [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_independent_retrieval_consensus`: [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md)
+- `qwen35_4b_retrieval_adapt_verify_scale`: [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
+
+### Assigned Experiments
+
+- `counterexample_rule_repair` (track-z): [README](../experiments/counterexample_rule_repair/README.md)
+- `feature_factorized_rule_diversity` (track-z): [README](../experiments/feature_factorized_rule_diversity/README.md)
+- `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
+- `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
+- `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
+- `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
+- `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
+- `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
+- `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
+- `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
+- `qwen35_4b_independent_retrieval_consensus` (track-z): [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md)
+- `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
+- `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
+- `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
+- `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
+- `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
+- `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
+- `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
+- `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
+- `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
+- `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
+- `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
+- `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)
+- `qwen_context_trace_verifier` (track-y): [README](../experiments/qwen_context_trace_verifier/README.md)
+- `qwen_counterexample_guided_ephemeral_program` (track-y): [README](../experiments/qwen_counterexample_guided_ephemeral_program/README.md)
+- `qwen_counterexample_guided_projection` (track-y): [README](../experiments/qwen_counterexample_guided_projection/README.md)
+- `qwen_hidden_vm_curriculum_repair` (track-y): [README](../experiments/qwen_hidden_vm_curriculum_repair/README.md)
+- `qwen_learned_repair_verifier` (track-y): [README](../experiments/qwen_learned_repair_verifier/README.md)
+- `qwen_mixed_domain_trace_verifier` (track-y): [README](../experiments/qwen_mixed_domain_trace_verifier/README.md)
+- `qwen_onpolicy_repair_compiler` (track-y): [README](../experiments/qwen_onpolicy_repair_compiler/README.md)
+- `qwen_oracle_distilled_acquisition_policy` (track-y): [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md)
+- `qwen_pairwise_table_judge` (track-y): [README](../experiments/qwen_pairwise_table_judge/README.md)
+- `qwen_prefix_state_process_verifier` (track-y): [README](../experiments/qwen_prefix_state_process_verifier/README.md)
+- `qwen_progressive_repair_compiler` (track-y): [README](../experiments/qwen_progressive_repair_compiler/README.md)
+- `qwen_readable_candidate_verifier` (track-y): [README](../experiments/qwen_readable_candidate_verifier/README.md)
+- `qwen_real_task_abi_coverage_gate` (track-y): [README](../experiments/qwen_real_task_abi_coverage_gate/README.md)
+- `qwen_register_trace_refiner` (track-y): [README](../experiments/qwen_register_trace_refiner/README.md)
+- `qwen_teacher_distilled_slot_compiler` (track-y): [README](../experiments/qwen_teacher_distilled_slot_compiler/README.md)
+- `qwen_typed_bytecode_expert_iteration` (track-y): [README](../experiments/qwen_typed_bytecode_expert_iteration/README.md)
+- `qwen_verified_skill_memory_rag` (track-y): [README](../experiments/qwen_verified_skill_memory_rag/README.md)
+- `qwen_verifier_guided_slot_repair` (track-y): [README](../experiments/qwen_verifier_guided_slot_repair/README.md)
+- `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)
+
+## Active Evidence Acquisition
+
+Choose or synthesize the next visible example, probe, test, or trace that collapses uncertainty.
+
+- Charter: [active_evidence_acquisition](../research_programs/active_evidence_acquisition/charter.md)
+- Assigned experiments: 12
+
+### Seed Evidence
+
+- `qwen35_4b_active_counterexample_trace_selection`: [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
+- `qwen35_4b_adaptive_evidence_budget_policy`: [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_learned_active_trace_policy`: [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
+- `qwen_active_example_acquisition`: [README](../experiments/qwen_active_example_acquisition/README.md)
+
+### Assigned Experiments
+
+- `dense_latent_query_executor` (track-y): [README](../experiments/dense_latent_query_executor/README.md)
+- `query_filter_executor` (track-y): [README](../experiments/query_filter_executor/README.md)
+- `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
+- `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
+- `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
+- `qwen_active_example_acquisition` (track-y): [README](../experiments/qwen_active_example_acquisition/README.md)
+- `qwen_learned_active_interrogation` (track-y): [README](../experiments/qwen_learned_active_interrogation/README.md)
+- `qwen_oracle_distilled_acquisition_policy` (track-y): [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md)
+- `qwen_pairwise_table_judge` (track-y): [README](../experiments/qwen_pairwise_table_judge/README.md)
+- `sampled_query_filter_executor` (track-y): [README](../experiments/sampled_query_filter_executor/README.md)
+
+## Algorithmic Memory And Retrieval
+
+Use libraries of verified algorithms, examples, traces, skills, or failures as reusable memory.
+
+- Charter: [algorithmic_memory_and_retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md)
+- Assigned experiments: 21
+
+### Seed Evidence
+
+- `learned_sparse_slot_executor`: [README](../experiments/learned_sparse_slot_executor/README.md)
+- `qwen35_4b_retrieval_adapt_verify_scale`: [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
+- `qwen35_4b_verified_algorithm_retrieval_adaptation`: [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
+- `qwen_verified_skill_memory_rag`: [README](../experiments/qwen_verified_skill_memory_rag/README.md)
+
+### Assigned Experiments
+
+- `feature_factorized_rule_diversity` (track-z): [README](../experiments/feature_factorized_rule_diversity/README.md)
+- `learned_sparse_slot_executor` (track-y): [README](../experiments/learned_sparse_slot_executor/README.md)
+- `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
+- `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
+- `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
+- `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
+- `qwen35_4b_independent_retrieval_consensus` (track-z): [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md)
+- `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
+- `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
+- `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
+- `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
+- `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
+- `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
+- `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen_real_task_abi_coverage_gate` (track-y): [README](../experiments/qwen_real_task_abi_coverage_gate/README.md)
+- `qwen_verified_skill_memory_rag` (track-y): [README](../experiments/qwen_verified_skill_memory_rag/README.md)
+- `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)
+- `sparse_support_memory_executor` (track-y): [README](../experiments/sparse_support_memory_executor/README.md)
+
+## Operator And Skill Inventories
+
+Grow, search, shortlist, compose, and stress-test reusable operator and skill banks.
+
+- Charter: [operator_and_skill_inventories](../research_programs/operator_and_skill_inventories/charter.md)
+- Assigned experiments: 7
+
+### Seed Evidence
+
+- `qwen35_4b_inventory_shortlister_training`: [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
+- `qwen35_4b_joint_shortlister_ladder`: [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md)
+- `qwen35_4b_operator_inventory_scaling_stress`: [README](../experiments/qwen35_4b_operator_inventory_scaling_stress/README.md)
+- `qwen35_4b_operator_inventory_search_pilot`: [README](../experiments/qwen35_4b_operator_inventory_search_pilot/README.md)
+
+### Assigned Experiments
+
+- `qwen35_4b_inventory_shortlister_training` (track-z): [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
+- `qwen35_4b_joint_shortlister_ladder` (track-z): [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md)
+- `qwen35_4b_operator_inventory_scaling_stress` (track-z): [README](../experiments/qwen35_4b_operator_inventory_scaling_stress/README.md)
+- `qwen35_4b_operator_inventory_search_pilot` (track-z): [README](../experiments/qwen35_4b_operator_inventory_search_pilot/README.md)
+- `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen_recurrent_vm_repair_policy` (track-y): [README](../experiments/qwen_recurrent_vm_repair_policy/README.md)
+
+## Posttraining And Adaptation
+
+Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
+
+- Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
+- Assigned experiments: 43
+
+### Seed Evidence
+
+- `qwen35_4b_constrained_coverage_dpo`: [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
+- `qwen35_4b_live_tool_dagger`: [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_offline_hard_negative_coverage_dpo`: [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
+- `qwen35_4b_oracle_process_grpo`: [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+
+### Assigned Experiments
+
+- `adaptive_cognitive_kernel` (track-y): [README](../experiments/adaptive_cognitive_kernel/README.md)
+- `dense_teacher_distillation` (track-y): [README](../experiments/dense_teacher_distillation/README.md)
+- `execution_conditioned_repair` (track-z): [README](../experiments/execution_conditioned_repair/README.md)
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
+- `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
+- `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
+- `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
+- `qwen35_4b_inventory_shortlister_training` (track-z): [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
+- `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
+- `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
+- `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
+- `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
+- `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
+- `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
+- `qwen35_4b_strategy_token_diversity_lora` (track-z): [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md)
+- `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
+- `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
+- `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
+- `qwen_counterfactual_episodic_icl` (track-y): [README](../experiments/qwen_counterfactual_episodic_icl/README.md)
+- `qwen_counterfactual_icl_public_multiseed` (track-y): [README](../experiments/qwen_counterfactual_icl_public_multiseed/README.md)
+- `qwen_counterfactual_trace_preference_distillation` (track-y): [README](../experiments/qwen_counterfactual_trace_preference_distillation/README.md)
+- `qwen_dense_state_dagger_vm_agent` (track-y): [README](../experiments/qwen_dense_state_dagger_vm_agent/README.md)
+- `qwen_fuyu_vm_grpo_echo` (track-y): [README](../experiments/qwen_fuyu_vm_grpo_echo/README.md)
+- `qwen_hidden_vm_onpolicy_canonical_repair` (track-y): [README](../experiments/qwen_hidden_vm_onpolicy_canonical_repair/README.md)
+- `qwen_inpolicy_vm_echo_distillation` (track-y): [README](../experiments/qwen_inpolicy_vm_echo_distillation/README.md)
+- `qwen_iterative_repair_policy` (track-y): [README](../experiments/qwen_iterative_repair_policy/README.md)
+- `qwen_lora_parser_compiler` (track-y): [README](../experiments/qwen_lora_parser_compiler/README.md)
+- `qwen_lora_typed_bytecode_trace_compiler` (track-y): [README](../experiments/qwen_lora_typed_bytecode_trace_compiler/README.md)
+- `qwen_onpolicy_repair_compiler` (track-y): [README](../experiments/qwen_onpolicy_repair_compiler/README.md)
+- `qwen_oracle_distilled_acquisition_policy` (track-y): [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md)
+- `qwen_recurrent_vm_repair_policy` (track-y): [README](../experiments/qwen_recurrent_vm_repair_policy/README.md)
+- `qwen_search_augmented_rollout_distillation` (track-y): [README](../experiments/qwen_search_augmented_rollout_distillation/README.md)
+- `qwen_slot_repair_distillation` (track-y): [README](../experiments/qwen_slot_repair_distillation/README.md)
+- `qwen_support_contrastive_meta_icl` (track-y): [README](../experiments/qwen_support_contrastive_meta_icl/README.md)
+- `qwen_teacher_distilled_slot_compiler` (track-y): [README](../experiments/qwen_teacher_distilled_slot_compiler/README.md)
+- `qwen_verifier_guided_slot_repair` (track-y): [README](../experiments/qwen_verifier_guided_slot_repair/README.md)
+- `qwen_vm_agent_echo_qlora` (track-y): [README](../experiments/qwen_vm_agent_echo_qlora/README.md)
+- `qwen_vm_echo_trace_distillation` (track-y): [README](../experiments/qwen_vm_echo_trace_distillation/README.md)
+
+## Process Control And Tool Use
+
+Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
+
+- Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
+- Assigned experiments: 22
+
+### Seed Evidence
+
+- `qwen35_4b_adaptive_evidence_budget_policy`: [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_adaptive_tool_controller`: [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_live_tool_dagger`: [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_tool_state_policy_lora`: [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
+
+### Assigned Experiments
+
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
+- `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
+- `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
+- `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
+- `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
+- `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
+- `qwen35_4b_strategy_token_diversity_lora` (track-z): [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md)
+- `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
+- `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
+- `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
+- `qwen_fuyu_vm_grpo_echo` (track-y): [README](../experiments/qwen_fuyu_vm_grpo_echo/README.md)
+- `qwen_hidden_vm_onpolicy_canonical_repair` (track-y): [README](../experiments/qwen_hidden_vm_onpolicy_canonical_repair/README.md)
+- `qwen_inpolicy_vm_echo_distillation` (track-y): [README](../experiments/qwen_inpolicy_vm_echo_distillation/README.md)
+- `qwen_iterative_repair_policy` (track-y): [README](../experiments/qwen_iterative_repair_policy/README.md)
+- `qwen_onpolicy_repair_compiler` (track-y): [README](../experiments/qwen_onpolicy_repair_compiler/README.md)
+- `qwen_oracle_distilled_acquisition_policy` (track-y): [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md)
+- `qwen_recurrent_vm_repair_policy` (track-y): [README](../experiments/qwen_recurrent_vm_repair_policy/README.md)
+
+## Benchmark Generalization
+
+Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
+
+- Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
+- Assigned experiments: 80
+
+### Seed Evidence
+
+- `factor_recombination_ladder`: [README](../experiments/factor_recombination_ladder/README.md)
+- `feature_factorized_rule_diversity`: [README](../experiments/feature_factorized_rule_diversity/README.md)
+- `qwen35_4b_sketch_coverage_shift_probe`: [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
+- `targeted_bridge_allocation`: [README](../experiments/targeted_bridge_allocation/README.md)
+
+### Assigned Experiments
+
+- `bridge_dose_recombination_curriculum` (track-z): [README](../experiments/bridge_dose_recombination_curriculum/README.md)
+- `cyclic_transition_ladder` (track-y): [README](../experiments/cyclic_transition_ladder/README.md)
+- `dense_supervision_ladder` (track-y): [README](../experiments/dense_supervision_ladder/README.md)
+- `factor_recombination_ladder` (track-z): [README](../experiments/factor_recombination_ladder/README.md)
+- `feature_factorized_rule_diversity` (track-z): [README](../experiments/feature_factorized_rule_diversity/README.md)
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
+- `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
+- `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
+- `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
+- `qwen35_4b_foofah_direct_vs_abi` (track-z): [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md)
+- `qwen35_4b_foofah_ephemeral_program_induction` (track-z): [README](../experiments/qwen35_4b_foofah_ephemeral_program_induction/README.md)
+- `qwen35_4b_foofah_external_transform_gate` (track-z): [README](../experiments/qwen35_4b_foofah_external_transform_gate/README.md)
+- `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_foofah_program_repair_agent` (track-z): [README](../experiments/qwen35_4b_foofah_program_repair_agent/README.md)
+- `qwen35_4b_foofah_program_strategy_portfolio` (track-z): [README](../experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md)
+- `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_foofah_strategy_discovery_live` (track-z): [README](../experiments/qwen35_4b_foofah_strategy_discovery_live/README.md)
+- `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
+- `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
+- `qwen35_4b_joint_shortlister_ladder` (track-z): [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md)
+- `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
+- `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
+- `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_transform_abi_compiler_pilot` (track-z): [README](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md)
+- `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
+- `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
+- `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
+- `qwen_active_example_acquisition` (track-y): [README](../experiments/qwen_active_example_acquisition/README.md)
+- `qwen_batched_transduction_consistency` (track-y): [README](../experiments/qwen_batched_transduction_consistency/README.md)
+- `qwen_budgeted_action_value_compiler` (track-y): [README](../experiments/qwen_budgeted_action_value_compiler/README.md)
+- `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
+- `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
+- `qwen_checkpoint_scheduled_state_compiler` (track-y): [README](../experiments/qwen_checkpoint_scheduled_state_compiler/README.md)
+- `qwen_compiler_multiseed_reattribution` (track-y): [README](../experiments/qwen_compiler_multiseed_reattribution/README.md)
+- `qwen_compositional_curriculum_abi` (track-y): [README](../experiments/qwen_compositional_curriculum_abi/README.md)
+- `qwen_constrained_abi_parser` (track-y): [README](../experiments/qwen_constrained_abi_parser/README.md)
+- `qwen_counterexample_guided_ephemeral_program` (track-y): [README](../experiments/qwen_counterexample_guided_ephemeral_program/README.md)
+- `qwen_counterexample_guided_projection` (track-y): [README](../experiments/qwen_counterexample_guided_projection/README.md)
+- `qwen_counterfactual_episodic_icl` (track-y): [README](../experiments/qwen_counterfactual_episodic_icl/README.md)
+- `qwen_counterfactual_icl_public_multiseed` (track-y): [README](../experiments/qwen_counterfactual_icl_public_multiseed/README.md)
+- `qwen_crystallized_trace_abi_tournament` (track-y): [README](../experiments/qwen_crystallized_trace_abi_tournament/README.md)
+- `qwen_disagreement_probe_program_induction` (track-y): [README](../experiments/qwen_disagreement_probe_program_induction/README.md)
+- `qwen_episodic_soft_prompt_task_vectors` (track-y): [README](../experiments/qwen_episodic_soft_prompt_task_vectors/README.md)
+- `qwen_full_table_consistency_reranker` (track-y): [README](../experiments/qwen_full_table_consistency_reranker/README.md)
+- `qwen_hidden_vm_curriculum_repair` (track-y): [README](../experiments/qwen_hidden_vm_curriculum_repair/README.md)
+- `qwen_learned_active_interrogation` (track-y): [README](../experiments/qwen_learned_active_interrogation/README.md)
+- `qwen_lora_typed_bytecode_trace_compiler` (track-y): [README](../experiments/qwen_lora_typed_bytecode_trace_compiler/README.md)
+- `qwen_mixed_domain_trace_verifier` (track-y): [README](../experiments/qwen_mixed_domain_trace_verifier/README.md)
+- `qwen_oracle_distilled_acquisition_policy` (track-y): [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md)
+- `qwen_pairwise_table_judge` (track-y): [README](../experiments/qwen_pairwise_table_judge/README.md)
+- `qwen_prefix_state_process_verifier` (track-y): [README](../experiments/qwen_prefix_state_process_verifier/README.md)
+- `qwen_program_only_executable_abi` (track-y): [README](../experiments/qwen_program_only_executable_abi/README.md)
+- `qwen_progressive_repair_compiler` (track-y): [README](../experiments/qwen_progressive_repair_compiler/README.md)
+- `qwen_public_prose_abi_gate` (track-y): [README](../experiments/qwen_public_prose_abi_gate/README.md)
+- `qwen_readable_candidate_verifier` (track-y): [README](../experiments/qwen_readable_candidate_verifier/README.md)
+- `qwen_recursive_ephemeral_program_induction` (track-y): [README](../experiments/qwen_recursive_ephemeral_program_induction/README.md)
+- `qwen_recursive_task_decomposition` (track-y): [README](../experiments/qwen_recursive_task_decomposition/README.md)
+- `qwen_register_structured_runtime` (track-y): [README](../experiments/qwen_register_structured_runtime/README.md)
+- `qwen_register_token_latent_compiler` (track-y): [README](../experiments/qwen_register_token_latent_compiler/README.md)
+- `qwen_semantic_prefix_value_model` (track-y): [README](../experiments/qwen_semantic_prefix_value_model/README.md)
+- `qwen_shared_parser_compiler` (track-y): [README](../experiments/qwen_shared_parser_compiler/README.md)
+- `qwen_slot_repair_distillation` (track-y): [README](../experiments/qwen_slot_repair_distillation/README.md)
+- `qwen_span_free_compiler` (track-y): [README](../experiments/qwen_span_free_compiler/README.md)
+- `qwen_state_ladder_compiler` (track-y): [README](../experiments/qwen_state_ladder_compiler/README.md)
+- `qwen_structural_compiler_attribution_ablation` (track-y): [README](../experiments/qwen_structural_compiler_attribution_ablation/README.md)
+- `qwen_structural_latent_compiler_expansion` (track-y): [README](../experiments/qwen_structural_latent_compiler_expansion/README.md)
+- `qwen_structured_bridge` (track-y): [README](../experiments/qwen_structured_bridge/README.md)
+- `qwen_support_contrastive_meta_icl` (track-y): [README](../experiments/qwen_support_contrastive_meta_icl/README.md)
+- `qwen_tail_repair_stability_critic` (track-y): [README](../experiments/qwen_tail_repair_stability_critic/README.md)
+- `qwen_trace_procedure_depth_stress` (track-y): [README](../experiments/qwen_trace_procedure_depth_stress/README.md)
+- `qwen_verified_skill_memory_rag` (track-y): [README](../experiments/qwen_verified_skill_memory_rag/README.md)
+- `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)
+- `structured_slot_initializer_ladder` (track-y): [README](../experiments/structured_slot_initializer_ladder/README.md)
+- `targeted_bridge_allocation` (track-z): [README](../experiments/targeted_bridge_allocation/README.md)
+
+## Interpretability And Diagnostics
+
+Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
+
+- Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
+- Assigned experiments: 37
+
+### Seed Evidence
+
+- `qwen35_4b_opsd_pressure_locality_audit`: [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
+- `qwen35_4b_reliability_exec_opsd_audit`: [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen_full_table_consistency_reranker`: [README](../experiments/qwen_full_table_consistency_reranker/README.md)
+- `qwen_structural_compiler_attribution_ablation`: [README](../experiments/qwen_structural_compiler_attribution_ablation/README.md)
+
+### Assigned Experiments
+
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
+- `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
+- `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
+- `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
+- `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
+- `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
+- `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
+- `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
+- `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
+- `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)
+- `qwen_context_trace_verifier` (track-y): [README](../experiments/qwen_context_trace_verifier/README.md)
+- `qwen_full_table_consistency_reranker` (track-y): [README](../experiments/qwen_full_table_consistency_reranker/README.md)
+- `qwen_hidden_vm_curriculum_repair` (track-y): [README](../experiments/qwen_hidden_vm_curriculum_repair/README.md)
+- `qwen_learned_repair_verifier` (track-y): [README](../experiments/qwen_learned_repair_verifier/README.md)
+- `qwen_mixed_domain_trace_verifier` (track-y): [README](../experiments/qwen_mixed_domain_trace_verifier/README.md)
+- `qwen_onpolicy_repair_compiler` (track-y): [README](../experiments/qwen_onpolicy_repair_compiler/README.md)
+- `qwen_oracle_distilled_acquisition_policy` (track-y): [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md)
+- `qwen_pairwise_table_judge` (track-y): [README](../experiments/qwen_pairwise_table_judge/README.md)
+- `qwen_prefix_state_process_verifier` (track-y): [README](../experiments/qwen_prefix_state_process_verifier/README.md)
+- `qwen_progressive_repair_compiler` (track-y): [README](../experiments/qwen_progressive_repair_compiler/README.md)
+- `qwen_readable_candidate_verifier` (track-y): [README](../experiments/qwen_readable_candidate_verifier/README.md)
+- `qwen_register_trace_refiner` (track-y): [README](../experiments/qwen_register_trace_refiner/README.md)
+- `qwen_structural_compiler_attribution_ablation` (track-y): [README](../experiments/qwen_structural_compiler_attribution_ablation/README.md)
+- `qwen_teacher_distilled_slot_compiler` (track-y): [README](../experiments/qwen_teacher_distilled_slot_compiler/README.md)
+- `qwen_typed_bytecode_expert_iteration` (track-y): [README](../experiments/qwen_typed_bytecode_expert_iteration/README.md)
+- `qwen_verified_skill_memory_rag` (track-y): [README](../experiments/qwen_verified_skill_memory_rag/README.md)
+- `qwen_verifier_guided_slot_repair` (track-y): [README](../experiments/qwen_verifier_guided_slot_repair/README.md)
+
+## Reliability And Safety
+
+Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
+
+- Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
+- Assigned experiments: 42
+
+### Seed Evidence
+
+- `qwen35_4b_oracle_distilled_semantic_verifier`: [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
+- `qwen35_4b_real_sample_verify_commit`: [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_reliability_exec_opsd_audit`: [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen_readable_candidate_verifier`: [README](../experiments/qwen_readable_candidate_verifier/README.md)
+
+### Assigned Experiments
+
+- `counterexample_rule_repair` (track-z): [README](../experiments/counterexample_rule_repair/README.md)
+- `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
+- `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
+- `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
+- `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
+- `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
+- `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
+- `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
+- `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
+- `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
+- `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
+- `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
+- `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
+- `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
+- `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)
+- `qwen_context_trace_verifier` (track-y): [README](../experiments/qwen_context_trace_verifier/README.md)
+- `qwen_counterexample_guided_ephemeral_program` (track-y): [README](../experiments/qwen_counterexample_guided_ephemeral_program/README.md)
+- `qwen_counterexample_guided_projection` (track-y): [README](../experiments/qwen_counterexample_guided_projection/README.md)
+- `qwen_hidden_vm_curriculum_repair` (track-y): [README](../experiments/qwen_hidden_vm_curriculum_repair/README.md)
+- `qwen_learned_repair_verifier` (track-y): [README](../experiments/qwen_learned_repair_verifier/README.md)
+- `qwen_mixed_domain_trace_verifier` (track-y): [README](../experiments/qwen_mixed_domain_trace_verifier/README.md)
+- `qwen_onpolicy_repair_compiler` (track-y): [README](../experiments/qwen_onpolicy_repair_compiler/README.md)
+- `qwen_oracle_distilled_acquisition_policy` (track-y): [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md)
+- `qwen_pairwise_table_judge` (track-y): [README](../experiments/qwen_pairwise_table_judge/README.md)
+- `qwen_prefix_state_process_verifier` (track-y): [README](../experiments/qwen_prefix_state_process_verifier/README.md)
+- `qwen_progressive_repair_compiler` (track-y): [README](../experiments/qwen_progressive_repair_compiler/README.md)
+- `qwen_readable_candidate_verifier` (track-y): [README](../experiments/qwen_readable_candidate_verifier/README.md)
+- `qwen_register_trace_refiner` (track-y): [README](../experiments/qwen_register_trace_refiner/README.md)
+- `qwen_teacher_distilled_slot_compiler` (track-y): [README](../experiments/qwen_teacher_distilled_slot_compiler/README.md)
+- `qwen_typed_bytecode_expert_iteration` (track-y): [README](../experiments/qwen_typed_bytecode_expert_iteration/README.md)
+- `qwen_verified_skill_memory_rag` (track-y): [README](../experiments/qwen_verified_skill_memory_rag/README.md)
+- `qwen_verifier_guided_slot_repair` (track-y): [README](../experiments/qwen_verifier_guided_slot_repair/README.md)
+- `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)
+
+## Collective Experimentation Infrastructure
+
+Make the repository itself better at spawning, comparing, validating, and remembering many independent lines.
+
+- Charter: [collective_experimentation_infrastructure](../research_programs/collective_experimentation_infrastructure/charter.md)
+- Assigned experiments: 4
+
+### Seed Evidence
+
+- `qwen35_4b_sampler_portfolio_scheduler`: [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
+- `qwen_compiler_multiseed_reattribution`: [README](../experiments/qwen_compiler_multiseed_reattribution/README.md)
+
+### Assigned Experiments
+
+- `episodic_echo_ttt` (track-y): [README](../experiments/episodic_echo_ttt/README.md)
+- `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
+- `qwen_compiler_multiseed_reattribution` (track-y): [README](../experiments/qwen_compiler_multiseed_reattribution/README.md)
+- `rule_family_diversity_scaling` (track-z): [README](../experiments/rule_family_diversity_scaling/README.md)
+
+## Program Review Needed
+
+- `qwen_fastweight_hook`: [README](../experiments/qwen_fastweight_hook/README.md)
+- `trace_keyed_symbol_repair`: [README](../experiments/trace_keyed_symbol_repair/README.md)

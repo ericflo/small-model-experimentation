@@ -11,6 +11,11 @@ tags:
   - "execution"
   - "policy"
   - "small-model"
+research_programs:
+  - "active_evidence_acquisition"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -29,5 +34,5 @@ file_counts:
   py: 12
   yaml: 1
 total_files: 73
-total_size_bytes: 88024649
+total_size_bytes: 88024812
 generated_on: "2026-06-28"

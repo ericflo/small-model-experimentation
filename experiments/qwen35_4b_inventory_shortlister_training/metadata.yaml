@@ -10,6 +10,9 @@ tags:
   - "lora"
   - "operator-search"
   - "small-model"
+research_programs:
+  - "operator_and_skill_inventories"
+  - "posttraining_and_adaptation"
 top_level_dirs:
   - "configs"
   - "data"
@@ -28,5 +31,5 @@ file_counts:
   py: 9
   yaml: 1
 total_files: 38
-total_size_bytes: 14454878
+total_size_bytes: 14454968
 generated_on: "2026-06-28"

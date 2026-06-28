@@ -10,6 +10,7 @@ Good entries:
 - a result that changes which direction should be tried next,
 - a negative control that prevents a tempting wrong explanation,
 - a reusable evaluation pattern.
+- a program-level direction or stop condition.
 
 Avoid entries that are only aspirations or generic advice.
 
@@ -26,6 +27,8 @@ Use these labels in synthesis notes:
 
 Do not hand-edit generated files:
 
+- `knowledge/research_program_index.md`
+- `knowledge/research_program_index.csv`
 - `knowledge/experiment_catalog.md`
 - `knowledge/experiment_catalog.csv`
 - `knowledge/tag_index.md`
@@ -41,3 +44,10 @@ Regenerate them with:
 make catalog
 ```
 
+## Updating Program Files
+
+Hand-edit program files when a result changes direction:
+
+- `research_programs/<program>/charter.md` for purpose or boundary changes,
+- `research_programs/<program>/backlog.md` for next experiments,
+- `research_programs/<program>/evidence.md` for seed evidence and current read.

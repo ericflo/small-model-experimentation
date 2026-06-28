@@ -12,6 +12,10 @@ tags:
   - "latent-state"
   - "small-model"
   - "table-transform"
+research_programs:
+  - "benchmark_generalization"
+  - "interpretability_and_diagnostics"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "reports"
   - "runs"
@@ -25,5 +29,5 @@ file_counts:
   py: 2
   yaml: 1
 total_files: 67
-total_size_bytes: 3036383
+total_size_bytes: 3036513
 generated_on: "2026-06-28"

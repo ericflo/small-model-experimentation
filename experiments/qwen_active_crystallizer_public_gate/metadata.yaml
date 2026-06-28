@@ -11,6 +11,10 @@ tags:
   - "execution"
   - "small-model"
   - "table-transform"
+research_programs:
+  - "active_evidence_acquisition"
+  - "benchmark_generalization"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -25,5 +29,5 @@ file_counts:
   py: 2
   yaml: 1
 total_files: 35
-total_size_bytes: 612299
+total_size_bytes: 612424
 generated_on: "2026-06-28"

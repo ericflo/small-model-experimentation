@@ -11,6 +11,11 @@ tags:
   - "counterexamples"
   - "memory"
   - "small-model"
+research_programs:
+  - "algorithmic_memory_and_retrieval"
+  - "evidence_conditioned_selection"
+  - "posttraining_and_adaptation"
+  - "reliability_and_safety"
 top_level_dirs:
   - "configs"
   - "data"
@@ -28,5 +33,5 @@ file_counts:
   py: 11
   yaml: 1
 total_files: 87
-total_size_bytes: 3298537
+total_size_bytes: 3298695
 generated_on: "2026-06-28"

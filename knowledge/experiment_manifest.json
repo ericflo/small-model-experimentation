@@ -14,6 +14,10 @@
     "path": "experiments/adaptive_cognitive_kernel",
     "primary_readme": "experiments/adaptive_cognitive_kernel/README.md",
     "primary_report": "experiments/adaptive_cognitive_kernel/reports/adaptive_cognitive_kernel_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a task-conditioned recurrent runtime with temporary adapter-style weight edits can learn compositional execution better than ordinary fixed-weight controllers.",
     "tags": [
@@ -28,7 +32,7 @@
       "src"
     ],
     "total_files": 39,
-    "total_size_bytes": 500091
+    "total_size_bytes": 500185
   },
   {
     "file_counts": {
@@ -45,6 +49,9 @@
     "path": "experiments/belief_filter_executor",
     "primary_readme": "experiments/belief_filter_executor/README.md",
     "primary_report": "experiments/belief_filter_executor/reports/belief_filter_executor_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests latent recurrent execution over correlated belief states with both arithmetic transitions and observation/filter operations.",
     "tags": [
@@ -59,7 +66,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 607050
+    "total_size_bytes": 607110
   },
   {
     "file_counts": {
@@ -77,6 +84,9 @@
     "path": "experiments/bridge_dose_recombination_curriculum",
     "primary_readme": "experiments/bridge_dose_recombination_curriculum/README.md",
     "primary_report": "experiments/bridge_dose_recombination_curriculum/reports/bridge_dose_recombination_curriculum_report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for testing whether a small number of exact factor-pair bridge examples is enough to unlock trace-conditioned recombination generalization.",
     "tags": [
@@ -94,7 +104,7 @@
       "scripts"
     ],
     "total_files": 71,
-    "total_size_bytes": 22003424
+    "total_size_bytes": 22003474
   },
   {
     "file_counts": {
@@ -112,6 +122,10 @@
     "path": "experiments/counterexample_rule_repair",
     "primary_readme": "experiments/counterexample_rule_repair/README.md",
     "primary_report": "experiments/counterexample_rule_repair/reports/counterexample_rule_repair_paper.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "This directory contains the small, download-friendly artifacts for a standalone counterexample-to-rule repair experiment.",
     "tags": [
@@ -128,7 +142,7 @@
       "scripts"
     ],
     "total_files": 52,
-    "total_size_bytes": 10146673
+    "total_size_bytes": 10146758
   },
   {
     "file_counts": {
@@ -145,6 +159,10 @@
     "path": "experiments/cyclic_transition_ladder",
     "primary_readme": "experiments/cyclic_transition_ladder/README.md",
     "primary_report": "experiments/cyclic_transition_ladder/reports/cyclic_transition_ladder_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests which transition inductive bias is sufficient for a recurrent slot model to learn modular belief-state execution.",
     "tags": [
@@ -160,7 +178,7 @@
       "src"
     ],
     "total_files": 69,
-    "total_size_bytes": 5998603
+    "total_size_bytes": 5998694
   },
   {
     "file_counts": {
@@ -177,6 +195,10 @@
     "path": "experiments/dense_latent_query_executor",
     "primary_readme": "experiments/dense_latent_query_executor/README.md",
     "primary_report": "experiments/dense_latent_query_executor/reports/dense_latent_query_executor_paper.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a recurrent model with a fixed-width dense hidden state can learn modular belief-state execution from one sampled final query value per example.",
     "tags": [
@@ -192,7 +214,7 @@
       "src"
     ],
     "total_files": 34,
-    "total_size_bytes": 1229717
+    "total_size_bytes": 1229811
   },
   {
     "file_counts": {
@@ -209,6 +231,10 @@
     "path": "experiments/dense_supervision_ladder",
     "primary_readme": "experiments/dense_supervision_ladder/README.md",
     "primary_report": "experiments/dense_supervision_ladder/reports/dense_supervision_ladder_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests which training signal is sufficient for a recurrent model with a fixed-width dense hidden state to learn modular belief-state execution.",
     "tags": [
@@ -224,7 +250,7 @@
       "src"
     ],
     "total_files": 55,
-    "total_size_bytes": 3276154
+    "total_size_bytes": 3276245
   },
   {
     "file_counts": {
@@ -241,6 +267,10 @@
     "path": "experiments/dense_teacher_distillation",
     "primary_readme": "experiments/dense_teacher_distillation/README.md",
     "primary_report": "experiments/dense_teacher_distillation/reports/dense_teacher_distillation_paper.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a fixed-width dense recurrent state can learn exact modular belief-state execution when the training signal is the full teacher belief distribution at every prefix step.",
     "tags": [
@@ -256,7 +286,7 @@
       "src"
     ],
     "total_files": 48,
-    "total_size_bytes": 3813150
+    "total_size_bytes": 3813244
   },
   {
     "file_counts": {
@@ -273,6 +303,9 @@
     "path": "experiments/end_to_end_structured_slot_executor",
     "primary_readme": "experiments/end_to_end_structured_slot_executor/README.md",
     "primary_report": "experiments/end_to_end_structured_slot_executor/reports/end_to_end_structured_slot_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a structured slot executor can learn both initial support formation and recurrent modular belief-state transitions in one model.",
     "tags": [
@@ -287,7 +320,7 @@
       "src"
     ],
     "total_files": 87,
-    "total_size_bytes": 8831741
+    "total_size_bytes": 8831801
   },
   {
     "file_counts": {
@@ -304,6 +337,9 @@
     "path": "experiments/episodic_echo_ttt",
     "primary_readme": "experiments/episodic_echo_ttt/README.md",
     "primary_report": "experiments/episodic_echo_ttt/reports/episodic_echo_ttt_report.md",
+    "research_programs": [
+      "collective_experimentation_infrastructure"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether temporary per-episode gradient updates on environment-observation prediction improve later decisions in a small local language model.",
     "tags": [
@@ -317,7 +353,7 @@
       "src"
     ],
     "total_files": 48,
-    "total_size_bytes": 874604
+    "total_size_bytes": 874671
   },
   {
     "file_counts": {
@@ -334,6 +370,10 @@
     "path": "experiments/execution_conditioned_repair",
     "primary_readme": "experiments/execution_conditioned_repair/README.md",
     "primary_report": "experiments/execution_conditioned_repair/reports/transfer_gap_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This workspace implements the experiment brief in `/root/.codex/attachments/67be2ef6-a2f4-424d-a411-f0479b10c076/pasted-text-1.txt`.",
     "tags": [
@@ -352,7 +392,7 @@
       "src"
     ],
     "total_files": 106,
-    "total_size_bytes": 12555808
+    "total_size_bytes": 12555902
   },
   {
     "file_counts": {
@@ -370,6 +410,9 @@
     "path": "experiments/factor_recombination_ladder",
     "primary_readme": "experiments/factor_recombination_ladder/README.md",
     "primary_report": "experiments/factor_recombination_ladder/reports/factor_recombination_ladder_report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for testing whether trace-conditioned repair learns reusable factor recombination, rather than only learning seen rule templates.",
     "tags": [
@@ -387,7 +430,7 @@
       "scripts"
     ],
     "total_files": 60,
-    "total_size_bytes": 13872809
+    "total_size_bytes": 13872859
   },
   {
     "file_counts": {
@@ -405,6 +448,11 @@
     "path": "experiments/feature_factorized_rule_diversity",
     "primary_readme": "experiments/feature_factorized_rule_diversity/README.md",
     "primary_report": "experiments/feature_factorized_rule_diversity/reports/feature_factorized_rule_diversity_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization",
+      "evidence_conditioned_selection"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for testing whether trace-conditioned repair transfer is driven more by isolated primitive factor coverage, analogous multi-factor composition coverage, or a fixed-budget mixture of both.",
     "tags": [
@@ -423,7 +471,7 @@
       "scripts"
     ],
     "total_files": 53,
-    "total_size_bytes": 19626518
+    "total_size_bytes": 19626644
   },
   {
     "file_counts": {
@@ -440,6 +488,9 @@
     "path": "experiments/joint_register_executor",
     "primary_readme": "experiments/joint_register_executor/README.md",
     "primary_report": "experiments/joint_register_executor/reports/joint_register_executor_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests latent recurrent execution for two-register modular programs with cross-register operations such as `A=A+B` and `B=B-A`.",
     "tags": [
@@ -454,7 +505,7 @@
       "src"
     ],
     "total_files": 50,
-    "total_size_bytes": 777566
+    "total_size_bytes": 777626
   },
   {
     "file_counts": {
@@ -471,6 +522,9 @@
     "path": "experiments/latent_executor",
     "primary_readme": "experiments/latent_executor/README.md",
     "primary_report": "experiments/latent_executor/reports/latent_executor_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This controlled experiment tests whether a neural runtime can execute two-register modular programs one hidden recurrent step at a time.",
     "tags": [
@@ -485,7 +539,7 @@
       "src"
     ],
     "total_files": 33,
-    "total_size_bytes": 441136
+    "total_size_bytes": 441196
   },
   {
     "file_counts": {
@@ -502,6 +556,10 @@
     "path": "experiments/learned_sparse_slot_executor",
     "primary_readme": "experiments/learned_sparse_slot_executor/README.md",
     "primary_report": "experiments/learned_sparse_slot_executor/reports/learned_sparse_slot_paper.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a neural recurrent runtime can learn to use an explicit slot memory for modular belief-state execution.",
     "tags": [
@@ -517,7 +575,7 @@
       "src"
     ],
     "total_files": 49,
-    "total_size_bytes": 3490518
+    "total_size_bytes": 3490617
   },
   {
     "file_counts": {
@@ -534,6 +592,10 @@
     "path": "experiments/query_filter_executor",
     "primary_readme": "experiments/query_filter_executor/README.md",
     "primary_report": "experiments/query_filter_executor/reports/query_filter_executor_paper.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests latent recurrent execution over correlated belief states when training supervision is limited to final query answers.",
     "tags": [
@@ -549,7 +611,7 @@
       "src"
     ],
     "total_files": 39,
-    "total_size_bytes": 1830175
+    "total_size_bytes": 1830269
   },
   {
     "file_counts": {
@@ -567,6 +629,12 @@
     "path": "experiments/qwen35_4b_active_counterexample_trace_selection",
     "primary_readme": "experiments/qwen35_4b_active_counterexample_trace_selection/README.md",
     "primary_report": "experiments/qwen35_4b_active_counterexample_trace_selection/reports/qwen35_4b_active_counterexample_trace_selection_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "evidence_conditioned_selection",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for testing active execution-case acquisition after typed sketch synthesis.",
     "tags": [
@@ -586,7 +654,7 @@
       "src"
     ],
     "total_files": 50,
-    "total_size_bytes": 53045187
+    "total_size_bytes": 53045347
   },
   {
     "file_counts": {
@@ -604,6 +672,16 @@
     "path": "experiments/qwen35_4b_adaptive_evidence_budget_policy",
     "primary_readme": "experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md",
     "primary_report": "experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether Qwen3.5-4B can be posttrained as a STOP/MORE controller for an executable verifier.",
     "tags": [
@@ -624,7 +702,7 @@
       "src"
     ],
     "total_files": 47,
-    "total_size_bytes": 12550126
+    "total_size_bytes": 12550425
   },
   {
     "file_counts": {
@@ -641,6 +719,11 @@
     "path": "experiments/qwen35_4b_adaptive_tool_controller",
     "primary_readme": "experiments/qwen35_4b_adaptive_tool_controller/README.md",
     "primary_report": "experiments/qwen35_4b_adaptive_tool_controller/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment evaluates a small adaptive controller over a fixed table-transformation candidate pool. Each task has a direct JSON attempt and five executable-program tool attempts. The controller decides whether to stop with the direct answer or spend additional forward-token budget on tool actions.",
     "tags": [
@@ -659,7 +742,7 @@
       "scripts"
     ],
     "total_files": 24,
-    "total_size_bytes": 8866831
+    "total_size_bytes": 8866957
   },
   {
     "file_counts": {
@@ -675,6 +758,13 @@
     "path": "experiments/qwen35_4b_balanced_discriminative_bridge",
     "primary_readme": "experiments/qwen35_4b_balanced_discriminative_bridge/README.md",
     "primary_report": "experiments/qwen35_4b_balanced_discriminative_bridge/reports/qwen35_4b_balanced_discriminative_bridge_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether equal frontier-family bridge coverage improves when visible traces are selected to discriminate against hard alias programs and seed-adapter mistakes.",
     "tags": [
@@ -696,7 +786,7 @@
       "src"
     ],
     "total_files": 65,
-    "total_size_bytes": 12566895
+    "total_size_bytes": 12567096
   },
   {
     "file_counts": {
@@ -715,6 +805,10 @@
     "path": "experiments/qwen35_4b_bucket_belief_probe_ranker",
     "primary_readme": "experiments/qwen35_4b_bucket_belief_probe_ranker/README.md",
     "primary_report": "experiments/qwen35_4b_bucket_belief_probe_ranker/reports/qwen35_4b_bucket_belief_probe_ranker_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether Qwen3.5-4B can convert target-aware probe headroom into a deployable probe-ranking policy.",
     "tags": [
@@ -732,7 +826,7 @@
       "src"
     ],
     "total_files": 49,
-    "total_size_bytes": 15428604
+    "total_size_bytes": 15428692
   },
   {
     "file_counts": {
@@ -749,6 +843,9 @@
     "path": "experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot",
     "primary_readme": "experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md",
     "primary_report": "experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/reports/final_report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment for a frozen code-primitive ABI compiler pilot.",
     "tags": [
@@ -766,7 +863,7 @@
       "src"
     ],
     "total_files": 27,
-    "total_size_bytes": 627988
+    "total_size_bytes": 628048
   },
   {
     "file_counts": {
@@ -783,6 +880,14 @@
     "path": "experiments/qwen35_4b_code_abi_oracle_coverage_ladder",
     "primary_readme": "experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md",
     "primary_report": "experiments/qwen35_4b_code_abi_oracle_coverage_ladder/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone no-training experiment for a code-primitive ABI oracle coverage gate.",
     "tags": [
@@ -804,7 +909,7 @@
       "src"
     ],
     "total_files": 25,
-    "total_size_bytes": 840828
+    "total_size_bytes": 841063
   },
   {
     "file_counts": {
@@ -821,6 +926,11 @@
     "path": "experiments/qwen35_4b_constrained_coverage_dpo",
     "primary_readme": "experiments/qwen35_4b_constrained_coverage_dpo/README.md",
     "primary_report": "experiments/qwen35_4b_constrained_coverage_dpo/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for a constrained coverage preference objective on Qwen3.5-4B code generation.",
     "tags": [
@@ -839,7 +949,7 @@
       "src"
     ],
     "total_files": 47,
-    "total_size_bytes": 2086141
+    "total_size_bytes": 2086270
   },
   {
     "file_counts": {
@@ -855,6 +965,12 @@
     "path": "experiments/qwen35_4b_counterexample_directed_dsl",
     "primary_readme": "experiments/qwen35_4b_counterexample_directed_dsl/README.md",
     "primary_report": "experiments/qwen35_4b_counterexample_directed_dsl/reports/qwen35_4b_counterexample_directed_dsl_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether visible execution traces become more useful when their examples are chosen to distinguish the target executable program from plausible wrong programs.",
     "tags": [
@@ -874,7 +990,7 @@
       "src"
     ],
     "total_files": 38,
-    "total_size_bytes": 2720951
+    "total_size_bytes": 2721108
   },
   {
     "file_counts": {
@@ -892,6 +1008,11 @@
     "path": "experiments/qwen35_4b_deployable_information_ceiling_sweep",
     "primary_readme": "experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md",
     "primary_report": "experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
     "source_track": "track-z",
     "summary": "This standalone diagnostic asks whether the hard low-information regime is limited by deployable information or by a trainable probe-selection policy.",
     "tags": [
@@ -910,7 +1031,7 @@
       "src"
     ],
     "total_files": 29,
-    "total_size_bytes": 16616511
+    "total_size_bytes": 16616636
   },
   {
     "file_counts": {
@@ -927,6 +1048,11 @@
     "path": "experiments/qwen35_4b_diversity_keyed_coverage_gate",
     "primary_readme": "experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md",
     "primary_report": "experiments/qwen35_4b_diversity_keyed_coverage_gate/reports/qwen35_4b_diversity_keyed_coverage_gate_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This experiment tests whether held-out MBPP tasks missed by a small direct sample pool are diversity-limited or capability-limited. The practical question is whether a small posttraining objective should try to reshape the model into a better ensemble sampler, or whether inference-time diverse sampling already captures the available headroom.",
     "tags": [
@@ -946,7 +1072,7 @@
       "src"
     ],
     "total_files": 48,
-    "total_size_bytes": 15315436
+    "total_size_bytes": 15315572
   },
   {
     "file_counts": {
@@ -962,6 +1088,10 @@
     "path": "experiments/qwen35_4b_executable_program_posttraining",
     "primary_readme": "experiments/qwen35_4b_executable_program_posttraining/README.md",
     "primary_report": "experiments/qwen35_4b_executable_program_posttraining/reports/qwen35_4b_executable_program_posttraining_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether a small posttraining change can move Qwen 3.5 4B from direct text repair into executable program repair.",
     "tags": [
@@ -981,7 +1111,7 @@
       "src"
     ],
     "total_files": 39,
-    "total_size_bytes": 2566218
+    "total_size_bytes": 2566309
   },
   {
     "file_counts": {
@@ -998,6 +1128,10 @@
     "path": "experiments/qwen35_4b_foofah_adaptive_program_budget_router",
     "primary_readme": "experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_adaptive_program_budget_router/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone package evaluates adaptive budget policies over a fixed Foofah-style table-transformation candidate pool. Each task has one direct JSON completion and five executable-program strategy completions. The experiment asks whether a cheap deployable router can decide when the expensive program portfolio is worth running.",
     "tags": [
@@ -1016,7 +1150,7 @@
       "scripts"
     ],
     "total_files": 58,
-    "total_size_bytes": 9408087
+    "total_size_bytes": 9408178
   },
   {
     "file_counts": {
@@ -1033,6 +1167,10 @@
     "path": "experiments/qwen35_4b_foofah_direct_vs_abi",
     "primary_readme": "experiments/qwen35_4b_foofah_direct_vs_abi/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_direct_vs_abi/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone external benchmark comparison:",
     "tags": [
@@ -1052,7 +1190,7 @@
       "src"
     ],
     "total_files": 29,
-    "total_size_bytes": 1724572
+    "total_size_bytes": 1724663
   },
   {
     "file_counts": {
@@ -1069,6 +1207,10 @@
     "path": "experiments/qwen35_4b_foofah_ephemeral_program_induction",
     "primary_readme": "experiments/qwen35_4b_foofah_ephemeral_program_induction/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_ephemeral_program_induction/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment on Foofah table transformations:",
     "tags": [
@@ -1088,7 +1230,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 4110310
+    "total_size_bytes": 4110401
   },
   {
     "file_counts": {
@@ -1105,6 +1247,9 @@
     "path": "experiments/qwen35_4b_foofah_external_transform_gate",
     "primary_readme": "experiments/qwen35_4b_foofah_external_transform_gate/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_external_transform_gate/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-z",
     "summary": "Standalone external transformation gate using the Foofah benchmark format.",
     "tags": [
@@ -1123,7 +1268,7 @@
       "src"
     ],
     "total_files": 16,
-    "total_size_bytes": 280938
+    "total_size_bytes": 280988
   },
   {
     "file_counts": {
@@ -1140,6 +1285,13 @@
     "path": "experiments/qwen35_4b_foofah_program_ensemble_consensus",
     "primary_readme": "experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_program_ensemble_consensus/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether multiple independently prompted executable table-transform programs can produce safer fallback answers than a single visible-verified program.",
     "tags": [
@@ -1160,7 +1312,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 12448673
+    "total_size_bytes": 12448869
   },
   {
     "file_counts": {
@@ -1177,6 +1329,10 @@
     "path": "experiments/qwen35_4b_foofah_program_repair_agent",
     "primary_readme": "experiments/qwen35_4b_foofah_program_repair_agent/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_program_repair_agent/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment on Foofah table transformations.",
     "tags": [
@@ -1197,7 +1353,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 6808108
+    "total_size_bytes": 6808199
   },
   {
     "file_counts": {
@@ -1214,6 +1370,10 @@
     "path": "experiments/qwen35_4b_foofah_program_strategy_portfolio",
     "primary_readme": "experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_program_strategy_portfolio/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment for searching a small portfolio of executable program-generation strategies for Foofah table transformations.",
     "tags": [
@@ -1233,7 +1393,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 8881954
+    "total_size_bytes": 8882045
   },
   {
     "file_counts": {
@@ -1250,6 +1410,11 @@
     "path": "experiments/qwen35_4b_foofah_selective_program_fallback",
     "primary_readme": "experiments/qwen35_4b_foofah_selective_program_fallback/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_selective_program_fallback/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether a generated Python table-transform program should be used as a fallback to direct JSON generation on Foofah table-transformation tasks.",
     "tags": [
@@ -1269,7 +1434,7 @@
       "src"
     ],
     "total_files": 40,
-    "total_size_bytes": 24787863
+    "total_size_bytes": 24787991
   },
   {
     "file_counts": {
@@ -1286,6 +1451,9 @@
     "path": "experiments/qwen35_4b_foofah_strategy_discovery_live",
     "primary_readme": "experiments/qwen35_4b_foofah_strategy_discovery_live/README.md",
     "primary_report": "experiments/qwen35_4b_foofah_strategy_discovery_live/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-z",
     "summary": "This standalone package tests strategy discovery for Foofah-style table transformations.",
     "tags": [
@@ -1304,7 +1472,7 @@
       "src"
     ],
     "total_files": 21,
-    "total_size_bytes": 10385060
+    "total_size_bytes": 10385110
   },
   {
     "file_counts": {
@@ -1321,6 +1489,13 @@
     "path": "experiments/qwen35_4b_graphir_self_repair",
     "primary_readme": "experiments/qwen35_4b_graphir_self_repair/README.md",
     "primary_report": "experiments/qwen35_4b_graphir_self_repair/reports/qwen35_4b_graphir_self_repair_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether Qwen 3.5 4B can improve held-out executable repair by configuring a typed register graph and then applying a verifier-guided graph repair step.",
     "tags": [
@@ -1343,7 +1518,7 @@
       "src"
     ],
     "total_files": 58,
-    "total_size_bytes": 8842758
+    "total_size_bytes": 8842954
   },
   {
     "file_counts": {
@@ -1360,6 +1535,13 @@
     "path": "experiments/qwen35_4b_humaneval_adaptive_budget",
     "primary_readme": "experiments/qwen35_4b_humaneval_adaptive_budget/README.md",
     "primary_report": "experiments/qwen35_4b_humaneval_adaptive_budget/reports/qwen35_4b_humaneval_adaptive_budget_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether Qwen3.5-4B can be posttrained as a STOP/MORE controller for an executable Python verifier on HumanEval tasks. The verifier generates candidate implementations, chooses unlabeled probes by target-independent output-agreement split, and commits the first candidate in the largest output-agreement cluster. The model only decides whether to commit or spend one more executable probe.",
     "tags": [
@@ -1377,7 +1559,7 @@
       "src"
     ],
     "total_files": 34,
-    "total_size_bytes": 1757824
+    "total_size_bytes": 1758020
   },
   {
     "file_counts": {
@@ -1394,6 +1576,11 @@
     "path": "experiments/qwen35_4b_independent_code_abi_coverage_gate",
     "primary_readme": "experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md",
     "primary_report": "experiments/qwen35_4b_independent_code_abi_coverage_gate/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone no-training coverage gate for an independently specified code ABI.",
     "tags": [
@@ -1412,7 +1599,7 @@
       "scripts"
     ],
     "total_files": 23,
-    "total_size_bytes": 1545084
+    "total_size_bytes": 1545220
   },
   {
     "file_counts": {
@@ -1429,6 +1616,10 @@
     "path": "experiments/qwen35_4b_independent_retrieval_consensus",
     "primary_readme": "experiments/qwen35_4b_independent_retrieval_consensus/README.md",
     "primary_report": "experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment for independent-retrieval consensus selection on MBPP residual tasks.",
     "tags": [
@@ -1446,7 +1637,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 2752235
+    "total_size_bytes": 2752330
   },
   {
     "file_counts": {
@@ -1464,6 +1655,10 @@
     "path": "experiments/qwen35_4b_inventory_shortlister_training",
     "primary_readme": "experiments/qwen35_4b_inventory_shortlister_training/README.md",
     "primary_report": "experiments/qwen35_4b_inventory_shortlister_training/reports/qwen35_4b_inventory_shortlister_training_report.md",
+    "research_programs": [
+      "operator_and_skill_inventories",
+      "posttraining_and_adaptation"
+    ],
     "source_track": "track-z",
     "summary": "Standalone Qwen3.5-4B QLoRA experiment for inventory-conditioned operator shortlisting.",
     "tags": [
@@ -1482,7 +1677,7 @@
       "src"
     ],
     "total_files": 38,
-    "total_size_bytes": 14454878
+    "total_size_bytes": 14454968
   },
   {
     "file_counts": {
@@ -1500,6 +1695,11 @@
     "path": "experiments/qwen35_4b_joint_shortlister_ladder",
     "primary_readme": "experiments/qwen35_4b_joint_shortlister_ladder/README.md",
     "primary_report": "experiments/qwen35_4b_joint_shortlister_ladder/reports/qwen35_4b_joint_shortlister_ladder_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "operator_and_skill_inventories",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether Qwen3.5-4B can use an in-context typed operator inventory to emit a joint two-operator shortlist for programs of the form `LEFT(xs), RIGHT(xs)`.",
     "tags": [
@@ -1519,7 +1719,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 11409787
+    "total_size_bytes": 11409915
   },
   {
     "file_counts": {
@@ -1537,6 +1737,12 @@
     "path": "experiments/qwen35_4b_learned_active_trace_policy",
     "primary_readme": "experiments/qwen35_4b_learned_active_trace_policy/README.md",
     "primary_report": "experiments/qwen35_4b_learned_active_trace_policy/reports/qwen35_4b_learned_active_trace_policy_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for training and evaluating a learned active execution-query policy after typed sketch synthesis.",
     "tags": [
@@ -1556,7 +1762,7 @@
       "src"
     ],
     "total_files": 73,
-    "total_size_bytes": 88024649
+    "total_size_bytes": 88024812
   },
   {
     "file_counts": {
@@ -1573,6 +1779,11 @@
     "path": "experiments/qwen35_4b_live_tool_dagger",
     "primary_readme": "experiments/qwen35_4b_live_tool_dagger/README.md",
     "primary_report": "experiments/qwen35_4b_live_tool_dagger/reports/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone live tool-state DAgger-style pilot.",
     "tags": [
@@ -1592,7 +1803,7 @@
       "src"
     ],
     "total_files": 24,
-    "total_size_bytes": 7043919
+    "total_size_bytes": 7044048
   },
   {
     "file_counts": {
@@ -1608,6 +1819,12 @@
     "path": "experiments/qwen35_4b_model_in_loop_counterexamples",
     "primary_readme": "experiments/qwen35_4b_model_in_loop_counterexamples/README.md",
     "primary_report": "experiments/qwen35_4b_model_in_loop_counterexamples/reports/qwen35_4b_model_in_loop_counterexamples_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether executable DSL traces become more useful when their visible cases are selected against wrong programs generated by the current model.",
     "tags": [
@@ -1627,7 +1844,7 @@
       "src"
     ],
     "total_files": 49,
-    "total_size_bytes": 6250941
+    "total_size_bytes": 6251098
   },
   {
     "file_counts": {
@@ -1644,6 +1861,12 @@
     "path": "experiments/qwen35_4b_offline_hard_negative_coverage_dpo",
     "primary_readme": "experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md",
     "primary_report": "experiments/qwen35_4b_offline_hard_negative_coverage_dpo/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for an offline hard-negative preference objective aimed at improving coverage from a fixed Qwen3.5-4B generator.",
     "tags": [
@@ -1663,7 +1886,7 @@
       "src"
     ],
     "total_files": 87,
-    "total_size_bytes": 3298537
+    "total_size_bytes": 3298695
   },
   {
     "file_counts": {
@@ -1681,6 +1904,9 @@
     "path": "experiments/qwen35_4b_operator_inventory_scaling_stress",
     "primary_readme": "experiments/qwen35_4b_operator_inventory_scaling_stress/README.md",
     "primary_report": "experiments/qwen35_4b_operator_inventory_scaling_stress/reports/qwen35_4b_operator_inventory_scaling_stress_report.md",
+    "research_programs": [
+      "operator_and_skill_inventories"
+    ],
     "source_track": "track-z",
     "summary": "Standalone scaling stress test for typed operator inventory search.",
     "tags": [
@@ -1698,7 +1924,7 @@
       "src"
     ],
     "total_files": 32,
-    "total_size_bytes": 4071538
+    "total_size_bytes": 4071594
   },
   {
     "file_counts": {
@@ -1716,6 +1942,9 @@
     "path": "experiments/qwen35_4b_operator_inventory_search_pilot",
     "primary_readme": "experiments/qwen35_4b_operator_inventory_search_pilot/README.md",
     "primary_report": "experiments/qwen35_4b_operator_inventory_search_pilot/reports/qwen35_4b_operator_inventory_search_pilot_report.md",
+    "research_programs": [
+      "operator_and_skill_inventories"
+    ],
     "source_track": "track-z",
     "summary": "Standalone no-training pilot for open-vocabulary operator identification.",
     "tags": [
@@ -1733,7 +1962,7 @@
       "src"
     ],
     "total_files": 31,
-    "total_size_bytes": 4475592
+    "total_size_bytes": 4475648
   },
   {
     "file_counts": {
@@ -1750,6 +1979,11 @@
     "path": "experiments/qwen35_4b_opsd_pressure_locality_audit",
     "primary_readme": "experiments/qwen35_4b_opsd_pressure_locality_audit/README.md",
     "primary_report": "experiments/qwen35_4b_opsd_pressure_locality_audit/reports/final_report.md",
+    "research_programs": [
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
     "source_track": "track-z",
     "summary": "Standalone no-training audit for positive-only on-policy self-distillation.",
     "tags": [
@@ -1768,7 +2002,7 @@
       "src"
     ],
     "total_files": 34,
-    "total_size_bytes": 4358200
+    "total_size_bytes": 4358327
   },
   {
     "file_counts": {
@@ -1785,6 +2019,13 @@
     "path": "experiments/qwen35_4b_oracle_distilled_semantic_verifier",
     "primary_readme": "experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md",
     "primary_report": "experiments/qwen35_4b_oracle_distilled_semantic_verifier/reports/qwen35_4b_oracle_distilled_semantic_verifier_report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Train Qwen3.5-4B as a deployable verifier for Python candidate programs. The training oracle labels visible-test-passing candidates by hidden-test execution. At inference, the model sees only the task, public tests, public-test status, and candidate code; it ranks candidates by the probability that they pass hidden tests.",
     "tags": [
@@ -1803,7 +2044,7 @@
       "src"
     ],
     "total_files": 38,
-    "total_size_bytes": 3060575
+    "total_size_bytes": 3060774
   },
   {
     "file_counts": {
@@ -1821,6 +2062,14 @@
     "path": "experiments/qwen35_4b_oracle_probe_synthesis_mdp",
     "primary_readme": "experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md",
     "primary_report": "experiments/qwen35_4b_oracle_probe_synthesis_mdp/reports/qwen35_4b_oracle_probe_synthesis_mdp_report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "operator_and_skill_inventories",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "This standalone line-2 experiment tests whether Qwen3.5-4B can exploit richer verifier probes. The model does not emit operators. It chooses among eight displayed probe inputs, but those probes are mined from a 96-case bank using target-independent candidate-bucket statistics.",
     "tags": [
@@ -1840,7 +2089,7 @@
       "src"
     ],
     "total_files": 61,
-    "total_size_bytes": 18966456
+    "total_size_bytes": 18966686
   },
   {
     "file_counts": {
@@ -1858,6 +2107,16 @@
     "path": "experiments/qwen35_4b_oracle_process_grpo",
     "primary_readme": "experiments/qwen35_4b_oracle_process_grpo/README.md",
     "primary_report": "experiments/qwen35_4b_oracle_process_grpo/reports/qwen35_4b_oracle_process_grpo_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "operator_and_skill_inventories",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment trains Qwen3.5-4B as a process controller inside an executable verifier MDP. The model does not emit operators directly. It chooses among displayed probe actions, and exhaustive search updates the candidate set deterministically.",
     "tags": [
@@ -1879,7 +2138,7 @@
       "src"
     ],
     "total_files": 59,
-    "total_size_bytes": 13189905
+    "total_size_bytes": 13190207
   },
   {
     "file_counts": {
@@ -1896,6 +2155,12 @@
     "path": "experiments/qwen35_4b_passk_coverage_rl",
     "primary_readme": "experiments/qwen35_4b_passk_coverage_rl/README.md",
     "primary_report": "experiments/qwen35_4b_passk_coverage_rl/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
     "source_track": "track-z",
     "summary": "Can a small online QLoRA update aimed at set-level coverage make cheap K-sample generation cover more held-out MBPP tasks than tuned inference-only sampling?",
     "tags": [
@@ -1916,7 +2181,7 @@
       "src"
     ],
     "total_files": 50,
-    "total_size_bytes": 883083
+    "total_size_bytes": 883247
   },
   {
     "file_counts": {
@@ -1933,6 +2198,9 @@
     "path": "experiments/qwen35_4b_prefix_value_guided_search",
     "primary_readme": "experiments/qwen35_4b_prefix_value_guided_search/README.md",
     "primary_report": "experiments/qwen35_4b_prefix_value_guided_search/reports/final_report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Can hidden-test-valued code prefixes expose a search state that is better than ordinary full-code sampling at matched completion budget?",
     "tags": [
@@ -1950,7 +2218,7 @@
       "src"
     ],
     "total_files": 23,
-    "total_size_bytes": 516989
+    "total_size_bytes": 517049
   },
   {
     "file_counts": {
@@ -1968,6 +2236,12 @@
     "path": "experiments/qwen35_4b_real_sample_verify_commit",
     "primary_readme": "experiments/qwen35_4b_real_sample_verify_commit/README.md",
     "primary_report": "experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "Run the full sample -> verify -> commit loop using genuine Qwen3.5-4B code samples. The primary measurement decomposes final pass rate into candidate-pool coverage and selector capture.",
     "tags": [
@@ -1985,7 +2259,7 @@
       "src"
     ],
     "total_files": 57,
-    "total_size_bytes": 3132862
+    "total_size_bytes": 3133025
   },
   {
     "file_counts": {
@@ -2002,6 +2276,11 @@
     "path": "experiments/qwen35_4b_reliability_exec_opsd_audit",
     "primary_readme": "experiments/qwen35_4b_reliability_exec_opsd_audit/README.md",
     "primary_report": "experiments/qwen35_4b_reliability_exec_opsd_audit/reports/final_report.md",
+    "research_programs": [
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment testing two reliability probes and one execution-grounded OPSD locality audit.",
     "tags": [
@@ -2020,7 +2299,7 @@
       "src"
     ],
     "total_files": 46,
-    "total_size_bytes": 15025483
+    "total_size_bytes": 15025611
   },
   {
     "file_counts": {
@@ -2037,6 +2316,12 @@
     "path": "experiments/qwen35_4b_retrieval_adapt_verify_scale",
     "primary_readme": "experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md",
     "primary_report": "experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment: scale retrieval-and-adaptation on direct-sampling misses, then test whether deployable verification can turn new candidate-pool coverage into selected pass@1.",
     "tags": [
@@ -2056,7 +2341,7 @@
       "src"
     ],
     "total_files": 63,
-    "total_size_bytes": 2230231
+    "total_size_bytes": 2230394
   },
   {
     "file_counts": {
@@ -2073,6 +2358,11 @@
     "path": "experiments/qwen35_4b_sampler_portfolio_scheduler",
     "primary_readme": "experiments/qwen35_4b_sampler_portfolio_scheduler/README.md",
     "primary_report": "experiments/qwen35_4b_sampler_portfolio_scheduler/reports/final_report.md",
+    "research_programs": [
+      "collective_experimentation_infrastructure",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for testing whether multiple Qwen3.5-4B generation policies can be combined more efficiently than simply sampling more from one policy.",
     "tags": [
@@ -2090,7 +2380,7 @@
       "src"
     ],
     "total_files": 47,
-    "total_size_bytes": 6514199
+    "total_size_bytes": 6514335
   },
   {
     "file_counts": {
@@ -2108,6 +2398,13 @@
     "path": "experiments/qwen35_4b_sketch_coverage_shift_probe",
     "primary_readme": "experiments/qwen35_4b_sketch_coverage_shift_probe/README.md",
     "primary_report": "experiments/qwen35_4b_sketch_coverage_shift_probe/reports/qwen35_4b_sketch_coverage_shift_probe_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "Standalone falsification experiment for typed-sketch verified completion under task shift.",
     "tags": [
@@ -2127,7 +2424,7 @@
       "src"
     ],
     "total_files": 33,
-    "total_size_bytes": 4157720
+    "total_size_bytes": 4157914
   },
   {
     "file_counts": {
@@ -2144,6 +2441,11 @@
     "path": "experiments/qwen35_4b_static_bridge_ceiling_breaker",
     "primary_readme": "experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md",
     "primary_report": "experiments/qwen35_4b_static_bridge_ceiling_breaker/reports/qwen35_4b_static_bridge_ceiling_breaker_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether static bridge posttraining learns a trace-conditioned executable repair interface that transfers from support bridge families to deeper held-out composition families.",
     "tags": [
@@ -2166,7 +2468,7 @@
       "src"
     ],
     "total_files": 55,
-    "total_size_bytes": 7383352
+    "total_size_bytes": 7383480
   },
   {
     "file_counts": {
@@ -2183,6 +2485,10 @@
     "path": "experiments/qwen35_4b_strategy_token_diversity_lora",
     "primary_readme": "experiments/qwen35_4b_strategy_token_diversity_lora/README.md",
     "primary_report": "experiments/qwen35_4b_strategy_token_diversity_lora/reports/final_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
     "source_track": "track-z",
     "summary": "Can a small QLoRA adapter with explicit strategy tokens make extra samples on base-missed MBPP tasks behave like a more complementary ensemble, recovering misses at roughly the cost of one hot K32 arm instead of a three-policy union?",
     "tags": [
@@ -2201,7 +2507,7 @@
       "src"
     ],
     "total_files": 70,
-    "total_size_bytes": 24574468
+    "total_size_bytes": 24574556
   },
   {
     "file_counts": {
@@ -2218,6 +2524,14 @@
     "path": "experiments/qwen35_4b_substrate_coverage_ladder",
     "primary_readme": "experiments/qwen35_4b_substrate_coverage_ladder/README.md",
     "primary_report": "experiments/qwen35_4b_substrate_coverage_ladder/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Can an executable kernel/template substrate express MBPP held-out tasks that remained unsolved by a large direct-sampling candidate pool? This is an oracle-ceiling experiment: no model is trained, and hidden tests are used only to measure whether the substrate contains a correct graph/program and how often public-test filtering would produce spurious targets.",
     "tags": [
@@ -2240,7 +2554,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 958581
+    "total_size_bytes": 958816
   },
   {
     "file_counts": {
@@ -2257,6 +2571,11 @@
     "path": "experiments/qwen35_4b_tool_state_policy_lora",
     "primary_readme": "experiments/qwen35_4b_tool_state_policy_lora/README.md",
     "primary_report": "experiments/qwen35_4b_tool_state_policy_lora/reports/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment for tool-state action-policy learning.",
     "tags": [
@@ -2276,7 +2595,7 @@
       "scripts"
     ],
     "total_files": 17,
-    "total_size_bytes": 6093634
+    "total_size_bytes": 6093763
   },
   {
     "file_counts": {
@@ -2292,6 +2611,12 @@
     "path": "experiments/qwen35_4b_trained_vs_frozen_repair_mdp",
     "primary_readme": "experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md",
     "primary_report": "experiments/qwen35_4b_trained_vs_frozen_repair_mdp/reports/qwen35_4b_trained_vs_frozen_repair_mdp_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
     "source_track": "track-z",
     "summary": "This experiment tested whether a trained repair policy can expand held-out coding coverage beyond frozen Qwen self-repair, under a fair comparison against spending the same estimated model-forward-token budget on more direct samples.",
     "tags": [
@@ -2311,7 +2636,7 @@
       "src"
     ],
     "total_files": 72,
-    "total_size_bytes": 11079951
+    "total_size_bytes": 11080115
   },
   {
     "file_counts": {
@@ -2328,6 +2653,10 @@
     "path": "experiments/qwen35_4b_transform_abi_compiler_pilot",
     "primary_readme": "experiments/qwen35_4b_transform_abi_compiler_pilot/README.md",
     "primary_report": "experiments/qwen35_4b_transform_abi_compiler_pilot/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone compiler pilot for deterministic transformation tasks.",
     "tags": [
@@ -2346,7 +2675,7 @@
       "src"
     ],
     "total_files": 53,
-    "total_size_bytes": 2361693
+    "total_size_bytes": 2361784
   },
   {
     "file_counts": {
@@ -2363,6 +2692,10 @@
     "path": "experiments/qwen35_4b_typed_sketch_synthesis",
     "primary_readme": "experiments/qwen35_4b_typed_sketch_synthesis/README.md",
     "primary_report": "experiments/qwen35_4b_typed_sketch_synthesis/reports/qwen35_4b_typed_sketch_synthesis_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether `Qwen/Qwen3.5-4B` can improve executable DSL repair by emitting a typed partial program that a bounded symbolic synthesizer completes and verifies on visible execution cases.",
     "tags": [
@@ -2382,7 +2715,7 @@
       "src"
     ],
     "total_files": 55,
-    "total_size_bytes": 7075343
+    "total_size_bytes": 7075434
   },
   {
     "file_counts": {
@@ -2398,6 +2731,11 @@
     "path": "experiments/qwen35_4b_unsaturated_frontier_active_bridge",
     "primary_readme": "experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md",
     "primary_report": "experiments/qwen35_4b_unsaturated_frontier_active_bridge/reports/qwen35_4b_unsaturated_frontier_active_bridge_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests active bridge allocation on a broad executable-DSL frontier suite.",
     "tags": [
@@ -2418,7 +2756,7 @@
       "src"
     ],
     "total_files": 60,
-    "total_size_bytes": 10769426
+    "total_size_bytes": 10769551
   },
   {
     "file_counts": {
@@ -2435,6 +2773,12 @@
     "path": "experiments/qwen35_4b_verified_algorithm_retrieval_adaptation",
     "primary_readme": "experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md",
     "primary_report": "experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/reports/final_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for testing verified algorithm retrieval plus Qwen3.5-4B adaptation on MBPP-style code tasks.",
     "tags": [
@@ -2453,7 +2797,7 @@
       "src"
     ],
     "total_files": 38,
-    "total_size_bytes": 1141271
+    "total_size_bytes": 1141434
   },
   {
     "file_counts": {
@@ -2470,6 +2814,13 @@
     "path": "experiments/qwen35_4b_verified_edit_closure",
     "primary_readme": "experiments/qwen35_4b_verified_edit_closure/README.md",
     "primary_report": "experiments/qwen35_4b_verified_edit_closure/reports/qwen35_4b_verified_edit_closure_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "This standalone experiment tests whether Qwen 3.5 4B executable-DSL repair improves when model candidates are expanded by a bounded symbolic edit neighborhood and selected by visible execution.",
     "tags": [
@@ -2490,7 +2841,7 @@
       "src"
     ],
     "total_files": 46,
-    "total_size_bytes": 6809887
+    "total_size_bytes": 6810083
   },
   {
     "file_counts": {
@@ -2507,6 +2858,13 @@
     "path": "experiments/qwen35_4b_verifier_guided_self_improvement",
     "primary_readme": "experiments/qwen35_4b_verifier_guided_self_improvement/README.md",
     "primary_report": "experiments/qwen35_4b_verifier_guided_self_improvement/reports/qwen35_4b_verifier_guided_self_improvement_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "reliability_and_safety"
+    ],
     "source_track": "track-z",
     "summary": "The main result is negative for the central question. Verified self-training did not raise held-out generation coverage under this local LoRA/data budget. The 20-task smoke signal was positive, but the 150-task held-out run regressed slightly.",
     "tags": [
@@ -2527,7 +2885,7 @@
       "src"
     ],
     "total_files": 101,
-    "total_size_bytes": 17974453
+    "total_size_bytes": 17974650
   },
   {
     "file_counts": {
@@ -2544,6 +2902,11 @@
     "path": "experiments/qwen_action_conditioned_vm_echo_policy_iteration",
     "primary_readme": "experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md",
     "primary_report": "experiments/qwen_action_conditioned_vm_echo_policy_iteration/reports/qwen_action_conditioned_vm_echo_policy_iteration_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a frozen-Qwen bytecode compiler can improve by learning the consequences of its own generated candidate programs.",
     "tags": [
@@ -2560,7 +2923,7 @@
       "src"
     ],
     "total_files": 68,
-    "total_size_bytes": 774024
+    "total_size_bytes": 774153
   },
   {
     "file_counts": {
@@ -2577,6 +2940,11 @@
     "path": "experiments/qwen_active_crystallizer_public_gate",
     "primary_readme": "experiments/qwen_active_crystallizer_public_gate/README.md",
     "primary_report": "experiments/qwen_active_crystallizer_public_gate/reports/qwen_active_crystallizer_public_gate_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether frozen Qwen probe labels can turn sparse example-level transformation behavior into a deterministic program selected from a broad candidate DSL.",
     "tags": [
@@ -2593,7 +2961,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 612299
+    "total_size_bytes": 612424
   },
   {
     "file_counts": {
@@ -2610,6 +2978,10 @@
     "path": "experiments/qwen_active_example_acquisition",
     "primary_readme": "experiments/qwen_active_example_acquisition/README.md",
     "primary_report": "experiments/qwen_active_example_acquisition/reports/qwen_active_example_acquisition_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether actively selected clarifying examples improve strict held-out text-transformation accuracy.",
     "tags": [
@@ -2625,7 +2997,7 @@
       "src"
     ],
     "total_files": 40,
-    "total_size_bytes": 1445226
+    "total_size_bytes": 1445310
   },
   {
     "file_counts": {
@@ -2642,6 +3014,9 @@
     "path": "experiments/qwen_batched_transduction_consistency",
     "primary_readme": "experiments/qwen_batched_transduction_consistency/README.md",
     "primary_report": "experiments/qwen_batched_transduction_consistency/reports/qwen_batched_transduction_consistency_report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether batched transduction improves task-level consistency on public text-transformation tasks.",
     "tags": [
@@ -2656,7 +3031,7 @@
       "src"
     ],
     "total_files": 30,
-    "total_size_bytes": 868208
+    "total_size_bytes": 868258
   },
   {
     "file_counts": {
@@ -2673,6 +3048,10 @@
     "path": "experiments/qwen_budgeted_action_value_compiler",
     "primary_readme": "experiments/qwen_budgeted_action_value_compiler/README.md",
     "primary_report": "experiments/qwen_budgeted_action_value_compiler/reports/qwen_budgeted_action_value_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for action-value learning over executable bytecode prefixes.",
     "tags": [
@@ -2689,7 +3068,7 @@
       "src"
     ],
     "total_files": 48,
-    "total_size_bytes": 1448093
+    "total_size_bytes": 1448184
   },
   {
     "file_counts": {
@@ -2706,6 +3085,13 @@
     "path": "experiments/qwen_candidate_conditioned_trace_verifier",
     "primary_readme": "experiments/qwen_candidate_conditioned_trace_verifier/README.md",
     "primary_report": "experiments/qwen_candidate_conditioned_trace_verifier/reports/qwen_candidate_conditioned_trace_verifier_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether Qwen can select executable repair candidates by reading the prompt, candidate program, and candidate execution trace.",
     "tags": [
@@ -2722,7 +3108,7 @@
       "src"
     ],
     "total_files": 53,
-    "total_size_bytes": 853330
+    "total_size_bytes": 853526
   },
   {
     "file_counts": {
@@ -2739,6 +3125,13 @@
     "path": "experiments/qwen_candidate_trace_verifier",
     "primary_readme": "experiments/qwen_candidate_trace_verifier/README.md",
     "primary_report": "experiments/qwen_candidate_trace_verifier/reports/qwen_candidate_trace_verifier_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment trains a transformer verifier over candidate execution traces for local repairs of Qwen-compiled modular-arithmetic programs.",
     "tags": [
@@ -2756,7 +3149,7 @@
       "src"
     ],
     "total_files": 25,
-    "total_size_bytes": 349143
+    "total_size_bytes": 349339
   },
   {
     "file_counts": {
@@ -2773,6 +3166,10 @@
     "path": "experiments/qwen_checkpoint_scheduled_state_compiler",
     "primary_readme": "experiments/qwen_checkpoint_scheduled_state_compiler/README.md",
     "primary_report": "experiments/qwen_checkpoint_scheduled_state_compiler/reports/qwen_checkpoint_scheduled_state_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether stage-specific intermediate-state supervision and validation checkpoint selection improve a Qwen numeric-copy compiler on long modular-arithmetic programs.",
     "tags": [
@@ -2790,7 +3187,7 @@
       "src"
     ],
     "total_files": 32,
-    "total_size_bytes": 2024222
+    "total_size_bytes": 2024313
   },
   {
     "file_counts": {
@@ -2808,6 +3205,11 @@
     "path": "experiments/qwen_compiler_multiseed_reattribution",
     "primary_readme": "experiments/qwen_compiler_multiseed_reattribution/README.md",
     "primary_report": "experiments/qwen_compiler_multiseed_reattribution/reports/qwen_compiler_multiseed_reattribution_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "collective_experimentation_infrastructure",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a one-shot executable latent compiler reliably learns length-24 modular programs across random seeds.",
     "tags": [
@@ -2825,7 +3227,7 @@
       "suite_logs"
     ],
     "total_files": 116,
-    "total_size_bytes": 2076616
+    "total_size_bytes": 2076755
   },
   {
     "file_counts": {
@@ -2842,6 +3244,12 @@
     "path": "experiments/qwen_complete_program_trace_reranker",
     "primary_readme": "experiments/qwen_complete_program_trace_reranker/README.md",
     "primary_report": "experiments/qwen_complete_program_trace_reranker/reports/qwen_complete_program_trace_reranker_report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a learned verifier can better select hidden-VM candidate traces when it receives prompt-conditioned Qwen hidden-state context in addition to candidate execution features.",
     "tags": [
@@ -2858,7 +3266,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 1617828
+    "total_size_bytes": 1617993
   },
   {
     "file_counts": {
@@ -2875,6 +3283,10 @@
     "path": "experiments/qwen_compositional_curriculum_abi",
     "primary_readme": "experiments/qwen_compositional_curriculum_abi/README.md",
     "primary_report": "experiments/qwen_compositional_curriculum_abi/reports/qwen_compositional_curriculum_abi_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone Track 1 experiment testing whether shallow composed-procedure supervision improves a Qwen stack-ABI compiler.",
     "tags": [
@@ -2890,7 +3302,7 @@
       "src"
     ],
     "total_files": 29,
-    "total_size_bytes": 3062465
+    "total_size_bytes": 3062556
   },
   {
     "file_counts": {
@@ -2907,6 +3319,10 @@
     "path": "experiments/qwen_constrained_abi_parser",
     "primary_readme": "experiments/qwen_constrained_abi_parser/README.md",
     "primary_report": "experiments/qwen_constrained_abi_parser/reports/qwen_constrained_abi_parser_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a finite-state stack-ABI decoder and a canonical parse stage improve a local 4B model's reliability as a compiler from natural language into executable procedures.",
     "tags": [
@@ -2924,7 +3340,7 @@
       "src"
     ],
     "total_files": 30,
-    "total_size_bytes": 4096548
+    "total_size_bytes": 4096639
   },
   {
     "file_counts": {
@@ -2941,6 +3357,12 @@
     "path": "experiments/qwen_context_trace_verifier",
     "primary_readme": "experiments/qwen_context_trace_verifier/README.md",
     "primary_report": "experiments/qwen_context_trace_verifier/reports/qwen_context_trace_verifier_report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a learned verifier can better select hidden-VM candidate traces when it receives prompt-conditioned Qwen hidden-state context in addition to candidate execution features.",
     "tags": [
@@ -2957,7 +3379,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 1615503
+    "total_size_bytes": 1615668
   },
   {
     "file_counts": {
@@ -2974,6 +3396,12 @@
     "path": "experiments/qwen_counterexample_guided_ephemeral_program",
     "primary_readme": "experiments/qwen_counterexample_guided_ephemeral_program/README.md",
     "primary_report": "experiments/qwen_counterexample_guided_ephemeral_program/reports/qwen_counterexample_guided_ephemeral_program_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a local language model can be made more task-consistent by inducing a task-local executable program and selecting it with synthetic disagreement probes.",
     "tags": [
@@ -2990,7 +3418,7 @@
       "src"
     ],
     "total_files": 44,
-    "total_size_bytes": 1411981
+    "total_size_bytes": 1412138
   },
   {
     "file_counts": {
@@ -3007,6 +3435,11 @@
     "path": "experiments/qwen_counterexample_guided_projection",
     "primary_readme": "experiments/qwen_counterexample_guided_projection/README.md",
     "primary_report": "experiments/qwen_counterexample_guided_projection/reports/qwen_counterexample_guided_projection_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "reliability_and_safety"
+    ],
     "source_track": "track-y",
     "summary": "Can noisy row-level model guesses be converted into a stable task-level deterministic transformation?",
     "tags": [
@@ -3022,7 +3455,7 @@
       "src"
     ],
     "total_files": 47,
-    "total_size_bytes": 1236200
+    "total_size_bytes": 1236316
   },
   {
     "file_counts": {
@@ -3038,6 +3471,11 @@
     "path": "experiments/qwen_counterfactual_episodic_icl",
     "primary_readme": "experiments/qwen_counterfactual_episodic_icl/README.md",
     "primary_report": "experiments/qwen_counterfactual_episodic_icl/reports/qwen_counterfactual_episodic_icl_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether answer-only LoRA posttraining on counterfactual few-shot episodes improves Qwen's ability to infer a text transformation from support examples.",
     "tags": [
@@ -3054,7 +3492,7 @@
       "src"
     ],
     "total_files": 31,
-    "total_size_bytes": 668080
+    "total_size_bytes": 668205
   },
   {
     "file_counts": {
@@ -3071,6 +3509,10 @@
     "path": "experiments/qwen_counterfactual_icl_public_multiseed",
     "primary_readme": "experiments/qwen_counterfactual_icl_public_multiseed/README.md",
     "primary_report": "experiments/qwen_counterfactual_icl_public_multiseed/reports/qwen_counterfactual_icl_public_multiseed_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "posttraining_and_adaptation"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether counterfactual episodic LoRA posttraining improves example-conditioned public text transformation accuracy across seeds.",
     "tags": [
@@ -3086,7 +3528,7 @@
       "src"
     ],
     "total_files": 58,
-    "total_size_bytes": 2717988
+    "total_size_bytes": 2718072
   },
   {
     "file_counts": {
@@ -3103,6 +3545,10 @@
     "path": "experiments/qwen_counterfactual_trace_preference_distillation",
     "primary_readme": "experiments/qwen_counterfactual_trace_preference_distillation/README.md",
     "primary_report": "experiments/qwen_counterfactual_trace_preference_distillation/reports/qwen_counterfactual_trace_preference_distillation_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether a Qwen-attached typed-bytecode compiler improves when repair candidates are trained with hard counterfactual trace preferences instead of final-answer labels alone.",
     "tags": [
@@ -3119,7 +3565,7 @@
       "src"
     ],
     "total_files": 61,
-    "total_size_bytes": 979378
+    "total_size_bytes": 979472
   },
   {
     "file_counts": {
@@ -3136,6 +3582,10 @@
     "path": "experiments/qwen_crystallized_trace_abi_tournament",
     "primary_readme": "experiments/qwen_crystallized_trace_abi_tournament/README.md",
     "primary_report": "experiments/qwen_crystallized_trace_abi_tournament/reports/qwen_crystallized_trace_abi_tournament_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether dense executable traces help a local 4B model learn compact crystallized procedures better than answer-only supervision, and whether the output representation itself is a load-bearing choice.",
     "tags": [
@@ -3152,7 +3602,7 @@
       "src"
     ],
     "total_files": 93,
-    "total_size_bytes": 1092021
+    "total_size_bytes": 1092112
   },
   {
     "file_counts": {
@@ -3169,6 +3619,10 @@
     "path": "experiments/qwen_dense_state_dagger_vm_agent",
     "primary_readme": "experiments/qwen_dense_state_dagger_vm_agent/README.md",
     "primary_report": "experiments/qwen_dense_state_dagger_vm_agent/reports/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment trains `Qwen/Qwen3-4B` as one recurrent transition inside a typed bytecode VM loop.",
     "tags": [
@@ -3184,7 +3638,7 @@
       "src"
     ],
     "total_files": 46,
-    "total_size_bytes": 1250338
+    "total_size_bytes": 1250432
   },
   {
     "file_counts": {
@@ -3201,6 +3655,10 @@
     "path": "experiments/qwen_disagreement_probe_program_induction",
     "primary_readme": "experiments/qwen_disagreement_probe_program_induction/README.md",
     "primary_report": "experiments/qwen_disagreement_probe_program_induction/reports/qwen_disagreement_probe_program_induction_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for selecting task-local executable transformation programs with model-labeled disagreement probes.",
     "tags": [
@@ -3216,7 +3674,7 @@
       "src"
     ],
     "total_files": 43,
-    "total_size_bytes": 1879538
+    "total_size_bytes": 1879629
   },
   {
     "file_counts": {
@@ -3233,6 +3691,9 @@
     "path": "experiments/qwen_episodic_soft_prompt_task_vectors",
     "primary_readme": "experiments/qwen_episodic_soft_prompt_task_vectors/README.md",
     "primary_report": "experiments/qwen_episodic_soft_prompt_task_vectors/reports/qwen_episodic_soft_prompt_task_vectors_report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether a short continuous prefix optimized per task can improve Qwen's held-out text-transformation consistency.",
     "tags": [
@@ -3247,7 +3708,7 @@
       "src"
     ],
     "total_files": 52,
-    "total_size_bytes": 907241
+    "total_size_bytes": 907291
   },
   {
     "file_counts": {
@@ -3264,6 +3725,9 @@
     "path": "experiments/qwen_extrapolation_bound_abi",
     "primary_readme": "experiments/qwen_extrapolation_bound_abi/README.md",
     "primary_report": "experiments/qwen_extrapolation_bound_abi/reports/qwen_extrapolation_bound_abi_report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone Track 1 experiment measuring how far a constrained stack-ABI compiler extrapolates past its maximum supervised composition depth.",
     "tags": [
@@ -3278,7 +3742,7 @@
       "src"
     ],
     "total_files": 29,
-    "total_size_bytes": 3761192
+    "total_size_bytes": 3761252
   },
   {
     "file_counts": {
@@ -3295,6 +3759,9 @@
     "path": "experiments/qwen_fastweight_hook",
     "primary_readme": "experiments/qwen_fastweight_hook/README.md",
     "primary_report": "experiments/qwen_fastweight_hook/reports/latent_fastweight_qwen_paper.md",
+    "research_programs": [
+      "program_review_needed"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a frozen Qwen3.5-4B model gains accuracy from an inserted invisible recurrent fast-weight runtime.",
     "tags": [
@@ -3308,7 +3775,7 @@
       "src"
     ],
     "total_files": 29,
-    "total_size_bytes": 612670
+    "total_size_bytes": 612717
   },
   {
     "file_counts": {
@@ -3325,6 +3792,10 @@
     "path": "experiments/qwen_full_table_consistency_reranker",
     "primary_readme": "experiments/qwen_full_table_consistency_reranker/README.md",
     "primary_report": "experiments/qwen_full_table_consistency_reranker/reports/qwen_full_table_consistency_reranker_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "interpretability_and_diagnostics"
+    ],
     "source_track": "track-y",
     "summary": "Can multiple row-level model guesses be converted into task-level consistency by selecting an entire candidate output table?",
     "tags": [
@@ -3339,7 +3810,7 @@
       "src"
     ],
     "total_files": 36,
-    "total_size_bytes": 2047603
+    "total_size_bytes": 2047692
   },
   {
     "file_counts": {
@@ -3356,6 +3827,11 @@
     "path": "experiments/qwen_fuyu_vm_grpo_echo",
     "primary_readme": "experiments/qwen_fuyu_vm_grpo_echo/README.md",
     "primary_report": "experiments/qwen_fuyu_vm_grpo_echo/reports/qwen_fuyu_vm_grpo_echo_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment trains `Qwen/Qwen3-4B` as a Fuyu-style recurrent controller for a typed bytecode VM.",
     "tags": [
@@ -3371,7 +3847,7 @@
       "src"
     ],
     "total_files": 53,
-    "total_size_bytes": 945581
+    "total_size_bytes": 945710
   },
   {
     "file_counts": {
@@ -3388,6 +3864,13 @@
     "path": "experiments/qwen_hidden_vm_curriculum_repair",
     "primary_readme": "experiments/qwen_hidden_vm_curriculum_repair/README.md",
     "primary_report": "experiments/qwen_hidden_vm_curriculum_repair/reports/qwen_hidden_vm_curriculum_repair_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for training `Qwen/Qwen3-4B` to compile natural-language tasks into a fixed hidden VM with a length curriculum and verifier-guided program repair.",
     "tags": [
@@ -3405,7 +3888,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 1020923
+    "total_size_bytes": 1021119
   },
   {
     "file_counts": {
@@ -3422,6 +3905,9 @@
     "path": "experiments/qwen_hidden_vm_mixed_domains",
     "primary_readme": "experiments/qwen_hidden_vm_mixed_domains/README.md",
     "primary_report": "experiments/qwen_hidden_vm_mixed_domains/reports/qwen_hidden_vm_mixed_domains_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment trains a Qwen-attached hidden virtual machine compiler on multiple deterministic task families. The model reads natural-language prompts, writes an invisible typed program into fixed slots, executes that program in a deterministic runtime, and returns the runtime answer.",
     "tags": [
@@ -3438,7 +3924,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 544807
+    "total_size_bytes": 544867
   },
   {
     "file_counts": {
@@ -3455,6 +3941,11 @@
     "path": "experiments/qwen_hidden_vm_onpolicy_canonical_repair",
     "primary_readme": "experiments/qwen_hidden_vm_onpolicy_canonical_repair/README.md",
     "primary_report": "experiments/qwen_hidden_vm_onpolicy_canonical_repair/reports/qwen_hidden_vm_onpolicy_canonical_repair_paper.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for training `Qwen/Qwen3-4B` to compile mixed natural-language tasks into a hidden typed VM, then improve the compiler with canonical on-policy repair targets.",
     "tags": [
@@ -3471,7 +3962,7 @@
       "src"
     ],
     "total_files": 52,
-    "total_size_bytes": 1914537
+    "total_size_bytes": 1914666
   },
   {
     "file_counts": {
@@ -3488,6 +3979,11 @@
     "path": "experiments/qwen_inpolicy_vm_echo_distillation",
     "primary_readme": "experiments/qwen_inpolicy_vm_echo_distillation/README.md",
     "primary_report": "experiments/qwen_inpolicy_vm_echo_distillation/reports/qwen_inpolicy_vm_echo_distillation_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether a frozen-Qwen typed-bytecode compiler improves when it learns the VM consequences of its own proposed programs during repair distillation.",
     "tags": [
@@ -3506,7 +4002,7 @@
       "src"
     ],
     "total_files": 60,
-    "total_size_bytes": 853734
+    "total_size_bytes": 853863
   },
   {
     "file_counts": {
@@ -3523,6 +4019,11 @@
     "path": "experiments/qwen_iterative_repair_policy",
     "primary_readme": "experiments/qwen_iterative_repair_policy/README.md",
     "primary_report": "experiments/qwen_iterative_repair_policy/reports/qwen_iterative_repair_policy_paper.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for an iterative hidden-program repair policy attached to a frozen Qwen numeric compiler. The policy receives the current compiled program trace, predicts sparse slot edits, and is evaluated over multiple repair iterations.",
     "tags": [
@@ -3541,7 +4042,7 @@
       "src"
     ],
     "total_files": 39,
-    "total_size_bytes": 1064538
+    "total_size_bytes": 1064667
   },
   {
     "file_counts": {
@@ -3558,6 +4059,9 @@
     "path": "experiments/qwen_large_abi_nested_compiler",
     "primary_readme": "experiments/qwen_large_abi_nested_compiler/README.md",
     "primary_report": "experiments/qwen_large_abi_nested_compiler/reports/qwen_large_abi_nested_compiler_report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether a constrained stack-ABI compiler still works when the primitive library becomes large and when tasks require nested sub-procedures rather than only linear chains.",
     "tags": [
@@ -3572,7 +4076,7 @@
       "src"
     ],
     "total_files": 30,
-    "total_size_bytes": 3756773
+    "total_size_bytes": 3756833
   },
   {
     "file_counts": {
@@ -3588,6 +4092,9 @@
     "path": "experiments/qwen_latent_beam_program_compiler",
     "primary_readme": "experiments/qwen_latent_beam_program_compiler/README.md",
     "primary_report": "experiments/qwen_latent_beam_program_compiler/reports/standalone_report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a Qwen 4B backbone can write a compact latent program into fixed register slots, execute that program with a differentiable modular-arithmetic runtime, and improve by selecting among multiple latent candidate programs.",
     "tags": [
@@ -3603,7 +4110,7 @@
       "src"
     ],
     "total_files": 39,
-    "total_size_bytes": 1139006
+    "total_size_bytes": 1139066
   },
   {
     "file_counts": {
@@ -3620,6 +4127,10 @@
     "path": "experiments/qwen_learned_active_interrogation",
     "primary_readme": "experiments/qwen_learned_active_interrogation/README.md",
     "primary_report": "experiments/qwen_learned_active_interrogation/reports/qwen_learned_active_interrogation_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether a frozen model can improve text-transformation accuracy by choosing which unlabeled examples should be revealed before answering held-out rows.",
     "tags": [
@@ -3635,7 +4146,7 @@
       "src"
     ],
     "total_files": 34,
-    "total_size_bytes": 1292473
+    "total_size_bytes": 1292557
   },
   {
     "file_counts": {
@@ -3652,6 +4163,12 @@
     "path": "experiments/qwen_learned_repair_verifier",
     "primary_readme": "experiments/qwen_learned_repair_verifier/README.md",
     "primary_report": "experiments/qwen_learned_repair_verifier/reports/qwen_learned_repair_verifier_paper.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment trains a small non-oracle verifier to rerank local repairs of programs compiled by a fixed Qwen-attached numeric compiler.",
     "tags": [
@@ -3669,7 +4186,7 @@
       "src"
     ],
     "total_files": 31,
-    "total_size_bytes": 400397
+    "total_size_bytes": 400562
   },
   {
     "file_counts": {
@@ -3686,6 +4203,10 @@
     "path": "experiments/qwen_lora_parser_compiler",
     "primary_readme": "experiments/qwen_lora_parser_compiler/README.md",
     "primary_report": "experiments/qwen_lora_parser_compiler/reports/qwen_lora_parser_compiler_paper.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone QLoRA-attached parser/compiler experiment.",
     "tags": [
@@ -3701,7 +4222,7 @@
       "src"
     ],
     "total_files": 25,
-    "total_size_bytes": 416507
+    "total_size_bytes": 416601
   },
   {
     "file_counts": {
@@ -3718,6 +4239,11 @@
     "path": "experiments/qwen_lora_typed_bytecode_trace_compiler",
     "primary_readme": "experiments/qwen_lora_typed_bytecode_trace_compiler/README.md",
     "primary_report": "experiments/qwen_lora_typed_bytecode_trace_compiler/reports/qwen_lora_typed_bytecode_trace_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for training a Qwen 4B model, with QLoRA adapters, to compile natural-language tasks into executable typed bytecode.",
     "tags": [
@@ -3735,7 +4261,7 @@
       "src"
     ],
     "total_files": 44,
-    "total_size_bytes": 637508
+    "total_size_bytes": 637633
   },
   {
     "file_counts": {
@@ -3752,6 +4278,13 @@
     "path": "experiments/qwen_mixed_domain_trace_verifier",
     "primary_readme": "experiments/qwen_mixed_domain_trace_verifier/README.md",
     "primary_report": "experiments/qwen_mixed_domain_trace_verifier/reports/qwen_mixed_domain_trace_verifier_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a learned candidate-trace verifier can select better hidden-VM programs from a frozen Qwen-attached mixed-domain compiler. The compiler proposes an executable VM trace; the verifier reranks local candidate traces using only prompt/compiler/execution-derived features at test time.",
     "tags": [
@@ -3769,7 +4302,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 1473185
+    "total_size_bytes": 1473381
   },
   {
     "file_counts": {
@@ -3786,6 +4319,9 @@
     "path": "experiments/qwen_noisy_row_program_crystallizer",
     "primary_readme": "experiments/qwen_noisy_row_program_crystallizer/README.md",
     "primary_report": "experiments/qwen_noisy_row_program_crystallizer/reports/qwen_noisy_row_program_crystallizer_report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment directory for candidate-supported deterministic program selection.",
     "tags": [
@@ -3800,7 +4336,7 @@
       "src"
     ],
     "total_files": 48,
-    "total_size_bytes": 1413340
+    "total_size_bytes": 1413400
   },
   {
     "file_counts": {
@@ -3817,6 +4353,9 @@
     "path": "experiments/qwen_numeric_copy_compiler",
     "primary_readme": "experiments/qwen_numeric_copy_compiler/README.md",
     "primary_report": "experiments/qwen_numeric_copy_compiler/reports/qwen_numeric_copy_compiler_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone numeric-copy compiler experiment for a Qwen causal language model.",
     "tags": [
@@ -3831,7 +4370,7 @@
       "src"
     ],
     "total_files": 25,
-    "total_size_bytes": 459339
+    "total_size_bytes": 459399
   },
   {
     "file_counts": {
@@ -3848,6 +4387,14 @@
     "path": "experiments/qwen_onpolicy_repair_compiler",
     "primary_readme": "experiments/qwen_onpolicy_repair_compiler/README.md",
     "primary_report": "experiments/qwen_onpolicy_repair_compiler/reports/qwen_onpolicy_repair_compiler_paper.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether verified local program repairs can be distilled into the Qwen-attached compiler policy itself.",
     "tags": [
@@ -3867,7 +4414,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 577866
+    "total_size_bytes": 578100
   },
   {
     "file_counts": {
@@ -3884,6 +4431,15 @@
     "path": "experiments/qwen_oracle_distilled_acquisition_policy",
     "primary_readme": "experiments/qwen_oracle_distilled_acquisition_policy/README.md",
     "primary_report": "experiments/qwen_oracle_distilled_acquisition_policy/reports/qwen_oracle_distilled_acquisition_policy_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether a supervised acquisition-row scorer can choose useful clarifying examples for text-transformation tasks.",
     "tags": [
@@ -3902,7 +4458,7 @@
       "src"
     ],
     "total_files": 49,
-    "total_size_bytes": 954886
+    "total_size_bytes": 955144
   },
   {
     "file_counts": {
@@ -3919,6 +4475,13 @@
     "path": "experiments/qwen_pairwise_table_judge",
     "primary_readme": "experiments/qwen_pairwise_table_judge/README.md",
     "primary_report": "experiments/qwen_pairwise_table_judge/reports/qwen_pairwise_table_judge_report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
     "source_track": "track-y",
     "summary": "Can a model choose the more task-consistent full output table when shown examples, query rows, and two candidate tables?",
     "tags": [
@@ -3935,7 +4498,7 @@
       "src"
     ],
     "total_files": 40,
-    "total_size_bytes": 2729412
+    "total_size_bytes": 2729601
   },
   {
     "file_counts": {
@@ -3952,6 +4515,13 @@
     "path": "experiments/qwen_prefix_state_process_verifier",
     "primary_readme": "experiments/qwen_prefix_state_process_verifier/README.md",
     "primary_report": "experiments/qwen_prefix_state_process_verifier/reports/qwen_prefix_state_process_verifier_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for prefix-level verification and typed beam search over executable bytecode.",
     "tags": [
@@ -3970,7 +4540,7 @@
       "src"
     ],
     "total_files": 36,
-    "total_size_bytes": 546849
+    "total_size_bytes": 547045
   },
   {
     "file_counts": {
@@ -3987,6 +4557,10 @@
     "path": "experiments/qwen_program_only_executable_abi",
     "primary_readme": "experiments/qwen_program_only_executable_abi/README.md",
     "primary_report": "experiments/qwen_program_only_executable_abi/reports/qwen_program_only_executable_abi_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a local 4B model can compile deterministic office-style tasks into executable programs whose interpreter result, not an emitted answer token, determines correctness.",
     "tags": [
@@ -4003,7 +4577,7 @@
       "src"
     ],
     "total_files": 94,
-    "total_size_bytes": 1224195
+    "total_size_bytes": 1224286
   },
   {
     "file_counts": {
@@ -4020,6 +4594,13 @@
     "path": "experiments/qwen_progressive_repair_compiler",
     "primary_readme": "experiments/qwen_progressive_repair_compiler/README.md",
     "primary_report": "experiments/qwen_progressive_repair_compiler/reports/qwen_progressive_repair_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment trains a non-oracle repair selector for a frozen Qwen-attached numeric program compiler. Each prompt is compiled into an executable modular-arithmetic program, local candidate repairs are enumerated, and a small transformer verifier chooses among candidate execution traces without access to the true answer or true state trajectory at test time.",
     "tags": [
@@ -4039,7 +4620,7 @@
       "src"
     ],
     "total_files": 24,
-    "total_size_bytes": 410316
+    "total_size_bytes": 410512
   },
   {
     "file_counts": {
@@ -4056,6 +4637,10 @@
     "path": "experiments/qwen_public_prose_abi_gate",
     "primary_readme": "experiments/qwen_public_prose_abi_gate/README.md",
     "primary_report": "experiments/qwen_public_prose_abi_gate/reports/qwen_public_prose_abi_gate_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether a frozen deterministic transformation ABI covers public Microsoft PROSE `Transformation.Text` tasks under within-task held-out validation.",
     "tags": [
@@ -4071,7 +4656,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 606753
+    "total_size_bytes": 606844
   },
   {
     "file_counts": {
@@ -4088,6 +4673,9 @@
     "path": "experiments/qwen_python_shaped_silent_executor",
     "primary_readme": "experiments/qwen_python_shaped_silent_executor/README.md",
     "primary_report": "experiments/qwen_python_shaped_silent_executor/reports/qwen_python_shaped_silent_executor_report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether a Qwen 4B model can learn to execute Python-shaped mini-programs using private latent compute positions instead of emitting an explicit chain-of-thought trace.",
     "tags": [
@@ -4102,7 +4690,7 @@
       "src"
     ],
     "total_files": 89,
-    "total_size_bytes": 3810473
+    "total_size_bytes": 3810533
   },
   {
     "file_counts": {
@@ -4119,6 +4707,13 @@
     "path": "experiments/qwen_readable_candidate_verifier",
     "primary_readme": "experiments/qwen_readable_candidate_verifier/README.md",
     "primary_report": "experiments/qwen_readable_candidate_verifier/reports/qwen_readable_candidate_verifier_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether Qwen can select executable repair candidates when the task and candidate are rendered as readable pseudocode and execution text.",
     "tags": [
@@ -4135,7 +4730,7 @@
       "src"
     ],
     "total_files": 66,
-    "total_size_bytes": 1120912
+    "total_size_bytes": 1121108
   },
   {
     "file_counts": {
@@ -4152,6 +4747,11 @@
     "path": "experiments/qwen_real_task_abi_coverage_gate",
     "primary_readme": "experiments/qwen_real_task_abi_coverage_gate/README.md",
     "primary_report": "experiments/qwen_real_task_abi_coverage_gate/reports/qwen_real_task_abi_coverage_gate_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether a fixed office-data ABI covers real-style deterministic tasks that were not generated from the ABI.",
     "tags": [
@@ -4168,7 +4768,7 @@
       "src"
     ],
     "total_files": 27,
-    "total_size_bytes": 493474
+    "total_size_bytes": 493610
   },
   {
     "file_counts": {
@@ -4185,6 +4785,12 @@
     "path": "experiments/qwen_recurrent_vm_repair_policy",
     "primary_readme": "experiments/qwen_recurrent_vm_repair_policy/README.md",
     "primary_report": "experiments/qwen_recurrent_vm_repair_policy/reports/qwen_recurrent_vm_repair_policy_report.md",
+    "research_programs": [
+      "operator_and_skill_inventories",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether a Qwen-attached typed-bytecode compiler improves when the model is trained as a repeated repair transition operator instead of a one-shot program generator.",
     "tags": [
@@ -4203,7 +4809,7 @@
       "src"
     ],
     "total_files": 72,
-    "total_size_bytes": 2400692
+    "total_size_bytes": 2400858
   },
   {
     "file_counts": {
@@ -4220,6 +4826,10 @@
     "path": "experiments/qwen_recursive_ephemeral_program_induction",
     "primary_readme": "experiments/qwen_recursive_ephemeral_program_induction/README.md",
     "primary_report": "experiments/qwen_recursive_ephemeral_program_induction/reports/qwen_recursive_ephemeral_program_induction_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for inducing task-local executable transformation programs from sparse examples.",
     "tags": [
@@ -4235,7 +4845,7 @@
       "src"
     ],
     "total_files": 54,
-    "total_size_bytes": 1914565
+    "total_size_bytes": 1914656
   },
   {
     "file_counts": {
@@ -4252,6 +4862,9 @@
     "path": "experiments/qwen_recursive_task_decomposition",
     "primary_readme": "experiments/qwen_recursive_task_decomposition/README.md",
     "primary_report": "experiments/qwen_recursive_task_decomposition/reports/qwen_recursive_task_decomposition_report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether recursive task decomposition improves task-level consistency on public text-transformation tasks.",
     "tags": [
@@ -4266,7 +4879,7 @@
       "src"
     ],
     "total_files": 52,
-    "total_size_bytes": 747477
+    "total_size_bytes": 747527
   },
   {
     "file_counts": {
@@ -4283,6 +4896,10 @@
     "path": "experiments/qwen_register_structured_runtime",
     "primary_readme": "experiments/qwen_register_structured_runtime/README.md",
     "primary_report": "experiments/qwen_register_structured_runtime/reports/qwen_register_structured_runtime_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a Qwen-attached model can write a program into fixed register tokens and have that program executed by a fixed cyclic runtime. The bridge reads only register-token hidden states. It predicts an initial residue, primitive operation routes, and operation arguments. A deterministic modulo-97 runtime executes the predicted program.",
     "tags": [
@@ -4299,7 +4916,7 @@
       "src"
     ],
     "total_files": 27,
-    "total_size_bytes": 680736
+    "total_size_bytes": 680827
   },
   {
     "file_counts": {
@@ -4316,6 +4933,10 @@
     "path": "experiments/qwen_register_token_latent_compiler",
     "primary_readme": "experiments/qwen_register_token_latent_compiler/README.md",
     "primary_report": "experiments/qwen_register_token_latent_compiler/reports/qwen_register_token_latent_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a Qwen-attached model can write an executable modular-arithmetic program into a fixed bank of appended register tokens. A trainable bridge reads only those register hidden states, predicts an initial value plus per-step operations and arguments, and an invisible executor runs the predicted program modulo 97.",
     "tags": [
@@ -4334,7 +4955,7 @@
       "src"
     ],
     "total_files": 42,
-    "total_size_bytes": 1013426
+    "total_size_bytes": 1013517
   },
   {
     "file_counts": {
@@ -4351,6 +4972,12 @@
     "path": "experiments/qwen_register_trace_refiner",
     "primary_readme": "experiments/qwen_register_trace_refiner/README.md",
     "primary_report": "experiments/qwen_register_trace_refiner/reports/qwen_register_trace_refiner_paper.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a learned verifier can improve a Qwen3-4B register-program compiler by searching local edits around the compiled latent program and selecting a better execution trace.",
     "tags": [
@@ -4369,7 +4996,7 @@
       "src"
     ],
     "total_files": 30,
-    "total_size_bytes": 460217
+    "total_size_bytes": 460382
   },
   {
     "file_counts": {
@@ -4386,6 +5013,10 @@
     "path": "experiments/qwen_search_augmented_rollout_distillation",
     "primary_readme": "experiments/qwen_search_augmented_rollout_distillation/README.md",
     "primary_report": "experiments/qwen_search_augmented_rollout_distillation/reports/search_augmented_rollout_distillation_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment trains `Qwen/Qwen3-4B` as a recurrent controller for a typed bytecode VM.",
     "tags": [
@@ -4401,7 +5032,7 @@
       "src"
     ],
     "total_files": 46,
-    "total_size_bytes": 998090
+    "total_size_bytes": 998184
   },
   {
     "file_counts": {
@@ -4418,6 +5049,10 @@
     "path": "experiments/qwen_semantic_prefix_value_model",
     "primary_readme": "experiments/qwen_semantic_prefix_value_model/README.md",
     "primary_report": "experiments/qwen_semantic_prefix_value_model/reports/qwen_semantic_prefix_value_model_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for semantic reachability supervision over executable bytecode prefixes.",
     "tags": [
@@ -4434,7 +5069,7 @@
       "src"
     ],
     "total_files": 52,
-    "total_size_bytes": 968723
+    "total_size_bytes": 968814
   },
   {
     "file_counts": {
@@ -4451,6 +5086,10 @@
     "path": "experiments/qwen_shared_parser_compiler",
     "primary_readme": "experiments/qwen_shared_parser_compiler/README.md",
     "primary_report": "experiments/qwen_shared_parser_compiler/reports/qwen_shared_parser_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a shared token parser can read a frozen Qwen hidden sequence, recover ordered program symbols, and configure an executable latent modular program without token-span inputs at inference time.",
     "tags": [
@@ -4468,7 +5107,7 @@
       "src"
     ],
     "total_files": 37,
-    "total_size_bytes": 815960
+    "total_size_bytes": 816051
   },
   {
     "file_counts": {
@@ -4485,6 +5124,11 @@
     "path": "experiments/qwen_slot_repair_distillation",
     "primary_readme": "experiments/qwen_slot_repair_distillation/README.md",
     "primary_report": "experiments/qwen_slot_repair_distillation/reports/qwen_slot_repair_distillation_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether local repair headroom can be distilled into a deployable gated slot editor for a frozen Qwen-attached numeric compiler. The compiler emits an executable modular-arithmetic program. Offline local repair search supplies corrected-program labels when available, and the editor learns to decide which init/op/arg slots to edit plus what replacement values to emit from the base compiler trace.",
     "tags": [
@@ -4504,7 +5148,7 @@
       "src"
     ],
     "total_files": 43,
-    "total_size_bytes": 730729
+    "total_size_bytes": 730854
   },
   {
     "file_counts": {
@@ -4521,6 +5165,9 @@
     "path": "experiments/qwen_slot_stability_compiler",
     "primary_readme": "experiments/qwen_slot_stability_compiler/README.md",
     "primary_report": "experiments/qwen_slot_stability_compiler/reports/qwen_slot_stability_compiler_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone paired paraphrase slot-stability experiment for a Qwen numeric-copy compiler.",
     "tags": [
@@ -4536,7 +5183,7 @@
       "src"
     ],
     "total_files": 36,
-    "total_size_bytes": 760186
+    "total_size_bytes": 760246
   },
   {
     "file_counts": {
@@ -4553,6 +5200,10 @@
     "path": "experiments/qwen_span_free_compiler",
     "primary_readme": "experiments/qwen_span_free_compiler/README.md",
     "primary_report": "experiments/qwen_span_free_compiler/reports/qwen_span_free_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a small trainable latent compiler can read a frozen Qwen hidden sequence and configure an executable modular program without being given token-span features for the numeric values or operation words.",
     "tags": [
@@ -4570,7 +5221,7 @@
       "src"
     ],
     "total_files": 39,
-    "total_size_bytes": 828494
+    "total_size_bytes": 828585
   },
   {
     "file_counts": {
@@ -4587,6 +5238,10 @@
     "path": "experiments/qwen_state_ladder_compiler",
     "primary_readme": "experiments/qwen_state_ladder_compiler/README.md",
     "primary_report": "experiments/qwen_state_ladder_compiler/reports/qwen_state_ladder_compiler_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone intermediate-state ladder experiment for a Qwen numeric-copy compiler.",
     "tags": [
@@ -4603,7 +5258,7 @@
       "src"
     ],
     "total_files": 35,
-    "total_size_bytes": 1635523
+    "total_size_bytes": 1635614
   },
   {
     "file_counts": {
@@ -4620,6 +5275,11 @@
     "path": "experiments/qwen_structural_compiler_attribution_ablation",
     "primary_readme": "experiments/qwen_structural_compiler_attribution_ablation/README.md",
     "primary_report": "experiments/qwen_structural_compiler_attribution_ablation/reports/structural_compiler_attribution_ablation_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "interpretability_and_diagnostics",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests why a tuned executable latent compiler learns length-24 modular programs.",
     "tags": [
@@ -4636,7 +5296,7 @@
       "src"
     ],
     "total_files": 67,
-    "total_size_bytes": 3036383
+    "total_size_bytes": 3036513
   },
   {
     "file_counts": {
@@ -4653,6 +5313,10 @@
     "path": "experiments/qwen_structural_latent_compiler_expansion",
     "primary_readme": "experiments/qwen_structural_latent_compiler_expansion/README.md",
     "primary_report": "experiments/qwen_structural_latent_compiler_expansion/reports/structural_latent_compiler_expansion_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether an executable latent program compiler can be expanded structurally from short chains to longer chains without using beam search, candidate reranking, or text program generation.",
     "tags": [
@@ -4669,7 +5333,7 @@
       "src"
     ],
     "total_files": 31,
-    "total_size_bytes": 1198376
+    "total_size_bytes": 1198467
   },
   {
     "file_counts": {
@@ -4686,6 +5350,10 @@
     "path": "experiments/qwen_structured_bridge",
     "primary_readme": "experiments/qwen_structured_bridge/README.md",
     "primary_report": "experiments/qwen_structured_bridge/reports/qwen_structured_bridge_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests a frozen Qwen encoder attached to a structured latent executor. The trainable bridge compiles text into modular program symbols, then an invisible executor runs the compiled program to produce the answer.",
     "tags": [
@@ -4702,7 +5370,7 @@
       "src"
     ],
     "total_files": 25,
-    "total_size_bytes": 322308
+    "total_size_bytes": 322399
   },
   {
     "file_counts": {
@@ -4719,6 +5387,10 @@
     "path": "experiments/qwen_support_contrastive_meta_icl",
     "primary_readme": "experiments/qwen_support_contrastive_meta_icl/README.md",
     "primary_report": "experiments/qwen_support_contrastive_meta_icl/reports/qwen_support_contrastive_meta_icl_latest_run_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "posttraining_and_adaptation"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether a support-contrastive LoRA objective makes Qwen3-4B bind text-transformation answers to the provided support examples, rather than only adapting to the prompt format or task family.",
     "tags": [
@@ -4734,7 +5406,7 @@
       "src"
     ],
     "total_files": 74,
-    "total_size_bytes": 3797436
+    "total_size_bytes": 3797520
   },
   {
     "file_counts": {
@@ -4751,6 +5423,10 @@
     "path": "experiments/qwen_tail_repair_stability_critic",
     "primary_readme": "experiments/qwen_tail_repair_stability_critic/README.md",
     "primary_report": "experiments/qwen_tail_repair_stability_critic/reports/qwen_tail_repair_stability_critic_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for testing whether a learned tail-repair critic can turn mostly-correct length-24 modular programs into stable exact executable programs.",
     "tags": [
@@ -4767,7 +5443,7 @@
       "src"
     ],
     "total_files": 61,
-    "total_size_bytes": 1283982
+    "total_size_bytes": 1284073
   },
   {
     "file_counts": {
@@ -4784,6 +5460,13 @@
     "path": "experiments/qwen_teacher_distilled_slot_compiler",
     "primary_readme": "experiments/qwen_teacher_distilled_slot_compiler/README.md",
     "primary_report": "experiments/qwen_teacher_distilled_slot_compiler/reports/qwen_teacher_distilled_slot_compiler_paper.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether an oracle slot teacher improves a QLoRA-adapted `Qwen/Qwen3-4B` numeric-copy compiler on long modular-arithmetic programs.",
     "tags": [
@@ -4803,7 +5486,7 @@
       "src"
     ],
     "total_files": 30,
-    "total_size_bytes": 1760443
+    "total_size_bytes": 1760642
   },
   {
     "file_counts": {
@@ -4820,6 +5503,9 @@
     "path": "experiments/qwen_trace_bootstrap_retention",
     "primary_readme": "experiments/qwen_trace_bootstrap_retention/README.md",
     "primary_report": "experiments/qwen_trace_bootstrap_retention/reports/qwen_trace_bootstrap_retention_paper.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a frozen Qwen encoder attached to a structured latent executor can keep using a learned program interface after symbol-trace supervision is removed.",
     "tags": [
@@ -4835,7 +5521,7 @@
       "src"
     ],
     "total_files": 21,
-    "total_size_bytes": 492061
+    "total_size_bytes": 492121
   },
   {
     "file_counts": {
@@ -4852,6 +5538,10 @@
     "path": "experiments/qwen_trace_procedure_depth_stress",
     "primary_readme": "experiments/qwen_trace_procedure_depth_stress/README.md",
     "primary_report": "experiments/qwen_trace_procedure_depth_stress/reports/qwen_trace_procedure_depth_stress_report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment tests whether a local 4B model can compile natural language tasks into explicit executable procedures over a fixed stack ABI.",
     "tags": [
@@ -4868,7 +5558,7 @@
       "src"
     ],
     "total_files": 28,
-    "total_size_bytes": 2611653
+    "total_size_bytes": 2611744
   },
   {
     "file_counts": {
@@ -4885,6 +5575,12 @@
     "path": "experiments/qwen_typed_bytecode_expert_iteration",
     "primary_readme": "experiments/qwen_typed_bytecode_expert_iteration/README.md",
     "primary_report": "experiments/qwen_typed_bytecode_expert_iteration/reports/qwen_typed_bytecode_expert_iteration_paper.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment for a Qwen-oriented typed-bytecode training loop. The experiment tests whether exact execution and answer-verified program search can turn a weak text-to-bytecode compiler into a stronger deployable compiler.",
     "tags": [
@@ -4901,7 +5597,7 @@
       "src"
     ],
     "total_files": 60,
-    "total_size_bytes": 885377
+    "total_size_bytes": 885542
   },
   {
     "file_counts": {
@@ -4918,6 +5614,13 @@
     "path": "experiments/qwen_verified_skill_memory_rag",
     "primary_readme": "experiments/qwen_verified_skill_memory_rag/README.md",
     "primary_report": "experiments/qwen_verified_skill_memory_rag/reports/qwen_verified_skill_memory_rag_report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether train-only verified transformation examples help Qwen solve public text-transformation tasks more consistently.",
     "tags": [
@@ -4934,7 +5637,7 @@
       "src"
     ],
     "total_files": 54,
-    "total_size_bytes": 839094
+    "total_size_bytes": 839288
   },
   {
     "file_counts": {
@@ -4951,6 +5654,13 @@
     "path": "experiments/qwen_verifier_guided_slot_repair",
     "primary_readme": "experiments/qwen_verifier_guided_slot_repair/README.md",
     "primary_report": "experiments/qwen_verifier_guided_slot_repair/reports/qwen_verifier_guided_slot_repair_paper.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "Standalone experiment testing whether exact-answer verifier search can repair near-miss compiled programs from a QLoRA-adapted `Qwen/Qwen3-4B` numeric-copy compiler.",
     "tags": [
@@ -4970,7 +5680,7 @@
       "src"
     ],
     "total_files": 31,
-    "total_size_bytes": 1770729
+    "total_size_bytes": 1770928
   },
   {
     "file_counts": {
@@ -4987,6 +5697,10 @@
     "path": "experiments/qwen_vm_agent_echo_qlora",
     "primary_readme": "experiments/qwen_vm_agent_echo_qlora/README.md",
     "primary_report": "experiments/qwen_vm_agent_echo_qlora/reports/main_vm_agent_echo_blank_a512_stoprule/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This standalone experiment trains a Qwen-attached VM agent. The agent receives a natural-language task, an initial typed bytecode program, and VM observations. At each private turn it emits one textual edit action or `STOP`; the VM executes the edit and returns the updated program and execution trace as text.",
     "tags": [
@@ -5002,7 +5716,7 @@
       "src"
     ],
     "total_files": 56,
-    "total_size_bytes": 1570383
+    "total_size_bytes": 1570477
   },
   {
     "file_counts": {
@@ -5019,6 +5733,10 @@
     "path": "experiments/qwen_vm_echo_trace_distillation",
     "primary_readme": "experiments/qwen_vm_echo_trace_distillation/README.md",
     "primary_report": "experiments/qwen_vm_echo_trace_distillation/reports/qwen_vm_echo_trace_distillation_report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether a frozen-Qwen bytecode compiler improves when it is trained not only to emit a target program, but also to predict the VM observations produced by that program.",
     "tags": [
@@ -5035,7 +5753,7 @@
       "src"
     ],
     "total_files": 51,
-    "total_size_bytes": 940308
+    "total_size_bytes": 940402
   },
   {
     "file_counts": {
@@ -5052,6 +5770,13 @@
     "path": "experiments/real_transform_abi_gate_with_counterexamples",
     "primary_readme": "experiments/real_transform_abi_gate_with_counterexamples/README.md",
     "primary_report": "experiments/real_transform_abi_gate_with_counterexamples/reports/report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-z",
     "summary": "Standalone no-training experiment for deterministic transformation ABI coverage with counterexample filtering.",
     "tags": [
@@ -5071,7 +5796,7 @@
       "scripts"
     ],
     "total_files": 16,
-    "total_size_bytes": 237319
+    "total_size_bytes": 237515
   },
   {
     "file_counts": {
@@ -5088,6 +5813,9 @@
     "path": "experiments/rule_family_diversity_scaling",
     "primary_readme": "experiments/rule_family_diversity_scaling/README.md",
     "primary_report": "experiments/rule_family_diversity_scaling/reports/rule_family_diversity_scaling_paper.md",
+    "research_programs": [
+      "collective_experimentation_infrastructure"
+    ],
     "source_track": "track-z",
     "summary": "This directory contains the small, download-friendly artifacts for a standalone rule-family diversity scaling experiment.",
     "tags": [
@@ -5103,7 +5831,7 @@
       "scripts"
     ],
     "total_files": 54,
-    "total_size_bytes": 14769526
+    "total_size_bytes": 14769593
   },
   {
     "file_counts": {
@@ -5120,6 +5848,10 @@
     "path": "experiments/sampled_query_filter_executor",
     "primary_readme": "experiments/sampled_query_filter_executor/README.md",
     "primary_report": "experiments/sampled_query_filter_executor/reports/sampled_query_filter_executor_paper.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests latent recurrent execution over correlated belief states when training supervision is limited to one sampled final query value per example.",
     "tags": [
@@ -5135,7 +5867,7 @@
       "src"
     ],
     "total_files": 39,
-    "total_size_bytes": 1855386
+    "total_size_bytes": 1855480
   },
   {
     "file_counts": {
@@ -5152,6 +5884,10 @@
     "path": "experiments/sparse_support_memory_executor",
     "primary_readme": "experiments/sparse_support_memory_executor/README.md",
     "primary_report": "experiments/sparse_support_memory_executor/reports/sparse_support_memory_paper.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests whether exact modular belief-state execution is recovered when the recurrent state is an explicit sparse set of support slots rather than a fixed-width dense vector.",
     "tags": [
@@ -5167,7 +5903,7 @@
       "src"
     ],
     "total_files": 56,
-    "total_size_bytes": 4018379
+    "total_size_bytes": 4018478
   },
   {
     "file_counts": {
@@ -5184,6 +5920,10 @@
     "path": "experiments/structured_slot_initializer_ladder",
     "primary_readme": "experiments/structured_slot_initializer_ladder/README.md",
     "primary_report": "experiments/structured_slot_initializer_ladder/reports/structured_slot_initializer_ladder_paper.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
     "source_track": "track-y",
     "summary": "This experiment tests which initializer structure is sufficient to populate a sparse modular belief support before an exact recurrent transition executes the program.",
     "tags": [
@@ -5199,7 +5939,7 @@
       "src"
     ],
     "total_files": 83,
-    "total_size_bytes": 7583034
+    "total_size_bytes": 7583125
   },
   {
     "file_counts": {
@@ -5217,6 +5957,9 @@
     "path": "experiments/targeted_bridge_allocation",
     "primary_readme": "experiments/targeted_bridge_allocation/README.md",
     "primary_report": "experiments/targeted_bridge_allocation/reports/targeted_bridge_allocation_report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
     "source_track": "track-z",
     "summary": "Standalone experiment package for testing whether fixed-budget targeted bridge allocation improves trace-conditioned recombination repair compared with uniform bridge allocation.",
     "tags": [
@@ -5234,7 +5977,7 @@
       "scripts"
     ],
     "total_files": 74,
-    "total_size_bytes": 24816766
+    "total_size_bytes": 24816816
   },
   {
     "file_counts": {
@@ -5252,6 +5995,9 @@
     "path": "experiments/trace_keyed_symbol_repair",
     "primary_readme": "experiments/trace_keyed_symbol_repair/README.md",
     "primary_report": "experiments/trace_keyed_symbol_repair/reports/trace_keyed_symbol_repair_paper.md",
+    "research_programs": [
+      "program_review_needed"
+    ],
     "source_track": "track-z",
     "summary": "This directory contains the small, download-friendly artifacts for a standalone trace-conditioned repair experiment.",
     "tags": [
@@ -5267,6 +6013,6 @@
       "scripts"
     ],
     "total_files": 44,
-    "total_size_bytes": 7776431
+    "total_size_bytes": 7776478
   }
 ]

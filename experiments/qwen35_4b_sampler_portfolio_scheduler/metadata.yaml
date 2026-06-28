@@ -9,6 +9,10 @@ summary: "Standalone experiment package for testing whether multiple Qwen3.5-4B 
 tags:
   - "policy"
   - "small-model"
+research_programs:
+  - "collective_experimentation_infrastructure"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
 top_level_dirs:
   - "configs"
   - "data"
@@ -26,5 +30,5 @@ file_counts:
   py: 13
   yaml: 1
 total_files: 47
-total_size_bytes: 6514199
+total_size_bytes: 6514335
 generated_on: "2026-06-28"

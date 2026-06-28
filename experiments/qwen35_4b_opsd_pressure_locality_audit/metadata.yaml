@@ -10,6 +10,10 @@ tags:
   - "distillation"
   - "policy"
   - "small-model"
+research_programs:
+  - "interpretability_and_diagnostics"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +31,5 @@ file_counts:
   py: 8
   yaml: 1
 total_files: 34
-total_size_bytes: 4358200
+total_size_bytes: 4358327
 generated_on: "2026-06-28"

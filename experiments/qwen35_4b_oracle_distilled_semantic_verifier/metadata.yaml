@@ -12,6 +12,12 @@ tags:
   - "execution"
   - "small-model"
   - "verification"
+research_programs:
+  - "evidence_conditioned_selection"
+  - "interpretability_and_diagnostics"
+  - "posttraining_and_adaptation"
+  - "reliability_and_safety"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "data"
   - "logs"
@@ -27,5 +33,5 @@ file_counts:
   py: 7
   yaml: 1
 total_files: 38
-total_size_bytes: 3060575
+total_size_bytes: 3060774
 generated_on: "2026-06-28"

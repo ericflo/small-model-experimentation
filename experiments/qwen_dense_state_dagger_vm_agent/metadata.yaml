@@ -11,6 +11,9 @@ tags:
   - "distillation"
   - "latent-state"
   - "small-model"
+research_programs:
+  - "posttraining_and_adaptation"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "reports"
   - "runs"
@@ -24,5 +27,5 @@ file_counts:
   py: 3
   yaml: 1
 total_files: 46
-total_size_bytes: 1250338
+total_size_bytes: 1250432
 generated_on: "2026-06-28"

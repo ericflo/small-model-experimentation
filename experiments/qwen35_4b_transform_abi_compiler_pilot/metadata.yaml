@@ -10,6 +10,9 @@ tags:
   - "abi"
   - "small-model"
   - "table-transform"
+research_programs:
+  - "benchmark_generalization"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +30,5 @@ file_counts:
   py: 7
   yaml: 1
 total_files: 53
-total_size_bytes: 2361693
+total_size_bytes: 2361784
 generated_on: "2026-06-28"

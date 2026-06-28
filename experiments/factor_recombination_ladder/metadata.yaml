@@ -9,6 +9,8 @@ summary: "Standalone experiment package for testing whether trace-conditioned re
 tags:
   - "curriculum"
   - "repair"
+research_programs:
+  - "benchmark_generalization"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +29,5 @@ file_counts:
   py: 5
   yaml: 1
 total_files: 60
-total_size_bytes: 13872809
+total_size_bytes: 13872859
 generated_on: "2026-06-28"

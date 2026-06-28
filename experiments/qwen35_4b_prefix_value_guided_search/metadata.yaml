@@ -9,6 +9,8 @@ summary: "Can hidden-test-valued code prefixes expose a search state that is bet
 tags:
   - "latent-state"
   - "small-model"
+research_programs:
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -26,5 +28,5 @@ file_counts:
   py: 7
   yaml: 1
 total_files: 23
-total_size_bytes: 516989
+total_size_bytes: 517049
 generated_on: "2026-06-28"

@@ -11,6 +11,9 @@ tags:
   - "execution"
   - "lora"
   - "small-model"
+research_programs:
+  - "posttraining_and_adaptation"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "reports"
   - "runs"
@@ -24,5 +27,5 @@ file_counts:
   py: 4
   yaml: 1
 total_files: 56
-total_size_bytes: 1570383
+total_size_bytes: 1570477
 generated_on: "2026-06-28"

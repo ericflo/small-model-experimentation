@@ -9,6 +9,9 @@ summary: "This directory contains the small, download-friendly artifacts for a s
 tags:
   - "counterexamples"
   - "repair"
+research_programs:
+  - "evidence_conditioned_selection"
+  - "reliability_and_safety"
 top_level_dirs:
   - "configs"
   - "data"
@@ -26,5 +29,5 @@ file_counts:
   txt: 1
   yaml: 1
 total_files: 52
-total_size_bytes: 10146673
+total_size_bytes: 10146758
 generated_on: "2026-06-28"

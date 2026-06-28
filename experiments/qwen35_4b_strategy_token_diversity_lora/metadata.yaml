@@ -10,6 +10,9 @@ tags:
   - "lora"
   - "policy"
   - "small-model"
+research_programs:
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +30,5 @@ file_counts:
   py: 15
   yaml: 1
 total_files: 70
-total_size_bytes: 24574468
+total_size_bytes: 24574556
 generated_on: "2026-06-28"

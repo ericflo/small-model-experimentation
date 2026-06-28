@@ -1,11 +1,28 @@
 # Experiment Lifecycle
 
+## 0. Choose The Program
+
+Every new experiment must advance an existing research program or justify a new one. Start from `research_programs/README.md` and `knowledge/research_program_index.md`.
+
+If no current program fits, create one before adding the experiment:
+
+```bash
+make new-program PROGRAM=<program-id> TITLE="<Title>" FOCUS="<one-sentence focus>"
+```
+
 ## 1. Claim The Question
 
-Create `experiments/<id>/README.md` before the expensive run. Keep the question narrow enough that a single result can move belief.
+Create the experiment scaffold before the expensive run:
+
+```bash
+make new-experiment EXPERIMENT=<id> PROGRAM=<program-id> TITLE="<Title>"
+```
+
+Keep the question narrow enough that a single result can move belief.
 
 The README should include:
 
+- Research program.
 - Question.
 - Hypothesis.
 - Baseline and controls.
@@ -44,3 +61,4 @@ make validate
 
 Then update the human knowledge pages when the result changes strategy.
 
+Also update the owning program's `evidence.md` and `backlog.md` when the result changes what should be tried next.

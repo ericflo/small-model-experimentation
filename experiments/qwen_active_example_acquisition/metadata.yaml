@@ -10,6 +10,9 @@ tags:
   - "active-learning"
   - "small-model"
   - "table-transform"
+research_programs:
+  - "active_evidence_acquisition"
+  - "benchmark_generalization"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -24,5 +27,5 @@ file_counts:
   py: 1
   yaml: 1
 total_files: 40
-total_size_bytes: 1445226
+total_size_bytes: 1445310
 generated_on: "2026-06-28"

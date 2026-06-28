@@ -11,6 +11,10 @@ tags:
   - "foofah"
   - "small-model"
   - "table-transform"
+research_programs:
+  - "benchmark_generalization"
+  - "evidence_conditioned_selection"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -28,5 +32,5 @@ file_counts:
   py: 6
   yaml: 1
 total_files: 40
-total_size_bytes: 24787863
+total_size_bytes: 24787991
 generated_on: "2026-06-28"

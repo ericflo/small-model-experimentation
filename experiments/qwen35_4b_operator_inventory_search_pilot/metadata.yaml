@@ -9,6 +9,8 @@ summary: "Standalone no-training pilot for open-vocabulary operator identificati
 tags:
   - "operator-search"
   - "small-model"
+research_programs:
+  - "operator_and_skill_inventories"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +29,5 @@ file_counts:
   py: 7
   yaml: 1
 total_files: 31
-total_size_bytes: 4475592
+total_size_bytes: 4475648
 generated_on: "2026-06-28"

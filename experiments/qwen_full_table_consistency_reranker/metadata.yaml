@@ -9,6 +9,9 @@ summary: "Can multiple row-level model guesses be converted into task-level cons
 tags:
   - "small-model"
   - "table-transform"
+research_programs:
+  - "benchmark_generalization"
+  - "interpretability_and_diagnostics"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -23,5 +26,5 @@ file_counts:
   py: 1
   yaml: 1
 total_files: 36
-total_size_bytes: 2047603
+total_size_bytes: 2047692
 generated_on: "2026-06-28"

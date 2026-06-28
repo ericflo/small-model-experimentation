@@ -9,6 +9,8 @@ summary: "Standalone Track 1 experiment measuring how far a constrained stack-AB
 tags:
   - "abi"
   - "small-model"
+research_programs:
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -23,5 +25,5 @@ file_counts:
   py: 1
   yaml: 1
 total_files: 29
-total_size_bytes: 3761192
+total_size_bytes: 3761252
 generated_on: "2026-06-28"

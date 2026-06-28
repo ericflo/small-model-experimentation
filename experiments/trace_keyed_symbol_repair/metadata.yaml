@@ -8,6 +8,8 @@ primary_report: "experiments/trace_keyed_symbol_repair/reports/trace_keyed_symbo
 summary: "This directory contains the small, download-friendly artifacts for a standalone trace-conditioned repair experiment."
 tags:
   - "repair"
+research_programs:
+  - "program_review_needed"
 top_level_dirs:
   - "configs"
   - "data"
@@ -25,5 +27,5 @@ file_counts:
   txt: 1
   yaml: 1
 total_files: 44
-total_size_bytes: 7776431
+total_size_bytes: 7776478
 generated_on: "2026-06-28"

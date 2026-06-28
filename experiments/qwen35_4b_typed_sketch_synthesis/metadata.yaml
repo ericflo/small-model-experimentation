@@ -11,6 +11,9 @@ tags:
   - "repair"
   - "small-model"
   - "table-transform"
+research_programs:
+  - "benchmark_generalization"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -28,5 +31,5 @@ file_counts:
   py: 10
   yaml: 1
 total_files: 55
-total_size_bytes: 7075343
+total_size_bytes: 7075434
 generated_on: "2026-06-28"

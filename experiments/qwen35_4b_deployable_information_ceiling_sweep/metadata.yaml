@@ -10,6 +10,10 @@ tags:
   - "coverage"
   - "policy"
   - "small-model"
+research_programs:
+  - "evidence_conditioned_selection"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
 top_level_dirs:
   - "configs"
   - "data"
@@ -28,5 +32,5 @@ file_counts:
   py: 4
   yaml: 1
 total_files: 29
-total_size_bytes: 16616511
+total_size_bytes: 16616636
 generated_on: "2026-06-28"

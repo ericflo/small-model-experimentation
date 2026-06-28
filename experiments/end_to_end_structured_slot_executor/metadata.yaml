@@ -9,6 +9,8 @@ summary: "This experiment tests whether a structured slot executor can learn bot
 tags:
   - "execution"
   - "latent-state"
+research_programs:
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -23,5 +25,5 @@ file_counts:
   py: 2
   yaml: 1
 total_files: 87
-total_size_bytes: 8831741
+total_size_bytes: 8831801
 generated_on: "2026-06-28"

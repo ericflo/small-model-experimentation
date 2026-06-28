@@ -11,6 +11,10 @@ tags:
   - "lora"
   - "small-model"
   - "table-transform"
+research_programs:
+  - "benchmark_generalization"
+  - "posttraining_and_adaptation"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -24,5 +28,5 @@ file_counts:
   py: 1
   yaml: 1
 total_files: 31
-total_size_bytes: 668080
+total_size_bytes: 668205
 generated_on: "2026-06-28"

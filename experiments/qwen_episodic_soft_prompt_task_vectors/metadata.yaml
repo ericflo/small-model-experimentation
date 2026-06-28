@@ -9,6 +9,8 @@ summary: "Standalone experiment testing whether a short continuous prefix optimi
 tags:
   - "small-model"
   - "table-transform"
+research_programs:
+  - "benchmark_generalization"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -23,5 +25,5 @@ file_counts:
   py: 1
   yaml: 1
 total_files: 52
-total_size_bytes: 907241
+total_size_bytes: 907291
 generated_on: "2026-06-28"

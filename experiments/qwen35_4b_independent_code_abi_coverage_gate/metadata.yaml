@@ -11,6 +11,10 @@ tags:
   - "coverage"
   - "memory"
   - "small-model"
+research_programs:
+  - "algorithmic_memory_and_retrieval"
+  - "evidence_conditioned_selection"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +31,5 @@ file_counts:
   py: 2
   yaml: 1
 total_files: 23
-total_size_bytes: 1545084
+total_size_bytes: 1545220
 generated_on: "2026-06-28"

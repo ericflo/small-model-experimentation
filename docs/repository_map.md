@@ -1,5 +1,15 @@
 # Repository Map
 
+## `research_programs/`
+
+The forward-looking program layer. Each direct child is a durable line of inquiry with a charter, backlog, and evidence ledger. Programs are how the repository grows beyond the imported seed tracks.
+
+Expected files:
+
+- `charter.md`: purpose, progress signals, boundaries.
+- `backlog.md`: concrete next experiments and controls.
+- `evidence.md`: seed experiments, claims, and current read.
+
 ## `experiments/`
 
 The primary research library. Every direct child is a standalone experiment. A reader should be able to understand the question, run path, artifacts, and result without needing files from another experiment folder.
@@ -25,7 +35,8 @@ The compounding memory layer. Generated files make the corpus navigable; human-a
 
 Key files:
 
-- `synthesis.md`: human cross-track findings.
+- `synthesis.md`: human cross-program findings.
+- `research_program_index.md` and `.csv`: generated program-to-experiment index.
 - `experiment_catalog.md` and `.csv`: generated catalog.
 - `tag_index.md`: generated topic index.
 - `artifact_index.md`: generated artifact inventory.
@@ -38,9 +49,13 @@ Process and operating guidance. Keep this stable and general. Experiment-specifi
 
 ## `templates/`
 
-Starting structure for new self-contained experiments.
+Starting structure for new self-contained experiments and research programs. Prefer the scaffold scripts over manual copying so registry and metadata stay aligned.
 
 ## `scripts/`
 
 Repository-level maintenance scripts. They must stay dependency-light so future agents can run them immediately.
 
+- `build_knowledgebase.py`: regenerate generated catalogs and indexes.
+- `validate_repository.py`: check repository invariants.
+- `scaffold_research_program.py`: create a new program directory and registry entry.
+- `scaffold_experiment.py`: create a new experiment attached to one or more programs.

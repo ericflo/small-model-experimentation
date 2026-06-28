@@ -10,6 +10,11 @@ tags:
   - "memory"
   - "small-model"
   - "verification"
+research_programs:
+  - "algorithmic_memory_and_retrieval"
+  - "evidence_conditioned_selection"
+  - "interpretability_and_diagnostics"
+  - "reliability_and_safety"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +32,5 @@ file_counts:
   py: 10
   yaml: 1
 total_files: 38
-total_size_bytes: 1141271
+total_size_bytes: 1141434
 generated_on: "2026-06-28"

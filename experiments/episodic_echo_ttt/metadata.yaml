@@ -8,6 +8,8 @@ primary_report: "experiments/episodic_echo_ttt/reports/episodic_echo_ttt_report.
 summary: "This standalone experiment tests whether temporary per-episode gradient updates on environment-observation prediction improve later decisions in a small local language model."
 tags:
   - "experiment"
+research_programs:
+  - "collective_experimentation_infrastructure"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -22,5 +24,5 @@ file_counts:
   py: 1
   yaml: 1
 total_files: 48
-total_size_bytes: 874604
+total_size_bytes: 874671
 generated_on: "2026-06-28"

@@ -12,6 +12,10 @@ tags:
   - "policy"
   - "small-model"
   - "tools"
+research_programs:
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -28,5 +32,5 @@ file_counts:
   py: 1
   yaml: 1
 total_files: 17
-total_size_bytes: 6093634
+total_size_bytes: 6093763
 generated_on: "2026-06-28"

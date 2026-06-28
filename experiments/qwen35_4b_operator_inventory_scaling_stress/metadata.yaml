@@ -9,6 +9,8 @@ summary: "Standalone scaling stress test for typed operator inventory search."
 tags:
   - "operator-search"
   - "small-model"
+research_programs:
+  - "operator_and_skill_inventories"
 top_level_dirs:
   - "configs"
   - "data"
@@ -27,5 +29,5 @@ file_counts:
   py: 7
   yaml: 1
 total_files: 32
-total_size_bytes: 4071538
+total_size_bytes: 4071594
 generated_on: "2026-06-28"

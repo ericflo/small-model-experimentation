@@ -12,6 +12,15 @@ tags:
   - "small-model"
   - "table-transform"
   - "verification"
+research_programs:
+  - "active_evidence_acquisition"
+  - "benchmark_generalization"
+  - "evidence_conditioned_selection"
+  - "interpretability_and_diagnostics"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
+  - "reliability_and_safety"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -30,5 +39,5 @@ file_counts:
   py: 8
   yaml: 1
 total_files: 47
-total_size_bytes: 12550126
+total_size_bytes: 12550425
 generated_on: "2026-06-28"

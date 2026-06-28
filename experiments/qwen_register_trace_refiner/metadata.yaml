@@ -13,6 +13,11 @@ tags:
   - "repair"
   - "small-model"
   - "verification"
+research_programs:
+  - "evidence_conditioned_selection"
+  - "interpretability_and_diagnostics"
+  - "reliability_and_safety"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -27,5 +32,5 @@ file_counts:
   py: 3
   yaml: 1
 total_files: 30
-total_size_bytes: 460217
+total_size_bytes: 460382
 generated_on: "2026-06-28"

@@ -14,18 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EXPERIMENTS = ROOT / "experiments"
 KNOWLEDGE = ROOT / "knowledge"
-
-TRACK_Z_NON_QWEN35 = {
-    "bridge_dose_recombination_curriculum",
-    "counterexample_rule_repair",
-    "execution_conditioned_repair",
-    "factor_recombination_ladder",
-    "feature_factorized_rule_diversity",
-    "real_transform_abi_gate_with_counterexamples",
-    "rule_family_diversity_scaling",
-    "targeted_bridge_allocation",
-    "trace_keyed_symbol_repair",
-}
+PROGRAMS = ROOT / "research_programs"
+PROGRAM_REGISTRY = PROGRAMS / "registry.yaml"
 
 TAG_KEYWORDS = {
     "abi": ["abi", "bytecode", "compiler"],
@@ -63,11 +53,100 @@ STANDARD_DIRS = [
 ]
 
 
+def parse_inline_list(value: str) -> list[str]:
+    value = value.strip()
+    if not value.startswith("[") or not value.endswith("]"):
+        return []
+    inner = value[1:-1].strip()
+    if not inner:
+        return []
+    return [item.strip().strip('"').strip("'") for item in inner.split(",") if item.strip()]
+
+
+def load_programs() -> list[dict[str, object]]:
+    if not PROGRAM_REGISTRY.exists():
+        return []
+    programs: list[dict[str, object]] = []
+    current: dict[str, object] | None = None
+    active_list: str | None = None
+    for raw_line in PROGRAM_REGISTRY.read_text(encoding="utf-8", errors="replace").splitlines():
+        stripped = raw_line.strip()
+        if not stripped or stripped.startswith("#") or stripped == "programs:":
+            continue
+        if stripped.startswith("- id:"):
+            if current:
+                programs.append(current)
+            current = {
+                "id": stripped.split(":", 1)[1].strip().strip('"'),
+                "title": "",
+                "charter": "",
+                "focus": "",
+                "seed_tags": [],
+                "seed_experiments": [],
+            }
+            active_list = None
+            continue
+        if current is None:
+            continue
+        if stripped.startswith("- ") and active_list:
+            current[active_list].append(stripped[2:].strip().strip('"'))  # type: ignore[index, union-attr]
+            continue
+        if ":" not in stripped:
+            continue
+        key, value = stripped.split(":", 1)
+        key = key.strip()
+        value = value.strip()
+        if key in {"seed_tags", "seed_experiments"}:
+            parsed = parse_inline_list(value)
+            current[key] = parsed
+            active_list = key if not parsed else None
+        else:
+            current[key] = value.strip('"')
+            active_list = None
+    if current:
+        programs.append(current)
+    return programs
+
+
+PROGRAMS_CACHE = load_programs()
+
+
 def read_text(path: Path, limit: int | None = None) -> str:
     if not path.exists():
         return ""
     text = path.read_text(encoding="utf-8", errors="replace")
     return text if limit is None else text[:limit]
+
+
+def metadata_value(path: Path, key: str) -> str:
+    if not path.exists():
+        return ""
+    prefix = f"{key}: "
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith(prefix):
+            value = line[len(prefix) :].strip()
+            if value.startswith('"') and value.endswith('"'):
+                return value[1:-1]
+            return value
+    return ""
+
+
+def metadata_list(path: Path, key: str) -> list[str]:
+    if not path.exists():
+        return []
+    values: list[str] = []
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    in_list = False
+    for line in lines:
+        if line.startswith(f"{key}:"):
+            in_list = True
+            continue
+        if in_list:
+            if line.startswith("  - "):
+                values.append(line[4:].strip().strip('"'))
+            elif line and not line.startswith(" "):
+                break
+    return values
 
 
 def excluded(path: Path) -> bool:
@@ -93,10 +172,12 @@ def title_from_slug(slug: str) -> str:
     return " ".join(w.upper() if w in {"abi", "rag", "vm", "dpo", "rl"} else w.capitalize() for w in words)
 
 
-def source_track(slug: str) -> str:
-    if slug.startswith("qwen35_4b_") or slug in TRACK_Z_NON_QWEN35:
-        return "track-z"
-    return "track-y"
+def source_track_for(exp: Path) -> str:
+    metadata = exp / "metadata.yaml"
+    existing = metadata_value(metadata, "source_track")
+    if existing:
+        return existing
+    return "new"
 
 
 def first_heading(text: str) -> str:
@@ -214,6 +295,26 @@ def tags_for(slug: str, title: str, summary: str) -> list[str]:
     return tags or ["experiment"]
 
 
+def programs_for(exp_id: str, tags: list[str]) -> list[str]:
+    assigned: list[str] = []
+    tag_set = set(tags)
+    for program in PROGRAMS_CACHE:
+        seed_experiments = set(program.get("seed_experiments", []))
+        seed_tags = set(program.get("seed_tags", []))
+        if exp_id in seed_experiments or tag_set.intersection(seed_tags):
+            assigned.append(str(program["id"]))
+    return sorted(set(assigned)) or ["program_review_needed"]
+
+
+def research_programs_for(exp: Path, tags: list[str]) -> list[str]:
+    generated = set(programs_for(exp.name, tags))
+    existing = set(metadata_list(exp / "metadata.yaml", "research_programs"))
+    assigned = (generated | existing) - {"program_review_needed"}
+    if assigned:
+        return sorted(assigned)
+    return ["program_review_needed"]
+
+
 def yaml_scalar(value: str) -> str:
     escaped = value.replace("\\", "\\\\").replace('"', '\\"')
     return f'"{escaped}"'
@@ -235,6 +336,9 @@ def write_metadata(record: dict[str, object]) -> None:
     ]
     for tag in record["tags"]:
         lines.append(f"  - {yaml_scalar(str(tag))}")
+    lines.append("research_programs:")
+    for program in record["research_programs"]:
+        lines.append(f"  - {yaml_scalar(str(program))}")
     lines.extend(
         [
             "top_level_dirs:",
@@ -287,15 +391,17 @@ def collect_records() -> list[dict[str, object]]:
         primary_report = find_primary_report(exp)
         title, summary = summarize(exp, primary_report)
         counts, total_files, total_size = file_stats(exp)
+        tags = tags_for(exp.name, title, summary)
         record = {
             "id": exp.name,
             "title": title,
-            "source_track": source_track(exp.name),
+            "source_track": source_track_for(exp),
             "path": rel(exp),
             "primary_readme": rel(exp / "README.md") if (exp / "README.md").exists() else "",
             "primary_report": rel(primary_report),
             "summary": summary,
-            "tags": tags_for(exp.name, title, summary),
+            "tags": tags,
+            "research_programs": research_programs_for(exp, tags),
             "top_level_dirs": top_level_dirs(exp),
             "file_counts": dict(counts),
             "total_files": total_files,
@@ -313,6 +419,7 @@ def write_catalog_csv(records: list[dict[str, object]]) -> None:
         "title",
         "source_track",
         "tags",
+        "research_programs",
         "summary",
         "path",
         "primary_readme",
@@ -321,15 +428,13 @@ def write_catalog_csv(records: list[dict[str, object]]) -> None:
         "total_size_bytes",
     ]
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for record in records:
-            writer.writerow(
-                {
-                    key: ";".join(record[key]) if key == "tags" else record[key]
-                    for key in fieldnames
-                }
-            )
+            row = {}
+            for key in fieldnames:
+                row[key] = ";".join(record[key]) if key in {"tags", "research_programs"} else record[key]
+            writer.writerow(row)
 
 
 def md_link(label: str, target: str) -> str:
@@ -345,19 +450,21 @@ def write_catalog_md(records: list[dict[str, object]]) -> None:
         f"Generated from `experiments/` on {dt.date.today().isoformat()}.",
         "",
         f"- Experiments: {len(records)}",
-        f"- Track Y imports: {track_counts['track-y']}",
-        f"- Track Z imports: {track_counts['track-z']}",
+        f"- Source track Y provenance: {track_counts['track-y']}",
+        f"- Source track Z provenance: {track_counts['track-z']}",
         "",
-        "| Track | Experiment | Tags | Summary | Read | Report |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| Programs | Track | Experiment | Tags | Summary | Read | Report |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for record in records:
         summary = str(record["summary"]).replace("|", "\\|")
         if len(summary) > 220:
             summary = summary[:217].rstrip() + "..."
         tags = ", ".join(record["tags"])
+        programs = ", ".join(record["research_programs"])
         lines.append(
-            "| {track} | `{id}` | {tags} | {summary} | {readme} | {report} |".format(
+            "| {programs} | {track} | `{id}` | {tags} | {summary} | {readme} | {report} |".format(
+                programs=programs,
                 track=record["source_track"],
                 id=record["id"],
                 tags=tags,
@@ -388,6 +495,80 @@ def write_tag_index(records: list[dict[str, object]]) -> None:
             )
         lines.append("")
     (KNOWLEDGE / "tag_index.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def write_program_index(records: list[dict[str, object]]) -> None:
+    by_program: dict[str, list[dict[str, object]]] = defaultdict(list)
+    for record in records:
+        for program_id in record["research_programs"]:
+            by_program[str(program_id)].append(record)
+
+    lines = [
+        "# Research Program Index",
+        "",
+        "Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.",
+        "",
+        f"- Programs: {len(PROGRAMS_CACHE)}",
+        f"- Experiments: {len(records)}",
+        "",
+    ]
+    csv_rows: list[dict[str, str]] = []
+    for program in PROGRAMS_CACHE:
+        program_id = str(program["id"])
+        program_records = sorted(by_program.get(program_id, []), key=lambda item: str(item["id"]))
+        lines.extend(
+            [
+                f"## {program['title']}",
+                "",
+                str(program["focus"]),
+                "",
+                f"- Charter: [{program_id}](../{program['charter']})",
+                f"- Assigned experiments: {len(program_records)}",
+                "",
+            ]
+        )
+        seed_ids = set(program.get("seed_experiments", []))
+        if seed_ids:
+            lines.extend(["### Seed Evidence", ""])
+            for exp_id in sorted(seed_ids):
+                record = next((candidate for candidate in records if candidate["id"] == exp_id), None)
+                if record:
+                    lines.append(f"- `{exp_id}`: {md_link('README', str(record['primary_readme']))}")
+                else:
+                    lines.append(f"- `{exp_id}`: not present in `experiments/`")
+            lines.append("")
+        lines.extend(["### Assigned Experiments", ""])
+        for record in program_records:
+            lines.append(
+                f"- `{record['id']}` ({record['source_track']}): {md_link('README', str(record['primary_readme']))}"
+            )
+            csv_rows.append(
+                {
+                    "program_id": program_id,
+                    "program_title": str(program["title"]),
+                    "experiment_id": str(record["id"]),
+                    "source_track": str(record["source_track"]),
+                    "primary_readme": str(record["primary_readme"]),
+                    "primary_report": str(record["primary_report"]),
+                }
+            )
+        lines.append("")
+
+    if by_program.get("program_review_needed"):
+        lines.extend(["## Program Review Needed", ""])
+        for record in by_program["program_review_needed"]:
+            lines.append(f"- `{record['id']}`: {md_link('README', str(record['primary_readme']))}")
+        lines.append("")
+
+    (KNOWLEDGE / "research_program_index.md").write_text("\n".join(lines), encoding="utf-8")
+    with (KNOWLEDGE / "research_program_index.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["program_id", "program_title", "experiment_id", "source_track", "primary_readme", "primary_report"],
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(csv_rows)
 
 
 def write_artifact_index(records: list[dict[str, object]]) -> None:
@@ -441,7 +622,7 @@ def write_source_tracks(records: list[dict[str, object]]) -> None:
     (KNOWLEDGE / "source_tracks.md").write_text("\n".join(lines), encoding="utf-8")
 
     with (KNOWLEDGE / "source_tracks.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["id", "source_track", "path"])
+        writer = csv.DictWriter(handle, fieldnames=["id", "source_track", "path"], lineterminator="\n")
         writer.writeheader()
         for record in records:
             writer.writerow({"id": record["id"], "source_track": record["source_track"], "path": record["path"]})
@@ -506,6 +687,7 @@ def main() -> None:
     write_catalog_csv(records)
     write_catalog_md(records)
     write_tag_index(records)
+    write_program_index(records)
     write_artifact_index(records)
     write_source_tracks(records)
     write_json_manifest(records)

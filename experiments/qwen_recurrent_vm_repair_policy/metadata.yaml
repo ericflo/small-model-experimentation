@@ -13,6 +13,11 @@ tags:
   - "policy"
   - "repair"
   - "small-model"
+research_programs:
+  - "operator_and_skill_inventories"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "analysis"
   - "reports"
@@ -27,5 +32,5 @@ file_counts:
   py: 3
   yaml: 1
 total_files: 72
-total_size_bytes: 2400692
+total_size_bytes: 2400858
 generated_on: "2026-06-28"

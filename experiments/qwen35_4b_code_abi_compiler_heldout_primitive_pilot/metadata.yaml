@@ -9,6 +9,8 @@ summary: "Standalone experiment for a frozen code-primitive ABI compiler pilot."
 tags:
   - "abi"
   - "small-model"
+research_programs:
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -26,5 +28,5 @@ file_counts:
   py: 7
   yaml: 1
 total_files: 27
-total_size_bytes: 627988
+total_size_bytes: 628048
 generated_on: "2026-06-28"

@@ -11,6 +11,8 @@ tags:
   - "execution"
   - "latent-state"
   - "small-model"
+research_programs:
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "reports"
   - "runs"
@@ -23,5 +25,5 @@ file_counts:
   py: 2
   yaml: 1
 total_files: 39
-total_size_bytes: 1139006
+total_size_bytes: 1139066
 generated_on: "2026-06-28"
