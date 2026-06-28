@@ -14,11 +14,12 @@ A new program should be broad enough to host multiple future experiments and spe
 
 1. Pick a research program or create a new one.
 2. Pick a stable snake_case experiment id.
-3. Run `make new-experiment EXPERIMENT=<id> PROGRAM=<program-id> TITLE="<Title>"`.
-4. Fill in the README before running the full experiment.
-5. Add a cheap smoke run and record how to run it.
-6. Put code, data, runs, analysis, and reports inside the experiment folder.
-7. Run `make check`.
+3. Review `knowledge/program_scorecards.md` and complete `templates/idea_intake.md` for material new directions.
+4. Run `make new-experiment EXPERIMENT=<id> PROGRAM=<program-id> TITLE="<Title>"`.
+5. Fill in the README before running the full experiment.
+6. Add a cheap smoke run and record how to run it.
+7. Put code, data, runs, analysis, and reports inside the experiment folder.
+8. Run `make check`.
 
 ## Report A Result
 

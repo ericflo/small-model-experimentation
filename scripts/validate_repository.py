@@ -52,16 +52,27 @@ def metadata_list(path: Path, key: str) -> list[str]:
     return values
 
 
-def registry_program_ids() -> list[str]:
+def registry_programs() -> list[dict[str, str]]:
     registry = PROGRAMS / "registry.yaml"
     if not registry.exists():
         return []
-    ids: list[str] = []
+    programs: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
     for line in registry.read_text(encoding="utf-8", errors="replace").splitlines():
         stripped = line.strip()
         if stripped.startswith("- id:"):
-            ids.append(stripped.split(":", 1)[1].strip().strip('"'))
-    return ids
+            if current:
+                programs.append(current)
+            current = {"id": stripped.split(":", 1)[1].strip().strip('"'), "title": ""}
+        elif current and stripped.startswith("title:"):
+            current["title"] = stripped.split(":", 1)[1].strip().strip('"')
+    if current:
+        programs.append(current)
+    return programs
+
+
+def registry_program_ids() -> list[str]:
+    return [program["id"] for program in registry_programs()]
 
 
 def validate() -> int:
@@ -73,7 +84,8 @@ def validate() -> int:
     if (ROOT / "tracks").exists():
         fail(errors, "legacy tracks/ directory still exists")
 
-    program_ids = registry_program_ids()
+    registry = registry_programs()
+    program_ids = [program["id"] for program in registry]
     if len(program_ids) < MIN_RESEARCH_PROGRAMS:
         fail(errors, f"research program registry has {len(program_ids)} programs; expected at least {MIN_RESEARCH_PROGRAMS}")
     if len(set(program_ids)) != len(program_ids):
@@ -89,6 +101,9 @@ def validate() -> int:
         PROGRAMS / "registry.yaml",
         KNOWLEDGE / "research_program_index.md",
         KNOWLEDGE / "research_program_index.csv",
+        KNOWLEDGE / "program_scorecards.md",
+        KNOWLEDGE / "decision_records" / "README.md",
+        ROOT / "docs" / "idea_intake_protocol.md",
         ROOT / "scripts" / "scaffold_research_program.py",
         ROOT / "scripts" / "scaffold_experiment.py",
         ROOT / "scripts" / "check_markdown_links.py",
@@ -105,9 +120,19 @@ def validate() -> int:
         ROOT / "templates" / "research_program" / "evidence.md",
         ROOT / "templates" / "experiment" / "README.md",
         ROOT / "templates" / "experiment" / "metadata.yaml",
+        ROOT / "templates" / "idea_intake.md",
+        ROOT / "templates" / "decision_record.md",
     ]:
         if not required.exists():
             fail(errors, f"missing research-program scaffold file: {rel(required)}")
+
+    scorecards = KNOWLEDGE / "program_scorecards.md"
+    if scorecards.exists():
+        content = scorecards.read_text(encoding="utf-8", errors="replace")
+        for program in registry:
+            title = program["title"]
+            if title and f"## {title}" not in content:
+                fail(errors, f"program scorecards missing section for {title!r}")
 
     experiments = sorted(path for path in EXPERIMENTS.iterdir() if path.is_dir())
     if not experiments:

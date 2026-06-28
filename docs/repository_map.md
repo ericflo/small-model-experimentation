@@ -37,6 +37,8 @@ Key files:
 
 - `synthesis.md`: human cross-program findings.
 - `research_program_index.md` and `.csv`: generated program-to-experiment index.
+- `program_scorecards.md`: hand-authored next-experiment and anti-duplication scorecards.
+- `decision_records/`: strategic decisions that affect more than one experiment.
 - `experiment_catalog.md` and `.csv`: generated catalog.
 - `tag_index.md`: generated topic index.
 - `artifact_index.md`: generated artifact inventory.
@@ -49,7 +51,7 @@ Process and operating guidance. Keep this stable and general. Experiment-specifi
 
 ## `templates/`
 
-Starting structure for new self-contained experiments and research programs. Prefer the scaffold scripts over manual copying so registry and metadata stay aligned.
+Starting structure for new self-contained experiments, research programs, idea intake notes, and decision records. Prefer the scaffold scripts over manual copying for experiments and programs so registry and metadata stay aligned.
 
 ## `scripts/`
 

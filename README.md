@@ -8,11 +8,13 @@ The imported prototype corpus is seed evidence and working examples. It is not t
 
 - [research_programs/README.md](research_programs/README.md) for the durable research lines this repo is meant to grow.
 - [knowledge/research_program_index.md](knowledge/research_program_index.md) to see which experiments already inform each line.
+- [knowledge/program_scorecards.md](knowledge/program_scorecards.md) to choose what to try next and avoid duplicate variants.
 - [knowledge/synthesis.md](knowledge/synthesis.md) for cross-program claims and current strategic read.
 - [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) for the full experiment inventory.
 - [docs/agent_handbook.md](docs/agent_handbook.md) for future agents.
 - [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md) before adding a new experiment.
 - [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md) before adding a new line of inquiry.
+- [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md) before turning a rough idea into a run.
 - [docs/quality_gates.md](docs/quality_gates.md) for the checks that protect the repository shape.
 
 ## Layout

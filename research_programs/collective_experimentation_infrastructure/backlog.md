@@ -2,11 +2,11 @@
 
 ## Next Infrastructure
 
-- Generate program indexes from `research_programs/registry.yaml` and experiment metadata.
-- Add claim/evidence ledgers with links to supporting and contradicting experiments.
-- Add experiment decision records for major strategic pivots.
-- Add issue templates or backlog files for new hypotheses.
-- Add validation that every new experiment names a program or explicitly proposes one.
+- Add lightweight navigation tests for whether new agents find prior evidence faster.
+- Turn program scorecards into a generated dashboard when enough hand-curated examples exist.
+- Add first-class decision records for major strategic pivots as they occur.
+- Add schema checks for hidden-label boundaries and artifact manifests.
+- Add a deduplication audit that samples new proposals against prior experiments.
 
 ## Required Controls
 

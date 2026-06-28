@@ -6,6 +6,8 @@ Use this funnel when deciding whether a new idea belongs in the repository and w
 
 Find the closest program in `research_programs/` and at least three relevant experiments through `knowledge/research_program_index.md` or `knowledge/experiment_catalog.md`.
 
+Read `knowledge/program_scorecards.md` before deciding the idea is novel.
+
 ## 2. Novel Uncertainty
 
 Write the uncertainty as a single sentence. If it is already answered by prior evidence, do not run the experiment; add a synthesis note instead.
@@ -19,6 +21,8 @@ Choose one:
 - Mark as exploratory only if it is a small probe and explain where it might land later.
 
 Use `make new-program` or `make new-experiment` once the fit is clear.
+
+For material ideas, complete `templates/idea_intake.md` and store it with the resulting experiment or decision record.
 
 ## 4. Control Plan
 

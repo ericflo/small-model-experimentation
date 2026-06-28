@@ -6,16 +6,18 @@ This repository is a compounding research system. The current experiments are ex
 
 1. Read [research_programs/README.md](research_programs/README.md).
 2. Read [knowledge/research_program_index.md](knowledge/research_program_index.md).
-3. Read [knowledge/synthesis.md](knowledge/synthesis.md).
-4. Use [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
-5. Before adding work, read [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
-6. Use [docs/quality_gates.md](docs/quality_gates.md) to understand what `make check` enforces.
+3. Read [knowledge/program_scorecards.md](knowledge/program_scorecards.md).
+4. Read [knowledge/synthesis.md](knowledge/synthesis.md).
+5. Use [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
+6. Before adding work, read [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md), [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
+7. Use [docs/quality_gates.md](docs/quality_gates.md) to understand what `make check` enforces.
 
 ## Non-Negotiables
 
 - Treat the imported tracks as prototypes, not as the repo boundary.
 - Keep experiments self-contained under `experiments/<id>/`.
 - Attach every new experiment to a research program, or create a new program.
+- Use an idea intake note for material new directions and name the closest near-duplicate before running.
 - Preserve negative results and failed controls; they are part of the map.
 - Update program evidence and shared synthesis when a result changes strategy.
 - Run `make check` before committing.

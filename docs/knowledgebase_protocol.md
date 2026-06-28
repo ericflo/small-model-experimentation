@@ -11,6 +11,7 @@ Good entries:
 - a negative control that prevents a tempting wrong explanation,
 - a reusable evaluation pattern.
 - a program-level direction or stop condition.
+- a decision record for a strategic pivot that affects more than one program or experiment.
 
 Avoid entries that are only aspirations or generic advice.
 
@@ -57,3 +58,7 @@ Hand-edit program files when a result changes direction:
 - `research_programs/<program>/charter.md` for purpose or boundary changes,
 - `research_programs/<program>/backlog.md` for next experiments,
 - `research_programs/<program>/evidence.md` for seed evidence and current read.
+
+Update `knowledge/program_scorecards.md` when the best next experiment, strongest anchors, or anti-duplication guidance changes.
+
+Use `knowledge/decision_records/` for strategic pivots that affect multiple experiments or programs.

@@ -10,6 +10,7 @@
 - Checks local markdown links in navigation and knowledge surfaces.
 - Scans for stale repository framing and temporary scaffold residue.
 - Requires GitHub workflow, issue, and pull request templates to stay present.
+- Requires idea-intake, decision-record, and program-scorecard surfaces to stay present.
 
 ## Why This Exists
 
