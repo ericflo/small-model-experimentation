@@ -1,0 +1,38 @@
+name: Synthesis Update
+description: Propose a shared knowledgebase or claim-ledger update.
+title: "[synthesis] "
+labels:
+  - synthesis
+body:
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim or update
+      description: State the claim, negative result, open question, or roadmap change.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link the specific experiments, reports, controls, or program evidence this depends on.
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence_label
+    attributes:
+      label: Evidence label
+      options:
+        - Confirmed
+        - Promising
+        - Negative
+        - Open
+    validations:
+      required: true
+  - type: textarea
+    id: implications
+    attributes:
+      label: Implications
+      description: What should future experiments do differently after this update?
+    validations:
+      required: true

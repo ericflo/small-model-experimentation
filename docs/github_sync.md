@@ -21,3 +21,5 @@ git lfs status
 ```
 
 No file may exceed GitHub's 100 MB non-LFS hard limit.
+
+GitHub issue and pull request templates are part of the operating system. Keep them aligned with `docs/experiment_lifecycle.md`, `docs/research_program_lifecycle.md`, and `docs/quality_gates.md` when the workflow changes.

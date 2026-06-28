@@ -1,0 +1,49 @@
+name: Research Program
+description: Propose a new durable line of inquiry.
+title: "[program] "
+labels:
+  - research-program
+body:
+  - type: input
+    id: program_id
+    attributes:
+      label: Program id
+      description: Stable lower snake_case id for `research_programs/<program-id>/`.
+      placeholder: multimodal_small_models
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: Human-readable program title.
+    validations:
+      required: true
+  - type: textarea
+    id: focus
+    attributes:
+      label: Focus
+      description: What durable line of inquiry does this program own?
+    validations:
+      required: true
+  - type: textarea
+    id: distinction
+    attributes:
+      label: Why this is a program
+      description: Explain why this is broader than one experiment and distinct from existing programs.
+    validations:
+      required: true
+  - type: textarea
+    id: seed_evidence
+    attributes:
+      label: Seed evidence
+      description: Link existing experiments, claims, failures, or external context that should seed the line.
+    validations:
+      required: true
+  - type: textarea
+    id: first_backlog
+    attributes:
+      label: First backlog
+      description: Name the first experiments, required controls, and stop conditions.
+    validations:
+      required: true

@@ -1,0 +1,65 @@
+name: Experiment Proposal
+description: Propose a new self-contained experiment attached to a research program.
+title: "[experiment] "
+labels:
+  - experiment
+body:
+  - type: input
+    id: program
+    attributes:
+      label: Research program
+      description: Name the existing program, or state the new program that must be created first.
+      placeholder: structured_execution_and_compilers
+    validations:
+      required: true
+  - type: input
+    id: experiment_id
+    attributes:
+      label: Experiment id
+      description: Stable lower snake_case id for `experiments/<id>/`.
+      placeholder: qwen_new_control_probe
+    validations:
+      required: true
+  - type: textarea
+    id: uncertainty
+    attributes:
+      label: Uncertainty
+      description: What specific uncertainty should this experiment resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: prior_evidence
+    attributes:
+      label: Prior evidence
+      description: Link at least three relevant prior experiments, claims, or program notes.
+    validations:
+      required: true
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: State the mechanism expected to work and why it should beat the baseline.
+    validations:
+      required: true
+  - type: textarea
+    id: controls
+    attributes:
+      label: Baseline and controls
+      description: Name the baseline, mechanism-falsifying control, and shift or robustness check.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence_output
+    attributes:
+      label: Evidence output
+      description: What will this add to program evidence, the claim ledger, or shared synthesis?
+    validations:
+      required: true
+  - type: textarea
+    id: artifact_policy
+    attributes:
+      label: Artifact policy
+      description: Note any large artifacts, adapters, external manifests, or reproducibility constraints.
+      placeholder: No adapters will be checked in; large outputs will use an external manifest.
+    validations:
+      required: true

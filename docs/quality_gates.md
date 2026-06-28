@@ -9,6 +9,7 @@
 - Compiles repository maintenance scripts without writing cache files.
 - Checks local markdown links in navigation and knowledge surfaces.
 - Scans for stale repository framing and temporary scaffold residue.
+- Requires GitHub workflow, issue, and pull request templates to stay present.
 
 ## Why This Exists
 
