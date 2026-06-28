@@ -16,6 +16,8 @@ EXPERIMENTS = ROOT / "experiments"
 KNOWLEDGE = ROOT / "knowledge"
 PROGRAMS = ROOT / "research_programs"
 PROGRAM_REGISTRY = PROGRAMS / "registry.yaml"
+CLAIMS = KNOWLEDGE / "claims"
+CLAIM_LEDGER = CLAIMS / "claim_ledger.json"
 
 TAG_KEYWORDS = {
     "abi": ["abi", "bytecode", "compiler"],
@@ -640,6 +642,117 @@ def write_json_manifest(records: list[dict[str, object]]) -> None:
     )
 
 
+def load_claims() -> list[dict[str, object]]:
+    if not CLAIM_LEDGER.exists():
+        return []
+    data = json.loads(CLAIM_LEDGER.read_text(encoding="utf-8"))
+    claims = data.get("claims", [])
+    if not isinstance(claims, list):
+        raise SystemExit("knowledge/claims/claim_ledger.json must contain a claims list")
+    return claims
+
+
+def claim_link(label: str, target: str) -> str:
+    return f"[{label}](../../{target})" if target else label
+
+
+def evidence_label(evidence: dict[str, object], record_by_id: dict[str, dict[str, object]]) -> str:
+    kind = str(evidence.get("kind", ""))
+    if kind == "experiment":
+        exp_id = str(evidence.get("id", ""))
+        record = record_by_id.get(exp_id)
+        target = str(record.get("primary_report") or record.get("primary_readme")) if record else ""
+        return claim_link(f"`{exp_id}`", target)
+    if kind == "program":
+        program_id = str(evidence.get("id", ""))
+        target = str(evidence.get("path") or f"research_programs/{program_id}/charter.md")
+        return claim_link(f"`{program_id}`", target)
+    target = str(evidence.get("path", ""))
+    return claim_link(f"`{target}`", target)
+
+
+def write_claim_index(records: list[dict[str, object]]) -> None:
+    claims = load_claims()
+    record_by_id = {str(record["id"]): record for record in records}
+    by_status = Counter(str(claim.get("status", "")) for claim in claims)
+    by_program: Counter[str] = Counter()
+    for claim in claims:
+        by_program.update(str(program_id) for program_id in claim.get("programs", []))
+
+    lines = [
+        "# Claim Index",
+        "",
+        "Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.",
+        "",
+        f"- Claims: {len(claims)}",
+        "",
+        "## Status Counts",
+        "",
+        "| Status | Claims |",
+        "| --- | ---: |",
+    ]
+    for status, count in sorted(by_status.items()):
+        lines.append(f"| {status} | {count} |")
+    lines.extend(["", "## Program Counts", "", "| Program | Claims |", "| --- | ---: |"])
+    for program_id, count in sorted(by_program.items()):
+        lines.append(f"| `{program_id}` | {count} |")
+    lines.append("")
+
+    csv_rows: list[dict[str, str]] = []
+    for claim in claims:
+        claim_id = str(claim.get("id", ""))
+        title = str(claim.get("title", ""))
+        status = str(claim.get("status", ""))
+        programs = [str(program_id) for program_id in claim.get("programs", [])]
+        evidence_items = [item for item in claim.get("evidence", []) if isinstance(item, dict)]
+        lines.extend(
+            [
+                f"## {claim_id}: {title}",
+                "",
+                f"- Status: `{status}`",
+                f"- Programs: {', '.join(f'`{program_id}`' for program_id in programs)}",
+                f"- Summary: {claim.get('summary', '')}",
+                f"- Implication: {claim.get('implication', '')}",
+                "",
+                "### Evidence",
+                "",
+            ]
+        )
+        for evidence in evidence_items:
+            lines.append(f"- {evidence_label(evidence, record_by_id)}")
+        lines.extend(["", "### Next Tests", ""])
+        for test in claim.get("next_tests", []):
+            lines.append(f"- {test}")
+        lines.extend(["", "### Avoid", ""])
+        for item in claim.get("avoid", []):
+            lines.append(f"- {item}")
+        lines.append("")
+
+        csv_rows.append(
+            {
+                "id": claim_id,
+                "title": title,
+                "status": status,
+                "programs": ";".join(programs),
+                "evidence": ";".join(
+                    str(evidence.get("id") or evidence.get("path", "")) for evidence in evidence_items
+                ),
+                "summary": str(claim.get("summary", "")),
+                "implication": str(claim.get("implication", "")),
+            }
+        )
+
+    (CLAIMS / "index.md").write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    with (CLAIMS / "index.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["id", "title", "status", "programs", "evidence", "summary", "implication"],
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(csv_rows)
+
+
 def generated_readme_ids(records: list[dict[str, object]], generated: list[str]) -> list[str]:
     ids = set(generated)
     marker = "generated during repository normalization"
@@ -691,6 +804,7 @@ def main() -> None:
     write_artifact_index(records)
     write_source_tracks(records)
     write_json_manifest(records)
+    write_claim_index(records)
     write_readme_gap_report(records, generated_readmes)
     print(f"indexed {len(records)} experiments")
     if generated_readmes:

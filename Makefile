@@ -2,6 +2,8 @@ PYTHON ?= python3
 GENERATED_PATHS := \
 	experiments/*/metadata.yaml \
 	knowledge/artifact_index.md \
+	knowledge/claims/index.csv \
+	knowledge/claims/index.md \
 	knowledge/experiment_catalog.csv \
 	knowledge/experiment_catalog.md \
 	knowledge/experiment_manifest.json \

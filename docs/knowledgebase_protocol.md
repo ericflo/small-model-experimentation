@@ -28,6 +28,8 @@ Use these labels in synthesis notes:
 
 Do not hand-edit generated files:
 
+- `knowledge/claims/index.md`
+- `knowledge/claims/index.csv`
 - `knowledge/research_program_index.md`
 - `knowledge/research_program_index.csv`
 - `knowledge/experiment_catalog.md`
@@ -62,3 +64,5 @@ Hand-edit program files when a result changes direction:
 Update `knowledge/program_scorecards.md` when the best next experiment, strongest anchors, or anti-duplication guidance changes.
 
 Use `knowledge/decision_records/` for strategic pivots that affect multiple experiments or programs.
+
+Update `knowledge/claims/claim_ledger.json` when a result changes a durable claim. The generated claim index validates claim ids, statuses, programs, and evidence references.

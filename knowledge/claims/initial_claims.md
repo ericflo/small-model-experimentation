@@ -1,5 +1,7 @@
 # Initial Claims
 
+These narrative claims are preserved for readability. The structured, validation-backed ledger is [claim_ledger.json](claim_ledger.json), with generated navigation in [index.md](index.md).
+
 ## C1: Structured intermediates can improve small-model reliability
 
 Status: `Confirmed`

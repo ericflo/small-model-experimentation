@@ -12,7 +12,8 @@ The two imported tracks are seed evidence. The knowledgebase is organized around
 - [open_questions.md](open_questions.md): unresolved questions worth testing.
 - [future_program_seeds.md](future_program_seeds.md): candidate lines not yet promoted to full programs.
 - [program_scorecards.md](program_scorecards.md): at-a-glance routing, next-experiment, and anti-duplication guidance.
-- [claims/README.md](claims/README.md): claim ledger format and initial claims.
+- [claims/index.md](claims/index.md): generated structured claim index.
+- [claims/README.md](claims/README.md): claim ledger format and narrative claim files.
 - [decision_records/README.md](decision_records/README.md): strategic pivots that affect more than one experiment.
 - [experiment_catalog.md](experiment_catalog.md): generated experiment table.
 - [tag_index.md](tag_index.md): generated topic index.

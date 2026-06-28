@@ -5,6 +5,7 @@
 ## What It Checks
 
 - Regenerates catalogs and verifies generated files are committed.
+- Regenerates the structured claim index and verifies claim references.
 - Validates experiment, program, artifact, and adapter invariants.
 - Compiles repository maintenance scripts without writing cache files.
 - Checks local markdown links in navigation and knowledge surfaces.

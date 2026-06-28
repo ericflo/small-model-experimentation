@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -15,6 +16,7 @@ KNOWLEDGE = ROOT / "knowledge"
 PROGRAMS = ROOT / "research_programs"
 MAX_GITHUB_FILE_BYTES = 100 * 1024 * 1024
 MIN_RESEARCH_PROGRAMS = 8
+CLAIM_STATUSES = {"Confirmed", "Promising", "Negative", "Open", "Retired"}
 
 
 def rel(path: Path) -> str:
@@ -75,6 +77,79 @@ def registry_program_ids() -> list[str]:
     return [program["id"] for program in registry_programs()]
 
 
+def validate_claim_ledger(errors: list[str], program_ids: set[str], exp_ids: set[str]) -> None:
+    ledger = KNOWLEDGE / "claims" / "claim_ledger.json"
+    if not ledger.exists():
+        fail(errors, "missing claims ledger: knowledge/claims/claim_ledger.json")
+        return
+    try:
+        data = json.loads(ledger.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        fail(errors, f"claims ledger is invalid JSON: {exc}")
+        return
+    claims = data.get("claims")
+    if not isinstance(claims, list) or not claims:
+        fail(errors, "claims ledger must contain a non-empty claims list")
+        return
+
+    seen: set[str] = set()
+    for claim in claims:
+        if not isinstance(claim, dict):
+            fail(errors, "claims ledger contains a non-object claim")
+            continue
+        claim_id = str(claim.get("id", ""))
+        if not claim_id:
+            fail(errors, "claims ledger contains a claim without an id")
+        elif claim_id in seen:
+            fail(errors, f"claims ledger contains duplicate id: {claim_id}")
+        seen.add(claim_id)
+
+        status = str(claim.get("status", ""))
+        if status not in CLAIM_STATUSES:
+            fail(errors, f"claim {claim_id} has invalid status: {status!r}")
+
+        programs = claim.get("programs", [])
+        if not isinstance(programs, list) or not programs:
+            fail(errors, f"claim {claim_id} must name at least one program")
+        else:
+            unknown_programs = sorted(set(str(program_id) for program_id in programs) - program_ids)
+            if unknown_programs:
+                fail(errors, f"claim {claim_id} references unknown programs: {', '.join(unknown_programs)}")
+
+        evidence_items = claim.get("evidence", [])
+        if not isinstance(evidence_items, list) or not evidence_items:
+            fail(errors, f"claim {claim_id} must include evidence")
+            continue
+        for evidence in evidence_items:
+            if not isinstance(evidence, dict):
+                fail(errors, f"claim {claim_id} contains non-object evidence")
+                continue
+            kind = str(evidence.get("kind", ""))
+            if kind == "experiment":
+                exp_id = str(evidence.get("id", ""))
+                if exp_id not in exp_ids:
+                    fail(errors, f"claim {claim_id} references missing experiment evidence: {exp_id}")
+            elif kind == "program":
+                program_id = str(evidence.get("id", ""))
+                if program_id not in program_ids:
+                    fail(errors, f"claim {claim_id} references missing program evidence: {program_id}")
+            elif kind == "doc":
+                path = ROOT / str(evidence.get("path", ""))
+                if not path.exists():
+                    fail(errors, f"claim {claim_id} references missing doc evidence: {rel(path)}")
+            else:
+                fail(errors, f"claim {claim_id} has unknown evidence kind: {kind!r}")
+
+    claim_index = KNOWLEDGE / "claims" / "index.csv"
+    if claim_index.exists():
+        with claim_index.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        indexed_ids = {row["id"] for row in rows}
+        ledger_ids = {str(claim.get("id", "")) for claim in claims if isinstance(claim, dict)}
+        if indexed_ids != ledger_ids:
+            fail(errors, "claim index ids do not match claim ledger ids")
+
+
 def validate() -> int:
     errors: list[str] = []
 
@@ -102,6 +177,9 @@ def validate() -> int:
         KNOWLEDGE / "research_program_index.md",
         KNOWLEDGE / "research_program_index.csv",
         KNOWLEDGE / "program_scorecards.md",
+        KNOWLEDGE / "claims" / "claim_ledger.json",
+        KNOWLEDGE / "claims" / "index.md",
+        KNOWLEDGE / "claims" / "index.csv",
         KNOWLEDGE / "decision_records" / "README.md",
         ROOT / "docs" / "idea_intake_protocol.md",
         ROOT / "scripts" / "scaffold_research_program.py",
@@ -137,6 +215,7 @@ def validate() -> int:
     experiments = sorted(path for path in EXPERIMENTS.iterdir() if path.is_dir())
     if not experiments:
         fail(errors, "experiments/ contains no experiment directories")
+    exp_ids = {path.name for path in experiments}
 
     for exp in experiments:
         readme = exp / "README.md"
@@ -199,7 +278,6 @@ def validate() -> int:
         if len(rows) != len(experiments):
             fail(errors, f"catalog row count {len(rows)} != experiment count {len(experiments)}")
         catalog_ids = {row["id"] for row in rows}
-        exp_ids = {path.name for path in experiments}
         missing = sorted(exp_ids - catalog_ids)
         extra = sorted(catalog_ids - exp_ids)
         if missing:
@@ -215,6 +293,8 @@ def validate() -> int:
         missing_programs = sorted(set(program_ids) - indexed_programs)
         if missing_programs:
             fail(errors, "program index has no experiment rows for programs: " + ", ".join(missing_programs))
+
+    validate_claim_ledger(errors, set(program_ids), exp_ids)
 
     gitattributes = ROOT / ".gitattributes"
     if not gitattributes.exists():

@@ -1,0 +1,260 @@
+{
+  "claims": [
+    {
+      "id": "C1",
+      "title": "Structured intermediates improve small-model reliability",
+      "status": "Confirmed",
+      "programs": [
+        "structured_execution_and_compilers",
+        "reliability_and_safety"
+      ],
+      "summary": "Executable, typed, latent, or otherwise structured intermediates repeatedly create checkable surfaces that direct final-answer prompting lacks.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen_structural_latent_compiler_expansion"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_foofah_selective_program_fallback"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_operator_inventory_search_pilot"
+        }
+      ],
+      "implication": "Future direct-answer tasks should include a structured-output or executable-evidence baseline before making broad claims.",
+      "next_tests": [
+        "Compare direct text, typed bytecode, latent slots, and stateful executors on one shared suite.",
+        "Ablate supervision source separately from representation."
+      ],
+      "avoid": [
+        "Another isolated structured-output win without direct-output and corrupted-intermediate controls."
+      ]
+    },
+    {
+      "id": "C2",
+      "title": "Candidate coverage does not imply deployable accuracy",
+      "status": "Confirmed",
+      "programs": [
+        "evidence_conditioned_selection",
+        "reliability_and_safety"
+      ],
+      "summary": "Candidate pools can contain hidden-correct answers while visible evidence still selects or commits incorrectly.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_retrieval_adapt_verify_scale"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_foofah_selective_program_fallback"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_independent_retrieval_consensus"
+        }
+      ],
+      "implication": "Candidate-pool work should report oracle coverage, deployable selection, false-pass rate, precision, recall, and abstention separately.",
+      "next_tests": [
+        "Build visible-only selector benchmarks with family-held-out candidate pools.",
+        "Convert oracle-ceiling reports into deployable-gap scorecards."
+      ],
+      "avoid": [
+        "Claiming selection progress from hidden-oracle coverage alone."
+      ]
+    },
+    {
+      "id": "C3",
+      "title": "Plain prompt memory is not enough",
+      "status": "Negative",
+      "programs": [
+        "algorithmic_memory_and_retrieval",
+        "operator_and_skill_inventories"
+      ],
+      "summary": "Naive retrieved skill cards are a weak memory mechanism unless retrieval contributes candidates, tests, constraints, or verifier inputs.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen_verified_skill_memory_rag"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_verified_algorithm_retrieval_adaptation"
+        }
+      ],
+      "implication": "Memory experiments should include random, mismatched, and constraint/test/candidate variants rather than only prompt-context variants.",
+      "next_tests": [
+        "Compare retrieved examples, retrieved algorithms, retrieved tests, and retrieved failure cases on one task family."
+      ],
+      "avoid": [
+        "Treating retrieval as useful because it looks semantically relevant but is never verified."
+      ]
+    },
+    {
+      "id": "C4",
+      "title": "Active evidence must be coupled to downstream decisions",
+      "status": "Promising",
+      "programs": [
+        "active_evidence_acquisition",
+        "process_control_and_tool_use",
+        "evidence_conditioned_selection"
+      ],
+      "summary": "Actively selected examples and probes can help, but the acquisition objective must optimize the final selector, verifier, or controller decision.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen_active_example_acquisition"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_active_counterexample_trace_selection"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_learned_active_trace_policy"
+        }
+      ],
+      "implication": "Evidence-acquisition work should report downstream decision lift per evidence budget, not only probe informativeness.",
+      "next_tests": [
+        "Compare active probe policies by selector lift under identical budgets.",
+        "Separate expected-output-free probes from oracle-only diagnostics."
+      ],
+      "avoid": [
+        "Optimizing examples or probes without showing commit, repair, or selection improvement."
+      ]
+    },
+    {
+      "id": "C5",
+      "title": "Adaptation must beat strong frozen alternatives",
+      "status": "Open",
+      "programs": [
+        "posttraining_and_adaptation",
+        "process_control_and_tool_use"
+      ],
+      "summary": "LoRA, DPO, distillation, GRPO, and DAgger are promising, but their value is unclear unless compared against frozen sampling, verification, retrieval, and tool-control alternatives.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_constrained_coverage_dpo"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_live_tool_dagger"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_oracle_process_grpo"
+        }
+      ],
+      "implication": "Posttraining runs should include frozen inference-time alternatives and explicit deployability boundaries.",
+      "next_tests": [
+        "Run one update method against frozen inference-time alternatives on the same selector or compiler benchmark."
+      ],
+      "avoid": [
+        "Adapter wins whose labels are hidden-only or whose artifacts are not auditable."
+      ]
+    },
+    {
+      "id": "C6",
+      "title": "Controls are the difference between a result and a story",
+      "status": "Confirmed",
+      "programs": [
+        "benchmark_generalization",
+        "interpretability_and_diagnostics",
+        "reliability_and_safety"
+      ],
+      "summary": "The strongest imported lessons come from experiments that separate mechanism from confounders through corrupted, shuffled, random, frozen, length-held-out, or family-held-out controls.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "factor_recombination_ladder"
+        },
+        {
+          "kind": "experiment",
+          "id": "feature_factorized_rule_diversity"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen_structural_compiler_attribution_ablation"
+        }
+      ],
+      "implication": "Future claims should name the mechanism-falsifying control before running expensive work.",
+      "next_tests": [
+        "Build a shared generalization and control suite used across compiler, selector, memory, and adaptation work."
+      ],
+      "avoid": [
+        "Treating train or IID lift as evidence for generalization."
+      ]
+    },
+    {
+      "id": "C7",
+      "title": "Reliability requires explicit hidden-label and artifact boundaries",
+      "status": "Confirmed",
+      "programs": [
+        "reliability_and_safety",
+        "collective_experimentation_infrastructure"
+      ],
+      "summary": "The repository should preserve small reproducible artifacts while excluding trained adapters and labeling oracle-only evidence separately from deployable evidence.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_reliability_exec_opsd_audit"
+        },
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_real_sample_verify_commit"
+        },
+        {
+          "kind": "doc",
+          "path": ".gitignore"
+        },
+        {
+          "kind": "doc",
+          "path": "scripts/validate_repository.py"
+        }
+      ],
+      "implication": "Reports and scaffolds must separate deployable evidence from hidden-oracle evaluation, and trained adapter directories must remain out of git.",
+      "next_tests": [
+        "Add stronger hidden-label boundary and artifact-manifest checks as new experiments are created."
+      ],
+      "avoid": [
+        "Checking in trained adapters or letting oracle-only metrics become headline deployment claims."
+      ]
+    },
+    {
+      "id": "C8",
+      "title": "The repository itself is a research instrument",
+      "status": "Confirmed",
+      "programs": [
+        "collective_experimentation_infrastructure"
+      ],
+      "summary": "Program charters, generated indexes, claim ledgers, scorecards, intake notes, templates, validation, and CI are part of the experiment system because they determine whether future work compounds.",
+      "evidence": [
+        {
+          "kind": "doc",
+          "path": "research_programs/registry.yaml"
+        },
+        {
+          "kind": "doc",
+          "path": "knowledge/program_scorecards.md"
+        },
+        {
+          "kind": "doc",
+          "path": "docs/quality_gates.md"
+        },
+        {
+          "kind": "doc",
+          "path": ".github/workflows/validate.yml"
+        }
+      ],
+      "implication": "New experiments should update program evidence and shared claims when they change what future work should believe.",
+      "next_tests": [
+        "Measure whether scorecards and intake notes reduce duplicate proposals and improve citation of prior evidence."
+      ],
+      "avoid": [
+        "Treating process as complete when it no longer improves research memory."
+      ]
+    }
+  ]
+}

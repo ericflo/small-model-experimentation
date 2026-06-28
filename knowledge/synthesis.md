@@ -2,6 +2,8 @@
 
 This synthesis is deliberately evidence-linked. It should be updated whenever a new result changes a research program, opens a new program, or retires an old hypothesis.
 
+For the machine-checkable claim ledger, use [claims/index.md](claims/index.md).
+
 ## Executive Read
 
 1. `Confirmed`: the imported corpus is a prototype for a broader research operating system. Its main value is not its original source structure; it is the set of reusable patterns it exposes for structured execution, candidate selection, active evidence, memory, posttraining, tool control, diagnostics, and infrastructure.

@@ -2,6 +2,8 @@
 
 Use these scorecards before opening a new experiment. They are intentionally short: the goal is to route ideas, avoid duplicate variants, and choose the next result that would most change the repository's shared beliefs.
 
+For evidence-linked durable claims, use [claims/index.md](claims/index.md).
+
 ## Structured Execution And Compilers
 
 - Program: [charter](../research_programs/structured_execution_and_compilers/charter.md)
