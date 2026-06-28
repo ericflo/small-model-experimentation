@@ -9,6 +9,7 @@
 - Validates experiment, program, artifact, and adapter invariants.
 - Validates standard artifact-manifest presence for new experiments and documentation for local adapter directories.
 - Compiles repository maintenance scripts without writing cache files.
+- Keeps the related-work discovery script available for idea routing.
 - Checks local markdown links in navigation and knowledge surfaces.
 - Scans for stale repository framing and temporary scaffold residue.
 - Requires GitHub workflow, issue, and pull request templates to stay present.

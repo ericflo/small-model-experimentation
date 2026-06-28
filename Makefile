@@ -16,7 +16,7 @@ GENERATED_PATHS := \
 	knowledge/source_tracks.md \
 	knowledge/tag_index.md
 
-.PHONY: catalog validate py-compile check-links check-text generated-clean lint check new-program new-experiment
+.PHONY: catalog validate py-compile check-links check-text generated-clean lint check related new-program new-experiment
 
 catalog:
 	$(PYTHON) scripts/build_knowledgebase.py
@@ -39,6 +39,9 @@ generated-clean:
 lint: py-compile check-links check-text
 
 check: catalog generated-clean validate lint
+
+related:
+	$(PYTHON) scripts/find_related.py "$(QUERY)" $(EXTRA_ARGS)
 
 new-program:
 	$(PYTHON) scripts/scaffold_research_program.py "$(PROGRAM)" --title "$(TITLE)" --focus "$(FOCUS)" $(EXTRA_ARGS)

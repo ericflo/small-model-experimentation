@@ -220,6 +220,7 @@ def validate() -> int:
         ROOT / "scripts" / "check_markdown_links.py",
         ROOT / "scripts" / "check_python_syntax.py",
         ROOT / "scripts" / "check_repository_text.py",
+        ROOT / "scripts" / "find_related.py",
         ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml",
         ROOT / ".github" / "ISSUE_TEMPLATE" / "experiment_proposal.yml",
         ROOT / ".github" / "ISSUE_TEMPLATE" / "research_program.yml",

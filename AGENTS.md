@@ -9,8 +9,8 @@ This repository is a compounding research system. The current experiments are ex
 3. Read [knowledge/program_scorecards.md](knowledge/program_scorecards.md).
 4. Read [knowledge/claims/index.md](knowledge/claims/index.md).
 5. Read [knowledge/synthesis.md](knowledge/synthesis.md).
-6. Use [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
-7. Before adding work, read [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md), [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), [docs/artifact_policy.md](docs/artifact_policy.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
+6. Use `make related QUERY="<rough idea>"`, [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md), and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
+7. Before adding work, read [docs/discovery_workflow.md](docs/discovery_workflow.md), [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md), [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), [docs/artifact_policy.md](docs/artifact_policy.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
 8. Use [docs/quality_gates.md](docs/quality_gates.md) to understand what `make check` enforces.
 
 ## Non-Negotiables
