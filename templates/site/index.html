@@ -24,11 +24,12 @@
       </a>
       <nav class="topnav" aria-label="Primary">
         <a href="#overview">Overview</a>
+        <a href="#map">Map</a>
         <a href="#programs">Programs</a>
         <a href="#experiments">Experiments</a>
         <a href="#readiness">Readiness</a>
-        <a href="#queue">Queue</a>
         <a href="#claims">Claims</a>
+        <a href="#queue">Queue</a>
         <a href="#artifacts">Artifacts</a>
       </nav>
     </header>
@@ -85,9 +86,10 @@
               <span>Curation need</span>
               <select id="needFilter"></select>
             </label>
+            <div class="hero-chips" id="filterChipsHero" aria-live="polite"></div>
             <div class="controls-foot">
-              <p class="field-hint" id="filterStatus">Filters apply across every panel below.</p>
-              <button id="resetFilters" class="reset-link" type="button">Reset filters</button>
+              <p class="field-hint" id="filterStatus">Filters scope every panel below.</p>
+              <button id="resetFilters" class="reset-link" type="button" hidden>Reset filters</button>
             </div>
           </form>
         </div>
@@ -151,7 +153,7 @@
           <div id="experimentCount" class="result-count" aria-live="polite"></div>
         </div>
         <div class="explorer-layout">
-          <div class="tool-panel">
+          <div class="tool-panel sticky-side">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Distribution</p>
@@ -181,7 +183,7 @@
           <p class="sub">Anchor-ready experiments can be cited and built on directly. The rest carry specific, named curation gaps.</p>
         </div>
         <div class="split-layout">
-          <div class="tool-panel">
+          <div class="tool-panel sticky-side">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Top gaps</p>
@@ -200,18 +202,6 @@
             <div id="programHeatmap" class="visual"></div>
           </div>
         </div>
-      </section>
-
-      <!-- ========================== QUEUE ============================ -->
-      <section id="queue" class="band">
-        <div class="section-heading inline-heading">
-          <div>
-            <p class="eyebrow">Future experiment queue</p>
-            <h2>A structured launchpad for new work</h2>
-          </div>
-          <div id="queueCount" class="result-count" aria-live="polite"></div>
-        </div>
-        <div id="queueBoard" class="queue-board"></div>
       </section>
 
       <!-- ========================== CLAIMS =========================== -->
@@ -236,6 +226,18 @@
         </div>
       </section>
 
+      <!-- ========================== QUEUE ============================ -->
+      <section id="queue" class="band">
+        <div class="section-heading inline-heading">
+          <div>
+            <p class="eyebrow">Future experiment queue</p>
+            <h2>A structured launchpad for new work</h2>
+          </div>
+          <div id="queueCount" class="result-count" aria-live="polite"></div>
+        </div>
+        <div id="queueBoard" class="queue-board"></div>
+      </section>
+
       <!-- ========================= ARTIFACTS ========================= -->
       <section id="artifacts" class="band">
         <div class="section-heading">
@@ -243,23 +245,25 @@
           <h2>Manifests, file types, and shared memory</h2>
         </div>
         <div class="artifact-grid">
-          <div class="tool-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Manifest types</p>
-                <h3>Artifact coverage</h3>
+          <div class="artifact-col">
+            <div class="tool-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Manifest types</p>
+                  <h3>Artifact coverage</h3>
+                </div>
               </div>
+              <div id="artifactKindChart" class="visual"></div>
             </div>
-            <div id="artifactKindChart" class="visual"></div>
-          </div>
-          <div class="tool-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">File extensions</p>
-                <h3>Corpus texture</h3>
+            <div class="tool-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">File extensions</p>
+                  <h3>Corpus texture</h3>
+                </div>
               </div>
+              <div id="extensionChart" class="visual"></div>
             </div>
-            <div id="extensionChart" class="visual"></div>
           </div>
           <div class="tool-panel">
             <div class="panel-heading">
@@ -281,7 +285,7 @@
     </footer>
 
     <div id="drawerScrim" class="scrim"></div>
-    <aside id="detailDrawer" class="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog" aria-modal="true">
+    <aside id="detailDrawer" class="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog" aria-modal="true" inert>
       <div class="drawer-head">
         <div>
           <p class="drawer-eyebrow" id="drawerEyebrow"></p>

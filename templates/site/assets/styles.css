@@ -13,7 +13,7 @@
   --ink: #111a24;
   --ink-soft: #2c3a49;
   --muted: #586676;
-  --faint: #8995a4;
+  --faint: #5c6979;
   --line: #d3dae3;
   --line-soft: #e4e9ef;
 
@@ -55,6 +55,9 @@
   --gap: 18px;
   --pad-band: clamp(40px, 6vw, 96px);
   --pad-x: clamp(18px, 4vw, 60px);
+  --maxw: 1560px;
+  /* horizontal padding that also centers content within --maxw on ultra-wide screens */
+  --pad-edge: max(var(--pad-x), calc((100% - var(--maxw)) / 2));
   --header-h: 66px;
 }
 
@@ -131,7 +134,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: space-between;
   min-height: var(--header-h);
-  padding: 10px var(--pad-x);
+  padding: 10px var(--pad-edge);
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper) 82%, transparent);
   backdrop-filter: saturate(140%) blur(14px);
@@ -229,7 +232,7 @@ h1, h2, h3 {
    Bands / sections
    ========================================================================== */
 .band {
-  padding: var(--pad-band) var(--pad-x);
+  padding: var(--pad-band) var(--pad-edge);
   /* clear both the sticky topbar and the filter rail when anchor-jumping */
   scroll-margin-top: calc(var(--header-h) + 72px);
 }
@@ -239,8 +242,9 @@ h1, h2, h3 {
 .section-heading { max-width: 70ch; margin-bottom: 28px; }
 .section-heading h2 {
   margin: 0;
-  font-size: clamp(1.55rem, 3vw, 2.5rem);
-  line-height: 1.04;
+  font-size: clamp(1.6rem, 3.1vw, 2.6rem);
+  line-height: 1.03;
+  text-wrap: balance;
 }
 .section-heading p.sub {
   margin: 10px 0 0;
@@ -274,9 +278,9 @@ h1, h2, h3 {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(330px, 0.85fr);
   gap: clamp(28px, 4vw, 64px);
-  align-items: center;
-  padding-top: clamp(40px, 6vw, 80px);
-  padding-bottom: clamp(40px, 6vw, 80px);
+  align-items: start;
+  padding-top: clamp(40px, 6vw, 72px);
+  padding-bottom: clamp(40px, 6vw, 72px);
 }
 
 .hero-copy { min-width: 0; }
@@ -437,10 +441,11 @@ input:focus, select:focus {
   border-bottom: 1px solid var(--line-soft);
 }
 .panel-heading .eyebrow { margin: 0 0 3px; }
-.panel-heading h2 {
+.panel-heading h2, .panel-heading h3 {
   margin: 0;
-  font-size: 1.02rem;
-  letter-spacing: -0.01em;
+  font-size: 1.22rem;
+  letter-spacing: -0.015em;
+  font-weight: 700;
 }
 
 .chart-strip, .split-layout, .artifact-grid, .explorer-layout {
@@ -455,7 +460,8 @@ input:focus, select:focus {
 .split-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
 
 .sticky-side { position: sticky; top: calc(var(--header-h) + 16px); }
-.artifact-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.artifact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.artifact-col { display: flex; flex-direction: column; gap: var(--gap); min-width: 0; }
 .explorer-layout { grid-template-columns: minmax(280px, 0.42fr) minmax(0, 1fr); align-items: start; }
 
 /* ---- Visuals ------------------------------------------------------------- */
@@ -673,13 +679,21 @@ tbody tr:last-child td { border-bottom: none; }
 /* ============================================================================
    Queue board
    ========================================================================== */
-.queue-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
-.queue-column { min-width: 0; }
+.queue-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.queue-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 45%, transparent);
+}
 .queue-col-head {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--col-color, var(--line));
 }
@@ -951,7 +965,7 @@ tbody tr:last-child td { border-bottom: none; }
   gap: 16px 32px;
   align-items: center;
   justify-content: space-between;
-  padding: 28px var(--pad-x);
+  padding: 28px var(--pad-edge);
   border-top: 1px solid var(--line);
   background: var(--paper-deep);
   font-family: var(--mono);
@@ -1016,6 +1030,8 @@ tbody tr:last-child td { border-bottom: none; }
   transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 .reset-link:hover, .rail-reset:hover { color: var(--ink); border-color: var(--faint); background: var(--surface-tint); }
+.hero-chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+.hero-chips:empty { display: none; }
 
 /* ---- Metric tiles are buttons (deep-link + filter) ----------------------- */
 .metric-card {
@@ -1039,7 +1055,7 @@ tbody tr:last-child td { border-bottom: none; }
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 9px var(--pad-x);
+  padding: 9px var(--pad-edge);
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   backdrop-filter: saturate(150%) blur(14px);
@@ -1121,7 +1137,7 @@ tbody tr:last-child td { border-bottom: none; }
   font-weight: 600;
   flex: none;
 }
-.program-card h4 { margin: 0; font-size: 1.04rem; line-height: 1.15; font-family: var(--display); font-weight: 700; }
+.program-card h4 { margin: 0; font-size: 1.2rem; line-height: 1.15; font-family: var(--display); font-weight: 700; text-wrap: balance; }
 .program-card.active { border-color: var(--accent, var(--teal)); box-shadow: 0 0 0 1px var(--accent, var(--teal)), var(--shadow-sm); }
 .card-actions {
   display: flex;
@@ -1140,8 +1156,8 @@ tbody tr:last-child td { border-bottom: none; }
 .pill-link:hover { box-shadow: inset 0 0 0 1.5px var(--pill-color, var(--muted)); }
 
 /* ---- queue card h4, queue empty ------------------------------------------ */
-.queue-card h4 { margin: 8px 0 0; font-size: 0.98rem; line-height: 1.2; font-family: var(--display); font-weight: 700; }
-.claim-card h4 { margin: 0; font-size: 1.04rem; line-height: 1.2; font-family: var(--display); font-weight: 700; }
+.queue-card h4 { margin: 8px 0 0; font-size: 1.12rem; line-height: 1.18; font-family: var(--display); font-weight: 700; text-wrap: balance; }
+.claim-card h4 { margin: 0; font-size: 1.18rem; line-height: 1.18; font-family: var(--display); font-weight: 700; text-wrap: balance; }
 .queue-empty { padding: 16px 4px; color: var(--faint); font-family: var(--mono); font-size: 0.78rem; }
 
 /* ---- table tweaks -------------------------------------------------------- */
@@ -1160,7 +1176,7 @@ tbody tr:last-child td { border-bottom: none; }
 }
 .sort-caret { color: var(--faint); font-size: 0.7em; }
 .sort-caret.on { color: var(--teal); }
-.col-mono { color: var(--muted); font-family: var(--mono); font-size: 0.76rem; }
+.col-mono { color: var(--muted); font-family: var(--sans); font-size: 0.82rem; }
 .col-mono .none, .muted-val { color: var(--faint); }
 
 /* ---- drawer actions ------------------------------------------------------ */
@@ -1179,6 +1195,40 @@ tbody tr:last-child td { border-bottom: none; }
   transition: background 120ms ease;
 }
 .btn-primary:hover { background: color-mix(in srgb, var(--teal) 86%, black); }
+
+/* ============================================================================
+   Motion — restrained load reveal + one signature moment (reduced-motion gated)
+   ========================================================================== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.55); } to { opacity: 1; transform: scale(1); } }
+@keyframes drawArc { from { stroke-dashoffset: var(--dash, 0); } to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* hero entrance */
+  .js-motion .hero-copy > *, .js-motion .metric-card {
+    opacity: 0;
+    animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .js-motion .hero-copy > *:nth-child(1) { animation-delay: 0.02s; }
+  .js-motion .hero-copy > *:nth-child(2) { animation-delay: 0.09s; }
+  .js-motion .hero-copy > *:nth-child(3) { animation-delay: 0.16s; }
+  .js-motion .hero-copy > *:nth-child(4) { animation-delay: 0.23s; }
+  .js-motion .metric-card { animation-delay: calc(0.28s + var(--i, 0) * 0.045s); }
+
+  /* signature: corpus-map disks settle in, donut draws — one-shot on first reveal.
+     Only sub-elements are hidden, and only while .play-once is present, so panels
+     can never get stuck invisible if the observer doesn't fire. */
+  .js-motion .panel-signature .map-node { transform-box: fill-box; transform-origin: center; }
+  .js-motion .panel-signature.play-once .map-node {
+    opacity: 0;
+    animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 0.04s);
+  }
+  .js-motion .play-once .donut-arc {
+    stroke-dashoffset: var(--dash, 0);
+    animation: drawArc 0.9s ease-out 0.1s both;
+  }
+}
 
 /* ============================================================================
    Responsive
