@@ -5,6 +5,7 @@
 ## What It Checks
 
 - Regenerates catalogs and verifies generated files are committed.
+- Regenerates the experiment readiness matrix so curation gaps stay visible.
 - Regenerates the structured claim index and verifies claim references.
 - Validates experiment, program, artifact, and adapter invariants.
 - Validates standard artifact-manifest presence for new experiments and documentation for local adapter directories.

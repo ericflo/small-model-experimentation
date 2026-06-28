@@ -209,6 +209,8 @@ def validate() -> int:
         KNOWLEDGE / "program_scorecards.md",
         KNOWLEDGE / "artifact_manifest_index.md",
         KNOWLEDGE / "artifact_manifest_index.csv",
+        KNOWLEDGE / "experiment_readiness.md",
+        KNOWLEDGE / "experiment_readiness.csv",
         KNOWLEDGE / "claims" / "claim_ledger.json",
         KNOWLEDGE / "claims" / "index.md",
         KNOWLEDGE / "claims" / "index.csv",
@@ -326,6 +328,39 @@ def validate() -> int:
             fail(errors, "catalog missing experiments: " + ", ".join(missing))
         if extra:
             fail(errors, "catalog has extra experiments: " + ", ".join(extra))
+
+    readiness = KNOWLEDGE / "experiment_readiness.csv"
+    if not readiness.exists():
+        fail(errors, "missing knowledge/experiment_readiness.csv")
+    else:
+        with readiness.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        required_columns = {
+            "id",
+            "readme_status",
+            "primary_report",
+            "experiment_log",
+            "run_surface",
+            "smoke_command",
+            "artifact_manifest",
+            "anchor_ready",
+            "needs",
+        }
+        missing_columns = sorted(required_columns - set(rows[0].keys() if rows else []))
+        if missing_columns:
+            fail(errors, "readiness index missing columns: " + ", ".join(missing_columns))
+        if len(rows) != len(experiments):
+            fail(errors, f"readiness row count {len(rows)} != experiment count {len(experiments)}")
+        readiness_ids = {row["id"] for row in rows if "id" in row}
+        missing = sorted(exp_ids - readiness_ids)
+        extra = sorted(readiness_ids - exp_ids)
+        if missing:
+            fail(errors, "readiness index missing experiments: " + ", ".join(missing))
+        if extra:
+            fail(errors, "readiness index has extra experiments: " + ", ".join(extra))
+        invalid_ready = sorted(row.get("id", "") for row in rows if row.get("anchor_ready") not in {"yes", "no"})
+        if invalid_ready:
+            fail(errors, "readiness index has invalid anchor_ready values: " + ", ".join(invalid_ready[:20]))
 
     program_index = KNOWLEDGE / "research_program_index.csv"
     if program_index.exists():

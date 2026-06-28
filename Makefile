@@ -9,6 +9,8 @@ GENERATED_PATHS := \
 	knowledge/experiment_catalog.csv \
 	knowledge/experiment_catalog.md \
 	knowledge/experiment_manifest.json \
+	knowledge/experiment_readiness.csv \
+	knowledge/experiment_readiness.md \
 	knowledge/readme_coverage.md \
 	knowledge/research_program_index.csv \
 	knowledge/research_program_index.md \

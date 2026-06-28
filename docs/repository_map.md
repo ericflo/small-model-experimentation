@@ -40,6 +40,7 @@ Key files:
 - `program_scorecards.md`: hand-authored next-experiment and anti-duplication scorecards.
 - `decision_records/`: strategic decisions that affect more than one experiment.
 - `experiment_catalog.md` and `.csv`: generated catalog.
+- `experiment_readiness.md` and `.csv`: generated per-experiment curation matrix for README, report, log, run-surface, smoke-command, artifact-manifest, and program-assignment readiness.
 - `tag_index.md`: generated topic index.
 - `artifact_index.md`: generated artifact inventory.
 - `artifact_manifest_index.md` and `.csv`: generated index of dataset, checkpoint, large-artifact, and reproducibility manifests.

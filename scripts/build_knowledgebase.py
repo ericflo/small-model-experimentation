@@ -54,6 +54,18 @@ STANDARD_DIRS = [
     "reports/",
 ]
 
+COMMAND_PATTERNS = [
+    r"\bpython(?:3)?\s+",
+    r"\bpython\s+-m\b",
+    r"\buv\s+run\b",
+    r"\bmake\s+",
+    r"\bbash\s+",
+    r"\bpytest\b",
+    r"\bnpm\s+",
+]
+
+SCRIPT_EXTENSIONS = {".py", ".sh", ".bash", ".ipynb", ".R", ".jl"}
+
 
 def parse_inline_list(value: str) -> list[str]:
     value = value.strip()
@@ -118,6 +130,10 @@ def read_text(path: Path, limit: int | None = None) -> str:
         return ""
     text = path.read_text(encoding="utf-8", errors="replace")
     return text if limit is None else text[:limit]
+
+
+def yes_no(value: bool) -> str:
+    return "yes" if value else "no"
 
 
 def metadata_value(path: Path, key: str) -> str:
@@ -653,6 +669,228 @@ def artifact_manifest_rows(records: list[dict[str, object]]) -> list[dict[str, s
     return rows
 
 
+def readme_status(record: dict[str, object]) -> str:
+    readme = ROOT / str(record["primary_readme"]) if record["primary_readme"] else None
+    if not readme or not readme.exists():
+        return "missing"
+    marker = "generated during repository normalization"
+    return "generated-stub" if marker in read_text(readme, 1000).lower() else "human-authored"
+
+
+def experiment_docs(record: dict[str, object]) -> str:
+    paths = []
+    if record["primary_readme"]:
+        paths.append(ROOT / str(record["primary_readme"]))
+    if record["primary_report"]:
+        paths.append(ROOT / str(record["primary_report"]))
+    return "\n".join(read_text(path, 20000) for path in paths)
+
+
+def experiment_script_paths(exp: Path) -> list[Path]:
+    paths: list[Path] = []
+    scripts = exp / "scripts"
+    if scripts.exists():
+        paths.extend(path for path in scripts.rglob("*") if path.is_file() and path.suffix in SCRIPT_EXTENSIONS)
+    for name in ["Makefile", "run.sh", "train.py", "eval.py", "evaluate.py"]:
+        path = exp / name
+        if path.exists() and path.is_file():
+            paths.append(path)
+    return sorted(set(paths))
+
+
+def has_command_signal(text: str) -> bool:
+    return any(re.search(pattern, text, flags=re.I) for pattern in COMMAND_PATTERNS)
+
+
+def has_smoke_signal(record: dict[str, object], scripts: list[Path]) -> bool:
+    haystack = experiment_docs(record).lower()
+    if "smoke" in haystack or "--smoke" in haystack:
+        return True
+    for path in scripts[:25]:
+        if "smoke" in path.name.lower():
+            return True
+        if "smoke" in read_text(path, 12000).lower():
+            return True
+    return False
+
+
+def run_surface(record: dict[str, object], scripts: list[Path]) -> str:
+    exp = ROOT / str(record["path"])
+    docs = experiment_docs(record)
+    documented = has_command_signal(docs)
+    if documented and scripts:
+        return "documented-scripts"
+    if documented:
+        return "documented-command"
+    if scripts:
+        return "scripts-undocumented"
+    if any((exp / dirname).exists() for dirname in ["src", "analysis"]):
+        return "source-or-analysis"
+    if any((exp / dirname).exists() for dirname in ["data", "runs", "reports"]):
+        return "artifact-only"
+    return "unknown"
+
+
+def recognized_artifacts(exp: Path) -> list[str]:
+    names = [name for name in ["src", "scripts", "configs", "data", "runs", "analysis", "reports"] if (exp / name).exists()]
+    names.extend(name for name in ["experiment_log.md", "checkpoint_manifest.csv"] if (exp / name).exists())
+    return names
+
+
+def readiness_rows(records: list[dict[str, object]]) -> list[dict[str, str]]:
+    manifest_rows = artifact_manifest_rows(records)
+    manifest_by_experiment: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in manifest_rows:
+        manifest_by_experiment[row["experiment_id"]].append(row)
+
+    rows: list[dict[str, str]] = []
+    for record in records:
+        exp = ROOT / str(record["path"])
+        exp_id = str(record["id"])
+        scripts = experiment_script_paths(exp)
+        status = readme_status(record)
+        report = bool(record["primary_report"])
+        log = (exp / "experiment_log.md").exists()
+        artifact_names = recognized_artifacts(exp)
+        manifests = manifest_by_experiment.get(exp_id, [])
+        manifest_kinds = sorted(set(row["kind"] for row in manifests))
+        surface = run_surface(record, scripts)
+        smoke = has_smoke_signal(record, scripts)
+        programs = [str(program) for program in record["research_programs"]]
+
+        needs: list[str] = []
+        if status == "missing":
+            needs.append("add-readme")
+        elif status == "generated-stub":
+            needs.append("replace-generated-readme")
+        if not report:
+            needs.append("add-primary-report")
+        if not log:
+            needs.append("add-experiment-log")
+        if surface in {"scripts-undocumented", "source-or-analysis", "artifact-only", "unknown"}:
+            needs.append("document-run-path")
+        if not smoke:
+            needs.append("add-smoke-command")
+        if not manifests:
+            needs.append("add-artifact-manifest")
+        if "program_review_needed" in programs:
+            needs.append("review-program-assignment")
+
+        anchor_ready = status == "human-authored" and report and bool(artifact_names) and "program_review_needed" not in programs
+
+        rows.append(
+            {
+                "id": exp_id,
+                "title": str(record["title"]),
+                "source_track": str(record["source_track"]),
+                "research_programs": ";".join(programs),
+                "readme_status": status,
+                "primary_report": str(record["primary_report"]),
+                "experiment_log": yes_no(log),
+                "run_surface": surface,
+                "smoke_command": yes_no(smoke),
+                "artifact_manifest": yes_no(bool(manifests)),
+                "manifest_kinds": ";".join(manifest_kinds),
+                "recognized_artifacts": ";".join(artifact_names),
+                "anchor_ready": yes_no(anchor_ready),
+                "needs": ";".join(needs) if needs else "none",
+            }
+        )
+    return rows
+
+
+def write_experiment_readiness(records: list[dict[str, object]]) -> None:
+    rows = readiness_rows(records)
+    fieldnames = [
+        "id",
+        "title",
+        "source_track",
+        "research_programs",
+        "readme_status",
+        "primary_report",
+        "experiment_log",
+        "run_surface",
+        "smoke_command",
+        "artifact_manifest",
+        "manifest_kinds",
+        "recognized_artifacts",
+        "anchor_ready",
+        "needs",
+    ]
+    with (KNOWLEDGE / "experiment_readiness.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+    readme_counts = Counter(row["readme_status"] for row in rows)
+    run_counts = Counter(row["run_surface"] for row in rows)
+    need_counts: Counter[str] = Counter()
+    for row in rows:
+        if row["needs"] != "none":
+            need_counts.update(row["needs"].split(";"))
+
+    lines = [
+        "# Experiment Readiness Matrix",
+        "",
+        "Generated from tracked experiment contents. Use this as a triage surface for turning individual experiment folders into reusable anchors for future research programs.",
+        "",
+        "Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.",
+        "",
+        f"- Experiments: {len(rows)}",
+        f"- Anchor-ready: {sum(1 for row in rows if row['anchor_ready'] == 'yes')}",
+        f"- Human-authored READMEs: {readme_counts['human-authored']}",
+        f"- Generated README stubs: {readme_counts['generated-stub']}",
+        f"- Primary reports: {sum(1 for row in rows if row['primary_report'])}",
+        f"- Experiment logs: {sum(1 for row in rows if row['experiment_log'] == 'yes')}",
+        f"- Smoke commands: {sum(1 for row in rows if row['smoke_command'] == 'yes')}",
+        f"- Artifact manifests: {sum(1 for row in rows if row['artifact_manifest'] == 'yes')}",
+        "",
+        "## Run Surface Counts",
+        "",
+        "| Run surface | Experiments |",
+        "| --- | ---: |",
+    ]
+    for surface, count in sorted(run_counts.items()):
+        lines.append(f"| `{surface}` | {count} |")
+
+    lines.extend(["", "## Curation Needs", "", "| Need | Experiments |", "| --- | ---: |"])
+    for need, count in sorted(need_counts.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"| `{need}` | {count} |")
+    if not need_counts:
+        lines.append("| `none` | 0 |")
+
+    lines.extend(
+        [
+            "",
+            "## Matrix",
+            "",
+            "| Ready | Experiment | Programs | README | Report | Log | Run surface | Smoke | Manifests | Needs |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for row in rows:
+        programs = row["research_programs"].replace(";", ", ")
+        report = md_link("report", row["primary_report"]) if row["primary_report"] else ""
+        manifests = row["manifest_kinds"].replace(";", ", ") if row["manifest_kinds"] else ""
+        needs = row["needs"].replace(";", ", ")
+        lines.append(
+            "| {ready} | {experiment} | {programs} | `{readme}` | {report} | {log} | `{surface}` | {smoke} | {manifests} | {needs} |".format(
+                ready=row["anchor_ready"],
+                experiment=md_link(f"`{row['id']}`", f"experiments/{row['id']}/README.md"),
+                programs=programs,
+                readme=row["readme_status"],
+                report=report,
+                log=row["experiment_log"],
+                surface=row["run_surface"],
+                smoke=row["smoke_command"],
+                manifests=manifests,
+                needs=needs,
+            )
+        )
+
+    (KNOWLEDGE / "experiment_readiness.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def write_artifact_manifest_index(records: list[dict[str, object]]) -> None:
     rows = artifact_manifest_rows(records)
     by_kind = Counter(row["kind"] for row in rows)
@@ -878,6 +1116,7 @@ def main() -> None:
     write_program_index(records)
     write_artifact_index(records)
     write_artifact_manifest_index(records)
+    write_experiment_readiness(records)
     write_source_tracks(records)
     write_json_manifest(records)
     write_claim_index(records)
