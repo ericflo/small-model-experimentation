@@ -18,6 +18,7 @@ PROGRAMS = ROOT / "research_programs"
 PROGRAM_REGISTRY = PROGRAMS / "registry.yaml"
 CLAIMS = KNOWLEDGE / "claims"
 CLAIM_LEDGER = CLAIMS / "claim_ledger.json"
+FUTURE_QUEUE = KNOWLEDGE / "future_experiment_queue.json"
 
 TAG_KEYWORDS = {
     "abi": ["abi", "bytecode", "compiler"],
@@ -1066,6 +1067,163 @@ def write_claim_index(records: list[dict[str, object]]) -> None:
         writer.writerows(csv_rows)
 
 
+def load_future_queue() -> dict[str, object]:
+    if not FUTURE_QUEUE.exists():
+        return {"candidate_programs": [], "proposals": []}
+    data = json.loads(FUTURE_QUEUE.read_text(encoding="utf-8"))
+    proposals = data.get("proposals", [])
+    if not isinstance(proposals, list):
+        raise SystemExit("knowledge/future_experiment_queue.json must contain a proposals list")
+    candidates = data.get("candidate_programs", [])
+    if not isinstance(candidates, list):
+        raise SystemExit("knowledge/future_experiment_queue.json must contain a candidate_programs list")
+    return data
+
+
+def program_title_map(candidate_programs: list[dict[str, object]]) -> dict[str, str]:
+    titles = {str(program["id"]): str(program["title"]) for program in PROGRAMS_CACHE}
+    for candidate in candidate_programs:
+        titles[str(candidate.get("id", ""))] = str(candidate.get("title", ""))
+    return titles
+
+
+def program_queue_link(program_id: str, title: str, candidate_ids: set[str]) -> str:
+    if program_id in candidate_ids:
+        return f"`{program_id}`"
+    return md_link(title or program_id, f"research_programs/{program_id}/charter.md")
+
+
+def write_future_experiment_queue() -> None:
+    data = load_future_queue()
+    candidate_programs = [item for item in data.get("candidate_programs", []) if isinstance(item, dict)]
+    proposals = [item for item in data.get("proposals", []) if isinstance(item, dict)]
+    candidate_ids = {str(item.get("id", "")) for item in candidate_programs}
+    titles = program_title_map(candidate_programs)
+    by_status = Counter(str(item.get("status", "")) for item in proposals)
+    by_priority = Counter(str(item.get("priority", "")) for item in proposals)
+    by_program: dict[str, list[dict[str, object]]] = defaultdict(list)
+    for proposal in proposals:
+        for program_id in proposal.get("programs", []):
+            by_program[str(program_id)].append(proposal)
+
+    existing_ids = {str(program["id"]) for program in PROGRAMS_CACHE}
+    existing_covered = existing_ids.intersection(by_program)
+    lines = [
+        "# Future Experiment Queue",
+        "",
+        "Generated from `knowledge/future_experiment_queue.json`. Edit the JSON source, not this file.",
+        "",
+        "This queue is intentionally broader than the imported prototype corpus. It is a launchpad for future experiments, candidate programs, infrastructure work, and falsifiable probes.",
+        "",
+        f"- Proposals: {len(proposals)}",
+        f"- Existing research programs covered: {len(existing_covered)} / {len(existing_ids)}",
+        f"- Candidate program lines: {len(candidate_programs)}",
+        "",
+        "## Status Counts",
+        "",
+        "| Status | Proposals |",
+        "| --- | ---: |",
+    ]
+    for status, count in sorted(by_status.items()):
+        lines.append(f"| `{status}` | {count} |")
+
+    lines.extend(["", "## Priority Counts", "", "| Priority | Proposals |", "| --- | ---: |"])
+    for priority, count in sorted(by_priority.items()):
+        lines.append(f"| `{priority}` | {count} |")
+
+    lines.extend(["", "## Candidate Program Lines", ""])
+    for candidate in candidate_programs:
+        lines.extend(
+            [
+                f"### {candidate.get('title', candidate.get('id', ''))}",
+                "",
+                f"- Candidate id: `{candidate.get('id', '')}`",
+                f"- Focus: {candidate.get('focus', '')}",
+                "",
+            ]
+        )
+
+    lines.extend(["## By Program", ""])
+    program_order = [str(program["id"]) for program in PROGRAMS_CACHE] + sorted(candidate_ids)
+    for program_id in program_order:
+        program_proposals = sorted(by_program.get(program_id, []), key=lambda item: str(item.get("priority", "")))
+        if not program_proposals:
+            continue
+        title = titles.get(program_id, program_id)
+        lines.extend([f"### {title}", "", f"- Proposals: {len(program_proposals)}", ""])
+        for proposal in program_proposals:
+            lines.append(
+                f"- `{proposal.get('id', '')}` (`{proposal.get('priority', '')}`, `{proposal.get('status', '')}`): {proposal.get('question', '')}"
+            )
+        lines.append("")
+
+    lines.extend(
+        [
+            "## Queue",
+            "",
+            "| Priority | Status | Effort | Proposal | Programs | Question | Next step | Source |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for proposal in proposals:
+        programs = ", ".join(
+            program_queue_link(program_id, titles.get(program_id, program_id), candidate_ids)
+            for program_id in [str(item) for item in proposal.get("programs", [])]
+        )
+        question = str(proposal.get("question", "")).replace("|", "\\|")
+        next_step = str(proposal.get("next_step", "")).replace("|", "\\|")
+        source = md_link("source", str(proposal.get("source", "")))
+        lines.append(
+            "| {priority} | {status} | {effort} | `{id}` | {programs} | {question} | {next_step} | {source} |".format(
+                priority=proposal.get("priority", ""),
+                status=proposal.get("status", ""),
+                effort=proposal.get("effort", ""),
+                id=proposal.get("id", ""),
+                programs=programs,
+                question=question,
+                next_step=next_step,
+                source=source,
+            )
+        )
+
+    (KNOWLEDGE / "future_experiment_queue.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    with (KNOWLEDGE / "future_experiment_queue.csv").open("w", newline="", encoding="utf-8") as handle:
+        fieldnames = [
+            "id",
+            "title",
+            "status",
+            "priority",
+            "effort",
+            "programs",
+            "question",
+            "hypothesis",
+            "success_signal",
+            "failure_signal",
+            "next_step",
+            "source",
+        ]
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        for proposal in proposals:
+            writer.writerow(
+                {
+                    "id": proposal.get("id", ""),
+                    "title": proposal.get("title", ""),
+                    "status": proposal.get("status", ""),
+                    "priority": proposal.get("priority", ""),
+                    "effort": proposal.get("effort", ""),
+                    "programs": ";".join(str(item) for item in proposal.get("programs", [])),
+                    "question": proposal.get("question", ""),
+                    "hypothesis": proposal.get("hypothesis", ""),
+                    "success_signal": proposal.get("success_signal", ""),
+                    "failure_signal": proposal.get("failure_signal", ""),
+                    "next_step": proposal.get("next_step", ""),
+                    "source": proposal.get("source", ""),
+                }
+            )
+
+
 def generated_readme_ids(records: list[dict[str, object]], generated: list[str]) -> list[str]:
     ids = set(generated)
     marker = "generated during repository normalization"
@@ -1120,6 +1278,7 @@ def main() -> None:
     write_source_tracks(records)
     write_json_manifest(records)
     write_claim_index(records)
+    write_future_experiment_queue()
     write_readme_gap_report(records, generated_readmes)
     print(f"indexed {len(records)} experiments")
     if generated_readmes:

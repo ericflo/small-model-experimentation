@@ -11,6 +11,8 @@ GENERATED_PATHS := \
 	knowledge/experiment_manifest.json \
 	knowledge/experiment_readiness.csv \
 	knowledge/experiment_readiness.md \
+	knowledge/future_experiment_queue.csv \
+	knowledge/future_experiment_queue.md \
 	knowledge/readme_coverage.md \
 	knowledge/research_program_index.csv \
 	knowledge/research_program_index.md \

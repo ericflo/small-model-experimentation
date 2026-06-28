@@ -12,12 +12,13 @@ Use this protocol before creating a new experiment. It is lighter than a proposa
 ## Intake Steps
 
 1. Start from [program_scorecards.md](../knowledge/program_scorecards.md).
-2. Run `make related QUERY="<rough idea>"`.
-3. Find the closest program and at least three prior anchors.
-4. Write the novelty claim as one sentence.
-5. Name the closest duplicate or near-duplicate experiment.
-6. State the control that could falsify the mechanism.
-7. Decide the evidence output before running anything.
+2. Check [future_experiment_queue.md](../knowledge/future_experiment_queue.md) for an existing queued probe or candidate program line.
+3. Run `make related QUERY="<rough idea>"`.
+4. Find the closest program and at least three prior anchors.
+5. Write the novelty claim as one sentence.
+6. Name the closest duplicate or near-duplicate experiment.
+7. State the control that could falsify the mechanism.
+8. Decide the evidence output before running anything.
 
 ## Outcomes
 
@@ -28,7 +29,7 @@ Use this protocol before creating a new experiment. It is lighter than a proposa
 
 ## Required Artifact
 
-Use [templates/idea_intake.md](../templates/idea_intake.md) for material ideas. Store completed intake notes inside the relevant experiment folder or decision record. Do not create a central pile of loose proposals unless they are intentionally being curated.
+Use [templates/idea_intake.md](../templates/idea_intake.md) for material ideas. Store completed intake notes inside the relevant experiment folder or decision record. The intentionally curated central queue is [future_experiment_queue.json](../knowledge/future_experiment_queue.json); loose proposals should either enter that schema or stay local to an experiment or decision record.
 
 For a prefilled note, run:
 

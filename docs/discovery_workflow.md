@@ -11,10 +11,11 @@ make related QUERY="visible-only selector with abstention for candidate pools"
 The command searches:
 
 - `research_programs/registry.yaml` plus program charters, backlogs, and evidence,
+- `knowledge/future_experiment_queue.csv`,
 - `knowledge/claims/index.csv`,
 - `knowledge/experiment_catalog.csv`.
 
-It returns the closest programs, claims, and experiments with matched terms.
+It returns the closest programs, queued future work, claims, and experiments with matched terms.
 
 ## Intake Note
 
@@ -30,6 +31,7 @@ Then complete the missing mechanism, control, hidden-label, and evidence-output 
 ## How To Use Results
 
 - If the top experiments already answer the uncertainty, write a synthesis update instead of a duplicate run.
+- If a queued future-work item already matches, use it as the starting proposal and update the queue when the decision changes.
 - If the top program fits, attach the experiment there.
 - If no program fits after reading scorecards and related claims, create a new program.
 - If a related claim would change status after the proposed result, update `knowledge/claims/claim_ledger.json`.

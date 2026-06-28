@@ -10,6 +10,7 @@ The imported prototype corpus is seed evidence and working examples. It is not t
 - [knowledge/research_program_index.md](knowledge/research_program_index.md) to see which experiments already inform each line.
 - [knowledge/program_scorecards.md](knowledge/program_scorecards.md) to choose what to try next and avoid duplicate variants.
 - [knowledge/experiment_readiness.md](knowledge/experiment_readiness.md) to see which experiment folders need curation before reuse.
+- [knowledge/future_experiment_queue.md](knowledge/future_experiment_queue.md) for structured future probes, infrastructure work, and candidate program lines.
 - [knowledge/claims/index.md](knowledge/claims/index.md) for structured claims with evidence links.
 - [knowledge/synthesis.md](knowledge/synthesis.md) for cross-program claims and current strategic read.
 - [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) for the full experiment inventory.

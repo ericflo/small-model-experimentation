@@ -13,6 +13,8 @@ The two imported tracks are seed evidence. The knowledgebase is organized around
 - [future_program_seeds.md](future_program_seeds.md): candidate lines not yet promoted to full programs.
 - [program_scorecards.md](program_scorecards.md): at-a-glance routing, next-experiment, and anti-duplication guidance.
 - [experiment_readiness.md](experiment_readiness.md): generated per-experiment curation and anchor-readiness matrix.
+- [future_experiment_queue.md](future_experiment_queue.md): generated queue of proposed experiments, infrastructure work, and candidate program lines.
+- [future_experiment_queue.json](future_experiment_queue.json): source of truth for the future queue.
 - [claims/index.md](claims/index.md): generated structured claim index.
 - [claims/README.md](claims/README.md): claim ledger format and narrative claim files.
 - [decision_records/README.md](decision_records/README.md): strategic pivots that affect more than one experiment.

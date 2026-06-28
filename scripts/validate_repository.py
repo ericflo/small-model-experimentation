@@ -16,7 +16,11 @@ KNOWLEDGE = ROOT / "knowledge"
 PROGRAMS = ROOT / "research_programs"
 MAX_GITHUB_FILE_BYTES = 100 * 1024 * 1024
 MIN_RESEARCH_PROGRAMS = 8
+MIN_FUTURE_PROPOSALS = 24
 CLAIM_STATUSES = {"Confirmed", "Promising", "Negative", "Open", "Retired"}
+QUEUE_STATUSES = {"ready-for-intake", "program-seed", "needs-design", "infrastructure"}
+QUEUE_PRIORITIES = {"P0", "P1", "P2"}
+QUEUE_EFFORTS = {"small", "medium", "large"}
 ARTIFACT_MANIFEST_FIELDS = ["schema_version:", "external_artifacts:", "omitted_artifacts:", "reproducibility:"]
 
 
@@ -151,6 +155,119 @@ def validate_claim_ledger(errors: list[str], program_ids: set[str], exp_ids: set
             fail(errors, "claim index ids do not match claim ledger ids")
 
 
+def validate_future_queue(errors: list[str], program_ids: set[str]) -> None:
+    source = KNOWLEDGE / "future_experiment_queue.json"
+    if not source.exists():
+        fail(errors, "missing future experiment queue: knowledge/future_experiment_queue.json")
+        return
+    try:
+        data = json.loads(source.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        fail(errors, f"future experiment queue is invalid JSON: {exc}")
+        return
+
+    candidate_programs = data.get("candidate_programs", [])
+    proposals = data.get("proposals", [])
+    if not isinstance(candidate_programs, list) or not candidate_programs:
+        fail(errors, "future experiment queue must contain candidate_programs")
+        candidate_programs = []
+    if not isinstance(proposals, list) or len(proposals) < MIN_FUTURE_PROPOSALS:
+        count = len(proposals) if isinstance(proposals, list) else 0
+        fail(errors, f"future experiment queue has {count} proposals; expected at least {MIN_FUTURE_PROPOSALS}")
+        proposals = []
+
+    candidate_ids: set[str] = set()
+    for candidate in candidate_programs:
+        if not isinstance(candidate, dict):
+            fail(errors, "future experiment queue contains non-object candidate program")
+            continue
+        candidate_id = str(candidate.get("id", ""))
+        if not candidate_id:
+            fail(errors, "future experiment queue contains candidate program without id")
+        elif candidate_id in candidate_ids:
+            fail(errors, f"future experiment queue contains duplicate candidate program id: {candidate_id}")
+        candidate_ids.add(candidate_id)
+        for field in ["title", "focus"]:
+            if not str(candidate.get(field, "")).strip():
+                fail(errors, f"future queue candidate {candidate_id} missing {field}")
+
+    required_fields = {
+        "id",
+        "title",
+        "status",
+        "priority",
+        "effort",
+        "programs",
+        "question",
+        "hypothesis",
+        "minimal_protocol",
+        "success_signal",
+        "failure_signal",
+        "expected_artifacts",
+        "next_step",
+        "avoid",
+        "source",
+    }
+    seen: set[str] = set()
+    referenced_existing_programs: set[str] = set()
+    known_programs = program_ids | candidate_ids
+    for proposal in proposals:
+        if not isinstance(proposal, dict):
+            fail(errors, "future experiment queue contains non-object proposal")
+            continue
+        proposal_id = str(proposal.get("id", ""))
+        if not proposal_id:
+            fail(errors, "future experiment queue contains proposal without id")
+        elif proposal_id in seen:
+            fail(errors, f"future experiment queue contains duplicate proposal id: {proposal_id}")
+        seen.add(proposal_id)
+
+        missing_fields = sorted(field for field in required_fields if not proposal.get(field))
+        if missing_fields:
+            fail(errors, f"future queue proposal {proposal_id} missing fields: {', '.join(missing_fields)}")
+
+        status = str(proposal.get("status", ""))
+        if status not in QUEUE_STATUSES:
+            fail(errors, f"future queue proposal {proposal_id} has invalid status: {status!r}")
+        priority = str(proposal.get("priority", ""))
+        if priority not in QUEUE_PRIORITIES:
+            fail(errors, f"future queue proposal {proposal_id} has invalid priority: {priority!r}")
+        effort = str(proposal.get("effort", ""))
+        if effort not in QUEUE_EFFORTS:
+            fail(errors, f"future queue proposal {proposal_id} has invalid effort: {effort!r}")
+
+        programs = proposal.get("programs", [])
+        if not isinstance(programs, list) or not programs:
+            fail(errors, f"future queue proposal {proposal_id} must reference at least one program")
+        else:
+            unknown = sorted(set(str(program_id) for program_id in programs) - known_programs)
+            if unknown:
+                fail(errors, f"future queue proposal {proposal_id} references unknown programs: {', '.join(unknown)}")
+            referenced_existing_programs.update(str(program_id) for program_id in programs if str(program_id) in program_ids)
+
+        artifacts = proposal.get("expected_artifacts", [])
+        if not isinstance(artifacts, list) or not artifacts:
+            fail(errors, f"future queue proposal {proposal_id} must list expected artifacts")
+
+        source_path = ROOT / str(proposal.get("source", ""))
+        if not source_path.exists():
+            fail(errors, f"future queue proposal {proposal_id} references missing source: {rel(source_path)}")
+
+    missing_programs = sorted(program_ids - referenced_existing_programs)
+    if missing_programs:
+        fail(errors, "future experiment queue has no proposal for programs: " + ", ".join(missing_programs))
+
+    queue_csv = KNOWLEDGE / "future_experiment_queue.csv"
+    if queue_csv.exists():
+        with queue_csv.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        if len(rows) != len(proposals):
+            fail(errors, f"future queue csv row count {len(rows)} != proposal count {len(proposals)}")
+        indexed_ids = {row["id"] for row in rows}
+        if indexed_ids != seen:
+            fail(errors, "future queue csv ids do not match source proposal ids")
+
+
 def experiment_has_artifact_manifest(exp: Path) -> bool:
     candidates = [
         exp / "reports" / "artifact_manifest.yaml",
@@ -211,6 +328,9 @@ def validate() -> int:
         KNOWLEDGE / "artifact_manifest_index.csv",
         KNOWLEDGE / "experiment_readiness.md",
         KNOWLEDGE / "experiment_readiness.csv",
+        KNOWLEDGE / "future_experiment_queue.json",
+        KNOWLEDGE / "future_experiment_queue.md",
+        KNOWLEDGE / "future_experiment_queue.csv",
         KNOWLEDGE / "claims" / "claim_ledger.json",
         KNOWLEDGE / "claims" / "index.md",
         KNOWLEDGE / "claims" / "index.csv",
@@ -389,6 +509,7 @@ def validate() -> int:
             fail(errors, "artifact manifest index missing paths: " + ", ".join(missing_manifest_paths[:20]))
 
     validate_claim_ledger(errors, set(program_ids), exp_ids)
+    validate_future_queue(errors, set(program_ids))
 
     gitattributes = ROOT / ".gitattributes"
     if not gitattributes.exists():

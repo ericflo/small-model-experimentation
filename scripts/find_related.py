@@ -132,6 +132,22 @@ def document_text(kind: str, row: dict[str, str]) -> str:
         return " ".join([row["id"], row["title"], row["focus"], row["tags"], row["text"]])
     if kind == "claim":
         return " ".join([row["id"], row["title"], row["status"], row["programs"], row["evidence"], row["summary"], row["implication"]])
+    if kind == "future_queue":
+        return " ".join(
+            [
+                row["id"],
+                row["title"],
+                row["status"],
+                row["priority"],
+                row["effort"],
+                row["programs"],
+                row["question"],
+                row["hypothesis"],
+                row["success_signal"],
+                row["failure_signal"],
+                row["next_step"],
+            ]
+        )
     return " ".join([row["id"], row["title"], row["tags"], row["research_programs"], row["summary"]])
 
 
@@ -168,13 +184,15 @@ def load_related(query: str, top: int) -> dict[str, list[dict[str, object]]]:
     programs = scored("program", load_programs(), query_terms)[:top]
     claims = scored("claim", load_csv(ROOT / "knowledge" / "claims" / "index.csv"), query_terms)[:top]
     experiments = scored("experiment", load_csv(ROOT / "knowledge" / "experiment_catalog.csv"), query_terms)[:top]
-    return {"programs": programs, "claims": claims, "experiments": experiments}
+    future_queue = scored("future_queue", load_csv(ROOT / "knowledge" / "future_experiment_queue.csv"), query_terms)[:top]
+    return {"programs": programs, "claims": claims, "experiments": experiments, "future_queue": future_queue}
 
 
 def md_result(query: str, results: dict[str, list[dict[str, object]]]) -> str:
     lines = ["# Related Work", "", f"Query: {query}", ""]
     sections = [
         ("Programs", "programs", ["id", "title", "focus", "path"]),
+        ("Queued Future Work", "future_queue", ["id", "title", "priority", "status", "programs", "next_step"]),
         ("Claims", "claims", ["id", "title", "status", "programs"]),
         ("Experiments", "experiments", ["id", "title", "research_programs", "primary_report"]),
     ]
@@ -200,6 +218,10 @@ def md_result(query: str, results: dict[str, list[dict[str, object]]]) -> str:
                 implication = str(row.get("implication", ""))
                 if implication:
                     lines.append(f"- implication: {implication}")
+            if key == "future_queue":
+                question = str(row.get("question", ""))
+                if question:
+                    lines.append(f"- question: {question}")
             lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
@@ -208,6 +230,7 @@ def write_intake(path: Path, query: str, results: dict[str, list[dict[str, objec
     programs = results["programs"]
     claims = results["claims"]
     experiments = results["experiments"]
+    future_queue = results.get("future_queue", [])
     lines = [
         "# Idea Intake",
         "",
@@ -216,6 +239,7 @@ def write_intake(path: Path, query: str, results: dict[str, list[dict[str, objec
         f"- Program: {programs[0]['id'] if programs else ''}",
         "- Existing or new program: existing",
         "- Closest program scorecard reviewed: knowledge/program_scorecards.md",
+        f"- Related future queue item: {future_queue[0]['id'] if future_queue else ''}",
         "",
         "## Prior Evidence",
         "",
