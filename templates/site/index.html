@@ -15,13 +15,13 @@
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="topbar">
-      <div class="brand">
+      <a class="brand" href="#overview">
         <span class="brand-mark" aria-hidden="true"></span>
-        <div class="brand-text">
-          <p class="kicker">Research Atlas</p>
-          <h1>Small Model Experimentation</h1>
-        </div>
-      </div>
+        <span class="brand-text">
+          <span class="kicker">Research Atlas</span>
+          <span class="wordmark">Small Model Experimentation</span>
+        </span>
+      </a>
       <nav class="topnav" aria-label="Primary">
         <a href="#overview">Overview</a>
         <a href="#programs">Programs</a>
@@ -33,12 +33,32 @@
       </nav>
     </header>
 
+    <!-- Sticky filter rail: appears once the hero controls scroll out of view -->
+    <div id="filterRail" class="filter-rail" aria-label="Active filters">
+      <div class="rail-controls">
+        <label class="rail-search">
+          <span class="sr-only">Search</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input id="globalSearchTop" type="search" autocomplete="off" placeholder="Search the atlas…">
+        </label>
+        <select id="programFilterTop" aria-label="Program filter"></select>
+        <select id="readyFilterTop" aria-label="Readiness filter">
+          <option value="all">All readiness</option>
+          <option value="yes">Anchor-ready</option>
+          <option value="no">Needs curation</option>
+        </select>
+        <select id="needFilterTop" aria-label="Curation need filter"></select>
+      </div>
+      <div id="filterChips" class="filter-chips" aria-live="polite"></div>
+      <button id="resetFiltersTop" class="rail-reset" type="button">Reset</button>
+    </div>
+
     <main id="main">
       <!-- ============================ HERO ============================ -->
       <section id="overview" class="band hero-band">
         <div class="hero-copy">
           <p class="eyebrow accent" id="heroStamp">Generated from the repository knowledgebase</p>
-          <h2>The small-model research corpus, <span class="hl">mapped</span> and searchable.</h2>
+          <h1>The small-model research corpus, <span class="hl">mapped</span> and searchable.</h1>
           <p class="lede" id="heroLede">
             Every experiment, research program, claim under test, and queued probe — indexed,
             cross-linked, and explorable from one page.
@@ -65,43 +85,48 @@
               <span>Curation need</span>
               <select id="needFilter"></select>
             </label>
-            <p class="field-hint" id="filterStatus">Filters apply across every panel below.</p>
+            <div class="controls-foot">
+              <p class="field-hint" id="filterStatus">Filters apply across every panel below.</p>
+              <button id="resetFilters" class="reset-link" type="button">Reset filters</button>
+            </div>
           </form>
         </div>
         <div id="metricGrid" class="metric-grid" aria-label="Corpus metrics"></div>
       </section>
 
       <!-- ====================== PORTFOLIO MAP ======================== -->
-      <section class="band tight" aria-label="Portfolio overview">
+      <section id="map" class="band tight" aria-labelledby="mapHeading">
+        <h2 id="mapHeading" class="sr-only">Portfolio overview</h2>
         <div class="chart-strip">
-          <div class="tool-panel">
+          <div class="tool-panel panel-signature">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Corpus map</p>
-                <h2>Programs by weight &amp; readiness</h2>
+                <h3>Programs by weight &amp; readiness</h3>
               </div>
-              <button id="resetFilters" class="drawer-close" type="button" title="Reset all filters" aria-label="Reset all filters">↺</button>
             </div>
             <div id="programNetwork" class="visual network-visual"></div>
             <div id="programLegend" class="legend" aria-label="Program legend"></div>
           </div>
-          <div class="tool-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Readiness</p>
-                <h2>Anchor status</h2>
+          <div class="chart-side">
+            <div class="tool-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Readiness</p>
+                  <h3>Anchor status</h3>
+                </div>
               </div>
+              <div id="readinessDonut" class="visual"></div>
             </div>
-            <div id="readinessDonut" class="visual"></div>
-          </div>
-          <div class="tool-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Future queue</p>
-                <h2>Priority mix</h2>
+            <div class="tool-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Future queue</p>
+                  <h3>Priority mix</h3>
+                </div>
               </div>
+              <div id="queuePriorityChart" class="visual"></div>
             </div>
-            <div id="queuePriorityChart" class="visual"></div>
           </div>
         </div>
       </section>
@@ -123,21 +148,21 @@
             <p class="eyebrow">Experiment explorer</p>
             <h2>Search, filter, and inspect the corpus</h2>
           </div>
-          <div id="experimentCount" class="result-count"></div>
+          <div id="experimentCount" class="result-count" aria-live="polite"></div>
         </div>
         <div class="explorer-layout">
           <div class="tool-panel">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Distribution</p>
-                <h2>Run surface</h2>
+                <h3>Run surface</h3>
               </div>
             </div>
             <div id="runSurfaceChart" class="visual"></div>
             <div class="panel-heading" style="border-top:1px solid var(--line-soft)">
               <div>
                 <p class="eyebrow">Scale</p>
-                <h2>Files per experiment</h2>
+                <h3>Files per experiment</h3>
               </div>
             </div>
             <div id="experimentScatter" class="visual"></div>
@@ -160,7 +185,7 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Top gaps</p>
-                <h2>Curation needs across the corpus</h2>
+                <h3>Curation needs across the corpus</h3>
               </div>
             </div>
             <div id="needsChart" class="visual"></div>
@@ -169,7 +194,7 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Program heatmap</p>
-                <h2>Readiness by program</h2>
+                <h3>Readiness by program</h3>
               </div>
             </div>
             <div id="programHeatmap" class="visual"></div>
@@ -184,7 +209,7 @@
             <p class="eyebrow">Future experiment queue</p>
             <h2>A structured launchpad for new work</h2>
           </div>
-          <div id="queueCount" class="result-count"></div>
+          <div id="queueCount" class="result-count" aria-live="polite"></div>
         </div>
         <div id="queueBoard" class="queue-board"></div>
       </section>
@@ -201,7 +226,7 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Evidence graph</p>
-                <h2>Claims linked to programs</h2>
+                <h3>Claims linked to programs</h3>
               </div>
             </div>
             <div id="claimGraph" class="visual"></div>
@@ -222,7 +247,7 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Manifest types</p>
-                <h2>Artifact coverage</h2>
+                <h3>Artifact coverage</h3>
               </div>
             </div>
             <div id="artifactKindChart" class="visual"></div>
@@ -231,7 +256,7 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">File extensions</p>
-                <h2>Corpus texture</h2>
+                <h3>Corpus texture</h3>
               </div>
             </div>
             <div id="extensionChart" class="visual"></div>
@@ -240,7 +265,7 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Narrative</p>
-                <h2>From shared memory</h2>
+                <h3>From shared memory</h3>
               </div>
             </div>
             <div id="narrativeCards" class="narrative-list"></div>
@@ -256,7 +281,7 @@
     </footer>
 
     <div id="drawerScrim" class="scrim"></div>
-    <aside id="detailDrawer" class="drawer" aria-hidden="true" aria-label="Details" role="dialog" aria-modal="true">
+    <aside id="detailDrawer" class="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog" aria-modal="true">
       <div class="drawer-head">
         <div>
           <p class="drawer-eyebrow" id="drawerEyebrow"></p>
