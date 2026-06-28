@@ -31,6 +31,7 @@ The README should include:
 - Full command.
 - Expected primary metrics.
 - Artifact plan.
+- External or omitted artifact manifest plan.
 
 ## 2. Make The Smoke Path Real
 
@@ -48,7 +49,7 @@ Prefer controls that test the mechanism:
 
 ## 4. Analyze
 
-Put derived outputs under `analysis/` and final narrative under `reports/`. Preserve raw run outputs when they are small enough or write a manifest for external artifacts.
+Put derived outputs under `analysis/` and final narrative under `reports/`. Preserve raw run outputs when they are small enough or update `reports/artifact_manifest.yaml` for external or omitted artifacts.
 
 ## 5. Update Shared Knowledge
 

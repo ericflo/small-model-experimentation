@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "replace_me"
+external_artifacts:
+  # - name: "trained adapter"
+  #   storage: "/workspace/large_artifacts/replace_me/models/adapter"
+  #   required_for: "rerun trained-model evaluation"
+  #   checksum: ""
+  #   regenerate: "python scripts/run.py"
+omitted_artifacts:
+  # - path: "reports/adapters/"
+  #   reason: "trained adapter output; do not check into git"
+reproducibility:
+  smoke_command: "python scripts/run.py --smoke"
+  full_command: "python scripts/run.py"
+  required_external_artifacts: []
+notes: "Update this before reporting results."

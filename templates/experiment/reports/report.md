@@ -15,3 +15,7 @@
 ## Interpretation
 
 ## Next Experiments
+
+## Artifact Manifest
+
+Update `artifact_manifest.yaml` before considering this result complete.

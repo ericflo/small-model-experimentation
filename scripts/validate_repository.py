@@ -17,6 +17,7 @@ PROGRAMS = ROOT / "research_programs"
 MAX_GITHUB_FILE_BYTES = 100 * 1024 * 1024
 MIN_RESEARCH_PROGRAMS = 8
 CLAIM_STATUSES = {"Confirmed", "Promising", "Negative", "Open", "Retired"}
+ARTIFACT_MANIFEST_FIELDS = ["schema_version:", "external_artifacts:", "omitted_artifacts:", "reproducibility:"]
 
 
 def rel(path: Path) -> str:
@@ -150,6 +151,35 @@ def validate_claim_ledger(errors: list[str], program_ids: set[str], exp_ids: set
             fail(errors, "claim index ids do not match claim ledger ids")
 
 
+def experiment_has_artifact_manifest(exp: Path) -> bool:
+    candidates = [
+        exp / "reports" / "artifact_manifest.yaml",
+        exp / "artifact_manifest.yaml",
+        exp / "large_artifacts_manifest.md",
+        exp / "checkpoint_manifest.csv",
+    ]
+    return any(candidate.exists() for candidate in candidates)
+
+
+def is_artifact_manifest_file(path: Path) -> bool:
+    name = path.name
+    if name in {"artifact_manifest.yaml", "large_artifacts_manifest.md", "checkpoint_manifest.csv", "split_manifest.json"}:
+        return True
+    if name.endswith(".manifest.json") or name.endswith("_manifest.json"):
+        return True
+    return False
+
+
+def validate_standard_artifact_manifest(errors: list[str], path: Path, exp: Path) -> None:
+    text = path.read_text(encoding="utf-8", errors="replace")
+    for field in ARTIFACT_MANIFEST_FIELDS:
+        if field not in text:
+            fail(errors, f"artifact manifest missing {field} in {rel(path)}")
+    expected = f'experiment_id: "{exp.name}"'
+    if "experiment_id:" in text and expected not in text:
+        fail(errors, f"artifact manifest experiment_id mismatch in {rel(path)}; expected {expected}")
+
+
 def validate() -> int:
     errors: list[str] = []
 
@@ -177,11 +207,14 @@ def validate() -> int:
         KNOWLEDGE / "research_program_index.md",
         KNOWLEDGE / "research_program_index.csv",
         KNOWLEDGE / "program_scorecards.md",
+        KNOWLEDGE / "artifact_manifest_index.md",
+        KNOWLEDGE / "artifact_manifest_index.csv",
         KNOWLEDGE / "claims" / "claim_ledger.json",
         KNOWLEDGE / "claims" / "index.md",
         KNOWLEDGE / "claims" / "index.csv",
         KNOWLEDGE / "decision_records" / "README.md",
         ROOT / "docs" / "idea_intake_protocol.md",
+        ROOT / "docs" / "artifact_policy.md",
         ROOT / "scripts" / "scaffold_research_program.py",
         ROOT / "scripts" / "scaffold_experiment.py",
         ROOT / "scripts" / "check_markdown_links.py",
@@ -198,6 +231,7 @@ def validate() -> int:
         ROOT / "templates" / "research_program" / "evidence.md",
         ROOT / "templates" / "experiment" / "README.md",
         ROOT / "templates" / "experiment" / "metadata.yaml",
+        ROOT / "templates" / "experiment" / "reports" / "artifact_manifest.yaml",
         ROOT / "templates" / "idea_intake.md",
         ROOT / "templates" / "decision_record.md",
     ]:
@@ -235,6 +269,8 @@ def validate() -> int:
                 fail(errors, f"metadata path mismatch in {rel(metadata)}: {meta_path!r} != {rel(exp)!r}")
             if not meta_source_track:
                 fail(errors, f"metadata missing source_track: {rel(metadata)}")
+            if meta_source_track == "new" and not experiment_has_artifact_manifest(exp):
+                fail(errors, f"new experiment missing artifact manifest: {rel(exp)}")
             if not meta_programs:
                 fail(errors, f"metadata missing research_programs: {rel(metadata)}")
             unknown_programs = sorted(set(meta_programs) - set(program_ids) - {"program_review_needed"})
@@ -244,6 +280,11 @@ def validate() -> int:
         useful_files = [name for name in ["experiment_log.md", "checkpoint_manifest.csv"] if (exp / name).exists()]
         if not useful_dirs and not useful_files:
             fail(errors, f"experiment has no recognized artifacts: {rel(exp)}")
+        standard_manifest = exp / "reports" / "artifact_manifest.yaml"
+        if standard_manifest.exists():
+            validate_standard_artifact_manifest(errors, standard_manifest, exp)
+        if (exp / "reports" / "adapters").exists() and not experiment_has_artifact_manifest(exp):
+            fail(errors, f"adapter directory exists without an external artifact manifest: {rel(exp)}")
 
     for pattern in ["*:Zone.Identifier", "*.pyc"]:
         for path in ROOT.rglob(pattern):
@@ -293,6 +334,23 @@ def validate() -> int:
         missing_programs = sorted(set(program_ids) - indexed_programs)
         if missing_programs:
             fail(errors, "program index has no experiment rows for programs: " + ", ".join(missing_programs))
+
+    artifact_manifest_index = KNOWLEDGE / "artifact_manifest_index.csv"
+    if artifact_manifest_index.exists():
+        with artifact_manifest_index.open(newline="", encoding="utf-8") as handle:
+            manifest_rows = list(csv.DictReader(handle))
+        indexed_paths = {row["path"] for row in manifest_rows}
+        expected_paths = set()
+        for exp in experiments:
+            for path in exp.rglob("*"):
+                if path.is_file() and ".git" not in path.parts and is_artifact_manifest_file(path):
+                    expected_paths.add(rel(path))
+            standard = exp / "reports" / "artifact_manifest.yaml"
+            if standard.exists():
+                expected_paths.add(rel(standard))
+        missing_manifest_paths = sorted(expected_paths - indexed_paths)
+        if missing_manifest_paths:
+            fail(errors, "artifact manifest index missing paths: " + ", ".join(missing_manifest_paths[:20]))
 
     validate_claim_ledger(errors, set(program_ids), exp_ids)
 

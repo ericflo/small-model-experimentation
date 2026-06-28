@@ -608,6 +608,81 @@ def write_artifact_index(records: list[dict[str, object]]) -> None:
     (KNOWLEDGE / "artifact_index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def manifest_kind(path: Path) -> str:
+    name = path.name
+    if name == "artifact_manifest.yaml":
+        return "standard-artifact"
+    if name == "large_artifacts_manifest.md":
+        return "large-artifact"
+    if name == "checkpoint_manifest.csv":
+        return "checkpoint"
+    if name == "dataset_manifest.json":
+        return "dataset"
+    if name.endswith(".manifest.json"):
+        return "run-data"
+    if "manifest" in name:
+        return "other"
+    return "unknown"
+
+
+def is_artifact_manifest_file(path: Path) -> bool:
+    name = path.name
+    if name in {"artifact_manifest.yaml", "large_artifacts_manifest.md", "checkpoint_manifest.csv", "split_manifest.json"}:
+        return True
+    if name.endswith(".manifest.json") or name.endswith("_manifest.json"):
+        return True
+    return False
+
+
+def artifact_manifest_rows(records: list[dict[str, object]]) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    record_ids = {str(record["id"]) for record in records}
+    for exp in sorted(path for path in EXPERIMENTS.iterdir() if path.is_dir() and path.name in record_ids):
+        for path in sorted(exp.rglob("*")):
+            if not path.is_file() or excluded(path.relative_to(ROOT)):
+                continue
+            if not is_artifact_manifest_file(path):
+                continue
+            rows.append(
+                {
+                    "experiment_id": exp.name,
+                    "kind": manifest_kind(path),
+                    "path": rel(path),
+                }
+            )
+    return rows
+
+
+def write_artifact_manifest_index(records: list[dict[str, object]]) -> None:
+    rows = artifact_manifest_rows(records)
+    by_kind = Counter(row["kind"] for row in rows)
+    by_experiment = Counter(row["experiment_id"] for row in rows)
+    lines = [
+        "# Artifact Manifest Index",
+        "",
+        "Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.",
+        "",
+        f"- Experiments with manifests: {len(by_experiment)}",
+        f"- Manifest files: {len(rows)}",
+        "",
+        "## Manifest Types",
+        "",
+        "| Type | Files |",
+        "| --- | ---: |",
+    ]
+    for kind, count in sorted(by_kind.items()):
+        lines.append(f"| `{kind}` | {count} |")
+    lines.extend(["", "## Manifests", "", "| Experiment | Type | Manifest |", "| --- | --- | --- |"])
+    for row in rows:
+        lines.append(f"| `{row['experiment_id']}` | `{row['kind']}` | {md_link('manifest', row['path'])} |")
+    (KNOWLEDGE / "artifact_manifest_index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    with (KNOWLEDGE / "artifact_manifest_index.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["experiment_id", "kind", "path"], lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def write_source_tracks(records: list[dict[str, object]]) -> None:
     lines = [
         "# Source Track Provenance",
@@ -802,6 +877,7 @@ def main() -> None:
     write_tag_index(records)
     write_program_index(records)
     write_artifact_index(records)
+    write_artifact_manifest_index(records)
     write_source_tracks(records)
     write_json_manifest(records)
     write_claim_index(records)

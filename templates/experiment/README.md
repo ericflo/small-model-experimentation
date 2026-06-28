@@ -62,3 +62,4 @@ What changed after this result? What is now more likely, less likely, or still u
 - `runs/`
 - `analysis/`
 - `reports/`
+- `reports/artifact_manifest.yaml`

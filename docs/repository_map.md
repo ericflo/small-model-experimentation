@@ -42,6 +42,7 @@ Key files:
 - `experiment_catalog.md` and `.csv`: generated catalog.
 - `tag_index.md`: generated topic index.
 - `artifact_index.md`: generated artifact inventory.
+- `artifact_manifest_index.md` and `.csv`: generated index of dataset, checkpoint, large-artifact, and reproducibility manifests.
 - `source_tracks.md` and `.csv`: original raw-track provenance.
 - `readme_coverage.md`: imported README coverage and generated stubs.
 

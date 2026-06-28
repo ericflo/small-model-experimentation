@@ -15,6 +15,7 @@ The imported prototype corpus is seed evidence and working examples. It is not t
 - [docs/agent_handbook.md](docs/agent_handbook.md) for future agents.
 - [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md) before adding a new experiment.
 - [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md) before adding a new line of inquiry.
+- [docs/artifact_policy.md](docs/artifact_policy.md) before adding large outputs, adapters, or external artifacts.
 - [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md) before turning a rough idea into a run.
 - [docs/quality_gates.md](docs/quality_gates.md) for the checks that protect the repository shape.
 

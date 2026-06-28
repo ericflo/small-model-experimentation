@@ -34,4 +34,4 @@ Every result-bearing experiment should answer:
 
 ## Artifact Policy
 
-Keep small reproducible artifacts in git. Do not check trained adapter directories into git. Put externally stored artifacts in a manifest that names the path, checksum when available, and how to regenerate or retrieve them.
+Keep small reproducible artifacts in git. Do not check trained adapter directories into git. New experiments should keep `reports/artifact_manifest.yaml` current; imported experiments may use historical large-artifact or checkpoint manifests. Put externally stored artifacts in a manifest that names the path, checksum when available, and how to regenerate or retrieve them.

@@ -90,6 +90,11 @@ def write_report(exp_dir: Path, title: str) -> None:
     report = report.replace("# Report", f"# {title} Report", 1)
     (exp_dir / "reports" / "report.md").write_text(report, encoding="utf-8")
 
+    artifact_template = TEMPLATE / "reports" / "artifact_manifest.yaml"
+    artifact_manifest = artifact_template.read_text(encoding="utf-8")
+    artifact_manifest = artifact_manifest.replace('experiment_id: "replace_me"', f'experiment_id: "{exp_dir.name}"', 1)
+    (exp_dir / "reports" / "artifact_manifest.yaml").write_text(artifact_manifest, encoding="utf-8")
+
 
 def write_run_script(exp_dir: Path, experiment_id: str) -> None:
     run_py = exp_dir / "scripts" / "run.py"

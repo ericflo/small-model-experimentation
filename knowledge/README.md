@@ -18,5 +18,6 @@ The two imported tracks are seed evidence. The knowledgebase is organized around
 - [experiment_catalog.md](experiment_catalog.md): generated experiment table.
 - [tag_index.md](tag_index.md): generated topic index.
 - [artifact_index.md](artifact_index.md): generated artifact inventory.
+- [artifact_manifest_index.md](artifact_manifest_index.md): generated index of experiment-local artifact manifests.
 
 Generated files should be refreshed with `make catalog`, not hand-edited. Run `make check` before committing so generated indexes and validation stay aligned.

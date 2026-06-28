@@ -24,6 +24,7 @@
 
 - No trained adapters checked in:
 - Large artifacts are absent, LFS-tracked, or externally manifested:
+- `reports/artifact_manifest.yaml` or historical manifest updated when needed:
 
 ## Checks
 
