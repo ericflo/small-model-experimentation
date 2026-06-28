@@ -1,0 +1,9 @@
+task_id,family,method,budget,selected_indices,row_exact,full_task_exact,predictions_json
+City.000004,City,qwen_choose1_trace,1,[0],,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}]"
+City.000004,City,qwen_choose3_trace,3,"[0, 1, 2]",,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}, {""step"": 1, ""choice"": 1, ""fallback"": true, ""raw"": """"}, {""step"": 2, ""choice"": 2, ""fallback"": true, ""raw"": """"}]"
+Email.000006,Email,qwen_choose1_trace,1,[0],,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}]"
+Email.000006,Email,qwen_choose3_trace,3,"[0, 1, 2]",,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}, {""step"": 1, ""choice"": 1, ""fallback"": true, ""raw"": """"}, {""step"": 2, ""choice"": 2, ""fallback"": true, ""raw"": """"}]"
+Name.000015,Name,qwen_choose1_trace,1,[0],,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}]"
+Name.000015,Name,qwen_choose3_trace,3,"[0, 1, 2]",,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}, {""step"": 1, ""choice"": 1, ""fallback"": true, ""raw"": """"}, {""step"": 2, ""choice"": 2, ""fallback"": true, ""raw"": """"}]"
+Name.000016,Name,qwen_choose1_trace,1,[0],,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}]"
+Name.000016,Name,qwen_choose3_trace,3,"[0, 1, 2]",,False,"[{""step"": 0, ""choice"": 0, ""fallback"": true, ""raw"": """"}, {""step"": 1, ""choice"": 1, ""fallback"": true, ""raw"": """"}, {""step"": 2, ""choice"": 2, ""fallback"": true, ""raw"": """"}]"

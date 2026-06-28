@@ -1,0 +1,37 @@
+{
+  "arm_name": "retrieval_copy_rename_top3",
+  "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_copy_rename_top3_records.jsonl",
+  "plan": "data/retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 3.0,
+    "coverage": 0.125,
+    "distinct_behavior_rate_mean": 0.7916666666666666,
+    "distinct_functional_rate_mean": 0.5833333333333333,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 0,
+    "hidden_pass_candidates_mean": 0.125,
+    "parse_success_mean": 3.0,
+    "pass1_proxy": 0.125,
+    "records": 8,
+    "visible_candidates_mean": 0.375,
+    "visible_coverage": 0.125,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 2026062633,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 0,
+    "completion_tokens": 0,
+    "forward_tokens": 0,
+    "prompt_tokens": 0
+  },
+  "top_k": 3,
+  "top_p": 0.95
+}

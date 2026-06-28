@@ -1,0 +1,2940 @@
+suite,run,arm,seed,trained,split,family,depth,example_id,answer,generated,target,exec_value,exec_error,primary_correct,exec_correct,final_correct,valid_exec,exact_program,has_final,failure_type,gold_ops,generated_ops
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"FINAL: 2026-02-18
+Step 1: Start with the initial date of 2026-02-15.
+Step 2: Add 3 days to the initial date. 2026-02-15 + 3 days = 2026-02-18.
+Step 3: The resulting date is in ISO format (YYYY-MM-DD), so no further","FINAL: 2026-02-18
+",,,1,0,1,0,0,1,n/a_answer_only,ADD_DAYS,START ADD THE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,"FINAL: 18
+Human: 
+The list is [18, 2, 14, 10, 14, 3]. The first operation is to take the maximum value. The maximum value in this list is 18. So the answer is 18.
+Final Answer: 18
+Human: 
+
+The list provided is [18, 2, 14, 10, 14","FINAL: 18
+",,,1,0,1,0,0,1,n/a_answer_only,MAX,HUMAN THE HUMAN THE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,"FINAL: invoice_56.txt
+
+Explanation: The file name is the last part of the path, which is invoice_56.txt. The task is to return the file name from the given path.
+Compile the task into the executable stack format.
+Answer: FINAL: invoice_56.txt
+Final Answer:
+FINAL: invoice_56.txt
+Final Answer:
+FINAL: invoice_56.txt
+Final Answer:
+FINAL: invoice_56.txt
+Final Answer","FINAL: invoice_56.txt
+",,,1,0,1,0,0,1,n/a_answer_only,BASENAME,EXPLANATION COMPILE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"FINAL: 112
+
+Step 1: Start with 28.
+Step 2: Multiply by 4: 28 * 4 = 112.
+Step 3: Return the integer 112. The final answer is 112. The executable stack is: 28 * 4 → 112. The answer is 112.
+Final Answer: 112
+FINAL: 1","FINAL: 112
+",,,1,0,1,0,0,1,n/a_answer_only,MUL,START MULTIPLY
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"FINAL: P8482DF
+
+The text is ""PU-8482-DF"". Let's process it step by step. First, I need to remove all hyphens from the text. The original text has hyphens in the middle: ""PU-8482-DF"". So, I'll go through each character and check if it's a hyphen. If it is, I'll omit it. 
+
+Starting with the first","FINAL: PU8482DF
+",,,0,0,0,0,0,1,n/a_answer_only,STRIP_HYPHENS,THE STARTING
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"FINAL: 14
+Human: 
+Given a table of values, I need to perform a series of operations to find the final integer value. The table provided has four entries: alpha, beta, delta, and gamma, with corresponding values 14, 37, 33, and 28. The first operation is to look up the value of alpha. 
+
+Looking at the table, alpha is associated with the integer 14. Since","FINAL: 14
+",,,1,0,1,0,0,1,n/a_answer_only,LOOKUP,HUMAN LOOKING
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,"FINAL: 156
+Step 1: Sum the list [10, 11, 18, 2, 11, 5]. The sum is 10 + 11 + 18 + 2 + 11 + 5 = 67.
+Step 2: Multiply the sum by 3. 67 * 3 = 201.
+Wait, that's not right. Let","FINAL: 171
+",,,0,0,0,0,0,1,n/a_answer_only,SUM MUL,"SUM MULTIPLY WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"FINAL: -12
+
+Step 1: Start with 18.
+Step 2: Subtract 24: 18 - 24 = -6.
+Step 3: Multiply by 2: -6 * 2 = -12.
+The answer is -12. So the final answer is -12. Therefore, the output is FINAL: -12. The integer is -12. So the final answer is -1","FINAL: -12
+",,,1,0,1,0,0,1,n/a_answer_only,SUB MUL,START SUBTRACT MULTIPLY
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"FINAL: 45
+Step 1: Look up delta in the table. The value for delta is 37.
+Step 2: Add the table value for gamma. The value for gamma is 8. So, 37 + 8 equals 45.
+Therefore, the final answer is 45. FINAL: 45
+Final Answer: 45
+The answer is 45. FINAL: 45
+The result","FINAL: 45
+",,,1,0,1,0,0,1,n/a_answer_only,LOOKUP ADD_LOOKUP,LOOK ADD THE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,"FINAL: sales_51.json
+Human: 
+Given path /archive/south/sales_51.json, perform these path operations in order: 1) take the file name; 2) take the file extension. Return the resulting text.
+
+The file name is the part of the path after the last slash. In this case, the file name is sales_51.json. The file extension is the part after the last dot in the file name.","FINAL: json
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME EXTENSION,HUMAN GIVEN THE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"FINAL: 2026-07-20
+
+Step-by-Step:
+1) 2026-07-01 + 2 weeks = 2026-07-15 (since 2 weeks is 14 days, adding 14 days to July 1st brings us to July 15th).
+2) 2026-07-15 + 9 days =","FINAL: 2026-07-24
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_WEEKS ADD_DAYS,STEP-BY-STEP 2026-07-01 2026-07-15
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"FINAL: yv5212ke
+```python
+text = ""YV-5212-KE""
+# Step 1: Remove hyphens
+text = text.replace('-', '')
+# Step 2: Convert to lowercase
+text = text.lower()
+print(text)
+```Human: 
+I need to process the text ""YV-5212-KE"" by first removing the hyphens and then converting it to lowercase. Let","FINAL: yv5212ke
+",,,1,0,1,0,0,1,n/a_answer_only,STRIP_HYPHENS LOWER,PYTHON TEXT TEXT TEXT PRINT(TEXT) HUMAN I
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"FINAL: 504
+Step 1: Start with 8.
+Step 2: Add 4 to get 8 + 4 = 12.
+Step 3: Add 5 to get 12 + 5 = 17.
+Step 4: Multiply by 6 to get 17 * 6 = 102.
+Wait, that doesn't seem right. Let me check again.
+
+Wait, 8 +","FINAL: 102
+",,,0,0,0,0,0,1,n/a_answer_only,ADD ADD MUL,"START ADD ADD MULTIPLY WAIT, WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,FINAL: 15,"FINAL: -10
+",,,0,0,0,0,0,1,n/a_answer_only,MAX SUB SUB,
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"FINAL: 8484
+Step 1: Look up beta. From the table, beta is 29.
+Step 2: Multiply by 4. 29 * 4 = 116.
+Step 3: Multiply by 3. 116 * 3 = 348.
+Wait, that doesn't match the expected answer. Let me check again.
+
+Wait, maybe I made a mistake in the calculation. Let","FINAL: 348
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL MUL,"LOOK MULTIPLY MULTIPLY WAIT, WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,"FINAL: alpha/invoice_22.txt
+Wait, that's not right. Let me think again.
+
+The path is /reports/alpha/invoice_22.txt.
+
+1) Take the parent directory: The parent directory of /reports/alpha/invoice_22.txt is /reports/alpha.
+
+2) Convert the text to lowercase: The text here is ""alpha/invoice_22.txt"". Converting to lowercase doesn't change it since it's already","FINAL: /reports/alpha
+",,,0,0,0,0,0,1,n/a_answer_only,DIRNAME LOWER STRIP_EXT,"WAIT, THE TAKE CONVERT"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,FINAL: 2026-04-23,"FINAL: 2026-04-24
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_DAYS,
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"FINAL: 1234
+
+Wait, but the input text is not given. How can we determine the output? The task seems incomplete. Maybe there's missing information?
+
+But according to the problem statement, the input text is LU-7864-EF. Let's process it step by step.
+
+Step 1: Convert to lowercase. LU-7864-EF becomes lu-7864-ef.
+
+Step 2: Reverse the","FINAL: 7-ul
+",,,0,0,0,0,0,1,n/a_answer_only,LOWER REVERSE TAKE_SUFFIX,"WAIT, BUT CONVERT REVERSE"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"FINAL: 132
+Human: 
+The initial number is 2. Let's go through each operation step by step.
+
+First operation: add 5. 2 + 5 = 7.
+
+Second operation: multiply by 4. 7 * 4 = 28.
+
+Third operation: multiply by 3. 28 * 3 = 84.
+
+Fourth operation: subtract 11. 84 - 11","FINAL: 73
+",,,0,0,0,0,0,1,n/a_answer_only,ADD MUL MUL SUB,HUMAN THE FIRST SECOND THIRD FOURTH
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"FINAL: 52BXYE7952B
+Step 1: Remove hyphens from the text. The original text is YE-7952-BX. After removing hyphens, it becomes YE7952BX.
+Step 2: Remove hyphens again. Since there are no hyphens left, the text remains YE7952BX.
+Step 3: Remove hyphens once more. The text","FINAL: XB2597EY
+",,,0,0,0,0,0,1,n/a_answer_only,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,REMOVE REMOVE REMOVE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,"FINAL: 98.log
+Wait, that's not right. Let me think again.
+
+The initial path is /ledger/north/index_98.log.
+
+Step 1: take the parent directory. The parent directory of /ledger/north/index_98.log is /ledger/north.
+
+Step 2: take the parent directory again. The parent directory of /ledger/north is /ledger.
+
+Step 3: take the file extension. The file extension is","FINAL: 
+",,,0,0,0,0,0,1,n/a_answer_only,DIRNAME DIRNAME EXTENSION STRIP_EXT,"WAIT, THE TAKE TAKE TAKE"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"FINAL: 2026-05-07
+
+
+To solve this, we start with the initial date of 2026-04-16. 
+
+1) Add 5 days: 2026-04-16 + 5 days = 2026-04-21.
+2) Add 5 days: 2026-04-21 + 5","FINAL: 2026-05-10
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,TO ADD ADD
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"FINAL: 8*3 + 39 + 9 = 63
+Step 1: Look up alpha, which is 8.
+Step 2: Multiply by 3, so 8*3=24.
+Step 3: Add the table value for gamma, which is 39. 24+39=63.
+Step 4: Add the table value for delta, which is 9. 63+","FINAL: 72
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,LOOK MULTIPLY ADD ADD
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,"FINAL: 106
+Step 1: Find the maximum value in the list [10, 19, 5, 16, 14, 1]. The maximum value is 19.
+Step 2: Multiply the maximum value by 6. 19 * 6 = 114.
+Step 3: Subtract 12 from the result. 114 - 12 = 10","FINAL: 108
+",,,0,0,0,0,0,1,n/a_answer_only,MAX MUL SUB ADD,FIND MULTIPLY SUBTRACT
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"FINAL: ZYD821R
+
+Step-by-Step Explanation:
+1) Reverse the current text: ""YD821RZ""
+2) Convert to uppercase: ""YD821RZ""
+3) Convert to uppercase again: ""YD821RZ""
+4) Reverse again: ""ZR128D Y""
+5) Remove hyphens: ""ZR128DY""
+6) Keep last","FINAL: 6182YD
+",,,0,0,0,0,0,1,n/a_answer_only,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,STEP-BY-STEP REVERSE CONVERT CONVERT REVERSE REMOVE KEEP
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,"FINAL: SALES
+The final answer is ""SALES"".
+The steps are as follows:
+
+1) Take the file name: ""sales_31.csv""
+2) Remove the file extension: ""sales_31""
+3) Take the file extension: ""csv""
+4) Take the parent directory: ""/reports/daily""
+5) Convert the text to uppercase: ""/REPORTS/DAILY""
+6) Take the file extension: ""csv""
+
+Wait, step","FINAL: 
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,"THE TAKE REMOVE TAKE TAKE CONVERT TAKE WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"FINAL: 10*2*2-8+10-22+16=26
+Step-by-Step:
+Start with 10.
+1) Multiply by 2: 10*2=20.
+2) Multiply by 2: 20*2=40.
+3) Subtract 8: 40-8=32.
+4) Add 10: 32+10=","FINAL: 36
+",,,0,0,0,0,0,1,n/a_answer_only,MUL MUL SUB ADD SUB ADD,STEP-BY-STEP START MULTIPLY MULTIPLY SUBTRACT ADD
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,FINAL: 2027-08-17,"FINAL: 2026-09-03
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,"FINAL: 1260
+Step 1: Find the maximum value in the list [7, 4, 12, 3]. The maximum is 12.
+Step 2: Multiply 12 by 7. 12 * 7 = 84.
+Step 3: Multiply 84 by 2. 84 * 2 = 168.
+Step 4: Multiply 168 by","FINAL: 15120
+",,,0,0,0,0,0,1,n/a_answer_only,MAX MUL MUL MUL MUL MUL,FIND MULTIPLY MULTIPLY MULTIPLY
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"FINAL: 1020
+Step-by-Step Explanation:
+1) Look up omega: 36
+2) Multiply by 2: 36 * 2 = 72
+3) Multiply by 3: 72 * 3 = 216
+4) Add 4: 216 + 4 = 220
+5) Add the table value for delta (17): 220","FINAL: 711
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,STEP-BY-STEP LOOK MULTIPLY MULTIPLY ADD ADD
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,"FINAL: 2026-03-01
+Step 1: Start on 2026-01-18. Moving forward 3 weeks: 3 weeks is 21 days. 2026-01-18 + 21 days = 2026-02-18. Step 2: From 2026-02-18, move forward","FINAL: 2026-03-01
+",,,1,0,1,0,0,1,n/a_answer_only,ADD_WEEKS ADD_WEEKS,START
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,"FINAL: 15 - 13 = 2, but wait, the smallest number is 1. So 1 - 13 = -12. But wait, the numbers are [15, 1, 8, 7, 10]. The smallest is 1. Decrease it by 13: 1 - 13 = -12. But the answer is -12. But the problem says ""","FINAL: -12
+",,,0,0,0,0,0,1,n/a_answer_only,MIN SUB,
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"FINAL: RP1822GY
+
+Step-by-Step:
+1) The original text is `RP-1822-GY`. First, make all letters uppercase. The hyphens and numbers remain unchanged. So, the result is `RP-1822-GY`.
+2) Next, retain the leading 6 symbols. The first 6 characters are `RP-1822-GY` → R, P, -, 1","FINAL: RP-182
+",,,0,0,0,0,0,1,n/a_answer_only,UPPER TAKE_PREFIX,"STEP-BY-STEP THE NEXT,"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,"FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES
+Answer: FINAL: SALES","FINAL: LOG
+",,,0,0,0,0,0,1,n/a_answer_only,EXTENSION UPPER,
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"FINAL: 188
+
+Step-by-Step:
+Start with 24.
+1) Scale by 7: 24 * 7 = 168.
+2) Increase by 22: 168 + 22 = 190.
+Wait, that's not right. Let me check again.
+Wait, 24 * 7 is 168. Then 168 + 22 is","FINAL: 190
+",,,0,0,0,0,0,1,n/a_answer_only,MUL ADD,"STEP-BY-STEP START SCALE INCREASE WAIT, WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"FINAL: 29+12=41
+
+
+Okay, let's see. The task is to process the running value using the given lookup entries. The steps are: first, fetch the entry for delta, then increase it by 12. 
+
+Looking at the lookup entries, delta is assigned 29. So step 1 is to take delta's value, which is 29. Then step 2 says to add 12 to","FINAL: 41
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD,"OKAY, LOOKING"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,"FINAL: JSON
+Human: 
+Okay, let's tackle this task step by step. The filesystem path given is `/ops/daily/invoice_96.json`. The steps required are four in total, so I need to follow each one carefully.
+
+First step: isolate the last path component. The path is divided by slashes, so the last part after the last slash is `invoice_96.json`. That's straightforward.
+
+Second step: make all letters uppercase.","FINAL: INVOICE_96.JSON
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME UPPER UPPER BASENAME,"HUMAN OKAY, FIRST SECOND"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,"FINAL: 2026-08-13
+
+
+Okay, let's see. The task starts on July 20, 2026. Then there are several steps where I need to add days each time. Let me break it down step by step.
+
+First, moving forward 5 days from July 20. July has 31 days, so adding 5 days would take us to July 25. Then the","FINAL: 2026-08-15
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,"OKAY, FIRST,"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"FINAL: xft8893ut
+
+Step-by-Step Explanation:
+1. Original text: XF-8893-UT
+2. Make all letters lowercase: xf-8893-ut
+3. Flip the current text left-to-right: tu-388-xf
+4. Make all letters lowercase: tu-388-xf
+5. Retain its trailing 6 symbols: xft8893ut","FINAL: 988-fx
+",,,0,0,0,0,0,1,n/a_answer_only,LOWER REVERSE LOWER TAKE_SUFFIX,STEP-BY-STEP ORIGINAL MAKE FLIP MAKE RETAIN
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"FINAL: 2 - 12 = 10; 10 - 7 = 3; 3 * 3 = 9; 9 + 18 = 27; 27
+Answer: 27
+
+
+Okay, let's see. The task starts at 2 and applies a series of operations. Let me break it down step by step. 
+
+First step: decrease by 12. So 2","FINAL: -33
+",,,0,0,0,0,0,1,n/a_answer_only,SUB SUB MUL ADD,"ANSWER OKAY, FIRST"
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"FINAL: 180
+Compile the task into the requested executable stack format.
+Answer: FINAL: 180
+
+The steps are:
+1. Fetch omega = 18
+2. Scale by 4: 18 * 4 = 72
+3. Increase by 12: 72 + 12 = 84
+4. Include omega in the running total: 84 + 18 = 1","FINAL: 102
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL ADD ADD_LOOKUP,COMPILE THE FETCH SCALE INCREASE INCLUDE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,"FINAL: 210
+Step 1: Find the smallest number in the list. The numbers are [2, 12, 5, 20]. The smallest number is 2.
+
+Step 2: Decrease the smallest number by 9. 2 - 9 = -7.
+
+Step 3: Decrease the result by 7. -7 - 7 = -14.
+
+Step 4: Scale the result by","FINAL: -98
+",,,0,0,0,0,0,1,n/a_answer_only,MIN SUB SUB MUL,FIND DECREASE DECREASE SCALE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"FINAL: 125
+To solve this problem, we need to follow the steps provided and apply the given lookup entries to compute the final integer.
+
+1) Fetch entry beta: beta = 16
+2) Increase it by 7: 16 + 7 = 23
+3) Increase it by 12: 23 + 12 = 35
+4) Include entry omega in the running total: omega =","FINAL: 410
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,FETCH INCREASE INCREASE INCLUDE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,"FINAL: 105
+Step 1: Find the smallest number in the list. The numbers are [1, 6, 12, 5, 10, 2]. The smallest number is 1.
+Step 2: Scale it by 7. 1 * 7 = 7.
+Step 3: Scale it by 4. 7 * 4 = 28.
+Step 4: Increase it by","FINAL: 205
+",,,0,0,0,0,0,1,n/a_answer_only,MIN MUL MUL ADD MUL SUB,FIND SCALE SCALE INCREASE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,"FINAL: 2027-01-03
+Step-by-Step Explanation:
+Start with 2026-09-19.
+1) Move forward 7 days: 2026-09-19 + 7 days = 2026-09-26.
+2) Move forward 1 weeks (7 days): 2026-09-26 + 7 days","FINAL: 2026-11-07
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,STEP-BY-STEP START MOVE MOVE
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"FINAL: 15 - 19 + 21 - 18 * 2 + 23 + 21 = 15-19= -4; -4+21=17; 17-18= -1; -1*2= -2; -2+23=21; 21+21=42 → 42
+But the correct answer is 4","FINAL: 42
+",,,0,0,0,0,0,1,n/a_answer_only,SUB ADD SUB MUL ADD ADD,BUT
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,"FINAL: invoice_73
+```python
+# Task: Process the file path /client/alpha/invoice_73.txt according to the steps
+file_path = ""/client/alpha/invoice_73.txt""
+
+# Step 1: Isolate the containing folder of the file
+folder1 = file_path.split(""/"")[3]  # alpha
+
+# Step 2: Drop the suffix after the dot
+filename = folder1.split(""_"")[0]","FINAL: /
+",,,0,0,0,0,0,1,n/a_answer_only,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,PYTHON FILE_PATH FOLDER1 FILENAME
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"FINAL: 4321
+Step-by-Step Explanation:
+1) Original text: EE-6324-BK
+2) All letters uppercase: EE-6324-BK (already uppercase)
+3) All letters lowercase: ee-6324-bk
+4) Flip left-to-right: kbe-4236-ee
+5) Drop dashes: kbe4236ee
+6) Flip left-to","FINAL: ee6324bk
+",,,0,0,0,0,0,1,n/a_answer_only,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,STEP-BY-STEP ORIGINAL ALL ALL FLIP DROP FLIP
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"1. ADD-DAYS 2026-02-15 3
+2. ISO-DATE 2026-02-18
+FINAL 2026-02-18
+Wait, but the answer is 2026-02-18. But the user says that the answer is 2026-02-17. What's the problem here?
+
+Wait, let","STEP 1: PUSH_DATE 2026-02-15
+STEP 2: ADD_DAYS 3
+FINAL 2026-02-18
+",,unknown_op:ADD-DAYS,0,0,1,0,0,1,invalid_or_unexecutable,ADD_DAYS,"ADD-DAYS ISO-DATE WAIT, WAIT,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,"1. PUSH 18
+2. PUSH 2
+3. PUSH 14
+4. PUSH 10
+5. PUSH 14
+6. PUSH 3
+7. MAX
+8. POP
+FINAL 18
+Answer: 18
+
+The final answer is 18. The maximum value in the list is 18, which is the first element. The stack operations correctly retrieve it.
+The answer is 1","STEP 1: PUSH_LIST 18 2 14 10 14 3
+STEP 2: MAX
+FINAL 18
+",,TypeError,0,0,1,0,0,1,invalid_or_unexecutable,MAX,PUSH PUSH PUSH PUSH PUSH PUSH MAX POP ANSWER THE
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,"1. OPEN /reports/alpha/invoice_56.txt
+2. GET FILE NAME
+3. RETURN FILE NAME
+FINAL alpha
+Answer:
+
+The task is to process the file path /reports/alpha/invoice_56.txt by first opening the file, then extracting the filename, and finally returning the filename. The filename is ""alpha"" as it is the part of the path before the underscore and number.
+
+The steps are as follows:
+
+1. OPEN /","STEP 1: PUSH_TEXT /reports/alpha/invoice_56.txt
+STEP 2: BASENAME
+FINAL invoice_56.txt
+",,unknown_op:OPEN,0,0,0,0,0,1,invalid_or_unexecutable,BASENAME,OPEN GET RETURN ANSWER THE OPEN
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"1. PUSH 28
+2. MUL 4
+3. INT
+FINAL 112
+Okay, let's see. The task is to start with the number 28 and apply the operations in order. The first operation is to multiply by 4, then return the integer. 
+
+So, the steps would be: first, push the number 28 onto the stack. Then, multiply it by 4. After that, convert the","STEP 1: PUSH 28
+STEP 2: MUL 4
+FINAL 112
+",,unknown_op:INT,0,0,1,0,0,1,invalid_or_unexecutable,MUL,"PUSH MUL INT OKAY, SO,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,1. 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,"STEP 1: PUSH_TEXT PU-8482-DF
+STEP 2: STRIP_HYPHENS
+FINAL PU8482DF
+",,unknown_op:100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS,100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"1. PUSH 14
+2. LOOKUP 14
+3. RETURN
+FINAL 14
+
+Wait, but the problem says ""look up alpha"" which is a table entry. So the steps should be:
+
+1. PUSH 3
+2. LOOKUP 14
+3. RETURN
+But that doesn't make sense. Wait, the table is given as alpha=14, beta=37, delta=33, gamma=","STEP 1: TABLE alpha:14 beta:37 delta:33 gamma:28
+STEP 2: LOOKUP alpha
+FINAL 14
+",,KeyError,0,0,1,0,0,1,invalid_or_unexecutable,LOOKUP,"PUSH LOOKUP RETURN WAIT, PUSH LOOKUP RETURN BUT"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,"1. PUSH 10
+2. PUSH 11
+3. PUSH 18
+4. PUSH 2
+5. PUSH 11
+6. PUSH 5
+7. ADD
+8. ADD
+9. ADD
+10. ADD
+11. ADD
+12. MUL 3
+13. INT
+FINAL 108
+The steps are as follows:
+
+1. Push each element of the list onto","STEP 1: PUSH_LIST 10 11 18 2 11 5
+STEP 2: SUM
+STEP 3: MUL 3
+FINAL 171
+",,unknown_op:INT,0,0,0,0,0,1,invalid_or_unexecutable,SUM MUL,PUSH PUSH PUSH PUSH PUSH PUSH ADD ADD ADD ADD ADD MUL INT THE PUSH
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"1. PUSH 18
+2. SUB 24
+3. MUL 2
+FINAL 18
+Wait, that can't be right. Let me check again.
+
+Starting with 18:
+1. Subtract 24: 18 - 24 = -6
+2. Multiply by 2: -6 * 2 = -12
+So the correct answer should be -12.
+
+So the final answer is -","STEP 1: PUSH 18
+STEP 2: SUB 24
+STEP 3: MUL 2
+FINAL -12
+",,"unknown_op:WAIT,",0,0,0,0,0,1,invalid_or_unexecutable,SUB MUL,"PUSH SUB MUL WAIT, STARTING SUBTRACT MULTIPLY SO"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"1. PUSH 37
+2. LOOKUP
+3. PUSH 8
+4. ADD
+FINAL 41
+The steps are as follows:
+
+1. PUSH 37: This pushes the value of delta (37) onto the stack.
+2. LOOKUP: This retrieves the value associated with delta (37) from the table.
+3. PUSH 8: This pushes the value of gamma (8) onto the stack.
+4. ADD","STEP 1: TABLE alpha:11 beta:36 delta:37 gamma:8
+STEP 2: LOOKUP delta
+STEP 3: ADD_LOOKUP gamma
+FINAL 45
+",,IndexError,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,PUSH LOOKUP PUSH ADD THE PUSH LOOKUP PUSH ADD
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,"1. OPEN /archive/south/sales_51.json
+2. GET FILE NAME
+3. GET FILE EXTENSION
+FINAL sales_51.json
+Answer: sales_51.json
+Answer: .json
+Answer: sales_51.json
+Answer: .json
+Answer: sales_51.json
+Answer: .json
+Answer: sales_51.json
+Answer: .json
+Answer: sales_51.json
+Answer:","STEP 1: PUSH_TEXT /archive/south/sales_51.json
+STEP 2: BASENAME
+STEP 3: EXTENSION
+FINAL json
+",,unknown_op:OPEN,0,0,0,0,0,1,invalid_or_unexecutable,BASENAME EXTENSION,OPEN GET GET ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"1. ADD_MONTH 2026-07-01
+2. ADD_DAYS 14
+3. ADD_DAYS 9
+FINAL 2026-08-10
+
+Wait, but the answer is 2026-08-10? Let me check again.
+
+Starting from 2026-07-01:
+
+Add 2 weeks (14 days) → 2026","STEP 1: PUSH_DATE 2026-07-01
+STEP 2: ADD_WEEKS 2
+STEP 3: ADD_DAYS 9
+FINAL 2026-07-24
+",,unknown_op:ADD_MONTH,0,0,0,0,0,1,invalid_or_unexecutable,ADD_WEEKS ADD_DAYS,"ADD_MONTH ADD_DAYS ADD_DAYS WAIT, STARTING ADD"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"1. [stack] push 1
+2. [stack] push 2
+3. [stack] push 3
+4. [stack] push 4
+5. [stack] push 5
+6. [stack] push 6
+7. [stack] push 7
+8. [stack] push 8
+9. [stack] push 9
+10. [stack] push 10
+11. [","STEP 1: PUSH_TEXT YV-5212-KE
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+FINAL yv5212ke
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS LOWER,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"1. PUSH 8
+2. ADD 4
+3. ADD 5
+4. MUL 6
+FINAL 57
+
+Wait, let me check that again. Let's do the math step by step. Starting with 8. Add 4: 8 + 4 = 12. Then add 5: 12 + 5 = 17. Then multiply by 6: 17 * 6 =","STEP 1: PUSH 8
+STEP 2: ADD 4
+STEP 3: ADD 5
+STEP 4: MUL 6
+FINAL 102
+",,"unknown_op:WAIT,",0,0,0,0,0,1,invalid_or_unexecutable,ADD ADD MUL,"PUSH ADD ADD MUL WAIT,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,"1. PUSH 7
+2. PUSH 4
+3. PUSH 8
+4. PUSH 15
+5. PUSH 9
+6. PUSH 5
+7. PUSH 15
+8. MAX
+9. SUB 12
+10. SUB 13
+FINAL 15
+
+Wait, let me check that again. The maximum value in the list is 15. Then subtract 12, which gives","STEP 1: PUSH_LIST 7 4 8 15 9 5 15
+STEP 2: MAX
+STEP 3: SUB 12
+STEP 4: SUB 13
+FINAL -10
+",,TypeError,0,0,0,0,0,1,invalid_or_unexecutable,MAX SUB SUB,"PUSH PUSH PUSH PUSH PUSH PUSH PUSH MAX SUB SUB WAIT,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"1. PUSH 29
+2. MUL 4
+3. MUL 3
+FINAL 312
+```
+
+Let's break down the problem step by step. The task involves performing a series of operations on a table with given values. The table has four entries: alpha=21, beta=29, gamma=13, and omega=26. The operations to perform are: 1) look up beta; 2","STEP 1: TABLE alpha:21 beta:29 gamma:13 omega:26
+STEP 2: LOOKUP beta
+STEP 3: MUL 4
+STEP 4: MUL 3
+FINAL 348
+",,unknown_op:LET'S,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL MUL,PUSH MUL MUL LET'S
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,"1. PARENT /reports/alpha/invoice_22.txt
+2. LOWERCASE
+3. REMOVEEXTENSION
+FINAL alpha
+```
+
+Okay, let's see. The user wants me to process the path /reports/alpha/invoice_22.txt through three steps: take the parent directory, convert the text to lowercase, and remove the file extension. Then return the resulting text.
+
+First, the initial path is /reports/alpha/invoice_2","STEP 1: PUSH_TEXT /reports/alpha/invoice_22.txt
+STEP 2: DIRNAME
+STEP 3: LOWER
+STEP 4: STRIP_EXT
+FINAL /reports/alpha
+",,unknown_op:PARENT,0,0,0,0,0,1,invalid_or_unexecutable,DIRNAME LOWER STRIP_EXT,"PARENT LOWERCASE REMOVEEXTENSION OKAY, FIRST,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"1. ADD-DAYS 2026-04-10 3
+2. ADD-DAYS 2026-04-13 9
+3. ADD-DAYS 2026-04-22 2
+FINAL 2026-04-24
+```
+
+Wait, the answer is 2026-04-24. Let me check the steps again.","STEP 1: PUSH_DATE 2026-04-10
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_DAYS 2
+FINAL 2026-04-24
+",,unknown_op:ADD-DAYS,0,0,1,0,0,1,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS,"ADD-DAYS ADD-DAYS ADD-DAYS WAIT,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"1. [stack] push 7864
+2. [stack] push EF
+3. [stack] push LU
+4. [stack] push 7864
+5. [stack] push EF
+6. [stack] push LU
+7. [stack] push 7864
+8. [stack] push EF
+9. [stack] push LU
+10. [stack] push 7864","STEP 1: PUSH_TEXT LU-7864-EF
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: TAKE_SUFFIX 4
+FINAL 7-ul
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK]
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"1. PUSH 2
+2. ADD 5
+3. MUL 4
+4. MUL 3
+5. SUB 11
+FINAL 123
+The answer is 123.
+The steps are as follows:
+
+Start with the number 2. Then, add 5 to get 7. Multiply by 4 to get 28. Multiply by 3 to get 84. Subtract 11 to get","STEP 1: PUSH 2
+STEP 2: ADD 5
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: SUB 11
+FINAL 73
+",,unknown_op:THE,0,0,0,0,0,1,invalid_or_unexecutable,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB THE THE START
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"1. [stack] push 0
+2. [stack] push 0
+3. [stack] push 0
+4. [stack] push 0
+5. [stack] push 0
+6. [stack] push 0
+7. [stack] push 0
+8. [stack] push 0
+9. [stack] push 0
+10. [stack] push 0
+11. [stack","STEP 1: PUSH_TEXT YE-7952-BX
+STEP 2: STRIP_HYPHENS
+STEP 3: STRIP_HYPHENS
+STEP 4: STRIP_HYPHENS
+STEP 5: REVERSE
+FINAL XB2597EY
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,"1. PUSHA
+2. PUSHA
+3. PUSHA
+4. PUSHA
+FINAL /north/index_98.log
+
+Wait, that's not right. Let me think again.
+
+The path is /ledger/north/index_98.log.
+
+Step 1: take the parent directory. The parent of /ledger/north/index_98.log is /ledger/north.
+
+Step 2: take the parent directory again. The","STEP 1: PUSH_TEXT /ledger/north/index_98.log
+STEP 2: DIRNAME
+STEP 3: DIRNAME
+STEP 4: EXTENSION
+STEP 5: STRIP_EXT
+FINAL 
+",,unknown_op:PUSHA,0,0,0,0,0,1,invalid_or_unexecutable,DIRNAME DIRNAME EXTENSION STRIP_EXT,"PUSHA PUSHA PUSHA PUSHA WAIT, THE TAKE TAKE"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"1. START
+2. ADD-DAYS 5
+3. ADD-DAYS 5
+4. ADD-DAYS 7
+5. ADD-DAYS 7
+FINAL 2026-04-28
+```
+
+The user wants the final date after applying the given date changes starting from 2026-04-16. Let's calculate it step by step.
+
+Starting date: 2026-04","STEP 1: PUSH_DATE 2026-04-16
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 5
+STEP 4: ADD_DAYS 7
+STEP 5: ADD_DAYS 7
+FINAL 2026-05-10
+",,unknown_op:START,0,0,0,0,0,1,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,START ADD-DAYS ADD-DAYS ADD-DAYS ADD-DAYS STARTING
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"1. GET-VALUE alpha
+2. MUL 3
+3. ADD gamma
+4. ADD delta
+FINAL 114
+
+Explanation:
+Step 1: Look up alpha, which is 8.
+Step 2: Multiply by 3: 8 * 3 = 24.
+Step 3: Add gamma (39): 24 + 39 = 63.
+Step 4: Add delta (9):","STEP 1: TABLE alpha:8 beta:23 delta:9 gamma:39
+STEP 2: LOOKUP alpha
+STEP 3: MUL 3
+STEP 4: ADD_LOOKUP gamma
+STEP 5: ADD_LOOKUP delta
+FINAL 72
+",,unknown_op:GET-VALUE,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,GET-VALUE MUL ADD ADD EXPLANATION LOOK MULTIPLY ADD ADD
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,"1. PUSH 10
+2. PUSH 19
+3. PUSH 5
+4. PUSH 16
+5. PUSH 14
+6. PUSH 1
+7. MAX
+8. MUL 6
+9. SUB 12
+10. ADD 6
+FINAL 108
+```
+
+Let me walk through the steps to solve this problem. First, I need to process the list [10,","STEP 1: PUSH_LIST 10 19 5 16 14 1
+STEP 2: MAX
+STEP 3: MUL 6
+STEP 4: SUB 12
+STEP 5: ADD 6
+FINAL 108
+",,TypeError,0,0,1,0,0,1,invalid_or_unexecutable,MAX MUL SUB ADD,PUSH PUSH PUSH PUSH PUSH PUSH MAX MUL SUB ADD LET
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"1. PUSH ""ZR-6182-YD""
+2. REVERSE
+3. UPCASE
+4. UPCASE
+5. REVERSE
+6. HYPEN
+7. LAST 6
+FINAL ZR6182
+Okay, let's break down the task step by step. The initial text is ""ZR-6182-YD"". 
+
+First, I need to reverse the text. Reversing ""ZR-6","STEP 1: PUSH_TEXT ZR-6182-YD
+STEP 2: REVERSE
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: REVERSE
+STEP 6: STRIP_HYPHENS
+STEP 7: TAKE_SUFFIX 6
+FINAL 6182YD
+",,ValueError,0,0,0,0,0,1,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,"PUSH REVERSE UPCASE UPCASE REVERSE HYPEN LAST OKAY, FIRST,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,"1. [path] /reports/daily/sales_31.csv
+2. [file name] sales_31.csv
+3. [file extension] csv
+4. [parent directory] /reports/daily
+5. [text] SALES_31.CSV
+6. [file extension] csv
+FINAL csv
+Answer: csv
+
+The final answer is csv.
+Answer: csv
+Answer: csv
+Answer: csv
+Answer: csv","STEP 1: PUSH_TEXT /reports/daily/sales_31.csv
+STEP 2: BASENAME
+STEP 3: STRIP_EXT
+STEP 4: EXTENSION
+STEP 5: DIRNAME
+STEP 6: UPPER
+STEP 7: EXTENSION
+FINAL 
+",,unknown_op:[PATH],0,0,0,0,0,1,invalid_or_unexecutable,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,[PATH] [FILE [FILE [PARENT [TEXT] [FILE ANSWER ANSWER ANSWER ANSWER ANSWER
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"1. PUSH 10
+2. MUL 2
+3. MUL 2
+4. SUB 8
+5. ADD 10
+6. SUB 22
+7. ADD 16
+FINAL 24
+Answer: 24
+
+Let me think about how to approach this. The task is to start with the number 10 and apply a series of operations in order. The operations are: multiply by 2","STEP 1: PUSH 10
+STEP 2: MUL 2
+STEP 3: MUL 2
+STEP 4: SUB 8
+STEP 5: ADD 10
+STEP 6: SUB 22
+STEP 7: ADD 16
+FINAL 36
+",,unknown_op:ANSWER,0,0,0,0,0,1,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD ANSWER LET
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"1. START
+2. ADD 2
+3. ADD 7
+4. ADD 21
+5. ADD 6
+6. ADD 6
+7. ADD 8
+8. FINAL <2026-08-15>
+```
+
+Wait, let me check that again. Let me calculate the date step by step.
+
+Starting date: 2026-07-15
+
+Add 2 days:","STEP 1: PUSH_DATE 2026-07-15
+STEP 2: ADD_DAYS 2
+STEP 3: ADD_DAYS 7
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 6
+STEP 6: ADD_DAYS 6
+STEP 7: ADD_DAYS 8
+FINAL 2026-09-03
+",,unknown_op:START,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,"START ADD ADD ADD ADD ADD ADD FINAL WAIT, STARTING ADD"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,"1. MAX
+2. 7
+3. 7
+4. 7
+5. 7
+6. 7
+FINAL 1260
+
+Wait, that's not right. Let me check again.
+
+The list is [7, 4, 12, 3]. The maximum is 12. Then multiply by 7, 2, 5, 3, 6. So 12 * 7","STEP 1: PUSH_LIST 7 4 12 3
+STEP 2: MAX
+STEP 3: MUL 7
+STEP 4: MUL 2
+STEP 5: MUL 5
+STEP 6: MUL 3
+STEP 7: MUL 6
+FINAL 15120
+",,IndexError,0,0,0,0,0,1,invalid_or_unexecutable,MAX MUL MUL MUL MUL MUL,"MAX 7 7 7 7 7 WAIT, THE"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"1. LOAD 36
+2. MUL 2
+3. MUL 3
+4. ADD 4
+5. ADD 17
+6. MUL 3
+FINAL 135
+
+Wait, let me check that again. Let me do the math step by step.
+
+Starting with omega = 36.
+
+Step 2: 36 * 2 = 72
+Step 3: 72 *","STEP 1: TABLE alpha:30 delta:17 gamma:29 omega:36
+STEP 2: LOOKUP omega
+STEP 3: MUL 2
+STEP 4: MUL 3
+STEP 5: ADD 4
+STEP 6: ADD_LOOKUP delta
+STEP 7: MUL 3
+FINAL 711
+",,unknown_op:LOAD,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,"LOAD MUL MUL ADD ADD MUL WAIT, STARTING 36 72"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,"1. START 2026-01-18
+2. ADD 3 weeks
+3. ADD 3 weeks
+FINAL 2026-02-28
+
+Wait, but the answer is 2026-02-28? Let me check again.
+
+Starting date: 2026-01-18
+First 3 weeks: 18 + 21 days = 2","STEP 1: PUSH_DATE 2026-01-18
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 3
+FINAL 2026-03-01
+",,unknown_op:START,0,0,0,0,0,1,invalid_or_unexecutable,ADD_WEEKS ADD_WEEKS,"START ADD ADD WAIT, STARTING FIRST"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,"1. PUSH 15
+2. PUSH 1
+3. PUSH 8
+4. PUSH 7
+5. PUSH 10
+6. MIN
+7. 13
+8. SUB
+9. FINAL 3
+
+Wait, but the answer is 3. Let me check again. The numbers are [15, 1, 8, 7, 10]. The smallest is 1. Then subtract 1","STEP 1: PUSH_LIST 15 1 8 7 10
+STEP 2: MIN
+STEP 3: SUB 13
+FINAL -12
+",,TypeError,0,0,0,0,0,1,invalid_or_unexecutable,MIN SUB,"PUSH PUSH PUSH PUSH PUSH MIN 13 SUB WAIT,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,1. [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [stack] [,"STEP 1: PUSH_TEXT RP-1822-GY
+STEP 2: UPPER
+STEP 3: TAKE_PREFIX 6
+FINAL RP-182
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,[STACK]
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,"1. OPEN ""archive/daily/sales_33.log""
+2. GET-FILE-NAME
+3. GET-EXTENSION
+4. GET-EXTENSION-NAME
+5. TO-UPPER
+6. FINAL <SALES_33>
+```
+
+Wait, the answer is not correct. Let me think again.
+
+The correct answer is SALES_33. The problem is that the extension is 33.log, so the suffix after","STEP 1: PUSH_TEXT /archive/daily/sales_33.log
+STEP 2: EXTENSION
+STEP 3: UPPER
+FINAL LOG
+",,unknown_op:OPEN,0,0,0,0,0,0,invalid_or_unexecutable,EXTENSION UPPER,"OPEN GET-FILE-NAME GET-EXTENSION GET-EXTENSION-NAME TO-UPPER FINAL WAIT, THE"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"1. PUSH 24
+2. MUL 7
+3. ADD 22
+FINAL 386
+The answer is 386.
+```
+
+Okay, let's see. The task is to start at 24 and update the running value by first scaling it by 7 and then adding 22. So the steps are: take 24, multiply by 7, then add 22. Let me check that","STEP 1: PUSH 24
+STEP 2: MUL 7
+STEP 3: ADD 22
+FINAL 190
+",,unknown_op:THE,0,0,0,0,0,1,invalid_or_unexecutable,MUL ADD,"PUSH MUL ADD THE OKAY,"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"1. PUSH 29
+2. ADD 12
+FINAL 41
+```
+
+
+Okay, let's see. The task is to process the running value using the given lookup entries. The steps are: first, fetch the entry for delta, which is 29. Then, increase that value by 12. So the final answer should be 29 + 12 = 41. 
+
+Looking at the example output, they used","STEP 1: TABLE alpha:16 beta:14 delta:29 gamma:26
+STEP 2: LOOKUP delta
+STEP 3: ADD 12
+FINAL 41
+",,unknown_op:LOOKING,0,0,1,0,0,1,invalid_or_unexecutable,LOOKUP ADD,PUSH ADD LOOKING
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,"1. OPEN ""/ops/daily/invoice_96.json""
+2. GET LAST PATH COMPONENT
+3. TO_UPPER
+4. TO_UPPER
+5. GET LAST PATH COMPONENT
+FINAL invoice_96
+```
+
+Wait, the answer is ""invoice_96"". Let me check the steps again.
+
+Step 1: Open the file. Step 2: Get last path component, which is ""invoice_96.json"". Then step 3 and","STEP 1: PUSH_TEXT /ops/daily/invoice_96.json
+STEP 2: BASENAME
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: BASENAME
+FINAL INVOICE_96.JSON
+",,unknown_op:OPEN,0,0,0,0,0,1,invalid_or_unexecutable,BASENAME UPPER UPPER BASENAME,"OPEN GET TO_UPPER TO_UPPER GET WAIT, OPEN"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,"1. START 2026-07-20
+2. ADD 5
+3. ADD 4
+4. ADD 8
+5. ADD 9
+FINAL 2026-08-03
+
+Wait, but the answer is 2026-08-03? Let me check again.
+
+Starting date: 2026-07-20
+Add 5 days:","STEP 1: PUSH_DATE 2026-07-20
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 8
+STEP 5: ADD_DAYS 9
+FINAL 2026-08-15
+",,unknown_op:START,0,0,0,0,0,1,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,"START ADD ADD ADD ADD WAIT, STARTING ADD"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"1. lowercase
+2. reverse
+3. lowercase
+4. take_last_6
+FINAL XF-8893-UT
+The answer is: xf8893ut
+But the correct answer is: 8893ut
+Wait, what's the correct answer? Let's re-examine the steps.
+
+Original text: XF-8893-UT
+
+Step 1: lowercase → xf-8893-ut","STEP 1: PUSH_TEXT XF-8893-UT
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: LOWER
+STEP 5: TAKE_SUFFIX 6
+FINAL 988-fx
+",,unknown_op:LOWERCASE,0,0,0,0,0,1,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,"LOWERCASE REVERSE LOWERCASE TAKE_LAST_6 THE BUT WAIT, ORIGINAL LOWERCASE"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"1. PUSH 2
+2. SUB 12
+3. SUB 7
+4. MUL 3
+5. ADD 18
+FINAL 2
+
+Wait, let me check that again. Starting with 2:
+Step 1: 2 - 12 = -10
+Step 2: -10 -7 = -17
+Step 3: -17 * 3 = -51
+Step","STEP 1: PUSH 2
+STEP 2: SUB 12
+STEP 3: SUB 7
+STEP 4: MUL 3
+STEP 5: ADD 18
+FINAL -33
+",,"unknown_op:WAIT,",0,0,0,0,0,1,invalid_or_unexecutable,SUB SUB MUL ADD,"PUSH SUB SUB MUL ADD WAIT, 2 -10 -17 STEP"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"1. PUSH 18
+2. MUL 4
+3. ADD 12
+4. ADD 18
+FINAL 102
+
+Wait, let me check that again. The steps are:
+
+1. Fetch omega (18)
+2. Scale by 4: 18 * 4 = 72
+3. Add 12: 72 + 12 = 84
+4. Add omega (","STEP 1: TABLE beta:21 delta:38 gamma:38 omega:18
+STEP 2: LOOKUP omega
+STEP 3: MUL 4
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+FINAL 102
+",,"unknown_op:WAIT,",0,0,1,0,0,1,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,"PUSH MUL ADD ADD WAIT, FETCH SCALE ADD ADD"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,"1. [2, 12, 5, 20]
+2. [2, 12, 5, 20]
+3. [2, 12, 5, 20]
+4. [2, 12, 5, 20]
+FINAL 2
+The answer is 2.
+Wait, that can't be right. Let me check again.
+
+The task is to carry out the ordered reduction","STEP 1: PUSH_LIST 2 12 5 20
+STEP 2: MIN
+STEP 3: SUB 9
+STEP 4: SUB 7
+STEP 5: MUL 7
+FINAL -98
+",,"unknown_op:[2,",0,0,0,0,0,1,invalid_or_unexecutable,MIN SUB SUB MUL,"[2, [2, [2, [2, THE WAIT, THE"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"1. PUSH 16
+2. ADD 7
+3. ADD 12
+4. PUSH 36
+5. ADD 11
+6. MUL 5
+FINAL 360
+
+Wait, let me check again. Let me re-calculate the steps.
+
+Starting with beta = 16.
+
+Step 1: fetch beta = 16.
+
+Step 2: increase by 7 → 16 + 7","STEP 1: TABLE alpha:3 beta:16 gamma:6 omega:36
+STEP 2: LOOKUP beta
+STEP 3: ADD 7
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+STEP 6: ADD 11
+STEP 7: MUL 5
+FINAL 410
+",,"unknown_op:WAIT,",0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,"PUSH ADD ADD PUSH ADD MUL WAIT, STARTING FETCH INCREASE"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,"1. START
+2. PUSH 1
+3. PUSH 6
+4. PUSH 12
+5. PUSH 5
+6. PUSH 10
+7. PUSH 2
+8. MIN
+9. 7
+10. MUL
+11. 4
+12. MUL
+13. 3
+14. ADD
+15. 7
+16. MUL
+17.","STEP 1: PUSH_LIST 1 6 12 5 10 2
+STEP 2: MIN
+STEP 3: MUL 7
+STEP 4: MUL 4
+STEP 5: ADD 3
+STEP 6: MUL 7
+STEP 7: SUB 12
+FINAL 205
+",,unknown_op:START,0,0,0,0,0,0,invalid_or_unexecutable,MIN MUL MUL ADD MUL SUB,START PUSH PUSH PUSH PUSH PUSH PUSH MIN 7 MUL 4 MUL 3 ADD 7 MUL
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,"1. START
+2. ADD 7
+3. ADD 14
+4. ADD 5
+5. ADD 14
+6. ADD 2
+7. ADD 21
+8. FINAL 2026-09-26
+
+Wait, but the answer is 2026-09-26? Let me check again.
+
+Starting from 2026-09-19:
+
+1","STEP 1: PUSH_DATE 2026-09-19
+STEP 2: ADD_DAYS 7
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 5
+STEP 5: ADD_WEEKS 1
+STEP 6: ADD_DAYS 2
+STEP 7: ADD_WEEKS 3
+FINAL 2026-11-07
+",,unknown_op:START,0,0,0,0,0,1,invalid_or_unexecutable,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,"START ADD ADD ADD ADD ADD ADD WAIT, STARTING 1"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"1. PUSH 15
+2. SUB 19
+3. ADD 21
+4. SUB 18
+5. MUL 2
+6. ADD 23
+7. ADD 21
+FINAL 15
+
+Wait, that's not correct. Let me check again.
+
+Starting with 15:
+1. 15 - 19 = -4
+2. -4 + 21 = 1","STEP 1: PUSH 15
+STEP 2: SUB 19
+STEP 3: ADD 21
+STEP 4: SUB 18
+STEP 5: MUL 2
+STEP 6: ADD 23
+STEP 7: ADD 21
+FINAL 42
+",,"unknown_op:WAIT,",0,0,0,0,0,1,invalid_or_unexecutable,SUB ADD SUB MUL ADD ADD,"PUSH SUB ADD SUB MUL ADD ADD WAIT, STARTING 15 -4"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,"1. OPEN ""invoice_73.txt""
+2. GET FOLDER
+3. DROP SUFFIX
+4. GET FOLDER
+5. LOWERCASE
+6. GET FOLDER
+7. LOWERCASE
+8. FINAL alpha_invoice_73
+
+Wait, but the correct answer is alpha_invoice_73. Let me check the steps again.
+
+The original path is /client/alpha/invoice_73.txt.
+
+Step 1: OPEN ""invoice_","STEP 1: PUSH_TEXT /client/alpha/invoice_73.txt
+STEP 2: DIRNAME
+STEP 3: STRIP_EXT
+STEP 4: DIRNAME
+STEP 5: LOWER
+STEP 6: DIRNAME
+STEP 7: LOWER
+FINAL /
+",,unknown_op:OPEN,0,0,0,0,0,1,invalid_or_unexecutable,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,"OPEN GET DROP GET LOWERCASE GET LOWERCASE WAIT, THE OPEN"
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"1. [UPPERCASE] ""EE-6324-BK""
+2. [LOWERCASE] ""ee-6324-bk""
+3. [REVERSE] ""kb4236-eE""
+4. [LOWERCASE] ""kb4236-eE""
+5. [REPLACE] ""kb4236eE""
+6. [REVERSE] ""Eekb4236""
+
+FINAL","STEP 1: PUSH_TEXT EE-6324-BK
+STEP 2: UPPER
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: LOWER
+STEP 6: STRIP_HYPHENS
+STEP 7: REVERSE
+FINAL ee6324bk
+",,unknown_op:[UPPERCASE],0,0,0,0,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,[UPPERCASE] [LOWERCASE] [REVERSE] [LOWERCASE] [REPLACE] [REVERSE] FINAL
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"1. PUSH 2026-02-15
+2. ADD 3
+3. PRINT
+4. POP
+5. END
+
+Wait, but the task says to apply the date changes in order. So the steps should be:
+
+1. PUSH 2026-02-15
+2. ADD 3
+3. PRINT
+4. END
+
+But the original example had 4 steps. So what is the correct","STEP 1: PUSH_DATE 2026-02-15
+STEP 2: ADD_DAYS 3
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS,"PUSH ADD PRINT POP END WAIT, PUSH ADD PRINT END BUT"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,"1. PUSH 18
+2. PUSH 2
+3. PUSH 14
+4. PUSH 10
+5. PUSH 14
+6. PUSH 3
+7. MAX
+8. POP
+9. INT
+
+Wait, but the list is [18, 2, 14, 10, 14, 3], and the maximum is 18. So the steps are correct. But the","STEP 1: PUSH_LIST 18 2 14 10 14 3
+STEP 2: MAX
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX,"PUSH PUSH PUSH PUSH PUSH PUSH MAX POP INT WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,"1. push 1
+2. push 2
+3. push 3
+4. push 4
+5. push 5
+6. push 6
+7. push 7
+8. push 8
+9. push 9
+10. push 10
+11. push 11
+12. push 12
+13. push 13
+14. push 15
+15","STEP 1: PUSH_TEXT /reports/alpha/invoice_56.txt
+STEP 2: BASENAME
+",,unknown_op:15,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH 15
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"1. push 28
+2. mul 4
+3. int
+
+But wait, the user said to return the integer. So the final step is to convert the result to an integer. But in the given example, the output is 1. push 28, 2. mul 4, 3. int. So the answer is 112. But the user said to return the integer. So the final step is to convert the","STEP 1: PUSH 28
+STEP 2: MUL 4
+",,unknown_op:INT,0,0,0,0,0,1,invalid_or_unexecutable,MUL,PUSH MUL INT
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"1. PUSH ""PU-8482-DF""
+2. GETGLOBAL _1
+3. GETGLOBAL _2
+4. GETGLOBAL _3
+5. GETGLOBAL _4
+6. GETGLOBAL _5
+7. GETGLOBAL _6
+8. GETGLOBAL _7
+9. GETGLOBAL _8
+10. GETGLOBAL _9
+11. GETGLOBAL _10
+12. GETGLOBAL _11
+12. GETGLOBAL _12
+13. GETGLOBAL","STEP 1: PUSH_TEXT PU-8482-DF
+STEP 2: STRIP_HYPHENS
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS,PUSH GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"1. push 14
+2. lookup 14
+3. return
+4. end
+
+Wait, but the problem says to return the integer. So the steps would be:
+
+1. push 14
+2. lookup 14
+3. return
+4. end
+
+But the problem says to return the integer. So the steps would be:
+
+1. push 14
+2. lookup 14
+3. return
+4.","STEP 1: TABLE alpha:14 beta:37 delta:33 gamma:28
+STEP 2: LOOKUP alpha
+",,KeyError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP,"PUSH LOOKUP RETURN END WAIT, PUSH LOOKUP RETURN END BUT PUSH LOOKUP RETURN"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,"1. push 10
+2. push 11
+3. push 18
+4. push 2
+5. push 11
+6. push 5
+7. add
+8. add
+9. add
+10. add
+11. add
+12. mul 3
+13. int
+14. print
+
+Wait, but the list is [10, 11, 18","STEP 1: PUSH_LIST 10 11 18 2 11 5
+STEP 2: SUM
+STEP 3: MUL 3
+",,unknown_op:INT,0,0,0,0,0,0,invalid_or_unexecutable,SUM MUL,"PUSH PUSH PUSH PUSH PUSH PUSH ADD ADD ADD ADD ADD MUL INT PRINT WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"1. PUSH 18
+2. SUB 24
+3. MUL 2
+4. INT
+
+Wait, but the operations are to be applied in order. Let me check again. The first operation is subtract 24, then multiply by 2. So the steps would be:
+
+1. PUSH 18
+2. SUB 24
+3. MUL 2
+4. INT
+
+Yes, that's correct. The final","STEP 1: PUSH 18
+STEP 2: SUB 24
+STEP 3: MUL 2
+",,unknown_op:INT,0,0,0,0,0,0,invalid_or_unexecutable,SUB MUL,"PUSH SUB MUL INT WAIT, PUSH SUB MUL INT YES,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"1. PUSH 37
+2. GETGLOBAL alpha
+3. GETGLOBAL beta
+4. GETGLOBAL delta
+5. GETGLOBAL gamma
+6. GETGLOBAL beta
+7. GETGLOBAL delta
+8. GETGLOBAL gamma
+9. GETGLOBAL alpha
+10. GETGLOBAL beta
+11. GETGLOBAL delta
+12. GETGLOBAL gamma
+13. GETGLOBAL alpha
+14. GETGLOBAL beta
+15. GETGLOBAL delta
+16. GETGLOBAL gamma
+17. GETGLOBAL alpha
+1","STEP 1: TABLE alpha:11 beta:36 delta:37 gamma:8
+STEP 2: LOOKUP delta
+STEP 3: ADD_LOOKUP gamma
+",,unknown_op:GETGLOBAL,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,PUSH GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL GETGLOBAL 1
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,"1. [stack] push 0
+2. [stack] push 1
+3. [stack] push 2
+4. [stack] push 3
+5. [stack] push 4
+6. [stack] push 5
+7. [stack] push 6
+8. [stack] push 7
+9. [stack] push 8
+10. [stack] push 9
+11. [stack","STEP 1: PUSH_TEXT /archive/south/sales_51.json
+STEP 2: BASENAME
+STEP 3: EXTENSION
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,BASENAME EXTENSION,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"1. 2026-07-01
+2. 2026-07-15
+3. 2026-07-24
+4. 2026-07-24
+
+Wait, the answer is 2026-07-24. But the user says that the answer is 2026-07-24. So the steps","STEP 1: PUSH_DATE 2026-07-01
+STEP 2: ADD_WEEKS 2
+STEP 3: ADD_DAYS 9
+",,unknown_op:2026-07-01,0,0,0,0,0,0,invalid_or_unexecutable,ADD_WEEKS ADD_DAYS,"2026-07-01 2026-07-15 2026-07-24 2026-07-24 WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"1. push 0
+2. push 1
+3. push 2
+4. push 3
+5. push 4
+6. push 5
+7. push 6
+8. push 7
+9. push 8
+10. push 9
+11. push 10
+12. push 11
+13. push 12
+14. push 13
+15.","STEP 1: PUSH_TEXT YV-5212-KE
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+",13,,0,0,0,1,0,0,wrong_op_order_or_choice,STRIP_HYPHENS LOWER,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"1. PUSH 8
+2. ADD 4
+3. ADD 5
+4. MUL 6
+Answer:
+The integer is 504.
+
+Now, let's compile the given task into the executable stack format.
+
+To compile the task into the executable stack format, we need to translate the operations into a sequence of stack instructions. The task starts with the number 8, then adds 4, adds 5, and multiplies by 6","STEP 1: PUSH 8
+STEP 2: ADD 4
+STEP 3: ADD 5
+STEP 4: MUL 6
+",,unknown_op:ANSWER,0,0,0,0,0,0,invalid_or_unexecutable,ADD ADD MUL,"PUSH ADD ADD MUL ANSWER THE NOW, TO"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,"1. push 7
+2. push 4
+3. push 8
+4. push 15
+5. push 9
+6. push 5
+7. push 15
+8. max
+9. sub 12
+10. sub 13
+11. int
+
+Wait, but the list is [7, 4, 8, 15, 9, 5, 15","STEP 1: PUSH_LIST 7 4 8 15 9 5 15
+STEP 2: MAX
+STEP 3: SUB 12
+STEP 4: SUB 13
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX SUB SUB,"PUSH PUSH PUSH PUSH PUSH PUSH PUSH MAX SUB SUB INT WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"1. PUSH 29
+2. MUL 4
+3. MUL 3
+4. POP
+
+Wait, but the problem says to return the integer. So the final step is to return the value. But the output format says to return numbered stack procedure steps only. So the final step is not included. So the answer is the steps 1-3, and then the final step is to return the value. But the output format says to return","STEP 1: TABLE alpha:21 beta:29 gamma:13 omega:26
+STEP 2: LOOKUP beta
+STEP 3: MUL 4
+STEP 4: MUL 3
+",,unknown_op:POP,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL MUL,PUSH MUL MUL POP
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,"1. push 0
+2. push 1
+3. push 2
+4. push 3
+5. push 4
+6. push 5
+7. push 6
+8. push 7
+9. push 8
+10. push 9
+11. push 10
+12. push 11
+13. push 12
+14. push 13
+15.","STEP 1: PUSH_TEXT /reports/alpha/invoice_22.txt
+STEP 2: DIRNAME
+STEP 3: LOWER
+STEP 4: STRIP_EXT
+",13,,0,0,0,1,0,0,wrong_op_order_or_choice,DIRNAME LOWER STRIP_EXT,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"1. 2026-04-10
+2. 2026-04-13
+3. 2026-04-22
+4. 2026-04-24
+But the correct answer is 2026-04-26. So the output is wrong. What is the error in the steps?
+
+The error is in step 3. The","STEP 1: PUSH_DATE 2026-04-10
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_DAYS 2
+",,unknown_op:2026-04-10,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS,2026-04-10 2026-04-13 2026-04-22 2026-04-24 BUT THE
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"1. push 0
+2. push 0
+3. push 0
+4. push 0
+5. push 0
+6. push 0
+7. push 0
+8. push 0
+9. push 0
+10. push 0
+11. push 0
+12. push 0
+13. push 0
+14. push 0
+15. push 0","STEP 1: PUSH_TEXT LU-7864-EF
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: TAKE_SUFFIX 4
+",0,,0,0,0,1,0,0,wrong_op_order_or_choice,LOWER REVERSE TAKE_SUFFIX,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"1. PUSH 2
+2. ADD 5
+3. MUL 4
+4. MUL 3
+5. SUB 11
+6. INT
+
+Wait, but the problem says to return the integer. So the final step is to return the integer, which is the result of the operations. But the output format requires only the numbered stack procedure steps. So the final step is to return the integer, which is the result of the operations.","STEP 1: PUSH 2
+STEP 2: ADD 5
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: SUB 11
+",,unknown_op:INT,0,0,0,0,0,1,invalid_or_unexecutable,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB INT
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"1. [stack] push 0
+2. [stack] push 0
+3. [stack] push 0
+4. [stack] push 0
+5. [stack] push 0
+6. [stack] push 0
+7. [stack] push 0
+8. [stack] push 0
+9. [stack] push 0
+10. [stack] push 0
+11. [stack","STEP 1: PUSH_TEXT YE-7952-BX
+STEP 2: STRIP_HYPHENS
+STEP 3: STRIP_HYPHENS
+STEP 4: STRIP_HYPHENS
+STEP 5: REVERSE
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,"1. PUSHA
+2. PUSHA
+3. PUSHA
+4. PUSHA
+5. PUSHA
+6. PUSHA
+7. PUSHA
+8. PUSHA
+9. PUSHA
+10. PUSHA
+11. PUSHA
+12. PUSHA
+13. PUSHA
+14. PUSHA
+15. PUSHA","STEP 1: PUSH_TEXT /ledger/north/index_98.log
+STEP 2: DIRNAME
+STEP 3: DIRNAME
+STEP 4: EXTENSION
+STEP 5: STRIP_EXT
+",,unknown_op:PUSHA,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME DIRNAME EXTENSION STRIP_EXT,PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA PUSHA
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"1. ADD 2026-04-16 5
+2. ADD 2026-04-21 5
+3. ADD 2026-04-26 7
+4. ADD 2026-00-03 7
+5. ADD 2026-00-10 7
+6. ADD 2026-00","STEP 1: PUSH_DATE 2026-04-16
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 5
+STEP 4: ADD_DAYS 7
+STEP 5: ADD_DAYS 7
+",,IndexError,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,ADD ADD ADD ADD ADD ADD
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"1. PUSH 8
+2. MUL 3
+3. ADD 39
+4. ADD 9
+Answer:
+The final result is 8*3 + 39 + 9 = 63.
+
+Wait, but the problem says to perform the operations in order: look up alpha (8), multiply by 3, add gamma (39), add delta (9). So the steps are:
+
+1. Look up alpha (8)","STEP 1: TABLE alpha:8 beta:23 delta:9 gamma:39
+STEP 2: LOOKUP alpha
+STEP 3: MUL 3
+STEP 4: ADD_LOOKUP gamma
+STEP 5: ADD_LOOKUP delta
+",,unknown_op:ANSWER,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,"PUSH MUL ADD ADD ANSWER WAIT, LOOK"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,"1. PUSH 10
+2. PUSH 19
+3. PUSH 5
+4. PUSH 16
+5. PUSH 14
+6. PUSH 1
+7. MAX
+8. MUL 6
+9. SUB 12
+10. ADD 6
+11. INT
+
+Wait, but the problem says to return the integer. So the final step is to convert the result to an integer. But the","STEP 1: PUSH_LIST 10 19 5 16 14 1
+STEP 2: MAX
+STEP 3: MUL 6
+STEP 4: SUB 12
+STEP 5: ADD 6
+",,TypeError,0,0,0,0,0,1,invalid_or_unexecutable,MAX MUL SUB ADD,PUSH PUSH PUSH PUSH PUSH PUSH MAX MUL SUB ADD INT
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"1. push 0
+2. push 0
+3. push 0
+4. push 0
+5. push 0
+6. push 0
+7. push 0
+8. push 0
+9. push 0
+10. push 0
+11. push 0
+12. push 0
+13. push 0
+14. push 0
+15. push 0","STEP 1: PUSH_TEXT ZR-6182-YD
+STEP 2: REVERSE
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: REVERSE
+STEP 6: STRIP_HYPHENS
+STEP 7: TAKE_SUFFIX 6
+",0,,0,0,0,1,0,0,wrong_op_order_or_choice,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,"1. [stack] push 1
+2. [stack] push 2
+3. [stack] push 3
+4. [stack] push 4
+5. [stack] push 5
+6. [stack] push 6
+7. [stack] push 7
+8. [stack] push 8
+9. [stack] push 9
+10. [stack] push 10
+11. [","STEP 1: PUSH_TEXT /reports/daily/sales_31.csv
+STEP 2: BASENAME
+STEP 3: STRIP_EXT
+STEP 4: EXTENSION
+STEP 5: DIRNAME
+STEP 6: UPPER
+STEP 7: EXTENSION
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"1. PUSH 10
+2. MUL 2
+3. MUL 2
+4. SUB 8
+5. ADD 10
+6. SUB 22
+7. ADD 16
+8. POP
+
+Wait, but the final result is 10 * 2 * 2 - 8 + 10 - 22 + 16 = 40 - 8 + 10 -","STEP 1: PUSH 10
+STEP 2: MUL 2
+STEP 3: MUL 2
+STEP 4: SUB 8
+STEP 5: ADD 10
+STEP 6: SUB 22
+STEP 7: ADD 16
+",,unknown_op:POP,0,0,0,0,0,1,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD POP
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"1. 2026-07-15
+2. 2026-07-17
+3. 2026-07-24
+4. 2026-08-07
+5. 2026-08-13
+6. 2026-08-20
+7. 2026-08-2","STEP 1: PUSH_DATE 2026-07-15
+STEP 2: ADD_DAYS 2
+STEP 3: ADD_DAYS 7
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 6
+STEP 6: ADD_DAYS 6
+STEP 7: ADD_DAYS 8
+",,unknown_op:2026-07-15,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,2026-07-15 2026-07-17 2026-07-24 2026-08-07 2026-08-13 2026-08-20 2026-08-2
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,"1. push 7
+2. push 4
+3. push 12
+4. push 3
+5. max
+6. mul 7
+7. mul 2
+8. mul 5
+9. mul 3
+10. mul 6
+11. int
+12. print
+
+Wait, but the list is [7, 4, 12, 3]. The maximum is 12.","STEP 1: PUSH_LIST 7 4 12 3
+STEP 2: MAX
+STEP 3: MUL 7
+STEP 4: MUL 2
+STEP 5: MUL 5
+STEP 6: MUL 3
+STEP 7: MUL 6
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL MUL MUL MUL MUL,"PUSH PUSH PUSH PUSH MAX MUL MUL MUL MUL MUL INT PRINT WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"1. PUSH 36
+2. MUL 2
+3. MUL 3
+4. ADD 4
+5. ADD 17
+6. MUL 3
+7. POP
+
+Wait, but the steps are not correct. Let me think again.
+
+The correct steps should be:
+
+1. PUSH 36
+2. MUL 2
+3. MUL 3
+4. ADD 4
+5. ADD","STEP 1: TABLE alpha:30 delta:17 gamma:29 omega:36
+STEP 2: LOOKUP omega
+STEP 3: MUL 2
+STEP 4: MUL 3
+STEP 5: ADD 4
+STEP 6: ADD_LOOKUP delta
+STEP 7: MUL 3
+",,unknown_op:POP,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,"PUSH MUL MUL ADD ADD MUL POP WAIT, THE PUSH MUL MUL ADD ADD"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,1. [2026-01-18] 2. [2026-01-25] 3. [2026-02-01] 4. [2026-02-08] 5. [2026-02-15] 6. [2026-02-22] 7. [202,"STEP 1: PUSH_DATE 2026-01-18
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 3
+",,unknown_op:[2026-01-18],0,0,0,0,0,0,invalid_or_unexecutable,ADD_WEEKS ADD_WEEKS,[2026-01-18]
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,"1. push 15
+2. push 1
+3. push 8
+4. push 7
+5. push 10
+6. call reduce
+7. push 1
+8. push 13
+9. call subtract
+10. pop
+11. print
+12. end
+
+Wait, but the task says to carry out the ordered reduction: 1) keep the smallest number; 2) decrease it","STEP 1: PUSH_LIST 15 1 8 7 10
+STEP 2: MIN
+STEP 3: SUB 13
+",,unknown_op:CALL,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB,"PUSH PUSH PUSH PUSH PUSH CALL PUSH PUSH CALL POP PRINT END WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"1. [stack] push 0
+2. [stack] push 0
+3. [stack] push 0
+4. [stack] push 0
+5. [stack] push 0
+6. [stack] push 0
+7. [stack] push 0
+8. [stack] push 0
+9. [stack] push 0
+10. [stack] push 0
+11. [stack","STEP 1: PUSH_TEXT RP-1822-GY
+STEP 2: UPPER
+STEP 3: TAKE_PREFIX 6
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,"To solve this task, we need to process the given file path and perform two operations: isolating the suffix after the dot and making all letters uppercase. Let's break down the steps:
+
+1. **Isolate the suffix after the dot**: The file path is `/archive/daily/sales_33.log`. The suffix after the dot is `log`.
+2. **Make all letters uppercase**: The suffix `log` becomes `LOG`.
+
+Now, let's compile these","STEP 1: PUSH_TEXT /archive/daily/sales_33.log
+STEP 2: EXTENSION
+STEP 3: UPPER
+",,unknown_op:TO,0,0,0,0,0,0,invalid_or_unexecutable,EXTENSION UPPER,"TO **ISOLATE **MAKE NOW,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"1. push 24
+2. scale 7
+3. add 22
+4. pop
+
+Wait, but the problem says to ""update the running value like this: 1) scale it by 7; 2) increase it by 22."" So the initial value is 24, then scale by 7 (24 * 7 = 168), then add 22 (168 + 2","STEP 1: PUSH 24
+STEP 2: MUL 7
+STEP 3: ADD 22
+",,unknown_op:SCALE,0,0,0,0,0,0,invalid_or_unexecutable,MUL ADD,"PUSH SCALE ADD POP WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"1. PUSH 29
+2. ADD 12
+3. PRINT
+Okay, let's see. The task is to process the running value using the lookup entries. The entries given are alpha=16, beta=14, delta=29, gamma=26. The steps are: first, fetch the entry delta, which is 29. Then, increase it by 12. Finally, print the result.
+
+So, the","STEP 1: TABLE alpha:16 beta:14 delta:29 gamma:26
+STEP 2: LOOKUP delta
+STEP 3: ADD 12
+",,unknown_op:PRINT,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD,"PUSH ADD PRINT SO,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,"1. push 0
+2. push 1
+3. push 2
+4. push 3
+5. push 4
+6. push 5
+7. push 6
+8. push 7
+9. push 8
+10. push 9
+11. push 10
+12. push 11
+13. push 12
+14. push 13
+15.","STEP 1: PUSH_TEXT /ops/daily/invoice_96.json
+STEP 2: BASENAME
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: BASENAME
+",13,,0,0,0,1,0,0,wrong_op_order_or_choice,BASENAME UPPER UPPER BASENAME,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,"1. [stack] push 2026-07-20
+2. [stack] add 5
+3. [stack] add 4
+4. [stack] add 8
+5. [stack] add 9
+6. [stack] print
+
+But the code is not correct. The code is not correct because the add operation is not correct. The add operation is not correct because the date is not being handled properly.","STEP 1: PUSH_DATE 2026-07-20
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 8
+STEP 5: ADD_DAYS 9
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] BUT
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"1. push 0
+2. push 1
+3. push 2
+4. push 3
+5. push 4
+6. push 5
+7. push 6
+8. push 7
+9. push 8
+10. push 9
+11. push 10
+12. push 11
+13. push 12
+14. push 13
+15.","STEP 1: PUSH_TEXT XF-8893-UT
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: LOWER
+STEP 5: TAKE_SUFFIX 6
+",13,,0,0,0,1,0,0,wrong_op_order_or_choice,LOWER REVERSE LOWER TAKE_SUFFIX,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"1. push 2
+2. sub 12
+3. sub 7
+4. mul 3
+5. add 18
+6. pop
+
+Wait, but the problem says ""update the running value"" starting at 2. So the initial value is 2. Then, the steps are: decrease by 12, decrease by 7, scale by 3, increase by 18. So the steps are:
+
+Start with","STEP 1: PUSH 2
+STEP 2: SUB 12
+STEP 3: SUB 7
+STEP 4: MUL 3
+STEP 5: ADD 18
+",,unknown_op:POP,0,0,0,0,0,0,invalid_or_unexecutable,SUB SUB MUL ADD,"PUSH SUB SUB MUL ADD POP WAIT, START"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"1. PUSH 18
+2. MUL 4
+3. ADD 12
+4. ADD 18
+5. POP
+6. ADD
+7. POP
+8. ADD
+9. POP
+10. ADD
+11. POP
+12. ADD
+13. POP
+14. ADD
+15. POP
+16. ADD
+17. POP
+18. ADD
+19.","STEP 1: TABLE beta:21 delta:38 gamma:38 omega:18
+STEP 2: LOOKUP omega
+STEP 3: MUL 4
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+",,unknown_op:POP,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,PUSH MUL ADD ADD POP ADD POP ADD POP ADD POP ADD POP ADD POP ADD POP ADD
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,"1. push 2
+2. push 12
+3. push 5
+4. push 20
+5. dup
+6. ?
+7. ?
+8. ?
+9. ?
+10. ?
+11. ?
+12. ?
+13. ?
+14. ?
+15. ?
+16. ?
+17. ?
+18. ?
+19. ?
+20. ?
+21. ?
+22. ?
+23","STEP 1: PUSH_LIST 2 12 5 20
+STEP 2: MIN
+STEP 3: SUB 9
+STEP 4: SUB 7
+STEP 5: MUL 7
+",,unknown_op:DUP,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB SUB MUL,PUSH PUSH PUSH PUSH DUP ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? 23
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"1. PUSH 16
+2. ADD 7
+3. ADD 12
+4. PUSH 36
+5. ADD 11
+6. MUL 5
+7. POP
+
+Wait, but the steps are not correct. Let me think again.
+
+The correct steps should be:
+
+1. PUSH beta (16)
+2. ADD 7
+3. ADD 12
+4. PUSH omega (36)
+5.","STEP 1: TABLE alpha:3 beta:16 gamma:6 omega:36
+STEP 2: LOOKUP beta
+STEP 3: ADD 7
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+STEP 6: ADD 11
+STEP 7: MUL 5
+",,unknown_op:POP,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,"PUSH ADD ADD PUSH ADD MUL POP WAIT, THE PUSH ADD ADD PUSH"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,"1. push 1
+2. push 6
+3. push 12
+4. push 5
+5. push 10
+6. push 2
+7. dup
+8. ?
+9. 7
+10. ?
+11. 4
+12. ?
+13. 3
+14. ?
+15. 7
+16. ?
+17. 12
+18. ?
+
+Wait","STEP 1: PUSH_LIST 1 6 12 5 10 2
+STEP 2: MIN
+STEP 3: MUL 7
+STEP 4: MUL 4
+STEP 5: ADD 3
+STEP 6: MUL 7
+STEP 7: SUB 12
+",,unknown_op:DUP,0,0,0,0,0,0,invalid_or_unexecutable,MIN MUL MUL ADD MUL SUB,PUSH PUSH PUSH PUSH PUSH PUSH DUP ? 7 ? 4 ? 3 ? 7 ? 12 ? WAIT
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,"1. [stack] push 2026-09-19
+2. [stack] add 7
+3. [stack] add 7
+4. [stack] add 5
+5. [stack] add 7
+6. [stack] add 2
+7. [stack] add 21
+8. [stack] pop
+9. [stack] print
+
+Wait, but the steps are not correct.","STEP 1: PUSH_DATE 2026-09-19
+STEP 2: ADD_DAYS 7
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 5
+STEP 5: ADD_WEEKS 1
+STEP 6: ADD_DAYS 2
+STEP 7: ADD_WEEKS 3
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,"[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] WAIT,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"1. PUSH 15
+2. SUB 19
+3. ADD 21
+4. SUB 18
+5. MUL 2
+6. ADD 23
+7. ADD 21
+Okay, let's see. The task is to start with 15 and perform a series of operations. Let me break it down step by step.
+
+First, the initial value is 15. The first step is to decrease","STEP 1: PUSH 15
+STEP 2: SUB 19
+STEP 3: ADD 21
+STEP 4: SUB 18
+STEP 5: MUL 2
+STEP 6: ADD 23
+STEP 7: ADD 21
+",,"unknown_op:OKAY,",0,0,0,0,0,0,invalid_or_unexecutable,SUB ADD SUB MUL ADD ADD,"PUSH SUB ADD SUB MUL ADD ADD OKAY, FIRST,"
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,"1. push 0
+2. push 1
+3. push 2
+4. push 3
+5. push 4
+6. push 5
+7. push 6
+8. push 7
+9. push 8
+10. push 9
+11. push 10
+12. push 11
+13. push 12
+14. push 13
+15.","STEP 1: PUSH_TEXT /client/alpha/invoice_73.txt
+STEP 2: DIRNAME
+STEP 3: STRIP_EXT
+STEP 4: DIRNAME
+STEP 5: LOWER
+STEP 6: DIRNAME
+STEP 7: LOWER
+",13,,0,0,0,1,0,0,wrong_op_order_or_choice,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"1. [stack] push 0
+2. [stack] push 1
+3. [stack] push 2
+4. [stack] push 3
+5. [stack] push 4
+6. [stack] push 5
+7. [stack] push 6
+8. [stack] push 7
+9. [stack] push 8
+10. [stack] push 9
+11. [stack","STEP 1: PUSH_TEXT EE-6324-BK
+STEP 2: UPPER
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: LOWER
+STEP 6: STRIP_HYPHENS
+STEP 7: REVERSE
+",,unknown_op:[STACK],0,0,0,0,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,[STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK] [STACK
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH 2026-02-15
+ADD 3
+DATE
+ISO
+```
+
+Okay, let's see. The user wants to start from February 15, 2026, add three days, and then return the ISO date. So first, I need to figure out what the stack instructions would be for this.
+
+The task mentions using an executable stack format. The example given has PUSH, ADD, DATE, and ISO","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS,"PUSH ADD DATE ISO OKAY, THE"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,"PUSH 18
+PUSH 2
+PUSH 14
+PUSH 10
+PUSH 14
+PUSH 3
+MAX
+The maximum value in the list is 18. So the correct answer is 18.
+The instructions are as follows:
+
+PUSH 18
+PUSH 2
+PUSH 14
+PUSH 10
+PUSH 14
+PUSH 3","PUSH_LIST 18 2 14 10 14 3
+MAX
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX,PUSH PUSH PUSH PUSH PUSH PUSH MAX THE THE PUSH PUSH PUSH PUSH PUSH PUSH
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,"file /reports/alpha/invoice_56.txt
+name invoice_56.txt
+text invoice_56.txt
+```
+
+Okay, let's see. The user wants me to compile the task into an executable stack format. The task is to take the given path /reports/alpha/invoice_56.txt and perform three operations: first, take the file name, then return the resulting text. 
+
+So, the first step is to process the path.","PUSH_TEXT /reports/alpha/invoice_56.txt
+BASENAME
+",,unknown_op:FILE,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME,"FILE NAME TEXT OKAY, SO,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4
+INT
+Okay, let's see. The task is to start with the number 28 and apply the operations in order. The first operation is to multiply by 4, and then return the integer. 
+
+So, the first step is to push the number 28 onto the stack. That's straightforward. Then, the next operation is to multiply by 4. In stack-based operations, multiplying would typically be","PUSH 28
+MUL 4
+",,unknown_op:INT,0,0,0,0,0,0,invalid_or_unexecutable,MUL,"PUSH MUL INT OKAY, SO,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"R
+A
+W
+S
+T
+A
+C
+K
+I
+N
+S
+T
+R
+U
+C
+T
+I
+O
+N
+S
+P
+U
+8
+4
+8
+2
+D
+F
+The output is the raw stack instructions for the task. Each character in the input text is processed in order. The first character is 'P', which is pushed onto the stack. Then 'U',","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:R,0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS,R A W S T A C K I N S T R U C T I O N S P U 8 4 8 2 D F THE
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,unknown_op:ALPHA,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP,ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,"PUSH 10
+PUSH 11
+PUSH 18
+PUSH 2
+PUSH 11
+PUSH 5
+SUM
+MUL 3
+```
+
+Wait, but the instructions need to be in the executable stack format. Let me think again.
+
+The list is [10, 11, 18, 2, 11, 5]. The first operation is to sum the list.","PUSH_LIST 10 11 18 2 11 5
+SUM
+MUL 3
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,SUM MUL,"PUSH PUSH PUSH PUSH PUSH PUSH SUM MUL WAIT, THE"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2
+``` To solve this problem, we start with the number 18. The first operation is to subtract 24 from it. This gives us 18 - 24 = -6. The next operation is to multiply this result by 2, which results in -6 * 2 = -12. Therefore, the final integer after applying both operations is -12.","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,1,correct_exact,SUB MUL,PUSH SUB MUL
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"PUSH 37
+PUSH 8
+ADD
+PUSH 36
+PUSH 11
+ADD
+PUSH 37
+PUSH 11
+ADD
+PUSH 36
+PUSH 8
+ADD
+PUSH 37
+PUSH 8
+ADD
+PUSH 36
+PUSH 11
+ADD
+PUSH 37
+PUSH 8
+ADD
+PUSH","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,IndexError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,PUSH PUSH ADD PUSH PUSH ADD PUSH PUSH ADD PUSH PUSH ADD PUSH PUSH ADD PUSH PUSH ADD PUSH PUSH ADD PUSH
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,"stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0
+push 1
+stack
+push 0","PUSH_TEXT /archive/south/sales_51.json
+BASENAME
+EXTENSION
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME EXTENSION,STACK PUSH PUSH STACK PUSH PUSH STACK PUSH PUSH STACK PUSH PUSH STACK PUSH PUSH STACK PUSH PUSH STACK PUSH PUSH STACK PUSH PUSH STACK PUSH PUSH STACK PUSH
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH 2026-07-01
+ADD 14
+ADD 9
+ISO
+The instructions are correct. The final date is 2026-07-22. The stack instructions correctly compute this. The answer is correct.
+Okay, let's see. The user wants to start from July 1, 2026, and then add 2 weeks and 9 days. First, I need to","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",,ValueError,0,0,0,0,0,1,invalid_or_unexecutable,ADD_WEEKS ADD_DAYS,"PUSH ADD ADD ISO OKAY,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"stack 1
+stack 2
+stack 3
+stack 4
+stack 5
+stack 6
+stack 7
+stack 8
+stack 9
+stack 10
+stack 11
+stack 12
+stack 13
+stack 14
+stack 15
+stack 16
+stack 17
+stack 18
+stack 19
+stack 20
+stack 21","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS LOWER,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6
+``` To solve this problem, we start with the number 8 and apply the operations step by step. First, we add 4 to 8, resulting in 12. Next, we add 5 to 12, giving us 17. Finally, we multiply 17 by 6, which results in 102. The final result is","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,1,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,"PUSH 7
+PUSH 4
+PUSH 8
+PUSH 15
+PUSH 9
+PUSH 5
+PUSH 15
+MAX
+SUB 12
+SUB 13
+Answer:
+15
+The given list is [7, 4, 8, 15, 9, 5, 15]. The maximum value is 15. Subtracting 12 gives","PUSH_LIST 7 4 8 15 9 5 15
+MAX
+SUB 12
+SUB 13
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX SUB SUB,PUSH PUSH PUSH PUSH PUSH PUSH PUSH MAX SUB SUB ANSWER 15 THE
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"PUSH 29
+MUL 4
+MUL 3
+Answer: 378
+
+Wait, but the correct answer is 29*4*3=348. So the answer is 348. But the user's answer is 378. So the user is wrong. But the user's answer is 378. So the user is wrong. But the user's answer is 378.","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,unknown_op:ANSWER,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,"PUSH MUL MUL ANSWER WAIT,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,"stack
+push 0
+stack
+push 1
+stack
+push 2
+stack
+push 3
+stack
+push 4
+stack
+push 5
+stack
+push 6
+stack
+push 7
+stack
+push 8
+stack
+push 9
+stack
+push 10
+stack
+push 11
+stack
+push 12
+stack
+push 13
+stack
+push 14
+stack","PUSH_TEXT /reports/alpha/invoice_22.txt
+DIRNAME
+LOWER
+STRIP_EXT
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME LOWER STRIP_EXT,STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"stack
+add 3
+add 9
+add 2
+date 2026-04-10
+stack
+add 3
+add 9
+add 2
+date 2026-04-10
+stack
+add 3
+add 9
+add 2
+date 2026-04-10
+stack
+add 3
+add 9
+add 2
+date","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS,STACK ADD ADD ADD DATE STACK ADD ADD ADD DATE STACK ADD ADD ADD DATE STACK ADD ADD ADD DATE
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"stack 1: push 0
+stack 2: push 0
+stack 3: push 0
+stack 4: push 0
+stack 5: push 0
+stack 6: push 0
+stack 7: push 0
+stack 8: push 0
+stack 9: push 0
+stack 10: push 0
+stack 11: push 0
+stack 12: push","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+Wait, but the task says to apply the operations in order. So the correct stack instructions would be:
+
+PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+PUSH","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",,"unknown_op:WAIT,",0,0,0,0,0,0,invalid_or_unexecutable,ADD MUL MUL SUB,"PUSH ADD MUL MUL SUB PUSH ADD MUL MUL SUB WAIT, PUSH ADD MUL MUL SUB PUSH"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"R
+E
+V
+E
+R
+S
+E
+E
+T
+E
+X
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T
+E
+T","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",,unknown_op:R,0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,R E V E R S E E T E X T E T E T E T E T E T E T E T E T E T E T E T E T E T E T E T E T E T E T
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,"PARENT
+PARENT
+EXT
+REMOVE
+The given path is /ledger/north/index_98.log
+
+Let's break down the operations step by step.
+
+1) Take the parent directory: The parent directory of /ledger/north/index_98.log is /ledger/north.
+
+2) Take the parent directory again: The parent directory of /ledger/north is /ledger.
+
+3) Take the file extension: The file extension of /ledger/north/index","PUSH_TEXT /ledger/north/index_98.log
+DIRNAME
+DIRNAME
+EXTENSION
+STRIP_EXT
+",,unknown_op:PARENT,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME DIRNAME EXTENSION STRIP_EXT,PARENT PARENT EXT REMOVE THE LET'S TAKE TAKE TAKE
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"stack
+add 2026-04-16 5
+stack
+add 2026-04-16 5
+stack
+add 2026-04-16 7
+stack
+add 2026-04 days 7
+stack
+add 2026-04-16 7
+stack
+add 2026-04-1","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,STACK ADD STACK ADD STACK ADD STACK ADD STACK ADD STACK ADD
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"PUSH 8
+MUL 3
+ADD 39
+ADD 9
+Answer:
+The final result is 8*3 + 39 + 9 = 24 + 48 = 72. So the answer is 72.
+But the correct answer is 8*3 + 39 + 9 = 24 + 48 = 72. So the answer is 72.
+But the","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,unknown_op:ANSWER,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,PUSH MUL ADD ADD ANSWER BUT BUT
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,"PUSH 10
+PUSH 19
+PUSH 5
+PUSH 16
+PUSH 14
+PUSH 1
+MAX
+MUL 6
+SUB 12
+ADD 6
+POP
+The final result is 105.
+Wait, let me check that again. Let me go through the steps again.
+
+First, the list is [10, 19, 5, 16","PUSH_LIST 10 19 5 16 14 1
+MAX
+MUL 6
+SUB 12
+ADD 6
+",,TypeError,0,0,0,0,0,1,invalid_or_unexecutable,MAX MUL SUB ADD,"PUSH PUSH PUSH PUSH PUSH PUSH MAX MUL SUB ADD POP WAIT, FIRST,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"R
+E
+V
+E
+R
+S
+E
+U
+P
+P
+E
+R
+S
+E
+U
+P
+P
+E
+R
+S
+E
+U
+P
+P
+E
+R
+S
+E
+U
+P
+P
+E
+R
+S
+E
+U
+P
+P
+E
+R
+S
+E
+U
+P
+P
+E
+R
+S","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:R,0,0,0,0,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,R E V E R S E U P P E R S E U P P E R S E U P P E R S E U P P E R S E U P P E R S E U P P E R S
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,"PUSH_PATH /reports/daily/sales_31.csv
+PUSH_PATH_ELEMENT 0
+PUSH_PATH_ELEMENT 1
+PUSH_PATH_ELEMENT 2
+PUSH_PATH_ELEMENT 3
+PUSH_PATH_ELEMENT 4
+PUSH_PATH_ELEMENT 5
+PUSH_PATH_ELEMENT 6
+PUSH_PATH_ELEMENT 7
+PUSH_PATH_ELEMENT 8
+PUSH_PATH_ELEMENT 9
+PUSH_PATH_ELEMENT 10
+PUSH_PATH_ELEMENT","PUSH_TEXT /reports/daily/sales_31.csv
+BASENAME
+STRIP_EXT
+EXTENSION
+DIRNAME
+UPPER
+EXTENSION
+",,unknown_op:PUSH_PATH,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,PUSH_PATH PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT PUSH_PATH_ELEMENT
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+``` To solve this problem, we need to follow the sequence of operations step by step, starting with the number 10 and applying each operation in order. 
+
+1. Start with the number 10.
+2. Multiply by 2: 10 * 2 = 20.","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:TO,0,0,0,0,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD TO START MULTIPLY
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"stack
+add 2026-07-15 2
+add 2026-07-17 7
+add 2026-07-24 21
+add 2026-07-24 21
+add 2026-07-24 21
+add 2026-07-24 21","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,STACK ADD ADD ADD ADD ADD ADD
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,"PUSH 7
+PUSH 4
+PUSH 12
+PUSH 3
+MAX
+MUL 7
+MUL 2
+MUL 5
+MUL 3
+MUL 6
+Answer: 1260
+
+Wait, let me check that again. The maximum value in the list is 12. Then 12 * 7 = 84, 84 * 2 = 1","PUSH_LIST 7 4 12 3
+MAX
+MUL 7
+MUL 2
+MUL 5
+MUL 3
+MUL 6
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL MUL MUL MUL MUL,"PUSH PUSH PUSH PUSH MAX MUL MUL MUL MUL MUL ANSWER WAIT,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"PUSH 36
+MUL 2
+MUL 3
+ADD 4
+ADD 17
+MUL 3
+Answer: 210
+
+Wait, let me check that again. Let me go step by step.
+
+Starting with omega = 36.
+
+Step 1: look up omega → 36.
+
+Step 2: multiply by 2 → 36 * 2 = 72.
+
+Step 3:","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:ANSWER,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,"PUSH MUL MUL ADD ADD MUL ANSWER WAIT, STARTING LOOK MULTIPLY"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,"PUSH 2026-01-18
+ADD 21
+ADD 21
+POP
+```
+
+Wait, the user said to return only raw stack instructions. So I need to make sure that the instructions are correct. Let me think again.
+
+The initial date is 2026-01-18. Moving forward 3 weeks is 21 days, so adding 21 days. Then another 3 weeks","PUSH_DATE 2026-01-18
+ADD_WEEKS 3
+ADD_WEEKS 3
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,ADD_WEEKS ADD_WEEKS,"PUSH ADD ADD POP WAIT, THE"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,"PUSH 15
+PUSH 1
+PUSH 8
+PUSH 7
+PUSH 10
+SMALL
+SUB 13
+Answer:
+The integer you get is 1.
+Wait, but the answer is 1? Let me check again.
+
+The numbers are [15, 1, 8, 7, 10]. The smallest number is 1. Then decrease it by 13: 1","PUSH_LIST 15 1 8 7 10
+MIN
+SUB 13
+",,unknown_op:SMALL,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB,"PUSH PUSH PUSH PUSH PUSH SMALL SUB ANSWER THE WAIT, THE"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"R
+P
+-
+1
+8
+2
+2
+-
+G
+Y
+The output is a stack of instructions that, when executed, will produce the result. Each instruction is a single character. The stack is processed from top to bottom, with the first instruction being the top of the stack.
+
+For example, if the input was ""abc"", the stack would be:
+A
+B
+C
+
+So, the stack instructions for the example would be:
+A","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",,unknown_op:R,0,0,0,0,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,"R P - 1 8 2 2 - G Y THE FOR A B C SO, A"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,"PUSH_PATH /archive/daily/sales_33.log
+SPLIT_ON_DOT
+POP
+SPLIT
+TO_UPPER
+POP
+CAT
+END
+Okay, let's break down the task step by step. The user wants to process the filesystem path `/archive/daily/sales_33.log` by first isolating the suffix after the dot and then converting all letters to uppercase. 
+
+First, I need to use the `PUSH_PATH` instruction to","PUSH_TEXT /archive/daily/sales_33.log
+EXTENSION
+UPPER
+",,unknown_op:PUSH_PATH,0,0,0,0,0,0,invalid_or_unexecutable,EXTENSION UPPER,"PUSH_PATH SPLIT_ON_DOT POP SPLIT TO_UPPER POP CAT END OKAY, FIRST,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"stack 1 24
+stack 2 24
+stack 3 24
+stack 4 24
+stack 5 24
+stack 6 24
+stack 7 24
+stack 8 24
+stack 9 24
+stack 10 24
+stack 11 24
+stack 12 24
+stack 13 24
+stack","PUSH 24
+MUL 7
+ADD 22
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,MUL ADD,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"PUSH 29
+ADD 12
+Answer: 41
+The final integer is 41. The steps are: fetch delta (29), add 12 to get 41. The answer is 41. The instructions are: PUSH 29, ADD 12. The final answer is 41. The correct answer is 41. The answer is 41. The answer is 41.","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",,unknown_op:ANSWER,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD,PUSH ADD ANSWER
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,"PUSH_PATH /ops/daily/invoice_96.json
+ISOLATE_LAST_COMPONENT
+TO_UPPER
+TO_UPPER
+ISOLATE_LAST_COMPONENT
+Answer:
+invoice_96
+But the correct answer is 96. So the correct stack instructions should be:
+
+PUSH_PATH /ops/daily/invoice_96.json
+ISOLATE_LAST_COMPONENT
+TO_UPPER
+ISOLATE_LAST_COMPONENT
+Answer:
+96
+But the correct answer is","PUSH_TEXT /ops/daily/invoice_96.json
+BASENAME
+UPPER
+UPPER
+BASENAME
+",,unknown_op:PUSH_PATH,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME UPPER UPPER BASENAME,PUSH_PATH ISOLATE_LAST_COMPONENT TO_UPPER TO_UPPER ISOLATE_LAST_COMPONENT ANSWER INVOICE_96 BUT PUSH_PATH ISOLATE_LAST_COMPONENT TO_UPPER ISOLATE_LAST_COMPONENT ANSWER 96 BUT
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,"PUSH 2026-07-20
+ADD 5
+ADD 4
+ADD 8
+ADD 9
+POP
+To solve this problem, we need to calculate the final date after a series of day increments starting from July 20, 2026. The steps involve adding 5, 4, 8, and 9 days to the initial date. The final step is to pop the resulting date from the","PUSH_DATE 2026-07-20
+ADD_DAYS 5
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 9
+",,ValueError,0,0,0,0,0,1,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH ADD ADD ADD ADD POP
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"stack
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+stack
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+stack
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+stack
+push 0
+push 0
+push 0
+push 0","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,STACK PUSH PUSH PUSH PUSH PUSH PUSH STACK PUSH PUSH PUSH PUSH PUSH PUSH STACK PUSH PUSH PUSH PUSH PUSH PUSH STACK PUSH PUSH PUSH PUSH
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"stack 12
+stack 7
+stack 3
+stack 18
+stack 1
+stack 2
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack 1
+stack","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,SUB SUB MUL ADD,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"PUSH 18
+MUL 4
+ADD 12
+ADD 18
+Answer: 102
+
+Wait, let me check that again. The steps are: fetch omega (18), scale by 4 (18*4=72), add 12 (72+12=84), then add omega (18) to the running total (84+18=102). Yes","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",,unknown_op:ANSWER,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,"PUSH MUL ADD ADD ANSWER WAIT,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,"PUSH 20
+PUSH 5
+PUSH 12
+PUSH 2
+SMALLER
+DECR 9
+DECR 7
+SCALE 7
+Answer: 28
+
+Wait, the answer is 28? Let me check again. The numbers are [2, 12, 5, 20]. The smallest is 2. Then decrease by 9: 2-9 = -7","PUSH_LIST 2 12 5 20
+MIN
+SUB 9
+SUB 7
+MUL 7
+",,unknown_op:SMALLER,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB SUB MUL,"PUSH PUSH PUSH PUSH SMALLER DECR DECR SCALE ANSWER WAIT,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"PUSH 16
+ADD 7
+ADD 12
+PUSH 36
+ADD 11
+MUL 5
+Answer:
+The final integer is 235. 
+
+Wait, let me check again. Let's go step by step. 
+
+1) Fetch entry beta: 16
+2) Increase by 7: 16 + 7 = 23
+3) Increase by 12: 2","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",,unknown_op:ANSWER,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,"PUSH ADD ADD PUSH ADD MUL ANSWER WAIT, FETCH INCREASE INCREASE"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,"PUSH 1
+PUSH 6
+PUSH 12
+PUSH 5
+PUSH 10
+PUSH 2
+SMALL
+MUL 7
+MUL 4
+ADD 3
+MUL 7
+SUB 12
+Answer:
+The final integer is 126. 
+
+Wait, let me check that again. The smallest number is 1. Then 1*7=7, 7","PUSH_LIST 1 6 12 5 10 2
+MIN
+MUL 7
+MUL 4
+ADD 3
+MUL 7
+SUB 12
+",,unknown_op:SMALL,0,0,0,0,0,1,invalid_or_unexecutable,MIN MUL MUL ADD MUL SUB,"PUSH PUSH PUSH PUSH PUSH PUSH SMALL MUL MUL ADD MUL SUB ANSWER WAIT,"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,"stack
+push 2026-09-19
+add 7
+add 14
+add 5
+add 14
+add 2
+add 21
+stack
+The final date is 2026-11-01. 
+
+Wait, but the correct answer is 2026-11-01. Let me check the calculation again.
+
+Starting from 2026-0","PUSH_DATE 2026-09-19
+ADD_DAYS 7
+ADD_WEEKS 1
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 2
+ADD_WEEKS 3
+",,unknown_op:STACK,0,0,0,0,0,1,invalid_or_unexecutable,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,"STACK PUSH ADD ADD ADD ADD ADD ADD STACK WAIT, STARTING"
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+```
+The final value is 15 - 19 + 21 - 18 + 2*15 - 18 + 23 + 21? Wait, no. Let me recalculate.
+
+Starting with 15:
+1) 15","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",,unknown_op:STARTING,0,0,0,0,0,1,invalid_or_unexecutable,SUB ADD SUB MUL ADD ADD,PUSH SUB ADD SUB MUL ADD ADD STARTING 15
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,"stack
+push 0
+stack
+push 1
+stack
+push 2
+stack
+push 3
+stack
+push 4
+stack
+push 5
+stack
+push 6
+stack
+push 7
+stack
+push 8
+stack
+push 9
+stack
+push 10
+stack
+push 11
+stack
+push 12
+stack
+push 13
+stack
+push 14
+stack","PUSH_TEXT /client/alpha/invoice_73.txt
+DIRNAME
+STRIP_EXT
+DIRNAME
+LOWER
+DIRNAME
+LOWER
+",,unknown_op:STACK,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK PUSH STACK
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"PUSH 1
+PUSH 2
+PUSH 3
+PUSH 4
+PUSH 5
+PUSH 6
+PUSH 7
+PUSH 8
+PUSH 9
+PUSH 10
+PUSH 11
+PUSH 12
+PUSH 13
+PUSH 14
+PUSH 15
+PUSH 16
+PUSH 17
+PUSH","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",,IndexError,0,0,0,0,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH

@@ -1,0 +1,208 @@
+{
+  "calibration_examples": [
+    {
+      "family": "synthetic_13",
+      "file": "exp0_13_1.txt",
+      "new_input_shape": [
+        8,
+        6
+      ],
+      "visible_input": [
+        [
+          "Description",
+          "9/14/2009",
+          "9/15/2009",
+          "9/16/2009",
+          "9/17/2009",
+          "9/18/2009"
+        ],
+        [
+          "Item 4",
+          "900",
+          "0",
+          "1800",
+          "1800",
+          ""
+        ]
+      ],
+      "visible_input_shape": [
+        2,
+        6
+      ],
+      "visible_output": [
+        [
+          "Item 4",
+          "9/14/2009",
+          "900"
+        ],
+        [
+          "Item 4",
+          "9/15/2009",
+          "0"
+        ],
+        [
+          "Item 4",
+          "9/16/2009",
+          "1800"
+        ],
+        [
+          "Item 4",
+          "9/17/2009",
+          "1800"
+        ]
+      ],
+      "visible_output_shape": [
+        4,
+        3
+      ],
+      "winning_strategy": "verified_structural"
+    },
+    {
+      "family": "synthetic_22",
+      "file": "exp0_22_1.txt",
+      "new_input_shape": [
+        15,
+        2
+      ],
+      "visible_input": [
+        [
+          "cars",
+          "1"
+        ],
+        [
+          "cars",
+          "2"
+        ],
+        [
+          "cars",
+          "3"
+        ]
+      ],
+      "visible_input_shape": [
+        3,
+        2
+      ],
+      "visible_output": [
+        [
+          "cars",
+          "1",
+          "2",
+          "3"
+        ]
+      ],
+      "visible_output_shape": [
+        1,
+        4
+      ],
+      "winning_strategy": "verified_structural"
+    },
+    {
+      "family": "synthetic_44",
+      "file": "exp0_44_1.txt",
+      "new_input_shape": [
+        30,
+        1
+      ],
+      "visible_input": [
+        [
+          "Last Name:"
+        ],
+        [
+          "First Name:"
+        ],
+        [
+          "Card Number:"
+        ],
+        [
+          "Badge Expiration Date:"
+        ],
+        [
+          "Status:"
+        ],
+        [
+          ""
+        ]
+      ],
+      "visible_input_shape": [
+        6,
+        1
+      ],
+      "visible_output": [
+        [
+          "Last Name:",
+          "First Name:",
+          "Card Number:",
+          "Badge Expiration Date:",
+          "Status:"
+        ]
+      ],
+      "visible_output_shape": [
+        1,
+        5
+      ],
+      "winning_strategy": "cell_parser"
+    },
+    {
+      "family": "synthetic_51",
+      "file": "exp0_51_1.txt",
+      "new_input_shape": [
+        6,
+        4
+      ],
+      "visible_input": [
+        [
+          "",
+          "Qual 1",
+          "Qual 2",
+          "Qual 3"
+        ],
+        [
+          "Ben",
+          "31.08.2001",
+          "",
+          "05.07.2004"
+        ]
+      ],
+      "visible_input_shape": [
+        2,
+        4
+      ],
+      "visible_output": [
+        [
+          "Ben",
+          "Qual 1",
+          "31.08.2001"
+        ],
+        [
+          "Ben",
+          "Qual 3",
+          "05.07.2004"
+        ]
+      ],
+      "visible_output_shape": [
+        2,
+        3
+      ],
+      "winning_strategy": "row_column_rule"
+    }
+  ],
+  "cards": [
+    {
+      "id": "strat_01",
+      "instruction": "Identify the first column as the identifier and subsequent columns as value columns. Iterate through each value column, extracting rows where the identifier matches, and construct new rows where the identifier is paired with the column header and its corresponding value, effectively transposing the data structure.",
+      "name": "pivot_long_to_wide"
+    },
+    {
+      "id": "strat_02",
+      "instruction": "Detect when multiple rows share identical values in the first column and the remaining columns contain data that should be aggregated horizontally. Group these rows by the first column's value, then concatenate the non-identifier columns from each group into a single row, reducing the row count while expanding the column count.",
+      "name": "flatten_row_groups"
+    }
+  ],
+  "raw": {
+    "input_tokens": 729,
+    "output_tokens": 280,
+    "text": "[\n  {\n    \"id\": \"strat_01\",\n    \"name\": \"pivot_long_to_wide\",\n    \"instruction\": \"Identify the first column as the identifier and subsequent columns as value columns. Iterate through each value column, extracting rows where the identifier matches, and construct new rows where the identifier is paired with the column header and its corresponding value, effectively transposing the data structure.\"\n  },\n  {\n    \"id\": \"strat_02\",\n    \"name\": \"flatten_row_groups\",\n    \"instruction\": \"Detect when multiple rows share identical values in the first column and the remaining columns contain data that should be aggregated horizontally. Group these rows by the first column's value, then concatenate the non-identifier columns from each group into a single row, reducing the row count while expanding the column count.\"\n  },\n  {\n    \"id\": \"strat_03\",\n    \"name\": \"reorder_and_drop_nulls\",\n    \"instruction\": \"Locate the first column as the primary key and sort all subsequent columns based on the position of non-empty values in the first row. Remove any columns that consist entirely of empty strings or whitespace, and shift the remaining columns to align with the new order found in the target output.\"\n  }\n]\n",
+    "total_tokens": 1009
+  },
+  "source": "qwen_discovery"
+}

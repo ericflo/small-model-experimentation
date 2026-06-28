@@ -1,0 +1,8 @@
+run,run_label,train_seconds,beam_count,beam_register_mode,prompt_bank_count,max_steps,train_size,eval_size,train_batch_size,paired_train,paired_eval,curriculum_stages,gpu_name,gpu_vram_gb,run_order
+pilot_beam4_s120,prompt beams,1611.4617655277252,4,prompt,4,24,64,32,2,True,True,"short:1:4:30,medium:1:8:30,train:1:12:30,long:8:24:30",NVIDIA RTX 6000 Ada Generation,47.383,0
+pilot_latent_beam4_s160,latent beams,838.4032125473022,4,latent,1,24,128,64,4,True,True,"short:1:4:40,medium:1:8:40,train:1:12:40,long:8:24:40",NVIDIA RTX 6000 Ada Generation,47.383,1
+pilot_single_compiler_len8_s300,single compiler max8,498.7735240459442,1,latent,1,8,256,128,8,False,False,"short:1:4:150,medium:1:8:150",NVIDIA RTX 6000 Ada Generation,47.383,2
+pilot_single_compiler_len24_unpaired_s600,single compiler max24 mixed,2293.5073742866516,1,latent,1,24,512,64,8,False,False,"short:1:4:150,medium:1:8:150,train:1:12:150,long:8:24:150",NVIDIA RTX 6000 Ada Generation,47.383,3
+main_single_compiler_len24_paired_s750,single compiler paired,3357.935948371887,1,latent,1,24,512,64,8,True,True,"short:1:4:150,medium:1:8:150,train:1:12:150,long:8:24:300",NVIDIA RTX 6000 Ada Generation,47.383,4
+smoke_beam2,smoke_beam2,7.8675854206085205,2,prompt,2,6,8,8,2,True,True,smoke:1:3:2,NVIDIA RTX 6000 Ada Generation,47.383,5
+smoke_latent_beam4,smoke_latent_beam4,7.857314825057983,4,latent,1,6,8,8,2,True,True,smoke:1:3:2,NVIDIA RTX 6000 Ada Generation,47.383,5

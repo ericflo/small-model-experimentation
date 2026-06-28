@@ -1,0 +1,18 @@
+{
+  "run_name": "pilot_qwen_6",
+  "seed": 20260627,
+  "task_limit": 6,
+  "train_n": 4,
+  "heldout_cap": 4,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "row_samples": 1,
+  "temperature": 0.7,
+  "row_max_new_tokens": 64,
+  "batch_max_new_tokens": 420,
+  "max_tables": 128,
+  "folds": 3,
+  "no_qwen": true,
+  "tasks": 6,
+  "created_utc": "2026-06-27T07:21:03.890278+00:00"
+}

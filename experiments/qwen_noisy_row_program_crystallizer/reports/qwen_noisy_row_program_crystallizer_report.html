@@ -1,0 +1,311 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Noisy Row Program Crystallizer</title><style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; margin: 40px; color: #111827; line-height: 1.5; }
+    h1 { font-size: 32px; margin-bottom: 4px; }
+    h2 { margin-top: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0 24px; font-size: 13px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 4px; }
+    figure { margin: 18px 0 26px; }
+    figcaption { color: #4b5563; font-size: 13px; margin-top: 6px; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+    </style></head><body><h1>Noisy Row Program Crystallizer</h1>
+
+<h2>Question</h2>
+
+<p>Can noisy row-level candidate outputs be crystallized into one deterministic program for an entire text-transformation task?</p>
+
+<p>The experiment uses the language model only to propose row outputs. It then enumerates deterministic programs that exactly match the visible examples and selects the program whose held-out predictions receive the strongest support from the row-candidate pool. Hidden outputs are used only for evaluation and oracle diagnostics.</p>
+
+<h2>Setup</h2>
+
+<p>- Run: <code>main_final</code></p>
+<p>- Dataset: public text-transformation tasks.</p>
+<p>- Tasks: <code>40</code></p>
+<p>- Visible examples per task: <code>4</code></p>
+<p>- Held-out cap per task: <code>6</code></p>
+<p>- Max deterministic programs enumerated per task: <code>40000</code></p>
+<p>- Max candidate tables per task: <code>32</code></p>
+<p>- Pseudo-program support threshold for fallback: <code>0.75</code></p>
+<p>- Row-candidate rows used: <code>1428</code></p>
+
+<h2>Main Result</h2>
+
+<table>
+<tr><th>method</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th></tr>
+<tr><td>row_candidate_oracle</td><td>40</td><td>62.5%</td><td>62.5%</td></tr>
+<tr><td>table_candidate_oracle</td><td>40</td><td>60.0%</td><td>60.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>40</td><td>72.3%</td><td>50.0%</td></tr>
+<tr><td>row_majority</td><td>40</td><td>72.7%</td><td>50.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>40</td><td>72.3%</td><td>50.0%</td></tr>
+<tr><td>program_oracle</td><td>40</td><td>27.5%</td><td>27.5%</td></tr>
+<tr><td>examples_shortest_program</td><td>40</td><td>25.0%</td><td>25.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>40</td><td>28.7%</td><td>25.0%</td></tr>
+<tr><td>candidate_support_program</td><td>40</td><td>27.1%</td><td>22.5%</td></tr>
+<tr><td>pseudo_program_table</td><td>40</td><td>19.2%</td><td>17.5%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>40</td><td>0.0%</td><td>0.0%</td></tr>
+</table>
+
+<h2>Interpretation</h2>
+
+<p>Candidate support changes strict full-task exactness by <code>-27.5</code> points relative to direct greedy row inference and by <code>-2.5</code> points relative to the shortest train-fitting deterministic program. The shuffled-support control is separated by <code>-2.5</code> points.</p>
+
+<p>The pseudo-label crystallizer reaches <code>17.5%</code> as a pure table selector and <code>50.0%</code> with conservative direct fallback. Its shuffled-pseudo control reaches <code>0.0%</code>.</p>
+
+<p>The deterministic train-fitting program oracle solves <code>27.5%</code> of tasks and the row-candidate oracle solves <code>62.5%</code>. Relative to the direct-to-program oracle gap, candidate-support gap capture is not defined because the deterministic-program oracle is below the direct row baseline.</p>
+
+<h2>Diagnostics</h2>
+
+<p>- Direct row inference solves <code>20</code> of <code>40</code> tasks.</p>
+<p>- A deterministic train-fitting program can solve <code>11</code> of <code>40</code> tasks.</p>
+<p>- Candidate-support selection solves <code>9</code> of <code>40</code> tasks.</p>
+<p>- Pseudo-label crystallization solves <code>7</code> tasks as a pure selector and <code>20</code> with direct fallback.</p>
+<p>- The direct fallback uses the pseudo-program table on <code>8</code> tasks.</p>
+<p>- There are <code>4</code> direct-missed tasks with a hidden-valid deterministic program; candidate support captures <code>2</code> of them.</p>
+<p>- Candidate support changes the selected program on <code>10</code> tasks: <code>0</code> helped and <code>1</code> hurt on strict full-task exactness.</p>
+
+<h2>Charts</h2>
+
+<figure><img src="../analysis/figures/method_full_task_exact.png" alt="Full-task exact by method"><figcaption>Full-task exact by method</figcaption></figure>
+
+<figure><img src="../analysis/figures/row_vs_full_task.png" alt="Row versus full-task exact"><figcaption>Row versus full-task exact</figcaption></figure>
+
+<figure><img src="../analysis/figures/program_headroom.png" alt="Program headroom"><figcaption>Program headroom</figcaption></figure>
+
+<figure><img src="../analysis/figures/support_selection_changes.png" alt="Support selection changes"><figcaption>Support selection changes</figcaption></figure>
+
+<figure><img src="../analysis/figures/support_vote_share_distribution.png" alt="Support vote-share distribution"><figcaption>Support vote-share distribution</figcaption></figure>
+
+<figure><img src="../analysis/figures/family_heatmap.png" alt="Family heatmap"><figcaption>Family heatmap</figcaption></figure>
+
+<h2>Family Breakdown</h2>
+
+<table>
+<tr><th>method</th><th>family</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th></tr>
+<tr><td>candidate_support_program</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>candidate_support_program</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>candidate_support_program</td><td>City</td><td>2</td><td>25.0%</td><td>0.0%</td></tr>
+<tr><td>candidate_support_program</td><td>Column</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>candidate_support_program</td><td>DateTime</td><td>16</td><td>12.5%</td><td>12.5%</td></tr>
+<tr><td>candidate_support_program</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>candidate_support_program</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>candidate_support_program</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>candidate_support_program</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>candidate_support_program</td><td>Number</td><td>10</td><td>23.3%</td><td>20.0%</td></tr>
+<tr><td>candidate_support_program</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>candidate_support_program</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>candidate_support_program</td><td>UserAgent</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>DateTime</td><td>16</td><td>72.9%</td><td>56.2%</td></tr>
+<tr><td>direct_row_greedy</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Number</td><td>10</td><td>61.7%</td><td>30.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>BillingCode</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>City</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>Column</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>DateTime</td><td>16</td><td>12.5%</td><td>12.5%</td></tr>
+<tr><td>examples_shortest_program</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>Gender</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>Number</td><td>10</td><td>20.0%</td><td>20.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>examples_shortest_program</td><td>UserAgent</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_oracle</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_oracle</td><td>BillingCode</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>program_oracle</td><td>City</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_oracle</td><td>Column</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_oracle</td><td>DateTime</td><td>16</td><td>12.5%</td><td>12.5%</td></tr>
+<tr><td>program_oracle</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>program_oracle</td><td>Gender</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_oracle</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>program_oracle</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>program_oracle</td><td>Number</td><td>10</td><td>30.0%</td><td>30.0%</td></tr>
+<tr><td>program_oracle</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>program_oracle</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_oracle</td><td>UserAgent</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>DateTime</td><td>16</td><td>72.9%</td><td>56.2%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>Number</td><td>10</td><td>61.7%</td><td>30.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_or_direct</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>City</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>Column</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>DateTime</td><td>16</td><td>12.5%</td><td>12.5%</td></tr>
+<tr><td>pseudo_program_table</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>Gender</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>Number</td><td>10</td><td>3.3%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>pseudo_program_table</td><td>UserAgent</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>BillingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>City</td><td>2</td><td>50.0%</td><td>50.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>DateTime</td><td>16</td><td>62.5%</td><td>62.5%</td></tr>
+<tr><td>row_candidate_oracle</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>Gender</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>Number</td><td>10</td><td>70.0%</td><td>70.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>row_candidate_oracle</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>row_majority</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>DateTime</td><td>16</td><td>74.0%</td><td>56.2%</td></tr>
+<tr><td>row_majority</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Number</td><td>10</td><td>61.7%</td><td>30.0%</td></tr>
+<tr><td>row_majority</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>BillingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>City</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>Column</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>DateTime</td><td>16</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>FilePath</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>Gender</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>Language</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>Name</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>Number</td><td>10</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>Phone</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_pseudo_program_table</td><td>UserAgent</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>BillingCode</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>City</td><td>2</td><td>25.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>Column</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>DateTime</td><td>16</td><td>12.5%</td><td>12.5%</td></tr>
+<tr><td>shuffled_support_program</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>Number</td><td>10</td><td>23.3%</td><td>20.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_support_program</td><td>UserAgent</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>Address</td><td>2</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>BillingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>City</td><td>2</td><td>50.0%</td><td>50.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>DateTime</td><td>16</td><td>62.5%</td><td>62.5%</td></tr>
+<tr><td>table_candidate_oracle</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>Gender</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>Number</td><td>10</td><td>60.0%</td><td>60.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>ShippingCode</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>table_candidate_oracle</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+</table>
+
+<h2>Reachable Headroom Tasks</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>features</th><th>direct_full_exact</th><th>examples_full_exact</th><th>support_full_exact</th><th>shuffled_full_exact</th><th>support_avg_vote_share</th><th>train_match_count</th><th>support_program</th><th>oracle_program</th></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>Concatenation</td><td>False</td><td>True</td><td>False</td><td>True</td><td>71.4%</td><td>1239</td><td>affix[&#x27;[&#x27;,&#x27;]&#x27;](field[[,-1](COL0))</td><td>affix[&#x27;&#x27;,&#x27;]&#x27;](COL0)</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>Numeric,NumericRounding</td><td>False</td><td>False</td><td>False</td><td>False</td><td>57.1%</td><td>687</td><td>affix[&#x27;&#x27;,&#x27;0&#x27;](slice[0:2](COL0))</td><td>affix[&#x27;&#x27;,&#x27;0&#x27;](drop_last[1](COL0))</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>Numeric,NumericRounding</td><td>False</td><td>True</td><td>True</td><td>True</td><td>57.1%</td><td>617</td><td>number_round10(COL0)</td><td>number_round10(COL0)</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>Numeric,NumericRounding</td><td>False</td><td>True</td><td>True</td><td>True</td><td>14.3%</td><td>624</td><td>number_round100(COL0)</td><td>number_round100(COL0)</td></tr>
+</table>
+
+<h2>Candidate-Support Changes</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>features</th><th>examples_full_exact</th><th>support_full_exact</th><th>support_avg_vote_share</th><th>support_supported_rows</th><th>examples_program</th><th>support_program</th></tr>
+<tr><td>Address.000002</td><td>Address</td><td>Substring</td><td>False</td><td>False</td><td>0.0%</td><td>0</td><td>map[Aysu Fatma Ahmed 492 24th Place NW,Edison,AK,(896) 388-9065,000-93-6876,38891-&gt;492 24th Place,Fiamma Greco 967 03th Place SE,Long Beach,OK,(129) 734-1247,000-61-4879,03719-&gt;967 03th Place SE](COL0)</td><td>map[Place-&gt;492 24th Place,SE,Long-&gt;967 03th Place SE](field[space,-3](COL0))</td></tr>
+<tr><td>City.000011</td><td>City</td><td>Conditional</td><td>False</td><td>False</td><td>64.3%</td><td>3</td><td>map[New York City-&gt;New York City,n.y.c.-&gt;New York City,New York City  -&gt;New York City](COL0)</td><td>affix[&#x27;&#x27;,&#x27;ew York City&#x27;](upper(slice[0:1](COL0)))</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>DateTimeRange,DateTimeRounding,DateTime</td><td>False</td><td>False</td><td>0.0%</td><td>0</td><td>map[11:12:29-&gt;11:00AM-11:30AM,08:29:52-&gt;8:00AM-8:30AM](COL0)</td><td>map[1-&gt;11:00AM-11:30AM,0-&gt;8:00AM-8:30AM](slice[0:1](COL0))</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>DateTimeRange,DateTimeRounding,DateTime</td><td>False</td><td>False</td><td>16.7%</td><td>1</td><td>map[6:25PM-&gt;6:15PM-6:45PM,9:44PM-&gt;9:15PM-9:45PM,7:00AM-&gt;6:45AM-7:15AM,11:34PM-&gt;11:15PM-11:45PM](COL0)</td><td>map[2-&gt;6:15PM-6:45PM,4-&gt;9:15PM-9:45PM,0-&gt;6:45AM-7:15AM,1-&gt;11:15PM-11:45PM](title(slice[1:3](COL0)))</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>DateTimeRange,DateTimeRounding,DateTime</td><td>False</td><td>False</td><td>100.0%</td><td>6</td><td>map[31-Jan-2031 05:54:18-&gt;0-20,17-Jan-1990 13:32:01-&gt;0-20,14-Feb-2034 05:36:07-&gt;0-20,14-Mar-2002 13:16:16-&gt;0-20](COL0)</td><td>affix[&#x27;0&#x27;,&#x27;20&#x27;](slice[6:7](COL0))</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>Conditional</td><td>False</td><td>False</td><td>90.5%</td><td>3</td><td>map[M-&gt;0,F-&gt;1](COL0)</td><td>map[M-&gt;0,F-&gt;1](initials(COL0))</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>DateTime</td><td>False</td><td>False</td><td>0.0%</td><td>0</td><td>map[26/4-&gt;04-26,5/11-&gt;11-05,23/9-&gt;09-23,8/12-&gt;12-08](COL0)</td><td>map[30-&gt;04-26,0-&gt;11-05,20-&gt;09-23,10-&gt;12-08](number_round10(COL0))</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>Numeric,NumericRounding</td><td>False</td><td>False</td><td>57.1%</td><td>3</td><td>map[112-&gt;110,117-&gt;110](COL0)</td><td>affix[&#x27;&#x27;,&#x27;0&#x27;](slice[0:2](COL0))</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>Concatenation,Substring</td><td>False</td><td>False</td><td>0.0%</td><td>0</td><td>map[1Z 39V 80D 24 0712 870 8-&gt;39V 870,1Z AI7 S7L 39 2136 908 9-&gt;AI7 2136](COL0)</td><td>map[9-&gt;39V 870,-&gt;AI7 2136](digits(slice[4:5](COL0)))</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>Concatenation</td><td>True</td><td>False</td><td>71.4%</td><td>3</td><td>affix[&#x27;&#x27;,&#x27;]&#x27;](COL0)</td><td>affix[&#x27;[&#x27;,&#x27;]&#x27;](field[[,-1](COL0))</td></tr>
+</table>
+
+<h2>Task Details</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>heldout_rows</th><th>train_match_count</th><th>candidate_tables</th><th>coherent_pseudo_tables</th><th>program_oracle</th><th>table_candidate_oracle</th><th>direct_full_exact</th><th>examples_full_exact</th><th>support_full_exact</th><th>pseudo_full_exact</th><th>pseudo_or_direct_full_exact</th><th>shuffled_pseudo_full_exact</th><th>pseudo_avg_vote_share</th></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>3</td><td>1239</td><td>8</td><td>1</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>False</td><td>False</td><td>False</td><td>71.4%</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>3</td><td>687</td><td>18</td><td>2</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>57.1%</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>3</td><td>1404</td><td>1</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>6</td><td>1168</td><td>9</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>City.000011</td><td>City</td><td>4</td><td>864</td><td>4</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>6</td><td>1026</td><td>32</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>3</td><td>1051</td><td>4</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>6</td><td>568</td><td>6</td><td>0</td><td>False</td><td>True</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>6</td><td>750</td><td>6</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>6</td><td>862</td><td>32</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>6</td><td>1327</td><td>1</td><td>1</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>100.0%</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>6</td><td>907</td><td>1</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>3</td><td>540</td><td>3</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>6</td><td>768</td><td>8</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>6</td><td>691</td><td>32</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>6</td><td>687</td><td>32</td><td>0</td><td>False</td><td>True</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>6</td><td>645</td><td>8</td><td>0</td><td>False</td><td>True</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>3</td><td>1184</td><td>1</td><td>0</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>3</td><td>617</td><td>6</td><td>0</td><td>True</td><td>False</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>4</td><td>624</td><td>32</td><td>0</td><td>True</td><td>False</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>0.0%</td></tr>
+<tr><td>City.000010</td><td>City</td><td>3</td><td>574</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>6</td><td>491</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>6</td><td>974</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>6</td><td>1027</td><td>32</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>6</td><td>1027</td><td>8</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>6</td><td>484</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>4</td><td>948</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>6</td><td>862</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>6</td><td>862</td><td>2</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>6</td><td>701</td><td>24</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>3</td><td>768</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>6</td><td>736</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>6</td><td>805</td><td>1</td><td>0</td><td>False</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>True</td><td>False</td><td>0.0%</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>6</td><td>1891</td><td>1</td><td>1</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>100.0%</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>6</td><td>1199</td><td>1</td><td>1</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>100.0%</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>6</td><td>582</td><td>1</td><td>1</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>100.0%</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>6</td><td>1292</td><td>1</td><td>1</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>100.0%</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>6</td><td>1054</td><td>1</td><td>1</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>100.0%</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>6</td><td>1228</td><td>1</td><td>1</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>100.0%</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>3</td><td>1093</td><td>1</td><td>1</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>100.0%</td></tr>
+</table>
+
+<h2>Files</h2>
+
+<p>- <code>runs/main_final/row_candidates.csv</code></p>
+<p>- <code>runs/main_final/task_details.csv</code></p>
+<p>- <code>runs/main_final/method_details.csv</code></p>
+<p>- <code>runs/main_final/summary.csv</code></p>
+<p>- <code>analysis/summary.csv</code></p>
+<p>- <code>analysis/task_details.csv</code></p>
+<p>- <code>analysis/method_details.csv</code></p>
+<p>- <code>analysis/family_summary.csv</code></p></body></html>

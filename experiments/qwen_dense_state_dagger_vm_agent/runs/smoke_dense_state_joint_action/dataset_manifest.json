@@ -1,0 +1,52 @@
+{
+  "run": "smoke_dense_state_joint_action",
+  "args": {
+    "run_name": "smoke_dense_state_joint_action",
+    "model_name": "Qwen/Qwen3-4B",
+    "seed": 431,
+    "train_size": 8,
+    "val_size": 4,
+    "fresh_size": 4,
+    "hard_size": 4,
+    "max_arith_steps": 4,
+    "max_prompt_len": 96,
+    "state_tokens": 17,
+    "dropout": 0.05,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lr": 0.0001,
+    "dagger_lr": 5e-05,
+    "bc_epochs": 1,
+    "dagger_epochs": 1,
+    "dagger_rounds": 1,
+    "batch_size": 1,
+    "grad_accum": 1,
+    "teacher_max_steps": 6,
+    "dagger_rollout_steps": 2,
+    "stop_loss_weight": 4.0,
+    "value_loss_weight": 0.5,
+    "distance_loss_weight": 0.05,
+    "false_stop_weight": 6.0,
+    "value_threshold": 0.55,
+    "dagger_value_gate": 0,
+    "typed_action_mask": 1,
+    "eval_native": 0,
+    "native_max_new_tokens": 16,
+    "k_values": [
+      0,
+      1,
+      2
+    ]
+  },
+  "sizes": {
+    "train": 8,
+    "val_mixed": 4,
+    "fresh_standard": 4,
+    "fresh_paraphrase": 4,
+    "fresh_paired": 4,
+    "hard_composition": 4
+  },
+  "hidden_size": 2560,
+  "action_size": 1761
+}

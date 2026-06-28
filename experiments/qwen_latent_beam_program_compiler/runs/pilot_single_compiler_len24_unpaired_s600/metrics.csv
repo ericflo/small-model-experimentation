@@ -1,0 +1,7 @@
+run,split,n,beam_count,beam0_accuracy,selected_accuracy,prior_accuracy,oracle_accuracy,beam0_program_exact,selected_program_exact,prior_program_exact,oracle_program_exact,selected_state_prefix_fraction,oracle_state_prefix_fraction,avg_distinct_answers,selector_entropy,selected_oracle_gap_recovered
+pilot_single_compiler_len24_unpaired_s600,standard_len8,64.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,nan
+pilot_single_compiler_len24_unpaired_s600,standard_len12,64.0,1.0,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.9778645833333334,0.9778645833333334,1.0,0.0,nan
+pilot_single_compiler_len24_unpaired_s600,standard_len24,64.0,1.0,0.046875,0.046875,0.046875,0.046875,0.0,0.0,0.0,0.0,0.486328125,0.486328125,1.0,0.0,nan
+pilot_single_compiler_len24_unpaired_s600,paraphrase_len8,64.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,nan
+pilot_single_compiler_len24_unpaired_s600,paraphrase_len12,64.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,nan
+pilot_single_compiler_len24_unpaired_s600,paraphrase_len24,64.0,1.0,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.927734375,0.927734375,1.0,0.0,nan

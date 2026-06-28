@@ -1,0 +1,160 @@
+{
+  "caveats": [
+    "This is not the official Docker SWE-bench harness.",
+    "The runner uses a manually validated local Flask dependency profile on Python 3.12.",
+    "The prompt context includes production files touched by the gold patch, matching the synthetic opened-file setup but not a full autonomous retrieval setting."
+  ],
+  "initial": {
+    "added_lines": 5,
+    "completion": "diff --git a/src/flask/blueprints.py b/src/flask/blueprints.py\nindex 9d0a3d0..3d8d8f5 100644\n--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -1,6 +1,6 @@\n import os\n import typing as t\n-from collections import defaultdict\n from functools import update_wrapper\n \n from . import typing as ft\n@@ -100,6 +100,10 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain\n@@ -108,6 +112,7 @@ class Blueprint(Scaffold):\n         self.url_values_defaults = url_defaults\n         self.cli_group = cli_group\n         self._blueprints: t.List[t.Tuple[\"Blueprint\", dict]] = []\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n\n     def _check_setup_finished(self, f_name: str) -> None:\n         if self._got_registered_once:\n@@ -115,6 +120,7 @@ class Blueprint(Scaffold):\n     @setupmethod\n     def record(self, func: t.Callable) -> None:\n         \"\"\"Registers a function that is called when the blueprint is\n         registered on the application.  This function is called with the\n         state as argument as returned by the :meth:`make_setup_state`\n         method.\n         \"\"\"\n         self.deferred_functions.append(func)\n\n     @setupmethod\n     def record_once(self, func: t.Callable) -> None:\n         \"\"\"Works like :meth:`record` but wraps the function in another\n         function that will ensure the function is only called once.  If the\n         blueprint is registered a second time on the application, the\n         function passed is not called.\n         \"\"\"\n\n         def wrapper(state: BlueprintSetupState) -> None:\n             if state.first_registration:\n                 func(state)\n\n         self.record(update_wrapper(wrapper, func))\n\n     def make_setup_state(\n         self, app: \"Flask\", options: dict, first_registration: bool = False\n     ) -> BlueprintSetupState:\n         \"\"\"Creates an instance of :meth:`~flask.blueprints.BlueprintSetupState`\n         object that is later passed to the register callback functions.\n         Subclasses can override this to return a subclass of the setup state.\n         \"\"\"\n         return BlueprintSetupState(self, app, options, first_registration)\n\n     @setupmethod\n     def register_blueprint(self, blueprint: \"Blueprint\", **options: t.Any) -> None:\n         \"\"\"Register a :class:`~flask.Blueprint` on this blueprint. Keyword\n         arguments passed to this method will override the defaults set\n         on the blueprint.\n\n         .. versionchanged:: 2.0.1\n             The ``name`` option can be used to change the (pre-dotted)\n             name the blueprint is registered with. This allows the same\n             blueprint to be registered multiple times with unique names\n             for ``url_for``.\n\n         .. versionadded:: 2.0\n         \"\"\"\n         if blueprint is self:\n             raise ValueError(\"Cannot register a blueprint on itself\")\n         self._blueprints.append((blueprint, options))\n\n     def register(self, app: \"Flask\", options: dict) -> None:\n         \"\"\"Called by :meth:`Flask.register_blueprint` to register all\n         views and callbacks registered on the blueprint with the\n         application. Creates",
+    "extracted_patch": "diff --git a/src/flask/blueprints.py b/src/flask/blueprints.py\nindex 9d0a3d0..3d8d8f5 100644\n--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -1,6 +1,6 @@\n import os\n import typing as t\n-from collections import defaultdict\n from functools import update_wrapper\n \n from . import typing as ft\n@@ -100,6 +100,10 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain\n@@ -108,6 +112,7 @@ class Blueprint(Scaffold):\n         self.url_values_defaults = url_defaults\n         self.cli_group = cli_group\n         self._blueprints: t.List[t.Tuple[\"Blueprint\", dict]] = []\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n\n     def _check_setup_finished(self, f_name: str) -> None:\n         if self._got_registered_once:\n@@ -115,6 +120,7 @@ class Blueprint(Scaffold):\n     @setupmethod\n     def record(self, func: t.Callable) -> None:\n         \"\"\"Registers a function that is called when the blueprint is\n         registered on the application.  This function is called with the\n         state as argument as returned by the :meth:`make_setup_state`\n         method.\n         \"\"\"\n         self.deferred_functions.append(func)\n\n     @setupmethod\n     def record_once(self, func: t.Callable) -> None:\n         \"\"\"Works like :meth:`record` but wraps the function in another\n         function that will ensure the function is only called once.  If the\n         blueprint is registered a second time on the application, the\n         function passed is not called.\n         \"\"\"\n\n         def wrapper(state: BlueprintSetupState) -> None:\n             if state.first_registration:\n                 func(state)\n\n         self.record(update_wrapper(wrapper, func))\n\n     def make_setup_state(\n         self, app: \"Flask\", options: dict, first_registration: bool = False\n     ) -> BlueprintSetupState:\n         \"\"\"Creates an instance of :meth:`~flask.blueprints.BlueprintSetupState`\n         object that is later passed to the register callback functions.\n         Subclasses can override this to return a subclass of the setup state.\n         \"\"\"\n         return BlueprintSetupState(self, app, options, first_registration)\n\n     @setupmethod\n     def register_blueprint(self, blueprint: \"Blueprint\", **options: t.Any) -> None:\n         \"\"\"Register a :class:`~flask.Blueprint` on this blueprint. Keyword\n         arguments passed to this method will override the defaults set\n         on the blueprint.\n\n         .. versionchanged:: 2.0.1\n             The ``name`` option can be used to change the (pre-dotted)\n             name the blueprint is registered with. This allows the same\n             blueprint to be registered multiple times with unique names\n             for ``url_for``.\n\n         .. versionadded:: 2.0\n         \"\"\"\n         if blueprint is self:\n             raise ValueError(\"Cannot register a blueprint on itself\")\n         self._blueprints.append((blueprint, options))\n\n     def register(self, app: \"Flask\", options: dict) -> None:\n         \"\"\"Called by :meth:`Flask.register_blueprint` to register all\n         views and callbacks registered on the blueprint with the\n         application. Creates\n",
+    "files_touched": 1,
+    "generation_seconds": 43.70142197608948,
+    "patch_applied": false,
+    "patch_apply_output": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n",
+    "removed_lines": 1,
+    "test_output": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n",
+    "tests_passed": false
+  },
+  "preflight": {
+    "base_test": {
+      "cmd": [
+        "/workspace/runs/swebench_direct/venvs/pallets__flask-5014/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-W",
+        "ignore::DeprecationWarning",
+        "tests/test_blueprints.py::test_empty_name_not_allowed"
+      ],
+      "cwd": "/workspace/runs/swebench_direct/eval_work/pallets__flask-5014/preflight_base",
+      "output": "F                                                                                                                                                                                                                                                                                                                                 [100%]\n=============================================================================================================================================================== FAILURES ================================================================================================================================================================\n______________________________________________________________________________________________________________________________________________________ test_empty_name_not_allowed ______________________________________________________________________________________________________________________________________________________\n\napp = <Flask 'flask_test'>, client = <FlaskClient <Flask 'flask_test'>>\n\n    def test_empty_name_not_allowed(app, client):\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/test_blueprints.py:260: Failed\n======================================================================================================================================================== short test summary info ========================================================================================================================================================\nFAILED tests/test_blueprints.py::test_empty_name_not_allowed - Failed: DID NOT RAISE <class 'ValueError'>\n1 failed in 0.12s\n",
+      "returncode": 1
+    },
+    "gold_eval": {
+      "patch_applied": true,
+      "patch_apply_output": "",
+      "test_output": ".                                                                                                                                                                                                                                                                                                                                 [100%]\n1 passed in 0.09s\n",
+      "test_returncode": 0,
+      "tests_passed": true
+    }
+  },
+  "repair_record": {
+    "test_output_after_wrong_patch": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n",
+    "wrong_patch_applied": false,
+    "wrong_patch_apply_output": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n"
+  },
+  "repairs": [
+    {
+      "adapter": null,
+      "added_lines": 3,
+      "completion": "diff --git a/src/flask/blueprints.py b/src/flask/blueprints.py\nindex 9d0a3d0..3d8d8f5 100644\n--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -100,6 +100,10 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain",
+      "condition": "B_frozen_second_attempt",
+      "extracted_patch": "diff --git a/src/flask/blueprints.py b/src/flask/blueprints.py\nindex 9d0a3d0..3d8d8f5 100644\n--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -100,6 +100,10 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain\n",
+      "files_touched": 1,
+      "generation_seconds": 8.119356870651245,
+      "patch_applied": false,
+      "patch_apply_output": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "prompt_mode": "trace",
+      "removed_lines": 0,
+      "test_output": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "tests_passed": false
+    },
+    {
+      "adapter": "models/v2_final_patch_sft_lora",
+      "added_lines": 3,
+      "completion": "--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -100,7 +100,9 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain\n",
+      "condition": "C_final_patch_sft",
+      "extracted_patch": "--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -100,7 +100,9 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain\n",
+      "files_touched": 1,
+      "generation_seconds": 9.152280569076538,
+      "patch_applied": false,
+      "patch_apply_output": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "prompt_mode": "trace",
+      "removed_lines": 0,
+      "test_output": "error: patch failed: src/flask/blueprints.py:100\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "tests_passed": false
+    },
+    {
+      "adapter": "models/v2_failure_conditioned_no_trace_lora",
+      "added_lines": 1,
+      "completion": "diff --git a/src/flask/blueprints.py b/src/flask/blueprints.py\nindex 9d0a3d0..3d8d8f5 100644\n--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -1,8 +1,7 @@\n import os\n import typing as t\n-from collections import defaultdict\n from functools import update_wrapper\n \n from . import typing as ft\n-from .scaffold import _endpoint_from_view_func\n-from .scaffold import _sentinel\n-from .scaffold import Scaffold\n-from .scaffold import setupmethod\n+from .scaffold import _endpoint_from_view_func, _sentinel, Scaffold, setupmethod\n \n if t.TYPE_CHECKING:  # pragma: no cover\n     from .app import Flask\n",
+      "condition": "D_no_trace_repair_sft",
+      "extracted_patch": "diff --git a/src/flask/blueprints.py b/src/flask/blueprints.py\nindex 9d0a3d0..3d8d8f5 100644\n--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -1,8 +1,7 @@\n import os\n import typing as t\n-from collections import defaultdict\n from functools import update_wrapper\n \n from . import typing as ft\n-from .scaffold import _endpoint_from_view_func\n-from .scaffold import _sentinel\n-from .scaffold import Scaffold\n-from .scaffold import setupmethod\n+from .scaffold import _endpoint_from_view_func, _sentinel, Scaffold, setupmethod\n \n if t.TYPE_CHECKING:  # pragma: no cover\n     from .app import Flask\n",
+      "files_touched": 1,
+      "generation_seconds": 17.34305500984192,
+      "patch_applied": true,
+      "patch_apply_output": "",
+      "prompt_mode": "no_trace",
+      "removed_lines": 5,
+      "test_output": "F                                                                                                                                                                                                                                                                                                                                 [100%]\n=============================================================================================================================================================== FAILURES ================================================================================================================================================================\n______________________________________________________________________________________________________________________________________________________ test_empty_name_not_allowed ______________________________________________________________________________________________________________________________________________________\n\napp = <Flask 'flask_test'>, client = <FlaskClient <Flask 'flask_test'>>\n\n    def test_empty_name_not_allowed(app, client):\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/test_blueprints.py:260: Failed\n======================================================================================================================================================== short test summary info ========================================================================================================================================================\nFAILED tests/test_blueprints.py::test_empty_name_not_allowed - Failed: DID NOT RAISE <class 'ValueError'>\n1 failed in 0.11s\n",
+      "test_returncode": 1,
+      "tests_passed": false
+    },
+    {
+      "adapter": "models/v2_failure_conditioned_trace_lora",
+      "added_lines": 1,
+      "completion": "--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -99,7 +99,7 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n-        if not name:\n+        if not name or not name.strip():\n             raise ValueError(\"Blueprint name must be non-empty.\")\n \n         self.name = name\n",
+      "condition": "E_trace_repair_sft",
+      "extracted_patch": "--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -99,7 +99,7 @@ class Blueprint(Scaffold):\n         if url_defaults is None:\n             url_defaults = {}\n\n-        if not name:\n+        if not name or not name.strip():\n             raise ValueError(\"Blueprint name must be non-empty.\")\n \n         self.name = name\n",
+      "files_touched": 1,
+      "generation_seconds": 8.474340677261353,
+      "patch_applied": false,
+      "patch_apply_output": "error: patch failed: src/flask/blueprints.py:99\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "prompt_mode": "trace",
+      "removed_lines": 1,
+      "test_output": "error: patch failed: src/flask/blueprints.py:99\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "tests_passed": false
+    },
+    {
+      "adapter": "models/v2_failure_conditioned_shuffled_trace_lora",
+      "added_lines": 3,
+      "completion": "--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -1,7 +1,7 @@\n import os\n import typing as t\n-from collections import defaultdict\n from functools import update_wrapper\n \n from . import typing as ft\n@@ -98,6 +98,10 @@\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain\n",
+      "condition": "F_shuffled_trace_repair_sft",
+      "extracted_patch": "--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -1,7 +1,7 @@\n import os\n import typing as t\n-from collections import defaultdict\n from functools import update_wrapper\n \n from . import typing as ft\n@@ -98,6 +98,10 @@\n         if url_defaults is None:\n             url_defaults = {}\n\n+        if not name:\n+            raise ValueError(\"Blueprint name must be non-empty.\")\n+\n         self.name = name\n         self.url_prefix = url_prefix\n         self.subdomain = subdomain\n",
+      "files_touched": 1,
+      "generation_seconds": 11.992800235748291,
+      "patch_applied": false,
+      "patch_apply_output": "error: patch failed: src/flask/blueprints.py:98\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "prompt_mode": "trace",
+      "removed_lines": 1,
+      "test_output": "error: patch failed: src/flask/blueprints.py:98\nerror: src/flask/blueprints.py: patch does not apply\n",
+      "tests_passed": false
+    }
+  ],
+  "summary": {
+    "base_commit": "7ee9ceb71e868944a46e1ff00b506772a53a4f1d",
+    "base_failed": true,
+    "context_paths": [
+      "src/flask/blueprints.py"
+    ],
+    "dataset": "princeton-nlp/SWE-bench_Verified",
+    "end_to_end_resolved@2": {
+      "B_frozen_second_attempt": 0.0,
+      "C_final_patch_sft": 0.0,
+      "D_no_trace_repair_sft": 0.0,
+      "E_trace_repair_sft": 0.0,
+      "F_shuffled_trace_repair_sft": 0.0
+    },
+    "gold_passed": true,
+    "harness": "direct_pytest_not_official_docker",
+    "initial_resolved@1": 0.0,
+    "instance_id": "pallets__flask-5014",
+    "pythonpath_entries": [
+      "src"
+    ],
+    "repair_after_first_failure@1": {
+      "B_frozen_second_attempt": 0.0,
+      "C_final_patch_sft": 0.0,
+      "D_no_trace_repair_sft": 0.0,
+      "E_trace_repair_sft": 0.0,
+      "F_shuffled_trace_repair_sft": 0.0
+    },
+    "repo": "pallets/flask",
+    "status": "completed",
+    "tests": [
+      "tests/test_blueprints.py::test_empty_name_not_allowed"
+    ],
+    "valid_initial_failures": 1
+  }
+}

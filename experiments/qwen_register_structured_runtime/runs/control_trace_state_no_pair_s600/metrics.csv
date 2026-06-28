@@ -1,0 +1,13 @@
+run,variant,split,n,direct_accuracy,direct_target_mass,executor_accuracy,executor_target_mass,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,pair_true_answer_consistency,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+control_trace_state_no_pair_s600,register_trace_state,standard_len4,128.0,nan,nan,1.0,0.9740650318562984,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+control_trace_state_no_pair_s600,register_trace_state,standard_len8,128.0,nan,nan,1.0,0.9710110276937485,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+control_trace_state_no_pair_s600,register_trace_state,standard_len12,128.0,nan,nan,1.0,0.9785917066037655,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+control_trace_state_no_pair_s600,register_trace_state,standard_len24,128.0,nan,nan,0.0390625,0.03237689347588457,1.0,0.9059244791666666,0.865234375,0.0234375,0.8352864583333334,0.0234375,0.8333333333333334,,,,,
+control_trace_state_no_pair_s600,register_trace_state,paraphrase_len4,128.0,nan,nan,1.0,0.9717613458633423,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+control_trace_state_no_pair_s600,register_trace_state,paraphrase_len8,128.0,nan,nan,1.0,0.9768612422049046,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+control_trace_state_no_pair_s600,register_trace_state,paraphrase_len12,128.0,nan,nan,1.0,0.9721079953014851,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+control_trace_state_no_pair_s600,register_trace_state,paraphrase_len24,128.0,nan,nan,0.015625,0.009449861739994958,1.0,0.8177083333333334,0.7259114583333334,0.0,0.7067057291666666,0.0,0.7041015625,,,,,
+control_trace_state_no_pair_s600,register_trace_state,paired_len4,256.0,nan,nan,1.0,0.9695038069039583,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+control_trace_state_no_pair_s600,register_trace_state,paired_len8,256.0,nan,nan,1.0,0.9753463640809059,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+control_trace_state_no_pair_s600,register_trace_state,paired_len12,256.0,nan,nan,1.0,0.9687870759516954,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+control_trace_state_no_pair_s600,register_trace_state,paired_len24,256.0,nan,nan,0.015625,0.012634072700166143,1.0,0.8600260416666666,0.7970377604166666,0.0078125,0.76318359375,0.0078125,0.76123046875,1.0,0.015625,0.0,0.0,0.0

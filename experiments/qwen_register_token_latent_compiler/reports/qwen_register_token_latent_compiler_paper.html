@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen Register-Token Latent Compiler</title>
+<style>
+:root { color-scheme: light; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #202124; background: #f7f8fa; }
+main { max-width: 920px; margin: 0 auto; padding: 48px 24px 72px; background: #fff; min-height: 100vh; box-sizing: border-box; }
+h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 24px; }
+h2 { font-size: 1.35rem; margin: 34px 0 12px; padding-top: 8px; border-top: 1px solid #e5e7eb; }
+h3 { font-size: 1.05rem; margin: 24px 0 10px; }
+p, li { line-height: 1.55; font-size: 0.98rem; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #f0f2f4; padding: 0.1rem 0.25rem; border-radius: 4px; }
+pre { overflow-x: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 6px; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 22px; font-size: 0.95rem; }
+th, td { border: 1px solid #d8dde3; padding: 8px 10px; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { background: #eef1f5; }
+</style>
+</head>
+<body>
+<main>
+<h1>Qwen Register-Token Latent Compiler</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a small Qwen-attached training intervention can
+make a fixed bank of latent register tokens act like an executable program
+surface. Each prompt describes a modular-arithmetic chain. The prompt is
+followed by marker tokens for an initial-value register and one operation and
+argument register per possible step. A trainable compiler reads only the hidden
+states at those register markers. It predicts a program, and a deterministic
+invisible executor runs that program modulo 97.</p>
+<p>The result is mixed. With QLoRA adaptation and trace supervision, the model
+learns the register interface well through length 12: exact execution reaches
+88.3-94.5% on standard prompts, 89.1-90.6% on paraphrased prompts, and
+87.9-96.1% on paired renderings of the same program. At length 24, exact
+execution falls to 21.9% on standard prompts, 3.1% on paraphrases, and 12.5% on
+paired prompts. Per-slot accuracy remains high at length 24, but exact
+long-chain program correctness is brittle.</p>
+<p>Two controls stayed near chance. A direct answer head trained on the answer
+marker reached only 3.1% on standard length 24. The same register compiler
+trained only from final-answer loss reached 1.6% on standard length 24 and 0.0%
+on paired length 24. The useful signal came from supervised executable traces,
+not from final-answer supervision alone.</p>
+<h2>Question</h2>
+<p>Can a Qwen-attached model learn to write an invisible executable program into a
+fixed register bank, where the downstream runtime reads only those register
+hidden states and never reads hand-selected prompt spans?</p>
+<p>This is a strict interface test. The bridge sees:</p>
+<ul>
+<li>the hidden state at <code>&lt;REG_INIT&gt;</code>;</li>
+<li>the hidden state at each <code>&lt;REG_OP_XX&gt;</code>;</li>
+<li>the hidden state at each <code>&lt;REG_ARG_XX&gt;</code>.</li>
+</ul>
+<p>It does not receive token spans for the source numbers or operation words. If it
+works, the language model has learned to route source information into fixed
+latent program slots.</p>
+<h2>Task</h2>
+<p>Each example samples an initial value <code>x</code> modulo 97 and a chain of updates:</p>
+<pre><code class="language-text">+x by a
+-x by a
+*x by a
+</code></pre>
+<p>The true answer is the final value after executing all active steps modulo 97.
+The maximum register bank has 24 steps. Evaluation uses lengths 4, 8, 12, and
+24, with three rendering modes:</p>
+<table>
+<thead><tr><th>Split</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Standard</td><td>Canonical prompt wording</td></tr>
+<tr><td>Paraphrase</td><td>Alternative wording for the same operation semantics</td></tr>
+<tr><td>Paired</td><td>Two renderings of each sampled program, used to measure consistency</td></tr>
+</tbody>
+</table>
+<h2>Model</h2>
+<p>The base model is <code>Qwen/Qwen3-4B</code>, loaded in 4-bit NF4 with LoRA adapters on
+linear modules. The main compiler is a one-layer transformer over the register
+bank:</p>
+<ul>
+<li>input: Qwen hidden states at register-marker positions;</li>
+<li>width: 512;</li>
+<li>heads: 4;</li>
+<li>outputs: one init distribution over 97 values, one operation distribution per
+  step, and one argument distribution per step.</li>
+</ul>
+<p>A deterministic differentiable executor maps the predicted distributions into a
+final answer distribution. Argmax execution is used for exact program metrics.</p>
+<h2>Training Variants</h2>
+<table>
+<thead><tr><th>Variant</th><th>Interface</th><th>Supervision</th></tr></thead>
+<tbody>
+<tr><td>Direct answer head</td><td>Answer-marker hidden state</td><td>Final answer only</td></tr>
+<tr><td>Register answer-only</td><td>Register hidden states</td><td>Final answer through soft executor</td></tr>
+<tr><td>Register trace</td><td>Register hidden states</td><td>Init, operation, argument, and final answer</td></tr>
+</tbody>
+</table>
+<p>The main run uses the register-trace variant. It trains for 600 optimizer steps
+with a curriculum: 150 steps on lengths 1-4, 150 on 1-8, 150 on 1-12, and 150 on
+8-24.</p>
+<h2>Main Results</h2>
+<h3>Trace-Supervised Register Compiler</h3>
+<table>
+<thead>
+<tr><th>Split</th><th>Executor exact</th><th>Program exact</th><th>Init</th><th>Op</th><th>Arg</th><th>Prefix</th><th>Pair both</th><th>Pair state consistency</th></tr>
+</thead>
+<tbody>
+<tr><td>Standard L4</td><td>88.3%</td><td>88.3%</td><td>88.3%</td><td>100.0%</td><td>100.0%</td><td>88.3%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Standard L8</td><td>94.5%</td><td>94.5%</td><td>94.5%</td><td>100.0%</td><td>100.0%</td><td>94.5%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Standard L12</td><td>94.5%</td><td>94.5%</td><td>94.5%</td><td>100.0%</td><td>100.0%</td><td>94.5%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Standard L24</td><td>21.9%</td><td>21.1%</td><td>91.4%</td><td>97.3%</td><td>95.2%</td><td>83.9%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paraphrase L4</td><td>90.6%</td><td>90.6%</td><td>90.6%</td><td>100.0%</td><td>100.0%</td><td>90.6%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paraphrase L8</td><td>91.4%</td><td>91.4%</td><td>91.4%</td><td>100.0%</td><td>100.0%</td><td>91.4%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paraphrase L12</td><td>89.1%</td><td>89.1%</td><td>89.1%</td><td>100.0%</td><td>100.0%</td><td>89.1%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paraphrase L24</td><td>3.1%</td><td>2.3%</td><td>89.1%</td><td>92.5%</td><td>88.5%</td><td>72.9%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paired L4</td><td>87.9%</td><td>87.9%</td><td>87.9%</td><td>100.0%</td><td>100.0%</td><td>87.9%</td><td>87.5%</td><td>99.2%</td></tr>
+<tr><td>Paired L8</td><td>96.1%</td><td>96.1%</td><td>96.1%</td><td>100.0%</td><td>100.0%</td><td>96.1%</td><td>96.1%</td><td>99.2%</td></tr>
+<tr><td>Paired L12</td><td>91.0%</td><td>91.0%</td><td>91.0%</td><td>100.0%</td><td>100.0%</td><td>91.0%</td><td>90.6%</td><td>98.4%</td></tr>
+<tr><td>Paired L24</td><td>12.5%</td><td>12.1%</td><td>92.2%</td><td>94.7%</td><td>92.4%</td><td>79.5%</td><td>1.6%</td><td>3.1%</td></tr>
+</tbody>
+</table>
+<p>The trace-supervised compiler clearly learns the latent register interface
+through length 12. It also learns many length-24 slots: init, op, and arg
+accuracies are all high on the standard length-24 split. But exact length-24
+program execution is much lower, because a long chain needs every crucial slot
+and every intermediate transition to be right.</p>
+<h3>Controls</h3>
+<table>
+<thead><tr><th>Control</th><th>Standard L4</th><th>Standard L8</th><th>Standard L12</th><th>Standard L24</th><th>Paraphrase L24</th><th>Paired L24</th></tr></thead>
+<tbody>
+<tr><td>Direct answer head</td><td>1.6%</td><td>1.6%</td><td>1.6%</td><td>3.1%</td><td>0.0%</td><td>1.6%</td></tr>
+<tr><td>Register answer-only</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.6%</td><td>0.0%</td><td>0.0%</td></tr>
+</tbody>
+</table>
+<p>Modulo-97 chance is about 1.0%. These controls do not learn the task under the
+tested budgets. The answer-only register compiler does learn a stable but
+uninformative program pattern: paired consistency is high because both prompt
+renderings collapse to the same wrong registers.</p>
+<h2>Training Dynamics</h2>
+<table>
+<thead><tr><th>Step</th><th>Standard L4</th><th>Standard L8</th><th>Standard L12</th><th>Standard L24</th><th>Paired L24</th></tr></thead>
+<tbody>
+<tr><td>450</td><td>59.4%</td><td>56.2%</td><td>64.1%</td><td>2.3%</td><td>1.6%</td></tr>
+<tr><td>600</td><td>88.3%</td><td>94.5%</td><td>94.5%</td><td>21.9%</td><td>12.5%</td></tr>
+</tbody>
+</table>
+<p>The last 150-step long-chain stage is responsible for the length-24 lift, but it
+does not produce prompt-invariant length-24 programs.</p>
+<h2>Interpretation</h2>
+<p>This is evidence that a local 4B-scale model can be trained to expose a
+program-like latent interface through fixed register tokens. The strongest
+result is not the length-24 score; it is the length-12 behavior combined with
+the failed controls. The bridge reads only register-marker states, yet it
+recovers complete executable programs for unseen examples and paraphrases.</p>
+<p>The hard failure is compositional reliability. At length 24, per-slot accuracies
+near 90-97% are not enough. The product of many small slot errors destroys exact
+execution, and paired consistency shows that different prompt renderings do not
+land on the same latent state trajectory.</p>
+<p>This points to a specific next direction: the register interface should be kept,
+but training should directly penalize long-chain trajectory errors and paired
+state disagreement. More final-answer-only optimization is unlikely to discover
+the interface by itself; the answer-only control is the clearest evidence for
+that.</p>
+<h2>Limitations</h2>
+<ul>
+<li>The task is synthetic modular arithmetic, not open-domain language use.</li>
+<li>Trace supervision supplies privileged intermediate labels during training.</li>
+<li>The executor is fixed and exact; the experiment does not learn a general
+  runtime.</li>
+<li>The main run is a single 600-step configuration, not a scaling study.</li>
+<li>Length-24 performance is not robust enough to call the method solved.</li>
+</ul>
+<h2>Artifacts</h2>
+<ul>
+<li>Source, metadata, analysis, and reports:
+  <code>experiments/qwen_register_token_latent_compiler/</code></li>
+<li>Checkpoints:
+  <code>large_artifacts/qwen_register_token_latent_compiler/checkpoints/</code></li>
+<li>Aggregate metrics:
+  <code>experiments/qwen_register_token_latent_compiler/analysis/all_final_metrics.csv</code></li>
+<li>Main summary:
+  <code>experiments/qwen_register_token_latent_compiler/analysis/summary.md</code></li>
+</ul>
+</main>
+</body>
+</html>

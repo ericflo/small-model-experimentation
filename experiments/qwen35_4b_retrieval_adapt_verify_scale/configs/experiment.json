@@ -1,0 +1,37 @@
+{
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "date_utc": "2026-06-26",
+  "model": "Qwen3.5-4B",
+  "dataset": "MBPP heldout",
+  "visible_tests": 1,
+  "baseline": {
+    "records": 80,
+    "samples_per_task": 4,
+    "description": "Local direct-sampling heldout pool with hidden tests used only for evaluation."
+  },
+  "library": {
+    "source": "MBPP train references",
+    "requested_records": 374,
+    "verification": "reference code must pass public and hidden tests under the local executor"
+  },
+  "retrieval": {
+    "method": "TF-IDF over task text, entry point, public tests, and verified library code",
+    "top_k": 3,
+    "controls": ["random_top3", "shuffled_query_top3"]
+  },
+  "adaptation": {
+    "samples_per_retrieval": 1,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "max_new_tokens": 260
+  },
+  "selectors": {
+    "agreement_probes_per_task": 24,
+    "deployable": ["first_visible", "shortest_visible", "consensus_visible", "frozen_qwen_visible_rerank"],
+    "oracle": ["oracle_hidden"]
+  },
+  "pre_registered_read": {
+    "positive": "semantic retrieval+adaptation recovers more direct misses than random and shuffled controls, and a deployable selector captures a meaningful fraction of oracle pool coverage with lower false-pass rate than first-visible",
+    "negative": "pool coverage rises but deployable selectors cannot identify correct adaptations, showing that false visible passes remain the gate"
+  }
+}

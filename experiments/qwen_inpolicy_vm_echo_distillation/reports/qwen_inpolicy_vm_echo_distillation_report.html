@@ -1,0 +1,280 @@
+<!doctype html><html><head><meta charset='utf-8'><title>In-Policy VM-ECHO Distillation</title><style>
+body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; color: #172033; background: #f6f7fb; }
+main { max-width: 1120px; margin: 0 auto; padding: 40px 24px 64px; background: white; min-height: 100vh; }
+h1 { font-size: 34px; line-height: 1.1; margin-bottom: 12px; color: #111827; }
+h2 { color: #111827; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 24px; }
+p, li { line-height: 1.55; }
+code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 14px; }
+th, td { border: 1px solid #d9e0ea; padding: 8px 10px; text-align: left; }
+th { background: #edf2f7; }
+img { max-width: 100%; display: block; margin: 18px 0 30px; border: 1px solid #d9e0ea; }
+.note { color: #4b5563; font-size: 14px; }
+</style></head><body><main><p class='note'>Standalone report generated from <code>main_inpolicy_vm_echo_s192_w010</code>.</p><h1>In-Policy VM-ECHO Distillation</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a Qwen-attached typed-bytecode compiler improves when it learns the VM consequences of its own proposed programs during repair distillation. The compiler first emits executable candidates from frozen <code>Qwen/Qwen3-4B</code> hidden states. Those candidates are executed in a typed VM. The training objective combines answer-verified repair distillation with an integrated observation loss over all sampled candidates: validity, final value, trace top, trace depth, and answer-correctness.</p>
+<p>The result is mixed. VM-ECHO learned the observation channels: on the main run, trace-depth prediction reached about 91.5% on fresh-standard candidates and trace-top prediction reached 53.9%. It also improved some answer-search metrics over answer-verified distillation, including hard-composition search from 47.7% to 51.6%. But it did not produce a broad direct-accuracy jump: fresh-paired direct accuracy stayed at 8.6%, while the full-supervised ceiling reached 76.6%.</p>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code>, used as a frozen hidden-state feature extractor.</li>
+<li>Compiler: transformer slot decoder over Qwen hidden states.</li>
+<li>Integrated VM-ECHO head: candidate-conditioned transformer sharing the compiler prompt projection.</li>
+<li>Seed examples: <code>192</code>.</li>
+<li>Candidate prompts: <code>1024</code>.</li>
+<li>Candidate programs: <code>246784</code>.</li>
+<li>Candidate positive rate: <code>8.3%</code>.</li>
+<li>Prompt-level oracle found rate: <code>44.8%</code>.</li>
+<li>Repair targets selected: <code>459</code>.</li>
+<li>ECHO loss weight selected by pilot: <code>0.1</code>.</li>
+<li>Checkpoints: <code>large_artifacts/qwen_inpolicy_vm_echo_distillation/checkpoints/main_inpolicy_vm_echo_s192_w010/</code>.</li>
+</ul>
+<h2>Main Results</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Split</th>
+<th style="text-align: right;">Direct</th>
+<th style="text-align: right;">Answer search</th>
+<th style="text-align: right;">Oracle</th>
+<th style="text-align: right;">ECHO rerank</th>
+<th style="text-align: right;">Program exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seed</td>
+<td>fresh standard</td>
+<td style="text-align: right;">12.5%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">40.6%</td>
+<td style="text-align: right;">40.6%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>fresh paired</td>
+<td style="text-align: right;">8.6%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>hard composition</td>
+<td style="text-align: right;">11.7%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>fresh standard</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">10.9%</td>
+<td style="text-align: right;">46.9%</td>
+<td style="text-align: right;">46.9%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>fresh paired</td>
+<td style="text-align: right;">8.6%</td>
+<td style="text-align: right;">45.3%</td>
+<td style="text-align: right;">45.3%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>hard composition</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>VM-ECHO distill</td>
+<td>fresh standard</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">48.4%</td>
+<td style="text-align: right;">48.4%</td>
+<td style="text-align: right;">10.9%</td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>VM-ECHO distill</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">50.0%</td>
+<td style="text-align: right;">50.0%</td>
+<td style="text-align: right;">10.2%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>VM-ECHO distill</td>
+<td>fresh paired</td>
+<td style="text-align: right;">8.6%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;">44.5%</td>
+<td style="text-align: right;">6.2%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>VM-ECHO distill</td>
+<td>hard composition</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">51.6%</td>
+<td style="text-align: right;">51.6%</td>
+<td style="text-align: right;">8.6%</td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Gold trace</td>
+<td>fresh standard</td>
+<td style="text-align: right;">16.4%</td>
+<td style="text-align: right;">49.2%</td>
+<td style="text-align: right;">49.2%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3.9%</td>
+</tr>
+<tr>
+<td>Gold trace</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">18.0%</td>
+<td style="text-align: right;">55.5%</td>
+<td style="text-align: right;">55.5%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>Gold trace</td>
+<td>fresh paired</td>
+<td style="text-align: right;">16.4%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">5.5%</td>
+</tr>
+<tr>
+<td>Gold trace</td>
+<td>hard composition</td>
+<td style="text-align: right;">16.4%</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3.9%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>fresh standard</td>
+<td style="text-align: right;">71.9%</td>
+<td style="text-align: right;">90.6%</td>
+<td style="text-align: right;">90.6%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">55.5%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">78.9%</td>
+<td style="text-align: right;">88.3%</td>
+<td style="text-align: right;">88.3%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">63.3%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>fresh paired</td>
+<td style="text-align: right;">76.6%</td>
+<td style="text-align: right;">95.3%</td>
+<td style="text-align: right;">95.3%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">63.3%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>hard composition</td>
+<td style="text-align: right;">58.6%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">39.1%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Main accuracy" src="../analysis/figures/main_accuracy_by_phase.png" /></p>
+<h2>Candidate Surface</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th style="text-align: right;">Round</th>
+<th style="text-align: right;">Targets</th>
+<th style="text-align: right;">Oracle found</th>
+<th style="text-align: right;">Changed</th>
+<th style="text-align: right;">Candidate valid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>answer_verified_targets</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">459</td>
+<td style="text-align: right;">44.8%</td>
+<td style="text-align: right;">70.6%</td>
+<td style="text-align: right;">64.3%</td>
+</tr>
+<tr>
+<td>echo_repair_targets</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">459</td>
+<td style="text-align: right;">44.8%</td>
+<td style="text-align: right;">70.6%</td>
+<td style="text-align: right;">64.3%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Candidate and target stats" src="../analysis/figures/candidate_and_target_stats.png" /></p>
+<p>The candidate surface is large enough to matter but not large enough to solve the task by itself. The main run generated <code>246784</code> candidates from <code>1024</code> prompts, and <code>44.8%</code> of prompts had at least one answer-correct candidate. This puts a ceiling on what one round of repair distillation can learn.</p>
+<h2>VM Observation Learning</h2>
+<p><img alt="Observation accuracy" src="../analysis/figures/echo_observation_accuracy.png" /></p>
+<p>VM-ECHO learned validity and trace structure much better than final answer correctness. This is important: the auxiliary loss did train a consequence model, but the learned consequence model was not a useful no-answer reranker. ECHO reranking was below direct decoding on every main split. The useful effect, where present, came from joint training changing the compiler, not from selecting candidates at inference time.</p>
+<h2>Training Dynamics</h2>
+<p><img alt="Training curves" src="../analysis/figures/training_curves.png" /></p>
+<p>The main ECHO auxiliary loss decreased from <code>5.35</code> to <code>2.67</code>, while repair loss also improved. A higher pilot weight damaged deployable accuracy, so the auxiliary needs to remain secondary to the repair target.</p>
+<h2>Pilot Results</h2>
+<p><img alt="Pilot comparison" src="../analysis/figures/pilot_comparison.png" /></p>
+<p>The pilot sweep selected <code>echo_loss_weight=0.1</code>. A stronger <code>0.35</code> weight over-regularized the compiler. A second in-policy round improved some standard/paraphrase cells, but it removed the fresh-paired and hard direct signal that made the one-round pilot attractive.</p>
+<h2>Interpretation</h2>
+<p>This experiment supports a narrow claim: candidate-consequence prediction can be trained in the same compiler loop without breaking executable decoding, and it can modestly reshape the answer-search surface. It does not support the stronger claim that this objective currently unlocks the full repair oracle or produces a large direct compiler improvement.</p>
+<p>The decisive remaining problem is credit assignment among executable candidates. VM-ECHO learned broad consequences such as validity and stack traces, but it did not learn to identify which candidate solves the prompt. The next version should make the preference signal sharper: train on counterfactual candidate pairs from the same prompt, emphasize hard negatives that share validity or final-value plausibility, and expose a more direct representation of the prompt-implied answer to the candidate scorer.</p>
+<h2>Artifacts</h2>
+<ul>
+<li><code>experiments/qwen_inpolicy_vm_echo_distillation/runs/main_inpolicy_vm_echo_s192_w010/metrics.csv</code></li>
+<li><code>experiments/qwen_inpolicy_vm_echo_distillation/runs/main_inpolicy_vm_echo_s192_w010/train_log.csv</code></li>
+<li><code>experiments/qwen_inpolicy_vm_echo_distillation/analysis/main_metrics.csv</code></li>
+<li><code>experiments/qwen_inpolicy_vm_echo_distillation/reports/qwen_inpolicy_vm_echo_distillation_report.md</code></li>
+<li><code>experiments/qwen_inpolicy_vm_echo_distillation/reports/qwen_inpolicy_vm_echo_distillation_report.html</code></li>
+</ul></main></body></html>

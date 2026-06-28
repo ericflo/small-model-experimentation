@@ -1,0 +1,17 @@
+{
+  "commit_count": 13,
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "out": "data/qwen_rerank_copy_semantic_records.jsonl",
+  "records": 24,
+  "selected_false_pass_rate": 0.6153846153846154,
+  "selected_hidden_correct": 5,
+  "selected_recovery_rate": 0.20833333333333334,
+  "selected_visible_hidden_wrong": 8,
+  "selector": "frozen_qwen_visible_rerank",
+  "token_usage": {
+    "calls": 14,
+    "completion_tokens": 14,
+    "forward_tokens": 5558,
+    "prompt_tokens": 5544
+  }
+}

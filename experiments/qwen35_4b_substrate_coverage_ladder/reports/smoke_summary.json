@@ -1,0 +1,136 @@
+{
+  "per_task": {
+    "16": {
+      "combined": {
+        "candidate_count": 26,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "lowercase_underscore_full",
+          "lowercase_underscore_one_or_more_groups"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 11,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "lowercase_underscore_full"
+        ]
+      },
+      "manual_expanded": {
+        "candidate_count": 16,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "lowercase_underscore_full",
+          "lowercase_underscore_one_or_more_groups"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 10,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "26": {
+      "combined": {
+        "candidate_count": 18,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "tuple_list_all_k",
+          "tuple_list_all_k_set"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 7,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 2,
+        "winning_templates": [
+          "tuple_list_all_k"
+        ]
+      },
+      "manual_expanded": {
+        "candidate_count": 12,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "tuple_list_all_k",
+          "tuple_list_all_k_set"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 6,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    }
+  },
+  "rungs": {
+    "combined": {
+      "coverage": 1.0,
+      "hidden_pass_candidates": 4,
+      "mean_candidates_per_task": 22.0,
+      "solved_count": 2,
+      "solved_task_ids": [
+        16,
+        26
+      ],
+      "total_candidates": 44,
+      "visible_hidden_fail_candidates": 3,
+      "visible_pass_candidates": 7,
+      "visible_pass_hidden_fail_rate": 0.42857142857142855
+    },
+    "manual_core": {
+      "coverage": 1.0,
+      "hidden_pass_candidates": 2,
+      "mean_candidates_per_task": 9.0,
+      "solved_count": 2,
+      "solved_task_ids": [
+        16,
+        26
+      ],
+      "total_candidates": 18,
+      "visible_hidden_fail_candidates": 3,
+      "visible_pass_candidates": 5,
+      "visible_pass_hidden_fail_rate": 0.6
+    },
+    "manual_expanded": {
+      "coverage": 1.0,
+      "hidden_pass_candidates": 4,
+      "mean_candidates_per_task": 14.0,
+      "solved_count": 2,
+      "solved_task_ids": [
+        16,
+        26
+      ],
+      "total_candidates": 28,
+      "visible_hidden_fail_candidates": 3,
+      "visible_pass_candidates": 7,
+      "visible_pass_hidden_fail_rate": 0.42857142857142855
+    },
+    "retrieved_transplant": {
+      "coverage": 0.0,
+      "hidden_pass_candidates": 0,
+      "mean_candidates_per_task": 8.0,
+      "solved_count": 0,
+      "solved_task_ids": [],
+      "total_candidates": 16,
+      "visible_hidden_fail_candidates": 0,
+      "visible_pass_candidates": 0,
+      "visible_pass_hidden_fail_rate": 0.0
+    }
+  },
+  "task_count": 2
+}

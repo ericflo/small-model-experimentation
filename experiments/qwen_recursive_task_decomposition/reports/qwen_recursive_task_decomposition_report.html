@@ -1,0 +1,177 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Recursive Task Decomposition</title><style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;margin:32px;line-height:1.5;color:#111827;max-width:1160px}h1,h2,h3{line-height:1.2}table{border-collapse:collapse;margin:14px 0 24px;width:100%;font-size:14px}th,td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f3f4f6}img{max-width:100%;border:1px solid #e5e7eb;border-radius:6px}figure{margin:24px 0}p,li{max-width:940px}code{background:#f3f4f6;padding:1px 4px;border-radius:4px}</style></head><body><h1>Recursive Task Decomposition on Public Text Transformations</h1>
+<h2>Abstract</h2>
+<p>This standalone experiment tests whether recursive task decomposition improves task-level consistency on public text-transformation tasks. It compares executable recursive decomposition trees with a frozen language-model rule-locking procedure: first infer one reusable rule, then apply that same rule to every held-out row.</p>
+<h2>Method</h2>
+<ul>
+<li>Dataset: public Microsoft PROSE `Transformation.Text` tasks.</li>
+<li>Split: first `4` examples are training examples; up to `50` held-out examples are scored for static methods.</li>
+<li>Primary metric: full-task exact. A task is correct only if every held-out row is exact.</li>
+<li>Static recursive decomposition: derive output templates from delimiters or token/literal structure, synthesize child transformations for each slot, and compose the children into a tree.</li>
+<li>Qwen locked-rule decomposition: frozen Qwen writes one reusable rule/decomposition from the examples, then answers each held-out row while conditioned on that same rule.</li>
+<li>Shuffled controls: static recursive synthesis on rotated labels, and Qwen application with a rule from another task.</li>
+</ul>
+<h2>Run Configuration</h2>
+<ul>
+<li>Suite: `main_v2_train_verified_rules`.</li>
+<li>Static tasks: `309`.</li>
+<li>Qwen tasks: `30`.</li>
+<li>Qwen model: `Qwen/Qwen3-4B`.</li>
+<li>Static max candidates: `12000`.</li>
+<li>Recursive depth: `2`; child limit: `5`.</li>
+<li>Qwen held-out cap: `6` rows per task.</li>
+</ul>
+<h2>Primary Results</h2>
+<h3>Static Executable Decomposition</h3>
+<table><thead><tr><th>method</th><th>tasks</th><th>full_exact</th><th>row_exact</th></tr></thead><tbody>
+<tr><td>static_mono_examples</td><td>309</td><td>22.7%</td><td>27.2%</td></tr>
+<tr><td>static_mono_oracle</td><td>309</td><td>29.4%</td><td>n/a</td></tr>
+<tr><td>static_recursive_examples</td><td>309</td><td>22.7%</td><td>27.2%</td></tr>
+<tr><td>static_recursive_oracle</td><td>309</td><td>34.3%</td><td>n/a</td></tr>
+<tr><td>static_recursive_shuffled</td><td>309</td><td>0.3%</td><td>0.4%</td></tr>
+</tbody></table>
+<h3>Frozen Qwen Decomposition</h3>
+<table><thead><tr><th>method</th><th>tasks</th><th>full_exact</th><th>row_exact</th></tr></thead><tbody>
+<tr><td>direct_qwen</td><td>30</td><td>46.7%</td><td>69.4%</td></tr>
+<tr><td>locked_rule_qwen</td><td>30</td><td>43.3%</td><td>59.4%</td></tr>
+<tr><td>shuffled_rule_qwen</td><td>30</td><td>33.3%</td><td>58.3%</td></tr>
+</tbody></table>
+<h3>Qwen Iteration Comparison</h3>
+<p>The first Qwen iteration used one generated decomposition rule per task. The second iteration generated three rule styles and selected the rule that best reproduced the training examples before held-out application. Both iterations used the same 30-task sample.</p>
+<table><thead><tr><th>iteration</th><th>method</th><th>tasks</th><th>full_exact</th><th>row_exact</th></tr></thead><tbody>
+<tr><td>v1_single_rule</td><td>direct_qwen</td><td>30</td><td>46.7%</td><td>69.4%</td></tr>
+<tr><td>v1_single_rule</td><td>locked_rule_qwen</td><td>30</td><td>46.7%</td><td>61.7%</td></tr>
+<tr><td>v1_single_rule</td><td>shuffled_rule_qwen</td><td>30</td><td>36.7%</td><td>53.6%</td></tr>
+<tr><td>v2_train_verified</td><td>direct_qwen</td><td>30</td><td>46.7%</td><td>69.4%</td></tr>
+<tr><td>v2_train_verified</td><td>locked_rule_qwen</td><td>30</td><td>43.3%</td><td>59.4%</td></tr>
+<tr><td>v2_train_verified</td><td>shuffled_rule_qwen</td><td>30</td><td>33.3%</td><td>58.3%</td></tr>
+</tbody></table>
+<h3>Static Coverage By Family</h3>
+<table><thead><tr><th>family</th><th>tasks</th><th>mono_oracle</th><th>recursive_oracle</th><th>mono_examples</th><th>recursive_examples</th></tr></thead><tbody>
+<tr><td>Column</td><td>2</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>Product</td><td>2</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>Author</td><td>1</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>FilePath</td><td>1</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>Meteorite</td><td>1</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>City</td><td>9</td><td>0.11</td><td>0.11</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>DateTime</td><td>106</td><td>0.11</td><td>0.14</td><td>0.09</td><td>0.09</td></tr>
+<tr><td>Number</td><td>84</td><td>0.19</td><td>0.21</td><td>0.13</td><td>0.13</td></tr>
+<tr><td>Gender</td><td>3</td><td>0.33</td><td>0.33</td><td>0.33</td><td>0.33</td></tr>
+<tr><td>Address</td><td>6</td><td>0.17</td><td>0.50</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>EmergencyCall</td><td>2</td><td>0.50</td><td>0.50</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>Rating</td><td>2</td><td>0.50</td><td>0.50</td><td>0.50</td><td>0.50</td></tr>
+<tr><td>Phone</td><td>16</td><td>0.50</td><td>0.56</td><td>0.38</td><td>0.38</td></tr>
+<tr><td>UserAgent</td><td>7</td><td>0.57</td><td>0.57</td><td>0.43</td><td>0.43</td></tr>
+<tr><td>Name</td><td>28</td><td>0.61</td><td>0.64</td><td>0.43</td><td>0.43</td></tr>
+<tr><td>Email</td><td>6</td><td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td></tr>
+<tr><td>ShippingCode</td><td>10</td><td>0.80</td><td>0.80</td><td>0.70</td><td>0.70</td></tr>
+<tr><td>BillingCode</td><td>6</td><td>1.00</td><td>1.00</td><td>0.67</td><td>0.67</td></tr>
+<tr><td>Log</td><td>4</td><td>0.00</td><td>1.00</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>Currency</td><td>3</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+<tr><td>Language</td><td>2</td><td>0.50</td><td>1.00</td><td>0.50</td><td>0.50</td></tr>
+<tr><td>Abbreviation</td><td>1</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+<tr><td>Airline</td><td>1</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+<tr><td>Noise</td><td>1</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+<tr><td>Song</td><td>1</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+<tr><td>State</td><td>1</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+<tr><td>Team</td><td>1</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+<tr><td>Url</td><td>1</td><td>0.00</td><td>1.00</td><td>0.00</td><td>0.00</td></tr>
+<tr><td>ZipCode</td><td>1</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td></tr>
+</tbody></table>
+<h3>Qwen Task-Level Details</h3>
+<table><thead><tr><th>task_id</th><th>family</th><th>heldout_rows</th><th>direct_row_exact</th><th>locked_row_exact</th><th>shuffled_row_exact</th><th>direct_full_exact</th><th>locked_full_exact</th><th>shuffled_full_exact</th><th>locked_minus_direct_rows</th></tr></thead><tbody>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>6</td><td>66.7%</td><td>100.0%</td><td>66.7%</td><td>False</td><td>True</td><td>False</td><td>0.33</td></tr>
+<tr><td>City.000010</td><td>City</td><td>3</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>6</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>6</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>6</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>6</td><td>100.0%</td><td>100.0%</td><td>66.7%</td><td>True</td><td>True</td><td>False</td><td>0.00</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>4</td><td>100.0%</td><td>100.0%</td><td>50.0%</td><td>True</td><td>True</td><td>False</td><td>0.00</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>6</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>6</td><td>100.0%</td><td>100.0%</td><td>83.3%</td><td>True</td><td>True</td><td>False</td><td>0.00</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>6</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>6</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>6</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>0.00</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>6</td><td>0.0%</td><td>16.7%</td><td>0.0%</td><td>False</td><td>False</td><td>False</td><td>0.17</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>3</td><td>33.3%</td><td>33.3%</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>3</td><td>33.3%</td><td>33.3%</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>6</td><td>50.0%</td><td>50.0%</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>6</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>3</td><td>66.7%</td><td>66.7%</td><td>66.7%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>6</td><td>33.3%</td><td>33.3%</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>4</td><td>25.0%</td><td>25.0%</td><td>25.0%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>3</td><td>33.3%</td><td>33.3%</td><td>0.0%</td><td>False</td><td>False</td><td>False</td><td>0.00</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>6</td><td>50.0%</td><td>33.3%</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>-0.17</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>6</td><td>66.7%</td><td>50.0%</td><td>50.0%</td><td>False</td><td>False</td><td>False</td><td>-0.17</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>6</td><td>100.0%</td><td>66.7%</td><td>50.0%</td><td>True</td><td>False</td><td>False</td><td>-0.33</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>3</td><td>33.3%</td><td>0.0%</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>-0.33</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>3</td><td>33.3%</td><td>0.0%</td><td>100.0%</td><td>False</td><td>False</td><td>True</td><td>-0.33</td></tr>
+<tr><td>City.000011</td><td>City</td><td>4</td><td>75.0%</td><td>25.0%</td><td>25.0%</td><td>False</td><td>False</td><td>False</td><td>-0.50</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>6</td><td>83.3%</td><td>0.0%</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>-0.83</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>6</td><td>100.0%</td><td>16.7%</td><td>33.3%</td><td>True</td><td>False</td><td>False</td><td>-0.83</td></tr>
+</tbody></table>
+<h3>Example Locked Rules</h3>
+<table><thead><tr><th>task_id</th><th>family</th><th>rule_chars</th><th>rule</th></tr></thead><tbody>
+<tr><td>Address.000002</td><td>Address</td><td>245</td><td>Take the input and split it into parts using commas as delimiters. The first part contains the name and a number followed by a place and direction. Extract the number and place portion, then take the first part of the split result as the output.</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>116</td><td>Keep the input as is.</td></tr>
+</tbody></table>
+<p>Substep 1: Extract the input string.  </p>
+<p>Substep 2: Return the extracted string as the output.|</p>
+<table><thead><tr><th>City.000010</th><th>City</th><th>88</th><th>Replace any input that is &amp;quot;None&amp;quot; with &amp;quot;0&amp;quot;. For all other inputs, return the input as is.</th></tr></thead><tbody>
+<tr><td>City.000011</td><td>City</td><td>123</td><td>If the input is &amp;quot;New York City&amp;quot;, &amp;quot;n.y.c.&amp;quot;, or &amp;quot;New York City  &amp;quot;, output &amp;quot;New York City&amp;quot;. Otherwise, output the input as is.</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>218</td><td>If the input starts with &amp;quot;Coln&amp;quot;, remove the &amp;quot;n&amp;quot; and keep the rest as is. If the input is &amp;quot;ID&amp;quot;, output &amp;quot;Col1&amp;quot;. If the input is &amp;quot;Coln&amp;quot; followed by a number, output &amp;quot;Col&amp;quot; followed by that number. Otherwise, output &amp;quot;Col1&amp;quot;.</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>107</td><td>Take the value from col0 and col1, format col0 as &amp;quot;HH:MM:SS&amp;quot;, and concatenate the formatted col0 with col1.</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>88</td><td>Take the input date time string, extract the year and month, and format as &amp;quot;Month Year&amp;quot;.</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>166</td><td>Split the input into parts based on separators (space, hyphen, slash), then reformat each part into day/month/year format, combining them in the order day/month/year.</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>529</td><td>**Rule: Extract and reformat date components**</td></tr>
+</tbody></table>
+<p>1. **Split the input into components**: Separate the date into month, day, and year (or equivalent parts).</p>
+<p>2. **Map the month abbreviation to its full name**: Convert abbreviations like &amp;quot;Mar&amp;quot; to &amp;quot;March&amp;quot; (though examples use abbreviations, this step is for consistency).</p>
+<p>3. **Reformat the day**: Convert the day into a two-digit format if necessary (e.g., &amp;quot;1&amp;quot; → &amp;quot;01&amp;quot;, &amp;quot;30&amp;quot; → &amp;quot;30&amp;quot;).</p>
+<p>4. **Reformat the year**: Extract the last two digits of the year (e.g., &amp;quot;2002&amp;quot; → &amp;quot;02&amp;quot;, &amp;quot;1953&amp;quot; → &amp;quot;53|</p>
+<table><thead><tr><th>DateTime.000051</th><th>DateTime</th><th>365</th><th>If the input is a time in HH:MM:SS format:</th></tr></thead><tbody>
+</tbody></table>
+<p>If the hour is 11, then format as &amp;quot;11:00AM-11:30AM&amp;quot;;  </p>
+<p>If the hour is 8, then format as &amp;quot;8:00AM-8:30AM&amp;quot;;  </p>
+<p>If the hour is 12, then format as &amp;quot;12:00PM-12:30PM&amp;quot;;  </p>
+<p>If the hour is 0, then format as &amp;quot;12:00AM-12:30AM&amp;quot;;  </p>
+<p>If the input is empty or null, then return &amp;quot;N/A&amp;quot;;  </p>
+<p>If the input is an abbreviation like &amp;quot;11:00AM&amp;quot;, then|</p>
+<table><thead><tr><th>DateTime.000076</th><th>DateTime</th><th>235</th><th>Take the input time in the format HH:MM. Extract the hour part (HH). If the hour is between 00 and 19, output &amp;quot;0:00-19:00&amp;quot;. If the hour is between 20 and 39, output &amp;quot;20:00-39:00&amp;quot;. If the hour is between 40 and 59, output &amp;quot;40:00-59:00&amp;quot;.</th></tr></thead><tbody>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>434</td><td>**Rule:**</td></tr>
+</tbody></table>
+<p>Given a time in HH:MMAM/PM format, decompose into:  </p>
+<p>1. Extract hour and minute.  </p>
+<p>2. If minute &amp;lt; 15, subtract (minute - 0) from hour, add 15 minutes, and set the new start time.  </p>
+<p>3. If minute &amp;gt;= 15 and &amp;lt; 45, set start time to hour:15 and end time to hour:45.  </p>
+<p>4. If minute &amp;gt;= 45, add (60 - minute) to hour, set start time to (hour + 1):15 and end time to (hour + 1):45.  </p>
+<p>5. Combine start and end times into &amp;quot;start-time|</p>
+<table><thead><tr><th>DateTime.000094</th><th>DateTime</th><th>281</th><th>Parse the input date into components (year, month, day). If the date is in the format &amp;quot;DD.MM.YYYY&amp;quot; or &amp;quot;DD. MMM YYYY&amp;quot;, extract the day, month, and year. If the date is in the format &amp;quot;MMM DD YYYY&amp;quot; or &amp;quot;DD MMM YYYY&amp;quot;, extract the day, month, and year. Format the output as &amp;quot;YYYY-MM-DD&amp;quot;.</th></tr></thead><tbody>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>241</td><td>Extract the third character from the date portion of the input string. The date portion is in the format &amp;quot;DD-Mon-YYYY&amp;quot;, so the third character is the first letter of the month (e.g., &amp;quot;Jan&amp;quot;, &amp;quot;Feb&amp;quot;, &amp;quot;Mar&amp;quot;). Return that character as the output.</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>243</td><td>Parse the input date and time string. Extract the day and month from the date part. Format the output as MM/DD/YYYY, where MM is the month abbreviation (Jan=1, Feb=2, ..., Dec=12), DD is the day, and YYYY is the year. The time part is ignored.</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>149</td><td>Take the day of the month from the input date. If the day is less than or equal to 15, output &amp;quot;15-30&amp;quot;. If the day is greater than 15, output &amp;quot;30-45&amp;quot;.</td></tr>
+</tbody></table>
+<h2>Figures</h2>
+<figure><img src="../analysis/figures/method_full_task_scores.png" alt="method_full_task_scores.png"><figcaption>method_full_task_scores.png</figcaption></figure>
+<figure><img src="../analysis/figures/qwen_row_vs_full.png" alt="qwen_row_vs_full.png"><figcaption>qwen_row_vs_full.png</figcaption></figure>
+<figure><img src="../analysis/figures/static_recursive_gain.png" alt="static_recursive_gain.png"><figcaption>static_recursive_gain.png</figcaption></figure>
+<figure><img src="../analysis/figures/qwen_family_locked_effect.png" alt="qwen_family_locked_effect.png"><figcaption>qwen_family_locked_effect.png</figcaption></figure>
+<figure><img src="../analysis/figures/iteration_comparison.png" alt="iteration_comparison.png"><figcaption>iteration_comparison.png</figcaption></figure>
+<h2>Interpretation</h2>
+<p>Executable recursion changes the static oracle from 29.4% to 34.3%. The examples-selected recursive tree reaches 22.7%, compared with 22.7% for monolithic expressions and 0.3% for the shuffled-label control.</p>
+<p>For frozen Qwen, direct answering reaches 69.4% row exact and 46.7% full-task exact. The locked-rule decomposition reaches 59.4% row exact and 43.3% full-task exact. The shuffled-rule control reaches 58.3% row exact and 33.3% full-task exact.</p>
+<p>The locked-rule full-task delta over direct answering is -3.3%. Positive values mean decomposition improved consistency; negative values mean rule commitment damaged useful row-level inference.</p>
+<p>The iteration comparison is negative for this form of recursive decomposition. A single generated rule tied direct Qwen on full-task exact but reduced row exact. Train-verifying three rule styles did not recover the lost row competence and lowered full-task exact by one task. The shuffled-rule controls are lower than the real-rule arms, so the generated rules carry task signal; the problem is that the signal is not reliably better than Qwen&#x27;s direct row-level inference.</p>
+<h2>Limitations</h2>
+<p>The Qwen arm is capped for runtime and uses deterministic decoding. The static recursive tree only explores delimiter and token-template decompositions, not arbitrary semantic subgoals. Full-task exact is intentionally strict and can be much lower than row exact when a method is inconsistent across rows.</p>
+<h2>Artifacts</h2>
+<ul>
+<li>Static details: `analysis/static_details.csv`</li>
+<li>Qwen rules: `analysis/qwen_rules.csv`</li>
+<li>Qwen task summary: `analysis/qwen_task_details.csv`</li>
+<li>Qwen row details: `analysis/qwen_row_details.csv`</li>
+<li>Iteration comparison: `analysis/iteration_comparison.csv`</li>
+<li>Figures: `analysis/figures/`</li>
+<li>Benchmark mirror: `/workspace/large_artifacts/qwen_recursive_task_decomposition/prose-benchmarks`</li>
+</ul>
+</body></html>

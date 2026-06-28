@@ -1,0 +1,3128 @@
+task_id,source,variant,repair_round,raw_text,code,status,train_pass,train_row_exact,heldout_row_exact,heldout_full_exact,error
+City.000011,monolithic,monolithic,0,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized","def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized",ok,False,0.5,0.0,False,
+City.000011,monolithic,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York","def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York","syntax_error: unterminated string literal (detected at line 39) (<unknown>, line 39)",False,0.0,0.0,False,"syntax_error: unterminated string literal (detected at line 39) (<unknown>, line 39)"
+City.000011,monolithic,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '","def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '","syntax_error: unterminated string literal (detected at line 45) (<unknown>, line 45)",False,0.0,0.0,False,"syntax_error: unterminated string literal (detected at line 45) (<unknown>, line 45)"
+City.000011,recursive,monolithic,0,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized","def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized",ok,False,0.5,0.0,False,
+City.000011,recursive,monolithic,1,"```python
+def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        parts = normalized.split()
+        if len(parts) == 1:
+            year = int(parts[0])
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            year = int(parts[0])
+            month = int(parts[1])
+            return datetime.date(year, month, 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized
+```","def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        parts = normalized.split()
+        if len(parts) == 1:
+            year = int(parts[0])
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            year = int(parts[0])
+            month = int(parts[1])
+            return datetime.date(year, month, 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized",ok,False,0.5,0.0,False,
+City.000011,recursive,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York","def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York","syntax_error: unterminated string literal (detected at line 39) (<unknown>, line 39)",False,0.0,0.0,False,"syntax_error: unterminated string literal (detected at line 39) (<unknown>, line 39)"
+City.000011,recursive,helpers,1,"```python
+def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York City'
+        # Check if the cleaned string is a date
+        if re.match(r'\b\d{4}-\d{2}-\d{2","def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York City'
+        # Check if the cleaned string is a date
+        if re.match(r'\b\d{4}-\d{2}-\d{2","syntax_error: unterminated string literal (detected at line 41) (<unknown>, line 41)",False,0.0,0.0,False,"syntax_error: unterminated string literal (detected at line 41) (<unknown>, line 41)"
+City.000011,recursive,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '","def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '","syntax_error: unterminated string literal (detected at line 45) (<unknown>, line 45)",False,0.0,0.0,False,"syntax_error: unterminated string literal (detected at line 45) (<unknown>, line 45)"
+City.000011,recursive,robust,1,"```python
+def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+```","def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'",ok,False,0.75,0.3333333333333333,False,
+City.000011,recursive_shuffled,monolithic,0,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized","def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized",ok,False,0.5,0.0,False,
+City.000011,recursive_shuffled,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York","def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York","syntax_error: unterminated string literal (detected at line 39) (<unknown>, line 39)",False,0.0,0.0,False,"syntax_error: unterminated string literal (detected at line 39) (<unknown>, line 39)"
+City.000011,recursive_shuffled,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '","def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '","syntax_error: unterminated string literal (detected at line 45) (<unknown>, line 45)",False,0.0,0.0,False,"syntax_error: unterminated string literal (detected at line 45) (<unknown>, line 45)"
+DateTime.000012,monolithic,monolithic,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if re.fullmatch(r'\d{4}', row[0]):
+        return row[0]
+    match = re.fullmatch(r'(\d{1,2})\s?(\w+)?\s?(\d{4})', row[0])
+    if match:
+        return match.group(3)
+    return row[0]
+```","def transform(row):
+    if re.fullmatch(r'\d{4}', row[0]):
+        return row[0]
+    match = re.fullmatch(r'(\d{1,2})\s?(\w+)?\s?(\d{4})', row[0])
+    if match:
+        return match.group(3)
+    return row[0]",ok,True,1.0,0.6666666666666666,False,
+DateTime.000012,monolithic,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]
+```","def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]",ok,False,0.75,0.6666666666666666,False,
+DateTime.000012,monolithic,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"
+```","def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"",ok,False,0.75,0.6666666666666666,False,
+DateTime.000012,recursive,monolithic,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if re.fullmatch(r'\d{4}', row[0]):
+        return row[0]
+    match = re.fullmatch(r'(\d{1,2})\s?(\w+)?\s?(\d{4})', row[0])
+    if match:
+        return match.group(3)
+    return row[0]
+```","def transform(row):
+    if re.fullmatch(r'\d{4}', row[0]):
+        return row[0]
+    match = re.fullmatch(r'(\d{1,2})\s?(\w+)?\s?(\d{4})', row[0])
+    if match:
+        return match.group(3)
+    return row[0]",ok,True,1.0,0.6666666666666666,False,
+DateTime.000012,recursive,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]
+```","def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]",ok,False,0.75,0.6666666666666666,False,
+DateTime.000012,recursive,helpers,1,"```python
+def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]
+```","def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]",ok,False,0.75,0.6666666666666666,False,
+DateTime.000012,recursive,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"
+```","def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"",ok,False,0.75,0.6666666666666666,False,
+DateTime.000012,recursive,robust,1,"```python
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"
+```","def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"",ok,False,0.75,0.6666666666666666,False,
+DateTime.000012,recursive_shuffled,monolithic,0,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    if row[0].isdigit():
+        return str(int(row[0]) + 188)
+    elif re.match(r'\d{4}', row[0]):
+        return str(int(row[0]) + 188)
+    elif re.match(r'\d{1,2} \w+ \d{4}', row[0]):
+        date_str = row[0]
+        year = int(re.search(r'\d{4}', date_str).group())
+        month = int(re.search(r'\d{1,2}', date_str, re.IGNORECASE).group())
+        day = int(re.search(r'\d{1,2}', date_str, re.IGNORECASE).group())
+        if month > 12:
+            month = 12
+        if day > calendar.monthrange(year, month)[1]:
+            day = calendar.monthrange(year, month)[1]
+        new_year = year + 1
+        new_month = month + 1
+        if new_month > 12:
+            new_month = 1
+            new_year += 1
+        new_day = day + 1
+        if new_day > calendar.monthrange(new_year, new_month)[1]:
+            new_day = calendar.monthrange(new_year, new_month)[1]
+        return f""{new_year}{new_month:02d}{new_day:02d}""
+    else:
+        return str(int(row[0]) + 188)","def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    if row[0].isdigit():
+        return str(int(row[0]) + 188)
+    elif re.match(r'\d{4}', row[0]):
+        return str(int(row[0]) + 188)
+    elif re.match(r'\d{1,2} \w+ \d{4}', row[0]):
+        date_str = row[0]
+        year = int(re.search(r'\d{4}', date_str).group())
+        month = int(re.search(r'\d{1,2}', date_str, re.IGNORECASE).group())
+        day = int(re.search(r'\d{1,2}', date_str, re.IGNORECASE).group())
+        if month > 12:
+            month = 12
+        if day > calendar.monthrange(year, month)[1]:
+            day = calendar.monthrange(year, month)[1]
+        new_year = year + 1
+        new_month = month + 1
+        if new_month > 12:
+            new_month = 1
+            new_year += 1
+        new_day = day + 1
+        if new_day > calendar.monthrange(new_year, new_month)[1]:
+            new_day = calendar.monthrange(new_year, new_month)[1]
+        return f""{new_year}{new_month:02d}{new_day:02d}""
+    else:
+        return str(int(row[0]) + 188)",ok,False,0.0,0.0,False,
+DateTime.000012,recursive_shuffled,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def parse_date(date_str):
+        match = re.match(r'(\d{1,2})\s+(.+?)\s+(\d{4})', date_str)
+        if match:
+            day = int(match.group(1))
+            month = match.group(2)
+            year = int(match.group(3))
+            # Map month names to numbers
+            month_num = calendar.month_abbr.index(month)
+            return datetime.date(year, month_num, day)
+        return None
+
+    def date_to_number(date_obj):
+        return int(date_obj.strftime(""%Y%m%d""))
+
+    def number_to_date(number):
+        year = number // 10000
+        month = (number // 100) % 100
+        day = number % 100
+        # Map month numbers to names
+        month_name = calendar.month_abbr[month]
+        return f""{day} {month_name} {year}""
+
+    def calculate_next_date(date_obj):
+        return date_obj + datetime.timedelta(days=100)
+
+    def get_transformed_value(input_value):
+        if re.match(r'\d{4}', input_value):
+            return number_to_date(date_to_number(datetime.date(int(input_value), 1, 1)))
+        elif re.match(r'\d{1,2}\s+\w+\s+\d{4}', input_value):
+            return number_to_date(date_to_number(parse_date(input_value)))
+        else:
+            return input_value
+
+    value = get_transformed_value(row[0])
+    return value
+```","def transform(row):
+    def parse_date(date_str):
+        match = re.match(r'(\d{1,2})\s+(.+?)\s+(\d{4})', date_str)
+        if match:
+            day = int(match.group(1))
+            month = match.group(2)
+            year = int(match.group(3))
+            # Map month names to numbers
+            month_num = calendar.month_abbr.index(month)
+            return datetime.date(year, month_num, day)
+        return None
+
+    def date_to_number(date_obj):
+        return int(date_obj.strftime(""%Y%m%d""))
+
+    def number_to_date(number):
+        year = number // 10000
+        month = (number // 100) % 100
+        day = number % 100
+        # Map month numbers to names
+        month_name = calendar.month_abbr[month]
+        return f""{day} {month_name} {year}""
+
+    def calculate_next_date(date_obj):
+        return date_obj + datetime.timedelta(days=100)
+
+    def get_transformed_value(input_value):
+        if re.match(r'\d{4}', input_value):
+            return number_to_date(date_to_number(datetime.date(int(input_value), 1, 1)))
+        elif re.match(r'\d{1,2}\s+\w+\s+\d{4}', input_value):
+            return number_to_date(date_to_number(parse_date(input_value)))
+        else:
+            return input_value
+
+    value = get_transformed_value(row[0])
+    return value",ok,False,0.0,0.0,False,
+DateTime.000012,recursive_shuffled,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) == 1:
+        input_col = row[0]
+    else:
+        input_col = row[1]
+    
+    # Check if the input is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', input_col)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Convert month name to number
+        month_num = calendar.month_abbr.index(month)
+        
+        # Create a date object
+        try:
+            date = datetime.date(year, month_num, day)
+        except ValueError:
+            return """"
+        
+        # Calculate the number of days since the start of the year
+        days_since_start = (date - datetime.date(year, 1, 1)).days
+        
+        # Calculate the number of years since 1970
+        years_since_1970 = (date - datetime.date(1970, 1, 1)).days // 365
+        
+        # Calculate the result using the formula
+        result = str((days_since_start + years_since_1970) * 2)
+        return result
+    
+    # Check if the input is a number
+    if re.fullmatch(r'\d+', input_col):
+        num = int(input_col)
+        # Calculate the result using the formula
+        result = str((num + 100) * 2)
+        return result","def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) == 1:
+        input_col = row[0]
+    else:
+        input_col = row[1]
+    
+    # Check if the input is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', input_col)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Convert month name to number
+        month_num = calendar.month_abbr.index(month)
+        
+        # Create a date object
+        try:
+            date = datetime.date(year, month_num, day)
+        except ValueError:
+            return """"
+        
+        # Calculate the number of days since the start of the year
+        days_since_start = (date - datetime.date(year, 1, 1)).days
+        
+        # Calculate the number of years since 1970
+        years_since_1970 = (date - datetime.date(1970, 1, 1)).days // 365
+        
+        # Calculate the result using the formula
+        result = str((days_since_start + years_since_1970) * 2)
+        return result
+    
+    # Check if the input is a number
+    if re.fullmatch(r'\d+', input_col):
+        num = int(input_col)
+        # Calculate the result using the formula
+        result = str((num + 100) * 2)
+        return result",ok,False,0.0,0.0,False,
+Name.000028,monolithic,monolithic,0,"def transform(row):
+    return row[0].split('-')[0]","def transform(row):
+    return row[0].split('-')[0]",ok,False,0.75,0.3333333333333333,False,
+Name.000028,monolithic,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_first_name(full_name):
+        # Split the full name into parts using the '-' separator
+        parts = full_name.split('-')
+        # Check if the first part contains a space (e.g., 'Maureen-Snorre')
+        if ' ' in parts[0]:
+            # Split the first part into first and last name
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the calendar module
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        # Get the day of the week as an integer (0-6)
+        return date.weekday()
+    
+    def get_day_of_week_name(date_str):
+        # Get the day of the week name from the calendar module
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return calendar.weekday_name[date.weekday()]
+    
+    def get_day_of_month(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.day
+    
+    def get_month_number(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.month
+    
+    def get_year(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime","def transform(row):
+    def extract_first_name(full_name):
+        # Split the full name into parts using the '-' separator
+        parts = full_name.split('-')
+        # Check if the first part contains a space (e.g., 'Maureen-Snorre')
+        if ' ' in parts[0]:
+            # Split the first part into first and last name
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the calendar module
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        # Get the day of the week as an integer (0-6)
+        return date.weekday()
+    
+    def get_day_of_week_name(date_str):
+        # Get the day of the week name from the calendar module
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return calendar.weekday_name[date.weekday()]
+    
+    def get_day_of_month(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.day
+    
+    def get_month_number(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.month
+    
+    def get_year(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime",ok,False,0.0,0.0,False,
+Name.000028,monolithic,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name
+```","def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name",ok,False,0.75,0.3333333333333333,False,
+Name.000028,recursive,monolithic,0,"def transform(row):
+    return row[0].split('-')[0]","def transform(row):
+    return row[0].split('-')[0]",ok,False,0.75,0.3333333333333333,False,
+Name.000028,recursive,monolithic,1,"```python
+def transform(row):
+    return row[0].split('-')[0]
+```","def transform(row):
+    return row[0].split('-')[0]",ok,False,0.75,0.3333333333333333,False,
+Name.000028,recursive,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_first_name(full_name):
+        # Split the full name into parts using the '-' separator
+        parts = full_name.split('-')
+        # Check if the first part contains a space (e.g., 'Maureen-Snorre')
+        if ' ' in parts[0]:
+            # Split the first part into first and last name
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the calendar module
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        # Get the day of the week as an integer (0-6)
+        return date.weekday()
+    
+    def get_day_of_week_name(date_str):
+        # Get the day of the week name from the calendar module
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return calendar.weekday_name[date.weekday()]
+    
+    def get_day_of_month(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.day
+    
+    def get_month_number(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.month
+    
+    def get_year(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime","def transform(row):
+    def extract_first_name(full_name):
+        # Split the full name into parts using the '-' separator
+        parts = full_name.split('-')
+        # Check if the first part contains a space (e.g., 'Maureen-Snorre')
+        if ' ' in parts[0]:
+            # Split the first part into first and last name
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the calendar module
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        # Get the day of the week as an integer (0-6)
+        return date.weekday()
+    
+    def get_day_of_week_name(date_str):
+        # Get the day of the week name from the calendar module
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return calendar.weekday_name[date.weekday()]
+    
+    def get_day_of_month(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.day
+    
+    def get_month_number(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.month
+    
+    def get_year(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime",ok,False,0.0,0.0,False,
+Name.000028,recursive,helpers,1,"```python
+def transform(row):
+    def extract_first_name(full_name):
+        parts = full_name.split('-')
+        if ' ' in parts[0]:
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    return extract_first_name(row[0])
+```","def transform(row):
+    def extract_first_name(full_name):
+        parts = full_name.split('-')
+        if ' ' in parts[0]:
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    return extract_first_name(row[0])",ok,True,1.0,1.0,True,
+Name.000028,recursive,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name
+```","def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name",ok,False,0.75,0.3333333333333333,False,
+Name.000028,recursive,robust,1,"```python
+def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name
+```","def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name",ok,False,0.75,0.3333333333333333,False,
+Name.000028,recursive_shuffled,monolithic,0,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    name = row[0]
+    parts = re.split(r'[-_]', name)
+    if len(parts) == 2:
+        first = parts[0]
+        last = parts[1]
+        return first[-1] + last[0]
+    else:
+        return name[0] + name[-1]","def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    name = row[0]
+    parts = re.split(r'[-_]', name)
+    if len(parts) == 2:
+        first = parts[0]
+        last = parts[1]
+        return first[-1] + last[0]
+    else:
+        return name[0] + name[-1]",ok,False,0.0,0.0,False,
+Name.000028,recursive_shuffled,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_first_name(full_name):
+        # Split on '-' and take the first part
+        parts = full_name.split('-')
+        return parts[0].split()[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the month number
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date and get the weekday name
+        try:
+            date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+            return calendar.weekday_name[date.weekday()]
+        except ValueError:
+            return """"
+    
+    def get_initials(full_name):
+        # Extract first and last names and get initials
+        first_name = extract_first_name(full_name)
+        last_name = full_name.split()[1]
+        return first_name[0] + last_name[0]
+    
+    def get_name_from_initials(initials):
+        # Map initials to names based on some logic
+        name_map = {
+            'AR': 'Artem',
+            'BI': 'Bidisha',
+            'MA': 'Maureen',
+            'HO': 'Hone'
+        }
+        return name_map.get(initials, """")
+    
+    def get_name_from_date(date_str):
+        # Get the month name from the date and construct a name
+        month = int(date_str.split('-')[1])
+        month_name = get_month_name(month)
+        return f""{month_name} {date_str.split('-')[2]}""
+    
+    def get_name_from_parts(parts):
+        # Get the first part of the name
+        return parts[0].split()[0]
+    
+    def get_name_from_full","def transform(row):
+    def extract_first_name(full_name):
+        # Split on '-' and take the first part
+        parts = full_name.split('-')
+        return parts[0].split()[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the month number
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date and get the weekday name
+        try:
+            date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+            return calendar.weekday_name[date.weekday()]
+        except ValueError:
+            return """"
+    
+    def get_initials(full_name):
+        # Extract first and last names and get initials
+        first_name = extract_first_name(full_name)
+        last_name = full_name.split()[1]
+        return first_name[0] + last_name[0]
+    
+    def get_name_from_initials(initials):
+        # Map initials to names based on some logic
+        name_map = {
+            'AR': 'Artem',
+            'BI': 'Bidisha',
+            'MA': 'Maureen',
+            'HO': 'Hone'
+        }
+        return name_map.get(initials, """")
+    
+    def get_name_from_date(date_str):
+        # Get the month name from the date and construct a name
+        month = int(date_str.split('-')[1])
+        month_name = get_month_name(month)
+        return f""{month_name} {date_str.split('-')[2]}""
+    
+    def get_name_from_parts(parts):
+        # Get the first part of the name
+        return parts[0].split()[0]
+    
+    def get_name_from_full","syntax_error: expected '(' (<unknown>, line 45)",False,0.0,0.0,False,"syntax_error: expected '(' (<unknown>, line 45)"
+Name.000028,recursive_shuffled,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    name = row[0]
+    # Split name into first and last name
+    parts = re.split(r'[-_]', name)
+    if len(parts) == 2:
+        first = parts[0]
+        last = parts[1]
+        # Check if first name is a single word
+        if len(first) == 1:
+            # Use the last name for transformation
+            return last
+        # Check if last name is a single word
+        if len(last) == 1:
+            # Use the first name for transformation
+            return first
+        # Use the first letter of each name
+        return first[0] + last[0]
+    # If not split into two parts, return the first letter of the name
+    return name[0] if name else ''
+```","def transform(row):
+    name = row[0]
+    # Split name into first and last name
+    parts = re.split(r'[-_]', name)
+    if len(parts) == 2:
+        first = parts[0]
+        last = parts[1]
+        # Check if first name is a single word
+        if len(first) == 1:
+            # Use the last name for transformation
+            return last
+        # Check if last name is a single word
+        if len(last) == 1:
+            # Use the first name for transformation
+            return first
+        # Use the first letter of each name
+        return first[0] + last[0]
+    # If not split into two parts, return the first letter of the name
+    return name[0] if name else ''",ok,False,0.0,0.0,False,
+Number.000048,monolithic,monolithic,0,"def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))","def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))",ok,False,0.0,0.0,False,
+Number.000048,monolithic,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def round_to_nearest_integer(value):
+    """"""Round a value to the nearest integer.""""""
+    return math.round(value)
+
+def format_as_string(value):
+    """"""Format a value as a string with one decimal place, rounded to the nearest integer.""""""
+    return f""{round_to_nearest_integer(value):.1f}""
+
+def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return format_as_string(value)
+```","def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return format_as_string(value)",ok,False,0.0,0.0,False,
+Number.000048,monolithic,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return str(rounded)
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value
+```","def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return str(rounded)
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value",ok,False,0.0,0.0,False,
+Number.000048,recursive,monolithic,0,"def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))","def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))",ok,False,0.0,0.0,False,
+Number.000048,recursive,monolithic,1,"```python
+def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))
+```","def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))",ok,False,0.0,0.0,False,
+Number.000048,recursive,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def round_to_nearest_integer(value):
+    """"""Round a value to the nearest integer.""""""
+    return math.round(value)
+
+def format_as_string(value):
+    """"""Format a value as a string with one decimal place, rounded to the nearest integer.""""""
+    return f""{round_to_nearest_integer(value):.1f}""
+
+def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return format_as_string(value)
+```","def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return format_as_string(value)",ok,False,0.0,0.0,False,
+Number.000048,recursive,helpers,1,"```python
+def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return f""{int(round(value))}""
+```","def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return f""{int(round(value))}""",ok,False,0.0,0.0,False,
+Number.000048,recursive,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return str(rounded)
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value
+```","def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return str(rounded)
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value",ok,False,0.0,0.0,False,
+Number.000048,recursive,robust,1,"```python
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return f""{int(rounded)}""
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value
+```","def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return f""{int(rounded)}""
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value",ok,False,0.0,0.0,False,
+Number.000048,recursive_shuffled,monolithic,0,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    value = float(row[0])
+    # Convert to Fahrenheit
+    fahrenheit = (value * 9/5) + 32
+    # Round to one decimal place
+    return f""{round(fahrenheit, 1)}""","def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    value = float(row[0])
+    # Convert to Fahrenheit
+    fahrenheit = (value * 9/5) + 32
+    # Round to one decimal place
+    return f""{round(fahrenheit, 1)}""",ok,False,0.0,0.0,False,
+Number.000048,recursive_shuffled,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def parse_value(value):
+        # Extract the numeric part using regex
+        match = re.match(r'^(\d+\.\d+)$', value)
+        if not match:
+            return None
+        return float(match.group(1))
+    
+    def calculate_result(value):
+        # Convert value to a float
+        value = float(value)
+        # Calculate the result using a formula
+        # This is a placeholder formula; the actual logic should be derived from the examples
+        # For the given examples, the formula appears to be: result = (value + 100) % 100
+        return (value + 100) % 100
+    
+    def format_result(result):
+        # Format the result as a string with one decimal place
+        return f""{result:.1f}""
+    
+    value = parse_value(row[0])
+    if value is None:
+        return """"
+    result = calculate_result(value)
+    return format_result(result)
+```","def transform(row):
+    def parse_value(value):
+        # Extract the numeric part using regex
+        match = re.match(r'^(\d+\.\d+)$', value)
+        if not match:
+            return None
+        return float(match.group(1))
+    
+    def calculate_result(value):
+        # Convert value to a float
+        value = float(value)
+        # Calculate the result using a formula
+        # This is a placeholder formula; the actual logic should be derived from the examples
+        # For the given examples, the formula appears to be: result = (value + 100) % 100
+        return (value + 100) % 100
+    
+    def format_result(result):
+        # Format the result as a string with one decimal place
+        return f""{result:.1f}""
+    
+    value = parse_value(row[0])
+    if value is None:
+        return """"
+    result = calculate_result(value)
+    return format_result(result)",ok,False,0.0,0.0,False,
+Number.000048,recursive_shuffled,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Convert to float
+        num = float(value)
+        # Check if the number is in the range of a day of the year (1-366)
+        if 1 <= num <= 366:
+            # Convert to a date (January 1st of the current year)
+            year = datetime.datetime.now().year
+            try:
+                # Create a date object for the given day of the year
+                date = datetime.date(year, 1, 1) + datetime.timedelta(days=int(num) - 1)
+                # Format as MM/DD/YYYY
+                return date.strftime(""%m/%d/%Y"")
+            except ValueError:
+                # Handle invalid day of the year (e.g., 366 in a non-leap year)
+                return ""Invalid date""
+        else:
+            # Handle numbers not in the range of a day of the year
+            return ""Invalid number""
+    else:
+        # Handle non-numeric input
+        return ""Invalid input""
+```","def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Convert to float
+        num = float(value)
+        # Check if the number is in the range of a day of the year (1-366)
+        if 1 <= num <= 366:
+            # Convert to a date (January 1st of the current year)
+            year = datetime.datetime.now().year
+            try:
+                # Create a date object for the given day of the year
+                date = datetime.date(year, 1, 1) + datetime.timedelta(days=int(num) - 1)
+                # Format as MM/DD/YYYY
+                return date.strftime(""%m/%d/%Y"")
+            except ValueError:
+                # Handle invalid day of the year (e.g., 366 in a non-leap year)
+                return ""Invalid date""
+        else:
+            # Handle numbers not in the range of a day of the year
+            return ""Invalid number""
+    else:
+        # Handle non-numeric input
+        return ""Invalid input""",ok,False,0.0,0.0,False,
+Number.000081,monolithic,monolithic,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""
+```","def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""",ok,False,0.5,0.0,False,
+Number.000081,monolithic,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{","def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{","syntax_error: '{' was never closed (<unknown>, line 51)",False,0.0,0.0,False,"syntax_error: '{' was never closed (<unknown>, line 51)"
+Number.000081,monolithic,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""
+```","def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""",ok,False,0.0,0.0,False,
+Number.000081,recursive,monolithic,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""
+```","def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""",ok,False,0.5,0.0,False,
+Number.000081,recursive,monolithic,1,"```python
+def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""
+```","def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""",ok,False,0.5,0.0,False,
+Number.000081,recursive,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{","def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{","syntax_error: '{' was never closed (<unknown>, line 51)",False,0.0,0.0,False,"syntax_error: '{' was never closed (<unknown>, line 51)"
+Number.000081,recursive,helpers,1,"```python
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{date_info['day']:02d}""
+    
+    date = get_date_from_row(row)
+    date_info = get_date_info(date)
+    return get_transform","def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{date_info['day']:02d}""
+    
+    date = get_date_from_row(row)
+    date_info = get_date_info(date)
+    return get_transform",ok,False,0.0,0.0,False,
+Number.000081,recursive,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""
+```","def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""",ok,False,0.0,0.0,False,
+Number.000081,recursive,robust,1,"```python
+def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""
+```","def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""",ok,False,0.0,0.0,False,
+Number.000081,recursive_shuffled,monolithic,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    num = int(row[0])
+    if num < 51:
+        return f""{num}-{num + 49}""
+    else:
+        return ""76-100""
+```","def transform(row):
+    num = int(row[0])
+    if num < 51:
+        return f""{num}-{num + 49}""
+    else:
+        return ""76-100""",ok,False,0.5,0.3333333333333333,False,
+Number.000081,recursive_shuffled,helpers,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_day_of_week_name(day_number):
+        return calendar.weekday_name[get_day_of_week(day_number)]
+    
+    def get_month_name_from_number(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_month_from_number(day_number):
+        return day_number
+    
+    def get_month_number_from_name(month_name):
+        return calendar.month_abbr.index(month_name)
+    
+    def get_day_of_week_from_name(weekday_name):
+        return calendar.weekday_name.index(weekday_name)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def get_month_number_from_name(weekday_name):
+        return get_month_name_from_number(get_day_of_week_from_name(weekday_name) + 1)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def get_month_name_from_number(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week_name(weekday_number):
+        return calendar.weekday_name[weekday_number]
+    
+    def get_day_of_week_from_number(weekday_number):
+        return weekday_number
+    
+    def get_month_number_from_name(month_name):
+        return calendar.month_abbr.index(month_name)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def","def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_day_of_week_name(day_number):
+        return calendar.weekday_name[get_day_of_week(day_number)]
+    
+    def get_month_name_from_number(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_month_from_number(day_number):
+        return day_number
+    
+    def get_month_number_from_name(month_name):
+        return calendar.month_abbr.index(month_name)
+    
+    def get_day_of_week_from_name(weekday_name):
+        return calendar.weekday_name.index(weekday_name)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def get_month_number_from_name(weekday_name):
+        return get_month_name_from_number(get_day_of_week_from_name(weekday_name) + 1)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def get_month_name_from_number(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week_name(weekday_number):
+        return calendar.weekday_name[weekday_number]
+    
+    def get_day_of_week_from_number(weekday_number):
+        return weekday_number
+    
+    def get_month_number_from_name(month_name):
+        return calendar.month_abbr.index(month_name)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def","syntax_error: invalid syntax (<unknown>, line 47)",False,0.0,0.0,False,"syntax_error: invalid syntax (<unknown>, line 47)"
+Number.000081,recursive_shuffled,robust,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    # Extract the number from the row
+    num_str = row[0]
+    
+    # Check if the input is a valid integer
+    if not num_str.isdigit():
+        return ""Invalid input""
+    
+    num = int(num_str)
+    
+    # Determine the range based on the number
+    if num <= 50:
+        return f""{num}-50""
+    elif num <= 75:
+        return f""51-{num}""
+    else:
+        return ""76-100""
+```","def transform(row):
+    # Extract the number from the row
+    num_str = row[0]
+    
+    # Check if the input is a valid integer
+    if not num_str.isdigit():
+        return ""Invalid input""
+    
+    num = int(num_str)
+    
+    # Determine the range based on the number
+    if num <= 50:
+        return f""{num}-50""
+    elif num <= 75:
+        return f""51-{num}""
+    else:
+        return ""76-100""",ok,False,0.5,0.3333333333333333,False,

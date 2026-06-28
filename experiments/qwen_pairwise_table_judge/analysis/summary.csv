@@ -1,0 +1,5 @@
+method,tasks,row_exact,full_task_exact,table_oracle_rate,median_candidate_tables
+row_repair_diagnostic,25,0.9133333333333333,0.8,1.0,9.0
+table_oracle,40,0.825,0.625,0.625,9.5
+direct_row_greedy,40,0.7229166666666667,0.5,0.625,9.5
+pairwise_tournament,40,0.71875,0.475,0.625,9.5

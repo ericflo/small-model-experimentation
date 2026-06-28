@@ -1,0 +1,32 @@
+[
+  {
+    "initial_visible_pass": 52,
+    "n": 250,
+    "repair_added_visible": 12,
+    "variant": "row_column_rule",
+    "visible_correct": 51,
+    "visible_pass": 64,
+    "visible_pass_rate": 0.256,
+    "visible_precision": 0.796875
+  },
+  {
+    "initial_visible_pass": 29,
+    "n": 250,
+    "repair_added_visible": 28,
+    "variant": "structural_python",
+    "visible_correct": 42,
+    "visible_pass": 57,
+    "visible_pass_rate": 0.228,
+    "visible_precision": 0.7368421052631579
+  },
+  {
+    "initial_visible_pass": 53,
+    "n": 250,
+    "repair_added_visible": 6,
+    "variant": "verified_structural",
+    "visible_correct": 42,
+    "visible_pass": 59,
+    "visible_pass_rate": 0.236,
+    "visible_precision": 0.711864406779661
+  }
+]

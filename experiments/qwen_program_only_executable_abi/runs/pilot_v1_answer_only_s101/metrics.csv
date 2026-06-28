@@ -1,0 +1,4 @@
+run,suite,arm,seed,trained,split,n,primary_accuracy,final_accuracy,exec_accuracy,valid_final_rate,valid_exec_rate,no_final_rate,leak_string_rate,mean_new_tokens,acc_string,acc_unit,acc_table,acc_date
+pilot_v1_answer_only_s101,pilot,answer_only,101,1,eval_indist,16,0.8125,0.8125,0.0,1.0,0.0,0.0,0.8125,9.6875,0.5,1.0,0.75,1.0
+pilot_v1_answer_only_s101,pilot,answer_only,101,1,eval_composition,16,0.375,0.375,0.0,1.0,0.0,0.0,0.375,9.8125,0.0,1.0,0.5,0.0
+pilot_v1_answer_only_s101,pilot,answer_only,101,1,eval_template_shift,16,0.4375,0.4375,0.0,1.0,0.0,0.0,0.5625,9.875,0.5,1.0,0.25,0.0

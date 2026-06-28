@@ -1,0 +1,80 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:13,  9.84it/s]Loading weights:   4%|▎         | 27/723 [00:00<00:04, 152.90it/s]Loading weights:  12%|█▏        | 89/723 [00:00<00:01, 362.43it/s]Loading weights:  20%|██        | 147/723 [00:00<00:01, 440.53it/s]Loading weights:  28%|██▊       | 205/723 [00:00<00:01, 485.13it/s]Loading weights:  37%|███▋      | 265/723 [00:00<00:00, 521.59it/s]Loading weights:  46%|████▌     | 329/723 [00:00<00:00, 558.81it/s]Loading weights:  53%|█████▎    | 385/723 [00:00<00:00, 542.01it/s]Loading weights:  68%|██████▊   | 490/723 [00:00<00:00, 694.92it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 705.68it/s]
+eval-sketch:   0%|          | 0/5 [00:00<?, ?it/s]eval-sketch:  20%|██        | 1/5 [00:30<02:02, 30.67s/it]eval-sketch:  40%|████      | 2/5 [01:00<01:31, 30.39s/it]eval-sketch:  60%|██████    | 3/5 [01:31<01:00, 30.48s/it]eval-sketch:  80%|████████  | 4/5 [01:58<00:29, 29.02s/it]eval-sketch: 100%|██████████| 5/5 [02:28<00:00, 29.30s/it]eval-sketch: 100%|██████████| 5/5 [02:28<00:00, 29.61s/it]
+{
+  "by_family": {
+    "sum_length_mod_gate_label": {
+      "avg_synthesized_programs": 16000.0,
+      "avg_unique_sketches": 2.6,
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "damaged_vs_base_hidden": 1,
+      "improved_over_base_hidden": 3,
+      "sketch_synth_hidden_all": {
+        "rate": 0.4,
+        "records": 5,
+        "successes": 2
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    }
+  },
+  "overall": {
+    "avg_synthesized_programs": 16000.0,
+    "avg_unique_sketches": 2.6,
+    "base_rerank_hidden_all": {
+      "rate": 0.0,
+      "records": 5,
+      "successes": 0
+    },
+    "base_rerank_visible_all": {
+      "rate": 0.0,
+      "records": 5,
+      "successes": 0
+    },
+    "damaged_vs_base_hidden": 1,
+    "improved_over_base_hidden": 3,
+    "sketch_synth_hidden_all": {
+      "rate": 0.4,
+      "records": 5,
+      "successes": 2
+    },
+    "sketch_synth_oracle_hidden_all": {
+      "rate": 1.0,
+      "records": 5,
+      "successes": 5
+    },
+    "sketch_synth_visible_all": {
+      "rate": 1.0,
+      "records": 5,
+      "successes": 5
+    },
+    "target_program_synthesized": {
+      "rate": 1.0,
+      "records": 5,
+      "successes": 5
+    }
+  }
+}

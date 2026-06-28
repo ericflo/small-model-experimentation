@@ -1,0 +1,2 @@
+phase,epoch,candidate_examples,positive_rate,pos_weight,loss,correct_loss,group_loss,valid_loss,final_loss,trace_top_loss,trace_depth_loss,quick_base_accuracy,quick_learned_accuracy,quick_oracle_accuracy,quick_learned_valid_rate,quick_mean_selected_score,quick_gap_recovered
+candidate_consequence,1,1346,0.02451708766716196,12.0,3.15426576031264,1.36886681811289,0.4016652468586393,0.6592223946265268,3.1460390175965354,4.337414450666703,3.7788028816234482,0.0,0.0,0.0,1.0,0.03410413721576333,0.0

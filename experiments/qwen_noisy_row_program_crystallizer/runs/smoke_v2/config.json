@@ -1,0 +1,19 @@
+{
+  "run_name": "smoke_v2",
+  "seed": 20260627,
+  "task_limit": 6,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "max_candidates": 8000,
+  "max_tables": 64,
+  "topk_per_row": 4,
+  "pseudo_max_candidates": 5000,
+  "pseudo_min_vote_share": 0.75,
+  "allow_pseudo_maps": false,
+  "candidate_cache": "/workspace/experiments/qwen_full_table_consistency_reranker/runs/main_qwen_table_40/row_candidates.csv",
+  "tasks": 6,
+  "candidate_rows": 210,
+  "started_utc": "2026-06-27T09:49:17.049209+00:00"
+}

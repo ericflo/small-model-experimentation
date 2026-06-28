@@ -1,0 +1,116 @@
+{
+  "eval_records": {
+    "by_cell": {
+      "eval/n128/pair_affine_mod": 20,
+      "eval/n128/pair_compare_gate": 20,
+      "eval/n256/pair_affine_mod": 20,
+      "eval/n256/pair_compare_gate": 20,
+      "eval/n512/pair_affine_mod": 20,
+      "eval/n512/pair_compare_gate": 20,
+      "eval/n64/pair_affine_mod": 20,
+      "eval/n64/pair_compare_gate": 20
+    },
+    "records": 160
+  },
+  "eval_sizes": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "eval_states": {
+    "by_budget": {
+      "0": 160,
+      "1": 160,
+      "2": 160,
+      "3": 160,
+      "4": 160,
+      "5": 160,
+      "6": 160,
+      "7": 160,
+      "8": 160,
+      "9": 160,
+      "10": 160
+    },
+    "by_cell": {
+      "eval/n128/pair_affine_mod": 220,
+      "eval/n128/pair_compare_gate": 220,
+      "eval/n256/pair_affine_mod": 220,
+      "eval/n256/pair_compare_gate": 220,
+      "eval/n512/pair_affine_mod": 220,
+      "eval/n512/pair_compare_gate": 220,
+      "eval/n64/pair_affine_mod": 220,
+      "eval/n64/pair_compare_gate": 220
+    },
+    "candidate_count_mean": 1186.8426136363637,
+    "first_stop_budget_mean_by_template": {
+      "eval/pair_affine_mod": 5.798365122615804,
+      "eval/pair_compare_gate": 7.833333333333333
+    },
+    "hidden_equivalent_candidates_mean": 37.691477272727276,
+    "labels": {
+      "A": 1082,
+      "B": 678
+    },
+    "states": 1760
+  },
+  "hidden_cases": 16,
+  "max_budget": 10,
+  "query_pool_cases": 96,
+  "seed": 20260624,
+  "templates": [
+    "pair_affine_mod",
+    "pair_compare_gate"
+  ],
+  "train_records": {
+    "by_cell": {
+      "train/n128/pair_affine_mod": 40,
+      "train/n128/pair_compare_gate": 40,
+      "train/n256/pair_affine_mod": 40,
+      "train/n256/pair_compare_gate": 40,
+      "train/n64/pair_affine_mod": 40,
+      "train/n64/pair_compare_gate": 40
+    },
+    "records": 240
+  },
+  "train_sizes": [
+    64,
+    128,
+    256
+  ],
+  "train_states": {
+    "by_budget": {
+      "0": 240,
+      "1": 240,
+      "2": 240,
+      "3": 240,
+      "4": 240,
+      "5": 240,
+      "6": 240,
+      "7": 240,
+      "8": 240,
+      "9": 240,
+      "10": 240
+    },
+    "by_cell": {
+      "train/n128/pair_affine_mod": 440,
+      "train/n128/pair_compare_gate": 440,
+      "train/n256/pair_affine_mod": 440,
+      "train/n256/pair_compare_gate": 440,
+      "train/n64/pair_affine_mod": 440,
+      "train/n64/pair_compare_gate": 440
+    },
+    "candidate_count_mean": 211.01856060606062,
+    "first_stop_budget_mean_by_template": {
+      "train/pair_affine_mod": 5.737400530503979,
+      "train/pair_compare_gate": 7.666666666666667
+    },
+    "hidden_equivalent_candidates_mean": 4.0212121212121215,
+    "labels": {
+      "A": 1698,
+      "B": 942
+    },
+    "states": 2640
+  },
+  "visible_cases": 4
+}

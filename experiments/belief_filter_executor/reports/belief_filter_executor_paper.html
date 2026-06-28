@@ -1,0 +1,303 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Belief Filter Executor Experiment</title><style>
+body { margin:0; background:#f6f7f9; color:#17202a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.62; }
+main { max-width:960px; margin:0 auto; padding:56px 30px 84px; background:#fff; box-shadow:0 1px 18px rgba(20,30,40,.08); }
+h1 { font-size:2.35rem; line-height:1.12; margin:0 0 .4rem; color:#0f1720; }
+h2 { margin-top:2.2rem; padding-top:.45rem; border-top:1px solid #e5e7eb; color:#152238; }
+h3 { margin-top:1.5rem; color:#24364b; }
+p,li { font-size:1.02rem; }
+a { color:#1d5fa7; }
+code { background:#f0f3f6; padding:.12rem .28rem; border-radius:4px; }
+pre { background:#111827; color:#f9fafb; padding:1rem; border-radius:8px; overflow-x:auto; }
+pre code { background:transparent; padding:0; }
+table { border-collapse:collapse; width:100%; margin:1rem 0 1.4rem; font-size:.96rem; }
+th,td { border:1px solid #d7dde5; padding:.55rem .65rem; vertical-align:top; }
+th { background:#edf2f7; text-align:left; }
+img { display:block; max-width:100%; margin:1.2rem auto 1.8rem; border:1px solid #d8dee8; border-radius:6px; }
+blockquote { border-left:4px solid #8aa4c2; margin-left:0; padding-left:1rem; background:#f8fafc; color:#334155; }
+@media print { body{background:white;} main{box-shadow:none; max-width:none;} }
+</style></head><body><main><h1>Latent Recurrent Filtering for Correlated Modular Beliefs</h1>
+<p><strong>A controlled experiment on hidden-state execution with arithmetic updates and observations</strong></p>
+<h2>Abstract</h2>
+<p>This experiment tests whether a latent recurrent runtime can maintain and update a correlated belief state. Each example starts with an unknown pair of modular registers constrained by <code>B=A+d (mod p)</code>. A program then applies arithmetic updates and observation filters such as <code>A % m = r</code> or <code>B % m = r</code>. The target is the exact final probability distribution over all <code>(A,B)</code> pairs.</p>
+<p>The primary model stores a joint categorical belief over all register pairs and applies one learned update per internal recurrent step. On the scaled modulus-31 task, it was trained on program lengths 1-8 and evaluated on lengths 4, 8, 12, 16, and 24. Target-support mass stayed low when the internal step budget <code>K</code> was below program length <code>L</code>, then rose above 91% once <code>K&gt;=L</code>. Top-1-on-support reached 100% at the same threshold for every evaluated length. A marginal recurrent control and a static one-shot compiler failed on the scaled task, showing that both joint state and recurrent execution are doing useful work.</p>
+<h2>Lay Summary</h2>
+<p>The model begins with partial knowledge:</p>
+<pre><code class="language-text">B = A + d (mod p)
+</code></pre>
+<p>This relation describes many possible starting worlds. The program then changes the registers and sometimes adds observations:</p>
+<pre><code class="language-text">A = A + 7
+B = B - A
+observe A % 5 = 2
+A = A + B
+</code></pre>
+<p>The correct answer is not one value. It is the set of all <code>(A,B)</code> pairs still possible after executing the program and filtering by the observations. The joint recurrent model learns to update that whole belief state one instruction at a time. If a program has 16 instructions, it needs 16 internal steps; with fewer steps it has not executed the whole program.</p>
+<h2>1. Question</h2>
+<p>The experiment asks whether a learned recurrent runtime can execute belief-state programs when the hidden state must preserve correlations between variables.</p>
+<p>The desired evidence has four parts:</p>
+<ol>
+<li>Accuracy should depend on the internal recurrent step budget <code>K</code>.</li>
+<li>The threshold should align with program length <code>L</code>: weak when <code>K&lt;L</code>, strong when <code>K&gt;=L</code>.</li>
+<li>Lengths beyond the training range should work when enough recurrent steps are available.</li>
+<li>Controls without joint state or without recurrent execution should fail.</li>
+</ol>
+<p>The setting is intentionally controlled. The point is not to test open-ended language reasoning; it is to isolate whether recurrent latent execution can implement exact filtering over a known state space.</p>
+<h2>2. Task</h2>
+<p>Programs operate over two registers modulo <code>p</code>.</p>
+<p>Initial belief:</p>
+<pre><code class="language-text">{(A, B): B = A + d mod p}
+</code></pre>
+<p>For <code>p=31</code>, the full state space has <code>31 * 31 = 961</code> register pairs, and the initial support contains 31 of them.</p>
+<p>Operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A=A+c</code></td>
+<td>add a constant to <code>A</code></td>
+</tr>
+<tr>
+<td><code>A=A-c</code></td>
+<td>subtract a constant from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+c</code></td>
+<td>add a constant to <code>B</code></td>
+</tr>
+<tr>
+<td><code>B=B-c</code></td>
+<td>subtract a constant from <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A+B</code></td>
+<td>add <code>B</code> into <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+A</code></td>
+<td>add <code>A</code> into <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A-B</code></td>
+<td>subtract <code>B</code> from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B-A</code></td>
+<td>subtract <code>A</code> from <code>B</code></td>
+</tr>
+<tr>
+<td><code>OBS_A_BUCKET</code></td>
+<td>filter to states where <code>A % m = r</code></td>
+</tr>
+<tr>
+<td><code>OBS_B_BUCKET</code></td>
+<td>filter to states where <code>B % m = r</code></td>
+</tr>
+</tbody>
+</table>
+<p>Observation residues are sampled from the live support, so every target support is non-empty. For the scaled run, <code>p=31</code>, <code>m=5</code>, and each instruction is an observation with probability 0.3.</p>
+<p>Each example has:</p>
+<ul>
+<li>a random relation parameter <code>d</code></li>
+<li>a random program of length <code>L</code></li>
+<li>exact belief targets after each program prefix</li>
+<li>an exact final target distribution</li>
+</ul>
+<p>Training used lengths 1-8. Evaluation used lengths 4, 8, 12, 16, and 24. Lengths 12, 16, and 24 test length generalization.</p>
+<h2>3. Models</h2>
+<h3>Joint Recurrent Filter</h3>
+<p>The primary model stores a categorical distribution over all <code>(A,B)</code> pairs. Each recurrent step reads the next instruction and applies the corresponding learned update:</p>
+<ul>
+<li>arithmetic instructions use learned transition distributions</li>
+<li>observation instructions use learned likelihoods over register values</li>
+<li>the belief state is renormalized after each update</li>
+</ul>
+<p>For arithmetic operations, the model learns transition logits with shape <code>8 x p x p x p</code>. For observations, it learns likelihood logits for each observed register and residue bucket. The model is not handed a symbolic arithmetic table or a hard-coded modulo filter; those operations are learned from dense belief supervision.</p>
+<h3>Marginal Recurrent Control</h3>
+<p>The marginal control follows the same recurrent schedule, but it stores separate distributions over <code>A</code> and <code>B</code>. This representation cannot exactly preserve the line-shaped correlation <code>B=A+d</code>. It can learn local filtering signals, but it cannot represent the joint support.</p>
+<h3>Static Compiler Control</h3>
+<p>The static control receives the relation parameter and the whole program, then predicts the final distribution in one pass with a small Transformer encoder. It has no recurrent execution axis and cannot trade more internal steps for better final accuracy.</p>
+<h2>4. Metrics</h2>
+<p>The target is a distribution over a support set.</p>
+<ul>
+<li><code>target_mass</code>: total model probability assigned to the exact target support.</li>
+<li><code>top1_on_support</code>: whether the highest-probability pair is inside the exact target support.</li>
+<li><code>target_nll</code>: cross-entropy against the exact target distribution.</li>
+<li><code>mean_support_size</code>: average number of valid final states.</li>
+</ul>
+<p><code>target_mass</code> is the main distribution-quality metric. <code>top1_on_support</code> is useful as a coarse correctness check, but it does not measure whether probability is well distributed across all valid states.</p>
+<h2>5. Main Result</h2>
+<p>The scaled modulus-31 joint recurrent filter shows a clean execution threshold. When <code>K</code> is too small to consume the whole program, target mass stays low. When <code>K</code> reaches <code>L</code>, target mass jumps above 91% and top-1-on-support reaches 100%.</p>
+<p><img alt="Top-1 support heatmap" src="../analysis/figures/mod31_top1_support_heatmap.png" /></p>
+<p><img alt="Target mass heatmap" src="../analysis/figures/mod31_target_mass_heatmap.png" /></p>
+<p>The same threshold is visible in the line curves.</p>
+<p><img alt="Target mass K curves" src="../analysis/figures/mod31_target_mass_k_curves.png" /></p>
+<p>Numerically:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Program length</th>
+<th style="text-align: right;">Mean support size</th>
+<th style="text-align: right;">Best target mass when <code>K&lt;L</code></th>
+<th style="text-align: right;">First <code>K&gt;=L</code></th>
+<th style="text-align: right;">Target mass at first <code>K&gt;=L</code></th>
+<th style="text-align: right;">Top-1 at first <code>K&gt;=L</code></th>
+<th style="text-align: right;">Target NLL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">13.1</td>
+<td style="text-align: right;">13.8%</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">96.2%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">2.195</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">6.5</td>
+<td style="text-align: right;">3.8%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">93.9%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">1.500</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4.2</td>
+<td style="text-align: right;">3.1%</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">92.4%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">1.081</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">2.6%</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">91.7%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.785</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1.7</td>
+<td style="text-align: right;">0.8%</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">91.3%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.441</td>
+</tr>
+</tbody>
+</table>
+<p>The held-out lengths are the key part of the result. The model was trained only up to length 8, but it executes lengths 12, 16, and 24 when given enough recurrent steps.</p>
+<h2>6. Controls</h2>
+<p>The scaled controls show that the result is not explained by weak filtering cues or one-shot compilation.</p>
+<p><img alt="Control comparison" src="../analysis/figures/mod31_controls_target_mass.png" /></p>
+<p>At modulus 31:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">L=4</th>
+<th style="text-align: right;">L=8</th>
+<th style="text-align: right;">L=12</th>
+<th style="text-align: right;">L=16</th>
+<th style="text-align: right;">L=24</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Joint recurrent filter</td>
+<td style="text-align: right;">96.2%</td>
+<td style="text-align: right;">93.9%</td>
+<td style="text-align: right;">92.4%</td>
+<td style="text-align: right;">91.7%</td>
+<td style="text-align: right;">91.3%</td>
+</tr>
+<tr>
+<td>Marginal recurrent control</td>
+<td style="text-align: right;">3.9%</td>
+<td style="text-align: right;">2.9%</td>
+<td style="text-align: right;">2.3%</td>
+<td style="text-align: right;">1.7%</td>
+<td style="text-align: right;">1.4%</td>
+</tr>
+<tr>
+<td>Static compiler control</td>
+<td style="text-align: right;">5.4%</td>
+<td style="text-align: right;">2.1%</td>
+<td style="text-align: right;">0.7%</td>
+<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">0.2%</td>
+</tr>
+</tbody>
+</table>
+<p>The marginal control has recurrent steps and learned filters, but it cannot represent the pairwise correlation. The static compiler sees the whole program but lacks an execution axis. Both controls remain far below the joint recurrent filter on every scaled length.</p>
+<h2>7. Small-Modulus Check</h2>
+<p>A smaller modulus-11 run used the same task structure with <code>m=4</code>, training lengths 1-6, and evaluation lengths 3, 6, 9, and 12. The joint recurrent filter reached 92.2-96.2% target mass at the matching <code>K=L</code> thresholds. The matched marginal and static controls stayed below 17.5% target mass. This check established that the filtering task and controls behave consistently at a smaller state size before the modulus-31 run.</p>
+<h2>8. Interpretation</h2>
+<p>The result supports a narrow mechanism claim:</p>
+<blockquote>
+<p>A recurrent latent runtime with a joint belief state can execute arithmetic and observation-filter programs, and additional internal steps improve performance when those steps correspond to consuming more program instructions.</p>
+</blockquote>
+<p>The threshold shape is important:</p>
+<pre><code class="language-text">K &lt; L: the runtime has not executed the whole program -&gt; low target mass
+K &gt;= L: the runtime has executed the program -&gt; high target mass
+</code></pre>
+<p>The observations make the task stricter than pure arithmetic support transport. The model must both move probability through register updates and renormalize after filtering. The marginal control confirms that this is not solvable by tracking independent register distributions.</p>
+<h2>9. Limits</h2>
+<p>This is a structured experiment.</p>
+<ul>
+<li>The joint model stores an explicit categorical distribution over <code>(A,B)</code>.</li>
+<li>Training uses dense belief supervision at program prefixes.</li>
+<li>The recurrent runtime uses a direct program counter.</li>
+<li>The operations are modular arithmetic updates and bucket observations.</li>
+<li>The largest completed state space has 961 pairs.</li>
+</ul>
+<p>These limits define the scope of the result. The experiment shows that the mechanism works when the hidden representation is aligned with the required state. It does not show that an unstructured hidden vector will discover the same representation without additional pressure.</p>
+<h2>10. Next Iterations</h2>
+<p>Useful next tests:</p>
+<ol>
+<li>Replace the explicit program counter with attention over instruction tokens.</li>
+<li>Add a learned halt or no-op policy so the runtime can choose its compute budget.</li>
+<li>Distill the categorical belief into a dense hidden state and measure how much accuracy survives.</li>
+<li>Increase modulus and observation variety while tracking memory and runtime cost.</li>
+<li>Train on final-query supervision instead of full prefix distributions.</li>
+</ol>
+<h2>11. Reproducibility</h2>
+<p>Primary files:</p>
+<ul>
+<li>Experiment script: <code>../src/belief_filter_executor_experiment.py</code></li>
+<li>Analysis script: <code>../src/analyze_belief_filter_executor.py</code></li>
+<li>Experiment log: <code>belief_filter_executor_experiment_log.md</code></li>
+<li>Results directory: <code>../runs/</code></li>
+<li>Analysis directory: <code>../analysis/</code></li>
+<li>Checkpoint manifest: <code>../checkpoint_manifest.csv</code></li>
+</ul>
+<p>Key run directories:</p>
+<ul>
+<li><code>../runs/main_joint_mod31</code></li>
+<li><code>../runs/control_marginal_mod31</code></li>
+<li><code>../runs/control_static_mod31</code></li>
+<li><code>../runs/pilot_joint_mod11</code></li>
+<li><code>../runs/control_marginal_mod11</code></li>
+<li><code>../runs/control_static_mod11</code></li>
+</ul>
+<p>Large checkpoint files are stored outside the experiment bundle under:</p>
+<pre><code class="language-text">../../../large_artifacts/belief_filter_executor/checkpoints/
+</code></pre>
+<p>Environment:</p>
+<ul>
+<li>Python 3.12.3</li>
+<li>PyTorch 2.8.0+cu128</li>
+<li>GPU: NVIDIA RTX 6000 Ada Generation</li>
+</ul>
+<h2>12. Bottom Line</h2>
+<p>The joint recurrent filter learned to execute correlated belief-state programs with arithmetic updates and observations. It generalized from training lengths 1-8 to evaluation lengths 12, 16, and 24, and it showed a sharp improvement when the recurrent step budget reached program length. The controls failed on the same scaled task. The main lesson is that recurrent latent execution can scale cleanly with internal compute when the hidden state can represent the correlations required by the task.</p></main></body></html>

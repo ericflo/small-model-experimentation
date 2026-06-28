@@ -1,0 +1,901 @@
+task_id,family,method,row_index,input,prediction,target,exact
+Address.000002,Address,direct_row,0,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place SE,880 81th Place,False
+Address.000002,Address,direct_row,1,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place NE,256 32th Place,False
+Address.000002,Address,direct_row,2,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,True
+Address.000002,Address,direct_batch,0,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place SE,880 81th Place,False
+Address.000002,Address,direct_batch,1,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place NE,256 32th Place,False
+Address.000002,Address,direct_batch,2,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,True
+Address.000002,Address,init_soft_row,0,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place SE,880 81th Place,False
+Address.000002,Address,init_soft_row,1,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place NE,256 32th Place,False
+Address.000002,Address,init_soft_row,2,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,True
+Address.000002,Address,learned_soft_row,0,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place SE,880 81th Place,False
+Address.000002,Address,learned_soft_row,1,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place NE,256 32th Place,False
+Address.000002,Address,learned_soft_row,2,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,True
+Address.000002,Address,shuffled_soft_row,0,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place SE,880 81th Place,False
+Address.000002,Address,shuffled_soft_row,1,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place NE,256 32th Place,False
+Address.000002,Address,shuffled_soft_row,2,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,True
+Address.000002,Address,learned_soft_batch,0,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place SE,880 81th Place,False
+Address.000002,Address,learned_soft_batch,1,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place NE,256 32th Place,False
+Address.000002,Address,learned_soft_batch,2,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,True
+Address.000013,Address,direct_row,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+Address.000013,Address,direct_row,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+Address.000013,Address,direct_row,2,"One Main Parkway, Allentown, ND 41230",One Main Parkway,None,False
+Address.000013,Address,direct_row,3,"One Second Way, Ekurhuleni, NY 58712",One Second Way,None,False
+Address.000013,Address,direct_batch,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+Address.000013,Address,direct_batch,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+Address.000013,Address,direct_batch,2,"One Main Parkway, Allentown, ND 41230",One,None,False
+Address.000013,Address,direct_batch,3,"One Second Way, Ekurhuleni, NY 58712",One,None,False
+Address.000013,Address,init_soft_row,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+Address.000013,Address,init_soft_row,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+Address.000013,Address,init_soft_row,2,"One Main Parkway, Allentown, ND 41230",One Main Parkway,None,False
+Address.000013,Address,init_soft_row,3,"One Second Way, Ekurhuleni, NY 58712",One Second Way,None,False
+Address.000013,Address,learned_soft_row,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+Address.000013,Address,learned_soft_row,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+Address.000013,Address,learned_soft_row,2,"One Main Parkway, Allentown, ND 41230","One Main Parkway, Allentown, ND 41230",None,False
+Address.000013,Address,learned_soft_row,3,"One Second Way, Ekurhuleni, NY 58712","One Second Way, Ekurhuleni, NY 58712",None,False
+Address.000013,Address,shuffled_soft_row,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+Address.000013,Address,shuffled_soft_row,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+Address.000013,Address,shuffled_soft_row,2,"One Main Parkway, Allentown, ND 41230",None,None,True
+Address.000013,Address,shuffled_soft_row,3,"One Second Way, Ekurhuleni, NY 58712",None,None,True
+Address.000013,Address,learned_soft_batch,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+Address.000013,Address,learned_soft_batch,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+Address.000013,Address,learned_soft_batch,2,"One Main Parkway, Allentown, ND 41230",One,None,False
+Address.000013,Address,learned_soft_batch,3,"One Second Way, Ekurhuleni, NY 58712",One,None,False
+BillingCode.000007,BillingCode,direct_row,0,11529,[11529],11529],False
+BillingCode.000007,BillingCode,direct_row,1,PT-11529,[PT-11529],PT-11529],False
+BillingCode.000007,BillingCode,direct_row,2,[CPT-11529,[CPT-11529],[CPT-11529],True
+BillingCode.000007,BillingCode,direct_batch,0,11529,11529,11529],False
+BillingCode.000007,BillingCode,direct_batch,1,PT-11529,PT-11529,PT-11529],False
+BillingCode.000007,BillingCode,direct_batch,2,[CPT-11529,[CPT-11529,[CPT-11529],False
+BillingCode.000007,BillingCode,init_soft_row,0,11529,[11529],11529],False
+BillingCode.000007,BillingCode,init_soft_row,1,PT-11529,[PT-11529],PT-11529],False
+BillingCode.000007,BillingCode,init_soft_row,2,[CPT-11529,[CPT-11529],[CPT-11529],True
+BillingCode.000007,BillingCode,learned_soft_row,0,11529,11529,11529],False
+BillingCode.000007,BillingCode,learned_soft_row,1,PT-11529,[PT-11529],PT-11529],False
+BillingCode.000007,BillingCode,learned_soft_row,2,[CPT-11529,[CPT-11529],[CPT-11529],True
+BillingCode.000007,BillingCode,shuffled_soft_row,0,11529,[11529],11529],False
+BillingCode.000007,BillingCode,shuffled_soft_row,1,PT-11529,[PT-11529],PT-11529],False
+BillingCode.000007,BillingCode,shuffled_soft_row,2,[CPT-11529,[CPT-11529],[CPT-11529],True
+BillingCode.000007,BillingCode,learned_soft_batch,0,11529,11529,11529],False
+BillingCode.000007,BillingCode,learned_soft_batch,1,PT-11529,PT-11529,PT-11529],False
+BillingCode.000007,BillingCode,learned_soft_batch,2,[CPT-11529,[CPT-11529,[CPT-11529],False
+City.000010,City,direct_row,0,9,9,9,True
+City.000010,City,direct_row,1,20+,20,20,True
+City.000010,City,direct_row,2,None,0,0,True
+City.000010,City,direct_batch,0,9,9,9,True
+City.000010,City,direct_batch,1,20+,20,20,True
+City.000010,City,direct_batch,2,None,0,0,True
+City.000010,City,init_soft_row,0,9,9,9,True
+City.000010,City,init_soft_row,1,20+,20,20,True
+City.000010,City,init_soft_row,2,None,0,0,True
+City.000010,City,learned_soft_row,0,9,9,9,True
+City.000010,City,learned_soft_row,1,20+,20,20,True
+City.000010,City,learned_soft_row,2,None,0,0,True
+City.000010,City,shuffled_soft_row,0,9,9,9,True
+City.000010,City,shuffled_soft_row,1,20+,20,20,True
+City.000010,City,shuffled_soft_row,2,None,0,0,True
+City.000010,City,learned_soft_batch,0,9,9,9,True
+City.000010,City,learned_soft_batch,1,20+,20,20,True
+City.000010,City,learned_soft_batch,2,None,0,0,True
+City.000011,City,direct_row,0,NYC,New York City,New York City,True
+City.000011,City,direct_row,1,new york city,New York City,New York City,True
+City.000011,City,direct_row,2,None,None,None,True
+City.000011,City,direct_row,3,SJ,San Jose,San Jose,True
+City.000011,City,direct_batch,0,NYC,New York City,New York City,True
+City.000011,City,direct_batch,1,new york city,new york city,New York City,False
+City.000011,City,direct_batch,2,None,None,None,True
+City.000011,City,direct_batch,3,SJ,San Jose,San Jose,True
+City.000011,City,init_soft_row,0,NYC,New York City,New York City,True
+City.000011,City,init_soft_row,1,new york city,New York City,New York City,True
+City.000011,City,init_soft_row,2,None,New York City,None,False
+City.000011,City,init_soft_row,3,SJ,San Jose,San Jose,True
+City.000011,City,learned_soft_row,0,NYC,New York City,New York City,True
+City.000011,City,learned_soft_row,1,new york city,New York City,New York City,True
+City.000011,City,learned_soft_row,2,None,New York City,None,False
+City.000011,City,learned_soft_row,3,SJ,New York City,San Jose,False
+City.000011,City,shuffled_soft_row,0,NYC,New York City,New York City,True
+City.000011,City,shuffled_soft_row,1,new york city,New York City,New York City,True
+City.000011,City,shuffled_soft_row,2,None,New York City,None,False
+City.000011,City,shuffled_soft_row,3,SJ,New York City,San Jose,False
+City.000011,City,learned_soft_batch,0,NYC,New York City,New York City,True
+City.000011,City,learned_soft_batch,1,new york city,new york city,New York City,False
+City.000011,City,learned_soft_batch,2,None,None,None,True
+City.000011,City,learned_soft_batch,3,SJ,SJ,San Jose,False
+Column.000001,Column,direct_row,0,ID,Col1,Col1,True
+Column.000001,Column,direct_row,1,Coln2,Col2,Col2,True
+Column.000001,Column,direct_row,2,ID,Col1,Col1,True
+Column.000001,Column,direct_row,3,ID,Col1,Col1,True
+Column.000001,Column,direct_batch,0,ID,Col1,Col1,True
+Column.000001,Column,direct_batch,1,Coln2,Col2,Col2,True
+Column.000001,Column,direct_batch,2,ID,Col1,Col1,True
+Column.000001,Column,direct_batch,3,ID,Col1,Col1,True
+Column.000001,Column,init_soft_row,0,ID,Col1,Col1,True
+Column.000001,Column,init_soft_row,1,Coln2,Col2,Col2,True
+Column.000001,Column,init_soft_row,2,ID,Col1,Col1,True
+Column.000001,Column,init_soft_row,3,ID,Col1,Col1,True
+Column.000001,Column,learned_soft_row,0,ID,Col1,Col1,True
+Column.000001,Column,learned_soft_row,1,Coln2,Col2,Col2,True
+Column.000001,Column,learned_soft_row,2,ID,Col1,Col1,True
+Column.000001,Column,learned_soft_row,3,ID,Col1,Col1,True
+Column.000001,Column,shuffled_soft_row,0,ID,Col1,Col1,True
+Column.000001,Column,shuffled_soft_row,1,Coln2,Col2,Col2,True
+Column.000001,Column,shuffled_soft_row,2,ID,Col1,Col1,True
+Column.000001,Column,shuffled_soft_row,3,ID,Col1,Col1,True
+Column.000001,Column,learned_soft_batch,0,ID,Col1,Col1,True
+Column.000001,Column,learned_soft_batch,1,Coln2,Col2,Col2,True
+Column.000001,Column,learned_soft_batch,2,ID,Col1,Col1,True
+Column.000001,Column,learned_soft_batch,3,ID,Col1,Col1,True
+DateTime.000004,DateTime,direct_row,0,col0=04:29:27 | col1=1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True
+DateTime.000004,DateTime,direct_row,1,col0=09:08:38 | col1=2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,True
+DateTime.000004,DateTime,direct_row,2,col0=21:46:13 | col1=1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,True
+DateTime.000004,DateTime,direct_row,3,col0=17:14:57 | col1=1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,True
+DateTime.000004,DateTime,direct_batch,0,col0=04:29:27 | col1=1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True
+DateTime.000004,DateTime,direct_batch,1,col0=09:08:38 | col1=2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,True
+DateTime.000004,DateTime,direct_batch,2,col0=21:46:13 | col1=1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,True
+DateTime.000004,DateTime,direct_batch,3,col0=17:14:57 | col1=1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,True
+DateTime.000004,DateTime,init_soft_row,0,col0=04:29:27 | col1=1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True
+DateTime.000004,DateTime,init_soft_row,1,col0=09:08:38 | col1=2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,True
+DateTime.000004,DateTime,init_soft_row,2,col0=21:46:13 | col1=1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,True
+DateTime.000004,DateTime,init_soft_row,3,col0=17:14:57 | col1=1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,True
+DateTime.000004,DateTime,learned_soft_row,0,col0=04:29:27 | col1=1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True
+DateTime.000004,DateTime,learned_soft_row,1,col0=09:08:38 | col1=2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,True
+DateTime.000004,DateTime,learned_soft_row,2,col0=21:46:13 | col1=1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,True
+DateTime.000004,DateTime,learned_soft_row,3,col0=17:14:57 | col1=1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,True
+DateTime.000004,DateTime,shuffled_soft_row,0,col0=04:29:27 | col1=1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True
+DateTime.000004,DateTime,shuffled_soft_row,1,col0=09:08:38 | col1=2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,True
+DateTime.000004,DateTime,shuffled_soft_row,2,col0=21:46:13 | col1=1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,True
+DateTime.000004,DateTime,shuffled_soft_row,3,col0=17:14:57 | col1=1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,True
+DateTime.000004,DateTime,learned_soft_batch,0,col0=04:29:27 | col1=1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True
+DateTime.000004,DateTime,learned_soft_batch,1,col0=09:08:38 | col1=2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,True
+DateTime.000004,DateTime,learned_soft_batch,2,col0=21:46:13 | col1=1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,True
+DateTime.000004,DateTime,learned_soft_batch,3,col0=17:14:57 | col1=1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,True
+DateTime.000007,DateTime,direct_row,0,2007-09-10T01:20:52Z,Sep 2007,Sep 2007,True
+DateTime.000007,DateTime,direct_row,1,1953-12-14T08:35:28Z,Dec 1953,Dec 1953,True
+DateTime.000007,DateTime,direct_row,2,1987-11-30T11:17:50Z,Nov 1987,Nov 1987,True
+DateTime.000007,DateTime,direct_row,3,1963-12-31T08:32:04Z,Dec 1963,Dec 1963,True
+DateTime.000007,DateTime,direct_batch,0,2007-09-10T01:20:52Z,Sep 2007,Sep 2007,True
+DateTime.000007,DateTime,direct_batch,1,1953-12-14T08:35:28Z,Dec 1953,Dec 1953,True
+DateTime.000007,DateTime,direct_batch,2,1987-11-30T11:17:50Z,Nov 1987,Nov 1987,True
+DateTime.000007,DateTime,direct_batch,3,1963-12-31T08:32:04Z,Dec 1963,Dec 1963,True
+DateTime.000007,DateTime,init_soft_row,0,2007-09-10T01:20:52Z,Sep 2007,Sep 2007,True
+DateTime.000007,DateTime,init_soft_row,1,1953-12-14T08:35:28Z,Dec 1953,Dec 1953,True
+DateTime.000007,DateTime,init_soft_row,2,1987-11-30T11:17:50Z,Nov 1987,Nov 1987,True
+DateTime.000007,DateTime,init_soft_row,3,1963-12-31T08:32:04Z,Dec 1963,Dec 1963,True
+DateTime.000007,DateTime,learned_soft_row,0,2007-09-10T01:20:52Z,Sep 2007,Sep 2007,True
+DateTime.000007,DateTime,learned_soft_row,1,1953-12-14T08:35:28Z,Dec 1953,Dec 1953,True
+DateTime.000007,DateTime,learned_soft_row,2,1987-11-30T11:17:50Z,Nov 1987,Nov 1987,True
+DateTime.000007,DateTime,learned_soft_row,3,1963-12-31T08:32:04Z,Dec 1963,Dec 1963,True
+DateTime.000007,DateTime,shuffled_soft_row,0,2007-09-10T01:20:52Z,Sep 2007,Sep 2007,True
+DateTime.000007,DateTime,shuffled_soft_row,1,1953-12-14T08:35:28Z,Dec 1953,Dec 1953,True
+DateTime.000007,DateTime,shuffled_soft_row,2,1987-11-30T11:17:50Z,Nov 1987,Nov 1987,True
+DateTime.000007,DateTime,shuffled_soft_row,3,1963-12-31T08:32:04Z,Dec 1963,Dec 1963,True
+DateTime.000007,DateTime,learned_soft_batch,0,2007-09-10T01:20:52Z,Sep 2007,Sep 2007,True
+DateTime.000007,DateTime,learned_soft_batch,1,1953-12-14T08:35:28Z,Dec 1953,Dec 1953,True
+DateTime.000007,DateTime,learned_soft_batch,2,1987-11-30T11:17:50Z,Nov 1987,Nov 1987,True
+DateTime.000007,DateTime,learned_soft_batch,3,1963-12-31T08:32:04Z,Dec 1963,Dec 1963,True
+DateTime.000017,DateTime,direct_row,0,03302241,30/3/2241,30/3/2241,True
+DateTime.000017,DateTime,direct_row,1,02-Aug-2160,2/8/2160,2/8/2160,True
+DateTime.000017,DateTime,direct_row,2,23 May 1984,23/5/1984,23/5/1984,True
+DateTime.000017,DateTime,direct_row,3,15 August 1740,15/8/1740,15/8/1740,True
+DateTime.000017,DateTime,direct_batch,0,03302241,3/3/2241,30/3/2241,False
+DateTime.000017,DateTime,direct_batch,1,02-Aug-2160,2/8/2160,2/8/2160,True
+DateTime.000017,DateTime,direct_batch,2,23 May 1984,23/5/1984,23/5/1984,True
+DateTime.000017,DateTime,direct_batch,3,15 August 1740,15/8/1740,15/8/1740,True
+DateTime.000017,DateTime,init_soft_row,0,03302241,30/3/2241,30/3/2241,True
+DateTime.000017,DateTime,init_soft_row,1,02-Aug-2160,2/8/2160,2/8/2160,True
+DateTime.000017,DateTime,init_soft_row,2,23 May 1984,23/5/1984,23/5/1984,True
+DateTime.000017,DateTime,init_soft_row,3,15 August 1740,15/8/1740,15/8/1740,True
+DateTime.000017,DateTime,learned_soft_row,0,03302241,30/3/2241,30/3/2241,True
+DateTime.000017,DateTime,learned_soft_row,1,02-Aug-2160,2/8/2160,2/8/2160,True
+DateTime.000017,DateTime,learned_soft_row,2,23 May 1984,23/5/1984,23/5/1984,True
+DateTime.000017,DateTime,learned_soft_row,3,15 August 1740,15/8/1740,15/8/1740,True
+DateTime.000017,DateTime,shuffled_soft_row,0,03302241,30/3/2241,30/3/2241,True
+DateTime.000017,DateTime,shuffled_soft_row,1,02-Aug-2160,02/8/2160,2/8/2160,False
+DateTime.000017,DateTime,shuffled_soft_row,2,23 May 1984,23/5/1984,23/5/1984,True
+DateTime.000017,DateTime,shuffled_soft_row,3,15 August 1740,15/8/1740,15/8/1740,True
+DateTime.000017,DateTime,learned_soft_batch,0,03302241,30/3/2241,30/3/2241,True
+DateTime.000017,DateTime,learned_soft_batch,1,02-Aug-2160,2/8/2160,2/8/2160,True
+DateTime.000017,DateTime,learned_soft_batch,2,23 May 1984,23/5/1984,23/5/1984,True
+DateTime.000017,DateTime,learned_soft_batch,3,15 August 1740,15/8/1740,15/8/1740,True
+DateTime.000025,DateTime,direct_row,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,direct_row,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,direct_row,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,direct_row,3,15 August 1740,Aug 40,Aug 40,True
+DateTime.000025,DateTime,direct_batch,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,direct_batch,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,direct_batch,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,direct_batch,3,15 August 1740,Aug 70,Aug 40,False
+DateTime.000025,DateTime,init_soft_row,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,init_soft_row,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,init_soft_row,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,init_soft_row,3,15 August 1740,Aug 40,Aug 40,True
+DateTime.000025,DateTime,learned_soft_row,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,learned_soft_row,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,learned_soft_row,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,learned_soft_row,3,15 August 1740,Aug 40,Aug 40,True
+DateTime.000025,DateTime,shuffled_soft_row,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,shuffled_soft_row,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,shuffled_soft_row,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,shuffled_soft_row,3,15 August 1740,Aug 40,Aug 40,True
+DateTime.000025,DateTime,learned_soft_batch,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,learned_soft_batch,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,learned_soft_batch,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,learned_soft_batch,3,15 August 1740,Aug 40,Aug 40,True
+DateTime.000027,DateTime,direct_row,0,3302241,Q1 '241,Q1 '2241,False
+DateTime.000027,DateTime,direct_row,1,8022160,Q1 '160,Q3 '2160,False
+DateTime.000027,DateTime,direct_row,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+DateTime.000027,DateTime,direct_row,3,15 Aug 1740 04:29,Q2 '1740,Q3 '1740,False
+DateTime.000027,DateTime,direct_batch,0,3302241,Q1 '3302241,Q1 '2241,False
+DateTime.000027,DateTime,direct_batch,1,8022160,Q1 '8022160,Q3 '2160,False
+DateTime.000027,DateTime,direct_batch,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+DateTime.000027,DateTime,direct_batch,3,15 Aug 1740 04:29,Q3 '1740,Q3 '1740,True
+DateTime.000027,DateTime,init_soft_row,0,3302241,Q1 '2241,Q1 '2241,True
+DateTime.000027,DateTime,init_soft_row,1,8022160,Q1 '2160,Q3 '2160,False
+DateTime.000027,DateTime,init_soft_row,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+DateTime.000027,DateTime,init_soft_row,3,15 Aug 1740 04:29,Q2 '1740,Q3 '1740,False
+DateTime.000027,DateTime,learned_soft_row,0,3302241,Q1 '2241,Q1 '2241,True
+DateTime.000027,DateTime,learned_soft_row,1,8022160,Q1 '2160,Q3 '2160,False
+DateTime.000027,DateTime,learned_soft_row,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+DateTime.000027,DateTime,learned_soft_row,3,15 Aug 1740 04:29,Q3 '1740,Q3 '1740,True
+DateTime.000027,DateTime,shuffled_soft_row,0,3302241,Q1 '241,Q1 '2241,False
+DateTime.000027,DateTime,shuffled_soft_row,1,8022160,Q2 '160,Q3 '2160,False
+DateTime.000027,DateTime,shuffled_soft_row,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+DateTime.000027,DateTime,shuffled_soft_row,3,15 Aug 1740 04:29,Q2 '1740,Q3 '1740,False
+DateTime.000027,DateTime,learned_soft_batch,0,3302241,Q1 '3302,Q1 '2241,False
+DateTime.000027,DateTime,learned_soft_batch,1,8022160,Q1 '8022,Q3 '2160,False
+DateTime.000027,DateTime,learned_soft_batch,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+DateTime.000027,DateTime,learned_soft_batch,3,15 Aug 1740 04:29,Q2 '1740,Q3 '1740,False
+DateTime.000034,DateTime,direct_row,0,"22ABDDK_3388.XY,9/12/2002 4:15:08 PM,8.111111,311,chicago",2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000034,DateTime,direct_row,1,"22ABDDK_3388.XY,9/12/2002 11:48:20 PM,8.111111,311,chicago",2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000034,DateTime,direct_row,2,"22ABDDK_3388.XY,9/12/2002 10:24:59 PM,8.111111,311,chicago",2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000034,DateTime,direct_row,3,"22ABDDK_3388.XY,9/12/2002 4:29:27 AM,8.111111,311,chicago",2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000034,DateTime,direct_batch,0,"22ABDDK_3388.XY,9/12/2002 4:15:08 PM,8.111111,311,chicago",2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000034,DateTime,direct_batch,1,"22ABDDK_3388.XY,9/12/2002 11:48:20 PM,8.111111,311,chicago",2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000034,DateTime,direct_batch,2,"22ABDDK_3388.XY,9/12/2002 10:24:59 PM,8.111111,311,chicago",2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000034,DateTime,direct_batch,3,"22ABDDK_3388.XY,9/12/2002 4:29:27 AM,8.111111,311,chicago",2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000034,DateTime,init_soft_row,0,"22ABDDK_3388.XY,9/12/2002 4:15:08 PM,8.111111,311,chicago",2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000034,DateTime,init_soft_row,1,"22ABDDK_3388.XY,9/12/2002 11:48:20 PM,8.111111,311,chicago",2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000034,DateTime,init_soft_row,2,"22ABDDK_3388.XY,9/12/2002 10:24:59 PM,8.111111,311,chicago",2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000034,DateTime,init_soft_row,3,"22ABDDK_3388.XY,9/12/2002 4:29:27 AM,8.111111,311,chicago",2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000034,DateTime,learned_soft_row,0,"22ABDDK_3388.XY,9/12/2002 4:15:08 PM,8.111111,311,chicago",2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000034,DateTime,learned_soft_row,1,"22ABDDK_3388.XY,9/12/2002 11:48:20 PM,8.111111,311,chicago",2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000034,DateTime,learned_soft_row,2,"22ABDDK_3388.XY,9/12/2002 10:24:59 PM,8.111111,311,chicago",2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000034,DateTime,learned_soft_row,3,"22ABDDK_3388.XY,9/12/2002 4:29:27 AM,8.111111,311,chicago",2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000034,DateTime,shuffled_soft_row,0,"22ABDDK_3388.XY,9/12/2002 4:15:08 PM,8.111111,311,chicago",2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000034,DateTime,shuffled_soft_row,1,"22ABDDK_3388.XY,9/12/2002 11:48:20 PM,8.111111,311,chicago",2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000034,DateTime,shuffled_soft_row,2,"22ABDDK_3388.XY,9/12/2002 10:24:59 PM,8.111111,311,chicago",2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000034,DateTime,shuffled_soft_row,3,"22ABDDK_3388.XY,9/12/2002 4:29:27 AM,8.111111,311,chicago",2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000034,DateTime,learned_soft_batch,0,"22ABDDK_3388.XY,9/12/2002 4:15:08 PM,8.111111,311,chicago",2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000034,DateTime,learned_soft_batch,1,"22ABDDK_3388.XY,9/12/2002 11:48:20 PM,8.111111,311,chicago",2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000034,DateTime,learned_soft_batch,2,"22ABDDK_3388.XY,9/12/2002 10:24:59 PM,8.111111,311,chicago",2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000034,DateTime,learned_soft_batch,3,"22ABDDK_3388.XY,9/12/2002 4:29:27 AM,8.111111,311,chicago",2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000051,DateTime,direct_row,0,12:41:14,12:00PM-12:30PM,12:30PM-1:00PM,False
+DateTime.000051,DateTime,direct_row,1,04:22:15,4:00AM-4:30AM,4:00AM-4:30AM,True
+DateTime.000051,DateTime,direct_row,2,04:54:07,4:00AM-4:30AM,4:30AM-5:00AM,False
+DateTime.000051,DateTime,direct_batch,0,12:41:14,12:41AM-12:50AM,12:30PM-1:00PM,False
+DateTime.000051,DateTime,direct_batch,1,04:22:15,4:22AM-4:30AM,4:00AM-4:30AM,False
+DateTime.000051,DateTime,direct_batch,2,04:54:07,4:54AM-5:00AM,4:30AM-5:00AM,False
+DateTime.000051,DateTime,init_soft_row,0,12:41:14,12:00PM-12:30PM,12:30PM-1:00PM,False
+DateTime.000051,DateTime,init_soft_row,1,04:22:15,4:00AM-4:30AM,4:00AM-4:30AM,True
+DateTime.000051,DateTime,init_soft_row,2,04:54:07,4:00AM-4:30AM,4:30AM-5:00AM,False
+DateTime.000051,DateTime,learned_soft_row,0,12:41:14,12:00PM-12:30PM,12:30PM-1:00PM,False
+DateTime.000051,DateTime,learned_soft_row,1,04:22:15,4:00AM-4:30AM,4:00AM-4:30AM,True
+DateTime.000051,DateTime,learned_soft_row,2,04:54:07,4:00AM-4:30AM,4:30AM-5:00AM,False
+DateTime.000051,DateTime,shuffled_soft_row,0,12:41:14,12:00PM-12:30PM,12:30PM-1:00PM,False
+DateTime.000051,DateTime,shuffled_soft_row,1,04:22:15,4:00AM-4:30AM,4:00AM-4:30AM,True
+DateTime.000051,DateTime,shuffled_soft_row,2,04:54:07,4:00AM-4:30AM,4:30AM-5:00AM,False
+DateTime.000051,DateTime,learned_soft_batch,0,12:41:14,12:41-12:43,12:30PM-1:00PM,False
+DateTime.000051,DateTime,learned_soft_batch,1,04:22:15,4:22AM-4:24AM,4:00AM-4:30AM,False
+DateTime.000051,DateTime,learned_soft_batch,2,04:54:07,4:54AM-4:56AM,4:30AM-5:00AM,False
+DateTime.000076,DateTime,direct_row,0,15:00,10:00-29:00,0:00-19:00,False
+DateTime.000076,DateTime,direct_row,1,48:00,50:00-59:00,40:00-59:00,False
+DateTime.000076,DateTime,direct_row,2,24:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,direct_row,3,29:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,direct_batch,0,15:00,15:00-35:00,0:00-19:00,False
+DateTime.000076,DateTime,direct_batch,1,48:00,40:00-59:00,40:00-59:00,True
+DateTime.000076,DateTime,direct_batch,2,24:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,direct_batch,3,29:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,init_soft_row,0,15:00,10:00-29:00,0:00-19:00,False
+DateTime.000076,DateTime,init_soft_row,1,48:00,40:00-59:00,40:00-59:00,True
+DateTime.000076,DateTime,init_soft_row,2,24:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,init_soft_row,3,29:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,learned_soft_row,0,15:00,0:00-19:00,0:00-19:00,True
+DateTime.000076,DateTime,learned_soft_row,1,48:00,40:00-59:00,40:00-59:00,True
+DateTime.000076,DateTime,learned_soft_row,2,24:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,learned_soft_row,3,29:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,shuffled_soft_row,0,15:00,0:00-19:00,0:00-19:00,True
+DateTime.000076,DateTime,shuffled_soft_row,1,48:00,50:00-59:00,40:00-59:00,False
+DateTime.000076,DateTime,shuffled_soft_row,2,24:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,shuffled_soft_row,3,29:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,learned_soft_batch,0,15:00,15:00-35:00,0:00-19:00,False
+DateTime.000076,DateTime,learned_soft_batch,1,48:00,40:00-59:00,40:00-59:00,True
+DateTime.000076,DateTime,learned_soft_batch,2,24:00,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,learned_soft_batch,3,29:00,20:00-39:00,20:00-39:00,True
+DateTime.000081,DateTime,direct_row,0,4:15PM,4:15PM-4:30PM,4:15PM-4:45PM,False
+DateTime.000081,DateTime,direct_row,1,11:48PM,11:15PM-11:45PM,11:45PM-12:15AM,False
+DateTime.000081,DateTime,direct_row,2,10:24PM,10:15PM-10:45PM,10:15PM-10:45PM,True
+DateTime.000081,DateTime,direct_row,3,4:29AM,4:15AM-4:45AM,4:15AM-4:45AM,True
+DateTime.000081,DateTime,direct_batch,0,4:15PM,4:15PM-4:30PM,4:15PM-4:45PM,False
+DateTime.000081,DateTime,direct_batch,1,11:48PM,11:45PM-12:00AM,11:45PM-12:15AM,False
+DateTime.000081,DateTime,direct_batch,2,10:24PM,10:15PM-10:30PM,10:15PM-10:45PM,False
+DateTime.000081,DateTime,direct_batch,3,4:29AM,4:20AM-4:30AM,4:15AM-4:45AM,False
+DateTime.000081,DateTime,init_soft_row,0,4:15PM,4:00PM-4:30PM,4:15PM-4:45PM,False
+DateTime.000081,DateTime,init_soft_row,1,11:48PM,11:15PM-11:45PM,11:45PM-12:15AM,False
+DateTime.000081,DateTime,init_soft_row,2,10:24PM,10:15PM-10:45PM,10:15PM-10:45PM,True
+DateTime.000081,DateTime,init_soft_row,3,4:29AM,4:15AM-4:45AM,4:15AM-4:45AM,True
+DateTime.000081,DateTime,learned_soft_row,0,4:15PM,4:00PM-4:30PM,4:15PM-4:45PM,False
+DateTime.000081,DateTime,learned_soft_row,1,11:48PM,11:15PM-11:45PM,11:45PM-12:15AM,False
+DateTime.000081,DateTime,learned_soft_row,2,10:24PM,10:15PM-10:45PM,10:15PM-10:45PM,True
+DateTime.000081,DateTime,learned_soft_row,3,4:29AM,4:15AM-4:45AM,4:15AM-4:45AM,True
+DateTime.000081,DateTime,shuffled_soft_row,0,4:15PM,7:15PM-7:45PM,4:15PM-4:45PM,False
+DateTime.000081,DateTime,shuffled_soft_row,1,11:48PM,11:15PM-11:45PM,11:45PM-12:15AM,False
+DateTime.000081,DateTime,shuffled_soft_row,2,10:24PM,10:15PM-10:45PM,10:15PM-10:45PM,True
+DateTime.000081,DateTime,shuffled_soft_row,3,4:29AM,7:15AM-7:45AM,4:15AM-4:45AM,False
+DateTime.000081,DateTime,learned_soft_batch,0,4:15PM,4:15PM-4:30PM,4:15PM-4:45PM,False
+DateTime.000081,DateTime,learned_soft_batch,1,11:48PM,11:45PM-12:00AM,11:45PM-12:15AM,False
+DateTime.000081,DateTime,learned_soft_batch,2,10:24PM,10:22:30PM-10:45PM,10:15PM-10:45PM,False
+DateTime.000081,DateTime,learned_soft_batch,3,4:29AM,4:28:30AM-4:45AM,4:15AM-4:45AM,False
+DateTime.000094,DateTime,direct_row,0,21.02.2006,2006-02-21,2006-02-21,True
+DateTime.000094,DateTime,direct_row,1,19.12.97,1997-12-19,1997-12-19,True
+DateTime.000094,DateTime,direct_row,2,30/9/2004,2004-09-30,2004-09-30,True
+DateTime.000094,DateTime,direct_row,3,18/05/1967,1967-05-18,1967-05-18,True
+DateTime.000094,DateTime,direct_batch,0,21.02.2006,2006-02-21,2006-02-21,True
+DateTime.000094,DateTime,direct_batch,1,19.12.97,1997-12-19,1997-12-19,True
+DateTime.000094,DateTime,direct_batch,2,30/9/2004,2004-09-30,2004-09-30,True
+DateTime.000094,DateTime,direct_batch,3,18/05/1967,1967-05-18,1967-05-18,True
+DateTime.000094,DateTime,init_soft_row,0,21.02.2006,2006-02-21,2006-02-21,True
+DateTime.000094,DateTime,init_soft_row,1,19.12.97,1997-12-19,1997-12-19,True
+DateTime.000094,DateTime,init_soft_row,2,30/9/2004,2004-09-30,2004-09-30,True
+DateTime.000094,DateTime,init_soft_row,3,18/05/1967,1967-05-18,1967-05-18,True
+DateTime.000094,DateTime,learned_soft_row,0,21.02.2006,2006-02-21,2006-02-21,True
+DateTime.000094,DateTime,learned_soft_row,1,19.12.97,1997-12-19,1997-12-19,True
+DateTime.000094,DateTime,learned_soft_row,2,30/9/2004,2004-09-30,2004-09-30,True
+DateTime.000094,DateTime,learned_soft_row,3,18/05/1967,1967-05-18,1967-05-18,True
+DateTime.000094,DateTime,shuffled_soft_row,0,21.02.2006,2006-02-21,2006-02-21,True
+DateTime.000094,DateTime,shuffled_soft_row,1,19.12.97,1997-12-19,1997-12-19,True
+DateTime.000094,DateTime,shuffled_soft_row,2,30/9/2004,2004-09-30,2004-09-30,True
+DateTime.000094,DateTime,shuffled_soft_row,3,18/05/1967,1967-05-18,1967-05-18,True
+DateTime.000094,DateTime,learned_soft_batch,0,21.02.2006,2006-02-21,2006-02-21,True
+DateTime.000094,DateTime,learned_soft_batch,1,19.12.97,1997-12-19,1997-12-19,True
+DateTime.000094,DateTime,learned_soft_batch,2,30/9/2004,2004-09-30,2004-09-30,True
+DateTime.000094,DateTime,learned_soft_batch,3,18/05/1967,1967-05-18,1967-05-18,True
+DateTime.000104,DateTime,direct_row,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,direct_row,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,direct_row,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,direct_row,3,16-Jul-1984 10:21:59,Jul,Jul,True
+DateTime.000104,DateTime,direct_batch,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,direct_batch,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,direct_batch,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,direct_batch,3,16-Jul-1984 10:21:59,Jul,Jul,True
+DateTime.000104,DateTime,init_soft_row,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,init_soft_row,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,init_soft_row,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,init_soft_row,3,16-Jul-1984 10:21:59,Jul,Jul,True
+DateTime.000104,DateTime,learned_soft_row,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,learned_soft_row,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,learned_soft_row,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,learned_soft_row,3,16-Jul-1984 10:21:59,Jul,Jul,True
+DateTime.000104,DateTime,shuffled_soft_row,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,shuffled_soft_row,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,shuffled_soft_row,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,shuffled_soft_row,3,16-Jul-1984 10:21:59,Jul,Jul,True
+DateTime.000104,DateTime,learned_soft_batch,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,learned_soft_batch,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,learned_soft_batch,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,learned_soft_batch,3,16-Jul-1984 10:21:59,Jul,Jul,True
+DateTime.000108,DateTime,direct_row,0,21-Jan-1985 05:44:43,1/21/1985,1/21/1985,True
+DateTime.000108,DateTime,direct_row,1,16-Aug-1985 01:11:56,8/16/1985,8/16/1985,True
+DateTime.000108,DateTime,direct_row,2,20-Dec-2033 18:36:29,12/20/2033,12/20/2033,True
+DateTime.000108,DateTime,direct_row,3,16-Jul-1984 10:21:59,7/16/1984,7/16/1984,True
+DateTime.000108,DateTime,direct_batch,0,21-Jan-1985 05:44:43,1/21/1985,1/21/1985,True
+DateTime.000108,DateTime,direct_batch,1,16-Aug-1985 01:11:56,8/16/1985,8/16/1985,True
+DateTime.000108,DateTime,direct_batch,2,20-Dec-2033 18:36:29,12/20/2033,12/20/2033,True
+DateTime.000108,DateTime,direct_batch,3,16-Jul-1984 10:21:59,7/16/1984,7/16/1984,True
+DateTime.000108,DateTime,init_soft_row,0,21-Jan-1985 05:44:43,1/21/1985,1/21/1985,True
+DateTime.000108,DateTime,init_soft_row,1,16-Aug-1985 01:11:56,8/16/1985,8/16/1985,True
+DateTime.000108,DateTime,init_soft_row,2,20-Dec-2033 18:36:29,12/20/2033,12/20/2033,True
+DateTime.000108,DateTime,init_soft_row,3,16-Jul-1984 10:21:59,7/16/1984,7/16/1984,True
+DateTime.000108,DateTime,learned_soft_row,0,21-Jan-1985 05:44:43,1/21/1985,1/21/1985,True
+DateTime.000108,DateTime,learned_soft_row,1,16-Aug-1985 01:11:56,8/16/1985,8/16/1985,True
+DateTime.000108,DateTime,learned_soft_row,2,20-Dec-2033 18:36:29,12/20/2033,12/20/2033,True
+DateTime.000108,DateTime,learned_soft_row,3,16-Jul-1984 10:21:59,7/16/1984,7/16/1984,True
+DateTime.000108,DateTime,shuffled_soft_row,0,21-Jan-1985 05:44:43,1/21/1985,1/21/1985,True
+DateTime.000108,DateTime,shuffled_soft_row,1,16-Aug-1985 01:11:56,8/16/1985,8/16/1985,True
+DateTime.000108,DateTime,shuffled_soft_row,2,20-Dec-2033 18:36:29,12/20/2033,12/20/2033,True
+DateTime.000108,DateTime,shuffled_soft_row,3,16-Jul-1984 10:21:59,7/16/1984,7/16/1984,True
+DateTime.000108,DateTime,learned_soft_batch,0,21-Jan-1985 05:44:43,1/21/1985,1/21/1985,True
+DateTime.000108,DateTime,learned_soft_batch,1,16-Aug-1985 01:11:56,8/16/1985,8/16/1985,True
+DateTime.000108,DateTime,learned_soft_batch,2,20-Dec-2033 18:36:29,12/20/2033,12/20/2033,True
+DateTime.000108,DateTime,learned_soft_batch,3,16-Jul-1984 10:21:59,7/16/1984,7/16/1984,True
+DateTime.000111,DateTime,direct_row,0,21-Jan-1985 05:44:43,21/1/1985 5:44 AM,21/1/1985 5:44 AM,True
+DateTime.000111,DateTime,direct_row,1,16-Aug-1985 01:11:56,16/8/1985 1:11 AM,16/8/1985 1:11 AM,True
+DateTime.000111,DateTime,direct_row,2,20-Dec-2033 18:36:29,20/12/2033 6:36 PM,20/12/2033 6:36 PM,True
+DateTime.000111,DateTime,direct_row,3,16-Jul-1984 10:21:59,16/7/1984 10:21 AM,16/7/1984 10:21 AM,True
+DateTime.000111,DateTime,direct_batch,0,21-Jan-1985 05:44:43,21/1/1985 5:44 AM,21/1/1985 5:44 AM,True
+DateTime.000111,DateTime,direct_batch,1,16-Aug-1985 01:11:56,16/8/1985 1:11 PM,16/8/1985 1:11 AM,False
+DateTime.000111,DateTime,direct_batch,2,20-Dec-2033 18:36:29,20/12/2033 6:36 PM,20/12/2033 6:36 PM,True
+DateTime.000111,DateTime,direct_batch,3,16-Jul-1984 10:21:59,16/7/1984 10:21 AM,16/7/1984 10:21 AM,True
+DateTime.000111,DateTime,init_soft_row,0,21-Jan-1985 05:44:43,21/1/1985 5:44 AM,21/1/1985 5:44 AM,True
+DateTime.000111,DateTime,init_soft_row,1,16-Aug-1985 01:11:56,16/8/1985 1:11 AM,16/8/1985 1:11 AM,True
+DateTime.000111,DateTime,init_soft_row,2,20-Dec-2033 18:36:29,20/12/2033 6:36 PM,20/12/2033 6:36 PM,True
+DateTime.000111,DateTime,init_soft_row,3,16-Jul-1984 10:21:59,16/7/1984 10:21 AM,16/7/1984 10:21 AM,True
+DateTime.000111,DateTime,learned_soft_row,0,21-Jan-1985 05:44:43,21/1/1985 5:44 AM,21/1/1985 5:44 AM,True
+DateTime.000111,DateTime,learned_soft_row,1,16-Aug-1985 01:11:56,16/8/1985 1:11 AM,16/8/1985 1:11 AM,True
+DateTime.000111,DateTime,learned_soft_row,2,20-Dec-2033 18:36:29,20/12/2033 6:36 PM,20/12/2033 6:36 PM,True
+DateTime.000111,DateTime,learned_soft_row,3,16-Jul-1984 10:21:59,16/7/1984 10:21 AM,16/7/1984 10:21 AM,True
+DateTime.000111,DateTime,shuffled_soft_row,0,21-Jan-1985 05:44:43,21/1/1985 5:44 AM,21/1/1985 5:44 AM,True
+DateTime.000111,DateTime,shuffled_soft_row,1,16-Aug-1985 01:11:56,16/8/1985 1:11 AM,16/8/1985 1:11 AM,True
+DateTime.000111,DateTime,shuffled_soft_row,2,20-Dec-2033 18:36:29,20/12/2033 6:36 PM,20/12/2033 6:36 PM,True
+DateTime.000111,DateTime,shuffled_soft_row,3,16-Jul-1984 10:21:59,16/7/1984 10:21 AM,16/7/1984 10:21 AM,True
+DateTime.000111,DateTime,learned_soft_batch,0,21-Jan-1985 05:44:43,21/1/1985 5:44 AM,21/1/1985 5:44 AM,True
+DateTime.000111,DateTime,learned_soft_batch,1,16-Aug-1985 01:11:56,16/8/1985 1:11 PM,16/8/1985 1:11 AM,False
+DateTime.000111,DateTime,learned_soft_batch,2,20-Dec-2033 18:36:29,20/12/2033 6:36 PM,20/12/2033 6:36 PM,True
+DateTime.000111,DateTime,learned_soft_batch,3,16-Jul-1984 10:21:59,16/7/1984 10:21 AM,16/7/1984 10:21 AM,True
+DateTime.000114,DateTime,direct_row,0,21-Jan-1985 05:44:43,15-30,30-45,False
+DateTime.000114,DateTime,direct_row,1,16-Aug-1985 01:11:56,25-40,0-15,False
+DateTime.000114,DateTime,direct_row,2,20-Dec-2033 18:36:29,25-40,30-45,False
+DateTime.000114,DateTime,direct_row,3,16-Jul-1984 10:21:59,25-40,15-30,False
+DateTime.000114,DateTime,direct_batch,0,21-Jan-1985 05:44:43,30-45,30-45,True
+DateTime.000114,DateTime,direct_batch,1,16-Aug-1985 01:11:56,30-45,0-15,False
+DateTime.000114,DateTime,direct_batch,2,20-Dec-2033 18:36:29,30-45,30-45,True
+DateTime.000114,DateTime,direct_batch,3,16-Jul-1984 10:21:59,15-30,15-30,True
+DateTime.000114,DateTime,init_soft_row,0,21-Jan-1985 05:44:43,25-40,30-45,False
+DateTime.000114,DateTime,init_soft_row,1,16-Aug-1985 01:11:56,25-40,0-15,False
+DateTime.000114,DateTime,init_soft_row,2,20-Dec-2033 18:36:29,30-45,30-45,True
+DateTime.000114,DateTime,init_soft_row,3,16-Jul-1984 10:21:59,25-40,15-30,False
+DateTime.000114,DateTime,learned_soft_row,0,21-Jan-1985 05:44:43,30-45,30-45,True
+DateTime.000114,DateTime,learned_soft_row,1,16-Aug-1985 01:11:56,30-45,0-15,False
+DateTime.000114,DateTime,learned_soft_row,2,20-Dec-2033 18:36:29,45-60,30-45,False
+DateTime.000114,DateTime,learned_soft_row,3,16-Jul-1984 10:21:59,30-45,15-30,False
+DateTime.000114,DateTime,shuffled_soft_row,0,21-Jan-1985 05:44:43,30-45,30-45,True
+DateTime.000114,DateTime,shuffled_soft_row,1,16-Aug-1985 01:11:56,30-45,0-15,False
+DateTime.000114,DateTime,shuffled_soft_row,2,20-Dec-2033 18:36:29,45-60,30-45,False
+DateTime.000114,DateTime,shuffled_soft_row,3,16-Jul-1984 10:21:59,30-45,15-30,False
+DateTime.000114,DateTime,learned_soft_batch,0,21-Jan-1985 05:44:43,,30-45,False
+DateTime.000114,DateTime,learned_soft_batch,1,16-Aug-1985 01:11:56,,0-15,False
+DateTime.000114,DateTime,learned_soft_batch,2,20-Dec-2033 18:36:29,,30-45,False
+DateTime.000114,DateTime,learned_soft_batch,3,16-Jul-1984 10:21:59,,15-30,False
+DateTime.000115,DateTime,direct_row,0,21-Jan-1985 05:44:43,0-20,40-60,False
+DateTime.000115,DateTime,direct_row,1,16-Aug-1985 01:11:56,0-20,40-60,False
+DateTime.000115,DateTime,direct_row,2,20-Dec-2033 18:36:29,0-20,20-40,False
+DateTime.000115,DateTime,direct_row,3,16-Jul-1984 10:21:59,0-20,40-60,False
+DateTime.000115,DateTime,direct_batch,0,21-Jan-1985 05:44:43,0-20,40-60,False
+DateTime.000115,DateTime,direct_batch,1,16-Aug-1985 01:11:56,0-20,40-60,False
+DateTime.000115,DateTime,direct_batch,2,20-Dec-2033 18:36:29,0-20,20-40,False
+DateTime.000115,DateTime,direct_batch,3,16-Jul-1984 10:21:59,0-20,40-60,False
+DateTime.000115,DateTime,init_soft_row,0,21-Jan-1985 05:44:43,0-20,40-60,False
+DateTime.000115,DateTime,init_soft_row,1,16-Aug-1985 01:11:56,0-20,40-60,False
+DateTime.000115,DateTime,init_soft_row,2,20-Dec-2033 18:36:29,0-20,20-40,False
+DateTime.000115,DateTime,init_soft_row,3,16-Jul-1984 10:21:59,0-20,40-60,False
+DateTime.000115,DateTime,learned_soft_row,0,21-Jan-1985 05:44:43,0-20,40-60,False
+DateTime.000115,DateTime,learned_soft_row,1,16-Aug-1985 01:11:56,0-20,40-60,False
+DateTime.000115,DateTime,learned_soft_row,2,20-Dec-2033 18:36:29,0-20,20-40,False
+DateTime.000115,DateTime,learned_soft_row,3,16-Jul-1984 10:21:59,0-20,40-60,False
+DateTime.000115,DateTime,shuffled_soft_row,0,21-Jan-1985 05:44:43,0-20,40-60,False
+DateTime.000115,DateTime,shuffled_soft_row,1,16-Aug-1985 01:11:56,0-20,40-60,False
+DateTime.000115,DateTime,shuffled_soft_row,2,20-Dec-2033 18:36:29,0-20,20-40,False
+DateTime.000115,DateTime,shuffled_soft_row,3,16-Jul-1984 10:21:59,0-20,40-60,False
+DateTime.000115,DateTime,learned_soft_batch,0,21-Jan-1985 05:44:43,0-20,40-60,False
+DateTime.000115,DateTime,learned_soft_batch,1,16-Aug-1985 01:11:56,0-20,40-60,False
+DateTime.000115,DateTime,learned_soft_batch,2,20-Dec-2033 18:36:29,0-20,20-40,False
+DateTime.000115,DateTime,learned_soft_batch,3,16-Jul-1984 10:21:59,0-20,40-60,False
+DateTime.000116,DateTime,direct_row,0,21-Jan-1985 05:44:43,5AM-7AM,5AM-7AM,True
+DateTime.000116,DateTime,direct_row,1,16-Aug-1985 01:11:56,1AM-3AM,1AM-3AM,True
+DateTime.000116,DateTime,direct_row,2,20-Dec-2033 18:36:29,6PM-8PM,5PM-7PM,False
+DateTime.000116,DateTime,direct_row,3,16-Jul-1984 10:21:59,10AM-12PM,9AM-11AM,False
+DateTime.000116,DateTime,direct_batch,0,21-Jan-1985 05:44:43,5AM-7AM,5AM-7AM,True
+DateTime.000116,DateTime,direct_batch,1,16-Aug-1985 01:11:56,1AM-3AM,1AM-3AM,True
+DateTime.000116,DateTime,direct_batch,2,20-Dec-2033 18:36:29,6PM-8PM,5PM-7PM,False
+DateTime.000116,DateTime,direct_batch,3,16-Jul-1984 10:21:59,10AM-12PM,9AM-11AM,False
+DateTime.000116,DateTime,init_soft_row,0,21-Jan-1985 05:44:43,5AM-7AM,5AM-7AM,True
+DateTime.000116,DateTime,init_soft_row,1,16-Aug-1985 01:11:56,1AM-3AM,1AM-3AM,True
+DateTime.000116,DateTime,init_soft_row,2,20-Dec-2033 18:36:29,6PM-8PM,5PM-7PM,False
+DateTime.000116,DateTime,init_soft_row,3,16-Jul-1984 10:21:59,10AM-12PM,9AM-11AM,False
+DateTime.000116,DateTime,learned_soft_row,0,21-Jan-1985 05:44:43,5AM-7AM,5AM-7AM,True
+DateTime.000116,DateTime,learned_soft_row,1,16-Aug-1985 01:11:56,1AM-3AM,1AM-3AM,True
+DateTime.000116,DateTime,learned_soft_row,2,20-Dec-2033 18:36:29,6PM-8PM,5PM-7PM,False
+DateTime.000116,DateTime,learned_soft_row,3,16-Jul-1984 10:21:59,10AM-12PM,9AM-11AM,False
+DateTime.000116,DateTime,shuffled_soft_row,0,21-Jan-1985 05:44:43,1AM-3AM,5AM-7AM,False
+DateTime.000116,DateTime,shuffled_soft_row,1,16-Aug-1985 01:11:56,1AM-3AM,1AM-3AM,True
+DateTime.000116,DateTime,shuffled_soft_row,2,20-Dec-2033 18:36:29,6PM-8PM,5PM-7PM,False
+DateTime.000116,DateTime,shuffled_soft_row,3,16-Jul-1984 10:21:59,10AM-12PM,9AM-11AM,False
+DateTime.000116,DateTime,learned_soft_batch,0,21-Jan-1985 05:44:43,5AM-7AM,5AM-7AM,True
+DateTime.000116,DateTime,learned_soft_batch,1,16-Aug-1985 01:11:56,1AM-3AM,1AM-3AM,True
+DateTime.000116,DateTime,learned_soft_batch,2,20-Dec-2033 18:36:29,6PM-8PM,5PM-7PM,False
+DateTime.000116,DateTime,learned_soft_batch,3,16-Jul-1984 10:21:59,10AM-12PM,9AM-11AM,False
+FilePath.000001,FilePath,direct_row,0,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,direct_row,1,/libero/quas/enim3.png,enim3,enim3,True
+FilePath.000001,FilePath,direct_row,2,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,direct_row,3,/libero/quas/enim6.png,enim6,enim6,True
+FilePath.000001,FilePath,direct_batch,0,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,direct_batch,1,/libero/quas/enim3.png,enim3,enim3,True
+FilePath.000001,FilePath,direct_batch,2,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,direct_batch,3,/libero/quas/enim6.png,enim6,enim6,True
+FilePath.000001,FilePath,init_soft_row,0,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,init_soft_row,1,/libero/quas/enim3.png,enim3,enim3,True
+FilePath.000001,FilePath,init_soft_row,2,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,init_soft_row,3,/libero/quas/enim6.png,enim6,enim6,True
+FilePath.000001,FilePath,learned_soft_row,0,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,learned_soft_row,1,/libero/quas/enim3.png,enim3,enim3,True
+FilePath.000001,FilePath,learned_soft_row,2,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,learned_soft_row,3,/libero/quas/enim6.png,enim6,enim6,True
+FilePath.000001,FilePath,shuffled_soft_row,0,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,shuffled_soft_row,1,/libero/quas/enim3.png,enim3,enim3,True
+FilePath.000001,FilePath,shuffled_soft_row,2,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,shuffled_soft_row,3,/libero/quas/enim6.png,enim6,enim6,True
+FilePath.000001,FilePath,learned_soft_batch,0,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,learned_soft_batch,1,/libero/quas/enim3.png,enim3,enim3,True
+FilePath.000001,FilePath,learned_soft_batch,2,/libero/quas/enim0.png,enim0,enim0,True
+FilePath.000001,FilePath,learned_soft_batch,3,/libero/quas/enim6.png,enim6,enim6,True
+Gender.000001,Gender,direct_row,0,M,0,0,True
+Gender.000001,Gender,direct_row,1,F,1,1,True
+Gender.000001,Gender,direct_row,2,Male,1,None,False
+Gender.000001,Gender,direct_batch,0,M,0,0,True
+Gender.000001,Gender,direct_batch,1,F,1,1,True
+Gender.000001,Gender,direct_batch,2,Male,2,None,False
+Gender.000001,Gender,init_soft_row,0,M,0,0,True
+Gender.000001,Gender,init_soft_row,1,F,1,1,True
+Gender.000001,Gender,init_soft_row,2,Male,1,None,False
+Gender.000001,Gender,learned_soft_row,0,M,0,0,True
+Gender.000001,Gender,learned_soft_row,1,F,1,1,True
+Gender.000001,Gender,learned_soft_row,2,Male,0,None,False
+Gender.000001,Gender,shuffled_soft_row,0,M,0,0,True
+Gender.000001,Gender,shuffled_soft_row,1,F,1,1,True
+Gender.000001,Gender,shuffled_soft_row,2,Male,1,None,False
+Gender.000001,Gender,learned_soft_batch,0,M,0,0,True
+Gender.000001,Gender,learned_soft_batch,1,F,1,1,True
+Gender.000001,Gender,learned_soft_batch,2,Male,2,None,False
+Language.000002,Language,direct_row,0,col0=Catalan | col1=http://proseware.com/ca,ca,ca,True
+Language.000002,Language,direct_row,1,col0=Chinese - Simplified | col1=http://proseware.com/zh,zh,zh,True
+Language.000002,Language,direct_row,2,col0=Chinese - Traditional | col1=http://proseware.com/hk,hk,hk,True
+Language.000002,Language,direct_row,3,col0=Croatian | col1=http://proseware.com/hr,hr,hr,True
+Language.000002,Language,direct_batch,0,col0=Catalan | col1=http://proseware.com/ca,ca,ca,True
+Language.000002,Language,direct_batch,1,col0=Chinese - Simplified | col1=http://proseware.com/zh,zh,zh,True
+Language.000002,Language,direct_batch,2,col0=Chinese - Traditional | col1=http://proseware.com/hk,hk,hk,True
+Language.000002,Language,direct_batch,3,col0=Croatian | col1=http://proseware.com/hr,hr,hr,True
+Language.000002,Language,init_soft_row,0,col0=Catalan | col1=http://proseware.com/ca,ca,ca,True
+Language.000002,Language,init_soft_row,1,col0=Chinese - Simplified | col1=http://proseware.com/zh,zh,zh,True
+Language.000002,Language,init_soft_row,2,col0=Chinese - Traditional | col1=http://proseware.com/hk,hk,hk,True
+Language.000002,Language,init_soft_row,3,col0=Croatian | col1=http://proseware.com/hr,hr,hr,True
+Language.000002,Language,learned_soft_row,0,col0=Catalan | col1=http://proseware.com/ca,ca,ca,True
+Language.000002,Language,learned_soft_row,1,col0=Chinese - Simplified | col1=http://proseware.com/zh,zh,zh,True
+Language.000002,Language,learned_soft_row,2,col0=Chinese - Traditional | col1=http://proseware.com/hk,hk,hk,True
+Language.000002,Language,learned_soft_row,3,col0=Croatian | col1=http://proseware.com/hr,hr,hr,True
+Language.000002,Language,shuffled_soft_row,0,col0=Catalan | col1=http://proseware.com/ca,"The task is to extract the two-letter language code from the second column of the input. The second column is a URL that ends with a two-letter code, which represents the language. For example, ""http://proseware.com/ca"" corresponds to ""ca"", which is the two-letter code for Catalan. Therefore",ca,False
+Language.000002,Language,shuffled_soft_row,1,col0=Chinese - Simplified | col1=http://proseware.com/zh,</think>,zh,False
+Language.000002,Language,shuffled_soft_row,2,col0=Chinese - Traditional | col1=http://proseware.com/hk,The task is to infer the transformation from the given examples and apply it to the query.,hk,False
+Language.000002,Language,shuffled_soft_row,3,col0=Croatian | col1=http://proseware.com/hr,hr,hr,True
+Language.000002,Language,learned_soft_batch,0,col0=Catalan | col1=http://proseware.com/ca,ca,ca,True
+Language.000002,Language,learned_soft_batch,1,col0=Chinese - Simplified | col1=http://proseware.com/zh,zh,zh,True
+Language.000002,Language,learned_soft_batch,2,col0=Chinese - Traditional | col1=http://proseware.com/hk,hk,hk,True
+Language.000002,Language,learned_soft_batch,3,col0=Croatian | col1=http://proseware.com/hr,hr,hr,True
+Name.000028,Name,direct_row,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+Name.000028,Name,direct_row,1,Jan Evans,Jan,Jan,True
+Name.000028,Name,direct_row,2,Antonia Lusis,Antonia,Antonia,True
+Name.000028,Name,direct_row,3,Barbara Susila,Barbara,Barbara,True
+Name.000028,Name,direct_batch,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+Name.000028,Name,direct_batch,1,Jan Evans,Jan,Jan,True
+Name.000028,Name,direct_batch,2,Antonia Lusis,Antonia,Antonia,True
+Name.000028,Name,direct_batch,3,Barbara Susila,Barbara,Barbara,True
+Name.000028,Name,init_soft_row,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+Name.000028,Name,init_soft_row,1,Jan Evans,Jan,Jan,True
+Name.000028,Name,init_soft_row,2,Antonia Lusis,Antonia,Antonia,True
+Name.000028,Name,init_soft_row,3,Barbara Susila,Barbara,Barbara,True
+Name.000028,Name,learned_soft_row,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+Name.000028,Name,learned_soft_row,1,Jan Evans,Jan,Jan,True
+Name.000028,Name,learned_soft_row,2,Antonia Lusis,Antonia,Antonia,True
+Name.000028,Name,learned_soft_row,3,Barbara Susila,Barbara,Barbara,True
+Name.000028,Name,shuffled_soft_row,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+Name.000028,Name,shuffled_soft_row,1,Jan Evans,Jan,Jan,True
+Name.000028,Name,shuffled_soft_row,2,Antonia Lusis,Antonia,Antonia,True
+Name.000028,Name,shuffled_soft_row,3,Barbara Susila,Barbara,Barbara,True
+Name.000028,Name,learned_soft_batch,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+Name.000028,Name,learned_soft_batch,1,Jan Evans,Jan,Jan,True
+Name.000028,Name,learned_soft_batch,2,Antonia Lusis,Antonia,Antonia,True
+Name.000028,Name,learned_soft_batch,3,Barbara Susila,Barbara,Barbara,True
+Number.000008,Number,direct_row,0,-13578,-13.578,-135.78,False
+Number.000008,Number,direct_row,1,-1961.1180,-19.611180,-19.611180,True
+Number.000008,Number,direct_row,2,-1829.29,-18.2929,-18.2929,True
+Number.000008,Number,direct_row,3,-28178,-28.178,-281.78,False
+Number.000008,Number,direct_batch,0,-13578,-13.578,-135.78,False
+Number.000008,Number,direct_batch,1,-1961.1180,-19.61118,-19.611180,False
+Number.000008,Number,direct_batch,2,-1829.29,-18.2929,-18.2929,True
+Number.000008,Number,direct_batch,3,-28178,-28.178,-281.78,False
+Number.000008,Number,init_soft_row,0,-13578,-13.578,-135.78,False
+Number.000008,Number,init_soft_row,1,-1961.1180,-19.611180,-19.611180,True
+Number.000008,Number,init_soft_row,2,-1829.29,-18.2929,-18.2929,True
+Number.000008,Number,init_soft_row,3,-28178,-28.178,-281.78,False
+Number.000008,Number,learned_soft_row,0,-13578,-13.578,-135.78,False
+Number.000008,Number,learned_soft_row,1,-1961.1180,-19.611180,-19.611180,True
+Number.000008,Number,learned_soft_row,2,-1829.29,-18.2929,-18.2929,True
+Number.000008,Number,learned_soft_row,3,-28178,-28.178,-281.78,False
+Number.000008,Number,shuffled_soft_row,0,-13578,-13.578,-135.78,False
+Number.000008,Number,shuffled_soft_row,1,-1961.1180,-19.611180,-19.611180,True
+Number.000008,Number,shuffled_soft_row,2,-1829.29,-18.2929,-18.2929,True
+Number.000008,Number,shuffled_soft_row,3,-28178,-28.178,-281.78,False
+Number.000008,Number,learned_soft_batch,0,-13578,-135.78,-135.78,True
+Number.000008,Number,learned_soft_batch,1,-1961.1180,-196.1118,-19.611180,False
+Number.000008,Number,learned_soft_batch,2,-1829.29,-18.2929,-18.2929,True
+Number.000008,Number,learned_soft_batch,3,-28178,-2817.8,-281.78,False
+Number.000015,Number,direct_row,0,-22630,-22500,-22600,False
+Number.000015,Number,direct_row,1,-3269,-3250,-3250,True
+Number.000015,Number,direct_row,2,-3049,-3050,-3000,False
+Number.000015,Number,direct_row,3,-46964,-47000,-46950,False
+Number.000015,Number,direct_batch,0,-22630,-22600,-22600,True
+Number.000015,Number,direct_batch,1,-3269,-3250,-3250,True
+Number.000015,Number,direct_batch,2,-3049,-3000,-3000,True
+Number.000015,Number,direct_batch,3,-46964,-46900,-46950,False
+Number.000015,Number,init_soft_row,0,-22630,-22500,-22600,False
+Number.000015,Number,init_soft_row,1,-3269,-3250,-3250,True
+Number.000015,Number,init_soft_row,2,-3049,-3050,-3000,False
+Number.000015,Number,init_soft_row,3,-46964,-47000,-46950,False
+Number.000015,Number,learned_soft_row,0,-22630,-22500,-22600,False
+Number.000015,Number,learned_soft_row,1,-3269,-3250,-3250,True
+Number.000015,Number,learned_soft_row,2,-3049,-3050,-3000,False
+Number.000015,Number,learned_soft_row,3,-46964,-47000,-46950,False
+Number.000015,Number,shuffled_soft_row,0,-22630,-22550,-22600,False
+Number.000015,Number,shuffled_soft_row,1,-3269,-3250,-3250,True
+Number.000015,Number,shuffled_soft_row,2,-3049,-3050,-3000,False
+Number.000015,Number,shuffled_soft_row,3,-46964,-47000,-46950,False
+Number.000015,Number,learned_soft_batch,0,-22630,-22600,-22600,True
+Number.000015,Number,learned_soft_batch,1,-3269,-3250,-3250,True
+Number.000015,Number,learned_soft_batch,2,-3049,-3050,-3000,False
+Number.000015,Number,learned_soft_batch,3,-46964,-46950,-46950,True
+Number.000016,Number,direct_row,0,601,602,605,False
+Number.000016,Number,direct_row,1,814,815,815,True
+Number.000016,Number,direct_row,2,816,817,820,False
+Number.000016,Number,direct_row,3,333,335,335,True
+Number.000016,Number,direct_batch,0,601,,605,False
+Number.000016,Number,direct_batch,1,814,,815,False
+Number.000016,Number,direct_batch,2,816,,820,False
+Number.000016,Number,direct_batch,3,333,,335,False
+Number.000016,Number,init_soft_row,0,601,602,605,False
+Number.000016,Number,init_soft_row,1,814,815,815,True
+Number.000016,Number,init_soft_row,2,816,818,820,False
+Number.000016,Number,init_soft_row,3,333,335,335,True
+Number.000016,Number,learned_soft_row,0,601,600,605,False
+Number.000016,Number,learned_soft_row,1,814,815,815,True
+Number.000016,Number,learned_soft_row,2,816,820,820,True
+Number.000016,Number,learned_soft_row,3,333,335,335,True
+Number.000016,Number,shuffled_soft_row,0,601,700,605,False
+Number.000016,Number,shuffled_soft_row,1,814,915,815,False
+Number.000016,Number,shuffled_soft_row,2,816,1200,820,False
+Number.000016,Number,shuffled_soft_row,3,333,1200,335,False
+Number.000016,Number,learned_soft_batch,0,601,602,605,False
+Number.000016,Number,learned_soft_batch,1,814,815,815,True
+Number.000016,Number,learned_soft_batch,2,816,817,820,False
+Number.000016,Number,learned_soft_batch,3,333,335,335,True
+Number.000022,Number,direct_row,0,12.11,12.1,12.1,True
+Number.000022,Number,direct_row,1,20.33,20.35,20.35,True
+Number.000022,Number,direct_row,2,18.11,18.1,18.1,True
+Number.000022,Number,direct_row,3,13.77,13.75,13.75,True
+Number.000022,Number,direct_batch,0,12.11,12.1,12.1,True
+Number.000022,Number,direct_batch,1,20.33,20.3,20.35,False
+Number.000022,Number,direct_batch,2,18.11,18.1,18.1,True
+Number.000022,Number,direct_batch,3,13.77,13.8,13.75,False
+Number.000022,Number,init_soft_row,0,12.11,12.1,12.1,True
+Number.000022,Number,init_soft_row,1,20.33,20.35,20.35,True
+Number.000022,Number,init_soft_row,2,18.11,18.1,18.1,True
+Number.000022,Number,init_soft_row,3,13.77,13.75,13.75,True
+Number.000022,Number,learned_soft_row,0,12.11,12.1,12.1,True
+Number.000022,Number,learned_soft_row,1,20.33,20.35,20.35,True
+Number.000022,Number,learned_soft_row,2,18.11,18.1,18.1,True
+Number.000022,Number,learned_soft_row,3,13.77,13.75,13.75,True
+Number.000022,Number,shuffled_soft_row,0,12.11,12.1,12.1,True
+Number.000022,Number,shuffled_soft_row,1,20.33,20.35,20.35,True
+Number.000022,Number,shuffled_soft_row,2,18.11,18.1,18.1,True
+Number.000022,Number,shuffled_soft_row,3,13.77,13.75,13.75,True
+Number.000022,Number,learned_soft_batch,0,12.11,12.1,12.1,True
+Number.000022,Number,learned_soft_batch,1,20.33,20.3,20.35,False
+Number.000022,Number,learned_soft_batch,2,18.11,18.1,18.1,True
+Number.000022,Number,learned_soft_batch,3,13.77,13.8,13.75,False
+Number.000028,Number,direct_row,0,10,10.000,10.000,True
+Number.000028,Number,direct_row,1,1202.3433,1202.343,1202.343,True
+Number.000028,Number,direct_row,2,23224.1,23224.100,23224.100,True
+Number.000028,Number,direct_batch,0,10,10.000,10.000,True
+Number.000028,Number,direct_batch,1,1202.3433,1202.343,1202.343,True
+Number.000028,Number,direct_batch,2,23224.1,23224.100,23224.100,True
+Number.000028,Number,init_soft_row,0,10,10.000,10.000,True
+Number.000028,Number,init_soft_row,1,1202.3433,1202.343,1202.343,True
+Number.000028,Number,init_soft_row,2,23224.1,23224.100,23224.100,True
+Number.000028,Number,learned_soft_row,0,10,10.000,10.000,True
+Number.000028,Number,learned_soft_row,1,1202.3433,1202.343,1202.343,True
+Number.000028,Number,learned_soft_row,2,23224.1,23224.100,23224.100,True
+Number.000028,Number,shuffled_soft_row,0,10,0.000,10.000,False
+Number.000028,Number,shuffled_soft_row,1,1202.3433,1202.3433,1202.343,False
+Number.000028,Number,shuffled_soft_row,2,23224.1,23224.100,23224.100,True
+Number.000028,Number,learned_soft_batch,0,10,,10.000,False
+Number.000028,Number,learned_soft_batch,1,1202.3433,,1202.343,False
+Number.000028,Number,learned_soft_batch,2,23224.1,,23224.100,False
+Number.000029,Number,direct_row,0,11119,11110,11120,False
+Number.000029,Number,direct_row,1,548,540,550,False
+Number.000029,Number,direct_row,2,23224,23220,23220,True
+Number.000029,Number,direct_batch,0,11119,11118,11120,False
+Number.000029,Number,direct_batch,1,548,547,550,False
+Number.000029,Number,direct_batch,2,23224,23223,23220,False
+Number.000029,Number,init_soft_row,0,11119,11110,11120,False
+Number.000029,Number,init_soft_row,1,548,540,550,False
+Number.000029,Number,init_soft_row,2,23224,23220,23220,True
+Number.000029,Number,learned_soft_row,0,11119,11120,11120,True
+Number.000029,Number,learned_soft_row,1,548,540,550,False
+Number.000029,Number,learned_soft_row,2,23224,23220,23220,True
+Number.000029,Number,shuffled_soft_row,0,11119,11120,11120,True
+Number.000029,Number,shuffled_soft_row,1,548,540,550,False
+Number.000029,Number,shuffled_soft_row,2,23224,23220,23220,True
+Number.000029,Number,learned_soft_batch,0,11119,11120,11120,True
+Number.000029,Number,learned_soft_batch,1,548,540,550,False
+Number.000029,Number,learned_soft_batch,2,23224,23220,23220,True
+Number.000043,Number,direct_row,0,14/5,05-14,05-14,True
+Number.000043,Number,direct_row,1,21/9,09-21,09-21,True
+Number.000043,Number,direct_row,2,14/8,08-14,08-14,True
+Number.000043,Number,direct_row,3,16/11,11-16,11-16,True
+Number.000043,Number,direct_batch,0,14/5,05-14,05-14,True
+Number.000043,Number,direct_batch,1,21/9,09-21,09-21,True
+Number.000043,Number,direct_batch,2,14/8,08-14,08-14,True
+Number.000043,Number,direct_batch,3,16/11,11-16,11-16,True
+Number.000043,Number,init_soft_row,0,14/5,05-14,05-14,True
+Number.000043,Number,init_soft_row,1,21/9,09-21,09-21,True
+Number.000043,Number,init_soft_row,2,14/8,08-14,08-14,True
+Number.000043,Number,init_soft_row,3,16/11,11-16,11-16,True
+Number.000043,Number,learned_soft_row,0,14/5,05-14,05-14,True
+Number.000043,Number,learned_soft_row,1,21/9,09-21,09-21,True
+Number.000043,Number,learned_soft_row,2,14/8,08-14,08-14,True
+Number.000043,Number,learned_soft_row,3,16/11,11-16,11-16,True
+Number.000043,Number,shuffled_soft_row,0,14/5,05-14,05-14,True
+Number.000043,Number,shuffled_soft_row,1,21/9,09-21,09-21,True
+Number.000043,Number,shuffled_soft_row,2,14/8,08-14,08-14,True
+Number.000043,Number,shuffled_soft_row,3,16/11,11-16,11-16,True
+Number.000043,Number,learned_soft_batch,0,14/5,05-14,05-14,True
+Number.000043,Number,learned_soft_batch,1,21/9,09-21,09-21,True
+Number.000043,Number,learned_soft_batch,2,14/8,08-14,08-14,True
+Number.000043,Number,learned_soft_batch,3,16/11,11-16,11-16,True
+Number.000049,Number,direct_row,0,8330,8300,8300,True
+Number.000049,Number,direct_row,1,6265,6000,6300,False
+Number.000049,Number,direct_row,2,9812,10000,9800,False
+Number.000049,Number,direct_row,3,458,500,500,True
+Number.000049,Number,direct_batch,0,8330,,8300,False
+Number.000049,Number,direct_batch,1,6265,,6300,False
+Number.000049,Number,direct_batch,2,9812,,9800,False
+Number.000049,Number,direct_batch,3,458,,500,False
+Number.000049,Number,init_soft_row,0,8330,8300,8300,True
+Number.000049,Number,init_soft_row,1,6265,6000,6300,False
+Number.000049,Number,init_soft_row,2,9812,1000,9800,False
+Number.000049,Number,init_soft_row,3,458,500,500,True
+Number.000049,Number,learned_soft_row,0,8330,8000,8300,False
+Number.000049,Number,learned_soft_row,1,6265,6000,6300,False
+Number.000049,Number,learned_soft_row,2,9812,10000,9800,False
+Number.000049,Number,learned_soft_row,3,458,500,500,True
+Number.000049,Number,shuffled_soft_row,0,8330,8000,8300,False
+Number.000049,Number,shuffled_soft_row,1,6265,6000,6300,False
+Number.000049,Number,shuffled_soft_row,2,9812,10000,9800,False
+Number.000049,Number,shuffled_soft_row,3,458,500,500,True
+Number.000049,Number,learned_soft_batch,0,8330,8300,8300,True
+Number.000049,Number,learned_soft_batch,1,6265,6200,6300,False
+Number.000049,Number,learned_soft_batch,2,9812,9800,9800,True
+Number.000049,Number,learned_soft_batch,3,458,400,500,False
+Number.000075,Number,direct_row,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,direct_row,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,direct_row,2,29974.1,$2.9B,$30.0B,False
+Number.000075,Number,direct_row,3,0.0,$0.0B,$0.0B,True
+Number.000075,Number,direct_batch,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,direct_batch,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,direct_batch,2,29974.1,$3.0B,$30.0B,False
+Number.000075,Number,direct_batch,3,0.0,$0.0B,$0.0B,True
+Number.000075,Number,init_soft_row,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,init_soft_row,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,init_soft_row,2,29974.1,$2.9B,$30.0B,False
+Number.000075,Number,init_soft_row,3,0.0,$0.0B,$0.0B,True
+Number.000075,Number,learned_soft_row,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,learned_soft_row,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,learned_soft_row,2,29974.1,$0.3B,$30.0B,False
+Number.000075,Number,learned_soft_row,3,0.0,$0.0B,$0.0B,True
+Number.000075,Number,shuffled_soft_row,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,shuffled_soft_row,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,shuffled_soft_row,2,29974.1,$0.3B,$30.0B,False
+Number.000075,Number,shuffled_soft_row,3,0.0,$0.0B,$0.0B,True
+Number.000075,Number,learned_soft_batch,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,learned_soft_batch,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,learned_soft_batch,2,29974.1,$3.0B,$30.0B,False
+Number.000075,Number,learned_soft_batch,3,0.0,$0.0B,$0.0B,True
+Number.000077,Number,direct_row,0,11112,110,11110,False
+Number.000077,Number,direct_row,1,11119,11000,11110,False
+Number.000077,Number,direct_row,2,548,540,540,True
+Number.000077,Number,direct_batch,0,11112,11110,11110,True
+Number.000077,Number,direct_batch,1,11119,11110,11110,True
+Number.000077,Number,direct_batch,2,548,546,540,False
+Number.000077,Number,init_soft_row,0,11112,110,11110,False
+Number.000077,Number,init_soft_row,1,11119,110,11110,False
+Number.000077,Number,init_soft_row,2,548,540,540,True
+Number.000077,Number,learned_soft_row,0,11112,110,11110,False
+Number.000077,Number,learned_soft_row,1,11119,11000,11110,False
+Number.000077,Number,learned_soft_row,2,548,550,540,False
+Number.000077,Number,shuffled_soft_row,0,11112,110,11110,False
+Number.000077,Number,shuffled_soft_row,1,11119,11000,11110,False
+Number.000077,Number,shuffled_soft_row,2,548,550,540,False
+Number.000077,Number,learned_soft_batch,0,11112,110,11110,False
+Number.000077,Number,learned_soft_batch,1,11119,110,11110,False
+Number.000077,Number,learned_soft_batch,2,548,540,540,True
+Phone.000008,Phone,direct_row,0,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True
+Phone.000008,Phone,direct_row,1,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True
+Phone.000008,Phone,direct_row,2,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True
+Phone.000008,Phone,direct_row,3,"Bazarbay Abildauly    456 Fifth Route ,Dongguan,LA,(873) 884-2783,000-73-7962,38891",(873) 884-2783,(873) 884-2783,True
+Phone.000008,Phone,direct_batch,0,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True
+Phone.000008,Phone,direct_batch,1,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True
+Phone.000008,Phone,direct_batch,2,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True
+Phone.000008,Phone,direct_batch,3,"Bazarbay Abildauly    456 Fifth Route ,Dongguan,LA,(873) 884-2783,000-73-7962,38891",(873) 884-2783,(873) 884-2783,True
+Phone.000008,Phone,init_soft_row,0,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True
+Phone.000008,Phone,init_soft_row,1,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True
+Phone.000008,Phone,init_soft_row,2,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True
+Phone.000008,Phone,init_soft_row,3,"Bazarbay Abildauly    456 Fifth Route ,Dongguan,LA,(873) 884-2783,000-73-7962,38891",(873) 884-2783,(873) 884-2783,True
+Phone.000008,Phone,learned_soft_row,0,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True
+Phone.000008,Phone,learned_soft_row,1,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True
+Phone.000008,Phone,learned_soft_row,2,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True
+Phone.000008,Phone,learned_soft_row,3,"Bazarbay Abildauly    456 Fifth Route ,Dongguan,LA,(873) 884-2783,000-73-7962,38891",(873) 884-2783,(873) 884-2783,True
+Phone.000008,Phone,shuffled_soft_row,0,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True
+Phone.000008,Phone,shuffled_soft_row,1,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True
+Phone.000008,Phone,shuffled_soft_row,2,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True
+Phone.000008,Phone,shuffled_soft_row,3,"Bazarbay Abildauly    456 Fifth Route ,Dongguan,LA,(873) 884-2783,000-73-7962,38891",(873) 884-2783,(873) 884-2783,True
+Phone.000008,Phone,learned_soft_batch,0,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True
+Phone.000008,Phone,learned_soft_batch,1,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True
+Phone.000008,Phone,learned_soft_batch,2,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True
+Phone.000008,Phone,learned_soft_batch,3,"Bazarbay Abildauly    456 Fifth Route ,Dongguan,LA,(873) 884-2783,000-73-7962,38891",(873) 884-2783,(873) 884-2783,True
+Phone.000011,Phone,direct_row,0,670-339-5712,670 339 5712,670 339 5712,True
+Phone.000011,Phone,direct_row,1,734-124-7641,734 124 7641,734 124 7641,True
+Phone.000011,Phone,direct_row,2,878-662-8808,878 662 8808,878 662 8808,True
+Phone.000011,Phone,direct_batch,0,670-339-5712,670 339 5712,670 339 5712,True
+Phone.000011,Phone,direct_batch,1,734-124-7641,734 124 7641,734 124 7641,True
+Phone.000011,Phone,direct_batch,2,878-662-8808,878 662 8808,878 662 8808,True
+Phone.000011,Phone,init_soft_row,0,670-339-5712,670 339 5712,670 339 5712,True
+Phone.000011,Phone,init_soft_row,1,734-124-7641,734 124 7641,734 124 7641,True
+Phone.000011,Phone,init_soft_row,2,878-662-8808,878 662 8808,878 662 8808,True
+Phone.000011,Phone,learned_soft_row,0,670-339-5712,670 339 5712,670 339 5712,True
+Phone.000011,Phone,learned_soft_row,1,734-124-7641,734 124 7641,734 124 7641,True
+Phone.000011,Phone,learned_soft_row,2,878-662-8808,878 662 8808,878 662 8808,True
+Phone.000011,Phone,shuffled_soft_row,0,670-339-5712,670 339 5712,670 339 5712,True
+Phone.000011,Phone,shuffled_soft_row,1,734-124-7641,734 124 7641,734 124 7641,True
+Phone.000011,Phone,shuffled_soft_row,2,878-662-8808,878 662 8808,878 662 8808,True
+Phone.000011,Phone,learned_soft_batch,0,670-339-5712,670 339 5712,670 339 5712,True
+Phone.000011,Phone,learned_soft_batch,1,734-124-7641,734 124 7641,734 124 7641,True
+Phone.000011,Phone,learned_soft_batch,2,878-662-8808,878 662 8808,878 662 8808,True
+ShippingCode.000008,ShippingCode,direct_row,0,1Z GU2 T24 89 4205 353 5,GU2 4205,GU2 89,False
+ShippingCode.000008,ShippingCode,direct_row,1,1Z VDB 80S 06 9545 042 0,VDB 9545,VDB 042,False
+ShippingCode.000008,ShippingCode,direct_row,2,1Z 1KN 3G8 94 1261 323 9,1KN 1261,1KN 1261,True
+ShippingCode.000008,ShippingCode,direct_batch,0,1Z GU2 T24 89 4205 353 5,GU2 4205,GU2 89,False
+ShippingCode.000008,ShippingCode,direct_batch,1,1Z VDB 80S 06 9545 042 0,VDB 9545,VDB 042,False
+ShippingCode.000008,ShippingCode,direct_batch,2,1Z 1KN 3G8 94 1261 323 9,1KN 1261,1KN 1261,True
+ShippingCode.000008,ShippingCode,init_soft_row,0,1Z GU2 T24 89 4205 353 5,GU2 4205,GU2 89,False
+ShippingCode.000008,ShippingCode,init_soft_row,1,1Z VDB 80S 06 9545 042 0,VDB 9545,VDB 042,False
+ShippingCode.000008,ShippingCode,init_soft_row,2,1Z 1KN 3G8 94 1261 323 9,1KN 1261,1KN 1261,True
+ShippingCode.000008,ShippingCode,learned_soft_row,0,1Z GU2 T24 89 4205 353 5,GU2 4205,GU2 89,False
+ShippingCode.000008,ShippingCode,learned_soft_row,1,1Z VDB 80S 06 9545 042 0,VDB 9545,VDB 042,False
+ShippingCode.000008,ShippingCode,learned_soft_row,2,1Z 1KN 3G8 94 1261 323 9,1KN 323,1KN 1261,False
+ShippingCode.000008,ShippingCode,shuffled_soft_row,0,1Z GU2 T24 89 4205 353 5,GU2 4205,GU2 89,False
+ShippingCode.000008,ShippingCode,shuffled_soft_row,1,1Z VDB 80S 06 9545 042 0,VDB 9545,VDB 042,False
+ShippingCode.000008,ShippingCode,shuffled_soft_row,2,1Z 1KN 3G8 94 1261 323 9,3G8 1261,1KN 1261,False
+ShippingCode.000008,ShippingCode,learned_soft_batch,0,1Z GU2 T24 89 4205 353 5,GU2 89 4205,GU2 89,False
+ShippingCode.000008,ShippingCode,learned_soft_batch,1,1Z VDB 80S 06 9545 042 0,VDB 06 9545,VDB 042,False
+ShippingCode.000008,ShippingCode,learned_soft_batch,2,1Z 1KN 3G8 94 1261 323 9,1KN 94 1261,1KN 1261,False
+UserAgent.000003,UserAgent,direct_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,direct_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,direct_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,direct_row,3,MFM-Robot/1.1.69-internal RO FQAJ OS 8.0.2,RO FQAJ,RO FQAJ,True
+UserAgent.000003,UserAgent,direct_batch,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,direct_batch,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,direct_batch,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,direct_batch,3,MFM-Robot/1.1.69-internal RO FQAJ OS 8.0.2,RO FQAJ,RO FQAJ,True
+UserAgent.000003,UserAgent,init_soft_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,init_soft_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,init_soft_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,init_soft_row,3,MFM-Robot/1.1.69-internal RO FQAJ OS 8.0.2,RO FQAJ,RO FQAJ,True
+UserAgent.000003,UserAgent,learned_soft_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,learned_soft_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,learned_soft_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,learned_soft_row,3,MFM-Robot/1.1.69-internal RO FQAJ OS 8.0.2,RO FQAJ,RO FQAJ,True
+UserAgent.000003,UserAgent,shuffled_soft_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,shuffled_soft_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,shuffled_soft_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,shuffled_soft_row,3,MFM-Robot/1.1.69-internal RO FQAJ OS 8.0.2,RO FQAJ,RO FQAJ,True
+UserAgent.000003,UserAgent,learned_soft_batch,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,learned_soft_batch,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,learned_soft_batch,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,learned_soft_batch,3,MFM-Robot/1.1.69-internal RO FQAJ OS 8.0.2,RO FQAJ,RO FQAJ,True

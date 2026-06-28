@@ -1,0 +1,4 @@
+run,phase,n_examples,states,stop_labels,edit_labels,false_stop_states,rollout_success_rate,mean_states_per_example,mean_policy_steps
+main_joint_action_calibrated_s256_r2,bc_teacher,256,1855,244,1611,0,0.953125,7.24609375,6.29296875
+main_joint_action_calibrated_s256_r2,dagger_r1_states,256,1808,155,1653,56,0.64453125,7.0625,6.23828125
+main_joint_action_calibrated_s256_r2,dagger_r2_states,256,1805,167,1638,36,0.66015625,7.05078125,6.2578125

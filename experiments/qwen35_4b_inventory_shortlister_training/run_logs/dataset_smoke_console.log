@@ -1,0 +1,43 @@
+{
+  "base_model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "candidate_budgets": [
+    1024,
+    4096,
+    16384
+  ],
+  "eval_records": 8,
+  "eval_slots": 16,
+  "experiment": "qwen35_4b_inventory_shortlister_training",
+  "hidden_count": 18,
+  "library_size": 512,
+  "operator_count": 512,
+  "operator_families": {
+    "core": 19,
+    "count_eq": 21,
+    "count_threshold": 42,
+    "edge_mod": 136,
+    "extreme_mod": 136,
+    "order_stat": 20,
+    "prod_mod": 69,
+    "sum_mod": 69
+  },
+  "operator_signature": "list[int] -> int",
+  "query_count": 48,
+  "seed": 20260624,
+  "slot_topk_for_budgets": {
+    "1024": 32,
+    "16384": 128,
+    "4096": 64
+  },
+  "templates_eval": {
+    "pair_affine_mod": 4,
+    "pair_compare_gate": 4
+  },
+  "templates_train": {
+    "pair_affine_mod": 8,
+    "pair_compare_gate": 8
+  },
+  "train_records": 16,
+  "train_slots": 32,
+  "visible_count": 6
+}

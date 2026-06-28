@@ -1,0 +1,37 @@
+task_id,family,features,method,row_exact,full_task_exact,parse_ok,parse_status,output_count,outputs_json,targets_json,raw
+City.000010,City,"Conditional,Numeric",direct_row,0.0,False,True,row_clean,3,"["""", """", """"]","[""9"", ""20"", ""0""]","
+---
+
+---
+"
+City.000010,City,"Conditional,Numeric",direct_batch,0.0,False,False,parse_fail,3,"["""", """", """"]","[""9"", ""20"", ""0""]",
+City.000010,City,"Conditional,Numeric",skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""9"", ""20"", ""0""]",
+City.000010,City,"Conditional,Numeric",random_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""9"", ""20"", ""0""]",
+City.000010,City,"Conditional,Numeric",corrupt_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""9"", ""20"", ""0""]",
+DateTime.000025,DateTime,DateTime,direct_row,0.0,False,True,row_clean,3,"["""", """", """"]","[""Mar 41"", ""Aug 60"", ""May 84""]","
+---
+
+---
+"
+DateTime.000025,DateTime,DateTime,direct_batch,0.0,False,False,parse_fail,3,"["""", """", """"]","[""Mar 41"", ""Aug 60"", ""May 84""]",
+DateTime.000025,DateTime,DateTime,skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""Mar 41"", ""Aug 60"", ""May 84""]",
+DateTime.000025,DateTime,DateTime,random_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""Mar 41"", ""Aug 60"", ""May 84""]",
+DateTime.000025,DateTime,DateTime,corrupt_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""Mar 41"", ""Aug 60"", ""May 84""]",
+Number.000077,Number,"Numeric,NumericRounding",direct_row,0.0,False,True,row_clean,3,"["""", """", """"]","[""11110"", ""11110"", ""540""]","
+---
+
+---
+"
+Number.000077,Number,"Numeric,NumericRounding",direct_batch,0.0,False,False,parse_fail,3,"["""", """", """"]","[""11110"", ""11110"", ""540""]",
+Number.000077,Number,"Numeric,NumericRounding",skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""11110"", ""11110"", ""540""]",
+Number.000077,Number,"Numeric,NumericRounding",random_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""11110"", ""11110"", ""540""]",
+Number.000077,Number,"Numeric,NumericRounding",corrupt_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""11110"", ""11110"", ""540""]",
+UserAgent.000003,UserAgent,Substring,direct_row,0.0,False,True,row_clean,3,"["""", """", """"]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","
+---
+
+---
+"
+UserAgent.000003,UserAgent,Substring,direct_batch,0.0,False,False,parse_fail,3,"["""", """", """"]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]",
+UserAgent.000003,UserAgent,Substring,skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]",
+UserAgent.000003,UserAgent,Substring,random_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]",
+UserAgent.000003,UserAgent,Substring,corrupt_skill_rag,0.0,False,False,parse_fail,3,"["""", """", """"]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]",

@@ -1,0 +1,2 @@
+split,blank_k0,action_only_k8,action_only_false_stop,action_only_program_exact,action_only_mean_steps,echo_k8,echo_false_stop,echo_program_exact,echo_mean_steps,oracle_k8,native_qwen_direct,native_parse_rate,action_minus_native,echo_minus_action,action_oracle_gap,echo_oracle_gap
+average,0.1,0.43125,0.54375,0.325,2.28125,0.3625,0.6,0.2625,2.03125,0.7375,0.36875,0.9875,0.0625,-0.06875,0.30625,0.375

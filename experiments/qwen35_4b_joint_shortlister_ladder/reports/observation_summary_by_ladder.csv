@@ -1,0 +1,9 @@
+designed_consistent_avg,designed_selected_hidden_all_successes,designed_selected_hidden_all_records,designed_selected_hidden_all_pct,designed_target_in_set_successes,designed_target_in_set_records,designed_target_in_set_pct,library_size,random_consistent_avg,random_selected_hidden_all_successes,random_selected_hidden_all_records,random_selected_hidden_all_pct,random_target_in_set_successes,random_target_in_set_records,random_target_in_set_pct,records,template
+1.0,4,4,100.0,4,4,100.0,64,2.5,3,4,75.0,4,4,100.0,4,pair_affine_mod
+68.25,0,4,0.0,4,4,100.0,64,216.5,0,4,0.0,4,4,100.0,4,pair_compare_gate
+4.0,4,4,100.0,4,4,100.0,128,29.75,3,4,75.0,4,4,100.0,4,pair_affine_mod
+511.75,2,4,50.0,4,4,100.0,128,2458.75,1,4,25.0,4,4,100.0,4,pair_compare_gate
+3.0,4,4,100.0,4,4,100.0,256,3.5,4,4,100.0,4,4,100.0,4,pair_affine_mod
+729.75,0,4,0.0,4,4,100.0,256,1131.5,1,4,25.0,4,4,100.0,4,pair_compare_gate
+756.25,4,4,100.0,4,4,100.0,512,1558.0,4,4,100.0,4,4,100.0,4,pair_affine_mod
+7456.0,0,4,0.0,4,4,100.0,512,12018.75,0,4,0.0,4,4,100.0,4,pair_compare_gate

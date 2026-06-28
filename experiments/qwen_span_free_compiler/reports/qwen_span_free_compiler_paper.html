@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Span-Free Qwen Latent Compiler with Alignment Bootstrap</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; margin: 40px auto; max-width: 980px; padding: 0 24px; color: #1f2937; }
+    h1, h2 { color: #111827; line-height: 1.2; }
+    code { background: #f3f4f6; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0 1.4rem; font-size: 0.95rem; }
+    th, td { border: 1px solid #d1d5db; padding: 0.45rem 0.55rem; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #f9fafb; }
+    .note { background: #f9fafb; border-left: 4px solid #6b7280; padding: 0.85rem 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Span-Free Qwen Latent Compiler with Alignment Bootstrap</h1>
+  <h2>Abstract</h2>
+  <p>This experiment tests whether a small trainable compiler can read the full hidden sequence of a frozen Qwen3.5-4B model and configure an executable latent program without receiving token-span features at inference time. A plain query-context reader fails to extract numeric program symbols. Token-local classification improves argument extraction but still fails to locate the initial value. Adding trace-time attention alignment changes the result: the compiler reaches 99.6% exact execution on the trained length-4 standard template, while a direct answer head and an answer-only compiler remain at chance. Answer-only continuation preserves the installed interface. The result does not transfer to untrained later step slots or paraphrased prompt wording.</p>
+
+  <h2>Setup</h2>
+  <p>The task is modular program execution. Each prompt gives an initial value <code>x</code>, a sequence of add, subtract, and multiply updates modulo 97, and an answer marker. The frozen model is used only as a hidden-state source. The trainable compiler receives the padded full hidden sequence and a sequence mask, with no numeric token span features at inference time.</p>
+
+  <h2>Variants</h2>
+  <table>
+    <tr><th>Variant</th><th>Training signal</th></tr>
+    <tr><td><code>direct</code></td><td>answer classification from the answer-marker hidden state</td></tr>
+    <tr><td><code>compiler_answer_only</code></td><td>final-answer loss through the executor</td></tr>
+    <tr><td><code>compiler_trace</code></td><td>symbol trace loss, executor loss, and attention alignment</td></tr>
+    <tr><td><code>compiler_trace_then_answer</code></td><td>trace bootstrap followed by final-answer-only continuation</td></tr>
+  </table>
+
+  <h2>Main Result</h2>
+  <p>Run: <code>main_qwen35_attention_len4_retention</code></p>
+  <table>
+    <tr><th>Variant</th><th>L=4 exec</th><th>L=8 exec</th><th>L=12 exec</th><th>L=24 exec</th><th>L=4 init</th><th>L=4 op</th><th>L=4 arg</th><th>L=4 exact</th></tr>
+    <tr><td><code>direct</code></td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+    <tr><td><code>compiler_trace</code></td><td>99.6%</td><td>0.4%</td><td>1.2%</td><td>0.8%</td><td>100.0%</td><td>100.0%</td><td>99.9%</td><td>99.6%</td></tr>
+    <tr><td><code>compiler_answer_only</code></td><td>0.0%</td><td>0.8%</td><td>0.8%</td><td>0.0%</td><td>0.4%</td><td>35.5%</td><td>1.7%</td><td>0.0%</td></tr>
+    <tr><td><code>compiler_trace_then_answer</code></td><td>99.6%</td><td>1.6%</td><td>1.6%</td><td>0.4%</td><td>100.0%</td><td>100.0%</td><td>99.9%</td><td>99.6%</td></tr>
+  </table>
+
+  <p>The direct answer control stays at chance.</p>
+  <table>
+    <tr><th>Split</th><th>Direct accuracy</th></tr>
+    <tr><td>standard L=4</td><td>1.6%</td></tr>
+    <tr><td>standard L=8</td><td>1.2%</td></tr>
+    <tr><td>standard L=12</td><td>0.0%</td></tr>
+    <tr><td>standard L=24</td><td>1.2%</td></tr>
+  </table>
+
+  <h2>Stress Tests</h2>
+  <table>
+    <tr><th>Variant</th><th>paraphrase L=4 exec</th><th>paraphrase L=4 init</th><th>paraphrase L=4 op</th><th>paraphrase L=4 arg</th></tr>
+    <tr><td><code>compiler_trace</code></td><td>1.6%</td><td>94.9%</td><td>58.0%</td><td>54.0%</td></tr>
+    <tr><td><code>compiler_trace_then_answer</code></td><td>2.0%</td><td>94.5%</td><td>62.9%</td><td>55.7%</td></tr>
+  </table>
+  <table>
+    <tr><th>Split</th><th>Exec</th><th>Init</th><th>Op</th><th>Arg</th><th>Program exact</th></tr>
+    <tr><td>standard L=4</td><td>99.2%</td><td>100.0%</td><td>100.0%</td><td>99.8%</td><td>99.2%</td></tr>
+    <tr><td>standard L=8</td><td>37.9%</td><td>100.0%</td><td>93.3%</td><td>94.4%</td><td>37.9%</td></tr>
+    <tr><td>standard L=12</td><td>5.9%</td><td>100.0%</td><td>86.3%</td><td>88.9%</td><td>4.3%</td></tr>
+  </table>
+
+  <h2>Interpretation</h2>
+  <p>The positive result is real but bounded. A small trainable module can compile frozen Qwen hidden states into an executable latent program without span features at inference time. Trace-time attention alignment is the critical ingredient; without it, numeric extraction does not form reliably. Once the interface is installed, final-answer-only continuation preserves it on the trained distribution.</p>
+  <p>The negative result is equally important. The method does not yet produce a general latent program interface. It does not discover the interface from answer-only supervision, does not extrapolate to untrained step slots, and does not handle paraphrased wording under the tested training budget.</p>
+
+  <h2>Conclusion</h2>
+  <p>The experiment supports a narrow claim: frozen Qwen hidden states can feed a span-free executable latent compiler when bootstrap supervision teaches both symbols and attention. It does not support a broad claim of universal posttraining improvement. The next technically meaningful step is to replace independent step queries with a parser-like sequence tagger or to train a small QLoRA adapter so Qwen exposes stable program-token features across wording and length.</p>
+
+  <h2>Artifacts</h2>
+  <ul>
+    <li>Source: <code>experiments/qwen_span_free_compiler/src/</code></li>
+    <li>Runs: <code>experiments/qwen_span_free_compiler/runs/</code></li>
+    <li>Analysis: <code>experiments/qwen_span_free_compiler/analysis/</code></li>
+    <li>Checkpoints: <code>large_artifacts/qwen_span_free_compiler/checkpoints/</code></li>
+    <li>Manifest: <code>experiments/qwen_span_free_compiler/checkpoint_manifest.csv</code></li>
+  </ul>
+</body>
+</html>

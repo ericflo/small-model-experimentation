@@ -1,0 +1,190 @@
+[build] train scalar_affine x20
+[build] train threshold_offset x20
+[build] train modulo_label x20
+[build] train tuple_affine x20
+[build] train tuple_sum_wrap x20
+[build] train length_label x20
+[build] train contains_label x20
+[build] train sort_join x20
+[build] train sum_offset x20
+[build] train sum_threshold x20
+[build] train modulo_shift x20
+[build] train length_affine x20
+[build] seen_iid scalar_affine x3
+[build] seen_iid threshold_offset x3
+[build] seen_iid modulo_label x3
+[build] seen_iid tuple_affine x3
+[build] seen_iid tuple_sum_wrap x3
+[build] seen_iid length_label x3
+[build] seen_iid contains_label x3
+[build] seen_iid sort_join x3
+[build] seen_iid sum_offset x3
+[build] seen_iid sum_threshold x3
+[build] seen_iid modulo_shift x3
+[build] seen_iid length_affine x3
+[build] format_shift scalar_affine x3
+[build] format_shift threshold_offset x3
+[build] format_shift modulo_label x3
+[build] format_shift tuple_affine x3
+[build] format_shift tuple_sum_wrap x3
+[build] format_shift length_label x3
+[build] format_shift contains_label x3
+[build] format_shift sort_join x3
+[build] format_shift sum_offset x3
+[build] format_shift sum_threshold x3
+[build] format_shift modulo_shift x3
+[build] format_shift length_affine x3
+[build] recombination_holdout tuple_branch_label x12
+[build] recombination_holdout length_contains_code x12
+[build] recombination_holdout modulo_sum_label x12
+[build] recombination_holdout sorted_tuple_affine x12
+[build] recombination_holdout sorted_contains_count x12
+{
+  "dataset": "factor_recombination_ladder",
+  "families": {
+    "repair_train_ladder": {
+      "contains_label": 20,
+      "length_affine": 20,
+      "length_label": 20,
+      "modulo_label": 20,
+      "modulo_shift": 20,
+      "scalar_affine": 20,
+      "sort_join": 20,
+      "sum_offset": 20,
+      "sum_threshold": 20,
+      "threshold_offset": 20,
+      "tuple_affine": 20,
+      "tuple_sum_wrap": 20
+    },
+    "repair_train_ladder_labelled": {
+      "contains_label": 20,
+      "length_affine": 20,
+      "length_label": 20,
+      "modulo_label": 20,
+      "modulo_shift": 20,
+      "scalar_affine": 20,
+      "sort_join": 20,
+      "sum_offset": 20,
+      "sum_threshold": 20,
+      "threshold_offset": 20,
+      "tuple_affine": 20,
+      "tuple_sum_wrap": 20
+    },
+    "repair_val_format_shift": {
+      "contains_label": 3,
+      "length_affine": 3,
+      "length_label": 3,
+      "modulo_label": 3,
+      "modulo_shift": 3,
+      "scalar_affine": 3,
+      "sort_join": 3,
+      "sum_offset": 3,
+      "sum_threshold": 3,
+      "threshold_offset": 3,
+      "tuple_affine": 3,
+      "tuple_sum_wrap": 3
+    },
+    "repair_val_format_shift_labelled": {
+      "contains_label": 3,
+      "length_affine": 3,
+      "length_label": 3,
+      "modulo_label": 3,
+      "modulo_shift": 3,
+      "scalar_affine": 3,
+      "sort_join": 3,
+      "sum_offset": 3,
+      "sum_threshold": 3,
+      "threshold_offset": 3,
+      "tuple_affine": 3,
+      "tuple_sum_wrap": 3
+    },
+    "repair_val_recombination_holdout": {
+      "length_contains_code": 12,
+      "modulo_sum_label": 12,
+      "sorted_contains_count": 12,
+      "sorted_tuple_affine": 12,
+      "tuple_branch_label": 12
+    },
+    "repair_val_recombination_holdout_labelled": {
+      "length_contains_code": 12,
+      "modulo_sum_label": 12,
+      "sorted_contains_count": 12,
+      "sorted_tuple_affine": 12,
+      "tuple_branch_label": 12
+    },
+    "repair_val_seen_iid": {
+      "contains_label": 3,
+      "length_affine": 3,
+      "length_label": 3,
+      "modulo_label": 3,
+      "modulo_shift": 3,
+      "scalar_affine": 3,
+      "sort_join": 3,
+      "sum_offset": 3,
+      "sum_threshold": 3,
+      "threshold_offset": 3,
+      "tuple_affine": 3,
+      "tuple_sum_wrap": 3
+    },
+    "repair_val_seen_iid_labelled": {
+      "contains_label": 3,
+      "length_affine": 3,
+      "length_label": 3,
+      "modulo_label": 3,
+      "modulo_shift": 3,
+      "scalar_affine": 3,
+      "sort_join": 3,
+      "sum_offset": 3,
+      "sum_threshold": 3,
+      "threshold_offset": 3,
+      "tuple_affine": 3,
+      "tuple_sum_wrap": 3
+    }
+  },
+  "heldout_factor_pairs": [
+    "aggregation+modulo",
+    "branching+tuple_access",
+    "length+string_match",
+    "ordering+string_match",
+    "ordering+tuple_access"
+  ],
+  "labelled_train_file": "experiments/factor_recombination_ladder/data/repair_train_ladder_labelled.jsonl",
+  "leaked_heldout_pairs": [],
+  "normal_train_file": "experiments/factor_recombination_ladder/data/repair_train_ladder.jsonl",
+  "question": "Can trace SFT learn reusable factor recombination rather than seen rule-template shortcuts?",
+  "records": {
+    "repair_train_ladder": 240,
+    "repair_train_ladder_labelled": 240,
+    "repair_val_format_shift": 36,
+    "repair_val_format_shift_labelled": 36,
+    "repair_val_recombination_holdout": 60,
+    "repair_val_recombination_holdout_labelled": 60,
+    "repair_val_seen_iid": 36,
+    "repair_val_seen_iid_labelled": 36
+  },
+  "seed": 20260621,
+  "train_factor_pair_counts": {
+    "aggregation+arithmetic": 40,
+    "aggregation+branching": 20,
+    "aggregation+string_format": 20,
+    "aggregation+tuple_access": 20,
+    "arithmetic+branching": 60,
+    "arithmetic+length": 20,
+    "arithmetic+modulo": 20,
+    "arithmetic+tuple_access": 20,
+    "branching+length": 20,
+    "branching+modulo": 40,
+    "branching+string_format": 60,
+    "branching+string_match": 20,
+    "length+string_format": 20,
+    "modulo+string_format": 20,
+    "ordering+sequence_iteration": 20,
+    "ordering+string_format": 20,
+    "ordering+string_normalization": 20,
+    "sequence_iteration+string_format": 20,
+    "sequence_iteration+string_normalization": 20,
+    "string_format+string_match": 20,
+    "string_format+string_normalization": 20,
+    "string_format+tuple_access": 20
+  }
+}

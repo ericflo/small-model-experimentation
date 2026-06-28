@@ -1,0 +1,13 @@
+arm,operator_status,operator,template,records,target_raw_pct,target_visible_pct,oracle_hidden_all_pct,selected_hidden_all_pct,avg_raw_candidate_count,avg_visible_consistent_count,avg_visible_consistent_operator_count
+arm0_full_inventory,held_out,,mod_format,40,100.0,100.0,100.0,97.5,56.0,2.3,1.05
+arm0_full_inventory,held_out,,offset_format,40,100.0,100.0,100.0,100.0,56.0,1.025,1.025
+arm0_full_inventory,held_out,,threshold_gate,40,100.0,100.0,100.0,80.0,56.0,1.55,1.525
+arm0_full_inventory,in_bank,,mod_format,30,100.0,100.0,100.0,100.0,56.0,1.1,1.0
+arm0_full_inventory,in_bank,,offset_format,30,100.0,100.0,100.0,100.0,56.0,1.0,1.0
+arm0_full_inventory,in_bank,,threshold_gate,30,100.0,100.0,100.0,70.0,56.0,3.6,1.967
+arm1_closed_vocab,held_out,,mod_format,40,0.0,0.0,0.0,0.0,24.0,0.025,0.025
+arm1_closed_vocab,held_out,,offset_format,40,0.0,0.0,0.0,0.0,24.0,0.0,0.0
+arm1_closed_vocab,held_out,,threshold_gate,40,0.0,0.0,0.0,0.0,24.0,0.25,0.25
+arm1_closed_vocab,in_bank,,mod_format,30,100.0,100.0,100.0,100.0,24.0,1.1,1.0
+arm1_closed_vocab,in_bank,,offset_format,30,100.0,100.0,100.0,100.0,24.0,1.0,1.0
+arm1_closed_vocab,in_bank,,threshold_gate,30,100.0,100.0,100.0,80.0,24.0,1.933,1.333

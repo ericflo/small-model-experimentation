@@ -1,0 +1,16 @@
+stage,split,n,max_steps,executor_accuracy,executor_target_mass,direct_accuracy,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,state_mean_correct_prefix,run,arm,seed,global_step,stage_idx,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+stage1_max24,standard_L8,64,24,1.0,0.999413512647152,nan,1.0,1.0,1.0,1.0,1.0,1.0,1.0,8.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,paraphrase_L8,64,24,1.0,0.9993921220302582,nan,1.0,1.0,1.0,1.0,1.0,1.0,1.0,8.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,heldout_L8,64,24,1.0,0.99793840944767,nan,1.0,1.0,1.0,1.0,1.0,1.0,1.0,8.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,paired_L8,64,24,1.0,0.9993906766176224,nan,1.0,1.0,1.0,1.0,1.0,1.0,1.0,8.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,1.0,1.0,1.0,1.0
+stage1_max24,paired_heldout_L8,64,24,1.0,0.9985420107841492,nan,1.0,1.0,1.0,1.0,1.0,1.0,1.0,8.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,1.0,1.0,1.0,1.0
+stage1_max24,standard_L16,64,24,1.0,0.9991767331957817,nan,1.0,1.0,1.0,1.0,1.0,1.0,1.0,16.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,paraphrase_L16,64,24,0.9375,0.9366795271635056,nan,1.0,0.9990234375,0.9970703125,0.9375,0.99609375,0.9375,0.99609375,15.9375,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,heldout_L16,64,24,0.75,0.7290827818214893,nan,1.0,0.98828125,0.9794921875,0.75,0.9638671875,0.75,0.9638671875,15.421875,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,paired_L16,64,24,0.96875,0.9679021239280701,nan,1.0,0.998046875,0.998046875,0.96875,0.998046875,0.96875,0.998046875,15.96875,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,0.9375,0.9375,0.9375,0.9375
+stage1_max24,paired_heldout_L16,64,24,0.828125,0.8238180801272392,nan,1.0,0.9912109375,0.9892578125,0.828125,0.98828125,0.828125,0.98828125,15.8125,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,0.65625,0.65625,0.65625,0.65625
+stage1_max24,standard_L24,64,24,0.0,5.007966626635607e-05,nan,1.0,0.884765625,0.8307291666666666,0.0,0.791015625,0.0,0.7903645833333334,18.96875,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,paraphrase_L24,64,24,1.0,0.996421605348587,nan,1.0,1.0,1.0,1.0,1.0,1.0,1.0,24.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,heldout_L24,64,24,0.375,0.37129905069468805,nan,1.0,0.919921875,0.8782552083333334,0.375,0.7916666666666666,0.375,0.7916666666666666,19.0,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,,,,
+stage1_max24,paired_L24,64,24,0.5,0.5034634135663509,nan,1.0,0.9401041666666666,0.916015625,0.5,0.892578125,0.5,0.8919270833333334,21.40625,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,0.03125,0.03125,0.03125,0.03125
+stage1_max24,paired_heldout_L24,64,24,0.25,0.24758669227048813,nan,1.0,0.9088541666666666,0.8723958333333334,0.25,0.8333333333333334,0.25,0.8326822916666666,19.984375,main_max24_no_curriculum_seed456,max24_no_curriculum,456,750,1,0.0,0.0,0.0,0.0

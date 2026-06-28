@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Program-Only Executable ABI</title><style>body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1120px;margin:36px auto;line-height:1.5;color:#202124}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #d4d7dc;padding:7px 9px;text-align:left}th{background:#f2f4f7}img{max-width:100%;border:1px solid #d4d7dc}figure{margin:24px 0}figcaption{color:#5f6368;font-size:13px}</style></head><body><h1>Qwen Program-Only Executable ABI</h1>
+
+<h2>Abstract</h2>
+
+<p>This experiment tests whether a local 4B language model can compile deterministic office-style tasks into executable programs when the final answer is absent from the program-only targets. Program-only outputs are parsed and executed by a deterministic interpreter; correctness is based on the interpreter result.</p>
+
+<h2>Method</h2>
+
+<p>The task factory creates string, unit-conversion, table-lookup, and date-offset examples. The training split contains atomic operations, while the composition split recombines known primitives into held-out multi-step procedures. Four arms are compared: `answer_only`, `trace_stack_final`, `program_stack`, and `program_python`.</p>
+
+<p>For program-only arms, the primary metric is strict execution accuracy: the generated program must execute to the correct answer and must not contain a `FINAL` line. For answer-emitting arms, the primary metric is exact match on the parsed `FINAL` line.</p>
+
+<h2>Run Configuration</h2>
+
+<li>Primary suite: `main`.</li>
+<li>Adapter seeds: `101,202`.</li>
+<li>Total trained-arm evaluation examples: `576` across arms, splits, and seeds.</li>
+<li>QLoRA update steps per adapter: `48`.</li>
+<li>Large adapters are stored outside the experiment tree.</li>
+
+<h2>Primary Results</h2>
+
+<li>Best in-distribution arm: `program_python` at 100.0%.</li>
+<li>Best held-out composition arm: `program_stack` at 72.9%.</li>
+<li>Best externally executed held-out composition procedure: `trace_stack_final` at 93.8%.</li>
+<li>Best strict program-only composition arm: `program_stack` at 72.9%.</li>
+
+<table>
+<tr><th>suite</th><th>arm</th><th>split</th><th>runs</th><th>n_total</th><th>primary_accuracy_mean</th><th>primary_accuracy_std</th><th>exec_accuracy_mean</th><th>valid_exec_rate_mean</th><th>no_final_rate_mean</th><th>mean_new_tokens_mean</th></tr>
+<tr><td>main</td><td>program_stack</td><td>eval_composition</td><td>2</td><td>48</td><td>72.9%</td><td>32.4%</td><td>72.9%</td><td>72.9%</td><td>100.0%</td><td>28.90</td></tr>
+<tr><td>main</td><td>answer_only</td><td>eval_composition</td><td>2</td><td>48</td><td>43.8%</td><td>8.8%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>9.92</td></tr>
+<tr><td>main</td><td>program_python</td><td>eval_composition</td><td>2</td><td>48</td><td>43.8%</td><td>8.8%</td><td>43.8%</td><td>58.3%</td><td>100.0%</td><td>33.27</td></tr>
+<tr><td>main</td><td>trace_stack_final</td><td>eval_composition</td><td>2</td><td>48</td><td>39.6%</td><td>2.9%</td><td>93.8%</td><td>100.0%</td><td>0.0%</td><td>34.21</td></tr>
+<tr><td>main</td><td>zero_shot_answer</td><td>eval_composition</td><td>1</td><td>24</td><td>4.2%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>75.0%</td><td>24.00</td></tr>
+<tr><td>main</td><td>program_python</td><td>eval_indist</td><td>2</td><td>48</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>27.56</td></tr>
+<tr><td>main</td><td>program_stack</td><td>eval_indist</td><td>2</td><td>48</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>22.08</td></tr>
+<tr><td>main</td><td>answer_only</td><td>eval_indist</td><td>2</td><td>48</td><td>89.6%</td><td>2.9%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>9.83</td></tr>
+<tr><td>main</td><td>trace_stack_final</td><td>eval_indist</td><td>2</td><td>48</td><td>83.3%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>29.92</td></tr>
+<tr><td>main</td><td>zero_shot_answer</td><td>eval_indist</td><td>1</td><td>24</td><td>37.5%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>33.3%</td><td>24.00</td></tr>
+<tr><td>main</td><td>trace_stack_final</td><td>eval_template_shift</td><td>2</td><td>48</td><td>77.1%</td><td>8.8%</td><td>50.0%</td><td>52.1%</td><td>0.0%</td><td>29.12</td></tr>
+<tr><td>main</td><td>answer_only</td><td>eval_template_shift</td><td>2</td><td>48</td><td>75.0%</td><td>5.9%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>9.92</td></tr>
+<tr><td>main</td><td>program_stack</td><td>eval_template_shift</td><td>2</td><td>48</td><td>56.2%</td><td>8.8%</td><td>56.2%</td><td>56.2%</td><td>100.0%</td><td>19.88</td></tr>
+<tr><td>main</td><td>program_python</td><td>eval_template_shift</td><td>2</td><td>48</td><td>39.6%</td><td>14.7%</td><td>39.6%</td><td>54.2%</td><td>100.0%</td><td>26.12</td></tr>
+<tr><td>main</td><td>zero_shot_answer</td><td>eval_template_shift</td><td>1</td><td>24</td><td>37.5%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>25.0%</td><td>24.00</td></tr>
+</table>
+
+<figure><img src="../analysis/figures/primary_accuracy_by_arm.png" alt="Primary accuracy by arm"><figcaption>Primary accuracy by arm</figcaption></figure>
+
+<figure><img src="../analysis/figures/execution_vs_final.png" alt="Execution versus final"><figcaption>Execution versus final</figcaption></figure>
+
+<figure><img src="../analysis/figures/format_and_tokens.png" alt="Format and tokens"><figcaption>Format and tokens</figcaption></figure>
+
+<figure><img src="../analysis/figures/family_breakdown.png" alt="Family breakdown"><figcaption>Family breakdown</figcaption></figure>
+
+<figure><img src="../analysis/figures/training_curves.png" alt="Training curves"><figcaption>Training curves</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>The strongest procedure-level result is the externally executed `trace_stack_final` program: 93.8% execution accuracy on held-out compositions, with 39.6% final-answer accuracy. The generated procedure can be right while the answer token is wrong, so the emitted `FINAL` line is a confounded score for procedure arms.</p>
+<p>The best held-out composition arm was `program_stack`. Its family accuracies were: string 91.7%, unit 50.0%, table 50.0%, date 100.0%.</p>
+<p>The strongest strict program-only arm reached 72.9% on held-out compositions, compared with 43.8% for answer-only. This directly measures whether executable compilation improves composition rather than merely producing a plausible answer string.</p>
+<p>The same row has seed standard deviation 32.4%, so the result is positive but not yet stable enough to treat as a finished recipe.</p>
+<p>The trace-plus-final procedure execution was more stable than strict program-only emission in this compact run: composition execution standard deviation was 8.8%, versus 32.4% for the best strict program-only row.</p>
+<p>A program-only win would show that the model learned a useful executable ABI. A program-only loss, especially with high valid-execution rate, indicates that the model can imitate program syntax but still chooses the wrong operations or arguments.</p>
+
+<h2>Limitations</h2>
+
+<p>This is a compact controlled run. The generated domains are narrow, and the interpreters intentionally support only a small operation set. The result should be read as an ABI and supervision test, not a benchmark of general assistant capability.</p>
+
+<h2>Artifacts</h2>
+
+<li>Metrics: `analysis/summary_by_arm.csv` and `analysis/all_metrics.csv`</li>
+<li>Details: `analysis/all_details.csv`</li>
+<li>Training logs: `analysis/all_train_logs.csv`</li>
+<li>Checkpoints: `/workspace/large_artifacts/qwen_program_only_executable_abi/checkpoints`</li></body></html>

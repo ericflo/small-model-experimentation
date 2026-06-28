@@ -1,0 +1,155 @@
+{
+  "base_coverage": 0.7,
+  "base_covered": 56,
+  "base_miss_count": 24,
+  "base_miss_tasks": [
+    15,
+    16,
+    22,
+    26,
+    31,
+    34,
+    35,
+    36,
+    39,
+    42,
+    43,
+    44,
+    48,
+    55,
+    59,
+    60,
+    67,
+    70,
+    73,
+    77,
+    81,
+    83,
+    84,
+    87
+  ],
+  "base_records": 80,
+  "combined_oracle_coverage_all_tasks": 0.8,
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "false_pass_counts": {
+    "copy": {
+      "hidden_wrong": 6,
+      "visible_pass": 7
+    },
+    "copy_semantic": {
+      "hidden_wrong": 20,
+      "visible_pass": 31
+    },
+    "random": {
+      "hidden_wrong": 18,
+      "visible_pass": 23
+    },
+    "semantic": {
+      "hidden_wrong": 14,
+      "visible_pass": 24
+    },
+    "shuffled": {
+      "hidden_wrong": 17,
+      "visible_pass": 20
+    }
+  },
+  "false_pass_rates": {
+    "copy": 0.8571428571428571,
+    "copy_semantic": 0.6451612903225806,
+    "random": 0.782608695652174,
+    "semantic": 0.5833333333333334,
+    "shuffled": 0.85
+  },
+  "forward_tokens": {
+    "copy": 0,
+    "random": 25603,
+    "semantic": 24352,
+    "shuffled": 26127
+  },
+  "library_entries": 364,
+  "pool_coverage_counts": {
+    "copy": 1,
+    "random": 4,
+    "semantic": 8,
+    "shuffled": 3
+  },
+  "pool_coverage_tasks": {
+    "copy": [
+      67
+    ],
+    "random": [
+      36,
+      42,
+      67,
+      84
+    ],
+    "semantic": [
+      15,
+      35,
+      36,
+      42,
+      44,
+      67,
+      73,
+      87
+    ],
+    "shuffled": [
+      36,
+      42,
+      73
+    ]
+  },
+  "primary_read": "semantic retrieval+adaptation improves residual pool coverage, but deployable reranking still fails to remove false visible-pass candidates",
+  "qwen_rerank_forward_tokens": 5558,
+  "retrieval_plan_records": 24,
+  "selector_counts": {
+    "consensus_visible": {
+      "correct": 6,
+      "no_commit": 10,
+      "wrong_visible": 8
+    },
+    "first_visible": {
+      "correct": 7,
+      "no_commit": 10,
+      "wrong_visible": 7
+    },
+    "frozen_qwen_visible_rerank": {
+      "correct": 5,
+      "no_commit": 11,
+      "wrong_visible": 8
+    },
+    "oracle_hidden": {
+      "correct": 8,
+      "no_commit": 16,
+      "wrong_visible": 0
+    },
+    "shortest_visible": {
+      "correct": 6,
+      "no_commit": 10,
+      "wrong_visible": 8
+    }
+  },
+  "selector_selected_recovery_rates": {
+    "consensus_visible": 0.25,
+    "first_visible": 0.2916666666666667,
+    "frozen_qwen_visible_rerank": 0.20833333333333334,
+    "oracle_hidden": 0.3333333333333333,
+    "shortest_visible": 0.25
+  },
+  "semantic_plus_copy_tasks": [
+    15,
+    35,
+    36,
+    42,
+    44,
+    67,
+    73,
+    87
+  ],
+  "semantic_unique_vs_copy_random_shuffled": [
+    15,
+    35,
+    44,
+    87
+  ]
+}

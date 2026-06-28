@@ -1,0 +1,47 @@
+{
+  "experiment": "qwen35_4b_operator_inventory_search_pilot",
+  "model_family": "Qwen/Qwen3.5-4B",
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_operator_inventory_search_pilot",
+  "objective": "No-training pilot for operator-level search on type-colliding held-out aggregate operators before training an inventory-conditioned sketcher.",
+  "records_per_family": 10,
+  "visible_cases": 6,
+  "hidden_cases": 18,
+  "query_pool_cases": 48,
+  "operator_signature_under_test": "list[int] -> int",
+  "closed_vocab_operators": [
+    "sum",
+    "first",
+    "last"
+  ],
+  "full_inventory_operators": [
+    "sum",
+    "first",
+    "last",
+    "max",
+    "min",
+    "prod",
+    "gcd"
+  ],
+  "held_out_operators": [
+    "max",
+    "min",
+    "prod",
+    "gcd"
+  ],
+  "active_query_budgets": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "arms": [
+    "arm1_closed_vocab",
+    "arm0_full_inventory"
+  ],
+  "notes": [
+    "This pilot intentionally performs no QLoRA training.",
+    "Arm 0 measures the search and identifiability ceiling.",
+    "Arm 1 measures the closed-vocabulary floor."
+  ]
+}
+

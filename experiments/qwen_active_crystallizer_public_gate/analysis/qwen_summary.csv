@@ -1,0 +1,6 @@
+method,tasks,score
+candidate_oracle,120,0.25
+examples_shortest,120,0.20833333333333334
+qwen_probe_select,120,0.25
+shuffled_probe_select,120,0.225
+qwen_direct_first_row,120,0.7

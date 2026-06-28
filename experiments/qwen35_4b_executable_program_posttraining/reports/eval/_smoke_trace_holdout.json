@@ -1,0 +1,547 @@
+{
+  "adapter": "/workspace/large_artifacts/qwen35_4b_executable_program_posttraining/models/dsl_trace_lora",
+  "data": "data/dsl_eval_holdout.jsonl",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "num_samples": 3,
+  "prompt_mode": "trace",
+  "records": 9,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "rows": [
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_000",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (mod (len values) modulus))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_001",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (mod (len values) modulus))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_002",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (sum values))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_003",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (sum values))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_004",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (mod (len values) modulus))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_005",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (sum values))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_006",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (sum values))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_007",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (mod (len values) modulus))"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_00",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_01",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        },
+        {
+          "kind": "sample_02",
+          "program": "(format \"M{}\" (mod (sum values) modulus))",
+          "raw": "(format \"M{}\" (mod (sum values) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "modulo_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "holdout_modulo_sum_label_008",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"M{}\" (mod (sum values) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"M{}\" (mod (len values) modulus))"
+    }
+  ],
+  "summary": {
+    "by_family": {
+      "modulo_sum_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 9,
+          "successes": 9
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 9,
+          "successes": 9
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 9,
+          "successes": 9
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 9,
+          "successes": 9
+        }
+      }
+    },
+    "overall": {
+      "greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      },
+      "greedy_visible_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      },
+      "rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      },
+      "rerank_visible_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      }
+    }
+  },
+  "temperature": 0.7,
+  "top_p": 0.95
+}

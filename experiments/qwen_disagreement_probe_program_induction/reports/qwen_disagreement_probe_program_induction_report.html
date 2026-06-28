@@ -1,0 +1,734 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Disagreement-Probe Program Induction</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 1120px; margin: 36px auto; padding: 0 24px; line-height: 1.45; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 13px; }
+    th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    img { max-width: 100%; border: 1px solid #ddd; margin: 8px 0 22px; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+    pre { background: #f6f8fa; padding: 16px; overflow: auto; }
+  </style>
+</head>
+<body>
+<h1>Disagreement-Probe Program Induction</h1>
+<h2>Question</h2>
+<p>Can model-labeled disagreement probes select better task-local executable programs than visible examples alone?</p>
+<p>The method asks the model to write Python <code>transform(row)</code> candidate functions. Candidate programs are executed on visible examples. Synthetic probe inputs are generated from the visible examples, ranked by candidate disagreement, and labeled by the model. Program selection uses visible examples plus probe labels. Held-out rows are used only for final scoring.</p>
+<h2>Setup</h2>
+<ul>
+<li>Run: <code>main_v1</code></li>
+<li>Dataset: public text-transformation tasks.</li>
+<li>Tasks: <code>25</code></li>
+<li>Visible examples per task: <code>4</code></li>
+<li>Held-out cap per task: <code>6</code></li>
+<li>Program variants: <code>monolithic,robust</code></li>
+<li>Repair rounds: <code>1</code></li>
+<li>Disagreement probes per task: <code>4</code></li>
+<li>Probe label variants: <code>plain,consistency</code></li>
+<li>Probe score threshold for gated use: <code>0.67</code></li>
+<li>Elapsed seconds: <code>1556.2</code></li>
+</ul>
+<h2>Main Result</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">tasks</th>
+<th style="text-align: left;">row_exact</th>
+<th style="text-align: left;">full_task_exact</th>
+<th style="text-align: left;">train_pass_rate</th>
+<th style="text-align: right;">tasks_helped_vs_direct</th>
+<th style="text-align: right;">tasks_hurt_vs_direct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">recursive_gated_direct</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">82.7%</td>
+<td style="text-align: left;">64.0%</td>
+<td style="text-align: left;">44.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">probe_gated_direct</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">82.7%</td>
+<td style="text-align: left;">64.0%</td>
+<td style="text-align: left;">40.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">random_probe_gated_direct</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">82.7%</td>
+<td style="text-align: left;">64.0%</td>
+<td style="text-align: left;">40.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">direct_batch</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">76.0%</td>
+<td style="text-align: left;">60.0%</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">direct_row</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">80.7%</td>
+<td style="text-align: left;">56.0%</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_probe_gated_direct</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">80.7%</td>
+<td style="text-align: left;">56.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">recursive_program</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">44.7%</td>
+<td style="text-align: left;">40.0%</td>
+<td style="text-align: left;">52.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">probe_program</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">44.7%</td>
+<td style="text-align: left;">40.0%</td>
+<td style="text-align: left;">52.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">recursive_oracle</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">44.7%</td>
+<td style="text-align: left;">40.0%</td>
+<td style="text-align: left;">52.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">monolithic_program</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">40.7%</td>
+<td style="text-align: left;">36.0%</td>
+<td style="text-align: left;">48.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr>
+<td style="text-align: left;">recursive_shuffled</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">6.0%</td>
+<td style="text-align: left;">4.0%</td>
+<td style="text-align: left;">20.0%</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">14</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>Direct row-by-row answering solves <code>56.0%</code> of tasks under strict full-task exactness. The selected executable program without probe selection solves <code>40.0%</code>. The non-probe gated method solves <code>64.0%</code>. The disagreement-probe gated method solves <code>64.0%</code>. Random-probe gated selection solves <code>64.0%</code>, and shuffled-label probe selection solves <code>56.0%</code>.</p>
+<p>The disagreement-probe gated method helps <code>2</code> tasks and hurts <code>0</code> tasks relative to direct row-by-row answering. The hidden diagnostic oracle over train-passing generated programs solves <code>40.0%</code>, and at least one candidate passes visible examples on <code>52.0%</code> of tasks.</p>
+<p>The shuffled-label control checks whether probe labels matter. The random-probe control checks whether disagreement ranking matters. A useful result should beat direct answering, the non-probe gate, and both probe controls.</p>
+<h2>Verdict</h2>
+<p>Disagreement probes did not add measurable selection power in this run. The probe-gated method tied the non-probe gate at <code>64.0%</code> and tied the random-probe gate at <code>64.0%</code>. Probe-gated and non-probe gated decisions differed on <code>0</code> of <code>25</code> tasks, while probe-gated and random-probe gated outcomes matched on <code>25</code> of <code>25</code> tasks.</p>
+<p>The deployable gain came from the conservative direct-fallback gate: it used generated programs on <code>11</code> tasks and improved full-task exactness from <code>56.0%</code> to <code>64.0%</code> without hurting any direct-answer successes. The disagreement-probe gate used generated programs on <code>10</code> tasks, and the random-probe gate used generated programs on <code>10</code> tasks, but neither improved on that simpler gate.</p>
+<h2>Program Diagnostics</h2>
+<p>The raw executable-program arm is not deployable by itself: train-passing programs can be too narrow, often literal branches or partial parsers. The gated arms use a generated program only when the selected train-passing candidate does not look like a literal example table and its probe agreement clears the configured threshold; otherwise they fall back to direct row-by-row answering.</p>
+<p>The probe score distribution is reported separately because a method that only wins by falling back everywhere is not a useful program selector.</p>
+<h2>Charts</h2>
+<p><img alt="Method full-task exact" src="../analysis/figures/method_full_task_exact.png" /></p>
+<p><img alt="Row scatter" src="../analysis/figures/row_scatter_direct_vs_recursive.png" /></p>
+<p><img alt="Wins and losses" src="../analysis/figures/wins_losses_vs_direct.png" /></p>
+<p><img alt="Family breakdown" src="../analysis/figures/family_breakdown.png" /></p>
+<p><img alt="Train-passing candidates" src="../analysis/figures/train_passing_candidates.png" /></p>
+<p><img alt="Probe agreement scores" src="../analysis/figures/probe_agreement_scores.png" /></p>
+<h2>Task Details</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">task_id</th>
+<th style="text-align: left;">family</th>
+<th style="text-align: right;">heldout_rows</th>
+<th style="text-align: left;">direct_full_exact</th>
+<th style="text-align: left;">recursive_full_exact</th>
+<th style="text-align: left;">recursive_gated_full_exact</th>
+<th style="text-align: left;">probe_gated_full_exact</th>
+<th style="text-align: left;">random_probe_gated_full_exact</th>
+<th style="text-align: left;">shuffled_probe_gated_full_exact</th>
+<th style="text-align: left;">recursive_oracle_full_exact</th>
+<th style="text-align: right;">recursive_train_pass_count</th>
+<th style="text-align: left;">probe_gated_used_program</th>
+<th style="text-align: right;">probe_gated_score</th>
+<th style="text-align: left;">probe_gated_helped_vs_direct</th>
+<th style="text-align: left;">probe_gated_hurt_vs_direct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Number.000044</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number.000093</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">BillingCode.000002</td>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">City.000011</td>
+<td style="text-align: left;">City</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Currency.000004</td>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime.000012</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime.000035</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime.000077</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime.000083</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime.000088</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime.000094</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime.000098</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Email.000013</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">FilePath.000001</td>
+<td style="text-align: left;">FilePath</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Name.000013</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Name.000026</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Name.000028</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number.000048</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number.000074</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number.000075</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number.000081</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number.000088</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Phone.000005</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Phone.000017</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rating.000001</td>
+<td style="text-align: left;">Rating</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">False</td>
+</tr>
+</tbody>
+</table>
+<h2>Family Summary</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">family</th>
+<th style="text-align: right;">direct_row</th>
+<th style="text-align: right;">monolithic_program</th>
+<th style="text-align: right;">probe_gated_direct</th>
+<th style="text-align: right;">recursive_gated_direct</th>
+<th style="text-align: right;">recursive_oracle</th>
+<th style="text-align: right;">recursive_program</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">City</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">0.286</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.286</td>
+<td style="text-align: right;">0.286</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Email</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">FilePath</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.667</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.667</td>
+<td style="text-align: right;">0.667</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">0.286</td>
+<td style="text-align: right;">0.429</td>
+<td style="text-align: right;">0.571</td>
+<td style="text-align: right;">0.571</td>
+<td style="text-align: right;">0.429</td>
+<td style="text-align: right;">0.429</td>
+</tr>
+<tr>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rating</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<h2>Limitations</h2>
+<p>Generated code is sandboxed by a conservative AST pass, so some potentially valid programs may be rejected. The benchmark tasks are public text transformations and do not cover arbitrary software engineering problems. Full-task exact is intentionally strict and can be much lower than row accuracy.</p>
+<h2>Artifacts</h2>
+<ul>
+<li>Run directory: <code>/workspace/experiments/qwen_disagreement_probe_program_induction/runs/main_v1</code></li>
+<li>Summary: <code>analysis/summary.csv</code></li>
+<li>Task details: <code>analysis/task_summary.csv</code></li>
+<li>Candidate programs: <code>analysis/candidates.csv</code></li>
+<li>Probe labels: <code>analysis/probe_labels.csv</code></li>
+<li>Figures: <code>analysis/figures/</code></li>
+</ul>
+</body>
+</html>

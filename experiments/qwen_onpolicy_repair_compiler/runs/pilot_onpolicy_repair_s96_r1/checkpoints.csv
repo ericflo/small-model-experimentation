@@ -1,0 +1,2 @@
+run,round,adapter_path,heads_path
+pilot_onpolicy_repair_s96_r1,1,large_artifacts/qwen_onpolicy_repair_compiler/checkpoints/pilot_onpolicy_repair_s96_r1/round01/adapter,large_artifacts/qwen_onpolicy_repair_compiler/checkpoints/pilot_onpolicy_repair_s96_r1/round01/heads.pt

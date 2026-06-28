@@ -1,0 +1,5 @@
+phase,epoch,loss,train_examples,quick_val_direct_accuracy,quick_val_search_accuracy,action_accuracy,stop_accuracy,train_states,stop_labels,quick_val_accuracy,quick_val_mean_steps
+seed_compiler,1,7.910670280456543,16,0.0,0.0,,,,,,
+teacher_policy,1,8.51915526644615,,,,0.07829181494661921,0.6875,281,32,0.0,0.0
+dagger_policy,1,5.199048252992852,,,,0.19476744186046513,1.0,344,64,0.0,2.0625
+full_supervised_compiler,1,6.873979568481445,48,0.0,0.0,,,,,,

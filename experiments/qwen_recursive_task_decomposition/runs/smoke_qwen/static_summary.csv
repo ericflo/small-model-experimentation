@@ -1,0 +1,6 @@
+method,tasks,full_exact,row_exact
+static_mono_examples,20,0.3,0.35
+static_mono_oracle,20,0.5,
+static_recursive_examples,20,0.3,0.35
+static_recursive_oracle,20,0.5,
+static_recursive_shuffled,20,0.0,0.0

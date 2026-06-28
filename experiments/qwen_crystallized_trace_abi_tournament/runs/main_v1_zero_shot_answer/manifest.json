@@ -1,0 +1,31 @@
+{
+  "run": "main_v1_zero_shot_answer",
+  "suite": "main",
+  "config": {
+    "run_name": "main_v1",
+    "suite": "main",
+    "model_name": "Qwen/Qwen3-4B",
+    "seeds": [
+      101,
+      202
+    ],
+    "arms": [
+      "answer",
+      "python",
+      "json",
+      "stack"
+    ],
+    "train_n": 192,
+    "eval_n": 24,
+    "train_steps": 48,
+    "batch_size": 2,
+    "grad_accum": 4,
+    "lr": 0.0002,
+    "max_length": 384,
+    "eval_batch_size": 4,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "max_new_tokens": 64
+  },
+  "trained": false
+}

@@ -1,0 +1,7 @@
+{
+  "experiment_id": "trace_keyed_symbol_repair",
+  "small_artifact_dir": "/workspace/experiments/trace_keyed_symbol_repair",
+  "large_artifact_dir": "/workspace/large_artifacts/trace_keyed_symbol_repair",
+  "date_utc": "2026-06-20",
+  "primary_question": "Can execution-conditioned repair learn to use trace-revealed symbols that are absent from repository context?"
+}

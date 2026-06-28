@@ -1,0 +1,11 @@
+method,split,support_mode,tasks,rows,row_exact,full_task_exact
+adapter,public_prose,none,30,90,0.1,0.03333333333333333
+adapter,public_prose,normal,30,90,0.7333333333333333,0.5666666666666667
+adapter,public_prose,shuffled,30,90,0.3333333333333333,0.16666666666666666
+base,public_prose,normal,30,90,0.4444444444444444,0.23333333333333334
+base,public_prose,shuffled,30,90,0.12222222222222222,0.06666666666666667
+adapter,synthetic_counterfactual,none,60,120,0.03333333333333333,0.016666666666666666
+adapter,synthetic_counterfactual,normal,60,120,0.95,0.9166666666666666
+adapter,synthetic_counterfactual,shuffled,60,120,0.43333333333333335,0.31666666666666665
+base,synthetic_counterfactual,normal,60,120,0.4166666666666667,0.25
+base,synthetic_counterfactual,shuffled,60,120,0.13333333333333333,0.08333333333333333

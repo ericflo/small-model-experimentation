@@ -1,0 +1,16 @@
+{
+  "elapsed_sec": 540.2210626602173,
+  "train_rows": 11,
+  "trained_metric_rows": 77,
+  "splits": {
+    "train": 384,
+    "val": 96,
+    "eval_len4": 48,
+    "eval_len8": 48,
+    "eval_len16": 48,
+    "eval_len24": 48,
+    "eval_len32": 48,
+    "eval_comp16": 48,
+    "eval_comp24": 48
+  }
+}

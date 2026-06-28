@@ -1,0 +1,36 @@
+{
+  "arm_name": "smoke_hot",
+  "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+  "extra_per_zero_task": 4,
+  "max_new_tokens": 180,
+  "path": "data/smoke_hot_extra_records.jsonl",
+  "records": {
+    "candidate_count_mean": 4.375,
+    "coverage": 0.75,
+    "distinct_behavior_rate_mean": 0.6614583333333334,
+    "distinct_functional_rate_mean": 0.3489583333333333,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.125,
+    "parse_success_mean": 4.375,
+    "records": 8,
+    "visible_candidates_mean": 2.75,
+    "visible_coverage": 0.75,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 2,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "records_in": "data/smoke_base_k4_records.jsonl",
+  "round_name": "smoke_hot_extra",
+  "seed": 20260625,
+  "temperatures": "0.8,1.0",
+  "token_usage": {
+    "calls": 8,
+    "completion_tokens": 1112,
+    "forward_tokens": 2004,
+    "prompt_tokens": 892
+  },
+  "top_p": 0.98,
+  "zero_base_records": 2
+}

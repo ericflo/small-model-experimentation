@@ -1,0 +1,55 @@
+task_id,family,features,method,row_exact,full_task_exact,parse_ok,parse_status,output_count,outputs_json,targets_json,raw
+City.000010,City,"Conditional,Numeric",direct_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",direct_batch,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]"
+City.000010,City,"Conditional,Numeric",skill_rag,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]"
+City.000010,City,"Conditional,Numeric",random_skill_rag,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]"
+City.000010,City,"Conditional,Numeric",corrupt_skill_rag,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]"
+DateTime.000025,DateTime,DateTime,direct_row,1.0,True,True,row_clean,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","Mar 41
+---
+Aug 60
+---
+May 84"
+DateTime.000025,DateTime,DateTime,direct_batch,1.0,True,True,ok,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]"
+DateTime.000025,DateTime,DateTime,skill_rag,1.0,True,True,ok,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]"
+DateTime.000025,DateTime,DateTime,random_skill_rag,1.0,True,True,ok,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]"
+DateTime.000025,DateTime,DateTime,corrupt_skill_rag,1.0,True,True,ok,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]"
+DateTime.000104,DateTime,DateTime,direct_row,1.0,True,True,row_clean,3,"[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]","Jan
+---
+Aug
+---
+Dec"
+DateTime.000104,DateTime,DateTime,direct_batch,1.0,True,True,ok,3,"[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]"
+DateTime.000104,DateTime,DateTime,skill_rag,1.0,True,True,ok,3,"[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]"
+DateTime.000104,DateTime,DateTime,random_skill_rag,1.0,True,True,ok,3,"[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]"
+DateTime.000104,DateTime,DateTime,corrupt_skill_rag,1.0,True,True,ok,3,"[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]","[""Jan"", ""Aug"", ""Dec""]"
+Number.000075,Number,"Concatenation,Numeric",direct_row,0.3333333333333333,False,True,row_clean,3,"[""$1.9B"", ""$2.3B"", ""$2.9B""]","[""$1.9B"", ""$23.2B"", ""$30.0B""]","$1.9B
+---
+$2.3B
+---
+$2.9B"
+Number.000075,Number,"Concatenation,Numeric",direct_batch,0.3333333333333333,False,True,ok,3,"[""$1.9B"", ""$2.3B"", ""$3.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B""]","[""$1.9B"", ""$2.3B"", ""$3.0B""]"
+Number.000075,Number,"Concatenation,Numeric",skill_rag,0.6666666666666666,False,True,ok,3,"[""$1.9B"", ""$23.2B"", ""$3.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B""]","[""$1.9B"", ""$23.2B"", ""$3.0B""]"
+Number.000075,Number,"Concatenation,Numeric",random_skill_rag,0.6666666666666666,False,True,ok,3,"[""$1.9B"", ""$23.2B"", ""$3.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B""]","[""$1.9B"", ""$23.2B"", ""$3.0B""]"
+Number.000075,Number,"Concatenation,Numeric",corrupt_skill_rag,0.6666666666666666,False,True,ok,3,"[""$1.9B"", ""$23.2B"", ""$3.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B""]","[""$1.9B"", ""$23.2B"", ""$3.0B""]"
+Number.000077,Number,"Numeric,NumericRounding",direct_row,0.3333333333333333,False,True,row_clean,3,"[""110"", ""11000"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+11000
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",direct_batch,0.6666666666666666,False,True,ok,3,"[""11110"", ""11110"", ""546""]","[""11110"", ""11110"", ""540""]","[""11110"", ""11110"", ""546""]"
+Number.000077,Number,"Numeric,NumericRounding",skill_rag,0.6666666666666666,False,True,ok,3,"[""11110"", ""11120"", ""540""]","[""11110"", ""11110"", ""540""]","[""11110"", ""11120"", ""540""]"
+Number.000077,Number,"Numeric,NumericRounding",random_skill_rag,0.3333333333333333,False,True,ok,3,"[""110"", ""110"", ""540""]","[""11110"", ""11110"", ""540""]","[""110"", ""110"", ""540""]"
+Number.000077,Number,"Numeric,NumericRounding",corrupt_skill_rag,0.3333333333333333,False,True,ok,3,"[""120"", ""11110"", ""548""]","[""11110"", ""11110"", ""540""]","[""120"", ""11110"", ""548""]"
+UserAgent.000003,UserAgent,Substring,direct_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,direct_batch,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,UserAgent,Substring,skill_rag,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,UserAgent,Substring,random_skill_rag,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,UserAgent,Substring,corrupt_skill_rag,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"

@@ -1,0 +1,6 @@
+method,tasks,row_exact,full_task_exact,parse_ok,avg_outputs
+direct_row,40,0.7083333333333333,0.5,1.0,5.1
+skill_rag,40,0.6520833333333333,0.475,1.0,5.1
+corrupt_skill_rag,40,0.63125,0.45,1.0,5.1
+direct_batch,40,0.6520833333333333,0.425,0.95,5.1
+random_skill_rag,40,0.6708333333333333,0.425,1.0,5.1

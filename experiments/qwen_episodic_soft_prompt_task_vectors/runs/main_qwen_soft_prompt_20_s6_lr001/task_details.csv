@@ -1,0 +1,569 @@
+task_id,family,features,method,row_exact,full_task_exact,parse_ok,parse_status,output_count,outputs_json,targets_json,raw
+BillingCode.000007,BillingCode,Concatenation,direct_row,0.3333333333333333,False,True,row_clean,3,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]","[""11529]"", ""PT-11529]"", ""[CPT-11529]""]","[11529]
+---
+[PT-11529]
+---
+[CPT-11529]"
+BillingCode.000007,BillingCode,Concatenation,direct_batch,0.0,False,True,ok,3,"[""11529"", ""PT-11529"", ""[CPT-11529""]","[""11529]"", ""PT-11529]"", ""[CPT-11529]""]","[""11529"",""PT-11529"",""[CPT-11529""]"
+BillingCode.000007,BillingCode,Concatenation,init_soft_row,0.3333333333333333,False,True,row_clean,3,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]","[""11529]"", ""PT-11529]"", ""[CPT-11529]""]","[11529]
+---
+[PT-11529]
+---
+[CPT-11529]"
+BillingCode.000007,BillingCode,Concatenation,learned_soft_row,0.3333333333333333,False,True,row_clean,3,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]","[""11529]"", ""PT-11529]"", ""[CPT-11529]""]","[11529]
+---
+[PT-11529]
+---
+[CPT-11529]"
+BillingCode.000007,BillingCode,Concatenation,shuffled_soft_row,0.3333333333333333,False,True,row_clean,3,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]","[""11529]"", ""PT-11529]"", ""[CPT-11529]""]","[11529]
+---
+[PT-11529]
+---
+[CPT-11529]"
+BillingCode.000007,BillingCode,Concatenation,learned_soft_batch,0.0,False,True,ok,3,"[""11529"", ""PT-11529"", ""[CPT-11529""]","[""11529]"", ""PT-11529]"", ""[CPT-11529]""]","[""11529"",""PT-11529"",""[CPT-11529""]"
+City.000010,City,"Conditional,Numeric",direct_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",direct_batch,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]"
+City.000010,City,"Conditional,Numeric",init_soft_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",learned_soft_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",shuffled_soft_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",learned_soft_batch,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"",""20"",""0""]"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",direct_row,1.0,True,True,row_clean,4,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","04:29:27 1858-12-08
+---
+09:08:38 2220-06-30
+---
+21:46:13 1880-10-31
+---
+17:14:57 1963-05-31"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",direct_batch,1.0,True,True,ok,4,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",init_soft_row,1.0,True,True,row_clean,4,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","04:29:27 1858-12-08
+---
+09:08:38 2220-06-30
+---
+21:46:13 1880-10-31
+---
+17:14:57 1963-05-31"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",learned_soft_row,1.0,True,True,row_clean,4,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","04:29:27 1858-12-08
+---
+09:08:38 2220-06-30
+---
+21:46:13 1880-10-31
+---
+17:14:57 1963-05-31"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",shuffled_soft_row,1.0,True,True,row_clean,4,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","04:29:27 1858-12-08
+---
+09:08:38 2220-06-30
+---
+21:46:13 1880-10-31
+---
+17:14:57 1963-05-31"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",learned_soft_batch,1.0,True,True,ok,4,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]","[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31""]"
+DateTime.000025,DateTime,DateTime,direct_row,1.0,True,True,row_clean,4,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","Mar 41
+---
+Aug 60
+---
+May 84
+---
+Aug 40"
+DateTime.000025,DateTime,DateTime,direct_batch,0.75,False,True,ok,4,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 70""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 70""]"
+DateTime.000025,DateTime,DateTime,init_soft_row,1.0,True,True,row_clean,4,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","Mar 41
+---
+Aug 60
+---
+May 84
+---
+Aug 40"
+DateTime.000025,DateTime,DateTime,learned_soft_row,1.0,True,True,row_clean,4,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","Mar 41
+---
+Aug 60
+---
+May 84
+---
+Aug 40"
+DateTime.000025,DateTime,DateTime,shuffled_soft_row,1.0,True,True,row_clean,4,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","Mar 41
+---
+Aug 60
+---
+May 84
+---
+Aug 40"
+DateTime.000025,DateTime,DateTime,learned_soft_batch,1.0,True,True,ok,4,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]","[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]"
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row,0.5,False,True,row_clean,4,"[""10:00-29:00"", ""50:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","[""0:00-19:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","10:00-29:00
+---
+50:00-59:00
+---
+20:00-39:00
+---
+20:00-39:00"
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_batch,0.75,False,True,ok,4,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","[""0:00-19:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]"
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",init_soft_row,0.75,False,True,row_clean,4,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","[""0:00-19:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","10:00-29:00
+---
+40:00-59:00
+---
+20:00-39:00
+---
+20:00-39:00"
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_row,0.75,False,True,row_clean,4,"[""0:00-19:00"", ""50:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","[""0:00-19:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","0:00-19:00
+---
+50:00-59:00
+---
+20:00-39:00
+---
+20:00-39:00"
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_soft_row,0.5,False,True,row_clean,4,"[""20:00-39:00"", ""50:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","[""0:00-19:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","20:00-39:00
+---
+50:00-59:00
+---
+20:00-39:00
+---
+20:00-39:00"
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_batch,0.5,False,True,ok,4,"[""15:00"", ""40:00-59:00"", ""20:00-29:00"", ""20:00-39:00""]","[""0:00-19:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00""]","[""15:00"", ""40:00-59:00"", ""20:00-29:00"", ""20:00-39:00""]"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row,0.5,False,True,row_clean,4,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","[""4:15PM-4:45PM"", ""11:45PM-12:15AM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","4:15PM-4:30PM
+---
+11:15PM-11:45PM
+---
+10:15PM-10:45PM
+---
+4:15AM-4:45AM"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_batch,0.0,False,True,ok,4,"[""4:15PM-4:30PM"", ""11:45PM-12:00AM"", ""10:15PM-10:30PM"", ""4:20AM-4:30AM""]","[""4:15PM-4:45PM"", ""11:45PM-12:15AM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","[""4:15PM-4:30PM"", ""11:45PM-12:00AM"", ""10:15PM-10:30PM"", ""4:20AM-4:30AM""]"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",init_soft_row,0.5,False,True,row_clean,4,"[""4:00PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","[""4:15PM-4:45PM"", ""11:45PM-12:15AM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","4:00PM-4:30PM
+---
+11:15PM-11:45PM
+---
+10:15PM-10:45PM
+---
+4:15AM-4:45AM"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_row,0.5,False,True,row_clean,4,"[""4:00PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","[""4:15PM-4:45PM"", ""11:45PM-12:15AM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","4:00PM-4:30PM
+---
+11:15PM-11:45PM
+---
+10:15PM-10:45PM
+---
+4:15AM-4:45AM"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_soft_row,0.5,False,True,row_clean,4,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","[""4:15PM-4:45PM"", ""11:45PM-12:15AM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","4:15PM-4:30PM
+---
+11:15PM-11:45PM
+---
+10:15PM-10:45PM
+---
+4:15AM-4:45AM"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_batch,0.0,False,True,ok,4,"[""4:15PM-4:30PM"", ""11:45PM-12:00AM"", ""10:22:30PM-10:25:30PM"", ""4:28:30AM-4:30:30AM""]","[""4:15PM-4:45PM"", ""11:45PM-12:15AM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM""]","[""4:15PM-4:30PM"", ""11:45PM-12:00AM"", ""10:22:30PM-10:25:30PM"", ""4:28:30AM-4:30:30AM""]"
+DateTime.000094,DateTime,DateTime,direct_row,1.0,True,True,row_clean,4,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","2006-02-21
+---
+1997-12-19
+---
+2004-09-30
+---
+1967-05-18"
+DateTime.000094,DateTime,DateTime,direct_batch,1.0,True,True,ok,4,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,DateTime,DateTime,init_soft_row,1.0,True,True,row_clean,4,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","2006-02-21
+---
+1997-12-19
+---
+2004-09-30
+---
+1967-05-18"
+DateTime.000094,DateTime,DateTime,learned_soft_row,1.0,True,True,row_clean,4,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","2006-02-21
+---
+1997-12-19
+---
+2004-09-30
+---
+1967-05-18"
+DateTime.000094,DateTime,DateTime,shuffled_soft_row,1.0,True,True,row_clean,4,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","2006-02-21
+---
+1997-12-19
+---
+2004-09-30
+---
+1967-05-18"
+DateTime.000094,DateTime,DateTime,learned_soft_batch,1.0,True,True,ok,4,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]","[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000104,DateTime,DateTime,direct_row,1.0,True,True,row_clean,4,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"", ""Aug"", ""Dec"", ""Jul""]","Jan
+---
+Aug
+---
+Dec
+---
+Jul"
+DateTime.000104,DateTime,DateTime,direct_batch,1.0,True,True,ok,4,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"",""Aug"",""Dec"",""Jul""]"
+DateTime.000104,DateTime,DateTime,init_soft_row,1.0,True,True,row_clean,4,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"", ""Aug"", ""Dec"", ""Jul""]","Jan
+---
+Aug
+---
+Dec
+---
+Jul"
+DateTime.000104,DateTime,DateTime,learned_soft_row,1.0,True,True,row_clean,4,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"", ""Aug"", ""Dec"", ""Jul""]","Jan
+---
+Aug
+---
+Dec
+---
+Jul"
+DateTime.000104,DateTime,DateTime,shuffled_soft_row,1.0,True,True,row_clean,4,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"", ""Aug"", ""Dec"", ""Jul""]","Jan
+---
+Aug
+---
+Dec
+---
+Jul"
+DateTime.000104,DateTime,DateTime,learned_soft_batch,1.0,True,True,ok,4,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"", ""Aug"", ""Dec"", ""Jul""]","[""Jan"", ""Aug"", ""Dec"", ""Jul""]"
+DateTime.000108,DateTime,DateTime,direct_row,1.0,True,True,row_clean,4,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","1/21/1985
+---
+8/16/1985
+---
+12/20/2033
+---
+7/16/1984"
+DateTime.000108,DateTime,DateTime,direct_batch,1.0,True,True,ok,4,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]"
+DateTime.000108,DateTime,DateTime,init_soft_row,1.0,True,True,row_clean,4,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","1/21/1985
+---
+8/16/1985
+---
+12/20/2033
+---
+7/16/1984"
+DateTime.000108,DateTime,DateTime,learned_soft_row,1.0,True,True,row_clean,4,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","1/21/1985
+---
+8/16/1985
+---
+12/20/2033
+---
+7/16/1984"
+DateTime.000108,DateTime,DateTime,shuffled_soft_row,1.0,True,True,row_clean,4,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","1/21/1985
+---
+8/16/1985
+---
+12/20/2033
+---
+7/16/1984"
+DateTime.000108,DateTime,DateTime,learned_soft_batch,1.0,True,True,ok,4,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]","[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984""]"
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row,0.0,False,True,row_clean,4,"[""15-30"", ""25-40"", ""25-40"", ""25-40""]","[""30-45"", ""0-15"", ""30-45"", ""15-30""]","15-30
+---
+25-40
+---
+25-40
+---
+25-40"
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_batch,0.75,False,True,ok,4,"[""30-45"", ""30-45"", ""30-45"", ""15-30""]","[""30-45"", ""0-15"", ""30-45"", ""15-30""]","[""30-45"", ""30-45"", ""30-45"", ""15-30""]"
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",init_soft_row,0.25,False,True,row_clean,4,"[""15-30"", ""25-40"", ""30-45"", ""25-40""]","[""30-45"", ""0-15"", ""30-45"", ""15-30""]","15-30
+---
+25-40
+---
+30-45
+---
+25-40"
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_row,0.0,False,True,row_clean,4,"[""15-30"", ""15-30"", ""15-30"", ""25-45""]","[""30-45"", ""0-15"", ""30-45"", ""15-30""]","15-30
+---
+15-30
+---
+15-30
+---
+25-45"
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_soft_row,0.0,False,True,row_clean,4,"[""15-30"", ""25-45"", ""45-60"", ""45-60""]","[""30-45"", ""0-15"", ""30-45"", ""15-30""]","15-30
+---
+25-45
+---
+45-60
+---
+45-60"
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_batch,0.75,False,True,ok,4,"[""30-45"", ""30-45"", ""30-45"", ""15-30""]","[""30-45"", ""0-15"", ""30-45"", ""15-30""]","[""30-45"", ""30-45"", ""30-45"", ""15-30""]"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row,0.0,False,True,row_clean,4,"[""0-20"", ""0-20"", ""0-20"", ""0-20""]","[""40-60"", ""40-60"", ""20-40"", ""40-60""]","0-20
+---
+0-20
+---
+0-20
+---
+0-20"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_batch,0.0,False,True,ok,4,"[""0-20"", ""0-20"", ""0-20"", ""0-20""]","[""40-60"", ""40-60"", ""20-40"", ""40-60""]","[""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",init_soft_row,0.0,False,True,row_clean,4,"[""0-20"", ""0-20"", ""0-20"", ""0-20""]","[""40-60"", ""40-60"", ""20-40"", ""40-60""]","0-20
+---
+0-20
+---
+0-20
+---
+0-20"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_row,0.0,False,True,row_clean,4,"[""0-20"", ""0-20"", ""0-20"", ""0-20""]","[""40-60"", ""40-60"", ""20-40"", ""40-60""]","0-20
+---
+0-20
+---
+0-20
+---
+0-20"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_soft_row,0.0,False,True,row_clean,4,"[""0-20"", ""0-20"", ""0-20"", ""0-20""]","[""40-60"", ""40-60"", ""20-40"", ""40-60""]","0-20
+---
+0-20
+---
+0-20
+---
+0-20"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",learned_soft_batch,0.0,False,True,ok,4,"[""0-20"", ""0-20"", ""0-20"", ""0-20""]","[""40-60"", ""40-60"", ""20-40"", ""40-60""]","[""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+FilePath.000001,FilePath,"Conditional,Substring",direct_row,1.0,True,True,row_clean,4,"[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]","enim0
+---
+enim3
+---
+enim0
+---
+enim6"
+FilePath.000001,FilePath,"Conditional,Substring",direct_batch,1.0,True,True,ok,4,"[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]"
+FilePath.000001,FilePath,"Conditional,Substring",init_soft_row,1.0,True,True,row_clean,4,"[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]","enim0
+---
+enim3
+---
+enim0
+---
+enim6"
+FilePath.000001,FilePath,"Conditional,Substring",learned_soft_row,1.0,True,True,row_clean,4,"[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]","enim0
+---
+enim3
+---
+enim0
+---
+enim6"
+FilePath.000001,FilePath,"Conditional,Substring",shuffled_soft_row,1.0,True,True,row_clean,4,"[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]","enim0
+---
+enim3
+---
+enim0
+---
+enim6"
+FilePath.000001,FilePath,"Conditional,Substring",learned_soft_batch,1.0,True,True,ok,4,"[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]","[""enim0"", ""enim3"", ""enim0"", ""enim6""]"
+Language.000002,Language,"Multicolumn,Substring",direct_row,1.0,True,True,row_clean,4,"[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]","ca
+---
+zh
+---
+hk
+---
+hr"
+Language.000002,Language,"Multicolumn,Substring",direct_batch,1.0,True,True,ok,4,"[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]"
+Language.000002,Language,"Multicolumn,Substring",init_soft_row,1.0,True,True,row_clean,4,"[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]","ca
+---
+zh
+---
+hk
+---
+hr"
+Language.000002,Language,"Multicolumn,Substring",learned_soft_row,1.0,True,True,row_clean,4,"[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]","ca
+---
+zh
+---
+hk
+---
+hr"
+Language.000002,Language,"Multicolumn,Substring",shuffled_soft_row,1.0,True,True,row_clean,4,"[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]","ca
+---
+zh
+---
+hk
+---
+hr"
+Language.000002,Language,"Multicolumn,Substring",learned_soft_batch,1.0,True,True,ok,4,"[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]","[""ca"", ""zh"", ""hk"", ""hr""]"
+Number.000016,Number,"Numeric,NumericRounding",direct_row,0.5,False,True,row_clean,4,"[""602"", ""815"", ""817"", ""335""]","[""605"", ""815"", ""820"", ""335""]","602
+---
+815
+---
+817
+---
+335"
+Number.000016,Number,"Numeric,NumericRounding",direct_batch,0.0,False,False,parse_fail,4,"["""", """", """", """"]","[""605"", ""815"", ""820"", ""335""]","{""0"": ""602"", ""1"": ""815"", ""2"": ""817"", ""3"": ""334""}"
+Number.000016,Number,"Numeric,NumericRounding",init_soft_row,0.5,False,True,row_clean,4,"[""602"", ""815"", ""817"", ""335""]","[""605"", ""815"", ""820"", ""335""]","602
+---
+815
+---
+817
+---
+335"
+Number.000016,Number,"Numeric,NumericRounding",learned_soft_row,0.75,False,True,row_clean,4,"[""600"", ""815"", ""820"", ""335""]","[""605"", ""815"", ""820"", ""335""]","600
+---
+815
+---
+820
+---
+335"
+Number.000016,Number,"Numeric,NumericRounding",shuffled_soft_row,0.0,False,True,row_clean,4,"[""700"", ""915"", ""1200"", ""1200""]","[""605"", ""815"", ""820"", ""335""]","700
+---
+915
+---
+1200
+---
+1200"
+Number.000016,Number,"Numeric,NumericRounding",learned_soft_batch,0.5,False,True,ok,4,"[""602"", ""815"", ""817"", ""335""]","[""605"", ""815"", ""820"", ""335""]","[""602"", ""815"", ""817"", ""335""]"
+Number.000022,Number,"Numeric,NumericRounding",direct_row,1.0,True,True,row_clean,4,"[""12.1"", ""20.35"", ""18.1"", ""13.75""]","[""12.1"", ""20.35"", ""18.1"", ""13.75""]","12.1
+---
+20.35
+---
+18.1
+---
+13.75"
+Number.000022,Number,"Numeric,NumericRounding",direct_batch,0.5,False,True,ok,4,"[""12.1"", ""20.3"", ""18.1"", ""13.8""]","[""12.1"", ""20.35"", ""18.1"", ""13.75""]","[""12.1"", ""20.3"", ""18.1"", ""13.8""]"
+Number.000022,Number,"Numeric,NumericRounding",init_soft_row,1.0,True,True,row_clean,4,"[""12.1"", ""20.35"", ""18.1"", ""13.75""]","[""12.1"", ""20.35"", ""18.1"", ""13.75""]","12.1
+---
+20.35
+---
+18.1
+---
+13.75"
+Number.000022,Number,"Numeric,NumericRounding",learned_soft_row,1.0,True,True,row_clean,4,"[""12.1"", ""20.35"", ""18.1"", ""13.75""]","[""12.1"", ""20.35"", ""18.1"", ""13.75""]","12.1
+---
+20.35
+---
+18.1
+---
+13.75"
+Number.000022,Number,"Numeric,NumericRounding",shuffled_soft_row,1.0,True,True,row_clean,4,"[""12.1"", ""20.35"", ""18.1"", ""13.75""]","[""12.1"", ""20.35"", ""18.1"", ""13.75""]","12.1
+---
+20.35
+---
+18.1
+---
+13.75"
+Number.000022,Number,"Numeric,NumericRounding",learned_soft_batch,0.5,False,True,ok,4,"[""12.1"", ""20.3"", ""18.1"", ""13.8""]","[""12.1"", ""20.35"", ""18.1"", ""13.75""]","[""12.1"", ""20.3"", ""18.1"", ""13.8""]"
+Number.000049,Number,"Numeric,NumericRounding",direct_row,0.5,False,True,row_clean,4,"[""8300"", ""6000"", ""10000"", ""500""]","[""8300"", ""6300"", ""9800"", ""500""]","8300
+---
+6000
+---
+10000
+---
+500"
+Number.000049,Number,"Numeric,NumericRounding",direct_batch,0.0,False,False,parse_fail,4,"["""", """", """", """"]","[""8300"", ""6300"", ""9800"", ""500""]","{""0"": ""8300"", ""1"": ""6200"", ""2"": ""9800"", ""3"": ""4500""}"
+Number.000049,Number,"Numeric,NumericRounding",init_soft_row,0.25,False,True,row_clean,4,"[""8000"", ""6000"", ""1000"", ""500""]","[""8300"", ""6300"", ""9800"", ""500""]","8000
+---
+6000
+---
+1000
+---
+500"
+Number.000049,Number,"Numeric,NumericRounding",learned_soft_row,0.25,False,True,row_clean,4,"[""8000"", ""6000"", ""10000"", ""500""]","[""8300"", ""6300"", ""9800"", ""500""]","8000
+---
+6000
+---
+10000
+---
+500"
+Number.000049,Number,"Numeric,NumericRounding",shuffled_soft_row,0.25,False,True,row_clean,4,"[""9000"", ""7000"", ""1000"", ""500""]","[""8300"", ""6300"", ""9800"", ""500""]","9000
+---
+7000
+---
+1000
+---
+500"
+Number.000049,Number,"Numeric,NumericRounding",learned_soft_batch,1.0,True,True,ok,4,"[""8300"", ""6300"", ""9800"", ""500""]","[""8300"", ""6300"", ""9800"", ""500""]","[""8300"", ""6300"", ""9800"", ""500""]"
+Number.000075,Number,"Concatenation,Numeric",direct_row,0.5,False,True,row_clean,4,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B""]","$1.9B
+---
+$2.3B
+---
+$2.9B
+---
+$0.0B"
+Number.000075,Number,"Concatenation,Numeric",direct_batch,0.5,False,True,ok,4,"[""$1.9B"", ""$2.3B"", ""$3.0B"", ""$0.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B""]","[""$1.9B"", ""$2.3B"", ""$3.0B"", ""$0.0B""]"
+Number.000075,Number,"Concatenation,Numeric",init_soft_row,0.5,False,True,row_clean,4,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B""]","$1.9B
+---
+$2.3B
+---
+$2.9B
+---
+$0.0B"
+Number.000075,Number,"Concatenation,Numeric",learned_soft_row,0.5,False,True,row_clean,4,"[""$1.9B"", ""$2.3B"", ""$0.3B"", ""$0.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B""]","$1.9B
+---
+$2.3B
+---
+$0.3B
+---
+$0.0B"
+Number.000075,Number,"Concatenation,Numeric",shuffled_soft_row,0.5,False,True,row_clean,4,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B""]","$1.9B
+---
+$2.3B
+---
+$2.9B
+---
+$0.0B"
+Number.000075,Number,"Concatenation,Numeric",learned_soft_batch,0.5,False,True,ok,4,"[""$1.9B"", ""$2.3B"", ""$3.0B"", ""$0.0B""]","[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B""]","[""$1.9B"", ""$2.3B"", ""$3.0B"", ""$0.0B""]"
+Number.000077,Number,"Numeric,NumericRounding",direct_row,0.3333333333333333,False,True,row_clean,3,"[""110"", ""11000"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+11000
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",direct_batch,0.6666666666666666,False,True,ok,3,"[""11110"", ""11110"", ""546""]","[""11110"", ""11110"", ""540""]","[""11110"", ""11110"", ""546""]"
+Number.000077,Number,"Numeric,NumericRounding",init_soft_row,0.3333333333333333,False,True,row_clean,3,"[""110"", ""110"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+110
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",learned_soft_row,0.6666666666666666,False,True,row_clean,3,"[""110"", ""11110"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+11110
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",shuffled_soft_row,0.6666666666666666,False,True,row_clean,3,"[""110"", ""11110"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+11110
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",learned_soft_batch,0.3333333333333333,False,True,ok,3,"[""110"", ""110"", ""540""]","[""11110"", ""11110"", ""540""]","[""110"", ""110"", ""540""]"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",direct_row,0.3333333333333333,False,True,row_clean,3,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]","[""GU2 89"", ""VDB 042"", ""1KN 1261""]","GU2 4205
+---
+VDB 9545
+---
+1KN 1261"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",direct_batch,0.3333333333333333,False,True,ok,3,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]","[""GU2 89"", ""VDB 042"", ""1KN 1261""]","[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",init_soft_row,0.3333333333333333,False,True,row_clean,3,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]","[""GU2 89"", ""VDB 042"", ""1KN 1261""]","GU2 4205
+---
+VDB 9545
+---
+1KN 1261"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",learned_soft_row,0.3333333333333333,False,True,row_clean,3,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]","[""GU2 89"", ""VDB 042"", ""1KN 1261""]","GU2 4205
+---
+VDB 9545
+---
+1KN 1261"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",shuffled_soft_row,0.0,False,True,row_clean,3,"[""GU2 4205"", ""VDB 9545"", ""3G8 1261""]","[""GU2 89"", ""VDB 042"", ""1KN 1261""]","GU2 4205
+---
+VDB 9545
+---
+3G8 1261"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",learned_soft_batch,0.3333333333333333,False,True,ok,3,"[""GU2 89"", ""VDB 06"", ""1KN 94""]","[""GU2 89"", ""VDB 042"", ""1KN 1261""]","[""GU2 89"", ""VDB 06"", ""1KN 94""]"
+UserAgent.000003,UserAgent,Substring,direct_row,1.0,True,True,row_clean,4,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","FZ467
+---
+RM VVUT
+---
+QS QYFY
+---
+RO FQAJ"
+UserAgent.000003,UserAgent,Substring,direct_batch,1.0,True,True,ok,4,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]"
+UserAgent.000003,UserAgent,Substring,init_soft_row,1.0,True,True,row_clean,4,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","FZ467
+---
+RM VVUT
+---
+QS QYFY
+---
+RO FQAJ"
+UserAgent.000003,UserAgent,Substring,learned_soft_row,1.0,True,True,row_clean,4,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","FZ467
+---
+RM VVUT
+---
+QS QYFY
+---
+RO FQAJ"
+UserAgent.000003,UserAgent,Substring,shuffled_soft_row,0.75,False,True,row_clean,4,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""JI YNSD""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","FZ467
+---
+RM VVUT
+---
+QS QYFY
+---
+JI YNSD"
+UserAgent.000003,UserAgent,Substring,learned_soft_batch,1.0,True,True,ok,4,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]","[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]"

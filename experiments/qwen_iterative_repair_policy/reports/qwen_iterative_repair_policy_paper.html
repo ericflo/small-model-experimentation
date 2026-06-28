@@ -1,0 +1,103 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Iterative Candidate Repair Policy</title><style>
+body { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 40px auto; max-width: 980px; line-height: 1.55; color: #1f2933; }
+h1, h2 { color: #101828; }
+table { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 14px; }
+th, td { border: 1px solid #d0d5dd; padding: 8px 10px; text-align: left; }
+th { background: #f2f4f7; }
+img { max-width: 100%; margin: 12px 0 28px; border: 1px solid #e4e7ec; }
+code { background: #f2f4f7; padding: 1px 4px; border-radius: 4px; }
+</style></head><body>
+<h1>Qwen Iterative Candidate Repair Policy</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a frozen Qwen-attached hidden-program compiler
+can be improved at inference time by a learned iterative repair loop. The
+compiler emits an executable modular-arithmetic program. A small verifier scores
+local candidate repairs from execution-trace features. At inference, the repair
+loop starts from the base compiled program and may move one slot edit at a time
+for <code>K</code> iterations.</p>
+<p>The primary run trained on 384 length-24 programs and selected checkpoints on
+a paired standard/paraphrase validation split. On fresh paired length-24
+prompts, base accuracy was 30.1%,
+unconstrained learned scorer accuracy was 52.0%,
+and iterative repair reached 52.7% at
+<code>K=2</code>. The local oracle ceiling was 89.1%.</p>
+<h2>Setup</h2>
+<ul>
+<li>Substrate: frozen Qwen 4B hidden-program compiler localized in this experiment's artifact directory.</li>
+<li>Program domain: length-24 modular arithmetic over modulus 97.</li>
+<li>Candidate set: top-3 local alternatives with up to two edits around the base compiled program.</li>
+<li>Iterative rule: move only to a candidate within one slot edit of the current candidate if its learned score is higher.</li>
+<li>Primary run: <code>main_iterative_candidate_scorer_s384</code>; verifier epochs: 12; selected epoch: 9.</li>
+</ul>
+<h2>Main Results</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Split</th>
+      <th>Base</th>
+      <th>Learned</th>
+      <th>Best K</th>
+      <th>Iterative</th>
+      <th>Oracle</th>
+      <th>Delta</th>
+      <th>Gap</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fresh standard L24</td>
+      <td>29.7%</td>
+      <td>45.3%</td>
+      <td>2</td>
+      <td>44.8%</td>
+      <td>89.6%</td>
+      <td>+15.1 pp</td>
+      <td>25.2%</td>
+    </tr>
+    <tr>
+      <td>Fresh paraphrase L24</td>
+      <td>29.7%</td>
+      <td>50.5%</td>
+      <td>2</td>
+      <td>51.6%</td>
+      <td>88.0%</td>
+      <td>+21.9 pp</td>
+      <td>37.5%</td>
+    </tr>
+    <tr>
+      <td>Fresh paired L24</td>
+      <td>30.1%</td>
+      <td>52.0%</td>
+      <td>2</td>
+      <td>52.7%</td>
+      <td>89.1%</td>
+      <td>+22.7 pp</td>
+      <td>38.4%</td>
+    </tr>
+  </tbody>
+</table>
+<img src="../analysis/figures/fresh_accuracy_bars.png" alt="Fresh accuracy">
+<h2>K Sweep</h2>
+<p>Most of the gain appears by <code>K=1</code>, with a smaller second-step gain
+on validation, paraphrase, and paired splits. <code>K=3</code> adds no measurable
+benefit because the candidate set is capped at two edits.</p>
+<img src="../analysis/figures/accuracy_by_k_main.png" alt="Accuracy by K">
+<h2>Oracle Gap</h2>
+<p>At <code>K=2</code>, the iterative repair loop recovered
+38.4% of the fresh paired base-to-oracle
+gap.</p>
+<img src="../analysis/figures/oracle_gap_recovered.png" alt="Oracle gap">
+<h2>Training Dynamics</h2>
+<img src="../analysis/figures/verifier_training_curve.png" alt="Verifier training">
+<h2>Iteration Path</h2>
+<p>The direct raw-value repair policy was not robust. The candidate scorer was
+the first robust positive arm because it separated proposal quality from sparse
+transition control.</p>
+<img src="../analysis/figures/iteration_path_comparison.png" alt="Iteration comparison">
+<h2>Interpretation</h2>
+<p>The result supports the narrow claim that an iterative hidden-program repair
+loop can convert near-miss Qwen-compiled programs into exact programs without
+generating chain-of-thought text. It does not show a universal capability gain:
+the task is synthetic, the runtime is hand-designed, and the oracle ceiling
+still leaves substantial unrecovered headroom.</p>
+</body></html>

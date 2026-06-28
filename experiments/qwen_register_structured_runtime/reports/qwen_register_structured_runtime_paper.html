@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen Register-Token Structured Runtime</title>
+<style>
+:root { color-scheme: light; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #202124; background: #f7f8fa; }
+main { max-width: 920px; margin: 0 auto; padding: 48px 24px 72px; background: #fff; min-height: 100vh; box-sizing: border-box; }
+h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 24px; }
+h2 { font-size: 1.35rem; margin: 34px 0 12px; padding-top: 8px; border-top: 1px solid #e5e7eb; }
+h3 { font-size: 1.05rem; margin: 24px 0 10px; }
+p, li { line-height: 1.55; font-size: 0.98rem; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #f0f2f4; padding: 0.1rem 0.25rem; border-radius: 4px; }
+pre { overflow-x: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 6px; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 22px; font-size: 0.95rem; }
+th, td { border: 1px solid #d8dde3; padding: 8px 10px; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { background: #eef1f5; }
+</style>
+</head>
+<body>
+<main>
+<h1>Qwen Register-Token Structured Runtime</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a Qwen-attached model can write an executable
+program into fixed register tokens, then execute that program inside a fixed
+cyclic modulo runtime. Each prompt describes a modular-arithmetic chain. The
+prompt is followed by an appended register bank: one initial-value marker and
+one operation and argument marker per possible step. A trainable compiler reads
+only the hidden states at those marker positions. It predicts an initial
+residue, operation routes, and arguments. A deterministic runtime executes the
+predicted program modulo 97.</p>
+<p>The main result is mixed. With QLoRA, full executable-slot supervision, full
+intermediate-state supervision, and paired consistency between prompt renderings,
+the model reaches 100.0% exact execution through length 12 on standard, paired,
+and nearly all paraphrase splits. At length 24, it reaches 25.0% standard exact
+execution, 5.5% paraphrase exact execution, and 11.7% paired exact execution.
+A matched state-supervised control without paired consistency also solves length
+12, but remains near chance at length 24: 3.9% standard, 1.6% paraphrase, and
+1.6% paired.</p>
+<p>The conclusion is narrow: paired trajectory consistency helps the fixed register
+runtime start to generalize beyond the trained easy range, but it does not solve
+long-chain prompt-invariant execution.</p>
+<h2>Question</h2>
+<p>Can a Qwen-attached model configure a fixed structured runtime through invisible
+register tokens, rather than relying on answer-token prediction?</p>
+<p>The interface is intentionally strict. The compiler sees only the hidden states
+at <code>&lt;REG_INIT&gt;</code>, <code>&lt;REG_OP_XX&gt;</code>, and <code>&lt;REG_ARG_XX&gt;</code>. It does not receive
+hand-selected prompt spans. If the method works, the model has learned to route
+source-program information into fixed latent registers.</p>
+<h2>Task</h2>
+<p>Each example samples an initial value <code>x</code> modulo 97 and a chain of updates:</p>
+<pre><code class="language-text">+x by a
+-x by a
+*x by a
+</code></pre>
+<p>The target answer is the final value after all active updates. Evaluation uses
+lengths 4, 8, 12, and 24.</p>
+<table>
+<thead><tr><th>Split</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Standard</td><td>Canonical prompt wording</td></tr>
+<tr><td>Paraphrase</td><td>Alternative wording for the same operation semantics</td></tr>
+<tr><td>Paired</td><td>Two renderings of each sampled program</td></tr>
+</tbody>
+</table>
+<h2>Model</h2>
+<p>The base model is <code>Qwen/Qwen3-4B</code>, loaded in 4-bit NF4 with LoRA adapters.
+The register compiler is a one-layer transformer over the fixed register bank,
+with width 512, four attention heads, and a maximum of 24 active steps. The
+runtime applies fixed add, subtract, and multiply primitives modulo 97.</p>
+<h2>Training</h2>
+<table>
+<thead><tr><th>Loss</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>Slot trace loss</td><td>Supervise init, operation, and argument registers</td></tr>
+<tr><td>Final executor loss</td><td>Supervise the final runtime answer</td></tr>
+<tr><td>State trajectory loss</td><td>Supervise every intermediate modulo state</td></tr>
+<tr><td>Paired consistency loss</td><td>Align register and state distributions across two prompt renderings</td></tr>
+</tbody>
+</table>
+<p>The main curriculum uses 150 steps at lengths 1-4, 150 at 1-8, 150 at 1-12,
+and 150 at 8-24. The matched control removes paired consistency losses.</p>
+<h2>Results</h2>
+<h3>Main Run</h3>
+<table>
+<thead><tr><th>Split</th><th>Executor exact</th><th>Program exact</th><th>Init</th><th>Op</th><th>Arg</th><th>Prefix</th><th>Pair both</th><th>Pair state consistency</th></tr></thead>
+<tbody>
+<tr><td>Standard L4</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Standard L8</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Standard L12</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Standard L24</td><td>25.0%</td><td>25.0%</td><td>100.0%</td><td>93.8%</td><td>89.7%</td><td>80.5%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paraphrase L12</td><td>99.2%</td><td>99.2%</td><td>100.0%</td><td>99.9%</td><td>99.9%</td><td>99.7%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paraphrase L24</td><td>5.5%</td><td>4.7%</td><td>100.0%</td><td>88.9%</td><td>83.8%</td><td>81.0%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>Paired L12</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Paired L24</td><td>11.7%</td><td>10.2%</td><td>100.0%</td><td>89.7%</td><td>85.7%</td><td>79.1%</td><td>1.6%</td><td>1.6%</td></tr>
+</tbody>
+</table>
+<h3>Matched Control</h3>
+<table>
+<thead><tr><th>Split</th><th>Main</th><th>No-pair control</th></tr></thead>
+<tbody>
+<tr><td>Standard L24 executor exact</td><td>25.0%</td><td>3.9%</td></tr>
+<tr><td>Standard L24 program exact</td><td>25.0%</td><td>2.3%</td></tr>
+<tr><td>Paraphrase L24 executor exact</td><td>5.5%</td><td>1.6%</td></tr>
+<tr><td>Paired L24 executor exact</td><td>11.7%</td><td>1.6%</td></tr>
+<tr><td>Paired L24 pair both-correct</td><td>1.6%</td><td>0.0%</td></tr>
+<tr><td>Paired L24 state consistency</td><td>1.6%</td><td>0.0%</td></tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>The fixed register-token interface is trainable: the compiler reaches perfect
+exact execution through length 12 while reading only appended marker states.
+State trajectory supervision alone is not enough for long-chain generalization:
+the matched control has full state loss and stays near chance at length 24.
+Paired consistency is useful but incomplete: it raises standard L24 from 3.9%
+to 25.0%, but paired both-correct and state consistency remain at 1.6%.</p>
+<p>The next technical target should be repair or refinement over the compiled
+register program. The compiler often gets most length-24 slots right, but one or
+two wrong slots are enough to break exact execution.</p>
+<h2>Artifacts</h2>
+<ul>
+<li><code>experiments/qwen_register_structured_runtime/</code></li>
+<li><code>large_artifacts/qwen_register_structured_runtime/checkpoints/</code></li>
+</ul>
+</main>
+</body>
+</html>

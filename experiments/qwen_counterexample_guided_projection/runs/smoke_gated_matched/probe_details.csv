@@ -1,0 +1,33 @@
+task_id,probe_index,probe,qwen_label,train_only_pred,qwen_projection_pred
+City.000010,0,none,,,
+City.000010,1,NONE,,,
+City.000010,2,None+43,,,
+City.000010,3,30++43,,,
+DateTime.000025,0,Mar Mar 30 2002,,,
+DateTime.000025,1,22 Oct 1953,,,
+DateTime.000025,2,06-Oct-30,,,
+DateTime.000025,3,22-Apr-1953,,,
+DateTime.000076,0,Beta:44:00,,,
+DateTime.000076,1,Beta:00:00,,,
+DateTime.000076,2,Delta:25:00,,,
+DateTime.000076,3,Gamma:34:00,,,
+DateTime.000104,0,17-Mar-1990 13:32:01,,Mar,Mar
+DateTime.000104,1,14-feb-2034 05:36:07,,feb,feb
+DateTime.000104,2,14-Feb-2031 05:36:07,,Feb,Feb
+DateTime.000104,3,17-JAN-1990 13:32:01,,JAN,JAN
+Number.000016,0,914:913,,,
+Number.000016,1,Alpha_913,,,
+Number.000016,2,914:786,,,
+Number.000016,3,Delta/914,,,
+Number.000075,0,Alpha.1202.3433,,,
+Number.000075,1,Delta.1202.3433,,,
+Number.000075,2,3433.3433,,,
+Number.000075,3,2345.23292.3433,,,
+Number.000077,0,"112,112",,110,110
+Number.000077,1,Gamma:112,,110,110
+Number.000077,2,112 112,,110,110
+Number.000077,3,112_117,,110,110
+UserAgent.000003,0,MFM-Robot/8.7.52-internal  LZ224  OS  6.4.9,,,
+UserAgent.000003,1,MFM-Robot/878.2.96-internal JI YNSD OS 2.9.7,,,
+UserAgent.000003,2,LZ MFM-Robot/8.9.63-internal ZA659 OS 6.5.0,,,
+UserAgent.000003,3,Mfm-Robot/8.9.63-Internal Za659 Os 6.5.0,,,

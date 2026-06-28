@@ -1,0 +1,26 @@
+{
+  "experiment": "qwen35_4b_foofah_strategy_discovery_live",
+  "date": "2026-06-28",
+  "objective": "Test whether reusable program-generation strategies discovered from calibration examples improve held-out Foofah-style table transformation coverage.",
+  "protocol": {
+    "stage_1": "Use Qwen3.5-4B to propose reusable strategy prompts from calibration examples, then freeze the parsed strategy cards.",
+    "stage_2": "Generate fresh executable Python transform(table) programs on held-out tasks under the frozen discovered strategy prompts.",
+    "stage_3": "Execute generated programs on public examples and held-out targets with a sandboxed runner; compare against direct and fixed baseline records included in this package.",
+    "primary_gate": "Discovered strategies should add held-out recoveries over direct answering, and ideally add direct-miss recoveries not already available to the fixed baseline strategy pool."
+  },
+  "model": {
+    "path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "local_files_only": true
+  },
+  "data": {
+    "cases": "data/cases.jsonl",
+    "calibration_baseline_records": "data/calibration_baseline_records.jsonl",
+    "test_baseline_records": "data/test_baseline_records.jsonl"
+  },
+  "outputs": {
+    "strategy_cards": "reports/discovered_strategy_cards.json",
+    "generated_records": "reports/discovered_test_records.jsonl",
+    "summary": "reports/final_summary.json",
+    "report": "reports/report.md"
+  }
+}

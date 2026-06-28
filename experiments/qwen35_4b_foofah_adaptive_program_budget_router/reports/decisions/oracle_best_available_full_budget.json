@@ -1,0 +1,802 @@
+[
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 20876,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 19819,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 17431,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 22337,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 24649,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 22030,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_25",
+    "file": "exp0_25_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 25431,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 21850,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 28506,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 30810,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 8035,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_48",
+    "file": "exp0_48_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 10418,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 11338,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 13252,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 11170,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:row_column_rule",
+    "tokens": 25493,
+    "trigger": true
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:cell_parser",
+    "tokens": 25419,
+    "trigger": true
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:split_fold_unpivot",
+    "tokens": 29148,
+    "trigger": true
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 36418,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:verified_structural",
+    "tokens": 35120,
+    "trigger": true
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 9155,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 12279,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 14264,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 13676,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "agriculture",
+    "file": "exp0_agriculture_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 14813,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 45839,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 46513,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 46011,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 46995,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 48002,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 3634,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:verified_structural",
+    "tokens": 6173,
+    "trigger": true
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:verified_structural",
+    "tokens": 4366,
+    "trigger": true
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:verified_structural",
+    "tokens": 4905,
+    "trigger": true
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "oracle:verified_structural",
+    "tokens": 5309,
+    "trigger": true
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 7034,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 7173,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 8430,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 9697,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 9366,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 9965,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 11499,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 10477,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 11728,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 12993,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 7943,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 5109,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 3511,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 6216,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "source": "direct",
+    "tokens": 7405,
+    "trigger": false
+  }
+]

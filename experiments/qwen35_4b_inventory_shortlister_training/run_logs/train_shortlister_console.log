@@ -1,0 +1,345 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:42,  9.94it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 159.63it/s]Loading weights:  22%|██▏       | 92/426 [00:00<00:00, 376.17it/s]Loading weights:  35%|███▍      | 148/426 [00:00<00:00, 443.55it/s]Loading weights:  48%|████▊     | 206/426 [00:00<00:00, 487.65it/s]Loading weights:  63%|██████▎   | 267/426 [00:00<00:00, 528.50it/s]Loading weights:  77%|███████▋  | 327/426 [00:00<00:00, 549.43it/s]Loading weights:  90%|█████████ | 384/426 [00:00<00:00, 552.00it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 480.78it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+qwen-shortlister-train:   0%|          | 0/80 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+qwen-shortlister-train:   1%|▏         | 1/80 [00:13<17:31, 13.31s/it]qwen-shortlister-train:   2%|▎         | 2/80 [00:26<17:06, 13.16s/it]qwen-shortlister-train:   4%|▍         | 3/80 [00:39<17:04, 13.31s/it]qwen-shortlister-train:   5%|▌         | 4/80 [00:52<16:43, 13.21s/it]qwen-shortlister-train:   6%|▋         | 5/80 [01:05<16:26, 13.15s/it]qwen-shortlister-train:   8%|▊         | 6/80 [01:18<16:02, 13.01s/it]qwen-shortlister-train:   9%|▉         | 7/80 [01:31<15:51, 13.04s/it]qwen-shortlister-train:  10%|█         | 8/80 [01:44<15:39, 13.05s/it]qwen-shortlister-train:  11%|█▏        | 9/80 [01:57<15:27, 13.07s/it]qwen-shortlister-train:  12%|█▎        | 10/80 [02:11<15:14, 13.06s/it]                                                                       {"step": 10, "loss": 1.6914}
+qwen-shortlister-train:  12%|█▎        | 10/80 [02:11<15:14, 13.06s/it]qwen-shortlister-train:  14%|█▍        | 11/80 [02:24<15:01, 13.07s/it]qwen-shortlister-train:  15%|█▌        | 12/80 [02:37<14:48, 13.07s/it]qwen-shortlister-train:  16%|█▋        | 13/80 [02:50<14:35, 13.07s/it]qwen-shortlister-train:  18%|█▊        | 14/80 [03:03<14:23, 13.08s/it]qwen-shortlister-train:  19%|█▉        | 15/80 [03:16<14:16, 13.18s/it]qwen-shortlister-train:  20%|██        | 16/80 [03:29<14:02, 13.16s/it]qwen-shortlister-train:  21%|██▏       | 17/80 [03:42<13:41, 13.05s/it]qwen-shortlister-train:  22%|██▎       | 18/80 [03:55<13:29, 13.06s/it]qwen-shortlister-train:  24%|██▍       | 19/80 [04:08<13:17, 13.07s/it]qwen-shortlister-train:  25%|██▌       | 20/80 [04:21<13:04, 13.08s/it]                                                                       {"step": 20, "loss": 1.6936}
+qwen-shortlister-train:  25%|██▌       | 20/80 [04:21<13:04, 13.08s/it]qwen-shortlister-train:  26%|██▋       | 21/80 [04:35<12:51, 13.08s/it]qwen-shortlister-train:  28%|██▊       | 22/80 [04:48<12:38, 13.08s/it]qwen-shortlister-train:  29%|██▉       | 23/80 [05:01<12:25, 13.08s/it]qwen-shortlister-train:  30%|███       | 24/80 [05:14<12:12, 13.09s/it]qwen-shortlister-train:  31%|███▏      | 25/80 [05:27<11:59, 13.08s/it]qwen-shortlister-train:  32%|███▎      | 26/80 [05:40<11:46, 13.09s/it]qwen-shortlister-train:  34%|███▍      | 27/80 [05:53<11:33, 13.08s/it]qwen-shortlister-train:  35%|███▌      | 28/80 [06:06<11:20, 13.08s/it]qwen-shortlister-train:  36%|███▋      | 29/80 [06:19<11:07, 13.08s/it]qwen-shortlister-train:  38%|███▊      | 30/80 [06:32<10:54, 13.08s/it]                                                                       {"step": 30, "loss": 2.2485}
+qwen-shortlister-train:  38%|███▊      | 30/80 [06:32<10:54, 13.08s/it]qwen-shortlister-train:  39%|███▉      | 31/80 [06:46<10:52, 13.32s/it]qwen-shortlister-train:  40%|████      | 32/80 [06:59<10:36, 13.26s/it]qwen-shortlister-train:  41%|████▏     | 33/80 [07:12<10:22, 13.24s/it]qwen-shortlister-train:  42%|████▎     | 34/80 [07:26<10:07, 13.21s/it]qwen-shortlister-train:  44%|████▍     | 35/80 [07:39<09:53, 13.19s/it]qwen-shortlister-train:  45%|████▌     | 36/80 [07:52<09:39, 13.18s/it]qwen-shortlister-train:  46%|████▋     | 37/80 [08:05<09:26, 13.17s/it]qwen-shortlister-train:  48%|████▊     | 38/80 [08:18<09:13, 13.17s/it]qwen-shortlister-train:  49%|████▉     | 39/80 [08:31<09:00, 13.18s/it]qwen-shortlister-train:  50%|█████     | 40/80 [08:45<08:46, 13.16s/it]                                                                       {"step": 40, "loss": 1.6932}
+qwen-shortlister-train:  50%|█████     | 40/80 [08:45<08:46, 13.16s/it]qwen-shortlister-train:  51%|█████▏    | 41/80 [08:58<08:32, 13.15s/it]qwen-shortlister-train:  52%|█████▎    | 42/80 [09:11<08:18, 13.12s/it]qwen-shortlister-train:  54%|█████▍    | 43/80 [09:24<08:05, 13.12s/it]qwen-shortlister-train:  55%|█████▌    | 44/80 [09:37<07:51, 13.11s/it]qwen-shortlister-train:  56%|█████▋    | 45/80 [09:50<07:38, 13.10s/it]qwen-shortlister-train:  57%|█████▊    | 46/80 [10:03<07:25, 13.10s/it]qwen-shortlister-train:  59%|█████▉    | 47/80 [10:16<07:12, 13.10s/it]qwen-shortlister-train:  60%|██████    | 48/80 [10:29<06:59, 13.10s/it]qwen-shortlister-train:  61%|██████▏   | 49/80 [10:42<06:46, 13.10s/it]qwen-shortlister-train:  62%|██████▎   | 50/80 [10:55<06:33, 13.10s/it]                                                                       {"step": 50, "loss": 1.8529}
+qwen-shortlister-train:  62%|██████▎   | 50/80 [10:55<06:33, 13.10s/it]qwen-shortlister-train:  64%|██████▍   | 51/80 [11:09<06:19, 13.10s/it]qwen-shortlister-train:  65%|██████▌   | 52/80 [11:22<06:06, 13.10s/it]qwen-shortlister-train:  66%|██████▋   | 53/80 [11:35<05:53, 13.10s/it]qwen-shortlister-train:  68%|██████▊   | 54/80 [11:48<05:40, 13.10s/it]qwen-shortlister-train:  69%|██████▉   | 55/80 [12:01<05:27, 13.10s/it]qwen-shortlister-train:  70%|███████   | 56/80 [12:14<05:14, 13.10s/it]qwen-shortlister-train:  71%|███████▏  | 57/80 [12:27<05:01, 13.09s/it]qwen-shortlister-train:  72%|███████▎  | 58/80 [12:40<04:48, 13.10s/it]qwen-shortlister-train:  74%|███████▍  | 59/80 [12:53<04:35, 13.10s/it]qwen-shortlister-train:  75%|███████▌  | 60/80 [13:07<04:24, 13.22s/it]                                                                       {"step": 60, "loss": 1.4171}
+qwen-shortlister-train:  75%|███████▌  | 60/80 [13:07<04:24, 13.22s/it]qwen-shortlister-train:  76%|███████▋  | 61/80 [13:20<04:10, 13.19s/it]qwen-shortlister-train:  78%|███████▊  | 62/80 [13:33<03:56, 13.16s/it]qwen-shortlister-train:  79%|███████▉  | 63/80 [13:46<03:43, 13.15s/it]qwen-shortlister-train:  80%|████████  | 64/80 [13:59<03:28, 13.05s/it]qwen-shortlister-train:  81%|████████▏ | 65/80 [14:12<03:15, 13.06s/it]qwen-shortlister-train:  82%|████████▎ | 66/80 [14:25<03:03, 13.08s/it]qwen-shortlister-train:  84%|████████▍ | 67/80 [14:38<02:49, 13.08s/it]qwen-shortlister-train:  85%|████████▌ | 68/80 [14:51<02:36, 13.08s/it]qwen-shortlister-train:  86%|████████▋ | 69/80 [15:04<02:23, 13.08s/it]qwen-shortlister-train:  88%|████████▊ | 70/80 [15:18<02:10, 13.08s/it]                                                                       {"step": 70, "loss": 3.7993}
+qwen-shortlister-train:  88%|████████▊ | 70/80 [15:18<02:10, 13.08s/it]qwen-shortlister-train:  89%|████████▉ | 71/80 [15:31<01:57, 13.09s/it]qwen-shortlister-train:  90%|█████████ | 72/80 [15:44<01:44, 13.09s/it]qwen-shortlister-train:  91%|█████████▏| 73/80 [15:57<01:31, 13.08s/it]qwen-shortlister-train:  92%|█████████▎| 74/80 [16:10<01:18, 13.08s/it]qwen-shortlister-train:  94%|█████████▍| 75/80 [16:23<01:05, 13.09s/it]qwen-shortlister-train:  95%|█████████▌| 76/80 [16:36<00:52, 13.09s/it]qwen-shortlister-train:  96%|█████████▋| 77/80 [16:49<00:39, 13.08s/it]qwen-shortlister-train:  98%|█████████▊| 78/80 [17:02<00:26, 13.08s/it]qwen-shortlister-train:  99%|█████████▉| 79/80 [17:15<00:13, 13.09s/it]qwen-shortlister-train: 100%|██████████| 80/80 [17:28<00:00, 13.09s/it]                                                                       {"step": 80, "loss": 1.6272}
+qwen-shortlister-train: 100%|██████████| 80/80 [17:28<00:00, 13.09s/it]qwen-shortlister-train: 100%|██████████| 80/80 [17:28<00:00, 13.11s/it]
+{
+  "batch_size": 1,
+  "grad_accum": 1,
+  "learning_rate": 0.0002,
+  "losses": [
+    {
+      "loss": 3.9782450199127197,
+      "step": 1
+    },
+    {
+      "loss": 1.8651150465011597,
+      "step": 2
+    },
+    {
+      "loss": 1.3951053619384766,
+      "step": 3
+    },
+    {
+      "loss": 2.5642690658569336,
+      "step": 4
+    },
+    {
+      "loss": 1.5251855850219727,
+      "step": 5
+    },
+    {
+      "loss": 1.4615360498428345,
+      "step": 6
+    },
+    {
+      "loss": 1.9042167663574219,
+      "step": 7
+    },
+    {
+      "loss": 2.066514492034912,
+      "step": 8
+    },
+    {
+      "loss": 1.5643141269683838,
+      "step": 9
+    },
+    {
+      "loss": 1.6913940906524658,
+      "step": 10
+    },
+    {
+      "loss": 1.535027027130127,
+      "step": 11
+    },
+    {
+      "loss": 1.5104897022247314,
+      "step": 12
+    },
+    {
+      "loss": 1.5334928035736084,
+      "step": 13
+    },
+    {
+      "loss": 1.659179925918579,
+      "step": 14
+    },
+    {
+      "loss": 2.787179946899414,
+      "step": 15
+    },
+    {
+      "loss": 1.7083234786987305,
+      "step": 16
+    },
+    {
+      "loss": 1.5823298692703247,
+      "step": 17
+    },
+    {
+      "loss": 2.0316481590270996,
+      "step": 18
+    },
+    {
+      "loss": 1.9977912902832031,
+      "step": 19
+    },
+    {
+      "loss": 1.693634271621704,
+      "step": 20
+    },
+    {
+      "loss": 1.5824213027954102,
+      "step": 21
+    },
+    {
+      "loss": 1.6439342498779297,
+      "step": 22
+    },
+    {
+      "loss": 1.5693105459213257,
+      "step": 23
+    },
+    {
+      "loss": 1.4973067045211792,
+      "step": 24
+    },
+    {
+      "loss": 1.94041109085083,
+      "step": 25
+    },
+    {
+      "loss": 1.8405489921569824,
+      "step": 26
+    },
+    {
+      "loss": 1.3997265100479126,
+      "step": 27
+    },
+    {
+      "loss": 1.695192813873291,
+      "step": 28
+    },
+    {
+      "loss": 1.714101791381836,
+      "step": 29
+    },
+    {
+      "loss": 2.248491048812866,
+      "step": 30
+    },
+    {
+      "loss": 1.7537169456481934,
+      "step": 31
+    },
+    {
+      "loss": 1.4983701705932617,
+      "step": 32
+    },
+    {
+      "loss": 1.3928483724594116,
+      "step": 33
+    },
+    {
+      "loss": 1.3687705993652344,
+      "step": 34
+    },
+    {
+      "loss": 1.553968906402588,
+      "step": 35
+    },
+    {
+      "loss": 1.5019172430038452,
+      "step": 36
+    },
+    {
+      "loss": 1.8503650426864624,
+      "step": 37
+    },
+    {
+      "loss": 1.865614891052246,
+      "step": 38
+    },
+    {
+      "loss": 1.6331905126571655,
+      "step": 39
+    },
+    {
+      "loss": 1.693237066268921,
+      "step": 40
+    },
+    {
+      "loss": 1.8258980512619019,
+      "step": 41
+    },
+    {
+      "loss": 1.7608041763305664,
+      "step": 42
+    },
+    {
+      "loss": 1.5357338190078735,
+      "step": 43
+    },
+    {
+      "loss": 1.5028115510940552,
+      "step": 44
+    },
+    {
+      "loss": 2.071455478668213,
+      "step": 45
+    },
+    {
+      "loss": 1.659764051437378,
+      "step": 46
+    },
+    {
+      "loss": 1.3979878425598145,
+      "step": 47
+    },
+    {
+      "loss": 1.5863792896270752,
+      "step": 48
+    },
+    {
+      "loss": 1.3141953945159912,
+      "step": 49
+    },
+    {
+      "loss": 1.8529188632965088,
+      "step": 50
+    },
+    {
+      "loss": 1.8363027572631836,
+      "step": 51
+    },
+    {
+      "loss": 1.774519443511963,
+      "step": 52
+    },
+    {
+      "loss": 1.6377840042114258,
+      "step": 53
+    },
+    {
+      "loss": 2.351303815841675,
+      "step": 54
+    },
+    {
+      "loss": 2.0166478157043457,
+      "step": 55
+    },
+    {
+      "loss": 1.668339490890503,
+      "step": 56
+    },
+    {
+      "loss": 1.6229050159454346,
+      "step": 57
+    },
+    {
+      "loss": 1.560203194618225,
+      "step": 58
+    },
+    {
+      "loss": 1.5372602939605713,
+      "step": 59
+    },
+    {
+      "loss": 1.4170777797698975,
+      "step": 60
+    },
+    {
+      "loss": 1.7898977994918823,
+      "step": 61
+    },
+    {
+      "loss": 1.6151187419891357,
+      "step": 62
+    },
+    {
+      "loss": 1.624010443687439,
+      "step": 63
+    },
+    {
+      "loss": 1.368612289428711,
+      "step": 64
+    },
+    {
+      "loss": 1.456087589263916,
+      "step": 65
+    },
+    {
+      "loss": 1.4397780895233154,
+      "step": 66
+    },
+    {
+      "loss": 1.3233250379562378,
+      "step": 67
+    },
+    {
+      "loss": 1.8340219259262085,
+      "step": 68
+    },
+    {
+      "loss": 1.9665416479110718,
+      "step": 69
+    },
+    {
+      "loss": 3.7993433475494385,
+      "step": 70
+    },
+    {
+      "loss": 1.4107153415679932,
+      "step": 71
+    },
+    {
+      "loss": 1.5187413692474365,
+      "step": 72
+    },
+    {
+      "loss": 2.1313657760620117,
+      "step": 73
+    },
+    {
+      "loss": 2.099799156188965,
+      "step": 74
+    },
+    {
+      "loss": 1.9134376049041748,
+      "step": 75
+    },
+    {
+      "loss": 1.6826894283294678,
+      "step": 76
+    },
+    {
+      "loss": 1.7218536138534546,
+      "step": 77
+    },
+    {
+      "loss": 1.492950677871704,
+      "step": 78
+    },
+    {
+      "loss": 1.556678295135498,
+      "step": 79
+    },
+    {
+      "loss": 1.6272310018539429,
+      "step": 80
+    }
+  ],
+  "max_length": 5120,
+  "max_steps": 80,
+  "tokenized_examples": 1536,
+  "train_examples_seen": 80
+}

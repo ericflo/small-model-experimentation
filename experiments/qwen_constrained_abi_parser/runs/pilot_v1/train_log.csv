@@ -1,0 +1,16 @@
+suite,run,arm,seed,step,loss
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,3.2272486686706543
+pilot,pilot_v1_answer_only_s101,answer_only,101,3,0.9797908663749695
+pilot,pilot_v1_answer_only_s101,answer_only,101,6,0.007956053130328655
+pilot,pilot_v1_answer_only_s101,answer_only,101,9,0.002242004731670022
+pilot,pilot_v1_answer_only_s101,answer_only,101,12,0.0021468140184879303
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,3.7780513763427734
+pilot,pilot_v1_program_stack_s101,program_stack,101,3,1.6672476530075073
+pilot,pilot_v1_program_stack_s101,program_stack,101,6,1.0817433595657349
+pilot,pilot_v1_program_stack_s101,program_stack,101,9,0.42565205693244934
+pilot,pilot_v1_program_stack_s101,program_stack,101,12,0.027350299060344696
+pilot,pilot_v1_parse_emit_s101,parse_emit,101,1,1.98916494846344
+pilot,pilot_v1_parse_emit_s101,parse_emit,101,3,0.6874712705612183
+pilot,pilot_v1_parse_emit_s101,parse_emit,101,6,0.3033120334148407
+pilot,pilot_v1_parse_emit_s101,parse_emit,101,9,0.10200377553701401
+pilot,pilot_v1_parse_emit_s101,parse_emit,101,12,0.010957174934446812

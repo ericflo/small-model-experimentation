@@ -1,0 +1,4 @@
+suite,run,arm,seed,step,loss
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,101,1,2.624420404434204
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,101,1,1.59957754611969
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,101,1,2.4644248485565186

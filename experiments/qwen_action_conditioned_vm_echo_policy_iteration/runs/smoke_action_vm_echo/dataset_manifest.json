@@ -1,0 +1,21 @@
+{
+  "run": "smoke_action_vm_echo",
+  "model_name": "Qwen/Qwen3-4B",
+  "seed": 73,
+  "sizes": {
+    "seed_train": 16,
+    "unlabeled_train": 24,
+    "full_supervised_train": 24,
+    "val_mixed": 16,
+    "fresh_standard": 16,
+    "fresh_paraphrase": 16,
+    "fresh_paired": 16,
+    "hard_composition": 16
+  },
+  "hidden_size": 2560,
+  "backend": "frozen_qwen_hidden_states",
+  "candidate_topk": 2,
+  "max_two_arg_pairs": 2,
+  "max_candidates": 64,
+  "distill_min_score": 0.0
+}

@@ -1,0 +1,20 @@
+[1/9] task_id=16 entry=text_lowercase_underscore
+  candidates=16 visible_pass=4 hidden_solved=True elapsed=0.463s
+[2/9] task_id=26 entry=check_k_elements
+  candidates=12 visible_pass=3 hidden_solved=True elapsed=0.334s
+[3/9] task_id=31 entry=func
+  candidates=12 visible_pass=0 hidden_solved=False elapsed=0.328s
+[4/9] task_id=39 entry=rearange_string
+  candidates=15 visible_pass=1 hidden_solved=True elapsed=0.417s
+[5/9] task_id=43 entry=text_match
+  candidates=16 visible_pass=4 hidden_solved=True elapsed=0.434s
+[6/9] task_id=44 entry=text_match_string
+  candidates=16 visible_pass=4 hidden_solved=True elapsed=0.441s
+[7/9] task_id=48 entry=odd_bit_set_number
+  candidates=15 visible_pass=1 hidden_solved=True elapsed=0.412s
+[8/9] task_id=60 entry=max_len_sub
+  candidates=12 visible_pass=2 hidden_solved=True elapsed=0.325s
+[9/9] task_id=77 entry=is_Diff
+  candidates=15 visible_pass=2 hidden_solved=True elapsed=0.409s
+wrote data/pilot_manual_results.jsonl
+wrote reports/pilot_manual_summary.json

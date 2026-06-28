@@ -1,0 +1,494 @@
+scored 50/150 action states
+scored 100/150 action states
+scored 150/150 action states
+scored 50/50 action states
+scored 50/50 action states
+lora_action_policy step 1/80 loss=4.8841
+lora_action_policy step 16/80 loss=0.0008
+lora_action_policy step 32/80 loss=0.0147
+lora_action_policy step 48/80 loss=0.0005
+lora_action_policy step 64/80 loss=0.0001
+lora_action_policy step 80/80 loss=0.0001
+scored 50/150 action states
+scored 100/150 action states
+scored 150/150 action states
+scored 50/50 action states
+scored 50/50 action states
+lora_shuffled_labels step 1/80 loss=5.7312
+lora_shuffled_labels step 16/80 loss=0.2933
+lora_shuffled_labels step 32/80 loss=0.3300
+lora_shuffled_labels step 48/80 loss=0.3799
+lora_shuffled_labels step 64/80 loss=0.1436
+lora_shuffled_labels step 80/80 loss=0.1291
+scored 50/150 action states
+scored 100/150 action states
+scored 150/150 action states
+scored 50/50 action states
+scored 50/50 action states
+{
+  "experiment": "qwen35_4b_tool_state_policy_lora",
+  "family_breakdown": {
+    "agriculture": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "craigslist_data_wrangler": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "potters_wheel_divide": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 1,
+      "oracle_accuracy": 0.2,
+      "program": 1,
+      "program_accuracy": 0.2,
+      "program_only": 1
+    },
+    "potters_wheel_split_fold": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 3,
+      "program_accuracy": 0.6,
+      "program_only": 0
+    },
+    "synthetic_28": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 0,
+      "oracle_accuracy": 0.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_30": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_34": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 0,
+      "oracle_accuracy": 0.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_40": {
+      "direct": 4,
+      "direct_accuracy": 0.8,
+      "n": 5,
+      "oracle": 4,
+      "oracle_accuracy": 0.8,
+      "program": 4,
+      "program_accuracy": 0.8,
+      "program_only": 0
+    },
+    "synthetic_46": {
+      "direct": 4,
+      "direct_accuracy": 0.8,
+      "n": 5,
+      "oracle": 4,
+      "oracle_accuracy": 0.8,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_8": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 4,
+      "oracle_accuracy": 0.8,
+      "program": 4,
+      "program_accuracy": 0.8,
+      "program_only": 4
+    }
+  },
+  "learned_rule": {
+    "results": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 43,
+          "PROGRAM": 7
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 7,
+        "program_correct": 5,
+        "program_precision": 0.7142857142857143,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 45,
+          "PROGRAM": 5
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 5,
+        "program_correct": 5,
+        "program_precision": 1.0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 136,
+          "PROGRAM": 14
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 14,
+        "program_correct": 8,
+        "program_precision": 0.5714285714285714,
+        "split": "train"
+      }
+    },
+    "selected": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 43,
+          "PROGRAM": 7
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule",
+        "program_commits": 7,
+        "program_correct": 5,
+        "program_precision": 0.7142857142857143,
+        "split": "dev"
+      },
+      "false_action": "DIRECT",
+      "feature": "direct_program_disagree_visible_pass",
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 136,
+          "PROGRAM": 14
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "rule",
+        "program_commits": 14,
+        "program_correct": 8,
+        "program_precision": 0.5714285714285714,
+        "split": "train"
+      },
+      "true_action": "PROGRAM"
+    },
+    "top_candidates": [
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 43,
+            "PROGRAM": 7
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 7,
+          "program_correct": 5,
+          "program_precision": 0.7142857142857143,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "direct_program_disagree_visible_pass",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 136,
+            "PROGRAM": 14
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 14,
+          "program_correct": 8,
+          "program_precision": 0.5714285714285714,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 40,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 8,
+          "program_precision": 0.8,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "final_round_0",
+        "train": {
+          "accuracy": 0.58,
+          "action_counts": {
+            "DIRECT": 116,
+            "PROGRAM": 34
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 87,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 34,
+          "program_correct": 28,
+          "program_precision": 0.8235294117647058,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 40,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 8,
+          "program_precision": 0.8,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "initial_visible_pass",
+        "train": {
+          "accuracy": 0.58,
+          "action_counts": {
+            "DIRECT": 116,
+            "PROGRAM": 34
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 87,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 34,
+          "program_correct": 28,
+          "program_precision": 0.8235294117647058,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 40,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 8,
+          "program_precision": 0.8,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "round_count_1",
+        "train": {
+          "accuracy": 0.58,
+          "action_counts": {
+            "DIRECT": 116,
+            "PROGRAM": 34
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 87,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 34,
+          "program_correct": 28,
+          "program_precision": 0.8235294117647058,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 39,
+            "PROGRAM": 11
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 11,
+          "program_correct": 9,
+          "program_precision": 0.8181818181818182,
+          "split": "dev"
+        },
+        "false_action": "PROGRAM",
+        "feature": "final_round_ge_2",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 102,
+            "PROGRAM": 48
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 48,
+          "program_correct": 38,
+          "program_precision": 0.7916666666666666,
+          "split": "train"
+        },
+        "true_action": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 39,
+            "PROGRAM": 11
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 11,
+          "program_correct": 9,
+          "program_precision": 0.8181818181818182,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "final_visible_pass",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 97,
+            "PROGRAM": 53
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 53,
+          "program_correct": 41,
+          "program_precision": 0.7735849056603774,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 39,
+            "PROGRAM": 11
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 11,
+          "program_correct": 9,
+          "program_precision": 0.8181818181818182,
+          "split": "dev"
+        },
+        "false_action": "PROGRAM",
+        "feature": "round_count_ge_3",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 102,
+            "PROGRAM": 48
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 48,
+          "program_correct": 38,
+          "program_precision": 0.7916666666666666,
+          "split": "train"
+        },
+        "true_action": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.56,
+          "action_counts": {
+            "DIRECT": 49,
+            "PROGRAM": 1
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 28,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 1,
+          "program_correct": 0,
+          "program

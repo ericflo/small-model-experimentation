@@ -1,0 +1,5 @@
+arm,operator_status,operator,template,records,target_raw_pct,target_visible_pct,oracle_hidden_all_pct,selected_hidden_all_pct,avg_raw_candidate_count,avg_visible_consistent_count,avg_visible_consistent_operator_count
+arm0_full_inventory,held_out,,,120,100.0,100.0,100.0,92.5,56.0,1.625,1.2
+arm0_full_inventory,in_bank,,,90,100.0,100.0,100.0,90.0,56.0,1.9,1.322
+arm1_closed_vocab,held_out,,,120,0.0,0.0,0.0,0.0,24.0,0.092,0.092
+arm1_closed_vocab,in_bank,,,90,100.0,100.0,100.0,93.333,24.0,1.344,1.111

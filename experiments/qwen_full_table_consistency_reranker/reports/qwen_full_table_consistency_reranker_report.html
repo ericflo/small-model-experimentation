@@ -1,0 +1,370 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Full-Table Consistency Reranker</title><style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; margin: 40px; color: #111827; line-height: 1.5; }
+    h1 { font-size: 32px; margin-bottom: 4px; }
+    h2 { margin-top: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0 24px; font-size: 13px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 4px; }
+    figure { margin: 18px 0 26px; }
+    figcaption { color: #4b5563; font-size: 13px; margin-top: 6px; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+    </style></head><body><h1>Full-Table Consistency Reranker</h1>
+
+<h2>Question</h2>
+
+<p>Can multiple row-level model guesses be converted into task-level consistency by selecting an entire candidate output table?</p>
+
+<p>The experiment generates several candidate outputs for each held-out row, enumerates full-table candidates, and trains a task-held-out consistency scorer to choose one table. The primary metric is strict full-task exactness: every held-out row for a task must be correct.</p>
+
+<h2>Setup</h2>
+
+<p>- Benchmark root: <code>/workspace/large_artifacts/qwen_full_table_consistency_reranker/prose-benchmarks</code></p>
+<p>- Run: <code>main_qwen_table_40</code></p>
+<p>- Tasks: 40</p>
+<p>- Train rows per task: 4</p>
+<p>- Held-out cap per task: 6</p>
+<p>- Row samples per row: 2</p>
+<p>- Max candidate tables per task: 512</p>
+<p>- Cross-validation folds: 4</p>
+
+<h2>Main Result</h2>
+
+<table>
+<tr><th>method</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th><th>table_oracle_rate</th><th>row_oracle_rate</th><th>median_candidate_tables</th></tr>
+<tr><td>table_oracle</td><td>40</td><td>82.5%</td><td>62.5%</td><td>62.5%</td><td>62.5%</td><td>9.50</td></tr>
+<tr><td>direct_row_greedy</td><td>40</td><td>72.3%</td><td>50.0%</td><td>62.5%</td><td>62.5%</td><td>9.50</td></tr>
+<tr><td>heuristic</td><td>40</td><td>72.7%</td><td>50.0%</td><td>62.5%</td><td>62.5%</td><td>9.50</td></tr>
+<tr><td>learned_reranker</td><td>40</td><td>72.3%</td><td>50.0%</td><td>62.5%</td><td>62.5%</td><td>9.50</td></tr>
+<tr><td>row_majority</td><td>40</td><td>72.7%</td><td>50.0%</td><td>62.5%</td><td>62.5%</td><td>9.50</td></tr>
+<tr><td>shuffled_label_reranker</td><td>40</td><td>72.5%</td><td>47.5%</td><td>62.5%</td><td>62.5%</td><td>9.50</td></tr>
+</table>
+
+<h2>Interpretation</h2>
+
+<p>The generated row-candidate sets make the exact table reachable on 62.5% of tasks after enumeration, while the per-row oracle is 62.5%. The learned reranker changes full-task exact by 0.0 points relative to direct greedy row inference. The learned reranker is separated from the shuffled-label control by 2.5 points. Mean candidate-level AUC is 92.9% versus 36.4% for shuffled labels, but that discrimination does not translate into task-level headroom capture.</p>
+
+<p>If oracle reachability is high but the learned reranker does not improve over direct row inference, the bottleneck is table selection. If oracle reachability is low, the bottleneck is generation diversity.</p>
+
+<h2>Diagnostic Findings</h2>
+
+<p>- Direct greedy solves 20 of 40 tasks.</p>
+<p>- The table oracle solves 25 of 40 tasks, leaving 5 tasks of reachable headroom beyond direct greedy.</p>
+<p>- The learned reranker solves 20 of 40 tasks and captures 0 of the 5 reachable-headroom tasks.</p>
+<p>- The learned reranker changes the selected output table on 3 tasks: 0 helped, 3 tied, and 0 hurt on strict full-task exactness.</p>
+
+<h2>Charts</h2>
+
+<figure><img src="../analysis/figures/full_task_by_method.png" alt="Full-task exact by method"><figcaption>Full-task exact by method</figcaption></figure>
+
+<figure><img src="../analysis/figures/row_vs_task.png" alt="Row versus task accuracy"><figcaption>Row versus task accuracy</figcaption></figure>
+
+<figure><img src="../analysis/figures/oracle_reachability.png" alt="Oracle reachability"><figcaption>Oracle reachability</figcaption></figure>
+
+<figure><img src="../analysis/figures/oracle_headroom.png" alt="Oracle headroom"><figcaption>Oracle headroom</figcaption></figure>
+
+<figure><img src="../analysis/figures/candidate_table_counts.png" alt="Candidate table counts"><figcaption>Candidate table counts</figcaption></figure>
+
+<figure><img src="../analysis/figures/fold_auc.png" alt="Fold AUC"><figcaption>Fold AUC</figcaption></figure>
+
+<figure><img src="../analysis/figures/learned_selection_changes.png" alt="Learned selection changes"><figcaption>Learned selection changes</figcaption></figure>
+
+<figure><img src="../analysis/figures/family_heatmap.png" alt="Family heatmap"><figcaption>Family heatmap</figcaption></figure>
+
+<h2>Fold Diagnostics</h2>
+
+<table>
+<tr><th>fold</th><th>train_tasks</th><th>test_tasks</th><th>train_candidates</th><th>test_candidates</th><th>train_positive_rate</th><th>test_positive_rate</th><th>candidate_auc</th><th>shuffled_candidate_auc</th></tr>
+<tr><td>0</td><td>30</td><td>10</td><td>750</td><td>620</td><td>15.7%</td><td>9.2%</td><td>97.4%</td><td>26.7%</td></tr>
+<tr><td>1</td><td>30</td><td>10</td><td>1258</td><td>112</td><td>9.6%</td><td>48.2%</td><td>89.8%</td><td>50.0%</td></tr>
+<tr><td>2</td><td>30</td><td>10</td><td>1210</td><td>160</td><td>11.7%</td><td>20.6%</td><td>96.7%</td><td>58.5%</td></tr>
+<tr><td>3</td><td>30</td><td>10</td><td>892</td><td>478</td><td>16.1%</td><td>6.5%</td><td>87.9%</td><td>10.5%</td></tr>
+</table>
+
+<h2>Family Breakdown</h2>
+
+<table>
+<tr><th>method</th><th>family</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th></tr>
+<tr><td>direct_row_greedy</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>DateTime</td><td>16</td><td>72.9%</td><td>56.2%</td></tr>
+<tr><td>direct_row_greedy</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Number</td><td>10</td><td>61.7%</td><td>30.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>direct_row_greedy</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>heuristic</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>heuristic</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>heuristic</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>heuristic</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>heuristic</td><td>DateTime</td><td>16</td><td>74.0%</td><td>56.2%</td></tr>
+<tr><td>heuristic</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>heuristic</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>heuristic</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>heuristic</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>heuristic</td><td>Number</td><td>10</td><td>61.7%</td><td>30.0%</td></tr>
+<tr><td>heuristic</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>heuristic</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>heuristic</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>learned_reranker</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>learned_reranker</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>learned_reranker</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>learned_reranker</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>learned_reranker</td><td>DateTime</td><td>16</td><td>72.9%</td><td>56.2%</td></tr>
+<tr><td>learned_reranker</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>learned_reranker</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>learned_reranker</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>learned_reranker</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>learned_reranker</td><td>Number</td><td>10</td><td>61.7%</td><td>30.0%</td></tr>
+<tr><td>learned_reranker</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>learned_reranker</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>learned_reranker</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>row_majority</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>DateTime</td><td>16</td><td>74.0%</td><td>56.2%</td></tr>
+<tr><td>row_majority</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>Number</td><td>10</td><td>61.7%</td><td>30.0%</td></tr>
+<tr><td>row_majority</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_majority</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>row_majority</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>DateTime</td><td>16</td><td>72.9%</td><td>56.2%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>Number</td><td>10</td><td>62.5%</td><td>20.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>shuffled_label_reranker</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_oracle</td><td>Address</td><td>2</td><td>50.0%</td><td>0.0%</td></tr>
+<tr><td>table_oracle</td><td>BillingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>table_oracle</td><td>City</td><td>2</td><td>87.5%</td><td>50.0%</td></tr>
+<tr><td>table_oracle</td><td>Column</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_oracle</td><td>DateTime</td><td>16</td><td>81.2%</td><td>62.5%</td></tr>
+<tr><td>table_oracle</td><td>FilePath</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_oracle</td><td>Gender</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>table_oracle</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_oracle</td><td>Name</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_oracle</td><td>Number</td><td>10</td><td>89.2%</td><td>70.0%</td></tr>
+<tr><td>table_oracle</td><td>Phone</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>table_oracle</td><td>ShippingCode</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>table_oracle</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+</table>
+
+<h2>Task-Level Reachability</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>heldout_rows</th><th>direct_row_exact</th><th>direct_full_exact</th><th>row_candidate_oracle</th><th>table_candidate_oracle</th><th>candidate_tables</th><th>row_candidate_median</th></tr>
+<tr><td>City.000011</td><td>City</td><td>4</td><td>75.0%</td><td>False</td><td>False</td><td>False</td><td>12</td><td>1.50</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>6</td><td>66.7%</td><td>False</td><td>False</td><td>False</td><td>17</td><td>1.00</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>3</td><td>66.7%</td><td>False</td><td>False</td><td>False</td><td>11</td><td>1.00</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>3</td><td>66.7%</td><td>False</td><td>False</td><td>False</td><td>14</td><td>2.00</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>6</td><td>50.0%</td><td>False</td><td>False</td><td>False</td><td>88</td><td>2.00</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>6</td><td>50.0%</td><td>False</td><td>False</td><td>False</td><td>14</td><td>1.00</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>6</td><td>50.0%</td><td>False</td><td>False</td><td>False</td><td>9</td><td>1.00</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>3</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>9</td><td>1.00</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>3</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>16</td><td>2.00</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>3</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>12</td><td>2.00</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>6</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>16</td><td>1.50</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>3</td><td>33.3%</td><td>False</td><td>False</td><td>False</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>6</td><td>16.7%</td><td>False</td><td>False</td><td>False</td><td>512</td><td>4.00</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>6</td><td>0.0%</td><td>False</td><td>False</td><td>False</td><td>9</td><td>1.00</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>4</td><td>0.0%</td><td>False</td><td>False</td><td>False</td><td>56</td><td>2.50</td></tr>
+<tr><td>City.000010</td><td>City</td><td>3</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>44</td><td>2.00</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>16</td><td>1.50</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>4</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>10</td><td>1.00</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>32</td><td>2.00</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>3</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>3</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>6</td><td>100.0%</td><td>True</td><td>True</td><td>True</td><td>9</td><td>1.00</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>6</td><td>83.3%</td><td>False</td><td>True</td><td>True</td><td>40</td><td>2.00</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>6</td><td>66.7%</td><td>False</td><td>True</td><td>True</td><td>14</td><td>1.00</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>6</td><td>66.7%</td><td>False</td><td>True</td><td>True</td><td>16</td><td>1.00</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>6</td><td>33.3%</td><td>False</td><td>True</td><td>True</td><td>224</td><td>2.50</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>3</td><td>33.3%</td><td>False</td><td>True</td><td>True</td><td>26</td><td>3.00</td></tr>
+</table>
+
+<h2>Reachable Headroom Tasks</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>features</th><th>direct_row_exact</th><th>direct_full_task_exact</th><th>learned_row_exact</th><th>learned_full_task_exact</th><th>oracle_row_exact</th><th>oracle_full_task_exact</th><th>learned_source</th><th>oracle_source</th><th>candidate_tables</th></tr>
+<tr><td>Number.000015</td><td>Number</td><td>Numeric,NumericRounding</td><td>33.3%</td><td>False</td><td>33.3%</td><td>False</td><td>100.0%</td><td>True</td><td>row_combo</td><td>row_combo</td><td>224</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>Numeric,NumericRounding</td><td>33.3%</td><td>False</td><td>33.3%</td><td>False</td><td>100.0%</td><td>True</td><td>row_sample0</td><td>row_combo</td><td>26</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>DateTimeRange,DateTimeRounding,DateTime</td><td>66.7%</td><td>False</td><td>66.7%</td><td>False</td><td>100.0%</td><td>True</td><td>row_sample0</td><td>row_combo</td><td>14</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>Concatenation,Numeric</td><td>66.7%</td><td>False</td><td>66.7%</td><td>False</td><td>100.0%</td><td>True</td><td>row_sample0</td><td>batch_plain</td><td>16</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>Numeric,NumericRounding</td><td>83.3%</td><td>False</td><td>83.3%</td><td>False</td><td>100.0%</td><td>True</td><td>row_combo</td><td>row_combo</td><td>40</td></tr>
+</table>
+
+<h2>Learned Selection Changes</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>direct_row_exact</th><th>learned_row_exact</th><th>direct_full_task_exact</th><th>learned_full_task_exact</th><th>learned_source</th><th>score</th><th>candidate_tables</th><th>table_candidate_oracle</th></tr>
+<tr><td>Address.000013</td><td>Address</td><td>66.7%</td><td>66.7%</td><td>False</td><td>False</td><td>batch_plain</td><td>0.95</td><td>17</td><td>False</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>50.0%</td><td>33.3%</td><td>False</td><td>False</td><td>row_combo</td><td>0.99</td><td>88</td><td>False</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>16.7%</td><td>33.3%</td><td>False</td><td>False</td><td>row_combo</td><td>0.01</td><td>512</td><td>False</td></tr>
+</table>
+
+<h2>Selected Tables</h2>
+
+<table>
+<tr><th>task_id</th><th>method</th><th>source</th><th>row_exact</th><th>full_task_exact</th><th>score</th><th>candidate_tables</th><th>table_candidate_oracle</th></tr>
+<tr><td>Address.000002</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>0.00</td><td>9</td><td>False</td></tr>
+<tr><td>Address.000013</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>0.00</td><td>17</td><td>False</td></tr>
+<tr><td>BillingCode.000007</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>0.00</td><td>16</td><td>False</td></tr>
+<tr><td>City.000010</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>City.000011</td><td>direct_row_greedy</td><td>row_greedy</td><td>75.0%</td><td>False</td><td>0.00</td><td>12</td><td>False</td></tr>
+<tr><td>Column.000001</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000004</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000007</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000017</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>44</td><td>True</td></tr>
+<tr><td>DateTime.000025</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>16</td><td>True</td></tr>
+<tr><td>DateTime.000027</td><td>direct_row_greedy</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>0.00</td><td>88</td><td>False</td></tr>
+<tr><td>DateTime.000034</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000051</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>0.00</td><td>12</td><td>False</td></tr>
+<tr><td>DateTime.000076</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>0.00</td><td>14</td><td>True</td></tr>
+<tr><td>DateTime.000081</td><td>direct_row_greedy</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>0.00</td><td>14</td><td>False</td></tr>
+<tr><td>DateTime.000094</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000104</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000108</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000111</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>10</td><td>True</td></tr>
+<tr><td>DateTime.000114</td><td>direct_row_greedy</td><td>row_greedy</td><td>16.7%</td><td>False</td><td>0.00</td><td>512</td><td>False</td></tr>
+<tr><td>DateTime.000115</td><td>direct_row_greedy</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>0.00</td><td>9</td><td>False</td></tr>
+<tr><td>DateTime.000116</td><td>direct_row_greedy</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>0.00</td><td>9</td><td>False</td></tr>
+<tr><td>FilePath.000001</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>Gender.000001</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>0.00</td><td>11</td><td>False</td></tr>
+<tr><td>Language.000002</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>Name.000028</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000008</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>0.00</td><td>16</td><td>False</td></tr>
+<tr><td>Number.000015</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>0.00</td><td>224</td><td>True</td></tr>
+<tr><td>Number.000016</td><td>direct_row_greedy</td><td>row_greedy</td><td>83.3%</td><td>False</td><td>0.00</td><td>40</td><td>True</td></tr>
+<tr><td>Number.000022</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>32</td><td>True</td></tr>
+<tr><td>Number.000028</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000029</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>0.00</td><td>14</td><td>False</td></tr>
+<tr><td>Number.000043</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000049</td><td>direct_row_greedy</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>0.00</td><td>56</td><td>False</td></tr>
+<tr><td>Number.000075</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>0.00</td><td>16</td><td>True</td></tr>
+<tr><td>Number.000077</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>0.00</td><td>26</td><td>True</td></tr>
+<tr><td>Phone.000008</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>Phone.000011</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>ShippingCode.000008</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>0.00</td><td>9</td><td>False</td></tr>
+<tr><td>UserAgent.000003</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>0.00</td><td>9</td><td>True</td></tr>
+<tr><td>Address.000002</td><td>heuristic</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>1.37</td><td>9</td><td>False</td></tr>
+<tr><td>Address.000013</td><td>heuristic</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>1.65</td><td>17</td><td>False</td></tr>
+<tr><td>BillingCode.000007</td><td>heuristic</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>1.49</td><td>16</td><td>False</td></tr>
+<tr><td>City.000010</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.19</td><td>9</td><td>True</td></tr>
+<tr><td>City.000011</td><td>heuristic</td><td>row_greedy</td><td>75.0%</td><td>False</td><td>1.76</td><td>12</td><td>False</td></tr>
+<tr><td>Column.000001</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000004</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000007</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000017</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>1.91</td><td>44</td><td>True</td></tr>
+<tr><td>DateTime.000025</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.09</td><td>16</td><td>True</td></tr>
+<tr><td>DateTime.000027</td><td>heuristic</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>1.77</td><td>88</td><td>False</td></tr>
+<tr><td>DateTime.000034</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000051</td><td>heuristic</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>2.05</td><td>12</td><td>False</td></tr>
+<tr><td>DateTime.000076</td><td>heuristic</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>2.05</td><td>14</td><td>True</td></tr>
+<tr><td>DateTime.000081</td><td>heuristic</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>2.02</td><td>14</td><td>False</td></tr>
+<tr><td>DateTime.000094</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000104</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>3.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000108</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000111</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.12</td><td>10</td><td>True</td></tr>
+<tr><td>DateTime.000114</td><td>heuristic</td><td>row_majority</td><td>33.3%</td><td>False</td><td>1.49</td><td>512</td><td>False</td></tr>
+<tr><td>DateTime.000115</td><td>heuristic</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>2.20</td><td>9</td><td>False</td></tr>
+<tr><td>DateTime.000116</td><td>heuristic</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>2.19</td><td>9</td><td>False</td></tr>
+<tr><td>FilePath.000001</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>Gender.000001</td><td>heuristic</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>2.06</td><td>11</td><td>False</td></tr>
+<tr><td>Language.000002</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>3.00</td><td>9</td><td>True</td></tr>
+<tr><td>Name.000028</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.99</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000008</td><td>heuristic</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>1.34</td><td>16</td><td>False</td></tr>
+<tr><td>Number.000015</td><td>heuristic</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>1.12</td><td>224</td><td>True</td></tr>
+<tr><td>Number.000016</td><td>heuristic</td><td>row_greedy</td><td>83.3%</td><td>False</td><td>1.91</td><td>40</td><td>True</td></tr>
+<tr><td>Number.000022</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>1.87</td><td>32</td><td>True</td></tr>
+<tr><td>Number.000028</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.19</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000029</td><td>heuristic</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>1.90</td><td>14</td><td>False</td></tr>
+<tr><td>Number.000043</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000049</td><td>heuristic</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>1.76</td><td>56</td><td>False</td></tr>
+<tr><td>Number.000075</td><td>heuristic</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>1.99</td><td>16</td><td>True</td></tr>
+<tr><td>Number.000077</td><td>heuristic</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>1.69</td><td>26</td><td>True</td></tr>
+<tr><td>Phone.000008</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>Phone.000011</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>2.20</td><td>9</td><td>True</td></tr>
+<tr><td>ShippingCode.000008</td><td>heuristic</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>1.66</td><td>9</td><td>False</td></tr>
+<tr><td>UserAgent.000003</td><td>heuristic</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>1.52</td><td>9</td><td>True</td></tr>
+<tr><td>Address.000002</td><td>learned_reranker</td><td>batch_plain</td><td>33.3%</td><td>False</td><td>1.00</td><td>9</td><td>False</td></tr>
+<tr><td>Address.000013</td><td>learned_reranker</td><td>batch_plain</td><td>66.7%</td><td>False</td><td>0.95</td><td>17</td><td>False</td></tr>
+<tr><td>BillingCode.000007</td><td>learned_reranker</td><td>row_combo</td><td>33.3%</td><td>False</td><td>0.00</td><td>16</td><td>False</td></tr>
+<tr><td>City.000010</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>1.00</td><td>9</td><td>True</td></tr>
+<tr><td>City.000011</td><td>learned_reranker</td><td>row_combo</td><td>75.0%</td><td>False</td><td>0.00</td><td>12</td><td>False</td></tr>
+<tr><td>Column.000001</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>0.96</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000004</td><td>learned_reranker</td><td>row_sample0</td><td>100.0%</td><td>True</td><td>0.99</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000007</td><td>learned_reranker</td><td>row_sample0</td><td>100.0%</td><td>True</td><td>0.99</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000017</td><td>learned_reranker</td><td>row_combo</td><td>100.0%</td><td>True</td><td>0.89</td><td>44</td><td>True</td></tr>
+<tr><td>DateTime.000025</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>0.97</td><td>16</td><td>True</td></tr>
+<tr><td>DateTime.000027</td><td>learned_reranker</td><td>row_combo</td><td>33.3%</td><td>False</td><td>0.99</td><td>88</td><td>False</td></tr>
+<tr><td>DateTime.000034</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>0.99</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000051</td><td>learned_reranker</td><td>row_sample0</td><td>33.3%</td><td>False</td><td>0.42</td><td>12</td><td>False</td></tr>
+<tr><td>DateTime.000076</td><td>learned_reranker</td><td>row_sample0</td><td>66.7%</td><td>False</td><td>0.86</td><td>14</td><td>True</td></tr>
+<tr><td>DateTime.000081</td><td>learned_reranker</td><td>row_sample0</td><td>50.0%</td><td>False</td><td>0.47</td><td>14</td><td>False</td></tr>
+<tr><td>DateTime.000094</td><td>learned_reranker</td><td>row_combo</td><td>100.0%</td><td>True</td><td>0.81</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000104</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>1.00</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000108</td><td>learned_reranker</td><td>row_sample0</td><td>100.0%</td><td>True</td><td>0.98</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000111</td><td>learned_reranker</td><td>row_sample0</td><td>100.0%</td><td>True</td><td>0.98</td><td>10</td><td>True</td></tr>
+<tr><td>DateTime.000114</td><td>learned_reranker</td><td>row_combo</td><td>33.3%</td><td>False</td><td>0.01</td><td>512</td><td>False</td></tr>
+<tr><td>DateTime.000115</td><td>learned_reranker</td><td>batch_plain</td><td>0.0%</td><td>False</td><td>0.82</td><td>9</td><td>False</td></tr>
+<tr><td>DateTime.000116</td><td>learned_reranker</td><td>row_combo</td><td>50.0%</td><td>False</td><td>1.00</td><td>9</td><td>False</td></tr>
+<tr><td>FilePath.000001</td><td>learned_reranker</td><td>row_sample0</td><td>100.0%</td><td>True</td><td>0.95</td><td>9</td><td>True</td></tr>
+<tr><td>Gender.000001</td><td>learned_reranker</td><td>row_combo</td><td>66.7%</td><td>False</td><td>0.02</td><td>11</td><td>False</td></tr>
+<tr><td>Language.000002</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>1.00</td><td>9</td><td>True</td></tr>
+<tr><td>Name.000028</td><td>learned_reranker</td><td>row_sample0</td><td>100.0%</td><td>True</td><td>1.00</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000008</td><td>learned_reranker</td><td>row_sample1</td><td>33.3%</td><td>False</td><td>0.08</td><td>16</td><td>False</td></tr>
+<tr><td>Number.000015</td><td>learned_reranker</td><td>row_combo</td><td>33.3%</td><td>False</td><td>0.03</td><td>224</td><td>True</td></tr>
+<tr><td>Number.000016</td><td>learned_reranker</td><td>row_combo</td><td>83.3%</td><td>False</td><td>0.71</td><td>40</td><td>True</td></tr>
+<tr><td>Number.000022</td><td>learned_reranker</td><td>row_combo</td><td>100.0%</td><td>True</td><td>0.90</td><td>32</td><td>True</td></tr>
+<tr><td>Number.000028</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>0.92</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000029</td><td>learned_reranker</td><td>batch_json</td><td>66.7%</td><td>False</td><td>0.87</td><td>14</td><td>False</td></tr>
+<tr><td>Number.000043</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>0.98</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000049</td><td>learned_reranker</td><td>batch_json</td><td>0.0%</td><td>False</td><td>0.69</td><td>56</td><td>False</td></tr>
+<tr><td>Number.000075</td><td>learned_reranker</td><td>row_sample0</td><td>66.7%</td><td>False</td><td>0.16</td><td>16</td><td>True</td></tr>
+<tr><td>Number.000077</td><td>learned_reranker</td><td>row_sample0</td><td>33.3%</td><td>False</td><td>0.14</td><td>26</td><td>True</td></tr>
+<tr><td>Phone.000008</td><td>learned_reranker</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>1.00</td><td>9</td><td>True</td></tr>
+<tr><td>Phone.000011</td><td>learned_reranker</td><td>row_combo</td><td>100.0%</td><td>True</td><td>0.36</td><td>9</td><td>True</td></tr>
+<tr><td>ShippingCode.000008</td><td>learned_reranker</td><td>batch_plain</td><td>33.3%</td><td>False</td><td>0.80</td><td>9</td><td>False</td></tr>
+<tr><td>UserAgent.000003</td><td>learned_reranker</td><td>row_sample0</td><td>100.0%</td><td>True</td><td>0.10</td><td>9</td><td>True</td></tr>
+</table>
+
+<h2>Files</h2>
+
+<p>- <code>runs/main_qwen_table_40/row_candidates.csv</code></p>
+<p>- <code>runs/main_qwen_table_40/table_candidates.csv</code></p>
+<p>- <code>runs/main_qwen_table_40/selected_tables.csv</code></p>
+<p>- <code>runs/main_qwen_table_40/oracle_summary.csv</code></p>
+<p>- <code>runs/main_qwen_table_40/fold_diagnostics.csv</code></p>
+<p>- <code>analysis/summary.csv</code></p>
+<p>- <code>analysis/family_summary.csv</code></p>
+<p>- <code>analysis/selected_tables.csv</code></p>
+<p>- <code>analysis/oracle_summary.csv</code></p></body></html>

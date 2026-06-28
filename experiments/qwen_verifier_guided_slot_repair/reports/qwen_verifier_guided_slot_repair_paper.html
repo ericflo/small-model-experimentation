@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen Verifier-Guided Slot Repair</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.55; max-width: 920px; margin: 40px auto; padding: 0 24px; color: #17202a; }
+h1, h2, h3 { line-height: 1.2; }
+table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 14px; }
+th, td { border: 1px solid #d6dde5; padding: 8px 10px; text-align: left; }
+th { background: #eef3f7; }
+code { background: #eef3f7; padding: 1px 4px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<h1>Qwen Verifier-Guided Slot Repair</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether local verifier-guided search can recover exact long-chain execution from near-miss programs compiled by a QLoRA-adapted <code>Qwen/Qwen3-4B</code> model. Each prompt describes modular arithmetic updates. The compiler copies an initial value, operation sequence, and operation arguments from Qwen hidden states, then an invisible executor runs the copied program modulo 97.</p>
+<p>The main result is positive as a headroom result. On fresh paired length-24 standard/paraphrase programs, the selected checkpoint scored 27.5% exact execution before repair and 91.0% after top-3/two-edit state-verifier repair. Repaired program exact was 90.0%, and repaired paired state consistency was 92.2%. A one-edit ablation reached 70.5%, showing that many failures are one local slot edit away and more are recoverable with two-slot edits.</p>
+<p>This is not a deployable inference method yet. The primary verifier uses the true intermediate state trajectory. The result shows that the compiler's errors are often locally repairable, and that a learned or task-native verifier is a high-value next target.</p>
+<h2>Question</h2>
+<p>If a Qwen-attached compiler is mostly right but brittle over long chains, how much exact execution can be recovered by searching a small neighborhood of locally plausible slot edits?</p>
+<p>The tested repair space includes:</p>
+<ul>
+<li>alternate initial values from the compiler logits;</li>
+<li>alternate operations from the compiler logits;</li>
+<li>alternate arguments from the compiler logits;</li>
+<li>same-step operation and argument edits;</li>
+<li>pairs of argument edits.</li>
+</ul>
+<p>The primary verifier requires the full intermediate state trajectory to match the true trajectory. This avoids a failure mode of final-answer-only verification: with many candidates and only 97 possible final answers, spurious final-answer matches are common.</p>
+<h2>Method</h2>
+<p>The main run used <code>Qwen/Qwen3-4B</code> with 4-bit QLoRA adapters and a numeric-copy compiler. Training used a four-stage curriculum:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th style="text-align: right;">Length range</th>
+<th style="text-align: right;">Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>short</td>
+<td style="text-align: right;">1-4</td>
+<td style="text-align: right;">200</td>
+</tr>
+<tr>
+<td>medium</td>
+<td style="text-align: right;">1-8</td>
+<td style="text-align: right;">200</td>
+</tr>
+<tr>
+<td>train</td>
+<td style="text-align: right;">1-12</td>
+<td style="text-align: right;">200</td>
+</tr>
+<tr>
+<td>long</td>
+<td style="text-align: right;">8-24</td>
+<td style="text-align: right;">300</td>
+</tr>
+</tbody>
+</table>
+<p>The compiler was trained with trace supervision, executor loss, token-position selection losses, paired standard/paraphrase batches, and light intermediate-state supervision with weight 0.25. Checkpoints were saved at evaluation points and selected by validation <code>paired_len24_repair_executor_accuracy</code>.</p>
+<p>Repair search used:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>verifier</td>
+<td style="text-align: right;">full state trajectory</td>
+</tr>
+<tr>
+<td>candidate top-k per slot</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>maximum edits</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>max argument-pair slots</td>
+<td style="text-align: right;">24</td>
+</tr>
+</tbody>
+</table>
+<p>The fresh retest used 256 standard length-24 programs, 256 paraphrase length-24 programs, and 256 paired length-24 latent programs rendered in both forms.</p>
+<h2>Results</h2>
+<h3>Selected Validation Checkpoint</h3>
+<p>The selected checkpoint was step 800.</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Unrepaired exact</th>
+<th style="text-align: right;">Repaired exact</th>
+<th style="text-align: right;">Repaired program exact</th>
+<th style="text-align: right;">Repair found</th>
+<th style="text-align: right;">Repair changed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard L24</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">48.4%</td>
+</tr>
+<tr>
+<td>Paraphrase L24</td>
+<td style="text-align: right;">20.3%</td>
+<td style="text-align: right;">81.2%</td>
+<td style="text-align: right;">79.7%</td>
+<td style="text-align: right;">81.2%</td>
+<td style="text-align: right;">60.9%</td>
+</tr>
+<tr>
+<td>Paired L24</td>
+<td style="text-align: right;">30.5%</td>
+<td style="text-align: right;">88.3%</td>
+<td style="text-align: right;">88.3%</td>
+<td style="text-align: right;">88.3%</td>
+<td style="text-align: right;">57.8%</td>
+</tr>
+</tbody>
+</table>
+<p>Step 900 was worse on the primary repaired paired metric: 82.0%. Checkpoint selection therefore mattered.</p>
+<h3>Fresh Retest</h3>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Unrepaired exact</th>
+<th style="text-align: right;">Repaired exact</th>
+<th style="text-align: right;">Repaired program exact</th>
+<th style="text-align: right;">Repaired prefix</th>
+<th style="text-align: right;">Repair found</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fresh standard L24</td>
+<td style="text-align: right;">27.3%</td>
+<td style="text-align: right;">88.3%</td>
+<td style="text-align: right;">87.9%</td>
+<td style="text-align: right;">90.7%</td>
+<td style="text-align: right;">88.3%</td>
+</tr>
+<tr>
+<td>Fresh paraphrase L24</td>
+<td style="text-align: right;">23.8%</td>
+<td style="text-align: right;">86.3%</td>
+<td style="text-align: right;">85.5%</td>
+<td style="text-align: right;">88.6%</td>
+<td style="text-align: right;">86.3%</td>
+</tr>
+<tr>
+<td>Fresh paired L24</td>
+<td style="text-align: right;">27.5%</td>
+<td style="text-align: right;">91.0%</td>
+<td style="text-align: right;">90.0%</td>
+<td style="text-align: right;">93.4%</td>
+<td style="text-align: right;">91.0%</td>
+</tr>
+</tbody>
+</table>
+<p>On the paired split, unrepaired paired state consistency was 69.1%; repaired paired state consistency was 92.2%. Repaired pair both-correct was 89.5%.</p>
+<h3>One-Edit Ablation</h3>
+<p>The same selected checkpoint was retested with the same top-3 candidates but only one allowed edit.</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Unrepaired exact</th>
+<th style="text-align: right;">One-edit repaired exact</th>
+<th style="text-align: right;">Two-edit repaired exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fresh standard L24</td>
+<td style="text-align: right;">27.3%</td>
+<td style="text-align: right;">64.1%</td>
+<td style="text-align: right;">88.3%</td>
+</tr>
+<tr>
+<td>Fresh paraphrase L24</td>
+<td style="text-align: right;">23.8%</td>
+<td style="text-align: right;">59.8%</td>
+<td style="text-align: right;">86.3%</td>
+</tr>
+<tr>
+<td>Fresh paired L24</td>
+<td style="text-align: right;">27.5%</td>
+<td style="text-align: right;">70.5%</td>
+<td style="text-align: right;">91.0%</td>
+</tr>
+</tbody>
+</table>
+<p>One-edit repair recovers a large fraction of failures, but two-edit repair is much stronger. This suggests the compiler often makes one or two local slot errors rather than globally incoherent programs.</p>
+<h2>Interpretation</h2>
+<p>The repair result is much larger than the training-objective changes tested in this harness. The reason is straightforward: exact long-chain execution is an all-or-nothing metric, while the compiler's per-slot predictions are already close. At length 24, a small number of wrong arguments or operations can destroy the final answer. Local search converts the compiler's near-miss distribution into exact programs when the verifier can identify the correct state trajectory.</p>
+<p>The repaired program-exact numbers are important. On fresh paired L24, repaired exact execution is 91.0% and repaired program exact is 90.0%. The search is usually recovering the true compiled program, not merely exploiting final-answer collisions.</p>
+<p>The answer-only verifier pilot failed immediately and was stopped. With roughly 1,299 candidates and only 97 final answers, even weak candidates often include a spurious final-answer match. The state-trajectory verifier fixes that measurement problem by requiring the whole execution path to be correct.</p>
+<h2>Limitations</h2>
+<p>The primary verifier is oracle-like. It uses the true intermediate state trajectory, which is available to the synthetic training and evaluation harness but would not be available for ordinary inference. Therefore this experiment should be read as a repair headroom test, not as a completed posttraining recipe.</p>
+<p>The task is synthetic modular arithmetic. The compiler, token maps, operation set, and executor are all specialized. The result does not demonstrate broad intelligence improvement. It does show a concrete fact about this Qwen-attached runtime: most long-chain failures are locally repairable if a strong verifier is available.</p>
+<h2>Next Step</h2>
+<p>The next experiment should replace the oracle state verifier with a learned verifier or repair policy. The most direct version is:</p>
+<ol>
+<li>Generate candidate repair sets from the trained compiler.</li>
+<li>Label candidates by whether their state trajectory is correct.</li>
+<li>Train a verifier/reranker from Qwen hidden states, compiled slot logits, candidate edits, and execution features.</li>
+<li>Evaluate whether the learned verifier can recover a meaningful fraction of the 91.0% oracle-repair ceiling without access to oracle states.</li>
+</ol>
+<p>The success criterion should be fresh paired L24 exact execution substantially above the unrepaired 27.5% baseline, while preserving paired consistency.</p>
+<h2>Artifacts</h2>
+<p>Small files live in:</p>
+<pre><code class="language-text">experiments/qwen_verifier_guided_slot_repair/
+</code></pre>
+<p>Large checkpoints live in:</p>
+<pre><code class="language-text">large_artifacts/qwen_verifier_guided_slot_repair/checkpoints/
+</code></pre>
+<p>Primary result files:</p>
+<ul>
+<li><code>analysis/selected_checkpoints.csv</code></li>
+<li><code>analysis/selected_retest_metrics.csv</code></li>
+<li><code>analysis/selected_retest_metrics_one_edit.csv</code></li>
+<li><code>reports/qwen_verifier_guided_slot_repair_experiment_log.md</code></li>
+</ul>
+</body>
+</html>

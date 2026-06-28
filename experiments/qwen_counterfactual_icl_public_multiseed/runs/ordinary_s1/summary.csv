@@ -1,0 +1,7 @@
+method,split,support_mode,tasks,rows,row_exact,full_task_exact
+adapter,public_prose,none,45,135,0.05185185185185185,0.0
+adapter,public_prose,normal,45,135,0.7407407407407407,0.6444444444444445
+adapter,public_prose,shuffled,45,135,0.4888888888888889,0.26666666666666666
+adapter,synthetic_counterfactual,none,60,120,0.025,0.0
+adapter,synthetic_counterfactual,normal,60,120,0.9666666666666667,0.95
+adapter,synthetic_counterfactual,shuffled,60,120,0.5833333333333334,0.4666666666666667

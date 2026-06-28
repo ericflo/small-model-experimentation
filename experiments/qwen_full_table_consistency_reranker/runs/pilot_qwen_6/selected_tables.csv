@@ -1,0 +1,37 @@
+task_id,method,candidate_id,source,row_exact,full_task_exact,score,outputs_json,family,features,heldout_rows,row_candidate_oracle,table_candidate_oracle,candidate_tables,row_candidate_median
+City.000010,heuristic,City.000010::cand0000,row_greedy,1.0,True,2.193333333333333,"[""9"", ""20"", ""0""]",City,"Conditional,Numeric",3,True,True,8,1.0
+DateTime.000025,heuristic,DateTime.000025::cand0000,row_greedy,1.0,True,2.0124999999999997,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]",DateTime,DateTime,4,True,True,13,1.5
+DateTime.000104,heuristic,DateTime.000104::cand0000,row_greedy,1.0,True,2.7499999999999996,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]",DateTime,DateTime,4,True,True,23,2.0
+Number.000075,heuristic,Number.000075::cand0000,row_greedy,0.5,False,1.825,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]",Number,"Concatenation,Numeric",4,True,True,15,1.5
+Number.000077,heuristic,Number.000077::cand0000,row_greedy,0.3333333333333333,False,1.6033333333333333,"[""110"", ""11000"", ""540""]",Number,"Numeric,NumericRounding",3,True,True,25,3.0
+UserAgent.000003,heuristic,UserAgent.000003::cand0000,row_greedy,1.0,True,1.5899999999999999,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]",UserAgent,Substring,4,True,True,8,1.0
+City.000010,direct_row_greedy,City.000010::cand0000,row_greedy,1.0,True,0.0,"[""9"", ""20"", ""0""]",City,"Conditional,Numeric",3,True,True,8,1.0
+DateTime.000025,direct_row_greedy,DateTime.000025::cand0000,row_greedy,1.0,True,0.0,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]",DateTime,DateTime,4,True,True,13,1.5
+DateTime.000104,direct_row_greedy,DateTime.000104::cand0000,row_greedy,1.0,True,0.0,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]",DateTime,DateTime,4,True,True,23,2.0
+Number.000075,direct_row_greedy,Number.000075::cand0000,row_greedy,0.5,False,0.0,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]",Number,"Concatenation,Numeric",4,True,True,15,1.5
+Number.000077,direct_row_greedy,Number.000077::cand0000,row_greedy,0.3333333333333333,False,0.0,"[""110"", ""11000"", ""540""]",Number,"Numeric,NumericRounding",3,True,True,25,3.0
+UserAgent.000003,direct_row_greedy,UserAgent.000003::cand0000,row_greedy,1.0,True,0.0,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]",UserAgent,Substring,4,True,True,8,1.0
+City.000010,row_majority,City.000010::cand0006,row_majority,1.0,True,0.0,"[""9"", ""20"", ""0""]",City,"Conditional,Numeric",3,True,True,8,1.0
+DateTime.000025,row_majority,DateTime.000025::cand0006,row_majority,1.0,True,0.0,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]",DateTime,DateTime,4,True,True,13,1.5
+DateTime.000104,row_majority,DateTime.000104::cand0006,row_majority,1.0,True,0.0,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]",DateTime,DateTime,4,True,True,23,2.0
+Number.000075,row_majority,Number.000075::cand0006,row_majority,0.5,False,0.0,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]",Number,"Concatenation,Numeric",4,True,True,15,1.5
+Number.000077,row_majority,Number.000077::cand0006,row_majority,0.3333333333333333,False,0.0,"[""110"", ""11000"", ""540""]",Number,"Numeric,NumericRounding",3,True,True,25,3.0
+UserAgent.000003,row_majority,UserAgent.000003::cand0006,row_majority,1.0,True,0.0,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]",UserAgent,Substring,4,True,True,8,1.0
+City.000010,table_oracle,City.000010::cand0000,row_greedy,1.0,True,1.0,"[""9"", ""20"", ""0""]",City,"Conditional,Numeric",3,True,True,8,1.0
+DateTime.000025,table_oracle,DateTime.000025::cand0000,row_greedy,1.0,True,1.0,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]",DateTime,DateTime,4,True,True,13,1.5
+DateTime.000104,table_oracle,DateTime.000104::cand0000,row_greedy,1.0,True,1.0,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]",DateTime,DateTime,4,True,True,23,2.0
+Number.000075,table_oracle,Number.000075::cand0003,batch_plain,1.0,True,1.0,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B""]",Number,"Concatenation,Numeric",4,True,True,15,1.5
+Number.000077,table_oracle,Number.000077::cand0022,row_combo,1.0,True,1.0,"[""11110"", ""11110"", ""540""]",Number,"Numeric,NumericRounding",3,True,True,25,3.0
+UserAgent.000003,table_oracle,UserAgent.000003::cand0000,row_greedy,1.0,True,1.0,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]",UserAgent,Substring,4,True,True,8,1.0
+City.000010,learned_reranker,City.000010::cand0003,batch_plain,1.0,True,0.09049938356902647,"[""9"", ""20"", ""0""]",City,"Conditional,Numeric",3,True,True,8,1.0
+DateTime.000025,learned_reranker,DateTime.000025::cand0008,row_combo,0.75,False,0.8375922718351576,"[""Mar 41"", ""Aug 60"", ""May 84"", ""August 40""]",DateTime,DateTime,4,True,True,13,1.5
+DateTime.000104,learned_reranker,DateTime.000104::cand0006,row_majority,1.0,True,0.9923163365184189,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]",DateTime,DateTime,4,True,True,23,2.0
+Number.000075,learned_reranker,Number.000075::cand0006,row_majority,0.5,False,0.46412339170423544,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]",Number,"Concatenation,Numeric",4,True,True,15,1.5
+Number.000077,learned_reranker,Number.000077::cand0016,row_combo,0.6666666666666666,False,0.9985579264760749,"[""11110"", ""11000"", ""540""]",Number,"Numeric,NumericRounding",3,True,True,25,3.0
+UserAgent.000003,learned_reranker,UserAgent.000003::cand0003,batch_plain,1.0,True,0.9999696211319341,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]",UserAgent,Substring,4,True,True,8,1.0
+City.000010,shuffled_label_reranker,City.000010::cand0006,row_majority,1.0,True,0.6335105994541322,"[""9"", ""20"", ""0""]",City,"Conditional,Numeric",3,True,True,8,1.0
+DateTime.000025,shuffled_label_reranker,DateTime.000025::cand0006,row_majority,1.0,True,0.7887427072433003,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40""]",DateTime,DateTime,4,True,True,13,1.5
+DateTime.000104,shuffled_label_reranker,DateTime.000104::cand0005,row_sample0,1.0,True,0.5334181614467194,"[""Jan"", ""Aug"", ""Dec"", ""Jul""]",DateTime,DateTime,4,True,True,23,2.0
+Number.000075,shuffled_label_reranker,Number.000075::cand0005,row_sample0,0.5,False,0.5849725345262622,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B""]",Number,"Concatenation,Numeric",4,True,True,15,1.5
+Number.000077,shuffled_label_reranker,Number.000077::cand0006,row_majority,0.3333333333333333,False,0.9210450789917876,"[""110"", ""11000"", ""540""]",Number,"Numeric,NumericRounding",3,True,True,25,3.0
+UserAgent.000003,shuffled_label_reranker,UserAgent.000003::cand0006,row_majority,1.0,True,0.9636653258017762,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ""]",UserAgent,Substring,4,True,True,8,1.0

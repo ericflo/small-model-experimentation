@@ -1,0 +1,33 @@
+trainable params: 10,616,832 || all params: 4,549,882,368 || trainable%: 0.2333
+{'loss': '1.431', 'grad_norm': '2.988', 'learning_rate': '0.00016', 'epoch': '0.1111'}
+{'loss': '0.3463', 'grad_norm': '1.937', 'learning_rate': '0.0001893', 'epoch': '0.2222'}
+{'loss': '0.1022', 'grad_norm': '1.987', 'learning_rate': '0.000176', 'epoch': '0.3333'}
+{'loss': '0.02178', 'grad_norm': '1.058', 'learning_rate': '0.0001627', 'epoch': '0.4444'}
+{'loss': '0.03164', 'grad_norm': '0.125', 'learning_rate': '0.0001493', 'epoch': '0.5556'}
+{'loss': '0.05334', 'grad_norm': '0.07541', 'learning_rate': '0.000136', 'epoch': '0.6667'}
+{'eval_loss': '0.01057', 'eval_runtime': '11.66', 'eval_samples_per_second': '3.43', 'eval_steps_per_second': '3.43', 'epoch': '0.6667'}
+{'loss': '0.004051', 'grad_norm': '0.01333', 'learning_rate': '0.0001227', 'epoch': '0.7778'}
+{'loss': '0.007371', 'grad_norm': '0.06744', 'learning_rate': '0.0001093', 'epoch': '0.8889'}
+{'loss': '0.01229', 'grad_norm': '1.252', 'learning_rate': '9.6e-05', 'epoch': '1'}
+{'loss': '0.002783', 'grad_norm': '0.05661', 'learning_rate': '8.267e-05', 'epoch': '1.111'}
+{'loss': '0.001979', 'grad_norm': '0.02159', 'learning_rate': '6.933e-05', 'epoch': '1.222'}
+{'loss': '0.001288', 'grad_norm': '2.375', 'learning_rate': '5.6e-05', 'epoch': '1.333'}
+{'eval_loss': '0.0003883', 'eval_runtime': '11.56', 'eval_samples_per_second': '3.461', 'eval_steps_per_second': '3.461', 'epoch': '1.333'}
+{'loss': '0.0002647', 'grad_norm': '0.006423', 'learning_rate': '4.267e-05', 'epoch': '1.444'}
+{'loss': '0.0002427', 'grad_norm': '0.00626', 'learning_rate': '2.933e-05', 'epoch': '1.556'}
+{'loss': '0.0002528', 'grad_norm': '0.005914', 'learning_rate': '1.6e-05', 'epoch': '1.667'}
+{'loss': '0.0001783', 'grad_norm': '0.005836', 'learning_rate': '2.667e-06', 'epoch': '1.778'}
+{'eval_loss': '0.0002274', 'eval_runtime': '11.67', 'eval_samples_per_second': '3.428', 'eval_steps_per_second': '3.428', 'epoch': '1.778'}
+{'train_runtime': '546.2', 'train_samples_per_second': '0.586', 'train_steps_per_second': '0.146', 'train_loss': '0.1261', 'epoch': '1.778'}
+{
+  "train_records": 180,
+  "train_result": {
+    "epoch": 1.7777777777777777,
+    "total_flos": 2522868217064448.0,
+    "train_loss": 0.12608320784784155,
+    "train_runtime": 546.2462,
+    "train_samples_per_second": 0.586,
+    "train_steps_per_second": 0.146
+  },
+  "validation_records": 40
+}

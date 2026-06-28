@@ -1,0 +1,6 @@
+n,accuracy,parse_rate,run,split,variant
+32,0.3125,1.0,main_vm_agent_echo_blank_a512_stoprule,val_mixed,native_qwen_direct
+32,0.40625,1.0,main_vm_agent_echo_blank_a512_stoprule,fresh_standard,native_qwen_direct
+32,0.375,1.0,main_vm_agent_echo_blank_a512_stoprule,fresh_paraphrase,native_qwen_direct
+32,0.34375,0.96875,main_vm_agent_echo_blank_a512_stoprule,fresh_paired,native_qwen_direct
+32,0.40625,0.96875,main_vm_agent_echo_blank_a512_stoprule,hard_composition,native_qwen_direct

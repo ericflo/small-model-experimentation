@@ -1,0 +1,33 @@
+{
+  "experiment": "qwen35_4b_trained_vs_frozen_repair_mdp",
+  "max_extra_per_task": 12,
+  "max_new_tokens": 220,
+  "path": "data/sample_more_token_matched_heldout_records.jsonl",
+  "records": {
+    "candidate_count_mean": 5.18,
+    "coverage": 0.6533333333333333,
+    "distinct_behavior_rate_mean": 0.7079047619047619,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.3933333333333335,
+    "parse_success_mean": 4.946666666666666,
+    "records": 150,
+    "visible_candidates_mean": 2.8733333333333335,
+    "visible_coverage": 0.6533333333333333,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 57,
+    "zero_to_one": 5,
+    "zero_to_one_rate": 0.08771929824561403
+  },
+  "records_in": "data/base_direct_heldout_records.jsonl",
+  "round_name": "sample_more_token_matched_heldout",
+  "target_forward_tokens": 79614,
+  "temperatures": "0.2,0.7,1.0",
+  "token_usage": {
+    "calls": 344,
+    "completion_tokens": 36242,
+    "forward_tokens": 79861,
+    "prompt_tokens": 43619
+  },
+  "top_p": 0.95
+}

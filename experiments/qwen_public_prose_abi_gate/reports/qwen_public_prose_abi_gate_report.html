@@ -1,0 +1,233 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Public PROSE ABI Gate</title><style>body{font-family:Inter,system-ui,sans-serif;line-height:1.45;max-width:1180px;margin:32px auto;padding:0 24px;color:#172033}table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #ddd;padding:4px 6px}code{background:#f4f4f5;padding:1px 4px;border-radius:4px}h1,h2,h3{line-height:1.15}</style></head><body><h1>Qwen Public PROSE ABI Gate</h1><br>
+<br>
+<h2>Abstract</h2><br>
+<br>
+This standalone experiment evaluates a frozen deterministic transformation ABI on the public Microsoft PROSE `Transformation.Text` benchmark. A program is selected from train examples and counted only if it also matches held-out examples from the same task.<br>
+<br>
+<h2>Method</h2><br>
+<br>
+- Dataset: Microsoft PROSE public benchmark suite, `Transformation.Text`.<br>
+- Tasks with too few examples are excluded so every scored task has held-out examples.<br>
+- Split: first `4` examples, capped by task size, are train examples; up to `50` following examples are held out.<br>
+- Frozen ABI tiers: `core` surface extraction/casing, `office` adds regex/date/number/domain primitives, `concat` adds two-part concatenation over ABI expressions.<br>
+- Train-only fits are counted as failures because they do not validate task semantics on held-out rows.<br>
+<br>
+<h2>Run Configuration</h2><br>
+<br>
+- Suite: `main`.<br>
+- Scored tasks: `309`.<br>
+- Public benchmark checkout: `/workspace/large_artifacts/qwen_public_prose_abi_gate/prose-benchmarks`.<br>
+<br>
+<h2>Primary Results</h2><br>
+<br>
+- Best frozen tier coverage: 19.1% (59/309 tasks).<br>
+- Train-only/coincidence failures: 3.6% (11 tasks).<br>
+- No-train-match failures: 77.3% (239 tasks).<br>
+- Synthetic-metadata coverage: 18.3% (55/301 tasks).<br>
+- Non-synthetic-metadata coverage: 50.0% (4/8 tasks).<br>
+<br>
+<h3>Frozen Qwen Direct-Answer Sample</h3><br>
+<br>
+- Model: `Qwen/Qwen3-4B`.<br>
+- Sample: `60` tasks, seed `20260627`.<br>
+- Prompt: first `4` examples, then one held-out query.<br>
+- Exact match on that one held-out query: 73.3% (44/60 tasks).<br>
+- This is a diagnostic baseline, not the same metric as ABI coverage: it scores one held-out query, while ABI coverage requires one program to match all held-out rows.<br>
+<br>
+|slice|tasks|exact|<br>
+|---|---|---|<br>
+|overall|60|0.73|<br>
+|abi_covered=False|44|0.66|<br>
+|abi_covered=True|16|0.94|<br>
+|family=DateTime|22|0.50|<br>
+|family=Name|4|1.00|<br>
+|family=Number|14|0.79|<br>
+|family=Phone|6|1.00|<br>
+<br>
+#### Qwen Sample Misses<br>
+<br>
+|task_id|family|features|abi_covered|exact|target|prediction|<br>
+|---|---|---|---|---|---|---|<br>
+|BillingCode.000007|BillingCode|Concatenation|False|False|11529]|[11529]|<br>
+|DateTime.000006|DateTime|Concatenation,DateTimeRange,DateTimeRounding,DateTime,Multicolumn|False|False|Fri 8:00-9:00|Thu 8:00-9:00|<br>
+|DateTime.000014|DateTime|DateTime|False|False|Friday #1 February 2013|Saturday #1 February 2013|<br>
+|DateTime.000046|DateTime|DateTime|False|False|1952 7 2|7/2/1952 2 2|<br>
+|DateTime.000056|DateTime|DateTimeRange,DateTimeRounding,DateTime|False|False|11AM-1PM|Noon-2PM|<br>
+|DateTime.000065|DateTime|DateTimeRange,DateTimeRounding,DateTime|False|False|12:30PM-12:44PM|12:00PM-12:45PM|<br>
+|DateTime.000066|DateTime|DateTimeRange,DateTimeRounding,DateTime|False|False|12:40PM-12:49PM|12:40PM-12:41PM|<br>
+|DateTime.000067|DateTime|DateTimeRange,DateTimeRounding,DateTime|False|False|12:00PM-1:20PM|11:30AM-12:50PM|<br>
+|DateTime.000088|DateTime|DateTimeRounding,DateTime|False|False|4:00PM|8:00AM|<br>
+|DateTime.000093|DateTime|DateTime|False|False|1990-03-07|1990-11-07|<br>
+|DateTime.000106|DateTime|DateTime|False|False|Mon|Wed|<br>
+|DateTime.000115|DateTime|DateTimeRange,DateTimeRounding,DateTime|False|False|40-60|0-20|<br>
+|Noise.000001|Noise|Concatenation,Multicolumn|True|False|%@^zxi**d^gx%i ry!d!!e*grumyr%$$#(k|col0=%@^zxi**d^gx%i ry! col1=d!!e*grumyr%$$#(k|<br>
+|Number.000015|Number|Numeric,NumericRounding|False|False|-22600|-22500|<br>
+|Number.000031|Number|Numeric,NumericRounding|False|False|43.5|43.0|<br>
+|Number.000094|Number|Concatenation,Numeric|False|False|₹56,343|₹5,6343|<br>
+<br>
+<h3>Overall By Tier</h3><br>
+<br>
+|tier|tasks|coverage|train_match_rate|train_only_rate|no_train_match_rate|median_candidates|<br>
+|---|---|---|---|---|---|---|<br>
+|concat|309|19.1%|22.7%|3.6%|77.3%|56833.00|<br>
+|core|309|12.6%|15.2%|2.6%|84.8%|109.00|<br>
+|office|309|17.8%|21.0%|3.2%|79.0%|1057.00|<br>
+<br>
+<h3>Feature Coverage</h3><br>
+<br>
+|feature|tasks|coverage|train_only_rate|<br>
+|---|---|---|---|<br>
+|DateTimeRange|36|0.0%|0.0%|<br>
+|DateTimeRounding|44|0.0%|0.0%|<br>
+|NumericRange|7|0.0%|0.0%|<br>
+|NumericRounding|42|4.8%|2.4%|<br>
+|Conditional|37|5.4%|10.8%|<br>
+|Numeric|82|7.3%|2.4%|<br>
+|DateTime|117|7.7%|4.3%|<br>
+|Multicolumn|16|18.8%|0.0%|<br>
+|Concatenation|52|19.2%|0.0%|<br>
+|Casing|9|33.3%|0.0%|<br>
+|Substring|111|40.5%|3.6%|<br>
+<br>
+<h3>Lowest-Coverage Families</h3><br>
+<br>
+|family|tasks|coverage|train_only_rate|<br>
+|---|---|---|---|<br>
+|Address|6|0.0%|16.7%|<br>
+|Author|1|0.0%|0.0%|<br>
+|BillingCode|6|0.0%|0.0%|<br>
+|Column|2|0.0%|0.0%|<br>
+|FilePath|1|0.0%|100.0%|<br>
+|Gender|3|0.0%|0.0%|<br>
+|Log|4|0.0%|0.0%|<br>
+|Meteorite|1|0.0%|0.0%|<br>
+|Product|2|0.0%|50.0%|<br>
+|Url|1|0.0%|0.0%|<br>
+|Number|84|7.1%|2.4%|<br>
+|DateTime|106|8.5%|4.7%|<br>
+|City|9|11.1%|0.0%|<br>
+|Phone|16|37.5%|0.0%|<br>
+|Name|28|39.3%|3.6%|<br>
+|UserAgent|7|42.9%|0.0%|<br>
+|Email|6|50.0%|0.0%|<br>
+|EmergencyCall|2|50.0%|0.0%|<br>
+|Language|2|50.0%|0.0%|<br>
+|Rating|2|50.0%|0.0%|<br>
+|Currency|3|66.7%|0.0%|<br>
+|ShippingCode|10|80.0%|0.0%|<br>
+|Abbreviation|1|100.0%|0.0%|<br>
+|Airline|1|100.0%|0.0%|<br>
+|Noise|1|100.0%|0.0%|<br>
+|Song|1|100.0%|0.0%|<br>
+|State|1|100.0%|0.0%|<br>
+|Team|1|100.0%|0.0%|<br>
+|ZipCode|1|100.0%|0.0%|<br>
+<br>
+<h3>Covered Program Examples</h3><br>
+<br>
+|task_id|family|features|num_examples|program_depth|program|<br>
+|---|---|---|---|---|---|<br>
+|Abbreviation.000001|Abbreviation|Concatenation,Conditional,Substring|52|1.00|initials(COL0)|<br>
+|Airline.000002|Airline|Substring|5|1.00|field[,,0](COL0)|<br>
+|City.000012|City|Substring|22|1.00|field[,,1](COL0)|<br>
+|Currency.000003|Currency|Numeric,Substring|20|1.00|number_2dp(COL0)|<br>
+|Currency.000005|Currency|Numeric,Substring|100|1.00|number_2dp(COL0)|<br>
+|DateTime.000003|DateTime|DateTime|10|1.00|time_hour(COL0)|<br>
+|DateTime.000004|DateTime|Concatenation,DateTime,Multicolumn|20|1.00|concat[&amp;#x27; &amp;#x27;](COL0,COL1)|<br>
+|DateTime.000013|DateTime|Conditional,DateTime|230|0.00|COL0|<br>
+|DateTime.000037|DateTime|DateTime|5|1.00|title(COL0)|<br>
+|DateTime.000092|DateTime|DateTime|32|1.00|time_hour(COL0)|<br>
+|DateTime.000102|DateTime|DateTime|20|1.00|time_hour(COL0)|<br>
+|DateTime.000103|DateTime|DateTime|20|1.00|field[:,1](COL0)|<br>
+|DateTime.000104|DateTime|DateTime|20|1.00|alpha(COL0)|<br>
+|DateTime.000105|DateTime|DateTime|20|1.00|field[:,2](COL0)|<br>
+|Email.000010|Email|Substring|10|1.00|email_domain(COL0)|<br>
+|Email.000011|Email|Substring|10|1.00|field[.,0](COL0)|<br>
+|Email.000013|Email|Substring|100|1.00|email_domain(COL0)|<br>
+|EmergencyCall.000003|EmergencyCall|Casing,Substring|12|2.00|title(field[;,1](COL0))|<br>
+|Language.000002|Language|Multicolumn,Substring|51|1.00|file_stem(COL1)|<br>
+|Name.000008|Name|Concatenation,Substring|20|1.00|first_last_initials(COL0)|<br>
+|Name.000014|Name|Substring|10|1.00|first_word(COL0)|<br>
+|Name.000025|Name|Casing,Concatenation,Substring|10|2.00|lower(initials_sp(COL0))|<br>
+<br>
+<h3>Train-Only Failures</h3><br>
+<br>
+|task_id|family|features|num_examples|program|<br>
+|---|---|---|---|---|<br>
+|Address.000012|Address|Conditional,Substring|10|number_int(COL0)|<br>
+|DateTime.000012|DateTime|Conditional,DateTime|10|field[space,-1](COL0)|<br>
+|DateTime.000096|DateTime|DateTime|20|field[-,4](COL0)|<br>
+|DateTime.000097|DateTime|DateTime|20|field[-,2](COL0)|<br>
+|DateTime.000099|DateTime|DateTime|20|field[-,0](COL0)|<br>
+|DateTime.000101|DateTime|DateTime|20|field[-,0](COL0)|<br>
+|FilePath.000001|FilePath|Conditional,Substring|17|file_stem(COL0)|<br>
+|Name.000037|Name|Conditional,Substring|20|field[,,1](COL0)|<br>
+|Number.000010|Number|Numeric,NumericRounding|40|COL0|<br>
+|Number.000082|Number|Numeric|20|number_int(COL0)|<br>
+|Product.000003|Product|Substring|5|concat[&amp;#x27; &amp;#x27;](number_int(COL0),last_word(COL0))|<br>
+<br>
+<h3>No-Train-Match Failures</h3><br>
+<br>
+|task_id|family|features|num_examples|<br>
+|---|---|---|---|<br>
+|Address.000002|Address|Substring|5|<br>
+|Address.000003|Address|Substring|5|<br>
+|Address.000009|Address|Concatenation,Multicolumn|10|<br>
+|Address.000013|Address|Conditional,Substring|10|<br>
+|Address.000014|Address|Substring|29|<br>
+|Author.000001|Author|Conditional,DateTime|39|<br>
+|BillingCode.000001|BillingCode|Concatenation|11|<br>
+|BillingCode.000002|BillingCode|Concatenation,Substring|11|<br>
+|BillingCode.000003|BillingCode|Concatenation|5|<br>
+|BillingCode.000004|BillingCode|Concatenation|5|<br>
+|BillingCode.000005|BillingCode|Concatenation,Substring|5|<br>
+|BillingCode.000007|BillingCode|Concatenation|5|<br>
+|City.000004|City|Conditional|20|<br>
+|City.000005|City|Conditional|14|<br>
+|City.000006|City|Conditional|5|<br>
+|City.000007|City|Conditional|5|<br>
+|City.000008|City|Conditional|5|<br>
+|City.000009|City|Conditional,Substring|6|<br>
+|City.000010|City|Conditional,Numeric|6|<br>
+|City.000011|City|Conditional|7|<br>
+|Column.000001|Column|Concatenation,Conditional,Substring|10|<br>
+|Column.000002|Column|Casing,Concatenation,Conditional,Substring|10|<br>
+|Currency.000004|Currency|Numeric,Substring|20|<br>
+|DateTime.000005|DateTime|Conditional,DateTime|27|<br>
+|DateTime.000006|DateTime|Concatenation,DateTimeRange,DateTimeRounding,DateTime,Multicolumn|1000|<br>
+|DateTime.000007|DateTime|DateTime|25|<br>
+|DateTime.000008|DateTime|DateTimeRange,DateTimeRounding,DateTime|20|<br>
+|DateTime.000009|DateTime|DateTime|100|<br>
+<br>
+<p><img src="../analysis/figures/coverage_by_tier.png" alt="coverage_by_tier.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/coverage_by_family.png" alt="coverage_by_family.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/coverage_by_feature.png" alt="coverage_by_feature.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/failure_modes.png" alt="failure_modes.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/synthetic_split.png" alt="synthetic_split.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/qwen_direct_sample.png" alt="qwen_direct_sample.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<h2>Interpretation</h2><br>
+<br>
+This public benchmark is a hard gate because task definitions come from an independent repository rather than this experiment&#x27;s generator. It directly tests whether a frozen transformation ABI covers independent string-transformation tasks under held-out validation.<br>
+The result is negative for this frozen ABI: the best tier covers only 19.1%, and most misses are no-train-match failures rather than held-out coincidence failures. The ABI is therefore too narrow for the public `Transformation.Text` suite without substantial primitive expansion or a retrieval step that selects a domain-specific ABI.<br>
+The frozen-Qwen direct-answer diagnostic points in a different direction: the model often infers these public transformations from examples even when the frozen ABI has no matching program. That suggests the immediate bottleneck is not that the transformations are impossible for the model; it is that the fixed ABI does not expose the right operations for this benchmark.<br>
+The train-only column is load-bearing. Those tasks are exactly the cases where a plausible expression fits examples but fails held-out rows, so they are excluded from coverage.<br>
+<br>
+<h2>Limitations</h2><br>
+<br>
+This run covers `Transformation.Text`, not `Split.Text` or `Extraction.Text`. The ABI is a fixed template library rather than a complete PROSE-style DSL, so misses can reflect missing primitives or bounded search. The benchmark itself contains mostly synthetic data according to its metadata, though it is independent public data rather than generated by this experiment.<br>
+<br>
+<h2>Artifacts</h2><br>
+<br>
+- Details: `analysis/details.csv`<br>
+- Overall summary: `analysis/overall_summary.csv`<br>
+- Family summary: `analysis/family_summary.csv`<br>
+- Feature summary: `analysis/feature_summary.csv`<br>
+- Frozen Qwen direct-answer sample: `analysis/qwen_direct_sample.csv`<br>
+- Public benchmark checkout: `/workspace/large_artifacts/qwen_public_prose_abi_gate/prose-benchmarks`<br>
+</body></html>

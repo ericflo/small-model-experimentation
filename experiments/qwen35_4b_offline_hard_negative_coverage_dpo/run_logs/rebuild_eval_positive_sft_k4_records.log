@@ -1,0 +1,28 @@
+{
+  "manifest": "data/eval_positive_sft_k4_records.manifest.json",
+  "records": {
+    "candidate_count_mean": 3.5833333333333335,
+    "coverage": 0.5416666666666666,
+    "distinct_behavior_rate_mean": 0.7777777777777778,
+    "distinct_functional_rate_mean": 0.44097222222222227,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 18704,
+    "hidden_pass_candidates_mean": 1.3333333333333333,
+    "parse_success_mean": 3.5416666666666665,
+    "pass1_proxy": 0.4583333333333333,
+    "records": 24,
+    "visible_candidates_mean": 1.9583333333333333,
+    "visible_coverage": 0.5416666666666666,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "token_usage": {
+    "calls": 96,
+    "completion_tokens": 8347,
+    "forward_tokens": 20327,
+    "prompt_tokens": 11980
+  }
+}

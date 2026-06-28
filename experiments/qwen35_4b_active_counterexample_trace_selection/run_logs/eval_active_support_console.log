@@ -1,0 +1,274 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:12,  9.94it/s]Loading weights:   5%|▍         | 36/723 [00:00<00:03, 205.26it/s]Loading weights:  13%|█▎        | 94/723 [00:00<00:01, 368.15it/s]Loading weights:  21%|██        | 152/723 [00:00<00:01, 443.02it/s]Loading weights:  29%|██▉       | 212/723 [00:00<00:01, 495.48it/s]Loading weights:  38%|███▊      | 274/723 [00:00<00:00, 536.82it/s]Loading weights:  46%|████▌     | 330/723 [00:00<00:00, 538.01it/s]Loading weights:  54%|█████▍    | 393/723 [00:00<00:00, 562.09it/s]Loading weights:  72%|███████▏  | 524/723 [00:00<00:00, 791.79it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 723.87it/s]
+eval-active:dsl_eval_support:   0%|          | 0/120 [00:00<?, ?it/s]eval-active:dsl_eval_support:   1%|          | 1/120 [00:07<14:28,  7.30s/it]eval-active:dsl_eval_support:   2%|▏         | 2/120 [00:13<13:20,  6.78s/it]eval-active:dsl_eval_support:   2%|▎         | 3/120 [00:20<12:57,  6.65s/it]eval-active:dsl_eval_support:   3%|▎         | 4/120 [00:26<12:43,  6.58s/it]eval-active:dsl_eval_support:   4%|▍         | 5/120 [00:36<14:31,  7.58s/it]eval-active:dsl_eval_support:   5%|▌         | 6/120 [00:42<13:44,  7.24s/it]eval-active:dsl_eval_support:   6%|▌         | 7/120 [00:49<13:09,  6.98s/it]eval-active:dsl_eval_support:   7%|▋         | 8/120 [00:55<12:40,  6.79s/it]eval-active:dsl_eval_support:   8%|▊         | 9/120 [01:01<12:19,  6.67s/it]eval-active:dsl_eval_support:   8%|▊         | 10/120 [01:08<12:04,  6.58s/it]eval-active:dsl_eval_support:   9%|▉         | 11/120 [01:14<11:51,  6.52s/it]eval-active:dsl_eval_support:  10%|█         | 12/120 [01:21<11:52,  6.60s/it]eval-active:dsl_eval_support:  11%|█         | 13/120 [01:38<17:14,  9.67s/it]eval-active:dsl_eval_support:  12%|█▏        | 14/120 [01:54<20:52, 11.82s/it]eval-active:dsl_eval_support:  12%|█▎        | 15/120 [02:12<23:31, 13.44s/it]eval-active:dsl_eval_support:  13%|█▎        | 16/120 [02:28<24:54, 14.37s/it]eval-active:dsl_eval_support:  14%|█▍        | 17/120 [02:45<25:56, 15.12s/it]eval-active:dsl_eval_support:  15%|█▌        | 18/120 [03:02<26:28, 15.57s/it]eval-active:dsl_eval_support:  16%|█▌        | 19/120 [03:19<27:13, 16.17s/it]eval-active:dsl_eval_support:  17%|█▋        | 20/120 [03:36<27:25, 16.46s/it]eval-active:dsl_eval_support:  18%|█▊        | 21/120 [03:54<27:36, 16.73s/it]eval-active:dsl_eval_support:  18%|█▊        | 22/120 [04:11<27:26, 16.80s/it]eval-active:dsl_eval_support:  19%|█▉        | 23/120 [04:27<27:03, 16.74s/it]eval-active:dsl_eval_support:  20%|██        | 24/120 [04:44<26:51, 16.79s/it]eval-active:dsl_eval_support:  21%|██        | 25/120 [05:03<27:21, 17.28s/it]eval-active:dsl_eval_support:  22%|██▏       | 26/120 [05:14<24:15, 15.48s/it]eval-active:dsl_eval_support:  22%|██▎       | 27/120 [05:25<21:57, 14.17s/it]eval-active:dsl_eval_support:  23%|██▎       | 28/120 [05:36<20:20, 13.27s/it]eval-active:dsl_eval_support:  24%|██▍       | 29/120 [05:47<19:10, 12.65s/it]eval-active:dsl_eval_support:  25%|██▌       | 30/120 [06:06<21:48, 14.53s/it]eval-active:dsl_eval_support:  26%|██▌       | 31/120 [06:17<20:03, 13.53s/it]eval-active:dsl_eval_support:  27%|██▋       | 32/120 [06:29<18:48, 12.82s/it]eval-active:dsl_eval_support:  28%|██▊       | 33/120 [06:40<17:57, 12.39s/it]eval-active:dsl_eval_support:  28%|██▊       | 34/120 [06:58<20:19, 14.18s/it]eval-active:dsl_eval_support:  29%|██▉       | 35/120 [07:17<21:54, 15.46s/it]eval-active:dsl_eval_support:  30%|███       | 36/120 [07:28<19:52, 14.19s/it]eval-active:dsl_eval_support:  31%|███       | 37/120 [07:45<20:48, 15.04s/it]eval-active:dsl_eval_support:  32%|███▏      | 38/120 [08:03<21:46, 15.93s/it]eval-active:dsl_eval_support:  32%|███▎      | 39/120 [08:21<22:13, 16.46s/it]eval-active:dsl_eval_support:  33%|███▎      | 40/120 [08:39<22:29, 16.86s/it]eval-active:dsl_eval_support:  34%|███▍      | 41/120 [08:56<22:25, 17.03s/it]eval-active:dsl_eval_support:  35%|███▌      | 42/120 [09:13<22:17, 17.15s/it]eval-active:dsl_eval_support:  36%|███▌      | 43/120 [09:31<22:11, 17.30s/it]eval-active:dsl_eval_support:  37%|███▋      | 44/120 [09:49<22:00, 17.37s/it]eval-active:dsl_eval_support:  38%|███▊      | 45/120 [10:06<21:47, 17.43s/it]eval-active:dsl_eval_support:  38%|███▊      | 46/120 [10:23<21:21, 17.31s/it]eval-active:dsl_eval_support:  39%|███▉      | 47/120 [10:40<21:00, 17.27s/it]eval-active:dsl_eval_support:  40%|████      | 48/120 [10:57<20:38, 17.20s/it]eval-active:dsl_eval_support:  41%|████      | 49/120 [11:16<20:46, 17.56s/it]eval-active:dsl_eval_support:  42%|████▏     | 50/120 [11:34<20:41, 17.74s/it]eval-active:dsl_eval_support:  42%|████▎     | 51/120 [11:53<20:43, 18.02s/it]eval-active:dsl_eval_support:  43%|████▎     | 52/120 [12:11<20:27, 18.05s/it]eval-active:dsl_eval_support:  44%|████▍     | 53/120 [12:29<20:18, 18.18s/it]eval-active:dsl_eval_support:  45%|████▌     | 54/120 [12:48<20:01, 18.21s/it]eval-active:dsl_eval_support:  46%|████▌     | 55/120 [13:06<19:43, 18.20s/it]eval-active:dsl_eval_support:  47%|████▋     | 56/120 [13:24<19:31, 18.31s/it]eval-active:dsl_eval_support:  48%|████▊     | 57/120 [13:43<19:13, 18.32s/it]eval-active:dsl_eval_support:  48%|████▊     | 58/120 [14:01<18:59, 18.38s/it]eval-active:dsl_eval_support:  49%|████▉     | 59/120 [14:19<18:39, 18.35s/it]eval-active:dsl_eval_support:  50%|█████     | 60/120 [14:38<18:22, 18.38s/it]eval-active:dsl_eval_support:  51%|█████     | 61/120 [15:04<20:20, 20.69s/it]eval-active:dsl_eval_support:  52%|█████▏    | 62/120 [15:28<21:03, 21.78s/it]eval-active:dsl_eval_support:  52%|█████▎    | 63/120 [15:54<21:52, 23.03s/it]eval-active:dsl_eval_support:  53%|█████▎    | 64/120 [16:14<20:34, 22.04s/it]eval-active:dsl_eval_support:  54%|█████▍    | 65/120 [16:34<19:42, 21.51s/it]eval-active:dsl_eval_support:  55%|█████▌    | 66/120 [16:55<19:02, 21.15s/it]eval-active:dsl_eval_support:  56%|█████▌    | 67/120 [17:15<18:26, 20.88s/it]eval-active:dsl_eval_support:  57%|█████▋    | 68/120 [17:35<18:01, 20.79s/it]eval-active:dsl_eval_support:  57%|█████▊    | 69/120 [17:56<17:35, 20.69s/it]eval-active:dsl_eval_support:  58%|█████▊    | 70/120 [18:16<17:04, 20.49s/it]eval-active:dsl_eval_support:  59%|█████▉    | 71/120 [18:36<16:41, 20.43s/it]eval-active:dsl_eval_support:  60%|██████    | 72/120 [18:57<16:20, 20.43s/it]eval-active:dsl_eval_support:  61%|██████    | 73/120 [19:08<13:59, 17.87s/it]eval-active:dsl_eval_support:  62%|██████▏   | 74/120 [19:29<14:17, 18.64s/it]eval-active:dsl_eval_support:  62%|██████▎   | 75/120 [19:41<12:30, 16.67s/it]eval-active:dsl_eval_support:  63%|██████▎   | 76/120 [19:53<11:08, 15.20s/it]eval-active:dsl_eval_support:  64%|██████▍   | 77/120 [20:04<10:07, 14.13s/it]eval-active:dsl_eval_support:  65%|██████▌   | 78/120 [20:20<10:08, 14.49s/it]eval-active:dsl_eval_support:  66%|██████▌   | 79/120 [20:34<09:46, 14.30s/it]eval-active:dsl_eval_support:  67%|██████▋   | 80/120 [20:49<09:46, 14.65s/it]eval-active:dsl_eval_support:  68%|██████▊   | 81/120 [21:01<08:57, 13.79s/it]eval-active:dsl_eval_support:  68%|██████▊   | 82/120 [21:13<08:22, 13.22s/it]eval-active:dsl_eval_support:  69%|██████▉   | 83/120 [21:25<07:55, 12.86s/it]eval-active:dsl_eval_support:  70%|███████   | 84/120 [21:37<07:31, 12.55s/it]eval-active:dsl_eval_support:  71%|███████   | 85/120 [21:59<08:59, 15.40s/it]eval-active:dsl_eval_support:  72%|███████▏  | 86/120 [22:21<09:51, 17.38s/it]eval-active:dsl_eval_support:  72%|███████▎  | 87/120 [22:43<10:20, 18.81s/it]eval-active:dsl_eval_support:  73%|███████▎  | 88/120 [23:05<10:31, 19.75s/it]eval-active:dsl_eval_support:  74%|███████▍  | 89/120 [23:26<10:30, 20.33s/it]eval-active:dsl_eval_support:  75%|███████▌  | 90/120 [23:48<10:24, 20.83s/it]eval-active:dsl_eval_support:  76%|███████▌  | 91/120 [24:10<10:15, 21.21s/it]eval-active:dsl_eval_support:  77%|███████▋  | 92/120 [24:33<10:01, 21.47s/it]eval-active:dsl_eval_support:  78%|███████▊  | 93/120 [24:55<09:49, 21.82s/it]eval-active:dsl_eval_support:  78%|███████▊  | 94/120 [25:17<09:29, 21.89s/it]eval-active:dsl_eval_support:  79%|███████▉  | 95/120 [25:40<09:12, 22.08s/it]eval-active:dsl_eval_support:  80%|████████  | 96/120 [26:02<08:49, 22.08s/it]eval-active:dsl_eval_support:  81%|████████  | 97/120 [26:21<08:11, 21.35s/it]eval-active:dsl_eval_support:  82%|████████▏ | 98/120 [26:42<07:41, 20.96s/it]eval-active:dsl_eval_support:  82%|████████▎ | 99/120 [27:01<07:13, 20.66s/it]eval-active:dsl_eval_support:  83%|████████▎ | 100/120 [27:22<06:49, 20.47s/it]eval-active:dsl_eval_support:  84%|████████▍ | 101/120 [27:47<06:56, 21.93s/it]eval-active:dsl_eval_support:  85%|████████▌ | 102/120 [28:07<06:24, 21.35s/it]eval-active:dsl_eval_support:  86%|████████▌ | 103/120 [28:33<06:26, 22.76s/it]eval-active:dsl_eval_support:  87%|████████▋ | 104/120 [28:53<05:51, 21.97s/it]eval-active:dsl_eval_support:  88%|████████▊ | 105/120 [29:13<05:22, 21.48s/it]eval-active:dsl_eval_support:  88%|████████▊ | 106/120 [29:34<04:56, 21.19s/it]eval-active:dsl_eval_support:  89%|████████▉ | 107/120 [29:55<04:33, 21.06s/it]eval-active:dsl_eval_support:  90%|█████████ | 108/120 [30:15<04:10, 20.87s/it]eval-active:dsl_eval_support:  91%|█████████ | 109/120 [30:34<03:42, 20.25s/it]eval-active:dsl_eval_support:  92%|█████████▏| 110/120 [30:52<03:16, 19.62s/it]eval-active:dsl_eval_support:  92%|█████████▎| 111/120 [31:10<02:52, 19.17s/it]eval-active:dsl_eval_support:  93%|█████████▎| 112/120 [31:28<02:29, 18.74s/it]eval-active:dsl_eval_support:  94%|█████████▍| 113/120 [31:52<02:21, 20.23s/it]eval-active:dsl_eval_support:  95%|█████████▌| 114/120 [32:15<02:07, 21.22s/it]eval-active:dsl_eval_support:  96%|█████████▌| 115/120 [32:33<01:41, 20.37s/it]eval-active:dsl_eval_support:  97%|█████████▋| 116/120 [32:52<01:18, 19.68s/it]eval-active:dsl_eval_support:  98%|█████████▊| 117/120 [33:10<00:57, 19.26s/it]eval-active:dsl_eval_support:  98%|█████████▊| 118/120 [33:28<00:37, 18.90s/it]eval-active:dsl_eval_support:  99%|█████████▉| 119/120 [33:46<00:18, 18.79s/it]eval-active:dsl_eval_support: 100%|██████████| 120/120 [34:10<00:00, 20.33s/it]eval-active:dsl_eval_support: 100%|██████████| 120/120 [34:10<00:00, 17.09s/it]
+{
+  "candidate_summary": {
+    "overall": {
+      "records": 120,
+      "candidate_oracle_hidden_all_successes": 120,
+      "candidate_oracle_hidden_all_rate": 1.0,
+      "target_program_synthesized_successes": 120,
+      "target_program_synthesized_rate": 1.0,
+      "avg_synthesized_programs": 3320.9,
+      "avg_visible_consistent_candidates": 251.325,
+      "avg_unique_sketches": 1.058
+    },
+    "by_family": {
+      "contains_count_length_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 1424.417,
+        "avg_unique_sketches": 1.25
+      },
+      "length_contains_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 292.167,
+        "avg_unique_sketches": 1.0
+      },
+      "length_mod_contains_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 12.417,
+        "avg_unique_sketches": 1.0
+      },
+      "modulo_sum_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 830.0,
+        "avg_visible_consistent_candidates": 4.0,
+        "avg_unique_sketches": 1.0
+      },
+      "not_contains_length_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 230.667,
+        "avg_unique_sketches": 1.083
+      },
+      "sorted_index_offset_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 2279.0,
+        "avg_visible_consistent_candidates": 3.0,
+        "avg_unique_sketches": 1.167
+      },
+      "sum_length_branch_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 272.083,
+        "avg_unique_sketches": 1.083
+      },
+      "sum_offset_mod_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 3.0,
+        "avg_unique_sketches": 1.0
+      },
+      "tuple_branch_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 2100.0,
+        "avg_visible_consistent_candidates": 11.333,
+        "avg_unique_sketches": 1.0
+      },
+      "tuple_sum_gate_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 260.167,
+        "avg_unique_sketches": 1.0
+      }
+    }
+  },
+  "policy_summary": {
+    "active_max_split@0": {
+      "records": 120,
+      "hidden_all_successes": 84,
+      "hidden_all_rate": 0.7,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.708,
+      "avg_queries_used": 0.0
+    },
+    "active_max_split@1": {
+      "records": 120,
+      "hidden_all_successes": 89,
+      "hidden_all_rate": 0.741667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.892,
+      "avg_queries_used": 1.0
+    },
+    "active_max_split@2": {
+      "records": 120,
+      "hidden_all_successes": 100,
+      "hidden_all_rate": 0.833333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.317,
+      "avg_queries_used": 2.0
+    },
+    "active_max_split@3": {
+      "records": 120,
+      "hidden_all_successes": 113,
+      "hidden_all_rate": 0.941667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.783,
+      "avg_queries_used": 3.0
+    },
+    "active_max_split@6": {
+      "records": 120,
+      "hidden_all_successes": 119,
+      "hidden_all_rate": 0.991667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.958,
+      "avg_queries_used": 6.0
+    },
+    "active_max_split@12": {
+      "records": 120,
+      "hidden_all_successes": 120,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 12.0
+    },
+    "oracle_elimination@0": {
+      "records": 120,
+      "hidden_all_successes": 84,
+      "hidden_all_rate": 0.7,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.708,
+      "avg_queries_used": 0.0
+    },
+    "oracle_elimination@1": {
+      "records": 120,
+      "hidden_all_successes": 109,
+      "hidden_all_rate": 0.908333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.667,
+      "avg_queries_used": 1.0
+    },
+    "oracle_elimination@2": {
+      "records": 120,
+      "hidden_all_successes": 117,
+      "hidden_all_rate": 0.975,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.925,
+      "avg_queries_used": 2.0
+    },
+    "oracle_elimination@3": {
+      "records": 120,
+      "hidden_all_successes": 119,
+      "hidden_all_rate": 0.991667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.967,
+      "avg_queries_used": 3.0
+    },
+    "oracle_elimination@6": {
+      "records": 120,
+      "hidden_all_successes": 120,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 6.0
+    },
+    "oracle_elimination@12": {
+      "records": 120,
+      "hidden_all_successes": 120,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 12.0
+    },
+    "random_extra@0": {
+      "records": 240,
+      "hidden_all_successes": 168,
+      "hidden_all_rate": 0.7,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.708,
+      "avg_queries_used": 0.0
+    },
+    "random_extra@1": {
+      "records": 240,
+      "hidden_all_successes": 179,
+      "hidden_all_rate": 0.745833,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.95,
+      "avg_queries_used": 1.0
+    },
+    "random_extra@2": {
+      "records": 240,
+      "hidden_all_successes": 192,
+      "hidden_all_rate": 0.8,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.179,
+      "avg_queries_used": 2.0
+    },
+    "random_extra@3": {
+      "records": 240,
+      "hidden_all_successes": 201,
+      "hidden_all_rate": 0.8375,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.35,
+      "avg_queries_used": 3.0
+    },
+    "random_extra@6": {
+      "records": 240,
+      "hidden_all_successes": 219,
+      "hidden_all_rate": 0.9125,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.696,
+      "avg_queries_used": 6.0
+    },
+    "random_extra@12": {
+      "records": 240,
+      "hidden_all_successes": 230,
+      "hidden_all_rate": 0.958333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.896,
+      "avg_queries_used": 12.0
+    },
+    "visible_prior@0": {
+      "records": 120,
+      "hidden_all_successes": 84,
+      "hidden_all_rate": 0.7,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.708,
+      "avg_queries_used": 0.0
+    }
+  }
+}

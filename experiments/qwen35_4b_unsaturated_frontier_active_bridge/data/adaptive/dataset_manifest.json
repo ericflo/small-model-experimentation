@@ -1,0 +1,121 @@
+{
+  "allocation_mode": "adaptive",
+  "base_anchor_records": 180,
+  "bridge_allocation": {
+    "contains_count_length_code": 5,
+    "length_contains_code": 9,
+    "length_mod_contains_code": 10,
+    "modulo_sum_label": 2,
+    "not_contains_length_code": 2,
+    "sorted_index_offset_label": 24,
+    "sum_length_branch_label": 2,
+    "sum_offset_mod_label": 2,
+    "tuple_branch_label": 2,
+    "tuple_sum_gate_label": 2
+  },
+  "family_summaries": {
+    "contains_count_length_code": {
+      "bridge_records_requested": 5,
+      "bridge_records_with_model_wrong": 1,
+      "mining_records": 24,
+      "top_wrong_programs": [
+        {
+          "count": 1,
+          "program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold) (gt (len tokens) min_len)) \"FOUND\" \"MISS\")"
+        }
+      ],
+      "unique_wrong_programs": 1,
+      "wrong_candidate_score": 1
+    },
+    "length_contains_code": {
+      "bridge_records_requested": 9,
+      "bridge_records_with_model_wrong": 1,
+      "mining_records": 24,
+      "top_wrong_programs": [
+        {
+          "count": 2,
+          "program": "(if (and (contains text needle) (gt (count_eq text needle) threshold)) \"MATCH_LONG\" \"MISS\")"
+        }
+      ],
+      "unique_wrong_programs": 1,
+      "wrong_candidate_score": 2
+    },
+    "length_mod_contains_code": {
+      "bridge_records_requested": 10,
+      "bridge_records_with_model_wrong": 1,
+      "mining_records": 24,
+      "top_wrong_programs": [
+        {
+          "count": 2,
+          "program": "(if (and (contains text needle) (eq (mod (len text) modulus) target)) \"HIT\" \"MISS\")"
+        }
+      ],
+      "unique_wrong_programs": 1,
+      "wrong_candidate_score": 2
+    },
+    "modulo_sum_label": {
+      "bridge_records_requested": 2,
+      "bridge_records_with_model_wrong": 0,
+      "mining_records": 24,
+      "top_wrong_programs": [],
+      "unique_wrong_programs": 0,
+      "wrong_candidate_score": 0
+    },
+    "not_contains_length_code": {
+      "bridge_records_requested": 2,
+      "bridge_records_with_model_wrong": 0,
+      "mining_records": 24,
+      "top_wrong_programs": [],
+      "unique_wrong_programs": 0,
+      "wrong_candidate_score": 0
+    },
+    "sorted_index_offset_label": {
+      "bridge_records_requested": 24,
+      "bridge_records_with_model_wrong": 4,
+      "mining_records": 24,
+      "top_wrong_programs": [
+        {
+          "count": 8,
+          "program": "(format \"SI{}\" (add (sum values) offset))"
+        }
+      ],
+      "unique_wrong_programs": 1,
+      "wrong_candidate_score": 8
+    },
+    "sum_length_branch_label": {
+      "bridge_records_requested": 2,
+      "bridge_records_with_model_wrong": 0,
+      "mining_records": 24,
+      "top_wrong_programs": [],
+      "unique_wrong_programs": 0,
+      "wrong_candidate_score": 0
+    },
+    "sum_offset_mod_label": {
+      "bridge_records_requested": 2,
+      "bridge_records_with_model_wrong": 0,
+      "mining_records": 24,
+      "top_wrong_programs": [],
+      "unique_wrong_programs": 0,
+      "wrong_candidate_score": 0
+    },
+    "tuple_branch_label": {
+      "bridge_records_requested": 2,
+      "bridge_records_with_model_wrong": 0,
+      "mining_records": 24,
+      "top_wrong_programs": [],
+      "unique_wrong_programs": 0,
+      "wrong_candidate_score": 0
+    },
+    "tuple_sum_gate_label": {
+      "bridge_records_requested": 2,
+      "bridge_records_with_model_wrong": 0,
+      "mining_records": 24,
+      "top_wrong_programs": [],
+      "unique_wrong_programs": 0,
+      "wrong_candidate_score": 0
+    }
+  },
+  "mined_bridge_records": 60,
+  "trace_strategy": "adaptive_mined",
+  "train_records": 240
+}

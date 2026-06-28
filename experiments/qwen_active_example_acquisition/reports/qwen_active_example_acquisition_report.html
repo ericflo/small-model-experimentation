@@ -1,0 +1,264 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Active Example Acquisition</title><style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; margin: 40px; color: #111827; line-height: 1.5; }
+    h1 { font-size: 32px; margin-bottom: 4px; }
+    h2 { margin-top: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0 24px; font-size: 13px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 4px; }
+    figure { margin: 18px 0 26px; }
+    figcaption { color: #4b5563; font-size: 13px; margin-top: 6px; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+    </style></head><body><h1>Active Example Acquisition</h1>
+
+<h2>Question</h2>
+
+<p>Can a small number of actively selected clarifying examples improve strict held-out text-transformation accuracy?</p>
+
+<p>Each task starts with four visible examples. The selector may reveal one or three additional examples from a separate acquisition pool before the model answers three held-out rows. The held-out rows are never used for acquisition.</p>
+
+<h2>Setup</h2>
+
+<p>- Run: <code>main_final</code></p>
+<p>- Dataset: public text-transformation tasks.</p>
+<p>- Tasks: <code>30</code></p>
+<p>- Visible examples per task: <code>4</code></p>
+<p>- Acquisition pool examples per task: <code>5</code></p>
+<p>- Held-out evaluation rows per task: <code>3</code></p>
+<p>- Probe variants for active disagreement: <code>plain, format, consistency</code></p>
+<p>- Generation records: <code>1890</code></p>
+
+<h2>Main Result</h2>
+
+<table>
+<tr><th>method</th><th>tasks</th><th>mean_budget</th><th>row_exact</th><th>full_task_exact</th></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>30</td><td>1.13</td><td>87.8%</td><td>73.3%</td></tr>
+<tr><td>active1_plain</td><td>30</td><td>1.00</td><td>84.4%</td><td>70.0%</td></tr>
+<tr><td>order1_plain</td><td>30</td><td>1.00</td><td>84.4%</td><td>70.0%</td></tr>
+<tr><td>active3_plain</td><td>30</td><td>3.00</td><td>84.4%</td><td>70.0%</td></tr>
+<tr><td>random1_plain</td><td>30</td><td>1.00</td><td>81.1%</td><td>66.7%</td></tr>
+<tr><td>base_plain</td><td>30</td><td>0.00</td><td>81.1%</td><td>66.7%</td></tr>
+<tr><td>loo_portfolio_base</td><td>30</td><td>0.00</td><td>81.1%</td><td>66.7%</td></tr>
+<tr><td>diverse3_plain</td><td>30</td><td>3.00</td><td>82.2%</td><td>66.7%</td></tr>
+<tr><td>order3_plain</td><td>30</td><td>3.00</td><td>83.3%</td><td>66.7%</td></tr>
+<tr><td>diverse1_plain</td><td>30</td><td>1.00</td><td>80.0%</td><td>63.3%</td></tr>
+<tr><td>random3_plain</td><td>30</td><td>3.00</td><td>81.1%</td><td>63.3%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>30</td><td>3.00</td><td>76.7%</td><td>60.0%</td></tr>
+</table>
+
+<h2>Interpretation</h2>
+
+<p>The baseline with four examples solves <code>66.7%</code> of tasks. Active acquisition solves <code>70.0%</code> with one extra example and <code>70.0%</code> with three extra examples. Input-diversity acquisition solves <code>66.7%</code> with three extra examples. Random three-example acquisition solves <code>63.3%</code>, order-three solves <code>66.7%</code>, and the shuffled-label control solves <code>60.0%</code>.</p>
+
+<p>The hidden diagnostic oracle over the tested acquisition policies reaches <code>73.3%</code>, which measures whether any tested extra-example choice contained a better move. Visible-example portfolio selection reaches <code>66.7%</code>.</p>
+
+<h2>Charts</h2>
+
+<figure><img src="../analysis/figures/method_full_task_exact.png" alt="Full-task exact by method"><figcaption>Full-task exact by method</figcaption></figure>
+
+<figure><img src="../analysis/figures/row_vs_full_task.png" alt="Row versus full-task exact"><figcaption>Row versus full-task exact</figcaption></figure>
+
+<figure><img src="../analysis/figures/budget_comparison.png" alt="Budget comparison"><figcaption>Budget comparison</figcaption></figure>
+
+<figure><img src="../analysis/figures/wins_losses_vs_base.png" alt="Wins and losses versus base"><figcaption>Wins and losses versus base</figcaption></figure>
+
+<figure><img src="../analysis/figures/probe_entropy_distribution.png" alt="Probe entropy distribution"><figcaption>Probe entropy distribution</figcaption></figure>
+
+<figure><img src="../analysis/figures/family_heatmap.png" alt="Family heatmap"><figcaption>Family heatmap</figcaption></figure>
+
+<h2>Task-Level Active Versus Random</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>features</th><th>base</th><th>active3_exact</th><th>random3_exact</th><th>active_helped</th><th>active_hurt</th><th>active3_indices</th><th>random3_indices</th><th>loo_variant</th></tr>
+<tr><td>Number.000017</td><td>Number</td><td>Numeric,NumericRounding</td><td>False</td><td>True</td><td>False</td><td>True</td><td>False</td><td>[3, 0, 1]</td><td>[1, 2, 4]</td><td>plain</td></tr>
+<tr><td>City.000004</td><td>City</td><td>Conditional</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[2, 3, 4]</td><td>plain</td></tr>
+<tr><td>City.000012</td><td>City</td><td>Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[2, 3, 4]</td><td>plain</td></tr>
+<tr><td>Currency.000003</td><td>Currency</td><td>Numeric,Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 1, 2]</td><td>plain</td></tr>
+<tr><td>Currency.000004</td><td>Currency</td><td>Numeric,Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 2, 3]</td><td>plain</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>DateTime</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 2, 4]</td><td>plain</td></tr>
+<tr><td>DateTime.000015</td><td>DateTime</td><td>DateTime</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[1, 2, 3]</td><td>[1, 2, 4]</td><td>plain</td></tr>
+<tr><td>DateTime.000022</td><td>DateTime</td><td>DateTime</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 1, 2]</td><td>plain</td></tr>
+<tr><td>DateTime.000023</td><td>DateTime</td><td>DateTime</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 2, 3]</td><td>plain</td></tr>
+<tr><td>DateTime.000026</td><td>DateTime</td><td>DateTime</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 2, 4]</td><td>consistency</td></tr>
+<tr><td>DateTime.000028</td><td>DateTime</td><td>DateTime</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[1, 4, 0]</td><td>[0, 1, 3]</td><td>plain</td></tr>
+<tr><td>DateTime.000029</td><td>DateTime</td><td>DateTime</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[0, 2, 4]</td><td>[0, 1, 4]</td><td>plain</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>DateTime,Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 2, 4]</td><td>plain</td></tr>
+<tr><td>DateTime.000090</td><td>DateTime</td><td>DateTime</td><td>True</td><td>True</td><td>False</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[2, 3, 4]</td><td>plain</td></tr>
+<tr><td>DateTime.000092</td><td>DateTime</td><td>DateTime</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 1, 3]</td><td>plain</td></tr>
+<tr><td>DateTime.000107</td><td>DateTime</td><td>DateTime</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 2, 3]</td><td>plain</td></tr>
+<tr><td>DateTime.000109</td><td>DateTime</td><td>DateTime</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[0, 1, 3]</td><td>[0, 1, 4]</td><td>plain</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>DateTimeRange,DateTimeRounding,DateTime</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 1, 3]</td><td>plain</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>Multicolumn,Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 3, 4]</td><td>plain</td></tr>
+<tr><td>Meteorite.000001</td><td>Meteorite</td><td>Casing,Concatenation,DateTime,Multicolumn,Numeric,Substring</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[3, 0, 1]</td><td>[1, 2, 4]</td><td>consistency</td></tr>
+<tr><td>Number.000011</td><td>Number</td><td>Numeric,NumericRounding</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 2, 3]</td><td>plain</td></tr>
+<tr><td>Number.000082</td><td>Number</td><td>Numeric</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 3, 4]</td><td>consistency</td></tr>
+<tr><td>Number.000084</td><td>Number</td><td>Numeric,NumericRange,NumericRounding</td><td>False</td><td>False</td><td>False</td><td>False</td><td>False</td><td>[3, 0, 1]</td><td>[2, 3, 4]</td><td>plain</td></tr>
+<tr><td>Number.000087</td><td>Number</td><td>Numeric,NumericRange,NumericRounding</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 3, 4]</td><td>plain</td></tr>
+<tr><td>Number.000088</td><td>Number</td><td>Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 1, 2]</td><td>plain</td></tr>
+<tr><td>Phone.000003</td><td>Phone</td><td>Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 2, 3]</td><td>plain</td></tr>
+<tr><td>Phone.000005</td><td>Phone</td><td>Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 2, 4]</td><td>plain</td></tr>
+<tr><td>Phone.000006</td><td>Phone</td><td>Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[1, 2, 4]</td><td>plain</td></tr>
+<tr><td>State.000003</td><td>State</td><td>Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 2, 4]</td><td>plain</td></tr>
+<tr><td>UserAgent.000006</td><td>UserAgent</td><td>Substring</td><td>True</td><td>True</td><td>True</td><td>False</td><td>False</td><td>[0, 1, 2]</td><td>[0, 2, 3]</td><td>plain</td></tr>
+</table>
+
+<h2>Acquisition Diagnostics</h2>
+
+<table>
+<tr><th>task_id</th><th>family</th><th>features</th><th>active1</th><th>active3</th><th>diverse1</th><th>diverse3</th><th>random1</th><th>random3</th><th>loo_variant</th><th>loo_plain</th><th>loo_format</th><th>loo_consistency</th></tr>
+<tr><td>City.000004</td><td>City</td><td>Conditional</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[2, 3, 4]</td><td>plain</td><td>75.0%</td><td>75.0%</td><td>75.0%</td></tr>
+<tr><td>City.000012</td><td>City</td><td>Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[2, 0, 4]</td><td>[2]</td><td>[2, 3, 4]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Currency.000003</td><td>Currency</td><td>Numeric,Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[0, 1, 2]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Currency.000004</td><td>Currency</td><td>Numeric,Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[1, 2, 3]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[1, 2, 4]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000015</td><td>DateTime</td><td>DateTime</td><td>[1]</td><td>[1, 2, 3]</td><td>[4]</td><td>[4, 3, 0]</td><td>[4]</td><td>[1, 2, 4]</td><td>plain</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>DateTime.000022</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[3, 0, 1]</td><td>[2]</td><td>[0, 1, 2]</td><td>plain</td><td>75.0%</td><td>75.0%</td><td>50.0%</td></tr>
+<tr><td>DateTime.000023</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[3, 0, 1]</td><td>[0]</td><td>[0, 2, 3]</td><td>plain</td><td>75.0%</td><td>75.0%</td><td>75.0%</td></tr>
+<tr><td>DateTime.000026</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[3, 0, 1]</td><td>[1]</td><td>[1, 2, 4]</td><td>consistency</td><td>75.0%</td><td>75.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000028</td><td>DateTime</td><td>DateTime</td><td>[1]</td><td>[1, 4, 0]</td><td>[3]</td><td>[3, 2, 0]</td><td>[1]</td><td>[0, 1, 3]</td><td>plain</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>DateTime.000029</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 2, 4]</td><td>[3]</td><td>[3, 0, 1]</td><td>[1]</td><td>[0, 1, 4]</td><td>plain</td><td>25.0%</td><td>0.0%</td><td>25.0%</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>DateTime,Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 2, 4]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000090</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[2, 3, 4]</td><td>plain</td><td>50.0%</td><td>50.0%</td><td>50.0%</td></tr>
+<tr><td>DateTime.000092</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[0, 1, 3]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000107</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 2, 3]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000109</td><td>DateTime</td><td>DateTime</td><td>[0]</td><td>[0, 1, 3]</td><td>[0]</td><td>[0, 1, 2]</td><td>[4]</td><td>[0, 1, 4]</td><td>plain</td><td>25.0%</td><td>25.0%</td><td>25.0%</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>DateTimeRange,DateTimeRounding,DateTime</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[1]</td><td>[0, 1, 3]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>Multicolumn,Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[2, 4, 3]</td><td>[4]</td><td>[1, 3, 4]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Meteorite.000001</td><td>Meteorite</td><td>Casing,Concatenation,DateTime,Multicolumn,Numeric,Substring</td><td>[3]</td><td>[3, 0, 1]</td><td>[3]</td><td>[3, 1, 4]</td><td>[2]</td><td>[1, 2, 4]</td><td>consistency</td><td>0.0%</td><td>0.0%</td><td>25.0%</td></tr>
+<tr><td>Number.000011</td><td>Number</td><td>Numeric,NumericRounding</td><td>[0]</td><td>[0, 1, 2]</td><td>[1]</td><td>[1, 0, 2]</td><td>[3]</td><td>[1, 2, 3]</td><td>plain</td><td>75.0%</td><td>75.0%</td><td>75.0%</td></tr>
+<tr><td>Number.000017</td><td>Number</td><td>Numeric,NumericRounding</td><td>[3]</td><td>[3, 0, 1]</td><td>[1]</td><td>[1, 0, 2]</td><td>[1]</td><td>[1, 2, 4]</td><td>plain</td><td>50.0%</td><td>50.0%</td><td>25.0%</td></tr>
+<tr><td>Number.000082</td><td>Number</td><td>Numeric</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[1, 3, 4]</td><td>consistency</td><td>75.0%</td><td>75.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000084</td><td>Number</td><td>Numeric,NumericRange,NumericRounding</td><td>[3]</td><td>[3, 0, 1]</td><td>[3]</td><td>[3, 0, 1]</td><td>[2]</td><td>[2, 3, 4]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>75.0%</td></tr>
+<tr><td>Number.000087</td><td>Number</td><td>Numeric,NumericRange,NumericRounding</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 3, 4]</td><td>plain</td><td>100.0%</td><td>75.0%</td><td>75.0%</td></tr>
+<tr><td>Number.000088</td><td>Number</td><td>Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[2, 0, 4]</td><td>[2]</td><td>[0, 1, 2]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone.000003</td><td>Phone</td><td>Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[1, 2, 3]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone.000005</td><td>Phone</td><td>Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[3, 0, 1]</td><td>[2]</td><td>[1, 2, 4]</td><td>plain</td><td>100.0%</td><td>75.0%</td><td>100.0%</td></tr>
+<tr><td>Phone.000006</td><td>Phone</td><td>Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[3, 2, 4]</td><td>[2]</td><td>[1, 2, 4]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>State.000003</td><td>State</td><td>Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[2]</td><td>[2, 0, 4]</td><td>[4]</td><td>[0, 2, 4]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>UserAgent.000006</td><td>UserAgent</td><td>Substring</td><td>[0]</td><td>[0, 1, 2]</td><td>[0]</td><td>[0, 1, 2]</td><td>[3]</td><td>[0, 2, 3]</td><td>plain</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+</table>
+
+<h2>Family Breakdown</h2>
+
+<table>
+<tr><th>method</th><th>family</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th></tr>
+<tr><td>active1_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active1_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active1_plain</td><td>DateTime</td><td>13</td><td>74.4%</td><td>53.8%</td></tr>
+<tr><td>active1_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active1_plain</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>active1_plain</td><td>Number</td><td>6</td><td>88.9%</td><td>66.7%</td></tr>
+<tr><td>active1_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active1_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active1_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_plain</td><td>DateTime</td><td>13</td><td>69.2%</td><td>46.2%</td></tr>
+<tr><td>active3_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_plain</td><td>Meteorite</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>active3_plain</td><td>Number</td><td>6</td><td>94.4%</td><td>83.3%</td></tr>
+<tr><td>active3_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>DateTime</td><td>13</td><td>66.7%</td><td>38.5%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>Number</td><td>6</td><td>66.7%</td><td>50.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>active3_shuffled_labels</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>base_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>base_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>base_plain</td><td>DateTime</td><td>13</td><td>69.2%</td><td>46.2%</td></tr>
+<tr><td>base_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>base_plain</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>base_plain</td><td>Number</td><td>6</td><td>83.3%</td><td>66.7%</td></tr>
+<tr><td>base_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>base_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>base_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse1_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse1_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse1_plain</td><td>DateTime</td><td>13</td><td>64.1%</td><td>38.5%</td></tr>
+<tr><td>diverse1_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse1_plain</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>diverse1_plain</td><td>Number</td><td>6</td><td>88.9%</td><td>66.7%</td></tr>
+<tr><td>diverse1_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse1_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse1_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse3_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse3_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse3_plain</td><td>DateTime</td><td>13</td><td>66.7%</td><td>38.5%</td></tr>
+<tr><td>diverse3_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse3_plain</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>diverse3_plain</td><td>Number</td><td>6</td><td>94.4%</td><td>83.3%</td></tr>
+<tr><td>diverse3_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse3_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>diverse3_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>loo_portfolio_base</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>loo_portfolio_base</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>loo_portfolio_base</td><td>DateTime</td><td>13</td><td>69.2%</td><td>46.2%</td></tr>
+<tr><td>loo_portfolio_base</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>loo_portfolio_base</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>loo_portfolio_base</td><td>Number</td><td>6</td><td>83.3%</td><td>66.7%</td></tr>
+<tr><td>loo_portfolio_base</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>loo_portfolio_base</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>loo_portfolio_base</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>DateTime</td><td>13</td><td>76.9%</td><td>53.8%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>Meteorite</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>Number</td><td>6</td><td>94.4%</td><td>83.3%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>oracle_among_tested_acquisitions</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order1_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order1_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order1_plain</td><td>DateTime</td><td>13</td><td>71.8%</td><td>53.8%</td></tr>
+<tr><td>order1_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order1_plain</td><td>Meteorite</td><td>1</td><td>66.7%</td><td>0.0%</td></tr>
+<tr><td>order1_plain</td><td>Number</td><td>6</td><td>88.9%</td><td>66.7%</td></tr>
+<tr><td>order1_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order1_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order1_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order3_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order3_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order3_plain</td><td>DateTime</td><td>13</td><td>71.8%</td><td>46.2%</td></tr>
+<tr><td>order3_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order3_plain</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>order3_plain</td><td>Number</td><td>6</td><td>88.9%</td><td>66.7%</td></tr>
+<tr><td>order3_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order3_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>order3_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random1_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random1_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random1_plain</td><td>DateTime</td><td>13</td><td>66.7%</td><td>46.2%</td></tr>
+<tr><td>random1_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random1_plain</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>random1_plain</td><td>Number</td><td>6</td><td>88.9%</td><td>66.7%</td></tr>
+<tr><td>random1_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random1_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random1_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random3_plain</td><td>City</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random3_plain</td><td>Currency</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random3_plain</td><td>DateTime</td><td>13</td><td>66.7%</td><td>38.5%</td></tr>
+<tr><td>random3_plain</td><td>Language</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random3_plain</td><td>Meteorite</td><td>1</td><td>33.3%</td><td>0.0%</td></tr>
+<tr><td>random3_plain</td><td>Number</td><td>6</td><td>88.9%</td><td>66.7%</td></tr>
+<tr><td>random3_plain</td><td>Phone</td><td>3</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random3_plain</td><td>State</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>random3_plain</td><td>UserAgent</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+</table>
+
+<h2>Files</h2>
+
+<p>- <code>runs/main_final/generations.csv</code></p>
+<p>- <code>runs/main_final/method_details.csv</code></p>
+<p>- <code>runs/main_final/acquisition_details.csv</code></p>
+<p>- <code>runs/main_final/summary.csv</code></p>
+<p>- <code>analysis/summary.csv</code></p>
+<p>- <code>analysis/method_details.csv</code></p>
+<p>- <code>analysis/acquisition_details.csv</code></p>
+<p>- <code>analysis/family_summary.csv</code></p></body></html>

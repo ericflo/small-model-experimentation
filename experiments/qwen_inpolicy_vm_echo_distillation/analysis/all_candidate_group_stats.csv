@@ -1,0 +1,15 @@
+phase,round,groups,candidates,positive_candidates,positive_rate,valid_rate,oracle_found_rate,mean_candidates,run
+answer_verified,1,1024.0,246784.0,20457.0,0.0828943529564315,0.6432224131224067,0.4482421875,241.0,main_inpolicy_vm_echo_s192_w010
+echo_repair,1,1024.0,246784.0,20457.0,0.0828943529564315,0.6432224131224067,0.4482421875,241.0,main_inpolicy_vm_echo_s192_w010
+answer_verified,1,256.0,32768.0,2144.0,0.0654296875,0.594268798828125,0.33203125,128.0,pilot_inpolicy_vm_echo_s96_w010
+echo_repair,1,256.0,32768.0,2144.0,0.0654296875,0.594268798828125,0.33203125,128.0,pilot_inpolicy_vm_echo_s96_w010
+answer_verified,1,256.0,32768.0,2144.0,0.0654296875,0.594268798828125,0.33203125,128.0,pilot_inpolicy_vm_echo_s96_w010_r2
+answer_verified,2,256.0,32768.0,2391.0,0.072967529296875,0.64141845703125,0.34375,128.0,pilot_inpolicy_vm_echo_s96_w010_r2
+echo_repair,1,256.0,32768.0,2144.0,0.0654296875,0.594268798828125,0.33203125,128.0,pilot_inpolicy_vm_echo_s96_w010_r2
+echo_repair,2,256.0,32768.0,2530.0,0.07720947265625,0.64031982421875,0.33984375,128.0,pilot_inpolicy_vm_echo_s96_w010_r2
+answer_verified,1,256.0,32768.0,2144.0,0.0654296875,0.594268798828125,0.33203125,128.0,pilot_inpolicy_vm_echo_s96_w035
+echo_repair,1,256.0,32768.0,2144.0,0.0654296875,0.594268798828125,0.33203125,128.0,pilot_inpolicy_vm_echo_s96_w035
+answer_verified,1,12.0,384.0,0.0,0.0,0.0,0.0,32.0,smoke_inpolicy_vm_echo
+echo_repair,1,12.0,384.0,0.0,0.0,0.0,0.0,32.0,smoke_inpolicy_vm_echo
+answer_verified,1,12.0,384.0,0.0,0.0,0.0,0.0,32.0,smoke_inpolicy_vm_echo_v2
+echo_repair,1,12.0,384.0,0.0,0.0,0.0,0.0,32.0,smoke_inpolicy_vm_echo_v2

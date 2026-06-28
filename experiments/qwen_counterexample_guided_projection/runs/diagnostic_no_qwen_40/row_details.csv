@@ -1,0 +1,499 @@
+task_id,family,features,method,row_index,input,target,prediction,exact,program
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",train_only,1,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",train_only,2,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",train_only,3,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection,1,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection,2,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection,3,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection_shuffled,1,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection_shuffled,2,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection_shuffled,3,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection_random,1,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection_random,2,Consectetur,C,C,True,initials(COL0)
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",qwen_projection_random,3,Consectetur,C,C,True,initials(COL0)
+Address.000009,Address,"Concatenation,Multicolumn",train_only,1,col0=Angola | col1=581,case 581: return Angola;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",train_only,2,col0=Gambia | col1=955,case 955: return Gambia;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",train_only,3,col0=Finland | col1=879,case 879: return Finland;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection,1,col0=Angola | col1=581,case 581: return Angola;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection,2,col0=Gambia | col1=955,case 955: return Gambia;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection,3,col0=Finland | col1=879,case 879: return Finland;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection_shuffled,1,col0=Angola | col1=581,case 581: return Angola;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection_shuffled,2,col0=Gambia | col1=955,case 955: return Gambia;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection_shuffled,3,col0=Finland | col1=879,case 879: return Finland;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection_random,1,col0=Angola | col1=581,case 581: return Angola;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection_random,2,col0=Gambia | col1=955,case 955: return Gambia;,,False,
+Address.000009,Address,"Concatenation,Multicolumn",qwen_projection_random,3,col0=Finland | col1=879,case 879: return Finland;,,False,
+BillingCode.000002,BillingCode,"Concatenation,Substring",train_only,1,[CPT-115],[CPT-115],[CPT-115]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",train_only,2,[CPT-1153622],[CPT-1153622],[CPT-1153622]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",train_only,3,[CPT-00340],[CPT-00340],[CPT-00340]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection,1,[CPT-115],[CPT-115],[CPT-115]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection,2,[CPT-1153622],[CPT-1153622],[CPT-1153622]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection,3,[CPT-00340],[CPT-00340],[CPT-00340]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection_shuffled,1,[CPT-115],[CPT-115],[CPT-115]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection_shuffled,2,[CPT-1153622],[CPT-1153622],[CPT-1153622]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection_shuffled,3,[CPT-00340],[CPT-00340],[CPT-00340]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection_random,1,[CPT-115],[CPT-115],[CPT-115]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection_random,2,[CPT-1153622],[CPT-1153622],[CPT-1153622]],False,"affix('',COL0,']')"
+BillingCode.000002,BillingCode,"Concatenation,Substring",qwen_projection_random,3,[CPT-00340],[CPT-00340],[CPT-00340]],False,"affix('',COL0,']')"
+City.000007,City,Conditional,train_only,1,None,,,True,
+City.000007,City,Conditional,train_only,2,SAN FRANCISCO,San Francisco,,False,
+City.000007,City,Conditional,train_only,3,san francisco,San Francisco,,False,
+City.000007,City,Conditional,qwen_projection,1,None,,,True,
+City.000007,City,Conditional,qwen_projection,2,SAN FRANCISCO,San Francisco,,False,
+City.000007,City,Conditional,qwen_projection,3,san francisco,San Francisco,,False,
+City.000007,City,Conditional,qwen_projection_shuffled,1,None,,,True,
+City.000007,City,Conditional,qwen_projection_shuffled,2,SAN FRANCISCO,San Francisco,,False,
+City.000007,City,Conditional,qwen_projection_shuffled,3,san francisco,San Francisco,,False,
+City.000007,City,Conditional,qwen_projection_random,1,None,,,True,
+City.000007,City,Conditional,qwen_projection_random,2,SAN FRANCISCO,San Francisco,,False,
+City.000007,City,Conditional,qwen_projection_random,3,san francisco,San Francisco,,False,
+City.000008,City,Conditional,train_only,1,None,,,True,
+City.000008,City,Conditional,train_only,2,san francisco,san francisco,,False,
+City.000008,City,Conditional,train_only,3,SAN FRANCISCO,San Francisco,,False,
+City.000008,City,Conditional,qwen_projection,1,None,,,True,
+City.000008,City,Conditional,qwen_projection,2,san francisco,san francisco,,False,
+City.000008,City,Conditional,qwen_projection,3,SAN FRANCISCO,San Francisco,,False,
+City.000008,City,Conditional,qwen_projection_shuffled,1,None,,,True,
+City.000008,City,Conditional,qwen_projection_shuffled,2,san francisco,san francisco,,False,
+City.000008,City,Conditional,qwen_projection_shuffled,3,SAN FRANCISCO,San Francisco,,False,
+City.000008,City,Conditional,qwen_projection_random,1,None,,,True,
+City.000008,City,Conditional,qwen_projection_random,2,san francisco,san francisco,,False,
+City.000008,City,Conditional,qwen_projection_random,3,SAN FRANCISCO,San Francisco,,False,
+City.000011,City,Conditional,train_only,1,NYC,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,train_only,2,new york city,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,train_only,3,None,None,New York City,False,const('New York City')
+City.000011,City,Conditional,qwen_projection,1,NYC,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,qwen_projection,2,new york city,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,qwen_projection,3,None,None,New York City,False,const('New York City')
+City.000011,City,Conditional,qwen_projection_shuffled,1,NYC,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,qwen_projection_shuffled,2,new york city,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,qwen_projection_shuffled,3,None,None,New York City,False,const('New York City')
+City.000011,City,Conditional,qwen_projection_random,1,NYC,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,qwen_projection_random,2,new york city,New York City,New York City,True,const('New York City')
+City.000011,City,Conditional,qwen_projection_random,3,None,None,New York City,False,const('New York City')
+City.000011,City,Conditional,direct_row_by_row,1,NYC,New York City,New York City,True,
+City.000011,City,Conditional,direct_row_by_row,2,new york city,New York City,New York City,True,
+City.000011,City,Conditional,direct_row_by_row,3,None,None,New York City,False,
+Currency.000003,Currency,"Numeric,Substring",train_only,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",train_only,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",train_only,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_shuffled,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_shuffled,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_shuffled,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_random,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_random,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_random,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+DateTime.000009,DateTime,DateTime,train_only,1,2024-03-31T04:15:08Z,31,31,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,train_only,2,2008-02-13T11:48:20Z,13,13,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,train_only,3,1972-11-17T10:24:59Z,17,17,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection,1,2024-03-31T04:15:08Z,31,31,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection,2,2008-02-13T11:48:20Z,13,13,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection,3,1972-11-17T10:24:59Z,17,17,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection_shuffled,1,2024-03-31T04:15:08Z,31,31,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection_shuffled,2,2008-02-13T11:48:20Z,13,13,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection_shuffled,3,1972-11-17T10:24:59Z,17,17,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection_random,1,2024-03-31T04:15:08Z,31,31,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection_random,2,2008-02-13T11:48:20Z,13,13,True,"slice_abs(COL0,8,10)"
+DateTime.000009,DateTime,DateTime,qwen_projection_random,3,1972-11-17T10:24:59Z,17,17,True,"slice_abs(COL0,8,10)"
+DateTime.000019,DateTime,"DateTime,Multicolumn",train_only,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",train_only,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",train_only,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_shuffled,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_shuffled,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_shuffled,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_random,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_random,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_random,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000022,DateTime,DateTime,train_only,1,03302241,3/30/2241,,False,
+DateTime.000022,DateTime,DateTime,train_only,2,02-Aug-2160,8/2/2160,,False,
+DateTime.000022,DateTime,DateTime,train_only,3,23 May 1984,5/23/1984,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection,1,03302241,3/30/2241,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection,2,02-Aug-2160,8/2/2160,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection,3,23 May 1984,5/23/1984,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection_shuffled,1,03302241,3/30/2241,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection_shuffled,2,02-Aug-2160,8/2/2160,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection_shuffled,3,23 May 1984,5/23/1984,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection_random,1,03302241,3/30/2241,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection_random,2,02-Aug-2160,8/2/2160,,False,
+DateTime.000022,DateTime,DateTime,qwen_projection_random,3,23 May 1984,5/23/1984,,False,
+DateTime.000027,DateTime,DateTime,train_only,1,3302241,Q1 '2241,,False,
+DateTime.000027,DateTime,DateTime,train_only,2,8022160,Q3 '2160,,False,
+DateTime.000027,DateTime,DateTime,train_only,3,23 May 1984 22:24,Q2 '1984,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection,1,3302241,Q1 '2241,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection,2,8022160,Q3 '2160,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection,3,23 May 1984 22:24,Q2 '1984,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection_shuffled,1,3302241,Q1 '2241,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection_shuffled,2,8022160,Q3 '2160,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection_shuffled,3,23 May 1984 22:24,Q2 '1984,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection_random,1,3302241,Q1 '2241,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection_random,2,8022160,Q3 '2160,,False,
+DateTime.000027,DateTime,DateTime,qwen_projection_random,3,23 May 1984 22:24,Q2 '1984,,False,
+DateTime.000027,DateTime,DateTime,direct_row_by_row,1,3302241,Q1 '2241,Q1 '241,False,
+DateTime.000027,DateTime,DateTime,direct_row_by_row,2,8022160,Q3 '2160,Q1 '2160,False,
+DateTime.000027,DateTime,DateTime,direct_row_by_row,3,23 May 1984 22:24,Q2 '1984,Q2 '1984,True,
+DateTime.000030,DateTime,DateTime,train_only,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,train_only,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,train_only,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_shuffled,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_shuffled,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_shuffled,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_random,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_random,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_random,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+DateTime.000040,DateTime,"DateTime,Substring",train_only,1,Word 1 Word 31 Word 1846 Word,"January 31, 1846",,False,
+DateTime.000040,DateTime,"DateTime,Substring",train_only,2,Word 4 Word 22 Word 1953 Word,"April 22, 1953",,False,
+DateTime.000040,DateTime,"DateTime,Substring",train_only,3,Word 3 Word 30 Word 2241 Word,"March 30, 2241",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection,1,Word 1 Word 31 Word 1846 Word,"January 31, 1846",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection,2,Word 4 Word 22 Word 1953 Word,"April 22, 1953",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection,3,Word 3 Word 30 Word 2241 Word,"March 30, 2241",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection_shuffled,1,Word 1 Word 31 Word 1846 Word,"January 31, 1846",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection_shuffled,2,Word 4 Word 22 Word 1953 Word,"April 22, 1953",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection_shuffled,3,Word 3 Word 30 Word 2241 Word,"March 30, 2241",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection_random,1,Word 1 Word 31 Word 1846 Word,"January 31, 1846",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection_random,2,Word 4 Word 22 Word 1953 Word,"April 22, 1953",,False,
+DateTime.000040,DateTime,"DateTime,Substring",qwen_projection_random,3,Word 3 Word 30 Word 2241 Word,"March 30, 2241",,False,
+DateTime.000046,DateTime,DateTime,train_only,1,7/2/1952,1952 7 2,,False,
+DateTime.000046,DateTime,DateTime,train_only,2,1712 247,1712 3 9,,False,
+DateTime.000046,DateTime,DateTime,train_only,3,14/7/2143,2143 14 7,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection,1,7/2/1952,1952 7 2,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection,2,1712 247,1712 3 9,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection,3,14/7/2143,2143 14 7,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection_shuffled,1,7/2/1952,1952 7 2,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection_shuffled,2,1712 247,1712 3 9,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection_shuffled,3,14/7/2143,2143 14 7,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection_random,1,7/2/1952,1952 7 2,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection_random,2,1712 247,1712 3 9,,False,
+DateTime.000046,DateTime,DateTime,qwen_projection_random,3,14/7/2143,2143 14 7,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,1,07:00:20,6AM to 8AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,2,23:34:17,10PM to 12AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,3,16:15:08,4PM to 6PM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,1,07:00:20,6AM to 8AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,2,23:34:17,10PM to 12AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,3,16:15:08,4PM to 6PM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,1,07:00:20,6AM to 8AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,2,23:34:17,10PM to 12AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,3,16:15:08,4PM to 6PM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,1,07:00:20,6AM to 8AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,2,23:34:17,10PM to 12AM,,False,
+DateTime.000049,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,3,16:15:08,4PM to 6PM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,1,12:41:14,12:00PM-1:50PM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,2,04:22:15,4:00AM-5:50AM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,3,04:54:07,4:00AM-5:50AM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,1,12:41:14,12:00PM-1:50PM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,2,04:22:15,4:00AM-5:50AM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,3,04:54:07,4:00AM-5:50AM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,1,12:41:14,12:00PM-1:50PM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,2,04:22:15,4:00AM-5:50AM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,3,04:54:07,4:00AM-5:50AM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,1,12:41:14,12:00PM-1:50PM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,2,04:22:15,4:00AM-5:50AM,,False,
+DateTime.000061,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,3,04:54:07,4:00AM-5:50AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,1,12:41:14,11AM-12PM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,2,04:22:15,3AM-4AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",train_only,3,04:54:07,3AM-4AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,1,12:41:14,11AM-12PM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,2,04:22:15,3AM-4AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection,3,04:54:07,3AM-4AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,1,12:41:14,11AM-12PM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,2,04:22:15,3AM-4AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_shuffled,3,04:54:07,3AM-4AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,1,12:41:14,11AM-12PM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,2,04:22:15,3AM-4AM,,False,
+DateTime.000063,DateTime,"DateTimeRange,DateTimeRounding,DateTime",qwen_projection_random,3,04:54:07,3AM-4AM,,False,
+DateTime.000107,DateTime,DateTime,train_only,1,21-Jan-1985 05:44:43,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,train_only,2,16-Aug-1985 01:11:56,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,train_only,3,20-Dec-2033 18:36:29,2033,2033,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection,1,21-Jan-1985 05:44:43,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection,2,16-Aug-1985 01:11:56,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection,3,20-Dec-2033 18:36:29,2033,2033,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection_shuffled,1,21-Jan-1985 05:44:43,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection_shuffled,2,16-Aug-1985 01:11:56,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection_shuffled,3,20-Dec-2033 18:36:29,2033,2033,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection_random,1,21-Jan-1985 05:44:43,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection_random,2,16-Aug-1985 01:11:56,1985,1985,True,"slice_abs(COL0,7,11)"
+DateTime.000107,DateTime,DateTime,qwen_projection_random,3,20-Dec-2033 18:36:29,2033,2033,True,"slice_abs(COL0,7,11)"
+Email.000006,Email,"Concatenation,Conditional",train_only,1,iñaki,iñaki@proseware.com,,False,
+Email.000006,Email,"Concatenation,Conditional",train_only,2,celtia@contoso.com,celtia@contoso.com,,False,
+Email.000006,Email,"Concatenation,Conditional",train_only,3,nina@fabrikam.com,nina@fabrikam.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection,1,iñaki,iñaki@proseware.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection,2,celtia@contoso.com,celtia@contoso.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection,3,nina@fabrikam.com,nina@fabrikam.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection_shuffled,1,iñaki,iñaki@proseware.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection_shuffled,2,celtia@contoso.com,celtia@contoso.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection_shuffled,3,nina@fabrikam.com,nina@fabrikam.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection_random,1,iñaki,iñaki@proseware.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection_random,2,celtia@contoso.com,celtia@contoso.com,,False,
+Email.000006,Email,"Concatenation,Conditional",qwen_projection_random,3,nina@fabrikam.com,nina@fabrikam.com,,False,
+Email.000009,Email,Substring,train_only,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,train_only,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,train_only,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000009,Email,Substring,qwen_projection,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,qwen_projection,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,qwen_projection,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000009,Email,Substring,qwen_projection_shuffled,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,qwen_projection_shuffled,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,qwen_projection_shuffled,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000009,Email,Substring,qwen_projection_random,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,qwen_projection_random,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,qwen_projection_random,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000010,Email,Substring,train_only,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,train_only,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,train_only,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_shuffled,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_shuffled,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_shuffled,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_random,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_random,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_random,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Log.000018,Log,"Concatenation,Substring",train_only,1,type size =  185: Et.Consectetur.UtVoluptas type size =  175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,,False,
+Log.000018,Log,"Concatenation,Substring",train_only,2,type size =  82: Quasi.Fuga.EtMolestiaeModi type size =  229: Ut.Cum.Voluptatem,82->229,,False,
+Log.000018,Log,"Concatenation,Substring",train_only,3,type size =  234: Ratione.Cum.TemporaEt type size =  37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection,1,type size =  185: Et.Consectetur.UtVoluptas type size =  175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection,2,type size =  82: Quasi.Fuga.EtMolestiaeModi type size =  229: Ut.Cum.Voluptatem,82->229,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection,3,type size =  234: Ratione.Cum.TemporaEt type size =  37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection_shuffled,1,type size =  185: Et.Consectetur.UtVoluptas type size =  175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection_shuffled,2,type size =  82: Quasi.Fuga.EtMolestiaeModi type size =  229: Ut.Cum.Voluptatem,82->229,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection_shuffled,3,type size =  234: Ratione.Cum.TemporaEt type size =  37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection_random,1,type size =  185: Et.Consectetur.UtVoluptas type size =  175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection_random,2,type size =  82: Quasi.Fuga.EtMolestiaeModi type size =  229: Ut.Cum.Voluptatem,82->229,,False,
+Log.000018,Log,"Concatenation,Substring",qwen_projection_random,3,type size =  234: Ratione.Cum.TemporaEt type size =  37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,,False,
+Name.000010,Name,Substring,train_only,1,793 764 937 294 522 663 Joonsuh 624 693 Borkakati,Joonsuh 624 693,,False,
+Name.000010,Name,Substring,train_only,2,900 678 93 149 106 609 Meaza 677@569 360 850 62 281 704 Dursunowa,Meaza 677@569,,False,
+Name.000010,Name,Substring,train_only,3,506 531 57 280 Janez 104_742 699 615 830 685 569 172 Sixirei,Janez 104_742,,False,
+Name.000010,Name,Substring,qwen_projection,1,793 764 937 294 522 663 Joonsuh 624 693 Borkakati,Joonsuh 624 693,,False,
+Name.000010,Name,Substring,qwen_projection,2,900 678 93 149 106 609 Meaza 677@569 360 850 62 281 704 Dursunowa,Meaza 677@569,,False,
+Name.000010,Name,Substring,qwen_projection,3,506 531 57 280 Janez 104_742 699 615 830 685 569 172 Sixirei,Janez 104_742,,False,
+Name.000010,Name,Substring,qwen_projection_shuffled,1,793 764 937 294 522 663 Joonsuh 624 693 Borkakati,Joonsuh 624 693,,False,
+Name.000010,Name,Substring,qwen_projection_shuffled,2,900 678 93 149 106 609 Meaza 677@569 360 850 62 281 704 Dursunowa,Meaza 677@569,,False,
+Name.000010,Name,Substring,qwen_projection_shuffled,3,506 531 57 280 Janez 104_742 699 615 830 685 569 172 Sixirei,Janez 104_742,,False,
+Name.000010,Name,Substring,qwen_projection_random,1,793 764 937 294 522 663 Joonsuh 624 693 Borkakati,Joonsuh 624 693,,False,
+Name.000010,Name,Substring,qwen_projection_random,2,900 678 93 149 106 609 Meaza 677@569 360 850 62 281 704 Dursunowa,Meaza 677@569,,False,
+Name.000010,Name,Substring,qwen_projection_random,3,506 531 57 280 Janez 104_742 699 615 830 685 569 172 Sixirei,Janez 104_742,,False,
+Name.000017,Name,Substring,train_only,1,Cecep Sutresna,Cece,Cece,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,train_only,2,Milica Zujovic,Mili,Mili,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,train_only,3,Radmilo Bogic,Radm,Radm,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection,1,Cecep Sutresna,Cece,Cece,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection,2,Milica Zujovic,Mili,Mili,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection,3,Radmilo Bogic,Radm,Radm,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection_shuffled,1,Cecep Sutresna,Cece,Cece,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection_shuffled,2,Milica Zujovic,Mili,Mili,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection_shuffled,3,Radmilo Bogic,Radm,Radm,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection_random,1,Cecep Sutresna,Cece,Cece,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection_random,2,Milica Zujovic,Mili,Mili,True,"slice_abs(COL0,0,4)"
+Name.000017,Name,Substring,qwen_projection_random,3,Radmilo Bogic,Radm,Radm,True,"slice_abs(COL0,0,4)"
+Name.000026,Name,"Casing,Concatenation,Substring",train_only,1,Cecep Sutresna,cs,cs,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",train_only,2,Milica Zujovic,mz,mz,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",train_only,3,Radmilo Bogic,rb,rb,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection,1,Cecep Sutresna,cs,cs,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection,2,Milica Zujovic,mz,mz,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection,3,Radmilo Bogic,rb,rb,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection_shuffled,1,Cecep Sutresna,cs,cs,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection_shuffled,2,Milica Zujovic,mz,mz,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection_shuffled,3,Radmilo Bogic,rb,rb,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection_random,1,Cecep Sutresna,cs,cs,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection_random,2,Milica Zujovic,mz,mz,True,lower(initials(COL0))
+Name.000026,Name,"Casing,Concatenation,Substring",qwen_projection_random,3,Radmilo Bogic,rb,rb,True,lower(initials(COL0))
+Name.000028,Name,Substring,train_only,1,Rodel-Habiba Chaiprasit,Rodel,Rodel,True,first_word(COL0)
+Name.000028,Name,Substring,train_only,2,Jan Evans,Jan,Jan,True,first_word(COL0)
+Name.000028,Name,Substring,train_only,3,Antonia Lusis,Antonia,Antonia,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection,1,Rodel-Habiba Chaiprasit,Rodel,Rodel,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection,2,Jan Evans,Jan,Jan,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection,3,Antonia Lusis,Antonia,Antonia,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection_shuffled,1,Rodel-Habiba Chaiprasit,Rodel,Rodel,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection_shuffled,2,Jan Evans,Jan,Jan,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection_shuffled,3,Antonia Lusis,Antonia,Antonia,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection_random,1,Rodel-Habiba Chaiprasit,Rodel,Rodel,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection_random,2,Jan Evans,Jan,Jan,True,first_word(COL0)
+Name.000028,Name,Substring,qwen_projection_random,3,Antonia Lusis,Antonia,Antonia,True,first_word(COL0)
+Name.000028,Name,Substring,direct_row_by_row,1,Rodel-Habiba Chaiprasit,Rodel,Rodel,True,
+Name.000028,Name,Substring,direct_row_by_row,2,Jan Evans,Jan,Jan,True,
+Name.000028,Name,Substring,direct_row_by_row,3,Antonia Lusis,Antonia,Antonia,True,
+Name.000032,Name,Substring,train_only,1,"4,Dilorom",Dilorom,Dilorom,True,alpha(COL0)
+Name.000032,Name,Substring,train_only,2,"2,Milica",Milica,Milica,True,alpha(COL0)
+Name.000032,Name,Substring,train_only,3,"4,Anna",Anna,Anna,True,alpha(COL0)
+Name.000032,Name,Substring,qwen_projection,1,"4,Dilorom",Dilorom,Dilorom,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection,2,"2,Milica",Milica,Milica,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection,3,"4,Anna",Anna,Anna,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection_shuffled,1,"4,Dilorom",Dilorom,Dilorom,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection_shuffled,2,"2,Milica",Milica,Milica,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection_shuffled,3,"4,Anna",Anna,Anna,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection_random,1,"4,Dilorom",Dilorom,Dilorom,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection_random,2,"2,Milica",Milica,Milica,True,"alpha(field[,,1](COL0))"
+Name.000032,Name,Substring,qwen_projection_random,3,"4,Anna",Anna,Anna,True,"alpha(field[,,1](COL0))"
+Name.000034,Name,Substring,train_only,1,Fatma Yilmaz,Yilmaz,Yilmaz,True,last_word(COL0)
+Name.000034,Name,Substring,train_only,2,Artem Kuznetsov,Kuznetsov,Kuznetsov,True,last_word(COL0)
+Name.000034,Name,Substring,train_only,3,Cecep Sutresna,Sutresna,Sutresna,True,last_word(COL0)
+Name.000034,Name,Substring,qwen_projection,1,Fatma Yilmaz,Yilmaz,Yilmaz,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection,2,Artem Kuznetsov,Kuznetsov,Kuznetsov,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection,3,Cecep Sutresna,Sutresna,Sutresna,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection_shuffled,1,Fatma Yilmaz,Yilmaz,Yilmaz,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection_shuffled,2,Artem Kuznetsov,Kuznetsov,Kuznetsov,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection_shuffled,3,Cecep Sutresna,Sutresna,Sutresna,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection_random,1,Fatma Yilmaz,Yilmaz,Yilmaz,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection_random,2,Artem Kuznetsov,Kuznetsov,Kuznetsov,True,"field[space,1](COL0)"
+Name.000034,Name,Substring,qwen_projection_random,3,Cecep Sutresna,Sutresna,Sutresna,True,"field[space,1](COL0)"
+Number.000015,Number,"Numeric,NumericRounding",train_only,1,-22630,-22600,,False,
+Number.000015,Number,"Numeric,NumericRounding",train_only,2,-3269,-3250,,False,
+Number.000015,Number,"Numeric,NumericRounding",train_only,3,-3049,-3000,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection,1,-22630,-22600,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection,2,-3269,-3250,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection,3,-3049,-3000,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection_shuffled,1,-22630,-22600,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection_shuffled,2,-3269,-3250,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection_shuffled,3,-3049,-3000,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection_random,1,-22630,-22600,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection_random,2,-3269,-3250,,False,
+Number.000015,Number,"Numeric,NumericRounding",qwen_projection_random,3,-3049,-3000,,False,
+Number.000015,Number,"Numeric,NumericRounding",direct_row_by_row,1,-22630,-22600,-22500,False,
+Number.000015,Number,"Numeric,NumericRounding",direct_row_by_row,2,-3269,-3250,-3250,True,
+Number.000015,Number,"Numeric,NumericRounding",direct_row_by_row,3,-3049,-3000,-3050,False,
+Number.000016,Number,"Numeric,NumericRounding",train_only,1,601,605,,False,
+Number.000016,Number,"Numeric,NumericRounding",train_only,2,814,815,,False,
+Number.000016,Number,"Numeric,NumericRounding",train_only,3,816,820,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection,1,601,605,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection,2,814,815,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection,3,816,820,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection_shuffled,1,601,605,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection_shuffled,2,814,815,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection_shuffled,3,816,820,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection_random,1,601,605,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection_random,2,814,815,,False,
+Number.000016,Number,"Numeric,NumericRounding",qwen_projection_random,3,816,820,,False,
+Number.000016,Number,"Numeric,NumericRounding",direct_row_by_row,1,601,605,605,True,
+Number.000016,Number,"Numeric,NumericRounding",direct_row_by_row,2,814,815,815,True,
+Number.000016,Number,"Numeric,NumericRounding",direct_row_by_row,3,816,820,817,False,
+Number.000032,Number,"Numeric,NumericRounding",train_only,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",train_only,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",train_only,3,102,102.00,102.00,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection,3,102,102.00,102.00,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_shuffled,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_shuffled,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_shuffled,3,102,102.00,102.00,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_random,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_random,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_random,3,102,102.00,102.00,True,number_2dp(COL0)
+Number.000044,Number,Numeric,train_only,1,1015,1015,1015,True,number_int(COL0)
+Number.000044,Number,Numeric,train_only,2,2010,2010,2010,True,number_int(COL0)
+Number.000044,Number,Numeric,train_only,3,1002,1002,1002,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection,1,1015,1015,1015,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection,2,2010,2010,2010,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection,3,1002,1002,1002,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection_shuffled,1,1015,1015,1015,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection_shuffled,2,2010,2010,2010,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection_shuffled,3,1002,1002,1002,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection_random,1,1015,1015,1015,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection_random,2,2010,2010,2010,True,number_int(COL0)
+Number.000044,Number,Numeric,qwen_projection_random,3,1002,1002,1002,True,number_int(COL0)
+Number.000047,Number,"Numeric,NumericRounding",train_only,1,1284.42,1285.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",train_only,2,23224.98,23225.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",train_only,3,1024.21,1025.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection,1,1284.42,1285.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection,2,23224.98,23225.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection,3,1024.21,1025.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection_shuffled,1,1284.42,1285.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection_shuffled,2,23224.98,23225.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection_shuffled,3,1024.21,1025.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection_random,1,1284.42,1285.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection_random,2,23224.98,23225.00,,False,
+Number.000047,Number,"Numeric,NumericRounding",qwen_projection_random,3,1024.21,1025.00,,False,
+Number.000053,Number,"Numeric,NumericRounding",train_only,1,283872,300000,,False,
+Number.000053,Number,"Numeric,NumericRounding",train_only,2,234282,200000,,False,
+Number.000053,Number,"Numeric,NumericRounding",train_only,3,932828,900000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection,1,283872,300000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection,2,234282,200000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection,3,932828,900000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection_shuffled,1,283872,300000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection_shuffled,2,234282,200000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection_shuffled,3,932828,900000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection_random,1,283872,300000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection_random,2,234282,200000,,False,
+Number.000053,Number,"Numeric,NumericRounding",qwen_projection_random,3,932828,900000,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",train_only,1,col0=33 | col1=285 | col2=928423,033-285-928423,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",train_only,2,col0=925 | col1=982 | col2=1892,925-982-1892,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",train_only,3,col0=1 | col1=425 | col2=28520,001-425-28520,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection,1,col0=33 | col1=285 | col2=928423,033-285-928423,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection,2,col0=925 | col1=982 | col2=1892,925-982-1892,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection,3,col0=1 | col1=425 | col2=28520,001-425-28520,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection_shuffled,1,col0=33 | col1=285 | col2=928423,033-285-928423,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection_shuffled,2,col0=925 | col1=982 | col2=1892,925-982-1892,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection_shuffled,3,col0=1 | col1=425 | col2=28520,001-425-28520,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection_random,1,col0=33 | col1=285 | col2=928423,033-285-928423,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection_random,2,col0=925 | col1=982 | col2=1892,925-982-1892,,False,
+Number.000064,Number,"Concatenation,Multicolumn,Numeric",qwen_projection_random,3,col0=1 | col1=425 | col2=28520,001-425-28520,,False,
+Number.000068,Number,"Numeric,NumericRounding",train_only,1,1202.3433,1200,,False,
+Number.000068,Number,"Numeric,NumericRounding",train_only,2,23224.1,23220,,False,
+Number.000068,Number,"Numeric,NumericRounding",train_only,3,-23224.1,-23220,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection,1,1202.3433,1200,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection,2,23224.1,23220,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection,3,-23224.1,-23220,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection_shuffled,1,1202.3433,1200,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection_shuffled,2,23224.1,23220,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection_shuffled,3,-23224.1,-23220,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection_random,1,1202.3433,1200,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection_random,2,23224.1,23220,,False,
+Number.000068,Number,"Numeric,NumericRounding",qwen_projection_random,3,-23224.1,-23220,,False,
+Phone.000008,Phone,Substring,train_only,1,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,train_only,2,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,train_only,3,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection,1,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection,2,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection,3,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection_shuffled,1,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection_shuffled,2,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection_shuffled,3,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection_random,1,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection_random,2,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,qwen_projection_random,3,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True,"field[,,3](COL0)"
+Phone.000008,Phone,Substring,direct_row_by_row,1,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",(311) 343-5301,(311) 343-5301,True,
+Phone.000008,Phone,Substring,direct_row_by_row,2,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",(956) 100-1022,(956) 100-1022,True,
+Phone.000008,Phone,Substring,direct_row_by_row,3,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",(106) 620-5226,(106) 620-5226,True,
+ShippingCode.000001,ShippingCode,Substring,train_only,1,1Z I81 6QF 90 9601 169 4,I81,I81,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,train_only,2,1Z O63 B7Z 35 2550 248 6,O63,O63,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,train_only,3,1Z KDQ RE6 29 5028 565 9,KDQ,KDQ,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection,1,1Z I81 6QF 90 9601 169 4,I81,I81,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection,2,1Z O63 B7Z 35 2550 248 6,O63,O63,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection,3,1Z KDQ RE6 29 5028 565 9,KDQ,KDQ,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection_shuffled,1,1Z I81 6QF 90 9601 169 4,I81,I81,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection_shuffled,2,1Z O63 B7Z 35 2550 248 6,O63,O63,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection_shuffled,3,1Z KDQ RE6 29 5028 565 9,KDQ,KDQ,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection_random,1,1Z I81 6QF 90 9601 169 4,I81,I81,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection_random,2,1Z O63 B7Z 35 2550 248 6,O63,O63,True,"field[space,1](COL0)"
+ShippingCode.000001,ShippingCode,Substring,qwen_projection_random,3,1Z KDQ RE6 29 5028 565 9,KDQ,KDQ,True,"field[space,1](COL0)"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",train_only,1,1Z 339 5D2 97 3412 476 4,339 97,339 97,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",train_only,2,1Z 887 8Q2 88 0816 829 4,887 88,887 88,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",train_only,3,1Z 781 7D9 14 5364 887 7,781 14,781 14,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection,1,1Z 339 5D2 97 3412 476 4,339 97,339 97,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection,2,1Z 887 8Q2 88 0816 829 4,887 88,887 88,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection,3,1Z 781 7D9 14 5364 887 7,781 14,781 14,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection_shuffled,1,1Z 339 5D2 97 3412 476 4,339 97,339 97,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection_shuffled,2,1Z 887 8Q2 88 0816 829 4,887 88,887 88,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection_shuffled,3,1Z 781 7D9 14 5364 887 7,781 14,781 14,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection_random,1,1Z 339 5D2 97 3412 476 4,339 97,339 97,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection_random,2,1Z 887 8Q2 88 0816 829 4,887 88,887 88,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",qwen_projection_random,3,1Z 781 7D9 14 5364 887 7,781 14,781 14,True,"concat[' '](field[space,1](COL0),field[space,3](COL0))"
+UserAgent.000005,UserAgent,Substring,train_only,1,MFM-5.7.12/xPhone-9.7,9.7,9.7,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,train_only,2,MFM-2.4.76/xPad-4.1.8,4.1.8,4.1.8,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,train_only,3,MFM-6.6.28/xPhone-8.0,8.0,8.0,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection,1,MFM-5.7.12/xPhone-9.7,9.7,9.7,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection,2,MFM-2.4.76/xPad-4.1.8,4.1.8,4.1.8,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection,3,MFM-6.6.28/xPhone-8.0,8.0,8.0,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection_shuffled,1,MFM-5.7.12/xPhone-9.7,9.7,9.7,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection_shuffled,2,MFM-2.4.76/xPad-4.1.8,4.1.8,4.1.8,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection_shuffled,3,MFM-6.6.28/xPhone-8.0,8.0,8.0,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection_random,1,MFM-5.7.12/xPhone-9.7,9.7,9.7,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection_random,2,MFM-2.4.76/xPad-4.1.8,4.1.8,4.1.8,True,"field[-,2](COL0)"
+UserAgent.000005,UserAgent,Substring,qwen_projection_random,3,MFM-6.6.28/xPhone-8.0,8.0,8.0,True,"field[-,2](COL0)"

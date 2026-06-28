@@ -1,0 +1,26 @@
+{
+  "experiment": "qwen35_4b_operator_inventory_scaling_stress",
+  "model_family": "Qwen/Qwen3.5-4B",
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_operator_inventory_scaling_stress",
+  "objective": "Scale typed operator inventory search over same-signature list[int] -> int operators and two-operator compositions to identify the search-cost and identifiability frontier before training a top-k shortlister.",
+  "library_sizes": [8, 16, 32, 64, 128, 256, 512],
+  "records_per_template": 12,
+  "visible_cases": 6,
+  "hidden_cases": 18,
+  "query_pool_cases": 48,
+  "operator_signature_under_test": "list[int] -> int",
+  "templates": [
+    "single_mod",
+    "single_offset",
+    "pair_affine_mod",
+    "pair_compare_gate"
+  ],
+  "active_query_budgets": [0, 1, 2, 3],
+  "fixed_candidate_budgets": [1024, 4096, 16384],
+  "notes": [
+    "This run intentionally performs no QLoRA training.",
+    "The experiment measures when exhaustive search becomes too large or too ambiguous.",
+    "A trained inventory-conditioned sketcher is only justified after the search curve exposes a scale budget to beat."
+  ]
+}
+

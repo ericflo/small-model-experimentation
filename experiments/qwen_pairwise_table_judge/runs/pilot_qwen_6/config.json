@@ -1,0 +1,17 @@
+{
+  "run_name": "pilot_qwen_6",
+  "seed": 20260627,
+  "task_limit": 6,
+  "train_n": 4,
+  "heldout_cap": 4,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "candidate_source": "/workspace/experiments/qwen_full_table_consistency_reranker/runs/main_qwen_table_40",
+  "shortlist": 4,
+  "max_new_tokens": 8,
+  "no_qwen": false,
+  "tasks": 6,
+  "candidate_rows": 1370,
+  "judgment_rows": 52,
+  "created_utc": "2026-06-27T08:08:16.846490+00:00"
+}

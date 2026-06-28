@@ -1,0 +1,7 @@
+run,checkpoint_dir,created_unix,notes
+smoke_vm_agent_echo,large_artifacts/qwen_vm_agent_echo_qlora/checkpoints/smoke_vm_agent_echo,1782270295,VM-agent ECHO QLoRA; base=Qwen/Qwen3-4B
+smoke_vm_agent_echo_v2,large_artifacts/qwen_vm_agent_echo_qlora/checkpoints/smoke_vm_agent_echo_v2,1782270447,VM-agent ECHO QLoRA; base=Qwen/Qwen3-4B
+pilot_vm_agent_echo_s64_a96,large_artifacts/qwen_vm_agent_echo_qlora/checkpoints/pilot_vm_agent_echo_s64_a96,1782271338,VM-agent ECHO QLoRA; base=Qwen/Qwen3-4B
+pilot_vm_agent_echo_blank_a128,large_artifacts/qwen_vm_agent_echo_qlora/checkpoints/pilot_vm_agent_echo_blank_a128,1782272616,VM-agent ECHO QLoRA; base=Qwen/Qwen3-4B
+pilot_vm_agent_echo_blank_exactstop_a128,large_artifacts/qwen_vm_agent_echo_qlora/checkpoints/pilot_vm_agent_echo_blank_exactstop_a128,1782273645,VM-agent ECHO QLoRA; base=Qwen/Qwen3-4B
+main_vm_agent_echo_blank_a512_stoprule,large_artifacts/qwen_vm_agent_echo_qlora/checkpoints/main_vm_agent_echo_blank_a512_stoprule,1782277923,VM-agent ECHO QLoRA; base=Qwen/Qwen3-4B

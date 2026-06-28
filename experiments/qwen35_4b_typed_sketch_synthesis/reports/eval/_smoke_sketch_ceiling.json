@@ -1,0 +1,373 @@
+{
+  "adapter": "/workspace/large_artifacts/qwen35_4b_typed_sketch_synthesis/models/sketch_lora",
+  "baseline_result": "reports/eval/program_ceiling.json",
+  "data": "data/eval/dsl_eval_ceiling.jsonl",
+  "max_hole_options": 28,
+  "max_new_tokens": 96,
+  "max_programs_per_sketch": 5000,
+  "max_total_programs_per_record": 16000,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "num_samples": 3,
+  "prompt_mode": "trace",
+  "records": 5,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "rows": [
+    {
+      "base_rerank_hidden_all": false,
+      "base_rerank_hidden_passes": 14,
+      "base_rerank_visible_all": false,
+      "base_rerank_visible_passes": 4,
+      "base_selected_program": "(if (and (not (contains text \"\")) (eq (mod (sum values) modulus) target)) high_label low_label)",
+      "family": "sum_length_mod_gate_label",
+      "hidden_total": 18,
+      "id": "eval_ceiling_eval_random_sum_length_mod_gate_label_000",
+      "selected": {
+        "hidden_passes": 14,
+        "hidden_total": 18,
+        "program": "(if (eq (mod (sum values) (len text)) target) high_label low_label)",
+        "valid": true,
+        "visible_passes": 5,
+        "visible_total": 6
+      },
+      "sketch_selected_program": "(if (eq (mod (sum values) (len text)) target) high_label low_label)",
+      "sketch_synth_hidden_all": false,
+      "sketch_synth_hidden_passes": 14,
+      "sketch_synth_oracle_hidden_all": false,
+      "sketch_synth_oracle_hidden_passes": 15,
+      "sketch_synth_oracle_visible_all": false,
+      "sketch_synth_oracle_visible_passes": 5,
+      "sketch_synth_visible_all": false,
+      "sketch_synth_visible_passes": 5,
+      "sketches": [
+        {
+          "added_programs": 1568,
+          "completed_programs": 1568,
+          "hole_count": 3,
+          "kind": "greedy",
+          "raw": "(if (eq (mod (sum ?SEQ0) ?NUM0) ?NUM1) high_label low_label)\n",
+          "sketch": "(if (eq (mod (sum ?SEQ0) ?NUM0) ?NUM1) high_label low_label)",
+          "valid_syntax": true
+        },
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 4,
+          "kind": "sample_00",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2)) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2)) high_label low_label)",
+          "valid_syntax": true
+        },
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 4,
+          "kind": "sample_01",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (gt (len ?TEXT0) ?NUM1)) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (gt (len ?TEXT0) ?NUM1)) high_label low_label)",
+          "valid_syntax": true
+        }
+      ],
+      "synthesized_program_count": 11568,
+      "target_program": "(if (eq (mod (add (sum values) (len text)) modulus) target) high_label low_label)",
+      "target_program_synthesized": false,
+      "target_sketch": "(if (eq (mod (add (sum ?SEQ0) (len ?TEXT0)) ?NUM0) ?NUM1) high_label low_label)",
+      "trace_strategy": "eval_random",
+      "unique_sketch_count": 3,
+      "visible_total": 6
+    },
+    {
+      "base_rerank_hidden_all": false,
+      "base_rerank_hidden_passes": 13,
+      "base_rerank_visible_all": false,
+      "base_rerank_visible_passes": 4,
+      "base_selected_program": "(if (and (gt (sum values) 0) (eq (mod (sum values) modulus) target)) high_label low_label)",
+      "family": "sum_length_mod_gate_label",
+      "hidden_total": 18,
+      "id": "eval_ceiling_eval_random_sum_length_mod_gate_label_001",
+      "selected": {
+        "hidden_passes": 14,
+        "hidden_total": 18,
+        "program": "(if (and (gt (sum values) 0) (eq (mod (len text) (len values)) (count_eq text text))) high_label low_label)",
+        "valid": true,
+        "visible_passes": 5,
+        "visible_total": 6
+      },
+      "sketch_selected_program": "(if (and (gt (sum values) 0) (eq (mod (len text) (len values)) (count_eq text text))) high_label low_label)",
+      "sketch_synth_hidden_all": false,
+      "sketch_synth_hidden_passes": 14,
+      "sketch_synth_oracle_hidden_all": false,
+      "sketch_synth_oracle_hidden_passes": 16,
+      "sketch_synth_oracle_visible_all": false,
+      "sketch_synth_oracle_visible_passes": 5,
+      "sketch_synth_visible_all": false,
+      "sketch_synth_visible_passes": 5,
+      "sketches": [
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 5,
+          "kind": "greedy",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (len ?TEXT0) ?NUM1) ?NUM2)) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (len ?TEXT0) ?NUM1) ?NUM2)) high_label low_label)",
+          "valid_syntax": true
+        }
+      ],
+      "synthesized_program_count": 5000,
+      "target_program": "(if (eq (mod (add (sum values) (len text)) modulus) target) high_label low_label)",
+      "target_program_synthesized": false,
+      "target_sketch": "(if (eq (mod (add (sum ?SEQ0) (len ?TEXT0)) ?NUM0) ?NUM1) high_label low_label)",
+      "trace_strategy": "eval_random",
+      "unique_sketch_count": 1,
+      "visible_total": 6
+    },
+    {
+      "base_rerank_hidden_all": false,
+      "base_rerank_hidden_passes": 16,
+      "base_rerank_visible_all": false,
+      "base_rerank_visible_passes": 5,
+      "base_selected_program": "(if (and (contains text \"bbaecbdbcdadbcdae\") (gt (sum values) (mod (len text) modulus))) high_label low_label)",
+      "family": "sum_length_mod_gate_label",
+      "hidden_total": 18,
+      "id": "eval_ceiling_eval_random_sum_length_mod_gate_label_002",
+      "selected": {
+        "hidden_passes": 14,
+        "hidden_total": 18,
+        "program": "(if (and (gt (sum values) 0) (eq (mod (len text) (len values)) target)) high_label low_label)",
+        "valid": true,
+        "visible_passes": 5,
+        "visible_total": 6
+      },
+      "sketch_selected_program": "(if (and (gt (sum values) 0) (eq (mod (len text) (len values)) target)) high_label low_label)",
+      "sketch_synth_hidden_all": false,
+      "sketch_synth_hidden_passes": 14,
+      "sketch_synth_oracle_hidden_all": false,
+      "sketch_synth_oracle_hidden_passes": 17,
+      "sketch_synth_oracle_visible_all": false,
+      "sketch_synth_oracle_visible_passes": 5,
+      "sketch_synth_visible_all": false,
+      "sketch_synth_visible_passes": 5,
+      "sketches": [
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 5,
+          "kind": "greedy",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (len ?TEXT0) ?NUM1) ?NUM2)) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (len ?TEXT0) ?NUM1) ?NUM2)) high_label low_label)",
+          "valid_syntax": true
+        },
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 4,
+          "kind": "sample_01",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2)) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2)) high_label low_label)",
+          "valid_syntax": true
+        }
+      ],
+      "synthesized_program_count": 10000,
+      "target_program": "(if (eq (mod (add (sum values) (len text)) modulus) target) high_label low_label)",
+      "target_program_synthesized": false,
+      "target_sketch": "(if (eq (mod (add (sum ?SEQ0) (len ?TEXT0)) ?NUM0) ?NUM1) high_label low_label)",
+      "trace_strategy": "eval_random",
+      "unique_sketch_count": 2,
+      "visible_total": 6
+    },
+    {
+      "base_rerank_hidden_all": false,
+      "base_rerank_hidden_passes": 12,
+      "base_rerank_visible_all": false,
+      "base_rerank_visible_passes": 4,
+      "base_selected_program": "(if (and (not (contains text \"bebbecdbecbaaba\")) (gt (sum values) 0) (eq (mod (sum values) modulus) target)) high_label low_label)",
+      "family": "sum_length_mod_gate_label",
+      "hidden_total": 18,
+      "id": "eval_ceiling_eval_random_sum_length_mod_gate_label_003",
+      "selected": {
+        "hidden_passes": 9,
+        "hidden_total": 18,
+        "program": "(if (eq (mod (sum values) (sum values)) target) high_label low_label)",
+        "valid": true,
+        "visible_passes": 5,
+        "visible_total": 6
+      },
+      "sketch_selected_program": "(if (eq (mod (sum values) (sum values)) target) high_label low_label)",
+      "sketch_synth_hidden_all": false,
+      "sketch_synth_hidden_passes": 9,
+      "sketch_synth_oracle_hidden_all": false,
+      "sketch_synth_oracle_hidden_passes": 14,
+      "sketch_synth_oracle_visible_all": false,
+      "sketch_synth_oracle_visible_passes": 5,
+      "sketch_synth_visible_all": false,
+      "sketch_synth_visible_passes": 5,
+      "sketches": [
+        {
+          "added_programs": 1568,
+          "completed_programs": 1568,
+          "hole_count": 3,
+          "kind": "greedy",
+          "raw": "(if (eq (mod (sum ?SEQ0) ?NUM0) ?NUM1) high_label low_label)\n",
+          "sketch": "(if (eq (mod (sum ?SEQ0) ?NUM0) ?NUM1) high_label low_label)",
+          "valid_syntax": true
+        },
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 4,
+          "kind": "sample_01",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (not (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2))) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (not (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2))) high_label low_label)",
+          "valid_syntax": true
+        },
+        {
+          "added_programs": 1568,
+          "completed_programs": 1568,
+          "hole_count": 3,
+          "kind": "sample_02",
+          "raw": "(if (eq (mod (sum ?SEQ0) ?NUM0) ?NUM1)) high_label low_label\n",
+          "sketch": "(if (eq (mod (sum ?SEQ0) ?NUM0) ?NUM1))",
+          "valid_syntax": true
+        }
+      ],
+      "synthesized_program_count": 8136,
+      "target_program": "(if (eq (mod (add (sum values) (len text)) modulus) target) high_label low_label)",
+      "target_program_synthesized": false,
+      "target_sketch": "(if (eq (mod (add (sum ?SEQ0) (len ?TEXT0)) ?NUM0) ?NUM1) high_label low_label)",
+      "trace_strategy": "eval_random",
+      "unique_sketch_count": 3,
+      "visible_total": 6
+    },
+    {
+      "base_rerank_hidden_all": false,
+      "base_rerank_hidden_passes": 13,
+      "base_rerank_visible_all": false,
+      "base_rerank_visible_passes": 4,
+      "base_selected_program": "(if (and (gt (sum values) target) (eq (mod (sum values) modulus) target)) high_label low_label)",
+      "family": "sum_length_mod_gate_label",
+      "hidden_total": 18,
+      "id": "eval_ceiling_eval_random_sum_length_mod_gate_label_004",
+      "selected": {
+        "hidden_passes": 12,
+        "hidden_total": 18,
+        "program": "(if (and (gt (sum values) 0) (eq (mod (len text) modulus) target)) high_label low_label)",
+        "valid": true,
+        "visible_passes": 6,
+        "visible_total": 6
+      },
+      "sketch_selected_program": "(if (and (gt (sum values) 0) (eq (mod (len text) modulus) target)) high_label low_label)",
+      "sketch_synth_hidden_all": false,
+      "sketch_synth_hidden_passes": 12,
+      "sketch_synth_oracle_hidden_all": false,
+      "sketch_synth_oracle_hidden_passes": 15,
+      "sketch_synth_oracle_visible_all": true,
+      "sketch_synth_oracle_visible_passes": 6,
+      "sketch_synth_visible_all": true,
+      "sketch_synth_visible_passes": 6,
+      "sketches": [
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 5,
+          "kind": "greedy",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (len ?TEXT0) ?NUM1) ?NUM2)) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (len ?TEXT0) ?NUM1) ?NUM2)) high_label low_label)",
+          "valid_syntax": true
+        },
+        {
+          "added_programs": 5000,
+          "completed_programs": 5000,
+          "hole_count": 4,
+          "kind": "sample_00",
+          "raw": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2)) high_label low_label)\n",
+          "sketch": "(if (and (gt (sum ?SEQ0) ?NUM0) (eq (mod (sum ?SEQ0) ?NUM1) ?NUM2)) high_label low_label)",
+          "valid_syntax": true
+        }
+      ],
+      "synthesized_program_count": 10000,
+      "target_program": "(if (eq (mod (add (sum values) (len text)) modulus) target) high_label low_label)",
+      "target_program_synthesized": false,
+      "target_sketch": "(if (eq (mod (add (sum ?SEQ0) (len ?TEXT0)) ?NUM0) ?NUM1) high_label low_label)",
+      "trace_strategy": "eval_random",
+      "unique_sketch_count": 2,
+      "visible_total": 6
+    }
+  ],
+  "summary": {
+    "by_family": {
+      "sum_length_mod_gate_label": {
+        "avg_synthesized_programs": 8940.8,
+        "avg_unique_sketches": 2.2,
+        "base_rerank_hidden_all": {
+          "rate": 0.0,
+          "records": 5,
+          "successes": 0
+        },
+        "base_rerank_visible_all": {
+          "rate": 0.0,
+          "records": 5,
+          "successes": 0
+        },
+        "damaged_vs_base_hidden": 3,
+        "improved_over_base_hidden": 1,
+        "sketch_synth_hidden_all": {
+          "rate": 0.0,
+          "records": 5,
+          "successes": 0
+        },
+        "sketch_synth_oracle_hidden_all": {
+          "rate": 0.0,
+          "records": 5,
+          "successes": 0
+        },
+        "sketch_synth_visible_all": {
+          "rate": 0.2,
+          "records": 5,
+          "successes": 1
+        },
+        "target_program_synthesized": {
+          "rate": 0.0,
+          "records": 5,
+          "successes": 0
+        }
+      }
+    },
+    "overall": {
+      "avg_synthesized_programs": 8940.8,
+      "avg_unique_sketches": 2.2,
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "damaged_vs_base_hidden": 3,
+      "improved_over_base_hidden": 1,
+      "sketch_synth_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "sketch_synth_visible_all": {
+        "rate": 0.2,
+        "records": 5,
+        "successes": 1
+      },
+      "target_program_synthesized": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    }
+  },
+  "temperature": 0.7,
+  "top_p": 0.95
+}

@@ -1,0 +1,7 @@
+run,checkpoint_dir,created_unix,notes
+smoke_inpolicy_vm_echo,large_artifacts/qwen_inpolicy_vm_echo_distillation/checkpoints/smoke_inpolicy_vm_echo,1782262970,in-policy VM-ECHO distillation; base=Qwen/Qwen3-4B
+smoke_inpolicy_vm_echo_v2,large_artifacts/qwen_inpolicy_vm_echo_distillation/checkpoints/smoke_inpolicy_vm_echo_v2,1782263030,in-policy VM-ECHO distillation; base=Qwen/Qwen3-4B
+pilot_inpolicy_vm_echo_s96_w010,large_artifacts/qwen_inpolicy_vm_echo_distillation/checkpoints/pilot_inpolicy_vm_echo_s96_w010,1782263139,in-policy VM-ECHO distillation; base=Qwen/Qwen3-4B
+pilot_inpolicy_vm_echo_s96_w035,large_artifacts/qwen_inpolicy_vm_echo_distillation/checkpoints/pilot_inpolicy_vm_echo_s96_w035,1782263242,in-policy VM-ECHO distillation; base=Qwen/Qwen3-4B
+main_inpolicy_vm_echo_s192_w010,large_artifacts/qwen_inpolicy_vm_echo_distillation/checkpoints/main_inpolicy_vm_echo_s192_w010,1782263569,in-policy VM-ECHO distillation; base=Qwen/Qwen3-4B
+pilot_inpolicy_vm_echo_s96_w010_r2,large_artifacts/qwen_inpolicy_vm_echo_distillation/checkpoints/pilot_inpolicy_vm_echo_s96_w010_r2,1782263705,in-policy VM-ECHO distillation; base=Qwen/Qwen3-4B

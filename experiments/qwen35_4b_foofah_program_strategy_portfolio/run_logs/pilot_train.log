@@ -1,0 +1,76 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   4%|▍         | 28/723 [00:00<00:02, 279.57it/s]Loading weights:  10%|█         | 75/723 [00:00<00:01, 387.90it/s]Loading weights:  16%|█▌        | 114/723 [00:00<00:01, 386.96it/s]Loading weights:  21%|██        | 153/723 [00:00<00:01, 371.40it/s]Loading weights:  28%|██▊       | 200/723 [00:00<00:01, 391.10it/s]Loading weights:  34%|███▍      | 248/723 [00:00<00:01, 415.07it/s]Loading weights:  40%|████      | 290/723 [00:00<00:01, 411.96it/s]Loading weights:  46%|████▌     | 332/723 [00:00<00:00, 395.18it/s]Loading weights:  52%|█████▏    | 379/723 [00:00<00:00, 410.17it/s]Loading weights:  58%|█████▊    | 421/723 [00:01<00:00, 405.27it/s]Loading weights:  89%|████████▉ | 644/723 [00:01<00:00, 932.58it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 603.10it/s]
+[2/30 new, 2 total] split=train best=direct 1/2 direct=1 oracle_union=2 visible_tasks=2 tokens=17928
+[4/30 new, 4 total] split=train best=direct 1/4 direct=1 oracle_union=2 visible_tasks=3 tokens=37992
+[6/30 new, 6 total] split=train best=first_visible_program 3/6 direct=2 oracle_union=4 visible_tasks=5 tokens=46372
+[8/30 new, 8 total] split=train best=first_visible_program 3/8 direct=2 oracle_union=4 visible_tasks=6 tokens=58589
+[10/30 new, 10 total] split=train best=first_visible_program 3/10 direct=2 oracle_union=4 visible_tasks=6 tokens=85311
+[12/30 new, 12 total] split=train best=first_visible_program 3/12 direct=2 oracle_union=4 visible_tasks=8 tokens=107569
+[14/30 new, 14 total] split=train best=first_visible_program 3/14 direct=2 oracle_union=4 visible_tasks=10 tokens=133092
+[16/30 new, 16 total] split=train best=first_visible_program 3/16 direct=2 oracle_union=4 visible_tasks=10 tokens=200277
+[18/30 new, 18 total] split=train best=consensus_2 4/18 direct=3 oracle_union=6 visible_tasks=12 tokens=219199
+[20/30 new, 20 total] split=train best=consensus_2 4/20 direct=3 oracle_union=6 visible_tasks=13 tokens=243656
+[22/30 new, 22 total] split=train best=consensus_2 5/22 direct=4 oracle_union=7 visible_tasks=15 tokens=258450
+[24/30 new, 24 total] split=train best=consensus_2 5/24 direct=4 oracle_union=7 visible_tasks=17 tokens=287446
+[26/30 new, 26 total] split=train best=consensus_2 6/26 direct=5 oracle_union=8 visible_tasks=19 tokens=303396
+[28/30 new, 28 total] split=train best=consensus_2 8/28 direct=7 oracle_union=10 visible_tasks=21 tokens=316152
+[30/30 new, 30 total] split=train best=consensus_2 10/30 direct=9 oracle_union=12 visible_tasks=22 tokens=341451
+{
+  "direct_accuracy": 0.3,
+  "direct_exact": 9,
+  "direct_parse_ok": 29,
+  "mean_correct_visible_programs": 0.6333333333333333,
+  "mean_visible_programs": 1.6,
+  "n": 30,
+  "oracle_union": 12,
+  "oracle_union_accuracy": 0.4,
+  "oracle_visible_program": 10,
+  "policies": {
+    "consensus_2": {
+      "accuracy": 0.3333333333333333,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 1,
+      "exact": 10,
+      "program_commit_correct": 4,
+      "program_commit_precision": 0.4,
+      "program_commits": 10
+    },
+    "consensus_3": {
+      "accuracy": 0.3333333333333333,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 1,
+      "exact": 10,
+      "program_commit_correct": 4,
+      "program_commit_precision": 0.4444444444444444,
+      "program_commits": 9
+    },
+    "direct": {
+      "accuracy": 0.3,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 9,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "first_visible_program": {
+      "accuracy": 0.26666666666666666,
+      "direct_correct_losses": 3,
+      "direct_miss_recoveries": 2,
+      "exact": 8,
+      "program_commit_correct": 7,
+      "program_commit_precision": 0.3181818181818182,
+      "program_commits": 22
+    }
+  },
+  "tasks_with_visible_program": 22,
+  "total_forward_tokens": 341451,
+  "variants": [
+    "verified_structural",
+    "row_column_rule",
+    "split_fold_unpivot",
+    "header_aware",
+    "cell_parser"
+  ]
+}

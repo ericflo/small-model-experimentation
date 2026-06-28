@@ -1,0 +1,71 @@
+[1/6] best=direct 1/1 direct=1 oracle_union=1 visible_tasks=1
+[2/6] best=first_visible_program 2/2 direct=1 oracle_union=2 visible_tasks=2
+[3/6] best=first_visible_program 3/3 direct=1 oracle_union=3 visible_tasks=3
+[4/6] best=first_visible_program 4/4 direct=1 oracle_union=4 visible_tasks=4
+[5/6] best=first_visible_program 5/5 direct=1 oracle_union=5 visible_tasks=5
+[6/6] best=first_visible_program 5/6 direct=1 oracle_union=5 visible_tasks=5
+{
+  "direct_exact": 1,
+  "direct_parse_ok": 1,
+  "mean_correct_visible_programs": 1.5,
+  "mean_unique_visible_outputs": 0.8333333333333334,
+  "mean_visible_programs": 1.5,
+  "n": 6,
+  "oracle_union": 5,
+  "oracle_visible_program": 5,
+  "policies": {
+    "consensus_2": {
+      "accuracy": 0.5,
+      "consensus_commits": 3,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 2,
+      "exact": 3,
+      "program_commit_correct": 3,
+      "program_commit_precision": 1.0,
+      "program_commits": 3
+    },
+    "consensus_3": {
+      "accuracy": 0.3333333333333333,
+      "consensus_commits": 1,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 1,
+      "exact": 2,
+      "program_commit_correct": 1,
+      "program_commit_precision": 1.0,
+      "program_commits": 1
+    },
+    "direct": {
+      "accuracy": 0.16666666666666666,
+      "consensus_commits": 0,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 1,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "direct_or_program_agreement": {
+      "accuracy": 0.16666666666666666,
+      "consensus_commits": 0,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 1,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "first_visible_program": {
+      "accuracy": 0.8333333333333334,
+      "consensus_commits": 0,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 4,
+      "exact": 5,
+      "program_commit_correct": 5,
+      "program_commit_precision": 1.0,
+      "program_commits": 5
+    }
+  },
+  "tasks_with_consensus_2": 3,
+  "tasks_with_two_plus_visible_programs": 3,
+  "tasks_with_visible_program": 5
+}

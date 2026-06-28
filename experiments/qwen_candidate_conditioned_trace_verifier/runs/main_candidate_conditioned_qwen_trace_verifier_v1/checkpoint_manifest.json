@@ -1,0 +1,94 @@
+[
+  {
+    "arm": "feature_mlp",
+    "seed": 101,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "trace_transformer",
+    "seed": 101,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_rank",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_rank_seed101.pt",
+    "best_utility": -0.5
+  },
+  {
+    "arm": "qwen_echo",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_echo_seed101.pt",
+    "best_utility": -0.5
+  },
+  {
+    "arm": "qwen_shuffled",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_shuffled_seed101.pt",
+    "best_utility": -0.5833333333333333
+  },
+  {
+    "arm": "qwen_prompt_only",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_prompt_only_seed101.pt",
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_candidate_only",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_candidate_only_seed101.pt",
+    "best_utility": -0.6666666666666666
+  },
+  {
+    "arm": "qwen_trace_corrupt",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_trace_corrupt_seed101.pt",
+    "best_utility": -0.75
+  },
+  {
+    "arm": "feature_mlp",
+    "seed": 202,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "trace_transformer",
+    "seed": 202,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_rank",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_rank_seed202.pt",
+    "best_utility": -0.5833333333333333
+  },
+  {
+    "arm": "qwen_echo",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_echo_seed202.pt",
+    "best_utility": -0.5833333333333333
+  },
+  {
+    "arm": "qwen_shuffled",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_shuffled_seed202.pt",
+    "best_utility": -0.6666666666666666
+  },
+  {
+    "arm": "qwen_prompt_only",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_prompt_only_seed202.pt",
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_candidate_only",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_candidate_only_seed202.pt",
+    "best_utility": -0.75
+  },
+  {
+    "arm": "qwen_trace_corrupt",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v1/qwen_trace_corrupt_seed202.pt",
+    "best_utility": -0.75
+  }
+]

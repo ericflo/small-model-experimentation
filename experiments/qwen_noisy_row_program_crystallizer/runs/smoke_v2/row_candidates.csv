@@ -1,0 +1,211 @@
+task_id,row_index,method,prediction,raw
+City.000010,0,row_greedy,9,9
+City.000010,0,row_format,9,9
+City.000010,0,row_consistency,9,9
+City.000010,0,row_sample0,9,9
+City.000010,0,row_sample1,9,9
+City.000010,1,row_greedy,20,20
+City.000010,1,row_format,20,20
+City.000010,1,row_consistency,20,20
+City.000010,1,row_sample0,20,20
+City.000010,1,row_sample1,20,20
+City.000010,2,row_greedy,0,0
+City.000010,2,row_format,0,0
+City.000010,2,row_consistency,0,0
+City.000010,2,row_sample0,0,0
+City.000010,2,row_sample1,0,0
+City.000010,0,batch_plain,9,"[""9"", ""20"", ""0""]"
+City.000010,1,batch_plain,20,"[""9"", ""20"", ""0""]"
+City.000010,2,batch_plain,0,"[""9"", ""20"", ""0""]"
+City.000010,0,batch_json,9,"[""9"", ""20"", ""0""]"
+City.000010,1,batch_json,20,"[""9"", ""20"", ""0""]"
+City.000010,2,batch_json,0,"[""9"", ""20"", ""0""]"
+DateTime.000025,0,row_greedy,Mar 41,Mar 41
+DateTime.000025,0,row_format,Mar 41,Mar 41
+DateTime.000025,0,row_consistency,Mar 41,Mar 41
+DateTime.000025,0,row_sample0,Mar 41,Mar 41
+DateTime.000025,0,row_sample1,Mar 41,Mar 41
+DateTime.000025,1,row_greedy,Aug 60,Aug 60
+DateTime.000025,1,row_format,Aug 60,Aug 60
+DateTime.000025,1,row_consistency,Aug 60,Aug 60
+DateTime.000025,1,row_sample0,Aug 60,Aug 60
+DateTime.000025,1,row_sample1,Aug 60,Aug 60
+DateTime.000025,2,row_greedy,May 84,May 84
+DateTime.000025,2,row_format,May 84,May 84
+DateTime.000025,2,row_consistency,May 84,May 84
+DateTime.000025,2,row_sample0,May 84,May 84
+DateTime.000025,2,row_sample1,May 84,May 84
+DateTime.000025,3,row_greedy,Aug 40,Aug 40
+DateTime.000025,3,row_format,Aug 40,Aug 40
+DateTime.000025,3,row_consistency,August 40,August 40
+DateTime.000025,3,row_sample0,Aug 40,Aug 40
+DateTime.000025,3,row_sample1,Aug 40,Aug 40
+DateTime.000025,4,row_greedy,Jul 37,Jul 37
+DateTime.000025,4,row_format,Jul 37,Jul 37
+DateTime.000025,4,row_consistency,Jul 37,Jul 37
+DateTime.000025,4,row_sample0,Jul 37,Jul 37
+DateTime.000025,4,row_sample1,Jul 37,Jul 37
+DateTime.000025,5,row_greedy,Nov 04,Nov 04
+DateTime.000025,5,row_format,Nov 04,Nov 04
+DateTime.000025,5,row_consistency,Nov 04,Nov 04
+DateTime.000025,5,row_sample0,Nov 04,Nov 04
+DateTime.000025,5,row_sample1,Nov 04,Nov 04
+DateTime.000025,0,batch_plain,Mar 41,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,1,batch_plain,Aug 60,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,2,batch_plain,May 84,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,3,batch_plain,Aug 40,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,4,batch_plain,Jul 37,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,5,batch_plain,Nov 04,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,0,batch_json,Jan 41,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,1,batch_json,Aug 60,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,2,batch_json,May 84,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,3,batch_json,Aug 40,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,4,batch_json,Jul 08,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,5,batch_json,Nov 04,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000104,0,row_greedy,Jan,Jan
+DateTime.000104,0,row_format,Jan,Jan
+DateTime.000104,0,row_consistency,Jan,Jan
+DateTime.000104,0,row_sample0,Jan,Jan
+DateTime.000104,0,row_sample1,Jan,Jan
+DateTime.000104,1,row_greedy,Aug,Aug
+DateTime.000104,1,row_format,Aug,Aug
+DateTime.000104,1,row_consistency,Aug,Aug
+DateTime.000104,1,row_sample0,Aug,Aug
+DateTime.000104,1,row_sample1,Aug,Aug
+DateTime.000104,2,row_greedy,Dec,Dec
+DateTime.000104,2,row_format,Dec,Dec
+DateTime.000104,2,row_consistency,Dec,Dec
+DateTime.000104,2,row_sample0,Dec,Dec
+DateTime.000104,2,row_sample1,Dec,Dec
+DateTime.000104,3,row_greedy,Jul,Jul
+DateTime.000104,3,row_format,Jul,Jul
+DateTime.000104,3,row_consistency,Jul,Jul
+DateTime.000104,3,row_sample0,Jul,Jul
+DateTime.000104,3,row_sample1,Jul,Jul
+DateTime.000104,4,row_greedy,Jan,Jan
+DateTime.000104,4,row_format,Jan,Jan
+DateTime.000104,4,row_consistency,Jan,Jan
+DateTime.000104,4,row_sample0,Jan,Jan
+DateTime.000104,4,row_sample1,Jan,Jan
+DateTime.000104,5,row_greedy,Aug,Aug
+DateTime.000104,5,row_format,Aug,Aug
+DateTime.000104,5,row_consistency,Aug,Aug
+DateTime.000104,5,row_sample0,Aug,Aug
+DateTime.000104,5,row_sample1,Aug,Aug
+DateTime.000104,0,batch_plain,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,1,batch_plain,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,2,batch_plain,Dec,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,3,batch_plain,Jul,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,4,batch_plain,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,5,batch_plain,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,0,batch_json,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,1,batch_json,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,2,batch_json,Dec,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,3,batch_json,Jul,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,4,batch_json,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,5,batch_json,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+Number.000075,0,row_greedy,$1.9B,$1.9B
+Number.000075,0,row_format,$1.9B,$1.9B
+Number.000075,0,row_consistency,$1.9B,$1.9B
+Number.000075,0,row_sample0,$1.9B,$1.9B
+Number.000075,0,row_sample1,$1.9B,$1.9B
+Number.000075,1,row_greedy,$2.3B,$2.3B
+Number.000075,1,row_format,$2.3B,$2.3B
+Number.000075,1,row_consistency,$2.3B,$2.3B
+Number.000075,1,row_sample0,$2.3B,$2.3B
+Number.000075,1,row_sample1,$2.3B,$2.3B
+Number.000075,2,row_greedy,$2.9B,$2.9B
+Number.000075,2,row_format,$0.3B,$0.3B
+Number.000075,2,row_consistency,$0.3B,$0.3B
+Number.000075,2,row_sample0,$2.9B,$2.9B
+Number.000075,2,row_sample1,$2.9B,$2.9B
+Number.000075,3,row_greedy,$0.0B,$0.0B
+Number.000075,3,row_format,$0.0B,$0.0B
+Number.000075,3,row_consistency,$0.0B,$0.0B
+Number.000075,3,row_sample0,$0.0B,$0.0B
+Number.000075,3,row_sample1,$0.0B,$0.0B
+Number.000075,4,row_greedy,$0.0B,$0.0B
+Number.000075,4,row_format,$0.0B,$0.0B
+Number.000075,4,row_consistency,$0.0B,$0.0B
+Number.000075,4,row_sample0,$0.0B,$0.0B
+Number.000075,4,row_sample1,$0.0B,$0.0B
+Number.000075,5,row_greedy,$0.0B,$0.0B
+Number.000075,5,row_format,$0.0B,$0.0B
+Number.000075,5,row_consistency,$0.0B,$0.0B
+Number.000075,5,row_sample0,$0.0B,$0.0B
+Number.000075,5,row_sample1,$0.0B,$0.0B
+Number.000075,0,batch_plain,$1.9B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,1,batch_plain,$23.2B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,2,batch_plain,$30.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,3,batch_plain,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,4,batch_plain,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,5,batch_plain,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,0,batch_json,$1.9B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,1,batch_json,$23.2B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,2,batch_json,$30B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,3,batch_json,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,4,batch_json,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,5,batch_json,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000077,0,row_greedy,110,110
+Number.000077,0,row_format,110,110
+Number.000077,0,row_consistency,110,110
+Number.000077,0,row_sample0,110,110
+Number.000077,0,row_sample1,110,110
+Number.000077,1,row_greedy,11000,11000
+Number.000077,1,row_format,110,110
+Number.000077,1,row_consistency,11000,11000
+Number.000077,1,row_sample0,11000,11000
+Number.000077,1,row_sample1,11000,11000
+Number.000077,2,row_greedy,540,540
+Number.000077,2,row_format,110,110
+Number.000077,2,row_consistency,110,110
+Number.000077,2,row_sample0,540,540
+Number.000077,2,row_sample1,540,540
+Number.000077,0,batch_plain,11110,"[""11110"", ""11110"", ""548""]"
+Number.000077,1,batch_plain,11110,"[""11110"", ""11110"", ""548""]"
+Number.000077,2,batch_plain,548,"[""11110"", ""11110"", ""548""]"
+Number.000077,0,batch_json,110,"[""110"", ""110"", ""540""]"
+Number.000077,1,batch_json,110,"[""110"", ""110"", ""540""]"
+Number.000077,2,batch_json,540,"[""110"", ""110"", ""540""]"
+UserAgent.000003,0,row_greedy,FZ467,FZ467
+UserAgent.000003,0,row_format,FZ467,FZ467
+UserAgent.000003,0,row_consistency,FZ467,FZ467
+UserAgent.000003,0,row_sample0,FZ467,FZ467
+UserAgent.000003,0,row_sample1,FZ467,FZ467
+UserAgent.000003,1,row_greedy,RM VVUT,RM VVUT
+UserAgent.000003,1,row_format,RM VVUT,RM VVUT
+UserAgent.000003,1,row_consistency,RM VVUT,RM VVUT
+UserAgent.000003,1,row_sample0,RM VVUT,RM VVUT
+UserAgent.000003,1,row_sample1,RM VVUT,RM VVUT
+UserAgent.000003,2,row_greedy,QS QYFY,QS QYFY
+UserAgent.000003,2,row_format,QS QYFY,QS QYFY
+UserAgent.000003,2,row_consistency,QS QYFY,QS QYFY
+UserAgent.000003,2,row_sample0,QS QYFY,QS QYFY
+UserAgent.000003,2,row_sample1,QS QYFY,QS QYFY
+UserAgent.000003,3,row_greedy,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_format,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_consistency,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_sample0,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_sample1,RO FQAJ,RO FQAJ
+UserAgent.000003,4,row_greedy,NB-H486,NB-H486
+UserAgent.000003,4,row_format,NB-H486,NB-H486
+UserAgent.000003,4,row_consistency,NB-H486,NB-H486
+UserAgent.000003,4,row_sample0,NB-H486,NB-H486
+UserAgent.000003,4,row_sample1,NB-H486,NB-H486
+UserAgent.000003,5,row_greedy,EE-P295,EE-P295
+UserAgent.000003,5,row_format,EE-P295,EE-P295
+UserAgent.000003,5,row_consistency,EE-P295,EE-P295
+UserAgent.000003,5,row_sample0,EE-P295,EE-P295
+UserAgent.000003,5,row_sample1,EE-P295,EE-P295
+UserAgent.000003,0,batch_plain,FZ467,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,1,batch_plain,RM VVUT,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,2,batch_plain,QS QYFY,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,3,batch_plain,RO FQAJ,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,4,batch_plain,NB-H486,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,5,batch_plain,EE-P295,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,0,batch_json,FZ467,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,1,batch_json,RM VVUT,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,2,batch_json,QS QYFY,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,3,batch_json,RO FQAJ,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,4,batch_json,NB-H486,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,5,batch_json,EE-P295,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"

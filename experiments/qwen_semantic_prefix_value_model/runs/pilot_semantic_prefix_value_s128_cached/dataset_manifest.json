@@ -1,0 +1,44 @@
+{
+  "run": "pilot_semantic_prefix_value_s128_cached",
+  "seed": 202,
+  "sizes": {
+    "trace_train": 128,
+    "verifier_train": 128,
+    "val_mixed": 64,
+    "fresh_standard": 64,
+    "fresh_paraphrase": 64,
+    "fresh_paired": 64,
+    "hard_composition": 64
+  },
+  "opcodes": [
+    "PAD",
+    "PUSH",
+    "ADD",
+    "SUB",
+    "MUL",
+    "MOD",
+    "MAX",
+    "MIN",
+    "GT",
+    "EQ",
+    "LOOKUP_A",
+    "LOOKUP_B",
+    "END"
+  ],
+  "modulus": 97,
+  "max_program_len": 16,
+  "max_prompt_tokens": 58,
+  "metadata": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-62-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0+cu128",
+    "cuda_available": true,
+    "transformers_loader": "AutoModelForCausalLM",
+    "peft_installed": true,
+    "model_id": "Qwen/Qwen3-4B",
+    "load_in_4bit": true,
+    "lora_r": 8,
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "gpu_vram_gb": 47.383
+  }
+}

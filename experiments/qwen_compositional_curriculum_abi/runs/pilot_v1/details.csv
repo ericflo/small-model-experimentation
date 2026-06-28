@@ -1,0 +1,5203 @@
+suite,run,train_target,arm,seed,trained,split,family,depth,example_id,answer,generated,program_text,target,exec_value,exec_error,primary_correct,exec_correct,final_correct,valid_exec,exact_program,parse_exact,has_final,attempts_used,diverged_from_free,free_exec_correct,failure_type,gold_ops,generated_ops
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH_NUM 28
+IMUL 4","PUSH_NUM 28
+IMUL 4","PUSH 28
+MUL 4
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL,PUSH_NUM IMUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,1,0,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,1,0,1,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH_NUM 28
+IMUL 4","PUSH_NUM 28
+IMUL 4","PUSH 28
+MUL 4
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL,PUSH_NUM IMUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,1,0,1,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH_NUM 18
+SUB 24
+_MUL","PUSH_NUM 18
+SUB 24
+_MUL","PUSH 18
+SUB 24
+MUL 2
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB MUL,PUSH_NUM SUB _MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,ValueError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",45,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH_NUM 18
+SUB 24
+_MUL","PUSH_NUM 18
+SUB 24
+_MUL","PUSH 18
+SUB 24
+MUL 2
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,SUB MUL,PUSH_NUM SUB _MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,ValueError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH_NUM 8
+ADD 4
+ADD 5
+_MUL 6","PUSH_NUM 8
+ADD 4
+ADD 5
+_MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD ADD MUL,PUSH_NUM ADD ADD _MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+×4
+×3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+×4
+×3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,unknown_op:×4,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP ×4 ×3
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:TAIL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAIL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",7-ul,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAKE_SUFFIX
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH_NUM 8
+ADD 4
+ADD 5
+_MUL 6","PUSH_NUM 8
+ADD 4
+ADD 5
+_MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,ADD ADD MUL,PUSH_NUM ADD ADD _MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+×4
+×3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+×4
+×3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,unknown_op:×4,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP ×4 ×3
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:TAIL,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAIL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH_NUM 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH_NUM 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD MUL MUL SUB,PUSH_NUM ADD MUL MUL SUB
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MULTIPLY 3
+ADD gamma
+ADD delta","TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MULTIPLY 3
+ADD gamma
+ADD delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE TABLE TABLE TABLE LOOKUP MULTIPLY ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",36,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH_NUM 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH_NUM 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,ADD MUL MUL SUB,PUSH_NUM ADD MUL MUL SUB
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MULTIPLY 3
+ADD gamma
+ADD delta","TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MULTIPLY 3
+ADD gamma
+ADD delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE TABLE TABLE TABLE LOOKUP MULTIPLY ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH_NUM 10
+_MUL
+_MUL
+_SUB 8
+_ADD 10
+_SUB 22
+_ADD 16","PUSH_NUM 10
+_MUL
+_MUL
+_SUB 8
+_ADD 10
+_SUB 22
+_ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,PUSH_NUM _MUL _MUL _SUB _ADD _SUB _ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+×2
+×3
++4
+ADD delta
+×3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+×2
+×3
++4
+ADD delta
+×3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:×2,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP ×2 ×3 +4 ADD ×3
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+LAST_6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+LAST_6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:LAST_6,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS LAST_6
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",663,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+SLICE 6 7","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+SLICE 6 7","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",2Y,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS SLICE
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH_NUM 10
+_MUL
+_MUL
+_SUB 8
+_ADD 10
+_SUB 22
+_ADD 16","PUSH_NUM 10
+_MUL
+_MUL
+_SUB 8
+_ADD 10
+_SUB 22
+_ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,PUSH_NUM _MUL _MUL _SUB _ADD _SUB _ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+×2
+×3
++4
+ADD delta
+×3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+×2
+×3
++4
+ADD delta
+×3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:×2,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP ×2 ×3 +4 ADD ×3
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+LAST_6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+LAST_6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:LAST_6,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS LAST_6
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha 16 delta 32 gamma 13 omega 39
+LOOKUP gamma
+ADD delta
+ADD omega
+MULTIPLY 3
+MULTIPLY 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha 16 delta 32 gamma 13 omega 39
+LOOKUP gamma
+ADD delta
+ADD omega
+MULTIPLY 3
+MULTIPLY 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD MULTIPLY MULTIPLY ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",,unknown_op:RIGHT,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER RIGHT
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH_NUM 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH_NUM 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",,unknown_op:PUSH_NUM,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH_NUM ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD 3
+ADD 3
+ADD 3
+MUL 3
+MUL 2
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD 3
+ADD 3
+ADD 3
+MUL 3
+MUL 2
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",138,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD ADD MUL MUL ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",2281PR,,1,1,0,1,1,0,0,1,1,0,correct_exact,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD delta
+ADD omega
+MULTIPLY 3
+MULTIPLY 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD delta
+ADD omega
+MULTIPLY 3
+MULTIPLY 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",,ValueError,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD MULTIPLY MULTIPLY ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",,unknown_op:RIGHT,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER RIGHT
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,2,1,0,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"POP_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES","POP_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:POP_TEXT,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,POP_TEXT STRIP_DASHES UPPER UPPER UPPER STRIP_DASHES
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"PUSH_LOOKUP beta
+ADD omega
+MULTIPLY 5
+ADD beta
+ADD 10
+ADD 10","PUSH_LOOKUP beta
+ADD omega
+MULTIPLY 5
+ADD beta
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,PUSH_LOOKUP ADD MULTIPLY ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH_VALUE 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH_VALUE 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:PUSH_VALUE,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,PUSH_VALUE ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT5350MQ,,1,1,0,1,1,0,0,1,1,0,correct_exact,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD 3
+ADD 11
+ADD 11
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD 3
+ADD 11
+ADD 11
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",56,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,TABLE LOOKUP ADD ADD ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD 9
+ADD 9
+ADD 1
+ADD 9
+ADD 8
+ADD 2","PUSH_DATE 2026-11-08
+ADD 9
+ADD 9
+ADD 1
+ADD 9
+ADD 8
+ADD 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",,ValueError,0,0,0,0,0,0,0,2,1,1,invalid_or_unexecutable,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD ADD ADD ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"POP_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES","POP_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:POP_TEXT,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,POP_TEXT STRIP_DASHES UPPER UPPER UPPER STRIP_DASHES
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"PUSH_LOOKUP beta
+ADD omega
+MULTIPLY 5
+ADD beta
+ADD 10
+ADD 10","PUSH_LOOKUP beta
+ADD omega
+MULTIPLY 5
+ADD beta
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,PUSH_LOOKUP ADD MULTIPLY ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH_VALUE 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH_VALUE 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:PUSH_VALUE,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,PUSH_VALUE ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH_VALUE 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH_VALUE 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",,unknown_op:PUSH_VALUE,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH_VALUE SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MULTIPLY 5
+MULTIPLY 3
+ADD 12","PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MULTIPLY 5
+MULTIPLY 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD ADD MUL MUL ADD,PUSH_LOOKUP ADD ADD ADD ADD MULTIPLY MULTIPLY ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 28
+ADD 28","PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 28
+ADD 28","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",,ValueError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD ADD ADD ADD ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_DASHES REVERSE UPPER UPPER STRIP_DASHES UPPER REVERSE
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",627,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP ADD ADD ADD ADD MUL MUL ADD,TABLE LOOKUP ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",2026-09-27,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",MR5112DT,,1,1,0,1,1,0,0,1,1,0,correct_exact,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,2,1,0,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MULTIPLY 5
+MULTIPLY 3
+ADD 12","PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MULTIPLY 5
+MULTIPLY 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD ADD MUL MUL ADD,PUSH_LOOKUP ADD ADD ADD ADD MULTIPLY MULTIPLY ADD
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",2026-09-27,,1,1,0,1,1,0,0,2,1,0,correct_exact,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_DASHES REVERSE UPPER UPPER STRIP_DASHES UPPER REVERSE
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,0,0,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14
+TABLE beta:37
+TABLE delta:33
+TABLE gamma:28
+LOOKUP alpha","TABLE alpha:14
+TABLE beta:37
+TABLE delta:33
+TABLE gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP,TABLE TABLE TABLE TABLE LOOKUP
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14
+LOOKUP alpha","TABLE alpha:14
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,0,0,0,2,1,0,correct_semantic_variant,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL 2
+",,IndexError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha=11, beta=36, delta=37, gamma=8
+LOOKUP delta
+ADD gamma","TABLE alpha=11, beta=36, delta=37, gamma=8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",45,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL 2
+",,IndexError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha=11, beta=36, delta=37, gamma=8
+LOOKUP delta
+ADD gamma","TABLE alpha=11, beta=36, delta=37, gamma=8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha=21, beta=29, gamma=13, omega=26
+LOOKUP beta
+MULTIPLY 4
+MULTIPLY 3","TABLE alpha=21, beta=29, gamma=13, omega=26
+LOOKUP beta
+MULTIPLY 4
+MULTIPLY 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP MULTIPLY MULTIPLY
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:TAIL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAIL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",7-ul,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAKE_SUFFIX
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha=21, beta=29, gamma=13, omega=26
+LOOKUP beta
+MULTIPLY 4
+MULTIPLY 3","TABLE alpha=21, beta=29, gamma=13, omega=26
+LOOKUP beta
+MULTIPLY 4
+MULTIPLY 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP MULTIPLY MULTIPLY
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:TAIL,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAIL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE TABLE TABLE TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",36,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha 8
+TABLE beta 23
+TABLE delta 9
+TABLE gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE TABLE TABLE TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,0,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"PUSH_TABLE alpha delta gamma omega
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","PUSH_TABLE alpha delta gamma omega
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:PUSH_TABLE,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,PUSH_TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:TAIL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAIL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",663,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",6182YD,,1,1,0,1,1,0,0,1,1,0,correct_exact,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"PUSH_TABLE alpha delta gamma omega
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","PUSH_TABLE alpha delta gamma omega
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:PUSH_TABLE,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,PUSH_TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:TAIL,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAIL
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha=16, delta=32, gamma=13, omega=39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha=16, delta=32, gamma=13, omega=39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD MUL MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",,unknown_op:RIGHT,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER RIGHT
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD 3
+ADD 3
+ADD 3
+MUL 3
+MUL 2
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD 3
+ADD 3
+ADD 3
+MUL 3
+MUL 2
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",138,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD ADD MUL MUL ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",2281PR,,1,1,0,1,1,0,0,1,1,0,correct_exact,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha=16, delta=32, gamma=13, omega=39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha=16, delta=32, gamma=13, omega=39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD MUL MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",,unknown_op:RIGHT,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER RIGHT
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_DASHES UPPER UPPER UPPER STRIP_DASHES UPPER
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"PUSH_LOOKUP beta
+ADD omega
+MUL 5
+ADD beta
+ADD 10
+ADD 10","PUSH_LOOKUP beta
+ADD omega
+MUL 5
+ADD beta
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,PUSH_LOOKUP ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT5350MQ,,1,1,0,1,1,0,0,1,1,0,correct_exact,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD 3
+ADD 11
+ADD 11
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD 3
+ADD 11
+ADD 11
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",56,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,TABLE LOOKUP ADD ADD ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_DASHES UPPER UPPER UPPER STRIP_DASHES UPPER
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"PUSH_LOOKUP alpha
+PUSH_LOOKUP beta
+PUSH_LOOKUP delta
+PUSH_LOOKUP omega","PUSH_LOOKUP alpha
+PUSH_LOOKUP beta
+PUSH_LOOKUP delta
+PUSH_LOOKUP omega","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,PUSH_LOOKUP PUSH_LOOKUP PUSH_LOOKUP PUSH_LOOKUP
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,1,0,0,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD ADD MUL MUL ADD,PUSH_LOOKUP ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 7
+ADD 28","PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 7
+ADD 28","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",,ValueError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD ADD ADD ADD ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_DASHES REVERSE UPPER UPPER STRIP_DASHES UPPER REVERSE
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",627,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP ADD ADD ADD ADD MUL MUL ADD,TABLE LOOKUP ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",2026-09-27,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",MR5112DT,,1,1,0,1,1,0,0,1,1,0,correct_exact,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","PUSH_LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD ADD MUL MUL ADD,PUSH_LOOKUP ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 7
+ADD 28","PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 7
+ADD 28","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",,ValueError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD ADD ADD ADD ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_DASHES REVERSE UPPER UPPER STRIP_DASHES UPPER REVERSE
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,0,0,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha beta delta gamma 14 37 33 28
+LOOKUP alpha","TABLE alpha beta delta gamma 14 37 33 28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha beta delta gamma 14 37 33 28
+LOOKUP alpha","TABLE alpha beta delta gamma 14 37 33 28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL 2
+",,IndexError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,ValueError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",45,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL","PUSH 18
+SUB 24
+MUL 2
+",,IndexError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,ValueError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha=21 beta=29 gamma=13 omega=26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha=21 beta=29 gamma=13 omega=26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:TAIL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAIL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+STRIP_HYPHENS","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+STRIP_HYPHENS","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",fe4687ul,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE STRIP_HYPHENS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha=21 beta=29 gamma=13 omega=26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha=21 beta=29 gamma=13 omega=26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:TAIL,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAIL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha 8 beta 23 delta 9 gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha 8 beta 23 delta 9 gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",36,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,1,0,1,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha 8 beta 23 delta 9 gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha 8 beta 23 delta 9 gamma 39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,0,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,ValueError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:TAIL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAIL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",663,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+SLICE 6 7","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+SLICE 6 7","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",2Y,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS SLICE
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,ValueError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:TAIL,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAIL
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha 16 delta 32 gamma 13 omega 39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha 16 delta 32 gamma 13 omega 39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD MUL MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",,unknown_op:RIGHT,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER RIGHT
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",513,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",2281PR,,1,1,0,1,1,0,0,1,1,0,correct_exact,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha 16 delta 32 gamma 13 omega 39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha 16 delta 32 gamma 13 omega 39
+LOOKUP gamma
+ADD delta
+ADD omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",,KeyError,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD ADD MUL MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+RIGHT 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",,unknown_op:RIGHT,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER RIGHT
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_DASHES UPPER UPPER UPPER STRIP_DASHES UPPER
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"PUSH_LOOKUP alpha=20 beta=11 delta=31 omega=36
+FETCH beta
+ADD omega
+MUL 5
+ADD beta
+ADD 10
+ADD 10","PUSH_LOOKUP alpha=20 beta=11 delta=31 omega=36
+FETCH beta
+ADD omega
+MUL 5
+ADD beta
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,PUSH_LOOKUP FETCH ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT5350MQ,,1,1,0,1,1,0,0,1,1,0,correct_exact,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD 3
+MUL 5
+ADD 11
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD 3
+MUL 5
+ADD 11
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",101,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,TABLE LOOKUP ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_DASHES
+UPPER
+UPPER
+UPPER
+STRIP_DASHES
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_DASHES UPPER UPPER UPPER STRIP_DASHES UPPER
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d6,table,6,eval_template_d6_table_2,266,"PUSH_LOOKUP alpha=20 beta=11 delta=31 omega=36
+FETCH beta
+ADD omega
+MUL 5
+ADD beta
+ADD 10
+ADD 10","PUSH_LOOKUP alpha=20 beta=11 delta=31 omega=36
+FETCH beta
+ADD omega
+MUL 5
+ADD beta
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,PUSH_LOOKUP FETCH ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,1,0,0,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"PUSH_LOOKUP alpha beta delta omega
+12 18 36 9
+FETCH alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","PUSH_LOOKUP alpha beta delta omega
+12 18 36 9
+FETCH alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD ADD MUL MUL ADD,PUSH_LOOKUP 12 FETCH ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 28
+ADD 28","PUSH_DATE 2026-04-19
+ADD 14
+ADD 28
+ADD 14
+ADD 14
+ADD 28
+ADD 28
+ADD 28","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",,ValueError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD ADD ADD ADD ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_DASHES REVERSE UPPER UPPER STRIP_DASHES UPPER REVERSE
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",627,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP ADD ADD ADD ADD MUL MUL ADD,TABLE LOOKUP ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",2026-09-27,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",MR5112DT,,1,1,0,1,1,0,0,1,1,0,correct_exact,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d8,table,8,eval_template_d8_table_2,627,"PUSH_LOOKUP alpha beta delta omega
+12 18 36 9
+FETCH alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","PUSH_LOOKUP alpha beta delta omega
+12 18 36 9
+FETCH alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",,unknown_op:PUSH_LOOKUP,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD ADD MUL MUL ADD,PUSH_LOOKUP 12 FETCH ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",2026-09-27,,1,1,0,1,1,0,0,2,1,0,correct_exact,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_DASHES
+REVERSE
+UPPER
+UPPER
+STRIP_DASHES
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_DASHES REVERSE UPPER UPPER STRIP_DASHES UPPER REVERSE
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",45,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD_LOOKUP
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",7-ul,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAKE_SUFFIX
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",72,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD_LOOKUP ADD_LOOKUP
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",711,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD_LOOKUP MUL
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",6182YD,,1,1,0,1,1,0,0,0,0,0,correct_exact,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d8,table,8,eval_comp_d8_table_2,513,"TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3","TABLE alpha:16 delta:32 gamma:13 omega:39
+LOOKUP gamma
+ADD_LOOKUP delta
+ADD_LOOKUP omega
+MUL 3
+MUL 2
+ADD 3
+ADD 3
+ADD 3
+",513,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD,TABLE LOOKUP ADD_LOOKUP ADD_LOOKUP MUL MUL ADD ADD ADD
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d8,string,8,eval_comp_d8_string_0,2281PR,"PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_SUFFIX 6
+",2281PR,,1,1,0,1,1,0,0,0,0,0,correct_exact,UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX,PUSH_TEXT UPPER STRIP_HYPHENS UPPER REVERSE STRIP_HYPHENS UPPER UPPER TAKE_SUFFIX
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d8,date,8,eval_comp_d8_date_3,2026-07-20,"PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3","PUSH_DATE 2026-05-20
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 6
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 4
+ADD_DAYS 6
+ADD_WEEKS 3
+",2026-07-20,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d8,number,8,eval_comp_d8_number_1,656,"PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8","PUSH 9
+ADD 1
+MUL 2
+MUL 7
+SUB 10
+MUL 5
+SUB 17
+ADD 15
+ADD 8
+",656,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD MUL MUL SUB MUL SUB ADD ADD,PUSH ADD MUL MUL SUB MUL SUB ADD ADD
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,date,6,eval_template_d6_date_3,2026-12-16,"PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2","PUSH_DATE 2026-11-08
+ADD_DAYS 9
+ADD_DAYS 9
+ADD_DAYS 1
+ADD_DAYS 9
+ADD_DAYS 8
+ADD_DAYS 2
+",2026-12-16,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT5350MQ,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,table,6,eval_template_d6_table_2,266,"TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10","TABLE alpha:20 beta:11 delta:31 omega:36
+LOOKUP beta
+ADD_LOOKUP omega
+MUL 5
+ADD_LOOKUP beta
+ADD 10
+ADD 10
+",266,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD,TABLE LOOKUP ADD_LOOKUP MUL ADD_LOOKUP ADD ADD
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d8,number,8,eval_template_d8_number_1,172,"PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13","PUSH 22
+SUB 2
+SUB 11
+ADD 16
+ADD 13
+MUL 3
+ADD 21
+ADD 24
+ADD 13
+",172,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB SUB ADD ADD MUL ADD ADD ADD,PUSH SUB SUB ADD ADD MUL ADD ADD ADD
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d8,table,8,eval_template_d8_table_2,627,"TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12","TABLE alpha:12 beta:18 delta:36 omega:9
+LOOKUP alpha
+ADD 3
+ADD 9
+ADD 7
+ADD 10
+MUL 5
+MUL 3
+ADD 12
+",627,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD ADD ADD ADD MUL MUL ADD,TABLE LOOKUP ADD ADD ADD ADD MUL MUL ADD
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d8,date,8,eval_template_d8_date_3,2026-09-27,"PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4","PUSH_DATE 2026-04-19
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 2
+ADD_WEEKS 2
+ADD_WEEKS 4
+ADD_WEEKS 4
+ADD_WEEKS 1
+ADD_WEEKS 4
+",2026-09-27,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d8,string,8,eval_template_d8_string_0,MR5112DT,"PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE","PUSH_TEXT MR-5112-DT
+UPPER
+STRIP_HYPHENS
+REVERSE
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+REVERSE
+",MR5112DT,,1,1,0,1,1,0,0,0,0,0,correct_exact,UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE,PUSH_TEXT UPPER STRIP_HYPHENS REVERSE UPPER UPPER STRIP_HYPHENS UPPER REVERSE

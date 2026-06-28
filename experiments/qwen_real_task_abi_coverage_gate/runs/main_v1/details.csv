@@ -1,0 +1,229 @@
+variant,max_depth,task_id,family,split,input_kind,description,n_train,n_test,train_match,test_match,program,program_depth,train_match_count,candidate_count,failure_reason
+core,1,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,66,covered
+core,1,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,66,train_match_only
+core,1,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,False,False,,,0,13,no_train_match
+core,1,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,False,False,,,0,13,no_train_match
+core,1,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,False,False,,,0,13,no_train_match
+core,1,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,False,False,,,0,29,no_train_match
+core,1,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,13,no_train_match
+core,1,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,False,False,,,0,47,no_train_match
+core,1,money_percent_decimal,money,calibration,row,Parse a percent into decimal form.,4,2,False,False,,,0,47,no_train_match
+core,1,money_line_total_cents,money,heldout_composition,row,Return price times quantity in cents.,4,2,False,False,,,0,47,no_train_match
+core,1,money_discounted_total,money,stress_out_of_abi,row,Return discounted line total in dollars rounded to cents.,4,2,False,False,,,0,47,no_train_match
+core,1,url_domain,url_file,calibration,row,Extract URL domain.,4,2,False,False,,,0,41,no_train_match
+core,1,url_last_slug,url_file,heldout_same_family,row,Extract the final URL path slug.,4,2,False,False,,,0,41,no_train_match
+core,1,url_slug_to_title,url_file,heldout_composition,row,Turn the final URL slug into a title.,4,2,False,False,,,0,41,no_train_match
+core,1,file_extension,url_file,calibration,row,Extract the file extension.,4,2,False,False,,,0,41,no_train_match
+core,1,file_stem_title,url_file,heldout_composition,row,Turn a file stem into a readable title.,4,2,False,False,,,0,41,no_train_match
+core,1,sku_prefix,product,calibration,row,Extract the product family prefix.,4,2,False,False,,,0,60,no_train_match
+core,1,sku_suffix,product,heldout_same_family,row,Extract the final SKU segment.,4,2,False,False,,,0,60,no_train_match
+core,1,code_after_colon,product,heldout_same_family,row,Extract the code after a colon.,4,2,True,True,digits(FIELD(code)),1.0,1,60,covered
+core,1,status_boolean,product,heldout_new_family,row,Map common status words to booleans.,4,2,False,False,,,0,60,no_train_match
+core,1,sku_middle_segment,product,stress_out_of_abi,row,Extract the middle SKU segment.,4,2,True,False,digits(FIELD(sku)),1.0,1,60,train_match_only
+core,1,address_zip5,address,heldout_new_family,row,Extract five-digit ZIP code.,4,2,False,False,,,0,17,no_train_match
+core,1,address_state,address,heldout_new_family,row,Extract two-letter state code.,4,2,False,False,,,0,17,no_train_match
+core,1,address_city,address,heldout_new_family,row,Extract city before state and ZIP.,4,2,False,False,,,0,17,no_train_match
+core,1,text_normalize_spaces,text,calibration,row,Normalize whitespace.,4,2,True,True,normalize_spaces(FIELD(text)),1.0,1,38,covered
+core,1,text_alnum_upper,text,heldout_composition,row,Keep alphanumerics and uppercase.,4,2,False,False,,,0,38,no_train_match
+core,1,phrase_initials,text,heldout_same_family,row,Return phrase initials.,4,2,True,True,initials(FIELD(phrase)),1.0,1,38,covered
+core,1,phrase_slug,text,stress_out_of_abi,row,Convert a phrase to kebab-case slug.,4,2,False,False,,,0,38,no_train_match
+core,1,table_count_rows,table,heldout_new_family,table,Count rows in a small table.,3,2,False,False,,,0,0,table_ops_disabled
+core,1,table_sum_amount,table,heldout_new_family,table,Sum the amount column.,3,2,False,False,,,0,0,table_ops_disabled
+core,1,table_sum_paid_amount,table,heldout_composition,table,Sum amount where status is paid.,3,2,False,False,,,0,0,table_ops_disabled
+core,1,table_count_west,table,heldout_composition,table,Count rows where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+core,1,table_sum_west_qty,table,heldout_composition,table,Sum quantity where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+core,1,table_latest_paid_amount,table,stress_out_of_abi,table,Return amount from latest paid order.,3,2,False,False,,,0,0,table_ops_disabled
+core,2,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,66,covered
+core,2,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,14879,train_match_only
+core,2,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,False,False,,,0,692,no_train_match
+core,2,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,False,False,,,0,692,no_train_match
+core,2,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,False,False,,,0,692,no_train_match
+core,2,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,False,False,,,0,2500,no_train_match
+core,2,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,692,no_train_match
+core,2,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,False,False,,,0,6818,no_train_match
+core,2,money_percent_decimal,money,calibration,row,Parse a percent into decimal form.,4,2,False,False,,,0,6818,no_train_match
+core,2,money_line_total_cents,money,heldout_composition,row,Return price times quantity in cents.,4,2,False,False,,,0,6818,no_train_match
+core,2,money_discounted_total,money,stress_out_of_abi,row,Return discounted line total in dollars rounded to cents.,4,2,False,False,,,0,6818,no_train_match
+core,2,url_domain,url_file,calibration,row,Extract URL domain.,4,2,False,False,,,0,6747,no_train_match
+core,2,url_last_slug,url_file,heldout_same_family,row,Extract the final URL path slug.,4,2,False,False,,,0,6747,no_train_match
+core,2,url_slug_to_title,url_file,heldout_composition,row,Turn the final URL slug into a title.,4,2,False,False,,,0,6747,no_train_match
+core,2,file_extension,url_file,calibration,row,Extract the file extension.,4,2,False,False,,,0,6747,no_train_match
+core,2,file_stem_title,url_file,heldout_composition,row,Turn a file stem into a readable title.,4,2,False,False,,,0,6747,no_train_match
+core,2,sku_prefix,product,calibration,row,Extract the product family prefix.,4,2,True,True,before_dash(upper(FIELD(sku))),2.0,1,13807,covered
+core,2,sku_suffix,product,heldout_same_family,row,Extract the final SKU segment.,4,2,False,False,,,0,13807,no_train_match
+core,2,code_after_colon,product,heldout_same_family,row,Extract the code after a colon.,4,2,True,True,digits(FIELD(code)),1.0,1,60,covered
+core,2,status_boolean,product,heldout_new_family,row,Map common status words to booleans.,4,2,False,False,,,0,13807,no_train_match
+core,2,sku_middle_segment,product,stress_out_of_abi,row,Extract the middle SKU segment.,4,2,True,False,digits(FIELD(sku)),1.0,1,13807,train_match_only
+core,2,address_zip5,address,heldout_new_family,row,Extract five-digit ZIP code.,4,2,True,True,before_dash(last_token(FIELD(address))),2.0,1,1191,covered
+core,2,address_state,address,heldout_new_family,row,Extract two-letter state code.,4,2,True,True,last_token(alpha_spaces(FIELD(address))),2.0,1,1191,covered
+core,2,address_city,address,heldout_new_family,row,Extract city before state and ZIP.,4,2,False,False,,,0,1191,no_train_match
+core,2,text_normalize_spaces,text,calibration,row,Normalize whitespace.,4,2,True,True,normalize_spaces(FIELD(text)),1.0,1,38,covered
+core,2,text_alnum_upper,text,heldout_composition,row,Keep alphanumerics and uppercase.,4,2,True,True,upper(alnum(FIELD(text))),2.0,1,5045,covered
+core,2,phrase_initials,text,heldout_same_family,row,Return phrase initials.,4,2,True,True,initials(FIELD(phrase)),1.0,1,38,covered
+core,2,phrase_slug,text,stress_out_of_abi,row,Convert a phrase to kebab-case slug.,4,2,False,False,,,0,5045,no_train_match
+core,2,table_count_rows,table,heldout_new_family,table,Count rows in a small table.,3,2,False,False,,,0,0,table_ops_disabled
+core,2,table_sum_amount,table,heldout_new_family,table,Sum the amount column.,3,2,False,False,,,0,0,table_ops_disabled
+core,2,table_sum_paid_amount,table,heldout_composition,table,Sum amount where status is paid.,3,2,False,False,,,0,0,table_ops_disabled
+core,2,table_count_west,table,heldout_composition,table,Count rows where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+core,2,table_sum_west_qty,table,heldout_composition,table,Sum quantity where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+core,2,table_latest_paid_amount,table,stress_out_of_abi,table,Return amount from latest paid order.,3,2,False,False,,,0,0,table_ops_disabled
+office,1,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,True,True,email_domain(FIELD(email)),1.0,1,84,covered
+office,1,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,True,True,email_company(FIELD(email)),1.0,1,84,covered
+office,1,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,True,True,phone_e164_us(FIELD(phone)),1.0,1,84,covered
+office,1,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,True,True,phone_last4(FIELD(phone)),1.0,1,84,covered
+office,1,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,84,covered
+office,1,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,84,train_match_only
+office,1,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,True,True,date_iso(FIELD(date)),1.0,1,22,covered
+office,1,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,True,True,date_month_name(FIELD(date)),1.0,1,22,covered
+office,1,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,True,True,date_quarter(FIELD(date)),1.0,1,22,covered
+office,1,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,True,True,"date_diff_days(FIELD(end),FIELD(start))",1.0,1,40,covered
+office,1,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,22,no_train_match
+office,1,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,True,True,money_cents(FIELD(price)),1.0,1,75,covered
+office,1,money_percent_decimal,money,calibration,row,Parse a percent into decimal form.,4,2,True,True,percent_float(FIELD(discount)),1.0,1,75,covered
+office,1,money_line_total_cents,money,heldout_composition,row,Return price times quantity in cents.,4,2,False,False,,,0,75,no_train_match
+office,1,money_discounted_total,money,stress_out_of_abi,row,Return discounted line total in dollars rounded to cents.,4,2,False,False,,,0,75,no_train_match
+office,1,url_domain,url_file,calibration,row,Extract URL domain.,4,2,True,True,url_domain(FIELD(url)),1.0,1,56,covered
+office,1,url_last_slug,url_file,heldout_same_family,row,Extract the final URL path slug.,4,2,True,True,file_stem(FIELD(url)),1.0,2,56,covered
+office,1,url_slug_to_title,url_file,heldout_composition,row,Turn the final URL slug into a title.,4,2,False,False,,,0,56,no_train_match
+office,1,file_extension,url_file,calibration,row,Extract the file extension.,4,2,True,True,file_ext(FIELD(path)),1.0,1,56,covered
+office,1,file_stem_title,url_file,heldout_composition,row,Turn a file stem into a readable title.,4,2,False,False,,,0,56,no_train_match
+office,1,sku_prefix,product,calibration,row,Extract the product family prefix.,4,2,True,True,sku_prefix(FIELD(sku)),1.0,1,66,covered
+office,1,sku_suffix,product,heldout_same_family,row,Extract the final SKU segment.,4,2,True,True,sku_suffix(FIELD(sku)),1.0,1,66,covered
+office,1,code_after_colon,product,heldout_same_family,row,Extract the code after a colon.,4,2,True,True,digits(FIELD(code)),1.0,1,66,covered
+office,1,status_boolean,product,heldout_new_family,row,Map common status words to booleans.,4,2,True,True,bool_yes_no(FIELD(status)),1.0,1,66,covered
+office,1,sku_middle_segment,product,stress_out_of_abi,row,Extract the middle SKU segment.,4,2,True,False,digits(FIELD(sku)),1.0,1,66,train_match_only
+office,1,address_zip5,address,heldout_new_family,row,Extract five-digit ZIP code.,4,2,True,True,zip5(FIELD(address)),1.0,1,26,covered
+office,1,address_state,address,heldout_new_family,row,Extract two-letter state code.,4,2,True,True,us_state(FIELD(address)),1.0,1,26,covered
+office,1,address_city,address,heldout_new_family,row,Extract city before state and ZIP.,4,2,True,True,city_before_state(FIELD(address)),1.0,1,26,covered
+office,1,text_normalize_spaces,text,calibration,row,Normalize whitespace.,4,2,True,True,normalize_spaces(FIELD(text)),1.0,1,45,covered
+office,1,text_alnum_upper,text,heldout_composition,row,Keep alphanumerics and uppercase.,4,2,False,False,,,0,45,no_train_match
+office,1,phrase_initials,text,heldout_same_family,row,Return phrase initials.,4,2,True,True,initials(FIELD(phrase)),1.0,1,45,covered
+office,1,phrase_slug,text,stress_out_of_abi,row,Convert a phrase to kebab-case slug.,4,2,False,False,,,0,45,no_train_match
+office,1,table_count_rows,table,heldout_new_family,table,Count rows in a small table.,3,2,False,False,,,0,0,table_ops_disabled
+office,1,table_sum_amount,table,heldout_new_family,table,Sum the amount column.,3,2,False,False,,,0,0,table_ops_disabled
+office,1,table_sum_paid_amount,table,heldout_composition,table,Sum amount where status is paid.,3,2,False,False,,,0,0,table_ops_disabled
+office,1,table_count_west,table,heldout_composition,table,Count rows where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+office,1,table_sum_west_qty,table,heldout_composition,table,Sum quantity where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+office,1,table_latest_paid_amount,table,stress_out_of_abi,table,Return amount from latest paid order.,3,2,False,False,,,0,0,table_ops_disabled
+office,2,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,True,True,email_domain(FIELD(email)),1.0,1,84,covered
+office,2,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,True,True,email_company(FIELD(email)),1.0,1,84,covered
+office,2,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,True,True,phone_e164_us(FIELD(phone)),1.0,1,84,covered
+office,2,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,True,True,phone_last4(FIELD(phone)),1.0,1,84,covered
+office,2,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,84,covered
+office,2,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,23341,train_match_only
+office,2,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,True,True,date_iso(FIELD(date)),1.0,1,22,covered
+office,2,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,True,True,date_month_name(FIELD(date)),1.0,1,22,covered
+office,2,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,True,True,date_quarter(FIELD(date)),1.0,1,22,covered
+office,2,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,True,True,"date_diff_days(FIELD(end),FIELD(start))",1.0,1,40,covered
+office,2,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,2047,no_train_match
+office,2,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,True,True,money_cents(FIELD(price)),1.0,1,75,covered
+office,2,money_percent_decimal,money,calibration,row,Parse a percent into decimal form.,4,2,True,True,percent_float(FIELD(discount)),1.0,1,75,covered
+office,2,money_line_total_cents,money,heldout_composition,row,Return price times quantity in cents.,4,2,True,True,"mul(FIELD(qty),alnum(FIELD(price)))",2.0,2,20752,covered
+office,2,money_discounted_total,money,stress_out_of_abi,row,Return discounted line total in dollars rounded to cents.,4,2,False,False,,,0,20752,no_train_match
+office,2,url_domain,url_file,calibration,row,Extract URL domain.,4,2,True,True,url_domain(FIELD(url)),1.0,1,56,covered
+office,2,url_last_slug,url_file,heldout_same_family,row,Extract the final URL path slug.,4,2,True,True,file_stem(FIELD(url)),1.0,2,56,covered
+office,2,url_slug_to_title,url_file,heldout_composition,row,Turn the final URL slug into a title.,4,2,True,True,slug_title(file_stem(FIELD(url))),2.0,1,12249,covered
+office,2,file_extension,url_file,calibration,row,Extract the file extension.,4,2,True,True,file_ext(FIELD(path)),1.0,1,56,covered
+office,2,file_stem_title,url_file,heldout_composition,row,Turn a file stem into a readable title.,4,2,True,True,slug_title(file_stem(FIELD(path))),2.0,1,12249,covered
+office,2,sku_prefix,product,calibration,row,Extract the product family prefix.,4,2,True,True,sku_prefix(FIELD(sku)),1.0,1,66,covered
+office,2,sku_suffix,product,heldout_same_family,row,Extract the final SKU segment.,4,2,True,True,sku_suffix(FIELD(sku)),1.0,1,66,covered
+office,2,code_after_colon,product,heldout_same_family,row,Extract the code after a colon.,4,2,True,True,digits(FIELD(code)),1.0,1,66,covered
+office,2,status_boolean,product,heldout_new_family,row,Map common status words to booleans.,4,2,True,True,bool_yes_no(FIELD(status)),1.0,1,66,covered
+office,2,sku_middle_segment,product,stress_out_of_abi,row,Extract the middle SKU segment.,4,2,True,False,digits(FIELD(sku)),1.0,1,16849,train_match_only
+office,2,address_zip5,address,heldout_new_family,row,Extract five-digit ZIP code.,4,2,True,True,zip5(FIELD(address)),1.0,1,26,covered
+office,2,address_state,address,heldout_new_family,row,Extract two-letter state code.,4,2,True,True,us_state(FIELD(address)),1.0,1,26,covered
+office,2,address_city,address,heldout_new_family,row,Extract city before state and ZIP.,4,2,True,True,city_before_state(FIELD(address)),1.0,1,26,covered
+office,2,text_normalize_spaces,text,calibration,row,Normalize whitespace.,4,2,True,True,normalize_spaces(FIELD(text)),1.0,1,45,covered
+office,2,text_alnum_upper,text,heldout_composition,row,Keep alphanumerics and uppercase.,4,2,True,True,upper(alnum(FIELD(text))),2.0,1,6965,covered
+office,2,phrase_initials,text,heldout_same_family,row,Return phrase initials.,4,2,True,True,initials(FIELD(phrase)),1.0,1,45,covered
+office,2,phrase_slug,text,stress_out_of_abi,row,Convert a phrase to kebab-case slug.,4,2,False,False,,,0,6965,no_train_match
+office,2,table_count_rows,table,heldout_new_family,table,Count rows in a small table.,3,2,False,False,,,0,0,table_ops_disabled
+office,2,table_sum_amount,table,heldout_new_family,table,Sum the amount column.,3,2,False,False,,,0,0,table_ops_disabled
+office,2,table_sum_paid_amount,table,heldout_composition,table,Sum amount where status is paid.,3,2,False,False,,,0,0,table_ops_disabled
+office,2,table_count_west,table,heldout_composition,table,Count rows where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+office,2,table_sum_west_qty,table,heldout_composition,table,Sum quantity where region is West.,3,2,False,False,,,0,0,table_ops_disabled
+office,2,table_latest_paid_amount,table,stress_out_of_abi,table,Return amount from latest paid order.,3,2,False,False,,,0,0,table_ops_disabled
+office_table,1,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,True,True,email_domain(FIELD(email)),1.0,1,84,covered
+office_table,1,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,True,True,email_company(FIELD(email)),1.0,1,84,covered
+office_table,1,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,True,True,phone_e164_us(FIELD(phone)),1.0,1,84,covered
+office_table,1,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,True,True,phone_last4(FIELD(phone)),1.0,1,84,covered
+office_table,1,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,84,covered
+office_table,1,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,84,train_match_only
+office_table,1,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,True,True,date_iso(FIELD(date)),1.0,1,22,covered
+office_table,1,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,True,True,date_month_name(FIELD(date)),1.0,1,22,covered
+office_table,1,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,True,True,date_quarter(FIELD(date)),1.0,1,22,covered
+office_table,1,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,True,True,"date_diff_days(FIELD(end),FIELD(start))",1.0,1,40,covered
+office_table,1,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,22,no_train_match
+office_table,1,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,True,True,money_cents(FIELD(price)),1.0,1,75,covered
+office_table,1,money_percent_decimal,money,calibration,row,Parse a percent into decimal form.,4,2,True,True,percent_float(FIELD(discount)),1.0,1,75,covered
+office_table,1,money_line_total_cents,money,heldout_composition,row,Return price times quantity in cents.,4,2,False,False,,,0,75,no_train_match
+office_table,1,money_discounted_total,money,stress_out_of_abi,row,Return discounted line total in dollars rounded to cents.,4,2,False,False,,,0,75,no_train_match
+office_table,1,url_domain,url_file,calibration,row,Extract URL domain.,4,2,True,True,url_domain(FIELD(url)),1.0,1,56,covered
+office_table,1,url_last_slug,url_file,heldout_same_family,row,Extract the final URL path slug.,4,2,True,True,file_stem(FIELD(url)),1.0,2,56,covered
+office_table,1,url_slug_to_title,url_file,heldout_composition,row,Turn the final URL slug into a title.,4,2,False,False,,,0,56,no_train_match
+office_table,1,file_extension,url_file,calibration,row,Extract the file extension.,4,2,True,True,file_ext(FIELD(path)),1.0,1,56,covered
+office_table,1,file_stem_title,url_file,heldout_composition,row,Turn a file stem into a readable title.,4,2,False,False,,,0,56,no_train_match
+office_table,1,sku_prefix,product,calibration,row,Extract the product family prefix.,4,2,True,True,sku_prefix(FIELD(sku)),1.0,1,66,covered
+office_table,1,sku_suffix,product,heldout_same_family,row,Extract the final SKU segment.,4,2,True,True,sku_suffix(FIELD(sku)),1.0,1,66,covered
+office_table,1,code_after_colon,product,heldout_same_family,row,Extract the code after a colon.,4,2,True,True,digits(FIELD(code)),1.0,1,66,covered
+office_table,1,status_boolean,product,heldout_new_family,row,Map common status words to booleans.,4,2,True,True,bool_yes_no(FIELD(status)),1.0,1,66,covered
+office_table,1,sku_middle_segment,product,stress_out_of_abi,row,Extract the middle SKU segment.,4,2,True,False,digits(FIELD(sku)),1.0,1,66,train_match_only
+office_table,1,address_zip5,address,heldout_new_family,row,Extract five-digit ZIP code.,4,2,True,True,zip5(FIELD(address)),1.0,1,26,covered
+office_table,1,address_state,address,heldout_new_family,row,Extract two-letter state code.,4,2,True,True,us_state(FIELD(address)),1.0,1,26,covered
+office_table,1,address_city,address,heldout_new_family,row,Extract city before state and ZIP.,4,2,True,True,city_before_state(FIELD(address)),1.0,1,26,covered
+office_table,1,text_normalize_spaces,text,calibration,row,Normalize whitespace.,4,2,True,True,normalize_spaces(FIELD(text)),1.0,1,45,covered
+office_table,1,text_alnum_upper,text,heldout_composition,row,Keep alphanumerics and uppercase.,4,2,False,False,,,0,45,no_train_match
+office_table,1,phrase_initials,text,heldout_same_family,row,Return phrase initials.,4,2,True,True,initials(FIELD(phrase)),1.0,1,45,covered
+office_table,1,phrase_slug,text,stress_out_of_abi,row,Convert a phrase to kebab-case slug.,4,2,False,False,,,0,45,no_train_match
+office_table,1,table_count_rows,table,heldout_new_family,table,Count rows in a small table.,3,2,True,True,COUNT_ROWS,1.0,6,441,covered
+office_table,1,table_sum_amount,table,heldout_new_family,table,Sum the amount column.,3,2,True,True,SUM(amount),1.0,1,441,covered
+office_table,1,table_sum_paid_amount,table,heldout_composition,table,Sum amount where status is paid.,3,2,True,True,"SUM_WHERE(status=paid,amount)",2.0,1,441,covered
+office_table,1,table_count_west,table,heldout_composition,table,Count rows where region is West.,3,2,True,True,COUNT_WHERE(region=West),2.0,1,441,covered
+office_table,1,table_sum_west_qty,table,heldout_composition,table,Sum quantity where region is West.,3,2,True,True,"SUM_WHERE(region=West,qty)",2.0,1,441,covered
+office_table,1,table_latest_paid_amount,table,stress_out_of_abi,table,Return amount from latest paid order.,3,2,False,False,,,0,441,no_train_match
+office_table,2,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,True,True,email_domain(FIELD(email)),1.0,1,84,covered
+office_table,2,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,True,True,email_company(FIELD(email)),1.0,1,84,covered
+office_table,2,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,True,True,phone_e164_us(FIELD(phone)),1.0,1,84,covered
+office_table,2,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,True,True,phone_last4(FIELD(phone)),1.0,1,84,covered
+office_table,2,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,84,covered
+office_table,2,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,23341,train_match_only
+office_table,2,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,True,True,date_iso(FIELD(date)),1.0,1,22,covered
+office_table,2,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,True,True,date_month_name(FIELD(date)),1.0,1,22,covered
+office_table,2,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,True,True,date_quarter(FIELD(date)),1.0,1,22,covered
+office_table,2,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,True,True,"date_diff_days(FIELD(end),FIELD(start))",1.0,1,40,covered
+office_table,2,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,2047,no_train_match
+office_table,2,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,True,True,money_cents(FIELD(price)),1.0,1,75,covered
+office_table,2,money_percent_decimal,money,calibration,row,Parse a percent into decimal form.,4,2,True,True,percent_float(FIELD(discount)),1.0,1,75,covered
+office_table,2,money_line_total_cents,money,heldout_composition,row,Return price times quantity in cents.,4,2,True,True,"mul(FIELD(qty),alnum(FIELD(price)))",2.0,2,20752,covered
+office_table,2,money_discounted_total,money,stress_out_of_abi,row,Return discounted line total in dollars rounded to cents.,4,2,False,False,,,0,20752,no_train_match
+office_table,2,url_domain,url_file,calibration,row,Extract URL domain.,4,2,True,True,url_domain(FIELD(url)),1.0,1,56,covered
+office_table,2,url_last_slug,url_file,heldout_same_family,row,Extract the final URL path slug.,4,2,True,True,file_stem(FIELD(url)),1.0,2,56,covered
+office_table,2,url_slug_to_title,url_file,heldout_composition,row,Turn the final URL slug into a title.,4,2,True,True,slug_title(file_stem(FIELD(url))),2.0,1,12249,covered
+office_table,2,file_extension,url_file,calibration,row,Extract the file extension.,4,2,True,True,file_ext(FIELD(path)),1.0,1,56,covered
+office_table,2,file_stem_title,url_file,heldout_composition,row,Turn a file stem into a readable title.,4,2,True,True,slug_title(file_stem(FIELD(path))),2.0,1,12249,covered
+office_table,2,sku_prefix,product,calibration,row,Extract the product family prefix.,4,2,True,True,sku_prefix(FIELD(sku)),1.0,1,66,covered
+office_table,2,sku_suffix,product,heldout_same_family,row,Extract the final SKU segment.,4,2,True,True,sku_suffix(FIELD(sku)),1.0,1,66,covered
+office_table,2,code_after_colon,product,heldout_same_family,row,Extract the code after a colon.,4,2,True,True,digits(FIELD(code)),1.0,1,66,covered
+office_table,2,status_boolean,product,heldout_new_family,row,Map common status words to booleans.,4,2,True,True,bool_yes_no(FIELD(status)),1.0,1,66,covered
+office_table,2,sku_middle_segment,product,stress_out_of_abi,row,Extract the middle SKU segment.,4,2,True,False,digits(FIELD(sku)),1.0,1,16849,train_match_only
+office_table,2,address_zip5,address,heldout_new_family,row,Extract five-digit ZIP code.,4,2,True,True,zip5(FIELD(address)),1.0,1,26,covered
+office_table,2,address_state,address,heldout_new_family,row,Extract two-letter state code.,4,2,True,True,us_state(FIELD(address)),1.0,1,26,covered
+office_table,2,address_city,address,heldout_new_family,row,Extract city before state and ZIP.,4,2,True,True,city_before_state(FIELD(address)),1.0,1,26,covered
+office_table,2,text_normalize_spaces,text,calibration,row,Normalize whitespace.,4,2,True,True,normalize_spaces(FIELD(text)),1.0,1,45,covered
+office_table,2,text_alnum_upper,text,heldout_composition,row,Keep alphanumerics and uppercase.,4,2,True,True,upper(alnum(FIELD(text))),2.0,1,6965,covered
+office_table,2,phrase_initials,text,heldout_same_family,row,Return phrase initials.,4,2,True,True,initials(FIELD(phrase)),1.0,1,45,covered
+office_table,2,phrase_slug,text,stress_out_of_abi,row,Convert a phrase to kebab-case slug.,4,2,False,False,,,0,6965,no_train_match
+office_table,2,table_count_rows,table,heldout_new_family,table,Count rows in a small table.,3,2,True,True,COUNT_ROWS,1.0,6,441,covered
+office_table,2,table_sum_amount,table,heldout_new_family,table,Sum the amount column.,3,2,True,True,SUM(amount),1.0,1,441,covered
+office_table,2,table_sum_paid_amount,table,heldout_composition,table,Sum amount where status is paid.,3,2,True,True,"SUM_WHERE(status=paid,amount)",2.0,1,441,covered
+office_table,2,table_count_west,table,heldout_composition,table,Count rows where region is West.,3,2,True,True,COUNT_WHERE(region=West),2.0,1,441,covered
+office_table,2,table_sum_west_qty,table,heldout_composition,table,Sum quantity where region is West.,3,2,True,True,"SUM_WHERE(region=West,qty)",2.0,1,441,covered
+office_table,2,table_latest_paid_amount,table,stress_out_of_abi,table,Return amount from latest paid order.,3,2,False,False,,,0,441,no_train_match

@@ -1,0 +1,64 @@
+{
+  "experiment_name": "qwen35_4b_model_in_loop_counterexamples",
+  "question": "Can counterexamples selected against Qwen-generated wrong DSL programs improve executable program repair beyond static counterexample traces under the same training budget?",
+  "model": {
+    "model_id": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "loader": "AutoModelForImageTextToText",
+    "training": "4-bit NF4 QLoRA"
+  },
+  "dataset": {
+    "seed": 20260623,
+    "seed_train_records": 240,
+    "bridge_base_records": 180,
+    "bridge_records": 60,
+    "iid_eval_records": 60,
+    "challenge_eval_records": 72,
+    "mining_records_per_family": 48,
+    "visible_cases_per_record": 6,
+    "hidden_cases_per_record": 18,
+    "mine_case_pool_per_record": 96,
+    "selector_pool_size": 192,
+    "challenge_families": [
+      "modulo_sum_label",
+      "length_contains_code",
+      "tuple_branch_label"
+    ],
+    "bridge_allocation": {
+      "length_contains_code": 40,
+      "modulo_sum_label": 10,
+      "tuple_branch_label": 10
+    }
+  },
+  "training": {
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "seed_epochs": 2.0,
+    "bridge_epochs": 2.0,
+    "learning_rate": 0.00015,
+    "max_length": 4096,
+    "gradient_accumulation_steps": 8,
+    "per_device_train_batch_size": 1,
+    "bf16": true
+  },
+  "mining": {
+    "seed_adapter": "large_artifacts/qwen35_4b_model_in_loop_counterexamples/models/seed_lora",
+    "num_samples": 2,
+    "max_new_tokens": 64,
+    "temperature": 0.7,
+    "top_p": 0.95
+  },
+  "evaluation": {
+    "max_new_tokens": 64,
+    "num_samples_main": 3,
+    "num_samples_control": 0,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "selection": "valid candidate with most visible-case passes; tie-break by shorter parsed DSL"
+  },
+  "artifact_layout": {
+    "compact_dir": "experiments/qwen35_4b_model_in_loop_counterexamples",
+    "large_artifact_dir": "large_artifacts/qwen35_4b_model_in_loop_counterexamples"
+  }
+}

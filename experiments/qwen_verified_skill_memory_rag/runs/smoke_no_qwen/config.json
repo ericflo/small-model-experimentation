@@ -1,0 +1,21 @@
+{
+  "run_name": "smoke_no_qwen",
+  "seed": 20260627,
+  "task_limit": 4,
+  "memory_limit": 0,
+  "train_n": 4,
+  "heldout_cap": 3,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "top_k": 2,
+  "card_examples": 4,
+  "row_max_new_tokens": 64,
+  "batch_max_new_tokens": 384,
+  "no_qwen": true,
+  "model": "Qwen/Qwen3-4B",
+  "eval_tasks": 4,
+  "memory_tasks": 305,
+  "generation_records": 28,
+  "elapsed_seconds": 0.15,
+  "created_utc": "2026-06-27T08:46:28.927354+00:00"
+}

@@ -1,0 +1,5 @@
+run,variant,phase,local_step,step,loss,train_examples,quick_answer_head_accuracy,quick_bytecode_accuracy,quick_program_exact,op_loss,arg_loss,answer_loss
+pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,1,1,9.065356254577637,128,0.0,0.03125,0.0,2.6377110481262207,5.492939472198486,4.673530578613281
+pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,50,50,1.3399075269699097,128,0.125,0.125,0.0,0.18128742277622223,0.5645986795425415,2.970107078552246
+pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,100,100,0.8227484822273254,128,0.09375,0.15625,0.0,0.05245431140065193,0.3852282166481018,1.9253296852111816
+pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,150,150,0.5963160991668701,128,0.125,0.125,0.0,0.023932579904794693,0.24725894629955292,1.6256229877471924

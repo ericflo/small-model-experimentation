@@ -1,0 +1,4 @@
+run,suite,arm,seed,trained,split,n,answer_accuracy,valid_rate,mean_new_tokens,acc_string,acc_unit,acc_table,acc_date
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,16,0.75,1.0,29.3125,0.5,1.0,0.5,1.0
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,16,0.3125,1.0,32.5625,0.0,1.0,0.25,0.0
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,16,0.625,1.0,29.75,0.25,1.0,0.75,0.5

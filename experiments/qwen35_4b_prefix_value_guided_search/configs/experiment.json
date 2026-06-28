@@ -1,0 +1,18 @@
+{
+  "experiment": "qwen35_4b_prefix_value_guided_search",
+  "date": "2026-06-26",
+  "goal": "Test whether scoring partial code prefixes can make search over frozen Qwen completions more sample-efficient than ordinary full-code sampling.",
+  "model": "Qwen3.5-4B",
+  "primary_metric": "heldout_hidden_coverage_at_matched_completion_budget",
+  "gates": {
+    "oracle_prefix_ceiling": "Hidden-test oracle prefix search must beat ordinary full-code sampling at matched completion budget before any value model training is justified.",
+    "value_model": "A trained prefix value model must recover nontrivial oracle-prefix headroom against lexical and random prefix-selection baselines."
+  },
+  "arms": [
+    "full_sample_base",
+    "prefix_oracle",
+    "prefix_lexical_value",
+    "prefix_random"
+  ],
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_prefix_value_guided_search"
+}

@@ -1,0 +1,100 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Trace Procedure Depth Stress</title><style>body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1160px;margin:36px auto;line-height:1.5;color:#202124}table{border-collapse:collapse;width:100%;font-size:13px}td,th{border:1px solid #d4d7dc;padding:6px 8px;text-align:left}th{background:#f2f4f7}img{max-width:100%;border:1px solid #d4d7dc}figure{margin:24px 0}figcaption{color:#5f6368;font-size:13px}code{background:#f5f7fa;padding:1px 4px;border-radius:4px}</style></head><body><h1>Qwen Trace Procedure Depth Stress</h1>
+
+<h2>Abstract</h2>
+
+<p>This standalone experiment tests whether a local 4B model composes known primitives into executable procedures when trained only on atomic procedures. The primary score for procedure arms is external execution of the emitted stack program, not the model&#x27;s own final answer.</p>
+
+<h2>Method</h2>
+
+<p>Training examples contain one primitive operation. Evaluation sweeps held-out procedure depths 2, 3, 4, and 6, plus template-shifted prompts at depths 2, 4, and 6. The task families are string, number, table, date, list, and path transformations. Four arms are compared: `answer_only`, `trace_stack_final`, `trace_stack_no_final`, and `program_stack`.</p>
+
+<p>The load-bearing distinction is compilation versus self-execution. `trace_stack_final` may emit a `FINAL` line, but its procedure is also parsed and executed by the interpreter. `trace_stack_no_final` tests the same numbered procedure format without answer supervision. `program_stack` tests compact raw instructions.</p>
+
+<h2>Run Configuration</h2>
+
+<ul>
+<li>Primary suite: `main`.</li>
+<li>Seeds: `101,202,303,404,505`.</li>
+<li>Evaluation examples across trained arms: `1920`.</li>
+<li>QLoRA update steps per adapter: `32`.</li>
+<li>Large adapters are stored outside the experiment tree.</li>
+</ul>
+
+<h2>Primary Results</h2>
+
+<ul>
+<li>Best held-out composition execution row: `program_stack` depth `2` at 76.7%.</li>
+<li>Compact program execution at depth 6: `program_stack` 63.3% with seed std 11.2%, versus `answer_only` final accuracy 0.0%.</li>
+<li>`trace_stack_final` depth-6 composition execution: 58.3% with seed std 8.3%.</li>
+<li>`trace_stack_final` depth-6 template-shift execution: 36.7%.</li>
+<li>Final-answer supervision comparison at depth 4: `trace_stack_final` execution 63.3%; `trace_stack_no_final` execution 68.3%.</li>
+<li>Template-shift depth-6 execution for `program_stack`: 41.7%, a 21.7% absolute drop from standard depth-6 composition.</li>
+</ul>
+
+<table>
+<tr><th>arm</th><th>split</th><th>depth</th><th>runs</th><th>n_total</th><th>primary_accuracy_mean</th><th>primary_accuracy_std</th><th>exec_accuracy_mean</th><th>exec_accuracy_std</th><th>valid_exec_rate_mean</th><th>final_accuracy_mean</th><th>no_final_rate_mean</th><th>exact_program_rate_mean</th></tr>
+<tr><td>answer_only</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>60</td><td>41.7%</td><td>10.2%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>41.7%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>60</td><td>76.7%</td><td>3.7%</td><td>76.7%</td><td>3.7%</td><td>78.3%</td><td>0.0%</td><td>100.0%</td><td>75.0%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>60</td><td>76.7%</td><td>7.0%</td><td>76.7%</td><td>7.0%</td><td>80.0%</td><td>30.0%</td><td>0.0%</td><td>73.3%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>60</td><td>65.0%</td><td>16.0%</td><td>65.0%</td><td>16.0%</td><td>75.0%</td><td>0.0%</td><td>100.0%</td><td>63.3%</td></tr>
+<tr><td>answer_only</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>60</td><td>15.0%</td><td>7.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>15.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>60</td><td>75.0%</td><td>10.2%</td><td>75.0%</td><td>10.2%</td><td>81.7%</td><td>0.0%</td><td>100.0%</td><td>68.3%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>60</td><td>75.0%</td><td>5.9%</td><td>75.0%</td><td>5.9%</td><td>83.3%</td><td>18.3%</td><td>0.0%</td><td>70.0%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>60</td><td>61.7%</td><td>4.6%</td><td>61.7%</td><td>4.6%</td><td>73.3%</td><td>0.0%</td><td>100.0%</td><td>61.7%</td></tr>
+<tr><td>answer_only</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>60</td><td>5.0%</td><td>7.5%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>5.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>60</td><td>70.0%</td><td>11.2%</td><td>70.0%</td><td>11.2%</td><td>71.7%</td><td>0.0%</td><td>100.0%</td><td>63.3%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>60</td><td>63.3%</td><td>11.2%</td><td>63.3%</td><td>11.2%</td><td>63.3%</td><td>3.3%</td><td>0.0%</td><td>63.3%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>60</td><td>68.3%</td><td>13.7%</td><td>68.3%</td><td>13.7%</td><td>71.7%</td><td>0.0%</td><td>100.0%</td><td>65.0%</td></tr>
+<tr><td>answer_only</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>60</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>60</td><td>63.3%</td><td>11.2%</td><td>63.3%</td><td>11.2%</td><td>65.0%</td><td>0.0%</td><td>100.0%</td><td>60.0%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>60</td><td>58.3%</td><td>8.3%</td><td>58.3%</td><td>8.3%</td><td>63.3%</td><td>0.0%</td><td>0.0%</td><td>48.3%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>60</td><td>56.7%</td><td>12.4%</td><td>56.7%</td><td>12.4%</td><td>61.7%</td><td>0.0%</td><td>100.0%</td><td>48.3%</td></tr>
+<tr><td>answer_only</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>60</td><td>86.7%</td><td>12.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>86.7%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>60</td><td>98.3%</td><td>3.7%</td><td>98.3%</td><td>3.7%</td><td>98.3%</td><td>0.0%</td><td>100.0%</td><td>98.3%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>60</td><td>98.3%</td><td>3.7%</td><td>98.3%</td><td>3.7%</td><td>100.0%</td><td>91.7%</td><td>0.0%</td><td>98.3%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>60</td><td>98.3%</td><td>3.7%</td><td>98.3%</td><td>3.7%</td><td>98.3%</td><td>0.0%</td><td>100.0%</td><td>96.7%</td></tr>
+<tr><td>answer_only</td><td>eval_template_d2</td><td>2</td><td>5</td><td>60</td><td>45.0%</td><td>12.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>45.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_template_d2</td><td>2</td><td>5</td><td>60</td><td>53.3%</td><td>4.6%</td><td>53.3%</td><td>4.6%</td><td>56.7%</td><td>0.0%</td><td>100.0%</td><td>46.7%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_template_d2</td><td>2</td><td>5</td><td>60</td><td>50.0%</td><td>5.9%</td><td>50.0%</td><td>5.9%</td><td>53.3%</td><td>40.0%</td><td>0.0%</td><td>43.3%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_template_d2</td><td>2</td><td>5</td><td>60</td><td>48.3%</td><td>9.1%</td><td>48.3%</td><td>9.1%</td><td>58.3%</td><td>0.0%</td><td>100.0%</td><td>43.3%</td></tr>
+<tr><td>answer_only</td><td>eval_template_d4</td><td>4</td><td>5</td><td>60</td><td>3.3%</td><td>7.5%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>3.3%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_template_d4</td><td>4</td><td>5</td><td>60</td><td>43.3%</td><td>7.0%</td><td>43.3%</td><td>7.0%</td><td>45.0%</td><td>0.0%</td><td>100.0%</td><td>40.0%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_template_d4</td><td>4</td><td>5</td><td>60</td><td>40.0%</td><td>7.0%</td><td>40.0%</td><td>7.0%</td><td>41.7%</td><td>8.3%</td><td>1.7%</td><td>35.0%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_template_d4</td><td>4</td><td>5</td><td>60</td><td>33.3%</td><td>0.0%</td><td>33.3%</td><td>0.0%</td><td>43.3%</td><td>0.0%</td><td>100.0%</td><td>31.7%</td></tr>
+<tr><td>answer_only</td><td>eval_template_d6</td><td>6</td><td>5</td><td>60</td><td>1.7%</td><td>3.7%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.7%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>program_stack</td><td>eval_template_d6</td><td>6</td><td>5</td><td>60</td><td>41.7%</td><td>8.3%</td><td>41.7%</td><td>8.3%</td><td>41.7%</td><td>0.0%</td><td>100.0%</td><td>36.7%</td></tr>
+<tr><td>trace_stack_final</td><td>eval_template_d6</td><td>6</td><td>5</td><td>60</td><td>36.7%</td><td>12.6%</td><td>36.7%</td><td>12.6%</td><td>38.3%</td><td>0.0%</td><td>11.7%</td><td>30.0%</td></tr>
+<tr><td>trace_stack_no_final</td><td>eval_template_d6</td><td>6</td><td>5</td><td>60</td><td>38.3%</td><td>9.5%</td><td>38.3%</td><td>9.5%</td><td>41.7%</td><td>0.0%</td><td>100.0%</td><td>33.3%</td></tr>
+</table>
+
+<figure><img src="../analysis/figures/execution_by_depth.png" alt="Execution by depth"><figcaption>Execution by depth</figcaption></figure>
+
+<figure><img src="../analysis/figures/template_shift_by_depth.png" alt="Template shift by depth"><figcaption>Template shift by depth</figcaption></figure>
+
+<figure><img src="../analysis/figures/final_vs_execution_gap.png" alt="Final versus execution gap"><figcaption>Final versus execution gap</figcaption></figure>
+
+<figure><img src="../analysis/figures/failure_taxonomy.png" alt="Failure taxonomy"><figcaption>Failure taxonomy</figcaption></figure>
+
+<figure><img src="../analysis/figures/training_curves.png" alt="Training curves"><figcaption>Training curves</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>A real compiler result should degrade gradually with depth rather than collapse immediately once procedure length exceeds the atomic training distribution. A gap between `trace_stack_final` execution and final-answer accuracy means the model can emit a correct procedure while failing to self-execute it. A gap between standard composition and template-shift composition localizes the remaining problem to language grounding rather than procedure sequencing.</p>
+<p>The main result is positive: training only on atomic procedures still produced executable depth-6 compositions at 63.3% for the compact raw stack ABI, while answer-only scoring was 0.0%. This is not a self-execution win; it is a compiler win, because the deterministic interpreter supplies the execution.</p>
+<p>The final-answer confound persists at the hardest standard composition split: `trace_stack_final` executed correctly at 58.3% but its emitted final answer was correct at 0.0%.</p>
+<p>Removing the final-answer line did not kill procedure learning: `trace_stack_no_final` reached 56.7% at depth 6. Final-answer supervision is therefore not required for the basic compiler effect, though arm ranking varies by depth and template split.</p>
+<p>The remaining major weakness is prompt wording. `program_stack` falls from 63.3% on standard depth-6 composition to 41.7% under template shift, so the next bottleneck is language grounding into the ABI, not deterministic execution.</p>
+<p>For `trace_stack_final` on composition splits, generated procedures break down as: correct_exact 58.0%, invalid_or_unexecutable 33.7%, wrong_op_order_or_choice 4.5%, correct_semantic_variant 3.8%.</p>
+
+<h2>Limitations</h2>
+
+<p>This experiment tests composition over a fixed known primitive library. It does not test invention of new operations outside the ABI. The families are synthetic but selected to cover several common deterministic task shapes.</p>
+
+<h2>Artifacts</h2>
+
+<ul>
+<li>Metrics: `analysis/summary_by_arm.csv` and `analysis/all_metrics.csv`</li>
+<li>Details: `analysis/all_details.csv`</li>
+<li>Training logs: `analysis/all_train_logs.csv`</li>
+<li>Checkpoints: `/workspace/large_artifacts/qwen_trace_procedure_depth_stress/checkpoints`</li>
+</ul></body></html>

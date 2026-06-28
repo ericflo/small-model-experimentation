@@ -1,0 +1,35 @@
+coverage-probe:   0%|          | 0/1296 [00:00<?, ?it/s]coverage-probe:   0%|          | 1/1296 [00:02<54:17,  2.52s/it]coverage-probe:   0%|          | 2/1296 [00:09<1:46:23,  4.93s/it]coverage-probe:   0%|          | 3/1296 [00:46<7:06:34, 19.79s/it]coverage-probe:   0%|          | 4/1296 [00:46<4:18:56, 12.03s/it]coverage-probe:   0%|          | 5/1296 [00:46<2:46:59,  7.76s/it]coverage-probe:   0%|          | 6/1296 [00:47<1:57:52,  5.48s/it]coverage-probe:   1%|          | 9/1296 [00:48<48:47,  2.27s/it]  coverage-probe:   1%|          | 10/1296 [00:54<1:08:50,  3.21s/it]coverage-probe:   1%|          | 11/1296 [01:01<1:25:40,  4.00s/it]coverage-probe:   1%|          | 12/1296 [01:19<2:42:12,  7.58s/it]coverage-probe:   1%|          | 13/1296 [01:25<2:35:04,  7.25s/it]coverage-probe:   1%|          | 14/1296 [01:32<2:29:53,  7.01s/it]coverage-probe:   1%|          | 15/1296 [01:50<3:37:40, 10.20s/it]coverage-probe:   1%|▏         | 18/1296 [01:50<1:38:48,  4.64s/it]coverage-probe:   2%|▏         | 21/1296 [01:50<55:53,  2.63s/it]  coverage-probe:   2%|▏         | 24/1296 [01:50<34:48,  1.64s/it]coverage-probe:   2%|▏         | 27/1296 [01:51<22:53,  1.08s/it]coverage-probe:   2%|▏         | 28/1296 [01:56<1:27:47,  4.15s/it]
+Traceback (most recent call last):
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/scripts/run_coverage_probe.py", line 309, in <module>
+    main()
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/scripts/run_coverage_probe.py", line 279, in main
+    row, active = evaluate_record(
+                  ^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/scripts/run_coverage_probe.py", line 161, in evaluate_record
+    selected = select_by_visible(programs, record["visible"], record["hidden"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/sketch.py", line 773, in select_by_visible
+    hidden_passes = program_pass_count(program, hidden) if hidden is not None and valid else None
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/dsl.py", line 239, in program_pass_count
+    return sum(1 for case in cases if program_case_passes(program, case))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/dsl.py", line 239, in <genexpr>
+    return sum(1 for case in cases if program_case_passes(program, case))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/dsl.py", line 233, in program_case_passes
+    return execute(program, case["input"]) == case["expected"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/dsl.py", line 189, in execute
+    return eval_expr(parse_expr(program), env)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/dsl.py", line 179, in eval_expr
+    return eval_expr(args[1], env) if bool(eval_expr(args[0], env)) else eval_expr(args[2], env)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/dsl.py", line 169, in eval_expr
+    return all(bool(eval_expr(arg, env)) for arg in args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_sketch_coverage_shift_probe/src/dsl.py", line 169, in <genexpr>
+    return all(bool(eval_expr(arg, env)) for arg in args)
+
+KeyboardInterrupt

@@ -1,0 +1,129 @@
+task_id,family,features,rule,rule_chars,rule_lines
+Address.000002,Address,Substring,"**Rule:** Extract the first three characters of the input, then find the next occurrence of a space, take everything from that space to the end of the first segment, and combine with the first three characters. Repeat this process for each new segment in the input.
+
+**Substeps:**
+1. Split the input by spaces into segments.
+2. For each segment, take the first three characters.
+3. Find the next space after the first three characters.
+4. Take everything from that space to the end of the segment.
+5. Combine the first three characters with the extracted part to form the output.",579,7
+BillingCode.000007,BillingCode,Concatenation,"Keep the input as is.  
+Substep 1: Extract the input string.  
+Substep 2: Return the extracted string as the output.",116,3
+City.000010,City,"Conditional,Numeric","Remove any non-numeric characters from the input. If the result is empty, return 0. If the result is ""None"", return 0. If the result is a string representing a number, convert it to an integer. If the result is a number, return it as is.",237,1
+City.000011,City,Conditional,"**Rule: Normalize City Names**  
+1. **Expand Abbreviations**: Replace common city abbreviations (e.g., ""n.y.c."" → ""New York City"").  
+2. **Standardize Capitalization**: Ensure proper noun capitalization (e.g., ""new york city"" → ""New York City"").  
+3. **Combine Parts**: Merge expanded and standardized parts into a single, correctly formatted city name.",353,4
+Column.000001,Column,"Concatenation,Conditional,Substring","Extract the number from the end of the string, ignoring any 'n' character, and return the result as ""Col"" followed by that number.  
+**Rule:**  
+1. Remove any 'n' character from the input string.  
+2. Extract the numeric part from the end of the string.  
+3. Combine ""Col"" with the extracted number to form the output.",318,5
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn","Take the value from col0 and col1, format col0 as ""HH:MM:SS"", and concatenate the formatted col0 with col1.",107,1
+DateTime.000007,DateTime,DateTime,"**Rule:** Extract the month and year from an ISO 8601 datetime string.  
+**Decomposition:**  
+1. Parse the input string to extract the date part (e.g., ""2041-11-23"").  
+2. Split the date part into month (e.g., ""11"") and year (e.g., ""2041"").  
+3. Convert the month number to its corresponding name (e.g., ""11"" → ""Nov"").  
+4. Combine the month name and year to form the output (e.g., ""Nov 2041"").",394,6
+DateTime.000017,DateTime,DateTime,"Split the input into parts based on separators (space, hyphen, slash), then reformat each part into day/month/year format, combining them in the order day/month/year.",166,1
+DateTime.000025,DateTime,DateTime,"**Rule: Extract and reformat date components**
+
+1. **Split the input into components**: Separate the date into month, day, and year (or equivalent parts).
+2. **Map the month abbreviation to its full name**: Convert abbreviations like ""Mar"" to ""March"" (though examples use abbreviations, this step is for consistency).
+3. **Reformat the day**: Convert the day into a two-digit format if necessary (e.g., ""1"" → ""01"", ""30"" → ""30"").
+4. **Reformat the year**: Extract the last two digits of the year (e.g., ""2002"" → ""02"", ""1953"" → ""53"").
+5. **Combine the components**: Join the",572,6
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime","**Rule: TimeRangeFromTimestamp**
+
+**Decomposition:**
+
+1. **Parse Timestamp:** Extract hours, minutes, and seconds from the input string.
+2. **Round to Nearest 30 Minutes:** Round the minutes to the nearest 0 or 30 (e.g., 12 → 00, 29 → 30).
+3. **Format as Time:** Convert the rounded hours and minutes into a 12-hour format with AM/PM.
+4. **Create Time Range:** Combine the start and end times into a range string (e.g., ""11:00AM-11:30AM"").
+
+**Combination:** The output is the combination of the start and end times formatted as a time range.",541,7
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime","**Rule:**  
+Split the time into hours and minutes. If the minutes are 0, output ""0:00-19:00"". If the minutes are between 1 and 59, output ""20:00-39:00"" if the time is between 20:00 and 39:00, else output ""40:00-59:00"". Combine the outputs by replacing the original time with the determined range.",296,2
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime","**Rule:**  
+Given a time in HH:MMAM/PM format, decompose into:  
+1. Extract hour and minute.  
+2. If minute < 15, subtract (minute - 0) from hour, add 15 minutes, and set the new start time.  
+3. If minute >= 15 and < 45, set start time to hour:15 and end time to hour:45.  
+4. If minute >= 45, add (60 - minute) to hour, set start time to (hour + 1):15 and end time to (hour + 1):45.  
+5. Combine start and end times into ""start-time-end-time"" format.",452,7
+DateTime.000094,DateTime,DateTime,"Parse the input date into components (year, month, day). If the date is in the format ""DD.MM.YYYY"" or ""DD. MMM YYYY"", extract the day, month, and year. If the date is in the format ""MMM DD YYYY"" or ""DD MMM YYYY"", extract the day, month, and year. Format the output as ""YYYY-MM-DD"".",281,1
+DateTime.000104,DateTime,DateTime,"Extract the month abbreviation from a date string.  
+Decompose into:  
+1. Split the input string on the hyphen to separate date and time parts.  
+2. Split the date part on the hyphen again to get day, month, and year.  
+3. Take the second element of the split result (the month) and return it as the output.",307,5
+DateTime.000108,DateTime,DateTime,"**Rule: Date Format Conversion**
+
+1. **Parse the input date string** into day, month, and year components.
+2. **Format the month as a single digit** (e.g., ""Jan"" → ""1"").
+3. **Format the day as a single digit** (e.g., ""14"" → ""14"").
+4. **Combine the formatted components** into the format: ""M/D/YYYY"".
+
+Output is the combination of the formatted month, day, and year.",365,6
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime","Rule: Extract the day and month from the date, calculate the day of the week, and then map the day of the week to a range based on the following: if the day of the week is Monday to Friday, output 30-45; if Saturday or Sunday, output 15-30. Recursively decompose by first parsing the date to get day and month, then determining the day of the week, and finally mapping to the range.",382,1
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime","Take the date and time string, extract the day of the month, format it as two digits, and combine with the first two digits of the year to form the output.",155,1
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime","**Rule:** Transform a datetime string into a simplified time range.  
+**Substeps:**  
+1. Extract the hour from the datetime string.  
+2. Convert the hour to a 12-hour format with AM/PM notation.  
+3. Add 2 hours to the extracted hour.  
+4. Convert the resulting hour to a 12-hour format with AM/PM notation.  
+5. Combine the two formatted times with a hyphen.",359,7
+FilePath.000001,FilePath,"Conditional,Substring","**Rule: Extract the filename part after the last slash and take the part before the last数字 (digit).**
+
+**Decomposition:**
+1. Split the input path by slashes to get the filename part (e.g., ""quas/enim5.png"" → ""enim5.png"").
+2. Split the filename by the last slash to get the numeric part (e.g., ""enim5.png"" → ""enim5"").
+3. Take the part before the last数字 in the filename (e.g., ""enim5"" → ""enim5"").
+4. Combine the results to form the output.",437,6
+Gender.000001,Gender,Conditional,"Rule: Convert a character to its position in the alphabet, where 'A' is 0 and 'M' is 12. For rows, if the character is unknown, return 0. If the character is unknown, return 0. If the character is unknown, return 0.",215,1
+Language.000002,Language,"Multicolumn,Substring","Extract the two-letter language code from the URL in col1.  
+1. Parse the URL in col1 to extract the domain suffix.  
+2. Map the domain suffix to the two-letter language code.  
+3. Combine the results to output the two-letter code.",231,4
+Number.000008,Number,Numeric,"Move the decimal point one place to the left. If no decimal point is present, assume it is at the end. For example, for ""19039.5"", move the decimal to get ""190.395"". Apply this rule recursively by repeating the step until the desired format is achieved. Combine the result of each step by applying the rule to the current value.",328,1
+Number.000016,Number,"Numeric,NumericRounding","Round to the nearest multiple of 5:  
+1. Take the input number.  
+2. Divide by 5, round to the nearest integer, then multiply by 5.  
+3. The result is the transformed number.",174,4
+Number.000022,Number,"Numeric,NumericRounding","Round to two decimal places, then round down to one decimal place if the second decimal is 5 or higher.  
+**Rule:**  
+1. Round the number to two decimal places.  
+2. If the second decimal is 5 or higher, round down to one decimal place.  
+3. Combine the results of steps 1 and 2 to produce the final output.",307,5
+Number.000049,Number,"Numeric,NumericRounding","Subtract the last two digits from the number and round up to the nearest hundred.  
+Rule: For a number, subtract the last two digits and round up to the nearest hundred.  
+Decomposition:  
+1. Take the number.  
+2. Extract the last two digits.  
+3. Subtract the last two digits from the number.  
+4. Round the result up to the nearest hundred.  
+Combine: The final result is the number after steps 3 and 4.",405,8
+Number.000075,Number,"Concatenation,Numeric","Round to the nearest hundred million (100M), then format as $X.YB.  
+Substeps:  
+1. Divide the number by 100,000,000.  
+2. Round the result to one decimal place.  
+3. Format as $X.YB, where X is the integer part and Y is the first decimal digit.",245,5
+Number.000077,Number,"Numeric,NumericRounding","Subtract 7 from the number.  
+Rule: For a given number, subtract 7 to get the output.",85,2
+Phone.000011,Phone,"Concatenation,Substring","Split the input into three parts separated by hyphens. For each part, ensure it is three digits. If a part has fewer than three digits, pad with leading zeros. Combine the three parts with spaces.",196,1
+ShippingCode.000008,ShippingCode,"Concatenation,Substring","Rule: Extract the second and sixth elements from the input list.  
+Substeps:  
+1. Split the input into elements based on spaces.  
+2. Take the element at index 1 (second element).  
+3. Take the element at index 5 (sixth element).  
+4. Combine the outputs of steps 2 and 3 with a space.",285,6
+UserAgent.000003,UserAgent,Substring,"**Rule:** Extract the component before ""OS"" in the input text.  
+**Decomposition:**  
+1. Split the input on ""OS"" to get two parts.  
+2. Take the part before ""OS"".  
+3. If the part before ""OS"" contains a slash (""/""), split on the slash and take the part after the slash.  
+4. Combine the result from step 3 as the output.",320,6

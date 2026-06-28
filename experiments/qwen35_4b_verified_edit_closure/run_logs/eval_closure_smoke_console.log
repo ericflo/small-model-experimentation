@@ -1,0 +1,79 @@
+closure:   0%|          | 0/5 [00:00<?, ?it/s]closure:  20%|██        | 1/5 [00:00<00:01,  2.04it/s]closure:  40%|████      | 2/5 [00:03<00:05,  1.93s/it]closure:  60%|██████    | 3/5 [00:05<00:04,  2.09s/it]closure:  80%|████████  | 4/5 [00:08<00:02,  2.47s/it]closure: 100%|██████████| 5/5 [00:11<00:00,  2.41s/it]closure: 100%|██████████| 5/5 [00:11<00:00,  2.21s/it]
+{
+  "by_family": {
+    "sum_length_mod_gate_label": {
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.2,
+        "records": 5,
+        "successes": 1
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.4,
+        "records": 5,
+        "successes": 2
+      },
+      "closure_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "closure_improved_hidden": {
+        "rate": 0.2,
+        "records": 5,
+        "successes": 1
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 0.2,
+        "records": 5,
+        "successes": 1
+      },
+      "closure_visible_all": {
+        "rate": 0.6,
+        "records": 5,
+        "successes": 3
+      }
+    }
+  },
+  "overall": {
+    "base_rerank_hidden_all": {
+      "rate": 0.0,
+      "records": 5,
+      "successes": 0
+    },
+    "base_rerank_visible_all": {
+      "rate": 0.2,
+      "records": 5,
+      "successes": 1
+    },
+    "closure_damaged_hidden": {
+      "rate": 0.4,
+      "records": 5,
+      "successes": 2
+    },
+    "closure_hidden_all": {
+      "rate": 0.0,
+      "records": 5,
+      "successes": 0
+    },
+    "closure_improved_hidden": {
+      "rate": 0.2,
+      "records": 5,
+      "successes": 1
+    },
+    "closure_oracle_hidden_all": {
+      "rate": 0.2,
+      "records": 5,
+      "successes": 1
+    },
+    "closure_visible_all": {
+      "rate": 0.6,
+      "records": 5,
+      "successes": 3
+    }
+  }
+}

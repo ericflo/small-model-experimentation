@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Sparse Slot Execution for Modular Belief Programs</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #182024;
+      background: #f5f7f8;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 24px 72px;
+      background: #fff;
+    }
+    h1, h2 {
+      color: #102028;
+      line-height: 1.15;
+    }
+    h1 {
+      margin: 0 0 24px;
+      font-size: 2.2rem;
+    }
+    h2 {
+      margin-top: 38px;
+      padding-top: 22px;
+      border-top: 1px solid #d8e0e4;
+      font-size: 1.35rem;
+    }
+    p {
+      max-width: 830px;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    pre {
+      overflow-x: auto;
+      background: #eef3f4;
+      padding: 14px 16px;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 24px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid #d4dee2;
+      padding: 8px 10px;
+      text-align: right;
+    }
+    th:first-child, td:first-child,
+    th:nth-child(2), td:nth-child(2),
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4) {
+      text-align: left;
+    }
+    th {
+      background: #eef3f4;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 20px 0 28px;
+      border: 1px solid #d4dee2;
+    }
+    .lead {
+      color: #33434a;
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Learning Sparse Slot Execution for Modular Belief Programs</h1>
+
+  <h2>Abstract</h2>
+  <p class="lead">This experiment tests whether a neural recurrent model can learn to use an explicit sparse slot memory for modular belief-state execution. Each example starts from a hidden relation over two registers, <code>B = A + d (mod p)</code>, then applies arithmetic updates and observation filters.</p>
+  <p>The experiment separates two learnability questions: learning to initialize the slot memory and learning to update slots recurrently. At modulus 11, a neural transition module with oracle slot initialization learns strong recurrent execution, reaching 97.1% query mass and 95.5% belief mass at held-out length 12. At modulus 31, the same transition learner reaches only 30.7% query mass and 12.3% belief mass at length 24. Learned initialization with exact transitions scales better at modulus 31, reaching 49.1% query mass and 36.5% belief mass at length 24, but remains far from the exact oracle ceiling.</p>
+
+  <h2>Task</h2>
+  <pre><code>B = A + d (mod p), with A unknown</code></pre>
+  <p>The initial belief has <code>p</code> possible <code>(A,B)</code> states. Programs contain arithmetic updates and observation filters. Observation residues are sampled from the current support, so the target belief is never empty. The final query asks for the distribution of <code>A</code>, <code>B</code>, <code>A+B mod p</code>, or <code>A-B mod p</code>.</p>
+
+  <h2>Model</h2>
+  <p>The model maintains <code>S</code> slots. Each slot has logits over <code>A</code>, logits over <code>B</code>, and a scalar slot-weight logit. The decoded pair belief is:</p>
+  <pre><code>P(A,B) = sum_s softmax(w)_s * P_s(A) * P_s(B)</code></pre>
+  <table>
+    <thead><tr><th>Axis</th><th>Choices</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>Initialization</td><td>oracle, learned</td><td>Oracle slots store the initial support; learned slots are produced by an MLP from <code>d</code> and a slot id.</td></tr>
+      <tr><td>Transition</td><td>exact, neural</td><td>Exact transitions apply the known update; neural transitions use an MLP conditioned on slot state, op, and argument.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Protocol</h2>
+  <table>
+    <thead><tr><th>Phase</th><th>Modulus</th><th>Main purpose</th><th>Evaluation lengths</th></tr></thead>
+    <tbody>
+      <tr><td>Smoke</td><td>7</td><td>Validate staged paths.</td><td>2, 3</td></tr>
+      <tr><td>Pilot</td><td>11</td><td>Compare initialization, transition, and end-to-end composition.</td><td>3, 6, 9, 12</td></tr>
+      <tr><td>Main</td><td>31</td><td>Test scale behavior of the strongest staged conditions.</td><td>4, 8, 12, 16, 24</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Pilot Results</h2>
+  <table>
+    <thead><tr><th>Variant</th><th>Init</th><th>Transition</th><th>Supervision</th><th>L=3 query</th><th>L=6 query</th><th>L=9 query</th><th>L=12 query</th><th>L=12 belief</th></tr></thead>
+    <tbody>
+      <tr><td>Learned init, exact transition</td><td>learned</td><td>exact</td><td>full belief</td><td>84.1%</td><td>75.3%</td><td>72.3%</td><td>70.2%</td><td>58.1%</td></tr>
+      <tr><td>Oracle init, neural transition</td><td>oracle</td><td>neural</td><td>full belief</td><td>98.4%</td><td>97.6%</td><td>97.2%</td><td>97.1%</td><td>95.5%</td></tr>
+      <tr><td>Learned init, neural transition</td><td>learned</td><td>neural</td><td>full belief</td><td>84.2%</td><td>72.4%</td><td>64.9%</td><td>57.8%</td><td>39.3%</td></tr>
+      <tr><td>Learned init, exact transition</td><td>learned</td><td>exact</td><td>final query</td><td>89.3%</td><td>82.7%</td><td>80.1%</td><td>78.9%</td><td>70.2%</td></tr>
+    </tbody>
+  </table>
+  <img src="../analysis/figures/pilot_mod11_decoder_query_mass_at_k_ge_l.png" alt="Pilot query mass">
+  <img src="../analysis/figures/pilot_mod11_decoder_belief_mass_at_k_ge_l.png" alt="Pilot belief mass">
+
+  <h2>Main Results</h2>
+  <table>
+    <thead><tr><th>Variant</th><th>Init</th><th>Transition</th><th>Supervision</th><th>L=4 query</th><th>L=8 query</th><th>L=12 query</th><th>L=16 query</th><th>L=24 query</th><th>L=24 belief</th></tr></thead>
+    <tbody>
+      <tr><td>Oracle exact ceiling</td><td>oracle</td><td>exact</td><td>full belief</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+      <tr><td>Oracle init, neural transition</td><td>oracle</td><td>neural</td><td>full belief</td><td>74.1%</td><td>60.3%</td><td>49.2%</td><td>41.2%</td><td>30.7%</td><td>12.3%</td></tr>
+      <tr><td>Learned init, exact transition</td><td>learned</td><td>exact</td><td>final query</td><td>84.8%</td><td>74.6%</td><td>66.4%</td><td>59.3%</td><td>49.1%</td><td>36.5%</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead><tr><th>Variant</th><th>L=4 belief</th><th>L=8 belief</th><th>L=12 belief</th><th>L=16 belief</th><th>L=24 belief</th></tr></thead>
+    <tbody>
+      <tr><td>Oracle exact ceiling</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+      <tr><td>Oracle init, neural transition</td><td>34.4%</td><td>27.5%</td><td>21.3%</td><td>17.2%</td><td>12.3%</td></tr>
+      <tr><td>Learned init, exact transition</td><td>60.0%</td><td>54.5%</td><td>49.0%</td><td>44.2%</td><td>36.5%</td></tr>
+    </tbody>
+  </table>
+  <img src="../analysis/figures/main_mod31_decoder_query_mass_at_k_ge_l.png" alt="Main query mass">
+  <img src="../analysis/figures/main_mod31_decoder_belief_mass_at_k_ge_l.png" alt="Main belief mass">
+  <img src="../analysis/figures/main_mod31_slot_purity_at_k_ge_l.png" alt="Main slot purity">
+
+  <h2>Interpretation</h2>
+  <p>The oracle exact ceiling proves that the slot representation can express the exact belief state. The learned models show that this state format is not automatically discovered at scale by generic MLP initializers and transitions.</p>
+  <p>The clearest positive result is local: at modulus 11, neural recurrent transitions are learnable when the initial support is already placed into slots. The main negative result is scale: the same transition parameterization fails to learn clean modular updates at modulus 31.</p>
+  <p>The learned initializer is more robust at modulus 31 than the neural transition, but it still learns an approximate support allocation rather than the exact one-slot-per-state machine.</p>
+
+  <h2>Limitations</h2>
+  <p>The neural transition is a generic MLP over expected slot embeddings and has no hard modular arithmetic inductive bias. The slot decoder also factorizes each slot as <code>P_s(A)P_s(B)</code>, which is appropriate only when slots become sharp.</p>
+  <p>The main runs do not include a full-budget end-to-end modulus-31 model because the pilot showed that end-to-end learning was weaker than both staged conditions, and the main staged transition itself failed to scale.</p>
+
+  <h2>Reproducibility</h2>
+  <p>Run outputs are in <code>experiments/learned_sparse_slot_executor/runs/</code>. Checkpoints are stored externally under <code>large_artifacts/learned_sparse_slot_executor/checkpoints/</code>.</p>
+  <pre><code>PYTHONDONTWRITEBYTECODE=1 python experiments/learned_sparse_slot_executor/src/analyze_learned_sparse_slot.py</code></pre>
+</main>
+</body>
+</html>

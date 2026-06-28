@@ -1,0 +1,151 @@
+{
+  "direct_sample_more": {
+    "summary": {
+      "candidate_count_mean": 11.5,
+      "coverage": 0.2916666666666667,
+      "distinct_behavior_rate_mean": 0.7263888888888889,
+      "distinct_functional_rate_mean": 0.2635416666666667,
+      "false_repair_count": 0,
+      "false_repair_rate": 0.0,
+      "forward_tokens": 72774,
+      "hidden_pass_candidates_mean": 0.5,
+      "parse_success_mean": 10.416666666666666,
+      "pass1_proxy": 0.041666666666666664,
+      "records": 24,
+      "visible_candidates_mean": 3.3333333333333335,
+      "visible_coverage": 0.2916666666666667,
+      "visible_repair_pass_count": 0,
+      "zero_base_records": 0,
+      "zero_to_one": 0,
+      "zero_to_one_rate": 0.0
+    },
+    "token_usage": {
+      "calls": 288,
+      "completion_tokens": 38648,
+      "forward_tokens": 74780,
+      "prompt_tokens": 36132
+    }
+  },
+  "experiment": "qwen35_4b_independent_retrieval_consensus",
+  "independent_pool": {
+    "candidate_count_mean": 5.625,
+    "coverage": 0.2916666666666667,
+    "hidden_correct_mean": 0.4166666666666667,
+    "records": 24,
+    "visible_hidden_wrong_count": 32,
+    "visible_hidden_wrong_rate": 0.7619047619047619,
+    "visible_pass_count": 42,
+    "visible_pass_mean": 1.75
+  },
+  "out": "data/consensus_selector_records.jsonl",
+  "probe_budget": 8,
+  "probe_pool": 64,
+  "records": 24,
+  "same_neighborhood_pool": {
+    "candidate_count_mean": 5.375,
+    "coverage": 0.375,
+    "hidden_correct_mean": 0.5833333333333334,
+    "records": 24,
+    "visible_hidden_wrong_count": 25,
+    "visible_hidden_wrong_rate": 0.6410256410256411,
+    "visible_pass_count": 39,
+    "visible_pass_mean": 1.625
+  },
+  "selectors": {
+    "consensus_independent_min2": {
+      "commit_count": 0,
+      "commit_rate": 0.0,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 0,
+      "selected_recovery_rate": 0.0,
+      "selected_visible_hidden_wrong": 0
+    },
+    "consensus_independent_min3": {
+      "commit_count": 0,
+      "commit_rate": 0.0,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 0,
+      "selected_recovery_rate": 0.0,
+      "selected_visible_hidden_wrong": 0
+    },
+    "consensus_same_min2": {
+      "commit_count": 5,
+      "commit_rate": 0.20833333333333334,
+      "records": 24,
+      "selected_false_pass_rate": 0.6,
+      "selected_hidden_correct": 2,
+      "selected_recovery_rate": 0.08333333333333333,
+      "selected_visible_hidden_wrong": 3
+    },
+    "consensus_same_min3": {
+      "commit_count": 2,
+      "commit_rate": 0.08333333333333333,
+      "records": 24,
+      "selected_false_pass_rate": 1.0,
+      "selected_hidden_correct": 0,
+      "selected_recovery_rate": 0.0,
+      "selected_visible_hidden_wrong": 2
+    },
+    "first_visible_independent": {
+      "commit_count": 14,
+      "commit_rate": 0.5833333333333334,
+      "records": 24,
+      "selected_false_pass_rate": 0.5714285714285714,
+      "selected_hidden_correct": 6,
+      "selected_recovery_rate": 0.25,
+      "selected_visible_hidden_wrong": 8
+    },
+    "first_visible_same": {
+      "commit_count": 15,
+      "commit_rate": 0.625,
+      "records": 24,
+      "selected_false_pass_rate": 0.5333333333333333,
+      "selected_hidden_correct": 7,
+      "selected_recovery_rate": 0.2916666666666667,
+      "selected_visible_hidden_wrong": 8
+    },
+    "oracle_independent": {
+      "commit_count": 7,
+      "commit_rate": 0.2916666666666667,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 7,
+      "selected_recovery_rate": 0.2916666666666667,
+      "selected_visible_hidden_wrong": 0
+    },
+    "oracle_same": {
+      "commit_count": 9,
+      "commit_rate": 0.375,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 9,
+      "selected_recovery_rate": 0.375,
+      "selected_visible_hidden_wrong": 0
+    },
+    "oracle_union": {
+      "commit_count": 9,
+      "commit_rate": 0.375,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 9,
+      "selected_recovery_rate": 0.375,
+      "selected_visible_hidden_wrong": 0
+    }
+  },
+  "token_usage": {
+    "independent": {
+      "calls": 144,
+      "completion_tokens": 17445,
+      "forward_tokens": 51282,
+      "prompt_tokens": 33837
+    },
+    "same_neighborhood": {
+      "calls": 144,
+      "completion_tokens": 17482,
+      "forward_tokens": 52001,
+      "prompt_tokens": 34519
+    }
+  }
+}

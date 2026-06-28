@@ -1,0 +1,25 @@
+task_id,family,features,method,candidate_id,source,row_exact,full_task_exact,outputs_json,candidate_tables,table_candidate_oracle,tournament_path
+City.000010,City,"Conditional,Numeric",direct_row_greedy,City.000010::cand0000,row_greedy,1.0,True,"[""9"", ""20"", ""0""]",9,True,
+City.000010,City,"Conditional,Numeric",table_oracle,City.000010::cand0000,row_greedy,1.0,True,"[""9"", ""20"", ""0""]",9,True,
+City.000010,City,"Conditional,Numeric",pairwise_tournament,City.000010::cand0000,row_greedy,1.0,True,"[""9"", ""20"", ""0""]",9,True,"[""City.000010::cand0000"", ""City.000010::cand0000"", ""City.000010::cand0000"", ""City.000010::cand0000""]"
+City.000010,City,"Conditional,Numeric",row_repair_diagnostic,City.000010::row_repair_diagnostic,row_repair_diagnostic,1.0,True,"[""9"", ""20"", ""0""]",9,True,
+DateTime.000025,DateTime,DateTime,direct_row_greedy,DateTime.000025::cand0000,row_greedy,1.0,True,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]",16,True,
+DateTime.000025,DateTime,DateTime,table_oracle,DateTime.000025::cand0000,row_greedy,1.0,True,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]",16,True,
+DateTime.000025,DateTime,DateTime,pairwise_tournament,DateTime.000025::cand0000,row_greedy,1.0,True,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]",16,True,"[""DateTime.000025::cand0000"", ""DateTime.000025::cand0000"", ""DateTime.000025::cand0000"", ""DateTime.000025::cand0000""]"
+DateTime.000025,DateTime,DateTime,row_repair_diagnostic,DateTime.000025::row_repair_diagnostic,row_repair_diagnostic,1.0,False,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]",16,True,
+DateTime.000104,DateTime,DateTime,direct_row_greedy,DateTime.000104::cand0000,row_greedy,1.0,True,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",9,True,
+DateTime.000104,DateTime,DateTime,table_oracle,DateTime.000104::cand0000,row_greedy,1.0,True,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",9,True,
+DateTime.000104,DateTime,DateTime,pairwise_tournament,DateTime.000104::cand0000,row_greedy,1.0,True,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",9,True,"[""DateTime.000104::cand0000"", ""DateTime.000104::cand0000"", ""DateTime.000104::cand0000"", ""DateTime.000104::cand0000""]"
+DateTime.000104,DateTime,DateTime,row_repair_diagnostic,DateTime.000104::row_repair_diagnostic,row_repair_diagnostic,1.0,False,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",9,True,
+Number.000075,Number,"Concatenation,Numeric",direct_row_greedy,Number.000075::cand0000,row_greedy,0.6666666666666666,False,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]",16,True,
+Number.000075,Number,"Concatenation,Numeric",table_oracle,Number.000075::cand0003,batch_plain,1.0,True,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]",16,True,
+Number.000075,Number,"Concatenation,Numeric",pairwise_tournament,Number.000075::cand0000,row_greedy,0.6666666666666666,False,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]",16,True,"[""Number.000075::cand0000"", ""Number.000075::cand0000"", ""Number.000075::cand0000"", ""Number.000075::cand0000""]"
+Number.000075,Number,"Concatenation,Numeric",row_repair_diagnostic,Number.000075::row_repair_diagnostic,row_repair_diagnostic,0.5,False,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]",16,True,
+Number.000077,Number,"Numeric,NumericRounding",direct_row_greedy,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"[""110"", ""11000"", ""540""]",26,True,
+Number.000077,Number,"Numeric,NumericRounding",table_oracle,Number.000077::cand0023,row_combo,1.0,True,"[""11110"", ""11110"", ""540""]",26,True,
+Number.000077,Number,"Numeric,NumericRounding",pairwise_tournament,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"[""110"", ""11000"", ""540""]",26,True,"[""Number.000077::cand0000"", ""Number.000077::cand0000"", ""Number.000077::cand0000"", ""Number.000077::cand0000""]"
+Number.000077,Number,"Numeric,NumericRounding",row_repair_diagnostic,Number.000077::row_repair_diagnostic,row_repair_diagnostic,0.3333333333333333,False,"[""110"", ""11000"", ""540""]",26,True,
+UserAgent.000003,UserAgent,Substring,direct_row_greedy,UserAgent.000003::cand0000,row_greedy,1.0,True,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]",9,True,
+UserAgent.000003,UserAgent,Substring,table_oracle,UserAgent.000003::cand0000,row_greedy,1.0,True,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]",9,True,
+UserAgent.000003,UserAgent,Substring,pairwise_tournament,UserAgent.000003::cand0000,row_greedy,1.0,True,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]",9,True,"[""UserAgent.000003::cand0000"", ""UserAgent.000003::cand0000"", ""UserAgent.000003::cand0000"", ""UserAgent.000003::cand0000""]"
+UserAgent.000003,UserAgent,Substring,row_repair_diagnostic,UserAgent.000003::row_repair_diagnostic,row_repair_diagnostic,1.0,False,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]",9,True,

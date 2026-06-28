@@ -1,0 +1,281 @@
+method,split,support_mode,task_id,family,rule_name,counterfactual_rule,query_index,input,target,prediction,exact
+base,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,7833,True
+base,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,1937,True
+base,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,,False
+base,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,,False
+base,synthetic_counterfactual,normal,cf_0001_number_times_2,number,number_times_2,number_last2,0,EMBER 5092,10184,,False
+base,synthetic_counterfactual,normal,cf_0001_number_times_2,number,number_times_2,number_last2,1,LAMBDA 5782,11564,,False
+base,synthetic_counterfactual,normal,cf_0001_number_last2,number,number_last2,number_times_2,0,EMBER 5092,92,,False
+base,synthetic_counterfactual,normal,cf_0001_number_last2,number,number_last2,number_times_2,1,LAMBDA 5782,82,,False
+base,synthetic_counterfactual,normal,cf_0002_number_last2,number,number_last2,number_plus_1,0,EMBER 7474,74,47,False
+base,synthetic_counterfactual,normal,cf_0002_number_last2,number,number_last2,number_plus_1,1,COBALT 6364,64,64 The text transformation involves taking the last two digits of the numerical part after the word.,False
+base,synthetic_counterfactual,normal,cf_0002_number_plus_1,number,number_plus_1,number_last2,0,EMBER 7474,7475,7475,True
+base,synthetic_counterfactual,normal,cf_0002_number_plus_1,number,number_plus_1,number_last2,1,COBALT 6364,6365,6365 The examples show that the transformation involves incrementing the number part by 1. For instance,False
+base,synthetic_counterfactual,normal,cf_0003_initials,words,initials,second_word,0,Fatma Yilmaz Ember,FYE,,False
+base,synthetic_counterfactual,normal,cf_0003_initials,words,initials,second_word,1,Akila Kadija Ivory,AKI,,False
+base,synthetic_counterfactual,normal,cf_0003_second_word,words,second_word,initials,0,Fatma Yilmaz Ember,Yilmaz,Yilmaz The task is to extract the middle name from a given input string. The input string consists of three,False
+base,synthetic_counterfactual,normal,cf_0003_second_word,words,second_word,initials,1,Akila Kadija Ivory,Kadija,Kadija,True
+base,synthetic_counterfactual,normal,cf_0004_number_last2,number,number_last2,number_plus_1,0,MATRIX 4490,90,,False
+base,synthetic_counterfactual,normal,cf_0004_number_last2,number,number_last2,number_plus_1,1,EMBER 5346,46,46,True
+base,synthetic_counterfactual,normal,cf_0004_number_plus_1,number,number_plus_1,number_last2,0,MATRIX 4490,4491,,False
+base,synthetic_counterfactual,normal,cf_0004_number_plus_1,number,number_plus_1,number_last2,1,EMBER 5346,5347,,False
+base,synthetic_counterfactual,normal,cf_0005_first_three,span,first_three,last_three,0,harborgranite,har,har,True
+base,synthetic_counterfactual,normal,cf_0005_first_three,span,first_three,last_three,1,ivoryivory,ivo,iv,False
+base,synthetic_counterfactual,normal,cf_0005_last_three,span,last_three,first_three,0,harborgranite,ite,,False
+base,synthetic_counterfactual,normal,cf_0005_last_three,span,last_three,first_three,1,ivoryivory,ory,ry,False
+base,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,0,binary.ember32@mail.test,mail.test,mail.test,True
+base,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,1,prairie.prairie73@example.com,example.com,example.com,True
+base,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,0,binary.ember32@mail.test,binary.ember32,binary.ember32,True
+base,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,1,prairie.prairie73@example.com,prairie.prairie73,prairie.prairie73,True
+base,synthetic_counterfactual,normal,cf_0007_last_word,words,last_word,first_word,0,Sonia Rees Kernel,Kernel,Kernel,True
+base,synthetic_counterfactual,normal,cf_0007_last_word,words,last_word,first_word,1,Aysu Polat Harbor,Harbor,Harbor The text transformation involves extracting the last word from each input string.,False
+base,synthetic_counterfactual,normal,cf_0007_first_word,words,first_word,last_word,0,Sonia Rees Kernel,Sonia,"Sonia The text transformation involves extracting the first name from a three-part name. The first part is the given name,",False
+base,synthetic_counterfactual,normal,cf_0007_first_word,words,first_word,last_word,1,Aysu Polat Harbor,Aysu,Aysu The task is to extract the first name from a given input string. The input string consists of three,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,,False
+base,synthetic_counterfactual,shuffled,cf_0001_number_times_2,number,number_times_2,number_last2,0,EMBER 5092,10184,,False
+base,synthetic_counterfactual,shuffled,cf_0001_number_times_2,number,number_times_2,number_last2,1,LAMBDA 5782,11564,,False
+base,synthetic_counterfactual,shuffled,cf_0001_number_last2,number,number_last2,number_times_2,0,EMBER 5092,92,,False
+base,synthetic_counterfactual,shuffled,cf_0001_number_last2,number,number_last2,number_times_2,1,LAMBDA 5782,82,,False
+base,synthetic_counterfactual,shuffled,cf_0002_number_last2,number,number_last2,number_plus_1,0,EMBER 7474,74,,False
+base,synthetic_counterfactual,shuffled,cf_0002_number_last2,number,number_last2,number_plus_1,1,COBALT 6364,64,,False
+base,synthetic_counterfactual,shuffled,cf_0002_number_plus_1,number,number_plus_1,number_last2,0,EMBER 7474,7475,,False
+base,synthetic_counterfactual,shuffled,cf_0002_number_plus_1,number,number_plus_1,number_last2,1,COBALT 6364,6365,,False
+base,synthetic_counterfactual,shuffled,cf_0003_initials,words,initials,second_word,0,Fatma Yilmaz Ember,FYE,,False
+base,synthetic_counterfactual,shuffled,cf_0003_initials,words,initials,second_word,1,Akila Kadija Ivory,AKI,,False
+base,synthetic_counterfactual,shuffled,cf_0003_second_word,words,second_word,initials,0,Fatma Yilmaz Ember,Yilmaz,Yilmaz,True
+base,synthetic_counterfactual,shuffled,cf_0003_second_word,words,second_word,initials,1,Akila Kadija Ivory,Kadija,,False
+base,synthetic_counterfactual,shuffled,cf_0004_number_last2,number,number_last2,number_plus_1,0,MATRIX 4490,90,,False
+base,synthetic_counterfactual,shuffled,cf_0004_number_last2,number,number_last2,number_plus_1,1,EMBER 5346,46,,False
+base,synthetic_counterfactual,shuffled,cf_0004_number_plus_1,number,number_plus_1,number_last2,0,MATRIX 4490,4491,,False
+base,synthetic_counterfactual,shuffled,cf_0004_number_plus_1,number,number_plus_1,number_last2,1,EMBER 5346,5347,,False
+base,synthetic_counterfactual,shuffled,cf_0005_first_three,span,first_three,last_three,0,harborgranite,har,,False
+base,synthetic_counterfactual,shuffled,cf_0005_first_three,span,first_three,last_three,1,ivoryivory,ivo,iv,False
+base,synthetic_counterfactual,shuffled,cf_0005_last_three,span,last_three,first_three,0,harborgranite,ite,,False
+base,synthetic_counterfactual,shuffled,cf_0005_last_three,span,last_three,first_three,1,ivoryivory,ory,,False
+base,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,0,binary.ember32@mail.test,mail.test,mail.test,True
+base,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,1,prairie.prairie73@example.com,example.com,example.com,True
+base,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,0,binary.ember32@mail.test,binary.ember32,binary.ember32,True
+base,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,1,prairie.prairie73@example.com,prairie.prairie73,prairie.prairie73,True
+base,synthetic_counterfactual,shuffled,cf_0007_last_word,words,last_word,first_word,0,Sonia Rees Kernel,Kernel,,False
+base,synthetic_counterfactual,shuffled,cf_0007_last_word,words,last_word,first_word,1,Aysu Polat Harbor,Harbor,,False
+base,synthetic_counterfactual,shuffled,cf_0007_first_word,words,first_word,last_word,0,Sonia Rees Kernel,Sonia,,False
+base,synthetic_counterfactual,shuffled,cf_0007_first_word,words,first_word,last_word,1,Aysu Polat Harbor,Aysu,,False
+base,public_prose,normal,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,878-6628,True
+base,public_prose,normal,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,467-8177,True
+base,public_prose,normal,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,887-7925,True
+base,public_prose,normal,Name.000008,Name,public,"Concatenation,Substring",0,Antonia A. Guachiac,A G,A A,False
+base,public_prose,normal,Name.000008,Name,public,"Concatenation,Substring",1,Nikolajs Serdar Pirc,N P,,False
+base,public_prose,normal,Name.000008,Name,public,"Concatenation,Substring",2,Jaap H. Kleefstra,J K,J K The task is to take the first letter of the first name and the first letter of the last name.,False
+base,public_prose,normal,Name.000037,Name,public,"Conditional,Substring",0,"Dr. Christophe Beaulieu, Sr.",Sr.,Sr.,True
+base,public_prose,normal,Name.000037,Name,public,"Conditional,Substring",1,Marcela Kubatova,NULL,,False
+base,public_prose,normal,Name.000037,Name,public,"Conditional,Substring",2,Mr. Hadar Caspit,NULL,Mr.,False
+base,public_prose,normal,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",0,93,90-99,90-99,True
+base,public_prose,normal,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",1,6,0-9,60-69,False
+base,public_prose,normal,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",2,199,190-209,190-199,False
+base,public_prose,normal,DateTime.000030,DateTime,public,DateTime,0,03302241,"Tuesday, March 30, 2241",,False
+base,public_prose,normal,DateTime.000030,DateTime,public,DateTime,1,02-Aug-2160,"Saturday, August 2, 2160",,False
+base,public_prose,normal,DateTime.000030,DateTime,public,DateTime,2,23 May 1984,"Wednesday, May 23, 1984","Wednesday, May 23, 1984",True
+base,public_prose,normal,DateTime.000009,DateTime,public,DateTime,0,2024-03-31T04:15:08Z,31,31 The task is to extract the day from the date in the format YYYY-MM-DDTHH:MM,False
+base,public_prose,normal,DateTime.000009,DateTime,public,DateTime,1,2008-02-13T11:48:20Z,13,13 The task is to extract the day from the date string. The examples show that the output is the,False
+base,public_prose,normal,DateTime.000009,DateTime,public,DateTime,2,1972-11-17T10:24:59Z,17,17 The examples show that the task is to extract the day part from the date in the format YYYY-MM,False
+base,public_prose,normal,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:00PM-4:29PM,4:15PM-4:29PM,False
+base,public_prose,normal,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:30PM-11:59PM,11:30PM-11:59PM,True
+base,public_prose,normal,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:00PM-10:29PM,10:20PM-10:59PM,False
+base,public_prose,normal,Name.000025,Name,public,"Casing,Concatenation,Substring",0,Cecep Sutresna,c s,,False
+base,public_prose,normal,Name.000025,Name,public,"Casing,Concatenation,Substring",1,Milica Zujovic,m z,"m z The task is to take the first letter of each name and convert it to lowercase. So for ""H",False
+base,public_prose,normal,Name.000025,Name,public,"Casing,Concatenation,Substring",2,Radmilo Bogic,r b,,False
+base,public_prose,shuffled,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,,False
+base,public_prose,shuffled,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,,False
+base,public_prose,shuffled,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,,False
+base,public_prose,shuffled,Name.000008,Name,public,"Concatenation,Substring",0,Antonia A. Guachiac,A G,,False
+base,public_prose,shuffled,Name.000008,Name,public,"Concatenation,Substring",1,Nikolajs Serdar Pirc,N P,,False
+base,public_prose,shuffled,Name.000008,Name,public,"Concatenation,Substring",2,Jaap H. Kleefstra,J K,,False
+base,public_prose,shuffled,Name.000037,Name,public,"Conditional,Substring",0,"Dr. Christophe Beaulieu, Sr.",Sr.,Sr.,True
+base,public_prose,shuffled,Name.000037,Name,public,"Conditional,Substring",1,Marcela Kubatova,NULL,,False
+base,public_prose,shuffled,Name.000037,Name,public,"Conditional,Substring",2,Mr. Hadar Caspit,NULL,Mr.,False
+base,public_prose,shuffled,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",0,93,90-99,,False
+base,public_prose,shuffled,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",1,6,0-9,,False
+base,public_prose,shuffled,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",2,199,190-209,200-209,False
+base,public_prose,shuffled,DateTime.000030,DateTime,public,DateTime,0,03302241,"Tuesday, March 30, 2241",,False
+base,public_prose,shuffled,DateTime.000030,DateTime,public,DateTime,1,02-Aug-2160,"Saturday, August 2, 2160",,False
+base,public_prose,shuffled,DateTime.000030,DateTime,public,DateTime,2,23 May 1984,"Wednesday, May 23, 1984",,False
+base,public_prose,shuffled,DateTime.000009,DateTime,public,DateTime,0,2024-03-31T04:15:08Z,31,,False
+base,public_prose,shuffled,DateTime.000009,DateTime,public,DateTime,1,2008-02-13T11:48:20Z,13,,False
+base,public_prose,shuffled,DateTime.000009,DateTime,public,DateTime,2,1972-11-17T10:24:59Z,17,,False
+base,public_prose,shuffled,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:00PM-4:29PM,,False
+base,public_prose,shuffled,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:30PM-11:59PM,,False
+base,public_prose,shuffled,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:00PM-10:29PM,,False
+base,public_prose,shuffled,Name.000025,Name,public,"Casing,Concatenation,Substring",0,Cecep Sutresna,c s,,False
+base,public_prose,shuffled,Name.000025,Name,public,"Casing,Concatenation,Substring",1,Milica Zujovic,m z,,False
+base,public_prose,shuffled,Name.000025,Name,public,"Casing,Concatenation,Substring",2,Radmilo Bogic,r b,,False
+adapter,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,7833,True
+adapter,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,1937,True
+adapter,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,15664,True
+adapter,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,3872,True
+adapter,synthetic_counterfactual,normal,cf_0001_number_times_2,number,number_times_2,number_last2,0,EMBER 5092,10184,10184,True
+adapter,synthetic_counterfactual,normal,cf_0001_number_times_2,number,number_times_2,number_last2,1,LAMBDA 5782,11564,11564,True
+adapter,synthetic_counterfactual,normal,cf_0001_number_last2,number,number_last2,number_times_2,0,EMBER 5092,92,92,True
+adapter,synthetic_counterfactual,normal,cf_0001_number_last2,number,number_last2,number_times_2,1,LAMBDA 5782,82,82,True
+adapter,synthetic_counterfactual,normal,cf_0002_number_last2,number,number_last2,number_plus_1,0,EMBER 7474,74,74,True
+adapter,synthetic_counterfactual,normal,cf_0002_number_last2,number,number_last2,number_plus_1,1,COBALT 6364,64,64,True
+adapter,synthetic_counterfactual,normal,cf_0002_number_plus_1,number,number_plus_1,number_last2,0,EMBER 7474,7475,7475,True
+adapter,synthetic_counterfactual,normal,cf_0002_number_plus_1,number,number_plus_1,number_last2,1,COBALT 6364,6365,6365,True
+adapter,synthetic_counterfactual,normal,cf_0003_initials,words,initials,second_word,0,Fatma Yilmaz Ember,FYE,FYE,True
+adapter,synthetic_counterfactual,normal,cf_0003_initials,words,initials,second_word,1,Akila Kadija Ivory,AKI,AKI,True
+adapter,synthetic_counterfactual,normal,cf_0003_second_word,words,second_word,initials,0,Fatma Yilmaz Ember,Yilmaz,Yilmaz,True
+adapter,synthetic_counterfactual,normal,cf_0003_second_word,words,second_word,initials,1,Akila Kadija Ivory,Kadija,Kadija,True
+adapter,synthetic_counterfactual,normal,cf_0004_number_last2,number,number_last2,number_plus_1,0,MATRIX 4490,90,90,True
+adapter,synthetic_counterfactual,normal,cf_0004_number_last2,number,number_last2,number_plus_1,1,EMBER 5346,46,46,True
+adapter,synthetic_counterfactual,normal,cf_0004_number_plus_1,number,number_plus_1,number_last2,0,MATRIX 4490,4491,4491,True
+adapter,synthetic_counterfactual,normal,cf_0004_number_plus_1,number,number_plus_1,number_last2,1,EMBER 5346,5347,5347,True
+adapter,synthetic_counterfactual,normal,cf_0005_first_three,span,first_three,last_three,0,harborgranite,har,har,True
+adapter,synthetic_counterfactual,normal,cf_0005_first_three,span,first_three,last_three,1,ivoryivory,ivo,ivo,True
+adapter,synthetic_counterfactual,normal,cf_0005_last_three,span,last_three,first_three,0,harborgranite,ite,ite,True
+adapter,synthetic_counterfactual,normal,cf_0005_last_three,span,last_three,first_three,1,ivoryivory,ory,ry,False
+adapter,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,0,binary.ember32@mail.test,mail.test,mail.test,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,1,prairie.prairie73@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,0,binary.ember32@mail.test,binary.ember32,binary.ember32,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,1,prairie.prairie73@example.com,prairie.prairie73,prairie.prairie73,True
+adapter,synthetic_counterfactual,normal,cf_0007_last_word,words,last_word,first_word,0,Sonia Rees Kernel,Kernel,Kernel,True
+adapter,synthetic_counterfactual,normal,cf_0007_last_word,words,last_word,first_word,1,Aysu Polat Harbor,Harbor,Harbor,True
+adapter,synthetic_counterfactual,normal,cf_0007_first_word,words,first_word,last_word,0,Sonia Rees Kernel,Sonia,Sonia,True
+adapter,synthetic_counterfactual,normal,cf_0007_first_word,words,first_word,last_word,1,Aysu Polat Harbor,Aysu,Aysu,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,1905,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,1937,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,11748,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,2648,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_number_times_2,number,number_times_2,number_last2,0,EMBER 5092,10184,3055,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_number_times_2,number,number_times_2,number_last2,1,LAMBDA 5782,11564,3469,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_number_last2,number,number_last2,number_times_2,0,EMBER 5092,92,12,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_number_last2,number,number_last2,number_times_2,1,LAMBDA 5782,82,82,True
+adapter,synthetic_counterfactual,shuffled,cf_0002_number_last2,number,number_last2,number_plus_1,0,EMBER 7474,74,17,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_number_last2,number,number_last2,number_plus_1,1,COBALT 6364,64,16,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_number_plus_1,number,number_plus_1,number_last2,0,EMBER 7474,7475,7475,True
+adapter,synthetic_counterfactual,shuffled,cf_0002_number_plus_1,number,number_plus_1,number_last2,1,COBALT 6364,6365,6365,True
+adapter,synthetic_counterfactual,shuffled,cf_0003_initials,words,initials,second_word,0,Fatma Yilmaz Ember,FYE,FYE,True
+adapter,synthetic_counterfactual,shuffled,cf_0003_initials,words,initials,second_word,1,Akila Kadija Ivory,AKI,AKI,True
+adapter,synthetic_counterfactual,shuffled,cf_0003_second_word,words,second_word,initials,0,Fatma Yilmaz Ember,Yilmaz,Yilmaz,True
+adapter,synthetic_counterfactual,shuffled,cf_0003_second_word,words,second_word,initials,1,Akila Kadija Ivory,Kadija,Kadija,True
+adapter,synthetic_counterfactual,shuffled,cf_0004_number_last2,number,number_last2,number_plus_1,0,MATRIX 4490,90,90,True
+adapter,synthetic_counterfactual,shuffled,cf_0004_number_last2,number,number_last2,number_plus_1,1,EMBER 5346,46,46,True
+adapter,synthetic_counterfactual,shuffled,cf_0004_number_plus_1,number,number_plus_1,number_last2,0,MATRIX 4490,4491,1351,False
+adapter,synthetic_counterfactual,shuffled,cf_0004_number_plus_1,number,number_plus_1,number_last2,1,EMBER 5346,5347,8649,False
+adapter,synthetic_counterfactual,shuffled,cf_0005_first_three,span,first_three,last_three,0,harborgranite,har,har,True
+adapter,synthetic_counterfactual,shuffled,cf_0005_first_three,span,first_three,last_three,1,ivoryivory,ivo,ivo,True
+adapter,synthetic_counterfactual,shuffled,cf_0005_last_three,span,last_three,first_three,0,harborgranite,ite,ite,True
+adapter,synthetic_counterfactual,shuffled,cf_0005_last_three,span,last_three,first_three,1,ivoryivory,ory,yvi,False
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,0,binary.ember32@mail.test,mail.test,test,False
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,1,prairie.prairie73@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,0,binary.ember32@mail.test,binary.ember32,binary.ember32,True
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,1,prairie.prairie73@example.com,prairie.prairie73,prairie.prairie7,False
+adapter,synthetic_counterfactual,shuffled,cf_0007_last_word,words,last_word,first_word,0,Sonia Rees Kernel,Kernel,Kernel,True
+adapter,synthetic_counterfactual,shuffled,cf_0007_last_word,words,last_word,first_word,1,Aysu Polat Harbor,Harbor,Harbor,True
+adapter,synthetic_counterfactual,shuffled,cf_0007_first_word,words,first_word,last_word,0,Sonia Rees Kernel,Sonia,Sonia,True
+adapter,synthetic_counterfactual,shuffled,cf_0007_first_word,words,first_word,last_word,1,Aysu Polat Harbor,Aysu,Aysu,True
+adapter,synthetic_counterfactual,none,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,7832,False
+adapter,synthetic_counterfactual,none,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,1936,False
+adapter,synthetic_counterfactual,none,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,7832,False
+adapter,synthetic_counterfactual,none,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,1936,False
+adapter,synthetic_counterfactual,none,cf_0001_number_times_2,number,number_times_2,number_last2,0,EMBER 5092,10184,5092,False
+adapter,synthetic_counterfactual,none,cf_0001_number_times_2,number,number_times_2,number_last2,1,LAMBDA 5782,11564,ЛАМБДА,False
+adapter,synthetic_counterfactual,none,cf_0001_number_last2,number,number_last2,number_times_2,0,EMBER 5092,92,5092,False
+adapter,synthetic_counterfactual,none,cf_0001_number_last2,number,number_last2,number_times_2,1,LAMBDA 5782,82,ЛАМБДА,False
+adapter,synthetic_counterfactual,none,cf_0002_number_last2,number,number_last2,number_plus_1,0,EMBER 7474,74,7474,False
+adapter,synthetic_counterfactual,none,cf_0002_number_last2,number,number_last2,number_plus_1,1,COBALT 6364,64,6364,False
+adapter,synthetic_counterfactual,none,cf_0002_number_plus_1,number,number_plus_1,number_last2,0,EMBER 7474,7475,7474,False
+adapter,synthetic_counterfactual,none,cf_0002_number_plus_1,number,number_plus_1,number_last2,1,COBALT 6364,6365,6364,False
+adapter,synthetic_counterfactual,none,cf_0003_initials,words,initials,second_word,0,Fatma Yilmaz Ember,FYE,伊玛·叶尔马兹·埃默,False
+adapter,synthetic_counterfactual,none,cf_0003_initials,words,initials,second_word,1,Akila Kadija Ivory,AKI,乌克西拉·卡迪雅,False
+adapter,synthetic_counterfactual,none,cf_0003_second_word,words,second_word,initials,0,Fatma Yilmaz Ember,Yilmaz,伊玛·叶尔马兹·埃默,False
+adapter,synthetic_counterfactual,none,cf_0003_second_word,words,second_word,initials,1,Akila Kadija Ivory,Kadija,乌克西拉·卡迪雅,False
+adapter,synthetic_counterfactual,none,cf_0004_number_last2,number,number_last2,number_plus_1,0,MATRIX 4490,90,4490,False
+adapter,synthetic_counterfactual,none,cf_0004_number_last2,number,number_last2,number_plus_1,1,EMBER 5346,46,5346,False
+adapter,synthetic_counterfactual,none,cf_0004_number_plus_1,number,number_plus_1,number_last2,0,MATRIX 4490,4491,4490,False
+adapter,synthetic_counterfactual,none,cf_0004_number_plus_1,number,number_plus_1,number_last2,1,EMBER 5346,5347,5346,False
+adapter,synthetic_counterfactual,none,cf_0005_first_three,span,first_three,last_three,0,harborgranite,har,珊瑚石,False
+adapter,synthetic_counterfactual,none,cf_0005_first_three,span,first_three,last_three,1,ivoryivory,ivo,ivory,False
+adapter,synthetic_counterfactual,none,cf_0005_last_three,span,last_three,first_three,0,harborgranite,ite,珊瑚石,False
+adapter,synthetic_counterfactual,none,cf_0005_last_three,span,last_three,first_three,1,ivoryivory,ory,ivory,False
+adapter,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,0,binary.ember32@mail.test,mail.test,binary.ember32@mail.test,False
+adapter,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,1,prairie.prairie73@example.com,example.com,prairie73,False
+adapter,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,0,binary.ember32@mail.test,binary.ember32,binary.ember32@mail.test,False
+adapter,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,1,prairie.prairie73@example.com,prairie.prairie73,prairie73,False
+adapter,synthetic_counterfactual,none,cf_0007_last_word,words,last_word,first_word,0,Sonia Rees Kernel,Kernel,莎拉·里兹·肯纳,False
+adapter,synthetic_counterfactual,none,cf_0007_last_word,words,last_word,first_word,1,Aysu Polat Harbor,Harbor,Айсу Полат Харбор,False
+adapter,synthetic_counterfactual,none,cf_0007_first_word,words,first_word,last_word,0,Sonia Rees Kernel,Sonia,莎拉·里兹·肯纳,False
+adapter,synthetic_counterfactual,none,cf_0007_first_word,words,first_word,last_word,1,Aysu Polat Harbor,Aysu,Айсу Полат Харбор,False
+adapter,public_prose,normal,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,878-6628,True
+adapter,public_prose,normal,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,467-8177,True
+adapter,public_prose,normal,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,887-7925,True
+adapter,public_prose,normal,Name.000008,Name,public,"Concatenation,Substring",0,Antonia A. Guachiac,A G,A G,True
+adapter,public_prose,normal,Name.000008,Name,public,"Concatenation,Substring",1,Nikolajs Serdar Pirc,N P,N S,False
+adapter,public_prose,normal,Name.000008,Name,public,"Concatenation,Substring",2,Jaap H. Kleefstra,J K,J K,True
+adapter,public_prose,normal,Name.000037,Name,public,"Conditional,Substring",0,"Dr. Christophe Beaulieu, Sr.",Sr.,Sr,False
+adapter,public_prose,normal,Name.000037,Name,public,"Conditional,Substring",1,Marcela Kubatova,NULL,,False
+adapter,public_prose,normal,Name.000037,Name,public,"Conditional,Substring",2,Mr. Hadar Caspit,NULL,Mr,False
+adapter,public_prose,normal,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",0,93,90-99,90-99,True
+adapter,public_prose,normal,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",1,6,0-9,0-9,True
+adapter,public_prose,normal,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",2,199,190-209,200-209,False
+adapter,public_prose,normal,DateTime.000030,DateTime,public,DateTime,0,03302241,"Tuesday, March 30, 2241","Monday, March 30, 2241",False
+adapter,public_prose,normal,DateTime.000030,DateTime,public,DateTime,1,02-Aug-2160,"Saturday, August 2, 2160","Monday, August 2, 2160",False
+adapter,public_prose,normal,DateTime.000030,DateTime,public,DateTime,2,23 May 1984,"Wednesday, May 23, 1984","Monday, May 23, 1984",False
+adapter,public_prose,normal,DateTime.000009,DateTime,public,DateTime,0,2024-03-31T04:15:08Z,31,31,True
+adapter,public_prose,normal,DateTime.000009,DateTime,public,DateTime,1,2008-02-13T11:48:20Z,13,13,True
+adapter,public_prose,normal,DateTime.000009,DateTime,public,DateTime,2,1972-11-17T10:24:59Z,17,17,True
+adapter,public_prose,normal,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:00PM-4:29PM,4:00PM-4:29PM,True
+adapter,public_prose,normal,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:30PM-11:59PM,11:45PM-12:00AM,False
+adapter,public_prose,normal,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:00PM-10:29PM,10:20PM-10:49PM,False
+adapter,public_prose,normal,Name.000025,Name,public,"Casing,Concatenation,Substring",0,Cecep Sutresna,c s,c s,True
+adapter,public_prose,normal,Name.000025,Name,public,"Casing,Concatenation,Substring",1,Milica Zujovic,m z,m z,True
+adapter,public_prose,normal,Name.000025,Name,public,"Casing,Concatenation,Substring",2,Radmilo Bogic,r b,r b,True
+adapter,public_prose,shuffled,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,712-9734,False
+adapter,public_prose,shuffled,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,712-9734,False
+adapter,public_prose,shuffled,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,887-7925,True
+adapter,public_prose,shuffled,Name.000008,Name,public,"Concatenation,Substring",0,Antonia A. Guachiac,A G,A A,False
+adapter,public_prose,shuffled,Name.000008,Name,public,"Concatenation,Substring",1,Nikolajs Serdar Pirc,N P,N S,False
+adapter,public_prose,shuffled,Name.000008,Name,public,"Concatenation,Substring",2,Jaap H. Kleefstra,J K,J H,False
+adapter,public_prose,shuffled,Name.000037,Name,public,"Conditional,Substring",0,"Dr. Christophe Beaulieu, Sr.",Sr.,Sr.,True
+adapter,public_prose,shuffled,Name.000037,Name,public,"Conditional,Substring",1,Marcela Kubatova,NULL,II,False
+adapter,public_prose,shuffled,Name.000037,Name,public,"Conditional,Substring",2,Mr. Hadar Caspit,NULL,Jr.,False
+adapter,public_prose,shuffled,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",0,93,90-99,90-99,True
+adapter,public_prose,shuffled,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",1,6,0-9,10-19,False
+adapter,public_prose,shuffled,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",2,199,190-209,200-209,False
+adapter,public_prose,shuffled,DateTime.000030,DateTime,public,DateTime,0,03302241,"Tuesday, March 30, 2241","Monday, March 30, 2241",False
+adapter,public_prose,shuffled,DateTime.000030,DateTime,public,DateTime,1,02-Aug-2160,"Saturday, August 2, 2160","Monday, August 2, 2160",False
+adapter,public_prose,shuffled,DateTime.000030,DateTime,public,DateTime,2,23 May 1984,"Wednesday, May 23, 1984","Monday, June 16, 2144",False
+adapter,public_prose,shuffled,DateTime.000009,DateTime,public,DateTime,0,2024-03-31T04:15:08Z,31,31,True
+adapter,public_prose,shuffled,DateTime.000009,DateTime,public,DateTime,1,2008-02-13T11:48:20Z,13,13,True
+adapter,public_prose,shuffled,DateTime.000009,DateTime,public,DateTime,2,1972-11-17T10:24:59Z,17,17,True
+adapter,public_prose,shuffled,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:00PM-4:29PM,4:00PM-4:29PM,True
+adapter,public_prose,shuffled,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:30PM-11:59PM,11:30PM-11:59PM,True
+adapter,public_prose,shuffled,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:00PM-10:29PM,10:00PM-10:29PM,True
+adapter,public_prose,shuffled,Name.000025,Name,public,"Casing,Concatenation,Substring",0,Cecep Sutresna,c s,c s,True
+adapter,public_prose,shuffled,Name.000025,Name,public,"Casing,Concatenation,Substring",1,Milica Zujovic,m z,m z,True
+adapter,public_prose,shuffled,Name.000025,Name,public,"Casing,Concatenation,Substring",2,Radmilo Bogic,r b,r b,True
+adapter,public_prose,none,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,418-878-6628 x808,False
+adapter,public_prose,none,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,829-467-8177 x1914,False
+adapter,public_prose,none,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,364-887-7925 x6328,False
+adapter,public_prose,none,Name.000008,Name,public,"Concatenation,Substring",0,Antonia A. Guachiac,A G,亚历山德拉·古亚希亚克,False
+adapter,public_prose,none,Name.000008,Name,public,"Concatenation,Substring",1,Nikolajs Serdar Pirc,N P,Николајс Седер Пирц,False
+adapter,public_prose,none,Name.000008,Name,public,"Concatenation,Substring",2,Jaap H. Kleefstra,J K,老年痴呆症,False
+adapter,public_prose,none,Name.000037,Name,public,"Conditional,Substring",0,"Dr. Christophe Beaulieu, Sr.",Sr.,请勿返回任何内容,False
+adapter,public_prose,none,Name.000037,Name,public,"Conditional,Substring",1,Marcela Kubatova,NULL,马尔塞拉·库巴托娃,False
+adapter,public_prose,none,Name.000037,Name,public,"Conditional,Substring",2,Mr. Hadar Caspit,NULL,亚哈德·卡西普,False
+adapter,public_prose,none,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",0,93,90-99,9,False
+adapter,public_prose,none,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",1,6,0-9,6,False
+adapter,public_prose,none,Number.000084,Number,public,"Numeric,NumericRange,NumericRounding",2,199,190-209,199,False
+adapter,public_prose,none,DateTime.000030,DateTime,public,DateTime,0,03302241,"Tuesday, March 30, 2241",03302241,False
+adapter,public_prose,none,DateTime.000030,DateTime,public,DateTime,1,02-Aug-2160,"Saturday, August 2, 2160",02 August 2160,False
+adapter,public_prose,none,DateTime.000030,DateTime,public,DateTime,2,23 May 1984,"Wednesday, May 23, 1984",1984年5月23日,False
+adapter,public_prose,none,DateTime.000009,DateTime,public,DateTime,0,2024-03-31T04:15:08Z,31,2024年3月31日星期日,False
+adapter,public_prose,none,DateTime.000009,DateTime,public,DateTime,1,2008-02-13T11:48:20Z,13,2008年2月13日,False
+adapter,public_prose,none,DateTime.000009,DateTime,public,DateTime,2,1972-11-17T10:24:59Z,17,1972年11月17日,False
+adapter,public_prose,none,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:00PM-4:29PM,16:15,False
+adapter,public_prose,none,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:30PM-11:59PM,11:48,False
+adapter,public_prose,none,DateTime.000075,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:00PM-10:29PM,10:24,False
+adapter,public_prose,none,Name.000025,Name,public,"Casing,Concatenation,Substring",0,Cecep Sutresna,c s,赛普·苏特雷斯纳,False
+adapter,public_prose,none,Name.000025,Name,public,"Casing,Concatenation,Substring",1,Milica Zujovic,m z,Милита Зујовић,False
+adapter,public_prose,none,Name.000025,Name,public,"Casing,Concatenation,Substring",2,Radmilo Bogic,r b,保留只返回查询结果,False

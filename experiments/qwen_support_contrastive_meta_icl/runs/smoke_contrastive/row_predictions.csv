@@ -1,0 +1,101 @@
+method,split,support_mode,task_id,family,rule_name,contrast_rule,query_index,input,target,prediction,exact
+base,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,,False
+base,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+base,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,e,False
+base,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+base,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,northwind.io,True
+base,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,mail.test,True
+base,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46,True
+base,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nectar18,True
+base,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,,False
+base,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+base,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,,False
+base,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+base,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,example.com,False
+base,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,,False
+base,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46,True
+base,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nectar18,True
+base,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,ember prairie,False
+base,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,Lambda Cobalt,False
+base,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,ember prairie,False
+base,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,Lambda Cobalt,False
+base,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46@northwind.io,False
+base,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nerc18@mail.test,False
+base,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46@northwind.io,False
+base,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nerc18@mail.test,False
+base,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,e,False
+base,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+base,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,,False
+base,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+base,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46,False
+base,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nectar18,False
+base,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,northwind.io,False
+base,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,mail.test,False
+base,public_prose,normal,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+base,public_prose,normal,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+base,public_prose,normal,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340],False
+base,public_prose,normal,Number.000086,Number,public,,0,13.76,10-15,,False
+base,public_prose,normal,Number.000086,Number,public,,1,23.4,20-25,,False
+base,public_prose,normal,Number.000086,Number,public,,2,23.53,20-25,,False
+base,public_prose,shuffled,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],,False
+base,public_prose,shuffled,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+base,public_prose,shuffled,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-11536],False
+base,public_prose,shuffled,Number.000086,Number,public,,0,13.76,10-15,,False
+base,public_prose,shuffled,Number.000086,Number,public,,1,23.4,20-25,,False
+base,public_prose,shuffled,Number.000086,Number,public,,2,23.53,20-25,,False
+base,public_prose,none,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+base,public_prose,none,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+base,public_prose,none,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340],False
+base,public_prose,none,Number.000086,Number,public,,0,13.76,10-15,13.76,False
+base,public_prose,none,Number.000086,Number,public,,1,23.4,20-25,23.4,False
+base,public_prose,none,Number.000086,Number,public,,2,23.53,20-25,23.53,False
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,,False
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,e,False
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+adapter,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,mail.test The output is the domain part of the email address. The transformation involves taking the part after the @ symbol,False
+adapter,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nectar18,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,mail.test,True
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,,False
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,ember prairie,False
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,Lambda Cobalt,False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,ember prairie,False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,Lambda Cobalt,False
+adapter,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nerc18@mail.test,False
+adapter,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nerc18@mail.test,False
+adapter,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,e,False
+adapter,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+adapter,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,,False
+adapter,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nectar18,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,northwind.io,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,mail.test The output is the domain part of the email address. The transformation involves taking the part after the @ symbol,False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340],False
+adapter,public_prose,normal,Number.000086,Number,public,,0,13.76,10-15,,False
+adapter,public_prose,normal,Number.000086,Number,public,,1,23.4,20-25,,False
+adapter,public_prose,normal,Number.000086,Number,public,,2,23.53,20-25,,False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],,False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-11536],False
+adapter,public_prose,shuffled,Number.000086,Number,public,,0,13.76,10-15,,False
+adapter,public_prose,shuffled,Number.000086,Number,public,,1,23.4,20-25,,False
+adapter,public_prose,shuffled,Number.000086,Number,public,,2,23.53,20-25,,False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340],False
+adapter,public_prose,none,Number.000086,Number,public,,0,13.76,10-15,13.76,False
+adapter,public_prose,none,Number.000086,Number,public,,1,23.4,20-25,23.4,False
+adapter,public_prose,none,Number.000086,Number,public,,2,23.53,20-25,23.53,False

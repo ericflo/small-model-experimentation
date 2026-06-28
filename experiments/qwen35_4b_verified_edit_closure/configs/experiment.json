@@ -1,0 +1,35 @@
+{
+  "experiment": "qwen35_4b_verified_edit_closure",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260630,
+  "training": {
+    "adapter": "static60_lora",
+    "train_records": 240,
+    "base_records": 180,
+    "support_bridge_records": 60,
+    "epochs": 2.0,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "learning_rate": 0.00015,
+    "gradient_accumulation_steps": 8
+  },
+  "evaluation": {
+    "iid_records": 60,
+    "support_records": 120,
+    "ceiling_records": 120,
+    "visible_cases_per_record": 6,
+    "hidden_cases_per_record": 18,
+    "baseline_num_samples": 3,
+    "baseline_max_new_tokens": 64
+  },
+  "edit_closure": {
+    "candidate_mode": "all",
+    "max_base_candidates": 4,
+    "rounds": 2,
+    "max_variants_per_seed": 900,
+    "max_total_variants_per_seed": 2400
+  },
+  "large_artifact_root": "/workspace/large_artifacts/qwen35_4b_verified_edit_closure"
+}

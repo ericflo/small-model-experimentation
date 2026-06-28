@@ -1,0 +1,28 @@
+{
+  "manifest": "data/pilot_train_k8_records.manifest.json",
+  "records": {
+    "candidate_count_mean": 7.666666666666667,
+    "coverage": 0.5833333333333334,
+    "distinct_behavior_rate_mean": 0.6383928571428571,
+    "distinct_functional_rate_mean": 0.26091269841269843,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 22260,
+    "hidden_pass_candidates_mean": 3.25,
+    "parse_success_mean": 7.583333333333333,
+    "pass1_proxy": 0.4166666666666667,
+    "records": 12,
+    "visible_candidates_mean": 4.416666666666667,
+    "visible_coverage": 0.5833333333333334,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "token_usage": {
+    "calls": 96,
+    "completion_tokens": 10958,
+    "forward_tokens": 22862,
+    "prompt_tokens": 11904
+  }
+}

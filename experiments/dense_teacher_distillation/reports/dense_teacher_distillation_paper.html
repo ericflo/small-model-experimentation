@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dense Teacher Distillation for Recurrent Belief Execution</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      color: #1f2933;
+      background: #f7f8fa;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 48px 24px 72px;
+      background: #ffffff;
+    }
+    h1, h2, h3 {
+      line-height: 1.2;
+      color: #111827;
+    }
+    h1 {
+      font-size: 34px;
+      margin: 0 0 24px;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 1px solid #d8dee6;
+      padding-bottom: 8px;
+    }
+    h3 {
+      margin-top: 28px;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    pre {
+      background: #f1f5f9;
+      border: 1px solid #d8dee6;
+      padding: 14px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #d8dee6;
+      padding: 8px 10px;
+      text-align: right;
+      vertical-align: top;
+    }
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+    th {
+      background: #eef2f7;
+      color: #111827;
+    }
+    img {
+      max-width: 100%;
+      border: 1px solid #d8dee6;
+      background: #ffffff;
+      margin: 8px 0 24px;
+    }
+    .note {
+      background: #f8fafc;
+      border-left: 4px solid #64748b;
+      padding: 12px 16px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Dense Teacher Distillation for Recurrent Belief Execution</h1>
+
+  <h2>Abstract</h2>
+  <p>This experiment tests whether a fixed-width dense recurrent state can learn exact belief-state execution when supervision is not the limiting factor. Programs operate on two modular registers <code>(A,B)</code> using arithmetic updates and observation filters. A teacher computes the exact belief distribution over all <code>(A,B)</code> pairs after every prefix. A student recurrent executor receives the same program and initial relation, stores only a dense hidden vector, and is trained to decode the exact teacher belief at each recurrent step.</p>
+  <p>The result is clear but mixed. Full prefix-belief distillation greatly improves dense recurrent execution, and increasing state width from 256 to 512 substantially improves both query accuracy and strict belief accuracy. A residual transition cell is consistently better than a GRU at width 512. However, even the best dense student does not learn exact belief execution on modulus 31. At train-length 8, the best model assigns 52.1% mass to the correct query support but only 21.9% mass to the exact pair-belief support. At held-out length 24, those fall to 20.5% and 5.1%.</p>
+
+  <h2>Task</h2>
+  <p>Each example starts with a correlated support over two registers:</p>
+  <pre>B = A + delta (mod p)</pre>
+  <p>The program then applies constant arithmetic updates, cross-register arithmetic updates, and observation filters. The teacher maintains the exact belief distribution over all <code>p^2</code> possible <code>(A,B)</code> pairs after each prefix. The query asks for <code>A</code>, <code>B</code>, <code>A + B</code>, or <code>A - B</code>, all modulo <code>p</code>.</p>
+
+  <h2>Student Model</h2>
+  <p>The recurrent student embeds the current instruction, updates a fixed-width dense state, and decodes that state to a distribution over all <code>(A,B)</code> pairs. The pilot tested GRU and gated residual transitions, plus MLP and low-rank decoders. The low-rank decoder was dropped from the main sweep because it was consistently worse.</p>
+
+  <h2>Training And Metrics</h2>
+  <p>The student is trained with full prefix-belief distillation. At each recurrent step, the decoder produces logits over all pairs, and the training loss is cross-entropy against the teacher belief after that prefix.</p>
+  <p>The direct query head is intentionally left unsupervised in the main runs. The headline query metric is computed by projecting the decoded pair distribution onto the requested query.</p>
+  <ul>
+    <li><code>decoder_query_target_mass</code>: mass assigned to the correct query support after projection.</li>
+    <li><code>decoder_belief_target_mass</code>: mass assigned to the exact teacher pair-belief support.</li>
+    <li><code>probe_belief_target_mass</code>: mass assigned by a separately trained frozen-state probe to the exact pair-belief support.</li>
+    <li><code>query_target_mass</code>: direct query-head mass, included only as a diagnostic.</li>
+  </ul>
+
+  <h2>Pilot Results</h2>
+  <p>The pilot used modulus 11, train lengths up to 6, and evaluation lengths 3, 6, 9, and 12.</p>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>L=3 Query</th><th>L=6 Query</th><th>L=9 Query</th><th>L=12 Query</th><th>L=3 Belief</th><th>L=6 Belief</th><th>L=9 Belief</th><th>L=12 Belief</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GRU MLP d128</td><td>90.5%</td><td>61.9%</td><td>44.8%</td><td>35.2%</td><td>70.6%</td><td>37.8%</td><td>21.6%</td><td>15.0%</td></tr>
+      <tr><td>GRU MLP d256</td><td>94.7%</td><td>71.3%</td><td>53.1%</td><td>41.4%</td><td>81.9%</td><td>52.9%</td><td>32.7%</td><td>22.0%</td></tr>
+      <tr><td>Residual MLP d256</td><td>94.8%</td><td>71.6%</td><td>54.7%</td><td>42.6%</td><td>81.0%</td><td>52.8%</td><td>33.8%</td><td>22.5%</td></tr>
+      <tr><td>GRU low-rank d256</td><td>78.8%</td><td>50.3%</td><td>36.4%</td><td>28.5%</td><td>49.4%</td><td>21.2%</td><td>12.0%</td><td>8.9%</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Main Results</h2>
+  <p>The main sweep used modulus 31, train lengths up to 8, and evaluation lengths 4, 8, 12, 16, and 24.</p>
+
+  <h3>Decoder-Projected Query Mass</h3>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>L=4</th><th>L=8</th><th>L=12</th><th>L=16</th><th>L=24</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GRU MLP d256</td><td>69.9%</td><td>36.1%</td><td>23.7%</td><td>16.8%</td><td>11.7%</td></tr>
+      <tr><td>GRU MLP d512</td><td>78.1%</td><td>49.2%</td><td>35.4%</td><td>26.3%</td><td>18.7%</td></tr>
+      <tr><td>Residual MLP d512</td><td>80.5%</td><td>52.1%</td><td>36.5%</td><td>27.9%</td><td>20.5%</td></tr>
+    </tbody>
+  </table>
+  <img src="../analysis/figures/main_mod31_decoder_query_mass_at_k_ge_l.png" alt="Main decoder-projected query mass">
+
+  <h3>Strict Decoded-Belief Mass</h3>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>L=4</th><th>L=8</th><th>L=12</th><th>L=16</th><th>L=24</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GRU MLP d256</td><td>32.6%</td><td>9.0%</td><td>4.0%</td><td>2.5%</td><td>1.6%</td></tr>
+      <tr><td>GRU MLP d512</td><td>45.7%</td><td>19.3%</td><td>9.9%</td><td>6.8%</td><td>4.3%</td></tr>
+      <tr><td>Residual MLP d512</td><td>50.1%</td><td>21.9%</td><td>11.5%</td><td>7.8%</td><td>5.1%</td></tr>
+    </tbody>
+  </table>
+  <img src="../analysis/figures/main_mod31_decoder_belief_mass_at_k_ge_l.png" alt="Main decoded-belief mass">
+
+  <h2>Interpretation</h2>
+  <p>Full prefix-belief supervision is not enough to make a fixed-width dense recurrent state behave like an exact symbolic belief executor at modulus 31. The student learns useful approximate state updates, and the approximation improves with more width, but exact pair-belief mass remains low.</p>
+  <p>The gap between query mass and belief mass is important. The best main model reaches 52.1% projected query mass at train-length 8, but only 21.9% exact pair-belief mass. It learned a partially useful compressed computation, not exact latent belief execution.</p>
+  <p>The frozen probes do not reveal a hidden exact state. Probe belief mass is close to decoder belief mass on the main fixed-length evaluation rows, suggesting the main bottleneck is the learned recurrent state and transition, not merely the final decoder.</p>
+
+  <h2>Conclusion</h2>
+  <p>Dense teacher distillation improves recurrent belief execution, and state capacity matters. The strongest tested model is the residual MLP decoder with 512 hidden dimensions. It is better than the GRU at the same width and much better than the 256-dimensional model.</p>
+  <p>The experiment does not support the claim that full teacher supervision alone makes a dense recurrent student learn exact modular belief-state execution. On the hard modulus-31 setting, the dense state remains an approximation whose accuracy decays quickly with program length.</p>
+  <p>The most direct next test is to add structure back into the state or transition: factorized register beliefs, explicit pair-state tables, sparse support tracking, or a differentiable update rule constrained to preserve and transform belief mass.</p>
+
+  <h2>Reproducibility</h2>
+  <p>Code and lightweight artifacts are in <code>experiments/dense_teacher_distillation/</code>. Checkpoints are stored separately in <code>large_artifacts/dense_teacher_distillation/checkpoints/</code>. The normal research bundle is the experiment directory; the checkpoint directory is only needed when loading saved model weights.</p>
+  <ul>
+    <li><code>src/dense_teacher_distillation_experiment.py</code></li>
+    <li><code>src/analyze_dense_teacher_distillation.py</code></li>
+    <li><code>analysis/summary.md</code></li>
+    <li><code>analysis/threshold_summary.csv</code></li>
+    <li><code>checkpoint_manifest.csv</code></li>
+  </ul>
+</main>
+</body>
+</html>

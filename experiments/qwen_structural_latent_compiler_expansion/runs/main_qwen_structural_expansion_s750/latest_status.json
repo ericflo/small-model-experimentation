@@ -1,0 +1,33 @@
+{
+  "run": "main_qwen_structural_expansion_s750",
+  "last_stage": "stage3_max24",
+  "global_step": 750,
+  "compiler_max_steps": 24,
+  "latest_selection": {
+    "stage": "stage3_max24",
+    "split": "paired_L24",
+    "n": 64,
+    "max_steps": 24,
+    "executor_accuracy": 0.9375,
+    "executor_target_mass": 0.9342033714056015,
+    "direct_accuracy": NaN,
+    "init_accuracy": 1.0,
+    "op_accuracy": 0.9993489583333334,
+    "arg_accuracy": 0.998046875,
+    "program_exact": 0.9375,
+    "state_accuracy": 0.9921875,
+    "state_all_exact": 0.9375,
+    "state_prefix_fraction": 0.9921875,
+    "state_mean_correct_prefix": 23.8125,
+    "executor_pair_answer_consistency": 0.875,
+    "executor_pair_both_correct": 0.875,
+    "compiler_pair_program_consistency": 0.875,
+    "compiler_pair_state_consistency": 0.875,
+    "run": "main_qwen_structural_expansion_s750",
+    "global_step": 750,
+    "stage_idx": 3,
+    "selection_split": "paired_L24",
+    "selection_metric": "executor_pair_both_correct",
+    "selection_value": 0.875
+  }
+}

@@ -1,0 +1,536 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:14,  9.71it/s]Loading weights:   4%|▍         | 28/723 [00:00<00:04, 160.70it/s]Loading weights:  12%|█▏        | 90/723 [00:00<00:01, 366.67it/s]Loading weights:  20%|██        | 146/723 [00:00<00:01, 437.98it/s]Loading weights:  28%|██▊       | 201/723 [00:00<00:01, 475.50it/s]Loading weights:  36%|███▌      | 258/723 [00:00<00:00, 502.67it/s]Loading weights:  43%|████▎     | 311/723 [00:00<00:00, 508.80it/s]Loading weights:  51%|█████     | 369/723 [00:00<00:00, 529.05it/s]Loading weights:  60%|██████    | 434/723 [00:00<00:00, 565.07it/s]Loading weights:  94%|█████████▍| 682/723 [00:01<00:00, 1147.28it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 698.14it/s] 
+eval-sketch:   0%|          | 0/120 [00:00<?, ?it/s]eval-sketch:   1%|          | 1/120 [00:03<06:59,  3.53s/it]eval-sketch:   2%|▏         | 2/120 [00:06<06:03,  3.08s/it]eval-sketch:   2%|▎         | 3/120 [00:09<05:43,  2.93s/it]eval-sketch:   3%|▎         | 4/120 [00:11<05:33,  2.87s/it]eval-sketch:   4%|▍         | 5/120 [00:14<05:30,  2.87s/it]eval-sketch:   5%|▌         | 6/120 [00:17<05:28,  2.88s/it]eval-sketch:   6%|▌         | 7/120 [00:20<05:20,  2.84s/it]eval-sketch:   7%|▋         | 8/120 [00:23<05:15,  2.82s/it]eval-sketch:   8%|▊         | 9/120 [00:25<05:12,  2.81s/it]eval-sketch:   8%|▊         | 10/120 [00:28<05:08,  2.80s/it]eval-sketch:   9%|▉         | 11/120 [00:31<05:02,  2.78s/it]eval-sketch:  10%|█         | 12/120 [00:34<04:59,  2.77s/it]eval-sketch:  11%|█         | 13/120 [00:47<10:29,  5.88s/it]eval-sketch:  12%|█▏        | 14/120 [01:00<14:14,  8.06s/it]eval-sketch:  12%|█▎        | 15/120 [01:13<16:33,  9.46s/it]eval-sketch:  13%|█▎        | 16/120 [01:25<17:59, 10.38s/it]eval-sketch:  14%|█▍        | 17/120 [01:38<19:05, 11.12s/it]eval-sketch:  15%|█▌        | 18/120 [01:51<19:58, 11.75s/it]eval-sketch:  16%|█▌        | 19/120 [02:04<20:23, 12.12s/it]eval-sketch:  17%|█▋        | 20/120 [02:17<20:35, 12.35s/it]eval-sketch:  18%|█▊        | 21/120 [02:30<20:39, 12.52s/it]eval-sketch:  18%|█▊        | 22/120 [02:43<20:38, 12.64s/it]eval-sketch:  19%|█▉        | 23/120 [02:56<20:42, 12.81s/it]eval-sketch:  20%|██        | 24/120 [03:09<20:35, 12.87s/it]eval-sketch:  21%|██        | 25/120 [03:14<16:32, 10.44s/it]eval-sketch:  22%|██▏       | 26/120 [03:18<13:39,  8.72s/it]eval-sketch:  22%|██▎       | 27/120 [03:23<11:45,  7.58s/it]eval-sketch:  23%|██▎       | 28/120 [03:28<10:22,  6.77s/it]eval-sketch:  24%|██▍       | 29/120 [03:33<09:26,  6.22s/it]eval-sketch:  25%|██▌       | 30/120 [03:38<08:39,  5.77s/it]eval-sketch:  26%|██▌       | 31/120 [03:43<08:08,  5.49s/it]eval-sketch:  27%|██▋       | 32/120 [03:48<07:43,  5.27s/it]eval-sketch:  28%|██▊       | 33/120 [03:52<07:24,  5.11s/it]eval-sketch:  28%|██▊       | 34/120 [03:57<07:12,  5.03s/it]eval-sketch:  29%|██▉       | 35/120 [04:02<07:01,  4.96s/it]eval-sketch:  30%|███       | 36/120 [04:07<06:51,  4.90s/it]eval-sketch:  31%|███       | 37/120 [04:17<09:06,  6.58s/it]eval-sketch:  32%|███▏      | 38/120 [04:28<10:34,  7.73s/it]eval-sketch:  32%|███▎      | 39/120 [04:38<11:34,  8.57s/it]eval-sketch:  33%|███▎      | 40/120 [04:49<12:13,  9.17s/it]eval-sketch:  34%|███▍      | 41/120 [05:00<12:43,  9.66s/it]eval-sketch:  35%|███▌      | 42/120 [05:10<12:55,  9.94s/it]eval-sketch:  36%|███▌      | 43/120 [05:21<13:01, 10.15s/it]eval-sketch:  37%|███▋      | 44/120 [05:31<13:00, 10.28s/it]eval-sketch:  38%|███▊      | 45/120 [05:42<12:58, 10.38s/it]eval-sketch:  38%|███▊      | 46/120 [05:53<12:54, 10.47s/it]eval-sketch:  39%|███▉      | 47/120 [06:03<12:48, 10.53s/it]eval-sketch:  40%|████      | 48/120 [06:14<12:39, 10.56s/it]eval-sketch:  41%|████      | 49/120 [06:28<13:34, 11.47s/it]eval-sketch:  42%|████▏     | 50/120 [06:41<14:05, 12.07s/it]eval-sketch:  42%|████▎     | 51/120 [06:55<14:26, 12.56s/it]eval-sketch:  43%|████▎     | 52/120 [07:08<14:39, 12.93s/it]eval-sketch:  44%|████▍     | 53/120 [07:22<14:41, 13.16s/it]eval-sketch:  45%|████▌     | 54/120 [07:35<14:29, 13.18s/it]eval-sketch:  46%|████▌     | 55/120 [07:49<14:19, 13.22s/it]eval-sketch:  47%|████▋     | 56/120 [08:03<14:18, 13.42s/it]eval-sketch:  48%|████▊     | 57/120 [08:16<14:11, 13.52s/it]eval-sketch:  48%|████▊     | 58/120 [08:30<13:53, 13.44s/it]eval-sketch:  49%|████▉     | 59/120 [08:43<13:41, 13.47s/it]eval-sketch:  50%|█████     | 60/120 [08:57<13:28, 13.48s/it]eval-sketch:  51%|█████     | 61/120 [09:11<13:31, 13.76s/it]eval-sketch:  52%|█████▏    | 62/120 [09:26<13:39, 14.13s/it]eval-sketch:  52%|█████▎    | 63/120 [09:41<13:32, 14.26s/it]eval-sketch:  53%|█████▎    | 64/120 [09:55<13:16, 14.23s/it]eval-sketch:  54%|█████▍    | 65/120 [10:10<13:15, 14.47s/it]eval-sketch:  55%|█████▌    | 66/120 [10:24<13:03, 14.52s/it]eval-sketch:  56%|█████▌    | 67/120 [10:39<12:52, 14.58s/it]eval-sketch:  57%|█████▋    | 68/120 [10:54<12:44, 14.70s/it]eval-sketch:  57%|█████▊    | 69/120 [11:09<12:36, 14.83s/it]eval-sketch:  58%|█████▊    | 70/120 [11:24<12:24, 14.88s/it]eval-sketch:  59%|█████▉    | 71/120 [11:39<12:00, 14.71s/it]eval-sketch:  60%|██████    | 72/120 [11:53<11:45, 14.70s/it]eval-sketch:  61%|██████    | 73/120 [11:58<09:16, 11.84s/it]eval-sketch:  62%|██████▏   | 74/120 [12:04<07:33,  9.86s/it]eval-sketch:  62%|██████▎   | 75/120 [12:09<06:25,  8.57s/it]eval-sketch:  63%|██████▎   | 76/120 [12:15<05:35,  7.62s/it]eval-sketch:  64%|██████▍   | 77/120 [12:20<04:58,  6.94s/it]eval-sketch:  65%|██████▌   | 78/120 [12:25<04:30,  6.44s/it]eval-sketch:  66%|██████▌   | 79/120 [12:30<04:07,  6.04s/it]eval-sketch:  67%|██████▋   | 80/120 [12:36<03:52,  5.81s/it]eval-sketch:  68%|██████▊   | 81/120 [12:41<03:41,  5.68s/it]eval-sketch:  68%|██████▊   | 82/120 [12:46<03:29,  5.51s/it]eval-sketch:  69%|██████▉   | 83/120 [12:51<03:20,  5.43s/it]eval-sketch:  70%|███████   | 84/120 [12:56<03:12,  5.34s/it]eval-sketch:  71%|███████   | 85/120 [13:16<05:32,  9.49s/it]eval-sketch:  72%|███████▏  | 86/120 [13:35<07:04, 12.49s/it]eval-sketch:  72%|███████▎  | 87/120 [13:54<07:52, 14.33s/it]eval-sketch:  73%|███████▎  | 88/120 [14:13<08:25, 15.80s/it]eval-sketch:  74%|███████▍  | 89/120 [14:31<08:34, 16.60s/it]eval-sketch:  75%|███████▌  | 90/120 [14:50<08:35, 17.20s/it]eval-sketch:  76%|███████▌  | 91/120 [15:09<08:35, 17.77s/it]eval-sketch:  77%|███████▋  | 92/120 [15:28<08:29, 18.18s/it]eval-sketch:  78%|███████▊  | 93/120 [15:48<08:21, 18.56s/it]eval-sketch:  78%|███████▊  | 94/120 [16:07<08:04, 18.65s/it]eval-sketch:  79%|███████▉  | 95/120 [16:25<07:46, 18.66s/it]eval-sketch:  80%|████████  | 96/120 [16:44<07:29, 18.73s/it]eval-sketch:  81%|████████  | 97/120 [16:59<06:41, 17.44s/it]eval-sketch:  82%|████████▏ | 98/120 [17:13<06:06, 16.65s/it]eval-sketch:  82%|████████▎ | 99/120 [17:28<05:38, 16.11s/it]eval-sketch:  83%|████████▎ | 100/120 [17:43<05:15, 15.75s/it]eval-sketch:  84%|████████▍ | 101/120 [17:58<04:56, 15.58s/it]eval-sketch:  85%|████████▌ | 102/120 [18:14<04:38, 15.47s/it]eval-sketch:  86%|████████▌ | 103/120 [18:29<04:23, 15.50s/it]eval-sketch:  87%|████████▋ | 104/120 [18:44<04:06, 15.44s/it]eval-sketch:  88%|████████▊ | 105/120 [18:59<03:48, 15.25s/it]eval-sketch:  88%|████████▊ | 106/120 [19:14<03:33, 15.23s/it]eval-sketch:  89%|████████▉ | 107/120 [19:29<03:15, 15.07s/it]eval-sketch:  90%|█████████ | 108/120 [19:44<03:00, 15.08s/it]eval-sketch:  91%|█████████ | 109/120 [19:59<02:45, 15.03s/it]eval-sketch:  92%|█████████▏| 110/120 [20:14<02:29, 14.93s/it]eval-sketch:  92%|█████████▎| 111/120 [20:28<02:13, 14.79s/it]eval-sketch:  93%|█████████▎| 112/120 [20:43<01:58, 14.77s/it]eval-sketch:  94%|█████████▍| 113/120 [20:58<01:43, 14.79s/it]eval-sketch:  95%|█████████▌| 114/120 [21:13<01:29, 14.84s/it]eval-sketch:  96%|█████████▌| 115/120 [21:28<01:13, 14.79s/it]eval-sketch:  97%|█████████▋| 116/120 [21:42<00:58, 14.71s/it]eval-sketch:  98%|█████████▊| 117/120 [21:56<00:43, 14.61s/it]eval-sketch:  98%|█████████▊| 118/120 [22:12<00:29, 14.79s/it]eval-sketch:  99%|█████████▉| 119/120 [22:26<00:14, 14.73s/it]eval-sketch: 100%|██████████| 120/120 [22:40<00:00, 14.57s/it]eval-sketch: 100%|██████████| 120/120 [22:40<00:00, 11.34s/it]
+{
+  "by_family": {
+    "contains_count_length_code": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 9,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "length_contains_code": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 12,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "length_mod_contains_code": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "damaged_vs_base_hidden": 5,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "hybrid_improved_over_base_hidden": 2,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 2,
+      "sketch_synth_hidden_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "modulo_sum_label": {
+      "avg_synthesized_programs": 830.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "not_contains_length_code": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 9,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "sorted_index_offset_label": {
+      "avg_synthesized_programs": 2181.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "sum_length_branch_label": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 3,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "sum_offset_mod_label": {
+      "avg_synthesized_programs": 6702.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "tuple_branch_label": {
+      "avg_synthesized_programs": 2100.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 0.9166666666666666,
+        "records": 12,
+        "successes": 11
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.9166666666666666,
+        "records": 12,
+        "successes": 11
+      },
+      "damaged_vs_base_hidden": 3,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 1,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 1,
+      "sketch_synth_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "tuple_sum_gate_label": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "damaged_vs_base_hidden": 7,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    }
+  },
+  "overall": {
+    "avg_synthesized_programs": 5981.3,
+    "avg_unique_sketches": 1.0,
+    "base_rerank_hidden_all": {
+      "rate": 0.975,
+      "records": 120,
+      "successes": 117
+    },
+    "base_rerank_visible_all": {
+      "rate": 0.975,
+      "records": 120,
+      "successes": 117
+    },
+    "damaged_vs_base_hidden": 48,
+    "hybrid_damaged_vs_base_hidden": 0,
+    "hybrid_hidden_all": {
+      "rate": 0.9833333333333333,
+      "records": 120,
+      "successes": 118
+    },
+    "hybrid_improved_over_base_hidden": 3,
+    "hybrid_visible_all": {
+      "rate": 1.0,
+      "records": 120,
+      "successes": 120
+    },
+    "improved_over_base_hidden": 3,
+    "sketch_synth_hidden_all": {
+      "rate": 0.5833333333333334,
+      "records": 120,
+      "successes": 70
+    },
+    "sketch_synth_oracle_hidden_all": {
+      "rate": 1.0,
+      "records": 120,
+      "successes": 120
+    },
+    "sketch_synth_visible_all": {
+      "rate": 1.0,
+      "records": 120,
+      "successes": 120
+    },
+    "target_program_synthesized": {
+      "rate": 1.0,
+      "records": 120,
+      "successes": 120
+    }
+  }
+}

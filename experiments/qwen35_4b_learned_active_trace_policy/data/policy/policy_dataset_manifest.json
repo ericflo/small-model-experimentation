@@ -1,0 +1,69 @@
+{
+  "eval_data": [
+    "data/seed/dsl_train.jsonl"
+  ],
+  "eval_records": 120,
+  "eval_summary": {
+    "avg_target_actual_eliminated": 24.905,
+    "avg_target_entropy": 0.819,
+    "by_family": {
+      "contains_and_count_code": 13,
+      "contains_code": 2,
+      "contains_count_label": 6,
+      "length_and_mod_code": 19,
+      "length_mod_label": 5,
+      "mod_scalar_label": 3,
+      "scalar_branch_label": 17,
+      "sum_and_scalar_code": 19,
+      "sum_threshold_label": 11
+    },
+    "by_step": {
+      "1": 53,
+      "2": 27,
+      "3": 15
+    },
+    "examples": 95
+  },
+  "label": "oracle-elimination option among displayed candidate query choices",
+  "max_buckets": 6,
+  "max_options": 24,
+  "max_policy_candidates": 128,
+  "max_query_pool_cases": 48,
+  "max_steps": 3,
+  "max_total_programs_per_record": 4000,
+  "seed": 20260702,
+  "train_data": [
+    "data/static_bridge_80/dsl_train.jsonl",
+    "data/static_bridge_60/dsl_train.jsonl"
+  ],
+  "train_records": 480,
+  "train_summary": {
+    "avg_target_actual_eliminated": 27.744,
+    "avg_target_entropy": 0.781,
+    "by_family": {
+      "contains_and_count_code": 40,
+      "contains_code": 1,
+      "contains_count_label": 17,
+      "contains_count_length_code": 34,
+      "length_and_mod_code": 59,
+      "length_contains_code": 20,
+      "length_label": 2,
+      "length_mod_contains_code": 33,
+      "length_mod_label": 10,
+      "mod_scalar_label": 6,
+      "not_contains_length_code": 23,
+      "scalar_branch_label": 51,
+      "sum_and_scalar_code": 56,
+      "sum_length_branch_label": 32,
+      "sum_threshold_label": 38,
+      "tuple_branch_label": 23,
+      "tuple_sum_gate_label": 36
+    },
+    "by_step": {
+      "1": 241,
+      "2": 165,
+      "3": 75
+    },
+    "examples": 481
+  }
+}

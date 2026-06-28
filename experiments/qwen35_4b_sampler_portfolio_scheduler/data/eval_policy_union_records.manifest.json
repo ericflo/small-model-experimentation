@@ -1,0 +1,29 @@
+{
+  "arm_name": "eval_policy_union",
+  "experiment": "qwen35_4b_sampler_portfolio_scheduler",
+  "path": "data/eval_policy_union_records.jsonl",
+  "records": {
+    "candidate_count_mean": 24.0875,
+    "coverage": 0.8625,
+    "distinct_behavior_rate_mean": 0.635992928544019,
+    "distinct_functional_rate_mean": 0.34001591234862166,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.875,
+    "parse_success_mean": 22.225,
+    "records": 80,
+    "visible_candidates_mean": 7.325,
+    "visible_coverage": 0.8625,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 24,
+    "zero_to_one": 13,
+    "zero_to_one_rate": 0.5416666666666666
+  },
+  "round_name": "eval_policy_union",
+  "token_usage": {
+    "calls": 2336,
+    "completion_tokens": 289984,
+    "forward_tokens": 582812,
+    "prompt_tokens": 292828
+  }
+}

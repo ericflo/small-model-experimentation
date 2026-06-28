@@ -1,0 +1,19 @@
+{
+  "run_name": "main_qwen_soft_prompt_40_s6_lr001",
+  "seed": 20260627,
+  "task_limit": 40,
+  "train_n": 4,
+  "heldout_cap": 4,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "soft_tokens": 8,
+  "steps": 6,
+  "lr": 0.01,
+  "row_max_new_tokens": 64,
+  "batch_max_new_tokens": 320,
+  "no_qwen": false,
+  "model": "Qwen/Qwen3-4B",
+  "tasks": 40,
+  "elapsed_seconds": 481.45,
+  "created_utc": "2026-06-27T09:24:41.525016+00:00"
+}

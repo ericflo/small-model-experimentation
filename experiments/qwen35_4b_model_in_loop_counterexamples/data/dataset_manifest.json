@@ -1,0 +1,47 @@
+{
+  "base_families": [
+    "sum_label",
+    "mod_scalar_label",
+    "length_label",
+    "contains_code",
+    "tuple_get_label",
+    "scalar_branch_label",
+    "sum_threshold_label",
+    "length_mod_label",
+    "tuple_sum_label",
+    "contains_count_label",
+    "sorted_first_label",
+    "sum_add_label",
+    "contains_and_count_code",
+    "length_and_mod_code",
+    "sum_and_scalar_code"
+  ],
+  "bridge_allocation": {
+    "length_contains_code": 40,
+    "modulo_sum_label": 10,
+    "tuple_branch_label": 10
+  },
+  "bridge_base_records": 180,
+  "challenge_eval_records": 72,
+  "challenge_families": [
+    "modulo_sum_label",
+    "length_contains_code",
+    "tuple_branch_label"
+  ],
+  "conditions": {
+    "model_loop": "180 base-family records plus 60 challenge-family records with traces selected against seed-model wrong programs",
+    "seed": "240 base-family random-trace records",
+    "static_bridge": "180 base-family records plus 60 challenge-family records with static counterexample-selected traces"
+  },
+  "hidden_cases_per_record": 18,
+  "iid_eval_records": 60,
+  "mine_case_pool_per_record": 96,
+  "mining_pool_records": 144,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "seed": 20260623,
+  "seed_train_records": 240,
+  "selector_pool_size": 192,
+  "static_bridge_records": 60,
+  "static_bridge_train_records": 240,
+  "visible_cases_per_record": 6
+}

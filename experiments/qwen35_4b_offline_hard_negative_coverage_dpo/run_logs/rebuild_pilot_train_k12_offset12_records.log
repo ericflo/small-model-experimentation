@@ -1,0 +1,28 @@
+{
+  "manifest": "data/pilot_train_k12_offset12_records.manifest.json",
+  "records": {
+    "candidate_count_mean": 10.208333333333334,
+    "coverage": 0.875,
+    "distinct_behavior_rate_mean": 0.6535082972582972,
+    "distinct_functional_rate_mean": 0.27048160173160174,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 63506,
+    "hidden_pass_candidates_mean": 5.583333333333333,
+    "parse_success_mean": 9.5,
+    "pass1_proxy": 0.75,
+    "records": 24,
+    "visible_candidates_mean": 6.208333333333333,
+    "visible_coverage": 0.875,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "token_usage": {
+    "calls": 288,
+    "completion_tokens": 31189,
+    "forward_tokens": 70549,
+    "prompt_tokens": 39360
+  }
+}

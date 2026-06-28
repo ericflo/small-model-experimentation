@@ -1,0 +1,21 @@
+{
+  "run": "pilot_action_vm_echo_s96",
+  "model_name": "Qwen/Qwen3-4B",
+  "seed": 79,
+  "sizes": {
+    "seed_train": 96,
+    "unlabeled_train": 256,
+    "full_supervised_train": 256,
+    "val_mixed": 64,
+    "fresh_standard": 64,
+    "fresh_paraphrase": 64,
+    "fresh_paired": 64,
+    "hard_composition": 64
+  },
+  "hidden_size": 2560,
+  "backend": "frozen_qwen_hidden_states",
+  "candidate_topk": 3,
+  "max_two_arg_pairs": 6,
+  "max_candidates": 192,
+  "distill_min_score": 0.0
+}

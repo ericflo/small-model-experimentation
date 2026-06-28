@@ -1,0 +1,5 @@
+suite,run,arm,seed,step,loss
+smoke,smoke_v1_abi32_chain_d3_s101,abi32_chain_d3,101,1,3.6798510551452637
+smoke,smoke_v1_abi128_chain_d3_s101,abi128_chain_d3,101,1,1.5597329139709473
+smoke,smoke_v1_abi32_nested_d3_s101,abi32_nested_d3,101,1,3.5447559356689453
+smoke,smoke_v1_abi128_nested_d3_s101,abi128_nested_d3,101,1,3.5841267108917236

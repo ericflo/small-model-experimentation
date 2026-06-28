@@ -1,0 +1,151 @@
+task_id,family,features,row_index,input,target,direct_prediction,locked_prediction,shuffled_prediction,direct_exact,locked_exact,shuffled_exact
+Address.000002,Address,Substring,1,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place,880 81th Place SE,Muralixxxxx Hasmik Drakou 880 81th Place,880 81th Place SE,False,False,False
+Address.000002,Address,Substring,2,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place,256 32th Place NE,256 32th Place,256 32th Place NE,False,True,False
+Address.000002,Address,Substring,3,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,526 03th Place NE,526 03th Place NE,True,True,True
+BillingCode.000007,BillingCode,Concatenation,1,11529,11529],[11529],11529,11529,False,False,False
+BillingCode.000007,BillingCode,Concatenation,2,PT-11529,PT-11529],[PT-11529],[PT-11529],PT-11529,False,False,False
+BillingCode.000007,BillingCode,Concatenation,3,[CPT-11529,[CPT-11529],[CPT-11529],[CPT-11529],[CPT-11529],True,True,True
+City.000010,City,"Conditional,Numeric",1,9,9,9,9,9,True,True,True
+City.000010,City,"Conditional,Numeric",2,20+,20,20,20,20,True,True,True
+City.000010,City,"Conditional,Numeric",3,None,0,0,0,0,True,True,True
+City.000011,City,Conditional,1,NYC,New York City,New York City,New York City,Col3,True,True,False
+City.000011,City,Conditional,2,new york city,New York City,New York City,New York City,New York City,True,True,True
+City.000011,City,Conditional,3,None,None,New York City,None,None,False,True,True
+City.000011,City,Conditional,4,SJ,San Jose,San Jose,San Jose,SJ,True,True,False
+Column.000001,Column,"Concatenation,Conditional,Substring",1,ID,Col1,Col1,Col1,Col1,True,True,True
+Column.000001,Column,"Concatenation,Conditional,Substring",2,Coln2,Col2,Col2,Col2,Col2,True,True,True
+Column.000001,Column,"Concatenation,Conditional,Substring",3,ID,Col1,Col1,Col1,Col1,True,True,True
+Column.000001,Column,"Concatenation,Conditional,Substring",4,ID,Col1,Col1,Col1,Col1,True,True,True
+Column.000001,Column,"Concatenation,Conditional,Substring",5,Coln4,Col4,Col4,Col4,Col4,True,True,True
+Column.000001,Column,"Concatenation,Conditional,Substring",6,Coln0,Col0,Col0,Col0,Col0,True,True,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",1,col0=04:29:27 | col1=1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True,True,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",2,col0=09:08:38 | col1=2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,09:08:38 2220-06-30,True,True,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",3,col0=21:46:13 | col1=1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,21:46:13 1880-10-31,True,True,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",4,col0=17:14:57 | col1=1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,17:14:57 1963-05-31,True,True,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",5,col0=20:35:50 | col1=2038-05-17,20:35:50 2038-05-17,20:35:50 2038-05-17,20:35:50 2038-05-17,20:35:50 2038-05-17,True,True,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",6,col0=20:07:33 | col1=2048-11-30,20:07:33 2048-11-30,20:07:33 2048-11-30,20:07:33 2048-11-30,20:07:33 2048-11-30,True,True,True
+DateTime.000007,DateTime,DateTime,1,2007-09-10T01:20:52Z,Sep 2007,Sep 2007,Sep 2007,Sep 2007,True,True,True
+DateTime.000007,DateTime,DateTime,2,1953-12-14T08:35:28Z,Dec 1953,Dec 1953,Dec 1953,Dec 1953,True,True,True
+DateTime.000007,DateTime,DateTime,3,1987-11-30T11:17:50Z,Nov 1987,Nov 1987,Nov 1987,Nov 1987,True,True,True
+DateTime.000007,DateTime,DateTime,4,1963-12-31T08:32:04Z,Dec 1963,Dec 1963,Dec 1963,Dec 1963,True,True,True
+DateTime.000007,DateTime,DateTime,5,1961-09-21T12:44:55Z,Sep 1961,Sep 1961,Sep 1961,Sep 1961,True,True,True
+DateTime.000007,DateTime,DateTime,6,2041-06-16T05:46:33Z,Jun 2041,Jun 2041,Jun 2041,Jun 2041,True,True,True
+DateTime.000017,DateTime,DateTime,1,03302241,30/3/2241,30/3/2241,30/3/2241,30/3/2241,True,True,True
+DateTime.000017,DateTime,DateTime,2,02-Aug-2160,2/8/2160,2/8/2160,2/8/2160,02/8/2160,True,True,False
+DateTime.000017,DateTime,DateTime,3,23 May 1984,23/5/1984,23/5/1984,23/5/1984,23/5/1984,True,True,True
+DateTime.000017,DateTime,DateTime,4,15 August 1740,15/8/1740,15/8/1740,15/8/1740,15/8/1740,True,True,True
+DateTime.000017,DateTime,DateTime,5,Jul 08 2237,8/7/2237,8/7/2237,08/7/2237,08/7/2237,True,False,False
+DateTime.000017,DateTime,DateTime,6,3 Nov 1904,3/11/1904,3/11/1904,11/11/1904,11/11/1904,True,False,False
+DateTime.000025,DateTime,DateTime,1,03302241,Mar 41,Mar 41,Mar 41,Mar 41,True,True,True
+DateTime.000025,DateTime,DateTime,2,02-Aug-2160,Aug 60,Aug 60,Aug 60,Aug 60,True,True,True
+DateTime.000025,DateTime,DateTime,3,23 May 1984,May 84,May 84,May 84,May 84,True,True,True
+DateTime.000025,DateTime,DateTime,4,15 August 1740,Aug 40,Aug 40,Aug 40,Aug 40,True,True,True
+DateTime.000025,DateTime,DateTime,5,Jul 08 2237,Jul 37,Jul 37,Jul 37,Jul 37,True,True,True
+DateTime.000025,DateTime,DateTime,6,3 Nov 1904,Nov 04,Nov 04,Nov 04,Nov 04,True,True,True
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,12:41:14,12:30PM-1:00PM,12:00PM-12:30PM,12:30PM-1:00PM,12:00PM-12:30PM,False,True,False
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,04:22:15,4:00AM-4:30AM,4:00AM-4:30AM,04:00AM-04:30AM,4:00AM-4:30AM,True,False,True
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,04:54:07,4:30AM-5:00AM,4:00AM-4:30AM,04:30AM-05:00AM,4:00AM-4:30AM,False,False,False
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,15:00,0:00-19:00,10:00-29:00,0:00-19:00,00:00-19:00,False,True,False
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,48:00,40:00-59:00,40:00-59:00,40:00-59:00,40:00-59:00,True,True,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,24:00,20:00-39:00,20:00-39:00,20:00-39:00,20:00-39:00,True,True,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",4,29:00,20:00-39:00,20:00-39:00,20:00-39:00,20:00-39:00,True,True,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",5,25:00,20:00-39:00,20:00-39:00,20:00-39:00,20:00-39:00,True,True,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",6,14:00,0:00-19:00,10:00-29:00,0:00-19:00,15:00-35:00,False,True,False
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,4:15PM,4:15PM-4:45PM,4:00PM-4:30PM,12:15PM-12:45PM,6:15PM-6:45PM,False,False,False
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,11:48PM,11:45PM-12:15AM,11:15PM-11:45PM,11:15PM-11:45PM,11:15PM-11:45PM,False,False,False
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,10:24PM,10:15PM-10:45PM,10:15PM-10:45PM,10:15PM-10:45PM,10:15PM-10:45PM,True,True,True
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",4,4:29AM,4:15AM-4:45AM,4:15AM-4:45AM,5:15AM-5:45AM,0:45AM-1:15AM,True,False,False
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",5,3:25PM,3:15PM-3:45PM,3:15PM-3:45PM,3:15PM-3:45PM,3:15PM-3:45PM,True,True,True
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",6,8:14AM,7:45AM-8:15AM,8:15AM-8:30AM,7:15AM-7:45AM,07:15AM-07:45AM,False,False,False
+DateTime.000094,DateTime,DateTime,1,21.02.2006,2006-02-21,2006-02-21,2006-02-21,06,True,True,False
+DateTime.000094,DateTime,DateTime,2,19.12.97,1997-12-19,1997-12-19,1997-12-19,97,True,True,False
+DateTime.000094,DateTime,DateTime,3,30/9/2004,2004-09-30,2004-09-30,2004-09-30,04,True,True,False
+DateTime.000094,DateTime,DateTime,4,18/05/1967,1967-05-18,1967-05-18,1967-05-18,05,True,True,False
+DateTime.000104,DateTime,DateTime,1,21-Jan-1985 05:44:43,Jan,Jan,Jan,Jan,True,True,True
+DateTime.000104,DateTime,DateTime,2,16-Aug-1985 01:11:56,Aug,Aug,Aug,Aug,True,True,True
+DateTime.000104,DateTime,DateTime,3,20-Dec-2033 18:36:29,Dec,Dec,Dec,Dec,True,True,True
+DateTime.000104,DateTime,DateTime,4,16-Jul-1984 10:21:59,Jul,Jul,Jul,Jul,True,True,True
+DateTime.000104,DateTime,DateTime,5,13-Jan-2038 10:59:36,Jan,Jan,Jan,Jan,True,True,True
+DateTime.000104,DateTime,DateTime,6,14-Aug-1982 15:13:54,Aug,Aug,Aug,Aug,True,True,True
+DateTime.000108,DateTime,DateTime,1,21-Jan-1985 05:44:43,1/21/1985,1/21/1985,1/21/1985,1/21/1985,True,True,True
+DateTime.000108,DateTime,DateTime,2,16-Aug-1985 01:11:56,8/16/1985,8/16/1985,8/16/1985,8/16/1985,True,True,True
+DateTime.000108,DateTime,DateTime,3,20-Dec-2033 18:36:29,12/20/2033,12/20/2033,12/20/2033,12/20/2033,True,True,True
+DateTime.000108,DateTime,DateTime,4,16-Jul-1984 10:21:59,7/16/1984,7/16/1984,7/16/1984,7/16/1984,True,True,True
+DateTime.000108,DateTime,DateTime,5,13-Jan-2038 10:59:36,1/13/2038,1/13/2038,1/13/2038,1/13/2038,True,True,True
+DateTime.000108,DateTime,DateTime,6,14-Aug-1982 15:13:54,8/14/1982,8/14/1982,8/14/1982,8/14/1982,True,True,True
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,21-Jan-1985 05:44:43,30-45,15-30,"To determine the output for the input ""21-Jan-1985 05:44:43"", we follow the fixed transformation rule:",21-85,False,False,False
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,16-Aug-1985 01:11:56,0-15,25-40,"To determine the output for the input ""16-Aug-1985 01:11:56"", we follow the fixed transformation rule:",22-35,False,False,False
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,20-Dec-2033 18:36:29,30-45,25-40,"To determine the output for the input ""20-Dec-2033 18:36:29"", we follow the fixed transformation rule:",22-33,False,False,False
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",4,16-Jul-1984 10:21:59,15-30,25-40,"To determine the output for the input ""16-Jul-1984 10:21:59"", we need to follow the fixed transformation rule:",16-84,False,False,False
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",5,13-Jan-2038 10:59:36,45-60,25-40,"To determine the output for the input ""13-Jan-2038 10:59:36"", we follow the fixed transformation rule:",13-38,False,False,False
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",6,14-Aug-1982 15:13:54,0-15,30-45,"To determine the output for the input ""14-Aug-1982 15:13:54"", we follow the fixed transformation rule:",24-82,False,False,False
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,21-Jan-1985 05:44:43,40-60,0-20,0-85,0-20,False,False,False
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,16-Aug-1985 01:11:56,40-60,0-20,0-85,0-20,False,False,False
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,20-Dec-2033 18:36:29,20-40,0-20,0-33,12-04,False,False,False
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",4,16-Jul-1984 10:21:59,40-60,0-20,0-84,0-20,False,False,False
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",5,13-Jan-2038 10:59:36,20-40,0-20,0-38,12-22,False,False,False
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",6,14-Aug-1982 15:13:54,40-60,0-20,0-82,1. Extract the hour from the datetime string: 15,False,False,False
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,21-Jan-1985 05:44:43,5AM-7AM,5AM-7AM,5AM-7AM,11AM-1PM,True,True,False
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,16-Aug-1985 01:11:56,1AM-3AM,1AM-3AM,1AM-3AM,1AM-3AM,True,True,True
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,20-Dec-2033 18:36:29,5PM-7PM,6PM-8PM,6PM-8PM,12PM-2PM,False,False,False
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",4,16-Jul-1984 10:21:59,9AM-11AM,10AM-12PM,10AM-12PM,1PM-3PM,False,False,False
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",5,13-Jan-2038 10:59:36,9AM-11AM,10AM-12PM,12PM-2PM,11AM-1PM,False,False,False
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",6,14-Aug-1982 15:13:54,3PM-5PM,3PM-5PM,2PM-4PM,1PM-7PM,True,False,False
+FilePath.000001,FilePath,"Conditional,Substring",1,/libero/quas/enim0.png,enim0,enim0,enim0,enim0,True,True,True
+FilePath.000001,FilePath,"Conditional,Substring",2,/libero/quas/enim3.png,enim3,enim3,enim3,enim3,True,True,True
+FilePath.000001,FilePath,"Conditional,Substring",3,/libero/quas/enim0.png,enim0,enim0,enim0,enim0,True,True,True
+FilePath.000001,FilePath,"Conditional,Substring",4,/libero/quas/enim6.png,enim6,enim6,enim6,enim6,True,True,True
+FilePath.000001,FilePath,"Conditional,Substring",5,/libero/enim0.png,enim0,enim0,enim0,enim0,True,True,True
+FilePath.000001,FilePath,"Conditional,Substring",6,/libero/enim4.png,enim4,enim4,enim4,enim4,True,True,True
+Gender.000001,Gender,Conditional,1,M,0,0,0,0,True,True,True
+Gender.000001,Gender,Conditional,2,F,1,1,1,1,True,True,True
+Gender.000001,Gender,Conditional,3,Male,None,0,0,0,False,False,False
+Language.000002,Language,"Multicolumn,Substring",1,col0=Catalan | col1=http://proseware.com/ca,ca,ca,ca,ca,True,True,True
+Language.000002,Language,"Multicolumn,Substring",2,col0=Chinese - Simplified | col1=http://proseware.com/zh,zh,zh,zh,zh,True,True,True
+Language.000002,Language,"Multicolumn,Substring",3,col0=Chinese - Traditional | col1=http://proseware.com/hk,hk,hk,hk,hk,True,True,True
+Language.000002,Language,"Multicolumn,Substring",4,col0=Croatian | col1=http://proseware.com/hr,hr,hr,hr,hr,True,True,True
+Language.000002,Language,"Multicolumn,Substring",5,col0=Czech | col1=http://proseware.com/cs,cs,cs,cs,cs,True,True,True
+Language.000002,Language,"Multicolumn,Substring",6,col0=Danish | col1=http://proseware.com/da,da,da,da,da,True,True,True
+Number.000008,Number,Numeric,1,-13578,-135.78,-13.578,-13.578,-13.578,False,False,False
+Number.000008,Number,Numeric,2,-1961.1180,-19.611180,-19.611180,-19.611180,-19.611180,True,True,True
+Number.000008,Number,Numeric,3,-1829.29,-18.2929,-18.2929,-182.929,-18.2929,True,False,True
+Number.000008,Number,Numeric,4,-28178,-281.78,-28.178,-28.178,-28.178,False,False,False
+Number.000008,Number,Numeric,5,29721,297.21,29.721,-29.721,30.321,False,False,False
+Number.000008,Number,Numeric,6,-11124.5,-111.245,-11.1245,-1112.45,-11.1245,False,False,False
+Number.000016,Number,"Numeric,NumericRounding",1,601,605,605,795,795,True,False,False
+Number.000016,Number,"Numeric,NumericRounding",2,814,815,815,915,915,True,False,False
+Number.000016,Number,"Numeric,NumericRounding",3,816,820,817,920,1200,False,False,False
+Number.000016,Number,"Numeric,NumericRounding",4,333,335,335,400,"4.00 → 4.00 (since the second decimal is 0, no rounding down is needed) → 4.0",True,False,False
+Number.000016,Number,"Numeric,NumericRounding",5,1394,1395,1395,1. Take the input number: 1394,1395,True,False,True
+Number.000016,Number,"Numeric,NumericRounding",6,646,650,650,750,745,True,False,False
+Number.000022,Number,"Numeric,NumericRounding",1,12.11,12.1,12.1,1. Round the number to two decimal places: 12.11,2.15,True,False,False
+Number.000022,Number,"Numeric,NumericRounding",2,20.33,20.35,20.35,20.35,20.35,True,True,True
+Number.000022,Number,"Numeric,NumericRounding",3,18.11,18.1,18.1,18.11,20.0,True,False,False
+Number.000022,Number,"Numeric,NumericRounding",4,13.77,13.75,13.75,1. Round the number to two decimal places: 13.77,1. Take the number: 13.77,True,False,False
+Number.000022,Number,"Numeric,NumericRounding",5,6.55,6.55,6.55,7.5,1. Take the number: 6.55,True,False,False
+Number.000022,Number,"Numeric,NumericRounding",6,19.83,19.85,19.85,1. Round the number to two decimal places: 19.83,20.0,True,False,False
+Number.000049,Number,"Numeric,NumericRounding",1,8330,8300,8000,900,"1. Divide the number by 100,000,000: 8330 / 100,000,000 = 0.0833",False,False,False
+Number.000049,Number,"Numeric,NumericRounding",2,6265,6300,6000,700,"1. Divide the number by 100,000,000: 6265 / 100,000,000 = 0.06265",False,False,False
+Number.000049,Number,"Numeric,NumericRounding",3,9812,9800,10000,1. Take the number: 9812,"1. Divide the number by 100,000,000: 9812 / 100,000,000 = 0.09812",False,False,False
+Number.000049,Number,"Numeric,NumericRounding",4,458,500,500,600,500,True,False,True
+Number.000075,Number,"Concatenation,Numeric",1,1892.3433,$1.9B,$1.9B,$1.8B,$1.1B,True,False,False
+Number.000075,Number,"Concatenation,Numeric",2,23224.1,$23.2B,$2.3B,$0.2B,$2.3B,False,False,False
+Number.000075,Number,"Concatenation,Numeric",3,29974.1,$30.0B,$2.9B,$0.3B,$2.9B,False,False,False
+Number.000075,Number,"Concatenation,Numeric",4,0.0,$0.0B,$0.0B,$0.0B,$0.0B,True,True,True
+Number.000075,Number,"Concatenation,Numeric",5,0.1,$0.0B,$0.0B,$0.0B,$0.0B,True,True,True
+Number.000075,Number,"Concatenation,Numeric",6,-0.1,$0.0B,$0.0B,$0.0B,$-0.8B,True,True,False
+Number.000077,Number,"Numeric,NumericRounding",1,11112,11110,110,10995,011 112,False,False,False
+Number.000077,Number,"Numeric,NumericRounding",2,11119,11110,11000,11112,011 119,False,False,False
+Number.000077,Number,"Numeric,NumericRounding",3,548,540,540,1041,054 048,True,False,False
+Phone.000011,Phone,"Concatenation,Substring",1,670-339-5712,670 339 5712,670 339 5712,670 339 5712,670 339 5712,True,True,True
+Phone.000011,Phone,"Concatenation,Substring",2,734-124-7641,734 124 7641,734 124 7641,734 124 7641,734 124 7641,True,True,True
+Phone.000011,Phone,"Concatenation,Substring",3,878-662-8808,878 662 8808,878 662 8808,878 662 8808,878 662 8808,True,True,True
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",1,1Z GU2 T24 89 4205 353 5,GU2 89,GU2 4205,GU2 353,GU2 353,False,False,False
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",2,1Z VDB 80S 06 9545 042 0,VDB 042,VDB 9545,VDB 042,VDB 9545,False,True,False
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",3,1Z 1KN 3G8 94 1261 323 9,1KN 1261,1KN 1261,3KN 323,1KN 323,True,False,False
+UserAgent.000003,UserAgent,Substring,1,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,FZ467,FZ467,True,True,True
+UserAgent.000003,UserAgent,Substring,2,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,RM VVUT,RM VVUT,True,True,True
+UserAgent.000003,UserAgent,Substring,3,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,QS QYFY,QS QYFY,True,True,True
+UserAgent.000003,UserAgent,Substring,4,MFM-Robot/1.1.69-internal RO FQAJ OS 8.0.2,RO FQAJ,RO FQAJ,RO FQAJ,RO FQAJ,True,True,True
+UserAgent.000003,UserAgent,Substring,5,MFM-Robot/9.9.35-internal NB-H486 OS 1.7.4,NB-H486,NB-H486,NB-H486,NB-H486,True,True,True
+UserAgent.000003,UserAgent,Substring,6,MFM-Robot/1.6.68-internal EE-P295 OS 0.2.8,EE-P295,EE-P295,EE-P295,EE-P295,True,True,True

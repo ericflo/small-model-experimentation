@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""Analyze Qwen span-free compiler runs."""
+
+from __future__ import annotations
+
+import csv
+import json
+import re
+from pathlib import Path
+from typing import Any, Dict, List
+
+import matplotlib.pyplot as plt
+
+
+ROOT = Path("experiments/qwen_span_free_compiler")
+RUNS = ROOT / "runs"
+ANALYSIS = ROOT / "analysis"
+FIGURES = ANALYSIS / "figures"
+
+
+def pct(x: float) -> str:
+    if x != x:
+        return "n/a"
+    return f"{100.0 * x:.1f}%"
+
+
+def load_runs() -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    for path in sorted(RUNS.glob("*/results.json")):
+        data = json.loads(path.read_text())
+        for variant, result in data.get("variants", {}).items():
+            for split, metrics in result.get("final_metrics", {}).items():
+                rows.append({
+                    "run": path.parent.name,
+                    "variant": variant,
+                    "split": split,
+                    **{k: v for k, v in metrics.items() if isinstance(v, (int, float, str))},
+                })
+    return rows
+
+
+def split_length(split: str) -> int:
+    match = re.search(r"len(\d+)", split)
+    if match is None:
+        return 0
+    return int(match.group(1))
+
+
+def split_mode(split: str) -> str:
+    if "_len" in split:
+        return split.rsplit("_len", 1)[0]
+    return "default"
+
+
+def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
+    if not rows:
+        return
+    keys: List[str] = []
+    for row in rows:
+        for key in row:
+            if key not in keys:
+                keys.append(key)
+    with path.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def main() -> None:
+    ANALYSIS.mkdir(parents=True, exist_ok=True)
+    FIGURES.mkdir(parents=True, exist_ok=True)
+    rows = load_runs()
+    write_csv(ANALYSIS / "final_metrics.csv", rows)
+    lines = ["# Qwen Span-Free Compiler Analysis Summary", "", "## Final Metrics", ""]
+    if rows:
+        cols = [
+            "run",
+            "variant",
+            "split",
+            "direct_accuracy",
+            "executor_accuracy",
+            "executor_target_mass",
+            "init_accuracy",
+            "op_accuracy",
+            "arg_accuracy",
+            "program_exact",
+        ]
+        lines.append("| " + " | ".join(cols) + " |")
+        lines.append("|" + "|".join(["---"] * len(cols)) + "|")
+        for row in rows:
+            vals = []
+            for col in cols:
+                val = row.get(col, "")
+                vals.append(pct(val) if isinstance(val, float) else str(val))
+            lines.append("| " + " | ".join(vals) + " |")
+
+        by_variant: Dict[str, List[Dict[str, Any]]] = {}
+        for row in rows:
+            by_variant.setdefault(str(row["variant"]), []).append(row)
+        for metric in ["direct_accuracy", "executor_accuracy", "program_exact"]:
+            plt.figure(figsize=(8, 4.5))
+            by_line: Dict[str, List[Dict[str, Any]]] = {}
+            for variant, vrows in by_variant.items():
+                for row in vrows:
+                    by_line.setdefault(f"{variant}:{split_mode(str(row['split']))}", []).append(row)
+            for label, vrows in sorted(by_line.items()):
+                xs: List[int] = []
+                ys: List[float] = []
+                for row in sorted(vrows, key=lambda r: split_length(str(r["split"]))):
+                    val = row.get(metric)
+                    if isinstance(val, float) and val == val:
+                        xs.append(split_length(str(row["split"])))
+                        ys.append(100.0 * val)
+                if xs:
+                    plt.plot(xs, ys, marker="o", label=label)
+            plt.xlabel("Evaluation length")
+            plt.ylabel(metric.replace("_", " ") + " (%)")
+            plt.ylim(0, 105)
+            plt.grid(True, alpha=0.25)
+            plt.legend()
+            plt.tight_layout()
+            plt.savefig(FIGURES / f"{metric}.png", dpi=160)
+            plt.close()
+    else:
+        lines.append("No runs found.")
+    (ANALYSIS / "summary.md").write_text("\n".join(lines) + "\n")
+    print(ANALYSIS / "summary.md")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cyclic Transition Structure Solves Modular Slot Execution</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #58636d;
+      --line: #d7dde2;
+      --panel: #f6f8fa;
+      --accent: #0b6bcb;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 24px 72px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.12;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 1.35rem;
+      margin: 34px 0 12px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 10px 0;
+    }
+    .abstract {
+      border-left: 4px solid var(--accent);
+      background: var(--panel);
+      padding: 16px 18px;
+      margin: 20px 0 28px;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+    pre {
+      background: #101820;
+      color: #eef5f9;
+      padding: 14px 16px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--panel);
+      font-weight: 650;
+    }
+    td.num, th.num {
+      text-align: right;
+      white-space: nowrap;
+    }
+    figure {
+      margin: 18px 0 30px;
+    }
+    img {
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    figcaption {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 12px 16px;
+      background: var(--panel);
+      border-left: 4px solid var(--accent);
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Cyclic Transition Structure Solves Modular Slot Execution</h1>
+
+  <section class="abstract">
+    <h2>Abstract</h2>
+    <p>This experiment tests whether modular arithmetic structure is sufficient
+    for a recurrent slot model to learn exact latent belief-state transitions.
+    Each task starts with a hidden relation <code>B = A + d (mod p)</code>,
+    then applies arithmetic updates and observation filters to hidden registers
+    <code>A</code> and <code>B</code>. The model is given the initial support in
+    oracle slots, so the experiment isolates the transition learner.</p>
+    <p>At modulus 31, a generic MLP transition reaches only 22.6% query mass and
+    5.9% strict belief mass at held-out length 24. A Fourier-feature MLP is
+    weaker, reaching 18.4% query mass and 3.9% belief mass. A cyclic candidate
+    mixer reaches 100.0% query mass and 100.0% belief mass through length 24.
+    A learned primitive router also reaches 100.0%. A modulus-97 scale check
+    keeps the structured variants essentially exact: 99.8% belief mass for the
+    cyclic mixer and 99.9% for the primitive router at length 24.</p>
+  </section>
+
+  <h2>Task</h2>
+  <p>Each example begins with:</p>
+  <pre><code>B = A + d (mod p), with A unknown</code></pre>
+  <p>The initial belief contains <code>p</code> possible <code>(A,B)</code>
+  states. Programs contain arithmetic updates and observation filters:
+  <code>A=A+c</code>, <code>A=A-c</code>, <code>B=B+c</code>,
+  <code>B=B-c</code>, <code>A=A+B</code>, <code>B=B+A</code>,
+  <code>A=A-B</code>, <code>B=B-A</code>, <code>A % m = r</code>, and
+  <code>B % m = r</code>. Observation residues are sampled from the live
+  support, so target beliefs are never empty.</p>
+
+  <h2>Model</h2>
+  <p>The recurrent state is a fixed set of weighted slots. Each slot contains
+  logits over <code>A</code>, logits over <code>B</code>, and one slot-weight
+  logit. The decoded belief is:</p>
+  <pre><code>P(A,B) = sum_s softmax(w)_s * P_s(A) * P_s(B)</code></pre>
+  <p>All reported runs use oracle initialization: slot <code>a</code> starts at
+  <code>(A=a, B=a+d)</code>. This makes the transition rule the only learned
+  component.</p>
+
+  <h2>Transition Ladder</h2>
+  <table>
+    <thead><tr><th>Mode</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Exact ceiling</td><td>Applies the known transition rule directly.</td></tr>
+      <tr><td>MLP</td><td>Uses expected slot embeddings, operation embeddings, and argument embeddings to predict new slot logits.</td></tr>
+      <tr><td>Fourier MLP</td><td>Replaces value embeddings with cyclic Fourier residue features before the MLP.</td></tr>
+      <tr><td>Cyclic mixer</td><td>Learns gates over equivariant candidate updates such as circular shifts, circular sums/differences, and observation conditioning.</td></tr>
+      <tr><td>Primitive router</td><td>Learns a soft route over exact equivariant transition primitives.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Protocol</h2>
+  <table>
+    <thead>
+      <tr><th>Phase</th><th class="num">Modulus</th><th>Training lengths</th><th>Evaluation lengths</th><th class="num">Examples per length</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Smoke</td><td class="num">7</td><td>1-3</td><td>2, 3</td><td class="num">128</td></tr>
+      <tr><td>Pilot</td><td class="num">11</td><td>1-6</td><td>3, 6, 9, 12</td><td class="num">512</td></tr>
+      <tr><td>Main</td><td class="num">31</td><td>1-8</td><td>4, 8, 12, 16, 24</td><td class="num">512</td></tr>
+      <tr><td>Scale</td><td class="num">97</td><td>1-8</td><td>4, 8, 12, 16, 24</td><td class="num">128</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Main Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Variant</th><th>Transition</th><th class="num">L=4 query</th><th class="num">L=8 query</th>
+        <th class="num">L=12 query</th><th class="num">L=16 query</th><th class="num">L=24 query</th>
+        <th class="num">L=24 belief</th><th class="num">L=24 route acc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Exact ceiling</td><td>exact</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">n/a</td></tr>
+      <tr><td>MLP</td><td>MLP</td><td class="num">66.4%</td><td class="num">50.3%</td><td class="num">39.1%</td><td class="num">31.4%</td><td class="num">22.6%</td><td class="num">5.9%</td><td class="num">n/a</td></tr>
+      <tr><td>Fourier MLP</td><td>Fourier MLP</td><td class="num">60.2%</td><td class="num">43.9%</td><td class="num">33.1%</td><td class="num">26.1%</td><td class="num">18.4%</td><td class="num">3.9%</td><td class="num">n/a</td></tr>
+      <tr><td>Cyclic mixer</td><td>cyclic mixer</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">94.3%</td></tr>
+      <tr><td>Primitive router</td><td>primitive router</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <img src="../analysis/figures/main_mod31_decoder_belief_mass_at_k_ge_l.png" alt="Main modulus 31 belief mass">
+    <figcaption>Main modulus 31 belief mass at the first K satisfying K >= L.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="../analysis/figures/main_mod31_route_accuracy_at_k_ge_l.png" alt="Main modulus 31 route accuracy">
+    <figcaption>Main modulus 31 route accuracy for routed transition modes.</figcaption>
+  </figure>
+
+  <h2>Modulus-97 Scale Check</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Variant</th><th>Transition</th><th class="num">L=4 query</th><th class="num">L=8 query</th>
+        <th class="num">L=12 query</th><th class="num">L=16 query</th><th class="num">L=24 query</th>
+        <th class="num">L=24 belief</th><th class="num">L=24 route acc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Exact ceiling</td><td>exact</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">n/a</td></tr>
+      <tr><td>Cyclic mixer</td><td>cyclic mixer</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">99.9%</td><td class="num">99.9%</td><td class="num">99.8%</td><td class="num">100.0%</td></tr>
+      <tr><td>Primitive router</td><td>primitive router</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">99.9%</td><td class="num">99.9%</td><td class="num">100.0%</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <img src="../analysis/figures/scale_mod97_decoder_belief_mass_at_k_ge_l.png" alt="Scale modulus 97 belief mass">
+    <figcaption>Modulus 97 scale check for exact and structured transition modes.</figcaption>
+  </figure>
+
+  <h2>Interpretation</h2>
+  <blockquote>The transition learner needs cyclic modular structure, not merely more dense parameters or residue features.</blockquote>
+  <p>The oracle slot state already contains the correct initial support. The
+  hard part is applying the same update rule repeatedly. A generic MLP can
+  learn some task-level query signal, but its decoded belief remains far from
+  exact at modulus 31. Fourier features expose cyclic coordinates, but do not
+  enforce cyclic transition algebra. The cyclic mixer changes the learning
+  problem: it offers the correct equivariant update families and trains a small
+  controller to compose them.</p>
+
+  <h2>Limitations</h2>
+  <p>The experiment uses oracle slot initialization. It does not test whether a
+  model can populate the slot memory from raw text or from a learned encoder.
+  The cyclic mixer contains hand-designed equivariant candidate updates. The
+  result should be read as evidence for the required transition structure, not
+  as evidence that a generic neural model will discover that structure unaided.</p>
+
+  <h2>Reproducibility</h2>
+  <p>Run outputs are in <code>experiments/cyclic_transition_ladder/runs/</code>.
+  Checkpoints are stored externally in
+  <code>large_artifacts/cyclic_transition_ladder/checkpoints/</code>.</p>
+  <pre><code>PYTHONDONTWRITEBYTECODE=1 python experiments/cyclic_transition_ladder/src/analyze_cyclic_transition_ladder.py</code></pre>
+</main>
+</body>
+</html>

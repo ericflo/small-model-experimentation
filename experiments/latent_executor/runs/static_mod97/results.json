@@ -1,0 +1,106 @@
+{
+  "mode": "static",
+  "args": {
+    "mode": "static",
+    "seed": 23,
+    "modulus": 97,
+    "op_family": "const",
+    "train_min_len": 1,
+    "train_max_len": 8,
+    "eval_lengths": "4,8,12,16,24",
+    "eval_k": "0,1,2,4,8,12,16,24",
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "num_bases": 16,
+    "rank": 16,
+    "mem_dim": 48,
+    "dropout": 0.05,
+    "disable_memory": false,
+    "disable_dynamic": false,
+    "transition_temperature": 1.0,
+    "train_steps": 300,
+    "batch_size": 4096,
+    "eval_batch_size": 512,
+    "eval_examples": 2048,
+    "lr": 0.0005,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "log_every": 50,
+    "eval_every": 150,
+    "output_dir": "runs_latent_executor/static_mod97"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 4.59491491317749,
+      "pair_acc": 0.0,
+      "grad_norm": 0.15000776946544647
+    },
+    {
+      "step": 50,
+      "loss": 4.427318572998047,
+      "pair_acc": 0.001220703125,
+      "grad_norm": 0.16926048696041107
+    },
+    {
+      "step": 100,
+      "loss": 4.180720329284668,
+      "pair_acc": 0.002197265625,
+      "grad_norm": 0.17830583453178406
+    },
+    {
+      "step": 150,
+      "loss": 4.153103828430176,
+      "pair_acc": 0.001953125,
+      "grad_norm": 0.142388716340065
+    }
+  ],
+  "eval": [
+    {
+      "step": 150,
+      "rows": [
+        {
+          "model": "static",
+          "length": 4,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0107421875
+        },
+        {
+          "model": "static",
+          "length": 8,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.00048828125,
+          "register_accuracy": 0.011962890625
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.009033203125
+        },
+        {
+          "model": "static",
+          "length": 16,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.010986328125
+        },
+        {
+          "model": "static",
+          "length": 24,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0087890625
+        }
+      ]
+    }
+  ]
+}

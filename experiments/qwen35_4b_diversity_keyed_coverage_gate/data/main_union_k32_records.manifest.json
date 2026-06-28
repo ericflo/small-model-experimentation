@@ -1,0 +1,195 @@
+{
+  "base_records": "data/main_base_k4_records.jsonl",
+  "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+  "inputs": [
+    "data/main_base_k4_records.jsonl",
+    "data/main_default_extra_k32_records.jsonl",
+    "data/main_hot_extra_k32_records.jsonl",
+    "data/main_diverse_extra_k32_records.jsonl"
+  ],
+  "path": "data/main_union_k32_records.jsonl",
+  "records": {
+    "candidate_count_mean": 24.0875,
+    "coverage": 0.8625,
+    "distinct_behavior_rate_mean": 0.635992928544019,
+    "distinct_functional_rate_mean": 0.34001591234862166,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.875,
+    "parse_success_mean": 22.225,
+    "records": 80,
+    "visible_candidates_mean": 7.325,
+    "visible_coverage": 0.8625,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 24,
+    "zero_to_one": 13,
+    "zero_to_one_rate": 0.5416666666666666
+  },
+  "round_name": "main_union_k32",
+  "source_manifests": [
+    {
+      "manifest": {
+        "arm_name": "base_default",
+        "count": 80,
+        "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+        "max_new_tokens": 220,
+        "offset": 0,
+        "path": "data/main_base_k4_records.jsonl",
+        "records": {
+          "candidate_count_mean": 3.45,
+          "coverage": 0.7,
+          "distinct_behavior_rate_mean": 0.75625,
+          "distinct_functional_rate_mean": 0.4770833333333333,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "hidden_pass_candidates_mean": 1.875,
+          "parse_success_mean": 3.3625,
+          "records": 80,
+          "visible_candidates_mean": 2.2625,
+          "visible_coverage": 0.7,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 0,
+          "zero_to_one": 0,
+          "zero_to_one_rate": 0.0
+        },
+        "round_name": "main_base_k4",
+        "samples_per_task": 4,
+        "seed": 20260625,
+        "split": "mbpp_heldout",
+        "temperatures": "0.2,0.7,1.0",
+        "token_usage": {
+          "calls": 320,
+          "completion_tokens": 29741,
+          "forward_tokens": 69645,
+          "prompt_tokens": 39904
+        },
+        "top_p": 0.95,
+        "visible_tests": 1
+      },
+      "path": "data/main_base_k4_records.jsonl"
+    },
+    {
+      "manifest": {
+        "arm_name": "default_extra",
+        "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+        "extra_per_zero_task": 28,
+        "max_new_tokens": 220,
+        "path": "data/main_default_extra_k32_records.jsonl",
+        "records": {
+          "candidate_count_mean": 10.275,
+          "coverage": 0.8,
+          "distinct_behavior_rate_mean": 0.6699040017263572,
+          "distinct_functional_rate_mean": 0.3576054245473618,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "hidden_pass_candidates_mean": 2.2125,
+          "parse_success_mean": 9.7,
+          "records": 80,
+          "visible_candidates_mean": 4.0125,
+          "visible_coverage": 0.8,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 24,
+          "zero_to_one": 8,
+          "zero_to_one_rate": 0.3333333333333333
+        },
+        "records_in": "data/main_base_k4_records.jsonl",
+        "round_name": "main_default_extra_k32",
+        "seed": 20260625,
+        "temperatures": "0.2,0.7,1.0",
+        "token_usage": {
+          "calls": 672,
+          "completion_tokens": 81538,
+          "forward_tokens": 165846,
+          "prompt_tokens": 84308
+        },
+        "top_p": 0.95,
+        "zero_base_records": 24
+      },
+      "path": "data/main_default_extra_k32_records.jsonl"
+    },
+    {
+      "manifest": {
+        "arm_name": "hot_extra",
+        "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+        "extra_per_zero_task": 28,
+        "max_new_tokens": 220,
+        "path": "data/main_hot_extra_k32_records.jsonl",
+        "records": {
+          "candidate_count_mean": 11.3875,
+          "coverage": 0.825,
+          "distinct_behavior_rate_mean": 0.6847077256622585,
+          "distinct_functional_rate_mean": 0.3585286603170189,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "hidden_pass_candidates_mean": 2.3125,
+          "parse_success_mean": 10.675,
+          "records": 80,
+          "visible_candidates_mean": 4.4375,
+          "visible_coverage": 0.825,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 24,
+          "zero_to_one": 10,
+          "zero_to_one_rate": 0.4166666666666667
+        },
+        "records_in": "data/main_base_k4_records.jsonl",
+        "round_name": "main_hot_extra_k32",
+        "seed": 20260625,
+        "temperatures": "0.8,1.0,1.2",
+        "token_usage": {
+          "calls": 672,
+          "completion_tokens": 89390,
+          "forward_tokens": 173698,
+          "prompt_tokens": 84308
+        },
+        "top_p": 0.98,
+        "zero_base_records": 24
+      },
+      "path": "data/main_hot_extra_k32_records.jsonl"
+    },
+    {
+      "manifest": {
+        "arm_name": "diverse_extra",
+        "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+        "extra_per_zero_task": 28,
+        "max_new_tokens": 220,
+        "path": "data/main_diverse_extra_k32_records.jsonl",
+        "records": {
+          "candidate_count_mean": 11.0375,
+          "coverage": 0.8125,
+          "distinct_behavior_rate_mean": 0.6845410540226828,
+          "distinct_functional_rate_mean": 0.36232719125516677,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "hidden_pass_candidates_mean": 2.225,
+          "parse_success_mean": 10.2375,
+          "records": 80,
+          "visible_candidates_mean": 4.2125,
+          "visible_coverage": 0.8125,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 24,
+          "zero_to_one": 9,
+          "zero_to_one_rate": 0.375
+        },
+        "records_in": "data/main_base_k4_records.jsonl",
+        "round_name": "main_diverse_extra_k32",
+        "seed": 20260625,
+        "temperatures": "0.4,0.9,1.3",
+        "token_usage": {
+          "calls": 672,
+          "completion_tokens": 89315,
+          "forward_tokens": 173623,
+          "prompt_tokens": 84308
+        },
+        "top_p": 0.99,
+        "zero_base_records": 24
+      },
+      "path": "data/main_diverse_extra_k32_records.jsonl"
+    }
+  ],
+  "token_usage": {
+    "calls": 2336,
+    "completion_tokens": 289984,
+    "forward_tokens": 582812,
+    "prompt_tokens": 292828
+  }
+}

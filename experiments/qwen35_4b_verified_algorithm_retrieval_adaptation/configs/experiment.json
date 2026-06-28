@@ -1,0 +1,39 @@
+{
+  "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+  "date": "2026-06-26",
+  "model": "Qwen/Qwen3.5-4B local snapshot",
+  "dataset": "MBPP",
+  "visible_tests": 1,
+  "objective": "Test whether verified algorithm retrieval plus Qwen adaptation can recover held-out tasks missed by direct sampling.",
+  "primary_success_criteria": [
+    "Semantic retrieval adaptation recovers at least one direct-sampling miss not recovered by random or shuffled retrieval controls.",
+    "Oracle over semantic retrieval candidates shows nonzero headroom on direct-sampling misses.",
+    "Visible-pass/hidden-fail rate is reported for all retrieval arms.",
+    "Direct sampling baseline and retrieval arms are decomposed into coverage, zero-to-one lift, pass@1 proxy, parseability, and forward-token cost."
+  ],
+  "library": {
+    "split": "mbpp_train",
+    "count": 374,
+    "offset": 0,
+    "verified_reference_only": true
+  },
+  "eval": {
+    "split": "mbpp_test",
+    "count": 24,
+    "offset": 0,
+    "direct_baseline_k": 8,
+    "adaptation_on_direct_misses_only": true
+  },
+  "retrieval": {
+    "top_k": 3,
+    "method": "tfidf_lexical_cosine",
+    "controls": ["random", "shuffled"]
+  },
+  "adaptation": {
+    "samples_per_retrieved_algorithm": 1,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "max_new_tokens": 260,
+    "generation_batch_size": 1
+  }
+}

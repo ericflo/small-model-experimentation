@@ -1,0 +1,2811 @@
+{
+  "construct_adapter": "/workspace/large_artifacts/qwen35_4b_graphir_self_repair/models/graphir_construct_lora",
+  "data": "data/eval/graph_iid.jsonl",
+  "max_new_tokens": 160,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "num_samples": 0,
+  "prompt_mode": "trace",
+  "records": 60,
+  "repair_adapter": null,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "rows": [
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_000",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "target_program": "(format \"S{}\" (sum values))",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (len values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "mod_scalar_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_001",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" n)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_002",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "target_program": "(format \"L{}\" (len text))",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" 0)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_003",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "\"MISS\""
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_get_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_004",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" index)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "scalar_branch_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_005",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "low_label"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_threshold_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_006",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len values) threshold) high_label low_label)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_mod_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_007",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" modulus)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_008",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "target_program": "(format \"TS{}\" (sum item))",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (first item))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_count_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_009",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "visible_total": 6,
+      "wrong_program": "(format \"C{}\" (len tokens))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sorted_first_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_010",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (last values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_add_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_011",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" (sum values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_and_count_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_012",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (count_eq tokens needle) threshold) \"MANY\" \"FEW\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_and_mod_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_013",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "(if (eq (mod (len text) modulus) target) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nuser\nr0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nuser\nr0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nassistant\n<think>",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_and_scalar_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_014",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt n 0) \"PASS\" \"FAIL\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_015",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "target_program": "(format \"S{}\" (sum values))",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (len values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "mod_scalar_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_016",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" n)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_017",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "target_program": "(format \"L{}\" (len text))",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" text)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_018",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "(if (contains needle text) \"HAS\" \"MISS\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_get_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_019",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" index)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nassistant\n<think>\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "scalar_branch_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_020",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "(if (lt score threshold) high_label low_label)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_threshold_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_021",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len values) threshold) high_label low_label)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_mod_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_022",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" modulus)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_023",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "target_program": "(format \"TS{}\" (sum item))",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (len item))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_count_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_024",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "visible_total": 6,
+      "wrong_program": "(if (contains tokens needle) \"C1\" \"C0\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sorted_first_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_025",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (last values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_add_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_026",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" (sum values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_and_count_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_027",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "visible_total": 6,
+      "wrong_program": "(if (contains tokens needle) \"MANY\" \"FEW\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_and_mod_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_028",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len text) threshold) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nuser\nr0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nuser\nr0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nuser\nr",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_and_scalar_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_029",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (sum values) threshold) \"PASS\" \"FAIL\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_030",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "target_program": "(format \"S{}\" (sum values))",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (len values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "mod_scalar_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_031",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" n)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_032",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "target_program": "(format \"L{}\" (len text))",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" 0)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_033",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "\"MISS\""
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_get_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_034",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" (sum item))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nassistant\n<think>\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr0 = GT score threshold\nr1 = IF r0 high0\nassistant\n<think>\nr0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\nuser\nr",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "scalar_branch_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_035",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "(if (lt score threshold) high_label low_label)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_threshold_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_036",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "low_label"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_mod_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_037",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" (len text))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_038",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "target_program": "(format \"TS{}\" (sum item))",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (first item))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_count_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_039",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "visible_total": 6,
+      "wrong_program": "(format \"C{}\" (len tokens))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sorted_first_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_040",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (first values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_add_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_041",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" offset)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_and_count_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_042",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (count_eq tokens needle) threshold) \"MANY\" \"FEW\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_and_mod_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_043",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "(if (eq (mod (len text) modulus) target) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nuser\nr0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nuser\nr0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\nassistant\n<think>",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_and_scalar_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_044",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt n 0) \"PASS\" \"FAIL\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_045",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = FORMAT \"S{}\" r0\nout = r1",
+      "target_program": "(format \"S{}\" (sum values))",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (first values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "mod_scalar_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_046",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = MOD n modulus\nr1 = FORMAT \"R{}\" r0\nout = r1",
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" modulus)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_047",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = FORMAT \"L{}\" r0\nout = r1",
+      "target_program": "(format \"L{}\" (len text))",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" text)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_048",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS text needle\nr1 = IF r0 \"HAS\" \"MISS\"\nout = r1",
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "\"MISS\""
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_get_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_049",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GET item index\nr1 = FORMAT \"T{}\" r0\nout = r1",
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" index)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "scalar_branch_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_050",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = GT score threshold\nr1 = IF r0 high_label low_label\nout = r1",
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "low_label"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_threshold_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_051",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = IF r1 high_label low_label\nout = r2",
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len values) threshold) high_label low_label)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_mod_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_052",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = MOD r0 modulus\nr2 = FORMAT \"LM{}\" r1\nout = r2",
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" modulus)"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "tuple_sum_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_053",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM item\nr1 = FORMAT \"TS{}\" r0\nout = r1",
+      "target_program": "(format \"TS{}\" (sum item))",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (first item))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+          "kind": "construct_greedy",
+          "raw": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_count_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_054",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = COUNT_EQ tokens needle\nr1 = FORMAT \"C{}\" r0\nout = r1",
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "visible_total": 6,
+      "wrong_program": "(if (contains tokens needle) \"C1\" \"C0\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sorted_first_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_055",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SORT values\nr1 = FIRST r0\nr2 = FORMAT \"F{}\" r1\nout = r2",
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (last values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_add_label",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_056",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = ADD r0 offset\nr2 = FORMAT \"A{}\" r1\nout = r2",
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" (sum values))"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "contains_and_count_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_057",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = CONTAINS tokens needle\nr1 = COUNT_EQ tokens needle\nr2 = GT r1 threshold\nr3 = AND r0 r2\nr4 = IF r3 \"MANY\" \"FEW\"\nout = r4",
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (count_eq tokens needle) threshold) \"MANY\" \"FEW\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+          "kind": "construct_greedy",
+          "raw": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "length_and_mod_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_058",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = LEN text\nr1 = GT r0 threshold\nr2 = LEN text\nr3 = MOD r2 modulus\nr4 = EQ r3 target\nr5 = AND r1 r4\nr6 = IF r5 \"LEN_OK\" \"MISS\"\nout = r6",
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len text) threshold) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "construct_candidate_count": 1,
+      "construct_candidates": [
+        {
+          "graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+          "kind": "construct_greedy",
+          "raw": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "construct_greedy_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_greedy_hidden_all": true,
+      "construct_greedy_hidden_passes": 18,
+      "construct_greedy_visible_all": true,
+      "construct_greedy_visible_passes": 6,
+      "construct_rerank_hidden_all": true,
+      "construct_rerank_visible_all": true,
+      "construct_selected_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "construct_selected_hidden_passes": 18,
+      "construct_selected_kind": "construct_greedy",
+      "construct_selected_visible_passes": 6,
+      "family": "sum_and_scalar_code",
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_059",
+      "repair_candidate_count": 0,
+      "repair_candidates": [],
+      "repair_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "repair_hidden_all": true,
+      "repair_hidden_passes": 18,
+      "repair_visible_all": true,
+      "repair_visible_passes": 6,
+      "target_graph": "r0 = SUM values\nr1 = GT r0 threshold\nr2 = GT n 0\nr3 = AND r1 r2\nr4 = IF r3 \"PASS\" \"FAIL\"\nout = r4",
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "visible_total": 6,
+      "wrong_program": "(if (gt n 0) \"PASS\" \"FAIL\")"
+    }
+  ],
+  "summary": {
+    "by_family": {
+      "contains_and_count_code": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "contains_code": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "contains_count_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "length_and_mod_code": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "length_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "length_mod_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "mod_scalar_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "scalar_branch_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sorted_first_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_add_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_and_scalar_code": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_threshold_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "tuple_get_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "tuple_sum_label": {
+        "construct_greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "construct_rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "repair_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      }
+    },
+    "overall": {
+      "construct_greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "construct_greedy_visible_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "construct_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "repair_hidden_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "repair_visible_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      }
+    }
+  },
+  "temperature": 0.7,
+  "top_p": 0.95
+}

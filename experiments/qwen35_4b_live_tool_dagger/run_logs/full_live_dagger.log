@@ -1,0 +1,470 @@
+generated 3/51 split=train direct=0 program=0 visible=0 rounds=3
+generated 6/51 split=train direct=0 program=1 visible=1 rounds=1
+generated 9/51 split=train direct=0 program=0 visible=0 rounds=3
+generated 12/51 split=train direct=1 program=1 visible=1 rounds=1
+generated 15/51 split=train direct=0 program=0 visible=0 rounds=3
+generated 18/51 split=train direct=0 program=0 visible=0 rounds=3
+generated 21/51 split=train direct=0 program=0 visible=0 rounds=3
+generated 24/51 split=train direct=0 program=0 visible=1 rounds=1
+generated 27/51 split=train direct=0 program=0 visible=0 rounds=3
+generated 30/51 split=train direct=0 program=1 visible=1 rounds=2
+generated 33/51 split=train direct=0 program=0 visible=0 rounds=3
+generated 36/51 split=train direct=1 program=0 visible=0 rounds=3
+generated 39/51 split=dev direct=0 program=1 visible=1 rounds=1
+generated 42/51 split=dev direct=1 program=0 visible=0 rounds=3
+generated 45/51 split=dev direct=1 program=0 visible=0 rounds=3
+generated 48/51 split=test direct=0 program=0 visible=0 rounds=3
+generated 51/51 split=test direct=0 program=0 visible=0 rounds=3
+lora_seq_policy step 1/60 loss=4.8074
+lora_seq_policy step 12/60 loss=0.1103
+lora_seq_policy step 24/60 loss=0.1483
+lora_seq_policy step 36/60 loss=0.2158
+lora_seq_policy step 48/60 loss=0.3658
+lora_seq_policy step 60/60 loss=0.9393
+lora_shuffled_seq step 1/60 loss=4.8965
+lora_shuffled_seq step 12/60 loss=0.6062
+lora_shuffled_seq step 24/60 loss=0.5394
+lora_shuffled_seq step 36/60 loss=0.6574
+lora_shuffled_seq step 48/60 loss=0.3419
+lora_shuffled_seq step 60/60 loss=0.6767
+{
+  "experiment": "qwen35_4b_live_tool_dagger",
+  "learned_rule": {
+    "results": {
+      "dev": {
+        "accuracy": 0.5555555555555556,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 5,
+        "n": 9,
+        "policy": "learned_rule",
+        "program_commits": 2,
+        "program_correct": 2,
+        "program_generations": 9,
+        "program_precision": 1.0,
+        "repair_actions": 0,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 6,
+        "policy": "learned_rule",
+        "program_commits": 2,
+        "program_correct": 0,
+        "program_generations": 6,
+        "program_precision": 0.0,
+        "repair_actions": 0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.2777777777777778,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 6,
+        "exact": 10,
+        "n": 36,
+        "policy": "learned_rule",
+        "program_commits": 8,
+        "program_correct": 6,
+        "program_generations": 36,
+        "program_precision": 0.75,
+        "repair_actions": 0,
+        "split": "train"
+      }
+    },
+    "selected": {
+      "dev": {
+        "accuracy": 0.5555555555555556,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 5,
+        "n": 9,
+        "policy": "rule",
+        "program_commits": 2,
+        "program_correct": 2,
+        "program_generations": 9,
+        "program_precision": 1.0,
+        "repair_actions": 0,
+        "split": "dev"
+      },
+      "false": "WRITE",
+      "feature": "program_disagrees_direct",
+      "true": "PROGRAM"
+    },
+    "top_candidates": [
+      {
+        "dev": {
+          "accuracy": 0.5555555555555556,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 2,
+          "exact": 5,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 2,
+          "program_correct": 2,
+          "program_generations": 9,
+          "program_precision": 1.0,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "program_disagrees_direct",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.5555555555555556,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 2,
+          "exact": 5,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 2,
+          "program_correct": 2,
+          "program_generations": 9,
+          "program_precision": 1.0,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "round_zero",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.5555555555555556,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 2,
+          "exact": 5,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 2,
+          "program_correct": 2,
+          "program_generations": 9,
+          "program_precision": 1.0,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "stage_round",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.5555555555555556,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 2,
+          "exact": 5,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 2,
+          "program_correct": 2,
+          "program_generations": 9,
+          "program_precision": 1.0,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "PROGRAM",
+        "feature": "stage_start",
+        "true": "WRITE"
+      },
+      {
+        "dev": {
+          "accuracy": 0.5555555555555556,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 2,
+          "exact": 5,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 2,
+          "program_correct": 2,
+          "program_generations": 9,
+          "program_precision": 1.0,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "visible_exec_ok",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.5555555555555556,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 2,
+          "exact": 5,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 2,
+          "program_correct": 2,
+          "program_generations": 9,
+          "program_precision": 1.0,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "visible_pass",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 6,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "direct_char_close_visible",
+        "true": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 0,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "FIX",
+        "feature": "direct_char_close_visible",
+        "true": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 0,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "PROGRAM",
+        "feature": "direct_char_close_visible",
+        "true": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 3,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "DIRECT",
+        "feature": "direct_char_close_visible",
+        "true": "WRITE"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 3,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "FIX",
+        "feature": "direct_char_close_visible",
+        "true": "WRITE"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 3,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "PROGRAM",
+        "feature": "direct_char_close_visible",
+        "true": "WRITE"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 0,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "DIRECT",
+        "feature": "direct_char_close_visible",
+        "true": "FIX"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 6,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "direct_char_close_visible",
+        "true": "FIX"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 0,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "PROGRAM",
+        "feature": "direct_char_close_visible",
+        "true": "FIX"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 0,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "DIRECT",
+        "feature": "direct_char_close_visible",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 6,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "direct_char_close_visible",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 0,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "FIX",
+        "feature": "direct_char_close_visible",
+        "true": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 4,
+          "program_precision": null,
+          "repair_actions": 0,
+          "split": "dev"
+        },
+        "false": "WRITE",
+        "feature": "direct_output_empty",
+        "true": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.3333333333333333,
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 3,
+          "n": 9,
+          "policy": "rule",
+          "program_commits": 0,
+          "program_correct": 0,
+          "program_generations": 0,
+          "program_precision": null,
+      

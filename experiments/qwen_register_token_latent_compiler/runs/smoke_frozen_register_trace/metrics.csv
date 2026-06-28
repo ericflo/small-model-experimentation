@@ -1,0 +1,7 @@
+run,variant,split,n,direct_accuracy,direct_target_mass,executor_accuracy,executor_target_mass,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,pair_true_answer_consistency,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+smoke_frozen_register_trace,register_trace,standard_len2,4.0,nan,nan,0.0,0.010258573107421398,0.0,0.25,0.0,0.0,0.0,0.0,0.0,,,,,
+smoke_frozen_register_trace,register_trace,standard_len4,4.0,nan,nan,0.0,0.010251559782773256,0.0,0.1875,0.0,0.0,0.0,0.0,0.0,,,,,
+smoke_frozen_register_trace,register_trace,paraphrase_len2,4.0,nan,nan,0.0,0.01025943923741579,0.0,0.375,0.0,0.0,0.0,0.0,0.0,,,,,
+smoke_frozen_register_trace,register_trace,paraphrase_len4,4.0,nan,nan,0.0,0.010260708630084991,0.0,0.1875,0.0,0.0,0.0,0.0,0.0,,,,,
+smoke_frozen_register_trace,register_trace,paired_len2,8.0,nan,nan,0.0,0.01026474661193788,0.25,0.25,0.0,0.0,0.0,0.0,0.0,1.0,1.0,0.0,1.0,1.0
+smoke_frozen_register_trace,register_trace,paired_len4,8.0,nan,nan,0.0,0.010259605944156647,0.0,0.25,0.03125,0.0,0.0,0.0,0.0,1.0,0.5,0.0,0.5,0.5

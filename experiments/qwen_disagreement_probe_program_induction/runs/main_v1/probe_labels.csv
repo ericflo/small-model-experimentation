@@ -1,0 +1,415 @@
+task_id,family,probe_kind,probe_index,variant,input,label,raw
+BillingCode.000002,BillingCode,disagreement,0,plain,[CPT-351,[CPT-351],[CPT-351]
+BillingCode.000002,BillingCode,disagreement,0,consistency,[CPT-351,[CPT-351],[CPT-351]
+BillingCode.000002,BillingCode,disagreement,1,plain,[CPT-11535,[CPT-11535],[CPT-11535]
+BillingCode.000002,BillingCode,disagreement,1,consistency,[CPT-11535,[CPT-11535],[CPT-11535]
+BillingCode.000002,BillingCode,disagreement,2,plain,[CPT-11222,[CPT-11222],[CPT-11222]
+BillingCode.000002,BillingCode,disagreement,2,consistency,[CPT-11222,[CPT-11222],[CPT-11222]
+BillingCode.000002,BillingCode,disagreement,3,plain,[CPT-11224,[CPT-11224],[CPT-11224]
+BillingCode.000002,BillingCode,disagreement,3,consistency,[CPT-11224,[CPT-11224],[CPT-11224]
+BillingCode.000002,BillingCode,random,0,plain,[CPT-11222,[CPT-11222],[CPT-11222]
+BillingCode.000002,BillingCode,random,0,consistency,[CPT-11222,[CPT-11222],[CPT-11222]
+BillingCode.000002,BillingCode,random,1,plain,[CPT-352,[CPT-352],[CPT-352]
+BillingCode.000002,BillingCode,random,1,consistency,[CPT-352,[CPT-352],[CPT-352]
+BillingCode.000002,BillingCode,random,2,plain,[CPT-335,[CPT-335],[CPT-335]
+BillingCode.000002,BillingCode,random,2,consistency,[CPT-335,[CPT-335],[CPT-335]
+BillingCode.000002,BillingCode,random,3,plain,[CPT-11224,[CPT-11224],[CPT-11224]
+BillingCode.000002,BillingCode,random,3,consistency,[CPT-11224,[CPT-11224],[CPT-11224]
+City.000011,City,disagreement,0,plain,New York City,New York City,New York City
+City.000011,City,disagreement,0,consistency,New York City,New York City,New York City
+City.000011,City,disagreement,1,plain,NEW YORK CITY,New York City,New York City
+City.000011,City,disagreement,1,consistency,NEW YORK CITY,New York City,New York City
+City.000011,City,disagreement,2,plain,n.y.c.,New York City,New York City
+City.000011,City,disagreement,2,consistency,n.y.c.,New York City,New York City
+City.000011,City,disagreement,3,plain,NEW YORK CITY  ,New York City,New York City
+City.000011,City,disagreement,3,consistency,NEW YORK CITY  ,New York City,New York City
+City.000011,City,random,0,plain,New Yor,New York City,New York City
+City.000011,City,random,0,consistency,New Yor,New York City,New York City
+City.000011,City,random,1,plain,.c.y.n,New York City,New York City
+City.000011,City,random,1,consistency,.c.y.n,New York City,New York City
+City.000011,City,random,2,plain,NEW YORK CITY,New York City,New York City
+City.000011,City,random,2,consistency,NEW YORK CITY,New York City,New York City
+City.000011,City,random,3,plain,New York City   X,New York City,New York City
+City.000011,City,random,3,consistency,New York City   X,New York City,New York City
+Currency.000004,Currency,disagreement,0,plain,�38.5,�,�
+Currency.000004,Currency,disagreement,0,consistency,�38.5,�,�
+Currency.000004,Currency,disagreement,1,plain,�19.9,�,�
+Currency.000004,Currency,disagreement,1,consistency,�19.9,�,�
+Currency.000004,Currency,disagreement,2,plain,�40.47,�,�
+Currency.000004,Currency,disagreement,2,consistency,�40.47,�,�
+Currency.000004,Currency,disagreement,3,plain,$48.4,$,$
+Currency.000004,Currency,disagreement,3,consistency,$48.4,$,$
+Currency.000004,Currency,random,0,plain,$57.4,$,$
+Currency.000004,Currency,random,0,consistency,$57.4,$,$
+Currency.000004,Currency,random,1,plain,�50.5,�,�
+Currency.000004,Currency,random,1,consistency,�50.5,�,�
+Currency.000004,Currency,random,2,plain,$49.4,$,$
+Currency.000004,Currency,random,2,consistency,$49.4,$,$
+Currency.000004,Currency,random,3,plain,$43.2,$,$
+Currency.000004,Currency,random,3,consistency,$43.2,$,$
+DateTime.000012,DateTime,disagreement,0,plain,1766,1766,1766
+DateTime.000012,DateTime,disagreement,0,consistency,1766,1766,1766
+DateTime.000012,DateTime,disagreement,1,plain,2050,2050,2050
+DateTime.000012,DateTime,disagreement,1,consistency,2050,2050,2050
+DateTime.000012,DateTime,disagreement,2,plain,2047,2047,2047
+DateTime.000012,DateTime,disagreement,2,consistency,2047,2047,2047
+DateTime.000012,DateTime,disagreement,3,plain,1756,1756,1756
+DateTime.000012,DateTime,disagreement,3,consistency,1756,1756,1756
+DateTime.000012,DateTime,random,0,plain,2048,2048,2048
+DateTime.000012,DateTime,random,0,consistency,2048,2048,2048
+DateTime.000012,DateTime,random,1,plain,10 March 1933,1933,1933
+DateTime.000012,DateTime,random,1,consistency,10 March 1933,1933,1933
+DateTime.000012,DateTime,random,2,plain,2238,2238,2238
+DateTime.000012,DateTime,random,2,consistency,2238,2238,2238
+DateTime.000012,DateTime,random,3,plain,11 March 1933,1933,1933
+DateTime.000012,DateTime,random,3,consistency,11 March 1933,1933,1933
+DateTime.000035,DateTime,disagreement,0,plain,col0=22ABDDK_3388.XY | col1=9/12/2002 11:34:17 PM | col2=8.111111 | col3=310 | col4=chicago,2002-09-12 23:34:17,2002-09-12 23:34:17
+DateTime.000035,DateTime,disagreement,0,consistency,col0=22ABDDK_3388.XY | col1=9/12/2002 11:34:17 PM | col2=8.111111 | col3=310 | col4=chicago,2002-09-12 23:34:17,2002-09-12 23:34:17
+DateTime.000035,DateTime,disagreement,1,plain,col0=22ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=316 | col4=chicago,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,disagreement,1,consistency,col0=22ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=316 | col4=chicago,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,disagreement,2,plain,col0=21ABDDK_3388.XY | col1=9/12/2002 11:34:17 PM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 23:34:17,2002-09-12 23:34:17
+DateTime.000035,DateTime,disagreement,2,consistency,col0=21ABDDK_3388.XY | col1=9/12/2002 11:34:17 PM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 23:34:17,2002-09-12 23:34:17
+DateTime.000035,DateTime,disagreement,3,plain,col0=22ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=311 | col4=chicago X,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,disagreement,3,consistency,col0=22ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=311 | col4=chicago X,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,random,0,plain,col0=22ABDDK_3388.XY | col1=9/12/2002 6:25:57 pm | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 18:25:57,2002-09-12 18:25:57
+DateTime.000035,DateTime,random,0,consistency,col0=22ABDDK_3388.XY | col1=9/12/2002 6:25:57 pm | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 18:25:57,2002-09-12 18:25:57
+DateTime.000035,DateTime,random,1,plain,col0=22ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=311 | col4=chi,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,random,1,consistency,col0=22ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=311 | col4=chi,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,random,2,plain,col0=21ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,random,2,consistency,col0=21ABDDK_3388.XY | col1=9/12/2002 7:00:20 AM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 07:00:20,2002-09-12 07:00:20
+DateTime.000035,DateTime,random,3,plain,col0=22ABDDK_3388.XY | col1=9/12/2002 9:44:40 PM | col2=8.111111 | col3=316 | col4=chicago,2002-09-12 21:44:40,2002-09-12 21:44:40
+DateTime.000035,DateTime,random,3,consistency,col0=22ABDDK_3388.XY | col1=9/12/2002 9:44:40 PM | col2=8.111111 | col3=316 | col4=chicago,2002-09-12 21:44:40,2002-09-12 21:44:40
+DateTime.000077,DateTime,disagreement,0,plain,24:00,20:00-39:00,20:00-39:00
+DateTime.000077,DateTime,disagreement,0,consistency,24:00,20:00-39:00,20:00-39:00
+DateTime.000077,DateTime,disagreement,1,plain,1:00,0:00-19:00,0:00-19:00
+DateTime.000077,DateTime,disagreement,1,consistency,1:00,0:00-19:00,0:00-19:00
+DateTime.000077,DateTime,disagreement,2,plain,44:-2,40:00-59:00-2,40:00-59:00-2
+DateTime.000077,DateTime,disagreement,2,consistency,44:-2,40:00-59:00,40:00-59:00
+DateTime.000077,DateTime,disagreement,3,plain,44:00,40:00-59:00,40:00-59:00
+DateTime.000077,DateTime,disagreement,3,consistency,44:00,40:00-59:00,40:00-59:00
+DateTime.000077,DateTime,random,0,plain,00:00,0:00-19:00,0:00-19:00
+DateTime.000077,DateTime,random,0,consistency,00:00,0:00-19:00,0:00-19:00
+DateTime.000077,DateTime,random,1,plain,10:00,10:00-19:00,10:00-19:00
+DateTime.000077,DateTime,random,1,consistency,10:00,0:00-19:00,0:00-19:00
+DateTime.000077,DateTime,random,2,plain,49:00,40:00-59:00,40:00-59:00
+DateTime.000077,DateTime,random,2,consistency,49:00,40:00-59:00,40:00-59:00
+DateTime.000077,DateTime,random,3,plain,26:00,20:00-39:00,20:00-39:00
+DateTime.000077,DateTime,random,3,consistency,26:00,20:00-39:00,20:00-39:00
+DateTime.000083,DateTime,disagreement,0,plain,9/6/2143 18:25,Sun 6:00 PM,Sun 6:00 PM
+DateTime.000083,DateTime,disagreement,0,consistency,9/6/2143 18:25,Sun 6:00 PM,Sun 6:00 PM
+DateTime.000083,DateTime,disagreement,1,plain,11/31/1846 7:00,Sat 7:00 AM,Sat 7:00 AM
+DateTime.000083,DateTime,disagreement,1,consistency,11/31/1846 7:00,Sat 7:00 AM,Sat 7:00 AM
+DateTime.000083,DateTime,disagreement,2,plain,4/20/1953 23:34,Wed 11:30 PM,Wed 11:30 PM
+DateTime.000083,DateTime,disagreement,2,consistency,4/20/1953 23:34,Wed 11:30 PM,Wed 11:30 PM
+DateTime.000083,DateTime,disagreement,3,plain,9/22/1953 23:34,Wed 11:30 PM,Wed 11:30 PM
+DateTime.000083,DateTime,disagreement,3,consistency,9/22/1953 23:34,Wed 11:30 PM,Wed 11:30 PM
+DateTime.000083,DateTime,random,0,plain,1/31/1846 7:00,Sat 7:00 AM,Sat 7:00 AM
+DateTime.000083,DateTime,random,0,consistency,1/31/1846 7:00,Sat 7:00 AM,Sat 7:00 AM
+DateTime.000083,DateTime,random,1,plain,9/6/2143 18:25,Sun 6:00 PM,Sun 6:00 PM
+DateTime.000083,DateTime,random,1,consistency,9/6/2143 18:25,Sun 6:00 PM,Sun 6:00 PM
+DateTime.000083,DateTime,random,2,plain,11/6/2143 18:25,Sun 6:00 PM,Sun 6:00 PM
+DateTime.000083,DateTime,random,2,consistency,11/6/2143 18:25,Sun 6:00 PM,Sun 6:00 PM
+DateTime.000083,DateTime,random,3,plain,5/30/2002 21:44,Sat 9:30 PM,Sat 9:30 PM
+DateTime.000083,DateTime,random,3,consistency,5/30/2002 21:44,Sat 9:30 PM,Sat 9:30 PM
+DateTime.000088,DateTime,disagreement,0,plain,19:44:40,7:00PM,7:00PM
+DateTime.000088,DateTime,disagreement,0,consistency,19:44:40,7:00PM,7:00PM
+DateTime.000088,DateTime,disagreement,1,plain,20:25:57,8:00PM,8:00PM
+DateTime.000088,DateTime,disagreement,1,consistency,20:25:57,8:00PM,8:00PM
+DateTime.000088,DateTime,disagreement,2,plain,21:34:17,8:00PM,8:00PM
+DateTime.000088,DateTime,disagreement,2,consistency,21:34:17,8:00PM,8:00PM
+DateTime.000088,DateTime,disagreement,3,plain,23:44:40,8:00PM,8:00PM
+DateTime.000088,DateTime,disagreement,3,consistency,23:44:40,9:00PM,9:00PM
+DateTime.000088,DateTime,random,0,plain,22:34:17,8:00PM,8:00PM
+DateTime.000088,DateTime,random,0,consistency,22:34:17,8:00PM,8:00PM
+DateTime.000088,DateTime,random,1,plain,23:25:57,10:00PM,10:00PM
+DateTime.000088,DateTime,random,1,consistency,23:25:57,9:00PM,9:00PM
+DateTime.000088,DateTime,random,2,plain,23:32:17,10:00PM,10:00PM
+DateTime.000088,DateTime,random,2,consistency,23:32:17,10:00PM,10:00PM
+DateTime.000088,DateTime,random,3,plain,28:34:17,12:00AM,12:00AM
+DateTime.000088,DateTime,random,3,consistency,28:34:17,12:00AM,12:00AM
+DateTime.000094,DateTime,disagreement,0,plain,1983-12-17,1983-12-17,1983-12-17
+DateTime.000094,DateTime,disagreement,0,consistency,1983-12-17,1983-12-17,1983-12-17
+DateTime.000094,DateTime,disagreement,1,plain,13. November 2013,2013-11-13,2013-11-13
+DateTime.000094,DateTime,disagreement,1,consistency,13. November 2013,2013-11-13,2013-11-13
+DateTime.000094,DateTime,disagreement,2,plain,26.3.1990,1990-03-26,1990-03-26
+DateTime.000094,DateTime,disagreement,2,consistency,26.3.1990,1990-03-26,1990-03-26
+DateTime.000094,DateTime,disagreement,3,plain,14. November 2013,2013-11-14,2013-11-14
+DateTime.000094,DateTime,disagreement,3,consistency,14. November 2013,2013-11-14,2013-11-14
+DateTime.000094,DateTime,random,0,plain,8 April 1987,1987-04-08,1987-04-08
+DateTime.000094,DateTime,random,0,consistency,8 April 1987,1987-04-08,1987-04-08
+DateTime.000094,DateTime,random,1,plain,1983-12-17,1983-12-17,1983-12-17
+DateTime.000094,DateTime,random,1,consistency,1983-12-17,1983-12-17,1983-12-17
+DateTime.000094,DateTime,random,2,plain,14. NOVEMBER 2013,2013-11-14,2013-11-14
+DateTime.000094,DateTime,random,2,consistency,14. NOVEMBER 2013,2013-11-14,2013-11-14
+DateTime.000094,DateTime,random,3,plain,1974-12-17,1974-12-17,1974-12-17
+DateTime.000094,DateTime,random,3,consistency,1974-12-17,1974-12-17,1974-12-17
+DateTime.000098,DateTime,disagreement,0,plain,1999--11--6,November,November
+DateTime.000098,DateTime,disagreement,0,consistency,1999--11--6,November,November
+DateTime.000098,DateTime,disagreement,1,plain,2159--8--2,August,August
+DateTime.000098,DateTime,disagreement,1,consistency,2159--8--2,August,August
+DateTime.000098,DateTime,disagreement,2,plain,2161--8--2,August,August
+DateTime.000098,DateTime,disagreement,2,consistency,2161--8--2,August,August
+DateTime.000098,DateTime,disagreement,3,plain,2160--10--2,October,October
+DateTime.000098,DateTime,disagreement,3,consistency,2160--10--2,October,October
+DateTime.000098,DateTime,random,0,plain,2170--8--2,August,August
+DateTime.000098,DateTime,random,0,consistency,2170--8--2,August,August
+DateTime.000098,DateTime,random,1,plain,2000--11--6,November,November
+DateTime.000098,DateTime,random,1,consistency,2000--11--6,November,November
+DateTime.000098,DateTime,random,2,plain,1847--1--31,January,January
+DateTime.000098,DateTime,random,2,consistency,1847--1--31,January,January
+DateTime.000098,DateTime,random,3,plain,2160--8--2,August,August
+DateTime.000098,DateTime,random,3,consistency,2160--8--2,August,August
+Email.000013,Email,disagreement,0,plain,10b19p@fabrikamresidences.com,fabrikamresidences.com,fabrikamresidences.com
+Email.000013,Email,disagreement,0,consistency,10b19p@fabrikamresidences.com,fabrikamresidences.com,fabrikamresidences.com
+Email.000013,Email,disagreement,1,plain,VIMI4B8QS@LAMNAHEALTCARE.COM,LAMNAHEALTCARE.COM,LAMNAHEALTCARE.COM
+Email.000013,Email,disagreement,1,consistency,VIMI4B8QS@LAMNAHEALTCARE.COM,LAMNAHEALTCARE.COM,LAMNAHEALTCARE.COM
+Email.000013,Email,disagreement,2,plain,7crg5qhfl@humongousinsurance.com,humongousinsurance.com,humongousinsurance.com
+Email.000013,Email,disagreement,2,consistency,7crg5qhfl@humongousinsurance.com,humongousinsurance.com,humongousinsurance.com
+Email.000013,Email,disagreement,3,plain,nvbxv6fshq@vanarsdelltd.com,vanarsdelltd.com,vanarsdelltd.com
+Email.000013,Email,disagreement,3,consistency,nvbxv6fshq@vanarsdelltd.com,vanarsdelltd.com,vanarsdelltd.com
+Email.000013,Email,random,0,plain,nvbxv6fshq@vanarsdelltd.com,vanarsdelltd.com,vanarsdelltd.com
+Email.000013,Email,random,0,consistency,nvbxv6fshq@vanarsdelltd.com,vanarsdelltd.com,vanarsdelltd.com
+Email.000013,Email,random,1,plain,vimi9b8qs@lamnahealtcare.com,lamnahealtcare.com,lamnahealtcare.com
+Email.000013,Email,random,1,consistency,vimi9b8qs@lamnahealtcare.com,lamnahealtcare.com,lamnahealtcare.com
+Email.000013,Email,random,2,plain,Vimi4B8Qs@Lamnahealtcare.Com,Lamnahealtcare.Com,Lamnahealtcare.Com
+Email.000013,Email,random,2,consistency,Vimi4B8Qs@Lamnahealtcare.Com,Lamnahealtcare.com,Lamnahealtcare.com
+Email.000013,Email,random,3,plain,vimi3b8qs@lamnahealtcare.com,lamnahealtcare.com,lamnahealtcare.com
+Email.000013,Email,random,3,consistency,vimi3b8qs@lamnahealtcare.com,lamnahealtcare.com,lamnahealtcare.com
+FilePath.000001,FilePath,disagreement,0,plain,/libero/enim9.png,enim9,enim9
+FilePath.000001,FilePath,disagreement,0,consistency,/libero/enim9.png,enim9,enim9
+FilePath.000001,FilePath,disagreement,1,plain,/libero/quas/enim7.png,enim7,enim7
+FilePath.000001,FilePath,disagreement,1,consistency,/libero/quas/enim7.png,enim7,enim7
+FilePath.000001,FilePath,disagreement,2,plain,/LIBERO/ENIM4.PNG,enim4,enim4
+FilePath.000001,FilePath,disagreement,2,consistency,/LIBERO/ENIM4.PNG,enim4,enim4
+FilePath.000001,FilePath,disagreement,3,plain,/libero/enim6.png,enim6,enim6
+FilePath.000001,FilePath,disagreement,3,consistency,/libero/enim6.png,enim6,enim6
+FilePath.000001,FilePath,random,0,plain,/libero/quas/enim7.png,enim7,enim7
+FilePath.000001,FilePath,random,0,consistency,/libero/quas/enim7.png,enim7,enim7
+FilePath.000001,FilePath,random,1,plain,/libero/enim4.png,enim4,enim4
+FilePath.000001,FilePath,random,1,consistency,/libero/enim4.png,enim4,enim4
+FilePath.000001,FilePath,random,2,plain,/libero/quas/enim1.png,enim1,enim1
+FilePath.000001,FilePath,random,2,consistency,/libero/quas/enim1.png,enim1,enim1
+FilePath.000001,FilePath,random,3,plain,/libero/enim2.png,enim2,enim2
+FilePath.000001,FilePath,random,3,consistency,/libero/enim2.png,enim2,enim2
+Name.000013,Name,disagreement,0,plain,Albert Hone,H,H
+Name.000013,Name,disagreement,0,consistency,Albert Hone,H,H
+Name.000013,Name,disagreement,1,plain,fatma yilmaz,F,F
+Name.000013,Name,disagreement,1,consistency,fatma yilmaz,F,F
+Name.000013,Name,disagreement,2,plain,Aysu Polat,A,A
+Name.000013,Name,disagreement,2,consistency,Aysu Polat,A,A
+Name.000013,Name,disagreement,3,plain,Albert,A,A
+Name.000013,Name,disagreement,3,consistency,Albert,A,A
+Name.000013,Name,random,0,plain,Artem,A,A
+Name.000013,Name,random,0,consistency,Artem,A,A
+Name.000013,Name,random,1,plain,Artem K,A,A
+Name.000013,Name,random,1,consistency,Artem K,A,A
+Name.000013,Name,random,2,plain,Fatma Yilmaz X,F,F
+Name.000013,Name,random,2,consistency,Fatma Yilmaz X,F,F
+Name.000013,Name,random,3,plain,Fatma Yilmaz,F,F
+Name.000013,Name,random,3,consistency,Fatma Yilmaz,F,F
+Name.000026,Name,disagreement,0,plain,Artem K,ak,ak
+Name.000026,Name,disagreement,0,consistency,Artem K,ak,ak
+Name.000026,Name,disagreement,1,plain,Fatma ,fy,fy
+Name.000026,Name,disagreement,1,consistency,Fatma ,fy,fy
+Name.000026,Name,disagreement,2,plain,aysu polat,ap,ap
+Name.000026,Name,disagreement,2,consistency,aysu polat,ap,ap
+Name.000026,Name,disagreement,3,plain,artem kuznetsov,ak,ak
+Name.000026,Name,disagreement,3,consistency,artem kuznetsov,ak,ak
+Name.000026,Name,random,0,plain,Yilmaz,y,y
+Name.000026,Name,random,0,consistency,Yilmaz,y,y
+Name.000026,Name,random,1,plain,artem kuznetsov,ak,ak
+Name.000026,Name,random,1,consistency,artem kuznetsov,ak,ak
+Name.000026,Name,random,2,plain,Hone ,h,h
+Name.000026,Name,random,2,consistency,Hone ,h,h
+Name.000026,Name,random,3,plain,Artem K,ak,ak
+Name.000026,Name,random,3,consistency,Artem K,ak,ak
+Name.000028,Name,disagreement,0,plain,Maureen-Snorre,Maureen,Maureen
+Name.000028,Name,disagreement,0,consistency,Maureen-Snorre,Maureen,Maureen
+Name.000028,Name,disagreement,1,plain,Artem,Artem,Artem
+Name.000028,Name,disagreement,1,consistency,Artem,Artem,Artem
+Name.000028,Name,disagreement,2,plain,Hone,Hone,Hone
+Name.000028,Name,disagreement,2,consistency,Hone,Hone,Hone
+Name.000028,Name,disagreement,3,plain,Artem M,Artem,Artem
+Name.000028,Name,disagreement,3,consistency,Artem M,Artem,Artem
+Name.000028,Name,random,0,plain,artem milanesi,Artem,Artem
+Name.000028,Name,random,0,consistency,artem milanesi,Artem,Artem
+Name.000028,Name,random,1,plain,Snezhana Panigrahi-Bidisha,Snezhana,Snezhana
+Name.000028,Name,random,1,consistency,Snezhana Panigrahi-Bidisha,Snezhana,Snezhana
+Name.000028,Name,random,2,plain,maureen-snorre ndiaye,Maureen,Maureen
+Name.000028,Name,random,2,consistency,maureen-snorre ndiaye,Maureen,Maureen
+Name.000028,Name,random,3,plain,Snezhana Panigrahi,Snezhana,Snezhana
+Name.000028,Name,random,3,consistency,Snezhana Panigrahi,Snezhana,Snezhana
+Number.000044,Number,disagreement,0,plain,932,32,32
+Number.000044,Number,disagreement,0,consistency,932,32,32
+Number.000044,Number,disagreement,1,plain,840,840,840
+Number.000044,Number,disagreement,1,consistency,840,840,840
+Number.000044,Number,disagreement,2,plain,835,835,835
+Number.000044,Number,disagreement,2,consistency,835,835,835
+Number.000044,Number,disagreement,3,plain,935,935,935
+Number.000044,Number,disagreement,3,consistency,935,35,35
+Number.000044,Number,random,0,plain,1647,1647,1647
+Number.000044,Number,random,0,consistency,1647,1647,1647
+Number.000044,Number,random,1,plain,831,831,831
+Number.000044,Number,random,1,consistency,831,831,831
+Number.000044,Number,random,2,plain,840,840,840
+Number.000044,Number,random,2,consistency,840,840,840
+Number.000044,Number,random,3,plain,1653,1653,1653
+Number.000044,Number,random,3,consistency,1653,1653,1653
+Number.000048,Number,disagreement,0,plain,4.82,5.00,5.00
+Number.000048,Number,disagreement,0,consistency,4.82,5.0,5.0
+Number.000048,Number,disagreement,1,plain,71.2,71.0,71.0
+Number.000048,Number,disagreement,1,consistency,71.2,71.0,71.0
+Number.000048,Number,disagreement,2,plain,81.4,81.0,81.0
+Number.000048,Number,disagreement,2,consistency,81.4,81.0,81.0
+Number.000048,Number,disagreement,3,plain,80.4,80.0,80.0
+Number.000048,Number,disagreement,3,consistency,80.4,80.0,80.0
+Number.000048,Number,random,0,plain,80.4,80.0,80.0
+Number.000048,Number,random,0,consistency,80.4,80.0,80.0
+Number.000048,Number,random,1,plain,71.8,72.0,72.0
+Number.000048,Number,random,1,consistency,71.8,72.0,72.0
+Number.000048,Number,random,2,plain,69.2,69.0,69.0
+Number.000048,Number,random,2,consistency,69.2,69.0,69.0
+Number.000048,Number,random,3,plain,8.103,8.103,8.103
+Number.000048,Number,random,3,consistency,8.103,8.103 → 8.100,8.103 → 8.100
+Number.000074,Number,disagreement,0,plain,-242,-242000,-242000
+Number.000074,Number,disagreement,0,consistency,-242,-242000,-242000
+Number.000074,Number,disagreement,1,plain,-233,-233000,-233000
+Number.000074,Number,disagreement,1,consistency,-233,-233000,-233000
+Number.000074,Number,disagreement,2,plain,-2345.23292,-2345232.92,-2345232.92
+Number.000074,Number,disagreement,2,consistency,-2345.23292,-2345232.92,-2345232.92
+Number.000074,Number,disagreement,3,plain,-241,-241000,-241000
+Number.000074,Number,disagreement,3,consistency,-241,-241000,-241000
+Number.000074,Number,random,0,plain,-1197.3,-1197300,-1197300
+Number.000074,Number,random,0,consistency,-1197.3,-1197300,-1197300
+Number.000074,Number,random,1,plain,-1192.3,-1192300,-1192300
+Number.000074,Number,random,1,consistency,-1192.3,-1192300.0,-1192300.0
+Number.000074,Number,random,2,plain,-244,-244000,-244000
+Number.000074,Number,random,2,consistency,-244,-244000,-244000
+Number.000074,Number,random,3,plain,-14.5,-14500,-14500
+Number.000074,Number,random,3,consistency,-14.5,-14500,-14500
+Number.000075,Number,disagreement,0,plain,1203.3,$1.2B,$1.2B
+Number.000075,Number,disagreement,0,consistency,1203.3,$1.2B,$1.2B
+Number.000075,Number,disagreement,1,plain,10.5,$0.0B,$0.0B
+Number.000075,Number,disagreement,1,consistency,10.5,$0.0B,$0.0B
+Number.000075,Number,disagreement,2,plain,1204.3,$1.2B,$1.2B
+Number.000075,Number,disagreement,2,consistency,1204.3,$1.2B,$1.2B
+Number.000075,Number,disagreement,3,plain,17.5,$0.0B,$0.0B
+Number.000075,Number,disagreement,3,consistency,17.5,$0.0B,$0.0B
+Number.000075,Number,random,0,plain,11.5,$0.0B,$0.0B
+Number.000075,Number,random,0,consistency,11.5,$0.0B,$0.0B
+Number.000075,Number,random,1,plain,2346.2,$2.3B,$2.3B
+Number.000075,Number,random,1,consistency,2346.2,$2.3B,$2.3B
+Number.000075,Number,random,2,plain,1212.3,$1.2B,$1.2B
+Number.000075,Number,random,2,consistency,1212.3,$1.2B,$1.2B
+Number.000075,Number,random,3,plain,2350.2,$2.4B,$2.4B
+Number.000075,Number,random,3,consistency,2350.2,$2.4B,$2.4B
+Number.000081,Number,disagreement,0,plain,84,76-100,76-100
+Number.000081,Number,disagreement,0,consistency,84,76-100,76-100
+Number.000081,Number,disagreement,1,plain,53,51-75,51-75
+Number.000081,Number,disagreement,1,consistency,53,53-75,53-75
+Number.000081,Number,disagreement,2,plain,98,76-100,76-100
+Number.000081,Number,disagreement,2,consistency,98,98-100,98-100
+Number.000081,Number,disagreement,3,plain,49,26-50,26-50
+Number.000081,Number,disagreement,3,consistency,49,49-75,49-75
+Number.000081,Number,random,0,plain,44,26-50,26-50
+Number.000081,Number,random,0,consistency,44,44-50,44-50
+Number.000081,Number,random,1,plain,61,76-100,76-100
+Number.000081,Number,random,1,consistency,61,61-75,61-75
+Number.000081,Number,random,2,plain,50,51-75,51-75
+Number.000081,Number,random,2,consistency,50,50-75,50-75
+Number.000081,Number,random,3,plain,53,51-75,51-75
+Number.000081,Number,random,3,consistency,53,53-75,53-75
+Number.000088,Number,disagreement,0,plain,"Aksel Hedegaard     1234 Pecan Avenue,Yangon,Ny,(023) 966-2677,000-94-0933,03719",000-94-0933,000-94-0933
+Number.000088,Number,disagreement,0,consistency,"Aksel Hedegaard     1234 Pecan Avenue,Yangon,Ny,(023) 966-2677,000-94-0933,03719",000-94-0933,000-94-0933
+Number.000088,Number,disagreement,1,plain,"Yves Grethen  2345 Eighth Way ,Henderson,OK,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000088,Number,disagreement,1,consistency,"Yves Grethen  2345 Eighth Way ,Henderson,OK,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000088,Number,disagreement,2,plain,"Yves Grethen  2344 Eighth Way ,Henderson,OK,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000088,Number,disagreement,2,consistency,"Yves Grethen  2344 Eighth Way ,Henderson,OK,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000088,Number,disagreement,3,plain,"Yves Grethen  2345 Eighth Way ,Henderson,Ok,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000088,Number,disagreement,3,consistency,"Yves Grethen  2345 Eighth Way ,Henderson,Ok,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000088,Number,random,0,plain,"Jacqueline Martin     69 Ninth Boulevard,Guadalajara,OH,(319) 094-6012,000-08-3119,38891",000-08-3119,000-08-3119
+Number.000088,Number,random,0,consistency,"Jacqueline Martin     69 Ninth Boulevard,Guadalajara,OH,(319) 094-6012,000-08-3119,38891",000-08-3119,000-08-3119
+Number.000088,Number,random,1,plain,"bola atanda         2345 sixth street,cologne,wv,(479) 143-0433,000-37-0076,41230",000-37-0076,000-37-0076
+Number.000088,Number,random,1,consistency,"bola atanda         2345 sixth street,cologne,wv,(479) 143-0433,000-37-0076,41230",000-37-0076,000-37-0076
+Number.000088,Number,random,2,plain,"Aksel Hedegaard     1235 Pecan Avenue,Yangon,NY,(023) 966-2677,000-94-0933,03719",000-94-0933,000-94-0933
+Number.000088,Number,random,2,consistency,"Aksel Hedegaard     1235 Pecan Avenue,Yangon,NY,(023) 966-2677,000-94-0933,03719",000-94-0933,000-94-0933
+Number.000088,Number,random,3,plain,"Yves Grethen  2347 Eighth Way ,Henderson,OK,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000088,Number,random,3,consistency,"Yves Grethen  2347 Eighth Way ,Henderson,OK,(609) 880-5529,000-69-3866,38891",000-69-3866,000-69-3866
+Number.000093,Number,disagreement,0,plain,49007,49007,49007
+Number.000093,Number,disagreement,0,consistency,49007,49007,49007
+Number.000093,Number,disagreement,1,plain,29,0029,0029
+Number.000093,Number,disagreement,1,consistency,29,029,029
+Number.000093,Number,disagreement,2,plain,44135,44135,44135
+Number.000093,Number,disagreement,2,consistency,44135,44135,44135
+Number.000093,Number,disagreement,3,plain,49005,49005,49005
+Number.000093,Number,disagreement,3,consistency,49005,49005,49005
+Number.000093,Number,random,0,plain,49006,49006,49006
+Number.000093,Number,random,0,consistency,49006,49006,49006
+Number.000093,Number,random,1,plain,49008,49008,49008
+Number.000093,Number,random,1,consistency,49008,49008,49008
+Number.000093,Number,random,2,plain,29684,29684,29684
+Number.000093,Number,random,2,consistency,29684,29684,Output: 29684
+Number.000093,Number,random,3,plain,29692,029692,029692
+Number.000093,Number,random,3,consistency,29692,29692,Output: 29692
+Phone.000005,Phone,disagreement,0,plain,648-089-6388 x9065,089-6388,089-6388
+Phone.000005,Phone,disagreement,0,consistency,648-089-6388 x9065,089-6388,089-6388
+Phone.000005,Phone,disagreement,1,plain,395-712-9734 x1247,712-9734,712-9734
+Phone.000005,Phone,disagreement,1,consistency,395-712-9734 x1247,712-9734,712-9734
+Phone.000005,Phone,disagreement,2,plain,655-142-9670,142-9670,142-9670
+Phone.000005,Phone,disagreement,2,consistency,655-142-9670,142-9670,142-9670
+Phone.000005,Phone,disagreement,3,plain,885-259-4922,259-4922,259-4922
+Phone.000005,Phone,disagreement,3,consistency,885-259-4922,259-4922,259-4922
+Phone.000005,Phone,random,0,plain,875-261-4922,261-4922,261-4922
+Phone.000005,Phone,random,0,consistency,875-261-4922,261-4922,261-4922
+Phone.000005,Phone,random,1,plain,875-259-4922,259-4922,259-4922
+Phone.000005,Phone,random,1,consistency,875-259-4922,259-4922,259-4922
+Phone.000005,Phone,random,2,plain,880-259-4922,259-4922,259-4922
+Phone.000005,Phone,random,2,consistency,880-259-4922,259-4922,259-4922
+Phone.000005,Phone,random,3,plain,660-142-9670,142-9670,142-9670
+Phone.000005,Phone,random,3,consistency,660-142-9670,142-9670,142-9670
+Phone.000017,Phone,disagreement,0,plain,et dignissimos reiciendis ad nostrum 52mg zaw 963-889-0659 - - 501429-67 11-07-1712,963-889-0659,963-889-0659
+Phone.000017,Phone,disagreement,0,consistency,et dignissimos reiciendis ad nostrum 52mg zaw 963-889-0659 - - 501429-67 11-07-1712,963-889-0659,963-889-0659
+Phone.000017,Phone,disagreement,1,plain,Et Autem Suscipit 3 Blanditiis [Ks] 641-887-8662 - - 808168-29 10-19-1959,641-887-8662,641-887-8662
+Phone.000017,Phone,disagreement,1,consistency,Et Autem Suscipit 3 Blanditiis [Ks] 641-887-8662 - - 808168-29 10-19-1959,641-887-8662,641-887-8662
+Phone.000017,Phone,disagreement,2,plain,Et Consectetur Voluptatum [RM] 887-792-5632 - - 210666-92 10-02-2204,887-792-5632,887-792-5632
+Phone.000017,Phone,disagreement,2,consistency,Et Consectetur Voluptatum [RM] 887-792-5632 - - 210666-92 10-02-2204,887-792-5632,887-792-5632
+Phone.000017,Phone,disagreement,3,plain,tenetur quos ratione cum similique 10mg jwb 279-935-2550 486174-91 04-29-2079,279-935-2550,279-935-2550
+Phone.000017,Phone,disagreement,3,consistency,tenetur quos ratione cum similique 10mg jwb 279-935-2550 486174-91 04-29-2079,279-935-2550,279-935-2550
+Phone.000017,Phone,random,0,plain,ET AUTEM SUSCIPIT 5 BLANDITIIS [KS] 641-887-8662 - - 808168-29 10-19-1959,641-887-8662,641-887-8662
+Phone.000017,Phone,random,0,consistency,ET AUTEM SUSCIPIT 5 BLANDITIIS [KS] 641-887-8662 - - 808168-29 10-19-1959,641-887-8662,641-887-8662
+Phone.000017,Phone,random,1,plain,ET AUTEM SUSCIPIT 8 BLANDITIIS [KS] 641-887-8662 - - 808168-29 10-19-1959,641-887-8662,641-887-8662
+Phone.000017,Phone,random,1,consistency,ET AUTEM SUSCIPIT 8 BLANDITIIS [KS] 641-887-8662 - - 808168-29 10-19-1959,641-887-8662,641-887-8662
+Phone.000017,Phone,random,2,plain,Et Consectetur Voluptatum [RM] 889-792-5632 - - 210666-92 10-02-2204,889-792-5632,889-792-5632
+Phone.000017,Phone,random,2,consistency,Et Consectetur Voluptatum [RM] 889-792-5632 - - 210666-92 10-02-2204,889-792-5632,889-792-5632
+Phone.000017,Phone,random,3,plain,Et Consectetur Voluptatum [RM] 888-792-5632 - - 210666-92 10-02-2204,888-792-5632,888-792-5632
+Phone.000017,Phone,random,3,consistency,Et Consectetur Voluptatum [RM] 888-792-5632 - - 210666-92 10-02-2204,888-792-5632,888-792-5632
+Rating.000001,Rating,disagreement,0,plain," 	
+   		(8)",8,8
+Rating.000001,Rating,disagreement,0,consistency," 	
+   		(8)",8,8
+Rating.000001,Rating,disagreement,1,plain,(10),10,10
+Rating.000001,Rating,disagreement,1,consistency,(10),10,10
+Rating.000001,Rating,disagreement,2,plain," 	
+   		(9)",9,9
+Rating.000001,Rating,disagreement,2,consistency," 	
+   		(9)",9,9
+Rating.000001,Rating,disagreement,3,plain,Rating),0,0
+Rating.000001,Rating,disagreement,3,consistency,Rating),0,0
+Rating.000001,Rating,random,0,plain," 	
+   		(15)",15,15
+Rating.000001,Rating,random,0,consistency," 	
+   		(15)",15,15
+Rating.000001,Rating,random,1,plain,"( 		 
+ 
+
+No Rating)",0,0
+Rating.000001,Rating,random,1,consistency,"( 		 
+ 
+
+No Rating)",0,0
+Rating.000001,Rating,random,2,plain,(7),7,7
+Rating.000001,Rating,random,2,consistency,(7),7,7
+Rating.000001,Rating,random,3,plain," 	
+   		(8)",8,8
+Rating.000001,Rating,random,3,consistency," 	
+   		(8)",8,8

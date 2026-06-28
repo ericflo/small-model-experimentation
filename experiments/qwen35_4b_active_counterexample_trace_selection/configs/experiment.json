@@ -1,0 +1,18 @@
+{
+  "experiment": "qwen35_4b_active_counterexample_trace_selection",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260701,
+  "objective": "Measure whether actively requested counterexample traces improve selection among typed-sketch-synthesized candidate programs.",
+  "standalone": true,
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_active_counterexample_trace_selection",
+  "selection_budgets": [0, 1, 2, 3, 6, 12],
+  "policies": [
+    "visible_prior",
+    "random_extra",
+    "active_max_split",
+    "oracle_elimination"
+  ],
+  "primary_split": "ceiling",
+  "retention_splits": ["iid", "support"]
+}

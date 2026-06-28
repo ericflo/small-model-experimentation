@@ -1,0 +1,29 @@
+{
+  "run_name": "main_v1",
+  "suite": "main",
+  "model_name": "Qwen/Qwen3-4B",
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "arms": [
+    "answer_only",
+    "program_stack",
+    "parse_emit"
+  ],
+  "train_n": 180,
+  "eval_n": 8,
+  "train_steps": 24,
+  "batch_size": 2,
+  "grad_accum": 2,
+  "lr": 0.0002,
+  "max_length": 448,
+  "eval_batch_size": 4,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "max_new_tokens": 96,
+  "resample_attempts": 2
+}

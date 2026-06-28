@@ -1,0 +1,16 @@
+method,split,support_mode,task_id,family,row_exact,full_task_exact,rows
+base,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,0.0,False,2
+base,synthetic_counterfactual,normal,cf_0000_number_times_2,number,0.0,False,2
+base,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,0.0,False,2
+base,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,0.0,False,2
+base,public_prose,normal,Phone.000005,Phone,0.0,False,3
+base,public_prose,shuffled,Phone.000005,Phone,0.0,False,3
+adapter,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,0.0,False,2
+adapter,synthetic_counterfactual,normal,cf_0000_number_times_2,number,0.0,False,2
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,0.0,False,2
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,0.0,False,2
+adapter,synthetic_counterfactual,none,cf_0000_number_plus_1,number,0.0,False,2
+adapter,synthetic_counterfactual,none,cf_0000_number_times_2,number,0.0,False,2
+adapter,public_prose,normal,Phone.000005,Phone,0.0,False,3
+adapter,public_prose,shuffled,Phone.000005,Phone,0.0,False,3
+adapter,public_prose,none,Phone.000005,Phone,0.0,False,3

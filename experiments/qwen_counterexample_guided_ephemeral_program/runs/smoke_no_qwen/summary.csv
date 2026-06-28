@@ -1,0 +1,10 @@
+method,tasks,row_exact,full_task_exact,used_program_rate,helped_vs_direct,hurt_vs_direct
+direct_qwen_row,3,0.0,0.0,,0,0
+direct_qwen_batch,3,0.0,0.0,,0,0
+program_visible,3,0.0,0.0,0.0,0,0
+program_ceg,3,0.0,0.0,0.0,0,0
+program_ceg_gated,3,0.0,0.0,0.0,0,0
+program_ceg_router,3,0.0,0.0,0.0,0,0
+program_random_probe,3,0.0,0.0,0.0,0,0
+program_shuffled_probe_labels,3,0.0,0.0,0.0,0,0
+hidden_candidate_oracle,3,0.0,0.0,0.0,0,0

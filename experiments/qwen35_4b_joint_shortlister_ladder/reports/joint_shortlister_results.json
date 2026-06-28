@@ -1,0 +1,6178 @@
+{
+  "beam_width": 16,
+  "max_length": 5120,
+  "model_eval_max_records_per_cell": 2,
+  "observation_rows": [
+    {
+      "designed_case_indexes": [
+        24,
+        58,
+        52,
+        25
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 4,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_affine_mod_00000",
+      "library_size": 64,
+      "random_consistent_count": 1,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        40,
+        41,
+        31,
+        24
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 4,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_affine_mod_00001",
+      "library_size": 64,
+      "random_consistent_count": 2,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        39,
+        52,
+        68,
+        26
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 4,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_affine_mod_00002",
+      "library_size": 64,
+      "random_consistent_count": 1,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        61,
+        66,
+        47
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 3,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_affine_mod_00003",
+      "library_size": 64,
+      "random_consistent_count": 6,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        38,
+        30,
+        34,
+        63,
+        40,
+        32
+      ],
+      "designed_consistent_count": 42,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_compare_gate_00000",
+      "library_size": 64,
+      "random_consistent_count": 45,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        58,
+        55,
+        40,
+        49,
+        25,
+        63
+      ],
+      "designed_consistent_count": 99,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_compare_gate_00001",
+      "library_size": 64,
+      "random_consistent_count": 337,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        46,
+        37,
+        25,
+        60,
+        58,
+        27
+      ],
+      "designed_consistent_count": 40,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_compare_gate_00002",
+      "library_size": 64,
+      "random_consistent_count": 4,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        26,
+        39,
+        65,
+        60,
+        46,
+        70
+      ],
+      "designed_consistent_count": 92,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib64_pair_compare_gate_00003",
+      "library_size": 64,
+      "random_consistent_count": 480,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 4096,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        32,
+        30,
+        64,
+        25,
+        24,
+        26
+      ],
+      "designed_consistent_count": 5,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_affine_mod_00000",
+      "library_size": 128,
+      "random_consistent_count": 10,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        42,
+        40,
+        55
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 3,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_affine_mod_00001",
+      "library_size": 128,
+      "random_consistent_count": 1,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        37,
+        31,
+        25,
+        24,
+        26,
+        27
+      ],
+      "designed_consistent_count": 5,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_affine_mod_00002",
+      "library_size": 128,
+      "random_consistent_count": 66,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        57,
+        36,
+        26,
+        24,
+        25,
+        27
+      ],
+      "designed_consistent_count": 5,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_affine_mod_00003",
+      "library_size": 128,
+      "random_consistent_count": 42,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        26,
+        63,
+        24,
+        32,
+        59,
+        70
+      ],
+      "designed_consistent_count": 320,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_compare_gate_00000",
+      "library_size": 128,
+      "random_consistent_count": 767,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        43,
+        34,
+        29,
+        45,
+        49,
+        52
+      ],
+      "designed_consistent_count": 290,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_compare_gate_00001",
+      "library_size": 128,
+      "random_consistent_count": 2021,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        38,
+        49,
+        43,
+        66,
+        34,
+        42
+      ],
+      "designed_consistent_count": 1251,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_compare_gate_00002",
+      "library_size": 128,
+      "random_consistent_count": 6138,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        56,
+        45,
+        44,
+        34,
+        38,
+        26
+      ],
+      "designed_consistent_count": 186,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib128_pair_compare_gate_00003",
+      "library_size": 128,
+      "random_consistent_count": 909,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 16384,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        26,
+        61,
+        56,
+        31,
+        29
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 5,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_affine_mod_00000",
+      "library_size": 256,
+      "random_consistent_count": 1,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        24,
+        45,
+        49,
+        29,
+        35,
+        25
+      ],
+      "designed_consistent_count": 9,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_affine_mod_00001",
+      "library_size": 256,
+      "random_consistent_count": 10,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        41,
+        42,
+        49,
+        40,
+        25
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 5,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_affine_mod_00002",
+      "library_size": 256,
+      "random_consistent_count": 1,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        38,
+        57,
+        26,
+        67,
+        25
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 5,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_affine_mod_00003",
+      "library_size": 256,
+      "random_consistent_count": 2,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        55,
+        41,
+        61,
+        47,
+        29,
+        71
+      ],
+      "designed_consistent_count": 40,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_compare_gate_00000",
+      "library_size": 256,
+      "random_consistent_count": 3,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        34,
+        65,
+        69,
+        35,
+        60,
+        42
+      ],
+      "designed_consistent_count": 1137,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_compare_gate_00001",
+      "library_size": 256,
+      "random_consistent_count": 94,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        47,
+        56,
+        24,
+        35,
+        42,
+        38
+      ],
+      "designed_consistent_count": 1055,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_compare_gate_00002",
+      "library_size": 256,
+      "random_consistent_count": 2390,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        54,
+        32,
+        70,
+        66,
+        28,
+        45
+      ],
+      "designed_consistent_count": 687,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib256_pair_compare_gate_00003",
+      "library_size": 256,
+      "random_consistent_count": 2039,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 65536,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        46,
+        69,
+        28,
+        33,
+        58,
+        24
+      ],
+      "designed_consistent_count": 50,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_affine_mod_00000",
+      "library_size": 512,
+      "random_consistent_count": 3248,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        56,
+        37,
+        54,
+        24,
+        25,
+        26
+      ],
+      "designed_consistent_count": 2916,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_affine_mod_00001",
+      "library_size": 512,
+      "random_consistent_count": 2916,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        28,
+        58,
+        63,
+        37,
+        24,
+        25
+      ],
+      "designed_consistent_count": 58,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_affine_mod_00002",
+      "library_size": 512,
+      "random_consistent_count": 67,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        54,
+        26,
+        51,
+        58,
+        24
+      ],
+      "designed_consistent_count": 1,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 5,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_affine_mod_00003",
+      "library_size": 512,
+      "random_consistent_count": 1,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": true,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_case_indexes": [
+        49,
+        44,
+        43,
+        48,
+        35,
+        51
+      ],
+      "designed_consistent_count": 3431,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_compare_gate_00000",
+      "library_size": 512,
+      "random_consistent_count": 35307,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        65,
+        66,
+        52,
+        51,
+        50,
+        35
+      ],
+      "designed_consistent_count": 19326,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_compare_gate_00001",
+      "library_size": 512,
+      "random_consistent_count": 4247,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        30,
+        35,
+        41,
+        26,
+        42,
+        44
+      ],
+      "designed_consistent_count": 4651,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_compare_gate_00002",
+      "library_size": 512,
+      "random_consistent_count": 7397,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_case_indexes": [
+        64,
+        44,
+        24,
+        35,
+        63,
+        62
+      ],
+      "designed_consistent_count": 2416,
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": false,
+      "designed_target_in_set": true,
+      "id": "eval_lib512_pair_compare_gate_00003",
+      "library_size": 512,
+      "random_consistent_count": 1124,
+      "random_oracle_hidden_all": true,
+      "random_selected_hidden_all": false,
+      "random_target_in_set": true,
+      "raw_candidate_count": 262144,
+      "template": "pair_compare_gate"
+    }
+  ],
+  "observation_summary_by_ladder": [
+    {
+      "designed_consistent_avg": 1.0,
+      "designed_selected_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 64,
+      "random_consistent_avg": 2.5,
+      "random_selected_hidden_all": {
+        "rate": 0.75,
+        "records": 4,
+        "successes": 3
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_consistent_avg": 68.25,
+      "designed_selected_hidden_all": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 64,
+      "random_consistent_avg": 216.5,
+      "random_selected_hidden_all": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_consistent_avg": 4.0,
+      "designed_selected_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 128,
+      "random_consistent_avg": 29.75,
+      "random_selected_hidden_all": {
+        "rate": 0.75,
+        "records": 4,
+        "successes": 3
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_consistent_avg": 511.75,
+      "designed_selected_hidden_all": {
+        "rate": 0.5,
+        "records": 4,
+        "successes": 2
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 128,
+      "random_consistent_avg": 2458.75,
+      "random_selected_hidden_all": {
+        "rate": 0.25,
+        "records": 4,
+        "successes": 1
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_consistent_avg": 3.0,
+      "designed_selected_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 256,
+      "random_consistent_avg": 3.5,
+      "random_selected_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_consistent_avg": 729.75,
+      "designed_selected_hidden_all": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 256,
+      "random_consistent_avg": 1131.5,
+      "random_selected_hidden_all": {
+        "rate": 0.25,
+        "records": 4,
+        "successes": 1
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_compare_gate"
+    },
+    {
+      "designed_consistent_avg": 756.25,
+      "designed_selected_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 512,
+      "random_consistent_avg": 1558.0,
+      "random_selected_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_affine_mod"
+    },
+    {
+      "designed_consistent_avg": 7456.0,
+      "designed_selected_hidden_all": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "library_size": 512,
+      "random_consistent_avg": 12018.75,
+      "random_selected_hidden_all": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "records": 4,
+      "template": "pair_compare_gate"
+    }
+  ],
+  "observation_summary_overall": [
+    {
+      "designed_consistent_avg": 1191.25,
+      "designed_selected_hidden_all": {
+        "rate": 0.5625,
+        "records": 32,
+        "successes": 18
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 32,
+        "successes": 32
+      },
+      "random_consistent_avg": 2177.406,
+      "random_selected_hidden_all": {
+        "rate": 0.5,
+        "records": 32,
+        "successes": 16
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 32,
+        "successes": 32
+      },
+      "records": 32
+    }
+  ],
+  "prediction_rows": [
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib64_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,063",
+        "003,003",
+        "000,002",
+        "001,002",
+        "001,001",
+        "003,008",
+        "000,003",
+        "003,000",
+        "001,003",
+        "003,009",
+        "003,007",
+        "003,004",
+        "003,022",
+        "000,004"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 5,
+      "target_right_code": 62,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib64_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,063",
+        "001,001",
+        "000,002",
+        "000,003",
+        "000,005",
+        "000,006",
+        "002,002",
+        "002,003",
+        "001,002",
+        "005,005",
+        "003,003",
+        "000,007",
+        "063,063",
+        "000,060"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 35,
+      "target_right_code": 58,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib64_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,001",
+        "000,000",
+        "000,063",
+        "001,001",
+        "001,002",
+        "000,003",
+        "003,003",
+        "000,002",
+        "001,003",
+        "005,005",
+        "002,003",
+        "063,063",
+        "001,005",
+        "000,062",
+        "062,063",
+        "002,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 55,
+      "target_right_code": 34,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,001",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib64_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,063",
+        "001,001",
+        "000,003",
+        "004,004",
+        "000,002",
+        "005,005",
+        "000,005",
+        "063,063",
+        "003,003",
+        "001,002",
+        "004,006",
+        "002,002",
+        "004,005",
+        "004,007"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 21,
+      "target_right_code": 14,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib128_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,127",
+        "000,002",
+        "000,005",
+        "000,003",
+        "001,002",
+        "000,007",
+        "000,100",
+        "000,010",
+        "127,127",
+        "001,001",
+        "000,008",
+        "000,004",
+        "003,003",
+        "000,120"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 18,
+      "target_right_code": 22,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib128_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,127",
+        "000,002",
+        "000,007",
+        "001,002",
+        "000,008",
+        "000,003",
+        "001,001",
+        "000,010",
+        "000,005",
+        "000,012",
+        "000,009",
+        "000,006",
+        "127,000",
+        "000,011"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 117,
+      "target_right_code": 47,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib128_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,127",
+        "000,002",
+        "000,003",
+        "007,007",
+        "127,127",
+        "000,007",
+        "000,005",
+        "001,001",
+        "003,003",
+        "001,002",
+        "000,008",
+        "007,008",
+        "008,008",
+        "000,006"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 97,
+      "target_right_code": 27,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib128_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,127",
+        "001,001",
+        "000,002",
+        "127,127",
+        "001,002",
+        "000,005",
+        "000,003",
+        "005,006",
+        "000,007",
+        "001,006",
+        "005,005",
+        "100,100",
+        "004,004",
+        "009,009"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": true,
+      "right_recall_at_4": false,
+      "right_recall_at_8": true,
+      "target_left_code": 17,
+      "target_right_code": 5,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib256_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,001",
+        "000,000",
+        "000,255",
+        "000,002",
+        "001,001",
+        "001,002",
+        "000,100",
+        "000,005",
+        "003,003",
+        "100,100",
+        "000,003",
+        "003,006",
+        "002,002",
+        "005,006",
+        "001,003",
+        "000,010"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 199,
+      "target_right_code": 97,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,001",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib256_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,001",
+        "000,000",
+        "000,255",
+        "000,100",
+        "000,002",
+        "255,255",
+        "007,007",
+        "000,005",
+        "001,001",
+        "007,008",
+        "254,255",
+        "001,002",
+        "000,003",
+        "003,003",
+        "000,010",
+        "000,004"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 109,
+      "target_right_code": 203,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,001",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib256_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,255",
+        "001,001",
+        "004,004",
+        "002,002",
+        "000,002",
+        "000,100",
+        "004,007",
+        "003,003",
+        "000,103",
+        "000,005",
+        "005,005",
+        "000,003",
+        "100,100",
+        "001,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 189,
+      "target_right_code": 204,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib256_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,255",
+        "000,100",
+        "001,001",
+        "000,002",
+        "000,005",
+        "005,005",
+        "003,003",
+        "001,002",
+        "255,255",
+        "007,007",
+        "100,100",
+        "007,008",
+        "000,003",
+        "000,008"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 226,
+      "target_right_code": 66,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib512_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,511",
+        "511,511",
+        "511,000",
+        "510,511",
+        "500,511",
+        "500,500",
+        "000,108",
+        "511,510",
+        "000,100",
+        "500,501",
+        "000,500",
+        "511,500",
+        "510,510",
+        "001,001"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 390,
+      "target_right_code": 5,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib512_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,511",
+        "511,511",
+        "511,000",
+        "510,511",
+        "500,511",
+        "000,100",
+        "000,011",
+        "500,501",
+        "511,510",
+        "003,003",
+        "500,500",
+        "511,500",
+        "000,002",
+        "000,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 438,
+      "target_right_code": 411,
+      "template": "pair_affine_mod",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib512_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "511,511",
+        "510,511",
+        "000,511",
+        "500,511",
+        "500,500",
+        "511,000",
+        "000,100",
+        "100,100",
+        "000,002",
+        "001,001",
+        "001,002",
+        "510,510",
+        "511,510",
+        "007,008"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 366,
+      "target_right_code": 154,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "base_model",
+      "id": "eval_lib512_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "000,000",
+        "000,001",
+        "000,511",
+        "511,511",
+        "510,511",
+        "500,511",
+        "000,100",
+        "511,000",
+        "500,500",
+        "500,501",
+        "511,510",
+        "003,003",
+        "000,002",
+        "000,010",
+        "000,011",
+        "000,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 123,
+      "target_right_code": 331,
+      "template": "pair_compare_gate",
+      "top1_pair": "000,000",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_affine_mod_00000",
+      "left_recall_at_1": true,
+      "left_recall_at_16": true,
+      "left_recall_at_4": true,
+      "left_recall_at_8": true,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "002,002",
+        "002,005",
+        "055,005",
+        "000,000",
+        "005,002",
+        "005,025",
+        "005,055",
+        "055,025",
+        "025,005",
+        "000,002",
+        "000,005",
+        "005,000",
+        "025,025",
+        "052,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 5,
+      "target_right_code": 62,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "002,002",
+        "002,005",
+        "055,005",
+        "005,002",
+        "000,000",
+        "000,005",
+        "005,055",
+        "025,025",
+        "025,005",
+        "005,000",
+        "055,025",
+        "055,052",
+        "000,002",
+        "055,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 35,
+      "target_right_code": 58,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": true,
+      "left_recall_at_4": true,
+      "left_recall_at_8": true,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "055,005",
+        "025,025",
+        "005,002",
+        "005,055",
+        "052,005",
+        "000,000",
+        "055,052",
+        "025,005",
+        "055,002",
+        "045,005",
+        "005,025",
+        "055,025",
+        "035,005",
+        "002,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 55,
+      "target_right_code": 34,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "000,000",
+        "025,025",
+        "055,005",
+        "005,002",
+        "002,005",
+        "002,002",
+        "000,005",
+        "025,005",
+        "005,055",
+        "025,055",
+        "035,005",
+        "005,000",
+        "055,025",
+        "045,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 21,
+      "target_right_code": 14,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "000,000",
+        "002,002",
+        "005,002",
+        "055,025",
+        "005,025",
+        "055,005",
+        "022,025",
+        "022,022",
+        "000,005",
+        "055,052",
+        "025,005",
+        "002,005",
+        "025,022"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": true,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 18,
+      "target_right_code": 22,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "025,025",
+        "005,005",
+        "000,000",
+        "055,052",
+        "002,005",
+        "002,002",
+        "052,052",
+        "052,055",
+        "005,002",
+        "025,022",
+        "055,025",
+        "025,005",
+        "055,005",
+        "005,000",
+        "025,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 117,
+      "target_right_code": 47,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "025,025",
+        "052,052",
+        "052,055",
+        "005,002",
+        "005,025",
+        "000,000",
+        "005,055",
+        "002,005",
+        "002,002",
+        "025,005",
+        "055,025",
+        "055,052",
+        "055,005",
+        "022,022"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 97,
+      "target_right_code": 27,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "002,002",
+        "000,000",
+        "052,052",
+        "052,055",
+        "055,052",
+        "055,025",
+        "005,002",
+        "055,005",
+        "002,005",
+        "005,025",
+        "000,005",
+        "005,055",
+        "025,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": true,
+      "right_recall_at_4": true,
+      "right_recall_at_8": true,
+      "target_left_code": 17,
+      "target_right_code": 5,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "000,000",
+        "055,025",
+        "055,052",
+        "255,055",
+        "052,055",
+        "055,005",
+        "002,002",
+        "002,005",
+        "005,002",
+        "053,055",
+        "025,055",
+        "025,005",
+        "000,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 199,
+      "target_right_code": 97,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "255,055",
+        "052,055",
+        "000,000",
+        "255,005",
+        "055,005",
+        "052,052",
+        "055,025",
+        "005,055",
+        "025,055",
+        "025,005",
+        "255,000",
+        "005,002",
+        "055,052"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 109,
+      "target_right_code": 203,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "255,055",
+        "025,025",
+        "005,055",
+        "255,000",
+        "255,005",
+        "055,025",
+        "000,000",
+        "055,052",
+        "002,002",
+        "002,005",
+        "025,055",
+        "052,055",
+        "052,052",
+        "055,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 189,
+      "target_right_code": 204,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "000,000",
+        "055,005",
+        "255,055",
+        "255,005",
+        "055,052",
+        "055,025",
+        "005,055",
+        "005,000",
+        "005,002",
+        "052,055",
+        "052,052",
+        "255,002",
+        "255,000"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 226,
+      "target_right_code": 66,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "505,505",
+        "005,005",
+        "055,055",
+        "505,005",
+        "025,025",
+        "000,000",
+        "505,502",
+        "052,052",
+        "005,002",
+        "505,055",
+        "505,500",
+        "052,055",
+        "502,005",
+        "502,002",
+        "055,005",
+        "005,000"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": true,
+      "right_recall_at_4": true,
+      "right_recall_at_8": true,
+      "target_left_code": 390,
+      "target_right_code": 5,
+      "template": "pair_affine_mod",
+      "top1_pair": "505,505",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "505,505",
+        "005,005",
+        "505,005",
+        "055,055",
+        "025,025",
+        "505,502",
+        "002,005",
+        "002,002",
+        "000,000",
+        "505,002",
+        "005,002",
+        "505,025",
+        "505,500",
+        "505,055",
+        "000,005",
+        "505,000"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 438,
+      "target_right_code": 411,
+      "template": "pair_affine_mod",
+      "top1_pair": "505,505",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "505,505",
+        "055,055",
+        "505,005",
+        "002,002",
+        "000,000",
+        "005,002",
+        "025,025",
+        "505,055",
+        "002,005",
+        "505,502",
+        "052,052",
+        "005,000",
+        "055,005",
+        "055,052",
+        "002,000"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 366,
+      "target_right_code": 154,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "505,505",
+        "505,005",
+        "025,025",
+        "505,002",
+        "052,052",
+        "005,002",
+        "055,052",
+        "055,005",
+        "505,025",
+        "505,502",
+        "505,500",
+        "505,055",
+        "000,000",
+        "505,000"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 123,
+      "target_right_code": 331,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_affine_mod_00000",
+      "left_recall_at_1": true,
+      "left_recall_at_16": true,
+      "left_recall_at_4": true,
+      "left_recall_at_8": true,
+      "library_size": 64,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "025,025",
+        "005,002",
+        "005,025",
+        "025,005",
+        "002,005",
+        "002,002",
+        "005,055",
+        "055,005",
+        "000,000",
+        "045,005",
+        "025,055",
+        "055,025",
+        "005,000",
+        "025,022"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 5,
+      "target_right_code": 62,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "055,005",
+        "005,025",
+        "025,025",
+        "005,055",
+        "005,002",
+        "055,025",
+        "002,005",
+        "002,002",
+        "000,000",
+        "000,005",
+        "025,005",
+        "055,052",
+        "005,000",
+        "055,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 35,
+      "target_right_code": 58,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": true,
+      "left_recall_at_4": true,
+      "left_recall_at_8": true,
+      "library_size": 64,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "055,005",
+        "025,025",
+        "005,002",
+        "002,002",
+        "002,005",
+        "005,025",
+        "055,025",
+        "005,055",
+        "025,005",
+        "055,052",
+        "035,005",
+        "005,000",
+        "052,052",
+        "052,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 55,
+      "target_right_code": 34,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib64_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "055,005",
+        "005,002",
+        "025,005",
+        "025,025",
+        "005,025",
+        "005,055",
+        "055,052",
+        "052,005",
+        "055,002",
+        "045,005",
+        "002,002",
+        "002,005",
+        "005,000",
+        "025,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 21,
+      "target_right_code": 14,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "055,005",
+        "055,025",
+        "052,055",
+        "052,052",
+        "000,000",
+        "055,052",
+        "025,055",
+        "055,022",
+        "025,005",
+        "005,002",
+        "022,022",
+        "022,025",
+        "055,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": true,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 18,
+      "target_right_code": 22,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "025,025",
+        "055,055",
+        "005,005",
+        "055,025",
+        "000,000",
+        "025,022",
+        "002,002",
+        "002,005",
+        "055,005",
+        "022,025",
+        "022,022",
+        "055,052",
+        "025,005",
+        "052,052",
+        "052,055",
+        "025,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 117,
+      "target_right_code": 47,
+      "template": "pair_affine_mod",
+      "top1_pair": "025,025",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "025,025",
+        "000,000",
+        "002,002",
+        "055,025",
+        "055,005",
+        "005,002",
+        "025,005",
+        "005,025",
+        "005,055",
+        "002,005",
+        "052,052",
+        "052,055",
+        "055,052",
+        "000,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 97,
+      "target_right_code": 27,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib128_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "025,025",
+        "000,000",
+        "005,002",
+        "055,052",
+        "055,005",
+        "055,025",
+        "025,005",
+        "025,022",
+        "002,005",
+        "002,002",
+        "052,055",
+        "052,052",
+        "005,025",
+        "005,003"
+      ],
+      "right_recall_at_1": true,
+      "right_recall_at_16": true,
+      "right_recall_at_4": true,
+      "right_recall_at_8": true,
+      "target_left_code": 17,
+      "target_right_code": 5,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "005,002",
+        "000,000",
+        "255,055",
+        "055,005",
+        "055,052",
+        "055,025",
+        "005,000",
+        "255,005",
+        "052,052",
+        "052,055",
+        "005,055",
+        "025,055",
+        "255,025"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 199,
+      "target_right_code": 97,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "000,000",
+        "025,025",
+        "055,005",
+        "052,055",
+        "255,055",
+        "005,002",
+        "055,052",
+        "005,055",
+        "255,005",
+        "255,000",
+        "025,055",
+        "002,002",
+        "002,005",
+        "055,025"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 109,
+      "target_right_code": 203,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "025,025",
+        "005,005",
+        "055,005",
+        "055,052",
+        "052,055",
+        "052,052",
+        "025,055",
+        "000,000",
+        "055,025",
+        "255,055",
+        "025,005",
+        "022,022",
+        "022,025",
+        "055,053",
+        "055,050"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 189,
+      "target_right_code": 204,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib256_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "255,055",
+        "005,005",
+        "025,025",
+        "255,005",
+        "000,000",
+        "255,000",
+        "055,052",
+        "005,002",
+        "025,055",
+        "005,055",
+        "000,005",
+        "055,005",
+        "255,052",
+        "255,025",
+        "052,052"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 226,
+      "target_right_code": 66,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "505,505",
+        "005,005",
+        "505,005",
+        "000,000",
+        "055,055",
+        "505,055",
+        "025,025",
+        "005,002",
+        "505,502",
+        "505,002",
+        "000,005",
+        "505,025",
+        "002,002",
+        "055,005",
+        "005,000",
+        "052,052"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": true,
+      "right_recall_at_4": true,
+      "right_recall_at_8": true,
+      "target_left_code": 390,
+      "target_right_code": 5,
+      "template": "pair_affine_mod",
+      "top1_pair": "505,505",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "505,505",
+        "025,025",
+        "005,002",
+        "000,000",
+        "505,005",
+        "055,052",
+        "505,502",
+        "005,000",
+        "002,005",
+        "002,002",
+        "052,052",
+        "055,005",
+        "000,005",
+        "005,025"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 438,
+      "target_right_code": 411,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "000,000",
+        "055,055",
+        "505,005",
+        "005,002",
+        "002,002",
+        "002,005",
+        "000,005",
+        "025,025",
+        "505,055",
+        "052,052",
+        "005,000",
+        "055,005",
+        "505,002",
+        "000,002",
+        "055,052"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 366,
+      "target_right_code": 154,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model",
+      "id": "eval_lib512_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "designed",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "505,005",
+        "005,002",
+        "025,025",
+        "000,000",
+        "505,055",
+        "005,000",
+        "055,052",
+        "505,002",
+        "002,002",
+        "002,005",
+        "025,005",
+        "455,055",
+        "055,005",
+        "052,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 123,
+      "target_right_code": 331,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib64_pair_affine_mod_00000",
+      "left_recall_at_1": true,
+      "left_recall_at_16": true,
+      "left_recall_at_4": true,
+      "left_recall_at_8": true,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "025,025",
+        "005,002",
+        "055,005",
+        "005,055",
+        "025,005",
+        "002,002",
+        "002,005",
+        "000,005",
+        "000,000",
+        "005,000",
+        "005,025",
+        "055,002",
+        "055,000",
+        "025,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 5,
+      "target_right_code": 62,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib64_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "005,002",
+        "055,055",
+        "055,005",
+        "005,000",
+        "005,025",
+        "005,055",
+        "002,002",
+        "002,005",
+        "003,005",
+        "005,003",
+        "025,025",
+        "000,000",
+        "000,005",
+        "055,002",
+        "025,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 35,
+      "target_right_code": 58,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib64_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": true,
+      "left_recall_at_4": true,
+      "left_recall_at_8": true,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "055,005",
+        "000,000",
+        "002,002",
+        "002,005",
+        "005,002",
+        "025,025",
+        "005,025",
+        "025,005",
+        "000,005",
+        "055,002",
+        "005,055",
+        "005,000",
+        "052,005",
+        "025,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 55,
+      "target_right_code": 34,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib64_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "055,005",
+        "005,002",
+        "005,055",
+        "000,000",
+        "025,005",
+        "055,052",
+        "005,000",
+        "055,002",
+        "052,005",
+        "025,025",
+        "002,002",
+        "002,005",
+        "000,005",
+        "005,025"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 21,
+      "target_right_code": 14,
+      "template": "pair_compare_gate",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib128_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "025,025",
+        "002,002",
+        "055,025",
+        "000,000",
+        "055,005",
+        "002,005",
+        "005,000",
+        "005,002",
+        "055,052",
+        "052,052",
+        "052,055",
+        "000,005",
+        "025,005",
+        "005,025"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 18,
+      "target_right_code": 22,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib128_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "005,002",
+        "000,000",
+        "002,002",
+        "005,000",
+        "055,005",
+        "052,052",
+        "052,055",
+        "055,052",
+        "055,025",
+        "005,025",
+        "002,005",
+        "005,055",
+        "005,004"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 117,
+      "target_right_code": 47,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib128_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "025,025",
+        "055,055",
+        "005,005",
+        "005,002",
+        "025,005",
+        "005,025",
+        "000,000",
+        "025,022",
+        "055,052",
+        "002,005",
+        "002,002",
+        "052,052",
+        "052,055",
+        "005,055",
+        "025,055",
+        "055,025"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 97,
+      "target_right_code": 27,
+      "template": "pair_compare_gate",
+      "top1_pair": "025,025",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib128_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "055,005",
+        "002,002",
+        "052,052",
+        "052,055",
+        "055,052",
+        "055,025",
+        "000,000",
+        "005,025",
+        "005,002",
+        "005,055",
+        "002,005",
+        "055,002",
+        "025,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": true,
+      "right_recall_at_4": true,
+      "right_recall_at_8": true,
+      "target_left_code": 17,
+      "target_right_code": 5,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib256_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "000,000",
+        "055,005",
+        "255,055",
+        "005,002",
+        "052,055",
+        "255,005",
+        "055,025",
+        "002,002",
+        "002,005",
+        "025,055",
+        "005,055",
+        "055,052",
+        "025,005"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 199,
+      "target_right_code": 97,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib256_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "055,005",
+        "005,005",
+        "025,025",
+        "055,025",
+        "055,052",
+        "052,055",
+        "255,055",
+        "000,000",
+        "255,005",
+        "005,055",
+        "055,002",
+        "052,052",
+        "053,055",
+        "025,055",
+        "005,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 109,
+      "target_right_code": 203,
+      "template": "pair_affine_mod",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib256_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "000,000",
+        "055,052",
+        "052,052",
+        "052,055",
+        "055,005",
+        "255,005",
+        "055,025",
+        "025,055",
+        "052,005",
+        "002,002",
+        "255,055",
+        "005,002",
+        "005,000"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 189,
+      "target_right_code": 204,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib256_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "055,055",
+        "005,005",
+        "025,025",
+        "055,052",
+        "052,055",
+        "055,005",
+        "000,000",
+        "255,055",
+        "005,055",
+        "055,025",
+        "052,052",
+        "055,050",
+        "255,005",
+        "025,055",
+        "054,055",
+        "005,002"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 226,
+      "target_right_code": 66,
+      "template": "pair_compare_gate",
+      "top1_pair": "055,055",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib512_pair_affine_mod_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "000,000",
+        "005,002",
+        "505,005",
+        "025,025",
+        "005,000",
+        "505,055",
+        "052,055",
+        "052,052",
+        "000,005",
+        "005,003",
+        "002,002",
+        "002,005",
+        "055,005",
+        "055,052"
+      ],
+      "right_recall_at_1": true,
+      "right_recall_at_16": true,
+      "right_recall_at_4": true,
+      "right_recall_at_8": true,
+      "target_left_code": 390,
+      "target_right_code": 5,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib512_pair_affine_mod_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "005,005",
+        "055,055",
+        "505,505",
+        "025,025",
+        "000,000",
+        "505,005",
+        "005,000",
+        "005,002",
+        "052,055",
+        "052,052",
+        "002,002",
+        "002,005",
+        "055,005",
+        "505,055",
+        "025,005",
+        "055,052"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 438,
+      "target_right_code": 411,
+      "template": "pair_affine_mod",
+      "top1_pair": "005,005",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib512_pair_compare_gate_00000",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "505,505",
+        "055,055",
+        "005,005",
+        "505,005",
+        "505,055",
+        "025,025",
+        "055,005",
+        "505,502",
+        "055,052",
+        "005,002",
+        "505,002",
+        "000,000",
+        "052,055",
+        "052,052",
+        "505,025",
+        "055,025"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 366,
+      "target_right_code": 154,
+      "template": "pair_compare_gate",
+      "top1_pair": "505,505",
+      "top1_pair_hit": false
+    },
+    {
+      "beam_width": 16,
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_lib512_pair_compare_gate_00001",
+      "left_recall_at_1": false,
+      "left_recall_at_16": false,
+      "left_recall_at_4": false,
+      "left_recall_at_8": false,
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": false,
+      "pair_recall_at_16": false,
+      "pair_recall_at_4": false,
+      "pair_recall_at_8": false,
+      "returned_pair_count": 16,
+      "returned_pairs": [
+        "505,505",
+        "055,055",
+        "005,005",
+        "000,000",
+        "025,025",
+        "005,002",
+        "002,005",
+        "002,002",
+        "000,005",
+        "505,502",
+        "055,052",
+        "505,005",
+        "005,000",
+        "052,052",
+        "005,025",
+        "505,055"
+      ],
+      "right_recall_at_1": false,
+      "right_recall_at_16": false,
+      "right_recall_at_4": false,
+      "right_recall_at_8": false,
+      "target_left_code": 123,
+      "target_right_code": 331,
+      "template": "pair_compare_gate",
+      "top1_pair": "505,505",
+      "top1_pair_hit": false
+    }
+  ],
+  "prediction_summary_by_control": [
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      }
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "right_recall_at_16": {
+        "rate": 0.1875,
+        "records": 16,
+        "successes": 3
+      },
+      "right_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      }
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.1875,
+        "records": 16,
+        "successes": 3
+      },
+      "right_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      }
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "right_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      }
+    }
+  ],
+  "prediction_summary_by_ladder": [
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "library_size": 64,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "library_size": 64,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "left_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "library_size": 64,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 128,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 256,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_16": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "right_recall_at_8": {
+        "rate": 0.5,
+        "records": 2,
+        "successes": 1
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "library_size": 512,
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "records": 2,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    }
+  ],
+  "probe_records_per_cell": 4,
+  "recall_ks": [
+    1,
+    4,
+    8,
+    16
+  ],
+  "records": 16
+}

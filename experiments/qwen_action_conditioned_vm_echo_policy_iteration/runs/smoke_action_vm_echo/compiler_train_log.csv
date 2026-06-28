@@ -1,0 +1,5 @@
+phase,epoch,loss,train_examples,quick_val_direct_accuracy,quick_val_answer_search_accuracy
+seed_supervised,1,7.695821046829224,16,0.0,0.0
+learned_policy_distill,1,4.2813623428344725,40,0.0,0.0
+answer_verified_distill,1,5.059712674882677,18,0.0,0.0
+full_supervised,1,6.914475440979004,24,0.0,0.0

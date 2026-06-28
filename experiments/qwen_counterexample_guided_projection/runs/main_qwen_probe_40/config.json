@@ -1,0 +1,18 @@
+{
+  "run_name": "main_qwen_probe_40",
+  "seed": 20260627,
+  "task_limit": 40,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "probes_per_task": 8,
+  "max_candidates": 400,
+  "max_new_tokens": 48,
+  "complexity_penalty": 0.05,
+  "gated_probe_threshold": 0.75,
+  "existing_predictions": "/workspace/experiments/qwen_batched_transduction_consistency/runs/main_v2_prompt_iteration/row_details.csv",
+  "no_qwen": true,
+  "tasks": 40,
+  "created_utc": "2026-06-27T07:08:21.107708+00:00"
+}

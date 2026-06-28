@@ -1,0 +1,13 @@
+{
+  "started_utc": "2026-06-27T06:15:53.156323+00:00",
+  "suite": "smoke_v1",
+  "task_limit": 0,
+  "qwen_task_limit": 4,
+  "train_n": 4,
+  "heldout_cap": 3,
+  "min_heldout": 3,
+  "sample_seed": 20260627,
+  "row_max_new_tokens": 48,
+  "batch_max_new_tokens": 160,
+  "methods": "row_by_row,batch_all"
+}

@@ -1,0 +1,34 @@
+{
+  "experiment": "qwen35_4b_code_abi_oracle_coverage_ladder",
+  "date": "2026-06-27",
+  "dataset": "google-research-datasets/mbpp test split",
+  "visible_tests": 1,
+  "task_count": 160,
+  "task_offset": 0,
+  "rungs": {
+    "core": {
+      "oracle_covered": 20,
+      "oracle_coverage": 0.125,
+      "mean_candidates_per_task": 66.875
+    },
+    "expanded": {
+      "oracle_covered": 92,
+      "oracle_coverage": 0.575,
+      "mean_candidates_per_task": 164.15625
+    },
+    "final": {
+      "oracle_covered": 134,
+      "oracle_coverage": 0.8375,
+      "first_visible_full_pass": 95,
+      "mean_candidates_per_task": 224.01875
+    }
+  },
+  "abi": [
+    "string transforms and regex extraction",
+    "list transforms and reducers",
+    "dict/counter transforms",
+    "numeric reducers",
+    "small composed templates"
+  ],
+  "primary_gate": "oracle ABI coverage must be high on decomposable slices before any Qwen compiler training"
+}

@@ -1,0 +1,49 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:02,  6.83it/s]Loading weights:   6%|▌         | 25/426 [00:00<00:03, 121.79it/s]Loading weights:  16%|█▌        | 67/426 [00:00<00:01, 241.20it/s]Loading weights:  27%|██▋       | 117/426 [00:00<00:00, 333.62it/s]Loading weights:  37%|███▋      | 159/426 [00:00<00:00, 357.36it/s]Loading weights:  48%|████▊     | 205/426 [00:00<00:00, 387.72it/s]Loading weights:  59%|█████▉    | 253/426 [00:00<00:00, 416.43it/s]Loading weights:  71%|███████   | 301/426 [00:00<00:00, 433.80it/s]Loading weights:  81%|████████  | 345/426 [00:00<00:00, 426.16it/s]Loading weights:  92%|█████████▏| 394/426 [00:01<00:00, 441.96it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 374.58it/s]
+strategy-semantic_strategy_k32:   0%|          | 0/80 [00:00<?, ?it/s]strategy-semantic_strategy_k32:   1%|▏         | 1/80 [01:58<2:35:49, 118.35s/it]strategy-semantic_strategy_k32:   2%|▎         | 2/80 [03:30<2:13:54, 103.01s/it]strategy-semantic_strategy_k32:   4%|▍         | 3/80 [04:55<2:01:43, 94.86s/it] strategy-semantic_strategy_k32:   5%|▌         | 4/80 [06:07<1:48:23, 85.58s/it]strategy-semantic_strategy_k32:   6%|▋         | 5/80 [07:56<1:57:52, 94.30s/it]strategy-semantic_strategy_k32:   8%|▊         | 6/80 [09:35<1:58:03, 95.73s/it]strategy-semantic_strategy_k32:   9%|▉         | 7/80 [10:03<1:29:46, 73.78s/it]strategy-semantic_strategy_k32:  10%|█         | 8/80 [10:56<1:20:34, 67.15s/it]strategy-semantic_strategy_k32:  11%|█▏        | 9/80 [11:50<1:14:25, 62.89s/it]strategy-semantic_strategy_k32:  12%|█▎        | 10/80 [13:12<1:20:25, 68.94s/it]strategy-semantic_strategy_k32:  14%|█▍        | 11/80 [13:57<1:10:41, 61.48s/it]strategy-semantic_strategy_k32:  15%|█▌        | 12/80 [14:48<1:06:10, 58.39s/it]strategy-semantic_strategy_k32:  16%|█▋        | 13/80 [15:43<1:03:52, 57.21s/it]strategy-semantic_strategy_k32:  18%|█▊        | 14/80 [16:20<56:20, 51.22s/it]  strategy-semantic_strategy_k32:  19%|█▉        | 15/80 [17:56<1:09:59, 64.61s/it]strategy-semantic_strategy_k32:  20%|██        | 16/80 [19:17<1:14:12, 69.57s/it]strategy-semantic_strategy_k32:  21%|██▏       | 17/80 [20:13<1:08:52, 65.60s/it]strategy-semantic_strategy_k32:  22%|██▎       | 18/80 [22:08<1:23:06, 80.43s/it]strategy-semantic_strategy_k32:  24%|██▍       | 19/80 [24:01<1:31:42, 90.21s/it]strategy-semantic_strategy_k32:  25%|██▌       | 20/80 [26:17<1:43:50, 103.84s/it]strategy-semantic_strategy_k32:  26%|██▋       | 21/80 [29:18<2:04:47, 126.92s/it]strategy-semantic_strategy_k32:  28%|██▊       | 22/80 [31:50<2:10:02, 134.53s/it]strategy-semantic_strategy_k32:  29%|██▉       | 23/80 [33:04<1:50:33, 116.38s/it]strategy-semantic_strategy_k32:  30%|███       | 24/80 [35:10<1:51:18, 119.26s/it]strategy-semantic_strategy_k32:  31%|███▏      | 25/80 [37:27<1:54:10, 124.56s/it]strategy-semantic_strategy_k32:  32%|███▎      | 26/80 [40:39<2:10:21, 144.83s/it]strategy-semantic_strategy_k32:  34%|███▍      | 27/80 [42:06<1:52:39, 127.54s/it]strategy-semantic_strategy_k32:  35%|███▌      | 28/80 [43:46<1:43:16, 119.15s/it]strategy-semantic_strategy_k32:  36%|███▋      | 29/80 [46:53<1:58:43, 139.67s/it]strategy-semantic_strategy_k32:  38%|███▊      | 30/80 [47:59<1:37:49, 117.39s/it]strategy-semantic_strategy_k32:  39%|███▉      | 31/80 [48:39<1:17:06, 94.42s/it] strategy-semantic_strategy_k32:  40%|████      | 32/80 [50:18<1:16:31, 95.65s/it]strategy-semantic_strategy_k32:  41%|████▏     | 33/80 [51:18<1:06:26, 84.81s/it]strategy-semantic_strategy_k32:  42%|████▎     | 34/80 [52:15<58:40, 76.53s/it]  strategy-semantic_strategy_k32:  44%|████▍     | 35/80 [53:16<53:56, 71.91s/it]strategy-semantic_strategy_k32:  45%|████▌     | 36/80 [53:50<44:30, 60.70s/it]strategy-semantic_strategy_k32:  46%|████▋     | 37/80 [55:56<57:25, 80.14s/it]strategy-semantic_strategy_k32:  48%|████▊     | 38/80 [58:11<1:07:42, 96.73s/it]strategy-semantic_strategy_k32:  49%|████▉     | 39/80 [59:04<57:04, 83.53s/it]  strategy-semantic_strategy_k32:  50%|█████     | 40/80 [59:58<49:47, 74.70s/it]strategy-semantic_strategy_k32:  51%|█████▏    | 41/80 [1:01:18<49:36, 76.32s/it]strategy-semantic_strategy_k32:  52%|█████▎    | 42/80 [1:01:48<39:27, 62.30s/it]strategy-semantic_strategy_k32:  54%|█████▍    | 43/80 [1:02:40<36:29, 59.19s/it]strategy-semantic_strategy_k32:  55%|█████▌    | 44/80 [1:04:35<45:32, 75.89s/it]strategy-semantic_strategy_k32:  56%|█████▋    | 45/80 [1:06:10<47:40, 81.72s/it]strategy-semantic_strategy_k32:  57%|█████▊    | 46/80 [1:07:06<41:52, 73.89s/it]strategy-semantic_strategy_k32:  59%|█████▉    | 47/80 [1:08:41<44:13, 80.40s/it]strategy-semantic_strategy_k32:  60%|██████    | 48/80 [1:09:23<36:40, 68.77s/it]strategy-semantic_strategy_k32:  61%|██████▏   | 49/80 [1:10:41<36:59, 71.59s/it]strategy-semantic_strategy_k32:  62%|██████▎   | 50/80 [1:13:45<52:35, 105.18s/it]strategy-semantic_strategy_k32:  64%|██████▍   | 51/80 [1:16:16<57:36, 119.20s/it]strategy-semantic_strategy_k32:  65%|██████▌   | 52/80 [1:16:53<44:04, 94.43s/it] strategy-semantic_strategy_k32:  66%|██████▋   | 53/80 [1:18:29<42:42, 94.92s/it]strategy-semantic_strategy_k32:  68%|██████▊   | 54/80 [1:19:10<34:04, 78.63s/it]strategy-semantic_strategy_k32:  69%|██████▉   | 55/80 [1:20:35<33:33, 80.53s/it]strategy-semantic_strategy_k32:  70%|███████   | 56/80 [1:21:11<26:51, 67.14s/it]strategy-semantic_strategy_k32:  71%|███████▏  | 57/80 [1:24:16<39:19, 102.59s/it]strategy-semantic_strategy_k32:  72%|███████▎  | 58/80 [1:26:37<41:49, 114.07s/it]strategy-semantic_strategy_k32:  74%|███████▍  | 59/80 [1:27:54<36:01, 102.93s/it]strategy-semantic_strategy_k32:  75%|███████▌  | 60/80 [1:29:51<35:43, 107.16s/it]strategy-semantic_strategy_k32:  76%|███████▋  | 61/80 [1:33:04<42:04, 132.85s/it]strategy-semantic_strategy_k32:  78%|███████▊  | 62/80 [1:35:02<38:31, 128.43s/it]strategy-semantic_strategy_k32:  79%|███████▉  | 63/80 [1:37:11<36:26, 128.62s/it]strategy-semantic_strategy_k32:  80%|████████  | 64/80 [1:38:57<32:29, 121.84s/it]strategy-semantic_strategy_k32:  81%|████████▏ | 65/80 [1:40:05<26:27, 105.82s/it]strategy-semantic_strategy_k32:  82%|████████▎ | 66/80 [1:42:40<28:06, 120.46s/it]strategy-semantic_strategy_k32:  84%|████████▍ | 67/80 [1:44:33<25:35, 118.14s/it]strategy-semantic_strategy_k32:  85%|████████▌ | 68/80 [1:46:07<22:12, 111.04s/it]strategy-semantic_strategy_k32:  86%|████████▋ | 69/80 [1:46:36<15:51, 86.48s/it] strategy-semantic_strategy_k32:  88%|████████▊ | 70/80 [1:48:26<15:33, 93.37s/it]strategy-semantic_strategy_k32:  89%|████████▉ | 71/80 [1:49:45<13:23, 89.27s/it]strategy-semantic_strategy_k32:  90%|█████████ | 72/80 [1:50:33<10:14, 76.82s/it]strategy-semantic_strategy_k32:  91%|█████████▏| 73/80 [1:51:25<08:05, 69.34s/it]strategy-semantic_strategy_k32:  92%|█████████▎| 74/80 [1:53:11<08:02, 80.42s/it]strategy-semantic_strategy_k32:  94%|█████████▍| 75/80 [1:53:58<05:50, 70.20s/it]strategy-semantic_strategy_k32:  95%|█████████▌| 76/80 [1:55:33<05:10, 77.64s/it]strategy-semantic_strategy_k32:  96%|█████████▋| 77/80 [1:57:19<04:19, 86.39s/it]strategy-semantic_strategy_k32:  98%|█████████▊| 78/80 [1:58:19<02:36, 78.46s/it]strategy-semantic_strategy_k32:  99%|█████████▉| 79/80 [1:58:52<01:04, 64.57s/it]strategy-semantic_strategy_k32: 100%|██████████| 80/80 [1:59:31<00:00, 57.02s/it]strategy-semantic_strategy_k32: 100%|██████████| 80/80 [1:59:31<00:00, 89.64s/it]
+{
+  "adapter_dir": "/workspace/large_artifacts/qwen35_4b_strategy_token_diversity_lora/models/semantic_strategy_lora",
+  "arm_name": "semantic_strategy_k32",
+  "base_records": "data/main_base_k4_records.jsonl",
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "max_new_tokens": 220,
+  "path": "data/main_strategy_semantic_k32_records.jsonl",
+  "records": {
+    "candidate_count_mean": 23.1,
+    "coverage": 0.8125,
+    "distinct_behavior_rate_mean": 0.42941675909423155,
+    "distinct_functional_rate_mean": 0.13803405825016013,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 10.1375,
+    "parse_success_mean": 22.8125,
+    "records": 80,
+    "visible_candidates_mean": 13.0875,
+    "visible_coverage": 0.8125,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 24,
+    "zero_to_one": 11,
+    "zero_to_one_rate": 0.4583333333333333
+  },
+  "records_in": "data/main_base_k4_records.jsonl",
+  "round_name": "main_strategy_semantic_k32",
+  "samples_per_strategy": 4,
+  "strategy_keys": [
+    "DIRECT",
+    "LOOP",
+    "COMPREHENSION",
+    "SORTING",
+    "SET_DICT",
+    "RECURSION",
+    "STRING_REGEX",
+    "MATH"
+  ],
+  "temperature": 0.8,
+  "token_usage": {
+    "calls": 2560,
+    "completion_tokens": 174824,
+    "forward_tokens": 627176,
+    "prompt_tokens": 452352
+  },
+  "top_p": 0.98
+}

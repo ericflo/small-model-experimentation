@@ -1,0 +1,73 @@
+task_id,family,features,method,row_index,input,target,prediction,exact,program
+Currency.000003,Currency,"Numeric,Substring",train_only,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",train_only,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",train_only,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_shuffled,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_shuffled,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_shuffled,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_random,1,�23.81,23.81,23.81,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_random,2,$4.03,4.03,4.03,True,number_2dp(COL0)
+Currency.000003,Currency,"Numeric,Substring",qwen_projection_random,3,�27.32,27.32,27.32,True,number_2dp(COL0)
+DateTime.000019,DateTime,"DateTime,Multicolumn",train_only,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",train_only,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",train_only,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_shuffled,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_shuffled,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_shuffled,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_random,1,col0=29 Dec 2113 | col1=lgovprx,29/12/2113,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_random,2,col0=Oct 08 2089 | col1=msjgluuer,8/10/2089,,False,
+DateTime.000019,DateTime,"DateTime,Multicolumn",qwen_projection_random,3,col0=26-Mar-1816 | col1=fllgvjycq,26/3/1816,,False,
+DateTime.000030,DateTime,DateTime,train_only,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,train_only,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,train_only,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_shuffled,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_shuffled,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_shuffled,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_random,1,03302241,"Tuesday, March 30, 2241",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_random,2,02-Aug-2160,"Saturday, August 2, 2160",,False,
+DateTime.000030,DateTime,DateTime,qwen_projection_random,3,23 May 1984,"Wednesday, May 23, 1984",,False,
+Email.000009,Email,Substring,train_only,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,train_only,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,train_only,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000009,Email,Substring,qwen_projection,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,qwen_projection,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,qwen_projection,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000009,Email,Substring,qwen_projection_shuffled,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,qwen_projection_shuffled,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,qwen_projection_shuffled,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000009,Email,Substring,qwen_projection_random,1,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False,
+Email.000009,Email,Substring,qwen_projection_random,2,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,,False,
+Email.000009,Email,Substring,qwen_projection_random,3,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False,
+Email.000010,Email,Substring,train_only,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,train_only,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,train_only,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_shuffled,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_shuffled,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_shuffled,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_random,1,Radmilo.Bogic@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_random,2,Archana.Panigrahi@woodgrovebank.com,woodgrovebank.com,woodgrovebank.com,True,"field[@,1](COL0)"
+Email.000010,Email,Substring,qwen_projection_random,3,Daniyar.Shakenuly@tailspintoys.com,tailspintoys.com,tailspintoys.com,True,"field[@,1](COL0)"
+Number.000032,Number,"Numeric,NumericRounding",train_only,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",train_only,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",train_only,3,102,102.00,102.00,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection,3,102,102.00,102.00,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_shuffled,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_shuffled,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_shuffled,3,102,102.00,102.00,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_random,1,1.82,1.82,1.82,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_random,2,43.3235,43.32,43.32,True,number_2dp(COL0)
+Number.000032,Number,"Numeric,NumericRounding",qwen_projection_random,3,102,102.00,102.00,True,number_2dp(COL0)

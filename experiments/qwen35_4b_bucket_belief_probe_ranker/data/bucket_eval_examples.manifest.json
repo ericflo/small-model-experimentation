@@ -1,0 +1,34 @@
+{
+  "candidates_per_state": 8,
+  "max_options": 8,
+  "out": "data/bucket_eval_examples.jsonl",
+  "records": "data/eval_records.jsonl",
+  "states": "data/process_eval_states.jsonl",
+  "summary": {
+    "by_cell": {
+      "eval/n128/pair_affine_mod": 256,
+      "eval/n128/pair_compare_gate": 480,
+      "eval/n256/pair_affine_mod": 192,
+      "eval/n256/pair_compare_gate": 472,
+      "eval/n512/pair_affine_mod": 192,
+      "eval/n512/pair_compare_gate": 480,
+      "eval/n64/pair_affine_mod": 144,
+      "eval/n64/pair_compare_gate": 456
+    },
+    "candidate_count_mean": 3319.946107784431,
+    "examples": 2672,
+    "labels": {
+      "A": 1329,
+      "B": 889,
+      "C": 271,
+      "D": 32,
+      "E": 33,
+      "F": 22,
+      "G": 22,
+      "H": 74
+    },
+    "reward_mean": 1.5571173861445697,
+    "states": 334,
+    "survivors_if_taken_mean": 2227.103667664671
+  }
+}

@@ -1,0 +1,11 @@
+method,tasks,row_exact,full_task_exact,mean_budget
+active1_plain,4,0.75,0.75,1.0
+active3_plain,4,0.75,0.75,3.0
+oracle_among_tested_acquisitions,4,0.875,0.75,1.0
+order1_plain,4,0.75,0.75,1.0
+order3_plain,4,0.75,0.75,3.0
+active3_shuffled_labels,4,0.625,0.5,3.0
+loo_portfolio_base_plain,4,0.75,0.5,0.0
+base_plain,4,0.75,0.5,0.0
+random1_plain,4,0.75,0.5,1.0
+random3_plain,4,0.625,0.5,3.0

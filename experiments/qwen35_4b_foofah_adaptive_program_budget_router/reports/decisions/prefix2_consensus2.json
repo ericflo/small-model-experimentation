@@ -1,0 +1,652 @@
+[
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 8552,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 6012,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 6551,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 7328,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_12",
+    "file": "exp0_12_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 7728,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 10838,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_25",
+    "file": "exp0_25_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 10697,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 8020,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 13751,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_25",
+    "file": "exp0_25_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 15334,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2860,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "synthetic_48",
+    "file": "exp0_48_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 4592,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 4676,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 4832,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_48",
+    "file": "exp0_48_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 5135,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 11240,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 8888,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 14380,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 15609,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "synthetic_8",
+    "file": "exp0_8_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 13328,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 2546,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 5397,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 5558,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "agriculture",
+    "file": "exp0_agriculture_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 6054,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "agriculture",
+    "file": "exp0_agriculture_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 6183,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 21045,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 21422,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 21494,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 21311,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "crime_data_wrangler",
+    "file": "exp0_crime_data_wrangler_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 21935,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 1209,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 1865,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 1913,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 1959,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_merge_split",
+    "file": "exp0_potters_wheel_merge_split_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2066,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2179,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2429,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2434,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_4.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 4408,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold2",
+    "file": "exp0_potters_wheel_unfold2_5.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 3857,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_1.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 3762,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_2.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 5465,
+    "trigger": false
+  },
+  {
+    "direct_exact": false,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_3.txt",
+    "ok": false,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 3573,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 4878,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "potters_wheel_unfold",
+    "file": "exp0_potters_wheel_unfold_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 4190,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_1.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2524,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_2.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 1178,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_3.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2000,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_4.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "consensus_2",
+    "tokens": 1814,
+    "trigger": false
+  },
+  {
+    "direct_exact": true,
+    "family": "proactive_wrangling_fold",
+    "file": "exp0_proactive_wrangling_fold_5.txt",
+    "ok": true,
+    "ran_variants": [
+      "verified_structural",
+      "cell_parser"
+    ],
+    "source": "direct",
+    "tokens": 2608,
+    "trigger": false
+  }
+]

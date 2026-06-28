@@ -1,0 +1,37 @@
+{
+  "run_name": "main_v1",
+  "suite": "main",
+  "model_name": "Qwen/Qwen3-4B",
+  "seeds": [
+    101,
+    202,
+    303
+  ],
+  "arms": [
+    "atomic_d1",
+    "mix_d1_d2",
+    "mix_d1_d2_d3"
+  ],
+  "train_n": 120,
+  "eval_n": 6,
+  "train_steps": 16,
+  "eval_splits": [
+    "eval_indist_d1",
+    "eval_comp_d2",
+    "eval_comp_d3",
+    "eval_comp_d4",
+    "eval_comp_d6",
+    "eval_comp_d8",
+    "eval_template_d6",
+    "eval_template_d8"
+  ],
+  "batch_size": 2,
+  "grad_accum": 2,
+  "lr": 0.0002,
+  "max_length": 448,
+  "eval_batch_size": 4,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "max_new_tokens": 150,
+  "resample_attempts": 2
+}

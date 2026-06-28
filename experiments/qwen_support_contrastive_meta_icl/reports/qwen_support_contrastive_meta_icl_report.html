@@ -1,0 +1,1408 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Support-Contrastive Meta-ICL</title><style>body{font-family:Inter,Arial,sans-serif;max-width:1200px;margin:32px auto;line-height:1.48;color:#1f2937}table{border-collapse:collapse;font-size:13px;margin:14px 0}td,th{border:1px solid #d1d5db;padding:4px 7px}th{background:#f3f4f6}img{max-width:100%;margin:14px 0;border:1px solid #e5e7eb}code{background:#f3f4f6;padding:1px 4px;border-radius:4px}</style></head><body><h1>Support-Contrastive Meta-ICL</h1>
+<h2>Question</h2>
+<p>Can a support-contrastive LoRA objective make Qwen3-4B answer public text-transformation tasks better while making the answer depend more strongly on intact support examples?</p>
+<p>The contrastive arm trains on synthetic few-shot transformations. For each target answer, the positive prompt contains intact support examples, while negative prompts contain shuffled support labels, no support examples, or a counterfactual support set from an incompatible rule. Public benchmark labels are used only for evaluation.</p>
+<h2>Headline</h2>
+<ul>
+<li>Public full-task exact: base <code>17.8%</code>; contrastive arm <code>50.4%</code> with seed spread <code>1.3%</code>.</li>
+<li>Contrastive public support controls: normal <code>50.4%</code>, shuffled <code>7.4%</code>, no support <code>0.0%</code>.</li>
+<li>CE-only counterfactual control: <code>53.3%</code>.</li>
+<li>CE-only ordinary control: <code>55.6%</code>.</li>
+<li>CE-only shuffled-label control: <code>48.9%</code>.</li>
+</ul>
+<h2>Aggregate Metrics</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">arm</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">support_mode</th>
+<th style="text-align: right;">runs</th>
+<th style="text-align: right;">tasks</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">row_exact_mean</th>
+<th style="text-align: left;">row_exact_std</th>
+<th style="text-align: left;">full_task_exact_mean</th>
+<th style="text-align: left;">full_task_exact_std</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">5.9%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">2.2%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">36.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">17.8%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">14.1%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">6.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">8.9%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">4.4%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">68.1%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">53.3%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">51.1%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">7.4%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">4.4%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">71.9%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">55.6%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">43.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">22.2%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">8.1%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">2.2%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">68.9%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">48.9%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">63.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">48.9%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">67.4%</td>
+<td style="text-align: left;">2.0%</td>
+<td style="text-align: left;">50.4%</td>
+<td style="text-align: left;">1.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">12.6%</td>
+<td style="text-align: left;">1.3%</td>
+<td style="text-align: left;">7.4%</td>
+<td style="text-align: left;">1.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">contrast</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">5.8%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">1.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">56.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">43.3%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">21.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">contrast</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">1.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">92.5%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">85.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">59.2%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">46.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">contrast</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.8%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">88.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">80.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">47.5%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">36.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">contrast</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">5.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">1.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">95.8%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">91.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">90.8%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">83.3%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">contrast</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">89.7%</td>
+<td style="text-align: left;">3.8%</td>
+<td style="text-align: left;">83.9%</td>
+<td style="text-align: left;">6.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">8.9%</td>
+<td style="text-align: left;">1.7%</td>
+<td style="text-align: left;">6.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+</tbody>
+</table>
+<h2>Support-Dependence Gaps</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">arm</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">normal</th>
+<th style="text-align: left;">shuffled</th>
+<th style="text-align: left;">none</th>
+<th style="text-align: left;">contrast</th>
+<th style="text-align: left;">normal_minus_shuffled_gap</th>
+<th style="text-align: left;">normal_minus_none_gap</th>
+<th style="text-align: left;">normal_minus_contrast_gap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">17.8%</td>
+<td style="text-align: left;">6.7%</td>
+<td style="text-align: left;">2.2%</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">11.1%</td>
+<td style="text-align: left;">15.6%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">53.3%</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">4.4%</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">20.0%</td>
+<td style="text-align: left;">48.9%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">55.6%</td>
+<td style="text-align: left;">22.2%</td>
+<td style="text-align: left;">4.4%</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">51.1%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">48.9%</td>
+<td style="text-align: left;">48.9%</td>
+<td style="text-align: left;">2.2%</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">46.7%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">50.4%</td>
+<td style="text-align: left;">7.4%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">43.0%</td>
+<td style="text-align: left;">50.4%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">43.3%</td>
+<td style="text-align: left;">21.7%</td>
+<td style="text-align: left;">1.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">21.7%</td>
+<td style="text-align: left;">41.7%</td>
+<td style="text-align: left;">43.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">85.0%</td>
+<td style="text-align: left;">46.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">38.3%</td>
+<td style="text-align: left;">85.0%</td>
+<td style="text-align: left;">85.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">80.0%</td>
+<td style="text-align: left;">36.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">43.3%</td>
+<td style="text-align: left;">80.0%</td>
+<td style="text-align: left;">80.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">91.7%</td>
+<td style="text-align: left;">83.3%</td>
+<td style="text-align: left;">1.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: left;">90.0%</td>
+<td style="text-align: left;">91.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">83.9%</td>
+<td style="text-align: left;">6.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">77.2%</td>
+<td style="text-align: left;">83.9%</td>
+<td style="text-align: left;">83.9%</td>
+</tr>
+</tbody>
+</table>
+<h2>Seed-Level Normal-Support Metrics</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run_name</th>
+<th style="text-align: right;">seed</th>
+<th style="text-align: left;">arm</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: right;">tasks</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">row_exact</th>
+<th style="text-align: left;">full_task_exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">36.3%</td>
+<td style="text-align: left;">17.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">56.7%</td>
+<td style="text-align: left;">43.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_ce_cf_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">68.1%</td>
+<td style="text-align: left;">53.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_ce_cf_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ce_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">92.5%</td>
+<td style="text-align: left;">85.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_ce_ordinary_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">71.9%</td>
+<td style="text-align: left;">55.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_ce_ordinary_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ce_ordinary</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">88.3%</td>
+<td style="text-align: left;">80.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_ce_shuffled_labels_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">68.9%</td>
+<td style="text-align: left;">48.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_ce_shuffled_labels_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ce_shuffled_labels</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">95.8%</td>
+<td style="text-align: left;">91.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">51.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">93.3%</td>
+<td style="text-align: left;">88.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: right;">20260629</td>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">65.9%</td>
+<td style="text-align: left;">48.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: right;">20260629</td>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">90.0%</td>
+<td style="text-align: left;">86.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s3</td>
+<td style="text-align: right;">20260630</td>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">69.6%</td>
+<td style="text-align: left;">51.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s3</td>
+<td style="text-align: right;">20260630</td>
+<td style="text-align: left;">contrastive_cf</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">85.8%</td>
+<td style="text-align: left;">76.7%</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>The support-contrastive arm improves public strict task consistency over the frozen base model.
+The contrastive arm is strongly support-sensitive at evaluation time.
+A CE-only control beats the support-contrastive arm, so this objective is not the current best recipe.</p>
+<h2>Charts</h2>
+<p><img alt="Normal-support full-task exact" src="../analysis/figures/aggregate_normal_full_task_exact.png" /></p>
+<p><img alt="Public support-dependence gaps" src="../analysis/figures/public_support_gaps.png" /></p>
+<p><img alt="Contrastive task flips versus base" src="../analysis/figures/contrastive_task_flips.png" /></p>
+<p><img alt="Training loss" src="../analysis/figures/aggregate_training_loss.png" /></p>
+<h2>Contrastive Public Task Flips Versus Base</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run_name</th>
+<th style="text-align: right;">seed</th>
+<th style="text-align: right;">helped</th>
+<th style="text-align: right;">hurt</th>
+<th style="text-align: right;">tied</th>
+<th style="text-align: right;">tasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: right;">20260629</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s3</td>
+<td style="text-align: right;">20260630</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">45</td>
+</tr>
+</tbody>
+</table>
+<h2>Public Family Breakdown</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">family</th>
+<th style="text-align: right;">tasks_base</th>
+<th style="text-align: right;">tasks_contrastive_cf</th>
+<th style="text-align: left;">row_exact_base</th>
+<th style="text-align: left;">row_exact_contrastive_cf</th>
+<th style="text-align: left;">full_task_exact_base</th>
+<th style="text-align: left;">full_task_exact_contrastive_cf</th>
+<th style="text-align: left;">delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ShippingCode</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Log</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">92.6%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">77.8%</td>
+<td style="text-align: left;">77.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Email</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">80.6%</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">41.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">27.1%</td>
+<td style="text-align: left;">59.0%</td>
+<td style="text-align: left;">6.2%</td>
+<td style="text-align: left;">39.6%</td>
+<td style="text-align: left;">33.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">68.5%</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">47.2%</td>
+<td style="text-align: left;">22.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">58.3%</td>
+<td style="text-align: left;">50.0%</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">41.7%</td>
+<td style="text-align: left;">16.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ZipCode</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Address</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">-100.0%</td>
+</tr>
+</tbody>
+</table>
+<h2>Public Error Sample</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run_name</th>
+<th style="text-align: left;">task_id</th>
+<th style="text-align: left;">family</th>
+<th style="text-align: left;">input</th>
+<th style="text-align: left;">target</th>
+<th style="text-align: left;">prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Address.000013</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">One Main Parkway, Allentown, ND 41230</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">BillingCode.000001</td>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: left;">[CPT-115]</td>
+<td style="text-align: left;">[CPT-115]]</td>
+<td style="text-align: left;">[CPT-115]</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">BillingCode.000001</td>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: left;">[CPT-1153622]</td>
+<td style="text-align: left;">[CPT-1153622]]</td>
+<td style="text-align: left;">[CPT-1153622]</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">BillingCode.000001</td>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: left;">[CPT-00340]</td>
+<td style="text-align: left;">[CPT-00340]]</td>
+<td style="text-align: left;">[CPT-00340]</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000014</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">1 Feb 2013</td>
+<td style="text-align: left;">Friday #1 February 2013</td>
+<td style="text-align: left;">Saturday #1 February 2013</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000014</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">12 Dec 2002</td>
+<td style="text-align: left;">Thursday #2 December 2002</td>
+<td style="text-align: left;">Thursday #3 December 2002</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000014</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">01 Sep 2012</td>
+<td style="text-align: left;">Saturday #1 September 2012</td>
+<td style="text-align: left;">Thursday #1 September 2012</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000027</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">3302241</td>
+<td style="text-align: left;">Q1 '2241</td>
+<td style="text-align: left;">Q4 '241</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000027</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">8022160</td>
+<td style="text-align: left;">Q3 '2160</td>
+<td style="text-align: left;">Q2 '2160</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000028</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">11 May 2215</td>
+<td style="text-align: left;">W19</td>
+<td style="text-align: left;">W17</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000028</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">Oct 17 1892</td>
+<td style="text-align: left;">W42</td>
+<td style="text-align: left;">W07</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000028</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">Tue wk 42 in 2222</td>
+<td style="text-align: left;">W42</td>
+<td style="text-align: left;">18-Oct-2222</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">03302241</td>
+<td style="text-align: left;">Tuesday, March 30, 2241</td>
+<td style="text-align: left;">Monday, March 30, 2241</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">02-Aug-2160</td>
+<td style="text-align: left;">Saturday, August 2, 2160</td>
+<td style="text-align: left;">Monday, August 2, 2160</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">23 May 1984</td>
+<td style="text-align: left;">Wednesday, May 23, 1984</td>
+<td style="text-align: left;">Monday, May 23, 1984</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000073</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">10:24PM</td>
+<td style="text-align: left;">10:00PM-10:30PM</td>
+<td style="text-align: left;">10:15PM-10:45PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000082</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">1953-04-22 23:34:17</td>
+<td style="text-align: left;">1953-04-22 23:30</td>
+<td style="text-align: left;">1953-04-22 23:25</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000082</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">1868-06-22 19:36:20</td>
+<td style="text-align: left;">1868-06-22 19:30</td>
+<td style="text-align: left;">1868-06-22 19:25</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000088</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">16:15:08</td>
+<td style="text-align: left;">4:00PM</td>
+<td style="text-align: left;">3:00PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000088</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">22:24:59</td>
+<td style="text-align: left;">10:00PM</td>
+<td style="text-align: left;">9:00PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000096</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">8/7/2237</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">2237</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000096</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">6.30.2220</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">2220</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">DateTime.000114</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">16-Aug-1985 01:11:56</td>
+<td style="text-align: left;">0-15</td>
+<td style="text-align: left;">30-45</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Email.000009</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">blanditiis ratione @ contososuites.com porro dolorum corrupti</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">contososuites.com</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Email.000009</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">repellat deleniti @ northwindtraders.com consequatur aut qui porro</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">northwindtraders.com</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Name.000024</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Milica Zujovic</td>
+<td style="text-align: left;">m.z.</td>
+<td style="text-align: left;">m.z</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000005</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">47641887866</td>
+<td style="text-align: left;">7866</td>
+<td style="text-align: left;">8786</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000005</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">88081682946</td>
+<td style="text-align: left;">2946</td>
+<td style="text-align: left;">8294</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000008</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">-13578</td>
+<td style="text-align: left;">-135.78</td>
+<td style="text-align: left;">-13.578</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000008</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">-1961.1180</td>
+<td style="text-align: left;">-19.611180</td>
+<td style="text-align: left;">-19.61118</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000015</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">-22630</td>
+<td style="text-align: left;">-22600</td>
+<td style="text-align: left;">-22550</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000052</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">124</td>
+<td style="text-align: left;">125</td>
+<td style="text-align: left;">126</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000052</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">605</td>
+<td style="text-align: left;">605</td>
+<td style="text-align: left;">607</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000052</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">842</td>
+<td style="text-align: left;">840</td>
+<td style="text-align: left;">844</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000056</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">13.24</td>
+<td style="text-align: left;">13.24</td>
+<td style="text-align: left;">3.24</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000056</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">200.0</td>
+<td style="text-align: left;">200.0</td>
+<td style="text-align: left;">0.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000056</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">4.62</td>
+<td style="text-align: left;">4.62</td>
+<td style="text-align: left;">62</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000060</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">+43</td>
+<td style="text-align: left;">+0043</td>
+<td style="text-align: left;">+043</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Number.000061</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">1.252</td>
+<td style="text-align: left;">8.2</td>
+<td style="text-align: left;">1.3 * 8.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Phone.000009</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: left;">247-641-8878</td>
+<td style="text-align: left;">247-641-8878</td>
+<td style="text-align: left;">425-247-6418</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Phone.000009</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: left;">880-816-8294</td>
+<td style="text-align: left;">880-816-8294</td>
+<td style="text-align: left;">425-880-8168</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Phone.000009</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: left;">(177) 191 4536</td>
+<td style="text-align: left;">177-191-4536</td>
+<td style="text-align: left;">425-177-1914536</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Phone.000012</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: left;">247-641-8878</td>
+<td style="text-align: left;">425-641-8878</td>
+<td style="text-align: left;">425-247-6418878</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Phone.000012</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: left;">880-816-8294</td>
+<td style="text-align: left;">425-816-8294</td>
+<td style="text-align: left;">425-880-8168294</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s1</td>
+<td style="text-align: left;">Phone.000012</td>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: left;">(177) 191 4536</td>
+<td style="text-align: left;">177-191-4536</td>
+<td style="text-align: left;">425-177-1914536</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">Address.000013</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">One Main Parkway, Allentown, ND 41230</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">One</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">BillingCode.000001</td>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: left;">[CPT-115]</td>
+<td style="text-align: left;">[CPT-115]]</td>
+<td style="text-align: left;">[CPT-115]</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">BillingCode.000001</td>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: left;">[CPT-1153622]</td>
+<td style="text-align: left;">[CPT-1153622]]</td>
+<td style="text-align: left;">[CPT-1153622]</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">BillingCode.000001</td>
+<td style="text-align: left;">BillingCode</td>
+<td style="text-align: left;">[CPT-00340]</td>
+<td style="text-align: left;">[CPT-00340]]</td>
+<td style="text-align: left;">[CPT-00340]</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000014</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">1 Feb 2013</td>
+<td style="text-align: left;">Friday #1 February 2013</td>
+<td style="text-align: left;">Saturday #2 February 2013</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000014</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">12 Dec 2002</td>
+<td style="text-align: left;">Thursday #2 December 2002</td>
+<td style="text-align: left;">Thursday #3 December 2002</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000014</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">01 Sep 2012</td>
+<td style="text-align: left;">Saturday #1 September 2012</td>
+<td style="text-align: left;">Tuesday #1 September 2012</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000018</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">02-Aug-2160</td>
+<td style="text-align: left;">2 Aug 2160</td>
+<td style="text-align: left;">02 Aug 2160</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000027</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">3302241</td>
+<td style="text-align: left;">Q1 '2241</td>
+<td style="text-align: left;">Q1 '241</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000027</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">8022160</td>
+<td style="text-align: left;">Q3 '2160</td>
+<td style="text-align: left;">Q2 '160</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000028</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">11 May 2215</td>
+<td style="text-align: left;">W19</td>
+<td style="text-align: left;">W37</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000028</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">Oct 17 1892</td>
+<td style="text-align: left;">W42</td>
+<td style="text-align: left;">W03</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000028</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">Tue wk 42 in 2222</td>
+<td style="text-align: left;">W42</td>
+<td style="text-align: left;">W04</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">03302241</td>
+<td style="text-align: left;">Tuesday, March 30, 2241</td>
+<td style="text-align: left;">Monday, March 30, 2241</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_contrastive_s2</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">02-Aug-2160</td>
+<td style="text-align: left;">Saturday, August 2, 2160</td>
+<td style="text-align: left;">Monday, August 2, 2160</td>
+</tr>
+</tbody>
+</table>
+<h2>Artifacts</h2>
+<ul>
+<li>Experiment root: <code>/workspace/experiments/qwen_support_contrastive_meta_icl</code></li>
+<li>Large artifacts root: <code>/workspace/large_artifacts/qwen_support_contrastive_meta_icl</code></li>
+<li>Runs: <code>/workspace/experiments/qwen_support_contrastive_meta_icl/runs</code></li>
+<li>Checkpoints: <code>/workspace/large_artifacts/qwen_support_contrastive_meta_icl/checkpoints</code></li>
+<li>Aggregate summary CSV: <code>/workspace/experiments/qwen_support_contrastive_meta_icl/analysis/aggregate_summary.csv</code></li>
+<li>Combined task metrics: <code>/workspace/experiments/qwen_support_contrastive_meta_icl/analysis/aggregate_task_metrics.csv</code></li>
+<li>Combined row predictions: <code>/workspace/experiments/qwen_support_contrastive_meta_icl/analysis/aggregate_row_predictions.csv</code></li>
+</ul>
+<h2>Limitations</h2>
+<p>The public evaluation is capped for runtime. Exact-match scoring is strict. The main contrastive arm is multiseed; CE controls may be single-seed depending on the completed run matrix. The synthetic task generator covers a limited set of text transformations.</p></body></html>

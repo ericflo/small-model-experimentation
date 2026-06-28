@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Qwen Learned Repair Verifier</title><style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; max-width: 980px; margin: 40px auto; padding: 0 24px; color: #1f2933; }
+h1, h2, h3 { color: #111827; line-height: 1.2; }
+table { border-collapse: collapse; width: 100%; margin: 18px 0; }
+th, td { border: 1px solid #d0d7de; padding: 6px 8px; text-align: left; }
+th { background: #f6f8fa; }
+code, pre { background: #f6f8fa; border-radius: 6px; }
+pre { padding: 12px; overflow-x: auto; }
+</style></head><body><h1>Qwen Learned Repair Verifier</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a small learned verifier can recover exact
+long-chain execution from local repairs of programs compiled by a Qwen-attached
+numeric compiler. Each prompt describes a sequence of modular arithmetic updates.
+The compiler copies executable slots from the prompt, and a deterministic runtime
+executes the copied program modulo 97.</p>
+<p>The repair neighborhood contains 1,299 candidates for each length-24 example:
+the base compiled program plus top-3 local edits of the initial value,
+operations, arguments, same-step operation/argument pairs, and pairs of argument
+edits. An oracle state verifier can identify the correct candidate when the full
+target trajectory is available. This experiment trains a non-oracle verifier to
+choose among the same candidates using only candidate features available at test
+time.</p>
+<p>The result is positive but partial. On fresh paired length-24 programs, base
+execution accuracy is 30.3%. The learned verifier reaches 47.3%. A paired
+consistency reranker reaches 51.0%. The oracle state-verifier ceiling is 88.1%.
+Thus the learned verifier recovers 29.4% of the measured base-to-oracle gap on
+the paired split.</p>
+<h2>Question</h2>
+<p>Can a lightweight verifier learn to select useful local repairs of a compiled
+program without seeing the true answer or the true state trajectory at test time?</p>
+<p>This is the deployment-relevant version of verifier-guided repair. The oracle
+state verifier is useful as a training label source and as a ceiling, but it is
+not a runtime method. A learned verifier must infer which candidate is plausible
+from model confidence geometry, edit type, candidate program structure, and
+execution features.</p>
+<h2>Method</h2>
+<p>The experiment freezes a QLoRA-attached <code>Qwen/Qwen3-4B</code> numeric compiler. The
+compiler predicts:</p>
+<ul>
+<li>the initial modular value;</li>
+<li>one operation per step from add, subtract, multiply;</li>
+<li>one numeric argument per step.</li>
+</ul>
+<p>The copied program is executed exactly modulo 97. All evaluated programs have
+length 24.</p>
+<p>For each example, the experiment enumerates a local repair neighborhood:</p>
+<table>
+<thead>
+<tr>
+<th>Candidate class</th>
+<th style="text-align: right;">Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base compiled program</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Alternate initial values</td>
+<td style="text-align: right;">top-3</td>
+</tr>
+<tr>
+<td>Alternate operations</td>
+<td style="text-align: right;">top-3 per active step</td>
+</tr>
+<tr>
+<td>Alternate arguments</td>
+<td style="text-align: right;">top-3 per active step</td>
+</tr>
+<tr>
+<td>Same-step operation and argument edits</td>
+<td style="text-align: right;">top-3 by slot</td>
+</tr>
+<tr>
+<td>Two-argument edits</td>
+<td style="text-align: right;">top-3 by slot, up to 24 slots</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting length-24 neighborhood has 1,299 candidates per example.</p>
+<p>Offline labels mark candidates whose full execution trajectory matches the true
+state trajectory. The learned verifier is a two-layer MLP trained with a groupwise
+ranking loss:</p>
+<pre><code class="language-text">loss = logsumexp(all candidate scores) - logsumexp(correct candidate scores)
+</code></pre>
+<p>For examples with no correct candidate in the neighborhood, a small auxiliary
+term selects the base program. At test time, labels are not used.</p>
+<p>Candidate features include:</p>
+<ul>
+<li>candidate prior and prior delta from compiler logits;</li>
+<li>edit count, edit position, edit type, and changed-slot margins;</li>
+<li>changed values and argument-change magnitudes;</li>
+<li>candidate operation mix and argument statistics;</li>
+<li>differentiable executor support for the candidate's final answer and state
+  path;</li>
+<li>agreement with the base program's answer and state path.</li>
+</ul>
+<p>The primary main run uses 512 verifier-training examples, 128 validation
+examples, and fresh held-out length-24 standard, paraphrase, and paired splits.</p>
+<h2>Results</h2>
+<h3>Main Fresh Results</h3>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Base</th>
+<th style="text-align: right;">Learned verifier</th>
+<th style="text-align: right;">Pair rerank</th>
+<th style="text-align: right;">Oracle ceiling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fresh standard L24</td>
+<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">44.1%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">90.6%</td>
+</tr>
+<tr>
+<td>Fresh paraphrase L24</td>
+<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">48.0%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">86.7%</td>
+</tr>
+<tr>
+<td>Fresh paired L24</td>
+<td style="text-align: right;">30.3%</td>
+<td style="text-align: right;">47.3%</td>
+<td style="text-align: right;">51.0%</td>
+<td style="text-align: right;">88.1%</td>
+</tr>
+</tbody>
+</table>
+<p>The learned verifier improves all fresh splits. On the paired split it recovers
+29.4% of the base-to-oracle gap:</p>
+<pre><code class="language-text">(47.3 - 30.3) / (88.1 - 30.3) = 29.4%
+</code></pre>
+<p>The paired consistency reranker is only available when two renderings of the
+same latent program are evaluated together. It selects from the learned
+verifier's top candidates while rewarding program, state, and answer agreement
+between renderings. On the paired split it improves executor accuracy from 47.3%
+to 51.0%.</p>
+<h3>Paired Split Details</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Base</th>
+<th style="text-align: right;">Learned verifier</th>
+<th style="text-align: right;">Pair rerank</th>
+<th style="text-align: right;">Oracle ceiling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executor accuracy</td>
+<td style="text-align: right;">30.3%</td>
+<td style="text-align: right;">47.3%</td>
+<td style="text-align: right;">51.0%</td>
+<td style="text-align: right;">88.1%</td>
+</tr>
+<tr>
+<td>Program exact</td>
+<td style="text-align: right;">30.3%</td>
+<td style="text-align: right;">47.3%</td>
+<td style="text-align: right;">51.0%</td>
+<td style="text-align: right;">87.7%</td>
+</tr>
+<tr>
+<td>State prefix fraction</td>
+<td style="text-align: right;">58.6%</td>
+<td style="text-align: right;">71.2%</td>
+<td style="text-align: right;">73.4%</td>
+<td style="text-align: right;">90.7%</td>
+</tr>
+<tr>
+<td>Pair both-correct</td>
+<td style="text-align: right;">28.1%</td>
+<td style="text-align: right;">34.4%</td>
+<td style="text-align: right;">46.5%</td>
+<td style="text-align: right;">85.9%</td>
+</tr>
+<tr>
+<td>Pair state consistency</td>
+<td style="text-align: right;">71.1%</td>
+<td style="text-align: right;">55.1%</td>
+<td style="text-align: right;">82.8%</td>
+<td style="text-align: right;">92.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The individual learned verifier raises exact accuracy but lowers paired state
+consistency, because it can choose different plausible repairs for two surface
+forms. The paired reranker fixes much of that problem: paired state consistency
+rises to 82.8%, and paired both-correct rises to 46.5%.</p>
+<h3>Training Dynamics</h3>
+<p>The best validation epoch is epoch 15:</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Base</th>
+<th style="text-align: right;">Learned</th>
+<th style="text-align: right;">Oracle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train L24</td>
+<td style="text-align: right;">28.7%</td>
+<td style="text-align: right;">58.8%</td>
+<td style="text-align: right;">86.7%</td>
+</tr>
+<tr>
+<td>Validation L24</td>
+<td style="text-align: right;">32.0%</td>
+<td style="text-align: right;">50.8%</td>
+<td style="text-align: right;">85.2%</td>
+</tr>
+</tbody>
+</table>
+<p>The train/validation gap is visible but not dominant. Fresh held-out performance
+lands between the validation result and the lower pilot results, which is
+consistent with a real but incomplete learned signal.</p>
+<h2>Iterations</h2>
+<p>The first smoke run used a tiny top-2/one-edit neighborhood to verify loading,
+candidate generation, metric writing, and verifier checkpointing.</p>
+<p>The first full-neighborhood pilot used fragment-mixed training and validation
+renderings. That produced very low oracle ceilings on train and validation while
+clean fresh standard/paraphrase ceilings stayed high. The setup was corrected to
+use clean standard/paraphrase renderings for verifier training and validation.</p>
+<p>A clean balanced pilot showed a measurable learned-verifier gain, but the gain
+was weak on paraphrased prompts. A paraphrase-weighted pilot helped slightly but
+reduced validation quality. The decisive improvement came from richer candidate
+features that exposed edit values, operation mix, and argument-change magnitudes.
+That configuration was used for the main run.</p>
+<h2>Interpretation</h2>
+<p>The experiment answers the immediate question positively: a small learned
+verifier can convert some oracle repair headroom into actual non-oracle accuracy.
+The result is not just a validation artifact; it appears on fresh standard,
+paraphrase, and paired length-24 splits.</p>
+<p>The ceiling remains much higher than the learned result. The oracle verifier
+finds correct repairs for 88.1% of fresh paired examples, while the learned
+verifier reaches 47.3% and the paired reranker reaches 51.0%. This means the
+candidate neighborhood is strong enough, but the learned selection signal is
+still weak relative to exact trajectory verification.</p>
+<p>The paired reranker result is important. When multiple renderings of the same
+latent task are available, consistency is a strong non-oracle signal. It improves
+both exact accuracy and state consistency. However, it is not a single-prompt
+method.</p>
+<h2>Limitations</h2>
+<ul>
+<li>The task is synthetic modular arithmetic.</li>
+<li>The compiler and executor are specialized to this task family.</li>
+<li>The verifier labels are generated from true state trajectories offline.</li>
+<li>The learned verifier uses hand-engineered candidate features rather than a
+  deeper model over prompt tokens and candidate traces.</li>
+<li>The main result is from one fixed compiler checkpoint and one main verifier
+  seed.</li>
+<li>Paired consistency reranking requires two renderings of the same latent task.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Learned repair verification is a high-value direction. It improves fresh paired
+length-24 exact execution from 30.3% to 47.3%, and paired consistency reranking
+raises it to 51.0%. This is a meaningful conversion of oracle repair headroom
+into a non-oracle mechanism, but most of the 88.1% oracle ceiling remains
+unclaimed.</p>
+<p>The next step should make the verifier less hand-engineered and more
+task-native: train a candidate-trace transformer or Qwen-conditioned reranker
+over compact execution traces, and combine it with consistency training across
+multiple prompt renderings.</p>
+<h2>Artifacts</h2>
+<p>Small files live in:</p>
+<pre><code class="language-text">experiments/qwen_learned_repair_verifier/
+</code></pre>
+<p>Large checkpoints live in:</p>
+<pre><code class="language-text">large_artifacts/qwen_learned_repair_verifier/checkpoints/
+</code></pre>
+<p>Primary files:</p>
+<ul>
+<li><code>analysis/summary.md</code></li>
+<li><code>analysis/final_metrics.csv</code></li>
+<li><code>analysis/all_final_metrics.csv</code></li>
+<li><code>analysis/figures/executor_accuracy.png</code></li>
+<li><code>runs/main_rich_learned_verifier_s512/metrics.csv</code></li>
+<li><code>runs/main_rich_learned_verifier_s512/verifier_train_log.csv</code></li>
+<li><code>checkpoint_manifest.csv</code></li>
+</ul></body></html>

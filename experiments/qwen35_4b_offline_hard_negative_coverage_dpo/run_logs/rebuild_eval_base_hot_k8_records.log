@@ -1,0 +1,28 @@
+{
+  "manifest": "data/eval_base_hot_k8_records.manifest.json",
+  "records": {
+    "candidate_count_mean": 7.833333333333333,
+    "coverage": 0.6666666666666666,
+    "distinct_behavior_rate_mean": 0.7688492063492064,
+    "distinct_functional_rate_mean": 0.33903769841269843,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 45854,
+    "hidden_pass_candidates_mean": 2.7916666666666665,
+    "parse_success_mean": 7.583333333333333,
+    "pass1_proxy": 0.2916666666666667,
+    "records": 24,
+    "visible_candidates_mean": 3.875,
+    "visible_coverage": 0.6666666666666666,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "token_usage": {
+    "calls": 192,
+    "completion_tokens": 22507,
+    "forward_tokens": 46467,
+    "prompt_tokens": 23960
+  }
+}

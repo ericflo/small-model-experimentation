@@ -1,0 +1,12 @@
+{
+  "examples": 158,
+  "hidden_positive_examples": 95,
+  "max_per_task": 2,
+  "mode": "unverified",
+  "out": "data/selftrain_unverified_sft.jsonl",
+  "records": [
+    "data/base_train_records.jsonl"
+  ],
+  "source_records": 80,
+  "visible_positive_examples": 103
+}

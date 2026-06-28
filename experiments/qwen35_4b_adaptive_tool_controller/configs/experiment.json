@@ -1,0 +1,27 @@
+{
+  "experiment": "qwen35_4b_adaptive_tool_controller",
+  "date": "2026-06-28",
+  "objective": "Train and evaluate a small offline adaptive controller that decides which external tool actions to spend on Foofah-style table transformations.",
+  "data": {
+    "pilot_records": "data/pilot_train_dev_records.jsonl",
+    "test_records": "data/test_records.jsonl",
+    "cases": "data/cases.jsonl"
+  },
+  "controller": {
+    "policy_class": "depth-1 decision tree over deployable table/direct-output features",
+    "leaf_actions": [
+      "direct_only",
+      "single program strategy",
+      "fixed program-strategy prefix",
+      "full first-visible portfolio",
+      "single-program canary with disagreement-triggered escalation"
+    ],
+    "training_protocol": "Fit leaf actions on pilot train, select tree on pilot dev by accuracy, then direct-correct losses, then token cost; freeze before held-out test."
+  },
+  "primary_metric": "Held-out exact accuracy vs total forward-token cost.",
+  "nondeployable_diagnostics": [
+    "oracle best available action per task",
+    "oracle budget full-portfolio trigger"
+  ],
+  "scope_note": "This is an offline controller evaluation over a fixed recorded candidate pool. It charges only the actions a policy would have taken, but it does not regenerate model outputs."
+}

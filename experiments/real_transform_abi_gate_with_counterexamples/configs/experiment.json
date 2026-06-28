@@ -1,0 +1,13 @@
+{
+  "experiment": "real_transform_abi_gate_with_counterexamples",
+  "date": "2026-06-27",
+  "type": "no_training_transform_abi_gate",
+  "domains": ["csv_etl", "date_id_irregular"],
+  "coverage_definitions": {
+    "raw": "candidate passes visible and standard hidden examples",
+    "filtered": "candidate passes visible, standard hidden, and adversarial counterexample examples"
+  },
+  "abi_policy": "frozen generic transformation primitives; no post-result kernel additions",
+  "large_artifacts_dir": "/workspace/large_artifacts/real_transform_abi_gate_with_counterexamples"
+}
+

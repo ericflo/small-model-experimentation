@@ -1,0 +1,17 @@
+[
+  {
+    "source_run": "main_expand_copy_seed123",
+    "heads": "/workspace/large_artifacts/qwen_compiler_multiseed_reattribution/checkpoints/main_expand_copy_seed123/stage3_max24_step00750/heads.pt",
+    "adapter": "/workspace/large_artifacts/qwen_compiler_multiseed_reattribution/checkpoints/main_expand_copy_seed123/stage3_max24_step00750/adapter"
+  },
+  {
+    "source_run": "main_expand_copy_seed456",
+    "heads": "/workspace/large_artifacts/qwen_compiler_multiseed_reattribution/checkpoints/main_expand_copy_seed456/stage3_max24_step00750/heads.pt",
+    "adapter": "/workspace/large_artifacts/qwen_compiler_multiseed_reattribution/checkpoints/main_expand_copy_seed456/stage3_max24_step00750/adapter"
+  },
+  {
+    "source_run": "main_expand_copy_seed789",
+    "heads": "/workspace/large_artifacts/qwen_compiler_multiseed_reattribution/checkpoints/main_expand_copy_seed789/stage3_max24_step00750/heads.pt",
+    "adapter": "/workspace/large_artifacts/qwen_compiler_multiseed_reattribution/checkpoints/main_expand_copy_seed789/stage3_max24_step00750/adapter"
+  }
+]

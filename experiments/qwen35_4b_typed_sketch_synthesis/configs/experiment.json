@@ -1,0 +1,33 @@
+{
+  "experiment": "qwen35_4b_typed_sketch_synthesis",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260701,
+  "training": {
+    "records_per_adapter": 240,
+    "epochs": 2,
+    "learning_rate": 0.00015,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "gradient_accumulation_steps": 8
+  },
+  "data": {
+    "static60_base_records": 180,
+    "static60_bridge_records": 60,
+    "iid_eval_records": 60,
+    "support_eval_records": 120,
+    "ceiling_eval_records": 120,
+    "visible_cases_per_record": 6,
+    "hidden_cases_per_record": 18
+  },
+  "synthesis": {
+    "max_programs_per_sketch": 5000,
+    "max_total_programs_per_record": 8000,
+    "max_hole_options": 28,
+    "max_sketch_variants": 16,
+    "num_model_samples": 0,
+    "selection_rule": "conservative hybrid: keep direct program when it passes all visible cases, otherwise use sketch synthesis when it passes all visible cases"
+  },
+  "large_artifact_root": "/workspace/large_artifacts/qwen35_4b_typed_sketch_synthesis"
+}

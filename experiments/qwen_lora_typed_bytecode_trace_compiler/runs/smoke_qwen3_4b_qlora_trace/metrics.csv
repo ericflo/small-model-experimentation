@@ -1,0 +1,6 @@
+run,variant,phase,split,n,answer_head_accuracy,bytecode_accuracy,search_accuracy,oracle_accuracy,program_exact,direct_valid_rate,candidate_valid_rate,mean_candidates,found_rate,gap_recovered
+smoke_qwen3_4b_qlora_trace,qlora_trace,trace_supervised,val_mixed,4,0.0,0.0,0.25,0.25,0.0,0.5,0.11818181818181818,27.5,0.25,1.0
+smoke_qwen3_4b_qlora_trace,qlora_trace,trace_supervised,fresh_standard,4,0.0,0.0,0.0,0.0,0.0,0.25,0.06666666666666667,33.75,0.0,0.0
+smoke_qwen3_4b_qlora_trace,qlora_trace,trace_supervised,fresh_paraphrase,4,0.0,0.0,0.0,0.0,0.0,0.0,0.013605442176870748,36.75,0.0,0.0
+smoke_qwen3_4b_qlora_trace,qlora_trace,trace_supervised,fresh_paired,4,0.0,0.0,0.0,0.0,0.0,0.5,0.11009174311926606,27.25,0.0,0.0
+smoke_qwen3_4b_qlora_trace,qlora_trace,trace_supervised,hard_composition,4,0.0,0.0,0.25,0.25,0.0,0.25,0.05357142857142857,28.0,0.25,1.0

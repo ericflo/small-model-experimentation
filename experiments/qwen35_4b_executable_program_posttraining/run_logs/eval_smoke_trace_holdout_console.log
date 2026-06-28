@@ -1,0 +1,52 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:14,  9.64it/s]Loading weights:   4%|▎         | 26/723 [00:00<00:04, 146.94it/s]Loading weights:  11%|█         | 80/723 [00:00<00:01, 323.18it/s]Loading weights:  19%|█▉        | 137/723 [00:00<00:01, 419.57it/s]Loading weights:  27%|██▋       | 195/723 [00:00<00:01, 475.70it/s]Loading weights:  34%|███▍      | 249/723 [00:00<00:00, 488.25it/s]Loading weights:  42%|████▏     | 301/723 [00:00<00:00, 492.99it/s]Loading weights:  49%|████▉     | 355/723 [00:00<00:00, 506.33it/s]Loading weights:  57%|█████▋    | 412/723 [00:00<00:00, 519.81it/s]Loading weights:  84%|████████▍ | 610/723 [00:01<00:00, 961.23it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 676.35it/s]
+eval:   0%|          | 0/9 [00:00<?, ?it/s]eval:  11%|█         | 1/9 [00:06<00:53,  6.73s/it]eval:  22%|██▏       | 2/9 [00:12<00:43,  6.27s/it]eval:  33%|███▎      | 3/9 [00:18<00:36,  6.14s/it]eval:  44%|████▍     | 4/9 [00:24<00:30,  6.07s/it]eval:  56%|█████▌    | 5/9 [00:30<00:24,  6.08s/it]eval:  67%|██████▋   | 6/9 [00:36<00:18,  6.06s/it]eval:  78%|███████▊  | 7/9 [00:42<00:12,  6.05s/it]eval:  89%|████████▉ | 8/9 [00:48<00:06,  6.02s/it]eval: 100%|██████████| 9/9 [00:54<00:00,  5.99s/it]eval: 100%|██████████| 9/9 [00:54<00:00,  6.07s/it]
+{
+  "by_family": {
+    "modulo_sum_label": {
+      "greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      },
+      "greedy_visible_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      },
+      "rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      },
+      "rerank_visible_all": {
+        "rate": 1.0,
+        "records": 9,
+        "successes": 9
+      }
+    }
+  },
+  "overall": {
+    "greedy_hidden_all": {
+      "rate": 1.0,
+      "records": 9,
+      "successes": 9
+    },
+    "greedy_visible_all": {
+      "rate": 1.0,
+      "records": 9,
+      "successes": 9
+    },
+    "rerank_hidden_all": {
+      "rate": 1.0,
+      "records": 9,
+      "successes": 9
+    },
+    "rerank_visible_all": {
+      "rate": 1.0,
+      "records": 9,
+      "successes": 9
+    }
+  }
+}

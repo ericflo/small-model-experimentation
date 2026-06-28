@@ -1,0 +1,6 @@
+phase,epoch,loss,train_examples,quick_val_direct_accuracy,quick_val_search_accuracy,echo_groups,echo_candidates,echo_positive_rate,echo_oracle_found_rate,echo_loss_weight,pos_weight,repair_loss,echo_loss,echo_correct_loss,echo_group_loss,echo_valid_loss,echo_final_loss,echo_trace_top_loss,echo_trace_depth_loss,quick_val_echo_rerank_accuracy
+seed_supervised,1,7.62490177154541,8,0.0,0.0,,,,,,,,,,,,,,,
+answer_verified_round1,1,6.40664267539978,8,0.0,0.0,,,,,,,,,,,,,,,
+echo_repair_round1,1,6.590447187423706,8,0.0,0.0,12,384,0.0,0.0,0.1,16.0,6.4013671875,1.8907999396324158,0.9503636360168457,0.0,1.0857242345809937,0.0,5.664322376251221,3.137186288833618,0.0
+gold_trace_distill,1,6.089905738830566,20,0.0,0.0,,,,,,,,,,,,,,,
+full_supervised,1,7.208642641703288,12,0.0,0.0,,,,,,,,,,,,,,,

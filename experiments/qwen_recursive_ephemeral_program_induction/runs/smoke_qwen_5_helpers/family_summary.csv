@@ -1,0 +1,17 @@
+family,method,tasks,row_exact,full_task_exact
+City,direct_row,1,0.6666666666666666,0.0
+City,recursive_program,1,0.3333333333333333,0.0
+City,recursive_oracle,1,0.3333333333333333,0.0
+City,monolithic_program,1,0.3333333333333333,0.0
+DateTime,direct_row,1,0.6666666666666666,0.0
+DateTime,recursive_program,1,0.6666666666666666,0.0
+DateTime,recursive_oracle,1,0.6666666666666666,0.0
+DateTime,monolithic_program,1,0.6666666666666666,0.0
+Name,direct_row,1,1.0,1.0
+Name,recursive_program,1,1.0,1.0
+Name,recursive_oracle,1,1.0,1.0
+Name,monolithic_program,1,1.0,1.0
+Number,direct_row,2,1.0,1.0
+Number,recursive_program,2,0.0,0.0
+Number,recursive_oracle,2,0.0,0.0
+Number,monolithic_program,2,0.0,0.0

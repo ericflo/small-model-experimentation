@@ -1,0 +1,354 @@
+{
+  "actions": [],
+  "fixed_budget": 3,
+  "max_budget": 8,
+  "name": "fixed_budget3",
+  "policy": "fixed",
+  "records": [
+    {
+      "agreement_cluster_count": 2,
+      "candidate_count": 2,
+      "entry_point": "filter_by_prefix",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0029_HumanEval_29",
+      "selected_candidate_id": "cand_05",
+      "selected_cluster_fraction": 0.5,
+      "selected_cluster_size": 1,
+      "selected_hidden_correct": false,
+      "selected_source": "default_return_[]",
+      "survivor_ids": [
+        "cand_05",
+        "cand_06"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/29",
+      "used_probe_indices": [
+        0,
+        1,
+        2
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 3,
+      "candidate_count": 4,
+      "entry_point": "get_positive",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0030_HumanEval_30",
+      "selected_candidate_id": "cand_02",
+      "selected_cluster_fraction": 0.5,
+      "selected_cluster_size": 2,
+      "selected_hidden_correct": false,
+      "selected_source": "const_0_to_-1",
+      "survivor_ids": [
+        "cand_02",
+        "cand_09",
+        "cand_10",
+        "cand_11"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/30",
+      "used_probe_indices": [
+        1,
+        7,
+        0
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 3,
+      "candidate_count": 3,
+      "entry_point": "sort_third",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0033_HumanEval_33",
+      "selected_candidate_id": "cand_06",
+      "selected_cluster_fraction": 0.3333333333333333,
+      "selected_cluster_size": 1,
+      "selected_hidden_correct": false,
+      "selected_source": "const_3_to_4",
+      "survivor_ids": [
+        "cand_06",
+        "cand_07",
+        "cand_09"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/33",
+      "used_probe_indices": [
+        0,
+        1,
+        2
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 1,
+      "candidate_count": 1,
+      "entry_point": "unique",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0034_HumanEval_34",
+      "selected_candidate_id": "cand_04",
+      "selected_cluster_fraction": 1.0,
+      "selected_cluster_size": 1,
+      "selected_hidden_correct": true,
+      "selected_source": "canonical",
+      "survivor_ids": [
+        "cand_04"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/34",
+      "used_probe_indices": [
+        0,
+        1,
+        2
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 1,
+      "candidate_count": 9,
+      "entry_point": "fizz_buzz",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0036_HumanEval_36",
+      "selected_candidate_id": "cand_01",
+      "selected_cluster_fraction": 1.0,
+      "selected_cluster_size": 9,
+      "selected_hidden_correct": false,
+      "selected_source": "const_7_to_8",
+      "survivor_ids": [
+        "cand_01",
+        "cand_02",
+        "cand_03",
+        "cand_04",
+        "cand_06",
+        "cand_07",
+        "cand_08",
+        "cand_11",
+        "cand_12"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/36",
+      "used_probe_indices": [
+        0,
+        1,
+        2
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 5,
+      "candidate_count": 5,
+      "entry_point": "sort_even",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0037_HumanEval_37",
+      "selected_candidate_id": "cand_01",
+      "selected_cluster_fraction": 0.2,
+      "selected_cluster_size": 1,
+      "selected_hidden_correct": false,
+      "selected_source": "replace_-_with_+",
+      "survivor_ids": [
+        "cand_01",
+        "cand_02",
+        "cand_05",
+        "cand_09",
+        "cand_11"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/37",
+      "used_probe_indices": [
+        2,
+        3,
+        0
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 3,
+      "candidate_count": 9,
+      "entry_point": "triples_sum_to_zero",
+      "hidden_correct_survivors": 4,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0040_HumanEval_40",
+      "selected_candidate_id": "cand_01",
+      "selected_cluster_fraction": 0.4444444444444444,
+      "selected_cluster_size": 4,
+      "selected_hidden_correct": false,
+      "selected_source": "replace_True_with_False",
+      "survivor_ids": [
+        "cand_00",
+        "cand_01",
+        "cand_03",
+        "cand_06",
+        "cand_08",
+        "cand_09",
+        "cand_13",
+        "cand_14",
+        "cand_15"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/40",
+      "used_probe_indices": [
+        5,
+        0,
+        1
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 1,
+      "candidate_count": 1,
+      "entry_point": "incr_list",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0042_HumanEval_42",
+      "selected_candidate_id": "cand_07",
+      "selected_cluster_fraction": 1.0,
+      "selected_cluster_size": 1,
+      "selected_hidden_correct": true,
+      "selected_source": "canonical",
+      "survivor_ids": [
+        "cand_07"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/42",
+      "used_probe_indices": [
+        0,
+        1,
+        2
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 1,
+      "candidate_count": 2,
+      "entry_point": "change_base",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0044_HumanEval_44",
+      "selected_candidate_id": "cand_12",
+      "selected_cluster_fraction": 1.0,
+      "selected_cluster_size": 2,
+      "selected_hidden_correct": false,
+      "selected_source": "const_0_to_1",
+      "survivor_ids": [
+        "cand_12",
+        "cand_14"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/44",
+      "used_probe_indices": [
+        0,
+        1,
+        2
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 6,
+      "candidate_count": 6,
+      "entry_point": "median",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0047_HumanEval_47",
+      "selected_candidate_id": "cand_03",
+      "selected_cluster_fraction": 0.16666666666666666,
+      "selected_cluster_size": 1,
+      "selected_hidden_correct": false,
+      "selected_source": "const_1_to_2",
+      "survivor_ids": [
+        "cand_03",
+        "cand_07",
+        "cand_08",
+        "cand_09",
+        "cand_10",
+        "cand_14"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/47",
+      "used_probe_indices": [
+        1,
+        0,
+        2
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 6,
+      "candidate_count": 8,
+      "entry_point": "is_palindrome",
+      "hidden_correct_survivors": 1,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0048_HumanEval_48",
+      "selected_candidate_id": "cand_05",
+      "selected_cluster_fraction": 0.25,
+      "selected_cluster_size": 2,
+      "selected_hidden_correct": false,
+      "selected_source": "const_1_to_0",
+      "survivor_ids": [
+        "cand_00",
+        "cand_01",
+        "cand_03",
+        "cand_04",
+        "cand_05",
+        "cand_08",
+        "cand_11",
+        "cand_13"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/48",
+      "used_probe_indices": [
+        0,
+        3,
+        6
+      ],
+      "used_probes": 3
+    },
+    {
+      "agreement_cluster_count": 3,
+      "candidate_count": 5,
+      "entry_point": "below_threshold",
+      "hidden_correct_survivors": 2,
+      "policy": "fixed_budget3",
+      "record_id": "eval_0052_HumanEval_52",
+      "selected_candidate_id": "cand_07",
+      "selected_cluster_fraction": 0.4,
+      "selected_cluster_size": 2,
+      "selected_hidden_correct": false,
+      "selected_source": "replace_False_with_True",
+      "survivor_ids": [
+        "cand_07",
+        "cand_08",
+        "cand_09",
+        "cand_10",
+        "cand_12"
+      ],
+      "target_reachable": true,
+      "task_id": "HumanEval/52",
+      "used_probe_indices": [
+        0,
+        1,
+        2
+      ],
+      "used_probes": 3
+    }
+  ],
+  "summary": [
+    {
+      "agreement_cluster_count_mean": 2.9166666666666665,
+      "candidate_count_mean": 4.583333333333333,
+      "hidden_correct_survivors_mean": 1.3333333333333333,
+      "policy": "fixed_budget3",
+      "records": 12,
+      "selected_cluster_fraction_mean": 0.5662037037037037,
+      "selected_hidden_correct": 0.16666666666666666,
+      "target_reachable": 1.0,
+      "used_probes_mean": 3.0
+    }
+  ],
+  "threshold": 1
+}

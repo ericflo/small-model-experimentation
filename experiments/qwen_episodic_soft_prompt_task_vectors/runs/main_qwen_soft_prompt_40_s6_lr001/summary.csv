@@ -1,0 +1,7 @@
+method,tasks,row_exact,full_task_exact,parse_ok,avg_outputs
+direct_row,40,0.7041666666666667,0.525,1.0,3.75
+learned_soft_row,40,0.7145833333333333,0.525,1.0,3.75
+init_soft_row,40,0.7166666666666667,0.5,1.0,3.75
+shuffled_soft_row,40,0.6354166666666667,0.45,1.0,3.75
+learned_soft_batch,40,0.6375,0.425,0.95,3.75
+direct_batch,40,0.65,0.4,0.95,3.75

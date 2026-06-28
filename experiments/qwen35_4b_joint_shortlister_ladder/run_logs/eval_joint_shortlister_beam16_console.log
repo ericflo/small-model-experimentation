@@ -1,0 +1,304 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.73it/s]Loading weights:   8%|▊         | 36/426 [00:00<00:01, 203.49it/s]Loading weights:  22%|██▏       | 94/426 [00:00<00:00, 365.21it/s]Loading weights:  35%|███▍      | 148/426 [00:00<00:00, 428.18it/s]Loading weights:  48%|████▊     | 205/426 [00:00<00:00, 478.14it/s]Loading weights:  62%|██████▏   | 262/426 [00:00<00:00, 508.09it/s]Loading weights:  74%|███████▍  | 316/426 [00:00<00:00, 518.05it/s]Loading weights:  89%|████████▉ | 379/426 [00:00<00:00, 550.95it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 471.92it/s]
+base_model:random:   0%|          | 0/16 [00:00<?, ?it/s]base_model:random:   6%|▋         | 1/16 [00:02<00:42,  2.84s/it]base_model:random:  12%|█▎        | 2/16 [00:05<00:36,  2.58s/it]base_model:random:  19%|█▉        | 3/16 [00:07<00:32,  2.49s/it]base_model:random:  25%|██▌       | 4/16 [00:09<00:29,  2.42s/it]base_model:random:  31%|███▏      | 5/16 [00:13<00:32,  2.96s/it]base_model:random:  38%|███▊      | 6/16 [00:17<00:32,  3.30s/it]base_model:random:  44%|████▍     | 7/16 [00:21<00:31,  3.51s/it]base_model:random:  50%|█████     | 8/16 [00:25<00:28,  3.62s/it]base_model:random:  56%|█████▋    | 9/16 [00:32<00:31,  4.56s/it]base_model:random:  62%|██████▎   | 10/16 [00:38<00:31,  5.20s/it]base_model:random:  69%|██████▉   | 11/16 [00:45<00:28,  5.63s/it]base_model:random:  75%|███████▌  | 12/16 [00:52<00:23,  5.95s/it]base_model:random:  81%|████████▏ | 13/16 [01:04<00:23,  7.96s/it]base_model:random:  88%|████████▊ | 14/16 [01:17<00:18,  9.38s/it]base_model:random:  94%|█████████▍| 15/16 [01:30<00:10, 10.42s/it]base_model:random: 100%|██████████| 16/16 [01:42<00:00, 11.12s/it]base_model:random: 100%|██████████| 16/16 [01:42<00:00,  6.44s/it]
+trained_model:random:   0%|          | 0/16 [00:00<?, ?it/s]trained_model:random:   6%|▋         | 1/16 [00:02<00:43,  2.90s/it]trained_model:random:  12%|█▎        | 2/16 [00:05<00:41,  2.96s/it]trained_model:random:  19%|█▉        | 3/16 [00:08<00:38,  2.96s/it]trained_model:random:  25%|██▌       | 4/16 [00:11<00:35,  2.93s/it]trained_model:random:  31%|███▏      | 5/16 [00:16<00:39,  3.62s/it]trained_model:random:  38%|███▊      | 6/16 [00:21<00:40,  4.03s/it]trained_model:random:  44%|████▍     | 7/16 [00:26<00:38,  4.28s/it]trained_model:random:  50%|█████     | 8/16 [00:30<00:35,  4.42s/it]trained_model:random:  56%|█████▋    | 9/16 [00:38<00:38,  5.53s/it]trained_model:random:  62%|██████▎   | 10/16 [00:46<00:37,  6.30s/it]trained_model:random:  69%|██████▉   | 11/16 [00:54<00:33,  6.79s/it]trained_model:random:  75%|███████▌  | 12/16 [01:02<00:28,  7.16s/it]trained_model:random:  81%|████████▏ | 13/16 [01:17<00:28,  9.52s/it]trained_model:random:  88%|████████▊ | 14/16 [01:32<00:22, 11.18s/it]trained_model:random:  94%|█████████▍| 15/16 [01:47<00:12, 12.35s/it]trained_model:random: 100%|██████████| 16/16 [02:02<00:00, 13.15s/it]trained_model:random: 100%|██████████| 16/16 [02:02<00:00,  7.68s/it]
+trained_model:designed:   0%|          | 0/16 [00:00<?, ?it/s]trained_model:designed:   6%|▋         | 1/16 [00:02<00:42,  2.85s/it]trained_model:designed:  12%|█▎        | 2/16 [00:05<00:39,  2.81s/it]trained_model:designed:  19%|█▉        | 3/16 [00:08<00:37,  2.87s/it]trained_model:designed:  25%|██▌       | 4/16 [00:11<00:35,  2.93s/it]trained_model:designed:  31%|███▏      | 5/16 [00:16<00:39,  3.57s/it]trained_model:designed:  38%|███▊      | 6/16 [00:20<00:38,  3.89s/it]trained_model:designed:  44%|████▍     | 7/16 [00:25<00:37,  4.20s/it]trained_model:designed:  50%|█████     | 8/16 [00:30<00:35,  4.40s/it]trained_model:designed:  56%|█████▋    | 9/16 [00:38<00:38,  5.54s/it]trained_model:designed:  62%|██████▎   | 10/16 [00:46<00:37,  6.32s/it]trained_model:designed:  69%|██████▉   | 11/16 [00:54<00:34,  6.84s/it]trained_model:designed:  75%|███████▌  | 12/16 [01:02<00:28,  7.21s/it]trained_model:designed:  81%|████████▏ | 13/16 [01:17<00:28,  9.64s/it]trained_model:designed:  88%|████████▊ | 14/16 [01:33<00:22, 11.33s/it]trained_model:designed:  94%|█████████▍| 15/16 [01:48<00:12, 12.49s/it]trained_model:designed: 100%|██████████| 16/16 [02:03<00:00, 13.33s/it]trained_model:designed: 100%|██████████| 16/16 [02:03<00:00,  7.72s/it]
+trained_model_shuffled_inventory:random:   0%|          | 0/16 [00:00<?, ?it/s]trained_model_shuffled_inventory:random:   6%|▋         | 1/16 [00:02<00:42,  2.86s/it]trained_model_shuffled_inventory:random:  12%|█▎        | 2/16 [00:05<00:41,  2.94s/it]trained_model_shuffled_inventory:random:  19%|█▉        | 3/16 [00:08<00:38,  2.95s/it]trained_model_shuffled_inventory:random:  25%|██▌       | 4/16 [00:11<00:34,  2.91s/it]trained_model_shuffled_inventory:random:  31%|███▏      | 5/16 [00:16<00:39,  3.60s/it]trained_model_shuffled_inventory:random:  38%|███▊      | 6/16 [00:21<00:40,  4.01s/it]trained_model_shuffled_inventory:random:  44%|████▍     | 7/16 [00:26<00:38,  4.27s/it]trained_model_shuffled_inventory:random:  50%|█████     | 8/16 [00:30<00:35,  4.41s/it]trained_model_shuffled_inventory:random:  56%|█████▋    | 9/16 [00:38<00:38,  5.53s/it]trained_model_shuffled_inventory:random:  62%|██████▎   | 10/16 [00:46<00:37,  6.30s/it]trained_model_shuffled_inventory:random:  69%|██████▉   | 11/16 [00:54<00:34,  6.81s/it]trained_model_shuffled_inventory:random:  75%|███████▌  | 12/16 [01:02<00:28,  7.18s/it]trained_model_shuffled_inventory:random:  81%|████████▏ | 13/16 [01:17<00:28,  9.54s/it]trained_model_shuffled_inventory:random:  88%|████████▊ | 14/16 [01:32<00:22, 11.20s/it]trained_model_shuffled_inventory:random:  94%|█████████▍| 15/16 [01:47<00:12, 12.37s/it]trained_model_shuffled_inventory:random: 100%|██████████| 16/16 [02:02<00:00, 13.16s/it]trained_model_shuffled_inventory:random: 100%|██████████| 16/16 [02:02<00:00,  7.68s/it]
+observation-diagnostic:   0%|          | 0/32 [00:00<?, ?it/s]observation-diagnostic:  22%|██▏       | 7/32 [00:00<00:00, 65.02it/s]observation-diagnostic:  44%|████▍     | 14/32 [00:00<00:00, 45.32it/s]observation-diagnostic:  59%|█████▉    | 19/32 [00:00<00:00, 30.15it/s]observation-diagnostic:  72%|███████▏  | 23/32 [00:00<00:00, 22.17it/s]observation-diagnostic:  81%|████████▏ | 26/32 [00:01<00:00, 13.66it/s]observation-diagnostic:  88%|████████▊ | 28/32 [00:01<00:00, 10.37it/s]observation-diagnostic:  94%|█████████▍| 30/32 [00:02<00:00,  7.86it/s]observation-diagnostic: 100%|██████████| 32/32 [00:02<00:00,  6.56it/s]observation-diagnostic: 100%|██████████| 32/32 [00:02<00:00, 11.96it/s]
+{
+  "beam_width": 16,
+  "observation_summary_overall": [
+    {
+      "designed_consistent_avg": 1191.25,
+      "designed_selected_hidden_all": {
+        "rate": 0.5625,
+        "records": 32,
+        "successes": 18
+      },
+      "designed_target_in_set": {
+        "rate": 1.0,
+        "records": 32,
+        "successes": 32
+      },
+      "random_consistent_avg": 2177.406,
+      "random_selected_hidden_all": {
+        "rate": 0.5,
+        "records": 32,
+        "successes": 16
+      },
+      "random_target_in_set": {
+        "rate": 1.0,
+        "records": 32,
+        "successes": 32
+      },
+      "records": 32
+    }
+  ],
+  "prediction_summary_by_control": [
+    {
+      "control": "base_model",
+      "left_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "left_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "left_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "left_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "right_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "right_recall_at_8": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      }
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "observation": "designed",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "right_recall_at_16": {
+        "rate": 0.1875,
+        "records": 16,
+        "successes": 3
+      },
+      "right_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      }
+    },
+    {
+      "control": "trained_model",
+      "left_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "right_recall_at_16": {
+        "rate": 0.1875,
+        "records": 16,
+        "successes": 3
+      },
+      "right_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      }
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "left_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "left_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "observation": "random",
+      "pair_recall_at_1": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_16": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_4": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "pair_recall_at_8": {
+        "rate": 0.0,
+        "records": 16,
+        "successes": 0
+      },
+      "records": 16,
+      "returned_pair_count_avg": 16.0,
+      "right_recall_at_1": {
+        "rate": 0.0625,
+        "records": 16,
+        "successes": 1
+      },
+      "right_recall_at_16": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_4": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      },
+      "right_recall_at_8": {
+        "rate": 0.125,
+        "records": 16,
+        "successes": 2
+      }
+    }
+  ],
+  "records": 16
+}

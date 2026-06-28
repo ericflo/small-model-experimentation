@@ -1,0 +1,278 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Joint Register Executor Experiment</title><style>
+body { margin:0; background:#f6f7f9; color:#17202a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.62; }
+main { max-width:960px; margin:0 auto; padding:56px 30px 84px; background:#fff; box-shadow:0 1px 18px rgba(20,30,40,.08); }
+h1 { font-size:2.35rem; line-height:1.12; margin:0 0 .4rem; color:#0f1720; }
+h2 { margin-top:2.2rem; padding-top:.45rem; border-top:1px solid #e5e7eb; color:#152238; }
+h3 { margin-top:1.5rem; color:#24364b; }
+p,li { font-size:1.02rem; }
+a { color:#1d5fa7; }
+code { background:#f0f3f6; padding:.12rem .28rem; border-radius:4px; }
+pre { background:#111827; color:#f9fafb; padding:1rem; border-radius:8px; overflow-x:auto; }
+pre code { background:transparent; padding:0; }
+table { border-collapse:collapse; width:100%; margin:1rem 0 1.4rem; font-size:.96rem; }
+th,td { border:1px solid #d7dde5; padding:.55rem .65rem; vertical-align:top; }
+th { background:#edf2f7; text-align:left; }
+img { display:block; max-width:100%; margin:1.2rem auto 1.8rem; border:1px solid #d8dee8; border-radius:6px; }
+blockquote { border-left:4px solid #8aa4c2; margin-left:0; padding-left:1rem; background:#f8fafc; color:#334155; }
+@media print { body{background:white;} main{box-shadow:none; max-width:none;} }
+</style></head><body><main><h1>A Joint-State Latent Executor for Correlated Register Beliefs</h1>
+<p><strong>A controlled experiment on recurrent hidden-state computation over uncertain two-register programs</strong></p>
+<h2>Abstract</h2>
+<p>This experiment tests whether a latent recurrent runtime can execute programs over a correlated belief state. Each example starts with an unknown register pair constrained by <code>B=A+d (mod p)</code>, so the correct hidden state is not one pair but a line-shaped support over <code>(A,B)</code>. A program containing constant and cross-register operations transforms that support. The model must assign probability mass to the exact final support after <code>K</code> internal recurrent steps.</p>
+<p>The primary joint-state executor stores a categorical distribution over all <code>(A,B)</code> pairs and applies one learned transition per hidden step. On modulo-31 programs trained only on lengths 1-8, it generalizes to held-out lengths 12, 16, and 24. Top-1-on-support accuracy is near baseline when <code>K&lt;L</code>, then reaches 100% exactly when <code>K&gt;=L</code>. Target-support mass at <code>K=L</code> is 97.8%, 95.7%, 93.6%, 91.6%, and 87.4% for lengths 4, 8, 12, 16, and 24. A marginal recurrent control stays at the 3.2% factorized baseline, and a static compiler control stays near baseline on longer lengths. The result supports the claim that joint latent state plus recurrent execution can solve correlated belief-state programs with clean test-time-compute scaling.</p>
+<h2>Lay Summary</h2>
+<p>The model does not know the exact starting values of <code>A</code> and <code>B</code>. It only knows a relation:</p>
+<pre><code class="language-text">B = A + d (mod p)
+</code></pre>
+<p>That relation describes many possible starting pairs. The model then receives a hidden program such as:</p>
+<pre><code class="language-text">A = A + 7
+B = B - A
+A = A + B
+...
+</code></pre>
+<p>The correct internal state is the whole set of possible <code>(A,B)</code> pairs after each step. The joint recurrent model learns to update that set one instruction at a time. If the program has 16 instructions, the model needs 16 internal steps. With fewer steps it stays near baseline; with enough steps it puts most probability on the exact final set.</p>
+<h2>1. Question</h2>
+<p>The experiment asks whether recurrent latent computation can maintain and update a correlated hidden belief state. The desired evidence has three parts:</p>
+<ol>
+<li>Accuracy should depend on the internal step budget <code>K</code>.</li>
+<li>The threshold should align with program length <code>L</code>: low when <code>K&lt;L</code>, high when <code>K&gt;=L</code>.</li>
+<li>A model without joint state should fail because separate marginals cannot represent the correlation.</li>
+</ol>
+<p>The task is deliberately controlled. The goal is not broad language reasoning; it is to test a specific mechanism under conditions where the required computation is exactly known.</p>
+<h2>2. Task</h2>
+<p>Programs operate over two registers modulo <code>p</code>.</p>
+<p>Initial belief:</p>
+<pre><code class="language-text">{(A, B): B = A + d mod p}
+</code></pre>
+<p>For modulus 31, this support contains 31 possible pairs out of 961 total pairs.</p>
+<p>Operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A=A+c</code></td>
+<td>add a constant to A</td>
+</tr>
+<tr>
+<td><code>A=A-c</code></td>
+<td>subtract a constant from A</td>
+</tr>
+<tr>
+<td><code>B=B+c</code></td>
+<td>add a constant to B</td>
+</tr>
+<tr>
+<td><code>B=B-c</code></td>
+<td>subtract a constant from B</td>
+</tr>
+<tr>
+<td><code>A=A+B</code></td>
+<td>add B into A</td>
+</tr>
+<tr>
+<td><code>B=B+A</code></td>
+<td>add A into B</td>
+</tr>
+<tr>
+<td><code>A=A-B</code></td>
+<td>subtract B from A</td>
+</tr>
+<tr>
+<td><code>B=B-A</code></td>
+<td>subtract A from B</td>
+</tr>
+</tbody>
+</table>
+<p>Each example has:</p>
+<ul>
+<li>a random relation parameter <code>d</code></li>
+<li>a random program of length <code>L</code></li>
+<li>exact support targets after every prefix step</li>
+<li>exact final support target after the whole program</li>
+</ul>
+<p>Training lengths were 1-8. Evaluation lengths were 4, 8, 12, 16, and 24. Lengths 12, 16, and 24 test recurrent length generalization.</p>
+<h2>3. Models</h2>
+<h3>Joint Recurrent Executor</h3>
+<p>The primary model stores a categorical distribution over all <code>(A,B)</code> pairs. Each recurrent step applies a learned transition selected by the current instruction:</p>
+<ul>
+<li>constant operations use the instruction constant as the selector</li>
+<li><code>A</code> cross-register operations use the current <code>B</code> value as the selector</li>
+<li><code>B</code> cross-register operations use the current <code>A</code> value as the selector</li>
+</ul>
+<p>The transition table has <code>8 * p * p * p</code> learned logits. For <code>p=31</code>, this is 238,328 transition logits. The model is not handed the modular arithmetic table; it learns the transitions from dense support supervision.</p>
+<h3>Marginal Recurrent Control</h3>
+<p>The marginal control uses the same recurrent schedule and transition parameterization, but it stores separate distributions over <code>A</code> and <code>B</code>. On the belief task, both marginals are uniform at initialization, so the relation <code>B=A+d</code> is lost.</p>
+<h3>Static Compiler Control</h3>
+<p>The static model receives the relation parameter and program, then predicts the final support in one shot. It has no recurrent execution axis and cannot trade more internal steps for better answers.</p>
+<h2>4. Metrics</h2>
+<p>The target is a support set, not a single pair.</p>
+<ul>
+<li><code>top1_on_support</code>: whether the highest-probability pair lies inside the exact final support.</li>
+<li><code>target_mass</code>: total probability assigned to the exact final support.</li>
+<li><code>target_nll</code>: mean negative log probability across support elements.</li>
+</ul>
+<p>For modulus 31, a uniform factorized prediction assigns <code>1/31 = 3.2%</code> mass to the correct support. A perfect prediction assigns 100% mass and has target NLL <code>log(31) = 3.434</code>.</p>
+<h2>5. Main Result</h2>
+<p>The modulo-31 joint recurrent executor shows a clean K threshold. Top-1-on-support is 100% exactly once <code>K</code> reaches program length.</p>
+<p><img alt="Top-1 support heatmap" src="../analysis/figures/mod31_top1_support_heatmap.png" /></p>
+<p>Target-support mass shows the same structure with a graded distribution-quality signal.</p>
+<p><img alt="Target mass heatmap" src="../analysis/figures/mod31_target_mass_heatmap.png" /></p>
+<p>Line curves make the threshold visible by length.</p>
+<p><img alt="Target mass K curves" src="../analysis/figures/mod31_target_mass_k_curves.png" /></p>
+<p>Numerically:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Program length</th>
+<th style="text-align: right;">Best target mass before <code>K&gt;=L</code></th>
+<th style="text-align: right;">First <code>K&gt;=L</code></th>
+<th style="text-align: right;">Target mass at first <code>K&gt;=L</code></th>
+<th style="text-align: right;">Top-1 at first <code>K&gt;=L</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">14.5%</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">97.8%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">5.7%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">95.7%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">5.6%</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">93.6%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">5.2%</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">91.6%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">3.8%</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">87.4%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The held-out lengths 12, 16, and 24 are the key result. The model was trained only on lengths up to 8, but because it learned reusable transitions, it executes longer programs when given enough recurrent steps.</p>
+<h2>6. Controls</h2>
+<p>The scaled controls show that the result is not explained by marginal belief tracking or one-shot compilation.</p>
+<p><img alt="Control comparison" src="../analysis/figures/mod31_controls_target_mass.png" /></p>
+<p>At modulus 31:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">L=4</th>
+<th style="text-align: right;">L=8</th>
+<th style="text-align: right;">L=12</th>
+<th style="text-align: right;">L=16</th>
+<th style="text-align: right;">L=24</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Joint recurrent</td>
+<td style="text-align: right;">97.8%</td>
+<td style="text-align: right;">95.7%</td>
+<td style="text-align: right;">93.6%</td>
+<td style="text-align: right;">91.6%</td>
+<td style="text-align: right;">87.4%</td>
+</tr>
+<tr>
+<td>Marginal recurrent</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">3.2%</td>
+</tr>
+<tr>
+<td>Static compiler</td>
+<td style="text-align: right;">7.9%</td>
+<td style="text-align: right;">3.5%</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">3.2%</td>
+</tr>
+</tbody>
+</table>
+<p>The marginal control stays at the <code>1/31</code> baseline because it cannot represent the relation between <code>A</code> and <code>B</code>. The static control learns a small short-length signal but does not solve longer programs.</p>
+<h2>7. Interpretation</h2>
+<p>This experiment supports a narrow mechanistic claim:</p>
+<blockquote>
+<p>A latent recurrent runtime with joint state can execute correlated belief-state programs, and additional internal steps causally improve performance when those steps correspond to program execution.</p>
+</blockquote>
+<p>The result is stronger than a smooth improvement curve. It has the expected executor signature:</p>
+<pre><code class="language-text">K &lt; L: the runtime has not consumed the whole program -&gt; near-baseline support mass
+K &gt;= L: the program has been executed -&gt; high support mass
+</code></pre>
+<p>The marginal control is important because exact single-state programs do not force joint representation. Correlated belief states do: the separate marginals are uniform, while the joint support contains the useful information.</p>
+<h2>8. Limits</h2>
+<p>This is still a structured setting.</p>
+<ul>
+<li>The state is an explicit categorical distribution over <code>(A,B)</code>.</li>
+<li>The model receives dense support supervision.</li>
+<li>The runtime uses a direct program counter.</li>
+<li>The operations are modular affine updates.</li>
+<li>The largest completed run here uses modulus 31, not a much larger state space.</li>
+</ul>
+<p>These are not flaws in the result; they define its scope. The experiment shows that the mechanism works when the representation is aligned with the task. It does not show that an unstructured hidden vector will discover the same representation unaided.</p>
+<h2>9. Next Iterations</h2>
+<p>The most useful next steps are:</p>
+<ol>
+<li>Replace the explicit program counter with attention over instruction tokens and a learned halt/no-op.</li>
+<li>Distill the joint categorical belief state into a dense hidden state.</li>
+<li>Add observations or queries that require selecting one property of the belief state rather than supervising the full support.</li>
+<li>Increase modulus and state size while tracking memory and runtime costs.</li>
+<li>Test robustness under noisier supervision where the exact support is not given at every step.</li>
+</ol>
+<h2>10. Reproducibility</h2>
+<p>Primary files:</p>
+<ul>
+<li>Experiment script: <code>../src/joint_register_executor_experiment.py</code></li>
+<li>Analysis script: <code>../src/analyze_joint_register_executor.py</code></li>
+<li>Experiment log: <code>joint_register_executor_experiment_log.md</code></li>
+<li>Results directory: <code>../runs/</code></li>
+<li>Analysis directory: <code>../analysis/</code></li>
+</ul>
+<p>Key run directories:</p>
+<ul>
+<li><code>../runs/main_belief_joint_mod31</code></li>
+<li><code>../runs/control_belief_marginal_mod31</code></li>
+<li><code>../runs/control_belief_static_mod31</code></li>
+<li><code>../runs/pilot_belief_joint_mod11</code></li>
+<li><code>../runs/control_belief_marginal_mod11</code></li>
+<li><code>../runs/control_belief_static_mod11</code></li>
+</ul>
+<p>Large checkpoint files are stored outside the experiment bundle under:</p>
+<ul>
+<li><code>../../../large_artifacts/joint_register_executor/checkpoints/</code></li>
+</ul>
+<p>Environment:</p>
+<ul>
+<li>Python 3.12.3</li>
+<li>PyTorch 2.8.0+cu128</li>
+<li>GPU: NVIDIA RTX 6000 Ada Generation</li>
+</ul>
+<h2>11. Bottom Line</h2>
+<p>The joint-state executor learned to execute correlated belief-state programs. It generalized from training lengths 1-8 to evaluation lengths 12, 16, and 24, with a sharp threshold when internal recurrent steps reached program length. The marginal and static controls stayed near baseline on the scaled task. The core lesson is that recurrent latent execution can scale cleanly with test-time compute, but only when the hidden state can represent the variables and correlations the task actually requires.</p></main></body></html>

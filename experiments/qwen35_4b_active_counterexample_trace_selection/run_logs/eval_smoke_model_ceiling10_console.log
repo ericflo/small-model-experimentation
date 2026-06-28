@@ -1,0 +1,160 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:13,  9.82it/s]Loading weights:   4%|▍         | 30/723 [00:00<00:03, 173.34it/s]Loading weights:  12%|█▏        | 90/723 [00:00<00:01, 363.61it/s]Loading weights:  20%|█▉        | 142/723 [00:00<00:01, 420.63it/s]Loading weights:  28%|██▊       | 199/723 [00:00<00:01, 466.81it/s]Loading weights:  35%|███▌      | 254/723 [00:00<00:00, 491.82it/s]Loading weights:  43%|████▎     | 311/723 [00:00<00:00, 513.03it/s]Loading weights:  51%|█████     | 370/723 [00:00<00:00, 537.09it/s]Loading weights:  60%|██████    | 434/723 [00:00<00:00, 568.18it/s]Loading weights:  92%|█████████▏| 666/723 [00:01<00:00, 1104.14it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 690.66it/s] 
+eval-active:dsl_eval_ceiling:   0%|          | 0/10 [00:00<?, ?it/s]eval-active:dsl_eval_ceiling:  10%|█         | 1/10 [00:21<03:12, 21.36s/it]eval-active:dsl_eval_ceiling:  20%|██        | 2/10 [00:41<02:46, 20.82s/it]eval-active:dsl_eval_ceiling:  30%|███       | 3/10 [01:07<02:40, 22.97s/it]eval-active:dsl_eval_ceiling:  40%|████      | 4/10 [01:28<02:12, 22.16s/it]eval-active:dsl_eval_ceiling:  50%|█████     | 5/10 [01:53<01:56, 23.28s/it]eval-active:dsl_eval_ceiling:  60%|██████    | 6/10 [02:08<01:22, 20.52s/it]eval-active:dsl_eval_ceiling:  70%|███████   | 7/10 [02:29<01:01, 20.51s/it]eval-active:dsl_eval_ceiling:  80%|████████  | 8/10 [02:49<00:41, 20.58s/it]eval-active:dsl_eval_ceiling:  90%|█████████ | 9/10 [03:10<00:20, 20.64s/it]eval-active:dsl_eval_ceiling: 100%|██████████| 10/10 [03:36<00:00, 22.19s/it]eval-active:dsl_eval_ceiling: 100%|██████████| 10/10 [03:36<00:00, 21.63s/it]
+{
+  "candidate_summary": {
+    "overall": {
+      "records": 10,
+      "candidate_oracle_hidden_all_successes": 10,
+      "candidate_oracle_hidden_all_rate": 1.0,
+      "target_program_synthesized_successes": 10,
+      "target_program_synthesized_rate": 1.0,
+      "avg_synthesized_programs": 4000.0,
+      "avg_visible_consistent_candidates": 1144.3,
+      "avg_unique_sketches": 1.6
+    },
+    "by_family": {
+      "sum_length_mod_gate_label": {
+        "records": 10,
+        "candidate_oracle_hidden_all_successes": 10,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 10,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 1144.3,
+        "avg_unique_sketches": 1.6
+      }
+    }
+  },
+  "policy_summary": {
+    "active_max_split@0": {
+      "records": 10,
+      "hidden_all_successes": 6,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.3,
+      "avg_queries_used": 0.0
+    },
+    "active_max_split@1": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 1.0
+    },
+    "active_max_split@2": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 2.0
+    },
+    "active_max_split@3": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 3.0
+    },
+    "active_max_split@6": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 6.0
+    },
+    "oracle_elimination@0": {
+      "records": 10,
+      "hidden_all_successes": 6,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.3,
+      "avg_queries_used": 0.0
+    },
+    "oracle_elimination@1": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 1.0
+    },
+    "oracle_elimination@2": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 2.0
+    },
+    "oracle_elimination@3": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 3.0
+    },
+    "oracle_elimination@6": {
+      "records": 10,
+      "hidden_all_successes": 10,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 6.0
+    },
+    "random_extra@0": {
+      "records": 20,
+      "hidden_all_successes": 12,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.3,
+      "avg_queries_used": 0.0
+    },
+    "random_extra@1": {
+      "records": 20,
+      "hidden_all_successes": 15,
+      "hidden_all_rate": 0.75,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.0,
+      "avg_queries_used": 1.0
+    },
+    "random_extra@2": {
+      "records": 20,
+      "hidden_all_successes": 17,
+      "hidden_all_rate": 0.85,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.45,
+      "avg_queries_used": 2.0
+    },
+    "random_extra@3": {
+      "records": 20,
+      "hidden_all_successes": 18,
+      "hidden_all_rate": 0.9,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.7,
+      "avg_queries_used": 3.0
+    },
+    "random_extra@6": {
+      "records": 20,
+      "hidden_all_successes": 19,
+      "hidden_all_rate": 0.95,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.9,
+      "avg_queries_used": 6.0
+    },
+    "visible_prior@0": {
+      "records": 10,
+      "hidden_all_successes": 6,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.3,
+      "avg_queries_used": 0.0
+    }
+  }
+}

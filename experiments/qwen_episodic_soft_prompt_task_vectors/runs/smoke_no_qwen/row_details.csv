@@ -1,0 +1,55 @@
+task_id,family,method,row_index,input,prediction,target,exact
+City.000010,City,direct_row,0,9,,9,False
+City.000010,City,direct_row,1,20+,,20,False
+City.000010,City,direct_row,2,None,,0,False
+City.000010,City,direct_batch,0,9,,9,False
+City.000010,City,direct_batch,1,20+,,20,False
+City.000010,City,direct_batch,2,None,,0,False
+City.000010,City,init_soft_row,0,9,,9,False
+City.000010,City,init_soft_row,1,20+,,20,False
+City.000010,City,init_soft_row,2,None,,0,False
+City.000010,City,learned_soft_row,0,9,,9,False
+City.000010,City,learned_soft_row,1,20+,,20,False
+City.000010,City,learned_soft_row,2,None,,0,False
+City.000010,City,shuffled_soft_row,0,9,,9,False
+City.000010,City,shuffled_soft_row,1,20+,,20,False
+City.000010,City,shuffled_soft_row,2,None,,0,False
+City.000010,City,learned_soft_batch,0,9,,9,False
+City.000010,City,learned_soft_batch,1,20+,,20,False
+City.000010,City,learned_soft_batch,2,None,,0,False
+Number.000077,Number,direct_row,0,11112,,11110,False
+Number.000077,Number,direct_row,1,11119,,11110,False
+Number.000077,Number,direct_row,2,548,,540,False
+Number.000077,Number,direct_batch,0,11112,,11110,False
+Number.000077,Number,direct_batch,1,11119,,11110,False
+Number.000077,Number,direct_batch,2,548,,540,False
+Number.000077,Number,init_soft_row,0,11112,,11110,False
+Number.000077,Number,init_soft_row,1,11119,,11110,False
+Number.000077,Number,init_soft_row,2,548,,540,False
+Number.000077,Number,learned_soft_row,0,11112,,11110,False
+Number.000077,Number,learned_soft_row,1,11119,,11110,False
+Number.000077,Number,learned_soft_row,2,548,,540,False
+Number.000077,Number,shuffled_soft_row,0,11112,,11110,False
+Number.000077,Number,shuffled_soft_row,1,11119,,11110,False
+Number.000077,Number,shuffled_soft_row,2,548,,540,False
+Number.000077,Number,learned_soft_batch,0,11112,,11110,False
+Number.000077,Number,learned_soft_batch,1,11119,,11110,False
+Number.000077,Number,learned_soft_batch,2,548,,540,False
+UserAgent.000003,UserAgent,direct_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,,FZ467,False
+UserAgent.000003,UserAgent,direct_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,,RM VVUT,False
+UserAgent.000003,UserAgent,direct_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,,QS QYFY,False
+UserAgent.000003,UserAgent,direct_batch,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,,FZ467,False
+UserAgent.000003,UserAgent,direct_batch,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,,RM VVUT,False
+UserAgent.000003,UserAgent,direct_batch,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,,QS QYFY,False
+UserAgent.000003,UserAgent,init_soft_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,,FZ467,False
+UserAgent.000003,UserAgent,init_soft_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,,RM VVUT,False
+UserAgent.000003,UserAgent,init_soft_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,,QS QYFY,False
+UserAgent.000003,UserAgent,learned_soft_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,,FZ467,False
+UserAgent.000003,UserAgent,learned_soft_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,,RM VVUT,False
+UserAgent.000003,UserAgent,learned_soft_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,,QS QYFY,False
+UserAgent.000003,UserAgent,shuffled_soft_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,,FZ467,False
+UserAgent.000003,UserAgent,shuffled_soft_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,,RM VVUT,False
+UserAgent.000003,UserAgent,shuffled_soft_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,,QS QYFY,False
+UserAgent.000003,UserAgent,learned_soft_batch,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,,FZ467,False
+UserAgent.000003,UserAgent,learned_soft_batch,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,,RM VVUT,False
+UserAgent.000003,UserAgent,learned_soft_batch,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,,QS QYFY,False

@@ -1,0 +1,7 @@
+run,checkpoint_dir,created_unix,notes
+smoke_vm_echo,large_artifacts/qwen_vm_echo_trace_distillation/checkpoints/smoke_vm_echo,1782259722,"frozen Qwen VM-ECHO head; base=Qwen/Qwen3-4B; arms=baseline,vm_echo"
+smoke_vm_echo_masked,large_artifacts/qwen_vm_echo_trace_distillation/checkpoints/smoke_vm_echo_masked,1782259772,"frozen Qwen VM-ECHO head; base=Qwen/Qwen3-4B; arms=baseline,vm_echo"
+pilot_vm_echo_s96,large_artifacts/qwen_vm_echo_trace_distillation/checkpoints/pilot_vm_echo_s96,1782259830,"frozen Qwen VM-ECHO head; base=Qwen/Qwen3-4B; arms=baseline,vm_echo"
+pilot_vm_echo_s96_w010,large_artifacts/qwen_vm_echo_trace_distillation/checkpoints/pilot_vm_echo_s96_w010,1782259882,frozen Qwen VM-ECHO head; base=Qwen/Qwen3-4B; arms=vm_echo
+pilot_vm_echo_s96_w003,large_artifacts/qwen_vm_echo_trace_distillation/checkpoints/pilot_vm_echo_s96_w003,1782259937,frozen Qwen VM-ECHO head; base=Qwen/Qwen3-4B; arms=vm_echo
+main_vm_echo_s192_w003,large_artifacts/qwen_vm_echo_trace_distillation/checkpoints/main_vm_echo_s192_w003,1782260158,"frozen Qwen VM-ECHO head; base=Qwen/Qwen3-4B; arms=baseline,vm_echo"

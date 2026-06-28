@@ -1,0 +1,43 @@
+{
+  "adapter_dir": "/workspace/large_artifacts/qwen35_4b_constrained_coverage_dpo/models/constrained_dpo_lora",
+  "arm_name": "constrained_dpo_k4",
+  "count": 24,
+  "experiment": "qwen35_4b_constrained_coverage_dpo",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/eval_constrained_dpo_k4_records.jsonl",
+  "records": {
+    "candidate_count_mean": 3.8333333333333335,
+    "coverage": 0.625,
+    "distinct_behavior_rate_mean": 0.8541666666666666,
+    "distinct_functional_rate_mean": 0.548611111111111,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 21785,
+    "hidden_pass_candidates_mean": 1.5416666666666667,
+    "parse_success_mean": 3.5833333333333335,
+    "pass1_proxy": 0.4166666666666667,
+    "records": 24,
+    "visible_candidates_mean": 1.9583333333333333,
+    "visible_coverage": 0.625,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "pilot_eval",
+  "samples_per_task": 4,
+  "seed": 2026062626,
+  "split": "mbpp_test",
+  "temperatures": [
+    1.0
+  ],
+  "token_usage": {
+    "calls": 96,
+    "completion_tokens": 10431,
+    "forward_tokens": 22411,
+    "prompt_tokens": 11980
+  },
+  "top_p": 0.98,
+  "visible_tests": 1
+}

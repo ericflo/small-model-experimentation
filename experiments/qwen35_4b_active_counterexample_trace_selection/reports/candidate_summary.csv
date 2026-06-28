@@ -1,0 +1,4 @@
+split,records,candidate_oracle_hidden_all_rate,visible_selected_hidden_all_rate,target_program_synthesized_rate,avg_synthesized_programs,avg_visible_consistent_candidates,avg_unique_sketches,candidate_oracle_hidden_all_pct,visible_selected_hidden_all_pct,target_program_synthesized_pct
+ceiling,120,1.0,0.775,1.0,3235.5583333333334,643.6,1.55,100.0,77.5,100.0
+iid,60,1.0,0.7666666666666667,1.0,1108.0666666666666,59.88333333333333,1.0,100.0,76.66666666666667,100.0
+support,120,1.0,0.7,1.0,3320.9,251.325,1.0583333333333333,100.0,70.0,100.0

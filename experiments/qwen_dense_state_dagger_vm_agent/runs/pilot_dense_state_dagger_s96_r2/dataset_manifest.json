@@ -1,0 +1,53 @@
+{
+  "run": "pilot_dense_state_dagger_s96_r2",
+  "args": {
+    "run_name": "pilot_dense_state_dagger_s96_r2",
+    "model_name": "Qwen/Qwen3-4B",
+    "seed": 431,
+    "train_size": 96,
+    "val_size": 16,
+    "fresh_size": 16,
+    "hard_size": 16,
+    "max_arith_steps": 4,
+    "max_prompt_len": 96,
+    "state_tokens": 17,
+    "dropout": 0.05,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lr": 0.0001,
+    "dagger_lr": 5e-05,
+    "bc_epochs": 2,
+    "dagger_epochs": 1,
+    "dagger_rounds": 2,
+    "batch_size": 2,
+    "grad_accum": 8,
+    "teacher_max_steps": 12,
+    "dagger_rollout_steps": 8,
+    "stop_loss_weight": 4.0,
+    "value_loss_weight": 0.5,
+    "distance_loss_weight": 0.05,
+    "false_stop_weight": 6.0,
+    "value_threshold": 0.55,
+    "dagger_value_gate": 0,
+    "typed_action_mask": 1,
+    "eval_native": 1,
+    "native_max_new_tokens": 16,
+    "k_values": [
+      0,
+      2,
+      4,
+      8
+    ]
+  },
+  "sizes": {
+    "train": 96,
+    "val_mixed": 16,
+    "fresh_standard": 16,
+    "fresh_paraphrase": 16,
+    "fresh_paired": 16,
+    "hard_composition": 16
+  },
+  "hidden_size": 2560,
+  "action_size": 1761
+}

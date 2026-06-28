@@ -1,0 +1,459 @@
+task_id,family,features,row_index,target,prediction,exact
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",1,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",2,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",3,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",4,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",5,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",6,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",7,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",8,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",9,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",10,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",11,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",12,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",13,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",14,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",15,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",16,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",17,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",18,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",19,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",20,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",21,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",22,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",23,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",24,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",25,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",26,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",27,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",28,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",29,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",30,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",31,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",32,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",33,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",34,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",35,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",36,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",37,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",38,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",39,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",40,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",41,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",42,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",43,NI,NI,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",44,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",45,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",46,E,E,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",47,C,C,True
+Abbreviation.000001,Abbreviation,"Concatenation,Conditional,Substring",48,E,E,True
+Address.000002,Address,Substring,1,880 81th Place,880 81th Place SE,False
+Address.000002,Address,Substring,2,256 32th Place,256 32th Place NE,False
+Address.000002,Address,Substring,3,526 03th Place NE,526 03th Place NE,True
+Address.000003,Address,Substring,1,319 09th Lane,319 09th Lane,True
+Address.000003,Address,Substring,2,914 30th Lane,914 30th Lane,True
+Address.000003,Address,Substring,3,435 30th Lane,435 30th Lane,True
+Address.000013,Address,"Conditional,Substring",1,89,89,True
+Address.000013,Address,"Conditional,Substring",2,234,234,True
+Address.000013,Address,"Conditional,Substring",3,None,One Main Parkway,False
+Address.000013,Address,"Conditional,Substring",4,None,One Second Way,False
+Address.000013,Address,"Conditional,Substring",5,789,789,True
+Address.000013,Address,"Conditional,Substring",6,234,234,True
+BillingCode.000007,BillingCode,Concatenation,1,11529],[11529],False
+BillingCode.000007,BillingCode,Concatenation,2,PT-11529],[PT-11529],False
+BillingCode.000007,BillingCode,Concatenation,3,[CPT-11529],[CPT-11529],True
+City.000004,City,Conditional,1,San Francisco,San Francisco,True
+City.000004,City,Conditional,2,San Francisco,San Francisco,True
+City.000004,City,Conditional,3,San Francisco,San Francisco,True
+City.000004,City,Conditional,4,San Francisco,San Francisco,True
+City.000004,City,Conditional,5,San Francisco,San Francisco,True
+City.000004,City,Conditional,6,San Francisco,San Francisco,True
+City.000004,City,Conditional,7,San Francisco,San Francisco,True
+City.000004,City,Conditional,8,San Francisco,San Francisco,True
+City.000004,City,Conditional,9,San Francisco,San Francisco,True
+City.000004,City,Conditional,10,San Francisco,San Francisco,True
+City.000004,City,Conditional,11,San Francisco,San Francisco,True
+City.000004,City,Conditional,12,San Francisco,San Francisco,True
+City.000004,City,Conditional,13,San Francisco,San Francisco,True
+City.000004,City,Conditional,14,San Francisco,San Francisco,True
+City.000004,City,Conditional,15,San Francisco,Can Francisco,False
+City.000004,City,Conditional,16,San Francisco,San Francisco,True
+City.000008,City,Conditional,1,,None,False
+City.000008,City,Conditional,2,san francisco,San Francisco,False
+City.000008,City,Conditional,3,San Francisco,San Francisco,True
+City.000010,City,"Conditional,Numeric",1,9,9,True
+City.000010,City,"Conditional,Numeric",2,20,20,True
+City.000010,City,"Conditional,Numeric",3,0,0,True
+City.000011,City,Conditional,1,New York City,New York City,True
+City.000011,City,Conditional,2,New York City,New York City,True
+City.000011,City,Conditional,3,None,New York City,False
+City.000011,City,Conditional,4,San Jose,San Jose,True
+Column.000001,Column,"Concatenation,Conditional,Substring",1,Col1,Col1,True
+Column.000001,Column,"Concatenation,Conditional,Substring",2,Col2,Col2,True
+Column.000001,Column,"Concatenation,Conditional,Substring",3,Col1,Col1,True
+Column.000001,Column,"Concatenation,Conditional,Substring",4,Col1,Col1,True
+Column.000001,Column,"Concatenation,Conditional,Substring",5,Col4,Col4,True
+Column.000001,Column,"Concatenation,Conditional,Substring",6,Col0,Col0,True
+DateTime.000003,DateTime,DateTime,1,16,16,True
+DateTime.000003,DateTime,DateTime,2,23,23,True
+DateTime.000003,DateTime,DateTime,3,22,22,True
+DateTime.000003,DateTime,DateTime,4,4,4,True
+DateTime.000003,DateTime,DateTime,5,15,15,True
+DateTime.000003,DateTime,DateTime,6,8,8,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",1,04:29:27 1858-12-08,04:29:27 1858-12-08,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",2,09:08:38 2220-06-30,09:08:38 2220-06-30,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",3,21:46:13 1880-10-31,21:46:13 1880-10-31,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",4,17:14:57 1963-05-31,17:14:57 1963-05-31,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",5,20:35:50 2038-05-17,20:35:50 2038-05-17,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",6,20:07:33 2048-11-30,20:07:33 2048-11-30,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",7,15:39:10 2139-06-16,15:39:10 2139-06-16,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",8,21:43:27 1957-04-20,21:43:27 1957-04-20,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",9,20:00:14 2130-10-15,20:00:14 2130-10-15,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",10,15:55:17 1853-03-19,15:55:17 1853-03-19,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",11,14:59:27 2041-05-26,14:59:27 2041-05-26,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",12,21:36:09 1747-09-02,21:36:09 1747-09-02,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",13,11:46:30 2067-04-04,11:46:30 2067-04-04,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",14,08:39:45 1730-04-30,08:39:45 1730-04-30,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",15,09:17:28 1849-09-17,09:17:28 1849-09-17,True
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",16,11:54:21 2031-12-18,11:54:21 2031-12-18,True
+DateTime.000005,DateTime,"Conditional,DateTime",1,Jun 2027,Jun 2027,True
+DateTime.000005,DateTime,"Conditional,DateTime",2,Not a date.,Not a date.,True
+DateTime.000005,DateTime,"Conditional,DateTime",3,Aug 2025,Aug 2025,True
+DateTime.000005,DateTime,"Conditional,DateTime",4,Not a date.,Not a date.,True
+DateTime.000005,DateTime,"Conditional,DateTime",5,Sep 2026,Sep 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",6,Apr 2026,Apr 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",7,Jul 2025,Jul 2025,True
+DateTime.000005,DateTime,"Conditional,DateTime",8,Nov 2024,Nov 2024,True
+DateTime.000005,DateTime,"Conditional,DateTime",9,Not a date.,Not a date.,True
+DateTime.000005,DateTime,"Conditional,DateTime",10,Jun 2026,Jun 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",11,Dec 2024,Dec 2024,True
+DateTime.000005,DateTime,"Conditional,DateTime",12,Jan 2027,Jan 2027,True
+DateTime.000005,DateTime,"Conditional,DateTime",13,Jul 2026,Jul 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",14,Oct 2026,Oct 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",15,Apr 2025,Apr 2025,True
+DateTime.000005,DateTime,"Conditional,DateTime",16,Aug 2026,Aug 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",17,Dec 2026,Dec 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",18,Mar 2026,Mar 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",19,Jan 2027,Jan 2027,True
+DateTime.000005,DateTime,"Conditional,DateTime",20,Jun 2026,Jun 2026,True
+DateTime.000005,DateTime,"Conditional,DateTime",21,Not a date.,Not a date.,True
+DateTime.000005,DateTime,"Conditional,DateTime",22,Feb 2027,Feb 2027,True
+DateTime.000005,DateTime,"Conditional,DateTime",23,May 2027,May 2027,True
+DateTime.000007,DateTime,DateTime,1,Sep 2007,Sep 2007,True
+DateTime.000007,DateTime,DateTime,2,Dec 1953,Dec 1953,True
+DateTime.000007,DateTime,DateTime,3,Nov 1987,Nov 1987,True
+DateTime.000007,DateTime,DateTime,4,Dec 1963,Dec 1963,True
+DateTime.000007,DateTime,DateTime,5,Sep 1961,Sep 1961,True
+DateTime.000007,DateTime,DateTime,6,Jun 2041,Jun 2041,True
+DateTime.000007,DateTime,DateTime,7,Feb 1998,Feb 1998,True
+DateTime.000007,DateTime,DateTime,8,Mar 1932,Mar 1932,True
+DateTime.000007,DateTime,DateTime,9,Jan 1925,Jan 1925,True
+DateTime.000007,DateTime,DateTime,10,Oct 1961,Oct 1961,True
+DateTime.000007,DateTime,DateTime,11,Jul 2001,Jul 2001,True
+DateTime.000007,DateTime,DateTime,12,Jan 2027,Jan 2027,True
+DateTime.000007,DateTime,DateTime,13,Nov 1978,Nov 1978,True
+DateTime.000007,DateTime,DateTime,14,Aug 1971,Aug 1971,True
+DateTime.000007,DateTime,DateTime,15,Sep 1935,Sep 1935,True
+DateTime.000007,DateTime,DateTime,16,Sep 1983,Sep 1983,True
+DateTime.000007,DateTime,DateTime,17,Jul 1955,Jul 1955,True
+DateTime.000007,DateTime,DateTime,18,Jan 1960,Jan 1960,True
+DateTime.000007,DateTime,DateTime,19,Mar 2021,Mar 2021,True
+DateTime.000007,DateTime,DateTime,20,Mar 2017,Mar 2017,True
+DateTime.000007,DateTime,DateTime,21,May 2021,May 2021,True
+DateTime.000012,DateTime,"Conditional,DateTime",1,2033,2033,True
+DateTime.000012,DateTime,"Conditional,DateTime",2,None,Unknown,False
+DateTime.000012,DateTime,"Conditional,DateTime",3,1784,1784,True
+DateTime.000012,DateTime,"Conditional,DateTime",4,2130,2130,True
+DateTime.000012,DateTime,"Conditional,DateTime",5,None,Unknown,False
+DateTime.000012,DateTime,"Conditional,DateTime",6,2088,2088,True
+DateTime.000013,DateTime,"Conditional,DateTime",1,2241,2241,True
+DateTime.000013,DateTime,"Conditional,DateTime",2,2160,2160,True
+DateTime.000013,DateTime,"Conditional,DateTime",3,1984,1984,True
+DateTime.000013,DateTime,"Conditional,DateTime",4,1740,1740,True
+DateTime.000013,DateTime,"Conditional,DateTime",5,2237,2237,True
+DateTime.000013,DateTime,"Conditional,DateTime",6,1904,1904,True
+DateTime.000013,DateTime,"Conditional,DateTime",7,2088,2088,True
+DateTime.000013,DateTime,"Conditional,DateTime",8,2131,2131,True
+DateTime.000013,DateTime,"Conditional,DateTime",9,1817,1817,True
+DateTime.000013,DateTime,"Conditional,DateTime",10,1963,1963,True
+DateTime.000013,DateTime,"Conditional,DateTime",11,2098,2098,True
+DateTime.000013,DateTime,"Conditional,DateTime",12,1815,1815,True
+DateTime.000013,DateTime,"Conditional,DateTime",13,2155,2155,True
+DateTime.000013,DateTime,"Conditional,DateTime",14,1816,1816,True
+DateTime.000013,DateTime,"Conditional,DateTime",15,2090,2090,True
+DateTime.000013,DateTime,"Conditional,DateTime",16,2089,2089,True
+DateTime.000013,DateTime,"Conditional,DateTime",17,1957,1957,True
+DateTime.000013,DateTime,"Conditional,DateTime",18,1952,1952,True
+DateTime.000013,DateTime,"Conditional,DateTime",19,2114,2114,True
+DateTime.000013,DateTime,"Conditional,DateTime",20,2059,2059,True
+DateTime.000013,DateTime,"Conditional,DateTime",21,1818,1818,True
+DateTime.000013,DateTime,"Conditional,DateTime",22,2075,2075,True
+DateTime.000013,DateTime,"Conditional,DateTime",23,2204,2204,True
+DateTime.000013,DateTime,"Conditional,DateTime",24,1747,1747,True
+DateTime.000013,DateTime,"Conditional,DateTime",25,2218,2218,True
+DateTime.000013,DateTime,"Conditional,DateTime",26,2008,2008,True
+DateTime.000013,DateTime,"Conditional,DateTime",27,1893,1893,True
+DateTime.000013,DateTime,"Conditional,DateTime",28,2082,2082,True
+DateTime.000013,DateTime,"Conditional,DateTime",29,1982,1982,True
+DateTime.000013,DateTime,"Conditional,DateTime",30,1727,1727,True
+DateTime.000013,DateTime,"Conditional,DateTime",31,2031,2031,True
+DateTime.000013,DateTime,"Conditional,DateTime",32,2207,2207,True
+DateTime.000013,DateTime,"Conditional,DateTime",33,2151,2151,True
+DateTime.000013,DateTime,"Conditional,DateTime",34,1797,1797,True
+DateTime.000013,DateTime,"Conditional,DateTime",35,None,None,True
+DateTime.000013,DateTime,"Conditional,DateTime",36,1730,1730,True
+DateTime.000013,DateTime,"Conditional,DateTime",37,2049,2049,True
+DateTime.000013,DateTime,"Conditional,DateTime",38,1977,1977,True
+DateTime.000013,DateTime,"Conditional,DateTime",39,2011,2011,True
+DateTime.000013,DateTime,"Conditional,DateTime",40,None,None,True
+DateTime.000013,DateTime,"Conditional,DateTime",41,1731,1731,True
+DateTime.000013,DateTime,"Conditional,DateTime",42,1735,1735,True
+DateTime.000013,DateTime,"Conditional,DateTime",43,1943,1943,True
+DateTime.000013,DateTime,"Conditional,DateTime",44,1807,1807,True
+DateTime.000013,DateTime,"Conditional,DateTime",45,2223,2223,True
+DateTime.000013,DateTime,"Conditional,DateTime",46,1848,1848,True
+DateTime.000013,DateTime,"Conditional,DateTime",47,1873,1873,True
+DateTime.000013,DateTime,"Conditional,DateTime",48,2228,2228,True
+DateTime.000013,DateTime,"Conditional,DateTime",49,1793,1793,True
+DateTime.000013,DateTime,"Conditional,DateTime",50,1977,1977,True
+DateTime.000014,DateTime,DateTime,1,Friday #1 February 2013,Saturday #1 February 2013,False
+DateTime.000014,DateTime,DateTime,2,Thursday #2 December 2002,Thursday #12 December 2002,False
+DateTime.000014,DateTime,DateTime,3,Saturday #1 September 2012,Thursday #1 September 2012,False
+DateTime.000014,DateTime,DateTime,4,Sunday #1 June 2016,Sunday #5 June 2016,False
+DateTime.000014,DateTime,DateTime,5,Friday #1 January 1998,Thursday #2 January 1998,False
+DateTime.000014,DateTime,DateTime,6,Monday #3 December 1973,Monday #3 December 1973,True
+DateTime.000014,DateTime,DateTime,7,Wednesday #1 April 1932,Thursday #3 September 1932,False
+DateTime.000014,DateTime,DateTime,8,Tuesday #3 March 1983,Tuesday #3 March 1983,True
+DateTime.000014,DateTime,DateTime,9,Thursday #2 March 2039,"Week 10, 2039",False
+DateTime.000015,DateTime,DateTime,1,"Friday, 2013W05","Thursday, 2013W01",False
+DateTime.000015,DateTime,DateTime,2,"Thursday, 2002W50","Thursday, 2002W48",False
+DateTime.000015,DateTime,DateTime,3,"Saturday, 2012W35","Thursday, 2012W29",False
+DateTime.000015,DateTime,DateTime,4,"Sunday, 2016W22","Thursday, 2016W19",False
+DateTime.000015,DateTime,DateTime,5,"Friday, 1998W01","Thursday, 1998W01",False
+DateTime.000015,DateTime,DateTime,6,"Monday, 1973W51","Monday, 1973W51",True
+DateTime.000015,DateTime,DateTime,7,"Wednesday, 1932W14","Thursday, 1932W36",False
+DateTime.000015,DateTime,DateTime,8,"Tuesday, 1983W11","Tuesday, 1983W11",True
+DateTime.000015,DateTime,DateTime,9,"Friday, 1998W53","Thursday, 1999W01",False
+DateTime.000015,DateTime,DateTime,10,"Tuesday, 1998W01","Thursday, 1997W52",False
+DateTime.000015,DateTime,DateTime,11,"Thursday, 2039W10",2039W20,False
+DateTime.000017,DateTime,DateTime,1,30/3/2241,30/3/2241,True
+DateTime.000017,DateTime,DateTime,2,2/8/2160,2/8/2160,True
+DateTime.000017,DateTime,DateTime,3,23/5/1984,23/5/1984,True
+DateTime.000017,DateTime,DateTime,4,15/8/1740,15/8/1740,True
+DateTime.000017,DateTime,DateTime,5,8/7/2237,8/7/2237,True
+DateTime.000017,DateTime,DateTime,6,3/11/1904,3/11/1904,True
+DateTime.000017,DateTime,DateTime,7,5/4/2088,5/4/2088,True
+DateTime.000017,DateTime,DateTime,8,30/5/2131,30/5/2131,True
+DateTime.000017,DateTime,DateTime,9,25/5/1817,25/5/1817,True
+DateTime.000017,DateTime,DateTime,10,31/5/1963,31/5/1963,True
+DateTime.000017,DateTime,DateTime,11,24/11/2098,24/11/2098,True
+DateTime.000017,DateTime,DateTime,12,22/10/1815,22/10/1815,True
+DateTime.000017,DateTime,DateTime,13,26/5/2155,26/5/2155,True
+DateTime.000017,DateTime,DateTime,14,26/3/1816,26/3/1816,True
+DateTime.000017,DateTime,DateTime,15,26/4/2090,26/4/2090,True
+DateTime.000017,DateTime,DateTime,16,14/8/2089,14/8/2089,True
+DateTime.000017,DateTime,DateTime,17,20/4/1957,20/4/1957,True
+DateTime.000017,DateTime,DateTime,18,11/9/1952,11/9/1952,True
+DateTime.000017,DateTime,DateTime,19,3/11/2114,3/11/2114,True
+DateTime.000017,DateTime,DateTime,20,21/6/2059,21/6/2059,True
+DateTime.000017,DateTime,DateTime,21,21/1/1818,21/1/1818,True
+DateTime.000017,DateTime,DateTime,22,16/9/2075,16/9/2075,True
+DateTime.000017,DateTime,DateTime,23,2/10/2204,2/10/2204,True
+DateTime.000017,DateTime,DateTime,24,2/9/1747,2/9/1747,True
+DateTime.000017,DateTime,DateTime,25,29/1/2218,29/1/2218,True
+DateTime.000017,DateTime,DateTime,26,3/4/2008,3/4/2008,True
+DateTime.000018,DateTime,DateTime,1,30 Mar 2241,30 Mar 2241,True
+DateTime.000018,DateTime,DateTime,2,2 Aug 2160,2 Aug 2160,True
+DateTime.000018,DateTime,DateTime,3,23 May 1984,23 May 1984,True
+DateTime.000018,DateTime,DateTime,4,15 Aug 1740,15 Aug 1740,True
+DateTime.000018,DateTime,DateTime,5,8 Jul 2237,08 Jul 2237,False
+DateTime.000018,DateTime,DateTime,6,3 Nov 1904,3 Nov 1904,True
+DateTime.000018,DateTime,DateTime,7,5 Apr 2088,5 April 2088,False
+DateTime.000018,DateTime,DateTime,8,30 May 2131,30 Mar 1846,False
+DateTime.000018,DateTime,DateTime,9,25 May 1817,25 May 1817,True
+DateTime.000018,DateTime,DateTime,10,31 May 1963,31 May 1963,True
+DateTime.000018,DateTime,DateTime,11,24 Nov 2098,24 Nov 2098,True
+DateTime.000018,DateTime,DateTime,12,22 Oct 1815,22 Oct 1815,True
+DateTime.000018,DateTime,DateTime,13,26 May 2155,26 May 2155,True
+DateTime.000018,DateTime,DateTime,14,26 Mar 1816,26 Mar 1816,True
+DateTime.000018,DateTime,DateTime,15,26 Apr 2090,26 Apr 2090,True
+DateTime.000018,DateTime,DateTime,16,14 Aug 2089,14 Aug 2089,True
+DateTime.000018,DateTime,DateTime,17,20 Apr 1957,20 Apr 1957,True
+DateTime.000018,DateTime,DateTime,18,11 Sep 1952,11 Sep 1952,True
+DateTime.000018,DateTime,DateTime,19,3 Nov 2114,3 Nov 2114,True
+DateTime.000018,DateTime,DateTime,20,21 Jun 2059,21 June 2059,False
+DateTime.000018,DateTime,DateTime,21,21 Jan 1818,21 Jan 1818,True
+DateTime.000018,DateTime,DateTime,22,16 Sep 2075,16 Sep 2075,True
+DateTime.000018,DateTime,DateTime,23,2 Oct 2204,2 Oct 2204,True
+DateTime.000018,DateTime,DateTime,24,2 Sep 1747,2 Sep 1747,True
+DateTime.000018,DateTime,DateTime,25,29 Jan 2218,29 Jan 2218,True
+DateTime.000018,DateTime,DateTime,26,3 Apr 2008,3 Apr 2008,True
+DateTime.000023,DateTime,DateTime,1,03302241,03302241,True
+DateTime.000023,DateTime,DateTime,2,08022160,08022160,True
+DateTime.000023,DateTime,DateTime,3,05231984,05231984,True
+DateTime.000023,DateTime,DateTime,4,08151740,08151740,True
+DateTime.000023,DateTime,DateTime,5,07082237,07082237,True
+DateTime.000023,DateTime,DateTime,6,11031904,04031904,False
+DateTime.000023,DateTime,DateTime,7,04052088,04052088,True
+DateTime.000023,DateTime,DateTime,8,05302131,05302131,True
+DateTime.000023,DateTime,DateTime,9,05251817,05251817,True
+DateTime.000023,DateTime,DateTime,10,05311963,05311963,True
+DateTime.000023,DateTime,DateTime,11,11242098,11242098,True
+DateTime.000023,DateTime,DateTime,12,10221815,04221815,False
+DateTime.000023,DateTime,DateTime,13,05262155,05262155,True
+DateTime.000023,DateTime,DateTime,14,03261816,03261816,True
+DateTime.000023,DateTime,DateTime,15,04262090,04262090,True
+DateTime.000023,DateTime,DateTime,16,08142089,08142089,True
+DateTime.000023,DateTime,DateTime,17,04201957,04201957,True
+DateTime.000023,DateTime,DateTime,18,09111952,09111952,True
+DateTime.000023,DateTime,DateTime,19,11032114,03112114,False
+DateTime.000023,DateTime,DateTime,20,06212059,06212059,True
+DateTime.000023,DateTime,DateTime,21,01211818,01211818,True
+DateTime.000023,DateTime,DateTime,22,09162075,09162075,True
+DateTime.000023,DateTime,DateTime,23,10022204,10022204,True
+DateTime.000023,DateTime,DateTime,24,09021747,09021747,True
+DateTime.000023,DateTime,DateTime,25,01292218,01292218,True
+DateTime.000023,DateTime,DateTime,26,04032008,04032008,True
+DateTime.000025,DateTime,DateTime,1,Mar 41,Mar 41,True
+DateTime.000025,DateTime,DateTime,2,Aug 60,Aug 60,True
+DateTime.000025,DateTime,DateTime,3,May 84,May 84,True
+DateTime.000025,DateTime,DateTime,4,Aug 40,Aug 40,True
+DateTime.000025,DateTime,DateTime,5,Jul 37,Jul 37,True
+DateTime.000025,DateTime,DateTime,6,Nov 04,Nov 04,True
+DateTime.000025,DateTime,DateTime,7,Apr 88,Apr 88,True
+DateTime.000025,DateTime,DateTime,8,May 31,Mar 31,False
+DateTime.000025,DateTime,DateTime,9,May 17,May 17,True
+DateTime.000025,DateTime,DateTime,10,May 63,May 63,True
+DateTime.000025,DateTime,DateTime,11,Nov 98,Nov 98,True
+DateTime.000025,DateTime,DateTime,12,Oct 15,Oct 15,True
+DateTime.000025,DateTime,DateTime,13,May 55,May 55,True
+DateTime.000025,DateTime,DateTime,14,Mar 16,Mar 16,True
+DateTime.000025,DateTime,DateTime,15,Apr 90,Apr 90,True
+DateTime.000025,DateTime,DateTime,16,Aug 89,Aug 89,True
+DateTime.000025,DateTime,DateTime,17,Apr 57,Apr 57,True
+DateTime.000025,DateTime,DateTime,18,Sep 52,Sep 52,True
+DateTime.000025,DateTime,DateTime,19,Nov 14,Nov 14,True
+DateTime.000025,DateTime,DateTime,20,Jun 59,June 59,False
+DateTime.000025,DateTime,DateTime,21,Jan 18,Jan 18,True
+DateTime.000025,DateTime,DateTime,22,Sep 75,Sep 75,True
+DateTime.000025,DateTime,DateTime,23,Oct 04,Oct 04,True
+DateTime.000025,DateTime,DateTime,24,Sep 47,Sep 47,True
+DateTime.000025,DateTime,DateTime,25,Jan 18,Jan 18,True
+DateTime.000025,DateTime,DateTime,26,Apr 08,Apr 08,True
+DateTime.000027,DateTime,DateTime,1,Q1 '2241,Q1 '241,False
+DateTime.000027,DateTime,DateTime,2,Q3 '2160,Q1 '2160,False
+DateTime.000027,DateTime,DateTime,3,Q2 '1984,Q2 '1984,True
+DateTime.000027,DateTime,DateTime,4,Q3 '1740,Q2 '1740,False
+DateTime.000027,DateTime,DateTime,5,Q3 '2237,Q2 '2237,False
+DateTime.000027,DateTime,DateTime,6,Q4 '1904,Q4 '1904,True
+DateTime.000027,DateTime,DateTime,7,Q2 '2088,Q2 '2088,True
+DateTime.000027,DateTime,DateTime,8,Q2 '2131,Q1 '2131,False
+DateTime.000027,DateTime,DateTime,9,Q2 '1817,Q2 '1817,True
+DateTime.000027,DateTime,DateTime,10,Q2 '1963,Q2 '1963,True
+DateTime.000027,DateTime,DateTime,11,Q4 '2098,Q1 '1898,False
+DateTime.000027,DateTime,DateTime,12,Q4 '1815,Q4 '1815,True
+DateTime.000027,DateTime,DateTime,13,Q2 '2155,Q2 '2155,True
+DateTime.000027,DateTime,DateTime,14,Q1 '1816,Q1 '1816,True
+DateTime.000027,DateTime,DateTime,15,Q2 '2090,Q2 '2090,True
+DateTime.000027,DateTime,DateTime,16,Q3 '2089,Q3 '2089,True
+DateTime.000027,DateTime,DateTime,17,Q2 '1957,Q2 '1957,True
+DateTime.000027,DateTime,DateTime,18,Q3 '1952,Q3 '1952,True
+DateTime.000027,DateTime,DateTime,19,Q4 '2114,Q4 '2114,True
+DateTime.000027,DateTime,DateTime,20,Q2 '2059,Q2 '2059,True
+DateTime.000027,DateTime,DateTime,21,Q1 '1818,Q1 '1818,True
+DateTime.000027,DateTime,DateTime,22,Q3 '2075,Q3 '2075,True
+DateTime.000027,DateTime,DateTime,23,Q4 '2204,Q4 '2204,True
+DateTime.000027,DateTime,DateTime,24,Q3 '1747,Q3 '1747,True
+DateTime.000027,DateTime,DateTime,25,Q1 '2218,Q1 '2218,True
+DateTime.000027,DateTime,DateTime,26,Q2 '2008,Q1 '2008,False
+DateTime.000029,DateTime,DateTime,1,Tuesday,Sunday,False
+DateTime.000029,DateTime,DateTime,2,Saturday,Sunday,False
+DateTime.000029,DateTime,DateTime,3,Wednesday,Thursday,False
+DateTime.000029,DateTime,DateTime,4,Monday,Thursday,False
+DateTime.000029,DateTime,DateTime,5,Saturday,Sunday,False
+DateTime.000029,DateTime,DateTime,6,Thursday,Sunday,False
+DateTime.000029,DateTime,DateTime,7,Monday,Sunday,False
+DateTime.000029,DateTime,DateTime,8,Wednesday,Sunday,False
+DateTime.000029,DateTime,DateTime,9,Sunday,Thursday,False
+DateTime.000029,DateTime,DateTime,10,Friday,Sunday,False
+DateTime.000029,DateTime,DateTime,11,Monday,Thursday,False
+DateTime.000029,DateTime,DateTime,12,Sunday,Thursday,False
+DateTime.000029,DateTime,DateTime,13,Monday,Sunday,False
+DateTime.000029,DateTime,DateTime,14,Tuesday,Thursday,False
+DateTime.000029,DateTime,DateTime,15,Wednesday,Sunday,False
+DateTime.000029,DateTime,DateTime,16,Sunday,Sunday,True
+DateTime.000029,DateTime,DateTime,17,Saturday,Wednesday,False
+DateTime.000029,DateTime,DateTime,18,Thursday,Thursday,True
+DateTime.000029,DateTime,DateTime,19,Saturday,Sunday,False
+DateTime.000029,DateTime,DateTime,20,Saturday,Sunday,False
+DateTime.000029,DateTime,DateTime,21,Wednesday,Thursday,False
+DateTime.000029,DateTime,DateTime,22,Monday,Sunday,False
+DateTime.000029,DateTime,DateTime,23,Tuesday,Sunday,False
+DateTime.000029,DateTime,DateTime,24,Saturday,Sunday,False
+DateTime.000029,DateTime,DateTime,25,Thursday,Sunday,False
+DateTime.000029,DateTime,DateTime,26,Thursday,Thursday,True
+DateTime.000032,DateTime,DateTime,1,10:02 PM,10:02 PM,True
+DateTime.000032,DateTime,DateTime,2,9:53 AM,9:53 AM,True
+DateTime.000032,DateTime,DateTime,3,8:18 PM,1956-12-16 8:18 PM,False
+DateTime.000032,DateTime,DateTime,4,5:18 PM,1712-10-01 05:18 PM,False
+DateTime.000034,DateTime,"DateTime,Substring",1,2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000034,DateTime,"DateTime,Substring",2,2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000034,DateTime,"DateTime,Substring",3,2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000034,DateTime,"DateTime,Substring",4,2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000034,DateTime,"DateTime,Substring",5,2002-09-12 15:25:29,2002-09-12 15:25:29,True
+DateTime.000034,DateTime,"DateTime,Substring",6,2002-09-12 08:14:07,2002-09-12 08:14:07,True
+DateTime.000034,DateTime,"DateTime,Substring",7,2002-09-12 02:51:17,2002-09-12 02:51:17,True
+DateTime.000034,DateTime,"DateTime,Substring",8,2002-09-12 08:05:30,2002-09-12 08:05:30,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",1,2002-09-12 16:15:08,2002-09-12 16:15:08,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",2,2002-09-12 23:48:20,2002-09-12 23:48:20,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",3,2002-09-12 22:24:59,2002-09-12 22:24:59,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",4,2002-09-12 04:29:27,2002-09-12 04:29:27,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",5,2002-09-12 15:25:29,2002-09-12 15:25:29,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",6,2002-09-12 08:14:07,2002-09-12 08:14:07,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",7,2002-09-12 02:51:17,2002-09-12 02:51:17,True
+DateTime.000035,DateTime,"DateTime,Multicolumn",8,2002-09-12 08:05:30,2002-09-12 08:05:30,True
+DateTime.000040,DateTime,"DateTime,Substring",1,"January 31, 1846","January 31, 1846",True
+DateTime.000040,DateTime,"DateTime,Substring",2,"April 22, 1953","April 22, 1953",True
+DateTime.000040,DateTime,"DateTime,Substring",3,"March 30, 2241","March 30, 2241",True
+DateTime.000044,DateTime,DateTime,1,January the 31th 1846,January the 31st 1846,False
+DateTime.000044,DateTime,DateTime,2,April the 22th 1953,April the 22nd 1953,False
+DateTime.000044,DateTime,DateTime,3,March the 30th 2241,March the 30th 2241,True
+DateTime.000047,DateTime,DateTime,1,2143 14 7,2143 1 4,False
+DateTime.000047,DateTime,DateTime,2,2079 26 6,2079 26 6,True
+DateTime.000047,DateTime,DateTime,3,1995 19 6,1995 7 25,False
+DateTime.000047,DateTime,DateTime,4,2237 8 7,2237 8 7,True
+DateTime.000047,DateTime,DateTime,5,1904 3 11,1904 3 11,True
+DateTime.000047,DateTime,DateTime,6,2088 26 11,2088 3 1,False
+DateTime.000048,DateTime,"Concatenation,DateTimeRange,DateTimeRounding,DateTime",1,Between 6AM and 8AM,Between 7AM and 9AM,False
+DateTime.000048,DateTime,"Concatenation,DateTimeRange,DateTimeRounding,DateTime",2,Between 10PM and 12AM,Between 11PM and 12AM,False
+DateTime.000048,DateTime,"Concatenation,DateTimeRange,DateTimeRounding,DateTime",3,Between 4PM and 6PM,Between 4PM and 6PM,True
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,12:30PM-1:00PM,12:00PM-12:30PM,False
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,4:00AM-4:30AM,4:00AM-4:30AM,True
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,4:30AM-5:00AM,4:00AM-4:30AM,False
+DateTime.000056,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,11AM-1PM,Noon-2PM,False
+DateTime.000056,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,3AM-5AM,4AM-6AM,False
+DateTime.000056,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,3AM-5AM,4AM-6AM,False
+DateTime.000057,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,12:15PM-12:45PM,12:00PM-12:30PM,False
+DateTime.000057,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,4:15AM-4:45AM,4:15AM-4:45AM,True
+DateTime.000057,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,4:45AM-5:15AM,4:15AM-4:45AM,False
+DateTime.000059,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,11:30AM-12:30PM,11:30AM-12:30PM,True
+DateTime.000059,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,3:30AM-4:30AM,3:30AM-4:30AM,True
+DateTime.000059,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,3:30AM-4:30AM,3:30AM-4:30AM,True
+DateTime.000062,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,12:00:00PM-1:59:59PM,12:00:00PM-1:59:59PM,True
+DateTime.000062,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,4:00:00AM-5:59:59AM,4:00:00AM-5:59:59AM,True
+DateTime.000062,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,4:00:00AM-5:59:59AM,4:00:00AM-5:59:59AM,True
+DateTime.000064,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,12PM-1PM,Noon-1PM,False
+DateTime.000064,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,4AM-5AM,4AM-5AM,True
+DateTime.000064,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,4AM-5AM,4AM-5AM,True
+DateTime.000065,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,12:30PM-12:44PM,12:00PM-12:45PM,False
+DateTime.000065,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,4:15AM-4:29AM,4:15AM-4:22AM,False
+DateTime.000065,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,4:45AM-4:59AM,4:45AM-4:54AM,False
+DateTime.000067,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,12:00PM-1:20PM,11:30AM-12:50PM,False
+DateTime.000067,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,3:00AM-4:20AM,3:30AM-4:50AM,False
+DateTime.000067,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,4:30AM-5:50AM,3:54AM-4:50AM,False
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",1,0:00-19:00,10:00-29:00,False
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",2,40:00-59:00,40:00-59:00,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",3,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",4,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",5,20:00-39:00,20:00-39:00,True
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",6,0:00-19:00,10:00-29:00,False

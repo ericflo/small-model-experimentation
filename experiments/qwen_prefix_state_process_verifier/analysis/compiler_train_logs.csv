@@ -1,0 +1,12 @@
+run_dir,run,variant,phase,local_step,step,loss,train_examples,quick_answer_head_accuracy,quick_bytecode_accuracy,quick_program_exact,op_loss,arg_loss,answer_loss
+main_prefix_state_verifier_s512,main_prefix_state_verifier_s512,frozen_compiler,compiler_train,1,1,9.128870964050291,512,0.0,0.0,0.0,2.686487436294556,5.529237747192383,4.565730094909668
+main_prefix_state_verifier_s512,main_prefix_state_verifier_s512,frozen_compiler,compiler_train,150,150,0.96552973985672,512,0.125,0.1875,0.0,0.010971425101161,0.4510383605957031,2.517599582672119
+main_prefix_state_verifier_s512,main_prefix_state_verifier_s512,frozen_compiler,compiler_train,300,300,0.5167751312255859,512,0.171875,0.515625,0.265625,0.0128016173839569,0.0827424973249435,2.1061549186706543
+main_prefix_state_verifier_s512,main_prefix_state_verifier_s512,frozen_compiler,compiler_train,450,450,0.4002261459827423,512,0.203125,0.609375,0.3125,0.0016546740662306,0.0240945946425199,1.8723843097686768
+main_prefix_state_verifier_s512,main_prefix_state_verifier_s512,frozen_compiler,compiler_train,600,600,0.3563326001167297,512,0.25,0.65625,0.359375,0.0014125041197985,0.0084825782105326,1.7321875095367432
+pilot_prefix_state_verifier_s128,pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,1,1,9.065356254577637,128,0.0,0.03125,0.0,2.6377110481262207,5.492939472198486,4.673530578613281
+pilot_prefix_state_verifier_s128,pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,50,50,1.3399075269699097,128,0.125,0.125,0.0,0.1812874227762222,0.5645986795425415,2.970107078552246
+pilot_prefix_state_verifier_s128,pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,100,100,0.8227484822273254,128,0.09375,0.15625,0.0,0.0524543114006519,0.3852282166481018,1.9253296852111816
+pilot_prefix_state_verifier_s128,pilot_prefix_state_verifier_s128,frozen_compiler,compiler_train,150,150,0.5963160991668701,128,0.125,0.125,0.0,0.0239325799047946,0.2472589462995529,1.6256229877471924
+smoke_prefix_state_verifier,smoke_prefix_state_verifier,frozen_compiler,compiler_train,1,1,8.253166198730469,12,0.0,0.0,0.0,2.573479652404785,4.721176624298096,4.792550563812256
+smoke_prefix_state_verifier,smoke_prefix_state_verifier,frozen_compiler,compiler_train,2,2,7.114338397979736,12,0.25,0.0,0.0,2.1387815475463867,4.051390171051025,4.6208343505859375

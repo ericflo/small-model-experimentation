@@ -1,0 +1,193 @@
+{
+  "by_domain": {
+    "csv_etl": {
+      "candidate_count_mean": 86.95,
+      "filtered_coverage": 1.0,
+      "filtered_covered": 20,
+      "n": 20,
+      "raw_coverage": 1.0,
+      "raw_covered": 20,
+      "raw_removed_by_counterexamples": 0,
+      "visible_any": 20,
+      "visible_consistent_mean": 1.6,
+      "visible_hidden_wrong_candidates": 12,
+      "visible_hidden_wrong_rate": 0.375
+    },
+    "date_id_irregular": {
+      "candidate_count_mean": 27.0,
+      "filtered_coverage": 0.85,
+      "filtered_covered": 17,
+      "n": 20,
+      "raw_coverage": 0.95,
+      "raw_covered": 19,
+      "raw_removed_by_counterexamples": 2,
+      "visible_any": 19,
+      "visible_consistent_mean": 1.35,
+      "visible_hidden_wrong_candidates": 9,
+      "visible_hidden_wrong_rate": 0.3333333333333333
+    }
+  },
+  "filtered_depth_counts": {
+    "1": 32,
+    "2": 5
+  },
+  "overall": {
+    "candidate_count_mean": 56.975,
+    "filtered_coverage": 0.925,
+    "filtered_covered": 37,
+    "n": 40,
+    "raw_coverage": 0.975,
+    "raw_covered": 39,
+    "raw_removed_by_counterexamples": 2,
+    "visible_any": 39,
+    "visible_consistent_mean": 1.475,
+    "visible_hidden_wrong_candidates": 21,
+    "visible_hidden_wrong_rate": 0.3559322033898305
+  },
+  "raw_depth_counts": {
+    "1": 34,
+    "2": 5
+  },
+  "smoke": {
+    "by_domain": {
+      "smoke": {
+        "candidate_count_mean": 27.0,
+        "filtered_coverage": 0.0,
+        "filtered_covered": 0,
+        "n": 2,
+        "raw_coverage": 1.0,
+        "raw_covered": 2,
+        "raw_removed_by_counterexamples": 2,
+        "visible_any": 2,
+        "visible_consistent_mean": 1.5,
+        "visible_hidden_wrong_candidates": 3,
+        "visible_hidden_wrong_rate": 1.0
+      }
+    },
+    "filtered_depth_counts": {},
+    "overall": {
+      "candidate_count_mean": 27.0,
+      "filtered_coverage": 0.0,
+      "filtered_covered": 0,
+      "n": 2,
+      "raw_coverage": 1.0,
+      "raw_covered": 2,
+      "raw_removed_by_counterexamples": 2,
+      "visible_any": 2,
+      "visible_consistent_mean": 1.5,
+      "visible_hidden_wrong_candidates": 3,
+      "visible_hidden_wrong_rate": 1.0
+    },
+    "raw_depth_counts": {
+      "1": 2
+    }
+  },
+  "smoke_records": [
+    {
+      "candidate_count": 27,
+      "description": "Verify balanced parentheses, not merely distinct characters.",
+      "domain": "smoke",
+      "filtered_covered": false,
+      "filtered_winner_count": 0,
+      "raw_but_filtered_out": true,
+      "raw_covered": true,
+      "raw_winner_count": 1,
+      "task_id": "smoke_parentheses",
+      "visible_consistent_count": 1,
+      "visible_hidden_wrong_count": 1,
+      "visible_or_winning_candidates": [
+        {
+          "all_outputs": [
+            "True",
+            "True",
+            "False",
+            "True"
+          ],
+          "category": "generic",
+          "depth": 1,
+          "filtered_pass": false,
+          "name": "all_distinct_chars",
+          "program": {
+            "op": "all_distinct_chars"
+          },
+          "raw_outputs": [
+            "True",
+            "True"
+          ],
+          "raw_pass": true,
+          "visible_pass": true
+        }
+      ],
+      "winning_filtered_depth": null,
+      "winning_filtered_program": null,
+      "winning_raw_depth": 1,
+      "winning_raw_program": {
+        "op": "all_distinct_chars"
+      }
+    },
+    {
+      "candidate_count": 27,
+      "description": "Check whether month has 30 days.",
+      "domain": "smoke",
+      "filtered_covered": false,
+      "filtered_winner_count": 0,
+      "raw_but_filtered_out": true,
+      "raw_covered": true,
+      "raw_winner_count": 2,
+      "task_id": "smoke_month_30",
+      "visible_consistent_count": 2,
+      "visible_hidden_wrong_count": 2,
+      "visible_or_winning_candidates": [
+        {
+          "all_outputs": [
+            "True",
+            "True",
+            "False",
+            "False"
+          ],
+          "category": "generic",
+          "depth": 1,
+          "filtered_pass": false,
+          "name": "all_distinct_chars",
+          "program": {
+            "op": "all_distinct_chars"
+          },
+          "raw_outputs": [
+            "True",
+            "True"
+          ],
+          "raw_pass": true,
+          "visible_pass": true
+        },
+        {
+          "all_outputs": [
+            "True",
+            "True",
+            "True",
+            "True"
+          ],
+          "category": "date_id",
+          "depth": 1,
+          "filtered_pass": false,
+          "name": "bool_letters",
+          "program": {
+            "op": "bool_letters",
+            "pattern": "([A-Za-z]+)"
+          },
+          "raw_outputs": [
+            "True",
+            "True"
+          ],
+          "raw_pass": true,
+          "visible_pass": true
+        }
+      ],
+      "winning_filtered_depth": null,
+      "winning_filtered_program": null,
+      "winning_raw_depth": 1,
+      "winning_raw_program": {
+        "op": "all_distinct_chars"
+      }
+    }
+  ]
+}

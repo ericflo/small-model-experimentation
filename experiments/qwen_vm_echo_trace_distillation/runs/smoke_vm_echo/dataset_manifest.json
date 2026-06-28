@@ -1,0 +1,28 @@
+{
+  "run": "smoke_vm_echo",
+  "model_name": "Qwen/Qwen3-4B",
+  "seed": 31,
+  "sizes": {
+    "seed_train": 16,
+    "unlabeled_train": 16,
+    "full_supervised_train": 16,
+    "val_mixed": 16,
+    "fresh_standard": 16,
+    "fresh_paraphrase": 16,
+    "fresh_paired": 16,
+    "hard_composition": 16
+  },
+  "hidden_size": 2560,
+  "backend": "frozen_qwen_hidden_states",
+  "arms": [
+    "baseline",
+    "vm_echo"
+  ],
+  "echo_weights": {
+    "echo_weight": 0.35,
+    "trace": 1.0,
+    "depth": 0.4,
+    "final": 0.5,
+    "valid": 0.2
+  }
+}

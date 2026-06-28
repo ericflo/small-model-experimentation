@@ -1,0 +1,13 @@
+{
+  "run_name": "main_final",
+  "seed": 20260627,
+  "task_limit": 30,
+  "base_examples": 4,
+  "pool_examples": 5,
+  "eval_examples": 3,
+  "max_new_tokens": 64,
+  "tasks": 30,
+  "generation_records": 1890,
+  "started_utc": "2026-06-27T10:28:06.779017+00:00",
+  "elapsed_sec": 0.0894770622253418
+}

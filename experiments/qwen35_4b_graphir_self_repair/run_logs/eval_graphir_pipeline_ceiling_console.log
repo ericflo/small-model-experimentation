@@ -1,0 +1,360 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:52,  6.44it/s]Loading weights:   3%|▎         | 25/723 [00:00<00:05, 117.26it/s]Loading weights:   9%|▉         | 66/723 [00:00<00:02, 232.16it/s]Loading weights:  16%|█▌        | 114/723 [00:00<00:01, 317.29it/s]Loading weights:  21%|██        | 153/723 [00:00<00:01, 336.05it/s]Loading weights:  28%|██▊       | 201/723 [00:00<00:01, 375.48it/s]Loading weights:  34%|███▍      | 248/723 [00:00<00:01, 398.79it/s]Loading weights:  40%|████      | 291/723 [00:00<00:01, 402.87it/s]Loading weights:  46%|████▌     | 332/723 [00:00<00:00, 402.66it/s]Loading weights:  53%|█████▎    | 380/723 [00:01<00:00, 425.06it/s]Loading weights:  59%|█████▊    | 423/723 [00:01<00:00, 418.18it/s]Loading weights:  81%|████████▏ | 588/723 [00:01<00:00, 780.01it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 519.73it/s]
+repair:   0%|          | 0/120 [00:00<?, ?it/s]repair:   1%|          | 1/120 [00:12<24:26, 12.32s/it]repair:   2%|▏         | 2/120 [00:24<23:39, 12.03s/it]repair:   2%|▎         | 3/120 [00:36<23:48, 12.21s/it]repair:   5%|▌         | 6/120 [00:48<12:48,  6.74s/it]repair:   7%|▋         | 8/120 [00:59<11:53,  6.37s/it]repair:   8%|▊         | 9/120 [01:11<13:57,  7.55s/it]repair:   8%|▊         | 10/120 [01:21<14:59,  8.17s/it]repair:   9%|▉         | 11/120 [01:34<16:44,  9.22s/it]repair:  10%|█         | 12/120 [01:46<17:48,  9.89s/it]repair:  11%|█         | 13/120 [01:52<15:59,  8.96s/it]repair:  12%|█▏        | 14/120 [01:58<14:26,  8.18s/it]repair:  12%|█▎        | 15/120 [02:05<13:28,  7.70s/it]repair:  13%|█▎        | 16/120 [02:12<13:08,  7.58s/it]repair:  14%|█▍        | 17/120 [02:19<12:29,  7.27s/it]repair:  15%|█▌        | 18/120 [02:25<11:52,  6.98s/it]repair:  16%|█▌        | 19/120 [02:31<11:28,  6.81s/it]repair:  17%|█▋        | 20/120 [02:38<11:05,  6.66s/it]repair:  18%|█▊        | 21/120 [02:44<10:48,  6.55s/it]repair:  18%|█▊        | 22/120 [02:50<10:38,  6.52s/it]repair:  19%|█▉        | 23/120 [02:57<10:22,  6.42s/it]repair:  20%|██        | 24/120 [03:04<10:53,  6.81s/it]repair:  21%|██        | 25/120 [03:14<12:19,  7.79s/it]repair:  22%|██▎       | 27/120 [03:24<10:03,  6.49s/it]repair:  23%|██▎       | 28/120 [03:35<11:23,  7.43s/it]repair:  24%|██▍       | 29/120 [03:46<12:44,  8.40s/it]repair:  25%|██▌       | 30/120 [03:56<13:19,  8.89s/it]repair:  26%|██▌       | 31/120 [04:06<13:35,  9.17s/it]repair:  27%|██▋       | 32/120 [04:16<13:53,  9.47s/it]repair:  28%|██▊       | 33/120 [04:26<13:56,  9.61s/it]repair:  28%|██▊       | 34/120 [04:36<14:09,  9.88s/it]repair:  29%|██▉       | 35/120 [04:47<14:17, 10.09s/it]repair:  30%|███       | 36/120 [04:57<14:03, 10.04s/it]repair:  51%|█████     | 61/120 [05:05<01:07,  1.15s/it]repair:  52%|█████▏    | 62/120 [05:12<01:24,  1.46s/it]repair:  52%|█████▎    | 63/120 [05:19<01:45,  1.84s/it]repair:  53%|█████▎    | 64/120 [05:27<02:09,  2.31s/it]repair:  54%|█████▍    | 65/120 [05:35<02:42,  2.95s/it]repair:  55%|█████▌    | 66/120 [05:43<03:16,  3.65s/it]repair:  56%|█████▌    | 67/120 [05:50<03:45,  4.26s/it]repair:  57%|█████▋    | 68/120 [05:58<04:11,  4.84s/it]repair:  57%|█████▊    | 69/120 [06:05<04:34,  5.39s/it]repair:  58%|█████▊    | 70/120 [06:13<04:55,  5.90s/it]repair:  59%|█████▉    | 71/120 [06:20<05:06,  6.25s/it]repair:  60%|██████    | 72/120 [06:27<05:14,  6.55s/it]repair:  61%|██████    | 73/120 [06:33<04:56,  6.31s/it]repair:  62%|██████▏   | 74/120 [06:39<04:41,  6.12s/it]repair:  62%|██████▎   | 75/120 [06:45<04:42,  6.28s/it]repair:  63%|██████▎   | 76/120 [06:51<04:30,  6.15s/it]repair:  64%|██████▍   | 77/120 [06:57<04:18,  6.01s/it]repair:  65%|██████▌   | 78/120 [07:03<04:09,  5.94s/it]repair:  66%|██████▌   | 79/120 [07:09<04:06,  6.02s/it]repair:  67%|██████▋   | 80/120 [07:15<04:02,  6.07s/it]repair:  68%|██████▊   | 81/120 [07:23<04:16,  6.56s/it]repair:  68%|██████▊   | 82/120 [07:30<04:21,  6.87s/it]repair:  69%|██████▉   | 83/120 [07:37<04:16,  6.92s/it]repair:  70%|███████   | 84/120 [07:43<03:58,  6.63s/it]repair:  71%|███████   | 85/120 [07:55<04:42,  8.07s/it]repair:  72%|███████▏  | 86/120 [08:06<05:06,  9.02s/it]repair:  72%|███████▎  | 87/120 [08:17<05:17,  9.63s/it]repair:  73%|███████▎  | 88/120 [08:29<05:27, 10.24s/it]repair:  74%|███████▍  | 89/120 [08:40<05:31, 10.70s/it]repair:  75%|███████▌  | 90/120 [08:52<05:31, 11.04s/it]repair:  76%|███████▌  | 91/120 [09:04<05:27, 11.28s/it]repair:  77%|███████▋  | 92/120 [09:16<05:20, 11.43s/it]repair:  78%|███████▊  | 93/120 [09:27<05:08, 11.41s/it]repair:  78%|███████▊  | 94/120 [09:39<04:57, 11.44s/it]repair:  79%|███████▉  | 95/120 [09:52<04:56, 11.84s/it]repair:  80%|████████  | 96/120 [10:04<04:45, 11.91s/it]repair:  81%|████████  | 97/120 [10:11<04:01, 10.51s/it]repair:  83%|████████▎ | 100/120 [10:18<01:59,  5.96s/it]repair:  84%|████████▍ | 101/120 [10:25<01:55,  6.08s/it]repair:  85%|████████▌ | 102/120 [10:32<01:54,  6.38s/it]repair:  86%|████████▌ | 103/120 [10:39<01:51,  6.57s/it]repair:  87%|████████▋ | 104/120 [10:45<01:43,  6.46s/it]repair:  88%|████████▊ | 105/120 [10:52<01:39,  6.65s/it]repair:  88%|████████▊ | 106/120 [10:59<01:30,  6.49s/it]repair:  91%|█████████ | 109/120 [11:11<00:56,  5.15s/it]repair:  92%|█████████▏| 110/120 [11:22<01:03,  6.38s/it]repair:  92%|█████████▎| 111/120 [11:32<01:05,  7.33s/it]repair:  93%|█████████▎| 112/120 [11:44<01:06,  8.35s/it]repair:  95%|█████████▌| 114/120 [11:55<00:43,  7.28s/it]repair:  96%|█████████▌| 115/120 [12:06<00:40,  8.07s/it]repair:  97%|█████████▋| 116/120 [12:17<00:35,  8.80s/it]repair:  98%|█████████▊| 117/120 [12:28<00:28,  9.40s/it]repair:  98%|█████████▊| 118/120 [12:42<00:21, 10.52s/it]repair:  99%|█████████▉| 119/120 [12:53<00:10, 10.70s/it]repair: 100%|██████████| 120/120 [13:04<00:00, 10.83s/it]repair: 100%|██████████| 120/120 [13:04<00:00,  6.54s/it]
+{
+  "by_family": {
+    "sorted_index_sum_branch_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      }
+    },
+    "sorted_join_contains_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sum_len_mod_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "repair_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "repair_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      }
+    },
+    "sum_length_mod_gate_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      }
+    },
+    "text_absent_mod_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "text_value_gate_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_greedy_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "repair_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "repair_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "token_absent_length_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_hidden_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      }
+    },
+    "token_count_mod_length_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "construct_greedy_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "construct_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "repair_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "repair_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "tuple_sum_mod_gate_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_hidden_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      }
+    },
+    "tuple_value_mod_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    }
+  },
+  "overall": {
+    "construct_greedy_hidden_all": {
+      "rate": 0.21666666666666667,
+      "records": 120,
+      "successes": 26
+    },
+    "construct_greedy_visible_all": {
+      "rate": 0.26666666666666666,
+      "records": 120,
+      "successes": 32
+    },
+    "construct_rerank_hidden_all": {
+      "rate": 0.21666666666666667,
+      "records": 120,
+      "successes": 26
+    },
+    "construct_rerank_visible_all": {
+      "rate": 0.275,
+      "records": 120,
+      "successes": 33
+    },
+    "repair_hidden_all": {
+      "rate": 0.24166666666666667,
+      "records": 120,
+      "successes": 29
+    },
+    "repair_visible_all": {
+      "rate": 0.31666666666666665,
+      "records": 120,
+      "successes": 38
+    }
+  }
+}

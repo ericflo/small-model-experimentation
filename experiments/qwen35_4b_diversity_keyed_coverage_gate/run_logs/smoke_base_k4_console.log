@@ -1,0 +1,42 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   6%|▌         | 26/426 [00:00<00:01, 243.80it/s]Loading weights:  17%|█▋        | 74/426 [00:00<00:00, 367.42it/s]Loading weights:  28%|██▊       | 120/426 [00:00<00:00, 396.62it/s]Loading weights:  39%|███▉      | 167/426 [00:00<00:00, 420.41it/s]Loading weights:  49%|████▉     | 210/426 [00:00<00:00, 404.68it/s]Loading weights:  60%|█████▉    | 254/426 [00:00<00:00, 408.20it/s]Loading weights:  71%|███████   | 301/426 [00:00<00:00, 424.72it/s]Loading weights:  81%|████████  | 344/426 [00:00<00:00, 424.06it/s]Loading weights:  91%|█████████ | 387/426 [00:00<00:00, 415.11it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 407.16it/s]
+base-smoke_default:   0%|          | 0/8 [00:00<?, ?it/s]base-smoke_default:  12%|█▎        | 1/8 [00:16<01:55, 16.47s/it]base-smoke_default:  25%|██▌       | 2/8 [00:22<01:01, 10.22s/it]base-smoke_default:  38%|███▊      | 3/8 [00:29<00:43,  8.70s/it]base-smoke_default:  50%|█████     | 4/8 [00:44<00:45, 11.45s/it]base-smoke_default:  62%|██████▎   | 5/8 [00:58<00:36, 12.07s/it]base-smoke_default:  75%|███████▌  | 6/8 [01:06<00:21, 10.69s/it]base-smoke_default:  88%|████████▊ | 7/8 [01:10<00:08,  8.56s/it]base-smoke_default: 100%|██████████| 8/8 [01:16<00:00,  7.86s/it]base-smoke_default: 100%|██████████| 8/8 [01:16<00:00,  9.57s/it]
+{
+  "arm_name": "smoke_default",
+  "count": 8,
+  "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+  "max_new_tokens": 180,
+  "offset": 0,
+  "path": "data/smoke_base_k4_records.jsonl",
+  "records": {
+    "candidate_count_mean": 3.375,
+    "coverage": 0.75,
+    "distinct_behavior_rate_mean": 0.59375,
+    "distinct_functional_rate_mean": 0.38541666666666663,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.125,
+    "parse_success_mean": 3.375,
+    "records": 8,
+    "visible_candidates_mean": 2.375,
+    "visible_coverage": 0.75,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "smoke_base_k4",
+  "samples_per_task": 4,
+  "seed": 20260625,
+  "split": "mbpp_heldout",
+  "temperatures": "0.2,0.7,1.0",
+  "token_usage": {
+    "calls": 32,
+    "completion_tokens": 2066,
+    "forward_tokens": 6122,
+    "prompt_tokens": 4056
+  },
+  "top_p": 0.95,
+  "visible_tests": 1
+}

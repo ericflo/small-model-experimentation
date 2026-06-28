@@ -1,0 +1,19 @@
+{
+  "answer_max_new_tokens": 56,
+  "batch_max_new_tokens": 180,
+  "code_max_new_tokens": 520,
+  "gate_probe_score": 0.75,
+  "heldout_cap": 3,
+  "min_confident_probes": 2,
+  "min_heldout": 3,
+  "min_probe_consensus": 0.6666666666666666,
+  "no_qwen": false,
+  "probe_count": 2,
+  "probe_label_styles": "plain,rule,strict",
+  "repair_rounds": 1,
+  "run_name": "smoke_qwen_3_repair",
+  "seed": 20260628,
+  "task_limit": 3,
+  "train_n": 4,
+  "variants": "direct,helpers,regex,conditional"
+}

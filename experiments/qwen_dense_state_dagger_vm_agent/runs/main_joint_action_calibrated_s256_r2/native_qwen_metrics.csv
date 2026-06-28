@@ -1,0 +1,6 @@
+run,split,accuracy,parse_rate
+main_joint_action_calibrated_s256_r2,val_mixed,0.21875,0.96875
+main_joint_action_calibrated_s256_r2,fresh_standard,0.5625,1.0
+main_joint_action_calibrated_s256_r2,fresh_paraphrase,0.40625,1.0
+main_joint_action_calibrated_s256_r2,fresh_paired,0.3125,1.0
+main_joint_action_calibrated_s256_r2,hard_composition,0.25,1.0

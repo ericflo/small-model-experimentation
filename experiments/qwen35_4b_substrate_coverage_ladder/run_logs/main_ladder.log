@@ -1,0 +1,20 @@
+[1/9] task_id=16 entry=text_lowercase_underscore
+  candidates=62 visible_pass=4 hidden_solved=True elapsed=1.828s
+[2/9] task_id=26 entry=check_k_elements
+  candidates=36 visible_pass=4 hidden_solved=True elapsed=1.054s
+[3/9] task_id=31 entry=func
+  candidates=42 visible_pass=1 hidden_solved=True elapsed=1.215s
+[4/9] task_id=39 entry=rearange_string
+  candidates=63 visible_pass=1 hidden_solved=True elapsed=1.776s
+[5/9] task_id=43 entry=text_match
+  candidates=65 visible_pass=5 hidden_solved=True elapsed=1.843s
+[6/9] task_id=44 entry=text_match_string
+  candidates=66 visible_pass=9 hidden_solved=True elapsed=1.845s
+[7/9] task_id=48 entry=odd_bit_set_number
+  candidates=69 visible_pass=1 hidden_solved=True elapsed=1.955s
+[8/9] task_id=60 entry=max_len_sub
+  candidates=45 visible_pass=2 hidden_solved=True elapsed=1.265s
+[9/9] task_id=77 entry=is_Diff
+  candidates=63 visible_pass=3 hidden_solved=True elapsed=10.064s
+wrote data/main_substrate_results.jsonl
+wrote reports/main_summary.json

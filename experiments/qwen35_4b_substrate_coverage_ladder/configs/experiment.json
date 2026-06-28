@@ -1,0 +1,32 @@
+{
+  "experiment": "qwen35_4b_substrate_coverage_ladder",
+  "date": "2026-06-26",
+  "goal": "Measure whether an executable kernel/template substrate can express held-out MBPP tasks that remain unsolved by a large direct-sampling pool, before training any model to configure that substrate.",
+  "primary_metric": "hidden_test_oracle_coverage_on_k128_residual_tasks",
+  "secondary_metrics": [
+    "visible_pass_hidden_fail_rate",
+    "candidate_count",
+    "graph_size_proxy",
+    "per_task_solved_by_ladder_rung"
+  ],
+  "task_selection": {
+    "dataset": "MBPP held-out",
+    "selection_rule": "tasks with no hidden-correct candidate in the local K128 candidate-pool artifact",
+    "baseline_inputs": {
+      "coverage_index": "data/baseline_coverage_index.jsonl",
+      "residual_tasks": "data/residual_tasks.jsonl"
+    }
+  },
+  "arms": [
+    "manual_core",
+    "manual_expanded",
+    "retrieved_transplant",
+    "combined"
+  ],
+  "gates": {
+    "weak_gate_1": "Does any readable executable substrate candidate solve the residual tasks on hidden tests?",
+    "strict_gate_1": "Does a reusable substrate, not task-specific hand-authored templates, solve the residual tasks on hidden tests?",
+    "gate_2": "If hidden-test coverage is nontrivial, inspect visible-pass/hidden-fail rate before any training targets are trusted."
+  },
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_substrate_coverage_ladder"
+}

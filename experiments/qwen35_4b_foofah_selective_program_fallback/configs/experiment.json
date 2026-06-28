@@ -1,0 +1,31 @@
+{
+  "experiment": "qwen35_4b_foofah_selective_program_fallback",
+  "date": "2026-06-27",
+  "model": {
+    "name": "Qwen3.5-4B",
+    "local_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "generation": "greedy"
+  },
+  "dataset": {
+    "name": "Foofah benchmarks",
+    "source": "https://github.com/markjin1990/foofah_benchmarks",
+    "cases": "data/cases.jsonl",
+    "candidate_records": "data/candidate_records.jsonl",
+    "n": 250
+  },
+  "probe_design": {
+    "max_probes_per_visible_program": 3,
+    "probe_source": "deterministic perturbations of visible and test input tables",
+    "probe_answer_source": "Qwen3.5-4B direct JSON generation on probe inputs",
+    "program_probe_source": "execute candidate transform(table) on probe inputs"
+  },
+  "primary_metrics": [
+    "deployed exact accuracy",
+    "program commit count",
+    "program commit precision",
+    "direct-miss recoveries",
+    "direct-correct losses",
+    "counterexample probe agreement rate"
+  ]
+}
+

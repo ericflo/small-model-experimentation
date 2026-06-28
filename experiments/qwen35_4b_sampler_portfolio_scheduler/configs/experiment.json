@@ -1,0 +1,59 @@
+{
+  "experiment": "qwen35_4b_sampler_portfolio_scheduler",
+  "date": "2026-06-26",
+  "model": "Qwen/Qwen3.5-4B local snapshot",
+  "dataset": "MBPP",
+  "visible_tests": 1,
+  "objective": "Test whether complementary generation policies and a deployable scheduler improve coverage/sample efficiency relative to single-policy sample-more.",
+  "primary_success_criteria": [
+    "A deployable static portfolio or learned scheduler is on a better coverage/pass@1/forward-token Pareto frontier than base hot K=8.",
+    "Pass@1 proxy does not regress relative to base hot K=4 by more than 2 percentage points.",
+    "Parse rate stays within 5 percentage points of base hot K=4.",
+    "Oracle scheduler headroom is reported separately from deployable scheduler performance."
+  ],
+  "train_split": {
+    "split": "mbpp_train",
+    "count": 36,
+    "offset": 0
+  },
+  "eval_split": {
+    "split": "mbpp_test",
+    "count": 24,
+    "offset": 0
+  },
+  "sampling": {
+    "max_new_tokens": 220,
+    "generation_batch_size": 4,
+    "base_hot": {
+      "samples_per_task": 8,
+      "temperatures": [1.0],
+      "top_p": 0.98
+    },
+    "base_mixed": {
+      "samples_per_task": 8,
+      "temperatures": [0.2, 0.7, 1.0, 1.2],
+      "top_p": 0.98
+    },
+    "constrained_lora": {
+      "samples_per_task": 4,
+      "temperatures": [1.0],
+      "top_p": 0.98
+    }
+  },
+  "constrained_lora_training": {
+    "max_steps": 10,
+    "learning_rate": 0.00003,
+    "beta": 0.05,
+    "nll_weight": 0.08,
+    "anchor_weight": 0.08,
+    "batch_size": 1,
+    "grad_accum": 4,
+    "lora_r": 16,
+    "lora_alpha": 32
+  },
+  "scheduler": {
+    "prefix_policy": "base_hot",
+    "prefix_k": 2,
+    "blocks": ["stop", "hot_next4", "mixed_low4", "mixed_high4", "constrained4"]
+  }
+}

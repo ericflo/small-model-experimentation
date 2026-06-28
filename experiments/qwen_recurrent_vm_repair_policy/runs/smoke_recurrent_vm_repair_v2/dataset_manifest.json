@@ -1,0 +1,25 @@
+{
+  "run": "smoke_recurrent_vm_repair_v2",
+  "model_name": "Qwen/Qwen3-4B",
+  "seed": 173,
+  "sizes": {
+    "seed_train": 16,
+    "unlabeled_train": 32,
+    "full_supervised_train": 32,
+    "val_mixed": 16,
+    "fresh_standard": 16,
+    "fresh_paraphrase": 16,
+    "fresh_paired": 16,
+    "hard_composition": 16
+  },
+  "hidden_size": 2560,
+  "backend": "frozen_qwen_hidden_states_recurrent_vm_repair_policy",
+  "action_size": 1761,
+  "k_values": [
+    0,
+    1,
+    2,
+    4,
+    8
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "run_name": "main_v1",
+  "seed": 20260627,
+  "task_limit": 40,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "max_candidates": 40000,
+  "candidate_cache": "/workspace/experiments/qwen_full_table_consistency_reranker/runs/main_qwen_table_40/row_candidates.csv",
+  "tasks": 40,
+  "candidate_rows": 1428,
+  "started_utc": "2026-06-27T09:46:09.497287+00:00"
+}

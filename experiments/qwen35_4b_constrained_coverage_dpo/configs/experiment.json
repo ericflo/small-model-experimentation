@@ -1,0 +1,35 @@
+{
+  "experiment": "qwen35_4b_constrained_coverage_dpo",
+  "date": "2026-06-26",
+  "model": "Qwen/Qwen3.5-4B local snapshot",
+  "dataset": "MBPP full",
+  "visible_tests": 1,
+  "objective": "Test whether hard-negative coverage preference learning can keep its coverage-efficiency signal after explicit pass@1, parseability, and reference-distribution constraints.",
+  "primary_success_criteria": [
+    "Constrained DPO is on the coverage/pass@1/forward-token Pareto frontier versus tuned-hot K=4 and sample-more K=8.",
+    "Coverage@4 is at least sample-more K=8 coverage or matches it at materially lower forward-token cost.",
+    "Pass@1 proxy stays within 2 percentage points of tuned-hot K=4.",
+    "Parse successes per task stays within 5 percent of tuned-hot K=4.",
+    "Matched shuffled constrained-DPO underperforms real constrained-DPO."
+  ],
+  "training": {
+    "max_steps": 10,
+    "learning_rate": 0.00003,
+    "beta": 0.05,
+    "nll_weight": 0.08,
+    "anchor_weight": 0.08,
+    "batch_size": 1,
+    "grad_accum": 4,
+    "lora_r": 16,
+    "lora_alpha": 32
+  },
+  "eval": {
+    "split": "mbpp_test",
+    "count": 24,
+    "offset": 0,
+    "samples_per_task": [4, 8],
+    "temperature": 1.0,
+    "top_p": 0.98
+  }
+}
+

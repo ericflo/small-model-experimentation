@@ -1,0 +1,365 @@
+task_id,method,item_key,prompt_sha,raw
+Address.000002,direct_row,row0,c662ba161f974f0d,880 81th Place SE
+Address.000002,direct_row,row1,4b68c7c6d06a6ef4,256 32th Place NE
+Address.000002,direct_row,row2,89a0767888152fb7,526 03th Place NE
+Address.000002,direct_batch,batch,2baafbb2bf57a8cd,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000002,skill_rag,batch,542f783560ba7bdc,"[""880 81th Place SE"",""256 32th Place NE"",""526 03th Place NE""]"
+Address.000002,random_skill_rag,batch,cd74fe79ad316aa2,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000002,corrupt_skill_rag,batch,a9af95962e158019,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000013,direct_row,row0,e86b9f4c9a2c7cc6,89
+Address.000013,direct_row,row1,c7f75c3b7032094d,234
+Address.000013,direct_row,row2,127f9d8e0b523472,One Main Parkway
+Address.000013,direct_row,row3,ec555d7d21a7caf6,One Second Way
+Address.000013,direct_row,row4,c5aa954d998f38f6,789
+Address.000013,direct_row,row5,f5a39be159f08ff1,234
+Address.000013,direct_batch,batch,228f4aec35fdb124,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,skill_rag,batch,f8ede5123c2d3d29,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,random_skill_rag,batch,d9870e8d5a161192,"[""89"", ""234"", ""One Main Parkway"", ""One Second Way"", ""789"", ""234""]"
+Address.000013,corrupt_skill_rag,batch,581d6be34c50452c,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+BillingCode.000007,direct_row,row0,202fb668958a1d70,[11529]
+BillingCode.000007,direct_row,row1,0a549d9c6a8966c0,[PT-11529]
+BillingCode.000007,direct_row,row2,fc22e36029c3d829,[CPT-11529]
+BillingCode.000007,direct_batch,batch,c7afaa8dad160db4,"[""11529"",""PT-11529"",""[CPT-11529""]"
+BillingCode.000007,skill_rag,batch,71c1e912b166e2d0,"[""11529"", ""PT-11529"", ""CPT-11529""]"
+BillingCode.000007,random_skill_rag,batch,99a07ea5aaedda40,"[""11529"", ""PT-11529"", ""[CPT-11529]""]"
+BillingCode.000007,corrupt_skill_rag,batch,cf23c617766fd368,"[""11529"", ""PT-11529"", ""CPT-11529""]"
+City.000010,direct_row,row0,2c8f6e693591d382,9
+City.000010,direct_row,row1,c7c97be35ac61d84,20
+City.000010,direct_row,row2,f98abd0c2d5f7e7e,0
+City.000010,direct_batch,batch,7511c572975c9346,"[""9"", ""20"", ""0""]"
+City.000010,skill_rag,batch,e1e085a20d158ce1,"[""9"", ""20"", ""0""]"
+City.000010,random_skill_rag,batch,8c8f3571c5898669,"[""9"", ""20"", ""0""]"
+City.000010,corrupt_skill_rag,batch,6891f971c100c267,"[""9"", ""20"", ""0""]"
+City.000011,direct_row,row0,980a48dc23ed6e32,New York City
+City.000011,direct_row,row1,e31fe2477661b9bc,New York City
+City.000011,direct_row,row2,1cef8d6d420b184c,None
+City.000011,direct_row,row3,5a29fdc37e36dc5b,San Jose
+City.000011,direct_batch,batch,25889a0f266f9660,"[""New York City"", ""new york city"", ""None"", ""San Jose""]"
+City.000011,skill_rag,batch,7c013917245ea8ce,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,random_skill_rag,batch,11c515e6399c345f,"[""New York City"", ""new york city"", ""None"", ""SJ""]"
+City.000011,corrupt_skill_rag,batch,9de6a1da335fb274,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+Column.000001,direct_row,row0,2c8b02c05b5aaabd,Col1
+Column.000001,direct_row,row1,778ba9e2ff1cfe26,Col2
+Column.000001,direct_row,row2,2c8b02c05b5aaabd,Col1
+Column.000001,direct_row,row3,2c8b02c05b5aaabd,Col1
+Column.000001,direct_row,row4,efd15b9c9d3a4085,Col4
+Column.000001,direct_row,row5,bbeffbfbd95b4fd7,Col0
+Column.000001,direct_batch,batch,3b0cc9a3e5afbfe2,"[""Col1"",""Col2"",""Col1"",""Col1"",""Col4"",""Col0""]"
+Column.000001,skill_rag,batch,4502bb17089d5b6b,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,random_skill_rag,batch,99c5cbc3903b6443,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,corrupt_skill_rag,batch,6523f4d88c02767b,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+DateTime.000004,direct_row,row0,a9259c105edcc528,04:29:27 1858-12-08
+DateTime.000004,direct_row,row1,8fe02dcbd08176f5,09:08:38 2220-06-30
+DateTime.000004,direct_row,row2,d2328d03728d294b,21:46:13 1880-10-31
+DateTime.000004,direct_row,row3,e689c528ffc4c4a2,17:14:57 1963-05-31
+DateTime.000004,direct_row,row4,fe7b920969307365,20:35:50 2038-05-17
+DateTime.000004,direct_row,row5,18ffdcf5a4b7bcf2,20:07:33 2048-11-30
+DateTime.000004,direct_batch,batch,f31415188b9b541a,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,skill_rag,batch,69b6a1b6b0fcfc16,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,random_skill_rag,batch,3dbaee1ed84dd2f3,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,corrupt_skill_rag,batch,e13ed0076570d8af,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000007,direct_row,row0,3d9922414d8ff21e,Sep 2007
+DateTime.000007,direct_row,row1,80462e2f21172416,Dec 1953
+DateTime.000007,direct_row,row2,cfb53ec725a0a1d0,Nov 1987
+DateTime.000007,direct_row,row3,ab4d6e09f23f1327,Dec 1963
+DateTime.000007,direct_row,row4,3ff58fdf5259fa0f,Sep 1961
+DateTime.000007,direct_row,row5,ed728ef9da96b613,Jun 2041
+DateTime.000007,direct_batch,batch,39a387d3438bc65f,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,skill_rag,batch,9549e531fa24ad5a,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,random_skill_rag,batch,10f7d6bd083aee7c,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,corrupt_skill_rag,batch,98864a13481dab85,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000017,direct_row,row0,8dabd76fa8cf0750,30/3/2241
+DateTime.000017,direct_row,row1,2302a334934115d4,2/8/2160
+DateTime.000017,direct_row,row2,0695da4774979b89,23/5/1984
+DateTime.000017,direct_row,row3,7c429fddfe534a6a,15/8/1740
+DateTime.000017,direct_row,row4,45f9332e98f912dc,08/7/2237
+DateTime.000017,direct_row,row5,de35eda714529524,31/11/1904
+DateTime.000017,direct_batch,batch,ce5fe8bb2d97dd58,"[""3/0/2241"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000017,skill_rag,batch,b51bebb5c516a7e8,"[""3/30/2241"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000017,random_skill_rag,batch,ab3167a4eb28556e,"[""31/3/2241"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000017,corrupt_skill_rag,batch,3ef843661876ae7a,"[""3/30/2241"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000025,direct_row,row0,1e81cc2136fa90b1,Mar 41
+DateTime.000025,direct_row,row1,96570d5ce0ef5d17,Aug 60
+DateTime.000025,direct_row,row2,68fd430ff1545934,May 84
+DateTime.000025,direct_row,row3,8cc723effb85fcfc,Aug 40
+DateTime.000025,direct_row,row4,3af48704e54c75db,Jul 37
+DateTime.000025,direct_row,row5,b0c734d3734ae36b,Nov 04
+DateTime.000025,direct_batch,batch,66f1deed7801eb55,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,skill_rag,batch,24e0c66a211af5dd,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,random_skill_rag,batch,4cbdb04360b01c9d,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,corrupt_skill_rag,batch,c0515b2865c6b32b,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000027,direct_row,row0,410ca8a5b67a39d0,Q1 '241
+DateTime.000027,direct_row,row1,a6668ee230171e55,Q1 '160
+DateTime.000027,direct_row,row2,393ec131256ed8f5,Q2 '1984
+DateTime.000027,direct_row,row3,00ec0db620bb241c,Q2 '1740
+DateTime.000027,direct_row,row4,4533e9cbee562ad4,Q2 '2237
+DateTime.000027,direct_row,row5,512e042f536f9fa8,Q4 '1904
+DateTime.000027,direct_batch,batch,0d009367cc7510e7,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,skill_rag,batch,b0cc1ac71914c359,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q2 '2237"", ""Q4 '1904""]"
+DateTime.000027,random_skill_rag,batch,4023cd5fa87db45b,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,corrupt_skill_rag,batch,9c2f30bd257e001e,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000034,direct_row,row0,f9831eeabb4887f8,2002-09-12 16:15:08
+DateTime.000034,direct_row,row1,0242faf35b850071,2002-09-12 23:48:20
+DateTime.000034,direct_row,row2,2237f52f8c018210,2002-09-12 22:24:59
+DateTime.000034,direct_row,row3,c4d52baad74bbdc5,2002-09-12 04:29:27
+DateTime.000034,direct_row,row4,6f80b255a8b617b9,2002-09-12 15:25:29
+DateTime.000034,direct_row,row5,6983fbb6c8b6dc80,2002-09-12 08:14:07
+DateTime.000034,direct_batch,batch,df44cec068cd3968,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,skill_rag,batch,e53c2774d30985c7,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,random_skill_rag,batch,79d588cbd6e47ef8,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,corrupt_skill_rag,batch,847153ec1a7e5900,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000051,direct_row,row0,c24eb93aa49f48a3,12:00PM-12:30PM
+DateTime.000051,direct_row,row1,d2283017bffdb51b,4:00AM-4:30AM
+DateTime.000051,direct_row,row2,c2a0b91188419eb1,4:00AM-4:30AM
+DateTime.000051,direct_batch,batch,290a6b1335cee65c,"[""12:41AM-12:50AM"", ""4:22AM-4:30AM"", ""4:54AM-5:00AM""]"
+DateTime.000051,skill_rag,batch,cc1bbf34cb4f975d,"[""12:30PM-2:00PM"", ""3:30AM-5:00AM"", ""4:30AM-6:00AM""]"
+DateTime.000051,random_skill_rag,batch,b3051cfedbc31219,"[""12:00AM-12:30AM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]"
+DateTime.000051,corrupt_skill_rag,batch,0ae271afde99b283,"[""3:30AM-5:00AM"", ""11:00AM-12:30PM"", ""4:54AM-5:15AM""]"
+DateTime.000076,direct_row,row0,9d71edfe0be94e63,10:00-29:00
+DateTime.000076,direct_row,row1,eec39f00d71e5e0f,50:00-59:00
+DateTime.000076,direct_row,row2,dbf25d0fedbce0d2,20:00-39:00
+DateTime.000076,direct_row,row3,ada99fddfc8c3889,20:00-39:00
+DateTime.000076,direct_row,row4,2951d620f74ae63d,20:00-39:00
+DateTime.000076,direct_row,row5,8982b13355e292c9,10:00-29:00
+DateTime.000076,direct_batch,batch,7534c4b439c9aec0,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""10:00-29:00""]"
+DateTime.000076,skill_rag,batch,7ffa228d05e7edda,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""10:00-29:00""]"
+DateTime.000076,random_skill_rag,batch,c7748f4b093e7f16,"[""15:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""10:00-19:00""]"
+DateTime.000076,corrupt_skill_rag,batch,35e52fecfa91c35f,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000081,direct_row,row0,a49c54c4661c6236,4:15PM-4:30PM
+DateTime.000081,direct_row,row1,e3c1bd35b7284849,11:15PM-11:45PM
+DateTime.000081,direct_row,row2,103d6796580cf3ec,10:15PM-10:45PM
+DateTime.000081,direct_row,row3,fdbc5f70df79cf92,4:15AM-4:45AM
+DateTime.000081,direct_row,row4,628c07259210db0e,3:15PM-3:45PM
+DateTime.000081,direct_row,row5,a20f8cbd565354b9,8:15AM-8:30AM
+DateTime.000081,direct_batch,batch,d02eda2e30d50578,"[""4:15PM-4:30PM"", ""11:45PM-12:00AM"", ""10:15PM-10:30PM"", ""4:20AM-4:30AM"", ""3:15PM-3:30PM"", ""8:10AM-8:20AM""]"
+DateTime.000081,skill_rag,batch,0cb756b169fb6925,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,random_skill_rag,batch,842ecd4a2efcb656,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,corrupt_skill_rag,batch,58b8977cfb6c4bf2,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000094,direct_row,row0,81e941aa543c2159,2006-02-21
+DateTime.000094,direct_row,row1,54068f63a3de1b4e,1997-12-19
+DateTime.000094,direct_row,row2,5a29b1a803848976,2004-09-30
+DateTime.000094,direct_row,row3,bc9b88d20a14c37d,1967-05-18
+DateTime.000094,direct_batch,batch,58622285ac0b347c,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,skill_rag,batch,b0a6552244ccf636,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,random_skill_rag,batch,63836c5cfeae2a53,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,corrupt_skill_rag,batch,a93dea74b8da34ab,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000104,direct_row,row0,b2f87da6605cba7e,Jan
+DateTime.000104,direct_row,row1,61a02074a5aa1baf,Aug
+DateTime.000104,direct_row,row2,b2e87309e0011324,Dec
+DateTime.000104,direct_row,row3,053a4c790e17507b,Jul
+DateTime.000104,direct_row,row4,116a837be003db0f,Jan
+DateTime.000104,direct_row,row5,e82365aa5373afbe,Aug
+DateTime.000104,direct_batch,batch,388dc8b060c453fa,"[""Jan"",""Aug"",""Dec"",""Jul"",""Jan"",""Aug""]"
+DateTime.000104,skill_rag,batch,a348e7aa20541565,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,random_skill_rag,batch,0db4cf68168d7141,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,corrupt_skill_rag,batch,43366751d180efda,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000108,direct_row,row0,1c136377f7f08258,1/21/1985
+DateTime.000108,direct_row,row1,af3c34b453243713,8/16/1985
+DateTime.000108,direct_row,row2,fd3cf02fb90e032e,12/20/2033
+DateTime.000108,direct_row,row3,cdb266d2b3f0598b,7/16/1984
+DateTime.000108,direct_row,row4,e6b7a91e4ecec457,1/13/2038
+DateTime.000108,direct_row,row5,b4cfcd875cd579f6,8/14/1982
+DateTime.000108,direct_batch,batch,9bd29497de437f11,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,skill_rag,batch,0a3ee6a07cd57153,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,random_skill_rag,batch,98ae646465e2ab40,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,corrupt_skill_rag,batch,ee3912b1e601df2e,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000111,direct_row,row0,0897e4fcd10ce218,21/1/1985 5:44 AM
+DateTime.000111,direct_row,row1,82787494bae3a3b7,16/8/1985 1:11 AM
+DateTime.000111,direct_row,row2,de4ee53b7efab4df,20/12/2033 6:36 PM
+DateTime.000111,direct_row,row3,e1a6296bece4e9b0,16/7/1984 10:21 AM
+DateTime.000111,direct_row,row4,8f9f41b86c1edaad,13/1/2038 10:59 AM
+DateTime.000111,direct_row,row5,a49458b76e0e01a1,14/8/1982 3:13 PM
+DateTime.000111,direct_batch,batch,0d808fc3e86fdfa9,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,skill_rag,batch,b8675549162e31a4,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 AM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,random_skill_rag,batch,3c821a6b669423eb,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,corrupt_skill_rag,batch,d6e5a0b231e4a89d,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 AM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000114,direct_row,row0,28bc13bb1e7b1816,15-30
+DateTime.000114,direct_row,row1,3c646b8d9dabdfe0,25-40
+DateTime.000114,direct_row,row2,02e74d21af6e720a,25-40
+DateTime.000114,direct_row,row3,de8f0ed3da29d77e,25-40
+DateTime.000114,direct_row,row4,c2ede36ab694eda6,25-40
+DateTime.000114,direct_row,row5,5f6377f7c9e6201d,30-45
+DateTime.000114,direct_batch,batch,a9f516e4c9acdea6,"[""25-45"", ""30-45"", ""30-45"", ""15-30"", ""30-45"", ""30-45""]"
+DateTime.000114,skill_rag,batch,916df906d83fc6cc,"[""25-45"", ""11-30"", ""36-45"", ""21-30"", ""30-45"", ""30-45""]"
+DateTime.000114,random_skill_rag,batch,1f135a9bfc8a3ec5,"[""30-45"", ""15-30"", ""30-45"", ""15-30"", ""30-45"", ""15-30""]"
+DateTime.000114,corrupt_skill_rag,batch,77efb511bbc5c4ef,"[""25-45"", ""11-30"", ""36-45"", ""10-25"", ""10-25"", ""15-30""]"
+DateTime.000115,direct_row,row0,1550b4e66618a803,0-20
+DateTime.000115,direct_row,row1,0f8e3f3524affa23,0-20
+DateTime.000115,direct_row,row2,145224ee1f78cce0,0-20
+DateTime.000115,direct_row,row3,99dda88a5c72eb10,0-20
+DateTime.000115,direct_row,row4,830bd2bd7eb4de1b,0-20
+DateTime.000115,direct_row,row5,cbc384f3d1957d64,0-20
+DateTime.000115,direct_batch,batch,6e11c2b626d6e948,"[""0-20"",""0-20"",""0-20"",""0-20"",""0-20"",""0-20""]"
+DateTime.000115,skill_rag,batch,3aea80a4961133d3,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,random_skill_rag,batch,e09091f6b2a99cb7,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,corrupt_skill_rag,batch,ecd9f4bbf8b4c5f8,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000116,direct_row,row0,daf49649852b1584,5AM-7AM
+DateTime.000116,direct_row,row1,b7f517105a7b80f7,1AM-3AM
+DateTime.000116,direct_row,row2,66a73df5b173f4f6,6PM-8PM
+DateTime.000116,direct_row,row3,7e7c30ad790ee6d9,10AM-12PM
+DateTime.000116,direct_row,row4,a6b4af1aa2f0eb1a,10AM-12PM
+DateTime.000116,direct_row,row5,ef2398fa8b888870,3PM-5PM
+DateTime.000116,direct_batch,batch,6a691b22d1a3d37c,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,skill_rag,batch,6168828100d34ea0,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,random_skill_rag,batch,3b599bfb5055a12f,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,corrupt_skill_rag,batch,2b52439db13abaa7,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+FilePath.000001,direct_row,row0,143f68741c54a1e5,enim0
+FilePath.000001,direct_row,row1,78b3cfb00c445a94,enim3
+FilePath.000001,direct_row,row2,143f68741c54a1e5,enim0
+FilePath.000001,direct_row,row3,852ba7f06e57c0a0,enim6
+FilePath.000001,direct_row,row4,1426b619006b4ba9,enim0
+FilePath.000001,direct_row,row5,b5105996441a3f20,enim4
+FilePath.000001,direct_batch,batch,2a9decbac0584230,"[""enim0"",""enim3"",""enim0"",""enim6"",""enim0"",""enim4""]"
+FilePath.000001,skill_rag,batch,0b0d7c12f2514cbd,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,random_skill_rag,batch,b4a81954d15ffe7d,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,corrupt_skill_rag,batch,11bc06d12936a15a,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+Gender.000001,direct_row,row0,7b6b638b78eb77fa,0
+Gender.000001,direct_row,row1,6f0cdd5e4cd06f53,1
+Gender.000001,direct_row,row2,fd2d9fe149d0c872,1
+Gender.000001,direct_batch,batch,487fd5c06491849b,"[""0"", ""1"", ""2""]"
+Gender.000001,skill_rag,batch,d24efb7812778d0e,"[""M"", ""F"", ""Male""]"
+Gender.000001,random_skill_rag,batch,b3cedd63c306a4a2,"[""0"", ""1"", ""2""]"
+Gender.000001,corrupt_skill_rag,batch,529dc6f3ac20fc90,"[""M"", ""F"", ""Male""]"
+Language.000002,direct_row,row0,8e089aa0af6a1523,ca
+Language.000002,direct_row,row1,0b6342a63d4c89ae,zh
+Language.000002,direct_row,row2,d71a92537349c62f,hk
+Language.000002,direct_row,row3,7caf42724649b986,hr
+Language.000002,direct_row,row4,b1bd7379957ecd82,cs
+Language.000002,direct_row,row5,a681f2c3dc5efdc2,da
+Language.000002,direct_batch,batch,1eaef6b3463de631,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,skill_rag,batch,0653349b756bb6a4,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,random_skill_rag,batch,08dce88fcd7ae269,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,corrupt_skill_rag,batch,f5fe02d1f68a051a,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Name.000028,direct_row,row0,2f07827964253ff6,Rodel
+Name.000028,direct_row,row1,e90cf576959ae163,Jan
+Name.000028,direct_row,row2,3fbce81f5f501ec6,Antonia
+Name.000028,direct_row,row3,56dff7365201198a,Barbara
+Name.000028,direct_row,row4,a81fd7fca36744fe,Meena
+Name.000028,direct_row,row5,81003fa712079925,Afonso
+Name.000028,direct_batch,batch,378eac68ae98b625,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,skill_rag,batch,ecc432c8ed3e08c7,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,random_skill_rag,batch,34eb6250e021585b,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,corrupt_skill_rag,batch,154e9337b45b6eba,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Number.000008,direct_row,row0,ff8f437277527488,-13.578
+Number.000008,direct_row,row1,95634c3bea10bd8f,-19.611180
+Number.000008,direct_row,row2,5471b5cf0009ce22,-18.2929
+Number.000008,direct_row,row3,f95e52eea22deacc,-28.178
+Number.000008,direct_row,row4,e3d326fa047719be,29.721
+Number.000008,direct_row,row5,254eeafe1828316e,-11.1245
+Number.000008,direct_batch,batch,7838ec22cb3cef28,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""29.721"",""-11.1245""]"
+Number.000008,skill_rag,batch,cf5ff99b26dd0f7a,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""29.721"",""-11.1245""]"
+Number.000008,random_skill_rag,batch,09fad0b1e6d93c3e,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-28.178"", ""2.9721"", ""-11.1245""]"
+Number.000008,corrupt_skill_rag,batch,612290337bc52a35,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-2817.8"", ""2972.1"", ""-11.1245""]"
+Number.000015,direct_row,row0,a869152ca472e81d,-22500
+Number.000015,direct_row,row1,7e55e00663042c87,-3250
+Number.000015,direct_row,row2,f19f6eb3687a9df5,-3050
+Number.000015,direct_row,row3,927c5d015a9fad94,-47000
+Number.000015,direct_row,row4,1b0ecdb640767db6,49550
+Number.000015,direct_row,row5,5aaf67109b42ee04,-18550
+Number.000015,direct_batch,batch,674f62ba288d6099,"[""-22600"", ""-3250"", ""-3000"", ""-46900"", ""49500"", ""-18500""]"
+Number.000015,skill_rag,batch,c4a46e121e6fed4b,"[""-22630"", ""-3269"", ""-3049"", ""-46964"", ""49534"", ""-18541""]"
+Number.000015,random_skill_rag,batch,2c8c9e24263f543c,"[""-22630"", ""-3269"", ""-3049"", ""-46964"", ""49534"", ""-18541""]"
+Number.000015,corrupt_skill_rag,batch,978bf45db3a0e462,"[""-22630"", ""-3269"", ""-3049"", ""-46964"", ""49534"", ""-18541""]"
+Number.000016,direct_row,row0,01debb3761a82645,602
+Number.000016,direct_row,row1,7a9812e1c807354f,815
+Number.000016,direct_row,row2,2613ccd4109f15e7,817
+Number.000016,direct_row,row3,58a1a8807c832766,335
+Number.000016,direct_row,row4,b6868b5cf6e6bbf7,1395
+Number.000016,direct_row,row5,832442d9adff8b79,650
+Number.000016,direct_batch,batch,6e53075b6c56cb81,"{""0"": ""602"", ""1"": ""815"", ""2"": ""817"", ""3"": ""334"", ""4"": ""1395"", ""5"": ""647""}"
+Number.000016,skill_rag,batch,5da010e5c814460b,"[""600"", ""815"", ""815"", ""330"", ""1400"", ""650""]"
+Number.000016,random_skill_rag,batch,f6a0961fd3308e63,"[""600"", ""815"", ""816"", ""333"", ""1394"", ""646""]"
+Number.000016,corrupt_skill_rag,batch,e4da5d7db9d41477,"[""600"", ""815"", ""815"", ""330"", ""1400"", ""650""]"
+Number.000022,direct_row,row0,cb633d38f57a9582,12.1
+Number.000022,direct_row,row1,e50662cecc4884cb,20.35
+Number.000022,direct_row,row2,9e1efa129c41e092,18.1
+Number.000022,direct_row,row3,f3e9a16bafcee713,13.75
+Number.000022,direct_row,row4,295e27e5396b9941,6.55
+Number.000022,direct_row,row5,a2b0def4454ddf9f,19.85
+Number.000022,direct_batch,batch,d5db6efe6cdfc2cd,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,skill_rag,batch,0bfefc6357ebec30,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,random_skill_rag,batch,cff6c7b8ea2e9bcb,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,corrupt_skill_rag,batch,534bc7e7bde5f20b,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000028,direct_row,row0,39f6bd623727c3e1,10.000
+Number.000028,direct_row,row1,3495c2ec1a3b2f21,1202.343
+Number.000028,direct_row,row2,19e0f69a0de7d2a1,23224.100
+Number.000028,direct_batch,batch,4025613f9a9d92b1,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,skill_rag,batch,1562546413752380,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,random_skill_rag,batch,05a1301ab4107fa0,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,corrupt_skill_rag,batch,d6d5a2d542b9b719,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000029,direct_row,row0,a14b821544da41e1,11110
+Number.000029,direct_row,row1,542705de109a43b2,540
+Number.000029,direct_row,row2,3398490eef0be532,23220
+Number.000029,direct_batch,batch,7659cf4f2a94db93,"[""11118"", ""547"", ""23223""]"
+Number.000029,skill_rag,batch,0c769a494794f659,"[""11120"", ""540"", ""23220""]"
+Number.000029,random_skill_rag,batch,b6df47291141bd8e,"[""11120"", ""550"", ""23220""]"
+Number.000029,corrupt_skill_rag,batch,9608e47df1a6ebd3,"[""11120"", ""540"", ""23220""]"
+Number.000043,direct_row,row0,b8ddb6511e132b09,05-14
+Number.000043,direct_row,row1,8ac23c0ea3fd0475,09-21
+Number.000043,direct_row,row2,ff5aef4b79f447b2,08-14
+Number.000043,direct_row,row3,a3e7c109998619b2,11-16
+Number.000043,direct_row,row4,9bca77b2d876c7b1,09-24
+Number.000043,direct_row,row5,cb0816c34f95d823,12-18
+Number.000043,direct_batch,batch,1c389b23dcba4ba4,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,skill_rag,batch,fc951ebe7a354a8a,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,random_skill_rag,batch,44cb9cdc6d4e70c0,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,corrupt_skill_rag,batch,3e904c606e97d9f4,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000049,direct_row,row0,e59254db4e1c0939,8300
+Number.000049,direct_row,row1,672a6389dc4cb490,6000
+Number.000049,direct_row,row2,01420c1b8e24a433,10000
+Number.000049,direct_row,row3,abc0bc1653c5e20a,500
+Number.000049,direct_batch,batch,eefe95b0a57379e9,"{""0"": ""8300"", ""1"": ""6200"", ""2"": ""9800"", ""3"": ""4500""}"
+Number.000049,skill_rag,batch,c3a7054492b9c9db,"[""8000"", ""6000"", ""10000"", ""500""]"
+Number.000049,random_skill_rag,batch,3e9014c5f6890b16,"[""8000"", ""6000"", ""10000"", ""400""]"
+Number.000049,corrupt_skill_rag,batch,f5d87ba4a352754b,"[""8000"", ""6000"", ""10000"", ""500""]"
+Number.000075,direct_row,row0,adc1a028ed6899d0,$1.9B
+Number.000075,direct_row,row1,30d96a871ee4aeba,$2.3B
+Number.000075,direct_row,row2,34d187907a5ee506,$2.9B
+Number.000075,direct_row,row3,785b82a7529ccbac,$0.0B
+Number.000075,direct_row,row4,1cdf152b63456592,$0.0B
+Number.000075,direct_row,row5,5c78f95206dd7730,$0.0B
+Number.000075,direct_batch,batch,6440cbbf057fc014,"[""$1.9B"", ""$2.3B"", ""$3.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,skill_rag,batch,d066984481369804,"[""$1.9B"", ""$23.2B"", ""$29.97B"", ""$0.0B"", ""$0.0B"", ""$-0.0B""]"
+Number.000075,random_skill_rag,batch,a71be9856b3fc430,"[""$0.2B"", ""$2.3B"", ""$2.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,corrupt_skill_rag,batch,48bc2c9815b9de73,"[""$1.9B"", ""$23.2B"", ""$29.974B"", ""$0.0B"", ""$0.1B"", ""$-0.1B""]"
+Number.000077,direct_row,row0,73c94fef4cb1565d,110
+Number.000077,direct_row,row1,98dc980236847c34,11000
+Number.000077,direct_row,row2,cc9c75ef445e1241,540
+Number.000077,direct_batch,batch,d78d60e31fd86603,"[""11110"", ""11110"", ""546""]"
+Number.000077,skill_rag,batch,fe24a1a56c741574,"[""11110"", ""11120"", ""540""]"
+Number.000077,random_skill_rag,batch,52619d8bd4cc9214,"[""110"", ""110"", ""548""]"
+Number.000077,corrupt_skill_rag,batch,3e29938e64859cdb,"[""110"", ""11120"", ""548""]"
+Phone.000008,direct_row,row0,3a01e1fb5a880873,(311) 343-5301
+Phone.000008,direct_row,row1,80192deb5a84b2ca,(956) 100-1022
+Phone.000008,direct_row,row2,270cedb40356df4c,(106) 620-5226
+Phone.000008,direct_row,row3,0141419fe2110451,(873) 884-2783
+Phone.000008,direct_row,row4,c1db9c074bc81e71,(864) 453-3833
+Phone.000008,direct_row,row5,7b0a1637af0d478a,(712) 012-9104
+Phone.000008,direct_batch,batch,ed477857eee5d3b5,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,skill_rag,batch,9744d1962a5d9cf5,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,random_skill_rag,batch,8948c7e828b21c85,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,corrupt_skill_rag,batch,eeba7eea3e0acc25,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000011,direct_row,row0,a1ef4ae340c4606b,670 339 5712
+Phone.000011,direct_row,row1,ffaa11f55d21106f,734 124 7641
+Phone.000011,direct_row,row2,3f334a968a57ab33,878 662 8808
+Phone.000011,direct_batch,batch,7707adc2b87a4f08,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,skill_rag,batch,699db17e9c94cbf8,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,random_skill_rag,batch,34c56a4cb26c5c68,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,corrupt_skill_rag,batch,1e1c263ec4974277,"[""649 259 4922"", ""734 124 7641"", ""878 662 8808""]"
+ShippingCode.000008,direct_row,row0,c347b4c2ffcf9760,GU2 4205
+ShippingCode.000008,direct_row,row1,82266124445ef113,VDB 9545
+ShippingCode.000008,direct_row,row2,fd95ce4054283746,1KN 1261
+ShippingCode.000008,direct_batch,batch,7f784e9d361a7362,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,skill_rag,batch,d416ca8e3a418ce3,"[""GU2"", ""VDB"", ""1KN""]"
+ShippingCode.000008,random_skill_rag,batch,694a3e5156214725,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,corrupt_skill_rag,batch,eec14232ae68b86f,"[""GU2"", ""VDB"", ""1KN""]"
+UserAgent.000003,direct_row,row0,e16bb5db2129a0e4,FZ467
+UserAgent.000003,direct_row,row1,c93b5a54dccb4de0,RM VVUT
+UserAgent.000003,direct_row,row2,b7a1c1eb2e351801,QS QYFY
+UserAgent.000003,direct_row,row3,3f3f95d728bb0974,RO FQAJ
+UserAgent.000003,direct_row,row4,a776bb3e7dc1a190,NB-H486
+UserAgent.000003,direct_row,row5,0d3f856d23075bd2,EE-P295
+UserAgent.000003,direct_batch,batch,2c2ab7c9bb8543cc,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,skill_rag,batch,e6b36b0033d5c5bb,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,random_skill_rag,batch,b46f440a19c444f1,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,corrupt_skill_rag,batch,263138b4899c1520,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"

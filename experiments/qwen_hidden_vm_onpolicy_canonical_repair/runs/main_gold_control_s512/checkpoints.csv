@@ -1,0 +1,2 @@
+run,adapter_path,heads_path
+main_gold_control_s512,large_artifacts/qwen_hidden_vm_onpolicy_canonical_repair/checkpoints/main_gold_control_s512/adapter,large_artifacts/qwen_hidden_vm_onpolicy_canonical_repair/checkpoints/main_gold_control_s512/heads.pt

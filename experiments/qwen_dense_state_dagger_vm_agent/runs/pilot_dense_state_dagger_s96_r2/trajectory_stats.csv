@@ -1,0 +1,4 @@
+run,phase,n_examples,states,stop_labels,edit_labels,false_stop_states,rollout_success_rate,mean_states_per_example,mean_policy_steps
+pilot_dense_state_dagger_s96_r2,bc_teacher,96,679,91,588,0,0.9479166666666666,7.072916666666667,6.125
+pilot_dense_state_dagger_s96_r2,dagger_r1_states,96,113,15,98,81,0.15625,1.1770833333333333,0.17708333333333334
+pilot_dense_state_dagger_s96_r2,dagger_r2_states,96,534,24,510,66,0.25,5.5625,4.625

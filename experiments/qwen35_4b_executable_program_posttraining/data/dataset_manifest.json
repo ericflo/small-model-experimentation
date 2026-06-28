@@ -1,0 +1,27 @@
+{
+  "hidden_cases_per_record": 18,
+  "holdout_families": [
+    "modulo_sum_label",
+    "length_contains_code",
+    "tuple_branch_label"
+  ],
+  "holdout_records": 72,
+  "iid_eval_records": 60,
+  "seed": 20260622,
+  "train_families": [
+    "sum_label",
+    "mod_scalar_label",
+    "length_label",
+    "contains_code",
+    "tuple_get_label",
+    "scalar_branch_label",
+    "sum_threshold_label",
+    "length_mod_label",
+    "tuple_sum_label",
+    "contains_count_label",
+    "sorted_first_label",
+    "sum_add_label"
+  ],
+  "train_records": 240,
+  "visible_cases_per_record": 6
+}

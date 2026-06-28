@@ -1,0 +1,45 @@
+task_id,family,features,method,row_exact,full_task_exact,parse_ok,parse_status,output_count,outputs_json,targets_json,raw
+Number.000077,Number,"Numeric,NumericRounding",direct_row,0.3333333333333333,False,True,row_clean,3,"[""110"", ""11000"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+11000
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",direct_batch,0.6666666666666666,False,True,ok,3,"[""11110"", ""11110"", ""546""]","[""11110"", ""11110"", ""540""]","[""11110"", ""11110"", ""546""]"
+Number.000077,Number,"Numeric,NumericRounding",init_soft_row,0.3333333333333333,False,True,row_clean,3,"[""110"", ""110"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+110
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",learned_soft_row,0.0,False,True,row_clean,3,"[""110"", ""110"", ""110""]","[""11110"", ""11110"", ""540""]","110
+---
+110
+---
+110"
+Number.000077,Number,"Numeric,NumericRounding",shuffled_soft_row,0.0,False,True,row_clean,3,"[""110"", ""110"", ""110""]","[""11110"", ""11110"", ""540""]","110
+---
+110
+---
+110"
+Number.000077,Number,"Numeric,NumericRounding",learned_soft_batch,0.6666666666666666,False,True,ok,3,"[""11110"", ""11110"", ""546""]","[""11110"", ""11110"", ""540""]","[""11110"", ""11110"", ""546""]"
+UserAgent.000003,UserAgent,Substring,direct_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,direct_batch,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,UserAgent,Substring,init_soft_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,learned_soft_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,shuffled_soft_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,learned_soft_batch,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"

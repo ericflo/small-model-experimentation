@@ -1,0 +1,213 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Latent Recurrent Executor Experiment</title><style>
+body { margin:0; background:#f6f7f9; color:#17202a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.62; }
+main { max-width:960px; margin:0 auto; padding:56px 30px 84px; background:#fff; box-shadow:0 1px 18px rgba(20,30,40,.08); }
+h1 { font-size:2.35rem; line-height:1.12; margin:0 0 .4rem; color:#0f1720; }
+h2 { margin-top:2.2rem; padding-top:.45rem; border-top:1px solid #e5e7eb; color:#152238; }
+h3 { margin-top:1.5rem; color:#24364b; }
+p,li { font-size:1.02rem; }
+a { color:#1d5fa7; }
+code { background:#f0f3f6; padding:.12rem .28rem; border-radius:4px; }
+pre { background:#111827; color:#f9fafb; padding:1rem; border-radius:8px; overflow-x:auto; }
+pre code { background:transparent; padding:0; }
+table { border-collapse:collapse; width:100%; margin:1rem 0 1.4rem; font-size:.96rem; }
+th,td { border:1px solid #d7dde5; padding:.55rem .65rem; vertical-align:top; }
+th { background:#edf2f7; text-align:left; }
+img { display:block; max-width:100%; margin:1.2rem auto 1.8rem; border:1px solid #d8dee8; border-radius:6px; }
+blockquote { border-left:4px solid #8aa4c2; margin-left:0; padding-left:1rem; background:#f8fafc; color:#334155; }
+@media print { body{background:white;} main{box-shadow:none; max-width:none;} }
+</style></head><body><main><h1>A Latent Recurrent Executor That Scales With Internal Steps</h1>
+<p><strong>A controlled experiment on hidden-state program execution and test-time compute</strong></p>
+<h2>Abstract</h2>
+<p>This experiment tests whether a neural runtime can use invisible recurrent computation to execute symbolic programs. The task is exact two-register modular arithmetic. Each example contains initial register values, a latent program, and trace targets after every program step. The successful model maintains a categorical latent workspace over register values and applies learned instruction-conditioned transition operators one hidden step at a time. With dense trace supervision, it learns to execute modulo-97 programs trained only on lengths 1-8 and generalizes perfectly to held-out lengths 12, 16, and 24. Exact final-pair accuracy stays near chance while <code>K &lt; L</code>, then jumps to 100% once the internal recurrent step budget <code>K</code> reaches the program length <code>L</code>. Static and unstructured recurrent controls remain near chance. The result supports the narrow claim that latent recurrent execution can produce clean test-time-compute scaling when the state representation, supervision, and task structure are aligned.</p>
+<h2>Lay Summary</h2>
+<p>The model receives a hidden program like:</p>
+<pre><code class="language-text">A = A + 17
+B = B - 4
+A = A + 22
+...
+</code></pre>
+<p>It must update hidden register values one internal step at a time. If the program has 16 instructions, the model should need about 16 private steps. That is what happened. With too few private steps, it was wrong. Once it had enough internal steps to execute the whole program, it became perfectly correct, even for programs much longer than it saw during training.</p>
+<p>This does not prove that an arbitrary language model will automatically benefit from the same mechanism. It proves a narrower point: latent recurrent execution can work in a controlled neural setting when the runtime has a usable state representation and receives direct pressure to learn each intermediate transition.</p>
+<h2>1. Question</h2>
+<p>The experiment asks whether hidden recurrent computation can behave like an internal executor rather than a decorative state update. A convincing positive result should have a specific shape:</p>
+<pre><code class="language-text">K &lt; L: the runtime has not had enough internal steps to consume the whole program
+K &gt;= L: the runtime has enough steps to execute the program
+</code></pre>
+<p>For exact arithmetic, this should produce a threshold curve. Accuracy should be low before <code>K</code> reaches program length <code>L</code>, then high after <code>K</code> reaches <code>L</code>. The held-out length condition is central: if the model learns reusable transitions, it should execute programs longer than those used in training when given more internal steps at evaluation time.</p>
+<h2>2. Task</h2>
+<p>Programs operate on two registers, <code>A</code> and <code>B</code>, modulo <code>p</code>.</p>
+<p>The successful runs used the constant-operation family:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A=A+c</code></td>
+<td>add a constant to A</td>
+</tr>
+<tr>
+<td><code>A=A-c</code></td>
+<td>subtract a constant from A</td>
+</tr>
+<tr>
+<td><code>B=B+c</code></td>
+<td>add a constant to B</td>
+</tr>
+<tr>
+<td><code>B=B-c</code></td>
+<td>subtract a constant from B</td>
+</tr>
+</tbody>
+</table>
+<p>Each example has:</p>
+<ul>
+<li>random initial <code>A,B</code></li>
+<li>a random program of length <code>L</code></li>
+<li>exact trace targets after every prefix step</li>
+<li>exact final target <code>(A_L, B_L)</code></li>
+</ul>
+<p>Training lengths were 1-8. Evaluation lengths were 4, 8, 12, 16, and 24. Lengths 12, 16, and 24 therefore test recurrent length generalization.</p>
+<h2>3. Models</h2>
+<h3>Categorical Latent Executor</h3>
+<p>The successful model uses a structured latent workspace:</p>
+<pre><code class="language-text">state_t = distribution over A values + distribution over B values
+</code></pre>
+<p>At step <code>t</code>, the runtime reads latent instruction <code>t</code> and applies a learned transition matrix:</p>
+<pre><code class="language-text">P(A_{t+1}) = P(A_t) T_{op,arg}
+</code></pre>
+<p>or the same update for <code>B</code>, depending on the operation.</p>
+<p>The transition matrices are learned. The model is not handed the modular-addition table. It discovers transition operators from trace supervision. The state remains internal; the model does not emit code, a DSL, or scratch text.</p>
+<h3>Static Baseline</h3>
+<p>The static baseline embeds the whole program and initial registers, then predicts the final answer in one shot. It has no recurrent execution axis and therefore cannot trade more internal steps for better answers.</p>
+<h3>Unstructured Recurrent Control</h3>
+<p>The unstructured recurrent control uses a generic hidden state with a dynamic low-rank operator bank and fast-weight memory. It tests whether recurrence alone is enough without the categorical register representation.</p>
+<h2>4. Training</h2>
+<p>The categorical executor was trained with dense trace loss:</p>
+<pre><code class="language-text">loss = average_t CE(A_t) + CE(B_t)
+</code></pre>
+<p>Every internal step receives a target. This makes the training signal much denser than final-answer supervision alone and directly pressures the recurrent state to represent the next program prefix.</p>
+<p>Modulo-97 categorical run:</p>
+<ul>
+<li>modulus: 97</li>
+<li>train lengths: 1-8</li>
+<li>eval lengths: 4, 8, 12, 16, 24</li>
+<li>eval examples: 2,048 per length</li>
+<li>recurrent budgets: <code>K = 0,1,2,4,8,12,16,24</code></li>
+<li>optimizer: AdamW</li>
+<li>training checkpoint used: step 250</li>
+</ul>
+<h2>5. Main Result</h2>
+<p>The result is a clean threshold curve: for program length <code>L</code>, accuracy is near zero until <code>K</code> reaches <code>L</code>, then jumps to 100%.</p>
+<p><img alt="Modulo-97 K threshold heatmap" src="../analysis/figures/mod97_k_threshold_heatmap.png" /></p>
+<p>The same result as line curves:</p>
+<p><img alt="Modulo-97 K curves" src="../analysis/figures/mod97_k_curves.png" /></p>
+<p>Numerically:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Program length</th>
+<th style="text-align: right;">Best exact accuracy before <code>K &gt;= L</code></th>
+<th style="text-align: right;">First exact accuracy at <code>K &gt;= L</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.6%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.1%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.2%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The held-out lengths 12, 16, and 24 are the important cases. The model was trained only on lengths up to 8, but because it learned reusable recurrent transitions, it generalizes to longer programs as long as it is given enough internal steps.</p>
+<h2>6. Controls</h2>
+<p>The comparison below shows the categorical recurrent executor against three controls.</p>
+<p><img alt="Executor versus controls" src="../analysis/figures/executor_vs_controls.png" /></p>
+<p>Control outcomes:</p>
+<ul>
+<li>Static modulo-97 baseline: 0.0-0.1% exact-pair accuracy across lengths.</li>
+<li>Static modulo-31 baseline: near chance.</li>
+<li>Unstructured recurrent modulo-31 control: failed to learn exact execution and stayed around 1-3%.</li>
+</ul>
+<p>The static baseline result rules out a trivial "the program was easy to compile in one shot" explanation. The unstructured recurrent result shows that recurrence alone is not sufficient; the latent state representation and dense trace objective were decisive.</p>
+<h2>7. Interpretation</h2>
+<p>This experiment supports a specific mechanistic claim:</p>
+<blockquote>
+<p>A latent recurrent runtime can learn reusable internal state transitions such that increasing internal step budget <code>K</code> causally improves exact algorithmic performance.</p>
+</blockquote>
+<p>The result is not just "more computation sometimes helps." It has the expected executor shape:</p>
+<pre><code class="language-text">K &lt; L: cannot have consumed the whole latent program -&gt; wrong
+K &gt;= L: program fully executed -&gt; correct
+</code></pre>
+<p>That threshold is stronger evidence than a noisy monotonic trend because it ties the needed internal compute budget directly to the number of latent instructions.</p>
+<h2>8. Limits</h2>
+<p>This is not a full language-model reasoning result. The successful model is deliberately structured:</p>
+<ul>
+<li>It uses categorical latent register distributions.</li>
+<li>It uses a restricted constant-op program family.</li>
+<li>It receives dense trace supervision.</li>
+<li>The runtime has an explicit program counter.</li>
+</ul>
+<p>Those choices are controls. They establish the mechanism under conditions where it should work. The next step is to relax them one at a time and measure which pieces are actually necessary.</p>
+<h2>9. Next Iterations</h2>
+<p>The next experiments should make the executor less structured while preserving the clean K-scaling signal:</p>
+<ol>
+<li><strong>Add cross-register operations</strong> by using a joint categorical state over <code>(A,B)</code> or a factored state with correlation memory.</li>
+<li><strong>Replace direct instruction indexing with attention-based instruction selection</strong> and a learned halting/no-op mechanism.</li>
+<li><strong>Distill categorical execution into a dense hidden-state runtime</strong> so the model no longer carries explicit value distributions.</li>
+<li><strong>Embed the supervised runtime into a larger frozen model</strong> only after the standalone executor remains stable.</li>
+<li><strong>Use paired per-example K evaluation</strong> in all aggregate tests.</li>
+</ol>
+<h2>10. Reproducibility</h2>
+<p>Primary files:</p>
+<ul>
+<li>Experiment script: <code>../src/latent_executor_experiment.py</code></li>
+<li>Analysis script: <code>../src/analyze_latent_executor.py</code></li>
+<li>Experiment log: <code>latent_executor_experiment_log.md</code></li>
+<li>Results directory: <code>../runs/</code></li>
+<li>Analysis directory: <code>../analysis/</code></li>
+</ul>
+<p>Key run directories:</p>
+<ul>
+<li><code>../runs/pilot_categorical_mod31</code></li>
+<li><code>../runs/categorical_mod97</code></li>
+<li><code>../runs/static_mod31</code></li>
+<li><code>../runs/static_mod97</code></li>
+<li><code>../runs/pilot_executor_mod31</code></li>
+</ul>
+<p>Large checkpoint files are stored outside the experiment bundle under:</p>
+<ul>
+<li><code>../../../large_artifacts/latent_executor/checkpoints/</code></li>
+</ul>
+<p>Environment:</p>
+<ul>
+<li>Python 3.12.3</li>
+<li>PyTorch 2.8.0+cu128</li>
+<li>GPU: NVIDIA RTX 6000 Ada Generation</li>
+</ul>
+<h2>11. Bottom Line</h2>
+<p>The controlled executor worked. The reason it worked is instructive: recurrent latent computation needs a state representation that can carry the relevant variables and a training signal that teaches each intermediate transition. Under those conditions, K-scaling is not a vague trend; it becomes a sharp causal threshold. The model is wrong before it has enough latent steps and perfect after it has enough latent steps, including on programs three times longer than the training horizon.</p>
+<p>The next challenge is making the runtime less structured without losing the clean K-scaling signal.</p></main></body></html>

@@ -1,0 +1,69 @@
+[command] /usr/local/bin/python /workspace/experiments/qwen_compiler_multiseed_reattribution/src/qwen_compiler_multiseed_reattribution.py --model_id Qwen/Qwen3-4B --modulus 97 --train_examples 32 --eval_examples 8 --paired_eval_pairs 4 --batch_size 2 --grad_accum 1 --eval_batch_size 4 --max_length 2048 --head_width 192 --compiler_layers 1 --compiler_heads 4 --compiler_dropout 0.05 --expansion_noise 0.005 --trace_loss_weight 1.0 --executor_loss_weight 1.0 --state_loss_weight 1.0 --init_trace_loss_weight 4.0 --op_trace_loss_weight 1.0 --arg_trace_loss_weight 4.0 --direct_head_weight 0.0 --lr 2e-4 --weight_decay 0.0 --optimizer paged_adamw_8bit --max_grad_norm 1.0 --torch_dtype bf16 --load_in_4bit 1 --device_map auto --use_lora 1 --gradient_checkpointing 1 --lora_r 4 --lora_alpha 8 --lora_dropout 0.05 --lora_target_modules all-linear --log_interval 2 --save_checkpoints 0 --selection_split paired_L24 --selection_metric executor_pair_both_correct --eval_lengths 8,16,24 --train_template_mode mixed --stage_max_steps 8,16,24 --stage_min_lengths 1,1,8 --stage_train_max_lengths 8,16,24 --stage_steps 4,2,4 --expansion_mode copy_last --run_name pilot_expand_copy_seed123 --arm expand_copy --seed 123
+[load] Loading Qwen/Qwen3-4B with AutoModelForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights:   1%|          | 3/398 [00:00<00:19, 20.04it/s]
+Loading weights:  13%|█▎        | 53/398 [00:00<00:01, 254.20it/s]
+Loading weights:  23%|██▎       | 91/398 [00:00<00:01, 300.62it/s]
+Loading weights:  34%|███▍      | 136/398 [00:00<00:00, 352.18it/s]
+Loading weights:  44%|████▍     | 176/398 [00:00<00:00, 366.90it/s]
+Loading weights:  54%|█████▍    | 215/398 [00:00<00:00, 368.05it/s]
+Loading weights:  65%|██████▍   | 257/398 [00:00<00:00, 384.23it/s]
+Loading weights:  78%|███████▊  | 311/398 [00:00<00:00, 425.85it/s]
+Loading weights:  89%|████████▉ | 355/398 [00:00<00:00, 416.21it/s]
+Loading weights: 100%|█████████▉| 397/398 [00:01<00:00, 409.56it/s]
+Loading weights: 100%|██████████| 398/398 [00:01<00:00, 366.48it/s]
+trainable params: 8,257,536 || all params: 4,030,725,632 || trainable%: 0.2049
+/usr/local/lib/python3.12/dist-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+[stage] stage1_max8 event=init train_len=1..8 examples=32 steps=4
+/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+[train] stage1_max8 1/4 g=1 loss=46.4563 exec=4.5818 state_acc=0.000
+[train] stage1_max8 2/4 g=2 loss=47.4654 exec=4.5798 state_acc=0.000
+[train] stage1_max8 4/4 g=4 loss=47.9195 exec=4.5807 state_acc=0.000
+[eval] stage1_max8 standard_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage1_max8 paraphrase_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage1_max8 heldout_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage1_max8 paired_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage1_max8 paired_heldout_L8: executor=0.000 program=0.000 prefix=0.000
+[stage] stage2_max16 event=expand_8_to_16_copy_last train_len=1..16 examples=32 steps=2
+[train] stage2_max16 1/2 g=5 loss=46.5259 exec=4.5796 state_acc=0.000
+[train] stage2_max16 2/2 g=6 loss=46.5396 exec=4.5760 state_acc=0.000
+[eval] stage2_max16 standard_L8: executor=0.125 program=0.000 prefix=0.000
+[eval] stage2_max16 paraphrase_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage2_max16 heldout_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage2_max16 paired_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage2_max16 paired_heldout_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage2_max16 standard_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage2_max16 paraphrase_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage2_max16 heldout_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage2_max16 paired_L16: executor=0.125 program=0.000 prefix=0.000
+[eval] stage2_max16 paired_heldout_L16: executor=0.000 program=0.000 prefix=0.000
+[stage] stage3_max24 event=expand_16_to_24_copy_last train_len=8..24 examples=32 steps=4
+[train] stage3_max24 1/4 g=7 loss=46.2986 exec=4.5806 state_acc=0.000
+[train] stage3_max24 2/4 g=8 loss=45.9193 exec=4.5814 state_acc=0.000
+[train] stage3_max24 4/4 g=10 loss=44.4892 exec=4.5788 state_acc=0.000
+[eval] stage3_max24 standard_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paraphrase_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 heldout_L8: executor=0.125 program=0.000 prefix=0.000
+[eval] stage3_max24 paired_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paired_heldout_L8: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 standard_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paraphrase_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 heldout_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paired_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paired_heldout_L16: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 standard_L24: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paraphrase_L24: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 heldout_L24: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paired_L24: executor=0.000 program=0.000 prefix=0.000
+[eval] stage3_max24 paired_heldout_L24: executor=0.000 program=0.000 prefix=0.000
+{
+  "run": "pilot_expand_copy_seed123",
+  "elapsed_sec": 30.605,
+  "metrics_rows": 30
+}
+
+[exit] 0

@@ -1,0 +1,2644 @@
+split,example_id,length,answer,states,op_names,composition,program
+train,train_4_0_390313,4,8,"[2, 6, 4, 8]","[""mul_add"", ""list_index"", ""max_floor"", ""add""]",in_distribution_composition,"x = 0
+x = x * 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = max(x - 2, 0)
+x = x + 4
+answer = x"
+train,train_4_0_8168825,4,20,"[8, 11, 22, 20]","[""list_len"", ""add"", ""mul_add"", ""sub""]",in_distribution_composition,"x = 6
+x = x + len([5, 0])
+x = x + 3
+x = x * 2 + 0
+x = x - 2
+answer = x"
+train,train_16_0_1503754,16,11,"[5, 4, 8, 13, 14, 17, 15, 20, 19, 17, 21, 21, 24, 30, 14, 11]","[""branch"", ""max_floor"", ""list_len"", ""list_len"", ""min_cap"", ""add"", ""max_floor"", ""list_len"", ""branch"", ""max_floor"", ""list_len"", ""max_floor"", ""reverse_len"", ""reverse_len"", ""min_cap"", ""max_floor""]",in_distribution_composition,"x = 3
+if x > 11:
+    x = x - 1
+else:
+    x = x + 2
+x = max(x - 1, 4)
+x = x + len([4, 4, 6, 5])
+x = x + len([3, 5, 6, 8, 4])
+x = min(x + 4, 14)
+x = x + 3
+x = max(x - 2, 5)
+x = x + len([9, 5, 6, 4, 7])
+if x > 15:
+    x = x - 1
+else:
+    x = x + 1
+x = max(x - 2, 4)
+x = x + len([4, 7, 4, 3])
+x = max(x - 0, 16)
+x = x + len(""cat""[::-1])
+x = x + len(""violet""[::-1])
+x = min(x + 2, 14)
+x = max(x - 3, 7)
+answer = x"
+train,train_4_0_3464844,4,24,"[12, 15, 11, 24]","[""add"", ""list_len"", ""sub"", ""mul_add""]",in_distribution_composition,"x = 8
+x = x + 4
+x = x + len([1, 1, 9])
+x = x - 4
+x = x * 2 + 2
+answer = x"
+train,train_16_0_2701092,16,15,"[12, 7, 12, 15, 16, 19, 22, 26, 24, 26, 29, 26, 24, 27, 30, 15]","[""branch"", ""half_add"", ""reverse_len"", ""min_cap"", ""add"", ""str_len"", ""add"", ""str_len"", ""max_floor"", ""list_index"", ""reverse_len"", ""sub"", ""sub"", ""add"", ""str_len"", ""half_add""]",in_distribution_composition,"x = 8
+if x > 12:
+    x = x - 4
+else:
+    x = x + 4
+x = x // 2 + 1
+x = x + len(""stone""[::-1])
+x = min(x + 3, 20)
+x = x + 1
+x = x + len(""tea"")
+x = x + 3
+x = x + len(""lamp"")
+x = max(x - 2, 10)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len(""tea""[::-1])
+x = x - 3
+x = x - 2
+x = x + 3
+x = x + len(""cat"")
+x = x // 2 + 0
+answer = x"
+train,train_4_0_7580774,4,12,"[10, 14, 8, 12]","[""list_index"", ""reverse_len"", ""half_add"", ""reverse_len""]",in_distribution_composition,"x = 7
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len(""lamp""[::-1])
+x = x // 2 + 1
+x = x + len(""lamp""[::-1])
+answer = x"
+train,train_8_0_5029681,8,8,"[10, 14, 12, 14, 13, 8, 4, 8]","[""sub"", ""list_len"", ""max_floor"", ""min_cap"", ""max_floor"", ""half_add"", ""sub"", ""reverse_len""]",in_distribution_composition,"x = 11
+x = x - 1
+x = x + len([1, 9, 8, 0])
+x = max(x - 2, 12)
+x = min(x + 2, 19)
+x = max(x - 1, 1)
+x = x // 2 + 2
+x = x - 4
+x = x + len(""lamp""[::-1])
+answer = x"
+train,train_16_0_5096685,16,23,"[6, 7, 9, 13, 14, 11, 7, 11, 7, 10, 8, 13, 13, 15, 18, 23]","[""min_cap"", ""min_cap"", ""min_cap"", ""list_len"", ""list_index"", ""half_add"", ""half_add"", ""list_index"", ""branch"", ""reverse_len"", ""sub"", ""list_len"", ""max_floor"", ""branch"", ""list_len"", ""list_len""]",in_distribution_composition,"x = 5
+x = min(x + 1, 25)
+x = min(x + 1, 22)
+x = min(x + 2, 28)
+x = x + len([8, 5, 2, 9])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x // 2 + 4
+x = x // 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 8:
+    x = x - 4
+else:
+    x = x + 2
+x = x + len(""tea""[::-1])
+x = x - 2
+x = x + len([4, 1, 4, 4, 4])
+x = max(x - 0, 1)
+if x > 14:
+    x = x - 3
+else:
+    x = x + 2
+x = x + len([7, 7, 6])
+x = x + len([3, 6, 2, 4, 5])
+answer = x"
+train,train_8_2_695132,8,16,"[3, 4, 10, 15, 20, 12, 8, 16]","[""add"", ""list_index"", ""reverse_len"", ""str_len"", ""reverse_len"", ""half_add"", ""sub"", ""mul_add""]",in_distribution_composition,"x = 1
+x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x + len(""yellow""[::-1])
+x = x + len(""stone"")
+x = x + len(""river""[::-1])
+x = x // 2 + 2
+x = x - 4
+x = x * 2 + 0
+answer = x"
+train,train_8_0_9368355,8,18,"[8, 5, 10, 11, 15, 12, 14, 18]","[""str_len"", ""sub"", ""reverse_len"", ""add"", ""list_len"", ""max_floor"", ""add"", ""branch""]",in_distribution_composition,"x = 5
+x = x + len(""cat"")
+x = x - 3
+x = x + len(""orbit""[::-1])
+x = x + 1
+x = x + len([9, 9, 9, 3])
+x = max(x - 3, 8)
+x = x + 2
+if x > 19:
+    x = x - 4
+else:
+    x = x + 4
+answer = x"
+train,train_16_0_4506192,16,19,"[10, 13, 16, 16, 19, 22, 25, 30, 13, 19, 25, 30, 28, 26, 13, 19]","[""str_len"", ""add"", ""min_cap"", ""max_floor"", ""str_len"", ""add"", ""list_index"", ""str_len"", ""min_cap"", ""reverse_len"", ""reverse_len"", ""str_len"", ""max_floor"", ""sub"", ""min_cap"", ""str_len""]",in_distribution_composition,"x = 4
+x = x + len(""yellow"")
+x = x + 3
+x = min(x + 3, 16)
+x = max(x - 0, 16)
+x = x + len(""tea"")
+x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len(""orbit"")
+x = min(x + 1, 13)
+x = x + len(""yellow""[::-1])
+x = x + len(""yellow""[::-1])
+x = x + len(""river"")
+x = max(x - 2, 16)
+x = x - 2
+x = min(x + 3, 13)
+x = x + len(""yellow"")
+answer = x"
+train,train_16_2_2951565,16,7,"[13, 11, 14, 9, 18, 21, 23, 19, 13, 13, 17, 15, 17, 16, 8, 7]","[""min_cap"", ""sub"", ""list_len"", ""half_add"", ""mul_add"", ""str_len"", ""add"", ""branch"", ""min_cap"", ""max_floor"", ""branch"", ""branch"", ""list_index"", ""max_floor"", ""half_add"", ""max_floor""]",in_distribution_composition,"x = 10
+x = min(x + 3, 19)
+x = x - 2
+x = x + len([8, 9, 6])
+x = x // 2 + 2
+x = x * 2 + 0
+x = x + len(""cat"")
+x = x + 2
+if x > 10:
+    x = x - 4
+else:
+    x = x + 2
+x = min(x + 1, 13)
+x = max(x - 0, 7)
+if x > 19:
+    x = x - 2
+else:
+    x = x + 4
+if x > 10:
+    x = x - 2
+else:
+    x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = max(x - 1, 15)
+x = x // 2 + 0
+x = max(x - 1, 7)
+answer = x"
+train,train_16_1_1725065,16,9,"[3, 0, 5, 5, 1, 3, 6, 9, 12, 24, 17, 11, 9, 13, 11, 9]","[""list_len"", ""sub"", ""list_len"", ""list_index"", ""sub"", ""mul_add"", ""list_index"", ""list_index"", ""min_cap"", ""mul_add"", ""min_cap"", ""half_add"", ""branch"", ""min_cap"", ""sub"", ""sub""]",in_distribution_composition,"x = 1
+x = x + len([0, 1])
+x = x - 3
+x = x + len([5, 6, 4, 6, 0])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x - 4
+x = x * 2 + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 3, 14)
+x = x * 2 + 0
+x = min(x + 3, 17)
+x = x // 2 + 3
+if x > 10:
+    x = x - 2
+else:
+    x = x + 3
+x = min(x + 4, 18)
+x = x - 2
+x = x - 2
+answer = x"
+train,train_8_0_1345431,8,14,"[3, 6, 10, 7, 11, 14, 11, 14]","[""half_add"", ""list_index"", ""branch"", ""max_floor"", ""list_len"", ""add"", ""sub"", ""branch""]",in_distribution_composition,"x = 2
+x = x // 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+if x > 18:
+    x = x - 1
+else:
+    x = x + 4
+x = max(x - 3, 5)
+x = x + len([0, 4, 5, 3])
+x = x + 3
+x = x - 3
+if x > 18:
+    x = x - 3
+else:
+    x = x + 3
+answer = x"
+train,train_16_3_9890388,16,30,"[3, 8, 6, 9, 6, 11, 13, 16, 21, 25, 29, 27, 31, 31, 31, 30]","[""mul_add"", ""mul_add"", ""sub"", ""add"", ""sub"", ""list_len"", ""branch"", ""list_len"", ""list_len"", ""list_index"", ""list_len"", ""sub"", ""str_len"", ""list_index"", ""max_floor"", ""sub""]",in_distribution_composition,"x = 1
+x = x * 2 + 1
+x = x * 2 + 2
+x = x - 2
+x = x + 3
+x = x - 3
+x = x + len([6, 8, 4, 7, 7])
+if x > 11:
+    x = x - 3
+else:
+    x = x + 2
+x = x + len([9, 5, 1])
+x = x + len([0, 7, 8, 2, 0])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len([5, 1, 4, 1])
+x = x - 2
+x = x + len(""lamp"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = max(x - 0, 12)
+x = x - 1
+answer = x"
+train,train_4_0_6079781,4,22,"[24, 22, 26, 22]","[""mul_add"", ""sub"", ""list_index"", ""branch""]",in_distribution_composition,"x = 12
+x = x * 2 + 0
+x = x - 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 14:
+    x = x - 4
+else:
+    x = x + 1
+answer = x"
+train,train_16_3_2522106,16,9,"[13, 11, 12, 9, 14, 8, 5, 11, 23, 20, 18, 14, 18, 16, 15, 9]","[""add"", ""sub"", ""add"", ""max_floor"", ""reverse_len"", ""half_add"", ""half_add"", ""mul_add"", ""mul_add"", ""branch"", ""branch"", ""sub"", ""list_index"", ""max_floor"", ""min_cap"", ""half_add""]",in_distribution_composition,"x = 9
+x = x + 4
+x = x - 2
+x = x + 1
+x = max(x - 3, 4)
+x = x + len(""orbit""[::-1])
+x = x // 2 + 1
+x = x // 2 + 1
+x = x * 2 + 1
+x = x * 2 + 1
+if x > 20:
+    x = x - 3
+else:
+    x = x + 1
+if x > 9:
+    x = x - 2
+else:
+    x = x + 1
+x = x - 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = max(x - 2, 8)
+x = min(x + 4, 15)
+x = x // 2 + 2
+answer = x"
+train,train_4_0_431809,4,12,"[6, 7, 10, 12]","[""half_add"", ""half_add"", ""branch"", ""min_cap""]",in_distribution_composition,"x = 4
+x = x // 2 + 4
+x = x // 2 + 4
+if x > 19:
+    x = x - 2
+else:
+    x = x + 3
+x = min(x + 2, 22)
+answer = x"
+train,train_8_1_9346111,8,13,"[5, 10, 14, 12, 15, 13, 12, 13]","[""sub"", ""str_len"", ""list_len"", ""sub"", ""add"", ""branch"", ""sub"", ""add""]",in_distribution_composition,"x = 7
+x = x - 2
+x = x + len(""orbit"")
+x = x + len([9, 6, 9, 2])
+x = x - 2
+x = x + 3
+if x > 9:
+    x = x - 2
+else:
+    x = x + 3
+x = x - 1
+x = x + 1
+answer = x"
+train,train_8_0_2233012,8,10,"[8, 13, 7, 10, 14, 9, 12, 10]","[""max_floor"", ""list_len"", ""half_add"", ""str_len"", ""add"", ""half_add"", ""add"", ""half_add""]",in_distribution_composition,"x = 9
+x = max(x - 1, 6)
+x = x + len([8, 7, 9, 6, 4])
+x = x // 2 + 1
+x = x + len(""cat"")
+x = x + 4
+x = x // 2 + 2
+x = x + 3
+x = x // 2 + 4
+answer = x"
+train,train_8_0_7514360,8,10,"[7, 9, 11, 7, 14, 12, 16, 10]","[""max_floor"", ""list_index"", ""add"", ""sub"", ""mul_add"", ""max_floor"", ""list_index"", ""half_add""]",in_distribution_composition,"x = 8
+x = max(x - 1, 4)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + 2
+x = x - 4
+x = x * 2 + 0
+x = max(x - 2, 5)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x // 2 + 2
+answer = x"
+train,train_4_0_5938486,4,19,"[8, 7, 14, 19]","[""branch"", ""max_floor"", ""mul_add"", ""reverse_len""]",in_distribution_composition,"x = 6
+if x > 22:
+    x = x - 4
+else:
+    x = x + 2
+x = max(x - 1, 5)
+x = x * 2 + 0
+x = x + len(""river""[::-1])
+answer = x"
+train,train_8_0_976123,8,18,"[14, 16, 9, 15, 19, 17, 15, 18]","[""str_len"", ""list_index"", ""half_add"", ""max_floor"", ""list_index"", ""branch"", ""max_floor"", ""list_index""]",in_distribution_composition,"x = 8
+x = x + len(""violet"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x // 2 + 1
+x = max(x - 0, 15)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 16:
+    x = x - 2
+else:
+    x = x + 3
+x = max(x - 2, 10)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+answer = x"
+train,train_4_0_3098408,4,13,"[13, 17, 21, 13]","[""reverse_len"", ""list_len"", ""list_len"", ""min_cap""]",in_distribution_composition,"x = 8
+x = x + len(""stone""[::-1])
+x = x + len([8, 9, 5, 9])
+x = x + len([6, 5, 1, 0])
+x = min(x + 2, 13)
+answer = x"
+val,val_4_0_8676581,4,15,"[2, 3, 6, 15]","[""mul_add"", ""half_add"", ""str_len"", ""max_floor""]",in_distribution_composition,"x = 1
+x = x * 2 + 0
+x = x // 2 + 2
+x = x + len(""cat"")
+x = max(x - 0, 15)
+answer = x"
+val,val_16_0_9713768,16,30,"[2, 7, 10, 7, 12, 8, 5, 8, 12, 13, 14, 11, 15, 19, 25, 30]","[""half_add"", ""str_len"", ""list_len"", ""half_add"", ""str_len"", ""half_add"", ""sub"", ""list_index"", ""add"", ""branch"", ""list_index"", ""branch"", ""min_cap"", ""min_cap"", ""str_len"", ""reverse_len""]",in_distribution_composition,"x = 0
+x = x // 2 + 2
+x = x + len(""orbit"")
+x = x + len([7, 4, 4])
+x = x // 2 + 2
+x = x + len(""orbit"")
+x = x // 2 + 2
+x = x - 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + 4
+if x > 24:
+    x = x - 2
+else:
+    x = x + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+if x > 12:
+    x = x - 3
+else:
+    x = x + 2
+x = min(x + 4, 26)
+x = min(x + 4, 26)
+x = x + len(""violet"")
+x = x + len(""stone""[::-1])
+answer = x"
+val,val_16_0_944835,16,28,"[14, 17, 22, 27, 27, 29, 16, 20, 12, 17, 23, 20, 22, 25, 24, 28]","[""min_cap"", ""list_len"", ""list_len"", ""str_len"", ""max_floor"", ""list_index"", ""half_add"", ""branch"", ""min_cap"", ""str_len"", ""reverse_len"", ""max_floor"", ""list_index"", ""list_index"", ""branch"", ""add""]",in_distribution_composition,"x = 12
+x = min(x + 2, 14)
+x = x + len([5, 3, 0])
+x = x + len([8, 3, 4, 8, 1])
+x = x + len(""stone"")
+x = max(x - 0, 15)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x // 2 + 2
+if x > 23:
+    x = x - 3
+else:
+    x = x + 4
+x = min(x + 1, 12)
+x = x + len(""river"")
+x = x + len(""violet""[::-1])
+x = max(x - 3, 3)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+if x > 10:
+    x = x - 1
+else:
+    x = x + 4
+x = x + 4
+answer = x"
+val,val_16_2_2706986,16,21,"[0, 4, 9, 14, 18, 17, 19, 23, 27, 25, 23, 25, 30, 28, 16, 21]","[""half_add"", ""reverse_len"", ""list_len"", ""reverse_len"", ""list_len"", ""sub"", ""branch"", ""list_len"", ""list_len"", ""branch"", ""max_floor"", ""list_len"", ""str_len"", ""sub"", ""min_cap"", ""reverse_len""]",in_distribution_composition,"x = 1
+x = x // 2 + 0
+x = x + len(""lamp""[::-1])
+x = x + len([6, 2, 1, 6, 2])
+x = x + len(""orbit""[::-1])
+x = x + len([0, 6, 8, 5])
+x = x - 1
+if x > 21:
+    x = x - 1
+else:
+    x = x + 2
+x = x + len([4, 6, 5, 0])
+x = x + len([5, 3, 8, 5])
+if x > 21:
+    x = x - 2
+else:
+    x = x + 2
+x = max(x - 2, 14)
+x = x + len([5, 0])
+x = x + len(""orbit"")
+x = x - 2
+x = min(x + 4, 16)
+x = x + len(""orbit""[::-1])
+answer = x"
+val,val_4_0_1072450,4,18,"[7, 11, 16, 18]","[""reverse_len"", ""min_cap"", ""str_len"", ""list_len""]",in_distribution_composition,"x = 4
+x = x + len(""tea""[::-1])
+x = min(x + 4, 13)
+x = x + len(""stone"")
+x = x + len([8, 8])
+answer = x"
+val,val_8_0_752429,8,24,"[15, 20, 10, 13, 17, 18, 21, 24]","[""list_len"", ""list_len"", ""half_add"", ""branch"", ""add"", ""min_cap"", ""add"", ""reverse_len""]",in_distribution_composition,"x = 11
+x = x + len([7, 9, 1, 6])
+x = x + len([1, 8, 4, 0, 6])
+x = x // 2 + 0
+if x > 22:
+    x = x - 4
+else:
+    x = x + 3
+x = x + 4
+x = min(x + 1, 29)
+x = x + 3
+x = x + len(""cat""[::-1])
+answer = x"
+val,val_16_0_3442688,16,18,"[4, 8, 12, 14, 19, 23, 27, 14, 16, 12, 10, 10, 15, 14, 17, 18]","[""half_add"", ""mul_add"", ""min_cap"", ""min_cap"", ""reverse_len"", ""reverse_len"", ""list_len"", ""min_cap"", ""list_len"", ""sub"", ""branch"", ""max_floor"", ""reverse_len"", ""sub"", ""add"", ""list_index""]",in_distribution_composition,"x = 7
+x = x // 2 + 1
+x = x * 2 + 0
+x = min(x + 4, 30)
+x = min(x + 2, 21)
+x = x + len(""river""[::-1])
+x = x + len(""lamp""[::-1])
+x = x + len([2, 2, 7, 6])
+x = min(x + 1, 14)
+x = x + len([6, 1])
+x = x - 4
+if x > 9:
+    x = x - 2
+else:
+    x = x + 3
+x = max(x - 0, 6)
+x = x + len(""stone""[::-1])
+x = x - 1
+x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+answer = x"
+val,val_4_1_5249803,4,13,"[14, 18, 17, 13]","[""branch"", ""list_index"", ""sub"", ""branch""]",in_distribution_composition,"x = 11
+if x > 16:
+    x = x - 2
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x - 1
+if x > 13:
+    x = x - 4
+else:
+    x = x + 4
+answer = x"
+val,val_8_0_2824512,8,22,"[7, 9, 11, 14, 17, 19, 22, 22]","[""reverse_len"", ""min_cap"", ""add"", ""list_len"", ""add"", ""list_len"", ""reverse_len"", ""max_floor""]",in_distribution_composition,"x = 2
+x = x + len(""orbit""[::-1])
+x = min(x + 2, 19)
+x = x + 2
+x = x + len([1, 7, 5])
+x = x + 3
+x = x + len([0, 9])
+x = x + len(""tea""[::-1])
+x = max(x - 0, 11)
+answer = x"
+val,val_8_0_1047571,8,17,"[11, 12, 15, 16, 15, 19, 16, 17]","[""mul_add"", ""list_index"", ""branch"", ""branch"", ""max_floor"", ""list_len"", ""max_floor"", ""branch""]",in_distribution_composition,"x = 5
+x = x * 2 + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+if x > 21:
+    x = x - 1
+else:
+    x = x + 3
+if x > 21:
+    x = x - 2
+else:
+    x = x + 1
+x = max(x - 1, 4)
+x = x + len([7, 7, 6, 0])
+x = max(x - 3, 14)
+if x > 17:
+    x = x - 2
+else:
+    x = x + 1
+answer = x"
+val,val_8_0_6816293,8,16,"[9, 9, 15, 19, 25, 24, 30, 16]","[""min_cap"", ""max_floor"", ""reverse_len"", ""list_len"", ""str_len"", ""min_cap"", ""reverse_len"", ""half_add""]",in_distribution_composition,"x = 8
+x = min(x + 1, 13)
+x = max(x - 0, 9)
+x = x + len(""yellow""[::-1])
+x = x + len([1, 8, 6, 7])
+x = x + len(""yellow"")
+x = min(x + 4, 24)
+x = x + len(""yellow""[::-1])
+x = x // 2 + 1
+answer = x"
+val,val_4_0_7296794,4,21,"[18, 22, 19, 21]","[""str_len"", ""min_cap"", ""max_floor"", ""add""]",in_distribution_composition,"x = 12
+x = x + len(""violet"")
+x = min(x + 4, 29)
+x = max(x - 3, 9)
+x = x + 2
+answer = x"
+eval_len4,eval_len4_4_0_6161593,4,16,"[1, 2, 7, 16]","[""sub"", ""min_cap"", ""str_len"", ""mul_add""]",in_distribution_composition,"x = 2
+x = x - 1
+x = min(x + 1, 19)
+x = x + len(""orbit"")
+x = x * 2 + 2
+answer = x"
+eval_len4,eval_len4_4_0_7076303,4,20,"[7, 12, 17, 20]","[""half_add"", ""reverse_len"", ""reverse_len"", ""add""]",in_distribution_composition,"x = 6
+x = x // 2 + 4
+x = x + len(""river""[::-1])
+x = x + len(""orbit""[::-1])
+x = x + 3
+answer = x"
+eval_len4,eval_len4_4_1_3925569,4,11,"[10, 9, 8, 11]","[""list_index"", ""sub"", ""max_floor"", ""reverse_len""]",in_distribution_composition,"x = 7
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x - 1
+x = max(x - 1, 2)
+x = x + len(""tea""[::-1])
+answer = x"
+eval_len4,eval_len4_4_0_3667723,4,5,"[5, 3, 2, 5]","[""list_index"", ""max_floor"", ""max_floor"", ""reverse_len""]",in_distribution_composition,"x = 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = max(x - 2, 3)
+x = max(x - 1, 2)
+x = x + len(""tea""[::-1])
+answer = x"
+eval_len4,eval_len4_4_0_5704431,4,16,"[7, 11, 14, 16]","[""max_floor"", ""branch"", ""list_index"", ""min_cap""]",in_distribution_composition,"x = 6
+x = max(x - 0, 7)
+if x > 11:
+    x = x - 4
+else:
+    x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 2, 29)
+answer = x"
+eval_len4,eval_len4_4_0_2519492,4,14,"[15, 15, 15, 14]","[""list_len"", ""min_cap"", ""max_floor"", ""max_floor""]",in_distribution_composition,"x = 11
+x = x + len([4, 3, 3, 4])
+x = min(x + 1, 15)
+x = max(x - 0, 13)
+x = max(x - 1, 13)
+answer = x"
+eval_len4,eval_len4_4_0_2909399,4,18,"[14, 18, 18, 18]","[""add"", ""add"", ""max_floor"", ""list_index""]",in_distribution_composition,"x = 10
+x = x + 4
+x = x + 4
+x = max(x - 0, 3)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+answer = x"
+eval_len4,eval_len4_4_0_3696091,4,11,"[13, 17, 8, 11]","[""max_floor"", ""branch"", ""half_add"", ""min_cap""]",in_distribution_composition,"x = 9
+x = max(x - 0, 13)
+if x > 20:
+    x = x - 1
+else:
+    x = x + 4
+x = x // 2 + 0
+x = min(x + 3, 25)
+answer = x"
+eval_len4,eval_len4_4_1_9606026,4,9,"[7, 10, 12, 9]","[""reverse_len"", ""list_index"", ""min_cap"", ""sub""]",in_distribution_composition,"x = 4
+x = x + len(""cat""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 2, 23)
+x = x - 3
+answer = x"
+eval_len4,eval_len4_4_0_2123978,4,22,"[10, 14, 17, 22]","[""add"", ""add"", ""min_cap"", ""reverse_len""]",in_distribution_composition,"x = 9
+x = x + 1
+x = x + 4
+x = min(x + 3, 23)
+x = x + len(""stone""[::-1])
+answer = x"
+eval_len4,eval_len4_4_0_2279470,4,10,"[1, 5, 7, 10]","[""branch"", ""branch"", ""list_len"", ""list_len""]",in_distribution_composition,"x = 0
+if x > 12:
+    x = x - 1
+else:
+    x = x + 1
+if x > 9:
+    x = x - 4
+else:
+    x = x + 4
+x = x + len([5, 7])
+x = x + len([9, 9, 0])
+answer = x"
+eval_len4,eval_len4_4_0_5252525,4,11,"[11, 6, 7, 11]","[""str_len"", ""half_add"", ""min_cap"", ""list_index""]",in_distribution_composition,"x = 7
+x = x + len(""lamp"")
+x = x // 2 + 1
+x = min(x + 1, 17)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+answer = x"
+eval_len8,eval_len8_8_1_3525759,8,11,"[10, 9, 14, 7, 5, 9, 5, 11]","[""add"", ""sub"", ""reverse_len"", ""half_add"", ""half_add"", ""add"", ""sub"", ""mul_add""]",in_distribution_composition,"x = 9
+x = x + 1
+x = x - 1
+x = x + len(""river""[::-1])
+x = x // 2 + 0
+x = x // 2 + 2
+x = x + 4
+x = x - 4
+x = x * 2 + 1
+answer = x"
+eval_len8,eval_len8_8_1_3549727,8,14,"[7, 5, 7, 12, 17, 17, 20, 14]","[""branch"", ""sub"", ""add"", ""list_len"", ""list_len"", ""list_index"", ""reverse_len"", ""half_add""]",in_distribution_composition,"x = 3
+if x > 14:
+    x = x - 1
+else:
+    x = x + 4
+x = x - 2
+x = x + 2
+x = x + len([6, 3, 7, 9, 3])
+x = x + len([5, 9, 9, 5, 5])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + len(""cat""[::-1])
+x = x // 2 + 4
+answer = x"
+eval_len8,eval_len8_8_0_1748397,8,19,"[4, 6, 10, 15, 17, 19, 21, 19]","[""mul_add"", ""list_len"", ""min_cap"", ""list_len"", ""list_len"", ""branch"", ""min_cap"", ""max_floor""]",in_distribution_composition,"x = 2
+x = x * 2 + 0
+x = x + len([4, 9])
+x = min(x + 4, 18)
+x = x + len([9, 3, 1, 6, 6])
+x = x + len([1, 2])
+if x > 20:
+    x = x - 1
+else:
+    x = x + 2
+x = min(x + 2, 27)
+x = max(x - 2, 3)
+answer = x"
+eval_len8,eval_len8_8_0_7568000,8,21,"[5, 7, 10, 14, 17, 21, 18, 21]","[""sub"", ""list_index"", ""list_len"", ""reverse_len"", ""list_len"", ""reverse_len"", ""max_floor"", ""list_len""]",in_distribution_composition,"x = 6
+x = x - 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len([2, 4, 2])
+x = x + len(""lamp""[::-1])
+x = x + len([9, 8, 1])
+x = x + len(""lamp""[::-1])
+x = max(x - 3, 4)
+x = x + len([6, 6, 7])
+answer = x"
+eval_len8,eval_len8_8_0_6958646,8,22,"[6, 10, 13, 17, 21, 20, 11, 22]","[""branch"", ""branch"", ""min_cap"", ""reverse_len"", ""list_len"", ""sub"", ""half_add"", ""mul_add""]",in_distribution_composition,"x = 4
+if x > 10:
+    x = x - 4
+else:
+    x = x + 2
+if x > 12:
+    x = x - 2
+else:
+    x = x + 4
+x = min(x + 3, 15)
+x = x + len(""lamp""[::-1])
+x = x + len([7, 1, 8, 3])
+x = x - 1
+x = x // 2 + 1
+x = x * 2 + 0
+answer = x"
+eval_len8,eval_len8_8_0_3893734,8,13,"[10, 15, 16, 22, 13, 12, 16, 13]","[""add"", ""str_len"", ""add"", ""str_len"", ""half_add"", ""sub"", ""str_len"", ""branch""]",in_distribution_composition,"x = 6
+x = x + 4
+x = x + len(""river"")
+x = x + 1
+x = x + len(""violet"")
+x = x // 2 + 2
+x = x - 1
+x = x + len(""lamp"")
+if x > 8:
+    x = x - 3
+else:
+    x = x + 1
+answer = x"
+eval_len8,eval_len8_8_0_4607152,8,25,"[14, 18, 21, 21, 24, 18, 22, 25]","[""mul_add"", ""list_len"", ""reverse_len"", ""max_floor"", ""list_len"", ""min_cap"", ""add"", ""reverse_len""]",in_distribution_composition,"x = 7
+x = x * 2 + 0
+x = x + len([4, 9, 8, 8])
+x = x + len(""tea""[::-1])
+x = max(x - 0, 1)
+x = x + len([8, 3, 7])
+x = min(x + 4, 18)
+x = x + 4
+x = x + len(""tea""[::-1])
+answer = x"
+eval_len8,eval_len8_8_0_8556974,8,12,"[6, 7, 3, 1, 3, 4, 6, 12]","[""half_add"", ""half_add"", ""half_add"", ""half_add"", ""mul_add"", ""min_cap"", ""add"", ""str_len""]",in_distribution_composition,"x = 5
+x = x // 2 + 4
+x = x // 2 + 4
+x = x // 2 + 0
+x = x // 2 + 0
+x = x * 2 + 1
+x = min(x + 1, 12)
+x = x + 2
+x = x + len(""violet"")
+answer = x"
+eval_len8,eval_len8_8_0_3261793,8,19,"[4, 3, 7, 16, 13, 14, 16, 19]","[""branch"", ""sub"", ""mul_add"", ""mul_add"", ""min_cap"", ""add"", ""min_cap"", ""reverse_len""]",in_distribution_composition,"x = 2
+if x > 20:
+    x = x - 3
+else:
+    x = x + 2
+x = x - 1
+x = x * 2 + 1
+x = x * 2 + 2
+x = min(x + 2, 13)
+x = x + 1
+x = min(x + 2, 28)
+x = x + len(""cat""[::-1])
+answer = x"
+eval_len8,eval_len8_8_0_7794522,8,29,"[8, 11, 24, 25, 24, 27, 24, 29]","[""branch"", ""branch"", ""mul_add"", ""min_cap"", ""max_floor"", ""add"", ""sub"", ""reverse_len""]",in_distribution_composition,"x = 5
+if x > 19:
+    x = x - 1
+else:
+    x = x + 3
+if x > 19:
+    x = x - 4
+else:
+    x = x + 3
+x = x * 2 + 2
+x = min(x + 1, 25)
+x = max(x - 1, 8)
+x = x + 3
+x = x - 3
+x = x + len(""orbit""[::-1])
+answer = x"
+eval_len8,eval_len8_8_0_3040033,8,8,"[12, 9, 10, 15, 13, 13, 10, 8]","[""list_index"", ""half_add"", ""list_index"", ""str_len"", ""sub"", ""max_floor"", ""sub"", ""half_add""]",in_distribution_composition,"x = 10
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x // 2 + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x + len(""orbit"")
+x = x - 2
+x = max(x - 0, 3)
+x = x - 3
+x = x // 2 + 3
+answer = x"
+eval_len8,eval_len8_8_0_9245626,8,17,"[8, 6, 7, 14, 15, 21, 20, 17]","[""half_add"", ""half_add"", ""half_add"", ""mul_add"", ""add"", ""str_len"", ""sub"", ""max_floor""]",in_distribution_composition,"x = 8
+x = x // 2 + 4
+x = x // 2 + 2
+x = x // 2 + 4
+x = x * 2 + 0
+x = x + 1
+x = x + len(""yellow"")
+x = x - 1
+x = max(x - 3, 0)
+answer = x"
+eval_len16,eval_len16_16_0_3028507,16,23,"[12, 9, 8, 12, 15, 7, 8, 17, 19, 24, 30, 31, 16, 9, 20, 23]","[""min_cap"", ""max_floor"", ""max_floor"", ""add"", ""str_len"", ""half_add"", ""max_floor"", ""mul_add"", ""min_cap"", ""reverse_len"", ""reverse_len"", ""list_index"", ""min_cap"", ""half_add"", ""mul_add"", ""list_index""]",in_distribution_composition,"x = 11
+x = min(x + 1, 24)
+x = max(x - 3, 9)
+x = max(x - 1, 2)
+x = x + 4
+x = x + len(""tea"")
+x = x // 2 + 0
+x = max(x - 0, 8)
+x = x * 2 + 1
+x = min(x + 2, 28)
+x = x + len(""orbit""[::-1])
+x = x + len(""yellow""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = min(x + 3, 16)
+x = x // 2 + 1
+x = x * 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+answer = x"
+eval_len16,eval_len16_16_0_2486109,16,15,"[8, 14, 8, 4, 6, 9, 5, 3, 5, 4, 10, 14, 10, 15, 11, 15]","[""half_add"", ""reverse_len"", ""half_add"", ""sub"", ""list_len"", ""str_len"", ""half_add"", ""half_add"", ""add"", ""sub"", ""reverse_len"", ""max_floor"", ""sub"", ""list_len"", ""sub"", ""add""]",in_distribution_composition,"x = 11
+x = x // 2 + 3
+x = x + len(""violet""[::-1])
+x = x // 2 + 1
+x = x - 4
+x = x + len([5, 4])
+x = x + len(""cat"")
+x = x // 2 + 1
+x = x // 2 + 1
+x = x + 2
+x = x - 1
+x = x + len(""violet""[::-1])
+x = max(x - 0, 14)
+x = x - 4
+x = x + len([7, 5, 8, 2, 7])
+x = x - 4
+x = x + 4
+answer = x"
+eval_len16,eval_len16_16_0_8146837,16,30,"[15, 15, 16, 12, 14, 18, 15, 20, 18, 14, 18, 21, 24, 23, 27, 30]","[""list_len"", ""min_cap"", ""min_cap"", ""sub"", ""list_len"", ""branch"", ""sub"", ""reverse_len"", ""sub"", ""sub"", ""list_index"", ""add"", ""add"", ""max_floor"", ""list_index"", ""str_len""]",in_distribution_composition,"x = 11
+x = x + len([1, 0, 7, 1])
+x = min(x + 1, 15)
+x = min(x + 1, 19)
+x = x - 4
+x = x + len([0, 2])
+if x > 17:
+    x = x - 1
+else:
+    x = x + 4
+x = x - 3
+x = x + len(""orbit""[::-1])
+x = x - 2
+x = x - 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + 3
+x = x + 3
+x = max(x - 1, 16)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len(""tea"")
+answer = x"
+eval_len16,eval_len16_16_0_6517723,16,18,"[0, 2, 4, 6, 13, 17, 12, 25, 24, 30, 27, 31, 30, 17, 20, 18]","[""list_index"", ""branch"", ""add"", ""add"", ""max_floor"", ""reverse_len"", ""min_cap"", ""mul_add"", ""max_floor"", ""str_len"", ""max_floor"", ""str_len"", ""sub"", ""half_add"", ""list_index"", ""max_floor""]",in_distribution_composition,"x = 0
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+if x > 19:
+    x = x - 1
+else:
+    x = x + 2
+x = x + 2
+x = x + 2
+x = max(x - 0, 13)
+x = x + len(""lamp""[::-1])
+x = min(x + 1, 12)
+x = x * 2 + 1
+x = max(x - 1, 7)
+x = x + len(""yellow"")
+x = max(x - 3, 10)
+x = x + len(""lamp"")
+x = x - 1
+x = x // 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = max(x - 2, 15)
+answer = x"
+eval_len16,eval_len16_16_4_6778049,16,25,"[2, 6, 10, 8, 12, 15, 18, 17, 18, 23, 26, 30, 29, 28, 27, 25]","[""half_add"", ""mul_add"", ""list_index"", ""sub"", ""list_len"", ""list_index"", ""str_len"", ""max_floor"", ""add"", ""str_len"", ""reverse_len"", ""list_len"", ""min_cap"", ""branch"", ""max_floor"", ""max_floor""]",in_distribution_composition,"x = 4
+x = x // 2 + 0
+x = x * 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x - 2
+x = x + len([5, 5, 2, 8])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len(""cat"")
+x = max(x - 1, 4)
+x = x + 1
+x = x + len(""stone"")
+x = x + len(""cat""[::-1])
+x = x + len([7, 0, 6, 1])
+x = min(x + 2, 29)
+if x > 13:
+    x = x - 1
+else:
+    x = x + 4
+x = max(x - 1, 14)
+x = max(x - 2, 11)
+answer = x"
+eval_len16,eval_len16_16_0_4939169,16,14,"[0, 1, 3, 8, 14, 19, 18, 15, 11, 15, 30, 16, 14, 12, 15, 14]","[""half_add"", ""list_index"", ""list_index"", ""reverse_len"", ""str_len"", ""str_len"", ""branch"", ""min_cap"", ""branch"", ""branch"", ""mul_add"", ""half_add"", ""max_floor"", ""max_floor"", ""list_len"", ""sub""]",in_distribution_composition,"x = 0
+x = x // 2 + 0
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len(""orbit""[::-1])
+x = x + len(""violet"")
+x = x + len(""stone"")
+if x > 10:
+    x = x - 1
+else:
+    x = x + 1
+x = min(x + 1, 15)
+if x > 8:
+    x = x - 4
+else:
+    x = x + 1
+if x > 15:
+    x = x - 3
+else:
+    x = x + 4
+x = x * 2 + 0
+x = x // 2 + 1
+x = max(x - 2, 7)
+x = max(x - 2, 12)
+x = x + len([5, 7, 3])
+x = x - 1
+answer = x"
+eval_len16,eval_len16_16_2_6577716,16,18,"[2, 6, 8, 10, 12, 8, 12, 13, 18, 20, 19, 23, 20, 16, 15, 18]","[""mul_add"", ""add"", ""add"", ""list_len"", ""min_cap"", ""sub"", ""min_cap"", ""list_index"", ""str_len"", ""list_index"", ""max_floor"", ""reverse_len"", ""max_floor"", ""branch"", ""max_floor"", ""str_len""]",in_distribution_composition,"x = 0
+x = x * 2 + 2
+x = x + 4
+x = x + 2
+x = x + len([8, 5])
+x = min(x + 2, 27)
+x = x - 4
+x = min(x + 4, 16)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x + len(""stone"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = max(x - 1, 4)
+x = x + len(""lamp""[::-1])
+x = max(x - 3, 2)
+if x > 10:
+    x = x - 4
+else:
+    x = x + 1
+x = max(x - 1, 2)
+x = x + len(""cat"")
+answer = x"
+eval_len16,eval_len16_16_0_7279722,16,8,"[13, 11, 15, 11, 10, 15, 14, 8, 4, 7, 6, 4, 7, 11, 9, 8]","[""branch"", ""sub"", ""str_len"", ""sub"", ""sub"", ""list_len"", ""max_floor"", ""half_add"", ""sub"", ""branch"", ""half_add"", ""sub"", ""str_len"", ""max_floor"", ""sub"", ""sub""]",in_distribution_composition,"x = 10
+if x > 10:
+    x = x - 4
+else:
+    x = x + 3
+x = x - 2
+x = x + len(""lamp"")
+x = x - 4
+x = x - 1
+x = x + len([3, 1, 8, 6, 4])
+x = max(x - 1, 4)
+x = x // 2 + 1
+x = x - 4
+if x > 13:
+    x = x - 2
+else:
+    x = x + 3
+x = x // 2 + 3
+x = x - 2
+x = x + len(""cat"")
+x = max(x - 0, 11)
+x = x - 2
+x = x - 1
+answer = x"
+eval_len16,eval_len16_16_0_2905105,16,16,"[7, 12, 9, 13, 14, 8, 8, 6, 5, 12, 14, 16, 19, 18, 16, 16]","[""min_cap"", ""str_len"", ""half_add"", ""min_cap"", ""min_cap"", ""half_add"", ""list_index"", ""sub"", ""sub"", ""mul_add"", ""min_cap"", ""list_index"", ""str_len"", ""max_floor"", ""sub"", ""min_cap""]",in_distribution_composition,"x = 6
+x = min(x + 1, 30)
+x = x + len(""river"")
+x = x // 2 + 3
+x = min(x + 4, 13)
+x = min(x + 3, 14)
+x = x // 2 + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x - 2
+x = x - 1
+x = x * 2 + 2
+x = min(x + 2, 23)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len(""tea"")
+x = max(x - 1, 7)
+x = x - 2
+x = min(x + 2, 16)
+answer = x"
+eval_len16,eval_len16_16_2_793180,16,15,"[6, 13, 17, 21, 15, 21, 12, 9, 12, 12, 14, 9, 14, 17, 19, 15]","[""min_cap"", ""mul_add"", ""min_cap"", ""reverse_len"", ""min_cap"", ""reverse_len"", ""half_add"", ""branch"", ""add"", ""max_floor"", ""list_len"", ""half_add"", ""reverse_len"", ""add"", ""list_len"", ""min_cap""]",in_distribution_composition,"x = 5
+x = min(x + 1, 21)
+x = x * 2 + 1
+x = min(x + 4, 29)
+x = x + len(""lamp""[::-1])
+x = min(x + 1, 15)
+x = x + len(""yellow""[::-1])
+x = x // 2 + 2
+if x > 11:
+    x = x - 3
+else:
+    x = x + 4
+x = x + 3
+x = max(x - 0, 6)
+x = x + len([2, 5])
+x = x // 2 + 2
+x = x + len(""stone""[::-1])
+x = x + 3
+x = x + len([0, 3])
+x = min(x + 1, 15)
+answer = x"
+eval_len16,eval_len16_16_0_9850654,16,16,"[13, 11, 24, 27, 30, 29, 17, 19, 15, 18, 17, 21, 14, 15, 14, 16]","[""str_len"", ""branch"", ""mul_add"", ""add"", ""list_len"", ""branch"", ""min_cap"", ""min_cap"", ""sub"", ""add"", ""max_floor"", ""add"", ""half_add"", ""add"", ""max_floor"", ""list_len""]",in_distribution_composition,"x = 8
+x = x + len(""river"")
+if x > 8:
+    x = x - 2
+else:
+    x = x + 3
+x = x * 2 + 2
+x = x + 3
+x = x + len([3, 9, 5])
+if x > 22:
+    x = x - 1
+else:
+    x = x + 1
+x = min(x + 4, 17)
+x = min(x + 2, 21)
+x = x - 4
+x = x + 3
+x = max(x - 1, 14)
+x = x + 4
+x = x // 2 + 4
+x = x + 1
+x = max(x - 1, 2)
+x = x + len([7, 5])
+answer = x"
+eval_len16,eval_len16_16_0_5056831,16,29,"[13, 12, 16, 18, 23, 26, 28, 27, 26, 23, 27, 31, 29, 27, 31, 29]","[""reverse_len"", ""max_floor"", ""add"", ""list_index"", ""str_len"", ""add"", ""list_index"", ""branch"", ""branch"", ""max_floor"", ""list_len"", ""list_len"", ""max_floor"", ""max_floor"", ""add"", ""max_floor""]",in_distribution_composition,"x = 7
+x = x + len(""violet""[::-1])
+x = max(x - 1, 5)
+x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len(""river"")
+x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+if x > 24:
+    x = x - 1
+else:
+    x = x + 3
+if x > 23:
+    x = x - 1
+else:
+    x = x + 3
+x = max(x - 3, 13)
+x = x + len([4, 7, 6, 2])
+x = x + len([8, 8, 4, 3])
+x = max(x - 2, 12)
+x = max(x - 2, 5)
+x = x + 4
+x = max(x - 2, 12)
+answer = x"
+eval_len24,eval_len24_24_1_9324731,24,20,"[14, 17, 20, 22, 20, 23, 21, 21, 20, 15, 17, 20, 26, 23, 22, 25, 28, 27, 25, 22, 27, 30, 16, 20]","[""mul_add"", ""list_index"", ""list_len"", ""min_cap"", ""max_floor"", ""str_len"", ""max_floor"", ""max_floor"", ""sub"", ""min_cap"", ""add"", ""branch"", ""reverse_len"", ""sub"", ""sub"", ""branch"", ""add"", ""branch"", ""sub"", ""branch"", ""list_len"", ""list_index"", ""half_add"", ""min_cap""]",in_distribution_composition,"x = 7
+x = x * 2 + 0
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([0, 4, 8])
+x = min(x + 2, 26)
+x = max(x - 2, 11)
+x = x + len(""tea"")
+x = max(x - 2, 9)
+x = max(x - 0, 4)
+x = x - 1
+x = min(x + 2, 15)
+x = x + 2
+if x > 19:
+    x = x - 3
+else:
+    x = x + 3
+x = x + len(""violet""[::-1])
+x = x - 3
+x = x - 1
+if x > 23:
+    x = x - 2
+else:
+    x = x + 3
+x = x + 3
+if x > 14:
+    x = x - 1
+else:
+    x = x + 2
+x = x - 2
+if x > 8:
+    x = x - 3
+else:
+    x = x + 3
+x = x + len([5, 2, 5, 8, 3])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x // 2 + 1
+x = min(x + 4, 24)
+answer = x"
+eval_len24,eval_len24_24_0_1646720,24,13,"[8, 8, 12, 24, 23, 29, 28, 29, 28, 28, 17, 20, 13, 12, 13, 9, 11, 11, 15, 15, 13, 15, 12, 13]","[""sub"", ""list_index"", ""str_len"", ""mul_add"", ""sub"", ""str_len"", ""branch"", ""add"", ""branch"", ""list_index"", ""half_add"", ""min_cap"", ""half_add"", ""sub"", ""min_cap"", ""half_add"", ""add"", ""list_index"", ""add"", ""max_floor"", ""max_floor"", ""branch"", ""branch"", ""min_cap""]",in_distribution_composition,"x = 10
+x = x - 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + len(""lamp"")
+x = x * 2 + 0
+x = x - 1
+x = x + len(""violet"")
+if x > 13:
+    x = x - 1
+else:
+    x = x + 3
+x = x + 1
+if x > 14:
+    x = x - 1
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x // 2 + 3
+x = min(x + 3, 21)
+x = x // 2 + 3
+x = x - 1
+x = min(x + 1, 14)
+x = x // 2 + 3
+x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + 4
+x = max(x - 0, 6)
+x = max(x - 2, 12)
+if x > 16:
+    x = x - 1
+else:
+    x = x + 2
+if x > 10:
+    x = x - 3
+else:
+    x = x + 3
+x = min(x + 1, 28)
+answer = x"
+eval_len24,eval_len24_24_0_7054292,24,13,"[11, 14, 20, 25, 31, 29, 30, 21, 25, 21, 24, 22, 18, 11, 10, 16, 19, 18, 12, 16, 18, 19, 11, 13]","[""min_cap"", ""list_len"", ""str_len"", ""str_len"", ""str_len"", ""sub"", ""add"", ""min_cap"", ""list_len"", ""sub"", ""str_len"", ""branch"", ""sub"", ""half_add"", ""sub"", ""str_len"", ""list_len"", ""sub"", ""half_add"", ""add"", ""min_cap"", ""min_cap"", ""half_add"", ""min_cap""]",in_distribution_composition,"x = 9
+x = min(x + 2, 13)
+x = x + len([6, 4, 9])
+x = x + len(""yellow"")
+x = x + len(""river"")
+x = x + len(""violet"")
+x = x - 2
+x = x + 1
+x = min(x + 2, 21)
+x = x + len([1, 1, 4, 9])
+x = x - 4
+x = x + len(""tea"")
+if x > 13:
+    x = x - 2
+else:
+    x = x + 4
+x = x - 4
+x = x // 2 + 2
+x = x - 1
+x = x + len(""yellow"")
+x = x + len([6, 2, 3])
+x = x - 1
+x = x // 2 + 3
+x = x + 4
+x = min(x + 2, 25)
+x = min(x + 1, 23)
+x = x // 2 + 2
+x = min(x + 2, 15)
+answer = x"
+eval_len24,eval_len24_24_2_4492677,24,30,"[9, 11, 15, 16, 21, 25, 22, 19, 17, 20, 17, 22, 13, 12, 15, 9, 10, 12, 15, 15, 19, 24, 29, 30]","[""branch"", ""add"", ""list_len"", ""min_cap"", ""reverse_len"", ""list_index"", ""sub"", ""branch"", ""max_floor"", ""reverse_len"", ""sub"", ""str_len"", ""half_add"", ""sub"", ""add"", ""half_add"", ""branch"", ""min_cap"", ""str_len"", ""max_floor"", ""min_cap"", ""str_len"", ""list_len"", ""add""]",in_distribution_composition,"x = 8
+if x > 9:
+    x = x - 1
+else:
+    x = x + 1
+x = x + 2
+x = x + len([1, 2, 9, 1])
+x = min(x + 1, 30)
+x = x + len(""river""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x - 3
+if x > 13:
+    x = x - 3
+else:
+    x = x + 4
+x = max(x - 2, 5)
+x = x + len(""tea""[::-1])
+x = x - 3
+x = x + len(""river"")
+x = x // 2 + 2
+x = x - 1
+x = x + 3
+x = x // 2 + 2
+if x > 19:
+    x = x - 4
+else:
+    x = x + 1
+x = min(x + 2, 21)
+x = x + len(""cat"")
+x = max(x - 0, 3)
+x = min(x + 4, 24)
+x = x + len(""river"")
+x = x + len([1, 9, 1, 3, 8])
+x = x + 1
+answer = x"
+eval_len24,eval_len24_24_3_1083352,24,16,"[4, 0, 5, 9, 13, 19, 22, 24, 28, 26, 28, 29, 28, 27, 27, 23, 27, 26, 29, 25, 12, 15, 11, 16]","[""add"", ""sub"", ""reverse_len"", ""min_cap"", ""str_len"", ""str_len"", ""list_len"", ""list_index"", ""list_len"", ""branch"", ""add"", ""list_index"", ""max_floor"", ""branch"", ""list_index"", ""branch"", ""list_index"", ""sub"", ""list_len"", ""branch"", ""half_add"", ""branch"", ""half_add"", ""reverse_len""]",in_distribution_composition,"x = 0
+x = x + 4
+x = x - 4
+x = x + len(""stone""[::-1])
+x = min(x + 4, 13)
+x = x + len(""lamp"")
+x = x + len(""yellow"")
+x = x + len([0, 1, 9])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len([2, 6, 3, 3])
+if x > 13:
+    x = x - 2
+else:
+    x = x + 4
+x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = max(x - 1, 12)
+if x > 12:
+    x = x - 1
+else:
+    x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+if x > 22:
+    x = x - 4
+else:
+    x = x + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x - 1
+x = x + len([6, 3, 3])
+if x > 11:
+    x = x - 4
+else:
+    x = x + 4
+x = x // 2 + 0
+if x > 16:
+    x = x - 1
+else:
+    x = x + 3
+x = x // 2 + 4
+x = x + len(""orbit""[::-1])
+answer = x"
+eval_len24,eval_len24_24_6_6210005,24,22,"[4, 6, 6, 10, 13, 17, 18, 22, 27, 26, 16, 14, 17, 22, 26, 31, 29, 29, 15, 13, 18, 16, 19, 22]","[""min_cap"", ""list_len"", ""half_add"", ""add"", ""list_index"", ""list_len"", ""add"", ""min_cap"", ""reverse_len"", ""sub"", ""half_add"", ""min_cap"", ""add"", ""str_len"", ""str_len"", ""str_len"", ""max_floor"", ""max_floor"", ""half_add"", ""sub"", ""str_len"", ""max_floor"", ""str_len"", ""str_len""]",in_distribution_composition,"x = 3
+x = min(x + 1, 21)
+x = x + len([9, 4])
+x = x // 2 + 3
+x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([8, 1, 2, 2])
+x = x + 1
+x = min(x + 4, 25)
+x = x + len(""river""[::-1])
+x = x - 1
+x = x // 2 + 3
+x = min(x + 4, 14)
+x = x + 3
+x = x + len(""stone"")
+x = x + len(""lamp"")
+x = x + len(""orbit"")
+x = max(x - 2, 5)
+x = max(x - 0, 16)
+x = x // 2 + 1
+x = x - 2
+x = x + len(""river"")
+x = max(x - 2, 9)
+x = x + len(""tea"")
+x = x + len(""tea"")
+answer = x"
+eval_len24,eval_len24_24_1_8456940,24,27,"[11, 13, 7, 10, 12, 26, 22, 27, 27, 12, 11, 13, 13, 14, 19, 20, 25, 29, 31, 31, 19, 24, 22, 27]","[""branch"", ""add"", ""half_add"", ""str_len"", ""min_cap"", ""mul_add"", ""sub"", ""reverse_len"", ""list_index"", ""min_cap"", ""max_floor"", ""list_index"", ""max_floor"", ""add"", ""reverse_len"", ""min_cap"", ""list_len"", ""add"", ""list_index"", ""list_index"", ""half_add"", ""reverse_len"", ""max_floor"", ""str_len""]",in_distribution_composition,"x = 9
+if x > 11:
+    x = x - 4
+else:
+    x = x + 2
+x = x + 2
+x = x // 2 + 1
+x = x + len(""tea"")
+x = min(x + 2, 15)
+x = x * 2 + 2
+x = x - 4
+x = x + len(""stone""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = min(x + 1, 12)
+x = max(x - 1, 11)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = max(x - 0, 13)
+x = x + 1
+x = x + len(""stone""[::-1])
+x = min(x + 1, 28)
+x = x + len([6, 7, 2, 3, 9])
+x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x // 2 + 4
+x = x + len(""orbit""[::-1])
+x = max(x - 2, 16)
+x = x + len(""river"")
+answer = x"
+eval_len24,eval_len24_24_0_1966273,24,24,"[11, 12, 15, 13, 9, 9, 10, 8, 10, 15, 17, 8, 14, 18, 16, 9, 5, 8, 11, 16, 17, 20, 20, 24]","[""list_len"", ""branch"", ""reverse_len"", ""max_floor"", ""sub"", ""list_index"", ""list_index"", ""sub"", ""list_index"", ""str_len"", ""branch"", ""half_add"", ""str_len"", ""list_len"", ""max_floor"", ""half_add"", ""sub"", ""list_index"", ""list_index"", ""reverse_len"", ""list_index"", ""min_cap"", ""max_floor"", ""list_len""]",in_distribution_composition,"x = 9
+x = x + len([2, 8])
+if x > 23:
+    x = x - 3
+else:
+    x = x + 1
+x = x + len(""cat""[::-1])
+x = max(x - 2, 13)
+x = x - 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x - 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len(""river"")
+if x > 17:
+    x = x - 1
+else:
+    x = x + 2
+x = x // 2 + 0
+x = x + len(""yellow"")
+x = x + len([9, 0, 3, 1])
+x = max(x - 2, 3)
+x = x // 2 + 1
+x = x - 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len(""river""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = min(x + 3, 21)
+x = max(x - 0, 4)
+x = x + len([3, 2, 5, 5])
+answer = x"
+eval_len24,eval_len24_24_2_5575718,24,10,"[22, 18, 22, 24, 24, 30, 28, 26, 29, 25, 21, 20, 20, 25, 16, 13, 19, 17, 9, 12, 7, 12, 10, 10]","[""mul_add"", ""branch"", ""add"", ""list_index"", ""list_index"", ""reverse_len"", ""sub"", ""max_floor"", ""list_len"", ""sub"", ""branch"", ""sub"", ""max_floor"", ""str_len"", ""half_add"", ""branch"", ""reverse_len"", ""max_floor"", ""half_add"", ""branch"", ""half_add"", ""str_len"", ""sub"", ""list_index""]",in_distribution_composition,"x = 11
+x = x * 2 + 0
+if x > 9:
+    x = x - 4
+else:
+    x = x + 2
+x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + len(""yellow""[::-1])
+x = x - 2
+x = max(x - 2, 6)
+x = x + len([1, 7, 4])
+x = x - 4
+if x > 14:
+    x = x - 4
+else:
+    x = x + 2
+x = x - 1
+x = max(x - 0, 16)
+x = x + len(""stone"")
+x = x // 2 + 4
+if x > 15:
+    x = x - 3
+else:
+    x = x + 4
+x = x + len(""yellow""[::-1])
+x = max(x - 2, 1)
+x = x // 2 + 1
+if x > 10:
+    x = x - 2
+else:
+    x = x + 3
+x = x // 2 + 1
+x = x + len(""orbit"")
+x = x - 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+answer = x"
+eval_len24,eval_len24_24_0_1383350,24,25,"[5, 14, 15, 12, 9, 11, 15, 20, 18, 20, 23, 20, 17, 23, 19, 22, 12, 15, 16, 14, 17, 19, 19, 25]","[""min_cap"", ""max_floor"", ""max_floor"", ""min_cap"", ""branch"", ""list_len"", ""branch"", ""reverse_len"", ""max_floor"", ""min_cap"", ""reverse_len"", ""sub"", ""max_floor"", ""reverse_len"", ""sub"", ""list_index"", ""half_add"", ""str_len"", ""add"", ""sub"", ""branch"", ""branch"", ""max_floor"", ""str_len""]",in_distribution_composition,"x = 3
+x = min(x + 2, 20)
+x = max(x - 0, 14)
+x = max(x - 0, 15)
+x = min(x + 3, 12)
+if x > 9:
+    x = x - 3
+else:
+    x = x + 3
+x = x + len([3, 9])
+if x > 15:
+    x = x - 1
+else:
+    x = x + 4
+x = x + len(""orbit""[::-1])
+x = max(x - 2, 13)
+x = min(x + 2, 28)
+x = x + len(""cat""[::-1])
+x = x - 3
+x = max(x - 3, 13)
+x = x + len(""violet""[::-1])
+x = x - 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x // 2 + 1
+x = x + len(""tea"")
+x = x + 1
+x = x - 2
+if x > 19:
+    x = x - 2
+else:
+    x = x + 3
+if x > 23:
+    x = x - 2
+else:
+    x = x + 2
+x = max(x - 0, 12)
+x = x + len(""yellow"")
+answer = x"
+eval_len24,eval_len24_24_0_3771664,24,24,"[8, 13, 17, 22, 27, 29, 30, 27, 28, 25, 26, 31, 24, 26, 24, 27, 25, 28, 31, 29, 31, 29, 27, 24]","[""add"", ""list_len"", ""str_len"", ""str_len"", ""str_len"", ""list_len"", ""add"", ""sub"", ""min_cap"", ""min_cap"", ""min_cap"", ""list_len"", ""min_cap"", ""add"", ""max_floor"", ""add"", ""max_floor"", ""reverse_len"", ""list_len"", ""max_floor"", ""list_index"", ""max_floor"", ""max_floor"", ""branch""]",in_distribution_composition,"x = 6
+x = x + 2
+x = x + len([0, 8, 5, 6, 9])
+x = x + len(""lamp"")
+x = x + len(""stone"")
+x = x + len(""stone"")
+x = x + len([0, 5])
+x = x + 1
+x = x - 3
+x = min(x + 1, 30)
+x = min(x + 1, 25)
+x = min(x + 3, 26)
+x = x + len([7, 0, 8, 8, 4])
+x = min(x + 1, 24)
+x = x + 2
+x = max(x - 2, 1)
+x = x + 3
+x = max(x - 2, 4)
+x = x + len(""tea""[::-1])
+x = x + len([2, 6, 4])
+x = max(x - 2, 13)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = max(x - 2, 9)
+x = max(x - 2, 12)
+if x > 14:
+    x = x - 3
+else:
+    x = x + 2
+answer = x"
+eval_len24,eval_len24_24_2_8035437,24,21,"[12, 18, 15, 18, 15, 19, 9, 10, 11, 11, 13, 14, 18, 14, 19, 21, 19, 13, 16, 21, 25, 22, 24, 21]","[""list_index"", ""reverse_len"", ""sub"", ""list_len"", ""branch"", ""min_cap"", ""half_add"", ""min_cap"", ""list_index"", ""max_floor"", ""list_len"", ""min_cap"", ""list_index"", ""branch"", ""reverse_len"", ""list_len"", ""sub"", ""half_add"", ""list_index"", ""list_len"", ""add"", ""min_cap"", ""list_len"", ""branch""]",in_distribution_composition,"x = 8
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len(""yellow""[::-1])
+x = x - 3
+x = x + len([2, 3, 4])
+if x > 17:
+    x = x - 3
+else:
+    x = x + 2
+x = min(x + 4, 26)
+x = x // 2 + 0
+x = min(x + 1, 14)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = max(x - 0, 11)
+x = x + len([7, 6])
+x = min(x + 1, 22)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 13:
+    x = x - 4
+else:
+    x = x + 4
+x = x + len(""stone""[::-1])
+x = x + len([0, 2])
+x = x - 2
+x = x // 2 + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([5, 6, 7, 1, 2])
+x = x + 4
+x = min(x + 1, 22)
+x = x + len([3, 4])
+if x > 12:
+    x = x - 3
+else:
+    x = x + 4
+answer = x"
+eval_len32,eval_len32_32_1_9920105,32,22,"[20, 18, 20, 23, 24, 25, 27, 23, 18, 18, 14, 12, 17, 23, 23, 27, 15, 18, 20, 25, 21, 24, 27, 30, 28, 24, 28, 30, 27, 16, 18, 22]","[""mul_add"", ""branch"", ""list_index"", ""add"", ""list_index"", ""min_cap"", ""list_index"", ""sub"", ""min_cap"", ""list_index"", ""sub"", ""sub"", ""str_len"", ""str_len"", ""max_floor"", ""list_len"", ""half_add"", ""branch"", ""list_len"", ""reverse_len"", ""sub"", ""min_cap"", ""str_len"", ""list_len"", ""branch"", ""sub"", ""add"", ""list_len"", ""branch"", ""half_add"", ""add"", ""min_cap""]",in_distribution_composition,"x = 10
+x = x * 2 + 0
+if x > 9:
+    x = x - 2
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = min(x + 1, 30)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x - 4
+x = min(x + 2, 18)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x - 4
+x = x - 2
+x = x + len(""stone"")
+x = x + len(""violet"")
+x = max(x - 0, 12)
+x = x + len([6, 7, 8, 4])
+x = x // 2 + 2
+if x > 16:
+    x = x - 1
+else:
+    x = x + 3
+x = x + len([6, 0])
+x = x + len(""river""[::-1])
+x = x - 4
+x = min(x + 3, 24)
+x = x + len(""cat"")
+x = x + len([8, 5, 7])
+if x > 17:
+    x = x - 2
+else:
+    x = x + 4
+x = x - 4
+x = x + 4
+x = x + len([3, 3])
+if x > 16:
+    x = x - 3
+else:
+    x = x + 1
+x = x // 2 + 3
+x = x + 2
+x = min(x + 4, 29)
+answer = x"
+eval_len32,eval_len32_32_0_7860050,32,14,"[5, 2, 8, 12, 16, 18, 22, 24, 22, 26, 26, 30, 30, 18, 18, 15, 12, 14, 16, 9, 6, 10, 11, 15, 14, 13, 18, 14, 19, 11, 6, 14]","[""sub"", ""sub"", ""reverse_len"", ""max_floor"", ""min_cap"", ""min_cap"", ""branch"", ""list_len"", ""sub"", ""list_len"", ""min_cap"", ""reverse_len"", ""list_index"", ""half_add"", ""list_index"", ""min_cap"", ""sub"", ""max_floor"", ""add"", ""half_add"", ""half_add"", ""list_index"", ""list_index"", ""branch"", ""sub"", ""max_floor"", ""reverse_len"", ""sub"", ""reverse_len"", ""half_add"", ""half_add"", ""mul_add""]",in_distribution_composition,"x = 8
+x = x - 3
+x = x - 3
+x = x + len(""violet""[::-1])
+x = max(x - 0, 12)
+x = min(x + 4, 17)
+x = min(x + 2, 28)
+if x > 21:
+    x = x - 1
+else:
+    x = x + 4
+x = x + len([7, 4])
+x = x - 2
+x = x + len([8, 2, 4, 3])
+x = min(x + 2, 26)
+x = x + len(""lamp""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x // 2 + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = min(x + 4, 15)
+x = x - 3
+x = max(x - 0, 14)
+x = x + 2
+x = x // 2 + 1
+x = x // 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+if x > 18:
+    x = x - 4
+else:
+    x = x + 4
+x = x - 1
+x = max(x - 1, 9)
+x = x + len(""orbit""[::-1])
+x = x - 4
+x = x + len(""river""[::-1])
+x = x // 2 + 2
+x = x // 2 + 1
+x = x * 2 + 2
+answer = x"
+eval_len32,eval_len32_32_0_7407274,32,29,"[17, 21, 19, 16, 19, 22, 23, 24, 27, 26, 24, 29, 30, 31, 28, 28, 24, 23, 28, 18, 21, 26, 24, 25, 28, 18, 23, 23, 22, 28, 30, 29]","[""str_len"", ""add"", ""sub"", ""branch"", ""min_cap"", ""str_len"", ""min_cap"", ""add"", ""list_len"", ""max_floor"", ""max_floor"", ""reverse_len"", ""add"", ""list_index"", ""max_floor"", ""max_floor"", ""sub"", ""sub"", ""reverse_len"", ""half_add"", ""reverse_len"", ""reverse_len"", ""sub"", ""add"", ""str_len"", ""min_cap"", ""list_len"", ""list_index"", ""sub"", ""reverse_len"", ""add"", ""min_cap""]",in_distribution_composition,"x = 12
+x = x + len(""orbit"")
+x = x + 4
+x = x - 2
+if x > 15:
+    x = x - 3
+else:
+    x = x + 1
+x = min(x + 3, 25)
+x = x + len(""tea"")
+x = min(x + 4, 23)
+x = x + 1
+x = x + len([6, 1, 2])
+x = max(x - 1, 11)
+x = max(x - 2, 5)
+x = x + len(""stone""[::-1])
+x = x + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = max(x - 3, 1)
+x = max(x - 0, 4)
+x = x - 4
+x = x - 1
+x = x + len(""orbit""[::-1])
+x = x // 2 + 4
+x = x + len(""cat""[::-1])
+x = x + len(""stone""[::-1])
+x = x - 2
+x = x + 1
+x = x + len(""cat"")
+x = min(x + 2, 18)
+x = x + len([0, 0, 5, 9, 5])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x - 1
+x = x + len(""violet""[::-1])
+x = x + 2
+x = min(x + 2, 29)
+answer = x"
+eval_len32,eval_len32_32_1_2267432,32,5,"[12, 10, 14, 18, 23, 26, 16, 14, 10, 16, 19, 24, 21, 26, 22, 24, 27, 27, 31, 27, 29, 26, 21, 18, 21, 12, 12, 16, 13, 14, 11, 5]","[""branch"", ""sub"", ""list_len"", ""list_len"", ""list_len"", ""reverse_len"", ""half_add"", ""max_floor"", ""sub"", ""str_len"", ""str_len"", ""str_len"", ""max_floor"", ""str_len"", ""sub"", ""min_cap"", ""list_len"", ""list_index"", ""add"", ""sub"", ""list_len"", ""branch"", ""min_cap"", ""max_floor"", ""add"", ""half_add"", ""max_floor"", ""min_cap"", ""max_floor"", ""branch"", ""max_floor"", ""half_add""]",in_distribution_composition,"x = 8
+if x > 14:
+    x = x - 3
+else:
+    x = x + 4
+x = x - 2
+x = x + len([5, 5, 4, 8])
+x = x + len([1, 4, 6, 9])
+x = x + len([7, 3, 1, 1, 5])
+x = x + len(""cat""[::-1])
+x = x // 2 + 3
+x = max(x - 2, 10)
+x = x - 4
+x = x + len(""yellow"")
+x = x + len(""tea"")
+x = x + len(""orbit"")
+x = max(x - 3, 9)
+x = x + len(""river"")
+x = x - 4
+x = min(x + 2, 30)
+x = x + len([3, 7, 4])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + 4
+x = x - 4
+x = x + len([8, 6])
+if x > 13:
+    x = x - 3
+else:
+    x = x + 3
+x = min(x + 3, 21)
+x = max(x - 3, 3)
+x = x + 3
+x = x // 2 + 2
+x = max(x - 0, 12)
+x = min(x + 4, 25)
+x = max(x - 3, 7)
+if x > 23:
+    x = x - 1
+else:
+    x = x + 1
+x = max(x - 3, 2)
+x = x // 2 + 0
+answer = x"
+eval_len32,eval_len32_32_1_2079868,32,24,"[9, 6, 10, 22, 20, 24, 21, 23, 26, 25, 21, 20, 24, 26, 24, 27, 24, 24, 28, 27, 31, 27, 29, 14, 16, 17, 17, 16, 13, 19, 23, 24]","[""add"", ""max_floor"", ""add"", ""mul_add"", ""min_cap"", ""list_len"", ""sub"", ""min_cap"", ""list_len"", ""sub"", ""sub"", ""max_floor"", ""list_len"", ""add"", ""branch"", ""add"", ""branch"", ""list_index"", ""branch"", ""branch"", ""list_index"", ""branch"", ""list_index"", ""half_add"", ""branch"", ""min_cap"", ""min_cap"", ""max_floor"", ""sub"", ""str_len"", ""reverse_len"", ""list_index""]",in_distribution_composition,"x = 5
+x = x + 4
+x = max(x - 3, 1)
+x = x + 4
+x = x * 2 + 2
+x = min(x + 3, 20)
+x = x + len([4, 3, 6, 0])
+x = x - 3
+x = min(x + 2, 28)
+x = x + len([6, 4, 8])
+x = x - 1
+x = x - 4
+x = max(x - 1, 15)
+x = x + len([6, 6, 2, 9])
+x = x + 2
+if x > 19:
+    x = x - 2
+else:
+    x = x + 2
+x = x + 3
+if x > 16:
+    x = x - 3
+else:
+    x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+if x > 24:
+    x = x - 2
+else:
+    x = x + 4
+if x > 21:
+    x = x - 1
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 20:
+    x = x - 4
+else:
+    x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x // 2 + 0
+if x > 16:
+    x = x - 1
+else:
+    x = x + 2
+x = min(x + 1, 30)
+x = min(x + 4, 17)
+x = max(x - 1, 16)
+x = x - 3
+x = x + len(""yellow"")
+x = x + len(""lamp""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+answer = x"
+eval_len32,eval_len32_32_2_6215434,32,29,"[5, 2, 8, 5, 6, 9, 12, 14, 19, 20, 18, 21, 23, 25, 27, 31, 31, 30, 27, 29, 27, 27, 28, 17, 21, 10, 15, 18, 23, 27, 30, 29]","[""sub"", ""sub"", ""reverse_len"", ""sub"", ""branch"", ""min_cap"", ""add"", ""list_len"", ""str_len"", ""add"", ""sub"", ""min_cap"", ""list_index"", ""list_index"", ""add"", ""list_len"", ""max_floor"", ""branch"", ""max_floor"", ""add"", ""max_floor"", ""max_floor"", ""add"", ""min_cap"", ""reverse_len"", ""half_add"", ""str_len"", ""add"", ""str_len"", ""list_len"", ""add"", ""min_cap""]",in_distribution_composition,"x = 9
+x = x - 4
+x = x - 3
+x = x + len(""violet""[::-1])
+x = x - 3
+if x > 24:
+    x = x - 3
+else:
+    x = x + 1
+x = min(x + 3, 27)
+x = x + 3
+x = x + len([0, 0])
+x = x + len(""river"")
+x = x + 1
+x = x - 2
+x = min(x + 3, 28)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + 2
+x = x + len([8, 5, 1, 3])
+x = max(x - 0, 0)
+if x > 8:
+    x = x - 1
+else:
+    x = x + 3
+x = max(x - 3, 14)
+x = x + 2
+x = max(x - 2, 15)
+x = max(x - 0, 15)
+x = x + 1
+x = min(x + 1, 17)
+x = x + len(""lamp""[::-1])
+x = x // 2 + 0
+x = x + len(""orbit"")
+x = x + 3
+x = x + len(""stone"")
+x = x + len([9, 5, 7, 4])
+x = x + 3
+x = min(x + 4, 29)
+answer = x"
+eval_len32,eval_len32_32_3_7867908,32,25,"[7, 11, 13, 13, 19, 19, 12, 16, 18, 21, 26, 30, 29, 26, 25, 24, 29, 17, 20, 23, 23, 23, 20, 24, 29, 26, 30, 26, 25, 28, 19, 25]","[""sub"", ""min_cap"", ""max_floor"", ""max_floor"", ""str_len"", ""max_floor"", ""min_cap"", ""max_floor"", ""min_cap"", ""reverse_len"", ""list_len"", ""add"", ""sub"", ""sub"", ""sub"", ""branch"", ""list_len"", ""half_add"", ""add"", ""min_cap"", ""max_floor"", ""min_cap"", ""branch"", ""list_index"", ""reverse_len"", ""sub"", ""add"", ""min_cap"", ""branch"", ""list_index"", ""min_cap"", ""str_len""]",in_distribution_composition,"x = 8
+x = x - 1
+x = min(x + 4, 15)
+x = max(x - 0, 13)
+x = max(x - 0, 3)
+x = x + len(""violet"")
+x = max(x - 0, 7)
+x = min(x + 1, 12)
+x = max(x - 0, 16)
+x = min(x + 4, 18)
+x = x + len(""cat""[::-1])
+x = x + len([1, 4, 4, 0, 8])
+x = x + 4
+x = x - 1
+x = x - 3
+x = x - 1
+if x > 13:
+    x = x - 1
+else:
+    x = x + 1
+x = x + len([0, 1, 4, 7, 4])
+x = x // 2 + 3
+x = x + 3
+x = min(x + 3, 30)
+x = max(x - 0, 2)
+x = min(x + 4, 23)
+if x > 21:
+    x = x - 3
+else:
+    x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len(""river""[::-1])
+x = x - 3
+x = x + 4
+x = min(x + 2, 26)
+if x > 23:
+    x = x - 1
+else:
+    x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 2, 19)
+x = x + len(""yellow"")
+answer = x"
+eval_len32,eval_len32_32_3_3382795,32,9,"[10, 12, 26, 15, 21, 12, 17, 11, 15, 14, 13, 15, 18, 12, 15, 16, 19, 12, 16, 18, 15, 19, 21, 26, 30, 28, 26, 13, 9, 12, 16, 9]","[""list_index"", ""list_len"", ""mul_add"", ""min_cap"", ""str_len"", ""half_add"", ""str_len"", ""half_add"", ""add"", ""max_floor"", ""max_floor"", ""add"", ""add"", ""half_add"", ""str_len"", ""min_cap"", ""add"", ""half_add"", ""list_index"", ""add"", ""branch"", ""branch"", ""branch"", ""list_len"", ""add"", ""branch"", ""sub"", ""half_add"", ""sub"", ""branch"", ""branch"", ""half_add""]",in_distribution_composition,"x = 8
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len([6, 2])
+x = x * 2 + 2
+x = min(x + 1, 15)
+x = x + len(""yellow"")
+x = x // 2 + 2
+x = x + len(""river"")
+x = x // 2 + 3
+x = x + 4
+x = max(x - 1, 10)
+x = max(x - 1, 11)
+x = x + 2
+x = x + 3
+x = x // 2 + 3
+x = x + len(""cat"")
+x = min(x + 1, 22)
+x = x + 3
+x = x // 2 + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + 2
+if x > 14:
+    x = x - 3
+else:
+    x = x + 4
+if x > 22:
+    x = x - 1
+else:
+    x = x + 4
+if x > 19:
+    x = x - 1
+else:
+    x = x + 2
+x = x + len([9, 6, 2, 0, 0])
+x = x + 4
+if x > 14:
+    x = x - 2
+else:
+    x = x + 4
+x = x - 2
+x = x // 2 + 0
+x = x - 4
+if x > 24:
+    x = x - 3
+else:
+    x = x + 3
+if x > 12:
+    x = x - 1
+else:
+    x = x + 4
+x = x // 2 + 1
+answer = x"
+eval_len32,eval_len32_32_8_427665,32,15,"[4, 8, 10, 8, 16, 21, 19, 17, 20, 17, 14, 13, 26, 30, 27, 23, 26, 31, 27, 30, 27, 29, 16, 10, 6, 3, 7, 10, 12, 16, 16, 15]","[""branch"", ""min_cap"", ""min_cap"", ""half_add"", ""mul_add"", ""list_len"", ""sub"", ""min_cap"", ""list_len"", ""branch"", ""max_floor"", ""sub"", ""mul_add"", ""list_index"", ""max_floor"", ""sub"", ""add"", ""list_len"", ""branch"", ""list_len"", ""branch"", ""min_cap"", ""half_add"", ""half_add"", ""sub"", ""sub"", ""add"", ""branch"", ""list_index"", ""list_len"", ""max_floor"", ""branch""]",in_distribution_composition,"x = 3
+if x > 23:
+    x = x - 2
+else:
+    x = x + 1
+x = min(x + 4, 13)
+x = min(x + 2, 17)
+x = x // 2 + 3
+x = x * 2 + 0
+x = x + len([2, 0, 9, 8, 8])
+x = x - 2
+x = min(x + 1, 17)
+x = x + len([1, 7, 2])
+if x > 10:
+    x = x - 3
+else:
+    x = x + 1
+x = max(x - 3, 4)
+x = x - 1
+x = x * 2 + 0
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = max(x - 3, 11)
+x = x - 4
+x = x + 3
+x = x + len([2, 5, 4, 2, 0])
+if x > 18:
+    x = x - 4
+else:
+    x = x + 3
+x = x + len([6, 0, 2])
+if x > 9:
+    x = x - 3
+else:
+    x = x + 3
+x = min(x + 4, 29)
+x = x // 2 + 2
+x = x // 2 + 2
+x = x - 4
+x = x - 3
+x = x + 4
+if x > 12:
+    x = x - 2
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len([9, 6, 1, 6])
+x = max(x - 0, 16)
+if x > 12:
+    x = x - 1
+else:
+    x = x + 1
+answer = x"
+eval_len32,eval_len32_32_0_6341951,32,12,"[15, 31, 19, 20, 23, 19, 21, 14, 15, 15, 17, 19, 22, 27, 23, 29, 15, 18, 19, 18, 10, 16, 14, 19, 16, 17, 22, 13, 12, 6, 9, 12]","[""max_floor"", ""mul_add"", ""half_add"", ""add"", ""str_len"", ""branch"", ""list_index"", ""min_cap"", ""min_cap"", ""max_floor"", ""min_cap"", ""list_index"", ""add"", ""list_len"", ""sub"", ""str_len"", ""min_cap"", ""branch"", ""add"", ""sub"", ""half_add"", ""max_floor"", ""max_floor"", ""reverse_len"", ""sub"", ""add"", ""list_len"", ""half_add"", ""max_floor"", ""half_add"", ""str_len"", ""branch""]",in_distribution_composition,"x = 0
+x = max(x - 0, 15)
+x = x * 2 + 1
+x = x // 2 + 4
+x = x + 1
+x = x + len(""tea"")
+if x > 20:
+    x = x - 4
+else:
+    x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = min(x + 3, 14)
+x = min(x + 1, 20)
+x = max(x - 0, 4)
+x = min(x + 4, 17)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + 3
+x = x + len([6, 8, 9, 4, 4])
+x = x - 4
+x = x + len(""violet"")
+x = min(x + 3, 15)
+if x > 18:
+    x = x - 3
+else:
+    x = x + 3
+x = x + 1
+x = x - 1
+x = x // 2 + 1
+x = max(x - 0, 16)
+x = max(x - 2, 10)
+x = x + len(""orbit""[::-1])
+x = x - 3
+x = x + 1
+x = x + len([1, 3, 3, 8, 3])
+x = x // 2 + 2
+x = max(x - 1, 4)
+x = x // 2 + 0
+x = x + len(""cat"")
+if x > 22:
+    x = x - 4
+else:
+    x = x + 3
+answer = x"
+eval_len32,eval_len32_32_1_9059529,32,29,"[5, 3, 6, 9, 13, 14, 18, 19, 17, 14, 18, 22, 27, 17, 19, 18, 19, 14, 28, 31, 28, 26, 24, 27, 25, 22, 21, 20, 23, 23, 27, 29]","[""str_len"", ""sub"", ""min_cap"", ""list_index"", ""min_cap"", ""branch"", ""list_len"", ""add"", ""sub"", ""branch"", ""reverse_len"", ""list_index"", ""str_len"", ""half_add"", ""list_index"", ""max_floor"", ""min_cap"", ""min_cap"", ""mul_add"", ""add"", ""branch"", ""sub"", ""sub"", ""reverse_len"", ""sub"", ""max_floor"", ""branch"", ""branch"", ""reverse_len"", ""min_cap"", ""min_cap"", ""list_len""]",in_distribution_composition,"x = 1
+x = x + len(""lamp"")
+x = x - 2
+x = min(x + 3, 25)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 4, 23)
+if x > 19:
+    x = x - 1
+else:
+    x = x + 1
+x = x + len([4, 1, 5, 6])
+x = x + 1
+x = x - 2
+if x > 8:
+    x = x - 3
+else:
+    x = x + 3
+x = x + len(""lamp""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len(""stone"")
+x = x // 2 + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = max(x - 1, 7)
+x = min(x + 1, 24)
+x = min(x + 4, 14)
+x = x * 2 + 0
+x = x + 3
+if x > 17:
+    x = x - 3
+else:
+    x = x + 3
+x = x - 2
+x = x - 2
+x = x + len(""tea""[::-1])
+x = x - 2
+x = max(x - 3, 4)
+if x > 11:
+    x = x - 1
+else:
+    x = x + 4
+if x > 16:
+    x = x - 1
+else:
+    x = x + 3
+x = x + len(""cat""[::-1])
+x = min(x + 4, 23)
+x = min(x + 4, 30)
+x = x + len([3, 5])
+answer = x"
+eval_len32,eval_len32_32_0_1906845,32,30,"[8, 9, 14, 13, 16, 19, 24, 23, 28, 30, 29, 30, 29, 29, 26, 23, 23, 26, 28, 25, 29, 26, 27, 16, 20, 26, 30, 27, 28, 31, 30, 30]","[""min_cap"", ""min_cap"", ""max_floor"", ""max_floor"", ""reverse_len"", ""reverse_len"", ""list_len"", ""branch"", ""list_len"", ""list_len"", ""branch"", ""add"", ""max_floor"", ""max_floor"", ""max_floor"", ""sub"", ""max_floor"", ""list_index"", ""list_len"", ""branch"", ""reverse_len"", ""max_floor"", ""add"", ""half_add"", ""add"", ""str_len"", ""str_len"", ""sub"", ""list_index"", ""list_index"", ""branch"", ""max_floor""]",in_distribution_composition,"x = 4
+x = min(x + 4, 25)
+x = min(x + 1, 15)
+x = max(x - 0, 14)
+x = max(x - 1, 1)
+x = x + len(""tea""[::-1])
+x = x + len(""tea""[::-1])
+x = x + len([8, 3, 8, 6, 2])
+if x > 22:
+    x = x - 1
+else:
+    x = x + 1
+x = x + len([6, 1, 4, 5, 1])
+x = x + len([6, 7])
+if x > 13:
+    x = x - 1
+else:
+    x = x + 2
+x = x + 1
+x = max(x - 1, 12)
+x = max(x - 0, 9)
+x = max(x - 3, 4)
+x = x - 3
+x = max(x - 0, 0)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([6, 0])
+if x > 22:
+    x = x - 3
+else:
+    x = x + 1
+x = x + len(""lamp""[::-1])
+x = max(x - 3, 3)
+x = x + 1
+x = x // 2 + 3
+x = x + 4
+x = x + len(""yellow"")
+x = x + len(""lamp"")
+x = x - 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+if x > 22:
+    x = x - 1
+else:
+    x = x + 4
+x = max(x - 0, 13)
+answer = x"
+eval_comp16,eval_comp16_16_0_8704822,16,27,"[16, 13, 14, 20, 21, 24, 27, 29, 31, 30, 27, 25, 28, 31, 29, 27]","[""list_index"", ""branch"", ""branch"", ""str_len"", ""list_index"", ""reverse_len"", ""str_len"", ""add"", ""add"", ""branch"", ""branch"", ""branch"", ""list_len"", ""list_index"", ""sub"", ""branch""]",heldout_composition,"x = 12
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 13:
+    x = x - 3
+else:
+    x = x + 3
+if x > 20:
+    x = x - 4
+else:
+    x = x + 1
+x = x + len(""violet"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x + len(""tea""[::-1])
+x = x + len(""tea"")
+x = x + 2
+x = x + 2
+if x > 8:
+    x = x - 1
+else:
+    x = x + 4
+if x > 19:
+    x = x - 3
+else:
+    x = x + 2
+if x > 9:
+    x = x - 2
+else:
+    x = x + 4
+x = x + len([0, 0, 7])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x - 2
+if x > 9:
+    x = x - 2
+else:
+    x = x + 2
+answer = x"
+eval_comp16,eval_comp16_16_0_3243446,16,19,"[14, 12, 14, 11, 12, 13, 14, 17, 22, 19, 25, 31, 27, 14, 17, 19]","[""reverse_len"", ""sub"", ""min_cap"", ""half_add"", ""add"", ""min_cap"", ""min_cap"", ""list_index"", ""list_len"", ""branch"", ""str_len"", ""reverse_len"", ""sub"", ""half_add"", ""add"", ""add""]",heldout_composition,"x = 10
+x = x + len(""lamp""[::-1])
+x = x - 2
+x = min(x + 2, 20)
+x = x // 2 + 4
+x = x + 1
+x = min(x + 1, 22)
+x = min(x + 3, 14)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([4, 9, 6, 2, 1])
+if x > 20:
+    x = x - 3
+else:
+    x = x + 4
+x = x + len(""violet"")
+x = x + len(""yellow""[::-1])
+x = x - 4
+x = x // 2 + 1
+x = x + 3
+x = x + 2
+answer = x"
+eval_comp16,eval_comp16_16_0_8356576,16,20,"[10, 15, 16, 21, 20, 18, 21, 24, 20, 26, 29, 21, 20, 16, 17, 20]","[""max_floor"", ""reverse_len"", ""branch"", ""reverse_len"", ""sub"", ""branch"", ""list_index"", ""list_len"", ""branch"", ""str_len"", ""list_index"", ""min_cap"", ""branch"", ""sub"", ""add"", ""list_index""]",heldout_composition,"x = 0
+x = max(x - 0, 10)
+x = x + len(""river""[::-1])
+if x > 15:
+    x = x - 1
+else:
+    x = x + 1
+x = x + len(""orbit""[::-1])
+x = x - 1
+if x > 13:
+    x = x - 2
+else:
+    x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([9, 7, 7])
+if x > 19:
+    x = x - 4
+else:
+    x = x + 3
+x = x + len(""yellow"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 3, 21)
+if x > 13:
+    x = x - 1
+else:
+    x = x + 4
+x = x - 4
+x = x + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+answer = x"
+eval_comp16,eval_comp16_16_0_6197032,16,16,"[11, 14, 7, 10, 13, 6, 9, 11, 22, 21, 20, 22, 20, 18, 13, 16]","[""mul_add"", ""add"", ""half_add"", ""min_cap"", ""reverse_len"", ""half_add"", ""add"", ""branch"", ""mul_add"", ""max_floor"", ""sub"", ""list_len"", ""max_floor"", ""sub"", ""half_add"", ""list_len""]",heldout_composition,"x = 5
+x = x * 2 + 1
+x = x + 3
+x = x // 2 + 0
+x = min(x + 3, 21)
+x = x + len(""tea""[::-1])
+x = x // 2 + 0
+x = x + 3
+if x > 13:
+    x = x - 3
+else:
+    x = x + 2
+x = x * 2 + 0
+x = max(x - 1, 13)
+x = x - 1
+x = x + len([4, 6])
+x = max(x - 2, 7)
+x = x - 2
+x = x // 2 + 4
+x = x + len([4, 1, 8])
+answer = x"
+eval_comp16,eval_comp16_16_1_82009,16,13,"[11, 9, 12, 17, 12, 8, 12, 15, 12, 14, 17, 18, 9, 12, 14, 13]","[""list_index"", ""branch"", ""str_len"", ""list_len"", ""min_cap"", ""half_add"", ""branch"", ""list_len"", ""min_cap"", ""add"", ""min_cap"", ""list_index"", ""half_add"", ""list_index"", ""min_cap"", ""max_floor""]",heldout_composition,"x = 8
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+if x > 8:
+    x = x - 2
+else:
+    x = x + 3
+x = x + len(""cat"")
+x = x + len([4, 4, 2, 6, 2])
+x = min(x + 1, 12)
+x = x // 2 + 2
+if x > 18:
+    x = x - 1
+else:
+    x = x + 4
+x = x + len([5, 9, 1])
+x = min(x + 3, 12)
+x = x + 2
+x = min(x + 3, 22)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x // 2 + 0
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 2, 29)
+x = max(x - 1, 13)
+answer = x"
+eval_comp16,eval_comp16_16_0_8618827,16,14,"[1, 6, 13, 6, 13, 28, 25, 22, 19, 16, 12, 7, 3, 9, 7, 14]","[""half_add"", ""list_len"", ""mul_add"", ""half_add"", ""mul_add"", ""mul_add"", ""max_floor"", ""sub"", ""max_floor"", ""branch"", ""sub"", ""half_add"", ""sub"", ""str_len"", ""half_add"", ""mul_add""]",heldout_composition,"x = 2
+x = x // 2 + 0
+x = x + len([8, 5, 1, 2, 6])
+x = x * 2 + 1
+x = x // 2 + 0
+x = x * 2 + 1
+x = x * 2 + 2
+x = max(x - 3, 3)
+x = x - 3
+x = max(x - 3, 11)
+if x > 16:
+    x = x - 3
+else:
+    x = x + 4
+x = x - 4
+x = x // 2 + 1
+x = x - 4
+x = x + len(""yellow"")
+x = x // 2 + 3
+x = x * 2 + 0
+answer = x"
+eval_comp16,eval_comp16_16_0_8637831,16,15,"[10, 9, 11, 14, 13, 8, 13, 15, 19, 24, 27, 24, 29, 31, 30, 15]","[""max_floor"", ""half_add"", ""list_len"", ""list_index"", ""max_floor"", ""half_add"", ""list_len"", ""add"", ""list_index"", ""list_len"", ""reverse_len"", ""branch"", ""str_len"", ""add"", ""sub"", ""half_add""]",heldout_composition,"x = 7
+x = max(x - 0, 10)
+x = x // 2 + 4
+x = x + len([1, 1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = max(x - 1, 2)
+x = x // 2 + 2
+x = x + len([2, 3, 3, 5, 3])
+x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len([5, 0, 5, 2, 7])
+x = x + len(""tea""[::-1])
+if x > 8:
+    x = x - 3
+else:
+    x = x + 3
+x = x + len(""river"")
+x = x + 2
+x = x - 1
+x = x // 2 + 0
+answer = x"
+eval_comp16,eval_comp16_16_0_1354983,16,26,"[18, 22, 12, 18, 15, 17, 21, 25, 16, 20, 23, 26, 23, 25, 26, 26]","[""mul_add"", ""add"", ""half_add"", ""reverse_len"", ""branch"", ""branch"", ""str_len"", ""min_cap"", ""min_cap"", ""reverse_len"", ""str_len"", ""list_index"", ""branch"", ""min_cap"", ""list_index"", ""max_floor""]",heldout_composition,"x = 8
+x = x * 2 + 2
+x = x + 4
+x = x // 2 + 1
+x = x + len(""violet""[::-1])
+if x > 16:
+    x = x - 3
+else:
+    x = x + 4
+if x > 17:
+    x = x - 3
+else:
+    x = x + 2
+x = x + len(""lamp"")
+x = min(x + 4, 29)
+x = min(x + 1, 16)
+x = x + len(""lamp""[::-1])
+x = x + len(""tea"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+if x > 24:
+    x = x - 3
+else:
+    x = x + 3
+x = min(x + 2, 25)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = max(x - 0, 16)
+answer = x"
+eval_comp16,eval_comp16_16_0_2317073,16,7,"[5, 8, 8, 12, 15, 16, 9, 14, 17, 20, 12, 10, 8, 4, 5, 7]","[""sub"", ""min_cap"", ""list_index"", ""list_index"", ""branch"", ""add"", ""half_add"", ""list_len"", ""branch"", ""list_index"", ""min_cap"", ""max_floor"", ""max_floor"", ""half_add"", ""max_floor"", ""list_index""]",heldout_composition,"x = 7
+x = x - 2
+x = min(x + 3, 12)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 12:
+    x = x - 4
+else:
+    x = x + 3
+x = x + 1
+x = x // 2 + 1
+x = x + len([9, 5, 7, 7, 4])
+if x > 20:
+    x = x - 4
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 1, 12)
+x = max(x - 2, 9)
+x = max(x - 2, 8)
+x = x // 2 + 0
+x = max(x - 0, 5)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+answer = x"
+eval_comp16,eval_comp16_16_0_1194271,16,22,"[9, 19, 23, 22, 27, 29, 25, 30, 30, 14, 28, 25, 30, 27, 23, 22]","[""list_index"", ""mul_add"", ""branch"", ""sub"", ""str_len"", ""add"", ""min_cap"", ""str_len"", ""list_index"", ""min_cap"", ""mul_add"", ""branch"", ""str_len"", ""max_floor"", ""sub"", ""min_cap""]",heldout_composition,"x = 8
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x * 2 + 1
+if x > 24:
+    x = x - 2
+else:
+    x = x + 4
+x = x - 1
+x = x + len(""orbit"")
+x = x + 2
+x = min(x + 2, 25)
+x = x + len(""river"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = min(x + 2, 14)
+x = x * 2 + 0
+if x > 11:
+    x = x - 3
+else:
+    x = x + 2
+x = x + len(""river"")
+x = max(x - 3, 16)
+x = x - 4
+x = min(x + 3, 22)
+answer = x"
+eval_comp16,eval_comp16_16_0_1314586,16,9,"[6, 16, 19, 19, 11, 13, 9, 12, 15, 14, 13, 16, 21, 17, 17, 9]","[""str_len"", ""max_floor"", ""list_index"", ""list_index"", ""half_add"", ""list_index"", ""sub"", ""str_len"", ""str_len"", ""branch"", ""max_floor"", ""min_cap"", ""reverse_len"", ""branch"", ""list_index"", ""half_add""]",heldout_composition,"x = 2
+x = x + len(""lamp"")
+x = max(x - 0, 16)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x // 2 + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x - 4
+x = x + len(""cat"")
+x = x + len(""tea"")
+if x > 14:
+    x = x - 1
+else:
+    x = x + 1
+x = max(x - 1, 13)
+x = min(x + 3, 23)
+x = x + len(""river""[::-1])
+if x > 10:
+    x = x - 4
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x // 2 + 1
+answer = x"
+eval_comp16,eval_comp16_16_1_2046168,16,13,"[4, 8, 11, 5, 6, 10, 9, 11, 12, 15, 19, 24, 23, 20, 24, 13]","[""list_len"", ""branch"", ""str_len"", ""half_add"", ""branch"", ""list_index"", ""half_add"", ""list_len"", ""list_index"", ""reverse_len"", ""list_len"", ""reverse_len"", ""branch"", ""sub"", ""reverse_len"", ""half_add""]",heldout_composition,"x = 2
+x = x + len([0, 3])
+if x > 12:
+    x = x - 3
+else:
+    x = x + 4
+x = x + len(""tea"")
+x = x // 2 + 0
+if x > 14:
+    x = x - 2
+else:
+    x = x + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x // 2 + 4
+x = x + len([8, 7])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x + len(""tea""[::-1])
+x = x + len([1, 1, 7, 8])
+x = x + len(""orbit""[::-1])
+if x > 15:
+    x = x - 1
+else:
+    x = x + 1
+x = x - 3
+x = x + len(""lamp""[::-1])
+x = x // 2 + 1
+answer = x"
+eval_comp24,eval_comp24_24_0_386410,24,19,"[10, 12, 9, 14, 29, 31, 31, 28, 31, 16, 14, 19, 22, 25, 22, 25, 15, 18, 20, 13, 14, 18, 15, 19]","[""max_floor"", ""min_cap"", ""sub"", ""list_len"", ""mul_add"", ""list_len"", ""max_floor"", ""max_floor"", ""list_len"", ""half_add"", ""branch"", ""str_len"", ""list_index"", ""list_len"", ""max_floor"", ""list_index"", ""min_cap"", ""str_len"", ""list_index"", ""half_add"", ""branch"", ""min_cap"", ""max_floor"", ""list_len""]",heldout_composition,"x = 2
+x = max(x - 0, 10)
+x = min(x + 2, 24)
+x = x - 3
+x = x + len([6, 3, 4, 9, 8])
+x = x * 2 + 1
+x = x + len([9, 6])
+x = max(x - 0, 2)
+x = max(x - 3, 2)
+x = x + len([8, 7, 5])
+x = x // 2 + 1
+if x > 9:
+    x = x - 2
+else:
+    x = x + 3
+x = x + len(""stone"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([1, 1, 3])
+x = max(x - 3, 4)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 1, 15)
+x = x + len(""tea"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x // 2 + 3
+if x > 24:
+    x = x - 1
+else:
+    x = x + 1
+x = min(x + 4, 27)
+x = max(x - 3, 2)
+x = x + len([2, 2, 8, 7])
+answer = x"
+eval_comp24,eval_comp24_24_0_2547215,24,12,"[19, 20, 19, 17, 23, 24, 28, 15, 31, 29, 25, 29, 27, 24, 27, 27, 30, 19, 21, 12, 15, 18, 10, 12]","[""mul_add"", ""list_index"", ""branch"", ""sub"", ""reverse_len"", ""branch"", ""reverse_len"", ""half_add"", ""mul_add"", ""sub"", ""branch"", ""add"", ""sub"", ""max_floor"", ""add"", ""max_floor"", ""str_len"", ""half_add"", ""min_cap"", ""half_add"", ""list_len"", ""reverse_len"", ""half_add"", ""list_index""]",heldout_composition,"x = 9
+x = x * 2 + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+if x > 14:
+    x = x - 1
+else:
+    x = x + 3
+x = x - 2
+x = x + len(""yellow""[::-1])
+if x > 23:
+    x = x - 2
+else:
+    x = x + 1
+x = x + len(""lamp""[::-1])
+x = x // 2 + 1
+x = x * 2 + 1
+x = x - 2
+if x > 16:
+    x = x - 4
+else:
+    x = x + 3
+x = x + 4
+x = x - 2
+x = max(x - 3, 14)
+x = x + 3
+x = max(x - 0, 16)
+x = x + len(""cat"")
+x = x // 2 + 4
+x = min(x + 2, 29)
+x = x // 2 + 2
+x = x + len([5, 3, 0])
+x = x + len(""cat""[::-1])
+x = x // 2 + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+answer = x"
+eval_comp24,eval_comp24_24_2_4906420,24,30,"[3, 6, 8, 10, 11, 17, 22, 24, 23, 28, 26, 28, 30, 31, 29, 27, 25, 23, 23, 20, 23, 26, 29, 30]","[""sub"", ""reverse_len"", ""branch"", ""list_index"", ""min_cap"", ""str_len"", ""str_len"", ""list_index"", ""sub"", ""list_len"", ""max_floor"", ""min_cap"", ""add"", ""add"", ""max_floor"", ""max_floor"", ""max_floor"", ""branch"", ""list_index"", ""sub"", ""list_index"", ""list_index"", ""list_len"", ""list_index""]",heldout_composition,"x = 6
+x = x - 3
+x = x + len(""cat""[::-1])
+if x > 20:
+    x = x - 2
+else:
+    x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = min(x + 1, 16)
+x = x + len(""yellow"")
+x = x + len(""river"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x - 1
+x = x + len([2, 3, 6, 9, 3])
+x = max(x - 2, 11)
+x = min(x + 3, 28)
+x = x + 2
+x = x + 1
+x = max(x - 2, 7)
+x = max(x - 2, 16)
+x = max(x - 2, 6)
+if x > 23:
+    x = x - 2
+else:
+    x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x - 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + len([6, 1, 0])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+answer = x"
+eval_comp24,eval_comp24_24_0_2852975,24,22,"[4, 5, 11, 11, 13, 17, 20, 24, 14, 13, 13, 14, 11, 16, 19, 24, 21, 17, 20, 14, 19, 24, 20, 22]","[""half_add"", ""add"", ""str_len"", ""list_index"", ""branch"", ""min_cap"", ""str_len"", ""add"", ""half_add"", ""sub"", ""list_index"", ""add"", ""max_floor"", ""str_len"", ""reverse_len"", ""str_len"", ""branch"", ""branch"", ""str_len"", ""half_add"", ""list_len"", ""reverse_len"", ""sub"", ""list_len""]",heldout_composition,"x = 1
+x = x // 2 + 4
+x = x + 1
+x = x + len(""yellow"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+if x > 17:
+    x = x - 4
+else:
+    x = x + 2
+x = min(x + 4, 18)
+x = x + len(""tea"")
+x = x + 4
+x = x // 2 + 2
+x = x - 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + 1
+x = max(x - 3, 1)
+x = x + len(""orbit"")
+x = x + len(""tea""[::-1])
+x = x + len(""stone"")
+if x > 12:
+    x = x - 3
+else:
+    x = x + 2
+if x > 14:
+    x = x - 4
+else:
+    x = x + 3
+x = x + len(""cat"")
+x = x // 2 + 4
+x = x + len([9, 0, 2, 6, 2])
+x = x + len(""orbit""[::-1])
+x = x - 4
+x = x + len([6, 1])
+answer = x"
+eval_comp24,eval_comp24_24_0_6239897,24,30,"[4, 9, 5, 1, 1, 6, 4, 7, 14, 13, 28, 14, 16, 18, 21, 18, 19, 18, 17, 22, 25, 30, 28, 30]","[""list_len"", ""mul_add"", ""sub"", ""sub"", ""half_add"", ""reverse_len"", ""sub"", ""branch"", ""max_floor"", ""sub"", ""mul_add"", ""half_add"", ""list_len"", ""add"", ""min_cap"", ""sub"", ""branch"", ""max_floor"", ""max_floor"", ""reverse_len"", ""branch"", ""str_len"", ""branch"", ""list_len""]",heldout_composition,"x = 0
+x = x + len([4, 2, 6, 3])
+x = x * 2 + 1
+x = x - 4
+x = x - 4
+x = x // 2 + 1
+x = x + len(""stone""[::-1])
+x = x - 2
+if x > 9:
+    x = x - 3
+else:
+    x = x + 3
+x = max(x - 0, 14)
+x = x - 1
+x = x * 2 + 2
+x = x // 2 + 0
+x = x + len([1, 2])
+x = x + 2
+x = min(x + 3, 29)
+x = x - 3
+if x > 23:
+    x = x - 4
+else:
+    x = x + 1
+x = max(x - 1, 15)
+x = max(x - 1, 15)
+x = x + len(""river""[::-1])
+if x > 24:
+    x = x - 4
+else:
+    x = x + 3
+x = x + len(""river"")
+if x > 20:
+    x = x - 2
+else:
+    x = x + 1
+x = x + len([9, 7])
+answer = x"
+eval_comp24,eval_comp24_24_0_7165654,24,16,"[4, 10, 11, 12, 9, 6, 10, 13, 16, 19, 24, 30, 27, 24, 22, 25, 25, 28, 31, 13, 10, 13, 17, 16]","[""str_len"", ""mul_add"", ""add"", ""list_index"", ""max_floor"", ""half_add"", ""list_len"", ""add"", ""str_len"", ""reverse_len"", ""list_len"", ""reverse_len"", ""sub"", ""branch"", ""max_floor"", ""list_index"", ""list_index"", ""add"", ""reverse_len"", ""min_cap"", ""sub"", ""list_index"", ""min_cap"", ""max_floor""]",heldout_composition,"x = 1
+x = x + len(""tea"")
+x = x * 2 + 2
+x = x + 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = max(x - 3, 2)
+x = x // 2 + 2
+x = x + len([3, 3, 4, 5])
+x = x + 3
+x = x + len(""tea"")
+x = x + len(""tea""[::-1])
+x = x + len([4, 3, 2, 4, 0])
+x = x + len(""violet""[::-1])
+x = x - 3
+if x > 13:
+    x = x - 3
+else:
+    x = x + 1
+x = max(x - 2, 5)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x + 3
+x = x + len(""tea""[::-1])
+x = min(x + 1, 13)
+x = x - 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 4, 19)
+x = max(x - 1, 1)
+answer = x"
+eval_comp24,eval_comp24_24_0_45680,24,24,"[11, 24, 24, 26, 30, 30, 17, 8, 11, 15, 15, 20, 24, 29, 17, 19, 20, 14, 20, 13, 15, 17, 21, 24]","[""list_index"", ""mul_add"", ""max_floor"", ""add"", ""reverse_len"", ""list_index"", ""min_cap"", ""half_add"", ""list_len"", ""add"", ""max_floor"", ""str_len"", ""str_len"", ""str_len"", ""half_add"", ""add"", ""list_index"", ""half_add"", ""str_len"", ""half_add"", ""min_cap"", ""list_len"", ""reverse_len"", ""list_index""]",heldout_composition,"x = 11
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x * 2 + 2
+x = max(x - 0, 5)
+x = x + 2
+x = x + len(""lamp""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = min(x + 4, 17)
+x = x // 2 + 0
+x = x + len([6, 9, 8])
+x = x + 4
+x = max(x - 0, 2)
+x = x + len(""orbit"")
+x = x + len(""lamp"")
+x = x + len(""stone"")
+x = x // 2 + 3
+x = x + 2
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = x // 2 + 4
+x = x + len(""yellow"")
+x = x // 2 + 3
+x = min(x + 2, 30)
+x = x + len([5, 4])
+x = x + len(""lamp""[::-1])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+answer = x"
+eval_comp24,eval_comp24_24_0_5587883,24,24,"[9, 13, 15, 21, 23, 26, 22, 26, 30, 19, 21, 25, 15, 18, 23, 21, 24, 22, 26, 27, 27, 30, 23, 24]","[""max_floor"", ""list_index"", ""list_index"", ""str_len"", ""list_len"", ""reverse_len"", ""branch"", ""list_index"", ""list_len"", ""min_cap"", ""list_len"", ""list_index"", ""half_add"", ""list_len"", ""reverse_len"", ""branch"", ""str_len"", ""branch"", ""add"", ""list_index"", ""max_floor"", ""list_index"", ""min_cap"", ""add""]",heldout_composition,"x = 0
+x = max(x - 0, 9)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""green"")
+x = x + len(""yellow"")
+x = x + len([0, 9])
+x = x + len(""tea""[::-1])
+if x > 8:
+    x = x - 4
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len([3, 9, 0, 7])
+x = min(x + 1, 19)
+x = x + len([6, 4])
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x // 2 + 3
+x = x + len([1, 0, 3])
+x = x + len(""stone""[::-1])
+if x > 22:
+    x = x - 2
+else:
+    x = x + 3
+x = x + len(""tea"")
+if x > 19:
+    x = x - 2
+else:
+    x = x + 2
+x = x + 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""blue"")
+x = max(x - 0, 3)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""gold"")
+x = min(x + 3, 23)
+x = x + 1
+answer = x"
+eval_comp24,eval_comp24_24_2_3017866,24,25,"[13, 16, 21, 23, 13, 10, 14, 11, 12, 15, 14, 14, 18, 23, 14, 20, 21, 18, 21, 24, 27, 30, 28, 25]","[""list_index"", ""add"", ""reverse_len"", ""list_len"", ""half_add"", ""half_add"", ""list_len"", ""sub"", ""branch"", ""reverse_len"", ""max_floor"", ""min_cap"", ""branch"", ""list_len"", ""half_add"", ""str_len"", ""add"", ""branch"", ""str_len"", ""reverse_len"", ""add"", ""add"", ""branch"", ""max_floor""]",heldout_composition,"x = 9
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + 3
+x = x + len(""river""[::-1])
+x = x + len([2, 9])
+x = x // 2 + 2
+x = x // 2 + 4
+x = x + len([3, 7, 0, 0])
+x = x - 3
+if x > 13:
+    x = x - 4
+else:
+    x = x + 1
+x = x + len(""tea""[::-1])
+x = max(x - 1, 11)
+x = min(x + 2, 14)
+if x > 24:
+    x = x - 3
+else:
+    x = x + 4
+x = x + len([7, 0, 3, 6, 4])
+x = x // 2 + 3
+x = x + len(""violet"")
+x = x + 1
+if x > 17:
+    x = x - 3
+else:
+    x = x + 2
+x = x + len(""cat"")
+x = x + len(""cat""[::-1])
+x = x + 3
+x = x + 3
+if x > 20:
+    x = x - 2
+else:
+    x = x + 2
+x = max(x - 3, 14)
+answer = x"
+eval_comp24,eval_comp24_24_0_2595933,24,12,"[4, 6, 12, 16, 11, 15, 18, 15, 21, 12, 15, 30, 26, 26, 25, 21, 24, 30, 29, 31, 29, 28, 15, 12]","[""max_floor"", ""branch"", ""str_len"", ""list_len"", ""half_add"", ""list_index"", ""min_cap"", ""sub"", ""reverse_len"", ""half_add"", ""add"", ""mul_add"", ""branch"", ""list_index"", ""max_floor"", ""sub"", ""reverse_len"", ""str_len"", ""branch"", ""add"", ""sub"", ""branch"", ""min_cap"", ""max_floor""]",heldout_composition,"x = 7
+x = max(x - 3, 4)
+if x > 15:
+    x = x - 2
+else:
+    x = x + 2
+x = x + len(""yellow"")
+x = x + len([6, 8, 9, 4])
+x = x // 2 + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = min(x + 3, 27)
+x = x - 3
+x = x + len(""violet""[::-1])
+x = x // 2 + 2
+x = x + 3
+x = x * 2 + 0
+if x > 17:
+    x = x - 4
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = max(x - 1, 5)
+x = x - 4
+x = x + len(""tea""[::-1])
+x = x + len(""violet"")
+if x > 24:
+    x = x - 1
+else:
+    x = x + 4
+x = x + 2
+x = x - 2
+if x > 13:
+    x = x - 1
+else:
+    x = x + 3
+x = min(x + 2, 15)
+x = max(x - 3, 8)
+answer = x"
+eval_comp24,eval_comp24_24_0_7642086,24,27,"[4, 8, 5, 8, 4, 3, 8, 4, 10, 15, 19, 9, 11, 22, 28, 25, 27, 23, 27, 24, 16, 18, 23, 27]","[""sub"", ""add"", ""max_floor"", ""min_cap"", ""sub"", ""sub"", ""mul_add"", ""sub"", ""mul_add"", ""reverse_len"", ""list_len"", ""half_add"", ""min_cap"", ""mul_add"", ""reverse_len"", ""min_cap"", ""add"", ""sub"", ""list_index"", ""branch"", ""half_add"", ""list_len"", ""list_len"", ""list_len""]",heldout_composition,"x = 8
+x = x - 4
+x = x + 4
+x = max(x - 3, 4)
+x = min(x + 3, 27)
+x = x - 4
+x = x - 1
+x = x * 2 + 2
+x = x - 4
+x = x * 2 + 2
+x = x + len(""orbit""[::-1])
+x = x + len([9, 7, 4, 1])
+x = x // 2 + 0
+x = min(x + 2, 27)
+x = x * 2 + 0
+x = x + len(""violet""[::-1])
+x = min(x + 1, 25)
+x = x + 2
+x = x - 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 10:
+    x = x - 3
+else:
+    x = x + 1
+x = x // 2 + 4
+x = x + len([0, 5])
+x = x + len([5, 0, 6, 8, 8])
+x = x + len([8, 1, 7, 5])
+answer = x"
+eval_comp24,eval_comp24_24_0_5917121,24,9,"[5, 11, 14, 14, 10, 10, 11, 10, 14, 18, 20, 24, 20, 26, 22, 22, 22, 27, 23, 26, 14, 11, 10, 9]","[""reverse_len"", ""reverse_len"", ""branch"", ""list_index"", ""half_add"", ""list_index"", ""min_cap"", ""sub"", ""list_index"", ""list_len"", ""min_cap"", ""list_index"", ""branch"", ""str_len"", ""sub"", ""list_index"", ""max_floor"", ""list_len"", ""sub"", ""str_len"", ""half_add"", ""max_floor"", ""max_floor"", ""max_floor""]",heldout_composition,"x = 2
+x = x + len(""tea""[::-1])
+x = x + len(""violet""[::-1])
+if x > 12:
+    x = x - 4
+else:
+    x = x + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = x // 2 + 3
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = min(x + 1, 29)
+x = x - 1
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+x = x + len([0, 3, 7, 9])
+x = min(x + 2, 30)
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""white"")
+if x > 17:
+    x = x - 4
+else:
+    x = x + 2
+x = x + len(""violet"")
+x = x - 4
+x = x + [""red"", ""blue"", ""green"", ""gold"", ""white""].index(""red"")
+x = max(x - 0, 13)
+x = x + len([1, 5, 2, 7, 8])
+x = x - 4
+x = x + len(""tea"")
+x = x // 2 + 1
+x = max(x - 3, 0)
+x = max(x - 1, 3)
+x = max(x - 1, 9)
+answer = x"

@@ -1,0 +1,3302 @@
+[
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "agriculture",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.4,
+    "mean_visible_programs": 0.4,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 1,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "craigslist_data_wrangler",
+    "mean_correct_visible_programs": 0.4,
+    "mean_unique_visible_outputs": 0.4,
+    "mean_visible_programs": 0.4,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 2
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 0,
+    "family": "crime_data_wrangler",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "potters_wheel_divide",
+    "mean_correct_visible_programs": 0.4,
+    "mean_unique_visible_outputs": 0.8,
+    "mean_visible_programs": 1.0,
+    "n": 5,
+    "oracle_union": 2,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      }
+    },
+    "tasks_with_consensus_2": 1,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 3
+  },
+  {
+    "direct_exact": 3,
+    "direct_parse_ok": 5,
+    "family": "potters_wheel_fold",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 3,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 3,
+    "direct_parse_ok": 5,
+    "family": "potters_wheel_fold_2",
+    "mean_correct_visible_programs": 0.2,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 3,
+    "oracle_visible_program": 1,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 2,
+    "direct_parse_ok": 5,
+    "family": "potters_wheel_merge_split",
+    "mean_correct_visible_programs": 2.0,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 2.4,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 4,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 5,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      },
+      "consensus_3": {
+        "accuracy": 0.4,
+        "consensus_commits": 2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "direct": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 5,
+    "tasks_with_two_plus_visible_programs": 5,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "potters_wheel_split_fold",
+    "mean_correct_visible_programs": 1.4,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 1.6,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 4,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 3,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 1,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 3,
+    "tasks_with_two_plus_visible_programs": 3,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "potters_wheel_unfold",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "potters_wheel_unfold2",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.6,
+    "mean_visible_programs": 0.8,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 2
+      }
+    },
+    "tasks_with_consensus_2": 1,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 2
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "proactive_wrangling_complex",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "proactive_wrangling_fold",
+    "mean_correct_visible_programs": 0.2,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 1,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 3,
+    "direct_parse_ok": 5,
+    "family": "reshape_table_structure_data_wrangler",
+    "mean_correct_visible_programs": 0.6,
+    "mean_unique_visible_outputs": 0.6,
+    "mean_visible_programs": 0.8,
+    "n": 5,
+    "oracle_union": 3,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.6,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "consensus_3": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      }
+    },
+    "tasks_with_consensus_2": 1,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 3
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_10",
+    "mean_correct_visible_programs": 2.0,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 2.0,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 5,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 4,
+    "tasks_with_two_plus_visible_programs": 4,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 1,
+    "direct_parse_ok": 5,
+    "family": "synthetic_11",
+    "mean_correct_visible_programs": 0.4,
+    "mean_unique_visible_outputs": 0.4,
+    "mean_visible_programs": 0.4,
+    "n": 5,
+    "oracle_union": 2,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 2
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_12",
+    "mean_correct_visible_programs": 2.6,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 2.6,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 5,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 5,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 3,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 5,
+    "tasks_with_two_plus_visible_programs": 5,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_13",
+    "mean_correct_visible_programs": 0.8,
+    "mean_unique_visible_outputs": 0.8,
+    "mean_visible_programs": 0.8,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 4,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 4
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_15",
+    "mean_correct_visible_programs": 0.2,
+    "mean_unique_visible_outputs": 0.6,
+    "mean_visible_programs": 1.0,
+    "n": 5,
+    "oracle_union": 1,
+    "oracle_visible_program": 1,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.3333333333333333,
+        "program_commits": 3
+      }
+    },
+    "tasks_with_consensus_2": 1,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 3
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_17",
+    "mean_correct_visible_programs": 0.2,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 1,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_18",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_19",
+    "mean_correct_visible_programs": 2.2,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 2.2,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 5,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 4,
+    "tasks_with_two_plus_visible_programs": 4,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 2,
+    "direct_parse_ok": 5,
+    "family": "synthetic_2",
+    "mean_correct_visible_programs": 0.2,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 3,
+    "oracle_visible_program": 1,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 3,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 2,
+    "direct_parse_ok": 5,
+    "family": "synthetic_22",
+    "mean_correct_visible_programs": 0.4,
+    "mean_unique_visible_outputs": 1.2,
+    "mean_visible_programs": 1.2,
+    "n": 5,
+    "oracle_union": 2,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.5,
+        "program_commits": 4
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 2,
+    "tasks_with_visible_program": 4
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_24",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.4,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 1,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_25",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "synthetic_26",
+    "mean_correct_visible_programs": 1.8,
+    "mean_unique_visible_outputs": 1.2,
+    "mean_visible_programs": 2.0,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 5,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 4,
+    "tasks_with_two_plus_visible_programs": 5,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "synthetic_27",
+    "mean_correct_visible_programs": 0.4,
+    "mean_unique_visible_outputs": 0.6,
+    "mean_visible_programs": 1.0,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      }
+    },
+    "tasks_with_consensus_2": 1,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 3
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_28",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_29",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_3",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_30",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "synthetic_33",
+    "mean_correct_visible_programs": 1.2,
+    "mean_unique_visible_outputs": 1.2,
+    "mean_visible_programs": 2.0,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 4,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 3,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 1,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.6,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 3,
+    "tasks_with_two_plus_visible_programs": 3,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_34",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.4,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 1,
+    "tasks_with_two_plus_visible_programs": 1,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_36",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_37",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "synthetic_4",
+    "mean_correct_visible_programs": 3.0,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 3.0,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 5,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 5,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 5,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 5,
+    "tasks_with_two_plus_visible_programs": 5,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 3,
+    "direct_parse_ok": 4,
+    "family": "synthetic_40",
+    "mean_correct_visible_programs": 1.4,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 2.0,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 3,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 4,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 4,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "direct": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 1,
+        "direct_miss_recoveries": 1,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.6,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 4,
+    "tasks_with_two_plus_visible_programs": 4,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 0,
+    "family": "synthetic_41",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 5,
+    "direct_parse_ok": 5,
+    "family": "synthetic_43",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 5,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 1.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 1,
+    "direct_parse_ok": 5,
+    "family": "synthetic_44",
+    "mean_correct_visible_programs": 0.4,
+    "mean_unique_visible_outputs": 0.8,
+    "mean_visible_programs": 0.8,
+    "n": 5,
+    "oracle_union": 2,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.5,
+        "program_commits": 4
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 4
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_45",
+    "mean_correct_visible_programs": 1.8,
+    "mean_unique_visible_outputs": 0.8,
+    "mean_visible_programs": 1.8,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 4,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "consensus_3": {
+        "accuracy": 0.2,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      }
+    },
+    "tasks_with_consensus_2": 4,
+    "tasks_with_two_plus_visible_programs": 4,
+    "tasks_with_visible_program": 4
+  },
+  {
+    "direct_exact": 1,
+    "direct_parse_ok": 5,
+    "family": "synthetic_46",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 1,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "synthetic_47",
+    "mean_correct_visible_programs": 0.2,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 1,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 1,
+    "direct_parse_ok": 5,
+    "family": "synthetic_48",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 1,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.2,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_49",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 3,
+    "direct_parse_ok": 5,
+    "family": "synthetic_5",
+    "mean_correct_visible_programs": 1.4,
+    "mean_unique_visible_outputs": 1.0,
+    "mean_visible_programs": 1.8,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 4,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 3,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      },
+      "consensus_3": {
+        "accuracy": 0.6,
+        "consensus_commits": 1,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "direct": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.6,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      }
+    },
+    "tasks_with_consensus_2": 3,
+    "tasks_with_two_plus_visible_programs": 3,
+    "tasks_with_visible_program": 5
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_51",
+    "mean_correct_visible_programs": 0.8,
+    "mean_unique_visible_outputs": 0.4,
+    "mean_visible_programs": 0.8,
+    "n": 5,
+    "oracle_union": 2,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.4,
+        "consensus_commits": 2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      }
+    },
+    "tasks_with_consensus_2": 2,
+    "tasks_with_two_plus_visible_programs": 2,
+    "tasks_with_visible_program": 2
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 5,
+    "family": "synthetic_6",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.0,
+    "mean_visible_programs": 0.0,
+    "n": 5,
+    "oracle_union": 0,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 0
+  },
+  {
+    "direct_exact": 4,
+    "direct_parse_ok": 5,
+    "family": "synthetic_7",
+    "mean_correct_visible_programs": 0.0,
+    "mean_unique_visible_outputs": 0.2,
+    "mean_visible_programs": 0.2,
+    "n": 5,
+    "oracle_union": 4,
+    "oracle_visible_program": 0,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.8,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 1
+  },
+  {
+    "direct_exact": 0,
+    "direct_parse_ok": 0,
+    "family": "synthetic_8",
+    "mean_correct_visible_programs": 0.4,
+    "mean_unique_visible_outputs": 0.4,
+    "mean_visible_programs": 0.4,
+    "n": 5,
+    "oracle_union": 2,
+    "oracle_visible_program": 2,
+    "policies": {
+      "consensus_2": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "consensus_3": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "direct_or_program_agreement": {
+        "accuracy": 0.0,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "first_visible_program": {
+        "accuracy": 0.4,
+        "consensus_commits": 0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 2,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      }
+    },
+    "tasks_with_consensus_2": 0,
+    "tasks_with_two_plus_visible_programs": 0,
+    "tasks_with_visible_program": 2
+  }
+]

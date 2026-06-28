@@ -1,0 +1,37 @@
+{
+  "arm_name": "retrieval_adapt_same_neighborhood_top6",
+  "experiment": "qwen35_4b_independent_retrieval_consensus",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_adapt_same_neighborhood_top6_records.jsonl",
+  "plan": "data/independent_retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 5.375,
+    "coverage": 0.375,
+    "distinct_behavior_rate_mean": 0.8444444444444444,
+    "distinct_functional_rate_mean": 0.4291666666666667,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 47332,
+    "hidden_pass_candidates_mean": 0.5833333333333334,
+    "parse_success_mean": 5.208333333333333,
+    "pass1_proxy": 0.125,
+    "records": 24,
+    "visible_candidates_mean": 1.625,
+    "visible_coverage": 0.375,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 20260626,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 144,
+    "completion_tokens": 17482,
+    "forward_tokens": 52001,
+    "prompt_tokens": 34519
+  },
+  "top_k": 6,
+  "top_p": 0.95
+}

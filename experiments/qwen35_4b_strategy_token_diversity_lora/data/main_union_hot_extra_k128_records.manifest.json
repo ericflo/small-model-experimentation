@@ -1,0 +1,36 @@
+{
+  "arm_name": "union_hot_extra",
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "extra_per_zero_task": 40,
+  "max_new_tokens": 220,
+  "path": "data/main_union_hot_extra_k128_records.jsonl",
+  "records": {
+    "candidate_count_mean": 29.3125,
+    "coverage": 0.8875,
+    "distinct_behavior_rate_mean": 0.6293906207377854,
+    "distinct_functional_rate_mean": 0.3378319238066158,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.9125,
+    "parse_success_mean": 26.9375,
+    "records": 80,
+    "visible_candidates_mean": 8.7875,
+    "visible_coverage": 0.8875,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 11,
+    "zero_to_one": 2,
+    "zero_to_one_rate": 0.18181818181818182
+  },
+  "records_in": "data/main_union_k32_records.jsonl",
+  "round_name": "main_union_hot_extra_k128",
+  "seed": 20260625,
+  "temperatures": "0.8,1.0,1.2",
+  "token_usage": {
+    "calls": 440,
+    "completion_tokens": 59931,
+    "forward_tokens": 115971,
+    "prompt_tokens": 56040
+  },
+  "top_p": 0.98,
+  "zero_base_records": 11
+}

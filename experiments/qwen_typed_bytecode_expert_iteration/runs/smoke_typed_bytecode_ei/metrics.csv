@@ -1,0 +1,16 @@
+run,phase,split,n,direct_accuracy,search_accuracy,oracle_accuracy,program_exact,valid_rate,direct_valid_rate,mean_candidates,found_rate,gap_recovered
+smoke_typed_bytecode_ei,seed_supervised,val_mixed,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,seed_supervised,fresh_standard,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,seed_supervised,fresh_paraphrase,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,seed_supervised,fresh_paired,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,seed_supervised,hard_composition,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,expert_round_1,val_mixed,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,expert_round_1,fresh_standard,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,expert_round_1,fresh_paraphrase,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,expert_round_1,fresh_paired,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,expert_round_1,hard_composition,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,full_supervised,val_mixed,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,full_supervised,fresh_standard,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,full_supervised,fresh_paraphrase,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,full_supervised,fresh_paired,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0
+smoke_typed_bytecode_ei,full_supervised,hard_composition,24,0.0,0.0,0.0,0.0,0.0,0.0,55.0,0.0,0.0

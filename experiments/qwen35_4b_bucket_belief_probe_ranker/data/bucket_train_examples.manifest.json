@@ -1,0 +1,32 @@
+{
+  "candidates_per_state": 8,
+  "max_options": 8,
+  "out": "/workspace/experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_train_examples.jsonl",
+  "records": "/workspace/experiments/qwen35_4b_bucket_belief_probe_ranker/data/train_records.jsonl",
+  "states": "/workspace/experiments/qwen35_4b_bucket_belief_probe_ranker/data/process_train_states.jsonl",
+  "summary": {
+    "by_cell": {
+      "train/n128/pair_affine_mod": 608,
+      "train/n128/pair_compare_gate": 1176,
+      "train/n256/pair_affine_mod": 544,
+      "train/n256/pair_compare_gate": 1200,
+      "train/n64/pair_affine_mod": 264,
+      "train/n64/pair_compare_gate": 1160
+    },
+    "candidate_count_mean": 619.2859450726979,
+    "examples": 4952,
+    "labels": {
+      "A": 2457,
+      "B": 1600,
+      "C": 514,
+      "D": 103,
+      "E": 83,
+      "F": 62,
+      "G": 38,
+      "H": 95
+    },
+    "reward_mean": 1.5686295107891588,
+    "states": 619,
+    "survivors_if_taken_mean": 309.7193053311793
+  }
+}

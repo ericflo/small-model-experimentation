@@ -1,0 +1,30 @@
+{
+  "experiment": "qwen35_4b_sketch_coverage_shift_probe",
+  "model_family": "Qwen/Qwen3.5-4B",
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_sketch_coverage_shift_probe",
+  "objective": "Falsify whether typed-sketch verified completion keeps target coverage under name and primitive shift before training another selector.",
+  "records_per_family": 8,
+  "visible_cases": 6,
+  "hidden_cases": 18,
+  "query_pool_cases": 48,
+  "sketch_conditions": [
+    "auto",
+    "manual",
+    "erased"
+  ],
+  "hole_option_caps": [
+    8,
+    16,
+    28
+  ],
+  "active_query_budgets": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "notes": [
+    "The executor supports shifted primitives so they can be scored.",
+    "The completion bank is intentionally left in its original tuned form for the first falsification pass."
+  ]
+}

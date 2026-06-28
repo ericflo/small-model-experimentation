@@ -1,0 +1,268 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Latent Fast-Weight Qwen Experiment</title><style>
+body { margin:0; background:#f6f7f9; color:#17202a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.62; }
+main { max-width:960px; margin:0 auto; padding:56px 30px 84px; background:#fff; box-shadow:0 1px 18px rgba(20,30,40,.08); }
+h1 { font-size:2.35rem; line-height:1.12; margin:0 0 .4rem; color:#0f1720; }
+h2 { margin-top:2.2rem; padding-top:.45rem; border-top:1px solid #e5e7eb; color:#152238; }
+h3 { margin-top:1.5rem; color:#24364b; }
+p,li { font-size:1.02rem; }
+a { color:#1d5fa7; }
+code { background:#f0f3f6; padding:.12rem .28rem; border-radius:4px; }
+pre { background:#111827; color:#f9fafb; padding:1rem; border-radius:8px; overflow-x:auto; }
+pre code { background:transparent; padding:0; }
+table { border-collapse:collapse; width:100%; margin:1rem 0 1.4rem; font-size:.96rem; }
+th,td { border:1px solid #d7dde5; padding:.55rem .65rem; vertical-align:top; }
+th { background:#edf2f7; text-align:left; }
+img { display:block; max-width:100%; margin:1.2rem auto 1.8rem; border:1px solid #d8dee8; border-radius:6px; }
+blockquote { border-left:4px solid #8aa4c2; margin-left:0; padding-left:1rem; background:#f8fafc; color:#334155; }
+@media print { body{background:white;} main{box-shadow:none; max-width:none;} }
+</style></head><body><main><h1>Did a Small Latent Recurrent Fast-Weight Runtime Make Qwen Compute Better?</h1>
+<p><strong>A local single-GPU experiment on invisible recurrent computation inside Qwen3.5-4B</strong></p>
+<h2>Abstract</h2>
+<p>We tested whether a frozen Qwen3.5-4B model augmented with a small internal recurrent fast-weight runtime gains accuracy when given more invisible latent compute steps <code>K</code>. The experiment used generated, exactly-verifiable modular arithmetic multiple-choice tasks, with a harder held-out split containing longer operation chains. The core result is negative: the current implementation does <strong>not</strong> demonstrate robust K-scaling. Several 100-example checkpoints showed small apparent gains from recurrence, but larger 250-example retests erased or reversed the most favorable effects. A <code>K=0</code>-only training control also produced occasional small K bumps despite never training the recurrent core, showing that isolated few-point gains are not reliable evidence. The best-supported conclusion is that this small bolt-on recurrent adapter sometimes perturbs predictions beneficially, but did not learn stable serial latent computation under this training setup.</p>
+<h2>Lay Summary</h2>
+<p>The idea was to give a language model a private scratchpad loop inside its neural network, instead of forcing it to think by writing words. If that worked, giving the model more private steps should make it more accurate on multi-step arithmetic.</p>
+<p>We built and ran that test. The model sometimes looked better with a few private steps, but when we checked those promising moments on more examples, the improvement went away. The experiment was still useful: it showed how to run this kind of test, what controls are needed, and why small apparent improvements can be misleading.</p>
+<h2>1. Motivation</h2>
+<p>A normal language model has two recurrence channels:</p>
+<ol>
+<li>It can attend over the input sequence inside one forward pass.</li>
+<li>It can generate more output tokens and feed them back into itself.</li>
+</ol>
+<p>The second channel is powerful but visible and expensive. The motivating hypothesis was that a model might benefit from an internal recurrent machine:</p>
+<pre><code class="language-text">prompt -&gt; compiler layers -&gt; latent workspace/runtime -&gt; decoder layers -&gt; answer
+</code></pre>
+<p>In the target design, the model does not emit a DSL or call a tool. It updates temporary internal state: workspace tokens, gates over low-rank operators, and differentiable fast-weight memory. The key empirical signature should be:</p>
+<pre><code class="language-text">accuracy(K=0) &lt; accuracy(K=1) &lt; accuracy(K=2/4/8), especially on longer held-out chains
+</code></pre>
+<h2>2. Important Architecture Caveat</h2>
+<p>One design assumption was that the backbone would behave like a plain transformer. The actual default model, <code>Qwen/Qwen3.5-4B</code>, is more interesting: its Hugging Face model card describes it as a causal language model with a vision encoder, 4B language-model parameters, hidden size 2560, 32 layers, and a repeated hidden layout of three Gated DeltaNet layers followed by one gated attention layer. NVIDIA's Qwen3.5 documentation likewise describes Qwen3.5 as a hybrid Gated DeltaNet plus standard-attention architecture, with dense and MoE variants in the broader family.</p>
+<p>That matters. Gated DeltaNet is already a kind of learned fast-weight/linear-attention substrate. Therefore this experiment should not be read as adding fast weights to a model that lacks them entirely. The sharper question is narrower:</p>
+<blockquote>
+<p>Does adding a small recurrent-depth axis over invisible workspace tokens improve this already hybrid Qwen3.5 model?</p>
+</blockquote>
+<p>Sources: <a href="https://huggingface.co/Qwen/Qwen3.5-4B">Qwen/Qwen3.5-4B model card</a>, <a href="https://docs.nvidia.com/nemo/megatron-bridge/0.4.1/models/vlm/qwen35-vl.html">NVIDIA Qwen3.5 documentation</a>.</p>
+<h2>3. Experimental Setup</h2>
+<h3>Backbone</h3>
+<ul>
+<li>Model: <code>Qwen/Qwen3.5-4B</code></li>
+<li>Loader: <code>AutoModelForMultimodalLM</code></li>
+<li>Quantization: 4-bit bitsandbytes</li>
+<li>Frozen base parameters: 2,590,093,824 counted in the loaded text/vision model object</li>
+<li>Detected language layers: <code>model.language_model.layers</code></li>
+<li>Hook insertion point: layer index 28 of 32 (<code>--hook_layer -4</code>)</li>
+<li>GPU: NVIDIA RTX 6000 Ada, about 48 GB VRAM</li>
+</ul>
+<h3>Runtime Adapter</h3>
+<p>The adapter reads prompt hidden states only, initializes eight latent workspace tokens, runs <code>K</code> recurrent steps, and writes a residual delta back into the hidden stream before later Qwen layers decode the answer.</p>
+<p>Core components:</p>
+<ul>
+<li>workspace tokens: 8</li>
+<li>runtime width: 256</li>
+<li>dynamic low-rank transform bank: 12 bases, rank 16</li>
+<li>temporary fast-weight memory: 128 x 128</li>
+<li>recurrent training budgets: <code>K in {1,2,4}</code></li>
+<li>evaluation budgets: <code>K in {0,1,2,4,8}</code></li>
+</ul>
+<p><code>K=0</code> is not the frozen model. It is the trained prompt-conditioned injection with zero recurrent loop iterations. The true frozen-model baseline was measured separately with the hook disabled.</p>
+<h3>Task</h3>
+<p>The task generator creates exact modular arithmetic problems modulo 97 with five answer choices. Families include single-register chains, reverse-worded chains, and two-register updates. The hard split uses longer operation chains than training by adding three extra steps.</p>
+<p>The model is scored by multiple-choice answer-letter log-likelihood. For each candidate letter, we compute the average negative log-likelihood of that answer token and choose the lowest-NLL candidate.</p>
+<h3>Runs</h3>
+<p>Three main runs were completed:</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">Training <code>K</code></th>
+<th>Extra objective</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full recurrent</td>
+<td style="text-align: right;"><code>1,2,4</code></td>
+<td>none</td>
+<td>Primary test of recurrent latent compute</td>
+</tr>
+<tr>
+<td><code>K=0</code>-only control</td>
+<td style="text-align: right;"><code>0</code></td>
+<td>none</td>
+<td>Tests whether untrained recurrent steps create similar bumps</td>
+</tr>
+<tr>
+<td>Auxiliary value loss</td>
+<td style="text-align: right;"><code>1,2,4</code></td>
+<td><code>0.2 * CE(answer mod 97)</code></td>
+<td>Tests whether denser numeric supervision helps</td>
+</tr>
+</tbody>
+</table>
+<p>Training used 300 optimizer steps, batch size 4, and 100-example validation/hard evaluations at checkpoints. The most favorable checkpoints were retested on 250 examples per split.</p>
+<h2>4. Results</h2>
+<h3>Frozen Baseline</h3>
+<p>The first concern was whether the task was too easy. It was not.</p>
+<p>Frozen Qwen3.5-4B, hook disabled:</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validation</td>
+<td style="text-align: right;">18.0%</td>
+</tr>
+<tr>
+<td>Hard</td>
+<td style="text-align: right;">21.0%</td>
+</tr>
+</tbody>
+</table>
+<p>Chance is 20% because there are five choices. This gave the recurrent runtime real headroom.</p>
+<h3>Training Checkpoints</h3>
+<p><img alt="Best recurrent gain over time" src="../analysis/figures/best_k_gain_over_time.png" /></p>
+<p>At 100-example checkpoint evaluations, the full recurrent run sometimes showed positive <code>K&gt;0</code> gains. For example, at step 150 validation improved from 22% at <code>K=0</code> to 28% at <code>K=2</code>, and hard improved from 29% at <code>K=0</code> to 32% at <code>K=1</code>.</p>
+<p>But the effect was unstable:</p>
+<ul>
+<li>It was not monotonic in <code>K</code>.</li>
+<li>It appeared and disappeared across checkpoints.</li>
+<li>The final full recurrent checkpoint was negative on validation: <code>K=0</code> was 26%, while <code>K=1/2/4/8</code> were 22%, 21%, 22%, and 24%.</li>
+<li>The hard split did not show reliable length-generalization gains.</li>
+</ul>
+<p>The heatmap below shows the full recurrent run across all checkpoints.</p>
+<p><img alt="Full recurrent heatmap" src="../analysis/figures/full_recurrent_heatmap.png" /></p>
+<h3>Control Run</h3>
+<p>The <code>K=0</code>-only control trained the same prompt-conditioned injection path but never trained the recurrent core. If untrained recurrence still creates small K bumps, then isolated gains in the full run are not enough.</p>
+<p>That is what happened. At step 200, the control hard split improved from 26% at <code>K=0</code> to 30% at <code>K=4</code>, even though recurrent dynamics were untrained. This does not mean the control learned recurrence. It means 100-example K sweeps are noisy enough to produce misleading few-point bumps.</p>
+<h3>Larger Retests</h3>
+<p>The most important verification was retesting promising checkpoints on 250 examples per split with Wilson 95% intervals.</p>
+<p><img alt="Large retest bars" src="../analysis/figures/large_retest_bars.png" /></p>
+<p>The strongest apparent full-run checkpoint was step 200. On larger retest:</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">K=0</th>
+<th style="text-align: right;">Best K&gt;0</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validation</td>
+<td style="text-align: right;">20.8%</td>
+<td style="text-align: right;">20.0% (<code>K=8</code>)</td>
+<td>no gain</td>
+</tr>
+<tr>
+<td>Hard</td>
+<td style="text-align: right;">26.0%</td>
+<td style="text-align: right;">24.4% (<code>K=8</code>)</td>
+<td>no gain</td>
+</tr>
+</tbody>
+</table>
+<p>The auxiliary final checkpoint also failed to show a robust effect:</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">K=0</th>
+<th style="text-align: right;">Best K&gt;0</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validation</td>
+<td style="text-align: right;">17.6%</td>
+<td style="text-align: right;">16.8% (<code>K=4</code>)</td>
+<td>no gain</td>
+</tr>
+<tr>
+<td>Hard</td>
+<td style="text-align: right;">21.2%</td>
+<td style="text-align: right;">22.8% (<code>K=2/8</code>)</td>
+<td>+1.6 points, not compelling</td>
+</tr>
+</tbody>
+</table>
+<p>The auxiliary value loss itself remained close to random prediction of one of 97 residues, so it did not provide evidence that the workspace learned exact arithmetic.</p>
+<h2>5. Interpretation</h2>
+<p>The experiment did <strong>not</strong> validate the strong hypothesis:</p>
+<blockquote>
+<p>More latent recurrent compute reliably improves accuracy on serial-depth-bound arithmetic.</p>
+</blockquote>
+<p>Instead, it supports a weaker and more cautionary conclusion:</p>
+<blockquote>
+<p>This small 256-dimensional recurrent adapter can perturb Qwen's answer distribution, sometimes beneficially, but under this training budget it does not produce stable, generalizing, monotonic internal computation.</p>
+</blockquote>
+<p>Several observations point in the same direction:</p>
+<ol>
+<li><code>K=0</code> was often as good as or better than <code>K&gt;0</code> under larger retesting.</li>
+<li>Apparent K gains were not monotonic.</li>
+<li>The hard length-generalization split did not improve reliably.</li>
+<li>A <code>K=0</code>-only control produced occasional K bumps despite untrained recurrence.</li>
+<li>The auxiliary value-prediction head did not learn the numeric target.</li>
+</ol>
+<h2>6. What This Falsifies and What It Does Not</h2>
+<p>This does <strong>not</strong> falsify latent recurrent reasoning as a general idea. It falsifies a narrower implementation claim:</p>
+<blockquote>
+<p>A small, hook-inserted, 256-dimensional recurrent fast-weight adapter trained for 300 steps with answer-letter NLL is sufficient to produce robust K-scaling on these modular arithmetic tasks.</p>
+</blockquote>
+<p>That claim is not supported.</p>
+<p>The broader idea remains plausible because this implementation is thin relative to the proposal:</p>
+<ul>
+<li>The recurrent loop operates in a small adapter, not through repeated full-width Qwen layers.</li>
+<li>The final objective is mostly one answer-letter token, a low-bandwidth signal.</li>
+<li>The fast-weight memory is a simple leaky outer-product accumulator.</li>
+<li>There is no monotonic-refinement loss, halting objective, teacher trace distillation, or paired per-example recurrence analysis.</li>
+<li>Qwen3.5 already contains Gated DeltaNet layers, so the added fast-weight memory may be redundant unless the recurrent axis is made much stronger.</li>
+</ul>
+<h2>7. Recommended Next Experiment</h2>
+<p>The next version should target the failure modes directly:</p>
+<ol>
+<li><strong>Use paired per-example evaluation.</strong> Record whether the same example flips correct/incorrect as K changes, then use paired tests rather than independent binomial intervals.</li>
+<li><strong>Train with a real workspace target.</strong> Predict the numeric answer from <code>S_K</code>, but make that objective strong enough to learn; the current auxiliary head did not.</li>
+<li><strong>Iterate a wider computation.</strong> Re-run a small slice of upper Qwen layers with workspace conditioning, not only a 256-dimensional adapter.</li>
+<li><strong>Preserve all checkpoints automatically.</strong> This is now patched in the script.</li>
+<li><strong>Reduce intermediate eval cost.</strong> Use small checkpoint sweeps, then large retests only for selected checkpoints.</li>
+<li><strong>Add a refinement objective.</strong> Train <code>V(S_{t+1})</code> to be more predictive than <code>V(S_t)</code> so recurrence is pressured to improve state rather than merely move it.</li>
+<li><strong>Use cleaner gates if interpretability matters.</strong> Softmax mixtures are poor evidence for discrete latent opcodes; sigmoid/top-k or vector-quantized program codes would make clustering tests more meaningful.</li>
+</ol>
+<h2>8. Reproducibility</h2>
+<p>Primary files:</p>
+<ul>
+<li>Experiment script: <code>../src/latent_qwen_fastweight_experiment.py</code></li>
+<li>Analysis script: <code>../src/analyze_latent_results.py</code></li>
+<li>Experiment log: <code>experiment_log.md</code></li>
+<li>Long-form checkpoint data: <code>../analysis/training_accuracy_long.csv</code></li>
+<li>Larger retests: <code>../analysis/large_retests_long.csv</code></li>
+<li>Figures: <code>../analysis/figures/</code></li>
+</ul>
+<p>Primary run directories:</p>
+<ul>
+<li><code>../runs/main_qwen35_hook_full_seed7</code></li>
+<li><code>../runs/control_qwen35_hook_traink0_seed7</code></li>
+<li><code>../runs/main_qwen35_hook_aux02_seed7</code></li>
+<li><code>../runs/eval_main_step200_n250</code></li>
+<li><code>../runs/eval_aux_final_n250</code></li>
+</ul>
+<p>Large adapter checkpoints are stored outside the experiment bundle under:</p>
+<ul>
+<li><code>../../../large_artifacts/qwen_fastweight_hook/checkpoints/</code></li>
+</ul>
+<p>Environment:</p>
+<ul>
+<li>Python 3.12.3</li>
+<li>PyTorch 2.8.0+cu128</li>
+<li>Transformers 5.12.1</li>
+<li>bitsandbytes 0.49.2</li>
+<li>GPU: NVIDIA RTX 6000 Ada Generation</li>
+</ul>
+<h2>9. Bottom Line</h2>
+<p>This was a useful negative result. The experiment found real headroom and successfully inserted an invisible recurrent runtime into Qwen3.5-4B, but it did not find robust evidence that more latent recurrent steps improve exact modular arithmetic. The strongest early positive signs did not survive larger retesting. The next experiment should move from a small residual adapter toward a stronger recurrent-depth mechanism with denser supervision and paired statistical evaluation.</p></main></body></html>

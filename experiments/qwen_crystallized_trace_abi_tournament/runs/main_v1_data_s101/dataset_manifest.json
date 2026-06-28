@@ -1,0 +1,150 @@
+{
+  "seed": 101,
+  "train_n": 192,
+  "eval_sizes": {
+    "eval_indist": 24,
+    "eval_composition": 24,
+    "eval_template_shift": 24
+  },
+  "train_sample": [
+    {
+      "example_id": "train_unit_17",
+      "split": "train",
+      "family": "unit",
+      "prompt": "Convert 12 meters to centimeters. Return the integer result.",
+      "answer": "1200",
+      "op_name": "meters_to_centimeters",
+      "payload": {
+        "amount": 12,
+        "src": "meters",
+        "dst": "centimeters",
+        "factor": 100
+      }
+    },
+    {
+      "example_id": "train_date_151",
+      "split": "train",
+      "family": "date",
+      "prompt": "Starting from 2026-05-10, add 6 days. Return the ISO date.",
+      "answer": "2026-05-16",
+      "op_name": "add_days",
+      "payload": {
+        "date": "2026-05-10",
+        "delta_days": 6
+      }
+    },
+    {
+      "example_id": "train_string_8",
+      "split": "train",
+      "family": "string",
+      "prompt": "Code JU-2062-JC has separators. Delete the separators and keep the leftmost 4 characters.",
+      "answer": "JU20",
+      "op_name": "take_prefix",
+      "payload": {
+        "code": "JU-2062-JC",
+        "clean": "JU2062JC",
+        "n": 4
+      }
+    },
+    {
+      "example_id": "train_unit_45",
+      "split": "train",
+      "family": "unit",
+      "prompt": "Convert 13 kilograms to grams. Return the integer result.",
+      "answer": "13000",
+      "op_name": "kilograms_to_grams",
+      "payload": {
+        "amount": 13,
+        "src": "kilograms",
+        "dst": "grams",
+        "factor": 1000
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_date_19",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Starting from 2026-09-21, add 5 days. Return the ISO date.",
+        "answer": "2026-09-26",
+        "op_name": "add_days",
+        "payload": {
+          "date": "2026-09-21",
+          "delta_days": 5
+        }
+      },
+      {
+        "example_id": "eval_indist_string_0",
+        "split": "eval_indist",
+        "family": "string",
+        "prompt": "Reference code: ZH-9446-JE. Remove hyphens, then return characters 2 through 6 using one-indexed positions.",
+        "answer": "H9446",
+        "op_name": "slice",
+        "payload": {
+          "code": "ZH-9446-JE",
+          "clean": "ZH9446JE",
+          "start": 1,
+          "end": 6
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_string_8",
+        "split": "eval_composition",
+        "family": "string",
+        "prompt": "Clean this code by deleting hyphens: JW-7630-CF. Reverse it and report the one-indexed span 3-6.",
+        "answer": "0367",
+        "op_name": "reverse_then_slice",
+        "payload": {
+          "code": "JW-7630-CF",
+          "clean": "JW7630CF",
+          "reversed": "FC0367WJ",
+          "start": 2,
+          "end": 6
+        }
+      },
+      {
+        "example_id": "eval_composition_unit_13",
+        "split": "eval_composition",
+        "family": "unit",
+        "prompt": "Combine 1 m and 25 cm. What is the total number of centimeters?",
+        "answer": "125",
+        "op_name": "meters_plus_centimeters",
+        "payload": {
+          "meters": 1,
+          "centimeters": 25
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_string_4",
+        "split": "eval_template_shift",
+        "family": "string",
+        "prompt": "Compact identifier UL-2311-MJ by dropping hyphens. What are the final 3 symbols afterward?",
+        "answer": "1MJ",
+        "op_name": "take_suffix",
+        "payload": {
+          "code": "UL-2311-MJ",
+          "clean": "UL2311MJ",
+          "n": 3
+        }
+      },
+      {
+        "example_id": "eval_template_shift_date_7",
+        "split": "eval_template_shift",
+        "family": "date",
+        "prompt": "Advance 2026-09-05 by 9 days and write the result as YYYY-MM-DD.",
+        "answer": "2026-09-14",
+        "op_name": "add_days",
+        "payload": {
+          "date": "2026-09-05",
+          "delta_days": 9
+        }
+      }
+    ]
+  }
+}

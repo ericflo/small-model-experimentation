@@ -1,0 +1,391 @@
+{
+  "mode": "hook",
+  "metadata": {
+    "created_unix": 1781910589.0051832,
+    "created_utc": "2026-06-19T23:09:49Z",
+    "python": "3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0]",
+    "platform": "Linux-6.8.0-62-generic-x86_64-with-glibc2.39",
+    "torch_version": "2.8.0+cu128",
+    "transformers_version": "5.12.1",
+    "bitsandbytes_version": "0.49.2",
+    "cuda": {
+      "available": true,
+      "torch_cuda": "12.8",
+      "device_count": 1,
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX 6000 Ada Generation",
+          "total_memory_gb": 47.38275146484375,
+          "major": 8,
+          "minor": 9
+        }
+      ]
+    },
+    "loader_name": "AutoModelForMultimodalLM",
+    "script": "/workspace/latent_qwen_fastweight_experiment.py",
+    "script_sha256": "0367b3a1d51564c9f44ac1f7ff45d9dbe3f652336e2a78c2f722bcf2243153c5",
+    "args": {
+      "model_id": "Qwen/Qwen3.5-4B",
+      "text_model_fallback": "Qwen/Qwen3-4B",
+      "model_class": "auto",
+      "mode": "hook",
+      "load_in_4bit": true,
+      "torch_dtype": "bf16",
+      "device_map": "auto",
+      "seed": 7,
+      "verbose": false,
+      "modulus": 97,
+      "num_choices": 5,
+      "min_steps": 3,
+      "max_steps": 8,
+      "max_length": 384,
+      "hook_layer": -4,
+      "runtime_dim": 256,
+      "workspace_tokens": 8,
+      "runtime_heads": 4,
+      "num_bases": 12,
+      "adapter_rank": 16,
+      "mem_dim": 128,
+      "dropout": 0.05,
+      "init_scale": 0.05,
+      "disable_fast_memory": false,
+      "disable_dynamic_lowrank": false,
+      "train_steps": 300,
+      "batch_size": 4,
+      "grad_accum": 1,
+      "lr": 0.0002,
+      "weight_decay": 0.01,
+      "max_grad_norm": 1.0,
+      "train_k": "0",
+      "eval_k": "0,1,2,4,8",
+      "aux_value_loss": 0.0,
+      "gate_entropy_bonus": 0.0,
+      "log_every": 10,
+      "eval_every": 100,
+      "eval_batches": 25,
+      "eval_batch_size": 4,
+      "candidate_batch_size": 20,
+      "skip_initial_eval": true,
+      "output_dir": "runs/control_qwen35_hook_traink0_seed7"
+    }
+  },
+  "architecture": {
+    "layer_path": "model.language_model.layers",
+    "num_layers": 32,
+    "hook_layer_index": 28,
+    "hidden_dim": 2560,
+    "runtime_dim": 256,
+    "workspace_tokens": 8,
+    "runtime_heads": 4,
+    "num_bases": 12,
+    "adapter_rank": 16,
+    "mem_dim": 128,
+    "disable_fast_memory": false,
+    "disable_dynamic_lowrank": false,
+    "aux_value_loss": 0.0
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 4.118315696716309,
+      "delta_rms": 1.2338939995970577e-05,
+      "scale": 0.05000000074505806,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 10,
+      "loss": 3.410245418548584,
+      "delta_rms": 0.013242789544165134,
+      "scale": 0.05008026957511902,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 20,
+      "loss": 1.6667759418487549,
+      "delta_rms": 0.08235674351453781,
+      "scale": 0.0501885861158371,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 30,
+      "loss": 1.4925601482391357,
+      "delta_rms": 0.18737785518169403,
+      "scale": 0.05028362572193146,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 40,
+      "loss": 1.5611211061477661,
+      "delta_rms": 0.24239741265773773,
+      "scale": 0.05031329393386841,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 50,
+      "loss": 1.482926607131958,
+      "delta_rms": 0.19795474410057068,
+      "scale": 0.05031409487128258,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 60,
+      "loss": 1.572636365890503,
+      "delta_rms": 0.1750953048467636,
+      "scale": 0.05031139776110649,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 70,
+      "loss": 1.5793439149856567,
+      "delta_rms": 0.17916129529476166,
+      "scale": 0.0503123439848423,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 80,
+      "loss": 1.5625226497650146,
+      "delta_rms": 0.2056991159915924,
+      "scale": 0.05031696334481239,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 90,
+      "loss": 1.6950101852416992,
+      "delta_rms": 0.22630104422569275,
+      "scale": 0.050322722643613815,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 100,
+      "loss": 1.5529403686523438,
+      "delta_rms": 0.19247639179229736,
+      "scale": 0.050315894186496735,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 110,
+      "loss": 1.418046474456787,
+      "delta_rms": 0.21077851951122284,
+      "scale": 0.05031900480389595,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 120,
+      "loss": 1.559584379196167,
+      "delta_rms": 0.22480829060077667,
+      "scale": 0.050322599709033966,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 130,
+      "loss": 1.671646237373352,
+      "delta_rms": 0.1827739030122757,
+      "scale": 0.0503157414495945,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 140,
+      "loss": 1.4890546798706055,
+      "delta_rms": 0.15373314917087555,
+      "scale": 0.05030447617173195,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 150,
+      "loss": 1.3672163486480713,
+      "delta_rms": 0.1527094542980194,
+      "scale": 0.05029599741101265,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 160,
+      "loss": 1.528685450553894,
+      "delta_rms": 0.15731757879257202,
+      "scale": 0.050298526883125305,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 170,
+      "loss": 1.6485496759414673,
+      "delta_rms": 0.18916106224060059,
+      "scale": 0.05031439661979675,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 180,
+      "loss": 1.4408936500549316,
+      "delta_rms": 0.1848999410867691,
+      "scale": 0.05031449347734451,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 190,
+      "loss": 1.6117140054702759,
+      "delta_rms": 0.1651257574558258,
+      "scale": 0.05030502751469612,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 200,
+      "loss": 1.6543309688568115,
+      "delta_rms": 0.11990927159786224,
+      "scale": 0.05028168112039566,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 210,
+      "loss": 1.5425611734390259,
+      "delta_rms": 0.14221517741680145,
+      "scale": 0.05028907582163811,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 220,
+      "loss": 1.5269031524658203,
+      "delta_rms": 0.16764028370380402,
+      "scale": 0.05030532553792,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 230,
+      "loss": 1.7374258041381836,
+      "delta_rms": 0.214109405875206,
+      "scale": 0.05031983181834221,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 240,
+      "loss": 1.6125596761703491,
+      "delta_rms": 0.21669496595859528,
+      "scale": 0.050324782729148865,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 250,
+      "loss": 1.3991734981536865,
+      "delta_rms": 0.1887584626674652,
+      "scale": 0.05032076686620712,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 260,
+      "loss": 1.205233097076416,
+      "delta_rms": 0.21762928366661072,
+      "scale": 0.05033363029360771,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 270,
+      "loss": 1.7257670164108276,
+      "delta_rms": 0.20904573798179626,
+      "scale": 0.05032789334654808,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 280,
+      "loss": 1.587977409362793,
+      "delta_rms": 0.16587971150875092,
+      "scale": 0.05030671879649162,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 290,
+      "loss": 1.6300983428955078,
+      "delta_rms": 0.16120421886444092,
+      "scale": 0.050307437777519226,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    },
+    {
+      "step": 300,
+      "loss": 1.666135549545288,
+      "delta_rms": 0.14778535068035126,
+      "scale": 0.050301693379879,
+      "gate_entropy": 0.0,
+      "mem_rms": 0.0
+    }
+  ],
+  "eval": [
+    {
+      "step": 100,
+      "val": {
+        "0": 0.25,
+        "1": 0.25,
+        "2": 0.24,
+        "4": 0.22,
+        "8": 0.22
+      },
+      "hard": {
+        "0": 0.2,
+        "1": 0.2,
+        "2": 0.18,
+        "4": 0.2,
+        "8": 0.23
+      }
+    },
+    {
+      "step": 200,
+      "val": {
+        "0": 0.19,
+        "1": 0.19,
+        "2": 0.17,
+        "4": 0.16,
+        "8": 0.21
+      },
+      "hard": {
+        "0": 0.26,
+        "1": 0.25,
+        "2": 0.28,
+        "4": 0.3,
+        "8": 0.28
+      }
+    },
+    {
+      "step": 300,
+      "val": {
+        "0": 0.22,
+        "1": 0.22,
+        "2": 0.2,
+        "4": 0.17,
+        "8": 0.2
+      },
+      "hard": {
+        "0": 0.19,
+        "1": 0.17,
+        "2": 0.19,
+        "4": 0.16,
+        "8": 0.2
+      }
+    }
+  ]
+}

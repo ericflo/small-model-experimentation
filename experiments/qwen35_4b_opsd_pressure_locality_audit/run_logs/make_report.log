@@ -1,0 +1,99 @@
+{
+  "experiment": "qwen35_4b_opsd_pressure_locality_audit",
+  "full_reference_task_specific": {
+    "context": "full_reference",
+    "frac_delta_over_student_positive": 0.7857142857142857,
+    "frac_prefers_correct": 1.0,
+    "mean_correct_positive_pressure": 0.05468686904226031,
+    "mean_delta_over_student": 0.21305872952046045,
+    "mean_preference": 4.662111037543842,
+    "mean_student_preference": 4.449052308023381,
+    "mean_sum_preference": 34.703812062740326,
+    "mean_wrong_positive_pressure": 0.017952847642963437,
+    "median_preference": 4.6447577476501465,
+    "n": 14,
+    "stratum": "task_specific"
+  },
+  "gate": {
+    "full_reference_task_specific_delta_over_student": 0.21305872952046045,
+    "full_reference_task_specific_mean": 4.662111037543842,
+    "passed": false,
+    "reason": "weak retrieved hint does not add task-specific correct-branch preference beyond student and shuffled control",
+    "shuffled_task_specific_delta_over_student": -0.02810088706259815,
+    "shuffled_task_specific_mean": 4.420951420960783,
+    "task_specific_forks": 14,
+    "weak_task_specific_delta_over_student": -0.007902212187546467,
+    "weak_task_specific_frac_prefers_correct": 1.0,
+    "weak_task_specific_mean": 4.441150095835835
+  },
+  "pair_summary": {
+    "experiment": "qwen35_4b_opsd_pressure_locality_audit",
+    "fork_strata": {
+      "hint_overlap": 36,
+      "task_specific": 14
+    },
+    "forks": 50,
+    "matched_pairs": 14,
+    "path": "data/matched_pairs.jsonl",
+    "source_arms": [
+      "retrieval_adapt_semantic_top3_records.jsonl",
+      "retrieval_adapt_random_top3_records.jsonl",
+      "retrieval_adapt_shuffled_top3_records.jsonl",
+      "retrieval_copy_rename_top3_records.jsonl"
+    ],
+    "tasks": [
+      35,
+      44,
+      87
+    ]
+  },
+  "primary_read": "static OPSD audit fails: weak hints do not add task-specific fork signal beyond the no-hint student",
+  "shuffled_task_specific": {
+    "context": "shuffled_retrieved",
+    "frac_delta_over_student_positive": 0.42857142857142855,
+    "frac_prefers_correct": 1.0,
+    "mean_correct_positive_pressure": 0.015295628138950893,
+    "mean_delta_over_student": -0.02810088706259815,
+    "mean_preference": 4.420951420960783,
+    "mean_student_preference": 4.449052308023381,
+    "mean_sum_preference": 33.18613694395338,
+    "mean_wrong_positive_pressure": 0.0785749785754145,
+    "median_preference": 4.520479202270508,
+    "n": 14,
+    "stratum": "task_specific"
+  },
+  "usage_estimate": {
+    "completion_tokens_estimate": 9412,
+    "forward_tokens_estimate": 136060,
+    "prompt_tokens_estimate": 126648,
+    "scored_sequences": 512
+  },
+  "weak_hint_overlap": {
+    "context": "weak_retrieved",
+    "frac_delta_over_student_positive": 0.6666666666666666,
+    "frac_prefers_correct": 0.9444444444444444,
+    "mean_correct_positive_pressure": 0.5580864234103097,
+    "mean_delta_over_student": 1.3568698995643194,
+    "mean_preference": 4.744635148180856,
+    "mean_student_preference": 3.3877652486165366,
+    "mean_sum_preference": 8.581611305475235,
+    "mean_wrong_positive_pressure": 0.5108776092529297,
+    "median_preference": 3.819840741157532,
+    "n": 36,
+    "stratum": "hint_overlap"
+  },
+  "weak_task_specific": {
+    "context": "weak_retrieved",
+    "frac_delta_over_student_positive": 0.35714285714285715,
+    "frac_prefers_correct": 1.0,
+    "mean_correct_positive_pressure": 0.03125653948102679,
+    "mean_delta_over_student": -0.007902212187546467,
+    "mean_preference": 4.441150095835835,
+    "mean_student_preference": 4.449052308023381,
+    "mean_sum_preference": 33.283862250191824,
+    "mean_wrong_positive_pressure": 0.08546507439645776,
+    "median_preference": 4.296556599934895,
+    "n": 14,
+    "stratum": "task_specific"
+  }
+}

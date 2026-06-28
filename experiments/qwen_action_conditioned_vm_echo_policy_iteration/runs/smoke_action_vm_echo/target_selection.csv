@@ -1,0 +1,3 @@
+source_examples,targets,oracle_found_rate,selected_correct_rate,selected_valid_rate,mean_selected_score,min_score,phase
+24,24,0.08333333333333333,0.041666666666666664,1.0,0.04122892243321985,0.0,learned_policy_targets
+24,2,0.08333333333333333,0.0,answer_verified_targets

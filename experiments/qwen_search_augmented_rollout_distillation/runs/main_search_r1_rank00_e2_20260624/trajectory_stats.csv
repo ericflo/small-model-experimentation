@@ -1,0 +1,3 @@
+run,phase,n_examples,states,stop_labels,edit_labels,false_stop_states,repair_found_states,search_states,mean_search_candidates,rollout_success_rate,mean_states_per_example,mean_policy_steps
+main_search_r1_rank00_e2_20260624,bc_teacher,128,901,122,779,0,901,0,0.0,0.953125,7.0390625,6.0859375
+main_search_r1_rank00_e2_20260624,search_r1_states,128,802,55,747,41,787,802,400.0436408977556,0.4375,6.265625,5.515625

@@ -1,0 +1,1065 @@
+{
+  "mode": "joint",
+  "args": {
+    "mode": "joint",
+    "seed": 41,
+    "modulus": 31,
+    "observe_mod": 5,
+    "observe_prob": 0.3,
+    "op_family": "full",
+    "train_min_len": 1,
+    "train_max_len": 8,
+    "eval_lengths": "4,8,12,16,24",
+    "eval_k": "0,1,2,4,8,12,16,24",
+    "transition_temperature": 1.0,
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "dropout": 0.05,
+    "train_steps": 500,
+    "batch_size": 512,
+    "eval_batch_size": 512,
+    "eval_examples": 1024,
+    "lr": 0.03,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "log_every": 25,
+    "eval_every": 250,
+    "output_dir": "experiments/belief_filter_executor/runs/main_joint_mod31",
+    "checkpoint_dir": "large_artifacts/belief_filter_executor/checkpoints/main_joint_mod31"
+  },
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "device": "cuda",
+    "cuda_name": "NVIDIA RTX 6000 Ada Generation"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 6.213019847869873,
+      "grad_norm": 0.06735797971487045,
+      "target_mass": 0.02176693081855774,
+      "target_nll": 6.713769912719727,
+      "top1_on_support": 0.01953125,
+      "mean_support_size": 13.125,
+      "transition_entropy": 3.433937758207321
+    },
+    {
+      "step": 25,
+      "loss": 5.519498825073242,
+      "grad_norm": 0.03512025624513626,
+      "target_mass": 0.05103190988302231,
+      "target_nll": 5.986637592315674,
+      "top1_on_support": 0.2890625,
+      "mean_support_size": 13.0078125,
+      "transition_entropy": 3.419539362192154
+    },
+    {
+      "step": 50,
+      "loss": 5.068994998931885,
+      "grad_norm": 0.02212097868323326,
+      "target_mass": 0.080828458070755,
+      "target_nll": 5.492654800415039,
+      "top1_on_support": 0.427734375,
+      "mean_support_size": 13.376953125,
+      "transition_entropy": 3.363722026348114
+    },
+    {
+      "step": 75,
+      "loss": 4.400118350982666,
+      "grad_norm": 0.01813049241900444,
+      "target_mass": 0.1512255072593689,
+      "target_nll": 4.744985103607178,
+      "top1_on_support": 0.7578125,
+      "mean_support_size": 12.841796875,
+      "transition_entropy": 3.1672908663749695
+    },
+    {
+      "step": 100,
+      "loss": 3.658390522003174,
+      "grad_norm": 0.01482965424656868,
+      "target_mass": 0.28691843152046204,
+      "target_nll": 3.774679183959961,
+      "top1_on_support": 0.99609375,
+      "mean_support_size": 13.705078125,
+      "transition_entropy": 2.73363333940506
+    },
+    {
+      "step": 125,
+      "loss": 3.0244264602661133,
+      "grad_norm": 0.009287434630095959,
+      "target_mass": 0.5183568000793457,
+      "target_nll": 2.8614096641540527,
+      "top1_on_support": 1.0,
+      "mean_support_size": 12.94140625,
+      "transition_entropy": 2.246557265520096
+    },
+    {
+      "step": 150,
+      "loss": 2.7979252338409424,
+      "grad_norm": 0.00594220869243145,
+      "target_mass": 0.681906521320343,
+      "target_nll": 2.5644426345825195,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.66015625,
+      "transition_entropy": 2.0211288928985596
+    },
+    {
+      "step": 175,
+      "loss": 2.7188615798950195,
+      "grad_norm": 0.004409939516335726,
+      "target_mass": 0.7640179991722107,
+      "target_nll": 2.4201059341430664,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.521484375,
+      "transition_entropy": 1.8720399513840675
+    },
+    {
+      "step": 200,
+      "loss": 2.661126136779785,
+      "grad_norm": 0.0034490148536860943,
+      "target_mass": 0.821028470993042,
+      "target_nll": 2.3431954383850098,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.66796875,
+      "transition_entropy": 1.812776893377304
+    },
+    {
+      "step": 225,
+      "loss": 2.670893669128418,
+      "grad_norm": 0.002739685820415616,
+      "target_mass": 0.8446570634841919,
+      "target_nll": 2.3313589096069336,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.771484375,
+      "transition_entropy": 1.7224940285086632
+    },
+    {
+      "step": 250,
+      "loss": 2.599250078201294,
+      "grad_norm": 0.002329530892893672,
+      "target_mass": 0.8765097856521606,
+      "target_nll": 2.2614364624023438,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.23046875,
+      "transition_entropy": 1.7314850352704525
+    },
+    {
+      "step": 275,
+      "loss": 2.5820553302764893,
+      "grad_norm": 0.0020533381029963493,
+      "target_mass": 0.895565390586853,
+      "target_nll": 2.2377896308898926,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.66796875,
+      "transition_entropy": 1.6542686484754086
+    },
+    {
+      "step": 300,
+      "loss": 2.5452237129211426,
+      "grad_norm": 0.001887626713141799,
+      "target_mass": 0.9115545153617859,
+      "target_nll": 2.2000930309295654,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.30078125,
+      "transition_entropy": 1.7162075750529766
+    },
+    {
+      "step": 325,
+      "loss": 2.5252835750579834,
+      "grad_norm": 0.0015920361038297415,
+      "target_mass": 0.9172772765159607,
+      "target_nll": 2.1575422286987305,
+      "top1_on_support": 1.0,
+      "mean_support_size": 12.857421875,
+      "transition_entropy": 1.596795730292797
+    },
+    {
+      "step": 350,
+      "loss": 2.545545816421509,
+      "grad_norm": 0.001457631355151534,
+      "target_mass": 0.9287652969360352,
+      "target_nll": 2.1730475425720215,
+      "top1_on_support": 1.0,
+      "mean_support_size": 12.974609375,
+      "transition_entropy": 1.6115432772785425
+    },
+    {
+      "step": 375,
+      "loss": 2.564709186553955,
+      "grad_norm": 0.0011940546100959182,
+      "target_mass": 0.9380443096160889,
+      "target_nll": 2.240488052368164,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.921875,
+      "transition_entropy": 1.6293915435671806
+    },
+    {
+      "step": 400,
+      "loss": 2.4786691665649414,
+      "grad_norm": 0.0013134180335327983,
+      "target_mass": 0.9416401982307434,
+      "target_nll": 2.0758800506591797,
+      "top1_on_support": 1.0,
+      "mean_support_size": 12.298828125,
+      "transition_entropy": 1.595570856705308
+    },
+    {
+      "step": 425,
+      "loss": 2.5250141620635986,
+      "grad_norm": 0.0010773538378998637,
+      "target_mass": 0.9493458867073059,
+      "target_nll": 2.1439061164855957,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.1953125,
+      "transition_entropy": 1.6363489218056202
+    },
+    {
+      "step": 450,
+      "loss": 2.5402464866638184,
+      "grad_norm": 0.0009592780843377113,
+      "target_mass": 0.9534039497375488,
+      "target_nll": 2.196394205093384,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.697265625,
+      "transition_entropy": 1.633100189268589
+    },
+    {
+      "step": 475,
+      "loss": 2.529341459274292,
+      "grad_norm": 0.0009718933724798262,
+      "target_mass": 0.9535531997680664,
+      "target_nll": 2.142695665359497,
+      "top1_on_support": 1.0,
+      "mean_support_size": 13.515625,
+      "transition_entropy": 1.5020518526434898
+    },
+    {
+      "step": 500,
+      "loss": 2.467372179031372,
+      "grad_norm": 0.0008010785095393658,
+      "target_mass": 0.9614778161048889,
+      "target_nll": 2.0985536575317383,
+      "top1_on_support": 1.0,
+      "mean_support_size": 12.421875,
+      "transition_entropy": 1.5377363776788116
+    }
+  ],
+  "eval": [
+    {
+      "step": 250,
+      "rows": [
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.017704146914184093,
+          "target_nll": 19.738142013549805,
+          "top1_on_support": 0.0478515625,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.05814005434513092,
+          "target_nll": 11.987829685211182,
+          "top1_on_support": 0.0654296875,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.1250748634338379,
+          "target_nll": 9.458513259887695,
+          "top1_on_support": 0.126953125,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.8801575303077698,
+          "target_nll": 2.2793936729431152,
+          "top1_on_support": 1.0,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.8801575303077698,
+          "target_nll": 2.2793936729431152,
+          "top1_on_support": 1.0,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.8801575303077698,
+          "target_nll": 2.2793936729431152,
+          "top1_on_support": 1.0,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.8801575303077698,
+          "target_nll": 2.2793936729431152,
+          "top1_on_support": 1.0,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.8801575303077698,
+          "target_nll": 2.2793936729431152,
+          "top1_on_support": 1.0,
+          "mean_support_size": 12.86328125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.00721396878361702,
+          "target_nll": 19.999552726745605,
+          "top1_on_support": 0.0078125,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.011431172490119934,
+          "target_nll": 12.593535423278809,
+          "top1_on_support": 0.0107421875,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.011780663393437862,
+          "target_nll": 11.14271354675293,
+          "top1_on_support": 0.0126953125,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.034283094108104706,
+          "target_nll": 10.551183223724365,
+          "top1_on_support": 0.0400390625,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.8063376247882843,
+          "target_nll": 1.6523441076278687,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.8063376545906067,
+          "target_nll": 1.6523441076278687,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.8063376545906067,
+          "target_nll": 1.6523441076278687,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.8063376545906067,
+          "target_nll": 1.6523441076278687,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.5830078125
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.004819812951609492,
+          "target_nll": 20.169631958007812,
+          "top1_on_support": 0.0048828125,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.004172359127551317,
+          "target_nll": 12.846176147460938,
+          "top1_on_support": 0.0029296875,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.004398706369102001,
+          "target_nll": 11.329018592834473,
+          "top1_on_support": 0.0048828125,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.00933203287422657,
+          "target_nll": 11.396933555603027,
+          "top1_on_support": 0.0068359375,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.033480312675237656,
+          "target_nll": 10.92071008682251,
+          "top1_on_support": 0.037109375,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.7716344594955444,
+          "target_nll": 1.2924470901489258,
+          "top1_on_support": 1.0,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.7716344594955444,
+          "target_nll": 1.2924470901489258,
+          "top1_on_support": 1.0,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.7716344594955444,
+          "target_nll": 1.2924470901489258,
+          "top1_on_support": 1.0,
+          "mean_support_size": 4.3154296875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.002740678028203547,
+          "target_nll": 20.226337432861328,
+          "top1_on_support": 0.001953125,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.002874928992241621,
+          "target_nll": 13.103389739990234,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.003668416989967227,
+          "target_nll": 11.324709415435791,
+          "top1_on_support": 0.001953125,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.004398672375828028,
+          "target_nll": 11.674057006835938,
+          "top1_on_support": 0.0029296875,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.004412627313286066,
+          "target_nll": 11.925760746002197,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.028797943145036697,
+          "target_nll": 11.019923210144043,
+          "top1_on_support": 0.033203125,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.7479947507381439,
+          "target_nll": 0.9880464673042297,
+          "top1_on_support": 1.0,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.7479947805404663,
+          "target_nll": 0.988046407699585,
+          "top1_on_support": 1.0,
+          "mean_support_size": 2.6708984375
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.002079134981613606,
+          "target_nll": 20.070453643798828,
+          "top1_on_support": 0.0,
+          "mean_support_size": 1.8125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.002314344746991992,
+          "target_nll": 12.86909532546997,
+          "top1_on_support": 0.001953125,
+          "mean_support_size": 1.8125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.001596844696905464,
+          "target_nll": 11.390913963317871,
+          "top1_on_support": 0.001953125,
+          "mean_support_size": 1.8125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.0012019064743071795,
+          "target_nll": 11.64905834197998,
+          "top1_on_support": 0.0,
+          "mean_support_size": 1.8125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.0031833702232688665,
+          "target_nll": 12.36759901046753,
+          "top1_on_support": 0.0048828125,
+          "mean_support_size": 1.8125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.00225215929094702,
+          "target_nll": 12.559207916259766,
+          "top1_on_support": 0.001953125,
+          "mean_support_size": 1.8125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.005019271280616522,
+          "target_nll": 12.60204029083252,
+          "top1_on_support": 0.0068359375,
+          "mean_support_size": 1.8125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.740030825138092,
+          "target_nll": 0.6926395297050476,
+          "top1_on_support": 1.0,
+          "mean_support_size": 1.8125
+        }
+      ]
+    },
+    {
+      "step": 500,
+      "rows": [
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.02028731256723404,
+          "target_nll": 19.678053855895996,
+          "top1_on_support": 0.0556640625,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.06912924349308014,
+          "target_nll": 13.043931007385254,
+          "top1_on_support": 0.0732421875,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.13830288499593735,
+          "target_nll": 10.320937156677246,
+          "top1_on_support": 0.1435546875,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.9623158872127533,
+          "target_nll": 2.195472240447998,
+          "top1_on_support": 1.0,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.9623159170150757,
+          "target_nll": 2.195472240447998,
+          "top1_on_support": 1.0,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.9623159170150757,
+          "target_nll": 2.195472240447998,
+          "top1_on_support": 1.0,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.9623159170150757,
+          "target_nll": 2.195472240447998,
+          "top1_on_support": 1.0,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 4,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.9623159170150757,
+          "target_nll": 2.195472240447998,
+          "top1_on_support": 1.0,
+          "mean_support_size": 13.0966796875
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.009104089811444283,
+          "target_nll": 19.962265014648438,
+          "top1_on_support": 0.009765625,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.012820934876799583,
+          "target_nll": 13.653800964355469,
+          "top1_on_support": 0.0107421875,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.01850193925201893,
+          "target_nll": 12.461583614349365,
+          "top1_on_support": 0.0205078125,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.037919532507658005,
+          "target_nll": 12.334948062896729,
+          "top1_on_support": 0.0458984375,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.9393073916435242,
+          "target_nll": 1.5001300573349,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.9393073916435242,
+          "target_nll": 1.5001300573349,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.9393073916435242,
+          "target_nll": 1.5001300573349,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 8,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.9393073916435242,
+          "target_nll": 1.5001300573349,
+          "top1_on_support": 1.0,
+          "mean_support_size": 6.4677734375
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.005575861316174269,
+          "target_nll": 20.08773899078369,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.004130737157538533,
+          "target_nll": 13.556257247924805,
+          "top1_on_support": 0.005859375,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.005392325576394796,
+          "target_nll": 12.693077564239502,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.006495352718047798,
+          "target_nll": 13.179922580718994,
+          "top1_on_support": 0.0048828125,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.03093780390918255,
+          "target_nll": 12.699507713317871,
+          "top1_on_support": 0.029296875,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.9244134724140167,
+          "target_nll": 1.0811400413513184,
+          "top1_on_support": 1.0,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.9244134724140167,
+          "target_nll": 1.0811400413513184,
+          "top1_on_support": 1.0,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 12,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.9244134724140167,
+          "target_nll": 1.0811400413513184,
+          "top1_on_support": 1.0,
+          "mean_support_size": 4.1748046875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.0026146702002733946,
+          "target_nll": 20.12096881866455,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.0036780538503080606,
+          "target_nll": 13.660522937774658,
+          "top1_on_support": 0.0048828125,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.003523456398397684,
+          "target_nll": 12.750794410705566,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.003608390921726823,
+          "target_nll": 13.442254066467285,
+          "top1_on_support": 0.0009765625,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.0054679443128407,
+          "target_nll": 13.94454050064087,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.026266053318977356,
+          "target_nll": 13.122437477111816,
+          "top1_on_support": 0.03125,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.9171677827835083,
+          "target_nll": 0.784845381975174,
+          "top1_on_support": 1.0,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 16,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.9171677827835083,
+          "target_nll": 0.784845381975174,
+          "top1_on_support": 1.0,
+          "mean_support_size": 2.7451171875
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 0,
+          "n": 1024,
+          "target_mass": 0.0022051428677514195,
+          "target_nll": 19.96884822845459,
+          "top1_on_support": 0.0009765625,
+          "mean_support_size": 1.7001953125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 1,
+          "n": 1024,
+          "target_mass": 0.0021717629861086607,
+          "target_nll": 13.689985752105713,
+          "top1_on_support": 0.00390625,
+          "mean_support_size": 1.7001953125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 2,
+          "n": 1024,
+          "target_mass": 0.0014058430097065866,
+          "target_nll": 12.762823581695557,
+          "top1_on_support": 0.0009765625,
+          "mean_support_size": 1.7001953125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 4,
+          "n": 1024,
+          "target_mass": 0.002679621335119009,
+          "target_nll": 13.463563442230225,
+          "top1_on_support": 0.0009765625,
+          "mean_support_size": 1.7001953125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 8,
+          "n": 1024,
+          "target_mass": 0.001947168493643403,
+          "target_nll": 14.104349613189697,
+          "top1_on_support": 0.0029296875,
+          "mean_support_size": 1.7001953125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 12,
+          "n": 1024,
+          "target_mass": 0.0011258680606260896,
+          "target_nll": 14.60649061203003,
+          "top1_on_support": 0.001953125,
+          "mean_support_size": 1.7001953125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 16,
+          "n": 1024,
+          "target_mass": 0.007513638585805893,
+          "target_nll": 14.441673755645752,
+          "top1_on_support": 0.0087890625,
+          "mean_support_size": 1.7001953125
+        },
+        {
+          "model": "joint",
+          "length": 24,
+          "k": 24,
+          "n": 1024,
+          "target_mass": 0.9129836857318878,
+          "target_nll": 0.4413885623216629,
+          "top1_on_support": 1.0,
+          "mean_support_size": 1.7001953125
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    "large_artifacts/belief_filter_executor/checkpoints/main_joint_mod31/checkpoint_step00250.pt",
+    "large_artifacts/belief_filter_executor/checkpoints/main_joint_mod31/checkpoint_step00500.pt"
+  ]
+}

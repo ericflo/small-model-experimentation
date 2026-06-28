@@ -1,0 +1,40 @@
+{
+  "base_model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "cache_dir": "/workspace/.cache/huggingface",
+  "large_artifacts_root": "/workspace/large_artifacts/qwen35_4b_static_bridge_ceiling_breaker",
+  "seed": 20260630,
+  "training": {
+    "epochs": 2.0,
+    "learning_rate": 0.00015,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "gradient_accumulation_steps": 8,
+    "max_length": 4096,
+    "quantization": "4-bit NF4 QLoRA"
+  },
+  "records": {
+    "seed_train": 240,
+    "static60_base": 180,
+    "static60_bridge": 60,
+    "static80_base": 160,
+    "static80_bridge": 80,
+    "iid_eval": 60,
+    "support_eval_per_family": 12,
+    "ceiling_eval_per_family": 12,
+    "visible_cases_per_record": 6,
+    "hidden_cases_per_record": 18
+  },
+  "conditions": [
+    "seed_lora",
+    "static60_lora",
+    "static80_lora"
+  ],
+  "evaluation": {
+    "main_samples": 3,
+    "iid_samples": 0,
+    "trace_control_samples": 0,
+    "max_new_tokens": 64
+  }
+}

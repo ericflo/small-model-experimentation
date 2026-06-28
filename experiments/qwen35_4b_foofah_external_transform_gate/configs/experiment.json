@@ -1,0 +1,12 @@
+{
+  "experiment": "qwen35_4b_foofah_external_transform_gate",
+  "date": "2026-06-27",
+  "source": "https://github.com/markjin1990/foofah_benchmarks",
+  "source_local_path": "/workspace/large_artifacts/external_sources/foofah_benchmarks",
+  "type": "external_table_transform_abi_gate",
+  "abi_policy": "frozen compact generic table-transform primitives before benchmark scoring",
+  "coverage": {
+    "raw": "candidate passes InputTable -> OutputTable",
+    "heldout": "candidate passes both raw examples and TestingTable -> TestAnswer"
+  }
+}

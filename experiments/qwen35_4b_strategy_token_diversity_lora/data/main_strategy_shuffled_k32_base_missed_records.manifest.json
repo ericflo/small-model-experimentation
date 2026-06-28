@@ -1,0 +1,46 @@
+{
+  "adapter_dir": "/workspace/large_artifacts/qwen35_4b_strategy_token_diversity_lora/models/shuffled_strategy_lora",
+  "arm_name": "shuffled_strategy_k32_base_missed",
+  "base_records": "data/main_base_k4_records.jsonl",
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "max_new_tokens": 220,
+  "path": "data/main_strategy_shuffled_k32_base_missed_records.jsonl",
+  "records": {
+    "candidate_count_mean": 27.708333333333332,
+    "coverage": 0.4166666666666667,
+    "distinct_behavior_rate_mean": 0.5202296155389053,
+    "distinct_functional_rate_mean": 0.1375229401224277,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 0.9583333333333334,
+    "parse_success_mean": 27.0,
+    "records": 24,
+    "visible_candidates_mean": 7.583333333333333,
+    "visible_coverage": 0.4166666666666667,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 24,
+    "zero_to_one": 10,
+    "zero_to_one_rate": 0.4166666666666667
+  },
+  "records_in": "data/main_base_missed_records.jsonl",
+  "round_name": "main_strategy_shuffled_k32_base_missed",
+  "samples_per_strategy": 4,
+  "strategy_keys": [
+    "DIRECT",
+    "LOOP",
+    "COMPREHENSION",
+    "SORTING",
+    "SET_DICT",
+    "RECURSION",
+    "STRING_REGEX",
+    "MATH"
+  ],
+  "temperature": 0.8,
+  "token_usage": {
+    "calls": 768,
+    "completion_tokens": 77458,
+    "forward_tokens": 213746,
+    "prompt_tokens": 136288
+  },
+  "top_p": 0.98
+}

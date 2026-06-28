@@ -1,0 +1,398 @@
+{
+  "by_family": {
+    "agriculture": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "craigslist_data_wrangler": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "crime_data_wrangler": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 0,
+      "parse_rate": 0.0
+    },
+    "potters_wheel_divide": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "potters_wheel_fold": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "potters_wheel_fold_2": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "potters_wheel_merge_split": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "potters_wheel_split_fold": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "potters_wheel_unfold": {
+      "exact": 2,
+      "exact_accuracy": 0.4,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "potters_wheel_unfold2": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "proactive_wrangling_complex": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "proactive_wrangling_fold": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "reshape_table_structure_data_wrangler": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_10": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_11": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_12": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_13": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_15": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_17": {
+      "exact": 3,
+      "exact_accuracy": 0.6,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_18": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_19": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_2": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_22": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_24": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_25": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_26": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_27": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_28": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_29": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_3": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_30": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_33": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 4,
+      "parse_rate": 0.8
+    },
+    "synthetic_34": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_36": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_37": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_4": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_40": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_41": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 2,
+      "parse_rate": 0.4
+    },
+    "synthetic_43": {
+      "exact": 5,
+      "exact_accuracy": 1.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_44": {
+      "exact": 3,
+      "exact_accuracy": 0.6,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_45": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_46": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_47": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_48": {
+      "exact": 1,
+      "exact_accuracy": 0.2,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_49": {
+      "exact": 3,
+      "exact_accuracy": 0.6,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_5": {
+      "exact": 2,
+      "exact_accuracy": 0.4,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_51": {
+      "exact": 2,
+      "exact_accuracy": 0.4,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_6": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_7": {
+      "exact": 4,
+      "exact_accuracy": 0.8,
+      "n": 5,
+      "parse_ok": 5,
+      "parse_rate": 1.0
+    },
+    "synthetic_8": {
+      "exact": 0,
+      "exact_accuracy": 0.0,
+      "n": 5,
+      "parse_ok": 0,
+      "parse_rate": 0.0
+    }
+  },
+  "by_num_samples": {
+    "1": {
+      "exact": 19,
+      "exact_accuracy": 0.38,
+      "n": 50,
+      "parse_ok": 47,
+      "parse_rate": 0.94
+    },
+    "2": {
+      "exact": 29,
+      "exact_accuracy": 0.58,
+      "n": 50,
+      "parse_ok": 47,
+      "parse_rate": 0.94
+    },
+    "3": {
+      "exact": 30,
+      "exact_accuracy": 0.6,
+      "n": 50,
+      "parse_ok": 47,
+      "parse_rate": 0.94
+    },
+    "4": {
+      "exact": 31,
+      "exact_accuracy": 0.62,
+      "n": 50,
+      "parse_ok": 47,
+      "parse_rate": 0.94
+    },
+    "5": {
+      "exact": 29,
+      "exact_accuracy": 0.58,
+      "n": 50,
+      "parse_ok": 48,
+      "parse_rate": 0.96
+    }
+  },
+  "overall": {
+    "exact": 138,
+    "exact_accuracy": 0.552,
+    "n": 250,
+    "parse_ok": 236,
+    "parse_rate": 0.944
+  }
+}

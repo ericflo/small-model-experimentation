@@ -1,0 +1,73 @@
+{
+  "phase": "pilot",
+  "seeds": [
+    123,
+    456
+  ],
+  "arms": [
+    "max24_curriculum",
+    "expand_copy",
+    "max24_no_curriculum"
+  ],
+  "overrides": {
+    "stage_steps": "4,2,4",
+    "train_examples": "32",
+    "eval_examples": "8",
+    "paired_eval_pairs": "4",
+    "batch_size": "2",
+    "eval_batch_size": "4",
+    "head_width": "192",
+    "compiler_layers": "1",
+    "lora_r": "4",
+    "lora_alpha": "8",
+    "log_interval": "2",
+    "save_checkpoints": "0"
+  },
+  "started_at": "2026-06-24 23:24:26 UTC",
+  "runs": [
+    {
+      "run": "pilot_max24_curriculum_seed123",
+      "arm": "max24_curriculum",
+      "seed": 123,
+      "exit_code": 0,
+      "elapsed_sec": 65.894
+    },
+    {
+      "run": "pilot_expand_copy_seed123",
+      "arm": "expand_copy",
+      "seed": 123,
+      "exit_code": 0,
+      "elapsed_sec": 43.018
+    },
+    {
+      "run": "pilot_max24_no_curriculum_seed123",
+      "arm": "max24_no_curriculum",
+      "seed": 123,
+      "exit_code": 0,
+      "elapsed_sec": 35.702
+    },
+    {
+      "run": "pilot_max24_curriculum_seed456",
+      "arm": "max24_curriculum",
+      "seed": 456,
+      "exit_code": 0,
+      "elapsed_sec": 66.381
+    },
+    {
+      "run": "pilot_expand_copy_seed456",
+      "arm": "expand_copy",
+      "seed": 456,
+      "exit_code": 0,
+      "elapsed_sec": 44.113
+    },
+    {
+      "run": "pilot_max24_no_curriculum_seed456",
+      "arm": "max24_no_curriculum",
+      "seed": 456,
+      "exit_code": 0,
+      "elapsed_sec": 36.506
+    }
+  ],
+  "analysis_exit_code": 0,
+  "finished_at": "2026-06-24 23:29:19 UTC"
+}

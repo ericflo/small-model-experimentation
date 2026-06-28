@@ -1,0 +1,33 @@
+designed_case_indexes,designed_consistent_count,designed_oracle_hidden_all,designed_queries,designed_selected_hidden_all,designed_target_in_set,id,library_size,random_consistent_count,random_oracle_hidden_all,random_selected_hidden_all,random_target_in_set,raw_candidate_count,template
+"[24, 58, 52, 25]",1,True,4,True,True,eval_lib64_pair_affine_mod_00000,64,1,True,True,True,4096,pair_affine_mod
+"[40, 41, 31, 24]",1,True,4,True,True,eval_lib64_pair_affine_mod_00001,64,2,True,True,True,4096,pair_affine_mod
+"[39, 52, 68, 26]",1,True,4,True,True,eval_lib64_pair_affine_mod_00002,64,1,True,True,True,4096,pair_affine_mod
+"[61, 66, 47]",1,True,3,True,True,eval_lib64_pair_affine_mod_00003,64,6,True,False,True,4096,pair_affine_mod
+"[38, 30, 34, 63, 40, 32]",42,True,6,False,True,eval_lib64_pair_compare_gate_00000,64,45,True,False,True,4096,pair_compare_gate
+"[58, 55, 40, 49, 25, 63]",99,True,6,False,True,eval_lib64_pair_compare_gate_00001,64,337,True,False,True,4096,pair_compare_gate
+"[46, 37, 25, 60, 58, 27]",40,True,6,False,True,eval_lib64_pair_compare_gate_00002,64,4,True,False,True,4096,pair_compare_gate
+"[26, 39, 65, 60, 46, 70]",92,True,6,False,True,eval_lib64_pair_compare_gate_00003,64,480,True,False,True,4096,pair_compare_gate
+"[32, 30, 64, 25, 24, 26]",5,True,6,True,True,eval_lib128_pair_affine_mod_00000,128,10,True,True,True,16384,pair_affine_mod
+"[42, 40, 55]",1,True,3,True,True,eval_lib128_pair_affine_mod_00001,128,1,True,True,True,16384,pair_affine_mod
+"[37, 31, 25, 24, 26, 27]",5,True,6,True,True,eval_lib128_pair_affine_mod_00002,128,66,True,False,True,16384,pair_affine_mod
+"[57, 36, 26, 24, 25, 27]",5,True,6,True,True,eval_lib128_pair_affine_mod_00003,128,42,True,True,True,16384,pair_affine_mod
+"[26, 63, 24, 32, 59, 70]",320,True,6,False,True,eval_lib128_pair_compare_gate_00000,128,767,True,False,True,16384,pair_compare_gate
+"[43, 34, 29, 45, 49, 52]",290,True,6,True,True,eval_lib128_pair_compare_gate_00001,128,2021,True,False,True,16384,pair_compare_gate
+"[38, 49, 43, 66, 34, 42]",1251,True,6,True,True,eval_lib128_pair_compare_gate_00002,128,6138,True,True,True,16384,pair_compare_gate
+"[56, 45, 44, 34, 38, 26]",186,True,6,False,True,eval_lib128_pair_compare_gate_00003,128,909,True,False,True,16384,pair_compare_gate
+"[26, 61, 56, 31, 29]",1,True,5,True,True,eval_lib256_pair_affine_mod_00000,256,1,True,True,True,65536,pair_affine_mod
+"[24, 45, 49, 29, 35, 25]",9,True,6,True,True,eval_lib256_pair_affine_mod_00001,256,10,True,True,True,65536,pair_affine_mod
+"[41, 42, 49, 40, 25]",1,True,5,True,True,eval_lib256_pair_affine_mod_00002,256,1,True,True,True,65536,pair_affine_mod
+"[38, 57, 26, 67, 25]",1,True,5,True,True,eval_lib256_pair_affine_mod_00003,256,2,True,True,True,65536,pair_affine_mod
+"[55, 41, 61, 47, 29, 71]",40,True,6,False,True,eval_lib256_pair_compare_gate_00000,256,3,True,True,True,65536,pair_compare_gate
+"[34, 65, 69, 35, 60, 42]",1137,True,6,False,True,eval_lib256_pair_compare_gate_00001,256,94,True,False,True,65536,pair_compare_gate
+"[47, 56, 24, 35, 42, 38]",1055,True,6,False,True,eval_lib256_pair_compare_gate_00002,256,2390,True,False,True,65536,pair_compare_gate
+"[54, 32, 70, 66, 28, 45]",687,True,6,False,True,eval_lib256_pair_compare_gate_00003,256,2039,True,False,True,65536,pair_compare_gate
+"[46, 69, 28, 33, 58, 24]",50,True,6,True,True,eval_lib512_pair_affine_mod_00000,512,3248,True,True,True,262144,pair_affine_mod
+"[56, 37, 54, 24, 25, 26]",2916,True,6,True,True,eval_lib512_pair_affine_mod_00001,512,2916,True,True,True,262144,pair_affine_mod
+"[28, 58, 63, 37, 24, 25]",58,True,6,True,True,eval_lib512_pair_affine_mod_00002,512,67,True,True,True,262144,pair_affine_mod
+"[54, 26, 51, 58, 24]",1,True,5,True,True,eval_lib512_pair_affine_mod_00003,512,1,True,True,True,262144,pair_affine_mod
+"[49, 44, 43, 48, 35, 51]",3431,True,6,False,True,eval_lib512_pair_compare_gate_00000,512,35307,True,False,True,262144,pair_compare_gate
+"[65, 66, 52, 51, 50, 35]",19326,True,6,False,True,eval_lib512_pair_compare_gate_00001,512,4247,True,False,True,262144,pair_compare_gate
+"[30, 35, 41, 26, 42, 44]",4651,True,6,False,True,eval_lib512_pair_compare_gate_00002,512,7397,True,False,True,262144,pair_compare_gate
+"[64, 44, 24, 35, 63, 62]",2416,True,6,False,True,eval_lib512_pair_compare_gate_00003,512,1124,True,False,True,262144,pair_compare_gate

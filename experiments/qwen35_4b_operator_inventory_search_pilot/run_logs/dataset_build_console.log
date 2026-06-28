@@ -1,0 +1,88 @@
+{
+  "by_operator_status": {
+    "held_out": 120,
+    "in_bank": 90
+  },
+  "by_template": {
+    "mod_format": 70,
+    "offset_format": 70,
+    "threshold_gate": 70
+  },
+  "closed_vocab_operators": [
+    "sum",
+    "first",
+    "last"
+  ],
+  "data_file": "data/operator_inventory_eval.jsonl",
+  "experiment": "qwen35_4b_operator_inventory_search_pilot",
+  "full_inventory_operators": [
+    "sum",
+    "first",
+    "last",
+    "max",
+    "min",
+    "prod",
+    "gcd"
+  ],
+  "hidden_count": 18,
+  "operators": [
+    {
+      "name": "sum",
+      "signature": "list[int] -> int",
+      "status": "in_bank"
+    },
+    {
+      "name": "first",
+      "signature": "list[int] -> int",
+      "status": "in_bank"
+    },
+    {
+      "name": "last",
+      "signature": "list[int] -> int",
+      "status": "in_bank"
+    },
+    {
+      "name": "max",
+      "signature": "list[int] -> int",
+      "status": "held_out"
+    },
+    {
+      "name": "min",
+      "signature": "list[int] -> int",
+      "status": "held_out"
+    },
+    {
+      "name": "prod",
+      "signature": "list[int] -> int",
+      "status": "held_out"
+    },
+    {
+      "name": "gcd",
+      "signature": "list[int] -> int",
+      "status": "held_out"
+    }
+  ],
+  "purpose": "No-training pilot for type-colliding operator identification: closed-vocabulary search versus full inventory operator-hole search.",
+  "query_count": 48,
+  "records": 210,
+  "records_per_family": 10,
+  "seed": 20260624,
+  "templates": [
+    {
+      "depth": 2,
+      "name": "mod_format",
+      "prefix": "M"
+    },
+    {
+      "depth": 2,
+      "name": "offset_format",
+      "prefix": "A"
+    },
+    {
+      "depth": 2,
+      "name": "threshold_gate",
+      "prefix": "G"
+    }
+  ],
+  "visible_count": 6
+}

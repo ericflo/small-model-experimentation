@@ -1,0 +1,44 @@
+{
+  "adapter_dir": null,
+  "arm_name": "smoke_base_k2",
+  "count": 2,
+  "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+  "max_new_tokens": 180,
+  "offset": 0,
+  "path": "data/smoke_train_k2_records.jsonl",
+  "records": {
+    "candidate_count_mean": 2.0,
+    "coverage": 0.0,
+    "distinct_behavior_rate_mean": 0.75,
+    "distinct_functional_rate_mean": 0.5,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 1003,
+    "hidden_pass_candidates_mean": 0.0,
+    "parse_success_mean": 2.0,
+    "pass1_proxy": 0.0,
+    "records": 2,
+    "visible_candidates_mean": 1.0,
+    "visible_coverage": 0.0,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "smoke",
+  "samples_per_task": 2,
+  "seed": 2026062601,
+  "split": "mbpp_train",
+  "temperatures": [
+    0.7,
+    1.0
+  ],
+  "token_usage": {
+    "calls": 4,
+    "completion_tokens": 483,
+    "forward_tokens": 1003,
+    "prompt_tokens": 520
+  },
+  "top_p": 0.95,
+  "visible_tests": 1
+}

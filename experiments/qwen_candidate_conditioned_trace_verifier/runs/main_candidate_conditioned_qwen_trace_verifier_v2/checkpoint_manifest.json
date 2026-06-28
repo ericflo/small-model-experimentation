@@ -1,0 +1,194 @@
+[
+  {
+    "arm": "zero_qwen_gated",
+    "seed": -1,
+    "margin": 6.84375,
+    "val_n": 24.0,
+    "val_accuracy": 0.75,
+    "val_state_accuracy": 0.75,
+    "val_base_accuracy": 0.75,
+    "val_oracle_accuracy": 0.9166666666666666,
+    "val_shortlist_oracle_accuracy": 0.8333333333333334,
+    "val_gap_capture": 0.0,
+    "val_shortlist_gap_capture": 0.0,
+    "val_coverage_capture": 0.8181818181818182,
+    "val_shortlist_coverage_capture": 0.8999999999999999,
+    "val_changed_fraction": 0.0,
+    "val_no_op_fraction": 1.0,
+    "val_damage_rate": 0.0,
+    "val_recovery_rate": 0.0,
+    "val_val_utility": 0.75
+  },
+  {
+    "arm": "feature_mlp",
+    "seed": 101,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "trace_transformer",
+    "seed": 101,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_rank",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_rank_seed101.pt",
+    "best_utility": -0.5
+  },
+  {
+    "arm": "qwen_rank_gated",
+    "seed": 101,
+    "margin": 3.730177164077759,
+    "val_n": 24.0,
+    "val_accuracy": 0.75,
+    "val_state_accuracy": 0.75,
+    "val_base_accuracy": 0.75,
+    "val_oracle_accuracy": 0.9166666666666666,
+    "val_shortlist_oracle_accuracy": 0.8333333333333334,
+    "val_gap_capture": 0.0,
+    "val_shortlist_gap_capture": 0.0,
+    "val_coverage_capture": 0.8181818181818182,
+    "val_shortlist_coverage_capture": 0.8999999999999999,
+    "val_changed_fraction": 0.0,
+    "val_no_op_fraction": 1.0,
+    "val_damage_rate": 0.0,
+    "val_recovery_rate": 0.0,
+    "val_val_utility": 0.75
+  },
+  {
+    "arm": "qwen_echo",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_echo_seed101.pt",
+    "best_utility": -0.5
+  },
+  {
+    "arm": "qwen_echo_gated",
+    "seed": 101,
+    "margin": 5.4319353103637695,
+    "val_n": 24.0,
+    "val_accuracy": 0.75,
+    "val_state_accuracy": 0.75,
+    "val_base_accuracy": 0.75,
+    "val_oracle_accuracy": 0.9166666666666666,
+    "val_shortlist_oracle_accuracy": 0.8333333333333334,
+    "val_gap_capture": 0.0,
+    "val_shortlist_gap_capture": 0.0,
+    "val_coverage_capture": 0.8181818181818182,
+    "val_shortlist_coverage_capture": 0.8999999999999999,
+    "val_changed_fraction": 0.0,
+    "val_no_op_fraction": 1.0,
+    "val_damage_rate": 0.0,
+    "val_recovery_rate": 0.0,
+    "val_val_utility": 0.75
+  },
+  {
+    "arm": "qwen_shuffled",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_shuffled_seed101.pt",
+    "best_utility": -0.5833333333333333
+  },
+  {
+    "arm": "qwen_prompt_only",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_prompt_only_seed101.pt",
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_candidate_only",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_candidate_only_seed101.pt",
+    "best_utility": -0.6666666666666666
+  },
+  {
+    "arm": "qwen_trace_corrupt",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_trace_corrupt_seed101.pt",
+    "best_utility": -0.75
+  },
+  {
+    "arm": "feature_mlp",
+    "seed": 202,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "trace_transformer",
+    "seed": 202,
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_rank",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_rank_seed202.pt",
+    "best_utility": -0.5833333333333333
+  },
+  {
+    "arm": "qwen_rank_gated",
+    "seed": 202,
+    "margin": 3.291755199432373,
+    "val_n": 24.0,
+    "val_accuracy": 0.75,
+    "val_state_accuracy": 0.75,
+    "val_base_accuracy": 0.75,
+    "val_oracle_accuracy": 0.9166666666666666,
+    "val_shortlist_oracle_accuracy": 0.8333333333333334,
+    "val_gap_capture": 0.0,
+    "val_shortlist_gap_capture": 0.0,
+    "val_coverage_capture": 0.8181818181818182,
+    "val_shortlist_coverage_capture": 0.8999999999999999,
+    "val_changed_fraction": 0.0,
+    "val_no_op_fraction": 1.0,
+    "val_damage_rate": 0.0,
+    "val_recovery_rate": 0.0,
+    "val_val_utility": 0.75
+  },
+  {
+    "arm": "qwen_echo",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_echo_seed202.pt",
+    "best_utility": -0.5833333333333333
+  },
+  {
+    "arm": "qwen_echo_gated",
+    "seed": 202,
+    "margin": 4.5992279052734375,
+    "val_n": 24.0,
+    "val_accuracy": 0.75,
+    "val_state_accuracy": 0.75,
+    "val_base_accuracy": 0.75,
+    "val_oracle_accuracy": 0.9166666666666666,
+    "val_shortlist_oracle_accuracy": 0.8333333333333334,
+    "val_gap_capture": 0.0,
+    "val_shortlist_gap_capture": 0.0,
+    "val_coverage_capture": 0.8181818181818182,
+    "val_shortlist_coverage_capture": 0.8999999999999999,
+    "val_changed_fraction": 0.0,
+    "val_no_op_fraction": 1.0,
+    "val_damage_rate": 0.0,
+    "val_recovery_rate": 0.0,
+    "val_val_utility": 0.75
+  },
+  {
+    "arm": "qwen_shuffled",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_shuffled_seed202.pt",
+    "best_utility": -0.6666666666666666
+  },
+  {
+    "arm": "qwen_prompt_only",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_prompt_only_seed202.pt",
+    "best_utility": 0.75
+  },
+  {
+    "arm": "qwen_candidate_only",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_candidate_only_seed202.pt",
+    "best_utility": -0.75
+  },
+  {
+    "arm": "qwen_trace_corrupt",
+    "seed": 202,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/main_candidate_conditioned_qwen_trace_verifier_v2/qwen_trace_corrupt_seed202.pt",
+    "best_utility": -0.75
+  }
+]

@@ -1,0 +1,17 @@
+policy,template,records,selected_hidden_all,used_probes_mean,candidate_count_mean,hidden_equivalent_candidates_mean
+base_budget_policy,pair_affine_mod,80,0.1,0.0,47.2,4.9875
+base_budget_policy,pair_compare_gate,80,0.0,0.0875,7591.55,254.125
+fixed_budget10,pair_affine_mod,80,0.9875,10.0,4.8125,4.7375
+fixed_budget10,pair_compare_gate,80,0.8625,10.0,702.7,2.55
+fixed_budget3,pair_affine_mod,80,0.875,3.0,5.1,4.7625
+fixed_budget3,pair_compare_gate,80,0.025,3.0,2075.975,21.1
+fixed_budget6,pair_affine_mod,80,0.9875,6.0,4.8125,4.7375
+fixed_budget6,pair_compare_gate,80,0.5,6.0,1084.575,12.85
+oracle_stop,pair_affine_mod,80,0.9875,1.825,7.7,4.8625
+oracle_stop,pair_compare_gate,80,0.8625,6.625,704.7,2.7
+sft_budget_policy,pair_affine_mod,80,0.9875,2.3375,4.8125,4.7375
+sft_budget_policy,pair_compare_gate,80,0.8625,7.275,702.7,2.55
+threshold_100,pair_affine_mod,80,0.125,0.075,37.2,4.9875
+threshold_100,pair_compare_gate,80,0.0125,3.65,757.9,3.7
+threshold_1000,pair_affine_mod,80,0.1,0.0,47.2,4.9875
+threshold_1000,pair_compare_gate,80,0.0,1.875,1154.25,4.625

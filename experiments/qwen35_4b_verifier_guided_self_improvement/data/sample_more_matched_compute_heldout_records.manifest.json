@@ -1,0 +1,24 @@
+{
+  "adapter_dir": null,
+  "experiment": "qwen35_4b_verifier_guided_self_improvement",
+  "humaneval_public_limit": 3,
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/sample_more_matched_compute_heldout_records.jsonl",
+  "records": {
+    "candidate_count_mean": 7.013333333333334,
+    "coverage": 0.6866666666666666,
+    "parse_success_mean": 6.793333333333333,
+    "records": 150,
+    "visible_candidates_mean": 3.6,
+    "visible_coverage": 0.6866666666666666
+  },
+  "repair_per_task": 2,
+  "round_name": "sample_more_matched_compute",
+  "samples_per_task": 8,
+  "seed": 20260625,
+  "split": "mbpp_heldout",
+  "temperatures": "0.2,0.7,1.0",
+  "top_p": 0.95,
+  "visible_tests": 1
+}

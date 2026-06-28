@@ -1,0 +1,17 @@
+{
+  "answer_max_new_tokens": 56,
+  "batch_max_new_tokens": 300,
+  "code_max_new_tokens": 420,
+  "heldout_cap": 6,
+  "min_heldout": 3,
+  "no_qwen": false,
+  "repair_max_new_tokens": 420,
+  "repair_rounds": 1,
+  "repair_variants": "minimal,broaden,conditional",
+  "run_name": "main_v1",
+  "run_shuffled": true,
+  "sample_seed": 20260627,
+  "task_limit": 25,
+  "train_n": 4,
+  "variants": "monolithic,robust"
+}

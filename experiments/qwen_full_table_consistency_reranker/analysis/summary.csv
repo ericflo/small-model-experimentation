@@ -1,0 +1,7 @@
+method,tasks,row_exact,full_task_exact,table_oracle_rate,row_oracle_rate,median_candidate_tables
+table_oracle,40,0.825,0.625,0.625,0.625,9.5
+direct_row_greedy,40,0.7229166666666667,0.5,0.625,0.625,9.5
+heuristic,40,0.7270833333333333,0.5,0.625,0.625,9.5
+learned_reranker,40,0.7229166666666667,0.5,0.625,0.625,9.5
+row_majority,40,0.7270833333333333,0.5,0.625,0.625,9.5
+shuffled_label_reranker,40,0.725,0.475,0.625,0.625,9.5

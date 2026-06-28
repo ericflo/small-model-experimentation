@@ -1,0 +1,160 @@
+{
+  "seed": 101,
+  "train_n": 96,
+  "eval_sizes": {
+    "eval_indist": 16,
+    "eval_composition": 16,
+    "eval_template_shift": 16
+  },
+  "train_sample": [
+    {
+      "example_id": "train_table_46",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: alpha=21, beta=11, gamma=6, delta=13. Take beta, then multiply by 5.",
+      "answer": "55",
+      "op_name": "lookup_mul",
+      "payload": {
+        "table": {
+          "alpha": 21,
+          "beta": 11,
+          "gamma": 6,
+          "delta": 13
+        },
+        "key": "beta",
+        "scale": 5
+      }
+    },
+    {
+      "example_id": "train_date_7",
+      "split": "train",
+      "family": "date",
+      "prompt": "Starting from 2026-12-12, add 10 days. Return the ISO date.",
+      "answer": "2026-12-22",
+      "op_name": "add_days",
+      "payload": {
+        "date": "2026-12-12",
+        "days": 10
+      }
+    },
+    {
+      "example_id": "train_date_83",
+      "split": "train",
+      "family": "date",
+      "prompt": "Starting from 2026-06-20, add 1 weeks. Return the ISO date.",
+      "answer": "2026-06-27",
+      "op_name": "add_weeks",
+      "payload": {
+        "date": "2026-06-20",
+        "weeks": 1
+      }
+    },
+    {
+      "example_id": "train_unit_81",
+      "split": "train",
+      "family": "unit",
+      "prompt": "Convert 4 minutes to seconds. Return the integer result.",
+      "answer": "240",
+      "op_name": "minutes_to_seconds",
+      "payload": {
+        "amount": 4,
+        "src": "minutes",
+        "dst": "seconds",
+        "factor": 60
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_unit_13",
+        "split": "eval_indist",
+        "family": "unit",
+        "prompt": "Start with 11 centimeters and add 33 centimeters. Return the total centimeters.",
+        "answer": "44",
+        "op_name": "add_centimeters",
+        "payload": {
+          "amount": 11,
+          "extra": 33
+        }
+      },
+      {
+        "example_id": "eval_indist_date_3",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Starting from 2026-05-03, add 1 days. Return the ISO date.",
+        "answer": "2026-05-04",
+        "op_name": "add_days",
+        "payload": {
+          "date": "2026-05-03",
+          "days": 1
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_table_2",
+        "split": "eval_composition",
+        "family": "table",
+        "prompt": "Table: gamma=10, alpha=25, beta=8, delta=12. Add the values for beta and alpha, then add 4.",
+        "answer": "37",
+        "op_name": "sum_two_keys_plus",
+        "payload": {
+          "table": {
+            "gamma": 10,
+            "alpha": 25,
+            "beta": 8,
+            "delta": 12
+          },
+          "k1": "beta",
+          "k2": "alpha",
+          "bias": 4
+        }
+      },
+      {
+        "example_id": "eval_composition_unit_5",
+        "split": "eval_composition",
+        "family": "unit",
+        "prompt": "A cable is 3 meters plus 40 centimeters long. Report the total length in centimeters.",
+        "answer": "340",
+        "op_name": "meters_plus_centimeters",
+        "payload": {
+          "meters": 3,
+          "centimeters": 40
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_string_0",
+        "split": "eval_template_shift",
+        "family": "string",
+        "prompt": "Drop separators from WE-8727-XP and flip the whole compacted text.",
+        "answer": "PX7278EW",
+        "op_name": "reverse_all",
+        "payload": {
+          "code": "WE-8727-XP"
+        }
+      },
+      {
+        "example_id": "eval_template_shift_table_14",
+        "split": "eval_template_shift",
+        "family": "table",
+        "prompt": "From lookup entries [gamma=27, alpha=5, beta=25, delta=12], scale alpha by 5 and increase by 6.",
+        "answer": "31",
+        "op_name": "lookup_mul_add",
+        "payload": {
+          "table": {
+            "gamma": 27,
+            "alpha": 5,
+            "beta": 25,
+            "delta": 12
+          },
+          "key": "alpha",
+          "scale": 5,
+          "bias": 6
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   6%|▌         | 24/426 [00:00<00:01, 235.19it/s]Loading weights:  15%|█▌        | 66/426 [00:00<00:01, 331.18it/s]Loading weights:  24%|██▍       | 104/426 [00:00<00:00, 352.07it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 380.53it/s]Loading weights:  44%|████▎     | 186/426 [00:00<00:00, 370.85it/s]Loading weights:  56%|█████▌    | 239/426 [00:00<00:00, 417.01it/s]Loading weights:  68%|██████▊   | 288/426 [00:00<00:00, 436.88it/s]Loading weights:  78%|███████▊  | 332/426 [00:00<00:00, 429.46it/s]Loading weights:  90%|█████████ | 385/426 [00:00<00:00, 458.24it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 417.80it/s]
+repair-main_union_k32_repair:   0%|          | 0/80 [00:00<?, ?it/s]repair-main_union_k32_repair:   8%|▊         | 6/80 [00:08<01:45,  1.42s/it]repair-main_union_k32_repair:  20%|██        | 16/80 [00:17<01:07,  1.06s/it]repair-main_union_k32_repair:  26%|██▋       | 21/80 [00:36<01:57,  2.00s/it]repair-main_union_k32_repair:  36%|███▋      | 29/80 [00:53<01:43,  2.04s/it]repair-main_union_k32_repair:  41%|████▏     | 33/80 [00:58<01:25,  1.82s/it]repair-main_union_k32_repair:  42%|████▎     | 34/80 [01:01<01:29,  1.95s/it]repair-main_union_k32_repair:  48%|████▊     | 38/80 [01:13<01:35,  2.27s/it]repair-main_union_k32_repair:  62%|██████▎   | 50/80 [01:25<00:46,  1.56s/it]repair-main_union_k32_repair:  79%|███████▉  | 63/80 [01:39<00:22,  1.32s/it]repair-main_union_k32_repair:  84%|████████▍ | 67/80 [01:49<00:19,  1.53s/it]repair-main_union_k32_repair:  92%|█████████▎| 74/80 [01:58<00:08,  1.47s/it]repair-main_union_k32_repair: 100%|██████████| 80/80 [01:58<00:00,  1.49s/it]
+{
+  "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+  "max_new_tokens": 260,
+  "max_sources_per_record": 2,
+  "path": "data/main_union_k32_repair_records.jsonl",
+  "records": {
+    "candidate_count_mean": 24.2625,
+    "coverage": 0.8625,
+    "distinct_behavior_rate_mean": 0.6361079829577109,
+    "distinct_functional_rate_mean": 0.339876956861977,
+    "false_repair_count": 2,
+    "false_repair_rate": 1.0,
+    "hidden_pass_candidates_mean": 2.875,
+    "parse_success_mean": 22.4,
+    "records": 80,
+    "visible_candidates_mean": 7.35,
+    "visible_coverage": 0.8625,
+    "visible_repair_pass_count": 2,
+    "zero_base_records": 11,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "records_in": "data/main_union_k32_records.jsonl",
+  "repair_visible_passers": false,
+  "repairs_per_source": 1,
+  "round_name": "main_union_k32_repair",
+  "temperature": 0.4,
+  "token_usage": {
+    "calls": 22,
+    "completion_tokens": 2805,
+    "forward_tokens": 12774,
+    "prompt_tokens": 9969
+  },
+  "top_p": 0.95
+}

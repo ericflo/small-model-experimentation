@@ -1,0 +1,4 @@
+phase,round,groups,candidates,valid_candidates,correct_candidates,trace_consistent_candidates,canonical_candidates,valid_rate,correct_rate,trace_consistent_rate,canonical_rate,oracle_found_rate,base_correct_rate,counterfactual_group_rate,mean_candidates
+seed_unlabeled_candidates,0,256.0,49152.0,33546.0,494.0,0.0,0.0,0.6824951171875,0.010050455729166666,0.0,0.0,0.25390625,0.00390625,0.25,192.0
+counterfactual_preference_train_groups,0,64.0,12288.0,8410.0,439.0,0.0,0.0,0.6844075520833334,0.035725911458333336,0.0,0.0,1.0,0.0,1.0,192.0
+preference_val_candidates,0,64.0,12288.0,8391.0,147.0,0.0,0.0,0.682861328125,0.011962890625,0.0,0.0,0.3125,0.015625,0.296875,192.0

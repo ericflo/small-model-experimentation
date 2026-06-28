@@ -1,0 +1,260 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:13,  9.79it/s]Loading weights:   4%|▍         | 30/723 [00:00<00:04, 173.16it/s]Loading weights:  13%|█▎        | 92/723 [00:00<00:01, 373.39it/s]Loading weights:  20%|██        | 147/723 [00:00<00:01, 439.21it/s]Loading weights:  28%|██▊       | 204/723 [00:00<00:01, 473.65it/s]Loading weights:  36%|███▌      | 258/723 [00:00<00:00, 492.60it/s]Loading weights:  44%|████▎     | 316/723 [00:00<00:00, 518.47it/s]Loading weights:  52%|█████▏    | 379/723 [00:00<00:00, 550.49it/s]Loading weights:  64%|██████▍   | 464/723 [00:00<00:00, 642.45it/s]Loading weights:  99%|█████████▉| 716/723 [00:01<00:00, 1205.35it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 705.68it/s] 
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:13,  9.85it/s]Loading weights:   9%|▉         | 64/723 [00:00<00:01, 368.57it/s]Loading weights:  17%|█▋        | 120/723 [00:00<00:01, 449.44it/s]Loading weights:  26%|██▌       | 185/723 [00:00<00:01, 519.03it/s]Loading weights:  34%|███▍      | 248/723 [00:00<00:00, 552.80it/s]Loading weights:  42%|████▏     | 306/723 [00:00<00:00, 558.63it/s]Loading weights:  50%|█████     | 364/723 [00:00<00:00, 560.14it/s]Loading weights:  59%|█████▊    | 424/723 [00:00<00:00, 569.44it/s]Loading weights:  95%|█████████▍| 684/723 [00:00<00:00, 1191.78it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 770.05it/s] 
+eval-learned:dsl_eval_ceiling:   0%|          | 0/120 [00:00<?, ?it/s]eval-learned:dsl_eval_ceiling:   1%|          | 1/120 [00:17<35:09, 17.73s/it]eval-learned:dsl_eval_ceiling:   2%|▏         | 2/120 [00:34<33:55, 17.25s/it]eval-learned:dsl_eval_ceiling:   2%|▎         | 3/120 [00:57<38:36, 19.80s/it]eval-learned:dsl_eval_ceiling:   3%|▎         | 4/120 [01:14<36:14, 18.74s/it]eval-learned:dsl_eval_ceiling:   4%|▍         | 5/120 [01:36<38:22, 20.02s/it]eval-learned:dsl_eval_ceiling:   5%|▌         | 6/120 [01:59<39:24, 20.74s/it]eval-learned:dsl_eval_ceiling:   6%|▌         | 7/120 [02:22<40:55, 21.73s/it]eval-learned:dsl_eval_ceiling:   7%|▋         | 8/120 [02:44<40:49, 21.87s/it]eval-learned:dsl_eval_ceiling:   8%|▊         | 9/120 [03:02<38:10, 20.64s/it]eval-learned:dsl_eval_ceiling:   8%|▊         | 10/120 [03:20<36:15, 19.78s/it]eval-learned:dsl_eval_ceiling:   9%|▉         | 11/120 [03:43<37:44, 20.78s/it]eval-learned:dsl_eval_ceiling:  10%|█         | 12/120 [04:06<38:36, 21.45s/it]eval-learned:dsl_eval_ceiling:  11%|█         | 13/120 [04:25<36:50, 20.66s/it]eval-learned:dsl_eval_ceiling:  12%|█▏        | 14/120 [04:37<31:35, 17.88s/it]eval-learned:dsl_eval_ceiling:  12%|█▎        | 15/120 [04:49<28:28, 16.27s/it]eval-learned:dsl_eval_ceiling:  13%|█▎        | 16/120 [05:01<26:00, 15.00s/it]eval-learned:dsl_eval_ceiling:  14%|█▍        | 17/120 [05:13<24:18, 14.16s/it]eval-learned:dsl_eval_ceiling:  15%|█▌        | 18/120 [05:26<23:16, 13.70s/it]eval-learned:dsl_eval_ceiling:  16%|█▌        | 19/120 [05:39<22:57, 13.64s/it]eval-learned:dsl_eval_ceiling:  17%|█▋        | 20/120 [05:53<22:39, 13.60s/it]eval-learned:dsl_eval_ceiling:  18%|█▊        | 21/120 [06:05<21:43, 13.17s/it]eval-learned:dsl_eval_ceiling:  18%|█▊        | 22/120 [06:17<20:57, 12.83s/it]eval-learned:dsl_eval_ceiling:  19%|█▉        | 23/120 [06:29<20:01, 12.39s/it]eval-learned:dsl_eval_ceiling:  20%|██        | 24/120 [06:41<19:58, 12.48s/it]eval-learned:dsl_eval_ceiling:  21%|██        | 25/120 [06:57<21:12, 13.40s/it]eval-learned:dsl_eval_ceiling:  22%|██▏       | 26/120 [07:13<22:10, 14.16s/it]eval-learned:dsl_eval_ceiling:  22%|██▎       | 27/120 [07:28<22:26, 14.48s/it]eval-learned:dsl_eval_ceiling:  23%|██▎       | 28/120 [07:44<22:57, 14.97s/it]eval-learned:dsl_eval_ceiling:  24%|██▍       | 29/120 [08:00<23:18, 15.37s/it]eval-learned:dsl_eval_ceiling:  25%|██▌       | 30/120 [08:17<23:24, 15.61s/it]eval-learned:dsl_eval_ceiling:  26%|██▌       | 31/120 [08:33<23:28, 15.83s/it]eval-learned:dsl_eval_ceiling:  27%|██▋       | 32/120 [08:55<26:04, 17.78s/it]eval-learned:dsl_eval_ceiling:  28%|██▊       | 33/120 [09:11<25:05, 17.30s/it]eval-learned:dsl_eval_ceiling:  28%|██▊       | 34/120 [09:27<24:16, 16.93s/it]eval-learned:dsl_eval_ceiling:  29%|██▉       | 35/120 [09:43<23:24, 16.53s/it]eval-learned:dsl_eval_ceiling:  30%|███       | 36/120 [09:59<23:02, 16.46s/it]eval-learned:dsl_eval_ceiling:  31%|███       | 37/120 [10:20<24:29, 17.71s/it]eval-learned:dsl_eval_ceiling:  32%|███▏      | 38/120 [10:41<25:39, 18.78s/it]eval-learned:dsl_eval_ceiling:  32%|███▎      | 39/120 [11:02<26:03, 19.30s/it]eval-learned:dsl_eval_ceiling:  33%|███▎      | 40/120 [11:22<26:15, 19.69s/it]eval-learned:dsl_eval_ceiling:  34%|███▍      | 41/120 [11:43<26:29, 20.12s/it]eval-learned:dsl_eval_ceiling:  35%|███▌      | 42/120 [12:04<26:13, 20.17s/it]eval-learned:dsl_eval_ceiling:  36%|███▌      | 43/120 [12:28<27:25, 21.38s/it]eval-learned:dsl_eval_ceiling:  37%|███▋      | 44/120 [12:49<26:51, 21.21s/it]eval-learned:dsl_eval_ceiling:  38%|███▊      | 45/120 [13:09<26:15, 21.01s/it]eval-learned:dsl_eval_ceiling:  38%|███▊      | 46/120 [13:30<25:45, 20.89s/it]eval-learned:dsl_eval_ceiling:  39%|███▉      | 47/120 [13:51<25:22, 20.86s/it]eval-learned:dsl_eval_ceiling:  40%|████      | 48/120 [14:11<24:55, 20.77s/it]eval-learned:dsl_eval_ceiling:  41%|████      | 49/120 [14:35<25:36, 21.64s/it]eval-learned:dsl_eval_ceiling:  42%|████▏     | 50/120 [14:53<24:05, 20.65s/it]eval-learned:dsl_eval_ceiling:  42%|████▎     | 51/120 [15:12<23:14, 20.21s/it]eval-learned:dsl_eval_ceiling:  43%|████▎     | 52/120 [15:31<22:26, 19.80s/it]eval-learned:dsl_eval_ceiling:  44%|████▍     | 53/120 [15:50<21:48, 19.54s/it]eval-learned:dsl_eval_ceiling:  45%|████▌     | 54/120 [16:09<21:06, 19.19s/it]eval-learned:dsl_eval_ceiling:  46%|████▌     | 55/120 [16:27<20:29, 18.91s/it]eval-learned:dsl_eval_ceiling:  47%|████▋     | 56/120 [16:45<19:59, 18.74s/it]eval-learned:dsl_eval_ceiling:  48%|████▊     | 57/120 [17:04<19:40, 18.73s/it]eval-learned:dsl_eval_ceiling:  48%|████▊     | 58/120 [17:23<19:28, 18.85s/it]eval-learned:dsl_eval_ceiling:  49%|████▉     | 59/120 [17:42<19:08, 18.82s/it]eval-learned:dsl_eval_ceiling:  50%|█████     | 60/120 [18:00<18:42, 18.71s/it]eval-learned:dsl_eval_ceiling:  51%|█████     | 61/120 [18:14<17:02, 17.32s/it]eval-learned:dsl_eval_ceiling:  52%|█████▏    | 62/120 [18:29<16:05, 16.65s/it]eval-learned:dsl_eval_ceiling:  52%|█████▎    | 63/120 [18:43<15:04, 15.87s/it]eval-learned:dsl_eval_ceiling:  53%|█████▎    | 64/120 [18:58<14:20, 15.36s/it]eval-learned:dsl_eval_ceiling:  54%|█████▍    | 65/120 [19:12<13:40, 14.92s/it]eval-learned:dsl_eval_ceiling:  55%|█████▌    | 66/120 [19:25<13:08, 14.60s/it]eval-learned:dsl_eval_ceiling:  56%|█████▌    | 67/120 [19:40<12:48, 14.51s/it]eval-learned:dsl_eval_ceiling:  57%|█████▋    | 68/120 [19:54<12:23, 14.30s/it]eval-learned:dsl_eval_ceiling:  57%|█████▊    | 69/120 [20:08<12:07, 14.27s/it]eval-learned:dsl_eval_ceiling:  58%|█████▊    | 70/120 [20:22<11:46, 14.13s/it]eval-learned:dsl_eval_ceiling:  59%|█████▉    | 71/120 [20:36<11:33, 14.15s/it]eval-learned:dsl_eval_ceiling:  60%|██████    | 72/120 [20:57<13:00, 16.27s/it]eval-learned:dsl_eval_ceiling:  61%|██████    | 73/120 [21:04<10:33, 13.49s/it]eval-learned:dsl_eval_ceiling:  62%|██████▏   | 74/120 [21:11<08:50, 11.53s/it]eval-learned:dsl_eval_ceiling:  62%|██████▎   | 75/120 [21:18<07:38, 10.19s/it]eval-learned:dsl_eval_ceiling:  63%|██████▎   | 76/120 [21:25<06:48,  9.28s/it]eval-learned:dsl_eval_ceiling:  64%|██████▍   | 77/120 [21:32<06:10,  8.62s/it]eval-learned:dsl_eval_ceiling:  65%|██████▌   | 78/120 [21:39<05:44,  8.20s/it]eval-learned:dsl_eval_ceiling:  66%|██████▌   | 79/120 [21:54<06:57, 10.17s/it]eval-learned:dsl_eval_ceiling:  67%|██████▋   | 80/120 [22:01<06:08,  9.21s/it]eval-learned:dsl_eval_ceiling:  68%|██████▊   | 81/120 [22:08<05:34,  8.59s/it]eval-learned:dsl_eval_ceiling:  68%|██████▊   | 82/120 [22:15<05:08,  8.13s/it]eval-learned:dsl_eval_ceiling:  69%|██████▉   | 83/120 [22:22<04:49,  7.82s/it]eval-learned:dsl_eval_ceiling:  70%|███████   | 84/120 [22:37<05:53,  9.83s/it]eval-learned:dsl_eval_ceiling:  71%|███████   | 85/120 [23:00<08:01, 13.75s/it]eval-learned:dsl_eval_ceiling:  72%|███████▏  | 86/120 [23:16<08:13, 14.51s/it]eval-learned:dsl_eval_ceiling:  72%|███████▎  | 87/120 [23:38<09:13, 16.77s/it]eval-learned:dsl_eval_ceiling:  73%|███████▎  | 88/120 [23:54<08:44, 16.40s/it]eval-learned:dsl_eval_ceiling:  74%|███████▍  | 89/120 [24:14<09:04, 17.57s/it]eval-learned:dsl_eval_ceiling:  75%|███████▌  | 90/120 [24:31<08:39, 17.31s/it]eval-learned:dsl_eval_ceiling:  76%|███████▌  | 91/120 [24:47<08:15, 17.07s/it]eval-learned:dsl_eval_ceiling:  77%|███████▋  | 92/120 [25:04<07:53, 16.90s/it]eval-learned:dsl_eval_ceiling:  78%|███████▊  | 93/120 [25:25<08:13, 18.28s/it]eval-learned:dsl_eval_ceiling:  78%|███████▊  | 94/120 [25:42<07:42, 17.79s/it]eval-learned:dsl_eval_ceiling:  79%|███████▉  | 95/120 [25:58<07:14, 17.39s/it]eval-learned:dsl_eval_ceiling:  80%|████████  | 96/120 [26:19<07:22, 18.45s/it]eval-learned:dsl_eval_ceiling:  81%|████████  | 97/120 [26:35<06:46, 17.66s/it]eval-learned:dsl_eval_ceiling:  82%|████████▏ | 98/120 [26:51<06:18, 17.22s/it]eval-learned:dsl_eval_ceiling:  82%|████████▎ | 99/120 [27:07<05:52, 16.77s/it]eval-learned:dsl_eval_ceiling:  83%|████████▎ | 100/120 [27:15<04:43, 14.17s/it]eval-learned:dsl_eval_ceiling:  84%|████████▍ | 101/120 [27:23<03:54, 12.36s/it]eval-learned:dsl_eval_ceiling:  85%|████████▌ | 102/120 [27:31<03:19, 11.07s/it]eval-learned:dsl_eval_ceiling:  86%|████████▌ | 103/120 [27:40<02:54, 10.25s/it]eval-learned:dsl_eval_ceiling:  87%|████████▋ | 104/120 [27:56<03:11, 11.95s/it]eval-learned:dsl_eval_ceiling:  88%|████████▊ | 105/120 [28:04<02:42, 10.82s/it]eval-learned:dsl_eval_ceiling:  88%|████████▊ | 106/120 [28:12<02:20, 10.01s/it]eval-learned:dsl_eval_ceiling:  89%|████████▉ | 107/120 [28:20<02:03,  9.49s/it]eval-learned:dsl_eval_ceiling:  90%|█████████ | 108/120 [28:28<01:49,  9.10s/it]eval-learned:dsl_eval_ceiling:  91%|█████████ | 109/120 [28:47<02:11, 11.97s/it]eval-learned:dsl_eval_ceiling:  92%|█████████▏| 110/120 [29:06<02:19, 13.98s/it]eval-learned:dsl_eval_ceiling:  92%|█████████▎| 111/120 [29:24<02:18, 15.38s/it]eval-learned:dsl_eval_ceiling:  93%|█████████▎| 112/120 [29:44<02:12, 16.55s/it]eval-learned:dsl_eval_ceiling:  94%|█████████▍| 113/120 [30:03<02:01, 17.37s/it]eval-learned:dsl_eval_ceiling:  95%|█████████▌| 114/120 [30:22<01:46, 17.83s/it]eval-learned:dsl_eval_ceiling:  96%|█████████▌| 115/120 [30:41<01:31, 18.21s/it]eval-learned:dsl_eval_ceiling:  97%|█████████▋| 116/120 [30:59<01:12, 18.10s/it]eval-learned:dsl_eval_ceiling:  98%|█████████▊| 117/120 [31:22<00:58, 19.66s/it]eval-learned:dsl_eval_ceiling:  98%|█████████▊| 118/120 [31:41<00:39, 19.51s/it]eval-learned:dsl_eval_ceiling:  99%|█████████▉| 119/120 [32:00<00:19, 19.24s/it]eval-learned:dsl_eval_ceiling: 100%|██████████| 120/120 [32:18<00:00, 18.94s/it]eval-learned:dsl_eval_ceiling: 100%|██████████| 120/120 [32:18<00:00, 16.15s/it]
+{
+  "candidate_summary": {
+    "overall": {
+      "records": 120,
+      "candidate_oracle_hidden_all_successes": 120,
+      "candidate_oracle_hidden_all_rate": 1.0,
+      "target_program_synthesized_successes": 120,
+      "target_program_synthesized_rate": 1.0,
+      "avg_synthesized_programs": 3114.733,
+      "avg_visible_consistent_candidates": 388.342,
+      "avg_unique_sketches": 1.4
+    },
+    "by_family": {
+      "sorted_index_sum_branch_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 2324.0,
+        "avg_visible_consistent_candidates": 32.5,
+        "avg_unique_sketches": 1.167
+      },
+      "sorted_join_contains_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 38.0,
+        "avg_visible_consistent_candidates": 1.083,
+        "avg_unique_sketches": 1.0
+      },
+      "sum_len_mod_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 833.0,
+        "avg_visible_consistent_candidates": 2.0,
+        "avg_unique_sketches": 1.0
+      },
+      "sum_length_mod_gate_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 503.333,
+        "avg_unique_sketches": 3.0
+      },
+      "text_absent_mod_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 16.917,
+        "avg_unique_sketches": 1.083
+      },
+      "text_value_gate_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 1549.417,
+        "avg_unique_sketches": 1.0
+      },
+      "token_absent_length_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 856.5,
+        "avg_unique_sketches": 1.667
+      },
+      "token_count_mod_length_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 595.5,
+        "avg_unique_sketches": 1.5
+      },
+      "tuple_sum_mod_gate_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 325.167,
+        "avg_unique_sketches": 1.5
+      },
+      "tuple_value_mod_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 3952.333,
+        "avg_visible_consistent_candidates": 1.0,
+        "avg_unique_sketches": 1.083
+      }
+    }
+  },
+  "policy_summary": {
+    "active_max_split@0": {
+      "records": 120,
+      "hidden_all_successes": 101,
+      "hidden_all_rate": 0.841667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.583,
+      "avg_queries_used": 0.0
+    },
+    "active_max_split@1": {
+      "records": 120,
+      "hidden_all_successes": 109,
+      "hidden_all_rate": 0.908333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.8,
+      "avg_queries_used": 1.0
+    },
+    "active_max_split@2": {
+      "records": 120,
+      "hidden_all_successes": 113,
+      "hidden_all_rate": 0.941667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.875,
+      "avg_queries_used": 2.0
+    },
+    "active_max_split@3": {
+      "records": 120,
+      "hidden_all_successes": 115,
+      "hidden_all_rate": 0.958333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.892,
+      "avg_queries_used": 3.0
+    },
+    "learned_qwen_policy@0": {
+      "records": 120,
+      "hidden_all_successes": 101,
+      "hidden_all_rate": 0.841667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.583,
+      "avg_queries_used": 0.0
+    },
+    "learned_qwen_policy@1": {
+      "records": 120,
+      "hidden_all_successes": 104,
+      "hidden_all_rate": 0.866667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.683,
+      "avg_queries_used": 1.0
+    },
+    "learned_qwen_policy@2": {
+      "records": 120,
+      "hidden_all_successes": 112,
+      "hidden_all_rate": 0.933333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.875,
+      "avg_queries_used": 2.0
+    },
+    "learned_qwen_policy@3": {
+      "records": 120,
+      "hidden_all_successes": 115,
+      "hidden_all_rate": 0.958333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.933,
+      "avg_queries_used": 3.0
+    },
+    "oracle_elimination@0": {
+      "records": 120,
+      "hidden_all_successes": 101,
+      "hidden_all_rate": 0.841667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.583,
+      "avg_queries_used": 0.0
+    },
+    "oracle_elimination@1": {
+      "records": 120,
+      "hidden_all_successes": 116,
+      "hidden_all_rate": 0.966667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.942,
+      "avg_queries_used": 1.0
+    },
+    "oracle_elimination@2": {
+      "records": 120,
+      "hidden_all_successes": 120,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 2.0
+    },
+    "oracle_elimination@3": {
+      "records": 120,
+      "hidden_all_successes": 120,
+      "hidden_all_rate": 1.0,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 18.0,
+      "avg_queries_used": 3.0
+    },
+    "random_extra@0": {
+      "records": 240,
+      "hidden_all_successes": 202,
+      "hidden_all_rate": 0.841667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.583,
+      "avg_queries_used": 0.0
+    },
+    "random_extra@1": {
+      "records": 240,
+      "hidden_all_successes": 207,
+      "hidden_all_rate": 0.8625,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.683,
+      "avg_queries_used": 1.0
+    },
+    "random_extra@2": {
+      "records": 240,
+      "hidden_all_successes": 211,
+      "hidden_all_rate": 0.879167,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.746,
+      "avg_queries_used": 2.0
+    },
+    "random_extra@3": {
+      "records": 240,
+      "hidden_all_successes": 218,
+      "hidden_all_rate": 0.908333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.837,
+      "avg_queries_used": 3.0
+    },
+    "visible_prior@0": {
+      "records": 120,
+      "hidden_all_successes": 101,
+      "hidden_all_rate": 0.841667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.583,
+      "avg_queries_used": 0.0
+    }
+  },
+  "learned_parse_rate": 1.0
+}

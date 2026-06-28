@@ -1,0 +1,4 @@
+phase,round,source_examples,targets,selected_correct_rate,selected_valid_rate,selected_program_exact_rate,selected_trace_consistent_rate,selected_quality_mean,changed_rate
+answer_verified_targets,1,1024,466,1.0,1.0,0.10515021459227468,0.10515021459227468,2.2103004291845494,0.6974248927038627
+best_quality_targets,1,1024,466,1.0,1.0,0.10944206008583691,0.10944206008583691,2.218884120171674,0.6974248927038627
+preference_selected_targets,1,1024,1024,0.1220703125,1.0,0.013671875,0.013671875,1.1494140625,1.0

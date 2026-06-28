@@ -1,0 +1,5 @@
+run,variant,phase,local_step,step,loss,train_examples,quick_answer_head_accuracy,quick_bytecode_accuracy,quick_program_exact,op_loss,arg_loss,answer_loss
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,1,1,7.892005443572998,128,0.0,0.0,0.0,2.497713327407837,4.511335372924805,4.4147844314575195
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,50,50,1.7726322412490845,128,0.125,0.0625,0.0,0.410439670085907,0.6352741718292236,3.634591579437256
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,100,100,1.1271600723266602,128,0.21875,0.125,0.0,0.06467179954051971,0.37793582677841187,3.422762393951416
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,150,150,1.2222990989685059,128,0.125,0.09375,0.03125,0.040365688502788544,0.6694438457489014,2.5624475479125977

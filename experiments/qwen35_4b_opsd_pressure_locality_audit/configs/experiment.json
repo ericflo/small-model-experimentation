@@ -1,0 +1,26 @@
+{
+  "experiment": "qwen35_4b_opsd_pressure_locality_audit",
+  "date_utc": "2026-06-26",
+  "model": "Qwen3.5-4B",
+  "type": "no_training_stage_1_audit",
+  "objective": "Test whether positive-only OPSD has token-localized correctness signal on hidden-correct versus visible-pass hidden-wrong code near-misses.",
+  "primary_gate": {
+    "statistic": "same-prefix teacher logprob preference for correct branch over wrong branch",
+    "primary_hint": "retrieved verified algorithm used by the hidden-correct adaptation",
+    "success_condition": "weak-hint preference is positive on task-specific forks and exceeds shuffled-hint control",
+    "full_reference_role": "leakage ceiling only"
+  },
+  "supporting_metrics": [
+    "token-level positive pressure mass by bucket",
+    "correct rollout versus wrong rollout gap means",
+    "hint-overlap versus task-specific fork strata",
+    "student no-hint baseline preference",
+    "shuffled-hint control"
+  ],
+  "raw_candidate_arms": [
+    "retrieval_adapt_semantic_top3",
+    "retrieval_adapt_random_top3",
+    "retrieval_adapt_shuffled_top3",
+    "retrieval_copy_rename_top3"
+  ]
+}

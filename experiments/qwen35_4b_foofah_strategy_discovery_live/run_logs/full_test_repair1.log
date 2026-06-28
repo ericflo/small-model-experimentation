@@ -1,0 +1,182 @@
+[5/50 new, 5 total] discovered=4/5 direct=5 baseline=5 new_over_baseline_oracle=0 tokens=63845
+[10/50 new, 10 total] discovered=8/10 direct=9 baseline=9 new_over_baseline_oracle=0 tokens=124214
+[15/50 new, 15 total] discovered=9/15 direct=10 baseline=10 new_over_baseline_oracle=0 tokens=149828
+[20/50 new, 20 total] discovered=9/20 direct=10 baseline=14 new_over_baseline_oracle=0 tokens=223232
+[25/50 new, 25 total] discovered=13/25 direct=14 baseline=17 new_over_baseline_oracle=0 tokens=254389
+[30/50 new, 30 total] discovered=13/30 direct=14 baseline=17 new_over_baseline_oracle=0 tokens=362956
+[35/50 new, 35 total] discovered=15/35 direct=14 baseline=21 new_over_baseline_oracle=0 tokens=378302
+[40/50 new, 40 total] discovered=15/40 direct=14 baseline=21 new_over_baseline_oracle=0 tokens=394454
+[45/50 new, 45 total] discovered=17/45 direct=16 baseline=23 new_over_baseline_oracle=0 tokens=418677
+[50/50 new, 50 total] discovered=22/50 direct=21 baseline=28 new_over_baseline_oracle=0 tokens=435131
+{
+  "avg_forward_tokens": 8702.62,
+  "baseline_first_visible_accuracy": 0.56,
+  "baseline_first_visible_exact": 28,
+  "baseline_oracle_union": 29,
+  "baseline_oracle_union_accuracy": 0.58,
+  "by_family": {
+    "agriculture": {
+      "baseline_first": 3,
+      "baseline_first_accuracy": 0.6,
+      "direct": 4,
+      "direct_accuracy": 0.8,
+      "discovered": 4,
+      "discovered_accuracy": 0.8,
+      "discovered_oracle": 4,
+      "discovered_oracle_accuracy": 0.8,
+      "n": 5,
+      "triggered": 4,
+      "triggered_accuracy": 0.8
+    },
+    "crime_data_wrangler": {
+      "baseline_first": 0,
+      "baseline_first_accuracy": 0.0,
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "discovered": 0,
+      "discovered_accuracy": 0.0,
+      "discovered_oracle": 0,
+      "discovered_oracle_accuracy": 0.0,
+      "n": 5,
+      "triggered": 0,
+      "triggered_accuracy": 0.0
+    },
+    "potters_wheel_merge_split": {
+      "baseline_first": 4,
+      "baseline_first_accuracy": 0.8,
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "discovered": 2,
+      "discovered_accuracy": 0.4,
+      "discovered_oracle": 2,
+      "discovered_oracle_accuracy": 0.4,
+      "n": 5,
+      "triggered": 2,
+      "triggered_accuracy": 0.4
+    },
+    "potters_wheel_unfold": {
+      "baseline_first": 2,
+      "baseline_first_accuracy": 0.4,
+      "direct": 2,
+      "direct_accuracy": 0.4,
+      "discovered": 2,
+      "discovered_accuracy": 0.4,
+      "discovered_oracle": 2,
+      "discovered_oracle_accuracy": 0.4,
+      "n": 5,
+      "triggered": 2,
+      "triggered_accuracy": 0.4
+    },
+    "potters_wheel_unfold2": {
+      "baseline_first": 0,
+      "baseline_first_accuracy": 0.0,
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "discovered": 0,
+      "discovered_accuracy": 0.0,
+      "discovered_oracle": 0,
+      "discovered_oracle_accuracy": 0.0,
+      "n": 5,
+      "triggered": 0,
+      "triggered_accuracy": 0.0
+    },
+    "proactive_wrangling_fold": {
+      "baseline_first": 5,
+      "baseline_first_accuracy": 1.0,
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "discovered": 5,
+      "discovered_accuracy": 1.0,
+      "discovered_oracle": 5,
+      "discovered_oracle_accuracy": 1.0,
+      "n": 5,
+      "triggered": 5,
+      "triggered_accuracy": 1.0
+    },
+    "synthetic_12": {
+      "baseline_first": 5,
+      "baseline_first_accuracy": 1.0,
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "discovered": 4,
+      "discovered_accuracy": 0.8,
+      "discovered_oracle": 5,
+      "discovered_oracle_accuracy": 1.0,
+      "n": 5,
+      "triggered": 5,
+      "triggered_accuracy": 1.0
+    },
+    "synthetic_25": {
+      "baseline_first": 4,
+      "baseline_first_accuracy": 0.8,
+      "direct": 4,
+      "direct_accuracy": 0.8,
+      "discovered": 4,
+      "discovered_accuracy": 0.8,
+      "discovered_oracle": 4,
+      "discovered_oracle_accuracy": 0.8,
+      "n": 5,
+      "triggered": 4,
+      "triggered_accuracy": 0.8
+    },
+    "synthetic_48": {
+      "baseline_first": 1,
+      "baseline_first_accuracy": 0.2,
+      "direct": 1,
+      "direct_accuracy": 0.2,
+      "discovered": 1,
+      "discovered_accuracy": 0.2,
+      "discovered_oracle": 1,
+      "discovered_oracle_accuracy": 0.2,
+      "n": 5,
+      "triggered": 1,
+      "triggered_accuracy": 0.2
+    },
+    "synthetic_8": {
+      "baseline_first": 4,
+      "baseline_first_accuracy": 0.8,
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "discovered": 0,
+      "discovered_accuracy": 0.0,
+      "discovered_oracle": 0,
+      "discovered_oracle_accuracy": 0.0,
+      "n": 5,
+      "triggered": 0,
+      "triggered_accuracy": 0.0
+    }
+  },
+  "direct_accuracy": 0.42,
+  "direct_exact": 21,
+  "discovered_commit_correct": 9,
+  "discovered_commit_precision": 0.6923076923076923,
+  "discovered_direct_correct_losses": 1,
+  "discovered_direct_miss_recoveries": 2,
+  "discovered_first_visible_accuracy": 0.44,
+  "discovered_first_visible_exact": 22,
+  "discovered_oracle_union": 23,
+  "discovered_oracle_union_accuracy": 0.46,
+  "discovered_program_commits": 13,
+  "discovered_shape_trigger_accuracy": 0.46,
+  "discovered_shape_trigger_commit_correct": 2,
+  "discovered_shape_trigger_commit_precision": 1.0,
+  "discovered_shape_trigger_exact": 23,
+  "discovered_shape_trigger_losses": 0,
+  "discovered_shape_trigger_program_commits": 2,
+  "discovered_shape_trigger_recoveries": 2,
+  "n": 50,
+  "new_visible_correct_over_baseline_oracle": 0,
+  "total_forward_tokens": 435131,
+  "variant_summary": {
+    "strat_01": {
+      "hidden": 6,
+      "tokens": 172558,
+      "visible": 6
+    },
+    "strat_02": {
+      "hidden": 9,
+      "tokens": 188662,
+      "visible": 10
+    }
+  }
+}

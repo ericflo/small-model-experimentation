@@ -1,0 +1,6 @@
+task_id,family,method,row_exact,full_task_exact,parse_ok,raw
+City.000011,City,direct_batch,0.3333333333333333,False,True,"[""New York City"", ""New York City"", ""New York City""]"
+DateTime.000012,DateTime,direct_batch,0.6666666666666666,False,True,"[""2033"", ""Unknown"", ""1784""]"
+Name.000028,Name,direct_batch,1.0,True,True,"[""Rodel"", ""Jan"", ""Antonia""]"
+Number.000048,Number,direct_batch,1.0,True,True,"[""97.0"", ""75.0"", ""100.0""]"
+Number.000081,Number,direct_batch,0.6666666666666666,False,True,"[""76-100"", ""26-50"", ""1-25""]"

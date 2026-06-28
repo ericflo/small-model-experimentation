@@ -1,0 +1,51 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:01,  6.93it/s]Loading weights:   5%|▌         | 23/426 [00:00<00:03, 111.12it/s]Loading weights:  15%|█▌        | 65/426 [00:00<00:01, 238.07it/s]Loading weights:  26%|██▋       | 112/426 [00:00<00:00, 323.69it/s]Loading weights:  36%|███▌      | 152/426 [00:00<00:00, 348.47it/s]Loading weights:  47%|████▋     | 200/426 [00:00<00:00, 390.13it/s]Loading weights:  58%|█████▊    | 248/426 [00:00<00:00, 412.24it/s]Loading weights:  68%|██████▊   | 291/426 [00:00<00:00, 415.93it/s]Loading weights:  78%|███████▊  | 334/426 [00:00<00:00, 419.77it/s]Loading weights:  90%|████████▉ | 382/426 [00:01<00:00, 436.24it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 414.53it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 361.89it/s]
+constrained_shuffled_dpo_k4:   0%|          | 0/24 [00:00<?, ?it/s]constrained_shuffled_dpo_k4:   4%|▍         | 1/24 [00:24<09:26, 24.63s/it]constrained_shuffled_dpo_k4:   8%|▊         | 2/24 [00:49<09:05, 24.80s/it]constrained_shuffled_dpo_k4:  12%|█▎        | 3/24 [01:14<08:38, 24.68s/it]constrained_shuffled_dpo_k4:  17%|█▋        | 4/24 [01:38<08:10, 24.54s/it]constrained_shuffled_dpo_k4:  21%|██        | 5/24 [02:02<07:45, 24.49s/it]constrained_shuffled_dpo_k4:  25%|██▌       | 6/24 [02:26<07:16, 24.22s/it]constrained_shuffled_dpo_k4:  29%|██▉       | 7/24 [02:34<05:21, 18.94s/it]constrained_shuffled_dpo_k4:  33%|███▎      | 8/24 [02:51<04:50, 18.16s/it]constrained_shuffled_dpo_k4:  38%|███▊      | 9/24 [03:01<03:53, 15.60s/it]constrained_shuffled_dpo_k4:  42%|████▏     | 10/24 [03:24<04:11, 17.98s/it]constrained_shuffled_dpo_k4:  46%|████▌     | 11/24 [03:47<04:16, 19.70s/it]constrained_shuffled_dpo_k4:  50%|█████     | 12/24 [04:03<03:42, 18.55s/it]constrained_shuffled_dpo_k4:  54%|█████▍    | 13/24 [04:20<03:18, 18.04s/it]constrained_shuffled_dpo_k4:  58%|█████▊    | 14/24 [04:44<03:18, 19.87s/it]constrained_shuffled_dpo_k4:  62%|██████▎   | 15/24 [05:09<03:11, 21.26s/it]constrained_shuffled_dpo_k4:  67%|██████▋   | 16/24 [05:32<02:55, 21.90s/it]<unknown>:2: SyntaxWarning: invalid escape sequence '\d'
+<unknown>:2: SyntaxWarning: invalid escape sequence '\d'
+<unknown>:2: SyntaxWarning: invalid escape sequence '\d'
+<unknown>:2: SyntaxWarning: invalid escape sequence '\d'
+<unknown>:2: SyntaxWarning: invalid escape sequence '\d'
+constrained_shuffled_dpo_k4:  71%|███████   | 17/24 [05:57<02:38, 22.65s/it]constrained_shuffled_dpo_k4:  75%|███████▌  | 18/24 [06:14<02:07, 21.17s/it]constrained_shuffled_dpo_k4:  79%|███████▉  | 19/24 [06:33<01:42, 20.55s/it]constrained_shuffled_dpo_k4:  83%|████████▎ | 20/24 [06:57<01:26, 21.57s/it]constrained_shuffled_dpo_k4:  88%|████████▊ | 21/24 [07:22<01:07, 22.42s/it]constrained_shuffled_dpo_k4:  92%|█████████▏| 22/24 [07:46<00:45, 23.00s/it]constrained_shuffled_dpo_k4:  96%|█████████▌| 23/24 [08:02<00:20, 20.94s/it]constrained_shuffled_dpo_k4: 100%|██████████| 24/24 [08:26<00:00, 21.68s/it]constrained_shuffled_dpo_k4: 100%|██████████| 24/24 [08:26<00:00, 21.09s/it]
+{
+  "adapter_dir": "/workspace/large_artifacts/qwen35_4b_constrained_coverage_dpo/models/constrained_shuffled_dpo_lora",
+  "arm_name": "constrained_shuffled_dpo_k4",
+  "count": 24,
+  "experiment": "qwen35_4b_constrained_coverage_dpo",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/eval_constrained_shuffled_dpo_k4_records.jsonl",
+  "records": {
+    "candidate_count_mean": 3.9583333333333335,
+    "coverage": 0.5833333333333334,
+    "distinct_behavior_rate_mean": 0.8819444444444445,
+    "distinct_functional_rate_mean": 0.5555555555555556,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 25420,
+    "hidden_pass_candidates_mean": 1.5,
+    "parse_success_mean": 3.5416666666666665,
+    "pass1_proxy": 0.25,
+    "records": 24,
+    "visible_candidates_mean": 1.8333333333333333,
+    "visible_coverage": 0.5833333333333334,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "pilot_eval",
+  "samples_per_task": 4,
+  "seed": 2026062627,
+  "split": "mbpp_test",
+  "temperatures": [
+    1.0
+  ],
+  "token_usage": {
+    "calls": 96,
+    "completion_tokens": 13595,
+    "forward_tokens": 25575,
+    "prompt_tokens": 11980
+  },
+  "top_p": 0.98,
+  "visible_tests": 1
+}

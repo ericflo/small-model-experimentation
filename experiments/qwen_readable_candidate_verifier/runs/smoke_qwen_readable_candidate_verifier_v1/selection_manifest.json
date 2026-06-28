@@ -1,0 +1,14 @@
+{
+  "selected_groups": 36,
+  "roles": {
+    "eval": 24,
+    "train": 8,
+    "val": 4
+  },
+  "source_runs": [
+    "main_expand_copy_seed123",
+    "main_expand_copy_seed456",
+    "main_expand_copy_seed789"
+  ],
+  "heldout_source_seed": 789
+}

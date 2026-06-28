@@ -1,0 +1,13 @@
+weight,phase,fresh_paired_search,hard_search
+baseline,seed_supervised,0.390625,0.359375
+baseline,expert_round_1,0.328125,0.46875
+baseline,full_supervised,0.421875,0.484375
+0.35,seed_supervised,0.25,0.25
+0.35,expert_round_1,0.359375,0.328125
+0.35,full_supervised,0.3125,0.4375
+0.10,seed_supervised,0.3125,0.34375
+0.10,expert_round_1,0.34375,0.375
+0.10,full_supervised,0.375,0.484375
+0.03,seed_supervised,0.390625,0.390625
+0.03,expert_round_1,0.34375,0.375
+0.03,full_supervised,0.40625,0.4375

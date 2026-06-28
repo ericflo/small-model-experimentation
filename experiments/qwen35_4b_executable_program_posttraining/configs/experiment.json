@@ -1,0 +1,45 @@
+{
+  "experiment_name": "qwen35_4b_executable_program_posttraining",
+  "question": "Can Qwen 3.5 4B learn to emit executable DSL repair programs, and can visible-test reranking improve hidden generalization on held-out program families?",
+  "model": {
+    "model_id": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "loader": "AutoModelForImageTextToText",
+    "quantization": "4-bit NF4 QLoRA"
+  },
+  "dataset": {
+    "seed": 20260622,
+    "train_records": 240,
+    "iid_eval_records": 60,
+    "holdout_records_per_family": 24,
+    "visible_cases_per_record": 6,
+    "hidden_cases_per_record": 18,
+    "heldout_families": [
+      "modulo_sum_label",
+      "length_contains_code",
+      "tuple_branch_label"
+    ]
+  },
+  "training": {
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "epochs": 2.0,
+    "learning_rate": 0.00015,
+    "max_length": 4096,
+    "gradient_accumulation_steps": 8,
+    "per_device_train_batch_size": 1,
+    "bf16": true
+  },
+  "evaluation": {
+    "max_new_tokens": 96,
+    "num_samples": 12,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "selection": "choose valid candidate with most visible-case passes; tie-break by shorter parsed DSL"
+  },
+  "artifact_layout": {
+    "compact_dir": "experiments/qwen35_4b_executable_program_posttraining",
+    "large_artifact_dir": "large_artifacts/qwen35_4b_executable_program_posttraining"
+  }
+}

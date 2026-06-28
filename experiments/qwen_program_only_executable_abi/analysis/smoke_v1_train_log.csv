@@ -1,0 +1,5 @@
+run,suite,arm,seed,step,loss,elapsed_s
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,2.4919073581695557,0.5643882751464844
+smoke_v1_answer_only_s101,smoke,answer_only,101,2,1.4809242486953735,0.9942789077758789
+smoke_v1_program_stack_s101,smoke,program_stack,101,1,2.6724143028259277,0.4460442066192627
+smoke_v1_program_stack_s101,smoke,program_stack,101,2,1.7435418367385864,0.8778600692749023

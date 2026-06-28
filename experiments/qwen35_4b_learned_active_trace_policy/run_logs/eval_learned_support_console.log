@@ -1,0 +1,260 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:13,  9.83it/s]Loading weights:   5%|▍         | 34/723 [00:00<00:03, 196.71it/s]Loading weights:  13%|█▎        | 92/723 [00:00<00:01, 368.25it/s]Loading weights:  20%|█▉        | 143/723 [00:00<00:01, 422.73it/s]Loading weights:  28%|██▊       | 199/723 [00:00<00:01, 470.48it/s]Loading weights:  35%|███▍      | 253/723 [00:00<00:00, 491.14it/s]Loading weights:  43%|████▎     | 310/723 [00:00<00:00, 512.80it/s]Loading weights:  50%|█████     | 365/723 [00:00<00:00, 521.06it/s]Loading weights:  59%|█████▊    | 424/723 [00:00<00:00, 541.22it/s]Loading weights:  92%|█████████▏| 662/723 [00:01<00:00, 1102.03it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 693.71it/s] 
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:17,  9.32it/s]Loading weights:   8%|▊         | 61/723 [00:00<00:01, 345.50it/s]Loading weights:  16%|█▋        | 118/723 [00:00<00:01, 441.98it/s]Loading weights:  24%|██▍       | 174/723 [00:00<00:01, 487.74it/s]Loading weights:  33%|███▎      | 235/723 [00:00<00:00, 527.25it/s]Loading weights:  40%|████      | 292/723 [00:00<00:00, 541.13it/s]Loading weights:  49%|████▉     | 355/723 [00:00<00:00, 567.59it/s]Loading weights:  57%|█████▋    | 412/723 [00:00<00:00, 567.00it/s]Loading weights:  83%|████████▎ | 598/723 [00:00<00:00, 966.60it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 746.02it/s]
+eval-learned:dsl_eval_support:   0%|          | 0/120 [00:00<?, ?it/s]eval-learned:dsl_eval_support:   1%|          | 1/120 [00:15<31:42, 15.98s/it]eval-learned:dsl_eval_support:   2%|▏         | 2/120 [00:31<30:54, 15.71s/it]eval-learned:dsl_eval_support:   2%|▎         | 3/120 [00:47<30:36, 15.69s/it]eval-learned:dsl_eval_support:   3%|▎         | 4/120 [00:55<24:28, 12.66s/it]eval-learned:dsl_eval_support:   4%|▍         | 5/120 [01:10<26:24, 13.78s/it]eval-learned:dsl_eval_support:   5%|▌         | 6/120 [01:18<22:28, 11.83s/it]eval-learned:dsl_eval_support:   6%|▌         | 7/120 [01:26<19:55, 10.58s/it]eval-learned:dsl_eval_support:   7%|▋         | 8/120 [01:35<18:25,  9.87s/it]eval-learned:dsl_eval_support:   8%|▊         | 9/120 [01:51<21:49, 11.80s/it]eval-learned:dsl_eval_support:   8%|▊         | 10/120 [02:07<23:54, 13.04s/it]eval-learned:dsl_eval_support:   9%|▉         | 11/120 [02:22<25:06, 13.82s/it]eval-learned:dsl_eval_support:  10%|█         | 12/120 [02:31<21:57, 12.20s/it]eval-learned:dsl_eval_support:  11%|█         | 13/120 [02:51<26:02, 14.60s/it]eval-learned:dsl_eval_support:  12%|█▏        | 14/120 [03:05<25:38, 14.52s/it]eval-learned:dsl_eval_support:  12%|█▎        | 15/120 [03:20<25:24, 14.52s/it]eval-learned:dsl_eval_support:  13%|█▎        | 16/120 [03:34<25:04, 14.47s/it]eval-learned:dsl_eval_support:  14%|█▍        | 17/120 [03:49<24:48, 14.45s/it]eval-learned:dsl_eval_support:  15%|█▌        | 18/120 [04:03<24:23, 14.35s/it]eval-learned:dsl_eval_support:  16%|█▌        | 19/120 [04:17<24:06, 14.32s/it]eval-learned:dsl_eval_support:  17%|█▋        | 20/120 [04:31<23:47, 14.27s/it]eval-learned:dsl_eval_support:  18%|█▊        | 21/120 [04:51<26:32, 16.09s/it]eval-learned:dsl_eval_support:  18%|█▊        | 22/120 [05:06<25:30, 15.62s/it]eval-learned:dsl_eval_support:  19%|█▉        | 23/120 [05:20<24:26, 15.12s/it]eval-learned:dsl_eval_support:  20%|██        | 24/120 [05:34<23:55, 14.95s/it]eval-learned:dsl_eval_support:  21%|██        | 25/120 [05:45<21:41, 13.70s/it]eval-learned:dsl_eval_support:  22%|██▏       | 26/120 [05:59<21:34, 13.77s/it]eval-learned:dsl_eval_support:  22%|██▎       | 27/120 [06:10<19:55, 12.85s/it]eval-learned:dsl_eval_support:  23%|██▎       | 28/120 [06:28<22:07, 14.43s/it]eval-learned:dsl_eval_support:  24%|██▍       | 29/120 [06:39<20:14, 13.34s/it]eval-learned:dsl_eval_support:  25%|██▌       | 30/120 [06:49<18:50, 12.56s/it]eval-learned:dsl_eval_support:  26%|██▌       | 31/120 [07:00<17:49, 12.02s/it]eval-learned:dsl_eval_support:  27%|██▋       | 32/120 [07:11<17:12, 11.73s/it]eval-learned:dsl_eval_support:  28%|██▊       | 33/120 [07:22<16:33, 11.43s/it]eval-learned:dsl_eval_support:  28%|██▊       | 34/120 [07:36<17:28, 12.19s/it]eval-learned:dsl_eval_support:  29%|██▉       | 35/120 [07:47<16:47, 11.85s/it]eval-learned:dsl_eval_support:  30%|███       | 36/120 [08:05<19:08, 13.67s/it]eval-learned:dsl_eval_support:  31%|███       | 37/120 [08:19<18:59, 13.73s/it]eval-learned:dsl_eval_support:  32%|███▏      | 38/120 [08:33<18:53, 13.83s/it]eval-learned:dsl_eval_support:  32%|███▎      | 39/120 [08:47<18:41, 13.84s/it]eval-learned:dsl_eval_support:  33%|███▎      | 40/120 [09:01<18:32, 13.91s/it]eval-learned:dsl_eval_support:  34%|███▍      | 41/120 [09:15<18:13, 13.84s/it]eval-learned:dsl_eval_support:  35%|███▌      | 42/120 [09:28<18:01, 13.87s/it]eval-learned:dsl_eval_support:  36%|███▌      | 43/120 [09:42<17:49, 13.89s/it]eval-learned:dsl_eval_support:  37%|███▋      | 44/120 [09:56<17:32, 13.84s/it]eval-learned:dsl_eval_support:  38%|███▊      | 45/120 [10:17<19:58, 15.98s/it]eval-learned:dsl_eval_support:  38%|███▊      | 46/120 [10:38<21:36, 17.51s/it]eval-learned:dsl_eval_support:  39%|███▉      | 47/120 [10:52<20:07, 16.54s/it]eval-learned:dsl_eval_support:  40%|████      | 48/120 [11:07<18:57, 15.80s/it]eval-learned:dsl_eval_support:  41%|████      | 49/120 [11:22<18:42, 15.81s/it]eval-learned:dsl_eval_support:  42%|████▏     | 50/120 [11:38<18:27, 15.82s/it]eval-learned:dsl_eval_support:  42%|████▎     | 51/120 [11:54<18:08, 15.78s/it]eval-learned:dsl_eval_support:  43%|████▎     | 52/120 [12:10<17:50, 15.74s/it]eval-learned:dsl_eval_support:  44%|████▍     | 53/120 [12:31<19:30, 17.47s/it]eval-learned:dsl_eval_support:  45%|████▌     | 54/120 [12:47<18:39, 16.97s/it]eval-learned:dsl_eval_support:  46%|████▌     | 55/120 [13:03<18:06, 16.72s/it]eval-learned:dsl_eval_support:  47%|████▋     | 56/120 [13:19<17:30, 16.42s/it]eval-learned:dsl_eval_support:  48%|████▊     | 57/120 [13:40<18:45, 17.86s/it]eval-learned:dsl_eval_support:  48%|████▊     | 58/120 [14:01<19:32, 18.91s/it]eval-learned:dsl_eval_support:  49%|████▉     | 59/120 [14:17<18:16, 17.98s/it]eval-learned:dsl_eval_support:  50%|█████     | 60/120 [14:33<17:22, 17.37s/it]eval-learned:dsl_eval_support:  51%|█████     | 61/120 [14:50<16:55, 17.21s/it]eval-learned:dsl_eval_support:  52%|█████▏    | 62/120 [15:07<16:31, 17.10s/it]eval-learned:dsl_eval_support:  52%|█████▎    | 63/120 [15:23<16:05, 16.94s/it]eval-learned:dsl_eval_support:  53%|█████▎    | 64/120 [15:40<15:46, 16.89s/it]eval-learned:dsl_eval_support:  54%|█████▍    | 65/120 [15:57<15:28, 16.87s/it]eval-learned:dsl_eval_support:  55%|█████▌    | 66/120 [16:14<15:11, 16.88s/it]eval-learned:dsl_eval_support:  56%|█████▌    | 67/120 [16:30<14:50, 16.81s/it]eval-learned:dsl_eval_support:  57%|█████▋    | 68/120 [16:48<14:42, 16.96s/it]eval-learned:dsl_eval_support:  57%|█████▊    | 69/120 [17:10<15:49, 18.62s/it]eval-learned:dsl_eval_support:  58%|█████▊    | 70/120 [17:28<15:11, 18.22s/it]eval-learned:dsl_eval_support:  59%|█████▉    | 71/120 [17:44<14:28, 17.73s/it]eval-learned:dsl_eval_support:  60%|██████    | 72/120 [18:01<14:00, 17.51s/it]eval-learned:dsl_eval_support:  61%|██████    | 73/120 [18:20<14:00, 17.89s/it]eval-learned:dsl_eval_support:  62%|██████▏   | 74/120 [18:32<12:16, 16.01s/it]eval-learned:dsl_eval_support:  62%|██████▎   | 75/120 [18:50<12:28, 16.64s/it]eval-learned:dsl_eval_support:  63%|██████▎   | 76/120 [19:08<12:35, 17.16s/it]eval-learned:dsl_eval_support:  64%|██████▍   | 77/120 [19:20<11:06, 15.49s/it]eval-learned:dsl_eval_support:  65%|██████▌   | 78/120 [19:38<11:27, 16.37s/it]eval-learned:dsl_eval_support:  66%|██████▌   | 79/120 [19:56<11:36, 16.98s/it]eval-learned:dsl_eval_support:  67%|██████▋   | 80/120 [20:08<10:14, 15.37s/it]eval-learned:dsl_eval_support:  68%|██████▊   | 81/120 [20:20<09:14, 14.23s/it]eval-learned:dsl_eval_support:  68%|██████▊   | 82/120 [20:31<08:30, 13.43s/it]eval-learned:dsl_eval_support:  69%|██████▉   | 83/120 [20:43<07:54, 12.83s/it]eval-learned:dsl_eval_support:  70%|███████   | 84/120 [20:54<07:30, 12.51s/it]eval-learned:dsl_eval_support:  71%|███████   | 85/120 [21:14<08:32, 14.64s/it]eval-learned:dsl_eval_support:  72%|███████▏  | 86/120 [21:33<09:04, 16.01s/it]eval-learned:dsl_eval_support:  72%|███████▎  | 87/120 [21:52<09:18, 16.91s/it]eval-learned:dsl_eval_support:  73%|███████▎  | 88/120 [22:12<09:24, 17.64s/it]eval-learned:dsl_eval_support:  74%|███████▍  | 89/120 [22:30<09:18, 18.03s/it]eval-learned:dsl_eval_support:  75%|███████▌  | 90/120 [22:50<09:11, 18.38s/it]eval-learned:dsl_eval_support:  76%|███████▌  | 91/120 [23:09<09:01, 18.68s/it]eval-learned:dsl_eval_support:  77%|███████▋  | 92/120 [23:28<08:46, 18.79s/it]eval-learned:dsl_eval_support:  78%|███████▊  | 93/120 [23:52<09:08, 20.30s/it]eval-learned:dsl_eval_support:  78%|███████▊  | 94/120 [24:11<08:37, 19.92s/it]eval-learned:dsl_eval_support:  79%|███████▉  | 95/120 [24:30<08:13, 19.75s/it]eval-learned:dsl_eval_support:  80%|████████  | 96/120 [24:50<07:54, 19.76s/it]eval-learned:dsl_eval_support:  81%|████████  | 97/120 [25:07<07:16, 18.99s/it]eval-learned:dsl_eval_support:  82%|████████▏ | 98/120 [25:24<06:44, 18.37s/it]eval-learned:dsl_eval_support:  82%|████████▎ | 99/120 [25:41<06:14, 17.84s/it]eval-learned:dsl_eval_support:  83%|████████▎ | 100/120 [25:57<05:48, 17.41s/it]eval-learned:dsl_eval_support:  84%|████████▍ | 101/120 [26:14<05:29, 17.32s/it]eval-learned:dsl_eval_support:  85%|████████▌ | 102/120 [26:38<05:46, 19.22s/it]eval-learned:dsl_eval_support:  86%|████████▌ | 103/120 [27:00<05:43, 20.20s/it]eval-learned:dsl_eval_support:  87%|████████▋ | 104/120 [27:17<05:05, 19.07s/it]eval-learned:dsl_eval_support:  88%|████████▊ | 105/120 [27:34<04:37, 18.49s/it]eval-learned:dsl_eval_support:  88%|████████▊ | 106/120 [27:51<04:11, 18.00s/it]eval-learned:dsl_eval_support:  89%|████████▉ | 107/120 [28:07<03:48, 17.58s/it]eval-learned:dsl_eval_support:  90%|█████████ | 108/120 [28:25<03:29, 17.42s/it]eval-learned:dsl_eval_support:  91%|█████████ | 109/120 [28:45<03:22, 18.43s/it]eval-learned:dsl_eval_support:  92%|█████████▏| 110/120 [29:00<02:53, 17.38s/it]eval-learned:dsl_eval_support:  92%|█████████▎| 111/120 [29:15<02:30, 16.72s/it]eval-learned:dsl_eval_support:  93%|█████████▎| 112/120 [29:30<02:09, 16.22s/it]eval-learned:dsl_eval_support:  94%|█████████▍| 113/120 [29:46<01:51, 15.92s/it]eval-learned:dsl_eval_support:  95%|█████████▌| 114/120 [30:01<01:33, 15.65s/it]eval-learned:dsl_eval_support:  96%|█████████▌| 115/120 [30:16<01:17, 15.43s/it]eval-learned:dsl_eval_support:  97%|█████████▋| 116/120 [30:31<01:01, 15.40s/it]eval-learned:dsl_eval_support:  98%|█████████▊| 117/120 [30:46<00:46, 15.34s/it]eval-learned:dsl_eval_support:  98%|█████████▊| 118/120 [31:02<00:30, 15.35s/it]eval-learned:dsl_eval_support:  99%|█████████▉| 119/120 [31:23<00:17, 17.05s/it]eval-learned:dsl_eval_support: 100%|██████████| 120/120 [31:38<00:00, 16.58s/it]eval-learned:dsl_eval_support: 100%|██████████| 120/120 [31:38<00:00, 15.82s/it]
+{
+  "candidate_summary": {
+    "overall": {
+      "records": 120,
+      "candidate_oracle_hidden_all_successes": 120,
+      "candidate_oracle_hidden_all_rate": 1.0,
+      "target_program_synthesized_successes": 120,
+      "target_program_synthesized_rate": 1.0,
+      "avg_synthesized_programs": 3311.1,
+      "avg_visible_consistent_candidates": 353.492,
+      "avg_unique_sketches": 1.017
+    },
+    "by_family": {
+      "contains_count_length_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 1731.417,
+        "avg_unique_sketches": 1.083
+      },
+      "length_contains_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 841.0,
+        "avg_unique_sketches": 1.0
+      },
+      "length_mod_contains_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 11.917,
+        "avg_unique_sketches": 1.0
+      },
+      "modulo_sum_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 830.0,
+        "avg_visible_consistent_candidates": 4.333,
+        "avg_unique_sketches": 1.0
+      },
+      "not_contains_length_code": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 234.417,
+        "avg_unique_sketches": 1.083
+      },
+      "sorted_index_offset_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 2181.0,
+        "avg_visible_consistent_candidates": 3.0,
+        "avg_unique_sketches": 1.0
+      },
+      "sum_length_branch_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 499.417,
+        "avg_unique_sketches": 1.0
+      },
+      "sum_offset_mod_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 3.0,
+        "avg_unique_sketches": 1.0
+      },
+      "tuple_branch_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 2100.0,
+        "avg_visible_consistent_candidates": 11.083,
+        "avg_unique_sketches": 1.0
+      },
+      "tuple_sum_gate_label": {
+        "records": 12,
+        "candidate_oracle_hidden_all_successes": 12,
+        "candidate_oracle_hidden_all_rate": 1.0,
+        "target_program_synthesized_successes": 12,
+        "target_program_synthesized_rate": 1.0,
+        "avg_synthesized_programs": 4000.0,
+        "avg_visible_consistent_candidates": 195.333,
+        "avg_unique_sketches": 1.0
+      }
+    }
+  },
+  "policy_summary": {
+    "active_max_split@0": {
+      "records": 120,
+      "hidden_all_successes": 72,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.458,
+      "avg_queries_used": 0.0
+    },
+    "active_max_split@1": {
+      "records": 120,
+      "hidden_all_successes": 83,
+      "hidden_all_rate": 0.691667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.95,
+      "avg_queries_used": 1.0
+    },
+    "active_max_split@2": {
+      "records": 120,
+      "hidden_all_successes": 93,
+      "hidden_all_rate": 0.775,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.358,
+      "avg_queries_used": 2.0
+    },
+    "active_max_split@3": {
+      "records": 120,
+      "hidden_all_successes": 107,
+      "hidden_all_rate": 0.891667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.725,
+      "avg_queries_used": 3.0
+    },
+    "learned_qwen_policy@0": {
+      "records": 120,
+      "hidden_all_successes": 72,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.458,
+      "avg_queries_used": 0.0
+    },
+    "learned_qwen_policy@1": {
+      "records": 120,
+      "hidden_all_successes": 85,
+      "hidden_all_rate": 0.708333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.942,
+      "avg_queries_used": 1.0
+    },
+    "learned_qwen_policy@2": {
+      "records": 120,
+      "hidden_all_successes": 99,
+      "hidden_all_rate": 0.825,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.442,
+      "avg_queries_used": 2.0
+    },
+    "learned_qwen_policy@3": {
+      "records": 120,
+      "hidden_all_successes": 104,
+      "hidden_all_rate": 0.866667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.633,
+      "avg_queries_used": 3.0
+    },
+    "oracle_elimination@0": {
+      "records": 120,
+      "hidden_all_successes": 72,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.458,
+      "avg_queries_used": 0.0
+    },
+    "oracle_elimination@1": {
+      "records": 120,
+      "hidden_all_successes": 103,
+      "hidden_all_rate": 0.858333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.633,
+      "avg_queries_used": 1.0
+    },
+    "oracle_elimination@2": {
+      "records": 120,
+      "hidden_all_successes": 115,
+      "hidden_all_rate": 0.958333,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.95,
+      "avg_queries_used": 2.0
+    },
+    "oracle_elimination@3": {
+      "records": 120,
+      "hidden_all_successes": 116,
+      "hidden_all_rate": 0.966667,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.967,
+      "avg_queries_used": 3.0
+    },
+    "random_extra@0": {
+      "records": 240,
+      "hidden_all_successes": 144,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.458,
+      "avg_queries_used": 0.0
+    },
+    "random_extra@1": {
+      "records": 240,
+      "hidden_all_successes": 156,
+      "hidden_all_rate": 0.65,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.8,
+      "avg_queries_used": 1.0
+    },
+    "random_extra@2": {
+      "records": 240,
+      "hidden_all_successes": 167,
+      "hidden_all_rate": 0.695833,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.008,
+      "avg_queries_used": 2.0
+    },
+    "random_extra@3": {
+      "records": 240,
+      "hidden_all_successes": 173,
+      "hidden_all_rate": 0.720833,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 17.125,
+      "avg_queries_used": 3.0
+    },
+    "visible_prior@0": {
+      "records": 120,
+      "hidden_all_successes": 72,
+      "hidden_all_rate": 0.6,
+      "observed_all_rate": 1.0,
+      "avg_hidden_passes": 16.458,
+      "avg_queries_used": 0.0
+    }
+  },
+  "learned_parse_rate": 1.0
+}

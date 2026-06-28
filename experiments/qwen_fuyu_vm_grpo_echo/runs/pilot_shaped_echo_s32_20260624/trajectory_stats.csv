@@ -1,0 +1,2 @@
+run,phase,n_examples,states,stop_labels,edit_labels,false_stop_states,repair_found_states,search_states,mean_search_candidates,rollout_success_rate,mean_states_per_example,mean_policy_steps
+pilot_shaped_echo_s32_20260624,bc_teacher,32,237,30,207,0,237,0,0.0,0.9375,7.40625,6.46875

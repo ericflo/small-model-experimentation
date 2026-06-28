@@ -1,0 +1,21 @@
+{
+  "suite": "pilot",
+  "run_name": "pilot_episodic_echo_ttt_batched_v3",
+  "model_name": "Qwen/Qwen3-4B",
+  "device": "cuda",
+  "dtype": "bf16",
+  "load_4bit": 1,
+  "data_seed": 17,
+  "seeds": "101",
+  "support_count": 5,
+  "ce_count": 2,
+  "train_episodes": 32,
+  "val_episodes": 8,
+  "eval_episodes": 8,
+  "prefix_len": 4,
+  "global_prefix_steps": 12,
+  "global_prefix_lr": 0.005,
+  "ttt_steps": "0,1,2",
+  "ttt_lr": 0.003,
+  "arms": "no_prefix,global_no_ttt,echo_ttt,shuffle_ttt,generic_ttt"
+}

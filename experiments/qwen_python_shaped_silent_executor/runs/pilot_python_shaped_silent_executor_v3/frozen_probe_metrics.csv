@@ -1,0 +1,8 @@
+arm,seed,split,k,n,final_accuracy,state_accuracy,mean_output_tokens
+frozen_direct_likelihood,-1,eval_len4,0,8,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len8,0,8,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len16,0,8,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len24,0,8,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len32,0,8,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_comp16,0,8,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_comp24,0,8,0.0,nan,1.0

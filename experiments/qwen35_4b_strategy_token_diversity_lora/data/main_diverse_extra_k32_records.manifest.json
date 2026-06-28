@@ -1,0 +1,36 @@
+{
+  "arm_name": "diverse_extra",
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "extra_per_zero_task": 28,
+  "max_new_tokens": 220,
+  "path": "data/main_diverse_extra_k32_records.jsonl",
+  "records": {
+    "candidate_count_mean": 11.0375,
+    "coverage": 0.8125,
+    "distinct_behavior_rate_mean": 0.6845410540226828,
+    "distinct_functional_rate_mean": 0.36232719125516677,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.225,
+    "parse_success_mean": 10.2375,
+    "records": 80,
+    "visible_candidates_mean": 4.2125,
+    "visible_coverage": 0.8125,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 24,
+    "zero_to_one": 9,
+    "zero_to_one_rate": 0.375
+  },
+  "records_in": "data/main_base_k4_records.jsonl",
+  "round_name": "main_diverse_extra_k32",
+  "seed": 20260625,
+  "temperatures": "0.4,0.9,1.3",
+  "token_usage": {
+    "calls": 672,
+    "completion_tokens": 89315,
+    "forward_tokens": 173623,
+    "prompt_tokens": 84308
+  },
+  "top_p": 0.99,
+  "zero_base_records": 24
+}

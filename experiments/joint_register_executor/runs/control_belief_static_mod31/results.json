@@ -1,0 +1,155 @@
+{
+  "mode": "static",
+  "args": {
+    "mode": "static",
+    "task": "belief_line",
+    "seed": 23,
+    "modulus": 31,
+    "op_family": "full",
+    "train_min_len": 1,
+    "train_max_len": 8,
+    "eval_lengths": "4,8,12,16,24",
+    "eval_k": "0,1,2,4,8,12,16,24",
+    "transition_temperature": 1.0,
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "dropout": 0.05,
+    "train_steps": 300,
+    "batch_size": 512,
+    "eval_batch_size": 512,
+    "eval_examples": 1024,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "log_every": 50,
+    "eval_every": 300,
+    "output_dir": "experiments/joint_register_executor/runs/control_belief_static_mod31",
+    "checkpoint_dir": "large_artifacts/joint_register_executor/checkpoints/control_belief_static_mod31"
+  },
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "device": "cuda",
+    "cuda_name": "NVIDIA RTX 6000 Ada Generation"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 6.884504318237305,
+      "pair_acc": 0.033203125,
+      "grad_norm": 0.10843706876039505
+    },
+    {
+      "step": 50,
+      "loss": 6.857891082763672,
+      "pair_acc": 0.0546875,
+      "grad_norm": 0.054251689463853836
+    },
+    {
+      "step": 100,
+      "loss": 6.700958728790283,
+      "pair_acc": 0.099609375,
+      "grad_norm": 0.12390845268964767
+    },
+    {
+      "step": 150,
+      "loss": 6.660524368286133,
+      "pair_acc": 0.12109375,
+      "grad_norm": 0.08785446733236313
+    },
+    {
+      "step": 200,
+      "loss": 6.55086088180542,
+      "pair_acc": 0.1328125,
+      "grad_norm": 0.10796110332012177
+    },
+    {
+      "step": 250,
+      "loss": 6.478620529174805,
+      "pair_acc": 0.166015625,
+      "grad_norm": 0.07105932384729385
+    },
+    {
+      "step": 300,
+      "loss": 6.468823432922363,
+      "pair_acc": 0.162109375,
+      "grad_norm": 0.14223001897335052
+    }
+  ],
+  "eval": [
+    {
+      "step": 300,
+      "rows": [
+        {
+          "model": "static",
+          "length": 4,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.1083984375,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0788499453125,
+          "target_nll": 6.692636012695313,
+          "top1_on_support": 0.1083984375
+        },
+        {
+          "model": "static",
+          "length": 8,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.0380859375,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0349287255859375,
+          "target_nll": 6.857664346679687,
+          "top1_on_support": 0.0380859375
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.0302734375,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0322529013671875,
+          "target_nll": 6.87038803125,
+          "top1_on_support": 0.0302734375
+        },
+        {
+          "model": "static",
+          "length": 16,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.025390625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.032264884765625,
+          "target_nll": 6.869582176757812,
+          "top1_on_support": 0.025390625
+        },
+        {
+          "model": "static",
+          "length": 24,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.033203125,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0322535615234375,
+          "target_nll": 6.869007825195313,
+          "top1_on_support": 0.033203125
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    "large_artifacts/joint_register_executor/checkpoints/control_belief_static_mod31/checkpoint_step00300.pt"
+  ]
+}

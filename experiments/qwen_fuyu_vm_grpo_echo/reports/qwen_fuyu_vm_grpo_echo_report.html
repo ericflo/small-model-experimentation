@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Qwen Fuyu VM GRPO-ECHO Report</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 36px auto; max-width: 1120px; color: #1f2933; line-height: 1.5; }
+    h1, h2 { color: #111827; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0 28px; font-size: 14px; }
+    th, td { border: 1px solid #d0d7de; padding: 7px 9px; text-align: left; }
+    th { background: #f3f4f6; }
+    img { display: block; width: 100%; max-width: 1050px; margin: 18px 0 32px; border: 1px solid #d0d7de; }
+    strong { color: #7c2d12; }
+  </style>
+</head>
+<body>
+<h1>Qwen Fuyu VM GRPO-ECHO Report</h1>
+<h2>Summary</h2>
+<p>This standalone experiment tested a token-free dense-state VM controller: prompt embeddings plus dense VM-state embeddings in, structured action/value/ECHO heads out.</p>
+<p><strong>Result:</strong> the experiment did not pass the scale-up gate. Both decision-optimization arms produced process signal but reduced deployable accuracy after one update.</p>
+<h2>Headline Metrics</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>arm</th>
+      <th>phase</th>
+      <th>mode</th>
+      <th>mean_accuracy</th>
+      <th>k8_accuracy</th>
+      <th>false_stop_rate</th>
+      <th>mean_steps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>bc_policy</td>
+      <td>forced</td>
+      <td>8.8%</td>
+      <td>12.5%</td>
+      <td>0.0%</td>
+      <td>4.00</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>bc_policy</td>
+      <td>learned</td>
+      <td>10.0%</td>
+      <td>13.8%</td>
+      <td>8.3%</td>
+      <td>3.53</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>bc_policy</td>
+      <td>value_gated</td>
+      <td>8.3%</td>
+      <td>11.2%</td>
+      <td>4.6%</td>
+      <td>3.89</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>grpo_echo_r1_policy</td>
+      <td>forced</td>
+      <td>7.1%</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+      <td>4.00</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>grpo_echo_r1_policy</td>
+      <td>learned</td>
+      <td>7.1%</td>
+      <td>0.0%</td>
+      <td>4.2%</td>
+      <td>3.92</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>grpo_echo_r1_policy</td>
+      <td>value_gated</td>
+      <td>7.1%</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+      <td>4.00</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>oracle_teacher</td>
+      <td>k=8</td>
+      <td>82.5%</td>
+      <td>82.5%</td>
+      <td>0.0%</td>
+      <td>5.19</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>bc_policy</td>
+      <td>forced</td>
+      <td>9.2%</td>
+      <td>13.8%</td>
+      <td>0.0%</td>
+      <td>4.00</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>bc_policy</td>
+      <td>learned</td>
+      <td>9.2%</td>
+      <td>12.5%</td>
+      <td>7.1%</td>
+      <td>3.60</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>process_dpo_r1_policy</td>
+      <td>forced</td>
+      <td>5.8%</td>
+      <td>2.5%</td>
+      <td>0.0%</td>
+      <td>4.00</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>process_dpo_r1_policy</td>
+      <td>learned</td>
+      <td>7.9%</td>
+      <td>5.0%</td>
+      <td>14.2%</td>
+      <td>3.33</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>oracle_teacher</td>
+      <td>k=8</td>
+      <td>82.5%</td>
+      <td>82.5%</td>
+      <td>0.0%</td>
+      <td>5.19</td>
+    </tr>
+  </tbody>
+</table>
+<img src="../analysis/accuracy_by_arm.png" alt="Accuracy by arm">
+<img src="../analysis/k8_split_accuracy.png" alt="K=8 split accuracy">
+<h2>Process Signals</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>arm</th>
+      <th>states</th>
+      <th>success/reachability</th>
+      <th>failure signal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>605</td>
+      <td>9.4% rollout success; 56.3% reachable-after</td>
+      <td>59.4% false STOP; 12.7% destroyed reachability</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>226</td>
+      <td>28.1% rollout success; 97/226 repair labels</td>
+      <td>3.5% false-STOP states; 1098 candidates/state</td>
+    </tr>
+  </tbody>
+</table>
+<img src="../analysis/process_signals.png" alt="Process signals">
+<h2>Training Diagnostics</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>arm</th>
+      <th>phase</th>
+      <th>action_acc</th>
+      <th>stop_acc</th>
+      <th>rank_acc</th>
+      <th>next_final</th>
+      <th>train_states</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>bc_policy</td>
+      <td>30.8%</td>
+      <td>64.7%</td>
+      <td>0.0%</td>
+      <td>51.1%</td>
+      <td>237</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>bc_policy</td>
+      <td>50.2%</td>
+      <td>85.3%</td>
+      <td>0.0%</td>
+      <td>72.2%</td>
+      <td>237</td>
+    </tr>
+    <tr>
+      <td>Shaped GRPO + ECHO</td>
+      <td>grpo_echo_r1_policy</td>
+      <td>35.0%</td>
+      <td>28.9%</td>
+      <td>0.0%</td>
+      <td>77.9%</td>
+      <td>842</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>bc_policy</td>
+      <td>30.8%</td>
+      <td>64.7%</td>
+      <td>0.0%</td>
+      <td>51.1%</td>
+      <td>237</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>bc_policy</td>
+      <td>50.2%</td>
+      <td>85.3%</td>
+      <td>0.0%</td>
+      <td>72.2%</td>
+      <td>237</td>
+    </tr>
+    <tr>
+      <td>Process Preference</td>
+      <td>process_dpo_r1_policy</td>
+      <td>33.0%</td>
+      <td>26.7%</td>
+      <td>80.2%</td>
+      <td>65.4%</td>
+      <td>463</td>
+    </tr>
+  </tbody>
+</table>
+<img src="../analysis/train_diagnostics.png" alt="Training diagnostics">
+<h2>Interpretation</h2>
+<p>The dense-state whole-network loop is mechanically viable, but direct actor updates damaged action and STOP calibration. Shaped GRPO reduced false STOP while producing repeated invalid edits; process preference produced repair labels and strong ranking accuracy but still regressed deployment.</p>
+<h2>Gate Decision</h2>
+<p>Do not scale this actor-update recipe. The next version should use Qwen as a value/prior model inside verified search, train process preferences as search heuristics, and keep ECHO as an ablation rather than a bundled claim.</p>
+</body>
+</html>

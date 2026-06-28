@@ -1,0 +1,360 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:15,  9.55it/s]Loading weights:   4%|▍         | 28/723 [00:00<00:04, 158.22it/s]Loading weights:  12%|█▏        | 90/723 [00:00<00:01, 362.76it/s]Loading weights:  20%|██        | 146/723 [00:00<00:01, 432.57it/s]Loading weights:  28%|██▊       | 200/723 [00:00<00:01, 470.31it/s]Loading weights:  35%|███▍      | 253/723 [00:00<00:00, 489.81it/s]Loading weights:  42%|████▏     | 306/723 [00:00<00:00, 500.67it/s]Loading weights:  50%|█████     | 363/723 [00:00<00:00, 521.58it/s]Loading weights:  58%|█████▊    | 417/723 [00:00<00:00, 525.88it/s]Loading weights:  88%|████████▊ | 638/723 [00:01<00:00, 1039.72it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 685.37it/s] 
+construct:   0%|          | 0/120 [00:00<?, ?it/s]construct:   1%|          | 1/120 [00:11<22:21, 11.27s/it]construct:   2%|▏         | 2/120 [00:21<20:56, 10.65s/it]construct:   2%|▎         | 3/120 [00:31<19:46, 10.14s/it]construct:   3%|▎         | 4/120 [00:43<21:10, 10.96s/it]construct:   4%|▍         | 5/120 [00:55<22:02, 11.50s/it]construct:   5%|▌         | 6/120 [01:09<23:26, 12.34s/it]construct:   6%|▌         | 7/120 [01:23<24:19, 12.92s/it]construct:   7%|▋         | 8/120 [01:38<25:01, 13.41s/it]construct:   8%|▊         | 9/120 [01:50<24:14, 13.10s/it]construct:   8%|▊         | 10/120 [02:03<23:56, 13.06s/it]construct:   9%|▉         | 11/120 [02:14<22:44, 12.52s/it]construct:  10%|█         | 12/120 [02:28<23:23, 12.99s/it]construct:  11%|█         | 13/120 [02:40<22:33, 12.65s/it]construct:  12%|█▏        | 14/120 [02:58<24:51, 14.07s/it]construct:  12%|█▎        | 15/120 [03:15<26:31, 15.16s/it]construct:  13%|█▎        | 16/120 [03:27<24:31, 14.15s/it]construct:  14%|█▍        | 17/120 [03:43<25:03, 14.60s/it]construct:  15%|█▌        | 18/120 [04:00<26:19, 15.49s/it]construct:  16%|█▌        | 19/120 [04:13<24:33, 14.59s/it]construct:  17%|█▋        | 20/120 [04:30<25:37, 15.37s/it]construct:  18%|█▊        | 21/120 [04:42<23:49, 14.44s/it]construct:  18%|█▊        | 22/120 [04:49<19:32, 11.96s/it]construct:  19%|█▉        | 23/120 [05:06<21:52, 13.53s/it]construct:  20%|██        | 24/120 [05:23<23:23, 14.62s/it]construct:  21%|██        | 25/120 [05:38<23:22, 14.77s/it]construct:  22%|██▏       | 26/120 [05:55<24:21, 15.55s/it]construct:  22%|██▎       | 27/120 [06:10<23:27, 15.14s/it]construct:  23%|██▎       | 28/120 [06:24<22:50, 14.89s/it]construct:  24%|██▍       | 29/120 [06:38<22:04, 14.56s/it]construct:  25%|██▌       | 30/120 [06:52<21:54, 14.60s/it]construct:  26%|██▌       | 31/120 [07:03<19:46, 13.33s/it]construct:  27%|██▋       | 32/120 [07:13<18:08, 12.37s/it]construct:  28%|██▊       | 33/120 [07:26<18:28, 12.74s/it]construct:  28%|██▊       | 34/120 [07:36<17:02, 11.89s/it]construct:  29%|██▉       | 35/120 [07:50<17:43, 12.52s/it]construct:  30%|███       | 36/120 [08:01<16:34, 11.84s/it]construct:  31%|███       | 37/120 [08:17<18:08, 13.12s/it]construct:  32%|███▏      | 38/120 [08:31<18:28, 13.52s/it]construct:  32%|███▎      | 39/120 [08:46<18:56, 14.03s/it]construct:  33%|███▎      | 40/120 [09:02<19:23, 14.55s/it]construct:  34%|███▍      | 41/120 [09:18<19:52, 15.10s/it]construct:  35%|███▌      | 42/120 [09:34<19:42, 15.16s/it]construct:  36%|███▌      | 43/120 [09:47<18:40, 14.55s/it]construct:  37%|███▋      | 44/120 [10:01<18:22, 14.50s/it]construct:  38%|███▊      | 45/120 [10:16<18:07, 14.50s/it]construct:  38%|███▊      | 46/120 [10:31<18:13, 14.78s/it]construct:  39%|███▉      | 47/120 [10:46<17:50, 14.67s/it]construct:  40%|████      | 48/120 [11:01<17:47, 14.82s/it]construct:  41%|████      | 49/120 [11:19<18:41, 15.80s/it]construct:  42%|████▏     | 50/120 [11:36<18:57, 16.25s/it]construct:  42%|████▎     | 51/120 [11:54<19:07, 16.63s/it]construct:  43%|████▎     | 52/120 [12:11<19:07, 16.88s/it]construct:  44%|████▍     | 53/120 [12:28<18:57, 16.98s/it]construct:  45%|████▌     | 54/120 [12:43<17:57, 16.32s/it]construct:  46%|████▌     | 55/120 [13:00<17:55, 16.55s/it]construct:  47%|████▋     | 56/120 [13:18<18:02, 16.92s/it]construct:  48%|████▊     | 57/120 [13:36<17:58, 17.11s/it]construct:  48%|████▊     | 58/120 [13:53<17:46, 17.20s/it]construct:  49%|████▉     | 59/120 [14:11<17:42, 17.42s/it]construct:  50%|█████     | 60/120 [14:26<16:40, 16.68s/it]construct:  51%|█████     | 61/120 [14:32<13:24, 13.63s/it]construct:  52%|█████▏    | 62/120 [14:41<11:47, 12.20s/it]construct:  52%|█████▎    | 63/120 [14:53<11:28, 12.08s/it]construct:  53%|█████▎    | 64/120 [15:01<10:01, 10.73s/it]construct:  54%|█████▍    | 65/120 [15:07<08:36,  9.40s/it]construct:  55%|█████▌    | 66/120 [15:16<08:20,  9.27s/it]construct:  56%|█████▌    | 67/120 [15:23<07:42,  8.73s/it]construct:  57%|█████▋    | 68/120 [15:32<07:32,  8.71s/it]construct:  57%|█████▊    | 69/120 [15:38<06:45,  7.96s/it]construct:  58%|█████▊    | 70/120 [15:47<06:49,  8.20s/it]construct:  59%|█████▉    | 71/120 [16:00<07:48,  9.55s/it]construct:  60%|██████    | 72/120 [16:06<06:48,  8.50s/it]construct:  61%|██████    | 73/120 [16:23<08:44, 11.15s/it]construct:  62%|██████▏   | 74/120 [16:40<09:50, 12.85s/it]construct:  62%|██████▎   | 75/120 [16:57<10:34, 14.09s/it]construct:  63%|██████▎   | 76/120 [17:14<10:59, 14.99s/it]construct:  64%|██████▍   | 77/120 [17:25<09:54, 13.84s/it]construct:  65%|██████▌   | 78/120 [17:42<10:18, 14.72s/it]construct:  66%|██████▌   | 79/120 [17:59<10:31, 15.39s/it]construct:  67%|██████▋   | 80/120 [18:10<09:25, 14.13s/it]construct:  68%|██████▊   | 81/120 [18:27<09:41, 14.92s/it]construct:  68%|██████▊   | 82/120 [18:44<09:47, 15.46s/it]construct:  69%|██████▉   | 83/120 [18:57<09:07, 14.80s/it]construct:  70%|███████   | 84/120 [19:14<09:20, 15.58s/it]construct:  71%|███████   | 85/120 [19:25<08:16, 14.17s/it]construct:  72%|███████▏  | 86/120 [19:39<08:01, 14.15s/it]construct:  72%|███████▎  | 87/120 [19:51<07:19, 13.31s/it]construct:  73%|███████▎  | 88/120 [20:05<07:14, 13.57s/it]construct:  74%|███████▍  | 89/120 [20:16<06:39, 12.90s/it]construct:  75%|███████▌  | 90/120 [20:28<06:15, 12.50s/it]construct:  76%|███████▌  | 91/120 [20:43<06:23, 13.23s/it]construct:  77%|███████▋  | 92/120 [20:57<06:23, 13.71s/it]construct:  78%|███████▊  | 93/120 [21:12<06:20, 14.10s/it]construct:  78%|███████▊  | 94/120 [21:24<05:44, 13.23s/it]construct:  79%|███████▉  | 95/120 [21:35<05:13, 12.54s/it]construct:  80%|████████  | 96/120 [21:49<05:12, 13.01s/it]construct:  81%|████████  | 97/120 [21:56<04:19, 11.28s/it]construct:  82%|████████▏ | 98/120 [22:04<03:50, 10.46s/it]construct:  82%|████████▎ | 99/120 [22:13<03:29,  9.98s/it]construct:  83%|████████▎ | 100/120 [22:20<03:02,  9.15s/it]construct:  84%|████████▍ | 101/120 [22:32<03:09,  9.97s/it]construct:  85%|████████▌ | 102/120 [22:44<03:09, 10.53s/it]construct:  86%|████████▌ | 103/120 [22:56<03:06, 10.95s/it]construct:  87%|████████▋ | 104/120 [23:09<03:02, 11.43s/it]construct:  88%|████████▊ | 105/120 [23:16<02:32, 10.17s/it]construct:  88%|████████▊ | 106/120 [23:28<02:31, 10.81s/it]construct:  89%|████████▉ | 107/120 [23:37<02:12, 10.16s/it]construct:  90%|█████████ | 108/120 [23:46<01:56,  9.72s/it]construct:  91%|█████████ | 109/120 [24:03<02:13, 12.11s/it]construct:  92%|█████████▏| 110/120 [24:20<02:16, 13.63s/it]construct:  92%|█████████▎| 111/120 [24:34<02:02, 13.63s/it]construct:  93%|█████████▎| 112/120 [24:48<01:48, 13.58s/it]construct:  94%|█████████▍| 113/120 [24:58<01:28, 12.64s/it]construct:  95%|█████████▌| 114/120 [25:15<01:24, 14.00s/it]construct:  96%|█████████▌| 115/120 [25:29<01:09, 13.91s/it]construct:  97%|█████████▋| 116/120 [25:39<00:51, 12.87s/it]construct:  98%|█████████▊| 117/120 [25:50<00:36, 12.19s/it]construct:  98%|█████████▊| 118/120 [26:08<00:27, 13.86s/it]construct:  99%|█████████▉| 119/120 [26:25<00:14, 14.88s/it]construct: 100%|██████████| 120/120 [26:43<00:00, 15.70s/it]construct: 100%|██████████| 120/120 [26:43<00:00, 13.36s/it]
+{
+  "by_family": {
+    "sorted_index_sum_branch_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sorted_join_contains_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sum_len_mod_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "repair_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "repair_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      }
+    },
+    "sum_length_mod_gate_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      }
+    },
+    "text_absent_mod_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "text_value_gate_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_greedy_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "repair_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "repair_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "token_absent_length_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      }
+    },
+    "token_count_mod_length_code": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "construct_greedy_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "construct_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "repair_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "repair_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "tuple_sum_mod_gate_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      }
+    },
+    "tuple_value_mod_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    }
+  },
+  "overall": {
+    "construct_greedy_hidden_all": {
+      "rate": 0.21666666666666667,
+      "records": 120,
+      "successes": 26
+    },
+    "construct_greedy_visible_all": {
+      "rate": 0.26666666666666666,
+      "records": 120,
+      "successes": 32
+    },
+    "construct_rerank_hidden_all": {
+      "rate": 0.21666666666666667,
+      "records": 120,
+      "successes": 26
+    },
+    "construct_rerank_visible_all": {
+      "rate": 0.275,
+      "records": 120,
+      "successes": 33
+    },
+    "repair_hidden_all": {
+      "rate": 0.21666666666666667,
+      "records": 120,
+      "successes": 26
+    },
+    "repair_visible_all": {
+      "rate": 0.275,
+      "records": 120,
+      "successes": 33
+    }
+  }
+}

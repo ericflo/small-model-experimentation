@@ -1,0 +1,146 @@
+task_id,family,method,row_index,input,target,prediction,exact,raw
+BillingCode.000002,BillingCode,direct_row,0,[CPT-115],[CPT-115],[CPT-115],True,[CPT-115]
+BillingCode.000002,BillingCode,direct_row,1,[CPT-1153622],[CPT-1153622],[CPT-1153622],True,[CPT-1153622]
+BillingCode.000002,BillingCode,direct_row,2,[CPT-00340],[CPT-00340],[CPT-00340],True,[CPT-00340]
+BillingCode.000002,BillingCode,direct_row,3,[CPT-11536],[CPT-11536],[CPT-11536],True,[CPT-11536]
+BillingCode.000002,BillingCode,direct_row,4,[CPT-11222],[CPT-11222],[CPT-11222],True,[CPT-11222]
+BillingCode.000002,BillingCode,direct_row,5,[CPT-115,[CPT-115],[CPT-115],True,[CPT-115]
+City.000011,City,direct_row,0,new york city,New York City,New York City,True,New York City
+City.000011,City,direct_row,1,None,None,New York City,False,New York City
+City.000011,City,direct_row,2,SJ,San Jose,San Jose,True,San Jose
+Currency.000004,Currency,direct_row,0,�23.81,�,�,True,�
+Currency.000004,Currency,direct_row,1,$4.03,$,$,True,$
+Currency.000004,Currency,direct_row,2,�27.32,�,�,True,�
+Currency.000004,Currency,direct_row,3,$12.18,$,$,True,$
+Currency.000004,Currency,direct_row,4,�44.65,�,�,True,�
+Currency.000004,Currency,direct_row,5,�33.04,�,�,True,�
+DateTime.000012,DateTime,direct_row,0,2033,2033,2033,True,2033
+DateTime.000012,DateTime,direct_row,1,Unknown,None,Unknown,False,Unknown
+DateTime.000012,DateTime,direct_row,2,1784,1784,1784,True,1784
+DateTime.000012,DateTime,direct_row,3,2130,2130,2130,True,2130
+DateTime.000012,DateTime,direct_row,4,Unknown,None,Unknown,False,Unknown
+DateTime.000012,DateTime,direct_row,5,4 September 2088,2088,2088,True,2088
+DateTime.000035,DateTime,direct_row,0,col0=22ABDDK_3388.XY | col1=9/12/2002 4:15:08 PM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 16:15:08,2002-09-12 16:15:08,True,2002-09-12 16:15:08
+DateTime.000035,DateTime,direct_row,1,col0=22ABDDK_3388.XY | col1=9/12/2002 11:48:20 PM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 23:48:20,2002-09-12 23:48:20,True,2002-09-12 23:48:20
+DateTime.000035,DateTime,direct_row,2,col0=22ABDDK_3388.XY | col1=9/12/2002 10:24:59 PM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 22:24:59,2002-09-12 22:24:59,True,2002-09-12 22:24:59
+DateTime.000035,DateTime,direct_row,3,col0=22ABDDK_3388.XY | col1=9/12/2002 4:29:27 AM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 04:29:27,2002-09-12 04:29:27,True,2002-09-12 04:29:27
+DateTime.000035,DateTime,direct_row,4,col0=22ABDDK_3388.XY | col1=9/12/2002 3:25:29 PM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 15:25:29,2002-09-12 15:25:29,True,2002-09-12 15:25:29
+DateTime.000035,DateTime,direct_row,5,col0=22ABDDK_3388.XY | col1=9/12/2002 8:14:07 AM | col2=8.111111 | col3=311 | col4=chicago,2002-09-12 08:14:07,2002-09-12 08:14:07,True,2002-09-12 08:14:07
+DateTime.000077,DateTime,direct_row,0,15:00,0:00-19:00,10:00-29:00,False,10:00-29:00
+DateTime.000077,DateTime,direct_row,1,48:00,40:00-59:00,40:00-59:00,True,40:00-59:00
+DateTime.000077,DateTime,direct_row,2,24:00,20:00-39:00,20:00-39:00,True,20:00-39:00
+DateTime.000077,DateTime,direct_row,3,29:00,20:00-39:00,20:00-39:00,True,20:00-39:00
+DateTime.000077,DateTime,direct_row,4,25:00,20:00-39:00,20:00-39:00,True,20:00-39:00
+DateTime.000077,DateTime,direct_row,5,0:00,0:00-19:00,0:00-19:00,True,0:00-19:00
+DateTime.000083,DateTime,direct_row,0,3/30/2241 16:15,Tue 4:00 PM,Sat 4:15 PM,False,Sat 4:15 PM
+DateTime.000083,DateTime,direct_row,1,8/2/2160 23:48,Sat 11:30 PM,Wed 11:48 PM,False,Wed 11:48 PM
+DateTime.000083,DateTime,direct_row,2,5/23/1984 22:24,Wed 10:00 PM,Sat 10:24 PM,False,Sat 10:24 PM
+DateTime.000083,DateTime,direct_row,3,8/15/1740 4:29,Mon 4:00 AM,Sat 4:29 AM,False,Sat 4:29 AM
+DateTime.000083,DateTime,direct_row,4,7/8/2237 15:25,Sat 3:00 PM,Sun 3:25 PM,False,Sun 3:25 PM
+DateTime.000083,DateTime,direct_row,5,11/3/1904 8:14,Thu 8:00 AM,Sat 8:14 AM,False,Sat 8:14 AM
+DateTime.000088,DateTime,direct_row,0,16:15:08,4:00PM,8:00AM,False,8:00AM
+DateTime.000088,DateTime,direct_row,1,23:48:20,10:00PM,7:00PM,False,7:00PM
+DateTime.000088,DateTime,direct_row,2,22:24:59,10:00PM,8:00PM,False,8:00PM
+DateTime.000088,DateTime,direct_row,3,4:29:27,4:00AM,7:00AM,False,7:00AM
+DateTime.000088,DateTime,direct_row,4,15:25:29,2:00PM,7:00AM,False,7:00AM
+DateTime.000088,DateTime,direct_row,5,8:14:07,8:00AM,7:14AM,False,7:14AM
+DateTime.000094,DateTime,direct_row,0,21.02.2006,2006-02-21,2006-02-21,True,2006-02-21
+DateTime.000094,DateTime,direct_row,1,19.12.97,1997-12-19,1997-12-19,True,1997-12-19
+DateTime.000094,DateTime,direct_row,2,30/9/2004,2004-09-30,2004-09-30,True,2004-09-30
+DateTime.000094,DateTime,direct_row,3,18/05/1967,1967-05-18,1967-05-18,True,1967-05-18
+DateTime.000098,DateTime,direct_row,0,2072--9--26,September,September,True,September
+DateTime.000098,DateTime,direct_row,1,8/7/2237,July,July,True,July
+DateTime.000098,DateTime,direct_row,2,6.30.2220,June,December,False,December
+DateTime.000098,DateTime,direct_row,3,2131--5--30,May,May,True,May
+DateTime.000098,DateTime,direct_row,4,10.8.2089,October,August,False,August
+DateTime.000098,DateTime,direct_row,5,2098--11--24,November,November,True,November
+Email.000013,Email,direct_row,0,cjnz@relecloud.com,relecloud.com,relecloud.com,True,relecloud.com
+Email.000013,Email,direct_row,1,m2zt1@proseware.com,proseware.com,proseware.com,True,proseware.com
+Email.000013,Email,direct_row,2,33f@treyresearch.net,treyresearch.net,treyresearch.net,True,treyresearch.net
+Email.000013,Email,direct_row,3,zn9dosy@bellowscollege.com,bellowscollege.com,bellowscollege.com,True,bellowscollege.com
+Email.000013,Email,direct_row,4,h4ldhupd@treyresearch.net,treyresearch.net,treyresearch.net,True,treyresearch.net
+Email.000013,Email,direct_row,5,v6sgpury@contososuites.com,contososuites.com,contososuites.com,True,contososuites.com
+FilePath.000001,FilePath,direct_row,0,/libero/quas/enim0.png,enim0,enim0,True,enim0
+FilePath.000001,FilePath,direct_row,1,/libero/quas/enim3.png,enim3,enim3,True,enim3
+FilePath.000001,FilePath,direct_row,2,/libero/quas/enim0.png,enim0,enim0,True,enim0
+FilePath.000001,FilePath,direct_row,3,/libero/quas/enim6.png,enim6,enim6,True,enim6
+FilePath.000001,FilePath,direct_row,4,/libero/enim0.png,enim0,enim0,True,enim0
+FilePath.000001,FilePath,direct_row,5,/libero/enim4.png,enim4,enim4,True,enim4
+Name.000013,Name,direct_row,0,Cecep Sutresna,C,C,True,C
+Name.000013,Name,direct_row,1,Milica Zujovic,M,M,True,M
+Name.000013,Name,direct_row,2,Radmilo Bogic,R,R,True,R
+Name.000013,Name,direct_row,3,Snezhana Bozhilova,S,S,True,S
+Name.000013,Name,direct_row,4,Ojerinde Adeniyi,O,O,True,O
+Name.000013,Name,direct_row,5,Daniyar Shakenuly,D,D,True,D
+Name.000026,Name,direct_row,0,Cecep Sutresna,cs,cs,True,cs
+Name.000026,Name,direct_row,1,Milica Zujovic,mz,mz,True,mz
+Name.000026,Name,direct_row,2,Radmilo Bogic,rb,rb,True,rb
+Name.000026,Name,direct_row,3,Snezhana Bozhilova,sb,sb,True,sb
+Name.000026,Name,direct_row,4,Ojerinde Adeniyi,oa,oa,True,oa
+Name.000026,Name,direct_row,5,Daniyar Shakenuly,ds,ds,True,ds
+Name.000028,Name,direct_row,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True,Rodel
+Name.000028,Name,direct_row,1,Jan Evans,Jan,Jan,True,Jan
+Name.000028,Name,direct_row,2,Antonia Lusis,Antonia,Antonia,True,Antonia
+Name.000028,Name,direct_row,3,Barbara Susila,Barbara,Barbara,True,Barbara
+Name.000028,Name,direct_row,4,Meena Orav,Meena,Meena,True,Meena
+Name.000028,Name,direct_row,5,Afonso-Igor Krause,Afonso,Afonso,True,Afonso
+Number.000044,Number,direct_row,0,1015,1015,1015,True,1015
+Number.000044,Number,direct_row,1,2010,2010,2010,True,2010
+Number.000044,Number,direct_row,2,1002,1002,002,False,002
+Number.000044,Number,direct_row,3,1425,1425,1425,True,1425
+Number.000044,Number,direct_row,4,2345,2345,2345,True,2345
+Number.000044,Number,direct_row,5,1247,1247,1247,True,1247
+Number.000048,Number,direct_row,0,96.7,97.0,97.0,True,97.0
+Number.000048,Number,direct_row,1,74.8,75.0,75.0,True,75.0
+Number.000048,Number,direct_row,2,99.9,100.0,100.0,True,100.0
+Number.000048,Number,direct_row,3,78.8,79.0,79.0,True,79.0
+Number.000074,Number,direct_row,0,1202.3433,1202343.3,1202343.3,True,1202343.3
+Number.000074,Number,direct_row,1,-23224.1,-23224100,-2322410,False,-2322410
+Number.000074,Number,direct_row,2,23224.1,23224100,-2322410,False,-2322410
+Number.000074,Number,direct_row,3,0.0,0,000,False,000
+Number.000074,Number,direct_row,4,0.1,100,0100,False,0100
+Number.000074,Number,direct_row,5,-0.1,-100,-100,True,-100
+Number.000075,Number,direct_row,0,1892.3433,$1.9B,$1.9B,True,$1.9B
+Number.000075,Number,direct_row,1,23224.1,$23.2B,$2.3B,False,$2.3B
+Number.000075,Number,direct_row,2,29974.1,$30.0B,$2.9B,False,$2.9B
+Number.000075,Number,direct_row,3,0.0,$0.0B,$0.0B,True,$0.0B
+Number.000075,Number,direct_row,4,0.1,$0.0B,$0.0B,True,$0.0B
+Number.000075,Number,direct_row,5,-0.1,$0.0B,$0.0B,True,$0.0B
+Number.000081,Number,direct_row,0,83,76-100,76-100,True,76-100
+Number.000081,Number,direct_row,1,46,26-50,26-50,True,26-50
+Number.000081,Number,direct_row,2,30,26-50,26-50,True,26-50
+Number.000081,Number,direct_row,3,5,1-25,5-25,False,5-25
+Number.000081,Number,direct_row,4,86,76-100,76-100,True,76-100
+Number.000081,Number,direct_row,5,44,26-50,26-50,True,26-50
+Number.000088,Number,direct_row,0,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",000-26-4391,000-26-4391,True,000-26-4391
+Number.000088,Number,direct_row,1,"Marten Ruutli         7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",000-08-9259,000-08-9259,True,000-08-9259
+Number.000088,Number,direct_row,2,"Oríowó Owólabi  3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",000-60-1806,000-60-1806,True,000-60-1806
+Number.000088,Number,direct_row,3,"Bazarbay Abildauly    456 Fifth Route ,Dongguan,LA,(873) 884-2783,000-73-7962,38891",000-73-7962,000-73-7962,True,000-73-7962
+Number.000088,Number,direct_row,4,"Mee-Yon Hah    4567 Second Highway ,Evansville,IA,(864) 453-3833,000-68-8231,17293",000-68-8231,000-68-8231,True,000-68-8231
+Number.000088,Number,direct_row,5,"Zamira Yesimkyzy    45 Third Route,Brasília,MI,(712) 012-9104,000-52-8290,41230",000-52-8290,000-52-8290,True,000-52-8290
+Number.000093,Number,direct_row,0,4759,04759,04759,True,04759
+Number.000093,Number,direct_row,1,10029,10029,010029,False,010029
+Number.000093,Number,direct_row,2,7204,07204,07204,True,07204
+Phone.000005,Phone,direct_row,0,418-878-6628 x8081,878-6628,878-6628,True,878-6628
+Phone.000005,Phone,direct_row,1,829-467-8177 x1914,467-8177,467-8177,True,467-8177
+Phone.000005,Phone,direct_row,2,364-887-7925 x6328,887-7925,887-7925,True,887-7925
+Phone.000005,Phone,direct_row,3,106-669-2909 x601,669-2909,669-2909,True,669-2909
+Phone.000005,Phone,direct_row,4,694-165-2603 x802,165-2603,165-2603,True,165-2603
+Phone.000005,Phone,direct_row,5,993-525-5024,525-5024,525-5024,True,525-5024
+Phone.000017,Phone,direct_row,0,MAGNAM REPELLAT SIMILIQUE VERITATIS VOLUPTATEM 68MG NZC 518-655-6930 420214-40 02-17-1909,518-655-6930,518-655-6930,True,518-655-6930
+Phone.000017,Phone,direct_row,1,Sit Et Minima Delectus Officia Est 97MG XZG 181-857-5390 - - 114523-27 01-25-1769,181-857-5390,181-857-5390,True,181-857-5390
+Phone.000017,Phone,direct_row,2,QUO SAEPE ET ALIQUAM VOLUPTATEM VOLUPTATUM 54'S 633-296-0991 - - 010171-86 12-16-2009,633-296-0991,633-296-0991,True,633-296-0991
+Phone.000017,Phone,direct_row,3,Laboriosam Omnis Molestiae Est 18MG QZW 510-563-8375 - - 551653-28 03-03-1948,510-563-8375,510-563-8375,True,510-563-8375
+Phone.000017,Phone,direct_row,4,MOLESTIAS EST ATQUE AUT ODIO 60'S 760-549-1126 - - 220428-85 04-08-2217,760-549-1126,760-549-1126,True,760-549-1126
+Phone.000017,Phone,direct_row,5,Omnis Corporis Quam Reprehenderit 64MG YXH 634-729-5892 312659-37 03-20-2128,634-729-5892,634-729-5892,True,634-729-5892
+Rating.000001,Rating,direct_row,0,"(
+
+ 	No Rating)",0,0,True,0
+Rating.000001,Rating,direct_row,1,"(
+No Rating)",0,0,True,0
+Rating.000001,Rating,direct_row,2,(10),10,10,True,10
+Rating.000001,Rating,direct_row,3,(7),7,7,True,7
+Rating.000001,Rating,direct_row,4,"  
+(5)",5,5,True,5
+Rating.000001,Rating,direct_row,5,"
+		(5)",5,5,True,5

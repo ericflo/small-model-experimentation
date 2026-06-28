@@ -1,0 +1,17 @@
+{
+  "started_utc": "2026-06-27T05:14:48.402553+00:00",
+  "suite": "main_v1",
+  "task_limit": 0,
+  "train_n": 4,
+  "heldout_cap": 50,
+  "max_candidates": 12000,
+  "recursive_depth": 2,
+  "child_limit": 5,
+  "run_qwen": true,
+  "qwen_task_limit": 30,
+  "qwen_heldout_cap": 6,
+  "qwen_min_heldout": 3,
+  "sample_seed": 20260627,
+  "rule_max_new_tokens": 160,
+  "answer_max_new_tokens": 56
+}

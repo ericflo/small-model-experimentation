@@ -1,0 +1,16 @@
+stage,split,n,max_steps,executor_accuracy,executor_target_mass,direct_accuracy,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,state_mean_correct_prefix,run,arm,global_step,stage_idx,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+stage1_max24,standard_L8,8,24,0.0,0.010307593271136284,nan,0.25,0.296875,0.0,0.0,0.0,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,paraphrase_L8,8,24,0.0,0.010307349264621735,nan,0.0,0.328125,0.03125,0.0,0.0,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,heldout_L8,8,24,0.0,0.010307177901268005,nan,0.125,0.34375,0.078125,0.0,0.03125,0.0,0.015625,0.125,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,paired_L8,8,24,0.0,0.010308642871677876,nan,0.0,0.375,0.015625,0.0,0.015625,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,0.0,0.0,0.0,0.0
+stage1_max24,paired_heldout_L8,8,24,0.0,0.010306912008672953,nan,0.125,0.453125,0.0,0.0,0.015625,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,0.0,0.0,0.0,0.0
+stage1_max24,standard_L16,8,24,0.0,0.010307446587830782,nan,0.0,0.3125,0.0234375,0.0,0.0234375,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,paraphrase_L16,8,24,0.0,0.010308006312698126,nan,0.125,0.28125,0.0546875,0.0,0.0078125,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,heldout_L16,8,24,0.0,0.010307913646101952,nan,0.0,0.34375,0.046875,0.0,0.0078125,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,paired_L16,8,24,0.0,0.010307217482477427,nan,0.0,0.3125,0.0625,0.0,0.0078125,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,0.0,0.0,0.0,0.0
+stage1_max24,paired_heldout_L16,8,24,0.0,0.010309252422302961,nan,0.0,0.2265625,0.0390625,0.0,0.0078125,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,0.0,0.0,0.0,0.0
+stage1_max24,standard_L24,8,24,0.0,0.01030734134837985,nan,0.0,0.359375,0.057291666666666664,0.0,0.005208333333333333,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,paraphrase_L24,8,24,0.0,0.010307024698704481,nan,0.0,0.2604166666666667,0.020833333333333332,0.0,0.005208333333333333,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,heldout_L24,8,24,0.0,0.010307596996426582,nan,0.125,0.3541666666666667,0.026041666666666668,0.0,0.005208333333333333,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,,,,
+stage1_max24,paired_L24,8,24,0.0,0.010307244956493378,nan,0.0,0.3333333333333333,0.07291666666666667,0.0,0.015625,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,0.0,0.0,0.0,0.0
+stage1_max24,paired_heldout_L24,8,24,0.0,0.010307100601494312,nan,0.0,0.2760416666666667,0.03125,0.0,0.015625,0.0,0.0,0.0,pilot_max24_no_curriculum,max24_no_curriculum,75,1,0.0,0.0,0.0,0.0

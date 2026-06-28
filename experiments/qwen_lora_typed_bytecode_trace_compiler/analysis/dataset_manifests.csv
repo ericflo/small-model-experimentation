@@ -1,0 +1,7 @@
+run,variant,max_prompt_tokens,gpu_name,gpu_vram_gb,lora_r,size_trace_train,size_seed_train,size_unlabeled_train,size_answer_train,size_val_mixed,size_fresh_standard,size_fresh_paraphrase,size_fresh_paired,size_hard_composition
+control_qwen3_4b_frozen_trace_s512,frozen_trace,58,NVIDIA RTX 6000 Ada Generation,47.383,8,512,256,1024,512,128,128,128,128,128
+control_qwen3_4b_qlora_answer_s512,qlora_answer,58,NVIDIA RTX 6000 Ada Generation,47.383,8,512,256,1024,512,128,128,128,128,128
+main_qwen3_4b_qlora_trace_ei_s256_u1024,qlora_trace_ei,58,NVIDIA RTX 6000 Ada Generation,47.383,8,512,256,1024,512,128,128,128,128,128
+main_qwen3_4b_qlora_trace_s512,qlora_trace,58,NVIDIA RTX 6000 Ada Generation,47.383,8,512,256,1024,512,128,128,128,128,128
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,58,NVIDIA RTX 6000 Ada Generation,47.383,8,128,64,128,128,32,32,32,32,32
+smoke_qwen3_4b_qlora_trace,qlora_trace,58,NVIDIA RTX 6000 Ada Generation,47.383,8,8,4,8,8,4,4,4,4,4

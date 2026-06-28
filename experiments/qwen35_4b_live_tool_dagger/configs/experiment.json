@@ -1,0 +1,35 @@
+{
+  "experiment": "qwen35_4b_live_tool_dagger",
+  "question": "Can a small action policy orchestrate a live table-transform tool loop by choosing when to write code, repair code, and commit direct or program outputs?",
+  "model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "source_cases": "data/cases.jsonl",
+  "fresh_traces": "reports/fresh_traces.jsonl",
+  "split": {
+    "construction": "family-disjoint balanced pilot split",
+    "train_families": 12,
+    "dev_families": 4,
+    "test_families": 4,
+    "cases_per_family": 3,
+    "selection_seed": 20260628
+  },
+  "actions": {
+    "DIRECT": "commit direct JSON answer",
+    "WRITE": "generate/use executable program attempt",
+    "FIX": "run one repair step",
+    "PROGRAM": "commit visible-passing program output"
+  },
+  "gates": {
+    "replication": "fresh traces should contain direct-miss program recoveries on held-out test",
+    "policy": "learned sequential policy should recover direct misses with fewer direct-correct losses than a shuffled-label control"
+  },
+  "lora": {
+    "max_steps": 60,
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "learning_rate": 0.0002,
+    "batch_size": 2,
+    "grad_accum": 8,
+    "max_length": 1024
+  }
+}

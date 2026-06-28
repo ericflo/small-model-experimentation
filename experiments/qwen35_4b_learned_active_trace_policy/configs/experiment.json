@@ -1,0 +1,25 @@
+{
+  "experiment": "qwen35_4b_learned_active_trace_policy",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260702,
+  "objective": "Train and evaluate a Qwen3.5-4B learned active query policy for selecting execution traces after typed-sketch candidate synthesis.",
+  "standalone": true,
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_learned_active_trace_policy",
+  "selection_budgets": [0, 1, 2, 3],
+  "policies": [
+    "visible_prior",
+    "random_extra",
+    "active_max_split",
+    "learned_qwen_policy",
+    "oracle_elimination"
+  ],
+  "primary_split": "ceiling",
+  "retention_splits": ["iid", "support"],
+  "policy_training": {
+    "target": "oracle-elimination query option among displayed candidate-output bucket options",
+    "max_options": 24,
+    "max_buckets_per_option": 6,
+    "max_oracle_steps": 3
+  }
+}

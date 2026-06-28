@@ -1,0 +1,32 @@
+{
+  "run_name": "smoke_v1",
+  "suite": "smoke",
+  "model_name": "Qwen/Qwen3-4B",
+  "seeds": [
+    101
+  ],
+  "arms": [
+    "abi32_chain_d3",
+    "abi128_chain_d3",
+    "abi32_nested_d3",
+    "abi128_nested_d3"
+  ],
+  "train_n": 24,
+  "eval_n": 1,
+  "train_steps": 1,
+  "eval_splits": [
+    "eval_chain_d16",
+    "eval_nested_l8",
+    "eval_chain_template_d16",
+    "eval_nested_template_l8"
+  ],
+  "batch_size": 1,
+  "grad_accum": 1,
+  "lr": 0.0002,
+  "max_length": 448,
+  "eval_batch_size": 1,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "max_new_tokens": 320,
+  "resample_attempts": 3
+}

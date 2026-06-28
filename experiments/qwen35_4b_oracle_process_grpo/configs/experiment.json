@@ -1,0 +1,29 @@
+{
+  "experiment": "qwen35_4b_oracle_process_grpo",
+  "date_utc": "2026-06-24",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "objective": "Train a Qwen3.5-4B process policy to choose verifier-backed probe actions in a deterministic executable search MDP.",
+  "data": {
+    "train_records": 480,
+    "eval_records": 128,
+    "visible_cases": 4,
+    "query_pool_cases": 12,
+    "hidden_cases": 16,
+    "train_library_sizes": [64, 128, 256],
+    "eval_library_sizes": [64, 128, 256, 512],
+    "templates": ["pair_affine_mod", "pair_compare_gate"],
+    "max_probe_budget": 3
+  },
+  "arms": [
+    "random",
+    "base",
+    "sft",
+    "process_dpo",
+    "process_dpo_shuffled_reward_control",
+    "process_grpo",
+    "max_split_heuristic",
+    "oracle_same_budget"
+  ],
+  "large_artifacts_root": "/workspace/large_artifacts/qwen35_4b_oracle_process_grpo"
+}
+

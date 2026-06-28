@@ -1,0 +1,42 @@
+{
+  "experiment": "qwen35_4b_real_sample_verify_commit",
+  "humaneval_public_limit": 3,
+  "max_new_tokens": 220,
+  "paths": {
+    "humaneval_eval": "data/humaneval_eval_records.jsonl",
+    "mbpp_eval": "data/mbpp_eval_records.jsonl",
+    "mbpp_train": "data/mbpp_train_records.jsonl"
+  },
+  "records": {
+    "humaneval_eval": {
+      "candidate_count_mean": 5.466666666666667,
+      "coverage": 0.9666666666666667,
+      "parse_success_mean": 5.333333333333333,
+      "records": 30,
+      "visible_candidates_mean": 4.433333333333334,
+      "visible_coverage": 0.9666666666666667
+    },
+    "mbpp_eval": {
+      "candidate_count_mean": 7.8,
+      "coverage": 0.6,
+      "parse_success_mean": 7.5,
+      "records": 20,
+      "visible_candidates_mean": 3.2,
+      "visible_coverage": 0.6
+    },
+    "mbpp_train": {
+      "candidate_count_mean": 6.925,
+      "coverage": 0.775,
+      "parse_success_mean": 6.675,
+      "records": 40,
+      "visible_candidates_mean": 4.075,
+      "visible_coverage": 0.775
+    }
+  },
+  "repair_per_task": 1,
+  "samples_per_task": 8,
+  "seed": 20260625,
+  "temperatures": "0.2,0.7,1.0",
+  "top_p": 0.95,
+  "visible_tests": 1
+}

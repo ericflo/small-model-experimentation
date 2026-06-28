@@ -1,0 +1,235 @@
+{
+  "mode": "joint",
+  "args": {
+    "mode": "joint",
+    "seed": 41,
+    "modulus": 7,
+    "observe_mod": 3,
+    "observe_prob": 0.4,
+    "op_family": "full",
+    "train_min_len": 1,
+    "train_max_len": 3,
+    "eval_lengths": "2,3",
+    "eval_k": "0,1,2,3",
+    "transition_temperature": 1.0,
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "dropout": 0.05,
+    "train_steps": 2,
+    "batch_size": 16,
+    "eval_batch_size": 16,
+    "eval_examples": 32,
+    "lr": 0.01,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "log_every": 1,
+    "eval_every": 1,
+    "output_dir": "experiments/belief_filter_executor/runs/smoke_joint_mod7",
+    "checkpoint_dir": "large_artifacts/belief_filter_executor/checkpoints/smoke_joint_mod7"
+  },
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "device": "cuda",
+    "cuda_name": "NVIDIA RTX 6000 Ada Generation"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 2.857860803604126,
+      "grad_norm": 0.16742242872714996,
+      "target_mass": 0.1365276575088501,
+      "target_nll": 3.404930353164673,
+      "top1_on_support": 0.125,
+      "mean_support_size": 3.6875,
+      "transition_entropy": 1.9458670218785603
+    },
+    {
+      "step": 2,
+      "loss": 2.9723353385925293,
+      "grad_norm": 0.16846083104610443,
+      "target_mass": 0.1269814521074295,
+      "target_nll": 3.51446533203125,
+      "top1_on_support": 0.1875,
+      "mean_support_size": 3.875,
+      "transition_entropy": 1.9458651940027873
+    }
+  ],
+  "eval": [
+    {
+      "step": 1,
+      "rows": [
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 0,
+          "n": 32,
+          "target_mass": 0.0982142873108387,
+          "target_nll": 16.965001106262207,
+          "top1_on_support": 0.28125,
+          "mean_support_size": 4.3125
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 1,
+          "n": 32,
+          "target_mass": 0.11928315460681915,
+          "target_nll": 7.890988826751709,
+          "top1_on_support": 0.25,
+          "mean_support_size": 4.3125
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 2,
+          "n": 32,
+          "target_mass": 0.12381859868764877,
+          "target_nll": 3.6382250785827637,
+          "top1_on_support": 0.28125,
+          "mean_support_size": 4.3125
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 3,
+          "n": 32,
+          "target_mass": 0.12381859868764877,
+          "target_nll": 3.6382250785827637,
+          "top1_on_support": 0.28125,
+          "mean_support_size": 4.3125
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 0,
+          "n": 32,
+          "target_mass": 0.066964291036129,
+          "target_nll": 17.998873710632324,
+          "top1_on_support": 0.09375,
+          "mean_support_size": 3.25
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 1,
+          "n": 32,
+          "target_mass": 0.07683781906962395,
+          "target_nll": 8.502522468566895,
+          "top1_on_support": 0.09375,
+          "mean_support_size": 3.25
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 2,
+          "n": 32,
+          "target_mass": 0.07261049747467041,
+          "target_nll": 4.873301267623901,
+          "top1_on_support": 0.125,
+          "mean_support_size": 3.25
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 3,
+          "n": 32,
+          "target_mass": 0.07484056055545807,
+          "target_nll": 3.8152248859405518,
+          "top1_on_support": 0.28125,
+          "mean_support_size": 3.25
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "rows": [
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 0,
+          "n": 32,
+          "target_mass": 0.0892857164144516,
+          "target_nll": 16.448065757751465,
+          "top1_on_support": 0.15625,
+          "mean_support_size": 3.875
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 1,
+          "n": 32,
+          "target_mass": 0.10111545771360397,
+          "target_nll": 6.8356428146362305,
+          "top1_on_support": 0.25,
+          "mean_support_size": 3.875
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 2,
+          "n": 32,
+          "target_mass": 0.10444788634777069,
+          "target_nll": 3.6242780685424805,
+          "top1_on_support": 0.46875,
+          "mean_support_size": 3.875
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 3,
+          "n": 32,
+          "target_mass": 0.10444788634777069,
+          "target_nll": 3.6242780685424805,
+          "top1_on_support": 0.46875,
+          "mean_support_size": 3.875
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 0,
+          "n": 32,
+          "target_mass": 0.1071428582072258,
+          "target_nll": 15.34433650970459,
+          "top1_on_support": 0.09375,
+          "mean_support_size": 3.09375
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 1,
+          "n": 32,
+          "target_mass": 0.10409041121602058,
+          "target_nll": 7.9608001708984375,
+          "top1_on_support": 0.21875,
+          "mean_support_size": 3.09375
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 2,
+          "n": 32,
+          "target_mass": 0.09276996180415154,
+          "target_nll": 5.211313247680664,
+          "top1_on_support": 0.21875,
+          "mean_support_size": 3.09375
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 3,
+          "n": 32,
+          "target_mass": 0.09761938452720642,
+          "target_nll": 3.61570143699646,
+          "top1_on_support": 0.3125,
+          "mean_support_size": 3.09375
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    "large_artifacts/belief_filter_executor/checkpoints/smoke_joint_mod7/checkpoint_step00001.pt",
+    "large_artifacts/belief_filter_executor/checkpoints/smoke_joint_mod7/checkpoint_step00002.pt"
+  ]
+}

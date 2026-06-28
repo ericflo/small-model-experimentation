@@ -1,0 +1,4 @@
+label_mode,critic_seed,shuffled,epoch,train_loss,positive_train_groups,val_executor_accuracy,val_state_exact,val_changed_fraction,val_damage_rate,val_recovery_rate
+answer,101,True,1,2.6397640705108643,24,0.0,0.0,1.0,1.0,0.0
+answer,101,True,2,2.7216848333676658,24,0.0,0.0,1.0,1.0,0.0
+answer,101,True,3,2.716628054777781,24,0.0,0.0,1.0,1.0,0.0

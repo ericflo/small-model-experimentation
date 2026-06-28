@@ -1,0 +1,4 @@
+run,seed,step,k,shuffle_train,loss,final_loss,state_loss,quick_best_final_accuracy
+smoke_python_shaped_silent_executor_v1,101,1,0,0,4.794480323791504,4.794480323791504,0.0,0.0
+smoke_python_shaped_silent_executor_v1,101,2,4,0,6.999391555786133,4.65241813659668,4.6939473152160645,0.0
+smoke_python_shaped_silent_executor_v1,101,4,8,0,7.633448600769043,5.233982086181641,4.7989325523376465,0.0

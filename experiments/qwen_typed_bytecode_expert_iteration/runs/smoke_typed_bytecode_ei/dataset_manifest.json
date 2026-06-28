@@ -1,0 +1,32 @@
+{
+  "run": "smoke_typed_bytecode_ei",
+  "seed": 7,
+  "sizes": {
+    "seed_train": 24,
+    "unlabeled_train": 32,
+    "full_supervised_train": 48,
+    "val_mixed": 24,
+    "fresh_standard": 24,
+    "fresh_paraphrase": 24,
+    "fresh_paired": 24,
+    "hard_composition": 24
+  },
+  "vocab_size": 196,
+  "opcodes": [
+    "PAD",
+    "PUSH",
+    "ADD",
+    "SUB",
+    "MUL",
+    "MOD",
+    "MAX",
+    "MIN",
+    "GT",
+    "EQ",
+    "LOOKUP_A",
+    "LOOKUP_B",
+    "END"
+  ],
+  "modulus": 97,
+  "max_program_len": 16
+}

@@ -1,0 +1,7 @@
+run_dir,split,source_examples,prefix_samples,positive_samples,negative_samples,positive_rate
+main_prefix_state_verifier_s512,train,512,31574,2902,28672,0.0919110660670171
+main_prefix_state_verifier_s512,val,128,7900,732,7168,0.0926582278481012
+pilot_prefix_state_verifier_s128,train,128,6841,697,6144,0.1018856892267212
+pilot_prefix_state_verifier_s128,val,32,1719,183,1536,0.106457242582897
+smoke_prefix_state_verifier,train,12,215,71,144,0.3302325581395349
+smoke_prefix_state_verifier,val,4,69,21,48,0.3043478260869565

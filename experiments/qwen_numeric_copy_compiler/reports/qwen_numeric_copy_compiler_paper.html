@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen Numeric-Copy Compiler</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; color: #17202a; background: #f6f7f9; }
+    main { max-width: 1000px; margin: 0 auto; padding: 44px 24px 72px; background: #fff; }
+    h1, h2, h3 { line-height: 1.2; color: #111827; }
+    h1 { font-size: 2.25rem; margin-top: 0; }
+    h2 { margin-top: 2.3rem; padding-top: 1.1rem; border-top: 1px solid #e5e7eb; }
+    code { background: #eef2f7; border-radius: 4px; padding: 0.1rem 0.28rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.92rem; }
+    th, td { border: 1px solid #d7dee8; padding: 0.46rem 0.55rem; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #f3f6fa; }
+    ul, ol { padding-left: 1.35rem; }
+    .lead { font-size: 1.08rem; color: #374151; }
+  </style>
+</head>
+<body>
+<main>
+<h1>Qwen Numeric-Copy Compiler</h1>
+
+<h2>Summary</h2>
+<p class="lead">This experiment tested whether a Qwen causal language model can expose a modular-arithmetic program through learned token roles while exact numeric and operation symbols are copied from a lexical token map. The frozen pilot trained only compiler heads over frozen hidden states. The full condition trained QLoRA adapters and compiler heads live.</p>
+<p>The result is positive. The full QLoRA trace condition reached 89.8% exact execution at standard length 4, 72.7% at length 8, 46.9% at length 12, and 20.3% at length 24. Direct final-answer QLoRA stayed at chance. An answer-only numeric-copy compiler learned length-4 programs exactly but did not generalize to longer chains.</p>
+
+<h2>Setup</h2>
+<ul>
+  <li>Base model: <code>Qwen/Qwen3-4B</code></li>
+  <li>Quantization: 4-bit NF4</li>
+  <li>Full-condition update: LoRA rank 8, alpha 16, dropout 0.05, target <code>all-linear</code></li>
+  <li>Task: modular arithmetic instructions modulo 97</li>
+  <li>Train lengths: 1-12 steps</li>
+  <li>Evaluation lengths: 4, 8, 12, 24 steps</li>
+  <li>Evaluation templates: standard and paraphrase</li>
+  <li>Evaluation size: 128 examples per split</li>
+</ul>
+
+<h2>Runs</h2>
+<table>
+<tr><th>Run</th><th>Variant</th><th>Purpose</th></tr>
+<tr><td><code>pilot_qwen3_4b_frozen_numeric_copy_trace_mixed_l12</code></td><td><code>copy_trace</code></td><td>Frozen-backbone pilot gate with trace and executor loss.</td></tr>
+<tr><td><code>main_qwen3_4b_qlora_numeric_copy_trace_mixed_l12</code></td><td><code>copy_trace</code></td><td>Full QLoRA numeric-copy compiler condition.</td></tr>
+<tr><td><code>control_qwen3_4b_direct_numeric_copy_distribution_l12</code></td><td><code>direct</code></td><td>Final-answer QLoRA control without compiler structure.</td></tr>
+<tr><td><code>control_qwen3_4b_qlora_numeric_copy_answer_only_l12</code></td><td><code>copy_answer_only</code></td><td>Numeric-copy compiler trained only from final-answer loss.</td></tr>
+</table>
+
+<h2>Main QLoRA Result</h2>
+<table>
+<tr><th>Split</th><th>Executor</th><th>Init</th><th>Op</th><th>Arg</th><th>Arg Pos</th><th>Program Exact</th></tr>
+<tr><td>Standard L4</td><td>89.8%</td><td>100.0%</td><td>100.0%</td><td>97.5%</td><td>96.9%</td><td>89.8%</td></tr>
+<tr><td>Standard L8</td><td>72.7%</td><td>100.0%</td><td>100.0%</td><td>96.1%</td><td>95.7%</td><td>72.7%</td></tr>
+<tr><td>Standard L12</td><td>46.9%</td><td>100.0%</td><td>100.0%</td><td>94.1%</td><td>94.0%</td><td>46.9%</td></tr>
+<tr><td>Standard L24</td><td>20.3%</td><td>100.0%</td><td>99.9%</td><td>92.9%</td><td>95.3%</td><td>18.0%</td></tr>
+<tr><td>Paraphrase L4</td><td>85.9%</td><td>100.0%</td><td>100.0%</td><td>96.5%</td><td>95.1%</td><td>85.9%</td></tr>
+<tr><td>Paraphrase L8</td><td>63.3%</td><td>100.0%</td><td>100.0%</td><td>94.5%</td><td>93.6%</td><td>63.3%</td></tr>
+<tr><td>Paraphrase L12</td><td>46.1%</td><td>100.0%</td><td>100.0%</td><td>93.6%</td><td>92.6%</td><td>46.1%</td></tr>
+<tr><td>Paraphrase L24</td><td>5.5%</td><td>100.0%</td><td>97.4%</td><td>85.8%</td><td>84.9%</td><td>5.5%</td></tr>
+</table>
+
+<h2>Frozen Pilot</h2>
+<table>
+<tr><th>Split</th><th>Executor</th><th>Init</th><th>Op</th><th>Arg</th><th>Arg Pos</th><th>Program Exact</th></tr>
+<tr><td>Standard L4</td><td>83.6%</td><td>100.0%</td><td>100.0%</td><td>95.5%</td><td>94.5%</td><td>82.8%</td></tr>
+<tr><td>Standard L8</td><td>46.1%</td><td>100.0%</td><td>100.0%</td><td>90.2%</td><td>88.5%</td><td>45.3%</td></tr>
+<tr><td>Standard L12</td><td>16.4%</td><td>100.0%</td><td>100.0%</td><td>86.5%</td><td>84.2%</td><td>16.4%</td></tr>
+<tr><td>Standard L24</td><td>1.6%</td><td>100.0%</td><td>93.9%</td><td>77.6%</td><td>75.3%</td><td>0.0%</td></tr>
+<tr><td>Paraphrase L4</td><td>87.5%</td><td>100.0%</td><td>100.0%</td><td>96.9%</td><td>94.1%</td><td>87.5%</td></tr>
+<tr><td>Paraphrase L8</td><td>68.8%</td><td>100.0%</td><td>100.0%</td><td>95.4%</td><td>91.5%</td><td>68.8%</td></tr>
+<tr><td>Paraphrase L12</td><td>46.1%</td><td>100.0%</td><td>100.0%</td><td>93.7%</td><td>90.4%</td><td>45.3%</td></tr>
+<tr><td>Paraphrase L24</td><td>14.8%</td><td>100.0%</td><td>99.5%</td><td>90.2%</td><td>88.2%</td><td>13.3%</td></tr>
+</table>
+
+<h2>Controls</h2>
+<table>
+<tr><th>Run</th><th>Standard L4</th><th>Standard L8</th><th>Standard L12</th><th>Standard L24</th><th>Paraphrase L4</th><th>Paraphrase L8</th><th>Paraphrase L12</th><th>Paraphrase L24</th></tr>
+<tr><td>Direct final-answer QLoRA</td><td>3.1%</td><td>0.8%</td><td>0.0%</td><td>0.8%</td><td>1.6%</td><td>3.1%</td><td>3.9%</td><td>1.6%</td></tr>
+<tr><td>Answer-only numeric-copy compiler</td><td>100.0%</td><td>0.0%</td><td>1.6%</td><td>2.3%</td><td>100.0%</td><td>7.0%</td><td>1.6%</td><td>0.0%</td></tr>
+</table>
+
+<h2>Interpretation</h2>
+<p>The experiment isolates a concrete bottleneck. A compiler that classifies numeric values from hidden states is too noisy for exact multi-step execution. A compiler that copies numeric values from selected tokens is much stronger. Once numeric copying is used, performance tracks slot localization accuracy.</p>
+<p>The result supports a practical recipe for this class of serial symbolic tasks: learn where the program tokens are, copy exact symbols, and run an invisible executor.</p>
+
+<h2>Recommended Next Experiment</h2>
+<p>The next experiment should target robust slot generalization rather than numeric value decoding: keep numeric-copy readout, add a slot-stability objective across paraphrase variants, use a mixed short/long curriculum, and save mid-run checkpoints selected by validation program exactness.</p>
+
+<h2>Artifacts</h2>
+<ul>
+  <li>Code: <code>experiments/qwen_numeric_copy_compiler/src/</code></li>
+  <li>Runs: <code>experiments/qwen_numeric_copy_compiler/runs/</code></li>
+  <li>Analysis: <code>experiments/qwen_numeric_copy_compiler/analysis/</code></li>
+  <li>Manifest: <code>experiments/qwen_numeric_copy_compiler/checkpoint_manifest.csv</code></li>
+  <li>Large checkpoints: <code>large_artifacts/qwen_numeric_copy_compiler/checkpoints/</code></li>
+</ul>
+</main>
+</body>
+</html>

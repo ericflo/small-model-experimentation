@@ -1,0 +1,2694 @@
+key,created_utc,system,user,max_new_tokens,text
+d9bb7c25c99bfd27ee3156a854c14345c83d0860e1d5e5937dbc571797e61307,2026-06-27T10:47:59.097954+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: New York City
+Output: New York City
+Input: n.y.c.
+Output: New York City
+Input: New York City  
+Output: New York City
+Input: NYC
+Output: New York City
+
+Query:
+Input: new york city
+Output:",48,New York City
+f120a6086ba64dce08f9b4dfc0d7d3e61ec9b3753c513969ef53d86bc3656fc7,2026-06-27T10:47:59.304285+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: New York City
+Output: New York City
+Input: n.y.c.
+Output: New York City
+Input: New York City  
+Output: New York City
+Input: NYC
+Output: New York City
+
+Query:
+Input: None
+Output:",48,New York City
+e8fe5732e43007f9b03b438bc3be561ef4e7aefdd4dac12c1f1d14293859922a,2026-06-27T10:47:59.462477+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: New York City
+Output: New York City
+Input: n.y.c.
+Output: New York City
+Input: New York City  
+Output: New York City
+Input: NYC
+Output: New York City
+
+Query:
+Input: SJ
+Output:",48,San Jose
+da9114423427b703808f4bfc0b4ed1ebd8cf92301a41900dda884922dd9c31d0,2026-06-27T10:48:00.239793+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer one deterministic text transformation from the examples.
+Apply it to every query.
+Return only a JSON array of output strings, in query order.
+
+Examples:
+Input: New York City
+Output: New York City
+Input: n.y.c.
+Output: New York City
+Input: New York City  
+Output: New York City
+Input: NYC
+Output: New York City
+
+Queries:
+0. new york city
+1. None
+2. SJ
+
+JSON outputs:",220,"[""New York City"", ""New York City"", ""New York City""]"
+2a616b9a851037ee2d876538c03be2122136f368204203b5bf4e10ee29a9e06c,2026-06-27T10:48:13.458368+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['New York City']) -> 'New York City'
+2. transform(['n.y.c.']) -> 'New York City'
+3. transform(['New York City  ']) -> 'New York City'
+4. transform(['NYC']) -> 'New York City'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized"
+81dc1e7202edad282209a3ac671844e9da22f9cd4fe77eb48abe226183f5bc52,2026-06-27T10:48:31.356362+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['New York City']) -> 'New York City'
+2. transform(['n.y.c.']) -> 'New York City'
+3. transform(['New York City  ']) -> 'New York City'
+4. transform(['NYC']) -> 'New York City'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York"
+6cc90a603a422b373100a2d15cb4b40603d81139986e6a42a28053097bdee563,2026-06-27T10:48:48.990285+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['New York City']) -> 'New York City'
+2. transform(['n.y.c.']) -> 'New York City'
+3. transform(['New York City  ']) -> 'New York City'
+4. transform(['NYC']) -> 'New York City'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '"
+754e36a224cca1f1e50c28004f66392b2afbbff92bf1c8d3b6beba9d22986867,2026-06-27T10:49:03.492216+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['New York City']) -> 'New York City'
+2. transform(['n.y.c.']) -> 'New York City'
+3. transform(['New York City  ']) -> 'New York City'
+4. transform(['NYC']) -> 'New York City'
+
+Failing cases:
+row = ['New York City']
+expected = 'New York City'
+actual = ''
+row = ['New York City  ']
+expected = 'New York City'
+actual = ''
+
+Previous code:
+```python
+def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        year = int(normalized.split()[0])
+        if len(normalized.split()) == 1:
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            return datetime.date(year, int(normalized.split()[1]), 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    # Normalize the input
+    normalized = re.sub(r'\s+', ' ', row[0]).strip()
+    
+    # Handle abbreviations
+    if normalized == 'NYC':
+        return 'New York City'
+    if normalized == 'n.y.c.':
+        return 'New York City'
+    
+    # Check for date formats and convert to full name
+    try:
+        parts = normalized.split()
+        if len(parts) == 1:
+            year = int(parts[0])
+            return datetime.date(year, 1, 1).strftime('%B %d, %Y')
+        else:
+            year = int(parts[0])
+            month = int(parts[1])
+            return datetime.date(year, month, 1).strftime('%B %d, %Y')
+    except (ValueError, IndexError):
+        pass
+    
+    # Handle simple city names
+    if normalized in ['New York City', 'New York', 'NYC']:
+        return 'New York City'
+    
+    # Handle simple date formats
+    if re.match(r'\d{4}-\d{2}-\d{2}', normalized):
+        return datetime.datetime.strptime(normalized, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    # Default case
+    return normalized
+```"
+c20b843a2d60927f3e4c788f9ea845ad1fde7c1b033e9c2e6dc1e43d2d34249d,2026-06-27T10:49:22.264724+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['New York City']) -> 'New York City'
+2. transform(['n.y.c.']) -> 'New York City'
+3. transform(['New York City  ']) -> 'New York City'
+4. transform(['NYC']) -> 'New York City'
+
+Failing cases:
+row = ['New York City']
+expected = 'New York City'
+actual = '<compile failure>'
+row = ['n.y.c.']
+expected = 'New York City'
+actual = '<compile failure>'
+row = ['New York City  ']
+expected = 'New York City'
+actual = '<compile failure>'
+
+Previous code:
+```python
+def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    def normalize_state(state):
+        if state.lower() == 'nyc':
+            return 'New York City'
+        return state
+
+    def clean_input(input_str):
+        # Remove any non-alphanumeric characters and convert to lowercase
+        cleaned = re.sub(r'[^a-zA-Z0-9\s\.\,\-\(\)]', '', input_str)
+        # Normalize state abbreviations
+        if re.search(r'\bnyc\b', cleaned, re.IGNORECASE):
+            return 'New York City'
+        # Split into parts and process each part
+        parts = cleaned.split()
+        normalized_parts = []
+        for part in parts:
+            # Check if part is a state abbreviation
+            if len(part) == 2 and part.isupper():
+                normalized_parts.append(normalize_state(part))
+            else:
+                # Normalize the part (e.g., 'n.y.c.' -> 'New York City')
+                normalized_parts.append(''.join([c.upper() for c in part]))
+        return ' '.join(normalized_parts)
+
+    def format_date(date_str):
+        # Parse the date string into a datetime object
+        try:
+            date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            return date_str
+        # Format the date as 'Month Day, Year'
+        return f""{calendar.month_abbr[date_obj.month]} {date_obj.day}, {date_obj.year}""
+
+    def process_input(input_str):
+        # Clean the input string
+        cleaned = clean_input(input_str)
+        # Check if the cleaned string is 'New York City'
+        if cleaned == 'New York City':
+            return 'New York City'
+        # Check if the cleaned string is a date
+        if re.match(r'\b\d{4}-\d{2}-\d{2"
+9d98463154c818cc7853413bfc530060b24fca104e14e6be4b3d82f2d39a82ba,2026-06-27T10:49:32.729988+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['New York City']) -> 'New York City'
+2. transform(['n.y.c.']) -> 'New York City'
+3. transform(['New York City  ']) -> 'New York City'
+4. transform(['NYC']) -> 'New York City'
+
+Failing cases:
+row = ['New York City']
+expected = 'New York City'
+actual = '<compile failure>'
+row = ['n.y.c.']
+expected = 'New York City'
+actual = '<compile failure>'
+row = ['New York City  ']
+expected = 'New York City'
+actual = '<compile failure>'
+
+Previous code:
+```python
+def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+    elif normalized == '
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    input_str = row[0].strip()
+    
+    # Normalize to lowercase and replace dots with spaces
+    normalized = input_str.lower()
+    normalized = re.sub(r'\.', ' ', normalized)
+    
+    # Check for common abbreviations
+    if normalized == 'nyc':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'ny':
+        return 'New York City'
+    elif normalized == 'new york':
+        return 'New York City'
+    elif normalized == 'city':
+        return 'New York City'
+    elif normalized == 'new york city  ':
+        return 'New York City'
+    elif normalized == 'new york city ':
+        return 'New York City'
+    elif normalized == 'new york city':
+        return 'New York City'
+    elif normalized == 'n.y.c.':
+        return 'New York City'
+    elif normalized == 'n.y.c':
+        return 'New York City'
+```"
+202845e086571243fdecfbde0455eb6a8c4ed5a5f4b4d9fbf61526b1593244a2,2026-06-27T10:49:32.988057+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 1756
+Output: 1756
+Input: 12 March 1933
+Output: 1933
+Input: 2048
+Output: 2048
+Input: 2238
+Output: 2238
+
+Query:
+Input: 2033
+Output:",48,2033
+60479fee2461c4757b176196287af84ef0bb582bbca7d25d0cd5dbea26d3590c,2026-06-27T10:49:33.101024+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 1756
+Output: 1756
+Input: 12 March 1933
+Output: 1933
+Input: 2048
+Output: 2048
+Input: 2238
+Output: 2238
+
+Query:
+Input: Unknown
+Output:",48,Unknown
+152a3f80dfa58f9110a70000e9a90f40bec98239af0be541784f085390c5e2de,2026-06-27T10:49:33.356204+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 1756
+Output: 1756
+Input: 12 March 1933
+Output: 1933
+Input: 2048
+Output: 2048
+Input: 2238
+Output: 2238
+
+Query:
+Input: 1784
+Output:",48,1784
+165cb9ac65ab29cd3922d8e5ba7c5ee2c17ee14cdb7dd99c313a447b6d475fa1,2026-06-27T10:49:34.166228+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer one deterministic text transformation from the examples.
+Apply it to every query.
+Return only a JSON array of output strings, in query order.
+
+Examples:
+Input: 1756
+Output: 1756
+Input: 12 March 1933
+Output: 1933
+Input: 2048
+Output: 2048
+Input: 2238
+Output: 2238
+
+Queries:
+0. 2033
+1. Unknown
+2. 1784
+
+JSON outputs:",220,"[""2033"", ""Unknown"", ""1784""]"
+23c54caa7e6a1c2e5321698f50379e8f844eb57697c20b01ce81d2f038743561,2026-06-27T10:49:38.662992+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['1756']) -> '1756'
+2. transform(['12 March 1933']) -> '1933'
+3. transform(['2048']) -> '2048'
+4. transform(['2238']) -> '2238'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if re.fullmatch(r'\d{4}', row[0]):
+        return row[0]
+    match = re.fullmatch(r'(\d{1,2})\s?(\w+)?\s?(\d{4})', row[0])
+    if match:
+        return match.group(3)
+    return row[0]
+```"
+5fc364afebe7a63007a8885a9c8e6be87df07501a653858f8a1cfad9154f2efb,2026-06-27T10:49:49.024617+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['1756']) -> '1756'
+2. transform(['12 March 1933']) -> '1933'
+3. transform(['2048']) -> '2048'
+4. transform(['2238']) -> '2238'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]
+```"
+f4fa5e59a2ce5a447b7b744f0af331799fd99e785be98ef02be0ff391cc744b6,2026-06-27T10:50:00.714668+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['1756']) -> '1756'
+2. transform(['12 March 1933']) -> '1933'
+3. transform(['2048']) -> '2048'
+4. transform(['2238']) -> '2238'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"
+```"
+b37f70ee0f12d756f6785b337e2ec22167f78c3f83df3ad1f7587bc695323fcb,2026-06-27T10:50:10.406968+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['1756']) -> '1756'
+2. transform(['12 March 1933']) -> '1933'
+3. transform(['2048']) -> '2048'
+4. transform(['2238']) -> '2238'
+
+Failing cases:
+row = ['12 March 1933']
+expected = '1933'
+actual = ''
+
+Previous code:
+```python
+def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    def extract_year(date_str):
+        match = re.match(r'\d{1,2}\s?(\d{4})', date_str)
+        if match:
+            return match.group(1)
+        return None
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    def get_year_from_date(date_str):
+        if is_number(date_str):
+            return date_str
+        year = extract_year(date_str)
+        if year:
+            return year
+        return None
+
+    def get_year_from_number(number_str):
+        if is_number(number_str):
+            return number_str
+        return None
+
+    def get_year_from_string(string):
+        year = get_year_from_date(string)
+        if year:
+            return year
+        return get_year_from_number(string)
+
+    year = get_year_from_string(row[0])
+    if year:
+        return year
+    return row[0]
+```"
+503d751c87cfef9cc87185390e6e292611cc53bf7523dd4e7d647fb0152af63f,2026-06-27T10:50:20.884807+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['1756']) -> '1756'
+2. transform(['12 March 1933']) -> '1933'
+3. transform(['2048']) -> '2048'
+4. transform(['2238']) -> '2238'
+
+Failing cases:
+row = ['12 March 1933']
+expected = '1933'
+actual = ''
+
+Previous code:
+```python
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return """"
+    value = row[0]
+    
+    # Check if the value is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', value)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Validate the month
+        if not calendar.month_name[calendar.month_abbr.index(month)] == month:
+            return """"
+        
+        # Validate the day
+        if day < 1 or day > calendar.monthrange(year, calendar.month_abbr.index(month))[1]:
+            return """"
+        
+        # Extract the year
+        return str(year)
+    
+    # Check if the value is a number
+    if re.fullmatch(r'\d+', value):
+        return value
+    
+    return """"
+```"
+01e1fb3c2d29a10894d3a705851a5f6949745cdb26aaa3eefc3951197866c1bb,2026-06-27T10:50:36.697342+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['1756']) -> '1933'
+2. transform(['12 March 1933']) -> '2048'
+3. transform(['2048']) -> '2238'
+4. transform(['2238']) -> '1756'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    if row[0].isdigit():
+        return str(int(row[0]) + 188)
+    elif re.match(r'\d{4}', row[0]):
+        return str(int(row[0]) + 188)
+    elif re.match(r'\d{1,2} \w+ \d{4}', row[0]):
+        date_str = row[0]
+        year = int(re.search(r'\d{4}', date_str).group())
+        month = int(re.search(r'\d{1,2}', date_str, re.IGNORECASE).group())
+        day = int(re.search(r'\d{1,2}', date_str, re.IGNORECASE).group())
+        if month > 12:
+            month = 12
+        if day > calendar.monthrange(year, month)[1]:
+            day = calendar.monthrange(year, month)[1]
+        new_year = year + 1
+        new_month = month + 1
+        if new_month > 12:
+            new_month = 1
+            new_year += 1
+        new_day = day + 1
+        if new_day > calendar.monthrange(new_year, new_month)[1]:
+            new_day = calendar.monthrange(new_year, new_month)[1]
+        return f""{new_year}{new_month:02d}{new_day:02d}""
+    else:
+        return str(int(row[0]) + 188)"
+460a9447c6804c40e16ed34a189acdbf2d012fde8154be27035f2383c9906d8d,2026-06-27T10:50:53.360361+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['1756']) -> '1933'
+2. transform(['12 March 1933']) -> '2048'
+3. transform(['2048']) -> '2238'
+4. transform(['2238']) -> '1756'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def parse_date(date_str):
+        match = re.match(r'(\d{1,2})\s+(.+?)\s+(\d{4})', date_str)
+        if match:
+            day = int(match.group(1))
+            month = match.group(2)
+            year = int(match.group(3))
+            # Map month names to numbers
+            month_num = calendar.month_abbr.index(month)
+            return datetime.date(year, month_num, day)
+        return None
+
+    def date_to_number(date_obj):
+        return int(date_obj.strftime(""%Y%m%d""))
+
+    def number_to_date(number):
+        year = number // 10000
+        month = (number // 100) % 100
+        day = number % 100
+        # Map month numbers to names
+        month_name = calendar.month_abbr[month]
+        return f""{day} {month_name} {year}""
+
+    def calculate_next_date(date_obj):
+        return date_obj + datetime.timedelta(days=100)
+
+    def get_transformed_value(input_value):
+        if re.match(r'\d{4}', input_value):
+            return number_to_date(date_to_number(datetime.date(int(input_value), 1, 1)))
+        elif re.match(r'\d{1,2}\s+\w+\s+\d{4}', input_value):
+            return number_to_date(date_to_number(parse_date(input_value)))
+        else:
+            return input_value
+
+    value = get_transformed_value(row[0])
+    return value
+```"
+5a9443583961b0050f87f7d49791545bd6dc2fb6a01608f48b52ba19a0208e17,2026-06-27T10:51:10.412278+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['1756']) -> '1933'
+2. transform(['12 March 1933']) -> '2048'
+3. transform(['2048']) -> '2238'
+4. transform(['2238']) -> '1756'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) == 1:
+        input_col = row[0]
+    else:
+        input_col = row[1]
+    
+    # Check if the input is a date in the format 'Day Month Year'
+    match = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', input_col)
+    if match:
+        day = int(match.group(1))
+        month = match.group(2)
+        year = int(match.group(3))
+        
+        # Convert month name to number
+        month_num = calendar.month_abbr.index(month)
+        
+        # Create a date object
+        try:
+            date = datetime.date(year, month_num, day)
+        except ValueError:
+            return """"
+        
+        # Calculate the number of days since the start of the year
+        days_since_start = (date - datetime.date(year, 1, 1)).days
+        
+        # Calculate the number of years since 1970
+        years_since_1970 = (date - datetime.date(1970, 1, 1)).days // 365
+        
+        # Calculate the result using the formula
+        result = str((days_since_start + years_since_1970) * 2)
+        return result
+    
+    # Check if the input is a number
+    if re.fullmatch(r'\d+', input_col):
+        num = int(input_col)
+        # Calculate the result using the formula
+        result = str((num + 100) * 2)
+        return result"
+c2b1125b09e3a31281ccd559802d9d76b8826481e73a68d6ceda3c6e75b3fcb7,2026-06-27T10:51:10.580193+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: Hone-Kiriakos Yilmaz
+Output: Hone
+Input: Artem Milanesi
+Output: Artem
+Input: Bidisha-Snezhana Panigrahi
+Output: Bidisha
+Input: Maureen-Snorre Ndiaye
+Output: Maureen
+
+Query:
+Input: Rodel-Habiba Chaiprasit
+Output:",48,Rodel
+c7adb0e10223c1b9dc0b261383fbf3a7caa687bb4692ec8356076941502c560e,2026-06-27T10:51:10.692213+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: Hone-Kiriakos Yilmaz
+Output: Hone
+Input: Artem Milanesi
+Output: Artem
+Input: Bidisha-Snezhana Panigrahi
+Output: Bidisha
+Input: Maureen-Snorre Ndiaye
+Output: Maureen
+
+Query:
+Input: Jan Evans
+Output:",48,Jan
+0c5937363b5b656a3f31b7b814f4ce19d3c95a85b4b5b6333158d280ace31521,2026-06-27T10:51:10.852397+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: Hone-Kiriakos Yilmaz
+Output: Hone
+Input: Artem Milanesi
+Output: Artem
+Input: Bidisha-Snezhana Panigrahi
+Output: Bidisha
+Input: Maureen-Snorre Ndiaye
+Output: Maureen
+
+Query:
+Input: Antonia Lusis
+Output:",48,Antonia
+9cf7584532d3dc3316d37106b789f8bf206c085e898b67e43c78d5d40ceb0677,2026-06-27T10:51:11.447574+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer one deterministic text transformation from the examples.
+Apply it to every query.
+Return only a JSON array of output strings, in query order.
+
+Examples:
+Input: Hone-Kiriakos Yilmaz
+Output: Hone
+Input: Artem Milanesi
+Output: Artem
+Input: Bidisha-Snezhana Panigrahi
+Output: Bidisha
+Input: Maureen-Snorre Ndiaye
+Output: Maureen
+
+Queries:
+0. Rodel-Habiba Chaiprasit
+1. Jan Evans
+2. Antonia Lusis
+
+JSON outputs:",220,"[""Rodel"", ""Jan"", ""Antonia""]"
+4371ac3da3e3a9b1748638c8d9d3efda036836fa61710a2bb90427fa8fe6bc7f,2026-06-27T10:51:12.228178+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Hone'
+2. transform(['Artem Milanesi']) -> 'Artem'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Bidisha'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Maureen'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"def transform(row):
+    return row[0].split('-')[0]"
+46c6b570c1d5cd2d9d3187461e6cd6cc9bf1bfb97f03d0a7c1be8f9372eece1e,2026-06-27T10:51:29.453034+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Hone'
+2. transform(['Artem Milanesi']) -> 'Artem'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Bidisha'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Maureen'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_first_name(full_name):
+        # Split the full name into parts using the '-' separator
+        parts = full_name.split('-')
+        # Check if the first part contains a space (e.g., 'Maureen-Snorre')
+        if ' ' in parts[0]:
+            # Split the first part into first and last name
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the calendar module
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        # Get the day of the week as an integer (0-6)
+        return date.weekday()
+    
+    def get_day_of_week_name(date_str):
+        # Get the day of the week name from the calendar module
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return calendar.weekday_name[date.weekday()]
+    
+    def get_day_of_month(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.day
+    
+    def get_month_number(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.month
+    
+    def get_year(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime"
+828ff10e22ebbb646dc13198ca376d3d42455979500327e8f51472fddd2e20f2,2026-06-27T10:51:36.789467+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Hone'
+2. transform(['Artem Milanesi']) -> 'Artem'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Bidisha'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Maureen'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name
+```"
+9ad23a5d546fdb990f36ae2be74a8d82e36172c1eda9fa4ffc5741cd963cdb90,2026-06-27T10:51:37.796780+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Hone'
+2. transform(['Artem Milanesi']) -> 'Artem'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Bidisha'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Maureen'
+
+Failing cases:
+row = ['Artem Milanesi']
+expected = 'Artem'
+actual = 'Artem Milanesi'
+
+Previous code:
+```python
+def transform(row):
+    return row[0].split('-')[0]
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    return row[0].split('-')[0]
+```"
+cf42695d7482c6b23e9027e6566cf4e31821dbc2de5c50fecabf09ac82a828f4,2026-06-27T10:51:41.142753+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Hone'
+2. transform(['Artem Milanesi']) -> 'Artem'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Bidisha'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Maureen'
+
+Failing cases:
+row = ['Hone-Kiriakos Yilmaz']
+expected = 'Hone'
+actual = ''
+row = ['Artem Milanesi']
+expected = 'Artem'
+actual = ''
+row = ['Bidisha-Snezhana Panigrahi']
+expected = 'Bidisha'
+actual = ''
+row = ['Maureen-Snorre Ndiaye']
+expected = 'Maureen'
+actual = ''
+
+Previous code:
+```python
+def transform(row):
+    def extract_first_name(full_name):
+        # Split the full name into parts using the '-' separator
+        parts = full_name.split('-')
+        # Check if the first part contains a space (e.g., 'Maureen-Snorre')
+        if ' ' in parts[0]:
+            # Split the first part into first and last name
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the calendar module
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        # Get the day of the week as an integer (0-6)
+        return date.weekday()
+    
+    def get_day_of_week_name(date_str):
+        # Get the day of the week name from the calendar module
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return calendar.weekday_name[date.weekday()]
+    
+    def get_day_of_month(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.day
+    
+    def get_month_number(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+        return date.month
+    
+    def get_year(date_str):
+        # Parse the date string into a datetime object
+        date = datetime.datetime.strptime
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    def extract_first_name(full_name):
+        parts = full_name.split('-')
+        if ' ' in parts[0]:
+            first_name, last_name = parts[0].split(' ')
+            return first_name
+        return parts[0]
+    
+    return extract_first_name(row[0])
+```"
+b747faf6ad0fb24fbb598372a06b1a16778c788cb3ce86fc9c4b71fbf194406d,2026-06-27T10:51:47.828884+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Hone'
+2. transform(['Artem Milanesi']) -> 'Artem'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Bidisha'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Maureen'
+
+Failing cases:
+row = ['Artem Milanesi']
+expected = 'Artem'
+actual = 'Artem Milanesi'
+
+Previous code:
+```python
+def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    name = row[0]
+    # Split the name into first and last names
+    parts = name.split('-')
+    if len(parts) < 2:
+        return name
+    first_name = parts[0]
+    # Check if the last name has a hyphen
+    if '-' in parts[1]:
+        # Split the last name into parts
+        last_name_parts = parts[1].split('-')
+        # Take the first part of the last name
+        last_name = last_name_parts[0]
+    else:
+        last_name = parts[1]
+    # Return the first name
+    return first_name
+```"
+dff73768c42169eb2f8edbd65de6b82d07f2c59fe23575b9394901fd099c7f81,2026-06-27T10:51:52.039725+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Artem'
+2. transform(['Artem Milanesi']) -> 'Bidisha'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Maureen'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Hone'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    name = row[0]
+    parts = re.split(r'[-_]', name)
+    if len(parts) == 2:
+        first = parts[0]
+        last = parts[1]
+        return first[-1] + last[0]
+    else:
+        return name[0] + name[-1]"
+660bb459e0fb74d29beea9e09da122afeb8c76daa41ebd86aec2caa58dd9051c,2026-06-27T10:52:09.066078+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Artem'
+2. transform(['Artem Milanesi']) -> 'Bidisha'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Maureen'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Hone'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def extract_first_name(full_name):
+        # Split on '-' and take the first part
+        parts = full_name.split('-')
+        return parts[0].split()[0]
+    
+    def get_month_name(month_number):
+        # Get the month name from the month number
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(date_str):
+        # Parse the date and get the weekday name
+        try:
+            date = datetime.datetime.strptime(date_str, ""%Y-%m-%d"")
+            return calendar.weekday_name[date.weekday()]
+        except ValueError:
+            return """"
+    
+    def get_initials(full_name):
+        # Extract first and last names and get initials
+        first_name = extract_first_name(full_name)
+        last_name = full_name.split()[1]
+        return first_name[0] + last_name[0]
+    
+    def get_name_from_initials(initials):
+        # Map initials to names based on some logic
+        name_map = {
+            'AR': 'Artem',
+            'BI': 'Bidisha',
+            'MA': 'Maureen',
+            'HO': 'Hone'
+        }
+        return name_map.get(initials, """")
+    
+    def get_name_from_date(date_str):
+        # Get the month name from the date and construct a name
+        month = int(date_str.split('-')[1])
+        month_name = get_month_name(month)
+        return f""{month_name} {date_str.split('-')[2]}""
+    
+    def get_name_from_parts(parts):
+        # Get the first part of the name
+        return parts[0].split()[0]
+    
+    def get_name_from_full"
+752d799e18c562081d6633aa6e3710f923c7a7ccbf04168f3cb9eac1861c423e,2026-06-27T10:52:18.555815+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['Hone-Kiriakos Yilmaz']) -> 'Artem'
+2. transform(['Artem Milanesi']) -> 'Bidisha'
+3. transform(['Bidisha-Snezhana Panigrahi']) -> 'Maureen'
+4. transform(['Maureen-Snorre Ndiaye']) -> 'Hone'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    name = row[0]
+    # Split name into first and last name
+    parts = re.split(r'[-_]', name)
+    if len(parts) == 2:
+        first = parts[0]
+        last = parts[1]
+        # Check if first name is a single word
+        if len(first) == 1:
+            # Use the last name for transformation
+            return last
+        # Check if last name is a single word
+        if len(last) == 1:
+            # Use the first name for transformation
+            return first
+        # Use the first letter of each name
+        return first[0] + last[0]
+    # If not split into two parts, return the first letter of the name
+    return name[0] if name else ''
+```"
+51cf7018cd39ad0d53ff4a48ffb970b31068da52ceb1f68c5765d6e4528d8b1c,2026-06-27T10:52:18.839995+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 71.8
+Output: 72.0
+Input: 71.2
+Output: 71.0
+Input: 82.4
+Output: 82.0
+Input: 103.8
+Output: 104.0
+
+Query:
+Input: 96.7
+Output:",48,97.0
+525f6bb613180e65e721f216b54592cba089e889d86bd57b7f918430b1d5a21c,2026-06-27T10:52:19.120451+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 71.8
+Output: 72.0
+Input: 71.2
+Output: 71.0
+Input: 82.4
+Output: 82.0
+Input: 103.8
+Output: 104.0
+
+Query:
+Input: 74.8
+Output:",48,75.0
+31f10780928e6d19baa9e8619909bd006e4730022b1188e3de33db1ea277a6d8,2026-06-27T10:52:19.446103+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 71.8
+Output: 72.0
+Input: 71.2
+Output: 71.0
+Input: 82.4
+Output: 82.0
+Input: 103.8
+Output: 104.0
+
+Query:
+Input: 99.9
+Output:",48,100.0
+55cd12566ac4e2c559a0096b94a677b8e404d29f66b47e24e0f4a7eb872c389c,2026-06-27T10:52:20.500708+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer one deterministic text transformation from the examples.
+Apply it to every query.
+Return only a JSON array of output strings, in query order.
+
+Examples:
+Input: 71.8
+Output: 72.0
+Input: 71.2
+Output: 71.0
+Input: 82.4
+Output: 82.0
+Input: 103.8
+Output: 104.0
+
+Queries:
+0. 96.7
+1. 74.8
+2. 99.9
+
+JSON outputs:",220,"[""97.0"", ""75.0"", ""100.0""]"
+48d23c8a6c46c1b12f1b23f99e318e8d9c8e497f60b005f3f549754b325b4805,2026-06-27T10:52:21.677254+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['71.8']) -> '72.0'
+2. transform(['71.2']) -> '71.0'
+3. transform(['82.4']) -> '82.0'
+4. transform(['103.8']) -> '104.0'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))"
+31f2043cdb380d491784e5eb89c6ff8f847a731f5e1ab54fdcc59291f50b1bb0,2026-06-27T10:52:28.769558+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['71.8']) -> '72.0'
+2. transform(['71.2']) -> '71.0'
+3. transform(['82.4']) -> '82.0'
+4. transform(['103.8']) -> '104.0'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def round_to_nearest_integer(value):
+    """"""Round a value to the nearest integer.""""""
+    return math.round(value)
+
+def format_as_string(value):
+    """"""Format a value as a string with one decimal place, rounded to the nearest integer.""""""
+    return f""{round_to_nearest_integer(value):.1f}""
+
+def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return format_as_string(value)
+```"
+1ad81c6006ddb8a86d83cf5094b7a04295df2e73fb181a1240434743dab15cc4,2026-06-27T10:52:35.491851+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['71.8']) -> '72.0'
+2. transform(['71.2']) -> '71.0'
+3. transform(['82.4']) -> '82.0'
+4. transform(['103.8']) -> '104.0'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return str(rounded)
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value
+```"
+1c6062696a53aa0404003eebe7fb398c48d631bba72fee9e803940db6c7350b1,2026-06-27T10:52:36.844362+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['71.8']) -> '72.0'
+2. transform(['71.2']) -> '71.0'
+3. transform(['82.4']) -> '82.0'
+4. transform(['103.8']) -> '104.0'
+
+Failing cases:
+row = ['71.8']
+expected = '72.0'
+actual = '72'
+row = ['71.2']
+expected = '71.0'
+actual = '72'
+row = ['82.4']
+expected = '82.0'
+actual = '83'
+row = ['103.8']
+expected = '104.0'
+actual = '104'
+
+Previous code:
+```python
+def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    import math
+    value = float(row[0])
+    return str(math.ceil(value))
+```"
+3978a0052ba5b0ed0e1a760670c6ad8133f5b330388266e6d4ffc32a16dadea6,2026-06-27T10:52:39.929384+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['71.8']) -> '72.0'
+2. transform(['71.2']) -> '71.0'
+3. transform(['82.4']) -> '82.0'
+4. transform(['103.8']) -> '104.0'
+
+Failing cases:
+row = ['71.8']
+expected = '72.0'
+actual = ''
+row = ['71.2']
+expected = '71.0'
+actual = ''
+row = ['82.4']
+expected = '82.0'
+actual = ''
+row = ['103.8']
+expected = '104.0'
+actual = ''
+
+Previous code:
+```python
+def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return format_as_string(value)
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    """"""Transform the input row to a string representation of the rounded value.""""""
+    # Extract the value from the row
+    value = float(row[0])
+    
+    # Round to the nearest integer and format as a string
+    return f""{int(round(value))}""
+```"
+2624d4f75559b55342b1a2d64f4d6e2fe19b9e2b399af82f8fbaff8a5181d9c2,2026-06-27T10:52:46.035873+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['71.8']) -> '72.0'
+2. transform(['71.2']) -> '71.0'
+3. transform(['82.4']) -> '82.0'
+4. transform(['103.8']) -> '104.0'
+
+Failing cases:
+row = ['71.8']
+expected = '72.0'
+actual = '72'
+row = ['71.2']
+expected = '71.0'
+actual = '71'
+row = ['82.4']
+expected = '82.0'
+actual = '82'
+row = ['103.8']
+expected = '104.0'
+actual = '104'
+
+Previous code:
+```python
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return str(rounded)
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Try to parse as a float
+        try:
+            num = float(value)
+            # Round to the nearest integer
+            rounded = round(num)
+            # Return as string
+            return f""{int(rounded)}""
+        except ValueError:
+            # If parsing fails, return original value as string
+            return value
+    else:
+        # If not a number, return original value as string
+        return value
+```"
+480044b320643affc3d888ca06a741c757da2a66abcd86574e88dde0a8785360,2026-06-27T10:52:49.676179+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['71.8']) -> '82.0'
+2. transform(['71.2']) -> '104.0'
+3. transform(['82.4']) -> '72.0'
+4. transform(['103.8']) -> '71.0'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"def transform(row):
+    import re
+    import math
+    import datetime
+    import calendar
+    
+    value = float(row[0])
+    # Convert to Fahrenheit
+    fahrenheit = (value * 9/5) + 32
+    # Round to one decimal place
+    return f""{round(fahrenheit, 1)}"""
+c388ad83e6790675c2bca20ed3e7ec4bbb288dd44cf84522a2ba384f973234ba,2026-06-27T10:53:00.959709+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['71.8']) -> '82.0'
+2. transform(['71.2']) -> '104.0'
+3. transform(['82.4']) -> '72.0'
+4. transform(['103.8']) -> '71.0'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def parse_value(value):
+        # Extract the numeric part using regex
+        match = re.match(r'^(\d+\.\d+)$', value)
+        if not match:
+            return None
+        return float(match.group(1))
+    
+    def calculate_result(value):
+        # Convert value to a float
+        value = float(value)
+        # Calculate the result using a formula
+        # This is a placeholder formula; the actual logic should be derived from the examples
+        # For the given examples, the formula appears to be: result = (value + 100) % 100
+        return (value + 100) % 100
+    
+    def format_result(result):
+        # Format the result as a string with one decimal place
+        return f""{result:.1f}""
+    
+    value = parse_value(row[0])
+    if value is None:
+        return """"
+    result = calculate_result(value)
+    return format_result(result)
+```"
+bda115e603ad011df07121cc89e1759fdbec8d00e7ee17f062b81a812e3656c9,2026-06-27T10:53:13.357615+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['71.8']) -> '82.0'
+2. transform(['71.2']) -> '104.0'
+3. transform(['82.4']) -> '72.0'
+4. transform(['103.8']) -> '71.0'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    # Check if the input is a number
+    if re.fullmatch(r'-?\d+\.?\d*', value):
+        # Convert to float
+        num = float(value)
+        # Check if the number is in the range of a day of the year (1-366)
+        if 1 <= num <= 366:
+            # Convert to a date (January 1st of the current year)
+            year = datetime.datetime.now().year
+            try:
+                # Create a date object for the given day of the year
+                date = datetime.date(year, 1, 1) + datetime.timedelta(days=int(num) - 1)
+                # Format as MM/DD/YYYY
+                return date.strftime(""%m/%d/%Y"")
+            except ValueError:
+                # Handle invalid day of the year (e.g., 366 in a non-leap year)
+                return ""Invalid date""
+        else:
+            # Handle numbers not in the range of a day of the year
+            return ""Invalid number""
+    else:
+        # Handle non-numeric input
+        return ""Invalid input""
+```"
+a3e02986baf87d7764f9f78c80e7d388c2ff271cb8271502cd0fd7cb08cae858,2026-06-27T10:53:13.711244+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 100
+Output: 76-100
+Input: 51
+Output: 51-75
+Input: 86
+Output: 76-100
+Input: 42
+Output: 26-50
+
+Query:
+Input: 83
+Output:",48,76-100
+6df879837177dc6ebb4b994496f3a43b388fcc39b5076803f80c458569b2f09c,2026-06-27T10:53:14.013047+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 100
+Output: 76-100
+Input: 51
+Output: 51-75
+Input: 86
+Output: 76-100
+Input: 42
+Output: 26-50
+
+Query:
+Input: 46
+Output:",48,26-50
+1cb47f7bf43216d42aa5805e825d659363941aff66132230b7caacd37a211db4,2026-06-27T10:53:14.315504+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer the exact text transformation from the examples.
+Return only the transformed output for the query. Do not explain.
+
+Examples:
+Input: 100
+Output: 76-100
+Input: 51
+Output: 51-75
+Input: 86
+Output: 76-100
+Input: 42
+Output: 26-50
+
+Query:
+Input: 30
+Output:",48,26-50
+27a2471b6fd09a4e20f71f877e7d9a101a46b33fc029df63d0d6a3d93d8b8347,2026-06-27T10:53:15.383677+00:00,You are a precise text-transformation engine. Return only the requested output.,"Infer one deterministic text transformation from the examples.
+Apply it to every query.
+Return only a JSON array of output strings, in query order.
+
+Examples:
+Input: 100
+Output: 76-100
+Input: 51
+Output: 51-75
+Input: 86
+Output: 76-100
+Input: 42
+Output: 26-50
+
+Queries:
+0. 83
+1. 46
+2. 30
+
+JSON outputs:",220,"[""76-100"", ""26-50"", ""1-25""]"
+0b2b4aaf6138efceaaf799de07875388da5617539e9818efa579ace826c53e76,2026-06-27T10:53:20.468199+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '51-75'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '26-50'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""
+```"
+74e7ddeec934989b3fa99a1871bacb2500a1d62003942fdd99b8618f46b9b79e,2026-06-27T10:53:38.207809+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '51-75'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '26-50'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{"
+6576327fa6919cd21cad3135fffa12329304c5876acfe4c41ceca5cbcf6b32de,2026-06-27T10:53:44.245240+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '51-75'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '26-50'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""
+```"
+b2b0676e09c7321f1df2d84c727e1cae5fc755e7b2913e96f5ac0fefbd7fd20e,2026-06-27T10:53:48.800388+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '51-75'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '26-50'
+
+Failing cases:
+row = ['86']
+expected = '76-100'
+actual = '76-86'
+row = ['42']
+expected = '26-50'
+actual = '26-42'
+
+Previous code:
+```python
+def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    num = int(row[0])
+    if 51 <= num <= 75:
+        return f""{num}-75""
+    elif 26 <= num <= 50:
+        return f""26-{num}""
+    elif 76 <= num <= 100:
+        return f""76-{num}""
+    else:
+        return f""{num}-100""
+```"
+89e64c7e06b91bafadc39f747422f75b74f74ac508f7e0323be0ff60ffa18c4c,2026-06-27T10:54:08.333437+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '51-75'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '26-50'
+
+Failing cases:
+row = ['100']
+expected = '76-100'
+actual = '<compile failure>'
+row = ['51']
+expected = '51-75'
+actual = '<compile failure>'
+row = ['86']
+expected = '76-100'
+actual = '<compile failure>'
+
+Previous code:
+```python
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_week_number(date):
+        return calendar.weekdate(date).week
+    
+    def get_year(date):
+        return date.year
+    
+    def get_month(date):
+        return date.month
+    
+    def get_day(date):
+        return date.day
+    
+    def get_date_string(date):
+        return f""{date.year}-{date.month:02d}-{date.day:02d}""
+    
+    def get_week_number_string(date):
+        return f""{date.year}-W{get_week_number(date):02d}""
+    
+    def get_month_name_string(date):
+        return get_month_name(date.month)
+    
+    def get_day_of_week_string(date):
+        return calendar.weekday_name[get_day_of_week(date)]
+    
+    def get_date_info(date):
+        return {
+            'year': get_year(date),
+            'month': get_month(date),
+            'day': get_day(date),
+            'week_number': get_week_number(date),
+            'month_name': get_month_name_string(date),
+            'day_of_week': get_day_of_week_string(date)
+        }
+    
+    def get_date_from_string(date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return datetime.date(year, month, day)
+    
+    def get_date_from_row(row):
+        date_string = row[0]
+        return get_date_from_string(date_string)
+    
+    def get_transformed_string(date_info):
+        return f""{date_info['year']}-{date_info['month']:02d}-{date_info['day']:02d}""
+    
+    date = get_date_from_row(row)
+    date_info = get_date_info(date)
+    return get_transform"
+9ebe1310af92a6fea44b9a84342d5ac337dd3aa7f8ac3d4c554c16b795619a41,2026-06-27T10:54:13.734879+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Repair this Python text-transformation function.
+
+It must define transform(row), where row is a list of input columns, and return a string.
+Use only Python built-ins, re, math, datetime, and calendar.
+Return only a Python code block.
+
+All examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '51-75'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '26-50'
+
+Failing cases:
+row = ['100']
+expected = '76-100'
+actual = '100-129'
+row = ['51']
+expected = '51-75'
+actual = '51-80'
+row = ['86']
+expected = '76-100'
+actual = '86-115'
+row = ['42']
+expected = '26-50'
+actual = '42-71'
+
+Previous code:
+```python
+def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""
+```
+
+Repair style: minimal. Preserve correct behavior and fix the failures.",380,"```python
+def transform(row):
+    value = row[0]
+    
+    # Check if the input is a number
+    if not value.isdigit():
+        return value
+    
+    num = int(value)
+    
+    # Determine the range based on the number
+    if num <= 75:
+        return f""{num}-{num + 29}""
+    elif num <= 100:
+        return f""{num}-{num + 29}""
+    else:
+        return ""76-100""
+```"
+7ea3dca4da31be97816f04bf875fcc4ca7405df17bc3701449c76817eae8e24f,2026-06-27T10:54:16.724192+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '26-50'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '51-75'
+
+Style: Write one concise function. Keep the logic direct.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    num = int(row[0])
+    if num < 51:
+        return f""{num}-{num + 49}""
+    else:
+        return ""76-100""
+```"
+2c4607c922c9efa64e1dcb37fffaee0c6b4b9cf1d481785fa72a7f92eb98df00,2026-06-27T10:54:34.550310+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '26-50'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '51-75'
+
+Style: Decompose the task into small local helper functions, then call them from transform.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    def get_month_name(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week(day_number):
+        return calendar.weekday(day_number)
+    
+    def get_day_of_week_name(day_number):
+        return calendar.weekday_name[get_day_of_week(day_number)]
+    
+    def get_month_name_from_number(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_month_from_number(day_number):
+        return day_number
+    
+    def get_month_number_from_name(month_name):
+        return calendar.month_abbr.index(month_name)
+    
+    def get_day_of_week_from_name(weekday_name):
+        return calendar.weekday_name.index(weekday_name)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def get_month_number_from_name(weekday_name):
+        return get_month_name_from_number(get_day_of_week_from_name(weekday_name) + 1)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def get_month_name_from_number(month_number):
+        return calendar.month_name[month_number]
+    
+    def get_day_of_week_name(weekday_number):
+        return calendar.weekday_name[weekday_number]
+    
+    def get_day_of_week_from_number(weekday_number):
+        return weekday_number
+    
+    def get_month_number_from_name(month_name):
+        return calendar.month_abbr.index(month_name)
+    
+    def get_day_of_month_from_name(weekday_name):
+        return get_day_of_week_from_name(weekday_name) + 1
+    
+    def"
+14fc7cf5ea81310a15b4219e5a69153962632fcba754e51767ed0eb63acc0580,2026-06-27T10:54:40.811317+00:00,You are a precise programming assistant. Follow the user's required output format exactly.,"Write Python code for a deterministic text transformation.
+
+Requirements:
+- Define exactly one public function named transform(row).
+- row is a list of input columns. Use row[0] for a single-column task.
+- Return a string.
+- Use only Python built-ins, re, math, datetime, and calendar.
+- Do not read files, import packages other than the allowed modules, print, or include tests.
+- The function must match every example exactly.
+
+Examples:
+1. transform(['100']) -> '76-100'
+2. transform(['51']) -> '26-50'
+3. transform(['86']) -> '76-100'
+4. transform(['42']) -> '51-75'
+
+Style: Prefer robust parsing, normalization, and explicit conditionals over memorizing examples.
+
+Return only a Python code block.",360,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    # Extract the number from the row
+    num_str = row[0]
+    
+    # Check if the input is a valid integer
+    if not num_str.isdigit():
+        return ""Invalid input""
+    
+    num = int(num_str)
+    
+    # Determine the range based on the number
+    if num <= 50:
+        return f""{num}-50""
+    elif num <= 75:
+        return f""51-{num}""
+    else:
+        return ""76-100""
+```"

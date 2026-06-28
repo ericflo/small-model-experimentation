@@ -1,0 +1,9 @@
+arm,seed,epoch,train_loss,val_utility,val_n,val_accuracy,val_state_accuracy,val_base_accuracy,val_oracle_accuracy,val_shortlist_oracle_accuracy,val_gap_capture,val_shortlist_gap_capture,val_coverage_capture,val_shortlist_coverage_capture,val_changed_fraction,val_no_op_fraction,val_damage_rate,val_recovery_rate,val_ranking_auc
+feature_mlp,101,1,1.1845469623804092,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan,nan
+feature_mlp,101,2,0.048875064589083195,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan,nan
+trace_transformer,101,1,0.4057048953914091,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan,nan
+trace_transformer,101,2,0.003242948254410294,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan,nan
+qwen_program_final,101,1,1.881354659795761,nan,,1.0,,,,,,,,,,,0.0,nan,
+qwen_program_final,101,2,1.974249541759491,nan,,1.0,,,,,,,,,,,0.0,nan,
+qwen_program_final_shuffled,101,1,1.8760805912315845,nan,,1.0,,,,,,,,,,,0.0,nan,
+qwen_program_final_shuffled,101,2,1.8239674381911755,nan,,1.0,,,,,,,,,,,0.0,nan,

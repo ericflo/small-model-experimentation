@@ -1,0 +1,3050 @@
+suite,run,arm,seed,trained,split,family,depth,example_id,answer,generated,target,exec_value,exec_error,primary_correct,exec_correct,final_correct,valid_exec,exact_program,has_final,failure_type,gold_ops,generated_ops
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,FINAL: invoice_56.txt,"FINAL: invoice_56.txt
+",,,1,0,1,0,0,1,n/a_answer_only,BASENAME,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,date,1,eval_indist_d1_date_9,2026-01-03,FINAL: 2026-01-03,"FINAL: 2026-01-03
+",,,1,0,1,0,0,1,n/a_answer_only,ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,string,1,eval_indist_d1_string_6,kc-3252-wf,FINAL: kc-3252-wf,"FINAL: kc-3252-wf
+",,,1,0,1,0,0,1,n/a_answer_only,LOWER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,number,1,eval_indist_d1_number_7,8,FINAL: 8,"FINAL: 8
+",,,1,0,1,0,0,1,n/a_answer_only,ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,FINAL: 14,"FINAL: 14
+",,,1,0,1,0,0,1,n/a_answer_only,LOOKUP,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,path,1,eval_indist_d1_path_11,/reports/daily,FINAL: /reports/daily,"FINAL: /reports/daily
+",,,1,0,1,0,0,1,n/a_answer_only,DIRNAME,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,FINAL: PU8482DF,"FINAL: PU8482DF
+",,,1,0,1,0,0,1,n/a_answer_only,STRIP_HYPHENS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,table,1,eval_indist_d1_table_8,25,FINAL: 25,"FINAL: 25
+",,,1,0,1,0,0,1,n/a_answer_only,LOOKUP,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,FINAL: 2026-02-18,"FINAL: 2026-02-18
+",,,1,0,1,0,0,1,n/a_answer_only,ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,FINAL: 112,"FINAL: 112
+",,,1,0,1,0,0,1,n/a_answer_only,MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,FINAL: 14,"FINAL: 18
+",,,0,0,0,0,0,1,n/a_answer_only,MAX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_indist_d1,list,1,eval_indist_d1_list_10,20,FINAL: 20,"FINAL: 20
+",,,1,0,1,0,0,1,n/a_answer_only,MAX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,date,2,eval_comp_d2_date_9,2026-06-11,FINAL: 2026-06-11,"FINAL: 2026-06-11
+",,,1,0,1,0,0,1,n/a_answer_only,ADD_WEEKS ADD_WEEKS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,path,2,eval_comp_d2_path_11,log,FINAL: log,"FINAL: log
+",,,1,0,1,0,0,1,n/a_answer_only,EXTENSION STRIP_EXT,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,FINAL: -12,"FINAL: -12
+",,,1,0,1,0,0,1,n/a_answer_only,SUB MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,FINAL: 48,"FINAL: 171
+",,,0,0,0,0,0,1,n/a_answer_only,SUM MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,string,2,eval_comp_d2_string_6,BZ-8673-DV,FINAL: BZ-8673-DV,"FINAL: BZ-8673-DV
+",,,1,0,1,0,0,1,n/a_answer_only,LOWER UPPER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,FINAL: 2026-07-18,"FINAL: 2026-07-24
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_WEEKS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,list,2,eval_comp_d2_list_10,14,FINAL: 14,"FINAL: 14
+",,,1,0,1,0,0,1,n/a_answer_only,MAX SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,FINAL: 37,"FINAL: 45
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD_LOOKUP,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,number,2,eval_comp_d2_number_7,-2,FINAL: -12,"FINAL: -2
+",,,0,0,0,0,0,1,n/a_answer_only,SUB SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,table,2,eval_comp_d2_table_8,56,FINAL: 14*4=16,"FINAL: 56
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,FINAL: yv-5212-ke,"FINAL: yv5212ke
+",,,0,0,0,0,0,1,n/a_answer_only,STRIP_HYPHENS LOWER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,FINAL: sales_51.json,"FINAL: json
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME EXTENSION,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,FINAL: 15,"FINAL: -10
+",,,0,0,0,0,0,1,n/a_answer_only,MAX SUB SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,FINAL: 2026-04-10 + 3 + 9 + 2 = 2026-04-10 + 14 = 2026-04-24,"FINAL: 2026-04-24
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,FINAL: ef,"FINAL: 7-ul
+",,,0,0,0,0,0,1,n/a_answer_only,LOWER REVERSE TAKE_SUFFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,string,3,eval_comp_d3_string_6,cv5171pc,FINAL: c1715vc,"FINAL: cv5171pc
+",,,0,0,0,0,0,1,n/a_answer_only,STRIP_HYPHENS LOWER REVERSE,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,FINAL: reports,"FINAL: /reports/alpha
+",,,0,0,0,0,0,1,n/a_answer_only,DIRNAME LOWER STRIP_EXT,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,list,3,eval_comp_d3_list_10,1140,FINAL: 100,"FINAL: 1140
+",,,0,0,0,0,0,1,n/a_answer_only,SUM MUL MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,FINAL: 54,"FINAL: 102
+",,,0,0,0,0,0,1,n/a_answer_only,ADD ADD MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,table,3,eval_comp_d3_table_8,52,FINAL: 33+8+11=42,"FINAL: 52
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,FINAL: 29*4*3=348,"FINAL: 348
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,path,3,eval_comp_d3_path_11,/ledger/alpha,FINAL: ledger,"FINAL: /ledger/alpha
+",,,0,0,0,0,0,1,n/a_answer_only,DIRNAME STRIP_EXT LOWER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,number,3,eval_comp_d3_number_7,33,FINAL: -1,"FINAL: 33
+",,,0,0,0,0,0,1,n/a_answer_only,SUB ADD ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d3,date,3,eval_comp_d3_date_9,2026-10-08,FINAL: 2026-10-01,"FINAL: 2026-10-08
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_WEEKS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,number,4,eval_comp_d4_number_7,21,FINAL: -1,"FINAL: 21
+",,,0,0,0,0,0,1,n/a_answer_only,SUB ADD SUB ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,FINAL: 2026-05-01,"FINAL: 2026-05-10
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,list,4,eval_comp_d4_list_10,15,FINAL: 10,"FINAL: 15
+",,,0,0,0,0,0,1,n/a_answer_only,MIN MUL MUL SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,FINAL: BX57E-Y,"FINAL: XB2597EY
+",,,0,0,0,0,0,1,n/a_answer_only,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,string,4,eval_comp_d4_string_6,TL8670,FINAL: TL8670,"FINAL: TL8670
+",,,1,0,1,0,0,1,n/a_answer_only,STRIP_HYPHENS UPPER UPPER TAKE_PREFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,FINAL: north,"FINAL: 
+",,,0,0,0,0,0,1,n/a_answer_only,DIRNAME DIRNAME EXTENSION STRIP_EXT,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,path,4,eval_comp_d4_path_11,,FINAL: csv,"FINAL: 
+",,,0,0,0,0,0,1,n/a_answer_only,EXTENSION STRIP_EXT EXTENSION LOWER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,date,4,eval_comp_d4_date_9,2026-06-22,FINAL: 2026-06-18,"FINAL: 2026-06-22
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,FINAL: 19,"FINAL: 108
+",,,0,0,0,0,0,1,n/a_answer_only,MAX MUL SUB ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,FINAL: 39,"FINAL: 73
+",,,0,0,0,0,0,1,n/a_answer_only,ADD MUL MUL SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,FINAL: 56,"FINAL: 72
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d4,table,4,eval_comp_d4_table_8,77,FINAL: 27 + 6 + 2*11 = 27 + 6 + 22 = 55,"FINAL: 77
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,list,6,eval_comp_d6_list_10,-7,FINAL: 15,"FINAL: -7
+",,,0,0,0,0,0,1,n/a_answer_only,MIN SUB SUB MUL ADD ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,FINAL: 210,"FINAL: 15120
+",,,0,0,0,0,0,1,n/a_answer_only,MAX MUL MUL MUL MUL MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,FINAL: YD821R,"FINAL: 6182YD
+",,,0,0,0,0,0,1,n/a_answer_only,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,string,6,eval_comp_d6_string_6,sl-6,FINAL: Kt-8116-ls,"FINAL: sl-6
+",,,0,0,0,0,0,1,n/a_answer_only,UPPER UPPER LOWER REVERSE LOWER TAKE_PREFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,date,6,eval_comp_d6_date_9,2026-03-08,FINAL: 2026-02-05,"FINAL: 2026-03-08
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,FINAL: 2027-08-17,"FINAL: 2026-09-03
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,FINAL: 115,"FINAL: 711
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,path,6,eval_comp_d6_path_11,/,FINAL: log,"FINAL: /
+",,,0,0,0,0,0,1,n/a_answer_only,EXTENSION UPPER BASENAME LOWER DIRNAME STRIP_EXT,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,number,6,eval_comp_d6_number_7,9792,FINAL: 13*3=39; 39+3=42; 42*6=252; 252+20=272; 272*6=1632; 1632*6=9792,"FINAL: 9792
+",,,0,0,0,0,0,1,n/a_answer_only,MUL ADD MUL ADD MUL MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,table,6,eval_comp_d6_table_8,1266,FINAL: 18 + 8 = 26; 26 * 4 = 104; 104 * 4 = 416; 416 + 6 = 422; 422 * 3 = 1266,"FINAL: 1266
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD_LOOKUP MUL MUL ADD MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,FINAL: CSV,"FINAL: 
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,FINAL: 10,"FINAL: 36
+",,,0,0,0,0,0,1,n/a_answer_only,MUL MUL SUB ADD SUB ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,FINAL: LOG,"FINAL: LOG
+",,,1,0,1,0,0,1,n/a_answer_only,EXTENSION UPPER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,FINAL: RP-1822-GY,"FINAL: RP-182
+",,,0,0,0,0,0,1,n/a_answer_only,UPPER TAKE_PREFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,FINAL: 188,"FINAL: 190
+",,,0,0,0,0,0,1,n/a_answer_only,MUL ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,string,2,eval_template_d2_string_6,KW-3,FINAL: KW-3696,"FINAL: KW-3
+",,,0,0,0,0,0,1,n/a_answer_only,UPPER TAKE_PREFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,FINAL: -8,"FINAL: -12
+",,,0,0,0,0,0,1,n/a_answer_only,MIN SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,date,2,eval_template_d2_date_9,2026-10-10,FINAL: 2026-10-01,"FINAL: 2026-10-10
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,path,2,eval_template_d2_path_11,/,FINAL: invoice_66.csv,"FINAL: /
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME DIRNAME,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,number,2,eval_template_d2_number_7,17,FINAL: 17,"FINAL: 17
+",,,1,0,1,0,0,1,n/a_answer_only,ADD ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,list,2,eval_template_d2_list_10,25,FINAL: 25,"FINAL: 25
+",,,1,0,1,0,0,1,n/a_answer_only,MAX ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,FINAL: 41,"FINAL: 41
+",,,1,0,1,0,0,1,n/a_answer_only,LOOKUP ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,FINAL: 2026-02-22,"FINAL: 2026-03-01
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_WEEKS ADD_WEEKS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d2,table,2,eval_template_d2_table_8,39,FINAL: 39,"FINAL: 39
+",,,1,0,1,0,0,1,n/a_answer_only,LOOKUP ADD_LOOKUP,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,list,4,eval_template_d4_list_10,143,FINAL: 119,"FINAL: 143
+",,,0,0,0,0,0,1,n/a_answer_only,MAX MUL ADD ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,number,4,eval_template_d4_number_7,-525,FINAL: 1,"FINAL: -525
+",,,0,0,0,0,0,1,n/a_answer_only,SUB SUB MUL MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,FINAL: 18,"FINAL: 102
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL ADD ADD_LOOKUP,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,FINAL: ut,"FINAL: 988-fx
+",,,0,0,0,0,0,1,n/a_answer_only,LOWER REVERSE LOWER TAKE_SUFFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,table,4,eval_template_d4_table_8,1800,FINAL: 450,"FINAL: 1800
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP MUL MUL MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,string,4,eval_template_d4_string_6,CF9776YT,FINAL: CFC779Y,"FINAL: CF9776YT
+",,,0,0,0,0,0,1,n/a_answer_only,LOWER STRIP_HYPHENS REVERSE UPPER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,FINAL: 1,"FINAL: -33
+",,,0,0,0,0,0,1,n/a_answer_only,SUB SUB MUL ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,FINAL: 2026-07-29,"FINAL: 2026-08-15
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,path,4,eval_template_d4_path_11,,FINAL: errors,"FINAL: 
+",,,0,0,0,0,0,1,n/a_answer_only,EXTENSION EXTENSION LOWER STRIP_EXT,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,FINAL: 2,"FINAL: -98
+",,,0,0,0,0,0,1,n/a_answer_only,MIN SUB SUB MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,FINAL: JSON,"FINAL: INVOICE_96.JSON
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME UPPER UPPER BASENAME,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d4,date,4,eval_template_d4_date_9,2026-12-08,FINAL: 2027-01-06,"FINAL: 2026-12-08
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,string,6,eval_template_d6_string_6,dp6373,FINAL: pd3736,"FINAL: dp6373
+",,,0,0,0,0,0,1,n/a_answer_only,REVERSE LOWER REVERSE STRIP_HYPHENS REVERSE TAKE_PREFIX,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,date,6,eval_template_d6_date_9,2027-01-27,FINAL: 2027-01-06,"FINAL: 2027-01-27
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_WEEKS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,FINAL: 2027-01-03,"FINAL: 2026-11-07
+",,,0,0,0,0,0,1,n/a_answer_only,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,FINAL: invoice,"FINAL: /
+",,,0,0,0,0,0,1,n/a_answer_only,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,FINAL: bk6324,"FINAL: ee6324bk
+",,,0,0,0,0,0,1,n/a_answer_only,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,path,6,eval_template_d6_path_11,,FINAL: SALES,"FINAL: 
+",,,0,0,0,0,0,1,n/a_answer_only,BASENAME DIRNAME UPPER BASENAME DIRNAME EXTENSION,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,FINAL: 1,"FINAL: 205
+",,,0,0,0,0,0,1,n/a_answer_only,MIN MUL MUL ADD MUL SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,FINAL: 59,"FINAL: 410
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,FINAL: 19,"FINAL: 42
+",,,0,0,0,0,0,1,n/a_answer_only,SUB ADD SUB MUL ADD ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,number,6,eval_template_d6_number_7,-116,FINAL: 1,"FINAL: -116
+",,,0,0,0,0,0,1,n/a_answer_only,SUB SUB MUL MUL SUB SUB,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,table,6,eval_template_d6_table_8,79,FINAL: 41,"FINAL: 79
+",,,0,0,0,0,0,1,n/a_answer_only,LOOKUP ADD ADD ADD MUL ADD,
+pilot,pilot_v1_answer_only_s101,answer_only,101,1,eval_template_d6,list,6,eval_template_d6_list_10,50,FINAL: 17,"FINAL: 50
+",,,0,0,0,0,0,1,n/a_answer_only,MAX MUL ADD SUB SUB ADD,
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,"STEP 1: PUSH_TEXT /reports/alpha/invoice_56.txt
+STEP 2: BASENAME
+FINAL invoice_56.txt","STEP 1: PUSH_TEXT /reports/alpha/invoice_56.txt
+STEP 2: BASENAME
+FINAL invoice_56.txt
+",invoice_56.txt,,1,1,1,1,1,1,correct_exact,BASENAME,PUSH_TEXT BASENAME
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,date,1,eval_indist_d1_date_9,2026-01-03,"STEP 1: PUSH_DATE 2026-01-02
+STEP 2: ADD_DAYS 1
+FINAL 2026-01-03","STEP 1: PUSH_DATE 2026-01-02
+STEP 2: ADD_DAYS 1
+FINAL 2026-01-03
+",2026-01-03,,1,1,1,1,1,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,string,1,eval_indist_d1_string_6,kc-3252-wf,"STEP 1: PUSH_TEXT KC-3252-WF
+STEP 2: LOWER
+FINAL kc-3252-wf","STEP 1: PUSH_TEXT KC-3252-WF
+STEP 2: LOWER
+FINAL kc-3252-wf
+",kc-3252-wf,,1,1,1,1,1,1,correct_exact,LOWER,PUSH_TEXT LOWER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,number,1,eval_indist_d1_number_7,8,"STEP 1: PUSH 5
+STEP 2: ADD 3
+FINAL 8","STEP 1: PUSH 5
+STEP 2: ADD 3
+FINAL 8
+",8,,1,1,1,1,1,1,correct_exact,ADD,PUSH ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"STEP 1: TABLE alpha:14 beta:37 delta:33 gamma:28
+STEP 2: LOOKUP alpha
+FINAL 14","STEP 1: TABLE alpha:14 beta:37 delta:33 gamma:28
+STEP 2: LOOKUP alpha
+FINAL 14
+",14,,1,1,1,1,1,1,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,path,1,eval_indist_d1_path_11,/reports/daily,"STEP 1: PUSH_TEXT /reports/daily/invoice_55.json
+STEP 2: DIRNAME
+FINAL /reports/daily","STEP 1: PUSH_TEXT /reports/daily/invoice_55.json
+STEP 2: DIRNAME
+FINAL /reports/daily
+",/reports/daily,,1,1,1,1,1,1,correct_exact,DIRNAME,PUSH_TEXT DIRNAME
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"STEP 1: PUSH_TEXT PU-8482-DF
+STEP 2: STRIP_HYPHENS
+FINAL PU8482DF","STEP 1: PUSH_TEXT PU-8482-DF
+STEP 2: STRIP_HYPHENS
+FINAL PU8482DF
+",PU8482DF,,1,1,1,1,1,1,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,table,1,eval_indist_d1_table_8,25,"STEP 1: TABLE alpha:14 beta:27 delta:37 gamma:25
+STEP 2: LOOKUP gamma
+FINAL 25","STEP 1: TABLE alpha:14 beta:27 delta:37 gamma:25
+STEP 2: LOOKUP gamma
+FINAL 25
+",25,,1,1,1,1,1,1,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"STEP 1: PUSH_DATE 2026-02-15
+STEP 2: ADD_DAYS 3
+FINAL 2026-02-18","STEP 1: PUSH_DATE 2026-02-15
+STEP 2: ADD_DAYS 3
+FINAL 2026-02-18
+",2026-02-18,,1,1,1,1,1,1,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"STEP 1: PUSH 28
+STEP 2: MUL 4
+FINAL 112","STEP 1: PUSH 28
+STEP 2: MUL 4
+FINAL 112
+",112,,1,1,1,1,1,1,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,"STEP 1: PUSH_LIST 18 2 14 10 14 3
+STEP 2: MAX
+FINAL 18","STEP 1: PUSH_LIST 18 2 14 10 14 3
+STEP 2: MAX
+FINAL 18
+",18,,1,1,1,1,1,1,correct_exact,MAX,PUSH_LIST MAX
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_indist_d1,list,1,eval_indist_d1_list_10,20,"STEP 1: PUSH_LIST 20 18 12 5 7
+STEP 2: MAX
+FINAL 20","STEP 1: PUSH_LIST 20 18 12 5 7
+STEP 2: MAX
+FINAL 20
+",20,,1,1,1,1,1,1,correct_exact,MAX,PUSH_LIST MAX
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,date,2,eval_comp_d2_date_9,2026-06-11,"STEP 1: PUSH_DATE 2026-05-07
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 2
+FINAL 2026-06-24","STEP 1: PUSH_DATE 2026-05-07
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 2
+FINAL 2026-06-11
+",2026-06-11,,1,1,0,1,1,1,correct_exact,ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,path,2,eval_comp_d2_path_11,log,"STEP 1: PUSH_TEXT /reports/daily/invoice_88.log
+STEP 2: EXTENSION
+STEP 3: STRIP_EXTENSION
+FINAL log","STEP 1: PUSH_TEXT /reports/daily/invoice_88.log
+STEP 2: EXTENSION
+STEP 3: STRIP_EXT
+FINAL log
+",,unknown_op:STRIP_EXTENSION,0,0,1,0,0,1,invalid_or_unexecutable,EXTENSION STRIP_EXT,PUSH_TEXT EXTENSION STRIP_EXTENSION
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"STEP 1: PUSH 18
+STEP 2: SUB 24
+STEP 3: MUL 2
+FINAL -12","STEP 1: PUSH 18
+STEP 2: SUB 24
+STEP 3: MUL 2
+FINAL -12
+",-12,,1,1,1,1,1,1,correct_exact,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,"STEP 1: PUSH_LIST 10 11 18 2 11 5
+STEP 2: SUM
+STEP 3: MUL 3
+FINAL 66","STEP 1: PUSH_LIST 10 11 18 2 11 5
+STEP 2: SUM
+STEP 3: MUL 3
+FINAL 171
+",171,,1,1,0,1,1,1,correct_exact,SUM MUL,PUSH_LIST SUM MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,string,2,eval_comp_d2_string_6,BZ-8673-DV,"STEP 1: PUSH_TEXT BZ-8673-DV
+STEP 2: LOWER
+FINAL bz-8673-dv","STEP 1: PUSH_TEXT BZ-8673-DV
+STEP 2: LOWER
+STEP 3: UPPER
+FINAL BZ-8673-DV
+",bz-8673-dv,,0,0,0,1,0,1,wrong_op_order_or_choice,LOWER UPPER,PUSH_TEXT LOWER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"STEP 1: PUSH_DATE 2026-07-01
+STEP 2: ADD_WEEKS 2
+STEP 3: ADD_DAYS 9
+FINAL 2026-08-09","STEP 1: PUSH_DATE 2026-07-01
+STEP 2: ADD_WEEKS 2
+STEP 3: ADD_DAYS 9
+FINAL 2026-07-24
+",2026-07-24,,1,1,0,1,1,1,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,list,2,eval_comp_d2_list_10,14,"STEP 1: PUSH_LIST 6 14 8 20
+STEP 2: MAX
+STEP 3: SUB 6
+FINAL 14","STEP 1: PUSH_LIST 6 14 8 20
+STEP 2: MAX
+STEP 3: SUB 6
+FINAL 14
+",14,,1,1,1,1,1,1,correct_exact,MAX SUB,PUSH_LIST MAX SUB
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"STEP 1: TABLE alpha:11 beta:36 delta:37 gamma:8
+STEP 2: LOOKUP delta
+STEP 3: ADD gamma
+FINAL 8","STEP 1: TABLE alpha:11 beta:36 delta:37 gamma:8
+STEP 2: LOOKUP delta
+STEP 3: ADD_LOOKUP gamma
+FINAL 45
+",,ValueError,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,number,2,eval_comp_d2_number_7,-2,"STEP 1: PUSH 15
+STEP 2: SUB 4
+STEP 3: SUB 13
+FINAL 15 - 4 - 13 = -2","STEP 1: PUSH 15
+STEP 2: SUB 4
+STEP 3: SUB 13
+FINAL -2
+",-2,,1,1,0,1,1,1,correct_exact,SUB SUB,PUSH SUB SUB
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,table,2,eval_comp_d2_table_8,56,"STEP 1: TABLE alpha:14 beta:2 delta:23 omega:38
+STEP 2: LOOKUP alpha
+STEP 3: MULTIPLY 14 BY 4
+FINAL 56","STEP 1: TABLE alpha:14 beta:2 delta:23 omega:38
+STEP 2: LOOKUP alpha
+STEP 3: MUL 4
+FINAL 56
+",,unknown_op:MULTIPLY,0,0,1,0,0,1,invalid_or_unexecutable,LOOKUP MUL,TABLE LOOKUP MULTIPLY
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"STEP 1: PUSH_TEXT YV-5212-KE
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+FINAL yv5212ke","STEP 1: PUSH_TEXT YV-5212-KE
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+FINAL yv5212ke
+",yv5212ke,,1,1,1,1,1,1,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,"STEP 1: PUSH_TEXT /archive/south/sales_51.json
+STEP 2: BASENAME
+STEP 3: EXTENSION
+FINAL sales_51.json","STEP 1: PUSH_TEXT /archive/south/sales_51.json
+STEP 2: BASENAME
+STEP 3: EXTENSION
+FINAL json
+",json,,1,1,0,1,1,1,correct_exact,BASENAME EXTENSION,PUSH_TEXT BASENAME EXTENSION
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,"STEP 1: PUSH_LIST 7 4 8 15 9 5 15
+STEP 2: MAX
+STEP 3: SUB 12
+STEP 4: SUB 13
+FINAL 12","STEP 1: PUSH_LIST 7 4 8 15 9 5 15
+STEP 2: MAX
+STEP 3: SUB 12
+STEP 4: SUB 13
+FINAL -10
+",-10,,1,1,0,1,1,1,correct_exact,MAX SUB SUB,PUSH_LIST MAX SUB SUB
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"STEP 1: PUSH_DATE 2026-04-10
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_DAYS 2
+FINAL 2026-05-15","STEP 1: PUSH_DATE 2026-04-10
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_DAYS 2
+FINAL 2026-04-24
+",2026-04-24,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"STEP 1: PUSH_TEXT lu-7864-ef
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: LAST 4
+FINAL 4467","STEP 1: PUSH_TEXT LU-7864-EF
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: TAKE_SUFFIX 4
+FINAL 7-ul
+",,unknown_op:LAST,0,0,0,0,0,1,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE LAST
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,string,3,eval_comp_d3_string_6,cv5171pc,"STEP 1: PUSH_TEXT CP-1715-VC
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+STEP 4: REVERSE
+FINAL cve5171p","STEP 1: PUSH_TEXT CP-1715-VC
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+STEP 4: REVERSE
+FINAL cv5171pc
+",cv5171pc,,1,1,0,1,1,1,correct_exact,STRIP_HYPHENS LOWER REVERSE,PUSH_TEXT STRIP_HYPHENS LOWER REVERSE
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,"STEP 1: PUSH_TEXT /reports/alpha/invoice_22.txt
+STEP 2: DIRNAME
+STEP 3: LOWER
+STEP 4: BASENAME
+FINAL /reports/alpha","STEP 1: PUSH_TEXT /reports/alpha/invoice_22.txt
+STEP 2: DIRNAME
+STEP 3: LOWER
+STEP 4: STRIP_EXT
+FINAL /reports/alpha
+",alpha,,0,0,1,1,0,1,wrong_op_order_or_choice,DIRNAME LOWER STRIP_EXT,PUSH_TEXT DIRNAME LOWER BASENAME
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,list,3,eval_comp_d3_list_10,1140,"STEP 1: PUSH_LIST 1 2 19 15 20
+STEP 2: SUM
+STEP 3: MUL 4
+STEP 4: MUL 5
+FINAL 110","STEP 1: PUSH_LIST 1 2 19 15 20
+STEP 2: SUM
+STEP 3: MUL 4
+STEP 4: MUL 5
+FINAL 1140
+",1140,,1,1,0,1,1,1,correct_exact,SUM MUL MUL,PUSH_LIST SUM MUL MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"STEP 1: PUSH 8
+STEP 2: ADD 4
+STEP 3: ADD 5
+STEP 4: MUL 6
+FINAL 504","STEP 1: PUSH 8
+STEP 2: ADD 4
+STEP 3: ADD 5
+STEP 4: MUL 6
+FINAL 102
+",102,,1,1,0,1,1,1,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,table,3,eval_comp_d3_table_8,52,"STEP 1: TABLE alpha:14 delta:17 gamma:33 omega:2
+STEP 2: LOOKUP gamma
+STEP 3: ADD 8
+STEP 4: ADD 11
+FINAL 54","STEP 1: TABLE alpha:14 delta:17 gamma:33 omega:2
+STEP 2: LOOKUP gamma
+STEP 3: ADD 8
+STEP 4: ADD 11
+FINAL 52
+",52,,1,1,0,1,1,1,correct_exact,LOOKUP ADD ADD,TABLE LOOKUP ADD ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"STEP 1: TABLE alpha:21 beta:29 gamma:13 omega:26
+STEP 2: LOOKUP beta
+STEP 3: MULT beta 4
+STEP 4: MULT beta 3
+FINAL 117","STEP 1: TABLE alpha:21 beta:29 gamma:13 omega:26
+STEP 2: LOOKUP beta
+STEP 3: MUL 4
+STEP 4: MUL 3
+FINAL 348
+",,unknown_op:MULT,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP MULT MULT
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,path,3,eval_comp_d3_path_11,/ledger/alpha,"STEP 1: PUSH_TEXT /ledger/alpha/sales_44.json
+STEP 2: DIRNAME
+STEP 3: BASENAME
+STEP 4: LOWER
+FINAL /ledger/alpha/sales","STEP 1: PUSH_TEXT /ledger/alpha/sales_44.json
+STEP 2: DIRNAME
+STEP 3: STRIP_EXT
+STEP 4: LOWER
+FINAL /ledger/alpha
+",alpha,,0,0,0,1,0,1,wrong_op_order_or_choice,DIRNAME STRIP_EXT LOWER,PUSH_TEXT DIRNAME BASENAME LOWER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,number,3,eval_comp_d3_number_7,33,"STEP 1: PUSH 14
+STEP 2: SUB 14
+FINAL 23","STEP 1: PUSH 14
+STEP 2: SUB 14
+STEP 3: ADD 23
+STEP 4: ADD 10
+FINAL 33
+",0,,0,0,0,1,0,1,wrong_op_order_or_choice,SUB ADD ADD,PUSH SUB
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d3,date,3,eval_comp_d3_date_9,2026-10-08,"STEP 1: PUSH_DATE 2026-09-14
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 9
+FINAL 2026-10-13","STEP 1: PUSH_DATE 2026-09-14
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 9
+FINAL 2026-10-08
+",2026-10-08,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,number,4,eval_comp_d4_number_7,21,"STEP 1: PUSH 7
+STEP 2: SUB 11
+STEP 3: ADD 15
+STEP 4: SUB 3
+STEP 5: ADD 13
+FINAL -2","STEP 1: PUSH 7
+STEP 2: SUB 11
+STEP 3: ADD 15
+STEP 4: SUB 3
+STEP 5: ADD 13
+FINAL 21
+",21,,1,1,0,1,1,1,correct_exact,SUB ADD SUB ADD,PUSH SUB ADD SUB ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"STEP 1: PUSH_DATE 2026-04-16
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 5
+STEP 4: ADD_DAYS 7
+STEP 5: ADD_DAYS 7
+FINAL 2026-05-28","STEP 1: PUSH_DATE 2026-04-16
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 5
+STEP 4: ADD_DAYS 7
+STEP 5: ADD_DAYS 7
+FINAL 2026-05-10
+",2026-05-10,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,list,4,eval_comp_d4_list_10,15,"STEP 1: PUSH_LIST 1 16 10 15
+STEP 2: MIN
+STEP 3: MUL 4
+STEP 4: MUL 5
+STEP 5: SUB 5
+FINAL 35","STEP 1: PUSH_LIST 1 16 10 15
+STEP 2: MIN
+STEP 3: MUL 4
+STEP 4: MUL 5
+STEP 5: SUB 5
+FINAL 15
+",15,,1,1,0,1,1,1,correct_exact,MIN MUL MUL SUB,PUSH_LIST MIN MUL MUL SUB
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"STEP 1: PUSH_TEXT YE-7952-BX
+STEP 2: STRIP_HYPHENS
+STEP 3: STRIP_HYPHENS
+STEP 4: STRIP_HYPHENS
+STEP 5: REVERSE
+FINAL 79522957","STEP 1: PUSH_TEXT YE-7952-BX
+STEP 2: STRIP_HYPHENS
+STEP 3: STRIP_HYPHENS
+STEP 4: STRIP_HYPHENS
+STEP 5: REVERSE
+FINAL XB2597EY
+",XB2597EY,,1,1,0,1,1,1,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,string,4,eval_comp_d4_string_6,TL8670,"STEP 1: PUSH_TEXT TL-8670-WX
+STEP 2: STRIP_HYPHENS
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: SUBSTR 6
+FINAL TL8670","STEP 1: PUSH_TEXT TL-8670-WX
+STEP 2: STRIP_HYPHENS
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: TAKE_PREFIX 6
+FINAL TL8670
+",,unknown_op:SUBSTR,0,0,1,0,0,1,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER TAKE_PREFIX,PUSH_TEXT STRIP_HYPHENS UPPER UPPER SUBSTR
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,"STEP 1: PUSH_TEXT /ledger/north/index_98.log
+STEP 2: DIRNAME
+STEP 3: DIRNAME
+STEP 4: EXTNAME
+STEP 5: BASENAME
+FINAL /north","STEP 1: PUSH_TEXT /ledger/north/index_98.log
+STEP 2: DIRNAME
+STEP 3: DIRNAME
+STEP 4: EXTENSION
+STEP 5: STRIP_EXT
+FINAL 
+",,unknown_op:EXTNAME,0,0,0,0,0,1,invalid_or_unexecutable,DIRNAME DIRNAME EXTENSION STRIP_EXT,PUSH_TEXT DIRNAME DIRNAME EXTNAME BASENAME
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,path,4,eval_comp_d4_path_11,,"STEP 1: PUSH_TEXT /reports/alpha/invoice_45.csv
+STEP 2: EXTENSION
+STEP 3: STRIP_EXTENSION
+STEP 4: EXTENSION
+STEP 5: LOWER
+FINAL csv","STEP 1: PUSH_TEXT /reports/alpha/invoice_45.csv
+STEP 2: EXTENSION
+STEP 3: STRIP_EXT
+STEP 4: EXTENSION
+STEP 5: LOWER
+FINAL 
+",,unknown_op:STRIP_EXTENSION,0,0,0,0,0,1,invalid_or_unexecutable,EXTENSION STRIP_EXT EXTENSION LOWER,PUSH_TEXT EXTENSION STRIP_EXTENSION EXTENSION LOWER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,date,4,eval_comp_d4_date_9,2026-06-22,"STEP 1: PUSH_DATE 2026-05-14
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 3
+STEP 4: ADD_WEEKS 4
+STEP 5: ADD_DAYS 5
+FINAL 2026-07-15","STEP 1: PUSH_DATE 2026-05-14
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 3
+STEP 4: ADD_WEEKS 4
+STEP 5: ADD_DAYS 5
+FINAL 2026-06-22
+",2026-06-22,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,"STEP 1: PUSH 10
+STEP 2: PUSH 19
+STEP 3: PUSH 5
+STEP 4: PUSH 16
+STEP 5: PUSH 14
+STEP 6: PUSH 1
+STEP 7: MAX
+STEP 8: MUL 6
+STEP 9: SUB 12
+STEP 10: ADD 6
+FINAL 102","STEP 1: PUSH_LIST 10 19 5 16 14 1
+STEP 2: MAX
+STEP 3: MUL 6
+STEP 4: SUB 12
+STEP 5: ADD 6
+FINAL 108
+",,TypeError,0,0,0,0,0,1,invalid_or_unexecutable,MAX MUL SUB ADD,PUSH PUSH PUSH PUSH PUSH PUSH MAX MUL SUB ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"STEP 1: PUSH 2
+STEP 2: ADD 5
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: SUB 11
+FINAL 29","STEP 1: PUSH 2
+STEP 2: ADD 5
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: SUB 11
+FINAL 73
+",73,,1,1,0,1,1,1,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"STEP 1: TABLE alpha:8 beta:23 delta:9 gamma:39
+STEP 2: LOOKUP alpha
+STEP 3: MULTIPLY 3
+STEP 4: ADD gamma
+STEP 5: ADD delta
+FINAL 60","STEP 1: TABLE alpha:8 beta:23 delta:9 gamma:39
+STEP 2: LOOKUP alpha
+STEP 3: MUL 3
+STEP 4: ADD_LOOKUP gamma
+STEP 5: ADD_LOOKUP delta
+FINAL 72
+",,unknown_op:MULTIPLY,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MULTIPLY ADD ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d4,table,4,eval_comp_d4_table_8,77,"STEP 1: TABLE alpha:11 beta:6 delta:27 gamma:16
+STEP 2: LOOKUP delta
+STEP 3: ADD beta
+STEP 4: MULTIPLY 2
+STEP 5: ADD alpha
+FINAL 60","STEP 1: TABLE alpha:11 beta:6 delta:27 gamma:16
+STEP 2: LOOKUP delta
+STEP 3: ADD_LOOKUP beta
+STEP 4: MUL 2
+STEP 5: ADD_LOOKUP alpha
+FINAL 77
+",,ValueError,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP,TABLE LOOKUP ADD MULTIPLY ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,list,6,eval_comp_d6_list_10,-7,"STEP 1: PUSH_LIST 15 2 15 16 5
+STEP 2: MIN
+STEP 3: SUB 14
+STEP 4: SUB 1
+STEP 5: MUL 2
+STEP 6: ADD 6
+STEP 7: ADD 13
+FINAL 18","STEP 1: PUSH_LIST 15 2 15 16 5
+STEP 2: MIN
+STEP 3: SUB 14
+STEP 4: SUB 1
+STEP 5: MUL 2
+STEP 6: ADD 6
+STEP 7: ADD 13
+FINAL -7
+",-7,,1,1,0,1,1,1,correct_exact,MIN SUB SUB MUL ADD ADD,PUSH_LIST MIN SUB SUB MUL ADD ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,"STEP 1: PUSH_LIST 7 4 12 3
+STEP 2: MAX
+STEP 3: MUL 7
+STEP 4: MUL 2
+STEP 5: MUL 5
+STEP 6: MUL 3
+STEP 7: MUL 6
+FINAL 1260","STEP 1: PUSH_LIST 7 4 12 3
+STEP 2: MAX
+STEP 3: MUL 7
+STEP 4: MUL 2
+STEP 5: MUL 5
+STEP 6: MUL 3
+STEP 7: MUL 6
+FINAL 15120
+",15120,,1,1,0,1,1,1,correct_exact,MAX MUL MUL MUL MUL MUL,PUSH_LIST MAX MUL MUL MUL MUL MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"STEP 1: PUSH_TEXT ZR-6182-YD
+STEP 2: REVERSE
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: REVERSE
+STEP 6: STRIP_HYPHENS
+STEP 7: LAST 6
+FINAL 2YD816","STEP 1: PUSH_TEXT ZR-6182-YD
+STEP 2: REVERSE
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: REVERSE
+STEP 6: STRIP_HYPHENS
+STEP 7: TAKE_SUFFIX 6
+FINAL 6182YD
+",,unknown_op:LAST,0,0,0,0,0,1,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS LAST
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,string,6,eval_comp_d6_string_6,sl-6,"STEP 1: PUSH_TEXT KT-8116-LS
+STEP 2: UPPER
+STEP 3: UPPER
+STEP 4: LOWER
+STEP 5: REVERSE
+STEP 6: LOWER
+STEP 7: TAKE 4
+FINAL K-81","STEP 1: PUSH_TEXT KT-8116-LS
+STEP 2: UPPER
+STEP 3: UPPER
+STEP 4: LOWER
+STEP 5: REVERSE
+STEP 6: LOWER
+STEP 7: TAKE_PREFIX 4
+FINAL sl-6
+",,unknown_op:TAKE,0,0,0,0,0,1,invalid_or_unexecutable,UPPER UPPER LOWER REVERSE LOWER TAKE_PREFIX,PUSH_TEXT UPPER UPPER LOWER REVERSE LOWER TAKE
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,date,6,eval_comp_d6_date_9,2026-03-08,"STEP 1: PUSH_DATE 2026-01-12
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 5
+STEP 6: ADD_DAYS 9
+STEP 7: ADD_DAYS 6
+FINAL 2026-03-10","STEP 1: PUSH_DATE 2026-01-12
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 5
+STEP 6: ADD_DAYS 9
+STEP 7: ADD_DAYS 6
+FINAL 2026-03-08
+",2026-03-08,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"STEP 1: PUSH_DATE 2026-07-15
+STEP 2: ADD_DAYS 2
+STEP 3: ADD_DAYS 7
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 6
+STEP 6: ADD_DAYS 6
+STEP 7: ADD_DAYS 8
+FINAL 2027-01-06","STEP 1: PUSH_DATE 2026-07-15
+STEP 2: ADD_DAYS 2
+STEP 3: ADD_DAYS 7
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 6
+STEP 6: ADD_DAYS 6
+STEP 7: ADD_DAYS 8
+FINAL 2026-09-03
+",2026-09-03,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"STEP 1: TABLE alpha:30 delta:17 gamma:29 omega:36
+STEP 2: LOOKUP omega
+STEP 3: MULT 2
+STEP 4: MULT 3
+STEP 5: ADD 4
+STEP 6: ADD delta
+STEP 7: MULT 3
+FINAL 117","STEP 1: TABLE alpha:30 delta:17 gamma:29 omega:36
+STEP 2: LOOKUP omega
+STEP 3: MUL 2
+STEP 4: MUL 3
+STEP 5: ADD 4
+STEP 6: ADD_LOOKUP delta
+STEP 7: MUL 3
+FINAL 711
+",,unknown_op:MULT,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MULT MULT ADD ADD MULT
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,path,6,eval_comp_d6_path_11,/,"STEP 1: PUSH_TEXT /ops/alpha/sales_97.log
+STEP 2: EXTENSION
+STEP 3: UPPER
+STEP 4: BASENAME
+STEP 5: LOWER
+STEP 6: DIRNAME
+STEP 7: STRIP_EXT
+FINAL LOG","STEP 1: PUSH_TEXT /ops/alpha/sales_97.log
+STEP 2: EXTENSION
+STEP 3: UPPER
+STEP 4: BASENAME
+STEP 5: LOWER
+STEP 6: DIRNAME
+STEP 7: STRIP_EXT
+FINAL /
+",/,,1,1,0,1,1,1,correct_exact,EXTENSION UPPER BASENAME LOWER DIRNAME STRIP_EXT,PUSH_TEXT EXTENSION UPPER BASENAME LOWER DIRNAME STRIP_EXT
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,number,6,eval_comp_d6_number_7,9792,"STEP 1: PUSH 13
+STEP 2: MUL 3
+STEP 3: ADD 3
+STEP 4: MUL 6
+STEP 5: ADD 20
+STEP 6: MUL 6
+STEP 7: MUL 6
+FINAL 1512","STEP 1: PUSH 13
+STEP 2: MUL 3
+STEP 3: ADD 3
+STEP 4: MUL 6
+STEP 5: ADD 20
+STEP 6: MUL 6
+STEP 7: MUL 6
+FINAL 9792
+",9792,,1,1,0,1,1,1,correct_exact,MUL ADD MUL ADD MUL MUL,PUSH MUL ADD MUL ADD MUL MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,table,6,eval_comp_d6_table_8,1266,"STEP 1: TABLE alpha:18 beta:22 delta:8 gamma:35
+STEP 2: LOOKUP alpha
+STEP 3: ADD delta
+STEP 4: MULTIPLY 4
+STEP 5: MULTIPLY 4
+STEP 6: ADD 6
+STEP 7: MULTIPLY 3
+FINAL 126","STEP 1: TABLE alpha:18 beta:22 delta:8 gamma:35
+STEP 2: LOOKUP alpha
+STEP 3: ADD_LOOKUP delta
+STEP 4: MUL 4
+STEP 5: MUL 4
+STEP 6: ADD 6
+STEP 7: MUL 3
+FINAL 1266
+",,ValueError,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL MUL ADD MUL,TABLE LOOKUP ADD MULTIPLY MULTIPLY ADD MULTIPLY
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,"STEP 1: PUSH_TEXT /reports/daily/sales_31.csv
+STEP 2: BASENAME
+STEP 3: EXTENSION
+STEP 4: DIRNAME
+STEP 5: UPPER
+STEP 6: EXTENSION
+FINAL CSV","STEP 1: PUSH_TEXT /reports/daily/sales_31.csv
+STEP 2: BASENAME
+STEP 3: STRIP_EXT
+STEP 4: EXTENSION
+STEP 5: DIRNAME
+STEP 6: UPPER
+STEP 7: EXTENSION
+FINAL 
+",,,1,1,0,1,0,1,correct_semantic_variant,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,PUSH_TEXT BASENAME EXTENSION DIRNAME UPPER EXTENSION
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"STEP 1: PUSH 10
+STEP 2: MUL 2
+STEP 3: MUL 2
+STEP 4: SUB 8
+STEP 5: ADD 10
+STEP 6: SUB 22
+STEP 7: ADD 16
+FINAL 24","STEP 1: PUSH 10
+STEP 2: MUL 2
+STEP 3: MUL 2
+STEP 4: SUB 8
+STEP 5: ADD 10
+STEP 6: SUB 22
+STEP 7: ADD 16
+FINAL 36
+",36,,1,1,0,1,1,1,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,"STEP 1: PUSH_TEXT /archive/daily/sales_33.log
+STEP 2: BASENAME
+STEP 3: SUFFIX
+STEP 4: UPPER
+FINAL LOG","STEP 1: PUSH_TEXT /archive/daily/sales_33.log
+STEP 2: EXTENSION
+STEP 3: UPPER
+FINAL LOG
+",,unknown_op:SUFFIX,0,0,1,0,0,1,invalid_or_unexecutable,EXTENSION UPPER,PUSH_TEXT BASENAME SUFFIX UPPER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"STEP 1: PUSH_TEXT RP-1822-GY
+STEP 2: UPPER
+FINAL RP-1822","STEP 1: PUSH_TEXT RP-1822-GY
+STEP 2: UPPER
+STEP 3: TAKE_PREFIX 6
+FINAL RP-182
+",RP-1822-GY,,0,0,0,1,0,1,wrong_op_order_or_choice,UPPER TAKE_PREFIX,PUSH_TEXT UPPER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"STEP 1: PUSH 24
+STEP 2: SCALE 7
+STEP 3: ADD 22
+FINAL 196","STEP 1: PUSH 24
+STEP 2: MUL 7
+STEP 3: ADD 22
+FINAL 190
+",,unknown_op:SCALE,0,0,0,0,0,1,invalid_or_unexecutable,MUL ADD,PUSH SCALE ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,string,2,eval_template_d2_string_6,KW-3,"STEP 1: PUSH_TEXT KW-3696-KH
+STEP 2: UPPER
+FINAL KW-36","STEP 1: PUSH_TEXT KW-3696-KH
+STEP 2: UPPER
+STEP 3: TAKE_PREFIX 4
+FINAL KW-3
+",KW-3696-KH,,0,0,0,1,0,1,wrong_op_order_or_choice,UPPER TAKE_PREFIX,PUSH_TEXT UPPER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,"STEP 1: PUSH 15
+STEP 2: PUSH 1
+STEP 3: PUSH 8
+STEP 4: PUSH 7
+STEP 5: PUSH 10
+STEP 6: MIN
+STEP 7: SUB 13
+FINAL 1","STEP 1: PUSH_LIST 15 1 8 7 10
+STEP 2: MIN
+STEP 3: SUB 13
+FINAL -12
+",,TypeError,0,0,0,0,0,1,invalid_or_unexecutable,MIN SUB,PUSH PUSH PUSH PUSH PUSH MIN SUB
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,date,2,eval_template_d2_date_9,2026-10-10,"STEP 1: PUSH_DATE 2026-09-22
+STEP 2: ADD_DAYS 9
+STEP 3: ADD_DAYS 9
+FINAL 2026-10-11","STEP 1: PUSH_DATE 2026-09-22
+STEP 2: ADD_DAYS 9
+STEP 3: ADD_DAYS 9
+FINAL 2026-10-10
+",2026-10-10,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,path,2,eval_template_d2_path_11,/,"STEP 1: PUSH_TEXT /client/daily/invoice_66.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME
+FINAL invoice_66","STEP 1: PUSH_TEXT /client/daily/invoice_66.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME
+FINAL /
+",/,,1,1,0,1,1,1,correct_exact,BASENAME DIRNAME,PUSH_TEXT BASENAME DIRNAME
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,number,2,eval_template_d2_number_7,17,"STEP 1: PUSH 6
+STEP 2: ADD 5
+STEP 3: ADD 6
+FINAL 17","STEP 1: PUSH 6
+STEP 2: ADD 5
+STEP 3: ADD 6
+FINAL 17
+",17,,1,1,1,1,1,1,correct_exact,ADD ADD,PUSH ADD ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,list,2,eval_template_d2_list_10,25,"STEP 1: PUSH 6
+STEP 2: PUSH 17
+STEP 3: PUSH 9
+STEP 4: PUSH 6
+STEP 5: PUSH 9
+STEP 6: PUSH 8
+STEP 7: MAX
+STEP 8: ADD 8
+FINAL 25","STEP 1: PUSH_LIST 6 17 9 6 9 8
+STEP 2: MAX
+STEP 3: ADD 8
+FINAL 25
+",,TypeError,0,0,1,0,0,1,invalid_or_unexecutable,MAX ADD,PUSH PUSH PUSH PUSH PUSH PUSH MAX ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"STEP 1: PUSH 16
+STEP 2: PUSH 14
+STEP 3: PUSH 29
+STEP 4: PUSH 26
+STEP 5: LOOKUP DELTA
+STEP 6: ADD 12
+FINAL 41","STEP 1: TABLE alpha:16 beta:14 delta:29 gamma:26
+STEP 2: LOOKUP delta
+STEP 3: ADD 12
+FINAL 41
+",,KeyError,0,0,1,0,0,1,invalid_or_unexecutable,LOOKUP ADD,PUSH PUSH PUSH PUSH LOOKUP ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,"STEP 1: PUSH_DATE 2026-01-18
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 3
+FINAL 2026-03-01","STEP 1: PUSH_DATE 2026-01-18
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 3
+FINAL 2026-03-01
+",2026-03-01,,1,1,1,1,1,1,correct_exact,ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d2,table,2,eval_template_d2_table_8,39,"STEP 1: PUSH 24
+STEP 2: PUSH 5
+STEP 3: ADD
+STEP 4: PUSH 15
+STEP 5: ADD
+FINAL 44","STEP 1: TABLE alpha:24 beta:5 delta:15 omega:31
+STEP 2: LOOKUP alpha
+STEP 3: ADD_LOOKUP delta
+FINAL 39
+",44,,0,0,0,1,0,1,wrong_op_order_or_choice,LOOKUP ADD_LOOKUP,PUSH PUSH ADD PUSH ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,list,4,eval_template_d4_list_10,143,"STEP 1: PUSH 17
+STEP 2: PUSH 16
+STEP 3: PUSH 11
+STEP 4: PUSH 20
+STEP 5: PUSH 18
+STEP 6: PUSH 3
+STEP 7: PUSH 11
+STEP 8: MAX
+STEP 9: MUL 6
+STEP 10: ADD 11
+STEP 11: ADD 12","STEP 1: PUSH_LIST 17 16 11 20 18 3 11
+STEP 2: MAX
+STEP 3: MUL 6
+STEP 4: ADD 11
+STEP 5: ADD 12
+FINAL 143
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL ADD ADD,PUSH PUSH PUSH PUSH PUSH PUSH PUSH MAX MUL ADD ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,number,4,eval_template_d4_number_7,-525,"STEP 1: PUSH 13
+STEP 2: VAL 13
+STEP 3: DEC 13
+STEP 4: DEC 21
+STEP 5: SCALE 5
+STEP 6: SCALE 5
+FINAL 10","STEP 1: PUSH 13
+STEP 2: SUB 13
+STEP 3: SUB 21
+STEP 4: MUL 5
+STEP 5: MUL 5
+FINAL -525
+",,unknown_op:VAL,0,0,0,0,0,1,invalid_or_unexecutable,SUB SUB MUL MUL,PUSH VAL DEC DEC SCALE SCALE
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"STEP 1: PUSH 21
+STEP 2: PUSH 38
+STEP 3: PUSH 38
+STEP 4: PUSH 18
+STEP 5: DUP
+STEP 6: MUL
+STEP 7: ADD
+STEP 8: ADD
+STEP 9: TOTAL
+FINAL 66","STEP 1: TABLE beta:21 delta:38 gamma:38 omega:18
+STEP 2: LOOKUP omega
+STEP 3: MUL 4
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+FINAL 102
+",,unknown_op:DUP,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,PUSH PUSH PUSH PUSH DUP MUL ADD ADD TOTAL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"STEP 1: PUSH_TEXT xf-8893-ut
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: TRIM 6
+FINAL ut9388-xf","STEP 1: PUSH_TEXT XF-8893-UT
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: LOWER
+STEP 5: TAKE_SUFFIX 6
+FINAL 988-fx
+",,unknown_op:TRIM,0,0,0,0,0,1,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TRIM
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,table,4,eval_template_d4_table_8,1800,"STEP 1: PUSH 11
+STEP 2: PUSH 35
+STEP 3: PUSH 30
+STEP 4: PUSH 32
+STEP 5: LOOKUP DELTA
+STEP 6: MUL 4
+STEP 7: MUL 3
+STEP 8: MUL 5
+FINAL 450","STEP 1: TABLE alpha:11 beta:35 delta:30 gamma:32
+STEP 2: LOOKUP delta
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: MUL 5
+FINAL 1800
+",,KeyError,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP MUL MUL MUL,PUSH PUSH PUSH PUSH LOOKUP MUL MUL MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,string,4,eval_template_d4_string_6,CF9776YT,"STEP 1: PUSH_TEXT ty-6779-fc
+STEP 2: STRIP_DASHES ty7779fc
+STEP 3: REVERSE ty7779fc
+STEP 4: UPPER FC9777YT
+FINAL FC9777YT","STEP 1: PUSH_TEXT TY-6779-FC
+STEP 2: LOWER
+STEP 3: STRIP_HYPHENS
+STEP 4: REVERSE
+STEP 5: UPPER
+FINAL CF9776YT
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,1,invalid_or_unexecutable,LOWER STRIP_HYPHENS REVERSE UPPER,PUSH_TEXT STRIP_DASHES REVERSE UPPER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"STEP 1: PUSH 2
+STEP 2: SUB 12
+STEP 3: SUB 7
+STEP 4: MUL 3
+STEP 5: ADD 18
+FINAL 12","STEP 1: PUSH 2
+STEP 2: SUB 12
+STEP 3: SUB 7
+STEP 4: MUL 3
+STEP 5: ADD 18
+FINAL -33
+",-33,,1,1,0,1,1,1,correct_exact,SUB SUB MUL ADD,PUSH SUB SUB MUL ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,"STEP 1: PUSH_DATE 2026-07-20
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 8
+STEP 5: ADD_DAYS 9
+FINAL 2026-08-13","STEP 1: PUSH_DATE 2026-07-20
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 8
+STEP 5: ADD_DAYS 9
+FINAL 2026-08-15
+",2026-08-15,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,path,4,eval_template_d4_path_11,,"STEP 1: PUSH_TEXT /archive/north/errors_34.csv
+STEP 2: BASENAME
+STEP 3: BASENAME
+STEP 4: LOWER
+STEP 5: BASENAME
+FINAL errors_34","STEP 1: PUSH_TEXT /archive/north/errors_34.csv
+STEP 2: EXTENSION
+STEP 3: EXTENSION
+STEP 4: LOWER
+STEP 5: STRIP_EXT
+FINAL 
+",errors_34.csv,,0,0,0,1,0,1,wrong_op_order_or_choice,EXTENSION EXTENSION LOWER STRIP_EXT,PUSH_TEXT BASENAME BASENAME LOWER BASENAME
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,"STEP 1: PUSH 2
+STEP 2: PUSH 12
+STEP 3: PUSH 5
+STEP 4: PUSH 20
+STEP 5: MIN
+STEP 6: SUB 9
+STEP 7: SUB 7
+STEP 8: MUL 7
+FINAL 14","STEP 1: PUSH_LIST 2 12 5 20
+STEP 2: MIN
+STEP 3: SUB 9
+STEP 4: SUB 7
+STEP 5: MUL 7
+FINAL -98
+",,TypeError,0,0,0,0,0,1,invalid_or_unexecutable,MIN SUB SUB MUL,PUSH PUSH PUSH PUSH MIN SUB SUB MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,"STEP 1: PUSH_TEXT /ops/daily/invoice_96.json
+STEP 2: BASENAME
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: BASENAME
+FINAL JSON","STEP 1: PUSH_TEXT /ops/daily/invoice_96.json
+STEP 2: BASENAME
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: BASENAME
+FINAL INVOICE_96.JSON
+",INVOICE_96.JSON,,1,1,0,1,1,1,correct_exact,BASENAME UPPER UPPER BASENAME,PUSH_TEXT BASENAME UPPER UPPER BASENAME
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d4,date,4,eval_template_d4_date_9,2026-12-08,"STEP 1: PUSH_DATE 2026-11-10
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 1
+STEP 5: ADD_DAYS 4
+FINAL 2027-01-06","STEP 1: PUSH_DATE 2026-11-10
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 1
+STEP 5: ADD_DAYS 4
+FINAL 2026-12-08
+",2026-12-08,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,string,6,eval_template_d6_string_6,dp6373,"STEP 1: PUSH_TEXT CA-3736-PD
+STEP 2: FLIP
+STEP 3: LOWER
+STEP 4: FLIP
+STEP 5: STRIP_DASH
+STEP 6: FLIP
+STEP 7: TAKE 6
+FINAL 3673a","STEP 1: PUSH_TEXT CA-3736-PD
+STEP 2: REVERSE
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: STRIP_HYPHENS
+STEP 6: REVERSE
+STEP 7: TAKE_PREFIX 6
+FINAL dp6373
+",,unknown_op:FLIP,0,0,0,0,0,1,invalid_or_unexecutable,REVERSE LOWER REVERSE STRIP_HYPHENS REVERSE TAKE_PREFIX,PUSH_TEXT FLIP LOWER FLIP STRIP_DASH FLIP TAKE
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,date,6,eval_template_d6_date_9,2027-01-27,"STEP 1: PUSH_DATE 2026-11-05
+STEP 2: ADD_DAYS 21
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 1
+STEP 5: ADD_DAYS 8
+STEP 6: ADD_WEEKS 21
+FINAL 2027-01-14","STEP 1: PUSH_DATE 2026-11-05
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 1
+STEP 5: ADD_DAYS 8
+STEP 6: ADD_WEEKS 3
+STEP 7: ADD_WEEKS 4
+FINAL 2027-01-27
+",2027-05-05,,0,0,0,1,0,1,wrong_op_order_or_choice,ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,"STEP 1: PUSH_DATE 2026-09-19
+STEP 2: ADD_DAYS 7
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 5
+STEP 5: ADD_WEEKS 1
+STEP 6: ADD_DAYS 2
+STEP 7: ADD_WEEKS 3
+FINAL 2026-10-25","STEP 1: PUSH_DATE 2026-09-19
+STEP 2: ADD_DAYS 7
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 5
+STEP 5: ADD_WEEKS 1
+STEP 6: ADD_DAYS 2
+STEP 7: ADD_WEEKS 3
+FINAL 2026-11-07
+",2026-11-07,,1,1,0,1,1,1,correct_exact,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,"STEP 1: PUSH_TEXT /client/alpha/invoice_73.txt
+STEP 2: DIRNAME
+STEP 3: BASENAME
+STEP 4: LOWER
+STEP 5: DIRNAME
+STEP 6: LOWER
+FINAL /client/alpha","STEP 1: PUSH_TEXT /client/alpha/invoice_73.txt
+STEP 2: DIRNAME
+STEP 3: STRIP_EXT
+STEP 4: DIRNAME
+STEP 5: LOWER
+STEP 6: DIRNAME
+STEP 7: LOWER
+FINAL /
+",/,,1,1,0,1,0,1,correct_semantic_variant,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,PUSH_TEXT DIRNAME BASENAME LOWER DIRNAME LOWER
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"STEP 1: PUSH_TEXT EE-6324-BK
+STEP 2: UPPER
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: LOWER
+STEP 6: STRIP_DASH
+STEP 7: REVERSE
+FINAL 4236E","STEP 1: PUSH_TEXT EE-6324-BK
+STEP 2: UPPER
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: LOWER
+STEP 6: STRIP_HYPHENS
+STEP 7: REVERSE
+FINAL ee6324bk
+",,unknown_op:STRIP_DASH,0,0,0,0,0,1,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,PUSH_TEXT UPPER LOWER REVERSE LOWER STRIP_DASH REVERSE
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,path,6,eval_template_d6_path_11,,"STEP 1: PUSH_TEXT /archive/beta/sales_68.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME
+STEP 4: UPPER
+STEP 5: BASENAME
+STEP 6: DIRNAME
+STEP 7: SPLIT
+FINAL CSV","STEP 1: PUSH_TEXT /archive/beta/sales_68.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME
+STEP 4: UPPER
+STEP 5: BASENAME
+STEP 6: DIRNAME
+STEP 7: EXTENSION
+FINAL 
+",,unknown_op:SPLIT,0,0,0,0,0,1,invalid_or_unexecutable,BASENAME DIRNAME UPPER BASENAME DIRNAME EXTENSION,PUSH_TEXT BASENAME DIRNAME UPPER BASENAME DIRNAME SPLIT
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,"STEP 1: PUSH 1
+STEP 2: PUSH 6
+STEP 3: PUSH 12
+STEP 4: PUSH 5
+STEP 5: PUSH 10
+STEP 6: PUSH 2
+STEP 7: MIN
+STEP 8: MUL 7
+STEP 9: MUL 4
+STEP 10: ADD 3
+STEP 11: MUL 7
+STEP 1","STEP 1: PUSH_LIST 1 6 12 5 10 2
+STEP 2: MIN
+STEP 3: MUL 7
+STEP 4: MUL 4
+STEP 5: ADD 3
+STEP 6: MUL 7
+STEP 7: SUB 12
+FINAL 205
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MIN MUL MUL ADD MUL SUB,PUSH PUSH PUSH PUSH PUSH PUSH MIN MUL MUL ADD MUL STEP
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"STEP 1: PUSH 3
+STEP 2: PUSH 16
+STEP 3: ADD 7
+STEP 4: PUSH 36
+STEP 5: ADD 11
+STEP 6: MUL 5
+FINAL 115","STEP 1: TABLE alpha:3 beta:16 gamma:6 omega:36
+STEP 2: LOOKUP beta
+STEP 3: ADD 7
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+STEP 6: ADD 11
+STEP 7: MUL 5
+FINAL 410
+",235,,0,0,0,1,0,1,wrong_op_order_or_choice,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,PUSH PUSH ADD PUSH ADD MUL
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"STEP 1: PUSH 15
+STEP 2: SUB 19
+STEP 3: ADD 21
+STEP 4: SUB 18
+STEP 5: MUL 2
+STEP 6: ADD 23
+STEP 7: ADD 21
+FINAL 13","STEP 1: PUSH 15
+STEP 2: SUB 19
+STEP 3: ADD 21
+STEP 4: SUB 18
+STEP 5: MUL 2
+STEP 6: ADD 23
+STEP 7: ADD 21
+FINAL 42
+",42,,1,1,0,1,1,1,correct_exact,SUB ADD SUB MUL ADD ADD,PUSH SUB ADD SUB MUL ADD ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,number,6,eval_template_d6_number_7,-116,"STEP 1: PUSH 25
+STEP 2: DEC 10
+STEP 3: DEC 18
+STEP 4: SCALE 5
+STEP 5: SCALE 5
+STEP 6: DEC 24
+STEP 7: DEC 17
+FINAL 115","STEP 1: PUSH 25
+STEP 2: SUB 10
+STEP 3: SUB 18
+STEP 4: MUL 5
+STEP 5: MUL 5
+STEP 6: SUB 24
+STEP 7: SUB 17
+FINAL -116
+",,unknown_op:DEC,0,0,0,0,0,1,invalid_or_unexecutable,SUB SUB MUL MUL SUB SUB,PUSH DEC DEC SCALE SCALE DEC DEC
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,table,6,eval_template_d6_table_8,79,"STEP 1: PUSH 8
+STEP 2: PUSH 38
+STEP 3: PUSH 8
+STEP 4: PUSH 15
+STEP 5: LOOKUP omega
+STEP 6: ADD 6
+STEP 7: ADD 5
+STEP 8: ADD 12
+STEP 9: MUL 2
+STEP 10: ADD 3
+FINAL 46","STEP 1: TABLE alpha:8 beta:38 delta:8 omega:15
+STEP 2: LOOKUP omega
+STEP 3: ADD 6
+STEP 4: ADD 5
+STEP 5: ADD 12
+STEP 6: MUL 2
+STEP 7: ADD 3
+FINAL 79
+",,KeyError,0,0,0,0,0,1,invalid_or_unexecutable,LOOKUP ADD ADD ADD MUL ADD,PUSH PUSH PUSH PUSH LOOKUP ADD ADD ADD MUL ADD
+pilot,pilot_v1_trace_stack_final_s101,trace_stack_final,101,1,eval_template_d6,list,6,eval_template_d6_list_10,50,"STEP 1: PUSH 17
+STEP 2: PUSH 16
+STEP 3: PUSH 16
+STEP 4: PUSH 5
+STEP 5: PUSH 4
+STEP 6: PUSH 9
+STEP 7: MAX
+STEP 8: MUL 3
+STEP 9: ADD 4
+STEP 10: SUB 3
+STEP 11: SUB 11
+STEP 1","STEP 1: PUSH_LIST 17 16 16 5 4 9
+STEP 2: MAX
+STEP 3: MUL 3
+STEP 4: ADD 4
+STEP 5: SUB 3
+STEP 6: SUB 11
+STEP 7: ADD 9
+FINAL 50
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL ADD SUB SUB ADD,PUSH PUSH PUSH PUSH PUSH PUSH MAX MUL ADD SUB SUB STEP
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,"STEP 1: PUSH_TEXT /reports/alpha/invoice_56.txt
+STEP 2: BASENAME","STEP 1: PUSH_TEXT /reports/alpha/invoice_56.txt
+STEP 2: BASENAME
+",invoice_56.txt,,1,1,0,1,1,0,correct_exact,BASENAME,PUSH_TEXT BASENAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,date,1,eval_indist_d1_date_9,2026-01-03,"STEP 1: PUSH_DATE 2026-01-02
+STEP 2: ADD_DAYS 1","STEP 1: PUSH_DATE 2026-01-02
+STEP 2: ADD_DAYS 1
+",2026-01-03,,1,1,0,1,1,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,string,1,eval_indist_d1_string_6,kc-3252-wf,"STEP 1: PUSH_TEXT KC-3252-WF
+STEP 2: LOWER","STEP 1: PUSH_TEXT KC-3252-WF
+STEP 2: LOWER
+",kc-3252-wf,,1,1,0,1,1,0,correct_exact,LOWER,PUSH_TEXT LOWER
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,number,1,eval_indist_d1_number_7,8,"STEP 1: PUSH 5
+STEP 2: ADD 3","STEP 1: PUSH 5
+STEP 2: ADD 3
+",8,,1,1,0,1,1,0,correct_exact,ADD,PUSH ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"STEP 1: TABLE alpha:14 beta:37 delta:33 gamma:28
+STEP 2: LOOKUP alpha","STEP 1: TABLE alpha:14 beta:37 delta:33 gamma:28
+STEP 2: LOOKUP alpha
+",14,,1,1,0,1,1,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,path,1,eval_indist_d1_path_11,/reports/daily,"STEP 1: PUSH_TEXT /reports/daily/invoice_55.json
+STEP 2: DIRNAME","STEP 1: PUSH_TEXT /reports/daily/invoice_55.json
+STEP 2: DIRNAME
+",/reports/daily,,1,1,0,1,1,0,correct_exact,DIRNAME,PUSH_TEXT DIRNAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"STEP 1: PUSH_TEXT PU-8482-DF
+STEP 2: STRIP_HYPHENS","STEP 1: PUSH_TEXT PU-8482-DF
+STEP 2: STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,table,1,eval_indist_d1_table_8,25,"STEP 1: TABLE alpha:14 beta:27 delta:37 gamma:25
+STEP 2: LOOKUP gamma","STEP 1: TABLE alpha:14 beta:27 delta:37 gamma:25
+STEP 2: LOOKUP gamma
+",25,,1,1,0,1,1,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"STEP 1: PUSH_DATE 2026-02-15
+STEP 2: ADD_DAYS 3","STEP 1: PUSH_DATE 2026-02-15
+STEP 2: ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"STEP 1: PUSH 28
+STEP 2: MUL 4","STEP 1: PUSH 28
+STEP 2: MUL 4
+",112,,1,1,0,1,1,0,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,"STEP 1: PUSH_LIST 18 2 14 10 14 3
+STEP 2: MAX","STEP 1: PUSH_LIST 18 2 14 10 14 3
+STEP 2: MAX
+",18,,1,1,0,1,1,0,correct_exact,MAX,PUSH_LIST MAX
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_indist_d1,list,1,eval_indist_d1_list_10,20,"STEP 1: PUSH_LIST 20 18 12 5 7
+STEP 2: MAX","STEP 1: PUSH_LIST 20 18 12 5 7
+STEP 2: MAX
+",20,,1,1,0,1,1,0,correct_exact,MAX,PUSH_LIST MAX
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,date,2,eval_comp_d2_date_9,2026-06-11,"STEP 1: PUSH_DATE 2026-05-07
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 2","STEP 1: PUSH_DATE 2026-05-07
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 2
+",2026-06-11,,1,1,0,1,1,0,correct_exact,ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,path,2,eval_comp_d2_path_11,log,"STEP 1: PUSH_TEXT /reports/daily/invoice_88.log
+STEP 2: BASENAME
+STEP 3: EXTENSION
+STEP 4: BASENAME","STEP 1: PUSH_TEXT /reports/daily/invoice_88.log
+STEP 2: EXTENSION
+STEP 3: STRIP_EXT
+",log,,1,1,0,1,0,0,correct_semantic_variant,EXTENSION STRIP_EXT,PUSH_TEXT BASENAME EXTENSION BASENAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"STEP 1: PUSH 18
+STEP 2: SUB 24
+STEP 3: MUL 2","STEP 1: PUSH 18
+STEP 2: SUB 24
+STEP 3: MUL 2
+",-12,,1,1,0,1,1,0,correct_exact,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,"STEP 1: PUSH_LIST 10 11 18 2 11 5
+STEP 2: SUM
+STEP 3: MUL 3","STEP 1: PUSH_LIST 10 11 18 2 11 5
+STEP 2: SUM
+STEP 3: MUL 3
+",171,,1,1,0,1,1,0,correct_exact,SUM MUL,PUSH_LIST SUM MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,string,2,eval_comp_d2_string_6,BZ-8673-DV,"STEP 1: PUSH_TEXT BZ-8673-DV
+STEP 2: LOWER
+STEP 3: UPPER","STEP 1: PUSH_TEXT BZ-8673-DV
+STEP 2: LOWER
+STEP 3: UPPER
+",BZ-8673-DV,,1,1,0,1,1,0,correct_exact,LOWER UPPER,PUSH_TEXT LOWER UPPER
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"STEP 1: PUSH_DATE 2026-07-01
+STEP 2: ADD_WEEKS 2
+STEP 3: ADD_DAYS 9","STEP 1: PUSH_DATE 2026-07-01
+STEP 2: ADD_WEEKS 2
+STEP 3: ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,list,2,eval_comp_d2_list_10,14,"STEP 1: PUSH_LIST 6 14 8 20
+STEP 2: MAX
+STEP 3: SUB 6","STEP 1: PUSH_LIST 6 14 8 20
+STEP 2: MAX
+STEP 3: SUB 6
+",14,,1,1,0,1,1,0,correct_exact,MAX SUB,PUSH_LIST MAX SUB
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"STEP 1: TABLE alpha:11 beta:36 delta:37 gamma:8
+STEP 2: LOOKUP delta
+STEP 3: ADD gamma","STEP 1: TABLE alpha:11 beta:36 delta:37 gamma:8
+STEP 2: LOOKUP delta
+STEP 3: ADD_LOOKUP gamma
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,number,2,eval_comp_d2_number_7,-2,"STEP 1: PUSH 15
+STEP 2: SUB 4
+STEP 3: SUB 13","STEP 1: PUSH 15
+STEP 2: SUB 4
+STEP 3: SUB 13
+",-2,,1,1,0,1,1,0,correct_exact,SUB SUB,PUSH SUB SUB
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,table,2,eval_comp_d2_table_8,56,"STEP 1: TABLE alpha:14 beta:2 delta:23 omega:38
+STEP 2: LOOKUP alpha
+STEP 3: MULTIPLY 4","STEP 1: TABLE alpha:14 beta:2 delta:23 omega:38
+STEP 2: LOOKUP alpha
+STEP 3: MUL 4
+",,unknown_op:MULTIPLY,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL,TABLE LOOKUP MULTIPLY
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"STEP 1: PUSH_TEXT YV-5212-KE
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER","STEP 1: PUSH_TEXT YV-5212-KE
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+",yv5212ke,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,"STEP 1: PUSH_TEXT /archive/south/sales_51.json
+STEP 2: BASENAME
+STEP 3: EXTENSION","STEP 1: PUSH_TEXT /archive/south/sales_51.json
+STEP 2: BASENAME
+STEP 3: EXTENSION
+",json,,1,1,0,1,1,0,correct_exact,BASENAME EXTENSION,PUSH_TEXT BASENAME EXTENSION
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,"STEP 1: PUSH_LIST 7 4 8 15 9 5 15
+STEP 2: MAX
+STEP 3: SUB 12
+STEP 4: SUB 13","STEP 1: PUSH_LIST 7 4 8 15 9 5 15
+STEP 2: MAX
+STEP 3: SUB 12
+STEP 4: SUB 13
+",-10,,1,1,0,1,1,0,correct_exact,MAX SUB SUB,PUSH_LIST MAX SUB SUB
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"STEP 1: PUSH_DATE 2026-04-10
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_DAYS 2","STEP 1: PUSH_DATE 2026-04-10
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"STEP 1: PUSH_TEXT LU-7864-EF
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: SUBSTR 4","STEP 1: PUSH_TEXT LU-7864-EF
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: TAKE_SUFFIX 4
+",,unknown_op:SUBSTR,0,0,0,0,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE SUBSTR
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,string,3,eval_comp_d3_string_6,cv5171pc,"STEP 1: PUSH_TEXT CP-1715-VC
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+STEP 4: REVERSE","STEP 1: PUSH_TEXT CP-1715-VC
+STEP 2: STRIP_HYPHENS
+STEP 3: LOWER
+STEP 4: REVERSE
+",cv5171pc,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS LOWER REVERSE,PUSH_TEXT STRIP_HYPHENS LOWER REVERSE
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,"STEP 1: PUSH_TEXT /reports/alpha/invoice_22.txt
+STEP 2: BASENAME
+STEP 3: LOWER
+STEP 4: BASENAME","STEP 1: PUSH_TEXT /reports/alpha/invoice_22.txt
+STEP 2: DIRNAME
+STEP 3: LOWER
+STEP 4: STRIP_EXT
+",invoice_22.txt,,0,0,0,1,0,0,wrong_op_order_or_choice,DIRNAME LOWER STRIP_EXT,PUSH_TEXT BASENAME LOWER BASENAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,list,3,eval_comp_d3_list_10,1140,"STEP 1: PUSH_LIST 1 2 19 15 20
+STEP 2: SUM
+STEP 3: MUL 4
+STEP 4: MUL 5","STEP 1: PUSH_LIST 1 2 19 15 20
+STEP 2: SUM
+STEP 3: MUL 4
+STEP 4: MUL 5
+",1140,,1,1,0,1,1,0,correct_exact,SUM MUL MUL,PUSH_LIST SUM MUL MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"STEP 1: PUSH 8
+STEP 2: ADD 4
+STEP 3: ADD 5
+STEP 4: MUL 6","STEP 1: PUSH 8
+STEP 2: ADD 4
+STEP 3: ADD 5
+STEP 4: MUL 6
+",102,,1,1,0,1,1,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,table,3,eval_comp_d3_table_8,52,"STEP 1: TABLE alpha:14 delta:17 gamma:33 omega:2
+STEP 2: LOOKUP gamma
+STEP 3: ADD 8
+STEP 4: ADD 11","STEP 1: TABLE alpha:14 delta:17 gamma:33 omega:2
+STEP 2: LOOKUP gamma
+STEP 3: ADD 8
+STEP 4: ADD 11
+",52,,1,1,0,1,1,0,correct_exact,LOOKUP ADD ADD,TABLE LOOKUP ADD ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"STEP 1: TABLE alpha:21 beta:29 gamma:13 omega:26
+STEP 2: LOOKUP beta
+STEP 3: MULTIPLY 4
+STEP 4: MULTIPLY 3","STEP 1: TABLE alpha:21 beta:29 gamma:13 omega:26
+STEP 2: LOOKUP beta
+STEP 3: MUL 4
+STEP 4: MUL 3
+",,unknown_op:MULTIPLY,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,TABLE LOOKUP MULTIPLY MULTIPLY
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,path,3,eval_comp_d3_path_11,/ledger/alpha,"STEP 1: PUSH_TEXT /ledger/alpha/sales_44.json
+STEP 2: DIRNAME
+STEP 3: BASENAME
+STEP 4: EXTENSION
+STEP 5: LOWER","STEP 1: PUSH_TEXT /ledger/alpha/sales_44.json
+STEP 2: DIRNAME
+STEP 3: STRIP_EXT
+STEP 4: LOWER
+",,,0,0,0,1,0,0,wrong_op_order_or_choice,DIRNAME STRIP_EXT LOWER,PUSH_TEXT DIRNAME BASENAME EXTENSION LOWER
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,number,3,eval_comp_d3_number_7,33,"STEP 1: PUSH 14
+STEP 2: SUB 14
+STEP 3: ADD 23
+STEP 4: ADD 10","STEP 1: PUSH 14
+STEP 2: SUB 14
+STEP 3: ADD 23
+STEP 4: ADD 10
+",33,,1,1,0,1,1,0,correct_exact,SUB ADD ADD,PUSH SUB ADD ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d3,date,3,eval_comp_d3_date_9,2026-10-08,"STEP 1: PUSH_DATE 2026-09-14
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 9","STEP 1: PUSH_DATE 2026-09-14
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 9
+",2026-10-08,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,number,4,eval_comp_d4_number_7,21,"STEP 1: PUSH 7
+STEP 2: SUB 11
+STEP 3: ADD 15
+STEP 4: SUB 3
+STEP 5: ADD 13","STEP 1: PUSH 7
+STEP 2: SUB 11
+STEP 3: ADD 15
+STEP 4: SUB 3
+STEP 5: ADD 13
+",21,,1,1,0,1,1,0,correct_exact,SUB ADD SUB ADD,PUSH SUB ADD SUB ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"STEP 1: PUSH_DATE 2026-04-16
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 5
+STEP 4: ADD_DAYS 7
+STEP 5: ADD_DAYS 7","STEP 1: PUSH_DATE 2026-04-16
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 5
+STEP 4: ADD_DAYS 7
+STEP 5: ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,list,4,eval_comp_d4_list_10,15,"STEP 1: PUSH_LIST 1 16 10 15
+STEP 2: MIN
+STEP 3: MUL 4
+STEP 4: MUL 5
+STEP 5: SUB 5","STEP 1: PUSH_LIST 1 16 10 15
+STEP 2: MIN
+STEP 3: MUL 4
+STEP 4: MUL 5
+STEP 5: SUB 5
+",15,,1,1,0,1,1,0,correct_exact,MIN MUL MUL SUB,PUSH_LIST MIN MUL MUL SUB
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"STEP 1: PUSH_TEXT YE-7952-BX
+STEP 2: STRIP_HYPHENS
+STEP 3: STRIP_HYPHENS
+STEP 4: STRIP_HYPHENS
+STEP 5: REVERSE","STEP 1: PUSH_TEXT YE-7952-BX
+STEP 2: STRIP_HYPHENS
+STEP 3: STRIP_HYPHENS
+STEP 4: STRIP_HYPHENS
+STEP 5: REVERSE
+",XB2597EY,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,string,4,eval_comp_d4_string_6,TL8670,"STEP 1: PUSH_TEXT TL-8670-WX
+STEP 2: STRIP
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: SUBSTR 6","STEP 1: PUSH_TEXT TL-8670-WX
+STEP 2: STRIP_HYPHENS
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: TAKE_PREFIX 6
+",,unknown_op:STRIP,0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER TAKE_PREFIX,PUSH_TEXT STRIP UPPER UPPER SUBSTR
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,"STEP 1: PUSH_TEXT /ledger/north/index_98.log
+STEP 2: DIRNAME
+STEP 3: DIRNAME
+STEP 4: BASENAME
+STEP 5: EXTENSION
+STEP 6: STRIP","STEP 1: PUSH_TEXT /ledger/north/index_98.log
+STEP 2: DIRNAME
+STEP 3: DIRNAME
+STEP 4: EXTENSION
+STEP 5: STRIP_EXT
+",,unknown_op:STRIP,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME DIRNAME EXTENSION STRIP_EXT,PUSH_TEXT DIRNAME DIRNAME BASENAME EXTENSION STRIP
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,path,4,eval_comp_d4_path_11,,"STEP 1: PUSH_TEXT /reports/alpha/invoice_45.csv
+STEP 2: BASENAME
+STEP 3: EXTENSION
+STEP 4: POP
+STEP 5: BASENAME
+STEP 6: EXTENSION
+STEP 7: LOWER","STEP 1: PUSH_TEXT /reports/alpha/invoice_45.csv
+STEP 2: EXTENSION
+STEP 3: STRIP_EXT
+STEP 4: EXTENSION
+STEP 5: LOWER
+",,unknown_op:POP,0,0,0,0,0,0,invalid_or_unexecutable,EXTENSION STRIP_EXT EXTENSION LOWER,PUSH_TEXT BASENAME EXTENSION POP BASENAME EXTENSION LOWER
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,date,4,eval_comp_d4_date_9,2026-06-22,"STEP 1: PUSH_DATE 2026-05-14
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 3
+STEP 4: ADD_WEEKS 4
+STEP 5: ADD_DAYS 5","STEP 1: PUSH_DATE 2026-05-14
+STEP 2: ADD_DAYS 3
+STEP 3: ADD_DAYS 3
+STEP 4: ADD_WEEKS 4
+STEP 5: ADD_DAYS 5
+",2026-06-22,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,"STEP 1: PUSH_LIST 10 19 5 16 14 1
+STEP 2: MAX
+STEP 3: MUL 6
+STEP 4: SUB 12
+STEP 5: ADD 6","STEP 1: PUSH_LIST 10 19 5 16 14 1
+STEP 2: MAX
+STEP 3: MUL 6
+STEP 4: SUB 12
+STEP 5: ADD 6
+",108,,1,1,0,1,1,0,correct_exact,MAX MUL SUB ADD,PUSH_LIST MAX MUL SUB ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"STEP 1: PUSH 2
+STEP 2: ADD 5
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: SUB 11","STEP 1: PUSH 2
+STEP 2: ADD 5
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: SUB 11
+",73,,1,1,0,1,1,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"STEP 1: TABLE alpha:8 beta:23 delta:9 gamma:39
+STEP 2: LOOKUP alpha
+STEP 3: MULTIPLY 3
+STEP 4: ADD gamma
+STEP 5: ADD delta","STEP 1: TABLE alpha:8 beta:23 delta:9 gamma:39
+STEP 2: LOOKUP alpha
+STEP 3: MUL 3
+STEP 4: ADD_LOOKUP gamma
+STEP 5: ADD_LOOKUP delta
+",,unknown_op:MULTIPLY,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MULTIPLY ADD ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d4,table,4,eval_comp_d4_table_8,77,"STEP 1: TABLE alpha:11 beta:6 delta:27 gamma:16
+STEP 2: LOOKUP delta
+STEP 3: ADD beta
+STEP 4: MUL 2
+STEP 5: ADD alpha","STEP 1: TABLE alpha:11 beta:6 delta:27 gamma:16
+STEP 2: LOOKUP delta
+STEP 3: ADD_LOOKUP beta
+STEP 4: MUL 2
+STEP 5: ADD_LOOKUP alpha
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP,TABLE LOOKUP ADD MUL ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,list,6,eval_comp_d6_list_10,-7,"STEP 1: PUSH_LIST 15 2 15 16 5
+STEP 2: MIN
+STEP 3: SUB 14
+STEP 4: SUB 1
+STEP 5: MUL 2
+STEP 6: ADD 6","STEP 1: PUSH_LIST 15 2 15 16 5
+STEP 2: MIN
+STEP 3: SUB 14
+STEP 4: SUB 1
+STEP 5: MUL 2
+STEP 6: ADD 6
+STEP 7: ADD 13
+",-20,,0,0,0,1,0,0,wrong_op_order_or_choice,MIN SUB SUB MUL ADD ADD,PUSH_LIST MIN SUB SUB MUL ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,"STEP 1: PUSH_LIST 7 4 12 3
+STEP 2: MAX
+STEP 3: MUL 7
+STEP 4: MUL 2
+STEP 5: MUL 5
+STEP 6: MUL 3","STEP 1: PUSH_LIST 7 4 12 3
+STEP 2: MAX
+STEP 3: MUL 7
+STEP 4: MUL 2
+STEP 5: MUL 5
+STEP 6: MUL 3
+STEP 7: MUL 6
+",2520,,0,0,0,1,0,0,wrong_op_order_or_choice,MAX MUL MUL MUL MUL MUL,PUSH_LIST MAX MUL MUL MUL MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"STEP 1: PUSH_TEXT ZR-6182-YD
+STEP 2: REVERSE
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: REVERSE
+STEP 6: STRIP_HYPHENS
+STEP 7: SUBSTR 6","STEP 1: PUSH_TEXT ZR-6182-YD
+STEP 2: REVERSE
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: REVERSE
+STEP 6: STRIP_HYPHENS
+STEP 7: TAKE_SUFFIX 6
+",,unknown_op:SUBSTR,0,0,0,0,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS SUBSTR
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,string,6,eval_comp_d6_string_6,sl-6,"STEP 1: PUSH_TEXT KT-8116-LS
+STEP 2: UPPER
+STEP 3: UPPER
+STEP 4: LOWER
+STEP 5: REVERSE
+STEP 6: LOWER
+STEP 7: SUBSTR 4","STEP 1: PUSH_TEXT KT-8116-LS
+STEP 2: UPPER
+STEP 3: UPPER
+STEP 4: LOWER
+STEP 5: REVERSE
+STEP 6: LOWER
+STEP 7: TAKE_PREFIX 4
+",,unknown_op:SUBSTR,0,0,0,0,0,0,invalid_or_unexecutable,UPPER UPPER LOWER REVERSE LOWER TAKE_PREFIX,PUSH_TEXT UPPER UPPER LOWER REVERSE LOWER SUBSTR
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,date,6,eval_comp_d6_date_9,2026-03-08,"STEP 1: PUSH_DATE 2026-01-12
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 5
+STEP 6: ADD_DAYS 9
+STEP 7: ADD_DAYS 6","STEP 1: PUSH_DATE 2026-01-12
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 5
+STEP 6: ADD_DAYS 9
+STEP 7: ADD_DAYS 6
+",2026-03-08,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"STEP 1: PUSH_DATE 2026-07-15
+STEP 2: ADD_DAYS 2
+STEP 3: ADD_DAYS 7
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 6
+STEP 6: ADD_DAYS 6
+STEP 7: ADD_DAYS 8","STEP 1: PUSH_DATE 2026-07-15
+STEP 2: ADD_DAYS 2
+STEP 3: ADD_DAYS 7
+STEP 4: ADD_WEEKS 3
+STEP 5: ADD_DAYS 6
+STEP 6: ADD_DAYS 6
+STEP 7: ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"STEP 1: TABLE alpha:30 delta:17 gamma:29 omega:36
+STEP 2: LOOKUP omega
+STEP 3: MULT:2
+STEP 4: MULT:3
+STEP 5: ADD:4
+STEP 6: TABLE:delta
+STEP 7: ADD
+STEP 8: MULT:3","STEP 1: TABLE alpha:30 delta:17 gamma:29 omega:36
+STEP 2: LOOKUP omega
+STEP 3: MUL 2
+STEP 4: MUL 3
+STEP 5: ADD 4
+STEP 6: ADD_LOOKUP delta
+STEP 7: MUL 3
+",,unknown_op:MULT:2,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MULT:2 MULT:3 ADD:4 TABLE:DELTA ADD MULT:3
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,path,6,eval_comp_d6_path_11,/,"STEP 1: PUSH_TEXT /ops/alpha/sales_97.log
+STEP 2: BASENAME
+STEP 3: EXTENSION
+STEP 4: UPPER
+STEP 5: BASENAME
+STEP 6: LOWER
+STEP 7: DIRNAME
+STEP 8: STRIP","STEP 1: PUSH_TEXT /ops/alpha/sales_97.log
+STEP 2: EXTENSION
+STEP 3: UPPER
+STEP 4: BASENAME
+STEP 5: LOWER
+STEP 6: DIRNAME
+STEP 7: STRIP_EXT
+",,unknown_op:STRIP,0,0,0,0,0,0,invalid_or_unexecutable,EXTENSION UPPER BASENAME LOWER DIRNAME STRIP_EXT,PUSH_TEXT BASENAME EXTENSION UPPER BASENAME LOWER DIRNAME STRIP
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,number,6,eval_comp_d6_number_7,9792,"STEP 1: PUSH 13
+STEP 2: MUL 3
+STEP 3: ADD 3
+STEP 4: MUL 6
+STEP 5: ADD 20
+STEP 6: MUL 6
+STEP 7: MUL 6","STEP 1: PUSH 13
+STEP 2: MUL 3
+STEP 3: ADD 3
+STEP 4: MUL 6
+STEP 5: ADD 20
+STEP 6: MUL 6
+STEP 7: MUL 6
+",9792,,1,1,0,1,1,0,correct_exact,MUL ADD MUL ADD MUL MUL,PUSH MUL ADD MUL ADD MUL MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,table,6,eval_comp_d6_table_8,1266,"STEP 1: TABLE alpha:18 beta:22 delta:8 gamma:35
+STEP 2: LOOKUP alpha
+STEP 3: VALUE
+STEP 4: ADD delta
+STEP 5: MUL 4
+STEP 6: MUL 4
+STEP 7: ADD 6
+STEP 8: MUL 3","STEP 1: TABLE alpha:18 beta:22 delta:8 gamma:35
+STEP 2: LOOKUP alpha
+STEP 3: ADD_LOOKUP delta
+STEP 4: MUL 4
+STEP 5: MUL 4
+STEP 6: ADD 6
+STEP 7: MUL 3
+",,unknown_op:VALUE,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL MUL ADD MUL,TABLE LOOKUP VALUE ADD MUL MUL ADD MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,"STEP 1: PUSH_TEXT /reports/daily/sales_31.csv
+STEP 2: BASENAME
+STEP 3: EXTENSION
+STEP 4: DIRNAME
+STEP 5: UPPER
+STEP 6: EXTENSION","STEP 1: PUSH_TEXT /reports/daily/sales_31.csv
+STEP 2: BASENAME
+STEP 3: STRIP_EXT
+STEP 4: EXTENSION
+STEP 5: DIRNAME
+STEP 6: UPPER
+STEP 7: EXTENSION
+",,,1,1,0,1,0,0,correct_semantic_variant,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,PUSH_TEXT BASENAME EXTENSION DIRNAME UPPER EXTENSION
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"STEP 1: PUSH 10
+STEP 2: MUL 2
+STEP 3: MUL 2
+STEP 4: SUB 8
+STEP 5: ADD 10
+STEP 6: SUB 22
+STEP 7: ADD 16","STEP 1: PUSH 10
+STEP 2: MUL 2
+STEP 3: MUL 2
+STEP 4: SUB 8
+STEP 5: ADD 10
+STEP 6: SUB 22
+STEP 7: ADD 16
+",36,,1,1,0,1,1,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,"STEP 1: PUSH_TEXT /archive/daily/sales_33.log
+STEP 2: BASENAME
+STEP 3: DIRNAME
+STEP 4: BASENAME
+STEP 5: UPPER","STEP 1: PUSH_TEXT /archive/daily/sales_33.log
+STEP 2: EXTENSION
+STEP 3: UPPER
+",,,0,0,0,1,0,0,wrong_op_order_or_choice,EXTENSION UPPER,PUSH_TEXT BASENAME DIRNAME BASENAME UPPER
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"STEP 1: PUSH_TEXT RP-1822-GY
+STEP 2: UPPER
+STEP 3: SUBSTR 6","STEP 1: PUSH_TEXT RP-1822-GY
+STEP 2: UPPER
+STEP 3: TAKE_PREFIX 6
+",,unknown_op:SUBSTR,0,0,0,0,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,PUSH_TEXT UPPER SUBSTR
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"STEP 1: PUSH 24
+STEP 2: MUL 7
+STEP 3: ADD 22","STEP 1: PUSH 24
+STEP 2: MUL 7
+STEP 3: ADD 22
+",190,,1,1,0,1,1,0,correct_exact,MUL ADD,PUSH MUL ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,string,2,eval_template_d2_string_6,KW-3,"STEP 1: PUSH_TEXT KW-3696-KH
+STEP 2: UPPER
+STEP 3: SUBSTR 4","STEP 1: PUSH_TEXT KW-3696-KH
+STEP 2: UPPER
+STEP 3: TAKE_PREFIX 4
+",,unknown_op:SUBSTR,0,0,0,0,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,PUSH_TEXT UPPER SUBSTR
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,"STEP 1: PUSH 15
+STEP 2: PUSH 1
+STEP 3: PUSH 8
+STEP 4: PUSH 7
+STEP 5: PUSH 10
+STEP 6: MIN
+STEP 7: SUB 13","STEP 1: PUSH_LIST 15 1 8 7 10
+STEP 2: MIN
+STEP 3: SUB 13
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB,PUSH PUSH PUSH PUSH PUSH MIN SUB
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,date,2,eval_template_d2_date_9,2026-10-10,"STEP 1: PUSH_DATE 2026-09-22
+STEP 2: ADD_DAYS 9
+STEP 3: ADD_DAYS 9","STEP 1: PUSH_DATE 2026-09-22
+STEP 2: ADD_DAYS 9
+STEP 3: ADD_DAYS 9
+",2026-10-10,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,path,2,eval_template_d2_path_11,/,"STEP 1: PUSH_TEXT /client/daily/invoice_66.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME","STEP 1: PUSH_TEXT /client/daily/invoice_66.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME
+",/,,1,1,0,1,1,0,correct_exact,BASENAME DIRNAME,PUSH_TEXT BASENAME DIRNAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,number,2,eval_template_d2_number_7,17,"STEP 1: PUSH 6
+STEP 2: ADD 5
+STEP 3: ADD 6","STEP 1: PUSH 6
+STEP 2: ADD 5
+STEP 3: ADD 6
+",17,,1,1,0,1,1,0,correct_exact,ADD ADD,PUSH ADD ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,list,2,eval_template_d2_list_10,25,"STEP 1: PUSH 6
+STEP 2: PUSH 17
+STEP 3: MAX
+STEP 4: PUSH 9
+STEP 5: PUSH 6
+STEP 6: PUSH 9
+STEP 7: PUSH 8
+STEP 8: ADD","STEP 1: PUSH_LIST 6 17 9 6 9 8
+STEP 2: MAX
+STEP 3: ADD 8
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX ADD,PUSH PUSH MAX PUSH PUSH PUSH PUSH ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"STEP 1: PUSH 29
+STEP 2: ADD 12","STEP 1: TABLE alpha:16 beta:14 delta:29 gamma:26
+STEP 2: LOOKUP delta
+STEP 3: ADD 12
+",41,,1,1,0,1,0,0,correct_semantic_variant,LOOKUP ADD,PUSH ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,"STEP 1: PUSH_DATE 2026-01-18
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 3","STEP 1: PUSH_DATE 2026-01-18
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_WEEKS 3
+",2026-03-01,,1,1,0,1,1,0,correct_exact,ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d2,table,2,eval_template_d2_table_8,39,"STEP 1: PUSH 24
+STEP 2: PUSH 15
+STEP 3: ADD","STEP 1: TABLE alpha:24 beta:5 delta:15 omega:31
+STEP 2: LOOKUP alpha
+STEP 3: ADD_LOOKUP delta
+",39,,1,1,0,1,0,0,correct_semantic_variant,LOOKUP ADD_LOOKUP,PUSH PUSH ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,list,4,eval_template_d4_list_10,143,"STEP 1: PUSH 17
+STEP 2: PUSH 16
+STEP 3: MAX
+STEP 4: PUSH 3
+STEP 5: PUSH 11
+STEP 6: MUL
+STEP 7: PUSH 12
+STEP 8: ADD","STEP 1: PUSH_LIST 17 16 11 20 18 3 11
+STEP 2: MAX
+STEP 3: MUL 6
+STEP 4: ADD 11
+STEP 5: ADD 12
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL ADD ADD,PUSH PUSH MAX PUSH PUSH MUL PUSH ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,number,4,eval_template_d4_number_7,-525,"STEP 1: PUSH 13
+STEP 2: SUB 13
+STEP 3: SUB 21
+STEP 4: MUL 5
+STEP 5: MUL 5","STEP 1: PUSH 13
+STEP 2: SUB 13
+STEP 3: SUB 21
+STEP 4: MUL 5
+STEP 5: MUL 5
+",-525,,1,1,0,1,1,0,correct_exact,SUB SUB MUL MUL,PUSH SUB SUB MUL MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"STEP 1: PUSH omega
+STEP 2: MUL 4
+STEP 3: ADD 12
+STEP 4: TOTAL","STEP 1: TABLE beta:21 delta:38 gamma:38 omega:18
+STEP 2: LOOKUP omega
+STEP 3: MUL 4
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,PUSH MUL ADD TOTAL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"STEP 1: PUSH_TEXT XF-8893-UT
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: LOWER
+STEP 5: TRIM 6","STEP 1: PUSH_TEXT XF-8893-UT
+STEP 2: LOWER
+STEP 3: REVERSE
+STEP 4: LOWER
+STEP 5: TAKE_SUFFIX 6
+",,unknown_op:TRIM,0,0,0,0,0,0,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE LOWER TRIM
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,table,4,eval_template_d4_table_8,1800,"STEP 1: PUSH_DELTA
+STEP 2: MUL 4
+STEP 3: MUL 3
+STEP 4: MUL 5","STEP 1: TABLE alpha:11 beta:35 delta:30 gamma:32
+STEP 2: LOOKUP delta
+STEP 3: MUL 4
+STEP 4: MUL 3
+STEP 5: MUL 5
+",,unknown_op:PUSH_DELTA,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL MUL,PUSH_DELTA MUL MUL MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,string,4,eval_template_d4_string_6,CF9776YT,"STEP 1: PUSH_TEXT TY-6779-FC
+STEP 2: LOWER
+STEP 3: STRIP
+STEP 4: REVERSE
+STEP 5: UPPER","STEP 1: PUSH_TEXT TY-6779-FC
+STEP 2: LOWER
+STEP 3: STRIP_HYPHENS
+STEP 4: REVERSE
+STEP 5: UPPER
+",,unknown_op:STRIP,0,0,0,0,0,0,invalid_or_unexecutable,LOWER STRIP_HYPHENS REVERSE UPPER,PUSH_TEXT LOWER STRIP REVERSE UPPER
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"STEP 1: PUSH 2
+STEP 2: SUB 12
+STEP 3: SUB 7
+STEP 4: MUL 3
+STEP 5: ADD 18","STEP 1: PUSH 2
+STEP 2: SUB 12
+STEP 3: SUB 7
+STEP 4: MUL 3
+STEP 5: ADD 18
+",-33,,1,1,0,1,1,0,correct_exact,SUB SUB MUL ADD,PUSH SUB SUB MUL ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,"STEP 1: PUSH_DATE 2026-07-20
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 8
+STEP 5: ADD_DAYS 9","STEP 1: PUSH_DATE 2026-07-20
+STEP 2: ADD_DAYS 5
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 8
+STEP 5: ADD_DAYS 9
+",2026-08-15,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,path,4,eval_template_d4_path_11,,"STEP 1: PUSH_TEXT /archive/north/errors_34.csv
+STEP 2: BASENAME
+STEP 3: BASENAME
+STEP 4: LOWER
+STEP 5: BASENAME","STEP 1: PUSH_TEXT /archive/north/errors_34.csv
+STEP 2: EXTENSION
+STEP 3: EXTENSION
+STEP 4: LOWER
+STEP 5: STRIP_EXT
+",errors_34.csv,,0,0,0,1,0,0,wrong_op_order_or_choice,EXTENSION EXTENSION LOWER STRIP_EXT,PUSH_TEXT BASENAME BASENAME LOWER BASENAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,"STEP 1: PUSH 2
+STEP 2: PUSH 12
+STEP 3: PUSH 5
+STEP 4: PUSH 20
+STEP 5: MIN
+STEP 6: SUB 9
+STEP 7: SUB 7
+STEP 8: MUL 7","STEP 1: PUSH_LIST 2 12 5 20
+STEP 2: MIN
+STEP 3: SUB 9
+STEP 4: SUB 7
+STEP 5: MUL 7
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB SUB MUL,PUSH PUSH PUSH PUSH MIN SUB SUB MUL
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,"STEP 1: PUSH_TEXT /ops/daily/invoice_96.json
+STEP 2: BASENAME
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: BASENAME","STEP 1: PUSH_TEXT /ops/daily/invoice_96.json
+STEP 2: BASENAME
+STEP 3: UPPER
+STEP 4: UPPER
+STEP 5: BASENAME
+",INVOICE_96.JSON,,1,1,0,1,1,0,correct_exact,BASENAME UPPER UPPER BASENAME,PUSH_TEXT BASENAME UPPER UPPER BASENAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d4,date,4,eval_template_d4_date_9,2026-12-08,"STEP 1: PUSH_DATE 2026-11-10
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 1
+STEP 5: ADD_DAYS 4","STEP 1: PUSH_DATE 2026-11-10
+STEP 2: ADD_DAYS 8
+STEP 3: ADD_DAYS 9
+STEP 4: ADD_WEEKS 1
+STEP 5: ADD_DAYS 4
+",2026-12-08,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,string,6,eval_template_d6_string_6,dp6373,"STEP 1: PUSH_TEXT CA-3736-PD
+STEP 2: STRIP
+STEP 3: REVERSE
+STEP 4: LOWER
+STEP 5: REVERSE
+STEP 6: DROP_DASH
+STEP 7: TRIM
+STEP 8: TAKE 6","STEP 1: PUSH_TEXT CA-3736-PD
+STEP 2: REVERSE
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: STRIP_HYPHENS
+STEP 6: REVERSE
+STEP 7: TAKE_PREFIX 6
+",,unknown_op:STRIP,0,0,0,0,0,0,invalid_or_unexecutable,REVERSE LOWER REVERSE STRIP_HYPHENS REVERSE TAKE_PREFIX,PUSH_TEXT STRIP REVERSE LOWER REVERSE DROP_DASH TRIM TAKE
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,date,6,eval_template_d6_date_9,2027-01-27,"STEP 1: PUSH_DATE 2026-11-05
+STEP 2: ADD_DAYS 21
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 1
+STEP 5: ADD_DAYS 8
+STEP 6: ADD_WEEKS 21
+STEP 7: ADD_WEEKS 28","STEP 1: PUSH_DATE 2026-11-05
+STEP 2: ADD_WEEKS 3
+STEP 3: ADD_DAYS 4
+STEP 4: ADD_DAYS 1
+STEP 5: ADD_DAYS 8
+STEP 6: ADD_WEEKS 3
+STEP 7: ADD_WEEKS 4
+",2027-11-17,,0,0,0,1,0,0,wrong_op_order_or_choice,ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,"STEP 1: PUSH_DATE 2026-09-19
+STEP 2: ADD_DAYS 7
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 5
+STEP 5: ADD_WEEKS 1
+STEP 6: ADD_DAYS 2
+STEP 7: ADD_WEEKS 3","STEP 1: PUSH_DATE 2026-09-19
+STEP 2: ADD_DAYS 7
+STEP 3: ADD_WEEKS 1
+STEP 4: ADD_DAYS 5
+STEP 5: ADD_WEEKS 1
+STEP 6: ADD_DAYS 2
+STEP 7: ADD_WEEKS 3
+",2026-11-07,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,"STEP 1: PUSH_TEXT /client/alpha/invoice_73.txt
+STEP 2: DIRNAME
+STEP 3: BASENAME
+STEP 4: STRIP_SUFFIX
+STEP 5: DIRNAME
+STEP 6: LOWER
+STEP 7: DIRNAME","STEP 1: PUSH_TEXT /client/alpha/invoice_73.txt
+STEP 2: DIRNAME
+STEP 3: STRIP_EXT
+STEP 4: DIRNAME
+STEP 5: LOWER
+STEP 6: DIRNAME
+STEP 7: LOWER
+",,unknown_op:STRIP_SUFFIX,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,PUSH_TEXT DIRNAME BASENAME STRIP_SUFFIX DIRNAME LOWER DIRNAME
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"STEP 1: PUSH_TEXT EE-6324-BK
+STEP 2: UPPER
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: LOWER
+STEP 6: STRIP_DASH
+STEP 7: REVERSE","STEP 1: PUSH_TEXT EE-6324-BK
+STEP 2: UPPER
+STEP 3: LOWER
+STEP 4: REVERSE
+STEP 5: LOWER
+STEP 6: STRIP_HYPHENS
+STEP 7: REVERSE
+",,unknown_op:STRIP_DASH,0,0,0,0,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,PUSH_TEXT UPPER LOWER REVERSE LOWER STRIP_DASH REVERSE
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,path,6,eval_template_d6_path_11,,"STEP 1: PUSH_TEXT /archive/beta/sales_68.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME
+STEP 4: UPPER
+STEP 5: BASENAME
+STEP 6: DIRNAME
+STEP 7: SUFFIX","STEP 1: PUSH_TEXT /archive/beta/sales_68.csv
+STEP 2: BASENAME
+STEP 3: DIRNAME
+STEP 4: UPPER
+STEP 5: BASENAME
+STEP 6: DIRNAME
+STEP 7: EXTENSION
+",,unknown_op:SUFFIX,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME DIRNAME UPPER BASENAME DIRNAME EXTENSION,PUSH_TEXT BASENAME DIRNAME UPPER BASENAME DIRNAME SUFFIX
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,"STEP 1: PUSH 1
+STEP 2: PUSH 6
+STEP 3: PUSH 12
+STEP 4: PUSH 5
+STEP 5: PUSH 10
+STEP 6: PUSH 2
+STEP 7: MIN
+STEP 8: MUL 7
+STEP 9: MUL 4
+STEP 10: ADD 3
+STEP 11: MUL 7
+STEP 1","STEP 1: PUSH_LIST 1 6 12 5 10 2
+STEP 2: MIN
+STEP 3: MUL 7
+STEP 4: MUL 4
+STEP 5: ADD 3
+STEP 6: MUL 7
+STEP 7: SUB 12
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MIN MUL MUL ADD MUL SUB,PUSH PUSH PUSH PUSH PUSH PUSH MIN MUL MUL ADD MUL STEP
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"STEP 1: PUSH_ALPHA
+STEP 2: LOOKUP_BETA
+STEP 3: ADD:7
+STEP 4: ADD:12
+STEP 5: LOOKUP_OMEGA
+STEP 6: ADD:11
+STEP 7: MUL:5","STEP 1: TABLE alpha:3 beta:16 gamma:6 omega:36
+STEP 2: LOOKUP beta
+STEP 3: ADD 7
+STEP 4: ADD 12
+STEP 5: ADD_LOOKUP omega
+STEP 6: ADD 11
+STEP 7: MUL 5
+",,unknown_op:PUSH_ALPHA,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,PUSH_ALPHA LOOKUP_BETA ADD:7 ADD:12 LOOKUP_OMEGA ADD:11 MUL:5
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"STEP 1: PUSH 15
+STEP 2: SUB 19
+STEP 3: ADD 21
+STEP 4: SUB 18
+STEP 5: MUL 2
+STEP 6: ADD 23
+STEP 7: ADD 21","STEP 1: PUSH 15
+STEP 2: SUB 19
+STEP 3: ADD 21
+STEP 4: SUB 18
+STEP 5: MUL 2
+STEP 6: ADD 23
+STEP 7: ADD 21
+",42,,1,1,0,1,1,0,correct_exact,SUB ADD SUB MUL ADD ADD,PUSH SUB ADD SUB MUL ADD ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,number,6,eval_template_d6_number_7,-116,"STEP 1: PUSH 25
+STEP 2: SUB 10
+STEP 3: SUB 18
+STEP 4: MUL 5
+STEP 5: MUL 5
+STEP 6: SUB 24
+STEP 7: SUB 17","STEP 1: PUSH 25
+STEP 2: SUB 10
+STEP 3: SUB 18
+STEP 4: MUL 5
+STEP 5: MUL 5
+STEP 6: SUB 24
+STEP 7: SUB 17
+",-116,,1,1,0,1,1,0,correct_exact,SUB SUB MUL MUL SUB SUB,PUSH SUB SUB MUL MUL SUB SUB
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,table,6,eval_template_d6_table_8,79,"STEP 1: PUSH omega
+STEP 2: ADD 6
+STEP 3: ADD 5
+STEP 4: ADD 12
+STEP 5: MUL 2
+STEP 6: ADD 3","STEP 1: TABLE alpha:8 beta:38 delta:8 omega:15
+STEP 2: LOOKUP omega
+STEP 3: ADD 6
+STEP 4: ADD 5
+STEP 5: ADD 12
+STEP 6: MUL 2
+STEP 7: ADD 3
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD MUL ADD,PUSH ADD ADD ADD MUL ADD
+pilot,pilot_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,eval_template_d6,list,6,eval_template_d6_list_10,50,"STEP 1: PUSH 17
+STEP 2: PUSH 16
+STEP 3: PUSH 16
+STEP 4: PUSH 5
+STEP 5: PUSH 4
+STEP 6: PUSH 9
+STEP 7: MAX
+STEP 8: MUL 3
+STEP 9: ADD 4
+STEP 10: SUB 3
+STEP 11: SUB 11
+STEP 1","STEP 1: PUSH_LIST 17 16 16 5 4 9
+STEP 2: MAX
+STEP 3: MUL 3
+STEP 4: ADD 4
+STEP 5: SUB 3
+STEP 6: SUB 11
+STEP 7: ADD 9
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL ADD SUB SUB ADD,PUSH PUSH PUSH PUSH PUSH PUSH MAX MUL ADD SUB SUB STEP
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,path,1,eval_indist_d1_path_5,invoice_56.txt,"PUSH_TEXT /reports/alpha/invoice_56.txt
+BASENAME","PUSH_TEXT /reports/alpha/invoice_56.txt
+BASENAME
+",invoice_56.txt,,1,1,0,1,1,0,correct_exact,BASENAME,PUSH_TEXT BASENAME
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,date,1,eval_indist_d1_date_9,2026-01-03,"PUSH_DATE 2026-01-02
+ADD_DAYS 1","PUSH_DATE 2026-01-02
+ADD_DAYS 1
+",2026-01-03,,1,1,0,1,1,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,string,1,eval_indist_d1_string_6,kc-3252-wf,"PUSH_TEXT KC-3252-WF
+LOWER","PUSH_TEXT KC-3252-WF
+LOWER
+",kc-3252-wf,,1,1,0,1,1,0,correct_exact,LOWER,PUSH_TEXT LOWER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,number,1,eval_indist_d1_number_7,8,"PUSH 5
+ADD 3","PUSH 5
+ADD 3
+",8,,1,1,0,1,1,0,correct_exact,ADD,PUSH ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,path,1,eval_indist_d1_path_11,/reports/daily,"PUSH_TEXT /reports/daily/invoice_55.json
+DIRNAME","PUSH_TEXT /reports/daily/invoice_55.json
+DIRNAME
+",/reports/daily,,1,1,0,1,1,0,correct_exact,DIRNAME,PUSH_TEXT DIRNAME
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,table,1,eval_indist_d1_table_8,25,"TABLE alpha:14 beta:27 delta:37 gamma:25
+LOOKUP gamma","TABLE alpha:14 beta:27 delta:37 gamma:25
+LOOKUP gamma
+",25,,1,1,0,1,1,0,correct_exact,LOOKUP,TABLE LOOKUP
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,date,1,eval_indist_d1_date_3,2026-02-18,"PUSH_DATE 2026-02-15
+ADD_DAYS 3","PUSH_DATE 2026-02-15
+ADD_DAYS 3
+",2026-02-18,,1,1,0,1,1,0,correct_exact,ADD_DAYS,PUSH_DATE ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,correct_exact,MUL,PUSH MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,list,1,eval_indist_d1_list_4,18,"PUSH_LIST 18 2 14 10 14 3
+MAX","PUSH_LIST 18 2 14 10 14 3
+MAX
+",18,,1,1,0,1,1,0,correct_exact,MAX,PUSH_LIST MAX
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_indist_d1,list,1,eval_indist_d1_list_10,20,"PUSH_LIST 20 18 12 5 7
+MAX","PUSH_LIST 20 18 12 5 7
+MAX
+",20,,1,1,0,1,1,0,correct_exact,MAX,PUSH_LIST MAX
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,date,2,eval_comp_d2_date_9,2026-06-11,"PUSH_DATE 2026-05-07
+ADD_WEEKS 3
+ADD_WEEKS 2","PUSH_DATE 2026-05-07
+ADD_WEEKS 3
+ADD_WEEKS 2
+",2026-06-11,,1,1,0,1,1,0,correct_exact,ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,path,2,eval_comp_d2_path_11,log,"PUSH_TEXT /reports/daily/invoice_88.log
+EXTENSION
+BASENAME","PUSH_TEXT /reports/daily/invoice_88.log
+EXTENSION
+STRIP_EXT
+",log,,1,1,0,1,0,0,correct_semantic_variant,EXTENSION STRIP_EXT,PUSH_TEXT EXTENSION BASENAME
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,correct_exact,SUB MUL,PUSH SUB MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,list,2,eval_comp_d2_list_4,171,"PUSH_LIST 10 11 18 2 11 5
+SUM
+MUL 3","PUSH_LIST 10 11 18 2 11 5
+SUM
+MUL 3
+",171,,1,1,0,1,1,0,correct_exact,SUM MUL,PUSH_LIST SUM MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,string,2,eval_comp_d2_string_6,BZ-8673-DV,"PUSH_TEXT BZ-8673-DV
+LOWER
+UPPER","PUSH_TEXT BZ-8673-DV
+LOWER
+UPPER
+",BZ-8673-DV,,1,1,0,1,1,0,correct_exact,LOWER UPPER,PUSH_TEXT LOWER UPPER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,date,2,eval_comp_d2_date_3,2026-07-24,"PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9","PUSH_DATE 2026-07-01
+ADD_WEEKS 2
+ADD_DAYS 9
+",2026-07-24,,1,1,0,1,1,0,correct_exact,ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,list,2,eval_comp_d2_list_10,14,"PUSH_LIST 6 14 8 20
+MAX
+SUB 6","PUSH_LIST 6 14 8 20
+MAX
+SUB 6
+",14,,1,1,0,1,1,0,correct_exact,MAX SUB,PUSH_LIST MAX SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,number,2,eval_comp_d2_number_7,-2,"PUSH 15
+SUB 4
+SUB 13","PUSH 15
+SUB 4
+SUB 13
+",-2,,1,1,0,1,1,0,correct_exact,SUB SUB,PUSH SUB SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,table,2,eval_comp_d2_table_8,56,"TABLE alpha:14 beta:2 delta:23 omega:38
+LOOKUP alpha
+MUL 4","TABLE alpha:14 beta:2 delta:23 omega:38
+LOOKUP alpha
+MUL 4
+",56,,1,1,0,1,1,0,correct_exact,LOOKUP MUL,TABLE LOOKUP MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d2,path,2,eval_comp_d2_path_5,json,"PUSH_TEXT /archive/south/sales_51.json
+BASENAME
+EXTENSION","PUSH_TEXT /archive/south/sales_51.json
+BASENAME
+EXTENSION
+",json,,1,1,0,1,1,0,correct_exact,BASENAME EXTENSION,PUSH_TEXT BASENAME EXTENSION
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,list,3,eval_comp_d3_list_4,-10,"PUSH_LIST 7 4 8 15 9 5 15
+MAX
+SUB 12
+SUB 13","PUSH_LIST 7 4 8 15 9 5 15
+MAX
+SUB 12
+SUB 13
+",-10,,1,1,0,1,1,0,correct_exact,MAX SUB SUB,PUSH_LIST MAX SUB SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,date,3,eval_comp_d3_date_3,2026-04-24,"PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2","PUSH_DATE 2026-04-10
+ADD_DAYS 3
+ADD_DAYS 9
+ADD_DAYS 2
+",2026-04-24,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAIL 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:TAIL,0,0,0,0,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAIL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,string,3,eval_comp_d3_string_6,cv5171pc,"PUSH_TEXT CP-1715-VC
+STRIP_HYPHENS
+LOWER
+REVERSE","PUSH_TEXT CP-1715-VC
+STRIP_HYPHENS
+LOWER
+REVERSE
+",cv5171pc,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS LOWER REVERSE,PUSH_TEXT STRIP_HYPHENS LOWER REVERSE
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,path,3,eval_comp_d3_path_5,/reports/alpha,"PUSH_TEXT /reports/alpha/invoice_22.txt
+DIRNAME
+BASENAME
+LOWER
+BASE","PUSH_TEXT /reports/alpha/invoice_22.txt
+DIRNAME
+LOWER
+STRIP_EXT
+",,unknown_op:BASE,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME LOWER STRIP_EXT,PUSH_TEXT DIRNAME BASENAME LOWER BASE
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,list,3,eval_comp_d3_list_10,1140,"PUSH_LIST 1 2 19 15 20
+SUM
+MUL 4
+MUL 5","PUSH_LIST 1 2 19 15 20
+SUM
+MUL 4
+MUL 5
+",1140,,1,1,0,1,1,0,correct_exact,SUM MUL MUL,PUSH_LIST SUM MUL MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,table,3,eval_comp_d3_table_8,52,"TABLE alpha:14 delta:17 gamma:33 omega:2
+LOOKUP gamma
+ADD 8
+ADD 11","TABLE alpha:14 delta:17 gamma:33 omega:2
+LOOKUP gamma
+ADD 8
+ADD 11
+",52,,1,1,0,1,1,0,correct_exact,LOOKUP ADD ADD,TABLE LOOKUP ADD ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,path,3,eval_comp_d3_path_11,/ledger/alpha,"PUSH_TEXT /ledger/alpha/sales_44.json
+DIRNAME
+BASENAME
+LOWER","PUSH_TEXT /ledger/alpha/sales_44.json
+DIRNAME
+STRIP_EXT
+LOWER
+",alpha,,0,0,0,1,0,0,wrong_op_order_or_choice,DIRNAME STRIP_EXT LOWER,PUSH_TEXT DIRNAME BASENAME LOWER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,number,3,eval_comp_d3_number_7,33,"PUSH 14
+SUB 14
+ADD 23
+ADD 10","PUSH 14
+SUB 14
+ADD 23
+ADD 10
+",33,,1,1,0,1,1,0,correct_exact,SUB ADD ADD,PUSH SUB ADD ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d3,date,3,eval_comp_d3_date_9,2026-10-08,"PUSH_DATE 2026-09-14
+ADD_DAYS 8
+ADD_WEEKS 1
+ADD_DAYS 9","PUSH_DATE 2026-09-14
+ADD_DAYS 8
+ADD_WEEKS 1
+ADD_DAYS 9
+",2026-10-08,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,number,4,eval_comp_d4_number_7,21,"PUSH 7
+SUB 11
+ADD 15
+SUB 3
+ADD 13","PUSH 7
+SUB 11
+ADD 15
+SUB 3
+ADD 13
+",21,,1,1,0,1,1,0,correct_exact,SUB ADD SUB ADD,PUSH SUB ADD SUB ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,date,4,eval_comp_d4_date_3,2026-05-10,"PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7","PUSH_DATE 2026-04-16
+ADD_DAYS 5
+ADD_DAYS 5
+ADD_DAYS 7
+ADD_DAYS 7
+",2026-05-10,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,list,4,eval_comp_d4_list_10,15,"PUSH_LIST 1 16 10 15
+MIN
+MUL 4
+MUL 5
+SUB 5","PUSH_LIST 1 16 10 15
+MIN
+MUL 4
+MUL 5
+SUB 5
+",15,,1,1,0,1,1,0,correct_exact,MIN MUL MUL SUB,PUSH_LIST MIN MUL MUL SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,string,4,eval_comp_d4_string_6,TL8670,"PUSH TL-8670-WX
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKEN 6","PUSH_TEXT TL-8670-WX
+STRIP_HYPHENS
+UPPER
+UPPER
+TAKE_PREFIX 6
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER TAKE_PREFIX,PUSH STRIP_HYPHENS UPPER UPPER TAKEN
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,path,4,eval_comp_d4_path_5,,"PUSH_TEXT /ledger/north/index_98.log
+DIRNAME
+DIRNAME
+EXT
+BASE","PUSH_TEXT /ledger/north/index_98.log
+DIRNAME
+DIRNAME
+EXTENSION
+STRIP_EXT
+",,unknown_op:EXT,0,0,0,0,0,0,invalid_or_unexecutable,DIRNAME DIRNAME EXTENSION STRIP_EXT,PUSH_TEXT DIRNAME DIRNAME EXT BASE
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,path,4,eval_comp_d4_path_11,,"PUSH /reports/alpha/invoice_45.csv
+EXTENSION
+BASENAME
+EXTENSION
+LOWER","PUSH_TEXT /reports/alpha/invoice_45.csv
+EXTENSION
+STRIP_EXT
+EXTENSION
+LOWER
+",,,1,1,0,1,0,0,correct_semantic_variant,EXTENSION STRIP_EXT EXTENSION LOWER,PUSH EXTENSION BASENAME EXTENSION LOWER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,date,4,eval_comp_d4_date_9,2026-06-22,"PUSH_DATE 2026-05-14
+ADD_DAYS 3
+ADD_DAYS 3
+ADD_WEEKS 4
+ADD_DAYS 5","PUSH_DATE 2026-05-14
+ADD_DAYS 3
+ADD_DAYS 3
+ADD_WEEKS 4
+ADD_DAYS 5
+",2026-06-22,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,list,4,eval_comp_d4_list_4,108,"PUSH_LIST 10 19 5 16 14 1
+MAX
+MUL 6
+SUB 12
+ADD 6","PUSH_LIST 10 19 5 16 14 1
+MAX
+MUL 6
+SUB 12
+ADD 6
+",108,,1,1,0,1,1,0,correct_exact,MAX MUL SUB ADD,PUSH_LIST MAX MUL SUB ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD gamma
+ADD delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d4,table,4,eval_comp_d4_table_8,77,"TABLE alpha:11 beta:6 delta:27 gamma:16
+LOOKUP delta
+ADD beta
+MUL 2
+ADD alpha","TABLE alpha:11 beta:6 delta:27 gamma:16
+LOOKUP delta
+ADD_LOOKUP beta
+MUL 2
+ADD_LOOKUP alpha
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL ADD_LOOKUP,TABLE LOOKUP ADD MUL ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,list,6,eval_comp_d6_list_10,-7,"PUSH_LIST 15 2 15 16 5
+MIN
+SUB 14
+SUB 1
+MUL 2
+ADD 6","PUSH_LIST 15 2 15 16 5
+MIN
+SUB 14
+SUB 1
+MUL 2
+ADD 6
+ADD 13
+",-20,,0,0,0,1,0,0,wrong_op_order_or_choice,MIN SUB SUB MUL ADD ADD,PUSH_LIST MIN SUB SUB MUL ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,list,6,eval_comp_d6_list_4,15120,"PUSH_LIST 7 4 12 3
+MAX
+MUL 7
+MUL 2
+MUL 5
+MUL 3
+MUL 6","PUSH_LIST 7 4 12 3
+MAX
+MUL 7
+MUL 2
+MUL 5
+MUL 3
+MUL 6
+",15120,,1,1,0,1,1,0,correct_exact,MAX MUL MUL MUL MUL MUL,PUSH_LIST MAX MUL MUL MUL MUL MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP -
+TAIL 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH REVERSE UPPER UPPER REVERSE STRIP TAIL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,string,6,eval_comp_d6_string_6,sl-6,"PUSH_TEXT KT-8116-LS
+UPPER
+UPPER
+LOWER
+REVERSE
+LOWER
+TAKEL 4","PUSH_TEXT KT-8116-LS
+UPPER
+UPPER
+LOWER
+REVERSE
+LOWER
+TAKE_PREFIX 4
+",,unknown_op:TAKEL,0,0,0,0,0,0,invalid_or_unexecutable,UPPER UPPER LOWER REVERSE LOWER TAKE_PREFIX,PUSH_TEXT UPPER UPPER LOWER REVERSE LOWER TAKEL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,date,6,eval_comp_d6_date_9,2026-03-08,"PUSH_DATE 2026-01-12
+ADD_DAYS 5
+ADD_DAYS 9
+ADD_WEEKS 3
+ADD_DAYS 5
+ADD_DAYS 9
+ADD_DAYS 6","PUSH_DATE 2026-01-12
+ADD_DAYS 5
+ADD_DAYS 9
+ADD_WEEKS 3
+ADD_DAYS 5
+ADD_DAYS 9
+ADD_DAYS 6
+",2026-03-08,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,date,6,eval_comp_d6_date_3,2026-09-03,"PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8","PUSH_DATE 2026-07-15
+ADD_DAYS 2
+ADD_DAYS 7
+ADD_WEEKS 3
+ADD_DAYS 6
+ADD_DAYS 6
+ADD_DAYS 8
+",2026-09-03,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,path,6,eval_comp_d6_path_11,/,"PUSH_TEXT /ops/alpha/sales_97.log
+EXTENSION
+UPPER
+BASENAME
+LOWER
+DIRNAME
+BASENAME","PUSH_TEXT /ops/alpha/sales_97.log
+EXTENSION
+UPPER
+BASENAME
+LOWER
+DIRNAME
+STRIP_EXT
+",,,0,0,0,1,0,0,wrong_op_order_or_choice,EXTENSION UPPER BASENAME LOWER DIRNAME STRIP_EXT,PUSH_TEXT EXTENSION UPPER BASENAME LOWER DIRNAME BASENAME
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,number,6,eval_comp_d6_number_7,9792,"PUSH 13
+MUL 3
+ADD 3
+MUL 6
+ADD 20
+MUL 6
+MUL 6","PUSH 13
+MUL 3
+ADD 3
+MUL 6
+ADD 20
+MUL 6
+MUL 6
+",9792,,1,1,0,1,1,0,correct_exact,MUL ADD MUL ADD MUL MUL,PUSH MUL ADD MUL ADD MUL MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,table,6,eval_comp_d6_table_8,1266,"TABLE alpha:18 beta:22 delta:8 gamma:35
+LOOKUP alpha
+ADD delta
+MUL 4
+MUL 4
+ADD 6
+MUL 3","TABLE alpha:18 beta:22 delta:8 gamma:35
+LOOKUP alpha
+ADD_LOOKUP delta
+MUL 4
+MUL 4
+ADD 6
+MUL 3
+",,ValueError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP MUL MUL ADD MUL,TABLE LOOKUP ADD MUL MUL ADD MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,path,6,eval_comp_d6_path_5,,"PUSH /reports/daily/sales_31.csv
+BASENAME
+EXTENSION
+DIRNAME
+UPPER
+EXTENSION","PUSH_TEXT /reports/daily/sales_31.csv
+BASENAME
+STRIP_EXT
+EXTENSION
+DIRNAME
+UPPER
+EXTENSION
+",,,1,1,0,1,0,0,correct_semantic_variant,BASENAME STRIP_EXT EXTENSION DIRNAME UPPER EXTENSION,PUSH BASENAME EXTENSION DIRNAME UPPER EXTENSION
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,path,2,eval_template_d2_path_5,LOG,"PUSH_PATH /archive/daily/sales_33.log
+BASENAME
+UPPER","PUSH_TEXT /archive/daily/sales_33.log
+EXTENSION
+UPPER
+",,unknown_op:PUSH_PATH,0,0,0,0,0,0,invalid_or_unexecutable,EXTENSION UPPER,PUSH_PATH BASENAME UPPER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"PUSH_TEXT RP-1822-GY
+UPPER
+LEFT 6","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",,unknown_op:LEFT,0,0,0,0,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,PUSH_TEXT UPPER LEFT
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"PUSH 24
+MUL 7
+ADD 22","PUSH 24
+MUL 7
+ADD 22
+",190,,1,1,0,1,1,0,correct_exact,MUL ADD,PUSH MUL ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,string,2,eval_template_d2_string_6,KW-3,"PUSH_TEXT KW-3696-KH
+UPPER
+TAKEN 4","PUSH_TEXT KW-3696-KH
+UPPER
+TAKE_PREFIX 4
+",,unknown_op:TAKEN,0,0,0,0,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,PUSH_TEXT UPPER TAKEN
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,list,2,eval_template_d2_list_4,-12,"PUSH 15
+PUSH 1
+PUSH 8
+PUSH 7
+PUSH 10
+MIN
+SUB 13","PUSH_LIST 15 1 8 7 10
+MIN
+SUB 13
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB,PUSH PUSH PUSH PUSH PUSH MIN SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,date,2,eval_template_d2_date_9,2026-10-10,"PUSH_DATE 2026-09-22
+ADD_DAYS 9
+ADD_DAYS 9","PUSH_DATE 2026-09-22
+ADD_DAYS 9
+ADD_DAYS 9
+",2026-10-10,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,path,2,eval_template_d2_path_11,/,"PUSH_PATH /client/daily/invoice_66.csv
+BASENAME
+DIRNAME","PUSH_TEXT /client/daily/invoice_66.csv
+BASENAME
+DIRNAME
+",,unknown_op:PUSH_PATH,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME DIRNAME,PUSH_PATH BASENAME DIRNAME
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,number,2,eval_template_d2_number_7,17,"PUSH 6
+ADD 5
+ADD 6","PUSH 6
+ADD 5
+ADD 6
+",17,,1,1,0,1,1,0,correct_exact,ADD ADD,PUSH ADD ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,list,2,eval_template_d2_list_10,25,"PUSH 6
+PUSH 17
+COMPARE
+KEEP
+PUSH 9
+COMPARE
+KEEP
+PUSH 6
+COMPARE
+KEEP
+PUSH 9
+COMPARE
+KEEP
+PUSH 8
+COMPARE
+KEEP
+ADD 8","PUSH_LIST 6 17 9 6 9 8
+MAX
+ADD 8
+",,unknown_op:COMPARE,0,0,0,0,0,0,invalid_or_unexecutable,MAX ADD,PUSH PUSH COMPARE KEEP PUSH COMPARE KEEP PUSH COMPARE KEEP PUSH COMPARE KEEP PUSH COMPARE KEEP ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"LOOKUP delta
+ADD 12","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",,KeyError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD,LOOKUP ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,date,2,eval_template_d2_date_3,2026-03-01,"PUSH_DATE 2026-01-18
+ADD_WEEKS 3
+ADD_WEEKS 3","PUSH_DATE 2026-01-18
+ADD_WEEKS 3
+ADD_WEEKS 3
+",2026-03-01,,1,1,0,1,1,0,correct_exact,ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d2,table,2,eval_template_d2_table_8,39,"LOOKUP alpha
+FETCH 24
+ADD delta","TABLE alpha:24 beta:5 delta:15 omega:31
+LOOKUP alpha
+ADD_LOOKUP delta
+",,KeyError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,LOOKUP FETCH ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,list,4,eval_template_d4_list_10,143,"PUSH 17
+PUSH 16
+COMPARE","PUSH_LIST 17 16 11 20 18 3 11
+MAX
+MUL 6
+ADD 11
+ADD 12
+",,unknown_op:COMPARE,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL ADD ADD,PUSH PUSH COMPARE
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,number,4,eval_template_d4_number_7,-525,"PUSH 13
+SUB 13
+SUB 21
+MUL 5
+MUL 5","PUSH 13
+SUB 13
+SUB 21
+MUL 5
+MUL 5
+",-525,,1,1,0,1,1,0,correct_exact,SUB SUB MUL MUL,PUSH SUB SUB MUL MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"LOOKUP omega
+MUL 4
+ADD 12","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",,KeyError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,LOOKUP MUL ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAIL 6","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",,unknown_op:TAIL,0,0,0,0,0,0,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE LOWER TAIL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,table,4,eval_template_d4_table_8,1800,"LOOKUP delta
+MUL 4
+MUL 3
+MUL 5","TABLE alpha:11 beta:35 delta:30 gamma:32
+LOOKUP delta
+MUL 4
+MUL 3
+MUL 5
+",,KeyError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP MUL MUL MUL,LOOKUP MUL MUL MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,string,4,eval_template_d4_string_6,CF9776YT,"PUSH_TEXT TY-6779-FC
+LOWER
+STRIP_DASHES
+REVERSE
+UPPER","PUSH_TEXT TY-6779-FC
+LOWER
+STRIP_HYPHENS
+REVERSE
+UPPER
+",,unknown_op:STRIP_DASHES,0,0,0,0,0,0,invalid_or_unexecutable,LOWER STRIP_HYPHENS REVERSE UPPER,PUSH_TEXT LOWER STRIP_DASHES REVERSE UPPER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",-33,,1,1,0,1,1,0,correct_exact,SUB SUB MUL ADD,PUSH SUB SUB MUL ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,date,4,eval_template_d4_date_3,2026-08-15,"PUSH_DATE 2026-07-20
+ADD_DAYS 5
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 9","PUSH_DATE 2026-07-20
+ADD_DAYS 5
+ADD_DAYS 4
+ADD_DAYS 8
+ADD_DAYS 9
+",2026-08-15,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_DAYS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,path,4,eval_template_d4_path_11,,"PUSH_TEXT /archive/north/errors_34.csv
+BASENAME
+BASENAME
+LOWER
+BASE","PUSH_TEXT /archive/north/errors_34.csv
+EXTENSION
+EXTENSION
+LOWER
+STRIP_EXT
+",,unknown_op:BASE,0,0,0,0,0,0,invalid_or_unexecutable,EXTENSION EXTENSION LOWER STRIP_EXT,PUSH_TEXT BASENAME BASENAME LOWER BASE
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,list,4,eval_template_d4_list_4,-98,"PUSH 2
+PUSH 12
+PUSH 5
+PUSH 20
+MIN
+SUB 9
+SUB 7
+MUL 7","PUSH_LIST 2 12 5 20
+MIN
+SUB 9
+SUB 7
+MUL 7
+",,TypeError,0,0,0,0,0,0,invalid_or_unexecutable,MIN SUB SUB MUL,PUSH PUSH PUSH PUSH MIN SUB SUB MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,path,4,eval_template_d4_path_5,INVOICE_96.JSON,"PUSH_TEXT /ops/daily/invoice_96.json
+BASENAME
+UPPER
+UPPER
+BASENAME","PUSH_TEXT /ops/daily/invoice_96.json
+BASENAME
+UPPER
+UPPER
+BASENAME
+",INVOICE_96.JSON,,1,1,0,1,1,0,correct_exact,BASENAME UPPER UPPER BASENAME,PUSH_TEXT BASENAME UPPER UPPER BASENAME
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d4,date,4,eval_template_d4_date_9,2026-12-08,"PUSH_DATE 2026-11-10
+ADD_DAYS 8
+ADD_DAYS 9
+ADD_WEEKS 1
+ADD_DAYS 4","PUSH_DATE 2026-11-10
+ADD_DAYS 8
+ADD_DAYS 9
+ADD_WEEKS 1
+ADD_DAYS 4
+",2026-12-08,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS,PUSH_DATE ADD_DAYS ADD_DAYS ADD_WEEKS ADD_DAYS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,string,6,eval_template_d6_string_6,dp6373,"PUSH_TEXT CA-3736-PD
+FLIP
+LOWER
+FLIP
+STRIP_DASH
+FLIP
+TAKEN 6","PUSH_TEXT CA-3736-PD
+REVERSE
+LOWER
+REVERSE
+STRIP_HYPHENS
+REVERSE
+TAKE_PREFIX 6
+",,unknown_op:FLIP,0,0,0,0,0,0,invalid_or_unexecutable,REVERSE LOWER REVERSE STRIP_HYPHENS REVERSE TAKE_PREFIX,PUSH_TEXT FLIP LOWER FLIP STRIP_DASH FLIP TAKEN
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,date,6,eval_template_d6_date_9,2027-01-27,"PUSH_DATE 2026-11-05
+ADD_WEEKS 3
+ADD_DAYS 4
+ADD_DAYS 1
+ADD_DAYS 8
+ADD_WEEKS 3
+ADD_WEEKS 4","PUSH_DATE 2026-11-05
+ADD_WEEKS 3
+ADD_DAYS 4
+ADD_DAYS 1
+ADD_DAYS 8
+ADD_WEEKS 3
+ADD_WEEKS 4
+",2027-01-27,,1,1,0,1,1,0,correct_exact,ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_WEEKS,PUSH_DATE ADD_WEEKS ADD_DAYS ADD_DAYS ADD_DAYS ADD_WEEKS ADD_WEEKS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,date,6,eval_template_d6_date_3,2026-11-07,"PUSH_DATE 2026-09-19
+ADD_DAYS 7
+ADD_WEEKS 1
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 2
+ADD_WEEKS 3","PUSH_DATE 2026-09-19
+ADD_DAYS 7
+ADD_WEEKS 1
+ADD_DAYS 5
+ADD_WEEKS 1
+ADD_DAYS 2
+ADD_WEEKS 3
+",2026-11-07,,1,1,0,1,1,0,correct_exact,ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS,PUSH_DATE ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS ADD_DAYS ADD_WEEKS
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,path,6,eval_template_d6_path_5,/,"PUSH_TEXT /client/alpha/invoice_73.txt
+DIRNAME
+BASENAME
+LOWER
+DIRNAME
+LOWER","PUSH_TEXT /client/alpha/invoice_73.txt
+DIRNAME
+STRIP_EXT
+DIRNAME
+LOWER
+DIRNAME
+LOWER
+",/,,1,1,0,1,0,0,correct_semantic_variant,DIRNAME STRIP_EXT DIRNAME LOWER DIRNAME LOWER,PUSH_TEXT DIRNAME BASENAME LOWER DIRNAME LOWER
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_DASH
+REVERSE","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",,unknown_op:STRIP_DASH,0,0,0,0,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,PUSH_TEXT UPPER LOWER REVERSE LOWER STRIP_DASH REVERSE
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,path,6,eval_template_d6_path_11,,"PUSH /archive/beta/sales_68.csv
+BASENAME
+DIRNAME
+UPPER
+BASENAME
+DIRNAME
+SUFFIX","PUSH_TEXT /archive/beta/sales_68.csv
+BASENAME
+DIRNAME
+UPPER
+BASENAME
+DIRNAME
+EXTENSION
+",,unknown_op:SUFFIX,0,0,0,0,0,0,invalid_or_unexecutable,BASENAME DIRNAME UPPER BASENAME DIRNAME EXTENSION,PUSH BASENAME DIRNAME UPPER BASENAME DIRNAME SUFFIX
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,list,6,eval_template_d6_list_4,205,"PUSH 1 6 12 5 10 2
+SMALLEST
+MUL 7
+MUL 4
+ADD 3
+MUL 7
+SUB 12","PUSH_LIST 1 6 12 5 10 2
+MIN
+MUL 7
+MUL 4
+ADD 3
+MUL 7
+SUB 12
+",,unknown_op:SMALLEST,0,0,0,0,0,0,invalid_or_unexecutable,MIN MUL MUL ADD MUL SUB,PUSH SMALLEST MUL MUL ADD MUL SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"LOOKUP beta
+ADD 7
+ADD 12
+INCLUDE omega
+ADD 11
+MUL 5","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",,KeyError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,LOOKUP ADD ADD INCLUDE ADD MUL
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",42,,1,1,0,1,1,0,correct_exact,SUB ADD SUB MUL ADD ADD,PUSH SUB ADD SUB MUL ADD ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,number,6,eval_template_d6_number_7,-116,"PUSH 25
+SUB 10
+SUB 18
+MUL 5
+MUL 5
+SUB 24
+SUB 17","PUSH 25
+SUB 10
+SUB 18
+MUL 5
+MUL 5
+SUB 24
+SUB 17
+",-116,,1,1,0,1,1,0,correct_exact,SUB SUB MUL MUL SUB SUB,PUSH SUB SUB MUL MUL SUB SUB
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,table,6,eval_template_d6_table_8,79,"LOOKUP omega
+BASE 15
+ADD 6
+ADD 5
+ADD 12
+MUL 2
+ADD 3","TABLE alpha:8 beta:38 delta:8 omega:15
+LOOKUP omega
+ADD 6
+ADD 5
+ADD 12
+MUL 2
+ADD 3
+",,KeyError,0,0,0,0,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD MUL ADD,LOOKUP BASE ADD ADD ADD MUL ADD
+pilot,pilot_v1_program_stack_s101,program_stack,101,1,eval_template_d6,list,6,eval_template_d6_list_10,50,"PUSH 17
+PUSH 16
+COMPARE","PUSH_LIST 17 16 16 5 4 9
+MAX
+MUL 3
+ADD 4
+SUB 3
+SUB 11
+ADD 9
+",,unknown_op:COMPARE,0,0,0,0,0,0,invalid_or_unexecutable,MAX MUL ADD SUB SUB ADD,PUSH PUSH COMPARE

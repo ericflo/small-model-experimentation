@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Shared Parser Compiler for Frozen Qwen Hidden States</title><style>
+body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; line-height: 1.55; margin: 2rem auto; max-width: 980px; padding: 0 1rem; color: #202124; }
+h1, h2 { line-height: 1.2; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+th, td { border: 1px solid #d0d7de; padding: 0.45rem 0.55rem; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1rem 0.25rem; border-radius: 4px; }
+</style></head><body><h1>Shared Parser Compiler for Frozen Qwen Hidden States</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a frozen Qwen3.5-4B model can support a small
+trainable latent compiler that reads the full hidden sequence, recovers an
+ordered modular arithmetic program, and executes that program without emitting
+intermediate text. The best trace-supervised parser reaches 78.5% exact
+execution at length 4, 62.5% at length 8, and 39.1% at length 12 on the
+standard template. It falls to 0.4% at length 24 and does not transfer to
+paraphrased templates. Direct answer classification and answer-only parser
+training stay near 97-way chance. Answer-only continuation from a
+trace-installed parser is destructive for longer lengths.</p>
+<h2>Question</h2>
+<p>The experiment asks whether frozen Qwen hidden states contain enough structure
+for a small posttraining head to compile text into an executable latent program
+without being given token spans at inference time.</p>
+<p>The target behavior is not just answer classification. The parser must predict:</p>
+<ul>
+<li>The initial residue modulo 97.</li>
+<li>One operation symbol per step: add, subtract, or multiply.</li>
+<li>One argument residue per step.</li>
+<li>Ordered slots for operation and argument tokens.</li>
+</ul>
+<p>An exact modular executor then applies the compiled program.</p>
+<h2>Task</h2>
+<p>Each prompt describes a hidden value <code>x</code> modulo 97. A prompt gives an initial
+value and a list of update steps. The answer is the final value after all
+updates.</p>
+<p>Training prompts use the standard wording:</p>
+<ul>
+<li><code>Initial x = n.</code></li>
+<li><code>Step: add k.</code></li>
+<li><code>Step: subtract k.</code></li>
+<li><code>Step: multiply by k.</code></li>
+</ul>
+<p>Evaluation uses both this standard wording and paraphrased wording. The main
+training lengths are 1 through 12. Evaluation lengths are 4, 8, 12, and 24.</p>
+<h2>Model</h2>
+<p>Qwen3.5-4B is loaded frozen in 4-bit mode. The trainable components are small
+heads over cached hidden states.</p>
+<p>The final parser uses:</p>
+<ul>
+<li>A shared token MLP over every hidden token.</li>
+<li>Token role heads for init, operation, and argument positions.</li>
+<li>Token symbol heads for initial values, operation classes, and argument values.</li>
+<li>A monotonic slot reader for operation slots.</li>
+<li>An after-operation argument reader that anchors each argument slot to the
+  learned operation slot and scores nearby following tokens.</li>
+<li>An exact differentiable modular executor for answer loss.</li>
+</ul>
+<p>The parser receives full hidden sequences and attention masks. It does not
+receive gold token spans at inference time.</p>
+<h2>Training</h2>
+<p>The main trace run uses:</p>
+<ul>
+<li>Model: <code>Qwen/Qwen3.5-4B</code></li>
+<li>Modulus: 97</li>
+<li>Max steps: 24</li>
+<li>Trace train lengths: 1-12</li>
+<li>Trace train examples: 4096</li>
+<li>Eval examples per split: 256</li>
+<li>Parser width: 768</li>
+<li>Trace steps: 1600</li>
+<li>Argument trace loss weight: 4</li>
+<li>Argument selection loss weight: 4</li>
+<li>Argument reader: after-operation window, width 8</li>
+</ul>
+<p>Controls:</p>
+<ul>
+<li><code>direct</code>: answer classifier from the frozen answer-marker hidden state.</li>
+<li><code>compiler_answer_only</code>: parser and executor trained only from final answer.</li>
+<li><code>compiler_trace</code>: parser trained with symbol and selection trace labels.</li>
+<li><code>compiler_trace_then_answer</code>: trace bootstrap followed by answer-only training.</li>
+<li><code>compiler_trace_then_answer_low_lr</code>: same, with 0.1x answer-stage learning rate.</li>
+</ul>
+<h2>Main Results</h2>
+<p>Standard-template exact answer accuracy:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th style="text-align: right;">L=4</th>
+<th style="text-align: right;">L=8</th>
+<th style="text-align: right;">L=12</th>
+<th style="text-align: right;">L=24</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct answer head</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">1.2%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Trace parser</td>
+<td style="text-align: right;">78.5%</td>
+<td style="text-align: right;">62.5%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">0.4%</td>
+</tr>
+<tr>
+<td>Answer-only parser</td>
+<td style="text-align: right;">2.3%</td>
+<td style="text-align: right;">2.3%</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+</tbody>
+</table>
+<p>Paraphrase-template exact answer accuracy:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th style="text-align: right;">L=4</th>
+<th style="text-align: right;">L=8</th>
+<th style="text-align: right;">L=12</th>
+<th style="text-align: right;">L=24</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct answer head</td>
+<td style="text-align: right;">1.2%</td>
+<td style="text-align: right;">0.8%</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">1.2%</td>
+</tr>
+<tr>
+<td>Trace parser</td>
+<td style="text-align: right;">4.3%</td>
+<td style="text-align: right;">0.8%</td>
+<td style="text-align: right;">2.3%</td>
+<td style="text-align: right;">0.4%</td>
+</tr>
+<tr>
+<td>Answer-only parser</td>
+<td style="text-align: right;">1.2%</td>
+<td style="text-align: right;">1.6%</td>
+<td style="text-align: right;">1.2%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The trace parser learns a real executable interface on the trained wording and
+length range. The direct and answer-only controls do not.</p>
+<h2>Parser Diagnostics</h2>
+<p>Trace parser diagnostics on standard-template splits:</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Init</th>
+<th style="text-align: right;">Init pos</th>
+<th style="text-align: right;">Op</th>
+<th style="text-align: right;">Op pos</th>
+<th style="text-align: right;">Arg</th>
+<th style="text-align: right;">Arg pos</th>
+<th style="text-align: right;">Program exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L=4</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">99.9%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">94.0%</td>
+<td style="text-align: right;">95.1%</td>
+<td style="text-align: right;">78.1%</td>
+</tr>
+<tr>
+<td>L=8</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">99.2%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">94.8%</td>
+<td style="text-align: right;">94.8%</td>
+<td style="text-align: right;">62.1%</td>
+</tr>
+<tr>
+<td>L=12</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">99.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">93.2%</td>
+<td style="text-align: right;">93.7%</td>
+<td style="text-align: right;">38.7%</td>
+</tr>
+<tr>
+<td>L=24</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">82.6%</td>
+<td style="text-align: right;">72.9%</td>
+<td style="text-align: right;">70.7%</td>
+<td style="text-align: right;">68.8%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The parser solves initial values and operation slots inside the trained length
+range. Argument errors are small per step but compound strongly. At length 24,
+operation and argument localization also degrade.</p>
+<p>Paraphrase diagnostics show a different failure. Init token selection remains
+high, but operation and argument slot selection break under wording shift. This
+indicates that the parser is format-sensitive rather than template-invariant.</p>
+<h2>Retention</h2>
+<p>Answer-only continuation after trace bootstrap:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Split</th>
+<th style="text-align: right;">L=4</th>
+<th style="text-align: right;">L=8</th>
+<th style="text-align: right;">L=12</th>
+<th style="text-align: right;">L=24</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trace then answer</td>
+<td>standard</td>
+<td style="text-align: right;">60.2%</td>
+<td style="text-align: right;">0.4%</td>
+<td style="text-align: right;">1.2%</td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Trace then answer, low LR</td>
+<td>standard</td>
+<td style="text-align: right;">78.1%</td>
+<td style="text-align: right;">6.6%</td>
+<td style="text-align: right;">0.8%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Trace then answer</td>
+<td>paraphrase</td>
+<td style="text-align: right;">3.1%</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">1.2%</td>
+</tr>
+<tr>
+<td>Trace then answer, low LR</td>
+<td>paraphrase</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">0.8%</td>
+<td style="text-align: right;">0.4%</td>
+<td style="text-align: right;">1.2%</td>
+</tr>
+</tbody>
+</table>
+<p>Answer-only continuation does not reliably preserve the parser. The low
+learning-rate variant preserves length 4 but loses longer standard lengths by
+the end of continuation.</p>
+<h2>Interpretation</h2>
+<p>The strongest positive result is that a small trace-supervised parser can read
+frozen Qwen hidden states and drive exact latent execution without span inputs
+at inference time. This is a genuine latent compiler result for the standard
+template through length 12.</p>
+<p>The strongest negative result is that the learned parser is not robust. It does
+not extrapolate to length 24, does not transfer to paraphrased wording, and is
+not discovered from answer-only training. Final-answer continuation also
+damages the installed interface.</p>
+<p>The main bottleneck is not modular execution. It is reliable parsing. Exact
+execution falls quickly when per-step operation and argument accuracies are
+below the high 90s, because every compiled symbol must be correct.</p>
+<h2>Conclusion</h2>
+<p>Frozen Qwen3.5-4B hidden states support a trace-supervised latent program
+compiler, but this parser is still too brittle to count as a broad intelligence
+gain recipe. The result supports the narrower claim that structured trace
+supervision can install an executable latent interface. It does not support the
+stronger claim that final-answer posttraining alone discovers or preserves such
+an interface.</p>
+<p>The next best test is to train the parser inside Qwen with a small QLoRA
+adapter, rather than only training external heads over frozen hidden states.</p></body></html>

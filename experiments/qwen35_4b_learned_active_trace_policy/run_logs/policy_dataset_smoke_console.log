@@ -1,0 +1,30 @@
+policy-data:train:   0%|          | 0/12 [00:00<?, ?it/s]policy-data:train:  17%|█▋        | 2/12 [00:00<00:01,  5.55it/s]policy-data:train:  42%|████▏     | 5/12 [00:00<00:00, 10.17it/s]policy-data:train:  58%|█████▊    | 7/12 [00:01<00:01,  4.13it/s]policy-data:train:  67%|██████▋   | 8/12 [00:01<00:01,  3.74it/s]policy-data:train:  83%|████████▎ | 10/12 [00:01<00:00,  5.43it/s]policy-data:train: 100%|██████████| 12/12 [00:02<00:00,  5.28it/s]policy-data:train: 100%|██████████| 12/12 [00:02<00:00,  5.16it/s]
+policy-data:eval:   0%|          | 0/8 [00:00<?, ?it/s]policy-data:eval:  25%|██▌       | 2/8 [00:00<00:01,  3.75it/s]policy-data:eval:  62%|██████▎   | 5/8 [00:00<00:00,  7.88it/s]policy-data:eval:  88%|████████▊ | 7/8 [00:01<00:00,  4.52it/s]policy-data:eval: 100%|██████████| 8/8 [00:01<00:00,  3.91it/s]policy-data:eval: 100%|██████████| 8/8 [00:01<00:00,  4.37it/s]
+{
+  "eval_data": "data/seed/dsl_train.jsonl",
+  "eval_records": 8,
+  "eval_summary": {
+    "avg_target_actual_eliminated": 0.0,
+    "avg_target_entropy": 0.0,
+    "by_family": {},
+    "by_step": {},
+    "examples": 0
+  },
+  "label": "oracle-elimination option among displayed candidate query choices",
+  "max_buckets": 6,
+  "max_options": 24,
+  "max_policy_candidates": 128,
+  "max_query_pool_cases": 48,
+  "max_steps": 3,
+  "max_total_programs_per_record": 4000,
+  "seed": 20260702,
+  "train_data": "data/static_bridge_80/dsl_train.jsonl",
+  "train_records": 12,
+  "train_summary": {
+    "avg_target_actual_eliminated": 0.0,
+    "avg_target_entropy": 0.0,
+    "by_family": {},
+    "by_step": {},
+    "examples": 0
+  }
+}

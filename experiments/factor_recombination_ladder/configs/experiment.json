@@ -1,0 +1,36 @@
+{
+  "experiment": "factor_recombination_ladder",
+  "model_id": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+  "question": "Can trace-conditioned repair learn reusable factor recombination when specific factor-pair cells are held out from training?",
+  "training": {
+    "records_per_condition": 240,
+    "max_length": 3072,
+    "epochs": 3.0,
+    "learning_rate": 0.00015,
+    "rank": 32,
+    "alpha": 64,
+    "dropout": 0.05,
+    "gradient_accumulation_steps": 8
+  },
+  "evaluation": {
+    "max_new_tokens": 256,
+    "splits": [
+      "seen_iid",
+      "format_shift",
+      "recombination_holdout"
+    ],
+    "heldout_factor_pairs": [
+      "aggregation+modulo",
+      "branching+tuple_access",
+      "length+string_match",
+      "ordering+string_match",
+      "ordering+tuple_access"
+    ]
+  },
+  "artifact_policy": {
+    "compact_dir": "experiments/factor_recombination_ladder",
+    "large_dir": "large_artifacts/factor_recombination_ladder",
+    "large_files_separate": true
+  }
+}

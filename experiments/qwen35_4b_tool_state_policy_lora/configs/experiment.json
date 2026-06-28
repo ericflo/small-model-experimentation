@@ -1,0 +1,27 @@
+{
+  "experiment": "qwen35_4b_tool_state_policy_lora",
+  "question": "Can a small posttrained action policy use tool-state observations from a table-transform repair environment to decide when to trust a repaired executable program over a direct answer?",
+  "model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "data": {
+    "traces": "data/tool_state_traces.jsonl",
+    "cases": "data/cases.jsonl",
+    "split_unit": "family",
+    "split_seed": 6137,
+    "train_families": 30,
+    "dev_families": 10,
+    "test_families": 10
+  },
+  "actions": ["DIRECT", "PROGRAM"],
+  "primary_gate": "The trained action policy must improve held-out exact accuracy over DIRECT-only and over fixed visible-pass program commit while not increasing direct-correct losses.",
+  "secondary_gate": "A shuffled-label LoRA control must not match or beat the real-label LoRA on held-out recoveries.",
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "max_steps": 80,
+    "learning_rate": 0.0002,
+    "batch_size": 2,
+    "grad_accum": 8,
+    "max_length": 1024
+  }
+}

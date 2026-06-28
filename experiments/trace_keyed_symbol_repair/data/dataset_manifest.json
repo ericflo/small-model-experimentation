@@ -1,0 +1,25 @@
+{
+  "holdout_token_styles": [
+    "colon_upper",
+    "dot_lower"
+  ],
+  "invariant": "expected token is absent from current files and present in failing trace",
+  "paths": {
+    "all": "experiments/trace_keyed_symbol_repair/data/repair_all.jsonl",
+    "train": "experiments/trace_keyed_symbol_repair/data/repair_train.jsonl",
+    "val_format_holdout": "experiments/trace_keyed_symbol_repair/data/repair_val_format_holdout.jsonl",
+    "val_iid": "experiments/trace_keyed_symbol_repair/data/repair_val_iid.jsonl"
+  },
+  "records": {
+    "all": 360,
+    "train": 240,
+    "val_format_holdout": 60,
+    "val_iid": 60
+  },
+  "seed": 20260620,
+  "train_token_styles": [
+    "dash_upper",
+    "underscore_upper",
+    "mixed_hex"
+  ]
+}

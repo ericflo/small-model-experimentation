@@ -1,0 +1,21 @@
+{
+  "run_name": "pilot_qwen_6_v2",
+  "seed": 20260627,
+  "task_limit": 6,
+  "memory_limit": 0,
+  "train_n": 4,
+  "heldout_cap": 3,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "top_k": 3,
+  "card_examples": 4,
+  "row_max_new_tokens": 64,
+  "batch_max_new_tokens": 384,
+  "no_qwen": false,
+  "model": "Qwen/Qwen3-4B",
+  "eval_tasks": 6,
+  "memory_tasks": 303,
+  "generation_records": 42,
+  "elapsed_seconds": 34.08,
+  "created_utc": "2026-06-27T08:48:58.828996+00:00"
+}

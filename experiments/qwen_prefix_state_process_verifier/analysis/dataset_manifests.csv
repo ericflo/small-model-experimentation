@@ -1,0 +1,4 @@
+run,seed,max_prompt_tokens,gpu_name,gpu_vram_gb,size_trace_train,size_verifier_train,size_val_mixed,size_fresh_standard,size_fresh_paraphrase,size_fresh_paired,size_hard_composition
+main_prefix_state_verifier_s512,333,58,NVIDIA RTX 6000 Ada Generation,47.383,512,512,128,128,128,128,128
+pilot_prefix_state_verifier_s128,222,58,NVIDIA RTX 6000 Ada Generation,47.383,128,128,32,32,32,32,32
+smoke_prefix_state_verifier,111,56,NVIDIA RTX 6000 Ada Generation,47.383,12,12,4,4,4,4,4

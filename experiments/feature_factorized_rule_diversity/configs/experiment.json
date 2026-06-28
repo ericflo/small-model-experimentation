@@ -1,0 +1,72 @@
+{
+  "experiment": "feature_factorized_rule_diversity",
+  "date_created": "2026-06-21",
+  "question": "Does held-out rule repair improve more from primitive factor coverage, analogous multi-factor composition coverage, or a fixed-budget mixture of both?",
+  "dataset": {
+    "seed": 20260621,
+    "total_train_records_per_condition": 240,
+    "training_conditions": {
+      "singletons_trace": {
+        "families": 10,
+        "records_per_family": 24,
+        "description": "isolated primitive factor examples"
+      },
+      "composites_trace": {
+        "families": 6,
+        "records_per_family": 40,
+        "description": "analogous multi-factor compositions"
+      },
+      "mixed_trace": {
+        "families": 8,
+        "records_per_family": 30,
+        "description": "fixed-budget blend of singleton and composite factors"
+      },
+      "mixed_no_trace": {
+        "base_training_set": "mixed_trace",
+        "mode": "no_trace"
+      },
+      "mixed_shuffled_trace": {
+        "base_training_set": "mixed_trace",
+        "mode": "trace",
+        "shuffle_traces": true
+      }
+    },
+    "evaluation_splits": {
+      "singleton_iid": "seen-style primitive factor repairs",
+      "composite_iid": "seen-style multi-factor repairs",
+      "recombination_holdout": "held-out recombinations absent from training"
+    }
+  },
+  "model": {
+    "model_id": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+    "load_in_4bit": true
+  },
+  "lora_training": {
+    "rank": 32,
+    "alpha": 64,
+    "dropout": 0.05,
+    "epochs": 3.0,
+    "learning_rate": 0.00015,
+    "max_length": 3072,
+    "gradient_accumulation_steps": 8,
+    "save_steps": 30,
+    "eval_steps": 30,
+    "optimizer": "paged_adamw_8bit",
+    "scheduler": "cosine"
+  },
+  "generation": {
+    "max_new_tokens": 256,
+    "do_sample": false
+  },
+  "artifact_policy": {
+    "compact_experiment_dir": "experiments/feature_factorized_rule_diversity",
+    "large_artifact_dir": "large_artifacts/feature_factorized_rule_diversity",
+    "large_artifact_contents": [
+      "LoRA adapter weights",
+      "training checkpoints",
+      "optimizer state",
+      "tokenizer copies saved with adapters"
+    ]
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "best": {
+    "objective": 0.7719444444444444,
+    "samples_used_mean": 2.75,
+    "selected_hidden_all": 0.775,
+    "threshold": -19.875,
+    "visible_coverage": 0.775
+  },
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    9
+  ],
+  "rows": [
+    {
+      "objective": 0.7719444444444444,
+      "samples_used_mean": 2.75,
+      "selected_hidden_all": 0.775,
+      "threshold": -19.875,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7719444444444444,
+      "samples_used_mean": 2.75,
+      "selected_hidden_all": 0.775,
+      "threshold": -18.875,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7719444444444444,
+      "samples_used_mean": 2.75,
+      "selected_hidden_all": 0.775,
+      "threshold": -18.225390625,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -17.57578125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -16.926171875,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -16.2765625,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -15.626953125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -14.97734375,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -14.327734375,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -13.678125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -13.028515625,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7717222222222222,
+      "samples_used_mean": 2.95,
+      "selected_hidden_all": 0.775,
+      "threshold": -12.37890625,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7716388888888889,
+      "samples_used_mean": 3.025,
+      "selected_hidden_all": 0.775,
+      "threshold": -11.729296875,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715277777777778,
+      "samples_used_mean": 3.125,
+      "selected_hidden_all": 0.775,
+      "threshold": -11.0796875,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715277777777778,
+      "samples_used_mean": 3.125,
+      "selected_hidden_all": 0.775,
+      "threshold": -10.430078125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715277777777778,
+      "samples_used_mean": 3.125,
+      "selected_hidden_all": 0.775,
+      "threshold": -9.78046875,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715277777777778,
+      "samples_used_mean": 3.125,
+      "selected_hidden_all": 0.775,
+      "threshold": -9.130859375,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715277777777778,
+      "samples_used_mean": 3.125,
+      "selected_hidden_all": 0.775,
+      "threshold": -8.48125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -7.831640625,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -7.18203125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -6.532421875000001,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -5.8828125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -5.233203124999999,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -4.58359375,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -3.9339843749999996,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -3.2843750000000007,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -2.634765625,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -1.9851562499999993,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -1.3355468749999986,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -0.6859375000000014,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": -0.03632812500000071,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": 0.61328125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": 1.2628906250000007,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": 1.9125000000000014,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": 2.5621093749999986,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7715000000000001,
+      "samples_used_mean": 3.15,
+      "selected_hidden_all": 0.775,
+      "threshold": 3.2117187499999993,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7713055555555556,
+      "samples_used_mean": 3.325,
+      "selected_hidden_all": 0.775,
+      "threshold": 3.861328125,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7711111111111111,
+      "samples_used_mean": 3.5,
+      "selected_hidden_all": 0.775,
+      "threshold": 4.510937500000001,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7706111111111111,
+      "samples_used_mean": 3.95,
+      "selected_hidden_all": 0.775,
+      "threshold": 5.160546875000001,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7699166666666667,
+      "samples_used_mean": 4.575,
+      "selected_hidden_all": 0.775,
+      "threshold": 5.810156249999999,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7665555555555555,
+      "samples_used_mean": 7.6,
+      "selected_hidden_all": 0.775,
+      "threshold": 6.459765624999999,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.7650277777777778,
+      "samples_used_mean": 8.975,
+      "selected_hidden_all": 0.775,
+      "threshold": 7.109375,
+      "visible_coverage": 0.775
+    },
+    {
+      "objective": 0.765,
+      "samples_used_mean": 9.0,
+      "selected_hidden_all": 0.775,
+      "threshold": 8.109375,
+      "visible_coverage": 0.775
+    }
+  ],
+  "sample_penalty": 0.01
+}

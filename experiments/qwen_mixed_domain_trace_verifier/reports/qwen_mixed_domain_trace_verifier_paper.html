@@ -1,0 +1,129 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Mixed-Domain Candidate-Trace Verifier</title><style>
+body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 42px auto; max-width: 1120px; line-height: 1.55; color: #172026; }
+h1, h2, h3 { line-height: 1.2; color: #101820; }
+h1 { font-size: 34px; margin-bottom: 8px; }
+h2 { font-size: 24px; margin-top: 36px; border-bottom: 1px solid #d8dee4; padding-bottom: 6px; }
+h3 { font-size: 18px; margin-top: 26px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 14px; }
+th, td { border: 1px solid #d8dee4; padding: 7px 9px; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { background: #f6f8fa; }
+img { max-width: 100%; border: 1px solid #d8dee4; border-radius: 6px; }
+figure { margin: 20px 0 28px; }
+figcaption { color: #667085; font-size: 13px; margin-top: 6px; }
+code { background: #f6f8fa; padding: 1px 4px; border-radius: 4px; }
+</style></head><body><h1>Qwen Mixed-Domain Candidate-Trace Verifier</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a small learned verifier can improve a frozen</p>
+<p>Qwen-attached hidden-VM compiler by selecting among local executable candidate</p>
+<p>traces. The model under test emits a hidden program consisting of an initial</p>
+<p>value plus a sequence of VM operations and arguments. The verifier never sees</p>
+<p>gold answers or gold states at test time; it scores candidate traces using</p>
+<p>compiler priors, local edit metadata, soft-executor support, and the candidate&#x27;s</p>
+<p>own executed trajectory.</p>
+<p>The strongest arm trained the verifier on length-6-to-8 traces and selected the</p>
+<p>checkpoint on length-8 validation. On fresh paired length-6 prompts, the base</p>
+<p>compiler achieved 46.1%, the learned verifier</p>
+<p>achieved 57.4%, and paired reranking</p>
+<p>achieved 61.3%. That is a learned gain</p>
+<p>of +11.3 pp and a paired-rerank gain of +15.2 pp. The same arm</p>
+<p>also improved hard paraphrase length-8 from 22.9%</p>
+<p>to 30.7% (+7.8 pp) and harder</p>
+<p>standard length-10 from 18.8% to</p>
+<p>24.5% (+5.7 pp).</p>
+<p>The oracle selector remains far higher than the learned verifier. This means the</p>
+<p>candidate set often contains a correct executable trace, but the learned scoring</p>
+<p>function recovers only a minority of the available headroom.</p>
+<h2>Setup</h2>
+<ul>
+<li>Backbone/compiler input: a frozen Qwen-attached hidden-VM compiler checkpoint</li>
+</ul>
+<p>  localized under this experiment&#x27;s large-artifact directory.</p>
+<ul>
+<li>VM value modulus: 97.</li>
+<li>VM operations: ADD, SUB, MUL, ADD7, SUB7, SET, MAX, MIN, XOR, GT.</li>
+<li>Domains: arithmetic, calendar, unit conversion, list aggregation, boolean</li>
+</ul>
+<p>  thresholding, and table lookup.</p>
+<ul>
+<li>Candidate neighborhood: top-3 compiler values for init/op/arg slots, one-edit</li>
+</ul>
+<p>  candidates, same-step op+arg two-edit candidates, and two-argument edits over</p>
+<p>  up to the first 10 slots.</p>
+<ul>
+<li>Candidate labels for verifier training: exact answer and exact state trajectory</li>
+</ul>
+<p>  match. These labels are offline supervision only.</p>
+<ul>
+<li>Test-time selectors:</li>
+</ul>
+<p>  - base: unedited compiler argmax trace.</p>
+<p>  - prior: highest compiler-prior candidate.</p>
+<p>  - soft_trace: highest soft-executor state-support candidate.</p>
+<p>  - learned: learned trace-verifier argmax.</p>
+<p>  - pair_rerank: learned verifier plus agreement bonus across paired standard</p>
+<p>    and paraphrased prompts.</p>
+<p>  - oracle: highest-prior candidate with exact gold state trajectory.</p>
+<h2>Main Results</h2>
+<figure><img src="../analysis/accuracy_by_split.png" alt="Accuracy by split"><figcaption>Accuracy by split</figcaption></figure>
+<h3>Length-6 Verifier</h3>
+<table>
+<tr><th>split</th><th>base</th><th>learned</th><th>pair-rerank</th><th>oracle</th><th>learned delta</th><th>oracle gap recovered</th></tr>
+<tr><td>`fresh_standard_len6`</td><td>50.5%</td><td>57.8%</td><td>n/a</td><td>94.3%</td><td>+7.3 pp</td><td>16.7%</td></tr>
+<tr><td>`fresh_paraphrase_len6`</td><td>43.2%</td><td>50.0%</td><td>n/a</td><td>90.1%</td><td>+6.8 pp</td><td>14.4%</td></tr>
+<tr><td>`fresh_paired_len6`</td><td>47.3%</td><td>53.1%</td><td>54.7%</td><td>93.8%</td><td>+5.9 pp</td><td>12.6%</td></tr>
+<tr><td>`hard_standard_len8`</td><td>41.7%</td><td>44.8%</td><td>n/a</td><td>79.2%</td><td>+3.1 pp</td><td>8.3%</td></tr>
+<tr><td>`hard_paraphrase_len8`</td><td>18.2%</td><td>20.3%</td><td>n/a</td><td>64.1%</td><td>+2.1 pp</td><td>4.5%</td></tr>
+<tr><td>`harder_standard_len10`</td><td>20.3%</td><td>21.4%</td><td>n/a</td><td>57.8%</td><td>+1.0 pp</td><td>2.8%</td></tr>
+<tr><td>`harder_paraphrase_len10`</td><td>7.3%</td><td>8.9%</td><td>n/a</td><td>30.2%</td><td>+1.6 pp</td><td>6.8%</td></tr>
+</table>
+<h3>Length-6-to-8 Verifier</h3>
+<table>
+<tr><th>split</th><th>base</th><th>learned</th><th>pair-rerank</th><th>oracle</th><th>learned delta</th><th>oracle gap recovered</th></tr>
+<tr><td>`fresh_standard_len6`</td><td>60.4%</td><td>67.7%</td><td>n/a</td><td>95.8%</td><td>+7.3 pp</td><td>20.6%</td></tr>
+<tr><td>`fresh_paraphrase_len6`</td><td>47.9%</td><td>53.1%</td><td>n/a</td><td>92.2%</td><td>+5.2 pp</td><td>11.8%</td></tr>
+<tr><td>`fresh_paired_len6`</td><td>46.1%</td><td>57.4%</td><td>61.3%</td><td>92.2%</td><td>+11.3 pp</td><td>24.6%</td></tr>
+<tr><td>`hard_standard_len8`</td><td>39.6%</td><td>41.1%</td><td>n/a</td><td>83.9%</td><td>+1.6 pp</td><td>3.5%</td></tr>
+<tr><td>`hard_paraphrase_len8`</td><td>22.9%</td><td>30.7%</td><td>n/a</td><td>69.3%</td><td>+7.8 pp</td><td>16.9%</td></tr>
+<tr><td>`harder_standard_len10`</td><td>18.8%</td><td>24.5%</td><td>n/a</td><td>58.9%</td><td>+5.7 pp</td><td>14.3%</td></tr>
+<tr><td>`harder_paraphrase_len10`</td><td>3.6%</td><td>5.7%</td><td>n/a</td><td>31.8%</td><td>+2.1 pp</td><td>7.4%</td></tr>
+</table>
+<h2>Oracle Gap</h2>
+<figure><img src="../analysis/oracle_gap_recovered.png" alt="Oracle gap recovered"><figcaption>Oracle gap recovered</figcaption></figure>
+<p>The learned verifier is real but not yet close to the oracle. The length-6-to-8</p>
+<p>arm recovers about 24.6% of the fresh</p>
+<p>paired length-6 oracle gap and 16.9%</p>
+<p>of the hard paraphrase length-8 oracle gap. This is enough to be useful, but it</p>
+<p>also shows that most of the selection problem remains unsolved.</p>
+<h2>Paired Prompt Behavior</h2>
+<figure><img src="../analysis/paired_consistency.png" alt="Paired consistency"><figcaption>Paired consistency</figcaption></figure>
+<p>Paired reranking is the cleanest inference-time gain. For the length-6-to-8 arm,</p>
+<p>paired prompts both correct improved from 37.5%</p>
+<p>under the base compiler to 55.5% with</p>
+<p>pair reranking, while the oracle pair ceiling was 86.7%.</p>
+<h2>Domain Breakdown</h2>
+<figure><img src="../analysis/domain_breakdown_len68.png" alt="Domain breakdown"><figcaption>Domain breakdown</figcaption></figure>
+<p>The strongest domain gains in the length-6-to-8 arm were list aggregation,</p>
+<p>boolean thresholding, lookup, and unit conversion. Arithmetic and calendar</p>
+<p>remain harder for the verifier despite large oracle headroom, suggesting that</p>
+<p>the trace features are not yet identifying the right local arithmetic repairs.</p>
+<h2>Training Dynamics</h2>
+<figure><img src="../analysis/validation_curves.png" alt="Validation curves"><figcaption>Validation curves</figcaption></figure>
+<table>
+<tr><th>verifier</th><th>best epoch</th><th>base val</th><th>learned val</th><th>oracle val</th></tr>
+<tr><td>Len6-8 verifier</td><td>12</td><td>28.1%</td><td>35.9%</td><td>73.4%</td></tr>
+<tr><td>Len6 verifier</td><td>16</td><td>52.3%</td><td>64.8%</td><td>91.4%</td></tr>
+</table>
+<p>The verifier has a narrow useful checkpoint window. Later epochs can over-edit,</p>
+<p>so validation-based checkpoint selection is required.</p>
+<h2>Interpretation</h2>
+<p>The experiment supports the narrow claim that hidden executable traces are</p>
+<p>repairable by a small learned selection layer. The best arm gives a meaningful</p>
+<p>inference-time lift without changing the frozen Qwen compiler. It does not</p>
+<p>support a broad claim of large universal intelligence gain: the learned verifier</p>
+<p>recovers only part of a much larger oracle candidate-selection ceiling, and the</p>
+<p>hardest paraphrase length-10 split remains very weak.</p>
+<p>The next technical bottleneck is verifier quality, not candidate availability.</p>
+<p>Useful next steps are stronger trace encoders, explicit contrastive training on</p>
+<p>base-wrong/repairable groups, and candidate generation that proposes structured</p>
+<p>multi-slot fixes without relying on a small local edit budget.</p></body></html>

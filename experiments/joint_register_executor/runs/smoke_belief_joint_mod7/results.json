@@ -1,0 +1,276 @@
+{
+  "mode": "joint",
+  "args": {
+    "mode": "joint",
+    "task": "belief_line",
+    "seed": 23,
+    "modulus": 7,
+    "op_family": "full",
+    "train_min_len": 1,
+    "train_max_len": 3,
+    "eval_lengths": "2,3",
+    "eval_k": "0,1,2,3",
+    "transition_temperature": 1.0,
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "dropout": 0.05,
+    "train_steps": 2,
+    "batch_size": 16,
+    "eval_batch_size": 16,
+    "eval_examples": 32,
+    "lr": 0.01,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "log_every": 1,
+    "eval_every": 1,
+    "output_dir": "experiments/joint_register_executor/runs/smoke_belief_joint_mod7",
+    "checkpoint_dir": "large_artifacts/joint_register_executor/checkpoints/smoke_belief_joint_mod7"
+  },
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "device": "cuda",
+    "cuda_name": "NVIDIA RTX 6000 Ada Generation"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 3.4057772159576416,
+      "pair_acc": 0.375,
+      "grad_norm": 0.05462948977947235,
+      "transition_entropy": 1.9458736975987752
+    },
+    {
+      "step": 2,
+      "loss": 3.40332293510437,
+      "pair_acc": 0.3125,
+      "grad_norm": 0.05506252497434616,
+      "transition_entropy": 1.9458664655685425
+    }
+  ],
+  "eval": [
+    {
+      "step": 1,
+      "rows": [
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 0,
+          "n": 32,
+          "pair_accuracy": 0.25,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.19642859375,
+          "target_nll": 17.03485678125,
+          "top1_on_support": 0.25
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 1,
+          "n": 32,
+          "pair_accuracy": 0.09375,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.14277490625,
+          "target_nll": 3.89244940625,
+          "top1_on_support": 0.09375
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 2,
+          "n": 32,
+          "pair_accuracy": 0.0625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1427921875,
+          "target_nll": 3.892289375,
+          "top1_on_support": 0.0625
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 3,
+          "n": 32,
+          "pair_accuracy": 0.0625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1427921875,
+          "target_nll": 3.8922895,
+          "top1_on_support": 0.0625
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 0,
+          "n": 32,
+          "pair_accuracy": 0.15625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.15178571875,
+          "target_nll": 17.87313175,
+          "top1_on_support": 0.15625
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 1,
+          "n": 32,
+          "pair_accuracy": 0.125,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1427775,
+          "target_nll": 3.89243671875,
+          "top1_on_support": 0.125
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 2,
+          "n": 32,
+          "pair_accuracy": 0.21875,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.14277975,
+          "target_nll": 3.8923811875,
+          "top1_on_support": 0.21875
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 3,
+          "n": 32,
+          "pair_accuracy": 0.125,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.14294971875,
+          "target_nll": 3.89119003125,
+          "top1_on_support": 0.125
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "rows": [
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 0,
+          "n": 32,
+          "pair_accuracy": 0.25,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.25000003125,
+          "target_nll": 16.02892778125,
+          "top1_on_support": 0.25
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 1,
+          "n": 32,
+          "pair_accuracy": 0.21875,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.14297528125,
+          "target_nll": 3.8910864375,
+          "top1_on_support": 0.21875
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 2,
+          "n": 32,
+          "pair_accuracy": 0.09375,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1428659375,
+          "target_nll": 3.891780625,
+          "top1_on_support": 0.09375
+        },
+        {
+          "model": "joint",
+          "length": 2,
+          "k": 3,
+          "n": 32,
+          "pair_accuracy": 0.09375,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1428659375,
+          "target_nll": 3.891780625,
+          "top1_on_support": 0.09375
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 0,
+          "n": 32,
+          "pair_accuracy": 0.25,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1875,
+          "target_nll": 17.20251275,
+          "top1_on_support": 0.25
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 1,
+          "n": 32,
+          "pair_accuracy": 0.15625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.14286546875,
+          "target_nll": 3.89185025,
+          "top1_on_support": 0.15625
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 2,
+          "n": 32,
+          "pair_accuracy": 0.25,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.14319784375,
+          "target_nll": 3.8894811875,
+          "top1_on_support": 0.25
+        },
+        {
+          "model": "joint",
+          "length": 3,
+          "k": 3,
+          "n": 32,
+          "pair_accuracy": 0.125,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.14271565625,
+          "target_nll": 3.8928443125,
+          "top1_on_support": 0.125
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    "large_artifacts/joint_register_executor/checkpoints/smoke_belief_joint_mod7/checkpoint_step00001.pt",
+    "large_artifacts/joint_register_executor/checkpoints/smoke_belief_joint_mod7/checkpoint_step00002.pt"
+  ]
+}

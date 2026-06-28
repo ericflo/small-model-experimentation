@@ -1,0 +1,776 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:13,  9.81it/s]Loading weights:   4%|▍         | 28/723 [00:00<00:04, 159.32it/s]Loading weights:  13%|█▎        | 92/723 [00:00<00:01, 373.67it/s]Loading weights:  20%|██        | 146/723 [00:00<00:01, 436.29it/s]Loading weights:  28%|██▊       | 201/723 [00:00<00:01, 471.24it/s]Loading weights:  36%|███▌      | 259/723 [00:00<00:00, 501.15it/s]Loading weights:  45%|████▌     | 326/723 [00:00<00:00, 549.32it/s]Loading weights:  53%|█████▎    | 383/723 [00:00<00:00, 550.95it/s]Loading weights:  65%|██████▍   | 468/723 [00:00<00:00, 642.56it/s]Loading weights:  99%|█████████▉| 716/723 [00:01<00:00, 1190.36it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 703.63it/s] 
+eval-sketch:   0%|          | 0/60 [00:00<?, ?it/s]eval-sketch:   2%|▏         | 1/60 [00:01<01:52,  1.91s/it]eval-sketch:   3%|▎         | 2/60 [00:04<02:08,  2.21s/it]eval-sketch:   5%|▌         | 3/60 [00:05<01:44,  1.84s/it]eval-sketch:   7%|▋         | 4/60 [00:07<01:42,  1.83s/it]eval-sketch:   8%|▊         | 5/60 [00:09<01:45,  1.92s/it]eval-sketch:  10%|█         | 6/60 [00:12<01:54,  2.12s/it]eval-sketch:  12%|█▏        | 7/60 [00:14<02:03,  2.34s/it]eval-sketch:  13%|█▎        | 8/60 [00:17<02:09,  2.50s/it]eval-sketch:  15%|█▌        | 9/60 [00:19<01:49,  2.16s/it]eval-sketch:  17%|█▋        | 10/60 [00:20<01:41,  2.03s/it]eval-sketch:  18%|█▊        | 11/60 [00:22<01:32,  1.89s/it]eval-sketch:  20%|██        | 12/60 [00:25<01:42,  2.14s/it]eval-sketch:  22%|██▏       | 13/60 [00:40<04:41,  5.98s/it]eval-sketch:  23%|██▎       | 14/60 [00:54<06:33,  8.55s/it]eval-sketch:  25%|██▌       | 15/60 [01:09<07:46, 10.38s/it]eval-sketch:  27%|██▋       | 16/60 [01:10<05:38,  7.69s/it]eval-sketch:  28%|██▊       | 17/60 [01:12<04:22,  6.10s/it]eval-sketch:  30%|███       | 18/60 [01:14<03:19,  4.76s/it]eval-sketch:  32%|███▏      | 19/60 [01:16<02:38,  3.88s/it]eval-sketch:  33%|███▎      | 20/60 [01:18<02:09,  3.24s/it]eval-sketch:  35%|███▌      | 21/60 [01:20<01:57,  3.01s/it]eval-sketch:  37%|███▋      | 22/60 [01:23<01:52,  2.97s/it]eval-sketch:  38%|███▊      | 23/60 [01:26<01:49,  2.95s/it]eval-sketch:  40%|████      | 24/60 [01:27<01:29,  2.48s/it]eval-sketch:  42%|████▏     | 25/60 [01:29<01:19,  2.26s/it]eval-sketch:  43%|████▎     | 26/60 [01:31<01:09,  2.05s/it]eval-sketch:  45%|████▌     | 27/60 [01:33<01:14,  2.25s/it]eval-sketch:  47%|████▋     | 28/60 [01:48<03:11,  5.99s/it]eval-sketch:  48%|████▊     | 29/60 [02:03<04:25,  8.55s/it]eval-sketch:  50%|█████     | 30/60 [02:17<05:10, 10.34s/it]eval-sketch:  52%|█████▏    | 31/60 [02:19<03:42,  7.66s/it]eval-sketch:  53%|█████▎    | 32/60 [02:21<02:50,  6.10s/it]eval-sketch:  55%|█████▌    | 33/60 [02:22<02:06,  4.69s/it]eval-sketch:  57%|█████▋    | 34/60 [02:24<01:39,  3.83s/it]eval-sketch:  58%|█████▊    | 35/60 [02:26<01:20,  3.21s/it]eval-sketch:  60%|██████    | 36/60 [02:28<01:11,  2.99s/it]eval-sketch:  62%|██████▏   | 37/60 [02:31<01:07,  2.93s/it]eval-sketch:  63%|██████▎   | 38/60 [02:34<01:04,  2.92s/it]eval-sketch:  65%|██████▌   | 39/60 [02:36<00:51,  2.47s/it]eval-sketch:  67%|██████▋   | 40/60 [02:37<00:45,  2.29s/it]eval-sketch:  68%|██████▊   | 41/60 [02:39<00:39,  2.08s/it]eval-sketch:  70%|███████   | 42/60 [02:42<00:40,  2.26s/it]eval-sketch:  72%|███████▏  | 43/60 [02:56<01:39,  5.87s/it]eval-sketch:  73%|███████▎  | 44/60 [03:10<02:14,  8.42s/it]eval-sketch:  75%|███████▌  | 45/60 [03:25<02:33, 10.22s/it]eval-sketch:  77%|███████▋  | 46/60 [03:26<01:46,  7.58s/it]eval-sketch:  78%|███████▊  | 47/60 [03:29<01:18,  6.01s/it]eval-sketch:  80%|████████  | 48/60 [03:30<00:55,  4.62s/it]eval-sketch:  82%|████████▏ | 49/60 [03:32<00:41,  3.78s/it]eval-sketch:  83%|████████▎ | 50/60 [03:34<00:31,  3.19s/it]eval-sketch:  85%|████████▌ | 51/60 [03:36<00:26,  2.97s/it]eval-sketch:  87%|████████▋ | 52/60 [03:39<00:23,  2.92s/it]eval-sketch:  88%|████████▊ | 53/60 [03:42<00:20,  2.91s/it]eval-sketch:  90%|█████████ | 54/60 [03:43<00:14,  2.45s/it]eval-sketch:  92%|█████████▏| 55/60 [03:45<00:11,  2.24s/it]eval-sketch:  93%|█████████▎| 56/60 [03:46<00:08,  2.03s/it]eval-sketch:  95%|█████████▌| 57/60 [03:49<00:06,  2.22s/it]eval-sketch:  97%|█████████▋| 58/60 [04:03<00:11,  5.88s/it]eval-sketch:  98%|█████████▊| 59/60 [04:18<00:08,  8.54s/it]eval-sketch: 100%|██████████| 60/60 [04:32<00:00, 10.24s/it]eval-sketch: 100%|██████████| 60/60 [04:32<00:00,  4.55s/it]
+{
+  "by_family": {
+    "contains_and_count_code": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 2,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.5,
+        "records": 4,
+        "successes": 2
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "contains_code": {
+      "avg_synthesized_programs": 44.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "contains_count_label": {
+      "avg_synthesized_programs": 44.5,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 1,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.75,
+        "records": 4,
+        "successes": 3
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "length_and_mod_code": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 3,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.25,
+        "records": 4,
+        "successes": 1
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "length_label": {
+      "avg_synthesized_programs": 38.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "length_mod_label": {
+      "avg_synthesized_programs": 1056.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 1,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.75,
+        "records": 4,
+        "successes": 3
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "mod_scalar_label": {
+      "avg_synthesized_programs": 812.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 2,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.5,
+        "records": 4,
+        "successes": 2
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "scalar_branch_label": {
+      "avg_synthesized_programs": 812.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 3,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.25,
+        "records": 4,
+        "successes": 1
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sorted_first_label": {
+      "avg_synthesized_programs": 30.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_add_label": {
+      "avg_synthesized_programs": 840.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 1,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.75,
+        "records": 4,
+        "successes": 3
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_and_scalar_code": {
+      "avg_synthesized_programs": 8000.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 1,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.75,
+        "records": 4,
+        "successes": 3
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_label": {
+      "avg_synthesized_programs": 29.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_threshold_label": {
+      "avg_synthesized_programs": 840.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 1,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 0.75,
+        "records": 4,
+        "successes": 3
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "tuple_get_label": {
+      "avg_synthesized_programs": 77.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "tuple_sum_label": {
+      "avg_synthesized_programs": 29.0,
+      "avg_unique_sketches": 1.0,
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "damaged_vs_base_hidden": 0,
+      "hybrid_damaged_vs_base_hidden": 0,
+      "hybrid_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "hybrid_improved_over_base_hidden": 0,
+      "hybrid_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "improved_over_base_hidden": 0,
+      "sketch_synth_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "sketch_synth_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "target_program_synthesized": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    }
+  },
+  "overall": {
+    "avg_synthesized_programs": 1910.1,
+    "avg_unique_sketches": 1.0,
+    "base_rerank_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "base_rerank_visible_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "damaged_vs_base_hidden": 15,
+    "hybrid_damaged_vs_base_hidden": 0,
+    "hybrid_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "hybrid_improved_over_base_hidden": 0,
+    "hybrid_visible_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "improved_over_base_hidden": 0,
+    "sketch_synth_hidden_all": {
+      "rate": 0.75,
+      "records": 60,
+      "successes": 45
+    },
+    "sketch_synth_oracle_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "sketch_synth_visible_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "target_program_synthesized": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    }
+  }
+}

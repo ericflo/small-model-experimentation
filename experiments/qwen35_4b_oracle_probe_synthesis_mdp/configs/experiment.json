@@ -1,0 +1,33 @@
+{
+  "experiment": "qwen35_4b_oracle_probe_synthesis_mdp",
+  "date_utc": "2026-06-24",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "objective": "Train and evaluate Qwen3.5-4B as a process policy over verifier-mined high-information probes.",
+  "data": {
+    "train_records": 300,
+    "eval_records": 160,
+    "visible_cases": 4,
+    "query_pool_cases": 96,
+    "displayed_actions": 8,
+    "hidden_cases": 16,
+    "train_library_sizes": [64, 128, 256],
+    "eval_library_sizes": [64, 128, 256, 512],
+    "templates": ["pair_affine_mod", "pair_compare_gate"],
+    "max_probe_budget": 3
+  },
+  "arms": [
+    "max_split_random8",
+    "oracle_random8",
+    "random_mined8",
+    "max_split_mined8",
+    "fullpool_max_split",
+    "base_mined8",
+    "sft_mined8",
+    "sft_scrambled_features",
+    "dpo_mined8",
+    "grpo_mined8",
+    "oracle_mined8",
+    "fullpool_oracle"
+  ],
+  "large_artifacts_root": "/workspace/large_artifacts/qwen35_4b_oracle_probe_synthesis_mdp"
+}

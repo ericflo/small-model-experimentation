@@ -1,0 +1,6 @@
+direct_accuracy,valid_rate,program_exact,search_accuracy,oracle_accuracy,candidate_valid_rate,mean_candidates,run,split,phase
+0.0,0.0,0.0,0.0,0.0,0.0,241.1875,pilot_vm_agent_echo_s64_a96,val_mixed,seed_compiler
+0.0,0.0,0.0,0.0,0.0,0.0,241.9375,pilot_vm_agent_echo_s64_a96,fresh_standard,seed_compiler
+0.0,0.0,0.0,0.0,0.0,0.0,241.5625,pilot_vm_agent_echo_s64_a96,fresh_paraphrase,seed_compiler
+0.0,0.0,0.0,0.0,0.0,0.0,241.375,pilot_vm_agent_echo_s64_a96,fresh_paired,seed_compiler
+0.0,0.0,0.0,0.0,0.0,0.0,241.375,pilot_vm_agent_echo_s64_a96,hard_composition,seed_compiler

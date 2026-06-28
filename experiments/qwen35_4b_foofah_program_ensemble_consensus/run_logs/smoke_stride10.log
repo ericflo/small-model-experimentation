@@ -1,0 +1,70 @@
+[5/25] best=direct 3/5 direct=3 oracle_union=3 visible_tasks=4
+[10/25] best=direct 5/10 direct=5 oracle_union=5 visible_tasks=6
+[15/25] best=direct 7/15 direct=7 oracle_union=7 visible_tasks=7
+[20/25] best=direct 8/20 direct=8 oracle_union=8 visible_tasks=7
+[25/25] best=direct 9/25 direct=9 oracle_union=9 visible_tasks=9
+{
+  "direct_exact": 9,
+  "direct_parse_ok": 24,
+  "mean_correct_visible_programs": 0.2,
+  "mean_unique_visible_outputs": 0.48,
+  "mean_visible_programs": 0.8,
+  "n": 25,
+  "oracle_union": 9,
+  "oracle_visible_program": 3,
+  "policies": {
+    "consensus_2": {
+      "accuracy": 0.36,
+      "consensus_commits": 7,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 9,
+      "program_commit_correct": 2,
+      "program_commit_precision": 0.2857142857142857,
+      "program_commits": 7
+    },
+    "consensus_3": {
+      "accuracy": 0.36,
+      "consensus_commits": 1,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 9,
+      "program_commit_correct": 0,
+      "program_commit_precision": 0.0,
+      "program_commits": 1
+    },
+    "direct": {
+      "accuracy": 0.36,
+      "consensus_commits": 0,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 9,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "direct_or_program_agreement": {
+      "accuracy": 0.36,
+      "consensus_commits": 0,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 9,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "first_visible_program": {
+      "accuracy": 0.32,
+      "consensus_commits": 0,
+      "direct_correct_losses": 1,
+      "direct_miss_recoveries": 0,
+      "exact": 8,
+      "program_commit_correct": 3,
+      "program_commit_precision": 0.3333333333333333,
+      "program_commits": 9
+    }
+  },
+  "tasks_with_consensus_2": 7,
+  "tasks_with_two_plus_visible_programs": 8,
+  "tasks_with_visible_program": 9
+}

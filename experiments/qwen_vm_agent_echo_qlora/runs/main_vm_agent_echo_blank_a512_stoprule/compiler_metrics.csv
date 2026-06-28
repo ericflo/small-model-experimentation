@@ -1,0 +1,6 @@
+direct_accuracy,valid_rate,program_exact,search_accuracy,oracle_accuracy,candidate_valid_rate,mean_candidates,run,split,phase
+0.125,1.0,0.0,0.0,0.0,0.0,0.0,main_vm_agent_echo_blank_a512_stoprule,val_mixed,seed_compiler
+0.09375,1.0,0.0,0.0,0.0,0.0,0.0,main_vm_agent_echo_blank_a512_stoprule,fresh_standard,seed_compiler
+0.03125,1.0,0.0,0.0,0.0,0.0,0.0,main_vm_agent_echo_blank_a512_stoprule,fresh_paraphrase,seed_compiler
+0.125,1.0,0.0,0.0,0.0,0.0,0.0,main_vm_agent_echo_blank_a512_stoprule,fresh_paired,seed_compiler
+0.125,1.0,0.0,0.0,0.0,0.0,0.0,main_vm_agent_echo_blank_a512_stoprule,hard_composition,seed_compiler

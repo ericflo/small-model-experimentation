@@ -1,0 +1,93 @@
+[command] /usr/local/bin/python /workspace/experiments/qwen_compiler_multiseed_reattribution/src/qwen_compiler_multiseed_reattribution.py --model_id Qwen/Qwen3-4B --modulus 97 --train_examples 512 --eval_examples 64 --paired_eval_pairs 32 --batch_size 8 --grad_accum 1 --eval_batch_size 8 --max_length 2048 --head_width 512 --compiler_layers 1 --compiler_heads 4 --compiler_dropout 0.05 --expansion_noise 0.005 --trace_loss_weight 1.0 --executor_loss_weight 1.0 --state_loss_weight 1.0 --init_trace_loss_weight 4.0 --op_trace_loss_weight 1.0 --arg_trace_loss_weight 4.0 --direct_head_weight 0.0 --lr 2e-4 --weight_decay 0.0 --optimizer paged_adamw_8bit --max_grad_norm 1.0 --torch_dtype bf16 --load_in_4bit 1 --device_map auto --use_lora 1 --gradient_checkpointing 1 --lora_r 8 --lora_alpha 16 --lora_dropout 0.05 --lora_target_modules all-linear --log_interval 50 --save_checkpoints 1 --selection_split paired_L24 --selection_metric executor_pair_both_correct --eval_lengths 8,16,24 --train_template_mode mixed --stage_max_steps 24,24,24 --stage_min_lengths 1,1,8 --stage_train_max_lengths 8,16,24 --stage_steps 300,150,300 --expansion_mode copy_last --run_name main_max24_curriculum_seed456 --arm max24_curriculum --seed 456
+[load] Loading Qwen/Qwen3-4B with AutoModelForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights:   1%|          | 3/398 [00:00<00:17, 22.06it/s]
+Loading weights:  10%|▉         | 38/398 [00:00<00:01, 189.63it/s]
+Loading weights:  23%|██▎       | 91/398 [00:00<00:00, 327.46it/s]
+Loading weights:  35%|███▌      | 140/398 [00:00<00:00, 387.88it/s]
+Loading weights:  48%|████▊     | 190/398 [00:00<00:00, 419.58it/s]
+Loading weights:  60%|██████    | 240/398 [00:00<00:00, 443.10it/s]
+Loading weights:  72%|███████▏  | 286/398 [00:00<00:00, 446.62it/s]
+Loading weights:  85%|████████▌ | 339/398 [00:00<00:00, 471.56it/s]
+Loading weights:  99%|█████████▉| 396/398 [00:00<00:00, 499.54it/s]
+Loading weights: 100%|██████████| 398/398 [00:00<00:00, 418.02it/s]
+trainable params: 16,515,072 || all params: 4,038,983,168 || trainable%: 0.4089
+/usr/local/lib/python3.12/dist-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+[stage] stage1_max24 event=init train_len=1..8 examples=512 steps=300
+/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+[train] stage1_max24 1/300 g=1 loss=47.0713 exec=4.5826 state_acc=0.000
+[train] stage1_max24 50/300 g=50 loss=42.5095 exec=4.5643 state_acc=0.049
+[train] stage1_max24 100/300 g=100 loss=34.0528 exec=4.4232 state_acc=0.000
+[train] stage1_max24 150/300 g=150 loss=10.2414 exec=2.6775 state_acc=0.854
+[train] stage1_max24 200/300 g=200 loss=0.8041 exec=0.1525 state_acc=1.000
+[train] stage1_max24 250/300 g=250 loss=0.1143 exec=0.0197 state_acc=1.000
+[train] stage1_max24 300/300 g=300 loss=5.6845 exec=1.5515 state_acc=0.932
+[eval] stage1_max24 standard_L8: executor=0.922 program=0.922 prefix=0.965
+[eval] stage1_max24 paraphrase_L8: executor=0.891 program=0.891 prefix=0.938
+[eval] stage1_max24 heldout_L8: executor=0.688 program=0.688 prefix=0.828
+[eval] stage1_max24 paired_L8: executor=0.859 program=0.859 prefix=0.930
+[eval] stage1_max24 paired_heldout_L8: executor=0.875 program=0.859 prefix=0.928
+[eval] stage1_max24 standard_L16: executor=0.094 program=0.062 prefix=0.689
+[eval] stage1_max24 paraphrase_L16: executor=0.156 program=0.156 prefix=0.756
+[eval] stage1_max24 heldout_L16: executor=0.047 program=0.000 prefix=0.478
+[eval] stage1_max24 paired_L16: executor=0.109 program=0.094 prefix=0.716
+[eval] stage1_max24 paired_heldout_L16: executor=0.094 program=0.078 prefix=0.658
+[eval] stage1_max24 standard_L24: executor=0.000 program=0.000 prefix=0.454
+[eval] stage1_max24 paraphrase_L24: executor=0.016 program=0.000 prefix=0.507
+[eval] stage1_max24 heldout_L24: executor=0.016 program=0.000 prefix=0.355
+[eval] stage1_max24 paired_L24: executor=0.000 program=0.000 prefix=0.472
+[eval] stage1_max24 paired_heldout_L24: executor=0.016 program=0.000 prefix=0.382
+[stage] stage2_max24 event=same train_len=1..16 examples=512 steps=150
+[train] stage2_max24 1/150 g=301 loss=16.4523 exec=4.7389 state_acc=0.761
+[train] stage2_max24 50/150 g=350 loss=0.0059 exec=0.0017 state_acc=1.000
+[train] stage2_max24 100/150 g=400 loss=0.0039 exec=0.0015 state_acc=1.000
+[train] stage2_max24 150/150 g=450 loss=0.0024 exec=0.0006 state_acc=1.000
+[eval] stage2_max24 standard_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage2_max24 paraphrase_L8: executor=0.984 program=0.984 prefix=0.984
+[eval] stage2_max24 heldout_L8: executor=0.953 program=0.953 prefix=0.959
+[eval] stage2_max24 paired_L8: executor=0.969 program=0.969 prefix=0.969
+[eval] stage2_max24 paired_heldout_L8: executor=0.953 program=0.953 prefix=0.971
+[eval] stage2_max24 standard_L16: executor=1.000 program=1.000 prefix=1.000
+[eval] stage2_max24 paraphrase_L16: executor=1.000 program=1.000 prefix=1.000
+[eval] stage2_max24 heldout_L16: executor=0.906 program=0.891 prefix=0.932
+[eval] stage2_max24 paired_L16: executor=0.969 program=0.969 prefix=0.969
+[eval] stage2_max24 paired_heldout_L16: executor=0.812 program=0.812 prefix=0.845
+[eval] stage2_max24 standard_L24: executor=0.328 program=0.297 prefix=0.851
+[eval] stage2_max24 paraphrase_L24: executor=0.094 program=0.078 prefix=0.790
+[eval] stage2_max24 heldout_L24: executor=0.109 program=0.109 prefix=0.748
+[eval] stage2_max24 paired_L24: executor=0.219 program=0.156 prefix=0.839
+[eval] stage2_max24 paired_heldout_L24: executor=0.266 program=0.219 prefix=0.824
+[stage] stage3_max24 event=same train_len=8..24 examples=512 steps=300
+[train] stage3_max24 1/300 g=451 loss=4.2045 exec=2.2095 state_acc=0.961
+[train] stage3_max24 50/300 g=500 loss=1.5835 exec=1.1173 state_acc=0.986
+[train] stage3_max24 100/300 g=550 loss=0.0028 exec=0.0006 state_acc=1.000
+[train] stage3_max24 150/300 g=600 loss=0.0005 exec=0.0002 state_acc=1.000
+[train] stage3_max24 200/300 g=650 loss=1.3815 exec=0.7770 state_acc=0.935
+[train] stage3_max24 250/300 g=700 loss=0.0646 exec=0.0356 state_acc=1.000
+[train] stage3_max24 300/300 g=750 loss=6.9532 exec=1.9390 state_acc=0.852
+[eval] stage3_max24 standard_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage3_max24 paraphrase_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage3_max24 heldout_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage3_max24 paired_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage3_max24 paired_heldout_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage3_max24 standard_L16: executor=0.906 program=0.906 prefix=0.987
+[eval] stage3_max24 paraphrase_L16: executor=0.969 program=0.969 prefix=0.985
+[eval] stage3_max24 heldout_L16: executor=0.875 program=0.875 prefix=0.983
+[eval] stage3_max24 paired_L16: executor=0.953 program=0.953 prefix=0.987
+[eval] stage3_max24 paired_heldout_L16: executor=0.953 program=0.953 prefix=0.985
+[eval] stage3_max24 standard_L24: executor=0.016 program=0.000 prefix=0.718
+[eval] stage3_max24 paraphrase_L24: executor=0.016 program=0.000 prefix=0.730
+[eval] stage3_max24 heldout_L24: executor=0.000 program=0.000 prefix=0.746
+[eval] stage3_max24 paired_L24: executor=0.000 program=0.000 prefix=0.741
+[eval] stage3_max24 paired_heldout_L24: executor=0.000 program=0.000 prefix=0.730
+{
+  "run": "main_max24_curriculum_seed456",
+  "elapsed_sec": 2720.912,
+  "metrics_rows": 45
+}
+
+[exit] 0

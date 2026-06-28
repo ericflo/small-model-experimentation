@@ -1,0 +1,407 @@
+# Counterexample-Guided Ephemeral Program
+
+## Question
+
+Can synthetic disagreement probes convert model-generated train-fitting programs into a more reliable task-local executable rule than direct row-by-row inference?
+
+The method generates candidate `transform(row)` programs from visible examples, finds synthetic inputs where those programs disagree, asks the model to label those probes, and selects or routes programs against the expanded label set. Held-out benchmark outputs are used only for final evaluation and hidden oracle diagnostics.
+
+## Setup
+
+- Run: `main_v1`
+- Dataset: public text-transformation tasks.
+- Tasks: `24`
+- Visible examples per task: `4`
+- Held-out rows per task cap: `4`
+- Program variants per task: `direct,helpers,regex,conditional`
+- Repair rounds for non-passing programs: `1`
+- Disagreement probes per task: `4`
+- Probe label styles: `plain,rule,strict`
+- Elapsed seconds: `1410.9`
+
+## Main Result
+
+| method                        |   tasks | row_exact   | full_task_exact   | used_program_rate   |   helped_vs_direct |   hurt_vs_direct |
+|:------------------------------|--------:|:------------|:------------------|:--------------------|-------------------:|-----------------:|
+| direct_qwen_row               |      24 | 82.3%       | 75.0%             |                     |                  0 |                0 |
+| program_ceg_gated             |      24 | 82.3%       | 75.0%             | 20.8%               |                  0 |                0 |
+| program_ceg_router            |      24 | 82.3%       | 75.0%             | 29.2%               |                  0 |                0 |
+| direct_qwen_batch             |      24 | 74.0%       | 58.3%             |                     |                  0 |                4 |
+| program_ceg                   |      24 | 46.9%       | 41.7%             | 62.5%               |                  0 |                8 |
+| program_random_probe          |      24 | 46.9%       | 41.7%             | 62.5%               |                  0 |                8 |
+| program_shuffled_probe_labels |      24 | 46.9%       | 41.7%             | 62.5%               |                  0 |                8 |
+| hidden_candidate_oracle       |      24 | 46.9%       | 41.7%             | 62.5%               |                  0 |                8 |
+| program_visible               |      24 | 45.8%       | 37.5%             | 62.5%               |                  0 |                9 |
+
+## Interpretation
+
+Negative for executable-program improvement: the hidden candidate oracle is 41.7%, below direct Qwen at 75.0%. This means the generated train-passing program set usually lacks a better candidate to select. The gated method ties direct at 75.0% by falling back on most tasks; it uses a program on 20.8% of tasks and produces no net task wins.
+
+The hidden candidate oracle reaches `41.7%` full-task exact, below direct Qwen. That makes candidate reachability the binding failure: even a perfect selector over these generated programs would not improve the task set.
+
+## Charts
+
+![Full-task exact by method](../analysis/figures/method_full_task_exact.png)
+
+![Row movement](../analysis/figures/row_scatter_direct_vs_ceg.png)
+
+![Wins and losses](../analysis/figures/wins_losses_vs_direct.png)
+
+![Probe diagnostics](../analysis/figures/probe_diagnostics.png)
+
+![Family heatmap](../analysis/figures/family_heatmap.png)
+
+## Task Details
+
+| task_id              | family        | direct_full_exact   | visible_full_exact   | ceg_full_exact   | ceg_gated_full_exact   | router_full_exact   | oracle_full_exact   |   train_pass_count |   confident_probe_count | ceg_probe_score   | router_probe_score   | ceg_description   | router_description                       |
+|:---------------------|:--------------|:--------------------|:---------------------|:-----------------|:-----------------------|:--------------------|:--------------------|-------------------:|------------------------:|:------------------|:---------------------|:------------------|:-----------------------------------------|
+| Abbreviation.000001  | Abbreviation  | 100.0%              | 0.0%                 | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  2 |                       4 | 50.0%             | 75.0%                | regex             | if len_gt_median: conditional else regex |
+| City.000004          | City          | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  1 |                       0 | 100.0%            | 0.0%                 | helpers           | fallback:fallback_direct                 |
+| DateTime.000005      | DateTime      | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  2 |                       4 | 75.0%             | 87.5%                | conditional       | if contains '-': conditional else direct |
+| DateTime.000025      | DateTime      | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| DateTime.000033      | DateTime      | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| DateTime.000090      | DateTime      | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  2 |                       0 | 100.0%            | -100.0%              | direct            | fallback:fallback_direct                 |
+| DateTime.000103      | DateTime      | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  3 |                       4 | 0.0%              | 50.0%                | helpers           | fallback:fallback_direct                 |
+| DateTime.000105      | DateTime      | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  4 |                       4 | 100.0%            | 100.0%               | helpers           | if contains '_': helpers else helpers    |
+| EmergencyCall.000004 | EmergencyCall | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| Log.000020           | Log           | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| Name.000014          | Name          | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  4 |                       4 | 100.0%            | 100.0%               | direct            | if contains '_': direct else direct      |
+| Name.000015          | Name          | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  3 |                       0 | 100.0%            | 100.0%               | regex             | if len_gt_median: regex else regex       |
+| Number.000011        | Number        | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| Number.000018        | Number        | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  3 |                       4 | 100.0%            | 100.0%               | direct            | if len_gt_median: direct else direct     |
+| Phone.000006         | Phone         | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  1 |                       0 | 100.0%            | 0.0%                 | helpers           | fallback:fallback_direct                 |
+| Product.000002       | Product       | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| ShippingCode.000001  | ShippingCode  | 100.0%              | 0.0%                 | 0.0%             | 100.0%                 | 100.0%              | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| ShippingCode.000002  | ShippingCode  | 100.0%              | 100.0%               | 100.0%           | 100.0%                 | 100.0%              | 100.0%              |                  2 |                       4 | 100.0%            | 100.0%               | helpers           | if contains '_': helpers else helpers    |
+| DateTime.000084      | DateTime      | 0.0%                | 0.0%                 | 0.0%             | 0.0%                   | 0.0%                | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+| DateTime.000116      | DateTime      | 0.0%                | 0.0%                 | 0.0%             | 0.0%                   | 0.0%                | 0.0%                |                  1 |                       0 | 100.0%            | 0.0%                 | direct            | fallback:fallback_direct                 |
+| Number.000010        | Number        | 0.0%                | 0.0%                 | 0.0%             | 0.0%                   | 0.0%                | 0.0%                |                  4 |                       0 | 100.0%            | -100.0%              | direct            | fallback:fallback_direct                 |
+| Number.000016        | Number        | 0.0%                | 0.0%                 | 0.0%             | 0.0%                   | 0.0%                | 0.0%                |                  1 |                       0 | 100.0%            | 0.0%                 | conditional       | fallback:fallback_direct                 |
+| Number.000050        | Number        | 0.0%                | 0.0%                 | 0.0%             | 0.0%                   | 0.0%                | 0.0%                |                  2 |                       4 | 75.0%             | -100.0%              | regex_repair1     | fallback:fallback_direct                 |
+| Number.000070        | Number        | 0.0%                | 0.0%                 | 0.0%             | 0.0%                   | 0.0%                | 0.0%                |                  0 |                       0 | 0.0%              | 0.0%                 |                   | fallback:fallback_direct                 |
+
+## Probe Labels
+
+| task_id             |   probe_index | selected_mode   | input                                                                                                           | label         | consensus   |   candidate_disagreement | candidate_outputs_json            |
+|:--------------------|--------------:|:----------------|:----------------------------------------------------------------------------------------------------------------|:--------------|:------------|-------------------------:|:----------------------------------|
+| Abbreviation.000001 |             0 | disagreement    | Conse                                                                                                           | C             | 100.0%      |                        2 | {"C": 1, "": 1}                   |
+| Abbreviation.000001 |             1 | disagreement    | Nihil                                                                                                           | NI            | 100.0%      |                        2 | {"N": 1, "": 1}                   |
+| Abbreviation.000001 |             2 | disagreement    | consectetur                                                                                                     | C             | 66.7%       |                        2 | {"c": 1, "": 1}                   |
+| Abbreviation.000001 |             3 | disagreement    | CONSECTETUR                                                                                                     | C             | 100.0%      |                        2 | {"C": 1, "": 1}                   |
+| Abbreviation.000001 |             0 | random          | Conse                                                                                                           | C             | 100.0%      |                        2 | {"C": 1, "": 1}                   |
+| Abbreviation.000001 |             1 | random          | CONSECTETUR                                                                                                     | C             | 100.0%      |                        2 | {"C": 1, "": 1}                   |
+| Abbreviation.000001 |             2 | random          | Consectetur 915                                                                                                 | C             | 100.0%      |                        2 | {"C": 1, "": 1}                   |
+| Abbreviation.000001 |             3 | random          | Consectetur 90                                                                                                  | C             | 100.0%      |                        2 | {"C": 1, "": 1}                   |
+| City.000004         |             0 | random          | san_fraccisno                                                                                                   | San Francisco | 100.0%      |                        1 | {"Sanfraccisno": 1}               |
+| City.000004         |             1 | random          | FRANCISOC SAN                                                                                                   | San Francisco | 100.0%      |                        1 | {"Francisocsan": 1}               |
+| City.000004         |             2 | random          | Sf.                                                                                                             | San Francisco | 100.0%      |                        1 | {"Sf": 1}                         |
+| City.000004         |             3 | random          | San Fraccisno                                                                                                   | San Francisco | 100.0%      |                        1 | {"Sanfraccisno": 1}               |
+| DateTime.000005     |             0 | disagreement    | 2025-07-22                                                                                                      | Jul 2025      | 100.0%      |                        2 | {"Not a date.": 1, "Jul 2025": 1} |
+| DateTime.000005     |             1 | disagreement    | 2026-12-30                                                                                                      | Dec 2026      | 100.0%      |                        2 | {"Not a date.": 1, "Dec 2026": 1} |
+| DateTime.000005     |             2 | disagreement    | 2026-04-15                                                                                                      | Apr 2026      | 100.0%      |                        2 | {"Not a date.": 1, "Apr 2026": 1} |
+| DateTime.000005     |             3 | disagreement    | 2026-12-30T06.25.57Z                                                                                            | Dec 2026      | 100.0%      |                        2 | {"Not a date.": 1, "": 1}         |
+| DateTime.000005     |             0 | random          | 2026-04-15T09:44:40Z 504                                                                                        | Apr 2026      | 100.0%      |                        2 | {"Not a date.": 1, "": 1}         |
+| DateTime.000005     |             1 | random          | 2026-04-15t09:44:40z                                                                                            | Apr 2026      | 100.0%      |                        2 | {"Not a date.": 1, "": 1}         |
+| DateTime.000005     |             2 | random          | 2026-12-30T06:25:57Z 650                                                                                        | Dec 2026      | 100.0%      |                        2 | {"Not a date.": 1, "": 1}         |
+| DateTime.000005     |             3 | random          | 2025-07-22t11:12:55z                                                                                            | Jul 2025      | 100.0%      |                        2 | {"Not a date.": 1, "": 1}         |
+| DateTime.000090     |             0 | disagreement    | 31:56:38                                                                                                        | 11:56:38      | 33.3%       |                        2 | {"31pm": 1, "43pm": 1}            |
+| DateTime.000090     |             0 | random          | 17:2                                                                                                            | 5pm           | 100.0%      |                        1 | {"": 2}                           |
+| DateTime.000090     |             1 | random          | 18:42:28                                                                                                        | 6pm           | 100.0%      |                        1 | {"6pm": 2}                        |
+| DateTime.000090     |             2 | random          | 17.10.52                                                                                                        | 5pm           | 100.0%      |                        1 | {"": 2}                           |
+| DateTime.000090     |             3 | random          | 14.39.21                                                                                                        | 2pm           | 100.0%      |                        1 | {"": 2}                           |
+| DateTime.000103     |             0 | disagreement    | 17 01                                                                                                           | 16            | 66.7%       |                        2 | {"": 2, "00": 1}                  |
+| DateTime.000103     |             1 | disagreement    | 14 07                                                                                                           | 07            | 100.0%      |                        2 | {"": 2, "00": 1}                  |
+| DateTime.000103     |             2 | disagreement    | 14 16                                                                                                           | 16            | 100.0%      |                        2 | {"": 2, "00": 1}                  |
+| DateTime.000103     |             3 | disagreement    | 31 18                                                                                                           | 18            | 100.0%      |                        2 | {"": 2, "00": 1}                  |
+| DateTime.000103     |             0 | random          | 14-mar-2002 13:16:16                                                                                            | 16            | 100.0%      |                        1 | {"16": 3}                         |
+| DateTime.000103     |             1 | random          | 31-Jan-2031 05:54:18 343                                                                                        | 54343         | 33.3%       |                        1 | {"54": 3}                         |
+| DateTime.000103     |             2 | random          | 14-Feb-2034 05:36:07 452                                                                                        | 36            | 66.7%       |                        1 | {"36": 3}                         |
+| DateTime.000103     |             3 | random          | 31-JAN-2031 05:54:18                                                                                            | 54            | 100.0%      |                        1 | {"54": 3}                         |
+| DateTime.000105     |             0 | disagreement    | 21-Jan-1985_05:44:43                                                                                            | 43            | 100.0%      |                        2 | {"43": 2, "": 2}                  |
+| DateTime.000105     |             1 | disagreement    | 31-Jan-2031_05:54:18                                                                                            | 18            | 100.0%      |                        2 | {"18": 2, "": 2}                  |
+| DateTime.000105     |             2 | disagreement    | 14-Feb-2034_05:36:07                                                                                            | 07            | 100.0%      |                        2 | {"07": 2, "": 2}                  |
+| DateTime.000105     |             3 | disagreement    | 17-Jan-1990_13:32:01                                                                                            | 01            | 100.0%      |                        2 | {"01": 2, "": 2}                  |
+| DateTime.000105     |             0 | random          | 21-jan-1985 05:44:43                                                                                            | 43            | 100.0%      |                        1 | {"43": 4}                         |
+| DateTime.000105     |             1 | random          | 17/Jan/1990 13:32:01                                                                                            | 01            | 100.0%      |                        1 | {"01": 4}                         |
+| DateTime.000105     |             2 | random          | 17-Jan-1990 13:32:01 279                                                                                        | 01            | 100.0%      |                        2 | {"01": 1, "": 3}                  |
+| DateTime.000105     |             3 | random          | 28-Jan-1997 14:33:03                                                                                            | 03            | 100.0%      |                        1 | {"03": 4}                         |
+| DateTime.000116     |             0 | random          | 14-Mar-200                                                                                                      | 1PM-3PM       | 100.0%      |                        1 | {"": 1}                           |
+| DateTime.000116     |             1 | random          | 31-jan-2031 05:54:18                                                                                            | 5AM-7AM       | 100.0%      |                        1 | {"5AM-7AM": 1}                    |
+| DateTime.000116     |             2 | random          | 31-Jan-2031_05:54:18                                                                                            | 5AM-7AM       | 100.0%      |                        1 | {"": 1}                           |
+| DateTime.000116     |             3 | random          | 14 16                                                                                                           | 1PM-3PM       | 66.7%       |                        1 | {"": 1}                           |
+| Name.000014         |             0 | disagreement    | Artem K                                                                                                         | Artem         | 100.0%      |                        2 | {"Artem": 3, "Artem K": 1}        |
+| Name.000014         |             1 | disagreement    | Aysu_Polat                                                                                                      | Aysu          | 100.0%      |                        2 | {"Aysu": 3, "Aysu_Polat": 1}      |
+| Name.000014         |             2 | disagreement    | aysu polat                                                                                                      | aysu          | 66.7%       |                        2 | {"aysu": 3, "aysu polat": 1}      |
+| Name.000014         |             3 | disagreement    | AYSU POLAT                                                                                                      | AYSU          | 100.0%      |                        2 | {"AYSU": 3, "AYSU POLAT": 1}      |
+| Name.000014         |             0 | random          | AYSU POLAT                                                                                                      | AYSU          | 100.0%      |                        2 | {"AYSU": 3, "AYSU POLAT": 1}      |
+| Name.000014         |             1 | random          | Aysu                                                                                                            | Aysu          | 100.0%      |                        1 | {"Aysu": 4}                       |
+| Name.000014         |             2 | random          | Aysu_Polat                                                                                                      | Aysu          | 100.0%      |                        2 | {"Aysu": 3, "Aysu_Polat": 1}      |
+| Name.000014         |             3 | random          | HONE ALBERT                                                                                                     | Hone          | 66.7%       |                        2 | {"HONE": 3, "HONE ALBERT": 1}     |
+| Name.000015         |             0 | random          | Fatma_Yilmaz                                                                                                    | Fa            | 100.0%      |                        1 | {"Fa": 3}                         |
+| Name.000015         |             1 | random          | Yilmaz Fatma                                                                                                    | Y             | 100.0%      |                        1 | {"Yi": 3}                         |
+| Name.000015         |             2 | random          | Aysu                                                                                                            | Ay            | 100.0%      |                        1 | {"Ay": 3}                         |
+| Name.000015         |             3 | random          | artem kuznetsov                                                                                                 | Ar            | 100.0%      |                        1 | {"ar": 3}                         |
+| Number.000010       |             0 | random          | 27 950                                                                                                          | 27 950        | 100.0%      |                        1 | {"27 950": 4}                     |
+| Number.000010       |             1 | random          | 28 554                                                                                                          | 28 554        | 100.0%      |                        1 | {"28 554": 4}                     |
+| Number.000010       |             2 | random          | 3                                                                                                               | 3             | 100.0%      |                        1 | {"3": 4}                          |
+| Number.000010       |             3 | random          | 29                                                                                                              | 29            | 100.0%      |                        1 | {"29": 4}                         |
+| Number.000016       |             0 | random          | 799                                                                                                             | 800           | 100.0%      |                        1 | {"800": 1}                        |
+| Number.000016       |             1 | random          | 1216                                                                                                            | 1220          | 66.7%       |                        1 | {"1220": 1}                       |
+| Number.000016       |             2 | random          | 931                                                                                                             | 935           | 100.0%      |                        1 | {"930": 1}                        |
+| Number.000016       |             3 | random          | 914 949                                                                                                         | 915 950       | 100.0%      |                        1 | {"": 1}                           |
+| Number.000018       |             0 | disagreement    | 1976 54                                                                                                         | 19.76 54      | 100.0%      |                        2 | {"19.76 54": 2, "19.76": 1}       |
+| Number.000018       |             1 | disagreement    | 2004 135                                                                                                        | 20.04 135     | 100.0%      |                        2 | {"20.04 135": 2, "20.04": 1}      |
+| Number.000018       |             2 | disagreement    | 1966 579                                                                                                        | 19.66 579     | 66.7%       |                        2 | {"19.66 579": 2, "19.66": 1}      |
+| Number.000018       |             3 | disagreement    | 1945 949                                                                                                        | 19.45 949     | 100.0%      |                        2 | {"19.45 949": 2, "19.45": 1}      |
+| Number.000018       |             0 | random          | 1956                                                                                                            | 19.56         | 100.0%      |                        1 | {"19.56": 3}                      |
+| Number.000018       |             1 | random          | 2004 135                                                                                                        | 20.04 135     | 100.0%      |                        2 | {"20.04 135": 2, "20.04": 1}      |
+| Number.000018       |             2 | random          | 2005                                                                                                            | 20.05         | 100.0%      |                        1 | {"20.05": 3}                      |
+| Number.000018       |             3 | random          | 1979                                                                                                            | 19.79         | 100.0%      |                        1 | {"19.79": 3}                      |
+| Number.000050       |             0 | disagreement    | 553                                                                                                             | 1000          | 100.0%      |                        2 | {"1000": 1, "553": 1}             |
+| Number.000050       |             1 | disagreement    | 247                                                                                                             | 1000          | 100.0%      |                        2 | {"1000": 1, "247": 1}             |
+| Number.000050       |             2 | disagreement    | 1323                                                                                                            | 1000          | 100.0%      |                        2 | {"1000": 1, "1323": 1}            |
+| Number.000050       |             3 | disagreement    | 1955                                                                                                            | 2000          | 100.0%      |                        2 | {"1000": 1, "1955": 1}            |
+| Number.000050       |             0 | random          | 1323                                                                                                            | 1000          | 100.0%      |                        2 | {"1000": 1, "1323": 1}            |
+| Number.000050       |             1 | random          | 1955                                                                                                            | 2000          | 100.0%      |                        2 | {"1000": 1, "1955": 1}            |
+| Number.000050       |             2 | random          | 553                                                                                                             | 1000          | 100.0%      |                        2 | {"1000": 1, "553": 1}             |
+| Number.000050       |             3 | random          | 247                                                                                                             | 1000          | 100.0%      |                        2 | {"1000": 1, "247": 1}             |
+| Phone.000006        |             0 | random          | Svetlana Konovalova                 678 Redwood Lane NW ,Long Beach,OK,(129) 734-1247,000-61-4879,03719 60      | 129           | 100.0%      |                        1 | {"129": 1}                        |
+| Phone.000006        |             1 | random          | AYSU KIRIAKOS YILMAZ                 7890 SEVENTH PLACE ,DENVER,WY,(089) 638-8906,000-52-9340,41230             | 089           | 100.0%      |                        1 | {"089": 1}                        |
+| Phone.000006        |             2 | random          | Aysu Kiriakos Yilmaz                 7890 Seventh                                                               | 7890          | 66.7%       |                        1 | {"": 1}                           |
+| Phone.000006        |             3 | random          | Joyikutty_Laddavone_Rukundo_________________456_Pecan_Place_,Belo_Horizonte,FL,(066)_692-9096,000-09-1490,03719 | 066           | 100.0%      |                        1 | {"066": 1}                        |
+| ShippingCode.000002 |             0 | disagreement    | 1Z_NRC_49T_03_3957_129_7                                                                                        | 49T           | 100.0%      |                        2 | {"": 1, "49T": 1}                 |
+| ShippingCode.000002 |             1 | disagreement    | 1Z_MSC_S94_53_6488_779_2                                                                                        | S94           | 100.0%      |                        2 | {"": 1, "S94": 1}                 |
+| ShippingCode.000002 |             2 | disagreement    | 1Z_TFX_926_49_0896_388_9                                                                                        | 926           | 100.0%      |                        2 | {"": 1, "926": 1}                 |
+| ShippingCode.000002 |             3 | disagreement    | 1Z_14Q_1VW_66_2880_816_8                                                                                        | 1VW           | 100.0%      |                        2 | {"": 1, "1VW": 1}                 |
+| ShippingCode.000002 |             0 | random          | 1z 14q 1vw 66 2880 816 8                                                                                        | 1vw           | 66.7%       |                        1 | {"1vw": 2}                        |
+| ShippingCode.000002 |             1 | random          | 1Z 2                                                                                                            | 2             | 100.0%      |                        1 | {"": 2}                           |
+| ShippingCode.000002 |             2 | random          | 1Z 7                                                                                                            | 7             | 100.0%      |                        1 | {"": 2}                           |
+| ShippingCode.000002 |             3 | random          | 1Z 14Q 1VW 66 2880 816 8 509                                                                                    | 1VW           | 100.0%      |                        1 | {"1VW": 2}                        |
+
+## Candidate Programs
+
+| task_id              | variant             | status                                                                               | train_pass   | heldout_full_exact   | heldout_row_exact   |   code_chars | suspicious   |
+|:---------------------|:--------------------|:-------------------------------------------------------------------------------------|:-------------|:---------------------|:--------------------|-------------:|:-------------|
+| Abbreviation.000001  | direct              | ok                                                                                   | False        | 100.0%               | 100.0%              |          630 | False        |
+| Abbreviation.000001  | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          723 | False        |
+| Abbreviation.000001  | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           53 | False        |
+| Abbreviation.000001  | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |           53 | False        |
+| Abbreviation.000001  | regex               | ok                                                                                   | True         | 100.0%               | 100.0%              |          531 | True         |
+| Abbreviation.000001  | conditional         | ok                                                                                   | True         | 0.0%                 | 75.0%               |          461 | True         |
+| City.000004          | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          942 | False        |
+| City.000004          | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          497 | False        |
+| City.000004          | helpers             | ok                                                                                   | True         | 0.0%                 | 0.0%                |          150 | True         |
+| City.000004          | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |         1879 | True         |
+| City.000004          | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |         1281 | True         |
+| City.000004          | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |         1236 | True         |
+| City.000004          | conditional_repair1 | syntax_error: '(' was never closed (<unknown>, line 49)                              | False        | 0.0%                 | 0.0%                |         2034 | False        |
+| DateTime.000005      | direct              | ok                                                                                   | True         | 100.0%               | 100.0%              |          503 | False        |
+| DateTime.000005      | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           81 | False        |
+| DateTime.000005      | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 50.0%               |          394 | False        |
+| DateTime.000005      | regex               | ok                                                                                   | False        | 0.0%                 | 50.0%               |          568 | False        |
+| DateTime.000005      | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 50.0%               |          568 | False        |
+| DateTime.000005      | conditional         | ok                                                                                   | True         | 100.0%               | 100.0%              |          882 | False        |
+| DateTime.000025      | direct              | syntax_error: unterminated string literal (detected at line 64) (<unknown>, line 64) | False        | 0.0%                 | 0.0%                |         4009 | False        |
+| DateTime.000025      | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 25.0%               |         1841 | False        |
+| DateTime.000025      | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           78 | False        |
+| DateTime.000025      | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          618 | False        |
+| DateTime.000025      | regex               | ok                                                                                   | False        | 0.0%                 | 50.0%               |         1277 | True         |
+| DateTime.000025      | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 50.0%               |         1277 | True         |
+| DateTime.000025      | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          720 | True         |
+| DateTime.000025      | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          961 | False        |
+| DateTime.000033      | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          449 | False        |
+| DateTime.000033      | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          449 | False        |
+| DateTime.000033      | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           93 | False        |
+| DateTime.000033      | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          548 | False        |
+| DateTime.000033      | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          542 | False        |
+| DateTime.000033      | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          930 | False        |
+| DateTime.000033      | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          360 | False        |
+| DateTime.000033      | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          394 | False        |
+| DateTime.000084      | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          790 | False        |
+| DateTime.000084      | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          774 | False        |
+| DateTime.000084      | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |          251 | False        |
+| DateTime.000084      | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          251 | False        |
+| DateTime.000084      | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          882 | False        |
+| DateTime.000084      | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          758 | False        |
+| DateTime.000084      | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          884 | False        |
+| DateTime.000084      | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          790 | False        |
+| DateTime.000090      | direct              | ok                                                                                   | True         | 100.0%               | 100.0%              |          447 | False        |
+| DateTime.000090      | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |          134 | False        |
+| DateTime.000090      | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          218 | False        |
+| DateTime.000090      | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          420 | False        |
+| DateTime.000090      | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          416 | False        |
+| DateTime.000090      | conditional         | ok                                                                                   | True         | 100.0%               | 100.0%              |         1433 | False        |
+| DateTime.000103      | direct              | ok                                                                                   | True         | 100.0%               | 100.0%              |          364 | False        |
+| DateTime.000103      | helpers             | ok                                                                                   | True         | 100.0%               | 100.0%              |           47 | False        |
+| DateTime.000103      | regex               | ok                                                                                   | True         | 100.0%               | 100.0%              |          308 | False        |
+| DateTime.000103      | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          333 | False        |
+| DateTime.000103      | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          333 | False        |
+| DateTime.000105      | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          549 | False        |
+| DateTime.000105      | direct_repair1      | ok                                                                                   | True         | 100.0%               | 100.0%              |          482 | False        |
+| DateTime.000105      | helpers             | ok                                                                                   | True         | 100.0%               | 100.0%              |           63 | False        |
+| DateTime.000105      | regex               | ok                                                                                   | True         | 100.0%               | 100.0%              |          144 | False        |
+| DateTime.000105      | conditional         | ok                                                                                   | True         | 100.0%               | 100.0%              |          144 | False        |
+| DateTime.000116      | direct              | ok                                                                                   | True         | 0.0%                 | 50.0%               |          872 | False        |
+| DateTime.000116      | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |          410 | False        |
+| DateTime.000116      | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          606 | False        |
+| DateTime.000116      | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          872 | False        |
+| DateTime.000116      | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          701 | False        |
+| DateTime.000116      | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |         1032 | False        |
+| DateTime.000116      | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          913 | False        |
+| EmergencyCall.000004 | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          679 | False        |
+| EmergencyCall.000004 | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          679 | False        |
+| EmergencyCall.000004 | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |          170 | False        |
+| EmergencyCall.000004 | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          234 | False        |
+| EmergencyCall.000004 | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          666 | False        |
+| EmergencyCall.000004 | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          917 | False        |
+| EmergencyCall.000004 | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          680 | False        |
+| EmergencyCall.000004 | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          680 | False        |
+| Log.000020           | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          567 | False        |
+| Log.000020           | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          567 | False        |
+| Log.000020           | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |          153 | False        |
+| Log.000020           | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          523 | False        |
+| Log.000020           | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          578 | False        |
+| Log.000020           | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          578 | False        |
+| Log.000020           | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          273 | False        |
+| Log.000020           | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          581 | False        |
+| Name.000014          | direct              | ok                                                                                   | True         | 100.0%               | 100.0%              |           49 | False        |
+| Name.000014          | helpers             | ok                                                                                   | True         | 100.0%               | 100.0%              |           49 | False        |
+| Name.000014          | regex               | ok                                                                                   | True         | 100.0%               | 100.0%              |           49 | False        |
+| Name.000014          | conditional         | ok                                                                                   | True         | 100.0%               | 100.0%              |          488 | False        |
+| Name.000015          | direct              | ok                                                                                   | True         | 100.0%               | 100.0%              |           75 | False        |
+| Name.000015          | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           58 | False        |
+| Name.000015          | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |           58 | False        |
+| Name.000015          | regex               | ok                                                                                   | True         | 100.0%               | 100.0%              |           68 | False        |
+| Name.000015          | conditional         | ok                                                                                   | True         | 100.0%               | 100.0%              |          136 | False        |
+| Number.000010        | direct              | ok                                                                                   | True         | 0.0%                 | 50.0%               |           37 | False        |
+| Number.000010        | helpers             | ok                                                                                   | True         | 0.0%                 | 50.0%               |           37 | False        |
+| Number.000010        | regex               | ok                                                                                   | True         | 0.0%                 | 50.0%               |           37 | False        |
+| Number.000010        | conditional         | ok                                                                                   | True         | 0.0%                 | 50.0%               |           84 | False        |
+| Number.000011        | direct              | ok                                                                                   | False        | 0.0%                 | 75.0%               |           82 | False        |
+| Number.000011        | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 75.0%               |           82 | False        |
+| Number.000011        | helpers             | ok                                                                                   | False        | 0.0%                 | 75.0%               |           37 | False        |
+| Number.000011        | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 75.0%               |          211 | False        |
+| Number.000011        | regex               | ok                                                                                   | False        | 0.0%                 | 75.0%               |           82 | False        |
+| Number.000011        | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 75.0%               |          859 | True         |
+| Number.000011        | conditional         | syntax_error: '[' was never closed (<unknown>, line 54)                              | False        | 0.0%                 | 0.0%                |         1601 | False        |
+| Number.000011        | conditional_repair1 | syntax_error: '{' was never closed (<unknown>, line 55)                              | False        | 0.0%                 | 0.0%                |         1651 | False        |
+| Number.000016        | direct              | ok                                                                                   | False        | 0.0%                 | 25.0%               |          282 | False        |
+| Number.000016        | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 25.0%               |          282 | False        |
+| Number.000016        | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           49 | False        |
+| Number.000016        | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          113 | False        |
+| Number.000016        | regex               | ok                                                                                   | False        | 0.0%                 | 25.0%               |          322 | True         |
+| Number.000016        | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 50.0%               |          360 | True         |
+| Number.000016        | conditional         | ok                                                                                   | True         | 0.0%                 | 25.0%               |          428 | True         |
+| Number.000018        | direct              | ok                                                                                   | True         | 100.0%               | 100.0%              |           73 | False        |
+| Number.000018        | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           69 | False        |
+| Number.000018        | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          149 | False        |
+| Number.000018        | regex               | ok                                                                                   | True         | 100.0%               | 100.0%              |           73 | False        |
+| Number.000018        | conditional         | ok                                                                                   | True         | 100.0%               | 100.0%              |          154 | False        |
+| Number.000050        | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          238 | True         |
+| Number.000050        | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 25.0%               |          240 | True         |
+| Number.000050        | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           44 | False        |
+| Number.000050        | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 25.0%               |          536 | True         |
+| Number.000050        | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          445 | True         |
+| Number.000050        | regex_repair1       | ok                                                                                   | True         | 0.0%                 | 0.0%                |          593 | True         |
+| Number.000050        | conditional         | ok                                                                                   | True         | 0.0%                 | 0.0%                |          415 | True         |
+| Number.000070        | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          445 | False        |
+| Number.000070        | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          445 | False        |
+| Number.000070        | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           78 | False        |
+| Number.000070        | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |          243 | False        |
+| Number.000070        | regex               | syntax_error: '(' was never closed (<unknown>, line 74)                              | False        | 0.0%                 | 0.0%                |         3233 | False        |
+| Number.000070        | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          495 | False        |
+| Number.000070        | conditional         | ok                                                                                   | False        | 0.0%                 | 50.0%               |         3307 | False        |
+| Number.000070        | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 50.0%               |         3307 | False        |
+| Phone.000006         | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |          189 | False        |
+| Phone.000006         | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          262 | False        |
+| Phone.000006         | helpers             | ok                                                                                   | True         | 100.0%               | 100.0%              |           72 | False        |
+| Phone.000006         | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          685 | False        |
+| Phone.000006         | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          685 | False        |
+| Phone.000006         | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          374 | False        |
+| Phone.000006         | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          374 | False        |
+| Product.000002       | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |         1975 | False        |
+| Product.000002       | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |          640 | False        |
+| Product.000002       | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           84 | False        |
+| Product.000002       | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |         1409 | False        |
+| Product.000002       | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          838 | False        |
+| Product.000002       | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          838 | False        |
+| Product.000002       | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |         1626 | False        |
+| Product.000002       | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          534 | False        |
+| ShippingCode.000001  | direct              | ok                                                                                   | False        | 0.0%                 | 0.0%                |           49 | False        |
+| ShippingCode.000001  | direct_repair1      | ok                                                                                   | False        | 0.0%                 | 0.0%                |           49 | False        |
+| ShippingCode.000001  | helpers             | ok                                                                                   | False        | 0.0%                 | 0.0%                |           49 | False        |
+| ShippingCode.000001  | helpers_repair1     | ok                                                                                   | False        | 0.0%                 | 0.0%                |           49 | False        |
+| ShippingCode.000001  | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          363 | False        |
+| ShippingCode.000001  | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          363 | False        |
+| ShippingCode.000001  | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          585 | False        |
+| ShippingCode.000001  | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          585 | False        |
+| ShippingCode.000002  | direct              | ok                                                                                   | True         | 100.0%               | 100.0%              |           48 | False        |
+| ShippingCode.000002  | helpers             | ok                                                                                   | True         | 100.0%               | 100.0%              |           46 | False        |
+| ShippingCode.000002  | regex               | ok                                                                                   | False        | 0.0%                 | 0.0%                |          480 | False        |
+| ShippingCode.000002  | regex_repair1       | ok                                                                                   | False        | 0.0%                 | 0.0%                |          290 | False        |
+| ShippingCode.000002  | conditional         | ok                                                                                   | False        | 0.0%                 | 0.0%                |          681 | False        |
+| ShippingCode.000002  | conditional_repair1 | ok                                                                                   | False        | 0.0%                 | 0.0%                |          681 | False        |
+
+## Family Breakdown
+
+| method             | family        |   tasks | row_exact   | full_task_exact   |
+|:-------------------|:--------------|--------:|:------------|:------------------|
+| direct_qwen_row    | Abbreviation  |       1 | 100.0%      | 100.0%            |
+| direct_qwen_row    | City          |       1 | 100.0%      | 100.0%            |
+| direct_qwen_row    | DateTime      |       8 | 81.2%       | 75.0%             |
+| direct_qwen_row    | EmergencyCall |       1 | 100.0%      | 100.0%            |
+| direct_qwen_row    | Log           |       1 | 100.0%      | 100.0%            |
+| direct_qwen_row    | Name          |       2 | 100.0%      | 100.0%            |
+| direct_qwen_row    | Number        |       6 | 54.2%       | 33.3%             |
+| direct_qwen_row    | Phone         |       1 | 100.0%      | 100.0%            |
+| direct_qwen_row    | Product       |       1 | 100.0%      | 100.0%            |
+| direct_qwen_row    | ShippingCode  |       2 | 100.0%      | 100.0%            |
+| program_visible    | Abbreviation  |       1 | 75.0%       | 0.0%              |
+| program_visible    | City          |       1 | 0.0%        | 0.0%              |
+| program_visible    | DateTime      |       8 | 56.2%       | 50.0%             |
+| program_visible    | EmergencyCall |       1 | 0.0%        | 0.0%              |
+| program_visible    | Log           |       1 | 0.0%        | 0.0%              |
+| program_visible    | Name          |       2 | 100.0%      | 100.0%            |
+| program_visible    | Number        |       6 | 29.2%       | 16.7%             |
+| program_visible    | Phone         |       1 | 100.0%      | 100.0%            |
+| program_visible    | Product       |       1 | 0.0%        | 0.0%              |
+| program_visible    | ShippingCode  |       2 | 50.0%       | 50.0%             |
+| program_ceg        | Abbreviation  |       1 | 100.0%      | 100.0%            |
+| program_ceg        | City          |       1 | 0.0%        | 0.0%              |
+| program_ceg        | DateTime      |       8 | 56.2%       | 50.0%             |
+| program_ceg        | EmergencyCall |       1 | 0.0%        | 0.0%              |
+| program_ceg        | Log           |       1 | 0.0%        | 0.0%              |
+| program_ceg        | Name          |       2 | 100.0%      | 100.0%            |
+| program_ceg        | Number        |       6 | 29.2%       | 16.7%             |
+| program_ceg        | Phone         |       1 | 100.0%      | 100.0%            |
+| program_ceg        | Product       |       1 | 0.0%        | 0.0%              |
+| program_ceg        | ShippingCode  |       2 | 50.0%       | 50.0%             |
+| program_ceg_gated  | Abbreviation  |       1 | 100.0%      | 100.0%            |
+| program_ceg_gated  | City          |       1 | 100.0%      | 100.0%            |
+| program_ceg_gated  | DateTime      |       8 | 81.2%       | 75.0%             |
+| program_ceg_gated  | EmergencyCall |       1 | 100.0%      | 100.0%            |
+| program_ceg_gated  | Log           |       1 | 100.0%      | 100.0%            |
+| program_ceg_gated  | Name          |       2 | 100.0%      | 100.0%            |
+| program_ceg_gated  | Number        |       6 | 54.2%       | 33.3%             |
+| program_ceg_gated  | Phone         |       1 | 100.0%      | 100.0%            |
+| program_ceg_gated  | Product       |       1 | 100.0%      | 100.0%            |
+| program_ceg_gated  | ShippingCode  |       2 | 100.0%      | 100.0%            |
+| program_ceg_router | Abbreviation  |       1 | 100.0%      | 100.0%            |
+| program_ceg_router | City          |       1 | 100.0%      | 100.0%            |
+| program_ceg_router | DateTime      |       8 | 81.2%       | 75.0%             |
+| program_ceg_router | EmergencyCall |       1 | 100.0%      | 100.0%            |
+| program_ceg_router | Log           |       1 | 100.0%      | 100.0%            |
+| program_ceg_router | Name          |       2 | 100.0%      | 100.0%            |
+| program_ceg_router | Number        |       6 | 54.2%       | 33.3%             |
+| program_ceg_router | Phone         |       1 | 100.0%      | 100.0%            |
+| program_ceg_router | Product       |       1 | 100.0%      | 100.0%            |
+| program_ceg_router | ShippingCode  |       2 | 100.0%      | 100.0%            |
+
+## Files
+
+- `runs/main_v1/task_summary.csv`
+- `runs/main_v1/candidate_programs.csv`
+- `runs/main_v1/probe_labels.csv`
+- `runs/main_v1/generations.csv`
+- `analysis/*.csv`
+- `analysis/figures/*.png`

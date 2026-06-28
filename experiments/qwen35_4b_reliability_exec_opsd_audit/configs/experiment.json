@@ -1,0 +1,17 @@
+{
+  "experiment": "qwen35_4b_reliability_exec_opsd_audit",
+  "date_utc": "2026-06-26",
+  "model": "Qwen3.5-4B",
+  "type": "standalone_reliability_and_execution_grounded_opsd_audit",
+  "dataset": "MBPP heldout residual tasks",
+  "probes": {
+    "map_likelihood_selector": "Select visible-pass candidates by raw model mean logprob under the task prompt.",
+    "low_temperature_retrieval_adaptation": "Generate semantic retrieval adaptations at T=0.0 and T=0.1; compare to included T=0.2 baseline.",
+    "execution_grounded_locality_audit": "Use failing input, observed output, and correct output as teacher context for same-prefix fork scoring."
+  },
+  "primary_gate": {
+    "statistic": "execution-hint task-specific branch preference delta over no-hint student",
+    "success_condition": "positive delta, above shuffled-observation control, on task-specific forks",
+    "reference_hint_role": "leakage ceiling only"
+  }
+}

@@ -1,0 +1,962 @@
+closure:   0%|          | 0/120 [00:00<?, ?it/s]closure:   1%|          | 1/120 [00:00<00:58,  2.05it/s]closure:   2%|▏         | 2/120 [00:03<03:46,  1.92s/it]closure:   2%|▎         | 3/120 [00:05<04:02,  2.08s/it]closure:   3%|▎         | 4/120 [00:08<04:46,  2.47s/it]closure:   4%|▍         | 5/120 [00:11<04:37,  2.42s/it]closure:   5%|▌         | 6/120 [00:12<04:04,  2.15s/it]closure:   6%|▌         | 7/120 [00:14<03:55,  2.09s/it]closure:   7%|▋         | 8/120 [00:15<02:56,  1.58s/it]closure:   8%|▊         | 9/120 [00:15<02:17,  1.24s/it]closure:   8%|▊         | 10/120 [00:19<03:47,  2.07s/it]closure:   9%|▉         | 11/120 [00:20<02:53,  1.59s/it]closure:  10%|█         | 12/120 [00:21<02:52,  1.60s/it]closure:  11%|█         | 13/120 [00:21<02:08,  1.20s/it]closure:  12%|█▏        | 14/120 [00:22<01:38,  1.08it/s]closure:  12%|█▎        | 15/120 [00:22<01:16,  1.37it/s]closure:  13%|█▎        | 16/120 [00:22<01:01,  1.69it/s]closure:  14%|█▍        | 17/120 [00:23<00:50,  2.02it/s]closure:  15%|█▌        | 18/120 [00:23<00:44,  2.31it/s]closure:  16%|█▌        | 19/120 [00:23<00:39,  2.55it/s]closure:  17%|█▋        | 20/120 [00:23<00:35,  2.82it/s]closure:  18%|█▊        | 21/120 [00:24<00:33,  2.99it/s]closure:  18%|█▊        | 22/120 [00:24<00:31,  3.11it/s]closure:  19%|█▉        | 23/120 [00:24<00:29,  3.29it/s]closure:  20%|██        | 24/120 [00:25<00:28,  3.34it/s]closure:  21%|██        | 25/120 [00:27<01:20,  1.18it/s]closure:  22%|██▏       | 26/120 [00:28<01:25,  1.10it/s]closure:  22%|██▎       | 27/120 [00:29<01:28,  1.05it/s]closure:  23%|██▎       | 28/120 [00:30<01:30,  1.02it/s]closure:  24%|██▍       | 29/120 [00:31<01:33,  1.03s/it]closure:  25%|██▌       | 30/120 [00:32<01:31,  1.02s/it]closure:  26%|██▌       | 31/120 [00:33<01:31,  1.03s/it]closure:  27%|██▋       | 32/120 [00:34<01:31,  1.04s/it]closure:  28%|██▊       | 33/120 [00:35<01:31,  1.05s/it]closure:  28%|██▊       | 34/120 [00:36<01:34,  1.10s/it]closure:  29%|██▉       | 35/120 [00:38<01:55,  1.36s/it]closure:  30%|███       | 36/120 [00:39<01:46,  1.26s/it]closure:  31%|███       | 37/120 [00:41<01:43,  1.25s/it]closure:  32%|███▏      | 38/120 [00:42<01:44,  1.28s/it]closure:  32%|███▎      | 39/120 [00:43<01:42,  1.26s/it]closure:  33%|███▎      | 40/120 [00:44<01:38,  1.23s/it]closure:  34%|███▍      | 41/120 [00:46<01:39,  1.26s/it]closure:  35%|███▌      | 42/120 [00:48<01:56,  1.50s/it]closure:  36%|███▌      | 43/120 [00:50<02:10,  1.69s/it]closure:  37%|███▋      | 44/120 [00:52<02:24,  1.90s/it]closure:  38%|███▊      | 45/120 [00:53<02:06,  1.68s/it]closure:  38%|███▊      | 46/120 [00:55<01:55,  1.57s/it]closure:  39%|███▉      | 47/120 [00:57<02:07,  1.74s/it]closure:  40%|████      | 48/120 [00:58<01:57,  1.64s/it]closure:  41%|████      | 49/120 [00:59<01:44,  1.47s/it]closure:  42%|████▏     | 50/120 [01:00<01:32,  1.32s/it]closure:  42%|████▎     | 51/120 [01:01<01:23,  1.21s/it]closure:  43%|████▎     | 52/120 [01:02<01:17,  1.15s/it]closure:  44%|████▍     | 53/120 [01:03<01:15,  1.12s/it]closure:  45%|████▌     | 54/120 [01:04<01:10,  1.08s/it]closure:  46%|████▌     | 55/120 [01:05<01:07,  1.04s/it]closure:  47%|████▋     | 56/120 [01:06<01:05,  1.02s/it]closure:  48%|████▊     | 57/120 [01:07<01:05,  1.03s/it]closure:  48%|████▊     | 58/120 [01:08<01:02,  1.01s/it]closure:  49%|████▉     | 59/120 [01:09<01:00,  1.00it/s]closure:  50%|█████     | 60/120 [01:10<00:59,  1.01it/s]closure:  51%|█████     | 61/120 [01:10<00:44,  1.32it/s]closure:  52%|█████▏    | 62/120 [01:11<00:35,  1.63it/s]closure:  52%|█████▎    | 63/120 [01:11<00:28,  2.02it/s]closure:  54%|█████▍    | 65/120 [01:11<00:18,  2.96it/s]closure:  55%|█████▌    | 66/120 [01:11<00:16,  3.23it/s]closure:  57%|█████▋    | 68/120 [01:12<00:12,  4.07it/s]closure:  57%|█████▊    | 69/120 [01:12<00:12,  4.16it/s]closure:  58%|█████▊    | 70/120 [01:12<00:11,  4.23it/s]closure:  59%|█████▉    | 71/120 [01:12<00:11,  4.29it/s]closure:  61%|██████    | 73/120 [01:13<00:07,  6.33it/s]closure:  63%|██████▎   | 76/120 [01:13<00:04,  9.85it/s]closure:  66%|██████▌   | 79/120 [01:13<00:03, 12.44it/s]closure:  71%|███████   | 85/120 [01:14<00:05,  6.31it/s]closure:  72%|███████▎  | 87/120 [01:16<00:12,  2.74it/s]closure:  73%|███████▎  | 88/120 [01:18<00:15,  2.10it/s]closure:  74%|███████▍  | 89/120 [01:19<00:18,  1.66it/s]closure:  75%|███████▌  | 90/120 [01:20<00:21,  1.42it/s]closure:  76%|███████▌  | 91/120 [01:21<00:23,  1.25it/s]closure:  77%|███████▋  | 92/120 [01:23<00:24,  1.14it/s]closure:  78%|███████▊  | 93/120 [01:24<00:26,  1.03it/s]closure:  78%|███████▊  | 94/120 [01:25<00:26,  1.02s/it]closure:  79%|███████▉  | 95/120 [01:26<00:26,  1.06s/it]closure:  80%|████████  | 96/120 [01:27<00:26,  1.08s/it]closure:  82%|████████▎ | 99/120 [01:27<00:11,  1.90it/s]closure:  83%|████████▎ | 100/120 [01:28<00:08,  2.27it/s]closure:  84%|████████▍ | 101/120 [01:28<00:08,  2.36it/s]closure:  87%|████████▋ | 104/120 [01:28<00:03,  4.22it/s]closure:  88%|████████▊ | 106/120 [01:28<00:03,  4.45it/s]closure:  91%|█████████ | 109/120 [01:30<00:03,  3.47it/s]closure:  92%|█████████▏| 110/120 [01:31<00:04,  2.42it/s]closure:  92%|█████████▎| 111/120 [01:32<00:04,  1.86it/s]closure:  93%|█████████▎| 112/120 [01:33<00:05,  1.49it/s]closure:  94%|█████████▍| 113/120 [01:34<00:06,  1.15it/s]closure:  95%|█████████▌| 114/120 [01:35<00:05,  1.09it/s]closure:  96%|█████████▌| 115/120 [01:37<00:04,  1.05it/s]closure:  97%|█████████▋| 116/120 [01:38<00:04,  1.01s/it]closure:  98%|█████████▊| 117/120 [01:39<00:03,  1.01s/it]closure:  98%|█████████▊| 118/120 [01:40<00:02,  1.14s/it]closure:  99%|█████████▉| 119/120 [01:41<00:01,  1.14s/it]closure: 100%|██████████| 120/120 [01:42<00:00,  1.11s/it]closure: 100%|██████████| 120/120 [01:42<00:00,  1.17it/s]
+{
+  "by_family": {
+    "sorted_index_sum_branch_label": {
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "closure_improved_hidden": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "closure_visible_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "conservative_closure_visible_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "strict_closure_accepted": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "strict_closure_visible_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      }
+    },
+    "sorted_join_contains_code": {
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_improved_hidden": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_visible_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "conservative_closure_visible_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "strict_closure_accepted": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "strict_closure_visible_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      }
+    },
+    "sum_len_mod_label": {
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "closure_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_improved_hidden": {
+        "rate": 0.5833333333333334,
+        "records": 12,
+        "successes": 7
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.5833333333333334,
+        "records": 12,
+        "successes": 7
+      },
+      "conservative_closure_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sum_length_mod_gate_label": {
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "closure_hidden_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "closure_improved_hidden": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "closure_visible_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "conservative_closure_visible_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "strict_closure_accepted": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "strict_closure_visible_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      }
+    },
+    "text_absent_mod_code": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "text_value_gate_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "token_absent_length_code": {
+      "base_rerank_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.9166666666666666,
+        "records": 12,
+        "successes": 11
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 0.9166666666666666,
+        "records": 12,
+        "successes": 11
+      },
+      "closure_improved_hidden": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.9166666666666666,
+        "records": 12,
+        "successes": 11
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "strict_closure_accepted": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.9166666666666666,
+        "records": 12,
+        "successes": 11
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "token_count_mod_length_code": {
+      "base_rerank_hidden_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "closure_improved_hidden": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "strict_closure_accepted": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "tuple_sum_mod_gate_label": {
+      "base_rerank_hidden_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "closure_hidden_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "closure_improved_hidden": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 0.5833333333333334,
+        "records": 12,
+        "successes": 7
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "strict_closure_accepted": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "tuple_value_mod_label": {
+      "base_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "base_rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "closure_improved_hidden": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "closure_visible_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "conservative_closure_accepted": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "conservative_closure_visible_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "strict_closure_accepted": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      },
+      "strict_closure_visible_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      }
+    }
+  },
+  "overall": {
+    "base_rerank_hidden_all": {
+      "rate": 0.39166666666666666,
+      "records": 120,
+      "successes": 47
+    },
+    "base_rerank_visible_all": {
+      "rate": 0.44166666666666665,
+      "records": 120,
+      "successes": 53
+    },
+    "closure_damaged_hidden": {
+      "rate": 0.06666666666666667,
+      "records": 120,
+      "successes": 8
+    },
+    "closure_hidden_all": {
+      "rate": 0.5166666666666667,
+      "records": 120,
+      "successes": 62
+    },
+    "closure_improved_hidden": {
+      "rate": 0.4083333333333333,
+      "records": 120,
+      "successes": 49
+    },
+    "closure_oracle_hidden_all": {
+      "rate": 0.575,
+      "records": 120,
+      "successes": 69
+    },
+    "closure_visible_all": {
+      "rate": 0.7666666666666667,
+      "records": 120,
+      "successes": 92
+    },
+    "conservative_closure_accepted": {
+      "rate": 0.49166666666666664,
+      "records": 120,
+      "successes": 59
+    },
+    "conservative_closure_damaged_hidden": {
+      "rate": 0.06666666666666667,
+      "records": 120,
+      "successes": 8
+    },
+    "conservative_closure_hidden_all": {
+      "rate": 0.5083333333333333,
+      "records": 120,
+      "successes": 61
+    },
+    "conservative_closure_improved_hidden": {
+      "rate": 0.4,
+      "records": 120,
+      "successes": 48
+    },
+    "conservative_closure_visible_all": {
+      "rate": 0.7666666666666667,
+      "records": 120,
+      "successes": 92
+    },
+    "strict_closure_accepted": {
+      "rate": 0.325,
+      "records": 120,
+      "successes": 39
+    },
+    "strict_closure_damaged_hidden": {
+      "rate": 0.03333333333333333,
+      "records": 120,
+      "successes": 4
+    },
+    "strict_closure_hidden_all": {
+      "rate": 0.5083333333333333,
+      "records": 120,
+      "successes": 61
+    },
+    "strict_closure_improved_hidden": {
+      "rate": 0.275,
+      "records": 120,
+      "successes": 33
+    },
+    "strict_closure_visible_all": {
+      "rate": 0.7666666666666667,
+      "records": 120,
+      "successes": 92
+    }
+  }
+}

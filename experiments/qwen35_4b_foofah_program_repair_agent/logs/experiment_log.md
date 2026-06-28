@@ -1,0 +1,52 @@
+# Experiment Log
+
+## 2026-06-27
+
+- Created standalone Foofah program-repair-agent experiment.
+- Objective: test whether execution feedback on the visible example lets Qwen3.5-4B repair generated `transform(table)` programs and improve held-out table transformation accuracy.
+- Planned process:
+  - Build Foofah case JSONL.
+  - Implement restricted Python execution and visible-output diff feedback.
+  - Smoke test initial generation plus repair loop.
+  - Iterate prompt or harness if smoke reveals mechanical failures.
+  - Run full 250-case evaluation with three repair rounds.
+  - Generate report, charts, and validation evidence.
+- Built 250 Foofah cases across 50 families.
+- Safe executor smoke passed, including stripping safe import lines before AST validation.
+- Prefix smoke, 6 cases, max 2 repairs:
+  - direct 6/6, initial program 5/6, final repaired program 5/6.
+  - only one case exercised repair; repair did not fix it.
+- Hard spread smoke, 25 cases with stride 10, max 2 repairs, first repair prompt:
+  - direct 11/25, initial program 2/25, final program 2/25, oracle union 11/25.
+  - repair increased visible-pass from 5/25 to 7/25 but added no hidden-correct programs.
+  - false-pass among final visible-pass programs was 5/7.
+- Revised repair prompt to forbid visible-output hardcoding and emphasize generalization to the new input shape.
+- Hard spread smoke, same 25 cases, strict repair prompt:
+  - direct 11/25, initial program 2/25, final program 4/25, oracle union 13/25.
+  - program-only recoveries 2/25.
+  - false-pass among final visible-pass programs dropped to 3/7.
+- Selected strict repair prompt for full run.
+- Full 250-case run, max 3 repairs:
+  - direct JSON exact 138/250 (55.2%).
+  - initial visible-verified program exact 40/250 (16.0%).
+  - final repaired visible-verified program exact 62/250 (24.8%).
+  - repair added 22 program-correct cases and lost 0 initially-correct program cases.
+  - direct with program fallback on direct parse failure reached 142/250 (56.8%).
+  - oracle union of direct OR final program reached 156/250 (62.4%), with 18 program-only direct-miss recoveries.
+  - final visible-pass programs: 78/250; hidden-wrong among those: 16/78 (20.5%).
+  - direct/program agreement: 55 cases; agreement correct: 44/55 (80.0%).
+- Generated final report and figures:
+  - `reports/report.md`
+  - `reports/summary.json`
+  - `reports/family_summary.json`
+  - `reports/figures/overall_accuracy.png`
+  - `reports/figures/round_progress.png`
+  - `reports/figures/verification_diagnostics.png`
+  - `reports/figures/by_num_samples.png`
+  - `reports/figures/prompt_iteration.png`
+  - `reports/figures/repair_advantage_families.png`
+- Validation:
+  - `data/cases.jsonl` and `reports/eval_records.jsonl` both contain 250 records.
+  - `python -m py_compile src/*.py scripts/*.py` passed.
+  - required report artifacts are non-empty.
+  - standalone-content grep found no references to broader experiment context.

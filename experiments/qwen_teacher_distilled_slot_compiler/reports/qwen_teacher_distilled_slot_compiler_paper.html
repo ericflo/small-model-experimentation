@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher-Distilled Slot Compiler for Qwen Numeric Programs</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.55; max-width: 920px; margin: 40px auto; padding: 0 24px; color: #17202a; }
+h1, h2, h3 { line-height: 1.2; }
+table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 14px; }
+th, td { border: 1px solid #d6dde5; padding: 8px 10px; text-align: left; }
+th { background: #eef3f7; }
+code { background: #eef3f7; padding: 1px 4px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<h1>Teacher-Distilled Slot Compiler for Qwen Numeric Programs</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether oracle slot-teacher losses improve a QLoRA-adapted <code>Qwen/Qwen3-4B</code> compiler on synthetic modular-arithmetic programs. The compiler reads the full prompt hidden sequence, predicts executable slots, copies numbers and operations, and executes the copied program modulo 97. The teacher variants add auxiliary supervision for slot localization, with one arm also matching oracle token representations.</p>
+<p>The result is negative. On fresh length-24 paired standard/paraphrase programs, the matched no-teacher control scored 27.1% exact execution with 72.7% paired compiler-state consistency. The heavier teacher arm scored 27.9% exact execution but only 55.5% consistency. The lower-weight soft-position-only arm scored 18.4% exact execution and 41.0% consistency. Oracle slot imitation did not improve the selected checkpoint and often made paraphrase-invariant compilation worse.</p>
+<h2>Question</h2>
+<p>Can a Qwen-attached numeric compiler bind executable slots more reliably when ordinary trace and state supervision are augmented with oracle slot-teacher losses?</p>
+<p>The hypothesis was that a substantial part of the remaining error came from misbinding surface tokens to executable slots. If true, teacher losses should improve long-chain execution and standard/paraphrase consistency, especially on length-24 programs where one copied-step error usually corrupts the final answer.</p>
+<h2>Method</h2>
+<p>All main runs used <code>Qwen/Qwen3-4B</code> with 4-bit QLoRA adapters, a copied-symbol program compiler head, a deterministic modular executor, and the same synthetic program curriculum:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th style="text-align: right;">Length range</th>
+<th style="text-align: right;">Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>short</td>
+<td style="text-align: right;">1-4</td>
+<td style="text-align: right;">200</td>
+</tr>
+<tr>
+<td>medium</td>
+<td style="text-align: right;">1-8</td>
+<td style="text-align: right;">200</td>
+</tr>
+<tr>
+<td>train</td>
+<td style="text-align: right;">1-12</td>
+<td style="text-align: right;">200</td>
+</tr>
+<tr>
+<td>long</td>
+<td style="text-align: right;">8-24</td>
+<td style="text-align: right;">300</td>
+</tr>
+</tbody>
+</table>
+<p>The model was trained with paired standard/paraphrase examples and selected by highest validation <code>paired_len24_executor_accuracy</code>. Large adapter and head checkpoints are stored outside the experiment directory under <code>large_artifacts/qwen_teacher_distilled_slot_compiler/checkpoints/</code>.</p>
+<p>Three main arms were run:</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">Teacher position weight</th>
+<th style="text-align: right;">Teacher representation weight</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main_control_light_state_s900</code></td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td>Matched light-state compiler control</td>
+</tr>
+<tr>
+<td><code>main_teacher_slot_distill_s900</code></td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.05</td>
+<td>Soft local position targets plus oracle slot-representation matching</td>
+</tr>
+<tr>
+<td><code>main_teacher_softpos_low_s900</code></td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">0.00</td>
+<td>Lower-weight soft position targets only</td>
+</tr>
+</tbody>
+</table>
+<p>The primary held-out retest used 256 fresh length-24 programs per single-rendering split and 256 paired programs rendered in both standard and paraphrased forms, giving 512 examples in the paired row.</p>
+<h2>Results</h2>
+<h3>Selected Validation Checkpoints</h3>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">Selected step</th>
+<th style="text-align: right;">Paired L24 exact</th>
+<th style="text-align: right;">Paired state consistency</th>
+<th style="text-align: right;">Standard L24 exact</th>
+<th style="text-align: right;">Paraphrase L24 exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">30.5%</td>
+<td style="text-align: right;">67.2%</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">25.0%</td>
+</tr>
+<tr>
+<td>Teacher position + representation</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">28.1%</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">21.9%</td>
+</tr>
+<tr>
+<td>Low soft-position only</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">23.4%</td>
+<td style="text-align: right;">32.8%</td>
+<td style="text-align: right;">29.7%</td>
+<td style="text-align: right;">15.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The matched control was the best validation-selected arm. Both teacher variants selected the same training step but had lower paired exact execution and lower paired compiler-state consistency.</p>
+<h3>Fresh Selected-Checkpoint Retest</h3>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">Fresh standard L24 exact</th>
+<th style="text-align: right;">Fresh paraphrase L24 exact</th>
+<th style="text-align: right;">Fresh paired L24 exact</th>
+<th style="text-align: right;">Fresh paired state consistency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">30.5%</td>
+<td style="text-align: right;">27.7%</td>
+<td style="text-align: right;">27.1%</td>
+<td style="text-align: right;">72.7%</td>
+</tr>
+<tr>
+<td>Teacher position + representation</td>
+<td style="text-align: right;">30.5%</td>
+<td style="text-align: right;">28.1%</td>
+<td style="text-align: right;">27.9%</td>
+<td style="text-align: right;">55.5%</td>
+</tr>
+<tr>
+<td>Low soft-position only</td>
+<td style="text-align: right;">27.0%</td>
+<td style="text-align: right;">11.7%</td>
+<td style="text-align: right;">18.4%</td>
+<td style="text-align: right;">41.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The heavier teacher arm had a tiny fresh paired exact-execution edge over the control, 27.9% versus 27.1%, but this is not a useful win: it came with a large consistency loss, and its selected validation metric was lower. The low-weight position-only arm was clearly worse on the fresh retest, especially on paraphrased prompts.</p>
+<h2>Interpretation</h2>
+<p>The teacher losses did not address the dominant bottleneck. The compiler already achieved near-perfect initialization and operation localization, and argument localization stayed around 93-95% at length 24 in the main arms. The remaining failure mode is therefore not simply "the model cannot find the right token." Small residual copy errors compound across 24 steps, and the paired consistency metrics show that the learned compiler is still sensitive to surface rendering.</p>
+<p>The representation-matching teacher likely over-constrained the compiler to prompt-surface-specific hidden vectors. That explains why the heavier teacher arm tied answer accuracy but lost paired compiler-state consistency. The low-weight soft-position-only arm briefly improved mid-training transfer at step 600, but the effect did not survive checkpoint selection or fresh retesting.</p>
+<h2>Conclusion</h2>
+<p>Oracle slot imitation is not the highest-leverage next direction for this Qwen-attached compiler. It can provide a transient curriculum signal, but it does not improve the best selected checkpoint and can damage paraphrase-invariant compilation.</p>
+<p>The most impactful next experiment should move from slot imitation to execution-level pressure:</p>
+<ol>
+<li>Train the compiler with verifier-guided self-correction or search over copied slots, so the model learns from execution failures rather than only from local token labels.</li>
+<li>Add a differentiable or sampled repair loop that proposes alternate arguments for low-confidence slots and backpropagates or reinforces the execution result.</li>
+<li>Use a short policy-gradient stage over compiled programs with a strong supervised anchor, rewarding exact final execution and paired standard/paraphrase program agreement.</li>
+</ol>
+<p>The practical recommendation is to start with verifier-guided slot repair, because it directly targets the observed failure mode: high per-slot accuracy that still collapses under long-chain composition.</p>
+</body>
+</html>

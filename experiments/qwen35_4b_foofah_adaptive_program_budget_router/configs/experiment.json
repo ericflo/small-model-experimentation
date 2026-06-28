@@ -1,0 +1,31 @@
+{
+  "experiment": "qwen35_4b_foofah_adaptive_program_budget_router",
+  "date": "2026-06-28",
+  "objective": "Evaluate whether a deployable adaptive budget router can recover most executable-program portfolio accuracy on Foofah-style table transformations at a much lower forward-token cost.",
+  "data": {
+    "pilot_records": "data/pilot_train_dev_records.jsonl",
+    "test_records": "data/test_records.jsonl",
+    "cases": "data/cases.jsonl"
+  },
+  "variant_order_selection": "Greedy first-visible ordering on pilot train.",
+  "router_selection": "Choose a public-feature trigger on pilot dev by accuracy, then direct-correct losses, then lower token cost; freeze before test.",
+  "primary_metric": "Exact test accuracy vs total forward tokens.",
+  "secondary_metrics": [
+    "direct-miss recoveries",
+    "direct-correct losses",
+    "program commits",
+    "program commit precision",
+    "family-level accuracy",
+    "accuracy/token Pareto frontier"
+  ],
+  "deployable_features": [
+    "visible example input/output table shapes",
+    "new input table shape",
+    "direct JSON parse/output shape",
+    "visible-test pass and output agreement for generated program candidates that the policy pays to generate"
+  ],
+  "nondeployable_diagnostics": [
+    "hidden oracle direct-or-program ceiling",
+    "oracle budget router"
+  ]
+}

@@ -1,0 +1,25 @@
+run,suite,arm,seed,trained,split,example_id,family,op_name,answer,final_prediction,exec_prediction,final_correct,exec_correct,strict_correct,valid_final,valid_exec,no_final,leak_string,exec_error,new_tokens,generated
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_table_2,table,lookup_mul_add,79,14,,0,0,0,1,0,0,1,,24,"FINAL: 14*5+9=79\nAnswer: 79\nOkay, let's see"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_date_3,date,add_days,2026-05-04,2026-05-04,,1,0,1,1,0,0,1,,24,"FINAL: 2026-05-04\n\n\nOkay, let's see. The task"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_string_4,string,slice,9787,787B,,0,0,0,1,0,0,0,,24,FINAL: 787B\nAnswer: FINAL: 787B\nAnswer: FINAL: 7
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_date_7,date,add_weeks,2026-02-11,2026-02-11,,1,0,1,1,0,0,1,,24,"FINAL: 2026-02-11\n```\n\n\nOkay, let's see. The task"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_unit_1,unit,kilograms_to_grams,10000,10000,,1,0,1,1,0,0,1,,24,"FINAL: 10000\nOkay, so I need to convert 10 kilograms to grams. Let"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_string_0,string,take_suffix,446JE,566-JE,,0,0,0,1,0,0,0,,24,"FINAL: 566-JE\n\n\nOkay, let's tackle this task step by step. The reference"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_unit_5,unit,add_centimeters,52,52,,1,0,1,1,0,0,1,,24,FINAL: 52\nAnswer: 16 + 36 = 52\nAnswer: 5
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_indist,eval_indist_table_6,table,lookup_mul,72,72,,1,0,1,1,0,0,1,,24,"FINAL: 72\nThe task involves taking the value of beta, which is 18, and multiplying it"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_date_7,date,weeks_plus_days,2026-07-31,2026-07-24,,0,0,0,1,0,0,0,,24,FINAL: 2026-07-24\nThe final answer is 2026-
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_table_2,table,sum_two_keys_plus,37,45,,0,0,0,1,0,0,0,,24,"FINAL: 45\nThe task is to add the values of beta and alpha first, which are 8 and"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_string_0,string,reverse_then_slice,008J,:,,0,0,0,1,0,0,0,,24,"FINAL: <answer>\nOkay, let's tackle this task step by step. The reference code given is TJ-8"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_unit_1,unit,meters_plus_centimeters,325,325,,1,0,1,1,0,0,1,,24,FINAL: 325\n\nThe cable is 3 meters plus 25 centimeters long. To convert this
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_table_6,table,sum_two_keys_plus,24,29,,0,0,0,1,0,0,0,,24,"FINAL: 29\nThe given table has values for gamma, alpha, beta, and delta. The task is"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_date_3,date,weeks_plus_days,2026-05-29,2026-05-20,,0,0,0,1,0,0,0,,24,FINAL: 2026-05-20\nThe final answer is 2026-
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_unit_5,unit,meters_plus_centimeters,340,340,,1,0,1,1,0,0,1,,24,FINAL: 340\nThe cable is 3 meters plus 40 centimeters long. To convert this
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_composition,eval_composition_string_4,string,reverse_then_slice,771ZB,BZ1779PH,,0,0,0,1,0,0,0,,24,FINAL: BZ1779PH\nFINAL: BZ1779PH\nFINAL: BZ
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_string_4,string,take_prefix,YQ9,YQ9,,1,0,1,1,0,0,1,,24,FINAL: YQ9\nFinal\nAnswer: FINAL: YQ9\nAnswer: FINAL: YQ9\n
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_table_2,table,lookup_mul_add,23,23,,1,0,1,1,0,0,1,,24,FINAL: 23\nAnswer: 10*2+3=23\nAnswer: 23
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_date_3,date,add_weeks,2026-05-01,2026-04-17,,0,0,0,1,0,0,0,,24,"FINAL: 2026-04-17\n\n\nOkay, let's see. The task"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_table_6,table,lookup_mul_add,53,53,,1,0,1,1,0,0,1,,24,FINAL: 53\nAnswer: 23*2+7=46+7=53\n
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_string_0,string,reverse_all,PX7278EW,WE8727XP,,0,0,0,1,0,0,0,,24,"FINAL: WE8727XP\nOkay, let's see. The task is to drop separators from WE-"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_unit_1,unit,minutes_to_seconds,540,540,,1,0,1,1,0,0,1,,24,FINAL: 540\n```\n\n\nFinal answer: 540\n```\n\n\nFinal answer: 5
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_unit_5,unit,kilograms_to_grams,10000,10000,,1,0,1,1,0,0,1,,24,"FINAL: 10000\nAnswer: 10000\nOkay, so the task is"
+smoke_v1_answer_only_s101,smoke,answer_only,101,1,eval_template_shift,eval_template_shift_date_7,date,add_weeks,2026-07-25,2026-07-18,,0,0,0,1,0,0,0,,24,FINAL: 2026-07-18\nThe task is to move the date 20

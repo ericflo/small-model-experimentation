@@ -1,0 +1,24 @@
+{
+  "adapter_dir": "/workspace/large_artifacts/qwen35_4b_verifier_guided_self_improvement/models/selftrain_verified_r1_lora",
+  "experiment": "qwen35_4b_verifier_guided_self_improvement",
+  "humaneval_public_limit": 3,
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/selftrain_verified_r1_transfer_records.jsonl",
+  "records": {
+    "candidate_count_mean": 2.7733333333333334,
+    "coverage": 0.7466666666666667,
+    "parse_success_mean": 2.6733333333333333,
+    "records": 150,
+    "visible_candidates_mean": 2.3466666666666667,
+    "visible_coverage": 0.7466666666666667
+  },
+  "repair_per_task": 1,
+  "round_name": "selftrain_verified_r1",
+  "samples_per_task": 4,
+  "seed": 20260625,
+  "split": "humaneval_transfer",
+  "temperatures": "0.2,0.7,1.0",
+  "top_p": 0.95,
+  "visible_tests": 1
+}

@@ -1,0 +1,31 @@
+{
+  "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+  "mean_pairs_per_task": 2.3333333333333335,
+  "pairs": 7,
+  "records": 12,
+  "seed": 2026062604,
+  "shuffle_labels": true,
+  "source": "data/pilot_train_k8_records.jsonl",
+  "stats": {
+    "tasks_with_pair_candidates": 3,
+    "tasks_with_visible_wrong": 1,
+    "tasks_without_negative": 4,
+    "tasks_without_positive": 5
+  },
+  "tasks_with_pairs": 3,
+  "top_pair_tasks": [
+    [
+      "mbpp_train_610",
+      4
+    ],
+    [
+      "mbpp_train_611",
+      2
+    ],
+    [
+      "mbpp_train_608",
+      1
+    ]
+  ],
+  "visible_wrong_pair_rate": 0.14285714285714285
+}

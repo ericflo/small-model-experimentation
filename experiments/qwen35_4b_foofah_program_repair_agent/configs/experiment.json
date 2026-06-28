@@ -1,0 +1,16 @@
+{
+  "experiment": "qwen35_4b_foofah_program_repair_agent",
+  "date": "2026-06-27",
+  "model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "source": "https://github.com/markjin1990/foofah_benchmarks",
+  "source_local_path": "/workspace/large_artifacts/external_sources/foofah_benchmarks",
+  "arms": [
+    "direct_qwen_json",
+    "initial_generated_program",
+    "visible_feedback_program_repair",
+    "final_visible_verified_program",
+    "direct_or_program_oracle_union"
+  ],
+  "max_repairs": 3,
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_foofah_program_repair_agent"
+}

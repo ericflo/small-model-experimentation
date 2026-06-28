@@ -1,0 +1,11 @@
+{
+  "model": "Qwen/Qwen3-4B",
+  "tasks": 40,
+  "actual_tasks": 40,
+  "rows": 458,
+  "train_n": 4,
+  "heldout_cap": 50,
+  "max_new_tokens": 64,
+  "started_utc": "2026-06-27T04:50:02.734386+00:00",
+  "elapsed_sec": 180.51
+}

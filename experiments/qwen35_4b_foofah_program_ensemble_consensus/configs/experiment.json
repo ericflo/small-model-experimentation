@@ -1,0 +1,30 @@
+{
+  "experiment": "qwen35_4b_foofah_program_ensemble_consensus",
+  "date": "2026-06-27",
+  "model": {
+    "name": "Qwen3.5-4B",
+    "local_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "generation": "greedy for direct and prompt variants; optional sampled variants supported"
+  },
+  "dataset": {
+    "name": "Foofah benchmarks",
+    "source": "https://github.com/markjin1990/foofah_benchmarks",
+    "cases": "data/cases.jsonl",
+    "n": 250
+  },
+  "program_variants": [
+    "verified_structural",
+    "structural_python",
+    "row_column_rule"
+  ],
+  "repair_rounds_per_variant": 1,
+  "primary_metrics": [
+    "direct exact accuracy",
+    "single visible-program fallback accuracy",
+    "ensemble oracle union",
+    "consensus commit accuracy",
+    "consensus commit precision",
+    "direct-miss recoveries",
+    "direct-correct losses"
+  ]
+}

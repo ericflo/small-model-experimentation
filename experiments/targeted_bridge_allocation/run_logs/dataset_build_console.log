@@ -1,0 +1,942 @@
+[build] seen_iid scalar_affine x3
+[build] seen_iid threshold_offset x3
+[build] seen_iid modulo_label x3
+[build] seen_iid tuple_affine x3
+[build] seen_iid tuple_sum_wrap x3
+[build] seen_iid length_label x3
+[build] seen_iid contains_label x3
+[build] seen_iid sort_join x3
+[build] seen_iid sum_offset x3
+[build] seen_iid sum_threshold x3
+[build] seen_iid modulo_shift x3
+[build] seen_iid length_affine x3
+[build] format_shift scalar_affine x3
+[build] format_shift threshold_offset x3
+[build] format_shift modulo_label x3
+[build] format_shift tuple_affine x3
+[build] format_shift tuple_sum_wrap x3
+[build] format_shift length_label x3
+[build] format_shift contains_label x3
+[build] format_shift sort_join x3
+[build] format_shift sum_offset x3
+[build] format_shift sum_threshold x3
+[build] format_shift modulo_shift x3
+[build] format_shift length_affine x3
+[build] recombination_holdout tuple_branch_label x12
+[build] recombination_holdout length_contains_code x12
+[build] recombination_holdout modulo_sum_label x12
+[build] recombination_holdout sorted_tuple_affine x12
+[build] recombination_holdout sorted_contains_count x12
+[build] train_uniform2_seen scalar_affine x20
+[build] train_uniform2_seen threshold_offset x20
+[build] train_uniform2_seen modulo_label x19
+[build] train_uniform2_seen tuple_affine x19
+[build] train_uniform2_seen tuple_sum_wrap x19
+[build] train_uniform2_seen length_label x19
+[build] train_uniform2_seen contains_label x19
+[build] train_uniform2_seen sort_join x19
+[build] train_uniform2_seen sum_offset x19
+[build] train_uniform2_seen sum_threshold x19
+[build] train_uniform2_seen modulo_shift x19
+[build] train_uniform2_seen length_affine x19
+[build] train_uniform2_bridge tuple_branch_label x2
+[build] train_uniform2_bridge length_contains_code x2
+[build] train_uniform2_bridge modulo_sum_label x2
+[build] train_uniform2_bridge sorted_tuple_affine x2
+[build] train_uniform2_bridge sorted_contains_count x2
+[build] train_uniform4_seen scalar_affine x18
+[build] train_uniform4_seen threshold_offset x19
+[build] train_uniform4_seen modulo_label x19
+[build] train_uniform4_seen tuple_affine x19
+[build] train_uniform4_seen tuple_sum_wrap x19
+[build] train_uniform4_seen length_label x18
+[build] train_uniform4_seen contains_label x18
+[build] train_uniform4_seen sort_join x18
+[build] train_uniform4_seen sum_offset x18
+[build] train_uniform4_seen sum_threshold x18
+[build] train_uniform4_seen modulo_shift x18
+[build] train_uniform4_seen length_affine x18
+[build] train_uniform4_bridge tuple_branch_label x4
+[build] train_uniform4_bridge length_contains_code x4
+[build] train_uniform4_bridge modulo_sum_label x4
+[build] train_uniform4_bridge sorted_tuple_affine x4
+[build] train_uniform4_bridge sorted_contains_count x4
+[build] train_hard_target_seen scalar_affine x17
+[build] train_hard_target_seen threshold_offset x17
+[build] train_hard_target_seen modulo_label x18
+[build] train_hard_target_seen tuple_affine x18
+[build] train_hard_target_seen tuple_sum_wrap x18
+[build] train_hard_target_seen length_label x18
+[build] train_hard_target_seen contains_label x18
+[build] train_hard_target_seen sort_join x18
+[build] train_hard_target_seen sum_offset x18
+[build] train_hard_target_seen sum_threshold x18
+[build] train_hard_target_seen modulo_shift x17
+[build] train_hard_target_seen length_affine x17
+[build] train_hard_target_bridge modulo_sum_label x8
+[build] train_hard_target_bridge length_contains_code x8
+[build] train_hard_target_bridge tuple_branch_label x8
+[build] train_hard_target_bridge sorted_contains_count x2
+[build] train_hard_target_bridge sorted_tuple_affine x2
+[build] train_hard_target_seen_preserving_seen scalar_affine x18
+[build] train_hard_target_seen_preserving_seen threshold_offset x18
+[build] train_hard_target_seen_preserving_seen modulo_label x18
+[build] train_hard_target_seen_preserving_seen tuple_affine x19
+[build] train_hard_target_seen_preserving_seen tuple_sum_wrap x19
+[build] train_hard_target_seen_preserving_seen length_label x19
+[build] train_hard_target_seen_preserving_seen contains_label x19
+[build] train_hard_target_seen_preserving_seen sort_join x18
+[build] train_hard_target_seen_preserving_seen sum_offset x18
+[build] train_hard_target_seen_preserving_seen sum_threshold x18
+[build] train_hard_target_seen_preserving_seen modulo_shift x18
+[build] train_hard_target_seen_preserving_seen length_affine x18
+[build] train_hard_target_seen_preserving_bridge modulo_sum_label x6
+[build] train_hard_target_seen_preserving_bridge length_contains_code x6
+[build] train_hard_target_seen_preserving_bridge tuple_branch_label x6
+[build] train_hard_target_seen_preserving_bridge sorted_contains_count x1
+[build] train_hard_target_seen_preserving_bridge sorted_tuple_affine x1
+[build] train_easy_target_control_seen scalar_affine x17
+[build] train_easy_target_control_seen threshold_offset x17
+[build] train_easy_target_control_seen modulo_label x17
+[build] train_easy_target_control_seen tuple_affine x17
+[build] train_easy_target_control_seen tuple_sum_wrap x18
+[build] train_easy_target_control_seen length_label x18
+[build] train_easy_target_control_seen contains_label x18
+[build] train_easy_target_control_seen sort_join x18
+[build] train_easy_target_control_seen sum_offset x18
+[build] train_easy_target_control_seen sum_threshold x18
+[build] train_easy_target_control_seen modulo_shift x18
+[build] train_easy_target_control_seen length_affine x18
+[build] train_easy_target_control_bridge modulo_sum_label x2
+[build] train_easy_target_control_bridge length_contains_code x2
+[build] train_easy_target_control_bridge tuple_branch_label x2
+[build] train_easy_target_control_bridge sorted_contains_count x11
+[build] train_easy_target_control_bridge sorted_tuple_affine x11
+[build] train_modulo16_seen scalar_affine x18
+[build] train_modulo16_seen threshold_offset x18
+[build] train_modulo16_seen modulo_label x18
+[build] train_modulo16_seen tuple_affine x18
+[build] train_modulo16_seen tuple_sum_wrap x18
+[build] train_modulo16_seen length_label x18
+[build] train_modulo16_seen contains_label x18
+[build] train_modulo16_seen sort_join x18
+[build] train_modulo16_seen sum_offset x18
+[build] train_modulo16_seen sum_threshold x18
+[build] train_modulo16_seen modulo_shift x18
+[build] train_modulo16_seen length_affine x18
+[build] train_modulo16_bridge modulo_sum_label x16
+[build] train_modulo16_bridge length_contains_code x2
+[build] train_modulo16_bridge tuple_branch_label x2
+[build] train_modulo16_bridge sorted_contains_count x2
+[build] train_modulo16_bridge sorted_tuple_affine x2
+[build] train_length16_seen scalar_affine x18
+[build] train_length16_seen threshold_offset x18
+[build] train_length16_seen modulo_label x18
+[build] train_length16_seen tuple_affine x18
+[build] train_length16_seen tuple_sum_wrap x18
+[build] train_length16_seen length_label x18
+[build] train_length16_seen contains_label x18
+[build] train_length16_seen sort_join x18
+[build] train_length16_seen sum_offset x18
+[build] train_length16_seen sum_threshold x18
+[build] train_length16_seen modulo_shift x18
+[build] train_length16_seen length_affine x18
+[build] train_length16_bridge modulo_sum_label x2
+[build] train_length16_bridge length_contains_code x16
+[build] train_length16_bridge tuple_branch_label x2
+[build] train_length16_bridge sorted_contains_count x2
+[build] train_length16_bridge sorted_tuple_affine x2
+[build] train_tuple16_seen scalar_affine x18
+[build] train_tuple16_seen threshold_offset x18
+[build] train_tuple16_seen modulo_label x18
+[build] train_tuple16_seen tuple_affine x18
+[build] train_tuple16_seen tuple_sum_wrap x18
+[build] train_tuple16_seen length_label x18
+[build] train_tuple16_seen contains_label x18
+[build] train_tuple16_seen sort_join x18
+[build] train_tuple16_seen sum_offset x18
+[build] train_tuple16_seen sum_threshold x18
+[build] train_tuple16_seen modulo_shift x18
+[build] train_tuple16_seen length_affine x18
+[build] train_tuple16_bridge modulo_sum_label x2
+[build] train_tuple16_bridge length_contains_code x2
+[build] train_tuple16_bridge tuple_branch_label x16
+[build] train_tuple16_bridge sorted_contains_count x2
+[build] train_tuple16_bridge sorted_tuple_affine x2
+{
+  "allocation_plan_order": [
+    "uniform2",
+    "uniform4",
+    "hard_target",
+    "hard_target_seen_preserving",
+    "easy_target_control",
+    "modulo16",
+    "length16",
+    "tuple16"
+  ],
+  "allocation_plans": {
+    "easy_target_control": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 2,
+        "modulo_sum_label": 2,
+        "sorted_contains_count": 11,
+        "sorted_tuple_affine": 11,
+        "tuple_branch_label": 2
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 2,
+        "branching+tuple_access": 2,
+        "length+string_match": 2,
+        "ordering+string_match": 11,
+        "ordering+tuple_access": 11
+      },
+      "bridge_total": 28,
+      "description": "Spends the same total bridge budget as hard_target, but concentrates it on the responsive-control families.",
+      "seen_total": 212,
+      "suite": "control"
+    },
+    "hard_target": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 8,
+        "modulo_sum_label": 8,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2,
+        "tuple_branch_label": 8
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 8,
+        "branching+tuple_access": 8,
+        "length+string_match": 8,
+        "ordering+string_match": 2,
+        "ordering+tuple_access": 2
+      },
+      "bridge_total": 28,
+      "description": "Concentrates bridge budget on the three target families while retaining two bridges for each responsive-control family.",
+      "seen_total": 212,
+      "suite": "targeted"
+    },
+    "hard_target_seen_preserving": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 6,
+        "modulo_sum_label": 6,
+        "sorted_contains_count": 1,
+        "sorted_tuple_affine": 1,
+        "tuple_branch_label": 6
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 6,
+        "branching+tuple_access": 6,
+        "length+string_match": 6,
+        "ordering+string_match": 1,
+        "ordering+tuple_access": 1
+      },
+      "bridge_total": 20,
+      "description": "Targets the same three families while keeping the total bridge count equal to the uniform4 baseline.",
+      "seen_total": 220,
+      "suite": "targeted"
+    },
+    "length16": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 16,
+        "modulo_sum_label": 2,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2,
+        "tuple_branch_label": 2
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 2,
+        "branching+tuple_access": 2,
+        "length+string_match": 16,
+        "ordering+string_match": 2,
+        "ordering+tuple_access": 2
+      },
+      "bridge_total": 24,
+      "description": "Light single-family high-dose probe for length_contains_code with two bridges for every other held-out family.",
+      "seen_total": 216,
+      "suite": "single_family_sweep"
+    },
+    "modulo16": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 2,
+        "modulo_sum_label": 16,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2,
+        "tuple_branch_label": 2
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 16,
+        "branching+tuple_access": 2,
+        "length+string_match": 2,
+        "ordering+string_match": 2,
+        "ordering+tuple_access": 2
+      },
+      "bridge_total": 24,
+      "description": "Light single-family high-dose probe for modulo_sum_label with two bridges for every other held-out family.",
+      "seen_total": 216,
+      "suite": "single_family_sweep"
+    },
+    "tuple16": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 2,
+        "modulo_sum_label": 2,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2,
+        "tuple_branch_label": 16
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 2,
+        "branching+tuple_access": 16,
+        "length+string_match": 2,
+        "ordering+string_match": 2,
+        "ordering+tuple_access": 2
+      },
+      "bridge_total": 24,
+      "description": "Light single-family high-dose probe for tuple_branch_label with two bridges for every other held-out family.",
+      "seen_total": 216,
+      "suite": "single_family_sweep"
+    },
+    "uniform2": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 2,
+        "modulo_sum_label": 2,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2,
+        "tuple_branch_label": 2
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 2,
+        "branching+tuple_access": 2,
+        "length+string_match": 2,
+        "ordering+string_match": 2,
+        "ordering+tuple_access": 2
+      },
+      "bridge_total": 10,
+      "description": "Uniform allocation with 2 exact bridge examples for every held-out family.",
+      "seen_total": 230,
+      "suite": "baseline"
+    },
+    "uniform4": {
+      "bridge_counts_by_family": {
+        "length_contains_code": 4,
+        "modulo_sum_label": 4,
+        "sorted_contains_count": 4,
+        "sorted_tuple_affine": 4,
+        "tuple_branch_label": 4
+      },
+      "bridge_counts_by_pair": {
+        "aggregation+modulo": 4,
+        "branching+tuple_access": 4,
+        "length+string_match": 4,
+        "ordering+string_match": 4,
+        "ordering+tuple_access": 4
+      },
+      "bridge_total": 20,
+      "description": "Uniform allocation with 4 exact bridge examples for every held-out family.",
+      "seen_total": 220,
+      "suite": "baseline"
+    }
+  },
+  "bridge_pair_counts": {
+    "repair_train_easy_target_control": {
+      "aggregation+modulo": 2,
+      "branching+tuple_access": 2,
+      "length+string_match": 2,
+      "ordering+string_match": 11,
+      "ordering+tuple_access": 11
+    },
+    "repair_train_hard_target": {
+      "aggregation+modulo": 8,
+      "branching+tuple_access": 8,
+      "length+string_match": 8,
+      "ordering+string_match": 2,
+      "ordering+tuple_access": 2
+    },
+    "repair_train_hard_target_seen_preserving": {
+      "aggregation+modulo": 6,
+      "branching+tuple_access": 6,
+      "length+string_match": 6,
+      "ordering+string_match": 1,
+      "ordering+tuple_access": 1
+    },
+    "repair_train_length16": {
+      "aggregation+modulo": 2,
+      "branching+tuple_access": 2,
+      "length+string_match": 16,
+      "ordering+string_match": 2,
+      "ordering+tuple_access": 2
+    },
+    "repair_train_modulo16": {
+      "aggregation+modulo": 16,
+      "branching+tuple_access": 2,
+      "length+string_match": 2,
+      "ordering+string_match": 2,
+      "ordering+tuple_access": 2
+    },
+    "repair_train_tuple16": {
+      "aggregation+modulo": 2,
+      "branching+tuple_access": 16,
+      "length+string_match": 2,
+      "ordering+string_match": 2,
+      "ordering+tuple_access": 2
+    },
+    "repair_train_uniform2": {
+      "aggregation+modulo": 2,
+      "branching+tuple_access": 2,
+      "length+string_match": 2,
+      "ordering+string_match": 2,
+      "ordering+tuple_access": 2
+    },
+    "repair_train_uniform4": {
+      "aggregation+modulo": 4,
+      "branching+tuple_access": 4,
+      "length+string_match": 4,
+      "ordering+string_match": 4,
+      "ordering+tuple_access": 4
+    }
+  },
+  "dataset": "targeted_bridge_allocation",
+  "evaluation_files": {
+    "format_shift": "experiments/targeted_bridge_allocation/data/repair_val_format_shift.jsonl",
+    "recombination_holdout": "experiments/targeted_bridge_allocation/data/repair_val_recombination_holdout.jsonl",
+    "seen_iid": "experiments/targeted_bridge_allocation/data/repair_val_seen_iid.jsonl"
+  },
+  "families": {
+    "repair_train_easy_target_control": {
+      "contains_label": 18,
+      "length_affine": 18,
+      "length_contains_code": 2,
+      "length_label": 18,
+      "modulo_label": 17,
+      "modulo_shift": 18,
+      "modulo_sum_label": 2,
+      "scalar_affine": 17,
+      "sort_join": 18,
+      "sorted_contains_count": 11,
+      "sorted_tuple_affine": 11,
+      "sum_offset": 18,
+      "sum_threshold": 18,
+      "threshold_offset": 17,
+      "tuple_affine": 17,
+      "tuple_branch_label": 2,
+      "tuple_sum_wrap": 18
+    },
+    "repair_train_hard_target": {
+      "contains_label": 18,
+      "length_affine": 17,
+      "length_contains_code": 8,
+      "length_label": 18,
+      "modulo_label": 18,
+      "modulo_shift": 17,
+      "modulo_sum_label": 8,
+      "scalar_affine": 17,
+      "sort_join": 18,
+      "sorted_contains_count": 2,
+      "sorted_tuple_affine": 2,
+      "sum_offset": 18,
+      "sum_threshold": 18,
+      "threshold_offset": 17,
+      "tuple_affine": 18,
+      "tuple_branch_label": 8,
+      "tuple_sum_wrap": 18
+    },
+    "repair_train_hard_target_seen_preserving": {
+      "contains_label": 19,
+      "length_affine": 18,
+      "length_contains_code": 6,
+      "length_label": 19,
+      "modulo_label": 18,
+      "modulo_shift": 18,
+      "modulo_sum_label": 6,
+      "scalar_affine": 18,
+      "sort_join": 18,
+      "sorted_contains_count": 1,
+      "sorted_tuple_affine": 1,
+      "sum_offset": 18,
+      "sum_threshold": 18,
+      "threshold_offset": 18,
+      "tuple_affine": 19,
+      "tuple_branch_label": 6,
+      "tuple_sum_wrap": 19
+    },
+    "repair_train_length16": {
+      "contains_label": 18,
+      "length_affine": 18,
+      "length_contains_code": 16,
+      "length_label": 18,
+      "modulo_label": 18,
+      "modulo_shift": 18,
+      "modulo_sum_label": 2,
+      "scalar_affine": 18,
+      "sort_join": 18,
+      "sorted_contains_count": 2,
+      "sorted_tuple_affine": 2,
+      "sum_offset": 18,
+      "sum_threshold": 18,
+      "threshold_offset": 18,
+      "tuple_affine": 18,
+      "tuple_branch_label": 2,
+      "tuple_sum_wrap": 18
+    },
+    "repair_train_modulo16": {
+      "contains_label": 18,
+      "length_affine": 18,
+      "length_contains_code": 2,
+      "length_label": 18,
+      "modulo_label": 18,
+      "modulo_shift": 18,
+      "modulo_sum_label": 16,
+      "scalar_affine": 18,
+      "sort_join": 18,
+      "sorted_contains_count": 2,
+      "sorted_tuple_affine": 2,
+      "sum_offset": 18,
+      "sum_threshold": 18,
+      "threshold_offset": 18,
+      "tuple_affine": 18,
+      "tuple_branch_label": 2,
+      "tuple_sum_wrap": 18
+    },
+    "repair_train_tuple16": {
+      "contains_label": 18,
+      "length_affine": 18,
+      "length_contains_code": 2,
+      "length_label": 18,
+      "modulo_label": 18,
+      "modulo_shift": 18,
+      "modulo_sum_label": 2,
+      "scalar_affine": 18,
+      "sort_join": 18,
+      "sorted_contains_count": 2,
+      "sorted_tuple_affine": 2,
+      "sum_offset": 18,
+      "sum_threshold": 18,
+      "threshold_offset": 18,
+      "tuple_affine": 18,
+      "tuple_branch_label": 16,
+      "tuple_sum_wrap": 18
+    },
+    "repair_train_uniform2": {
+      "contains_label": 19,
+      "length_affine": 19,
+      "length_contains_code": 2,
+      "length_label": 19,
+      "modulo_label": 19,
+      "modulo_shift": 19,
+      "modulo_sum_label": 2,
+      "scalar_affine": 20,
+      "sort_join": 19,
+      "sorted_contains_count": 2,
+      "sorted_tuple_affine": 2,
+      "sum_offset": 19,
+      "sum_threshold": 19,
+      "threshold_offset": 20,
+      "tuple_affine": 19,
+      "tuple_branch_label": 2,
+      "tuple_sum_wrap": 19
+    },
+    "repair_train_uniform4": {
+      "contains_label": 18,
+      "length_affine": 18,
+      "length_contains_code": 4,
+      "length_label": 18,
+      "modulo_label": 19,
+      "modulo_shift": 18,
+      "modulo_sum_label": 4,
+      "scalar_affine": 18,
+      "sort_join": 18,
+      "sorted_contains_count": 4,
+      "sorted_tuple_affine": 4,
+      "sum_offset": 18,
+      "sum_threshold": 18,
+      "threshold_offset": 19,
+      "tuple_affine": 19,
+      "tuple_branch_label": 4,
+      "tuple_sum_wrap": 19
+    },
+    "repair_val_format_shift": {
+      "contains_label": 3,
+      "length_affine": 3,
+      "length_label": 3,
+      "modulo_label": 3,
+      "modulo_shift": 3,
+      "scalar_affine": 3,
+      "sort_join": 3,
+      "sum_offset": 3,
+      "sum_threshold": 3,
+      "threshold_offset": 3,
+      "tuple_affine": 3,
+      "tuple_sum_wrap": 3
+    },
+    "repair_val_recombination_holdout": {
+      "length_contains_code": 12,
+      "modulo_sum_label": 12,
+      "sorted_contains_count": 12,
+      "sorted_tuple_affine": 12,
+      "tuple_branch_label": 12
+    },
+    "repair_val_seen_iid": {
+      "contains_label": 3,
+      "length_affine": 3,
+      "length_label": 3,
+      "modulo_label": 3,
+      "modulo_shift": 3,
+      "scalar_affine": 3,
+      "sort_join": 3,
+      "sum_offset": 3,
+      "sum_threshold": 3,
+      "threshold_offset": 3,
+      "tuple_affine": 3,
+      "tuple_sum_wrap": 3
+    }
+  },
+  "heldout_factor_pairs": [
+    "aggregation+modulo",
+    "branching+tuple_access",
+    "length+string_match",
+    "ordering+string_match",
+    "ordering+tuple_access"
+  ],
+  "heldout_family_groups": {
+    "responsive_control": [
+      "sorted_contains_count",
+      "sorted_tuple_affine"
+    ],
+    "target": [
+      "modulo_sum_label",
+      "length_contains_code",
+      "tuple_branch_label"
+    ]
+  },
+  "question": "Does fixed-budget targeted bridge allocation improve trace-conditioned recombination repair compared with uniform bridge allocation?",
+  "records": {
+    "repair_train_easy_target_control": 240,
+    "repair_train_hard_target": 240,
+    "repair_train_hard_target_seen_preserving": 240,
+    "repair_train_length16": 240,
+    "repair_train_modulo16": 240,
+    "repair_train_tuple16": 240,
+    "repair_train_uniform2": 240,
+    "repair_train_uniform4": 240,
+    "repair_val_format_shift": 36,
+    "repair_val_recombination_holdout": 60,
+    "repair_val_seen_iid": 36
+  },
+  "seed": 20260622,
+  "total_train_records_per_condition": 240,
+  "train_factor_pair_counts": {
+    "repair_train_easy_target_control": {
+      "aggregation+arithmetic": 38,
+      "aggregation+branching": 20,
+      "aggregation+modulo": 2,
+      "aggregation+ordering": 11,
+      "aggregation+sequence_iteration": 11,
+      "aggregation+string_format": 31,
+      "aggregation+string_match": 11,
+      "aggregation+string_normalization": 11,
+      "aggregation+tuple_access": 18,
+      "arithmetic+branching": 59,
+      "arithmetic+length": 20,
+      "arithmetic+modulo": 20,
+      "arithmetic+ordering": 11,
+      "arithmetic+string_format": 6,
+      "arithmetic+string_match": 2,
+      "arithmetic+tuple_access": 30,
+      "branching+length": 20,
+      "branching+modulo": 37,
+      "branching+string_format": 59,
+      "branching+string_match": 20,
+      "branching+tuple_access": 2,
+      "length+string_format": 20,
+      "length+string_match": 2,
+      "modulo+string_format": 19,
+      "ordering+sequence_iteration": 29,
+      "ordering+string_format": 29,
+      "ordering+string_match": 11,
+      "ordering+string_normalization": 29,
+      "ordering+tuple_access": 11,
+      "sequence_iteration+string_format": 29,
+      "sequence_iteration+string_match": 11,
+      "sequence_iteration+string_normalization": 29,
+      "string_format+string_match": 31,
+      "string_format+string_normalization": 29,
+      "string_format+tuple_access": 20,
+      "string_match+string_normalization": 11
+    },
+    "repair_train_hard_target": {
+      "aggregation+arithmetic": 44,
+      "aggregation+branching": 26,
+      "aggregation+modulo": 8,
+      "aggregation+ordering": 2,
+      "aggregation+sequence_iteration": 2,
+      "aggregation+string_format": 28,
+      "aggregation+string_match": 2,
+      "aggregation+string_normalization": 2,
+      "aggregation+tuple_access": 18,
+      "arithmetic+branching": 76,
+      "arithmetic+length": 25,
+      "arithmetic+modulo": 25,
+      "arithmetic+ordering": 2,
+      "arithmetic+string_format": 24,
+      "arithmetic+string_match": 8,
+      "arithmetic+tuple_access": 28,
+      "branching+length": 26,
+      "branching+modulo": 43,
+      "branching+string_format": 78,
+      "branching+string_match": 26,
+      "branching+tuple_access": 8,
+      "length+string_format": 26,
+      "length+string_match": 8,
+      "modulo+string_format": 26,
+      "ordering+sequence_iteration": 20,
+      "ordering+string_format": 20,
+      "ordering+string_match": 2,
+      "ordering+string_normalization": 20,
+      "ordering+tuple_access": 2,
+      "sequence_iteration+string_format": 20,
+      "sequence_iteration+string_match": 2,
+      "sequence_iteration+string_normalization": 20,
+      "string_format+string_match": 28,
+      "string_format+string_normalization": 20,
+      "string_format+tuple_access": 26,
+      "string_match+string_normalization": 2
+    },
+    "repair_train_hard_target_seen_preserving": {
+      "aggregation+arithmetic": 42,
+      "aggregation+branching": 24,
+      "aggregation+modulo": 6,
+      "aggregation+ordering": 1,
+      "aggregation+sequence_iteration": 1,
+      "aggregation+string_format": 26,
+      "aggregation+string_match": 1,
+      "aggregation+string_normalization": 1,
+      "aggregation+tuple_access": 19,
+      "arithmetic+branching": 72,
+      "arithmetic+length": 24,
+      "arithmetic+modulo": 24,
+      "arithmetic+ordering": 1,
+      "arithmetic+string_format": 18,
+      "arithmetic+string_match": 6,
+      "arithmetic+tuple_access": 26,
+      "branching+length": 25,
+      "branching+modulo": 42,
+      "branching+string_format": 74,
+      "branching+string_match": 25,
+      "branching+tuple_access": 6,
+      "length+string_format": 25,
+      "length+string_match": 6,
+      "modulo+string_format": 24,
+      "ordering+sequence_iteration": 19,
+      "ordering+string_format": 19,
+      "ordering+string_match": 1,
+      "ordering+string_normalization": 19,
+      "ordering+tuple_access": 1,
+      "sequence_iteration+string_format": 19,
+      "sequence_iteration+string_match": 1,
+      "sequence_iteration+string_normalization": 19,
+      "string_format+string_match": 26,
+      "string_format+string_normalization": 19,
+      "string_format+tuple_access": 25,
+      "string_match+string_normalization": 1
+    },
+    "repair_train_length16": {
+      "aggregation+arithmetic": 38,
+      "aggregation+branching": 20,
+      "aggregation+modulo": 2,
+      "aggregation+ordering": 2,
+      "aggregation+sequence_iteration": 2,
+      "aggregation+string_format": 22,
+      "aggregation+string_match": 2,
+      "aggregation+string_normalization": 2,
+      "aggregation+tuple_access": 18,
+      "arithmetic+branching": 74,
+      "arithmetic+length": 34,
+      "arithmetic+modulo": 20,
+      "arithmetic+ordering": 2,
+      "arithmetic+string_format": 20,
+      "arithmetic+string_match": 16,
+      "arithmetic+tuple_access": 22,
+      "branching+length": 34,
+      "branching+modulo": 38,
+      "branching+string_format": 74,
+      "branching+string_match": 34,
+      "branching+tuple_access": 2,
+      "length+string_format": 34,
+      "length+string_match": 16,
+      "modulo+string_format": 20,
+      "ordering+sequence_iteration": 20,
+      "ordering+string_format": 20,
+      "ordering+string_match": 2,
+      "ordering+string_normalization": 20,
+      "ordering+tuple_access": 2,
+      "sequence_iteration+string_format": 20,
+      "sequence_iteration+string_match": 2,
+      "sequence_iteration+string_normalization": 20,
+      "string_format+string_match": 36,
+      "string_format+string_normalization": 20,
+      "string_format+tuple_access": 20,
+      "string_match+string_normalization": 2
+    },
+    "repair_train_modulo16": {
+      "aggregation+arithmetic": 52,
+      "aggregation+branching": 34,
+      "aggregation+modulo": 16,
+      "aggregation+ordering": 2,
+      "aggregation+sequence_iteration": 2,
+      "aggregation+string_format": 36,
+      "aggregation+string_match": 2,
+      "aggregation+string_normalization": 2,
+      "aggregation+tuple_access": 18,
+      "arithmetic+branching": 74,
+      "arithmetic+length": 20,
+      "arithmetic+modulo": 34,
+      "arithmetic+ordering": 2,
+      "arithmetic+string_format": 20,
+      "arithmetic+string_match": 2,
+      "arithmetic+tuple_access": 22,
+      "branching+length": 20,
+      "branching+modulo": 52,
+      "branching+string_format": 74,
+      "branching+string_match": 20,
+      "branching+tuple_access": 2,
+      "length+string_format": 20,
+      "length+string_match": 2,
+      "modulo+string_format": 34,
+      "ordering+sequence_iteration": 20,
+      "ordering+string_format": 20,
+      "ordering+string_match": 2,
+      "ordering+string_normalization": 20,
+      "ordering+tuple_access": 2,
+      "sequence_iteration+string_format": 20,
+      "sequence_iteration+string_match": 2,
+      "sequence_iteration+string_normalization": 20,
+      "string_format+string_match": 22,
+      "string_format+string_normalization": 20,
+      "string_format+tuple_access": 20,
+      "string_match+string_normalization": 2
+    },
+    "repair_train_tuple16": {
+      "aggregation+arithmetic": 38,
+      "aggregation+branching": 20,
+      "aggregation+modulo": 2,
+      "aggregation+ordering": 2,
+      "aggregation+sequence_iteration": 2,
+      "aggregation+string_format": 22,
+      "aggregation+string_match": 2,
+      "aggregation+string_normalization": 2,
+      "aggregation+tuple_access": 18,
+      "arithmetic+branching": 74,
+      "arithmetic+length": 20,
+      "arithmetic+modulo": 20,
+      "arithmetic+ordering": 2,
+      "arithmetic+string_format": 20,
+      "arithmetic+string_match": 2,
+      "arithmetic+tuple_access": 36,
+      "branching+length": 20,
+      "branching+modulo": 38,
+      "branching+string_format": 74,
+      "branching+string_match": 20,
+      "branching+tuple_access": 16,
+      "length+string_format": 20,
+      "length+string_match": 2,
+      "modulo+string_format": 20,
+      "ordering+sequence_iteration": 20,
+      "ordering+string_format": 20,
+      "ordering+string_match": 2,
+      "ordering+string_normalization": 20,
+      "ordering+tuple_access": 2,
+      "sequence_iteration+string_format": 20,
+      "sequence_iteration+string_match": 2,
+      "sequence_iteration+string_normalization": 20,
+      "string_format+string_match": 22,
+      "string_format+string_normalization": 20,
+      "string_format+tuple_access": 34,
+      "string_match+string_normalization": 2
+    },
+    "repair_train_uniform2": {
+      "aggregation+arithmetic": 40,
+      "aggregation+branching": 21,
+      "aggregation+modulo": 2,
+      "aggregation+ordering": 2,
+      "aggregation+sequence_iteration": 2,
+      "aggregation+string_format": 23,
+      "aggregation+string_match": 2,
+      "aggregation+string_normalization": 2,
+      "aggregation+tuple_access": 19,
+      "arithmetic+branching": 64,
+      "arithmetic+length": 21,
+      "arithmetic+modulo": 21,
+      "arithmetic+ordering": 2,
+      "arithmetic+string_format": 6,
+      "arithmetic+string_match": 2,
+      "arithmetic+tuple_access": 23,
+      "branching+length": 21,
+      "branching+modulo": 40,
+      "branching+string_format": 63,
+      "branching+string_match": 21,
+      "branching+tuple_access": 2,
+      "length+string_format": 21,
+      "length+string_match": 2,
+      "modulo+string_format": 21,
+      "ordering+sequence_iteration": 21,
+      "ordering+string_format": 21,
+      "ordering+string_match": 2,
+      "ordering+string_normalization": 21,
+      "ordering+tuple_access": 2,
+      "sequence_iteration+string_format": 21,
+      "sequence_iteration+string_match": 2,
+      "sequence_iteration+string_normalization": 21,
+      "string_format+string_match": 23,
+      "string_format+string_normalization": 21,
+      "string_format+tuple_access": 21,
+      "string_match+string_normalization": 2
+    },
+    "repair_train_uniform4": {
+      "aggregation+arithmetic": 40,
+      "aggregation+branching": 22,
+      "aggregation+modulo": 4,
+      "aggregation+ordering": 4,
+      "aggregation+sequence_iteration": 4,
+      "aggregation+string_format": 27,
+      "aggregation+string_match": 4,
+      "aggregation+string_normalization": 4,
+      "aggregation+tuple_access": 19,
+      "arithmetic+branching": 67,
+      "arithmetic+length": 22,
+      "arithmetic+modulo": 22,
+      "arithmetic+ordering": 4,
+      "arithmetic+string_format": 12,
+      "arithmetic+string_match": 4,
+      "arithmetic+tuple_access": 27,
+      "branching+length": 22,
+      "branching+modulo": 41,
+      "branching+string_format": 67,
+      "branching+string_match": 22,
+      "branching+tuple_access": 4,
+      "length+string_format": 22,
+      "length+string_match": 4,
+      "modulo+string_format": 23,
+      "ordering+sequence_iteration": 22,
+      "ordering+string_format": 22,
+      "ordering+string_match": 4,
+      "ordering+string_normalization": 22,
+      "ordering+tuple_access": 4,
+      "sequence_iteration+string_format": 22,
+      "sequence_iteration+string_match": 4,
+      "sequence_iteration+string_normalization": 22,
+      "string_format+string_match": 26,
+      "string_format+string_normalization": 22,
+      "string_format+tuple_access": 23,
+      "string_match+string_normalization": 4
+    }
+  },
+  "train_files": {
+    "repair_train_easy_target_control": "experiments/targeted_bridge_allocation/data/repair_train_easy_target_control.jsonl",
+    "repair_train_hard_target": "experiments/targeted_bridge_allocation/data/repair_train_hard_target.jsonl",
+    "repair_train_hard_target_seen_preserving": "experiments/targeted_bridge_allocation/data/repair_train_hard_target_seen_preserving.jsonl",
+    "repair_train_length16": "experiments/targeted_bridge_allocation/data/repair_train_length16.jsonl",
+    "repair_train_modulo16": "experiments/targeted_bridge_allocation/data/repair_train_modulo16.jsonl",
+    "repair_train_tuple16": "experiments/targeted_bridge_allocation/data/repair_train_tuple16.jsonl",
+    "repair_train_uniform2": "experiments/targeted_bridge_allocation/data/repair_train_uniform2.jsonl",
+    "repair_train_uniform4": "experiments/targeted_bridge_allocation/data/repair_train_uniform4.jsonl"
+  }
+}

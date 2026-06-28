@@ -1,0 +1,37 @@
+{
+  "adapter_dir": null,
+  "experiment": "qwen35_4b_trained_vs_frozen_repair_mdp",
+  "max_new_tokens": 260,
+  "max_rounds": 1,
+  "max_sources_per_record": 3,
+  "path": "data/frozen_repair_train_mined_records.jsonl",
+  "records": {
+    "candidate_count_mean": 4.47,
+    "coverage": 0.76,
+    "distinct_behavior_rate_mean": 0.7397777777777778,
+    "false_repair_count": 8,
+    "false_repair_rate": 0.3076923076923077,
+    "hidden_pass_candidates_mean": 2.07,
+    "parse_success_mean": 4.31,
+    "records": 100,
+    "visible_candidates_mean": 2.31,
+    "visible_coverage": 0.76,
+    "visible_repair_pass_count": 26,
+    "zero_base_records": 28,
+    "zero_to_one": 4,
+    "zero_to_one_rate": 0.14285714285714285
+  },
+  "records_in": "data/base_direct_train_records.jsonl",
+  "repair_visible_passers": false,
+  "repairs_per_source": 2,
+  "round_name": "frozen_repair_train_mined",
+  "target_forward_tokens": 0,
+  "temperature": 0.5,
+  "token_usage": {
+    "calls": 220,
+    "completion_tokens": 29814,
+    "forward_tokens": 136948,
+    "prompt_tokens": 107134
+  },
+  "top_p": 0.95
+}

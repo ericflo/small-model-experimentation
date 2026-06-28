@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen Semantic Prefix Value Model</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; color: #202124; margin: 0; background: #f7f7f5; }
+    main { max-width: 980px; margin: 0 auto; padding: 42px 24px 72px; background: #fff; }
+    h1, h2 { line-height: 1.15; }
+    h1 { font-size: 2.2rem; margin-bottom: 0.4rem; }
+    h2 { margin-top: 2.0rem; border-top: 1px solid #ddd; padding-top: 1.2rem; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+    th, td { border: 1px solid #d8d8d8; padding: 6px 8px; text-align: left; }
+    th { background: #f0f2f4; }
+    img { max-width: 100%; display: block; margin: 1rem auto; border: 1px solid #ddd; }
+    code { background: #f1f3f4; padding: 0.1rem 0.25rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<main>
+<h1>Qwen Semantic Prefix Value Model</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a value model trained on semantic reachability labels can guide no-answer bytecode search better than an exact-prefix verifier. A frozen Qwen 4B model encodes natural-language prompts. A trained compiler head emits typed stack-machine bytecode distributions. A value model then scores partial bytecode actions during constrained beam search.</p>
+<p>The central target is not whether a partial program matches a canonical trace. Instead, the semantic label asks whether bounded executable completion from the post-action VM state can still reach the target answer. Raw reachability was too broad, so the final main run trained on the top-1 reachable action per prefix by compiler prior while preserving canonical exact positives.</p>
+<p>The main result is negative but informative. Exact-prefix value supervision reached AUC 0.941 and improved fresh-paired top-1 accuracy from 68.8% greedy / 68.8% logprob beam to 71.1% with <code>beam_exact_w0.5</code>. Semantic value supervision reached AUC 0.853, but its best fresh-paired beam was 68.0% with <code>beam_semantic_w0.25</code>. On hard composition, semantic value matched the logprob top-1 result at 51.6%, while answer-verified repair reached 78.9%. The gap to repair remains mostly a ranking/calibration problem rather than a candidate-generation problem.</p>
+<h2>Method</h2>
+<p>The task generator emits mixed natural-language tasks with executable bytecode over a compact stack VM. The opcode set includes arithmetic, comparison, min/max, modulus, and two lookup tables. Programs are normalized to a fixed length and executed invisibly for evaluation.</p>
+<p>For each prompt, frozen Qwen hidden states are pooled by a trained compiler head. The head predicts opcode logits, argument logits, and an auxiliary answer head. Typed beam search expands only stack-valid actions. During training-data collection, every candidate action receives:</p>
+<ul>
+<li><code>exact</code>: 1 if the action keeps the prefix equal to the canonical target program.</li>
+<li><code>raw semantic</code>: 1 if bounded suffix search can still complete to the target answer from the post-action state.</li>
+<li><code>filtered semantic</code>: 1 for canonical exact positives plus the top reachable action per prefix by compiler prior.</li>
+</ul>
+<p>The value models do not see the final answer at decode time. Answer-verified local repair is included only as an upper-bound diagnostic because it chooses candidates by executing them against the known target answer.</p>
+<h2>Runs</h2>
+<p>The experiment used a smoke run, three 128-example pilots, and one 512-example main run. The smoke run validated the full artifact path. The first pilot showed that raw semantic reachability was too dense. The second and third pilots introduced per-prefix rank filtering. The main run used the stricter top-1 semantic target.</p>
+<p>Main run hardware: NVIDIA RTX 6000 Ada Generation.</p>
+<h2>Label Density</h2>
+<p><img alt="Exact labels are sparse; raw semantic reachability is broad; top-1 filtering reduces but does not eliminate semantic-only positives." src="../analysis/figures/label_density.png" /></p>
+<p><em>Exact labels are sparse; raw semantic reachability is broad; top-1 filtering reduces but does not eliminate semantic-only positives.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run_dir</th>
+<th style="text-align: right;">prefix_samples</th>
+<th style="text-align: left;">exact_positive_rate</th>
+<th style="text-align: left;">raw_semantic_positive_rate</th>
+<th style="text-align: left;">semantic_positive_rate</th>
+<th style="text-align: left;">semantic_extra_positive_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">main_semantic_prefix_value_s512_top1</td>
+<td style="text-align: right;">37946</td>
+<td style="text-align: left;">7.7%</td>
+<td style="text-align: left;">56.6%</td>
+<td style="text-align: left;">35.2%</td>
+<td style="text-align: left;">27.5%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pilot_semantic_prefix_value_s128_cached</td>
+<td style="text-align: right;">16930</td>
+<td style="text-align: left;">4.4%</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">69.4%</td>
+<td style="text-align: left;">65.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pilot_semantic_prefix_value_s128_ranked</td>
+<td style="text-align: right;">12071</td>
+<td style="text-align: left;">6.1%</td>
+<td style="text-align: left;">65.3%</td>
+<td style="text-align: left;">49.1%</td>
+<td style="text-align: left;">43.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pilot_semantic_prefix_value_s128_top1</td>
+<td style="text-align: right;">9835</td>
+<td style="text-align: left;">7.5%</td>
+<td style="text-align: left;">59.5%</td>
+<td style="text-align: left;">37.5%</td>
+<td style="text-align: left;">30.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">smoke_semantic_prefix_value</td>
+<td style="text-align: right;">1288</td>
+<td style="text-align: left;">13.9%</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">47.8%</td>
+<td style="text-align: left;">33.9%</td>
+</tr>
+</tbody>
+</table>
+<h2>Value Training</h2>
+<p><img alt="The exact-prefix value model reaches higher AUC than the semantic value model, but the semantic model is trained on a broader and noisier target." src="../analysis/figures/verifier_auc.png" /></p>
+<p><em>The exact-prefix value model reaches higher AUC than the semantic value model, but the semantic model is trained on a broader and noisier target.</em></p>
+<p>In the main run, exact-prefix positives were 7.7% of train prefix actions. Raw semantic positives were 56.6%, and filtered semantic positives were 35.2%.</p>
+<h2>Decoder Results</h2>
+<p><img alt="Exact-prefix value improves fresh paired accuracy; semantic value does not outperform exact-prefix value in the main run." src="../analysis/figures/main_accuracy_by_decoder.png" /></p>
+<p><em>Exact-prefix value improves fresh paired accuracy; semantic value does not outperform exact-prefix value in the main run.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">decoder</th>
+<th style="text-align: left;">accuracy</th>
+<th style="text-align: left;">oracle</th>
+<th style="text-align: left;">program_exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">greedy</td>
+<td style="text-align: left;">64.1%</td>
+<td style="text-align: left;">64.1%</td>
+<td style="text-align: left;">46.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">beam_logprob</td>
+<td style="text-align: left;">64.1%</td>
+<td style="text-align: left;">82.8%</td>
+<td style="text-align: left;">46.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">beam_exact_w0.25</td>
+<td style="text-align: left;">67.2%</td>
+<td style="text-align: left;">83.6%</td>
+<td style="text-align: left;">46.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">beam_semantic_w4</td>
+<td style="text-align: left;">67.2%</td>
+<td style="text-align: left;">83.6%</td>
+<td style="text-align: left;">44.5%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">local_answer</td>
+<td style="text-align: left;">83.6%</td>
+<td style="text-align: left;">83.6%</td>
+<td style="text-align: left;">49.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">greedy</td>
+<td style="text-align: left;">62.5%</td>
+<td style="text-align: left;">62.5%</td>
+<td style="text-align: left;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">beam_logprob</td>
+<td style="text-align: left;">62.5%</td>
+<td style="text-align: left;">79.7%</td>
+<td style="text-align: left;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">beam_exact_w2</td>
+<td style="text-align: left;">64.8%</td>
+<td style="text-align: left;">81.2%</td>
+<td style="text-align: left;">50.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">beam_semantic_w0.25</td>
+<td style="text-align: left;">63.3%</td>
+<td style="text-align: left;">79.7%</td>
+<td style="text-align: left;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">local_answer</td>
+<td style="text-align: left;">81.2%</td>
+<td style="text-align: left;">81.2%</td>
+<td style="text-align: left;">53.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">greedy</td>
+<td style="text-align: left;">68.8%</td>
+<td style="text-align: left;">68.8%</td>
+<td style="text-align: left;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">beam_logprob</td>
+<td style="text-align: left;">68.8%</td>
+<td style="text-align: left;">82.8%</td>
+<td style="text-align: left;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">beam_exact_w0.5</td>
+<td style="text-align: left;">71.1%</td>
+<td style="text-align: left;">82.0%</td>
+<td style="text-align: left;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">beam_semantic_w0.25</td>
+<td style="text-align: left;">68.0%</td>
+<td style="text-align: left;">82.8%</td>
+<td style="text-align: left;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">local_answer</td>
+<td style="text-align: left;">82.8%</td>
+<td style="text-align: left;">82.8%</td>
+<td style="text-align: left;">51.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">greedy</td>
+<td style="text-align: left;">51.6%</td>
+<td style="text-align: left;">51.6%</td>
+<td style="text-align: left;">32.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">beam_logprob</td>
+<td style="text-align: left;">51.6%</td>
+<td style="text-align: left;">71.9%</td>
+<td style="text-align: left;">32.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">beam_exact_w0.25</td>
+<td style="text-align: left;">51.6%</td>
+<td style="text-align: left;">71.1%</td>
+<td style="text-align: left;">32.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">beam_semantic_w2</td>
+<td style="text-align: left;">51.6%</td>
+<td style="text-align: left;">72.7%</td>
+<td style="text-align: left;">32.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">local_answer</td>
+<td style="text-align: left;">78.9%</td>
+<td style="text-align: left;">78.9%</td>
+<td style="text-align: left;">35.2%</td>
+</tr>
+</tbody>
+</table>
+<h2>Candidate Oracle Gap</h2>
+<p><img alt="Beam oracle accuracy remains much higher than top-1 no-answer selection, especially before answer-verified repair." src="../analysis/figures/oracle_gap.png" /></p>
+<p><em>Beam oracle accuracy remains much higher than top-1 no-answer selection, especially before answer-verified repair.</em></p>
+<p>Fresh paired beam-logprob oracle accuracy was 82.8%, while top-1 logprob accuracy was 68.8%. Hard-composition beam-logprob oracle accuracy was 71.9%, while top-1 logprob accuracy was 51.6%. The value models did not reliably convert that oracle slack into top-1 gains.</p>
+<h2>Iteration</h2>
+<p><img alt="Pilot runs tightened semantic labels from raw reachability toward a top-1 reachable-action target before the main run." src="../analysis/figures/pilot_iteration.png" /></p>
+<p><em>Pilot runs tightened semantic labels from raw reachability toward a top-1 reachable-action target before the main run.</em></p>
+<p>The iteration changed the semantic label from raw reachability to rank-filtered reachability because raw reachability made too many actions positive. This improved target sharpness, but did not make semantic value dominate exact-prefix value in the final main run.</p>
+<h2>Conclusion</h2>
+<p>Bounded semantic reachability is a real, learnable signal: it creates many non-canonical positive actions and the semantic value model reaches held-out AUC above 0.85 during training. However, this form of semantic value supervision is not enough to close the no-answer beam-ranking gap. In the main run, exact-prefix value produced the best fresh-paired top-1 result, and semantic value was mostly neutral relative to logprob search.</p>
+<p>The next useful step is not another binary reachability classifier. The result points toward a calibrated action-value target: predict the best achievable completion score or success probability under the remaining search budget, not merely whether any bounded completion exists.</p>
+</main>
+</body>
+</html>

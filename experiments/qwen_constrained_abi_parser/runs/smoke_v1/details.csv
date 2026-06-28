@@ -1,0 +1,4946 @@
+suite,run,train_target,arm,seed,trained,split,family,depth,example_id,answer,generated,program_text,target,exec_value,exec_error,primary_correct,exec_correct,final_correct,valid_exec,exact_program,parse_exact,has_final,attempts_used,diverged_from_free,free_exec_correct,failure_type,gold_ops,generated_ops
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"FINAL: 14
+
+The task is to look up the value of ""alpha"" from the given table and return the integer. The table specifies that alpha is 14. Therefore, the answer is 14. The operations mentioned are straightforward, just retrieving the value associated with the key ""alpha"". There's no need to perform any calculations or additional operations since the question directly asks for","FINAL: 14
+
+The task is to look up the value of ""alpha"" from the given table and return the integer. The table specifies that alpha is 14. Therefore, the answer is 14. The operations mentioned are straightforward, just retrieving the value associated with the key ""alpha"". There's no need to perform any calculations or additional operations since the question directly asks for","FINAL: 14
+",,,1,0,1,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP,THE
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"FINAL: 112
+
+The operations are applied in order. Starting with 28, multiply by 4 to get 112. The result is 112. The answer is 112. The final answer is 112. The output is 112. The final answer is 112. The answer is 112","FINAL: 112
+
+The operations are applied in order. Starting with 28, multiply by 4 to get 112. The result is 112. The answer is 112. The final answer is 112. The output is 112. The final answer is 112. The answer is 112","FINAL: 112
+",,,1,0,1,0,0,0,1,1,0,0,n/a_answer_only,MUL,
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"FINAL: P8482DF
+
+The text is ""PU-8482-DF"". Let's see, the task is to remove hyphens from the text. So first, I need to look at each character in the string ""PU-8482-DF"". The hyphens are the characters that need to be removed. 
+
+Starting with the first character","FINAL: P8482DF
+
+The text is ""PU-8482-DF"". Let's see, the task is to remove hyphens from the text. So first, I need to look at each character in the string ""PU-8482-DF"". The hyphens are the characters that need to be removed. 
+
+Starting with the first character","FINAL: PU8482DF
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,STRIP_HYPHENS,THE STARTING
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"FINAL: 45
+```python
+# Given the table with alpha=11, beta=36, delta=37, gamma=8
+# Perform the operations: look up delta (37), then add the table value for gamma (8)
+# The result is 37 + 8 = 45
+``` 
+
+So the final answer is 45","FINAL: 45
+```python
+# Given the table with alpha=11, beta=36, delta=37, gamma=8
+# Perform the operations: look up delta (37), then add the table value for gamma (8)
+# The result is 37 + 8 = 45
+``` 
+
+So the final answer is 45","FINAL: 45
+",,,1,0,1,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP ADD_LOOKUP,PYTHON
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"FINAL: yv5212ke
+
+Step 1: Remove hyphens from the text. The original text is YV-5212-KE. Removing hyphens gives YV5212KE.
+
+Step 2: Convert the text to lowercase. The text after removing hyphens is YV5212KE. Converting to lowercase gives","FINAL: yv5212ke
+
+Step 1: Remove hyphens from the text. The original text is YV-5212-KE. Removing hyphens gives YV5212KE.
+
+Step 2: Convert the text to lowercase. The text after removing hyphens is YV5212KE. Converting to lowercase gives","FINAL: yv5212ke
+",,,1,0,1,0,0,0,1,1,0,0,n/a_answer_only,STRIP_HYPHENS LOWER,REMOVE CONVERT
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"FINAL: -12
+
+Step-by-Step Explanation:
+Start with 18.
+1) Subtract 24: 18 - 24 = -6.
+2) Multiply by 2: -6 * 2 = -12.
+The final result is -12. So the answer is -12. The integer is -12.
+Answer: -1","FINAL: -12
+
+Step-by-Step Explanation:
+Start with 18.
+1) Subtract 24: 18 - 24 = -6.
+2) Multiply by 2: -6 * 2 = -12.
+The final result is -12. So the answer is -12. The integer is -12.
+Answer: -1","FINAL: -12
+",,,1,0,1,0,0,0,1,1,0,0,n/a_answer_only,SUB MUL,STEP-BY-STEP START SUBTRACT MULTIPLY ANSWER
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"FINAL: 876
+```python
+# Given the table values, perform the operations in order
+# Step 1: Look up beta, which is 29
+# Step 2: Multiply by 4, 29 * 4 = 116
+# Step 3: Multiply by 3, 116 * 3 = 34","FINAL: 876
+```python
+# Given the table values, perform the operations in order
+# Step 1: Look up beta, which is 29
+# Step 2: Multiply by 4, 29 * 4 = 116
+# Step 3: Multiply by 3, 116 * 3 = 34","FINAL: 348
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP MUL MUL,PYTHON
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"FINAL: 504
+```python
+# Start with 8
+result = 8
+
+# Apply operations in order
+result += 4
+result += 5
+result *= 6
+
+# Return the final integer
+print(result)
+``` 
+
+The code starts with 8, adds 4 (result is 12), adds 5 (result is 17),","FINAL: 504
+```python
+# Start with 8
+result = 8
+
+# Apply operations in order
+result += 4
+result += 5
+result *= 6
+
+# Return the final integer
+print(result)
+``` 
+
+The code starts with 8, adds 4 (result is 12), adds 5 (result is 17),","FINAL: 102
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,ADD ADD MUL,PYTHON RESULT RESULT RESULT RESULT PRINT(RESULT) THE
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"FINAL: 4321
+
+Wait, but the text is ""LU-7864-EF"". Let's go through the steps again.
+
+First, convert to lowercase: ""lu-7864-ef"".
+Then reverse the text: ""fe-4687-UL"".
+Then take the last 4 characters: ""UL"".
+Wait, that's only","FINAL: 4321
+
+Wait, but the text is ""LU-7864-EF"". Let's go through the steps again.
+
+First, convert to lowercase: ""lu-7864-ef"".
+Then reverse the text: ""fe-4687-UL"".
+Then take the last 4 characters: ""UL"".
+Wait, that's only","FINAL: 7-ul
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOWER REVERSE TAKE_SUFFIX,"WAIT, FIRST, THEN THEN WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"FINAL: 8*3 + 39 + 9 = 37
+```
+
+
+Okay, let's see. The task is to perform some operations on the table values. The table has alpha=8, beta=23, delta=9, gamma=39. The steps are: look up alpha, multiply by 3, add gamma, add delta. 
+
+First","FINAL: 8*3 + 39 + 9 = 37
+```
+
+
+Okay, let's see. The task is to perform some operations on the table values. The table has alpha=8, beta=23, delta=9, gamma=39. The steps are: look up alpha, multiply by 3, add gamma, add delta. 
+
+First","FINAL: 72
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,"OKAY, FIRST"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"FINAL: 119
+
+Step-by-Step Explanation:
+Start with 2.
+1) Add 5: 2 + 5 = 7.
+2) Multiply by 4: 7 * 4 = 28.
+3) Multiply by 3: 28 * 3 = 84.
+4) Subtract 11: 84 -","FINAL: 119
+
+Step-by-Step Explanation:
+Start with 2.
+1) Add 5: 2 + 5 = 7.
+2) Multiply by 4: 7 * 4 = 28.
+3) Multiply by 3: 28 * 3 = 84.
+4) Subtract 11: 84 -","FINAL: 73
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,ADD MUL MUL SUB,STEP-BY-STEP START ADD MULTIPLY MULTIPLY SUBTRACT
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"FINAL: YEBX52BXX
+Wait, let me check again. The original text is YE-7952-BX. Step 1: remove hyphens → YE7952-BX. Step 2: remove hyphens → YE7952BX. Step 3: remove hyphens → YE7952BX. Then","FINAL: YEBX52BXX
+Wait, let me check again. The original text is YE-7952-BX. Step 1: remove hyphens → YE7952-BX. Step 2: remove hyphens → YE7952BX. Step 3: remove hyphens → YE7952BX. Then","FINAL: XB2597EY
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,"WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"FINAL: ZYD821R
+
+Wait, but the steps are 1) reverse, 2) uppercase, 3) uppercase, 4) reverse, 5) remove hyphens, 6) keep last 6 characters. Let's check again.
+
+Original text: ZR-6182-YD
+
+Step 1: reverse the text: Y","FINAL: ZYD821R
+
+Wait, but the steps are 1) reverse, 2) uppercase, 3) uppercase, 4) reverse, 5) remove hyphens, 6) keep last 6 characters. Let's check again.
+
+Original text: ZR-6182-YD
+
+Step 1: reverse the text: Y","FINAL: 6182YD
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,"WAIT, ORIGINAL REVERSE"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"FINAL: 306
+```python
+# Given table values
+table = {
+    'alpha': 30,
+    'delta': 17,
+    'gamma': 29,
+    'omega': 36
+}
+
+# Perform the operations step by step
+# Step 1: look up omega
+value = table['omega']
+
+# Step 2: multiply","FINAL: 306
+```python
+# Given table values
+table = {
+    'alpha': 30,
+    'delta': 17,
+    'gamma': 29,
+    'omega': 36
+}
+
+# Perform the operations step by step
+# Step 1: look up omega
+value = table['omega']
+
+# Step 2: multiply","FINAL: 711
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,PYTHON TABLE 'ALPHA' 'DELTA' 'GAMMA' 'OMEGA' } VALUE
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,FINAL: 10*2*2-8+10-22+16=10*2*2-8+10-22+16=10*2*2-8+10-22+16=10*2*2-8+10-22+16=10*2*,FINAL: 10*2*2-8+10-22+16=10*2*2-8+10-22+16=10*2*2-8+10-22+16=10*2*2-8+10-22+16=10*2*,"FINAL: 36
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,MUL MUL SUB ADD SUB ADD,
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"FINAL: 29+12=41
+```python
+# Given lookup entries
+lookup = {'alpha': 16, 'beta': 14, 'delta': 29, 'gamma': 26}
+
+# Process the running value
+delta_value = lookup['delta']
+result = delta_value + 12
+
+result
+```
+
+FINAL: 4","FINAL: 29+12=41
+```python
+# Given lookup entries
+lookup = {'alpha': 16, 'beta': 14, 'delta': 29, 'gamma': 26}
+
+# Process the running value
+delta_value = lookup['delta']
+result = delta_value + 12
+
+result
+```
+
+FINAL: 4","FINAL: 41
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP ADD,PYTHON LOOKUP DELTA_VALUE RESULT RESULT
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"FINAL: 188
+
+Step-by-Step Explanation:
+Start with 24.
+1) Scale by 7: 24 * 7 = 168.
+2) Increase by 22: 168 + 22 = 190.
+Wait, that's not right. Let me check again.
+Wait, 24 * 7","FINAL: 188
+
+Step-by-Step Explanation:
+Start with 24.
+1) Scale by 7: 24 * 7 = 168.
+2) Increase by 22: 168 + 22 = 190.
+Wait, that's not right. Let me check again.
+Wait, 24 * 7","FINAL: 190
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,MUL ADD,"STEP-BY-STEP START SCALE INCREASE WAIT, WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"FINAL: RP1822GY
+
+The input is `RP-1822-GY`. The first step is to make all letters uppercase, which gives `RP-1822-GY`. Then, we retain the leading 6 symbols, which are `RP1822`. However, the correct answer is `RP1822GY`. Wait, that","FINAL: RP1822GY
+
+The input is `RP-1822-GY`. The first step is to make all letters uppercase, which gives `RP-1822-GY`. Then, we retain the leading 6 symbols, which are `RP1822`. However, the correct answer is `RP1822GY`. Wait, that","FINAL: RP-182
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,UPPER TAKE_PREFIX,THE
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"FINAL: 18*4+12+18= 120? Wait, 18*4 is 72, plus 12 is 84, plus 18 is 102. So the answer is 102. But wait, the problem says ""include entry omega in the running total"". So maybe the steps are:","FINAL: 18*4+12+18= 120? Wait, 18*4 is 72, plus 12 is 84, plus 18 is 102. So the answer is 102. But wait, the problem says ""include entry omega in the running total"". So maybe the steps are:","FINAL: 102
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP MUL ADD ADD_LOOKUP,
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"FINAL: xft8893ut
+
+Step-by-Step Explanation:
+1. Original text: XF-8893-UT
+2. Make all letters lowercase: xf-8893-ut
+3. Flip the current text left-to-right: tu-388-xf
+4. Make all letters lowercase: tu-388-xf
+5","FINAL: xft8893ut
+
+Step-by-Step Explanation:
+1. Original text: XF-8893-UT
+2. Make all letters lowercase: xf-8893-ut
+3. Flip the current text left-to-right: tu-388-xf
+4. Make all letters lowercase: tu-388-xf
+5","FINAL: 988-fx
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOWER REVERSE LOWER TAKE_SUFFIX,STEP-BY-STEP ORIGINAL MAKE FLIP MAKE 5
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"FINAL: 2 - 12 = 10; 10 - 7 = 3; 3 * 3 = 9; 9 + 18 = 27; 27
+Answer: 27
+
+Wait, but the initial value is 2. Let me check again.
+
+Starting with 2.
+
+Step 1: 2 -","FINAL: 2 - 12 = 10; 10 - 7 = 3; 3 * 3 = 9; 9 + 18 = 27; 27
+Answer: 27
+
+Wait, but the initial value is 2. Let me check again.
+
+Starting with 2.
+
+Step 1: 2 -","FINAL: -33
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,SUB SUB MUL ADD,"ANSWER WAIT, STARTING 2"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"FINAL: 4236
+
+Wait, but the example given is not matching. Let me recheck the steps.
+
+Original code-like text: EE-6324-BK
+
+Step 1: make all letters uppercase. The text is already uppercase, so no change. Result: EE-6324-BK
+
+Step 2: make all letters lowercase. So,","FINAL: 4236
+
+Wait, but the example given is not matching. Let me recheck the steps.
+
+Original code-like text: EE-6324-BK
+
+Step 1: make all letters uppercase. The text is already uppercase, so no change. Result: EE-6324-BK
+
+Step 2: make all letters lowercase. So,","FINAL: ee6324bk
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,"WAIT, ORIGINAL MAKE MAKE"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"FINAL: 15 - 19 = -4; -4 + 21 = 17; 17 - 18 = -1; -1 * 2 = -2; -2 + 23 = 21; 21 + 21 = 42; 42
+Answer: 42
+
+Wait, but","FINAL: 15 - 19 = -4; -4 + 21 = 17; 17 - 18 = -1; -1 * 2 = -2; -2 + 23 = 21; 21 + 21 = 42; 42
+Answer: 42
+
+Wait, but","FINAL: 42
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,SUB ADD SUB MUL ADD ADD,"ANSWER WAIT,"
+smoke,smoke_v1_answer_only_s101,answer_only,answer_only,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"FINAL: 115
+
+Step-by-Step Explanation:
+1) Start with beta: 16
+2) Increase by 7: 16 + 7 = 23
+3) Increase by 12: 23 + 12 = 35
+4) Include omega: 35 + 36 = 71
+5)","FINAL: 115
+
+Step-by-Step Explanation:
+1) Start with beta: 16
+2) Increase by 7: 16 + 7 = 23
+3) Increase by 12: 23 + 12 = 35
+4) Include omega: 35 + 36 = 71
+5)","FINAL: 410
+",,,0,0,0,0,0,0,1,1,0,0,n/a_answer_only,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,STEP-BY-STEP START INCREASE INCREASE INCLUDE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha","alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,unknown_op:ALPHA,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP,ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"28
+4
+* 
+28
+4
+* 
+
+Wait, that's not right. Let me think again. The task is to start with 28, multiply by 4, and return the integer. So the correct stack instructions would be:
+
+Push 28
+Push 4
+Multiply
+Return
+
+But the user said to return only raw stack instructions. So the","28
+4
+* 
+28
+4
+* 
+
+Wait, that's not right. Let me think again. The task is to start with 28, multiply by 4, and return the integer. So the correct stack instructions would be:
+
+Push 28
+Push 4
+Multiply
+Return
+
+But the user said to return only raw stack instructions. So the","PUSH 28
+MUL 4
+",,unknown_op:28,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL,"28 4 * 28 4 * WAIT, PUSH PUSH MULTIPLY RETURN BUT"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"P8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The original string has hyphens at the beginning and between the numbers. So the steps would be to","P8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The original string has hyphens at the beginning and between the numbers. So the steps would be to","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:P8482DF,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS,"P8482DF OKAY,"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP,TABLE LOOKUP
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL,PUSH MUL
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",FD-2848-UP,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS,PUSH_TEXT REVERSE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha","alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha
+alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,unknown_op:ALPHA,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP,ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA ALPHA
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"28
+4
+* 
+28
+4
+* 
+
+Wait, that's not right. Let me think again. The task is to start with 28, multiply by 4, and return the integer. So the correct stack instructions would be:
+
+Push 28
+Push 4
+Multiply
+Return
+
+But the user said to return only raw stack instructions. So the","28
+4
+* 
+28
+4
+* 
+
+Wait, that's not right. Let me think again. The task is to start with 28, multiply by 4, and return the integer. So the correct stack instructions would be:
+
+Push 28
+Push 4
+Multiply
+Return
+
+But the user said to return only raw stack instructions. So the","PUSH 28
+MUL 4
+",,unknown_op:28,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL,"28 4 * 28 4 * WAIT, PUSH PUSH MULTIPLY RETURN BUT"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The output should be the string without those hyphens.
+
+So the original string is P U -","PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The output should be the string without those hyphens.
+
+So the original string is P U -","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:PU8482DF,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,STRIP_HYPHENS,"PU8482DF OKAY, SO"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"alpha=11, beta=36, delta=37, gamma=8
+lookup delta
+add gamma
+integer
+``` To solve the problem, we need to follow the given operations step by step. First, we look up the value of delta, which is 37. Then, we add the value of gamma, which is 8. The result of these operations is","alpha=11, beta=36, delta=37, gamma=8
+lookup delta
+add gamma
+integer
+``` To solve the problem, we need to follow the given operations step by step. First, we look up the value of delta, which is 37. Then, we add the value of gamma, which is 8. The result of these operations is","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,"unknown_op:ALPHA=11,",0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,"ALPHA=11, LOOKUP ADD INTEGER TO"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"stack 1
+stack 2
+stack 3
+stack 4
+stack 5
+stack 6
+stack 7
+stack 8
+stack 9
+stack 10
+stack 11
+stack 12
+stack 13
+stack 14
+stack 15
+stack 16
+stack 17
+stack 18","stack 1
+stack 2
+stack 3
+stack 4
+stack 5
+stack 6
+stack 7
+stack 8
+stack 9
+stack 10
+stack 11
+stack 12
+stack 13
+stack 14
+stack 15
+stack 16
+stack 17
+stack 18","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS LOWER,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"stack 18
+stack 18
+op - 24
+stack -6
+op * 2
+stack -12
+stack -12
+Answer: -12
+
+The final answer is -12.
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer","stack 18
+stack 18
+op - 24
+stack -6
+op * 2
+stack -12
+stack -12
+Answer: -12
+
+The final answer is -12.
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer","PUSH 18
+SUB 24
+MUL 2
+",,unknown_op:STACK,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,SUB MUL,STACK STACK OP STACK OP STACK STACK ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD 8","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",45,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+REVERSE
+REVERSE","PUSH_TEXT YV-5212-KE
+REVERSE
+REVERSE","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",YV-5212-KE,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS LOWER,PUSH_TEXT REVERSE REVERSE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB MUL,PUSH SUB MUL
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"alpha=11, beta=36, delta=37, gamma=8
+lookup delta
+add gamma
+integer
+``` To solve the problem, we need to follow the given operations step by step. First, we look up the value of delta, which is 37. Then, we add the value of gamma, which is 8. The result of these operations is","alpha=11, beta=36, delta=37, gamma=8
+lookup delta
+add gamma
+integer
+``` To solve the problem, we need to follow the given operations step by step. First, we look up the value of delta, which is 37. Then, we add the value of gamma, which is 8. The result of these operations is","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,"unknown_op:ALPHA=11,",0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,"ALPHA=11, LOOKUP ADD INTEGER TO"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"stack 1
+stack 2
+stack 3
+stack 4
+stack 5
+stack 6
+stack 7
+stack 8
+stack 9
+stack 10
+stack 11
+stack 12
+stack 13
+stack 14
+stack 15
+stack 16
+stack 17
+stack 18","stack 1
+stack 2
+stack 3
+stack 4
+stack 5
+stack 6
+stack 7
+stack 8
+stack 9
+stack 10
+stack 11
+stack 12
+stack 13
+stack 14
+stack 15
+stack 16
+stack 17
+stack 18","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS LOWER,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"stack 18
+stack 18
+op - 24
+stack -6
+op * 2
+stack -12
+stack -12
+Answer: -12
+
+The final answer is -12.
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer","stack 18
+stack 18
+op - 24
+stack -6
+op * 2
+stack -12
+stack -12
+Answer: -12
+
+The final answer is -12.
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer: -12
+Answer","PUSH 18
+SUB 24
+MUL 2
+",,unknown_op:STACK,0,0,0,0,0,0,1,2,0,0,invalid_or_unexecutable,SUB MUL,STACK STACK OP STACK OP STACK STACK ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER ANSWER
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"alpha beta gamma omega
+beta
+4
+3
+Answer:
+21*4*3=252
+
+But the correct answer is 29*4*3=348
+
+So the correct answer is 348.
+
+But the user wants the stack instructions.
+
+So the correct stack instructions would be:
+
+alpha beta gamma omega
+beta
+4
+3
+But wait","alpha beta gamma omega
+beta
+4
+3
+Answer:
+21*4*3=252
+
+But the correct answer is 29*4*3=348
+
+So the correct answer is 348.
+
+But the user wants the stack instructions.
+
+So the correct stack instructions would be:
+
+alpha beta gamma omega
+beta
+4
+3
+But wait","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,unknown_op:ALPHA,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,ALPHA BETA 4 3 ANSWER 21*4*3=252 BUT SO BUT SO ALPHA BETA 4 3 BUT
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"stack 8
+stack 12
+stack 17
+stack 102
+stack 102
+Okay, let's see. The task is to start with the number 8 and apply three operations in order: add 4, add 5, then multiply by 6. The final result should be an integer. 
+
+First, I need to make sure I","stack 8
+stack 12
+stack 17
+stack 102
+stack 102
+Okay, let's see. The task is to start with the number 8 and apply three operations in order: add 4, add 5, then multiply by 6. The final result should be an integer. 
+
+First, I need to make sure I","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",,unknown_op:STACK,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,ADD ADD MUL,"STACK STACK STACK STACK STACK FIRST,"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"stack 1
+push ""LU-7864-EF""
+stack 2
+lower
+stack 3
+reverse
+stack 4
+slice 4
+stack 5
+print
+stack 6
+end
+stack 7
+end
+stack 8
+end
+stack 9
+end
+stack 10
+end
+stack 11
+end
+stack","stack 1
+push ""LU-7864-EF""
+stack 2
+lower
+stack 3
+reverse
+stack 4
+slice 4
+stack 5
+print
+stack 6
+end
+stack 7
+end
+stack 8
+end
+stack 9
+end
+stack 10
+end
+stack 11
+end
+stack","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,STACK PUSH STACK LOWER STACK REVERSE STACK SLICE STACK PRINT STACK END STACK END STACK END STACK END STACK END STACK END STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",7-ul,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAKE_SUFFIX
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"alpha beta gamma omega
+beta
+4
+3
+Answer: 29*4*3=348
+
+So the final answer is 348.
+
+Now, let's convert this into the required executable stack format.
+
+First, we need to look up the value of beta from the table. The table has the values alpha=21, beta=29, gamma=","alpha beta gamma omega
+beta
+4
+3
+Answer: 29*4*3=348
+
+So the final answer is 348.
+
+Now, let's convert this into the required executable stack format.
+
+First, we need to look up the value of beta from the table. The table has the values alpha=21, beta=29, gamma=","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,unknown_op:ALPHA,0,0,0,0,0,0,1,2,1,0,invalid_or_unexecutable,LOOKUP MUL MUL,"ALPHA BETA 4 3 ANSWER NOW, FIRST,"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"stack 8
+stack 12
+stack 17
+stack 102
+stack 102
+Okay, let's see. The task is to start with the number 8 and apply three operations in order: add 4, add 5, then multiply by 6. The final result should be an integer. 
+
+First, I need to make sure I","stack 8
+stack 12
+stack 17
+stack 102
+stack 102
+Okay, let's see. The task is to start with the number 8 and apply three operations in order: add 4, add 5, then multiply by 6. The final result should be an integer. 
+
+First, I need to make sure I","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",,unknown_op:STACK,0,0,0,0,0,0,1,2,0,0,invalid_or_unexecutable,ADD ADD MUL,"STACK STACK STACK STACK STACK FIRST,"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"stack 1
+push ""LU-7864-EF""
+stack 2
+lower
+stack 3
+reverse
+stack 4
+slice 4
+stack 5
+print
+stack 6
+end
+stack 7
+end
+stack 8
+end
+stack 9
+end
+stack 10
+end
+stack 11
+end
+stack","stack 1
+push ""LU-7864-EF""
+stack 2
+lower
+stack 3
+reverse
+stack 4
+slice 4
+stack 5
+print
+stack 6
+end
+stack 7
+end
+stack 8
+end
+stack 9
+end
+stack 10
+end
+stack 11
+end
+stack","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,STACK PUSH STACK LOWER STACK REVERSE STACK SLICE STACK PRINT STACK END STACK END STACK END STACK END STACK END STACK END STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"alpha
+3
+gamma
+delta
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9","alpha
+3
+gamma
+delta
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,unknown_op:ALPHA,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,ALPHA 3 GAMMA DELTA 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"stack 2
+add 5
+mult 4
+mult 3
+sub 11
+Answer: 49
+
+The correct answer is 49. Let's verify the steps:
+
+Start with 2.
+Add 5: 2 + 5 = 7.
+Multiply by 4: 7 * 4 = 28.
+Multiply by 3:","stack 2
+add 5
+mult 4
+mult 3
+sub 11
+Answer: 49
+
+The correct answer is 49. Let's verify the steps:
+
+Start with 2.
+Add 5: 2 + 5 = 7.
+Multiply by 4: 7 * 4 = 28.
+Multiply by 3:","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD MUL MUL SUB,STACK ADD MULT MULT SUB ANSWER THE START ADD MULTIPLY MULTIPLY
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-B","stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-B","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,STACK PUSH SPLIT SPLIT SPLIT REVERSE POP STACK PUSH SPLIT SPLIT SPLIT REVERSE POP STACK PUSH SPLIT SPLIT SPLIT REVERSE POP STACK PUSH
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD 3
+ADD 9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",36,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+REVERSE
+REVERSE
+REVERSE
+REVERSE","PUSH_TEXT YE-7952-BX
+REVERSE
+REVERSE
+REVERSE
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",YE-7952-BX,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT REVERSE REVERSE REVERSE REVERSE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"alpha
+3
+gamma
+delta
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9","alpha
+3
+gamma
+delta
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9
+39
+3
+23
+9","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,unknown_op:ALPHA,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,ALPHA 3 GAMMA DELTA 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9 39 3 23 9
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"stack 2
+add 5
+mult 4
+mult 3
+sub 22
+```
+
+Wait, the user said to return only the raw stack instructions. Let me check the steps again.
+
+Start with 2. Add 5: 2 + 5 = 7. Multiply by 4: 7 * 4 = 28. Multiply by 3","stack 2
+add 5
+mult 4
+mult 3
+sub 22
+```
+
+Wait, the user said to return only the raw stack instructions. Let me check the steps again.
+
+Start with 2. Add 5: 2 + 5 = 7. Multiply by 4: 7 * 4 = 28. Multiply by 3","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,ADD MUL MUL SUB,"STACK ADD MULT MULT SUB WAIT, START"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-B","stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-BX""
+split
+split
+split
+reverse
+pop
+stack
+push ""YE-7952-B","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,STACK PUSH SPLIT SPLIT SPLIT REVERSE POP STACK PUSH SPLIT SPLIT SPLIT REVERSE POP STACK PUSH SPLIT SPLIT SPLIT REVERSE POP STACK PUSH
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"stack
+push ""ZR-6182-YD""
+reverse
+upper
+upper
+reverse
+replace - with 
+take 6
+```
+
+Wait, the user said to return only raw stack instructions. Let me check the steps again.
+
+Original text: ZR-6182-YD
+
+Step 1: reverse the current text → ""DY8216-RZ","stack
+push ""ZR-6182-YD""
+reverse
+upper
+upper
+reverse
+replace - with 
+take 6
+```
+
+Wait, the user said to return only raw stack instructions. Let me check the steps again.
+
+Original text: ZR-6182-YD
+
+Step 1: reverse the current text → ""DY8216-RZ","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,"STACK PUSH REVERSE UPPER UPPER REVERSE REPLACE TAKE WAIT, ORIGINAL REVERSE"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"stack 17
+stack 36
+stack 36
+stack 72
+stack 76
+stack 17
+stack 76
+stack 51
+stack 55
+stack 59
+stack 59
+stack 17
+stack 59
+stack 59
+stack 59
+stack 59","stack 17
+stack 36
+stack 36
+stack 72
+stack 76
+stack 17
+stack 76
+stack 51
+stack 55
+stack 59
+stack 59
+stack 17
+stack 59
+stack 59
+stack 59
+stack 59","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Okay, let's see. The task is to start with the number 10 and apply these operations in order. The operations are multiply by 2, multiply by 2 again, subtract 8, add 10, subtract 22, and add","10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Okay, let's see. The task is to start with the number 10 and apply these operations in order. The operations are multiply by 2, multiply by 2 again, subtract 8, add 10, subtract 22, and add","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:10,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,"10 2 2 -8 10 -22 16 ANSWER OKAY,"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+UPPER","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+UPPER","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",DY-2816-RZ,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE REVERSE UPPER
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD 1
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",663,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD MUL
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"stack
+push ""ZR-6182-YD""
+reverse
+upper
+upper
+reverse
+replace - with 
+take 6
+```
+
+Wait, but the task says to perform steps 1-6 in order. Let me check again.
+
+Step 1: reverse the current text. So the initial text is ""ZR-6182-YD"". Reverse it to get","stack
+push ""ZR-6182-YD""
+reverse
+upper
+upper
+reverse
+replace - with 
+take 6
+```
+
+Wait, but the task says to perform steps 1-6 in order. Let me check again.
+
+Step 1: reverse the current text. So the initial text is ""ZR-6182-YD"". Reverse it to get","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,"STACK PUSH REVERSE UPPER UPPER REVERSE REPLACE TAKE WAIT, REVERSE"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"stack 17
+stack 36
+stack 36
+stack 72
+stack 76
+stack 17
+stack 76
+stack 51
+stack 55
+stack 59
+stack 59
+stack 17
+stack 59
+stack 59
+stack 59
+stack 59","stack 17
+stack 36
+stack 36
+stack 72
+stack 76
+stack 17
+stack 76
+stack 51
+stack 55
+stack 59
+stack 59
+stack 17
+stack 59
+stack 59
+stack 59
+stack 59","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Okay, let's see. The task is to start with the number 10 and apply these operations in order. The operations are multiply by 2, multiply by 2 again, subtract 8, add 10, subtract 22, and add","10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Okay, let's see. The task is to start with the number 10 and apply these operations in order. The operations are multiply by 2, multiply by 2 again, subtract 8, add 10, subtract 22, and add","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:10,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,"10 2 2 -8 10 -22 16 ANSWER OKAY,"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"delta
++12
+Answer: 29+12=41
+But the correct answer is 41. So the final integer is 41.
+
+But the user wants the stack instructions. Let me think again.
+
+The lookup entries are alpha=16, beta=14, delta=29, gamma=26. The task is to fetch delta,","delta
++12
+Answer: 29+12=41
+But the correct answer is 41. So the final integer is 41.
+
+But the user wants the stack instructions. Let me think again.
+
+The lookup entries are alpha=16, beta=14, delta=29, gamma=26. The task is to fetch delta,","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",,unknown_op:DELTA,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,LOOKUP ADD,DELTA +12 ANSWER BUT THE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"stack 24 7 * 22 + 
+
+Wait, but the problem says to start at 24 and then perform the operations. Let me think again. The initial value is 24. First, scale it by 7: 24 * 7 = 168. Then add 22: 168 + 22 = 1","stack 24 7 * 22 + 
+
+Wait, but the problem says to start at 24 and then perform the operations. Let me think again. The initial value is 24. First, scale it by 7: 24 * 7 = 168. Then add 22: 168 + 22 = 1","PUSH 24
+MUL 7
+ADD 22
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL ADD,"STACK WAIT,"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"R
+P
+-
+1
+8
+2
+2
+-
+G
+Y
+
+Wait, that's not right. The correct answer should be RP1822-GY. But the user wants the output in the stack format. Let me think again.
+
+The original string is RP-1822-GY. First, make all letters uppercase. That's already done. Then","R
+P
+-
+1
+8
+2
+2
+-
+G
+Y
+
+Wait, that's not right. The correct answer should be RP1822-GY. But the user wants the output in the stack format. Let me think again.
+
+The original string is RP-1822-GY. First, make all letters uppercase. That's already done. Then","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",,unknown_op:R,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,"R P - 1 8 2 2 - G Y WAIT, THE"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",41,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOOKUP ADD,TABLE LOOKUP ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"PUSH 24
+MUL 7
+ADD 22","PUSH 24
+MUL 7
+ADD 22","PUSH 24
+MUL 7
+ADD 22
+",190,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL ADD,PUSH MUL ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"PUSH_TEXT RP-1822-GY
+UPPER
+REVERSE","PUSH_TEXT RP-1822-GY
+UPPER
+REVERSE","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",YG-2281-PR,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,UPPER TAKE_PREFIX,PUSH_TEXT UPPER REVERSE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"delta
++12
+Answer: 29+12=41
+But the correct answer is 41. So the final integer is 41.
+
+But the user wants the stack instructions. Let me think again.
+
+The lookup entries are alpha=16, beta=14, delta=29, gamma=26. The task is to fetch delta,","delta
++12
+Answer: 29+12=41
+But the correct answer is 41. So the final integer is 41.
+
+But the user wants the stack instructions. Let me think again.
+
+The lookup entries are alpha=16, beta=14, delta=29, gamma=26. The task is to fetch delta,","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",,unknown_op:DELTA,0,0,0,0,0,0,1,2,0,0,invalid_or_unexecutable,LOOKUP ADD,DELTA +12 ANSWER BUT THE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"stack 1 24
+stack 2 24
+stack 3 24
+stack 4 24
+stack 5 24
+stack 6 24
+stack 7 24
+stack 8 24
+stack 9 24
+stack 10 24
+stack 11 24
+stack","stack 1 24
+stack 2 24
+stack 3 24
+stack 4 24
+stack 5 24
+stack 6 24
+stack 7 24
+stack 8 24
+stack 9 24
+stack 10 24
+stack 11 24
+stack","PUSH 24
+MUL 7
+ADD 22
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,MUL ADD,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"R
+P
+-
+1
+8
+2
+2
+-
+G
+Y
+
+Wait, that's not right. The correct answer should be RP1822-GY. But the user wants the output in the stack format. Let me think again.
+
+The original string is RP-1822-GY. First, make all letters uppercase. That's already done. Then","R
+P
+-
+1
+8
+2
+2
+-
+G
+Y
+
+Wait, that's not right. The correct answer should be RP1822-GY. But the user wants the output in the stack format. Let me think again.
+
+The original string is RP-1822-GY. First, make all letters uppercase. That's already done. Then","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",,unknown_op:R,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,"R P - 1 8 2 2 - G Y WAIT, THE"
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack","stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack
+omega
+4
+*
+12
++
+omega
+stack","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,STACK OMEGA 4 * 12 + OMEGA STACK OMEGA 4 * 12 + OMEGA STACK OMEGA 4 * 12 + OMEGA STACK OMEGA 4 * 12 + OMEGA STACK OMEGA 4 * 12 + OMEGA STACK OMEGA 4 * 12 + OMEGA STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"stack
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop","stack
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,STACK PUSH PUSH PUSH PUSH PUSH PUSH POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"stack 2
+12
+7
+3
+18
+Okay, let's see. The task is to start at 2 and perform a series of operations. The steps are: decrease by 12, then decrease by 7, scale by 3, and finally increase by 18. I need to figure out the final integer value after all these operations.
+
+Starting with","stack 2
+12
+7
+3
+18
+Okay, let's see. The task is to start at 2 and perform a series of operations. The steps are: decrease by 12, then decrease by 7, scale by 3, and finally increase by 18. I need to figure out the final integer value after all these operations.
+
+Starting with","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",,unknown_op:STACK,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,SUB SUB MUL ADD,STACK 12 7 3 18 STARTING
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD 12","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD 12","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",96,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP MUL ADD ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",988-fx,,1,1,0,1,1,0,0,1,1,0,correct_exact,LOWER REVERSE LOWER TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE LOWER TAKE_SUFFIX
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",-33,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB SUB MUL ADD,PUSH SUB SUB MUL ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"stack
+omega
+4
+*
+12
++
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega","stack
+omega
+4
+*
+12
++
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega
+omega","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,STACK OMEGA 4 * 12 + OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA OMEGA
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"stack
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop","stack
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop
+pop","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,STACK PUSH PUSH PUSH PUSH PUSH PUSH POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP POP
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"stack 2
+12
+7
+3
+18
+Okay, let's see. The task is to start at 2 and perform a series of operations. The steps are: decrease by 12, then decrease by 7, scale by 3, and finally increase by 18. I need to figure out the final integer value after all these operations.
+
+Starting with","stack 2
+12
+7
+3
+18
+Okay, let's see. The task is to start at 2 and perform a series of operations. The steps are: decrease by 12, then decrease by 7, scale by 3, and finally increase by 18. I need to figure out the final integer value after all these operations.
+
+Starting with","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",,unknown_op:STACK,0,0,0,0,0,0,1,2,0,0,invalid_or_unexecutable,SUB SUB MUL ADD,STACK 12 7 3 18 STARTING
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"stack
+uppercase
+uppercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack","stack
+uppercase
+uppercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,STACK UPPERCASE UPPERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15","stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB ADD SUB MUL ADD ADD,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_free,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"stack 16
+stack 23
+stack 30
+stack 36
+stack 47
+stack 52
+stack 55
+stack 58
+stack 61
+stack 64
+stack 67
+stack 70
+stack 73
+stack 76
+stack 79
+stack 82","stack 16
+stack 23
+stack 30
+stack 36
+stack 47
+stack 52
+stack 55
+stack 58
+stack 61
+stack 64
+stack 67
+stack 70
+stack 73
+stack 76
+stack 79
+stack 82","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+REVERSE
+REVERSE","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+REVERSE
+REVERSE","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",kb-4236-ee,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,PUSH_TEXT UPPER LOWER REVERSE LOWER REVERSE REVERSE
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",42,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB ADD SUB MUL ADD ADD,PUSH SUB ADD SUB MUL ADD ADD
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_constrained,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD 3
+ADD 11
+MUL 5","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD 3
+ADD 11
+MUL 5","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",245,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,TABLE LOOKUP ADD ADD ADD ADD MUL
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"stack
+uppercase
+uppercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack","stack
+uppercase
+uppercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack
+uppercase
+lowercase
+reverse
+lowercase
+drop
+reverse
+stack","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,STACK UPPERCASE UPPERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK UPPERCASE LOWERCASE REVERSE LOWERCASE DROP REVERSE STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15","stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15
+stack 15","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,SUB ADD SUB MUL ADD ADD,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_program_stack_s101,program_stack,program_stack_resample_valid,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"stack 16
+stack 23
+stack 30
+stack 36
+stack 47
+stack 52
+stack 55
+stack 58
+stack 61
+stack 64
+stack 67
+stack 70
+stack 73
+stack 76
+stack 79
+stack 82","stack 16
+stack 23
+stack 30
+stack 36
+stack 47
+stack 52
+stack 55
+stack 58
+stack 61
+stack 64
+stack 67
+stack 70
+stack 73
+stack 76
+stack 79
+stack 82","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+14
+Okay, let's see. The user provided a task where they have a table with alpha, beta, delta, gamma assigned specific numbers. The operations are to look up alpha and return the integer. The output needs to be in a specific format with PARSE, FAMILY, INIT, OPS, END_PARSE, and","14
+Okay, let's see. The user provided a task where they have a table with alpha, beta, delta, gamma assigned specific numbers. The operations are to look up alpha and return the integer. The output needs to be in a specific format with PARSE, FAMILY, INIT, OPS, END_PARSE, and","PARSE
+FAMILY table
+INIT TABLE alpha:14 beta:37 delta:33 gamma:28
+OPS
+LOOKUP alpha
+END_PARSE
+PROGRAM
+TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,unknown_op:14,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP,"14 OKAY,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+28
+4
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0","28
+4
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0","PARSE
+FAMILY number
+INIT PUSH 28
+OPS
+MUL 4
+END_PARSE
+PROGRAM
+PUSH 28
+MUL 4
+",,unknown_op:28,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL,28 4 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+P
+U
+8
+4
+8
+2
+D
+F
+
+Wait, but the original text is ""PU-8482-DF"". So the correct output after removing hyphens would be ""PU8482DF"". Let me check the steps again. The task is to remove hyph","P
+U
+8
+4
+8
+2
+D
+F
+
+Wait, but the original text is ""PU-8482-DF"". So the correct output after removing hyphens would be ""PU8482DF"". Let me check the steps again. The task is to remove hyph","PARSE
+FAMILY string
+INIT PUSH_TEXT PU-8482-DF
+OPS
+STRIP_HYPHENS
+END_PARSE
+PROGRAM
+PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:P,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS,"P U 8 4 8 2 D F WAIT,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+14
+Okay, let's see. The user provided a task where they have a table with alpha, beta, delta, gamma assigned specific numbers. The operations are to look up alpha and return the integer. The output needs to be in a specific format with PARSE, FAMILY, INIT, OPS, END_PARSE, and",,"PARSE
+FAMILY table
+INIT TABLE alpha:14 beta:37 delta:33 gamma:28
+OPS
+LOOKUP alpha
+END_PARSE
+PROGRAM
+TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOOKUP,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+28
+4
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0",,"PARSE
+FAMILY number
+INIT PUSH 28
+OPS
+MUL 4
+END_PARSE
+PROGRAM
+PUSH 28
+MUL 4
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,MUL,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+P
+U
+8
+4
+8
+2
+D
+F
+
+Wait, but the original text is ""PU-8482-DF"". So the correct output after removing hyphens would be ""PU8482DF"". Let me check the steps again. The task is to remove hyph",,"PARSE
+FAMILY string
+INIT PUSH_TEXT PU-8482-DF
+OPS
+STRIP_HYPHENS
+END_PARSE
+PROGRAM
+PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,STRIP_HYPHENS,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+11
+36
+37
+8
+1
+2
+0
+
+Wait, let me think again. The task is to perform two operations on the table. First, look up delta, which is 37. Then add the table value for gamma, which is 8. So the result is 3","11
+36
+37
+8
+1
+2
+0
+
+Wait, let me think again. The task is to perform two operations on the table. First, look up delta, which is 37. Then add the table value for gamma, which is 8. So the result is 3","PARSE
+FAMILY table
+INIT TABLE alpha:11 beta:36 delta:37 gamma:8
+OPS
+LOOKUP delta
+ADD_LOOKUP gamma
+END_PARSE
+PROGRAM
+TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,unknown_op:11,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,"11 36 37 8 1 2 0 WAIT,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+YV5212KE
+PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+YV5212KE
+Okay, let's see. The user wants me to process the text ""YV-5212-KE"" by first removing hyphens and then converting it to","YV5212KE
+PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+YV5212KE
+Okay, let's see. The user wants me to process the text ""YV-5212-KE"" by first removing hyphens and then converting it to","PARSE
+FAMILY string
+INIT PUSH_TEXT YV-5212-KE
+OPS
+STRIP_HYPHENS
+LOWER
+END_PARSE
+PROGRAM
+PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",,unknown_op:YV5212KE,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS LOWER,"YV5212KE PARSE FAMILY INIT OPS END_PARSE PROGRAM YV5212KE OKAY,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+18
+SUB 24
+MUL 2
+END
+```
+
+Wait, but the user said to return the integer. So I need to compute the result. Let me check the steps again.
+
+Start with 18. Subtract 24: 18 - 24 = -6. Then","18
+SUB 24
+MUL 2
+END
+```
+
+Wait, but the user said to return the integer. So I need to compute the result. Let me check the steps again.
+
+Start with 18. Subtract 24: 18 - 24 = -6. Then","PARSE
+FAMILY number
+INIT PUSH 18
+OPS
+SUB 24
+MUL 2
+END_PARSE
+PROGRAM
+PUSH 18
+SUB 24
+MUL 2
+",,unknown_op:18,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB MUL,"18 SUB MUL END WAIT, START"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+11
+36
+37
+8
+1
+2
+0
+
+Wait, let me think again. The task is to perform two operations on the table. First, look up delta, which is 37. Then add the table value for gamma, which is 8. So the result is 3",,"PARSE
+FAMILY table
+INIT TABLE alpha:11 beta:36 delta:37 gamma:8
+OPS
+LOOKUP delta
+ADD_LOOKUP gamma
+END_PARSE
+PROGRAM
+TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOOKUP ADD_LOOKUP,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+YV5212KE
+PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+YV5212KE
+Okay, let's see. The user wants me to process the text ""YV-5212-KE"" by first removing hyphens and then converting it to",,"PARSE
+FAMILY string
+INIT PUSH_TEXT YV-5212-KE
+OPS
+STRIP_HYPHENS
+LOWER
+END_PARSE
+PROGRAM
+PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,STRIP_HYPHENS LOWER,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+18
+SUB 24
+MUL 2
+END
+```
+
+Wait, but the user said to return the integer. So I need to compute the result. Let me check the steps again.
+
+Start with 18. Subtract 24: 18 - 24 = -6. Then",,"PARSE
+FAMILY number
+INIT PUSH 18
+OPS
+SUB 24
+MUL 2
+END_PARSE
+PROGRAM
+PUSH 18
+SUB 24
+MUL 2
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,SUB MUL,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+1: LOOKUP beta
+2: MULTIPLY 4
+3: MULTIPLY 3
+RETURN 29*4*3= 108
+
+Wait, but the problem says to return the integer. The answer is 29*4*3=108. But the instructions say to return","1: LOOKUP beta
+2: MULTIPLY 4
+3: MULTIPLY 3
+RETURN 29*4*3= 108
+
+Wait, but the problem says to return the integer. The answer is 29*4*3=108. But the instructions say to return","PARSE
+FAMILY table
+INIT TABLE alpha:21 beta:29 gamma:13 omega:26
+OPS
+LOOKUP beta
+MUL 4
+MUL 3
+END_PARSE
+PROGRAM
+TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,KeyError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL,"LOOKUP MULTIPLY MULTIPLY RETURN WAIT,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PARSE
+FAMILY
+INIT
+OPS
+8
+4
+5
+6
+END_PARSE
+PROGRAM
+ADD
+ADD
+MUL
+Answer: 840
+
+Wait, let's check that again. Starting with 8, add 4 gives 12, add 5 gives 17, multiply by 6 gives 102. That's not 8","ADD
+ADD
+MUL
+Answer: 840
+
+Wait, let's check that again. Starting with 8, add 4 gives 12, add 5 gives 17, multiply by 6 gives 102. That's not 8","PARSE
+FAMILY number
+INIT PUSH 8
+OPS
+ADD 4
+ADD 5
+MUL 6
+END_PARSE
+PROGRAM
+PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",,IndexError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD ADD MUL,"ADD ADD MUL ANSWER WAIT,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+000000000000000000000000000000000000000000000000000000000000000000",000000000000000000000000000000000000000000000000000000000000000000,"PARSE
+FAMILY string
+INIT PUSH_TEXT LU-7864-EF
+OPS
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+END_PARSE
+PROGRAM
+PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,unknown_op:000000000000000000000000000000000000000000000000000000000000000000,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,000000000000000000000000000000000000000000000000000000000000000000
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+1: LOOKUP beta
+2: MULTIPLY 4
+3: MULTIPLY 3
+RETURN 29*4*3= 108
+
+Wait, but the problem says to return the integer. The answer is 29*4*3=108. But the instructions say to return",,"PARSE
+FAMILY table
+INIT TABLE alpha:21 beta:29 gamma:13 omega:26
+OPS
+LOOKUP beta
+MUL 4
+MUL 3
+END_PARSE
+PROGRAM
+TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOOKUP MUL MUL,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PARSE
+FAMILY
+INIT
+OPS
+8
+4
+5
+6
+END_PARSE
+PROGRAM
+ADD
+ADD
+MUL
+Answer: 840
+
+Wait, let's check that again. Starting with 8, add 4 gives 12, add 5 gives 17, multiply by 6 gives 102. That's not 8",,"PARSE
+FAMILY number
+INIT PUSH 8
+OPS
+ADD 4
+ADD 5
+MUL 6
+END_PARSE
+PROGRAM
+PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,ADD ADD MUL,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+000000000000000000000000000000000000000000000000000000000000000000",,"PARSE
+FAMILY string
+INIT PUSH_TEXT LU-7864-EF
+OPS
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+END_PARSE
+PROGRAM
+PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOWER REVERSE TAKE_SUFFIX,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+  1000: 1000
+  1001: 1001
+  1002: 1002
+  1003: 1003
+  1004: 1004","1000: 1000
+  1001: 1001
+  1002: 1002
+  1003: 1003
+  1004: 1004","PARSE
+FAMILY table
+INIT TABLE alpha:8 beta:23 delta:9 gamma:39
+OPS
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+END_PARSE
+PROGRAM
+TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,unknown_op:1000,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,1000 1001 1002 1003 1004
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PARSE
+FAMILY
+INIT
+OPS
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+END_PARSE
+PROGRAM
+2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+The final result is 28.
+
+Wait, let me check that again. Starting with 2: add 5 is","2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+The final result is 28.
+
+Wait, let me check that again. Starting with 2: add 5 is","PARSE
+FAMILY number
+INIT PUSH 2
+OPS
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+END_PARSE
+PROGRAM
+PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",,unknown_op:2,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,ADD MUL MUL SUB,"2 ADD MUL MUL SUB WAIT,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+```
+```
+
+To solve this, we need to process the input text ""YE-7952-BX"" through a series of operations. Let's break down the steps:
+
+1. **Step 1: Remove hyphens** - The first operation is to remove all hyphens from the text. The","```
+```
+
+To solve this, we need to process the input text ""YE-7952-BX"" through a series of operations. Let's break down the steps:
+
+1. **Step 1: Remove hyphens** - The first operation is to remove all hyphens from the text. The","PARSE
+FAMILY string
+INIT PUSH_TEXT YE-7952-BX
+OPS
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+END_PARSE
+PROGRAM
+PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",,unknown_op:TO,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,TO **STEP
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+  1000: 1000
+  1001: 1001
+  1002: 1002
+  1003: 1003
+  1004: 1004",,"PARSE
+FAMILY table
+INIT TABLE alpha:8 beta:23 delta:9 gamma:39
+OPS
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+END_PARSE
+PROGRAM
+TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PARSE
+FAMILY
+INIT
+OPS
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+END_PARSE
+PROGRAM
+2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+The final result is 28.
+
+Wait, let me check that again. Starting with 2: add 5 is",,"PARSE
+FAMILY number
+INIT PUSH 2
+OPS
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+END_PARSE
+PROGRAM
+PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",,empty_stack,0,0,0,0,0,0,1,1,1,0,invalid_or_unexecutable,ADD MUL MUL SUB,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+```
+```
+
+To solve this, we need to process the input text ""YE-7952-BX"" through a series of operations. Let's break down the steps:
+
+1. **Step 1: Remove hyphens** - The first operation is to remove all hyphens from the text. The",,"PARSE
+FAMILY string
+INIT PUSH_TEXT YE-7952-BX
+OPS
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+END_PARSE
+PROGRAM
+PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+REVERSE
+UPPER
+UPPER
+REVERSE
+REPLACE
+LAST6
+
+Let me try to work through this step by step. The initial text is ZR-6182-YD. 
+
+First, step 1 is to reverse the text. Reversing ""ZR-6182-Y","REVERSE
+UPPER
+UPPER
+REVERSE
+REPLACE
+LAST6
+
+Let me try to work through this step by step. The initial text is ZR-6182-YD. 
+
+First, step 1 is to reverse the text. Reversing ""ZR-6182-Y","PARSE
+FAMILY string
+INIT PUSH_TEXT ZR-6182-YD
+OPS
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,IndexError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,"REVERSE UPPER UPPER REVERSE REPLACE LAST6 LET FIRST,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+PUSH 36
+MUL 2
+MUL 3
+ADD 4
+ADD 17
+MUL 3
+RETURN
+Okay, let's see. The task is to perform a series of operations on the given table values. The table has alpha=30, delta=17,","PUSH 36
+MUL 2
+MUL 3
+ADD 4
+ADD 17
+MUL 3
+RETURN
+Okay, let's see. The task is to perform a series of operations on the given table values. The table has alpha=30, delta=17,","PARSE
+FAMILY table
+INIT TABLE alpha:30 delta:17 gamma:29 omega:36
+OPS
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+END_PARSE
+PROGRAM
+TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,unknown_op:RETURN,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,"PUSH MUL MUL ADD ADD MUL RETURN OKAY,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PARSE
+FAMILY
+INIT
+OPS
+10
+2
+2
+-8
+10
+-22
+16
+END_PARSE
+PROGRAM
+10
+2
+2
+-8
+10
+-22
+16
+Okay, let's see. The task is to start with the number 10 and apply a series of operations in order.","10
+2
+2
+-8
+10
+-22
+16
+Okay, let's see. The task is to start with the number 10 and apply a series of operations in order.","PARSE
+FAMILY number
+INIT PUSH 10
+OPS
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+END_PARSE
+PROGRAM
+PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:10,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,"10 2 2 -8 10 -22 16 OKAY,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+REVERSE
+UPPER
+UPPER
+REVERSE
+REPLACE
+LAST6
+
+Let me try to work through this step by step. The initial text is ZR-6182-YD. 
+
+First, step 1 is to reverse the text. Reversing ""ZR-6182-Y",,"PARSE
+FAMILY string
+INIT PUSH_TEXT ZR-6182-YD
+OPS
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+PUSH 36
+MUL 2
+MUL 3
+ADD 4
+ADD 17
+MUL 3
+RETURN
+Okay, let's see. The task is to perform a series of operations on the given table values. The table has alpha=30, delta=17,",,"PARSE
+FAMILY table
+INIT TABLE alpha:30 delta:17 gamma:29 omega:36
+OPS
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+END_PARSE
+PROGRAM
+TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PARSE
+FAMILY
+INIT
+OPS
+10
+2
+2
+-8
+10
+-22
+16
+END_PARSE
+PROGRAM
+10
+2
+2
+-8
+10
+-22
+16
+Okay, let's see. The task is to start with the number 10 and apply a series of operations in order.",,"PARSE
+FAMILY number
+INIT PUSH 10
+OPS
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+END_PARSE
+PROGRAM
+PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+FETCH delta
+ADD 12
+RESULT
+Okay, let's see. The user wants me to process the given lookup entries and perform some operations. The task is to fetch the entry delta, which is 29 according to the lookup, then increase it by 12. So the final value should be 2","FETCH delta
+ADD 12
+RESULT
+Okay, let's see. The user wants me to process the given lookup entries and perform some operations. The task is to fetch the entry delta, which is 29 according to the lookup, then increase it by 12. So the final value should be 2","PARSE
+FAMILY table
+INIT TABLE alpha:16 beta:14 delta:29 gamma:26
+OPS
+LOOKUP delta
+ADD 12
+END_PARSE
+PROGRAM
+TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",,unknown_op:FETCH,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,LOOKUP ADD,FETCH ADD RESULT
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+24
+7
+22
+Answer: 190
+
+Wait, let's check the calculation again. Starting with 24, scale by 7: 24 * 7 = 168. Then add 22: 168 + 22 = 190","24
+7
+22
+Answer: 190
+
+Wait, let's check the calculation again. Starting with 24, scale by 7: 24 * 7 = 168. Then add 22: 168 + 22 = 190","PARSE
+FAMILY number
+INIT PUSH 24
+OPS
+MUL 7
+ADD 22
+END_PARSE
+PROGRAM
+PUSH 24
+MUL 7
+ADD 22
+",,unknown_op:24,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL ADD,"24 7 22 ANSWER WAIT,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+UPPER
+1822GY
+1822GY
+END
+Okay, let's break down the task. The input is ""RP-1822-GY"". The first step is to make all letters uppercase. So, converting each character to uppercase would result in ""RP-1822","UPPER
+1822GY
+1822GY
+END
+Okay, let's break down the task. The input is ""RP-1822-GY"". The first step is to make all letters uppercase. So, converting each character to uppercase would result in ""RP-1822","PARSE
+FAMILY string
+INIT PUSH_TEXT RP-1822-GY
+OPS
+UPPER
+TAKE_PREFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",,IndexError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,"UPPER 1822GY 1822GY END OKAY,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d2,table,2,eval_template_d2_table_2,41,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+FETCH delta
+ADD 12
+RESULT
+Okay, let's see. The user wants me to process the given lookup entries and perform some operations. The task is to fetch the entry delta, which is 29 according to the lookup, then increase it by 12. So the final value should be 2",,"PARSE
+FAMILY table
+INIT TABLE alpha:16 beta:14 delta:29 gamma:26
+OPS
+LOOKUP delta
+ADD 12
+END_PARSE
+PROGRAM
+TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",,empty_stack,0,0,0,0,0,0,1,1,1,0,invalid_or_unexecutable,LOOKUP ADD,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d2,number,2,eval_template_d2_number_1,190,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+24
+7
+22
+Answer: 190
+
+Wait, let's check the calculation again. Starting with 24, scale by 7: 24 * 7 = 168. Then add 22: 168 + 22 = 190",,"PARSE
+FAMILY number
+INIT PUSH 24
+OPS
+MUL 7
+ADD 22
+END_PARSE
+PROGRAM
+PUSH 24
+MUL 7
+ADD 22
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,MUL ADD,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+UPPER
+1822GY
+1822GY
+END
+Okay, let's break down the task. The input is ""RP-1822-GY"". The first step is to make all letters uppercase. So, converting each character to uppercase would result in ""RP-1822",,"PARSE
+FAMILY string
+INIT PUSH_TEXT RP-1822-GY
+OPS
+UPPER
+TAKE_PREFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,UPPER TAKE_PREFIX,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+FETCH omega
+SCALE 4
+ADD 12
+ADD omega
+END_PROGRAM
+
+Wait, but the instructions are not matching the task. Let me check again.
+
+The task says: 1) fetch entry omega; 2) scale it by 4; 3) increase it by 12; 4","FETCH omega
+SCALE 4
+ADD 12
+ADD omega
+END_PROGRAM
+
+Wait, but the instructions are not matching the task. Let me check again.
+
+The task says: 1) fetch entry omega; 2) scale it by 4; 3) increase it by 12; 4","PARSE
+FAMILY table
+INIT TABLE beta:21 delta:38 gamma:38 omega:18
+OPS
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+END_PARSE
+PROGRAM
+TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",,unknown_op:FETCH,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,"FETCH SCALE ADD ADD END_PROGRAM WAIT, THE"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+000000000000000000000000000000000000000000000000000000000000000000",000000000000000000000000000000000000000000000000000000000000000000,"PARSE
+FAMILY string
+INIT PUSH_TEXT XF-8893-UT
+OPS
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",,unknown_op:000000000000000000000000000000000000000000000000000000000000000000,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,000000000000000000000000000000000000000000000000000000000000000000
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+2
+12
+7
+3
+18
+Okay, let's see. The task is to start at 2 and apply a series of operations: first decrease by 12, then decrease by 7, scale by 3, and finally increase by 18. I need to figure out the final","2
+12
+7
+3
+18
+Okay, let's see. The task is to start at 2 and apply a series of operations: first decrease by 12, then decrease by 7, scale by 3, and finally increase by 18. I need to figure out the final","PARSE
+FAMILY number
+INIT PUSH 2
+OPS
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+END_PARSE
+PROGRAM
+PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",,unknown_op:2,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,SUB SUB MUL ADD,2 12 7 3 18
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d4,table,4,eval_template_d4_table_2,102,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+FETCH omega
+SCALE 4
+ADD 12
+ADD omega
+END_PROGRAM
+
+Wait, but the instructions are not matching the task. Let me check again.
+
+The task says: 1) fetch entry omega; 2) scale it by 4; 3) increase it by 12; 4",,"PARSE
+FAMILY table
+INIT TABLE beta:21 delta:38 gamma:38 omega:18
+OPS
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+END_PARSE
+PROGRAM
+TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOOKUP MUL ADD ADD_LOOKUP,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+000000000000000000000000000000000000000000000000000000000000000000",,"PARSE
+FAMILY string
+INIT PUSH_TEXT XF-8893-UT
+OPS
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,LOWER REVERSE LOWER TAKE_SUFFIX,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d4,number,4,eval_template_d4_number_1,-33,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+2
+12
+7
+3
+18
+Okay, let's see. The task is to start at 2 and apply a series of operations: first decrease by 12, then decrease by 7, scale by 3, and finally increase by 18. I need to figure out the final",,"PARSE
+FAMILY number
+INIT PUSH 2
+OPS
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+END_PARSE
+PROGRAM
+PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",,empty_stack,0,0,0,0,0,0,1,1,1,0,invalid_or_unexecutable,SUB SUB MUL ADD,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+UPPER
+LOWER
+REVERSE
+LOWER
+DROP
+REVERSE
+The output is ""B423E6E""
+
+Wait, but the user said to return the resulting text. But the output is not the text, but the stack instructions. So the output is the stack instructions. But the user said that the","UPPER
+LOWER
+REVERSE
+LOWER
+DROP
+REVERSE
+The output is ""B423E6E""
+
+Wait, but the user said to return the resulting text. But the output is not the text, but the stack instructions. So the output is the stack instructions. But the user said that the","PARSE
+FAMILY string
+INIT PUSH_TEXT EE-6324-BK
+OPS
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+END_PARSE
+PROGRAM
+PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",,IndexError,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,"UPPER LOWER REVERSE LOWER DROP REVERSE THE WAIT,"
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15","15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15","PARSE
+FAMILY number
+INIT PUSH 15
+OPS
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+END_PARSE
+PROGRAM
+PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",,unknown_op:15,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB ADD SUB MUL ADD ADD,15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_free,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+FETCH beta
+ADD 7
+ADD 12
+ADD omega
+ADD 11
+MUL 5
+FINAL
+
+Wait, but the final value is 16+7+12+36+11=72, then 72*5=360. But the answer","FETCH beta
+ADD 7
+ADD 12
+ADD omega
+ADD 11
+MUL 5
+FINAL
+
+Wait, but the final value is 16+7+12+36+11=72, then 72*5=360. But the answer","PARSE
+FAMILY table
+INIT TABLE alpha:3 beta:16 gamma:6 omega:36
+OPS
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+END_PARSE
+PROGRAM
+TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",,unknown_op:FETCH,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,FETCH ADD ADD ADD ADD MUL FINAL
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+UPPER
+LOWER
+REVERSE
+LOWER
+DROP
+REVERSE
+The output is ""B423E6E""
+
+Wait, but the user said to return the resulting text. But the output is not the text, but the stack instructions. So the output is the stack instructions. But the user said that the",,"PARSE
+FAMILY string
+INIT PUSH_TEXT EE-6324-BK
+OPS
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+END_PARSE
+PROGRAM
+PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,42,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15
+15",,"PARSE
+FAMILY number
+INIT PUSH 15
+OPS
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+END_PARSE
+PROGRAM
+PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",,empty_stack,0,0,0,0,0,0,0,1,1,0,invalid_or_unexecutable,SUB ADD SUB MUL ADD ADD,
+smoke,smoke_v1_parse_emit_s101,parse_emit,parse_then_emit_constrained,101,1,eval_template_d6,table,6,eval_template_d6_table_2,410,"PARSE
+FAMILY
+INIT
+OPS
+END_PARSE
+PROGRAM
+FETCH beta
+ADD 7
+ADD 12
+ADD omega
+ADD 11
+MUL 5
+FINAL
+
+Wait, but the final value is 16+7+12+36+11=72, then 72*5=360. But the answer",,"PARSE
+FAMILY table
+INIT TABLE alpha:3 beta:16 gamma:6 omega:36
+OPS
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+END_PARSE
+PROGRAM
+TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",,empty_stack,0,0,0,0,0,0,1,1,1,0,invalid_or_unexecutable,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"PARSE
+FAMILY table
+INIT TABLE alpha:14 beta:37 delta:33 gamma:28
+OPS
+LOOKUP alpha
+END_PARSE
+PROGRAM
+TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP,TABLE LOOKUP
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PARSE
+FAMILY number
+INIT PUSH 28
+OPS
+MUL 4
+END_PARSE
+PROGRAM
+PUSH 28
+MUL 4
+","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL,PUSH MUL
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PARSE
+FAMILY string
+INIT PUSH_TEXT PU-8482-DF
+OPS
+STRIP_HYPHENS
+END_PARSE
+PROGRAM
+PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,table,1,eval_indist_d1_table_2,14,"TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha","TABLE alpha:14 beta:37 delta:33 gamma:28
+LOOKUP alpha
+",14,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP,TABLE LOOKUP
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL,PUSH MUL
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"PARSE
+FAMILY table
+INIT TABLE alpha:11 beta:36 delta:37 gamma:8
+OPS
+LOOKUP delta
+ADD_LOOKUP gamma
+END_PARSE
+PROGRAM
+TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",45,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD_LOOKUP
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PARSE
+FAMILY string
+INIT PUSH_TEXT YV-5212-KE
+OPS
+STRIP_HYPHENS
+LOWER
+END_PARSE
+PROGRAM
+PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PARSE
+FAMILY number
+INIT PUSH 18
+OPS
+SUB 24
+MUL 2
+END_PARSE
+PROGRAM
+PUSH 18
+SUB 24
+MUL 2
+","PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB MUL,PUSH SUB MUL
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d2,table,2,eval_comp_d2_table_2,45,"TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma","TABLE alpha:11 beta:36 delta:37 gamma:8
+LOOKUP delta
+ADD_LOOKUP gamma
+",45,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD_LOOKUP,TABLE LOOKUP ADD_LOOKUP
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d2,string,2,eval_comp_d2_string_0,yv5212ke,"PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER","PUSH_TEXT YV-5212-KE
+STRIP_HYPHENS
+LOWER
+",yv5212ke,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS LOWER,PUSH_TEXT STRIP_HYPHENS LOWER
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d2,number,2,eval_comp_d2_number_1,-12,"PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2","PUSH 18
+SUB 24
+MUL 2
+",-12,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB MUL,PUSH SUB MUL
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"PARSE
+FAMILY table
+INIT TABLE alpha:21 beta:29 gamma:13 omega:26
+OPS
+LOOKUP beta
+MUL 4
+MUL 3
+END_PARSE
+PROGRAM
+TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PARSE
+FAMILY number
+INIT PUSH 8
+OPS
+ADD 4
+ADD 5
+MUL 6
+END_PARSE
+PROGRAM
+PUSH 8
+ADD 4
+ADD 5
+MUL 6
+","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PARSE
+FAMILY string
+INIT PUSH_TEXT LU-7864-EF
+OPS
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+END_PARSE
+PROGRAM
+PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",7-ul,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAKE_SUFFIX
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d3,table,3,eval_comp_d3_table_2,348,"TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3","TABLE alpha:21 beta:29 gamma:13 omega:26
+LOOKUP beta
+MUL 4
+MUL 3
+",348,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL MUL,TABLE LOOKUP MUL MUL
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d3,number,3,eval_comp_d3_number_1,102,"PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6","PUSH 8
+ADD 4
+ADD 5
+MUL 6
+",102,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD ADD MUL,PUSH ADD ADD MUL
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d3,string,3,eval_comp_d3_string_0,7-ul,"PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4","PUSH_TEXT LU-7864-EF
+LOWER
+REVERSE
+TAKE_SUFFIX 4
+",7-ul,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOWER REVERSE TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE TAKE_SUFFIX
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"PARSE
+FAMILY table
+INIT TABLE alpha:8 beta:23 delta:9 gamma:39
+OPS
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+END_PARSE
+PROGRAM
+TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",72,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD_LOOKUP ADD_LOOKUP
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PARSE
+FAMILY number
+INIT PUSH 2
+OPS
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+END_PARSE
+PROGRAM
+PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PARSE
+FAMILY string
+INIT PUSH_TEXT YE-7952-BX
+OPS
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+END_PARSE
+PROGRAM
+PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d4,table,4,eval_comp_d4_table_2,72,"TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta","TABLE alpha:8 beta:23 delta:9 gamma:39
+LOOKUP alpha
+MUL 3
+ADD_LOOKUP gamma
+ADD_LOOKUP delta
+",72,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL ADD_LOOKUP ADD_LOOKUP,TABLE LOOKUP MUL ADD_LOOKUP ADD_LOOKUP
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d4,number,4,eval_comp_d4_number_1,73,"PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11","PUSH 2
+ADD 5
+MUL 4
+MUL 3
+SUB 11
+",73,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD MUL MUL SUB,PUSH ADD MUL MUL SUB
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d4,string,4,eval_comp_d4_string_0,XB2597EY,"PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT YE-7952-BX
+STRIP_HYPHENS
+STRIP_HYPHENS
+STRIP_HYPHENS
+REVERSE
+",XB2597EY,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE,PUSH_TEXT STRIP_HYPHENS STRIP_HYPHENS STRIP_HYPHENS REVERSE
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PARSE
+FAMILY string
+INIT PUSH_TEXT ZR-6182-YD
+OPS
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",6182YD,,1,1,0,1,1,0,0,0,0,0,correct_exact,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"PARSE
+FAMILY table
+INIT TABLE alpha:30 delta:17 gamma:29 omega:36
+OPS
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+END_PARSE
+PROGRAM
+TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",711,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD_LOOKUP MUL
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PARSE
+FAMILY number
+INIT PUSH 10
+OPS
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+END_PARSE
+PROGRAM
+PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",6182YD,,1,1,0,1,1,0,0,0,0,0,correct_exact,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,table,6,eval_comp_d6_table_2,711,"TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3","TABLE alpha:30 delta:17 gamma:29 omega:36
+LOOKUP omega
+MUL 2
+MUL 3
+ADD 4
+ADD_LOOKUP delta
+MUL 3
+",711,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL MUL ADD ADD_LOOKUP MUL,TABLE LOOKUP MUL MUL ADD ADD_LOOKUP MUL
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d2,table,2,eval_template_d2_table_2,41,"PARSE
+FAMILY table
+INIT TABLE alpha:16 beta:14 delta:29 gamma:26
+OPS
+LOOKUP delta
+ADD 12
+END_PARSE
+PROGRAM
+TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",41,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD,TABLE LOOKUP ADD
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d2,number,2,eval_template_d2_number_1,190,"PARSE
+FAMILY number
+INIT PUSH 24
+OPS
+MUL 7
+ADD 22
+END_PARSE
+PROGRAM
+PUSH 24
+MUL 7
+ADD 22
+","PUSH 24
+MUL 7
+ADD 22","PUSH 24
+MUL 7
+ADD 22
+",190,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL ADD,PUSH MUL ADD
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"PARSE
+FAMILY string
+INIT PUSH_TEXT RP-1822-GY
+OPS
+UPPER
+TAKE_PREFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",RP-182,,1,1,0,1,1,0,0,0,0,0,correct_exact,UPPER TAKE_PREFIX,PUSH_TEXT UPPER TAKE_PREFIX
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d2,table,2,eval_template_d2_table_2,41,"TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12","TABLE alpha:16 beta:14 delta:29 gamma:26
+LOOKUP delta
+ADD 12
+",41,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD,TABLE LOOKUP ADD
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d2,number,2,eval_template_d2_number_1,190,"PUSH 24
+MUL 7
+ADD 22","PUSH 24
+MUL 7
+ADD 22","PUSH 24
+MUL 7
+ADD 22
+",190,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL ADD,PUSH MUL ADD
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d2,string,2,eval_template_d2_string_0,RP-182,"PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6","PUSH_TEXT RP-1822-GY
+UPPER
+TAKE_PREFIX 6
+",RP-182,,1,1,0,1,1,0,0,0,0,0,correct_exact,UPPER TAKE_PREFIX,PUSH_TEXT UPPER TAKE_PREFIX
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d4,table,4,eval_template_d4_table_2,102,"PARSE
+FAMILY table
+INIT TABLE beta:21 delta:38 gamma:38 omega:18
+OPS
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+END_PARSE
+PROGRAM
+TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",102,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL ADD ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD_LOOKUP
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"PARSE
+FAMILY string
+INIT PUSH_TEXT XF-8893-UT
+OPS
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+END_PARSE
+PROGRAM
+PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",988-fx,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOWER REVERSE LOWER TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE LOWER TAKE_SUFFIX
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d4,number,4,eval_template_d4_number_1,-33,"PARSE
+FAMILY number
+INIT PUSH 2
+OPS
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+END_PARSE
+PROGRAM
+PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",-33,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB SUB MUL ADD,PUSH SUB SUB MUL ADD
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d4,table,4,eval_template_d4_table_2,102,"TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega","TABLE beta:21 delta:38 gamma:38 omega:18
+LOOKUP omega
+MUL 4
+ADD 12
+ADD_LOOKUP omega
+",102,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP MUL ADD ADD_LOOKUP,TABLE LOOKUP MUL ADD ADD_LOOKUP
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d4,string,4,eval_template_d4_string_0,988-fx,"PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6","PUSH_TEXT XF-8893-UT
+LOWER
+REVERSE
+LOWER
+TAKE_SUFFIX 6
+",988-fx,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOWER REVERSE LOWER TAKE_SUFFIX,PUSH_TEXT LOWER REVERSE LOWER TAKE_SUFFIX
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d4,number,4,eval_template_d4_number_1,-33,"PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18","PUSH 2
+SUB 12
+SUB 7
+MUL 3
+ADD 18
+",-33,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB SUB MUL ADD,PUSH SUB SUB MUL ADD
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"PARSE
+FAMILY string
+INIT PUSH_TEXT EE-6324-BK
+OPS
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+END_PARSE
+PROGRAM
+PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",ee6324bk,,1,1,0,1,1,0,0,0,0,0,correct_exact,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,PUSH_TEXT UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d6,number,6,eval_template_d6_number_1,42,"PARSE
+FAMILY number
+INIT PUSH 15
+OPS
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+END_PARSE
+PROGRAM
+PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",42,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB ADD SUB MUL ADD ADD,PUSH SUB ADD SUB MUL ADD ADD
+smoke,smoke_v1_oracle_parse_constrained_s101,oracle,oracle_parse_constrained,101,0,eval_template_d6,table,6,eval_template_d6_table_2,410,"PARSE
+FAMILY table
+INIT TABLE alpha:3 beta:16 gamma:6 omega:36
+OPS
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+END_PARSE
+PROGRAM
+TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",410,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,TABLE LOOKUP ADD ADD ADD_LOOKUP ADD MUL
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,string,6,eval_template_d6_string_0,ee6324bk,"PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE","PUSH_TEXT EE-6324-BK
+UPPER
+LOWER
+REVERSE
+LOWER
+STRIP_HYPHENS
+REVERSE
+",ee6324bk,,1,1,0,1,1,0,0,0,0,0,correct_exact,UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE,PUSH_TEXT UPPER LOWER REVERSE LOWER STRIP_HYPHENS REVERSE
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,number,6,eval_template_d6_number_1,42,"PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21","PUSH 15
+SUB 19
+ADD 21
+SUB 18
+MUL 2
+ADD 23
+ADD 21
+",42,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB ADD SUB MUL ADD ADD,PUSH SUB ADD SUB MUL ADD ADD
+smoke,smoke_v1_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,table,6,eval_template_d6_table_2,410,"TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5","TABLE alpha:3 beta:16 gamma:6 omega:36
+LOOKUP beta
+ADD 7
+ADD 12
+ADD_LOOKUP omega
+ADD 11
+MUL 5
+",410,,1,1,0,1,1,0,0,0,0,0,correct_exact,LOOKUP ADD ADD ADD_LOOKUP ADD MUL,TABLE LOOKUP ADD ADD ADD_LOOKUP ADD MUL

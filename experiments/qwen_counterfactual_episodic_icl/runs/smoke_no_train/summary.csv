@@ -1,0 +1,11 @@
+method,split,support_mode,tasks,rows,row_exact,full_task_exact
+adapter,public_prose,none,1,3,0.0,0.0
+adapter,public_prose,normal,1,3,0.0,0.0
+adapter,public_prose,shuffled,1,3,0.0,0.0
+base,public_prose,normal,1,3,0.0,0.0
+base,public_prose,shuffled,1,3,0.0,0.0
+adapter,synthetic_counterfactual,none,2,4,0.0,0.0
+adapter,synthetic_counterfactual,normal,2,4,0.0,0.0
+adapter,synthetic_counterfactual,shuffled,2,4,0.0,0.0
+base,synthetic_counterfactual,normal,2,4,0.0,0.0
+base,synthetic_counterfactual,shuffled,2,4,0.0,0.0

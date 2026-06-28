@@ -1,0 +1,49 @@
+run,suite,arm,seed,trained,split,example_id,family,op_name,answer,final_prediction,exec_prediction,final_correct,exec_correct,strict_correct,valid_final,valid_exec,no_final,leak_string,exec_error,new_tokens,generated
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_unit_13,unit,add_centimeters,44,,44,0,1,1,0,1,1,0,,12,PUSH 11\nADD 33\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_date_3,date,add_days,2026-05-04,,2026-05-04,0,1,1,0,1,1,0,,21,PUSH_DATE 2026-05-03\nADD_DAYS 1\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_string_0,string,take_suffix,446JE,,,0,0,0,0,0,1,0,IndexError,26,PUSH_CODE ZH-9446-JE\nSTRIP_HYPHENS\nSLICE 4\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_table_14,table,lookup_add,24,,24,0,1,1,0,1,1,0,,27,TABLE alpha:14 beta:27 delta:8 gamma:10\nLOOKUP alpha\nADD 10\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_table_2,table,lookup_mul_add,79,,79,0,1,1,0,1,1,0,,31,TABLE alpha:2 beta:28 delta:10 gamma:14\nLOOKUP gamma\nMUL 5\nADD 9\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_string_4,string,slice,9787,,9787,0,1,1,0,1,1,1,,27,PUSH_CODE US-9787-BJ\nSTRIP_HYPHENS\nSLICE 3 6\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_date_15,date,add_weeks,2026-10-26,,2026-10-26,0,1,1,0,1,1,0,,22,PUSH_DATE 2026-10-19\nADD_WEEKS 1\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_unit_9,unit,centimeters_to_millimeters,60,,60,0,1,1,0,1,1,0,,12,PUSH 6\nMUL 10\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_string_8,string,reverse_all,CS5031PT,,CS5031PT,0,1,1,0,1,1,0,,23,PUSH_CODE TP-1305-SC\nSTRIP_HYPHENS\nREVERSE\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_table_10,table,lookup_mul_add,155,,155,0,1,1,0,1,1,0,,31,TABLE alpha:14 beta:25 delta:25 gamma:6\nLOOKUP delta\nMUL 6\nADD 5\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_string_12,string,take_prefix,JF94,,,0,0,0,0,1,1,0,,28,PUSH_CODE JF-9491-GF\nSTRIP_HYPHENS\nSLICE 0 4\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_date_11,date,add_weeks,2026-03-15,,2026-03-15,0,1,1,0,1,1,0,,22,PUSH_DATE 2026-03-01\nADD_WEEKS 2\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_table_6,table,lookup_mul,72,,72,0,1,1,0,1,1,0,,27,TABLE alpha:26 beta:18 delta:11 gamma:9\nLOOKUP beta\nMUL 4\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_unit_5,unit,add_centimeters,52,,52,0,1,1,0,1,1,0,,12,PUSH 16\nADD 36\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_unit_1,unit,kilograms_to_grams,10000,,10000,0,1,1,0,1,1,0,,15,PUSH 10\nMUL 1000\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_indist,eval_indist_date_7,date,add_weeks,2026-02-11,,2026-02-11,0,1,1,0,1,1,0,,22,PUSH_DATE 2026-02-04\nADD_WEEKS 1\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_table_2,table,sum_two_keys_plus,37,,,0,0,0,0,0,1,0,IndexError,32,TABLE alpha:25 beta:8 delta:12 gamma:10\nLOOKUP alpha\nLOOKUP beta\nADD\nADD 4\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_unit_5,unit,meters_plus_centimeters,340,,340,0,1,1,0,1,1,0,,18,PUSH 3\nMUL 100\nADD 40\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_table_14,table,sum_two_keys_plus,50,,,0,0,0,0,0,1,0,IndexError,33,TABLE alpha:24 beta:23 delta:23 gamma:17\nLOOKUP beta\nLOOKUP delta\nADD\nADD 4\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_date_11,date,weeks_plus_days,2026-06-01,,2026-06-01,0,1,1,0,1,1,0,,27,PUSH_DATE 2026-05-15\nADD_WEEKS 2\nADD_DAYS 3\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_date_15,date,weeks_plus_days,2026-04-12,,2026-04-12,0,1,1,0,1,1,0,,27,PUSH_DATE 2026-04-03\nADD_WEEKS 1\nADD_DAYS 2\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_string_8,string,reverse_then_slice,0367,,0367,0,1,1,0,1,1,0,,30,PUSH_CODE JW-7630-CF\nSTRIP_HYPHENS\nREVERSE\nSLICE 3 6\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_string_12,string,reverse_then_slice,DH519,,DH519,0,1,1,0,1,1,0,,31,PUSH_CODE UZ-1915-HD\nSTRIP_HYPHENS\nREVERSE\nSLICE 1 5\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_unit_1,unit,meters_plus_centimeters,325,,325,0,1,1,0,1,1,0,,18,PUSH 3\nMUL 100\nADD 25\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_date_3,date,weeks_plus_days,2026-05-29,,2026-05-29,0,1,1,0,1,1,0,,27,PUSH_DATE 2026-05-06\nADD_WEEKS 3\nADD_DAYS 2\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_string_4,string,reverse_then_slice,771ZB,,771ZB,0,1,1,0,1,1,0,,31,PUSH_CODE BZ-1779-PH\nSTRIP_HYPHENS\nREVERSE\nSLICE 4 8\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_table_10,table,sum_two_keys_plus,42,,,0,0,0,0,0,1,0,IndexError,33,TABLE alpha:15 beta:29 delta:23 gamma:13\nLOOKUP delta\nLOOKUP alpha\nADD\nADD 4\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_date_7,date,weeks_plus_days,2026-07-31,,2026-07-31,0,1,1,0,1,1,0,,27,PUSH_DATE 2026-07-11\nADD_WEEKS 2\nADD_DAYS 6\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_unit_13,unit,meters_plus_centimeters,125,,,0,0,0,0,0,1,0,IndexError,16,PUSH 100\nMUL\nADD 25\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_string_0,string,reverse_then_slice,008J,,008J,0,1,1,0,1,1,0,,30,PUSH_CODE TJ-8009-KS\nSTRIP_HYPHENS\nREVERSE\nSLICE 4 7\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_unit_9,unit,meters_plus_centimeters,715,,715,0,1,1,0,1,1,0,,18,PUSH 7\nMUL 100\nADD 15\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_composition,eval_composition_table_6,table,sum_two_keys_plus,24,,,0,0,0,0,0,1,0,IndexError,32,TABLE alpha:25 beta:5 delta:14 gamma:15\nLOOKUP delta\nLOOKUP beta\nADD\nADD 5\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_string_0,string,reverse_all,PX7278EW,,,0,0,0,0,0,1,0,unknown op STRIP_SUFFIXES,24,"PUSH_CODE ""WE-8727-XP""\nSTRIP_SUFFIXES ""-""\nSLICE 0\n"
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_table_14,table,lookup_mul_add,31,,,0,0,0,0,0,1,0,KeyError,16,LOOKUP alpha 5\nMUL 5\nADD 6\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_table_2,table,lookup_mul_add,23,,,0,0,0,0,0,1,0,KeyError,14,LOOKUP gamma\nMUL 2\nADD 3\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_date_3,date,add_weeks,2026-05-01,,2026-05-01,0,1,1,0,1,1,0,,22,PUSH_DATE 2026-04-10\nADD_WEEKS 3\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_date_11,date,add_weeks,2026-09-26,,2026-09-26,0,1,1,0,1,1,0,,22,PUSH_DATE 2026-09-19\nADD_WEEKS 1\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_date_15,date,add_weeks,2026-07-31,,2026-07-31,0,1,1,0,1,1,0,,22,PUSH_DATE 2026-07-10\nADD_WEEKS 3\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_string_4,string,take_prefix,YQ9,,,0,0,0,0,1,1,0,,29,"PUSH_CODE ""YQ-9523-XX""\nSTRIP_HYPHENS\nSLICE 0 3\n"
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_unit_13,unit,kilograms_to_grams,17000,,17000,0,1,1,0,1,1,0,,15,PUSH 17\nMUL 1000\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_date_7,date,add_weeks,2026-07-25,,2026-07-25,0,1,1,0,1,1,0,,22,PUSH_DATE 2026-07-04\nADD_WEEKS 3\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_unit_5,unit,kilograms_to_grams,10000,,10000,0,1,1,0,1,1,0,,15,PUSH 10\nMUL 1000\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_unit_1,unit,minutes_to_seconds,540,,540,0,1,1,0,1,1,0,,12,PUSH 9\nMUL 60\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_table_6,table,lookup_mul_add,53,,,0,0,0,0,0,1,0,KeyError,14,LOOKUP gamma\nMUL 2\nADD 7\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_unit_9,unit,meters_to_centimeters,1800,,1800,0,1,1,0,1,1,0,,14,PUSH 18\nMUL 100\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_string_12,string,take_suffix,2VN,,,0,0,0,0,0,1,0,IndexError,26,"PUSH_CODE ""YS-6772-VN""\nSTRIP_HYPHENS\nSLICE 2\n"
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_table_10,table,lookup_add,19,,,0,0,0,0,0,1,0,KeyError,9,LOOKUP beta\nADD 6\n
+pilot_v1_program_stack_s101,pilot,program_stack,101,1,eval_template_shift,eval_template_shift_string_8,string,slice,SX720,,SX-72,0,0,0,0,1,1,0,,21,"PUSH_CODE ""SX-7202-LU""\nSLICE 1 5\n"

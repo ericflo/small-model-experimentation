@@ -1,0 +1,29 @@
+{
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "date": "2026-06-25",
+  "objective": "Test whether strategy-conditioned QLoRA posttraining can make K=32 sampling more complementary and recover the coverage currently obtained by a multi-policy sampling union at lower forward-token cost.",
+  "model": "Qwen/Qwen3.5-4B local snapshot",
+  "dataset": {
+    "name": "google-research-datasets/mbpp",
+    "train_split": "train",
+    "eval_split": "test",
+    "visible_tests": 1,
+    "hidden_tests": "remaining test_list plus challenge_test_list"
+  },
+  "main_arms": [
+    "hot_k32_baseline",
+    "union_k32_baseline",
+    "strategy_lora_k32",
+    "shuffled_strategy_lora_k32"
+  ],
+  "success_bar": {
+    "minimum": "strategy_lora_k32 recovers more base-missed tasks than hot_k32_baseline at comparable forward-token budget",
+    "strong": "strategy_lora_k32 approaches union_k32_baseline recovery while using materially fewer forward tokens than the union",
+    "control": "strategy_lora_k32 must beat shuffled_strategy_lora_k32"
+  },
+  "artifact_policy": {
+    "experiment_dir": "/workspace/experiments/qwen35_4b_strategy_token_diversity_lora",
+    "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_strategy_token_diversity_lora",
+    "large_files": "Adapters and any checkpoint-like artifacts live only in the large_artifacts directory."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "experiment_name": "qwen35_4b_unsaturated_frontier_active_bridge",
+  "question": "Can active bridge allocation outperform uniform static bridge coverage on a frontier suite broad enough that static examples should not saturate the target space?",
+  "model": {
+    "model_id": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "loader": "AutoModelForImageTextToText",
+    "training": "4-bit NF4 QLoRA"
+  },
+  "dataset": {
+    "seed": 20260625,
+    "seed_train_records": 240,
+    "bridge_base_records": 180,
+    "bridge_records": 60,
+    "iid_eval_records": 60,
+    "frontier_eval_records": 120,
+    "frontier_families": 10,
+    "frontier_eval_records_per_family": 12,
+    "mining_records_per_family": 24,
+    "visible_cases_per_record": 6,
+    "hidden_cases_per_record": 18,
+    "mine_case_pool_per_record": 96,
+    "selector_pool_size": 192
+  },
+  "conditions": {
+    "seed_lora": "240 base-family random-trace records",
+    "static_bridge_lora": "180 base-family records plus 60 uniformly allocated static frontier bridge records",
+    "seed_mined_bridge_lora": "180 base-family records plus 60 uniformly allocated bridge records selected against seed-adapter wrong programs",
+    "adaptive_bridge_lora": "180 base-family records plus 60 bridge records adaptively allocated from wrong programs generated after static bridge training"
+  },
+  "training": {
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "epochs": 2.0,
+    "learning_rate": 0.00015,
+    "max_length": 4096,
+    "gradient_accumulation_steps": 8,
+    "per_device_train_batch_size": 1,
+    "bf16": true
+  },
+  "mining": {
+    "num_samples": 2,
+    "max_new_tokens": 64,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "adaptive_min_per_family": 2
+  },
+  "evaluation": {
+    "max_new_tokens": 64,
+    "num_samples_main": 3,
+    "num_samples_control": 0,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "selection": "valid candidate with most visible-case passes; tie-break by shorter parsed DSL"
+  },
+  "artifact_layout": {
+    "compact_dir": "experiments/qwen35_4b_unsaturated_frontier_active_bridge",
+    "large_artifact_dir": "large_artifacts/qwen35_4b_unsaturated_frontier_active_bridge"
+  }
+}

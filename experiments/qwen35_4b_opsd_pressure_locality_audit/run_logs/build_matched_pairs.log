@@ -1,0 +1,21 @@
+{
+  "experiment": "qwen35_4b_opsd_pressure_locality_audit",
+  "fork_strata": {
+    "hint_overlap": 36,
+    "task_specific": 14
+  },
+  "forks": 50,
+  "matched_pairs": 14,
+  "path": "data/matched_pairs.jsonl",
+  "source_arms": [
+    "retrieval_adapt_semantic_top3_records.jsonl",
+    "retrieval_adapt_random_top3_records.jsonl",
+    "retrieval_adapt_shuffled_top3_records.jsonl",
+    "retrieval_copy_rename_top3_records.jsonl"
+  ],
+  "tasks": [
+    35,
+    44,
+    87
+  ]
+}

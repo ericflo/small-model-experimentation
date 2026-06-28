@@ -1,0 +1,175 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Qwen Compiler Multi-Seed Reattribution</title><style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 40px auto; max-width: 1180px; line-height: 1.45; color: #17202a; }
+h1, h2 { letter-spacing: 0; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 28px; font-size: 13px; }
+th, td { border: 1px solid #d7dde5; padding: 6px 8px; text-align: left; vertical-align: top; }
+th { background: #eef3f8; }
+figure { margin: 24px 0; }
+img { max-width: 100%; border: 1px solid #d7dde5; }
+.bullet::before { content: "- "; }
+p { margin: 8px 0; }
+</style></head><body><h1>Qwen Compiler Multi-Seed Reattribution</h1>
+
+<h2>Question</h2>
+
+<p>Does a one-shot executable latent compiler reliably learn length-24 modular programs across random seeds, and which training factor best explains the result: staged length curriculum, copied structural expansion, or same-budget no-curriculum training?</p>
+
+<h2>Method</h2>
+
+<p class="bullet">Each arm uses Qwen/Qwen3-4B with QLoRA and a direct executable compiler head.</p>
+<p class="bullet">The compiler predicts one initial value and a sequence of typed operation and argument slots.</p>
+<p class="bullet">A differentiable modular executor supervises final answers and intermediate state traces.</p>
+<p class="bullet">The same seed set is used for each arm, so the main readout is mean and spread across matched random seeds.</p>
+<p class="bullet">Evaluation includes standard templates, held-out wording templates, seen-family paired consistency, and held-out paired consistency.</p>
+
+<h2>Arms</h2>
+
+<p class="bullet">`max24_curriculum`: max-24 compiler from the start, with staged train lengths.</p>
+<p class="bullet">`expand_copy`: compiler capacity expands in stages and newly introduced slots copy the last learned slot.</p>
+<p class="bullet">`max24_no_curriculum`: max-24 compiler from the start, trained on the full length range immediately.</p>
+
+<h2>Runs</h2>
+
+<table><thead><tr><th>run</th><th>arm</th><th>seed</th><th>elapsed_sec</th><th>stage_max_steps</th><th>stage_steps</th><th>train_examples</th><th>eval_examples</th><th>gpu</th></tr></thead><tbody>
+<tr><td>main_expand_copy_seed123</td><td>expand_copy</td><td>123</td><td>1912</td><td>8,16,24</td><td>300,150,300</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_expand_copy_seed456</td><td>expand_copy</td><td>456</td><td>1914</td><td>8,16,24</td><td>300,150,300</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_expand_copy_seed789</td><td>expand_copy</td><td>789</td><td>1908</td><td>8,16,24</td><td>300,150,300</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_curriculum_seed123</td><td>max24_curriculum</td><td>123</td><td>2722</td><td>24,24,24</td><td>300,150,300</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_curriculum_seed456</td><td>max24_curriculum</td><td>456</td><td>2721</td><td>24,24,24</td><td>300,150,300</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_curriculum_seed789</td><td>max24_curriculum</td><td>789</td><td>2717</td><td>24,24,24</td><td>300,150,300</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_no_curriculum_seed123</td><td>max24_no_curriculum</td><td>123</td><td>2691</td><td>24</td><td>750</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_no_curriculum_seed456</td><td>max24_no_curriculum</td><td>456</td><td>2693</td><td>24</td><td>750</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_no_curriculum_seed789</td><td>max24_no_curriculum</td><td>789</td><td>2695</td><td>24</td><td>750</td><td>512</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_expand_copy_seed123</td><td>expand_copy</td><td>123</td><td>30.61</td><td>8,16,24</td><td>4,2,4</td><td>32</td><td>8</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_expand_copy_seed456</td><td>expand_copy</td><td>456</td><td>30.93</td><td>8,16,24</td><td>4,2,4</td><td>32</td><td>8</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_max24_curriculum_seed123</td><td>max24_curriculum</td><td>123</td><td>52.45</td><td>24,24,24</td><td>4,2,4</td><td>32</td><td>8</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_max24_curriculum_seed456</td><td>max24_curriculum</td><td>456</td><td>53.34</td><td>24,24,24</td><td>4,2,4</td><td>32</td><td>8</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_max24_no_curriculum_seed123</td><td>max24_no_curriculum</td><td>123</td><td>23.18</td><td>24</td><td>10</td><td>32</td><td>8</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_max24_no_curriculum_seed456</td><td>max24_no_curriculum</td><td>456</td><td>23.11</td><td>24</td><td>10</td><td>32</td><td>8</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>smoke_max24_curriculum_seed123</td><td>max24_curriculum</td><td>123</td><td>24.01</td><td>24,24,24</td><td>1,1,1</td><td>12</td><td>4</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+</tbody></table>
+
+<h2>Results</h2>
+
+<p>Final length-24 executable accuracy, mean +/- standard deviation across seeds:</p>
+
+<h2>Key Findings</h2>
+
+<p class="bullet">`standard_L24`: best mean is `expand_copy` at 43.2% with 40.9 percentage points seed standard deviation.</p>
+<p class="bullet">`paired_L24`: best mean is `expand_copy` at 60.4% with 30.9 percentage points seed standard deviation.</p>
+<p class="bullet">`heldout_L24`: best mean is `max24_curriculum` at 38.5% with 47.9 percentage points seed standard deviation.</p>
+<p class="bullet">State-prefix recovery is high even when exact execution fails: `standard_L24` ranges from 70.0% mean prefix recovery for `max24_no_curriculum` to 87.3% for `expand_copy`.</p>
+<p class="bullet">Same-budget no-curriculum training is the weakest standard-L24 arm at 0.5% mean accuracy.</p>
+
+<table><thead><tr><th>arm</th><th>standard_L24</th><th>heldout_L24</th><th>paired_L24</th><th>paired_heldout_L24</th></tr></thead><tbody>
+<tr><td>expand_copy</td><td>43.2% +/- 40.9 (0.0-81.2, n=3)</td><td>34.4% +/- 36.9 (7.8-76.6, n=3)</td><td>60.4% +/- 30.9 (32.8-93.8, n=3)</td><td>40.6% +/- 35.8 (9.4-79.7, n=3)</td></tr>
+<tr><td>max24_curriculum</td><td>14.1% +/- 11.3 (1.6-23.4, n=3)</td><td>38.5% +/- 47.9 (0.0-92.2, n=3)</td><td>40.1% +/- 34.7 (0.0-60.9, n=3)</td><td>22.9% +/- 23.5 (0.0-46.9, n=3)</td></tr>
+<tr><td>max24_no_curriculum</td><td>0.5% +/- 0.9 (0.0-1.6, n=3)</td><td>16.1% +/- 19.3 (0.0-37.5, n=3)</td><td>24.5% +/- 25.0 (0.0-50.0, n=3)</td><td>9.9% +/- 13.3 (0.0-25.0, n=3)</td></tr>
+</tbody></table>
+
+<p>Per-seed final length-24 executable accuracy:</p>
+
+<table><thead><tr><th>arm</th><th>seed</th><th>run</th><th>standard_L24</th><th>heldout_L24</th><th>paired_L24</th><th>paired_heldout_L24</th></tr></thead><tbody>
+<tr><td>expand_copy</td><td>123</td><td>main_expand_copy_seed123</td><td>0.0%</td><td>18.8%</td><td>32.8%</td><td>9.4%</td></tr>
+<tr><td>expand_copy</td><td>456</td><td>main_expand_copy_seed456</td><td>48.4%</td><td>7.8%</td><td>54.7%</td><td>32.8%</td></tr>
+<tr><td>expand_copy</td><td>789</td><td>main_expand_copy_seed789</td><td>81.2%</td><td>76.6%</td><td>93.8%</td><td>79.7%</td></tr>
+<tr><td>max24_curriculum</td><td>123</td><td>main_max24_curriculum_seed123</td><td>23.4%</td><td>23.4%</td><td>59.4%</td><td>21.9%</td></tr>
+<tr><td>max24_curriculum</td><td>456</td><td>main_max24_curriculum_seed456</td><td>1.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_curriculum</td><td>789</td><td>main_max24_curriculum_seed789</td><td>17.2%</td><td>92.2%</td><td>60.9%</td><td>46.9%</td></tr>
+<tr><td>max24_no_curriculum</td><td>123</td><td>main_max24_no_curriculum_seed123</td><td>0.0%</td><td>10.9%</td><td>23.4%</td><td>4.7%</td></tr>
+<tr><td>max24_no_curriculum</td><td>456</td><td>main_max24_no_curriculum_seed456</td><td>0.0%</td><td>37.5%</td><td>50.0%</td><td>25.0%</td></tr>
+<tr><td>max24_no_curriculum</td><td>789</td><td>main_max24_no_curriculum_seed789</td><td>1.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+</tbody></table>
+
+<p>Exact program recovery, aggregated across seeds:</p>
+
+<table><thead><tr><th>arm</th><th>standard_L24</th><th>heldout_L24</th><th>paired_L24</th><th>paired_heldout_L24</th></tr></thead><tbody>
+<tr><td>expand_copy</td><td>42.2% +/- 40.7 (0.0-81.2, n=3)</td><td>32.3% +/- 38.4 (7.8-76.6, n=3)</td><td>59.9% +/- 31.6 (31.2-93.8, n=3)</td><td>39.1% +/- 37.3 (6.2-79.7, n=3)</td></tr>
+<tr><td>max24_curriculum</td><td>10.4% +/- 9.2 (0.0-17.2, n=3)</td><td>38.0% +/- 48.2 (0.0-92.2, n=3)</td><td>38.5% +/- 33.4 (0.0-59.4, n=3)</td><td>22.4% +/- 22.7 (0.0-45.3, n=3)</td></tr>
+<tr><td>max24_no_curriculum</td><td>0.0% +/- 0.0 (0.0-0.0, n=3)</td><td>16.1% +/- 19.3 (0.0-37.5, n=3)</td><td>23.4% +/- 25.1 (0.0-50.0, n=3)</td><td>9.9% +/- 13.3 (0.0-25.0, n=3)</td></tr>
+</tbody></table>
+
+<p>State-prefix recovery, aggregated across seeds:</p>
+
+<table><thead><tr><th>arm</th><th>standard_L24</th><th>heldout_L24</th><th>paired_L24</th><th>paired_heldout_L24</th></tr></thead><tbody>
+<tr><td>expand_copy</td><td>87.3% +/- 13.4 (71.7-95.1, n=3)</td><td>70.5% +/- 24.9 (43.7-92.8, n=3)</td><td>92.2% +/- 6.6 (84.6-96.6, n=3)</td><td>78.4% +/- 21.0 (54.9-95.6, n=3)</td></tr>
+<tr><td>max24_curriculum</td><td>81.4% +/- 8.5 (71.8-87.9, n=3)</td><td>82.7% +/- 13.9 (74.6-98.7, n=3)</td><td>86.8% +/- 11.1 (74.1-93.7, n=3)</td><td>81.6% +/- 8.5 (73.0-89.9, n=3)</td></tr>
+<tr><td>max24_no_curriculum</td><td>70.0% +/- 8.5 (62.2-79.0, n=3)</td><td>72.0% +/- 6.6 (66.1-79.2, n=3)</td><td>78.0% +/- 9.8 (71.4-89.2, n=3)</td><td>72.2% +/- 9.6 (66.0-83.3, n=3)</td></tr>
+</tbody></table>
+
+<p>Final split rows:</p>
+
+<table><thead><tr><th>arm</th><th>seed</th><th>run</th><th>split</th><th>n</th><th>executor_accuracy</th><th>program_exact</th><th>state_prefix_fraction</th><th>executor_pair_both_correct</th><th>compiler_pair_state_consistency</th></tr></thead><tbody>
+<tr><td>expand_copy</td><td>123</td><td>main_expand_copy_seed123</td><td>standard_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>71.7%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>123</td><td>main_expand_copy_seed123</td><td>paraphrase_L24</td><td>64</td><td>78.1%</td><td>71.9%</td><td>97.3%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>123</td><td>main_expand_copy_seed123</td><td>heldout_L24</td><td>64</td><td>18.8%</td><td>12.5%</td><td>43.7%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>123</td><td>main_expand_copy_seed123</td><td>paired_L24</td><td>64</td><td>32.8%</td><td>31.2%</td><td>84.6%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>expand_copy</td><td>123</td><td>main_expand_copy_seed123</td><td>paired_heldout_L24</td><td>64</td><td>9.4%</td><td>6.2%</td><td>54.9%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>expand_copy</td><td>456</td><td>main_expand_copy_seed456</td><td>standard_L24</td><td>64</td><td>48.4%</td><td>45.3%</td><td>95.1%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>456</td><td>main_expand_copy_seed456</td><td>paraphrase_L24</td><td>64</td><td>73.4%</td><td>71.9%</td><td>96.8%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>456</td><td>main_expand_copy_seed456</td><td>heldout_L24</td><td>64</td><td>7.8%</td><td>7.8%</td><td>74.9%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>456</td><td>main_expand_copy_seed456</td><td>paired_L24</td><td>64</td><td>54.7%</td><td>54.7%</td><td>95.3%</td><td>21.9%</td><td>21.9%</td></tr>
+<tr><td>expand_copy</td><td>456</td><td>main_expand_copy_seed456</td><td>paired_heldout_L24</td><td>64</td><td>32.8%</td><td>31.2%</td><td>84.5%</td><td>3.1%</td><td>3.1%</td></tr>
+<tr><td>expand_copy</td><td>789</td><td>main_expand_copy_seed789</td><td>standard_L24</td><td>64</td><td>81.2%</td><td>81.2%</td><td>94.9%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>789</td><td>main_expand_copy_seed789</td><td>paraphrase_L24</td><td>64</td><td>98.4%</td><td>98.4%</td><td>98.4%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>789</td><td>main_expand_copy_seed789</td><td>heldout_L24</td><td>64</td><td>76.6%</td><td>76.6%</td><td>92.8%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>789</td><td>main_expand_copy_seed789</td><td>paired_L24</td><td>64</td><td>93.8%</td><td>93.8%</td><td>96.6%</td><td>90.6%</td><td>93.8%</td></tr>
+<tr><td>expand_copy</td><td>789</td><td>main_expand_copy_seed789</td><td>paired_heldout_L24</td><td>64</td><td>79.7%</td><td>79.7%</td><td>95.6%</td><td>59.4%</td><td>59.4%</td></tr>
+<tr><td>max24_curriculum</td><td>123</td><td>main_max24_curriculum_seed123</td><td>standard_L24</td><td>64</td><td>23.4%</td><td>17.2%</td><td>87.9%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>123</td><td>main_max24_curriculum_seed123</td><td>paraphrase_L24</td><td>64</td><td>92.2%</td><td>90.6%</td><td>99.3%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>123</td><td>main_max24_curriculum_seed123</td><td>heldout_L24</td><td>64</td><td>23.4%</td><td>21.9%</td><td>74.7%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>123</td><td>main_max24_curriculum_seed123</td><td>paired_L24</td><td>64</td><td>59.4%</td><td>56.2%</td><td>93.7%</td><td>25.0%</td><td>18.8%</td></tr>
+<tr><td>max24_curriculum</td><td>123</td><td>main_max24_curriculum_seed123</td><td>paired_heldout_L24</td><td>64</td><td>21.9%</td><td>21.9%</td><td>81.8%</td><td>3.1%</td><td>3.1%</td></tr>
+<tr><td>max24_curriculum</td><td>456</td><td>main_max24_curriculum_seed456</td><td>standard_L24</td><td>64</td><td>1.6%</td><td>0.0%</td><td>71.8%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>456</td><td>main_max24_curriculum_seed456</td><td>paraphrase_L24</td><td>64</td><td>1.6%</td><td>0.0%</td><td>73.0%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>456</td><td>main_max24_curriculum_seed456</td><td>heldout_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>74.6%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>456</td><td>main_max24_curriculum_seed456</td><td>paired_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>74.1%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_curriculum</td><td>456</td><td>main_max24_curriculum_seed456</td><td>paired_heldout_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>73.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_curriculum</td><td>789</td><td>main_max24_curriculum_seed789</td><td>standard_L24</td><td>64</td><td>17.2%</td><td>14.1%</td><td>84.6%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>789</td><td>main_max24_curriculum_seed789</td><td>paraphrase_L24</td><td>64</td><td>98.4%</td><td>98.4%</td><td>99.9%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>789</td><td>main_max24_curriculum_seed789</td><td>heldout_L24</td><td>64</td><td>92.2%</td><td>92.2%</td><td>98.7%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>789</td><td>main_max24_curriculum_seed789</td><td>paired_L24</td><td>64</td><td>60.9%</td><td>59.4%</td><td>92.8%</td><td>21.9%</td><td>18.8%</td></tr>
+<tr><td>max24_curriculum</td><td>789</td><td>main_max24_curriculum_seed789</td><td>paired_heldout_L24</td><td>64</td><td>46.9%</td><td>45.3%</td><td>89.9%</td><td>21.9%</td><td>21.9%</td></tr>
+<tr><td>max24_no_curriculum</td><td>123</td><td>main_max24_no_curriculum_seed123</td><td>standard_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>62.2%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>123</td><td>main_max24_no_curriculum_seed123</td><td>paraphrase_L24</td><td>64</td><td>46.9%</td><td>46.9%</td><td>78.8%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>123</td><td>main_max24_no_curriculum_seed123</td><td>heldout_L24</td><td>64</td><td>10.9%</td><td>10.9%</td><td>66.1%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>123</td><td>main_max24_no_curriculum_seed123</td><td>paired_L24</td><td>64</td><td>23.4%</td><td>20.3%</td><td>71.4%</td><td>3.1%</td><td>0.0%</td></tr>
+<tr><td>max24_no_curriculum</td><td>123</td><td>main_max24_no_curriculum_seed123</td><td>paired_heldout_L24</td><td>64</td><td>4.7%</td><td>4.7%</td><td>67.2%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_no_curriculum</td><td>456</td><td>main_max24_no_curriculum_seed456</td><td>standard_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>79.0%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>456</td><td>main_max24_no_curriculum_seed456</td><td>paraphrase_L24</td><td>64</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>456</td><td>main_max24_no_curriculum_seed456</td><td>heldout_L24</td><td>64</td><td>37.5%</td><td>37.5%</td><td>79.2%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>456</td><td>main_max24_no_curriculum_seed456</td><td>paired_L24</td><td>64</td><td>50.0%</td><td>50.0%</td><td>89.2%</td><td>3.1%</td><td>3.1%</td></tr>
+<tr><td>max24_no_curriculum</td><td>456</td><td>main_max24_no_curriculum_seed456</td><td>paired_heldout_L24</td><td>64</td><td>25.0%</td><td>25.0%</td><td>83.3%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_no_curriculum</td><td>789</td><td>main_max24_no_curriculum_seed789</td><td>standard_L24</td><td>64</td><td>1.6%</td><td>0.0%</td><td>68.8%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>789</td><td>main_max24_no_curriculum_seed789</td><td>paraphrase_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>77.5%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>789</td><td>main_max24_no_curriculum_seed789</td><td>heldout_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>70.8%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>789</td><td>main_max24_no_curriculum_seed789</td><td>paired_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>73.3%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_no_curriculum</td><td>789</td><td>main_max24_no_curriculum_seed789</td><td>paired_heldout_L24</td><td>64</td><td>0.0%</td><td>0.0%</td><td>66.0%</td><td>0.0%</td><td>0.0%</td></tr>
+</tbody></table>
+
+<h2>Figures</h2>
+
+<figure><img src="figures/mean_accuracy_by_split.png" alt="mean_accuracy_by_split.png"><figcaption>mean_accuracy_by_split.png</figcaption></figure>
+
+<figure><img src="figures/standard_accuracy_by_seed.png" alt="standard_accuracy_by_seed.png"><figcaption>standard_accuracy_by_seed.png</figcaption></figure>
+
+<figure><img src="figures/per_seed_accuracy_heatmap.png" alt="per_seed_accuracy_heatmap.png"><figcaption>per_seed_accuracy_heatmap.png</figcaption></figure>
+
+<figure><img src="figures/final_accuracy_by_length.png" alt="final_accuracy_by_length.png"><figcaption>final_accuracy_by_length.png</figcaption></figure>
+
+<figure><img src="figures/training_loss_by_seed.png" alt="training_loss_by_seed.png"><figcaption>training_loss_by_seed.png</figcaption></figure>
+
+<figure><img src="figures/training_state_accuracy_by_seed.png" alt="training_state_accuracy_by_seed.png"><figcaption>training_state_accuracy_by_seed.png</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>On the standard length-24 split, the strongest mean arm is `expand_copy` at 43.2% with 40.9 percentage points of seed standard deviation.</p>
+<p>The decisive criterion is whether the arm ranking remains stable across seeds and whether any arm&#x27;s seed spread is large enough to make a single-seed conclusion unreliable.</p>
+<p>The observed spread is large enough that no single seed supports a stable attribution claim. Copied expansion has the best mean in this seed set, but it ranges from complete standard-L24 failure to strong performance. Full-width curriculum is also unstable, and no-curriculum training is especially weak on standard-L24 despite sometimes doing well on other wording splits.</p>
+<p>A second conclusion is that partial execution is not the bottleneck: every arm recovers long state prefixes far more often than it recovers exact length-24 programs. The remaining failure is late-step/global program consistency, not the absence of local operator knowledge.</p>
+
+<h2>Artifacts</h2>
+
+<p class="bullet">Run outputs: `experiments/qwen_compiler_multiseed_reattribution/runs/`</p>
+<p class="bullet">Reports and figures: `experiments/qwen_compiler_multiseed_reattribution/reports/`</p>
+<p class="bullet">Large checkpoints: `large_artifacts/qwen_compiler_multiseed_reattribution/checkpoints/`</p></body></html>

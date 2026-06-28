@@ -1,0 +1,117 @@
+{
+  "base_coverage": 0.7,
+  "base_miss_records": 24,
+  "base_miss_tasks": [
+    15,
+    16,
+    22,
+    26,
+    31,
+    34,
+    35,
+    36,
+    39,
+    42,
+    43,
+    44,
+    48,
+    55,
+    59,
+    60,
+    67,
+    70,
+    73,
+    77,
+    81,
+    83,
+    84,
+    87
+  ],
+  "base_records": 80,
+  "baseline_records": "data/base_direct_k4_records.jsonl",
+  "candidate_records": [
+    "data/retrieval_adapt_shuffled_top3_records.jsonl"
+  ],
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "max_probes": 24,
+  "out": "data/selector_shuffled_records.jsonl",
+  "per_input_pool": {
+    "retrieval_adapt_shuffled_top3": {
+      "candidate_count_mean": 2.5833333333333335,
+      "coverage": 0.125,
+      "distinct_behavior_rate_mean": 0.9236111111111112,
+      "distinct_functional_rate_mean": 0.5833333333333334,
+      "false_repair_count": 0,
+      "false_repair_rate": 0.0,
+      "forward_tokens": 22943,
+      "hidden_pass_candidates_mean": 0.125,
+      "parse_success_mean": 2.5416666666666665,
+      "pass1_proxy": 0.041666666666666664,
+      "records": 24,
+      "visible_candidates_mean": 0.8333333333333334,
+      "visible_coverage": 0.125,
+      "visible_repair_pass_count": 0,
+      "zero_base_records": 0,
+      "zero_to_one": 0,
+      "zero_to_one_rate": 0.0
+    }
+  },
+  "pool_names": [
+    "retrieval_adapt_shuffled_top3"
+  ],
+  "residual_pool": {
+    "candidate_count_mean": 2.5833333333333335,
+    "coverage": 0.125,
+    "hidden_correct_mean": 0.125,
+    "records": 24,
+    "visible_any_rate": 0.5,
+    "visible_hidden_wrong_count": 17,
+    "visible_hidden_wrong_rate": 0.85,
+    "visible_pass_count": 20,
+    "visible_pass_mean": 0.8333333333333334
+  },
+  "selectors": {
+    "consensus_visible": {
+      "commit_count": 12,
+      "commit_rate": 0.5,
+      "records": 24,
+      "selected_false_pass_rate": 0.75,
+      "selected_hidden_correct": 3,
+      "selected_recovery_rate": 0.125,
+      "selected_visible_hidden_wrong": 9
+    },
+    "first_visible": {
+      "commit_count": 12,
+      "commit_rate": 0.5,
+      "records": 24,
+      "selected_false_pass_rate": 0.75,
+      "selected_hidden_correct": 3,
+      "selected_recovery_rate": 0.125,
+      "selected_visible_hidden_wrong": 9
+    },
+    "oracle_hidden": {
+      "commit_count": 3,
+      "commit_rate": 0.125,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 3,
+      "selected_recovery_rate": 0.125,
+      "selected_visible_hidden_wrong": 0
+    },
+    "shortest_visible": {
+      "commit_count": 12,
+      "commit_rate": 0.5,
+      "records": 24,
+      "selected_false_pass_rate": 0.75,
+      "selected_hidden_correct": 3,
+      "selected_recovery_rate": 0.125,
+      "selected_visible_hidden_wrong": 9
+    }
+  },
+  "token_usage": {
+    "calls": 72,
+    "completion_tokens": 9407,
+    "forward_tokens": 26127,
+    "prompt_tokens": 16720
+  }
+}

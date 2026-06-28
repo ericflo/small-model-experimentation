@@ -1,0 +1,13 @@
+{
+  "started_utc": "2026-06-27T06:26:46.178287+00:00",
+  "suite": "main_v2_prompt_iteration",
+  "task_limit": 0,
+  "qwen_task_limit": 40,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_heldout": 3,
+  "sample_seed": 20260627,
+  "row_max_new_tokens": 64,
+  "batch_max_new_tokens": 360,
+  "methods": "row_by_row,batch_all,batch_all_verify_hint,batch_all_structured"
+}

@@ -1,0 +1,4 @@
+tier,tasks,coverage,train_match_rate,train_only_rate,no_train_match_rate,median_candidates
+concat,40,0.2,0.275,0.075,0.725,56833.0
+core,40,0.1,0.175,0.075,0.825,109.0
+office,40,0.175,0.25,0.075,0.75,1057.0

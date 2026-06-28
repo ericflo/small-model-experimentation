@@ -1,0 +1,1002 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:01,  6.96it/s]Loading weights:   4%|▍         | 16/426 [00:00<00:05, 78.21it/s]Loading weights:  14%|█▍        | 61/426 [00:00<00:01, 231.64it/s]Loading weights:  23%|██▎       | 100/426 [00:00<00:01, 288.28it/s]Loading weights:  35%|███▍      | 148/426 [00:00<00:00, 353.14it/s]Loading weights:  46%|████▋     | 198/426 [00:00<00:00, 398.15it/s]Loading weights:  56%|█████▌    | 239/426 [00:00<00:00, 401.09it/s]Loading weights:  67%|██████▋   | 287/426 [00:00<00:00, 419.68it/s]Loading weights:  77%|███████▋  | 330/426 [00:00<00:00, 422.03it/s]Loading weights:  88%|████████▊ | 373/426 [00:01<00:00, 423.22it/s]Loading weights:  98%|█████████▊| 416/426 [00:01<00:00, 420.08it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 359.34it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+qwen-joint-shortlister-train:   0%|          | 0/240 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+qwen-joint-shortlister-train:   0%|          | 1/240 [00:13<54:15, 13.62s/it]qwen-joint-shortlister-train:   1%|          | 2/240 [00:15<27:38,  6.97s/it]qwen-joint-shortlister-train:   1%|▏         | 3/240 [00:19<21:21,  5.41s/it]qwen-joint-shortlister-train:   2%|▏         | 4/240 [00:23<18:31,  4.71s/it]qwen-joint-shortlister-train:   2%|▏         | 5/240 [00:25<14:56,  3.81s/it]qwen-joint-shortlister-train:   2%|▎         | 6/240 [00:28<14:27,  3.71s/it]qwen-joint-shortlister-train:   3%|▎         | 7/240 [00:42<26:48,  6.90s/it]qwen-joint-shortlister-train:   3%|▎         | 8/240 [00:55<34:16,  8.87s/it]qwen-joint-shortlister-train:   4%|▍         | 9/240 [00:58<27:45,  7.21s/it]qwen-joint-shortlister-train:   4%|▍         | 10/240 [01:01<21:47,  5.68s/it]                                                                              {"step": 10, "loss": 1.0551}
+qwen-joint-shortlister-train:   4%|▍         | 10/240 [01:01<21:47,  5.68s/it]qwen-joint-shortlister-train:   5%|▍         | 11/240 [01:14<30:19,  7.95s/it]qwen-joint-shortlister-train:   5%|▌         | 12/240 [01:17<25:13,  6.64s/it]qwen-joint-shortlister-train:   5%|▌         | 13/240 [01:21<21:39,  5.73s/it]qwen-joint-shortlister-train:   6%|▌         | 14/240 [01:25<19:05,  5.07s/it]qwen-joint-shortlister-train:   6%|▋         | 15/240 [01:38<28:04,  7.49s/it]qwen-joint-shortlister-train:   7%|▋         | 16/240 [01:51<34:41,  9.29s/it]qwen-joint-shortlister-train:   7%|▋         | 17/240 [01:54<26:44,  7.19s/it]qwen-joint-shortlister-train:   8%|▊         | 18/240 [02:07<33:13,  8.98s/it]qwen-joint-shortlister-train:   8%|▊         | 19/240 [02:08<25:01,  6.79s/it]qwen-joint-shortlister-train:   8%|▊         | 20/240 [02:21<31:51,  8.69s/it]                                                                              {"step": 20, "loss": 1.706}
+qwen-joint-shortlister-train:   8%|▊         | 20/240 [02:21<31:51,  8.69s/it]qwen-joint-shortlister-train:   9%|▉         | 21/240 [02:24<24:41,  6.77s/it]qwen-joint-shortlister-train:   9%|▉         | 22/240 [02:25<19:01,  5.24s/it]qwen-joint-shortlister-train:  10%|▉         | 23/240 [02:28<15:44,  4.35s/it]qwen-joint-shortlister-train:  10%|█         | 24/240 [02:29<12:50,  3.57s/it]qwen-joint-shortlister-train:  10%|█         | 25/240 [02:31<10:46,  3.01s/it]qwen-joint-shortlister-train:  11%|█         | 26/240 [02:33<09:21,  2.62s/it]qwen-joint-shortlister-train:  11%|█▏        | 27/240 [02:35<08:19,  2.34s/it]qwen-joint-shortlister-train:  12%|█▏        | 28/240 [02:48<19:40,  5.57s/it]qwen-joint-shortlister-train:  12%|█▏        | 29/240 [02:51<17:27,  4.96s/it]qwen-joint-shortlister-train:  12%|█▎        | 30/240 [02:53<14:29,  4.14s/it]                                                                              {"step": 30, "loss": 1.3087}
+qwen-joint-shortlister-train:  12%|█▎        | 30/240 [02:53<14:29,  4.14s/it]qwen-joint-shortlister-train:  13%|█▎        | 31/240 [02:55<11:55,  3.43s/it]qwen-joint-shortlister-train:  13%|█▎        | 32/240 [02:59<11:58,  3.46s/it]qwen-joint-shortlister-train:  14%|█▍        | 33/240 [03:00<10:05,  2.92s/it]qwen-joint-shortlister-train:  14%|█▍        | 34/240 [03:14<20:31,  5.98s/it]qwen-joint-shortlister-train:  15%|█▍        | 35/240 [03:16<16:35,  4.86s/it]qwen-joint-shortlister-train:  15%|█▌        | 36/240 [03:29<24:54,  7.33s/it]qwen-joint-shortlister-train:  15%|█▌        | 37/240 [03:31<19:07,  5.65s/it]qwen-joint-shortlister-train:  16%|█▌        | 38/240 [03:44<26:32,  7.89s/it]qwen-joint-shortlister-train:  16%|█▋        | 39/240 [03:57<31:41,  9.46s/it]qwen-joint-shortlister-train:  17%|█▋        | 40/240 [04:10<35:29, 10.65s/it]                                                                              {"step": 40, "loss": 1.5198}
+qwen-joint-shortlister-train:  17%|█▋        | 40/240 [04:10<35:29, 10.65s/it]qwen-joint-shortlister-train:  17%|█▋        | 41/240 [04:24<38:04, 11.48s/it]qwen-joint-shortlister-train:  18%|█▊        | 42/240 [04:37<39:29, 11.97s/it]qwen-joint-shortlister-train:  18%|█▊        | 43/240 [04:39<29:46,  9.07s/it]qwen-joint-shortlister-train:  18%|█▊        | 44/240 [04:52<33:34, 10.28s/it]qwen-joint-shortlister-train:  19%|█▉        | 45/240 [04:55<25:46,  7.93s/it]qwen-joint-shortlister-train:  19%|█▉        | 46/240 [04:56<19:39,  6.08s/it]qwen-joint-shortlister-train:  20%|█▉        | 47/240 [04:58<15:23,  4.78s/it]qwen-joint-shortlister-train:  20%|██        | 48/240 [05:00<12:23,  3.87s/it]qwen-joint-shortlister-train:  20%|██        | 49/240 [05:02<10:16,  3.23s/it]qwen-joint-shortlister-train:  21%|██        | 50/240 [05:15<19:54,  6.28s/it]                                                                              {"step": 50, "loss": 1.5598}
+qwen-joint-shortlister-train:  21%|██        | 50/240 [05:15<19:54,  6.28s/it]qwen-joint-shortlister-train:  21%|██▏       | 51/240 [05:19<17:12,  5.46s/it]qwen-joint-shortlister-train:  22%|██▏       | 52/240 [05:20<13:35,  4.34s/it]qwen-joint-shortlister-train:  22%|██▏       | 53/240 [05:22<11:30,  3.69s/it]qwen-joint-shortlister-train:  22%|██▎       | 54/240 [05:26<11:21,  3.66s/it]qwen-joint-shortlister-train:  23%|██▎       | 55/240 [05:28<10:00,  3.25s/it]qwen-joint-shortlister-train:  23%|██▎       | 56/240 [05:30<08:33,  2.79s/it]qwen-joint-shortlister-train:  24%|██▍       | 57/240 [05:32<08:03,  2.64s/it]qwen-joint-shortlister-train:  24%|██▍       | 58/240 [05:45<17:31,  5.78s/it]qwen-joint-shortlister-train:  25%|██▍       | 59/240 [05:47<13:45,  4.56s/it]qwen-joint-shortlister-train:  25%|██▌       | 60/240 [05:51<12:47,  4.27s/it]                                                                              {"step": 60, "loss": 1.3562}
+qwen-joint-shortlister-train:  25%|██▌       | 60/240 [05:51<12:47,  4.27s/it]qwen-joint-shortlister-train:  25%|██▌       | 61/240 [05:52<10:25,  3.49s/it]qwen-joint-shortlister-train:  26%|██▌       | 62/240 [05:56<10:29,  3.54s/it]qwen-joint-shortlister-train:  26%|██▋       | 63/240 [05:58<09:15,  3.14s/it]qwen-joint-shortlister-train:  27%|██▋       | 64/240 [06:00<08:00,  2.73s/it]qwen-joint-shortlister-train:  27%|██▋       | 65/240 [06:13<17:04,  5.85s/it]qwen-joint-shortlister-train:  28%|██▊       | 66/240 [06:17<14:58,  5.16s/it]qwen-joint-shortlister-train:  28%|██▊       | 67/240 [06:20<13:28,  4.67s/it]qwen-joint-shortlister-train:  28%|██▊       | 68/240 [06:23<11:18,  3.94s/it]qwen-joint-shortlister-train:  29%|██▉       | 69/240 [06:36<19:04,  6.70s/it]qwen-joint-shortlister-train:  29%|██▉       | 70/240 [06:49<24:26,  8.63s/it]                                                                              {"step": 70, "loss": 1.7412}
+qwen-joint-shortlister-train:  29%|██▉       | 70/240 [06:49<24:26,  8.63s/it]qwen-joint-shortlister-train:  30%|██▉       | 71/240 [07:02<28:08,  9.99s/it]qwen-joint-shortlister-train:  30%|███       | 72/240 [07:06<22:35,  8.07s/it]qwen-joint-shortlister-train:  30%|███       | 73/240 [07:09<18:44,  6.73s/it]qwen-joint-shortlister-train:  31%|███       | 74/240 [07:13<15:59,  5.78s/it]qwen-joint-shortlister-train:  31%|███▏      | 75/240 [07:15<12:59,  4.72s/it]qwen-joint-shortlister-train:  32%|███▏      | 76/240 [07:28<19:47,  7.24s/it]qwen-joint-shortlister-train:  32%|███▏      | 77/240 [07:42<24:42,  9.10s/it]qwen-joint-shortlister-train:  32%|███▎      | 78/240 [07:45<20:02,  7.42s/it]qwen-joint-shortlister-train:  33%|███▎      | 79/240 [07:47<15:18,  5.71s/it]qwen-joint-shortlister-train:  33%|███▎      | 80/240 [07:50<13:30,  5.07s/it]                                                                              {"step": 80, "loss": 1.4241}
+qwen-joint-shortlister-train:  33%|███▎      | 80/240 [07:50<13:30,  5.07s/it]qwen-joint-shortlister-train:  34%|███▍      | 81/240 [08:03<19:51,  7.49s/it]qwen-joint-shortlister-train:  34%|███▍      | 82/240 [08:07<16:41,  6.34s/it]qwen-joint-shortlister-train:  35%|███▍      | 83/240 [08:09<12:58,  4.96s/it]qwen-joint-shortlister-train:  35%|███▌      | 84/240 [08:11<10:47,  4.15s/it]qwen-joint-shortlister-train:  35%|███▌      | 85/240 [08:13<08:50,  3.42s/it]qwen-joint-shortlister-train:  36%|███▌      | 86/240 [08:15<07:57,  3.10s/it]qwen-joint-shortlister-train:  36%|███▋      | 87/240 [08:17<06:53,  2.70s/it]qwen-joint-shortlister-train:  37%|███▋      | 88/240 [08:21<07:31,  2.97s/it]qwen-joint-shortlister-train:  37%|███▋      | 89/240 [08:24<07:55,  3.15s/it]qwen-joint-shortlister-train:  38%|███▊      | 90/240 [08:28<08:09,  3.26s/it]                                                                              {"step": 90, "loss": 1.5217}
+qwen-joint-shortlister-train:  38%|███▊      | 90/240 [08:28<08:09,  3.26s/it]qwen-joint-shortlister-train:  38%|███▊      | 91/240 [08:30<07:23,  2.98s/it]qwen-joint-shortlister-train:  38%|███▊      | 92/240 [08:32<06:27,  2.62s/it]qwen-joint-shortlister-train:  39%|███▉      | 93/240 [08:34<05:49,  2.37s/it]qwen-joint-shortlister-train:  39%|███▉      | 94/240 [08:37<06:37,  2.72s/it]qwen-joint-shortlister-train:  40%|███▉      | 95/240 [08:41<07:12,  2.98s/it]qwen-joint-shortlister-train:  40%|████      | 96/240 [08:42<06:15,  2.61s/it]qwen-joint-shortlister-train:  40%|████      | 97/240 [08:44<05:35,  2.34s/it]qwen-joint-shortlister-train:  41%|████      | 98/240 [08:57<13:12,  5.58s/it]qwen-joint-shortlister-train:  41%|████▏     | 99/240 [08:59<10:23,  4.43s/it]qwen-joint-shortlister-train:  42%|████▏     | 100/240 [09:01<08:27,  3.62s/it]                                                                               {"step": 100, "loss": 1.0719}
+qwen-joint-shortlister-train:  42%|████▏     | 100/240 [09:01<08:27,  3.62s/it]qwen-joint-shortlister-train:  42%|████▏     | 101/240 [09:04<08:20,  3.60s/it]qwen-joint-shortlister-train:  42%|████▎     | 102/240 [09:08<08:15,  3.59s/it]qwen-joint-shortlister-train:  43%|████▎     | 103/240 [09:11<08:10,  3.58s/it]qwen-joint-shortlister-train:  43%|████▎     | 104/240 [09:25<14:35,  6.44s/it]qwen-joint-shortlister-train:  44%|████▍     | 105/240 [09:26<11:19,  5.03s/it]qwen-joint-shortlister-train:  44%|████▍     | 106/240 [09:30<10:14,  4.58s/it]qwen-joint-shortlister-train:  45%|████▍     | 107/240 [09:43<15:50,  7.14s/it]qwen-joint-shortlister-train:  45%|████▌     | 108/240 [09:46<13:20,  6.06s/it]qwen-joint-shortlister-train:  45%|████▌     | 109/240 [10:00<17:51,  8.18s/it]qwen-joint-shortlister-train:  46%|████▌     | 110/240 [10:03<14:43,  6.80s/it]                                                                               {"step": 110, "loss": 1.3755}
+qwen-joint-shortlister-train:  46%|████▌     | 110/240 [10:03<14:43,  6.80s/it]qwen-joint-shortlister-train:  46%|████▋     | 111/240 [10:16<18:41,  8.69s/it]qwen-joint-shortlister-train:  47%|████▋     | 112/240 [10:18<14:05,  6.61s/it]qwen-joint-shortlister-train:  47%|████▋     | 113/240 [10:31<18:07,  8.56s/it]qwen-joint-shortlister-train:  48%|████▊     | 114/240 [10:33<13:41,  6.52s/it]qwen-joint-shortlister-train:  48%|████▊     | 115/240 [10:35<10:55,  5.24s/it]qwen-joint-shortlister-train:  48%|████▊     | 116/240 [10:37<08:40,  4.19s/it]qwen-joint-shortlister-train:  49%|████▉     | 117/240 [10:50<14:05,  6.87s/it]qwen-joint-shortlister-train:  49%|████▉     | 118/240 [10:52<11:10,  5.49s/it]qwen-joint-shortlister-train:  50%|████▉     | 119/240 [10:54<08:48,  4.37s/it]qwen-joint-shortlister-train:  50%|█████     | 120/240 [10:58<08:14,  4.12s/it]                                                                               {"step": 120, "loss": 1.3219}
+qwen-joint-shortlister-train:  50%|█████     | 120/240 [10:58<08:14,  4.12s/it]qwen-joint-shortlister-train:  50%|█████     | 121/240 [11:00<07:06,  3.58s/it]qwen-joint-shortlister-train:  51%|█████     | 122/240 [11:04<07:04,  3.60s/it]qwen-joint-shortlister-train:  51%|█████▏    | 123/240 [11:17<12:45,  6.55s/it]qwen-joint-shortlister-train:  52%|█████▏    | 124/240 [11:19<10:11,  5.27s/it]qwen-joint-shortlister-train:  52%|█████▏    | 125/240 [11:22<08:21,  4.36s/it]qwen-joint-shortlister-train:  52%|█████▎    | 126/240 [11:23<06:47,  3.57s/it]qwen-joint-shortlister-train:  53%|█████▎    | 127/240 [11:26<06:01,  3.20s/it]qwen-joint-shortlister-train:  53%|█████▎    | 128/240 [11:29<06:09,  3.30s/it]qwen-joint-shortlister-train:  54%|█████▍    | 129/240 [11:42<11:33,  6.25s/it]qwen-joint-shortlister-train:  54%|█████▍    | 130/240 [11:45<09:18,  5.08s/it]                                                                               {"step": 130, "loss": 1.155}
+qwen-joint-shortlister-train:  54%|█████▍    | 130/240 [11:45<09:18,  5.08s/it]qwen-joint-shortlister-train:  55%|█████▍    | 131/240 [11:58<13:36,  7.49s/it]qwen-joint-shortlister-train:  55%|█████▌    | 132/240 [11:59<10:22,  5.76s/it]qwen-joint-shortlister-train:  55%|█████▌    | 133/240 [12:02<08:23,  4.71s/it]qwen-joint-shortlister-train:  56%|█████▌    | 134/240 [12:15<12:47,  7.24s/it]qwen-joint-shortlister-train:  56%|█████▋    | 135/240 [12:17<10:03,  5.75s/it]qwen-joint-shortlister-train:  57%|█████▋    | 136/240 [12:30<13:47,  7.95s/it]qwen-joint-shortlister-train:  57%|█████▋    | 137/240 [12:32<10:44,  6.25s/it]qwen-joint-shortlister-train:  57%|█████▊    | 138/240 [12:46<14:08,  8.32s/it]qwen-joint-shortlister-train:  58%|█████▊    | 139/240 [12:49<11:36,  6.89s/it]qwen-joint-shortlister-train:  58%|█████▊    | 140/240 [12:53<09:48,  5.89s/it]                                                                               {"step": 140, "loss": 1.344}
+qwen-joint-shortlister-train:  58%|█████▊    | 140/240 [12:53<09:48,  5.89s/it]qwen-joint-shortlister-train:  59%|█████▉    | 141/240 [13:06<13:17,  8.05s/it]qwen-joint-shortlister-train:  59%|█████▉    | 142/240 [13:08<10:18,  6.32s/it]qwen-joint-shortlister-train:  60%|█████▉    | 143/240 [13:12<08:51,  5.48s/it]qwen-joint-shortlister-train:  60%|██████    | 144/240 [13:13<06:58,  4.36s/it]qwen-joint-shortlister-train:  60%|██████    | 145/240 [13:26<11:03,  6.99s/it]qwen-joint-shortlister-train:  61%|██████    | 146/240 [13:28<08:27,  5.40s/it]qwen-joint-shortlister-train:  61%|██████▏   | 147/240 [13:30<06:55,  4.47s/it]qwen-joint-shortlister-train:  62%|██████▏   | 148/240 [13:44<11:07,  7.25s/it]qwen-joint-shortlister-train:  62%|██████▏   | 149/240 [13:57<13:39,  9.01s/it]qwen-joint-shortlister-train:  62%|██████▎   | 150/240 [14:01<11:03,  7.37s/it]                                                                               {"step": 150, "loss": 1.3738}
+qwen-joint-shortlister-train:  62%|██████▎   | 150/240 [14:01<11:03,  7.37s/it]qwen-joint-shortlister-train:  63%|██████▎   | 151/240 [14:03<08:41,  5.86s/it]qwen-joint-shortlister-train:  63%|██████▎   | 152/240 [14:05<06:47,  4.63s/it]qwen-joint-shortlister-train:  64%|██████▍   | 153/240 [14:07<05:41,  3.93s/it]qwen-joint-shortlister-train:  64%|██████▍   | 154/240 [14:10<04:57,  3.46s/it]qwen-joint-shortlister-train:  65%|██████▍   | 155/240 [14:11<04:09,  2.94s/it]qwen-joint-shortlister-train:  65%|██████▌   | 156/240 [14:24<08:23,  5.99s/it]qwen-joint-shortlister-train:  65%|██████▌   | 157/240 [14:38<11:14,  8.12s/it]qwen-joint-shortlister-train:  66%|██████▌   | 158/240 [14:41<09:12,  6.74s/it]qwen-joint-shortlister-train:  66%|██████▋   | 159/240 [14:43<07:17,  5.40s/it]qwen-joint-shortlister-train:  67%|██████▋   | 160/240 [14:56<10:16,  7.71s/it]                                                                               {"step": 160, "loss": 1.5164}
+qwen-joint-shortlister-train:  67%|██████▋   | 160/240 [14:56<10:16,  7.71s/it]qwen-joint-shortlister-train:  67%|██████▋   | 161/240 [14:58<07:47,  5.92s/it]qwen-joint-shortlister-train:  68%|██████▊   | 162/240 [15:02<06:46,  5.21s/it]qwen-joint-shortlister-train:  68%|██████▊   | 163/240 [15:04<05:33,  4.33s/it]qwen-joint-shortlister-train:  68%|██████▊   | 164/240 [15:17<08:49,  6.97s/it]qwen-joint-shortlister-train:  69%|██████▉   | 165/240 [15:30<11:00,  8.81s/it]qwen-joint-shortlister-train:  69%|██████▉   | 166/240 [15:32<08:14,  6.69s/it]qwen-joint-shortlister-train:  70%|██████▉   | 167/240 [15:35<06:58,  5.74s/it]qwen-joint-shortlister-train:  70%|███████   | 168/240 [15:39<06:05,  5.08s/it]qwen-joint-shortlister-train:  70%|███████   | 169/240 [15:43<05:27,  4.62s/it]qwen-joint-shortlister-train:  71%|███████   | 170/240 [15:44<04:20,  3.73s/it]                                                                               {"step": 170, "loss": 0.9623}
+qwen-joint-shortlister-train:  71%|███████   | 170/240 [15:44<04:20,  3.73s/it]qwen-joint-shortlister-train:  71%|███████▏  | 171/240 [15:46<03:35,  3.12s/it]qwen-joint-shortlister-train:  72%|███████▏  | 172/240 [15:48<03:15,  2.87s/it]qwen-joint-shortlister-train:  72%|███████▏  | 173/240 [15:51<03:01,  2.71s/it]qwen-joint-shortlister-train:  72%|███████▎  | 174/240 [15:53<02:50,  2.58s/it]qwen-joint-shortlister-train:  73%|███████▎  | 175/240 [15:55<02:42,  2.50s/it]qwen-joint-shortlister-train:  73%|███████▎  | 176/240 [15:59<03:00,  2.82s/it]qwen-joint-shortlister-train:  74%|███████▍  | 177/240 [16:01<02:46,  2.64s/it]qwen-joint-shortlister-train:  74%|███████▍  | 178/240 [16:14<05:58,  5.77s/it]qwen-joint-shortlister-train:  75%|███████▍  | 179/240 [16:18<05:11,  5.11s/it]qwen-joint-shortlister-train:  75%|███████▌  | 180/240 [16:19<04:04,  4.08s/it]                                                                               {"step": 180, "loss": 1.2059}
+qwen-joint-shortlister-train:  75%|███████▌  | 180/240 [16:19<04:04,  4.08s/it]qwen-joint-shortlister-train:  75%|███████▌  | 181/240 [16:32<06:40,  6.79s/it]qwen-joint-shortlister-train:  76%|███████▌  | 182/240 [16:35<05:16,  5.46s/it]qwen-joint-shortlister-train:  76%|███████▋  | 183/240 [16:38<04:38,  4.89s/it]qwen-joint-shortlister-train:  77%|███████▋  | 184/240 [16:51<06:52,  7.37s/it]qwen-joint-shortlister-train:  77%|███████▋  | 185/240 [16:53<05:11,  5.67s/it]qwen-joint-shortlister-train:  78%|███████▊  | 186/240 [17:06<07:07,  7.91s/it]qwen-joint-shortlister-train:  78%|███████▊  | 187/240 [17:09<05:30,  6.24s/it]qwen-joint-shortlister-train:  78%|███████▊  | 188/240 [17:12<04:42,  5.44s/it]qwen-joint-shortlister-train:  79%|███████▉  | 189/240 [17:14<03:40,  4.32s/it]qwen-joint-shortlister-train:  79%|███████▉  | 190/240 [17:17<03:24,  4.09s/it]                                                                               {"step": 190, "loss": 1.4667}
+qwen-joint-shortlister-train:  79%|███████▉  | 190/240 [17:17<03:24,  4.09s/it]qwen-joint-shortlister-train:  80%|███████▉  | 191/240 [17:21<03:12,  3.93s/it]qwen-joint-shortlister-train:  80%|████████  | 192/240 [17:34<05:21,  6.69s/it]qwen-joint-shortlister-train:  80%|████████  | 193/240 [17:36<04:12,  5.38s/it]qwen-joint-shortlister-train:  81%|████████  | 194/240 [17:40<03:42,  4.83s/it]qwen-joint-shortlister-train:  81%|████████▏ | 195/240 [17:44<03:19,  4.44s/it]qwen-joint-shortlister-train:  82%|████████▏ | 196/240 [17:46<02:47,  3.80s/it]qwen-joint-shortlister-train:  82%|████████▏ | 197/240 [17:48<02:16,  3.18s/it]qwen-joint-shortlister-train:  82%|████████▎ | 198/240 [17:49<01:55,  2.75s/it]qwen-joint-shortlister-train:  83%|████████▎ | 199/240 [18:02<04:00,  5.87s/it]qwen-joint-shortlister-train:  83%|████████▎ | 200/240 [18:06<03:27,  5.18s/it]                                                                               {"step": 200, "loss": 1.4297}
+qwen-joint-shortlister-train:  83%|████████▎ | 200/240 [18:06<03:27,  5.18s/it]qwen-joint-shortlister-train:  84%|████████▍ | 201/240 [18:08<02:42,  4.16s/it]qwen-joint-shortlister-train:  84%|████████▍ | 202/240 [18:10<02:16,  3.59s/it]qwen-joint-shortlister-train:  85%|████████▍ | 203/240 [18:23<03:58,  6.44s/it]qwen-joint-shortlister-train:  85%|████████▌ | 204/240 [18:26<03:07,  5.21s/it]qwen-joint-shortlister-train:  85%|████████▌ | 205/240 [18:29<02:45,  4.72s/it]qwen-joint-shortlister-train:  86%|████████▌ | 206/240 [18:31<02:15,  3.99s/it]qwen-joint-shortlister-train:  86%|████████▋ | 207/240 [18:34<01:54,  3.48s/it]qwen-joint-shortlister-train:  87%|████████▋ | 208/240 [18:35<01:34,  2.96s/it]qwen-joint-shortlister-train:  87%|████████▋ | 209/240 [18:49<03:06,  6.01s/it]qwen-joint-shortlister-train:  88%|████████▊ | 210/240 [18:50<02:22,  4.74s/it]                                                                               {"step": 210, "loss": 0.9842}
+qwen-joint-shortlister-train:  88%|████████▊ | 210/240 [18:50<02:22,  4.74s/it]qwen-joint-shortlister-train:  88%|████████▊ | 211/240 [19:03<03:30,  7.25s/it]qwen-joint-shortlister-train:  88%|████████▊ | 212/240 [19:05<02:36,  5.60s/it]qwen-joint-shortlister-train:  89%|████████▉ | 213/240 [19:07<01:59,  4.44s/it]qwen-joint-shortlister-train:  89%|████████▉ | 214/240 [19:20<03:03,  7.05s/it]qwen-joint-shortlister-train:  90%|████████▉ | 215/240 [19:24<02:29,  6.00s/it]qwen-joint-shortlister-train:  90%|█████████ | 216/240 [19:26<01:57,  4.90s/it]qwen-joint-shortlister-train:  90%|█████████ | 217/240 [19:28<01:30,  3.95s/it]qwen-joint-shortlister-train:  91%|█████████ | 218/240 [19:29<01:12,  3.28s/it]qwen-joint-shortlister-train:  91%|█████████▏| 219/240 [19:31<00:59,  2.82s/it]qwen-joint-shortlister-train:  92%|█████████▏| 220/240 [19:33<00:53,  2.67s/it]                                                                               {"step": 220, "loss": 1.2607}
+qwen-joint-shortlister-train:  92%|█████████▏| 220/240 [19:33<00:53,  2.67s/it]qwen-joint-shortlister-train:  92%|█████████▏| 221/240 [19:35<00:46,  2.43s/it]qwen-joint-shortlister-train:  92%|█████████▎| 222/240 [19:48<01:41,  5.63s/it]qwen-joint-shortlister-train:  93%|█████████▎| 223/240 [19:50<01:16,  4.49s/it]qwen-joint-shortlister-train:  93%|█████████▎| 224/240 [19:52<00:58,  3.67s/it]qwen-joint-shortlister-train:  94%|█████████▍| 225/240 [20:05<01:37,  6.51s/it]qwen-joint-shortlister-train:  94%|█████████▍| 226/240 [20:07<01:13,  5.25s/it]qwen-joint-shortlister-train:  95%|█████████▍| 227/240 [20:21<01:38,  7.61s/it]qwen-joint-shortlister-train:  95%|█████████▌| 228/240 [20:34<01:51,  9.26s/it]qwen-joint-shortlister-train:  95%|█████████▌| 229/240 [20:47<01:55, 10.51s/it]qwen-joint-shortlister-train:  96%|█████████▌| 230/240 [20:51<01:24,  8.42s/it]                                                                               {"step": 230, "loss": 1.4215}
+qwen-joint-shortlister-train:  96%|█████████▌| 230/240 [20:51<01:24,  8.42s/it]qwen-joint-shortlister-train:  96%|█████████▋| 231/240 [20:54<01:02,  6.96s/it]qwen-joint-shortlister-train:  97%|█████████▋| 232/240 [20:57<00:44,  5.57s/it]qwen-joint-shortlister-train:  97%|█████████▋| 233/240 [21:00<00:34,  4.96s/it]qwen-joint-shortlister-train:  98%|█████████▊| 234/240 [21:02<00:23,  4.00s/it]qwen-joint-shortlister-train:  98%|█████████▊| 235/240 [21:04<00:16,  3.32s/it]qwen-joint-shortlister-train:  98%|█████████▊| 236/240 [21:06<00:12,  3.02s/it]qwen-joint-shortlister-train:  99%|█████████▉| 237/240 [21:08<00:07,  2.62s/it]qwen-joint-shortlister-train:  99%|█████████▉| 238/240 [21:10<00:05,  2.52s/it]qwen-joint-shortlister-train: 100%|█████████▉| 239/240 [21:13<00:02,  2.83s/it]qwen-joint-shortlister-train: 100%|██████████| 240/240 [21:27<00:00,  5.92s/it]                                                                               {"step": 240, "loss": 1.7692}
+qwen-joint-shortlister-train: 100%|██████████| 240/240 [21:27<00:00,  5.92s/it]qwen-joint-shortlister-train: 100%|██████████| 240/240 [21:27<00:00,  5.36s/it]
+{
+  "batch_size": 1,
+  "grad_accum": 1,
+  "learning_rate": 0.0002,
+  "losses": [
+    {
+      "loss": 3.2945146560668945,
+      "step": 1
+    },
+    {
+      "loss": 1.3669049739837646,
+      "step": 2
+    },
+    {
+      "loss": 1.3895392417907715,
+      "step": 3
+    },
+    {
+      "loss": 1.5054296255111694,
+      "step": 4
+    },
+    {
+      "loss": 1.4088923931121826,
+      "step": 5
+    },
+    {
+      "loss": 1.6247395277023315,
+      "step": 6
+    },
+    {
+      "loss": 1.5486979484558105,
+      "step": 7
+    },
+    {
+      "loss": 1.529878854751587,
+      "step": 8
+    },
+    {
+      "loss": 1.4132475852966309,
+      "step": 9
+    },
+    {
+      "loss": 1.055149793624878,
+      "step": 10
+    },
+    {
+      "loss": 2.000213146209717,
+      "step": 11
+    },
+    {
+      "loss": 1.4079076051712036,
+      "step": 12
+    },
+    {
+      "loss": 1.3378071784973145,
+      "step": 13
+    },
+    {
+      "loss": 1.3033099174499512,
+      "step": 14
+    },
+    {
+      "loss": 1.534653663635254,
+      "step": 15
+    },
+    {
+      "loss": 1.4473850727081299,
+      "step": 16
+    },
+    {
+      "loss": 0.9224752187728882,
+      "step": 17
+    },
+    {
+      "loss": 2.3247385025024414,
+      "step": 18
+    },
+    {
+      "loss": 1.7343461513519287,
+      "step": 19
+    },
+    {
+      "loss": 1.7059592008590698,
+      "step": 20
+    },
+    {
+      "loss": 2.1929800510406494,
+      "step": 21
+    },
+    {
+      "loss": 1.3705356121063232,
+      "step": 22
+    },
+    {
+      "loss": 1.0685102939605713,
+      "step": 23
+    },
+    {
+      "loss": 0.8994020819664001,
+      "step": 24
+    },
+    {
+      "loss": 1.8107866048812866,
+      "step": 25
+    },
+    {
+      "loss": 1.2273261547088623,
+      "step": 26
+    },
+    {
+      "loss": 1.3833696842193604,
+      "step": 27
+    },
+    {
+      "loss": 1.7900691032409668,
+      "step": 28
+    },
+    {
+      "loss": 1.3375942707061768,
+      "step": 29
+    },
+    {
+      "loss": 1.3086634874343872,
+      "step": 30
+    },
+    {
+      "loss": 1.1060150861740112,
+      "step": 31
+    },
+    {
+      "loss": 1.454827070236206,
+      "step": 32
+    },
+    {
+      "loss": 1.090957522392273,
+      "step": 33
+    },
+    {
+      "loss": 1.6768755912780762,
+      "step": 34
+    },
+    {
+      "loss": 1.2512099742889404,
+      "step": 35
+    },
+    {
+      "loss": 1.5659891366958618,
+      "step": 36
+    },
+    {
+      "loss": 1.0068461894989014,
+      "step": 37
+    },
+    {
+      "loss": 1.8282638788223267,
+      "step": 38
+    },
+    {
+      "loss": 1.6586034297943115,
+      "step": 39
+    },
+    {
+      "loss": 1.5197877883911133,
+      "step": 40
+    },
+    {
+      "loss": 1.585664987564087,
+      "step": 41
+    },
+    {
+      "loss": 1.6139392852783203,
+      "step": 42
+    },
+    {
+      "loss": 1.3395111560821533,
+      "step": 43
+    },
+    {
+      "loss": 1.724250078201294,
+      "step": 44
+    },
+    {
+      "loss": 1.340260624885559,
+      "step": 45
+    },
+    {
+      "loss": 1.1793760061264038,
+      "step": 46
+    },
+    {
+      "loss": 1.003706693649292,
+      "step": 47
+    },
+    {
+      "loss": 1.112676978111267,
+      "step": 48
+    },
+    {
+      "loss": 1.0395231246948242,
+      "step": 49
+    },
+    {
+      "loss": 1.5597658157348633,
+      "step": 50
+    },
+    {
+      "loss": 1.4217264652252197,
+      "step": 51
+    },
+    {
+      "loss": 1.1882808208465576,
+      "step": 52
+    },
+    {
+      "loss": 1.2001023292541504,
+      "step": 53
+    },
+    {
+      "loss": 1.7193710803985596,
+      "step": 54
+    },
+    {
+      "loss": 1.5567405223846436,
+      "step": 55
+    },
+    {
+      "loss": 1.2455315589904785,
+      "step": 56
+    },
+    {
+      "loss": 1.2639080286026,
+      "step": 57
+    },
+    {
+      "loss": 1.518412709236145,
+      "step": 58
+    },
+    {
+      "loss": 1.1754670143127441,
+      "step": 59
+    },
+    {
+      "loss": 1.3561725616455078,
+      "step": 60
+    },
+    {
+      "loss": 1.0412558317184448,
+      "step": 61
+    },
+    {
+      "loss": 1.445300817489624,
+      "step": 62
+    },
+    {
+      "loss": 1.2059917449951172,
+      "step": 63
+    },
+    {
+      "loss": 1.597468376159668,
+      "step": 64
+    },
+    {
+      "loss": 1.8635660409927368,
+      "step": 65
+    },
+    {
+      "loss": 1.385579228401184,
+      "step": 66
+    },
+    {
+      "loss": 1.2863361835479736,
+      "step": 67
+    },
+    {
+      "loss": 1.3820234537124634,
+      "step": 68
+    },
+    {
+      "loss": 1.752382755279541,
+      "step": 69
+    },
+    {
+      "loss": 1.7411975860595703,
+      "step": 70
+    },
+    {
+      "loss": 1.6751000881195068,
+      "step": 71
+    },
+    {
+      "loss": 1.4305369853973389,
+      "step": 72
+    },
+    {
+      "loss": 1.7409512996673584,
+      "step": 73
+    },
+    {
+      "loss": 1.4561481475830078,
+      "step": 74
+    },
+    {
+      "loss": 1.220224142074585,
+      "step": 75
+    },
+    {
+      "loss": 1.8656328916549683,
+      "step": 76
+    },
+    {
+      "loss": 1.5022573471069336,
+      "step": 77
+    },
+    {
+      "loss": 1.4673070907592773,
+      "step": 78
+    },
+    {
+      "loss": 1.1028251647949219,
+      "step": 79
+    },
+    {
+      "loss": 1.4241108894348145,
+      "step": 80
+    },
+    {
+      "loss": 1.483553171157837,
+      "step": 81
+    },
+    {
+      "loss": 1.3785793781280518,
+      "step": 82
+    },
+    {
+      "loss": 1.1649419069290161,
+      "step": 83
+    },
+    {
+      "loss": 1.175910234451294,
+      "step": 84
+    },
+    {
+      "loss": 1.1915476322174072,
+      "step": 85
+    },
+    {
+      "loss": 1.2706598043441772,
+      "step": 86
+    },
+    {
+      "loss": 1.0553038120269775,
+      "step": 87
+    },
+    {
+      "loss": 1.4513731002807617,
+      "step": 88
+    },
+    {
+      "loss": 1.3551909923553467,
+      "step": 89
+    },
+    {
+      "loss": 1.5216567516326904,
+      "step": 90
+    },
+    {
+      "loss": 1.1767857074737549,
+      "step": 91
+    },
+    {
+      "loss": 1.0953805446624756,
+      "step": 92
+    },
+    {
+      "loss": 1.0749356746673584,
+      "step": 93
+    },
+    {
+      "loss": 1.5720288753509521,
+      "step": 94
+    },
+    {
+      "loss": 1.1734130382537842,
+      "step": 95
+    },
+    {
+      "loss": 1.1215384006500244,
+      "step": 96
+    },
+    {
+      "loss": 0.9411464929580688,
+      "step": 97
+    },
+    {
+      "loss": 1.9482409954071045,
+      "step": 98
+    },
+    {
+      "loss": 1.5477759838104248,
+      "step": 99
+    },
+    {
+      "loss": 1.0719369649887085,
+      "step": 100
+    },
+    {
+      "loss": 1.442831039428711,
+      "step": 101
+    },
+    {
+      "loss": 1.3773303031921387,
+      "step": 102
+    },
+    {
+      "loss": 1.509559154510498,
+      "step": 103
+    },
+    {
+      "loss": 1.577927589416504,
+      "step": 104
+    },
+    {
+      "loss": 1.0378553867340088,
+      "step": 105
+    },
+    {
+      "loss": 1.3978371620178223,
+      "step": 106
+    },
+    {
+      "loss": 1.6263015270233154,
+      "step": 107
+    },
+    {
+      "loss": 1.4635268449783325,
+      "step": 108
+    },
+    {
+      "loss": 1.5543209314346313,
+      "step": 109
+    },
+    {
+      "loss": 1.375483512878418,
+      "step": 110
+    },
+    {
+      "loss": 1.6524078845977783,
+      "step": 111
+    },
+    {
+      "loss": 1.2007238864898682,
+      "step": 112
+    },
+    {
+      "loss": 1.7029669284820557,
+      "step": 113
+    },
+    {
+      "loss": 1.1045491695404053,
+      "step": 114
+    },
+    {
+      "loss": 1.2024626731872559,
+      "step": 115
+    },
+    {
+      "loss": 1.0487711429595947,
+      "step": 116
+    },
+    {
+      "loss": 1.6581836938858032,
+      "step": 117
+    },
+    {
+      "loss": 1.2478463649749756,
+      "step": 118
+    },
+    {
+      "loss": 1.0219924449920654,
+      "step": 119
+    },
+    {
+      "loss": 1.3219306468963623,
+      "step": 120
+    },
+    {
+      "loss": 1.265828251838684,
+      "step": 121
+    },
+    {
+      "loss": 1.4808979034423828,
+      "step": 122
+    },
+    {
+      "loss": 1.4916008710861206,
+      "step": 123
+    },
+    {
+      "loss": 1.3305436372756958,
+      "step": 124
+    },
+    {
+      "loss": 1.2880305051803589,
+      "step": 125
+    },
+    {
+      "loss": 0.8202970623970032,
+      "step": 126
+    },
+    {
+      "loss": 1.2791937589645386,
+      "step": 127
+    },
+    {
+      "loss": 1.50313138961792,
+      "step": 128
+    },
+    {
+      "loss": 2.7380175590515137,
+      "step": 129
+    },
+    {
+      "loss": 1.154962182044983,
+      "step": 130
+    },
+    {
+      "loss": 1.7463122606277466,
+      "step": 131
+    },
+    {
+      "loss": 1.7752556800842285,
+      "step": 132
+    },
+    {
+      "loss": 1.1673188209533691,
+      "step": 133
+    },
+    {
+      "loss": 1.7004921436309814,
+      "step": 134
+    },
+    {
+      "loss": 1.1788220405578613,
+      "step": 135
+    },
+    {
+      "loss": 1.7679545879364014,
+      "step": 136
+    },
+    {
+      "loss": 1.275235891342163,
+      "step": 137
+    },
+    {
+      "loss": 1.5896401405334473,
+      "step": 138
+    },
+    {
+      "loss": 1.246349573135376,
+      "step": 139
+    },
+    {
+      "loss": 1.3440214395523071,
+      "step": 140
+    },
+    {
+      "loss": 1.566934585571289,
+      "step": 141
+    },
+    {
+      "loss": 1.2994825839996338,
+      "step": 142
+    },
+    {
+      "loss": 1.4811689853668213,
+      "step": 143
+    },
+    {
+      "loss": 1.2763553857803345,
+      "step": 144
+    },
+    {
+      "loss": 1.5907037258148193,
+      "step": 145
+    },
+    {
+      "loss": 1.1480536460876465,
+      "step": 146
+    },
+    {
+      "loss": 1.1165120601654053,
+      "step": 147
+    },
+    {
+      "loss": 1.4892436265945435,
+      "step": 148
+    },
+    {
+      "loss": 1.7427401542663574,
+      "step": 149
+    },
+    {
+      "loss": 1.3738160133361816,
+      "step": 150
+    },
+    {
+      "loss": 1.229934811592102,
+      "step": 151
+    },
+    {
+      "loss": 1.1284185647964478,
+      "step": 152
+    },
+    {
+      "loss": 1.2212063074111938,
+      "step": 153
+    },
+    {
+      "loss": 1.7781977653503418,
+      "step": 154
+    },
+    {
+      "loss": 1.0236246585845947,
+      "step": 155
+    },
+    {
+      "loss": 1.5289955139160156,
+      "step": 156
+    },
+    {
+      "loss": 1.6409780979156494,
+      "step": 157
+    },
+    {
+      "loss": 1.4648628234863281,
+      "step": 158
+    },
+    {
+      "loss": 1.2507778406143188,
+      "step": 159
+    },
+    {
+      "loss": 1.51643705368042,
+      "step": 160
+    },
+    {
+      "loss": 1.0180213451385498,
+      "step": 161
+    },
+    {
+      "loss": 1.4118963479995728,
+      "step": 162
+    },
+    {
+      "loss": 1.3159266710281372,
+      "step": 163
+    },
+    {
+      "loss": 1.5250132083892822,
+      "step": 164
+    },
+    {
+      "loss": 1.7209622859954834,
+      "step": 165
+    },
+    {
+      "loss": 0.9950646162033081,
+      "step": 166
+    },
+    {
+      "loss": 1.3012940883636475,
+      "step": 167
+    },
+    {
+      "loss": 1.5750732421875,
+      "step": 168
+    },
+    {
+      "loss": 1.4002302885055542,
+      "step": 169
+    },
+    {
+      "loss": 0.9622549414634705,
+      "step": 170
+    },
+    {
+      "loss": 0.9362399578094482,
+      "step": 171
+    },
+    {
+      "loss": 1.4444122314453125,
+      "step": 172
+    },
+    {
+      "loss": 1.242187738418579,
+      "step": 173
+    },
+    {
+      "loss": 1.2616000175476074,
+      "step": 174
+    },
+    {
+      "loss": 1.2090567350387573,
+      "step": 175
+    },
+    {
+      "loss": 1.3280632495880127,
+      "step": 176
+    },
+    {
+      "loss": 1.2849146127700806,
+      "step": 177
+    },
+    {
+      "loss": 1.654783844947815,
+      "step": 178
+    },
+    {
+      "loss": 1.547523856163025,
+      "step": 179
+    },
+    {
+      "loss": 1.2059283256530762,
+      "step": 180
+    },
+    {
+      "loss": 1.5592453479766846,
+      "step": 181
+    },
+    {
+      "loss": 1.148380160331726,
+      "step": 182
+    },
+    {
+      "loss": 1.3877365589141846,
+      "step": 183
+    },
+    {
+      "loss": 1.526134729385376,
+      "step": 184
+    },
+    {
+      "loss": 1.21720552444458,
+      "step": 185
+    },
+    {
+      "loss": 1.492502212524414,
+      "step": 186
+    },
+    {
+      "loss": 1.3479933738708496,
+      "step": 187
+    },
+    {
+      "loss": 1.432035207748413,
+      "step": 188
+    },
+    {
+      "loss": 1.0133239030838013,
+      "step": 189
+    },
+    {
+      "loss": 1.46673583984375,
+      "step": 190
+    },
+    {
+      "loss": 1.3357468843460083,
+      "step": 191
+    },
+    {
+      "loss": 1.5525720119476318,
+      "step": 192
+    },
+    {
+      "loss": 1.2882249355316162,
+      "step": 193
+    },
+    {
+      "loss": 1.222291350364685,
+      "step": 194
+    },
+    {
+      "loss": 1.3795835971832275,
+      "step": 195
+    },
+    {
+      "loss": 1.3701083660125732,
+      "step": 196
+    },
+    {
+      "loss": 2.1886050701141357,
+      "step": 197
+    },
+    {
+      "loss": 1.045183777809143,
+      "step": 198
+    },
+    {
+      "loss": 1.6589107513427734,
+      "step": 199
+    },
+    {
+      "loss": 1.4296947717666626,
+      "step": 200
+    },
+    {
+      "loss": 1.0701944828033447,
+      "step": 201
+    },
+    {
+      "loss": 1.1973685026168823,
+      "step": 202
+    },
+    {
+      "loss": 1.656774878501892,
+      "step": 203
+    },
+    {
+      "loss": 1.3949352502822876,
+      "step": 204
+    },
+    {
+      "loss": 1.4149446487426758,
+      "step": 205
+    },
+    {
+      "loss": 1.0655072927474976,
+      "step": 206
+    },
+    {
+      "loss": 2.1924524307250977,
+      "step": 207
+    },
+    {
+      "loss": 1.0813599824905396,
+      "step": 208
+    },
+    {
+      "loss": 1.7445321083068848,
+      "step": 209
+    },
+    {
+      "loss": 0.9841560125350952,
+      "step": 210
+    },
+    {
+      "loss": 1.58064603805542,
+      "step": 211
+    },
+    {
+      "loss": 1.046815276145935,
+      "step": 212
+    },
+    {
+      "loss": 1.0523614883422852,
+      "step": 213
+    },
+    {
+      "loss": 1.595170497894287,
+      "step": 214
+    },
+    {
+      "loss": 1.329288125038147,
+      "step": 215
+    },
+    {
+      "loss": 1.3169301748275757,
+      "step": 216
+    },
+    {
+      "loss": 1.0185341835021973,
+      "step": 217
+    },
+    {
+      "loss": 0.9796619415283203,
+      "step": 218
+    },
+    {
+      "loss": 1.1892426013946533,
+      "step": 219
+    },
+    {
+      "loss": 1.2606916427612305,
+      "step": 220
+    },
+    {
+      "loss": 1.0549160242080688,
+      "step": 221
+    },
+    {
+      "loss": 1.5623059272766113,
+      "step": 222
+    },
+    {
+      "loss": 1.0938431024551392,
+      "step": 223
+    },
+    {
+      "loss": 1.088154673576355,
+      "step": 224
+    },
+    {
+      "loss": 1.547123908996582,
+      "step": 225
+    },
+    {
+      "loss": 1.1521580219268799,
+      "step": 226
+    },
+    {
+      "loss": 1.591740369796753,
+      "step": 227
+    },
+    {
+      "loss": 1.630025863647461,
+      "step": 228
+    },
+    {
+      "loss": 1.502122402191162,
+      "step": 229
+    },
+    {
+      "loss": 1.4214959144592285,
+      "step": 230
+    },
+    {
+      "loss": 1.48204505443573,
+      "step": 231
+    },
+    {
+      "loss": 1.085716724395752,
+      "step": 232
+    },
+    {
+      "loss": 1.326920747756958,
+      "step": 233
+    },
+    {
+      "loss": 1.0697988271713257,
+      "step": 234
+    },
+    {
+      "loss": 1.4158867597579956,
+      "step": 235
+    },
+    {
+      "loss": 1.2568162679672241,
+      "step": 236
+    },
+    {
+      "loss": 0.9915112257003784,
+      "step": 237
+    },
+    {
+      "loss": 1.33530855178833,
+      "step": 238
+    },
+    {
+      "loss": 1.5412516593933105,
+      "step": 239
+    },
+    {
+      "loss": 1.7691676616668701,
+      "step": 240
+    }
+  ],
+  "max_length": 5120,
+  "max_steps": 240,
+  "raw_train_examples": 768,
+  "tokenized_examples": 768,
+  "train_examples_seen": 240
+}

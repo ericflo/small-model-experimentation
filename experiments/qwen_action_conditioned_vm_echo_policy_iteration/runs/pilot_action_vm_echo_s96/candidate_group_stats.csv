@@ -1,0 +1,3 @@
+phase,groups,candidates,positive_candidates,positive_rate,oracle_found_rate,mean_candidates
+train_candidates,256.0,48384.0,1936.0,0.040013227513227514,0.21875,189.0
+val_candidates,64.0,12096.0,462.0,0.03819444444444445,0.21875,189.0

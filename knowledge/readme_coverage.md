@@ -1,0 +1,179 @@
+# README Coverage
+
+Top-level README files are required for all experiments. Generated entries should be replaced with human-authored summaries when the experiment is revisited.
+
+## Generated During Normalization
+
+- `qwen35_4b_diversity_keyed_coverage_gate`
+- `qwen35_4b_humaneval_adaptive_budget`
+- `qwen35_4b_oracle_distilled_semantic_verifier`
+- `qwen35_4b_passk_coverage_rl`
+- `qwen35_4b_prefix_value_guided_search`
+- `qwen35_4b_real_sample_verify_commit`
+- `qwen35_4b_strategy_token_diversity_lora`
+- `qwen35_4b_substrate_coverage_ladder`
+- `qwen35_4b_trained_vs_frozen_repair_mdp`
+- `qwen35_4b_verifier_guided_self_improvement`
+- `qwen_counterexample_guided_projection`
+- `qwen_full_table_consistency_reranker`
+- `qwen_pairwise_table_judge`
+
+## Current Status
+
+| Experiment | README | Report |
+| --- | --- | --- |
+| `adaptive_cognitive_kernel` | [README](../experiments/adaptive_cognitive_kernel/README.md) | [report](../experiments/adaptive_cognitive_kernel/reports/adaptive_cognitive_kernel_report.md) |
+| `belief_filter_executor` | [README](../experiments/belief_filter_executor/README.md) | [report](../experiments/belief_filter_executor/reports/belief_filter_executor_paper.md) |
+| `bridge_dose_recombination_curriculum` | [README](../experiments/bridge_dose_recombination_curriculum/README.md) | [report](../experiments/bridge_dose_recombination_curriculum/reports/bridge_dose_recombination_curriculum_report.md) |
+| `counterexample_rule_repair` | [README](../experiments/counterexample_rule_repair/README.md) | [report](../experiments/counterexample_rule_repair/reports/counterexample_rule_repair_paper.md) |
+| `cyclic_transition_ladder` | [README](../experiments/cyclic_transition_ladder/README.md) | [report](../experiments/cyclic_transition_ladder/reports/cyclic_transition_ladder_paper.md) |
+| `dense_latent_query_executor` | [README](../experiments/dense_latent_query_executor/README.md) | [report](../experiments/dense_latent_query_executor/reports/dense_latent_query_executor_paper.md) |
+| `dense_supervision_ladder` | [README](../experiments/dense_supervision_ladder/README.md) | [report](../experiments/dense_supervision_ladder/reports/dense_supervision_ladder_paper.md) |
+| `dense_teacher_distillation` | [README](../experiments/dense_teacher_distillation/README.md) | [report](../experiments/dense_teacher_distillation/reports/dense_teacher_distillation_paper.md) |
+| `end_to_end_structured_slot_executor` | [README](../experiments/end_to_end_structured_slot_executor/README.md) | [report](../experiments/end_to_end_structured_slot_executor/reports/end_to_end_structured_slot_paper.md) |
+| `episodic_echo_ttt` | [README](../experiments/episodic_echo_ttt/README.md) | [report](../experiments/episodic_echo_ttt/reports/episodic_echo_ttt_report.md) |
+| `execution_conditioned_repair` | [README](../experiments/execution_conditioned_repair/README.md) | [report](../experiments/execution_conditioned_repair/reports/transfer_gap_report.md) |
+| `factor_recombination_ladder` | [README](../experiments/factor_recombination_ladder/README.md) | [report](../experiments/factor_recombination_ladder/reports/factor_recombination_ladder_report.md) |
+| `feature_factorized_rule_diversity` | [README](../experiments/feature_factorized_rule_diversity/README.md) | [report](../experiments/feature_factorized_rule_diversity/reports/feature_factorized_rule_diversity_report.md) |
+| `joint_register_executor` | [README](../experiments/joint_register_executor/README.md) | [report](../experiments/joint_register_executor/reports/joint_register_executor_paper.md) |
+| `latent_executor` | [README](../experiments/latent_executor/README.md) | [report](../experiments/latent_executor/reports/latent_executor_paper.md) |
+| `learned_sparse_slot_executor` | [README](../experiments/learned_sparse_slot_executor/README.md) | [report](../experiments/learned_sparse_slot_executor/reports/learned_sparse_slot_paper.md) |
+| `query_filter_executor` | [README](../experiments/query_filter_executor/README.md) | [report](../experiments/query_filter_executor/reports/query_filter_executor_paper.md) |
+| `qwen35_4b_active_counterexample_trace_selection` | [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md) | [report](../experiments/qwen35_4b_active_counterexample_trace_selection/reports/qwen35_4b_active_counterexample_trace_selection_report.md) |
+| `qwen35_4b_adaptive_evidence_budget_policy` | [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md) | [report](../experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md) |
+| `qwen35_4b_adaptive_tool_controller` | [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) |
+| `qwen35_4b_balanced_discriminative_bridge` | [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md) | [report](../experiments/qwen35_4b_balanced_discriminative_bridge/reports/qwen35_4b_balanced_discriminative_bridge_report.md) |
+| `qwen35_4b_bucket_belief_probe_ranker` | [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md) | [report](../experiments/qwen35_4b_bucket_belief_probe_ranker/reports/qwen35_4b_bucket_belief_probe_ranker_report.md) |
+| `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md) | [report](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/reports/final_report.md) |
+| `qwen35_4b_code_abi_oracle_coverage_ladder` | [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md) | [report](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/reports/final_report.md) |
+| `qwen35_4b_constrained_coverage_dpo` | [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md) | [report](../experiments/qwen35_4b_constrained_coverage_dpo/reports/final_report.md) |
+| `qwen35_4b_counterexample_directed_dsl` | [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md) | [report](../experiments/qwen35_4b_counterexample_directed_dsl/reports/qwen35_4b_counterexample_directed_dsl_report.md) |
+| `qwen35_4b_deployable_information_ceiling_sweep` | [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md) | [report](../experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md) |
+| `qwen35_4b_diversity_keyed_coverage_gate` | [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md) | [report](../experiments/qwen35_4b_diversity_keyed_coverage_gate/reports/qwen35_4b_diversity_keyed_coverage_gate_report.md) |
+| `qwen35_4b_executable_program_posttraining` | [README](../experiments/qwen35_4b_executable_program_posttraining/README.md) | [report](../experiments/qwen35_4b_executable_program_posttraining/reports/qwen35_4b_executable_program_posttraining_report.md) |
+| `qwen35_4b_foofah_adaptive_program_budget_router` | [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md) | [report](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/reports/report.md) |
+| `qwen35_4b_foofah_direct_vs_abi` | [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md) | [report](../experiments/qwen35_4b_foofah_direct_vs_abi/reports/report.md) |
+| `qwen35_4b_foofah_ephemeral_program_induction` | [README](../experiments/qwen35_4b_foofah_ephemeral_program_induction/README.md) | [report](../experiments/qwen35_4b_foofah_ephemeral_program_induction/reports/report.md) |
+| `qwen35_4b_foofah_external_transform_gate` | [README](../experiments/qwen35_4b_foofah_external_transform_gate/README.md) | [report](../experiments/qwen35_4b_foofah_external_transform_gate/reports/report.md) |
+| `qwen35_4b_foofah_program_ensemble_consensus` | [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md) | [report](../experiments/qwen35_4b_foofah_program_ensemble_consensus/reports/report.md) |
+| `qwen35_4b_foofah_program_repair_agent` | [README](../experiments/qwen35_4b_foofah_program_repair_agent/README.md) | [report](../experiments/qwen35_4b_foofah_program_repair_agent/reports/report.md) |
+| `qwen35_4b_foofah_program_strategy_portfolio` | [README](../experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md) | [report](../experiments/qwen35_4b_foofah_program_strategy_portfolio/reports/report.md) |
+| `qwen35_4b_foofah_selective_program_fallback` | [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md) | [report](../experiments/qwen35_4b_foofah_selective_program_fallback/reports/report.md) |
+| `qwen35_4b_foofah_strategy_discovery_live` | [README](../experiments/qwen35_4b_foofah_strategy_discovery_live/README.md) | [report](../experiments/qwen35_4b_foofah_strategy_discovery_live/reports/report.md) |
+| `qwen35_4b_graphir_self_repair` | [README](../experiments/qwen35_4b_graphir_self_repair/README.md) | [report](../experiments/qwen35_4b_graphir_self_repair/reports/qwen35_4b_graphir_self_repair_report.md) |
+| `qwen35_4b_humaneval_adaptive_budget` | [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md) | [report](../experiments/qwen35_4b_humaneval_adaptive_budget/reports/qwen35_4b_humaneval_adaptive_budget_report.md) |
+| `qwen35_4b_independent_code_abi_coverage_gate` | [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md) | [report](../experiments/qwen35_4b_independent_code_abi_coverage_gate/reports/final_report.md) |
+| `qwen35_4b_independent_retrieval_consensus` | [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md) | [report](../experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md) |
+| `qwen35_4b_inventory_shortlister_training` | [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md) | [report](../experiments/qwen35_4b_inventory_shortlister_training/reports/qwen35_4b_inventory_shortlister_training_report.md) |
+| `qwen35_4b_joint_shortlister_ladder` | [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md) | [report](../experiments/qwen35_4b_joint_shortlister_ladder/reports/qwen35_4b_joint_shortlister_ladder_report.md) |
+| `qwen35_4b_learned_active_trace_policy` | [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md) | [report](../experiments/qwen35_4b_learned_active_trace_policy/reports/qwen35_4b_learned_active_trace_policy_report.md) |
+| `qwen35_4b_live_tool_dagger` | [README](../experiments/qwen35_4b_live_tool_dagger/README.md) | [report](../experiments/qwen35_4b_live_tool_dagger/reports/report.md) |
+| `qwen35_4b_model_in_loop_counterexamples` | [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md) | [report](../experiments/qwen35_4b_model_in_loop_counterexamples/reports/qwen35_4b_model_in_loop_counterexamples_report.md) |
+| `qwen35_4b_offline_hard_negative_coverage_dpo` | [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md) | [report](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/reports/final_report.md) |
+| `qwen35_4b_operator_inventory_scaling_stress` | [README](../experiments/qwen35_4b_operator_inventory_scaling_stress/README.md) | [report](../experiments/qwen35_4b_operator_inventory_scaling_stress/reports/qwen35_4b_operator_inventory_scaling_stress_report.md) |
+| `qwen35_4b_operator_inventory_search_pilot` | [README](../experiments/qwen35_4b_operator_inventory_search_pilot/README.md) | [report](../experiments/qwen35_4b_operator_inventory_search_pilot/reports/qwen35_4b_operator_inventory_search_pilot_report.md) |
+| `qwen35_4b_opsd_pressure_locality_audit` | [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md) | [report](../experiments/qwen35_4b_opsd_pressure_locality_audit/reports/final_report.md) |
+| `qwen35_4b_oracle_distilled_semantic_verifier` | [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md) | [report](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/reports/qwen35_4b_oracle_distilled_semantic_verifier_report.md) |
+| `qwen35_4b_oracle_probe_synthesis_mdp` | [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md) | [report](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/reports/qwen35_4b_oracle_probe_synthesis_mdp_report.md) |
+| `qwen35_4b_oracle_process_grpo` | [README](../experiments/qwen35_4b_oracle_process_grpo/README.md) | [report](../experiments/qwen35_4b_oracle_process_grpo/reports/qwen35_4b_oracle_process_grpo_report.md) |
+| `qwen35_4b_passk_coverage_rl` | [README](../experiments/qwen35_4b_passk_coverage_rl/README.md) | [report](../experiments/qwen35_4b_passk_coverage_rl/reports/final_report.md) |
+| `qwen35_4b_prefix_value_guided_search` | [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md) | [report](../experiments/qwen35_4b_prefix_value_guided_search/reports/final_report.md) |
+| `qwen35_4b_real_sample_verify_commit` | [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) |
+| `qwen35_4b_reliability_exec_opsd_audit` | [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md) | [report](../experiments/qwen35_4b_reliability_exec_opsd_audit/reports/final_report.md) |
+| `qwen35_4b_retrieval_adapt_verify_scale` | [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) |
+| `qwen35_4b_sampler_portfolio_scheduler` | [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md) | [report](../experiments/qwen35_4b_sampler_portfolio_scheduler/reports/final_report.md) |
+| `qwen35_4b_sketch_coverage_shift_probe` | [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md) | [report](../experiments/qwen35_4b_sketch_coverage_shift_probe/reports/qwen35_4b_sketch_coverage_shift_probe_report.md) |
+| `qwen35_4b_static_bridge_ceiling_breaker` | [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md) | [report](../experiments/qwen35_4b_static_bridge_ceiling_breaker/reports/qwen35_4b_static_bridge_ceiling_breaker_report.md) |
+| `qwen35_4b_strategy_token_diversity_lora` | [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md) | [report](../experiments/qwen35_4b_strategy_token_diversity_lora/reports/final_report.md) |
+| `qwen35_4b_substrate_coverage_ladder` | [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md) | [report](../experiments/qwen35_4b_substrate_coverage_ladder/reports/final_report.md) |
+| `qwen35_4b_tool_state_policy_lora` | [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md) | [report](../experiments/qwen35_4b_tool_state_policy_lora/reports/report.md) |
+| `qwen35_4b_trained_vs_frozen_repair_mdp` | [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md) | [report](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/reports/qwen35_4b_trained_vs_frozen_repair_mdp_report.md) |
+| `qwen35_4b_transform_abi_compiler_pilot` | [README](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md) | [report](../experiments/qwen35_4b_transform_abi_compiler_pilot/reports/report.md) |
+| `qwen35_4b_typed_sketch_synthesis` | [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md) | [report](../experiments/qwen35_4b_typed_sketch_synthesis/reports/qwen35_4b_typed_sketch_synthesis_report.md) |
+| `qwen35_4b_unsaturated_frontier_active_bridge` | [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md) | [report](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/reports/qwen35_4b_unsaturated_frontier_active_bridge_report.md) |
+| `qwen35_4b_verified_algorithm_retrieval_adaptation` | [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md) | [report](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/reports/final_report.md) |
+| `qwen35_4b_verified_edit_closure` | [README](../experiments/qwen35_4b_verified_edit_closure/README.md) | [report](../experiments/qwen35_4b_verified_edit_closure/reports/qwen35_4b_verified_edit_closure_report.md) |
+| `qwen35_4b_verifier_guided_self_improvement` | [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md) | [report](../experiments/qwen35_4b_verifier_guided_self_improvement/reports/qwen35_4b_verifier_guided_self_improvement_report.md) |
+| `qwen_action_conditioned_vm_echo_policy_iteration` | [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md) | [report](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/reports/qwen_action_conditioned_vm_echo_policy_iteration_report.md) |
+| `qwen_active_crystallizer_public_gate` | [README](../experiments/qwen_active_crystallizer_public_gate/README.md) | [report](../experiments/qwen_active_crystallizer_public_gate/reports/qwen_active_crystallizer_public_gate_report.md) |
+| `qwen_active_example_acquisition` | [README](../experiments/qwen_active_example_acquisition/README.md) | [report](../experiments/qwen_active_example_acquisition/reports/qwen_active_example_acquisition_report.md) |
+| `qwen_batched_transduction_consistency` | [README](../experiments/qwen_batched_transduction_consistency/README.md) | [report](../experiments/qwen_batched_transduction_consistency/reports/qwen_batched_transduction_consistency_report.md) |
+| `qwen_budgeted_action_value_compiler` | [README](../experiments/qwen_budgeted_action_value_compiler/README.md) | [report](../experiments/qwen_budgeted_action_value_compiler/reports/qwen_budgeted_action_value_compiler_paper.md) |
+| `qwen_candidate_conditioned_trace_verifier` | [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md) | [report](../experiments/qwen_candidate_conditioned_trace_verifier/reports/qwen_candidate_conditioned_trace_verifier_report.md) |
+| `qwen_candidate_trace_verifier` | [README](../experiments/qwen_candidate_trace_verifier/README.md) | [report](../experiments/qwen_candidate_trace_verifier/reports/qwen_candidate_trace_verifier_paper.md) |
+| `qwen_checkpoint_scheduled_state_compiler` | [README](../experiments/qwen_checkpoint_scheduled_state_compiler/README.md) | [report](../experiments/qwen_checkpoint_scheduled_state_compiler/reports/qwen_checkpoint_scheduled_state_compiler_paper.md) |
+| `qwen_compiler_multiseed_reattribution` | [README](../experiments/qwen_compiler_multiseed_reattribution/README.md) | [report](../experiments/qwen_compiler_multiseed_reattribution/reports/qwen_compiler_multiseed_reattribution_report.md) |
+| `qwen_complete_program_trace_reranker` | [README](../experiments/qwen_complete_program_trace_reranker/README.md) | [report](../experiments/qwen_complete_program_trace_reranker/reports/qwen_complete_program_trace_reranker_report.md) |
+| `qwen_compositional_curriculum_abi` | [README](../experiments/qwen_compositional_curriculum_abi/README.md) | [report](../experiments/qwen_compositional_curriculum_abi/reports/qwen_compositional_curriculum_abi_report.md) |
+| `qwen_constrained_abi_parser` | [README](../experiments/qwen_constrained_abi_parser/README.md) | [report](../experiments/qwen_constrained_abi_parser/reports/qwen_constrained_abi_parser_report.md) |
+| `qwen_context_trace_verifier` | [README](../experiments/qwen_context_trace_verifier/README.md) | [report](../experiments/qwen_context_trace_verifier/reports/qwen_context_trace_verifier_report.md) |
+| `qwen_counterexample_guided_ephemeral_program` | [README](../experiments/qwen_counterexample_guided_ephemeral_program/README.md) | [report](../experiments/qwen_counterexample_guided_ephemeral_program/reports/qwen_counterexample_guided_ephemeral_program_report.md) |
+| `qwen_counterexample_guided_projection` | [README](../experiments/qwen_counterexample_guided_projection/README.md) | [report](../experiments/qwen_counterexample_guided_projection/reports/qwen_counterexample_guided_projection_report.md) |
+| `qwen_counterfactual_episodic_icl` | [README](../experiments/qwen_counterfactual_episodic_icl/README.md) | [report](../experiments/qwen_counterfactual_episodic_icl/reports/qwen_counterfactual_episodic_icl_report.md) |
+| `qwen_counterfactual_icl_public_multiseed` | [README](../experiments/qwen_counterfactual_icl_public_multiseed/README.md) | [report](../experiments/qwen_counterfactual_icl_public_multiseed/reports/qwen_counterfactual_icl_public_multiseed_report.md) |
+| `qwen_counterfactual_trace_preference_distillation` | [README](../experiments/qwen_counterfactual_trace_preference_distillation/README.md) | [report](../experiments/qwen_counterfactual_trace_preference_distillation/reports/qwen_counterfactual_trace_preference_distillation_report.md) |
+| `qwen_crystallized_trace_abi_tournament` | [README](../experiments/qwen_crystallized_trace_abi_tournament/README.md) | [report](../experiments/qwen_crystallized_trace_abi_tournament/reports/qwen_crystallized_trace_abi_tournament_report.md) |
+| `qwen_dense_state_dagger_vm_agent` | [README](../experiments/qwen_dense_state_dagger_vm_agent/README.md) | [report](../experiments/qwen_dense_state_dagger_vm_agent/reports/report.md) |
+| `qwen_disagreement_probe_program_induction` | [README](../experiments/qwen_disagreement_probe_program_induction/README.md) | [report](../experiments/qwen_disagreement_probe_program_induction/reports/qwen_disagreement_probe_program_induction_report.md) |
+| `qwen_episodic_soft_prompt_task_vectors` | [README](../experiments/qwen_episodic_soft_prompt_task_vectors/README.md) | [report](../experiments/qwen_episodic_soft_prompt_task_vectors/reports/qwen_episodic_soft_prompt_task_vectors_report.md) |
+| `qwen_extrapolation_bound_abi` | [README](../experiments/qwen_extrapolation_bound_abi/README.md) | [report](../experiments/qwen_extrapolation_bound_abi/reports/qwen_extrapolation_bound_abi_report.md) |
+| `qwen_fastweight_hook` | [README](../experiments/qwen_fastweight_hook/README.md) | [report](../experiments/qwen_fastweight_hook/reports/latent_fastweight_qwen_paper.md) |
+| `qwen_full_table_consistency_reranker` | [README](../experiments/qwen_full_table_consistency_reranker/README.md) | [report](../experiments/qwen_full_table_consistency_reranker/reports/qwen_full_table_consistency_reranker_report.md) |
+| `qwen_fuyu_vm_grpo_echo` | [README](../experiments/qwen_fuyu_vm_grpo_echo/README.md) | [report](../experiments/qwen_fuyu_vm_grpo_echo/reports/qwen_fuyu_vm_grpo_echo_report.md) |
+| `qwen_hidden_vm_curriculum_repair` | [README](../experiments/qwen_hidden_vm_curriculum_repair/README.md) | [report](../experiments/qwen_hidden_vm_curriculum_repair/reports/qwen_hidden_vm_curriculum_repair_paper.md) |
+| `qwen_hidden_vm_mixed_domains` | [README](../experiments/qwen_hidden_vm_mixed_domains/README.md) | [report](../experiments/qwen_hidden_vm_mixed_domains/reports/qwen_hidden_vm_mixed_domains_paper.md) |
+| `qwen_hidden_vm_onpolicy_canonical_repair` | [README](../experiments/qwen_hidden_vm_onpolicy_canonical_repair/README.md) | [report](../experiments/qwen_hidden_vm_onpolicy_canonical_repair/reports/qwen_hidden_vm_onpolicy_canonical_repair_paper.md) |
+| `qwen_inpolicy_vm_echo_distillation` | [README](../experiments/qwen_inpolicy_vm_echo_distillation/README.md) | [report](../experiments/qwen_inpolicy_vm_echo_distillation/reports/qwen_inpolicy_vm_echo_distillation_report.md) |
+| `qwen_iterative_repair_policy` | [README](../experiments/qwen_iterative_repair_policy/README.md) | [report](../experiments/qwen_iterative_repair_policy/reports/qwen_iterative_repair_policy_paper.md) |
+| `qwen_large_abi_nested_compiler` | [README](../experiments/qwen_large_abi_nested_compiler/README.md) | [report](../experiments/qwen_large_abi_nested_compiler/reports/qwen_large_abi_nested_compiler_report.md) |
+| `qwen_latent_beam_program_compiler` | [README](../experiments/qwen_latent_beam_program_compiler/README.md) | [report](../experiments/qwen_latent_beam_program_compiler/reports/standalone_report.md) |
+| `qwen_learned_active_interrogation` | [README](../experiments/qwen_learned_active_interrogation/README.md) | [report](../experiments/qwen_learned_active_interrogation/reports/qwen_learned_active_interrogation_report.md) |
+| `qwen_learned_repair_verifier` | [README](../experiments/qwen_learned_repair_verifier/README.md) | [report](../experiments/qwen_learned_repair_verifier/reports/qwen_learned_repair_verifier_paper.md) |
+| `qwen_lora_parser_compiler` | [README](../experiments/qwen_lora_parser_compiler/README.md) | [report](../experiments/qwen_lora_parser_compiler/reports/qwen_lora_parser_compiler_paper.md) |
+| `qwen_lora_typed_bytecode_trace_compiler` | [README](../experiments/qwen_lora_typed_bytecode_trace_compiler/README.md) | [report](../experiments/qwen_lora_typed_bytecode_trace_compiler/reports/qwen_lora_typed_bytecode_trace_compiler_paper.md) |
+| `qwen_mixed_domain_trace_verifier` | [README](../experiments/qwen_mixed_domain_trace_verifier/README.md) | [report](../experiments/qwen_mixed_domain_trace_verifier/reports/qwen_mixed_domain_trace_verifier_paper.md) |
+| `qwen_noisy_row_program_crystallizer` | [README](../experiments/qwen_noisy_row_program_crystallizer/README.md) | [report](../experiments/qwen_noisy_row_program_crystallizer/reports/qwen_noisy_row_program_crystallizer_report.md) |
+| `qwen_numeric_copy_compiler` | [README](../experiments/qwen_numeric_copy_compiler/README.md) | [report](../experiments/qwen_numeric_copy_compiler/reports/qwen_numeric_copy_compiler_paper.md) |
+| `qwen_onpolicy_repair_compiler` | [README](../experiments/qwen_onpolicy_repair_compiler/README.md) | [report](../experiments/qwen_onpolicy_repair_compiler/reports/qwen_onpolicy_repair_compiler_paper.md) |
+| `qwen_oracle_distilled_acquisition_policy` | [README](../experiments/qwen_oracle_distilled_acquisition_policy/README.md) | [report](../experiments/qwen_oracle_distilled_acquisition_policy/reports/qwen_oracle_distilled_acquisition_policy_report.md) |
+| `qwen_pairwise_table_judge` | [README](../experiments/qwen_pairwise_table_judge/README.md) | [report](../experiments/qwen_pairwise_table_judge/reports/qwen_pairwise_table_judge_report.md) |
+| `qwen_prefix_state_process_verifier` | [README](../experiments/qwen_prefix_state_process_verifier/README.md) | [report](../experiments/qwen_prefix_state_process_verifier/reports/qwen_prefix_state_process_verifier_paper.md) |
+| `qwen_program_only_executable_abi` | [README](../experiments/qwen_program_only_executable_abi/README.md) | [report](../experiments/qwen_program_only_executable_abi/reports/qwen_program_only_executable_abi_report.md) |
+| `qwen_progressive_repair_compiler` | [README](../experiments/qwen_progressive_repair_compiler/README.md) | [report](../experiments/qwen_progressive_repair_compiler/reports/qwen_progressive_repair_compiler_paper.md) |
+| `qwen_public_prose_abi_gate` | [README](../experiments/qwen_public_prose_abi_gate/README.md) | [report](../experiments/qwen_public_prose_abi_gate/reports/qwen_public_prose_abi_gate_report.md) |
+| `qwen_python_shaped_silent_executor` | [README](../experiments/qwen_python_shaped_silent_executor/README.md) | [report](../experiments/qwen_python_shaped_silent_executor/reports/qwen_python_shaped_silent_executor_report.md) |
+| `qwen_readable_candidate_verifier` | [README](../experiments/qwen_readable_candidate_verifier/README.md) | [report](../experiments/qwen_readable_candidate_verifier/reports/qwen_readable_candidate_verifier_report.md) |
+| `qwen_real_task_abi_coverage_gate` | [README](../experiments/qwen_real_task_abi_coverage_gate/README.md) | [report](../experiments/qwen_real_task_abi_coverage_gate/reports/qwen_real_task_abi_coverage_gate_report.md) |
+| `qwen_recurrent_vm_repair_policy` | [README](../experiments/qwen_recurrent_vm_repair_policy/README.md) | [report](../experiments/qwen_recurrent_vm_repair_policy/reports/qwen_recurrent_vm_repair_policy_report.md) |
+| `qwen_recursive_ephemeral_program_induction` | [README](../experiments/qwen_recursive_ephemeral_program_induction/README.md) | [report](../experiments/qwen_recursive_ephemeral_program_induction/reports/qwen_recursive_ephemeral_program_induction_report.md) |
+| `qwen_recursive_task_decomposition` | [README](../experiments/qwen_recursive_task_decomposition/README.md) | [report](../experiments/qwen_recursive_task_decomposition/reports/qwen_recursive_task_decomposition_report.md) |
+| `qwen_register_structured_runtime` | [README](../experiments/qwen_register_structured_runtime/README.md) | [report](../experiments/qwen_register_structured_runtime/reports/qwen_register_structured_runtime_paper.md) |
+| `qwen_register_token_latent_compiler` | [README](../experiments/qwen_register_token_latent_compiler/README.md) | [report](../experiments/qwen_register_token_latent_compiler/reports/qwen_register_token_latent_compiler_paper.md) |
+| `qwen_register_trace_refiner` | [README](../experiments/qwen_register_trace_refiner/README.md) | [report](../experiments/qwen_register_trace_refiner/reports/qwen_register_trace_refiner_paper.md) |
+| `qwen_search_augmented_rollout_distillation` | [README](../experiments/qwen_search_augmented_rollout_distillation/README.md) | [report](../experiments/qwen_search_augmented_rollout_distillation/reports/search_augmented_rollout_distillation_report.md) |
+| `qwen_semantic_prefix_value_model` | [README](../experiments/qwen_semantic_prefix_value_model/README.md) | [report](../experiments/qwen_semantic_prefix_value_model/reports/qwen_semantic_prefix_value_model_paper.md) |
+| `qwen_shared_parser_compiler` | [README](../experiments/qwen_shared_parser_compiler/README.md) | [report](../experiments/qwen_shared_parser_compiler/reports/qwen_shared_parser_compiler_paper.md) |
+| `qwen_slot_repair_distillation` | [README](../experiments/qwen_slot_repair_distillation/README.md) | [report](../experiments/qwen_slot_repair_distillation/reports/qwen_slot_repair_distillation_paper.md) |
+| `qwen_slot_stability_compiler` | [README](../experiments/qwen_slot_stability_compiler/README.md) | [report](../experiments/qwen_slot_stability_compiler/reports/qwen_slot_stability_compiler_paper.md) |
+| `qwen_span_free_compiler` | [README](../experiments/qwen_span_free_compiler/README.md) | [report](../experiments/qwen_span_free_compiler/reports/qwen_span_free_compiler_paper.md) |
+| `qwen_state_ladder_compiler` | [README](../experiments/qwen_state_ladder_compiler/README.md) | [report](../experiments/qwen_state_ladder_compiler/reports/qwen_state_ladder_compiler_paper.md) |
+| `qwen_structural_compiler_attribution_ablation` | [README](../experiments/qwen_structural_compiler_attribution_ablation/README.md) | [report](../experiments/qwen_structural_compiler_attribution_ablation/reports/structural_compiler_attribution_ablation_report.md) |
+| `qwen_structural_latent_compiler_expansion` | [README](../experiments/qwen_structural_latent_compiler_expansion/README.md) | [report](../experiments/qwen_structural_latent_compiler_expansion/reports/structural_latent_compiler_expansion_report.md) |
+| `qwen_structured_bridge` | [README](../experiments/qwen_structured_bridge/README.md) | [report](../experiments/qwen_structured_bridge/reports/qwen_structured_bridge_paper.md) |
+| `qwen_support_contrastive_meta_icl` | [README](../experiments/qwen_support_contrastive_meta_icl/README.md) | [report](../experiments/qwen_support_contrastive_meta_icl/reports/qwen_support_contrastive_meta_icl_latest_run_report.md) |
+| `qwen_tail_repair_stability_critic` | [README](../experiments/qwen_tail_repair_stability_critic/README.md) | [report](../experiments/qwen_tail_repair_stability_critic/reports/qwen_tail_repair_stability_critic_report.md) |
+| `qwen_teacher_distilled_slot_compiler` | [README](../experiments/qwen_teacher_distilled_slot_compiler/README.md) | [report](../experiments/qwen_teacher_distilled_slot_compiler/reports/qwen_teacher_distilled_slot_compiler_paper.md) |
+| `qwen_trace_bootstrap_retention` | [README](../experiments/qwen_trace_bootstrap_retention/README.md) | [report](../experiments/qwen_trace_bootstrap_retention/reports/qwen_trace_bootstrap_retention_paper.md) |
+| `qwen_trace_procedure_depth_stress` | [README](../experiments/qwen_trace_procedure_depth_stress/README.md) | [report](../experiments/qwen_trace_procedure_depth_stress/reports/qwen_trace_procedure_depth_stress_report.md) |
+| `qwen_typed_bytecode_expert_iteration` | [README](../experiments/qwen_typed_bytecode_expert_iteration/README.md) | [report](../experiments/qwen_typed_bytecode_expert_iteration/reports/qwen_typed_bytecode_expert_iteration_paper.md) |
+| `qwen_verified_skill_memory_rag` | [README](../experiments/qwen_verified_skill_memory_rag/README.md) | [report](../experiments/qwen_verified_skill_memory_rag/reports/qwen_verified_skill_memory_rag_report.md) |
+| `qwen_verifier_guided_slot_repair` | [README](../experiments/qwen_verifier_guided_slot_repair/README.md) | [report](../experiments/qwen_verifier_guided_slot_repair/reports/qwen_verifier_guided_slot_repair_paper.md) |
+| `qwen_vm_agent_echo_qlora` | [README](../experiments/qwen_vm_agent_echo_qlora/README.md) | [report](../experiments/qwen_vm_agent_echo_qlora/reports/main_vm_agent_echo_blank_a512_stoprule/report.md) |
+| `qwen_vm_echo_trace_distillation` | [README](../experiments/qwen_vm_echo_trace_distillation/README.md) | [report](../experiments/qwen_vm_echo_trace_distillation/reports/qwen_vm_echo_trace_distillation_report.md) |
+| `real_transform_abi_gate_with_counterexamples` | [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md) | [report](../experiments/real_transform_abi_gate_with_counterexamples/reports/report.md) |
+| `rule_family_diversity_scaling` | [README](../experiments/rule_family_diversity_scaling/README.md) | [report](../experiments/rule_family_diversity_scaling/reports/rule_family_diversity_scaling_paper.md) |
+| `sampled_query_filter_executor` | [README](../experiments/sampled_query_filter_executor/README.md) | [report](../experiments/sampled_query_filter_executor/reports/sampled_query_filter_executor_paper.md) |
+| `sparse_support_memory_executor` | [README](../experiments/sparse_support_memory_executor/README.md) | [report](../experiments/sparse_support_memory_executor/reports/sparse_support_memory_paper.md) |
+| `structured_slot_initializer_ladder` | [README](../experiments/structured_slot_initializer_ladder/README.md) | [report](../experiments/structured_slot_initializer_ladder/reports/structured_slot_initializer_ladder_paper.md) |
+| `targeted_bridge_allocation` | [README](../experiments/targeted_bridge_allocation/README.md) | [report](../experiments/targeted_bridge_allocation/reports/targeted_bridge_allocation_report.md) |
+| `trace_keyed_symbol_repair` | [README](../experiments/trace_keyed_symbol_repair/README.md) | [report](../experiments/trace_keyed_symbol_repair/reports/trace_keyed_symbol_repair_paper.md) |

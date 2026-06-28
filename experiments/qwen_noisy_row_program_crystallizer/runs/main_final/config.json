@@ -1,0 +1,21 @@
+{
+  "run_name": "main_final",
+  "seed": 20260627,
+  "task_limit": 40,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "max_candidates": 40000,
+  "max_tables": 32,
+  "shuffled_max_tables": 8,
+  "topk_per_row": 4,
+  "pseudo_max_candidates": 4000,
+  "shuffled_pseudo_max_candidates": 1000,
+  "pseudo_min_vote_share": 0.75,
+  "allow_pseudo_maps": false,
+  "candidate_cache": "/workspace/large_artifacts/qwen_noisy_row_program_crystallizer/qwen_row_candidates_main40.csv",
+  "tasks": 40,
+  "candidate_rows": 1428,
+  "started_utc": "2026-06-27T10:00:55.756401+00:00"
+}

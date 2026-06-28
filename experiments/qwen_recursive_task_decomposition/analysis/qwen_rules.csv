@@ -1,0 +1,62 @@
+task_id,family,features,selected_style,rule_candidates,train_verify_exact,candidate_train_exact,rule,rule_chars,rule_lines
+Address.000002,Address,Substring,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Take the input and split it into parts using commas as delimiters. The first part contains the name and a number followed by a place and direction. Extract the number and place portion, then take the first part of the split result as the output.",245,1
+BillingCode.000007,BillingCode,Concatenation,decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Keep the input as is.  
+Substep 1: Extract the input string.  
+Substep 2: Return the extracted string as the output.",116,3
+City.000010,City,"Conditional,Numeric",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Replace any input that is ""None"" with ""0"". For all other inputs, return the input as is.",88,1
+City.000011,City,Conditional,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","If the input is ""New York City"", ""n.y.c."", or ""New York City  "", output ""New York City"". Otherwise, output the input as is.",123,1
+Column.000001,Column,"Concatenation,Conditional,Substring",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","If the input starts with ""Coln"", remove the ""n"" and keep the rest as is. If the input is ""ID"", output ""Col1"". If the input is ""Coln"" followed by a number, output ""Col"" followed by that number. Otherwise, output ""Col1"".",218,1
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Take the value from col0 and col1, format col0 as ""HH:MM:SS"", and concatenate the formatted col0 with col1.",107,1
+DateTime.000007,DateTime,DateTime,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Take the input date time string, extract the year and month, and format as ""Month Year"".",88,1
+DateTime.000017,DateTime,DateTime,decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 0.75, ""conditional"": 0.75}","Split the input into parts based on separators (space, hyphen, slash), then reformat each part into day/month/year format, combining them in the order day/month/year.",166,1
+DateTime.000025,DateTime,DateTime,decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","**Rule: Extract and reformat date components**
+
+1. **Split the input into components**: Separate the date into month, day, and year (or equivalent parts).
+2. **Map the month abbreviation to its full name**: Convert abbreviations like ""Mar"" to ""March"" (though examples use abbreviations, this step is for consistency).
+3. **Reformat the day**: Convert the day into a two-digit format if necessary (e.g., ""1"" → ""01"", ""30"" → ""30"").
+4. **Reformat the year**: Extract the last two digits of the year (e.g., ""2002"" → ""02"", ""1953"" → ""53",529,5
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",conditional,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","If the input is a time in HH:MM:SS format:  
+If the hour is 11, then format as ""11:00AM-11:30AM"";  
+If the hour is 8, then format as ""8:00AM-8:30AM"";  
+If the hour is 12, then format as ""12:00PM-12:30PM"";  
+If the hour is 0, then format as ""12:00AM-12:30AM"";  
+If the input is empty or null, then return ""N/A"";  
+If the input is an abbreviation like ""11:00AM"", then",365,7
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Take the input time in the format HH:MM. Extract the hour part (HH). If the hour is between 00 and 19, output ""0:00-19:00"". If the hour is between 20 and 39, output ""20:00-39:00"". If the hour is between 40 and 59, output ""40:00-59:00"".",235,1
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","**Rule:**  
+Given a time in HH:MMAM/PM format, decompose into:  
+1. Extract hour and minute.  
+2. If minute < 15, subtract (minute - 0) from hour, add 15 minutes, and set the new start time.  
+3. If minute >= 15 and < 45, set start time to hour:15 and end time to hour:45.  
+4. If minute >= 45, add (60 - minute) to hour, set start time to (hour + 1):15 and end time to (hour + 1):45.  
+5. Combine start and end times into ""start-time",434,7
+DateTime.000094,DateTime,DateTime,decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Parse the input date into components (year, month, day). If the date is in the format ""DD.MM.YYYY"" or ""DD. MMM YYYY"", extract the day, month, and year. If the date is in the format ""MMM DD YYYY"" or ""DD MMM YYYY"", extract the day, month, and year. Format the output as ""YYYY-MM-DD"".",281,1
+DateTime.000104,DateTime,DateTime,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Extract the third character from the date portion of the input string. The date portion is in the format ""DD-Mon-YYYY"", so the third character is the first letter of the month (e.g., ""Jan"", ""Feb"", ""Mar""). Return that character as the output.",241,1
+DateTime.000108,DateTime,DateTime,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Parse the input date and time string. Extract the day and month from the date part. Format the output as MM/DD/YYYY, where MM is the month abbreviation (Jan=1, Feb=2, ..., Dec=12), DD is the day, and YYYY is the year. The time part is ignored.",243,1
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Take the day of the month from the input date. If the day is less than or equal to 15, output ""15-30"". If the day is greater than 15, output ""30-45"".",149,1
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Take the input date and time, extract the day of the month, and format it as ""0-20"".",84,1
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 0.75}","Take the hour part of the input time, add 2, and format as AM/PM with leading zero if necessary. If the hour is 12, set to 12AM/12PM. If the hour is 0, set to 12AM. For hours 1-9, use ""1AM"" to ""9AM"". For hours 13-23, subtract 12 and use ""1PM"" to ""11PM"". Combine the two times with a hyphen.",290,1
+FilePath.000001,FilePath,"Conditional,Substring",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 0.5}","Extract the substring starting from the second last slash and ending at the dot, excluding the dot.",99,1
+Gender.000001,Gender,Conditional,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","If the input is 'M', output '0'; if the input is 'F', output '1'.",65,1
+Language.000002,Language,"Multicolumn,Substring",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","If col0 is a language name and col1 is a URL starting with http://proseware.com/, then the output is the two-letter language code extracted from col1 (e.g., from http://proseware.com/ar, extract 'ar').",201,1
+Number.000008,Number,Numeric,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Move the decimal point one place to the left. If the number is an integer, add a decimal point followed by a zero.",114,1
+Number.000016,Number,"Numeric,NumericRounding",decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Round to the nearest multiple of 5:  
+1. Take the input number.  
+2. Divide by 5, round to the nearest integer, then multiply by 5.  
+3. The result is the transformed number.",174,4
+Number.000022,Number,"Numeric,NumericRounding",terse,3,1.0,"{""decompose"": 0.75, ""terse"": 1.0, ""conditional"": 0.75}","Round to two decimal places, then if the third decimal is 5 or more, round up the second decimal, otherwise truncate after two decimals. If the result after rounding is a whole number, return it as an integer.",209,1
+Number.000049,Number,"Numeric,NumericRounding",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Take the first digit of the number, multiply by 100, and append two zeros. If the number has more than three digits, take the first three digits, multiply by 100, and append two zeros.",184,1
+Number.000075,Number,"Concatenation,Numeric",decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Round to the nearest hundred million (100M), then format as $X.YB.  
+Substeps:  
+1. Divide the number by 100,000,000.  
+2. Round the result to one decimal place.  
+3. Format as $X.YB, where X is the integer part and Y is the first decimal digit.",245,5
+Number.000077,Number,"Numeric,NumericRounding",terse,3,1.0,"{""decompose"": 0.5, ""terse"": 1.0, ""conditional"": 0.5}","Subtract 7 from the input if the input is greater than or equal to 110 and less than 120. Otherwise, leave the input unchanged. Format the result as a three-digit number.",170,1
+Phone.000011,Phone,"Concatenation,Substring",terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}",Replace the hyphen in the input with a space.,45,1
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",decompose,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Rule: Extract the second and sixth elements from the input list.  
+Substeps:  
+1. Split the input into elements based on spaces.  
+2. Take the element at index 1 (second element).  
+3. Take the element at index 5 (sixth element).  
+4. Combine the outputs of steps 2 and 3 with a space.",285,6
+UserAgent.000003,UserAgent,Substring,terse,3,1.0,"{""decompose"": 1.0, ""terse"": 1.0, ""conditional"": 1.0}","Extract the substring that follows the pattern ""MF-"" or ""ZA"" or ""JI"" or ""MF-W"" in the input string, up to the next space character. The result is the identified component.",171,1

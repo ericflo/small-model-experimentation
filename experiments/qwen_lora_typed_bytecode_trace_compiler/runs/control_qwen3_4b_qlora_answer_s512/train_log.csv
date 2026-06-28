@@ -1,0 +1,6 @@
+run,variant,phase,local_step,step,loss,train_examples,quick_answer_head_accuracy
+control_qwen3_4b_qlora_answer_s512,qlora_answer,answer_only,1,1,4.625619888305664,512,0.015625
+control_qwen3_4b_qlora_answer_s512,qlora_answer,answer_only,150,150,3.9600400924682617,512,0.09375
+control_qwen3_4b_qlora_answer_s512,qlora_answer,answer_only,300,300,1.9325308799743652,512,0.109375
+control_qwen3_4b_qlora_answer_s512,qlora_answer,answer_only,450,450,2.572866916656494,512,0.15625
+control_qwen3_4b_qlora_answer_s512,qlora_answer,answer_only,600,600,1.773231029510498,512,0.109375

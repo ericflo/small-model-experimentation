@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dense Supervision Ladder for Recurrent Belief Execution</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; color: #202124; margin: 0; background: #fafafa; }
+main { max-width: 980px; margin: 0 auto; padding: 40px 24px 72px; background: white; }
+h1, h2, h3 { line-height: 1.2; color: #111827; }
+h1 { font-size: 2.1rem; margin-bottom: 0.3rem; }
+h2 { margin-top: 2rem; border-top: 1px solid #e5e7eb; padding-top: 1.2rem; }
+h3 { margin-top: 1.4rem; }
+code { background: #f3f4f6; padding: 0.1rem 0.25rem; border-radius: 4px; }
+pre { background: #111827; color: #f9fafb; padding: 1rem; overflow-x: auto; border-radius: 6px; }
+pre code { background: transparent; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.94rem; }
+th, td { border: 1px solid #e5e7eb; padding: 0.45rem 0.55rem; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { background: #f9fafb; font-weight: 650; }
+img { max-width: 100%; display: block; margin: 1rem auto; border: 1px solid #e5e7eb; border-radius: 6px; }
+blockquote { border-left: 4px solid #9ca3af; padding-left: 1rem; color: #374151; margin-left: 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>Dense Supervision Ladder for Recurrent Belief Execution</h1>
+<p><strong>A controlled experiment on how much supervision a dense recurrent state needs to learn modular belief execution</strong></p>
+<h2>Abstract</h2>
+<p>This experiment tests whether a fixed-width dense recurrent hidden state can learn to execute modular belief programs, and which training signal is strong enough to make that happen. Each example begins with an uncertain pair of registers constrained by <code>B=A+d (mod p)</code>. A program then applies modular arithmetic updates and bucket observations. The exact belief state is a distribution over <code>(A,B)</code> pairs, but the executor itself stores only a dense vector.</p>
+<p>Five training objectives are compared under the same architecture: one sampled final query label, the exact final query distribution, exact query distributions at every prefix, sparse belief-state distillation, and full belief-state distillation. Evaluation always uses exact final query distributions and exact final pair beliefs. A frozen post-hoc belief probe is also trained after each executor run.</p>
+<p>On the scaled modulus-31 task, trained on lengths 1-8 and evaluated on lengths 4, 8, 12, 16, and 24, supervision strength is the dominant bottleneck. At <code>K=L</code>, query target mass at length 24 rises from 9.4% with sampled final labels to 16.1% with exact final query distributions, 18.5% with prefix query supervision, and 19.4% with full belief distillation. Full belief supervision is best at every evaluated length and is the only condition that trains a useful belief decoder at scale.</p>
+<h2>Lay Summary</h2>
+<p>The model starts with partial knowledge:</p>
+<pre><code class="language-text">B = A + d (mod p)
+</code></pre>
+<p>That relation leaves many possible <code>(A,B)</code> worlds. A program changes the registers and sometimes filters possible worlds:</p>
+<pre><code class="language-text">A = A + 7
+observe B % 5 = 3
+B = B - A
+query A + B
+</code></pre>
+<p>The experiment asks how much training signal is required before a dense recurrent state learns to act like a belief executor. A single sampled answer is weak. Giving the whole final answer distribution is better. Giving targets at every prefix is much better. Giving the full belief state at every prefix is best and also makes the internal state directly decodable.</p>
+<h2>1. Question</h2>
+<p>The central question is:</p>
+<blockquote>
+<p>Is the dense recurrent substrate the bottleneck, or is weak supervision the bottleneck?</p>
+</blockquote>
+<p>The ladder is designed to answer that by holding the architecture fixed and increasing only the target information supplied during training.</p>
+<p>The five objectives are:</p>
+<table>
+<thead>
+<tr>
+<th>Objective</th>
+<th>Training target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sampled_final</code></td>
+<td>One sampled final query value</td>
+</tr>
+<tr>
+<td><code>soft_final_query</code></td>
+<td>Exact final query distribution</td>
+</tr>
+<tr>
+<td><code>prefix_query</code></td>
+<td>Exact query distribution at every executed prefix</td>
+</tr>
+<tr>
+<td><code>sparse_belief</code></td>
+<td>Prefix query targets plus belief distillation on sampled prefix states</td>
+</tr>
+<tr>
+<td><code>full_belief</code></td>
+<td>Prefix query targets plus belief distillation on every prefix state</td>
+</tr>
+</tbody>
+</table>
+<p>If <code>full_belief</code> fails, the dense recurrent state is likely too weak for the task. If <code>full_belief</code> succeeds while weaker objectives fail, the main bottleneck is training signal.</p>
+<h2>2. Task</h2>
+<p>Programs operate over two registers modulo <code>p</code>. The initial belief is:</p>
+<pre><code class="language-text">{(A, B): B = A + d mod p}
+</code></pre>
+<p>For <code>p=31</code>, the full state space has <code>31 * 31 = 961</code> register pairs, and the initial support contains 31 pairs.</p>
+<p>Operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A=A+c</code></td>
+<td>add a constant to <code>A</code></td>
+</tr>
+<tr>
+<td><code>A=A-c</code></td>
+<td>subtract a constant from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+c</code></td>
+<td>add a constant to <code>B</code></td>
+</tr>
+<tr>
+<td><code>B=B-c</code></td>
+<td>subtract a constant from <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A+B</code></td>
+<td>add <code>B</code> into <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+A</code></td>
+<td>add <code>A</code> into <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A-B</code></td>
+<td>subtract <code>B</code> from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B-A</code></td>
+<td>subtract <code>A</code> from <code>B</code></td>
+</tr>
+<tr>
+<td><code>OBS_A_BUCKET</code></td>
+<td>filter to states where <code>A % m = r</code></td>
+</tr>
+<tr>
+<td><code>OBS_B_BUCKET</code></td>
+<td>filter to states where <code>B % m = r</code></td>
+</tr>
+</tbody>
+</table>
+<p>Observation residues are sampled from the current support, so the target support is never empty. The scaled run uses <code>p=31</code>, observation modulus 5, and observation probability 0.3.</p>
+<p>Each example samples one query type:</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>Distribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>final distribution of <code>A</code></td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td>final distribution of <code>B</code></td>
+</tr>
+<tr>
+<td><code>A_PLUS_B</code></td>
+<td>final distribution of <code>A+B mod p</code></td>
+</tr>
+<tr>
+<td><code>A_MINUS_B</code></td>
+<td>final distribution of <code>A-B mod p</code></td>
+</tr>
+</tbody>
+</table>
+<p>Training lengths are 1-8 for the scaled run. Evaluation lengths are 4, 8, 12, 16, and 24. Lengths 12, 16, and 24 test beyond the training range.</p>
+<h2>3. Model</h2>
+<p>All ladder levels use the same dense recurrent executor. The model embeds the initial relation parameter <code>d</code>, embeds program instructions, then updates a dense hidden state with a recurrent cell. The recurrent budget <code>K</code> controls how many program instructions can be consumed. The final hidden state feeds a query head. Belief-supervised variants also train a belief decoder from the recurrent hidden state to a distribution over <code>(A,B)</code> pairs.</p>
+<p>The recurrent state is not an explicit categorical table. Exact pair beliefs are used to generate labels and evaluation metrics, but the executor state remains a fixed-width dense vector.</p>
+<p>After executor training, a separate post-hoc MLP probe is trained with the executor frozen. This tests whether exact pair-belief information is recoverable from the hidden state even when it was not part of the executor loss.</p>
+<h2>4. Metrics</h2>
+<p>Primary query metrics:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>query_target_mass</code></td>
+<td>Total probability assigned to exact final query support</td>
+</tr>
+<tr>
+<td><code>query_top1_on_support</code></td>
+<td>Whether the most likely query value is in the exact support</td>
+</tr>
+<tr>
+<td><code>query_target_nll</code></td>
+<td>Cross-entropy against the exact final query distribution</td>
+</tr>
+</tbody>
+</table>
+<p>Belief audit metrics:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>probe_belief_target_mass</code></td>
+<td>Post-hoc probe probability assigned to exact final <code>(A,B)</code> support</td>
+</tr>
+<tr>
+<td><code>decoder_belief_target_mass</code></td>
+<td>Trained decoder probability assigned to exact final <code>(A,B)</code> support</td>
+</tr>
+<tr>
+<td><code>*_top1_on_support</code></td>
+<td>Whether the most likely pair is in the exact support</td>
+</tr>
+</tbody>
+</table>
+<p>The headline summaries report the first evaluated <code>K</code> satisfying <code>K&gt;=L</code>, which is <code>K=L</code> for all evaluated lengths here.</p>
+<h2>5. Main Result</h2>
+<p>The scaled modulus-31 ladder separates cleanly.</p>
+<p><img alt="Modulus 31 query mass ladder" src="../analysis/figures/mod31_ladder_query_mass_at_k_ge_l.png" /></p>
+<p><img alt="Modulus 31 probe belief ladder" src="../analysis/figures/mod31_ladder_probe_belief_mass_at_k_ge_l.png" /></p>
+<p><img alt="Modulus 31 decoder belief ladder" src="../analysis/figures/mod31_ladder_decoder_belief_mass_at_k_ge_l.png" /></p>
+<p>At <code>K=L</code>, averaged across query types:</p>
+<table>
+<thead>
+<tr>
+<th>Supervision</th>
+<th style="text-align: right;">L=4 query</th>
+<th style="text-align: right;">L=8 query</th>
+<th style="text-align: right;">L=12 query</th>
+<th style="text-align: right;">L=16 query</th>
+<th style="text-align: right;">L=24 query</th>
+<th style="text-align: right;">L=24 probe belief</th>
+<th style="text-align: right;">L=24 decoder belief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sampled final</td>
+<td style="text-align: right;">51.0%</td>
+<td style="text-align: right;">28.2%</td>
+<td style="text-align: right;">20.5%</td>
+<td style="text-align: right;">13.6%</td>
+<td style="text-align: right;">9.4%</td>
+<td style="text-align: right;">1.2%</td>
+<td style="text-align: right;">0.2%</td>
+</tr>
+<tr>
+<td>Soft final query</td>
+<td style="text-align: right;">62.0%</td>
+<td style="text-align: right;">39.4%</td>
+<td style="text-align: right;">30.2%</td>
+<td style="text-align: right;">22.2%</td>
+<td style="text-align: right;">16.1%</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">0.2%</td>
+</tr>
+<tr>
+<td>Prefix query</td>
+<td style="text-align: right;">72.8%</td>
+<td style="text-align: right;">46.3%</td>
+<td style="text-align: right;">34.1%</td>
+<td style="text-align: right;">25.8%</td>
+<td style="text-align: right;">18.5%</td>
+<td style="text-align: right;">4.3%</td>
+<td style="text-align: right;">0.2%</td>
+</tr>
+<tr>
+<td>Sparse belief</td>
+<td style="text-align: right;">66.7%</td>
+<td style="text-align: right;">42.4%</td>
+<td style="text-align: right;">31.5%</td>
+<td style="text-align: right;">22.8%</td>
+<td style="text-align: right;">16.2%</td>
+<td style="text-align: right;">3.2%</td>
+<td style="text-align: right;">3.0%</td>
+</tr>
+<tr>
+<td>Full belief</td>
+<td style="text-align: right;">74.1%</td>
+<td style="text-align: right;">49.7%</td>
+<td style="text-align: right;">35.8%</td>
+<td style="text-align: right;">27.3%</td>
+<td style="text-align: right;">19.4%</td>
+<td style="text-align: right;">4.8%</td>
+<td style="text-align: right;">4.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The order is informative:</p>
+<ol>
+<li><code>sampled_final</code> is weakest. It learns some recurrent behavior but little long-chain belief structure.</li>
+<li><code>soft_final_query</code> is a large improvement, so exact final distributions are much better labels than sampled values.</li>
+<li><code>prefix_query</code> is the largest query-performance jump, showing that per-step targets strongly help recurrent execution.</li>
+<li><code>sparse_belief</code> trains a decoder above chance but costs query performance under this budget.</li>
+<li><code>full_belief</code> is best at every evaluated length and trains the strongest decoder.</li>
+</ol>
+<h2>6. K-Scaling</h2>
+<p>The K curves show that the recurrent budget matters: performance is weak for small <code>K</code> and rises when <code>K</code> reaches the program length.</p>
+<p><img alt="Full belief query mass heatmap" src="../analysis/figures/mod31_full_belief_query_mass_heatmap.png" /></p>
+<p><img alt="Full belief decoder mass heatmap" src="../analysis/figures/mod31_full_belief_decoder_mass_heatmap.png" /></p>
+<p>Full-belief query mass by length:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Length</th>
+<th style="text-align: right;">Best query mass for <code>K&lt;L</code></th>
+<th style="text-align: right;">Query mass at <code>K=L</code></th>
+<th style="text-align: right;">Probe belief at <code>K=L</code></th>
+<th style="text-align: right;">Decoder belief at <code>K=L</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">52.6%</td>
+<td style="text-align: right;">74.1%</td>
+<td style="text-align: right;">49.4%</td>
+<td style="text-align: right;">51.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">28.7%</td>
+<td style="text-align: right;">49.7%</td>
+<td style="text-align: right;">21.5%</td>
+<td style="text-align: right;">21.7%</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">18.8%</td>
+<td style="text-align: right;">35.8%</td>
+<td style="text-align: right;">11.8%</td>
+<td style="text-align: right;">11.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">12.7%</td>
+<td style="text-align: right;">27.3%</td>
+<td style="text-align: right;">7.9%</td>
+<td style="text-align: right;">7.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">6.4%</td>
+<td style="text-align: right;">19.4%</td>
+<td style="text-align: right;">4.8%</td>
+<td style="text-align: right;">4.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The absolute scores still degrade with length. Full supervision does not solve length generalization, but it makes the dense state much more useful than weak final labels.</p>
+<h2>7. Pilot Diagnostic</h2>
+<p>A smaller modulus-11 diagnostic used the same ladder with training lengths 1-6 and evaluation lengths 3, 6, 9, and 12. It served as a fast check before scaling the full ladder.</p>
+<p>At <code>K=L</code>, averaged across query types:</p>
+<table>
+<thead>
+<tr>
+<th>Supervision</th>
+<th style="text-align: right;">L=3 query</th>
+<th style="text-align: right;">L=6 query</th>
+<th style="text-align: right;">L=9 query</th>
+<th style="text-align: right;">L=12 query</th>
+<th style="text-align: right;">L=12 probe belief</th>
+<th style="text-align: right;">L=12 decoder belief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sampled final</td>
+<td style="text-align: right;">69.1%</td>
+<td style="text-align: right;">48.1%</td>
+<td style="text-align: right;">35.8%</td>
+<td style="text-align: right;">28.9%</td>
+<td style="text-align: right;">9.9%</td>
+<td style="text-align: right;">1.7%</td>
+</tr>
+<tr>
+<td>Soft final query</td>
+<td style="text-align: right;">81.7%</td>
+<td style="text-align: right;">60.5%</td>
+<td style="text-align: right;">46.8%</td>
+<td style="text-align: right;">39.2%</td>
+<td style="text-align: right;">20.1%</td>
+<td style="text-align: right;">1.7%</td>
+</tr>
+<tr>
+<td>Prefix query</td>
+<td style="text-align: right;">90.2%</td>
+<td style="text-align: right;">70.9%</td>
+<td style="text-align: right;">56.9%</td>
+<td style="text-align: right;">45.3%</td>
+<td style="text-align: right;">26.4%</td>
+<td style="text-align: right;">1.7%</td>
+</tr>
+<tr>
+<td>Sparse belief</td>
+<td style="text-align: right;">86.8%</td>
+<td style="text-align: right;">62.8%</td>
+<td style="text-align: right;">47.8%</td>
+<td style="text-align: right;">38.8%</td>
+<td style="text-align: right;">20.6%</td>
+<td style="text-align: right;">17.5%</td>
+</tr>
+<tr>
+<td>Full belief</td>
+<td style="text-align: right;">90.9%</td>
+<td style="text-align: right;">71.3%</td>
+<td style="text-align: right;">57.7%</td>
+<td style="text-align: right;">45.7%</td>
+<td style="text-align: right;">30.2%</td>
+<td style="text-align: right;">28.9%</td>
+</tr>
+</tbody>
+</table>
+<p>The diagnostic matches the scaled result: prefix query supervision is a large jump, and full belief supervision is the best overall condition.</p>
+<h2>8. Interpretation</h2>
+<p>The experiment supports a specific mechanism claim:</p>
+<blockquote>
+<p>The dense recurrent executor can host useful belief-state computation, but weak sampled final-answer supervision is not enough to train it well.</p>
+</blockquote>
+<p>The strongest evidence is that <code>full_belief</code> succeeds more than <code>sampled_final</code> under the same architecture. That rules out the simple explanation that the dense recurrent substrate alone is too weak. The substrate can carry useful belief information when the target exposes it.</p>
+<p>The result also shows that exact belief supervision is not a magic solution. At length 24 and modulus 31, full-belief query mass is 19.4%, not near exact execution. The architecture and optimizer still struggle with long-chain generalization. The practical lesson is that dense recurrent execution needs both a better objective and likely stronger architecture or curriculum to become high fidelity.</p>
+<h2>9. Reproducibility</h2>
+<p>Main scaled command pattern:</p>
+<pre><code class="language-bash">python experiments/dense_supervision_ladder/src/dense_supervision_ladder_experiment.py \
+  --mode dense --supervision &lt;level&gt; \
+  --modulus 31 --observe_mod 5 --observe_prob 0.3 \
+  --train_max_len 8 --eval_lengths 4,8,12,16,24 --eval_k 0,1,2,4,8,12,16,24 \
+  --train_steps 2000 --batch_size 256 --eval_batch_size 256 --eval_examples 256 \
+  --probe_steps 800 --probe_batch_size 256 \
+  --state_dim 256 --instr_dim 128 \
+  --log_every 250 --probe_log_every 200 \
+  --lr 0.001 --probe_lr 0.001 \
+  --output_dir experiments/dense_supervision_ladder/runs/main_&lt;level&gt;_mod31 \
+  --checkpoint_dir large_artifacts/dense_supervision_ladder/checkpoints/main_&lt;level&gt;_mod31
+</code></pre>
+<p>Analysis command:</p>
+<pre><code class="language-bash">python experiments/dense_supervision_ladder/src/analyze_dense_supervision_ladder.py
+</code></pre>
+<p>Key artifacts:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment log</td>
+<td><code>reports/dense_supervision_ladder_experiment_log.md</code></td>
+</tr>
+<tr>
+<td>Analysis summary</td>
+<td><code>analysis/summary.md</code></td>
+</tr>
+<tr>
+<td>Main threshold table</td>
+<td><code>analysis/mod31_ladder_threshold_summary.csv</code></td>
+</tr>
+<tr>
+<td>Per-query threshold table</td>
+<td><code>analysis/mod31_ladder_per_query_threshold_summary.csv</code></td>
+</tr>
+<tr>
+<td>Full metrics table</td>
+<td><code>analysis/all_metrics_long.csv</code></td>
+</tr>
+<tr>
+<td>Checkpoint manifest</td>
+<td><code>checkpoint_manifest.csv</code></td>
+</tr>
+</tbody>
+</table>
+<p>Large checkpoint files are stored outside the experiment directory under <code>../../large_artifacts/dense_supervision_ladder/checkpoints/</code>.</p>
+</main>
+</body>
+</html>

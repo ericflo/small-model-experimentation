@@ -1,0 +1,65 @@
+{
+  "experiment": "qwen35_4b_verifier_guided_self_improvement",
+  "date_utc": "2026-06-25",
+  "base_model": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_verifier_guided_self_improvement",
+  "task_splits": {
+    "train": {
+      "dataset": "google-research-datasets/mbpp",
+      "split": "train",
+      "target_main_n": 80,
+      "smoke_n": 10
+    },
+    "heldout": {
+      "dataset": "google-research-datasets/mbpp",
+      "split": "test",
+      "target_main_n": 150,
+      "smoke_n": 20
+    },
+    "transfer": {
+      "dataset": "openai/openai_humaneval",
+      "split": "test",
+      "target_main_n": 150,
+      "smoke_n": 20
+    }
+  },
+  "candidate_generation": {
+    "samples_per_task_main": 4,
+    "samples_per_task_smoke": 3,
+    "repair_per_task_main": 1,
+    "repair_per_task_smoke": 1,
+    "temperatures": "0.2,0.7,1.0",
+    "repair_temperature": 0.4,
+    "top_p": 0.95,
+    "max_new_tokens": 220,
+    "generation_batch_size": 4,
+    "visible_tests_mbpp": 1,
+    "visible_tests_humaneval": 3,
+    "timeout_seconds": 5.0
+  },
+  "arms": [
+    "base",
+    "selftrain_verified_r1",
+    "selftrain_verified_r2",
+    "selftrain_verified_r3",
+    "selftrain_unverified",
+    "oracle_sft",
+    "sample_more_matched_compute"
+  ],
+  "training": {
+    "generator_lora_max_steps_main": 80,
+    "generator_lora_max_steps_smoke": 30,
+    "batch_size": 1,
+    "grad_accum": 4,
+    "learning_rate": 0.0001,
+    "max_length": 1536,
+    "max_examples_per_task_verified": 2,
+    "max_examples_per_task_unverified": 2,
+    "max_examples_per_task_oracle": 1
+  },
+  "pre_registered_success_criteria": {
+    "primary": "Round-3 held-out coverage exceeds base beyond noise, selftrain_verified exceeds selftrain_unverified, and selftrain_verified beats sample_more_matched_compute at matched sampling budget.",
+    "secondary": "Transfer benchmark coverage rises versus base.",
+    "negative_decisive": "Train coverage rises while held-out coverage stays flat or regresses."
+  }
+}

@@ -1,0 +1,6 @@
+phase,epoch,loss,train_examples,quick_val_direct_accuracy,quick_val_valid_rate
+seed_supervised,1,7.9510817527771,24,0.0,0.0
+seed_supervised,2,7.412959257761638,24,0.0,0.0
+expert_round_1,1,6.969813823699951,24,0.0,0.0
+full_supervised,1,8.006490071614584,48,0.0,0.0
+full_supervised,2,7.373547871907552,48,0.0,0.0

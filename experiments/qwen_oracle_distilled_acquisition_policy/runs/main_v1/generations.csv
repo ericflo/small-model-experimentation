@@ -1,0 +1,1321 @@
+key,task_id,phase,method,row_id,prediction,raw
+Abbreviation.000001|base_plain|4656d51e497a37|eval0,Abbreviation.000001,answer,base_plain,eval0,C,C
+Abbreviation.000001|base_plain|4656d51e497a37|eval1,Abbreviation.000001,answer,base_plain,eval1,E,E
+Abbreviation.000001|base_plain|4656d51e497a37|eval2,Abbreviation.000001,answer,base_plain,eval2,E,E
+Abbreviation.000001|single_0|10f625a95e5abe|eval0,Abbreviation.000001,answer,single_0,eval0,C,C
+Abbreviation.000001|single_0|10f625a95e5abe|eval1,Abbreviation.000001,answer,single_0,eval1,E,E
+Abbreviation.000001|single_0|10f625a95e5abe|eval2,Abbreviation.000001,answer,single_0,eval2,E,E
+Abbreviation.000001|single_1|d99ef9e017e44f|eval0,Abbreviation.000001,answer,single_1,eval0,C,C
+Abbreviation.000001|single_1|d99ef9e017e44f|eval1,Abbreviation.000001,answer,single_1,eval1,E,E
+Abbreviation.000001|single_1|d99ef9e017e44f|eval2,Abbreviation.000001,answer,single_1,eval2,E,E
+Abbreviation.000001|single_2|10f625a95e5abe|eval0,Abbreviation.000001,answer,single_2,eval0,C,C
+Abbreviation.000001|single_2|10f625a95e5abe|eval1,Abbreviation.000001,answer,single_2,eval1,E,E
+Abbreviation.000001|single_2|10f625a95e5abe|eval2,Abbreviation.000001,answer,single_2,eval2,E,E
+Abbreviation.000001|single_3|10f625a95e5abe|eval0,Abbreviation.000001,answer,single_3,eval0,C,C
+Abbreviation.000001|single_3|10f625a95e5abe|eval1,Abbreviation.000001,answer,single_3,eval1,E,E
+Abbreviation.000001|single_3|10f625a95e5abe|eval2,Abbreviation.000001,answer,single_3,eval2,E,E
+Abbreviation.000001|single_4|10f625a95e5abe|eval0,Abbreviation.000001,answer,single_4,eval0,C,C
+Abbreviation.000001|single_4|10f625a95e5abe|eval1,Abbreviation.000001,answer,single_4,eval1,E,E
+Abbreviation.000001|single_4|10f625a95e5abe|eval2,Abbreviation.000001,answer,single_4,eval2,E,E
+Abbreviation.000001|single_5|ad63e41383d51e|eval0,Abbreviation.000001,answer,single_5,eval0,C,C
+Abbreviation.000001|single_5|ad63e41383d51e|eval1,Abbreviation.000001,answer,single_5,eval1,E,E
+Abbreviation.000001|single_5|ad63e41383d51e|eval2,Abbreviation.000001,answer,single_5,eval2,E,E
+Abbreviation.000001|qwen_select|budget1|step0|99cfd0a7f4fd91,Abbreviation.000001,select,qwen_choose1,step0,2,2
+Abbreviation.000001|qwen_select|budget4|step0|e3a51824a380b9,Abbreviation.000001,select,qwen_choose4,step0,3,3
+Abbreviation.000001|qwen_select|budget4|step1|71010b4d47d388,Abbreviation.000001,select,qwen_choose4,step1,0,0
+Abbreviation.000001|qwen_select|budget4|step2|5739a32ed129d3,Abbreviation.000001,select,qwen_choose4,step2,1,1
+Abbreviation.000001|qwen_select|budget4|step3|8fed64ba7c235b,Abbreviation.000001,select,qwen_choose4,step3,2,2
+Author.000001|base_plain|60039a8fc79775|eval0,Author.000001,answer,base_plain,eval0,2016,2016
+Author.000001|base_plain|60039a8fc79775|eval1,Author.000001,answer,base_plain,eval1,2016,2016
+Author.000001|base_plain|60039a8fc79775|eval2,Author.000001,answer,base_plain,eval2,1870,1870
+Author.000001|single_0|ab395f32de7e08|eval0,Author.000001,answer,single_0,eval0,2016,2016
+Author.000001|single_0|ab395f32de7e08|eval1,Author.000001,answer,single_0,eval1,2016,2016
+Author.000001|single_0|ab395f32de7e08|eval2,Author.000001,answer,single_0,eval2,1870,1870
+Author.000001|single_1|80307818cf8be4|eval0,Author.000001,answer,single_1,eval0,2016,2016
+Author.000001|single_1|80307818cf8be4|eval1,Author.000001,answer,single_1,eval1,2016,2016
+Author.000001|single_1|80307818cf8be4|eval2,Author.000001,answer,single_1,eval2,1870,1870
+Author.000001|single_2|b0c672207d6a22|eval0,Author.000001,answer,single_2,eval0,2016,2016
+Author.000001|single_2|b0c672207d6a22|eval1,Author.000001,answer,single_2,eval1,2016,2016
+Author.000001|single_2|b0c672207d6a22|eval2,Author.000001,answer,single_2,eval2,1870,1870
+Author.000001|single_3|8766e745f40d75|eval0,Author.000001,answer,single_3,eval0,2016,2016
+Author.000001|single_3|8766e745f40d75|eval1,Author.000001,answer,single_3,eval1,2016,2016
+Author.000001|single_3|8766e745f40d75|eval2,Author.000001,answer,single_3,eval2,1870,1870
+Author.000001|single_4|418d1952ba058c|eval0,Author.000001,answer,single_4,eval0,2016,2016
+Author.000001|single_4|418d1952ba058c|eval1,Author.000001,answer,single_4,eval1,2016,2016
+Author.000001|single_4|418d1952ba058c|eval2,Author.000001,answer,single_4,eval2,1870,1870
+Author.000001|single_5|a9efd8ec50060b|eval0,Author.000001,answer,single_5,eval0,2016,2016
+Author.000001|single_5|a9efd8ec50060b|eval1,Author.000001,answer,single_5,eval1,2016,2016
+Author.000001|single_5|a9efd8ec50060b|eval2,Author.000001,answer,single_5,eval2,1870,1870
+Author.000001|qwen_select|budget1|step0|e30be43c95fa5a,Author.000001,select,qwen_choose1,step0,0,0
+Author.000001|qwen_select|budget4|step0|ec65784503942b,Author.000001,select,qwen_choose4,step0,3,3
+Author.000001|qwen_select|budget4|step1|fa7090affa3d4f,Author.000001,select,qwen_choose4,step1,2,2
+Author.000001|qwen_select|budget4|step2|467bcac491277f,Author.000001,select,qwen_choose4,step2,0,0
+Author.000001|qwen_select|budget4|step3|e14b4ce735bcfa,Author.000001,select,qwen_choose4,step3,4,4
+BillingCode.000002|base_plain|e903131d97e6c8|eval0,BillingCode.000002,answer,base_plain,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|base_plain|e903131d97e6c8|eval1,BillingCode.000002,answer,base_plain,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|base_plain|e903131d97e6c8|eval2,BillingCode.000002,answer,base_plain,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|single_0|e18b9d17b182b9|eval0,BillingCode.000002,answer,single_0,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|single_0|e18b9d17b182b9|eval1,BillingCode.000002,answer,single_0,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|single_0|e18b9d17b182b9|eval2,BillingCode.000002,answer,single_0,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|single_1|8fe86e1608f58d|eval0,BillingCode.000002,answer,single_1,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|single_1|8fe86e1608f58d|eval1,BillingCode.000002,answer,single_1,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|single_1|8fe86e1608f58d|eval2,BillingCode.000002,answer,single_1,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|single_2|a184d74da51d33|eval0,BillingCode.000002,answer,single_2,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|single_2|a184d74da51d33|eval1,BillingCode.000002,answer,single_2,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|single_2|a184d74da51d33|eval2,BillingCode.000002,answer,single_2,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|single_3|82239e1fa546ef|eval0,BillingCode.000002,answer,single_3,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|single_3|82239e1fa546ef|eval1,BillingCode.000002,answer,single_3,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|single_3|82239e1fa546ef|eval2,BillingCode.000002,answer,single_3,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|single_4|67c15c6b785a16|eval0,BillingCode.000002,answer,single_4,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|single_4|67c15c6b785a16|eval1,BillingCode.000002,answer,single_4,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|single_4|67c15c6b785a16|eval2,BillingCode.000002,answer,single_4,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|single_5|0c1614db97fce2|eval0,BillingCode.000002,answer,single_5,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|single_5|0c1614db97fce2|eval1,BillingCode.000002,answer,single_5,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|single_5|0c1614db97fce2|eval2,BillingCode.000002,answer,single_5,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|qwen_select|budget1|step0|d1bc6dfef638c2,BillingCode.000002,select,qwen_choose1,step0,4,4
+BillingCode.000002|qwen_select|budget4|step0|8e79f7ded25f56,BillingCode.000002,select,qwen_choose4,step0,3,3
+BillingCode.000002|qwen_select|budget4|step1|6b26cf2301ded5,BillingCode.000002,select,qwen_choose4,step1,5,5
+BillingCode.000002|qwen_select|budget4|step2|4bf24cff9dd2d0,BillingCode.000002,select,qwen_choose4,step2,4,4
+BillingCode.000002|qwen_select|budget4|step3|2926998b7784cb,BillingCode.000002,select,qwen_choose4,step3,0,0
+Currency.000004|base_plain|31e8834e4f5da0|eval0,Currency.000004,answer,base_plain,eval0,�,�
+Currency.000004|base_plain|31e8834e4f5da0|eval1,Currency.000004,answer,base_plain,eval1,�,�
+Currency.000004|base_plain|31e8834e4f5da0|eval2,Currency.000004,answer,base_plain,eval2,�,�
+Currency.000004|single_0|328c36af74f012|eval0,Currency.000004,answer,single_0,eval0,�,�
+Currency.000004|single_0|328c36af74f012|eval1,Currency.000004,answer,single_0,eval1,�,�
+Currency.000004|single_0|328c36af74f012|eval2,Currency.000004,answer,single_0,eval2,�,�
+Currency.000004|single_1|f266afcf91701a|eval0,Currency.000004,answer,single_1,eval0,�,�
+Currency.000004|single_1|f266afcf91701a|eval1,Currency.000004,answer,single_1,eval1,�,�
+Currency.000004|single_1|f266afcf91701a|eval2,Currency.000004,answer,single_1,eval2,�,�
+Currency.000004|single_2|b5e26b3441e95e|eval0,Currency.000004,answer,single_2,eval0,�,�
+Currency.000004|single_2|b5e26b3441e95e|eval1,Currency.000004,answer,single_2,eval1,�,�
+Currency.000004|single_2|b5e26b3441e95e|eval2,Currency.000004,answer,single_2,eval2,�,�
+Currency.000004|single_3|92e1554289da5d|eval0,Currency.000004,answer,single_3,eval0,�,�
+Currency.000004|single_3|92e1554289da5d|eval1,Currency.000004,answer,single_3,eval1,�,�
+Currency.000004|single_3|92e1554289da5d|eval2,Currency.000004,answer,single_3,eval2,�,�
+Currency.000004|single_4|ab4ca23b74b4fd|eval0,Currency.000004,answer,single_4,eval0,�,�
+Currency.000004|single_4|ab4ca23b74b4fd|eval1,Currency.000004,answer,single_4,eval1,�,�
+Currency.000004|single_4|ab4ca23b74b4fd|eval2,Currency.000004,answer,single_4,eval2,�,�
+Currency.000004|single_5|e75d4f31f9f91d|eval0,Currency.000004,answer,single_5,eval0,�,�
+Currency.000004|single_5|e75d4f31f9f91d|eval1,Currency.000004,answer,single_5,eval1,�,�
+Currency.000004|single_5|e75d4f31f9f91d|eval2,Currency.000004,answer,single_5,eval2,�,�
+Currency.000004|qwen_select|budget1|step0|28cba01e249862,Currency.000004,select,qwen_choose1,step0,0,0
+Currency.000004|qwen_select|budget4|step0|28f07337a365a3,Currency.000004,select,qwen_choose4,step0,3,3
+Currency.000004|qwen_select|budget4|step1|42a210e287d0ec,Currency.000004,select,qwen_choose4,step1,2,2
+Currency.000004|qwen_select|budget4|step2|ffe4954e29601a,Currency.000004,select,qwen_choose4,step2,0,0
+Currency.000004|qwen_select|budget4|step3|79a21a20a81ddc,Currency.000004,select,qwen_choose4,step3,4,4
+DateTime.000014|base_plain|206820287a32db|eval0,DateTime.000014,answer,base_plain,eval0,Sunday #1 January 1998,Sunday #1 January 1998
+DateTime.000014|base_plain|206820287a32db|eval1,DateTime.000014,answer,base_plain,eval1,Monday #3 December 1973,Monday #3 December 1973
+DateTime.000014|base_plain|206820287a32db|eval2,DateTime.000014,answer,base_plain,eval2,Sunday #3 September 1932,Sunday #3 September 1932
+DateTime.000014|single_0|b70a78c266037a|eval0,DateTime.000014,answer,single_0,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|single_0|b70a78c266037a|eval1,DateTime.000014,answer,single_0,eval1,Monday #3 December 1973,Monday #3 December 1973
+DateTime.000014|single_0|b70a78c266037a|eval2,DateTime.000014,answer,single_0,eval2,Thursday #3 September 1932,Thursday #3 September 1932
+DateTime.000014|single_1|6fcb89d056210e|eval0,DateTime.000014,answer,single_1,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|single_1|6fcb89d056210e|eval1,DateTime.000014,answer,single_1,eval1,Thursday #12171973,Thursday #12171973
+DateTime.000014|single_1|6fcb89d056210e|eval2,DateTime.000014,answer,single_1,eval2,Sunday #1 September 1932,Sunday #1 September 1932
+DateTime.000014|single_2|4aaa480f4d02e6|eval0,DateTime.000014,answer,single_2,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|single_2|4aaa480f4d02e6|eval1,DateTime.000014,answer,single_2,eval1,Monday #3 December 1973,Monday #3 December 1973
+DateTime.000014|single_2|4aaa480f4d02e6|eval2,DateTime.000014,answer,single_2,eval2,Thursday #3 September 1932,Thursday #3 September 1932
+DateTime.000014|single_3|dd6dc316443510|eval0,DateTime.000014,answer,single_3,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|single_3|dd6dc316443510|eval1,DateTime.000014,answer,single_3,eval1,Wednesday #12 December 1973,Wednesday #12 December 1973
+DateTime.000014|single_3|dd6dc316443510|eval2,DateTime.000014,answer,single_3,eval2,Wednesday #1 September 1932,Wednesday #1 September 1932
+DateTime.000014|single_4|88f2a0a35d0f13|eval0,DateTime.000014,answer,single_4,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|single_4|88f2a0a35d0f13|eval1,DateTime.000014,answer,single_4,eval1,Thursday #12171973,Thursday #12171973
+DateTime.000014|single_4|88f2a0a35d0f13|eval2,DateTime.000014,answer,single_4,eval2,Thursday #1 September 1932,Thursday #1 September 1932
+DateTime.000014|single_5|f07500d67b09e4|eval0,DateTime.000014,answer,single_5,eval0,Thursday #2 January 1998,Thursday #2 January 1998
+DateTime.000014|single_5|f07500d67b09e4|eval1,DateTime.000014,answer,single_5,eval1,Thursday #3 December 1973,Thursday #3 December 1973
+DateTime.000014|single_5|f07500d67b09e4|eval2,DateTime.000014,answer,single_5,eval2,Thursday #3 September 1932,Thursday #3 September 1932
+DateTime.000014|qwen_select|budget1|step0|3c3d87bdacc045,DateTime.000014,select,qwen_choose1,step0,0,0
+DateTime.000014|qwen_select|budget4|step0|d702b1005463fe,DateTime.000014,select,qwen_choose4,step0,3,3
+DateTime.000014|qwen_select|budget4|step1|391201b28a4469,DateTime.000014,select,qwen_choose4,step1,2,2
+DateTime.000014|qwen_select|budget4|step2|255312ea28c703,DateTime.000014,select,qwen_choose4,step2,1,1
+DateTime.000014|qwen_select|budget4|step3|d313da2600ed9f,DateTime.000014,select,qwen_choose4,step3,1,1
+DateTime.000018|base_plain|00a68f3d4f0234|eval0,DateTime.000018,answer,base_plain,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|base_plain|00a68f3d4f0234|eval1,DateTime.000018,answer,base_plain,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|base_plain|00a68f3d4f0234|eval2,DateTime.000018,answer,base_plain,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|single_0|54c7f41302fa82|eval0,DateTime.000018,answer,single_0,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|single_0|54c7f41302fa82|eval1,DateTime.000018,answer,single_0,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|single_0|54c7f41302fa82|eval2,DateTime.000018,answer,single_0,eval2,5 April 2088,5 April 2088
+DateTime.000018|single_1|82f5c79b3d6de0|eval0,DateTime.000018,answer,single_1,eval0,08 Jul 2237,08 Jul 2237
+DateTime.000018|single_1|82f5c79b3d6de0|eval1,DateTime.000018,answer,single_1,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|single_1|82f5c79b3d6de0|eval2,DateTime.000018,answer,single_1,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|single_2|895bff134e5c86|eval0,DateTime.000018,answer,single_2,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|single_2|895bff134e5c86|eval1,DateTime.000018,answer,single_2,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|single_2|895bff134e5c86|eval2,DateTime.000018,answer,single_2,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|single_3|3d488a1d56bedc|eval0,DateTime.000018,answer,single_3,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|single_3|3d488a1d56bedc|eval1,DateTime.000018,answer,single_3,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|single_3|3d488a1d56bedc|eval2,DateTime.000018,answer,single_3,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|single_4|2614ba5d950edd|eval0,DateTime.000018,answer,single_4,eval0,08 Jul 2237,08 Jul 2237
+DateTime.000018|single_4|2614ba5d950edd|eval1,DateTime.000018,answer,single_4,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|single_4|2614ba5d950edd|eval2,DateTime.000018,answer,single_4,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|single_5|2b7f6e9a1772b0|eval0,DateTime.000018,answer,single_5,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|single_5|2b7f6e9a1772b0|eval1,DateTime.000018,answer,single_5,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|single_5|2b7f6e9a1772b0|eval2,DateTime.000018,answer,single_5,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|qwen_select|budget1|step0|006bbf5794df6a,DateTime.000018,select,qwen_choose1,step0,3,3
+DateTime.000018|qwen_select|budget4|step0|4b3ffcd09d5752,DateTime.000018,select,qwen_choose4,step0,3,3
+DateTime.000018|qwen_select|budget4|step1|e59dc50e107fe8,DateTime.000018,select,qwen_choose4,step1,2,2
+DateTime.000018|qwen_select|budget4|step2|6e1311f0d141ac,DateTime.000018,select,qwen_choose4,step2,1,1
+DateTime.000018|qwen_select|budget4|step3|9920d27513ef7f,DateTime.000018,select,qwen_choose4,step3,0,0
+DateTime.000027|base_plain|32501e20c5ad80|eval0,DateTime.000027,answer,base_plain,eval0,Q3 '2237,Q3 '2237
+DateTime.000027|base_plain|32501e20c5ad80|eval1,DateTime.000027,answer,base_plain,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|base_plain|32501e20c5ad80|eval2,DateTime.000027,answer,base_plain,eval2,Q1 '2088,Q1 '2088
+DateTime.000027|single_0|a52f40ab658f78|eval0,DateTime.000027,answer,single_0,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|single_0|a52f40ab658f78|eval1,DateTime.000027,answer,single_0,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|single_0|a52f40ab658f78|eval2,DateTime.000027,answer,single_0,eval2,Q1 '2088,Q1 '2088
+DateTime.000027|single_1|ac1a8e84185956|eval0,DateTime.000027,answer,single_1,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|single_1|ac1a8e84185956|eval1,DateTime.000027,answer,single_1,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|single_1|ac1a8e84185956|eval2,DateTime.000027,answer,single_1,eval2,Q2 '2088,Q2 '2088
+DateTime.000027|single_2|1f3b1043fef5ad|eval0,DateTime.000027,answer,single_2,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|single_2|1f3b1043fef5ad|eval1,DateTime.000027,answer,single_2,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|single_2|1f3b1043fef5ad|eval2,DateTime.000027,answer,single_2,eval2,Q1 '2088,Q1 '2088
+DateTime.000027|single_3|3e336fe3b8946e|eval0,DateTime.000027,answer,single_3,eval0,Q3 '2237,Q3 '2237
+DateTime.000027|single_3|3e336fe3b8946e|eval1,DateTime.000027,answer,single_3,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|single_3|3e336fe3b8946e|eval2,DateTime.000027,answer,single_3,eval2,Q1 '2088,Q1 '2088
+DateTime.000027|single_4|773ff0cb42e49d|eval0,DateTime.000027,answer,single_4,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|single_4|773ff0cb42e49d|eval1,DateTime.000027,answer,single_4,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|single_4|773ff0cb42e49d|eval2,DateTime.000027,answer,single_4,eval2,Q2 '2088,Q2 '2088
+DateTime.000027|single_5|a253dd4991bac9|eval0,DateTime.000027,answer,single_5,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|single_5|a253dd4991bac9|eval1,DateTime.000027,answer,single_5,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|single_5|a253dd4991bac9|eval2,DateTime.000027,answer,single_5,eval2,Q2 '2088,Q2 '2088
+DateTime.000027|qwen_select|budget1|step0|b443762bcb1dab,DateTime.000027,select,qwen_choose1,step0,0,0
+DateTime.000027|qwen_select|budget4|step0|9e1b117cb1b29b,DateTime.000027,select,qwen_choose4,step0,3,3
+DateTime.000027|qwen_select|budget4|step1|3cd2e207ec5900,DateTime.000027,select,qwen_choose4,step1,2,2
+DateTime.000027|qwen_select|budget4|step2|bb2915ef9f7e90,DateTime.000027,select,qwen_choose4,step2,0,0
+DateTime.000027|qwen_select|budget4|step3|738bad3ad9fb6b,DateTime.000027,select,qwen_choose4,step3,4,4
+DateTime.000029|base_plain|c1e86e973a0bb9|eval0,DateTime.000029,answer,base_plain,eval0,Friday,Friday
+DateTime.000029|base_plain|c1e86e973a0bb9|eval1,DateTime.000029,answer,base_plain,eval1,Thursday,Thursday
+DateTime.000029|base_plain|c1e86e973a0bb9|eval2,DateTime.000029,answer,base_plain,eval2,Thursday,Thursday
+DateTime.000029|single_0|c6cbd936eb9ef4|eval0,DateTime.000029,answer,single_0,eval0,Sunday,Sunday
+DateTime.000029|single_0|c6cbd936eb9ef4|eval1,DateTime.000029,answer,single_0,eval1,Thursday,Thursday
+DateTime.000029|single_0|c6cbd936eb9ef4|eval2,DateTime.000029,answer,single_0,eval2,Sunday,Sunday
+DateTime.000029|single_1|3218ac0e5c438a|eval0,DateTime.000029,answer,single_1,eval0,Friday,Friday
+DateTime.000029|single_1|3218ac0e5c438a|eval1,DateTime.000029,answer,single_1,eval1,Thursday,Thursday
+DateTime.000029|single_1|3218ac0e5c438a|eval2,DateTime.000029,answer,single_1,eval2,Thursday,Thursday
+DateTime.000029|single_2|dc79a39576e7d1|eval0,DateTime.000029,answer,single_2,eval0,Thursday,Thursday
+DateTime.000029|single_2|dc79a39576e7d1|eval1,DateTime.000029,answer,single_2,eval1,Thursday,Thursday
+DateTime.000029|single_2|dc79a39576e7d1|eval2,DateTime.000029,answer,single_2,eval2,Thursday,Thursday
+DateTime.000029|single_3|47947d825dd287|eval0,DateTime.000029,answer,single_3,eval0,Thursday,Thursday
+DateTime.000029|single_3|47947d825dd287|eval1,DateTime.000029,answer,single_3,eval1,Thursday,Thursday
+DateTime.000029|single_3|47947d825dd287|eval2,DateTime.000029,answer,single_3,eval2,Sunday,Sunday
+DateTime.000029|single_4|98b2504d8c000e|eval0,DateTime.000029,answer,single_4,eval0,Thursday,Thursday
+DateTime.000029|single_4|98b2504d8c000e|eval1,DateTime.000029,answer,single_4,eval1,Thursday,Thursday
+DateTime.000029|single_4|98b2504d8c000e|eval2,DateTime.000029,answer,single_4,eval2,Thursday,Thursday
+DateTime.000029|single_5|cf590918ec3ce3|eval0,DateTime.000029,answer,single_5,eval0,Thursday,Thursday
+DateTime.000029|single_5|cf590918ec3ce3|eval1,DateTime.000029,answer,single_5,eval1,Thursday,Thursday
+DateTime.000029|single_5|cf590918ec3ce3|eval2,DateTime.000029,answer,single_5,eval2,Thursday,Thursday
+DateTime.000029|qwen_select|budget1|step0|234e539539bd2a,DateTime.000029,select,qwen_choose1,step0,3,3
+DateTime.000029|qwen_select|budget4|step0|47a9b55ba5a7ea,DateTime.000029,select,qwen_choose4,step0,3,3
+DateTime.000029|qwen_select|budget4|step1|e5a23e86a8694c,DateTime.000029,select,qwen_choose4,step1,2,2
+DateTime.000029|qwen_select|budget4|step2|83ae7994778c6f,DateTime.000029,select,qwen_choose4,step2,1,1
+DateTime.000029|qwen_select|budget4|step3|b96f39e1a80985,DateTime.000029,select,qwen_choose4,step3,0,0
+DateTime.000030|base_plain|476f11e9acdba2|eval0,DateTime.000030,answer,base_plain,eval0,"Saturday, July 8, 2237","Saturday, July 8, 2237"
+DateTime.000030|base_plain|476f11e9acdba2|eval1,DateTime.000030,answer,base_plain,eval1,"Saturday, November 3, 1904","Saturday, November 3, 1904"
+DateTime.000030|base_plain|476f11e9acdba2|eval2,DateTime.000030,answer,base_plain,eval2,"Saturday, April 5, 2088","Saturday, April 5, 2088"
+DateTime.000030|single_0|9bea28292cde7a|eval0,DateTime.000030,answer,single_0,eval0,"Saturday, July 8, 2237","Saturday, July 8, 2237"
+DateTime.000030|single_0|9bea28292cde7a|eval1,DateTime.000030,answer,single_0,eval1,"Saturday, November 3, 1904","Saturday, November 3, 1904"
+DateTime.000030|single_0|9bea28292cde7a|eval2,DateTime.000030,answer,single_0,eval2,"Saturday, April 5, 2088","Saturday, April 5, 2088"
+DateTime.000030|single_1|15cfda0c8e15fe|eval0,DateTime.000030,answer,single_1,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|single_1|15cfda0c8e15fe|eval1,DateTime.000030,answer,single_1,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|single_1|15cfda0c8e15fe|eval2,DateTime.000030,answer,single_1,eval2,"Thursday, April 5, 2088","Thursday, April 5, 2088"
+DateTime.000030|single_2|c51ab6b6b14f74|eval0,DateTime.000030,answer,single_2,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|single_2|c51ab6b6b14f74|eval1,DateTime.000030,answer,single_2,eval1,"Saturday, November 3, 1904","Saturday, November 3, 1904"
+DateTime.000030|single_2|c51ab6b6b14f74|eval2,DateTime.000030,answer,single_2,eval2,"Thursday, April 5, 2088","Thursday, April 5, 2088"
+DateTime.000030|single_3|97bba327da42c1|eval0,DateTime.000030,answer,single_3,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|single_3|97bba327da42c1|eval1,DateTime.000030,answer,single_3,eval1,"Saturday, November 3, 1904","Saturday, November 3, 1904"
+DateTime.000030|single_3|97bba327da42c1|eval2,DateTime.000030,answer,single_3,eval2,"Saturday, April 5, 2088","Saturday, April 5, 2088"
+DateTime.000030|single_4|cd8ff136deb2b1|eval0,DateTime.000030,answer,single_4,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|single_4|cd8ff136deb2b1|eval1,DateTime.000030,answer,single_4,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|single_4|cd8ff136deb2b1|eval2,DateTime.000030,answer,single_4,eval2,"Thursday, April 5, 2088","Thursday, April 5, 2088"
+DateTime.000030|single_5|0830054e50cf24|eval0,DateTime.000030,answer,single_5,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|single_5|0830054e50cf24|eval1,DateTime.000030,answer,single_5,eval1,"Saturday, November 3, 1904","Saturday, November 3, 1904"
+DateTime.000030|single_5|0830054e50cf24|eval2,DateTime.000030,answer,single_5,eval2,"Thursday, April 5, 2088","Thursday, April 5, 2088"
+DateTime.000030|qwen_select|budget1|step0|cf4a8a59500010,DateTime.000030,select,qwen_choose1,step0,3,3
+DateTime.000030|qwen_select|budget4|step0|26714ff28805b2,DateTime.000030,select,qwen_choose4,step0,3,3
+DateTime.000030|qwen_select|budget4|step1|92b9fd39ff96f9,DateTime.000030,select,qwen_choose4,step1,2,2
+DateTime.000030|qwen_select|budget4|step2|b65fe3814006d1,DateTime.000030,select,qwen_choose4,step2,0,0
+DateTime.000030|qwen_select|budget4|step3|cfe4e57240471b,DateTime.000030,select,qwen_choose4,step3,0,0
+DateTime.000092|base_plain|108dcf85e5482a|eval0,DateTime.000092,answer,base_plain,eval0,16,16
+DateTime.000092|base_plain|108dcf85e5482a|eval1,DateTime.000092,answer,base_plain,eval1,17,17
+DateTime.000092|base_plain|108dcf85e5482a|eval2,DateTime.000092,answer,base_plain,eval2,17,17
+DateTime.000092|single_0|434485c91bfd7e|eval0,DateTime.000092,answer,single_0,eval0,16,16
+DateTime.000092|single_0|434485c91bfd7e|eval1,DateTime.000092,answer,single_0,eval1,17,17
+DateTime.000092|single_0|434485c91bfd7e|eval2,DateTime.000092,answer,single_0,eval2,17,17
+DateTime.000092|single_1|6f4302c00cb799|eval0,DateTime.000092,answer,single_1,eval0,16,16
+DateTime.000092|single_1|6f4302c00cb799|eval1,DateTime.000092,answer,single_1,eval1,17,17
+DateTime.000092|single_1|6f4302c00cb799|eval2,DateTime.000092,answer,single_1,eval2,17,17
+DateTime.000092|single_2|3a9bebb30f40eb|eval0,DateTime.000092,answer,single_2,eval0,16,16
+DateTime.000092|single_2|3a9bebb30f40eb|eval1,DateTime.000092,answer,single_2,eval1,17,17
+DateTime.000092|single_2|3a9bebb30f40eb|eval2,DateTime.000092,answer,single_2,eval2,17,17
+DateTime.000092|single_3|e899c88c2e1177|eval0,DateTime.000092,answer,single_3,eval0,16,16
+DateTime.000092|single_3|e899c88c2e1177|eval1,DateTime.000092,answer,single_3,eval1,17,17
+DateTime.000092|single_3|e899c88c2e1177|eval2,DateTime.000092,answer,single_3,eval2,17,17
+DateTime.000092|single_4|4c90eb8803ce66|eval0,DateTime.000092,answer,single_4,eval0,16,16
+DateTime.000092|single_4|4c90eb8803ce66|eval1,DateTime.000092,answer,single_4,eval1,17,17
+DateTime.000092|single_4|4c90eb8803ce66|eval2,DateTime.000092,answer,single_4,eval2,17,17
+DateTime.000092|single_5|cda5f504ab8bfc|eval0,DateTime.000092,answer,single_5,eval0,16,16
+DateTime.000092|single_5|cda5f504ab8bfc|eval1,DateTime.000092,answer,single_5,eval1,17,17
+DateTime.000092|single_5|cda5f504ab8bfc|eval2,DateTime.000092,answer,single_5,eval2,17,17
+DateTime.000092|qwen_select|budget1|step0|2da16723a6aad2,DateTime.000092,select,qwen_choose1,step0,0,0
+DateTime.000092|qwen_select|budget4|step0|3ddc8c21fe877f,DateTime.000092,select,qwen_choose4,step0,3,3
+DateTime.000092|qwen_select|budget4|step1|1f738ab0e6306b,DateTime.000092,select,qwen_choose4,step1,2,2
+DateTime.000092|qwen_select|budget4|step2|01b9120f9d2779,DateTime.000092,select,qwen_choose4,step2,1,1
+DateTime.000092|qwen_select|budget4|step3|5a34238c560096,DateTime.000092,select,qwen_choose4,step3,0,0
+DateTime.000096|base_plain|663ffc60de1b9b|eval0,DateTime.000096,answer,base_plain,eval0,2089,2089
+DateTime.000096|base_plain|663ffc60de1b9b|eval1,DateTime.000096,answer,base_plain,eval1,24,24
+DateTime.000096|base_plain|663ffc60de1b9b|eval2,DateTime.000096,answer,base_plain,eval2,30,30
+DateTime.000096|single_0|466fc30a556073|eval0,DateTime.000096,answer,single_0,eval0,2089,2089
+DateTime.000096|single_0|466fc30a556073|eval1,DateTime.000096,answer,single_0,eval1,24,24
+DateTime.000096|single_0|466fc30a556073|eval2,DateTime.000096,answer,single_0,eval2,30,30
+DateTime.000096|single_1|0965cb71a08249|eval0,DateTime.000096,answer,single_1,eval0,2089,2089
+DateTime.000096|single_1|0965cb71a08249|eval1,DateTime.000096,answer,single_1,eval1,24,24
+DateTime.000096|single_1|0965cb71a08249|eval2,DateTime.000096,answer,single_1,eval2,30,30
+DateTime.000096|single_2|8273d5e79066d2|eval0,DateTime.000096,answer,single_2,eval0,2089,2089
+DateTime.000096|single_2|8273d5e79066d2|eval1,DateTime.000096,answer,single_2,eval1,24,24
+DateTime.000096|single_2|8273d5e79066d2|eval2,DateTime.000096,answer,single_2,eval2,30,30
+DateTime.000096|single_3|d0fcf8a0ca9426|eval0,DateTime.000096,answer,single_3,eval0,8,8
+DateTime.000096|single_3|d0fcf8a0ca9426|eval1,DateTime.000096,answer,single_3,eval1,24,24
+DateTime.000096|single_3|d0fcf8a0ca9426|eval2,DateTime.000096,answer,single_3,eval2,30,30
+DateTime.000096|single_4|455f8351e8cddc|eval0,DateTime.000096,answer,single_4,eval0,8,8
+DateTime.000096|single_4|455f8351e8cddc|eval1,DateTime.000096,answer,single_4,eval1,24,24
+DateTime.000096|single_4|455f8351e8cddc|eval2,DateTime.000096,answer,single_4,eval2,30,30
+DateTime.000096|single_5|7ae3db23a42494|eval0,DateTime.000096,answer,single_5,eval0,2089,2089
+DateTime.000096|single_5|7ae3db23a42494|eval1,DateTime.000096,answer,single_5,eval1,24,24
+DateTime.000096|single_5|7ae3db23a42494|eval2,DateTime.000096,answer,single_5,eval2,30,30
+DateTime.000096|qwen_select|budget1|step0|356392f5c432fc,DateTime.000096,select,qwen_choose1,step0,5,5
+DateTime.000096|qwen_select|budget4|step0|6e8b33b4d5a238,DateTime.000096,select,qwen_choose4,step0,3,3
+DateTime.000096|qwen_select|budget4|step1|f8cbd52802db94,DateTime.000096,select,qwen_choose4,step1,2,2
+DateTime.000096|qwen_select|budget4|step2|8098942e82a8a3,DateTime.000096,select,qwen_choose4,step2,5,5
+DateTime.000096|qwen_select|budget4|step3|bc2bedb4109cd2,DateTime.000096,select,qwen_choose4,step3,4,4
+DateTime.000102|base_plain|f0ee2e269ad542|eval0,DateTime.000102,answer,base_plain,eval0,10,10
+DateTime.000102|base_plain|f0ee2e269ad542|eval1,DateTime.000102,answer,base_plain,eval1,15,15
+DateTime.000102|base_plain|f0ee2e269ad542|eval2,DateTime.000102,answer,base_plain,eval2,8,8
+DateTime.000102|single_0|3252ac3bcdfbd9|eval0,DateTime.000102,answer,single_0,eval0,10,10
+DateTime.000102|single_0|3252ac3bcdfbd9|eval1,DateTime.000102,answer,single_0,eval1,15,15
+DateTime.000102|single_0|3252ac3bcdfbd9|eval2,DateTime.000102,answer,single_0,eval2,8,8
+DateTime.000102|single_1|a842446abce896|eval0,DateTime.000102,answer,single_1,eval0,10,10
+DateTime.000102|single_1|a842446abce896|eval1,DateTime.000102,answer,single_1,eval1,15,15
+DateTime.000102|single_1|a842446abce896|eval2,DateTime.000102,answer,single_1,eval2,8,8
+DateTime.000102|single_2|300055c450e44a|eval0,DateTime.000102,answer,single_2,eval0,10,10
+DateTime.000102|single_2|300055c450e44a|eval1,DateTime.000102,answer,single_2,eval1,15,15
+DateTime.000102|single_2|300055c450e44a|eval2,DateTime.000102,answer,single_2,eval2,8,8
+DateTime.000102|single_3|d5cba5f016bffc|eval0,DateTime.000102,answer,single_3,eval0,0,0
+DateTime.000102|single_3|d5cba5f016bffc|eval1,DateTime.000102,answer,single_3,eval1,3,3
+DateTime.000102|single_3|d5cba5f016bffc|eval2,DateTime.000102,answer,single_3,eval2,8,8
+DateTime.000102|single_4|f5353000ae0a65|eval0,DateTime.000102,answer,single_4,eval0,05,05
+DateTime.000102|single_4|f5353000ae0a65|eval1,DateTime.000102,answer,single_4,eval1,15,15
+DateTime.000102|single_4|f5353000ae0a65|eval2,DateTime.000102,answer,single_4,eval2,8,8
+DateTime.000102|single_5|432319c1106e64|eval0,DateTime.000102,answer,single_5,eval0,0,0
+DateTime.000102|single_5|432319c1106e64|eval1,DateTime.000102,answer,single_5,eval1,15,15
+DateTime.000102|single_5|432319c1106e64|eval2,DateTime.000102,answer,single_5,eval2,8,8
+DateTime.000102|qwen_select|budget1|step0|df2e53e251b1a6,DateTime.000102,select,qwen_choose1,step0,3,3
+DateTime.000102|qwen_select|budget4|step0|37f4cef9981ca9,DateTime.000102,select,qwen_choose4,step0,3,3
+DateTime.000102|qwen_select|budget4|step1|d55b07a2c0a032,DateTime.000102,select,qwen_choose4,step1,2,2
+DateTime.000102|qwen_select|budget4|step2|c76eeafac042c0,DateTime.000102,select,qwen_choose4,step2,1,1
+DateTime.000102|qwen_select|budget4|step3|d8727a82ce9d0d,DateTime.000102,select,qwen_choose4,step3,4,4
+DateTime.000106|base_plain|8936b9cf8a6288|eval0,DateTime.000106,answer,base_plain,eval0,Thu,Thu
+DateTime.000106|base_plain|8936b9cf8a6288|eval1,DateTime.000106,answer,base_plain,eval1,Thu,Thu
+DateTime.000106|base_plain|8936b9cf8a6288|eval2,DateTime.000106,answer,base_plain,eval2,Thu,Thu
+DateTime.000106|single_0|442d42be38c2ac|eval0,DateTime.000106,answer,single_0,eval0,Thu,Thu
+DateTime.000106|single_0|442d42be38c2ac|eval1,DateTime.000106,answer,single_0,eval1,Thu,Thu
+DateTime.000106|single_0|442d42be38c2ac|eval2,DateTime.000106,answer,single_0,eval2,Thu,Thu
+DateTime.000106|single_1|d809013ba32ce6|eval0,DateTime.000106,answer,single_1,eval0,Fri,Fri
+DateTime.000106|single_1|d809013ba32ce6|eval1,DateTime.000106,answer,single_1,eval1,Wed,Wed
+DateTime.000106|single_1|d809013ba32ce6|eval2,DateTime.000106,answer,single_1,eval2,Fri,Fri
+DateTime.000106|single_2|53822ad164be5a|eval0,DateTime.000106,answer,single_2,eval0,Thu,Thu
+DateTime.000106|single_2|53822ad164be5a|eval1,DateTime.000106,answer,single_2,eval1,Thu,Thu
+DateTime.000106|single_2|53822ad164be5a|eval2,DateTime.000106,answer,single_2,eval2,Thu,Thu
+DateTime.000106|single_3|a83830074118aa|eval0,DateTime.000106,answer,single_3,eval0,Thu,Thu
+DateTime.000106|single_3|a83830074118aa|eval1,DateTime.000106,answer,single_3,eval1,Thu,Thu
+DateTime.000106|single_3|a83830074118aa|eval2,DateTime.000106,answer,single_3,eval2,Thu,Thu
+DateTime.000106|single_4|c340f2bc0fc662|eval0,DateTime.000106,answer,single_4,eval0,Thu,Thu
+DateTime.000106|single_4|c340f2bc0fc662|eval1,DateTime.000106,answer,single_4,eval1,Thu,Thu
+DateTime.000106|single_4|c340f2bc0fc662|eval2,DateTime.000106,answer,single_4,eval2,Thu,Thu
+DateTime.000106|single_5|15f4de8e802f74|eval0,DateTime.000106,answer,single_5,eval0,Thu,Thu
+DateTime.000106|single_5|15f4de8e802f74|eval1,DateTime.000106,answer,single_5,eval1,Thu,Thu
+DateTime.000106|single_5|15f4de8e802f74|eval2,DateTime.000106,answer,single_5,eval2,Thu,Thu
+DateTime.000106|qwen_select|budget1|step0|75f1ed31bc544c,DateTime.000106,select,qwen_choose1,step0,0,0
+DateTime.000106|qwen_select|budget4|step0|90fcd0e8dea033,DateTime.000106,select,qwen_choose4,step0,3,3
+DateTime.000106|qwen_select|budget4|step1|3e80a3e8dc73d9,DateTime.000106,select,qwen_choose4,step1,2,2
+DateTime.000106|qwen_select|budget4|step2|0e4e664eef7bab,DateTime.000106,select,qwen_choose4,step2,0,0
+DateTime.000106|qwen_select|budget4|step3|fbcf97993ab2b4,DateTime.000106,select,qwen_choose4,step3,1,1
+DateTime.000110|base_plain|bae3f91eb50776|eval0,DateTime.000110,answer,base_plain,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|base_plain|bae3f91eb50776|eval1,DateTime.000110,answer,base_plain,eval1,01141982 15:13,01141982 15:13
+DateTime.000110|base_plain|bae3f91eb50776|eval2,DateTime.000110,answer,base_plain,eval2,01222030 08:18,01222030 08:18
+DateTime.000110|single_0|de24b62f9c5f00|eval0,DateTime.000110,answer,single_0,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|single_0|de24b62f9c5f00|eval1,DateTime.000110,answer,single_0,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|single_0|de24b62f9c5f00|eval2,DateTime.000110,answer,single_0,eval2,02222030 8:18,02222030 8:18
+DateTime.000110|single_1|002b6f024c1201|eval0,DateTime.000110,answer,single_1,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|single_1|002b6f024c1201|eval1,DateTime.000110,answer,single_1,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|single_1|002b6f024c1201|eval2,DateTime.000110,answer,single_1,eval2,03222030 08:18,03222030 08:18
+DateTime.000110|single_2|e412e3230fdacf|eval0,DateTime.000110,answer,single_2,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|single_2|e412e3230fdacf|eval1,DateTime.000110,answer,single_2,eval1,01141982 15:13,01141982 15:13
+DateTime.000110|single_2|e412e3230fdacf|eval2,DateTime.000110,answer,single_2,eval2,01222030 8:18,01222030 8:18
+DateTime.000110|single_3|386f4c45fe02cb|eval0,DateTime.000110,answer,single_3,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|single_3|386f4c45fe02cb|eval1,DateTime.000110,answer,single_3,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|single_3|386f4c45fe02cb|eval2,DateTime.000110,answer,single_3,eval2,01222030 8:18,01222030 8:18
+DateTime.000110|single_4|435871f408fb36|eval0,DateTime.000110,answer,single_4,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|single_4|435871f408fb36|eval1,DateTime.000110,answer,single_4,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|single_4|435871f408fb36|eval2,DateTime.000110,answer,single_4,eval2,11222030 8:18,11222030 8:18
+DateTime.000110|single_5|edd541a5dbe09f|eval0,DateTime.000110,answer,single_5,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|single_5|edd541a5dbe09f|eval1,DateTime.000110,answer,single_5,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|single_5|edd541a5dbe09f|eval2,DateTime.000110,answer,single_5,eval2,11222030 8:18,11222030 8:18
+DateTime.000110|qwen_select|budget1|step0|b605ebaee22e53,DateTime.000110,select,qwen_choose1,step0,0,0
+DateTime.000110|qwen_select|budget4|step0|e5c9f220f5469c,DateTime.000110,select,qwen_choose4,step0,3,3
+DateTime.000110|qwen_select|budget4|step1|c92b5716ec6399,DateTime.000110,select,qwen_choose4,step1,0,0
+DateTime.000110|qwen_select|budget4|step2|4dc668964bc523,DateTime.000110,select,qwen_choose4,step2,2,2
+DateTime.000110|qwen_select|budget4|step3|fdf3ceaade66d9,DateTime.000110,select,qwen_choose4,step3,0,0
+DateTime.000112|base_plain|57680db96192ad|eval0,DateTime.000112,answer,base_plain,eval0,Q1 2038,Q1 2038
+DateTime.000112|base_plain|57680db96192ad|eval1,DateTime.000112,answer,base_plain,eval1,Q3 1982,Q3 1982
+DateTime.000112|base_plain|57680db96192ad|eval2,DateTime.000112,answer,base_plain,eval2,Q4 2030,Q4 2030
+DateTime.000112|single_0|4b875511507d4a|eval0,DateTime.000112,answer,single_0,eval0,Q1 2038,Q1 2038
+DateTime.000112|single_0|4b875511507d4a|eval1,DateTime.000112,answer,single_0,eval1,Q3 1982,Q3 1982
+DateTime.000112|single_0|4b875511507d4a|eval2,DateTime.000112,answer,single_0,eval2,Q4 2030,Q4 2030
+DateTime.000112|single_1|e1ac7b24cda90a|eval0,DateTime.000112,answer,single_1,eval0,Q1 2038,Q1 2038
+DateTime.000112|single_1|e1ac7b24cda90a|eval1,DateTime.000112,answer,single_1,eval1,Q3 1982,Q3 1982
+DateTime.000112|single_1|e1ac7b24cda90a|eval2,DateTime.000112,answer,single_1,eval2,Q4 2030,Q4 2030
+DateTime.000112|single_2|dd80389c1748ef|eval0,DateTime.000112,answer,single_2,eval0,Q1 2038,Q1 2038
+DateTime.000112|single_2|dd80389c1748ef|eval1,DateTime.000112,answer,single_2,eval1,Q3 1982,Q3 1982
+DateTime.000112|single_2|dd80389c1748ef|eval2,DateTime.000112,answer,single_2,eval2,Q4 2030,Q4 2030
+DateTime.000112|single_3|782e810f7b66c1|eval0,DateTime.000112,answer,single_3,eval0,Q1 2038,Q1 2038
+DateTime.000112|single_3|782e810f7b66c1|eval1,DateTime.000112,answer,single_3,eval1,Q3 1982,Q3 1982
+DateTime.000112|single_3|782e810f7b66c1|eval2,DateTime.000112,answer,single_3,eval2,Q4 2030,Q4 2030
+DateTime.000112|single_4|d4719e4cca2c2a|eval0,DateTime.000112,answer,single_4,eval0,Q1 2038,Q1 2038
+DateTime.000112|single_4|d4719e4cca2c2a|eval1,DateTime.000112,answer,single_4,eval1,Q3 1982,Q3 1982
+DateTime.000112|single_4|d4719e4cca2c2a|eval2,DateTime.000112,answer,single_4,eval2,Q4 2030,Q4 2030
+DateTime.000112|single_5|790cf9cdb4471a|eval0,DateTime.000112,answer,single_5,eval0,Q1 2038,Q1 2038
+DateTime.000112|single_5|790cf9cdb4471a|eval1,DateTime.000112,answer,single_5,eval1,Q3 1982,Q3 1982
+DateTime.000112|single_5|790cf9cdb4471a|eval2,DateTime.000112,answer,single_5,eval2,Q4 2030,Q4 2030
+DateTime.000112|qwen_select|budget1|step0|3919280a6ca3e6,DateTime.000112,select,qwen_choose1,step0,0,0
+DateTime.000112|qwen_select|budget4|step0|9f061376ae5dcf,DateTime.000112,select,qwen_choose4,step0,3,3
+DateTime.000112|qwen_select|budget4|step1|16c7393a373304,DateTime.000112,select,qwen_choose4,step1,2,2
+DateTime.000112|qwen_select|budget4|step2|c450731599dee9,DateTime.000112,select,qwen_choose4,step2,0,0
+DateTime.000112|qwen_select|budget4|step3|c6ef6ad0fc633c,DateTime.000112,select,qwen_choose4,step3,1,1
+DateTime.000113|base_plain|a88cb09a915b35|eval0,DateTime.000113,answer,base_plain,eval0,10:59-11:00,10:59-11:00
+DateTime.000113|base_plain|a88cb09a915b35|eval1,DateTime.000113,answer,base_plain,eval1,15:15-16:00,15:15-16:00
+DateTime.000113|base_plain|a88cb09a915b35|eval2,DateTime.000113,answer,base_plain,eval2,8:18-8:19,8:18-8:19
+DateTime.000113|single_0|3fc4fb9e1c7ff2|eval0,DateTime.000113,answer,single_0,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|single_0|3fc4fb9e1c7ff2|eval1,DateTime.000113,answer,single_0,eval1,15:15-16:00,15:15-16:00
+DateTime.000113|single_0|3fc4fb9e1c7ff2|eval2,DateTime.000113,answer,single_0,eval2,8:15-8:30,8:15-8:30
+DateTime.000113|single_1|4c7980bb13a3b3|eval0,DateTime.000113,answer,single_1,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|single_1|4c7980bb13a3b3|eval1,DateTime.000113,answer,single_1,eval1,15:00-15:30,15:00-15:30
+DateTime.000113|single_1|4c7980bb13a3b3|eval2,DateTime.000113,answer,single_1,eval2,08:18-08:20,08:18-08:20
+DateTime.000113|single_2|7fea4d1aec3474|eval0,DateTime.000113,answer,single_2,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|single_2|7fea4d1aec3474|eval1,DateTime.000113,answer,single_2,eval1,15:15-16:00,15:15-16:00
+DateTime.000113|single_2|7fea4d1aec3474|eval2,DateTime.000113,answer,single_2,eval2,8:15-8:45,8:15-8:45
+DateTime.000113|single_3|cfdb28ef9adf2e|eval0,DateTime.000113,answer,single_3,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|single_3|cfdb28ef9adf2e|eval1,DateTime.000113,answer,single_3,eval1,15:10-15:30,15:10-15:30
+DateTime.000113|single_3|cfdb28ef9adf2e|eval2,DateTime.000113,answer,single_3,eval2,8:18-8:20,8:18-8:20
+DateTime.000113|single_4|361cbf97b08cef|eval0,DateTime.000113,answer,single_4,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|single_4|361cbf97b08cef|eval1,DateTime.000113,answer,single_4,eval1,15:10-15:40,15:10-15:40
+DateTime.000113|single_4|361cbf97b08cef|eval2,DateTime.000113,answer,single_4,eval2,08:15-08:45,08:15-08:45
+DateTime.000113|single_5|a34ccc64ff7b1e|eval0,DateTime.000113,answer,single_5,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|single_5|a34ccc64ff7b1e|eval1,DateTime.000113,answer,single_5,eval1,15:15-15:30,15:15-15:30
+DateTime.000113|single_5|a34ccc64ff7b1e|eval2,DateTime.000113,answer,single_5,eval2,8:18-8:20,8:18-8:20
+DateTime.000113|qwen_select|budget1|step0|a42b60467555b6,DateTime.000113,select,qwen_choose1,step0,0,0
+DateTime.000113|qwen_select|budget4|step0|e6de44518bbcf4,DateTime.000113,select,qwen_choose4,step0,3,3
+DateTime.000113|qwen_select|budget4|step1|e95e39a51a9417,DateTime.000113,select,qwen_choose4,step1,2,2
+DateTime.000113|qwen_select|budget4|step2|f951bf00377c7e,DateTime.000113,select,qwen_choose4,step2,1,1
+DateTime.000113|qwen_select|budget4|step3|08453e5fcb03fa,DateTime.000113,select,qwen_choose4,step3,4,4
+DateTime.000114|base_plain|795a5c332b8b9d|eval0,DateTime.000114,answer,base_plain,eval0,25-30,25-30
+DateTime.000114|base_plain|795a5c332b8b9d|eval1,DateTime.000114,answer,base_plain,eval1,25-35,25-35
+DateTime.000114|base_plain|795a5c332b8b9d|eval2,DateTime.000114,answer,base_plain,eval2,30-45,30-45
+DateTime.000114|single_0|9480c9099e18e9|eval0,DateTime.000114,answer,single_0,eval0,30-45,30-45
+DateTime.000114|single_0|9480c9099e18e9|eval1,DateTime.000114,answer,single_0,eval1,30-45,30-45
+DateTime.000114|single_0|9480c9099e18e9|eval2,DateTime.000114,answer,single_0,eval2,30-45,30-45
+DateTime.000114|single_1|1fa7f98e1951ce|eval0,DateTime.000114,answer,single_1,eval0,15-30,15-30
+DateTime.000114|single_1|1fa7f98e1951ce|eval1,DateTime.000114,answer,single_1,eval1,25-45,25-45
+DateTime.000114|single_1|1fa7f98e1951ce|eval2,DateTime.000114,answer,single_1,eval2,25-40,25-40
+DateTime.000114|single_2|80ab47bd30ff29|eval0,DateTime.000114,answer,single_2,eval0,30-45,30-45
+DateTime.000114|single_2|80ab47bd30ff29|eval1,DateTime.000114,answer,single_2,eval1,30-45,30-45
+DateTime.000114|single_2|80ab47bd30ff29|eval2,DateTime.000114,answer,single_2,eval2,30-45,30-45
+DateTime.000114|single_3|c1251535400cf9|eval0,DateTime.000114,answer,single_3,eval0,15-30,15-30
+DateTime.000114|single_3|c1251535400cf9|eval1,DateTime.000114,answer,single_3,eval1,15-30,15-30
+DateTime.000114|single_3|c1251535400cf9|eval2,DateTime.000114,answer,single_3,eval2,15-30,15-30
+DateTime.000114|single_4|80211a540cdd98|eval0,DateTime.000114,answer,single_4,eval0,30-45,30-45
+DateTime.000114|single_4|80211a540cdd98|eval1,DateTime.000114,answer,single_4,eval1,30-45,30-45
+DateTime.000114|single_4|80211a540cdd98|eval2,DateTime.000114,answer,single_4,eval2,30-45,30-45
+DateTime.000114|single_5|10723b7096989f|eval0,DateTime.000114,answer,single_5,eval0,25-45,25-45
+DateTime.000114|single_5|10723b7096989f|eval1,DateTime.000114,answer,single_5,eval1,25-45,25-45
+DateTime.000114|single_5|10723b7096989f|eval2,DateTime.000114,answer,single_5,eval2,25-40,25-40
+DateTime.000114|qwen_select|budget1|step0|03fea060ed7d2e,DateTime.000114,select,qwen_choose1,step0,0,0
+DateTime.000114|qwen_select|budget4|step0|bae529cd675ad2,DateTime.000114,select,qwen_choose4,step0,3,3
+DateTime.000114|qwen_select|budget4|step1|1acd6a5492de2a,DateTime.000114,select,qwen_choose4,step1,2,2
+DateTime.000114|qwen_select|budget4|step2|de51e86d0e1526,DateTime.000114,select,qwen_choose4,step2,0,0
+DateTime.000114|qwen_select|budget4|step3|5934c7de3162d6,DateTime.000114,select,qwen_choose4,step3,3,3
+DateTime.000116|base_plain|818836753be76b|eval0,DateTime.000116,answer,base_plain,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|base_plain|818836753be76b|eval1,DateTime.000116,answer,base_plain,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|base_plain|818836753be76b|eval2,DateTime.000116,answer,base_plain,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|single_0|aa35410d1724ee|eval0,DateTime.000116,answer,single_0,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|single_0|aa35410d1724ee|eval1,DateTime.000116,answer,single_0,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|single_0|aa35410d1724ee|eval2,DateTime.000116,answer,single_0,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|single_1|7d1c7942b394bf|eval0,DateTime.000116,answer,single_1,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|single_1|7d1c7942b394bf|eval1,DateTime.000116,answer,single_1,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|single_1|7d1c7942b394bf|eval2,DateTime.000116,answer,single_1,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|single_2|d2d984fdf20dad|eval0,DateTime.000116,answer,single_2,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|single_2|d2d984fdf20dad|eval1,DateTime.000116,answer,single_2,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|single_2|d2d984fdf20dad|eval2,DateTime.000116,answer,single_2,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|single_3|70d61f7ad40515|eval0,DateTime.000116,answer,single_3,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|single_3|70d61f7ad40515|eval1,DateTime.000116,answer,single_3,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|single_3|70d61f7ad40515|eval2,DateTime.000116,answer,single_3,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|single_4|ba05edf1510b6c|eval0,DateTime.000116,answer,single_4,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|single_4|ba05edf1510b6c|eval1,DateTime.000116,answer,single_4,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|single_4|ba05edf1510b6c|eval2,DateTime.000116,answer,single_4,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|single_5|5d10ec6d912f2b|eval0,DateTime.000116,answer,single_5,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|single_5|5d10ec6d912f2b|eval1,DateTime.000116,answer,single_5,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|single_5|5d10ec6d912f2b|eval2,DateTime.000116,answer,single_5,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|qwen_select|budget1|step0|e4a5825eac04ef,DateTime.000116,select,qwen_choose1,step0,0,0
+DateTime.000116|qwen_select|budget4|step0|58a9da063d21bd,DateTime.000116,select,qwen_choose4,step0,3,3
+DateTime.000116|qwen_select|budget4|step1|1274947805b4fd,DateTime.000116,select,qwen_choose4,step1,2,2
+DateTime.000116|qwen_select|budget4|step2|a8a29ce5ecdb5e,DateTime.000116,select,qwen_choose4,step2,1,1
+DateTime.000116|qwen_select|budget4|step3|4cce2de7c339af,DateTime.000116,select,qwen_choose4,step3,0,0
+Language.000001|base_plain|1a50ef49e65ee2|eval0,Language.000001,answer,base_plain,eval0,Czech = cs,Czech = cs
+Language.000001|base_plain|1a50ef49e65ee2|eval1,Language.000001,answer,base_plain,eval1,Danish = da,Danish = da
+Language.000001|base_plain|1a50ef49e65ee2|eval2,Language.000001,answer,base_plain,eval2,Dutch = nl,Dutch = nl
+Language.000001|single_0|015f75c5348ae3|eval0,Language.000001,answer,single_0,eval0,Czech = cs,Czech = cs
+Language.000001|single_0|015f75c5348ae3|eval1,Language.000001,answer,single_0,eval1,Danish = da,Danish = da
+Language.000001|single_0|015f75c5348ae3|eval2,Language.000001,answer,single_0,eval2,Dutch = nl,Dutch = nl
+Language.000001|single_1|47df59ba6fa1bd|eval0,Language.000001,answer,single_1,eval0,Czech = cs,Czech = cs
+Language.000001|single_1|47df59ba6fa1bd|eval1,Language.000001,answer,single_1,eval1,Danish = da,Danish = da
+Language.000001|single_1|47df59ba6fa1bd|eval2,Language.000001,answer,single_1,eval2,Dutch = nl,Dutch = nl
+Language.000001|single_2|aa344f0194b940|eval0,Language.000001,answer,single_2,eval0,Czech = cs,Czech = cs
+Language.000001|single_2|aa344f0194b940|eval1,Language.000001,answer,single_2,eval1,Danish = da,Danish = da
+Language.000001|single_2|aa344f0194b940|eval2,Language.000001,answer,single_2,eval2,Dutch = nl,Dutch = nl
+Language.000001|single_3|8fc04a40869730|eval0,Language.000001,answer,single_3,eval0,Czech = cs,Czech = cs
+Language.000001|single_3|8fc04a40869730|eval1,Language.000001,answer,single_3,eval1,Danish = da,Danish = da
+Language.000001|single_3|8fc04a40869730|eval2,Language.000001,answer,single_3,eval2,Dutch = nl,Dutch = nl
+Language.000001|single_4|55affd09e08e28|eval0,Language.000001,answer,single_4,eval0,Czech = cs,Czech = cs
+Language.000001|single_4|55affd09e08e28|eval1,Language.000001,answer,single_4,eval1,Danish = da,Danish = da
+Language.000001|single_4|55affd09e08e28|eval2,Language.000001,answer,single_4,eval2,Dutch = nl,Dutch = nl
+Language.000001|single_5|52e47346d59ea3|eval0,Language.000001,answer,single_5,eval0,Czech = cs,Czech = cs
+Language.000001|single_5|52e47346d59ea3|eval1,Language.000001,answer,single_5,eval1,Danish = da,Danish = da
+Language.000001|single_5|52e47346d59ea3|eval2,Language.000001,answer,single_5,eval2,Dutch = nl,Dutch = nl
+Language.000001|qwen_select|budget1|step0|6e4b89f1acfe34,Language.000001,select,qwen_choose1,step0,0,0
+Language.000001|qwen_select|budget4|step0|ba7ff6e77d1a77,Language.000001,select,qwen_choose4,step0,3,3
+Language.000001|qwen_select|budget4|step1|e11ffa8c9d1716,Language.000001,select,qwen_choose4,step1,2,2
+Language.000001|qwen_select|budget4|step2|9b883d792d5830,Language.000001,select,qwen_choose4,step2,0,0
+Language.000001|qwen_select|budget4|step3|6072164ad485b4,Language.000001,select,qwen_choose4,step3,4,4
+Name.000008|base_plain|68f62769d550d5|eval0,Name.000008,answer,base_plain,eval0,I F,I F
+Name.000008|base_plain|68f62769d550d5|eval1,Name.000008,answer,base_plain,eval1,A B,A B
+Name.000008|base_plain|68f62769d550d5|eval2,Name.000008,answer,base_plain,eval2,M F,M F
+Name.000008|single_0|8222a0b2e1f4d5|eval0,Name.000008,answer,single_0,eval0,I F,I F
+Name.000008|single_0|8222a0b2e1f4d5|eval1,Name.000008,answer,single_0,eval1,A S,A S
+Name.000008|single_0|8222a0b2e1f4d5|eval2,Name.000008,answer,single_0,eval2,M F,M F
+Name.000008|single_1|99d2d5eb3f63c2|eval0,Name.000008,answer,single_1,eval0,I F,I F
+Name.000008|single_1|99d2d5eb3f63c2|eval1,Name.000008,answer,single_1,eval1,A B,A B
+Name.000008|single_1|99d2d5eb3f63c2|eval2,Name.000008,answer,single_1,eval2,M F,M F
+Name.000008|single_2|b9f7bf3625aa8b|eval0,Name.000008,answer,single_2,eval0,I F,I F
+Name.000008|single_2|b9f7bf3625aa8b|eval1,Name.000008,answer,single_2,eval1,A B,A B
+Name.000008|single_2|b9f7bf3625aa8b|eval2,Name.000008,answer,single_2,eval2,M F,M F
+Name.000008|single_3|aa42ff27aa7308|eval0,Name.000008,answer,single_3,eval0,I F,I F
+Name.000008|single_3|aa42ff27aa7308|eval1,Name.000008,answer,single_3,eval1,A B,A B
+Name.000008|single_3|aa42ff27aa7308|eval2,Name.000008,answer,single_3,eval2,M F,M F
+Name.000008|single_4|74190d0c4a405f|eval0,Name.000008,answer,single_4,eval0,I F,I F
+Name.000008|single_4|74190d0c4a405f|eval1,Name.000008,answer,single_4,eval1,A B,A B
+Name.000008|single_4|74190d0c4a405f|eval2,Name.000008,answer,single_4,eval2,M F,M F
+Name.000008|single_5|63564d260a923b|eval0,Name.000008,answer,single_5,eval0,I F,I F
+Name.000008|single_5|63564d260a923b|eval1,Name.000008,answer,single_5,eval1,A B,A B
+Name.000008|single_5|63564d260a923b|eval2,Name.000008,answer,single_5,eval2,M F,M F
+Name.000008|qwen_select|budget1|step0|78ebcbc2b4cc00,Name.000008,select,qwen_choose1,step0,3,3
+Name.000008|qwen_select|budget4|step0|447b548ee61199,Name.000008,select,qwen_choose4,step0,3,3
+Name.000008|qwen_select|budget4|step1|51dac600fc62ce,Name.000008,select,qwen_choose4,step1,2,2
+Name.000008|qwen_select|budget4|step2|3c2c84f85072b0,Name.000008,select,qwen_choose4,step2,4,4
+Name.000008|qwen_select|budget4|step3|8aab94bf41e031,Name.000008,select,qwen_choose4,step3,0,0
+Name.000009|base_plain|86be25f9aff0db|eval0,Name.000009,answer,base_plain,eval0,"Lusis, N.","Lusis, N."
+Name.000009|base_plain|86be25f9aff0db|eval1,Name.000009,answer,base_plain,eval1,"Susila, C.","Susila, C."
+Name.000009|base_plain|86be25f9aff0db|eval2,Name.000009,answer,base_plain,eval2,"Orav, K.","Orav, K."
+Name.000009|single_0|87a813a0aa297b|eval0,Name.000009,answer,single_0,eval0,"Lusis, N.","Lusis, N."
+Name.000009|single_0|87a813a0aa297b|eval1,Name.000009,answer,single_0,eval1,"Susila, C.","Susila, C."
+Name.000009|single_0|87a813a0aa297b|eval2,Name.000009,answer,single_0,eval2,"Orav, K.","Orav, K."
+Name.000009|single_1|37418defdc81f4|eval0,Name.000009,answer,single_1,eval0,"Lusis, N.","Lusis, N."
+Name.000009|single_1|37418defdc81f4|eval1,Name.000009,answer,single_1,eval1,"Susila, C.","Susila, C."
+Name.000009|single_1|37418defdc81f4|eval2,Name.000009,answer,single_1,eval2,"Orav, K.","Orav, K."
+Name.000009|single_2|0a25d49adf1038|eval0,Name.000009,answer,single_2,eval0,"Lusis, N.","Lusis, N."
+Name.000009|single_2|0a25d49adf1038|eval1,Name.000009,answer,single_2,eval1,"Susila, C.","Susila, C."
+Name.000009|single_2|0a25d49adf1038|eval2,Name.000009,answer,single_2,eval2,"Forav, K.","Forav, K."
+Name.000009|single_3|57035c13b168e5|eval0,Name.000009,answer,single_3,eval0,"Lusis, N.","Lusis, N."
+Name.000009|single_3|57035c13b168e5|eval1,Name.000009,answer,single_3,eval1,"Susila, C.","Susila, C."
+Name.000009|single_3|57035c13b168e5|eval2,Name.000009,answer,single_3,eval2,"Forav, K.","Forav, K."
+Name.000009|single_4|b16b6d5ed84263|eval0,Name.000009,answer,single_4,eval0,"Lusis, N.","Lusis, N."
+Name.000009|single_4|b16b6d5ed84263|eval1,Name.000009,answer,single_4,eval1,"Susila, C.","Susila, C."
+Name.000009|single_4|b16b6d5ed84263|eval2,Name.000009,answer,single_4,eval2,"Forav, K.","Forav, K."
+Name.000009|single_5|ad6bc7b1579715|eval0,Name.000009,answer,single_5,eval0,"Lusis, N.","Lusis, N."
+Name.000009|single_5|ad6bc7b1579715|eval1,Name.000009,answer,single_5,eval1,"Susila, C.","Susila, C."
+Name.000009|single_5|ad6bc7b1579715|eval2,Name.000009,answer,single_5,eval2,"Orav, K.","Orav, K."
+Name.000009|qwen_select|budget1|step0|ac38854bf0c152,Name.000009,select,qwen_choose1,step0,3,3
+Name.000009|qwen_select|budget4|step0|7c838b4c3f81a3,Name.000009,select,qwen_choose4,step0,3,3
+Name.000009|qwen_select|budget4|step1|f819640818ee3b,Name.000009,select,qwen_choose4,step1,2,2
+Name.000009|qwen_select|budget4|step2|fede3c07def100,Name.000009,select,qwen_choose4,step2,1,1
+Name.000009|qwen_select|budget4|step3|3e3dc9957d23b0,Name.000009,select,qwen_choose4,step3,4,4
+Name.000010|base_plain|f4115309e55ad6|eval0,Name.000010,answer,base_plain,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|base_plain|f4115309e55ad6|eval1,Name.000010,answer,base_plain,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|base_plain|f4115309e55ad6|eval2,Name.000010,answer,base_plain,eval2,Stanic,Stanic
+Name.000010|single_0|03b136ee766601|eval0,Name.000010,answer,single_0,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|single_0|03b136ee766601|eval1,Name.000010,answer,single_0,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|single_0|03b136ee766601|eval2,Name.000010,answer,single_0,eval2,Stanic,Stanic
+Name.000010|single_1|a22257ab3ca116|eval0,Name.000010,answer,single_1,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|single_1|a22257ab3ca116|eval1,Name.000010,answer,single_1,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|single_1|a22257ab3ca116|eval2,Name.000010,answer,single_1,eval2,Stanic,Stanic
+Name.000010|single_2|c811d6bdba9b86|eval0,Name.000010,answer,single_2,eval0,Ansari,Ansari
+Name.000010|single_2|c811d6bdba9b86|eval1,Name.000010,answer,single_2,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|single_2|c811d6bdba9b86|eval2,Name.000010,answer,single_2,eval2,Stanic,Stanic
+Name.000010|single_3|f4bcb298d10b33|eval0,Name.000010,answer,single_3,eval0,Ansari,Ansari
+Name.000010|single_3|f4bcb298d10b33|eval1,Name.000010,answer,single_3,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|single_3|f4bcb298d10b33|eval2,Name.000010,answer,single_3,eval2,Stanic,Stanic
+Name.000010|single_4|aae46d7115c1e5|eval0,Name.000010,answer,single_4,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|single_4|aae46d7115c1e5|eval1,Name.000010,answer,single_4,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|single_4|aae46d7115c1e5|eval2,Name.000010,answer,single_4,eval2,Bnar 559_655,Bnar 559_655
+Name.000010|single_5|a26bcf5b474ea8|eval0,Name.000010,answer,single_5,eval0,Ansari,Ansari
+Name.000010|single_5|a26bcf5b474ea8|eval1,Name.000010,answer,single_5,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|single_5|a26bcf5b474ea8|eval2,Name.000010,answer,single_5,eval2,Stanic,Stanic
+Name.000010|qwen_select|budget1|step0|d0bc4fd568f3e1,Name.000010,select,qwen_choose1,step0,0,0
+Name.000010|qwen_select|budget4|step0|878db1e2b2e431,Name.000010,select,qwen_choose4,step0,3,3
+Name.000010|qwen_select|budget4|step1|b3808ecd6ae572,Name.000010,select,qwen_choose4,step1,2,2
+Name.000010|qwen_select|budget4|step2|df0e5e82f3ad53,Name.000010,select,qwen_choose4,step2,1,1
+Name.000010|qwen_select|budget4|step3|9d6323088e6e26,Name.000010,select,qwen_choose4,step3,0,0
+Name.000013|base_plain|a9b9e5f03754ea|eval0,Name.000013,answer,base_plain,eval0,O,O
+Name.000013|base_plain|a9b9e5f03754ea|eval1,Name.000013,answer,base_plain,eval1,D,D
+Name.000013|base_plain|a9b9e5f03754ea|eval2,Name.000013,answer,base_plain,eval2,S,S
+Name.000013|single_0|e48793fdce83c3|eval0,Name.000013,answer,single_0,eval0,O,O
+Name.000013|single_0|e48793fdce83c3|eval1,Name.000013,answer,single_0,eval1,D,D
+Name.000013|single_0|e48793fdce83c3|eval2,Name.000013,answer,single_0,eval2,S,S
+Name.000013|single_1|8a3e30c396a269|eval0,Name.000013,answer,single_1,eval0,O,O
+Name.000013|single_1|8a3e30c396a269|eval1,Name.000013,answer,single_1,eval1,D,D
+Name.000013|single_1|8a3e30c396a269|eval2,Name.000013,answer,single_1,eval2,S,S
+Name.000013|single_2|a91d11097ea6f1|eval0,Name.000013,answer,single_2,eval0,O,O
+Name.000013|single_2|a91d11097ea6f1|eval1,Name.000013,answer,single_2,eval1,D,D
+Name.000013|single_2|a91d11097ea6f1|eval2,Name.000013,answer,single_2,eval2,S,S
+Name.000013|single_3|808596da9d930e|eval0,Name.000013,answer,single_3,eval0,O,O
+Name.000013|single_3|808596da9d930e|eval1,Name.000013,answer,single_3,eval1,D,D
+Name.000013|single_3|808596da9d930e|eval2,Name.000013,answer,single_3,eval2,S,S
+Name.000013|single_4|9af07e3d77c64a|eval0,Name.000013,answer,single_4,eval0,O,O
+Name.000013|single_4|9af07e3d77c64a|eval1,Name.000013,answer,single_4,eval1,D,D
+Name.000013|single_4|9af07e3d77c64a|eval2,Name.000013,answer,single_4,eval2,S,S
+Name.000013|single_5|4200b370041c10|eval0,Name.000013,answer,single_5,eval0,O,O
+Name.000013|single_5|4200b370041c10|eval1,Name.000013,answer,single_5,eval1,D,D
+Name.000013|single_5|4200b370041c10|eval2,Name.000013,answer,single_5,eval2,S,S
+Name.000013|qwen_select|budget1|step0|7cae8f32cadc5c,Name.000013,select,qwen_choose1,step0,0,0
+Name.000013|qwen_select|budget4|step0|d761e2c5878f85,Name.000013,select,qwen_choose4,step0,0,0
+Name.000013|qwen_select|budget4|step1|8a532c41d4aa3d,Name.000013,select,qwen_choose4,step1,1,1
+Name.000013|qwen_select|budget4|step2|cb8763fdec9725,Name.000013,select,qwen_choose4,step2,2,2
+Name.000013|qwen_select|budget4|step3|147d08ec97857f,Name.000013,select,qwen_choose4,step3,3,3
+Number.000015|base_plain|67e1c96f8e28bf|eval0,Number.000015,answer,base_plain,eval0,49550,49550
+Number.000015|base_plain|67e1c96f8e28bf|eval1,Number.000015,answer,base_plain,eval1,-18550,-18550
+Number.000015|base_plain|67e1c96f8e28bf|eval2,Number.000015,answer,base_plain,eval2,34850,34850
+Number.000015|single_0|425f1da385f4de|eval0,Number.000015,answer,single_0,eval0,49550,49550
+Number.000015|single_0|425f1da385f4de|eval1,Number.000015,answer,single_0,eval1,-19000,-19000
+Number.000015|single_0|425f1da385f4de|eval2,Number.000015,answer,single_0,eval2,34850,34850
+Number.000015|single_1|35d6f354d0451f|eval0,Number.000015,answer,single_1,eval0,49550,49550
+Number.000015|single_1|35d6f354d0451f|eval1,Number.000015,answer,single_1,eval1,-18550,-18550
+Number.000015|single_1|35d6f354d0451f|eval2,Number.000015,answer,single_1,eval2,34850,34850
+Number.000015|single_2|143d0eda3f6079|eval0,Number.000015,answer,single_2,eval0,49550,49550
+Number.000015|single_2|143d0eda3f6079|eval1,Number.000015,answer,single_2,eval1,-18500,-18500
+Number.000015|single_2|143d0eda3f6079|eval2,Number.000015,answer,single_2,eval2,34850,34850
+Number.000015|single_3|a9a811e1775143|eval0,Number.000015,answer,single_3,eval0,49550,49550
+Number.000015|single_3|a9a811e1775143|eval1,Number.000015,answer,single_3,eval1,-18550,-18550
+Number.000015|single_3|a9a811e1775143|eval2,Number.000015,answer,single_3,eval2,34850,34850
+Number.000015|single_4|808d63a26c4428|eval0,Number.000015,answer,single_4,eval0,49550,49550
+Number.000015|single_4|808d63a26c4428|eval1,Number.000015,answer,single_4,eval1,-18500,-18500
+Number.000015|single_4|808d63a26c4428|eval2,Number.000015,answer,single_4,eval2,34850,34850
+Number.000015|single_5|da4cfd9477b8d1|eval0,Number.000015,answer,single_5,eval0,49550,49550
+Number.000015|single_5|da4cfd9477b8d1|eval1,Number.000015,answer,single_5,eval1,-18550,-18550
+Number.000015|single_5|da4cfd9477b8d1|eval2,Number.000015,answer,single_5,eval2,34850,34850
+Number.000015|qwen_select|budget1|step0|36933e7b8e138f,Number.000015,select,qwen_choose1,step0,0,0
+Number.000015|qwen_select|budget4|step0|2b166b0341e41d,Number.000015,select,qwen_choose4,step0,3,3
+Number.000015|qwen_select|budget4|step1|c70957799001ef,Number.000015,select,qwen_choose4,step1,2,2
+Number.000015|qwen_select|budget4|step2|e12cf063ce68f0,Number.000015,select,qwen_choose4,step2,1,1
+Number.000015|qwen_select|budget4|step3|a33e8ee559f9cb,Number.000015,select,qwen_choose4,step3,4,4
+Number.000071|base_plain|3a1b9d665a5db2|eval0,Number.000071,answer,base_plain,eval0,0.1,0.1
+Number.000071|base_plain|3a1b9d665a5db2|eval1,Number.000071,answer,base_plain,eval1,0.9,0.9
+Number.000071|base_plain|3a1b9d665a5db2|eval2,Number.000071,answer,base_plain,eval2,0.6,0.6
+Number.000071|single_0|06abb4c9a55ff4|eval0,Number.000071,answer,single_0,eval0,0.1,0.1
+Number.000071|single_0|06abb4c9a55ff4|eval1,Number.000071,answer,single_0,eval1,0.9,0.9
+Number.000071|single_0|06abb4c9a55ff4|eval2,Number.000071,answer,single_0,eval2,0.6,0.6
+Number.000071|single_1|74a7ea580339f5|eval0,Number.000071,answer,single_1,eval0,0.1,0.1
+Number.000071|single_1|74a7ea580339f5|eval1,Number.000071,answer,single_1,eval1,0.9,0.9
+Number.000071|single_1|74a7ea580339f5|eval2,Number.000071,answer,single_1,eval2,0.6,0.6
+Number.000071|single_2|b0f9269ad87eb0|eval0,Number.000071,answer,single_2,eval0,0.1,0.1
+Number.000071|single_2|b0f9269ad87eb0|eval1,Number.000071,answer,single_2,eval1,0.9,0.9
+Number.000071|single_2|b0f9269ad87eb0|eval2,Number.000071,answer,single_2,eval2,0.5,0.5
+Number.000071|single_3|7259b173ca2365|eval0,Number.000071,answer,single_3,eval0,0.1,0.1
+Number.000071|single_3|7259b173ca2365|eval1,Number.000071,answer,single_3,eval1,0.9,0.9
+Number.000071|single_3|7259b173ca2365|eval2,Number.000071,answer,single_3,eval2,0.6,0.6
+Number.000071|single_4|0a3e63298f20e4|eval0,Number.000071,answer,single_4,eval0,0.1,0.1
+Number.000071|single_4|0a3e63298f20e4|eval1,Number.000071,answer,single_4,eval1,0.9,0.9
+Number.000071|single_4|0a3e63298f20e4|eval2,Number.000071,answer,single_4,eval2,0.6,0.6
+Number.000071|single_5|2dde539fb00c8c|eval0,Number.000071,answer,single_5,eval0,0.1,0.1
+Number.000071|single_5|2dde539fb00c8c|eval1,Number.000071,answer,single_5,eval1,0.9,0.9
+Number.000071|single_5|2dde539fb00c8c|eval2,Number.000071,answer,single_5,eval2,0.6,0.6
+Number.000071|qwen_select|budget1|step0|d20d9a46cc3e96,Number.000071,select,qwen_choose1,step0,0,0
+Number.000071|qwen_select|budget4|step0|e856698efb3066,Number.000071,select,qwen_choose4,step0,3,3
+Number.000071|qwen_select|budget4|step1|656b6cb1bf76af,Number.000071,select,qwen_choose4,step1,2,2
+Number.000071|qwen_select|budget4|step2|db6a90c63c79ad,Number.000071,select,qwen_choose4,step2,1,1
+Number.000071|qwen_select|budget4|step3|657d3e2da3b6aa,Number.000071,select,qwen_choose4,step3,4,4
+Number.000086|base_plain|489757cfb236f4|eval0,Number.000086,answer,base_plain,eval0,45-50,45-50
+Number.000086|base_plain|489757cfb236f4|eval1,Number.000086,answer,base_plain,eval1,15-20,15-20
+Number.000086|base_plain|489757cfb236f4|eval2,Number.000086,answer,base_plain,eval2,40-45,40-45
+Number.000086|single_0|51494af3701c71|eval0,Number.000086,answer,single_0,eval0,45-50,45-50
+Number.000086|single_0|51494af3701c71|eval1,Number.000086,answer,single_0,eval1,15-20,15-20
+Number.000086|single_0|51494af3701c71|eval2,Number.000086,answer,single_0,eval2,40-45,40-45
+Number.000086|single_1|fd84368bda092f|eval0,Number.000086,answer,single_1,eval0,50-55,50-55
+Number.000086|single_1|fd84368bda092f|eval1,Number.000086,answer,single_1,eval1,15-20,15-20
+Number.000086|single_1|fd84368bda092f|eval2,Number.000086,answer,single_1,eval2,40-45,40-45
+Number.000086|single_2|520c30dd239ea1|eval0,Number.000086,answer,single_2,eval0,50-55,50-55
+Number.000086|single_2|520c30dd239ea1|eval1,Number.000086,answer,single_2,eval1,10-20,10-20
+Number.000086|single_2|520c30dd239ea1|eval2,Number.000086,answer,single_2,eval2,40-45,40-45
+Number.000086|single_3|3b8490f353f7b9|eval0,Number.000086,answer,single_3,eval0,50-55,50-55
+Number.000086|single_3|3b8490f353f7b9|eval1,Number.000086,answer,single_3,eval1,15-20,15-20
+Number.000086|single_3|3b8490f353f7b9|eval2,Number.000086,answer,single_3,eval2,40-45,40-45
+Number.000086|single_4|70eb4bf1723334|eval0,Number.000086,answer,single_4,eval0,50-55,50-55
+Number.000086|single_4|70eb4bf1723334|eval1,Number.000086,answer,single_4,eval1,15-20,15-20
+Number.000086|single_4|70eb4bf1723334|eval2,Number.000086,answer,single_4,eval2,40-45,40-45
+Number.000086|single_5|a1299f73506914|eval0,Number.000086,answer,single_5,eval0,50-55,50-55
+Number.000086|single_5|a1299f73506914|eval1,Number.000086,answer,single_5,eval1,10-20,10-20
+Number.000086|single_5|a1299f73506914|eval2,Number.000086,answer,single_5,eval2,40-45,40-45
+Number.000086|qwen_select|budget1|step0|870a1f6844c9fe,Number.000086,select,qwen_choose1,step0,0,0
+Number.000086|qwen_select|budget4|step0|feb7f7b2508994,Number.000086,select,qwen_choose4,step0,3,3
+Number.000086|qwen_select|budget4|step1|e2072abb64b3bc,Number.000086,select,qwen_choose4,step1,2,2
+Number.000086|qwen_select|budget4|step2|605837eef7e810,Number.000086,select,qwen_choose4,step2,1,1
+Number.000086|qwen_select|budget4|step3|4d840500080252,Number.000086,select,qwen_choose4,step3,4,4
+Phone.000002|base_plain|8a094c06a476ed|eval0,Phone.000002,answer,base_plain,eval0,NULL,NULL
+Phone.000002|base_plain|8a094c06a476ed|eval1,Phone.000002,answer,base_plain,eval1,NULL,NULL
+Phone.000002|base_plain|8a094c06a476ed|eval2,Phone.000002,answer,base_plain,eval2,NULL,NULL
+Phone.000002|single_0|d6f53c1e4e7e91|eval0,Phone.000002,answer,single_0,eval0,NULL,NULL
+Phone.000002|single_0|d6f53c1e4e7e91|eval1,Phone.000002,answer,single_0,eval1,NULL,NULL
+Phone.000002|single_0|d6f53c1e4e7e91|eval2,Phone.000002,answer,single_0,eval2,x1162,x1162
+Phone.000002|single_1|e1ec7d303f42e8|eval0,Phone.000002,answer,single_1,eval0,NULL,NULL
+Phone.000002|single_1|e1ec7d303f42e8|eval1,Phone.000002,answer,single_1,eval1,NULL,NULL
+Phone.000002|single_1|e1ec7d303f42e8|eval2,Phone.000002,answer,single_1,eval2,x1162,x1162
+Phone.000002|single_2|6d13b6188af48f|eval0,Phone.000002,answer,single_2,eval0,NULL,NULL
+Phone.000002|single_2|6d13b6188af48f|eval1,Phone.000002,answer,single_2,eval1,NULL,NULL
+Phone.000002|single_2|6d13b6188af48f|eval2,Phone.000002,answer,single_2,eval2,x1162,x1162
+Phone.000002|single_3|088319c7ab48b8|eval0,Phone.000002,answer,single_3,eval0,NULL,NULL
+Phone.000002|single_3|088319c7ab48b8|eval1,Phone.000002,answer,single_3,eval1,NULL,NULL
+Phone.000002|single_3|088319c7ab48b8|eval2,Phone.000002,answer,single_3,eval2,NULL,NULL
+Phone.000002|single_4|705de9c42fb3ec|eval0,Phone.000002,answer,single_4,eval0,NULL,NULL
+Phone.000002|single_4|705de9c42fb3ec|eval1,Phone.000002,answer,single_4,eval1,NULL,NULL
+Phone.000002|single_4|705de9c42fb3ec|eval2,Phone.000002,answer,single_4,eval2,NULL,NULL
+Phone.000002|single_5|08f4af6213270e|eval0,Phone.000002,answer,single_5,eval0,NULL,NULL
+Phone.000002|single_5|08f4af6213270e|eval1,Phone.000002,answer,single_5,eval1,NULL,NULL
+Phone.000002|single_5|08f4af6213270e|eval2,Phone.000002,answer,single_5,eval2,x1162,x1162
+Phone.000002|qwen_select|budget1|step0|28862b5e0489a6,Phone.000002,select,qwen_choose1,step0,3,3
+Phone.000002|qwen_select|budget4|step0|b0bc10493ccf49,Phone.000002,select,qwen_choose4,step0,3,3
+Phone.000002|qwen_select|budget4|step1|d5d216dadd3cce,Phone.000002,select,qwen_choose4,step1,2,2
+Phone.000002|qwen_select|budget4|step2|ce5a2ed1b2464a,Phone.000002,select,qwen_choose4,step2,1,1
+Phone.000002|qwen_select|budget4|step3|466773b170fb8c,Phone.000002,select,qwen_choose4,step3,0,0
+Phone.000003|base_plain|7ce4c5fd44ee4f|eval0,Phone.000003,answer,base_plain,eval0,x3525,x3525
+Phone.000003|base_plain|7ce4c5fd44ee4f|eval1,Phone.000003,answer,base_plain,eval1,x6686,x6686
+Phone.000003|base_plain|7ce4c5fd44ee4f|eval2,Phone.000003,answer,base_plain,eval2,x6590,x6590
+Phone.000003|single_0|0173c39857656c|eval0,Phone.000003,answer,single_0,eval0,x3525,x3525
+Phone.000003|single_0|0173c39857656c|eval1,Phone.000003,answer,single_0,eval1,x6686,x6686
+Phone.000003|single_0|0173c39857656c|eval2,Phone.000003,answer,single_0,eval2,x6590,x6590
+Phone.000003|single_1|e3707fe45084ae|eval0,Phone.000003,answer,single_1,eval0,x3525,x3525
+Phone.000003|single_1|e3707fe45084ae|eval1,Phone.000003,answer,single_1,eval1,x6686,x6686
+Phone.000003|single_1|e3707fe45084ae|eval2,Phone.000003,answer,single_1,eval2,x6590,x6590
+Phone.000003|single_2|0f7a6dd91f675a|eval0,Phone.000003,answer,single_2,eval0,x3525,x3525
+Phone.000003|single_2|0f7a6dd91f675a|eval1,Phone.000003,answer,single_2,eval1,x6686,x6686
+Phone.000003|single_2|0f7a6dd91f675a|eval2,Phone.000003,answer,single_2,eval2,x6590,x6590
+Phone.000003|single_3|79122d3f28725d|eval0,Phone.000003,answer,single_3,eval0,x3525,x3525
+Phone.000003|single_3|79122d3f28725d|eval1,Phone.000003,answer,single_3,eval1,x6686,x6686
+Phone.000003|single_3|79122d3f28725d|eval2,Phone.000003,answer,single_3,eval2,x6590,x6590
+Phone.000003|single_4|4077aaccb2445a|eval0,Phone.000003,answer,single_4,eval0,x3525,x3525
+Phone.000003|single_4|4077aaccb2445a|eval1,Phone.000003,answer,single_4,eval1,x6686,x6686
+Phone.000003|single_4|4077aaccb2445a|eval2,Phone.000003,answer,single_4,eval2,x6590,x6590
+Phone.000003|single_5|6e075e7c22c1c9|eval0,Phone.000003,answer,single_5,eval0,x3525,x3525
+Phone.000003|single_5|6e075e7c22c1c9|eval1,Phone.000003,answer,single_5,eval1,x6686,x6686
+Phone.000003|single_5|6e075e7c22c1c9|eval2,Phone.000003,answer,single_5,eval2,x6590,x6590
+Phone.000003|qwen_select|budget1|step0|32e15662d652fa,Phone.000003,select,qwen_choose1,step0,0,0
+Phone.000003|qwen_select|budget4|step0|2119c35dba761f,Phone.000003,select,qwen_choose4,step0,3,3
+Phone.000003|qwen_select|budget4|step1|7f2ffd7f9c92c6,Phone.000003,select,qwen_choose4,step1,2,2
+Phone.000003|qwen_select|budget4|step2|3c22714d06f3e9,Phone.000003,select,qwen_choose4,step2,0,0
+Phone.000003|qwen_select|budget4|step3|f1213409927ccc,Phone.000003,select,qwen_choose4,step3,1,1
+Rating.000001|base_plain|85cf83073a4906|eval0,Rating.000001,answer,base_plain,eval0,5,5
+Rating.000001|base_plain|85cf83073a4906|eval1,Rating.000001,answer,base_plain,eval1,5,5
+Rating.000001|base_plain|85cf83073a4906|eval2,Rating.000001,answer,base_plain,eval2,9,9
+Rating.000001|single_0|70b28b24fd7afc|eval0,Rating.000001,answer,single_0,eval0,5,5
+Rating.000001|single_0|70b28b24fd7afc|eval1,Rating.000001,answer,single_0,eval1,5,5
+Rating.000001|single_0|70b28b24fd7afc|eval2,Rating.000001,answer,single_0,eval2,9,9
+Rating.000001|single_1|abdf3cb9db94c9|eval0,Rating.000001,answer,single_1,eval0,5,5
+Rating.000001|single_1|abdf3cb9db94c9|eval1,Rating.000001,answer,single_1,eval1,5,5
+Rating.000001|single_1|abdf3cb9db94c9|eval2,Rating.000001,answer,single_1,eval2,9,9
+Rating.000001|single_2|dd4c5268dcc2b9|eval0,Rating.000001,answer,single_2,eval0,5,5
+Rating.000001|single_2|dd4c5268dcc2b9|eval1,Rating.000001,answer,single_2,eval1,5,5
+Rating.000001|single_2|dd4c5268dcc2b9|eval2,Rating.000001,answer,single_2,eval2,9,9
+Rating.000001|single_3|14ab98edcd0bba|eval0,Rating.000001,answer,single_3,eval0,5,5
+Rating.000001|single_3|14ab98edcd0bba|eval1,Rating.000001,answer,single_3,eval1,5,5
+Rating.000001|single_3|14ab98edcd0bba|eval2,Rating.000001,answer,single_3,eval2,9,9
+Rating.000001|single_4|70b28b24fd7afc|eval0,Rating.000001,answer,single_4,eval0,5,5
+Rating.000001|single_4|70b28b24fd7afc|eval1,Rating.000001,answer,single_4,eval1,5,5
+Rating.000001|single_4|70b28b24fd7afc|eval2,Rating.000001,answer,single_4,eval2,9,9
+Rating.000001|single_5|a876dfe74fb1f2|eval0,Rating.000001,answer,single_5,eval0,5,5
+Rating.000001|single_5|a876dfe74fb1f2|eval1,Rating.000001,answer,single_5,eval1,5,5
+Rating.000001|single_5|a876dfe74fb1f2|eval2,Rating.000001,answer,single_5,eval2,9,9
+Rating.000001|qwen_select|budget1|step0|40a983c8b5f254,Rating.000001,select,qwen_choose1,step0,3,3
+Rating.000001|qwen_select|budget4|step0|464d6e15e85c80,Rating.000001,select,qwen_choose4,step0,3,3
+Rating.000001|qwen_select|budget4|step1|8786f291538436,Rating.000001,select,qwen_choose4,step1,2,2
+Rating.000001|qwen_select|budget4|step2|cee6eed6312001,Rating.000001,select,qwen_choose4,step2,1,1
+Rating.000001|qwen_select|budget4|step3|a5f09b7b1349be,Rating.000001,select,qwen_choose4,step3,0,0
+UserAgent.000006|base_plain|5f785df8cf919c|eval0,UserAgent.000006,answer,base_plain,eval0,1.7.4,1.7.4
+UserAgent.000006|base_plain|5f785df8cf919c|eval1,UserAgent.000006,answer,base_plain,eval1,0.2.8,0.2.8
+UserAgent.000006|base_plain|5f785df8cf919c|eval2,UserAgent.000006,answer,base_plain,eval2,3.0.4,3.0.4
+UserAgent.000006|single_0|457f9f5e04de8d|eval0,UserAgent.000006,answer,single_0,eval0,1.7.4,1.7.4
+UserAgent.000006|single_0|457f9f5e04de8d|eval1,UserAgent.000006,answer,single_0,eval1,0.2.8,0.2.8
+UserAgent.000006|single_0|457f9f5e04de8d|eval2,UserAgent.000006,answer,single_0,eval2,3.0.4,3.0.4
+UserAgent.000006|single_1|ac4b3108b4051f|eval0,UserAgent.000006,answer,single_1,eval0,1.7.4,1.7.4
+UserAgent.000006|single_1|ac4b3108b4051f|eval1,UserAgent.000006,answer,single_1,eval1,0.2.8,0.2.8
+UserAgent.000006|single_1|ac4b3108b4051f|eval2,UserAgent.000006,answer,single_1,eval2,3.0.4,3.0.4
+UserAgent.000006|single_2|411db5293ee76e|eval0,UserAgent.000006,answer,single_2,eval0,1.7.4,1.7.4
+UserAgent.000006|single_2|411db5293ee76e|eval1,UserAgent.000006,answer,single_2,eval1,0.2.8,0.2.8
+UserAgent.000006|single_2|411db5293ee76e|eval2,UserAgent.000006,answer,single_2,eval2,3.0.4,3.0.4
+UserAgent.000006|single_3|8aad2e740e9c36|eval0,UserAgent.000006,answer,single_3,eval0,1.7.4,1.7.4
+UserAgent.000006|single_3|8aad2e740e9c36|eval1,UserAgent.000006,answer,single_3,eval1,0.2.8,0.2.8
+UserAgent.000006|single_3|8aad2e740e9c36|eval2,UserAgent.000006,answer,single_3,eval2,3.0.4,3.0.4
+UserAgent.000006|single_4|cb4054cf3741ea|eval0,UserAgent.000006,answer,single_4,eval0,1.7.4,1.7.4
+UserAgent.000006|single_4|cb4054cf3741ea|eval1,UserAgent.000006,answer,single_4,eval1,0.2.8,0.2.8
+UserAgent.000006|single_4|cb4054cf3741ea|eval2,UserAgent.000006,answer,single_4,eval2,3.0.4,3.0.4
+UserAgent.000006|single_5|6366dd6bbd2b8c|eval0,UserAgent.000006,answer,single_5,eval0,1.7.4,1.7.4
+UserAgent.000006|single_5|6366dd6bbd2b8c|eval1,UserAgent.000006,answer,single_5,eval1,0.2.8,0.2.8
+UserAgent.000006|single_5|6366dd6bbd2b8c|eval2,UserAgent.000006,answer,single_5,eval2,3.0.4,3.0.4
+UserAgent.000006|qwen_select|budget1|step0|436d73ccada154,UserAgent.000006,select,qwen_choose1,step0,3,3
+UserAgent.000006|qwen_select|budget4|step0|356dc5ba5962ea,UserAgent.000006,select,qwen_choose4,step0,3,3
+UserAgent.000006|qwen_select|budget4|step1|40989ebcbc90b7,UserAgent.000006,select,qwen_choose4,step1,2,2
+UserAgent.000006|qwen_select|budget4|step2|cfe58099913862,UserAgent.000006,select,qwen_choose4,step2,1,1
+UserAgent.000006|qwen_select|budget4|step3|1ab0dcc75df8c5,UserAgent.000006,select,qwen_choose4,step3,5,5
+Abbreviation.000001|learned4_plain|8d94945a64cf2c|eval0,Abbreviation.000001,answer,learned4_plain,eval0,C,C
+Abbreviation.000001|learned4_plain|8d94945a64cf2c|eval1,Abbreviation.000001,answer,learned4_plain,eval1,E,E
+Abbreviation.000001|learned4_plain|8d94945a64cf2c|eval2,Abbreviation.000001,answer,learned4_plain,eval2,E,E
+Abbreviation.000001|learned4_shuffled_labels|aa67ca4d0effd6|eval0,Abbreviation.000001,answer,learned4_shuffled_labels,eval0,C,C
+Abbreviation.000001|learned4_shuffled_labels|aa67ca4d0effd6|eval1,Abbreviation.000001,answer,learned4_shuffled_labels,eval1,NI,NI
+Abbreviation.000001|learned4_shuffled_labels|aa67ca4d0effd6|eval2,Abbreviation.000001,answer,learned4_shuffled_labels,eval2,NI,NI
+Abbreviation.000001|order4_plain|86d2656cda54a0|eval0,Abbreviation.000001,answer,order4_plain,eval0,C,C
+Abbreviation.000001|order4_plain|86d2656cda54a0|eval1,Abbreviation.000001,answer,order4_plain,eval1,E,E
+Abbreviation.000001|order4_plain|86d2656cda54a0|eval2,Abbreviation.000001,answer,order4_plain,eval2,E,E
+Abbreviation.000001|random4_plain|86d2656cda54a0|eval0,Abbreviation.000001,answer,random4_plain,eval0,C,C
+Abbreviation.000001|random4_plain|86d2656cda54a0|eval1,Abbreviation.000001,answer,random4_plain,eval1,E,E
+Abbreviation.000001|random4_plain|86d2656cda54a0|eval2,Abbreviation.000001,answer,random4_plain,eval2,E,E
+Abbreviation.000001|diverse4_plain|181cb55d82fc2c|eval0,Abbreviation.000001,answer,diverse4_plain,eval0,C,C
+Abbreviation.000001|diverse4_plain|181cb55d82fc2c|eval1,Abbreviation.000001,answer,diverse4_plain,eval1,E,E
+Abbreviation.000001|diverse4_plain|181cb55d82fc2c|eval2,Abbreviation.000001,answer,diverse4_plain,eval2,E,E
+Abbreviation.000001|qwen_choose4_plain|06ac596e67a8c5|eval0,Abbreviation.000001,answer,qwen_choose4_plain,eval0,C,C
+Abbreviation.000001|qwen_choose4_plain|06ac596e67a8c5|eval1,Abbreviation.000001,answer,qwen_choose4_plain,eval1,E,E
+Abbreviation.000001|qwen_choose4_plain|06ac596e67a8c5|eval2,Abbreviation.000001,answer,qwen_choose4_plain,eval2,E,E
+Author.000001|learned4_plain|efc0c87d508dc1|eval0,Author.000001,answer,learned4_plain,eval0,2016,2016
+Author.000001|learned4_plain|efc0c87d508dc1|eval1,Author.000001,answer,learned4_plain,eval1,2016,2016
+Author.000001|learned4_plain|efc0c87d508dc1|eval2,Author.000001,answer,learned4_plain,eval2,1870,1870
+Author.000001|learned4_shuffled_labels|a2a64a9a6d659f|eval0,Author.000001,answer,learned4_shuffled_labels,eval0,2016,2016
+Author.000001|learned4_shuffled_labels|a2a64a9a6d659f|eval1,Author.000001,answer,learned4_shuffled_labels,eval1,2016,2016
+Author.000001|learned4_shuffled_labels|a2a64a9a6d659f|eval2,Author.000001,answer,learned4_shuffled_labels,eval2,1870,1870
+Author.000001|order4_plain|bdc36adf7a4adc|eval0,Author.000001,answer,order4_plain,eval0,2016,2016
+Author.000001|order4_plain|bdc36adf7a4adc|eval1,Author.000001,answer,order4_plain,eval1,2016,2016
+Author.000001|order4_plain|bdc36adf7a4adc|eval2,Author.000001,answer,order4_plain,eval2,1870,1870
+Author.000001|random4_plain|51448d5eaf7d73|eval0,Author.000001,answer,random4_plain,eval0,2016,2016
+Author.000001|random4_plain|51448d5eaf7d73|eval1,Author.000001,answer,random4_plain,eval1,2016,2016
+Author.000001|random4_plain|51448d5eaf7d73|eval2,Author.000001,answer,random4_plain,eval2,1870,1870
+Author.000001|diverse4_plain|3c9e5afd8b876a|eval0,Author.000001,answer,diverse4_plain,eval0,2016,2016
+Author.000001|diverse4_plain|3c9e5afd8b876a|eval1,Author.000001,answer,diverse4_plain,eval1,2016,2016
+Author.000001|diverse4_plain|3c9e5afd8b876a|eval2,Author.000001,answer,diverse4_plain,eval2,1870,1870
+Author.000001|qwen_choose4_plain|2249ff94be1494|eval0,Author.000001,answer,qwen_choose4_plain,eval0,2016,2016
+Author.000001|qwen_choose4_plain|2249ff94be1494|eval1,Author.000001,answer,qwen_choose4_plain,eval1,2016,2016
+Author.000001|qwen_choose4_plain|2249ff94be1494|eval2,Author.000001,answer,qwen_choose4_plain,eval2,1870,1870
+BillingCode.000002|learned4_plain|f91cb70bf1388e|eval0,BillingCode.000002,answer,learned4_plain,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|learned4_plain|f91cb70bf1388e|eval1,BillingCode.000002,answer,learned4_plain,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|learned4_plain|f91cb70bf1388e|eval2,BillingCode.000002,answer,learned4_plain,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|learned4_shuffled_labels|1bfecd323d2182|eval0,BillingCode.000002,answer,learned4_shuffled_labels,eval0,[CPT-11536],[CPT-11536]
+BillingCode.000002|learned4_shuffled_labels|1bfecd323d2182|eval1,BillingCode.000002,answer,learned4_shuffled_labels,eval1,[CPT-11536],[CPT-11536]
+BillingCode.000002|learned4_shuffled_labels|1bfecd323d2182|eval2,BillingCode.000002,answer,learned4_shuffled_labels,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|order4_plain|72f3d102095fd9|eval0,BillingCode.000002,answer,order4_plain,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|order4_plain|72f3d102095fd9|eval1,BillingCode.000002,answer,order4_plain,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|order4_plain|72f3d102095fd9|eval2,BillingCode.000002,answer,order4_plain,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|random4_plain|1b58a8fa4c0ff4|eval0,BillingCode.000002,answer,random4_plain,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|random4_plain|1b58a8fa4c0ff4|eval1,BillingCode.000002,answer,random4_plain,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|random4_plain|1b58a8fa4c0ff4|eval2,BillingCode.000002,answer,random4_plain,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|diverse4_plain|ca8cc738493d27|eval0,BillingCode.000002,answer,diverse4_plain,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|diverse4_plain|ca8cc738493d27|eval1,BillingCode.000002,answer,diverse4_plain,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|diverse4_plain|ca8cc738493d27|eval2,BillingCode.000002,answer,diverse4_plain,eval2,[CPT-1163],[CPT-1163]
+BillingCode.000002|qwen_choose4_plain|f53eb0d63053a9|eval0,BillingCode.000002,answer,qwen_choose4_plain,eval0,[CPT-11222],[CPT-11222]
+BillingCode.000002|qwen_choose4_plain|f53eb0d63053a9|eval1,BillingCode.000002,answer,qwen_choose4_plain,eval1,[CPT-115],[CPT-115]
+BillingCode.000002|qwen_choose4_plain|f53eb0d63053a9|eval2,BillingCode.000002,answer,qwen_choose4_plain,eval2,[CPT-1163],[CPT-1163]
+Currency.000004|learned4_plain|f8a07cafa45610|eval0,Currency.000004,answer,learned4_plain,eval0,�,�
+Currency.000004|learned4_plain|f8a07cafa45610|eval1,Currency.000004,answer,learned4_plain,eval1,�,�
+Currency.000004|learned4_plain|f8a07cafa45610|eval2,Currency.000004,answer,learned4_plain,eval2,�,�
+Currency.000004|learned4_shuffled_labels|a41ba76eb3a0f1|eval0,Currency.000004,answer,learned4_shuffled_labels,eval0,$,$
+Currency.000004|learned4_shuffled_labels|a41ba76eb3a0f1|eval1,Currency.000004,answer,learned4_shuffled_labels,eval1,$,$
+Currency.000004|learned4_shuffled_labels|a41ba76eb3a0f1|eval2,Currency.000004,answer,learned4_shuffled_labels,eval2,$,$
+Currency.000004|order4_plain|f8a07cafa45610|eval0,Currency.000004,answer,order4_plain,eval0,�,�
+Currency.000004|order4_plain|f8a07cafa45610|eval1,Currency.000004,answer,order4_plain,eval1,�,�
+Currency.000004|order4_plain|f8a07cafa45610|eval2,Currency.000004,answer,order4_plain,eval2,�,�
+Currency.000004|random4_plain|c2675adf2f300c|eval0,Currency.000004,answer,random4_plain,eval0,�,�
+Currency.000004|random4_plain|c2675adf2f300c|eval1,Currency.000004,answer,random4_plain,eval1,�,�
+Currency.000004|random4_plain|c2675adf2f300c|eval2,Currency.000004,answer,random4_plain,eval2,�,�
+Currency.000004|diverse4_plain|f8a07cafa45610|eval0,Currency.000004,answer,diverse4_plain,eval0,�,�
+Currency.000004|diverse4_plain|f8a07cafa45610|eval1,Currency.000004,answer,diverse4_plain,eval1,�,�
+Currency.000004|diverse4_plain|f8a07cafa45610|eval2,Currency.000004,answer,diverse4_plain,eval2,�,�
+Currency.000004|qwen_choose4_plain|46c213426d60a0|eval0,Currency.000004,answer,qwen_choose4_plain,eval0,�,�
+Currency.000004|qwen_choose4_plain|46c213426d60a0|eval1,Currency.000004,answer,qwen_choose4_plain,eval1,�,�
+Currency.000004|qwen_choose4_plain|46c213426d60a0|eval2,Currency.000004,answer,qwen_choose4_plain,eval2,�,�
+DateTime.000014|learned4_plain|5ad3fdd29eceb8|eval0,DateTime.000014,answer,learned4_plain,eval0,Thursday #2 January 1998,Thursday #2 January 1998
+DateTime.000014|learned4_plain|5ad3fdd29eceb8|eval1,DateTime.000014,answer,learned4_plain,eval1,Thursday #12 January 1973,Thursday #12 January 1973
+DateTime.000014|learned4_plain|5ad3fdd29eceb8|eval2,DateTime.000014,answer,learned4_plain,eval2,Thursday #1 September 1932,Thursday #1 September 1932
+DateTime.000014|learned4_shuffled_labels|edc0b45268e7cd|eval0,DateTime.000014,answer,learned4_shuffled_labels,eval0,Thursday #2 January 1998,Thursday #2 January 1998
+DateTime.000014|learned4_shuffled_labels|edc0b45268e7cd|eval1,DateTime.000014,answer,learned4_shuffled_labels,eval1,Monday #12 December 1973,Monday #12 December 1973
+DateTime.000014|learned4_shuffled_labels|edc0b45268e7cd|eval2,DateTime.000014,answer,learned4_shuffled_labels,eval2,Thursday #1 April 1933,Thursday #1 April 1933
+DateTime.000014|order4_plain|98f22d0f00c491|eval0,DateTime.000014,answer,order4_plain,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|order4_plain|98f22d0f00c491|eval1,DateTime.000014,answer,order4_plain,eval1,Sunday #3 July 1973,Sunday #3 July 1973
+DateTime.000014|order4_plain|98f22d0f00c491|eval2,DateTime.000014,answer,order4_plain,eval2,Sunday #39 July 1932,Sunday #39 July 1932
+DateTime.000014|random4_plain|469a7c4294140a|eval0,DateTime.000014,answer,random4_plain,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|random4_plain|469a7c4294140a|eval1,DateTime.000014,answer,random4_plain,eval1,Monday #3 December 1973,Monday #3 December 1973
+DateTime.000014|random4_plain|469a7c4294140a|eval2,DateTime.000014,answer,random4_plain,eval2,Thursday #1 September 1932,Thursday #1 September 1932
+DateTime.000014|diverse4_plain|142716e932659c|eval0,DateTime.000014,answer,diverse4_plain,eval0,Saturday #2 January 1998,Saturday #2 January 1998
+DateTime.000014|diverse4_plain|142716e932659c|eval1,DateTime.000014,answer,diverse4_plain,eval1,Monday #3 December 1973,Monday #3 December 1973
+DateTime.000014|diverse4_plain|142716e932659c|eval2,DateTime.000014,answer,diverse4_plain,eval2,Thursday #1 September 1932,Thursday #1 September 1932
+DateTime.000014|qwen_choose4_plain|fa832ad7080d0a|eval0,DateTime.000014,answer,qwen_choose4_plain,eval0,Sunday #2 January 1998,Sunday #2 January 1998
+DateTime.000014|qwen_choose4_plain|fa832ad7080d0a|eval1,DateTime.000014,answer,qwen_choose4_plain,eval1,Sunday #3 December 1973,Sunday #3 December 1973
+DateTime.000014|qwen_choose4_plain|fa832ad7080d0a|eval2,DateTime.000014,answer,qwen_choose4_plain,eval2,Sunday #1 September 1932,Sunday #1 September 1932
+DateTime.000018|learned4_plain|b7df859198a424|eval0,DateTime.000018,answer,learned4_plain,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|learned4_plain|b7df859198a424|eval1,DateTime.000018,answer,learned4_plain,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|learned4_plain|b7df859198a424|eval2,DateTime.000018,answer,learned4_plain,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|learned4_shuffled_labels|1a1a4895681bbc|eval0,DateTime.000018,answer,learned4_shuffled_labels,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|learned4_shuffled_labels|1a1a4895681bbc|eval1,DateTime.000018,answer,learned4_shuffled_labels,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|learned4_shuffled_labels|1a1a4895681bbc|eval2,DateTime.000018,answer,learned4_shuffled_labels,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|order4_plain|ab6e8b16e8ea16|eval0,DateTime.000018,answer,order4_plain,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|order4_plain|ab6e8b16e8ea16|eval1,DateTime.000018,answer,order4_plain,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|order4_plain|ab6e8b16e8ea16|eval2,DateTime.000018,answer,order4_plain,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|random4_plain|4fe5c45869d1dc|eval0,DateTime.000018,answer,random4_plain,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|random4_plain|4fe5c45869d1dc|eval1,DateTime.000018,answer,random4_plain,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|random4_plain|4fe5c45869d1dc|eval2,DateTime.000018,answer,random4_plain,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|diverse4_plain|683000a38a739a|eval0,DateTime.000018,answer,diverse4_plain,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|diverse4_plain|683000a38a739a|eval1,DateTime.000018,answer,diverse4_plain,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|diverse4_plain|683000a38a739a|eval2,DateTime.000018,answer,diverse4_plain,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000018|qwen_choose4_plain|0166b7b110cbd5|eval0,DateTime.000018,answer,qwen_choose4_plain,eval0,8 Jul 2237,8 Jul 2237
+DateTime.000018|qwen_choose4_plain|0166b7b110cbd5|eval1,DateTime.000018,answer,qwen_choose4_plain,eval1,3 Nov 1904,3 Nov 1904
+DateTime.000018|qwen_choose4_plain|0166b7b110cbd5|eval2,DateTime.000018,answer,qwen_choose4_plain,eval2,5 Apr 2088,5 Apr 2088
+DateTime.000027|learned4_plain|f9bef5226d4707|eval0,DateTime.000027,answer,learned4_plain,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|learned4_plain|f9bef5226d4707|eval1,DateTime.000027,answer,learned4_plain,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|learned4_plain|f9bef5226d4707|eval2,DateTime.000027,answer,learned4_plain,eval2,Q1 '2088,Q1 '2088
+DateTime.000027|learned4_shuffled_labels|4c88d027f01bc7|eval0,DateTime.000027,answer,learned4_shuffled_labels,eval0,Q3 '2237,Q3 '2237
+DateTime.000027|learned4_shuffled_labels|4c88d027f01bc7|eval1,DateTime.000027,answer,learned4_shuffled_labels,eval1,Q4 '2004,Q4 '2004
+DateTime.000027|learned4_shuffled_labels|4c88d027f01bc7|eval2,DateTime.000027,answer,learned4_shuffled_labels,eval2,Q1 '2088,Q1 '2088
+DateTime.000027|order4_plain|a0fb5d1fcc21e1|eval0,DateTime.000027,answer,order4_plain,eval0,Q3 '2237,Q3 '2237
+DateTime.000027|order4_plain|a0fb5d1fcc21e1|eval1,DateTime.000027,answer,order4_plain,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|order4_plain|a0fb5d1fcc21e1|eval2,DateTime.000027,answer,order4_plain,eval2,Q2 '2088,Q2 '2088
+DateTime.000027|random4_plain|0a556979295cd1|eval0,DateTime.000027,answer,random4_plain,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|random4_plain|0a556979295cd1|eval1,DateTime.000027,answer,random4_plain,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|random4_plain|0a556979295cd1|eval2,DateTime.000027,answer,random4_plain,eval2,Q2 '2088,Q2 '2088
+DateTime.000027|diverse4_plain|4b781f8b33664c|eval0,DateTime.000027,answer,diverse4_plain,eval0,Q3 '2237,Q3 '2237
+DateTime.000027|diverse4_plain|4b781f8b33664c|eval1,DateTime.000027,answer,diverse4_plain,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|diverse4_plain|4b781f8b33664c|eval2,DateTime.000027,answer,diverse4_plain,eval2,Q2 '2088,Q2 '2088
+DateTime.000027|qwen_choose4_plain|f9bef5226d4707|eval0,DateTime.000027,answer,qwen_choose4_plain,eval0,Q2 '2237,Q2 '2237
+DateTime.000027|qwen_choose4_plain|f9bef5226d4707|eval1,DateTime.000027,answer,qwen_choose4_plain,eval1,Q4 '1904,Q4 '1904
+DateTime.000027|qwen_choose4_plain|f9bef5226d4707|eval2,DateTime.000027,answer,qwen_choose4_plain,eval2,Q1 '2088,Q1 '2088
+DateTime.000029|learned4_plain|3bec9c72e1c64d|eval0,DateTime.000029,answer,learned4_plain,eval0,Sunday,Sunday
+DateTime.000029|learned4_plain|3bec9c72e1c64d|eval1,DateTime.000029,answer,learned4_plain,eval1,Sunday,Sunday
+DateTime.000029|learned4_plain|3bec9c72e1c64d|eval2,DateTime.000029,answer,learned4_plain,eval2,Sunday,Sunday
+DateTime.000029|learned4_shuffled_labels|c4d4dd03a440eb|eval0,DateTime.000029,answer,learned4_shuffled_labels,eval0,Sunday,Sunday
+DateTime.000029|learned4_shuffled_labels|c4d4dd03a440eb|eval1,DateTime.000029,answer,learned4_shuffled_labels,eval1,Sunday,Sunday
+DateTime.000029|learned4_shuffled_labels|c4d4dd03a440eb|eval2,DateTime.000029,answer,learned4_shuffled_labels,eval2,Sunday,Sunday
+DateTime.000029|order4_plain|a00487f3fcebdd|eval0,DateTime.000029,answer,order4_plain,eval0,Thursday,Thursday
+DateTime.000029|order4_plain|a00487f3fcebdd|eval1,DateTime.000029,answer,order4_plain,eval1,Thursday,Thursday
+DateTime.000029|order4_plain|a00487f3fcebdd|eval2,DateTime.000029,answer,order4_plain,eval2,Friday,Friday
+DateTime.000029|random4_plain|0dda2072f3a19f|eval0,DateTime.000029,answer,random4_plain,eval0,Sunday,Sunday
+DateTime.000029|random4_plain|0dda2072f3a19f|eval1,DateTime.000029,answer,random4_plain,eval1,Sunday,Sunday
+DateTime.000029|random4_plain|0dda2072f3a19f|eval2,DateTime.000029,answer,random4_plain,eval2,Sunday,Sunday
+DateTime.000029|diverse4_plain|21fc4b25d4f76b|eval0,DateTime.000029,answer,diverse4_plain,eval0,Thursday,Thursday
+DateTime.000029|diverse4_plain|21fc4b25d4f76b|eval1,DateTime.000029,answer,diverse4_plain,eval1,Thursday,Thursday
+DateTime.000029|diverse4_plain|21fc4b25d4f76b|eval2,DateTime.000029,answer,diverse4_plain,eval2,Sunday,Sunday
+DateTime.000029|qwen_choose4_plain|98fc41519bce0e|eval0,DateTime.000029,answer,qwen_choose4_plain,eval0,Thursday,Thursday
+DateTime.000029|qwen_choose4_plain|98fc41519bce0e|eval1,DateTime.000029,answer,qwen_choose4_plain,eval1,Thursday,Thursday
+DateTime.000029|qwen_choose4_plain|98fc41519bce0e|eval2,DateTime.000029,answer,qwen_choose4_plain,eval2,Thursday,Thursday
+DateTime.000030|learned4_plain|2b13f6c7a821a4|eval0,DateTime.000030,answer,learned4_plain,eval0,"Sunday, July 8, 2237","Sunday, July 8, 2237"
+DateTime.000030|learned4_plain|2b13f6c7a821a4|eval1,DateTime.000030,answer,learned4_plain,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|learned4_plain|2b13f6c7a821a4|eval2,DateTime.000030,answer,learned4_plain,eval2,"Thursday, April 5, 2088","Thursday, April 5, 2088"
+DateTime.000030|learned4_shuffled_labels|78c50ffa444abf|eval0,DateTime.000030,answer,learned4_shuffled_labels,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|learned4_shuffled_labels|78c50ffa444abf|eval1,DateTime.000030,answer,learned4_shuffled_labels,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|learned4_shuffled_labels|78c50ffa444abf|eval2,DateTime.000030,answer,learned4_shuffled_labels,eval2,"Sunday, April 5, 2088","Sunday, April 5, 2088"
+DateTime.000030|order4_plain|37e7457a8e16f9|eval0,DateTime.000030,answer,order4_plain,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|order4_plain|37e7457a8e16f9|eval1,DateTime.000030,answer,order4_plain,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|order4_plain|37e7457a8e16f9|eval2,DateTime.000030,answer,order4_plain,eval2,"Thursday, April 5, 2088","Thursday, April 5, 2088"
+DateTime.000030|random4_plain|a31174e6a9f05c|eval0,DateTime.000030,answer,random4_plain,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|random4_plain|a31174e6a9f05c|eval1,DateTime.000030,answer,random4_plain,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|random4_plain|a31174e6a9f05c|eval2,DateTime.000030,answer,random4_plain,eval2,"Wednesday, April 5, 2088","Wednesday, April 5, 2088"
+DateTime.000030|diverse4_plain|3c3c114092ffa8|eval0,DateTime.000030,answer,diverse4_plain,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|diverse4_plain|3c3c114092ffa8|eval1,DateTime.000030,answer,diverse4_plain,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|diverse4_plain|3c3c114092ffa8|eval2,DateTime.000030,answer,diverse4_plain,eval2,"Thursday, April 5, 2088","Thursday, April 5, 2088"
+DateTime.000030|qwen_choose4_plain|0f0e4c918c9f69|eval0,DateTime.000030,answer,qwen_choose4_plain,eval0,"Thursday, July 8, 2237","Thursday, July 8, 2237"
+DateTime.000030|qwen_choose4_plain|0f0e4c918c9f69|eval1,DateTime.000030,answer,qwen_choose4_plain,eval1,"Thursday, November 3, 1904","Thursday, November 3, 1904"
+DateTime.000030|qwen_choose4_plain|0f0e4c918c9f69|eval2,DateTime.000030,answer,qwen_choose4_plain,eval2,"Wednesday, April 5, 2088","Wednesday, April 5, 2088"
+DateTime.000092|learned4_plain|9204347508d76e|eval0,DateTime.000092,answer,learned4_plain,eval0,16,16
+DateTime.000092|learned4_plain|9204347508d76e|eval1,DateTime.000092,answer,learned4_plain,eval1,17,17
+DateTime.000092|learned4_plain|9204347508d76e|eval2,DateTime.000092,answer,learned4_plain,eval2,17,17
+DateTime.000092|learned4_shuffled_labels|5ecddd33575d5a|eval0,DateTime.000092,answer,learned4_shuffled_labels,eval0,16,16
+DateTime.000092|learned4_shuffled_labels|5ecddd33575d5a|eval1,DateTime.000092,answer,learned4_shuffled_labels,eval1,17,17
+DateTime.000092|learned4_shuffled_labels|5ecddd33575d5a|eval2,DateTime.000092,answer,learned4_shuffled_labels,eval2,17,17
+DateTime.000092|order4_plain|fa9dc9bb06a806|eval0,DateTime.000092,answer,order4_plain,eval0,16,16
+DateTime.000092|order4_plain|fa9dc9bb06a806|eval1,DateTime.000092,answer,order4_plain,eval1,17,17
+DateTime.000092|order4_plain|fa9dc9bb06a806|eval2,DateTime.000092,answer,order4_plain,eval2,17,17
+DateTime.000092|random4_plain|3f52cd20d6d56d|eval0,DateTime.000092,answer,random4_plain,eval0,16,16
+DateTime.000092|random4_plain|3f52cd20d6d56d|eval1,DateTime.000092,answer,random4_plain,eval1,17,17
+DateTime.000092|random4_plain|3f52cd20d6d56d|eval2,DateTime.000092,answer,random4_plain,eval2,17,17
+DateTime.000092|diverse4_plain|fa9dc9bb06a806|eval0,DateTime.000092,answer,diverse4_plain,eval0,16,16
+DateTime.000092|diverse4_plain|fa9dc9bb06a806|eval1,DateTime.000092,answer,diverse4_plain,eval1,17,17
+DateTime.000092|diverse4_plain|fa9dc9bb06a806|eval2,DateTime.000092,answer,diverse4_plain,eval2,17,17
+DateTime.000092|qwen_choose4_plain|15421aa84a131c|eval0,DateTime.000092,answer,qwen_choose4_plain,eval0,16,16
+DateTime.000092|qwen_choose4_plain|15421aa84a131c|eval1,DateTime.000092,answer,qwen_choose4_plain,eval1,17,17
+DateTime.000092|qwen_choose4_plain|15421aa84a131c|eval2,DateTime.000092,answer,qwen_choose4_plain,eval2,17,17
+DateTime.000096|learned4_plain|37d5cbcaf7c79f|eval0,DateTime.000096,answer,learned4_plain,eval0,8,8
+DateTime.000096|learned4_plain|37d5cbcaf7c79f|eval1,DateTime.000096,answer,learned4_plain,eval1,24,24
+DateTime.000096|learned4_plain|37d5cbcaf7c79f|eval2,DateTime.000096,answer,learned4_plain,eval2,30,30
+DateTime.000096|learned4_shuffled_labels|5d2c30c1a22027|eval0,DateTime.000096,answer,learned4_shuffled_labels,eval0,8,8
+DateTime.000096|learned4_shuffled_labels|5d2c30c1a22027|eval1,DateTime.000096,answer,learned4_shuffled_labels,eval1,24,24
+DateTime.000096|learned4_shuffled_labels|5d2c30c1a22027|eval2,DateTime.000096,answer,learned4_shuffled_labels,eval2,30,30
+DateTime.000096|order4_plain|f8271029c5540c|eval0,DateTime.000096,answer,order4_plain,eval0,2089,2089
+DateTime.000096|order4_plain|f8271029c5540c|eval1,DateTime.000096,answer,order4_plain,eval1,24,24
+DateTime.000096|order4_plain|f8271029c5540c|eval2,DateTime.000096,answer,order4_plain,eval2,30,30
+DateTime.000096|random4_plain|54b32a335da66c|eval0,DateTime.000096,answer,random4_plain,eval0,8,8
+DateTime.000096|random4_plain|54b32a335da66c|eval1,DateTime.000096,answer,random4_plain,eval1,24,24
+DateTime.000096|random4_plain|54b32a335da66c|eval2,DateTime.000096,answer,random4_plain,eval2,30,30
+DateTime.000096|diverse4_plain|e64d0b228e84fd|eval0,DateTime.000096,answer,diverse4_plain,eval0,8,8
+DateTime.000096|diverse4_plain|e64d0b228e84fd|eval1,DateTime.000096,answer,diverse4_plain,eval1,24,24
+DateTime.000096|diverse4_plain|e64d0b228e84fd|eval2,DateTime.000096,answer,diverse4_plain,eval2,30,30
+DateTime.000096|qwen_choose4_plain|caef19603ec23c|eval0,DateTime.000096,answer,qwen_choose4_plain,eval0,8,8
+DateTime.000096|qwen_choose4_plain|caef19603ec23c|eval1,DateTime.000096,answer,qwen_choose4_plain,eval1,24,24
+DateTime.000096|qwen_choose4_plain|caef19603ec23c|eval2,DateTime.000096,answer,qwen_choose4_plain,eval2,30,30
+DateTime.000102|learned4_plain|c5074ecacf6172|eval0,DateTime.000102,answer,learned4_plain,eval0,10,10
+DateTime.000102|learned4_plain|c5074ecacf6172|eval1,DateTime.000102,answer,learned4_plain,eval1,15,15
+DateTime.000102|learned4_plain|c5074ecacf6172|eval2,DateTime.000102,answer,learned4_plain,eval2,8,8
+DateTime.000102|learned4_shuffled_labels|b2c295f940423f|eval0,DateTime.000102,answer,learned4_shuffled_labels,eval0,10,10
+DateTime.000102|learned4_shuffled_labels|b2c295f940423f|eval1,DateTime.000102,answer,learned4_shuffled_labels,eval1,10,10
+DateTime.000102|learned4_shuffled_labels|b2c295f940423f|eval2,DateTime.000102,answer,learned4_shuffled_labels,eval2,10,10
+DateTime.000102|order4_plain|bbf905382f86dc|eval0,DateTime.000102,answer,order4_plain,eval0,10,10
+DateTime.000102|order4_plain|bbf905382f86dc|eval1,DateTime.000102,answer,order4_plain,eval1,15,15
+DateTime.000102|order4_plain|bbf905382f86dc|eval2,DateTime.000102,answer,order4_plain,eval2,8,8
+DateTime.000102|random4_plain|6b360e432f6343|eval0,DateTime.000102,answer,random4_plain,eval0,10,10
+DateTime.000102|random4_plain|6b360e432f6343|eval1,DateTime.000102,answer,random4_plain,eval1,15,15
+DateTime.000102|random4_plain|6b360e432f6343|eval2,DateTime.000102,answer,random4_plain,eval2,8,8
+DateTime.000102|diverse4_plain|bbf905382f86dc|eval0,DateTime.000102,answer,diverse4_plain,eval0,10,10
+DateTime.000102|diverse4_plain|bbf905382f86dc|eval1,DateTime.000102,answer,diverse4_plain,eval1,15,15
+DateTime.000102|diverse4_plain|bbf905382f86dc|eval2,DateTime.000102,answer,diverse4_plain,eval2,8,8
+DateTime.000102|qwen_choose4_plain|cb61a6e17fb46d|eval0,DateTime.000102,answer,qwen_choose4_plain,eval0,10,10
+DateTime.000102|qwen_choose4_plain|cb61a6e17fb46d|eval1,DateTime.000102,answer,qwen_choose4_plain,eval1,15,15
+DateTime.000102|qwen_choose4_plain|cb61a6e17fb46d|eval2,DateTime.000102,answer,qwen_choose4_plain,eval2,8,8
+DateTime.000106|learned4_plain|981ef49e854998|eval0,DateTime.000106,answer,learned4_plain,eval0,Thu,Thu
+DateTime.000106|learned4_plain|981ef49e854998|eval1,DateTime.000106,answer,learned4_plain,eval1,Fri,Fri
+DateTime.000106|learned4_plain|981ef49e854998|eval2,DateTime.000106,answer,learned4_plain,eval2,Fri,Fri
+DateTime.000106|learned4_shuffled_labels|ce87fdf94faa41|eval0,DateTime.000106,answer,learned4_shuffled_labels,eval0,Thu,Thu
+DateTime.000106|learned4_shuffled_labels|ce87fdf94faa41|eval1,DateTime.000106,answer,learned4_shuffled_labels,eval1,Thu,Thu
+DateTime.000106|learned4_shuffled_labels|ce87fdf94faa41|eval2,DateTime.000106,answer,learned4_shuffled_labels,eval2,Thu,Thu
+DateTime.000106|order4_plain|98df709716b5c4|eval0,DateTime.000106,answer,order4_plain,eval0,Fri,Fri
+DateTime.000106|order4_plain|98df709716b5c4|eval1,DateTime.000106,answer,order4_plain,eval1,Fri,Fri
+DateTime.000106|order4_plain|98df709716b5c4|eval2,DateTime.000106,answer,order4_plain,eval2,Thu,Thu
+DateTime.000106|random4_plain|dab9a7d0391fee|eval0,DateTime.000106,answer,random4_plain,eval0,Fri,Fri
+DateTime.000106|random4_plain|dab9a7d0391fee|eval1,DateTime.000106,answer,random4_plain,eval1,Fri,Fri
+DateTime.000106|random4_plain|dab9a7d0391fee|eval2,DateTime.000106,answer,random4_plain,eval2,Fri,Fri
+DateTime.000106|diverse4_plain|98df709716b5c4|eval0,DateTime.000106,answer,diverse4_plain,eval0,Fri,Fri
+DateTime.000106|diverse4_plain|98df709716b5c4|eval1,DateTime.000106,answer,diverse4_plain,eval1,Fri,Fri
+DateTime.000106|diverse4_plain|98df709716b5c4|eval2,DateTime.000106,answer,diverse4_plain,eval2,Thu,Thu
+DateTime.000106|qwen_choose4_plain|9cf7852e05e6af|eval0,DateTime.000106,answer,qwen_choose4_plain,eval0,Thu,Thu
+DateTime.000106|qwen_choose4_plain|9cf7852e05e6af|eval1,DateTime.000106,answer,qwen_choose4_plain,eval1,Thu,Thu
+DateTime.000106|qwen_choose4_plain|9cf7852e05e6af|eval2,DateTime.000106,answer,qwen_choose4_plain,eval2,Thu,Thu
+DateTime.000110|learned4_plain|b8b88460a298eb|eval0,DateTime.000110,answer,learned4_plain,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|learned4_plain|b8b88460a298eb|eval1,DateTime.000110,answer,learned4_plain,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|learned4_plain|b8b88460a298eb|eval2,DateTime.000110,answer,learned4_plain,eval2,11222030 8:18,11222030 8:18
+DateTime.000110|learned4_shuffled_labels|b55d49289cac97|eval0,DateTime.000110,answer,learned4_shuffled_labels,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|learned4_shuffled_labels|b55d49289cac97|eval1,DateTime.000110,answer,learned4_shuffled_labels,eval1,01141982 15:13,01141982 15:13
+DateTime.000110|learned4_shuffled_labels|b55d49289cac97|eval2,DateTime.000110,answer,learned4_shuffled_labels,eval2,01222030 8:18,01222030 8:18
+DateTime.000110|order4_plain|f5eadfbb0c6e9c|eval0,DateTime.000110,answer,order4_plain,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|order4_plain|f5eadfbb0c6e9c|eval1,DateTime.000110,answer,order4_plain,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|order4_plain|f5eadfbb0c6e9c|eval2,DateTime.000110,answer,order4_plain,eval2,11222030 8:18,11222030 8:18
+DateTime.000110|random4_plain|1039c93f481f75|eval0,DateTime.000110,answer,random4_plain,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|random4_plain|1039c93f481f75|eval1,DateTime.000110,answer,random4_plain,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|random4_plain|1039c93f481f75|eval2,DateTime.000110,answer,random4_plain,eval2,11222030 8:18,11222030 8:18
+DateTime.000110|diverse4_plain|f5eadfbb0c6e9c|eval0,DateTime.000110,answer,diverse4_plain,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|diverse4_plain|f5eadfbb0c6e9c|eval1,DateTime.000110,answer,diverse4_plain,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|diverse4_plain|f5eadfbb0c6e9c|eval2,DateTime.000110,answer,diverse4_plain,eval2,11222030 8:18,11222030 8:18
+DateTime.000110|qwen_choose4_plain|0ee1c9d3d4d4ef|eval0,DateTime.000110,answer,qwen_choose4_plain,eval0,01132038 10:59,01132038 10:59
+DateTime.000110|qwen_choose4_plain|0ee1c9d3d4d4ef|eval1,DateTime.000110,answer,qwen_choose4_plain,eval1,08141982 15:13,08141982 15:13
+DateTime.000110|qwen_choose4_plain|0ee1c9d3d4d4ef|eval2,DateTime.000110,answer,qwen_choose4_plain,eval2,11222030 8:18,11222030 8:18
+DateTime.000112|learned4_plain|9cad0173e1700a|eval0,DateTime.000112,answer,learned4_plain,eval0,Q1 2038,Q1 2038
+DateTime.000112|learned4_plain|9cad0173e1700a|eval1,DateTime.000112,answer,learned4_plain,eval1,Q3 1982,Q3 1982
+DateTime.000112|learned4_plain|9cad0173e1700a|eval2,DateTime.000112,answer,learned4_plain,eval2,Q4 2030,Q4 2030
+DateTime.000112|learned4_shuffled_labels|402525158b44eb|eval0,DateTime.000112,answer,learned4_shuffled_labels,eval0,Q1 2038,Q1 2038
+DateTime.000112|learned4_shuffled_labels|402525158b44eb|eval1,DateTime.000112,answer,learned4_shuffled_labels,eval1,Q3 1982,Q3 1982
+DateTime.000112|learned4_shuffled_labels|402525158b44eb|eval2,DateTime.000112,answer,learned4_shuffled_labels,eval2,Q4 2030,Q4 2030
+DateTime.000112|order4_plain|9cad0173e1700a|eval0,DateTime.000112,answer,order4_plain,eval0,Q1 2038,Q1 2038
+DateTime.000112|order4_plain|9cad0173e1700a|eval1,DateTime.000112,answer,order4_plain,eval1,Q3 1982,Q3 1982
+DateTime.000112|order4_plain|9cad0173e1700a|eval2,DateTime.000112,answer,order4_plain,eval2,Q4 2030,Q4 2030
+DateTime.000112|random4_plain|9cad0173e1700a|eval0,DateTime.000112,answer,random4_plain,eval0,Q1 2038,Q1 2038
+DateTime.000112|random4_plain|9cad0173e1700a|eval1,DateTime.000112,answer,random4_plain,eval1,Q3 1982,Q3 1982
+DateTime.000112|random4_plain|9cad0173e1700a|eval2,DateTime.000112,answer,random4_plain,eval2,Q4 2030,Q4 2030
+DateTime.000112|diverse4_plain|9cad0173e1700a|eval0,DateTime.000112,answer,diverse4_plain,eval0,Q1 2038,Q1 2038
+DateTime.000112|diverse4_plain|9cad0173e1700a|eval1,DateTime.000112,answer,diverse4_plain,eval1,Q3 1982,Q3 1982
+DateTime.000112|diverse4_plain|9cad0173e1700a|eval2,DateTime.000112,answer,diverse4_plain,eval2,Q4 2030,Q4 2030
+DateTime.000112|qwen_choose4_plain|f90cb3e6f1394e|eval0,DateTime.000112,answer,qwen_choose4_plain,eval0,Q1 2038,Q1 2038
+DateTime.000112|qwen_choose4_plain|f90cb3e6f1394e|eval1,DateTime.000112,answer,qwen_choose4_plain,eval1,Q3 1982,Q3 1982
+DateTime.000112|qwen_choose4_plain|f90cb3e6f1394e|eval2,DateTime.000112,answer,qwen_choose4_plain,eval2,Q4 2030,Q4 2030
+DateTime.000113|learned4_plain|6a1ea03d4f3698|eval0,DateTime.000113,answer,learned4_plain,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|learned4_plain|6a1ea03d4f3698|eval1,DateTime.000113,answer,learned4_plain,eval1,15:00-15:30,15:00-15:30
+DateTime.000113|learned4_plain|6a1ea03d4f3698|eval2,DateTime.000113,answer,learned4_plain,eval2,08:15-08:30,08:15-08:30
+DateTime.000113|learned4_shuffled_labels|3686ce2a33d92e|eval0,DateTime.000113,answer,learned4_shuffled_labels,eval0,10:00-10:30,10:00-10:30
+DateTime.000113|learned4_shuffled_labels|3686ce2a33d92e|eval1,DateTime.000113,answer,learned4_shuffled_labels,eval1,15:00-15:30,15:00-15:30
+DateTime.000113|learned4_shuffled_labels|3686ce2a33d92e|eval2,DateTime.000113,answer,learned4_shuffled_labels,eval2,08:30-09:00,08:30-09:00
+DateTime.000113|order4_plain|5870ea7f18098c|eval0,DateTime.000113,answer,order4_plain,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|order4_plain|5870ea7f18098c|eval1,DateTime.000113,answer,order4_plain,eval1,15:00-15:30,15:00-15:30
+DateTime.000113|order4_plain|5870ea7f18098c|eval2,DateTime.000113,answer,order4_plain,eval2,8:15-8:30,8:15-8:30
+DateTime.000113|random4_plain|6896e5155a43c8|eval0,DateTime.000113,answer,random4_plain,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|random4_plain|6896e5155a43c8|eval1,DateTime.000113,answer,random4_plain,eval1,15:00-15:30,15:00-15:30
+DateTime.000113|random4_plain|6896e5155a43c8|eval2,DateTime.000113,answer,random4_plain,eval2,8:15-8:30,8:15-8:30
+DateTime.000113|diverse4_plain|5870ea7f18098c|eval0,DateTime.000113,answer,diverse4_plain,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|diverse4_plain|5870ea7f18098c|eval1,DateTime.000113,answer,diverse4_plain,eval1,15:00-15:30,15:00-15:30
+DateTime.000113|diverse4_plain|5870ea7f18098c|eval2,DateTime.000113,answer,diverse4_plain,eval2,8:15-8:30,8:15-8:30
+DateTime.000113|qwen_choose4_plain|02d224e3a40a86|eval0,DateTime.000113,answer,qwen_choose4_plain,eval0,10:50-11:00,10:50-11:00
+DateTime.000113|qwen_choose4_plain|02d224e3a40a86|eval1,DateTime.000113,answer,qwen_choose4_plain,eval1,15:10-15:30,15:10-15:30
+DateTime.000113|qwen_choose4_plain|02d224e3a40a86|eval2,DateTime.000113,answer,qwen_choose4_plain,eval2,8:15-8:30,8:15-8:30
+DateTime.000114|learned4_plain|f63a76495fd7c6|eval0,DateTime.000114,answer,learned4_plain,eval0,15-30,15-30
+DateTime.000114|learned4_plain|f63a76495fd7c6|eval1,DateTime.000114,answer,learned4_plain,eval1,15-30,15-30
+DateTime.000114|learned4_plain|f63a76495fd7c6|eval2,DateTime.000114,answer,learned4_plain,eval2,25-45,25-45
+DateTime.000114|learned4_shuffled_labels|eab0c693be34bd|eval0,DateTime.000114,answer,learned4_shuffled_labels,eval0,30-45,30-45
+DateTime.000114|learned4_shuffled_labels|eab0c693be34bd|eval1,DateTime.000114,answer,learned4_shuffled_labels,eval1,15-30,15-30
+DateTime.000114|learned4_shuffled_labels|eab0c693be34bd|eval2,DateTime.000114,answer,learned4_shuffled_labels,eval2,15-30,15-30
+DateTime.000114|order4_plain|d3875d7f690376|eval0,DateTime.000114,answer,order4_plain,eval0,30-45,30-45
+DateTime.000114|order4_plain|d3875d7f690376|eval1,DateTime.000114,answer,order4_plain,eval1,15-30,15-30
+DateTime.000114|order4_plain|d3875d7f690376|eval2,DateTime.000114,answer,order4_plain,eval2,30-45,30-45
+DateTime.000114|random4_plain|48220eef10c0df|eval0,DateTime.000114,answer,random4_plain,eval0,30-45,30-45
+DateTime.000114|random4_plain|48220eef10c0df|eval1,DateTime.000114,answer,random4_plain,eval1,30-45,30-45
+DateTime.000114|random4_plain|48220eef10c0df|eval2,DateTime.000114,answer,random4_plain,eval2,30-45,30-45
+DateTime.000114|diverse4_plain|d3875d7f690376|eval0,DateTime.000114,answer,diverse4_plain,eval0,30-45,30-45
+DateTime.000114|diverse4_plain|d3875d7f690376|eval1,DateTime.000114,answer,diverse4_plain,eval1,15-30,15-30
+DateTime.000114|diverse4_plain|d3875d7f690376|eval2,DateTime.000114,answer,diverse4_plain,eval2,30-45,30-45
+DateTime.000114|qwen_choose4_plain|d1b9af84e1e677|eval0,DateTime.000114,answer,qwen_choose4_plain,eval0,30-45,30-45
+DateTime.000114|qwen_choose4_plain|d1b9af84e1e677|eval1,DateTime.000114,answer,qwen_choose4_plain,eval1,15-30,15-30
+DateTime.000114|qwen_choose4_plain|d1b9af84e1e677|eval2,DateTime.000114,answer,qwen_choose4_plain,eval2,30-45,30-45
+DateTime.000116|learned4_plain|197c4ae5a8261f|eval0,DateTime.000116,answer,learned4_plain,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|learned4_plain|197c4ae5a8261f|eval1,DateTime.000116,answer,learned4_plain,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|learned4_plain|197c4ae5a8261f|eval2,DateTime.000116,answer,learned4_plain,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|learned4_shuffled_labels|9bb73ce51ecbf2|eval0,DateTime.000116,answer,learned4_shuffled_labels,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|learned4_shuffled_labels|9bb73ce51ecbf2|eval1,DateTime.000116,answer,learned4_shuffled_labels,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|learned4_shuffled_labels|9bb73ce51ecbf2|eval2,DateTime.000116,answer,learned4_shuffled_labels,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|order4_plain|98df07b87abc1a|eval0,DateTime.000116,answer,order4_plain,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|order4_plain|98df07b87abc1a|eval1,DateTime.000116,answer,order4_plain,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|order4_plain|98df07b87abc1a|eval2,DateTime.000116,answer,order4_plain,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|random4_plain|88d2ea27de34f6|eval0,DateTime.000116,answer,random4_plain,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|random4_plain|88d2ea27de34f6|eval1,DateTime.000116,answer,random4_plain,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|random4_plain|88d2ea27de34f6|eval2,DateTime.000116,answer,random4_plain,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|diverse4_plain|98df07b87abc1a|eval0,DateTime.000116,answer,diverse4_plain,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|diverse4_plain|98df07b87abc1a|eval1,DateTime.000116,answer,diverse4_plain,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|diverse4_plain|98df07b87abc1a|eval2,DateTime.000116,answer,diverse4_plain,eval2,8AM-10AM,8AM-10AM
+DateTime.000116|qwen_choose4_plain|9525c5343d4497|eval0,DateTime.000116,answer,qwen_choose4_plain,eval0,10AM-12PM,10AM-12PM
+DateTime.000116|qwen_choose4_plain|9525c5343d4497|eval1,DateTime.000116,answer,qwen_choose4_plain,eval1,3PM-5PM,3PM-5PM
+DateTime.000116|qwen_choose4_plain|9525c5343d4497|eval2,DateTime.000116,answer,qwen_choose4_plain,eval2,8AM-10AM,8AM-10AM
+Language.000001|learned4_plain|82b58de8e02245|eval0,Language.000001,answer,learned4_plain,eval0,Czech = cs,Czech = cs
+Language.000001|learned4_plain|82b58de8e02245|eval1,Language.000001,answer,learned4_plain,eval1,Danish = da,Danish = da
+Language.000001|learned4_plain|82b58de8e02245|eval2,Language.000001,answer,learned4_plain,eval2,Dutch = nl,Dutch = nl
+Language.000001|learned4_shuffled_labels|bc69d95f45be70|eval0,Language.000001,answer,learned4_shuffled_labels,eval0,Czech = cs,Czech = cs
+Language.000001|learned4_shuffled_labels|bc69d95f45be70|eval1,Language.000001,answer,learned4_shuffled_labels,eval1,Danish = da,Danish = da
+Language.000001|learned4_shuffled_labels|bc69d95f45be70|eval2,Language.000001,answer,learned4_shuffled_labels,eval2,Dutch = nl,Dutch = nl
+Language.000001|order4_plain|60b6c90853bd45|eval0,Language.000001,answer,order4_plain,eval0,Czech = cs,Czech = cs
+Language.000001|order4_plain|60b6c90853bd45|eval1,Language.000001,answer,order4_plain,eval1,Danish = da,Danish = da
+Language.000001|order4_plain|60b6c90853bd45|eval2,Language.000001,answer,order4_plain,eval2,Dutch = nl,Dutch = nl
+Language.000001|random4_plain|53f94592ef7423|eval0,Language.000001,answer,random4_plain,eval0,Czech = cs,Czech = cs
+Language.000001|random4_plain|53f94592ef7423|eval1,Language.000001,answer,random4_plain,eval1,Danish = da,Danish = da
+Language.000001|random4_plain|53f94592ef7423|eval2,Language.000001,answer,random4_plain,eval2,Dutch = nl,Dutch = nl
+Language.000001|diverse4_plain|185b142264ef69|eval0,Language.000001,answer,diverse4_plain,eval0,Czech = cs,Czech = cs
+Language.000001|diverse4_plain|185b142264ef69|eval1,Language.000001,answer,diverse4_plain,eval1,Danish = da,Danish = da
+Language.000001|diverse4_plain|185b142264ef69|eval2,Language.000001,answer,diverse4_plain,eval2,Dutch = nl,Dutch = nl
+Language.000001|qwen_choose4_plain|fcd17447dc7b50|eval0,Language.000001,answer,qwen_choose4_plain,eval0,Czech = cs,Czech = cs
+Language.000001|qwen_choose4_plain|fcd17447dc7b50|eval1,Language.000001,answer,qwen_choose4_plain,eval1,Danish = da,Danish = da
+Language.000001|qwen_choose4_plain|fcd17447dc7b50|eval2,Language.000001,answer,qwen_choose4_plain,eval2,Dutch = nl,Dutch = nl
+Name.000008|learned4_plain|c865f3ede61600|eval0,Name.000008,answer,learned4_plain,eval0,I K,I K
+Name.000008|learned4_plain|c865f3ede61600|eval1,Name.000008,answer,learned4_plain,eval1,A B,A B
+Name.000008|learned4_plain|c865f3ede61600|eval2,Name.000008,answer,learned4_plain,eval2,M F,M F
+Name.000008|learned4_shuffled_labels|b7b9f7a56c04df|eval0,Name.000008,answer,learned4_shuffled_labels,eval0,I K,I K
+Name.000008|learned4_shuffled_labels|b7b9f7a56c04df|eval1,Name.000008,answer,learned4_shuffled_labels,eval1,A B,A B
+Name.000008|learned4_shuffled_labels|b7b9f7a56c04df|eval2,Name.000008,answer,learned4_shuffled_labels,eval2,M F,M F
+Name.000008|order4_plain|d58a6584693461|eval0,Name.000008,answer,order4_plain,eval0,I F,I F
+Name.000008|order4_plain|d58a6584693461|eval1,Name.000008,answer,order4_plain,eval1,A B,A B
+Name.000008|order4_plain|d58a6584693461|eval2,Name.000008,answer,order4_plain,eval2,M F,M F
+Name.000008|random4_plain|f0fd6a896e18db|eval0,Name.000008,answer,random4_plain,eval0,I K,I K
+Name.000008|random4_plain|f0fd6a896e18db|eval1,Name.000008,answer,random4_plain,eval1,A B,A B
+Name.000008|random4_plain|f0fd6a896e18db|eval2,Name.000008,answer,random4_plain,eval2,M V,M V
+Name.000008|diverse4_plain|fed0cc927635c5|eval0,Name.000008,answer,diverse4_plain,eval0,I K,I K
+Name.000008|diverse4_plain|fed0cc927635c5|eval1,Name.000008,answer,diverse4_plain,eval1,A B,A B
+Name.000008|diverse4_plain|fed0cc927635c5|eval2,Name.000008,answer,diverse4_plain,eval2,M V,M V
+Name.000008|qwen_choose4_plain|644fc1ab4a2e9b|eval0,Name.000008,answer,qwen_choose4_plain,eval0,I K,I K
+Name.000008|qwen_choose4_plain|644fc1ab4a2e9b|eval1,Name.000008,answer,qwen_choose4_plain,eval1,A B,A B
+Name.000008|qwen_choose4_plain|644fc1ab4a2e9b|eval2,Name.000008,answer,qwen_choose4_plain,eval2,M F,M F
+Name.000009|learned4_plain|ab1ee767e7136b|eval0,Name.000009,answer,learned4_plain,eval0,"Lusis, N.","Lusis, N."
+Name.000009|learned4_plain|ab1ee767e7136b|eval1,Name.000009,answer,learned4_plain,eval1,"Susila, C.","Susila, C."
+Name.000009|learned4_plain|ab1ee767e7136b|eval2,Name.000009,answer,learned4_plain,eval2,"Orav, K.","Orav, K."
+Name.000009|learned4_shuffled_labels|39d16fbe979851|eval0,Name.000009,answer,learned4_shuffled_labels,eval0,"Lusis, N.","Lusis, N."
+Name.000009|learned4_shuffled_labels|39d16fbe979851|eval1,Name.000009,answer,learned4_shuffled_labels,eval1,"Susila, C.","Susila, C."
+Name.000009|learned4_shuffled_labels|39d16fbe979851|eval2,Name.000009,answer,learned4_shuffled_labels,eval2,"Orav, K.","Orav, K."
+Name.000009|order4_plain|b00de9e34f0d60|eval0,Name.000009,answer,order4_plain,eval0,"Lusis, N.","Lusis, N."
+Name.000009|order4_plain|b00de9e34f0d60|eval1,Name.000009,answer,order4_plain,eval1,"Susila, C.","Susila, C."
+Name.000009|order4_plain|b00de9e34f0d60|eval2,Name.000009,answer,order4_plain,eval2,"Orav, K.","Orav, K."
+Name.000009|random4_plain|561257ac54809a|eval0,Name.000009,answer,random4_plain,eval0,"Lusis, N.","Lusis, N."
+Name.000009|random4_plain|561257ac54809a|eval1,Name.000009,answer,random4_plain,eval1,"Susila, C.","Susila, C."
+Name.000009|random4_plain|561257ac54809a|eval2,Name.000009,answer,random4_plain,eval2,"Orav, K.","Orav, K."
+Name.000009|diverse4_plain|84a53d2d4d789b|eval0,Name.000009,answer,diverse4_plain,eval0,"Lusis, N.","Lusis, N."
+Name.000009|diverse4_plain|84a53d2d4d789b|eval1,Name.000009,answer,diverse4_plain,eval1,"Susila, C.","Susila, C."
+Name.000009|diverse4_plain|84a53d2d4d789b|eval2,Name.000009,answer,diverse4_plain,eval2,"Orav, K.","Orav, K."
+Name.000009|qwen_choose4_plain|fbc589035eb536|eval0,Name.000009,answer,qwen_choose4_plain,eval0,"Lusis, N.","Lusis, N."
+Name.000009|qwen_choose4_plain|fbc589035eb536|eval1,Name.000009,answer,qwen_choose4_plain,eval1,"Susila, C.","Susila, C."
+Name.000009|qwen_choose4_plain|fbc589035eb536|eval2,Name.000009,answer,qwen_choose4_plain,eval2,"Orav, K.","Orav, K."
+Name.000010|learned4_plain|adae03a097c3de|eval0,Name.000010,answer,learned4_plain,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|learned4_plain|adae03a097c3de|eval1,Name.000010,answer,learned4_plain,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|learned4_plain|adae03a097c3de|eval2,Name.000010,answer,learned4_plain,eval2,Stanic,Stanic
+Name.000010|learned4_shuffled_labels|035d99075f24a2|eval0,Name.000010,answer,learned4_shuffled_labels,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|learned4_shuffled_labels|035d99075f24a2|eval1,Name.000010,answer,learned4_shuffled_labels,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|learned4_shuffled_labels|035d99075f24a2|eval2,Name.000010,answer,learned4_shuffled_labels,eval2,Stanic,Stanic
+Name.000010|order4_plain|c2a53d59f2429b|eval0,Name.000010,answer,order4_plain,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|order4_plain|c2a53d59f2429b|eval1,Name.000010,answer,order4_plain,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|order4_plain|c2a53d59f2429b|eval2,Name.000010,answer,order4_plain,eval2,Stanic,Stanic
+Name.000010|random4_plain|102b9e485f29bc|eval0,Name.000010,answer,random4_plain,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|random4_plain|102b9e485f29bc|eval1,Name.000010,answer,random4_plain,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|random4_plain|102b9e485f29bc|eval2,Name.000010,answer,random4_plain,eval2,Stanic,Stanic
+Name.000010|diverse4_plain|64424c2bbd5e45|eval0,Name.000010,answer,diverse4_plain,eval0,Andrey 388@816 Ansari,Andrey 388@816 Ansari
+Name.000010|diverse4_plain|64424c2bbd5e45|eval1,Name.000010,answer,diverse4_plain,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|diverse4_plain|64424c2bbd5e45|eval2,Name.000010,answer,diverse4_plain,eval2,Stanic,Stanic
+Name.000010|qwen_choose4_plain|39cee03a8e6982|eval0,Name.000010,answer,qwen_choose4_plain,eval0,Andrey 388@816,Andrey 388@816
+Name.000010|qwen_choose4_plain|39cee03a8e6982|eval1,Name.000010,answer,qwen_choose4_plain,eval1,Zeynep 897@178,Zeynep 897@178
+Name.000010|qwen_choose4_plain|39cee03a8e6982|eval2,Name.000010,answer,qwen_choose4_plain,eval2,Stanic,Stanic
+Name.000013|learned4_plain|dabb869179e6f2|eval0,Name.000013,answer,learned4_plain,eval0,O,O
+Name.000013|learned4_plain|dabb869179e6f2|eval1,Name.000013,answer,learned4_plain,eval1,D,D
+Name.000013|learned4_plain|dabb869179e6f2|eval2,Name.000013,answer,learned4_plain,eval2,S,S
+Name.000013|learned4_shuffled_labels|82994b29a32350|eval0,Name.000013,answer,learned4_shuffled_labels,eval0,A,A
+Name.000013|learned4_shuffled_labels|82994b29a32350|eval1,Name.000013,answer,learned4_shuffled_labels,eval1,S,S
+Name.000013|learned4_shuffled_labels|82994b29a32350|eval2,Name.000013,answer,learned4_shuffled_labels,eval2,S,S
+Name.000013|order4_plain|1ac607449dc734|eval0,Name.000013,answer,order4_plain,eval0,O,O
+Name.000013|order4_plain|1ac607449dc734|eval1,Name.000013,answer,order4_plain,eval1,D,D
+Name.000013|order4_plain|1ac607449dc734|eval2,Name.000013,answer,order4_plain,eval2,S,S
+Name.000013|random4_plain|786691eaf1175c|eval0,Name.000013,answer,random4_plain,eval0,O,O
+Name.000013|random4_plain|786691eaf1175c|eval1,Name.000013,answer,random4_plain,eval1,D,D
+Name.000013|random4_plain|786691eaf1175c|eval2,Name.000013,answer,random4_plain,eval2,S,S
+Name.000013|diverse4_plain|9b891a9491c7f1|eval0,Name.000013,answer,diverse4_plain,eval0,O,O
+Name.000013|diverse4_plain|9b891a9491c7f1|eval1,Name.000013,answer,diverse4_plain,eval1,D,D
+Name.000013|diverse4_plain|9b891a9491c7f1|eval2,Name.000013,answer,diverse4_plain,eval2,S,S
+Name.000013|qwen_choose4_plain|1ac607449dc734|eval0,Name.000013,answer,qwen_choose4_plain,eval0,O,O
+Name.000013|qwen_choose4_plain|1ac607449dc734|eval1,Name.000013,answer,qwen_choose4_plain,eval1,D,D
+Name.000013|qwen_choose4_plain|1ac607449dc734|eval2,Name.000013,answer,qwen_choose4_plain,eval2,S,S
+Number.000015|learned4_plain|fe900226f2d184|eval0,Number.000015,answer,learned4_plain,eval0,49550,49550
+Number.000015|learned4_plain|fe900226f2d184|eval1,Number.000015,answer,learned4_plain,eval1,-18550,-18550
+Number.000015|learned4_plain|fe900226f2d184|eval2,Number.000015,answer,learned4_plain,eval2,34850,34850
+Number.000015|learned4_shuffled_labels|84b5fd4f284765|eval0,Number.000015,answer,learned4_shuffled_labels,eval0,49550,49550
+Number.000015|learned4_shuffled_labels|84b5fd4f284765|eval1,Number.000015,answer,learned4_shuffled_labels,eval1,-3250,-3250
+Number.000015|learned4_shuffled_labels|84b5fd4f284765|eval2,Number.000015,answer,learned4_shuffled_labels,eval2,34850,34850
+Number.000015|order4_plain|e7f3d143bb8813|eval0,Number.000015,answer,order4_plain,eval0,49550,49550
+Number.000015|order4_plain|e7f3d143bb8813|eval1,Number.000015,answer,order4_plain,eval1,-18500,-18500
+Number.000015|order4_plain|e7f3d143bb8813|eval2,Number.000015,answer,order4_plain,eval2,34850,34850
+Number.000015|random4_plain|fe94508ea00ca8|eval0,Number.000015,answer,random4_plain,eval0,49550,49550
+Number.000015|random4_plain|fe94508ea00ca8|eval1,Number.000015,answer,random4_plain,eval1,-18500,-18500
+Number.000015|random4_plain|fe94508ea00ca8|eval2,Number.000015,answer,random4_plain,eval2,34850,34850
+Number.000015|diverse4_plain|422e502594717f|eval0,Number.000015,answer,diverse4_plain,eval0,49550,49550
+Number.000015|diverse4_plain|422e502594717f|eval1,Number.000015,answer,diverse4_plain,eval1,-18500,-18500
+Number.000015|diverse4_plain|422e502594717f|eval2,Number.000015,answer,diverse4_plain,eval2,34850,34850
+Number.000015|qwen_choose4_plain|bada8c311eee8a|eval0,Number.000015,answer,qwen_choose4_plain,eval0,49550,49550
+Number.000015|qwen_choose4_plain|bada8c311eee8a|eval1,Number.000015,answer,qwen_choose4_plain,eval1,-18500,-18500
+Number.000015|qwen_choose4_plain|bada8c311eee8a|eval2,Number.000015,answer,qwen_choose4_plain,eval2,34850,34850
+Number.000071|learned4_plain|c2a02be90e2531|eval0,Number.000071,answer,learned4_plain,eval0,0,0
+Number.000071|learned4_plain|c2a02be90e2531|eval1,Number.000071,answer,learned4_plain,eval1,0.9,0.9
+Number.000071|learned4_plain|c2a02be90e2531|eval2,Number.000071,answer,learned4_plain,eval2,0.6,0.6
+Number.000071|learned4_shuffled_labels|234af867fd70b9|eval0,Number.000071,answer,learned4_shuffled_labels,eval0,23224,23224
+Number.000071|learned4_shuffled_labels|234af867fd70b9|eval1,Number.000071,answer,learned4_shuffled_labels,eval1,10,10
+Number.000071|learned4_shuffled_labels|234af867fd70b9|eval2,Number.000071,answer,learned4_shuffled_labels,eval2,10,10
+Number.000071|order4_plain|ba2582b9d2fccd|eval0,Number.000071,answer,order4_plain,eval0,0.1,0.1
+Number.000071|order4_plain|ba2582b9d2fccd|eval1,Number.000071,answer,order4_plain,eval1,0.9,0.9
+Number.000071|order4_plain|ba2582b9d2fccd|eval2,Number.000071,answer,order4_plain,eval2,0.5,0.5
+Number.000071|random4_plain|c56ebec732b71d|eval0,Number.000071,answer,random4_plain,eval0,0.1,0.1
+Number.000071|random4_plain|c56ebec732b71d|eval1,Number.000071,answer,random4_plain,eval1,0.9,0.9
+Number.000071|random4_plain|c56ebec732b71d|eval2,Number.000071,answer,random4_plain,eval2,0.6,0.6
+Number.000071|diverse4_plain|c3a51e6012ea14|eval0,Number.000071,answer,diverse4_plain,eval0,0,0
+Number.000071|diverse4_plain|c3a51e6012ea14|eval1,Number.000071,answer,diverse4_plain,eval1,0.9,0.9
+Number.000071|diverse4_plain|c3a51e6012ea14|eval2,Number.000071,answer,diverse4_plain,eval2,0.5,0.5
+Number.000071|qwen_choose4_plain|f09484383061b0|eval0,Number.000071,answer,qwen_choose4_plain,eval0,0.1,0.1
+Number.000071|qwen_choose4_plain|f09484383061b0|eval1,Number.000071,answer,qwen_choose4_plain,eval1,0.9,0.9
+Number.000071|qwen_choose4_plain|f09484383061b0|eval2,Number.000071,answer,qwen_choose4_plain,eval2,0.5,0.5
+Number.000086|learned4_plain|193c0eb109e893|eval0,Number.000086,answer,learned4_plain,eval0,50-55,50-55
+Number.000086|learned4_plain|193c0eb109e893|eval1,Number.000086,answer,learned4_plain,eval1,10-20,10-20
+Number.000086|learned4_plain|193c0eb109e893|eval2,Number.000086,answer,learned4_plain,eval2,40-45,40-45
+Number.000086|learned4_shuffled_labels|1370a3bcaa0fdd|eval0,Number.000086,answer,learned4_shuffled_labels,eval0,50-55,50-55
+Number.000086|learned4_shuffled_labels|1370a3bcaa0fdd|eval1,Number.000086,answer,learned4_shuffled_labels,eval1,15-20,15-20
+Number.000086|learned4_shuffled_labels|1370a3bcaa0fdd|eval2,Number.000086,answer,learned4_shuffled_labels,eval2,40-45,40-45
+Number.000086|order4_plain|ae4b588532a224|eval0,Number.000086,answer,order4_plain,eval0,50-55,50-55
+Number.000086|order4_plain|ae4b588532a224|eval1,Number.000086,answer,order4_plain,eval1,10-20,10-20
+Number.000086|order4_plain|ae4b588532a224|eval2,Number.000086,answer,order4_plain,eval2,40-45,40-45
+Number.000086|random4_plain|692e2989718a75|eval0,Number.000086,answer,random4_plain,eval0,50-55,50-55
+Number.000086|random4_plain|692e2989718a75|eval1,Number.000086,answer,random4_plain,eval1,15-20,15-20
+Number.000086|random4_plain|692e2989718a75|eval2,Number.000086,answer,random4_plain,eval2,40-45,40-45
+Number.000086|diverse4_plain|ae4b588532a224|eval0,Number.000086,answer,diverse4_plain,eval0,50-55,50-55
+Number.000086|diverse4_plain|ae4b588532a224|eval1,Number.000086,answer,diverse4_plain,eval1,10-20,10-20
+Number.000086|diverse4_plain|ae4b588532a224|eval2,Number.000086,answer,diverse4_plain,eval2,40-45,40-45
+Number.000086|qwen_choose4_plain|cb3d6e04156289|eval0,Number.000086,answer,qwen_choose4_plain,eval0,50-55,50-55
+Number.000086|qwen_choose4_plain|cb3d6e04156289|eval1,Number.000086,answer,qwen_choose4_plain,eval1,10-20,10-20
+Number.000086|qwen_choose4_plain|cb3d6e04156289|eval2,Number.000086,answer,qwen_choose4_plain,eval2,40-45,40-45
+Phone.000002|learned4_plain|e12c0a0902d6eb|eval0,Phone.000002,answer,learned4_plain,eval0,NULL,NULL
+Phone.000002|learned4_plain|e12c0a0902d6eb|eval1,Phone.000002,answer,learned4_plain,eval1,NULL,NULL
+Phone.000002|learned4_plain|e12c0a0902d6eb|eval2,Phone.000002,answer,learned4_plain,eval2,x1162,x1162
+Phone.000002|learned4_shuffled_labels|3a9a79b7dc6a98|eval0,Phone.000002,answer,learned4_shuffled_labels,eval0,x6011,x6011
+Phone.000002|learned4_shuffled_labels|3a9a79b7dc6a98|eval1,Phone.000002,answer,learned4_shuffled_labels,eval1,x6011,x6011
+Phone.000002|learned4_shuffled_labels|3a9a79b7dc6a98|eval2,Phone.000002,answer,learned4_shuffled_labels,eval2,x6011,x6011
+Phone.000002|order4_plain|f87081d9b971a7|eval0,Phone.000002,answer,order4_plain,eval0,NULL,NULL
+Phone.000002|order4_plain|f87081d9b971a7|eval1,Phone.000002,answer,order4_plain,eval1,NULL,NULL
+Phone.000002|order4_plain|f87081d9b971a7|eval2,Phone.000002,answer,order4_plain,eval2,x1162,x1162
+Phone.000002|random4_plain|2a20e29a913ea2|eval0,Phone.000002,answer,random4_plain,eval0,NULL,NULL
+Phone.000002|random4_plain|2a20e29a913ea2|eval1,Phone.000002,answer,random4_plain,eval1,NULL,NULL
+Phone.000002|random4_plain|2a20e29a913ea2|eval2,Phone.000002,answer,random4_plain,eval2,x1162,x1162
+Phone.000002|diverse4_plain|f87081d9b971a7|eval0,Phone.000002,answer,diverse4_plain,eval0,NULL,NULL
+Phone.000002|diverse4_plain|f87081d9b971a7|eval1,Phone.000002,answer,diverse4_plain,eval1,NULL,NULL
+Phone.000002|diverse4_plain|f87081d9b971a7|eval2,Phone.000002,answer,diverse4_plain,eval2,x1162,x1162
+Phone.000002|qwen_choose4_plain|6136926a69b994|eval0,Phone.000002,answer,qwen_choose4_plain,eval0,NULL,NULL
+Phone.000002|qwen_choose4_plain|6136926a69b994|eval1,Phone.000002,answer,qwen_choose4_plain,eval1,NULL,NULL
+Phone.000002|qwen_choose4_plain|6136926a69b994|eval2,Phone.000002,answer,qwen_choose4_plain,eval2,x1162,x1162
+Phone.000003|learned4_plain|05a1be65d2fc29|eval0,Phone.000003,answer,learned4_plain,eval0,x3525,x3525
+Phone.000003|learned4_plain|05a1be65d2fc29|eval1,Phone.000003,answer,learned4_plain,eval1,x6686,x6686
+Phone.000003|learned4_plain|05a1be65d2fc29|eval2,Phone.000003,answer,learned4_plain,eval2,x6590,x6590
+Phone.000003|learned4_shuffled_labels|54f9816acdec23|eval0,Phone.000003,answer,learned4_shuffled_labels,eval0,x3525,x3525
+Phone.000003|learned4_shuffled_labels|54f9816acdec23|eval1,Phone.000003,answer,learned4_shuffled_labels,eval1,x6686,x6686
+Phone.000003|learned4_shuffled_labels|54f9816acdec23|eval2,Phone.000003,answer,learned4_shuffled_labels,eval2,x188,x188
+Phone.000003|order4_plain|bafe41852c7b3c|eval0,Phone.000003,answer,order4_plain,eval0,x3525,x3525
+Phone.000003|order4_plain|bafe41852c7b3c|eval1,Phone.000003,answer,order4_plain,eval1,x6686,x6686
+Phone.000003|order4_plain|bafe41852c7b3c|eval2,Phone.000003,answer,order4_plain,eval2,x6590,x6590
+Phone.000003|random4_plain|bafe41852c7b3c|eval0,Phone.000003,answer,random4_plain,eval0,x3525,x3525
+Phone.000003|random4_plain|bafe41852c7b3c|eval1,Phone.000003,answer,random4_plain,eval1,x6686,x6686
+Phone.000003|random4_plain|bafe41852c7b3c|eval2,Phone.000003,answer,random4_plain,eval2,x6590,x6590
+Phone.000003|diverse4_plain|bafe41852c7b3c|eval0,Phone.000003,answer,diverse4_plain,eval0,x3525,x3525
+Phone.000003|diverse4_plain|bafe41852c7b3c|eval1,Phone.000003,answer,diverse4_plain,eval1,x6686,x6686
+Phone.000003|diverse4_plain|bafe41852c7b3c|eval2,Phone.000003,answer,diverse4_plain,eval2,x6590,x6590
+Phone.000003|qwen_choose4_plain|87efec53b70c3b|eval0,Phone.000003,answer,qwen_choose4_plain,eval0,x3525,x3525
+Phone.000003|qwen_choose4_plain|87efec53b70c3b|eval1,Phone.000003,answer,qwen_choose4_plain,eval1,x6686,x6686
+Phone.000003|qwen_choose4_plain|87efec53b70c3b|eval2,Phone.000003,answer,qwen_choose4_plain,eval2,x6590,x6590
+Rating.000001|learned4_plain|0e9f78284a5392|eval0,Rating.000001,answer,learned4_plain,eval0,5,5
+Rating.000001|learned4_plain|0e9f78284a5392|eval1,Rating.000001,answer,learned4_plain,eval1,5,5
+Rating.000001|learned4_plain|0e9f78284a5392|eval2,Rating.000001,answer,learned4_plain,eval2,9,9
+Rating.000001|learned4_shuffled_labels|3a22505262ea8b|eval0,Rating.000001,answer,learned4_shuffled_labels,eval0,7,7
+Rating.000001|learned4_shuffled_labels|3a22505262ea8b|eval1,Rating.000001,answer,learned4_shuffled_labels,eval1,5,5
+Rating.000001|learned4_shuffled_labels|3a22505262ea8b|eval2,Rating.000001,answer,learned4_shuffled_labels,eval2,9,9
+Rating.000001|order4_plain|30a0eca3c35220|eval0,Rating.000001,answer,order4_plain,eval0,5,5
+Rating.000001|order4_plain|30a0eca3c35220|eval1,Rating.000001,answer,order4_plain,eval1,5,5
+Rating.000001|order4_plain|30a0eca3c35220|eval2,Rating.000001,answer,order4_plain,eval2,9,9
+Rating.000001|random4_plain|2e1294c4e5930c|eval0,Rating.000001,answer,random4_plain,eval0,5,5
+Rating.000001|random4_plain|2e1294c4e5930c|eval1,Rating.000001,answer,random4_plain,eval1,5,5
+Rating.000001|random4_plain|2e1294c4e5930c|eval2,Rating.000001,answer,random4_plain,eval2,9,9
+Rating.000001|diverse4_plain|b17cd647af18f2|eval0,Rating.000001,answer,diverse4_plain,eval0,5,5
+Rating.000001|diverse4_plain|b17cd647af18f2|eval1,Rating.000001,answer,diverse4_plain,eval1,5,5
+Rating.000001|diverse4_plain|b17cd647af18f2|eval2,Rating.000001,answer,diverse4_plain,eval2,9,9
+Rating.000001|qwen_choose4_plain|01b9bab31afa91|eval0,Rating.000001,answer,qwen_choose4_plain,eval0,5,5
+Rating.000001|qwen_choose4_plain|01b9bab31afa91|eval1,Rating.000001,answer,qwen_choose4_plain,eval1,5,5
+Rating.000001|qwen_choose4_plain|01b9bab31afa91|eval2,Rating.000001,answer,qwen_choose4_plain,eval2,9,9
+UserAgent.000006|learned4_plain|657cb23e8a5e5f|eval0,UserAgent.000006,answer,learned4_plain,eval0,1.7.4,1.7.4
+UserAgent.000006|learned4_plain|657cb23e8a5e5f|eval1,UserAgent.000006,answer,learned4_plain,eval1,0.2.8,0.2.8
+UserAgent.000006|learned4_plain|657cb23e8a5e5f|eval2,UserAgent.000006,answer,learned4_plain,eval2,3.0.4,3.0.4
+UserAgent.000006|learned4_shuffled_labels|a83bd18d8dcfeb|eval0,UserAgent.000006,answer,learned4_shuffled_labels,eval0,1.7.4,1.7.4
+UserAgent.000006|learned4_shuffled_labels|a83bd18d8dcfeb|eval1,UserAgent.000006,answer,learned4_shuffled_labels,eval1,0.2.8,0.2.8
+UserAgent.000006|learned4_shuffled_labels|a83bd18d8dcfeb|eval2,UserAgent.000006,answer,learned4_shuffled_labels,eval2,3.0.4,3.0.4
+UserAgent.000006|order4_plain|fe252fcd21e267|eval0,UserAgent.000006,answer,order4_plain,eval0,1.7.4,1.7.4
+UserAgent.000006|order4_plain|fe252fcd21e267|eval1,UserAgent.000006,answer,order4_plain,eval1,0.2.8,0.2.8
+UserAgent.000006|order4_plain|fe252fcd21e267|eval2,UserAgent.000006,answer,order4_plain,eval2,3.0.4,3.0.4
+UserAgent.000006|random4_plain|5c2aec3a78e7cb|eval0,UserAgent.000006,answer,random4_plain,eval0,1.7.4,1.7.4
+UserAgent.000006|random4_plain|5c2aec3a78e7cb|eval1,UserAgent.000006,answer,random4_plain,eval1,0.2.8,0.2.8
+UserAgent.000006|random4_plain|5c2aec3a78e7cb|eval2,UserAgent.000006,answer,random4_plain,eval2,3.0.4,3.0.4
+UserAgent.000006|diverse4_plain|fe252fcd21e267|eval0,UserAgent.000006,answer,diverse4_plain,eval0,1.7.4,1.7.4
+UserAgent.000006|diverse4_plain|fe252fcd21e267|eval1,UserAgent.000006,answer,diverse4_plain,eval1,0.2.8,0.2.8
+UserAgent.000006|diverse4_plain|fe252fcd21e267|eval2,UserAgent.000006,answer,diverse4_plain,eval2,3.0.4,3.0.4
+UserAgent.000006|qwen_choose4_plain|c185b1ba17a743|eval0,UserAgent.000006,answer,qwen_choose4_plain,eval0,1.7.4,1.7.4
+UserAgent.000006|qwen_choose4_plain|c185b1ba17a743|eval1,UserAgent.000006,answer,qwen_choose4_plain,eval1,0.2.8,0.2.8
+UserAgent.000006|qwen_choose4_plain|c185b1ba17a743|eval2,UserAgent.000006,answer,qwen_choose4_plain,eval2,3.0.4,3.0.4

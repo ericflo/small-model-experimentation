@@ -1,0 +1,281 @@
+task_id,family,features,method,row_exact,full_task_exact,program,program_kind,outputs_json,support_score,avg_vote_share,supported_rows,candidate_programs,selected_outputs
+Address.000002,Address,Substring,direct_row_greedy,0.3333333333333333,False,,row_candidate,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]",,,,,
+Address.000002,Address,Substring,row_majority,0.3333333333333333,False,,row_candidate,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]",,,,,
+Address.000002,Address,Substring,examples_shortest_program,0.0,False,"map[Aysu Fatma Ahmed 492 24th Place NW,Edison,AK,(896) 388-9065,000-93-6876,38891->492 24th Place,Fiamma Greco 967 03th Place SE,Long Beach,OK,(129) 734-1247,000-61-4879,03719->967 03th Place SE](COL0)",map,[],,,,,
+Address.000002,Address,Substring,candidate_support_program,0.0,False,"map[Place->492 24th Place,SE,Long->967 03th Place SE](field[space,-3](COL0))",map,"[""492 24th Place"", ""492 24th Place"", ""492 24th Place""]",-10.203592144986466,0.0,0.0,1404.0,"[""492 24th Place"", ""492 24th Place"", ""492 24th Place""]"
+Address.000002,Address,Substring,shuffled_support_program,0.0,False,"map[Place->492 24th Place,SE,Long->967 03th Place SE](field[space,-3](COL0))",map,"[""492 24th Place"", ""492 24th Place"", ""492 24th Place""]",-10.268130666124037,0.0,0.0,1404.0,"[""492 24th Place"", ""492 24th Place"", ""492 24th Place""]"
+Address.000002,Address,Substring,program_oracle,0.0,False,,,[],,,,,
+Address.000002,Address,Substring,row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+Address.000013,Address,"Conditional,Substring",direct_row_greedy,0.6666666666666666,False,,row_candidate,"[""89"", ""234"", ""One Main Parkway"", ""One Second Way"", ""789"", ""234""]",,,,,
+Address.000013,Address,"Conditional,Substring",row_majority,0.6666666666666666,False,,row_candidate,"[""89"", ""234"", ""One Main Parkway"", ""One Second Way"", ""789"", ""234""]",,,,,
+Address.000013,Address,"Conditional,Substring",examples_shortest_program,0.0,False,"map[One Cherry Court, Greensboro, VA 38891->None,234 Maple Blvd, Edison, AK 58712->234,2345 1st Rte, Kinshasa, OH 38891->2345,23 Fifth Ave SE, Maputo, WY 41230->23](COL0)",map,[],,,,,
+Address.000013,Address,"Conditional,Substring",candidate_support_program,0.0,False,"map[One Cherry Court, Greensboro, VA 38891->None,234 Maple Blvd, Edison, AK 58712->234,2345 1st Rte, Kinshasa, OH 38891->2345,23 Fifth Ave SE, Maputo, WY 41230->23](COL0)",map,[],-1000000000.0,0.0,0.0,1168.0,[]
+Address.000013,Address,"Conditional,Substring",shuffled_support_program,0.0,False,"map[One Cherry Court, Greensboro, VA 38891->None,234 Maple Blvd, Edison, AK 58712->234,2345 1st Rte, Kinshasa, OH 38891->2345,23 Fifth Ave SE, Maputo, WY 41230->23](COL0)",map,[],-1000000000.0,0.0,0.0,1168.0,[]
+Address.000013,Address,"Conditional,Substring",program_oracle,0.0,False,,,[],,,,,
+Address.000013,Address,"Conditional,Substring",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+BillingCode.000007,BillingCode,Concatenation,direct_row_greedy,0.3333333333333333,False,,row_candidate,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]",,,,,
+BillingCode.000007,BillingCode,Concatenation,row_majority,0.3333333333333333,False,,row_candidate,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]",,,,,
+BillingCode.000007,BillingCode,Concatenation,examples_shortest_program,1.0,True,"affix['',']'](COL0)",affix,"[""11529]"", ""PT-11529]"", ""[CPT-11529]""]",,,,,
+BillingCode.000007,BillingCode,Concatenation,candidate_support_program,0.3333333333333333,False,"affix['[',']'](field[[,-1](COL0))",affix,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]",-1.16839430028517,0.7142857142857143,3.0,1239.0,"[""[11529]"", ""[PT-11529]"", ""[CPT-11529]""]"
+BillingCode.000007,BillingCode,Concatenation,shuffled_support_program,1.0,True,"affix['',']'](COL0)",affix,"[""11529]"", ""PT-11529]"", ""[CPT-11529]""]",-10.203592144986466,0.0,0.0,1239.0,"[""11529]"", ""PT-11529]"", ""[CPT-11529]""]"
+BillingCode.000007,BillingCode,Concatenation,program_oracle,1.0,True,"affix['',']'](COL0)",affix,"[""11529]"", ""PT-11529]"", ""[CPT-11529]""]",,,,,
+BillingCode.000007,BillingCode,Concatenation,row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+City.000010,City,"Conditional,Numeric",direct_row_greedy,1.0,True,,row_candidate,"[""9"", ""20"", ""0""]",,,,,
+City.000010,City,"Conditional,Numeric",row_majority,1.0,True,,row_candidate,"[""9"", ""20"", ""0""]",,,,,
+City.000010,City,"Conditional,Numeric",examples_shortest_program,0.0,False,"map[30+->30,43->43,None->0](COL0)",map,[],,,,,
+City.000010,City,"Conditional,Numeric",candidate_support_program,0.0,False,"map[30+->30,43->43,None->0](COL0)",map,[],-1000000000.0,0.0,0.0,574.0,[]
+City.000010,City,"Conditional,Numeric",shuffled_support_program,0.0,False,"map[30+->30,43->43,None->0](COL0)",map,[],-1000000000.0,0.0,0.0,574.0,[]
+City.000010,City,"Conditional,Numeric",program_oracle,0.0,False,,,[],,,,,
+City.000010,City,"Conditional,Numeric",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""9"", ""20"", ""0""]",,,,,
+City.000011,City,Conditional,direct_row_greedy,0.75,False,,row_candidate,"[""New York City"", ""New York City"", ""New York City"", ""San Jose""]",,,,,
+City.000011,City,Conditional,row_majority,0.75,False,,row_candidate,"[""New York City"", ""New York City"", ""New York City"", ""San Jose""]",,,,,
+City.000011,City,Conditional,examples_shortest_program,0.0,False,"map[New York City->New York City,n.y.c.->New York City,New York City  ->New York City](COL0)",map,[],,,,,
+City.000011,City,Conditional,candidate_support_program,0.5,False,"affix['','ew York City'](upper(slice[0:1](COL0)))",affix,"[""New York City"", ""New York City"", ""New York City"", ""Sew York City""]",-4.102564168265439,0.6428571428571428,3.0,864.0,"[""New York City"", ""New York City"", ""New York City"", ""Sew York City""]"
+City.000011,City,Conditional,shuffled_support_program,0.5,False,"affix['','ew York City'](upper(slice[0:1](COL0)))",affix,"[""New York City"", ""New York City"", ""New York City"", ""Sew York City""]",-13.604789526648622,0.0,0.0,864.0,"[""New York City"", ""New York City"", ""New York City"", ""Sew York City""]"
+City.000011,City,Conditional,program_oracle,0.0,False,,,[],,,,,
+City.000011,City,Conditional,row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+Column.000001,Column,"Concatenation,Conditional,Substring",direct_row_greedy,1.0,True,,row_candidate,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]",,,,,
+Column.000001,Column,"Concatenation,Conditional,Substring",row_majority,1.0,True,,row_candidate,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]",,,,,
+Column.000001,Column,"Concatenation,Conditional,Substring",examples_shortest_program,0.0,False,"map[Coln8->Col8,Coln5->Col5,ID->Col1,Coln9->Col9](COL0)",map,[],,,,,
+Column.000001,Column,"Concatenation,Conditional,Substring",candidate_support_program,0.0,False,"map[Coln8->Col8,Coln5->Col5,ID->Col1,Coln9->Col9](COL0)",map,[],-1000000000.0,0.0,0.0,491.0,[]
+Column.000001,Column,"Concatenation,Conditional,Substring",shuffled_support_program,0.0,False,"map[Coln8->Col8,Coln5->Col5,ID->Col1,Coln9->Col9](COL0)",map,[],-1000000000.0,0.0,0.0,491.0,[]
+Column.000001,Column,"Concatenation,Conditional,Substring",program_oracle,0.0,False,,,[],,,,,
+Column.000001,Column,"Concatenation,Conditional,Substring",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]",,,,,
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",direct_row_greedy,1.0,True,,row_candidate,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]",,,,,
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",row_majority,1.0,True,,row_candidate,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]",,,,,
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",examples_shortest_program,1.0,True,"concat[' '](COL0,COL1)",concat,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]",,,,,
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",candidate_support_program,1.0,True,"concat[' '](COL0,COL1)",concat,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]",-0.20340931005408805,1.0,6.0,1891.0,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",shuffled_support_program,1.0,True,"concat[' '](COL0,COL1)",concat,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]",-20.407184289972932,0.0,0.0,1891.0,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",program_oracle,1.0,True,"concat[' '](COL0,COL1)",concat,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]",,,,,
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]",,,,,
+DateTime.000007,DateTime,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]",,,,,
+DateTime.000007,DateTime,DateTime,row_majority,1.0,True,,row_candidate,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]",,,,,
+DateTime.000007,DateTime,DateTime,examples_shortest_program,0.0,False,"map[2041-11-23T01:17:33Z->Nov 2041,2023-11-11T04:17:30Z->Nov 2023,1974-12-16T02:32:49Z->Dec 1974,2018-05-03T06:45:43Z->May 2018](COL0)",map,[],,,,,
+DateTime.000007,DateTime,DateTime,candidate_support_program,0.0,False,"map[2041-11-23T01:17:33Z->Nov 2041,2023-11-11T04:17:30Z->Nov 2023,1974-12-16T02:32:49Z->Dec 1974,2018-05-03T06:45:43Z->May 2018](COL0)",map,[],-1000000000.0,0.0,0.0,974.0,[]
+DateTime.000007,DateTime,DateTime,shuffled_support_program,0.0,False,"map[2041-11-23T01:17:33Z->Nov 2041,2023-11-11T04:17:30Z->Nov 2023,1974-12-16T02:32:49Z->Dec 1974,2018-05-03T06:45:43Z->May 2018](COL0)",map,[],-1000000000.0,0.0,0.0,974.0,[]
+DateTime.000007,DateTime,DateTime,program_oracle,0.0,False,,,[],,,,,
+DateTime.000007,DateTime,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]",,,,,
+DateTime.000017,DateTime,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""30/3/2241"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]",,,,,
+DateTime.000017,DateTime,DateTime,row_majority,1.0,True,,row_candidate,"[""30/3/2241"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]",,,,,
+DateTime.000017,DateTime,DateTime,examples_shortest_program,0.0,False,"map[06-Oct-2143->6/10/2143,Mar 30 2002->30/3/2002,01311846->31/1/1846,22 Apr 1953->22/4/1953](COL0)",map,[],,,,,
+DateTime.000017,DateTime,DateTime,candidate_support_program,0.0,False,"map[06-Oct-2143->6/10/2143,Mar 30 2002->30/3/2002,01311846->31/1/1846,22 Apr 1953->22/4/1953](COL0)",map,[],-1000000000.0,0.0,0.0,1027.0,[]
+DateTime.000017,DateTime,DateTime,shuffled_support_program,0.0,False,"map[06-Oct-2143->6/10/2143,Mar 30 2002->30/3/2002,01311846->31/1/1846,22 Apr 1953->22/4/1953](COL0)",map,[],-1000000000.0,0.0,0.0,1027.0,[]
+DateTime.000017,DateTime,DateTime,program_oracle,0.0,False,,,[],,,,,
+DateTime.000017,DateTime,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""30/3/2241"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]",,,,,
+DateTime.000025,DateTime,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]",,,,,
+DateTime.000025,DateTime,DateTime,row_majority,1.0,True,,row_candidate,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]",,,,,
+DateTime.000025,DateTime,DateTime,examples_shortest_program,0.0,False,"map[06-Oct-2143->Oct 43,Mar 30 2002->Mar 02,01311846->Jan 46,22 Apr 1953->Apr 53](COL0)",map,[],,,,,
+DateTime.000025,DateTime,DateTime,candidate_support_program,0.0,False,"map[06-Oct-2143->Oct 43,Mar 30 2002->Mar 02,01311846->Jan 46,22 Apr 1953->Apr 53](COL0)",map,[],-1000000000.0,0.0,0.0,1027.0,[]
+DateTime.000025,DateTime,DateTime,shuffled_support_program,0.0,False,"map[06-Oct-2143->Oct 43,Mar 30 2002->Mar 02,01311846->Jan 46,22 Apr 1953->Apr 53](COL0)",map,[],-1000000000.0,0.0,0.0,1027.0,[]
+DateTime.000025,DateTime,DateTime,program_oracle,0.0,False,,,[],,,,,
+DateTime.000025,DateTime,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]",,,,,
+DateTime.000027,DateTime,DateTime,direct_row_greedy,0.5,False,,row_candidate,"[""Q1 '2241"", ""Q1 '2160"", ""Q2 '1984"", ""Q2 '1740"", ""Q2 '2237"", ""Q4 '1904""]",,,,,
+DateTime.000027,DateTime,DateTime,row_majority,0.5,False,,row_candidate,"[""Q1 '2241"", ""Q1 '2160"", ""Q2 '1984"", ""Q2 '1740"", ""Q2 '2237"", ""Q4 '1904""]",,,,,
+DateTime.000027,DateTime,DateTime,examples_shortest_program,0.0,False,"map[06-Oct-2143 18:25->Q4 '2143,Mar 30 2002 21:44->Q1 '2002,01311846->Q1 '1846,22 April 1953 23:34->Q2 '1953](COL0)",map,[],,,,,
+DateTime.000027,DateTime,DateTime,candidate_support_program,0.0,False,"map[06-Oct-2143 18:25->Q4 '2143,Mar 30 2002 21:44->Q1 '2002,01311846->Q1 '1846,22 April 1953 23:34->Q2 '1953](COL0)",map,[],-1000000000.0,0.0,0.0,1026.0,[]
+DateTime.000027,DateTime,DateTime,shuffled_support_program,0.0,False,"map[06-Oct-2143 18:25->Q4 '2143,Mar 30 2002 21:44->Q1 '2002,01311846->Q1 '1846,22 April 1953 23:34->Q2 '1953](COL0)",map,[],-1000000000.0,0.0,0.0,1026.0,[]
+DateTime.000027,DateTime,DateTime,program_oracle,0.0,False,,,[],,,,,
+DateTime.000027,DateTime,DateTime,row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+DateTime.000034,DateTime,"DateTime,Substring",direct_row_greedy,1.0,True,,row_candidate,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]",,,,,
+DateTime.000034,DateTime,"DateTime,Substring",row_majority,1.0,True,,row_candidate,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]",,,,,
+DateTime.000034,DateTime,"DateTime,Substring",examples_shortest_program,0.0,False,"map[22ABDDK_3388.XY,9/12/2002 6:25:57 PM,8.111111,311,chicago->2002-09-12 18:25:57,22ABDDK_3388.XY,9/12/2002 9:44:40 PM,8.111111,311,chicago->2002-09-12 21:44:40,22ABDDK_3388.XY,9/12/2002 7:00:20 AM,8.111111,311,chicago->2002-09-12 07:00:20,22ABDDK_3388.XY,9/12/2002 11:34:17 PM,8.111111,311,chicago->2002-09-12 23:34:17](COL0)",map,[],,,,,
+DateTime.000034,DateTime,"DateTime,Substring",candidate_support_program,0.0,False,"map[22ABDDK_3388.XY,9/12/2002 6:25:57 PM,8.111111,311,chicago->2002-09-12 18:25:57,22ABDDK_3388.XY,9/12/2002 9:44:40 PM,8.111111,311,chicago->2002-09-12 21:44:40,22ABDDK_3388.XY,9/12/2002 7:00:20 AM,8.111111,311,chicago->2002-09-12 07:00:20,22ABDDK_3388.XY,9/12/2002 11:34:17 PM,8.111111,311,chicago->2002-09-12 23:34:17](COL0)",map,[],-1000000000.0,0.0,0.0,484.0,[]
+DateTime.000034,DateTime,"DateTime,Substring",shuffled_support_program,0.0,False,"map[22ABDDK_3388.XY,9/12/2002 6:25:57 PM,8.111111,311,chicago->2002-09-12 18:25:57,22ABDDK_3388.XY,9/12/2002 9:44:40 PM,8.111111,311,chicago->2002-09-12 21:44:40,22ABDDK_3388.XY,9/12/2002 7:00:20 AM,8.111111,311,chicago->2002-09-12 07:00:20,22ABDDK_3388.XY,9/12/2002 11:34:17 PM,8.111111,311,chicago->2002-09-12 23:34:17](COL0)",map,[],-1000000000.0,0.0,0.0,484.0,[]
+DateTime.000034,DateTime,"DateTime,Substring",program_oracle,0.0,False,,,[],,,,,
+DateTime.000034,DateTime,"DateTime,Substring",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]",,,,,
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row_greedy,0.3333333333333333,False,,row_candidate,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]",,,,,
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_majority,0.3333333333333333,False,,row_candidate,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]",,,,,
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",examples_shortest_program,0.0,False,"map[11:12:29->11:00AM-11:30AM,08:29:52->8:00AM-8:30AM](COL0)",map,[],,,,,
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",candidate_support_program,0.0,False,"map[1->11:00AM-11:30AM,0->8:00AM-8:30AM](slice[0:1](COL0))",map,"[""11:00AM-11:30AM"", ""8:00AM-8:30AM"", ""8:00AM-8:30AM""]",-10.269171790632448,0.0,0.0,1051.0,"[""11:00AM-11:30AM"", ""8:00AM-8:30AM"", ""8:00AM-8:30AM""]"
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_support_program,0.0,False,"map[1->11:00AM-11:30AM,0->8:00AM-8:30AM](slice[0:1](COL0))",map,"[""11:00AM-11:30AM"", ""8:00AM-8:30AM"", ""8:00AM-8:30AM""]",-10.268130666124037,0.0,0.0,1051.0,"[""11:00AM-11:30AM"", ""8:00AM-8:30AM"", ""8:00AM-8:30AM""]"
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",program_oracle,0.0,False,,,[],,,,,
+DateTime.000051,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row_greedy,0.6666666666666666,False,,row_candidate,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""10:00-29:00""]",,,,,
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_majority,0.6666666666666666,False,,row_candidate,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""10:00-29:00""]",,,,,
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",examples_shortest_program,0.0,False,"map[25:00->20:00-39:00,44:00->40:00-59:00,00:00->0:00-19:00,34:00->20:00-39:00](COL0)",map,[],,,,,
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",candidate_support_program,0.0,False,"map[25:00->20:00-39:00,44:00->40:00-59:00,00:00->0:00-19:00,34:00->20:00-39:00](COL0)",map,[],-1000000000.0,0.0,0.0,568.0,[]
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_support_program,0.0,False,"map[25:00->20:00-39:00,44:00->40:00-59:00,00:00->0:00-19:00,34:00->20:00-39:00](COL0)",map,[],-1000000000.0,0.0,0.0,568.0,[]
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",program_oracle,0.0,False,,,[],,,,,
+DateTime.000076,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""0:00-19:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]",,,,,
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row_greedy,0.5,False,,row_candidate,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:30AM""]",,,,,
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_majority,0.5,False,,row_candidate,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:30AM""]",,,,,
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",examples_shortest_program,0.0,False,"map[6:25PM->6:15PM-6:45PM,9:44PM->9:15PM-9:45PM,7:00AM->6:45AM-7:15AM,11:34PM->11:15PM-11:45PM](COL0)",map,[],,,,,
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",candidate_support_program,0.0,False,"map[2->6:15PM-6:45PM,4->9:15PM-9:45PM,0->6:45AM-7:15AM,1->11:15PM-11:45PM](title(slice[1:3](COL0)))",map,"[""11:15PM-11:45PM"", ""11:15PM-11:45PM"", ""6:45AM-7:15AM"", ""6:15PM-6:45PM"", ""6:15PM-6:45PM"", ""11:15PM-11:45PM""]",-17.13721680394702,0.16666666666666666,1.0,750.0,"[""11:15PM-11:45PM"", ""11:15PM-11:45PM"", ""6:45AM-7:15AM"", ""6:15PM-6:45PM"", ""6:15PM-6:45PM"", ""11:15PM-11:45PM""]"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_support_program,0.0,False,"map[2->6:15PM-6:45PM,4->9:15PM-9:45PM,0->6:45AM-7:15AM,1->11:15PM-11:45PM](title(slice[1:3](COL0)))",map,"[""11:15PM-11:45PM"", ""11:15PM-11:45PM"", ""6:45AM-7:15AM"", ""6:15PM-6:45PM"", ""6:15PM-6:45PM"", ""11:15PM-11:45PM""]",-20.407184289972932,0.0,0.0,750.0,"[""11:15PM-11:45PM"", ""11:15PM-11:45PM"", ""6:45AM-7:15AM"", ""6:15PM-6:45PM"", ""6:15PM-6:45PM"", ""11:15PM-11:45PM""]"
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",program_oracle,0.0,False,,,[],,,,,
+DateTime.000081,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+DateTime.000094,DateTime,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]",,,,,
+DateTime.000094,DateTime,DateTime,row_majority,1.0,True,,row_candidate,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]",,,,,
+DateTime.000094,DateTime,DateTime,examples_shortest_program,0.0,False,"map[1973-12-17->1973-12-17,9 April 1987->1987-04-09,14. November 2013->2013-11-14,27.3.1990->1990-03-27](COL0)",map,[],,,,,
+DateTime.000094,DateTime,DateTime,candidate_support_program,0.0,False,"map[1973-12-17->1973-12-17,9 April 1987->1987-04-09,14. November 2013->2013-11-14,27.3.1990->1990-03-27](COL0)",map,[],-1000000000.0,0.0,0.0,948.0,[]
+DateTime.000094,DateTime,DateTime,shuffled_support_program,0.0,False,"map[1973-12-17->1973-12-17,9 April 1987->1987-04-09,14. November 2013->2013-11-14,27.3.1990->1990-03-27](COL0)",map,[],-1000000000.0,0.0,0.0,948.0,[]
+DateTime.000094,DateTime,DateTime,program_oracle,0.0,False,,,[],,,,,
+DateTime.000094,DateTime,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]",,,,,
+DateTime.000104,DateTime,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",,,,,
+DateTime.000104,DateTime,DateTime,row_majority,1.0,True,,row_candidate,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",,,,,
+DateTime.000104,DateTime,DateTime,examples_shortest_program,1.0,True,alpha(COL0),surface,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",,,,,
+DateTime.000104,DateTime,DateTime,candidate_support_program,1.0,True,alpha(COL0),surface,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",-0.20340931005408805,1.0,6.0,1199.0,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,DateTime,DateTime,shuffled_support_program,1.0,True,alpha(COL0),surface,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",-20.407184289972932,0.0,0.0,1199.0,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,DateTime,DateTime,program_oracle,1.0,True,alpha(COL0),surface,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",,,,,
+DateTime.000104,DateTime,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]",,,,,
+DateTime.000108,DateTime,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]",,,,,
+DateTime.000108,DateTime,DateTime,row_majority,1.0,True,,row_candidate,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]",,,,,
+DateTime.000108,DateTime,DateTime,examples_shortest_program,0.0,False,"map[31-Jan-2031 05:54:18->1/31/2031,17-Jan-1990 13:32:01->1/17/1990,14-Feb-2034 05:36:07->2/14/2034,14-Mar-2002 13:16:16->3/14/2002](COL0)",map,[],,,,,
+DateTime.000108,DateTime,DateTime,candidate_support_program,0.0,False,"map[31-Jan-2031 05:54:18->1/31/2031,17-Jan-1990 13:32:01->1/17/1990,14-Feb-2034 05:36:07->2/14/2034,14-Mar-2002 13:16:16->3/14/2002](COL0)",map,[],-1000000000.0,0.0,0.0,862.0,[]
+DateTime.000108,DateTime,DateTime,shuffled_support_program,0.0,False,"map[31-Jan-2031 05:54:18->1/31/2031,17-Jan-1990 13:32:01->1/17/1990,14-Feb-2034 05:36:07->2/14/2034,14-Mar-2002 13:16:16->3/14/2002](COL0)",map,[],-1000000000.0,0.0,0.0,862.0,[]
+DateTime.000108,DateTime,DateTime,program_oracle,0.0,False,,,[],,,,,
+DateTime.000108,DateTime,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]",,,,,
+DateTime.000111,DateTime,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 AM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]",,,,,
+DateTime.000111,DateTime,DateTime,row_majority,1.0,True,,row_candidate,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 AM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]",,,,,
+DateTime.000111,DateTime,DateTime,examples_shortest_program,0.0,False,"map[31-Jan-2031 05:54:18->31/1/2031 5:54 AM,17-Jan-1990 13:32:01->17/1/1990 1:32 PM,14-Feb-2034 05:36:07->14/2/2034 5:36 AM,14-Mar-2002 13:16:16->14/3/2002 1:16 PM](COL0)",map,[],,,,,
+DateTime.000111,DateTime,DateTime,candidate_support_program,0.0,False,"map[31-Jan-2031 05:54:18->31/1/2031 5:54 AM,17-Jan-1990 13:32:01->17/1/1990 1:32 PM,14-Feb-2034 05:36:07->14/2/2034 5:36 AM,14-Mar-2002 13:16:16->14/3/2002 1:16 PM](COL0)",map,[],-1000000000.0,0.0,0.0,862.0,[]
+DateTime.000111,DateTime,DateTime,shuffled_support_program,0.0,False,"map[31-Jan-2031 05:54:18->31/1/2031 5:54 AM,17-Jan-1990 13:32:01->17/1/1990 1:32 PM,14-Feb-2034 05:36:07->14/2/2034 5:36 AM,14-Mar-2002 13:16:16->14/3/2002 1:16 PM](COL0)",map,[],-1000000000.0,0.0,0.0,862.0,[]
+DateTime.000111,DateTime,DateTime,program_oracle,0.0,False,,,[],,,,,
+DateTime.000111,DateTime,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 AM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]",,,,,
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row_greedy,0.16666666666666666,False,,row_candidate,"[""25-40"", ""25-40"", ""30-45"", ""25-40"", ""25-40"", ""30-45""]",,,,,
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_majority,0.3333333333333333,False,,row_candidate,"[""30-45"", ""30-45"", ""30-45"", ""25-40"", ""25-40"", ""30-45""]",,,,,
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",examples_shortest_program,0.0,False,"map[31-Jan-2031 05:54:18->45-60,17-Jan-1990 13:32:01->30-45,14-Feb-2034 05:36:07->30-45,14-Mar-2002 13:16:16->15-30](COL0)",map,[],,,,,
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",candidate_support_program,0.0,False,"map[31-Jan-2031 05:54:18->45-60,17-Jan-1990 13:32:01->30-45,14-Feb-2034 05:36:07->30-45,14-Mar-2002 13:16:16->15-30](COL0)",map,[],-1000000000.0,0.0,0.0,862.0,[]
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_support_program,0.0,False,"map[31-Jan-2031 05:54:18->45-60,17-Jan-1990 13:32:01->30-45,14-Feb-2034 05:36:07->30-45,14-Mar-2002 13:16:16->15-30](COL0)",map,[],-1000000000.0,0.0,0.0,862.0,[]
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",program_oracle,0.0,False,,,[],,,,,
+DateTime.000114,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row_greedy,0.0,False,,row_candidate,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]",,,,,
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_majority,0.0,False,,row_candidate,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]",,,,,
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",examples_shortest_program,0.0,False,"map[31-Jan-2031 05:54:18->0-20,17-Jan-1990 13:32:01->0-20,14-Feb-2034 05:36:07->0-20,14-Mar-2002 13:16:16->0-20](COL0)",map,[],,,,,
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",candidate_support_program,0.0,False,"affix['0','20'](slice[6:7](COL0))",affix,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]",-0.20340931005408805,1.0,6.0,1327.0,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_support_program,0.0,False,"affix['0','20'](slice[6:7](COL0))",affix,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]",-20.407184289972932,0.0,0.0,1327.0,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",program_oracle,0.0,False,,,[],,,,,
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",direct_row_greedy,0.5,False,,row_candidate,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]",,,,,
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_majority,0.5,False,,row_candidate,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]",,,,,
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",examples_shortest_program,0.0,False,"map[31-Jan-2031 05:54:18->5AM-7AM,17-Jan-1990 13:32:01->1PM-3PM,14-Feb-2034 05:36:07->5AM-7AM,14-Mar-2002 13:16:16->1PM-3PM](COL0)",map,[],,,,,
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",candidate_support_program,0.0,False,"map[31-Jan-2031 05:54:18->5AM-7AM,17-Jan-1990 13:32:01->1PM-3PM,14-Feb-2034 05:36:07->5AM-7AM,14-Mar-2002 13:16:16->1PM-3PM](COL0)",map,[],-1000000000.0,0.0,0.0,907.0,[]
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",shuffled_support_program,0.0,False,"map[31-Jan-2031 05:54:18->5AM-7AM,17-Jan-1990 13:32:01->1PM-3PM,14-Feb-2034 05:36:07->5AM-7AM,14-Mar-2002 13:16:16->1PM-3PM](COL0)",map,[],-1000000000.0,0.0,0.0,907.0,[]
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",program_oracle,0.0,False,,,[],,,,,
+DateTime.000116,DateTime,"DateTimeRange,DateTimeRounding,DateTime",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+FilePath.000001,FilePath,"Conditional,Substring",direct_row_greedy,1.0,True,,row_candidate,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]",,,,,
+FilePath.000001,FilePath,"Conditional,Substring",row_majority,1.0,True,,row_candidate,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]",,,,,
+FilePath.000001,FilePath,"Conditional,Substring",examples_shortest_program,1.0,True,word[-2](COL0),substring,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]",,,,,
+FilePath.000001,FilePath,"Conditional,Substring",candidate_support_program,1.0,True,word[-2](COL0),substring,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]",-0.20340931005408805,1.0,6.0,582.0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,FilePath,"Conditional,Substring",shuffled_support_program,1.0,True,word[-2](COL0),substring,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]",-20.536261332248074,0.0,0.0,582.0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,FilePath,"Conditional,Substring",program_oracle,1.0,True,word[-2](COL0),substring,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]",,,,,
+FilePath.000001,FilePath,"Conditional,Substring",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]",,,,,
+Gender.000001,Gender,Conditional,direct_row_greedy,0.6666666666666666,False,,row_candidate,"[""0"", ""1"", ""0""]",,,,,
+Gender.000001,Gender,Conditional,row_majority,0.6666666666666666,False,,row_candidate,"[""0"", ""1"", ""0""]",,,,,
+Gender.000001,Gender,Conditional,examples_shortest_program,0.0,False,"map[M->0,F->1](COL0)",map,[],,,,,
+Gender.000001,Gender,Conditional,candidate_support_program,0.6666666666666666,False,"map[M->0,F->1](initials(COL0))",map,"[""0"", ""1"", ""0""]",-0.4890165684276662,0.9047619047619048,3.0,540.0,"[""0"", ""1"", ""0""]"
+Gender.000001,Gender,Conditional,shuffled_support_program,0.6666666666666666,False,"map[M->0,F->1](initials(COL0))",map,"[""0"", ""1"", ""0""]",-10.203592144986466,0.0,0.0,540.0,"[""0"", ""1"", ""0""]"
+Gender.000001,Gender,Conditional,program_oracle,0.0,False,,,[],,,,,
+Gender.000001,Gender,Conditional,row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+Language.000002,Language,"Multicolumn,Substring",direct_row_greedy,1.0,True,,row_candidate,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]",,,,,
+Language.000002,Language,"Multicolumn,Substring",row_majority,1.0,True,,row_candidate,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]",,,,,
+Language.000002,Language,"Multicolumn,Substring",examples_shortest_program,1.0,True,word[3](COL1),substring,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]",,,,,
+Language.000002,Language,"Multicolumn,Substring",candidate_support_program,1.0,True,word[3](COL1),substring,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]",-0.20340931005408805,1.0,6.0,1292.0,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,Language,"Multicolumn,Substring",shuffled_support_program,1.0,True,word[3](COL1),substring,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]",-20.407184289972932,0.0,0.0,1292.0,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,Language,"Multicolumn,Substring",program_oracle,1.0,True,word[3](COL1),substring,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]",,,,,
+Language.000002,Language,"Multicolumn,Substring",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]",,,,,
+Name.000028,Name,Substring,direct_row_greedy,1.0,True,,row_candidate,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]",,,,,
+Name.000028,Name,Substring,row_majority,1.0,True,,row_candidate,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]",,,,,
+Name.000028,Name,Substring,examples_shortest_program,1.0,True,word[0](COL0),substring,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]",,,,,
+Name.000028,Name,Substring,candidate_support_program,1.0,True,word[0](COL0),substring,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]",-0.20340931005408805,1.0,6.0,1054.0,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,Name,Substring,shuffled_support_program,1.0,True,word[0](COL0),substring,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]",-20.505553758441906,0.0,0.0,1054.0,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,Name,Substring,program_oracle,1.0,True,word[0](COL0),substring,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]",,,,,
+Name.000028,Name,Substring,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]",,,,,
+Number.000008,Number,Numeric,direct_row_greedy,0.3333333333333333,False,,row_candidate,"[""-13.578"", ""-19.611180"", ""-18.2929"", ""-28.178"", ""29.721"", ""-11.1245""]",,,,,
+Number.000008,Number,Numeric,row_majority,0.3333333333333333,False,,row_candidate,"[""-13.578"", ""-19.611180"", ""-18.2929"", ""-28.178"", ""29.721"", ""-11.1245""]",,,,,
+Number.000008,Number,Numeric,examples_shortest_program,0.0,False,"map[19039.5->190.395,3489.7->34.897,3533.0877->35.330877,-3469->-34.69](COL0)",map,[],,,,,
+Number.000008,Number,Numeric,candidate_support_program,0.0,False,"map[19039.5->190.395,3489.7->34.897,3533.0877->35.330877,-3469->-34.69](COL0)",map,[],-1000000000.0,0.0,0.0,768.0,[]
+Number.000008,Number,Numeric,shuffled_support_program,0.0,False,"map[19039.5->190.395,3489.7->34.897,3533.0877->35.330877,-3469->-34.69](COL0)",map,[],-1000000000.0,0.0,0.0,768.0,[]
+Number.000008,Number,Numeric,program_oracle,0.0,False,,,[],,,,,
+Number.000008,Number,Numeric,row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+Number.000015,Number,"Numeric,NumericRounding",direct_row_greedy,0.3333333333333333,False,,row_candidate,"[""-22500"", ""-3250"", ""-3050"", ""-47000"", ""49550"", ""-18550""]",,,,,
+Number.000015,Number,"Numeric,NumericRounding",row_majority,0.3333333333333333,False,,row_candidate,"[""-22500"", ""-3250"", ""-3050"", ""-47000"", ""49550"", ""-18550""]",,,,,
+Number.000015,Number,"Numeric,NumericRounding",examples_shortest_program,0.0,False,"map[31732->31750,5816->5850,5888->5900,-5783->-5750](COL0)",map,[],,,,,
+Number.000015,Number,"Numeric,NumericRounding",candidate_support_program,0.0,False,"map[31732->31750,5816->5850,5888->5900,-5783->-5750](COL0)",map,[],-1000000000.0,0.0,0.0,691.0,[]
+Number.000015,Number,"Numeric,NumericRounding",shuffled_support_program,0.0,False,"map[31732->31750,5816->5850,5888->5900,-5783->-5750](COL0)",map,[],-1000000000.0,0.0,0.0,691.0,[]
+Number.000015,Number,"Numeric,NumericRounding",program_oracle,0.0,False,,,[],,,,,
+Number.000015,Number,"Numeric,NumericRounding",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""-22600"", ""-3250"", ""-3000"", ""-46950"", ""49550"", ""-18500""]",,,,,
+Number.000016,Number,"Numeric,NumericRounding",direct_row_greedy,0.8333333333333334,False,,row_candidate,"[""605"", ""815"", ""817"", ""335"", ""1395"", ""650""]",,,,,
+Number.000016,Number,"Numeric,NumericRounding",row_majority,0.8333333333333334,False,,row_candidate,"[""605"", ""815"", ""817"", ""335"", ""1395"", ""650""]",,,,,
+Number.000016,Number,"Numeric,NumericRounding",examples_shortest_program,0.0,False,"map[1199->1200,913->915,914->915,786->790](COL0)",map,[],,,,,
+Number.000016,Number,"Numeric,NumericRounding",candidate_support_program,0.0,False,"map[1199->1200,913->915,914->915,786->790](COL0)",map,[],-1000000000.0,0.0,0.0,687.0,[]
+Number.000016,Number,"Numeric,NumericRounding",shuffled_support_program,0.0,False,"map[1199->1200,913->915,914->915,786->790](COL0)",map,[],-1000000000.0,0.0,0.0,687.0,[]
+Number.000016,Number,"Numeric,NumericRounding",program_oracle,0.0,False,,,[],,,,,
+Number.000016,Number,"Numeric,NumericRounding",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""605"", ""815"", ""820"", ""335"", ""1395"", ""650""]",,,,,
+Number.000022,Number,"Numeric,NumericRounding",direct_row_greedy,1.0,True,,row_candidate,"[""12.1"", ""20.35"", ""18.1"", ""13.75"", ""6.55"", ""19.85""]",,,,,
+Number.000022,Number,"Numeric,NumericRounding",row_majority,1.0,True,,row_candidate,"[""12.1"", ""20.35"", ""18.1"", ""13.75"", ""6.55"", ""19.85""]",,,,,
+Number.000022,Number,"Numeric,NumericRounding",examples_shortest_program,0.0,False,"map[17.66->17.65,13.38->13.4,12.33->12.35,12.01->12](COL0)",map,[],,,,,
+Number.000022,Number,"Numeric,NumericRounding",candidate_support_program,0.0,False,"map[17.66->17.65,13.38->13.4,12.33->12.35,12.01->12](COL0)",map,[],-1000000000.0,0.0,0.0,701.0,[]
+Number.000022,Number,"Numeric,NumericRounding",shuffled_support_program,0.0,False,"map[17.66->17.65,13.38->13.4,12.33->12.35,12.01->12](COL0)",map,[],-1000000000.0,0.0,0.0,701.0,[]
+Number.000022,Number,"Numeric,NumericRounding",program_oracle,0.0,False,,,[],,,,,
+Number.000022,Number,"Numeric,NumericRounding",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""12.1"", ""20.35"", ""18.1"", ""13.75"", ""6.55"", ""19.85""]",,,,,
+Number.000028,Number,"Numeric,NumericRounding",direct_row_greedy,1.0,True,,row_candidate,"[""10.000"", ""1202.343"", ""23224.100""]",,,,,
+Number.000028,Number,"Numeric,NumericRounding",row_majority,1.0,True,,row_candidate,"[""10.000"", ""1202.343"", ""23224.100""]",,,,,
+Number.000028,Number,"Numeric,NumericRounding",examples_shortest_program,0.0,False,"map[2345.23292->2345.233,243.1->243.100,12.5->12.500](COL0)",map,[],,,,,
+Number.000028,Number,"Numeric,NumericRounding",candidate_support_program,0.0,False,"map[2345.23292->2345.233,243.1->243.100,12.5->12.500](COL0)",map,[],-1000000000.0,0.0,0.0,768.0,[]
+Number.000028,Number,"Numeric,NumericRounding",shuffled_support_program,0.0,False,"map[2345.23292->2345.233,243.1->243.100,12.5->12.500](COL0)",map,[],-1000000000.0,0.0,0.0,768.0,[]
+Number.000028,Number,"Numeric,NumericRounding",program_oracle,0.0,False,,,[],,,,,
+Number.000028,Number,"Numeric,NumericRounding",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""10.000"", ""1202.343"", ""23224.100""]",,,,,
+Number.000029,Number,"Numeric,NumericRounding",direct_row_greedy,0.6666666666666666,False,,row_candidate,"[""11120"", ""540"", ""23220""]",,,,,
+Number.000029,Number,"Numeric,NumericRounding",row_majority,0.6666666666666666,False,,row_candidate,"[""11120"", ""540"", ""23220""]",,,,,
+Number.000029,Number,"Numeric,NumericRounding",examples_shortest_program,1.0,True,number_round10(COL0),number,"[""11120"", ""550"", ""23220""]",,,,,
+Number.000029,Number,"Numeric,NumericRounding",candidate_support_program,1.0,True,number_round10(COL0),number,"[""11120"", ""550"", ""23220""]",-3.889102221237131,0.5714285714285715,2.0,617.0,"[""11120"", ""550"", ""23220""]"
+Number.000029,Number,"Numeric,NumericRounding",shuffled_support_program,1.0,True,number_round10(COL0),number,"[""11120"", ""550"", ""23220""]",-10.203592144986466,0.0,0.0,617.0,"[""11120"", ""550"", ""23220""]"
+Number.000029,Number,"Numeric,NumericRounding",program_oracle,1.0,True,number_round10(COL0),number,"[""11120"", ""550"", ""23220""]",,,,,
+Number.000029,Number,"Numeric,NumericRounding",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+Number.000043,Number,DateTime,direct_row_greedy,1.0,True,,row_candidate,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]",,,,,
+Number.000043,Number,DateTime,row_majority,1.0,True,,row_candidate,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]",,,,,
+Number.000043,Number,DateTime,examples_shortest_program,0.0,False,"map[26/4->04-26,5/11->11-05,23/9->09-23,8/12->12-08](COL0)",map,[],,,,,
+Number.000043,Number,DateTime,candidate_support_program,0.0,False,"map[30->04-26,0->11-05,20->09-23,10->12-08](number_round10(COL0))",map,"[""12-08"", ""09-23"", ""12-08"", ""09-23"", ""09-23"", ""09-23""]",-20.407184289972932,0.0,0.0,736.0,"[""12-08"", ""09-23"", ""12-08"", ""09-23"", ""09-23"", ""09-23""]"
+Number.000043,Number,DateTime,shuffled_support_program,0.0,False,"map[30->04-26,0->11-05,20->09-23,10->12-08](number_round10(COL0))",map,"[""12-08"", ""09-23"", ""12-08"", ""09-23"", ""09-23"", ""09-23""]",-20.69819228220679,0.0,0.0,736.0,"[""12-08"", ""09-23"", ""12-08"", ""09-23"", ""09-23"", ""09-23""]"
+Number.000043,Number,DateTime,program_oracle,0.0,False,,,[],,,,,
+Number.000043,Number,DateTime,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]",,,,,
+Number.000049,Number,"Numeric,NumericRounding",direct_row_greedy,0.0,False,,row_candidate,"[""8000"", ""6000"", ""10000"", ""400""]",,,,,
+Number.000049,Number,"Numeric,NumericRounding",row_majority,0.0,False,,row_candidate,"[""8000"", ""6000"", ""10000"", ""400""]",,,,,
+Number.000049,Number,"Numeric,NumericRounding",examples_shortest_program,1.0,True,number_round100(COL0),number,"[""8300"", ""6300"", ""9800"", ""500""]",,,,,
+Number.000049,Number,"Numeric,NumericRounding",candidate_support_program,1.0,True,number_round100(COL0),number,"[""8300"", ""6300"", ""9800"", ""500""]",-8.414117471032078,0.14285714285714285,3.0,624.0,"[""8300"", ""6300"", ""9800"", ""500""]"
+Number.000049,Number,"Numeric,NumericRounding",shuffled_support_program,1.0,True,number_round100(COL0),number,"[""8300"", ""6300"", ""9800"", ""500""]",-13.732889529275937,0.0,0.0,624.0,"[""8300"", ""6300"", ""9800"", ""500""]"
+Number.000049,Number,"Numeric,NumericRounding",program_oracle,1.0,True,number_round100(COL0),number,"[""8300"", ""6300"", ""9800"", ""500""]",,,,,
+Number.000049,Number,"Numeric,NumericRounding",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+Number.000075,Number,"Concatenation,Numeric",direct_row_greedy,0.6666666666666666,False,,row_candidate,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]",,,,,
+Number.000075,Number,"Concatenation,Numeric",row_majority,0.6666666666666666,False,,row_candidate,"[""$1.9B"", ""$2.3B"", ""$2.9B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]",,,,,
+Number.000075,Number,"Concatenation,Numeric",examples_shortest_program,0.0,False,"map[243->$0.2B,12.5->$0.0B,2345.23292->$2.3B,1202.3433->$1.2B](COL0)",map,[],,,,,
+Number.000075,Number,"Concatenation,Numeric",candidate_support_program,0.0,False,"map[243->$0.2B,12.5->$0.0B,2345.23292->$2.3B,1202.3433->$1.2B](COL0)",map,[],-1000000000.0,0.0,0.0,645.0,[]
+Number.000075,Number,"Concatenation,Numeric",shuffled_support_program,0.0,False,"map[243->$0.2B,12.5->$0.0B,2345.23292->$2.3B,1202.3433->$1.2B](COL0)",map,[],-1000000000.0,0.0,0.0,645.0,[]
+Number.000075,Number,"Concatenation,Numeric",program_oracle,0.0,False,,,[],,,,,
+Number.000075,Number,"Concatenation,Numeric",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]",,,,,
+Number.000077,Number,"Numeric,NumericRounding",direct_row_greedy,0.3333333333333333,False,,row_candidate,"[""110"", ""11000"", ""540""]",,,,,
+Number.000077,Number,"Numeric,NumericRounding",row_majority,0.3333333333333333,False,,row_candidate,"[""110"", ""11000"", ""540""]",,,,,
+Number.000077,Number,"Numeric,NumericRounding",examples_shortest_program,0.0,False,"map[112->110,117->110](COL0)",map,[],,,,,
+Number.000077,Number,"Numeric,NumericRounding",candidate_support_program,0.3333333333333333,False,"affix['','0'](slice[0:2](COL0))",affix,"[""110"", ""110"", ""540""]",-2.116145263823963,0.5714285714285714,3.0,687.0,"[""110"", ""110"", ""540""]"
+Number.000077,Number,"Numeric,NumericRounding",shuffled_support_program,0.3333333333333333,False,"affix['','0'](slice[0:2](COL0))",affix,"[""110"", ""110"", ""540""]",-10.203592144986466,0.0,0.0,687.0,"[""110"", ""110"", ""540""]"
+Number.000077,Number,"Numeric,NumericRounding",program_oracle,1.0,True,"affix['','0'](drop_last[1](COL0))",affix,"[""11110"", ""11110"", ""540""]",,,,,
+Number.000077,Number,"Numeric,NumericRounding",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""11110"", ""11110"", ""540""]",,,,,
+Phone.000008,Phone,Substring,direct_row_greedy,1.0,True,,row_candidate,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]",,,,,
+Phone.000008,Phone,Substring,row_majority,1.0,True,,row_candidate,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]",,,,,
+Phone.000008,Phone,Substring,examples_shortest_program,1.0,True,"field[,,3](COL0)",substring,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]",,,,,
+Phone.000008,Phone,Substring,candidate_support_program,1.0,True,"field[,,3](COL0)",substring,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]",-0.20340931005408805,1.0,6.0,1228.0,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,Phone,Substring,shuffled_support_program,1.0,True,"field[,,3](COL0)",substring,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]",-20.407184289972932,0.0,0.0,1228.0,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,Phone,Substring,program_oracle,1.0,True,"field[,,3](COL0)",substring,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]",,,,,
+Phone.000008,Phone,Substring,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]",,,,,
+Phone.000011,Phone,"Concatenation,Substring",direct_row_greedy,1.0,True,,row_candidate,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]",,,,,
+Phone.000011,Phone,"Concatenation,Substring",row_majority,1.0,True,,row_candidate,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]",,,,,
+Phone.000011,Phone,"Concatenation,Substring",examples_shortest_program,1.0,True,title(COL0),surface,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]",,,,,
+Phone.000011,Phone,"Concatenation,Substring",candidate_support_program,1.0,True,title(COL0),surface,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]",-0.10170465502704401,1.0,3.0,1093.0,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,Phone,"Concatenation,Substring",shuffled_support_program,1.0,True,title(COL0),surface,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]",-10.203592144986466,0.0,0.0,1093.0,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,Phone,"Concatenation,Substring",program_oracle,1.0,True,title(COL0),surface,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]",,,,,
+Phone.000011,Phone,"Concatenation,Substring",row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]",,,,,
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",direct_row_greedy,0.3333333333333333,False,,row_candidate,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]",,,,,
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",row_majority,0.3333333333333333,False,,row_candidate,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]",,,,,
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",examples_shortest_program,0.0,False,"map[1Z 39V 80D 24 0712 870 8->39V 870,1Z AI7 S7L 39 2136 908 9->AI7 2136](COL0)",map,[],,,,,
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",candidate_support_program,0.0,False,"map[9->39V 870,->AI7 2136](digits(slice[4:5](COL0)))",map,"[""AI7 2136"", ""AI7 2136"", ""AI7 2136""]",-10.203592144986466,0.0,0.0,1184.0,"[""AI7 2136"", ""AI7 2136"", ""AI7 2136""]"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",shuffled_support_program,0.0,False,"map[9->39V 870,->AI7 2136](digits(slice[4:5](COL0)))",map,"[""AI7 2136"", ""AI7 2136"", ""AI7 2136""]",-10.203592144986466,0.0,0.0,1184.0,"[""AI7 2136"", ""AI7 2136"", ""AI7 2136""]"
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",program_oracle,0.0,False,,,[],,,,,
+ShippingCode.000008,ShippingCode,"Concatenation,Substring",row_candidate_oracle,0.0,False,hidden row-candidate oracle,oracle,[],,,,,
+UserAgent.000003,UserAgent,Substring,direct_row_greedy,1.0,True,,row_candidate,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]",,,,,
+UserAgent.000003,UserAgent,Substring,row_majority,1.0,True,,row_candidate,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]",,,,,
+UserAgent.000003,UserAgent,Substring,examples_shortest_program,0.0,False,"map[MFM-Robot/8.7.52-internal LZ224 OS 6.4.9->LZ224,MFM-Robot/8.9.63-internal ZA659 OS 6.5.0->ZA659,MFM-Robot/4.2.96-internal JI YNSD OS 2.9.7->JI YNSD,MFM-Robot/4.1.24-internal MF-W878 OS 6.6.2->MF-W878](COL0)",map,[],,,,,
+UserAgent.000003,UserAgent,Substring,candidate_support_program,0.0,False,"map[MFM-Robot/8.7.52-internal LZ224 OS 6.4.9->LZ224,MFM-Robot/8.9.63-internal ZA659 OS 6.5.0->ZA659,MFM-Robot/4.2.96-internal JI YNSD OS 2.9.7->JI YNSD,MFM-Robot/4.1.24-internal MF-W878 OS 6.6.2->MF-W878](COL0)",map,[],-1000000000.0,0.0,0.0,805.0,[]
+UserAgent.000003,UserAgent,Substring,shuffled_support_program,0.0,False,"map[MFM-Robot/8.7.52-internal LZ224 OS 6.4.9->LZ224,MFM-Robot/8.9.63-internal ZA659 OS 6.5.0->ZA659,MFM-Robot/4.2.96-internal JI YNSD OS 2.9.7->JI YNSD,MFM-Robot/4.1.24-internal MF-W878 OS 6.6.2->MF-W878](COL0)",map,[],-1000000000.0,0.0,0.0,805.0,[]
+UserAgent.000003,UserAgent,Substring,program_oracle,0.0,False,,,[],,,,,
+UserAgent.000003,UserAgent,Substring,row_candidate_oracle,1.0,True,hidden row-candidate oracle,oracle,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]",,,,,

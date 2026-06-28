@@ -1,0 +1,398 @@
+{
+  "per_task": {
+    "16": {
+      "combined": {
+        "candidate_count": 16,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "lowercase_underscore_full",
+          "lowercase_underscore_one_or_more_groups"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 11,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "lowercase_underscore_full"
+        ]
+      },
+      "manual_expanded": {
+        "candidate_count": 16,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "lowercase_underscore_full",
+          "lowercase_underscore_one_or_more_groups"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "26": {
+      "combined": {
+        "candidate_count": 13,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "tuple_list_all_k",
+          "tuple_list_all_k_set"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 7,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 2,
+        "winning_templates": [
+          "tuple_list_all_k"
+        ]
+      },
+      "manual_expanded": {
+        "candidate_count": 13,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "tuple_list_all_k",
+          "tuple_list_all_k_set"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "31": {
+      "combined": {
+        "candidate_count": 13,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 1,
+        "winning_templates": [
+          "topk_frequency_minheap_pop_order"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 7,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      },
+      "manual_expanded": {
+        "candidate_count": 13,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 1,
+        "winning_templates": [
+          "topk_frequency_minheap_pop_order"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "39": {
+      "combined": {
+        "candidate_count": 15,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 1,
+        "winning_templates": [
+          "rearrange_no_adjacent_heap"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 11,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      },
+      "manual_expanded": {
+        "candidate_count": 15,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 1,
+        "winning_templates": [
+          "rearrange_no_adjacent_heap"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "43": {
+      "combined": {
+        "candidate_count": 16,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "lowercase_underscore_full",
+          "lowercase_underscore_one_or_more_groups"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 11,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "lowercase_underscore_full"
+        ]
+      },
+      "manual_expanded": {
+        "candidate_count": 16,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "lowercase_underscore_full",
+          "lowercase_underscore_one_or_more_groups"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "44": {
+      "combined": {
+        "candidate_count": 16,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "word_at_start",
+          "word_at_start_alpha"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 11,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 3,
+        "winning_templates": [
+          "word_at_start"
+        ]
+      },
+      "manual_expanded": {
+        "candidate_count": 16,
+        "hidden_pass_count": 2,
+        "solved": true,
+        "visible_pass_count": 4,
+        "winning_templates": [
+          "word_at_start",
+          "word_at_start_alpha"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "48": {
+      "combined": {
+        "candidate_count": 15,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 1,
+        "winning_templates": [
+          "odd_bit_mask_positions_0_2_4"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 11,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      },
+      "manual_expanded": {
+        "candidate_count": 15,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 1,
+        "winning_templates": [
+          "odd_bit_mask_positions_0_2_4"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "60": {
+      "combined": {
+        "candidate_count": 13,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 2,
+        "winning_templates": [
+          "longest_subseq_adjacent_diff_le_1"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 7,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      },
+      "manual_expanded": {
+        "candidate_count": 13,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 2,
+        "winning_templates": [
+          "longest_subseq_adjacent_diff_le_1"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    },
+    "77": {
+      "combined": {
+        "candidate_count": 15,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 2,
+        "winning_templates": [
+          "alternating_digit_sums_divisible_by_11"
+        ]
+      },
+      "manual_core": {
+        "candidate_count": 11,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      },
+      "manual_expanded": {
+        "candidate_count": 15,
+        "hidden_pass_count": 1,
+        "solved": true,
+        "visible_pass_count": 2,
+        "winning_templates": [
+          "alternating_digit_sums_divisible_by_11"
+        ]
+      },
+      "retrieved_transplant": {
+        "candidate_count": 0,
+        "hidden_pass_count": 0,
+        "solved": false,
+        "visible_pass_count": 0,
+        "winning_templates": []
+      }
+    }
+  },
+  "rungs": {
+    "combined": {
+      "coverage": 1.0,
+      "hidden_pass_candidates": 13,
+      "mean_candidates_per_task": 14.666666666666666,
+      "solved_count": 9,
+      "solved_task_ids": [
+        16,
+        26,
+        31,
+        39,
+        43,
+        44,
+        48,
+        60,
+        77
+      ],
+      "total_candidates": 132,
+      "visible_hidden_fail_candidates": 9,
+      "visible_pass_candidates": 22,
+      "visible_pass_hidden_fail_rate": 0.4090909090909091
+    },
+    "manual_core": {
+      "coverage": 0.4444444444444444,
+      "hidden_pass_candidates": 4,
+      "mean_candidates_per_task": 9.666666666666666,
+      "solved_count": 4,
+      "solved_task_ids": [
+        16,
+        26,
+        43,
+        44
+      ],
+      "total_candidates": 87,
+      "visible_hidden_fail_candidates": 7,
+      "visible_pass_candidates": 11,
+      "visible_pass_hidden_fail_rate": 0.6363636363636364
+    },
+    "manual_expanded": {
+      "coverage": 1.0,
+      "hidden_pass_candidates": 13,
+      "mean_candidates_per_task": 14.666666666666666,
+      "solved_count": 9,
+      "solved_task_ids": [
+        16,
+        26,
+        31,
+        39,
+        43,
+        44,
+        48,
+        60,
+        77
+      ],
+      "total_candidates": 132,
+      "visible_hidden_fail_candidates": 9,
+      "visible_pass_candidates": 22,
+      "visible_pass_hidden_fail_rate": 0.4090909090909091
+    },
+    "retrieved_transplant": {
+      "coverage": 0.0,
+      "hidden_pass_candidates": 0,
+      "mean_candidates_per_task": 0.0,
+      "solved_count": 0,
+      "solved_task_ids": [],
+      "total_candidates": 0,
+      "visible_hidden_fail_candidates": 0,
+      "visible_pass_candidates": 0,
+      "visible_pass_hidden_fail_rate": 0.0
+    }
+  },
+  "task_count": 9
+}

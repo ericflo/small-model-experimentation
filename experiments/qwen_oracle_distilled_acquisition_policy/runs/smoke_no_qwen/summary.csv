@@ -1,0 +1,14 @@
+method,tasks,mean_budget,row_exact,full_task_exact
+base_plain,4,0.0,0.0,0.0
+diverse1_plain,4,1.0,0.0,0.0
+diverse3_plain,4,3.0,0.0,0.0
+learned1_plain,4,1.0,0.0,0.0
+learned3_plain,4,3.0,0.0,0.0
+learned3_shuffled_labels,4,3.0,0.0,0.0
+oracle_single,4,1.0,0.0,0.0
+order1_plain,4,1.0,0.0,0.0
+order3_plain,4,3.0,0.0,0.0
+qwen_choose1_plain,4,1.0,0.0,0.0
+qwen_choose3_plain,4,3.0,0.0,0.0
+random1_plain,4,1.0,0.0,0.0
+random3_plain,4,3.0,0.0,0.0

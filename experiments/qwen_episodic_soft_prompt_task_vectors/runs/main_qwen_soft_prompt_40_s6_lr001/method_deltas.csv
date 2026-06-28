@@ -1,0 +1,6 @@
+method,tasks,full_task_delta,row_exact_delta,tasks_helped,tasks_hurt,tasks_tied
+learned_soft_row,40,0.0,0.010416666666666668,1,1,38
+init_soft_row,40,-0.025,0.0125,0,1,39
+shuffled_soft_row,40,-0.075,-0.06875,1,4,35
+learned_soft_batch,40,-0.1,-0.06666666666666665,0,4,36
+direct_batch,40,-0.125,-0.05416666666666666,0,5,35

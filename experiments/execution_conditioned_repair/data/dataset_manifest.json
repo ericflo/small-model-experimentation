@@ -1,0 +1,62 @@
+{
+  "bug_families": {
+    "algorithmic_edge": 5,
+    "boundary_condition": 5,
+    "case_normalization": 5,
+    "comparison_flip": 5,
+    "edge_case": 5,
+    "exception_case": 5,
+    "normalization": 5,
+    "off_by_one": 10,
+    "ordering": 9,
+    "parser_partial": 5,
+    "path_norm": 5
+  },
+  "dataset": "local_synthetic_python_v1",
+  "failure_classes": {
+    "assertion": 13,
+    "import": 13,
+    "syntax": 13,
+    "visible_pass_hidden_fail": 25
+  },
+  "notes": [
+    "This is a container-free executable synthetic pilot.",
+    "SWE-smith/SWE-bench Docker execution must be run separately once Docker preflight passes.",
+    "Every target_next_diff is computed from the wrong-patched source state to the clean source state."
+  ],
+  "num_episodes": 64,
+  "num_skipped": 1,
+  "num_tasks": 13,
+  "skipped": [
+    {
+      "episode_id": "top_k_tiebreak::near_miss",
+      "reason": "wrong patch already passes hidden tests"
+    }
+  ],
+  "splits": {
+    "train": 50,
+    "val_synth": 14
+  },
+  "task_ids": [
+    "clamp_bounds",
+    "dedupe_order",
+    "duration_multiunit",
+    "format_bytes_units",
+    "median_even",
+    "merge_intervals_adjacent",
+    "moving_average_window",
+    "normalize_path_parent",
+    "parse_bool_case",
+    "roman_subtractive",
+    "safe_get_default",
+    "slugify_collapse",
+    "top_k_tiebreak"
+  ],
+  "wrong_patch_variants": {
+    "import_error": 13,
+    "near_miss": 12,
+    "syntax_error": 13,
+    "visible_overfit": 13,
+    "wrong_localization": 13
+  }
+}

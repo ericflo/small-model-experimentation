@@ -1,0 +1,39 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:02,  6.84it/s]Loading weights:   6%|▌         | 25/426 [00:00<00:03, 120.44it/s]Loading weights:  15%|█▌        | 65/426 [00:00<00:01, 234.48it/s]Loading weights:  25%|██▌       | 107/426 [00:00<00:01, 302.67it/s]Loading weights:  36%|███▌      | 152/426 [00:00<00:00, 351.22it/s]Loading weights:  47%|████▋     | 200/426 [00:00<00:00, 389.04it/s]Loading weights:  58%|█████▊    | 248/426 [00:00<00:00, 411.53it/s]Loading weights:  68%|██████▊   | 291/426 [00:00<00:00, 415.26it/s]Loading weights:  78%|███████▊  | 333/426 [00:00<00:00, 415.97it/s]Loading weights:  90%|████████▉ | 382/426 [00:01<00:00, 437.55it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 428.03it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 363.74it/s]
+smoke_base_k2:   0%|          | 0/2 [00:00<?, ?it/s]smoke_base_k2:  50%|█████     | 1/2 [00:25<00:25, 25.14s/it]smoke_base_k2: 100%|██████████| 2/2 [00:34<00:00, 15.66s/it]smoke_base_k2: 100%|██████████| 2/2 [00:34<00:00, 17.08s/it]
+{
+  "adapter_dir": null,
+  "arm_name": "smoke_base_k2",
+  "count": 2,
+  "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+  "max_new_tokens": 180,
+  "offset": 0,
+  "path": "data/smoke_train_k2_records.jsonl",
+  "records": {
+    "candidate_count_mean": 2.0,
+    "coverage": 0.0,
+    "distinct_behavior_rate_mean": 0.75,
+    "distinct_functional_rate_mean": 0.5,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 0.0,
+    "parse_success_mean": 2.0,
+    "records": 2,
+    "visible_candidates_mean": 1.0,
+    "visible_coverage": 0.0,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "smoke",
+  "samples_per_task": 2,
+  "seed": 2026062601,
+  "split": "mbpp_train",
+  "temperatures": [
+    0.7,
+    1.0
+  ],
+  "top_p": 0.95,
+  "visible_tests": 1
+}

@@ -1,0 +1,61 @@
+{
+  "candidate_count": 18,
+  "datasets": {
+    "eval": "openai/openai_humaneval:test",
+    "train": "google-research-datasets/mbpp:train",
+    "valid": "google-research-datasets/mbpp:validation+test prefix"
+  },
+  "examples": {
+    "humaneval": 345,
+    "train": 489,
+    "valid": 181
+  },
+  "experiment": "qwen35_4b_oracle_distilled_semantic_verifier",
+  "paths": {
+    "humaneval_eval_records": "data/humaneval_eval_records.jsonl",
+    "humaneval_examples": "data/humaneval_verifier_examples.jsonl",
+    "mbpp_train_records": "data/mbpp_train_records.jsonl",
+    "mbpp_valid_records": "data/mbpp_valid_records.jsonl",
+    "train_examples": "data/train_verifier_examples.jsonl",
+    "valid_examples": "data/valid_verifier_examples.jsonl"
+  },
+  "raw_seen": {
+    "humaneval_eval": 100,
+    "mbpp_train": 267,
+    "mbpp_valid": 102
+  },
+  "records": {
+    "humaneval_eval": {
+      "coverage": 1.0,
+      "hidden_pass_visible_candidates_mean": 8.161290322580646,
+      "records": 31,
+      "visible_candidates_mean": 11.129032258064516
+    },
+    "mbpp_train": {
+      "coverage": 1.0,
+      "hidden_pass_visible_candidates_mean": 3.2111111111111112,
+      "records": 90,
+      "visible_candidates_mean": 5.855555555555555
+    },
+    "mbpp_valid": {
+      "coverage": 1.0,
+      "hidden_pass_visible_candidates_mean": 3.125,
+      "records": 32,
+      "visible_candidates_mean": 5.65625
+    }
+  },
+  "seed": 20260625,
+  "skips": {
+    "humaneval_eval": {
+      "no_hard_negative": 33,
+      "too_few_public_tests:0": 36
+    },
+    "mbpp_train": {
+      "no_hard_negative": 177
+    },
+    "mbpp_valid": {
+      "no_hard_negative": 70
+    }
+  },
+  "visible_tests": 1
+}

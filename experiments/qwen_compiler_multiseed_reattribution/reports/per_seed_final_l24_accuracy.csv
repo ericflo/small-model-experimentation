@@ -1,0 +1,10 @@
+arm,seed,run,standard_L24,heldout_L24,paired_L24,paired_heldout_L24
+expand_copy,123,main_expand_copy_seed123,0.0,0.1875,0.328125,0.09375
+expand_copy,456,main_expand_copy_seed456,0.484375,0.078125,0.546875,0.328125
+expand_copy,789,main_expand_copy_seed789,0.8125,0.765625,0.9375,0.796875
+max24_curriculum,123,main_max24_curriculum_seed123,0.234375,0.234375,0.59375,0.21875
+max24_curriculum,456,main_max24_curriculum_seed456,0.015625,0.0,0.0,0.0
+max24_curriculum,789,main_max24_curriculum_seed789,0.171875,0.921875,0.609375,0.46875
+max24_no_curriculum,123,main_max24_no_curriculum_seed123,0.0,0.109375,0.234375,0.046875
+max24_no_curriculum,456,main_max24_no_curriculum_seed456,0.0,0.375,0.5,0.25
+max24_no_curriculum,789,main_max24_no_curriculum_seed789,0.015625,0.0,0.0,0.0

@@ -1,0 +1,87 @@
+{
+  "eval_records": {
+    "by_cell": {
+      "eval/n128/pair_affine_mod": 16,
+      "eval/n128/pair_compare_gate": 16,
+      "eval/n256/pair_affine_mod": 16,
+      "eval/n256/pair_compare_gate": 16,
+      "eval/n512/pair_affine_mod": 16,
+      "eval/n512/pair_compare_gate": 16,
+      "eval/n64/pair_affine_mod": 16,
+      "eval/n64/pair_compare_gate": 16
+    },
+    "records": 128
+  },
+  "eval_sizes": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "eval_states": {
+    "by_step": {
+      "0": 127,
+      "1": 100,
+      "2": 72
+    },
+    "candidate_count_max": 81557,
+    "candidate_count_mean": 3053.1939799331103,
+    "oracle_action_histogram": {
+      "A": 34,
+      "B": 43,
+      "C": 35,
+      "D": 43,
+      "E": 25,
+      "F": 33,
+      "G": 30,
+      "H": 56
+    },
+    "states": 299
+  },
+  "hidden_cases": 16,
+  "operator_inventory_max": 512,
+  "query_pool_cases": 12,
+  "seed": 20260624,
+  "states_per_record": 3,
+  "templates": [
+    "pair_affine_mod",
+    "pair_compare_gate"
+  ],
+  "train_records": {
+    "by_cell": {
+      "train/n128/pair_affine_mod": 80,
+      "train/n128/pair_compare_gate": 80,
+      "train/n256/pair_affine_mod": 80,
+      "train/n256/pair_compare_gate": 80,
+      "train/n64/pair_affine_mod": 80,
+      "train/n64/pair_compare_gate": 80
+    },
+    "records": 480
+  },
+  "train_sizes": [
+    64,
+    128,
+    256
+  ],
+  "train_states": {
+    "by_step": {
+      "0": 472,
+      "1": 386,
+      "2": 280
+    },
+    "candidate_count_max": 14930,
+    "candidate_count_mean": 520.3787346221441,
+    "oracle_action_histogram": {
+      "A": 145,
+      "B": 147,
+      "C": 131,
+      "D": 139,
+      "E": 124,
+      "F": 129,
+      "G": 126,
+      "H": 197
+    },
+    "states": 1138
+  },
+  "visible_cases": 4
+}

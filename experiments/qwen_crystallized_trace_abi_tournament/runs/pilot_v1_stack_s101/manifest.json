@@ -1,0 +1,38 @@
+{
+  "run": "pilot_v1_stack_s101",
+  "suite": "pilot",
+  "abi": "stack",
+  "seed": 101,
+  "config": {
+    "run_name": "pilot_v1",
+    "suite": "pilot",
+    "model_name": "Qwen/Qwen3-4B",
+    "seeds": [
+      101
+    ],
+    "arms": [
+      "answer",
+      "python",
+      "json",
+      "stack"
+    ],
+    "train_n": 96,
+    "eval_n": 16,
+    "train_steps": 24,
+    "batch_size": 2,
+    "grad_accum": 2,
+    "lr": 0.0002,
+    "max_length": 384,
+    "eval_batch_size": 4,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "max_new_tokens": 80
+  },
+  "checkpoint_dir": "/workspace/large_artifacts/qwen_crystallized_trace_abi_tournament/checkpoints/pilot_v1_stack_s101",
+  "train_examples": 96,
+  "eval_sizes": {
+    "eval_indist": 16,
+    "eval_composition": 16,
+    "eval_template_shift": 16
+  }
+}

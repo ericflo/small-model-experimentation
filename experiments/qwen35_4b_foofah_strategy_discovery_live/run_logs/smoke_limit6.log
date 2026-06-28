@@ -1,0 +1,63 @@
+[1/6 new, 1 total] discovered=1/1 direct=1 baseline=1 new_over_baseline_oracle=0 tokens=5513
+[2/6 new, 2 total] discovered=2/2 direct=2 baseline=2 new_over_baseline_oracle=0 tokens=11554
+[3/6 new, 3 total] discovered=3/3 direct=3 baseline=3 new_over_baseline_oracle=0 tokens=18500
+[4/6 new, 4 total] discovered=4/4 direct=4 baseline=4 new_over_baseline_oracle=0 tokens=25935
+[5/6 new, 5 total] discovered=5/5 direct=5 baseline=5 new_over_baseline_oracle=0 tokens=33939
+[6/6 new, 6 total] discovered=6/6 direct=6 baseline=6 new_over_baseline_oracle=0 tokens=39464
+{
+  "avg_forward_tokens": 6577.333333333333,
+  "baseline_first_visible_accuracy": 1.0,
+  "baseline_first_visible_exact": 6,
+  "baseline_oracle_union": 6,
+  "baseline_oracle_union_accuracy": 1.0,
+  "by_family": {
+    "synthetic_12": {
+      "baseline_first": 5,
+      "baseline_first_accuracy": 1.0,
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "discovered": 5,
+      "discovered_accuracy": 1.0,
+      "discovered_oracle": 5,
+      "discovered_oracle_accuracy": 1.0,
+      "n": 5
+    },
+    "synthetic_25": {
+      "baseline_first": 1,
+      "baseline_first_accuracy": 1.0,
+      "direct": 1,
+      "direct_accuracy": 1.0,
+      "discovered": 1,
+      "discovered_accuracy": 1.0,
+      "discovered_oracle": 1,
+      "discovered_oracle_accuracy": 1.0,
+      "n": 1
+    }
+  },
+  "direct_accuracy": 1.0,
+  "direct_exact": 6,
+  "discovered_commit_correct": 5,
+  "discovered_commit_precision": 1.0,
+  "discovered_direct_correct_losses": 0,
+  "discovered_direct_miss_recoveries": 0,
+  "discovered_first_visible_accuracy": 1.0,
+  "discovered_first_visible_exact": 6,
+  "discovered_oracle_union": 6,
+  "discovered_oracle_union_accuracy": 1.0,
+  "discovered_program_commits": 5,
+  "n": 6,
+  "new_visible_correct_over_baseline_oracle": 0,
+  "total_forward_tokens": 39464,
+  "variant_summary": {
+    "strategy_01": {
+      "hidden": 5,
+      "tokens": 12567,
+      "visible": 5
+    },
+    "strategy_02": {
+      "hidden": 4,
+      "tokens": 13962,
+      "visible": 4
+    }
+  }
+}

@@ -1,0 +1,12 @@
+method,tasks,row_exact,full_task_exact
+row_candidate_oracle,40,0.625,0.625
+table_candidate_oracle,40,0.6,0.6
+direct_row_greedy,40,0.7229166666666667,0.5
+row_majority,40,0.7270833333333333,0.5
+pseudo_program_or_direct,40,0.7229166666666667,0.5
+program_oracle,40,0.275,0.275
+examples_shortest_program,40,0.25,0.25
+shuffled_support_program,40,0.2875,0.25
+candidate_support_program,40,0.27083333333333337,0.225
+pseudo_program_table,40,0.19166666666666665,0.175
+shuffled_pseudo_program_table,40,0.0,0.0

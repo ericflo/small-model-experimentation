@@ -1,0 +1,9 @@
+task_id,family,features,method,heldout_rows,row_exact,full_task_exact,parse_ok_rate,parse_statuses
+City.000010,City,"Conditional,Numeric",row_by_row,3,1.0,True,1.0,"{""single"": 3}"
+City.000010,City,"Conditional,Numeric",batch_all,3,1.0,True,1.0,"{""ok"": 3}"
+DateTime.000025,DateTime,DateTime,row_by_row,3,1.0,True,1.0,"{""single"": 3}"
+DateTime.000025,DateTime,DateTime,batch_all,3,1.0,True,1.0,"{""ok"": 3}"
+Number.000077,Number,"Numeric,NumericRounding",row_by_row,3,0.3333333333333333,False,1.0,"{""single"": 3}"
+Number.000077,Number,"Numeric,NumericRounding",batch_all,3,0.6666666666666666,False,1.0,"{""ok"": 3}"
+UserAgent.000003,UserAgent,Substring,row_by_row,3,1.0,True,1.0,"{""single"": 3}"
+UserAgent.000003,UserAgent,Substring,batch_all,3,1.0,True,1.0,"{""ok"": 3}"

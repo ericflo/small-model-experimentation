@@ -1,0 +1,4 @@
+run,suite,arm,seed,trained,split,n,primary_accuracy,final_accuracy,exec_accuracy,valid_final_rate,valid_exec_rate,no_final_rate,leak_string_rate,mean_new_tokens,acc_string,acc_unit,acc_table,acc_date
+main_v1_program_python_s202,main,program_python,202,1,eval_indist,24,1.0,0.0,1.0,0.0,1.0,1.0,0.041666666666666664,27.666666666666668,1.0,1.0,1.0,1.0
+main_v1_program_python_s202,main,program_python,202,1,eval_composition,24,0.5,0.0,0.5,0.0,0.75,1.0,0.0,33.208333333333336,0.0,1.0,1.0,0.0
+main_v1_program_python_s202,main,program_python,202,1,eval_template_shift,24,0.5,0.0,0.5,0.0,0.6666666666666666,1.0,0.08333333333333333,27.208333333333332,0.0,1.0,0.0,1.0

@@ -1,0 +1,126 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Structural Latent Compiler Expansion</title><style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 40px auto; max-width: 1160px; line-height: 1.45; color: #17202a; }
+h1, h2 { letter-spacing: 0; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 28px; font-size: 13px; }
+th, td { border: 1px solid #d7dde5; padding: 6px 8px; text-align: left; vertical-align: top; }
+th { background: #eef3f8; }
+figure { margin: 24px 0; }
+img { max-width: 100%; border: 1px solid #d7dde5; }
+.bullet::before { content: "- "; }
+p { margin: 8px 0; }
+</style></head><body><h1>Structural Latent Compiler Expansion</h1>
+
+<h2>Question</h2>
+
+<p>Can a Qwen-attached executable latent compiler be expanded from short modular programs to longer modular programs while preserving direct executable accuracy, without beam search, candidate reranking, or tokenized program output?</p>
+
+<h2>Method</h2>
+
+<p class="bullet">A Qwen causal LM reads the arithmetic prompt and fixed latent register markers.</p>
+<p class="bullet">A structural compiler head predicts one initial value plus typed operation and argument slots.</p>
+<p class="bullet">A differentiable modular executor supervises final answer probability and intermediate state traces.</p>
+<p class="bullet">The compiler is expanded by copying learned short-slot parameters into longer slot structures, then continuing training.</p>
+<p class="bullet">The run reports argmax executable accuracy, exact program recovery, state prefix recovery, and paraphrase-pair consistency.</p>
+
+<h2>Runs</h2>
+
+<table><thead><tr><th>run</th><th>elapsed_sec</th><th>model</th><th>stage_max_steps</th><th>stage_steps</th><th>train_examples</th><th>gpu</th></tr></thead><tbody>
+<tr><td>main_qwen_structural_expansion_s750</td><td>1833</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>300,150,300</td><td>512</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>84.14</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>30,30,30</td><td>64</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>6.944</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>1,1,1</td><td>4</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+</tbody></table>
+
+<h2>Results</h2>
+
+<p>Final expanded 24-slot compiler, length-24 splits:</p>
+
+<table><thead><tr><th>split</th><th>executor_accuracy</th><th>program_exact</th><th>state_prefix_fraction</th><th>executor_pair_both_correct</th><th>compiler_pair_state_consistency</th></tr></thead><tbody>
+<tr><td>standard_L24</td><td>82.8%</td><td>82.8%</td><td>97.9%</td><td></td><td></td></tr>
+<tr><td>paraphrase_L24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td></td><td></td></tr>
+<tr><td>paired_L24</td><td>93.8%</td><td>93.8%</td><td>99.2%</td><td>87.5%</td><td>87.5%</td></tr>
+</tbody></table>
+
+<p>Best single split executable accuracy was 100.0%; the length-24 table above is the main result.</p>
+
+<table><thead><tr><th>run</th><th>stage</th><th>split</th><th>global_step</th><th>max_steps</th><th>executor_accuracy</th><th>program_exact</th><th>state_prefix_fraction</th><th>state_all_exact</th><th>executor_pair_both_correct</th><th>compiler_pair_state_consistency</th><th>length</th></tr></thead><tbody>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage1_max8</td><td>paired_L8</td><td>300</td><td>8</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage1_max8</td><td>paraphrase_L8</td><td>300</td><td>8</td><td>98.4%</td><td>98.4%</td><td>98.4%</td><td>0.9844</td><td></td><td></td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage1_max8</td><td>standard_L8</td><td>300</td><td>8</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage2_max16</td><td>paired_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage2_max16</td><td>paraphrase_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage2_max16</td><td>standard_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage2_max16</td><td>paired_L16</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>16</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage2_max16</td><td>paraphrase_L16</td><td>450</td><td>16</td><td>98.4%</td><td>98.4%</td><td>99.7%</td><td>0.9844</td><td></td><td></td><td>16</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage2_max16</td><td>standard_L16</td><td>450</td><td>16</td><td>98.4%</td><td>98.4%</td><td>99.7%</td><td>0.9844</td><td></td><td></td><td>16</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>paired_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>paraphrase_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>standard_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>paired_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>16</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>paraphrase_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>standard_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>paired_L24</td><td>750</td><td>24</td><td>93.8%</td><td>93.8%</td><td>99.2%</td><td>0.9375</td><td>87.5%</td><td>87.5%</td><td>24</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>paraphrase_L24</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>24</td></tr>
+<tr><td>main_qwen_structural_expansion_s750</td><td>stage3_max24</td><td>standard_L24</td><td>750</td><td>24</td><td>82.8%</td><td>82.8%</td><td>97.9%</td><td>0.8281</td><td></td><td></td><td>24</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage1_max8</td><td>paired_L8</td><td>30</td><td>8</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>37.5%</td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage1_max8</td><td>paraphrase_L8</td><td>30</td><td>8</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage1_max8</td><td>standard_L8</td><td>30</td><td>8</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage2_max16</td><td>paired_L8</td><td>60</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.8%</td><td>0</td><td>0.0%</td><td>75.0%</td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage2_max16</td><td>paraphrase_L8</td><td>60</td><td>16</td><td>6.2%</td><td>0.0%</td><td>0.8%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage2_max16</td><td>standard_L8</td><td>60</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage2_max16</td><td>paired_L16</td><td>60</td><td>16</td><td>12.5%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>12.5%</td><td>62.5%</td><td>16</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage2_max16</td><td>paraphrase_L16</td><td>60</td><td>16</td><td>6.2%</td><td>0.0%</td><td>0.4%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage2_max16</td><td>standard_L16</td><td>60</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.4%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>paired_L8</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>1.6%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>paraphrase_L8</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>standard_L8</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>paired_L16</td><td>90</td><td>24</td><td>6.2%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>16</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>paraphrase_L16</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>standard_L16</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>paired_L24</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>paraphrase_L24</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.3%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>pilot_qwen_structural_expansion_s90</td><td>stage3_max24</td><td>standard_L24</td><td>90</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage1_max8</td><td>paired_L8</td><td>1</td><td>8</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage1_max8</td><td>paraphrase_L8</td><td>1</td><td>8</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage1_max8</td><td>standard_L8</td><td>1</td><td>8</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage2_max16</td><td>paired_L8</td><td>2</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage2_max16</td><td>paraphrase_L8</td><td>2</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage2_max16</td><td>standard_L8</td><td>2</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage2_max16</td><td>paired_L16</td><td>2</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>16</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage2_max16</td><td>paraphrase_L16</td><td>2</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage2_max16</td><td>standard_L16</td><td>2</td><td>16</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>paired_L8</td><td>3</td><td>24</td><td>50.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>paraphrase_L8</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>standard_L8</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>8</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>paired_L16</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>16</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>paraphrase_L16</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>standard_L16</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>16</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>paired_L24</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>paraphrase_L24</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>smoke_qwen_structural_expansion</td><td>stage3_max24</td><td>standard_L24</td><td>3</td><td>24</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0</td><td></td><td></td><td>24</td></tr>
+</tbody></table>
+
+<h2>Figures</h2>
+
+<figure><img src="figures/executor_accuracy_by_length.png" alt="executor_accuracy_by_length.png"><figcaption>executor_accuracy_by_length.png</figcaption></figure>
+
+<figure><img src="figures/executor_accuracy_by_step.png" alt="executor_accuracy_by_step.png"><figcaption>executor_accuracy_by_step.png</figcaption></figure>
+
+<figure><img src="figures/program_exact_by_step.png" alt="program_exact_by_step.png"><figcaption>program_exact_by_step.png</figcaption></figure>
+
+<figure><img src="figures/state_prefix_by_step.png" alt="state_prefix_by_step.png"><figcaption>state_prefix_by_step.png</figcaption></figure>
+
+<figure><img src="figures/paired_state_consistency_by_step.png" alt="paired_state_consistency_by_step.png"><figcaption>paired_state_consistency_by_step.png</figcaption></figure>
+
+<figure><img src="figures/training_loss.png" alt="training_loss.png"><figcaption>training_loss.png</figcaption></figure>
+
+<figure><img src="figures/training_state_accuracy.png" alt="training_state_accuracy.png"><figcaption>training_state_accuracy.png</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>This report is intentionally standalone. The key readout is whether expansion improves or preserves executable accuracy at longer lengths, and whether paraphrase-paired programs compile to the same latent execution trace.</p>
+
+<h2>Artifacts</h2>
+
+<p class="bullet">Run outputs: `experiments/qwen_structural_latent_compiler_expansion/runs/`</p>
+<p class="bullet">Reports and figures: `experiments/qwen_structural_latent_compiler_expansion/reports/`</p>
+<p class="bullet">Large checkpoints: `large_artifacts/qwen_structural_latent_compiler_expansion/checkpoints/`</p></body></html>

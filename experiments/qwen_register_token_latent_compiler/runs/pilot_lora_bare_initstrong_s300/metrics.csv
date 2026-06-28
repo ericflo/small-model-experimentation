@@ -1,0 +1,13 @@
+run,variant,split,n,direct_accuracy,direct_target_mass,executor_accuracy,executor_target_mass,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,pair_true_answer_consistency,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+pilot_lora_bare_initstrong_s300,register_trace,standard_len4,32.0,nan,nan,0.0,0.010308946948498487,0.125,1.0,0.28125,0.0,0.0390625,0.0,0.03125,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,standard_len8,32.0,nan,nan,0.03125,0.010308187222108245,0.0,1.0,0.1953125,0.0,0.02734375,0.0,0.00390625,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,standard_len12,32.0,nan,nan,0.03125,0.010308241471648216,0.0625,0.9713541666666666,0.234375,0.0,0.005208333333333333,0.0,0.0026041666666666665,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,standard_len24,32.0,nan,nan,0.0,0.010306800249963999,0.03125,0.78125,0.17578125,0.0,0.01171875,0.0,0.0026041666666666665,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,paraphrase_len4,32.0,nan,nan,0.0,0.010301186237484217,0.0,0.9921875,0.2578125,0.0,0.0,0.0,0.0,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,paraphrase_len8,32.0,nan,nan,0.0,0.010305190924555063,0.0625,0.796875,0.16796875,0.0,0.0078125,0.0,0.00390625,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,paraphrase_len12,32.0,nan,nan,0.0625,0.010332692181691527,0.0625,0.6536458333333334,0.140625,0.0,0.026041666666666668,0.0,0.0078125,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,paraphrase_len24,32.0,nan,nan,0.0,0.01030580559745431,0.0,0.5364583333333334,0.10677083333333333,0.0,0.014322916666666666,0.0,0.006510416666666667,,,,,
+pilot_lora_bare_initstrong_s300,register_trace,paired_len4,64.0,nan,nan,0.0,0.010312519269064069,0.03125,1.0,0.22265625,0.0,0.015625,0.0,0.0078125,1.0,0.5625,0.0,0.5625,0.5625
+pilot_lora_bare_initstrong_s300,register_trace,paired_len8,64.0,nan,nan,0.0,0.010310521349310875,0.03125,0.88671875,0.279296875,0.0,0.013671875,0.0,0.00390625,1.0,0.03125,0.0,0.03125,0.03125
+pilot_lora_bare_initstrong_s300,register_trace,paired_len12,64.0,nan,nan,0.0,0.010320727713406086,0.0625,0.8098958333333334,0.19010416666666666,0.0,0.010416666666666666,0.0,0.0,1.0,0.0,0.0,0.0,0.0
+pilot_lora_bare_initstrong_s300,register_trace,paired_len24,64.0,nan,nan,0.03125,0.010306895012035966,0.1875,0.6328125,0.13736979166666666,0.0,0.008463541666666666,0.0,0.0013020833333333333,1.0,0.0,0.0,0.0,0.0

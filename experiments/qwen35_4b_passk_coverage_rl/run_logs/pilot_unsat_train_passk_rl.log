@@ -1,0 +1,22 @@
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+{"adv_abs_mean": 0.13750000298023224, "adv_mean": 0.11250000447034836, "attempt": 13, "group_size": 8, "kl_proxy": 0.01994357630610466, "loss": 0.036828234791755676, "mean_completion_tokens": 106.625, "mean_gen_tokens_for_logprob": 156.0, "passk_utility": 1.0, "pg_loss": 0.03583105653524399, "positive_count": 6, "skip_reason": "", "skipped": false, "step": 5, "task_id": 613, "visible_count": 7}
+{
+  "attempts": 16,
+  "elapsed_s": 516.71,
+  "experiment": "qwen35_4b_passk_coverage_rl",
+  "kl_coef": 0.05,
+  "learning_rate": 5e-05,
+  "max_attempts": 40,
+  "max_steps": 6,
+  "method": "online_passk_rl",
+  "negative_weight": 0.2,
+  "rollouts_per_task": 8,
+  "skip_saturated_positive": true,
+  "skip_zero_positive": true,
+  "target_k": 4,
+  "temperature": 0.9,
+  "top_p": 0.95,
+  "train_count": 32,
+  "train_split": "train",
+  "updates": 6
+}

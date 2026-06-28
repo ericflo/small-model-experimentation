@@ -1,0 +1,3 @@
+run,variant,phase,local_step,step,loss,train_examples,quick_answer_head_accuracy,quick_bytecode_accuracy,quick_program_exact,op_loss,arg_loss,answer_loss
+smoke_qwen3_4b_qlora_trace,qlora_trace,trace_supervised,1,1,7.662839889526367,8,0.0,0.0,0.0,2.4449622631073,4.415011405944824,4.01432991027832
+smoke_qwen3_4b_qlora_trace,qlora_trace,trace_supervised,2,2,7.2659196853637695,8,0.0,0.0,0.0,2.271118640899658,3.919346809387207,5.377270221710205

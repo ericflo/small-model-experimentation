@@ -1,0 +1,744 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:45,  9.38it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 156.02it/s]Loading weights:  21%|██        | 89/426 [00:00<00:00, 353.38it/s]Loading weights:  34%|███▍      | 146/426 [00:00<00:00, 430.15it/s]Loading weights:  48%|████▊     | 204/426 [00:00<00:00, 477.17it/s]Loading weights:  62%|██████▏   | 262/426 [00:00<00:00, 511.18it/s]Loading weights:  77%|███████▋  | 326/426 [00:00<00:00, 547.73it/s]Loading weights:  90%|████████▉ | 383/426 [00:00<00:00, 553.70it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 464.69it/s]
+reference-probs:   0%|          | 0/310 [00:00<?, ?it/s]reference-probs:   0%|          | 1/310 [00:00<04:55,  1.04it/s]reference-probs:   1%|          | 2/310 [00:01<03:25,  1.50it/s]reference-probs:   1%|          | 3/310 [00:01<03:00,  1.70it/s]reference-probs:   1%|▏         | 4/310 [00:02<02:45,  1.85it/s]reference-probs:   2%|▏         | 5/310 [00:02<02:39,  1.91it/s]reference-probs:   2%|▏         | 6/310 [00:03<02:35,  1.96it/s]reference-probs:   2%|▏         | 7/310 [00:03<02:33,  1.97it/s]reference-probs:   3%|▎         | 8/310 [00:04<02:28,  2.04it/s]reference-probs:   3%|▎         | 9/310 [00:04<02:26,  2.06it/s]reference-probs:   3%|▎         | 10/310 [00:05<02:23,  2.09it/s]reference-probs:   4%|▎         | 11/310 [00:05<02:24,  2.07it/s]reference-probs:   4%|▍         | 12/310 [00:06<02:24,  2.06it/s]reference-probs:   4%|▍         | 13/310 [00:06<02:27,  2.02it/s]reference-probs:   5%|▍         | 14/310 [00:07<02:28,  1.99it/s]reference-probs:   5%|▍         | 15/310 [00:07<02:28,  1.99it/s]reference-probs:   5%|▌         | 16/310 [00:08<02:28,  1.99it/s]reference-probs:   5%|▌         | 17/310 [00:08<02:25,  2.01it/s]reference-probs:   6%|▌         | 18/310 [00:09<02:22,  2.05it/s]reference-probs:   6%|▌         | 19/310 [00:09<02:23,  2.03it/s]reference-probs:   6%|▋         | 20/310 [00:10<02:18,  2.10it/s]reference-probs:   7%|▋         | 21/310 [00:10<02:15,  2.13it/s]reference-probs:   7%|▋         | 22/310 [00:11<02:13,  2.16it/s]reference-probs:   7%|▋         | 23/310 [00:11<02:16,  2.11it/s]reference-probs:   8%|▊         | 24/310 [00:12<02:16,  2.10it/s]reference-probs:   8%|▊         | 25/310 [00:12<02:18,  2.05it/s]reference-probs:   8%|▊         | 26/310 [00:13<02:15,  2.10it/s]reference-probs:   9%|▊         | 27/310 [00:13<02:14,  2.10it/s]reference-probs:   9%|▉         | 28/310 [00:13<02:13,  2.11it/s]reference-probs:   9%|▉         | 29/310 [00:14<02:16,  2.07it/s]reference-probs:  10%|▉         | 30/310 [00:14<02:12,  2.11it/s]reference-probs:  10%|█         | 31/310 [00:15<02:15,  2.06it/s]reference-probs:  10%|█         | 32/310 [00:15<02:12,  2.10it/s]reference-probs:  11%|█         | 33/310 [00:16<02:13,  2.07it/s]reference-probs:  11%|█         | 34/310 [00:16<02:13,  2.07it/s]reference-probs:  11%|█▏        | 35/310 [00:17<02:12,  2.07it/s]reference-probs:  12%|█▏        | 36/310 [00:17<02:11,  2.08it/s]reference-probs:  12%|█▏        | 37/310 [00:18<02:11,  2.08it/s]reference-probs:  12%|█▏        | 38/310 [00:18<02:13,  2.04it/s]reference-probs:  13%|█▎        | 39/310 [00:19<02:12,  2.05it/s]reference-probs:  13%|█▎        | 40/310 [00:19<02:09,  2.08it/s]reference-probs:  13%|█▎        | 41/310 [00:20<02:11,  2.05it/s]reference-probs:  14%|█▎        | 42/310 [00:20<02:08,  2.08it/s]reference-probs:  14%|█▍        | 43/310 [00:21<02:06,  2.11it/s]reference-probs:  14%|█▍        | 44/310 [00:21<02:06,  2.11it/s]reference-probs:  15%|█▍        | 45/310 [00:22<02:04,  2.12it/s]reference-probs:  15%|█▍        | 46/310 [00:22<02:04,  2.11it/s]reference-probs:  15%|█▌        | 47/310 [00:23<02:06,  2.08it/s]reference-probs:  15%|█▌        | 48/310 [00:23<02:07,  2.06it/s]reference-probs:  16%|█▌        | 49/310 [00:24<02:06,  2.07it/s]reference-probs:  16%|█▌        | 50/310 [00:24<02:04,  2.09it/s]reference-probs:  16%|█▋        | 51/310 [00:25<02:02,  2.11it/s]reference-probs:  17%|█▋        | 52/310 [00:25<02:00,  2.14it/s]reference-probs:  17%|█▋        | 53/310 [00:25<01:57,  2.18it/s]reference-probs:  17%|█▋        | 54/310 [00:26<02:01,  2.10it/s]reference-probs:  18%|█▊        | 55/310 [00:26<01:59,  2.13it/s]reference-probs:  18%|█▊        | 56/310 [00:27<02:00,  2.11it/s]reference-probs:  18%|█▊        | 57/310 [00:27<02:00,  2.10it/s]reference-probs:  19%|█▊        | 58/310 [00:28<01:58,  2.13it/s]reference-probs:  19%|█▉        | 59/310 [00:28<01:58,  2.12it/s]reference-probs:  19%|█▉        | 60/310 [00:29<02:00,  2.08it/s]reference-probs:  20%|█▉        | 61/310 [00:29<02:00,  2.07it/s]reference-probs:  20%|██        | 62/310 [00:30<01:59,  2.07it/s]reference-probs:  20%|██        | 63/310 [00:30<02:01,  2.03it/s]reference-probs:  21%|██        | 64/310 [00:31<01:59,  2.05it/s]reference-probs:  21%|██        | 65/310 [00:31<01:58,  2.08it/s]reference-probs:  21%|██▏       | 66/310 [00:32<01:59,  2.04it/s]reference-probs:  22%|██▏       | 67/310 [00:32<01:59,  2.04it/s]reference-probs:  22%|██▏       | 68/310 [00:33<01:57,  2.06it/s]reference-probs:  22%|██▏       | 69/310 [00:33<02:00,  2.01it/s]reference-probs:  23%|██▎       | 70/310 [00:34<01:56,  2.06it/s]reference-probs:  23%|██▎       | 71/310 [00:34<01:53,  2.10it/s]reference-probs:  23%|██▎       | 72/310 [00:35<01:53,  2.10it/s]reference-probs:  24%|██▎       | 73/310 [00:35<01:51,  2.13it/s]reference-probs:  24%|██▍       | 74/310 [00:36<01:51,  2.13it/s]reference-probs:  24%|██▍       | 75/310 [00:36<01:50,  2.13it/s]reference-probs:  25%|██▍       | 76/310 [00:36<01:51,  2.10it/s]reference-probs:  25%|██▍       | 77/310 [00:37<01:51,  2.09it/s]reference-probs:  25%|██▌       | 78/310 [00:37<01:51,  2.08it/s]reference-probs:  25%|██▌       | 79/310 [00:38<01:52,  2.05it/s]reference-probs:  26%|██▌       | 80/310 [00:38<01:54,  2.01it/s]reference-probs:  26%|██▌       | 81/310 [00:39<01:50,  2.07it/s]reference-probs:  26%|██▋       | 82/310 [00:39<01:50,  2.07it/s]reference-probs:  27%|██▋       | 83/310 [00:40<01:51,  2.04it/s]reference-probs:  27%|██▋       | 84/310 [00:40<01:48,  2.08it/s]reference-probs:  27%|██▋       | 85/310 [00:41<01:48,  2.07it/s]reference-probs:  28%|██▊       | 86/310 [00:41<01:47,  2.08it/s]reference-probs:  28%|██▊       | 87/310 [00:42<01:45,  2.12it/s]reference-probs:  28%|██▊       | 88/310 [00:42<01:44,  2.12it/s]reference-probs:  29%|██▊       | 89/310 [00:43<01:46,  2.08it/s]reference-probs:  29%|██▉       | 90/310 [00:43<01:46,  2.07it/s]reference-probs:  29%|██▉       | 91/310 [00:44<01:45,  2.08it/s]reference-probs:  30%|██▉       | 92/310 [00:44<01:45,  2.08it/s]reference-probs:  30%|███       | 93/310 [00:45<01:45,  2.07it/s]reference-probs:  30%|███       | 94/310 [00:45<01:41,  2.13it/s]reference-probs:  31%|███       | 95/310 [00:46<01:42,  2.10it/s]reference-probs:  31%|███       | 96/310 [00:46<01:42,  2.09it/s]reference-probs:  31%|███▏      | 97/310 [00:47<01:42,  2.07it/s]reference-probs:  32%|███▏      | 98/310 [00:47<01:43,  2.04it/s]reference-probs:  32%|███▏      | 99/310 [00:48<01:44,  2.02it/s]reference-probs:  32%|███▏      | 100/310 [00:48<01:41,  2.07it/s]reference-probs:  33%|███▎      | 101/310 [00:49<01:42,  2.05it/s]reference-probs:  33%|███▎      | 102/310 [00:49<01:41,  2.05it/s]reference-probs:  33%|███▎      | 103/310 [00:50<01:41,  2.04it/s]reference-probs:  34%|███▎      | 104/310 [00:50<01:40,  2.06it/s]reference-probs:  34%|███▍      | 105/310 [00:51<01:39,  2.06it/s]reference-probs:  34%|███▍      | 106/310 [00:51<01:38,  2.07it/s]reference-probs:  35%|███▍      | 107/310 [00:51<01:36,  2.11it/s]reference-probs:  35%|███▍      | 108/310 [00:52<01:38,  2.06it/s]reference-probs:  35%|███▌      | 109/310 [00:52<01:39,  2.02it/s]reference-probs:  35%|███▌      | 110/310 [00:53<01:40,  1.99it/s]reference-probs:  36%|███▌      | 111/310 [00:54<01:41,  1.95it/s]reference-probs:  36%|███▌      | 112/310 [00:54<01:42,  1.93it/s]reference-probs:  36%|███▋      | 113/310 [00:55<01:42,  1.92it/s]reference-probs:  37%|███▋      | 114/310 [00:55<01:40,  1.95it/s]reference-probs:  37%|███▋      | 115/310 [00:56<01:38,  1.97it/s]reference-probs:  37%|███▋      | 116/310 [00:56<01:40,  1.94it/s]reference-probs:  38%|███▊      | 117/310 [00:57<01:35,  2.02it/s]reference-probs:  38%|███▊      | 118/310 [00:57<01:34,  2.04it/s]reference-probs:  38%|███▊      | 119/310 [00:58<01:33,  2.04it/s]reference-probs:  39%|███▊      | 120/310 [00:58<01:32,  2.04it/s]reference-probs:  39%|███▉      | 121/310 [00:59<01:34,  2.01it/s]reference-probs:  39%|███▉      | 122/310 [00:59<01:31,  2.05it/s]reference-probs:  40%|███▉      | 123/310 [01:00<01:32,  2.01it/s]reference-probs:  40%|████      | 124/310 [01:00<01:30,  2.06it/s]reference-probs:  40%|████      | 125/310 [01:01<01:32,  2.01it/s]reference-probs:  41%|████      | 126/310 [01:01<01:32,  1.99it/s]reference-probs:  41%|████      | 127/310 [01:01<01:30,  2.02it/s]reference-probs:  41%|████▏     | 128/310 [01:02<01:31,  1.99it/s]reference-probs:  42%|████▏     | 129/310 [01:03<01:29,  2.01it/s]reference-probs:  42%|████▏     | 130/310 [01:03<01:28,  2.03it/s]reference-probs:  42%|████▏     | 131/310 [01:03<01:28,  2.01it/s]reference-probs:  43%|████▎     | 132/310 [01:04<01:29,  2.00it/s]reference-probs:  43%|████▎     | 133/310 [01:05<01:29,  1.98it/s]reference-probs:  43%|████▎     | 134/310 [01:05<01:26,  2.05it/s]reference-probs:  44%|████▎     | 135/310 [01:05<01:24,  2.06it/s]reference-probs:  44%|████▍     | 136/310 [01:06<01:25,  2.04it/s]reference-probs:  44%|████▍     | 137/310 [01:06<01:23,  2.07it/s]reference-probs:  45%|████▍     | 138/310 [01:07<01:24,  2.03it/s]reference-probs:  45%|████▍     | 139/310 [01:07<01:26,  1.98it/s]reference-probs:  45%|████▌     | 140/310 [01:08<01:26,  1.96it/s]reference-probs:  45%|████▌     | 141/310 [01:09<01:26,  1.94it/s]reference-probs:  46%|████▌     | 142/310 [01:09<01:27,  1.93it/s]reference-probs:  46%|████▌     | 143/310 [01:10<01:27,  1.92it/s]reference-probs:  46%|████▋     | 144/310 [01:10<01:25,  1.95it/s]reference-probs:  47%|████▋     | 145/310 [01:11<01:23,  1.97it/s]reference-probs:  47%|████▋     | 146/310 [01:11<01:22,  1.99it/s]reference-probs:  47%|████▋     | 147/310 [01:12<01:25,  1.92it/s]reference-probs:  48%|████▊     | 148/310 [01:12<01:23,  1.94it/s]reference-probs:  48%|████▊     | 149/310 [01:13<01:24,  1.91it/s]reference-probs:  48%|████▊     | 150/310 [01:13<01:22,  1.95it/s]reference-probs:  49%|████▊     | 151/310 [01:14<01:21,  1.96it/s]reference-probs:  49%|████▉     | 152/310 [01:14<01:19,  1.99it/s]reference-probs:  49%|████▉     | 153/310 [01:15<01:17,  2.04it/s]reference-probs:  50%|████▉     | 154/310 [01:15<01:17,  2.00it/s]reference-probs:  50%|█████     | 155/310 [01:16<01:17,  2.00it/s]reference-probs:  50%|█████     | 156/310 [01:16<01:15,  2.05it/s]reference-probs:  51%|█████     | 157/310 [01:17<01:16,  2.00it/s]reference-probs:  51%|█████     | 158/310 [01:17<01:16,  1.98it/s]reference-probs:  51%|█████▏    | 159/310 [01:18<01:17,  1.96it/s]reference-probs:  52%|█████▏    | 160/310 [01:18<01:14,  2.02it/s]reference-probs:  52%|█████▏    | 161/310 [01:19<01:14,  2.00it/s]reference-probs:  52%|█████▏    | 162/310 [01:19<01:13,  2.02it/s]reference-probs:  53%|█████▎    | 163/310 [01:20<01:12,  2.03it/s]reference-probs:  53%|█████▎    | 164/310 [01:20<01:11,  2.05it/s]reference-probs:  53%|█████▎    | 165/310 [01:21<01:11,  2.02it/s]reference-probs:  54%|█████▎    | 166/310 [01:21<01:11,  2.02it/s]reference-probs:  54%|█████▍    | 167/310 [01:22<01:10,  2.04it/s]reference-probs:  54%|█████▍    | 168/310 [01:22<01:09,  2.05it/s]reference-probs:  55%|█████▍    | 169/310 [01:23<01:09,  2.04it/s]reference-probs:  55%|█████▍    | 170/310 [01:23<01:10,  2.00it/s]reference-probs:  55%|█████▌    | 171/310 [01:24<01:07,  2.05it/s]reference-probs:  55%|█████▌    | 172/310 [01:24<01:07,  2.05it/s]reference-probs:  56%|█████▌    | 173/310 [01:24<01:07,  2.04it/s]reference-probs:  56%|█████▌    | 174/310 [01:25<01:06,  2.03it/s]reference-probs:  56%|█████▋    | 175/310 [01:26<01:09,  1.95it/s]reference-probs:  57%|█████▋    | 176/310 [01:26<01:09,  1.94it/s]reference-probs:  57%|█████▋    | 177/310 [01:27<01:08,  1.93it/s]reference-probs:  57%|█████▋    | 178/310 [01:27<01:09,  1.91it/s]reference-probs:  58%|█████▊    | 179/310 [01:28<01:06,  1.96it/s]reference-probs:  58%|█████▊    | 180/310 [01:28<01:05,  1.98it/s]reference-probs:  58%|█████▊    | 181/310 [01:29<01:04,  1.99it/s]reference-probs:  59%|█████▊    | 182/310 [01:29<01:05,  1.96it/s]reference-probs:  59%|█████▉    | 183/310 [01:30<01:03,  2.01it/s]reference-probs:  59%|█████▉    | 184/310 [01:30<01:02,  2.03it/s]reference-probs:  60%|█████▉    | 185/310 [01:31<01:02,  2.00it/s]reference-probs:  60%|██████    | 186/310 [01:31<01:00,  2.05it/s]reference-probs:  60%|██████    | 187/310 [01:32<01:01,  2.01it/s]reference-probs:  61%|██████    | 188/310 [01:32<01:01,  1.97it/s]reference-probs:  61%|██████    | 189/310 [01:33<01:01,  1.98it/s]reference-probs:  61%|██████▏   | 190/310 [01:33<01:00,  1.98it/s]reference-probs:  62%|██████▏   | 191/310 [01:34<00:58,  2.04it/s]reference-probs:  62%|██████▏   | 192/310 [01:34<00:59,  1.98it/s]reference-probs:  62%|██████▏   | 193/310 [01:35<01:00,  1.94it/s]reference-probs:  63%|██████▎   | 194/310 [01:35<00:57,  2.00it/s]reference-probs:  63%|██████▎   | 195/310 [01:36<00:57,  2.01it/s]reference-probs:  63%|██████▎   | 196/310 [01:36<00:57,  1.97it/s]reference-probs:  64%|██████▎   | 197/310 [01:37<00:56,  2.00it/s]reference-probs:  64%|██████▍   | 198/310 [01:37<00:56,  1.97it/s]reference-probs:  64%|██████▍   | 199/310 [01:38<00:54,  2.02it/s]reference-probs:  65%|██████▍   | 200/310 [01:38<00:54,  2.01it/s]reference-probs:  65%|██████▍   | 201/310 [01:39<00:55,  1.97it/s]reference-probs:  65%|██████▌   | 202/310 [01:39<00:54,  1.98it/s]reference-probs:  65%|██████▌   | 203/310 [01:40<00:54,  1.96it/s]reference-probs:  66%|██████▌   | 204/310 [01:40<00:53,  1.98it/s]reference-probs:  66%|██████▌   | 205/310 [01:41<00:52,  2.01it/s]reference-probs:  66%|██████▋   | 206/310 [01:41<00:51,  2.04it/s]reference-probs:  67%|██████▋   | 207/310 [01:42<00:50,  2.03it/s]reference-probs:  67%|██████▋   | 208/310 [01:42<00:50,  2.03it/s]reference-probs:  67%|██████▋   | 209/310 [01:43<00:50,  1.98it/s]reference-probs:  68%|██████▊   | 210/310 [01:43<00:51,  1.96it/s]reference-probs:  68%|██████▊   | 211/310 [01:44<00:51,  1.94it/s]reference-probs:  68%|██████▊   | 212/310 [01:44<00:49,  1.96it/s]reference-probs:  69%|██████▊   | 213/310 [01:45<00:49,  1.97it/s]reference-probs:  69%|██████▉   | 214/310 [01:45<00:49,  1.93it/s]reference-probs:  69%|██████▉   | 215/310 [01:46<00:48,  1.97it/s]reference-probs:  70%|██████▉   | 216/310 [01:46<00:46,  2.03it/s]reference-probs:  70%|███████   | 217/310 [01:47<00:46,  2.02it/s]reference-probs:  70%|███████   | 218/310 [01:47<00:46,  1.99it/s]reference-probs:  71%|███████   | 219/310 [01:48<00:44,  2.03it/s]reference-probs:  71%|███████   | 220/310 [01:48<00:43,  2.06it/s]reference-probs:  71%|███████▏  | 221/310 [01:49<00:43,  2.07it/s]reference-probs:  72%|███████▏  | 222/310 [01:49<00:42,  2.05it/s]reference-probs:  72%|███████▏  | 223/310 [01:50<00:42,  2.06it/s]reference-probs:  72%|███████▏  | 224/310 [01:50<00:42,  2.04it/s]reference-probs:  73%|███████▎  | 225/310 [01:51<00:41,  2.07it/s]reference-probs:  73%|███████▎  | 226/310 [01:51<00:40,  2.09it/s]reference-probs:  73%|███████▎  | 227/310 [01:52<00:40,  2.07it/s]reference-probs:  74%|███████▎  | 228/310 [01:52<00:40,  2.01it/s]reference-probs:  74%|███████▍  | 229/310 [01:53<00:40,  2.02it/s]reference-probs:  74%|███████▍  | 230/310 [01:53<00:39,  2.02it/s]reference-probs:  75%|███████▍  | 231/310 [01:54<00:39,  2.01it/s]reference-probs:  75%|███████▍  | 232/310 [01:54<00:38,  2.02it/s]reference-probs:  75%|███████▌  | 233/310 [01:55<00:39,  1.96it/s]reference-probs:  75%|███████▌  | 234/310 [01:55<00:39,  1.94it/s]reference-probs:  76%|███████▌  | 235/310 [01:56<00:38,  1.94it/s]reference-probs:  76%|███████▌  | 236/310 [01:56<00:37,  2.00it/s]reference-probs:  76%|███████▋  | 237/310 [01:57<00:35,  2.07it/s]reference-probs:  77%|███████▋  | 238/310 [01:57<00:34,  2.07it/s]reference-probs:  77%|███████▋  | 239/310 [01:57<00:34,  2.07it/s]reference-probs:  77%|███████▋  | 240/310 [01:58<00:34,  2.02it/s]reference-probs:  78%|███████▊  | 241/310 [01:59<00:34,  2.01it/s]reference-probs:  78%|███████▊  | 242/310 [01:59<00:34,  1.98it/s]reference-probs:  78%|███████▊  | 243/310 [02:00<00:33,  1.98it/s]reference-probs:  79%|███████▊  | 244/310 [02:00<00:34,  1.91it/s]reference-probs:  79%|███████▉  | 245/310 [02:01<00:33,  1.96it/s]reference-probs:  79%|███████▉  | 246/310 [02:01<00:32,  2.00it/s]reference-probs:  80%|███████▉  | 247/310 [02:02<00:31,  2.00it/s]reference-probs:  80%|████████  | 248/310 [02:02<00:31,  2.00it/s]reference-probs:  80%|████████  | 249/310 [02:03<00:30,  2.00it/s]reference-probs:  81%|████████  | 250/310 [02:03<00:29,  2.00it/s]reference-probs:  81%|████████  | 251/310 [02:04<00:29,  2.02it/s]reference-probs:  81%|████████▏ | 252/310 [02:04<00:28,  2.02it/s]reference-probs:  82%|████████▏ | 253/310 [02:05<00:28,  1.97it/s]reference-probs:  82%|████████▏ | 254/310 [02:05<00:28,  1.98it/s]reference-probs:  82%|████████▏ | 255/310 [02:06<00:27,  1.98it/s]reference-probs:  83%|████████▎ | 256/310 [02:06<00:27,  1.99it/s]reference-probs:  83%|████████▎ | 257/310 [02:07<00:26,  2.02it/s]reference-probs:  83%|████████▎ | 258/310 [02:07<00:25,  2.03it/s]reference-probs:  84%|████████▎ | 259/310 [02:08<00:25,  1.98it/s]reference-probs:  84%|████████▍ | 260/310 [02:08<00:24,  2.06it/s]reference-probs:  84%|████████▍ | 261/310 [02:09<00:24,  2.04it/s]reference-probs:  85%|████████▍ | 262/310 [02:09<00:23,  2.06it/s]reference-probs:  85%|████████▍ | 263/310 [02:10<00:23,  2.02it/s]reference-probs:  85%|████████▌ | 264/310 [02:10<00:23,  1.99it/s]reference-probs:  85%|████████▌ | 265/310 [02:11<00:22,  1.98it/s]reference-probs:  86%|████████▌ | 266/310 [02:11<00:22,  1.98it/s]reference-probs:  86%|████████▌ | 267/310 [02:11<00:21,  2.03it/s]reference-probs:  86%|████████▋ | 268/310 [02:12<00:20,  2.03it/s]reference-probs:  87%|████████▋ | 269/310 [02:12<00:20,  2.04it/s]reference-probs:  87%|████████▋ | 270/310 [02:13<00:19,  2.03it/s]reference-probs:  87%|████████▋ | 271/310 [02:13<00:19,  2.02it/s]reference-probs:  88%|████████▊ | 272/310 [02:14<00:18,  2.04it/s]reference-probs:  88%|████████▊ | 273/310 [02:14<00:18,  2.05it/s]reference-probs:  88%|████████▊ | 274/310 [02:15<00:17,  2.01it/s]reference-probs:  89%|████████▊ | 275/310 [02:15<00:17,  2.05it/s]reference-probs:  89%|████████▉ | 276/310 [02:16<00:16,  2.01it/s]reference-probs:  89%|████████▉ | 277/310 [02:16<00:16,  2.06it/s]reference-probs:  90%|████████▉ | 278/310 [02:17<00:15,  2.02it/s]reference-probs:  90%|█████████ | 279/310 [02:17<00:15,  2.06it/s]reference-probs:  90%|█████████ | 280/310 [02:18<00:14,  2.04it/s]reference-probs:  91%|█████████ | 281/310 [02:18<00:14,  2.05it/s]reference-probs:  91%|█████████ | 282/310 [02:19<00:13,  2.01it/s]reference-probs:  91%|█████████▏| 283/310 [02:19<00:13,  2.07it/s]reference-probs:  92%|█████████▏| 284/310 [02:20<00:13,  2.00it/s]reference-probs:  92%|█████████▏| 285/310 [02:20<00:12,  1.96it/s]reference-probs:  92%|█████████▏| 286/310 [02:21<00:12,  1.99it/s]reference-probs:  93%|█████████▎| 287/310 [02:21<00:11,  2.01it/s]reference-probs:  93%|█████████▎| 288/310 [02:22<00:10,  2.01it/s]reference-probs:  93%|█████████▎| 289/310 [02:22<00:10,  2.01it/s]reference-probs:  94%|█████████▎| 290/310 [02:23<00:10,  1.99it/s]reference-probs:  94%|█████████▍| 291/310 [02:23<00:09,  1.98it/s]reference-probs:  94%|█████████▍| 292/310 [02:24<00:09,  1.96it/s]reference-probs:  95%|█████████▍| 293/310 [02:24<00:08,  1.93it/s]reference-probs:  95%|█████████▍| 294/310 [02:25<00:08,  1.93it/s]reference-probs:  95%|█████████▌| 295/310 [02:25<00:07,  1.98it/s]reference-probs:  95%|█████████▌| 296/310 [02:26<00:07,  1.95it/s]reference-probs:  96%|█████████▌| 297/310 [02:26<00:06,  1.96it/s]reference-probs:  96%|█████████▌| 298/310 [02:27<00:05,  2.01it/s]reference-probs:  96%|█████████▋| 299/310 [02:27<00:05,  1.97it/s]reference-probs:  97%|█████████▋| 300/310 [02:28<00:05,  2.00it/s]reference-probs:  97%|█████████▋| 301/310 [02:28<00:04,  2.04it/s]reference-probs:  97%|█████████▋| 302/310 [02:29<00:04,  2.00it/s]reference-probs:  98%|█████████▊| 303/310 [02:29<00:03,  2.04it/s]reference-probs:  98%|█████████▊| 304/310 [02:30<00:02,  2.01it/s]reference-probs:  98%|█████████▊| 305/310 [02:30<00:02,  1.97it/s]reference-probs:  99%|█████████▊| 306/310 [02:31<00:02,  1.98it/s]reference-probs:  99%|█████████▉| 307/310 [02:31<00:01,  1.98it/s]reference-probs:  99%|█████████▉| 308/310 [02:32<00:00,  2.01it/s]reference-probs: 100%|█████████▉| 309/310 [02:32<00:00,  2.01it/s]reference-probs: 100%|██████████| 310/310 [02:33<00:00,  2.18it/s]reference-probs: 100%|██████████| 310/310 [02:33<00:00,  2.02it/s]
+grpo-process-policy:   0%|          | 0/80 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+grpo-process-policy:   1%|▏         | 1/80 [00:04<05:32,  4.21s/it]grpo-process-policy:   2%|▎         | 2/80 [00:08<05:21,  4.12s/it]grpo-process-policy:   4%|▍         | 3/80 [00:12<05:17,  4.12s/it]grpo-process-policy:   5%|▌         | 4/80 [00:16<05:07,  4.04s/it]grpo-process-policy:   6%|▋         | 5/80 [00:20<05:06,  4.09s/it]grpo-process-policy:   8%|▊         | 6/80 [00:24<04:58,  4.04s/it]grpo-process-policy:   9%|▉         | 7/80 [00:28<04:55,  4.05s/it]grpo-process-policy:  10%|█         | 8/80 [00:32<04:44,  3.95s/it]grpo-process-policy:  11%|█▏        | 9/80 [00:36<04:39,  3.93s/it]grpo-process-policy:  12%|█▎        | 10/80 [00:39<04:32,  3.90s/it]grpo-process-policy:  14%|█▍        | 11/80 [00:44<04:33,  3.96s/it]grpo-process-policy:  15%|█▌        | 12/80 [00:48<04:30,  3.97s/it]grpo-process-policy:  16%|█▋        | 13/80 [00:51<04:23,  3.94s/it]grpo-process-policy:  18%|█▊        | 14/80 [00:55<04:16,  3.89s/it]grpo-process-policy:  19%|█▉        | 15/80 [00:59<04:11,  3.87s/it]grpo-process-policy:  20%|██        | 16/80 [01:03<04:05,  3.84s/it]grpo-process-policy:  21%|██▏       | 17/80 [01:07<04:01,  3.83s/it]grpo-process-policy:  22%|██▎       | 18/80 [01:11<04:02,  3.91s/it]grpo-process-policy:  24%|██▍       | 19/80 [01:15<04:01,  3.96s/it]grpo-process-policy:  25%|██▌       | 20/80 [01:18<03:53,  3.89s/it]                                                                    {"step": 20, "loss": 0.0193, "policy_loss": -0.0, "kl": 0.9651, "sampled_reward_mean": 1.161, "sampled_reward_max": 1.3219, "entropy": 0.6557}
+grpo-process-policy:  25%|██▌       | 20/80 [01:18<03:53,  3.89s/it]grpo-process-policy:  26%|██▋       | 21/80 [01:23<03:54,  3.98s/it]grpo-process-policy:  28%|██▊       | 22/80 [01:27<03:52,  4.01s/it]grpo-process-policy:  29%|██▉       | 23/80 [01:31<03:46,  3.98s/it]grpo-process-policy:  30%|███       | 24/80 [01:35<03:41,  3.95s/it]grpo-process-policy:  31%|███▏      | 25/80 [01:38<03:35,  3.92s/it]grpo-process-policy:  32%|███▎      | 26/80 [01:42<03:29,  3.89s/it]grpo-process-policy:  34%|███▍      | 27/80 [01:46<03:26,  3.90s/it]grpo-process-policy:  35%|███▌      | 28/80 [01:50<03:24,  3.93s/it]grpo-process-policy:  36%|███▋      | 29/80 [01:54<03:21,  3.95s/it]grpo-process-policy:  38%|███▊      | 30/80 [01:58<03:16,  3.93s/it]grpo-process-policy:  39%|███▉      | 31/80 [02:02<03:12,  3.93s/it]grpo-process-policy:  40%|████      | 32/80 [02:06<03:07,  3.91s/it]grpo-process-policy:  41%|████▏     | 33/80 [02:10<03:02,  3.88s/it]grpo-process-policy:  42%|████▎     | 34/80 [02:13<02:56,  3.85s/it]grpo-process-policy:  44%|████▍     | 35/80 [02:17<02:52,  3.83s/it]grpo-process-policy:  45%|████▌     | 36/80 [02:21<02:49,  3.85s/it]grpo-process-policy:  46%|████▋     | 37/80 [02:25<02:50,  3.96s/it]grpo-process-policy:  48%|████▊     | 38/80 [02:29<02:45,  3.95s/it]grpo-process-policy:  49%|████▉     | 39/80 [02:33<02:40,  3.93s/it]grpo-process-policy:  50%|█████     | 40/80 [02:37<02:35,  3.89s/it]                                                                    {"step": 40, "loss": 0.0425, "policy_loss": -0.0, "kl": 2.1258, "sampled_reward_mean": 1.1804, "sampled_reward_max": 1.415, "entropy": 0.0656}
+grpo-process-policy:  50%|█████     | 40/80 [02:37<02:35,  3.89s/it]grpo-process-policy:  51%|█████▏    | 41/80 [02:41<02:31,  3.90s/it]grpo-process-policy:  52%|█████▎    | 42/80 [02:45<02:29,  3.94s/it]grpo-process-policy:  54%|█████▍    | 43/80 [02:49<02:26,  3.96s/it]grpo-process-policy:  55%|█████▌    | 44/80 [02:53<02:23,  3.99s/it]grpo-process-policy:  56%|█████▋    | 45/80 [02:57<02:21,  4.05s/it]grpo-process-policy:  57%|█████▊    | 46/80 [03:01<02:14,  3.95s/it]grpo-process-policy:  59%|█████▉    | 47/80 [03:05<02:08,  3.90s/it]grpo-process-policy:  60%|██████    | 48/80 [03:09<02:07,  4.00s/it]grpo-process-policy:  61%|██████▏   | 49/80 [03:13<02:05,  4.04s/it]grpo-process-policy:  62%|██████▎   | 50/80 [03:17<02:00,  4.03s/it]grpo-process-policy:  64%|██████▍   | 51/80 [03:21<01:55,  3.97s/it]grpo-process-policy:  65%|██████▌   | 52/80 [03:25<01:49,  3.93s/it]grpo-process-policy:  66%|██████▋   | 53/80 [03:28<01:44,  3.87s/it]grpo-process-policy:  68%|██████▊   | 54/80 [03:32<01:39,  3.84s/it]grpo-process-policy:  69%|██████▉   | 55/80 [03:36<01:36,  3.85s/it]grpo-process-policy:  70%|███████   | 56/80 [03:40<01:33,  3.91s/it]grpo-process-policy:  71%|███████▏  | 57/80 [03:44<01:31,  3.98s/it]grpo-process-policy:  72%|███████▎  | 58/80 [03:48<01:26,  3.92s/it]grpo-process-policy:  74%|███████▍  | 59/80 [03:52<01:22,  3.94s/it]grpo-process-policy:  75%|███████▌  | 60/80 [03:56<01:19,  3.98s/it]                                                                    {"step": 60, "loss": 0.043, "policy_loss": -0.0, "kl": 2.1508, "sampled_reward_mean": 1.9534, "sampled_reward_max": 2.6845, "entropy": 0.0001}
+grpo-process-policy:  75%|███████▌  | 60/80 [03:56<01:19,  3.98s/it]grpo-process-policy:  76%|███████▋  | 61/80 [04:00<01:14,  3.92s/it]grpo-process-policy:  78%|███████▊  | 62/80 [04:04<01:10,  3.93s/it]grpo-process-policy:  79%|███████▉  | 63/80 [04:08<01:06,  3.94s/it]grpo-process-policy:  80%|████████  | 64/80 [04:12<01:02,  3.91s/it]grpo-process-policy:  81%|████████▏ | 65/80 [04:16<00:58,  3.91s/it]grpo-process-policy:  82%|████████▎ | 66/80 [04:19<00:54,  3.91s/it]grpo-process-policy:  84%|████████▍ | 67/80 [04:23<00:51,  3.94s/it]grpo-process-policy:  85%|████████▌ | 68/80 [04:27<00:47,  3.96s/it]grpo-process-policy:  86%|████████▋ | 69/80 [04:31<00:43,  3.95s/it]grpo-process-policy:  88%|████████▊ | 70/80 [04:35<00:39,  3.93s/it]grpo-process-policy:  89%|████████▉ | 71/80 [04:39<00:35,  3.98s/it]grpo-process-policy:  90%|█████████ | 72/80 [04:43<00:31,  3.92s/it]grpo-process-policy:  91%|█████████▏| 73/80 [04:47<00:27,  3.93s/it]grpo-process-policy:  92%|█████████▎| 74/80 [04:51<00:24,  4.01s/it]grpo-process-policy:  94%|█████████▍| 75/80 [04:55<00:20,  4.05s/it]grpo-process-policy:  95%|█████████▌| 76/80 [05:00<00:16,  4.08s/it]grpo-process-policy:  96%|█████████▋| 77/80 [05:04<00:12,  4.07s/it]grpo-process-policy:  98%|█████████▊| 78/80 [05:07<00:07,  3.97s/it]grpo-process-policy:  99%|█████████▉| 79/80 [05:11<00:03,  3.91s/it]grpo-process-policy: 100%|██████████| 80/80 [05:15<00:00,  3.85s/it]                                                                    {"step": 80, "loss": 0.0341, "policy_loss": -0.0, "kl": 1.7049, "sampled_reward_mean": 0.661, "sampled_reward_max": 0.9069, "entropy": 0.0}
+grpo-process-policy: 100%|██████████| 80/80 [05:15<00:00,  3.85s/it]grpo-process-policy: 100%|██████████| 80/80 [05:15<00:00,  3.94s/it]
+{
+  "batch_size": 2,
+  "grad_accum": 2,
+  "group_size": 8,
+  "kl_beta": 0.02,
+  "learning_rate": 8e-05,
+  "logs": [
+    {
+      "entropy": 1.9354524612426758,
+      "kl": 6.784385186620057e-05,
+      "loss": -0.1482410430908203,
+      "policy_loss": -0.14824239909648895,
+      "sampled_reward_max": 2.906890630722046,
+      "sampled_reward_mean": 2.088789939880371,
+      "step": 1
+    },
+    {
+      "entropy": 1.874424934387207,
+      "kl": 0.04245093837380409,
+      "loss": -0.3622373938560486,
+      "policy_loss": -0.36308640241622925,
+      "sampled_reward_max": 1.601554036140442,
+      "sampled_reward_mean": 0.8516002893447876,
+      "step": 2
+    },
+    {
+      "entropy": 1.6701778173446655,
+      "kl": 0.23970453441143036,
+      "loss": 0.44061794877052307,
+      "policy_loss": 0.43582385778427124,
+      "sampled_reward_max": 3.906890630722046,
+      "sampled_reward_mean": 2.3029332160949707,
+      "step": 3
+    },
+    {
+      "entropy": 1.4535386562347412,
+      "kl": 0.35901907086372375,
+      "loss": 0.08693574368953705,
+      "policy_loss": 0.07975536584854126,
+      "sampled_reward_max": 4.169925212860107,
+      "sampled_reward_mean": 2.3493294715881348,
+      "step": 4
+    },
+    {
+      "entropy": 1.2439179420471191,
+      "kl": 0.524625837802887,
+      "loss": 0.1746216118335724,
+      "policy_loss": 0.1641290932893753,
+      "sampled_reward_max": 2.6009039878845215,
+      "sampled_reward_mean": 1.2619572877883911,
+      "step": 5
+    },
+    {
+      "entropy": 1.0071989297866821,
+      "kl": 0.591553807258606,
+      "loss": -0.3051820397377014,
+      "policy_loss": -0.31701311469078064,
+      "sampled_reward_max": 3.5849626064300537,
+      "sampled_reward_mean": 2.298689842224121,
+      "step": 6
+    },
+    {
+      "entropy": 0.8717285990715027,
+      "kl": 0.6660630702972412,
+      "loss": -0.01005514431744814,
+      "policy_loss": -0.023376405239105225,
+      "sampled_reward_max": 4.584962368011475,
+      "sampled_reward_mean": 2.2924811840057373,
+      "step": 7
+    },
+    {
+      "entropy": 1.1619235277175903,
+      "kl": 0.520796000957489,
+      "loss": 0.020477138459682465,
+      "policy_loss": 0.010061219334602356,
+      "sampled_reward_max": 1.8579809665679932,
+      "sampled_reward_mean": 1.2780506610870361,
+      "step": 8
+    },
+    {
+      "entropy": 0.8023858070373535,
+      "kl": 0.8069760799407959,
+      "loss": -0.6750404238700867,
+      "policy_loss": -0.6911799311637878,
+      "sampled_reward_max": 1.906890630722046,
+      "sampled_reward_mean": 1.5265824794769287,
+      "step": 9
+    },
+    {
+      "entropy": 0.7326877117156982,
+      "kl": 0.8228110074996948,
+      "loss": -0.16440121829509735,
+      "policy_loss": -0.18085743486881256,
+      "sampled_reward_max": 1.1864131689071655,
+      "sampled_reward_mean": 1.070430874824524,
+      "step": 10
+    },
+    {
+      "entropy": 0.26084595918655396,
+      "kl": 1.128492832183838,
+      "loss": 0.02256985567510128,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 3.857980966567993,
+      "sampled_reward_mean": 2.5605077743530273,
+      "step": 11
+    },
+    {
+      "entropy": 1.3013571500778198,
+      "kl": 0.3223726153373718,
+      "loss": -0.3102664351463318,
+      "policy_loss": -0.3167138993740082,
+      "sampled_reward_max": 2.2410080432891846,
+      "sampled_reward_mean": 1.6213653087615967,
+      "step": 12
+    },
+    {
+      "entropy": 1.3432672023773193,
+      "kl": 0.5770487189292908,
+      "loss": -0.8483926653862,
+      "policy_loss": -0.859933614730835,
+      "sampled_reward_max": 1.8073549270629883,
+      "sampled_reward_mean": 1.3527648448944092,
+      "step": 13
+    },
+    {
+      "entropy": 0.5524057149887085,
+      "kl": 0.7397253513336182,
+      "loss": 0.014794507063925266,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.0,
+      "sampled_reward_mean": 1.5,
+      "step": 14
+    },
+    {
+      "entropy": 0.7761589288711548,
+      "kl": 0.825049102306366,
+      "loss": 0.8403695821762085,
+      "policy_loss": 0.8238685727119446,
+      "sampled_reward_max": 2.2837929725646973,
+      "sampled_reward_mean": 1.4368078708648682,
+      "step": 15
+    },
+    {
+      "entropy": 1.1023470163345337,
+      "kl": 0.6724424958229065,
+      "loss": 0.42285609245300293,
+      "policy_loss": 0.40940725803375244,
+      "sampled_reward_max": 2.8073549270629883,
+      "sampled_reward_mean": 1.4748157262802124,
+      "step": 16
+    },
+    {
+      "entropy": 1.129542350769043,
+      "kl": 0.6666916012763977,
+      "loss": -0.5638142228126526,
+      "policy_loss": -0.5771480798721313,
+      "sampled_reward_max": 1.3093280792236328,
+      "sampled_reward_mean": 1.1369788646697998,
+      "step": 17
+    },
+    {
+      "entropy": 1.057118535041809,
+      "kl": 0.712285041809082,
+      "loss": -0.5449098944664001,
+      "policy_loss": -0.5591555833816528,
+      "sampled_reward_max": 3.146841287612915,
+      "sampled_reward_mean": 2.582658290863037,
+      "step": 18
+    },
+    {
+      "entropy": 1.0287171602249146,
+      "kl": 0.699182391166687,
+      "loss": -0.25133049488067627,
+      "policy_loss": -0.26531413197517395,
+      "sampled_reward_max": 1.3219281435012817,
+      "sampled_reward_mean": 1.2775201797485352,
+      "step": 19
+    },
+    {
+      "entropy": 0.6556787490844727,
+      "kl": 0.9650980234146118,
+      "loss": 0.01930196024477482,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.3219281435012817,
+      "sampled_reward_mean": 1.160964012145996,
+      "step": 20
+    },
+    {
+      "entropy": 0.7180516719818115,
+      "kl": 1.2532154321670532,
+      "loss": -0.06292611360549927,
+      "policy_loss": -0.0879904180765152,
+      "sampled_reward_max": 2.5334322452545166,
+      "sampled_reward_mean": 1.2208935022354126,
+      "step": 21
+    },
+    {
+      "entropy": 0.6871554851531982,
+      "kl": 1.1205484867095947,
+      "loss": -0.1088908240199089,
+      "policy_loss": -0.13130179047584534,
+      "sampled_reward_max": 3.2223923206329346,
+      "sampled_reward_mean": 2.1256208419799805,
+      "step": 22
+    },
+    {
+      "entropy": 0.3515903949737549,
+      "kl": 1.1533502340316772,
+      "loss": 0.3400340676307678,
+      "policy_loss": 0.31696707010269165,
+      "sampled_reward_max": 3.2223923206329346,
+      "sampled_reward_mean": 2.184316396713257,
+      "step": 23
+    },
+    {
+      "entropy": 0.22832636535167694,
+      "kl": 1.1659283638000488,
+      "loss": -0.5224185585975647,
+      "policy_loss": -0.5457371473312378,
+      "sampled_reward_max": 1.9368062019348145,
+      "sampled_reward_mean": 1.2068661451339722,
+      "step": 24
+    },
+    {
+      "entropy": 0.10055287927389145,
+      "kl": 1.8716917037963867,
+      "loss": 0.03743383288383484,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2410080432891846,
+      "sampled_reward_mean": 1.0927565097808838,
+      "step": 25
+    },
+    {
+      "entropy": 0.11346770077943802,
+      "kl": 2.105419635772705,
+      "loss": 0.04210839048027992,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.4150375127792358,
+      "sampled_reward_mean": 1.3203487396240234,
+      "step": 26
+    },
+    {
+      "entropy": 0.1384809911251068,
+      "kl": 1.9485971927642822,
+      "loss": -0.5651528835296631,
+      "policy_loss": -0.6041248440742493,
+      "sampled_reward_max": 3.3575520515441895,
+      "sampled_reward_mean": 2.1736385822296143,
+      "step": 27
+    },
+    {
+      "entropy": 0.02742806263267994,
+      "kl": 1.1850945949554443,
+      "loss": 0.02370189130306244,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.475473403930664,
+      "sampled_reward_mean": 1.3476272821426392,
+      "step": 28
+    },
+    {
+      "entropy": 0.34215694665908813,
+      "kl": 1.6212024688720703,
+      "loss": -0.012122604995965958,
+      "policy_loss": -0.04454665258526802,
+      "sampled_reward_max": 1.392151117324829,
+      "sampled_reward_mean": 0.8368374109268188,
+      "step": 29
+    },
+    {
+      "entropy": 0.00814427062869072,
+      "kl": 1.3134490251541138,
+      "loss": 0.026268979534506798,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.0,
+      "sampled_reward_mean": 1.0,
+      "step": 30
+    },
+    {
+      "entropy": 0.009125626645982265,
+      "kl": 1.501129150390625,
+      "loss": 0.030022582039237022,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 4.754887580871582,
+      "sampled_reward_mean": 3.0089609622955322,
+      "step": 31
+    },
+    {
+      "entropy": 0.04392491281032562,
+      "kl": 1.7628052234649658,
+      "loss": 0.03525610268115997,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.6629650592803955,
+      "sampled_reward_mean": 1.4924466609954834,
+      "step": 32
+    },
+    {
+      "entropy": 0.3578651547431946,
+      "kl": 1.3592866659164429,
+      "loss": -0.17224496603012085,
+      "policy_loss": -0.1994307041168213,
+      "sampled_reward_max": 3.502500295639038,
+      "sampled_reward_mean": 2.7311296463012695,
+      "step": 33
+    },
+    {
+      "entropy": 1.6934982340899296e-05,
+      "kl": 2.0479836463928223,
+      "loss": 0.0409596711397171,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.180572271347046,
+      "sampled_reward_mean": 1.0823111534118652,
+      "step": 34
+    },
+    {
+      "entropy": 0.021329056471586227,
+      "kl": 2.027533769607544,
+      "loss": 0.04055067524313927,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.0968616008758545,
+      "sampled_reward_mean": 1.6889586448669434,
+      "step": 35
+    },
+    {
+      "entropy": 5.795692231913563e-06,
+      "kl": 1.9366085529327393,
+      "loss": 0.038732171058654785,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 3.1823220252990723,
+      "sampled_reward_mean": 2.3836421966552734,
+      "step": 36
+    },
+    {
+      "entropy": 0.3445621132850647,
+      "kl": 1.872541904449463,
+      "loss": 0.12418989837169647,
+      "policy_loss": 0.08673905581235886,
+      "sampled_reward_max": 4.584962368011475,
+      "sampled_reward_mean": 2.5262105464935303,
+      "step": 37
+    },
+    {
+      "entropy": 0.0004091163573320955,
+      "kl": 2.031294107437134,
+      "loss": 0.040625881403684616,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.4186714887619019,
+      "sampled_reward_mean": 1.1890147924423218,
+      "step": 38
+    },
+    {
+      "entropy": 0.004898232873529196,
+      "kl": 2.0121264457702637,
+      "loss": 0.040242526680231094,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 0.8875252604484558,
+      "sampled_reward_mean": 0.68045973777771,
+      "step": 39
+    },
+    {
+      "entropy": 0.06561383605003357,
+      "kl": 2.1258459091186523,
+      "loss": 0.04251691699028015,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.4150375127792358,
+      "sampled_reward_mean": 1.1803736686706543,
+      "step": 40
+    },
+    {
+      "entropy": 0.002269293647259474,
+      "kl": 1.7326319217681885,
+      "loss": 0.03465263918042183,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 3.1154773235321045,
+      "sampled_reward_mean": 2.322996139526367,
+      "step": 41
+    },
+    {
+      "entropy": 4.128822638449492e-06,
+      "kl": 1.8189716339111328,
+      "loss": 0.03637943044304848,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.4943171739578247,
+      "sampled_reward_mean": 1.162196159362793,
+      "step": 42
+    },
+    {
+      "entropy": 1.5503804888794548e-06,
+      "kl": 2.003974199295044,
+      "loss": 0.04007948189973831,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.1699249744415283,
+      "sampled_reward_mean": 1.7918227910995483,
+      "step": 43
+    },
+    {
+      "entropy": 2.7441558358987095e-06,
+      "kl": 1.9683332443237305,
+      "loss": 0.03936666250228882,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2107255458831787,
+      "sampled_reward_mean": 0.8330745100975037,
+      "step": 44
+    },
+    {
+      "entropy": 0.012399569153785706,
+      "kl": 2.0884852409362793,
+      "loss": 0.04176970571279526,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.5387119054794312,
+      "sampled_reward_mean": 0.9256111979484558,
+      "step": 45
+    },
+    {
+      "entropy": 3.8374018913600594e-05,
+      "kl": 1.9584987163543701,
+      "loss": 0.039169974625110626,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2276006937026978,
+      "sampled_reward_mean": 0.906281590461731,
+      "step": 46
+    },
+    {
+      "entropy": 5.299893018673174e-06,
+      "kl": 1.7413533926010132,
+      "loss": 0.03482706844806671,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2667865753173828,
+      "sampled_reward_mean": 1.063378095626831,
+      "step": 47
+    },
+    {
+      "entropy": 7.922827535367105e-06,
+      "kl": 2.0081088542938232,
+      "loss": 0.04016217589378357,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.6394102573394775,
+      "sampled_reward_mean": 2.028364419937134,
+      "step": 48
+    },
+    {
+      "entropy": 4.6217101612455735e-07,
+      "kl": 2.0367629528045654,
+      "loss": 0.040735259652137756,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.5443204641342163,
+      "sampled_reward_mean": 1.3141632080078125,
+      "step": 49
+    },
+    {
+      "entropy": 0.00014288502279669046,
+      "kl": 2.0926132202148438,
+      "loss": 0.04185226187109947,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 3.608103036880493,
+      "sampled_reward_mean": 2.6242804527282715,
+      "step": 50
+    },
+    {
+      "entropy": 0.013374736532568932,
+      "kl": 1.8353230953216553,
+      "loss": 0.03670646250247955,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.562936305999756,
+      "sampled_reward_mean": 1.5983729362487793,
+      "step": 51
+    },
+    {
+      "entropy": 1.7732677406456787e-06,
+      "kl": 2.0991740226745605,
+      "loss": 0.041983477771282196,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 0.9259994029998779,
+      "sampled_reward_mean": 0.7609333395957947,
+      "step": 52
+    },
+    {
+      "entropy": 3.259220193285728e-06,
+      "kl": 1.7378761768341064,
+      "loss": 0.034757521003484726,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2801079750061035,
+      "sampled_reward_mean": 0.9325352311134338,
+      "step": 53
+    },
+    {
+      "entropy": 4.678842378780246e-05,
+      "kl": 1.5970454216003418,
+      "loss": 0.03194090723991394,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2223924398422241,
+      "sampled_reward_mean": 1.1846169233322144,
+      "step": 54
+    },
+    {
+      "entropy": 4.611915574059822e-05,
+      "kl": 2.058913230895996,
+      "loss": 0.04117826372385025,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2672839164733887,
+      "sampled_reward_mean": 1.228983759880066,
+      "step": 55
+    },
+    {
+      "entropy": 1.3134001164871734e-05,
+      "kl": 1.913165807723999,
+      "loss": 0.038263313472270966,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.4854267835617065,
+      "sampled_reward_mean": 1.2120131254196167,
+      "step": 56
+    },
+    {
+      "entropy": 1.1562796089492622e-06,
+      "kl": 2.0441083908081055,
+      "loss": 0.0408821664750576,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.722465991973877,
+      "sampled_reward_mean": 1.4060516357421875,
+      "step": 57
+    },
+    {
+      "entropy": 1.739776280373917e-06,
+      "kl": 1.8038920164108276,
+      "loss": 0.0360778383910656,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.9899463653564453,
+      "sampled_reward_mean": 2.366225004196167,
+      "step": 58
+    },
+    {
+      "entropy": 3.875924812746234e-05,
+      "kl": 2.047455310821533,
+      "loss": 0.040949106216430664,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2537566423416138,
+      "sampled_reward_mean": 1.1133947372436523,
+      "step": 59
+    },
+    {
+      "entropy": 0.00011351746070431545,
+      "kl": 2.1507627964019775,
+      "loss": 0.043015256524086,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.6844980716705322,
+      "sampled_reward_mean": 1.9534451961517334,
+      "step": 60
+    },
+    {
+      "entropy": 9.348815183329862e-06,
+      "kl": 1.8307781219482422,
+      "loss": 0.036615561693906784,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.5849624872207642,
+      "sampled_reward_mean": 1.2924811840057373,
+      "step": 61
+    },
+    {
+      "entropy": 2.5620875021559186e-06,
+      "kl": 2.225313901901245,
+      "loss": 0.04450627788901329,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.3390085697174072,
+      "sampled_reward_mean": 1.0834624767303467,
+      "step": 62
+    },
+    {
+      "entropy": 3.199407728970982e-05,
+      "kl": 1.7004938125610352,
+      "loss": 0.03400987386703491,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.4594316482543945,
+      "sampled_reward_mean": 1.28745436668396,
+      "step": 63
+    },
+    {
+      "entropy": 3.9215632568812e-05,
+      "kl": 1.9565253257751465,
+      "loss": 0.03913050517439842,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.263034462928772,
+      "sampled_reward_mean": 1.1986126899719238,
+      "step": 64
+    },
+    {
+      "entropy": 1.865559397629113e-06,
+      "kl": 2.021859884262085,
+      "loss": 0.04043719545006752,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 3.502500295639038,
+      "sampled_reward_mean": 3.2806968688964844,
+      "step": 65
+    },
+    {
+      "entropy": 1.378133333673759e-06,
+      "kl": 2.022977828979492,
+      "loss": 0.04045955464243889,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.5849624872207642,
+      "sampled_reward_mean": 1.2924811840057373,
+      "step": 66
+    },
+    {
+      "entropy": 0.001058422727510333,
+      "kl": 1.5599795579910278,
+      "loss": 0.031199591234326363,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.0,
+      "sampled_reward_mean": 0.9150375127792358,
+      "step": 67
+    },
+    {
+      "entropy": 2.52752556662017e-06,
+      "kl": 1.9710050821304321,
+      "loss": 0.039420101791620255,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.2479275465011597,
+      "sampled_reward_mean": 1.1844134330749512,
+      "step": 68
+    },
+    {
+      "entropy": 4.934347089147195e-06,
+      "kl": 1.7136304378509521,
+      "loss": 0.034272607415914536,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.3219281435012817,
+      "sampled_reward_mean": 1.2042579650878906,
+      "step": 69
+    },
+    {
+      "entropy": 3.6407291190698743e-06,
+      "kl": 1.988605260848999,
+      "loss": 0.03977210447192192,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 0.6494892835617065,
+      "sampled_reward_mean": 0.4846847653388977,
+      "step": 70
+    },
+    {
+      "entropy": 2.351597140659578e-05,
+      "kl": 2.1040313243865967,
+      "loss": 0.042080625891685486,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 3.084988832473755,
+      "sampled_reward_mean": 2.3612093925476074,
+      "step": 71
+    },
+    {
+      "entropy": 5.979720299364999e-05,
+      "kl": 1.6830849647521973,
+      "loss": 0.033661697059869766,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.3219281435012817,
+      "sampled_reward_mean": 1.3075838088989258,
+      "step": 72
+    },
+    {
+      "entropy": 7.164437556639314e-05,
+      "kl": 1.951366901397705,
+      "loss": 0.03902733698487282,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.0,
+      "sampled_reward_mean": 1.0,
+      "step": 73
+    },
+    {
+      "entropy": 6.0312586356303655e-06,
+      "kl": 1.7902451753616333,
+      "loss": 0.03580490127205849,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.906890630722046,
+      "sampled_reward_mean": 1.7384424209594727,
+      "step": 74
+    },
+    {
+      "entropy": 0.00019244516442995518,
+      "kl": 2.0310072898864746,
+      "loss": 0.040620144456624985,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.287576675415039,
+      "sampled_reward_mean": 1.6580311059951782,
+      "step": 75
+    },
+    {
+      "entropy": 0.0002710840490180999,
+      "kl": 1.6544325351715088,
+      "loss": 0.033088650554418564,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 2.4374053478240967,
+      "sampled_reward_mean": 2.09614634513855,
+      "step": 76
+    },
+    {
+      "entropy": 1.7946007346836268e-06,
+      "kl": 2.1733455657958984,
+      "loss": 0.04346691071987152,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.8073549270629883,
+      "sampled_reward_mean": 1.4886399507522583,
+      "step": 77
+    },
+    {
+      "entropy": 0.00034927448723465204,
+      "kl": 2.248983860015869,
+      "loss": 0.044979676604270935,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.4791678190231323,
+      "sampled_reward_mean": 1.1903020143508911,
+      "step": 78
+    },
+    {
+      "entropy": 0.00012634538870770484,
+      "kl": 1.878916621208191,
+      "loss": 0.03757833316922188,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 1.418501377105713,
+      "sampled_reward_mean": 1.2394564151763916,
+      "step": 79
+    },
+    {
+      "entropy": 4.704404273070395e-05,
+      "kl": 1.704913854598999,
+      "loss": 0.03409827500581741,
+      "policy_loss": -0.0,
+      "sampled_reward_max": 0.9068905711174011,
+      "sampled_reward_mean": 0.6609640121459961,
+      "step": 80
+    }
+  ],
+  "max_length": 2048,
+  "max_steps": 80,
+  "method": "group_relative_policy_optimization_over_verifier_rewards",
+  "shuffle_rewards": false,
+  "train_states": 619
+}

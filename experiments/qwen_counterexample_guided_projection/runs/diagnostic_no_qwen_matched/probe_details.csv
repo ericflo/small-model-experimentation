@@ -1,0 +1,241 @@
+task_id,probe_index,probe,qwen_label,train_only_pred,qwen_projection_pred
+Address.000002,0,"Aysu  Fatma  Ahmed  492  24th  Place  NW,Edison,AK,(896)  388-9065,000-93-6876,38891",,,
+Address.000002,1,"Long Beach, Fiamma Greco 967 03th Place SE, 000-61-4879, OK, (129) 734-1247, 03719",,,
+Address.000002,2,"AK Fatma Ahmed 492 24th Place NW,Edison,AK,(896) 388-9065,000-93-6876,38891",,,
+Address.000002,3,"th(Fiamma Greco 967 03th Place SE,Long Beach,OK,(129) 734-1247,000-61-4879,03719",,,
+Address.000002,4,"Fiamma_Greco_967_03th_Place_SE,Long_Beach,OK,(129)_734-1247,000-61-4879,03719",,,
+Address.000002,5,"NW(Fiamma Greco 967 03th Place SE,Long Beach,OK,(129) 734-1247,000-61-4879,03719",,,
+Address.000013,0,"OH,23 Fifth Ave SE, Maputo, WY 41230",,,
+Address.000013,1,"234 MAPLE BLVD, EDISON, AK 58712",,,
+Address.000013,2,"23  Fifth  Ave  SE,  Maputo,  WY  41230",,,
+Address.000013,3,"One Cherry Court, Greensboro, VA 234",,,
+Address.000013,4,"2345_1st_Rte,_Kinshasa,_OH_38891",,,
+Address.000013,5,"234 Maple Maputo, Edison, AK 58712",,,
+BillingCode.000007,0,CPT-[AP-1089,,CPT-[AP-1089],CPT-[AP-1089]
+BillingCode.000007,1,CPT[[AP-1089,,CPT[[AP-1089],CPT[[AP-1089]
+BillingCode.000007,2,[CPT-1089,,[CPT-1089],[CPT-1089]
+BillingCode.000007,3,[ap-1089,,[ap-1089],[ap-1089]
+BillingCode.000007,4,[Cpt-00350,,[Cpt-00350],[Cpt-00350]
+BillingCode.000007,5,[Ap-1089,,[Ap-1089],[Ap-1089]
+City.000010,0,None+43,,,
+City.000010,1,none,,,
+City.000010,2,None+None,,,
+City.000010,3,43+30,,,
+City.000010,4,NONE,,,
+City.000010,5,30,,,
+City.000011,0,New York New,,New York City,New York City
+City.000011,1,York York City,,New York City,New York City
+City.000011,2,New_York_City,,New York City,New York City
+City.000011,3,New York City.12,,New York City,New York City
+City.000011,4,new york city  ,,New York City,New York City
+City.000011,5,N.Y.C.,,New York City,New York City
+Column.000001,0,COLN9,,,
+Column.000001,1,"ID,Coln9",,,
+Column.000001,2,ID 5,,,
+Column.000001,3,ID5,,,
+Column.000001,4,Coln8/5,,,
+Column.000001,5,ID8,,,
+DateTime.000004,0,col0=18:25:57 | col1=2067-01-08,,18:25:57 2067-01-08,18:25:57 2067-01-08
+DateTime.000004,1,col0=06:34:08 | col1=1809-01-11,,06:34:08 1809-01-11,06:34:08 1809-01-11
+DateTime.000004,2,col0=20:41:48 | col1=2067-01-07,,20:41:48 2067-01-07,20:41:48 2067-01-07
+DateTime.000004,3,col0=18:25:57 | col1=1984-05-23,,18:25:57 1984-05-23,18:25:57 1984-05-23
+DateTime.000004,4,col0=06:34:08 | col1=Alpha:1952-02-07,,06:34:08 Alpha:1952-02-07,06:34:08 Alpha:1952-02-07
+DateTime.000004,5,col0=06:34:08 | col1=Delta:1952-02-07,,06:34:08 Delta:1952-02-07,06:34:08 Delta:1952-02-07
+DateTime.000007,0,2041-11-23T01:17:33Z:45,,,
+DateTime.000007,1,05-05-03T06:45:43Z,,,
+DateTime.000007,2,05-11-23T01:17:33Z,,,
+DateTime.000007,3,T-2018-05-03T06:45:43Z,,,
+DateTime.000007,4,2041-11-23t01:17:33z,,,
+DateTime.000007,5,2041-04-23T01:17:33Z,,,
+DateTime.000017,0,1953,,,
+DateTime.000017,1,Mar_30_2002,,,
+DateTime.000017,2,22 Apr 1953-22,,,
+DateTime.000017,3,01311846-2002,,,
+DateTime.000017,4,01311846 06,,,
+DateTime.000017,5,Mar-06-Oct-2143,,,
+DateTime.000025,0,01311846 1953,,,
+DateTime.000025,1,06-OCT-2143,,,
+DateTime.000025,2,22 Mar 1953,,,
+DateTime.000025,3,2143 Apr 1953,,,
+DateTime.000025,4,22-Apr-1953,,,
+DateTime.000025,5,01311846 2002,,,
+DateTime.000027,0,01311846:44,,,
+DateTime.000027,1,April-22 April 1953 23:34,,,
+DateTime.000027,2,06-Mar-2143 18:25,,,
+DateTime.000027,3,06-oct-2143 18:25,,,
+DateTime.000027,4,06-Oct-2143 18:01311846,,,
+DateTime.000027,5,MAR 30 2002 21:44,,,
+DateTime.000034,0,"22Abddk_3388.Xy,9/12/2002 6:25:57 Pm,8.111111,311,Chicago",,,
+DateTime.000034,1,"22ABDDK_3388.XY,9/12/2002 11:34:17 PM,8.111111,311,CHICAGO",,,
+DateTime.000034,2,"22ABDDK_3388.XY,9/12/2002  11:34:17  PM,8.111111,311,chicago",,,
+DateTime.000034,3,"22ABDDK_3388.XY,9/12/6 6:25:57 PM,8.111111,311,chicago",,,
+DateTime.000034,4,"22ABDDK_3388.XY,9/12/2002 6:25:57 PM,8.111111,311,CHICAGO",,,
+DateTime.000034,5,"22ABDDK_3388.XY,9/12/2002 7:00:20 AM,8.111111,311,CHICAGO",,,
+DateTime.000051,0,08:29:52:11,,,
+DateTime.000051,1,08:12:29,,,
+DateTime.000051,2,Delta:08:29:52,,,
+DateTime.000051,3,08:29:11,,,
+DateTime.000051,4,29:12:29,,,
+DateTime.000051,5,Alpha:11:12:29,,,
+DateTime.000076,0,44:00:44,,,
+DateTime.000076,1,Alpha:44:00,,,
+DateTime.000076,2,00:00:00,,,
+DateTime.000076,3,Gamma:00:00,,,
+DateTime.000076,4,Delta:00:00,,,
+DateTime.000076,5,Delta:44:00,,,
+DateTime.000081,0,11:34Pm,,,
+DateTime.000081,1,7:00Am,,,
+DateTime.000081,2,6:25AM,,,
+DateTime.000081,3,6:25PM:7,,,
+DateTime.000081,4,9:44Pm,,,
+DateTime.000081,5,7:00am,,,
+DateTime.000094,0,1973-12-17-14,,,
+DateTime.000094,1,9 april 1987,,,
+DateTime.000094,2,3-12-17,,,
+DateTime.000094,3,3. November 2013,,,
+DateTime.000094,4,November.27.3.1990,,,
+DateTime.000094,5,November 1973-12-17,,,
+DateTime.000104,0,14-Feb-2002 13:16:16,,Feb,Feb
+DateTime.000104,1,14-Mar-2002 31:16:16,,Mar,Mar
+DateTime.000104,2,17-Jan-1990 13:32:01 13,,Jan,Jan
+DateTime.000104,3,14-MAR-2002 13:16:16,,MAR,MAR
+DateTime.000104,4,17-jan-1990 13:32:01,,jan,jan
+DateTime.000104,5,31-Jan-2031-05:54:18,,Jan,
+DateTime.000108,0,Feb-14-Mar-2002 13:16:16,,,
+DateTime.000108,1,2002-Jan-2031 05:54:18,,,
+DateTime.000108,2,31-JAN-2031 05:54:18,,,
+DateTime.000108,3,31-jan-2031 05:54:18,,,
+DateTime.000108,4,14-Mar-2002 13:16:16-18,,,
+DateTime.000108,5,17-jan-1990 13:32:01,,,
+DateTime.000111,0,31-JAN-2031 05:54:18,,,
+DateTime.000111,1,14-Jan-2002 13:16:16,,,
+DateTime.000111,2,17-Jan-1990_13:32:01,,,
+DateTime.000111,3,31-Jan-2031-05:54:18,,,
+DateTime.000111,4,14-Feb-2034 05:36:07-17,,,
+DateTime.000111,5,31-Jan-2031_05:54:18,,,
+DateTime.000114,0,17-JAN-1990 13:32:01,,,
+DateTime.000114,1,17-Jan-1990 13:32:17,,,
+DateTime.000114,2,31-Jan-17 05:54:18,,,
+DateTime.000114,3,Feb:17-Jan-1990 13:32:01,,,
+DateTime.000114,4,14-Feb-2034-05:36:07,,,
+DateTime.000114,5,17-Jan-1990-13:32:01,,,
+DateTime.000115,0,17-Mar-1990 13:32:01,,0-20,0-20
+DateTime.000115,1,14-Mar-2002 13:16:16-18,,0-20,0-20
+DateTime.000115,2,Jan-17-Jan-1990 13:32:01,,0-20,0-20
+DateTime.000115,3,14-feb-2034 05:36:07,,0-20,0-20
+DateTime.000115,4,14-Feb-05 05:36:07,,0-20,0-20
+DateTime.000115,5,14-Mar-2002_13:16:16,,0-20,0-20
+DateTime.000116,0,14-Mar-2002 13:16:16:01,,,
+DateTime.000116,1,14-Jan-2034 05:36:07,,,
+DateTime.000116,2,14-feb-2034 05:36:07,,,
+DateTime.000116,3,14-mar-2002 13:16:16,,,
+DateTime.000116,4,17-Jan-1990 13:17:01,,,
+DateTime.000116,5,17-Jan-1990  13:32:01,,,
+FilePath.000001,0,/libero/quas/libero2.png,,libero2,libero2
+FilePath.000001,1,/Libero/Quas/Enim2.Png,,Enim2,Enim2
+FilePath.000001,2,/LIBERO/QUAS/ENIM2.PNG,,ENIM2,ENIM2
+FilePath.000001,3,/libero/enim4.png.4,,enim4.png,enim4.png
+FilePath.000001,4,enim./libero/quas/enim5.png,,enim5,enim5
+FilePath.000001,5,/LIBERO/QUAS/ENIM5.PNG,,ENIM5,ENIM5
+Gender.000001,0,F 2026,,,
+Gender.000001,1,M 07,,,
+Gender.000001,2,F-2026,,,
+Gender.000001,3,F/F,,,
+Gender.000001,4,F 12,,,
+Gender.000001,5,F_07,,,
+Language.000002,0,col0=Bosnian | col1=Bosnian.http://proseware.com/bs,,bs,bs
+Language.000002,1,col0=BULGARIAN | col1=http://proseware.com/bg,,bg,bg
+Language.000002,2,col0=bs:Bosnian | col1=http://proseware.com/bs,,bs,bs
+Language.000002,3,col0=bosnian | col1=http://proseware.com/bs,,bs,bs
+Language.000002,4,col0=Bosnian | col1=http://proseware.com/eu,,eu,eu
+Language.000002,5,col0=bs.Arabic | col1=http://proseware.com/ar,,ar,ar
+Name.000028,0,Bidisha-Snezhana Panigrahi-12,,Bidisha,Bidisha
+Name.000028,1,Artem Panigrahi,,Artem,Artem
+Name.000028,2,Artem Bidisha,,Artem,Artem
+Name.000028,3,Snorre-Artem Milanesi,,Snorre,Snorre
+Name.000028,4,maureen-snorre ndiaye,,maureen,maureen
+Name.000028,5,Maureen Maureen-Snorre Ndiaye,,Maureen,Maureen
+Number.000008,0,-3469-0877,,,
+Number.000008,1,Beta--3469,,,
+Number.000008,2,Delta-3533.0877,,,
+Number.000008,3,19039.5.7,,,
+Number.000008,4,3533.3533,,,
+Number.000008,5,Gamma-19039.5,,,
+Number.000015,0,5888-31732,,,
+Number.000015,1,31732-5888,,,
+Number.000015,2,-5783-31732,,,
+Number.000015,3,5816-5816,,,
+Number.000015,4,Alpha--5783,,,
+Number.000015,5,5783,,,
+Number.000016,0,914_1199,,,
+Number.000016,1,786:786,,,
+Number.000016,2,"Delta,913",,,
+Number.000016,3,786-786,,,
+Number.000016,4,Alpha_913,,,
+Number.000016,5,786_1199,,,
+Number.000022,0,17.66.66,,,
+Number.000022,1,Delta.13.38,,,
+Number.000022,2,Delta.12.33,,,
+Number.000022,3,12.01.01,,,
+Number.000022,4,Beta.12.33,,,
+Number.000022,5,17.17,,,
+Number.000028,0,Delta.12.5,,,
+Number.000028,1,Delta.2345.23292,,,
+Number.000028,2,2345.23292.23292,,,
+Number.000028,3,243.1.23292,,,
+Number.000028,4,243.1.1,,,
+Number.000028,5,Gamma.243.1,,,
+Number.000029,0,Beta/117,,,
+Number.000029,1,112:11112,,,
+Number.000029,2,Beta:112,,,
+Number.000029,3,"Beta,112",,,
+Number.000029,4,117/117,,,
+Number.000029,5,Gamma-112,,,
+Number.000043,0,Gamma/5/11,,,
+Number.000043,1,Gamma/23/9,,,
+Number.000043,2,26/4/8,,,
+Number.000043,3,11/11,,,
+Number.000043,4,8/26,,,
+Number.000043,5,23/4,,,
+Number.000049,0,954-954,,,
+Number.000049,1,"Delta,954",,,
+Number.000049,2,Beta 1321,,,
+Number.000049,3,954/234,,,
+Number.000049,4,Alpha:954,,,
+Number.000049,5,Alpha:234,,,
+Number.000075,0,3433.23292,,,
+Number.000075,1,243.5,,,
+Number.000075,2,3433,,,
+Number.000075,3,2345.23292.23292,,,
+Number.000075,4,Gamma.12.5,,,
+Number.000075,5,Delta.2345.23292,,,
+Number.000077,0,112-112,,110,110
+Number.000077,1,"117,112",,110,110
+Number.000077,2,Delta 117,,110,110
+Number.000077,3,Beta/112,,110,110
+Number.000077,4,Alpha 117,,110,110
+Number.000077,5,112 112,,110,110
+Phone.000008,0,"Jacqueline Martin     67 Ninth Boulevard,Guadalajara,OH,(319) 094-6012,000-08-3119,38891-69",,(319) 094-6012,(319) 094-6012
+Phone.000008,1,"aksel hedegaard     1234 pecan avenue,yangon,ny,(023) 966-2677,000-94-0933,03719",,(023) 966-2677,(023) 966-2677
+Phone.000008,2,"Bola Atanda         2345 Sixth Street,Cologne,WV,(479) 3866-0433,000-37-0076,41230",,(479) 3866-0433,(479) 3866-0433
+Phone.000008,3,"JACQUELINE MARTIN     67 NINTH BOULEVARD,GUADALAJARA,OH,(319) 094-6012,000-08-3119,38891",,(319) 094-6012,(319) 094-6012
+Phone.000008,4,"AKSEL HEDEGAARD     1234 PECAN AVENUE,YANGON,NY,(023) 966-2677,000-94-0933,03719",,(023) 966-2677,(023) 966-2677
+Phone.000008,5,"Jacqueline Martin     67 Ninth Boulevard,Guadalajara,Oh,(319) 094-6012,000-08-3119,38891",,(319) 094-6012,(319) 094-6012
+Phone.000011,0,875-259-4922-875,,875 259 4922 875,875 259 4922 875
+Phone.000011,1,065-965-0142-259,,065 965 0142 259,065 965 0142 259
+Phone.000011,2,875-649-4922,,875 649 4922,875 649 4922
+Phone.000011,3,Beta-649-089-6388,,Beta 649 089 6388,Beta 649 089 6388
+Phone.000011,4,Gamma-065-965-0142,,Gamma 065 965 0142,Gamma 065 965 0142
+Phone.000011,5,Gamma-649-089-6388,,Gamma 649 089 6388,Gamma 649 089 6388
+ShippingCode.000008,0,1Z-AI7-S7L-39-2136-908-9,,,
+ShippingCode.000008,1,1L AI7 S7L 39 2136 908 9,,,
+ShippingCode.000008,2,1z ai7 s7l 39 2136 908 9,,,
+ShippingCode.000008,3,1z 39v 80d 24 0712 870 8,,,
+ShippingCode.000008,4,1Z 39V 80D 24 0712 39 8,,,
+ShippingCode.000008,5,1Z 39V 80D 24 0712 870 8 870,,,
+UserAgent.000003,0,MFM-ROBOT/8.7.52-INTERNAL LZ224 OS 6.4.9,,,
+UserAgent.000003,1,mfm-robot/8.9.63-internal za659 os 6.5.0,,,
+UserAgent.000003,2,mfm-robot/8.7.52-internal lz224 os 6.4.9,,,
+UserAgent.000003,3,W-Robot/4.1.24-internal MF-W878 OS 6.6.2,,,
+UserAgent.000003,4,MFM-Robot/4.9.24-internal MF-W878 OS 6.6.2,,,
+UserAgent.000003,5,MFM-Robot/4.1.24-internal  MF-W878  OS  6.6.2,,,

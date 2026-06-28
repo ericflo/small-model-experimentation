@@ -1,0 +1,43 @@
+{
+  "adapter_dir": null,
+  "arm_name": "subset_base_hot_k4",
+  "count": 24,
+  "experiment": "qwen35_4b_sampler_portfolio_scheduler",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/subset_base_hot_k4_records.jsonl",
+  "records": {
+    "candidate_count_mean": 4.0,
+    "coverage": 0.5833333333333334,
+    "distinct_behavior_rate_mean": 0.875,
+    "distinct_functional_rate_mean": 0.5104166666666666,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 23434,
+    "hidden_pass_candidates_mean": 1.5416666666666667,
+    "parse_success_mean": 3.5416666666666665,
+    "pass1_proxy": 0.375,
+    "records": 24,
+    "visible_candidates_mean": 2.2083333333333335,
+    "visible_coverage": 0.5833333333333334,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "subset_eval",
+  "samples_per_task": 4,
+  "seed": 2026062624,
+  "split": "mbpp_test",
+  "temperatures": [
+    1.0
+  ],
+  "token_usage": {
+    "calls": 96,
+    "completion_tokens": 11454,
+    "forward_tokens": 23434,
+    "prompt_tokens": 11980
+  },
+  "top_p": 0.98,
+  "visible_tests": 1
+}

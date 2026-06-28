@@ -1,0 +1,9 @@
+suite,run,arm,seed,step,loss
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,1.9942630529403687
+smoke,smoke_v1_answer_only_s101,answer_only,101,2,1.324007511138916
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,1,1.853487253189087
+smoke,smoke_v1_trace_stack_final_s101,trace_stack_final,101,2,1.267824411392212
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,1,2.4314322471618652
+smoke,smoke_v1_trace_stack_no_final_s101,trace_stack_no_final,101,2,1.7203501462936401
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,2.4746391773223877
+smoke,smoke_v1_program_stack_s101,program_stack,101,2,1.7069190740585327

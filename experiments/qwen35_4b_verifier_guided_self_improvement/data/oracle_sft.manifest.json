@@ -1,0 +1,12 @@
+{
+  "examples": 80,
+  "hidden_positive_examples": 80,
+  "max_per_task": 1,
+  "mode": "oracle",
+  "out": "data/oracle_sft.jsonl",
+  "records": [
+    "data/base_train_records.jsonl"
+  ],
+  "source_records": 80,
+  "visible_positive_examples": 80
+}

@@ -1,0 +1,17 @@
+{
+  "run_name": "smoke_no_qwen",
+  "seed": 123,
+  "task_limit": 6,
+  "train_n": 4,
+  "heldout_cap": 3,
+  "min_examples": 5,
+  "min_heldout": 1,
+  "probes_per_task": 3,
+  "max_candidates": 400,
+  "max_new_tokens": 32,
+  "complexity_penalty": 0.05,
+  "existing_predictions": "/workspace/experiments/qwen_batched_transduction_consistency/runs/main_v2_prompt_iteration/row_details.csv",
+  "no_qwen": true,
+  "tasks": 6,
+  "created_utc": "2026-06-27T06:48:34.902383+00:00"
+}

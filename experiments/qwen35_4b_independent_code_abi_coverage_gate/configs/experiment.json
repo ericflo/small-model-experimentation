@@ -1,0 +1,47 @@
+{
+  "experiment": "qwen35_4b_independent_code_abi_coverage_gate",
+  "date": "2026-06-27",
+  "type": "no_training_coverage_gate",
+  "dataset": {
+    "source": "google-research-datasets/mbpp",
+    "calibration_split": "test",
+    "calibration_offset": 0,
+    "calibration_count": 160,
+    "heldout_split": "test",
+    "heldout_offset": 160,
+    "heldout_count": 160,
+    "visible_tests": 1,
+    "sweep_exclude_first": 160,
+    "sweep_sample_count": 160,
+    "sweep_seeds": [11, 17, 23]
+  },
+  "abi_policy": "frozen independent Python/stdlib-style primitive inventory; no post-heldout kernel additions",
+  "results": {
+    "calibration": {
+      "oracle_covered": 60,
+      "n": 160,
+      "oracle_coverage": 0.375
+    },
+    "heldout": {
+      "oracle_covered": 23,
+      "n": 160,
+      "oracle_coverage": 0.14375,
+      "covered_depth_counts": {
+        "1": 20,
+        "2": 3
+      }
+    },
+    "train": {
+      "oracle_covered": 73,
+      "n": 374,
+      "oracle_coverage": 0.19518716577540107
+    },
+    "heldout_sweep": {
+      "covered_counts": [30, 29, 29],
+      "coverage_values": [0.1875, 0.18125, 0.18125],
+      "mean_coverage": 0.18333333333333335
+    },
+    "decision": "do_not_train_compiler"
+  },
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_independent_code_abi_coverage_gate"
+}

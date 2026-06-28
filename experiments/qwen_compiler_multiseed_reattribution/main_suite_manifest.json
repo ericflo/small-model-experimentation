@@ -1,0 +1,82 @@
+{
+  "phase": "main",
+  "seeds": [
+    123,
+    456,
+    789
+  ],
+  "arms": [
+    "max24_curriculum",
+    "expand_copy",
+    "max24_no_curriculum"
+  ],
+  "overrides": {},
+  "started_at": "2026-06-24 23:30:35 UTC",
+  "runs": [
+    {
+      "run": "main_max24_curriculum_seed123",
+      "arm": "max24_curriculum",
+      "seed": 123,
+      "exit_code": 0,
+      "elapsed_sec": 2735.872
+    },
+    {
+      "run": "main_expand_copy_seed123",
+      "arm": "expand_copy",
+      "seed": 123,
+      "exit_code": 0,
+      "elapsed_sec": 1925.806
+    },
+    {
+      "run": "main_max24_no_curriculum_seed123",
+      "arm": "max24_no_curriculum",
+      "seed": 123,
+      "exit_code": 0,
+      "elapsed_sec": 2704.058
+    },
+    {
+      "run": "main_max24_curriculum_seed456",
+      "arm": "max24_curriculum",
+      "seed": 456,
+      "exit_code": 0,
+      "elapsed_sec": 2735.179
+    },
+    {
+      "run": "main_expand_copy_seed456",
+      "arm": "expand_copy",
+      "seed": 456,
+      "exit_code": 0,
+      "elapsed_sec": 1927.728
+    },
+    {
+      "run": "main_max24_no_curriculum_seed456",
+      "arm": "max24_no_curriculum",
+      "seed": 456,
+      "exit_code": 0,
+      "elapsed_sec": 2705.935
+    },
+    {
+      "run": "main_max24_curriculum_seed789",
+      "arm": "max24_curriculum",
+      "seed": 789,
+      "exit_code": 0,
+      "elapsed_sec": 2731.098
+    },
+    {
+      "run": "main_expand_copy_seed789",
+      "arm": "expand_copy",
+      "seed": 789,
+      "exit_code": 0,
+      "elapsed_sec": 1920.716
+    },
+    {
+      "run": "main_max24_no_curriculum_seed789",
+      "arm": "max24_no_curriculum",
+      "seed": 789,
+      "exit_code": 0,
+      "elapsed_sec": 2708.297
+    }
+  ],
+  "analysis_exit_code": 0,
+  "finished_at": "2026-06-25 05:38:54 UTC"
+}

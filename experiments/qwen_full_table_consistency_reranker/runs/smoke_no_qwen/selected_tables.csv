@@ -1,0 +1,37 @@
+task_id,method,candidate_id,source,row_exact,full_task_exact,score,outputs_json,family,features,heldout_rows,row_candidate_oracle,table_candidate_oracle,candidate_tables,row_candidate_median
+City.000010,heuristic,City.000010::cand0000,row_majority,0.0,False,-10.333333333333334,"["""", """", """"]",City,"Conditional,Numeric",3,False,False,1,0.0
+DateTime.000025,heuristic,DateTime.000025::cand0000,row_majority,0.0,False,-10.42,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+DateTime.000104,heuristic,DateTime.000104::cand0000,row_majority,0.0,False,-10.360000000000001,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+Number.000075,heuristic,Number.000075::cand0000,row_majority,0.0,False,-10.4,"["""", """", """", """"]",Number,"Concatenation,Numeric",4,False,False,1,0.0
+Number.000077,heuristic,Number.000077::cand0000,row_majority,0.0,False,-10.360000000000001,"["""", """", """"]",Number,"Numeric,NumericRounding",3,False,False,1,0.0
+UserAgent.000003,heuristic,UserAgent.000003::cand0000,row_majority,0.0,False,-10.42,"["""", """", """", """"]",UserAgent,Substring,4,False,False,1,0.0
+City.000010,direct_row_greedy,City.000010::cand0000,row_majority,0.0,False,0.0,"["""", """", """"]",City,"Conditional,Numeric",3,False,False,1,0.0
+DateTime.000025,direct_row_greedy,DateTime.000025::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+DateTime.000104,direct_row_greedy,DateTime.000104::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+Number.000075,direct_row_greedy,Number.000075::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",Number,"Concatenation,Numeric",4,False,False,1,0.0
+Number.000077,direct_row_greedy,Number.000077::cand0000,row_majority,0.0,False,0.0,"["""", """", """"]",Number,"Numeric,NumericRounding",3,False,False,1,0.0
+UserAgent.000003,direct_row_greedy,UserAgent.000003::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",UserAgent,Substring,4,False,False,1,0.0
+City.000010,row_majority,City.000010::cand0000,row_majority,0.0,False,0.0,"["""", """", """"]",City,"Conditional,Numeric",3,False,False,1,0.0
+DateTime.000025,row_majority,DateTime.000025::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+DateTime.000104,row_majority,DateTime.000104::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+Number.000075,row_majority,Number.000075::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",Number,"Concatenation,Numeric",4,False,False,1,0.0
+Number.000077,row_majority,Number.000077::cand0000,row_majority,0.0,False,0.0,"["""", """", """"]",Number,"Numeric,NumericRounding",3,False,False,1,0.0
+UserAgent.000003,row_majority,UserAgent.000003::cand0000,row_majority,0.0,False,0.0,"["""", """", """", """"]",UserAgent,Substring,4,False,False,1,0.0
+City.000010,table_oracle,City.000010::cand0000,row_majority,0.0,False,1.0,"["""", """", """"]",City,"Conditional,Numeric",3,False,False,1,0.0
+DateTime.000025,table_oracle,DateTime.000025::cand0000,row_majority,0.0,False,1.0,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+DateTime.000104,table_oracle,DateTime.000104::cand0000,row_majority,0.0,False,1.0,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+Number.000075,table_oracle,Number.000075::cand0000,row_majority,0.0,False,1.0,"["""", """", """", """"]",Number,"Concatenation,Numeric",4,False,False,1,0.0
+Number.000077,table_oracle,Number.000077::cand0000,row_majority,0.0,False,1.0,"["""", """", """"]",Number,"Numeric,NumericRounding",3,False,False,1,0.0
+UserAgent.000003,table_oracle,UserAgent.000003::cand0000,row_majority,0.0,False,1.0,"["""", """", """", """"]",UserAgent,Substring,4,False,False,1,0.0
+City.000010,learned_reranker,City.000010::cand0000,row_majority,0.0,False,-10.333333333333334,"["""", """", """"]",City,"Conditional,Numeric",3,False,False,1,0.0
+DateTime.000025,learned_reranker,DateTime.000025::cand0000,row_majority,0.0,False,-10.42,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+DateTime.000104,learned_reranker,DateTime.000104::cand0000,row_majority,0.0,False,-10.360000000000001,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+Number.000075,learned_reranker,Number.000075::cand0000,row_majority,0.0,False,-10.4,"["""", """", """", """"]",Number,"Concatenation,Numeric",4,False,False,1,0.0
+Number.000077,learned_reranker,Number.000077::cand0000,row_majority,0.0,False,-10.360000000000001,"["""", """", """"]",Number,"Numeric,NumericRounding",3,False,False,1,0.0
+UserAgent.000003,learned_reranker,UserAgent.000003::cand0000,row_majority,0.0,False,-10.42,"["""", """", """", """"]",UserAgent,Substring,4,False,False,1,0.0
+City.000010,shuffled_label_reranker,City.000010::cand0000,row_majority,0.0,False,-10.333333333333334,"["""", """", """"]",City,"Conditional,Numeric",3,False,False,1,0.0
+DateTime.000025,shuffled_label_reranker,DateTime.000025::cand0000,row_majority,0.0,False,-10.42,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+DateTime.000104,shuffled_label_reranker,DateTime.000104::cand0000,row_majority,0.0,False,-10.360000000000001,"["""", """", """", """"]",DateTime,DateTime,4,False,False,1,0.0
+Number.000075,shuffled_label_reranker,Number.000075::cand0000,row_majority,0.0,False,-10.4,"["""", """", """", """"]",Number,"Concatenation,Numeric",4,False,False,1,0.0
+Number.000077,shuffled_label_reranker,Number.000077::cand0000,row_majority,0.0,False,-10.360000000000001,"["""", """", """"]",Number,"Numeric,NumericRounding",3,False,False,1,0.0
+UserAgent.000003,shuffled_label_reranker,UserAgent.000003::cand0000,row_majority,0.0,False,-10.42,"["""", """", """", """"]",UserAgent,Substring,4,False,False,1,0.0

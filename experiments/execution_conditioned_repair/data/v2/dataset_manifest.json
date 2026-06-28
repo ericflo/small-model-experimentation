@@ -1,0 +1,134 @@
+{
+  "bug_families": {
+    "case_normalization": 50,
+    "comparison_flip": 50,
+    "exception_case": 50,
+    "normalization": 50,
+    "off_by_one": 50,
+    "ordering": 50,
+    "path_norm": 15,
+    "tie_breaking": 12
+  },
+  "dataset": "local_synthetic_python_v2",
+  "failure_classes": {
+    "assertion": 66,
+    "import": 66,
+    "syntax": 66,
+    "visible_pass_hidden_fail": 129
+  },
+  "heldout_families": [
+    "path_norm",
+    "tie_breaking"
+  ],
+  "notes": [
+    "Container-free executable synthetic expansion.",
+    "Train split uses six parameterized bug families.",
+    "Validation includes both same-family IID tasks and held-out-family tasks.",
+    "Every target_next_diff is computed from the wrong-patched source state to the clean source state."
+  ],
+  "num_episodes": 327,
+  "num_skipped": 3,
+  "num_tasks": 66,
+  "skipped": [
+    {
+      "episode_id": "val_synth_family_holdout_top_k_0::near_miss",
+      "reason": "wrong patch already passes hidden tests"
+    },
+    {
+      "episode_id": "val_synth_family_holdout_top_k_1::near_miss",
+      "reason": "wrong patch already passes hidden tests"
+    },
+    {
+      "episode_id": "val_synth_family_holdout_top_k_2::near_miss",
+      "reason": "wrong patch already passes hidden tests"
+    }
+  ],
+  "splits": {
+    "train": 240,
+    "val_synth_family_holdout": 27,
+    "val_synth_iid": 60
+  },
+  "task_ids": [
+    "train_clamp_0",
+    "train_clamp_1",
+    "train_clamp_2",
+    "train_clamp_3",
+    "train_clamp_4",
+    "train_clamp_5",
+    "train_clamp_6",
+    "train_clamp_7",
+    "train_dedupe_0",
+    "train_dedupe_1",
+    "train_dedupe_2",
+    "train_dedupe_3",
+    "train_dedupe_4",
+    "train_dedupe_5",
+    "train_dedupe_6",
+    "train_dedupe_7",
+    "train_moving_average_0",
+    "train_moving_average_1",
+    "train_moving_average_2",
+    "train_moving_average_3",
+    "train_moving_average_4",
+    "train_moving_average_5",
+    "train_moving_average_6",
+    "train_moving_average_7",
+    "train_parse_bool_0",
+    "train_parse_bool_1",
+    "train_parse_bool_2",
+    "train_parse_bool_3",
+    "train_parse_bool_4",
+    "train_parse_bool_5",
+    "train_parse_bool_6",
+    "train_parse_bool_7",
+    "train_safe_get_0",
+    "train_safe_get_1",
+    "train_safe_get_2",
+    "train_safe_get_3",
+    "train_safe_get_4",
+    "train_safe_get_5",
+    "train_safe_get_6",
+    "train_safe_get_7",
+    "train_slugify_0",
+    "train_slugify_1",
+    "train_slugify_2",
+    "train_slugify_3",
+    "train_slugify_4",
+    "train_slugify_5",
+    "train_slugify_6",
+    "train_slugify_7",
+    "val_synth_family_holdout_normalize_path_0",
+    "val_synth_family_holdout_normalize_path_1",
+    "val_synth_family_holdout_normalize_path_2",
+    "val_synth_family_holdout_top_k_0",
+    "val_synth_family_holdout_top_k_1",
+    "val_synth_family_holdout_top_k_2",
+    "val_synth_iid_clamp_8",
+    "val_synth_iid_clamp_9",
+    "val_synth_iid_dedupe_8",
+    "val_synth_iid_dedupe_9",
+    "val_synth_iid_moving_average_8",
+    "val_synth_iid_moving_average_9",
+    "val_synth_iid_parse_bool_8",
+    "val_synth_iid_parse_bool_9",
+    "val_synth_iid_safe_get_8",
+    "val_synth_iid_safe_get_9",
+    "val_synth_iid_slugify_8",
+    "val_synth_iid_slugify_9"
+  ],
+  "train_families": [
+    "comparison_flip",
+    "case_normalization",
+    "off_by_one",
+    "ordering",
+    "exception_case",
+    "normalization"
+  ],
+  "wrong_patch_variants": {
+    "import_error": 66,
+    "near_miss": 63,
+    "syntax_error": 66,
+    "visible_overfit": 66,
+    "wrong_localization": 66
+  }
+}

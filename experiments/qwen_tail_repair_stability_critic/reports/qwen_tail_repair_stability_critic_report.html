@@ -1,0 +1,86 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Tail Repair Stability Critic</title>
+<style>body{font-family:Inter,Arial,sans-serif;max-width:1040px;margin:32px auto;line-height:1.45;color:#1f2933}table{border-collapse:collapse;font-size:12.5px;margin:12px 0}td,th{border:1px solid #cfd8dc;padding:5px 7px}th{background:#eef3f7}code{background:#f4f6f8;padding:1px 4px;border-radius:4px}img{max-width:100%;border:1px solid #d8dee6;margin:14px 0}</style>
+</head><body><h1>Qwen Tail Repair Stability Critic Report</h1>
+<h2>Summary</h2>
+<p>This standalone experiment tested whether a learned tail-repair critic can stabilize length-24 executable modular programs. The result is a clear negative for the tested critic class.</p>
+<p>The candidate set had a large oracle ceiling: on <code>standard_L24</code>, no repair achieved 44.8%, while the best answer-oracle candidate reached 91.1%. However, both learned critic variants selected the no-repair base program on every standard example selected by their best validation checkpoint. The stability gate failed: mean accuracy stayed at 44.8% and source-seed standard deviation stayed at 44.6%.</p>
+<h2>Experimental Setup</h2>
+<p>Three frozen source compiler snapshots generated length-24 modular programs under modulus <code>97</code>. For each generated program, the experiment enumerated local edits in the last eight slots. Candidate labels were computed offline by exact execution, but learned critics could only use non-target features at selection time.</p>
+<p>Two learned critic iterations were run:</p>
+<p>&bull; `v1_unweighted`: aggregate candidate features plus frozen Qwen context, trained on all groups with answer and state labels.</p>
+<p>&bull; `v2_focused`: adds explicit tail-slot candidate details and trains only the answer critic on a recovery-balanced subset, with checkpoint selection penalizing damage.</p>
+<p>Controls:</p>
+<p>&bull; `base`: no repair.</p>
+<p>&bull; `oracle_answer`: highest-prior candidate that executes to the correct final answer.</p>
+<p>&bull; `oracle_state`: highest-prior candidate with exact state trajectory.</p>
+<p>&bull; `shuffled_answer` / `shuffled_state`: same training pipeline with randomized labels.</p>
+<h2>Candidate Coverage</h2>
+<table>
+<tr><th>split</th><th>groups</th><th>avg_candidates</th><th>answer_positive_fraction</th><th>state_positive_fraction</th><th>base_executor_accuracy</th></tr>
+<tr><td>heldout_L24</td><td>192</td><td>177</td><td>88.0%</td><td>46.9%</td><td>40.1%</td></tr>
+<tr><td>paired_L24</td><td>192</td><td>177</td><td>94.3%</td><td>67.7%</td><td>66.7%</td></tr>
+<tr><td>paired_heldout_L24</td><td>192</td><td>177</td><td>90.1%</td><td>42.2%</td><td>35.4%</td></tr>
+<tr><td>paraphrase_L24</td><td>192</td><td>177</td><td>99.0%</td><td>85.4%</td><td>85.4%</td></tr>
+<tr><td>standard_L24</td><td>192</td><td>177</td><td>91.1%</td><td>50.0%</td><td>44.8%</td></tr>
+<tr><td>train_mixed_L24</td><td>480</td><td>177</td><td>98.8%</td><td>89.2%</td><td>88.5%</td></tr>
+<tr><td>val_mixed_L24</td><td>144</td><td>177</td><td>97.2%</td><td>86.1%</td><td>86.1%</td></tr>
+</table>
+<p>The key fact is that coverage is not the bottleneck for final-answer repair: <code>standard_L24</code> has answer-positive candidates for 91.1% of groups. State-exact repair is harder at 50.0%, but still nontrivial.</p>
+<h2>Stability Gate</h2>
+<table>
+<tr><th>run_key</th><th>arm</th><th>critic_seed</th><th>source_seed_count</th><th>mean_executor_accuracy</th><th>std_executor_accuracy</th><th>min_executor_accuracy</th><th>max_executor_accuracy</th><th>mean_changed_fraction</th><th>mean_damage_rate</th><th>mean_recovery_rate</th></tr>
+<tr><td>v1_unweighted</td><td>base</td><td>-1</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v1_unweighted</td><td>critic_answer</td><td>101</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v1_unweighted</td><td>critic_answer</td><td>202</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v1_unweighted</td><td>critic_answer</td><td>303</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v1_unweighted</td><td>critic_state</td><td>101</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v1_unweighted</td><td>critic_state</td><td>202</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v1_unweighted</td><td>critic_state</td><td>303</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v1_unweighted</td><td>oracle_answer</td><td>-1</td><td>3</td><td>91.1%</td><td>11.3%</td><td>78.1%</td><td>98.4%</td><td>46.4%</td><td>0.0%</td><td>85.2%</td></tr>
+<tr><td>v1_unweighted</td><td>oracle_state</td><td>-1</td><td>3</td><td>50.5%</td><td>47.7%</td><td>1.6%</td><td>96.9%</td><td>5.7%</td><td>0.0%</td><td>28.5%</td></tr>
+<tr><td>v2_focused</td><td>critic_answer</td><td>101</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v2_focused</td><td>critic_answer</td><td>202</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v2_focused</td><td>critic_answer</td><td>303</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v2_focused</td><td>shuffled_answer</td><td>101</td><td>3</td><td>29.2%</td><td>49.2%</td><td>0.0%</td><td>85.9%</td><td>38.5%</td><td>35.1%</td><td>0.0%</td></tr>
+<tr><td>v2_focused</td><td>shuffled_answer</td><td>202</td><td>3</td><td>44.8%</td><td>44.6%</td><td>1.6%</td><td>90.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>v2_focused</td><td>shuffled_answer</td><td>303</td><td>3</td><td>17.2%</td><td>27.1%</td><td>1.6%</td><td>48.4%</td><td>50.0%</td><td>47.6%</td><td>0.0%</td></tr>
+</table>
+<img alt='Standard L24 stability gate' src='figures/combined_standard_gate.png'>
+<p>The learned true-label critics did not improve mean accuracy or reduce spread. In v1, the selected true critics made zero changes. In v2, focused training learned to make edits during training, but the best validation checkpoint was still the no-change checkpoint for all three true critic seeds.</p>
+<h2>Split Results</h2>
+<table>
+<tr><th>split</th><th>run_key</th><th>arm</th><th>mean_executor_accuracy</th><th>std_executor_accuracy</th><th>mean_changed_fraction</th><th>mean_damage_rate</th><th>mean_recovery_rate</th></tr>
+<tr><td>standard_L24</td><td>v1_unweighted</td><td>base</td><td>44.8%</td><td>44.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>standard_L24</td><td>v2_focused</td><td>critic_answer</td><td>44.8%</td><td>44.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>standard_L24</td><td>v2_focused</td><td>shuffled_answer</td><td>30.4%</td><td>40.3%</td><td>29.5%</td><td>27.6%</td><td>0.0%</td></tr>
+<tr><td>standard_L24</td><td>v1_unweighted</td><td>oracle_answer</td><td>91.1%</td><td>11.3%</td><td>46.4%</td><td>0.0%</td><td>85.2%</td></tr>
+<tr><td>heldout_L24</td><td>v1_unweighted</td><td>base</td><td>40.1%</td><td>38.5%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>heldout_L24</td><td>v2_focused</td><td>critic_answer</td><td>40.1%</td><td>38.5%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>heldout_L24</td><td>v2_focused</td><td>shuffled_answer</td><td>31.2%</td><td>35.5%</td><td>43.2%</td><td>36.6%</td><td>0.4%</td></tr>
+<tr><td>heldout_L24</td><td>v1_unweighted</td><td>oracle_answer</td><td>88.0%</td><td>10.2%</td><td>47.9%</td><td>0.0%</td><td>82.5%</td></tr>
+<tr><td>paired_L24</td><td>v1_unweighted</td><td>base</td><td>66.7%</td><td>28.2%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>paired_L24</td><td>v2_focused</td><td>critic_answer</td><td>66.7%</td><td>28.2%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>paired_L24</td><td>v2_focused</td><td>shuffled_answer</td><td>41.3%</td><td>37.7%</td><td>36.6%</td><td>42.2%</td><td>0.0%</td></tr>
+<tr><td>paired_L24</td><td>v1_unweighted</td><td>oracle_answer</td><td>94.3%</td><td>7.4%</td><td>27.6%</td><td>0.0%</td><td>89.2%</td></tr>
+<tr><td>paired_heldout_L24</td><td>v1_unweighted</td><td>base</td><td>35.4%</td><td>34.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>paired_heldout_L24</td><td>v2_focused</td><td>critic_answer</td><td>35.4%</td><td>34.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>paired_heldout_L24</td><td>v2_focused</td><td>shuffled_answer</td><td>25.0%</td><td>31.9%</td><td>38.7%</td><td>37.9%</td><td>0.2%</td></tr>
+<tr><td>paired_heldout_L24</td><td>v1_unweighted</td><td>oracle_answer</td><td>90.1%</td><td>7.4%</td><td>54.7%</td><td>0.0%</td><td>86.6%</td></tr>
+</table>
+<img alt='Reachability by split' src='figures/recoverability_by_split.png'>
+<p>The oracle gap is large on every split. The learned focused critic does not close it.</p>
+<h2>Repair Behavior</h2>
+<img alt='V2 repair behavior' src='figures/v2_repair_behavior_standard.png'>
+<img alt='V2 validation curves' src='figures/v2_validation_curves.png'>
+<p>The v2 shuffled control is destructive, which confirms that the control is active. The true focused critic avoids that collapse, but it does so by falling back to no repair rather than by learning safe recovery. Later epochs make more edits, but validation accuracy falls because damage outpaces recovery.</p>
+<h2>Interpretation</h2>
+<p>The experiment separates reachability from selection. Tail-local candidate enumeration can often recover the right final answer, especially on the weak source seeds. The learned critic tested here cannot reliably identify those recoveries from frozen context plus candidate features.</p>
+<p>The failure is not that the tail-repair idea has no ceiling. The failure is that this critic is not grounded enough in the prompt-program relation. Aggregate features were insufficient, and even explicit tail-slot details plus recovery-focused training did not produce a deployable selector.</p>
+<h2>Next Diagnostic</h2>
+<p>The next version should score each candidate with a real candidate-conditioned forward pass: prompt plus dense candidate program/trace representation into Qwen, then a scalar value head. The scorer needs to compare the concrete candidate program against the prompt, not infer correctness from summary statistics around the source compiler logits.</p>
+<h2>Artifacts</h2>
+<p>&bull; Experiment root: `/workspace/experiments/qwen_tail_repair_stability_critic/`</p>
+<p>&bull; Large artifacts: `/workspace/large_artifacts/qwen_tail_repair_stability_critic/`</p>
+<p>&bull; Main v1 run: `/workspace/experiments/qwen_tail_repair_stability_critic/runs/main_tail_repair_critic_v1/`</p>
+<p>&bull; Main v2 run: `/workspace/experiments/qwen_tail_repair_stability_critic/runs/main_tail_repair_critic_focus_v2/`</p>
+<p>&bull; Combined summary CSV: `/workspace/experiments/qwen_tail_repair_stability_critic/reports/combined_summary_by_source_seed.csv`</p></body></html>

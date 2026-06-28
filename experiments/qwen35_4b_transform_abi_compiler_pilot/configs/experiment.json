@@ -1,0 +1,18 @@
+{
+  "experiment": "qwen35_4b_transform_abi_compiler_pilot",
+  "date": "2026-06-27",
+  "model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_transform_abi_compiler_pilot",
+  "compiler_surface": "constrained_candidate_scoring",
+  "max_program_depth": 3,
+  "train_records": 180,
+  "validation_records": 40,
+  "eval_records": 48,
+  "primary_metrics": [
+    "filtered_execution_accuracy",
+    "depth_1_selection_accuracy",
+    "depth_2_plus_composition_accuracy",
+    "base_vs_lora_delta",
+    "first_visible_baseline"
+  ]
+}

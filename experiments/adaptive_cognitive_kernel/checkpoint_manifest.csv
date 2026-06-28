@@ -1,0 +1,7 @@
+run,checkpoint_dir,notes
+smoke_ack_v1,large_artifacts/adaptive_cognitive_kernel/checkpoints/smoke_ack_v1,initial code-path smoke
+pilot_ack_v1,large_artifacts/adaptive_cognitive_kernel/checkpoints/pilot_ack_v1,finite-dataset pilot; showed memorization risk
+pilot_ack_long_v2,large_artifacts/adaptive_cognitive_kernel/checkpoints/pilot_ack_long_v2,long finite-dataset pilot; confirmed memorization risk
+pilot_ack_online_v3,large_artifacts/adaptive_cognitive_kernel/checkpoints/pilot_ack_online_v3,online-training pilot for ACK versus fixed GRU
+pilot_ack_drive_v4,large_artifacts/adaptive_cognitive_kernel/checkpoints/pilot_ack_drive_v4,operation-drive ACK pilot with no-delta ablation
+main_ack_v1,large_artifacts/adaptive_cognitive_kernel/checkpoints/main_ack_v1,three-seed full ablation main run

@@ -1,0 +1,8 @@
+condition,failures,family,file,hidden_pass_rate,median_generation_seconds,patch_apply_rate,records,repair@1,successes,syntax_valid_rate,target_added_line_match_rate,target_marker_presence_rate,visible_input_literal_rate,visible_pass_rate
+"Trace SFT + trace / IID","4","affine_int","final_trace_lora_trace_iid.json","0.7333333333333333","5.220176458358765","1.0","15","0.7333333333333333","11","1.0","0.7333333333333333","0.8666666666666667","0.6666666666666666","0.7333333333333333"
+"Trace SFT + trace / IID","0","slug_affix","final_trace_lora_trace_iid.json","1.0","11.199026107788086","1.0","15","1.0","15","1.0","1.0","1.0","0.0","1.0"
+"Trace SFT + trace / IID","0","threshold_label","final_trace_lora_trace_iid.json","1.0","8.491729974746704","1.0","15","1.0","15","1.0","1.0","1.0","1.0","1.0"
+"Trace SFT + trace / Format holdout","15","affine_int","final_trace_lora_trace_format_holdout.json","0.0","5.144287109375","1.0","15","0.0","0","1.0","0.0","0.13333333333333333","1.0","0.0"
+"Trace SFT + trace / Format holdout","6","slug_affix","final_trace_lora_trace_format_holdout.json","0.6","10.249844551086426","1.0","15","0.6","9","0.8","0.6","0.9333333333333333","0.0","0.6"
+"Trace SFT + trace / Format holdout","0","threshold_label","final_trace_lora_trace_format_holdout.json","1.0","8.151706457138062","1.0","15","1.0","15","1.0","1.0","1.0","1.0","1.0"
+"Trace SFT + trace / Rule-family holdout","45","parity_offset_holdout","final_trace_lora_trace_rule_holdout.json","0.0","8.047621726989746","1.0","45","0.0","0","1.0","0.0","0.06666666666666667","1.0","0.0"

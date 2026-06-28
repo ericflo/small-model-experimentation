@@ -1,0 +1,64 @@
+[command] /usr/local/bin/python /workspace/experiments/qwen_compiler_multiseed_reattribution/src/qwen_compiler_multiseed_reattribution.py --model_id Qwen/Qwen3-4B --modulus 97 --train_examples 512 --eval_examples 64 --paired_eval_pairs 32 --batch_size 8 --grad_accum 1 --eval_batch_size 8 --max_length 2048 --head_width 512 --compiler_layers 1 --compiler_heads 4 --compiler_dropout 0.05 --expansion_noise 0.005 --trace_loss_weight 1.0 --executor_loss_weight 1.0 --state_loss_weight 1.0 --init_trace_loss_weight 4.0 --op_trace_loss_weight 1.0 --arg_trace_loss_weight 4.0 --direct_head_weight 0.0 --lr 2e-4 --weight_decay 0.0 --optimizer paged_adamw_8bit --max_grad_norm 1.0 --torch_dtype bf16 --load_in_4bit 1 --device_map auto --use_lora 1 --gradient_checkpointing 1 --lora_r 8 --lora_alpha 16 --lora_dropout 0.05 --lora_target_modules all-linear --log_interval 50 --save_checkpoints 1 --selection_split paired_L24 --selection_metric executor_pair_both_correct --eval_lengths 8,16,24 --train_template_mode mixed --stage_max_steps 24 --stage_min_lengths 1 --stage_train_max_lengths 24 --stage_steps 750 --expansion_mode copy_last --run_name main_max24_no_curriculum_seed789 --arm max24_no_curriculum --seed 789
+[load] Loading Qwen/Qwen3-4B with AutoModelForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights:   1%|          | 3/398 [00:00<00:17, 23.03it/s]
+Loading weights:  10%|▉         | 38/398 [00:00<00:01, 191.69it/s]
+Loading weights:  18%|█▊        | 70/398 [00:00<00:01, 239.38it/s]
+Loading weights:  24%|██▍       | 96/398 [00:00<00:01, 239.21it/s]
+Loading weights:  31%|███       | 124/398 [00:00<00:01, 247.73it/s]
+Loading weights:  38%|███▊      | 150/398 [00:00<00:01, 239.75it/s]
+Loading weights:  44%|████▍     | 176/398 [00:00<00:00, 243.37it/s]
+Loading weights:  51%|█████     | 201/398 [00:00<00:00, 241.02it/s]
+Loading weights:  57%|█████▋    | 226/398 [00:00<00:00, 233.57it/s]
+Loading weights:  64%|██████▎   | 253/398 [00:01<00:00, 241.59it/s]
+Loading weights:  73%|███████▎  | 289/398 [00:01<00:00, 273.77it/s]
+Loading weights:  81%|████████▏ | 324/398 [00:01<00:00, 295.18it/s]
+Loading weights:  90%|████████▉ | 357/398 [00:01<00:00, 300.90it/s]
+Loading weights:  98%|█████████▊| 390/398 [00:01<00:00, 300.93it/s]
+Loading weights: 100%|██████████| 398/398 [00:01<00:00, 260.20it/s]
+trainable params: 16,515,072 || all params: 4,038,983,168 || trainable%: 0.4089
+/usr/local/lib/python3.12/dist-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+[stage] stage1_max24 event=init train_len=1..24 examples=512 steps=750
+/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+[train] stage1_max24 1/750 g=1 loss=47.0349 exec=4.5803 state_acc=0.026
+[train] stage1_max24 50/750 g=50 loss=41.6364 exec=4.5748 state_acc=0.000
+[train] stage1_max24 100/750 g=100 loss=32.2212 exec=4.5749 state_acc=0.000
+[train] stage1_max24 150/750 g=150 loss=18.2576 exec=4.5721 state_acc=0.315
+[train] stage1_max24 200/750 g=200 loss=1.4278 exec=0.1868 state_acc=0.990
+[train] stage1_max24 250/750 g=250 loss=1.7766 exec=1.1536 state_acc=0.984
+[train] stage1_max24 300/750 g=300 loss=0.1152 exec=0.0247 state_acc=1.000
+[train] stage1_max24 350/750 g=350 loss=0.0206 exec=0.0040 state_acc=1.000
+[train] stage1_max24 400/750 g=400 loss=0.0046 exec=0.0010 state_acc=1.000
+[train] stage1_max24 450/750 g=450 loss=0.0199 exec=0.0042 state_acc=1.000
+[train] stage1_max24 500/750 g=500 loss=0.0085 exec=0.0045 state_acc=1.000
+[train] stage1_max24 550/750 g=550 loss=0.0017 exec=0.0004 state_acc=1.000
+[train] stage1_max24 600/750 g=600 loss=11.6895 exec=4.9835 state_acc=0.788
+[train] stage1_max24 650/750 g=650 loss=0.0044 exec=0.0014 state_acc=1.000
+[train] stage1_max24 700/750 g=700 loss=0.1356 exec=0.1098 state_acc=1.000
+[train] stage1_max24 750/750 g=750 loss=3.8154 exec=1.8098 state_acc=0.870
+[eval] stage1_max24 standard_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage1_max24 paraphrase_L8: executor=0.984 program=0.984 prefix=0.984
+[eval] stage1_max24 heldout_L8: executor=0.922 program=0.922 prefix=0.947
+[eval] stage1_max24 paired_L8: executor=1.000 program=1.000 prefix=1.000
+[eval] stage1_max24 paired_heldout_L8: executor=0.906 program=0.906 prefix=0.914
+[eval] stage1_max24 standard_L16: executor=0.969 program=0.969 prefix=0.969
+[eval] stage1_max24 paraphrase_L16: executor=0.984 program=0.984 prefix=0.984
+[eval] stage1_max24 heldout_L16: executor=0.906 program=0.906 prefix=0.919
+[eval] stage1_max24 paired_L16: executor=0.984 program=0.984 prefix=0.998
+[eval] stage1_max24 paired_heldout_L16: executor=0.953 program=0.953 prefix=0.962
+[eval] stage1_max24 standard_L24: executor=0.016 program=0.000 prefix=0.688
+[eval] stage1_max24 paraphrase_L24: executor=0.000 program=0.000 prefix=0.775
+[eval] stage1_max24 heldout_L24: executor=0.000 program=0.000 prefix=0.708
+[eval] stage1_max24 paired_L24: executor=0.000 program=0.000 prefix=0.733
+[eval] stage1_max24 paired_heldout_L24: executor=0.000 program=0.000 prefix=0.660
+{
+  "run": "main_max24_no_curriculum_seed789",
+  "elapsed_sec": 2694.57,
+  "metrics_rows": 15
+}
+
+[exit] 0

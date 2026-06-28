@@ -1,0 +1,80 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Crystallized Trace ABI Tournament</title><style>
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 36px auto; max-width: 1120px; line-height: 1.5; color: #202124; }
+    h1, h2 { line-height: 1.15; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 14px; }
+    th, td { border: 1px solid #d4d7dc; padding: 7px 9px; text-align: left; }
+    th { background: #f2f4f7; }
+    img { max-width: 100%; border: 1px solid #d4d7dc; }
+    figure { margin: 24px 0; }
+    figcaption { color: #5f6368; font-size: 13px; margin-top: 6px; }
+    li { margin: 4px 0; }
+    code { background: #f2f4f7; padding: 1px 4px; border-radius: 4px; }
+    </style></head><body><h1>Qwen Crystallized Trace ABI Tournament</h1>
+
+<h2>Abstract</h2>
+
+<p>This experiment tests whether a local 4B language model learns practical deterministic procedures better when supervised with compact executable traces instead of final answers alone. The same generated tasks are rendered through four output ABIs: final-answer text, Python-like trace, JSON IR, and stack-style IR. Each trained arm uses the same QLoRA budget and is evaluated on fresh values, unseen operation compositions, and template-shifted prompts.</p>
+
+<h2>Method</h2>
+
+<p>The task factory creates examples from four families: string normalization, unit conversion, lookup-table calculation, and date arithmetic. Every example has a deterministic answer and a gold procedural rendering for each ABI. Evaluation uses greedy generation and exact matching of the parsed `FINAL` value.</p>
+
+<h2>Run Configuration</h2>
+
+<li>Primary suite: `main`.</li>
+<li>Adapter seeds: `101,202`.</li>
+<li>QLoRA update steps per adapter: `48`.</li>
+<li>Total trained-arm evaluation examples: `eval_composition`=192, `eval_indist`=192, `eval_template_shift`=192.</li>
+<li>Output ABIs: `answer`, `python`, `json`, and `stack`.</li>
+
+<h2>Primary Results</h2>
+
+<li>Best fresh-value arm: `python` at 93.8%.</li>
+<li>Best unseen-composition arm: `python` at 39.6%.</li>
+<li>Best template-shift arm: `answer` at 89.6%.</li>
+<li>Primary suite summarized below: `main`.</li>
+
+<table>
+<tr><th>suite</th><th>arm</th><th>split</th><th>runs</th><th>n_total</th><th>accuracy_mean</th><th>accuracy_std</th><th>valid_mean</th><th>tokens_mean</th></tr>
+<tr><td>main</td><td>python</td><td>eval_composition</td><td>2</td><td>48</td><td>39.6%</td><td>2.9%</td><td>100.0%</td><td>44.60</td></tr>
+<tr><td>main</td><td>answer</td><td>eval_composition</td><td>2</td><td>48</td><td>33.3%</td><td>0.0%</td><td>100.0%</td><td>9.60</td></tr>
+<tr><td>main</td><td>stack</td><td>eval_composition</td><td>2</td><td>48</td><td>29.2%</td><td>11.8%</td><td>100.0%</td><td>31.94</td></tr>
+<tr><td>main</td><td>json</td><td>eval_composition</td><td>2</td><td>48</td><td>12.5%</td><td>5.9%</td><td>68.8%</td><td>63.88</td></tr>
+<tr><td>main</td><td>zero_shot_answer</td><td>eval_composition</td><td>1</td><td>24</td><td>0.0%</td><td>0.0%</td><td>20.8%</td><td>32.00</td></tr>
+<tr><td>main</td><td>python</td><td>eval_indist</td><td>2</td><td>48</td><td>93.8%</td><td>2.9%</td><td>100.0%</td><td>37.25</td></tr>
+<tr><td>main</td><td>stack</td><td>eval_indist</td><td>2</td><td>48</td><td>93.8%</td><td>2.9%</td><td>100.0%</td><td>29.08</td></tr>
+<tr><td>main</td><td>answer</td><td>eval_indist</td><td>2</td><td>48</td><td>91.7%</td><td>5.9%</td><td>100.0%</td><td>9.73</td></tr>
+<tr><td>main</td><td>json</td><td>eval_indist</td><td>2</td><td>48</td><td>25.0%</td><td>0.0%</td><td>75.0%</td><td>63.56</td></tr>
+<tr><td>main</td><td>zero_shot_answer</td><td>eval_indist</td><td>1</td><td>24</td><td>0.0%</td><td>0.0%</td><td>4.2%</td><td>32.00</td></tr>
+<tr><td>main</td><td>answer</td><td>eval_template_shift</td><td>2</td><td>48</td><td>89.6%</td><td>14.7%</td><td>100.0%</td><td>9.42</td></tr>
+<tr><td>main</td><td>stack</td><td>eval_template_shift</td><td>2</td><td>48</td><td>87.5%</td><td>5.9%</td><td>100.0%</td><td>28.71</td></tr>
+<tr><td>main</td><td>python</td><td>eval_template_shift</td><td>2</td><td>48</td><td>83.3%</td><td>11.8%</td><td>100.0%</td><td>37.35</td></tr>
+<tr><td>main</td><td>json</td><td>eval_template_shift</td><td>2</td><td>48</td><td>39.6%</td><td>2.9%</td><td>72.9%</td><td>62.83</td></tr>
+<tr><td>main</td><td>zero_shot_answer</td><td>eval_template_shift</td><td>1</td><td>24</td><td>0.0%</td><td>0.0%</td><td>4.2%</td><td>32.00</td></tr>
+</table>
+
+<figure><img src="../analysis/figures/accuracy_by_abi_split.png" alt="Accuracy by ABI and split"><figcaption>Accuracy by ABI and split</figcaption></figure>
+
+<figure><img src="../analysis/figures/validity_and_tokens.png" alt="Format validity and generation length"><figcaption>Format validity and generation length</figcaption></figure>
+
+<figure><img src="../analysis/figures/family_breakdown.png" alt="Family breakdown"><figcaption>Family breakdown</figcaption></figure>
+
+<figure><img src="../analysis/figures/training_curves.png" alt="Training curves"><figcaption>Training curves</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>The composition gap for the best fresh-value arm is 54.2 percentage points. A small or negative gap would indicate that the learned representation transfers across operation combinations; a large positive gap indicates that the model mainly learned the easier in-distribution mapping.</p>
+<p>On fresh values, the best trace ABI scored 93.8% and answer-only scored 91.7%. The shortest strong trace ABI used 29.1 generated tokens on average, while answer-only used 9.7. This is a weak trace advantage in accuracy and a large trace cost in tokens.</p>
+<p>For the best unseen-composition arm, family accuracy was: string 0.0%, unit 100.0%, table 58.3%, date 0.0%. The composition failures are concentrated in families that require a new operation combination, while direct unit conversion remains easy.</p>
+<p>The JSON ABI had an average valid-final rate of 72.2% across primary splits, showing that a verbose structured object can be harder to emit reliably than line-oriented formats.</p>
+
+<h2>Limitations</h2>
+
+<p>This is a compact experiment. It is designed to reveal representation sensitivity and supervision effects, not to maximize absolute performance. The generated tasks are deterministic and intentionally narrow enough to allow controlled held-out splits. Larger task coverage and longer training would be needed before treating any ABI as a production recipe.</p>
+
+<h2>Artifacts</h2>
+
+<li>Metrics: `analysis/summary_by_arm.csv` and `analysis/all_metrics.csv`</li>
+<li>Details: `analysis/all_details.csv`</li>
+<li>Training logs: `analysis/all_train_logs.csv`</li>
+<li>Checkpoints: `/workspace/large_artifacts/qwen_crystallized_trace_abi_tournament/checkpoints`</li></body></html>

@@ -1,0 +1,143 @@
+{
+  "dataset": "rule_family_diversity_scaling",
+  "family_counts": {
+    "all": {
+      "abs_shift": 60,
+      "affine_int": 164,
+      "clamp_offset": 60,
+      "contains_label": 20,
+      "length_label": 20,
+      "modulo_label": 20,
+      "parity_offset_holdout": 12,
+      "prefix_switch": 20,
+      "quadratic_shift_holdout": 12,
+      "replace_wrap": 20,
+      "sign_piece": 20,
+      "slug_affix": 164,
+      "sorted_join_holdout": 12,
+      "threshold_label": 164,
+      "tuple_linear": 60,
+      "tuple_max_holdout": 12
+    },
+    "train_scale12": {
+      "abs_shift": 20,
+      "affine_int": 20,
+      "clamp_offset": 20,
+      "contains_label": 20,
+      "length_label": 20,
+      "modulo_label": 20,
+      "prefix_switch": 20,
+      "replace_wrap": 20,
+      "sign_piece": 20,
+      "slug_affix": 20,
+      "threshold_label": 20,
+      "tuple_linear": 20
+    },
+    "train_scale3": {
+      "affine_int": 80,
+      "slug_affix": 80,
+      "threshold_label": 80
+    },
+    "train_scale6": {
+      "abs_shift": 40,
+      "affine_int": 40,
+      "clamp_offset": 40,
+      "slug_affix": 40,
+      "threshold_label": 40,
+      "tuple_linear": 40
+    },
+    "val_base_iid": {
+      "affine_int": 12,
+      "slug_affix": 12,
+      "threshold_label": 12
+    },
+    "val_format_holdout": {
+      "affine_int": 12,
+      "slug_affix": 12,
+      "threshold_label": 12
+    },
+    "val_rule_holdout": {
+      "parity_offset_holdout": 12,
+      "quadratic_shift_holdout": 12,
+      "sorted_join_holdout": 12,
+      "tuple_max_holdout": 12
+    }
+  },
+  "holdout_families": [
+    "parity_offset_holdout",
+    "quadratic_shift_holdout",
+    "tuple_max_holdout",
+    "sorted_join_holdout"
+  ],
+  "invariants": [
+    "wrong-patched implementation fails visible counterexamples",
+    "target corrective diff applies to the wrong-patched implementation",
+    "target implementation passes visible and hidden tests",
+    "hidden test inputs do not overlap visible trace inputs",
+    "visible expected outputs appear in the failed execution trace",
+    "each diversity scale has the same total training record count"
+  ],
+  "paths": {
+    "all": "experiments/rule_family_diversity_scaling/data/repair_all.jsonl",
+    "train_scale12": "experiments/rule_family_diversity_scaling/data/repair_train_scale12.jsonl",
+    "train_scale3": "experiments/rule_family_diversity_scaling/data/repair_train_scale3.jsonl",
+    "train_scale6": "experiments/rule_family_diversity_scaling/data/repair_train_scale6.jsonl",
+    "val_base_iid": "experiments/rule_family_diversity_scaling/data/repair_val_base_iid.jsonl",
+    "val_format_holdout": "experiments/rule_family_diversity_scaling/data/repair_val_format_holdout.jsonl",
+    "val_rule_holdout": "experiments/rule_family_diversity_scaling/data/repair_val_rule_holdout.jsonl"
+  },
+  "records": {
+    "all": 840,
+    "train_scale12": 240,
+    "train_scale3": 240,
+    "train_scale6": 240,
+    "val_base_iid": 36,
+    "val_format_holdout": 36,
+    "val_rule_holdout": 48
+  },
+  "scales": {
+    "scale12": [
+      "affine_int",
+      "threshold_label",
+      "slug_affix",
+      "abs_shift",
+      "clamp_offset",
+      "tuple_linear",
+      "length_label",
+      "contains_label",
+      "prefix_switch",
+      "modulo_label",
+      "sign_piece",
+      "replace_wrap"
+    ],
+    "scale3": [
+      "affine_int",
+      "threshold_label",
+      "slug_affix"
+    ],
+    "scale6": [
+      "affine_int",
+      "threshold_label",
+      "slug_affix",
+      "abs_shift",
+      "clamp_offset",
+      "tuple_linear"
+    ]
+  },
+  "seed": 20260621,
+  "total_train_records_per_scale": 240,
+  "train_families": [
+    "affine_int",
+    "threshold_label",
+    "slug_affix",
+    "abs_shift",
+    "clamp_offset",
+    "tuple_linear",
+    "length_label",
+    "contains_label",
+    "prefix_switch",
+    "modulo_label",
+    "sign_piece",
+    "replace_wrap"
+  ]
+}

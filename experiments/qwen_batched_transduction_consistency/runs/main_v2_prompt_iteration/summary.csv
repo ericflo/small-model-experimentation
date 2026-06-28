@@ -1,0 +1,5 @@
+method,tasks,full_task_exact,row_exact,parse_ok_rate
+batch_all,40,0.45,0.725,1.0
+batch_all_structured,40,0.425,0.675,1.0
+batch_all_verify_hint,40,0.45,0.7,1.0
+row_by_row,40,0.5,0.7208333333333333,1.0

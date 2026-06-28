@@ -1,0 +1,23 @@
+task_id,family,features,rule,rule_chars,rule_lines
+Address.000002,Address,Substring,"**Rule:** Extract the first three characters of the input, then find the next occurrence of a space, take everything from that space to the end of the first segment, and combine with the first three characters. Repeat this process for each new segment in the input.
+
+**Substeps:**
+1. Split the input by spaces into segments.
+2. For each segment, take the first three characters.
+3. Find the next space after the first three characters.
+4. Take everything from that space to the end of the segment.
+5. Combine the first three characters with the extracted part to form the",571,7
+Address.000009,Address,"Concatenation,Multicolumn","Rule: Given a row with col0 and col1, generate a case statement where the key is col1 and the value is col0. Recursively decompose as: 1. Take col0 and col1 from the row. 2. Create a case statement with key col1 and value col0. Combine outputs by returning the case statement.",276,1
+City.000004,City,Conditional,"**Rule: Capitalize the first letter of each word, correct spelling of ""San Francisco"" from variations.**
+
+**Decomposition:**
+1. Split the input into words.
+2. For each word, capitalize the first letter.
+3. Check if the combined result is ""San Francisco""; if not, correct to ""San Francisco"".",290,5
+City.000007,City,Conditional,"**Rule: ExpandCityName**
+
+**Decomposition:**
+
+1. **Check if input is empty**: If the input is empty, output is empty.
+2. **Check if input is a city abbreviation**: If the input is a city abbreviation (e.g., ""SF"" for San Francisco), replace it with the full city name.
+3. **Combine outputs**: If step 2 is true, output the full city name; otherwise, output the input as is.",372,5

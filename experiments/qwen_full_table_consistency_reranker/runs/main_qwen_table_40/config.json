@@ -1,0 +1,21 @@
+{
+  "run_name": "main_qwen_table_40",
+  "seed": 20260627,
+  "task_limit": 40,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "row_samples": 2,
+  "temperature": 0.7,
+  "row_max_new_tokens": 64,
+  "batch_max_new_tokens": 420,
+  "max_tables": 512,
+  "folds": 4,
+  "no_qwen": false,
+  "report_regenerated_from_cached_candidates": true,
+  "candidate_cache_rows": 1428,
+  "qwen_generation_calls_completed": 1100,
+  "tasks": 40,
+  "created_utc": "2026-06-27T07:32:50.184378+00:00"
+}

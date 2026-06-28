@@ -1,0 +1,37 @@
+{
+  "base_model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260701,
+  "training": {
+    "records_per_adapter": 240,
+    "base_records": 180,
+    "support_bridge_records": 60,
+    "epochs": 2.0,
+    "learning_rate": 0.00015,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "gradient_accumulation_steps": 8,
+    "quantization": "4-bit NF4"
+  },
+  "evaluation": {
+    "visible_cases_per_record": 6,
+    "hidden_cases_per_record": 18,
+    "support_records": 120,
+    "ceiling_records": 120,
+    "iid_records": 60,
+    "construct_samples": 2,
+    "dsl_samples": 3,
+    "max_new_tokens_graphir": 160,
+    "max_new_tokens_dsl": 96
+  },
+  "conditions": [
+    "dsl_static60_lora",
+    "graphir_construct_lora",
+    "graphir_repair_lora"
+  ],
+  "artifact_policy": {
+    "compact_dir": "/workspace/experiments/qwen35_4b_graphir_self_repair",
+    "large_dir": "/workspace/large_artifacts/qwen35_4b_graphir_self_repair"
+  }
+}

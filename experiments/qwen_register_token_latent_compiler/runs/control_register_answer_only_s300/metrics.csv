@@ -1,0 +1,13 @@
+run,variant,split,n,direct_accuracy,direct_target_mass,executor_accuracy,executor_target_mass,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,pair_true_answer_consistency,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+control_register_answer_only_s300,register_answer_only,standard_len4,64.0,nan,nan,0.0,0.009994550491683185,0.0,0.3125,0.0078125,0.0,0.0,0.0,0.0,,,,,
+control_register_answer_only_s300,register_answer_only,standard_len8,64.0,nan,nan,0.0,0.010321349953301251,0.03125,0.3359375,0.013671875,0.0,0.009765625,0.0,0.001953125,,,,,
+control_register_answer_only_s300,register_answer_only,standard_len12,64.0,nan,nan,0.0,0.010310813318938017,0.0,0.3177083333333333,0.0078125,0.0,0.010416666666666666,0.0,0.0013020833333333333,,,,,
+control_register_answer_only_s300,register_answer_only,standard_len24,64.0,nan,nan,0.015625,0.010309275123290718,0.015625,0.3502604166666667,0.018229166666666668,0.0,0.009114583333333334,0.0,0.0013020833333333333,,,,,
+control_register_answer_only_s300,register_answer_only,paraphrase_len4,64.0,nan,nan,0.0,0.009889160050079226,0.0,0.3359375,0.01953125,0.0,0.0078125,0.0,0.00390625,,,,,
+control_register_answer_only_s300,register_answer_only,paraphrase_len8,64.0,nan,nan,0.015625,0.010312854778021574,0.0,0.353515625,0.017578125,0.0,0.0078125,0.0,0.001953125,,,,,
+control_register_answer_only_s300,register_answer_only,paraphrase_len12,64.0,nan,nan,0.0,0.010308456025086343,0.015625,0.3033854166666667,0.01953125,0.0,0.0078125,0.0,0.0,,,,,
+control_register_answer_only_s300,register_answer_only,paraphrase_len24,64.0,nan,nan,0.0,0.01030927081592381,0.015625,0.32421875,0.020833333333333332,0.0,0.012369791666666666,0.0,0.0006510416666666666,,,,,
+control_register_answer_only_s300,register_answer_only,paired_len4,128.0,nan,nan,0.015625,0.010304312105290592,0.0,0.375,0.03125,0.0,0.01171875,0.0,0.00390625,1.0,1.0,0.015625,1.0,1.0
+control_register_answer_only_s300,register_answer_only,paired_len8,128.0,nan,nan,0.0,0.010328561358619481,0.0,0.3125,0.015625,0.0,0.01171875,0.0,0.001953125,1.0,1.0,0.0,1.0,1.0
+control_register_answer_only_s300,register_answer_only,paired_len12,128.0,nan,nan,0.015625,0.010308377677574754,0.015625,0.3489583333333333,0.014322916666666666,0.0,0.006510416666666667,0.0,0.0013020833333333333,1.0,1.0,0.015625,1.0,1.0
+control_register_answer_only_s300,register_answer_only,paired_len24,128.0,nan,nan,0.0,0.010309286881238222,0.0,0.3404947916666667,0.018880208333333332,0.0,0.010416666666666666,0.0,0.0006510416666666666,1.0,1.0,0.0,1.0,1.0

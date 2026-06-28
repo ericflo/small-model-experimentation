@@ -1,0 +1,21 @@
+{
+  "run_name": "main_qwen_skill_memory_40_top1",
+  "seed": 20260627,
+  "task_limit": 40,
+  "memory_limit": 0,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "top_k": 1,
+  "card_examples": 4,
+  "row_max_new_tokens": 64,
+  "batch_max_new_tokens": 384,
+  "no_qwen": true,
+  "model": "Qwen/Qwen3-4B",
+  "eval_tasks": 40,
+  "memory_tasks": 269,
+  "generation_records": 364,
+  "elapsed_seconds": 0.44,
+  "created_utc": "2026-06-27T08:59:44.304314+00:00"
+}

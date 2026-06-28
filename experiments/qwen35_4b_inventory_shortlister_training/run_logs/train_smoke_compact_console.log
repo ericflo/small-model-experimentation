@@ -1,0 +1,21 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:44,  9.65it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 160.04it/s]Loading weights:  21%|██        | 90/426 [00:00<00:00, 359.06it/s]Loading weights:  34%|███▎      | 143/426 [00:00<00:00, 420.35it/s]Loading weights:  46%|████▋     | 198/426 [00:00<00:00, 464.37it/s]Loading weights:  59%|█████▉    | 253/426 [00:00<00:00, 488.27it/s]Loading weights:  73%|███████▎  | 310/426 [00:00<00:00, 511.06it/s]Loading weights:  86%|████████▌ | 365/426 [00:00<00:00, 516.97it/s]Loading weights:  99%|█████████▉| 422/426 [00:00<00:00, 532.24it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 458.61it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+qwen-shortlister-train:   0%|          | 0/1 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+qwen-shortlister-train: 100%|██████████| 1/1 [00:13<00:00, 13.61s/it]qwen-shortlister-train: 100%|██████████| 1/1 [00:13<00:00, 13.61s/it]
+{
+  "batch_size": 1,
+  "grad_accum": 1,
+  "learning_rate": 0.0002,
+  "losses": [
+    {
+      "loss": 3.78767466545105,
+      "step": 1
+    }
+  ],
+  "max_length": 5120,
+  "max_steps": 1,
+  "tokenized_examples": 4,
+  "train_examples_seen": 1
+}

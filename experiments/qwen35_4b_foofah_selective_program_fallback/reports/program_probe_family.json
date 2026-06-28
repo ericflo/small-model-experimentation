@@ -1,0 +1,4802 @@
+[
+  {
+    "direct_exact": 5,
+    "family": "agriculture",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "craigslist_data_wrangler",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "crime_data_wrangler",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "potters_wheel_divide",
+    "final_program_exact": 1,
+    "final_visible_pass": 1,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 1,
+    "visible_disagree": 1,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 1
+  },
+  {
+    "direct_exact": 5,
+    "family": "potters_wheel_fold",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "potters_wheel_fold_2",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "potters_wheel_merge_split",
+    "final_program_exact": 3,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 4,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 3
+  },
+  {
+    "direct_exact": 5,
+    "family": "potters_wheel_split_fold",
+    "final_program_exact": 3,
+    "final_visible_pass": 3,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 3,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 2,
+    "family": "potters_wheel_unfold",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "potters_wheel_unfold2",
+    "final_program_exact": 0,
+    "final_visible_pass": 1,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 1,
+    "visible_disagree": 1,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "proactive_wrangling_complex",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "proactive_wrangling_fold",
+    "final_program_exact": 2,
+    "final_visible_pass": 2,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 2,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "reshape_table_structure_data_wrangler",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "synthetic_10",
+    "final_program_exact": 4,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_11",
+    "final_program_exact": 5,
+    "final_visible_pass": 5,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 5,
+    "visible_disagree": 1,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 1
+  },
+  {
+    "direct_exact": 5,
+    "family": "synthetic_12",
+    "final_program_exact": 5,
+    "final_visible_pass": 5,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 5,
+        "program_commit_precision": 1.0,
+        "program_commits": 5
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 5,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_13",
+    "final_program_exact": 3,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 3,
+        "exact": 3,
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.75,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 4,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 3
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_15",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 3,
+    "family": "synthetic_17",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_18",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "synthetic_19",
+    "final_program_exact": 4,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_2",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_22",
+    "final_program_exact": 1,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.25,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.25,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 1,
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.25,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 1,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 1
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_24",
+    "final_program_exact": 0,
+    "final_visible_pass": 2,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 2
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 2
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 2
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 2
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 2,
+    "visible_disagree": 2,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_25",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_26",
+    "final_program_exact": 1,
+    "final_visible_pass": 2,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.5,
+        "program_commits": 2
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.5,
+        "program_commits": 2
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.5,
+        "program_commits": 2
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 2,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_27",
+    "final_program_exact": 2,
+    "final_visible_pass": 3,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 3,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_28",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_29",
+    "final_program_exact": 0,
+    "final_visible_pass": 1,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 1,
+    "visible_disagree": 1,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_3",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "synthetic_30",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_33",
+    "final_program_exact": 2,
+    "final_visible_pass": 3,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 3,
+    "visible_disagree": 1,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_34",
+    "final_program_exact": 0,
+    "final_visible_pass": 1,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 1,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_36",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_37",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "synthetic_4",
+    "final_program_exact": 4,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_40",
+    "final_program_exact": 4,
+    "final_visible_pass": 5,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 5,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_41",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 5,
+    "family": "synthetic_43",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 5,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 3,
+    "family": "synthetic_44",
+    "final_program_exact": 1,
+    "final_visible_pass": 1,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 1,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_45",
+    "final_program_exact": 4,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 1,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 1
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_46",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_47",
+    "final_program_exact": 2,
+    "final_visible_pass": 2,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 2,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 1,
+    "family": "synthetic_48",
+    "final_program_exact": 0,
+    "final_visible_pass": 1,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.2,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 1,
+        "program_commit_correct": 0,
+        "program_commit_precision": 0.0,
+        "program_commits": 1
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 1,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 3,
+    "family": "synthetic_49",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.6,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 3,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 2,
+    "family": "synthetic_5",
+    "final_program_exact": 4,
+    "final_visible_pass": 5,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.6666666666666666,
+        "program_commits": 3
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.8,
+        "program_commits": 5
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 5,
+    "visible_disagree": 3,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 2
+  },
+  {
+    "direct_exact": 2,
+    "family": "synthetic_51",
+    "final_program_exact": 3,
+    "final_visible_pass": 3,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 2,
+        "exact": 4,
+        "program_commit_correct": 3,
+        "program_commit_precision": 1.0,
+        "program_commits": 3
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 3,
+    "visible_disagree": 2,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 2
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_6",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 4,
+    "family": "synthetic_7",
+    "final_program_exact": 0,
+    "final_visible_pass": 0,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 0,
+    "visible_disagree": 0,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 0
+  },
+  {
+    "direct_exact": 0,
+    "family": "synthetic_8",
+    "final_program_exact": 4,
+    "final_visible_pass": 4,
+    "mean_probe_agree_rate": null,
+    "n": 5,
+    "policies": {
+      "direct": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_direct_parse_fail": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "program_if_probe_support_050": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_067": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_probe_support_100": {
+        "accuracy": 0.0,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0
+      },
+      "program_if_visible": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "program_if_visible_disagree": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_050": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      },
+      "visible_program_veto_probe_lt_067": {
+        "accuracy": 0.8,
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 4,
+        "program_commit_correct": 4,
+        "program_commit_precision": 1.0,
+        "program_commits": 4
+      }
+    },
+    "probe_comparable_records": 0,
+    "probe_records": 4,
+    "visible_disagree": 4,
+    "visible_disagree_direct_correct": 0,
+    "visible_disagree_program_correct": 4
+  }
+]

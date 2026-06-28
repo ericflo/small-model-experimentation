@@ -1,0 +1,11 @@
+{
+  "dpo_examples": 15,
+  "dpo_zero_to_one_examples": 5,
+  "experiment": "qwen35_4b_trained_vs_frozen_repair_mdp",
+  "kind": "dpo",
+  "max_per_task": 2,
+  "path": "data/repair_mined_dpo.jsonl",
+  "records": "data/frozen_repair_train_mined_records.jsonl",
+  "sft_examples": 17,
+  "sft_zero_to_one_examples": 6
+}

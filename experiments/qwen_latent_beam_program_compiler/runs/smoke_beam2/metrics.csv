@@ -1,0 +1,4 @@
+run,split,n,beam_count,beam0_accuracy,selected_accuracy,prior_accuracy,oracle_accuracy,beam0_program_exact,selected_program_exact,prior_program_exact,oracle_program_exact,selected_state_prefix_fraction,oracle_state_prefix_fraction,avg_distinct_answers,selector_entropy,selected_oracle_gap_recovered,selected_pair_answer_consistency,selected_pair_both_correct,oracle_pair_both_correct,selected_pair_state_consistency,oracle_pair_state_consistency
+smoke_beam2,standard_len3,8.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.6924464404582977,nan,,,,,
+smoke_beam2,paraphrase_len3,8.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.6925888359546661,nan,,,,,
+smoke_beam2,paired_len3,16.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0625,0.6924744918942451,nan,1.0,0.0,0.0,1.0,1.0

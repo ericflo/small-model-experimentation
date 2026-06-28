@@ -1,0 +1,8 @@
+{
+  "arms": "ack_dynamic,ack_no_delta,fixed_gru,direct_transformer",
+  "device": "cuda",
+  "elapsed_sec": 34.050915241241455,
+  "metric_rows": 46,
+  "run_name": "pilot_ack_v1",
+  "seeds": "101"
+}

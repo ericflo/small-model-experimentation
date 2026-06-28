@@ -1,0 +1,18 @@
+{
+  "experiment": "qwen35_4b_independent_retrieval_consensus",
+  "date": "2026-06-26",
+  "model": "Qwen3.5-4B",
+  "dataset": "MBPP heldout residual from base_direct_k4_records",
+  "visible_tests": 1,
+  "retrieval_top_k": 6,
+  "retrieval_candidate_pool": 80,
+  "mmr_lambda": 0.62,
+  "adapt_temperature": 0.2,
+  "adapt_top_p": 0.95,
+  "adapt_max_new_tokens": 260,
+  "direct_sample_more_k": 12,
+  "direct_temperatures": "0.7,1.0,1.2",
+  "consensus_probe_pool": 64,
+  "consensus_probe_budget": 8,
+  "primary_gate": "independent_consensus must improve hidden-correct commits and reduce false-pass rate versus first-visible and same-neighborhood consensus"
+}

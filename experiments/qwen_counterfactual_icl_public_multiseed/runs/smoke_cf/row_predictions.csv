@@ -1,0 +1,71 @@
+method,split,support_mode,task_id,family,rule_name,counterfactual_rule,query_index,input,target,prediction,exact
+base,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,0,matrixorbit,mat,mat,True
+base,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,1,orbitprairie,orb,orb The task is to extract the first three letters of the first word in the input string. The input string consists,False
+base,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,0,matrixorbit,bit,,False
+base,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,1,orbitprairie,rie,,False
+base,synthetic_counterfactual,normal,cf_0001_last_three,span,last_three,first_three,0,jupiterdelta,lta,,False
+base,synthetic_counterfactual,normal,cf_0001_last_three,span,last_three,first_three,1,lambdaivory,ory,,False
+base,synthetic_counterfactual,normal,cf_0001_first_three,span,first_three,last_three,0,jupiterdelta,jup,jup,True
+base,synthetic_counterfactual,normal,cf_0001_first_three,span,first_three,last_three,1,lambdaivory,lam,,False
+base,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,0,matrixorbit,mat,,False
+base,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,1,orbitprairie,orb,,False
+base,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,0,matrixorbit,bit,,False
+base,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,1,orbitprairie,rie,,False
+base,synthetic_counterfactual,shuffled,cf_0001_last_three,span,last_three,first_three,0,jupiterdelta,lta,,False
+base,synthetic_counterfactual,shuffled,cf_0001_last_three,span,last_three,first_three,1,lambdaivory,ory,,False
+base,synthetic_counterfactual,shuffled,cf_0001_first_three,span,first_three,last_three,0,jupiterdelta,jup,,False
+base,synthetic_counterfactual,shuffled,cf_0001_first_three,span,first_three,last_three,1,lambdaivory,lam,,False
+base,public_prose,normal,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",0,3/30/2241 16:15,Tue 4:30 PM,,False
+base,public_prose,normal,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",1,8/2/2160 23:48,Sat 12:00 AM,,False
+base,public_prose,normal,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",2,5/23/1984 22:24,Wed 10:30 PM,,False
+base,public_prose,normal,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:15PM-4:45PM,4:15PM-4:45PM,True
+base,public_prose,normal,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:45PM-12:15AM,11:15PM-11:45PM,False
+base,public_prose,normal,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:15PM-10:45PM,10:15PM-10:45PM,True
+base,public_prose,shuffled,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",0,3/30/2241 16:15,Tue 4:30 PM,,False
+base,public_prose,shuffled,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",1,8/2/2160 23:48,Sat 12:00 AM,,False
+base,public_prose,shuffled,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",2,5/23/1984 22:24,Wed 10:30 PM,,False
+base,public_prose,shuffled,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:15PM-4:45PM,,False
+base,public_prose,shuffled,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:45PM-12:15AM,,False
+base,public_prose,shuffled,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:15PM-10:45PM,,False
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,0,matrixorbit,mat,mat,True
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,1,orbitprairie,orb,orb,True
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,0,matrixorbit,bit,,False
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,1,orbitprairie,rie,,False
+adapter,synthetic_counterfactual,normal,cf_0001_last_three,span,last_three,first_three,0,jupiterdelta,lta,,False
+adapter,synthetic_counterfactual,normal,cf_0001_last_three,span,last_three,first_three,1,lambdaivory,ory,,False
+adapter,synthetic_counterfactual,normal,cf_0001_first_three,span,first_three,last_three,0,jupiterdelta,jup,jup,True
+adapter,synthetic_counterfactual,normal,cf_0001_first_three,span,first_three,last_three,1,lambdaivory,lam,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,0,matrixorbit,mat,mat,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,1,orbitprairie,orb,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,0,matrixorbit,bit,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,1,orbitprairie,rie,,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_last_three,span,last_three,first_three,0,jupiterdelta,lta,,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_last_three,span,last_three,first_three,1,lambdaivory,ory,,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_first_three,span,first_three,last_three,0,jupiterdelta,jup,,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_first_three,span,first_three,last_three,1,lambdaivory,lam,,False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,0,matrixorbit,mat,matrix orbit,False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,1,orbitprairie,orb,orbit prairie,False
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,0,matrixorbit,bit,matrix orbit,False
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,1,orbitprairie,rie,orbit prairie,False
+adapter,synthetic_counterfactual,none,cf_0001_last_three,span,last_three,first_three,0,jupiterdelta,lta,jupiter delta,False
+adapter,synthetic_counterfactual,none,cf_0001_last_three,span,last_three,first_three,1,lambdaivory,ory,lambdaivory,False
+adapter,synthetic_counterfactual,none,cf_0001_first_three,span,first_three,last_three,0,jupiterdelta,jup,jupiter delta,False
+adapter,synthetic_counterfactual,none,cf_0001_first_three,span,first_three,last_three,1,lambdaivory,lam,lambdaivory,False
+adapter,public_prose,normal,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",0,3/30/2241 16:15,Tue 4:30 PM,,False
+adapter,public_prose,normal,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",1,8/2/2160 23:48,Sat 12:00 AM,,False
+adapter,public_prose,normal,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",2,5/23/1984 22:24,Wed 10:30 PM,,False
+adapter,public_prose,normal,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:15PM-4:45PM,4:15PM-4:45PM,True
+adapter,public_prose,normal,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:45PM-12:15AM,11:15PM-11:45PM,False
+adapter,public_prose,normal,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:15PM-10:45PM,10:15PM-10:45PM,True
+adapter,public_prose,shuffled,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",0,3/30/2241 16:15,Tue 4:30 PM,,False
+adapter,public_prose,shuffled,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",1,8/2/2160 23:48,Sat 12:00 AM,,False
+adapter,public_prose,shuffled,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",2,5/23/1984 22:24,Wed 10:30 PM,,False
+adapter,public_prose,shuffled,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:15PM-4:45PM,,False
+adapter,public_prose,shuffled,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:45PM-12:15AM,,False
+adapter,public_prose,shuffled,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:15PM-10:45PM,,False
+adapter,public_prose,none,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",0,3/30/2241 16:15,Tue 4:30 PM,3/30/2241 16:15,False
+adapter,public_prose,none,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",1,8/2/2160 23:48,Sat 12:00 AM,2160-08-23T23:48,False
+adapter,public_prose,none,DateTime.000084,DateTime,public,"DateTimeRounding,DateTime",2,5/23/1984 22:24,Wed 10:30 PM,23/05/1984 22:24,False
+adapter,public_prose,none,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",0,4:15PM,4:15PM-4:45PM,15:15,False
+adapter,public_prose,none,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",1,11:48PM,11:45PM-12:15AM,23:48,False
+adapter,public_prose,none,DateTime.000081,DateTime,public,"DateTimeRange,DateTimeRounding,DateTime",2,10:24PM,10:15PM-10:45PM,22:24,False

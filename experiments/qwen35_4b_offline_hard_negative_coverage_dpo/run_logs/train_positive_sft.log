@@ -1,0 +1,268 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.83it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 160.96it/s]Loading weights:  21%|██        | 89/426 [00:00<00:00, 361.11it/s]Loading weights:  34%|███▍      | 146/426 [00:00<00:00, 436.56it/s]Loading weights:  48%|████▊     | 204/426 [00:00<00:00, 480.45it/s]Loading weights:  62%|██████▏   | 262/426 [00:00<00:00, 512.21it/s]Loading weights:  77%|███████▋  | 326/426 [00:00<00:00, 550.36it/s]Loading weights:  90%|████████▉ | 383/426 [00:00<00:00, 554.95it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 468.20it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+positive_sft:   0%|          | 0/60 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+positive_sft:   2%|▏         | 1/60 [00:05<04:56,  5.03s/it]positive_sft:   3%|▎         | 2/60 [00:09<04:31,  4.67s/it]positive_sft:   5%|▌         | 3/60 [00:13<04:21,  4.58s/it]positive_sft:   7%|▋         | 4/60 [00:18<04:12,  4.51s/it]positive_sft:   8%|▊         | 5/60 [00:22<04:03,  4.43s/it]positive_sft:  10%|█         | 6/60 [00:26<03:56,  4.38s/it]positive_sft:  12%|█▏        | 7/60 [00:31<03:51,  4.37s/it]positive_sft:  13%|█▎        | 8/60 [00:35<03:46,  4.36s/it]positive_sft:  15%|█▌        | 9/60 [00:39<03:42,  4.37s/it]positive_sft:  17%|█▋        | 10/60 [00:44<03:37,  4.34s/it]                                                             {"step": 10, "loss": 0.2082}
+positive_sft:  17%|█▋        | 10/60 [00:44<03:37,  4.34s/it]positive_sft:  18%|█▊        | 11/60 [00:48<03:33,  4.37s/it]positive_sft:  20%|██        | 12/60 [00:52<03:28,  4.34s/it]positive_sft:  22%|██▏       | 13/60 [00:57<03:22,  4.32s/it]positive_sft:  23%|██▎       | 14/60 [01:01<03:17,  4.30s/it]positive_sft:  25%|██▌       | 15/60 [01:05<03:13,  4.29s/it]positive_sft:  27%|██▋       | 16/60 [01:10<03:10,  4.32s/it]positive_sft:  28%|██▊       | 17/60 [01:14<03:08,  4.38s/it]positive_sft:  30%|███       | 18/60 [01:19<03:07,  4.47s/it]positive_sft:  32%|███▏      | 19/60 [01:23<03:00,  4.41s/it]positive_sft:  33%|███▎      | 20/60 [01:28<02:56,  4.42s/it]                                                             {"step": 20, "loss": 0.0943}
+positive_sft:  33%|███▎      | 20/60 [01:28<02:56,  4.42s/it]positive_sft:  35%|███▌      | 21/60 [01:32<02:49,  4.35s/it]positive_sft:  37%|███▋      | 22/60 [01:36<02:45,  4.36s/it]positive_sft:  38%|███▊      | 23/60 [01:40<02:40,  4.34s/it]positive_sft:  40%|████      | 24/60 [01:45<02:35,  4.31s/it]positive_sft:  42%|████▏     | 25/60 [01:49<02:30,  4.30s/it]positive_sft:  43%|████▎     | 26/60 [01:53<02:26,  4.32s/it]positive_sft:  45%|████▌     | 27/60 [01:58<02:23,  4.34s/it]positive_sft:  47%|████▋     | 28/60 [02:02<02:18,  4.33s/it]positive_sft:  48%|████▊     | 29/60 [02:06<02:16,  4.39s/it]positive_sft:  50%|█████     | 30/60 [02:11<02:10,  4.36s/it]                                                             {"step": 30, "loss": 0.0128}
+positive_sft:  50%|█████     | 30/60 [02:11<02:10,  4.36s/it]positive_sft:  52%|█████▏    | 31/60 [02:15<02:06,  4.36s/it]positive_sft:  53%|█████▎    | 32/60 [02:20<02:02,  4.36s/it]positive_sft:  55%|█████▌    | 33/60 [02:24<01:57,  4.34s/it]positive_sft:  57%|█████▋    | 34/60 [02:28<01:51,  4.30s/it]positive_sft:  58%|█████▊    | 35/60 [02:32<01:48,  4.32s/it]positive_sft:  60%|██████    | 36/60 [02:37<01:44,  4.34s/it]positive_sft:  62%|██████▏   | 37/60 [02:41<01:39,  4.32s/it]positive_sft:  63%|██████▎   | 38/60 [02:45<01:35,  4.33s/it]positive_sft:  65%|██████▌   | 39/60 [02:50<01:30,  4.31s/it]positive_sft:  67%|██████▋   | 40/60 [02:54<01:25,  4.30s/it]                                                             {"step": 40, "loss": 0.0239}
+positive_sft:  67%|██████▋   | 40/60 [02:54<01:25,  4.30s/it]positive_sft:  68%|██████▊   | 41/60 [02:58<01:21,  4.28s/it]positive_sft:  70%|███████   | 42/60 [03:02<01:17,  4.29s/it]positive_sft:  72%|███████▏  | 43/60 [03:07<01:12,  4.27s/it]positive_sft:  73%|███████▎  | 44/60 [03:11<01:08,  4.30s/it]positive_sft:  75%|███████▌  | 45/60 [03:16<01:05,  4.37s/it]positive_sft:  77%|███████▋  | 46/60 [03:20<01:01,  4.39s/it]positive_sft:  78%|███████▊  | 47/60 [03:24<00:57,  4.39s/it]positive_sft:  80%|████████  | 48/60 [03:29<00:52,  4.36s/it]positive_sft:  82%|████████▏ | 49/60 [03:33<00:47,  4.34s/it]positive_sft:  83%|████████▎ | 50/60 [03:37<00:43,  4.37s/it]                                                             {"step": 50, "loss": 0.0121}
+positive_sft:  83%|████████▎ | 50/60 [03:37<00:43,  4.37s/it]positive_sft:  85%|████████▌ | 51/60 [03:42<00:39,  4.39s/it]positive_sft:  87%|████████▋ | 52/60 [03:46<00:34,  4.35s/it]positive_sft:  88%|████████▊ | 53/60 [03:50<00:30,  4.34s/it]positive_sft:  90%|█████████ | 54/60 [03:55<00:26,  4.35s/it]positive_sft:  92%|█████████▏| 55/60 [03:59<00:21,  4.37s/it]positive_sft:  93%|█████████▎| 56/60 [04:04<00:17,  4.38s/it]positive_sft:  95%|█████████▌| 57/60 [04:08<00:13,  4.34s/it]positive_sft:  97%|█████████▋| 58/60 [04:12<00:08,  4.34s/it]positive_sft:  98%|█████████▊| 59/60 [04:17<00:04,  4.38s/it]positive_sft: 100%|██████████| 60/60 [04:21<00:00,  4.35s/it]                                                             {"step": 60, "loss": 0.0032}
+positive_sft: 100%|██████████| 60/60 [04:21<00:00,  4.35s/it]positive_sft: 100%|██████████| 60/60 [04:21<00:00,  4.36s/it]
+{
+  "batch_size": 1,
+  "grad_accum": 4,
+  "learning_rate": 0.0001,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_r": 16,
+  "losses": [
+    {
+      "loss": 0.29713916778564453,
+      "step": 1
+    },
+    {
+      "loss": 0.11841677874326706,
+      "step": 2
+    },
+    {
+      "loss": 0.22068136930465698,
+      "step": 3
+    },
+    {
+      "loss": 0.289946585893631,
+      "step": 4
+    },
+    {
+      "loss": 0.41901910305023193,
+      "step": 5
+    },
+    {
+      "loss": 0.1832701414823532,
+      "step": 6
+    },
+    {
+      "loss": 0.1436694711446762,
+      "step": 7
+    },
+    {
+      "loss": 0.07313910126686096,
+      "step": 8
+    },
+    {
+      "loss": 0.05626766383647919,
+      "step": 9
+    },
+    {
+      "loss": 0.20821121335029602,
+      "step": 10
+    },
+    {
+      "loss": 0.21177081763744354,
+      "step": 11
+    },
+    {
+      "loss": 0.1257765144109726,
+      "step": 12
+    },
+    {
+      "loss": 0.11918042600154877,
+      "step": 13
+    },
+    {
+      "loss": 0.05509177967905998,
+      "step": 14
+    },
+    {
+      "loss": 0.024430636316537857,
+      "step": 15
+    },
+    {
+      "loss": 0.03070177137851715,
+      "step": 16
+    },
+    {
+      "loss": 0.027940599247813225,
+      "step": 17
+    },
+    {
+      "loss": 0.034545835107564926,
+      "step": 18
+    },
+    {
+      "loss": 0.08846534043550491,
+      "step": 19
+    },
+    {
+      "loss": 0.09426233172416687,
+      "step": 20
+    },
+    {
+      "loss": 0.037814170122146606,
+      "step": 21
+    },
+    {
+      "loss": 0.033908646553754807,
+      "step": 22
+    },
+    {
+      "loss": 0.029962433502078056,
+      "step": 23
+    },
+    {
+      "loss": 0.030831970274448395,
+      "step": 24
+    },
+    {
+      "loss": 0.09805920720100403,
+      "step": 25
+    },
+    {
+      "loss": 0.07788922637701035,
+      "step": 26
+    },
+    {
+      "loss": 0.056531134992837906,
+      "step": 27
+    },
+    {
+      "loss": 0.0857248455286026,
+      "step": 28
+    },
+    {
+      "loss": 0.019989464432001114,
+      "step": 29
+    },
+    {
+      "loss": 0.012810872867703438,
+      "step": 30
+    },
+    {
+      "loss": 0.008040253072977066,
+      "step": 31
+    },
+    {
+      "loss": 0.029223080724477768,
+      "step": 32
+    },
+    {
+      "loss": 0.03614039346575737,
+      "step": 33
+    },
+    {
+      "loss": 0.01912572979927063,
+      "step": 34
+    },
+    {
+      "loss": 0.038214609026908875,
+      "step": 35
+    },
+    {
+      "loss": 0.03813334181904793,
+      "step": 36
+    },
+    {
+      "loss": 0.07152308523654938,
+      "step": 37
+    },
+    {
+      "loss": 0.08769207447767258,
+      "step": 38
+    },
+    {
+      "loss": 0.008454844355583191,
+      "step": 39
+    },
+    {
+      "loss": 0.02388160675764084,
+      "step": 40
+    },
+    {
+      "loss": 0.02907012589275837,
+      "step": 41
+    },
+    {
+      "loss": 0.04689134657382965,
+      "step": 42
+    },
+    {
+      "loss": 0.09567926079034805,
+      "step": 43
+    },
+    {
+      "loss": 0.10829136520624161,
+      "step": 44
+    },
+    {
+      "loss": 0.0169058907777071,
+      "step": 45
+    },
+    {
+      "loss": 0.03244251012802124,
+      "step": 46
+    },
+    {
+      "loss": 0.00228325929492712,
+      "step": 47
+    },
+    {
+      "loss": 0.004111568443477154,
+      "step": 48
+    },
+    {
+      "loss": 0.025268515571951866,
+      "step": 49
+    },
+    {
+      "loss": 0.012144459411501884,
+      "step": 50
+    },
+    {
+      "loss": 0.004070377442985773,
+      "step": 51
+    },
+    {
+      "loss": 0.023786189034581184,
+      "step": 52
+    },
+    {
+      "loss": 0.05000465363264084,
+      "step": 53
+    },
+    {
+      "loss": 0.05749230086803436,
+      "step": 54
+    },
+    {
+      "loss": 0.019449668005108833,
+      "step": 55
+    },
+    {
+      "loss": 0.009695715270936489,
+      "step": 56
+    },
+    {
+      "loss": 0.04610443860292435,
+      "step": 57
+    },
+    {
+      "loss": 0.0021850906778126955,
+      "step": 58
+    },
+    {
+      "loss": 0.010824593715369701,
+      "step": 59
+    },
+    {
+      "loss": 0.0032401680946350098,
+      "step": 60
+    }
+  ],
+  "max_length": 1536,
+  "max_steps": 60,
+  "pair_rows": 58,
+  "pairs_in": "data/pilot_pairs_combined_real.jsonl",
+  "run_name": "positive_sft",
+  "tokenized_rows": 38
+}

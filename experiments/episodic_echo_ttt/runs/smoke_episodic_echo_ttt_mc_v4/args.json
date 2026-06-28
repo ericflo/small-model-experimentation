@@ -1,0 +1,21 @@
+{
+  "suite": "smoke",
+  "run_name": "smoke_episodic_echo_ttt_mc_v4",
+  "model_name": "Qwen/Qwen3-4B",
+  "device": "cuda",
+  "dtype": "bf16",
+  "load_4bit": 1,
+  "data_seed": 17,
+  "seeds": "101",
+  "support_count": 5,
+  "ce_count": 2,
+  "train_episodes": 8,
+  "val_episodes": 4,
+  "eval_episodes": 4,
+  "prefix_len": 4,
+  "global_prefix_steps": 2,
+  "global_prefix_lr": 0.005,
+  "ttt_steps": "0,1",
+  "ttt_lr": 0.003,
+  "arms": "no_prefix,global_no_ttt,echo_ttt,shuffle_ttt"
+}

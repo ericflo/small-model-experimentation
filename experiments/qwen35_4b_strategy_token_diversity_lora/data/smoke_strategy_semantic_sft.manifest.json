@@ -1,0 +1,36 @@
+{
+  "examples_per_task_mean": 1.8333333333333333,
+  "max_per_task": 8,
+  "max_per_task_strategy": 2,
+  "mode": "semantic",
+  "out": "data/smoke_strategy_semantic_sft.jsonl",
+  "records_in": "data/smoke_train_k8_records.jsonl",
+  "rows": 11,
+  "semantic_strategy_counts": {
+    "LOOP": 2,
+    "MATH": 2,
+    "RECURSION": 2,
+    "SORTING": 1,
+    "STRING_REGEX": 4
+  },
+  "source_records": 8,
+  "strategy_keys": [
+    "DIRECT",
+    "LOOP",
+    "COMPREHENSION",
+    "SORTING",
+    "SET_DICT",
+    "RECURSION",
+    "STRING_REGEX",
+    "MATH"
+  ],
+  "tasks_used": 6,
+  "tasks_with_correct": 6,
+  "train_strategy_counts": {
+    "LOOP": 2,
+    "MATH": 2,
+    "RECURSION": 2,
+    "SORTING": 1,
+    "STRING_REGEX": 4
+  }
+}

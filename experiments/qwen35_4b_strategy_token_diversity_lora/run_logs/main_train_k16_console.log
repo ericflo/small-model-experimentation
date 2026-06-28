@@ -1,0 +1,42 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:44,  9.58it/s]Loading weights:  10%|▉         | 41/426 [00:00<00:01, 226.11it/s]Loading weights:  19%|█▊        | 79/426 [00:00<00:01, 287.41it/s]Loading weights:  27%|██▋       | 114/426 [00:00<00:01, 305.38it/s]Loading weights:  35%|███▍      | 148/426 [00:00<00:00, 309.77it/s]Loading weights:  45%|████▌     | 193/426 [00:00<00:00, 349.90it/s]Loading weights:  54%|█████▎    | 228/426 [00:00<00:00, 347.75it/s]Loading weights:  62%|██████▏   | 263/426 [00:00<00:00, 342.08it/s]Loading weights:  71%|███████▏  | 304/426 [00:00<00:00, 359.99it/s]Loading weights:  80%|████████  | 341/426 [00:01<00:00, 352.51it/s]Loading weights:  88%|████████▊ | 377/426 [00:01<00:00, 351.39it/s]Loading weights:  97%|█████████▋| 413/426 [00:01<00:00, 338.81it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 325.48it/s]
+base-train_k16:   0%|          | 0/80 [00:00<?, ?it/s]base-train_k16:   1%|▏         | 1/80 [01:01<1:20:49, 61.39s/it]base-train_k16:   2%|▎         | 2/80 [01:25<50:55, 39.17s/it]  base-train_k16:   4%|▍         | 3/80 [02:25<1:02:37, 48.79s/it]base-train_k16:   5%|▌         | 4/80 [02:44<47:10, 37.24s/it]  base-train_k16:   6%|▋         | 5/80 [03:20<45:47, 36.63s/it]base-train_k16:   8%|▊         | 6/80 [03:43<39:21, 31.91s/it]base-train_k16:   9%|▉         | 7/80 [04:27<43:53, 36.07s/it]base-train_k16:  10%|█         | 8/80 [05:27<52:12, 43.50s/it]base-train_k16:  11%|█▏        | 9/80 [06:04<49:09, 41.54s/it]base-train_k16:  12%|█▎        | 10/80 [06:37<45:33, 39.05s/it]base-train_k16:  14%|█▍        | 11/80 [07:27<48:48, 42.45s/it]base-train_k16:  15%|█▌        | 12/80 [08:15<49:42, 43.86s/it]base-train_k16:  16%|█▋        | 13/80 [08:39<42:16, 37.86s/it]base-train_k16:  18%|█▊        | 14/80 [09:05<37:46, 34.34s/it]base-train_k16:  19%|█▉        | 15/80 [09:51<41:09, 37.99s/it]base-train_k16:  20%|██        | 16/80 [10:24<38:51, 36.43s/it]base-train_k16:  21%|██▏       | 17/80 [11:17<43:22, 41.31s/it]base-train_k16:  22%|██▎       | 18/80 [11:32<34:43, 33.61s/it]base-train_k16:  24%|██▍       | 19/80 [12:27<40:36, 39.94s/it]base-train_k16:  25%|██▌       | 20/80 [13:26<45:46, 45.77s/it]base-train_k16:  26%|██▋       | 21/80 [14:08<43:36, 44.35s/it]base-train_k16:  28%|██▊       | 22/80 [15:32<54:24, 56.29s/it]base-train_k16:  29%|██▉       | 23/80 [15:51<42:56, 45.21s/it]base-train_k16:  30%|███       | 24/80 [16:03<32:59, 35.34s/it]base-train_k16:  31%|███▏      | 25/80 [16:31<30:14, 32.99s/it]base-train_k16:  32%|███▎      | 26/80 [17:16<32:55, 36.58s/it]base-train_k16:  34%|███▍      | 27/80 [18:13<37:47, 42.78s/it]base-train_k16:  35%|███▌      | 28/80 [18:28<29:43, 34.30s/it]base-train_k16:  36%|███▋      | 29/80 [18:55<27:21, 32.19s/it]base-train_k16:  38%|███▊      | 30/80 [19:30<27:33, 33.06s/it]base-train_k16:  39%|███▉      | 31/80 [20:22<31:45, 38.88s/it]base-train_k16:  40%|████      | 32/80 [21:14<34:05, 42.62s/it]base-train_k16:  41%|████▏     | 33/80 [22:05<35:19, 45.09s/it]base-train_k16:  42%|████▎     | 34/80 [22:57<36:14, 47.27s/it]base-train_k16:  44%|████▍     | 35/80 [23:35<33:18, 44.42s/it]base-train_k16:  45%|████▌     | 36/80 [24:27<34:12, 46.65s/it]base-train_k16:  46%|████▋     | 37/80 [25:01<30:47, 42.96s/it]base-train_k16:  48%|████▊     | 38/80 [25:50<31:26, 44.91s/it]base-train_k16:  49%|████▉     | 39/80 [26:13<26:09, 38.28s/it]base-train_k16:  50%|█████     | 40/80 [26:51<25:19, 37.99s/it]base-train_k16:  51%|█████▏    | 41/80 [27:24<23:49, 36.66s/it]base-train_k16:  52%|█████▎    | 42/80 [28:10<24:59, 39.45s/it]base-train_k16:  54%|█████▍    | 43/80 [28:52<24:46, 40.16s/it]base-train_k16:  55%|█████▌    | 44/80 [29:26<22:56, 38.23s/it]base-train_k16:  56%|█████▋    | 45/80 [30:06<22:44, 38.98s/it]base-train_k16:  57%|█████▊    | 46/80 [30:52<23:14, 41.01s/it]base-train_k16:  59%|█████▉    | 47/80 [31:42<24:01, 43.68s/it]base-train_k16:  60%|██████    | 48/80 [32:27<23:29, 44.04s/it]base-train_k16:  61%|██████▏   | 49/80 [32:57<20:36, 39.88s/it]base-train_k16:  62%|██████▎   | 50/80 [33:38<20:07, 40.25s/it]base-train_k16:  64%|██████▍   | 51/80 [34:18<19:20, 40.01s/it]base-train_k16:  65%|██████▌   | 52/80 [35:14<20:54, 44.80s/it]base-train_k16:  66%|██████▋   | 53/80 [35:38<17:23, 38.64s/it]base-train_k16:  68%|██████▊   | 54/80 [36:00<14:35, 33.69s/it]base-train_k16:  69%|██████▉   | 55/80 [36:52<16:18, 39.14s/it]base-train_k16:  70%|███████   | 56/80 [37:51<18:05, 45.25s/it]base-train_k16:  71%|███████▏  | 57/80 [38:28<16:19, 42.60s/it]base-train_k16:  72%|███████▎  | 58/80 [38:57<14:07, 38.54s/it]base-train_k16:  74%|███████▍  | 59/80 [39:25<12:24, 35.44s/it]base-train_k16:  75%|███████▌  | 60/80 [40:25<14:15, 42.79s/it]base-train_k16:  76%|███████▋  | 61/80 [41:26<15:16, 48.25s/it]base-train_k16:  78%|███████▊  | 62/80 [41:51<12:24, 41.36s/it]base-train_k16:  79%|███████▉  | 63/80 [42:52<13:20, 47.11s/it]base-train_k16:  80%|████████  | 64/80 [43:35<12:14, 45.92s/it]base-train_k16:  81%|████████▏ | 65/80 [43:50<09:10, 36.70s/it]base-train_k16:  82%|████████▎ | 66/80 [44:09<07:18, 31.34s/it]base-train_k16:  84%|████████▍ | 67/80 [44:41<06:49, 31.53s/it]base-train_k16:  85%|████████▌ | 68/80 [45:27<07:10, 35.91s/it]base-train_k16:  86%|████████▋ | 69/80 [46:21<07:33, 41.21s/it]base-train_k16:  88%|████████▊ | 70/80 [47:03<06:56, 41.61s/it]base-train_k16:  89%|████████▉ | 71/80 [47:53<06:37, 44.21s/it]base-train_k16:  90%|█████████ | 72/80 [48:11<04:49, 36.20s/it]base-train_k16:  91%|█████████▏| 73/80 [48:28<03:33, 30.54s/it]base-train_k16:  92%|█████████▎| 74/80 [49:03<03:10, 31.73s/it]base-train_k16:  94%|█████████▍| 75/80 [49:21<02:18, 27.71s/it]base-train_k16:  95%|█████████▌| 76/80 [49:40<01:40, 25.22s/it]base-train_k16:  96%|█████████▋| 77/80 [50:26<01:34, 31.40s/it]base-train_k16:  98%|█████████▊| 78/80 [50:38<00:51, 25.59s/it]base-train_k16:  99%|█████████▉| 79/80 [51:13<00:28, 28.32s/it]base-train_k16: 100%|██████████| 80/80 [51:53<00:00, 31.73s/it]base-train_k16: 100%|██████████| 80/80 [51:53<00:00, 38.92s/it]
+{
+  "arm_name": "train_k16",
+  "count": 80,
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/main_train_k16_records.jsonl",
+  "records": {
+    "candidate_count_mean": 13.025,
+    "coverage": 0.75,
+    "distinct_behavior_rate_mean": 0.5695726842601843,
+    "distinct_functional_rate_mean": 0.19440842143967144,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 6.525,
+    "parse_success_mean": 12.4125,
+    "records": 80,
+    "visible_candidates_mean": 7.2375,
+    "visible_coverage": 0.75,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "main_train_k16",
+  "samples_per_task": 16,
+  "seed": 20260625,
+  "split": "mbpp_train",
+  "temperatures": "0.2,0.8,1.1",
+  "token_usage": {
+    "calls": 1280,
+    "completion_tokens": 137488,
+    "forward_tokens": 303040,
+    "prompt_tokens": 165552
+  },
+  "top_p": 0.98,
+  "visible_tests": 1
+}

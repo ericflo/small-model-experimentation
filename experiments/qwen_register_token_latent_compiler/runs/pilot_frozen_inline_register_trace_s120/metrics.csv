@@ -1,0 +1,13 @@
+run,variant,split,n,direct_accuracy,direct_target_mass,executor_accuracy,executor_target_mass,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,pair_true_answer_consistency,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+pilot_frozen_inline_register_trace_s120,register_trace,standard_len4,32.0,nan,nan,0.0,0.010309250559657812,0.0,0.3515625,0.046875,0.0,0.015625,0.0,0.0,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,standard_len8,32.0,nan,nan,0.0,0.01030748407356441,0.0,0.38671875,0.0546875,0.0,0.0234375,0.0,0.0,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,standard_len12,32.0,nan,nan,0.0,0.010306556010618806,0.0,0.3802083333333333,0.028645833333333332,0.0,0.005208333333333333,0.0,0.0026041666666666665,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,standard_len24,32.0,nan,nan,0.0,0.010306155774742365,0.0,0.4166666666666667,0.053385416666666664,0.0,0.006510416666666667,0.0,0.0013020833333333333,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,paraphrase_len4,32.0,nan,nan,0.0,0.010307954624295235,0.0,0.4140625,0.0625,0.0,0.0,0.0,0.0,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,paraphrase_len8,32.0,nan,nan,0.03125,0.010314252693206072,0.0,0.43359375,0.046875,0.0,0.01171875,0.0,0.0,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,paraphrase_len12,32.0,nan,nan,0.0,0.010321831097826362,0.03125,0.390625,0.057291666666666664,0.0,0.005208333333333333,0.0,0.0,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,paraphrase_len24,32.0,nan,nan,0.0625,0.010306903626769781,0.0,0.4088541666666667,0.037760416666666664,0.0,0.014322916666666666,0.0,0.0013020833333333333,,,,,
+pilot_frozen_inline_register_trace_s120,register_trace,paired_len4,64.0,nan,nan,0.046875,0.010309549397788942,0.0,0.359375,0.0546875,0.0,0.03515625,0.0,0.01171875,1.0,0.5,0.0,0.375,0.375
+pilot_frozen_inline_register_trace_s120,register_trace,paired_len8,64.0,nan,nan,0.0,0.010306546580977738,0.0,0.3828125,0.04296875,0.0,0.00390625,0.0,0.001953125,1.0,0.375,0.0,0.1875,0.1875
+pilot_frozen_inline_register_trace_s120,register_trace,paired_len12,64.0,nan,nan,0.03125,0.01031415886245668,0.03125,0.3971354166666667,0.049479166666666664,0.0,0.009114583333333334,0.0,0.0,1.0,0.125,0.0,0.0,0.0
+pilot_frozen_inline_register_trace_s120,register_trace,paired_len24,64.0,nan,nan,0.015625,0.01030704565346241,0.0,0.4381510416666667,0.046875,0.0,0.009114583333333334,0.0,0.0,1.0,0.15625,0.0,0.03125,0.03125

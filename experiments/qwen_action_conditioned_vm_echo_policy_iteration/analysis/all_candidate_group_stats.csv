@@ -1,0 +1,11 @@
+phase,groups,candidates,positive_candidates,positive_rate,oracle_found_rate,mean_candidates,run
+train_candidates,1024.0,246910.0,23072.0,0.0934429549228463,0.4072265625,241.123046875,main_action_vm_echo_s192_thr070
+val_candidates,128.0,30863.0,2006.0,0.0649969218805689,0.3671875,241.1171875,main_action_vm_echo_s192_thr070
+train_candidates,256.0,48384.0,1936.0,0.0400132275132275,0.21875,189.0,pilot_action_vm_echo_s96
+val_candidates,64.0,12096.0,462.0,0.0381944444444444,0.21875,189.0,pilot_action_vm_echo_s96
+train_candidates,256.0,48384.0,1936.0,0.0400132275132275,0.21875,189.0,pilot_action_vm_echo_s96_thr070
+val_candidates,64.0,12096.0,462.0,0.0381944444444444,0.21875,189.0,pilot_action_vm_echo_s96_thr070
+train_candidates,256.0,48384.0,1936.0,0.0400132275132275,0.21875,189.0,pilot_action_vm_echo_s96_v2
+val_candidates,64.0,12096.0,462.0,0.0381944444444444,0.21875,189.0,pilot_action_vm_echo_s96_v2
+train_candidates,24.0,1346.0,33.0,0.0245170876671619,0.0833333333333333,56.083333333333336,smoke_action_vm_echo
+val_candidates,16.0,902.0,0.0,0.0,0.0,56.375,smoke_action_vm_echo

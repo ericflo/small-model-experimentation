@@ -1,0 +1,6 @@
+run,checkpoint_dir,created_unix,notes
+smoke_fuyu_grpo_echo_20260624,large_artifacts/qwen_fuyu_vm_grpo_echo/checkpoints/smoke_fuyu_grpo_echo_20260624,1782322492,Fuyu-style whole-network VM GRPO-ECHO agent; base=Qwen/Qwen3-4B
+smoke_fuyu_grpo_echo_anchor_20260624,large_artifacts/qwen_fuyu_vm_grpo_echo/checkpoints/smoke_fuyu_grpo_echo_anchor_20260624,1782322651,Fuyu-style whole-network VM GRPO-ECHO agent; base=Qwen/Qwen3-4B
+smoke_fuyu_grpo_echo_shaped_20260624,large_artifacts/qwen_fuyu_vm_grpo_echo/checkpoints/smoke_fuyu_grpo_echo_shaped_20260624,1782322908,Fuyu-style whole-network VM GRPO-ECHO agent; base=Qwen/Qwen3-4B
+smoke_process_dpo_20260624,large_artifacts/qwen_fuyu_vm_grpo_echo/checkpoints/smoke_process_dpo_20260624,1782324217,Fuyu-style whole-network VM agent; algorithm=process_dpo; base=Qwen/Qwen3-4B
+pilot_process_dpo_s32_20260624,large_artifacts/qwen_fuyu_vm_grpo_echo/checkpoints/pilot_process_dpo_s32_20260624,1782324902,Fuyu-style whole-network VM agent; algorithm=process_dpo; base=Qwen/Qwen3-4B

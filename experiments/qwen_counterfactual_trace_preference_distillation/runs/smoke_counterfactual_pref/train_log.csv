@@ -1,0 +1,9 @@
+phase,epoch,loss,train_examples,quick_val_direct_accuracy,quick_val_search_accuracy,train_groups,val_groups,listwise_loss,pairwise_loss,base_contrast_loss,quality_loss,valid_loss,final_loss,trace_top_loss,trace_depth_loss,val_selected_correct_rate,val_selected_valid_rate,val_selected_program_exact_rate,val_selected_trace_consistent_rate,val_selected_quality_mean,val_oracle_found_rate,val_base_correct_rate,val_counterfactual_group_rate,val_gap_recovered
+seed_supervised,1,7.990275859832764,16,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+seed_supervised,2,5.730495929718018,16,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+counterfactual_preference,1,3.4542195796966553,,,,4,16,1.0472931861877441,0.8366855382919312,0.0,1.2866427898406982,0.7447558641433716,5.162871360778809,5.125211238861084,2.66321063041687,0.0625,1.0,0.0,0.0,1.0625,0.0625,0.0625,0.0,0.0
+counterfactual_preference,2,3.0668869018554688,,,,4,16,1.0337587594985962,0.823255717754364,0.0,0.8663265705108643,0.699474573135376,3.8672542572021484,4.88007116317749,2.534421443939209,0.0625,1.0,0.0,0.0,1.0625,0.0625,0.0625,0.0,0.0
+answer_verified_distill,1,4.5054339408874515,20,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+preference_selected_distill,1,4.208416938781738,48,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+best_quality_distill,1,4.5259690284729,20,0.0,0.0,,,,,,,,,,,,,,,,,,,
+full_supervised,1,6.279623826344808,48,0.0625,0.0625,,,,,,,,,,,,,,,,,,,

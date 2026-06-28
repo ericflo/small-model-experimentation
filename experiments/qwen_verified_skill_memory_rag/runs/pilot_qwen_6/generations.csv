@@ -1,0 +1,43 @@
+task_id,method,item_key,prompt_sha,raw
+City.000010,direct_row,row0,2c8f6e693591d382,9
+City.000010,direct_row,row1,c7c97be35ac61d84,20
+City.000010,direct_row,row2,f98abd0c2d5f7e7e,0
+City.000010,direct_batch,batch,7511c572975c9346,"[""9"", ""20"", ""0""]"
+City.000010,skill_rag,batch,0428fee8ffa8e0c5,"[""9"", ""20"", ""0""]"
+City.000010,random_skill_rag,batch,7831b0ea6a4e9ebb,"[""9"", ""20"", ""0""]"
+City.000010,corrupt_skill_rag,batch,47dca74bef6897cc,"[""9"", ""20+"", ""0""]"
+DateTime.000025,direct_row,row0,1e81cc2136fa90b1,Mar 41
+DateTime.000025,direct_row,row1,96570d5ce0ef5d17,Aug 60
+DateTime.000025,direct_row,row2,68fd430ff1545934,May 84
+DateTime.000025,direct_batch,batch,388415d6d0a69600,"[""Mar 41"", ""Aug 60"", ""May 84""]"
+DateTime.000025,skill_rag,batch,8d66c94a8a7b5889,"[""03302241"", ""02 Aug 2160"", ""05231984""]"
+DateTime.000025,random_skill_rag,batch,9b98f414d90fad7e,"[""Mar 60"", ""Aug 60"", ""May 84""]"
+DateTime.000025,corrupt_skill_rag,batch,3b24b0b7c88d827e,"[""03302241"", ""02-Aug-2160"", ""23 May 1984""]"
+DateTime.000104,direct_row,row0,b2f87da6605cba7e,Jan
+DateTime.000104,direct_row,row1,61a02074a5aa1baf,Aug
+DateTime.000104,direct_row,row2,b2e87309e0011324,Dec
+DateTime.000104,direct_batch,batch,490a0273df773c4c,"[""Jan"", ""Aug"", ""Dec""]"
+DateTime.000104,skill_rag,batch,34208b547c42959a,"[""Jan"", ""Aug"", ""Dec""]"
+DateTime.000104,random_skill_rag,batch,f2fe0d8d486a6a89,"[""Jan"", ""Aug"", ""Dec""]"
+DateTime.000104,corrupt_skill_rag,batch,9aa337799ef283f6,"[""Jan"", ""Aug"", ""Dec""]"
+Number.000075,direct_row,row0,adc1a028ed6899d0,$1.9B
+Number.000075,direct_row,row1,30d96a871ee4aeba,$2.3B
+Number.000075,direct_row,row2,34d187907a5ee506,$2.9B
+Number.000075,direct_batch,batch,a4c8c5a2971ec4f3,"[""$1.9B"", ""$2.3B"", ""$3.0B""]"
+Number.000075,skill_rag,batch,05b9d047f8d94362,"[""$0.1B"", ""$2.3B"", ""$2.9B""]"
+Number.000075,random_skill_rag,batch,a0e45aa27991c588,"[""$0.2B"", ""$0.0B"", ""$2.3B""]"
+Number.000075,corrupt_skill_rag,batch,f6f0cfd50fa3a020,"[""$0.1B"", ""$2.3B"", ""$2.9B""]"
+Number.000077,direct_row,row0,73c94fef4cb1565d,110
+Number.000077,direct_row,row1,98dc980236847c34,11000
+Number.000077,direct_row,row2,cc9c75ef445e1241,540
+Number.000077,direct_batch,batch,d78d60e31fd86603,"[""11110"", ""11110"", ""546""]"
+Number.000077,skill_rag,batch,8b09e16219877d45,"[""11110"", ""11120"", ""540""]"
+Number.000077,random_skill_rag,batch,74ef486e88f6faaa,"[""11110"", ""11110"", ""540""]"
+Number.000077,corrupt_skill_rag,batch,b55d2b75c4f04e4e,"[""11110"", ""11110"", ""540-549""]"
+UserAgent.000003,direct_row,row0,e16bb5db2129a0e4,FZ467
+UserAgent.000003,direct_row,row1,c93b5a54dccb4de0,RM VVUT
+UserAgent.000003,direct_row,row2,b7a1c1eb2e351801,QS QYFY
+UserAgent.000003,direct_batch,batch,a9cc093d43958d3c,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,skill_rag,batch,2847a08aa82a7089,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,random_skill_rag,batch,68f2491176a4cfc1,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,corrupt_skill_rag,batch,089ff5fe5793e1a9,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]"

@@ -1,0 +1,55 @@
+{
+  "base_anchor_records": 180,
+  "bridge_allocation": {
+    "length_contains_code": 40,
+    "modulo_sum_label": 10,
+    "tuple_branch_label": 10
+  },
+  "family_summaries": {
+    "length_contains_code": {
+      "bridge_records_requested": 40,
+      "bridge_records_with_model_wrong": 36,
+      "mining_records": 48,
+      "top_wrong_programs": [
+        {
+          "count": 105,
+          "program": "(if (and (contains text needle) (gt (count_eq text needle) threshold)) \"MATCH_LONG\" \"MISS\")"
+        },
+        {
+          "count": 1,
+          "program": "(if (and (contains text needle) (gt (len (first (match-all text needle))) threshold)) \"MATCH_LONG\" \"MISS\")"
+        }
+      ],
+      "unique_wrong_programs": 2
+    },
+    "modulo_sum_label": {
+      "bridge_records_requested": 10,
+      "bridge_records_with_model_wrong": 0,
+      "mining_records": 48,
+      "top_wrong_programs": [],
+      "unique_wrong_programs": 0
+    },
+    "tuple_branch_label": {
+      "bridge_records_requested": 10,
+      "bridge_records_with_model_wrong": 10,
+      "mining_records": 48,
+      "top_wrong_programs": [
+        {
+          "count": 14,
+          "program": "(if (and (gt (sum item) threshold) (gt (tuple_get item index) 0)) high_label low_label)"
+        },
+        {
+          "count": 6,
+          "program": "(if (and (gt (sum item) threshold) (gt (tuple_get item index) threshold)) high_label low_label)"
+        },
+        {
+          "count": 6,
+          "program": "(if (and (gt (tuple_get item index) threshold) high_label) low_label)"
+        }
+      ],
+      "unique_wrong_programs": 3
+    }
+  },
+  "model_mined_bridge_records": 60,
+  "train_records": 240
+}

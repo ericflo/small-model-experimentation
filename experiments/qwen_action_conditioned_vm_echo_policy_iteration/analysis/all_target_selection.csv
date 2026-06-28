@@ -1,0 +1,11 @@
+source_examples,targets,oracle_found_rate,selected_correct_rate,selected_valid_rate,changed_rate,mean_selected_score,min_score,phase,run
+1024,470,0.4072265625,0.2893617021276595,0.9957446808510638,1.0,0.8841260302574077,0.7,learned_policy_targets,main_action_vm_echo_s192_thr070
+1024,417,0.4072265625,1.0,1.0,0.6258992805755396,,,answer_verified_targets,main_action_vm_echo_s192_thr070
+256,256,0.21875,0.140625,0.97265625,,0.3086530567250065,0.0,learned_policy_targets,pilot_action_vm_echo_s96
+256,56,0.21875,0.5357142857142857,answer_verified_targets,,,,,pilot_action_vm_echo_s96
+256,130,0.21875,0.2461538461538461,1.0,1.0,0.9183114661620212,0.7,learned_policy_targets,pilot_action_vm_echo_s96_thr070
+256,56,0.21875,1.0,1.0,0.5357142857142857,,,answer_verified_targets,pilot_action_vm_echo_s96_thr070
+256,256,0.21875,0.125,0.6796875,1.0,0.6597904017544352,0.0,learned_policy_targets,pilot_action_vm_echo_s96_v2
+256,56,0.21875,1.0,1.0,0.5357142857142857,,,answer_verified_targets,pilot_action_vm_echo_s96_v2
+24,24,0.0833333333333333,0.0416666666666666,1.0,,0.0412289224332198,0.0,learned_policy_targets,smoke_action_vm_echo
+24,2,0.0833333333333333,0.0,answer_verified_targets,,,,,smoke_action_vm_echo

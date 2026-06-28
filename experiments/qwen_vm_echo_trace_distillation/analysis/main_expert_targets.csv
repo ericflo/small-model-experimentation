@@ -1,0 +1,5 @@
+source_examples,targets,found_rate,changed_rate,mean_candidates,candidate_valid_rate,arm,round,phase,run
+1024,381,0.3720703125,0.6482939632545932,241.0,0.6309323132780082,baseline,1,baseline_expert_round_1,main_vm_echo_s192_w003
+1024,456,0.4453125,0.7083333333333334,241.0,0.6341537538900415,baseline,2,baseline_expert_round_2,main_vm_echo_s192_w003
+1024,398,0.388671875,0.678391959798995,241.216796875,0.6365837267110921,vm_echo,1,vm_echo_expert_round_1,main_vm_echo_s192_w003
+1024,436,0.42578125,0.6811926605504587,241.0,0.6434412279564315,vm_echo,2,vm_echo_expert_round_2,main_vm_echo_s192_w003

@@ -1,0 +1,47 @@
+{
+  "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+  "date": "2026-06-25",
+  "objective": "Measure whether Qwen3.5-4B held-out coding failures are diversity-limited or capability-limited before training any diversity-keyed adapter.",
+  "primary_question": "Among held-out MBPP tasks with no hidden-correct candidate in a small base pool, how many become covered by higher-K sampling and tuned diverse decoding at matched task prompts?",
+  "model": "Qwen/Qwen3.5-4B local snapshot",
+  "dataset": {
+    "name": "google-research-datasets/mbpp",
+    "split": "test",
+    "visible_tests": 1,
+    "hidden_tests": "remaining test_list plus challenge_test_list"
+  },
+  "planned_stages": [
+    {
+      "name": "smoke",
+      "purpose": "Validate sampling, execution, per-test functional signatures, manifests, and runtime."
+    },
+    {
+      "name": "base_pool",
+      "purpose": "Sample a small base pool to identify zero-coverage held-out tasks."
+    },
+    {
+      "name": "zero_base_ladder",
+      "purpose": "Spend extra sampling budget only on base-missed tasks under default/hot/diverse decoding arms."
+    },
+    {
+      "name": "combined_inference",
+      "purpose": "Run frozen self-repair on the strongest sampled pool's remaining failures."
+    }
+  ],
+  "main_metrics": [
+    "hidden coverage/pass@K",
+    "zero-to-one lift on base-missed tasks",
+    "coverage per estimated forward token",
+    "functional diversity from per-test failure bitstrings",
+    "false repair rate for visible-passing repairs"
+  ],
+  "gates": {
+    "diversity_training_positive_gate": "High-K/tuned sampling recovers a meaningful fraction of base-missed tasks; otherwise do not train strategy-token LoRA.",
+    "combined_recipe_gate": "Frozen repair adds coverage on tasks not recovered by sampling without excessive false repairs."
+  },
+  "artifact_policy": {
+    "experiment_dir": "/workspace/experiments/qwen35_4b_diversity_keyed_coverage_gate",
+    "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_diversity_keyed_coverage_gate",
+    "large_files": "No model checkpoints expected for the gated diagnostic; large files must stay out of the experiment directory."
+  }
+}

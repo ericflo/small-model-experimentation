@@ -1,0 +1,7 @@
+suite,iteration,method,tasks,full_exact,row_exact
+main_v1,v1_single_rule,direct_qwen,30,0.4666666666666667,0.6944444444444444
+main_v1,v1_single_rule,locked_rule_qwen,30,0.4666666666666667,0.6166666666666666
+main_v1,v1_single_rule,shuffled_rule_qwen,30,0.3666666666666666,0.5361111111111112
+main_v2_train_verified_rules,v2_train_verified,direct_qwen,30,0.4666666666666667,0.6944444444444444
+main_v2_train_verified_rules,v2_train_verified,locked_rule_qwen,30,0.4333333333333333,0.5944444444444444
+main_v2_train_verified_rules,v2_train_verified,shuffled_rule_qwen,30,0.3333333333333333,0.5833333333333334

@@ -1,0 +1,107 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:28,  4.78it/s]Loading weights:   3%|▎         | 14/426 [00:00<00:07, 54.57it/s]Loading weights:  11%|█         | 46/426 [00:00<00:02, 148.54it/s]Loading weights:  19%|█▉        | 80/426 [00:00<00:01, 208.58it/s]Loading weights:  27%|██▋       | 114/426 [00:00<00:01, 244.93it/s]Loading weights:  33%|███▎      | 141/426 [00:00<00:01, 250.91it/s]Loading weights:  39%|███▉      | 168/426 [00:00<00:01, 251.69it/s]Loading weights:  46%|████▋     | 198/426 [00:00<00:00, 264.86it/s]Loading weights:  53%|█████▎    | 226/426 [00:01<00:00, 257.63it/s]Loading weights:  61%|██████    | 259/426 [00:01<00:00, 276.06it/s]Loading weights:  68%|██████▊   | 288/426 [00:01<00:00, 277.67it/s]Loading weights:  74%|███████▍  | 317/426 [00:01<00:00, 266.28it/s]Loading weights:  81%|████████  | 346/426 [00:01<00:00, 270.30it/s]Loading weights:  89%|████████▉ | 379/426 [00:01<00:00, 276.31it/s]Loading weights:  96%|█████████▌| 407/426 [00:01<00:00, 241.38it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 222.45it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+conservative_dpo:   0%|          | 0/10 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/utils/checkpoint.py:85: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+conservative_dpo:  10%|█         | 1/10 [00:13<02:01, 13.46s/it]conservative_dpo:  20%|██        | 2/10 [00:25<01:42, 12.77s/it]conservative_dpo:  30%|███       | 3/10 [00:37<01:27, 12.44s/it]conservative_dpo:  40%|████      | 4/10 [00:49<01:12, 12.16s/it]conservative_dpo:  50%|█████     | 5/10 [01:01<00:59, 11.99s/it]conservative_dpo:  60%|██████    | 6/10 [01:13<00:47, 11.97s/it]conservative_dpo:  70%|███████   | 7/10 [01:24<00:35, 11.86s/it]conservative_dpo:  80%|████████  | 8/10 [01:36<00:23, 11.86s/it]conservative_dpo:  90%|█████████ | 9/10 [01:48<00:11, 11.83s/it]conservative_dpo: 100%|██████████| 10/10 [01:59<00:00, 11.75s/it]                                                                 {"loss": 0.6855, "pi_margin": 0.3566, "ref_margin": 0.0489, "reward_margin": 0.3078, "chosen_win_rate": 1.0, "step": 10}
+conservative_dpo: 100%|██████████| 10/10 [01:59<00:00, 11.75s/it]conservative_dpo: 100%|██████████| 10/10 [01:59<00:00, 12.00s/it]
+{
+  "batch_size": 1,
+  "beta": 0.05,
+  "grad_accum": 4,
+  "learning_rate": 3e-05,
+  "logprob_normalization": "mean_token",
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_r": 16,
+  "max_length": 1536,
+  "max_steps": 10,
+  "metrics": [
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6931471824645996,
+      "pi_margin": 0.21161015331745148,
+      "ref_margin": 0.21161015331745148,
+      "reward_margin": 0.0,
+      "step": 1
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6927943229675293,
+      "pi_margin": 0.050144270062446594,
+      "ref_margin": 0.036026954650878906,
+      "reward_margin": 0.014117315411567688,
+      "step": 2
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6863309741020203,
+      "pi_margin": 0.8005640506744385,
+      "ref_margin": 0.5269788503646851,
+      "reward_margin": 0.2735852003097534,
+      "step": 3
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6932573914527893,
+      "pi_margin": 0.18867594003677368,
+      "ref_margin": 0.19308575987815857,
+      "reward_margin": -0.004409819841384888,
+      "step": 4
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.693079948425293,
+      "pi_margin": 0.46930527687072754,
+      "ref_margin": 0.4666155278682709,
+      "reward_margin": 0.002689749002456665,
+      "step": 5
+    },
+    {
+      "chosen_win_rate": 0.0,
+      "loss": 0.6943790912628174,
+      "pi_margin": -0.15137484669685364,
+      "ref_margin": -0.10212942957878113,
+      "reward_margin": -0.04924541711807251,
+      "step": 6
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6926244497299194,
+      "pi_margin": 0.25608888268470764,
+      "ref_margin": 0.23517489433288574,
+      "reward_margin": 0.0209139883518219,
+      "step": 7
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6914085149765015,
+      "pi_margin": 0.33527812361717224,
+      "ref_margin": 0.26567089557647705,
+      "reward_margin": 0.06960722804069519,
+      "step": 8
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6921303868293762,
+      "pi_margin": 0.1904631406068802,
+      "ref_margin": 0.1497710645198822,
+      "reward_margin": 0.040692076086997986,
+      "step": 9
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6854829788208008,
+      "pi_margin": 0.3566060960292816,
+      "ref_margin": 0.0488547682762146,
+      "reward_margin": 0.307751327753067,
+      "step": 10
+    }
+  ],
+  "pair_rows": 58,
+  "pairs_in": "data/pilot_pairs_combined_real.jsonl",
+  "run_name": "conservative_dpo",
+  "tokenized_pairs": 58
+}

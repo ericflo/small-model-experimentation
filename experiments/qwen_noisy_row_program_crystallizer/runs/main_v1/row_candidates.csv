@@ -1,0 +1,1431 @@
+task_id,row_index,method,prediction,raw
+Address.000002,0,row_greedy,880 81th Place SE,880 81th Place SE
+Address.000002,0,row_format,880 81th Place SE,880 81th Place SE
+Address.000002,0,row_consistency,880 81th Place SE,880 81th Place SE
+Address.000002,0,row_sample0,880 81th Place SE,880 81th Place SE
+Address.000002,0,row_sample1,880 81th Place SE,880 81th Place SE
+Address.000002,1,row_greedy,256 32th Place NE,256 32th Place NE
+Address.000002,1,row_format,256 32th Place NE,256 32th Place NE
+Address.000002,1,row_consistency,256 32th Place NE,256 32th Place NE
+Address.000002,1,row_sample0,256 32th Place NE,256 32th Place NE
+Address.000002,1,row_sample1,256 32th Place NE,256 32th Place NE
+Address.000002,2,row_greedy,526 03th Place NE,526 03th Place NE
+Address.000002,2,row_format,526 03th Place NE,526 03th Place NE
+Address.000002,2,row_consistency,526 03th Place NE,526 03th Place NE
+Address.000002,2,row_sample0,526 03th Place NE,526 03th Place NE
+Address.000002,2,row_sample1,526 03th Place NE,526 03th Place NE
+Address.000002,0,batch_plain,880 81th Place SE,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000002,1,batch_plain,256 32th Place NE,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000002,2,batch_plain,526 03th Place NE,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000002,0,batch_json,880 81th Place SE,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000002,1,batch_json,256 32th Place NE,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000002,2,batch_json,526 03th Place NE,"[""880 81th Place SE"", ""256 32th Place NE"", ""526 03th Place NE""]"
+Address.000013,0,row_greedy,89,89
+Address.000013,0,row_format,89,89
+Address.000013,0,row_consistency,89,89
+Address.000013,0,row_sample0,89,89
+Address.000013,0,row_sample1,89,89
+Address.000013,1,row_greedy,234,234
+Address.000013,1,row_format,234,234
+Address.000013,1,row_consistency,234,234
+Address.000013,1,row_sample0,234,234
+Address.000013,1,row_sample1,234,234
+Address.000013,2,row_greedy,One Main Parkway,One Main Parkway
+Address.000013,2,row_format,One Main Parkway,One Main Parkway
+Address.000013,2,row_consistency,"One Main Parkway, Allentown, ND 41230","One Main Parkway, Allentown, ND 41230
+Output: One"
+Address.000013,2,row_sample0,One Main Parkway,One Main Parkway
+Address.000013,2,row_sample1,One Main Parkway,One Main Parkway
+Address.000013,3,row_greedy,One Second Way,One Second Way
+Address.000013,3,row_format,One Second Way,One Second Way
+Address.000013,3,row_consistency,"One Second Way, Ekurhuleni, NY 58712","One Second Way, Ekurhuleni, NY 58712
+Output: One"
+Address.000013,3,row_sample0,One Second Way,One Second Way
+Address.000013,3,row_sample1,One Second Way,One Second Way
+Address.000013,4,row_greedy,789,789
+Address.000013,4,row_format,789,789
+Address.000013,4,row_consistency,789,789
+Address.000013,4,row_sample0,789,789
+Address.000013,4,row_sample1,789,789
+Address.000013,5,row_greedy,234,234
+Address.000013,5,row_format,234,234
+Address.000013,5,row_consistency,234,234
+Address.000013,5,row_sample0,234,234
+Address.000013,5,row_sample1,234,234
+Address.000013,0,batch_plain,89,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,1,batch_plain,234,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,2,batch_plain,One,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,3,batch_plain,One,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,4,batch_plain,789,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,5,batch_plain,234,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,0,batch_json,89,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,1,batch_json,234,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,2,batch_json,One,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,3,batch_json,One,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,4,batch_json,789,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+Address.000013,5,batch_json,234,"[""89"", ""234"", ""One"", ""One"", ""789"", ""234""]"
+BillingCode.000007,0,row_greedy,[11529],[11529]
+BillingCode.000007,0,row_format,[11529],[11529]
+BillingCode.000007,0,row_consistency,[11529],[11529]
+BillingCode.000007,0,row_sample0,[11529],[11529]
+BillingCode.000007,0,row_sample1,[11529],[11529]
+BillingCode.000007,1,row_greedy,[PT-11529],[PT-11529]
+BillingCode.000007,1,row_format,[PT-11529],[PT-11529]
+BillingCode.000007,1,row_consistency,[PT-11529],[PT-11529]
+BillingCode.000007,1,row_sample0,[PT-11529],[PT-11529]
+BillingCode.000007,1,row_sample1,[PT-11529],[PT-11529]
+BillingCode.000007,2,row_greedy,[CPT-11529],[CPT-11529]
+BillingCode.000007,2,row_format,[CPT-11529],[CPT-11529]
+BillingCode.000007,2,row_consistency,[CPT-11529],[CPT-11529]
+BillingCode.000007,2,row_sample0,[CPT-11529],[CPT-11529]
+BillingCode.000007,2,row_sample1,[CPT-11529],[CPT-11529]
+BillingCode.000007,0,batch_plain,11529,"[""11529"", ""PT-11529"", ""[CPT-11529""]"
+BillingCode.000007,1,batch_plain,PT-11529,"[""11529"", ""PT-11529"", ""[CPT-11529""]"
+BillingCode.000007,2,batch_plain,[CPT-11529,"[""11529"", ""PT-11529"", ""[CPT-11529""]"
+BillingCode.000007,0,batch_json,11529,"[""11529"", ""PT-11529"", ""[CPT-11529""]"
+BillingCode.000007,1,batch_json,PT-11529,"[""11529"", ""PT-11529"", ""[CPT-11529""]"
+BillingCode.000007,2,batch_json,[CPT-11529,"[""11529"", ""PT-11529"", ""[CPT-11529""]"
+City.000010,0,row_greedy,9,9
+City.000010,0,row_format,9,9
+City.000010,0,row_consistency,9,9
+City.000010,0,row_sample0,9,9
+City.000010,0,row_sample1,9,9
+City.000010,1,row_greedy,20,20
+City.000010,1,row_format,20,20
+City.000010,1,row_consistency,20,20
+City.000010,1,row_sample0,20,20
+City.000010,1,row_sample1,20,20
+City.000010,2,row_greedy,0,0
+City.000010,2,row_format,0,0
+City.000010,2,row_consistency,0,0
+City.000010,2,row_sample0,0,0
+City.000010,2,row_sample1,0,0
+City.000010,0,batch_plain,9,"[""9"", ""20"", ""0""]"
+City.000010,1,batch_plain,20,"[""9"", ""20"", ""0""]"
+City.000010,2,batch_plain,0,"[""9"", ""20"", ""0""]"
+City.000010,0,batch_json,9,"[""9"", ""20"", ""0""]"
+City.000010,1,batch_json,20,"[""9"", ""20"", ""0""]"
+City.000010,2,batch_json,0,"[""9"", ""20"", ""0""]"
+City.000011,0,row_greedy,New York City,New York City
+City.000011,0,row_format,New York City,New York City
+City.000011,0,row_consistency,New York City,New York City
+City.000011,0,row_sample0,New York City,New York City
+City.000011,0,row_sample1,New York City,New York City
+City.000011,1,row_greedy,New York City,New York City
+City.000011,1,row_format,New York City,New York City
+City.000011,1,row_consistency,New York City,New York City
+City.000011,1,row_sample0,New York City,New York City
+City.000011,1,row_sample1,New York City,New York City
+City.000011,2,row_greedy,New York City,New York City
+City.000011,2,row_format,,
+City.000011,2,row_consistency,New York City,New York City
+City.000011,2,row_sample0,New York City,New York City
+City.000011,2,row_sample1,New York City,New York City
+City.000011,3,row_greedy,San Jose,San Jose
+City.000011,3,row_format,San Jose,San Jose
+City.000011,3,row_consistency,Chicago,Chicago
+City.000011,3,row_sample0,San Jose,San Jose
+City.000011,3,row_sample1,San Jose,San Jose
+City.000011,0,batch_plain,New York City,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,1,batch_plain,New York City,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,2,batch_plain,,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,3,batch_plain,San Jose,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,0,batch_json,New York City,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,1,batch_json,New York City,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,2,batch_json,,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+City.000011,3,batch_json,San Jose,"[""New York City"", ""New York City"", ""None"", ""San Jose""]"
+Column.000001,0,row_greedy,Col1,Col1
+Column.000001,0,row_format,Col1,Col1
+Column.000001,0,row_consistency,Col1,Col1
+Column.000001,0,row_sample0,Col1,Col1
+Column.000001,0,row_sample1,Col1,Col1
+Column.000001,1,row_greedy,Col2,Col2
+Column.000001,1,row_format,Col2,Col2
+Column.000001,1,row_consistency,Col2,Col2
+Column.000001,1,row_sample0,Col2,Col2
+Column.000001,1,row_sample1,Col2,Col2
+Column.000001,2,row_greedy,Col1,Col1
+Column.000001,2,row_format,Col1,Col1
+Column.000001,2,row_consistency,Col1,Col1
+Column.000001,2,row_sample0,Col1,Col1
+Column.000001,2,row_sample1,Col1,Col1
+Column.000001,3,row_greedy,Col1,Col1
+Column.000001,3,row_format,Col1,Col1
+Column.000001,3,row_consistency,Col1,Col1
+Column.000001,3,row_sample0,Col1,Col1
+Column.000001,3,row_sample1,Col1,Col1
+Column.000001,4,row_greedy,Col4,Col4
+Column.000001,4,row_format,Col4,Col4
+Column.000001,4,row_consistency,Col4,Col4
+Column.000001,4,row_sample0,Col4,Col4
+Column.000001,4,row_sample1,Col4,Col4
+Column.000001,5,row_greedy,Col0,Col0
+Column.000001,5,row_format,Col0,Col0
+Column.000001,5,row_consistency,Col0,Col0
+Column.000001,5,row_sample0,Col0,Col0
+Column.000001,5,row_sample1,Col0,Col0
+Column.000001,0,batch_plain,Col1,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,1,batch_plain,Col2,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,2,batch_plain,Col1,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,3,batch_plain,Col1,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,4,batch_plain,Col4,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,5,batch_plain,Col0,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,0,batch_json,Col1,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,1,batch_json,Col2,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,2,batch_json,Col1,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,3,batch_json,Col1,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,4,batch_json,Col4,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+Column.000001,5,batch_json,Col0,"[""Col1"", ""Col2"", ""Col1"", ""Col1"", ""Col4"", ""Col0""]"
+DateTime.000004,0,row_greedy,04:29:27 1858-12-08,04:29:27 1858-12-08
+DateTime.000004,0,row_format,04:29:27 1858-12-08,04:29:27 1858-12-08
+DateTime.000004,0,row_consistency,04:29:27 1858-12-08,04:29:27 1858-12-08
+DateTime.000004,0,row_sample0,04:29:27 1858-12-08,04:29:27 1858-12-08
+DateTime.000004,0,row_sample1,04:29:27 1858-12-08,04:29:27 1858-12-08
+DateTime.000004,1,row_greedy,09:08:38 2220-06-30,09:08:38 2220-06-30
+DateTime.000004,1,row_format,09:08:38 2220-06-30,09:08:38 2220-06-30
+DateTime.000004,1,row_consistency,09:08:38 2220-06-30,09:08:38 2220-06-30
+DateTime.000004,1,row_sample0,09:08:38 2220-06-30,09:08:38 2220-06-30
+DateTime.000004,1,row_sample1,09:08:38 2220-06-30,09:08:38 2220-06-30
+DateTime.000004,2,row_greedy,21:46:13 1880-10-31,21:46:13 1880-10-31
+DateTime.000004,2,row_format,21:46:13 1880-10-31,21:46:13 1880-10-31
+DateTime.000004,2,row_consistency,21:46:13 1880-10-31,21:46:13 1880-10-31
+DateTime.000004,2,row_sample0,21:46:13 1880-10-31,21:46:13 1880-10-31
+DateTime.000004,2,row_sample1,21:46:13 1880-10-31,21:46:13 1880-10-31
+DateTime.000004,3,row_greedy,17:14:57 1963-05-31,17:14:57 1963-05-31
+DateTime.000004,3,row_format,17:14:57 1963-05-31,17:14:57 1963-05-31
+DateTime.000004,3,row_consistency,17:14:57 1963-05-31,17:14:57 1963-05-31
+DateTime.000004,3,row_sample0,17:14:57 1963-05-31,17:14:57 1963-05-31
+DateTime.000004,3,row_sample1,17:14:57 1963-05-31,17:14:57 1963-05-31
+DateTime.000004,4,row_greedy,20:35:50 2038-05-17,20:35:50 2038-05-17
+DateTime.000004,4,row_format,20:35:50 2038-05-17,20:35:50 2038-05-17
+DateTime.000004,4,row_consistency,20:35:50 2038-05-17,20:35:50 2038-05-17
+DateTime.000004,4,row_sample0,20:35:50 2038-05-17,20:35:50 2038-05-17
+DateTime.000004,4,row_sample1,20:35:50 2038-05-17,20:35:50 2038-05-17
+DateTime.000004,5,row_greedy,20:07:33 2048-11-30,20:07:33 2048-11-30
+DateTime.000004,5,row_format,20:07:33 2048-11-30,20:07:33 2048-11-30
+DateTime.000004,5,row_consistency,20:07:33 2048-11-30,20:07:33 2048-11-30
+DateTime.000004,5,row_sample0,20:07:33 2048-11-30,20:07:33 2048-11-30
+DateTime.000004,5,row_sample1,20:07:33 2048-11-30,20:07:33 2048-11-30
+DateTime.000004,0,batch_plain,04:29:27 1858-12-08,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,1,batch_plain,09:08:38 2220-06-30,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,2,batch_plain,21:46:13 1880-10-31,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,3,batch_plain,17:14:57 1963-05-31,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,4,batch_plain,20:35:50 2038-05-17,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,5,batch_plain,20:07:33 2048-11-30,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,0,batch_json,04:29:27 1858-12-08,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,1,batch_json,09:08:38 2220-06-30,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,2,batch_json,21:46:13 1880-10-31,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,3,batch_json,17:14:57 1963-05-31,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,4,batch_json,20:35:50 2038-05-17,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000004,5,batch_json,20:07:33 2048-11-30,"[""04:29:27 1858-12-08"", ""09:08:38 2220-06-30"", ""21:46:13 1880-10-31"", ""17:14:57 1963-05-31"", ""20:35:50 2038-05-17"", ""20:07:33 2048-11-30""]"
+DateTime.000007,0,row_greedy,Sep 2007,Sep 2007
+DateTime.000007,0,row_format,Sep 2007,Sep 2007
+DateTime.000007,0,row_consistency,Sep 2007,Sep 2007
+DateTime.000007,0,row_sample0,Sep 2007,Sep 2007
+DateTime.000007,0,row_sample1,Sep 2007,Sep 2007
+DateTime.000007,1,row_greedy,Dec 1953,Dec 1953
+DateTime.000007,1,row_format,Dec 1953,Dec 1953
+DateTime.000007,1,row_consistency,Dec 1953,Dec 1953
+DateTime.000007,1,row_sample0,Dec 1953,Dec 1953
+DateTime.000007,1,row_sample1,Dec 1953,Dec 1953
+DateTime.000007,2,row_greedy,Nov 1987,Nov 1987
+DateTime.000007,2,row_format,Nov 1987,Nov 1987
+DateTime.000007,2,row_consistency,Nov 1987,Nov 1987
+DateTime.000007,2,row_sample0,Nov 1987,Nov 1987
+DateTime.000007,2,row_sample1,Nov 1987,Nov 1987
+DateTime.000007,3,row_greedy,Dec 1963,Dec 1963
+DateTime.000007,3,row_format,Dec 1963,Dec 1963
+DateTime.000007,3,row_consistency,Dec 1963,Dec 1963
+DateTime.000007,3,row_sample0,Dec 1963,Dec 1963
+DateTime.000007,3,row_sample1,Dec 1963,Dec 1963
+DateTime.000007,4,row_greedy,Sep 1961,Sep 1961
+DateTime.000007,4,row_format,Sep 1961,Sep 1961
+DateTime.000007,4,row_consistency,Sep 1961,Sep 1961
+DateTime.000007,4,row_sample0,Sep 1961,Sep 1961
+DateTime.000007,4,row_sample1,Sep 1961,Sep 1961
+DateTime.000007,5,row_greedy,Jun 2041,Jun 2041
+DateTime.000007,5,row_format,Jun 2041,Jun 2041
+DateTime.000007,5,row_consistency,Jun 2041,Jun 2041
+DateTime.000007,5,row_sample0,Jun 2041,Jun 2041
+DateTime.000007,5,row_sample1,Jun 2041,Jun 2041
+DateTime.000007,0,batch_plain,Sep 2007,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,1,batch_plain,Dec 1953,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,2,batch_plain,Nov 1987,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,3,batch_plain,Dec 1963,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,4,batch_plain,Sep 1961,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,5,batch_plain,Jun 2041,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,0,batch_json,Sep 2007,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,1,batch_json,Dec 1953,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,2,batch_json,Nov 1987,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,3,batch_json,Dec 1963,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,4,batch_json,Sep 1961,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000007,5,batch_json,Jun 2041,"[""Sep 2007"", ""Dec 1953"", ""Nov 1987"", ""Dec 1963"", ""Sep 1961"", ""Jun 2041""]"
+DateTime.000017,0,row_greedy,30/3/2241,30/3/2241
+DateTime.000017,0,row_format,30/3/2241,30/3/2241
+DateTime.000017,0,row_consistency,30/3/2241,30/3/2241
+DateTime.000017,0,row_sample0,30/3/2241,30/3/2241
+DateTime.000017,0,row_sample1,30/3/2241,30/3/2241
+DateTime.000017,1,row_greedy,2/8/2160,2/8/2160
+DateTime.000017,1,row_format,2/8/2160,2/8/2160
+DateTime.000017,1,row_consistency,02/8/2160,02/8/2160
+DateTime.000017,1,row_sample0,2/8/2160,2/8/2160
+DateTime.000017,1,row_sample1,2/8/2160,2/8/2160
+DateTime.000017,2,row_greedy,23/5/1984,23/5/1984
+DateTime.000017,2,row_format,23/5/1984,23/5/1984
+DateTime.000017,2,row_consistency,23/5/1984,23/5/1984
+DateTime.000017,2,row_sample0,23/5/1984,23/5/1984
+DateTime.000017,2,row_sample1,23/5/1984,23/5/1984
+DateTime.000017,3,row_greedy,15/8/1740,15/8/1740
+DateTime.000017,3,row_format,15/8/1740,15/8/1740
+DateTime.000017,3,row_consistency,15/8/1740,15/8/1740
+DateTime.000017,3,row_sample0,15/8/1740,15/8/1740
+DateTime.000017,3,row_sample1,15/8/1740,15/8/1740
+DateTime.000017,4,row_greedy,8/7/2237,8/7/2237
+DateTime.000017,4,row_format,08/7/2237,08/7/2237
+DateTime.000017,4,row_consistency,08/7/2237,08/7/2237
+DateTime.000017,4,row_sample0,8/7/2237,8/7/2237
+DateTime.000017,4,row_sample1,8/7/2237,8/7/2237
+DateTime.000017,5,row_greedy,3/11/1904,3/11/1904
+DateTime.000017,5,row_format,31/11/1904,31/11/1904
+DateTime.000017,5,row_consistency,31/11/1904,31/11/1904
+DateTime.000017,5,row_sample0,3/11/1904,3/11/1904
+DateTime.000017,5,row_sample1,3/11/1904,3/11/1904
+DateTime.000017,0,batch_plain,3/1/1846,"[""3/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000017,1,batch_plain,2/8/2160,"[""3/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000017,2,batch_plain,23/5/1984,"[""3/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000017,3,batch_plain,15/8/1740,"[""3/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000017,4,batch_plain,7/8/2237,"[""3/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000017,5,batch_plain,3/11/1904,"[""3/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""7/8/2237"", ""3/11/1904""]"
+DateTime.000017,0,batch_json,31/1/1846,"[""31/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000017,1,batch_json,2/8/2160,"[""31/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000017,2,batch_json,23/5/1984,"[""31/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000017,3,batch_json,15/8/1740,"[""31/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000017,4,batch_json,8/7/2237,"[""31/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000017,5,batch_json,3/11/1904,"[""31/1/1846"", ""2/8/2160"", ""23/5/1984"", ""15/8/1740"", ""8/7/2237"", ""3/11/1904""]"
+DateTime.000025,0,row_greedy,Mar 41,Mar 41
+DateTime.000025,0,row_format,Mar 41,Mar 41
+DateTime.000025,0,row_consistency,Mar 41,Mar 41
+DateTime.000025,0,row_sample0,Mar 41,Mar 41
+DateTime.000025,0,row_sample1,Mar 41,Mar 41
+DateTime.000025,1,row_greedy,Aug 60,Aug 60
+DateTime.000025,1,row_format,Aug 60,Aug 60
+DateTime.000025,1,row_consistency,Aug 60,Aug 60
+DateTime.000025,1,row_sample0,Aug 60,Aug 60
+DateTime.000025,1,row_sample1,Aug 60,Aug 60
+DateTime.000025,2,row_greedy,May 84,May 84
+DateTime.000025,2,row_format,May 84,May 84
+DateTime.000025,2,row_consistency,May 84,May 84
+DateTime.000025,2,row_sample0,May 84,May 84
+DateTime.000025,2,row_sample1,May 84,May 84
+DateTime.000025,3,row_greedy,Aug 40,Aug 40
+DateTime.000025,3,row_format,Aug 40,Aug 40
+DateTime.000025,3,row_consistency,August 40,August 40
+DateTime.000025,3,row_sample0,Aug 40,Aug 40
+DateTime.000025,3,row_sample1,Aug 40,Aug 40
+DateTime.000025,4,row_greedy,Jul 37,Jul 37
+DateTime.000025,4,row_format,Jul 37,Jul 37
+DateTime.000025,4,row_consistency,Jul 37,Jul 37
+DateTime.000025,4,row_sample0,Jul 37,Jul 37
+DateTime.000025,4,row_sample1,Jul 37,Jul 37
+DateTime.000025,5,row_greedy,Nov 04,Nov 04
+DateTime.000025,5,row_format,Nov 04,Nov 04
+DateTime.000025,5,row_consistency,Nov 04,Nov 04
+DateTime.000025,5,row_sample0,Nov 04,Nov 04
+DateTime.000025,5,row_sample1,Nov 04,Nov 04
+DateTime.000025,0,batch_plain,Mar 41,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,1,batch_plain,Aug 60,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,2,batch_plain,May 84,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,3,batch_plain,Aug 40,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,4,batch_plain,Jul 37,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,5,batch_plain,Nov 04,"[""Mar 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 37"", ""Nov 04""]"
+DateTime.000025,0,batch_json,Jan 41,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,1,batch_json,Aug 60,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,2,batch_json,May 84,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,3,batch_json,Aug 40,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,4,batch_json,Jul 08,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000025,5,batch_json,Nov 04,"[""Jan 41"", ""Aug 60"", ""May 84"", ""Aug 40"", ""Jul 08"", ""Nov 04""]"
+DateTime.000027,0,row_greedy,Q1 '2241,Q1 '2241
+DateTime.000027,0,row_format,Q1 '1846,Q1 '1846
+DateTime.000027,0,row_consistency,Q1 '3302241,Q1 '3302241
+DateTime.000027,0,row_sample0,Q1 '2241,Q1 '2241
+DateTime.000027,0,row_sample1,Q1 '2241,Q1 '2241
+DateTime.000027,1,row_greedy,Q1 '2160,Q1 '2160
+DateTime.000027,1,row_format,Q1 '160,Q1 '160
+DateTime.000027,1,row_consistency,Q2 '2160,Q2 '2160
+DateTime.000027,1,row_sample0,Q1 '2160,Q1 '2160
+DateTime.000027,1,row_sample1,Q1 '2160,Q1 '2160
+DateTime.000027,2,row_greedy,Q2 '1984,Q2 '1984
+DateTime.000027,2,row_format,Q2 '1984,Q2 '1984
+DateTime.000027,2,row_consistency,Q2 '1984,Q2 '1984
+DateTime.000027,2,row_sample0,Q2 '1984,Q2 '1984
+DateTime.000027,2,row_sample1,Q2 '1984,Q2 '1984
+DateTime.000027,3,row_greedy,Q2 '1740,Q2 '1740
+DateTime.000027,3,row_format,Q2 '1740,Q2 '1740
+DateTime.000027,3,row_consistency,Q2 '1740,Q2 '1740
+DateTime.000027,3,row_sample0,Q2 '1740,Q2 '1740
+DateTime.000027,3,row_sample1,Q2 '1740,Q2 '1740
+DateTime.000027,4,row_greedy,Q2 '2237,Q2 '2237
+DateTime.000027,4,row_format,Q2 '2237,Q2 '2237
+DateTime.000027,4,row_consistency,Q2 '2237,Q2 '2237
+DateTime.000027,4,row_sample0,Q2 '2237,Q2 '2237
+DateTime.000027,4,row_sample1,Q2 '2237,Q2 '2237
+DateTime.000027,5,row_greedy,Q4 '1904,Q4 '1904
+DateTime.000027,5,row_format,Q4 '1904,Q4 '1904
+DateTime.000027,5,row_consistency,Q4 '1904,Q4 '1904
+DateTime.000027,5,row_sample0,Q4 '1904,Q4 '1904
+DateTime.000027,5,row_sample1,Q4 '1904,Q4 '1904
+DateTime.000027,0,batch_plain,Q1 '3302,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,1,batch_plain,Q1 '8022,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,2,batch_plain,Q2 '1984,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,3,batch_plain,Q3 '1740,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,4,batch_plain,Q3 '2237,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,5,batch_plain,Q4 '1904,"[""Q1 '3302"", ""Q1 '8022"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,0,batch_json,Q1 '3302241,"[""Q1 '3302241"", ""Q2 '8022160"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,1,batch_json,Q2 '8022160,"[""Q1 '3302241"", ""Q2 '8022160"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,2,batch_json,Q2 '1984,"[""Q1 '3302241"", ""Q2 '8022160"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,3,batch_json,Q3 '1740,"[""Q1 '3302241"", ""Q2 '8022160"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,4,batch_json,Q3 '2237,"[""Q1 '3302241"", ""Q2 '8022160"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000027,5,batch_json,Q4 '1904,"[""Q1 '3302241"", ""Q2 '8022160"", ""Q2 '1984"", ""Q3 '1740"", ""Q3 '2237"", ""Q4 '1904""]"
+DateTime.000034,0,row_greedy,2002-09-12 16:15:08,2002-09-12 16:15:08
+DateTime.000034,0,row_format,2002-09-12 16:15:08,2002-09-12 16:15:08
+DateTime.000034,0,row_consistency,2002-09-12 16:15:08,2002-09-12 16:15:08
+DateTime.000034,0,row_sample0,2002-09-12 16:15:08,2002-09-12 16:15:08
+DateTime.000034,0,row_sample1,2002-09-12 16:15:08,2002-09-12 16:15:08
+DateTime.000034,1,row_greedy,2002-09-12 23:48:20,2002-09-12 23:48:20
+DateTime.000034,1,row_format,2002-09-12 23:48:20,2002-09-12 23:48:20
+DateTime.000034,1,row_consistency,2002-09-12 23:48:20,2002-09-12 23:48:20
+DateTime.000034,1,row_sample0,2002-09-12 23:48:20,2002-09-12 23:48:20
+DateTime.000034,1,row_sample1,2002-09-12 23:48:20,2002-09-12 23:48:20
+DateTime.000034,2,row_greedy,2002-09-12 22:24:59,2002-09-12 22:24:59
+DateTime.000034,2,row_format,2002-09-12 22:24:59,2002-09-12 22:24:59
+DateTime.000034,2,row_consistency,2002-09-12 22:24:59,2002-09-12 22:24:59
+DateTime.000034,2,row_sample0,2002-09-12 22:24:59,2002-09-12 22:24:59
+DateTime.000034,2,row_sample1,2002-09-12 22:24:59,2002-09-12 22:24:59
+DateTime.000034,3,row_greedy,2002-09-12 04:29:27,2002-09-12 04:29:27
+DateTime.000034,3,row_format,2002-09-12 04:29:27,2002-09-12 04:29:27
+DateTime.000034,3,row_consistency,2002-09-12 04:29:27,2002-09-12 04:29:27
+DateTime.000034,3,row_sample0,2002-09-12 04:29:27,2002-09-12 04:29:27
+DateTime.000034,3,row_sample1,2002-09-12 04:29:27,2002-09-12 04:29:27
+DateTime.000034,4,row_greedy,2002-09-12 15:25:29,2002-09-12 15:25:29
+DateTime.000034,4,row_format,2002-09-12 15:25:29,2002-09-12 15:25:29
+DateTime.000034,4,row_consistency,2002-09-12 15:25:29,2002-09-12 15:25:29
+DateTime.000034,4,row_sample0,2002-09-12 15:25:29,2002-09-12 15:25:29
+DateTime.000034,4,row_sample1,2002-09-12 15:25:29,2002-09-12 15:25:29
+DateTime.000034,5,row_greedy,2002-09-12 08:14:07,2002-09-12 08:14:07
+DateTime.000034,5,row_format,2002-09-12 08:14:07,2002-09-12 08:14:07
+DateTime.000034,5,row_consistency,2002-09-12 08:14:07,2002-09-12 08:14:07
+DateTime.000034,5,row_sample0,2002-09-12 08:14:07,2002-09-12 08:14:07
+DateTime.000034,5,row_sample1,2002-09-12 08:14:07,2002-09-12 08:14:07
+DateTime.000034,0,batch_plain,2002-09-12 16:15:08,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,1,batch_plain,2002-09-12 23:48:20,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,2,batch_plain,2002-09-12 22:24:59,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,3,batch_plain,2002-09-12 04:29:27,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,4,batch_plain,2002-09-12 15:25:29,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,5,batch_plain,2002-09-12 08:14:07,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,0,batch_json,2002-09-12 16:15:08,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,1,batch_json,2002-09-12 23:48:20,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,2,batch_json,2002-09-12 22:24:59,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,3,batch_json,2002-09-12 04:29:27,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,4,batch_json,2002-09-12 15:25:29,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000034,5,batch_json,2002-09-12 08:14:07,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000051,0,row_greedy,12:00PM-12:30PM,12:00PM-12:30PM
+DateTime.000051,0,row_format,12:00PM-12:30PM,12:00PM-12:30PM
+DateTime.000051,0,row_consistency,12:00PM-12:30PM,12:00PM-12:30PM
+DateTime.000051,0,row_sample0,12:00PM-12:30PM,12:00PM-12:30PM
+DateTime.000051,0,row_sample1,12:00PM-12:30PM,12:00PM-12:30PM
+DateTime.000051,1,row_greedy,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,1,row_format,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,1,row_consistency,04:00AM-04:30AM,04:00AM-04:30AM
+DateTime.000051,1,row_sample0,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,1,row_sample1,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,2,row_greedy,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,2,row_format,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,2,row_consistency,04:00AM-04:30AM,04:00AM-04:30AM
+DateTime.000051,2,row_sample0,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,2,row_sample1,4:00AM-4:30AM,4:00AM-4:30AM
+DateTime.000051,0,batch_plain,12:00PM-12:30PM,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]"
+DateTime.000051,1,batch_plain,4:00AM-4:30AM,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]"
+DateTime.000051,2,batch_plain,4:00AM-4:30AM,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]"
+DateTime.000051,0,batch_json,12:00PM-12:30PM,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]"
+DateTime.000051,1,batch_json,4:00AM-4:30AM,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]"
+DateTime.000051,2,batch_json,4:00AM-4:30AM,"[""12:00PM-12:30PM"", ""4:00AM-4:30AM"", ""4:00AM-4:30AM""]"
+DateTime.000076,0,row_greedy,10:00-29:00,10:00-29:00
+DateTime.000076,0,row_format,10:00-29:00,10:00-29:00
+DateTime.000076,0,row_consistency,0:00-19:00,0:00-19:00
+DateTime.000076,0,row_sample0,10:00-29:00,10:00-29:00
+DateTime.000076,0,row_sample1,10:00-29:00,10:00-29:00
+DateTime.000076,1,row_greedy,40:00-59:00,40:00-59:00
+DateTime.000076,1,row_format,40:00-59:00,40:00-59:00
+DateTime.000076,1,row_consistency,40:00-59:00,40:00-59:00
+DateTime.000076,1,row_sample0,40:00-59:00,40:00-59:00
+DateTime.000076,1,row_sample1,40:00-59:00,40:00-59:00
+DateTime.000076,2,row_greedy,20:00-39:00,20:00-39:00
+DateTime.000076,2,row_format,20:00-39:00,20:00-39:00
+DateTime.000076,2,row_consistency,20:00-39:00,20:00-39:00
+DateTime.000076,2,row_sample0,20:00-39:00,20:00-39:00
+DateTime.000076,2,row_sample1,20:00-39:00,20:00-39:00
+DateTime.000076,3,row_greedy,20:00-39:00,20:00-39:00
+DateTime.000076,3,row_format,20:00-39:00,20:00-39:00
+DateTime.000076,3,row_consistency,20:00-39:00,20:00-39:00
+DateTime.000076,3,row_sample0,20:00-39:00,20:00-39:00
+DateTime.000076,3,row_sample1,20:00-39:00,20:00-39:00
+DateTime.000076,4,row_greedy,20:00-39:00,20:00-39:00
+DateTime.000076,4,row_format,20:00-39:00,20:00-39:00
+DateTime.000076,4,row_consistency,20:00-39:00,20:00-39:00
+DateTime.000076,4,row_sample0,20:00-39:00,20:00-39:00
+DateTime.000076,4,row_sample1,20:00-39:00,20:00-39:00
+DateTime.000076,5,row_greedy,10:00-29:00,10:00-29:00
+DateTime.000076,5,row_format,10:00-29:00,10:00-29:00
+DateTime.000076,5,row_consistency,10:00-29:00,10:00-29:00
+DateTime.000076,5,row_sample0,10:00-29:00,10:00-29:00
+DateTime.000076,5,row_sample1,10:00-29:00,10:00-29:00
+DateTime.000076,0,batch_plain,15:00-35:00,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,1,batch_plain,40:00-59:00,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,2,batch_plain,20:00-39:00,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,3,batch_plain,20:00-39:00,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,4,batch_plain,20:00-39:00,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,5,batch_plain,0:00-19:00,"[""15:00-35:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,0,batch_json,10:00-29:00,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,1,batch_json,40:00-59:00,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,2,batch_json,20:00-39:00,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,3,batch_json,20:00-39:00,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,4,batch_json,20:00-39:00,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000076,5,batch_json,0:00-19:00,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000081,0,row_greedy,4:15PM-4:30PM,4:15PM-4:30PM
+DateTime.000081,0,row_format,4:15PM-4:30PM,4:15PM-4:30PM
+DateTime.000081,0,row_consistency,4:00PM-4:30PM,4:00PM-4:30PM
+DateTime.000081,0,row_sample0,4:15PM-4:30PM,4:15PM-4:30PM
+DateTime.000081,0,row_sample1,4:15PM-4:30PM,4:15PM-4:30PM
+DateTime.000081,1,row_greedy,11:15PM-11:45PM,11:15PM-11:45PM
+DateTime.000081,1,row_format,11:15PM-11:45PM,11:15PM-11:45PM
+DateTime.000081,1,row_consistency,11:15PM-11:45PM,11:15PM-11:45PM
+DateTime.000081,1,row_sample0,11:15PM-11:45PM,11:15PM-11:45PM
+DateTime.000081,1,row_sample1,11:15PM-11:45PM,11:15PM-11:45PM
+DateTime.000081,2,row_greedy,10:15PM-10:45PM,10:15PM-10:45PM
+DateTime.000081,2,row_format,10:15PM-10:45PM,10:15PM-10:45PM
+DateTime.000081,2,row_consistency,10:15PM-10:45PM,10:15PM-10:45PM
+DateTime.000081,2,row_sample0,10:15PM-10:45PM,10:15PM-10:45PM
+DateTime.000081,2,row_sample1,10:15PM-10:45PM,10:15PM-10:45PM
+DateTime.000081,3,row_greedy,4:15AM-4:45AM,4:15AM-4:45AM
+DateTime.000081,3,row_format,4:15AM-4:45AM,4:15AM-4:45AM
+DateTime.000081,3,row_consistency,4:15AM-4:45AM,4:15AM-4:45AM
+DateTime.000081,3,row_sample0,4:15AM-4:45AM,4:15AM-4:45AM
+DateTime.000081,3,row_sample1,4:15AM-4:45AM,4:15AM-4:45AM
+DateTime.000081,4,row_greedy,3:15PM-3:45PM,3:15PM-3:45PM
+DateTime.000081,4,row_format,3:15PM-3:45PM,3:15PM-3:45PM
+DateTime.000081,4,row_consistency,3:15PM-3:45PM,3:15PM-3:45PM
+DateTime.000081,4,row_sample0,3:15PM-3:45PM,3:15PM-3:45PM
+DateTime.000081,4,row_sample1,3:15PM-3:45PM,3:15PM-3:45PM
+DateTime.000081,5,row_greedy,8:15AM-8:30AM,8:15AM-8:30AM
+DateTime.000081,5,row_format,8:15AM-8:30AM,8:15AM-8:30AM
+DateTime.000081,5,row_consistency,8:15AM-8:45AM,8:15AM-8:45AM
+DateTime.000081,5,row_sample0,8:15AM-8:30AM,8:15AM-8:30AM
+DateTime.000081,5,row_sample1,8:15AM-8:30AM,8:15AM-8:30AM
+DateTime.000081,0,batch_plain,4:15PM-4:45PM,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,1,batch_plain,11:15PM-11:45PM,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,2,batch_plain,10:15PM-10:45PM,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,3,batch_plain,4:15AM-4:45AM,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,4,batch_plain,3:15PM-3:45PM,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,5,batch_plain,8:15AM-8:45AM,"[""4:15PM-4:45PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,0,batch_json,4:15PM-4:30PM,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,1,batch_json,11:15PM-11:45PM,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,2,batch_json,10:15PM-10:45PM,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,3,batch_json,4:15AM-4:45AM,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,4,batch_json,3:15PM-3:45PM,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000081,5,batch_json,8:15AM-8:45AM,"[""4:15PM-4:30PM"", ""11:15PM-11:45PM"", ""10:15PM-10:45PM"", ""4:15AM-4:45AM"", ""3:15PM-3:45PM"", ""8:15AM-8:45AM""]"
+DateTime.000094,0,row_greedy,2006-02-21,2006-02-21
+DateTime.000094,0,row_format,2006-02-21,2006-02-21
+DateTime.000094,0,row_consistency,2006-02-21,2006-02-21
+DateTime.000094,0,row_sample0,2006-02-21,2006-02-21
+DateTime.000094,0,row_sample1,2006-02-21,2006-02-21
+DateTime.000094,1,row_greedy,1997-12-19,1997-12-19
+DateTime.000094,1,row_format,1997-12-19,1997-12-19
+DateTime.000094,1,row_consistency,1997-12-19,1997-12-19
+DateTime.000094,1,row_sample0,1997-12-19,1997-12-19
+DateTime.000094,1,row_sample1,1997-12-19,1997-12-19
+DateTime.000094,2,row_greedy,2004-09-30,2004-09-30
+DateTime.000094,2,row_format,2004-09-30,2004-09-30
+DateTime.000094,2,row_consistency,2004-09-30,2004-09-30
+DateTime.000094,2,row_sample0,2004-09-30,2004-09-30
+DateTime.000094,2,row_sample1,2004-09-30,2004-09-30
+DateTime.000094,3,row_greedy,1967-05-18,1967-05-18
+DateTime.000094,3,row_format,1967-05-18,1967-05-18
+DateTime.000094,3,row_consistency,1967-05-18,1967-05-18
+DateTime.000094,3,row_sample0,1967-05-18,1967-05-18
+DateTime.000094,3,row_sample1,1967-05-18,1967-05-18
+DateTime.000094,0,batch_plain,2006-02-21,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,1,batch_plain,1997-12-19,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,2,batch_plain,2004-09-30,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,3,batch_plain,1967-05-18,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,0,batch_json,2006-02-21,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,1,batch_json,1997-12-19,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,2,batch_json,2004-09-30,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000094,3,batch_json,1967-05-18,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000104,0,row_greedy,Jan,Jan
+DateTime.000104,0,row_format,Jan,Jan
+DateTime.000104,0,row_consistency,Jan,Jan
+DateTime.000104,0,row_sample0,Jan,Jan
+DateTime.000104,0,row_sample1,Jan,Jan
+DateTime.000104,1,row_greedy,Aug,Aug
+DateTime.000104,1,row_format,Aug,Aug
+DateTime.000104,1,row_consistency,Aug,Aug
+DateTime.000104,1,row_sample0,Aug,Aug
+DateTime.000104,1,row_sample1,Aug,Aug
+DateTime.000104,2,row_greedy,Dec,Dec
+DateTime.000104,2,row_format,Dec,Dec
+DateTime.000104,2,row_consistency,Dec,Dec
+DateTime.000104,2,row_sample0,Dec,Dec
+DateTime.000104,2,row_sample1,Dec,Dec
+DateTime.000104,3,row_greedy,Jul,Jul
+DateTime.000104,3,row_format,Jul,Jul
+DateTime.000104,3,row_consistency,Jul,Jul
+DateTime.000104,3,row_sample0,Jul,Jul
+DateTime.000104,3,row_sample1,Jul,Jul
+DateTime.000104,4,row_greedy,Jan,Jan
+DateTime.000104,4,row_format,Jan,Jan
+DateTime.000104,4,row_consistency,Jan,Jan
+DateTime.000104,4,row_sample0,Jan,Jan
+DateTime.000104,4,row_sample1,Jan,Jan
+DateTime.000104,5,row_greedy,Aug,Aug
+DateTime.000104,5,row_format,Aug,Aug
+DateTime.000104,5,row_consistency,Aug,Aug
+DateTime.000104,5,row_sample0,Aug,Aug
+DateTime.000104,5,row_sample1,Aug,Aug
+DateTime.000104,0,batch_plain,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,1,batch_plain,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,2,batch_plain,Dec,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,3,batch_plain,Jul,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,4,batch_plain,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,5,batch_plain,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,0,batch_json,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,1,batch_json,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,2,batch_json,Dec,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,3,batch_json,Jul,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,4,batch_json,Jan,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000104,5,batch_json,Aug,"[""Jan"", ""Aug"", ""Dec"", ""Jul"", ""Jan"", ""Aug""]"
+DateTime.000108,0,row_greedy,1/21/1985,1/21/1985
+DateTime.000108,0,row_format,1/21/1985,1/21/1985
+DateTime.000108,0,row_consistency,1/21/1985,1/21/1985
+DateTime.000108,0,row_sample0,1/21/1985,1/21/1985
+DateTime.000108,0,row_sample1,1/21/1985,1/21/1985
+DateTime.000108,1,row_greedy,8/16/1985,8/16/1985
+DateTime.000108,1,row_format,8/16/1985,8/16/1985
+DateTime.000108,1,row_consistency,8/16/1985,8/16/1985
+DateTime.000108,1,row_sample0,8/16/1985,8/16/1985
+DateTime.000108,1,row_sample1,8/16/1985,8/16/1985
+DateTime.000108,2,row_greedy,12/20/2033,12/20/2033
+DateTime.000108,2,row_format,12/20/2033,12/20/2033
+DateTime.000108,2,row_consistency,12/20/2033,12/20/2033
+DateTime.000108,2,row_sample0,12/20/2033,12/20/2033
+DateTime.000108,2,row_sample1,12/20/2033,12/20/2033
+DateTime.000108,3,row_greedy,7/16/1984,7/16/1984
+DateTime.000108,3,row_format,7/16/1984,7/16/1984
+DateTime.000108,3,row_consistency,7/16/1984,7/16/1984
+DateTime.000108,3,row_sample0,7/16/1984,7/16/1984
+DateTime.000108,3,row_sample1,7/16/1984,7/16/1984
+DateTime.000108,4,row_greedy,1/13/2038,1/13/2038
+DateTime.000108,4,row_format,1/13/2038,1/13/2038
+DateTime.000108,4,row_consistency,1/13/2038,1/13/2038
+DateTime.000108,4,row_sample0,1/13/2038,1/13/2038
+DateTime.000108,4,row_sample1,1/13/2038,1/13/2038
+DateTime.000108,5,row_greedy,8/14/1982,8/14/1982
+DateTime.000108,5,row_format,8/14/1982,8/14/1982
+DateTime.000108,5,row_consistency,8/14/1982,8/14/1982
+DateTime.000108,5,row_sample0,8/14/1982,8/14/1982
+DateTime.000108,5,row_sample1,8/14/1982,8/14/1982
+DateTime.000108,0,batch_plain,1/21/1985,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,1,batch_plain,8/16/1985,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,2,batch_plain,12/20/2033,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,3,batch_plain,7/16/1984,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,4,batch_plain,1/13/2038,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,5,batch_plain,8/14/1982,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,0,batch_json,1/21/1985,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,1,batch_json,8/16/1985,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,2,batch_json,12/20/2033,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,3,batch_json,7/16/1984,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,4,batch_json,1/13/2038,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000108,5,batch_json,8/14/1982,"[""1/21/1985"", ""8/16/1985"", ""12/20/2033"", ""7/16/1984"", ""1/13/2038"", ""8/14/1982""]"
+DateTime.000111,0,row_greedy,21/1/1985 5:44 AM,21/1/1985 5:44 AM
+DateTime.000111,0,row_format,21/1/1985 5:44 AM,21/1/1985 5:44 AM
+DateTime.000111,0,row_consistency,21/1/1985 5:44 AM,21/1/1985 5:44 AM
+DateTime.000111,0,row_sample0,21/1/1985 5:44 AM,21/1/1985 5:44 AM
+DateTime.000111,0,row_sample1,21/1/1985 5:44 AM,21/1/1985 5:44 AM
+DateTime.000111,1,row_greedy,16/8/1985 1:11 AM,16/8/1985 1:11 AM
+DateTime.000111,1,row_format,16/8/1985 1:11 AM,16/8/1985 1:11 AM
+DateTime.000111,1,row_consistency,16/8/1985 1:11 AM,16/8/1985 1:11 AM
+DateTime.000111,1,row_sample0,16/8/1985 1:11 AM,16/8/1985 1:11 AM
+DateTime.000111,1,row_sample1,16/8/1985 1:11 AM,16/8/1985 1:11 AM
+DateTime.000111,2,row_greedy,20/12/2033 6:36 PM,20/12/2033 6:36 PM
+DateTime.000111,2,row_format,20/12/2033 6:36 PM,20/12/2033 6:36 PM
+DateTime.000111,2,row_consistency,20/12/2033 6:36 PM,20/12/2033 6:36 PM
+DateTime.000111,2,row_sample0,20/12/2033 6:36 PM,20/12/2033 6:36 PM
+DateTime.000111,2,row_sample1,20/12/2033 6:36 PM,20/12/2033 6:36 PM
+DateTime.000111,3,row_greedy,16/7/1984 10:21 AM,16/7/1984 10:21 AM
+DateTime.000111,3,row_format,16/7/1984 10:21 AM,16/7/1984 10:21 AM
+DateTime.000111,3,row_consistency,16/7/1984 10:21 AM,16/7/1984 10:21 AM
+DateTime.000111,3,row_sample0,16/7/1984 10:21 AM,16/7/1984 10:21 AM
+DateTime.000111,3,row_sample1,16/7/1984 10:21 AM,16/7/1984 10:21 AM
+DateTime.000111,4,row_greedy,13/1/2038 10:59 AM,13/1/2038 10:59 AM
+DateTime.000111,4,row_format,13/1/2038 10:59 AM,13/1/2038 10:59 AM
+DateTime.000111,4,row_consistency,13/1/2038 10:59 AM,13/1/2038 10:59 AM
+DateTime.000111,4,row_sample0,13/1/2038 10:59 AM,13/1/2038 10:59 AM
+DateTime.000111,4,row_sample1,13/1/2038 10:59 AM,13/1/2038 10:59 AM
+DateTime.000111,5,row_greedy,14/8/1982 3:13 PM,14/8/1982 3:13 PM
+DateTime.000111,5,row_format,14/8/1982 3:13 PM,14/8/1982 3:13 PM
+DateTime.000111,5,row_consistency,14/8/1982 3:13 PM,14/8/1982 3:13 PM
+DateTime.000111,5,row_sample0,14/8/1982 3:13 PM,14/8/1982 3:13 PM
+DateTime.000111,5,row_sample1,14/8/1982 3:13 PM,14/8/1982 3:13 PM
+DateTime.000111,0,batch_plain,21/1/1985 5:44 AM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,1,batch_plain,16/8/1985 1:11 PM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,2,batch_plain,20/12/2033 6:36 PM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,3,batch_plain,16/7/1984 10:21 AM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,4,batch_plain,13/1/2038 10:59 AM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,5,batch_plain,14/8/1982 3:13 PM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,0,batch_json,21/1/1985 5:44 AM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,1,batch_json,16/8/1985 1:11 PM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,2,batch_json,20/12/2033 6:36 PM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,3,batch_json,16/7/1984 10:21 AM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,4,batch_json,13/1/2038 10:59 AM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000111,5,batch_json,14/8/1982 3:13 PM,"[""21/1/1985 5:44 AM"", ""16/8/1985 1:11 PM"", ""20/12/2033 6:36 PM"", ""16/7/1984 10:21 AM"", ""13/1/2038 10:59 AM"", ""14/8/1982 3:13 PM""]"
+DateTime.000114,0,row_greedy,25-40,25-40
+DateTime.000114,0,row_format,25-40,25-40
+DateTime.000114,0,row_consistency,25-45,25-45
+DateTime.000114,0,row_sample0,15-30,15-30
+DateTime.000114,0,row_sample1,30-45,30-45
+DateTime.000114,1,row_greedy,25-40,25-40
+DateTime.000114,1,row_format,25-40,25-40
+DateTime.000114,1,row_consistency,25-30,25-30
+DateTime.000114,1,row_sample0,30-45,30-45
+DateTime.000114,1,row_sample1,30-45,30-45
+DateTime.000114,2,row_greedy,30-45,30-45
+DateTime.000114,2,row_format,25-40,25-40
+DateTime.000114,2,row_consistency,45-60,45-60
+DateTime.000114,2,row_sample0,25-40,25-40
+DateTime.000114,2,row_sample1,30-45,30-45
+DateTime.000114,3,row_greedy,25-40,25-40
+DateTime.000114,3,row_format,25-40,25-40
+DateTime.000114,3,row_consistency,25-45,25-45
+DateTime.000114,3,row_sample0,30-45,30-45
+DateTime.000114,3,row_sample1,25-40,25-40
+DateTime.000114,4,row_greedy,25-40,25-40
+DateTime.000114,4,row_format,25-40,25-40
+DateTime.000114,4,row_consistency,25-45,25-45
+DateTime.000114,4,row_sample0,25-40,25-40
+DateTime.000114,4,row_sample1,25-40,25-40
+DateTime.000114,5,row_greedy,30-45,30-45
+DateTime.000114,5,row_format,25-40,25-40
+DateTime.000114,5,row_consistency,25-45,25-45
+DateTime.000114,5,row_sample0,30-45,30-45
+DateTime.000114,5,row_sample1,30-45,30-45
+DateTime.000114,0,batch_plain,30-45,"[""30-45"", ""30-45"", ""30-45"", ""15-30"", ""30-45"", ""30-45""]"
+DateTime.000114,1,batch_plain,30-45,"[""30-45"", ""30-45"", ""30-45"", ""15-30"", ""30-45"", ""30-45""]"
+DateTime.000114,2,batch_plain,30-45,"[""30-45"", ""30-45"", ""30-45"", ""15-30"", ""30-45"", ""30-45""]"
+DateTime.000114,3,batch_plain,15-30,"[""30-45"", ""30-45"", ""30-45"", ""15-30"", ""30-45"", ""30-45""]"
+DateTime.000114,4,batch_plain,30-45,"[""30-45"", ""30-45"", ""30-45"", ""15-30"", ""30-45"", ""30-45""]"
+DateTime.000114,5,batch_plain,30-45,"[""30-45"", ""30-45"", ""30-45"", ""15-30"", ""30-45"", ""30-45""]"
+DateTime.000114,0,batch_json,30-45,"[""30-45"", ""15-30"", ""30-45"", ""15-30"", ""45-60"", ""30-45""]"
+DateTime.000114,1,batch_json,15-30,"[""30-45"", ""15-30"", ""30-45"", ""15-30"", ""45-60"", ""30-45""]"
+DateTime.000114,2,batch_json,30-45,"[""30-45"", ""15-30"", ""30-45"", ""15-30"", ""45-60"", ""30-45""]"
+DateTime.000114,3,batch_json,15-30,"[""30-45"", ""15-30"", ""30-45"", ""15-30"", ""45-60"", ""30-45""]"
+DateTime.000114,4,batch_json,45-60,"[""30-45"", ""15-30"", ""30-45"", ""15-30"", ""45-60"", ""30-45""]"
+DateTime.000114,5,batch_json,30-45,"[""30-45"", ""15-30"", ""30-45"", ""15-30"", ""45-60"", ""30-45""]"
+DateTime.000115,0,row_greedy,0-20,0-20
+DateTime.000115,0,row_format,0-20,0-20
+DateTime.000115,0,row_consistency,0-20,0-20
+DateTime.000115,0,row_sample0,0-20,0-20
+DateTime.000115,0,row_sample1,0-20,0-20
+DateTime.000115,1,row_greedy,0-20,0-20
+DateTime.000115,1,row_format,0-20,0-20
+DateTime.000115,1,row_consistency,0-20,0-20
+DateTime.000115,1,row_sample0,0-20,0-20
+DateTime.000115,1,row_sample1,0-20,0-20
+DateTime.000115,2,row_greedy,0-20,0-20
+DateTime.000115,2,row_format,0-20,0-20
+DateTime.000115,2,row_consistency,0-20,0-20
+DateTime.000115,2,row_sample0,0-20,0-20
+DateTime.000115,2,row_sample1,0-20,0-20
+DateTime.000115,3,row_greedy,0-20,0-20
+DateTime.000115,3,row_format,0-20,0-20
+DateTime.000115,3,row_consistency,0-20,0-20
+DateTime.000115,3,row_sample0,0-20,0-20
+DateTime.000115,3,row_sample1,0-20,0-20
+DateTime.000115,4,row_greedy,0-20,0-20
+DateTime.000115,4,row_format,0-20,0-20
+DateTime.000115,4,row_consistency,0-20,0-20
+DateTime.000115,4,row_sample0,0-20,0-20
+DateTime.000115,4,row_sample1,0-20,0-20
+DateTime.000115,5,row_greedy,0-20,0-20
+DateTime.000115,5,row_format,0-20,0-20
+DateTime.000115,5,row_consistency,0-20,0-20
+DateTime.000115,5,row_sample0,0-20,0-20
+DateTime.000115,5,row_sample1,0-20,0-20
+DateTime.000115,0,batch_plain,0-20,"[""0-20"",""0-20"",""0-20"",""0-20"",""0-20"",""0-20""]"
+DateTime.000115,1,batch_plain,0-20,"[""0-20"",""0-20"",""0-20"",""0-20"",""0-20"",""0-20""]"
+DateTime.000115,2,batch_plain,0-20,"[""0-20"",""0-20"",""0-20"",""0-20"",""0-20"",""0-20""]"
+DateTime.000115,3,batch_plain,0-20,"[""0-20"",""0-20"",""0-20"",""0-20"",""0-20"",""0-20""]"
+DateTime.000115,4,batch_plain,0-20,"[""0-20"",""0-20"",""0-20"",""0-20"",""0-20"",""0-20""]"
+DateTime.000115,5,batch_plain,0-20,"[""0-20"",""0-20"",""0-20"",""0-20"",""0-20"",""0-20""]"
+DateTime.000115,0,batch_json,0-20,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,1,batch_json,0-20,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,2,batch_json,0-20,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,3,batch_json,0-20,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,4,batch_json,0-20,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000115,5,batch_json,0-20,"[""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20"", ""0-20""]"
+DateTime.000116,0,row_greedy,5AM-7AM,5AM-7AM
+DateTime.000116,0,row_format,5AM-7AM,5AM-7AM
+DateTime.000116,0,row_consistency,5AM-7AM,5AM-7AM
+DateTime.000116,0,row_sample0,5AM-7AM,5AM-7AM
+DateTime.000116,0,row_sample1,5AM-7AM,5AM-7AM
+DateTime.000116,1,row_greedy,1AM-3AM,1AM-3AM
+DateTime.000116,1,row_format,1AM-3AM,1AM-3AM
+DateTime.000116,1,row_consistency,1AM-3AM,1AM-3AM
+DateTime.000116,1,row_sample0,1AM-3AM,1AM-3AM
+DateTime.000116,1,row_sample1,1AM-3AM,1AM-3AM
+DateTime.000116,2,row_greedy,6PM-8PM,6PM-8PM
+DateTime.000116,2,row_format,6PM-8PM,6PM-8PM
+DateTime.000116,2,row_consistency,6PM-8PM,6PM-8PM
+DateTime.000116,2,row_sample0,6PM-8PM,6PM-8PM
+DateTime.000116,2,row_sample1,6PM-8PM,6PM-8PM
+DateTime.000116,3,row_greedy,10AM-12PM,10AM-12PM
+DateTime.000116,3,row_format,10AM-12PM,10AM-12PM
+DateTime.000116,3,row_consistency,10AM-12PM,10AM-12PM
+DateTime.000116,3,row_sample0,10AM-12PM,10AM-12PM
+DateTime.000116,3,row_sample1,10AM-12PM,10AM-12PM
+DateTime.000116,4,row_greedy,10AM-12PM,10AM-12PM
+DateTime.000116,4,row_format,10AM-12PM,10AM-12PM
+DateTime.000116,4,row_consistency,10AM-12PM,10AM-12PM
+DateTime.000116,4,row_sample0,10AM-12PM,10AM-12PM
+DateTime.000116,4,row_sample1,10AM-12PM,10AM-12PM
+DateTime.000116,5,row_greedy,3PM-5PM,3PM-5PM
+DateTime.000116,5,row_format,3PM-5PM,3PM-5PM
+DateTime.000116,5,row_consistency,3PM-5PM,3PM-5PM
+DateTime.000116,5,row_sample0,3PM-5PM,3PM-5PM
+DateTime.000116,5,row_sample1,3PM-5PM,3PM-5PM
+DateTime.000116,0,batch_plain,5AM-7AM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,1,batch_plain,1AM-3AM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,2,batch_plain,6PM-8PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,3,batch_plain,10AM-12PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,4,batch_plain,10AM-12PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,5,batch_plain,3PM-5PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,0,batch_json,5AM-7AM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,1,batch_json,1AM-3AM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,2,batch_json,6PM-8PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,3,batch_json,10AM-12PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,4,batch_json,10AM-12PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+DateTime.000116,5,batch_json,3PM-5PM,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM"", ""10AM-12PM"", ""10AM-12PM"", ""3PM-5PM""]"
+FilePath.000001,0,row_greedy,enim0,enim0
+FilePath.000001,0,row_format,enim0,enim0
+FilePath.000001,0,row_consistency,enim0,enim0
+FilePath.000001,0,row_sample0,enim0,enim0
+FilePath.000001,0,row_sample1,enim0,enim0
+FilePath.000001,1,row_greedy,enim3,enim3
+FilePath.000001,1,row_format,enim3,enim3
+FilePath.000001,1,row_consistency,enim3,enim3
+FilePath.000001,1,row_sample0,enim3,enim3
+FilePath.000001,1,row_sample1,enim3,enim3
+FilePath.000001,2,row_greedy,enim0,enim0
+FilePath.000001,2,row_format,enim0,enim0
+FilePath.000001,2,row_consistency,enim0,enim0
+FilePath.000001,2,row_sample0,enim0,enim0
+FilePath.000001,2,row_sample1,enim0,enim0
+FilePath.000001,3,row_greedy,enim6,enim6
+FilePath.000001,3,row_format,enim6,enim6
+FilePath.000001,3,row_consistency,enim6,enim6
+FilePath.000001,3,row_sample0,enim6,enim6
+FilePath.000001,3,row_sample1,enim6,enim6
+FilePath.000001,4,row_greedy,enim0,enim0
+FilePath.000001,4,row_format,enim0,enim0
+FilePath.000001,4,row_consistency,enim0,enim0
+FilePath.000001,4,row_sample0,enim0,enim0
+FilePath.000001,4,row_sample1,enim0,enim0
+FilePath.000001,5,row_greedy,enim4,enim4
+FilePath.000001,5,row_format,enim4,enim4
+FilePath.000001,5,row_consistency,enim4,enim4
+FilePath.000001,5,row_sample0,enim4,enim4
+FilePath.000001,5,row_sample1,enim4,enim4
+FilePath.000001,0,batch_plain,enim0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,1,batch_plain,enim3,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,2,batch_plain,enim0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,3,batch_plain,enim6,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,4,batch_plain,enim0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,5,batch_plain,enim4,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,0,batch_json,enim0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,1,batch_json,enim3,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,2,batch_json,enim0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,3,batch_json,enim6,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,4,batch_json,enim0,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+FilePath.000001,5,batch_json,enim4,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+Gender.000001,0,row_greedy,0,0
+Gender.000001,0,row_format,0,0
+Gender.000001,0,row_consistency,0,0
+Gender.000001,0,row_sample0,0,0
+Gender.000001,0,row_sample1,0,0
+Gender.000001,1,row_greedy,1,1
+Gender.000001,1,row_format,1,1
+Gender.000001,1,row_consistency,1,1
+Gender.000001,1,row_sample0,1,1
+Gender.000001,1,row_sample1,1,1
+Gender.000001,2,row_greedy,0,0
+Gender.000001,2,row_format,0,0
+Gender.000001,2,row_consistency,0,0
+Gender.000001,2,row_sample0,0,0
+Gender.000001,2,row_sample1,0,0
+Gender.000001,0,batch_plain,0,"[""0"", ""1"", ""1""]"
+Gender.000001,1,batch_plain,1,"[""0"", ""1"", ""1""]"
+Gender.000001,2,batch_plain,1,"[""0"", ""1"", ""1""]"
+Gender.000001,0,batch_json,0,"[""0"", ""1"", ""2""]"
+Gender.000001,1,batch_json,1,"[""0"", ""1"", ""2""]"
+Gender.000001,2,batch_json,2,"[""0"", ""1"", ""2""]"
+Language.000002,0,row_greedy,ca,ca
+Language.000002,0,row_format,ca,ca
+Language.000002,0,row_consistency,ca,ca
+Language.000002,0,row_sample0,ca,ca
+Language.000002,0,row_sample1,ca,ca
+Language.000002,1,row_greedy,zh,zh
+Language.000002,1,row_format,zh,zh
+Language.000002,1,row_consistency,zh,zh
+Language.000002,1,row_sample0,zh,zh
+Language.000002,1,row_sample1,zh,zh
+Language.000002,2,row_greedy,hk,hk
+Language.000002,2,row_format,hk,hk
+Language.000002,2,row_consistency,hk,hk
+Language.000002,2,row_sample0,hk,hk
+Language.000002,2,row_sample1,hk,hk
+Language.000002,3,row_greedy,hr,hr
+Language.000002,3,row_format,hr,hr
+Language.000002,3,row_consistency,hr,hr
+Language.000002,3,row_sample0,hr,hr
+Language.000002,3,row_sample1,hr,hr
+Language.000002,4,row_greedy,cs,cs
+Language.000002,4,row_format,cs,cs
+Language.000002,4,row_consistency,cs,cs
+Language.000002,4,row_sample0,cs,cs
+Language.000002,4,row_sample1,cs,cs
+Language.000002,5,row_greedy,da,da
+Language.000002,5,row_format,da,da
+Language.000002,5,row_consistency,da,da
+Language.000002,5,row_sample0,da,da
+Language.000002,5,row_sample1,da,da
+Language.000002,0,batch_plain,ca,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,1,batch_plain,zh,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,2,batch_plain,hk,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,3,batch_plain,hr,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,4,batch_plain,cs,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,5,batch_plain,da,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,0,batch_json,ca,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,1,batch_json,zh,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,2,batch_json,hk,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,3,batch_json,hr,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,4,batch_json,cs,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Language.000002,5,batch_json,da,"[""ca"", ""zh"", ""hk"", ""hr"", ""cs"", ""da""]"
+Name.000028,0,row_greedy,Rodel,Rodel
+Name.000028,0,row_format,Rodel,Rodel
+Name.000028,0,row_consistency,Rodel,Rodel
+Name.000028,0,row_sample0,Rodel,Rodel
+Name.000028,0,row_sample1,Rodel,Rodel
+Name.000028,1,row_greedy,Jan,Jan
+Name.000028,1,row_format,Jan,Jan
+Name.000028,1,row_consistency,Jan,Jan
+Name.000028,1,row_sample0,Jan,Jan
+Name.000028,1,row_sample1,Jan,Jan
+Name.000028,2,row_greedy,Antonia,Antonia
+Name.000028,2,row_format,Antonia,Antonia
+Name.000028,2,row_consistency,Antonia,Antonia
+Name.000028,2,row_sample0,Antonia,Antonia
+Name.000028,2,row_sample1,Antonia,Antonia
+Name.000028,3,row_greedy,Barbara,Barbara
+Name.000028,3,row_format,Barbara,Barbara
+Name.000028,3,row_consistency,Barbara,Barbara
+Name.000028,3,row_sample0,Barbara,Barbara
+Name.000028,3,row_sample1,Barbara,Barbara
+Name.000028,4,row_greedy,Meena,Meena
+Name.000028,4,row_format,Meena,Meena
+Name.000028,4,row_consistency,Meena,Meena
+Name.000028,4,row_sample0,Meena,Meena
+Name.000028,4,row_sample1,Meena,Meena
+Name.000028,5,row_greedy,Afonso,Afonso
+Name.000028,5,row_format,Afonso,Afonso
+Name.000028,5,row_consistency,Afonso,Afonso
+Name.000028,5,row_sample0,Afonso,Afonso
+Name.000028,5,row_sample1,Afonso,Afonso
+Name.000028,0,batch_plain,Rodel,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,1,batch_plain,Jan,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,2,batch_plain,Antonia,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,3,batch_plain,Barbara,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,4,batch_plain,Meena,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,5,batch_plain,Afonso,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,0,batch_json,Rodel,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,1,batch_json,Jan,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,2,batch_json,Antonia,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,3,batch_json,Barbara,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,4,batch_json,Meena,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Name.000028,5,batch_json,Afonso,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Number.000008,0,row_greedy,-13.578,-13.578
+Number.000008,0,row_format,-13.578,-13.578
+Number.000008,0,row_consistency,-13.578,-13.578
+Number.000008,0,row_sample0,-13.578,-13.578
+Number.000008,0,row_sample1,-13.578,-13.578
+Number.000008,1,row_greedy,-19.611180,-19.611180
+Number.000008,1,row_format,-19.611180,-19.611180
+Number.000008,1,row_consistency,-19.611180,-19.611180
+Number.000008,1,row_sample0,-19.611180,-19.611180
+Number.000008,1,row_sample1,-19.611180,-19.611180
+Number.000008,2,row_greedy,-18.2929,-18.2929
+Number.000008,2,row_format,-18.2929,-18.2929
+Number.000008,2,row_consistency,-18.2929,-18.2929
+Number.000008,2,row_sample0,-18.2929,-18.2929
+Number.000008,2,row_sample1,-18.2929,-18.2929
+Number.000008,3,row_greedy,-28.178,-28.178
+Number.000008,3,row_format,-28.178,-28.178
+Number.000008,3,row_consistency,-28.178,-28.178
+Number.000008,3,row_sample0,-28.178,-28.178
+Number.000008,3,row_sample1,-28.178,-28.178
+Number.000008,4,row_greedy,29.721,29.721
+Number.000008,4,row_format,29.721,29.721
+Number.000008,4,row_consistency,29.721,29.721
+Number.000008,4,row_sample0,29.721,29.721
+Number.000008,4,row_sample1,29.721,29.721
+Number.000008,5,row_greedy,-11.1245,-11.1245
+Number.000008,5,row_format,-11.1245,-11.1245
+Number.000008,5,row_consistency,-11.1245,-11.1245
+Number.000008,5,row_sample0,-111.245,-111.245
+Number.000008,5,row_sample1,-11.1245,-11.1245
+Number.000008,0,batch_plain,-13.578,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""2.9721"",""-11.1245""]"
+Number.000008,1,batch_plain,-19.61118,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""2.9721"",""-11.1245""]"
+Number.000008,2,batch_plain,-18.2929,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""2.9721"",""-11.1245""]"
+Number.000008,3,batch_plain,-28.178,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""2.9721"",""-11.1245""]"
+Number.000008,4,batch_plain,2.9721,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""2.9721"",""-11.1245""]"
+Number.000008,5,batch_plain,-11.1245,"[""-13.578"",""-19.61118"",""-18.2929"",""-28.178"",""2.9721"",""-11.1245""]"
+Number.000008,0,batch_json,-13.578,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-28.178"", ""2.9721"", ""-11.1245""]"
+Number.000008,1,batch_json,-19.61118,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-28.178"", ""2.9721"", ""-11.1245""]"
+Number.000008,2,batch_json,-18.2929,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-28.178"", ""2.9721"", ""-11.1245""]"
+Number.000008,3,batch_json,-28.178,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-28.178"", ""2.9721"", ""-11.1245""]"
+Number.000008,4,batch_json,2.9721,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-28.178"", ""2.9721"", ""-11.1245""]"
+Number.000008,5,batch_json,-11.1245,"[""-13.578"", ""-19.61118"", ""-18.2929"", ""-28.178"", ""2.9721"", ""-11.1245""]"
+Number.000015,0,row_greedy,-22500,-22500
+Number.000015,0,row_format,-22500,-22500
+Number.000015,0,row_consistency,-22650,-22650
+Number.000015,0,row_sample0,-22500,-22500
+Number.000015,0,row_sample1,-22500,-22500
+Number.000015,1,row_greedy,-3250,-3250
+Number.000015,1,row_format,-3300,-3300
+Number.000015,1,row_consistency,-3250,-3250
+Number.000015,1,row_sample0,-3250,-3250
+Number.000015,1,row_sample1,-3250,-3250
+Number.000015,2,row_greedy,-3050,-3050
+Number.000015,2,row_format,-3050,-3050
+Number.000015,2,row_consistency,-3050,-3050
+Number.000015,2,row_sample0,-3050,-3050
+Number.000015,2,row_sample1,-3050,-3050
+Number.000015,3,row_greedy,-47000,-47000
+Number.000015,3,row_format,-47000,-47000
+Number.000015,3,row_consistency,-46950,-46950
+Number.000015,3,row_sample0,-47000,-47000
+Number.000015,3,row_sample1,-47000,-47000
+Number.000015,4,row_greedy,49550,49550
+Number.000015,4,row_format,49550,49550
+Number.000015,4,row_consistency,49550,49550
+Number.000015,4,row_sample0,49550,49550
+Number.000015,4,row_sample1,49550,49550
+Number.000015,5,row_greedy,-18550,-18550
+Number.000015,5,row_format,-18550,-18550
+Number.000015,5,row_consistency,-18550,-18550
+Number.000015,5,row_sample0,-18550,-18550
+Number.000015,5,row_sample1,-18550,-18550
+Number.000015,0,batch_plain,-22600,"[""-22600"", ""-3050"", ""-3000"", ""-46900"", ""49500"", ""-18500""]"
+Number.000015,1,batch_plain,-3050,"[""-22600"", ""-3050"", ""-3000"", ""-46900"", ""49500"", ""-18500""]"
+Number.000015,2,batch_plain,-3000,"[""-22600"", ""-3050"", ""-3000"", ""-46900"", ""49500"", ""-18500""]"
+Number.000015,3,batch_plain,-46900,"[""-22600"", ""-3050"", ""-3000"", ""-46900"", ""49500"", ""-18500""]"
+Number.000015,4,batch_plain,49500,"[""-22600"", ""-3050"", ""-3000"", ""-46900"", ""49500"", ""-18500""]"
+Number.000015,5,batch_plain,-18500,"[""-22600"", ""-3050"", ""-3000"", ""-46900"", ""49500"", ""-18500""]"
+Number.000015,0,batch_json,-22650,"[""-22650"", ""-3250"", ""-3050"", ""-46950"", ""49550"", ""-18550""]"
+Number.000015,1,batch_json,-3250,"[""-22650"", ""-3250"", ""-3050"", ""-46950"", ""49550"", ""-18550""]"
+Number.000015,2,batch_json,-3050,"[""-22650"", ""-3250"", ""-3050"", ""-46950"", ""49550"", ""-18550""]"
+Number.000015,3,batch_json,-46950,"[""-22650"", ""-3250"", ""-3050"", ""-46950"", ""49550"", ""-18550""]"
+Number.000015,4,batch_json,49550,"[""-22650"", ""-3250"", ""-3050"", ""-46950"", ""49550"", ""-18550""]"
+Number.000015,5,batch_json,-18550,"[""-22650"", ""-3250"", ""-3050"", ""-46950"", ""49550"", ""-18550""]"
+Number.000016,0,row_greedy,605,605
+Number.000016,0,row_format,605,605
+Number.000016,0,row_consistency,602,602
+Number.000016,0,row_sample0,605,605
+Number.000016,0,row_sample1,605,605
+Number.000016,1,row_greedy,815,815
+Number.000016,1,row_format,815,815
+Number.000016,1,row_consistency,815,815
+Number.000016,1,row_sample0,815,815
+Number.000016,1,row_sample1,815,815
+Number.000016,2,row_greedy,817,817
+Number.000016,2,row_format,817,817
+Number.000016,2,row_consistency,820,820
+Number.000016,2,row_sample0,817,817
+Number.000016,2,row_sample1,817,817
+Number.000016,3,row_greedy,335,335
+Number.000016,3,row_format,335,335
+Number.000016,3,row_consistency,335,335
+Number.000016,3,row_sample0,335,335
+Number.000016,3,row_sample1,335,335
+Number.000016,4,row_greedy,1395,1395
+Number.000016,4,row_format,1395,1395
+Number.000016,4,row_consistency,1395,1395
+Number.000016,4,row_sample0,1395,1395
+Number.000016,4,row_sample1,1395,1395
+Number.000016,5,row_greedy,650,650
+Number.000016,5,row_format,650,650
+Number.000016,5,row_consistency,650,650
+Number.000016,5,row_sample0,650,650
+Number.000016,5,row_sample1,650,650
+Number.000016,0,batch_plain,602,"[""602"", ""815"", ""817"", ""334"", ""1395"", ""647""]"
+Number.000016,1,batch_plain,815,"[""602"", ""815"", ""817"", ""334"", ""1395"", ""647""]"
+Number.000016,2,batch_plain,817,"[""602"", ""815"", ""817"", ""334"", ""1395"", ""647""]"
+Number.000016,3,batch_plain,334,"[""602"", ""815"", ""817"", ""334"", ""1395"", ""647""]"
+Number.000016,4,batch_plain,1395,"[""602"", ""815"", ""817"", ""334"", ""1395"", ""647""]"
+Number.000016,5,batch_plain,647,"[""602"", ""815"", ""817"", ""334"", ""1395"", ""647""]"
+Number.000016,0,batch_json,602,"[""602"", ""815"", ""817"", ""335"", ""1400"", ""647""]"
+Number.000016,1,batch_json,815,"[""602"", ""815"", ""817"", ""335"", ""1400"", ""647""]"
+Number.000016,2,batch_json,817,"[""602"", ""815"", ""817"", ""335"", ""1400"", ""647""]"
+Number.000016,3,batch_json,335,"[""602"", ""815"", ""817"", ""335"", ""1400"", ""647""]"
+Number.000016,4,batch_json,1400,"[""602"", ""815"", ""817"", ""335"", ""1400"", ""647""]"
+Number.000016,5,batch_json,647,"[""602"", ""815"", ""817"", ""335"", ""1400"", ""647""]"
+Number.000022,0,row_greedy,12.1,12.1
+Number.000022,0,row_format,12.1,12.1
+Number.000022,0,row_consistency,12.1,12.1
+Number.000022,0,row_sample0,12.1,12.1
+Number.000022,0,row_sample1,12.1,12.1
+Number.000022,1,row_greedy,20.35,20.35
+Number.000022,1,row_format,20.35,20.35
+Number.000022,1,row_consistency,20.35,20.35
+Number.000022,1,row_sample0,20.35,20.35
+Number.000022,1,row_sample1,20.35,20.35
+Number.000022,2,row_greedy,18.1,18.1
+Number.000022,2,row_format,18.1,18.1
+Number.000022,2,row_consistency,18.1,18.1
+Number.000022,2,row_sample0,18.1,18.1
+Number.000022,2,row_sample1,18.1,18.1
+Number.000022,3,row_greedy,13.75,13.75
+Number.000022,3,row_format,13.75,13.75
+Number.000022,3,row_consistency,13.75,13.75
+Number.000022,3,row_sample0,13.75,13.75
+Number.000022,3,row_sample1,13.75,13.75
+Number.000022,4,row_greedy,6.55,6.55
+Number.000022,4,row_format,6.55,6.55
+Number.000022,4,row_consistency,6.55,6.55
+Number.000022,4,row_sample0,6.55,6.55
+Number.000022,4,row_sample1,6.55,6.55
+Number.000022,5,row_greedy,19.85,19.85
+Number.000022,5,row_format,19.85,19.85
+Number.000022,5,row_consistency,19.83,19.83
+Number.000022,5,row_sample0,19.85,19.85
+Number.000022,5,row_sample1,19.85,19.85
+Number.000022,0,batch_plain,12.1,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,1,batch_plain,20.3,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,2,batch_plain,18.1,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,3,batch_plain,13.8,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,4,batch_plain,6.6,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,5,batch_plain,19.8,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,0,batch_json,12.1,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,1,batch_json,20.3,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,2,batch_json,18.1,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,3,batch_json,13.8,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,4,batch_json,6.6,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000022,5,batch_json,19.8,"[""12.1"", ""20.3"", ""18.1"", ""13.8"", ""6.6"", ""19.8""]"
+Number.000028,0,row_greedy,10.000,10.000
+Number.000028,0,row_format,10.000,10.000
+Number.000028,0,row_consistency,10.000,10.000
+Number.000028,0,row_sample0,10.000,10.000
+Number.000028,0,row_sample1,10.000,10.000
+Number.000028,1,row_greedy,1202.343,1202.343
+Number.000028,1,row_format,1202.343,1202.343
+Number.000028,1,row_consistency,1202.343,1202.343
+Number.000028,1,row_sample0,1202.343,1202.343
+Number.000028,1,row_sample1,1202.343,1202.343
+Number.000028,2,row_greedy,23224.100,23224.100
+Number.000028,2,row_format,23224.100,23224.100
+Number.000028,2,row_consistency,23224.100,23224.100
+Number.000028,2,row_sample0,23224.100,23224.100
+Number.000028,2,row_sample1,23224.100,23224.100
+Number.000028,0,batch_plain,10.000,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,1,batch_plain,1202.343,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,2,batch_plain,23224.100,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,0,batch_json,10.000,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,1,batch_json,1202.343,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000028,2,batch_json,23224.100,"[""10.000"", ""1202.343"", ""23224.100""]"
+Number.000029,0,row_greedy,11120,11120
+Number.000029,0,row_format,11110,11110
+Number.000029,0,row_consistency,11120,11120
+Number.000029,0,row_sample0,11120,11120
+Number.000029,0,row_sample1,11120,11120
+Number.000029,1,row_greedy,540,540
+Number.000029,1,row_format,600,600
+Number.000029,1,row_consistency,640,640
+Number.000029,1,row_sample0,540,540
+Number.000029,1,row_sample1,540,540
+Number.000029,2,row_greedy,23220,23220
+Number.000029,2,row_format,23220,23220
+Number.000029,2,row_consistency,23220,23220
+Number.000029,2,row_sample0,23220,23220
+Number.000029,2,row_sample1,23220,23220
+Number.000029,0,batch_plain,11110,"[""11110"", ""540"", ""23220""]"
+Number.000029,1,batch_plain,540,"[""11110"", ""540"", ""23220""]"
+Number.000029,2,batch_plain,23220,"[""11110"", ""540"", ""23220""]"
+Number.000029,0,batch_json,11120,"[""11120"", ""540"", ""23220""]"
+Number.000029,1,batch_json,540,"[""11120"", ""540"", ""23220""]"
+Number.000029,2,batch_json,23220,"[""11120"", ""540"", ""23220""]"
+Number.000043,0,row_greedy,05-14,05-14
+Number.000043,0,row_format,05-14,05-14
+Number.000043,0,row_consistency,05-14,05-14
+Number.000043,0,row_sample0,05-14,05-14
+Number.000043,0,row_sample1,05-14,05-14
+Number.000043,1,row_greedy,09-21,09-21
+Number.000043,1,row_format,09-21,09-21
+Number.000043,1,row_consistency,09-21,09-21
+Number.000043,1,row_sample0,09-21,09-21
+Number.000043,1,row_sample1,09-21,09-21
+Number.000043,2,row_greedy,08-14,08-14
+Number.000043,2,row_format,08-14,08-14
+Number.000043,2,row_consistency,08-14,08-14
+Number.000043,2,row_sample0,08-14,08-14
+Number.000043,2,row_sample1,08-14,08-14
+Number.000043,3,row_greedy,11-16,11-16
+Number.000043,3,row_format,11-16,11-16
+Number.000043,3,row_consistency,11-16,11-16
+Number.000043,3,row_sample0,11-16,11-16
+Number.000043,3,row_sample1,11-16,11-16
+Number.000043,4,row_greedy,09-24,09-24
+Number.000043,4,row_format,09-24,09-24
+Number.000043,4,row_consistency,09-24,09-24
+Number.000043,4,row_sample0,09-24,09-24
+Number.000043,4,row_sample1,09-24,09-24
+Number.000043,5,row_greedy,12-18,12-18
+Number.000043,5,row_format,12-18,12-18
+Number.000043,5,row_consistency,12-18,12-18
+Number.000043,5,row_sample0,12-18,12-18
+Number.000043,5,row_sample1,12-18,12-18
+Number.000043,0,batch_plain,05-14,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,1,batch_plain,09-21,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,2,batch_plain,08-14,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,3,batch_plain,11-16,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,4,batch_plain,09-24,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,5,batch_plain,12-18,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,0,batch_json,05-14,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,1,batch_json,09-21,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,2,batch_json,08-14,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,3,batch_json,11-16,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,4,batch_json,09-24,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000043,5,batch_json,12-18,"[""05-14"", ""09-21"", ""08-14"", ""11-16"", ""09-24"", ""12-18""]"
+Number.000049,0,row_greedy,8000,8000
+Number.000049,0,row_format,8000,8000
+Number.000049,0,row_consistency,8300,8300
+Number.000049,0,row_sample0,8000,8000
+Number.000049,0,row_sample1,8000,8000
+Number.000049,1,row_greedy,6000,6000
+Number.000049,1,row_format,6000,6000
+Number.000049,1,row_consistency,6000,6000
+Number.000049,1,row_sample0,6000,6000
+Number.000049,1,row_sample1,6000,6000
+Number.000049,2,row_greedy,10000,10000
+Number.000049,2,row_format,1000,1000
+Number.000049,2,row_consistency,9000,9000
+Number.000049,2,row_sample0,10000,10000
+Number.000049,2,row_sample1,10000,10000
+Number.000049,3,row_greedy,400,400
+Number.000049,3,row_format,500,500
+Number.000049,3,row_consistency,400,400
+Number.000049,3,row_sample0,400,400
+Number.000049,3,row_sample1,400,400
+Number.000049,0,batch_plain,8300,"[""8300"", ""6200"", ""9800"", ""4500""]"
+Number.000049,1,batch_plain,6200,"[""8300"", ""6200"", ""9800"", ""4500""]"
+Number.000049,2,batch_plain,9800,"[""8300"", ""6200"", ""9800"", ""4500""]"
+Number.000049,3,batch_plain,4500,"[""8300"", ""6200"", ""9800"", ""4500""]"
+Number.000049,0,batch_json,8000,"[""8000"", ""6000"", ""10000"", ""400""]"
+Number.000049,1,batch_json,6000,"[""8000"", ""6000"", ""10000"", ""400""]"
+Number.000049,2,batch_json,10000,"[""8000"", ""6000"", ""10000"", ""400""]"
+Number.000049,3,batch_json,400,"[""8000"", ""6000"", ""10000"", ""400""]"
+Number.000075,0,row_greedy,$1.9B,$1.9B
+Number.000075,0,row_format,$1.9B,$1.9B
+Number.000075,0,row_consistency,$1.9B,$1.9B
+Number.000075,0,row_sample0,$1.9B,$1.9B
+Number.000075,0,row_sample1,$1.9B,$1.9B
+Number.000075,1,row_greedy,$2.3B,$2.3B
+Number.000075,1,row_format,$2.3B,$2.3B
+Number.000075,1,row_consistency,$2.3B,$2.3B
+Number.000075,1,row_sample0,$2.3B,$2.3B
+Number.000075,1,row_sample1,$2.3B,$2.3B
+Number.000075,2,row_greedy,$2.9B,$2.9B
+Number.000075,2,row_format,$0.3B,$0.3B
+Number.000075,2,row_consistency,$0.3B,$0.3B
+Number.000075,2,row_sample0,$2.9B,$2.9B
+Number.000075,2,row_sample1,$2.9B,$2.9B
+Number.000075,3,row_greedy,$0.0B,$0.0B
+Number.000075,3,row_format,$0.0B,$0.0B
+Number.000075,3,row_consistency,$0.0B,$0.0B
+Number.000075,3,row_sample0,$0.0B,$0.0B
+Number.000075,3,row_sample1,$0.0B,$0.0B
+Number.000075,4,row_greedy,$0.0B,$0.0B
+Number.000075,4,row_format,$0.0B,$0.0B
+Number.000075,4,row_consistency,$0.0B,$0.0B
+Number.000075,4,row_sample0,$0.0B,$0.0B
+Number.000075,4,row_sample1,$0.0B,$0.0B
+Number.000075,5,row_greedy,$0.0B,$0.0B
+Number.000075,5,row_format,$0.0B,$0.0B
+Number.000075,5,row_consistency,$0.0B,$0.0B
+Number.000075,5,row_sample0,$0.0B,$0.0B
+Number.000075,5,row_sample1,$0.0B,$0.0B
+Number.000075,0,batch_plain,$1.9B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,1,batch_plain,$23.2B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,2,batch_plain,$30.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,3,batch_plain,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,4,batch_plain,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,5,batch_plain,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,0,batch_json,$1.9B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,1,batch_json,$23.2B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,2,batch_json,$30B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,3,batch_json,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,4,batch_json,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000075,5,batch_json,$0.0B,"[""$1.9B"", ""$23.2B"", ""$30B"", ""$0.0B"", ""$0.0B"", ""$0.0B""]"
+Number.000077,0,row_greedy,110,110
+Number.000077,0,row_format,110,110
+Number.000077,0,row_consistency,110,110
+Number.000077,0,row_sample0,110,110
+Number.000077,0,row_sample1,110,110
+Number.000077,1,row_greedy,11000,11000
+Number.000077,1,row_format,110,110
+Number.000077,1,row_consistency,11000,11000
+Number.000077,1,row_sample0,11000,11000
+Number.000077,1,row_sample1,11000,11000
+Number.000077,2,row_greedy,540,540
+Number.000077,2,row_format,110,110
+Number.000077,2,row_consistency,110,110
+Number.000077,2,row_sample0,540,540
+Number.000077,2,row_sample1,540,540
+Number.000077,0,batch_plain,11110,"[""11110"", ""11110"", ""548""]"
+Number.000077,1,batch_plain,11110,"[""11110"", ""11110"", ""548""]"
+Number.000077,2,batch_plain,548,"[""11110"", ""11110"", ""548""]"
+Number.000077,0,batch_json,110,"[""110"", ""110"", ""540""]"
+Number.000077,1,batch_json,110,"[""110"", ""110"", ""540""]"
+Number.000077,2,batch_json,540,"[""110"", ""110"", ""540""]"
+Phone.000008,0,row_greedy,(311) 343-5301,(311) 343-5301
+Phone.000008,0,row_format,(311) 343-5301,(311) 343-5301
+Phone.000008,0,row_consistency,(311) 343-5301,(311) 343-5301
+Phone.000008,0,row_sample0,(311) 343-5301,(311) 343-5301
+Phone.000008,0,row_sample1,(311) 343-5301,(311) 343-5301
+Phone.000008,1,row_greedy,(956) 100-1022,(956) 100-1022
+Phone.000008,1,row_format,(956) 100-1022,(956) 100-1022
+Phone.000008,1,row_consistency,(956) 100-1022,(956) 100-1022
+Phone.000008,1,row_sample0,(956) 100-1022,(956) 100-1022
+Phone.000008,1,row_sample1,(956) 100-1022,(956) 100-1022
+Phone.000008,2,row_greedy,(106) 620-5226,(106) 620-5226
+Phone.000008,2,row_format,(106) 620-5226,(106) 620-5226
+Phone.000008,2,row_consistency,(106) 620-5226,(106) 620-5226
+Phone.000008,2,row_sample0,(106) 620-5226,(106) 620-5226
+Phone.000008,2,row_sample1,(106) 620-5226,(106) 620-5226
+Phone.000008,3,row_greedy,(873) 884-2783,(873) 884-2783
+Phone.000008,3,row_format,(873) 884-2783,(873) 884-2783
+Phone.000008,3,row_consistency,(873) 884-2783,(873) 884-2783
+Phone.000008,3,row_sample0,(873) 884-2783,(873) 884-2783
+Phone.000008,3,row_sample1,(873) 884-2783,(873) 884-2783
+Phone.000008,4,row_greedy,(864) 453-3833,(864) 453-3833
+Phone.000008,4,row_format,(864) 453-3833,(864) 453-3833
+Phone.000008,4,row_consistency,(864) 453-3833,(864) 453-3833
+Phone.000008,4,row_sample0,(864) 453-3833,(864) 453-3833
+Phone.000008,4,row_sample1,(864) 453-3833,(864) 453-3833
+Phone.000008,5,row_greedy,(712) 012-9104,(712) 012-9104
+Phone.000008,5,row_format,(712) 012-9104,(712) 012-9104
+Phone.000008,5,row_consistency,(712) 012-9104,(712) 012-9104
+Phone.000008,5,row_sample0,(712) 012-9104,(712) 012-9104
+Phone.000008,5,row_sample1,(712) 012-9104,(712) 012-9104
+Phone.000008,0,batch_plain,(311) 343-5301,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,1,batch_plain,(956) 100-1022,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,2,batch_plain,(106) 620-5226,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,3,batch_plain,(873) 884-2783,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,4,batch_plain,(864) 453-3833,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,5,batch_plain,(712) 012-9104,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,0,batch_json,(311) 343-5301,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,1,batch_json,(956) 100-1022,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,2,batch_json,(106) 620-5226,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,3,batch_json,(873) 884-2783,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,4,batch_json,(864) 453-3833,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000008,5,batch_json,(712) 012-9104,"[""(311) 343-5301"", ""(956) 100-1022"", ""(106) 620-5226"", ""(873) 884-2783"", ""(864) 453-3833"", ""(712) 012-9104""]"
+Phone.000011,0,row_greedy,670 339 5712,670 339 5712
+Phone.000011,0,row_format,670 339 5712,670 339 5712
+Phone.000011,0,row_consistency,670 339 5712,670 339 5712
+Phone.000011,0,row_sample0,670 339 5712,670 339 5712
+Phone.000011,0,row_sample1,670 339 5712,670 339 5712
+Phone.000011,1,row_greedy,734 124 7641,734 124 7641
+Phone.000011,1,row_format,734 124 7641,734 124 7641
+Phone.000011,1,row_consistency,734 124 7641,734 124 7641
+Phone.000011,1,row_sample0,734 124 7641,734 124 7641
+Phone.000011,1,row_sample1,734 124 7641,734 124 7641
+Phone.000011,2,row_greedy,878 662 8808,878 662 8808
+Phone.000011,2,row_format,878 662 8808,878 662 8808
+Phone.000011,2,row_consistency,878 662 8808,878 662 8808
+Phone.000011,2,row_sample0,878 662 8808,878 662 8808
+Phone.000011,2,row_sample1,878 662 8808,878 662 8808
+Phone.000011,0,batch_plain,670 339 5712,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,1,batch_plain,734 124 7641,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,2,batch_plain,878 662 8808,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,0,batch_json,670 339 5712,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,1,batch_json,734 124 7641,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+Phone.000011,2,batch_json,878 662 8808,"[""670 339 5712"", ""734 124 7641"", ""878 662 8808""]"
+ShippingCode.000008,0,row_greedy,GU2 4205,GU2 4205
+ShippingCode.000008,0,row_format,GU2 4205,GU2 4205
+ShippingCode.000008,0,row_consistency,GU2 4205,GU2 4205
+ShippingCode.000008,0,row_sample0,GU2 4205,GU2 4205
+ShippingCode.000008,0,row_sample1,GU2 4205,GU2 4205
+ShippingCode.000008,1,row_greedy,VDB 9545,VDB 9545
+ShippingCode.000008,1,row_format,VDB 9545,VDB 9545
+ShippingCode.000008,1,row_consistency,VDB 9545,VDB 9545
+ShippingCode.000008,1,row_sample0,VDB 9545,VDB 9545
+ShippingCode.000008,1,row_sample1,VDB 9545,VDB 9545
+ShippingCode.000008,2,row_greedy,1KN 1261,1KN 1261
+ShippingCode.000008,2,row_format,1KN 1261,1KN 1261
+ShippingCode.000008,2,row_consistency,1KN 1261,1KN 1261
+ShippingCode.000008,2,row_sample0,1KN 1261,1KN 1261
+ShippingCode.000008,2,row_sample1,1KN 1261,1KN 1261
+ShippingCode.000008,0,batch_plain,GU2 4205,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,1,batch_plain,VDB 9545,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,2,batch_plain,1KN 1261,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,0,batch_json,GU2 4205,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,1,batch_json,VDB 9545,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+ShippingCode.000008,2,batch_json,1KN 1261,"[""GU2 4205"", ""VDB 9545"", ""1KN 1261""]"
+UserAgent.000003,0,row_greedy,FZ467,FZ467
+UserAgent.000003,0,row_format,FZ467,FZ467
+UserAgent.000003,0,row_consistency,FZ467,FZ467
+UserAgent.000003,0,row_sample0,FZ467,FZ467
+UserAgent.000003,0,row_sample1,FZ467,FZ467
+UserAgent.000003,1,row_greedy,RM VVUT,RM VVUT
+UserAgent.000003,1,row_format,RM VVUT,RM VVUT
+UserAgent.000003,1,row_consistency,RM VVUT,RM VVUT
+UserAgent.000003,1,row_sample0,RM VVUT,RM VVUT
+UserAgent.000003,1,row_sample1,RM VVUT,RM VVUT
+UserAgent.000003,2,row_greedy,QS QYFY,QS QYFY
+UserAgent.000003,2,row_format,QS QYFY,QS QYFY
+UserAgent.000003,2,row_consistency,QS QYFY,QS QYFY
+UserAgent.000003,2,row_sample0,QS QYFY,QS QYFY
+UserAgent.000003,2,row_sample1,QS QYFY,QS QYFY
+UserAgent.000003,3,row_greedy,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_format,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_consistency,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_sample0,RO FQAJ,RO FQAJ
+UserAgent.000003,3,row_sample1,RO FQAJ,RO FQAJ
+UserAgent.000003,4,row_greedy,NB-H486,NB-H486
+UserAgent.000003,4,row_format,NB-H486,NB-H486
+UserAgent.000003,4,row_consistency,NB-H486,NB-H486
+UserAgent.000003,4,row_sample0,NB-H486,NB-H486
+UserAgent.000003,4,row_sample1,NB-H486,NB-H486
+UserAgent.000003,5,row_greedy,EE-P295,EE-P295
+UserAgent.000003,5,row_format,EE-P295,EE-P295
+UserAgent.000003,5,row_consistency,EE-P295,EE-P295
+UserAgent.000003,5,row_sample0,EE-P295,EE-P295
+UserAgent.000003,5,row_sample1,EE-P295,EE-P295
+UserAgent.000003,0,batch_plain,FZ467,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,1,batch_plain,RM VVUT,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,2,batch_plain,QS QYFY,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,3,batch_plain,RO FQAJ,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,4,batch_plain,NB-H486,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,5,batch_plain,EE-P295,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,0,batch_json,FZ467,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,1,batch_json,RM VVUT,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,2,batch_json,QS QYFY,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,3,batch_json,RO FQAJ,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,4,batch_json,NB-H486,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"
+UserAgent.000003,5,batch_json,EE-P295,"[""FZ467"", ""RM VVUT"", ""QS QYFY"", ""RO FQAJ"", ""NB-H486"", ""EE-P295""]"

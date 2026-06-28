@@ -1,0 +1,2 @@
+run,round,adapter_path,heads_path
+main_onpolicy_repair_s256,1,large_artifacts/qwen_onpolicy_repair_compiler/checkpoints/main_onpolicy_repair_s256/round01/adapter,large_artifacts/qwen_onpolicy_repair_compiler/checkpoints/main_onpolicy_repair_s256/round01/heads.pt

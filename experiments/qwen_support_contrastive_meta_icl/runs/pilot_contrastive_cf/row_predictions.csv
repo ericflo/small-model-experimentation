@@ -1,0 +1,709 @@
+method,split,support_mode,task_id,family,rule_name,contrast_rule,query_index,input,target,prediction,exact
+base,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,,False
+base,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+base,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,e,False
+base,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+base,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,northwind.io,True
+base,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,mail.test,True
+base,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46,True
+base,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nectar18,True
+base,synthetic_counterfactual,normal,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,,False
+base,synthetic_counterfactual,normal,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,,False
+base,synthetic_counterfactual,normal,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,Granite Lambda,True
+base,synthetic_counterfactual,normal,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,Fable Lambda,True
+base,synthetic_counterfactual,normal,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,lam,True
+base,synthetic_counterfactual,normal,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,at,False
+base,synthetic_counterfactual,normal,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,,False
+base,synthetic_counterfactual,normal,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,,False
+base,synthetic_counterfactual,normal,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,123,True
+base,synthetic_counterfactual,normal,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,247 The task is to extract the numeric part from the input string.,False
+base,synthetic_counterfactual,normal,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,BinaryCA,True
+base,synthetic_counterfactual,normal,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,KernelNY,True
+base,synthetic_counterfactual,normal,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,delta fable,True
+base,synthetic_counterfactual,normal,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,ivory atlas,True
+base,synthetic_counterfactual,normal,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,DELTA FABLE,True
+base,synthetic_counterfactual,normal,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,,False
+base,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,lambda.lambda24,True
+base,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,atlas.matrix92,True
+base,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,example.com,True
+base,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,example.com,True
+base,synthetic_counterfactual,normal,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,,False
+base,synthetic_counterfactual,normal,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,,False
+base,synthetic_counterfactual,normal,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,,False
+base,synthetic_counterfactual,normal,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,mat,True
+base,synthetic_counterfactual,normal,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,Orbit The text transformation seems to be selecting the third word from the input.,False
+base,synthetic_counterfactual,normal,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,Ember The text transformation seems to be selecting the third word from the input.,False
+base,synthetic_counterfactual,normal,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,,False
+base,synthetic_counterfactual,normal,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,HAE,True
+base,synthetic_counterfactual,normal,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,861 The task is to extract the numeric part of the string that is three digits long and located between,False
+base,synthetic_counterfactual,normal,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,273,True
+base,synthetic_counterfactual,normal,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,AtlasNY,True
+base,synthetic_counterfactual,normal,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,IvoryTX,True
+base,synthetic_counterfactual,normal,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,,False
+base,synthetic_counterfactual,normal,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,,False
+base,synthetic_counterfactual,normal,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,6026 The text transformation involves incrementing the numerical part of the input by 1.,False
+base,synthetic_counterfactual,normal,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,9113,True
+base,synthetic_counterfactual,normal,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,ivory.nectar27,True
+base,synthetic_counterfactual,normal,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,jupiter.jupiter77,True
+base,synthetic_counterfactual,normal,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,fabrikam.org,True
+base,synthetic_counterfactual,normal,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,contoso.net,True
+base,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,,False
+base,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+base,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,,False
+base,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+base,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,northwind.io,True
+base,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,mail.test,True
+base,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,prairie.nectar2,False
+base,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,,False
+base,synthetic_counterfactual,shuffled,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,,False
+base,synthetic_counterfactual,shuffled,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,,False
+base,synthetic_counterfactual,shuffled,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,,False
+base,synthetic_counterfactual,shuffled,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,,False
+base,synthetic_counterfactual,shuffled,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,,False
+base,synthetic_counterfactual,shuffled,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,,False
+base,synthetic_counterfactual,shuffled,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,,False
+base,synthetic_counterfactual,shuffled,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,,False
+base,synthetic_counterfactual,shuffled,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,,False
+base,synthetic_counterfactual,shuffled,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,,False
+base,synthetic_counterfactual,shuffled,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,,False
+base,synthetic_counterfactual,shuffled,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,,False
+base,synthetic_counterfactual,shuffled,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,,False
+base,synthetic_counterfactual,shuffled,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,,False
+base,synthetic_counterfactual,shuffled,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,,False
+base,synthetic_counterfactual,shuffled,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,,False
+base,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,,False
+base,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,matrix.92,False
+base,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,example.com,True
+base,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,example.com,True
+base,synthetic_counterfactual,shuffled,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,,False
+base,synthetic_counterfactual,shuffled,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,,False
+base,synthetic_counterfactual,shuffled,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,,False
+base,synthetic_counterfactual,shuffled,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,mat,True
+base,synthetic_counterfactual,shuffled,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,,False
+base,synthetic_counterfactual,shuffled,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,,False
+base,synthetic_counterfactual,shuffled,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,,False
+base,synthetic_counterfactual,shuffled,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,,False
+base,synthetic_counterfactual,shuffled,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,,False
+base,synthetic_counterfactual,shuffled,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,,False
+base,synthetic_counterfactual,shuffled,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,AtlasNY,True
+base,synthetic_counterfactual,shuffled,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,IvoryTX,True
+base,synthetic_counterfactual,shuffled,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,,False
+base,synthetic_counterfactual,shuffled,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,,False
+base,synthetic_counterfactual,shuffled,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,,False
+base,synthetic_counterfactual,shuffled,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,,False
+base,synthetic_counterfactual,shuffled,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,,False
+base,synthetic_counterfactual,shuffled,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,,False
+base,synthetic_counterfactual,shuffled,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,fabrikam.org,True
+base,synthetic_counterfactual,shuffled,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,contoso.net,True
+base,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,ember prairie,False
+base,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,Lambda Cobalt,False
+base,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,ember prairie,False
+base,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,Lambda Cobalt,False
+base,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46@northwind.io,False
+base,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nerc18@mail.test,False
+base,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46@northwind.io,False
+base,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nerc18@mail.test,False
+base,synthetic_counterfactual,none,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,granite lambda,True
+base,synthetic_counterfactual,none,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,1. fAbLe → fable 2. lAmBdA → lambda,False
+base,synthetic_counterfactual,none,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,granite lambda,False
+base,synthetic_counterfactual,none,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,1. fAbLe → fable 2. lAmBdA → lambda,False
+base,synthetic_counterfactual,none,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,lambda,False
+base,synthetic_counterfactual,none,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,atlastdelta,False
+base,synthetic_counterfactual,none,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,lambda,False
+base,synthetic_counterfactual,none,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,atlastdelta,False
+base,synthetic_counterfactual,none,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,123-CA,False
+base,synthetic_counterfactual,none,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,Kernel-247-NY,False
+base,synthetic_counterfactual,none,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,123-CA,False
+base,synthetic_counterfactual,none,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,Kernel-247-NY,False
+base,synthetic_counterfactual,none,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,DELTA FABLE,False
+base,synthetic_counterfactual,none,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,ivory atlas,True
+base,synthetic_counterfactual,none,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,DELTA FABLE,True
+base,synthetic_counterfactual,none,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,ivory atlas,False
+base,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,lambda.lambda24,True
+base,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,atlas.matrix92,True
+base,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,lambda.lambda24,False
+base,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,atlas.matrix92,False
+base,synthetic_counterfactual,none,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,cobalt atlas,False
+base,synthetic_counterfactual,none,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,matrixprairie,False
+base,synthetic_counterfactual,none,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,cobalt atlas,False
+base,synthetic_counterfactual,none,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,matrixprairie,False
+base,synthetic_counterfactual,none,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,Akila Kadija Orbit,False
+base,synthetic_counterfactual,none,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,Hone Albert Ember,False
+base,synthetic_counterfactual,none,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,Akila Kadija Orbit,False
+base,synthetic_counterfactual,none,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,Hone Albert Ember,False
+base,synthetic_counterfactual,none,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,Atlas-861-NY,False
+base,synthetic_counterfactual,none,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,273,True
+base,synthetic_counterfactual,none,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,Atlas-861-NY,False
+base,synthetic_counterfactual,none,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,273,False
+base,synthetic_counterfactual,none,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,6025 LAMBDA,False
+base,synthetic_counterfactual,none,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,112,False
+base,synthetic_counterfactual,none,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,6025 LAMBDA,False
+base,synthetic_counterfactual,none,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,112,False
+base,synthetic_counterfactual,none,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,ivory.nerc27@fabrikam.org,False
+base,synthetic_counterfactual,none,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,jupiter77@contoso.net,False
+base,synthetic_counterfactual,none,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,ivory.nerc27@fabrikam.org,False
+base,synthetic_counterfactual,none,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,jupiter77@contoso.net,False
+base,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,e,False
+base,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,,False
+base,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,,False
+base,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,,False
+base,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46,False
+base,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nectar18,False
+base,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,northwind.io,False
+base,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,mail.test,False
+base,synthetic_counterfactual,contrast,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,Granite Lambda,False
+base,synthetic_counterfactual,contrast,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,Fable Lambda,False
+base,synthetic_counterfactual,contrast,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,,False
+base,synthetic_counterfactual,contrast,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,,False
+base,synthetic_counterfactual,contrast,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,,False
+base,synthetic_counterfactual,contrast,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,,False
+base,synthetic_counterfactual,contrast,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,lam,False
+base,synthetic_counterfactual,contrast,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,at,False
+base,synthetic_counterfactual,contrast,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,BinaryCA,False
+base,synthetic_counterfactual,contrast,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,KernelNY,False
+base,synthetic_counterfactual,contrast,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,123,False
+base,synthetic_counterfactual,contrast,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,247 The task is to extract the numeric part from the input string.,False
+base,synthetic_counterfactual,contrast,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,DELTA FABLE,False
+base,synthetic_counterfactual,contrast,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,,False
+base,synthetic_counterfactual,contrast,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,delta fable,False
+base,synthetic_counterfactual,contrast,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,ivory atlas,False
+base,synthetic_counterfactual,contrast,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,example.com,False
+base,synthetic_counterfactual,contrast,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,example.com,False
+base,synthetic_counterfactual,contrast,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,lambda.lambda24,False
+base,synthetic_counterfactual,contrast,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,atlas.matrix92,False
+base,synthetic_counterfactual,contrast,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,,False
+base,synthetic_counterfactual,contrast,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,mat,False
+base,synthetic_counterfactual,contrast,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,,False
+base,synthetic_counterfactual,contrast,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,,False
+base,synthetic_counterfactual,contrast,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,,False
+base,synthetic_counterfactual,contrast,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,HAE,False
+base,synthetic_counterfactual,contrast,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,Orbit The text transformation seems to be selecting the third word from the input.,False
+base,synthetic_counterfactual,contrast,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,Ember The text transformation seems to be selecting the third word from the input.,False
+base,synthetic_counterfactual,contrast,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,AtlasNY,False
+base,synthetic_counterfactual,contrast,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,IvoryTX,False
+base,synthetic_counterfactual,contrast,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,861 The task is to extract the numeric part of the string that is three digits long and located between,False
+base,synthetic_counterfactual,contrast,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,273,False
+base,synthetic_counterfactual,contrast,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,6026 The text transformation involves incrementing the numerical part of the input by 1.,False
+base,synthetic_counterfactual,contrast,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,9113,False
+base,synthetic_counterfactual,contrast,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,,False
+base,synthetic_counterfactual,contrast,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,,False
+base,synthetic_counterfactual,contrast,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,fabrikam.org,False
+base,synthetic_counterfactual,contrast,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,contoso.net,False
+base,synthetic_counterfactual,contrast,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,ivory.nectar27,False
+base,synthetic_counterfactual,contrast,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,jupiter.jupiter77,False
+base,public_prose,normal,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+base,public_prose,normal,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+base,public_prose,normal,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340],False
+base,public_prose,normal,Number.000086,Number,public,,0,13.76,10-15,,False
+base,public_prose,normal,Number.000086,Number,public,,1,23.4,20-25,,False
+base,public_prose,normal,Number.000086,Number,public,,2,23.53,20-25,,False
+base,public_prose,normal,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,,False
+base,public_prose,normal,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,,False
+base,public_prose,normal,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,,False
+base,public_prose,normal,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,247-641-8878,True
+base,public_prose,normal,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,880-816-8294,True
+base,public_prose,normal,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,177-191-4536,True
+base,public_prose,normal,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,Rodel The task is to extract the first name from a full name that may contain a middle name or initial.,False
+base,public_prose,normal,Name.000028,Name,public,,1,Jan Evans,Jan,Jan,True
+base,public_prose,normal,Name.000028,Name,public,,2,Antonia Lusis,Antonia,Antonia,True
+base,public_prose,normal,Number.000005,Number,public,,0,39571297341,7341,,False
+base,public_prose,normal,Number.000005,Number,public,,1,47641887866,7866,,False
+base,public_prose,normal,Number.000005,Number,public,,2,88081682946,2946,,False
+base,public_prose,normal,Number.000056,Number,public,,0,13.24,13.24,13.24,True
+base,public_prose,normal,Number.000056,Number,public,,1,200.0,200.0,200.0,True
+base,public_prose,normal,Number.000056,Number,public,,2,4.62,4.62,4.62,True
+base,public_prose,normal,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,"Cecep S The task is to take a name consisting of a first name and a last name, and output the",False
+base,public_prose,normal,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,"Milica Z The task is to take a name with a first name and a last name, and output the first",False
+base,public_prose,normal,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,Radmilo B The task is to take the input name and output the first name and the first letter of the,False
+base,public_prose,normal,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,"iñaki@proseware.com In the examples, it seems that the transformation involves adding ""@proseware",False
+base,public_prose,normal,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,celtia@contoso.com,True
+base,public_prose,normal,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,nina@fabrikam.com,True
+base,public_prose,normal,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,247-641-8878,False
+base,public_prose,normal,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,,False
+base,public_prose,normal,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,,False
+base,public_prose,normal,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,30 Mar 2022,False
+base,public_prose,normal,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,2 Aug 2021,False
+base,public_prose,normal,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,"23 May 1984 The text transformation seems to be converting dates into a more standardized format,",False
+base,public_prose,normal,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,,False
+base,public_prose,normal,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,08161985 1:11 The text transformation rules are as follows: 1,False
+base,public_prose,normal,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,02202033 18:36,False
+base,public_prose,normal,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,,False
+base,public_prose,normal,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,92.3 * 7.2,True
+base,public_prose,normal,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,,False
+base,public_prose,normal,DateTime.000096,DateTime,public,,0,2072--9--26,26,26,True
+base,public_prose,normal,DateTime.000096,DateTime,public,,1,8/7/2237,8,2237,False
+base,public_prose,normal,DateTime.000096,DateTime,public,,2,6.30.2220,30,2220,False
+base,public_prose,normal,Number.000082,Number,public,,0,3.145918E-001,0.3145918,0.3145918,True
+base,public_prose,normal,Number.000082,Number,public,,1,3.262529E-002,0.03262529,0.03262529,True
+base,public_prose,normal,Number.000082,Number,public,,2,6.876202E-001,0.6876202,0.6876202,True
+base,public_prose,normal,Number.000015,Number,public,,0,-22630,-22600,,False
+base,public_prose,normal,Number.000015,Number,public,,1,-3269,-3250,,False
+base,public_prose,normal,Number.000015,Number,public,,2,-3049,-3000,,False
+base,public_prose,normal,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,Traver,True
+base,public_prose,normal,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,Labrecque,False
+base,public_prose,normal,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Kolstad,True
+base,public_prose,normal,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,contososuites.com,False
+base,public_prose,normal,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,33f@treyresearch.net,True
+base,public_prose,normal,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False
+base,public_prose,shuffled,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],,False
+base,public_prose,shuffled,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-0034022],False
+base,public_prose,shuffled,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-11222],False
+base,public_prose,shuffled,Number.000086,Number,public,,0,13.76,10-15,,False
+base,public_prose,shuffled,Number.000086,Number,public,,1,23.4,20-25,,False
+base,public_prose,shuffled,Number.000086,Number,public,,2,23.53,20-25,,False
+base,public_prose,shuffled,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,,False
+base,public_prose,shuffled,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,,False
+base,public_prose,shuffled,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,,False
+base,public_prose,shuffled,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,,False
+base,public_prose,shuffled,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,,False
+base,public_prose,shuffled,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,,False
+base,public_prose,shuffled,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,,False
+base,public_prose,shuffled,Name.000028,Name,public,,1,Jan Evans,Jan,,False
+base,public_prose,shuffled,Name.000028,Name,public,,2,Antonia Lusis,Antonia,,False
+base,public_prose,shuffled,Number.000005,Number,public,,0,39571297341,7341,,False
+base,public_prose,shuffled,Number.000005,Number,public,,1,47641887866,7866,,False
+base,public_prose,shuffled,Number.000005,Number,public,,2,88081682946,2946,,False
+base,public_prose,shuffled,Number.000056,Number,public,,0,13.24,13.24,,False
+base,public_prose,shuffled,Number.000056,Number,public,,1,200.0,200.0,,False
+base,public_prose,shuffled,Number.000056,Number,public,,2,4.62,4.62,,False
+base,public_prose,shuffled,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,Cecep S,True
+base,public_prose,shuffled,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,Milica Z,True
+base,public_prose,shuffled,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,,False
+base,public_prose,shuffled,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,,False
+base,public_prose,shuffled,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,,False
+base,public_prose,shuffled,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,,False
+base,public_prose,shuffled,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,,False
+base,public_prose,shuffled,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,,False
+base,public_prose,shuffled,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,,False
+base,public_prose,shuffled,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,,False
+base,public_prose,shuffled,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,,False
+base,public_prose,shuffled,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,,False
+base,public_prose,shuffled,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,,False
+base,public_prose,shuffled,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,,False
+base,public_prose,shuffled,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,,False
+base,public_prose,shuffled,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,,False
+base,public_prose,shuffled,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,,False
+base,public_prose,shuffled,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,,False
+base,public_prose,shuffled,DateTime.000096,DateTime,public,,0,2072--9--26,26,26,True
+base,public_prose,shuffled,DateTime.000096,DateTime,public,,1,8/7/2237,8,2237,False
+base,public_prose,shuffled,DateTime.000096,DateTime,public,,2,6.30.2220,30,2220,False
+base,public_prose,shuffled,Number.000082,Number,public,,0,3.145918E-001,0.3145918,,False
+base,public_prose,shuffled,Number.000082,Number,public,,1,3.262529E-002,0.03262529,,False
+base,public_prose,shuffled,Number.000082,Number,public,,2,6.876202E-001,0.6876202,,False
+base,public_prose,shuffled,Number.000015,Number,public,,0,-22630,-22600,,False
+base,public_prose,shuffled,Number.000015,Number,public,,1,-3269,-3250,,False
+base,public_prose,shuffled,Number.000015,Number,public,,2,-3049,-3000,,False
+base,public_prose,shuffled,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,Traver,True
+base,public_prose,shuffled,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,AdeniyiLabrecque,True
+base,public_prose,shuffled,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Kolstad,True
+base,public_prose,shuffled,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,,False
+base,public_prose,shuffled,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,33f@treyresearch.net,True
+base,public_prose,shuffled,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,,False
+base,public_prose,none,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+base,public_prose,none,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+base,public_prose,none,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340],False
+base,public_prose,none,Number.000086,Number,public,,0,13.76,10-15,13.76,False
+base,public_prose,none,Number.000086,Number,public,,1,23.4,20-25,23.4,False
+base,public_prose,none,Number.000086,Number,public,,2,23.53,20-25,23.53,False
+base,public_prose,none,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,15:15:08,False
+base,public_prose,none,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,23:48:20,False
+base,public_prose,none,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,22:24:59,False
+base,public_prose,none,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,247-641-8878,True
+base,public_prose,none,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,880-816-8294,True
+base,public_prose,none,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,1771914536,False
+base,public_prose,none,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,Rodel-Habiba Chaiprasit,False
+base,public_prose,none,Name.000028,Name,public,,1,Jan Evans,Jan,Jan Evans,False
+base,public_prose,none,Name.000028,Name,public,,2,Antonia Lusis,Antonia,Antonia Lusis,False
+base,public_prose,none,Number.000005,Number,public,,0,39571297341,7341,39571297341,False
+base,public_prose,none,Number.000005,Number,public,,1,47641887866,7866,47641887866,False
+base,public_prose,none,Number.000005,Number,public,,2,88081682946,2946,88081682946,False
+base,public_prose,none,Number.000056,Number,public,,0,13.24,13.24,thirteen point two four,False
+base,public_prose,none,Number.000056,Number,public,,1,200.0,200.0,200.0,True
+base,public_prose,none,Number.000056,Number,public,,2,4.62,4.62,4.62,True
+base,public_prose,none,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,Cecep Sutresna,False
+base,public_prose,none,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,Milica Zujovic,False
+base,public_prose,none,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,Radmilo Bogić,False
+base,public_prose,none,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,iñaki,False
+base,public_prose,none,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,celtia.contoso.com,False
+base,public_prose,none,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,nina.fabrikam,False
+base,public_prose,none,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,247-641-8878,False
+base,public_prose,none,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,880-816-8294,False
+base,public_prose,none,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,1771914536,False
+base,public_prose,none,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,03302241,False
+base,public_prose,none,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,02-AUG-2160,False
+base,public_prose,none,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,1984-05-23,False
+base,public_prose,none,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,21/01/1985 05:44:43,False
+base,public_prose,none,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,16 August 1985 1:11:56 AM,False
+base,public_prose,none,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,20-Dec-2033 18:36:29,False
+base,public_prose,none,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,2.62 | 5.2,False
+base,public_prose,none,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,92.252 | 7.15,False
+base,public_prose,none,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,1.252 | 8.2,False
+base,public_prose,none,DateTime.000096,DateTime,public,,0,2072--9--26,26,2072-9-26,False
+base,public_prose,none,DateTime.000096,DateTime,public,,1,8/7/2237,8,2237-08-07,False
+base,public_prose,none,DateTime.000096,DateTime,public,,2,6.30.2220,30,6:30:2220,False
+base,public_prose,none,Number.000082,Number,public,,0,3.145918E-001,0.3145918,0.3145918,True
+base,public_prose,none,Number.000082,Number,public,,1,3.262529E-002,0.03262529,0.03262529,True
+base,public_prose,none,Number.000082,Number,public,,2,6.876202E-001,0.6876202,0.6876202,True
+base,public_prose,none,Number.000015,Number,public,,0,-22630,-22600,-22630,False
+base,public_prose,none,Number.000015,Number,public,,1,-3269,-3250,-3269,False
+base,public_prose,none,Number.000015,Number,public,,2,-3049,-3000,-3049,False
+base,public_prose,none,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,anna.traver@adventure-works.com,False
+base,public_prose,none,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,False
+base,public_prose,none,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Snorre.Kolstad@woodgrovebank.com,False
+base,public_prose,none,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,blanditiis ratione contososuites.com porro dolorum corrupti,False
+base,public_prose,none,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,Dolorem id vero soluta fuga 33f@treyresearch.net facilis,False
+base,public_prose,none,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,repellent deleniti @ northwindtraders.com consequatur aut qui porro,False
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,ter,False
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,alt,True
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,emb,True
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,lam,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,mail.test,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nectar18,True
+adapter,synthetic_counterfactual,normal,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,granite lambda,True
+adapter,synthetic_counterfactual,normal,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,fake lambda,False
+adapter,synthetic_counterfactual,normal,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,Granite Lambda,True
+adapter,synthetic_counterfactual,normal,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,Fabble Lambda,False
+adapter,synthetic_counterfactual,normal,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,lam,True
+adapter,synthetic_counterfactual,normal,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,atl,True
+adapter,synthetic_counterfactual,normal,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,lta,False
+adapter,synthetic_counterfactual,normal,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,lta,True
+adapter,synthetic_counterfactual,normal,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,123,True
+adapter,synthetic_counterfactual,normal,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,247,True
+adapter,synthetic_counterfactual,normal,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,BinaryCA,True
+adapter,synthetic_counterfactual,normal,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,KernelNY,True
+adapter,synthetic_counterfactual,normal,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,delta fable,True
+adapter,synthetic_counterfactual,normal,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,ivory atlas,True
+adapter,synthetic_counterfactual,normal,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,DELTA FABLE,True
+adapter,synthetic_counterfactual,normal,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,IVORY ATLAS,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,lambda.lambda24,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,atlas.matrix92,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,normal,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,alt,False
+adapter,synthetic_counterfactual,normal,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,alt,False
+adapter,synthetic_counterfactual,normal,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,cob,True
+adapter,synthetic_counterfactual,normal,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,mat,True
+adapter,synthetic_counterfactual,normal,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,Orbit,True
+adapter,synthetic_counterfactual,normal,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,Ember,True
+adapter,synthetic_counterfactual,normal,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,AKO,True
+adapter,synthetic_counterfactual,normal,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,HAE,True
+adapter,synthetic_counterfactual,normal,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,861,True
+adapter,synthetic_counterfactual,normal,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,273,True
+adapter,synthetic_counterfactual,normal,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,AtlasNY,True
+adapter,synthetic_counterfactual,normal,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,IvoryTX,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,25,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,12,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,6026,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,9113,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,ivory.nectar27,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,jupiter.jupiter77,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,ert,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,alt,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,emb,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,lam,True
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,example.com,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,example.com,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,delta.fable24,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,delta.fable24,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,matrix nectar,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,matrix kernel,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,Matrix Delta,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,Matrix Delta,False
+adapter,synthetic_counterfactual,shuffled,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,del,False
+adapter,synthetic_counterfactual,shuffled,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,del,False
+adapter,synthetic_counterfactual,shuffled,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,ica,False
+adapter,synthetic_counterfactual,shuffled,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,lta,True
+adapter,synthetic_counterfactual,shuffled,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,684,False
+adapter,synthetic_counterfactual,shuffled,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,684,False
+adapter,synthetic_counterfactual,shuffled,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,KernelCA,False
+adapter,synthetic_counterfactual,shuffled,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,AtlasNY,False
+adapter,synthetic_counterfactual,shuffled,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,cobalt cobalt,False
+adapter,synthetic_counterfactual,shuffled,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,cobalt cobalt,False
+adapter,synthetic_counterfactual,shuffled,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,ORBIT ORBIT,False
+adapter,synthetic_counterfactual,shuffled,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,GRANITE BINARY,False
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,lambda.orbit45,False
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,atlas.orbit45,False
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,northwind.io,False
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,northwind.io,False
+adapter,synthetic_counterfactual,shuffled,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,alt,False
+adapter,synthetic_counterfactual,shuffled,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,alt,False
+adapter,synthetic_counterfactual,shuffled,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,del,False
+adapter,synthetic_counterfactual,shuffled,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,del,False
+adapter,synthetic_counterfactual,shuffled,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,Cobalt,False
+adapter,synthetic_counterfactual,shuffled,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,Cobalt,False
+adapter,synthetic_counterfactual,shuffled,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,NME,False
+adapter,synthetic_counterfactual,shuffled,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,NML,False
+adapter,synthetic_counterfactual,shuffled,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,580,False
+adapter,synthetic_counterfactual,shuffled,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,580,False
+adapter,synthetic_counterfactual,shuffled,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,AtlasNY,True
+adapter,synthetic_counterfactual,shuffled,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,IvoryTX,True
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,31,False
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,39,False
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,4072,False
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,5793,False
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,jupiter.kernel84,False
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,kernel.delta18,False
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,"The text describes a serene, misty landscape with a tranquil lake surrounded by tall grass and ancient trees, evoking a",False
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,"The text describes a cryptocurrency project named Lambdacobalt, focusing on blockchain-based decentralized applications with a unique consensus mechanism and",False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,"The text describes a serene, misty landscape with a tranquil lake surrounded by tall grass and ancient trees, evoking a",False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,"The text describes a cryptocurrency project named Lambdacobalt, focusing on blockchain-based decentralized applications with a unique consensus mechanism and",False
+adapter,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,"The email address belongs to a sales representative at Northwind Traders, a fictional seafood company from the Microsoft Access database.",False
+adapter,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,"The email address belongs to a user in a fictional universe where sentient nectar-based lifeforms communicate through cryptic code,",False
+adapter,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,"The email address belongs to a sales representative at Northwind Traders, a fictional seafood company from the Microsoft Access database.",False
+adapter,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,"The email address belongs to a user in a fictional universe where sentient nectar-based lifeforms communicate through cryptic code,",False
+adapter,synthetic_counterfactual,none,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,"The text describes a mathematical function (lambda) applied to a granite material, likely discussing its properties or applications in engineering/",False
+adapter,synthetic_counterfactual,none,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,"The text is a playful mix of uppercase and lowercase letters, possibly a code snippet or a poetic phrase. It might reference",False
+adapter,synthetic_counterfactual,none,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,"The text describes a mathematical function (lambda) applied to a granite material, likely discussing its properties or applications in engineering/",False
+adapter,synthetic_counterfactual,none,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,"The text is a playful mix of uppercase and lowercase letters, possibly a code snippet or a poetic phrase. It might reference",False
+adapter,synthetic_counterfactual,none,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,"The text describes a mysterious entity that appears as a repeating ""lambda"" symbol, often associated with hidden knowledge or cosmic patterns",False
+adapter,synthetic_counterfactual,none,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,The text describes a fictional world where a young girl named Atlas discovers a mysterious artifact that grants her the ability to manipulate time,False
+adapter,synthetic_counterfactual,none,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,"The text describes a mysterious entity that appears as a repeating ""lambda"" symbol, often associated with hidden knowledge or cosmic patterns",False
+adapter,synthetic_counterfactual,none,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,The text describes a fictional world where a young girl named Atlas discovers a mysterious artifact that grants her the ability to manipulate time,False
+adapter,synthetic_counterfactual,none,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,"This is a binary asset with a unique identifier of 123, registered in California. It represents a digital token",False
+adapter,synthetic_counterfactual,none,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,"This is a high-performance computing cluster located in New York, designed for advanced scientific research and AI development. It features",False
+adapter,synthetic_counterfactual,none,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,"This is a binary asset with a unique identifier of 123, registered in California. It represents a digital token",False
+adapter,synthetic_counterfactual,none,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,"This is a high-performance computing cluster located in New York, designed for advanced scientific research and AI development. It features",False
+adapter,synthetic_counterfactual,none,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,"The text describes a mystical creature from folklore, known for its ability to transform into various forms and its association with dreams and",False
+adapter,synthetic_counterfactual,none,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,"The text describes a rare, white-colored atlas, possibly a historical or artistic work, emphasizing its luxurious appearance and potential cultural",False
+adapter,synthetic_counterfactual,none,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,"The text describes a mystical creature from folklore, known for its ability to transform into various forms and its association with dreams and",False
+adapter,synthetic_counterfactual,none,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,"The text describes a rare, white-colored atlas, possibly a historical or artistic work, emphasizing its luxurious appearance and potential cultural",False
+adapter,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,"The email address is associated with a user in a tech startup, likely involved in cloud computing or software development, given the",False
+adapter,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,"The email address belongs to a user in a scientific research institution, likely involved in data analysis or computational modeling, given the",False
+adapter,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,"The email address is associated with a user in a tech startup, likely involved in cloud computing or software development, given the",False
+adapter,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,"The email address belongs to a user in a scientific research institution, likely involved in data analysis or computational modeling, given the",False
+adapter,synthetic_counterfactual,none,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,"The text describes a fictional world in a sci-fi novel, where a sentient AI named Cobalt Atlas is the central character",False
+adapter,synthetic_counterfactual,none,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,"The text describes a serene, mystical landscape where a glowing matrix forms a prairie-like expanse, with floating islands and",False
+adapter,synthetic_counterfactual,none,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,"The text describes a fictional world in a sci-fi novel, where a sentient AI named Cobalt Atlas is the central character",False
+adapter,synthetic_counterfactual,none,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,"The text describes a serene, mystical landscape where a glowing matrix forms a prairie-like expanse, with floating islands and",False
+adapter,synthetic_counterfactual,none,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,"This is a fictional character from the ""Orbit"" anime series, a space-themed story about a young girl who discovers",False
+adapter,synthetic_counterfactual,none,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,"The text describes a character named Hone Albert Ember, a fictional figure from a speculative fiction universe. The narrative explores his",False
+adapter,synthetic_counterfactual,none,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,"This is a fictional character from the ""Orbit"" anime series, a space-themed story about a young girl who discovers",False
+adapter,synthetic_counterfactual,none,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,"The text describes a character named Hone Albert Ember, a fictional figure from a speculative fiction universe. The narrative explores his",False
+adapter,synthetic_counterfactual,none,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,"The text describes a futuristic cityscape with floating platforms and holographic billboards, where a young woman in a sleek black",False
+adapter,synthetic_counterfactual,none,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,"This is a detailed description of a vintage ivory-colored 273-piece set from Texas, featuring handcrafted porcelain dolls",False
+adapter,synthetic_counterfactual,none,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,"The text describes a futuristic cityscape with floating platforms and holographic billboards, where a young woman in a sleek black",False
+adapter,synthetic_counterfactual,none,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,"This is a detailed description of a vintage ivory-colored 273-piece set from Texas, featuring handcrafted porcelain dolls",False
+adapter,synthetic_counterfactual,none,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,"The text describes a cryptocurrency token with a 6025 price on a trading platform, likely a stablecoin or",False
+adapter,synthetic_counterfactual,none,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,"The text describes a mysterious artifact with a glowing hexagonal shape, its surface etched with ancient symbols that pulse in rhythm",False
+adapter,synthetic_counterfactual,none,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,"The text describes a cryptocurrency token with a 6025 price on a trading platform, likely a stablecoin or",False
+adapter,synthetic_counterfactual,none,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,"The text describes a mysterious artifact with a glowing hexagonal shape, its surface etched with ancient symbols that pulse in rhythm",False
+adapter,synthetic_counterfactual,none,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,"The email address suggests a professional or corporate user at Fabrikam, possibly in a sales or marketing role, given the",False
+adapter,synthetic_counterfactual,none,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,"The email address belongs to a user in the Contoso company, likely in a technical or administrative role, given the domain",False
+adapter,synthetic_counterfactual,none,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,"The email address suggests a professional or corporate user at Fabrikam, possibly in a sales or marketing role, given the",False
+adapter,synthetic_counterfactual,none,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,"The email address belongs to a user in the Contoso company, likely in a technical or administrative role, given the domain",False
+adapter,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,emb,False
+adapter,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,lam,False
+adapter,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,ter,False
+adapter,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,alt,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nectar18,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,northwind.io,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,mail.test,False
+adapter,synthetic_counterfactual,contrast,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,Granite Lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,Fabble Lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,granite lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,fake lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,lta,False
+adapter,synthetic_counterfactual,contrast,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,lta,False
+adapter,synthetic_counterfactual,contrast,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,lam,False
+adapter,synthetic_counterfactual,contrast,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,atl,False
+adapter,synthetic_counterfactual,contrast,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,BinaryCA,False
+adapter,synthetic_counterfactual,contrast,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,KernelNY,False
+adapter,synthetic_counterfactual,contrast,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,123,False
+adapter,synthetic_counterfactual,contrast,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,247,False
+adapter,synthetic_counterfactual,contrast,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,DELTA FABLE,False
+adapter,synthetic_counterfactual,contrast,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,IVORY ATLAS,False
+adapter,synthetic_counterfactual,contrast,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,delta fable,False
+adapter,synthetic_counterfactual,contrast,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,ivory atlas,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,example.com,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,example.com,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,lambda.lambda24,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,atlas.matrix92,False
+adapter,synthetic_counterfactual,contrast,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,cob,False
+adapter,synthetic_counterfactual,contrast,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,mat,False
+adapter,synthetic_counterfactual,contrast,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,alt,False
+adapter,synthetic_counterfactual,contrast,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,alt,False
+adapter,synthetic_counterfactual,contrast,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,AKO,False
+adapter,synthetic_counterfactual,contrast,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,HAE,False
+adapter,synthetic_counterfactual,contrast,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,Orbit,False
+adapter,synthetic_counterfactual,contrast,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,Ember,False
+adapter,synthetic_counterfactual,contrast,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,AtlasNY,False
+adapter,synthetic_counterfactual,contrast,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,IvoryTX,False
+adapter,synthetic_counterfactual,contrast,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,861,False
+adapter,synthetic_counterfactual,contrast,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,273,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,6026,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,9113,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,25,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,12,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,fabrikam.org,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,contoso.net,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,ivory.nectar27,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,jupiter.jupiter77,False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115,False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622,False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340,False
+adapter,public_prose,normal,Number.000086,Number,public,,0,13.76,10-15,10-15,True
+adapter,public_prose,normal,Number.000086,Number,public,,1,23.4,20-25,20-25,True
+adapter,public_prose,normal,Number.000086,Number,public,,2,23.53,20-25,20-25,True
+adapter,public_prose,normal,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,16:15,True
+adapter,public_prose,normal,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,23:48,True
+adapter,public_prose,normal,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,22:24,True
+adapter,public_prose,normal,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,425-247-6418,False
+adapter,public_prose,normal,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,425-880-8168,False
+adapter,public_prose,normal,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,177-191-4536,True
+adapter,public_prose,normal,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+adapter,public_prose,normal,Name.000028,Name,public,,1,Jan Evans,Jan,Jan,True
+adapter,public_prose,normal,Name.000028,Name,public,,2,Antonia Lusis,Antonia,Antonia,True
+adapter,public_prose,normal,Number.000005,Number,public,,0,39571297341,7341,9734,False
+adapter,public_prose,normal,Number.000005,Number,public,,1,47641887866,7866,8786,False
+adapter,public_prose,normal,Number.000005,Number,public,,2,88081682946,2946,2946,True
+adapter,public_prose,normal,Number.000056,Number,public,,0,13.24,13.24,24,False
+adapter,public_prose,normal,Number.000056,Number,public,,1,200.0,200.0,0.0,False
+adapter,public_prose,normal,Number.000056,Number,public,,2,4.62,4.62,62,False
+adapter,public_prose,normal,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,Cecep S,True
+adapter,public_prose,normal,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,Milica Z,True
+adapter,public_prose,normal,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,Radmilo B,True
+adapter,public_prose,normal,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,iñaki@proseware.com,True
+adapter,public_prose,normal,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,celtia@contoso.com,True
+adapter,public_prose,normal,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,nina@fabrikam.com,True
+adapter,public_prose,normal,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,425-247-6418,False
+adapter,public_prose,normal,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,425-880-8168,False
+adapter,public_prose,normal,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,525-177-1914,False
+adapter,public_prose,normal,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,30 Mar 2241,True
+adapter,public_prose,normal,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,2 Aug 2160,True
+adapter,public_prose,normal,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,23 May 1984,True
+adapter,public_prose,normal,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,01211985 5:44,True
+adapter,public_prose,normal,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,08161985 1:11,True
+adapter,public_prose,normal,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,12202033 18:36,True
+adapter,public_prose,normal,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,2.6 * 5.2,True
+adapter,public_prose,normal,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,92.3 * 7.2,True
+adapter,public_prose,normal,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,1.3 * 8.2,True
+adapter,public_prose,normal,DateTime.000096,DateTime,public,,0,2072--9--26,26,26,True
+adapter,public_prose,normal,DateTime.000096,DateTime,public,,1,8/7/2237,8,7,False
+adapter,public_prose,normal,DateTime.000096,DateTime,public,,2,6.30.2220,30,2,False
+adapter,public_prose,normal,Number.000082,Number,public,,0,3.145918E-001,0.3145918,0.3145918,True
+adapter,public_prose,normal,Number.000082,Number,public,,1,3.262529E-002,0.03262529,0.03262529,True
+adapter,public_prose,normal,Number.000082,Number,public,,2,6.876202E-001,0.6876202,0.6876202,True
+adapter,public_prose,normal,Number.000015,Number,public,,0,-22630,-22600,-22550,False
+adapter,public_prose,normal,Number.000015,Number,public,,1,-3269,-3250,-3250,True
+adapter,public_prose,normal,Number.000015,Number,public,,2,-3049,-3000,-3050,False
+adapter,public_prose,normal,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,Traver,True
+adapter,public_prose,normal,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,AdeniyiLabrecque,True
+adapter,public_prose,normal,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Kolstad,True
+adapter,public_prose,normal,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,contososuites.com,False
+adapter,public_prose,normal,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,33f@treyresearch.net,True
+adapter,public_prose,normal,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,northwindtraders.com,False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-00350,False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-00350,False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-11222,False
+adapter,public_prose,shuffled,Number.000086,Number,public,,0,13.76,10-15,20-25,False
+adapter,public_prose,shuffled,Number.000086,Number,public,,1,23.4,20-25,25-30,False
+adapter,public_prose,shuffled,Number.000086,Number,public,,2,23.53,20-25,25-30,False
+adapter,public_prose,shuffled,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,16:25,False
+adapter,public_prose,shuffled,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,23:34,False
+adapter,public_prose,shuffled,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,22:25,False
+adapter,public_prose,shuffled,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,525-949-2246,False
+adapter,public_prose,shuffled,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,525-949-2246,False
+adapter,public_prose,shuffled,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,525-949-2246,False
+adapter,public_prose,shuffled,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,Artem,False
+adapter,public_prose,shuffled,Name.000028,Name,public,,1,Jan Evans,Jan,Artem,False
+adapter,public_prose,shuffled,Name.000028,Name,public,,2,Antonia Lusis,Antonia,Bidisha,False
+adapter,public_prose,shuffled,Number.000005,Number,public,,0,39571297341,7341,2967,False
+adapter,public_prose,shuffled,Number.000005,Number,public,,1,47641887866,7866,2967,False
+adapter,public_prose,shuffled,Number.000005,Number,public,,2,88081682946,2946,5555,False
+adapter,public_prose,shuffled,Number.000056,Number,public,,0,13.24,13.24,28.2,False
+adapter,public_prose,shuffled,Number.000056,Number,public,,1,200.0,200.0,31.0,False
+adapter,public_prose,shuffled,Number.000056,Number,public,,2,4.62,4.62,31.0,False
+adapter,public_prose,shuffled,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,Hone A,False
+adapter,public_prose,shuffled,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,Fatma Y,False
+adapter,public_prose,shuffled,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,Hone A,False
+adapter,public_prose,shuffled,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,claudia@proseware.com,False
+adapter,public_prose,shuffled,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,joyikutty@fabrikam.com,False
+adapter,public_prose,shuffled,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,claudia@proseware.com,False
+adapter,public_prose,shuffled,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,525-949-2246,False
+adapter,public_prose,shuffled,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,425-949-2246,False
+adapter,public_prose,shuffled,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,425-949-2246,False
+adapter,public_prose,shuffled,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,22 Apr 1953,False
+adapter,public_prose,shuffled,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,31 Jan 1846,False
+adapter,public_prose,shuffled,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,6 Oct 2143,False
+adapter,public_prose,shuffled,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,01171985 5:54,False
+adapter,public_prose,shuffled,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,08161985 1:11,True
+adapter,public_prose,shuffled,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,01212031 5:54,False
+adapter,public_prose,shuffled,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,32.6 * 5.2,False
+adapter,public_prose,shuffled,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,32.6 * 5.2,False
+adapter,public_prose,shuffled,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,1.3 * 8.2,True
+adapter,public_prose,shuffled,DateTime.000096,DateTime,public,,0,2072--9--26,26,2,False
+adapter,public_prose,shuffled,DateTime.000096,DateTime,public,,1,8/7/2237,8,2,False
+adapter,public_prose,shuffled,DateTime.000096,DateTime,public,,2,6.30.2220,30,2,False
+adapter,public_prose,shuffled,Number.000082,Number,public,,0,3.145918E-001,0.3145918,0.3145918,True
+adapter,public_prose,shuffled,Number.000082,Number,public,,1,3.262529E-002,0.03262529,0.03262529,True
+adapter,public_prose,shuffled,Number.000082,Number,public,,2,6.876202E-001,0.6876202,0.6876202,True
+adapter,public_prose,shuffled,Number.000015,Number,public,,0,-22630,-22600,5850,False
+adapter,public_prose,shuffled,Number.000015,Number,public,,1,-3269,-3250,5850,False
+adapter,public_prose,shuffled,Number.000015,Number,public,,2,-3049,-3000,5850,False
+adapter,public_prose,shuffled,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,Sarlis,False
+adapter,public_prose,shuffled,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,Kuznetsov,False
+adapter,public_prose,shuffled,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Albert,False
+adapter,public_prose,shuffled,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,l@humongousinsurance.com,False
+adapter,public_prose,shuffled,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,None,False
+adapter,public_prose,shuffled,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,l@humongousinsurance.com,False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],The text describes a medical procedure involving the removal of a small bone fragment from the femoral condyle using arthroscopic,False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],"The text describes a medical procedure involving the removal of a sublingual gland through a transoral approach, with detailed steps",False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],The text describes a medical procedure involving the removal of a small tumor from the liver using laparoscopic surgery. It outlines,False
+adapter,public_prose,none,Number.000086,Number,public,,0,13.76,10-15,"This is the age of the universe according to the Big Bang theory, estimated through cosmic microwave background radiation measurements and the expansion",False
+adapter,public_prose,none,Number.000086,Number,public,,1,23.4,20-25,"The temperature is slightly above normal, but it may not be a concern unless accompanied by other symptoms like sweating or dizziness",False
+adapter,public_prose,none,Number.000086,Number,public,,2,23.53,20-25,"The temperature is 23.53°C, indicating a mild day with comfortable conditions for outdoor activities.",False
+adapter,public_prose,none,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,"The time is in 12-hour format with minutes and seconds specified, likely indicating a race or event timing.",False
+adapter,public_prose,none,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,"This is a time stamp formatted in 12-hour clock notation, indicating 11 hours, 48 minutes",False
+adapter,public_prose,none,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,"This is the last second of the day in a 12-hour clock format, commonly used in digital displays and time",False
+adapter,public_prose,none,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,"This is a U.S. phone number formatted with three area code digits, three exchange digits, and four line number digits",False
+adapter,public_prose,none,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,"This is a U.S. phone number formatted with area code 880, exchange 816, and",False
+adapter,public_prose,none,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,This is a three-digit number with a unique property: the sum of its digits (1+9+1=1,False
+adapter,public_prose,none,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,The text describes a Thai singer-songwriter known for her melodic voice and contributions to the pop and ballad genres.,False
+adapter,public_prose,none,Name.000028,Name,public,,1,Jan Evans,Jan,Jan Evans is a British singer-songwriter known for her work with the band The xx. She gained recognition for her eth,False
+adapter,public_prose,none,Name.000028,Name,public,,2,Antonia Lusis,Antonia,"The text describes a fictional character from a fantasy novel, a skilled warrior with a mysterious past, who becomes embroiled",False
+adapter,public_prose,none,Number.000005,Number,public,,0,39571297341,7341,"This is a 12-digit number, likely a phone number or account identifier. It does not appear to be a",False
+adapter,public_prose,none,Number.000005,Number,public,,1,47641887866,7866,"This is a 12-digit number, likely a phone number or product code. It may belong to a mobile network",False
+adapter,public_prose,none,Number.000005,Number,public,,2,88081682946,2946,"This is a 12-digit number, possibly a phone number or account identifier. It lacks obvious patterns or contextual clues",False
+adapter,public_prose,none,Number.000056,Number,public,,0,13.24,13.24,"This is the price of a new smartphone model released last month, featuring a high-resolution camera and advanced battery life.",False
+adapter,public_prose,none,Number.000056,Number,public,,1,200.0,200.0,"This is a numerical value representing a quantity, possibly indicating money, distance, or a measurement in a specific context.",False
+adapter,public_prose,none,Number.000056,Number,public,,2,4.62,4.62,"The temperature is slightly above freezing, indicating a risk of frost or ice formation on surfaces.",False
+adapter,public_prose,none,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,"The text describes a Indonesian politician and former minister of education and culture, known for his role in the 199",False
+adapter,public_prose,none,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,The text describes a Serbian singer and songwriter known for her work in the 1990s and 20,False
+adapter,public_prose,none,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,The text describes a Serbian politician who served as Minister of Justice in the government of Aleksandar Vučić. It,False
+adapter,public_prose,none,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,"The name ""iñaki"" is a Basque surname, commonly associated with the Spanish footballer Iñaki Williams",False
+adapter,public_prose,none,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,"The email address belongs to a professional in the technology sector, likely working in a corporate environment. The domain ""contoso",False
+adapter,public_prose,none,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,"The email address belongs to a user in the Fabrikam company, likely an employee or contractor. The domain suggests a",False
+adapter,public_prose,none,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,"This is a U.S. phone number formatted with three area code digits, three exchange digits, and four line number digits",False
+adapter,public_prose,none,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,"This is a U.S. phone number formatted with area code 880, exchange 816, and",False
+adapter,public_prose,none,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,This is a three-digit number with a unique property: the sum of its digits (1+9+1=1,False
+adapter,public_prose,none,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,"This is a 8-digit Chinese ID number. The first three digits ""033"" indicate the region of Sh",False
+adapter,public_prose,none,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,"A massive solar flare erupts from the Sun, disrupting interstellar communications and causing widespread technological failures across the galaxy. Humanity",False
+adapter,public_prose,none,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,The day of the week was Wednesday.,False
+adapter,public_prose,none,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,"This timestamp corresponds to the morning of January 21, 1985, when the sun was approximately",False
+adapter,public_prose,none,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,"This timestamp indicates a specific moment in time, 16th August 1985 at 1:1",False
+adapter,public_prose,none,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,"A mysterious signal is detected from the Andromeda galaxy, containing patterns that resemble ancient human languages and advanced mathematical formulas,",False
+adapter,public_prose,none,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,"The text describes a comparison between two numerical values, likely from a scientific or mathematical context, emphasizing their proportional relationship (2",False
+adapter,public_prose,none,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,The text describes a scientific experiment where a team of researchers measured the temperature of a chemical reaction at different stages. The first,False
+adapter,public_prose,none,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,"The text describes a mathematical calculation involving two decimal numbers, likely a multiplication or division problem where 1.252",False
+adapter,public_prose,none,DateTime.000096,DateTime,public,,0,2072--9--26,26,"This date is likely a fictional or hypothetical one, as it falls in the future relative to the present day (20",False
+adapter,public_prose,none,DateTime.000096,DateTime,public,,1,8/7/2237,8,"This date is from the 8th day of the 7th month in the year 2237,",False
+adapter,public_prose,none,DateTime.000096,DateTime,public,,2,6.30.2220,30,"This is a hexadecimal color code representing a dark gray color, commonly used in web design and digital graphics for text and backgrounds",False
+adapter,public_prose,none,Number.000082,Number,public,,0,3.145918E-001,0.3145918,"This is a scientific notation representation of the number 0.3145918, commonly used to express",False
+adapter,public_prose,none,Number.000082,Number,public,,1,3.262529E-002,0.03262529,"This is a scientific notation representation of the number 0.03262529, commonly used to",False
+adapter,public_prose,none,Number.000082,Number,public,,2,6.876202E-001,0.6876202,"This is a scientific notation representation of the number 0.6876202, commonly used to express",False
+adapter,public_prose,none,Number.000015,Number,public,,0,-22630,-22600,"The number represents the atomic number of the chemical element Copernicium, a heavy metal discovered in 200",False
+adapter,public_prose,none,Number.000015,Number,public,,1,-3269,-3250,"The number is negative, its absolute value is 3269, and it lies between -3270",False
+adapter,public_prose,none,Number.000015,Number,public,,2,-3049,-3000,"This is the atomic number of plutonium, a radioactive heavy metal used in nuclear reactors and weapons.",False
+adapter,public_prose,none,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,"The email address belongs to a sales representative at Adventure Works, likely involved in customer relations or sales operations.",False
+adapter,public_prose,none,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,"The email address belongs to a property manager at Fabrikam Residences, likely responsible for tenant relations and maintenance coordination in",False
+adapter,public_prose,none,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,"This email address belongs to a former employee of Woodgrove Bank, a fictional bank from the ""The Office"" (",False
+adapter,public_prose,none,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,The email address contososuites.com is associated with a user who has a blanditiis ratione porro dolor,False
+adapter,public_prose,none,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,The text describes a fictional character named Dolorem who is 33 years old and works at Trey Research. The email,False
+adapter,public_prose,none,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,The email address repellat deleniti @ northwindtraders.com is associated with a user who has a history of,False

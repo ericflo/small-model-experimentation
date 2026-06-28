@@ -1,0 +1,10 @@
+task_id,family,method,row_index,input,target,prediction,exact,raw
+City.000011,City,direct_row,0,new york city,New York City,,False,
+City.000011,City,direct_row,1,None,None,,False,
+City.000011,City,direct_row,2,SJ,San Jose,,False,
+Name.000028,Name,direct_row,0,Rodel-Habiba Chaiprasit,Rodel,,False,
+Name.000028,Name,direct_row,1,Jan Evans,Jan,,False,
+Name.000028,Name,direct_row,2,Antonia Lusis,Antonia,,False,
+Number.000048,Number,direct_row,0,96.7,97.0,,False,
+Number.000048,Number,direct_row,1,74.8,75.0,,False,
+Number.000048,Number,direct_row,2,99.9,100.0,,False,

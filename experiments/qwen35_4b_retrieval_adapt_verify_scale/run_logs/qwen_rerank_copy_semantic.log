@@ -1,0 +1,19 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.72it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 158.46it/s]Loading weights:  21%|██        | 90/426 [00:00<00:00, 365.73it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 439.62it/s]Loading weights:  47%|████▋     | 201/426 [00:00<00:00, 474.29it/s]Loading weights:  60%|██████    | 257/426 [00:00<00:00, 499.36it/s]Loading weights:  73%|███████▎  | 312/426 [00:00<00:00, 515.30it/s]Loading weights:  88%|████████▊ | 377/426 [00:00<00:00, 557.59it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 470.73it/s]
+{
+  "commit_count": 13,
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "out": "data/qwen_rerank_copy_semantic_records.jsonl",
+  "records": 24,
+  "selected_false_pass_rate": 0.6153846153846154,
+  "selected_hidden_correct": 5,
+  "selected_recovery_rate": 0.20833333333333334,
+  "selected_visible_hidden_wrong": 8,
+  "selector": "frozen_qwen_visible_rerank",
+  "token_usage": {
+    "calls": 14,
+    "completion_tokens": 14,
+    "forward_tokens": 5558,
+    "prompt_tokens": 5544
+  }
+}

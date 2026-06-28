@@ -1,0 +1,403 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Query Filter Executor Experiment</title><style>
+body { margin:0; background:#f6f7f9; color:#17202a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.62; }
+main { max-width:960px; margin:0 auto; padding:56px 30px 84px; background:#fff; box-shadow:0 1px 18px rgba(20,30,40,.08); }
+h1 { font-size:2.35rem; line-height:1.12; margin:0 0 .4rem; color:#0f1720; }
+h2 { margin-top:2.2rem; padding-top:.45rem; border-top:1px solid #e5e7eb; color:#152238; }
+h3 { margin-top:1.5rem; color:#24364b; }
+p,li { font-size:1.02rem; }
+a { color:#1d5fa7; }
+code { background:#f0f3f6; padding:.12rem .28rem; border-radius:4px; }
+pre { background:#111827; color:#f9fafb; padding:1rem; border-radius:8px; overflow-x:auto; }
+pre code { background:transparent; padding:0; }
+table { border-collapse:collapse; width:100%; margin:1rem 0 1.4rem; font-size:.96rem; }
+th,td { border:1px solid #d7dde5; padding:.55rem .65rem; vertical-align:top; }
+th { background:#edf2f7; text-align:left; }
+img { display:block; max-width:100%; margin:1.2rem auto 1.8rem; border:1px solid #d8dee8; border-radius:6px; }
+blockquote { border-left:4px solid #8aa4c2; margin-left:0; padding-left:1rem; background:#f8fafc; color:#334155; }
+@media print { body{background:white;} main{box-shadow:none; max-width:none;} }
+</style></head><body><main><h1>Query-Supervised Latent Filtering for Correlated Modular Beliefs</h1>
+<p><strong>A controlled experiment on recurrent hidden-state execution from final-answer supervision</strong></p>
+<h2>Abstract</h2>
+<p>This experiment tests whether a latent recurrent runtime can learn an internal belief-state executor when training supervision is limited to final query answers. Each example starts with an unknown pair of modular registers constrained by <code>B=A+d (mod p)</code>. A program applies arithmetic updates and observation filters. The model is trained only to answer a sampled final query: <code>A</code>, <code>B</code>, <code>A+B</code>, or <code>A-B</code>. The exact final belief distribution over <code>(A,B)</code> pairs is held out from the loss and used only as an audit.</p>
+<p>The primary joint recurrent model stores a categorical distribution over register pairs and applies one learned update per internal step. On the scaled modulus-31 task, trained on program lengths 1-8 and evaluated on lengths 4, 8, 12, 16, and 24, it shows a sharp execution threshold. Averaged across query types, query target mass at the first <code>K&gt;=L</code> step is 99.3%, 98.2%, 97.3%, 96.7%, and 96.2% for lengths 4, 8, 12, 16, and 24. Hidden belief target mass, despite not being directly supervised, is 98.3%, 97.0%, 96.1%, 95.5%, and 95.0%. Marginal recurrent and static one-shot controls remain far lower on held-out lengths.</p>
+<h2>Lay Summary</h2>
+<p>The model starts with a relation, not exact values:</p>
+<pre><code class="language-text">B = A + d (mod p)
+</code></pre>
+<p>That relation describes many possible worlds. The program changes the registers and sometimes adds observations:</p>
+<pre><code class="language-text">A = A + 7
+observe B % 5 = 3
+B = B - A
+query A + B
+</code></pre>
+<p>Training only tells the model the final answer distribution for the query. It does not tell the model the full set of possible <code>(A,B)</code> pairs. The question is whether the model learns the hidden set anyway because doing so is the reusable way to answer many queries. In the joint recurrent model, it does.</p>
+<h2>1. Question</h2>
+<p>The experiment asks whether final-answer supervision can induce a latent recurrent belief-state executor.</p>
+<p>The desired evidence has four parts:</p>
+<ol>
+<li>Query accuracy should depend on internal step budget <code>K</code>.</li>
+<li>The threshold should align with program length <code>L</code>: weak when <code>K&lt;L</code>, strong when <code>K&gt;=L</code>.</li>
+<li>Hidden belief mass should also rise, even though the full belief state is not directly supervised.</li>
+<li>Controls without joint state or without recurrent execution should fail on held-out lengths.</li>
+</ol>
+<p>The setting is deliberately controlled. The target is not broad natural-language reasoning; it is a mechanistic test of whether query supervision can train reusable latent execution.</p>
+<h2>2. Task</h2>
+<p>Programs operate over two registers modulo <code>p</code>.</p>
+<p>Initial belief:</p>
+<pre><code class="language-text">{(A, B): B = A + d mod p}
+</code></pre>
+<p>For <code>p=31</code>, the full state space has 961 register pairs. The initial support contains 31 pairs.</p>
+<p>Operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A=A+c</code></td>
+<td>add a constant to <code>A</code></td>
+</tr>
+<tr>
+<td><code>A=A-c</code></td>
+<td>subtract a constant from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+c</code></td>
+<td>add a constant to <code>B</code></td>
+</tr>
+<tr>
+<td><code>B=B-c</code></td>
+<td>subtract a constant from <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A+B</code></td>
+<td>add <code>B</code> into <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+A</code></td>
+<td>add <code>A</code> into <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A-B</code></td>
+<td>subtract <code>B</code> from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B-A</code></td>
+<td>subtract <code>A</code> from <code>B</code></td>
+</tr>
+<tr>
+<td><code>OBS_A_BUCKET</code></td>
+<td>filter to states where <code>A % m = r</code></td>
+</tr>
+<tr>
+<td><code>OBS_B_BUCKET</code></td>
+<td>filter to states where <code>B % m = r</code></td>
+</tr>
+</tbody>
+</table>
+<p>Observation residues are sampled from the live support, so every target support is non-empty. For the scaled run, <code>p=31</code>, observation modulus is 5, and each instruction is an observation with probability 0.3.</p>
+<p>Each example samples one final query:</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>final distribution of <code>A</code></td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td>final distribution of <code>B</code></td>
+</tr>
+<tr>
+<td><code>A_PLUS_B</code></td>
+<td>final distribution of <code>A+B mod p</code></td>
+</tr>
+<tr>
+<td><code>A_MINUS_B</code></td>
+<td>final distribution of <code>A-B mod p</code></td>
+</tr>
+</tbody>
+</table>
+<p>Training used lengths 1-8. Evaluation used lengths 4, 8, 12, 16, and 24. Lengths 12, 16, and 24 test length generalization.</p>
+<h2>3. Models</h2>
+<h3>Joint Recurrent Query Filter</h3>
+<p>The primary model stores a categorical distribution over all <code>(A,B)</code> pairs. Each recurrent step reads the next instruction and applies the corresponding learned update. The final pair distribution is projected into the sampled query distribution, and the loss is cross-entropy on that query distribution only.</p>
+<p>The full belief distribution is never used as a training target. It is measured afterward to see whether the model learned a coherent hidden state.</p>
+<h3>Marginal Recurrent Control</h3>
+<p>The marginal control follows the same recurrent schedule but stores separate distributions over <code>A</code> and <code>B</code>. It can learn some marginal query signal, but it cannot exactly represent pairwise correlations.</p>
+<h3>Static Compiler Control</h3>
+<p>The static control receives the initial relation and whole program, then predicts a final pair distribution in one pass with a small Transformer encoder. It has no recurrent execution axis.</p>
+<h2>4. Metrics</h2>
+<p>The primary metrics evaluate the sampled final query:</p>
+<ul>
+<li><code>query_target_mass</code>: total probability assigned to the exact query support.</li>
+<li><code>query_top1_on_support</code>: whether the most likely queried value is inside the exact query support.</li>
+<li><code>query_target_nll</code>: cross-entropy against the exact query distribution.</li>
+</ul>
+<p>The audit metrics evaluate the full hidden belief state:</p>
+<ul>
+<li><code>belief_target_mass</code>: total pair probability assigned to the exact final <code>(A,B)</code> support.</li>
+<li><code>belief_top1_on_support</code>: whether the most likely pair is inside the exact support.</li>
+<li><code>belief_target_nll</code>: cross-entropy against the exact final pair distribution.</li>
+</ul>
+<p>The hidden-belief metrics are not training objectives.</p>
+<h2>5. Main Result</h2>
+<p>The scaled modulus-31 joint recurrent query filter shows a clean execution threshold. Query mass is low when <code>K&lt;L</code>, then jumps when <code>K</code> reaches program length.</p>
+<p><img alt="Query top-1 heatmap" src="../analysis/figures/mod31_query_top1_heatmap.png" /></p>
+<p><img alt="Query mass heatmap" src="../analysis/figures/mod31_query_mass_heatmap.png" /></p>
+<p>The hidden belief audit shows the same threshold, even though the full belief state was not directly supervised.</p>
+<p><img alt="Hidden belief mass heatmap" src="../analysis/figures/mod31_belief_mass_heatmap.png" /></p>
+<p>The K curves show the threshold by length.</p>
+<p><img alt="Query mass K curves" src="../analysis/figures/mod31_query_mass_k_curves.png" /></p>
+<p><img alt="Hidden belief mass K curves" src="../analysis/figures/mod31_belief_mass_k_curves.png" /></p>
+<p>Numerically, averaged across query types:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Program length</th>
+<th style="text-align: right;">Best query mass when <code>K&lt;L</code></th>
+<th style="text-align: right;">Best hidden belief mass when <code>K&lt;L</code></th>
+<th style="text-align: right;">First <code>K&gt;=L</code></th>
+<th style="text-align: right;">Query mass at first <code>K&gt;=L</code></th>
+<th style="text-align: right;">Hidden belief mass at first <code>K&gt;=L</code></th>
+<th style="text-align: right;">Query top-1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">47.4%</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">99.3%</td>
+<td style="text-align: right;">98.3%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">26.0%</td>
+<td style="text-align: right;">4.1%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">98.2%</td>
+<td style="text-align: right;">97.0%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">19.2%</td>
+<td style="text-align: right;">3.5%</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">97.3%</td>
+<td style="text-align: right;">96.1%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">15.8%</td>
+<td style="text-align: right;">3.1%</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">96.7%</td>
+<td style="text-align: right;">95.5%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">7.6%</td>
+<td style="text-align: right;">0.4%</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">96.2%</td>
+<td style="text-align: right;">95.0%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The held-out lengths are the critical evidence. The model was trained only on lengths up to 8, but it executes lengths 12, 16, and 24 when given enough recurrent steps.</p>
+<h2>6. Query Types</h2>
+<p>All four query types work at the execution threshold. At length 24:</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th style="text-align: right;">Query mass at <code>K=24</code></th>
+<th style="text-align: right;">Hidden belief mass at <code>K=24</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td style="text-align: right;">96.5%</td>
+<td style="text-align: right;">94.9%</td>
+</tr>
+<tr>
+<td><code>A_MINUS_B</code></td>
+<td style="text-align: right;">95.8%</td>
+<td style="text-align: right;">95.1%</td>
+</tr>
+<tr>
+<td><code>A_PLUS_B</code></td>
+<td style="text-align: right;">95.7%</td>
+<td style="text-align: right;">94.9%</td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td style="text-align: right;">96.6%</td>
+<td style="text-align: right;">94.9%</td>
+</tr>
+</tbody>
+</table>
+<p>Relational queries are important because they are harder to answer from independent marginals. The joint model solves them along with the direct <code>A</code> and <code>B</code> queries.</p>
+<h2>7. Controls</h2>
+<p>The scaled controls show that the result is not explained by shallow query fitting or one-shot compilation.</p>
+<p><img alt="Control query mass" src="../analysis/figures/mod31_controls_query_mass.png" /></p>
+<p><img alt="Control hidden belief mass" src="../analysis/figures/mod31_controls_belief_mass.png" /></p>
+<p>At modulus 31, averaged across query types:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">L=4 query</th>
+<th style="text-align: right;">L=8 query</th>
+<th style="text-align: right;">L=12 query</th>
+<th style="text-align: right;">L=16 query</th>
+<th style="text-align: right;">L=24 query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Joint recurrent</td>
+<td style="text-align: right;">99.3%</td>
+<td style="text-align: right;">98.2%</td>
+<td style="text-align: right;">97.3%</td>
+<td style="text-align: right;">96.7%</td>
+<td style="text-align: right;">96.2%</td>
+</tr>
+<tr>
+<td>Marginal recurrent</td>
+<td style="text-align: right;">48.0%</td>
+<td style="text-align: right;">32.3%</td>
+<td style="text-align: right;">22.4%</td>
+<td style="text-align: right;">16.8%</td>
+<td style="text-align: right;">12.1%</td>
+</tr>
+<tr>
+<td>Static compiler</td>
+<td style="text-align: right;">46.9%</td>
+<td style="text-align: right;">27.2%</td>
+<td style="text-align: right;">13.1%</td>
+<td style="text-align: right;">8.4%</td>
+<td style="text-align: right;">5.1%</td>
+</tr>
+</tbody>
+</table>
+<p>Hidden belief target mass separates the models even more sharply:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">L=4 belief</th>
+<th style="text-align: right;">L=8 belief</th>
+<th style="text-align: right;">L=12 belief</th>
+<th style="text-align: right;">L=16 belief</th>
+<th style="text-align: right;">L=24 belief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Joint recurrent</td>
+<td style="text-align: right;">98.3%</td>
+<td style="text-align: right;">97.0%</td>
+<td style="text-align: right;">96.1%</td>
+<td style="text-align: right;">95.5%</td>
+<td style="text-align: right;">95.0%</td>
+</tr>
+<tr>
+<td>Marginal recurrent</td>
+<td style="text-align: right;">4.2%</td>
+<td style="text-align: right;">3.9%</td>
+<td style="text-align: right;">3.1%</td>
+<td style="text-align: right;">2.4%</td>
+<td style="text-align: right;">1.8%</td>
+</tr>
+<tr>
+<td>Static compiler</td>
+<td style="text-align: right;">6.3%</td>
+<td style="text-align: right;">2.6%</td>
+<td style="text-align: right;">0.7%</td>
+<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">0.2%</td>
+</tr>
+</tbody>
+</table>
+<p>The marginal control has recurrence but lacks joint state. The static compiler sees the whole program but lacks recurrent execution. Neither recovers the executor signature.</p>
+<h2>8. Modulus-11 Diagnostic</h2>
+<p>A smaller modulus-11 diagnostic used the same query-supervised task with training lengths 1-6 and evaluation lengths 3, 6, 9, and 12. The joint recurrent model reached 98.5-99.7% query mass and 98.0-99.2% hidden belief mass at <code>K=L</code>. The marginal and static controls stayed far lower, especially on held-out lengths. This diagnostic confirmed the training objective before the scaled run.</p>
+<h2>9. Interpretation</h2>
+<p>The result supports a specific mechanism claim:</p>
+<blockquote>
+<p>Final query supervision can train a latent recurrent runtime to form and execute a coherent joint belief state when that state is the reusable structure needed to answer varied queries.</p>
+</blockquote>
+<p>The strongest evidence is not just high final accuracy. It is the combination of:</p>
+<ol>
+<li>a sharp <code>K=L</code> threshold,</li>
+<li>length generalization beyond the training range,</li>
+<li>high hidden-belief mass without direct belief supervision,</li>
+<li>failure of marginal and static controls.</li>
+</ol>
+<p>This is a stronger test than training directly on full belief states. The hidden state is useful enough that the model discovers it under a lower-bandwidth objective.</p>
+<h2>10. Limits</h2>
+<p>This is still a structured setting.</p>
+<ul>
+<li>The joint model stores an explicit categorical distribution over <code>(A,B)</code>.</li>
+<li>The runtime uses a direct program counter.</li>
+<li>The operation family is modular arithmetic plus bucket observations.</li>
+<li>The largest completed state space has 961 pairs.</li>
+<li>Query supervision is exact; it is not noisy natural-language feedback.</li>
+</ul>
+<p>The experiment shows that query-only supervision can induce the intended latent state when the architecture can represent it. It does not show that an unstructured hidden vector would discover the same state without architectural support.</p>
+<h2>11. Next Iterations</h2>
+<p>Useful next tests:</p>
+<ol>
+<li>Replace the explicit categorical state with a dense latent state and probe how much belief structure remains.</li>
+<li>Replace the direct program counter with attention over instruction tokens.</li>
+<li>Add a learned halt/no-op policy so the model chooses its compute budget.</li>
+<li>Train on sparse scalar rewards or sampled query values instead of exact query distributions.</li>
+<li>Increase modulus and state size while tracking memory and runtime scaling.</li>
+</ol>
+<h2>12. Reproducibility</h2>
+<p>Primary files:</p>
+<ul>
+<li>Experiment script: <code>../src/query_filter_executor_experiment.py</code></li>
+<li>Analysis script: <code>../src/analyze_query_filter_executor.py</code></li>
+<li>Experiment log: <code>query_filter_executor_experiment_log.md</code></li>
+<li>Results directory: <code>../runs/</code></li>
+<li>Analysis directory: <code>../analysis/</code></li>
+<li>Checkpoint manifest: <code>../checkpoint_manifest.csv</code></li>
+</ul>
+<p>Key run directories:</p>
+<ul>
+<li><code>../runs/main_joint_mod31</code></li>
+<li><code>../runs/control_marginal_mod31</code></li>
+<li><code>../runs/control_static_mod31</code></li>
+<li><code>../runs/pilot_joint_mod11</code></li>
+<li><code>../runs/control_marginal_mod11</code></li>
+<li><code>../runs/control_static_mod11</code></li>
+</ul>
+<p>Large checkpoint files are stored outside the experiment bundle under:</p>
+<pre><code class="language-text">../../../large_artifacts/query_filter_executor/checkpoints/
+</code></pre>
+<p>Environment:</p>
+<ul>
+<li>Python 3.12.3</li>
+<li>PyTorch 2.8.0+cu128</li>
+<li>GPU: NVIDIA RTX 6000 Ada Generation</li>
+</ul>
+<h2>13. Bottom Line</h2>
+<p>The joint recurrent query filter learned to execute arithmetic and observation-filter programs from final-query supervision alone. It generalized from training lengths 1-8 to lengths 12, 16, and 24, with a sharp improvement when <code>K</code> reached <code>L</code>. The hidden belief state became accurate even though it was not directly supervised. The marginal and static controls failed on the scaled task.</p></main></body></html>

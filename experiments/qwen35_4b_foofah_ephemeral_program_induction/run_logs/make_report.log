@@ -1,0 +1,33 @@
+{
+  "agreement": 34,
+  "agreement_correct": 28,
+  "agreement_precision": 0.8235294117647058,
+  "agreement_rate": 0.136,
+  "code_found": 250,
+  "code_found_rate": 1.0,
+  "direct_accuracy": 0.552,
+  "direct_exact": 138,
+  "direct_parse_ok": 236,
+  "direct_parse_rate": 0.944,
+  "hybrid_accuracy": 0.556,
+  "hybrid_exact": 139,
+  "n": 250,
+  "oracle_union": 148,
+  "oracle_union_rate": 0.592,
+  "program_accuracy": 0.152,
+  "program_hidden_exact": 38,
+  "visible_exec_ok": 202,
+  "visible_exec_ok_rate": 0.808,
+  "visible_false_pass": 9,
+  "visible_false_pass_rate_among_visible": 0.19148936170212766,
+  "visible_pass": 47,
+  "visible_pass_rate": 0.188
+}
+{
+  "agreement_hidden_wrong": 6,
+  "both_direct_and_program": 28,
+  "direct_only": 110,
+  "neither": 102,
+  "program_only": 10,
+  "visible_pass_hidden_wrong": 9
+}

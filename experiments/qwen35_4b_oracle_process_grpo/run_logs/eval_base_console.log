@@ -1,0 +1,58 @@
+{
+  "out": "/workspace/experiments/qwen35_4b_oracle_process_grpo/reports/eval/base.json",
+  "summary": [
+    {
+      "policy": "base",
+      "library_size": 64,
+      "template": "pair_affine_mod",
+      "budget": 0,
+      "records": 16,
+      "selected_hidden_all": 0.0625,
+      "selected_exact_pair": 0.0625,
+      "target_reachable": 1.0,
+      "candidate_count_mean": 36.75,
+      "hidden_equivalent_candidates_mean": 7.125,
+      "mean_chosen_reward": 0.0
+    },
+    {
+      "policy": "base",
+      "library_size": 64,
+      "template": "pair_affine_mod",
+      "budget": 1,
+      "records": 16,
+      "selected_hidden_all": 0.25,
+      "selected_exact_pair": 0.125,
+      "target_reachable": 1.0,
+      "candidate_count_mean": 15.875,
+      "hidden_equivalent_candidates_mean": 7.125,
+      "mean_chosen_reward": 1.6202414662227371
+    },
+    {
+      "policy": "base",
+      "library_size": 64,
+      "template": "pair_affine_mod",
+      "budget": 2,
+      "records": 16,
+      "selected_hidden_all": 0.5,
+      "selected_exact_pair": 0.25,
+      "target_reachable": 1.0,
+      "candidate_count_mean": 9.125,
+      "hidden_equivalent_candidates_mean": 7.125,
+      "mean_chosen_reward": 0.8907217006367959
+    },
+    {
+      "policy": "base",
+      "library_size": 64,
+      "template": "pair_affine_mod",
+      "budget": 3,
+      "records": 16,
+      "selected_hidden_all": 0.5625,
+      "selected_exact_pair": 0.25,
+      "target_reachable": 1.0,
+      "candidate_count_mean": 8.0,
+      "hidden_equivalent_candidates_mean": 7.0,
+      "mean_chosen_reward": 0.35108264669791983
+    }
+  ],
+  "rows": 512
+}

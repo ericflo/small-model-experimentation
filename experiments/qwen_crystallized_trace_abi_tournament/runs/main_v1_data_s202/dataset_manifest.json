@@ -1,0 +1,167 @@
+{
+  "seed": 202,
+  "train_n": 192,
+  "eval_sizes": {
+    "eval_indist": 24,
+    "eval_composition": 24,
+    "eval_template_shift": 24
+  },
+  "train_sample": [
+    {
+      "example_id": "train_table_54",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: beta=19, delta=27, alpha=15, gamma=9. Take gamma, then add 2.",
+      "answer": "11",
+      "op_name": "lookup_add",
+      "payload": {
+        "table": {
+          "beta": 19,
+          "delta": 27,
+          "alpha": 15,
+          "gamma": 9
+        },
+        "key": "gamma",
+        "bias": 2
+      }
+    },
+    {
+      "example_id": "train_date_131",
+      "split": "train",
+      "family": "date",
+      "prompt": "Date 2026-12-12: move forward by 3 days.",
+      "answer": "2026-12-15",
+      "op_name": "add_days",
+      "payload": {
+        "date": "2026-12-12",
+        "delta_days": 3
+      }
+    },
+    {
+      "example_id": "train_date_111",
+      "split": "train",
+      "family": "date",
+      "prompt": "Date 2026-01-22: move forward by 7 days.",
+      "answer": "2026-01-29",
+      "op_name": "add_days",
+      "payload": {
+        "date": "2026-01-22",
+        "delta_days": 7
+      }
+    },
+    {
+      "example_id": "train_table_126",
+      "split": "train",
+      "family": "table",
+      "prompt": "Using beta=7, delta=7, gamma=28, alpha=17, compute value(beta) + 6.",
+      "answer": "13",
+      "op_name": "lookup_add",
+      "payload": {
+        "table": {
+          "beta": 7,
+          "delta": 7,
+          "gamma": 28,
+          "alpha": 17
+        },
+        "key": "beta",
+        "bias": 6
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_table_14",
+        "split": "eval_indist",
+        "family": "table",
+        "prompt": "Using beta=20, delta=7, alpha=18, gamma=27, compute value(gamma) + 10.",
+        "answer": "37",
+        "op_name": "lookup_add",
+        "payload": {
+          "table": {
+            "beta": 20,
+            "delta": 7,
+            "alpha": 18,
+            "gamma": 27
+          },
+          "key": "gamma",
+          "bias": 10
+        }
+      },
+      {
+        "example_id": "eval_indist_date_15",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Date 2026-05-24: move forward by 13 days.",
+        "answer": "2026-06-06",
+        "op_name": "add_days",
+        "payload": {
+          "date": "2026-05-24",
+          "delta_days": 13
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_date_11",
+        "split": "eval_composition",
+        "family": "date",
+        "prompt": "Starting from 2026-04-17, add 1 weeks and 2 days. Return the ISO date.",
+        "answer": "2026-04-26",
+        "op_name": "weeks_plus_days",
+        "payload": {
+          "date": "2026-04-17",
+          "weeks": 1,
+          "days": 2,
+          "delta_days": 9
+        }
+      },
+      {
+        "example_id": "eval_composition_unit_17",
+        "split": "eval_composition",
+        "family": "unit",
+        "prompt": "A cable is 4 meters plus 50 centimeters long. Report the total length in centimeters.",
+        "answer": "450",
+        "op_name": "meters_plus_centimeters",
+        "payload": {
+          "meters": 4,
+          "centimeters": 50
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_string_20",
+        "split": "eval_template_shift",
+        "family": "string",
+        "prompt": "After compacting SE-0206-TF, which substring occupies positions 5 through 7?",
+        "answer": "06T",
+        "op_name": "slice",
+        "payload": {
+          "code": "SE-0206-TF",
+          "clean": "SE0206TF",
+          "start": 4,
+          "end": 7
+        }
+      },
+      {
+        "example_id": "eval_template_shift_table_6",
+        "split": "eval_template_shift",
+        "family": "table",
+        "prompt": "From lookup entries [delta=26, alpha=8, gamma=19, beta=3], increase gamma by 6.",
+        "answer": "25",
+        "op_name": "lookup_add",
+        "payload": {
+          "table": {
+            "delta": 26,
+            "alpha": 8,
+            "gamma": 19,
+            "beta": 3
+          },
+          "key": "gamma",
+          "bias": 6
+        }
+      }
+    ]
+  }
+}

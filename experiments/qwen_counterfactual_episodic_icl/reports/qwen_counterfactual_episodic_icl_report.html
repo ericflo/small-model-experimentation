@@ -1,0 +1,1646 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Counterfactual Episodic ICL Posttraining</title><style>body{font-family:Inter,Arial,sans-serif;max-width:1180px;margin:32px auto;line-height:1.45;color:#1f2937}table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #d1d5db;padding:4px 7px}th{background:#f3f4f6}img{max-width:100%;margin:14px 0;border:1px solid #e5e7eb}</style></head><body><h1>Counterfactual Episodic ICL Posttraining</h1>
+<h2>Question</h2>
+<p>Can answer-only LoRA posttraining on counterfactual few-shot episodes improve a 4B model's ability to infer a task from support examples, rather than relying on a task-family prior?</p>
+<p>The training episodes are synthetic and deliberately counterfactual: the same kind of query input can require incompatible outputs depending on the support examples. Public benchmark outputs are used only for evaluation.</p>
+<h2>Setup</h2>
+<ul>
+<li>Run: <code>main_v2</code></li>
+<li>Model: <code>Qwen/Qwen3-4B</code></li>
+<li>Train episodes: <code>800</code></li>
+<li>Train steps: <code>120</code></li>
+<li>LoRA rank: <code>16</code></li>
+<li>Synthetic eval counterfactual pairs: <code>30</code></li>
+<li>Public PROSE tasks: <code>30</code></li>
+<li>Elapsed seconds: <code>588.9</code></li>
+</ul>
+<h2>Main Result</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">support_mode</th>
+<th style="text-align: right;">tasks</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">row_exact</th>
+<th style="text-align: left;">full_task_exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">10.0%</td>
+<td style="text-align: left;">3.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">73.3%</td>
+<td style="text-align: left;">56.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">16.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">44.4%</td>
+<td style="text-align: left;">23.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">12.2%</td>
+<td style="text-align: left;">6.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">3.3%</td>
+<td style="text-align: left;">1.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">95.0%</td>
+<td style="text-align: left;">91.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">43.3%</td>
+<td style="text-align: left;">31.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">41.7%</td>
+<td style="text-align: left;">25.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">13.3%</td>
+<td style="text-align: left;">8.3%</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>On held-out synthetic counterfactual episodes, the adapter changes full-task exactness from <code>25.0%</code> to <code>91.7%</code>. With shuffled support examples, the adapter scores <code>31.7%</code>.
+On the public text-transformation sample, the adapter changes full-task exactness from <code>23.3%</code> to <code>56.7%</code>. With shuffled support examples, the adapter scores <code>16.7%</code>.</p>
+<p>The synthetic split shows a real support-conditioning effect: performance improves and shuffled support degrades it. The public split determines whether that learned behavior transfers outside the synthetic generator.
+The public benchmark transfer is positive at the tested scale.</p>
+<h2>Charts</h2>
+<p><img alt="Strict full-task exact by method" src="../analysis/figures/full_task_exact_by_method.png" /></p>
+<p><img alt="Row exact versus full-task exact" src="../analysis/figures/row_vs_full_task.png" /></p>
+<p><img alt="Training loss" src="../analysis/figures/training_loss.png" /></p>
+<p><img alt="Adapter task flips versus base" src="../analysis/figures/adapter_task_flips.png" /></p>
+<h2>Task-Level Details</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">support_mode</th>
+<th style="text-align: left;">task_id</th>
+<th style="text-align: left;">family</th>
+<th style="text-align: left;">row_exact</th>
+<th style="text-align: left;">full_task_exact</th>
+<th style="text-align: right;">rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Address.000014</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Address.000014</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Address.000014</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Address.000014</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Address.000014</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Currency.000003</td>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Currency.000003</td>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Currency.000003</td>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Currency.000003</td>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Currency.000003</td>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000003</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000003</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000003</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000003</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000003</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000009</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000009</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000009</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000009</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000009</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000012</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000012</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000012</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000012</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000012</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000018</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000018</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000018</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000018</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000018</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000033</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000033</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000033</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000033</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000033</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000075</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000075</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000075</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000075</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000075</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000091</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000091</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000091</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000091</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000091</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000097</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000097</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000097</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000097</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000097</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">DateTime.000116</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000116</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000116</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">DateTime.000116</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">DateTime.000116</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Email.000013</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Email.000013</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Email.000013</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Email.000013</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Email.000013</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Language.000002</td>
+<td style="text-align: left;">Language</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Language.000002</td>
+<td style="text-align: left;">Language</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Language.000002</td>
+<td style="text-align: left;">Language</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Language.000002</td>
+<td style="text-align: left;">Language</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Language.000002</td>
+<td style="text-align: left;">Language</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Name.000025</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Name.000025</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Name.000025</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Name.000025</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Name.000025</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Number.000054</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000054</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000054</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000054</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000054</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Number.000062</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000062</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000062</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000062</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000062</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Number.000082</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000082</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000082</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000082</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000082</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Number.000084</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000084</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000084</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: left;">Number.000084</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: left;">Number.000084</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+<h2>Error Examples</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">task_id</th>
+<th style="text-align: left;">family</th>
+<th style="text-align: left;">rule_name</th>
+<th style="text-align: left;">input</th>
+<th style="text-align: left;">target</th>
+<th style="text-align: left;">prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">cf_0002_number_last2</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">number_last2</td>
+<td style="text-align: left;">COBALT 321</td>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">cf_0005_last_three</td>
+<td style="text-align: left;">span</td>
+<td style="text-align: left;">last_three</td>
+<td style="text-align: left;">harbordelta</td>
+<td style="text-align: left;">lta</td>
+<td style="text-align: left;">delta</td>
+</tr>
+<tr>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">cf_0013_initials</td>
+<td style="text-align: left;">words</td>
+<td style="text-align: left;">initials</td>
+<td style="text-align: left;">Sonia Rees Cobalt</td>
+<td style="text-align: left;">SRC</td>
+<td style="text-align: left;">SRE</td>
+</tr>
+<tr>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">cf_0017_last_three</td>
+<td style="text-align: left;">span</td>
+<td style="text-align: left;">last_three</td>
+<td style="text-align: left;">fablelambda</td>
+<td style="text-align: left;">bda</td>
+<td style="text-align: left;">amb</td>
+</tr>
+<tr>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">cf_0017_last_three</td>
+<td style="text-align: left;">span</td>
+<td style="text-align: left;">last_three</td>
+<td style="text-align: left;">fablenectar</td>
+<td style="text-align: left;">tar</td>
+<td style="text-align: left;">ter</td>
+</tr>
+<tr>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">cf_0022_last_three</td>
+<td style="text-align: left;">span</td>
+<td style="text-align: left;">last_three</td>
+<td style="text-align: left;">cobaltlambda</td>
+<td style="text-align: left;">bda</td>
+<td style="text-align: left;">lambda</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">Antonia A. Guachiac</td>
+<td style="text-align: left;">A G</td>
+<td style="text-align: left;">A A</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">Nikolajs Serdar Pirc</td>
+<td style="text-align: left;">N P</td>
+<td style="text-align: left;">N S</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Name.000008</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">Jaap H. Kleefstra</td>
+<td style="text-align: left;">J K</td>
+<td style="text-align: left;">J H</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">Dr. Christophe Beaulieu, Sr.</td>
+<td style="text-align: left;">Sr.</td>
+<td style="text-align: left;">Sr</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">Marcela Kubatova</td>
+<td style="text-align: left;">NULL</td>
+<td style="text-align: left;">null</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">Mr. Hadar Caspit</td>
+<td style="text-align: left;">NULL</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000084</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">199</td>
+<td style="text-align: left;">190-209</td>
+<td style="text-align: left;">190-199</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">03302241</td>
+<td style="text-align: left;">Tuesday, March 30, 2241</td>
+<td style="text-align: left;">Saturday, March 30, 2241</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">02-Aug-2160</td>
+<td style="text-align: left;">Saturday, August 2, 2160</td>
+<td style="text-align: left;">Monday, August 2, 2160</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000030</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">23 May 1984</td>
+<td style="text-align: left;">Wednesday, May 23, 1984</td>
+<td style="text-align: left;">Monday, May 23, 1984</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000075</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">10:24PM</td>
+<td style="text-align: left;">10:00PM-10:29PM</td>
+<td style="text-align: left;">10:30PM-10:59PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000012</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">Unknown</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Unknown</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">1284.42</td>
+<td style="text-align: left;">1285.00</td>
+<td style="text-align: left;">1280.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">23224.98</td>
+<td style="text-align: left;">23225.00</td>
+<td style="text-align: left;">23200.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">1024.21</td>
+<td style="text-align: left;">1025.00</td>
+<td style="text-align: left;">1020.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000097</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">6.30.2220</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">2220</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000054</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">12541253</td>
+<td style="text-align: left;">12541253</td>
+<td style="text-align: left;">000012541253</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">1956-12-16 20:18</td>
+<td style="text-align: left;">8:18 PM</td>
+<td style="text-align: left;">December 16, 2056 at 8:18 PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000093</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">4759</td>
+<td style="text-align: left;">04759</td>
+<td style="text-align: left;">4759</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000093</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">7204</td>
+<td style="text-align: left;">07204</td>
+<td style="text-align: left;">7204</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">DateTime.000116</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">20-Dec-2033 18:36:29</td>
+<td style="text-align: left;">5PM-7PM</td>
+<td style="text-align: left;">6PM-8PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">1202.3433</td>
+<td style="text-align: left;">1200</td>
+<td style="text-align: left;">1202</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">23224.1</td>
+<td style="text-align: left;">23225</td>
+<td style="text-align: left;">23224</td>
+</tr>
+<tr>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">public</td>
+<td style="text-align: left;">-23224.1</td>
+<td style="text-align: left;">-23225</td>
+<td style="text-align: left;">-23224</td>
+</tr>
+</tbody>
+</table>
+<h2>Artifacts</h2>
+<ul>
+<li>Run directory: <code>/workspace/experiments/qwen_counterfactual_episodic_icl/runs/main_v2</code></li>
+<li>Adapter checkpoint: <code>/workspace/large_artifacts/qwen_counterfactual_episodic_icl/checkpoints/main_v2/adapter</code></li>
+<li>Row predictions: <code>/workspace/experiments/qwen_counterfactual_episodic_icl/runs/main_v2/row_predictions.csv</code></li>
+<li>Task metrics: <code>/workspace/experiments/qwen_counterfactual_episodic_icl/runs/main_v2/task_metrics.csv</code></li>
+<li>Summary: <code>/workspace/experiments/qwen_counterfactual_episodic_icl/runs/main_v2/summary.csv</code></li>
+<li>Training log: <code>/workspace/experiments/qwen_counterfactual_episodic_icl/runs/main_v2/training_log.csv</code></li>
+<li>Large artifacts directory: <code>/workspace/large_artifacts/qwen_counterfactual_episodic_icl</code></li>
+</ul>
+<h2>Limitations</h2>
+<p>This run trains on synthetic counterfactual transformations, so public benchmark transfer is the decisive external signal. The public evaluation is capped for runtime. Exact-match scoring is intentionally strict and does not award partial credit for near-correct formats.</p></body></html>

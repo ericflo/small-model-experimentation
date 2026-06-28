@@ -1,0 +1,12 @@
+run,filename,checkpoint_path_from_experiment_root,size_bytes,size_mb
+categorical_mod97,checkpoint_step00250.pt,../../large_artifacts/latent_executor/checkpoints/categorical_mod97/checkpoint_step00250.pt,87622495,83.56
+pilot_categorical_mod31,checkpoint_step00200.pt,../../large_artifacts/latent_executor/checkpoints/pilot_categorical_mod31/checkpoint_step00200.pt,2865759,2.73
+pilot_categorical_mod31,checkpoint_step00400.pt,../../large_artifacts/latent_executor/checkpoints/pilot_categorical_mod31/checkpoint_step00400.pt,2867743,2.73
+pilot_executor_mod31,checkpoint_step00250.pt,../../large_artifacts/latent_executor/checkpoints/pilot_executor_mod31/checkpoint_step00250.pt,6968876,6.65
+pilot_executor_mod31,checkpoint_step00500.pt,../../large_artifacts/latent_executor/checkpoints/pilot_executor_mod31/checkpoint_step00500.pt,6972012,6.65
+smoke_categorical,checkpoint_step00005.pt,../../large_artifacts/latent_executor/checkpoints/smoke_categorical/checkpoint_step00005.pt,2864607,2.73
+smoke_executor,checkpoint_step00005.pt,../../large_artifacts/latent_executor/checkpoints/smoke_executor/checkpoint_step00005.pt,1953772,1.86
+smoke_static,checkpoint_step00005.pt,../../large_artifacts/latent_executor/checkpoints/smoke_static/checkpoint_step00005.pt,1987721,1.90
+static_mod31,checkpoint_step00200.pt,../../large_artifacts/latent_executor/checkpoints/static_mod31/checkpoint_step00200.pt,7708497,7.35
+static_mod31,checkpoint_step00400.pt,../../large_artifacts/latent_executor/checkpoints/static_mod31/checkpoint_step00400.pt,7709137,7.35
+static_mod97,checkpoint_step00150.pt,../../large_artifacts/latent_executor/checkpoints/static_mod97/checkpoint_step00150.pt,8723793,8.32

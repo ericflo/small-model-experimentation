@@ -1,0 +1,60 @@
+[2/6 new, 2 total] discovered=1/2 direct=2 baseline=2 new_over_baseline_oracle=0 tokens=13052
+[4/6 new, 4 total] discovered=3/4 direct=4 baseline=4 new_over_baseline_oracle=0 tokens=28578
+[6/6 new, 6 total] discovered=5/6 direct=6 baseline=6 new_over_baseline_oracle=0 tokens=42703
+{
+  "avg_forward_tokens": 7117.166666666667,
+  "baseline_first_visible_accuracy": 1.0,
+  "baseline_first_visible_exact": 6,
+  "baseline_oracle_union": 6,
+  "baseline_oracle_union_accuracy": 1.0,
+  "by_family": {
+    "synthetic_12": {
+      "baseline_first": 5,
+      "baseline_first_accuracy": 1.0,
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "discovered": 4,
+      "discovered_accuracy": 0.8,
+      "discovered_oracle": 5,
+      "discovered_oracle_accuracy": 1.0,
+      "n": 5
+    },
+    "synthetic_25": {
+      "baseline_first": 1,
+      "baseline_first_accuracy": 1.0,
+      "direct": 1,
+      "direct_accuracy": 1.0,
+      "discovered": 1,
+      "discovered_accuracy": 1.0,
+      "discovered_oracle": 1,
+      "discovered_oracle_accuracy": 1.0,
+      "n": 1
+    }
+  },
+  "direct_accuracy": 1.0,
+  "direct_exact": 6,
+  "discovered_commit_correct": 1,
+  "discovered_commit_precision": 0.5,
+  "discovered_direct_correct_losses": 1,
+  "discovered_direct_miss_recoveries": 0,
+  "discovered_first_visible_accuracy": 0.8333333333333334,
+  "discovered_first_visible_exact": 5,
+  "discovered_oracle_union": 6,
+  "discovered_oracle_union_accuracy": 1.0,
+  "discovered_program_commits": 2,
+  "n": 6,
+  "new_visible_correct_over_baseline_oracle": 0,
+  "total_forward_tokens": 42703,
+  "variant_summary": {
+    "strat_01": {
+      "hidden": 1,
+      "tokens": 14401,
+      "visible": 2
+    },
+    "strat_02": {
+      "hidden": 1,
+      "tokens": 15367,
+      "visible": 0
+    }
+  }
+}

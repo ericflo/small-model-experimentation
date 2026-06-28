@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen Slot-Stability Numeric-Copy Compiler</title>
+<style>
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; max-width: 980px; margin: 40px auto; padding: 0 24px; color: #1f2933; }
+h1, h2, h3 { line-height: 1.2; color: #111827; }
+code { background: #f3f4f6; padding: 0.1rem 0.25rem; border-radius: 4px; }
+pre { background: #f3f4f6; padding: 1rem; overflow-x: auto; border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.94rem; }
+th, td { border: 1px solid #d1d5db; padding: 0.45rem 0.55rem; text-align: left; }
+th { background: #f9fafb; }
+td:nth-child(n+2), th:nth-child(n+2) { text-align: right; }
+ul { padding-left: 1.4rem; }
+</style>
+</head>
+<body>
+<h1>Qwen Slot-Stability Numeric-Copy Compiler</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a QLoRA-adapted <code>Qwen/Qwen3-4B</code> model can expose a stable executable program interface for modular arithmetic prompts. Each prompt describes an initial value and a sequence of add, subtract, and multiply updates modulo 97. A trainable compiler reads Qwen hidden states, selects the token positions for the initial value, operations, and arguments, copies exact symbols from deterministic token maps, and executes the copied program with an invisible modular runtime.</p>
+<p>The main intervention is paired paraphrase stability. Training batches contain two renderings of the same underlying program, and the stability condition penalizes disagreement between the copied slot distributions for the paired renderings. The matched control receives the same paired data, trace supervision, executor loss, LoRA rank, batch schedule, training seed, and evaluation splits, but no stability loss.</p>
+<p>The result is mixed. Trace-supervised numeric-copy compilation works: both compiler arms solve short and medium chains far above chance, while final-answer-only QLoRA remains at chance. The paired stability loss is not a broad win. At 600 steps it improves some longer exact-execution splits, including standard length 12 and paired length 24, but it ties or trails the matched control on other splits and does not produce uniformly higher paired consistency.</p>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code></li>
+<li>Loader: <code>AutoModelForCausalLM</code></li>
+<li>Quantization: 4-bit NF4</li>
+<li>Trainable update: LoRA rank 8, alpha 16, dropout 0.05, target <code>all-linear</code></li>
+<li>Trainable LoRA parameters: 16,515,072</li>
+<li>Compiler head width: 768</li>
+<li>Task: modular arithmetic programs modulo 97</li>
+<li>Train lengths: 1-12 update steps</li>
+<li>Eval lengths: 4, 8, 12, and 24 update steps</li>
+<li>Eval templates: standard, paraphrase, and paired standard/paraphrase renderings of the same program</li>
+<li>Eval size: 64 examples per unpaired split; 64 program pairs per paired split</li>
+<li>Hardware: NVIDIA RTX 6000 Ada Generation, 48 GB class VRAM</li>
+<li>Large checkpoints: <code>large_artifacts/qwen_slot_stability_compiler/checkpoints/</code></li>
+</ul>
+<p>The compiler predicts:</p>
+<ul>
+<li>the token position of the initial value;</li>
+<li>ordered operation token positions;</li>
+<li>ordered argument token positions.</li>
+</ul>
+<p>Values and operations are copied from per-token maps rather than classified from hidden states alone. The copied program is executed exactly modulo 97 for accuracy. During training, a differentiable executor provides final-answer loss, and trace/selection losses supervise the ordered slot interface.</p>
+<h2>Conditions</h2>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Variant</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main_qwen3_4b_qlora_slot_stability_mixed_l12_s600</code></td>
+<td><code>copy_trace_stability</code></td>
+<td>Numeric-copy compiler with trace loss, executor loss, and paired stability loss.</td>
+</tr>
+<tr>
+<td><code>control_qwen3_4b_qlora_paired_no_stability_mixed_l12_s600</code></td>
+<td><code>copy_trace</code></td>
+<td>Matched numeric-copy compiler without the stability loss.</td>
+</tr>
+<tr>
+<td><code>control_qwen3_4b_qlora_answer_only_mixed_l12_s600</code></td>
+<td><code>direct</code></td>
+<td>Final-answer-only QLoRA control without compiler structure.</td>
+</tr>
+</tbody>
+</table>
+<p>The two compiler arms use the same data seed and the same explicit training seed (<code>2148</code>). Their step-300 metrics reproduce exactly across the 300-step pilot and the 600-step run, so the final comparison is controlled for initialization and batch order.</p>
+<h2>Exact Execution Results</h2>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Stability Compiler</th>
+<th style="text-align: right;">No-Stability Compiler</th>
+<th style="text-align: right;">Answer-Only QLoRA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard L4</td>
+<td style="text-align: right;">90.6%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Standard L8</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">60.9%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Standard L12</td>
+<td style="text-align: right;">43.8%</td>
+<td style="text-align: right;">34.4%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Standard L24</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">6.2%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paraphrase L4</td>
+<td style="text-align: right;">79.7%</td>
+<td style="text-align: right;">79.7%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Paraphrase L8</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Paraphrase L12</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paraphrase L24</td>
+<td style="text-align: right;">23.4%</td>
+<td style="text-align: right;">15.6%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Paired L4</td>
+<td style="text-align: right;">86.7%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paired L8</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">60.2%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Paired L12</td>
+<td style="text-align: right;">58.6%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paired L24</td>
+<td style="text-align: right;">22.7%</td>
+<td style="text-align: right;">17.2%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The direct answer-only control stays at chance across all lengths and prompt modes. The compiler arms are therefore not merely benefiting from generic QLoRA adaptation; the trace-supervised symbolic interface is doing the work.</p>
+<h2>Paired Consistency</h2>
+<p>Paired splits render the same latent program twice, once in the standard template and once in a paraphrased template. <code>Answer consistency</code> measures whether the two renderings produce the same executed answer. <code>Both correct</code> measures whether both renderings are exactly correct. <code>Program consistency</code> measures whether the compiled initial value, operation sequence, and argument sequence agree across the pair.</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Stability Answer Consistency</th>
+<th style="text-align: right;">Control Answer Consistency</th>
+<th style="text-align: right;">Stability Both Correct</th>
+<th style="text-align: right;">Control Both Correct</th>
+<th style="text-align: right;">Stability Program Consistency</th>
+<th style="text-align: right;">Control Program Consistency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paired L4</td>
+<td style="text-align: right;">96.9%</td>
+<td style="text-align: right;">93.8%</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">84.4%</td>
+<td style="text-align: right;">96.9%</td>
+<td style="text-align: right;">93.8%</td>
+</tr>
+<tr>
+<td>Paired L8</td>
+<td style="text-align: right;">75.0%</td>
+<td style="text-align: right;">87.5%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">75.0%</td>
+<td style="text-align: right;">87.5%</td>
+</tr>
+<tr>
+<td>Paired L12</td>
+<td style="text-align: right;">68.8%</td>
+<td style="text-align: right;">68.8%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">68.8%</td>
+<td style="text-align: right;">68.8%</td>
+</tr>
+<tr>
+<td>Paired L24</td>
+<td style="text-align: right;">15.6%</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">9.4%</td>
+<td style="text-align: right;">7.8%</td>
+<td style="text-align: right;">12.5%</td>
+<td style="text-align: right;">14.1%</td>
+</tr>
+</tbody>
+</table>
+<p>The stability penalty does not reliably increase paired consistency. It helps L4 consistency and slightly improves L24 answer consistency, but the no-stability control is much better at L8 consistency and ties L12. The most defensible interpretation is that paired data plus trace supervision already induces a fairly stable compiler; the explicit KL penalty is only a weak additional bias.</p>
+<h2>Diagnostics</h2>
+<p>The compiler arms learn the easy parts almost perfectly:</p>
+<ul>
+<li>initial value accuracy is 100.0% on every main compiler split;</li>
+<li>operation accuracy is at or near 100.0% on trained and medium lengths;</li>
+<li>operation position accuracy is at or near 100.0% except at length 24;</li>
+<li>argument accuracy remains high per step, but exact program execution compounds the remaining errors.</li>
+</ul>
+<p>This is a compounding-error regime. A 90-95% per-step argument extractor can still fail often on length-24 exact execution because every copied argument must be correct.</p>
+<h2>Training Dynamics</h2>
+<p>At step 300, the stability arm showed a large paired length-12 consistency advantage:</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Stability Exec</th>
+<th style="text-align: right;">Control Exec</th>
+<th style="text-align: right;">Stability Pair Consistency</th>
+<th style="text-align: right;">Control Pair Consistency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paired L12, step 300</td>
+<td style="text-align: right;">30.5%</td>
+<td style="text-align: right;">20.3%</td>
+<td style="text-align: right;">35.9%</td>
+<td style="text-align: right;">4.7%</td>
+</tr>
+</tbody>
+</table>
+<p>By step 600, that advantage mostly disappeared on paired L12, while both compiler arms improved. This suggests the stability objective may shape mid-training behavior, but under this budget the matched trace compiler catches up on the core paired L12 interface.</p>
+<h2>Interpretation</h2>
+<p>The positive result is the Qwen-attached compiler itself. With only 600 QLoRA steps, the model and compiler learn an invisible executable interface that solves many modular programs. The final-answer-only QLoRA control does not learn the task at all under the same step budget.</p>
+<p>The negative result is the stability loss as a central mechanism. It does not produce a clean monotonic improvement over a matched paired-data trace compiler. The strongest single gain is paraphrase length 24 exact execution, where stability reaches 23.4% versus 15.6%. The strongest loss is paired length 8 consistency, where stability reaches 75.0% versus 87.5%.</p>
+<p>The result supports a narrow claim:</p>
+<ol>
+<li>Qwen3-4B hidden states can be adapted to feed an exact symbolic executor through a learned numeric-copy compiler.</li>
+<li>Trace supervision is far more effective than final-answer-only QLoRA for this task.</li>
+<li>Paired paraphrase data is useful, but the tested symmetric-KL stability penalty is not a decisive standalone improvement.</li>
+</ol>
+<p>It does not support a claim of broad posttraining intelligence amplification. It shows a practical way to attach an executable latent tool interface to a local 4B-class model for a narrow serial symbolic workload.</p>
+<h2>Recommended Follow-Up</h2>
+<p>The next intervention should target long-chain compounding errors directly rather than adding another agreement penalty. The most promising design is a length curriculum with validation-selected checkpoints:</p>
+<ul>
+<li>train with dense trace supervision and paired templates as in this experiment;</li>
+<li>oversample lengths 12-24 after the compiler reaches high slot accuracy on lengths 4-8;</li>
+<li>add a per-step executor consistency loss that compares intermediate states, not just final answers;</li>
+<li>select by paired length-24 <code>program_exact</code>, not by training loss.</li>
+</ul>
+<p>Success should require a clear paired length-24 gain over the no-stability compiler, not only a short-chain gain.</p>
+<h2>Artifacts</h2>
+<p>Small files:</p>
+<ul>
+<li>Source: <code>experiments/qwen_slot_stability_compiler/src/</code></li>
+<li>Runs: <code>experiments/qwen_slot_stability_compiler/runs/</code></li>
+<li>Analysis: <code>experiments/qwen_slot_stability_compiler/analysis/</code></li>
+<li>Report: <code>experiments/qwen_slot_stability_compiler/reports/qwen_slot_stability_compiler_paper.md</code></li>
+<li>Manifest: <code>experiments/qwen_slot_stability_compiler/checkpoint_manifest.csv</code></li>
+</ul>
+<p>Large files:</p>
+<ul>
+<li>Stability adapter and heads: <code>large_artifacts/qwen_slot_stability_compiler/checkpoints/main_qwen3_4b_qlora_slot_stability_mixed_l12_s600/</code></li>
+<li>Matched no-stability adapter and heads: <code>large_artifacts/qwen_slot_stability_compiler/checkpoints/control_qwen3_4b_qlora_paired_no_stability_mixed_l12_s600/</code></li>
+<li>Answer-only adapter and heads: <code>large_artifacts/qwen_slot_stability_compiler/checkpoints/control_qwen3_4b_qlora_answer_only_mixed_l12_s600/</code></li>
+</ul>
+</body>
+</html>

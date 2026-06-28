@@ -1,0 +1,466 @@
+{
+  "baseline": {
+    "adapter_dir": null,
+    "arm_name": "base_sample_more_k8",
+    "count": 24,
+    "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+    "max_new_tokens": 220,
+    "offset": 0,
+    "path": "data/base_sample_more_k8_records.jsonl",
+    "records": {
+      "candidate_count_mean": 7.708333333333333,
+      "coverage": 0.6666666666666666,
+      "distinct_behavior_rate_mean": 0.7182539682539683,
+      "distinct_functional_rate_mean": 0.3209325396825397,
+      "false_repair_count": 0,
+      "false_repair_rate": 0.0,
+      "forward_tokens": 44219,
+      "hidden_pass_candidates_mean": 3.0,
+      "parse_success_mean": 7.5,
+      "pass1_proxy": 0.4166666666666667,
+      "records": 24,
+      "visible_candidates_mean": 4.208333333333333,
+      "visible_coverage": 0.6666666666666666,
+      "visible_repair_pass_count": 0,
+      "zero_base_records": 0,
+      "zero_to_one": 0,
+      "zero_to_one_rate": 0.0
+    },
+    "round_name": "direct_baseline",
+    "samples_per_task": 8,
+    "seed": 2026062625,
+    "split": "mbpp_test",
+    "temperatures": [
+      1.0
+    ],
+    "token_usage": {
+      "calls": 192,
+      "completion_tokens": 21446,
+      "forward_tokens": 45406,
+      "prompt_tokens": 23960
+    },
+    "top_p": 0.98,
+    "visible_tests": 1
+  },
+  "combined": [
+    {
+      "arm_name": "base_sample_more",
+      "coverage": 0.6666666666666666,
+      "covered_tasks": [
+        11,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19,
+        22,
+        23,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34
+      ],
+      "forward_tokens": 45406,
+      "records": 24,
+      "zero_to_one": 0,
+      "zero_to_one_tasks": []
+    },
+    {
+      "arm_name": "base_plus_retrieval_copy_rename_top3",
+      "coverage": 0.7083333333333334,
+      "covered_tasks": [
+        11,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34
+      ],
+      "forward_tokens": 45406,
+      "records": 24,
+      "zero_to_one": 1,
+      "zero_to_one_tasks": [
+        20
+      ]
+    },
+    {
+      "arm_name": "base_plus_retrieval_adapt_semantic_top3",
+      "coverage": 0.7916666666666666,
+      "covered_tasks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34
+      ],
+      "forward_tokens": 53105,
+      "records": 24,
+      "zero_to_one": 3,
+      "zero_to_one_tasks": [
+        15,
+        20,
+        25
+      ]
+    },
+    {
+      "arm_name": "base_plus_retrieval_adapt_random_top3",
+      "coverage": 0.6666666666666666,
+      "covered_tasks": [
+        11,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19,
+        22,
+        23,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34
+      ],
+      "forward_tokens": 53388,
+      "records": 24,
+      "zero_to_one": 0,
+      "zero_to_one_tasks": []
+    },
+    {
+      "arm_name": "base_plus_retrieval_adapt_shuffled_top3",
+      "coverage": 0.7083333333333334,
+      "covered_tasks": [
+        11,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34
+      ],
+      "forward_tokens": 53287,
+      "records": 24,
+      "zero_to_one": 1,
+      "zero_to_one_tasks": [
+        20
+      ]
+    }
+  ],
+  "library": {
+    "count_requested": 374,
+    "dropped_unverified": 10,
+    "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+    "library_entries": 364,
+    "offset": 0,
+    "path": "data/verified_algorithm_library.jsonl",
+    "records_loaded": 374,
+    "split": "mbpp_train"
+  },
+  "plan": {
+    "base_miss_filter": true,
+    "base_miss_tasks": [
+      15,
+      16,
+      20,
+      21,
+      24,
+      25,
+      26,
+      31
+    ],
+    "eval_records": 8,
+    "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+    "library_entries": 364,
+    "path": "data/retrieval_plan.jsonl",
+    "top_k": 3
+  },
+  "retrieval_rows": [
+    {
+      "arm_name": "retrieval_copy_rename_top3",
+      "coverage_tasks": [
+        20
+      ],
+      "manifest": {
+        "arm_name": "retrieval_copy_rename_top3",
+        "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+        "max_new_tokens": 260,
+        "path": "data/retrieval_copy_rename_top3_records.jsonl",
+        "plan": "data/retrieval_plan.jsonl",
+        "records": {
+          "candidate_count_mean": 3.0,
+          "coverage": 0.125,
+          "distinct_behavior_rate_mean": 0.7916666666666666,
+          "distinct_functional_rate_mean": 0.5833333333333333,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "forward_tokens": 0,
+          "hidden_pass_candidates_mean": 0.125,
+          "parse_success_mean": 3.0,
+          "pass1_proxy": 0.125,
+          "records": 8,
+          "visible_candidates_mean": 0.375,
+          "visible_coverage": 0.125,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 0,
+          "zero_to_one": 0,
+          "zero_to_one_rate": 0.0
+        },
+        "samples_per_retrieval": 1,
+        "seed": 2026062633,
+        "temperature": 0.2,
+        "token_usage": {
+          "calls": 0,
+          "completion_tokens": 0,
+          "forward_tokens": 0,
+          "prompt_tokens": 0
+        },
+        "top_k": 3,
+        "top_p": 0.95
+      },
+      "solved_task_details": [
+        {
+          "task_id": 20,
+          "task_text": "Write a function to check if the given number is woodball or not.",
+          "winner_sources": [
+            "retrieval_copy_rename_top3_semantic_r0"
+          ]
+        }
+      ],
+      "visible_hidden_wrong_rate": 0.6666666666666666,
+      "visible_pass_candidates": 3,
+      "visible_pass_hidden_wrong": 2,
+      "zero_to_one": 1,
+      "zero_to_one_rate": 0.125,
+      "zero_to_one_tasks": [
+        20
+      ]
+    },
+    {
+      "arm_name": "retrieval_adapt_semantic_top3",
+      "coverage_tasks": [
+        15,
+        20,
+        25
+      ],
+      "manifest": {
+        "arm_name": "retrieval_adapt_semantic_top3",
+        "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+        "max_new_tokens": 260,
+        "path": "data/retrieval_adapt_semantic_top3_records.jsonl",
+        "plan": "data/retrieval_plan.jsonl",
+        "records": {
+          "candidate_count_mean": 2.625,
+          "coverage": 0.375,
+          "distinct_behavior_rate_mean": 0.9583333333333334,
+          "distinct_functional_rate_mean": 0.7083333333333333,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "forward_tokens": 6946,
+          "hidden_pass_candidates_mean": 0.375,
+          "parse_success_mean": 2.625,
+          "pass1_proxy": 0.375,
+          "records": 8,
+          "visible_candidates_mean": 0.875,
+          "visible_coverage": 0.375,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 0,
+          "zero_to_one": 0,
+          "zero_to_one_rate": 0.0
+        },
+        "samples_per_retrieval": 1,
+        "seed": 2026062634,
+        "temperature": 0.2,
+        "token_usage": {
+          "calls": 24,
+          "completion_tokens": 2201,
+          "forward_tokens": 7699,
+          "prompt_tokens": 5498
+        },
+        "top_k": 3,
+        "top_p": 0.95
+      },
+      "solved_task_details": [
+        {
+          "task_id": 15,
+          "task_text": "Write a function to split a string at lowercase letters.",
+          "winner_sources": [
+            "retrieval_adapt_semantic_top3_semantic_r0_s0"
+          ]
+        },
+        {
+          "task_id": 20,
+          "task_text": "Write a function to check if the given number is woodball or not.",
+          "winner_sources": [
+            "retrieval_adapt_semantic_top3_semantic_r0_s0"
+          ]
+        },
+        {
+          "task_id": 25,
+          "task_text": "Write a python function to find the product of non-repeated elements in a given array.",
+          "winner_sources": [
+            "retrieval_adapt_semantic_top3_semantic_r0_s0"
+          ]
+        }
+      ],
+      "visible_hidden_wrong_rate": 0.5714285714285714,
+      "visible_pass_candidates": 7,
+      "visible_pass_hidden_wrong": 4,
+      "zero_to_one": 3,
+      "zero_to_one_rate": 0.375,
+      "zero_to_one_tasks": [
+        15,
+        20,
+        25
+      ]
+    },
+    {
+      "arm_name": "retrieval_adapt_random_top3",
+      "coverage_tasks": [],
+      "manifest": {
+        "arm_name": "retrieval_adapt_random_top3",
+        "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+        "max_new_tokens": 260,
+        "path": "data/retrieval_adapt_random_top3_records.jsonl",
+        "plan": "data/retrieval_plan.jsonl",
+        "records": {
+          "candidate_count_mean": 2.75,
+          "coverage": 0.0,
+          "distinct_behavior_rate_mean": 0.8958333333333334,
+          "distinct_functional_rate_mean": 0.4583333333333333,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "forward_tokens": 7389,
+          "hidden_pass_candidates_mean": 0.0,
+          "parse_success_mean": 2.75,
+          "pass1_proxy": 0.0,
+          "records": 8,
+          "visible_candidates_mean": 0.625,
+          "visible_coverage": 0.0,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 0,
+          "zero_to_one": 0,
+          "zero_to_one_rate": 0.0
+        },
+        "samples_per_retrieval": 1,
+        "seed": 2026062634,
+        "temperature": 0.2,
+        "token_usage": {
+          "calls": 24,
+          "completion_tokens": 2067,
+          "forward_tokens": 7982,
+          "prompt_tokens": 5915
+        },
+        "top_k": 3,
+        "top_p": 0.95
+      },
+      "solved_task_details": [],
+      "visible_hidden_wrong_rate": 1.0,
+      "visible_pass_candidates": 5,
+      "visible_pass_hidden_wrong": 5,
+      "zero_to_one": 0,
+      "zero_to_one_rate": 0.0,
+      "zero_to_one_tasks": []
+    },
+    {
+      "arm_name": "retrieval_adapt_shuffled_top3",
+      "coverage_tasks": [
+        20
+      ],
+      "manifest": {
+        "arm_name": "retrieval_adapt_shuffled_top3",
+        "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+        "max_new_tokens": 260,
+        "path": "data/retrieval_adapt_shuffled_top3_records.jsonl",
+        "plan": "data/retrieval_plan.jsonl",
+        "records": {
+          "candidate_count_mean": 2.875,
+          "coverage": 0.125,
+          "distinct_behavior_rate_mean": 0.8125,
+          "distinct_functional_rate_mean": 0.5625,
+          "false_repair_count": 0,
+          "false_repair_rate": 0.0,
+          "forward_tokens": 7589,
+          "hidden_pass_candidates_mean": 0.125,
+          "parse_success_mean": 2.875,
+          "pass1_proxy": 0.125,
+          "records": 8,
+          "visible_candidates_mean": 0.875,
+          "visible_coverage": 0.125,
+          "visible_repair_pass_count": 0,
+          "zero_base_records": 0,
+          "zero_to_one": 0,
+          "zero_to_one_rate": 0.0
+        },
+        "samples_per_retrieval": 1,
+        "seed": 2026062634,
+        "temperature": 0.2,
+        "token_usage": {
+          "calls": 24,
+          "completion_tokens": 2383,
+          "forward_tokens": 7881,
+          "prompt_tokens": 5498
+        },
+        "top_k": 3,
+        "top_p": 0.95
+      },
+      "solved_task_details": [
+        {
+          "task_id": 20,
+          "task_text": "Write a function to check if the given number is woodball or not.",
+          "winner_sources": [
+            "retrieval_adapt_shuffled_top3_shuffled_r0_s0"
+          ]
+        }
+      ],
+      "visible_hidden_wrong_rate": 0.8571428571428571,
+      "visible_pass_candidates": 7,
+      "visible_pass_hidden_wrong": 6,
+      "zero_to_one": 1,
+      "zero_to_one_rate": 0.125,
+      "zero_to_one_tasks": [
+        20
+      ]
+    }
+  ]
+}

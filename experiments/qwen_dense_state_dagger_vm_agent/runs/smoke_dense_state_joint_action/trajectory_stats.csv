@@ -1,0 +1,3 @@
+run,phase,n_examples,states,stop_labels,edit_labels,false_stop_states,rollout_success_rate,mean_states_per_example,mean_policy_steps
+smoke_dense_state_joint_action,bc_teacher,8,54,3,51,0,0.375,6.75,6.375
+smoke_dense_state_joint_action,dagger_r1_states,8,24,0,24,0,0.0,3.0,3.0

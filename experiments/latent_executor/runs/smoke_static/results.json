@@ -1,0 +1,94 @@
+{
+  "mode": "static",
+  "args": {
+    "mode": "static",
+    "seed": 11,
+    "modulus": 97,
+    "train_min_len": 1,
+    "train_max_len": 4,
+    "eval_lengths": "2,4,6",
+    "eval_k": "0,1,2,4,8,12,16,24",
+    "dim": 64,
+    "heads": 4,
+    "compiler_layers": 1,
+    "num_bases": 16,
+    "rank": 16,
+    "mem_dim": 48,
+    "dropout": 0.05,
+    "disable_memory": false,
+    "disable_dynamic": false,
+    "train_steps": 5,
+    "batch_size": 32,
+    "eval_batch_size": 32,
+    "eval_examples": 64,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "log_every": 1,
+    "eval_every": 5,
+    "output_dir": "runs_latent_executor/smoke_static"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 4.618013858795166,
+      "pair_acc": 0.0,
+      "grad_norm": 0.9567549228668213
+    },
+    {
+      "step": 2,
+      "loss": 4.585184097290039,
+      "pair_acc": 0.0,
+      "grad_norm": 0.9165496230125427
+    },
+    {
+      "step": 3,
+      "loss": 4.536962509155273,
+      "pair_acc": 0.0,
+      "grad_norm": 0.9160991311073303
+    },
+    {
+      "step": 4,
+      "loss": 4.568818092346191,
+      "pair_acc": 0.0,
+      "grad_norm": 0.9084265828132629
+    },
+    {
+      "step": 5,
+      "loss": 4.61360502243042,
+      "pair_acc": 0.0,
+      "grad_norm": 0.9145419597625732
+    }
+  ],
+  "eval": [
+    {
+      "step": 5,
+      "rows": [
+        {
+          "model": "static",
+          "length": 2,
+          "k": -1,
+          "n": 64,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0234375
+        },
+        {
+          "model": "static",
+          "length": 4,
+          "k": -1,
+          "n": 64,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0
+        },
+        {
+          "model": "static",
+          "length": 6,
+          "k": -1,
+          "n": 64,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0
+        }
+      ]
+    }
+  ]
+}

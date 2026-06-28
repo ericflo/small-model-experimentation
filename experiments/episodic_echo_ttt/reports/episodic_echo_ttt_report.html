@@ -1,0 +1,449 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Episodic ECHO-TTT Report</title>
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 32px; line-height: 1.5; color: #111827; }
+    table { border-collapse: collapse; font-size: 13px; margin: 16px 0; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; margin: 12px 0 24px; }
+    code { background: #f3f4f6; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<h1>Episodic ECHO-TTT Report</h1>
+<h2>Summary</h2>
+<p>This standalone experiment tests whether a frozen local language model can use
+temporary per-episode gradient updates on environment-observation prediction to
+make better later decisions.</p>
+<p>Verdict: <strong>negative mechanism signal</strong>.</p>
+<p>Best mean accuracy was 30.6% for <code>generic_ttt</code> on <code>eval_indist</code> at 2 TTT steps.</p>
+<p>The primary comparison is <code>global_no_ttt</code> versus <code>echo_ttt</code> and the corrupted
+controls <code>shuffle_ttt</code> and <code>generic_ttt</code>. A real mechanism signal requires
+true-observation TTT to improve final-probe accuracy and held-out observation
+prediction more than corrupted-observation TTT.</p>
+<p>Gate readout at the largest tested TTT step:</p>
+<ul>
+<li><code>eval_indist</code> at 2 TTT steps: echo 25.0%, no-TTT 25.0%, best corrupted control 30.6%.</li>
+<li><code>heldout_family</code> at 2 TTT steps: echo 27.8%, no-TTT 25.0%, best corrupted control 25.0%.</li>
+</ul>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code>.</li>
+<li>Frozen model weights: yes.</li>
+<li>Per-episode trainable state: <code>4</code> virtual prefix tokens.</li>
+<li>Observation update target: only text spans containing diagnostic-box observations.</li>
+<li>Candidate decision: likelihood over four randomized option-letter continuations.</li>
+<li>Four-choice chance accuracy: <code>25.0%</code>.</li>
+<li>Support observations per episode: <code>5</code>.</li>
+<li>Held-out observation probes per episode: <code>2</code>.</li>
+<li>Seeds: <code>101,202,303</code>.</li>
+<li>Large artifacts: <code>/workspace/large_artifacts/episodic_echo_ttt</code>.</li>
+</ul>
+<h2>Main Results</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">arm</th>
+<th style="text-align: right;">ttt_steps</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: left;">mean_accuracy</th>
+<th style="text-align: left;">std_accuracy</th>
+<th style="text-align: right;">mean_obs_ce_before</th>
+<th style="text-align: right;">mean_obs_ce_after</th>
+<th style="text-align: right;">mean_obs_ce_delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">echo_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">echo_ttt</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">5.46</td>
+<td style="text-align: right;">-0.852</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">echo_ttt</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">5.361</td>
+<td style="text-align: right;">-0.951</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">generic_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">generic_ttt</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">27.8%</td>
+<td style="text-align: left;">9.6%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">5.71</td>
+<td style="text-align: right;">-0.602</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">generic_ttt</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">30.6%</td>
+<td style="text-align: left;">4.8%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">5.747</td>
+<td style="text-align: right;">-0.565</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">global_no_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">no_prefix</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.398</td>
+<td style="text-align: right;">6.398</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">shuffle_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">shuffle_ttt</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">27.8%</td>
+<td style="text-align: left;">9.6%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">5.428</td>
+<td style="text-align: right;">-0.884</td>
+</tr>
+<tr>
+<td style="text-align: left;">eval_indist</td>
+<td style="text-align: left;">shuffle_ttt</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.312</td>
+<td style="text-align: right;">5.442</td>
+<td style="text-align: right;">-0.87</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">echo_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">echo_ttt</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">27.8%</td>
+<td style="text-align: left;">4.8%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">5.477</td>
+<td style="text-align: right;">-0.696</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">echo_ttt</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">27.8%</td>
+<td style="text-align: left;">4.8%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">5.457</td>
+<td style="text-align: right;">-0.717</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">generic_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">generic_ttt</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">27.8%</td>
+<td style="text-align: left;">4.8%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">5.573</td>
+<td style="text-align: right;">-0.6</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">generic_ttt</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">8.3%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">5.385</td>
+<td style="text-align: right;">-0.789</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">global_no_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">no_prefix</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">22.2%</td>
+<td style="text-align: left;">4.8%</td>
+<td style="text-align: right;">6.409</td>
+<td style="text-align: right;">6.409</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">shuffle_ttt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">25.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">shuffle_ttt</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">19.4%</td>
+<td style="text-align: left;">9.6%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">5.47</td>
+<td style="text-align: right;">-0.704</td>
+</tr>
+<tr>
+<td style="text-align: left;">heldout_family</td>
+<td style="text-align: left;">shuffle_ttt</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">19.4%</td>
+<td style="text-align: left;">9.6%</td>
+<td style="text-align: right;">6.174</td>
+<td style="text-align: right;">5.398</td>
+<td style="text-align: right;">-0.776</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Accuracy by arm" src="../analysis/figures/accuracy_by_arm.png" /></p>
+<p><img alt="TTT step curve" src="../analysis/figures/ttt_step_curve.png" /></p>
+<p><img alt="Observation CE delta" src="../analysis/figures/observation_ce_delta.png" /></p>
+<h2>Global Prefix Training</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">seed</th>
+<th style="text-align: right;">step</th>
+<th style="text-align: right;">train_loss</th>
+<th style="text-align: right;">val_obs_ce</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.107</td>
+<td style="text-align: right;">6.18</td>
+</tr>
+<tr>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.276</td>
+<td style="text-align: right;">6.569</td>
+</tr>
+<tr>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.988</td>
+<td style="text-align: right;">3.242</td>
+</tr>
+<tr>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.965</td>
+<td style="text-align: right;">3.821</td>
+</tr>
+<tr>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.969</td>
+<td style="text-align: right;">5.416</td>
+</tr>
+<tr>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.928</td>
+<td style="text-align: right;">5.874</td>
+</tr>
+<tr>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.649</td>
+<td style="text-align: right;">5.788</td>
+</tr>
+<tr>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.809</td>
+<td style="text-align: right;">5.919</td>
+</tr>
+<tr>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.137</td>
+<td style="text-align: right;">5.663</td>
+</tr>
+<tr>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.931</td>
+<td style="text-align: right;">5.504</td>
+</tr>
+<tr>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">5.823</td>
+</tr>
+<tr>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.764</td>
+<td style="text-align: right;">6.197</td>
+</tr>
+<tr>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.173</td>
+<td style="text-align: right;">6.673</td>
+</tr>
+<tr>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.148</td>
+<td style="text-align: right;">7.511</td>
+</tr>
+<tr>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.188</td>
+<td style="text-align: right;">6.377</td>
+</tr>
+<tr>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.876</td>
+<td style="text-align: right;">6.009</td>
+</tr>
+<tr>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.91</td>
+<td style="text-align: right;">5.954</td>
+</tr>
+<tr>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.925</td>
+<td style="text-align: right;">6.189</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Global prefix training" src="../analysis/figures/global_prefix_training.png" /></p>
+<h2>Interpretation</h2>
+<p>The load-bearing control is corrupted-observation TTT. The result does not pass
+that control. True-observation TTT reduces held-out observation CE, but shuffled
+and generic-observation updates also reduce CE on the same held-out probes.
+Final-probe accuracy remains near the four-choice chance level and does not
+separate reliably from the corrupted controls.</p>
+<p>The experiment therefore supports a narrow negative conclusion for this tested
+recipe: a tiny virtual-prefix test-time update can move Qwen's likelihoods, but
+the movement is not specifically grounded in the true episode dynamics strongly
+enough to improve decisions.</p>
+<h2>Artifacts</h2>
+<ul>
+<li>Run directory: <code>/workspace/experiments/episodic_echo_ttt/runs/main_episodic_echo_ttt_v1</code>.</li>
+<li>Metrics CSV: <code>/workspace/experiments/episodic_echo_ttt/analysis/metrics.csv</code>.</li>
+<li>Summary CSV: <code>/workspace/experiments/episodic_echo_ttt/analysis/summary_by_arm.csv</code>.</li>
+<li>Detail CSV: <code>/workspace/experiments/episodic_echo_ttt/analysis/detail_rows.csv</code>.</li>
+<li>Checkpoints: <code>/workspace/large_artifacts/episodic_echo_ttt/checkpoints/main_episodic_echo_ttt_v1</code>.</li>
+</ul>
+</body>
+</html>

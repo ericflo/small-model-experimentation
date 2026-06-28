@@ -1,0 +1,5 @@
+run,seed,modulus,max_program_len,max_prompt_tokens,model_id,loader,load_in_4bit,peft_installed,gpu_name,gpu_vram_gb,size_trace_train,size_verifier_train,size_val_mixed,size_fresh_standard,size_fresh_paraphrase,size_fresh_paired,size_hard_composition
+main_budgeted_action_value_s512,613,97,16,58,Qwen/Qwen3-4B,AutoModelForCausalLM,True,True,NVIDIA RTX 6000 Ada Generation,47.383,512,512,128,128,128,128,128
+pilot_budgeted_action_value_s128,512,97,16,58,Qwen/Qwen3-4B,AutoModelForCausalLM,True,True,NVIDIA RTX 6000 Ada Generation,47.383,128,128,64,64,64,64,64
+pilot_budgeted_action_value_s128_advantage,512,97,16,58,Qwen/Qwen3-4B,AutoModelForCausalLM,True,True,NVIDIA RTX 6000 Ada Generation,47.383,128,128,64,64,64,64,64
+smoke_budgeted_action_value,411,97,16,58,Qwen/Qwen3-4B,AutoModelForCausalLM,True,True,NVIDIA RTX 6000 Ada Generation,47.383,32,32,16,16,16,16,16

@@ -1,0 +1,223 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen LoRA Typed-Bytecode Trace Compiler</title><style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; color: #20242a; max-width: 980px; margin: 36px auto; padding: 0 24px; }
+h1, h2, h3 { line-height: 1.2; color: #111827; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; margin: 18px 0; }
+th, td { border: 1px solid #d8dee9; padding: 7px 9px; text-align: left; }
+th { background: #f3f6fa; }
+img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 6px; margin-top: 8px; }
+code { background: #f5f7fb; padding: 2px 4px; border-radius: 4px; }
+pre code { display: block; padding: 12px; overflow-x: auto; }
+</style></head><body><h1>Qwen LoRA Typed-Bytecode Trace Compiler</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a local Qwen 4B model can be posttrained to compile short natural-language reasoning tasks into executable typed bytecode. The runtime is a bounded stack machine with arithmetic, comparisons, min/max, modulo, and two table-lookup host calls. The main condition trains QLoRA adapters and a bytecode compiler head from dense gold execution traces. Controls train the same compiler head on frozen Qwen hidden states and train QLoRA only from final answers.</p>
+<p>The main QLoRA trace run reached 68.0% direct executable bytecode accuracy on fresh paired prompts and 85.9% when a small answer-verified local search repaired nearby candidates. On hard-composition prompts it reached 55.5% direct and 75.8% with local search. This is a large gain over answer-only training (14.8% fresh paired), but only a modest gain over a frozen-Qwen trace-head control (66.4% fresh paired, 53.1% hard).</p>
+<h2>Experimental Question</h2>
+<p>The question is whether a small posttraining modification can make a 4B language model use an internal executable format: the prompt is read by Qwen, a lightweight compiler emits bytecode, and a fixed VM executes that bytecode to produce the answer. The result should separate three mechanisms:</p>
+<ul>
+<li>whether dense executable trace supervision is much stronger than final-answer labels;</li>
+<li>whether live LoRA adaptation improves over a frozen Qwen feature extractor;</li>
+<li>whether answer-verified expert iteration can turn final-answer feedback into better bytecode targets.</li>
+</ul>
+<h2>Runtime</h2>
+<p>The bytecode VM is a typed stack machine over bounded integer values modulo 97. Programs have at most 16 slots and use these opcodes:</p>
+<p><code>PAD</code>, <code>PUSH</code>, <code>ADD</code>, <code>SUB</code>, <code>MUL</code>, <code>MOD</code>, <code>MAX</code>, <code>MIN</code>, <code>GT</code>, <code>EQ</code>, <code>LOOKUP_A</code>, <code>LOOKUP_B</code>, <code>END</code>.</p>
+<p>The decoder is constrained to produce stack-valid programs. Direct accuracy means the greedy constrained program executed to the correct answer. Search accuracy means a small local candidate set contained a correct executable program and the answer verifier selected it.</p>
+<h2>Data</h2>
+<p>The task generator creates natural-language prompts with executable gold bytecode across six domains:</p>
+<ul>
+<li>modular arithmetic chains;</li>
+<li>weekday offsets;</li>
+<li>unit scaling;</li>
+<li>list sum/max/min;</li>
+<li>boolean threshold checks;</li>
+<li>table lookup.</li>
+</ul>
+<p>Evaluation uses fresh standard prompts, fresh paraphrases, paired standard/paraphrase prompts sharing the same latent program, and a hard-composition split with longer arithmetic, longer lists, and larger offsets/factors.</p>
+<h2>Conditions</h2>
+<ul>
+<li><code>frozen_trace</code>: Qwen is frozen; hidden states are cached; only the bytecode head trains on gold traces.</li>
+<li><code>qlora_trace</code>: Qwen receives QLoRA adapters; the adapters and bytecode head train jointly on gold traces.</li>
+<li><code>qlora_trace_ei</code>: QLoRA starts from 256 gold traces, then answer-verified local search collects bytecode targets from unlabeled prompts for two training rounds.</li>
+<li><code>qlora_answer</code>: QLoRA and a direct answer head train only on final answer labels.</li>
+</ul>
+<p>All QLoRA conditions trained 16.5M adapter parameters, about 0.41% of the model, on NVIDIA RTX 6000 Ada Generation.</p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run</th>
+<th style="text-align: left;">variant</th>
+<th style="text-align: left;">phase</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">direct_metric</th>
+<th style="text-align: left;">search_accuracy</th>
+<th style="text-align: left;">program_exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_frozen_trace_s512</td>
+<td style="text-align: left;">frozen_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">68.8%</td>
+<td style="text-align: left;">82.0%</td>
+<td style="text-align: left;">47.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_frozen_trace_s512</td>
+<td style="text-align: left;">frozen_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">68.8%</td>
+<td style="text-align: left;">80.5%</td>
+<td style="text-align: left;">57.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_frozen_trace_s512</td>
+<td style="text-align: left;">frozen_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">66.4%</td>
+<td style="text-align: left;">86.7%</td>
+<td style="text-align: left;">50.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_frozen_trace_s512</td>
+<td style="text-align: left;">frozen_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">53.1%</td>
+<td style="text-align: left;">77.3%</td>
+<td style="text-align: left;">35.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_qlora_answer_s512</td>
+<td style="text-align: left;">qlora_answer</td>
+<td style="text-align: left;">answer_only</td>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">14.1%</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">n/a</td>
+</tr>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_qlora_answer_s512</td>
+<td style="text-align: left;">qlora_answer</td>
+<td style="text-align: left;">answer_only</td>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">20.3%</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">n/a</td>
+</tr>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_qlora_answer_s512</td>
+<td style="text-align: left;">qlora_answer</td>
+<td style="text-align: left;">answer_only</td>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">14.8%</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">n/a</td>
+</tr>
+<tr>
+<td style="text-align: left;">control_qwen3_4b_qlora_answer_s512</td>
+<td style="text-align: left;">qlora_answer</td>
+<td style="text-align: left;">answer_only</td>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">21.9%</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">n/a</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_ei_s256_u1024</td>
+<td style="text-align: left;">qlora_trace_ei</td>
+<td style="text-align: left;">expert_round_2</td>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">41.4%</td>
+<td style="text-align: left;">71.9%</td>
+<td style="text-align: left;">32.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_ei_s256_u1024</td>
+<td style="text-align: left;">qlora_trace_ei</td>
+<td style="text-align: left;">expert_round_2</td>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">38.3%</td>
+<td style="text-align: left;">71.9%</td>
+<td style="text-align: left;">24.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_ei_s256_u1024</td>
+<td style="text-align: left;">qlora_trace_ei</td>
+<td style="text-align: left;">expert_round_2</td>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">48.4%</td>
+<td style="text-align: left;">85.2%</td>
+<td style="text-align: left;">30.5%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_ei_s256_u1024</td>
+<td style="text-align: left;">qlora_trace_ei</td>
+<td style="text-align: left;">expert_round_2</td>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">38.3%</td>
+<td style="text-align: left;">73.4%</td>
+<td style="text-align: left;">26.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_s512</td>
+<td style="text-align: left;">qlora_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">fresh_standard</td>
+<td style="text-align: left;">71.1%</td>
+<td style="text-align: left;">85.9%</td>
+<td style="text-align: left;">53.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_s512</td>
+<td style="text-align: left;">qlora_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">fresh_paraphrase</td>
+<td style="text-align: left;">71.1%</td>
+<td style="text-align: left;">84.4%</td>
+<td style="text-align: left;">61.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_s512</td>
+<td style="text-align: left;">qlora_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">fresh_paired</td>
+<td style="text-align: left;">68.0%</td>
+<td style="text-align: left;">85.9%</td>
+<td style="text-align: left;">57.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_qwen3_4b_qlora_trace_s512</td>
+<td style="text-align: left;">qlora_trace</td>
+<td style="text-align: left;">trace_supervised</td>
+<td style="text-align: left;">hard_composition</td>
+<td style="text-align: left;">55.5%</td>
+<td style="text-align: left;">75.8%</td>
+<td style="text-align: left;">35.2%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Final direct accuracy. For bytecode conditions this is executable bytecode accuracy; for answer-only it is direct answer-head accuracy." src="../analysis/figures/final_direct_accuracy_by_condition.png" /></p>
+<p><em>Final direct accuracy. For bytecode conditions this is executable bytecode accuracy; for answer-only it is direct answer-head accuracy.</em></p>
+<p><img alt="Direct bytecode decoding compared with answer-verified local search." src="../analysis/figures/direct_vs_search_gap.png" /></p>
+<p><em>Direct bytecode decoding compared with answer-verified local search.</em></p>
+<p><img alt="Quick validation curves during training." src="../analysis/figures/training_curves.png" /></p>
+<p><em>Quick validation curves during training.</em></p>
+<p><img alt="Expert-iteration phase progress on fresh paired and hard-composition splits." src="../analysis/figures/expert_iteration_progress.png" /></p>
+<p><em>Expert-iteration phase progress on fresh paired and hard-composition splits.</em></p>
+<p><img alt="Answer-verified target quality during expert iteration." src="../analysis/figures/expert_target_quality.png" /></p>
+<p><em>Answer-verified target quality during expert iteration.</em></p>
+<h2>Interpretation</h2>
+<p>Dense executable trace supervision is the decisive ingredient in this setup. The answer-only control remained low (14.8% fresh paired), while trace-supervised bytecode reached 68.0% fresh paired direct execution and 55.5% hard-composition direct execution. The trained system is not merely producing valid syntax: program exactness reached 57.8% on fresh paired prompts and 35.2% on hard-composition prompts.</p>
+<p>Live QLoRA helped, but the effect was smaller than the headline trace-supervision effect. On fresh paired prompts, QLoRA trace was 68.0% versus 66.4% for the frozen trace head, a +1.6 pp difference. On hard composition, QLoRA trace was 55.5% versus 53.1%, a +2.3 pp difference. The strongest conclusion is therefore not that LoRA alone installed a new executor; it is that Qwen's existing hidden states already support a strong executable compiler head when dense trace supervision is available, and light adaptation gives a modest additional lift.</p>
+<p>The local-search gap remains important. The main QLoRA run reached 85.9% fresh paired search accuracy while greedy direct execution was 68.0%. That means many failures are near misses: the correct program often appears after small opcode/argument edits. This points toward process-level decoding or verifier-guided prefix search as a more promising next step than simply training a larger final answer head.</p>
+<p>Expert iteration partially worked but did not beat dense trace supervision. Fresh paired direct bytecode improved from 21.9% after seed training to 48.4% after two rounds. Round 1 found targets for 58.3% of unlabeled prompts and changed 68.8% of found targets. Round 2 found 68.3% and changed 49.1%. The generated targets were useful, but not as useful as more dense gold traces.</p>
+<h2>Limitations</h2>
+<p>The task distribution is synthetic and still narrow. The VM is deliberately small, and the answer verifier is exact because the generator supplies known answers. Search accuracy should not be read as deployable accuracy unless an external verifier is available. Also, the compiler head is separate from the base LM output head; this is a posttraining-attached executor, not yet a model that emits bytecode through its native token channel.</p>
+<h2>Next Experiment</h2>
+<p>The next high-value experiment should attack the remaining direct/search gap. The best candidate is a prefix-level process verifier for partial bytecode: train a value model over <code>(prompt, partial program, VM state)</code> to score whether a prefix can still complete to a correct program, then use beam/A* search over typed bytecode prefixes. That directly targets the observed failure mode: correct programs are often nearby, but greedy slot decoding picks the wrong argument or early opcode.</p>
+<p>The second priority is a trace factory with a broader set of crystallized tasks: string normalization, JSON/path extraction, date arithmetic, unit conversion, spreadsheet formulas, regex-like matching, and multi-hop table lookup. This experiment shows executable traces are high-bandwidth supervision; the scaling question is whether a much broader trace corpus preserves the same effect.</p></body></html>

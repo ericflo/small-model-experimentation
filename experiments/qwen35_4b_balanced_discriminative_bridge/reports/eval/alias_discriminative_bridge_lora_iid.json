@@ -1,0 +1,2230 @@
+{
+  "adapter": "/workspace/large_artifacts/qwen35_4b_balanced_discriminative_bridge/models/alias_discriminative_bridge_lora",
+  "data": "data/eval/dsl_eval_iid.jsonl",
+  "max_new_tokens": 64,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "num_samples": 0,
+  "prompt_mode": "trace",
+  "records": 60,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "rows": [
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"S{}\" (sum values))",
+          "raw": "(format \"S{}\" (sum values))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"S{}\" (sum values))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_000",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"S{}\" (sum values))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"S{}\" (sum values))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (first values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"R{}\" (mod n modulus))",
+          "raw": "(format \"R{}\" (mod n modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "mod_scalar_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"R{}\" (mod n modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_001",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"R{}\" (mod n modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" n)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"L{}\" (len text))",
+          "raw": "(format \"L{}\" (len text))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"L{}\" (len text))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_002",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"L{}\" (len text))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"L{}\" (len text))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" 0)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (contains text needle) \"HAS\" \"MISS\")",
+          "raw": "(if (contains text needle) \"HAS\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_003",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (contains needle text) \"HAS\" \"MISS\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"T{}\" (tuple_get item index))",
+          "raw": "(format \"T{}\" (tuple_get item index))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_get_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"T{}\" (tuple_get item index))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_004",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"T{}\" (tuple_get item index))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" (sum item))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt score threshold) high_label low_label)",
+          "raw": "(if (gt score threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "scalar_branch_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt score threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_005",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt score threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (lt score threshold) high_label low_label)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt (sum values) threshold) high_label low_label)",
+          "raw": "(if (gt (sum values) threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_threshold_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_006",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "low_label"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"LM{}\" (mod (len text) modulus))",
+          "raw": "(format \"LM{}\" (mod (len text) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_mod_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_007",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" (len text))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"TS{}\" (sum item))",
+          "raw": "(format \"TS{}\" (sum item))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"TS{}\" (sum item))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_008",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"TS{}\" (sum item))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"TS{}\" (sum item))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (len item))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"C{}\" (count_eq tokens needle))",
+          "raw": "(format \"C{}\" (count_eq tokens needle))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_count_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"C{}\" (count_eq tokens needle))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_009",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"C{}\" (count_eq tokens needle))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"C{}\" (len tokens))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"F{}\" (first (sort values)))",
+          "raw": "(format \"F{}\" (first (sort values)))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sorted_first_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"F{}\" (first (sort values)))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_010",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"F{}\" (first (sort values)))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (last values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"A{}\" (add (sum values) offset))",
+          "raw": "(format \"A{}\" (add (sum values) offset))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_add_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"A{}\" (add (sum values) offset))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_011",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"A{}\" (add (sum values) offset))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" (sum values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+          "raw": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_and_count_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_012",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (contains tokens needle) \"MANY\" \"FEW\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+          "raw": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_and_mod_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_013",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len text) threshold) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+          "raw": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_and_scalar_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_014",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt n 0) \"PASS\" \"FAIL\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"S{}\" (sum values))",
+          "raw": "(format \"S{}\" (sum values))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"S{}\" (sum values))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_015",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"S{}\" (sum values))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"S{}\" (sum values))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (len values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"R{}\" (mod n modulus))",
+          "raw": "(format \"R{}\" (mod n modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "mod_scalar_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"R{}\" (mod n modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_016",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"R{}\" (mod n modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" modulus)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"L{}\" (len text))",
+          "raw": "(format \"L{}\" (len text))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"L{}\" (len text))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_017",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"L{}\" (len text))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"L{}\" (len text))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" 0)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (contains text needle) \"HAS\" \"MISS\")",
+          "raw": "(if (contains text needle) \"HAS\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_018",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "\"MISS\""
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"T{}\" (tuple_get item index))",
+          "raw": "(format \"T{}\" (tuple_get item index))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_get_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"T{}\" (tuple_get item index))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_019",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"T{}\" (tuple_get item index))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" (sum item))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt score threshold) high_label low_label)",
+          "raw": "(if (gt score threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "scalar_branch_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt score threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_020",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt score threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (lt score threshold) high_label low_label)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt (sum values) threshold) high_label low_label)",
+          "raw": "(if (gt (sum values) threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_threshold_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_021",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len values) threshold) high_label low_label)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"LM{}\" (mod (len text) modulus))",
+          "raw": "(format \"LM{}\" (mod (len text) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_mod_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_022",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" (len text))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"TS{}\" (sum item))",
+          "raw": "(format \"TS{}\" (sum item))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"TS{}\" (sum item))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_023",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"TS{}\" (sum item))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"TS{}\" (sum item))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (len item))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"C{}\" (count_eq tokens needle))",
+          "raw": "(format \"C{}\" (count_eq tokens needle))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_count_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"C{}\" (count_eq tokens needle))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_024",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"C{}\" (count_eq tokens needle))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"C{}\" (len tokens))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"F{}\" (first (sort values)))",
+          "raw": "(format \"F{}\" (first (sort values)))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sorted_first_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"F{}\" (first (sort values)))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_025",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"F{}\" (first (sort values)))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (last values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"A{}\" (add (sum values) offset))",
+          "raw": "(format \"A{}\" (add (sum values) offset))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_add_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"A{}\" (add (sum values) offset))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_026",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"A{}\" (add (sum values) offset))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" (sum values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+          "raw": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_and_count_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_027",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (contains tokens needle) \"MANY\" \"FEW\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+          "raw": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_and_mod_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_028",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (eq (mod (len text) modulus) target) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+          "raw": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_and_scalar_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_029",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (sum values) threshold) \"PASS\" \"FAIL\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"S{}\" (sum values))",
+          "raw": "(format \"S{}\" (sum values))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"S{}\" (sum values))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_030",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"S{}\" (sum values))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"S{}\" (sum values))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (len values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"R{}\" (mod n modulus))",
+          "raw": "(format \"R{}\" (mod n modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "mod_scalar_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"R{}\" (mod n modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_031",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"R{}\" (mod n modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" n)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"L{}\" (len text))",
+          "raw": "(format \"L{}\" (len text))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"L{}\" (len text))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_032",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"L{}\" (len text))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"L{}\" (len text))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" text)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (contains text needle) \"HAS\" \"MISS\")",
+          "raw": "(if (contains text needle) \"HAS\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_033",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (contains needle text) \"HAS\" \"MISS\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"T{}\" (tuple_get item index))",
+          "raw": "(format \"T{}\" (tuple_get item index))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_get_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"T{}\" (tuple_get item index))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_034",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"T{}\" (tuple_get item index))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" (sum item))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt score threshold) high_label low_label)",
+          "raw": "(if (gt score threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "scalar_branch_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt score threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_035",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt score threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (lt score threshold) high_label low_label)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt (sum values) threshold) high_label low_label)",
+          "raw": "(if (gt (sum values) threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_threshold_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_036",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "low_label"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"LM{}\" (mod (len text) modulus))",
+          "raw": "(format \"LM{}\" (mod (len text) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_mod_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_037",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" (len text))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"TS{}\" (sum item))",
+          "raw": "(format \"TS{}\" (sum item))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"TS{}\" (sum item))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_038",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"TS{}\" (sum item))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"TS{}\" (sum item))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (first item))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"C{}\" (count_eq tokens needle))",
+          "raw": "(format \"C{}\" (count_eq tokens needle))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_count_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"C{}\" (count_eq tokens needle))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_039",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"C{}\" (count_eq tokens needle))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (contains tokens needle) \"C1\" \"C0\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"F{}\" (first (sort values)))",
+          "raw": "(format \"F{}\" (first (sort values)))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sorted_first_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"F{}\" (first (sort values)))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_040",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"F{}\" (first (sort values)))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (first values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"A{}\" (add (sum values) offset))",
+          "raw": "(format \"A{}\" (add (sum values) offset))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_add_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"A{}\" (add (sum values) offset))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_041",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"A{}\" (add (sum values) offset))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" (sum values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+          "raw": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_and_count_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_042",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (contains tokens needle) \"MANY\" \"FEW\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+          "raw": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_and_mod_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_043",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (eq (mod (len text) modulus) target) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+          "raw": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_and_scalar_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_044",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (sum values) threshold) \"PASS\" \"FAIL\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"S{}\" (sum values))",
+          "raw": "(format \"S{}\" (sum values))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"S{}\" (sum values))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_label_045",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"S{}\" (sum values))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"S{}\" (sum values))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"S{}\" (len values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"R{}\" (mod n modulus))",
+          "raw": "(format \"R{}\" (mod n modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "mod_scalar_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"R{}\" (mod n modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_mod_scalar_label_046",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"R{}\" (mod n modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"R{}\" (mod n modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"R{}\" n)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"L{}\" (len text))",
+          "raw": "(format \"L{}\" (len text))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"L{}\" (len text))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_label_047",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"L{}\" (len text))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"L{}\" (len text))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"L{}\" text)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (contains text needle) \"HAS\" \"MISS\")",
+          "raw": "(if (contains text needle) \"HAS\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_code_048",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (contains text needle) \"HAS\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (contains needle text) \"HAS\" \"MISS\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"T{}\" (tuple_get item index))",
+          "raw": "(format \"T{}\" (tuple_get item index))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_get_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"T{}\" (tuple_get item index))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_get_label_049",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"T{}\" (tuple_get item index))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"T{}\" (tuple_get item index))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"T{}\" index)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt score threshold) high_label low_label)",
+          "raw": "(if (gt score threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "scalar_branch_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt score threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_scalar_branch_label_050",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt score threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt score threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "low_label"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (gt (sum values) threshold) high_label low_label)",
+          "raw": "(if (gt (sum values) threshold) high_label low_label)\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_threshold_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_threshold_label_051",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "selected_visible_passes": 6,
+      "target_program": "(if (gt (sum values) threshold) high_label low_label)",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len values) threshold) high_label low_label)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"LM{}\" (mod (len text) modulus))",
+          "raw": "(format \"LM{}\" (mod (len text) modulus))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_mod_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_mod_label_052",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"LM{}\" (mod (len text) modulus))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"LM{}\" (len text))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"TS{}\" (sum item))",
+          "raw": "(format \"TS{}\" (sum item))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "tuple_sum_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"TS{}\" (sum item))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_tuple_sum_label_053",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"TS{}\" (sum item))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"TS{}\" (sum item))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"TS{}\" (len item))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"C{}\" (count_eq tokens needle))",
+          "raw": "(format \"C{}\" (count_eq tokens needle))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_count_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"C{}\" (count_eq tokens needle))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_count_label_054",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"C{}\" (count_eq tokens needle))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"C{}\" (count_eq tokens needle))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"C{}\" (len tokens))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"F{}\" (first (sort values)))",
+          "raw": "(format \"F{}\" (first (sort values)))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sorted_first_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"F{}\" (first (sort values)))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sorted_first_label_055",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"F{}\" (first (sort values)))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"F{}\" (first (sort values)))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"F{}\" (last values))"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(format \"A{}\" (add (sum values) offset))",
+          "raw": "(format \"A{}\" (add (sum values) offset))\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_add_label",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(format \"A{}\" (add (sum values) offset))",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_add_label_056",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(format \"A{}\" (add (sum values) offset))",
+      "selected_visible_passes": 6,
+      "target_program": "(format \"A{}\" (add (sum values) offset))",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(format \"A{}\" offset)"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+          "raw": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "contains_and_count_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_contains_and_count_code_057",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (contains tokens needle) (gt (count_eq tokens needle) threshold)) \"MANY\" \"FEW\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (count_eq tokens needle) threshold) \"MANY\" \"FEW\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+          "raw": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "length_and_mod_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_length_and_mod_code_058",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (len text) threshold) (eq (mod (len text) modulus) target)) \"LEN_OK\" \"MISS\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (len text) threshold) \"LEN_OK\" \"MISS\")"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "kind": "greedy",
+          "program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+          "raw": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")\n",
+          "valid": true,
+          "visible_passes": 6,
+          "visible_total": 6
+        }
+      ],
+      "family": "sum_and_scalar_code",
+      "greedy_hidden_all": true,
+      "greedy_hidden_passes": 18,
+      "greedy_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "greedy_visible_all": true,
+      "greedy_visible_passes": 6,
+      "hidden_total": 18,
+      "id": "eval_iid_seed_random_sum_and_scalar_code_059",
+      "rerank_hidden_all": true,
+      "rerank_visible_all": true,
+      "selected_hidden_passes": 18,
+      "selected_kind": "greedy",
+      "selected_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "selected_visible_passes": 6,
+      "target_program": "(if (and (gt (sum values) threshold) (gt n 0)) \"PASS\" \"FAIL\")",
+      "trace_strategy": "seed_random",
+      "visible_total": 6,
+      "wrong_program": "(if (gt (sum values) threshold) \"PASS\" \"FAIL\")"
+    }
+  ],
+  "summary": {
+    "by_family": {
+      "contains_and_count_code": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "contains_code": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "contains_count_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "length_and_mod_code": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "length_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "length_mod_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "mod_scalar_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "scalar_branch_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sorted_first_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_add_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_and_scalar_code": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "sum_threshold_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "tuple_get_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      },
+      "tuple_sum_label": {
+        "greedy_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "greedy_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_hidden_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        },
+        "rerank_visible_all": {
+          "rate": 1.0,
+          "records": 4,
+          "successes": 4
+        }
+      }
+    },
+    "overall": {
+      "greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "greedy_visible_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      },
+      "rerank_visible_all": {
+        "rate": 1.0,
+        "records": 60,
+        "successes": 60
+      }
+    }
+  },
+  "temperature": 0.7,
+  "top_p": 0.95
+}

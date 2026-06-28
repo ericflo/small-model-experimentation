@@ -1,0 +1,7 @@
+{
+  "experiment_id": "counterexample_rule_repair",
+  "small_artifact_dir": "/workspace/experiments/counterexample_rule_repair",
+  "large_artifact_dir": "/workspace/large_artifacts/counterexample_rule_repair",
+  "date_utc": "2026-06-20",
+  "primary_question": "Can a repair model use failed-test counterexamples to infer a general corrective rule rather than copy an answer string?"
+}

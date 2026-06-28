@@ -1,0 +1,116 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.81it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 161.23it/s]Loading weights:  22%|██▏       | 92/426 [00:00<00:00, 375.63it/s]Loading weights:  34%|███▍      | 146/426 [00:00<00:00, 437.56it/s]Loading weights:  47%|████▋     | 201/426 [00:00<00:00, 471.14it/s]Loading weights:  61%|██████    | 258/426 [00:00<00:00, 502.78it/s]Loading weights:  75%|███████▍  | 318/426 [00:00<00:00, 529.07it/s]Loading weights:  90%|████████▉ | 382/426 [00:00<00:00, 561.77it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 474.78it/s]
+retrieval_adapt_semantic_top3:   0%|          | 0/8 [00:00<?, ?it/s]retrieval_adapt_semantic_top3:  12%|█▎        | 1/8 [00:21<02:33, 21.93s/it]retrieval_adapt_semantic_top3:  25%|██▌       | 2/8 [00:34<01:38, 16.41s/it]retrieval_adapt_semantic_top3:  38%|███▊      | 3/8 [00:44<01:06, 13.35s/it]retrieval_adapt_semantic_top3:  50%|█████     | 4/8 [00:56<00:52, 13.06s/it]retrieval_adapt_semantic_top3:  62%|██████▎   | 5/8 [01:04<00:33, 11.24s/it]retrieval_adapt_semantic_top3:  75%|███████▌  | 6/8 [01:26<00:29, 14.84s/it]retrieval_adapt_semantic_top3:  88%|████████▊ | 7/8 [01:48<00:17, 17.21s/it]retrieval_adapt_semantic_top3: 100%|██████████| 8/8 [02:33<00:00, 26.07s/it]retrieval_adapt_semantic_top3: 100%|██████████| 8/8 [02:33<00:00, 19.22s/it]
+{
+  "arm_name": "retrieval_adapt_semantic_top3",
+  "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_adapt_semantic_top3_records.jsonl",
+  "plan": "data/retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 2.625,
+    "coverage": 0.375,
+    "distinct_behavior_rate_mean": 0.9583333333333334,
+    "distinct_functional_rate_mean": 0.7083333333333333,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 6946,
+    "hidden_pass_candidates_mean": 0.375,
+    "parse_success_mean": 2.625,
+    "pass1_proxy": 0.375,
+    "records": 8,
+    "visible_candidates_mean": 0.875,
+    "visible_coverage": 0.375,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 2026062634,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 24,
+    "completion_tokens": 2201,
+    "forward_tokens": 7699,
+    "prompt_tokens": 5498
+  },
+  "top_k": 3,
+  "top_p": 0.95
+}
+retrieval_adapt_random_top3:   0%|          | 0/8 [00:00<?, ?it/s]retrieval_adapt_random_top3:  12%|█▎        | 1/8 [00:16<01:58, 16.91s/it]retrieval_adapt_random_top3:  25%|██▌       | 2/8 [00:36<01:50, 18.46s/it]retrieval_adapt_random_top3:  38%|███▊      | 3/8 [01:03<01:51, 22.25s/it]retrieval_adapt_random_top3:  50%|█████     | 4/8 [01:14<01:12, 18.09s/it]retrieval_adapt_random_top3:  62%|██████▎   | 5/8 [01:25<00:46, 15.44s/it]retrieval_adapt_random_top3:  75%|███████▌  | 6/8 [01:38<00:29, 14.54s/it]retrieval_adapt_random_top3:  88%|████████▊ | 7/8 [01:47<00:12, 12.76s/it]retrieval_adapt_random_top3: 100%|██████████| 8/8 [02:25<00:00, 20.64s/it]retrieval_adapt_random_top3: 100%|██████████| 8/8 [02:25<00:00, 18.13s/it]
+{
+  "arm_name": "retrieval_adapt_random_top3",
+  "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_adapt_random_top3_records.jsonl",
+  "plan": "data/retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 2.75,
+    "coverage": 0.0,
+    "distinct_behavior_rate_mean": 0.8958333333333334,
+    "distinct_functional_rate_mean": 0.4583333333333333,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 7389,
+    "hidden_pass_candidates_mean": 0.0,
+    "parse_success_mean": 2.75,
+    "pass1_proxy": 0.0,
+    "records": 8,
+    "visible_candidates_mean": 0.625,
+    "visible_coverage": 0.0,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 2026062634,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 24,
+    "completion_tokens": 2067,
+    "forward_tokens": 7982,
+    "prompt_tokens": 5915
+  },
+  "top_k": 3,
+  "top_p": 0.95
+}
+retrieval_adapt_shuffled_top3:   0%|          | 0/8 [00:00<?, ?it/s]retrieval_adapt_shuffled_top3:  12%|█▎        | 1/8 [00:37<04:22, 37.50s/it]retrieval_adapt_shuffled_top3:  25%|██▌       | 2/8 [00:58<02:45, 27.53s/it]retrieval_adapt_shuffled_top3:  38%|███▊      | 3/8 [01:21<02:07, 25.44s/it]retrieval_adapt_shuffled_top3:  50%|█████     | 4/8 [01:29<01:15, 18.92s/it]retrieval_adapt_shuffled_top3:  62%|██████▎   | 5/8 [01:42<00:50, 16.71s/it]retrieval_adapt_shuffled_top3:  75%|███████▌  | 6/8 [01:58<00:33, 16.54s/it]retrieval_adapt_shuffled_top3:  88%|████████▊ | 7/8 [02:11<00:15, 15.24s/it]retrieval_adapt_shuffled_top3: 100%|██████████| 8/8 [02:45<00:00, 21.22s/it]retrieval_adapt_shuffled_top3: 100%|██████████| 8/8 [02:45<00:00, 20.69s/it]
+{
+  "arm_name": "retrieval_adapt_shuffled_top3",
+  "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_adapt_shuffled_top3_records.jsonl",
+  "plan": "data/retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 2.875,
+    "coverage": 0.125,
+    "distinct_behavior_rate_mean": 0.8125,
+    "distinct_functional_rate_mean": 0.5625,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 7589,
+    "hidden_pass_candidates_mean": 0.125,
+    "parse_success_mean": 2.875,
+    "pass1_proxy": 0.125,
+    "records": 8,
+    "visible_candidates_mean": 0.875,
+    "visible_coverage": 0.125,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 2026062634,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 24,
+    "completion_tokens": 2383,
+    "forward_tokens": 7881,
+    "prompt_tokens": 5498
+  },
+  "top_k": 3,
+  "top_p": 0.95
+}

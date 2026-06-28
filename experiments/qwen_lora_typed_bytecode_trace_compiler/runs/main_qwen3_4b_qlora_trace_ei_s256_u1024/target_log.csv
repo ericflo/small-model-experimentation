@@ -1,0 +1,3 @@
+source_examples,targets,found_rate,changed_rate,mean_candidates,candidate_valid_rate,run,variant,round,phase
+1024,597,0.5830078125,0.6884422110552764,31.974609375,0.701575957485798,main_qwen3_4b_qlora_trace_ei_s256_u1024,qlora_trace_ei,1,expert_round_1
+1024,699,0.6826171875,0.4907010014306152,32.62109375,0.7192851155550234,main_qwen3_4b_qlora_trace_ei_s256_u1024,qlora_trace_ei,2,expert_round_2

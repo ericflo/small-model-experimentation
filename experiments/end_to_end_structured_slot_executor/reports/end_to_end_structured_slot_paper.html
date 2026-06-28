@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>End-to-End Structured Slot Executor</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18202a;
+      --muted: #56616f;
+      --line: #d8dee7;
+      --accent: #0f766e;
+      --panel: #f7f9fb;
+      --paper: #ffffff;
+    }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #eef2f6;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 22px 64px;
+      background: var(--paper);
+      min-height: 100vh;
+    }
+    h1, h2, h3 {
+      line-height: 1.18;
+      margin: 0 0 14px;
+    }
+    h1 {
+      font-size: 34px;
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-size: 24px;
+      margin-top: 34px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    h3 {
+      font-size: 18px;
+      margin-top: 24px;
+    }
+    p {
+      margin: 0 0 14px;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    pre {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 14px 0 22px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--panel);
+    }
+    td:nth-child(n+4), th:nth-child(n+4) {
+      text-align: right;
+    }
+    ul {
+      margin: 0 0 14px 22px;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    figure {
+      margin: 18px 0 28px;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+    .lead {
+      font-size: 17px;
+      color: var(--muted);
+    }
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: #eefaf8;
+      padding: 12px 14px;
+      margin: 18px 0;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>End-to-End Structured Slot Executor</h1>
+
+  <h2>Abstract</h2>
+  <p class="lead">This experiment tests whether a single learned model can form a modular belief state and execute recurrent symbolic updates without being given either the initial state or the transition rule.</p>
+  <p>The task family uses hidden residues <code>A</code> and <code>B</code> with <code>B = A + d (mod p)</code>. A program applies arithmetic updates and observations, and the model must recover the final support over <code>(A, B)</code>.</p>
+  <div class="callout">The best learned executor reaches 98.1% strict belief mass at held-out length 24 for modulus 31, and 94.9% at held-out length 24 for modulus 97.</div>
+
+  <h2>Problem</h2>
+  <p>Each example begins with a relation:</p>
+  <pre>B = A + d (mod p)</pre>
+  <p>The value of <code>A</code> is hidden, so the initial support contains one valid <code>(A, B)</code> pair for each residue. The program then applies operations such as modular increments, decrements, swaps, and observations. The target is the final belief support induced by the whole program.</p>
+  <p>The strict metric is the probability mass assigned to the exact final support after evaluating at the first recurrent step budget <code>K</code> that is at least the program length <code>L</code>.</p>
+
+  <h2>Model</h2>
+  <p>The executor represents belief states with weighted slots. Each slot carries a distribution over <code>A</code>, a distribution over <code>B</code>, and a slot weight. Decoding forms a dense belief over <code>(A, B)</code> from the slot mixture.</p>
+  <p>The primary learned executor has two structured components:</p>
+  <ul>
+    <li>A Sinkhorn-normalized cyclic initializer that maps the relation offset <code>d</code> into one slot per residue.</li>
+    <li>A primitive router that selects among equivariant modular update candidates for each program operation.</li>
+  </ul>
+
+  <h2>Results</h2>
+  <h3>Main Modulus 31</h3>
+  <p>Training used program lengths 1-8. Evaluation used held-out lengths 4, 8, 12, 16, and 24.</p>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>Init</th><th>Transition</th><th>L=24 query</th><th>L=24 belief</th><th>Initial belief</th><th>Route acc</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>oracle_exact</code></td><td>oracle</td><td>exact</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td></tr>
+      <tr><td><code>oracle_primitive_router</code></td><td>oracle</td><td>primitive router</td><td>99.9%</td><td>99.9%</td><td>100.0%</td><td>100.0%</td></tr>
+      <tr><td><code>sinkhorn_exact</code></td><td>sinkhorn cyclic</td><td>exact</td><td>97.7%</td><td>96.8%</td><td>99.6%</td><td>n/a</td></tr>
+      <tr><td><code>sinkhorn_primitive_router</code></td><td>sinkhorn cyclic</td><td>primitive router</td><td>98.7%</td><td>98.1%</td><td>99.7%</td><td>100.0%</td></tr>
+      <tr><td><code>generic_primitive_router</code></td><td>generic MLP</td><td>primitive router</td><td>43.0%</td><td>28.7%</td><td>58.6%</td><td>100.0%</td></tr>
+      <tr><td><code>sinkhorn_mlp</code></td><td>sinkhorn cyclic</td><td>MLP</td><td>19.9%</td><td>5.0%</td><td>58.9%</td><td>n/a</td></tr>
+    </tbody>
+  </table>
+  <figure><img src="../analysis/figures/main_mod31_decoder_belief_mass_at_k_ge_l.png" alt="Modulus 31 strict belief mass"></figure>
+  <figure><img src="../analysis/figures/main_mod31_init_belief_mass.png" alt="Modulus 31 initial belief mass"></figure>
+
+  <h3>Scale Modulus 97</h3>
+  <p>The modulus-97 scale check used the same held-out maximum length of 24 with a smaller evaluation batch.</p>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>Init</th><th>Transition</th><th>L=24 query</th><th>L=24 belief</th><th>Initial belief</th><th>Route acc</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>oracle_exact</code></td><td>oracle</td><td>exact</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td></tr>
+      <tr><td><code>sinkhorn_primitive_router</code></td><td>sinkhorn cyclic</td><td>primitive router</td><td>96.2%</td><td>94.9%</td><td>99.4%</td><td>100.0%</td></tr>
+    </tbody>
+  </table>
+  <figure><img src="../analysis/figures/scale_mod97_decoder_belief_mass_at_k_ge_l.png" alt="Modulus 97 strict belief mass"></figure>
+
+  <h2>Interpretation</h2>
+  <p>The full learned structured executor solves the task end-to-end at modulus 31 and remains strong at modulus 97. The control rows isolate why: the learned router is exact when the state is supplied, and the Sinkhorn initializer forms nearly exact support when the transition is supplied. When both are trained together, the model retains both properties.</p>
+  <p>The failures are also informative. The generic initializer does not cover the initial modular support, so even a perfect router cannot recover the full belief state. The unstructured MLP transition fails despite a structured initializer, showing that transition equivariance is doing real work.</p>
+  <p>At modulus 97, the residual error is not caused by wrong route selection or missing residue coverage. It appears as slow diffusion of belief mass through long recurrent execution. That points to sharper recurrent state maintenance as the next technical bottleneck.</p>
+
+  <h2>Limitations</h2>
+  <p>The model uses strong structure: the slot capacity equals the modulus, the initializer is cyclic, and the transition router chooses among modular primitive candidates. The task is synthetic and arithmetic. The result shows that a learned structured executor can compose these mechanisms reliably, not that an unconstrained neural model would discover the same representation.</p>
+
+  <h2>Artifact Layout</h2>
+  <p>Lightweight code, metrics, figures, and reports live in:</p>
+  <pre>experiments/end_to_end_structured_slot_executor/</pre>
+  <p>Saved model weights live separately in:</p>
+  <pre>large_artifacts/end_to_end_structured_slot_executor/checkpoints/</pre>
+  <p>The checkpoint manifest is:</p>
+  <pre>experiments/end_to_end_structured_slot_executor/checkpoint_manifest.csv</pre>
+</main>
+</body>
+</html>

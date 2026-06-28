@@ -1,0 +1,74 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:12,  9.91it/s]Loading weights:   4%|▍         | 28/723 [00:00<00:04, 159.45it/s]Loading weights:  13%|█▎        | 92/723 [00:00<00:01, 375.34it/s]Loading weights:  20%|██        | 148/723 [00:00<00:01, 440.89it/s]Loading weights:  28%|██▊       | 205/723 [00:00<00:01, 485.10it/s]Loading weights:  37%|███▋      | 265/723 [00:00<00:00, 517.82it/s]Loading weights:  44%|████▍     | 318/723 [00:00<00:00, 518.63it/s]Loading weights:  51%|█████▏    | 371/723 [00:00<00:00, 520.65it/s]Loading weights:  63%|██████▎   | 452/723 [00:00<00:00, 609.32it/s]Loading weights:  99%|█████████▉| 716/723 [00:01<00:00, 1218.75it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 706.93it/s] 
+construct:   0%|          | 0/5 [00:00<?, ?it/s]construct:  20%|██        | 1/5 [00:05<00:21,  5.47s/it]construct:  40%|████      | 2/5 [00:10<00:15,  5.13s/it]construct:  60%|██████    | 3/5 [00:14<00:08,  4.50s/it]construct:  80%|████████  | 4/5 [00:20<00:05,  5.21s/it]construct: 100%|██████████| 5/5 [00:26<00:00,  5.39s/it]construct: 100%|██████████| 5/5 [00:26<00:00,  5.23s/it]
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:14,  9.72it/s]Loading weights:   9%|▉         | 64/723 [00:00<00:01, 368.22it/s]Loading weights:  16%|█▋        | 119/723 [00:00<00:01, 447.77it/s]Loading weights:  25%|██▌       | 181/723 [00:00<00:01, 510.20it/s]Loading weights:  33%|███▎      | 237/723 [00:00<00:00, 526.86it/s]Loading weights:  40%|████      | 291/723 [00:00<00:00, 529.56it/s]Loading weights:  48%|████▊     | 346/723 [00:00<00:00, 535.29it/s]Loading weights:  57%|█████▋    | 410/723 [00:00<00:00, 566.61it/s]Loading weights:  82%|████████▏ | 596/723 [00:00<00:00, 967.56it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 749.82it/s]
+repair:   0%|          | 0/5 [00:00<?, ?it/s]repair:  20%|██        | 1/5 [00:05<00:22,  5.53s/it]repair:  40%|████      | 2/5 [00:10<00:16,  5.46s/it]repair:  60%|██████    | 3/5 [00:15<00:10,  5.19s/it]repair:  80%|████████  | 4/5 [00:21<00:05,  5.34s/it]repair: 100%|██████████| 5/5 [00:28<00:00,  5.83s/it]repair: 100%|██████████| 5/5 [00:28<00:00,  5.61s/it]
+{
+  "by_family": {
+    "sum_length_mod_gate_label": {
+      "construct_greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "construct_greedy_visible_all": {
+        "rate": 0.4,
+        "records": 5,
+        "successes": 2
+      },
+      "construct_rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "construct_rerank_visible_all": {
+        "rate": 0.4,
+        "records": 5,
+        "successes": 2
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.4,
+        "records": 5,
+        "successes": 2
+      }
+    }
+  },
+  "overall": {
+    "construct_greedy_hidden_all": {
+      "rate": 0.0,
+      "records": 5,
+      "successes": 0
+    },
+    "construct_greedy_visible_all": {
+      "rate": 0.4,
+      "records": 5,
+      "successes": 2
+    },
+    "construct_rerank_hidden_all": {
+      "rate": 0.0,
+      "records": 5,
+      "successes": 0
+    },
+    "construct_rerank_visible_all": {
+      "rate": 0.4,
+      "records": 5,
+      "successes": 2
+    },
+    "repair_hidden_all": {
+      "rate": 0.0,
+      "records": 5,
+      "successes": 0
+    },
+    "repair_visible_all": {
+      "rate": 0.4,
+      "records": 5,
+      "successes": 2
+    }
+  }
+}

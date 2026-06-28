@@ -1,0 +1,54 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.79it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 158.98it/s]Loading weights:  22%|██▏       | 92/426 [00:00<00:00, 375.18it/s]Loading weights:  35%|███▍      | 148/426 [00:00<00:00, 441.92it/s]Loading weights:  48%|████▊     | 206/426 [00:00<00:00, 485.30it/s]Loading weights:  62%|██████▏   | 265/426 [00:00<00:00, 518.25it/s]Loading weights:  76%|███████▌  | 324/426 [00:00<00:00, 540.98it/s]Loading weights:  90%|████████▉ | 382/426 [00:00<00:00, 553.15it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 475.87it/s]
+{
+  "candidate_records": [
+    "data/retrieval_copy_rename_top3_records.jsonl",
+    "data/retrieval_adapt_semantic_t0p2_top3_records.jsonl"
+  ],
+  "experiment": "qwen35_4b_reliability_exec_opsd_audit",
+  "path": "data/map_selector_copy_semantic_t0p2_records.jsonl",
+  "pool_coverage": 0.3333333333333333,
+  "pool_names": [
+    "copy",
+    "semantic_t0p2"
+  ],
+  "records": 24,
+  "selectors": {
+    "first_visible": {
+      "commit_count": 14,
+      "commit_rate": 0.5833333333333334,
+      "records": 24,
+      "selected_false_pass_rate": 0.5,
+      "selected_hidden_correct": 7,
+      "selected_recovery_rate": 0.2916666666666667,
+      "selected_visible_hidden_wrong": 7,
+      "selector": "first_visible"
+    },
+    "map_mean": {
+      "commit_count": 14,
+      "commit_rate": 0.5833333333333334,
+      "records": 24,
+      "selected_false_pass_rate": 0.5714285714285714,
+      "selected_hidden_correct": 6,
+      "selected_recovery_rate": 0.25,
+      "selected_visible_hidden_wrong": 8,
+      "selector": "map_mean"
+    },
+    "oracle_hidden": {
+      "commit_count": 8,
+      "commit_rate": 0.3333333333333333,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 8,
+      "selected_recovery_rate": 0.3333333333333333,
+      "selected_visible_hidden_wrong": 0,
+      "selector": "oracle_hidden"
+    }
+  },
+  "usage_estimate": {
+    "completion_tokens_estimate": 10358,
+    "forward_tokens_estimate": 27049,
+    "prompt_tokens_estimate": 16691,
+    "scored_candidates": 140
+  }
+}

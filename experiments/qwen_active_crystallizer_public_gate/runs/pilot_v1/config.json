@@ -1,0 +1,13 @@
+{
+  "suite": "pilot",
+  "limit": 100,
+  "qwen_task_limit": 50,
+  "train_n": 4,
+  "heldout_cap": 20,
+  "max_candidates": 40000,
+  "qwen_probes": 4,
+  "max_new_tokens": 64,
+  "sample_seed": 20260627,
+  "started_utc": "2026-06-27T04:38:41.590159+00:00",
+  "elapsed_sec": 170.927113
+}

@@ -1,0 +1,4 @@
+phase,round,source_examples,targets,selected_correct_rate,selected_valid_rate,selected_program_exact_rate,selected_trace_consistent_rate,selected_quality_mean,changed_rate
+answer_verified_targets,1,256,72,1.0,1.0,0.0,0.0,2.0,0.6111111111111112
+best_quality_targets,1,256,72,1.0,1.0,0.0,0.0,2.0,0.6111111111111112
+preference_selected_targets,1,256,256,0.08203125,1.0,0.0,0.0,1.08203125,1.0

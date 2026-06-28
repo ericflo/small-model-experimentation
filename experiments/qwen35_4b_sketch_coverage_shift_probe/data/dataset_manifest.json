@@ -1,0 +1,35 @@
+{
+  "by_family": {
+    "alias_length_contains": 8,
+    "alias_sum_mod": 8,
+    "alias_tuple_mod_gate": 8,
+    "control_length_contains": 8,
+    "control_sum_mod": 8,
+    "control_tuple_mod_gate": 8,
+    "primitive_abs_min_delta": 8,
+    "primitive_max_gate": 8,
+    "primitive_max_mod": 8,
+    "primitive_mul_sum": 8,
+    "primitive_prefix_gate": 8,
+    "primitive_prod_mod": 8
+  },
+  "by_shift_type": {
+    "control_in_bank": 24,
+    "name_shift": 24,
+    "primitive_shift": 48
+  },
+  "data_file": "data/shifted_coverage_eval.jsonl",
+  "experiment": "qwen35_4b_sketch_coverage_shift_probe",
+  "hidden_count": 18,
+  "purpose": "Falsify whether typed-sketch verified completion retains target coverage under name and primitive shift before adding another selector.",
+  "query_count": 48,
+  "records": 96,
+  "records_per_family": 8,
+  "seed": 20260624,
+  "sketch_conditions": [
+    "auto",
+    "manual",
+    "erased"
+  ],
+  "visible_count": 6
+}

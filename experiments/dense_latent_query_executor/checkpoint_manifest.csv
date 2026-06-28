@@ -1,0 +1,7 @@
+run,filename,checkpoint_path_from_experiment_root,size_bytes,size_mb
+control_shuffled_mod11,checkpoint_final.pt,../../large_artifacts/dense_latent_query_executor/checkpoints/control_shuffled_mod11/checkpoint_final.pt,5513519,5.26
+control_static_mod11,checkpoint_final.pt,../../large_artifacts/dense_latent_query_executor/checkpoints/control_static_mod11/checkpoint_final.pt,4856365,4.63
+control_static_mod31,checkpoint_final.pt,../../large_artifacts/dense_latent_query_executor/checkpoints/control_static_mod31/checkpoint_final.pt,8492397,8.10
+main_dense_mod31,checkpoint_final.pt,../../large_artifacts/dense_latent_query_executor/checkpoints/main_dense_mod31/checkpoint_final.pt,9160687,8.74
+pilot_dense_mod11,checkpoint_final.pt,../../large_artifacts/dense_latent_query_executor/checkpoints/pilot_dense_mod11/checkpoint_final.pt,5513455,5.26
+smoke_dense_mod7,checkpoint_final.pt,../../large_artifacts/dense_latent_query_executor/checkpoints/smoke_dense_mod7/checkpoint_final.pt,394287,0.38

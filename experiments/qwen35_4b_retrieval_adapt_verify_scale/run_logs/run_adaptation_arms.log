@@ -1,0 +1,116 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:01,  6.86it/s]Loading weights:   5%|▌         | 22/426 [00:00<00:03, 105.08it/s]Loading weights:  15%|█▌        | 65/426 [00:00<00:01, 233.31it/s]Loading weights:  26%|██▋       | 112/426 [00:00<00:00, 319.47it/s]Loading weights:  36%|███▌      | 152/426 [00:00<00:00, 346.56it/s]Loading weights:  47%|████▋     | 200/426 [00:00<00:00, 388.06it/s]Loading weights:  58%|█████▊    | 248/426 [00:00<00:00, 415.48it/s]Loading weights:  68%|██████▊   | 291/426 [00:00<00:00, 407.69it/s]Loading weights:  78%|███████▊  | 333/426 [00:00<00:00, 408.87it/s]Loading weights:  89%|████████▉ | 379/426 [00:01<00:00, 423.13it/s]Loading weights:  99%|█████████▉| 422/426 [00:01<00:00, 412.85it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 358.52it/s]
+retrieval_adapt_semantic_top3:   0%|          | 0/24 [00:00<?, ?it/s]retrieval_adapt_semantic_top3:   4%|▍         | 1/24 [00:11<04:19, 11.30s/it]retrieval_adapt_semantic_top3:   8%|▊         | 2/24 [00:23<04:21, 11.89s/it]retrieval_adapt_semantic_top3:  12%|█▎        | 3/24 [00:34<04:03, 11.60s/it]retrieval_adapt_semantic_top3:  17%|█▋        | 4/24 [00:53<04:51, 14.57s/it]retrieval_adapt_semantic_top3:  21%|██        | 5/24 [01:31<07:16, 22.97s/it]retrieval_adapt_semantic_top3:  25%|██▌       | 6/24 [01:53<06:47, 22.63s/it]retrieval_adapt_semantic_top3:  29%|██▉       | 7/24 [02:21<06:52, 24.27s/it]retrieval_adapt_semantic_top3:  33%|███▎      | 8/24 [03:04<08:06, 30.38s/it]retrieval_adapt_semantic_top3:  38%|███▊      | 9/24 [03:58<09:23, 37.55s/it]retrieval_adapt_semantic_top3:  42%|████▏     | 10/24 [04:16<07:20, 31.48s/it]retrieval_adapt_semantic_top3:  46%|████▌     | 11/24 [04:28<05:32, 25.61s/it]retrieval_adapt_semantic_top3:  50%|█████     | 12/24 [04:39<04:14, 21.19s/it]retrieval_adapt_semantic_top3:  54%|█████▍    | 13/24 [05:19<04:55, 26.83s/it]retrieval_adapt_semantic_top3:  58%|█████▊    | 14/24 [05:36<03:58, 23.82s/it]retrieval_adapt_semantic_top3:  62%|██████▎   | 15/24 [05:49<03:05, 20.56s/it]retrieval_adapt_semantic_top3:  67%|██████▋   | 16/24 [06:27<03:26, 25.86s/it]retrieval_adapt_semantic_top3:  71%|███████   | 17/24 [07:13<03:42, 31.84s/it]retrieval_adapt_semantic_top3:  75%|███████▌  | 18/24 [07:31<02:46, 27.77s/it]retrieval_adapt_semantic_top3:  79%|███████▉  | 19/24 [07:43<01:54, 22.95s/it]retrieval_adapt_semantic_top3:  83%|████████▎ | 20/24 [08:05<01:31, 22.90s/it]retrieval_adapt_semantic_top3:  88%|████████▊ | 21/24 [08:13<00:55, 18.44s/it]retrieval_adapt_semantic_top3:  92%|█████████▏| 22/24 [08:28<00:34, 17.29s/it]retrieval_adapt_semantic_top3:  96%|█████████▌| 23/24 [08:53<00:19, 19.63s/it]retrieval_adapt_semantic_top3: 100%|██████████| 24/24 [09:07<00:00, 17.80s/it]retrieval_adapt_semantic_top3: 100%|██████████| 24/24 [09:07<00:00, 22.80s/it]
+{
+  "arm_name": "retrieval_adapt_semantic_top3",
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_adapt_semantic_top3_records.jsonl",
+  "plan": "data/retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 2.8333333333333335,
+    "coverage": 0.3333333333333333,
+    "distinct_behavior_rate_mean": 0.8541666666666666,
+    "distinct_functional_rate_mean": 0.611111111111111,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 23114,
+    "hidden_pass_candidates_mean": 0.4166666666666667,
+    "parse_success_mean": 2.7083333333333335,
+    "pass1_proxy": 0.125,
+    "records": 24,
+    "visible_candidates_mean": 1.0,
+    "visible_coverage": 0.3333333333333333,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 20260626,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 72,
+    "completion_tokens": 7632,
+    "forward_tokens": 24352,
+    "prompt_tokens": 16720
+  },
+  "top_k": 3,
+  "top_p": 0.95
+}
+retrieval_adapt_random_top3:   0%|          | 0/24 [00:00<?, ?it/s]retrieval_adapt_random_top3:   4%|▍         | 1/24 [00:20<07:48, 20.35s/it]retrieval_adapt_random_top3:   8%|▊         | 2/24 [00:37<06:50, 18.67s/it]retrieval_adapt_random_top3:  12%|█▎        | 3/24 [00:48<05:10, 14.81s/it]retrieval_adapt_random_top3:  17%|█▋        | 4/24 [00:57<04:12, 12.65s/it]retrieval_adapt_random_top3:  21%|██        | 5/24 [01:41<07:35, 23.98s/it]retrieval_adapt_random_top3:  25%|██▌       | 6/24 [02:03<07:02, 23.45s/it]retrieval_adapt_random_top3:  29%|██▉       | 7/24 [02:56<09:22, 33.08s/it]retrieval_adapt_random_top3:  33%|███▎      | 8/24 [03:44<10:06, 37.88s/it]retrieval_adapt_random_top3:  38%|███▊      | 9/24 [04:35<10:26, 41.75s/it]retrieval_adapt_random_top3:  42%|████▏     | 10/24 [04:55<08:13, 35.23s/it]retrieval_adapt_random_top3:  46%|████▌     | 11/24 [05:08<06:09, 28.44s/it]retrieval_adapt_random_top3:  50%|█████     | 12/24 [05:17<04:27, 22.26s/it]retrieval_adapt_random_top3:  54%|█████▍    | 13/24 [06:09<05:44, 31.35s/it]retrieval_adapt_random_top3:  58%|█████▊    | 14/24 [06:32<04:49, 28.99s/it]retrieval_adapt_random_top3:  62%|██████▎   | 15/24 [06:47<03:43, 24.82s/it]retrieval_adapt_random_top3:  67%|██████▋   | 16/24 [07:33<04:09, 31.18s/it]retrieval_adapt_random_top3:  71%|███████   | 17/24 [08:22<04:15, 36.48s/it]retrieval_adapt_random_top3:  75%|███████▌  | 18/24 [08:38<03:01, 30.30s/it]retrieval_adapt_random_top3:  79%|███████▉  | 19/24 [08:55<02:10, 26.19s/it]retrieval_adapt_random_top3:  83%|████████▎ | 20/24 [09:17<01:40, 25.03s/it]retrieval_adapt_random_top3:  88%|████████▊ | 21/24 [09:27<01:01, 20.48s/it]retrieval_adapt_random_top3:  92%|█████████▏| 22/24 [09:36<00:33, 17.00s/it]retrieval_adapt_random_top3:  96%|█████████▌| 23/24 [10:01<00:19, 19.31s/it]retrieval_adapt_random_top3: 100%|██████████| 24/24 [10:24<00:00, 20.48s/it]retrieval_adapt_random_top3: 100%|██████████| 24/24 [10:24<00:00, 26.01s/it]
+{
+  "arm_name": "retrieval_adapt_random_top3",
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_adapt_random_top3_records.jsonl",
+  "plan": "data/retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 2.8333333333333335,
+    "coverage": 0.16666666666666666,
+    "distinct_behavior_rate_mean": 0.8055555555555555,
+    "distinct_functional_rate_mean": 0.5,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 24491,
+    "hidden_pass_candidates_mean": 0.20833333333333334,
+    "parse_success_mean": 2.625,
+    "pass1_proxy": 0.16666666666666666,
+    "records": 24,
+    "visible_candidates_mean": 0.9583333333333334,
+    "visible_coverage": 0.16666666666666666,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 20260626,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 72,
+    "completion_tokens": 8805,
+    "forward_tokens": 25603,
+    "prompt_tokens": 16798
+  },
+  "top_k": 3,
+  "top_p": 0.95
+}
+retrieval_adapt_shuffled_top3:   0%|          | 0/24 [00:00<?, ?it/s]retrieval_adapt_shuffled_top3:   4%|▍         | 1/24 [00:49<18:54, 49.32s/it]retrieval_adapt_shuffled_top3:   8%|▊         | 2/24 [01:20<14:14, 38.85s/it]retrieval_adapt_shuffled_top3:  12%|█▎        | 3/24 [01:34<09:31, 27.20s/it]retrieval_adapt_shuffled_top3:  17%|█▋        | 4/24 [01:47<07:17, 21.87s/it]retrieval_adapt_shuffled_top3:  21%|██        | 5/24 [02:36<09:58, 31.51s/it]retrieval_adapt_shuffled_top3:  25%|██▌       | 6/24 [03:15<10:12, 34.02s/it]retrieval_adapt_shuffled_top3:  29%|██▉       | 7/24 [03:52<09:56, 35.10s/it]retrieval_adapt_shuffled_top3:  33%|███▎      | 8/24 [04:38<10:15, 38.44s/it]retrieval_adapt_shuffled_top3:  38%|███▊      | 9/24 [05:24<10:12, 40.84s/it]retrieval_adapt_shuffled_top3:  42%|████▏     | 10/24 [05:49<08:24, 36.01s/it]retrieval_adapt_shuffled_top3:  46%|████▌     | 11/24 [06:01<06:10, 28.52s/it]retrieval_adapt_shuffled_top3:  50%|█████     | 12/24 [06:09<04:28, 22.35s/it]retrieval_adapt_shuffled_top3:  54%|█████▍    | 13/24 [06:33<04:10, 22.75s/it]retrieval_adapt_shuffled_top3:  58%|█████▊    | 14/24 [06:56<03:49, 22.92s/it]retrieval_adapt_shuffled_top3:  62%|██████▎   | 15/24 [07:17<03:21, 22.42s/it]retrieval_adapt_shuffled_top3:  67%|██████▋   | 16/24 [08:04<03:58, 29.79s/it]retrieval_adapt_shuffled_top3:  71%|███████   | 17/24 [08:52<04:06, 35.17s/it]retrieval_adapt_shuffled_top3:  75%|███████▌  | 18/24 [09:22<03:21, 33.59s/it]retrieval_adapt_shuffled_top3:  79%|███████▉  | 19/24 [09:36<02:18, 27.69s/it]retrieval_adapt_shuffled_top3:  83%|████████▎ | 20/24 [09:57<01:43, 25.94s/it]retrieval_adapt_shuffled_top3:  88%|████████▊ | 21/24 [10:13<01:08, 22.97s/it]retrieval_adapt_shuffled_top3:  92%|█████████▏| 22/24 [10:23<00:37, 18.79s/it]retrieval_adapt_shuffled_top3:  96%|█████████▌| 23/24 [10:45<00:19, 19.95s/it]retrieval_adapt_shuffled_top3: 100%|██████████| 24/24 [11:11<00:00, 21.66s/it]retrieval_adapt_shuffled_top3: 100%|██████████| 24/24 [11:11<00:00, 27.97s/it]
+{
+  "arm_name": "retrieval_adapt_shuffled_top3",
+  "experiment": "qwen35_4b_retrieval_adapt_verify_scale",
+  "max_new_tokens": 260,
+  "path": "data/retrieval_adapt_shuffled_top3_records.jsonl",
+  "plan": "data/retrieval_plan.jsonl",
+  "records": {
+    "candidate_count_mean": 2.5833333333333335,
+    "coverage": 0.125,
+    "distinct_behavior_rate_mean": 0.9236111111111112,
+    "distinct_functional_rate_mean": 0.5833333333333334,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 22943,
+    "hidden_pass_candidates_mean": 0.125,
+    "parse_success_mean": 2.5416666666666665,
+    "pass1_proxy": 0.041666666666666664,
+    "records": 24,
+    "visible_candidates_mean": 0.8333333333333334,
+    "visible_coverage": 0.125,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "samples_per_retrieval": 1,
+  "seed": 20260626,
+  "temperature": 0.2,
+  "token_usage": {
+    "calls": 72,
+    "completion_tokens": 9407,
+    "forward_tokens": 26127,
+    "prompt_tokens": 16720
+  },
+  "top_k": 3,
+  "top_p": 0.95
+}

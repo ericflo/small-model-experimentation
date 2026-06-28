@@ -1,0 +1,152 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Large ABI Nested Compiler</title><style>body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1160px;margin:36px auto;line-height:1.5;color:#202124}table{border-collapse:collapse;width:100%;font-size:13px}td,th{border:1px solid #d4d7dc;padding:6px 8px;text-align:left}th{background:#f2f4f7}img{max-width:100%;border:1px solid #d4d7dc}figure{margin:24px 0}figcaption{color:#5f6368;font-size:13px}code{background:#f5f7fa;padding:1px 4px;border-radius:4px}</style></head><body><h1>Qwen Large ABI Nested Compiler</h1>
+
+<h2>Abstract</h2>
+
+<p>This standalone experiment tests whether a constrained stack-ABI compiler remains reliable when the primitive library grows from 32 to 128 unary operations and when tasks require nested branch sub-procedures. The model emits a program; a deterministic interpreter executes it.</p>
+
+<h2>Method</h2>
+
+<p>Four QLoRA adapters are trained over the same numeric stack ABI shape:</p>
+<ul>
+<li>`abi32_chain_d3`: 32 unary operations, chain tasks only, depths 1 to 3.</li>
+<li>`abi128_chain_d3`: 128 unary operations, chain tasks only, depths 1 to 3.</li>
+<li>`abi32_nested_d3`: 32 unary operations, chain depths 1 to 3 plus nested tasks with 2 to 3 branches.</li>
+<li>`abi128_nested_d3`: 128 unary operations, chain depths 1 to 3 plus nested tasks with 2 to 3 branches.</li>
+</ul>
+
+<p>Evaluation sweeps linear chains at depths 3, 8, and 16, plus nested branch tasks with 2, 3, 4, and 8 branches. Template-shifted endpoints test wording robustness. Each adapter is evaluated with free greedy decoding and finite-state constrained decoding. Gold ABI sanity arms check both ABI sizes.</p>
+
+<p>The primary criteria are constrained external execution accuracy on chain depth 16 and nested 8-branch tasks. Valid-program rate alone is not a success metric; the compiler must select the right operations and merge structure, not merely produce parseable syntax.</p>
+
+<h2>Run Configuration</h2>
+
+<ul>
+<li>Primary suite: `main`.</li>
+<li>Seeds: `101,202,303`.</li>
+<li>Evaluation rows: `270` metric rows, `1350` scored examples across curricula and decoder arms.</li>
+<li>QLoRA update steps per adapter: `24`.</li>
+<li>Large adapters are stored outside the experiment tree.</li>
+</ul>
+
+<h2>Primary Results</h2>
+
+<ul>
+<li>Constrained chain depth 3: 32-chain 100.0%; 128-chain 100.0%; 32-nested 100.0%; 128-nested 100.0%.</li>
+<li>Constrained chain depth 8: 32-chain 100.0%; 128-chain 100.0%; 32-nested 100.0%; 128-nested 100.0%.</li>
+<li>Constrained chain depth 16: 32-chain 100.0%; 128-chain 100.0%; 32-nested 100.0%; 128-nested 93.3%.</li>
+<li>Constrained nested 2 branches: 32-chain 53.3%; 128-chain 26.7%; 32-nested 100.0%; 128-nested 100.0%.</li>
+<li>Constrained nested 3 branches: 32-chain 13.3%; 128-chain 46.7%; 32-nested 100.0%; 128-nested 100.0%.</li>
+<li>Constrained nested 4 branches: 32-chain 26.7%; 128-chain 33.3%; 32-nested 100.0%; 128-nested 100.0%.</li>
+<li>Constrained nested 8 branches: 32-chain 6.7%; 128-chain 13.3%; 32-nested 73.3%; 128-nested 86.7%.</li>
+<li>Constrained template chain depth 16: 32-chain 46.7%; 128-chain 80.0%; 32-nested 33.3%; 128-nested 73.3%.</li>
+<li>Constrained template nested 8 branches: 32-chain 0.0%; 128-chain 0.0%; 32-nested 46.7%; 128-nested 40.0%.</li>
+<li>Gold ABI nested-8 sanity: 32-op 100.0% execution, 128-op 100.0% execution.</li>
+<li>At chain depth 16, 128-op chain beats 32-op chain on `0/3` matched seeds; mean per-seed delta 0.0%.</li>
+<li>On 128-op nested-8 tasks, nested curriculum beats chain-only on `3/3` matched seeds; mean per-seed delta 73.3%.</li>
+</ul>
+
+<table>
+<tr><th>train_target</th><th>arm</th><th>split</th><th>depth</th><th>runs</th><th>n_total</th><th>exec_accuracy_mean</th><th>exec_accuracy_std</th><th>valid_exec_rate_mean</th><th>correct_given_valid_mean</th><th>divergence_rate_mean</th><th>constrained_only_rate_mean</th><th>free_only_rate_mean</th><th>mean_attempts_mean</th></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_constrained</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>26.7%</td><td>26.7%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_free</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>73.3%</td><td>11.5%</td><td>73.3%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_constrained</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>93.3%</td><td>11.5%</td><td>100.0%</td><td>93.3%</td><td>26.7%</td><td>20.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_free</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>73.3%</td><td>11.5%</td><td>73.3%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_constrained</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>6.7%</td><td>6.7%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_free</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>93.3%</td><td>11.5%</td><td>93.3%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_constrained</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_free</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>oracle_abi128</td><td>gold_abi_constrained</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_abi32</td><td>gold_abi_constrained</td><td>eval_chain_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_constrained</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>20.0%</td><td>20.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_free</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>80.0%</td><td>34.6%</td><td>80.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_constrained</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_free</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_constrained</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_free</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_constrained</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_free</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>oracle_abi128</td><td>gold_abi_constrained</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_abi32</td><td>gold_abi_constrained</td><td>eval_chain_d8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_constrained</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>80.0%</td><td>20.0%</td><td>100.0%</td><td>80.0%</td><td>46.7%</td><td>26.7%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_free</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>53.3%</td><td>23.1%</td><td>53.3%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_constrained</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>73.3%</td><td>30.6%</td><td>100.0%</td><td>73.3%</td><td>66.7%</td><td>40.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_free</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>33.3%</td><td>23.1%</td><td>33.3%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_constrained</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>46.7%</td><td>46.2%</td><td>100.0%</td><td>46.7%</td><td>73.3%</td><td>20.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_free</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>26.7%</td><td>30.6%</td><td>40.0%</td><td>62.5%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_constrained</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>33.3%</td><td>23.1%</td><td>100.0%</td><td>33.3%</td><td>73.3%</td><td>20.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_free</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>13.3%</td><td>11.5%</td><td>46.7%</td><td>29.2%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>oracle_abi128</td><td>gold_abi_constrained</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_abi32</td><td>gold_abi_constrained</td><td>eval_chain_template_d16</td><td>16</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_constrained</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>33.3%</td><td>23.1%</td><td>100.0%</td><td>33.3%</td><td>100.0%</td><td>26.7%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_free</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>6.7%</td><td>11.5%</td><td>20.0%</td><td>25.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_constrained</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>26.7%</td><td>20.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_free</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>80.0%</td><td>20.0%</td><td>86.7%</td><td>91.7%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_constrained</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>26.7%</td><td>11.5%</td><td>100.0%</td><td>26.7%</td><td>100.0%</td><td>26.7%</td><td>6.7%</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_free</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>6.7%</td><td>11.5%</td><td>20.0%</td><td>33.3%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_constrained</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_free</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>oracle_abi128</td><td>gold_abi_constrained</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_abi32</td><td>gold_abi_constrained</td><td>eval_nested_l4</td><td>4</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_constrained</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>13.3%</td><td>11.5%</td><td>100.0%</td><td>13.3%</td><td>100.0%</td><td>13.3%</td><td>6.7%</td><td>1.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_free</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>6.7%</td><td>11.5%</td><td>6.7%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_constrained</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>86.7%</td><td>11.5%</td><td>100.0%</td><td>86.7%</td><td>66.7%</td><td>40.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_free</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>46.7%</td><td>23.1%</td><td>60.0%</td><td>75.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_constrained</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>6.7%</td><td>11.5%</td><td>100.0%</td><td>6.7%</td><td>100.0%</td><td>6.7%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_free</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>0.0%</td><td>0.0%</td><td>20.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_constrained</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>73.3%</td><td>30.6%</td><td>100.0%</td><td>73.3%</td><td>53.3%</td><td>33.3%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_free</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>40.0%</td><td>34.6%</td><td>66.7%</td><td>66.7%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>oracle_abi128</td><td>gold_abi_constrained</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_abi32</td><td>gold_abi_constrained</td><td>eval_nested_l8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_constrained</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>0.0%</td><td>0.0%</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_chain_d3</td><td>program_stack_free</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>0.0%</td><td>0.0%</td><td>26.7%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_constrained</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>40.0%</td><td>20.0%</td><td>100.0%</td><td>40.0%</td><td>86.7%</td><td>26.7%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi128_nested_d3</td><td>program_stack_free</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>13.3%</td><td>23.1%</td><td>13.3%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_constrained</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>0.0%</td><td>0.0%</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_chain_d3</td><td>program_stack_free</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>0.0%</td><td>0.0%</td><td>20.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_constrained</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>46.7%</td><td>50.3%</td><td>100.0%</td><td>46.7%</td><td>73.3%</td><td>26.7%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>abi32_nested_d3</td><td>program_stack_free</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>20.0%</td><td>34.6%</td><td>26.7%</td><td>50.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>oracle_abi128</td><td>gold_abi_constrained</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_abi32</td><td>gold_abi_constrained</td><td>eval_nested_template_l8</td><td>8</td><td>3</td><td>15</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+</table>
+
+<figure><img src="../analysis/figures/execution_by_depth.png" alt="Execution by depth"><figcaption>Execution by depth</figcaption></figure>
+
+<figure><img src="../analysis/figures/nested_by_branches.png" alt="Nested by branches"><figcaption>Nested by branches</figcaption></figure>
+
+<figure><img src="../analysis/figures/template_shift_by_depth.png" alt="Template shift by depth"><figcaption>Template shift by depth</figcaption></figure>
+
+<figure><img src="../analysis/figures/validity_vs_execution.png" alt="Validity versus execution"><figcaption>Validity versus execution</figcaption></figure>
+
+<figure><img src="../analysis/figures/decoder_divergence.png" alt="Decoder divergence"><figcaption>Decoder divergence</figcaption></figure>
+
+<figure><img src="../analysis/figures/failure_taxonomy.png" alt="Failure taxonomy"><figcaption>Failure taxonomy</figcaption></figure>
+
+<figure><img src="../analysis/figures/training_curves.png" alt="Training curves"><figcaption>Training curves</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>This experiment separates two questions that matter before scaling a real ABI: whether a larger operation catalog hurts linear chain compilation, and whether branch/sub-procedure structure requires explicit nested supervision.</p>
+<p>Operation-scale effect on chain depth 16: 128-op chain training changes execution by 0.0% relative to 32-op chain training.</p>
+<p>Nested-curriculum effect at 32 ops on nested-8 tasks: 66.7%.</p>
+<p>Nested-curriculum effect at 128 ops on nested-8 tasks: 73.3%.</p>
+<p>Template-shifted 128-op nested training reaches 73.3% on chain depth 16 but only 40.0% on nested-8, so wording robustness is not solved for nested branch tasks.</p>
+<p>The central positive result is that shallow nested supervision transfers beyond the trained branch counts: both nested curricula reach 100.0% at nested depth 4, and the 128-op nested curriculum reaches 86.7% at nested depth 8.</p>
+<p>The operation-catalog result is also positive but narrower: moving from 32 to 128 unary operations does not harm constrained linear-chain compilation, but it does not by itself teach nested structure.</p>
+<p>Because constrained decoding supplies only syntactic validity, any execution gain in constrained rows should be read as better operation or merge selection rather than better self-execution.</p>
+<p>For `abi128_chain_d3` constrained decoding on chain/nested endpoints, procedures break down as: correct_exact 46.7%, wrong_op_order_or_choice 43.3%, correct_semantic_variant 10.0%.</p>
+<p>For `abi128_nested_d3` constrained decoding on chain/nested endpoints, procedures break down as: correct_exact 86.7%, wrong_op_order_or_choice 10.0%, correct_semantic_variant 3.3%.</p>
+<p>For `abi32_chain_d3` constrained decoding on chain/nested endpoints, procedures break down as: correct_exact 53.3%, wrong_op_order_or_choice 46.7%.</p>
+<p>For `abi32_nested_d3` constrained decoding on chain/nested endpoints, procedures break down as: correct_exact 83.3%, wrong_op_order_or_choice 13.3%, correct_semantic_variant 3.3%.</p>
+
+<h2>Limitations</h2>
+
+<p>This experiment tests compilation over a known numeric primitive library. It does not test invention of operations outside the ABI. The finite-state decoder is tied to the task schema and uses task-visible constants plus known line kinds, so results measure operation and merge selection inside a valid grammar. Nested tasks are branch-merge programs, not arbitrary loops or recursion.</p>
+
+<h2>Artifacts</h2>
+
+<ul>
+<li>Metrics: `analysis/summary_by_arm.csv` and `analysis/all_metrics.csv`</li>
+<li>Details: `analysis/all_details.csv`</li>
+<li>Training logs: `analysis/all_train_logs.csv`</li>
+<li>Checkpoints: `/workspace/large_artifacts/qwen_large_abi_nested_compiler/checkpoints`</li>
+</ul></body></html>

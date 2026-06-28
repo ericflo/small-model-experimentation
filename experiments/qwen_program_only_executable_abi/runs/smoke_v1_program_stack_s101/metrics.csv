@@ -1,0 +1,4 @@
+run,suite,arm,seed,trained,split,n,primary_accuracy,final_accuracy,exec_accuracy,valid_final_rate,valid_exec_rate,no_final_rate,leak_string_rate,mean_new_tokens,acc_string,acc_unit,acc_table,acc_date
+smoke_v1_program_stack_s101,smoke,program_stack,101,1,eval_indist,8,0.125,0.0,0.125,0.125,0.25,0.875,0.25,56.0,0.0,0.5,0.0,0.0
+smoke_v1_program_stack_s101,smoke,program_stack,101,1,eval_composition,8,0.0,0.0,0.0,0.25,0.0,0.75,0.0,56.0,0.0,0.0,0.0,0.0
+smoke_v1_program_stack_s101,smoke,program_stack,101,1,eval_template_shift,8,0.125,0.0,0.125,0.0,0.125,1.0,0.0,56.0,0.0,0.5,0.0,0.0

@@ -1,0 +1,12 @@
+method,tasks,row_exact,full_task_exact,train_pass_rate,tasks_helped_vs_direct,tasks_hurt_vs_direct
+direct_row,5,0.8666666666666666,0.6,,0,0
+recursive_gated_direct,5,0.8666666666666666,0.6,0.4,0,0
+probe_gated_direct,5,0.8666666666666666,0.6,0.4,0,0
+random_probe_gated_direct,5,0.8666666666666666,0.6,0.2,0,0
+shuffled_probe_gated_direct,5,0.8666666666666666,0.6,0.0,0,0
+direct_batch,5,0.7333333333333333,0.4,,0,1
+monolithic_program,5,0.4,0.2,0.8,0,2
+recursive_program,5,0.4,0.2,0.8,0,2
+probe_program,5,0.4,0.2,0.8,0,2
+recursive_oracle,5,0.4,0.2,0.8,0,2
+recursive_shuffled,5,0.06666666666666667,0.0,0.6,0,3

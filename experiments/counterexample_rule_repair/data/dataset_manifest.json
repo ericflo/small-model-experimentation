@@ -1,0 +1,33 @@
+{
+  "dataset": "counterexample_rule_repair",
+  "invariants": [
+    "wrong-patched implementation fails visible counterexamples",
+    "target corrective diff applies to the wrong-patched implementation",
+    "target implementation passes visible and hidden tests",
+    "hidden test inputs do not overlap visible trace inputs",
+    "visible expected outputs appear in the failed execution trace"
+  ],
+  "paths": {
+    "all": "experiments/counterexample_rule_repair/data/repair_all.jsonl",
+    "train": "experiments/counterexample_rule_repair/data/repair_train.jsonl",
+    "val_format_holdout": "experiments/counterexample_rule_repair/data/repair_val_format_holdout.jsonl",
+    "val_iid": "experiments/counterexample_rule_repair/data/repair_val_iid.jsonl",
+    "val_rule_holdout": "experiments/counterexample_rule_repair/data/repair_val_rule_holdout.jsonl"
+  },
+  "records": {
+    "all": 375,
+    "train": 240,
+    "val_format_holdout": 45,
+    "val_iid": 45,
+    "val_rule_holdout": 45
+  },
+  "rule_holdout_families": [
+    "parity_offset_holdout"
+  ],
+  "seed": 20260620,
+  "train_families": [
+    "affine_int",
+    "slug_affix",
+    "threshold_label"
+  ]
+}

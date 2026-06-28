@@ -1,0 +1,182 @@
+{
+  "seed": 101,
+  "train_n": 24,
+  "eval_sizes": {
+    "eval_indist": 8,
+    "eval_composition": 8,
+    "eval_template_shift": 8
+  },
+  "train_sample": [
+    {
+      "example_id": "train_table_2",
+      "split": "train",
+      "family": "table",
+      "prompt": "Using delta=10, alpha=8, beta=7, gamma=4, compute value(gamma) * 6 + 6.",
+      "answer": "30",
+      "op_name": "lookup_mul_add",
+      "payload": {
+        "table": {
+          "delta": 10,
+          "alpha": 8,
+          "beta": 7,
+          "gamma": 4
+        },
+        "key": "gamma",
+        "scale": 6,
+        "bias": 6
+      }
+    },
+    {
+      "example_id": "train_string_16",
+      "split": "train",
+      "family": "string",
+      "prompt": "Delete hyphens from SL-3142-AA, then report the one-indexed span 5-8.",
+      "answer": "42AA",
+      "op_name": "slice",
+      "payload": {
+        "code": "SL-3142-AA",
+        "clean": "SL3142AA",
+        "start": 4,
+        "end": 8
+      }
+    },
+    {
+      "example_id": "train_unit_5",
+      "split": "train",
+      "family": "unit",
+      "prompt": "Convert 14 minutes to seconds. Return the integer result.",
+      "answer": "840",
+      "op_name": "minutes_to_seconds",
+      "payload": {
+        "amount": 14,
+        "src": "minutes",
+        "dst": "seconds",
+        "factor": 60
+      }
+    },
+    {
+      "example_id": "train_unit_21",
+      "split": "train",
+      "family": "unit",
+      "prompt": "How many grams are equal to 2 kilograms?",
+      "answer": "2000",
+      "op_name": "kilograms_to_grams",
+      "payload": {
+        "amount": 2,
+        "src": "kilograms",
+        "dst": "grams",
+        "factor": 1000
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_table_2",
+        "split": "eval_indist",
+        "family": "table",
+        "prompt": "Using beta=28, alpha=2, gamma=14, delta=10, compute value(gamma) * 7 + 9.",
+        "answer": "107",
+        "op_name": "lookup_mul_add",
+        "payload": {
+          "table": {
+            "beta": 28,
+            "alpha": 2,
+            "gamma": 14,
+            "delta": 10
+          },
+          "key": "gamma",
+          "scale": 7,
+          "bias": 9
+        }
+      },
+      {
+        "example_id": "eval_indist_table_6",
+        "split": "eval_indist",
+        "family": "table",
+        "prompt": "Using alpha=19, beta=24, gamma=5, delta=7, compute value(gamma) + 4.",
+        "answer": "9",
+        "op_name": "lookup_add",
+        "payload": {
+          "table": {
+            "alpha": 19,
+            "beta": 24,
+            "gamma": 5,
+            "delta": 7
+          },
+          "key": "gamma",
+          "bias": 4
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_date_7",
+        "split": "eval_composition",
+        "family": "date",
+        "prompt": "Starting from 2026-07-11, add 2 weeks and 6 days. Return the ISO date.",
+        "answer": "2026-07-31",
+        "op_name": "weeks_plus_days",
+        "payload": {
+          "date": "2026-07-11",
+          "weeks": 2,
+          "days": 6,
+          "delta_days": 20
+        }
+      },
+      {
+        "example_id": "eval_composition_table_2",
+        "split": "eval_composition",
+        "family": "table",
+        "prompt": "Using gamma=10, alpha=25, beta=8, delta=12, compute value(beta) + value(alpha) + 4.",
+        "answer": "37",
+        "op_name": "sum_two_keys_plus",
+        "payload": {
+          "table": {
+            "gamma": 10,
+            "alpha": 25,
+            "beta": 8,
+            "delta": 12
+          },
+          "k1": "beta",
+          "k2": "alpha",
+          "bias": 4
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_unit_5",
+        "split": "eval_template_shift",
+        "family": "unit",
+        "prompt": "Rewrite 13 minutes using seconds as the unit. Give only the integer value.",
+        "answer": "780",
+        "op_name": "minutes_to_seconds",
+        "payload": {
+          "amount": 13,
+          "src": "minutes",
+          "dst": "seconds",
+          "factor": 60
+        }
+      },
+      {
+        "example_id": "eval_template_shift_table_6",
+        "split": "eval_template_shift",
+        "family": "table",
+        "prompt": "From lookup entries [alpha=15, beta=27, delta=5, gamma=28], increase beta by 2.",
+        "answer": "29",
+        "op_name": "lookup_add",
+        "payload": {
+          "table": {
+            "alpha": 15,
+            "beta": 27,
+            "delta": 5,
+            "gamma": 28
+          },
+          "key": "beta",
+          "bias": 2
+        }
+      }
+    ]
+  }
+}

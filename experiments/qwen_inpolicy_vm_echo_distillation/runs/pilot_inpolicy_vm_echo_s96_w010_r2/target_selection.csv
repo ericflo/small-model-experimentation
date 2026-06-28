@@ -1,0 +1,5 @@
+phase,round,source_examples,targets,oracle_found_rate,selected_correct_rate,selected_valid_rate,changed_rate,candidate_valid_rate
+answer_verified_targets,1,256,85,0.33203125,1.0,1.0,0.7058823529411765,0.594268798828125
+answer_verified_targets,2,256,88,0.34375,1.0,1.0,0.6704545454545454,0.64141845703125
+echo_repair_targets,1,256,85,0.33203125,1.0,1.0,0.7058823529411765,0.594268798828125
+echo_repair_targets,2,256,87,0.33984375,1.0,1.0,0.6206896551724138,0.64031982421875

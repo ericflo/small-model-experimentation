@@ -1,0 +1,4 @@
+suite,run,arm,seed,step,loss
+smoke,smoke_v1_answer_only_s101,answer_only,101,1,4.7589311599731445
+smoke,smoke_v1_program_stack_s101,program_stack,101,1,2.206474542617798
+smoke,smoke_v1_parse_emit_s101,parse_emit,101,1,1.2408698797225952

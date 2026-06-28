@@ -1,0 +1,19 @@
+run,checkpoint,split,k,k_num,accuracy,n,ci_low,ci_high
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,val,0,0,0.208,250,0.1622930646183891,0.26254510217539095
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,val,1,1,0.192,250,0.14798339072642153,0.2453390591793465
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,val,2,2,0.184,250,0.14087481495903226,0.2366897765027297
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,val,4,4,0.192,250,0.14798339072642153,0.2453390591793465
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,val,8,8,0.2,250,0.15512326880286578,0.25395703954690824
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,hard,0,0,0.26,250,0.20954936702346566,0.31771487965635353
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,hard,1,1,0.24,250,0.19124802403494187,0.2966215765348623
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,hard,2,2,0.236,250,0.1876058720228644,0.2923847993249367
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,hard,4,4,0.236,250,0.1876058720228644,0.2923847993249367
+Full step 200 retest,runs/main_qwen35_hook_full_seed7/latent_adapter_step200.pt,hard,8,8,0.244,250,0.19489634565082414,0.300852184140983
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,val,0,0,0.176,250,0.13379907724930237,0.22800765576845358
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,val,2,2,0.152,250,0.11278704166232252,0.20174611602341536
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,val,4,4,0.168,250,0.12675788778063776,0.21929098679311218
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,val,8,8,0.156,250,0.11626512943648533,0.20614695747125555
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,hard,0,0,0.212,250,0.16588878550725972,0.26682831050852335
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,hard,2,2,0.228,250,0.1803405041462213,0.2838923087575739
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,hard,4,4,0.204,250,0.158704508175768,0.25825472939600896
+Aux final retest,runs/main_qwen35_hook_aux02_seed7/latent_adapter.pt,hard,8,8,0.228,250,0.1803405041462213,0.2838923087575739

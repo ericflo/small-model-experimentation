@@ -1,0 +1,8 @@
+method,tasks,row_exact,full_task_exact,median_candidates,median_probe_agreement
+direct_row_by_row,40,0.7208333333333333,0.5,0.0,0.0
+qwen_projection_gated_direct,40,0.7145833333333333,0.5,0.0,0.0
+output_majority,40,0.7145833333333333,0.475,0.0,0.0
+qwen_projection,40,0.2125,0.2,0.0,0.0
+qwen_projection_random,40,0.2125,0.2,0.0,0.0
+qwen_projection_shuffled,40,0.2125,0.2,0.0,0.0
+train_only,40,0.2125,0.2,0.0,0.0

@@ -1,0 +1,3 @@
+split,source_examples,prefix_samples,positive_samples,negative_samples,positive_rate
+train,512,31574,2902,28672,0.09191106606701717
+val,128,7900,732,7168,0.09265822784810127

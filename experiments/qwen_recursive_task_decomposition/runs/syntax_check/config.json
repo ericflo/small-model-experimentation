@@ -1,0 +1,19 @@
+{
+  "started_utc": "2026-06-27T05:36:54.207461+00:00",
+  "suite": "syntax_check",
+  "task_limit": 3,
+  "train_n": 4,
+  "heldout_cap": 3,
+  "max_candidates": 1000,
+  "recursive_depth": 1,
+  "child_limit": 2,
+  "run_qwen": false,
+  "qwen_task_limit": 12,
+  "qwen_heldout_cap": 6,
+  "qwen_min_heldout": 3,
+  "sample_seed": 20260627,
+  "rule_max_new_tokens": 180,
+  "answer_max_new_tokens": 64,
+  "rule_styles": "decompose",
+  "train_verify_rules": false
+}

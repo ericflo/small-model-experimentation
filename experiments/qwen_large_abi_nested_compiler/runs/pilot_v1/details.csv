@@ -1,0 +1,10189 @@
+suite,run,train_target,arm,seed,trained,split,family,depth,example_id,answer,generated,program_text,target,exec_value,exec_error,primary_correct,exec_correct,final_correct,valid_exec,exact_program,parse_exact,has_final,attempts_used,diverged_from_free,free_exec_correct,failure_type,gold_ops,generated_ops
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_0,0,"PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03
+",0,,1,1,0,1,1,0,0,1,0,0,correct_exact,MOD_07 DIV_06 DIV_03,PUSH MOD_07 DIV_06 DIV_03
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_1,29,"PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01
+",29,,1,1,0,1,1,0,0,1,0,0,correct_exact,MUL_05 DIV_06 SUB_01,PUSH MUL_05 DIV_06 SUB_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_2,0,"PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05
+",0,,1,1,0,1,1,0,0,1,0,0,correct_exact,NEG MOD_09 DIV_05,PUSH NEG MOD_09 DIV_05
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_0,0,"PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03
+",0,,1,1,0,1,1,0,0,1,0,1,correct_exact,MOD_07 DIV_06 DIV_03,PUSH MOD_07 DIV_06 DIV_03
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_1,29,"PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01
+",29,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL_05 DIV_06 SUB_01,PUSH MUL_05 DIV_06 SUB_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_2,0,"PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05
+",0,,1,1,0,1,1,0,0,1,0,1,correct_exact,NEG MOD_09 DIV_05,PUSH NEG MOD_09 DIV_05
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_2,109,"PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+ADD_01","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+ADD_01","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC
+",109,,1,1,0,1,0,0,0,1,0,0,correct_semantic_variant,MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE INC,PUSH MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE ADD_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_1,12,"PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MULT_06
+ABS
+MOD_09
+MULT_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MULT_06
+ABS
+MOD_09
+MULT_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02
+",,unknown_op:MULT_06,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02,PUSH ADD_04 SUB_02 TRIPLE SUB_05 MULT_06 ABS MOD_09 MULT_02
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_0,9,"PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC_01","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC_01","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC
+",,unknown_op:INC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC,PUSH NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_2,109,"PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+ADD_01","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+ADD_01","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC
+",109,,1,1,0,1,0,0,0,1,0,1,correct_semantic_variant,MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE INC,PUSH MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE ADD_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_1,12,"PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02
+",12,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02,PUSH ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_0,9,"PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC
+",9,,1,1,0,1,1,0,0,1,1,0,correct_exact,NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC,PUSH NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_0,5,"PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC_01
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC_01
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS
+",,unknown_op:INC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS,PUSH TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC_01 ADD_06 ABS
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_1,2,"PUSH 8
+SUB_05
+MUL_05
+INC_01
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DUP
+SUB_06
+ADD_06
+INC_01
+SUB_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC_01
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DUP
+SUB_06
+ADD_06
+INC_01
+SUB_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DOUBLE
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02
+",,unknown_op:INC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DOUBLE SUB_06 ADD_06 INC SUB_02 MUL_02,PUSH SUB_05 MUL_05 INC_01 MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DUP SUB_06 ADD_06 INC_01 SUB_02 MUL_02
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_2,9,"PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05
+",9,,1,1,0,1,1,0,0,1,0,0,correct_exact,TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05,PUSH TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_0,5,"PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS
+",5,,1,1,0,1,1,0,0,1,1,0,correct_exact,TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS,PUSH TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_1,2,"PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+MUL_02
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+MUL_02
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DOUBLE
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02
+",2,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DOUBLE SUB_06 ADD_06 INC SUB_02 MUL_02,PUSH SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 MUL_02 SUB_06 ADD_06 INC SUB_02 MUL_02
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_2,9,"PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05
+",9,,1,1,0,1,1,0,0,1,0,1,correct_exact,TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05,PUSH TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_0,2,"PUSH 6
+DECREASE_01
+DECREASE_05
+DIVIDE_06
+DECREASE_01
+FLIP_SIGN
+INCREASE_01
+MOD_07
+SCALE_04
+DROP_SIGN
+DECREASE_04
+DECREASE_06
+INCREASE_02
+DROP_SIGN
+INCREASE_02
+SCALE_03
+DECREASE_04","PUSH 6
+DECREASE_01
+DECREASE_05
+DIVIDE_06
+DECREASE_01
+FLIP_SIGN
+INCREASE_01
+MOD_07
+SCALE_04
+DROP_SIGN
+DECREASE_04
+DECREASE_06
+INCREASE_02
+DROP_SIGN
+INCREASE_02
+SCALE_03
+DECREASE_04","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04
+",,unknown_op:DECREASE_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_01 SUB_05 DIV_06 SUB_01 NEG INC MOD_07 MUL_04 ABS SUB_04 SUB_06 ADD_02 ABS ADD_02 MUL_03 SUB_04,PUSH DECREASE_01 DECREASE_05 DIVIDE_06 DECREASE_01 FLIP_SIGN INCREASE_01 MOD_07 SCALE_04 DROP_SIGN DECREASE_04 DECREASE_06 INCREASE_02 DROP_SIGN INCREASE_02 SCALE_03 DECREASE_04
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_2,563,"PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03
+",563,,1,1,0,1,1,0,0,1,0,0,correct_exact,DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03,PUSH DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_1,-27,"PUSH 36
+DOUBLE
+NEGATE
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEGATE
+DIV_06
+SCALE_04
+DIV_06
+SUB_03
+TRIPLE
+TRIPLE","PUSH 36
+DOUBLE
+NEGATE
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEGATE
+DIV_06
+SCALE_04
+DIV_06
+SUB_03
+TRIPLE
+TRIPLE","PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+",,unknown_op:NEGATE,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,DOUBLE NEG ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03,PUSH DOUBLE NEGATE ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEGATE DIV_06 SCALE_04 DIV_06 SUB_03 TRIPLE TRIPLE
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_0,2,"PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+ADD_01
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+ADD_01
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04
+",2,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,SUB_01 SUB_05 DIV_06 SUB_01 NEG INC MOD_07 MUL_04 ABS SUB_04 SUB_06 ADD_02 ABS ADD_02 MUL_03 SUB_04,PUSH SUB_01 SUB_05 DIV_06 SUB_01 NEG ADD_01 MOD_07 MUL_04 ABS SUB_04 SUB_06 ADD_02 ABS ADD_02 MUL_03 SUB_04
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_2,563,"PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03
+",563,,1,1,0,1,1,0,0,1,0,1,correct_exact,DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03,PUSH DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_1,-27,"PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+TRIPLE
+TRIPLE","PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+TRIPLE
+TRIPLE","PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+",-27,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,DOUBLE NEG ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03,PUSH DOUBLE NEG ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEG DIV_06 MUL_04 DIV_06 SUB_03 TRIPLE TRIPLE
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_0,51,"PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+SUB_01","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+SUB_01","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BSUB
+",26,,0,0,0,1,0,0,0,1,0,0,wrong_op_order_or_choice,MUL_02 ADD_06 BSUB,PUSH MUL_02 PUSH ADD_06 SUB_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_2,-14,"PUSH 24
+SUB_06
+MIN
+PUSH -28
+DIV_02
+ 
+
+Wait, but the task says to start with branch A as the running result and take the min with branch B. So the correct order should be: first compute branch A, then compute branch B, then take the min of the two. But the user's example output shows the order as PUSH 24, SUB_06, MIN, PUSH -28, DIV_02. That would be incorrect because the MIN is applied before branch B is computed. Let me re-express the task.
+
+The correct order should be: compute branch A, then compute branch B, then take the min of the two. So the correct stack instructions would be:
+
+PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+MIN
+ 
+
+But the user's example output shows the MIN before branch B is computed. That seems to be a mistake. Let me re-express the task again.
+
+The task is to compute branch A and branch B, then take the min of the two. So the correct order is:
+
+Compute branch A: PUSH 24, SUB_06
+
+Compute branch B: PUSH -28, DIV_02
+
+Then take the min of the two results.
+
+But how to represent that in the stack instructions? The MIN instruction would take the two values from the stack and compute the min. So the correct order is:
+
+PUSH 24
+SUB_06","PUSH 24
+SUB_06
+MIN
+PUSH -28
+DIV_02
+ 
+
+Wait, but the task says to start with branch A as the running result and take the min with branch B. So the correct order should be: first compute branch A, then compute branch B, then take the min of the two. But the user's example output shows the order as PUSH 24, SUB_06, MIN, PUSH -28, DIV_02. That would be incorrect because the MIN is applied before branch B is computed. Let me re-express the task.
+
+The correct order should be: compute branch A, then compute branch B, then take the min of the two. So the correct stack instructions would be:
+
+PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+MIN
+ 
+
+But the user's example output shows the MIN before branch B is computed. That seems to be a mistake. Let me re-express the task again.
+
+The task is to compute branch A and branch B, then take the min of the two. So the correct order is:
+
+Compute branch A: PUSH 24, SUB_06
+
+Compute branch B: PUSH -28, DIV_02
+
+Then take the min of the two results.
+
+But how to represent that in the stack instructions? The MIN instruction would take the two values from the stack and compute the min. So the correct order is:
+
+PUSH 24
+SUB_06","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN
+",,unknown_op:MIN,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_06 DIV_02 BMIN,"PUSH SUB_06 MIN PUSH DIV_02 WAIT, THE PUSH SUB_06 PUSH DIV_02 MIN BUT THE COMPUTE COMPUTE THEN BUT PUSH SUB_06"
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_1,-59,"PUSH 9
+ADD_04
+PUSH_59
+NEGATE
+MIN","PUSH 9
+ADD_04
+PUSH_59
+NEGATE
+MIN","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+",,unknown_op:PUSH_59,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_04 NEG BMIN,PUSH ADD_04 PUSH_59 NEGATE MIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_0,51,"PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BMIN","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BMIN","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BSUB
+",27,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MUL_02 ADD_06 BSUB,PUSH MUL_02 PUSH ADD_06 BMIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_2,-14,"PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN
+",-14,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB_06 DIV_02 BMIN,PUSH SUB_06 PUSH DIV_02 BMIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_1,-59,"PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+",-59,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD_04 NEG BMIN,PUSH ADD_04 PUSH NEG BMIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_1,1296,"PUSH 16
+ADD_01
+PUSH 11
+INC_01
+MIN
+PUSH 0
+ADD_02
+PUSH 52
+ADD_02
+MUL
+MUL","PUSH 16
+ADD_01
+PUSH 11
+INC_01
+MIN
+PUSH 0
+ADD_02
+PUSH 52
+ADD_02
+MUL
+MUL","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMUL
+PUSH 52
+ADD_02
+BMUL
+",,unknown_op:INC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_01 INC ADD_02 ADD_02 BMIN BMUL BMUL,PUSH ADD_01 PUSH INC_01 MIN PUSH ADD_02 PUSH ADD_02 MUL MUL
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_2,42,"PUSH 25
+ADD_05
+MIN_B
+PUSH_33
+NEGATE
+MAX_C
+PUSH_-07
+INCREMENT_01
+SUBTRACT_D","PUSH 25
+ADD_05
+MIN_B
+PUSH_33
+NEGATE
+MAX_C
+PUSH_-07
+INCREMENT_01
+SUBTRACT_D","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BSUB
+",,unknown_op:MIN_B,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_05 NEG INC MUL_06 BMIN BMAX BSUB,PUSH ADD_05 MIN_B PUSH_33 NEGATE MAX_C PUSH_-07 INCREMENT_01 SUBTRACT_D
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_0,-42,"PUSH -29
+NEGATE
+PUSH -11
+MULTIPLY_02
+PUSH 6
+DOUBLE
+PUSH 44
+ADD_05
+MIN
+SUB","PUSH -29
+NEGATE
+PUSH -11
+MULTIPLY_02
+PUSH 6
+DOUBLE
+PUSH 44
+ADD_05
+MIN
+SUB","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BADD
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BSUB
+",,unknown_op:NEGATE,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,NEG MUL_02 DOUBLE ADD_05 BADD BMIN BSUB,PUSH NEGATE PUSH MULTIPLY_02 PUSH DOUBLE PUSH ADD_05 MIN SUB
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_1,1296,"PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMAX
+PUSH 52
+ADD_02
+BMAX","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMAX
+PUSH 52
+ADD_02
+BMAX","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMUL
+PUSH 52
+ADD_02
+BMUL
+",54,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_01 INC ADD_02 ADD_02 BMIN BMUL BMUL,PUSH ADD_01 PUSH INC BMIN PUSH ADD_02 BMAX PUSH ADD_02 BMAX
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_2,42,"PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BMIN","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BMIN","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BSUB
+",-48,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_05 NEG INC MUL_06 BMIN BMAX BSUB,PUSH ADD_05 PUSH NEG BMIN PUSH INC BMAX PUSH MUL_06 BMIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_0,-42,"PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BMIN","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BMIN","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BADD
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BSUB
+",-22,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,NEG MUL_02 DOUBLE ADD_05 BADD BMIN BSUB,PUSH NEG PUSH MUL_02 BMIN PUSH DOUBLE BMIN PUSH ADD_05 BMIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_1,-6,"PUSH 58
+ADD_01
+MAX_01
+MIN_01
+ADD_01
+SUB_01
+ADD_01
+DIV_03
+MAX_01
+MIN_01","PUSH 58
+ADD_01
+MAX_01
+MIN_01
+ADD_01
+SUB_01
+ADD_01
+DIV_03
+MAX_01
+MIN_01","PUSH 58
+INC
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BSUB
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN
+",,unknown_op:MAX_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,INC ADD_05 SUB_05 SUB_03 SUB_03 DIV_03 MOD_10 DIV_04 BMAX BMIN BADD BSUB BADD BMAX BMIN,PUSH ADD_01 MAX_01 MIN_01 ADD_01 SUB_01 ADD_01 DIV_03 MAX_01 MIN_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_0,-34,"PUSH 6
+ADD_02
+MUL_0B
+SUB_0C
+ADD_0D
+MIN_0E
+MAX_0F
+SUB_0G
+MIN_0H","PUSH 6
+ADD_02
+MUL_0B
+SUB_0C
+ADD_0D
+MIN_0E
+MAX_0F
+SUB_0G
+MIN_0H","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMUL
+PUSH 17
+MOD_10
+BSUB
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BSUB
+PUSH -18
+DIV_05
+BMIN
+",,unknown_op:MUL_0B,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_02 MOD_13 MOD_10 MUL_03 ADD_02 DIV_05 ADD_02 DIV_05 BMUL BSUB BADD BMIN BMAX BSUB BMIN,PUSH ADD_02 MUL_0B SUB_0C ADD_0D MIN_0E MAX_0F SUB_0G MIN_0H
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_2,-8202600,"PUSH -21
+MOD_13
+ADD_60
+TRIPLE
+MIN
+SUB_04
+MUL_06
+DIV_04
+ADD_01
+ADD_05
+ 
+
+Wait, that's not right. Let me check again. The task is to compute branch sub-results and merge them. The branches are defined as follows:
+
+Branch A: start -21, then modulo 13
+Branch B: start 60, then triple the value
+Branch C: start 24, then add 4
+Branch D: start -14, then floor-divide by 5
+Branch E: start 10, then multiply by 6
+Branch F: start -8, then floor-divide by 4
+Branch G: start 34, then add 1
+Branch H: start 58, then add 5
+
+The steps are:
+Start with branch A as the running result
+Add branch B
+Take the min with branch C
+Subtract branch D
+Multiply by branch E
+Multiply by branch F
+Multiply by branch G
+Multiply by branch H
+
+So the correct sequence of instructions should be:
+
+PUSH -21
+MOD_13
+ADD_60
+TRIPLE
+MIN
+SUB_04
+MUL_06
+DIV_04
+ADD_01
+ADD_05
+ 
+
+But I think I made a mistake in the order of operations. Let me re-express the steps properly.
+
+The initial","PUSH -21
+MOD_13
+ADD_60
+TRIPLE
+MIN
+SUB_04
+MUL_06
+DIV_04
+ADD_01
+ADD_05
+ 
+
+Wait, that's not right. Let me check again. The task is to compute branch sub-results and merge them. The branches are defined as follows:
+
+Branch A: start -21, then modulo 13
+Branch B: start 60, then triple the value
+Branch C: start 24, then add 4
+Branch D: start -14, then floor-divide by 5
+Branch E: start 10, then multiply by 6
+Branch F: start -8, then floor-divide by 4
+Branch G: start 34, then add 1
+Branch H: start 58, then add 5
+
+The steps are:
+Start with branch A as the running result
+Add branch B
+Take the min with branch C
+Subtract branch D
+Multiply by branch E
+Multiply by branch F
+Multiply by branch G
+Multiply by branch H
+
+So the correct sequence of instructions should be:
+
+PUSH -21
+MOD_13
+ADD_60
+TRIPLE
+MIN
+SUB_04
+MUL_06
+DIV_04
+ADD_01
+ADD_05
+ 
+
+But I think I made a mistake in the order of operations. Let me re-express the steps properly.
+
+The initial","PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BADD
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMUL
+PUSH -8
+DIV_04
+BMUL
+PUSH 34
+ADD_01
+BMUL
+PUSH 58
+ADD_05
+BMUL
+",,unknown_op:ADD_60,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MOD_13 TRIPLE ADD_04 DIV_05 MUL_06 DIV_04 ADD_01 ADD_05 BADD BMIN BSUB BMUL BMUL BMUL BMUL,"PUSH MOD_13 ADD_60 TRIPLE MIN SUB_04 MUL_06 DIV_04 ADD_01 ADD_05 WAIT, BRANCH BRANCH BRANCH BRANCH BRANCH BRANCH BRANCH BRANCH THE START ADD TAKE SUBTRACT MULTIPLY MULTIPLY MULTIPLY MULTIPLY SO PUSH MOD_13 ADD_60 TRIPLE MIN SUB_04 MUL_06 DIV_04 ADD_01 ADD_05 BUT THE"
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_1,-6,"PUSH 58
+ADD_01
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BMIN
+PUSH 27
+DIV_03
+BMAX
+PUSH 49
+MOD_10
+BMIN
+PUSH -22
+DIV_04
+BMAX","PUSH 58
+ADD_01
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BMIN
+PUSH 27
+DIV_03
+BMAX
+PUSH 49
+MOD_10
+BMIN
+PUSH -22
+DIV_04
+BMAX","PUSH 58
+INC
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BSUB
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN
+",9,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,INC ADD_05 SUB_05 SUB_03 SUB_03 DIV_03 MOD_10 DIV_04 BMAX BMIN BADD BSUB BADD BMAX BMIN,PUSH ADD_01 PUSH ADD_05 BMAX PUSH SUB_05 BMIN PUSH SUB_03 BADD PUSH SUB_03 BMIN PUSH DIV_03 BMAX PUSH MOD_10 BMIN PUSH DIV_04 BMAX
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_0,-34,"PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BADD
+PUSH 17
+MOD_10
+BADD
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BMIN
+PUSH -18
+DIV_05
+BMAX","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BADD
+PUSH 17
+MOD_10
+BADD
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BMIN
+PUSH -18
+DIV_05
+BMAX","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMUL
+PUSH 17
+MOD_10
+BSUB
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BSUB
+PUSH -18
+DIV_05
+BMIN
+",-4,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_02 MOD_13 MOD_10 MUL_03 ADD_02 DIV_05 ADD_02 DIV_05 BMUL BSUB BADD BMIN BMAX BSUB BMIN,PUSH ADD_02 PUSH MOD_13 BADD PUSH MOD_10 BADD PUSH MUL_03 BADD PUSH ADD_02 BMIN PUSH DIV_05 BMAX PUSH ADD_02 BMIN PUSH DIV_05 BMAX
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_2,-8202600,"PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BMIN
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BMIN
+PUSH 10
+MUL_06
+BMIN
+PUSH -8
+DIV_04
+BMIN
+PUSH 34
+ADD_01
+BMIN
+PUSH 58
+ADD_05
+BMIN","PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BMIN
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BMIN
+PUSH 10
+MUL_06
+BMIN
+PUSH -8
+DIV_04
+BMIN
+PUSH 34
+ADD_01
+BMIN
+PUSH 58
+ADD_05
+BMIN","PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BADD
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMUL
+PUSH -8
+DIV_04
+BMUL
+PUSH 34
+ADD_01
+BMUL
+PUSH 58
+ADD_05
+BMUL
+",-3,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MOD_13 TRIPLE ADD_04 DIV_05 MUL_06 DIV_04 ADD_01 ADD_05 BADD BMIN BSUB BMUL BMUL BMUL BMUL,PUSH MOD_13 PUSH TRIPLE BMIN PUSH ADD_04 BMIN PUSH DIV_05 BMIN PUSH MUL_06 BMIN PUSH DIV_04 BMIN PUSH ADD_01 BMIN PUSH ADD_05 BMIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_0,102,"PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+PUSH -19
+DIV_04
+PUSH -12
+ADD_02
+PUSH -17
+ADD_06
+PUSH -30
+ADD_05
+PUSH 58
+MUL_06
+PUSH 34
+MUL_03
+MULT_01
+MULT_02
+SUB_03
+SUB_04
+MUL_05
+MAX_01
+MIN_01","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+PUSH -19
+DIV_04
+PUSH -12
+ADD_02
+PUSH -17
+ADD_06
+PUSH -30
+ADD_05
+PUSH 58
+MUL_06
+PUSH 34
+MUL_03
+MULT_01
+MULT_02
+SUB_03
+SUB_04
+MUL_05
+MAX_01
+MIN_01","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BMUL
+PUSH -19
+DIV_04
+BMUL
+PUSH -12
+ADD_02
+BSUB
+PUSH -17
+ADD_06
+BSUB
+PUSH -30
+ADD_05
+BMUL
+PUSH 58
+MUL_06
+BMAX
+PUSH 34
+TRIPLE
+BMIN
+",,unknown_op:MULT_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_02 SUB_04 DIV_04 ADD_02 ADD_06 ADD_05 MUL_06 TRIPLE BMUL BMUL BSUB BSUB BMUL BMAX BMIN,PUSH ADD_02 PUSH SUB_04 PUSH DIV_04 PUSH ADD_02 PUSH ADD_06 PUSH ADD_05 PUSH MUL_06 PUSH MUL_03 MULT_01 MULT_02 SUB_03 SUB_04 MUL_05 MAX_01 MIN_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_1,7,"PUSH -14
+DECREASE_03
+PUSH 23
+SCALE_06
+PUSH 17
+SCALE_02
+PUSH 37
+SCALE_02
+PUSH 26
+DECREASE_01
+PUSH 32
+SCALE_05
+PUSH 28
+DIVIDE_04
+PUSH 31
+DIVIDE_04
+SUBTRACT_01
+ADD_01
+MULTIPLY_01
+SUBTRACT_01
+MULTIPLY_01
+COMPARE_01
+COMPARE_01","PUSH -14
+DECREASE_03
+PUSH 23
+SCALE_06
+PUSH 17
+SCALE_02
+PUSH 37
+SCALE_02
+PUSH 26
+DECREASE_01
+PUSH 32
+SCALE_05
+PUSH 28
+DIVIDE_04
+PUSH 31
+DIVIDE_04
+SUBTRACT_01
+ADD_01
+MULTIPLY_01
+SUBTRACT_01
+MULTIPLY_01
+COMPARE_01
+COMPARE_01","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BSUB
+PUSH 17
+MUL_02
+BADD
+PUSH 37
+MUL_02
+BMUL
+PUSH 26
+SUB_01
+BSUB
+PUSH 32
+MUL_05
+BMUL
+PUSH 28
+DIV_04
+BMAX
+PUSH 31
+DIV_04
+BMAX
+",,unknown_op:DECREASE_03,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_03 MUL_06 MUL_02 MUL_02 SUB_01 MUL_05 DIV_04 DIV_04 BSUB BADD BMUL BSUB BMUL BMAX BMAX,PUSH DECREASE_03 PUSH SCALE_06 PUSH SCALE_02 PUSH SCALE_02 PUSH DECREASE_01 PUSH SCALE_05 PUSH DIVIDE_04 PUSH DIVIDE_04 SUBTRACT_01 ADD_01 MULTIPLY_01 SUBTRACT_01 MULTIPLY_01 COMPARE_01 COMPARE_01
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_2,-10,"PUSH -27
+SCALE_02
+PUSH 26
+MOD_11
+PUSH -28
+ADD_03
+PUSH -18
+SCALE_04
+PUSH 50
+SUB_03
+PUSH 53
+ADD_03
+PUSH 1
+MOD_09
+PUSH -16
+ADD_06
+COMPARE_LARGER
+COMPARE_LARGER
+SUB_03
+ADD_04
+ADD_03
+COMPARE_SMALLER
+ADD_07
+COMPARE_SMALLER
+ADD_07","PUSH -27
+SCALE_02
+PUSH 26
+MOD_11
+PUSH -28
+ADD_03
+PUSH -18
+SCALE_04
+PUSH 50
+SUB_03
+PUSH 53
+ADD_03
+PUSH 1
+MOD_09
+PUSH -16
+ADD_06
+COMPARE_LARGER
+COMPARE_LARGER
+SUB_03
+ADD_04
+ADD_03
+COMPARE_SMALLER
+ADD_07
+COMPARE_SMALLER
+ADD_07","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BSUB
+PUSH -18
+MUL_04
+BADD
+PUSH 50
+SUB_03
+BADD
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BADD
+PUSH -16
+ADD_06
+BMIN
+",,unknown_op:SCALE_02,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL_02 MOD_11 ADD_03 MUL_04 SUB_03 ADD_03 MOD_09 ADD_06 BMAX BSUB BADD BADD BMIN BADD BMIN,PUSH SCALE_02 PUSH MOD_11 PUSH ADD_03 PUSH SCALE_04 PUSH SUB_03 PUSH ADD_03 PUSH MOD_09 PUSH ADD_06 COMPARE_LARGER COMPARE_LARGER SUB_03 ADD_04 ADD_03 COMPARE_SMALLER ADD_07 COMPARE_SMALLER ADD_07
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_0,102,"PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BADD
+PUSH -19
+DIV_04
+BADD
+PUSH -12
+ADD_02
+BADD
+PUSH -17
+ADD_06
+BADD
+PUSH -30
+ADD_05
+BADD
+PUSH 58
+MUL_06
+BADD
+PUSH 34
+MUL_03
+BADD","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BADD
+PUSH -19
+DIV_04
+BADD
+PUSH -12
+ADD_02
+BADD
+PUSH -17
+ADD_06
+BADD
+PUSH -30
+ADD_05
+BADD
+PUSH 58
+MUL_06
+BADD
+PUSH 34
+MUL_03
+BADD","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BMUL
+PUSH -19
+DIV_04
+BMUL
+PUSH -12
+ADD_02
+BSUB
+PUSH -17
+ADD_06
+BSUB
+PUSH -30
+ADD_05
+BMUL
+PUSH 58
+MUL_06
+BMAX
+PUSH 34
+TRIPLE
+BMIN
+",379,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_02 SUB_04 DIV_04 ADD_02 ADD_06 ADD_05 MUL_06 TRIPLE BMUL BMUL BSUB BSUB BMUL BMAX BMIN,PUSH ADD_02 PUSH SUB_04 BADD PUSH DIV_04 BADD PUSH ADD_02 BADD PUSH ADD_06 BADD PUSH ADD_05 BADD PUSH MUL_06 BADD PUSH MUL_03 BADD
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_1,7,"PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BMIN
+PUSH 17
+MUL_02
+BMIN
+PUSH 37
+MUL_02
+BMIN
+PUSH 26
+SUB_01
+BMIN
+PUSH 32
+MUL_05
+BMIN
+PUSH 28
+DIV_04
+BMIN
+PUSH 31
+DIV_04
+BMIN","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BMIN
+PUSH 17
+MUL_02
+BMIN
+PUSH 37
+MUL_02
+BMIN
+PUSH 26
+SUB_01
+BMIN
+PUSH 32
+MUL_05
+BMIN
+PUSH 28
+DIV_04
+BMIN
+PUSH 31
+DIV_04
+BMIN","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BSUB
+PUSH 17
+MUL_02
+BADD
+PUSH 37
+MUL_02
+BMUL
+PUSH 26
+SUB_01
+BSUB
+PUSH 32
+MUL_05
+BMUL
+PUSH 28
+DIV_04
+BMAX
+PUSH 31
+DIV_04
+BMAX
+",-17,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_03 MUL_06 MUL_02 MUL_02 SUB_01 MUL_05 DIV_04 DIV_04 BSUB BADD BMUL BSUB BMUL BMAX BMAX,PUSH SUB_03 PUSH MUL_06 BMIN PUSH MUL_02 BMIN PUSH MUL_02 BMIN PUSH SUB_01 BMIN PUSH MUL_05 BMIN PUSH DIV_04 BMIN PUSH DIV_04 BMIN
+pilot,pilot_v1_abi32_chain_d3_s101,abi32_chain_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_2,-10,"PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMIN
+PUSH -28
+ADD_03
+BMIN
+PUSH -18
+MUL_04
+BMIN
+PUSH 50
+SUB_03
+BMIN
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BMIN
+PUSH -16
+ADD_06
+BMIN","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMIN
+PUSH -28
+ADD_03
+BMIN
+PUSH -18
+MUL_04
+BMIN
+PUSH 50
+SUB_03
+BMIN
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BMIN
+PUSH -16
+ADD_06
+BMIN","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BSUB
+PUSH -18
+MUL_04
+BADD
+PUSH 50
+SUB_03
+BADD
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BADD
+PUSH -16
+ADD_06
+BMIN
+",-72,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MUL_02 MOD_11 ADD_03 MUL_04 SUB_03 ADD_03 MOD_09 ADD_06 BMAX BSUB BADD BADD BMIN BADD BMIN,PUSH MUL_02 PUSH MOD_11 BMIN PUSH ADD_03 BMIN PUSH MUL_04 BMIN PUSH SUB_03 BMIN PUSH ADD_03 BMIN PUSH MOD_09 BMIN PUSH ADD_06 BMIN
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_2,83,"PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45
+",83,,1,1,0,1,1,0,0,1,0,0,correct_exact,MUL_03 ADD_05 ADD_45,PUSH MUL_03 ADD_05 ADD_45
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_1,-52,"PUSH 9
+SUB_33
+SUB_27
+SUB_1","PUSH 9
+SUB_33
+SUB_27
+SUB_1","PUSH 9
+SUB_33
+SUB_27
+SUB_01
+",,unknown_op:SUB_1,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_33 SUB_27 SUB_01,PUSH SUB_33 SUB_27 SUB_1
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_0,-8,"PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31
+",-8,,1,1,0,1,1,0,0,1,0,0,correct_exact,SUB_04 SUB_10 SUB_31,PUSH SUB_04 SUB_10 SUB_31
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_2,83,"PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45
+",83,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL_03 ADD_05 ADD_45,PUSH MUL_03 ADD_05 ADD_45
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_1,-52,"PUSH 9
+SUB_33
+SUB_27
+SUB_10","PUSH 9
+SUB_33
+SUB_27
+SUB_10","PUSH 9
+SUB_33
+SUB_27
+SUB_01
+",-61,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_33 SUB_27 SUB_01,PUSH SUB_33 SUB_27 SUB_10
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_0,-8,"PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31
+",-8,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB_04 SUB_10 SUB_31,PUSH SUB_04 SUB_10 SUB_31
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_2,81,"PUSH 30
+SUB_17
+ADD_43
+ADD_4
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_4
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_04
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14
+",,unknown_op:ADD_4,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_17 ADD_43 ADD_04 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14,PUSH SUB_17 ADD_43 ADD_4 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_0,-95,"PUSH -22
+SUB_17
+SUB_28
+DEC_01
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC_01
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15
+",,unknown_op:DEC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15,PUSH SUB_17 SUB_28 DEC_01 SUB_12 SUB_35 SUB_16 ADD_21 ADD_15
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_1,21,"PUSH -7
+ADD_01_34
+ADD_01_01
+SUB_01_07
+SUB_01_04
+SUB_01_23
+MOD_01_23
+SUB_01_18
+ADD_01_22","PUSH -7
+ADD_01_34
+ADD_01_01
+SUB_01_07
+SUB_01_04
+SUB_01_23
+MOD_01_23
+SUB_01_18
+ADD_01_22","PUSH -7
+ADD_34
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22
+",,unknown_op:ADD_01_34,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_34 ADD_01 SUB_07 SUB_04 SUB_23 MOD_23 SUB_18 ADD_22,PUSH ADD_01_34 ADD_01_01 SUB_01_07 SUB_01_04 SUB_01_23 MOD_01_23 SUB_01_18 ADD_01_22
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_2,81,"PUSH 30
+SUB_17
+ADD_43
+ADD_40
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_40
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_04
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14
+",117,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_17 ADD_43 ADD_04 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14,PUSH SUB_17 ADD_43 ADD_40 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_0,-95,"PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15
+",-95,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15,PUSH SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_1,21,"PUSH -7
+ADD_01
+ADD_02
+SUB_01
+SUB_02
+SUB_03
+MOD_07
+SUB_01
+ADD_02","PUSH -7
+ADD_01
+ADD_02
+SUB_01
+SUB_02
+SUB_03
+MOD_07
+SUB_01
+ADD_02","PUSH -7
+ADD_34
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22
+",5,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_34 ADD_01 SUB_07 SUB_04 SUB_23 MOD_23 SUB_18 ADD_22,PUSH ADD_01 ADD_02 SUB_01 SUB_02 SUB_03 MOD_07 SUB_01 ADD_02
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_1,-11,"PUSH 70
+ADD_041
+SUB_043
+ADD_020
+SUB_041
+SUB_027
+MOD_19
+SUB_030
+ADD_015
+MOD_19
+ADD_045
+ADD_006
+ADD_029
+DIV_005
+SUB_024
+ADD_040
+SUB_044","PUSH 70
+ADD_041
+SUB_043
+ADD_020
+SUB_041
+SUB_027
+MOD_19
+SUB_030
+ADD_015
+MOD_19
+ADD_045
+ADD_006
+ADD_029
+DIV_005
+SUB_024
+ADD_040
+SUB_044","PUSH 70
+ADD_41
+SUB_43
+ADD_20
+SUB_41
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44
+",,unknown_op:ADD_041,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_41 SUB_43 ADD_20 SUB_41 SUB_27 MOD_19 SUB_30 ADD_15 MOD_19 ADD_45 ADD_06 ADD_29 DIV_05 SUB_24 ADD_40 SUB_44,PUSH ADD_041 SUB_043 ADD_020 SUB_041 SUB_027 MOD_19 SUB_030 ADD_015 MOD_19 ADD_045 ADD_006 ADD_029 DIV_005 SUB_024 ADD_040 SUB_044
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_0,40,"PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC_01
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC_01
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+DOUBLE
+MUL_03
+ADD_37
+ADD_03
+",,unknown_op:INC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 DOUBLE MUL_03 ADD_37 ADD_03,PUSH MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC_01 SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 MUL_02 MUL_03 ADD_37 ADD_03
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_2,-35,"PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05
+",-35,,1,1,0,1,1,0,0,1,0,0,correct_exact,SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05,PUSH SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_1,-11,"PUSH 70
+ADD_04
+SUB_04
+ADD_20
+SUB_04
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44","PUSH 70
+ADD_04
+SUB_04
+ADD_20
+SUB_04
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44","PUSH 70
+ADD_41
+SUB_43
+ADD_20
+SUB_41
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44
+",-11,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,ADD_41 SUB_43 ADD_20 SUB_41 SUB_27 MOD_19 SUB_30 ADD_15 MOD_19 ADD_45 ADD_06 ADD_29 DIV_05 SUB_24 ADD_40 SUB_44,PUSH ADD_04 SUB_04 ADD_20 SUB_04 SUB_27 MOD_19 SUB_30 ADD_15 MOD_19 ADD_45 ADD_06 ADD_29 DIV_05 SUB_24 ADD_40 SUB_44
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_0,40,"PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+DOUBLE
+MUL_03
+ADD_37
+ADD_03
+",40,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 DOUBLE MUL_03 ADD_37 ADD_03,PUSH MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 MUL_02 MUL_03 ADD_37 ADD_03
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_2,-35,"PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05
+",-35,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05,PUSH SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_2,-77,"PUSH -22
+ADD_045
+ADD_029
+SUB_010
+MUL_009
+SUB_009
+SUB_020
+DIV_005
+SUB_027
+ADD_024
+SUB_044
+ADD_046
+SUB_001
+MOD_011
+SUB_034
+ADD_003
+SUB_047","PUSH -22
+ADD_045
+ADD_029
+SUB_010
+MUL_009
+SUB_009
+SUB_020
+DIV_005
+SUB_027
+ADD_024
+SUB_044
+ADD_046
+SUB_001
+MOD_011
+SUB_034
+ADD_003
+SUB_047","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47
+",,unknown_op:ADD_045,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47,PUSH ADD_045 ADD_029 SUB_010 MUL_009 SUB_009 SUB_020 DIV_005 SUB_027 ADD_024 SUB_044 ADD_046 SUB_001 MOD_011 SUB_034 ADD_003 SUB_047
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_1,-102,"PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_2
+SUB_40
+MUL_3","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_2
+SUB_40
+MUL_3","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_02
+SUB_40
+TRIPLE
+",,unknown_op:SUB_2,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_02 SUB_40 TRIPLE,PUSH ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_2 SUB_40 MUL_3
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_0,-474,"PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+MUL_02
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+MUL_02
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+DOUBLE
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46
+",-474,,1,1,0,1,0,0,0,1,0,0,correct_semantic_variant,SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 DOUBLE SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46,PUSH SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 MUL_02 SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_2,-77,"PUSH -22
+ADD_04
+ADD_02
+SUB_01
+MUL_09
+SUB_09
+SUB_02
+DIV_05
+SUB_02
+ADD_02
+SUB_04
+ADD_04
+SUB_03
+MOD_11
+SUB_03
+ADD_03
+SUB_04","PUSH -22
+ADD_04
+ADD_02
+SUB_01
+MUL_09
+SUB_09
+SUB_02
+DIV_05
+SUB_02
+ADD_02
+SUB_04
+ADD_04
+SUB_03
+MOD_11
+SUB_03
+ADD_03
+SUB_04","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47
+",4,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47,PUSH ADD_04 ADD_02 SUB_01 MUL_09 SUB_09 SUB_02 DIV_05 SUB_02 ADD_02 SUB_04 ADD_04 SUB_03 MOD_11 SUB_03 ADD_03 SUB_04
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_1,-102,"PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_20
+SUB_40
+MUL_03","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_20
+SUB_40
+MUL_03","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_02
+SUB_40
+TRIPLE
+",-156,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_02 SUB_40 TRIPLE,PUSH ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_20 SUB_40 MUL_03
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_0,-474,"PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+MUL_02
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+MUL_02
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+DOUBLE
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46
+",-474,,1,1,0,1,0,0,0,1,0,1,correct_semantic_variant,SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 DOUBLE SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46,PUSH SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 MUL_02 SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_0,88,"PUSH 60
+ADD_16
+PUSH -6
+MUL_2
+SUB","PUSH 60
+ADD_16
+PUSH -6
+MUL_2
+SUB","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BSUB
+",,unknown_op:MUL_2,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_16 MUL_02 BSUB,PUSH ADD_16 PUSH MUL_2 SUB
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_1,9,"PUSH 38
+MOD_23
+PUSH -27
+ADD_21","PUSH 38
+MOD_23
+PUSH -27
+ADD_21","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD
+",-6,,0,0,0,1,0,0,0,1,0,0,wrong_op_order_or_choice,MOD_23 ADD_21 BADD,PUSH MOD_23 PUSH ADD_21
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_2,-11,"PUSH 37
+SUB_12
+ADD_12
+MUL_3","PUSH 37
+SUB_12
+ADD_12
+MUL_3","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD
+",,unknown_op:MUL_3,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_12 MUL_03 BADD,PUSH SUB_12 ADD_12 MUL_3
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_0,88,"PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BMIN","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BMIN","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BSUB
+",-12,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_16 MUL_02 BSUB,PUSH ADD_16 PUSH MUL_02 BMIN
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_1,9,"PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD
+",9,,1,1,0,1,1,0,0,1,1,0,correct_exact,MOD_23 ADD_21 BADD,PUSH MOD_23 PUSH ADD_21 BADD
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_2,-11,"PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD
+",-11,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB_12 MUL_03 BADD,PUSH SUB_12 PUSH MUL_03 BADD
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_0,-165,"PUSH 5
+SUB_24
+MUL_B
+SUB_C
+ADD_D","PUSH 5
+SUB_24
+MUL_B
+SUB_C
+ADD_D","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BMUL
+PUSH 4
+DIV_03
+BSUB
+PUSH -3
+ADD_10
+BADD
+",,unknown_op:MUL_B,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_24 MOD_10 DIV_03 ADD_10 BMUL BSUB BADD,PUSH SUB_24 MUL_B SUB_C ADD_D
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_1,13,"PUSH -5
+SQ
+MOD_997
+PUSH -18
+ADD_28
+PUSH 24
+SUB_45
+PUSH 10
+SUB_19","PUSH -5
+SQ
+MOD_997
+PUSH -18
+ADD_28
+PUSH 24
+SUB_45
+PUSH 10
+SUB_19","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BSUB
+",,unknown_op:SQ,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SQUARE_MOD_997 ADD_28 SUB_45 SUB_19 BMAX BADD BSUB,PUSH SQ MOD_997 PUSH ADD_28 PUSH SUB_45 PUSH SUB_19
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_2,-61740,"PUSH 7
+SQR
+MOD_997
+PUSH 15
+SUB_35
+MAX
+PUSH -17
+SUB_13
+PUSH 0
+ADD_42
+MUL
+MUL","PUSH 7
+SQR
+MOD_997
+PUSH 15
+SUB_35
+MAX
+PUSH -17
+SUB_13
+PUSH 0
+ADD_42
+MUL
+MUL","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMUL
+PUSH 0
+ADD_42
+BMUL
+",,unknown_op:SQR,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SQUARE_MOD_997 SUB_35 SUB_13 ADD_42 BMAX BMUL BMUL,PUSH SQR MOD_997 PUSH SUB_35 MAX PUSH SUB_13 PUSH ADD_42 MUL MUL
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_0,-165,"PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BADD
+PUSH 4
+DIV_03
+BMIN
+PUSH -3
+ADD_10
+BADD","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BADD
+PUSH 4
+DIV_03
+BMIN
+PUSH -3
+ADD_10
+BADD","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BMUL
+PUSH 4
+DIV_03
+BSUB
+PUSH -3
+ADD_10
+BADD
+",-3,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_24 MOD_10 DIV_03 ADD_10 BMUL BSUB BADD,PUSH SUB_24 PUSH MOD_10 BADD PUSH DIV_03 BMIN PUSH ADD_10 BADD
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_1,13,"PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BMIN","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BMIN","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BSUB
+",-9,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SQUARE_MOD_997 ADD_28 SUB_45 SUB_19 BMAX BADD BSUB,PUSH SQUARE_MOD_997 PUSH ADD_28 BMAX PUSH SUB_45 BADD PUSH SUB_19 BMIN
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_2,-61740,"PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMAX
+PUSH 0
+ADD_42
+BMAX","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMAX
+PUSH 0
+ADD_42
+BMAX","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMUL
+PUSH 0
+ADD_42
+BMUL
+",49,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SQUARE_MOD_997 SUB_35 SUB_13 ADD_42 BMAX BMUL BMUL,PUSH SQUARE_MOD_997 PUSH SUB_35 BMAX PUSH SUB_13 BMAX PUSH ADD_42 BMAX
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_1,-6272068,"PUSH 40
+MUL_7
+PUSH 28
+MUL_5
+PUSH -20
+SUB_12
+PUSH -18
+FLOOR_DIV_9
+PUSH 7
+ADD_13
+PUSH 25
+MOD_10
+PUSH 1
+SUB_35
+PUSH 18
+SUB_42","PUSH 40
+MUL_7
+PUSH 28
+MUL_5
+PUSH -20
+SUB_12
+PUSH -18
+FLOOR_DIV_9
+PUSH 7
+ADD_13
+PUSH 25
+MOD_10
+PUSH 1
+SUB_35
+PUSH 18
+SUB_42","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMUL
+PUSH -20
+SUB_12
+BMUL
+PUSH -18
+DIV_09
+BADD
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMUL
+PUSH 1
+SUB_35
+BADD
+PUSH 18
+SUB_42
+BADD
+",,unknown_op:MUL_7,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL_07 MUL_05 SUB_12 DIV_09 ADD_13 MOD_10 SUB_35 SUB_42 BMUL BMUL BADD BMIN BMUL BADD BADD,PUSH MUL_7 PUSH MUL_5 PUSH SUB_12 PUSH FLOOR_DIV_9 PUSH ADD_13 PUSH MOD_10 PUSH SUB_35 PUSH SUB_42
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_2,54,"PUSH 30
+SUB_13
+MIN_01
+PUSH -25
+ADD_48
+PUSH 28
+ADD_41
+PUSH -14
+ADD_48
+PUSH 18
+ADD_36
+PUSH 42
+MUL_05
+PUSH -14
+SUB_16
+PUSH 27
+ADD_27","PUSH 30
+SUB_13
+MIN_01
+PUSH -25
+ADD_48
+PUSH 28
+ADD_41
+PUSH -14
+ADD_48
+PUSH 18
+ADD_36
+PUSH 42
+MUL_05
+PUSH -14
+SUB_16
+PUSH 27
+ADD_27","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX
+",,unknown_op:MIN_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_13 ADD_48 ADD_41 ADD_48 SUB_16 ADD_36 MUL_05 ADD_27 BMIN BADD BADD BMUL BMIN BADD BMAX,PUSH SUB_13 MIN_01 PUSH ADD_48 PUSH ADD_41 PUSH ADD_48 PUSH ADD_36 PUSH MUL_05 PUSH SUB_16 PUSH ADD_27
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_0,-33,"PUSH -9
+ADD_41
+MIN_01
+MUL_02
+SUB_03
+ADD_04
+MIN_05
+SUB_06
+MAX_07","PUSH -9
+ADD_41
+MIN_01
+MUL_02
+SUB_03
+ADD_04
+MIN_05
+SUB_06
+MAX_07","PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMUL
+PUSH 48
+ADD_44
+BSUB
+PUSH -28
+DIV_07
+BADD
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BSUB
+PUSH -22
+SUB_21
+BMAX
+",,unknown_op:MIN_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_41 MUL_03 ADD_18 ADD_44 DIV_07 SUB_29 SUB_12 SUB_21 BMIN BMUL BSUB BADD BMIN BSUB BMAX,PUSH ADD_41 MIN_01 MUL_02 SUB_03 ADD_04 MIN_05 SUB_06 MAX_07
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_1,-6272068,"PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMIN
+PUSH -20
+SUB_12
+BMIN
+PUSH -18
+DIV_09
+BMIN
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMIN
+PUSH 1
+SUB_35
+BMIN
+PUSH 18
+SUB_42
+BMIN","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMIN
+PUSH -20
+SUB_12
+BMIN
+PUSH -18
+DIV_09
+BMIN
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMIN
+PUSH 1
+SUB_35
+BMIN
+PUSH 18
+SUB_42
+BMIN","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMUL
+PUSH -20
+SUB_12
+BMUL
+PUSH -18
+DIV_09
+BADD
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMUL
+PUSH 1
+SUB_35
+BADD
+PUSH 18
+SUB_42
+BADD
+",-34,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MUL_07 MUL_05 SUB_12 DIV_09 ADD_13 MOD_10 SUB_35 SUB_42 BMUL BMUL BADD BMIN BMUL BADD BADD,PUSH MUL_07 PUSH MUL_05 BMIN PUSH SUB_12 BMIN PUSH DIV_09 BMIN PUSH ADD_13 BMIN PUSH MOD_10 BMIN PUSH SUB_35 BMIN PUSH SUB_42 BMIN
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_2,54,"PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMIN
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMIN
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX
+",180,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_13 ADD_48 ADD_41 ADD_48 SUB_16 ADD_36 MUL_05 ADD_27 BMIN BADD BADD BMUL BMIN BADD BMAX,PUSH SUB_13 PUSH ADD_48 BMIN PUSH ADD_41 BADD PUSH ADD_48 BADD PUSH SUB_16 BMIN PUSH ADD_36 BMIN PUSH MUL_05 BADD PUSH ADD_27 BMAX
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_0,-33,"PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMIN
+PUSH 48
+ADD_44
+BMIN
+PUSH -28
+DIV_07
+BMIN
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BMAX
+PUSH -22
+SUB_21
+BMAX","PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMIN
+PUSH 48
+ADD_44
+BMIN
+PUSH -28
+DIV_07
+BMIN
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BMAX
+PUSH -22
+SUB_21
+BMAX","PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMUL
+PUSH 48
+ADD_44
+BSUB
+PUSH -28
+DIV_07
+BADD
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BSUB
+PUSH -22
+SUB_21
+BMAX
+",-6,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_41 MUL_03 ADD_18 ADD_44 DIV_07 SUB_29 SUB_12 SUB_21 BMIN BMUL BSUB BADD BMIN BSUB BMAX,PUSH ADD_41 PUSH MUL_03 BMIN PUSH ADD_18 BMIN PUSH ADD_44 BMIN PUSH DIV_07 BMIN PUSH SUB_29 BMIN PUSH SUB_12 BMAX PUSH SUB_21 BMAX
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_0,7,"PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+PUSH -13
+SUB_47
+PUSH 27
+SUB_18
+PUSH -26
+MUL_4
+PUSH -14
+ADD_42
+PUSH 55
+SUB_11
+PUSH 52
+SUB_45","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+PUSH -13
+SUB_47
+PUSH 27
+SUB_18
+PUSH -26
+MUL_4
+PUSH -14
+ADD_42
+PUSH 55
+SUB_11
+PUSH 52
+SUB_45","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BSUB
+PUSH 27
+SUB_18
+BMUL
+PUSH -26
+MUL_04
+BADD
+PUSH -14
+ADD_42
+BADD
+PUSH 55
+SUB_11
+BMUL
+PUSH 52
+SUB_45
+BMIN
+",,unknown_op:MUL_4,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_17 ADD_24 SUB_47 SUB_18 MUL_04 ADD_42 SUB_11 SUB_45 BMIN BSUB BMUL BADD BADD BMUL BMIN,PUSH SUB_17 PUSH ADD_24 PUSH SUB_47 PUSH SUB_18 PUSH MUL_4 PUSH ADD_42 PUSH SUB_11 PUSH SUB_45
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_1,-38,"PUSH -26
+PUSH -15
+SUB
+PUSH -4
+PUSH -35
+SUB
+PUSH -4
+PUSH -16
+SUB
+PUSH 23
+PUSH 14
+ADD
+PUSH -27
+PUSH -29
+SUB
+PUSH -24
+PUSH -7
+SUB
+PUSH -28
+PUSH -10
+SUB
+PUSH -2
+PUSH -40
+SUB
+MUL_B
+SUB_C
+SUB_D
+MAX_E
+SUB_F
+MIN_G
+MAX_H","PUSH -26
+PUSH -15
+SUB
+PUSH -4
+PUSH -35
+SUB
+PUSH -4
+PUSH -16
+SUB
+PUSH 23
+PUSH 14
+ADD
+PUSH -27
+PUSH -29
+SUB
+PUSH -24
+PUSH -7
+SUB
+PUSH -28
+PUSH -10
+SUB
+PUSH -2
+PUSH -40
+SUB
+MUL_B
+SUB_C
+SUB_D
+MAX_E
+SUB_F
+MIN_G
+MAX_H","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BMUL
+PUSH -4
+SUB_16
+BSUB
+PUSH 23
+ADD_14
+BSUB
+PUSH -27
+SUB_29
+BMAX
+PUSH -24
+SUB_07
+BSUB
+PUSH -28
+SUB_10
+BMIN
+PUSH -2
+SUB_40
+BMAX
+",,unknown_op:SUB,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_15 SUB_35 SUB_16 ADD_14 SUB_29 SUB_07 SUB_10 SUB_40 BMUL BSUB BSUB BMAX BSUB BMIN BMAX,PUSH PUSH SUB PUSH PUSH SUB PUSH PUSH SUB PUSH PUSH ADD PUSH PUSH SUB PUSH PUSH SUB PUSH PUSH SUB PUSH PUSH SUB MUL_B SUB_C SUB_D MAX_E SUB_F MIN_G MAX_H
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_2,4,"PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+PUSH -1
+SUB_1
+PUSH 31
+MUL_3
+PUSH 33
+SUB_15
+PUSH -14
+SUB_34
+PUSH 13
+SUB_41
+PUSH -2
+SQR
+MOD_997
+CMP_B_0
+CMP_B_1
+CMP_B_2
+MUL_0
+CMP_B_3
+CMP_B_4
+CMP_B_5
+MUL_0
+CMP_B_6
+CMP_B_7
+MUL_0","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+PUSH -1
+SUB_1
+PUSH 31
+MUL_3
+PUSH 33
+SUB_15
+PUSH -14
+SUB_34
+PUSH 13
+SUB_41
+PUSH -2
+SQR
+MOD_997
+CMP_B_0
+CMP_B_1
+CMP_B_2
+MUL_0
+CMP_B_3
+CMP_B_4
+CMP_B_5
+MUL_0
+CMP_B_6
+CMP_B_7
+MUL_0","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+TRIPLE
+BMIN
+PUSH 33
+SUB_15
+BMUL
+PUSH -14
+SUB_34
+BMAX
+PUSH 13
+SUB_41
+BMAX
+PUSH -2
+SQUARE_MOD_997
+BMAX
+",,unknown_op:SUB_1,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_21 SUB_27 SUB_01 TRIPLE SUB_15 SUB_34 SUB_41 SQUARE_MOD_997 BMIN BMIN BMIN BMUL BMAX BMAX BMAX,PUSH SUB_21 PUSH SUB_27 PUSH SUB_1 PUSH MUL_3 PUSH SUB_15 PUSH SUB_34 PUSH SUB_41 PUSH SQR MOD_997 CMP_B_0 CMP_B_1 CMP_B_2 MUL_0 CMP_B_3 CMP_B_4 CMP_B_5 MUL_0 CMP_B_6 CMP_B_7 MUL_0
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_0,7,"PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BMIN
+PUSH 27
+SUB_18
+BMIN
+PUSH -26
+MUL_04
+BMIN
+PUSH -14
+ADD_42
+BMIN
+PUSH 55
+SUB_11
+BMIN
+PUSH 52
+SUB_45
+BMIN","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BMIN
+PUSH 27
+SUB_18
+BMIN
+PUSH -26
+MUL_04
+BMIN
+PUSH -14
+ADD_42
+BMIN
+PUSH 55
+SUB_11
+BMIN
+PUSH 52
+SUB_45
+BMIN","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BSUB
+PUSH 27
+SUB_18
+BMUL
+PUSH -26
+MUL_04
+BADD
+PUSH -14
+ADD_42
+BADD
+PUSH 55
+SUB_11
+BMUL
+PUSH 52
+SUB_45
+BMIN
+",-104,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_17 ADD_24 SUB_47 SUB_18 MUL_04 ADD_42 SUB_11 SUB_45 BMIN BSUB BMUL BADD BADD BMUL BMIN,PUSH SUB_17 PUSH ADD_24 BMIN PUSH SUB_47 BMIN PUSH SUB_18 BMIN PUSH MUL_04 BMIN PUSH ADD_42 BMIN PUSH SUB_11 BMIN PUSH SUB_45 BMIN
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_1,-38,"PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BADD
+PUSH -4
+SUB_16
+BADD
+PUSH 23
+ADD_14
+BADD
+PUSH -27
+SUB_29
+BADD
+PUSH -24
+SUB_07
+BADD
+PUSH -28
+SUB_10
+BADD
+PUSH -2
+SUB_40
+BADD","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BADD
+PUSH -4
+SUB_16
+BADD
+PUSH 23
+ADD_14
+BADD
+PUSH -27
+SUB_29
+BADD
+PUSH -24
+SUB_07
+BADD
+PUSH -28
+SUB_10
+BADD
+PUSH -2
+SUB_40
+BADD","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BMUL
+PUSH -4
+SUB_16
+BSUB
+PUSH 23
+ADD_14
+BSUB
+PUSH -27
+SUB_29
+BMAX
+PUSH -24
+SUB_07
+BSUB
+PUSH -28
+SUB_10
+BMIN
+PUSH -2
+SUB_40
+BMAX
+",-230,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_15 SUB_35 SUB_16 ADD_14 SUB_29 SUB_07 SUB_10 SUB_40 BMUL BSUB BSUB BMAX BSUB BMIN BMAX,PUSH SUB_15 PUSH SUB_35 BADD PUSH SUB_16 BADD PUSH ADD_14 BADD PUSH SUB_29 BADD PUSH SUB_07 BADD PUSH SUB_10 BADD PUSH SUB_40 BADD
+pilot,pilot_v1_abi128_chain_d3_s101,abi128_chain_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_2,4,"PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_10
+BMIN
+PUSH 31
+MUL_03
+BMIN
+PUSH 33
+SUB_15
+BMIN
+PUSH -14
+SUB_34
+BMIN
+PUSH 13
+SUB_41
+BMIN
+PUSH -2
+SQUARE_MOD_997
+BMIN","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_10
+BMIN
+PUSH 31
+MUL_03
+BMIN
+PUSH 33
+SUB_15
+BMIN
+PUSH -14
+SUB_34
+BMIN
+PUSH 13
+SUB_41
+BMIN
+PUSH -2
+SQUARE_MOD_997
+BMIN","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+TRIPLE
+BMIN
+PUSH 33
+SUB_15
+BMUL
+PUSH -14
+SUB_34
+BMAX
+PUSH 13
+SUB_41
+BMAX
+PUSH -2
+SQUARE_MOD_997
+BMAX
+",-48,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_21 SUB_27 SUB_01 TRIPLE SUB_15 SUB_34 SUB_41 SQUARE_MOD_997 BMIN BMIN BMIN BMUL BMAX BMAX BMAX,PUSH SUB_21 PUSH SUB_27 BMIN PUSH SUB_10 BMIN PUSH MUL_03 BMIN PUSH SUB_15 BMIN PUSH SUB_34 BMIN PUSH SUB_41 BMIN PUSH SQUARE_MOD_997 BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_0,0,"PUSH -14
+MOD_07
+DIV_06
+DIV_03
+. 
+
+Wait, but the user said not to include the final line. So the correct output is the three instructions without the final line. Let me check again. The user said to return only the raw numeric stack instructions. The three steps are PUSH -14, MOD_07, DIV_06, DIV_03. So the answer is those four instructions. But the user said not to number steps and not to write a final line. So the answer is those four instructions. But the example shows that the user included the final line as a dot. But the user said not to include the final line. So the correct answer is the four instructions without the final line. So the answer is the four instructions.
+The answer is:
+PUSH -14
+MOD_07
+DIV_06
+DIV_03
+. 
+
+Wait, but the user said not to include the final line. So the correct answer is the four instructions without the final line. So the answer is the four instructions. But the example shows that the user included the final line. But the user said not to include the final line. So the correct answer is the four instructions. Therefore, the answer is the four instructions.
+The answer is:
+PUSH -14
+MOD_07
+DIV_06
+DIV_03
+. 
+
+But the user said not to include the final line. So the correct answer is the four instructions. Therefore,","PUSH -14
+MOD_07
+DIV_06
+DIV_03
+. 
+
+Wait, but the user said not to include the final line. So the correct output is the three instructions without the final line. Let me check again. The user said to return only the raw numeric stack instructions. The three steps are PUSH -14, MOD_07, DIV_06, DIV_03. So the answer is those four instructions. But the user said not to number steps and not to write a final line. So the answer is those four instructions. But the example shows that the user included the final line as a dot. But the user said not to include the final line. So the correct answer is the four instructions without the final line. So the answer is the four instructions.
+The answer is:
+PUSH -14
+MOD_07
+DIV_06
+DIV_03
+. 
+
+Wait, but the user said not to include the final line. So the correct answer is the four instructions without the final line. So the answer is the four instructions. But the example shows that the user included the final line. But the user said not to include the final line. So the correct answer is the four instructions. Therefore, the answer is the four instructions.
+The answer is:
+PUSH -14
+MOD_07
+DIV_06
+DIV_03
+. 
+
+But the user said not to include the final line. So the correct answer is the four instructions. Therefore,","PUSH -14
+MOD_07
+DIV_06
+DIV_03
+",,unknown_op:.,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,MOD_07 DIV_06 DIV_03,PUSH MOD_07 DIV_06 DIV_03 . THE PUSH MOD_07 DIV_06 DIV_03 . THE PUSH MOD_07 DIV_06 DIV_03 .
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_1,29,"PUSH 36
+MUL_05
+DIV_06
+SUB_01
+To solve the problem, we start with the integer 36. The first step is to multiply it by 5, which is represented by the instruction MUL_05. After this operation, the value becomes 36 * 5 = 180. Next, we perform a floor division by 6, which is denoted by the instruction DIV_06. This results in 180 / 6 = 30. Finally, we subtract 1 from the result, which is done using the instruction SUB_01, leading to 30 - 1 = 29. The sequence of operations is therefore: PUSH 36, MUL_05, DIV_06, and SUB_01. These instructions accurately represent the given task in the required format. The final value after all operations is 29, but the focus here is on the sequence of instructions that achieve this result.
+The instructions are as follows: first, push the initial value of 36. Then, multiply it by 5. After that, divide the result by 6. Finally, subtract 1 from the outcome. These steps are represented by the instructions: PUSH 36, MUL_05, DIV_06, and SUB_01. Each instruction corresponds to the specified operation in the task. The final value is obtained by following these steps in order. The instructions are formatted correctly as","PUSH 36
+MUL_05
+DIV_06
+SUB_01
+To solve the problem, we start with the integer 36. The first step is to multiply it by 5, which is represented by the instruction MUL_05. After this operation, the value becomes 36 * 5 = 180. Next, we perform a floor division by 6, which is denoted by the instruction DIV_06. This results in 180 / 6 = 30. Finally, we subtract 1 from the result, which is done using the instruction SUB_01, leading to 30 - 1 = 29. The sequence of operations is therefore: PUSH 36, MUL_05, DIV_06, and SUB_01. These instructions accurately represent the given task in the required format. The final value after all operations is 29, but the focus here is on the sequence of instructions that achieve this result.
+The instructions are as follows: first, push the initial value of 36. Then, multiply it by 5. After that, divide the result by 6. Finally, subtract 1 from the outcome. These steps are represented by the instructions: PUSH 36, MUL_05, DIV_06, and SUB_01. Each instruction corresponds to the specified operation in the task. The final value is obtained by following these steps in order. The instructions are formatted correctly as","PUSH 36
+MUL_05
+DIV_06
+SUB_01
+",29,,1,1,0,1,1,0,1,1,0,0,correct_exact,MUL_05 DIV_06 SUB_01,PUSH MUL_05 DIV_06 SUB_01
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_2,0,"PUSH -13
+NEG
+MOD_09
+DIV_05
+. 
+
+Wait, but the task says to compile the procedure into the numeric stack format. Let me check the steps again.
+
+Start with -13. First, negate it: -13 becomes 13. Then take modulo 9: 13 mod 9 is 4. Then floor divide by 5: 4 divided by 5 is 0.8, but floor division would be 0. So the instructions should be NEG, MOD_09, DIV_05. But the initial value is -13, so the first step is PUSH -13. Then apply the operations. So the correct sequence is PUSH -13, NEG, MOD_09, DIV_05. That's what I wrote before. But the user said to return only the raw numeric stack instructions. So the answer is the three instructions: PUSH -13, NEG, MOD_09, DIV_05. But the user's example shows that the output is those four instructions. But the user's example shows that the output is four instructions, including the PUSH. So the correct answer is the four instructions as I wrote before.
+The instructions are correct. The first step is to push the initial value, then apply the operations in order. So the final answer is the four instructions.
+The answer is:
+PUSH -13
+NEG
+MOD_09
+DIV_05
+. 
+
+But the user said to not include the","PUSH -13
+NEG
+MOD_09
+DIV_05
+. 
+
+Wait, but the task says to compile the procedure into the numeric stack format. Let me check the steps again.
+
+Start with -13. First, negate it: -13 becomes 13. Then take modulo 9: 13 mod 9 is 4. Then floor divide by 5: 4 divided by 5 is 0.8, but floor division would be 0. So the instructions should be NEG, MOD_09, DIV_05. But the initial value is -13, so the first step is PUSH -13. Then apply the operations. So the correct sequence is PUSH -13, NEG, MOD_09, DIV_05. That's what I wrote before. But the user said to return only the raw numeric stack instructions. So the answer is the three instructions: PUSH -13, NEG, MOD_09, DIV_05. But the user's example shows that the output is those four instructions. But the user's example shows that the output is four instructions, including the PUSH. So the correct answer is the four instructions as I wrote before.
+The instructions are correct. The first step is to push the initial value, then apply the operations in order. So the final answer is the four instructions.
+The answer is:
+PUSH -13
+NEG
+MOD_09
+DIV_05
+. 
+
+But the user said to not include the","PUSH -13
+NEG
+MOD_09
+DIV_05
+",,unknown_op:.,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,NEG MOD_09 DIV_05,"PUSH NEG MOD_09 DIV_05 . WAIT, START THE PUSH NEG MOD_09 DIV_05 . BUT"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_0,0,"PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03
+",0,,1,1,0,1,1,0,0,1,1,0,correct_exact,MOD_07 DIV_06 DIV_03,PUSH MOD_07 DIV_06 DIV_03
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_1,29,"PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01
+",29,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL_05 DIV_06 SUB_01,PUSH MUL_05 DIV_06 SUB_01
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_2,0,"PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05
+",0,,1,1,0,1,1,0,0,1,1,0,correct_exact,NEG MOD_09 DIV_05,PUSH NEG MOD_09 DIV_05
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_2,109,"PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRPL
+INC_01","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRPL
+INC_01","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC
+",,unknown_op:TRPL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE INC,PUSH MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRPL INC_01
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_1,12,"PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02
+. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02
+. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer is 0. The final answer","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02
+",12,,1,1,0,1,1,0,1,1,0,0,correct_exact,ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02,PUSH ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_0,9,"PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC_01
+. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC_01
+. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer is 12. The final answer","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC
+",,unknown_op:INC_01,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC,PUSH NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC_01
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_2,109,"PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC
+",109,,1,1,0,1,1,0,0,1,1,0,correct_exact,MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE INC,PUSH MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE INC
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_1,12,"PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02
+",12,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02,PUSH ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_0,9,"PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC
+",9,,1,1,0,1,1,0,0,1,1,0,correct_exact,NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC,PUSH NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_0,5,"PUSH -7
+TRPL
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+FDIV_04
+SUB_05
+INC_01
+ADD_06
+ABS","PUSH -7
+TRPL
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+FDIV_04
+SUB_05
+INC_01
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS
+",,unknown_op:TRPL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS,PUSH TRPL SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 FDIV_04 SUB_05 INC_01 ADD_06 ABS
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_1,2,"PUSH 8
+SUB_05
+MUL_05
+INC_01
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DPL
+SUB_06
+ADD_06
+INC_01
+SUB_02
+MUL_02
+. 
+
+Wait, but the final answer is not correct. Let me check again. Let me re-calculate the steps.
+
+Let me re-calculate the steps step by step to see where the error might be.
+
+Starting with 8.
+
+Step 1: subtract 5 → 8 - 5 = 3
+Step 2: multiply by 5 → 3 * 5 = 15
+Step 3: increment by one → 15 + 1 = 16
+Step 4: multiply by 5 → 16 * 5 = 80
+Step 5: take modulo 9 → 80 % 9 = 8 (since 9*8=72, 80-72=8)
+Step 6: take modulo 7 → 8 % 7 = 1
+Step 7: subtract 6 → 1 - 6 = -5
+Step 8: negate the value → -(-5) = 5
+Step 9: take modulo 9 → 5 % 9 = 5
+Step 10: subtract 4","PUSH 8
+SUB_05
+MUL_05
+INC_01
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DPL
+SUB_06
+ADD_06
+INC_01
+SUB_02
+MUL_02
+. 
+
+Wait, but the final answer is not correct. Let me check again. Let me re-calculate the steps.
+
+Let me re-calculate the steps step by step to see where the error might be.
+
+Starting with 8.
+
+Step 1: subtract 5 → 8 - 5 = 3
+Step 2: multiply by 5 → 3 * 5 = 15
+Step 3: increment by one → 15 + 1 = 16
+Step 4: multiply by 5 → 16 * 5 = 80
+Step 5: take modulo 9 → 80 % 9 = 8 (since 9*8=72, 80-72=8)
+Step 6: take modulo 7 → 8 % 7 = 1
+Step 7: subtract 6 → 1 - 6 = -5
+Step 8: negate the value → -(-5) = 5
+Step 9: take modulo 9 → 5 % 9 = 5
+Step 10: subtract 4","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DOUBLE
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02
+",,unknown_op:INC_01,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DOUBLE SUB_06 ADD_06 INC SUB_02 MUL_02,PUSH SUB_05 MUL_05 INC_01 MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DPL SUB_06 ADD_06 INC_01 SUB_02 MUL_02 . LET STARTING SUBTRACT MULTIPLY INCREMENT MULTIPLY TAKE TAKE SUBTRACT NEGATE TAKE SUBTRACT
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_2,9,"PUSH 24
+TRPL
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DPL
+ADD_05
+ 
+
+Wait, but the final answer is not matching. Let me check again.
+
+Let me re-calculate the steps to see where I might have gone wrong.
+
+Starting with 24:
+
+1) Triple: 24 * 3 = 72
+2) Modulo 7: 72 % 7 = 72 - 7*10 = 72 - 70 = 2
+3) Absolute value: 2
+4) Subtract 4: 2 - 4 = -2
+5) Floor divide by 4: -2 / 4 = -0.5 → floor is -1
+6) Add 5: -1 + 5 = 4
+7) Add 4: 4 + 4 = 8
+8) Add 2: 8 + 2 = 10
+9) Modulo 13: 10 % 13 = 10
+10) Modulo 7: 10 % 7 = 3
+11) Modulo 13: 3 % 13 = 3
+12)","PUSH 24
+TRPL
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DPL
+ADD_05
+ 
+
+Wait, but the final answer is not matching. Let me check again.
+
+Let me re-calculate the steps to see where I might have gone wrong.
+
+Starting with 24:
+
+1) Triple: 24 * 3 = 72
+2) Modulo 7: 72 % 7 = 72 - 7*10 = 72 - 70 = 2
+3) Absolute value: 2
+4) Subtract 4: 2 - 4 = -2
+5) Floor divide by 4: -2 / 4 = -0.5 → floor is -1
+6) Add 5: -1 + 5 = 4
+7) Add 4: 4 + 4 = 8
+8) Add 2: 8 + 2 = 10
+9) Modulo 13: 10 % 13 = 10
+10) Modulo 7: 10 % 7 = 3
+11) Modulo 13: 3 % 13 = 3
+12)","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05
+",,unknown_op:TRPL,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05,PUSH TRPL MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DPL ADD_05 LET STARTING TRIPLE MODULO ABSOLUTE SUBTRACT FLOOR ADD ADD ADD MODULO MODULO MODULO
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_0,5,"PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS
+",5,,1,1,0,1,1,0,0,1,1,0,correct_exact,TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS,PUSH TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_1,2,"PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+MUL_02
+INC
+SUB_02
+MUL_02
+MUL_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+MUL_02
+INC
+SUB_02
+MUL_02
+MUL_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DOUBLE
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02
+",8,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DOUBLE SUB_06 ADD_06 INC SUB_02 MUL_02,PUSH SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 MUL_02 INC SUB_02 MUL_02 MUL_02 MUL_02
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_2,9,"PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05
+",9,,1,1,0,1,1,0,0,1,1,0,correct_exact,TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05,PUSH TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_0,2,"PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC_01
+MOD_07
+MUL_04
+SIGN
+SUB_04
+SUB_06
+INC_02
+SIGN
+INC_02
+MUL_03
+SUB_04
+ 
+
+Let me check the steps again. The initial value is 6. Step 1: decrease by 1 → 5. Step 2: decrease by 5 → 0. Step 3: divide by 6 → 0. Step 4: decrease by 1 → -1. Step 5: flip sign → 1. Step 6: increase by 1 → 2. Step 7: modulo 7 → 2. Step 8: multiply by 4 → 8. Step 9: drop sign → 8. Step 10: decrease by 4 → 4. Step 11: decrease by 6 → -2. Step 12: increase by 2 → 0. Step 13: drop sign → 0. Step 14: increase by 2 → 2. Step 15: multiply by 3 → 6. Step 16: decrease by 4 → 2. The final value is 2. The steps are correct.
+The final answer is 2.
+The final answer is 2. The steps are correct.
+The final answer is","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC_01
+MOD_07
+MUL_04
+SIGN
+SUB_04
+SUB_06
+INC_02
+SIGN
+INC_02
+MUL_03
+SUB_04
+ 
+
+Let me check the steps again. The initial value is 6. Step 1: decrease by 1 → 5. Step 2: decrease by 5 → 0. Step 3: divide by 6 → 0. Step 4: decrease by 1 → -1. Step 5: flip sign → 1. Step 6: increase by 1 → 2. Step 7: modulo 7 → 2. Step 8: multiply by 4 → 8. Step 9: drop sign → 8. Step 10: decrease by 4 → 4. Step 11: decrease by 6 → -2. Step 12: increase by 2 → 0. Step 13: drop sign → 0. Step 14: increase by 2 → 2. Step 15: multiply by 3 → 6. Step 16: decrease by 4 → 2. The final value is 2. The steps are correct.
+The final answer is 2.
+The final answer is 2. The steps are correct.
+The final answer is","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04
+",,unknown_op:INC_01,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,SUB_01 SUB_05 DIV_06 SUB_01 NEG INC MOD_07 MUL_04 ABS SUB_04 SUB_06 ADD_02 ABS ADD_02 MUL_03 SUB_04,PUSH SUB_01 SUB_05 DIV_06 SUB_01 NEG INC_01 MOD_07 MUL_04 SIGN SUB_04 SUB_06 INC_02 SIGN INC_02 MUL_03 SUB_04
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_2,563,"PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03
+ 
+
+Let me check the steps again. The initial value is -20. 
+
+Step 1: Divide by 5, keep the whole-number quotient. -20 / 5 = -4. So, the value is -4.
+
+Step 2: Scale by 5. -4 * 5 = -20.
+
+Step 3: Flip the sign. -20 * -1 = 20.
+
+Step 4: Divide by 3, keep the whole-number quotient. 20 / 3 = 6 (since 3*6=18, remainder 2). So, the value is 6.
+
+Step 5: Decrease by 1. 6 - 1 = 5.
+
+Step 6: Increase by 2. 5 + 2 = 7.
+
+Step 7: Increase by 5. 7 + 5 = 12.
+
+Step 8: Increase by 6. 12 + 6 = 18.
+
+Step 9: Increase by 6. 18 + 6 = 24.
+
+Step 1","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03
+ 
+
+Let me check the steps again. The initial value is -20. 
+
+Step 1: Divide by 5, keep the whole-number quotient. -20 / 5 = -4. So, the value is -4.
+
+Step 2: Scale by 5. -4 * 5 = -20.
+
+Step 3: Flip the sign. -20 * -1 = 20.
+
+Step 4: Divide by 3, keep the whole-number quotient. 20 / 3 = 6 (since 3*6=18, remainder 2). So, the value is 6.
+
+Step 5: Decrease by 1. 6 - 1 = 5.
+
+Step 6: Increase by 2. 5 + 2 = 7.
+
+Step 7: Increase by 5. 7 + 5 = 12.
+
+Step 8: Increase by 6. 12 + 6 = 18.
+
+Step 9: Increase by 6. 18 + 6 = 24.
+
+Step 1","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03
+",,unknown_op:LET,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03,PUSH DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03 LET DIVIDE SCALE FLIP DIVIDE DECREASE INCREASE INCREASE INCREASE INCREASE STEP
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_1,-27,"PUSH 36
+MUL_02
+NEG
+ADD_04
+MOD_11
+MUL_02
+DIV_05
+MOD_13
+SUB_05
+MUL_03
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+ 
+
+Wait, but the steps 16 and 15 are in the order 15 then 16. Let me check the original task again. The steps are 15) scale by 3; 16) scale by 3. So the correct order is MUL_03 (step 15), then MUL_03 (step 16). So the final steps should be:
+
+PUSH 36
+MUL_02
+NEG
+ADD_04
+MOD_11
+MUL_02
+DIV_05
+MOD_13
+SUB_05
+MUL_03
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+ 
+
+Yes, that's correct. The steps 15 and 16 are both MUL_03, so they are applied in sequence.
+Okay, let me go through the task step by step to make sure I have the correct sequence of instructions.
+
+Starting with 36 as","PUSH 36
+MUL_02
+NEG
+ADD_04
+MOD_11
+MUL_02
+DIV_05
+MOD_13
+SUB_05
+MUL_03
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+ 
+
+Wait, but the steps 16 and 15 are in the order 15 then 16. Let me check the original task again. The steps are 15) scale by 3; 16) scale by 3. So the correct order is MUL_03 (step 15), then MUL_03 (step 16). So the final steps should be:
+
+PUSH 36
+MUL_02
+NEG
+ADD_04
+MOD_11
+MUL_02
+DIV_05
+MOD_13
+SUB_05
+MUL_03
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+ 
+
+Yes, that's correct. The steps 15 and 16 are both MUL_03, so they are applied in sequence.
+Okay, let me go through the task step by step to make sure I have the correct sequence of instructions.
+
+Starting with 36 as","PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+",,"unknown_op:YES,",0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,DOUBLE NEG ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03,"PUSH MUL_02 NEG ADD_04 MOD_11 MUL_02 DIV_05 MOD_13 SUB_05 MUL_03 NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03 PUSH MUL_02 NEG ADD_04 MOD_11 MUL_02 DIV_05 MOD_13 SUB_05 MUL_03 NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03 YES, OKAY, STARTING"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_0,2,"PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+INC
+ABS
+INC
+MUL_03
+SUB_04","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+INC
+ABS
+INC
+MUL_03
+SUB_04","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04
+",2,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,SUB_01 SUB_05 DIV_06 SUB_01 NEG INC MOD_07 MUL_04 ABS SUB_04 SUB_06 ADD_02 ABS ADD_02 MUL_03 SUB_04,PUSH SUB_01 SUB_05 DIV_06 SUB_01 NEG INC MOD_07 MUL_04 ABS SUB_04 SUB_06 INC ABS INC MUL_03 SUB_04
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_2,563,"PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03
+",563,,1,1,0,1,1,0,0,1,1,0,correct_exact,DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03,PUSH DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_1,-27,"PUSH 36
+MUL_02
+NEG
+ADD_04
+MOD_11
+MUL_02
+DIV_05
+MOD_13
+SUB_05
+MUL_03
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03","PUSH 36
+MUL_02
+NEG
+ADD_04
+MOD_11
+MUL_02
+DIV_05
+MOD_13
+SUB_05
+MUL_03
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03","PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+",-27,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,DOUBLE NEG ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03,PUSH MUL_02 NEG ADD_04 MOD_11 MUL_02 DIV_05 MOD_13 SUB_05 MUL_03 NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_0,51,"PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+B_SUB
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is 39, then multiply by 2. Then, branch B is 21, add 6. Then subtract branch B from the running result. So the stack instructions should be:
+
+PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+B_SUB
+ 
+
+Yes, that's correct. The initial value is 39, then multiply by 2. Then, branch B is 21, add 6. Then subtract branch B from the running result. So the stack instructions are as above.
+The output is correct. The instructions correctly represent the steps: starting with 39, multiplying by 2, then pushing 21 and adding 6, and finally subtracting branch B from the running result. The B_SUB instruction is used to subtract the branch B result from the current running result. The numeric stack format is properly followed with PUSH, MUL_02, ADD_06, and B_SUB. The answer is correct.
+The output is correct. The instructions correctly represent the steps: starting with 39, multiplying by 2, then pushing 21 and adding 6, and finally subtracting branch B from the running result. The B_SUB instruction is used to subtract the branch B result from the current running result. The numeric","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+B_SUB
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is 39, then multiply by 2. Then, branch B is 21, add 6. Then subtract branch B from the running result. So the stack instructions should be:
+
+PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+B_SUB
+ 
+
+Yes, that's correct. The initial value is 39, then multiply by 2. Then, branch B is 21, add 6. Then subtract branch B from the running result. So the stack instructions are as above.
+The output is correct. The instructions correctly represent the steps: starting with 39, multiplying by 2, then pushing 21 and adding 6, and finally subtracting branch B from the running result. The B_SUB instruction is used to subtract the branch B result from the current running result. The numeric stack format is properly followed with PUSH, MUL_02, ADD_06, and B_SUB. The answer is correct.
+The output is correct. The instructions correctly represent the steps: starting with 39, multiplying by 2, then pushing 21 and adding 6, and finally subtracting branch B from the running result. The B_SUB instruction is used to subtract the branch B result from the current running result. The numeric","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BSUB
+",,unknown_op:B_SUB,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,MUL_02 ADD_06 BSUB,"PUSH MUL_02 PUSH ADD_06 B_SUB WAIT, PUSH MUL_02 PUSH ADD_06 B_SUB YES,"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_2,-14,"PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN
+",-14,,1,1,0,1,1,0,0,1,0,0,correct_exact,SUB_06 DIV_02 BMIN,PUSH SUB_06 PUSH DIV_02 BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_1,-59,"PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+ 
+
+The task involves computing two branches and then merging them by taking the minimum of the two results. Branch A starts with 9 and adds 4, resulting in 13. Branch B starts with 59 and negates it, resulting in -59. The BMIN instruction is used to take the minimum of the two values, which in this case is -59. The stack program is compiled with the appropriate instructions for each step.
+The final answer is -59. The numeric stack instructions are as follows:
+
+PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+ 
+
+The task involves computing two branches and then merging them by taking the minimum of the two results. Branch A starts with 9 and adds 4, resulting in 13. Branch B starts with 59 and negates it, resulting in -59. The BMIN instruction is used to take the minimum of the two values, which in this case is -59. The stack program is compiled with the appropriate instructions for each step.
+The final answer is -59. The numeric stack instructions are as follows:
+
+PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+ 
+
+The task involves computing two branches and then merging them by taking the minimum of the two results. Branch A starts with 9 and adds 4, resulting in 13. Branch B starts with","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+ 
+
+The task involves computing two branches and then merging them by taking the minimum of the two results. Branch A starts with 9 and adds 4, resulting in 13. Branch B starts with 59 and negates it, resulting in -59. The BMIN instruction is used to take the minimum of the two values, which in this case is -59. The stack program is compiled with the appropriate instructions for each step.
+The final answer is -59. The numeric stack instructions are as follows:
+
+PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+ 
+
+The task involves computing two branches and then merging them by taking the minimum of the two results. Branch A starts with 9 and adds 4, resulting in 13. Branch B starts with 59 and negates it, resulting in -59. The BMIN instruction is used to take the minimum of the two values, which in this case is -59. The stack program is compiled with the appropriate instructions for each step.
+The final answer is -59. The numeric stack instructions are as follows:
+
+PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+ 
+
+The task involves computing two branches and then merging them by taking the minimum of the two results. Branch A starts with 9 and adds 4, resulting in 13. Branch B starts with","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+",,unknown_op:THE,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,ADD_04 NEG BMIN,PUSH ADD_04 PUSH NEG BMIN THE PUSH ADD_04 PUSH NEG BMIN THE PUSH ADD_04 PUSH NEG BMIN THE
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_0,51,"PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BMIN","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BMIN","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BSUB
+",27,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MUL_02 ADD_06 BSUB,PUSH MUL_02 PUSH ADD_06 BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_2,-14,"PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN
+",-14,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB_06 DIV_02 BMIN,PUSH SUB_06 PUSH DIV_02 BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_1,-59,"PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+",-59,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD_04 NEG BMIN,PUSH ADD_04 PUSH NEG BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_1,1296,"PUSH 16
+ADD_01
+BMIN_0B
+PUSH 11
+INC_01
+BMIN_0B
+B_MUL_0C
+PUSH 0
+ADD_02
+B_MUL_0D
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is 16. Then, take the min with branch B (11). So the first step is to push 16, add 1 (to get 17), then push 11, increment by 1 (to get 12), then take the min of 17 and 12, which is 12. Then multiply by branch C (0 + 2 = 2), so 12 * 2 = 24. Then multiply by branch D (52 + 2 = 54), so 24 * 54 = 1296. But the output instructions given in the example don't seem to match this. Let me check again.
+
+The example output is:
+
+PUSH 16
+ADD_01
+BMIN_0B
+PUSH 11
+INC_01
+BMIN_0B
+B_MUL_0C
+PUSH 0
+ADD_02
+B_MUL_0D
+
+But according to the task, after taking the min with branch B, the running result is 12. Then multiply by branch C (0 +","PUSH 16
+ADD_01
+BMIN_0B
+PUSH 11
+INC_01
+BMIN_0B
+B_MUL_0C
+PUSH 0
+ADD_02
+B_MUL_0D
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is 16. Then, take the min with branch B (11). So the first step is to push 16, add 1 (to get 17), then push 11, increment by 1 (to get 12), then take the min of 17 and 12, which is 12. Then multiply by branch C (0 + 2 = 2), so 12 * 2 = 24. Then multiply by branch D (52 + 2 = 54), so 24 * 54 = 1296. But the output instructions given in the example don't seem to match this. Let me check again.
+
+The example output is:
+
+PUSH 16
+ADD_01
+BMIN_0B
+PUSH 11
+INC_01
+BMIN_0B
+B_MUL_0C
+PUSH 0
+ADD_02
+B_MUL_0D
+
+But according to the task, after taking the min with branch B, the running result is 12. Then multiply by branch C (0 +","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMUL
+PUSH 52
+ADD_02
+BMUL
+",,unknown_op:BMIN_0B,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_01 INC ADD_02 ADD_02 BMIN BMUL BMUL,"PUSH ADD_01 BMIN_0B PUSH INC_01 BMIN_0B B_MUL_0C PUSH ADD_02 B_MUL_0D WAIT, THE PUSH ADD_01 BMIN_0B PUSH INC_01 BMIN_0B B_MUL_0C PUSH ADD_02 B_MUL_0D BUT"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_2,42,"PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC_01
+BMAX
+PUSH -8
+MUL_06
+B_SUB","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC_01
+BMAX
+PUSH -8
+MUL_06
+B_SUB","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BSUB
+",,unknown_op:INC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_05 NEG INC MUL_06 BMIN BMAX BSUB,PUSH ADD_05 PUSH NEG BMIN PUSH INC_01 BMAX PUSH MUL_06 B_SUB
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_0,-42,"PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+BDOUB
+BMIN
+PUSH 44
+BADD_05
+BMIN
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is -29. Then add branch B (which is -11), then take the min with branch C (6), then subtract branch D (44 + 5 = 49). So the steps are:
+
+1. Start with branch A: -29
+2. Add branch B: -29 + (-11) = -40
+3. Take the min with branch C: min(-40, 6) = -40
+4. Subtract branch D: -40 - 49 = -89
+
+But the output instructions given in the example are:
+
+PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+BDOUB
+BMIN
+PUSH 44
+BADD_05
+BMIN
+
+But according to the task, the steps should be:
+
+Start with branch A: -29
+Add branch B: -11
+Take min with branch C: 6
+Subtract branch D: 44 + 5 = 49
+
+But the example output seems to have NEG (negate) for branch A, which is not correct","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+BDOUB
+BMIN
+PUSH 44
+BADD_05
+BMIN
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is -29. Then add branch B (which is -11), then take the min with branch C (6), then subtract branch D (44 + 5 = 49). So the steps are:
+
+1. Start with branch A: -29
+2. Add branch B: -29 + (-11) = -40
+3. Take the min with branch C: min(-40, 6) = -40
+4. Subtract branch D: -40 - 49 = -89
+
+But the output instructions given in the example are:
+
+PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+BDOUB
+BMIN
+PUSH 44
+BADD_05
+BMIN
+
+But according to the task, the steps should be:
+
+Start with branch A: -29
+Add branch B: -11
+Take min with branch C: 6
+Subtract branch D: 44 + 5 = 49
+
+But the example output seems to have NEG (negate) for branch A, which is not correct","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BADD
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BSUB
+",,unknown_op:BDOUB,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,NEG MUL_02 DOUBLE ADD_05 BADD BMIN BSUB,"PUSH NEG PUSH MUL_02 BMIN PUSH BDOUB BMIN PUSH BADD_05 BMIN WAIT, START ADD TAKE SUBTRACT BUT PUSH NEG PUSH MUL_02 BMIN PUSH BDOUB BMIN PUSH BADD_05 BMIN BUT START ADD TAKE SUBTRACT BUT"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_1,1296,"PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMAX
+PUSH 52
+ADD_02
+BMAX","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMAX
+PUSH 52
+ADD_02
+BMAX","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMUL
+PUSH 52
+ADD_02
+BMUL
+",54,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_01 INC ADD_02 ADD_02 BMIN BMUL BMUL,PUSH ADD_01 PUSH INC BMIN PUSH ADD_02 BMAX PUSH ADD_02 BMAX
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_2,42,"PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BMIN","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BMIN","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BSUB
+",-48,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_05 NEG INC MUL_06 BMIN BMAX BSUB,PUSH ADD_05 PUSH NEG BMIN PUSH INC BMAX PUSH MUL_06 BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_0,-42,"PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+MUL_02
+BMIN
+PUSH 44
+ADD_05
+BSUB","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BMIN
+PUSH 6
+MUL_02
+BMIN
+PUSH 44
+ADD_05
+BSUB","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BADD
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BSUB
+",-71,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,NEG MUL_02 DOUBLE ADD_05 BADD BMIN BSUB,PUSH NEG PUSH MUL_02 BMIN PUSH MUL_02 BMIN PUSH ADD_05 BSUB
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_1,-6,"PUSH 58
+ADD_01
+PUSH 52
+MAX
+PUSH 5
+MIN
+PUSH 56
+ADD
+PUSH 18
+SUB
+PUSH 27
+DIV_03
+PUSH 49
+MOD_10
+PUSH -22
+DIV_04
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is 58. Then take the max with branch B (52). So the running result is max(58, 52) = 58. Then take the min with branch C (5). So the running result is min(58, 5) = 5. Then add branch D (56). So 5 + 56 = 61. Then subtract branch E (18). 61 - 18 = 43. Then add branch F (27). 43 + 27 = 70. Then take the max with branch G (49). 70 is larger, so 70. Then take the min with branch H (-22). 70 is larger, so 70. So the final result is 70. But the output instructions given in the example are different. Let me check again.
+
+Wait, the example output is:
+
+PUSH 58
+ADD_01
+PUSH 52
+MAX
+PUSH 5
+MIN","PUSH 58
+ADD_01
+PUSH 52
+MAX
+PUSH 5
+MIN
+PUSH 56
+ADD
+PUSH 18
+SUB
+PUSH 27
+DIV_03
+PUSH 49
+MOD_10
+PUSH -22
+DIV_04
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is 58. Then take the max with branch B (52). So the running result is max(58, 52) = 58. Then take the min with branch C (5). So the running result is min(58, 5) = 5. Then add branch D (56). So 5 + 56 = 61. Then subtract branch E (18). 61 - 18 = 43. Then add branch F (27). 43 + 27 = 70. Then take the max with branch G (49). 70 is larger, so 70. Then take the min with branch H (-22). 70 is larger, so 70. So the final result is 70. But the output instructions given in the example are different. Let me check again.
+
+Wait, the example output is:
+
+PUSH 58
+ADD_01
+PUSH 52
+MAX
+PUSH 5
+MIN","PUSH 58
+INC
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BSUB
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN
+",,unknown_op:MAX,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,INC ADD_05 SUB_05 SUB_03 SUB_03 DIV_03 MOD_10 DIV_04 BMAX BMIN BADD BSUB BADD BMAX BMIN,"PUSH ADD_01 PUSH MAX PUSH MIN PUSH ADD PUSH SUB PUSH DIV_03 PUSH MOD_10 PUSH DIV_04 WAIT, PUSH ADD_01 PUSH MAX PUSH MIN"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_0,-34,"PUSH 6
+ADD_02
+MUL_B
+SUB_C
+ADD_D
+MIN_E
+MAX_F
+SUB_G
+MIN_H
+To solve this problem, we need to follow the sequence of operations defined in the task, starting with branch A and applying each subsequent operation step-by-step. Here's the breakdown of the steps:
+
+1. **Branch A**: Start with the value 6.
+   - This is the initial value we'll use for our calculations.
+   - The operation is to add 2, which is represented as `ADD_02`.
+
+2. **Multiply by Branch B**: Take the result from branch A and multiply it by the result of branch B.
+   - Branch B starts with -12 and takes modulo 13.
+   - The operation is to multiply the current value by the result of branch B, which is represented as `MUL_B`.
+
+3. **Subtract Branch C**: Subtract the result of branch C from the current value.
+   - Branch C starts with 17 and takes modulo 10.
+   - The operation is to subtract the result of branch C, which is represented as `SUB_C`.
+
+4. **Add Branch D**: Add the result of branch D to the current value.
+   - Branch D starts with -27 and multiplies by 3.
+   - The operation is to add the result of branch D, which is represented as `ADD_D`.
+
+5. **Take the Min with Branch E**: Take the minimum of the current value and the result of branch E.","PUSH 6
+ADD_02
+MUL_B
+SUB_C
+ADD_D
+MIN_E
+MAX_F
+SUB_G
+MIN_H
+To solve this problem, we need to follow the sequence of operations defined in the task, starting with branch A and applying each subsequent operation step-by-step. Here's the breakdown of the steps:
+
+1. **Branch A**: Start with the value 6.
+   - This is the initial value we'll use for our calculations.
+   - The operation is to add 2, which is represented as `ADD_02`.
+
+2. **Multiply by Branch B**: Take the result from branch A and multiply it by the result of branch B.
+   - Branch B starts with -12 and takes modulo 13.
+   - The operation is to multiply the current value by the result of branch B, which is represented as `MUL_B`.
+
+3. **Subtract Branch C**: Subtract the result of branch C from the current value.
+   - Branch C starts with 17 and takes modulo 10.
+   - The operation is to subtract the result of branch C, which is represented as `SUB_C`.
+
+4. **Add Branch D**: Add the result of branch D to the current value.
+   - Branch D starts with -27 and multiplies by 3.
+   - The operation is to add the result of branch D, which is represented as `ADD_D`.
+
+5. **Take the Min with Branch E**: Take the minimum of the current value and the result of branch E.","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMUL
+PUSH 17
+MOD_10
+BSUB
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BSUB
+PUSH -18
+DIV_05
+BMIN
+",,unknown_op:MUL_B,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_02 MOD_13 MOD_10 MUL_03 ADD_02 DIV_05 ADD_02 DIV_05 BMUL BSUB BADD BMIN BMAX BSUB BMIN,PUSH ADD_02 MUL_B SUB_C ADD_D MIN_E MAX_F SUB_G MIN_H TO **BRANCH - - **MULTIPLY - - **SUBTRACT - - **ADD - - **TAKE
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_2,-8202600,"PUSH -21
+MOD_13
+PUSH 60
+ADD
+PUSH 24
+ADD
+PUSH -14
+DIV_05
+PUSH 10
+MUL_06
+PUSH -8
+DIV_04
+PUSH 34
+ADD
+PUSH 58
+ADD
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is -21. Then add branch B (60), then take the min with branch C (24), then subtract branch D (-14), then multiply by branch E (10), then multiply by branch F (-8), then multiply by branch G (34), then multiply by branch H (58). 
+
+But the way the instructions are written, the steps are: 
+
+Start with branch A: -21
+Add branch B: -21 + 60 = 39
+Take min with branch C: min(39, 24) = 24
+Subtract branch D: 24 - (-14) = 38
+Multiply by branch E: 38 * 10 = 380
+Multiply by branch F: 380 * (-8) = -3040
+Multiply by branch G: -3040 * 34 = -103,360
+Multiply by branch H: -103,360 * 58","PUSH -21
+MOD_13
+PUSH 60
+ADD
+PUSH 24
+ADD
+PUSH -14
+DIV_05
+PUSH 10
+MUL_06
+PUSH -8
+DIV_04
+PUSH 34
+ADD
+PUSH 58
+ADD
+ 
+
+Wait, but the task says to start with branch A as the running result. So the initial value is -21. Then add branch B (60), then take the min with branch C (24), then subtract branch D (-14), then multiply by branch E (10), then multiply by branch F (-8), then multiply by branch G (34), then multiply by branch H (58). 
+
+But the way the instructions are written, the steps are: 
+
+Start with branch A: -21
+Add branch B: -21 + 60 = 39
+Take min with branch C: min(39, 24) = 24
+Subtract branch D: 24 - (-14) = 38
+Multiply by branch E: 38 * 10 = 380
+Multiply by branch F: 380 * (-8) = -3040
+Multiply by branch G: -3040 * 34 = -103,360
+Multiply by branch H: -103,360 * 58","PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BADD
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMUL
+PUSH -8
+DIV_04
+BMUL
+PUSH 34
+ADD_01
+BMUL
+PUSH 58
+ADD_05
+BMUL
+",,unknown_op:ADD,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MOD_13 TRIPLE ADD_04 DIV_05 MUL_06 DIV_04 ADD_01 ADD_05 BADD BMIN BSUB BMUL BMUL BMUL BMUL,"PUSH MOD_13 PUSH ADD PUSH ADD PUSH DIV_05 PUSH MUL_06 PUSH DIV_04 PUSH ADD PUSH ADD WAIT, BUT START ADD TAKE SUBTRACT MULTIPLY MULTIPLY MULTIPLY MULTIPLY"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_1,-6,"PUSH 58
+ADD_01
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BMIN
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN","PUSH 58
+ADD_01
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BMIN
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN","PUSH 58
+INC
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BSUB
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN
+",-6,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,INC ADD_05 SUB_05 SUB_03 SUB_03 DIV_03 MOD_10 DIV_04 BMAX BMIN BADD BSUB BADD BMAX BMIN,PUSH ADD_01 PUSH ADD_05 BMAX PUSH SUB_05 BMIN PUSH SUB_03 BADD PUSH SUB_03 BMIN PUSH DIV_03 BADD PUSH MOD_10 BMAX PUSH DIV_04 BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_0,-34,"PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMAX
+PUSH 17
+MOD_10
+BMIN
+PUSH -27
+MUL_03
+BMIN
+PUSH 8
+ADD_02
+BMAX
+PUSH -16
+DIV_05
+BMIN
+PUSH 28
+ADD_02
+BMIN
+PUSH -18
+DIV_05
+BMAX","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMAX
+PUSH 17
+MOD_10
+BMIN
+PUSH -27
+MUL_03
+BMIN
+PUSH 8
+ADD_02
+BMAX
+PUSH -16
+DIV_05
+BMIN
+PUSH 28
+ADD_02
+BMIN
+PUSH -18
+DIV_05
+BMAX","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMUL
+PUSH 17
+MOD_10
+BSUB
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BSUB
+PUSH -18
+DIV_05
+BMIN
+",-4,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_02 MOD_13 MOD_10 MUL_03 ADD_02 DIV_05 ADD_02 DIV_05 BMUL BSUB BADD BMIN BMAX BSUB BMIN,PUSH ADD_02 PUSH MOD_13 BMAX PUSH MOD_10 BMIN PUSH MUL_03 BMIN PUSH ADD_02 BMAX PUSH DIV_05 BMIN PUSH ADD_02 BMIN PUSH DIV_05 BMAX
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_2,-8202600,"PUSH -21
+MOD_13
+PUSH 60
+ADD_03
+BMIN
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMAX
+PUSH -8
+DIV_04
+BMAX
+PUSH 34
+ADD_01
+BMAX
+PUSH 58
+ADD_05
+BMAX","PUSH -21
+MOD_13
+PUSH 60
+ADD_03
+BMIN
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMAX
+PUSH -8
+DIV_04
+BMAX
+PUSH 34
+ADD_01
+BMAX
+PUSH 58
+ADD_05
+BMAX","PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BADD
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMUL
+PUSH -8
+DIV_04
+BMUL
+PUSH 34
+ADD_01
+BMUL
+PUSH 58
+ADD_05
+BMUL
+",63,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MOD_13 TRIPLE ADD_04 DIV_05 MUL_06 DIV_04 ADD_01 ADD_05 BADD BMIN BSUB BMUL BMUL BMUL BMUL,PUSH MOD_13 PUSH ADD_03 BMIN PUSH ADD_04 BMIN PUSH DIV_05 BSUB PUSH MUL_06 BMAX PUSH DIV_04 BMAX PUSH ADD_01 BMAX PUSH ADD_05 BMAX
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_0,102,"PUSH -12
+PUSH -6
+PUSH -19
+PUSH -12
+PUSH -17
+PUSH -30
+PUSH 58
+PUSH 34
+B_MUL
+B_MUL
+B_SUB
+B_SUB
+B_MUL
+B_MAX
+B_MIN
+. 
+
+Wait, but the branches are not just the starting values. The branches are sequences of operations. So the correct way is to first generate the branch values, then apply the operations in the order specified. Let me re-express the task.
+
+Branch A: start -12, then increase by 2. So the branch value is -12 + 2 = -10.
+Branch B: start -6, then decrease by 4. So the branch value is -6 - 4 = -10.
+Branch C: start -19, then keep the whole-number quotient after division by 4. So -19 / 4 = -4.75, but whole-number quotient is -5.
+Branch D: start -12, then increase by 2. So -12 + 2 = -10.
+Branch E: start -17, then increase by 6. So -17 + 6 = -11.
+Branch F: start -30, then increase by 5. So -30 + 5 = -25.
+Branch G: start 58, then scale by 6. So 58 * 6 = 3","PUSH -12
+PUSH -6
+PUSH -19
+PUSH -12
+PUSH -17
+PUSH -30
+PUSH 58
+PUSH 34
+B_MUL
+B_MUL
+B_SUB
+B_SUB
+B_MUL
+B_MAX
+B_MIN
+. 
+
+Wait, but the branches are not just the starting values. The branches are sequences of operations. So the correct way is to first generate the branch values, then apply the operations in the order specified. Let me re-express the task.
+
+Branch A: start -12, then increase by 2. So the branch value is -12 + 2 = -10.
+Branch B: start -6, then decrease by 4. So the branch value is -6 - 4 = -10.
+Branch C: start -19, then keep the whole-number quotient after division by 4. So -19 / 4 = -4.75, but whole-number quotient is -5.
+Branch D: start -12, then increase by 2. So -12 + 2 = -10.
+Branch E: start -17, then increase by 6. So -17 + 6 = -11.
+Branch F: start -30, then increase by 5. So -30 + 5 = -25.
+Branch G: start 58, then scale by 6. So 58 * 6 = 3","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BMUL
+PUSH -19
+DIV_04
+BMUL
+PUSH -12
+ADD_02
+BSUB
+PUSH -17
+ADD_06
+BSUB
+PUSH -30
+ADD_05
+BMUL
+PUSH 58
+MUL_06
+BMAX
+PUSH 34
+TRIPLE
+BMIN
+",,unknown_op:B_MUL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_02 SUB_04 DIV_04 ADD_02 ADD_06 ADD_05 MUL_06 TRIPLE BMUL BMUL BSUB BSUB BMUL BMAX BMIN,"PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH B_MUL B_MUL B_SUB B_SUB B_MUL B_MAX B_MIN . WAIT, BRANCH BRANCH BRANCH BRANCH BRANCH BRANCH BRANCH"
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_1,7,"PUSH -14
+PUSH 3
+SUB
+PUSH 23
+PUSH 6
+MUL
+PUSH 17
+PUSH 2
+MUL
+PUSH 37
+PUSH 2
+MUL
+PUSH 26
+PUSH 1
+SUB
+PUSH 32
+PUSH 5
+MUL
+PUSH 28
+PUSH 4
+DIV
+PUSH 31
+PUSH 4
+DIV
+B_SUB_01
+B_ADD_02
+B_MUL_03
+B_SUB_04
+B_MUL_05
+B_MAX_06
+B_MAX_07
+The user's task is to generate a numeric stack instruction sequence based on the given branch operations and the specified order of combining them. The branches are defined with their starting values and subsequent operations. The combining order is: subtract B from the running result, add C, multiply by D, subtract E, multiply by F, then compare with G and H, keeping the larger of the two. The output should be in the format of PUSH, ABI unary mnemonics, and branch merge mnemonics, without any additional explanations or numbering. The final answer is the sequence of instructions that correctly represents the task.
+The user's task is to generate a numeric stack instruction sequence based on the given branch operations and the specified order of combining them. The branches are defined with their starting values and subsequent operations. The combining order is: subtract B from the running","PUSH -14
+PUSH 3
+SUB
+PUSH 23
+PUSH 6
+MUL
+PUSH 17
+PUSH 2
+MUL
+PUSH 37
+PUSH 2
+MUL
+PUSH 26
+PUSH 1
+SUB
+PUSH 32
+PUSH 5
+MUL
+PUSH 28
+PUSH 4
+DIV
+PUSH 31
+PUSH 4
+DIV
+B_SUB_01
+B_ADD_02
+B_MUL_03
+B_SUB_04
+B_MUL_05
+B_MAX_06
+B_MAX_07
+The user's task is to generate a numeric stack instruction sequence based on the given branch operations and the specified order of combining them. The branches are defined with their starting values and subsequent operations. The combining order is: subtract B from the running result, add C, multiply by D, subtract E, multiply by F, then compare with G and H, keeping the larger of the two. The output should be in the format of PUSH, ABI unary mnemonics, and branch merge mnemonics, without any additional explanations or numbering. The final answer is the sequence of instructions that correctly represents the task.
+The user's task is to generate a numeric stack instruction sequence based on the given branch operations and the specified order of combining them. The branches are defined with their starting values and subsequent operations. The combining order is: subtract B from the running","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BSUB
+PUSH 17
+MUL_02
+BADD
+PUSH 37
+MUL_02
+BMUL
+PUSH 26
+SUB_01
+BSUB
+PUSH 32
+MUL_05
+BMUL
+PUSH 28
+DIV_04
+BMAX
+PUSH 31
+DIV_04
+BMAX
+",,unknown_op:SUB,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,SUB_03 MUL_06 MUL_02 MUL_02 SUB_01 MUL_05 DIV_04 DIV_04 BSUB BADD BMUL BSUB BMUL BMAX BMAX,PUSH PUSH SUB PUSH PUSH MUL PUSH PUSH MUL PUSH PUSH MUL PUSH PUSH SUB PUSH PUSH MUL PUSH PUSH DIV PUSH PUSH DIV B_SUB_01 B_ADD_02 B_MUL_03 B_SUB_04 B_MUL_05 B_MAX_06 B_MAX_07 THE
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_2,-10,"PUSH -27
+SCALE_02
+PUSH 26
+MOD_11
+PUSH -28
+ADD_03
+PUSH -18
+SCALE_04
+PUSH 50
+SUB_03
+PUSH 53
+ADD_03
+PUSH 1
+MOD_09
+PUSH -16
+ADD_06
+B_01
+B_02
+B_03
+B_04
+B_05
+B_06
+B_07
+B_08
+B_09
+B_10
+B_11
+B_12
+B_13
+B_14
+B_11
+B_12
+B_13
+B_14
+B_15
+B_16
+B_17
+B_18
+B_19
+B_20
+B_21
+B_22
+B_23
+B_24
+B_25
+B_26
+B_27
+B_28
+B_29
+B_30
+B_31
+B_32
+B_33
+B_34
+B_35
+B_36
+B_37
+B_38
+B_39
+B_40
+B_41
+B_42
+B_4","PUSH -27
+SCALE_02
+PUSH 26
+MOD_11
+PUSH -28
+ADD_03
+PUSH -18
+SCALE_04
+PUSH 50
+SUB_03
+PUSH 53
+ADD_03
+PUSH 1
+MOD_09
+PUSH -16
+ADD_06
+B_01
+B_02
+B_03
+B_04
+B_05
+B_06
+B_07
+B_08
+B_09
+B_10
+B_11
+B_12
+B_13
+B_14
+B_11
+B_12
+B_13
+B_14
+B_15
+B_16
+B_17
+B_18
+B_19
+B_20
+B_21
+B_22
+B_23
+B_24
+B_25
+B_26
+B_27
+B_28
+B_29
+B_30
+B_31
+B_32
+B_33
+B_34
+B_35
+B_36
+B_37
+B_38
+B_39
+B_40
+B_41
+B_42
+B_4","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BSUB
+PUSH -18
+MUL_04
+BADD
+PUSH 50
+SUB_03
+BADD
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BADD
+PUSH -16
+ADD_06
+BMIN
+",,unknown_op:SCALE_02,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL_02 MOD_11 ADD_03 MUL_04 SUB_03 ADD_03 MOD_09 ADD_06 BMAX BSUB BADD BADD BMIN BADD BMIN,PUSH SCALE_02 PUSH MOD_11 PUSH ADD_03 PUSH SCALE_04 PUSH SUB_03 PUSH ADD_03 PUSH MOD_09 PUSH ADD_06 B_01 B_02 B_03 B_04 B_05 B_06 B_07 B_08 B_09 B_10 B_11 B_12 B_13 B_14 B_11 B_12 B_13 B_14 B_15 B_16 B_17 B_18 B_19 B_20 B_21 B_22 B_23 B_24 B_25 B_26 B_27 B_28 B_29 B_30 B_31 B_32 B_33 B_34 B_35 B_36 B_37 B_38 B_39 B_40 B_41 B_42 B_4
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_0,102,"PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BADD
+PUSH -19
+DIV_04
+BADD
+PUSH -12
+ADD_02
+BADD
+PUSH -17
+ADD_06
+BADD
+PUSH -30
+ADD_05
+BADD
+PUSH 58
+MUL_06
+BADD
+PUSH 34
+MUL_03
+BADD","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BADD
+PUSH -19
+DIV_04
+BADD
+PUSH -12
+ADD_02
+BADD
+PUSH -17
+ADD_06
+BADD
+PUSH -30
+ADD_05
+BADD
+PUSH 58
+MUL_06
+BADD
+PUSH 34
+MUL_03
+BADD","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BMUL
+PUSH -19
+DIV_04
+BMUL
+PUSH -12
+ADD_02
+BSUB
+PUSH -17
+ADD_06
+BSUB
+PUSH -30
+ADD_05
+BMUL
+PUSH 58
+MUL_06
+BMAX
+PUSH 34
+TRIPLE
+BMIN
+",379,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_02 SUB_04 DIV_04 ADD_02 ADD_06 ADD_05 MUL_06 TRIPLE BMUL BMUL BSUB BSUB BMUL BMAX BMIN,PUSH ADD_02 PUSH SUB_04 BADD PUSH DIV_04 BADD PUSH ADD_02 BADD PUSH ADD_06 BADD PUSH ADD_05 BADD PUSH MUL_06 BADD PUSH MUL_03 BADD
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_1,7,"PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BMIN
+PUSH 17
+MUL_02
+BMIN
+PUSH 37
+MUL_02
+BMIN
+PUSH 26
+SUB_01
+BMIN
+PUSH 32
+MUL_05
+BMIN
+PUSH 28
+DIV_04
+BMIN
+PUSH 31
+DIV_04
+BMIN","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BMIN
+PUSH 17
+MUL_02
+BMIN
+PUSH 37
+MUL_02
+BMIN
+PUSH 26
+SUB_01
+BMIN
+PUSH 32
+MUL_05
+BMIN
+PUSH 28
+DIV_04
+BMIN
+PUSH 31
+DIV_04
+BMIN","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BSUB
+PUSH 17
+MUL_02
+BADD
+PUSH 37
+MUL_02
+BMUL
+PUSH 26
+SUB_01
+BSUB
+PUSH 32
+MUL_05
+BMUL
+PUSH 28
+DIV_04
+BMAX
+PUSH 31
+DIV_04
+BMAX
+",-17,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_03 MUL_06 MUL_02 MUL_02 SUB_01 MUL_05 DIV_04 DIV_04 BSUB BADD BMUL BSUB BMUL BMAX BMAX,PUSH SUB_03 PUSH MUL_06 BMIN PUSH MUL_02 BMIN PUSH MUL_02 BMIN PUSH SUB_01 BMIN PUSH MUL_05 BMIN PUSH DIV_04 BMIN PUSH DIV_04 BMIN
+pilot,pilot_v1_abi32_nested_d3_s101,abi32_nested_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_2,-10,"PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BMAX
+PUSH -18
+MUL_04
+BMAX
+PUSH 50
+SUB_03
+BMAX
+PUSH 53
+ADD_03
+BMAX
+PUSH 1
+MOD_09
+BMAX
+PUSH -16
+ADD_06
+BMAX","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BMAX
+PUSH -18
+MUL_04
+BMAX
+PUSH 50
+SUB_03
+BMAX
+PUSH 53
+ADD_03
+BMAX
+PUSH 1
+MOD_09
+BMAX
+PUSH -16
+ADD_06
+BMAX","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BSUB
+PUSH -18
+MUL_04
+BADD
+PUSH 50
+SUB_03
+BADD
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BADD
+PUSH -16
+ADD_06
+BMIN
+",56,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MUL_02 MOD_11 ADD_03 MUL_04 SUB_03 ADD_03 MOD_09 ADD_06 BMAX BSUB BADD BADD BMIN BADD BMIN,PUSH MUL_02 PUSH MOD_11 BMAX PUSH ADD_03 BMAX PUSH MUL_04 BMAX PUSH SUB_03 BMAX PUSH ADD_03 BMAX PUSH MOD_09 BMAX PUSH ADD_06 BMAX
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_2,83,"PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45
+",83,,1,1,0,1,1,0,0,1,0,0,correct_exact,MUL_03 ADD_05 ADD_45,PUSH MUL_03 ADD_05 ADD_45
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_1,-52,"PUSH 9
+SUB_33
+SUB_27
+SUB_1","PUSH 9
+SUB_33
+SUB_27
+SUB_1","PUSH 9
+SUB_33
+SUB_27
+SUB_01
+",,unknown_op:SUB_1,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_33 SUB_27 SUB_01,PUSH SUB_33 SUB_27 SUB_1
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_0,-8,"PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31
+",-8,,1,1,0,1,1,0,0,1,0,0,correct_exact,SUB_04 SUB_10 SUB_31,PUSH SUB_04 SUB_10 SUB_31
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_2,83,"PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45
+",83,,1,1,0,1,1,0,0,1,0,1,correct_exact,MUL_03 ADD_05 ADD_45,PUSH MUL_03 ADD_05 ADD_45
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_1,-52,"PUSH 9
+SUB_33
+SUB_27
+SUB_10","PUSH 9
+SUB_33
+SUB_27
+SUB_10","PUSH 9
+SUB_33
+SUB_27
+SUB_01
+",-61,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_33 SUB_27 SUB_01,PUSH SUB_33 SUB_27 SUB_10
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_0,-8,"PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31
+",-8,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB_04 SUB_10 SUB_31,PUSH SUB_04 SUB_10 SUB_31
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_2,81,"PUSH 30
+SUB_17
+ADD_43
+ADD_4
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_4
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_04
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14
+",,unknown_op:ADD_4,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_17 ADD_43 ADD_04 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14,PUSH SUB_17 ADD_43 ADD_4 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_0,-95,"PUSH -22
+SUB_17
+SUB_28
+DEC_01
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC_01
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15
+",,unknown_op:DEC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15,PUSH SUB_17 SUB_28 DEC_01 SUB_12 SUB_35 SUB_16 ADD_21 ADD_15
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_1,21,"PUSH -7
+ADD_034
+ADD_001
+SUB_007
+SUB_004
+SUB_01B
+MOD_23
+SUB_012
+ADD_016","PUSH -7
+ADD_034
+ADD_001
+SUB_007
+SUB_004
+SUB_01B
+MOD_23
+SUB_012
+ADD_016","PUSH -7
+ADD_34
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22
+",,unknown_op:ADD_034,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_34 ADD_01 SUB_07 SUB_04 SUB_23 MOD_23 SUB_18 ADD_22,PUSH ADD_034 ADD_001 SUB_007 SUB_004 SUB_01B MOD_23 SUB_012 ADD_016
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_2,81,"PUSH 30
+SUB_17
+ADD_43
+ADD_40
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_40
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_04
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14
+",117,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_17 ADD_43 ADD_04 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14,PUSH SUB_17 ADD_43 ADD_40 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_0,-95,"PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15
+",-95,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15,PUSH SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_1,21,"PUSH -7
+ADD_03
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22","PUSH -7
+ADD_03
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22","PUSH -7
+ADD_34
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22
+",13,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_34 ADD_01 SUB_07 SUB_04 SUB_23 MOD_23 SUB_18 ADD_22,PUSH ADD_03 ADD_01 SUB_07 SUB_04 SUB_23 MOD_23 SUB_18 ADD_22
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_1,-11,"PUSH 70
+ADD_041
+SUB_043
+ADD_020
+SUB_041
+SUB_027
+MOD_19
+SUB_030
+ADD_015
+MOD_19
+ADD_045
+ADD_006
+ADD_029
+DIV_005
+SUB_024
+ADD_040
+SUB_044","PUSH 70
+ADD_041
+SUB_043
+ADD_020
+SUB_041
+SUB_027
+MOD_19
+SUB_030
+ADD_015
+MOD_19
+ADD_045
+ADD_006
+ADD_029
+DIV_005
+SUB_024
+ADD_040
+SUB_044","PUSH 70
+ADD_41
+SUB_43
+ADD_20
+SUB_41
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44
+",,unknown_op:ADD_041,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_41 SUB_43 ADD_20 SUB_41 SUB_27 MOD_19 SUB_30 ADD_15 MOD_19 ADD_45 ADD_06 ADD_29 DIV_05 SUB_24 ADD_40 SUB_44,PUSH ADD_041 SUB_043 ADD_020 SUB_041 SUB_027 MOD_19 SUB_030 ADD_015 MOD_19 ADD_045 ADD_006 ADD_029 DIV_005 SUB_024 ADD_040 SUB_044
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_0,40,"PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC_01
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC_01
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+DOUBLE
+MUL_03
+ADD_37
+ADD_03
+",,unknown_op:INC_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 DOUBLE MUL_03 ADD_37 ADD_03,PUSH MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC_01 SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 MUL_02 MUL_03 ADD_37 ADD_03
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_2,-35,"PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05
+",-35,,1,1,0,1,1,0,0,1,0,0,correct_exact,SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05,PUSH SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_1,-11,"PUSH 70
+ADD_04
+SUB_03
+ADD_02
+SUB_01
+SUB_02
+MOD_07
+SUB_01
+ADD_01
+MOD_07
+ADD_04
+ADD_01
+ADD_02
+DIV_03
+SUB_01
+ADD_01
+SUB_01","PUSH 70
+ADD_04
+SUB_03
+ADD_02
+SUB_01
+SUB_02
+MOD_07
+SUB_01
+ADD_01
+MOD_07
+ADD_04
+ADD_01
+ADD_02
+DIV_03
+SUB_01
+ADD_01
+SUB_01","PUSH 70
+ADD_41
+SUB_43
+ADD_20
+SUB_41
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44
+",1,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_41 SUB_43 ADD_20 SUB_41 SUB_27 MOD_19 SUB_30 ADD_15 MOD_19 ADD_45 ADD_06 ADD_29 DIV_05 SUB_24 ADD_40 SUB_44,PUSH ADD_04 SUB_03 ADD_02 SUB_01 SUB_02 MOD_07 SUB_01 ADD_01 MOD_07 ADD_04 ADD_01 ADD_02 DIV_03 SUB_01 ADD_01 SUB_01
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_0,40,"PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+MUL_02
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+DOUBLE
+MUL_03
+ADD_37
+ADD_03
+",40,,1,1,0,1,0,0,0,1,1,0,correct_semantic_variant,MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 DOUBLE MUL_03 ADD_37 ADD_03,PUSH MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 MUL_02 MUL_03 ADD_37 ADD_03
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_2,-35,"PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05
+",-35,,1,1,0,1,1,0,0,1,0,1,correct_exact,SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05,PUSH SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_2,-77,"PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47
+",-77,,1,1,0,1,1,0,0,1,0,0,correct_exact,ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47,PUSH ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_1,-102,"PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_2
+SUB_40
+MUL_3","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_2
+SUB_40
+MUL_3","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_02
+SUB_40
+TRIPLE
+",,unknown_op:SUB_2,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_02 SUB_40 TRIPLE,PUSH ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_2 SUB_40 MUL_3
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_0,-474,"PUSH -37
+SUB_09
+SUB_0B
+MOD_11
+SUB_37
+ADD_1D
+MUL_07
+SUB_02
+ADD_0D
+DUP
+MUL_02
+SUB_1C
+ADD_0A
+MUL_05
+SUB_26
+SUB_1E
+SUB_1E
+SUB_2E","PUSH -37
+SUB_09
+SUB_0B
+MOD_11
+SUB_37
+ADD_1D
+MUL_07
+SUB_02
+ADD_0D
+DUP
+MUL_02
+SUB_1C
+ADD_0A
+MUL_05
+SUB_26
+SUB_1E
+SUB_1E
+SUB_2E","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+DOUBLE
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46
+",,unknown_op:SUB_0B,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 DOUBLE SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46,PUSH SUB_09 SUB_0B MOD_11 SUB_37 ADD_1D MUL_07 SUB_02 ADD_0D DUP MUL_02 SUB_1C ADD_0A MUL_05 SUB_26 SUB_1E SUB_1E SUB_2E
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_2,-77,"PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47
+",-77,,1,1,0,1,1,0,0,1,0,1,correct_exact,ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47,PUSH ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_1,-102,"PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_20
+SUB_40
+MUL_03","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_20
+SUB_40
+MUL_03","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_02
+SUB_40
+TRIPLE
+",-156,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_02 SUB_40 TRIPLE,PUSH ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_20 SUB_40 MUL_03
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_0,-474,"PUSH -37
+SUB_09
+SUB_01
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+MUL_02
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_01
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+MUL_02
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+DOUBLE
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46
+",-544,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 DOUBLE SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46,PUSH SUB_09 SUB_01 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 MUL_02 SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_0,88,"PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+B_SUB","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+B_SUB","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BSUB
+",,unknown_op:B_SUB,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_16 MUL_02 BSUB,PUSH ADD_16 PUSH MUL_02 B_SUB
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_1,9,"PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD
+",9,,1,1,0,1,1,0,0,1,0,0,correct_exact,MOD_23 ADD_21 BADD,PUSH MOD_23 PUSH ADD_21 BADD
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_2,-11,"PUSH 37
+SUB_12
+PUSH -12
+MUL_3
+ADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_3
+ADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD
+",,unknown_op:MUL_3,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_12 MUL_03 BADD,PUSH SUB_12 PUSH MUL_3 ADD
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_0,88,"PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BMIN","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BMIN","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BSUB
+",-12,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_16 MUL_02 BSUB,PUSH ADD_16 PUSH MUL_02 BMIN
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_1,9,"PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD
+",9,,1,1,0,1,1,0,0,1,0,1,correct_exact,MOD_23 ADD_21 BADD,PUSH MOD_23 PUSH ADD_21 BADD
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_2,-11,"PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD
+",-11,,1,1,0,1,1,0,0,1,1,0,correct_exact,SUB_12 MUL_03 BADD,PUSH SUB_12 PUSH MUL_03 BADD
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_0,-165,"PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+MUL
+PUSH 4
+DIV_3
+SUB
+PUSH -3
+ADD_10","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+MUL
+PUSH 4
+DIV_3
+SUB
+PUSH -3
+ADD_10","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BMUL
+PUSH 4
+DIV_03
+BSUB
+PUSH -3
+ADD_10
+BADD
+",,unknown_op:MUL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_24 MOD_10 DIV_03 ADD_10 BMUL BSUB BADD,PUSH SUB_24 PUSH MOD_10 MUL PUSH DIV_3 SUB PUSH ADD_10
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_1,13,"PUSH -5
+SQ_01
+MOD_01
+PUSH -18
+ADD_01
+BMAX
+PUSH 24
+SUB_01
+BADD
+PUSH 10
+SUB_01
+B_SUB","PUSH -5
+SQ_01
+MOD_01
+PUSH -18
+ADD_01
+BMAX
+PUSH 24
+SUB_01
+BADD
+PUSH 10
+SUB_01
+B_SUB","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BSUB
+",,unknown_op:SQ_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SQUARE_MOD_997 ADD_28 SUB_45 SUB_19 BMAX BADD BSUB,PUSH SQ_01 MOD_01 PUSH ADD_01 BMAX PUSH SUB_01 BADD PUSH SUB_01 B_SUB
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_2,-61740,"PUSH 7
+SQ_01
+MOD_997
+PUSH 15
+SUB_35
+MAX
+PUSH -17
+SUB_13
+MUL
+PUSH 0
+ADD_42
+MUL","PUSH 7
+SQ_01
+MOD_997
+PUSH 15
+SUB_35
+MAX
+PUSH -17
+SUB_13
+MUL
+PUSH 0
+ADD_42
+MUL","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMUL
+PUSH 0
+ADD_42
+BMUL
+",,unknown_op:SQ_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SQUARE_MOD_997 SUB_35 SUB_13 ADD_42 BMAX BMUL BMUL,PUSH SQ_01 MOD_997 PUSH SUB_35 MAX PUSH SUB_13 MUL PUSH ADD_42 MUL
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_0,-165,"PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BADD
+PUSH 4
+DIV_03
+BMIN
+PUSH -3
+ADD_10
+BADD","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BADD
+PUSH 4
+DIV_03
+BMIN
+PUSH -3
+ADD_10
+BADD","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BMUL
+PUSH 4
+DIV_03
+BSUB
+PUSH -3
+ADD_10
+BADD
+",-3,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_24 MOD_10 DIV_03 ADD_10 BMUL BSUB BADD,PUSH SUB_24 PUSH MOD_10 BADD PUSH DIV_03 BMIN PUSH ADD_10 BADD
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_1,13,"PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BMIN","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BMIN","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BSUB
+",-9,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SQUARE_MOD_997 ADD_28 SUB_45 SUB_19 BMAX BADD BSUB,PUSH SQUARE_MOD_997 PUSH ADD_28 BMAX PUSH SUB_45 BADD PUSH SUB_19 BMIN
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_2,-61740,"PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMAX
+PUSH 0
+ADD_42
+BMAX","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMAX
+PUSH 0
+ADD_42
+BMAX","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMUL
+PUSH 0
+ADD_42
+BMUL
+",49,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SQUARE_MOD_997 SUB_35 SUB_13 ADD_42 BMAX BMUL BMUL,PUSH SQUARE_MOD_997 PUSH SUB_35 BMAX PUSH SUB_13 BMAX PUSH ADD_42 BMAX
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_1,-6272068,"PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+PUSH -20
+SUB_12
+PUSH -18
+DIV_09
+PUSH 7
+ADD_13
+PUSH 25
+MOD_10
+PUSH 1
+SUB_35
+PUSH 18
+SUB_42
+B_MERGE_01
+B_MERGE_02
+B_MERGE_03
+B_MERGE_04
+B_MERGE_05
+B_MERGE_06
+B_MERGE_07","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+PUSH -20
+SUB_12
+PUSH -18
+DIV_09
+PUSH 7
+ADD_13
+PUSH 25
+MOD_10
+PUSH 1
+SUB_35
+PUSH 18
+SUB_42
+B_MERGE_01
+B_MERGE_02
+B_MERGE_03
+B_MERGE_04
+B_MERGE_05
+B_MERGE_06
+B_MERGE_07","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMUL
+PUSH -20
+SUB_12
+BMUL
+PUSH -18
+DIV_09
+BADD
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMUL
+PUSH 1
+SUB_35
+BADD
+PUSH 18
+SUB_42
+BADD
+",,unknown_op:B_MERGE_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL_07 MUL_05 SUB_12 DIV_09 ADD_13 MOD_10 SUB_35 SUB_42 BMUL BMUL BADD BMIN BMUL BADD BADD,PUSH MUL_07 PUSH MUL_05 PUSH SUB_12 PUSH DIV_09 PUSH ADD_13 PUSH MOD_10 PUSH SUB_35 PUSH SUB_42 B_MERGE_01 B_MERGE_02 B_MERGE_03 B_MERGE_04 B_MERGE_05 B_MERGE_06 B_MERGE_07
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_2,54,"PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+B_MUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_5
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+B_MUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_5
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX
+",,unknown_op:B_MUL,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_13 ADD_48 ADD_41 ADD_48 SUB_16 ADD_36 MUL_05 ADD_27 BMIN BADD BADD BMUL BMIN BADD BMAX,PUSH SUB_13 PUSH ADD_48 BMIN PUSH ADD_41 BADD PUSH ADD_48 BADD PUSH SUB_16 B_MUL PUSH ADD_36 BMIN PUSH MUL_5 BADD PUSH ADD_27 BMAX
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_0,-33,"PUSH -9
+ADD_041
+PUSH 30
+MUL_03
+PUSH 39
+ADD_018
+PUSH 48
+ADD_044
+PUSH -28
+DIV_07
+PUSH -10
+SUB_029
+PUSH 6
+SUB_012
+PUSH -22
+SUB_021","PUSH -9
+ADD_041
+PUSH 30
+MUL_03
+PUSH 39
+ADD_018
+PUSH 48
+ADD_044
+PUSH -28
+DIV_07
+PUSH -10
+SUB_029
+PUSH 6
+SUB_012
+PUSH -22
+SUB_021","PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMUL
+PUSH 48
+ADD_44
+BSUB
+PUSH -28
+DIV_07
+BADD
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BSUB
+PUSH -22
+SUB_21
+BMAX
+",,unknown_op:ADD_041,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD_41 MUL_03 ADD_18 ADD_44 DIV_07 SUB_29 SUB_12 SUB_21 BMIN BMUL BSUB BADD BMIN BSUB BMAX,PUSH ADD_041 PUSH MUL_03 PUSH ADD_018 PUSH ADD_044 PUSH DIV_07 PUSH SUB_029 PUSH SUB_012 PUSH SUB_021
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_1,-6272068,"PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMAX
+PUSH -20
+SUB_12
+BMAX
+PUSH -18
+DIV_09
+BMAX
+PUSH 7
+ADD_13
+BMAX
+PUSH 25
+MOD_10
+BMAX
+PUSH 1
+SUB_35
+BMAX
+PUSH 18
+SUB_42
+BMAX","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMAX
+PUSH -20
+SUB_12
+BMAX
+PUSH -18
+DIV_09
+BMAX
+PUSH 7
+ADD_13
+BMAX
+PUSH 25
+MOD_10
+BMAX
+PUSH 1
+SUB_35
+BMAX
+PUSH 18
+SUB_42
+BMAX","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMUL
+PUSH -20
+SUB_12
+BMUL
+PUSH -18
+DIV_09
+BADD
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMUL
+PUSH 1
+SUB_35
+BADD
+PUSH 18
+SUB_42
+BADD
+",280,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,MUL_07 MUL_05 SUB_12 DIV_09 ADD_13 MOD_10 SUB_35 SUB_42 BMUL BMUL BADD BMIN BMUL BADD BADD,PUSH MUL_07 PUSH MUL_05 BMAX PUSH SUB_12 BMAX PUSH DIV_09 BMAX PUSH ADD_13 BMAX PUSH MOD_10 BMAX PUSH SUB_35 BMAX PUSH SUB_42 BMAX
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_2,54,"PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMAX
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMAX
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX
+",264,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_13 ADD_48 ADD_41 ADD_48 SUB_16 ADD_36 MUL_05 ADD_27 BMIN BADD BADD BMUL BMIN BADD BMAX,PUSH SUB_13 PUSH ADD_48 BMIN PUSH ADD_41 BADD PUSH ADD_48 BADD PUSH SUB_16 BMAX PUSH ADD_36 BMIN PUSH MUL_05 BADD PUSH ADD_27 BMAX
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_0,-33,"PUSH -9
+ADD_04
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_01
+BMIN
+PUSH 48
+ADD_04
+BMIN
+PUSH -28
+DIV_07
+BMIN
+PUSH -10
+SUB_02
+BMIN
+PUSH 6
+SUB_01
+BMIN
+PUSH -22
+SUB_01
+BMAX","PUSH -9
+ADD_04
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_01
+BMIN
+PUSH 48
+ADD_04
+BMIN
+PUSH -28
+DIV_07
+BMIN
+PUSH -10
+SUB_02
+BMIN
+PUSH 6
+SUB_01
+BMIN
+PUSH -22
+SUB_01
+BMAX","PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMUL
+PUSH 48
+ADD_44
+BSUB
+PUSH -28
+DIV_07
+BADD
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BSUB
+PUSH -22
+SUB_21
+BMAX
+",-12,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,ADD_41 MUL_03 ADD_18 ADD_44 DIV_07 SUB_29 SUB_12 SUB_21 BMIN BMUL BSUB BADD BMIN BSUB BMAX,PUSH ADD_04 PUSH MUL_03 BMIN PUSH ADD_01 BMIN PUSH ADD_04 BMIN PUSH DIV_07 BMIN PUSH SUB_02 BMIN PUSH SUB_01 BMIN PUSH SUB_01 BMAX
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_0,7,"PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+PUSH -13
+SUB_47
+PUSH 27
+SUB_18
+PUSH -26
+MUL_04
+PUSH -14
+ADD_42
+PUSH 55
+SUB_11
+PUSH 52
+SUB_45
+B_01
+B_02
+B_03
+B_04
+B_05
+B_06
+B_07
+B_08","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+PUSH -13
+SUB_47
+PUSH 27
+SUB_18
+PUSH -26
+MUL_04
+PUSH -14
+ADD_42
+PUSH 55
+SUB_11
+PUSH 52
+SUB_45
+B_01
+B_02
+B_03
+B_04
+B_05
+B_06
+B_07
+B_08","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BSUB
+PUSH 27
+SUB_18
+BMUL
+PUSH -26
+MUL_04
+BADD
+PUSH -14
+ADD_42
+BADD
+PUSH 55
+SUB_11
+BMUL
+PUSH 52
+SUB_45
+BMIN
+",,unknown_op:B_01,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_17 ADD_24 SUB_47 SUB_18 MUL_04 ADD_42 SUB_11 SUB_45 BMIN BSUB BMUL BADD BADD BMUL BMIN,PUSH SUB_17 PUSH ADD_24 PUSH SUB_47 PUSH SUB_18 PUSH MUL_04 PUSH ADD_42 PUSH SUB_11 PUSH SUB_45 B_01 B_02 B_03 B_04 B_05 B_06 B_07 B_08
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_1,-38,"PUSH -26
+PUSH -15
+SUB
+PUSH -4
+PUSH -35
+SUB
+PUSH -4
+PUSH -16
+SUB
+PUSH 23
+PUSH 14
+ADD
+PUSH -27
+PUSH -29
+SUB
+PUSH -24
+PUSH -7
+SUB
+PUSH -28
+PUSH -10
+SUB
+B_0
+B_1
+B_2
+B_3
+B_4
+B_5
+B_6
+B_7","PUSH -26
+PUSH -15
+SUB
+PUSH -4
+PUSH -35
+SUB
+PUSH -4
+PUSH -16
+SUB
+PUSH 23
+PUSH 14
+ADD
+PUSH -27
+PUSH -29
+SUB
+PUSH -24
+PUSH -7
+SUB
+PUSH -28
+PUSH -10
+SUB
+B_0
+B_1
+B_2
+B_3
+B_4
+B_5
+B_6
+B_7","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BMUL
+PUSH -4
+SUB_16
+BSUB
+PUSH 23
+ADD_14
+BSUB
+PUSH -27
+SUB_29
+BMAX
+PUSH -24
+SUB_07
+BSUB
+PUSH -28
+SUB_10
+BMIN
+PUSH -2
+SUB_40
+BMAX
+",,unknown_op:SUB,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_15 SUB_35 SUB_16 ADD_14 SUB_29 SUB_07 SUB_10 SUB_40 BMUL BSUB BSUB BMAX BSUB BMIN BMAX,PUSH PUSH SUB PUSH PUSH SUB PUSH PUSH SUB PUSH PUSH ADD PUSH PUSH SUB PUSH PUSH SUB PUSH PUSH SUB B_0 B_1 B_2 B_3 B_4 B_5 B_6 B_7
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_free,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_2,4,"PUSH 37
+PUSH 30
+PUSH -1
+PUSH 31
+PUSH 33
+PUSH -14
+PUSH 13
+PUSH -2
+B_0001
+B_0002
+B_0003
+B_0004
+B_0005
+B_0006
+B_0007
+B_0008
+B_0009
+B_0010
+B_0011
+B_0012
+B_0013
+B_0014
+B_0015
+B_0016
+B_0017
+B_0018
+B_0019
+B_0020
+B_0021
+B_0022
+B_0023
+B_0024
+B_0025
+B_0026
+B_0027
+B_0028
+B_0029
+B_0030
+B_0031
+B_0032
+B_0033
+B_0034
+B_0035
+B_0036
+B_0037
+B_0038
+B_0039
+B","PUSH 37
+PUSH 30
+PUSH -1
+PUSH 31
+PUSH 33
+PUSH -14
+PUSH 13
+PUSH -2
+B_0001
+B_0002
+B_0003
+B_0004
+B_0005
+B_0006
+B_0007
+B_0008
+B_0009
+B_0010
+B_0011
+B_0012
+B_0013
+B_0014
+B_0015
+B_0016
+B_0017
+B_0018
+B_0019
+B_0020
+B_0021
+B_0022
+B_0023
+B_0024
+B_0025
+B_0026
+B_0027
+B_0028
+B_0029
+B_0030
+B_0031
+B_0032
+B_0033
+B_0034
+B_0035
+B_0036
+B_0037
+B_0038
+B_0039
+B","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+TRIPLE
+BMIN
+PUSH 33
+SUB_15
+BMUL
+PUSH -14
+SUB_34
+BMAX
+PUSH 13
+SUB_41
+BMAX
+PUSH -2
+SQUARE_MOD_997
+BMAX
+",,unknown_op:B_0001,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,SUB_21 SUB_27 SUB_01 TRIPLE SUB_15 SUB_34 SUB_41 SQUARE_MOD_997 BMIN BMIN BMIN BMUL BMAX BMAX BMAX,PUSH PUSH PUSH PUSH PUSH PUSH PUSH PUSH B_0001 B_0002 B_0003 B_0004 B_0005 B_0006 B_0007 B_0008 B_0009 B_0010 B_0011 B_0012 B_0013 B_0014 B_0015 B_0016 B_0017 B_0018 B_0019 B_0020 B_0021 B_0022 B_0023 B_0024 B_0025 B_0026 B_0027 B_0028 B_0029 B_0030 B_0031 B_0032 B_0033 B_0034 B_0035 B_0036 B_0037 B_0038 B_0039 B
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_0,7,"PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BMIN
+PUSH 27
+SUB_18
+BMIN
+PUSH -26
+MUL_04
+BMIN
+PUSH -14
+ADD_42
+BMIN
+PUSH 55
+SUB_11
+BMIN
+PUSH 52
+SUB_45
+BMIN","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BMIN
+PUSH 27
+SUB_18
+BMIN
+PUSH -26
+MUL_04
+BMIN
+PUSH -14
+ADD_42
+BMIN
+PUSH 55
+SUB_11
+BMIN
+PUSH 52
+SUB_45
+BMIN","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BSUB
+PUSH 27
+SUB_18
+BMUL
+PUSH -26
+MUL_04
+BADD
+PUSH -14
+ADD_42
+BADD
+PUSH 55
+SUB_11
+BMUL
+PUSH 52
+SUB_45
+BMIN
+",-104,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_17 ADD_24 SUB_47 SUB_18 MUL_04 ADD_42 SUB_11 SUB_45 BMIN BSUB BMUL BADD BADD BMUL BMIN,PUSH SUB_17 PUSH ADD_24 BMIN PUSH SUB_47 BMIN PUSH SUB_18 BMIN PUSH MUL_04 BMIN PUSH ADD_42 BMIN PUSH SUB_11 BMIN PUSH SUB_45 BMIN
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_1,-38,"PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BADD
+PUSH -4
+SUB_16
+BADD
+PUSH 23
+ADD_14
+BADD
+PUSH -27
+SUB_29
+BADD
+PUSH -24
+SUB_07
+BADD
+PUSH -28
+SUB_10
+BADD
+PUSH -2
+SUB_40
+BADD","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BADD
+PUSH -4
+SUB_16
+BADD
+PUSH 23
+ADD_14
+BADD
+PUSH -27
+SUB_29
+BADD
+PUSH -24
+SUB_07
+BADD
+PUSH -28
+SUB_10
+BADD
+PUSH -2
+SUB_40
+BADD","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BMUL
+PUSH -4
+SUB_16
+BSUB
+PUSH 23
+ADD_14
+BSUB
+PUSH -27
+SUB_29
+BMAX
+PUSH -24
+SUB_07
+BSUB
+PUSH -28
+SUB_10
+BMIN
+PUSH -2
+SUB_40
+BMAX
+",-230,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_15 SUB_35 SUB_16 ADD_14 SUB_29 SUB_07 SUB_10 SUB_40 BMUL BSUB BSUB BMAX BSUB BMIN BMAX,PUSH SUB_15 PUSH SUB_35 BADD PUSH SUB_16 BADD PUSH ADD_14 BADD PUSH SUB_29 BADD PUSH SUB_07 BADD PUSH SUB_10 BADD PUSH SUB_40 BADD
+pilot,pilot_v1_abi128_nested_d3_s101,abi128_nested_d3,program_stack_constrained,101,1,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_2,4,"PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+MUL_03
+BMIN
+PUSH 33
+SUB_15
+BMIN
+PUSH -14
+SUB_34
+BMIN
+PUSH 13
+SUB_41
+BMIN
+PUSH -2
+SQUARE_MOD_997
+BMIN","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+MUL_03
+BMIN
+PUSH 33
+SUB_15
+BMIN
+PUSH -14
+SUB_34
+BMIN
+PUSH 13
+SUB_41
+BMIN
+PUSH -2
+SQUARE_MOD_997
+BMIN","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+TRIPLE
+BMIN
+PUSH 33
+SUB_15
+BMUL
+PUSH -14
+SUB_34
+BMAX
+PUSH 13
+SUB_41
+BMAX
+PUSH -2
+SQUARE_MOD_997
+BMAX
+",-48,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,SUB_21 SUB_27 SUB_01 TRIPLE SUB_15 SUB_34 SUB_41 SQUARE_MOD_997 BMIN BMIN BMIN BMUL BMAX BMAX BMAX,PUSH SUB_21 PUSH SUB_27 BMIN PUSH SUB_01 BMIN PUSH MUL_03 BMIN PUSH SUB_15 BMIN PUSH SUB_34 BMIN PUSH SUB_41 BMIN PUSH SQUARE_MOD_997 BMIN
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_0,0,"PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03","PUSH -14
+MOD_07
+DIV_06
+DIV_03
+",0,,1,1,0,1,1,0,0,0,0,0,correct_exact,MOD_07 DIV_06 DIV_03,PUSH MOD_07 DIV_06 DIV_03
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_1,29,"PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01","PUSH 36
+MUL_05
+DIV_06
+SUB_01
+",29,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL_05 DIV_06 SUB_01,PUSH MUL_05 DIV_06 SUB_01
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d3,chain,3,eval_chain_d3_abi32_chain_2,0,"PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05","PUSH -13
+NEG
+MOD_09
+DIV_05
+",0,,1,1,0,1,1,0,0,0,0,0,correct_exact,NEG MOD_09 DIV_05,PUSH NEG MOD_09 DIV_05
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_2,109,"PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC","PUSH 45
+MOD_07
+ADD_04
+DIV_03
+ADD_04
+ADD_06
+MUL_03
+TRIPLE
+INC
+",109,,1,1,0,1,1,0,0,0,0,0,correct_exact,MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE INC,PUSH MOD_07 ADD_04 DIV_03 ADD_04 ADD_06 MUL_03 TRIPLE INC
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_1,12,"PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02","PUSH 21
+ADD_04
+SUB_02
+TRIPLE
+SUB_05
+MUL_06
+ABS
+MOD_09
+MUL_02
+",12,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02,PUSH ADD_04 SUB_02 TRIPLE SUB_05 MUL_06 ABS MOD_09 MUL_02
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d8,chain,8,eval_chain_d8_abi32_chain_0,9,"PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC","PUSH 27
+NEG
+ADD_06
+SUB_02
+MOD_09
+DIV_03
+ADD_03
+MUL_02
+INC
+",9,,1,1,0,1,1,0,0,0,0,0,correct_exact,NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC,PUSH NEG ADD_06 SUB_02 MOD_09 DIV_03 ADD_03 MUL_02 INC
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_0,5,"PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS","PUSH -7
+TRIPLE
+SUB_03
+ADD_02
+SUB_03
+ADD_06
+SUB_02
+MOD_09
+SUB_02
+ADD_02
+MOD_11
+ADD_06
+DIV_04
+SUB_05
+INC
+ADD_06
+ABS
+",5,,1,1,0,1,1,0,0,0,0,0,correct_exact,TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS,PUSH TRIPLE SUB_03 ADD_02 SUB_03 ADD_06 SUB_02 MOD_09 SUB_02 ADD_02 MOD_11 ADD_06 DIV_04 SUB_05 INC ADD_06 ABS
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_1,2,"PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DOUBLE
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DOUBLE
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02","PUSH 8
+SUB_05
+MUL_05
+INC
+MUL_05
+MOD_09
+MOD_07
+SUB_06
+NEG
+MOD_09
+SUB_04
+DOUBLE
+SUB_06
+ADD_06
+INC
+SUB_02
+MUL_02
+",2,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DOUBLE SUB_06 ADD_06 INC SUB_02 MUL_02,PUSH SUB_05 MUL_05 INC MUL_05 MOD_09 MOD_07 SUB_06 NEG MOD_09 SUB_04 DOUBLE SUB_06 ADD_06 INC SUB_02 MUL_02
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_d16,chain,16,eval_chain_d16_abi32_chain_2,9,"PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05","PUSH 24
+TRIPLE
+MOD_07
+ABS
+SUB_04
+DIV_04
+ADD_05
+ADD_04
+ADD_02
+MOD_13
+MOD_07
+MOD_13
+ADD_04
+DIV_03
+MOD_13
+DOUBLE
+ADD_05
+",9,,1,1,0,1,1,0,0,0,0,0,correct_exact,TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05,PUSH TRIPLE MOD_07 ABS SUB_04 DIV_04 ADD_05 ADD_04 ADD_02 MOD_13 MOD_07 MOD_13 ADD_04 DIV_03 MOD_13 DOUBLE ADD_05
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_0,2,"PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04","PUSH 6
+SUB_01
+SUB_05
+DIV_06
+SUB_01
+NEG
+INC
+MOD_07
+MUL_04
+ABS
+SUB_04
+SUB_06
+ADD_02
+ABS
+ADD_02
+MUL_03
+SUB_04
+",2,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_01 SUB_05 DIV_06 SUB_01 NEG INC MOD_07 MUL_04 ABS SUB_04 SUB_06 ADD_02 ABS ADD_02 MUL_03 SUB_04,PUSH SUB_01 SUB_05 DIV_06 SUB_01 NEG INC MOD_07 MUL_04 ABS SUB_04 SUB_06 ADD_02 ABS ADD_02 MUL_03 SUB_04
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_2,563,"PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03","PUSH -20
+DIV_05
+MUL_05
+NEG
+DIV_03
+SUB_01
+ADD_02
+ADD_05
+ADD_06
+ADD_06
+MUL_06
+MUL_02
+SUB_02
+SUB_02
+MUL_02
+SUB_02
+SUB_03
+",563,,1,1,0,1,1,0,0,0,0,0,correct_exact,DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03,PUSH DIV_05 MUL_05 NEG DIV_03 SUB_01 ADD_02 ADD_05 ADD_06 ADD_06 MUL_06 MUL_02 SUB_02 SUB_02 MUL_02 SUB_02 SUB_03
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi32_chain_1,-27,"PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03","PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03","PUSH 36
+DOUBLE
+NEG
+ADD_04
+MOD_11
+DOUBLE
+DIV_05
+MOD_13
+SUB_05
+TRIPLE
+NEG
+DIV_06
+MUL_04
+DIV_06
+SUB_03
+MUL_03
+MUL_03
+",-27,,1,1,0,1,1,0,0,0,0,0,correct_exact,DOUBLE NEG ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03,PUSH DOUBLE NEG ADD_04 MOD_11 DOUBLE DIV_05 MOD_13 SUB_05 TRIPLE NEG DIV_06 MUL_04 DIV_06 SUB_03 MUL_03 MUL_03
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_0,51,"PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BSUB","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BSUB","PUSH 39
+MUL_02
+PUSH 21
+ADD_06
+BSUB
+",51,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL_02 ADD_06 BSUB,PUSH MUL_02 PUSH ADD_06 BSUB
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_2,-14,"PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN","PUSH 24
+SUB_06
+PUSH -28
+DIV_02
+BMIN
+",-14,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_06 DIV_02 BMIN,PUSH SUB_06 PUSH DIV_02 BMIN
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l2,nested,2,eval_nested_l2_abi32_nested_1,-59,"PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN","PUSH 9
+ADD_04
+PUSH 59
+NEG
+BMIN
+",-59,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_04 NEG BMIN,PUSH ADD_04 PUSH NEG BMIN
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_1,1296,"PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMUL
+PUSH 52
+ADD_02
+BMUL","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMUL
+PUSH 52
+ADD_02
+BMUL","PUSH 16
+ADD_01
+PUSH 11
+INC
+BMIN
+PUSH 0
+ADD_02
+BMUL
+PUSH 52
+ADD_02
+BMUL
+",1296,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_01 INC ADD_02 ADD_02 BMIN BMUL BMUL,PUSH ADD_01 PUSH INC BMIN PUSH ADD_02 BMUL PUSH ADD_02 BMUL
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_2,42,"PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BSUB","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BSUB","PUSH 25
+ADD_05
+PUSH 33
+NEG
+BMIN
+PUSH -7
+INC
+BMAX
+PUSH -8
+MUL_06
+BSUB
+",42,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_05 NEG INC MUL_06 BMIN BMAX BSUB,PUSH ADD_05 PUSH NEG BMIN PUSH INC BMAX PUSH MUL_06 BSUB
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l4,nested,4,eval_nested_l4_abi32_nested_0,-42,"PUSH -29
+NEG
+PUSH -11
+MUL_02
+BADD
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BSUB","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BADD
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BSUB","PUSH -29
+NEG
+PUSH -11
+MUL_02
+BADD
+PUSH 6
+DOUBLE
+BMIN
+PUSH 44
+ADD_05
+BSUB
+",-42,,1,1,0,1,1,0,0,0,0,0,correct_exact,NEG MUL_02 DOUBLE ADD_05 BADD BMIN BSUB,PUSH NEG PUSH MUL_02 BADD PUSH DOUBLE BMIN PUSH ADD_05 BSUB
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_1,-6,"PUSH 58
+INC
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BSUB
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN","PUSH 58
+INC
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BSUB
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN","PUSH 58
+INC
+PUSH 52
+ADD_05
+BMAX
+PUSH 5
+SUB_05
+BMIN
+PUSH 56
+SUB_03
+BADD
+PUSH 18
+SUB_03
+BSUB
+PUSH 27
+DIV_03
+BADD
+PUSH 49
+MOD_10
+BMAX
+PUSH -22
+DIV_04
+BMIN
+",-6,,1,1,0,1,1,0,0,0,0,0,correct_exact,INC ADD_05 SUB_05 SUB_03 SUB_03 DIV_03 MOD_10 DIV_04 BMAX BMIN BADD BSUB BADD BMAX BMIN,PUSH INC PUSH ADD_05 BMAX PUSH SUB_05 BMIN PUSH SUB_03 BADD PUSH SUB_03 BSUB PUSH DIV_03 BADD PUSH MOD_10 BMAX PUSH DIV_04 BMIN
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_0,-34,"PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMUL
+PUSH 17
+MOD_10
+BSUB
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BSUB
+PUSH -18
+DIV_05
+BMIN","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMUL
+PUSH 17
+MOD_10
+BSUB
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BSUB
+PUSH -18
+DIV_05
+BMIN","PUSH 6
+ADD_02
+PUSH -12
+MOD_13
+BMUL
+PUSH 17
+MOD_10
+BSUB
+PUSH -27
+MUL_03
+BADD
+PUSH 8
+ADD_02
+BMIN
+PUSH -16
+DIV_05
+BMAX
+PUSH 28
+ADD_02
+BSUB
+PUSH -18
+DIV_05
+BMIN
+",-34,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_02 MOD_13 MOD_10 MUL_03 ADD_02 DIV_05 ADD_02 DIV_05 BMUL BSUB BADD BMIN BMAX BSUB BMIN,PUSH ADD_02 PUSH MOD_13 BMUL PUSH MOD_10 BSUB PUSH MUL_03 BADD PUSH ADD_02 BMIN PUSH DIV_05 BMAX PUSH ADD_02 BSUB PUSH DIV_05 BMIN
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_l8,nested,8,eval_nested_l8_abi32_nested_2,-8202600,"PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BADD
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMUL
+PUSH -8
+DIV_04
+BMUL
+PUSH 34
+ADD_01
+BMUL
+PUSH 58
+ADD_05
+BMUL","PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BADD
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMUL
+PUSH -8
+DIV_04
+BMUL
+PUSH 34
+ADD_01
+BMUL
+PUSH 58
+ADD_05
+BMUL","PUSH -21
+MOD_13
+PUSH 60
+TRIPLE
+BADD
+PUSH 24
+ADD_04
+BMIN
+PUSH -14
+DIV_05
+BSUB
+PUSH 10
+MUL_06
+BMUL
+PUSH -8
+DIV_04
+BMUL
+PUSH 34
+ADD_01
+BMUL
+PUSH 58
+ADD_05
+BMUL
+",-8202600,,1,1,0,1,1,0,0,0,0,0,correct_exact,MOD_13 TRIPLE ADD_04 DIV_05 MUL_06 DIV_04 ADD_01 ADD_05 BADD BMIN BSUB BMUL BMUL BMUL BMUL,PUSH MOD_13 PUSH TRIPLE BADD PUSH ADD_04 BMIN PUSH DIV_05 BSUB PUSH MUL_06 BMUL PUSH DIV_04 BMUL PUSH ADD_01 BMUL PUSH ADD_05 BMUL
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_0,102,"PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BMUL
+PUSH -19
+DIV_04
+BMUL
+PUSH -12
+ADD_02
+BSUB
+PUSH -17
+ADD_06
+BSUB
+PUSH -30
+ADD_05
+BMUL
+PUSH 58
+MUL_06
+BMAX
+PUSH 34
+TRIPLE
+BMIN","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BMUL
+PUSH -19
+DIV_04
+BMUL
+PUSH -12
+ADD_02
+BSUB
+PUSH -17
+ADD_06
+BSUB
+PUSH -30
+ADD_05
+BMUL
+PUSH 58
+MUL_06
+BMAX
+PUSH 34
+TRIPLE
+BMIN","PUSH -12
+ADD_02
+PUSH -6
+SUB_04
+BMUL
+PUSH -19
+DIV_04
+BMUL
+PUSH -12
+ADD_02
+BSUB
+PUSH -17
+ADD_06
+BSUB
+PUSH -30
+ADD_05
+BMUL
+PUSH 58
+MUL_06
+BMAX
+PUSH 34
+TRIPLE
+BMIN
+",102,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_02 SUB_04 DIV_04 ADD_02 ADD_06 ADD_05 MUL_06 TRIPLE BMUL BMUL BSUB BSUB BMUL BMAX BMIN,PUSH ADD_02 PUSH SUB_04 BMUL PUSH DIV_04 BMUL PUSH ADD_02 BSUB PUSH ADD_06 BSUB PUSH ADD_05 BMUL PUSH MUL_06 BMAX PUSH TRIPLE BMIN
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_1,7,"PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BSUB
+PUSH 17
+MUL_02
+BADD
+PUSH 37
+MUL_02
+BMUL
+PUSH 26
+SUB_01
+BSUB
+PUSH 32
+MUL_05
+BMUL
+PUSH 28
+DIV_04
+BMAX
+PUSH 31
+DIV_04
+BMAX","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BSUB
+PUSH 17
+MUL_02
+BADD
+PUSH 37
+MUL_02
+BMUL
+PUSH 26
+SUB_01
+BSUB
+PUSH 32
+MUL_05
+BMUL
+PUSH 28
+DIV_04
+BMAX
+PUSH 31
+DIV_04
+BMAX","PUSH -14
+SUB_03
+PUSH 23
+MUL_06
+BSUB
+PUSH 17
+MUL_02
+BADD
+PUSH 37
+MUL_02
+BMUL
+PUSH 26
+SUB_01
+BSUB
+PUSH 32
+MUL_05
+BMUL
+PUSH 28
+DIV_04
+BMAX
+PUSH 31
+DIV_04
+BMAX
+",7,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_03 MUL_06 MUL_02 MUL_02 SUB_01 MUL_05 DIV_04 DIV_04 BSUB BADD BMUL BSUB BMUL BMAX BMAX,PUSH SUB_03 PUSH MUL_06 BSUB PUSH MUL_02 BADD PUSH MUL_02 BMUL PUSH SUB_01 BSUB PUSH MUL_05 BMUL PUSH DIV_04 BMAX PUSH DIV_04 BMAX
+pilot,pilot_v1_oracle_abi32_gold_abi_constrained_s101,oracle_abi32,gold_abi_constrained,101,0,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi32_nested_2,-10,"PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BSUB
+PUSH -18
+MUL_04
+BADD
+PUSH 50
+SUB_03
+BADD
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BADD
+PUSH -16
+ADD_06
+BMIN","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BSUB
+PUSH -18
+MUL_04
+BADD
+PUSH 50
+SUB_03
+BADD
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BADD
+PUSH -16
+ADD_06
+BMIN","PUSH -27
+MUL_02
+PUSH 26
+MOD_11
+BMAX
+PUSH -28
+ADD_03
+BSUB
+PUSH -18
+MUL_04
+BADD
+PUSH 50
+SUB_03
+BADD
+PUSH 53
+ADD_03
+BMIN
+PUSH 1
+MOD_09
+BADD
+PUSH -16
+ADD_06
+BMIN
+",-10,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL_02 MOD_11 ADD_03 MUL_04 SUB_03 ADD_03 MOD_09 ADD_06 BMAX BSUB BADD BADD BMIN BADD BMIN,PUSH MUL_02 PUSH MOD_11 BMAX PUSH ADD_03 BSUB PUSH MUL_04 BADD PUSH SUB_03 BADD PUSH ADD_03 BMIN PUSH MOD_09 BADD PUSH ADD_06 BMIN
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_2,83,"PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45","PUSH 11
+MUL_03
+ADD_05
+ADD_45
+",83,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL_03 ADD_05 ADD_45,PUSH MUL_03 ADD_05 ADD_45
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_1,-52,"PUSH 9
+SUB_33
+SUB_27
+SUB_01","PUSH 9
+SUB_33
+SUB_27
+SUB_01","PUSH 9
+SUB_33
+SUB_27
+SUB_01
+",-52,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_33 SUB_27 SUB_01,PUSH SUB_33 SUB_27 SUB_01
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d3,chain,3,eval_chain_d3_abi128_chain_0,-8,"PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31","PUSH 37
+SUB_04
+SUB_10
+SUB_31
+",-8,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_04 SUB_10 SUB_31,PUSH SUB_04 SUB_10 SUB_31
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_2,81,"PUSH 30
+SUB_17
+ADD_43
+ADD_04
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_04
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14","PUSH 30
+SUB_17
+ADD_43
+ADD_04
+SUB_26
+ADD_33
+ADD_12
+SUB_12
+ADD_14
+",81,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_17 ADD_43 ADD_04 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14,PUSH SUB_17 ADD_43 ADD_04 SUB_26 ADD_33 ADD_12 SUB_12 ADD_14
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_0,-95,"PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15","PUSH -22
+SUB_17
+SUB_28
+DEC
+SUB_12
+SUB_35
+SUB_16
+ADD_21
+ADD_15
+",-95,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15,PUSH SUB_17 SUB_28 DEC SUB_12 SUB_35 SUB_16 ADD_21 ADD_15
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d8,chain,8,eval_chain_d8_abi128_chain_1,21,"PUSH -7
+ADD_34
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22","PUSH -7
+ADD_34
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22","PUSH -7
+ADD_34
+ADD_01
+SUB_07
+SUB_04
+SUB_23
+MOD_23
+SUB_18
+ADD_22
+",21,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_34 ADD_01 SUB_07 SUB_04 SUB_23 MOD_23 SUB_18 ADD_22,PUSH ADD_34 ADD_01 SUB_07 SUB_04 SUB_23 MOD_23 SUB_18 ADD_22
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_1,-11,"PUSH 70
+ADD_41
+SUB_43
+ADD_20
+SUB_41
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44","PUSH 70
+ADD_41
+SUB_43
+ADD_20
+SUB_41
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44","PUSH 70
+ADD_41
+SUB_43
+ADD_20
+SUB_41
+SUB_27
+MOD_19
+SUB_30
+ADD_15
+MOD_19
+ADD_45
+ADD_06
+ADD_29
+DIV_05
+SUB_24
+ADD_40
+SUB_44
+",-11,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_41 SUB_43 ADD_20 SUB_41 SUB_27 MOD_19 SUB_30 ADD_15 MOD_19 ADD_45 ADD_06 ADD_29 DIV_05 SUB_24 ADD_40 SUB_44,PUSH ADD_41 SUB_43 ADD_20 SUB_41 SUB_27 MOD_19 SUB_30 ADD_15 MOD_19 ADD_45 ADD_06 ADD_29 DIV_05 SUB_24 ADD_40 SUB_44
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_0,40,"PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+DOUBLE
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+DOUBLE
+MUL_03
+ADD_37
+ADD_03","PUSH 4
+MUL_09
+ADD_04
+ADD_38
+SUB_38
+ADD_29
+INC
+SUB_33
+SUB_41
+DIV_09
+ADD_19
+ABS
+SUB_18
+DOUBLE
+MUL_03
+ADD_37
+ADD_03
+",40,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 DOUBLE MUL_03 ADD_37 ADD_03,PUSH MUL_09 ADD_04 ADD_38 SUB_38 ADD_29 INC SUB_33 SUB_41 DIV_09 ADD_19 ABS SUB_18 DOUBLE MUL_03 ADD_37 ADD_03
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_d16,chain,16,eval_chain_d16_abi128_chain_2,-35,"PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05","PUSH 35
+SUB_06
+MOD_13
+ADD_21
+SUB_25
+ADD_18
+ADD_26
+ADD_17
+SUB_32
+SUB_27
+SUB_42
+ADD_45
+ADD_32
+SUB_28
+MOD_23
+SUB_15
+MUL_05
+",-35,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05,PUSH SUB_06 MOD_13 ADD_21 SUB_25 ADD_18 ADD_26 ADD_17 SUB_32 SUB_27 SUB_42 ADD_45 ADD_32 SUB_28 MOD_23 SUB_15 MUL_05
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_2,-77,"PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47","PUSH -22
+ADD_45
+ADD_29
+SUB_10
+MUL_09
+SUB_09
+SUB_20
+DIV_05
+SUB_27
+ADD_24
+SUB_44
+ADD_46
+SUB_01
+MOD_11
+SUB_34
+ADD_03
+SUB_47
+",-77,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47,PUSH ADD_45 ADD_29 SUB_10 MUL_09 SUB_09 SUB_20 DIV_05 SUB_27 ADD_24 SUB_44 ADD_46 SUB_01 MOD_11 SUB_34 ADD_03 SUB_47
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_1,-102,"PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_02
+SUB_40
+TRIPLE","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_02
+SUB_40
+TRIPLE","PUSH -12
+ADD_31
+SUB_31
+MOD_19
+ADD_39
+SUB_31
+SUB_16
+MOD_23
+SUB_48
+MOD_23
+SUB_44
+ADD_44
+ADD_22
+MOD_17
+SUB_02
+SUB_40
+TRIPLE
+",-102,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_02 SUB_40 TRIPLE,PUSH ADD_31 SUB_31 MOD_19 ADD_39 SUB_31 SUB_16 MOD_23 SUB_48 MOD_23 SUB_44 ADD_44 ADD_22 MOD_17 SUB_02 SUB_40 TRIPLE
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_chain_template_d16,chain,16,eval_chain_template_d16_abi128_chain_0,-474,"PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+DOUBLE
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+DOUBLE
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46","PUSH -37
+SUB_09
+SUB_11
+MOD_11
+SUB_37
+ADD_23
+MUL_07
+SUB_02
+ADD_13
+DOUBLE
+SUB_28
+ADD_10
+MUL_05
+SUB_38
+SUB_30
+SUB_30
+SUB_46
+",-474,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 DOUBLE SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46,PUSH SUB_09 SUB_11 MOD_11 SUB_37 ADD_23 MUL_07 SUB_02 ADD_13 DOUBLE SUB_28 ADD_10 MUL_05 SUB_38 SUB_30 SUB_30 SUB_46
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_0,88,"PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BSUB","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BSUB","PUSH 60
+ADD_16
+PUSH -6
+MUL_02
+BSUB
+",88,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_16 MUL_02 BSUB,PUSH ADD_16 PUSH MUL_02 BSUB
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_1,9,"PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD","PUSH 38
+MOD_23
+PUSH -27
+ADD_21
+BADD
+",9,,1,1,0,1,1,0,0,0,0,0,correct_exact,MOD_23 ADD_21 BADD,PUSH MOD_23 PUSH ADD_21 BADD
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l2,nested,2,eval_nested_l2_abi128_nested_2,-11,"PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD","PUSH 37
+SUB_12
+PUSH -12
+MUL_03
+BADD
+",-11,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_12 MUL_03 BADD,PUSH SUB_12 PUSH MUL_03 BADD
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_0,-165,"PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BMUL
+PUSH 4
+DIV_03
+BSUB
+PUSH -3
+ADD_10
+BADD","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BMUL
+PUSH 4
+DIV_03
+BSUB
+PUSH -3
+ADD_10
+BADD","PUSH 5
+SUB_24
+PUSH -21
+MOD_10
+BMUL
+PUSH 4
+DIV_03
+BSUB
+PUSH -3
+ADD_10
+BADD
+",-165,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_24 MOD_10 DIV_03 ADD_10 BMUL BSUB BADD,PUSH SUB_24 PUSH MOD_10 BMUL PUSH DIV_03 BSUB PUSH ADD_10 BADD
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_1,13,"PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BSUB","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BSUB","PUSH -5
+SQUARE_MOD_997
+PUSH -18
+ADD_28
+BMAX
+PUSH 24
+SUB_45
+BADD
+PUSH 10
+SUB_19
+BSUB
+",13,,1,1,0,1,1,0,0,0,0,0,correct_exact,SQUARE_MOD_997 ADD_28 SUB_45 SUB_19 BMAX BADD BSUB,PUSH SQUARE_MOD_997 PUSH ADD_28 BMAX PUSH SUB_45 BADD PUSH SUB_19 BSUB
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l4,nested,4,eval_nested_l4_abi128_nested_2,-61740,"PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMUL
+PUSH 0
+ADD_42
+BMUL","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMUL
+PUSH 0
+ADD_42
+BMUL","PUSH 7
+SQUARE_MOD_997
+PUSH 15
+SUB_35
+BMAX
+PUSH -17
+SUB_13
+BMUL
+PUSH 0
+ADD_42
+BMUL
+",-61740,,1,1,0,1,1,0,0,0,0,0,correct_exact,SQUARE_MOD_997 SUB_35 SUB_13 ADD_42 BMAX BMUL BMUL,PUSH SQUARE_MOD_997 PUSH SUB_35 BMAX PUSH SUB_13 BMUL PUSH ADD_42 BMUL
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_1,-6272068,"PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMUL
+PUSH -20
+SUB_12
+BMUL
+PUSH -18
+DIV_09
+BADD
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMUL
+PUSH 1
+SUB_35
+BADD
+PUSH 18
+SUB_42
+BADD","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMUL
+PUSH -20
+SUB_12
+BMUL
+PUSH -18
+DIV_09
+BADD
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMUL
+PUSH 1
+SUB_35
+BADD
+PUSH 18
+SUB_42
+BADD","PUSH 40
+MUL_07
+PUSH 28
+MUL_05
+BMUL
+PUSH -20
+SUB_12
+BMUL
+PUSH -18
+DIV_09
+BADD
+PUSH 7
+ADD_13
+BMIN
+PUSH 25
+MOD_10
+BMUL
+PUSH 1
+SUB_35
+BADD
+PUSH 18
+SUB_42
+BADD
+",-6272068,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL_07 MUL_05 SUB_12 DIV_09 ADD_13 MOD_10 SUB_35 SUB_42 BMUL BMUL BADD BMIN BMUL BADD BADD,PUSH MUL_07 PUSH MUL_05 BMUL PUSH SUB_12 BMUL PUSH DIV_09 BADD PUSH ADD_13 BMIN PUSH MOD_10 BMUL PUSH SUB_35 BADD PUSH SUB_42 BADD
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_2,54,"PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX","PUSH 30
+SUB_13
+PUSH -25
+ADD_48
+BMIN
+PUSH 28
+ADD_41
+BADD
+PUSH -14
+ADD_48
+BADD
+PUSH -14
+SUB_16
+BMUL
+PUSH 18
+ADD_36
+BMIN
+PUSH 42
+MUL_05
+BADD
+PUSH 27
+ADD_27
+BMAX
+",54,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_13 ADD_48 ADD_41 ADD_48 SUB_16 ADD_36 MUL_05 ADD_27 BMIN BADD BADD BMUL BMIN BADD BMAX,PUSH SUB_13 PUSH ADD_48 BMIN PUSH ADD_41 BADD PUSH ADD_48 BADD PUSH SUB_16 BMUL PUSH ADD_36 BMIN PUSH MUL_05 BADD PUSH ADD_27 BMAX
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_l8,nested,8,eval_nested_l8_abi128_nested_0,-33,"PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMUL
+PUSH 48
+ADD_44
+BSUB
+PUSH -28
+DIV_07
+BADD
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BSUB
+PUSH -22
+SUB_21
+BMAX","PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMUL
+PUSH 48
+ADD_44
+BSUB
+PUSH -28
+DIV_07
+BADD
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BSUB
+PUSH -22
+SUB_21
+BMAX","PUSH -9
+ADD_41
+PUSH 30
+MUL_03
+BMIN
+PUSH 39
+ADD_18
+BMUL
+PUSH 48
+ADD_44
+BSUB
+PUSH -28
+DIV_07
+BADD
+PUSH -10
+SUB_29
+BMIN
+PUSH 6
+SUB_12
+BSUB
+PUSH -22
+SUB_21
+BMAX
+",-33,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD_41 MUL_03 ADD_18 ADD_44 DIV_07 SUB_29 SUB_12 SUB_21 BMIN BMUL BSUB BADD BMIN BSUB BMAX,PUSH ADD_41 PUSH MUL_03 BMIN PUSH ADD_18 BMUL PUSH ADD_44 BSUB PUSH DIV_07 BADD PUSH SUB_29 BMIN PUSH SUB_12 BSUB PUSH SUB_21 BMAX
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_0,7,"PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BSUB
+PUSH 27
+SUB_18
+BMUL
+PUSH -26
+MUL_04
+BADD
+PUSH -14
+ADD_42
+BADD
+PUSH 55
+SUB_11
+BMUL
+PUSH 52
+SUB_45
+BMIN","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BSUB
+PUSH 27
+SUB_18
+BMUL
+PUSH -26
+MUL_04
+BADD
+PUSH -14
+ADD_42
+BADD
+PUSH 55
+SUB_11
+BMUL
+PUSH 52
+SUB_45
+BMIN","PUSH 9
+SUB_17
+PUSH 25
+ADD_24
+BMIN
+PUSH -13
+SUB_47
+BSUB
+PUSH 27
+SUB_18
+BMUL
+PUSH -26
+MUL_04
+BADD
+PUSH -14
+ADD_42
+BADD
+PUSH 55
+SUB_11
+BMUL
+PUSH 52
+SUB_45
+BMIN
+",7,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_17 ADD_24 SUB_47 SUB_18 MUL_04 ADD_42 SUB_11 SUB_45 BMIN BSUB BMUL BADD BADD BMUL BMIN,PUSH SUB_17 PUSH ADD_24 BMIN PUSH SUB_47 BSUB PUSH SUB_18 BMUL PUSH MUL_04 BADD PUSH ADD_42 BADD PUSH SUB_11 BMUL PUSH SUB_45 BMIN
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_1,-38,"PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BMUL
+PUSH -4
+SUB_16
+BSUB
+PUSH 23
+ADD_14
+BSUB
+PUSH -27
+SUB_29
+BMAX
+PUSH -24
+SUB_07
+BSUB
+PUSH -28
+SUB_10
+BMIN
+PUSH -2
+SUB_40
+BMAX","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BMUL
+PUSH -4
+SUB_16
+BSUB
+PUSH 23
+ADD_14
+BSUB
+PUSH -27
+SUB_29
+BMAX
+PUSH -24
+SUB_07
+BSUB
+PUSH -28
+SUB_10
+BMIN
+PUSH -2
+SUB_40
+BMAX","PUSH -26
+SUB_15
+PUSH -4
+SUB_35
+BMUL
+PUSH -4
+SUB_16
+BSUB
+PUSH 23
+ADD_14
+BSUB
+PUSH -27
+SUB_29
+BMAX
+PUSH -24
+SUB_07
+BSUB
+PUSH -28
+SUB_10
+BMIN
+PUSH -2
+SUB_40
+BMAX
+",-38,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_15 SUB_35 SUB_16 ADD_14 SUB_29 SUB_07 SUB_10 SUB_40 BMUL BSUB BSUB BMAX BSUB BMIN BMAX,PUSH SUB_15 PUSH SUB_35 BMUL PUSH SUB_16 BSUB PUSH ADD_14 BSUB PUSH SUB_29 BMAX PUSH SUB_07 BSUB PUSH SUB_10 BMIN PUSH SUB_40 BMAX
+pilot,pilot_v1_oracle_abi128_gold_abi_constrained_s101,oracle_abi128,gold_abi_constrained,101,0,eval_nested_template_l8,nested,8,eval_nested_template_l8_abi128_nested_2,4,"PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+TRIPLE
+BMIN
+PUSH 33
+SUB_15
+BMUL
+PUSH -14
+SUB_34
+BMAX
+PUSH 13
+SUB_41
+BMAX
+PUSH -2
+SQUARE_MOD_997
+BMAX","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+TRIPLE
+BMIN
+PUSH 33
+SUB_15
+BMUL
+PUSH -14
+SUB_34
+BMAX
+PUSH 13
+SUB_41
+BMAX
+PUSH -2
+SQUARE_MOD_997
+BMAX","PUSH 37
+SUB_21
+PUSH 30
+SUB_27
+BMIN
+PUSH -1
+SUB_01
+BMIN
+PUSH 31
+TRIPLE
+BMIN
+PUSH 33
+SUB_15
+BMUL
+PUSH -14
+SUB_34
+BMAX
+PUSH 13
+SUB_41
+BMAX
+PUSH -2
+SQUARE_MOD_997
+BMAX
+",4,,1,1,0,1,1,0,0,0,0,0,correct_exact,SUB_21 SUB_27 SUB_01 TRIPLE SUB_15 SUB_34 SUB_41 SQUARE_MOD_997 BMIN BMIN BMIN BMUL BMAX BMAX BMAX,PUSH SUB_21 PUSH SUB_27 BMIN PUSH SUB_01 BMIN PUSH TRIPLE BMIN PUSH SUB_15 BMUL PUSH SUB_34 BMAX PUSH SUB_41 BMAX PUSH SQUARE_MOD_997 BMAX

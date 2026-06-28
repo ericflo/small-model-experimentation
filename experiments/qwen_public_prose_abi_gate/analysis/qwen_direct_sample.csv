@@ -1,0 +1,61 @@
+task_id,family,features,abi_covered,target,prediction,raw_generation,exact,query
+DateTime.000106,DateTime,DateTime,False,Mon,Wed,Wed,False,21-Jan-1985 05:44:43
+DateTime.000040,DateTime,"DateTime,Substring",False,"January 31, 1846","January 31, 1846","January 31, 1846",True,Word 1 Word 31 Word 1846 Word
+Phone.000004,Phone,"Concatenation,Substring",True,734 124 7641,734 124 7641,734 124 7641,True,734-124-7641
+Log.000018,Log,"Concatenation,Substring",False,185->175,185->175,185->175,True,type size =  185: Et.Consectetur.UtVoluptas type size =  175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis
+Number.000094,Number,"Concatenation,Numeric",False,"₹56,343","₹5,6343","₹5,6343",False,56343
+DateTime.000023,DateTime,DateTime,False,03302241,03302241,03302241,True,03302241
+Phone.000001,Phone,Substring,True,786,786,786,True,786-628-8081 x8294
+Number.000044,Number,Numeric,True,1015,1015,1015,True,1015
+EmergencyCall.000004,EmergencyCall,"DateTime,Substring",False,12 Oct 2015 11PM,12 Oct 2015 11PM,12 Oct 2015 11PM,True,BELMONT AVE & OVERHILL RD; LOWER MERION; 2015-12-10 @ 23:02:27;
+Name.000008,Name,"Concatenation,Substring",True,A G,A G,A G,True,Antonia A. Guachiac
+Address.000013,Address,"Conditional,Substring",False,89,89,89,True,"89 123rd Blvd, Corona, CT 17293"
+Number.000067,Number,Numeric,False,10,10,10,True,10
+DateTime.000032,DateTime,DateTime,False,10:02 PM,10:02 PM,10:02 PM,True,22:02
+Name.000013,Name,Substring,False,C,C,C,True,Cecep Sutresna
+Number.000040,Number,DateTime,False,2001/9/18,2001/9/18,2001/9/18,True,20010918
+Currency.000003,Currency,"Numeric,Substring",True,23.81,23.81,23.81,True,�23.81
+Name.000021,Name,Substring,False,Su,Su,Su,True,Cecep Sutresna
+DateTime.000056,DateTime,"DateTimeRange,DateTimeRounding,DateTime",False,11AM-1PM,Noon-2PM,Noon-2PM,False,12:41:14
+Number.000086,Number,"Numeric,NumericRange,NumericRounding",False,10-15,10-15,10-15,True,13.76
+Number.000015,Number,"Numeric,NumericRounding",False,-22600,-22500,-22500,False,-22630
+DateTime.000066,DateTime,"DateTimeRange,DateTimeRounding,DateTime",False,12:40PM-12:49PM,12:40PM-12:41PM,12:40PM-12:41PM,False,12:41:14
+DateTime.000071,DateTime,"DateTimeRange,DateTimeRounding,DateTime",False,12AM-2AM,12AM-2AM,12AM-2AM,True,12AM
+ShippingCode.000007,ShippingCode,"Concatenation,Substring",True,339 97,339 97,339 97,True,1Z 339 5D2 97 3412 476 4
+DateTime.000037,DateTime,DateTime,True,1 31 1846,1 31 1846,1 31 1846,True,1/31/1846
+DateTime.000088,DateTime,"DateTimeRounding,DateTime",False,4:00PM,8:00AM,8:00AM,False,16:15:08
+Email.000012,Email,Substring,False,Traver,Traver,Traver,True,Anna.Traver@adventure-works.com
+Number.000051,Number,"Numeric,NumericRounding",False,200,200,200,True,234
+DateTime.000008,DateTime,"DateTimeRange,DateTimeRounding,DateTime",False,"Mar 30, 2241 4AM-6AM","Mar 30, 2241 4AM-6AM","Mar 30, 2241 4AM-6AM",True,2241-03-30 04:15
+DateTime.000046,DateTime,DateTime,False,1952 7 2,7/2/1952 2 2,7/2/1952 2 2,False,7/2/1952
+DateTime.000065,DateTime,"DateTimeRange,DateTimeRounding,DateTime",False,12:30PM-12:44PM,12:00PM-12:45PM,12:00PM-12:45PM,False,12:41:14
+BillingCode.000007,BillingCode,Concatenation,False,11529],[11529],[11529],False,11529
+Number.000076,Number,Numeric,False,1.2,1.2,1.2,True,1202.3433
+DateTime.000099,DateTime,DateTime,False,2072,2072,2072,True,2072--9--26
+Number.000056,Number,Numeric,False,13.24,13.24,13.24,True,13.24
+DateTime.000102,DateTime,DateTime,True,5,5,5,True,21-Jan-1985 05:44:43
+Number.000028,Number,"Numeric,NumericRounding",False,10.000,10.000,10.000,True,10
+Number.000031,Number,"Numeric,NumericRounding",False,43.5,43.0,43.0,False,43.32
+DateTime.000004,DateTime,"Concatenation,DateTime,Multicolumn",True,04:29:27 1858-12-08,04:29:27 1858-12-08,04:29:27 1858-12-08,True,col0=04:29:27 | col1=1858-12-08
+Name.000010,Name,Substring,False,Joonsuh 624 693,Joonsuh 624 693,Joonsuh 624 693,True,793 764 937 294 522 663 Joonsuh 624 693 Borkakati
+DateTime.000115,DateTime,"DateTimeRange,DateTimeRounding,DateTime",False,40-60,0-20,0-20,False,21-Jan-1985 05:44:43
+DateTime.000091,DateTime,DateTime,False,4PM,4PM,4PM,True,16:56:52
+Noise.000001,Noise,"Concatenation,Multicolumn",True,%@^zxi**d^gx%i ry!d!!e*grumyr%$$#(k,col0=%@^zxi**d^gx%i ry! col1=d!!e*grumyr%$$#(k,col0=%@^zxi**d^gx%i ry! col1=d!!e*grumyr%$$#(k,False,col0=%@^zxi**d^gx%i ry! | col1=d!!e*grumyr%$$#(k
+Phone.000002,Phone,"Conditional,Substring",False,x8294,x8294,x8294,True,786-628-8081 x8294
+City.000005,City,Conditional,False,San Francisco,San Francisco,San Francisco,True,
+DateTime.000097,DateTime,DateTime,False,9,9,9,True,2072--9--26
+Number.000083,Number,Numeric,True,0.00,0.00,0.00,True,00e-04
+UserAgent.000003,UserAgent,Substring,False,FZ467,FZ467,FZ467,True,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7
+City.000012,City,Substring,True,Lansing,Lansing,Lansing,True,"Amanda Haraldsen        34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230"
+DateTime.000014,DateTime,DateTime,False,Friday #1 February 2013,Saturday #1 February 2013,Saturday #1 February 2013,False,1 Feb 2013
+Phone.000006,Phone,Substring,True,993,993,993,True,"Liidia Vadeboncoeur                 678 First Place,Curitiba,OH,(993) 525-5024,000-84-6131,03719"
+Phone.000011,Phone,"Concatenation,Substring",True,670 339 5712,670 339 5712,670 339 5712,True,670-339-5712
+DateTime.000006,DateTime,"Concatenation,DateTimeRange,DateTimeRounding,DateTime,Multicolumn",False,Fri 8:00-9:00,Thu 8:00-9:00,Thu 8:00-9:00,False,col0=4/21/1989 0:00 | col1=8:31:18
+DateTime.000093,DateTime,DateTime,False,1990-03-07,1990-11-07,1990-11-07,False,7.3.1990
+Author.000001,Author,"Conditional,DateTime",False,1968,1968,1968,True,28-Nov-68
+Phone.000013,Phone,"Concatenation,Conditional,Substring",False,014-296-7033,014-296-7033,014-296-7033,True,(014) 296 7033
+UserAgent.000005,UserAgent,Substring,True,9.7,9.7,9.7,True,MFM-5.7.12/xPhone-9.7
+Gender.000002,Gender,Conditional,False,0,0,0,True,M
+Number.000021,Number,"Numeric,NumericRounding",True,-54,-54,-54,True,-54
+Number.000066,Number,DateTime,False,14h 05m 25s,14h 05m 25s,14h 05m 25s,True,14:5:25
+DateTime.000067,DateTime,"DateTimeRange,DateTimeRounding,DateTime",False,12:00PM-1:20PM,11:30AM-12:50PM,11:30AM-12:50PM,False,12:41:14

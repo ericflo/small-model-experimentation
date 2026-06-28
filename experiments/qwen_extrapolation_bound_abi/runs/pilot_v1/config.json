@@ -1,0 +1,37 @@
+{
+  "run_name": "pilot_v1",
+  "suite": "pilot",
+  "model_name": "Qwen/Qwen3-4B",
+  "seeds": [
+    101
+  ],
+  "arms": [
+    "atomic_d1",
+    "mix_d1_d2_d3",
+    "mix_d1_to_d6",
+    "mix_d1_to_d8"
+  ],
+  "train_n": 96,
+  "eval_n": 3,
+  "train_steps": 8,
+  "eval_splits": [
+    "eval_indist_d1",
+    "eval_comp_d3",
+    "eval_comp_d6",
+    "eval_comp_d8",
+    "eval_comp_d12",
+    "eval_comp_d16",
+    "eval_template_d8",
+    "eval_template_d12",
+    "eval_template_d16"
+  ],
+  "batch_size": 2,
+  "grad_accum": 2,
+  "lr": 0.0002,
+  "max_length": 448,
+  "eval_batch_size": 3,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "max_new_tokens": 260,
+  "resample_attempts": 3
+}

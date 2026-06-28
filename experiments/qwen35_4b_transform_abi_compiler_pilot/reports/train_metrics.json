@@ -1,0 +1,12 @@
+{
+  "train_records": 180,
+  "train_result": {
+    "epoch": 1.7777777777777777,
+    "total_flos": 2522868217064448.0,
+    "train_loss": 0.12608320784784155,
+    "train_runtime": 546.2462,
+    "train_samples_per_second": 0.586,
+    "train_steps_per_second": 0.146
+  },
+  "validation_records": 40
+}

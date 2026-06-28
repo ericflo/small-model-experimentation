@@ -1,0 +1,3 @@
+source_examples,targets,found_rate,changed_rate,mean_candidates,candidate_valid_rate,arm,round,phase
+256,125,0.48828125,0.88,189.0,0.5349702380952381,baseline,1,baseline_expert_round_1
+256,67,0.26171875,0.9850746268656716,189.0,0.5079985119047619,vm_echo,1,vm_echo_expert_round_1

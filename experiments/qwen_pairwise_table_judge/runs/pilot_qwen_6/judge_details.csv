@@ -1,0 +1,73 @@
+task_id,mode,pair_kind,cand_a_id,cand_b_id,order_tag,choice,chosen_id,chosen_source,chosen_row_exact,chosen_full_exact,raw,oracle_id,direct_id,picked_oracle,direct_full_exact,oracle_full_exact
+City.000010,normal,tournament,City.000010::cand0000,City.000010::cand0007,step1,A,City.000010::cand0000,row_greedy,1.0,True,A,,,,,
+City.000010,normal,tournament,City.000010::cand0000,City.000010::cand0003,step2,A,City.000010::cand0000,row_greedy,1.0,True,A,,,,,
+City.000010,normal,tournament,City.000010::cand0000,City.000010::cand0004,step3,A,City.000010::cand0000,row_greedy,1.0,True,A,,,,,
+City.000010,normal,direct_vs_correct,City.000010::cand0000,City.000010::cand0000,base,A,City.000010::cand0000,row_greedy,1.0,True,A,City.000010::cand0000,City.000010::cand0000,True,True,True
+City.000010,normal,direct_vs_correct,City.000010::cand0000,City.000010::cand0000,swapped,A,City.000010::cand0000,row_greedy,1.0,True,A,City.000010::cand0000,City.000010::cand0000,True,True,True
+City.000010,no_examples,direct_vs_correct,City.000010::cand0000,City.000010::cand0000,base,A,City.000010::cand0000,row_greedy,1.0,True,A,City.000010::cand0000,City.000010::cand0000,True,True,True
+City.000010,shuffled_examples,direct_vs_correct,City.000010::cand0000,City.000010::cand0000,base,A,City.000010::cand0000,row_greedy,1.0,True,A,City.000010::cand0000,City.000010::cand0000,True,True,True
+City.000010,row_shuffled_candidate,direct_vs_correct,City.000010::cand0000,City.000010::cand0000,base,A,City.000010::cand0000,row_greedy,1.0,True,A,City.000010::cand0000,City.000010::cand0000,True,True,True
+DateTime.000025,normal,tournament,DateTime.000025::cand0000,DateTime.000025::cand0007,step1,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,,,,,
+DateTime.000025,normal,tournament,DateTime.000025::cand0000,DateTime.000025::cand0003,step2,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,,,,,
+DateTime.000025,normal,tournament,DateTime.000025::cand0000,DateTime.000025::cand0004,step3,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,,,,,
+DateTime.000025,normal,direct_vs_correct,DateTime.000025::cand0000,DateTime.000025::cand0000,base,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,DateTime.000025::cand0000,DateTime.000025::cand0000,True,True,True
+DateTime.000025,normal,direct_vs_correct,DateTime.000025::cand0000,DateTime.000025::cand0000,swapped,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,DateTime.000025::cand0000,DateTime.000025::cand0000,True,True,True
+DateTime.000025,no_examples,direct_vs_correct,DateTime.000025::cand0000,DateTime.000025::cand0000,base,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,DateTime.000025::cand0000,DateTime.000025::cand0000,True,True,True
+DateTime.000025,shuffled_examples,direct_vs_correct,DateTime.000025::cand0000,DateTime.000025::cand0000,base,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,DateTime.000025::cand0000,DateTime.000025::cand0000,True,True,True
+DateTime.000025,row_shuffled_candidate,direct_vs_correct,DateTime.000025::cand0000,DateTime.000025::cand0000,base,A,DateTime.000025::cand0000,row_greedy,1.0,True,A,DateTime.000025::cand0000,DateTime.000025::cand0000,True,True,True
+DateTime.000104,normal,tournament,DateTime.000104::cand0000,DateTime.000104::cand0007,step1,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,,,,,
+DateTime.000104,normal,tournament,DateTime.000104::cand0000,DateTime.000104::cand0003,step2,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,,,,,
+DateTime.000104,normal,tournament,DateTime.000104::cand0000,DateTime.000104::cand0004,step3,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,,,,,
+DateTime.000104,normal,direct_vs_correct,DateTime.000104::cand0000,DateTime.000104::cand0000,base,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,DateTime.000104::cand0000,DateTime.000104::cand0000,True,True,True
+DateTime.000104,normal,direct_vs_correct,DateTime.000104::cand0000,DateTime.000104::cand0000,swapped,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,DateTime.000104::cand0000,DateTime.000104::cand0000,True,True,True
+DateTime.000104,no_examples,direct_vs_correct,DateTime.000104::cand0000,DateTime.000104::cand0000,base,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,DateTime.000104::cand0000,DateTime.000104::cand0000,True,True,True
+DateTime.000104,shuffled_examples,direct_vs_correct,DateTime.000104::cand0000,DateTime.000104::cand0000,base,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,DateTime.000104::cand0000,DateTime.000104::cand0000,True,True,True
+DateTime.000104,row_shuffled_candidate,direct_vs_correct,DateTime.000104::cand0000,DateTime.000104::cand0000,base,A,DateTime.000104::cand0000,row_greedy,1.0,True,A,DateTime.000104::cand0000,DateTime.000104::cand0000,True,True,True
+Number.000075,normal,tournament,Number.000075::cand0000,Number.000075::cand0007,step1,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,,,,,
+Number.000075,normal,tournament,Number.000075::cand0000,Number.000075::cand0003,step2,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,,,,,
+Number.000075,normal,tournament,Number.000075::cand0000,Number.000075::cand0004,step3,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,,,,,
+Number.000075,normal,direct_vs_correct,Number.000075::cand0000,Number.000075::cand0003,base,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,Number.000075::cand0003,Number.000075::cand0000,False,False,True
+Number.000075,normal,direct_vs_correct,Number.000075::cand0003,Number.000075::cand0000,swapped,A,Number.000075::cand0003,batch_plain,1.0,True,"A
+
+The examples show that numbers are",Number.000075::cand0003,Number.000075::cand0000,True,False,True
+Number.000075,no_examples,direct_vs_correct,Number.000075::cand0000,Number.000075::cand0003,base,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,Number.000075::cand0003,Number.000075::cand0000,False,False,True
+Number.000075,shuffled_examples,direct_vs_correct,Number.000075::cand0000,Number.000075::cand0003,base,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,Number.000075::cand0003,Number.000075::cand0000,False,False,True
+Number.000075,row_shuffled_candidate,direct_vs_correct,Number.000075::cand0000,Number.000075::cand0003,base,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,Number.000075::cand0003,Number.000075::cand0000,False,False,True
+Number.000075,normal,row_repair,Number.000075::cand0000,Number.000075::rowrepair1,row1,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,A,,,,,
+Number.000075,normal,row_repair,Number.000075::cand0000,Number.000075::rowrepair2,row2,A,Number.000075::cand0000,row_greedy,0.6666666666666666,False,"A
+
+The examples show that numbers are",,,,,
+Number.000077,normal,tournament,Number.000077::cand0000,Number.000077::cand0007,step1,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,A,,,,,
+Number.000077,normal,tournament,Number.000077::cand0000,Number.000077::cand0003,step2,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"A
+
+The examples show that the transformation",,,,,
+Number.000077,normal,tournament,Number.000077::cand0000,Number.000077::cand0004,step3,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"A
+
+The examples show that the transformation",,,,,
+Number.000077,normal,direct_vs_correct,Number.000077::cand0000,Number.000077::cand0023,base,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"A
+
+The examples show that the transformation",Number.000077::cand0023,Number.000077::cand0000,False,False,True
+Number.000077,normal,direct_vs_correct,Number.000077::cand0023,Number.000077::cand0000,swapped,A,Number.000077::cand0023,row_combo,1.0,True,"A
+
+The examples show that the transformation",Number.000077::cand0023,Number.000077::cand0000,True,False,True
+Number.000077,no_examples,direct_vs_correct,Number.000077::cand0000,Number.000077::cand0023,base,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,A,Number.000077::cand0023,Number.000077::cand0000,False,False,True
+Number.000077,shuffled_examples,direct_vs_correct,Number.000077::cand0000,Number.000077::cand0023,base,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"A
+
+The examples show that the transformation",Number.000077::cand0023,Number.000077::cand0000,False,False,True
+Number.000077,row_shuffled_candidate,direct_vs_correct,Number.000077::cand0000,Number.000077::cand0023,base,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"A
+
+The examples show that the transformation",Number.000077::cand0023,Number.000077::cand0000,False,False,True
+Number.000077,normal,row_repair,Number.000077::cand0000,Number.000077::rowrepair0,row0,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"A
+
+The examples show that the transformation",,,,,
+Number.000077,normal,row_repair,Number.000077::cand0000,Number.000077::rowrepair1,row1,A,Number.000077::cand0000,row_greedy,0.3333333333333333,False,"A
+
+The examples show that the transformation",,,,,
+UserAgent.000003,normal,tournament,UserAgent.000003::cand0000,UserAgent.000003::cand0007,step1,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,,,,,
+UserAgent.000003,normal,tournament,UserAgent.000003::cand0000,UserAgent.000003::cand0003,step2,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,,,,,
+UserAgent.000003,normal,tournament,UserAgent.000003::cand0000,UserAgent.000003::cand0004,step3,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,,,,,
+UserAgent.000003,normal,direct_vs_correct,UserAgent.000003::cand0000,UserAgent.000003::cand0000,base,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,UserAgent.000003::cand0000,UserAgent.000003::cand0000,True,True,True
+UserAgent.000003,normal,direct_vs_correct,UserAgent.000003::cand0000,UserAgent.000003::cand0000,swapped,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,UserAgent.000003::cand0000,UserAgent.000003::cand0000,True,True,True
+UserAgent.000003,no_examples,direct_vs_correct,UserAgent.000003::cand0000,UserAgent.000003::cand0000,base,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,UserAgent.000003::cand0000,UserAgent.000003::cand0000,True,True,True
+UserAgent.000003,shuffled_examples,direct_vs_correct,UserAgent.000003::cand0000,UserAgent.000003::cand0000,base,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,UserAgent.000003::cand0000,UserAgent.000003::cand0000,True,True,True
+UserAgent.000003,row_shuffled_candidate,direct_vs_correct,UserAgent.000003::cand0000,UserAgent.000003::cand0000,base,A,UserAgent.000003::cand0000,row_greedy,1.0,True,A,UserAgent.000003::cand0000,UserAgent.000003::cand0000,True,True,True

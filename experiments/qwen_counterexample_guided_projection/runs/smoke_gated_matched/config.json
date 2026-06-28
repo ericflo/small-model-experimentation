@@ -1,0 +1,18 @@
+{
+  "run_name": "smoke_gated_matched",
+  "seed": 20260627,
+  "task_limit": 8,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "probes_per_task": 4,
+  "max_candidates": 400,
+  "max_new_tokens": 32,
+  "complexity_penalty": 0.05,
+  "gated_probe_threshold": 0.75,
+  "existing_predictions": "/workspace/experiments/qwen_batched_transduction_consistency/runs/main_v2_prompt_iteration/row_details.csv",
+  "no_qwen": true,
+  "tasks": 8,
+  "created_utc": "2026-06-27T06:57:18.600472+00:00"
+}

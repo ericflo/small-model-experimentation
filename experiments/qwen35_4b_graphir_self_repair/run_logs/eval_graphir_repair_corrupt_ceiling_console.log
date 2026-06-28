@@ -1,0 +1,250 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:14,  9.68it/s]Loading weights:   4%|▍         | 28/723 [00:00<00:04, 160.64it/s]Loading weights:  13%|█▎        | 92/723 [00:00<00:01, 374.77it/s]Loading weights:  20%|██        | 147/723 [00:00<00:01, 441.69it/s]Loading weights:  28%|██▊       | 201/723 [00:00<00:01, 475.34it/s]Loading weights:  35%|███▍      | 253/723 [00:00<00:00, 484.23it/s]Loading weights:  43%|████▎     | 310/723 [00:00<00:00, 510.10it/s]Loading weights:  51%|█████     | 368/723 [00:00<00:00, 531.42it/s]Loading weights:  60%|█████▉    | 433/723 [00:00<00:00, 567.99it/s]Loading weights:  96%|█████████▌| 694/723 [00:01<00:00, 1193.51it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 703.65it/s] 
+repair:   0%|          | 0/120 [00:00<?, ?it/s]repair:   1%|          | 1/120 [00:06<13:23,  6.75s/it]repair:   2%|▏         | 2/120 [00:12<12:08,  6.18s/it]repair:   2%|▎         | 3/120 [00:16<10:26,  5.35s/it]repair:   3%|▎         | 4/120 [00:21<09:36,  4.97s/it]repair:   4%|▍         | 5/120 [00:27<10:11,  5.31s/it]repair:   5%|▌         | 6/120 [00:31<09:32,  5.02s/it]repair:   6%|▌         | 7/120 [00:37<09:59,  5.31s/it]repair:   7%|▋         | 8/120 [00:42<09:42,  5.20s/it]repair:   8%|▊         | 9/120 [00:47<09:16,  5.02s/it]repair:   8%|▊         | 10/120 [00:52<09:08,  4.99s/it]repair:   9%|▉         | 11/120 [00:57<09:14,  5.09s/it]repair:  10%|█         | 12/120 [01:02<09:07,  5.07s/it]repair:  11%|█         | 13/120 [01:09<09:55,  5.57s/it]repair:  12%|█▏        | 14/120 [01:12<08:26,  4.78s/it]repair:  12%|█▎        | 15/120 [01:16<08:03,  4.61s/it]repair:  13%|█▎        | 16/120 [01:19<07:07,  4.11s/it]repair:  14%|█▍        | 17/120 [01:22<06:25,  3.75s/it]repair:  15%|█▌        | 18/120 [01:28<07:55,  4.67s/it]repair:  16%|█▌        | 19/120 [01:31<07:01,  4.17s/it]repair:  17%|█▋        | 20/120 [01:34<06:22,  3.83s/it]repair:  18%|█▊        | 21/120 [01:38<06:10,  3.75s/it]repair:  18%|█▊        | 22/120 [01:42<06:00,  3.68s/it]repair:  19%|█▉        | 23/120 [01:46<06:19,  3.91s/it]repair:  20%|██        | 24/120 [01:50<06:06,  3.81s/it]repair:  21%|██        | 25/120 [01:55<06:42,  4.23s/it]repair:  22%|██▏       | 26/120 [02:00<07:07,  4.55s/it]repair:  22%|██▎       | 27/120 [02:05<07:23,  4.77s/it]repair:  23%|██▎       | 28/120 [02:10<07:15,  4.74s/it]repair:  24%|██▍       | 29/120 [02:15<07:27,  4.92s/it]repair:  25%|██▌       | 30/120 [02:20<07:16,  4.85s/it]repair:  26%|██▌       | 31/120 [02:25<07:07,  4.80s/it]repair:  27%|██▋       | 32/120 [02:30<07:18,  4.98s/it]repair:  28%|██▊       | 33/120 [02:35<07:20,  5.07s/it]repair:  28%|██▊       | 34/120 [02:40<07:06,  4.96s/it]repair:  29%|██▉       | 35/120 [02:46<07:14,  5.12s/it]repair:  30%|███       | 36/120 [02:50<07:02,  5.03s/it]repair:  31%|███       | 37/120 [02:57<07:43,  5.58s/it]repair:  32%|███▏      | 38/120 [03:05<08:40,  6.35s/it]repair:  32%|███▎      | 39/120 [03:12<08:46,  6.50s/it]repair:  33%|███▎      | 40/120 [03:19<08:32,  6.41s/it]repair:  34%|███▍      | 41/120 [03:25<08:36,  6.54s/it]repair:  35%|███▌      | 42/120 [03:33<08:58,  6.90s/it]repair:  36%|███▌      | 43/120 [03:40<08:45,  6.82s/it]repair:  37%|███▋      | 44/120 [03:48<09:09,  7.23s/it]repair:  38%|███▊      | 45/120 [03:55<08:55,  7.14s/it]repair:  38%|███▊      | 46/120 [04:02<08:44,  7.09s/it]repair:  39%|███▉      | 47/120 [04:10<08:59,  7.40s/it]repair:  40%|████      | 48/120 [04:17<08:41,  7.25s/it]repair:  41%|████      | 49/120 [04:23<08:01,  6.78s/it]repair:  42%|████▏     | 50/120 [04:28<07:35,  6.50s/it]repair:  42%|████▎     | 51/120 [04:34<07:16,  6.32s/it]repair:  43%|████▎     | 52/120 [04:40<06:56,  6.12s/it]repair:  44%|████▍     | 53/120 [04:46<06:41,  6.00s/it]repair:  45%|████▌     | 54/120 [04:51<06:32,  5.94s/it]repair:  46%|████▌     | 55/120 [04:57<06:27,  5.96s/it]repair:  47%|████▋     | 56/120 [05:04<06:23,  5.99s/it]repair:  48%|████▊     | 57/120 [05:09<06:11,  5.90s/it]repair:  48%|████▊     | 58/120 [05:15<06:03,  5.87s/it]repair:  49%|████▉     | 59/120 [05:21<05:56,  5.84s/it]repair:  50%|█████     | 60/120 [05:27<05:49,  5.82s/it]repair:  51%|█████     | 61/120 [05:30<05:03,  5.15s/it]repair:  52%|█████▏    | 62/120 [05:34<04:31,  4.67s/it]repair:  52%|█████▎    | 63/120 [05:37<04:08,  4.35s/it]repair:  53%|█████▎    | 64/120 [05:40<03:40,  3.94s/it]repair:  54%|█████▍    | 65/120 [05:44<03:29,  3.80s/it]repair:  55%|█████▌    | 66/120 [05:47<03:20,  3.71s/it]repair:  56%|█████▌    | 67/120 [05:51<03:12,  3.64s/it]repair:  57%|█████▋    | 68/120 [05:55<03:18,  3.82s/it]repair:  57%|█████▊    | 69/120 [05:58<03:10,  3.73s/it]repair:  58%|█████▊    | 70/120 [06:02<03:07,  3.75s/it]repair:  59%|█████▉    | 71/120 [06:07<03:13,  3.95s/it]repair:  60%|██████    | 72/120 [06:11<03:07,  3.91s/it]repair:  61%|██████    | 73/120 [06:14<02:59,  3.82s/it]repair:  62%|██████▏   | 74/120 [06:17<02:43,  3.54s/it]repair:  62%|██████▎   | 75/120 [06:20<02:30,  3.36s/it]repair:  63%|██████▎   | 76/120 [06:23<02:28,  3.37s/it]repair:  64%|██████▍   | 77/120 [06:26<02:18,  3.22s/it]repair:  65%|██████▌   | 78/120 [06:29<02:12,  3.15s/it]repair:  66%|██████▌   | 79/120 [06:32<02:04,  3.04s/it]repair:  67%|██████▋   | 80/120 [06:35<01:58,  2.95s/it]repair:  68%|██████▊   | 81/120 [06:38<01:59,  3.07s/it]repair:  68%|██████▊   | 82/120 [06:41<01:52,  2.97s/it]repair:  69%|██████▉   | 83/120 [06:44<01:48,  2.93s/it]repair:  70%|███████   | 84/120 [06:46<01:42,  2.86s/it]repair:  71%|███████   | 85/120 [06:52<02:06,  3.60s/it]repair:  72%|███████▏  | 86/120 [06:57<02:19,  4.10s/it]repair:  72%|███████▎  | 87/120 [07:02<02:27,  4.46s/it]repair:  73%|███████▎  | 88/120 [07:08<02:30,  4.71s/it]repair:  74%|███████▍  | 89/120 [07:13<02:31,  4.88s/it]repair:  75%|███████▌  | 90/120 [07:18<02:31,  5.06s/it]repair:  76%|███████▌  | 91/120 [07:24<02:29,  5.16s/it]repair:  77%|███████▋  | 92/120 [07:29<02:26,  5.25s/it]repair:  78%|███████▊  | 93/120 [07:35<02:27,  5.45s/it]repair:  78%|███████▊  | 94/120 [07:41<02:24,  5.56s/it]repair:  79%|███████▉  | 95/120 [07:46<02:17,  5.49s/it]repair:  80%|████████  | 96/120 [07:52<02:14,  5.61s/it]repair:  81%|████████  | 97/120 [07:56<01:59,  5.21s/it]repair:  82%|████████▏ | 98/120 [08:00<01:47,  4.88s/it]repair:  82%|████████▎ | 99/120 [08:03<01:29,  4.28s/it]repair:  83%|████████▎ | 100/120 [08:06<01:17,  3.87s/it]repair:  84%|████████▍ | 101/120 [08:09<01:07,  3.57s/it]repair:  85%|████████▌ | 102/120 [08:12<01:00,  3.38s/it]repair:  86%|████████▌ | 103/120 [08:15<00:56,  3.32s/it]repair:  87%|████████▋ | 104/120 [08:18<00:51,  3.20s/it]repair:  88%|████████▊ | 105/120 [08:21<00:47,  3.15s/it]repair:  88%|████████▊ | 106/120 [08:27<00:55,  3.94s/it]repair:  89%|████████▉ | 107/120 [08:30<00:47,  3.68s/it]repair:  90%|█████████ | 108/120 [08:33<00:41,  3.45s/it]repair:  91%|█████████ | 109/120 [08:39<00:44,  4.07s/it]repair:  92%|█████████▏| 110/120 [08:44<00:45,  4.52s/it]repair:  92%|█████████▎| 111/120 [08:50<00:43,  4.83s/it]repair:  93%|█████████▎| 112/120 [08:55<00:40,  5.05s/it]repair:  94%|█████████▍| 113/120 [09:00<00:35,  5.06s/it]repair:  95%|█████████▌| 114/120 [09:06<00:31,  5.21s/it]repair:  96%|█████████▌| 115/120 [09:11<00:26,  5.30s/it]repair:  97%|█████████▋| 116/120 [09:17<00:21,  5.38s/it]repair:  98%|█████████▊| 117/120 [09:23<00:16,  5.48s/it]repair:  98%|█████████▊| 118/120 [09:28<00:11,  5.53s/it]repair:  99%|█████████▉| 119/120 [09:34<00:05,  5.55s/it]repair: 100%|██████████| 120/120 [09:40<00:00,  5.60s/it]repair: 100%|██████████| 120/120 [09:40<00:00,  4.83s/it]
+{
+  "by_family": {
+    "sorted_index_sum_branch_label": {
+      "input_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "input_visible_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      },
+      "repair_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "repair_visible_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      }
+    },
+    "sorted_join_contains_code": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      }
+    },
+    "sum_len_mod_label": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sum_length_mod_gate_label": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "repair_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      }
+    },
+    "text_absent_mod_code": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "repair_visible_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      }
+    },
+    "text_value_gate_label": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      },
+      "repair_hidden_all": {
+        "rate": 0.8333333333333334,
+        "records": 12,
+        "successes": 10
+      },
+      "repair_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "token_absent_length_code": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "repair_visible_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      }
+    },
+    "token_count_mod_length_code": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "repair_hidden_all": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "repair_visible_all": {
+        "rate": 0.75,
+        "records": 12,
+        "successes": 9
+      }
+    },
+    "tuple_sum_mod_gate_label": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "repair_visible_all": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      }
+    },
+    "tuple_value_mod_label": {
+      "input_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "input_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "repair_hidden_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      },
+      "repair_visible_all": {
+        "rate": 0.08333333333333333,
+        "records": 12,
+        "successes": 1
+      }
+    }
+  },
+  "overall": {
+    "input_hidden_all": {
+      "rate": 0.03333333333333333,
+      "records": 120,
+      "successes": 4
+    },
+    "input_visible_all": {
+      "rate": 0.15833333333333333,
+      "records": 120,
+      "successes": 19
+    },
+    "repair_hidden_all": {
+      "rate": 0.26666666666666666,
+      "records": 120,
+      "successes": 32
+    },
+    "repair_visible_all": {
+      "rate": 0.4,
+      "records": 120,
+      "successes": 48
+    }
+  }
+}

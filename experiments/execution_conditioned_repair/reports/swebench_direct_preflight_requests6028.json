@@ -1,0 +1,51 @@
+{
+  "caveats": [
+    "This is not the official Docker SWE-bench harness.",
+    "The runner uses a manually validated local Requests dependency profile on Python 3.12.",
+    "The prompt context includes production files touched by the gold patch, matching the synthetic opened-file setup but not a full autonomous retrieval setting."
+  ],
+  "preflight": {
+    "base_test": {
+      "cmd": [
+        "/workspace/runs/swebench_direct/venvs/psf__requests-6028/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-W",
+        "ignore::DeprecationWarning",
+        "tests/test_utils.py::test_prepend_scheme_if_needed[http://user:pass@example.com/path?query-http://user:pass@example.com/path?query]",
+        "tests/test_utils.py::test_prepend_scheme_if_needed[http://user@example.com/path?query-http://user@example.com/path?query]"
+      ],
+      "cwd": "/workspace/runs/swebench_direct/eval_work/psf__requests-6028/preflight_base",
+      "output": "FF                                                                                                                                                                                                                                                                                                                                [100%]\n=============================================================================================================================================================== FAILURES ================================================================================================================================================================\n____________________________________________________________________________________________________________ test_prepend_scheme_if_needed[http://user:pass@example.com/path?query-http://user:pass@example.com/path?query] _____________________________________________________________________________________________________________\n\nvalue = 'http://user:pass@example.com/path?query', expected = 'http://user:pass@example.com/path?query'\n\n    @pytest.mark.parametrize(\n        'value, expected', (\n            ('example.com/path', 'http://example.com/path'),\n            ('//example.com/path', 'http://example.com/path'),\n            ('example.com:80', 'http://example.com:80'),\n            (\n                'http://user:pass@example.com/path?query',\n                'http://user:pass@example.com/path?query'\n            ),\n            (\n                'http://user@example.com/path?query',\n                'http://user@example.com/path?query'\n            )\n        ))\n    def test_prepend_scheme_if_needed(value, expected):\n>       assert prepend_scheme_if_needed(value, 'http') == expected\nE       AssertionError: assert 'http://examp...om/path?query' == 'http://user:...om/path?query'\nE         - http://user:pass@example.com/path?query\nE         ?        ----------\nE         + http://example.com/path?query\n\ntests/test_utils.py:615: AssertionError\n_________________________________________________________________________________________________________________ test_prepend_scheme_if_needed[http://user@example.com/path?query-http://user@example.com/path?query] __________________________________________________________________________________________________________________\n\nvalue = 'http://user@example.com/path?query', expected = 'http://user@example.com/path?query'\n\n    @pytest.mark.parametrize(\n        'value, expected', (\n            ('example.com/path', 'http://example.com/path'),\n            ('//example.com/path', 'http://example.com/path'),\n            ('example.com:80', 'http://example.com:80'),\n            (\n                'http://user:pass@example.com/path?query',\n                'http://user:pass@example.com/path?query'\n            ),\n            (\n                'http://user@example.com/path?query',\n                'http://user@example.com/path?query'\n            )\n        ))\n    def test_prepend_scheme_if_needed(value, expected):\n>       assert prepend_scheme_if_needed(value, 'http') == expected\nE       AssertionError: assert 'http://examp...om/path?query' == 'http://user@...om/path?query'\nE         - http://user@example.com/path?query\nE         ?        -----\nE         + http://example.com/path?query\n\ntests/test_utils.py:615: AssertionError\n======================================================================================================================================================== short test summary info ========================================================================================================================================================\nFAILED tests/test_utils.py::test_prepend_scheme_if_needed[http://user:pass@example.com/path?query-http://user:pass@example.com/path?query] - AssertionError: assert 'http://examp...om/path?query' == 'http://user:...om/path?query'\nFAILED tests/test_utils.py::test_prepend_scheme_if_needed[http://user@example.com/path?query-http://user@example.com/path?query] - AssertionError: assert 'http://examp...om/path?query' == 'http://user@...om/path?query'\n2 failed in 0.11s\n",
+      "returncode": 1
+    },
+    "gold_eval": {
+      "patch_applied": true,
+      "patch_apply_output": "",
+      "test_output": "..                                                                                                                                                                                                                                                                                                                                [100%]\n2 passed in 0.06s\n",
+      "test_returncode": 0,
+      "tests_passed": true
+    }
+  },
+  "summary": {
+    "base_commit": "0192aac24123735b3eaf9b08df46429bb770c283",
+    "base_failed": true,
+    "context_paths": [
+      "requests/utils.py"
+    ],
+    "dataset": "princeton-nlp/SWE-bench_Verified",
+    "gold_passed": true,
+    "harness": "direct_pytest_not_official_docker",
+    "instance_id": "psf__requests-6028",
+    "pythonpath_entries": [
+      "."
+    ],
+    "repo": "psf/requests",
+    "status": "preflight_completed",
+    "tests": [
+      "tests/test_utils.py::test_prepend_scheme_if_needed[http://user:pass@example.com/path?query-http://user:pass@example.com/path?query]",
+      "tests/test_utils.py::test_prepend_scheme_if_needed[http://user@example.com/path?query-http://user@example.com/path?query]"
+    ]
+  }
+}

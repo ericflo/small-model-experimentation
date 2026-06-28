@@ -1,0 +1,16 @@
+{
+  "run_name": "smoke_qwen_5",
+  "seed": 20260627,
+  "task_limit": 5,
+  "base_examples": 2,
+  "pool_examples": 4,
+  "eval_examples": 3,
+  "budgets": "1,2",
+  "max_new_tokens": 56,
+  "select_max_new_tokens": 16,
+  "no_qwen": false,
+  "tasks": 5,
+  "generation_records": 300,
+  "started_utc": "2026-06-28T02:22:31.407072+00:00",
+  "elapsed_sec": 72.00315928459167
+}

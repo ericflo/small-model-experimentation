@@ -1,0 +1,15 @@
+arm,operator_status,operator,template,records,target_raw_pct,target_visible_pct,oracle_hidden_all_pct,selected_hidden_all_pct,avg_raw_candidate_count,avg_visible_consistent_count,avg_visible_consistent_operator_count
+arm0_full_inventory,held_out,gcd,,30,100.0,100.0,100.0,76.667,56.0,2.767,1.367
+arm0_full_inventory,held_out,max,,30,100.0,100.0,100.0,100.0,56.0,1.1,1.1
+arm0_full_inventory,held_out,min,,30,100.0,100.0,100.0,96.667,56.0,1.6,1.3
+arm0_full_inventory,held_out,prod,,30,100.0,100.0,100.0,96.667,56.0,1.033,1.033
+arm0_full_inventory,in_bank,first,,30,100.0,100.0,100.0,83.333,56.0,2.233,1.5
+arm0_full_inventory,in_bank,last,,30,100.0,100.0,100.0,93.333,56.0,1.967,1.267
+arm0_full_inventory,in_bank,sum,,30,100.0,100.0,100.0,93.333,56.0,1.5,1.2
+arm1_closed_vocab,held_out,gcd,,30,0.0,0.0,0.0,0.0,24.0,0.1,0.1
+arm1_closed_vocab,held_out,max,,30,0.0,0.0,0.0,0.0,24.0,0.1,0.1
+arm1_closed_vocab,held_out,min,,30,0.0,0.0,0.0,0.0,24.0,0.133,0.133
+arm1_closed_vocab,held_out,prod,,30,0.0,0.0,0.0,0.0,24.0,0.033,0.033
+arm1_closed_vocab,in_bank,first,,30,100.0,100.0,100.0,86.667,24.0,1.467,1.167
+arm1_closed_vocab,in_bank,last,,30,100.0,100.0,100.0,96.667,24.0,1.433,1.1
+arm1_closed_vocab,in_bank,sum,,30,100.0,100.0,100.0,96.667,24.0,1.133,1.067

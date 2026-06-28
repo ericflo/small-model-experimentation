@@ -1,0 +1,18 @@
+{
+  "answer_max_new_tokens": 64,
+  "batch_max_new_tokens": 220,
+  "code_max_new_tokens": 620,
+  "gate_probe_score": 0.75,
+  "heldout_cap": 3,
+  "min_confident_probes": 2,
+  "min_heldout": 3,
+  "min_probe_consensus": 0.6666666666666666,
+  "no_qwen": true,
+  "probe_count": 2,
+  "probe_label_styles": "plain,rule,strict",
+  "run_name": "smoke_no_qwen",
+  "seed": 20260628,
+  "task_limit": 3,
+  "train_n": 3,
+  "variants": "direct,helpers,regex,conditional"
+}

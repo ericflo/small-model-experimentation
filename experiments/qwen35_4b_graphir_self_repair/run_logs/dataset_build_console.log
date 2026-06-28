@@ -1,0 +1,90 @@
+{
+  "base_families": [
+    "sum_label",
+    "mod_scalar_label",
+    "length_label",
+    "contains_code",
+    "tuple_get_label",
+    "scalar_branch_label",
+    "sum_threshold_label",
+    "length_mod_label",
+    "tuple_sum_label",
+    "contains_count_label",
+    "sorted_first_label",
+    "sum_add_label",
+    "contains_and_count_code",
+    "length_and_mod_code",
+    "sum_and_scalar_code"
+  ],
+  "base_train_records": 180,
+  "bridge_allocation": {
+    "contains_count_length_code": 6,
+    "length_contains_code": 6,
+    "length_mod_contains_code": 6,
+    "modulo_sum_label": 6,
+    "not_contains_length_code": 6,
+    "sorted_index_offset_label": 6,
+    "sum_length_branch_label": 6,
+    "sum_offset_mod_label": 6,
+    "tuple_branch_label": 6,
+    "tuple_sum_gate_label": 6
+  },
+  "bridge_allocation_counts": {
+    "contains_count_length_code": 6,
+    "length_contains_code": 6,
+    "length_mod_contains_code": 6,
+    "modulo_sum_label": 6,
+    "not_contains_length_code": 6,
+    "sorted_index_offset_label": 6,
+    "sum_length_branch_label": 6,
+    "sum_offset_mod_label": 6,
+    "tuple_branch_label": 6,
+    "tuple_sum_gate_label": 6
+  },
+  "bridge_train_records": 60,
+  "ceiling_eval_records": 120,
+  "ceiling_families": [
+    "sum_length_mod_gate_label",
+    "sorted_index_sum_branch_label",
+    "token_absent_length_code",
+    "token_count_mod_length_code",
+    "text_value_gate_label",
+    "tuple_value_mod_label",
+    "sorted_join_contains_code",
+    "text_absent_mod_code",
+    "sum_len_mod_label",
+    "tuple_sum_mod_gate_label"
+  ],
+  "conditions": {
+    "dsl_static60_lora": "180 base records plus 60 support bridge records; target is DSL",
+    "graphir_construct_lora": "same source records; target is typed register GraphIR",
+    "graphir_repair_lora": "same source records with corrupted candidate GraphIR; target is corrected GraphIR"
+  },
+  "evaluation_splits": {
+    "ceiling": "deeper held-out composition families absent from training",
+    "iid": "base-family retention",
+    "repair_ceiling_corrupt": "oracle corrupted GraphIR repair on ceiling records",
+    "support": "hard input cases for support bridge families"
+  },
+  "experiment": "GraphIR self repair",
+  "hidden_cases_per_record": 18,
+  "iid_eval_records": 60,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "seed": 20260701,
+  "selector_pool_size": 224,
+  "support_bridge_families": [
+    "modulo_sum_label",
+    "length_contains_code",
+    "tuple_branch_label",
+    "sum_offset_mod_label",
+    "length_mod_contains_code",
+    "sum_length_branch_label",
+    "sorted_index_offset_label",
+    "contains_count_length_code",
+    "tuple_sum_gate_label",
+    "not_contains_length_code"
+  ],
+  "support_eval_records": 120,
+  "train_records_per_adapter": 240,
+  "visible_cases_per_record": 6
+}

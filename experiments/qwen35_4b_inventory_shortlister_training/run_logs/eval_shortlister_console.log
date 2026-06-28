@@ -1,0 +1,35 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:48,  8.72it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 149.45it/s]Loading weights:  19%|█▉        | 81/426 [00:00<00:01, 310.03it/s]Loading weights:  31%|███▏      | 134/426 [00:00<00:00, 386.60it/s]Loading weights:  44%|████▎     | 186/426 [00:00<00:00, 431.73it/s]Loading weights:  56%|█████▌    | 239/426 [00:00<00:00, 456.95it/s]Loading weights:  68%|██████▊   | 291/426 [00:00<00:00, 471.34it/s]Loading weights:  81%|████████  | 345/426 [00:00<00:00, 492.23it/s]Loading weights:  96%|█████████▌| 407/426 [00:00<00:00, 525.57it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 433.11it/s]
+base_model:   0%|          | 0/16 [00:00<?, ?it/s]base_model:   6%|▋         | 1/16 [00:50<12:41, 50.79s/it]base_model:  12%|█▎        | 2/16 [01:41<11:51, 50.83s/it]base_model:  19%|█▉        | 3/16 [02:32<11:01, 50.92s/it]base_model:  25%|██▌       | 4/16 [03:23<10:11, 50.96s/it]base_model:  31%|███▏      | 5/16 [04:15<09:24, 51.29s/it]base_model:  38%|███▊      | 6/16 [05:07<08:34, 51.49s/it]base_model:  44%|████▍     | 7/16 [05:59<07:44, 51.60s/it]base_model:  50%|█████     | 8/16 [06:50<06:52, 51.54s/it]base_model:  56%|█████▋    | 9/16 [07:42<06:00, 51.55s/it]base_model:  62%|██████▎   | 10/16 [08:33<05:08, 51.49s/it]base_model:  69%|██████▉   | 11/16 [09:25<04:17, 51.48s/it]base_model:  75%|███████▌  | 12/16 [10:16<03:25, 51.47s/it]base_model:  81%|████████▏ | 13/16 [11:08<02:34, 51.51s/it]base_model:  88%|████████▊ | 14/16 [11:59<01:42, 51.50s/it]base_model:  94%|█████████▍| 15/16 [12:51<00:51, 51.52s/it]base_model: 100%|██████████| 16/16 [13:42<00:00, 51.37s/it]base_model: 100%|██████████| 16/16 [13:42<00:00, 51.39s/it]
+trained_model:   0%|          | 0/16 [00:00<?, ?it/s]trained_model:   6%|▋         | 1/16 [00:59<14:50, 59.37s/it]trained_model:  12%|█▎        | 2/16 [01:58<13:51, 59.42s/it]trained_model:  19%|█▉        | 3/16 [02:58<12:52, 59.45s/it]trained_model:  25%|██▌       | 4/16 [03:57<11:50, 59.19s/it]trained_model:  31%|███▏      | 5/16 [04:56<10:53, 59.37s/it]trained_model:  38%|███▊      | 6/16 [05:56<09:54, 59.41s/it]trained_model:  44%|████▍     | 7/16 [06:55<08:55, 59.49s/it]trained_model:  50%|█████     | 8/16 [07:55<07:55, 59.41s/it]trained_model:  56%|█████▋    | 9/16 [08:54<06:55, 59.38s/it]trained_model:  62%|██████▎   | 10/16 [09:53<05:56, 59.34s/it]trained_model:  69%|██████▉   | 11/16 [10:53<04:56, 59.32s/it]trained_model:  75%|███████▌  | 12/16 [11:52<03:57, 59.28s/it]trained_model:  81%|████████▏ | 13/16 [12:51<02:57, 59.31s/it]trained_model:  88%|████████▊ | 14/16 [13:50<01:58, 59.31s/it]trained_model:  94%|█████████▍| 15/16 [14:50<00:59, 59.36s/it]trained_model: 100%|██████████| 16/16 [15:49<00:00, 59.19s/it]trained_model: 100%|██████████| 16/16 [15:49<00:00, 59.32s/it]
+trained_model_shuffled_inventory:   0%|          | 0/16 [00:00<?, ?it/s]trained_model_shuffled_inventory:   6%|▋         | 1/16 [00:59<14:48, 59.21s/it]trained_model_shuffled_inventory:  12%|█▎        | 2/16 [01:58<13:49, 59.25s/it]trained_model_shuffled_inventory:  19%|█▉        | 3/16 [02:57<12:49, 59.19s/it]trained_model_shuffled_inventory:  25%|██▌       | 4/16 [03:56<11:47, 58.98s/it]trained_model_shuffled_inventory:  31%|███▏      | 5/16 [04:55<10:50, 59.16s/it]trained_model_shuffled_inventory:  38%|███▊      | 6/16 [05:55<09:52, 59.28s/it]trained_model_shuffled_inventory:  44%|████▍     | 7/16 [06:54<08:54, 59.38s/it]trained_model_shuffled_inventory:  50%|█████     | 8/16 [07:53<07:54, 59.30s/it]trained_model_shuffled_inventory:  56%|█████▋    | 9/16 [08:53<06:55, 59.31s/it]trained_model_shuffled_inventory:  62%|██████▎   | 10/16 [09:52<05:55, 59.26s/it]trained_model_shuffled_inventory:  69%|██████▉   | 11/16 [10:51<04:56, 59.24s/it]trained_model_shuffled_inventory:  75%|███████▌  | 12/16 [11:50<03:56, 59.22s/it]trained_model_shuffled_inventory:  81%|████████▏ | 13/16 [12:50<02:57, 59.27s/it]trained_model_shuffled_inventory:  88%|████████▊ | 14/16 [13:49<01:58, 59.23s/it]trained_model_shuffled_inventory:  94%|█████████▍| 15/16 [14:48<00:59, 59.25s/it]trained_model_shuffled_inventory: 100%|██████████| 16/16 [15:47<00:00, 59.11s/it]trained_model_shuffled_inventory: 100%|██████████| 16/16 [15:47<00:00, 59.21s/it]
+probe-design:   0%|          | 0/7 [00:00<?, ?it/s]probe-design:  14%|█▍        | 1/7 [00:00<00:01,  4.38it/s]probe-design:  29%|██▊       | 2/7 [00:00<00:01,  4.11it/s]probe-design:  43%|████▎     | 3/7 [00:00<00:00,  4.25it/s]probe-design:  57%|█████▋    | 4/7 [00:00<00:00,  4.39it/s]probe-design:  71%|███████▏  | 5/7 [00:01<00:00,  4.43it/s]probe-design:  86%|████████▌ | 6/7 [00:01<00:00,  4.27it/s]probe-design: 100%|██████████| 7/7 [00:01<00:00,  4.19it/s]probe-design: 100%|██████████| 7/7 [00:01<00:00,  4.25it/s]
+{
+  "beam_width": 32,
+  "probe_summary": {
+    "designed_selected_hidden_all": {
+      "rate": 0.42857142857142855,
+      "records": 7,
+      "successes": 3
+    },
+    "designed_target_in_visible": {
+      "rate": 1.0,
+      "records": 7,
+      "successes": 7
+    },
+    "designed_visible_consistent_count": 5656.286,
+    "random_selected_hidden_all": {
+      "rate": 0.2857142857142857,
+      "records": 7,
+      "successes": 2
+    },
+    "random_target_in_visible": {
+      "rate": 1.0,
+      "records": 7,
+      "successes": 7
+    },
+    "random_visible_consistent_count": 22396.286,
+    "records": 7
+  },
+  "records": 16
+}

@@ -1,0 +1,22 @@
+{
+  "run": "main_inpolicy_vm_echo_s192_w010",
+  "model_name": "Qwen/Qwen3-4B",
+  "seed": 93,
+  "sizes": {
+    "seed_train": 192,
+    "unlabeled_train": 1024,
+    "full_supervised_train": 1024,
+    "val_mixed": 128,
+    "fresh_standard": 128,
+    "fresh_paraphrase": 128,
+    "fresh_paired": 128,
+    "hard_composition": 128
+  },
+  "hidden_size": 2560,
+  "backend": "frozen_qwen_hidden_states_with_integrated_echo_heads",
+  "candidate_topk": 3,
+  "max_two_arg_pairs": 8,
+  "max_candidates": 256,
+  "inpolicy_rounds": 1,
+  "echo_loss_weight": 0.1
+}

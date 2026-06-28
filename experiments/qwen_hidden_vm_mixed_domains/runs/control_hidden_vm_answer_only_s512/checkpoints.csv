@@ -1,0 +1,2 @@
+run,adapter_path,heads_path
+control_hidden_vm_answer_only_s512,large_artifacts/qwen_hidden_vm_mixed_domains/checkpoints/control_hidden_vm_answer_only_s512/adapter,large_artifacts/qwen_hidden_vm_mixed_domains/checkpoints/control_hidden_vm_answer_only_s512/heads.pt

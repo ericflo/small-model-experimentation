@@ -1,0 +1,150 @@
+{
+  "args": {
+    "model_id": "Qwen/Qwen3-4B",
+    "load_in_4bit": true,
+    "torch_dtype": "bf16",
+    "device_map": "auto",
+    "use_lora": false,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lora_target_modules": "all-linear",
+    "gradient_checkpointing": false,
+    "optimizer": "adamw",
+    "modulus": 17,
+    "max_steps": 6,
+    "train_min_len": 1,
+    "train_max_len": 2,
+    "answer_train_min_len": 1,
+    "answer_train_max_len": 2,
+    "eval_lengths": "2",
+    "train_template_mode": "standard",
+    "answer_train_template_mode": "standard",
+    "eval_template_modes": "standard",
+    "train_size": 4,
+    "answer_train_size": 4,
+    "eval_size": 2,
+    "train_batch_size": 1,
+    "eval_batch_size": 1,
+    "bootstrap_steps": 1,
+    "answer_steps": 0,
+    "eval_every": 1,
+    "stage_eval_every": 1,
+    "lr": 0.001,
+    "answer_lr_scale": 0.1,
+    "weight_decay": 0.0,
+    "grad_clip": 1.0,
+    "head_width": 64,
+    "rank_temperature": 1.0,
+    "arg_reader_mode": "after_op",
+    "arg_window": 8,
+    "arg_distance_temperature": 2.0,
+    "trace_loss_weight": 1.0,
+    "init_trace_loss_weight": 4.0,
+    "op_trace_loss_weight": 1.0,
+    "arg_trace_loss_weight": 4.0,
+    "selection_loss_weight": 1.0,
+    "role_pos_weight": 20.0,
+    "init_selection_loss_weight": 1.0,
+    "op_selection_loss_weight": 1.0,
+    "arg_selection_loss_weight": 2.0,
+    "executor_loss_weight": 1.0,
+    "variants": "copy_trace",
+    "max_length": 128,
+    "seed": 7,
+    "output_dir": "experiments/qwen_numeric_copy_compiler/runs/smoke_qwen3_4b_frozen_copy_trace",
+    "checkpoint_dir": ""
+  },
+  "metadata": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-62-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0+cu128",
+    "cuda_available": true,
+    "transformers_loader": "AutoModelForCausalLM",
+    "peft_installed": true,
+    "use_lora": false,
+    "lora_r": 8,
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "gpu_vram_gb": 47.383
+  },
+  "hidden_dim": 2560,
+  "dataset": {
+    "train_size": 4,
+    "answer_train_size": 4,
+    "eval_size": 2,
+    "train_lengths": [
+      1,
+      2
+    ],
+    "answer_train_lengths": [
+      1,
+      2
+    ],
+    "eval_lengths": [
+      2
+    ],
+    "train_template_mode": "standard",
+    "answer_train_template_mode": "standard",
+    "eval_template_modes": [
+      "standard"
+    ]
+  },
+  "variants": {
+    "copy_trace": {
+      "variant": "copy_trace",
+      "train_seconds": 0.7161719799041748,
+      "checkpoints": [
+        "large_artifacts/qwen_numeric_copy_compiler/checkpoints/smoke_qwen3_4b_frozen_copy_trace/copy_trace/frozen_backbone.txt",
+        "large_artifacts/qwen_numeric_copy_compiler/checkpoints/smoke_qwen3_4b_frozen_copy_trace/copy_trace/heads.pt"
+      ],
+      "train_log": [
+        {
+          "variant": "copy_trace",
+          "stage": "trace",
+          "local_step": 1,
+          "step": 1,
+          "loss": 25.975181579589844,
+          "trace_loss_active": true,
+          "executor_loss_active": true,
+          "lr_scale": 1.0,
+          "executor_loss": 2.0739433765411377,
+          "init_loss": 1.0956575870513916,
+          "op_loss": 0.44941645860671997,
+          "arg_loss": 0.8906210064888,
+          "init_attn_loss": 3.601747751235962,
+          "op_attn_loss": 3.1519060134887695,
+          "arg_attn_loss": 3.2402942180633545,
+          "role_loss": 2.2724668979644775,
+          "standard_len2_direct_accuracy": NaN,
+          "standard_len2_direct_target_mass": NaN,
+          "standard_len2_executor_accuracy": 0.5,
+          "standard_len2_executor_target_mass": 0.09647432342171669,
+          "standard_len2_init_accuracy": 0.5,
+          "standard_len2_init_pos_accuracy": 0.5,
+          "standard_len2_op_accuracy": 1.0,
+          "standard_len2_arg_accuracy": 0.75,
+          "standard_len2_op_pos_accuracy": 0.5,
+          "standard_len2_arg_pos_accuracy": 0.5,
+          "standard_len2_program_exact": 0.5
+        }
+      ],
+      "final_metrics": {
+        "standard_len2": {
+          "variant": "copy_trace",
+          "n": 2.0,
+          "direct_accuracy": NaN,
+          "direct_target_mass": NaN,
+          "executor_accuracy": 0.5,
+          "executor_target_mass": 0.09647432342171669,
+          "init_accuracy": 0.5,
+          "init_pos_accuracy": 0.5,
+          "op_accuracy": 1.0,
+          "arg_accuracy": 0.75,
+          "op_pos_accuracy": 0.5,
+          "arg_pos_accuracy": 0.5,
+          "program_exact": 0.5
+        }
+      }
+    }
+  }
+}

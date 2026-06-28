@@ -1,0 +1,7 @@
+run,split,n,beam_count,beam0_accuracy,selected_accuracy,prior_accuracy,oracle_accuracy,beam0_program_exact,selected_program_exact,prior_program_exact,oracle_program_exact,selected_state_prefix_fraction,oracle_state_prefix_fraction,avg_distinct_answers,selector_entropy,selected_oracle_gap_recovered,selected_pair_answer_consistency,selected_pair_both_correct,oracle_pair_both_correct,selected_pair_state_consistency,oracle_pair_state_consistency
+pilot_beam4_s120,standard_len12,32.0,4.0,0.0,0.0,0.0,0.03125,0.0,0.0,0.0,0.0,0.0026041666666666665,0.0,2.0,1.3735490590333939,0.0,,,,,
+pilot_beam4_s120,standard_len24,32.0,4.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0013020833333333333,0.0013020833333333333,2.34375,1.3731747046113014,nan,,,,,
+pilot_beam4_s120,paraphrase_len12,32.0,4.0,0.03125,0.03125,0.03125,0.09375,0.0,0.0,0.0,0.0,0.0,0.0,2.71875,1.3732820451259613,0.0,,,,,
+pilot_beam4_s120,paraphrase_len24,32.0,4.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0013020833333333333,0.0013020833333333333,3.75,1.3728632554411888,nan,,,,,
+pilot_beam4_s120,paired_len12,64.0,4.0,0.015625,0.015625,0.015625,0.015625,0.0,0.0,0.0,0.0,0.0026041666666666665,0.0,2.390625,1.3732594661414623,nan,0.59375,0.0,0.0,0.59375,0.21875
+pilot_beam4_s120,paired_len24,64.0,4.0,0.03125,0.03125,0.03125,0.09375,0.0,0.0,0.0,0.0,0.0,0.0,3.078125,1.372943241149187,0.0,0.15625,0.0,0.03125,0.09375,0.25

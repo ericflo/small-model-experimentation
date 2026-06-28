@@ -1,0 +1,28 @@
+{
+  "manifest": "data/smoke_train_k2_records.manifest.json",
+  "records": {
+    "candidate_count_mean": 2.0,
+    "coverage": 0.0,
+    "distinct_behavior_rate_mean": 0.75,
+    "distinct_functional_rate_mean": 0.5,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 1003,
+    "hidden_pass_candidates_mean": 0.0,
+    "parse_success_mean": 2.0,
+    "pass1_proxy": 0.0,
+    "records": 2,
+    "visible_candidates_mean": 1.0,
+    "visible_coverage": 0.0,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "token_usage": {
+    "calls": 4,
+    "completion_tokens": 483,
+    "forward_tokens": 1003,
+    "prompt_tokens": 520
+  }
+}

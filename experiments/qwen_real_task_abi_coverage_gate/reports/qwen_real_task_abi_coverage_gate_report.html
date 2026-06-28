@@ -1,0 +1,114 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Real Task ABI Coverage Gate</title><style>body{font-family:Inter,system-ui,sans-serif;line-height:1.45;max-width:1180px;margin:32px auto;padding:0 24px;color:#172033}table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #ddd;padding:4px 6px}code{background:#f4f4f5;padding:1px 4px;border-radius:4px}h1,h2,h3{line-height:1.15}</style></head><body><h1>Qwen Real Task ABI Coverage Gate</h1><br>
+<br>
+<h2>Abstract</h2><br>
+<br>
+This standalone experiment tests whether a frozen office-data ABI covers real-style deterministic tasks that were not generated from that ABI. It uses oracle enumeration, not model training: the result is a decomposability gate for whether a large compiler corpus is worth building.<br>
+<br>
+<h2>Method</h2><br>
+<br>
+- The ABI is a fixed library of scalar string/date/money/contact/file operations plus small-table aggregation templates.<br>
+- Task references are ordinary Python functions over hand-curated examples; task outputs are not produced by stored ABI programs.<br>
+- The oracle enumerates expressions from visible fields/constants, fits train examples, then tests held-out examples for each task.<br>
+- ABI variants are `core`, `office`, and `office_table`; the primary gate is `office_table` at the largest search depth.<br>
+<br>
+<h2>Run Configuration</h2><br>
+<br>
+- Suite: `main`.<br>
+- Tasks: `38` total, `6` table tasks under the primary slice.<br>
+- Primary ABI/depth: `office_table`, depth `2`.<br>
+- Large artifacts directory: `/workspace/large_artifacts/qwen_real_task_abi_coverage_gate`.<br>
+<br>
+<h2>Primary Results</h2><br>
+<br>
+- Overall held-out coverage: 84.2% (32/38 tasks).<br>
+- Calibration coverage: 100.0% (10/10).<br>
+- Non-calibration coverage: 78.6% (22/28).<br>
+- Held-out composition coverage: 100.0% (8/8).<br>
+- Stress/out-of-ABI coverage: 0.0% (0/5).<br>
+- Table-task coverage: 83.3% (5/6).<br>
+- Train-match-only rate: 5.3%.<br>
+- No-train-match rate: 10.5%.<br>
+<br>
+<h3>Overall By ABI</h3><br>
+<br>
+|variant|max_depth|tasks|heldout_covered|train_match_rate|train_match_only|no_train_match|<br>
+|---|---|---|---|---|---|---|<br>
+|core|1|38|10.5%|15.8%|5.3%|84.2%|<br>
+|core|2|38|21.1%|26.3%|5.3%|73.7%|<br>
+|office|1|38|60.5%|65.8%|5.3%|34.2%|<br>
+|office|2|38|71.1%|76.3%|5.3%|23.7%|<br>
+|office_table|1|38|73.7%|78.9%|5.3%|21.1%|<br>
+|office_table|2|38|84.2%|89.5%|5.3%|10.5%|<br>
+<br>
+<h3>Primary Split Summary</h3><br>
+<br>
+|split|tasks|heldout_covered|train_match_rate|train_match_only|no_train_match|<br>
+|---|---|---|---|---|---|<br>
+|calibration|10|100.0%|100.0%|0.0%|0.0%|<br>
+|heldout_composition|8|100.0%|100.0%|0.0%|0.0%|<br>
+|heldout_new_family|6|100.0%|100.0%|0.0%|0.0%|<br>
+|heldout_same_family|9|93.3%|100.0%|6.7%|0.0%|<br>
+|stress_out_of_abi|5|0.0%|20.0%|20.0%|80.0%|<br>
+<br>
+<h3>Covered Program Examples</h3><br>
+<br>
+|task_id|family|split|program_depth|program|<br>
+|---|---|---|---|---|<br>
+|address_city|address|heldout_new_family|1.00|city_before_state(FIELD(address))|<br>
+|address_state|address|heldout_new_family|1.00|us_state(FIELD(address))|<br>
+|address_zip5|address|heldout_new_family|1.00|zip5(FIELD(address))|<br>
+|contact_email_company|contact|heldout_same_family|1.00|email_company(FIELD(email))|<br>
+|contact_email_domain|contact|calibration|1.00|email_domain(FIELD(email))|<br>
+|contact_name_initials|contact|calibration|1.00|initials(FIELD(name))|<br>
+|contact_phone_e164|contact|calibration|1.00|phone_e164_us(FIELD(phone))|<br>
+|contact_phone_last4|contact|heldout_same_family|1.00|phone_last4(FIELD(phone))|<br>
+|date_days_between|date|heldout_composition|1.00|date_diff_days(FIELD(end),FIELD(start))|<br>
+|date_month_name|date|heldout_same_family|1.00|date_month_name(FIELD(date))|<br>
+|date_quarter_label|date|heldout_same_family|1.00|date_quarter(FIELD(date))|<br>
+|date_to_iso|date|calibration|1.00|date_iso(FIELD(date))|<br>
+|money_cents|money|calibration|1.00|money_cents(FIELD(price))|<br>
+|money_line_total_cents|money|heldout_composition|2.00|mul(FIELD(qty),alnum(FIELD(price)))|<br>
+|money_percent_decimal|money|calibration|1.00|percent_float(FIELD(discount))|<br>
+|code_after_colon|product|heldout_same_family|1.00|digits(FIELD(code))|<br>
+|sku_prefix|product|calibration|1.00|sku_prefix(FIELD(sku))|<br>
+|sku_suffix|product|heldout_same_family|1.00|sku_suffix(FIELD(sku))|<br>
+<br>
+<h3>Uncovered Examples</h3><br>
+<br>
+|task_id|family|split|failure_reason|train_match|program|<br>
+|---|---|---|---|---|---|<br>
+|contact_normalize_name|contact|heldout_same_family|train_match_only|True|title(FIELD(name))|<br>
+|date_fiscal_year_july|date|stress_out_of_abi|no_train_match|False||<br>
+|money_discounted_total|money|stress_out_of_abi|no_train_match|False||<br>
+|sku_middle_segment|product|stress_out_of_abi|train_match_only|True|digits(FIELD(sku))|<br>
+|table_latest_paid_amount|table|stress_out_of_abi|no_train_match|False||<br>
+|phrase_slug|text|stress_out_of_abi|no_train_match|False||<br>
+<br>
+<p><img src="../analysis/figures/coverage_by_depth.png" alt="coverage_by_depth.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/coverage_by_split.png" alt="coverage_by_split.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/coverage_by_family.png" alt="coverage_by_family.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/failure_modes.png" alt="failure_modes.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<p><img src="../analysis/figures/program_depth_distribution.png" alt="program_depth_distribution.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p><br>
+<br>
+<h2>Interpretation</h2><br>
+<br>
+The fixed ABI covers a meaningful fraction of real-style deterministic tasks, but coverage is far from universal. The gap between calibration and stress splits is the main signal: common office transforms decompose well, while tasks that require bespoke fiscal logic, middle-token extraction, discount formulas, or latest-row selection expose missing primitives or missing control patterns.<br>
+The positive read is that held-out composition and held-out new-family tasks are covered in this catalog, including table filters and aggregations. The negative read is equally important: every deliberately out-of-ABI stress task fails, so the ABI cannot be treated as an open-ended intelligence multiplier without a retrieval/extension path for missing primitives.<br>
+A train-match-only result is treated as a warning rather than success: it means the ABI/search can fit visible examples but does not identify the actual task robustly on held-out examples.<br>
+This is a gate, not a compiler result. If the target domain is restricted to covered families, the ABI direction has a real base to build on. If the target domain includes the uncovered stress patterns, the ABI must be expanded or paired with retrieval/tooling before model training is worth scaling.<br>
+The next decisive step is a less hand-curated corpus: either production-like task logs or a public deterministic transformation benchmark, with the ABI frozen before evaluating that set.<br>
+<br>
+<h2>Limitations</h2><br>
+<br>
+The tasks are hand-curated real-style examples, not production logs or a public benchmark. That is stronger than factory-generated ABI compositions but still not a definitive real-world coverage estimate. The oracle is bounded by the implemented search space, so some misses may be search misses rather than true ABI misses. The table ABI is intentionally small and does not include sorting or window operations.<br>
+<br>
+<h2>Artifacts</h2><br>
+<br>
+- Details: `analysis/details.csv`<br>
+- Summary: `analysis/summary.csv` and `analysis/overall_summary.csv`<br>
+- Task catalog: `analysis/task_catalog.json`<br>
+- Large artifacts directory: `/workspace/large_artifacts/qwen_real_task_abi_coverage_gate`</body></html>

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen State-Ladder Numeric-Copy Compiler</title>
+<style>
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; max-width: 980px; margin: 40px auto; padding: 0 24px; color: #1f2933; }
+h1, h2, h3 { line-height: 1.2; color: #111827; }
+code { background: #f3f4f6; padding: 0.1rem 0.25rem; border-radius: 4px; }
+pre { background: #f3f4f6; padding: 1rem; overflow-x: auto; border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.94rem; }
+th, td { border: 1px solid #d1d5db; padding: 0.45rem 0.55rem; text-align: left; }
+th { background: #f9fafb; }
+td:nth-child(n+2), th:nth-child(n+2) { text-align: right; }
+ul { padding-left: 1.4rem; }
+</style>
+</head>
+<body>
+<h1>Qwen State-Ladder Numeric-Copy Compiler</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether dense intermediate-state supervision improves a QLoRA-adapted <code>Qwen/Qwen3-4B</code> numeric-copy compiler on long modular-arithmetic programs. Each prompt describes an initial value and a sequence of add, subtract, and multiply updates modulo 97. A trainable compiler reads Qwen hidden states, selects token positions for the initial value, operations, and arguments, copies exact symbols from deterministic token maps, and executes the copied program with an invisible modular runtime.</p>
+<p>The main intervention is a state ladder: in addition to trace supervision and final-answer executor loss, the compiler is trained to match the latent modular state after each operation. Training uses a four-stage length curriculum: 1-4 steps, 1-8 steps, 1-12 steps, and 8-24 steps.</p>
+<p>The main result is mixed. The curriculum itself is strongly useful: the matched no-state-ladder compiler reaches 39.1% exact execution on standard length 24, 15.6% on paraphrase length 24, and 21.1% on paired length 24. Final-answer-only QLoRA remains at chance. The state-ladder loss does not clearly beat the matched curriculum control at final checkpoint. A full-weight state ladder improves some shorter and medium splits but hurts length-24 robustness. A lighter state loss nearly matches the control and has the best logged paired length-24 checkpoint, but its final checkpoint still trails the control on paired length 24.</p>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code></li>
+<li>Loader: <code>AutoModelForCausalLM</code></li>
+<li>Quantization: 4-bit NF4</li>
+<li>Trainable update: LoRA rank 8, alpha 16, dropout 0.05, target <code>all-linear</code></li>
+<li>Trainable LoRA parameters: 16,515,072</li>
+<li>Compiler head width: 768</li>
+<li>Task: modular arithmetic programs modulo 97</li>
+<li>Curriculum: <code>short:1:4:200</code>, <code>medium:1:8:200</code>, <code>train:1:12:200</code>, <code>long:8:24:300</code></li>
+<li>Eval lengths: 4, 8, 12, and 24 update steps</li>
+<li>Eval templates: standard, paraphrase, and paired standard/paraphrase renderings of the same program</li>
+<li>Eval size: 64 examples per unpaired split; 64 program pairs per paired split</li>
+<li>Hardware: NVIDIA RTX 6000 Ada Generation, 48 GB class VRAM</li>
+<li>Large checkpoints: <code>large_artifacts/qwen_state_ladder_compiler/checkpoints/</code></li>
+</ul>
+<p>The compiler predicts:</p>
+<ul>
+<li>the token position of the initial value;</li>
+<li>ordered operation token positions;</li>
+<li>ordered argument token positions.</li>
+</ul>
+<p>Values and operations are copied from per-token maps. The copied program is executed exactly modulo 97. For state-ladder training, the differentiable executor also returns a distribution over the modular state after every active step, and the training loss includes per-step NLL against the true state trajectory.</p>
+<h2>Conditions</h2>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Variant</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main_qwen3_4b_qlora_state_ladder_curriculum_s900</code></td>
+<td><code>copy_trace_state_ladder</code></td>
+<td>Full state-ladder loss weight 1.0.</td>
+</tr>
+<tr>
+<td><code>main_qwen3_4b_qlora_state_ladder_w025_curriculum_s900</code></td>
+<td><code>copy_trace_state_ladder</code></td>
+<td>Lighter state-ladder loss weight 0.25.</td>
+</tr>
+<tr>
+<td><code>control_qwen3_4b_qlora_curriculum_no_state_ladder_s900</code></td>
+<td><code>copy_trace</code></td>
+<td>Matched curriculum compiler without state-ladder loss.</td>
+</tr>
+<tr>
+<td><code>control_qwen3_4b_qlora_answer_only_curriculum_s900</code></td>
+<td><code>direct</code></td>
+<td>Final-answer-only QLoRA control without compiler structure.</td>
+</tr>
+</tbody>
+</table>
+<p>All compiler arms use the same explicit training seed (<code>2427</code>), same curriculum, same paired training distribution, same LoRA configuration, and same evaluation splits.</p>
+<h2>Final Exact Execution</h2>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">State Ladder 1.0</th>
+<th style="text-align: right;">State Ladder 0.25</th>
+<th style="text-align: right;">No State Ladder</th>
+<th style="text-align: right;">Answer-Only QLoRA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard L4</td>
+<td style="text-align: right;">93.8%</td>
+<td style="text-align: right;">90.6%</td>
+<td style="text-align: right;">92.2%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Standard L8</td>
+<td style="text-align: right;">67.2%</td>
+<td style="text-align: right;">64.1%</td>
+<td style="text-align: right;">65.6%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Standard L12</td>
+<td style="text-align: right;">51.6%</td>
+<td style="text-align: right;">45.3%</td>
+<td style="text-align: right;">43.8%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Standard L24</td>
+<td style="text-align: right;">29.7%</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>Paraphrase L4</td>
+<td style="text-align: right;">84.4%</td>
+<td style="text-align: right;">75.0%</td>
+<td style="text-align: right;">78.1%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paraphrase L8</td>
+<td style="text-align: right;">64.1%</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">64.1%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paraphrase L12</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paraphrase L24</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">15.6%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Paired L4</td>
+<td style="text-align: right;">86.7%</td>
+<td style="text-align: right;">86.7%</td>
+<td style="text-align: right;">86.7%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Paired L8</td>
+<td style="text-align: right;">62.5%</td>
+<td style="text-align: right;">60.9%</td>
+<td style="text-align: right;">58.6%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Paired L12</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Paired L24</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">19.5%</td>
+<td style="text-align: right;">21.1%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The answer-only control stays near 97-way chance. The compiler arms therefore owe their gains to the structured compiler and curriculum, not to ordinary final-answer fitting.</p>
+<p>The no-state-ladder curriculum control is the strongest final checkpoint on the hardest target, paired length 24. Full-weight state loss helps standard length 12 but damages long paraphrase and paired performance. The lighter state loss is less damaging and reaches 37.5% standard L24, but still trails the no-state control on final paired L24.</p>
+<h2>State Trajectory Metrics</h2>
+<p><code>state_all_exact</code> measures whether every intermediate modular state is correct. <code>state_prefix_fraction</code> measures how far execution gets before the first state error, as a fraction of all active steps.</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">State 1.0 All Exact</th>
+<th style="text-align: right;">State 0.25 All Exact</th>
+<th style="text-align: right;">Control All Exact</th>
+<th style="text-align: right;">State 1.0 Prefix</th>
+<th style="text-align: right;">State 0.25 Prefix</th>
+<th style="text-align: right;">Control Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard L12</td>
+<td style="text-align: right;">51.6%</td>
+<td style="text-align: right;">45.3%</td>
+<td style="text-align: right;">43.8%</td>
+<td style="text-align: right;">76.2%</td>
+<td style="text-align: right;">71.0%</td>
+<td style="text-align: right;">70.6%</td>
+</tr>
+<tr>
+<td>Standard L24</td>
+<td style="text-align: right;">28.1%</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">62.8%</td>
+<td style="text-align: right;">63.7%</td>
+<td style="text-align: right;">63.7%</td>
+</tr>
+<tr>
+<td>Paraphrase L12</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">74.7%</td>
+<td style="text-align: right;">72.4%</td>
+<td style="text-align: right;">74.2%</td>
+</tr>
+<tr>
+<td>Paraphrase L24</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">15.6%</td>
+<td style="text-align: right;">40.0%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;">45.2%</td>
+</tr>
+<tr>
+<td>Paired L12</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">78.1%</td>
+<td style="text-align: right;">78.5%</td>
+<td style="text-align: right;">78.0%</td>
+</tr>
+<tr>
+<td>Paired L24</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">18.8%</td>
+<td style="text-align: right;">20.3%</td>
+<td style="text-align: right;">49.8%</td>
+<td style="text-align: right;">49.0%</td>
+<td style="text-align: right;">48.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The state metrics agree with the exact-execution result. The state ladder does not produce a clear final-checkpoint improvement on long programs. Weight 1.0 gives the best standard L12 trajectory but is too brittle at paraphrase L24. Weight 0.25 is more stable but still does not beat the no-state control at final L24.</p>
+<h2>Paired State Consistency</h2>
+<p>Paired splits render the same latent program twice, once in the standard template and once in a paraphrased template. <code>compiler_pair_state_consistency</code> measures whether the two renderings produce the same complete predicted state trajectory.</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">State Ladder 1.0</th>
+<th style="text-align: right;">State Ladder 0.25</th>
+<th style="text-align: right;">No State Ladder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paired L4</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;">95.3%</td>
+<td style="text-align: right;">98.4%</td>
+</tr>
+<tr>
+<td>Paired L8</td>
+<td style="text-align: right;">84.4%</td>
+<td style="text-align: right;">87.5%</td>
+<td style="text-align: right;">84.4%</td>
+</tr>
+<tr>
+<td>Paired L12</td>
+<td style="text-align: right;">71.9%</td>
+<td style="text-align: right;">76.6%</td>
+<td style="text-align: right;">73.4%</td>
+</tr>
+<tr>
+<td>Paired L24</td>
+<td style="text-align: right;">1.6%</td>
+<td style="text-align: right;">26.6%</td>
+<td style="text-align: right;">42.2%</td>
+</tr>
+</tbody>
+</table>
+<p>The full-weight state ladder collapses on paired L24 consistency at the final checkpoint. The lighter state ladder is better, but the matched no-state curriculum control still has the highest final paired L24 consistency.</p>
+<h2>Best Logged Checkpoints</h2>
+<p>The final checkpoint is the primary saved model for each run. Training logs also show that paired L24 peaked before the final checkpoint.</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">Step</th>
+<th style="text-align: right;">Paired L24 Exec</th>
+<th style="text-align: right;">Paired L24 Prefix</th>
+<th style="text-align: right;">Paired L24 State Consistency</th>
+<th style="text-align: right;">Standard L24 Exec</th>
+<th style="text-align: right;">Paraphrase L24 Exec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No state ladder</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">25.0%</td>
+<td style="text-align: right;">51.1%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">32.8%</td>
+<td style="text-align: right;">23.4%</td>
+</tr>
+<tr>
+<td>State ladder 1.0</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">23.4%</td>
+<td style="text-align: right;">52.3%</td>
+<td style="text-align: right;">43.8%</td>
+<td style="text-align: right;">31.2%</td>
+<td style="text-align: right;">10.9%</td>
+</tr>
+<tr>
+<td>State ladder 0.25</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">28.1%</td>
+<td style="text-align: right;">52.7%</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">35.9%</td>
+<td style="text-align: right;">21.9%</td>
+</tr>
+</tbody>
+</table>
+<p>The lighter state ladder has the best logged paired L24 checkpoint. However, those intermediate weights were not saved in this run; this table is a training-log result, not a saved-checkpoint result. The final saved checkpoint comparison remains mixed and favors the no-state control on paired L24.</p>
+<h2>Interpretation</h2>
+<p>The positive result is the length curriculum. It pushes the numeric-copy compiler into a much stronger long-chain regime while final-answer-only QLoRA remains at chance. The no-state curriculum compiler reaches 39.1% standard L24 and 21.1% paired L24 exact execution with only 900 optimizer steps.</p>
+<p>The state-ladder hypothesis is not cleanly supported. Dense intermediate-state loss changes learning dynamics and can improve some medium splits, but at the tested weights it does not reliably improve final long-chain execution over the matched curriculum control. The weight-0.25 ablation is informative: lowering the state loss reduces the damage and gives the best logged paired L24 checkpoint, but still does not produce a final-checkpoint win.</p>
+<p>The strongest conclusion is therefore:</p>
+<ol>
+<li>A staged long-chain curriculum is a high-leverage way to improve the Qwen numeric-copy compiler.</li>
+<li>Dense state supervision is useful diagnostically and may help with checkpoint timing, but the tested fixed-weight objective is not yet the right long-chain regularizer.</li>
+<li>The remaining failure is still compounding exactness: per-step symbol metrics are high, but length-24 exact execution remains sensitive to small operation and argument errors.</li>
+</ol>
+<h2>Recommended Follow-Up</h2>
+<p>The next run should make checkpoint selection and state loss scheduling explicit:</p>
+<ul>
+<li>save checkpoints at each stage boundary and every long-stage evaluation;</li>
+<li>select by paired length-24 validation exactness, not final step;</li>
+<li>anneal state loss from 1.0 to 0.0 during the long stage, or use state loss only through length 12 and disable it for length 24;</li>
+<li>run a matched no-state curriculum control with the same checkpoint-selection rule.</li>
+</ul>
+<p>The success criterion should be a saved checkpoint that beats the no-state curriculum control on paired L24 exact execution and paired L24 state consistency.</p>
+<h2>Artifacts</h2>
+<p>Small files:</p>
+<ul>
+<li>Source: <code>experiments/qwen_state_ladder_compiler/src/</code></li>
+<li>Runs: <code>experiments/qwen_state_ladder_compiler/runs/</code></li>
+<li>Analysis: <code>experiments/qwen_state_ladder_compiler/analysis/</code></li>
+<li>Report: <code>experiments/qwen_state_ladder_compiler/reports/qwen_state_ladder_compiler_paper.md</code></li>
+<li>Manifest: <code>experiments/qwen_state_ladder_compiler/checkpoint_manifest.csv</code></li>
+</ul>
+<p>Large files:</p>
+<ul>
+<li>State ladder weight 1.0: <code>large_artifacts/qwen_state_ladder_compiler/checkpoints/main_qwen3_4b_qlora_state_ladder_curriculum_s900/</code></li>
+<li>State ladder weight 0.25: <code>large_artifacts/qwen_state_ladder_compiler/checkpoints/main_qwen3_4b_qlora_state_ladder_w025_curriculum_s900/</code></li>
+<li>No-state curriculum control: <code>large_artifacts/qwen_state_ladder_compiler/checkpoints/control_qwen3_4b_qlora_curriculum_no_state_ladder_s900/</code></li>
+<li>Answer-only control: <code>large_artifacts/qwen_state_ladder_compiler/checkpoints/control_qwen3_4b_qlora_answer_only_curriculum_s900/</code></li>
+</ul>
+</body>
+</html>

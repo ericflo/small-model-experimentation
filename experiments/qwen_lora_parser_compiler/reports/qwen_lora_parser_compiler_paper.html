@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen LoRA Parser Compiler</title>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; margin: 0; color: #17202a; background: #f7f7f4; }
+    main { max-width: 980px; margin: 0 auto; padding: 42px 24px 72px; background: #fff; }
+    h1, h2, h3 { line-height: 1.2; color: #111827; }
+    h1 { font-size: 2.25rem; margin: 0 0 1rem; }
+    h2 { margin-top: 2.2rem; border-top: 1px solid #e5e7eb; padding-top: 1.2rem; }
+    code { background: #f1f5f9; padding: 0.1rem 0.28rem; border-radius: 4px; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0 1.6rem; font-size: 0.93rem; }
+    th, td { border: 1px solid #d7dee8; padding: 0.48rem 0.56rem; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #f3f6fa; }
+    ul { padding-left: 1.3rem; }
+    .lead { font-size: 1.08rem; color: #374151; }
+  </style>
+</head>
+<body>
+<main>
+<h1>Qwen LoRA Parser Compiler</h1>
+
+<h2>Summary</h2>
+<p class="lead">This experiment tested whether QLoRA posttraining can install a small symbolic interface on top of <code>Qwen/Qwen3-4B</code>. The model was trained live with LoRA adapters while a parser read the final hidden sequence and emitted a modular-arithmetic program: an initial value, ordered operations, and ordered arguments. A differentiable executor then ran the predicted program modulo 97.</p>
+<p>The result is mixed. Trace supervision created a real, measurable program interface that ordinary final-answer training did not discover. The full trace+executor condition reached 32.8% standard length-4 executor accuracy and 40.6% paraphrase length-4 accuracy, while direct final-answer QLoRA and answer-only compiler training stayed near chance. The failure mode is also clear: argument value decoding is not accurate enough. It remains near 80% on length-4 programs and falls with length, which compounds into near-zero exact programs by length 12.</p>
+<p>The experiment supports a narrow claim: explicit parser supervision can make a small QLoRA-adapted model expose a partial symbolic program in hidden states. It does not support a broad claim of large universal intelligence improvement from this recipe.</p>
+
+<h2>Setup</h2>
+<ul>
+  <li>Base model: <code>Qwen/Qwen3-4B</code></li>
+  <li>Loading: 4-bit NF4 quantization</li>
+  <li>Trainable model update: LoRA rank 8, alpha 16, dropout 0.05, target <code>all-linear</code></li>
+  <li>Task: synthetic text instructions for arithmetic modulo 97</li>
+  <li>Train lengths: 1-12 steps</li>
+  <li>Evaluation lengths: 4, 8, 12, 24 steps</li>
+  <li>Evaluation templates: standard and paraphrase</li>
+  <li>Evaluation size: 64 examples per split</li>
+  <li>Large checkpoint storage: <code>large_artifacts/qwen_lora_parser_compiler/checkpoints/</code></li>
+</ul>
+
+<h2>Runs</h2>
+<table>
+<tr><th>Run</th><th>Variant</th><th>Purpose</th></tr>
+<tr><td><code>pilot_qwen3_4b_qlora_tagger_mixed_l12</code></td><td><code>qlora_tagger</code></td><td>Pilot gate: learn token roles and program symbols with trace supervision only.</td></tr>
+<tr><td><code>main_qwen3_4b_qlora_trace_argstrong_mixed_l12</code></td><td><code>qlora_trace</code></td><td>Full condition: trace supervision plus differentiable executor loss, with stronger argument supervision.</td></tr>
+<tr><td><code>control_qwen3_4b_direct_mixed_l12</code></td><td><code>direct</code></td><td>Ordinary final-answer QLoRA control using an answer-marker hidden-state classifier.</td></tr>
+<tr><td><code>control_qwen3_4b_qlora_answer_only_mixed_l12</code></td><td><code>qlora_answer_only</code></td><td>Compiler/executor trained from final-answer loss only, without trace supervision.</td></tr>
+</table>
+
+<h2>Main Result</h2>
+<h3>Full Trace+Executor Condition</h3>
+<table>
+<tr><th>Split</th><th>Executor</th><th>Init</th><th>Op</th><th>Arg</th><th>Program Exact</th></tr>
+<tr><td>Standard L4</td><td>32.8%</td><td>100.0%</td><td>97.7%</td><td>79.7%</td><td>32.8%</td></tr>
+<tr><td>Standard L8</td><td>10.9%</td><td>100.0%</td><td>97.7%</td><td>77.9%</td><td>9.4%</td></tr>
+<tr><td>Standard L12</td><td>0.0%</td><td>100.0%</td><td>94.0%</td><td>70.7%</td><td>0.0%</td></tr>
+<tr><td>Standard L24</td><td>0.0%</td><td>100.0%</td><td>81.4%</td><td>67.4%</td><td>0.0%</td></tr>
+<tr><td>Paraphrase L4</td><td>40.6%</td><td>100.0%</td><td>96.9%</td><td>82.4%</td><td>40.6%</td></tr>
+<tr><td>Paraphrase L8</td><td>6.2%</td><td>100.0%</td><td>97.7%</td><td>75.8%</td><td>6.2%</td></tr>
+<tr><td>Paraphrase L12</td><td>4.7%</td><td>100.0%</td><td>90.5%</td><td>69.3%</td><td>0.0%</td></tr>
+<tr><td>Paraphrase L24</td><td>0.0%</td><td>100.0%</td><td>75.5%</td><td>53.1%</td><td>0.0%</td></tr>
+</table>
+
+<h3>Token-Tagger Pilot</h3>
+<table>
+<tr><th>Split</th><th>Executor</th><th>Init</th><th>Op</th><th>Arg</th><th>Op Pos</th><th>Arg Pos</th><th>Program Exact</th></tr>
+<tr><td>Standard L4</td><td>17.2%</td><td>96.9%</td><td>98.0%</td><td>76.2%</td><td>100.0%</td><td>89.5%</td><td>17.2%</td></tr>
+<tr><td>Standard L8</td><td>3.1%</td><td>98.4%</td><td>94.9%</td><td>73.8%</td><td>100.0%</td><td>85.2%</td><td>0.0%</td></tr>
+<tr><td>Standard L12</td><td>0.0%</td><td>96.9%</td><td>95.6%</td><td>68.8%</td><td>100.0%</td><td>82.4%</td><td>0.0%</td></tr>
+<tr><td>Standard L24</td><td>1.6%</td><td>100.0%</td><td>88.2%</td><td>65.4%</td><td>90.2%</td><td>77.4%</td><td>0.0%</td></tr>
+<tr><td>Paraphrase L4</td><td>32.8%</td><td>98.4%</td><td>99.2%</td><td>77.7%</td><td>100.0%</td><td>94.5%</td><td>32.8%</td></tr>
+<tr><td>Paraphrase L8</td><td>17.2%</td><td>95.3%</td><td>99.0%</td><td>77.5%</td><td>100.0%</td><td>93.0%</td><td>15.6%</td></tr>
+<tr><td>Paraphrase L12</td><td>0.0%</td><td>100.0%</td><td>99.2%</td><td>71.6%</td><td>100.0%</td><td>91.7%</td><td>0.0%</td></tr>
+<tr><td>Paraphrase L24</td><td>1.6%</td><td>93.8%</td><td>97.0%</td><td>71.2%</td><td>99.4%</td><td>87.3%</td><td>0.0%</td></tr>
+</table>
+
+<h3>Controls</h3>
+<table>
+<tr><th>Run</th><th>Standard L4</th><th>Standard L8</th><th>Standard L12</th><th>Standard L24</th><th>Paraphrase L4</th><th>Paraphrase L8</th><th>Paraphrase L12</th><th>Paraphrase L24</th></tr>
+<tr><td>Direct final-answer QLoRA</td><td>3.1%</td><td>0.0%</td><td>0.0%</td><td>1.6%</td><td>0.0%</td><td>0.0%</td><td>1.6%</td><td>0.0%</td></tr>
+<tr><td>Answer-only compiler</td><td>0.0%</td><td>1.6%</td><td>3.1%</td><td>3.1%</td><td>0.0%</td><td>1.6%</td><td>0.0%</td><td>0.0%</td></tr>
+</table>
+
+<h2>Interpretation</h2>
+<p>The useful signal is not the final executor score by itself. The useful signal is that explicit trace supervision made internal hidden states reliably expose parts of a program. Initial value decoding reached 100.0% in the full condition. Operation decoding stayed high through length 12 and degraded at length 24. Argument token localization was usually high. Argument value decoding was the unresolved bottleneck.</p>
+<p>The experiment did not fail because the parser could not find the computation. It failed because the numeric argument channel was too noisy for exact multi-step execution. With 8 or 12 steps, even a good but imperfect per-step argument classifier produces very few exact programs.</p>
+
+<h2>Recommended Next Experiment</h2>
+<p>Run a numeric-copy compiler variant. Keep the same QLoRA parser and role supervision, add an auxiliary numeric-token decoder for argument values, add a constrained value head that only predicts valid generated argument ranges for each operation class, and require argument value accuracy above 95% at L8 before running longer chains.</p>
+
+<h2>Artifacts</h2>
+<ul>
+  <li>Code: <code>experiments/qwen_lora_parser_compiler/src/</code></li>
+  <li>Runs: <code>experiments/qwen_lora_parser_compiler/runs/</code></li>
+  <li>Analysis: <code>experiments/qwen_lora_parser_compiler/analysis/</code></li>
+  <li>Manifest: <code>experiments/qwen_lora_parser_compiler/checkpoint_manifest.csv</code></li>
+  <li>Large checkpoints: <code>large_artifacts/qwen_lora_parser_compiler/checkpoints/</code></li>
+</ul>
+</main>
+</body>
+</html>

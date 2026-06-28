@@ -1,0 +1,1397 @@
+closure:   0%|          | 0/60 [00:00<?, ?it/s]closure:  10%|█         | 6/60 [00:00<00:01, 27.16it/s]closure:  15%|█▌        | 9/60 [00:00<00:02, 18.50it/s]closure:  22%|██▏       | 13/60 [00:01<00:07,  6.70it/s]closure:  25%|██▌       | 15/60 [00:03<00:16,  2.80it/s]closure:  35%|███▌      | 21/60 [00:03<00:07,  5.14it/s]closure:  38%|███▊      | 23/60 [00:04<00:06,  5.59it/s]closure:  47%|████▋     | 28/60 [00:05<00:06,  4.73it/s]closure:  48%|████▊     | 29/60 [00:06<00:09,  3.29it/s]closure:  50%|█████     | 30/60 [00:07<00:11,  2.59it/s]closure:  60%|██████    | 36/60 [00:07<00:04,  4.97it/s]closure:  63%|██████▎   | 38/60 [00:07<00:04,  5.43it/s]closure:  72%|███████▏  | 43/60 [00:08<00:03,  5.07it/s]closure:  73%|███████▎  | 44/60 [00:10<00:04,  3.23it/s]closure:  75%|███████▌  | 45/60 [00:11<00:05,  2.56it/s]closure:  85%|████████▌ | 51/60 [00:11<00:01,  4.95it/s]closure:  88%|████████▊ | 53/60 [00:11<00:01,  5.44it/s]closure:  97%|█████████▋| 58/60 [00:12<00:00,  5.13it/s]closure:  98%|█████████▊| 59/60 [00:13<00:00,  3.47it/s]closure: 100%|██████████| 60/60 [00:14<00:00,  2.69it/s]closure: 100%|██████████| 60/60 [00:14<00:00,  4.14it/s]
+{
+  "by_family": {
+    "contains_and_count_code": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "contains_code": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "contains_count_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "length_and_mod_code": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "length_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "length_mod_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "mod_scalar_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "scalar_branch_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sorted_first_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_add_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_and_scalar_code": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "sum_threshold_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "tuple_get_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    },
+    "tuple_sum_label": {
+      "base_rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "base_rerank_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "closure_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "conservative_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "conservative_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_accepted": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_damaged_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_hidden_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      },
+      "strict_closure_improved_hidden": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "strict_closure_visible_all": {
+        "rate": 1.0,
+        "records": 4,
+        "successes": 4
+      }
+    }
+  },
+  "overall": {
+    "base_rerank_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "base_rerank_visible_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "closure_damaged_hidden": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "closure_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "closure_improved_hidden": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "closure_oracle_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "closure_visible_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "conservative_closure_accepted": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "conservative_closure_damaged_hidden": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "conservative_closure_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "conservative_closure_improved_hidden": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "conservative_closure_visible_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "strict_closure_accepted": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "strict_closure_damaged_hidden": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "strict_closure_hidden_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    },
+    "strict_closure_improved_hidden": {
+      "rate": 0.0,
+      "records": 60,
+      "successes": 0
+    },
+    "strict_closure_visible_all": {
+      "rate": 1.0,
+      "records": 60,
+      "successes": 60
+    }
+  }
+}

@@ -1,0 +1,6 @@
+run,checkpoint_dir,created_unix,notes
+smoke_dense_state_dagger,large_artifacts/qwen_dense_state_dagger_vm_agent/checkpoints/smoke_dense_state_dagger,1782279827,dense-state DAgger VM agent; base=Qwen/Qwen3-4B
+pilot_dense_state_dagger_s96_r2,large_artifacts/qwen_dense_state_dagger_vm_agent/checkpoints/pilot_dense_state_dagger_s96_r2,1782282033,dense-state DAgger VM agent; base=Qwen/Qwen3-4B
+smoke_dense_state_joint_action,large_artifacts/qwen_dense_state_dagger_vm_agent/checkpoints/smoke_dense_state_joint_action,1782282453,dense-state DAgger VM agent; base=Qwen/Qwen3-4B
+pilot_joint_action_s96_r2,large_artifacts/qwen_dense_state_dagger_vm_agent/checkpoints/pilot_joint_action_s96_r2,1782284621,dense-state DAgger VM agent; base=Qwen/Qwen3-4B
+main_joint_action_calibrated_s256_r2,large_artifacts/qwen_dense_state_dagger_vm_agent/checkpoints/main_joint_action_calibrated_s256_r2,1782292925,dense-state DAgger VM agent; base=Qwen/Qwen3-4B

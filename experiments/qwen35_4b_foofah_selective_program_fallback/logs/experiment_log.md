@@ -1,0 +1,49 @@
+# Experiment Log
+
+## 2026-06-27
+
+- Created standalone selective-program-fallback experiment.
+- Objective: test whether visible-verified executable program candidates can be safely used as fallback answers for Foofah table transformations, and whether counterexample-style probe agreement improves the fallback decision.
+- Copied self-contained Foofah cases and candidate records into `data/`.
+- Planned process:
+  - Build selector/probe evaluator.
+  - Run no-model diagnostic to establish deterministic selector baselines.
+  - Run smoke with model-scored probe inputs.
+  - Iterate selector thresholds if smoke reveals useful signal.
+  - Run full visible-program probe evaluation.
+  - Generate report, figures, and validation evidence.
+- Built `scripts/eval_selective_fallback.py` with policies for direct-only, parse-failure fallback, visible-program fallback, visible-disagreement fallback, and counterexample-probe support thresholds.
+- No-model full diagnostic:
+  - direct JSON: 138/250 (55.2%).
+  - program only if direct parse fails: 142/250 (56.8%).
+  - program whenever visible example passes: 156/250 (62.4%).
+  - visible-program fallback recovered 18 direct misses and lost 0 direct-correct cases.
+  - visible-disagreement slice: 26 cases; direct correct 0, program correct 18.
+- Model-probe smoke on 8 visible-disagreement cases:
+  - visible-program fallback: 5/8.
+  - probe-support threshold policies: 0/8 or 1/8.
+  - probe support was higher on some hidden-wrong programs than on hidden-correct programs, so broader probing was restricted to the decision slice.
+- Deterministic program-probe full pass:
+  - all 78 visible-passing programs executed on generated probe inputs.
+  - crashes, constant outputs, and output-variety features did not separate correct programs from hidden-wrong programs.
+- Full model-probe pass on all 26 visible-disagreement cases:
+  - visible-program fallback: 18/26.
+  - probe support >= 0.50: 2/26.
+  - visible-program fallback with probe veto: 8/26.
+  - mean probe support was 25.0% for hidden-correct programs and 33.3% for hidden-wrong programs among comparable cases.
+- Final merged all-250 policy comparison:
+  - direct JSON: 138/250 (55.2%).
+  - parse-failure fallback: 142/250 (56.8%).
+  - probe support >= 0.50: 140/250 (56.0%).
+  - visible-program fallback with probe veto: 146/250 (58.4%).
+  - program on visible disagreement only: 156/250 (62.4%).
+  - program whenever visible example passes: 156/250 (62.4%).
+- Generated report and figures:
+  - `reports/report.md`
+  - `reports/report_metrics.json`
+  - `reports/final_summary.json`
+  - `reports/final_records.jsonl`
+  - `reports/figures/policy_accuracy.png`
+  - `reports/figures/program_commit_tradeoff.png`
+  - `reports/figures/probe_support_histogram.png`
+  - `reports/figures/family_gains.png`

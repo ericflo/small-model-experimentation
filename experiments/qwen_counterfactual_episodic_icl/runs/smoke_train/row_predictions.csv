@@ -1,0 +1,36 @@
+method,split,support_mode,task_id,family,rule_name,counterfactual_rule,query_index,input,target,prediction,exact
+base,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,"7833 Wait, but the examples show that the output is the input number incremented by 1.",False
+base,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,"1937 Wait, but the examples show that the output is the input number plus 1.",False
+base,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,,False
+base,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,,False
+base,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,,False
+base,public_prose,normal,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,"878-6628 Okay, let's see.",False
+base,public_prose,normal,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,"467-8177 Okay, let's see.",False
+base,public_prose,normal,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,"887-7925 Okay, let's see.",False
+base,public_prose,shuffled,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,,False
+base,public_prose,shuffled,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,,False
+base,public_prose,shuffled,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,,False
+adapter,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,"7833 Wait, but the examples show that the output is the input number incremented by 1.",False
+adapter,synthetic_counterfactual,normal,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,"1937 Wait, but the examples show that the output is the input number plus 1.",False
+adapter,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,,False
+adapter,synthetic_counterfactual,normal,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,,False
+adapter,synthetic_counterfactual,shuffled,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,,False
+adapter,synthetic_counterfactual,none,cf_0000_number_plus_1,number,number_plus_1,number_times_2,0,JUPITER 7832,7833,JUPITER 7832,False
+adapter,synthetic_counterfactual,none,cf_0000_number_plus_1,number,number_plus_1,number_times_2,1,MATRIX 1936,1937,1936 MATRIX,False
+adapter,synthetic_counterfactual,none,cf_0000_number_times_2,number,number_times_2,number_plus_1,0,JUPITER 7832,15664,JUPITER 7832,False
+adapter,synthetic_counterfactual,none,cf_0000_number_times_2,number,number_times_2,number_plus_1,1,MATRIX 1936,3872,1936 MATRIX,False
+adapter,public_prose,normal,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,"878-6628 Okay, let's see.",False
+adapter,public_prose,normal,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,"467-8177 Okay, let's see.",False
+adapter,public_prose,normal,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,"887-7925 Okay, let's see.",False
+adapter,public_prose,shuffled,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,,False
+adapter,public_prose,shuffled,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,,False
+adapter,public_prose,shuffled,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,,False
+adapter,public_prose,none,Phone.000005,Phone,public,Substring,0,418-878-6628 x8081,878-6628,418-878-6628 x8081,False
+adapter,public_prose,none,Phone.000005,Phone,public,Substring,1,829-467-8177 x1914,467-8177,829-467-8177 x1914,False
+adapter,public_prose,none,Phone.000005,Phone,public,Substring,2,364-887-7925 x6328,887-7925,364-887-7925 x6328,False

@@ -1,0 +1,71 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   5%|▍         | 36/723 [00:00<00:01, 349.86it/s]Loading weights:  11%|█         | 79/723 [00:00<00:01, 390.06it/s]Loading weights:  16%|█▋        | 119/723 [00:00<00:01, 388.03it/s]Loading weights:  22%|██▏       | 159/723 [00:00<00:01, 388.06it/s]Loading weights:  28%|██▊       | 200/723 [00:00<00:01, 391.92it/s]Loading weights:  34%|███▍      | 247/723 [00:00<00:01, 407.88it/s]Loading weights:  40%|████      | 291/723 [00:00<00:01, 410.21it/s]Loading weights:  46%|████▌     | 332/723 [00:00<00:00, 396.98it/s]Loading weights:  52%|█████▏    | 379/723 [00:00<00:00, 415.88it/s]Loading weights:  58%|█████▊    | 421/723 [00:01<00:00, 402.32it/s]Loading weights:  88%|████████▊ | 638/723 [00:01<00:00, 914.76it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 604.28it/s]
+[1/10 new, 31 total] split=dev best=consensus_2 11/31 direct=10 oracle_union=13 visible_tasks=23 tokens=344530
+[2/10 new, 32 total] split=dev best=consensus_2 11/32 direct=10 oracle_union=13 visible_tasks=23 tokens=358530
+[3/10 new, 33 total] split=dev best=consensus_2 11/33 direct=10 oracle_union=13 visible_tasks=24 tokens=366347
+[4/10 new, 34 total] split=dev best=consensus_2 12/34 direct=11 oracle_union=14 visible_tasks=25 tokens=382320
+[5/10 new, 35 total] split=dev best=consensus_2 12/35 direct=11 oracle_union=14 visible_tasks=25 tokens=392994
+[6/10 new, 36 total] split=dev best=consensus_2 12/36 direct=11 oracle_union=14 visible_tasks=26 tokens=397924
+[7/10 new, 37 total] split=dev best=consensus_2 13/37 direct=12 oracle_union=15 visible_tasks=27 tokens=405319
+[8/10 new, 38 total] split=dev best=consensus_2 13/38 direct=12 oracle_union=15 visible_tasks=28 tokens=411915
+[9/10 new, 39 total] split=dev best=consensus_2 14/39 direct=12 oracle_union=16 visible_tasks=29 tokens=419408
+[10/10 new, 40 total] split=dev best=consensus_2 15/40 direct=13 oracle_union=17 visible_tasks=29 tokens=428693
+{
+  "direct_accuracy": 0.325,
+  "direct_exact": 13,
+  "direct_parse_ok": 39,
+  "mean_correct_visible_programs": 0.65,
+  "mean_visible_programs": 1.575,
+  "n": 40,
+  "oracle_union": 17,
+  "oracle_union_accuracy": 0.425,
+  "oracle_visible_program": 13,
+  "policies": {
+    "consensus_2": {
+      "accuracy": 0.375,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 2,
+      "exact": 15,
+      "program_commit_correct": 6,
+      "program_commit_precision": 0.5,
+      "program_commits": 12
+    },
+    "consensus_3": {
+      "accuracy": 0.35,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 1,
+      "exact": 14,
+      "program_commit_correct": 5,
+      "program_commit_precision": 0.5,
+      "program_commits": 10
+    },
+    "direct": {
+      "accuracy": 0.325,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 13,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "first_visible_program": {
+      "accuracy": 0.3,
+      "direct_correct_losses": 4,
+      "direct_miss_recoveries": 3,
+      "exact": 12,
+      "program_commit_correct": 10,
+      "program_commit_precision": 0.3448275862068966,
+      "program_commits": 29
+    }
+  },
+  "tasks_with_visible_program": 29,
+  "total_forward_tokens": 428693,
+  "variants": [
+    "verified_structural",
+    "row_column_rule",
+    "split_fold_unpivot",
+    "header_aware",
+    "cell_parser"
+  ]
+}

@@ -1,0 +1,6 @@
+split,blank_k0,action_only_k8,action_only_false_stop,action_only_program_exact,action_only_mean_steps,echo_k8,echo_false_stop,echo_program_exact,echo_mean_steps,oracle_k8,native_qwen_direct,native_parse_rate,action_minus_native,echo_minus_action,action_oracle_gap,echo_oracle_gap
+val_mixed,0.125,0.46875,0.5,0.34375,2.34375,0.5,0.4375,0.375,2.375,0.78125,0.3125,1.0,0.15625,0.03125,0.3125,0.28125
+fresh_standard,0.09375,0.5625,0.4375,0.46875,2.78125,0.375,0.5625,0.28125,2.4375,0.8125,0.40625,1.0,0.15625,-0.1875,0.25,0.4375
+fresh_paraphrase,0.03125,0.21875,0.71875,0.1875,1.9375,0.21875,0.75,0.1875,1.4375,0.65625,0.375,1.0,-0.15625,0.0,0.4375,0.4375
+fresh_paired,0.125,0.34375,0.625,0.1875,2.09375,0.25,0.71875,0.125,1.875,0.625,0.34375,0.96875,0.0,-0.09375,0.28125,0.375
+hard_composition,0.125,0.5625,0.4375,0.4375,2.25,0.46875,0.53125,0.34375,2.03125,0.8125,0.40625,0.96875,0.15625,-0.09375,0.25,0.34375

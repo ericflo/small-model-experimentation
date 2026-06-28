@@ -1,0 +1,209 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Qwen Batched Transduction Consistency</title><style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;margin:32px;line-height:1.5;color:#111827;max-width:1160px}h1,h2,h3{line-height:1.2}table{border-collapse:collapse;margin:14px 0 24px;width:100%;font-size:14px}th,td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f3f4f6}img{max-width:100%;border:1px solid #e5e7eb;border-radius:6px}figure{margin:24px 0}p,li{max-width:940px}</style></head><body><h1>Qwen Batched Transduction Consistency</h1>
+<h2>Abstract</h2>
+<p>This standalone experiment tests whether answering multiple query rows in one shared generation context improves task-level consistency on public text-transformation tasks. The strict primary metric is full-task exact: all held-out rows for a task must be answered exactly.</p>
+<h2>Method</h2>
+<ul>
+<li>Dataset: public `Transformation.Text` tasks.</li>
+<li>Split: first `4` examples are train examples; up to `6` held-out examples are scored.</li>
+<li>Row-by-row baseline: one prompt per held-out row.</li>
+<li>Batched transduction: one JSON-array output per query batch, with batch sizes 2, 4, and all held-out rows.</li>
+<li>Shuffled-order control: query rows are shuffled inside the batch and then unshuffled for scoring.</li>
+<li>Rule-hint arm: one-batch output with an instruction to use one consistent internal rule.</li>
+<li>Parse failures are counted directly; malformed or wrong-length JSON arrays receive empty predictions for missing rows.</li>
+</ul>
+<h2>Run Configuration</h2>
+<ul>
+<li>Suite: `main_v2_prompt_iteration`.</li>
+<li>Qwen model: `Qwen/Qwen3-4B`.</li>
+<li>Tasks: `40`.</li>
+<li>Held-out cap: `6`.</li>
+<li>Sample seed: `20260627`.</li>
+</ul>
+<h2>Primary Results</h2>
+<h3>Prompt Iteration Result</h3>
+<table><thead><tr><th>method</th><th>tasks</th><th>full_task_exact</th><th>row_exact</th><th>parse_ok_rate</th></tr></thead><tbody>
+<tr><td>batch_all</td><td>40</td><td>45.0%</td><td>72.5%</td><td>100.0%</td></tr>
+<tr><td>batch_all_structured</td><td>40</td><td>42.5%</td><td>67.5%</td><td>100.0%</td></tr>
+<tr><td>batch_all_verify_hint</td><td>40</td><td>45.0%</td><td>70.0%</td><td>100.0%</td></tr>
+<tr><td>row_by_row</td><td>40</td><td>50.0%</td><td>72.1%</td><td>100.0%</td></tr>
+</tbody></table>
+<h3>Iteration Comparison</h3>
+<p>The first main run swept batch size and basic controls. The second main run kept the same 40-task sample and tested stricter batch prompts.</p>
+<table><thead><tr><th>iteration</th><th>method</th><th>tasks</th><th>full_task_exact</th><th>row_exact</th><th>parse_ok_rate</th></tr></thead><tbody>
+<tr><td>v1_batch_sweep</td><td>row_by_row</td><td>40</td><td>50.0%</td><td>72.1%</td><td>100.0%</td></tr>
+<tr><td>v1_batch_sweep</td><td>batch_2</td><td>40</td><td>40.0%</td><td>70.2%</td><td>99.2%</td></tr>
+<tr><td>v1_batch_sweep</td><td>batch_4</td><td>40</td><td>40.0%</td><td>71.7%</td><td>99.2%</td></tr>
+<tr><td>v1_batch_sweep</td><td>batch_all</td><td>40</td><td>45.0%</td><td>72.5%</td><td>100.0%</td></tr>
+<tr><td>v1_batch_sweep</td><td>batch_all_shuffled</td><td>40</td><td>42.5%</td><td>65.8%</td><td>100.0%</td></tr>
+<tr><td>v1_batch_sweep</td><td>batch_all_rule_hint</td><td>40</td><td>45.0%</td><td>69.0%</td><td>100.0%</td></tr>
+<tr><td>v2_prompt_iteration</td><td>row_by_row</td><td>40</td><td>50.0%</td><td>72.1%</td><td>100.0%</td></tr>
+<tr><td>v2_prompt_iteration</td><td>batch_all</td><td>40</td><td>45.0%</td><td>72.5%</td><td>100.0%</td></tr>
+<tr><td>v2_prompt_iteration</td><td>batch_all_verify_hint</td><td>40</td><td>45.0%</td><td>70.0%</td><td>100.0%</td></tr>
+<tr><td>v2_prompt_iteration</td><td>batch_all_structured</td><td>40</td><td>42.5%</td><td>67.5%</td><td>100.0%</td></tr>
+</tbody></table>
+<h3>Batch-All Task Flips</h3>
+<ul>
+<li>Batch-all wins over row-by-row on `0` tasks.</li>
+<li>Batch-all loses to row-by-row on `2` tasks.</li>
+<li>Batch-all ties row-by-row on `38` tasks.</li>
+</ul>
+<h3>Family Summary</h3>
+<table><thead><tr><th>family</th><th>method</th><th>tasks</th><th>full_task_exact</th><th>row_exact</th></tr></thead><tbody>
+<tr><td>Address</td><td>batch_all</td><td>2</td><td>0.0%</td><td>50.0%</td></tr>
+<tr><td>Address</td><td>batch_all_structured</td><td>2</td><td>0.0%</td><td>50.0%</td></tr>
+<tr><td>Address</td><td>batch_all_verify_hint</td><td>2</td><td>0.0%</td><td>50.0%</td></tr>
+<tr><td>Address</td><td>row_by_row</td><td>2</td><td>0.0%</td><td>50.0%</td></tr>
+<tr><td>BillingCode</td><td>batch_all</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>BillingCode</td><td>batch_all_structured</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>BillingCode</td><td>batch_all_verify_hint</td><td>1</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>BillingCode</td><td>row_by_row</td><td>1</td><td>0.0%</td><td>33.3%</td></tr>
+<tr><td>City</td><td>batch_all</td><td>2</td><td>50.0%</td><td>87.5%</td></tr>
+<tr><td>City</td><td>batch_all_structured</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>City</td><td>batch_all_verify_hint</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>City</td><td>row_by_row</td><td>2</td><td>50.0%</td><td>87.5%</td></tr>
+<tr><td>Column</td><td>batch_all</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Column</td><td>batch_all_structured</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Column</td><td>batch_all_verify_hint</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Column</td><td>row_by_row</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime</td><td>batch_all</td><td>16</td><td>50.0%</td><td>75.0%</td></tr>
+<tr><td>DateTime</td><td>batch_all_structured</td><td>16</td><td>37.5%</td><td>69.8%</td></tr>
+<tr><td>DateTime</td><td>batch_all_verify_hint</td><td>16</td><td>43.8%</td><td>72.9%</td></tr>
+<tr><td>DateTime</td><td>row_by_row</td><td>16</td><td>56.2%</td><td>70.8%</td></tr>
+<tr><td>FilePath</td><td>batch_all</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>FilePath</td><td>batch_all_structured</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>FilePath</td><td>batch_all_verify_hint</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>FilePath</td><td>row_by_row</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Gender</td><td>batch_all</td><td>1</td><td>0.0%</td><td>66.7%</td></tr>
+<tr><td>Gender</td><td>batch_all_structured</td><td>1</td><td>0.0%</td><td>66.7%</td></tr>
+<tr><td>Gender</td><td>batch_all_verify_hint</td><td>1</td><td>0.0%</td><td>66.7%</td></tr>
+<tr><td>Gender</td><td>row_by_row</td><td>1</td><td>0.0%</td><td>66.7%</td></tr>
+<tr><td>Language</td><td>batch_all</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Language</td><td>batch_all_structured</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Language</td><td>batch_all_verify_hint</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Language</td><td>row_by_row</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Name</td><td>batch_all</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Name</td><td>batch_all_structured</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Name</td><td>batch_all_verify_hint</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Name</td><td>row_by_row</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Number</td><td>batch_all</td><td>10</td><td>20.0%</td><td>62.5%</td></tr>
+<tr><td>Number</td><td>batch_all_structured</td><td>10</td><td>20.0%</td><td>48.3%</td></tr>
+<tr><td>Number</td><td>batch_all_verify_hint</td><td>10</td><td>20.0%</td><td>53.3%</td></tr>
+<tr><td>Number</td><td>row_by_row</td><td>10</td><td>30.0%</td><td>64.2%</td></tr>
+<tr><td>Phone</td><td>batch_all</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone</td><td>batch_all_structured</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone</td><td>batch_all_verify_hint</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone</td><td>row_by_row</td><td>2</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>ShippingCode</td><td>batch_all</td><td>1</td><td>0.0%</td><td>33.3%</td></tr>
+<tr><td>ShippingCode</td><td>batch_all_structured</td><td>1</td><td>0.0%</td><td>33.3%</td></tr>
+<tr><td>ShippingCode</td><td>batch_all_verify_hint</td><td>1</td><td>0.0%</td><td>33.3%</td></tr>
+<tr><td>ShippingCode</td><td>row_by_row</td><td>1</td><td>0.0%</td><td>33.3%</td></tr>
+<tr><td>UserAgent</td><td>batch_all</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>UserAgent</td><td>batch_all_structured</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>UserAgent</td><td>batch_all_verify_hint</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>UserAgent</td><td>row_by_row</td><td>1</td><td>100.0%</td><td>100.0%</td></tr>
+</tbody></table>
+<h3>Task Details</h3>
+<table><thead><tr><th>task_id</th><th>family</th><th>method</th><th>heldout_rows</th><th>full_task_exact</th><th>row_exact</th><th>parse_ok_rate</th></tr></thead><tbody>
+<tr><td>Address.000002</td><td>Address</td><td>batch_all</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>row_by_row</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>batch_all</td><td>6</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>row_by_row</td><td>6</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>batch_all</td><td>3</td><td>False</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>row_by_row</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>City.000010</td><td>City</td><td>batch_all</td><td>3</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>City.000010</td><td>City</td><td>row_by_row</td><td>3</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>City.000011</td><td>City</td><td>batch_all</td><td>4</td><td>False</td><td>75.0%</td><td>100.0%</td></tr>
+<tr><td>City.000011</td><td>City</td><td>row_by_row</td><td>4</td><td>False</td><td>75.0%</td><td>100.0%</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>batch_all</td><td>6</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>batch_all</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>row_by_row</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>batch_all</td><td>6</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>batch_all</td><td>6</td><td>False</td><td>50.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>False</td><td>50.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>batch_all</td><td>4</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>row_by_row</td><td>4</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>batch_all</td><td>6</td><td>False</td><td>83.3%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>batch_all</td><td>6</td><td>False</td><td>50.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>False</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>batch_all</td><td>6</td><td>False</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>False</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>batch_all</td><td>6</td><td>False</td><td>50.0%</td><td>100.0%</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>row_by_row</td><td>6</td><td>False</td><td>50.0%</td><td>100.0%</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>batch_all</td><td>3</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>row_by_row</td><td>3</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>batch_all</td><td>6</td><td>False</td><td>16.7%</td><td>100.0%</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>row_by_row</td><td>6</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>batch_all</td><td>6</td><td>False</td><td>50.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>row_by_row</td><td>6</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>batch_all</td><td>6</td><td>False</td><td>50.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>row_by_row</td><td>6</td><td>False</td><td>83.3%</td><td>100.0%</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>batch_all</td><td>6</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>batch_all</td><td>3</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>row_by_row</td><td>3</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>batch_all</td><td>3</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>row_by_row</td><td>3</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>batch_all</td><td>4</td><td>False</td><td>75.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>row_by_row</td><td>4</td><td>False</td><td>25.0%</td><td>100.0%</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>batch_all</td><td>6</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>row_by_row</td><td>6</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>batch_all</td><td>3</td><td>False</td><td>66.7%</td><td>100.0%</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>row_by_row</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>batch_all</td><td>3</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>row_by_row</td><td>3</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>batch_all</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>row_by_row</td><td>3</td><td>False</td><td>33.3%</td><td>100.0%</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>batch_all</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>row_by_row</td><td>6</td><td>True</td><td>100.0%</td><td>100.0%</td></tr>
+</tbody></table>
+<h2>Figures</h2>
+<figure><img src="../analysis/figures/method_accuracy.png" alt="method_accuracy.png"><figcaption>method_accuracy.png</figcaption></figure>
+<figure><img src="../analysis/figures/parse_cleanliness.png" alt="parse_cleanliness.png"><figcaption>parse_cleanliness.png</figcaption></figure>
+<figure><img src="../analysis/figures/family_batch_delta.png" alt="family_batch_delta.png"><figcaption>family_batch_delta.png</figcaption></figure>
+<figure><img src="../analysis/figures/task_row_scatter.png" alt="task_row_scatter.png"><figcaption>task_row_scatter.png</figcaption></figure>
+<figure><img src="../analysis/figures/iteration_comparison.png" alt="iteration_comparison.png"><figcaption>iteration_comparison.png</figcaption></figure>
+<h2>Interpretation</h2>
+<p>Row-by-row inference reaches 72.1% row exact and 50.0% full-task exact. Batch-all reaches 72.5% row exact and 45.0% full-task exact, a full-task delta of -5.0% and a row-exact delta of 0.4%.</p>
+<p>The result is a clean negative for batched transduction as a general consistency fix in this setup. Batch-all slightly improves average row exact, but it never flips a row-by-row-failed task into a full-task success on the 40-task sample, and it loses two tasks that row-by-row solved. The batch-size sweep shows larger batches are better than smaller batches, but the best batched arm still trails row-by-row on full-task exact. The stricter prompt iteration does not recover the gap: verify-hint batch-all ties plain batch-all at 45.0%, while structured JSON input falls to 42.5%.</p>
+<p>The shuffled-order control is lower than normal batch-all, so ordering and shared context carry some signal. The signal is not enough to overcome the new batch failure mode: one wrong element in the JSON array spoils full-task exact, and batch prompting sometimes changes correct row-by-row outputs into wrong batched outputs.</p>
+<h2>Limitations</h2>
+<p>This run uses deterministic decoding and a capped task sample. Batched JSON output is stricter than ordinary text output, so parse cleanliness is reported separately. Full-task exact is intentionally harsh; a method can have high row exact while failing full-task exact because one row is wrong.</p>
+<h2>Artifacts</h2>
+<ul>
+<li>Task-level details: `analysis/task_details.csv`</li>
+<li>Row-level details: `analysis/row_details.csv`</li>
+<li>Summary: `analysis/summary.csv`</li>
+<li>Iteration comparison: `analysis/iteration_comparison.csv`</li>
+<li>Figures: `analysis/figures/`</li>
+<li>Benchmark mirror: `/workspace/large_artifacts/qwen_batched_transduction_consistency/prose-benchmarks`</li>
+</ul>
+</body></html>

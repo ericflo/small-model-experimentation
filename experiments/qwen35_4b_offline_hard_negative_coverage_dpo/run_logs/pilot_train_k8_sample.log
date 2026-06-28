@@ -1,0 +1,41 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.86it/s]Loading weights:   8%|▊         | 34/426 [00:00<00:01, 196.61it/s]Loading weights:  22%|██▏       | 93/426 [00:00<00:00, 368.87it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 432.13it/s]Loading weights:  48%|████▊     | 204/426 [00:00<00:00, 474.31it/s]Loading weights:  62%|██████▏   | 262/426 [00:00<00:00, 508.18it/s]Loading weights:  77%|███████▋  | 326/426 [00:00<00:00, 543.96it/s]Loading weights:  90%|█████████ | 384/426 [00:00<00:00, 550.39it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 473.97it/s]
+train_k8_mixed:   0%|          | 0/12 [00:00<?, ?it/s]train_k8_mixed:   8%|▊         | 1/12 [01:13<13:32, 73.85s/it]train_k8_mixed:  17%|█▋        | 2/12 [01:41<07:44, 46.45s/it]train_k8_mixed:  25%|██▌       | 3/12 [02:59<09:09, 61.10s/it]train_k8_mixed:  33%|███▎      | 4/12 [03:18<05:53, 44.25s/it]train_k8_mixed:  42%|████▏     | 5/12 [03:57<04:57, 42.56s/it]train_k8_mixed:  50%|█████     | 6/12 [04:16<03:27, 34.61s/it]train_k8_mixed:  58%|█████▊    | 7/12 [05:17<03:35, 43.11s/it]train_k8_mixed:  67%|██████▋   | 8/12 [06:30<03:30, 52.67s/it]train_k8_mixed:  75%|███████▌  | 9/12 [06:52<02:09, 43.05s/it]train_k8_mixed:  83%|████████▎ | 10/12 [07:17<01:14, 37.45s/it]train_k8_mixed:  92%|█████████▏| 11/12 [08:10<00:42, 42.30s/it]train_k8_mixed: 100%|██████████| 12/12 [09:06<00:00, 46.32s/it]train_k8_mixed: 100%|██████████| 12/12 [09:06<00:00, 45.51s/it]
+{
+  "adapter_dir": null,
+  "arm_name": "train_k8_mixed",
+  "count": 12,
+  "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/pilot_train_k8_records.jsonl",
+  "records": {
+    "candidate_count_mean": 7.666666666666667,
+    "coverage": 0.5833333333333334,
+    "distinct_behavior_rate_mean": 0.6383928571428571,
+    "distinct_functional_rate_mean": 0.26091269841269843,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 3.25,
+    "parse_success_mean": 7.583333333333333,
+    "records": 12,
+    "visible_candidates_mean": 4.416666666666667,
+    "visible_coverage": 0.5833333333333334,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "pilot_mining",
+  "samples_per_task": 8,
+  "seed": 2026062602,
+  "split": "mbpp_train",
+  "temperatures": [
+    0.2,
+    0.7,
+    1.0,
+    1.2
+  ],
+  "top_p": 0.98,
+  "visible_tests": 1
+}

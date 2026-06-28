@@ -1,0 +1,1717 @@
+suite,run,train_target,arm,seed,trained,split,family,depth,example_id,answer,generated,program_text,target,exec_value,exec_error,primary_correct,exec_correct,final_correct,valid_exec,exact_program,parse_exact,has_final,attempts_used,diverged_from_free,free_exec_correct,failure_type,gold_ops,generated_ops
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"28
+4
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112","28
+4
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112","PUSH 28
+MUL 4
+",,unknown_op:28,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL,28 4 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The original string has hyphens at the beginning and between the numbers. So the steps would be to go through each character and check if it's a hyphen. If it is, remove it. Otherwise, keep it. 
+
+Let me think about the exact steps. The input is ""PU-","PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The original string has hyphens at the beginning and between the numbers. So the steps would be to go through each character and check if it's a hyphen. If it is, remove it. Otherwise, keep it. 
+
+Let me think about the exact steps. The input is ""PU-","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:PU8482DF,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS,"PU8482DF OKAY, LET"
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL,PUSH MUL
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",FD-2848-UP,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS,PUSH_TEXT REVERSE
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"28
+4
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112","28
+4
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112
+112","PUSH 28
+MUL 4
+",,unknown_op:28,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL,28 4 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112 112
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The original string has hyphens at the beginning and between the numbers. So the steps would be to go through each character and check if it's a hyphen. If it is, remove it. Otherwise, keep it. Let me think about the exact steps.
+
+The input is ""PU-8","PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The original string has hyphens at the beginning and between the numbers. So the steps would be to go through each character and check if it's a hyphen. If it is, remove it. Otherwise, keep it. Let me think about the exact steps.
+
+The input is ""PU-8","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:PU8482DF,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,STRIP_HYPHENS,"PU8482DF OKAY, THE"
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:10,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,"10 2 2 -8 10 -22 16 ANSWER WAIT, STARTING MULTIPLY MULTIPLY SUBTRACT ADD SUBTRACT"
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"ZR-6182-YD
+
+Step 1: reverse the current text
+Step 2: convert the text to uppercase
+Step 3: convert the text to uppercase
+Step 4: reverse the current text
+Step 5: remove hyphens
+Step 6: keep the last 6 characters
+
+Stack instructions:
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-6182-YD
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-618","ZR-6182-YD
+
+Step 1: reverse the current text
+Step 2: convert the text to uppercase
+Step 3: convert the text to uppercase
+Step 4: reverse the current text
+Step 5: remove hyphens
+Step 6: keep the last 6 characters
+
+Stack instructions:
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-6182-YD
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-618","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:ZR-6182-YD,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,ZR-6182-YD REVERSE CONVERT CONVERT REVERSE REMOVE KEEP STACK REVERSE UPPERCASE UPPERCASE REVERSE REMOVE-HYPHEN TAKE-LAST-6 ZR-6182-YD REVERSE UPPERCASE UPPERCASE REVERSE REMOVE-HYPHEN TAKE-LAST-6 ZR-618
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+REVERSE","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+REVERSE","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",ZR-6182-YD,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE REVERSE REVERSE
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:10,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,"10 2 2 -8 10 -22 16 ANSWER WAIT, STARTING MULTIPLY MULTIPLY SUBTRACT ADD SUBTRACT"
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"ZR-6182-YD
+
+Step 1: reverse the current text
+Step 2: convert the text to uppercase
+Step 3: convert the text to uppercase
+Step 4: reverse the current text
+Step 5: remove hyphens
+Step 6: keep the last 6 characters
+
+Stack instructions:
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-6182-YD
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-618","ZR-6182-YD
+
+Step 1: reverse the current text
+Step 2: convert the text to uppercase
+Step 3: convert the text to uppercase
+Step 4: reverse the current text
+Step 5: remove hyphens
+Step 6: keep the last 6 characters
+
+Stack instructions:
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-6182-YD
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphen
+take-last-6
+ZR-618","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:ZR-6182-YD,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,ZR-6182-YD REVERSE CONVERT CONVERT REVERSE REMOVE KEEP STACK REVERSE UPPERCASE UPPERCASE REVERSE REMOVE-HYPHEN TAKE-LAST-6 ZR-6182-YD REVERSE UPPERCASE UPPERCASE REVERSE REMOVE-HYPHEN TAKE-LAST-6 ZR-618
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT","JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:JT5350MQ,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"stack 21
+17
+-22
+-15
+-2
+4
+3
+Okay, let's see. The task starts at 21 and applies a series of operations. Let me go through each step one by one.
+
+First, the initial value is 21. The first step is to increase it by 17. So 21 + 17 equals 38. Then, the next step is to decrease it by 22. So 38 - 22 is 16. 
+
+Next, we decrease","stack 21
+17
+-22
+-15
+-2
+4
+3
+Okay, let's see. The task starts at 21 and applies a series of operations. Let me go through each step one by one.
+
+First, the initial value is 21. The first step is to increase it by 17. So 21 + 17 equals 38. Then, the next step is to decrease it by 22. So 38 - 22 is 16. 
+
+Next, we decrease","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,"STACK 17 -22 -15 -2 4 3 OKAY, FIRST, NEXT,"
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+REVERSE
+UPPER
+UPPER
+UPPER
+REVERSE
+UPPER","PUSH_TEXT JT-5350-MQ
+REVERSE
+UPPER
+UPPER
+UPPER
+REVERSE
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT-5350-MQ,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT REVERSE UPPER UPPER UPPER REVERSE UPPER
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT","JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:JT5350MQ,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT
+smoke,smoke_v2_atomic_d1_s101,atomic_d1,program_stack_resample_valid,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"stack 21
+17
+-22
+-15
+-2
+4
+3
+Okay, let's see. The task starts at 21 and applies a series of operations. Let me go through each step one by one.
+
+First, the initial value is 21. The first step is to increase it by 17. So 21 + 17 equals 38. Then, the next step is to decrease it by 22. So 38 - 22 is 16. 
+
+Next, we decrease","stack 21
+17
+-22
+-15
+-2
+4
+3
+Okay, let's see. The task starts at 21 and applies a series of operations. Let me go through each step one by one.
+
+First, the initial value is 21. The first step is to increase it by 17. So 21 + 17 equals 38. Then, the next step is to decrease it by 22. So 38 - 22 is 16. 
+
+Next, we decrease","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,"STACK 17 -22 -15 -2 4 3 OKAY, FIRST, NEXT,"
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"x = 28
+x = x * 4
+print(x)
+
+The correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user wants the answer in the format of a stack instruction list, not the code. So the correct answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So the answer is:
+
+push 28
+mul 4
+print
+Okay, let's see. The task is to start with the number 28 and apply the operations:","x = 28
+x = x * 4
+print(x)
+
+The correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user wants the answer in the format of a stack instruction list, not the code. So the correct answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So the answer is:
+
+push 28
+mul 4
+print
+Okay, let's see. The task is to start with the number 28 and apply the operations:","PUSH 28
+MUL 4
+",,unknown_op:X,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL,"X X PRINT(X) THE PUSH MUL PRINT BUT PUSH MUL PRINT BUT PUSH MUL PRINT OKAY,"
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack","stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS,STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL,PUSH MUL
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",FD-2848-UP,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS,PUSH_TEXT REVERSE
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"x = 28
+x = x * 4
+print(x)
+
+But the user wants the stack instructions. So, the correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to not write the final line or the answer. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to not number steps and not write a final line","x = 28
+x = x * 4
+print(x)
+
+But the user wants the stack instructions. So, the correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to not write the final line or the answer. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to not number steps and not write a final line","PUSH 28
+MUL 4
+",,unknown_op:X,0,0,0,0,0,0,1,2,1,0,invalid_or_unexecutable,MUL,X X PRINT(X) BUT PUSH MUL PRINT BUT PUSH MUL PRINT PUSH MUL PRINT
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack","stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack
+push F
+pop
+stack
+push 8482
+pop
+stack
+push D
+pop
+stack","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS,STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK PUSH POP STACK
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"To solve this, we can simulate the operations step by step using a stack. Here's how the stack would look at each step:
+
+Start with 10 on the stack.
+1) Multiply by 2: 10 * 2 = 20. Stack: [20]
+2) Multiply by 2: 20 * 2 = 40. Stack: [40]
+3) Subtract 8: 40 - 8 = 32. Stack: [32]
+4) Add 10: 32 + 1","To solve this, we can simulate the operations step by step using a stack. Here's how the stack would look at each step:
+
+Start with 10 on the stack.
+1) Multiply by 2: 10 * 2 = 20. Stack: [20]
+2) Multiply by 2: 20 * 2 = 40. Stack: [40]
+3) Subtract 8: 40 - 8 = 32. Stack: [32]
+4) Add 10: 32 + 1","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:TO,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,TO START MULTIPLY MULTIPLY SUBTRACT ADD
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"ZR-6182-YD
+
+Let's work through the steps:
+
+1) Reverse the current text: ""ZR-6182-YD"" becomes ""DY-2816-ZR""
+2) Convert to uppercase: ""DY-2816-ZR"" becomes ""DY-2816-ZR""
+3) Convert to uppercase again: still ""DY-2816-ZR""
+4) Reverse the current text: ""DY-2816-ZR"" becomes ""RZ-6812-YD""
+5)","ZR-6182-YD
+
+Let's work through the steps:
+
+1) Reverse the current text: ""ZR-6182-YD"" becomes ""DY-2816-ZR""
+2) Convert to uppercase: ""DY-2816-ZR"" becomes ""DY-2816-ZR""
+3) Convert to uppercase again: still ""DY-2816-ZR""
+4) Reverse the current text: ""DY-2816-ZR"" becomes ""RZ-6812-YD""
+5)","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:ZR-6182-YD,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,ZR-6182-YD LET'S REVERSE CONVERT CONVERT REVERSE
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+UPPER","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+UPPER","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",DY-2816-RZ,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE REVERSE UPPER
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"To solve this, we can simulate the operations step by step using a stack. Here's how the stack would look at each step:
+
+Start with 10 on the stack.
+1) Multiply by 2: 10 * 2 = 20. Stack: [20]
+2) Multiply by 2: 20 * 2 = 40. Stack: [40]
+3) Subtract 8: 40 - 8 = 32. Stack: [32]
+4) Add 10: 32 + 1","To solve this, we can simulate the operations step by step using a stack. Here's how the stack would look at each step:
+
+Start with 10 on the stack.
+1) Multiply by 2: 10 * 2 = 20. Stack: [20]
+2) Multiply by 2: 20 * 2 = 40. Stack: [40]
+3) Subtract 8: 40 - 8 = 32. Stack: [32]
+4) Add 10: 32 + 1","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:TO,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,TO START MULTIPLY MULTIPLY SUBTRACT ADD
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"stack
+push ""ZR-6182-YD""
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphens
+take 6
+stack
+```
+
+Wait, the user said to return only raw stack instructions. Let me check the steps again.
+
+Original text: ZR-6182-YD
+
+Step 1: reverse the current text → ""DY8216-RZ""
+
+Step 2: convert to uppercase → ""DY8216-RZ""
+
+Step 3: convert to uppercase again → same as before
+
+Step 4: reverse","stack
+push ""ZR-6182-YD""
+reverse
+uppercase
+uppercase
+reverse
+remove-hyphens
+take 6
+stack
+```
+
+Wait, the user said to return only raw stack instructions. Let me check the steps again.
+
+Original text: ZR-6182-YD
+
+Step 1: reverse the current text → ""DY8216-RZ""
+
+Step 2: convert to uppercase → ""DY8216-RZ""
+
+Step 3: convert to uppercase again → same as before
+
+Step 4: reverse","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:STACK,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,"STACK PUSH REVERSE UPPERCASE UPPERCASE REVERSE REMOVE-HYPHENS TAKE STACK WAIT, ORIGINAL REVERSE CONVERT CONVERT REVERSE"
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"To solve this, we need to process the given string `JT-5350-MQ` through a series of transformations as specified. Let's break down the steps:
+
+1. **Drop separator dashes**: The first step is to remove the hyphens from the string. The original string is `JT-5350-MQ`. Removing the hyphens gives us `JT5350MQ`.
+
+2. **Make all letters uppercase**: The next step is to convert all characters in the string to uppercase. The string `JT5350MQ` is already","To solve this, we need to process the given string `JT-5350-MQ` through a series of transformations as specified. Let's break down the steps:
+
+1. **Drop separator dashes**: The first step is to remove the hyphens from the string. The original string is `JT-5350-MQ`. Removing the hyphens gives us `JT5350MQ`.
+
+2. **Make all letters uppercase**: The next step is to convert all characters in the string to uppercase. The string `JT5350MQ` is already","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:TO,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,TO **DROP **MAKE
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"stack
+push 21
+add 17
+sub 22
+sub 15
+sub 2
+mul 4
+add 3
+Answer: 13
+
+The final answer is 13.
+
+Let me see. Starting with 21. First, add 17: 21 + 17 = 38. Then subtract 22: 38 - 22 = 16. Next, subtract 15: 16 - 15 = 1. Then subtract 2: 1","stack
+push 21
+add 17
+sub 22
+sub 15
+sub 2
+mul 4
+add 3
+Answer: 13
+
+The final answer is 13.
+
+Let me see. Starting with 21. First, add 17: 21 + 17 = 38. Then subtract 22: 38 - 22 = 16. Next, subtract 15: 16 - 15 = 1. Then subtract 2: 1","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:STACK,0,0,0,0,0,0,1,1,0,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,STACK PUSH ADD SUB SUB SUB MUL ADD ANSWER LET
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+REVERSE
+UPPER
+UPPER
+UPPER
+REVERSE
+UPPER","PUSH_TEXT JT-5350-MQ
+REVERSE
+UPPER
+UPPER
+UPPER
+REVERSE
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT-5350-MQ,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT REVERSE UPPER UPPER UPPER REVERSE UPPER
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"To solve this, we need to process the given string `JT-5350-MQ` through a series of transformations as specified. Let's break down the steps:
+
+1. **Drop separator dashes**: The first step is to remove the hyphens from the string. The original string is `JT-5350-MQ`. Removing the hyphens gives us `JT5350MQ`.
+
+2. **Make all letters uppercase**: The next step is to convert all characters in the string to uppercase. The string `JT5350MQ` is already","To solve this, we need to process the given string `JT-5350-MQ` through a series of transformations as specified. Let's break down the steps:
+
+1. **Drop separator dashes**: The first step is to remove the hyphens from the string. The original string is `JT-5350-MQ`. Removing the hyphens gives us `JT5350MQ`.
+
+2. **Make all letters uppercase**: The next step is to convert all characters in the string to uppercase. The string `JT5350MQ` is already","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:TO,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,TO **DROP **MAKE
+smoke,smoke_v2_mix_d1_d2_s101,mix_d1_d2,program_stack_resample_valid,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"stack
+push 21
+add 17
+sub 22
+sub 15
+sub 2
+mul 4
+add 3
+Answer: 13
+
+The final answer is 13.
+
+Let me see. Starting with 21. First, add 17: 21 + 17 = 38. Then subtract 22: 38 - 22 = 16. Next, subtract 15: 16 - 15 = 1. Then subtract 2: 1","stack
+push 21
+add 17
+sub 22
+sub 15
+sub 2
+mul 4
+add 3
+Answer: 13
+
+The final answer is 13.
+
+Let me see. Starting with 21. First, add 17: 21 + 17 = 38. Then subtract 22: 38 - 22 = 16. Next, subtract 15: 16 - 15 = 1. Then subtract 2: 1","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:STACK,0,0,0,0,0,0,1,2,0,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,STACK PUSH ADD SUB SUB SUB MUL ADD ANSWER LET
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"x = 28
+x = x * 4
+print(x)
+
+But the user wants the stack instructions. So, the correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to not write the answer. So, the answer is:
+
+push 28
+mul 4
+print
+Okay, let's see. The task is to start with the number 28 and apply","x = 28
+x = x * 4
+print(x)
+
+But the user wants the stack instructions. So, the correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to not write the answer. So, the answer is:
+
+push 28
+mul 4
+print
+Okay, let's see. The task is to start with the number 28 and apply","PUSH 28
+MUL 4
+",,unknown_op:X,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL,"X X PRINT(X) BUT PUSH MUL PRINT BUT PUSH MUL PRINT BUT PUSH MUL PRINT OKAY,"
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The output should be the string without those hyphens.
+
+So the original string is P U - 8 4 8 2 - D F. The hyphens are at positions 3 and 7. Removing them would give P U 8 4 8 2 D F","PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The output should be the string without those hyphens.
+
+So the original string is P U - 8 4 8 2 - D F. The hyphens are at positions 3 and 7. Removing them would give P U 8 4 8 2 D F","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:PU8482DF,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS,"PU8482DF OKAY, SO"
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL,PUSH MUL
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+REVERSE","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",FD-2848-UP,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS,PUSH_TEXT REVERSE
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"x = 28
+x = x * 4
+print(x)
+
+But the user wants the stack instructions. So, the correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:","x = 28
+x = x * 4
+print(x)
+
+But the user wants the stack instructions. So, the correct stack instructions would be:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:
+
+push 28
+mul 4
+print
+
+But the user also said to return only raw stack instructions. So, the answer is:","PUSH 28
+MUL 4
+",,unknown_op:X,0,0,0,0,0,0,0,2,1,0,invalid_or_unexecutable,MUL,X X PRINT(X) BUT PUSH MUL PRINT BUT PUSH MUL PRINT BUT PUSH MUL PRINT BUT
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The output should be the string without those hyphens.
+
+So the original string is P U - 8 4 8 2 - D F. The hyphens are at positions 3 and 7. Removing them would give P U 8 4 8 2 D F","PU8482DF
+
+Okay, let's see. The task is to take the text ""PU-8482-DF"" and remove the hyphens. So first, I need to process each character in the string. The hyphens are the '-' characters. The output should be the string without those hyphens.
+
+So the original string is P U - 8 4 8 2 - D F. The hyphens are at positions 3 and 7. Removing them would give P U 8 4 8 2 D F","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",,unknown_op:PU8482DF,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS,"PU8482DF OKAY, SO"
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:10,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,"10 2 2 -8 10 -22 16 ANSWER WAIT, STARTING MULTIPLY MULTIPLY SUBTRACT ADD SUBTRACT"
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"ZR-6182-YD
+
+Let's work through the steps:
+
+1) Reverse the current text: ""ZR-6182-YD"" becomes ""DY-2816-ZR""
+2) Convert to uppercase: ""DY-2816-ZR"" becomes ""DY-2816-ZR""
+3) Convert to uppercase again: still ""DY-2816-ZR""
+4) Reverse the current text: ""DY-2816-ZR"" becomes ""RZ-6812-YD""
+5)","ZR-6182-YD
+
+Let's work through the steps:
+
+1) Reverse the current text: ""ZR-6182-YD"" becomes ""DY-2816-ZR""
+2) Convert to uppercase: ""DY-2816-ZR"" becomes ""DY-2816-ZR""
+3) Convert to uppercase again: still ""DY-2816-ZR""
+4) Reverse the current text: ""DY-2816-ZR"" becomes ""RZ-6812-YD""
+5)","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:ZR-6182-YD,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,ZR-6182-YD LET'S REVERSE CONVERT CONVERT REVERSE
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,1,1,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+UPPER","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+REVERSE
+UPPER","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",DY-2816-RZ,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE REVERSE UPPER
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","10
+2
+2
+-8
+10
+-22
+16
+Answer: 10
+
+Wait, that's not right. Let me check again.
+
+Starting with 10.
+1) Multiply by 2: 10 * 2 = 20
+2) Multiply by 2: 20 * 2 = 40
+3) Subtract 8: 40 - 8 = 32
+4) Add 10: 32 + 10 = 42
+5) Subtract","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",,unknown_op:10,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,MUL MUL SUB ADD SUB ADD,"10 2 2 -8 10 -22 16 ANSWER WAIT, STARTING MULTIPLY MULTIPLY SUBTRACT ADD SUBTRACT"
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"ZR-6182-YD
+
+Let's work through the steps:
+
+1) Reverse the current text: ""ZR-6182-YD"" becomes ""DY-2816-ZR""
+2) Convert to uppercase: ""DY-2816-ZR"" becomes ""DY-2816-ZR""
+3) Convert to uppercase again: still ""DY-2816-ZR""
+4) Reverse the current text: ""DY-2816-ZR"" becomes ""RZ-6812-YD""
+5)","ZR-6182-YD
+
+Let's work through the steps:
+
+1) Reverse the current text: ""ZR-6182-YD"" becomes ""DY-2816-ZR""
+2) Convert to uppercase: ""DY-2816-ZR"" becomes ""DY-2816-ZR""
+3) Convert to uppercase again: still ""DY-2816-ZR""
+4) Reverse the current text: ""DY-2816-ZR"" becomes ""RZ-6812-YD""
+5)","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",,unknown_op:ZR-6182-YD,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,ZR-6182-YD LET'S REVERSE CONVERT CONVERT REVERSE
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+
+Wait, that's not right. Let me re-examine the steps.
+
+The original code is `JT-5350-MQ`. The steps are:
+
+1) Drop separator dashes: So remove the dashes. That gives `JT5350MQ`.
+
+2) Make all letters uppercase: The letters are already uppercase, so no change.
+
+3) Make all letters uppercase:","JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+
+Wait, that's not right. Let me re-examine the steps.
+
+The original code is `JT-5350-MQ`. The steps are:
+
+1) Drop separator dashes: So remove the dashes. That gives `JT5350MQ`.
+
+2) Make all letters uppercase: The letters are already uppercase, so no change.
+
+3) Make all letters uppercase:","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:JT5350MQ,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,"JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ WAIT, THE DROP MAKE MAKE"
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_free,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21","stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21
+stack 21","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:STACK,0,0,0,0,0,0,0,1,0,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK STACK
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+REVERSE
+UPPER
+UPPER
+UPPER
+REVERSE
+UPPER","PUSH_TEXT JT-5350-MQ
+REVERSE
+UPPER
+UPPER
+UPPER
+REVERSE
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT-5350-MQ,,0,0,0,1,0,0,0,1,1,0,wrong_op_order_or_choice,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT REVERSE UPPER UPPER UPPER REVERSE UPPER
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_constrained,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,1,1,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+
+Wait, that's not right. Let me re-examine the steps.
+
+The original code is `JT-5350-MQ`. The steps are:
+
+1) Drop separator dashes: So remove the dashes. That gives `JT5350MQ`.
+
+2) Make all letters uppercase: The letters are already uppercase, so no change.
+
+3) Make all letters uppercase:","JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+JT5350MQ
+
+Wait, that's not right. Let me re-examine the steps.
+
+The original code is `JT-5350-MQ`. The steps are:
+
+1) Drop separator dashes: So remove the dashes. That gives `JT5350MQ`.
+
+2) Make all letters uppercase: The letters are already uppercase, so no change.
+
+3) Make all letters uppercase:","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",,unknown_op:JT5350MQ,0,0,0,0,0,0,0,2,0,0,invalid_or_unexecutable,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,"JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ JT5350MQ WAIT, THE DROP MAKE MAKE"
+smoke,smoke_v2_mix_d1_d2_d3_s101,mix_d1_d2_d3,program_stack_resample_valid,101,1,eval_template_d6,number,6,eval_template_d6_number_1,-1,"stack
+push 21
+add 17
+sub 22
+sub 15
+sub 2
+mul 4
+add 3
+Answer: 13
+
+The final answer is 13.
+
+Let me see. Starting with 21. First, add 17: 21 + 17 = 38. Then subtract 22: 38 - 22 = 16. Next, subtract 15: 16 - 15 = 1. Then subtract 2: 1","stack
+push 21
+add 17
+sub 22
+sub 15
+sub 2
+mul 4
+add 3
+Answer: 13
+
+The final answer is 13.
+
+Let me see. Starting with 21. First, add 17: 21 + 17 = 38. Then subtract 22: 38 - 22 = 16. Next, subtract 15: 16 - 15 = 1. Then subtract 2: 1","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",,unknown_op:STACK,0,0,0,0,0,0,1,2,1,0,invalid_or_unexecutable,ADD SUB SUB SUB MUL ADD,STACK PUSH ADD SUB SUB SUB MUL ADD ANSWER LET
+smoke,smoke_v2_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,number,1,eval_indist_d1_number_1,112,"PUSH 28
+MUL 4","PUSH 28
+MUL 4","PUSH 28
+MUL 4
+",112,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL,PUSH MUL
+smoke,smoke_v2_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_indist_d1,string,1,eval_indist_d1_string_0,PU8482DF,"PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS","PUSH_TEXT PU-8482-DF
+STRIP_HYPHENS
+",PU8482DF,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS,PUSH_TEXT STRIP_HYPHENS
+smoke,smoke_v2_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,number,6,eval_comp_d6_number_1,36,"PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16","PUSH 10
+MUL 2
+MUL 2
+SUB 8
+ADD 10
+SUB 22
+ADD 16
+",36,,1,1,0,1,1,0,0,0,0,0,correct_exact,MUL MUL SUB ADD SUB ADD,PUSH MUL MUL SUB ADD SUB ADD
+smoke,smoke_v2_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_comp_d6,string,6,eval_comp_d6_string_0,6182YD,"PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6","PUSH_TEXT ZR-6182-YD
+REVERSE
+UPPER
+UPPER
+REVERSE
+STRIP_HYPHENS
+TAKE_SUFFIX 6
+",6182YD,,1,1,0,1,1,0,0,0,0,0,correct_exact,REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX,PUSH_TEXT REVERSE UPPER UPPER REVERSE STRIP_HYPHENS TAKE_SUFFIX
+smoke,smoke_v2_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,string,6,eval_template_d6_string_0,JT5350MQ,"PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER","PUSH_TEXT JT-5350-MQ
+STRIP_HYPHENS
+UPPER
+UPPER
+UPPER
+STRIP_HYPHENS
+UPPER
+",JT5350MQ,,1,1,0,1,1,0,0,0,0,0,correct_exact,STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER,PUSH_TEXT STRIP_HYPHENS UPPER UPPER UPPER STRIP_HYPHENS UPPER
+smoke,smoke_v2_gold_abi_constrained_s101,oracle,gold_abi_constrained,101,0,eval_template_d6,number,6,eval_template_d6_number_1,-1,"PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3","PUSH 21
+ADD 17
+SUB 22
+SUB 15
+SUB 2
+MUL 4
+ADD 3
+",-1,,1,1,0,1,1,0,0,0,0,0,correct_exact,ADD SUB SUB SUB MUL ADD,PUSH ADD SUB SUB SUB MUL ADD

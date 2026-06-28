@@ -1,0 +1,51 @@
+{
+  "base_model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "eval_by_library": {
+    "64": 16,
+    "128": 16,
+    "256": 16,
+    "512": 16
+  },
+  "eval_by_template": {
+    "pair_affine_mod": 32,
+    "pair_compare_gate": 32
+  },
+  "eval_pairs": 64,
+  "eval_records": 64,
+  "experiment": "qwen35_4b_joint_shortlister_ladder",
+  "hidden_count": 18,
+  "library_sizes": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "operator_count_max": 512,
+  "operator_families": {
+    "core": 19,
+    "count_eq": 21,
+    "count_threshold": 42,
+    "edge_mod": 136,
+    "extreme_mod": 136,
+    "order_stat": 20,
+    "prod_mod": 69,
+    "sum_mod": 69
+  },
+  "operator_signature": "list[int] -> int",
+  "query_count": 48,
+  "record_local_aliases": true,
+  "seed": 20260624,
+  "train_by_library": {
+    "64": 192,
+    "128": 192,
+    "256": 192,
+    "512": 192
+  },
+  "train_by_template": {
+    "pair_affine_mod": 384,
+    "pair_compare_gate": 384
+  },
+  "train_pairs": 768,
+  "train_records": 768,
+  "visible_count": 6
+}

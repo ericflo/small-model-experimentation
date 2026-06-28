@@ -1,0 +1,15 @@
+variant,path,bytes
+main_cyclic_mixer,../../large_artifacts/cyclic_transition_ladder/checkpoints/main_cyclic_mixer/checkpoint_final.pt,370635
+main_fourier_mlp,../../large_artifacts/cyclic_transition_ladder/checkpoints/main_fourier_mlp/checkpoint_final.pt,370443
+main_mlp,../../large_artifacts/cyclic_transition_ladder/checkpoints/main_mlp/checkpoint_final.pt,579221
+main_primitive_router,../../large_artifacts/cyclic_transition_ladder/checkpoints/main_primitive_router/checkpoint_final.pt,366411
+pilot_cyclic_mixer,../../large_artifacts/cyclic_transition_ladder/checkpoints/pilot_cyclic_mixer/checkpoint_final.pt,179787
+pilot_fourier_mlp,../../large_artifacts/cyclic_transition_ladder/checkpoints/pilot_fourier_mlp/checkpoint_final.pt,166475
+pilot_mlp,../../large_artifacts/cyclic_transition_ladder/checkpoints/pilot_mlp/checkpoint_final.pt,255701
+pilot_primitive_router,../../large_artifacts/cyclic_transition_ladder/checkpoints/pilot_primitive_router/checkpoint_final.pt,177099
+scale_cyclic_mixer,../../large_artifacts/cyclic_transition_ladder/checkpoints/scale_cyclic_mixer/checkpoint_final.pt,395403
+scale_primitive_router,../../large_artifacts/cyclic_transition_ladder/checkpoints/scale_primitive_router/checkpoint_final.pt,391563
+smoke_cyclic_mixer,../../large_artifacts/cyclic_transition_ladder/checkpoints/smoke_cyclic_mixer/checkpoint_final.pt,158859
+smoke_fourier_mlp,../../large_artifacts/cyclic_transition_ladder/checkpoints/smoke_fourier_mlp/checkpoint_final.pt,135307
+smoke_mlp,../../large_artifacts/cyclic_transition_ladder/checkpoints/smoke_mlp/checkpoint_final.pt,228565
+smoke_primitive_router,../../large_artifacts/cyclic_transition_ladder/checkpoints/smoke_primitive_router/checkpoint_final.pt,156299

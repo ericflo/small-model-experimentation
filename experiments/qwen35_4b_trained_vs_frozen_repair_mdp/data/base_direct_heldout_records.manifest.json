@@ -1,0 +1,35 @@
+{
+  "count": 150,
+  "experiment": "qwen35_4b_trained_vs_frozen_repair_mdp",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/base_direct_heldout_records.jsonl",
+  "records": {
+    "candidate_count_mean": 3.4466666666666668,
+    "coverage": 0.62,
+    "distinct_behavior_rate_mean": 0.77,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 1.6333333333333333,
+    "parse_success_mean": 3.3,
+    "records": 150,
+    "visible_candidates_mean": 1.96,
+    "visible_coverage": 0.62,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "base_direct_heldout",
+  "samples_per_task": 4,
+  "seed": 20260625,
+  "split": "mbpp_heldout",
+  "temperatures": "0.2,0.7,1.0",
+  "token_usage": {
+    "calls": 600,
+    "completion_tokens": 62726,
+    "forward_tokens": 138902,
+    "prompt_tokens": 76176
+  },
+  "top_p": 0.95
+}

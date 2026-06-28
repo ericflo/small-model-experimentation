@@ -1,0 +1,24 @@
+{
+  "base_model": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "experiment": "qwen35_4b_joint_shortlister_ladder",
+  "large_artifacts_root": "/workspace/large_artifacts/qwen35_4b_joint_shortlister_ladder",
+  "library_sizes": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "output_format": "LLL,RRR",
+  "templates": [
+    "pair_affine_mod",
+    "pair_compare_gate"
+  ],
+  "training": {
+    "batch_size": 1,
+    "grad_accum": 1,
+    "learning_rate": 0.0002,
+    "max_length": 5120,
+    "max_steps": 240
+  }
+}
+

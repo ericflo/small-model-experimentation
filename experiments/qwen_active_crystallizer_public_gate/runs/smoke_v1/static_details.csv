@@ -1,0 +1,36 @@
+task_id,family,synthetic,features,num_examples,candidate_count,train_match_count,oracle_covered,examples_full_exact,examples_program,examples_kind,oracle_program,oracle_kind,probe_count_available
+Abbreviation.000001,Abbreviation,True,"Concatenation,Conditional,Substring",52,14605,1022,True,True,initials(COL0),surface,initials(COL0),surface,8
+Address.000002,Address,True,Substring,5,14333,1404,False,False,"map[Aysu Fatma Ahmed 492 24th Place NW,Edison,AK,(896) 388-9065,000-93-6876,38891->492 24th Place,Fiamma Greco 967 03th Place SE,Long Beach,OK,(129) 734-1247,000-61-4879,03719->967 03th Place SE](COL0)",map,,,8
+Address.000003,Address,True,Substring,5,14223,1294,False,False,"map[Akila Kadija 643 91th Lane ,Yonkers,AK,(239) 662-6779,000-09-1609,17293->643 91th Lane,Kotonexxxxx Janjic 576 09th Lane ,Surprise,TX,(055) 296-3466,000-47-2445,17293->576 09th Lane](COL0)",map,,,8
+Address.000009,Address,True,"Concatenation,Multicolumn",10,13763,1465,False,False,"map[359->case 359: return Caribbean;,550->case 550: return India;,967->case 967: return Equatorial Guinea;,713->case 713: return Botswana;](COL1)",map,,,8
+Address.000012,Address,True,"Conditional,Substring",10,14038,1139,True,False,word[0](COL0),substring,digits(word[0](COL0)),wrap_substring,8
+Address.000013,Address,True,"Conditional,Substring",10,14097,1168,False,False,"map[One Cherry Court, Greensboro, VA 38891->None,234 Maple Blvd, Edison, AK 58712->234,2345 1st Rte, Kinshasa, OH 38891->2345,23 Fifth Ave SE, Maputo, WY 41230->23](COL0)",map,,,8
+Address.000014,Address,True,Substring,29,14206,1277,False,False,"map[Hone Mukasine                 456 Fifth Rd SW,Caracas,IN,(464) 908-9638,(890) 659-6501,38891->456 Fifth Rd SW,Haf Shchur                 1234 First Ave NW,Corona,CT,(297) 341-2476,(418) 878-6628,58712->1234 First Ave NW,Aseem Bonsaint                 678 1st Ct SW,Yangon,OR,(719) 145-3648,(877) 925-6328,17293->678 1st Ct SW,Srecko Ghazaryan                 789 Maple Rte NE ,Temecula,ND,(011) 694-1652,(603) 802-7993,38891->789 Maple Rte NE](COL0)",map,,,8
+Airline.000002,Airline,False,Substring,5,14810,1225,True,True,"field[,,0](COL0)",substring,"field[,,0](COL0)",substring,8
+Author.000001,Author,False,"Conditional,DateTime",39,15037,768,False,False,"map[Living->2016,6-Apr-92->1992,1 December 1848->1848,1984->1984](COL0)",map,,,8
+BillingCode.000001,BillingCode,True,Concatenation,11,14553,964,True,True,"affix['',']'](COL0)",affix,"affix['',']'](COL0)",affix,8
+BillingCode.000002,BillingCode,True,"Concatenation,Substring",11,14553,964,True,False,"affix['',']'](COL0)",affix,"affix['',']'](field[],0](COL0))",affix,8
+BillingCode.000003,BillingCode,True,Concatenation,5,14701,1112,True,True,"affix['',']'](COL0)",affix,"affix['',']'](COL0)",affix,8
+BillingCode.000004,BillingCode,True,Concatenation,5,14756,1167,True,True,"affix['',']'](COL0)",affix,"affix['',']'](COL0)",affix,8
+BillingCode.000005,BillingCode,True,"Concatenation,Substring",5,14618,1029,True,False,"map[[CPT-00350->[CPT-00350],[CPT-11523]->[CPT-11523]](COL0)",map,"affix['',']'](field[],0](COL0))",affix,8
+BillingCode.000007,BillingCode,True,Concatenation,5,14168,1239,True,True,"affix['',']'](COL0)",affix,"affix['',']'](COL0)",affix,8
+City.000004,City,True,Conditional,20,2643,274,True,False,"map[san fraccisno->San Francisco,SF.->San Francisco,->,SAN FRANCISOC->San Francisco](COL0)",map,"map[SF->San Francisco,S->San Francisco,->](initials(COL0))",map,0
+City.000005,City,True,Conditional,14,2370,1,False,False,"map[zzzzzz->San Francisco,->Empty,->San Francisco,->San Francisco](COL0)",map,,,0
+City.000006,City,True,Conditional,5,2650,281,False,False,"map[SF->San Francisco,->](COL0)",map,,,0
+City.000007,City,True,Conditional,5,2650,281,False,False,"map[SF->San Francisco,->Empty](COL0)",map,,,0
+City.000008,City,True,Conditional,5,2650,281,False,False,"map[SF->San Francisco,->](COL0)",map,,,0
+City.000009,City,True,"Conditional,Substring",6,14129,540,False,False,"map[Foo->F,A->A,None->N/A](COL0)",map,,,0
+City.000010,City,True,"Conditional,Numeric",6,14843,574,False,False,"map[30+->30,43->43,None->0](COL0)",map,,,8
+City.000011,City,True,Conditional,7,14453,864,False,False,"map[New York City->New York City,n.y.c.->New York City,New York City  ->New York City](COL0)",map,,,8
+City.000012,City,True,Substring,22,14149,1230,True,False,word[5](COL0),substring,"field[,,1](COL0)",substring,8
+Column.000001,Column,True,"Concatenation,Conditional,Substring",10,14080,491,False,False,"map[Coln8->Col8,Coln5->Col5,ID->Col1,Coln9->Col9](COL0)",map,,,8
+Column.000002,Column,True,"Casing,Concatenation,Conditional,Substring",10,14294,705,False,False,"map[CCC->ccc,Column2->Col_2](COL0)",map,,,8
+Currency.000003,Currency,True,"Numeric,Substring",20,14374,813,True,True,number_2dp(COL0),number,number_2dp(COL0),number,8
+Currency.000004,Currency,True,"Numeric,Substring",20,14401,820,True,True,slice[0:1](COL0),substring,slice[0:1](COL0),substring,8
+Currency.000005,Currency,True,"Numeric,Substring",100,14409,826,True,True,number_2dp(COL0),number,number_2dp(COL0),number,8
+DateTime.000003,DateTime,True,DateTime,10,14542,967,True,True,time_hour(COL0),time,time_hour(COL0),time,8
+DateTime.000004,DateTime,True,"Concatenation,DateTime,Multicolumn",20,14169,1891,True,True,"concat[' '](COL0,COL1)",concat,"concat[' '](COL0,COL1)",concat,8
+DateTime.000005,DateTime,True,"Conditional,DateTime",27,14136,547,False,False,"map[2026-12-30T06:25:57Z->Dec 2026,2026-04-15T09:44:40Z->Apr 2026,None->Not a date.,2025-07-22T11:12:55Z->Jul 2025](COL0)",map,,,7
+DateTime.000006,DateTime,True,"Concatenation,DateTimeRange,DateTimeRounding,DateTime,Multicolumn",1000,13946,1648,False,False,"map[1:13:23->Wed 1:00-2:00,11:54:32->Sat 11:00-12:00,10:05:34->Mon 10:00-11:00,2:51:23->Sat 2:00-3:00](COL1)",map,,,8
+DateTime.000007,DateTime,True,DateTime,25,14563,974,False,False,"map[2041-11-23T01:17:33Z->Nov 2041,2023-11-11T04:17:30Z->Nov 2023,1974-12-16T02:32:49Z->Dec 1974,2018-05-03T06:45:43Z->May 2018](COL0)",map,,,8
+DateTime.000008,DateTime,True,"DateTimeRange,DateTimeRounding,DateTime",20,14745,1156,False,False,"map[2143-10-06 06:25->Oct 06, 2143 6AM-8AM,2002-03-30 09:44->Mar 30, 2002 8AM-10AM,1846-01-31 07:00->Jan 31, 1846 6AM-8AM,1953-04-22 11:34->Apr 22, 1953 10AM-12PM](COL0)",map,,,8

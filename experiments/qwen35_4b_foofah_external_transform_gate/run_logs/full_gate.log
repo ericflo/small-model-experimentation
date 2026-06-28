@@ -1,0 +1,577 @@
+evaluated 50/250
+evaluated 100/250
+evaluated 150/250
+evaluated 200/250
+evaluated 250/250
+{
+  "by_family": {
+    "agriculture": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "craigslist_data_wrangler": {
+      "candidate_count_mean": 9.2,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "crime_data_wrangler": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "potters_wheel_divide": {
+      "candidate_count_mean": 26.4,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "potters_wheel_fold": {
+      "candidate_count_mean": 10.6,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "potters_wheel_fold_2": {
+      "candidate_count_mean": 9.6,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "potters_wheel_merge_split": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "potters_wheel_split_fold": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "potters_wheel_unfold": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "potters_wheel_unfold2": {
+      "candidate_count_mean": 4.4,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "proactive_wrangling_complex": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "proactive_wrangling_fold": {
+      "candidate_count_mean": 20.8,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "reshape_table_structure_data_wrangler": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_10": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_11": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_12": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_13": {
+      "candidate_count_mean": 8.0,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "synthetic_15": {
+      "candidate_count_mean": 9.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.4,
+      "raw_covered": 2
+    },
+    "synthetic_17": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_18": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_19": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_2": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_22": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_24": {
+      "candidate_count_mean": 1.8,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_25": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_26": {
+      "candidate_count_mean": 2.2,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_27": {
+      "candidate_count_mean": 48.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_28": {
+      "candidate_count_mean": 1.8,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_29": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_3": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_30": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_33": {
+      "candidate_count_mean": 49.6,
+      "first_visible_accuracy": 0.6,
+      "first_visible_heldout": 3,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "synthetic_34": {
+      "candidate_count_mean": 18.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_36": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_37": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_4": {
+      "candidate_count_mean": 11.4,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "synthetic_40": {
+      "candidate_count_mean": 26.4,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_41": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_43": {
+      "candidate_count_mean": 1.8,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_44": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_45": {
+      "candidate_count_mean": 9.4,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "synthetic_46": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_47": {
+      "candidate_count_mean": 2.2,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.2,
+      "raw_covered": 1
+    },
+    "synthetic_48": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_49": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_5": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_51": {
+      "candidate_count_mean": 9.4,
+      "first_visible_accuracy": 1.0,
+      "first_visible_heldout": 5,
+      "heldout_coverage": 1.0,
+      "heldout_covered": 5,
+      "n": 5,
+      "raw_coverage": 1.0,
+      "raw_covered": 5
+    },
+    "synthetic_6": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_7": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    },
+    "synthetic_8": {
+      "candidate_count_mean": 0.0,
+      "first_visible_accuracy": 0.0,
+      "first_visible_heldout": 0,
+      "heldout_coverage": 0.0,
+      "heldout_covered": 0,
+      "n": 5,
+      "raw_coverage": 0.0,
+      "raw_covered": 0
+    }
+  },
+  "by_num_samples": {
+    "1": {
+      "candidate_count_mean": 19.2,
+      "first_visible_accuracy": 0.16,
+      "first_visible_heldout": 8,
+      "heldout_coverage": 0.18,
+      "heldout_covered": 9,
+      "n": 50,
+      "raw_coverage": 0.4,
+      "raw_covered": 20
+    },
+    "2": {
+      "candidate_count_mean": 3.08,
+      "first_visible_accuracy": 0.16,
+      "first_visible_heldout": 8,
+      "heldout_coverage": 0.18,
+      "heldout_covered": 9,
+      "n": 50,
+      "raw_coverage": 0.2,
+      "raw_covered": 10
+    },
+    "3": {
+      "candidate_count_mean": 1.92,
+      "first_visible_accuracy": 0.18,
+      "first_visible_heldout": 9,
+      "heldout_coverage": 0.18,
+      "heldout_covered": 9,
+      "n": 50,
+      "raw_coverage": 0.18,
+      "raw_covered": 9
+    },
+    "4": {
+      "candidate_count_mean": 1.9,
+      "first_visible_accuracy": 0.18,
+      "first_visible_heldout": 9,
+      "heldout_coverage": 0.18,
+      "heldout_covered": 9,
+      "n": 50,
+      "raw_coverage": 0.18,
+      "raw_covered": 9
+    },
+    "5": {
+      "candidate_count_mean": 1.9,
+      "first_visible_accuracy": 0.18,
+      "first_visible_heldout": 9,
+      "heldout_coverage": 0.18,
+      "heldout_covered": 9,
+      "n": 50,
+      "raw_coverage": 0.18,
+      "raw_covered": 9
+    }
+  },
+  "overall": {
+    "candidate_count_mean": 5.6,
+    "first_visible_accuracy": 0.172,
+    "first_visible_heldout": 43,
+    "heldout_coverage": 0.18,
+    "heldout_covered": 45,
+    "n": 250,
+    "raw_coverage": 0.228,
+    "raw_covered": 57
+  },
+  "winner_depth_counts": {
+    "2": 45
+  },
+  "winner_family_counts": {
+    "compose": 45
+  }
+}

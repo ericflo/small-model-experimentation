@@ -1,0 +1,49 @@
+{
+  "caveats": [
+    "This is not the official Docker SWE-bench harness.",
+    "The runner uses a manually validated local Requests dependency profile on Python 3.12.",
+    "The prompt context includes production files touched by the gold patch, matching the synthetic opened-file setup but not a full autonomous retrieval setting."
+  ],
+  "preflight": {
+    "base_test": {
+      "cmd": [
+        "/workspace/runs/swebench_direct/venvs/psf__requests-2931/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-W",
+        "ignore::DeprecationWarning",
+        "test_requests.py::TestRequests::test_binary_put"
+      ],
+      "cwd": "/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_base",
+      "output": "/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_base/requests/packages/urllib3/connectionpool.py:99: SyntaxWarning: invalid escape sequence '\\*'\n  \"\"\"\n/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_base/requests/packages/urllib3/connectionpool.py:439: SyntaxWarning: invalid escape sequence '\\*'\n  \"\"\"\n/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_base/requests/packages/urllib3/connectionpool.py:795: SyntaxWarning: invalid escape sequence '\\*'\n  \"\"\"\n\n================================================================================================================================================================ ERRORS =================================================================================================================================================================\n___________________________________________________________________________________________________________________________________________________ ERROR collecting test_requests.py ___________________________________________________________________________________________________________________________________________________\nImportError while importing test module '/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_base/test_requests.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nrequests/packages/__init__.py:27: in <module>\n    from . import urllib3\nrequests/packages/urllib3/__init__.py:8: in <module>\n    from .connectionpool import (\nrequests/packages/urllib3/connectionpool.py:42: in <module>\n    from .response import HTTPResponse\nrequests/packages/urllib3/response.py:8: in <module>\n    from ._collections import HTTPHeaderDict\nrequests/packages/urllib3/_collections.py:2: in <module>\n    from collections import Mapping, MutableMapping\nE   ImportError: cannot import name 'Mapping' from 'collections' (/usr/lib/python3.12/collections/__init__.py)\n\nDuring handling of the above exception, another exception occurred:\n/usr/lib/python3.12/importlib/__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntest_requests.py:15: in <module>\n    import requests\nrequests/__init__.py:58: in <module>\n    from . import utils\nrequests/utils.py:26: in <module>\n    from .compat import parse_http_list as _parse_list_header\nrequests/compat.py:7: in <module>\n    from .packages import chardet\nrequests/packages/__init__.py:29: in <module>\n    import urllib3\nE   ModuleNotFoundError: No module named 'urllib3'\n======================================================================================================================================================== short test summary info ========================================================================================================================================================\nERROR test_requests.py\n1 error in 0.21s\nERROR: not found: /workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_base/test_requests.py::TestRequests::test_binary_put\n(no name '/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_base/test_requests.py::TestRequests::test_binary_put' in any of [<Module test_requests.py>])\n\n",
+      "returncode": 4
+    },
+    "gold_eval": {
+      "patch_applied": true,
+      "patch_apply_output": "",
+      "test_output": "/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_gold/requests/packages/urllib3/connectionpool.py:99: SyntaxWarning: invalid escape sequence '\\*'\n  \"\"\"\n/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_gold/requests/packages/urllib3/connectionpool.py:439: SyntaxWarning: invalid escape sequence '\\*'\n  \"\"\"\n/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_gold/requests/packages/urllib3/connectionpool.py:795: SyntaxWarning: invalid escape sequence '\\*'\n  \"\"\"\n\n================================================================================================================================================================ ERRORS =================================================================================================================================================================\n___________________________________________________________________________________________________________________________________________________ ERROR collecting test_requests.py ___________________________________________________________________________________________________________________________________________________\nImportError while importing test module '/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_gold/test_requests.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nrequests/packages/__init__.py:27: in <module>\n    from . import urllib3\nrequests/packages/urllib3/__init__.py:8: in <module>\n    from .connectionpool import (\nrequests/packages/urllib3/connectionpool.py:42: in <module>\n    from .response import HTTPResponse\nrequests/packages/urllib3/response.py:8: in <module>\n    from ._collections import HTTPHeaderDict\nrequests/packages/urllib3/_collections.py:2: in <module>\n    from collections import Mapping, MutableMapping\nE   ImportError: cannot import name 'Mapping' from 'collections' (/usr/lib/python3.12/collections/__init__.py)\n\nDuring handling of the above exception, another exception occurred:\n/usr/lib/python3.12/importlib/__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntest_requests.py:15: in <module>\n    import requests\nrequests/__init__.py:58: in <module>\n    from . import utils\nrequests/utils.py:26: in <module>\n    from .compat import parse_http_list as _parse_list_header\nrequests/compat.py:7: in <module>\n    from .packages import chardet\nrequests/packages/__init__.py:29: in <module>\n    import urllib3\nE   ModuleNotFoundError: No module named 'urllib3'\n======================================================================================================================================================== short test summary info ========================================================================================================================================================\nERROR test_requests.py\n1 error in 0.22s\nERROR: not found: /workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_gold/test_requests.py::TestRequests::test_binary_put\n(no name '/workspace/runs/swebench_direct/eval_work/psf__requests-2931/preflight_gold/test_requests.py::TestRequests::test_binary_put' in any of [<Module test_requests.py>])\n\n",
+      "test_returncode": 4,
+      "tests_passed": false
+    }
+  },
+  "summary": {
+    "base_commit": "5f7a3a74aab1625c2bb65f643197ee885e3da576",
+    "base_failed": true,
+    "context_paths": [
+      "requests/models.py"
+    ],
+    "dataset": "princeton-nlp/SWE-bench_Verified",
+    "gold_passed": false,
+    "harness": "direct_pytest_not_official_docker",
+    "instance_id": "psf__requests-2931",
+    "pythonpath_entries": [
+      "."
+    ],
+    "repo": "psf/requests",
+    "status": "preflight_completed",
+    "tests": [
+      "test_requests.py::TestRequests::test_binary_put"
+    ]
+  }
+}

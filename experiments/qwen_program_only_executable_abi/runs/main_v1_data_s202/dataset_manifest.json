@@ -1,0 +1,152 @@
+{
+  "seed": 202,
+  "train_n": 192,
+  "eval_sizes": {
+    "eval_indist": 24,
+    "eval_composition": 24,
+    "eval_template_shift": 24
+  },
+  "train_sample": [
+    {
+      "example_id": "train_string_88",
+      "split": "train",
+      "family": "string",
+      "prompt": "Reference code: BR-5510-EB. Remove hyphens, then return characters 1 through 4 using one-indexed positions.",
+      "answer": "BR55",
+      "op_name": "slice",
+      "payload": {
+        "code": "BR-5510-EB",
+        "start": 0,
+        "end": 4
+      }
+    },
+    {
+      "example_id": "train_unit_61",
+      "split": "train",
+      "family": "unit",
+      "prompt": "Start with 13 centimeters and add 13 centimeters. Return the total centimeters.",
+      "answer": "26",
+      "op_name": "add_centimeters",
+      "payload": {
+        "amount": 13,
+        "extra": 13
+      }
+    },
+    {
+      "example_id": "train_table_138",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: beta=22, alpha=11, delta=21, gamma=7. Take gamma, then add 7.",
+      "answer": "14",
+      "op_name": "lookup_add",
+      "payload": {
+        "table": {
+          "beta": 22,
+          "alpha": 11,
+          "delta": 21,
+          "gamma": 7
+        },
+        "key": "gamma",
+        "bias": 7
+      }
+    },
+    {
+      "example_id": "train_unit_65",
+      "split": "train",
+      "family": "unit",
+      "prompt": "Start with 17 centimeters and add 29 centimeters. Return the total centimeters.",
+      "answer": "46",
+      "op_name": "add_centimeters",
+      "payload": {
+        "amount": 17,
+        "extra": 29
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_date_15",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Starting from 2026-10-18, add 2 weeks. Return the ISO date.",
+        "answer": "2026-11-01",
+        "op_name": "add_weeks",
+        "payload": {
+          "date": "2026-10-18",
+          "weeks": 2
+        }
+      },
+      {
+        "example_id": "eval_indist_string_20",
+        "split": "eval_indist",
+        "family": "string",
+        "prompt": "Reference code: GY-8125-SG. Remove hyphens, then reverse the full cleaned string.",
+        "answer": "GS5218YG",
+        "op_name": "reverse_all",
+        "payload": {
+          "code": "GY-8125-SG"
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_date_11",
+        "split": "eval_composition",
+        "family": "date",
+        "prompt": "Starting from 2026-04-17, add 1 weeks and 2 days. Return the ISO date.",
+        "answer": "2026-04-26",
+        "op_name": "weeks_plus_days",
+        "payload": {
+          "date": "2026-04-17",
+          "weeks": 1,
+          "days": 2
+        }
+      },
+      {
+        "example_id": "eval_composition_unit_17",
+        "split": "eval_composition",
+        "family": "unit",
+        "prompt": "A cable is 4 meters plus 50 centimeters long. Report the total length in centimeters.",
+        "answer": "450",
+        "op_name": "meters_plus_centimeters",
+        "payload": {
+          "meters": 4,
+          "centimeters": 50
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_table_18",
+        "split": "eval_template_shift",
+        "family": "table",
+        "prompt": "From lookup entries [alpha=27, gamma=10, delta=29, beta=9], increase gamma by 4.",
+        "answer": "14",
+        "op_name": "lookup_add",
+        "payload": {
+          "table": {
+            "alpha": 27,
+            "gamma": 10,
+            "delta": 29,
+            "beta": 9
+          },
+          "key": "gamma",
+          "bias": 4
+        }
+      },
+      {
+        "example_id": "eval_template_shift_string_16",
+        "split": "eval_template_shift",
+        "family": "string",
+        "prompt": "Compact identifier RT-1772-NL by dropping hyphens. What are the first 4 symbols afterward?",
+        "answer": "RT17",
+        "op_name": "take_prefix",
+        "payload": {
+          "code": "RT-1772-NL",
+          "n": 4
+        }
+      }
+    ]
+  }
+}

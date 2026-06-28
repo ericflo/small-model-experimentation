@@ -1,0 +1,250 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:13,  9.82it/s]Loading weights:   4%|▎         | 27/723 [00:00<00:04, 153.86it/s]Loading weights:  12%|█▏        | 89/723 [00:00<00:01, 359.66it/s]Loading weights:  20%|██        | 146/723 [00:00<00:01, 436.54it/s]Loading weights:  28%|██▊       | 201/723 [00:00<00:01, 473.31it/s]Loading weights:  36%|███▌      | 258/723 [00:00<00:00, 498.49it/s]Loading weights:  44%|████▎     | 316/723 [00:00<00:00, 521.00it/s]Loading weights:  51%|█████     | 369/723 [00:00<00:00, 522.01it/s]Loading weights:  59%|█████▉    | 427/723 [00:00<00:00, 539.78it/s]Loading weights:  94%|█████████▍| 680/723 [00:01<00:00, 1146.76it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 695.08it/s] 
+eval:   0%|          | 0/120 [00:00<?, ?it/s]eval:   1%|          | 1/120 [00:09<19:36,  9.89s/it]eval:   2%|▏         | 2/120 [00:16<15:09,  7.71s/it]eval:   2%|▎         | 3/120 [00:22<13:56,  7.15s/it]eval:   3%|▎         | 4/120 [00:31<14:55,  7.72s/it]eval:   4%|▍         | 5/120 [00:37<14:06,  7.36s/it]eval:   5%|▌         | 6/120 [00:43<13:06,  6.90s/it]eval:   6%|▌         | 7/120 [00:49<12:13,  6.49s/it]eval:   7%|▋         | 8/120 [00:58<13:36,  7.29s/it]eval:   8%|▊         | 9/120 [01:07<14:32,  7.86s/it]eval:   8%|▊         | 10/120 [01:16<15:05,  8.23s/it]eval:   9%|▉         | 11/120 [01:22<13:31,  7.45s/it]eval:  10%|█         | 12/120 [01:28<12:38,  7.03s/it]eval:  11%|█         | 13/120 [01:32<10:48,  6.06s/it]eval:  12%|█▏        | 14/120 [01:40<11:51,  6.71s/it]eval:  12%|█▎        | 15/120 [01:44<10:14,  5.85s/it]eval:  13%|█▎        | 16/120 [01:51<10:48,  6.24s/it]eval:  14%|█▍        | 17/120 [01:57<10:50,  6.32s/it]eval:  15%|█▌        | 18/120 [02:06<11:46,  6.93s/it]eval:  16%|█▌        | 19/120 [02:10<10:09,  6.04s/it]eval:  17%|█▋        | 20/120 [02:18<11:10,  6.70s/it]eval:  18%|█▊        | 21/120 [02:23<10:10,  6.17s/it]eval:  18%|█▊        | 22/120 [02:28<09:20,  5.72s/it]eval:  19%|█▉        | 23/120 [02:34<09:36,  5.95s/it]eval:  20%|██        | 24/120 [02:42<10:38,  6.65s/it]eval:  21%|██        | 25/120 [02:50<11:12,  7.08s/it]eval:  22%|██▏       | 26/120 [02:56<10:28,  6.69s/it]eval:  22%|██▎       | 27/120 [03:06<11:33,  7.46s/it]eval:  23%|██▎       | 28/120 [03:15<12:36,  8.22s/it]eval:  24%|██▍       | 29/120 [03:27<14:06,  9.31s/it]eval:  25%|██▌       | 30/120 [03:33<12:22,  8.25s/it]eval:  26%|██▌       | 31/120 [03:43<13:09,  8.88s/it]eval:  27%|██▋       | 32/120 [03:53<13:11,  8.99s/it]eval:  28%|██▊       | 33/120 [03:59<11:47,  8.13s/it]eval:  28%|██▊       | 34/120 [04:09<12:29,  8.72s/it]eval:  29%|██▉       | 35/120 [04:15<11:11,  7.90s/it]eval:  30%|███       | 36/120 [04:27<12:51,  9.18s/it]eval:  31%|███       | 37/120 [04:36<12:29,  9.02s/it]eval:  32%|███▏      | 38/120 [04:47<13:11,  9.66s/it]eval:  32%|███▎      | 39/120 [04:56<12:52,  9.54s/it]eval:  33%|███▎      | 40/120 [05:07<13:11,  9.89s/it]eval:  34%|███▍      | 41/120 [05:17<13:10, 10.01s/it]eval:  35%|███▌      | 42/120 [05:26<12:43,  9.79s/it]eval:  36%|███▌      | 43/120 [05:38<13:07, 10.22s/it]eval:  37%|███▋      | 44/120 [05:47<12:34,  9.93s/it]eval:  38%|███▊      | 45/120 [05:56<11:59,  9.60s/it]eval:  38%|███▊      | 46/120 [06:06<12:08,  9.84s/it]eval:  39%|███▉      | 47/120 [06:15<11:42,  9.62s/it]eval:  40%|████      | 48/120 [06:25<11:27,  9.55s/it]eval:  41%|████      | 49/120 [06:32<10:23,  8.78s/it]eval:  42%|████▏     | 50/120 [06:42<10:45,  9.22s/it]eval:  42%|████▎     | 51/120 [06:49<09:50,  8.56s/it]eval:  43%|████▎     | 52/120 [06:56<09:16,  8.18s/it]eval:  44%|████▍     | 53/120 [07:03<08:46,  7.86s/it]eval:  45%|████▌     | 54/120 [07:10<08:23,  7.63s/it]eval:  46%|████▌     | 55/120 [07:18<08:08,  7.52s/it]eval:  47%|████▋     | 56/120 [07:25<07:51,  7.37s/it]eval:  48%|████▊     | 57/120 [07:32<07:43,  7.36s/it]eval:  48%|████▊     | 58/120 [07:42<08:32,  8.26s/it]eval:  49%|████▉     | 59/120 [07:53<09:02,  8.89s/it]eval:  50%|█████     | 60/120 [08:03<09:21,  9.35s/it]eval:  51%|█████     | 61/120 [08:07<07:38,  7.77s/it]eval:  52%|█████▏    | 62/120 [08:11<06:25,  6.64s/it]eval:  52%|█████▎    | 63/120 [08:15<05:33,  5.85s/it]eval:  53%|█████▎    | 64/120 [08:19<04:56,  5.29s/it]eval:  54%|█████▍    | 65/120 [08:23<04:30,  4.91s/it]eval:  55%|█████▌    | 66/120 [08:32<05:31,  6.15s/it]eval:  56%|█████▌    | 67/120 [08:36<04:52,  5.53s/it]eval:  57%|█████▋    | 68/120 [08:40<04:24,  5.09s/it]eval:  57%|█████▊    | 69/120 [08:44<04:03,  4.77s/it]eval:  58%|█████▊    | 70/120 [08:50<04:07,  4.95s/it]eval:  59%|█████▉    | 71/120 [08:54<03:48,  4.66s/it]eval:  60%|██████    | 72/120 [08:58<03:43,  4.65s/it]eval:  61%|██████    | 73/120 [09:07<04:38,  5.92s/it]eval:  62%|██████▏   | 74/120 [09:20<06:12,  8.09s/it]eval:  62%|██████▎   | 75/120 [09:29<06:13,  8.31s/it]eval:  63%|██████▎   | 76/120 [09:34<05:13,  7.13s/it]eval:  64%|██████▍   | 77/120 [09:47<06:22,  8.89s/it]eval:  65%|██████▌   | 78/120 [10:00<07:07, 10.17s/it]eval:  66%|██████▌   | 79/120 [10:09<06:42,  9.82s/it]eval:  67%|██████▋   | 80/120 [10:13<05:28,  8.21s/it]eval:  68%|██████▊   | 81/120 [10:25<06:03,  9.32s/it]eval:  68%|██████▊   | 82/120 [10:37<06:23, 10.10s/it]eval:  69%|██████▉   | 83/120 [10:49<06:34, 10.66s/it]eval:  70%|███████   | 84/120 [10:57<05:55,  9.88s/it]eval:  71%|███████   | 85/120 [11:06<05:40,  9.72s/it]eval:  72%|███████▏  | 86/120 [11:13<04:55,  8.69s/it]eval:  72%|███████▎  | 87/120 [11:22<04:55,  8.96s/it]eval:  73%|███████▎  | 88/120 [11:32<04:50,  9.07s/it]eval:  74%|███████▍  | 89/120 [11:41<04:44,  9.18s/it]eval:  75%|███████▌  | 90/120 [11:48<04:11,  8.37s/it]eval:  76%|███████▌  | 91/120 [11:54<03:46,  7.83s/it]eval:  77%|███████▋  | 92/120 [12:01<03:27,  7.40s/it]eval:  78%|███████▊  | 93/120 [12:10<03:37,  8.05s/it]eval:  78%|███████▊  | 94/120 [12:20<03:41,  8.50s/it]eval:  79%|███████▉  | 95/120 [12:26<03:17,  7.91s/it]eval:  80%|████████  | 96/120 [12:33<02:59,  7.48s/it]eval:  81%|████████  | 97/120 [12:45<03:25,  8.92s/it]eval:  82%|████████▏ | 98/120 [12:57<03:37,  9.90s/it]eval:  82%|████████▎ | 99/120 [13:09<03:41, 10.55s/it]eval:  83%|████████▎ | 100/120 [13:12<02:47,  8.37s/it]eval:  84%|████████▍ | 101/120 [13:16<02:10,  6.84s/it]eval:  85%|████████▌ | 102/120 [13:19<01:43,  5.78s/it]eval:  86%|████████▌ | 103/120 [13:27<01:50,  6.51s/it]eval:  87%|████████▋ | 104/120 [13:39<02:10,  8.19s/it]eval:  88%|████████▊ | 105/120 [13:52<02:20,  9.38s/it]eval:  88%|████████▊ | 106/120 [13:55<01:46,  7.57s/it]eval:  89%|████████▉ | 107/120 [14:07<01:56,  8.97s/it]eval:  90%|█████████ | 108/120 [14:19<01:59,  9.94s/it]eval:  91%|█████████ | 109/120 [14:29<01:49,  9.91s/it]eval:  92%|█████████▏| 110/120 [14:36<01:29,  8.94s/it]eval:  92%|█████████▎| 111/120 [14:43<01:15,  8.35s/it]eval:  93%|█████████▎| 112/120 [14:53<01:10,  8.83s/it]eval:  94%|█████████▍| 113/120 [15:03<01:04,  9.19s/it]eval:  95%|█████████▌| 114/120 [15:12<00:55,  9.32s/it]eval:  96%|█████████▌| 115/120 [15:22<00:46,  9.36s/it]eval:  97%|█████████▋| 116/120 [15:31<00:37,  9.38s/it]eval:  98%|█████████▊| 117/120 [15:38<00:25,  8.66s/it]eval:  98%|█████████▊| 118/120 [15:45<00:16,  8.16s/it]eval:  99%|█████████▉| 119/120 [15:52<00:07,  7.74s/it]eval: 100%|██████████| 120/120 [15:59<00:00,  7.45s/it]eval: 100%|██████████| 120/120 [15:59<00:00,  7.99s/it]
+{
+  "by_family": {
+    "sorted_index_sum_branch_label": {
+      "greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sorted_join_contains_code": {
+      "greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sum_len_mod_label": {
+      "greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    },
+    "sum_length_mod_gate_label": {
+      "greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_visible_all": {
+        "rate": 0.16666666666666666,
+        "records": 12,
+        "successes": 2
+      }
+    },
+    "text_absent_mod_code": {
+      "greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "greedy_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "text_value_gate_label": {
+      "greedy_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "greedy_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "rerank_hidden_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      },
+      "rerank_visible_all": {
+        "rate": 1.0,
+        "records": 12,
+        "successes": 12
+      }
+    },
+    "token_absent_length_code": {
+      "greedy_hidden_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "greedy_visible_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "rerank_hidden_all": {
+        "rate": 0.3333333333333333,
+        "records": 12,
+        "successes": 4
+      },
+      "rerank_visible_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      }
+    },
+    "token_count_mod_length_code": {
+      "greedy_hidden_all": {
+        "rate": 0.25,
+        "records": 12,
+        "successes": 3
+      },
+      "greedy_visible_all": {
+        "rate": 0.4166666666666667,
+        "records": 12,
+        "successes": 5
+      },
+      "rerank_hidden_all": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "rerank_visible_all": {
+        "rate": 0.5833333333333334,
+        "records": 12,
+        "successes": 7
+      }
+    },
+    "tuple_sum_mod_gate_label": {
+      "greedy_hidden_all": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "greedy_visible_all": {
+        "rate": 0.5833333333333334,
+        "records": 12,
+        "successes": 7
+      },
+      "rerank_hidden_all": {
+        "rate": 0.5,
+        "records": 12,
+        "successes": 6
+      },
+      "rerank_visible_all": {
+        "rate": 0.6666666666666666,
+        "records": 12,
+        "successes": 8
+      }
+    },
+    "tuple_value_mod_label": {
+      "greedy_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "greedy_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_hidden_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      },
+      "rerank_visible_all": {
+        "rate": 0.0,
+        "records": 12,
+        "successes": 0
+      }
+    }
+  },
+  "overall": {
+    "greedy_hidden_all": {
+      "rate": 0.3,
+      "records": 120,
+      "successes": 36
+    },
+    "greedy_visible_all": {
+      "rate": 0.3333333333333333,
+      "records": 120,
+      "successes": 40
+    },
+    "rerank_hidden_all": {
+      "rate": 0.3333333333333333,
+      "records": 120,
+      "successes": 40
+    },
+    "rerank_visible_all": {
+      "rate": 0.38333333333333336,
+      "records": 120,
+      "successes": 46
+    }
+  }
+}

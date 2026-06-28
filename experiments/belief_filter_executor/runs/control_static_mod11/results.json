@@ -1,0 +1,152 @@
+{
+  "mode": "static",
+  "args": {
+    "mode": "static",
+    "seed": 41,
+    "modulus": 11,
+    "observe_mod": 4,
+    "observe_prob": 0.3,
+    "op_family": "full",
+    "train_min_len": 1,
+    "train_max_len": 6,
+    "eval_lengths": "3,6,9,12",
+    "eval_k": "0,1,2,3,6,9,12",
+    "transition_temperature": 1.0,
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "dropout": 0.05,
+    "train_steps": 300,
+    "batch_size": 512,
+    "eval_batch_size": 512,
+    "eval_examples": 1024,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "log_every": 50,
+    "eval_every": 300,
+    "output_dir": "experiments/belief_filter_executor/runs/control_static_mod11",
+    "checkpoint_dir": "large_artifacts/belief_filter_executor/checkpoints/control_static_mod11"
+  },
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "device": "cuda",
+    "cuda_name": "NVIDIA RTX 6000 Ada Generation"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 4.817748069763184,
+      "grad_norm": 0.26936906576156616,
+      "target_mass": 0.047691427171230316,
+      "target_nll": 4.817748069763184,
+      "top1_on_support": 0.0390625,
+      "mean_support_size": 5.763671875
+    },
+    {
+      "step": 50,
+      "loss": 4.3229241371154785,
+      "grad_norm": 0.47559604048728943,
+      "target_mass": 0.08259691298007965,
+      "target_nll": 4.3229241371154785,
+      "top1_on_support": 0.1875,
+      "mean_support_size": 5.6875
+    },
+    {
+      "step": 100,
+      "loss": 3.943495750427246,
+      "grad_norm": 0.517652153968811,
+      "target_mass": 0.14099982380867004,
+      "target_nll": 3.943495750427246,
+      "top1_on_support": 0.232421875,
+      "mean_support_size": 6.05078125
+    },
+    {
+      "step": 150,
+      "loss": 3.826272487640381,
+      "grad_norm": 0.4592343866825104,
+      "target_mass": 0.1798267960548401,
+      "target_nll": 3.826272487640381,
+      "top1_on_support": 0.25390625,
+      "mean_support_size": 5.740234375
+    },
+    {
+      "step": 200,
+      "loss": 3.682835817337036,
+      "grad_norm": 0.5038516521453857,
+      "target_mass": 0.223031684756279,
+      "target_nll": 3.682835817337036,
+      "top1_on_support": 0.2734375,
+      "mean_support_size": 5.66015625
+    },
+    {
+      "step": 250,
+      "loss": 3.616617202758789,
+      "grad_norm": 0.5742974281311035,
+      "target_mass": 0.2680679261684418,
+      "target_nll": 3.616617202758789,
+      "top1_on_support": 0.322265625,
+      "mean_support_size": 5.583984375
+    },
+    {
+      "step": 300,
+      "loss": 3.4829487800598145,
+      "grad_norm": 0.5225449800491333,
+      "target_mass": 0.274090051651001,
+      "target_nll": 3.4829487800598145,
+      "top1_on_support": 0.302734375,
+      "mean_support_size": 5.3515625
+    }
+  ],
+  "eval": [
+    {
+      "step": 300,
+      "rows": [
+        {
+          "model": "static",
+          "length": 3,
+          "k": -1,
+          "n": 1024,
+          "target_mass": 0.1751817688345909,
+          "target_nll": 3.8270480632781982,
+          "top1_on_support": 0.2255859375,
+          "mean_support_size": 5.8076171875
+        },
+        {
+          "model": "static",
+          "length": 6,
+          "k": -1,
+          "n": 1024,
+          "target_mass": 0.08189087361097336,
+          "target_nll": 3.9976162910461426,
+          "top1_on_support": 0.087890625,
+          "mean_support_size": 3.6796875
+        },
+        {
+          "model": "static",
+          "length": 9,
+          "k": -1,
+          "n": 1024,
+          "target_mass": 0.03370867110788822,
+          "target_nll": 5.403295278549194,
+          "top1_on_support": 0.033203125,
+          "mean_support_size": 2.5771484375
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 1024,
+          "target_mass": 0.022679103538393974,
+          "target_nll": 5.4389870166778564,
+          "top1_on_support": 0.029296875,
+          "mean_support_size": 2.0
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    "large_artifacts/belief_filter_executor/checkpoints/control_static_mod11/checkpoint_step00300.pt"
+  ]
+}

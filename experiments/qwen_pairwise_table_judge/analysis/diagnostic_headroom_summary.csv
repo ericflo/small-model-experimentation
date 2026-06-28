@@ -1,0 +1,6 @@
+mode,order_tag,comparisons,unique_tasks,picked_oracle,picked_candidate_a
+no_examples,base,5,5,0.0,1.0
+normal,base,5,5,0.0,1.0
+normal,swapped,5,5,1.0,1.0
+row_shuffled_candidate,base,5,5,0.0,1.0
+shuffled_examples,base,5,5,0.0,1.0

@@ -1,0 +1,51 @@
+{
+  "experiment": "qwen35_4b_foofah_program_strategy_portfolio",
+  "date": "2026-06-28",
+  "model": {
+    "name": "Qwen3.5-4B",
+    "local_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "generation": "greedy direct JSON and greedy executable Python strategy variants"
+  },
+  "dataset": {
+    "name": "Foofah benchmarks",
+    "cases": "data/cases.jsonl",
+    "family_split_seed": 271828,
+    "split_fraction": {
+      "train": 0.6,
+      "dev": 0.2,
+      "test": 0.2
+    }
+  },
+  "strategy_search": {
+    "smoke_candidate_variants": [
+      "verified_structural",
+      "row_column_rule",
+      "shape_first",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser",
+      "aggregation_grouping",
+      "transpose_restructure"
+    ],
+    "pilot_candidate_variants": [
+      "verified_structural",
+      "row_column_rule",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser"
+    ],
+    "max_repairs_per_variant": 1,
+    "iteration_rule": "Use a small smoke to remove variants that are both slow and non-incremental before the family-balanced train/dev pilot.",
+    "portfolio_selection": "greedy ordered portfolio on train families; portfolio size and selector chosen on dev families",
+    "final_evaluation": "frozen selected portfolio on held-out test families"
+  },
+  "primary_metrics": [
+    "direct exact accuracy",
+    "selected portfolio exact accuracy",
+    "direct-miss recoveries",
+    "direct-correct losses",
+    "program commit precision",
+    "visible-program oracle union",
+    "total forward tokens"
+  ]
+}

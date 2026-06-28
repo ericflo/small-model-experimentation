@@ -1,0 +1,6 @@
+[1/2] task_id=16 entry=text_lowercase_underscore
+  candidates=26 visible_pass=4 hidden_solved=True elapsed=0.725s
+[2/2] task_id=26 entry=check_k_elements
+  candidates=18 visible_pass=3 hidden_solved=True elapsed=0.528s
+wrote data/smoke_substrate_results.jsonl
+wrote reports/smoke_summary.json

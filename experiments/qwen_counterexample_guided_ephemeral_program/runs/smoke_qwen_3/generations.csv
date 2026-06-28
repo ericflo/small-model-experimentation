@@ -1,0 +1,631 @@
+key,task_id,phase,method,row_id,prediction,raw
+07ce324b0a9210463558c8c84aba0bb80a4503aba058eb1690b3b665755c3b4d,City.000004,answer,direct_row,0,San Francisco,San Francisco
+e505f860e3faacaca2bf2c4c21b7ac29a5fc13d53b468b6f7a437a09a8f9baf5,City.000004,answer,direct_row,1,San Francisco,San Francisco
+c1d09eb54422b322056bb8a2b7b3805118867427788254ce55918e8a8452dc37,City.000004,answer,direct_row,2,San Francisco,San Francisco
+47be603bdc18c114d5edacb1dabbf7b9768ff1cc058bcafbb6b28f6c380cf5c8,City.000004,answer,direct_batch,all,"[""San Francisco"",""San Francisco"",""San Francisco""]","[""San Francisco"",""San Francisco"",""San Francisco""]"
+3b1efd91414b2d9c666983c3a8f0020417ae8eb613d96a164644b2b1418f4907,City.000004,program,direct,0,"def transform(row):
+    if not row:
+        return ''
+    input_str = row[0]
+    # Clean and process the input string
+    cleaned = clean(input_str)
+    # Extract first and last words
+    first = first_word(cleaned)
+    last = last_word(cleaned)
+    # Extract words in between
+    words = words(cleaned)
+    # Check if the string contains a date
+    if len(words) >= 3 and words[0].isdigit() and words[1].isdigit() and words[2].isdigit():
+        # Extract day, month, year
+        day = number_int(words[2])
+        month = number_int(words[1])
+        year = number_int(words[0])
+        # Format as date
+        return f""{day} {month_2(x=month)} {year}""
+    # Extract first and last word and combine
+    if first and last:
+        return f""{alpha(first)} {alpha(last)}""
+    # Extract all words and combine
+    if words:
+        return ' '.join(alpha(word) for word in words)
+    # Return empty string if no processing is done
+    return ''","def transform(row):
+    if not row:
+        return ''
+    input_str = row[0]
+    # Clean and process the input string
+    cleaned = clean(input_str)
+    # Extract first and last words
+    first = first_word(cleaned)
+    last = last_word(cleaned)
+    # Extract words in between
+    words = words(cleaned)
+    # Check if the string contains a date
+    if len(words) >= 3 and words[0].isdigit() and words[1].isdigit() and words[2].isdigit():
+        # Extract day, month, year
+        day = number_int(words[2])
+        month = number_int(words[1])
+        year = number_int(words[0])
+        # Format as date
+        return f""{day} {month_2(x=month)} {year}""
+    # Extract first and last word and combine
+    if first and last:
+        return f""{alpha(first)} {alpha(last)}""
+    # Extract all words and combine
+    if words:
+        return ' '.join(alpha(word) for word in words)
+    # Return empty string if no processing is done
+    return ''"
+a162901df49c46bddd61ea207ad154d30af518c99c01443a3fc2f57bf8f621f1,City.000004,program,helpers,0,"def transform(row):
+    return 'San Francisco' if row[0] in ['san fraccisno', 'SF.', 'SAN FRANCISOC'] else '' if not row[0] else alpha(row[0]).title()","def transform(row):
+    return 'San Francisco' if row[0] in ['san fraccisno', 'SF.', 'SAN FRANCISOC'] else '' if not row[0] else alpha(row[0]).title()"
+533724feb1bad89b72cee71d68a09fb471bf270f04c3d6f60b84ab09f2b66084,City.000004,program,regex,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if not row:
+        return """"
+    input_str = row[0]
+    
+    # Example 1: 'san fraccisno' -> 'San Francisco'
+    # Example 2: 'SF.' -> 'San Francisco'
+    # Example 3: '' -> ''
+    # Example 4: 'SAN FRANCISOC' -> 'San Francisco'
+    
+    # Clean and split into words
+    words = words(input_str)
+    if len(words) == 2:
+        first_word = first_word(input_str)
+        second_word = last_word(input_str)
+        return f""{alpha(first_word).capitalize()} {alpha(second_word).capitalize()}""
+    
+    # Handle cases where input is a single word
+    if len(words) == 1:
+        return alpha(input_str).capitalize()
+    
+    # Handle cases where input is a city name with possible abbreviations
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    # e.g., 'san fraccisno' -> 'San Francisco'
+    # e.g., 'SF' -> 'San Francisco'
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    # e.g., 'san fraccisno' -> 'San Francisco'
+    # e.g., 'SF' -> 'San Francisco'
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    
+    # Clean and split into words
+    words = words(input_str)
+    if len(words) == 2:
+        first_word = first_word(input_str)
+        second_word = last_word(input_str)
+        return f""{alpha(first_word).capitalize()} {alpha(second_word).capitalize()}""
+    
+    # Handle cases where input is a single word
+    if len(words) == 1:
+        return alpha(input_str).capitalize()
+    
+    # Handle cases where input is a city name with possible abbreviations
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    # e.g., 'san fraccisno' -> 'San Francisco'
+    # e.g., 'SF' -> 'San Francisco'
+    # e","```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if not row:
+        return """"
+    input_str = row[0]
+    
+    # Example 1: 'san fraccisno' -> 'San Francisco'
+    # Example 2: 'SF.' -> 'San Francisco'
+    # Example 3: '' -> ''
+    # Example 4: 'SAN FRANCISOC' -> 'San Francisco'
+    
+    # Clean and split into words
+    words = words(input_str)
+    if len(words) == 2:
+        first_word = first_word(input_str)
+        second_word = last_word(input_str)
+        return f""{alpha(first_word).capitalize()} {alpha(second_word).capitalize()}""
+    
+    # Handle cases where input is a single word
+    if len(words) == 1:
+        return alpha(input_str).capitalize()
+    
+    # Handle cases where input is a city name with possible abbreviations
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    # e.g., 'san fraccisno' -> 'San Francisco'
+    # e.g., 'SF' -> 'San Francisco'
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    # e.g., 'san fraccisno' -> 'San Francisco'
+    # e.g., 'SF' -> 'San Francisco'
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    
+    # Clean and split into words
+    words = words(input_str)
+    if len(words) == 2:
+        first_word = first_word(input_str)
+        second_word = last_word(input_str)
+        return f""{alpha(first_word).capitalize()} {alpha(second_word).capitalize()}""
+    
+    # Handle cases where input is a single word
+    if len(words) == 1:
+        return alpha(input_str).capitalize()
+    
+    # Handle cases where input is a city name with possible abbreviations
+    # e.g., 'SF.' -> 'San Francisco'
+    # e.g., 'SAN FRANCISOC' -> 'San Francisco'
+    # e.g., 'san fraccisno' -> 'San Francisco'
+    # e.g., 'SF' -> 'San Francisco'
+    # e"
+a105bc808f0c24ea2cae42d8e61ddba9fdf8e8c00ba763d8ffacc3388c879196,City.000004,program,conditional,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if not row:
+        return ''
+    input_str = row[0]
+    
+    # Example 1: 'san fraccisno' -> 'San Francisco'
+    # Example 2: 'SF.' -> 'San Francisco'
+    # Example 3: '' -> ''
+    # Example 4: 'SAN FRANCISOC' -> 'San Francisco'
+    
+    # Clean and split into words
+    words = words(input_str)
+    if len(words) == 2:
+        first = first_word(input_str)
+        second = last_word(input_str)
+        return f""{alpha(first)} {alpha(second)}""
+    
+    # Check for city names
+    if re.match(r'^[A-Z][a-z]+$', input_str):
+        return alpha(input_str)
+    
+    # Check for city abbreviations
+    if re.match(r'^[A-Z][a-z]+$', input_str):
+        return alpha(input_str)
+    
+    # Check for city names with numbers
+    if re.match(r'^[A-Z][a-z]+ \d+$', input_str):
+        return f""{alpha(first_word(input_str))} {alpha(last_word(input_str))}""
+    
+    # Check for city names with periods
+    if re.match(r'^[A-Z][a-z]+\.$', input_str):
+        return alpha(input_str)
+    
+    # Check for city names with numbers and periods
+    if re.match(r'^[A-Z][a-z]+ \d+\.$', input_str):
+        return f""{alpha(first_word(input_str))} {alpha(last_word(input_str))}""
+    
+    # Default case
+    return alpha(input_str)
+```","```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if not row:
+        return ''
+    input_str = row[0]
+    
+    # Example 1: 'san fraccisno' -> 'San Francisco'
+    # Example 2: 'SF.' -> 'San Francisco'
+    # Example 3: '' -> ''
+    # Example 4: 'SAN FRANCISOC' -> 'San Francisco'
+    
+    # Clean and split into words
+    words = words(input_str)
+    if len(words) == 2:
+        first = first_word(input_str)
+        second = last_word(input_str)
+        return f""{alpha(first)} {alpha(second)}""
+    
+    # Check for city names
+    if re.match(r'^[A-Z][a-z]+$', input_str):
+        return alpha(input_str)
+    
+    # Check for city abbreviations
+    if re.match(r'^[A-Z][a-z]+$', input_str):
+        return alpha(input_str)
+    
+    # Check for city names with numbers
+    if re.match(r'^[A-Z][a-z]+ \d+$', input_str):
+        return f""{alpha(first_word(input_str))} {alpha(last_word(input_str))}""
+    
+    # Check for city names with periods
+    if re.match(r'^[A-Z][a-z]+\.$', input_str):
+        return alpha(input_str)
+    
+    # Check for city names with numbers and periods
+    if re.match(r'^[A-Z][a-z]+ \d+\.$', input_str):
+        return f""{alpha(first_word(input_str))} {alpha(last_word(input_str))}""
+    
+    # Default case
+    return alpha(input_str)
+```"
+514badbfe12b6c8caf01f27482ff7d379a0e26ac7d282f5d00921314aa507363,City.000004,probe_label,label_plain,d3b0a725e4ab,San Francisco,San Francisco
+e390877078296361bd9d9346b92dab4ae3cfe08f4ad77525c4865a591c77f310,City.000004,probe_label,label_rule,d3b0a725e4ab,San Francisco,San Francisco
+b2ac6cc70be2acf614c8816a025ac73d2c6d824e329d84351e65f51cc23ba5bc,City.000004,probe_label,label_strict,d3b0a725e4ab,San Francisco,San Francisco
+3712294c483a3c0513c4c5101315620da83ce8dd9fcca8ca415a7d6271e786e5,City.000004,probe_label,label_plain,54f9093f3c7d,San Francisco,San Francisco
+637f7beecc70b5159ac51854d3d9930061dec0f8d24ea952f940e643705ceabf,City.000004,probe_label,label_rule,54f9093f3c7d,San Francisco,San Francisco
+7e347ce911d1d08baaa4c3c227581de32df0def1b047bc29f47ac772daeebf99,City.000004,probe_label,label_strict,54f9093f3c7d,San Francisco,San Francisco
+b9b3fc2be69856dad1dee7bff7074c3877b152d33187ba415957ecc1dc44c89b,DateTime.000116,answer,direct_row,0,5AM-7AM,5AM-7AM
+f9f71b9dbb158aa3b481b44ff272c12702b007f70092846005aab91e475f966d,DateTime.000116,answer,direct_row,1,1AM-3AM,1AM-3AM
+fa775ca3c1cd0893127d489eae05704ec84e51057609b62ca9c557514dde46d3,DateTime.000116,answer,direct_row,2,6PM-8PM,6PM-8PM
+ad84c7a136f35e8c78f6adc704cac8f1cd828a98754a66ef5eff1a1d3e2c6790,DateTime.000116,answer,direct_batch,all,"[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM""]","[""5AM-7AM"", ""1AM-3AM"", ""6PM-8PM""]"
+88b8fd6642e2cdd7f75bebda0b13b16b1abd70b586326809cb4fb3cfc12c41b8,DateTime.000116,program,direct,0,"def transform(row):
+    import re
+    import datetime
+    import calendar
+    
+    time_str = row[0]
+    time_parts = time_str.split()
+    date_part, time_part = time_parts[0], time_parts[1]
+    
+    # Parse date and time
+    date_obj = datetime.datetime.strptime(date_part, ""%d-%b-%Y"")
+    time_obj = datetime.datetime.strptime(time_part, ""%H:%M:%S"")
+    
+    # Extract hour and minute
+    hour = time_obj.hour
+    minute = time_obj.minute
+    
+    # Convert to 12-hour format
+    if hour == 0:
+        hour_12 = 12
+    elif 1 <= hour < 12:
+        hour_12 = hour
+    elif hour == 12:
+        hour_12 = hour
+    else:
+        hour_12 = hour - 12
+    
+    # Format as AM/PM
+    am_pm = ""AM"" if hour < 12 else ""PM""
+    
+    # Format as 5AM-7AM or 1PM-3PM
+    start_time = f""{hour_12}{am_pm}""
+    end_time = f""{hour_12 + 2}{am_pm}""
+    
+    return f""{start_time}-{end_time}""","def transform(row):
+    import re
+    import datetime
+    import calendar
+    
+    time_str = row[0]
+    time_parts = time_str.split()
+    date_part, time_part = time_parts[0], time_parts[1]
+    
+    # Parse date and time
+    date_obj = datetime.datetime.strptime(date_part, ""%d-%b-%Y"")
+    time_obj = datetime.datetime.strptime(time_part, ""%H:%M:%S"")
+    
+    # Extract hour and minute
+    hour = time_obj.hour
+    minute = time_obj.minute
+    
+    # Convert to 12-hour format
+    if hour == 0:
+        hour_12 = 12
+    elif 1 <= hour < 12:
+        hour_12 = hour
+    elif hour == 12:
+        hour_12 = hour
+    else:
+        hour_12 = hour - 12
+    
+    # Format as AM/PM
+    am_pm = ""AM"" if hour < 12 else ""PM""
+    
+    # Format as 5AM-7AM or 1PM-3PM
+    start_time = f""{hour_12}{am_pm}""
+    end_time = f""{hour_12 + 2}{am_pm}""
+    
+    return f""{start_time}-{end_time}"""
+dc9d2df75e0a9e3e220daba57e467d7f73c0b2fa8fe4f4acb6751cd15ed63a5a,DateTime.000116,program,helpers,0,"def transform(row):
+    time_str = row[0]
+    time_parts = time_str.split()
+    date_part = time_parts[0]
+    time_part = time_parts[1]
+    
+    hour_12 = hour(date_part)
+    minute = minute_2(date_part)
+    
+    if hour_12 < 12:
+        am_pm = ""AM""
+    else:
+        am_pm = ""PM""
+    
+    hour_12 = hour_12 % 12
+    if hour_12 == 0:
+        hour_12 = 12
+    
+    return f""{hour_12}{am_pm}-{hour_12+2}{am_pm}""","def transform(row):
+    time_str = row[0]
+    time_parts = time_str.split()
+    date_part = time_parts[0]
+    time_part = time_parts[1]
+    
+    hour_12 = hour(date_part)
+    minute = minute_2(date_part)
+    
+    if hour_12 < 12:
+        am_pm = ""AM""
+    else:
+        am_pm = ""PM""
+    
+    hour_12 = hour_12 % 12
+    if hour_12 == 0:
+        hour_12 = 12
+    
+    return f""{hour_12}{am_pm}-{hour_12+2}{am_pm}"""
+39763f7b50152f575f2f0eda7b594e494c281d34912118b2f6cc214af0f914c7,DateTime.000116,program,regex,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    date_str = row[0]
+    date_part, time_part = date_str.split()
+    
+    # Extract day, month, year from date_part
+    day = int(date_part.split('-')[0])
+    month = date_part.split('-')[1]
+    year = int(date_part.split('-')[2])
+    
+    # Extract hour, minute, second from time_part
+    hour = int(time_part.split(':')[0])
+    minute = int(time_part.split(':')[1])
+    
+    # Convert to 12-hour format
+    hour_12 = hour % 12
+    am_pm = 'AM' if hour < 12 else 'PM'
+    
+    # Handle 12:00 AM and 12:00 PM
+    if hour_12 == 0:
+        hour_12 = 12
+    elif hour_12 == 12:
+        am_pm = 'PM'
+    
+    # Calculate the next hour in 12-hour format
+    next_hour = hour_12 + 1 if hour_12 < 12 else 1
+    
+    # Convert to AM/PM format
+    start_time = f""{hour_12}{am_pm}""
+    end_time = f""{next_hour}{am_pm}""
+    
+    return f""{start_time}-{end_time}""
+```","```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    date_str = row[0]
+    date_part, time_part = date_str.split()
+    
+    # Extract day, month, year from date_part
+    day = int(date_part.split('-')[0])
+    month = date_part.split('-')[1]
+    year = int(date_part.split('-')[2])
+    
+    # Extract hour, minute, second from time_part
+    hour = int(time_part.split(':')[0])
+    minute = int(time_part.split(':')[1])
+    
+    # Convert to 12-hour format
+    hour_12 = hour % 12
+    am_pm = 'AM' if hour < 12 else 'PM'
+    
+    # Handle 12:00 AM and 12:00 PM
+    if hour_12 == 0:
+        hour_12 = 12
+    elif hour_12 == 12:
+        am_pm = 'PM'
+    
+    # Calculate the next hour in 12-hour format
+    next_hour = hour_12 + 1 if hour_12 < 12 else 1
+    
+    # Convert to AM/PM format
+    start_time = f""{hour_12}{am_pm}""
+    end_time = f""{next_hour}{am_pm}""
+    
+    return f""{start_time}-{end_time}""
+```"
+e72b21612b628f79c57e9890352c8515d509bffe6aaefebed6efb9e604c9474e,DateTime.000116,program,conditional,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    date_str = row[0]
+    date_part, time_part = date_str.split()
+    
+    # Extract day, month, year from date_part
+    day = day_2(date_part)
+    month = month_2(date_part)
+    year = year(date_str)
+    
+    # Extract hour, minute from time_part
+    hour = hour_2(time_part)
+    minute = minute_2(time_part)
+    
+    # Convert to 12-hour format with AM/PM
+    hour_12 = hour
+    if hour_12 > 12:
+        hour_12 -= 12
+        am_pm = ""PM""
+    else:
+        am_pm = ""AM""
+    
+    # Handle 12:00 AM case
+    if hour_12 == 0:
+        hour_12 = 12
+        am_pm = ""AM""
+    
+    # Format the time
+    start_time = f""{hour_12}{am_pm}""
+    
+    # Add 2 hours to get the end time
+    hour_12_end = hour_12 + 2
+    if hour_12_end > 12:
+        hour_12_end -= 12
+        am_pm_end = ""PM""
+    else:
+        am_pm_end = ""AM""
+    
+    # Handle 12:00 PM case
+    if hour_12_end == 0:
+        hour_12_end = 12
+        am_pm_end = ""PM""
+    
+    end_time = f""{hour_12_end}{am_pm_end}""
+    
+    return f""{start_time}-{end_time}""
+```","```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    date_str = row[0]
+    date_part, time_part = date_str.split()
+    
+    # Extract day, month, year from date_part
+    day = day_2(date_part)
+    month = month_2(date_part)
+    year = year(date_str)
+    
+    # Extract hour, minute from time_part
+    hour = hour_2(time_part)
+    minute = minute_2(time_part)
+    
+    # Convert to 12-hour format with AM/PM
+    hour_12 = hour
+    if hour_12 > 12:
+        hour_12 -= 12
+        am_pm = ""PM""
+    else:
+        am_pm = ""AM""
+    
+    # Handle 12:00 AM case
+    if hour_12 == 0:
+        hour_12 = 12
+        am_pm = ""AM""
+    
+    # Format the time
+    start_time = f""{hour_12}{am_pm}""
+    
+    # Add 2 hours to get the end time
+    hour_12_end = hour_12 + 2
+    if hour_12_end > 12:
+        hour_12_end -= 12
+        am_pm_end = ""PM""
+    else:
+        am_pm_end = ""AM""
+    
+    # Handle 12:00 PM case
+    if hour_12_end == 0:
+        hour_12_end = 12
+        am_pm_end = ""PM""
+    
+    end_time = f""{hour_12_end}{am_pm_end}""
+    
+    return f""{start_time}-{end_time}""
+```"
+74496cdb52e083178b236c810ce6cbf533d2560a1f86d3b7450fac47cebe6feb,DateTime.000116,probe_label,label_plain,27f70baa9514,1PM-3PM,1PM-3PM
+df68e92ad9cf8cf6d0afa464acc9cfbd6ed0d6b88f53e4b788872192205e7817,DateTime.000116,probe_label,label_rule,27f70baa9514,1PM-3PM,1PM-3PM
+f0f9b3ff20cd654c894446b8bb7a839355609703ab803720b03b50fc875437eb,DateTime.000116,probe_label,label_strict,27f70baa9514,1PM-3PM,1PM-3PM
+eb31f56ad84985b3c9dc8f436ea3e0d94924961cc6b993be28127228db520aed,DateTime.000116,probe_label,label_plain,c01934f3e1c7,5AM-7AM,5AM-7AM
+ee7b22c6c350f16c0c21479088716aa2547028041b1247ebbabd8eedeeef1184,DateTime.000116,probe_label,label_rule,c01934f3e1c7,5AM-7AM,5AM-7AM
+6d45fd0a089f24812d4466b3178cb8bb08151353bfebaa729ae0796bbd71b493,DateTime.000116,probe_label,label_strict,c01934f3e1c7,5AM-7AM,5AM-7AM
+7a27e01c3c95d442a42efee751ab7d0b5a1ecf475f1a3f1b3b37505728390c85,Name.000014,answer,direct_row,0,Cecep,Cecep
+6dd870d5c74dbb0ea7520b2ca482b9698210ce188a17a3651c613d0ac4d2ab45,Name.000014,answer,direct_row,1,Milica,Milica
+0dd81f4b5c3b179178f1c7854720271cf002300c31a4f0c2798f12d0a6c1234b,Name.000014,answer,direct_row,2,Radmilo,Radmilo
+618db0f3c0a46a5f77cc1256f0c1e9a092a7d03bdcd6b69a971b0cb662d3fb70,Name.000014,answer,direct_batch,all,"[""Cecep"", ""Milica"", ""Radmilo""]","[""Cecep"", ""Milica"", ""Radmilo""]"
+f1d139e344585a9411aa78d231b9f3765ab9600945f71ba179b7675b26efe2ed,Name.000014,program,direct,0,"def transform(row):
+    return first_word(row[0])","def transform(row):
+    return first_word(row[0])"
+f74867ae6ddd1c6b59f09014e456ead35aae7e228486e98069dfad4125fef0d3,Name.000014,program,helpers,0,"def transform(row):
+    return first_word(row[0])","def transform(row):
+    return first_word(row[0])"
+8ce52ae125483ab800aa1626b54040680e57a09ba1ff024c730eead885193e1b,Name.000014,program,regex,0,"def transform(row):
+    return first_word(row[0])","def transform(row):
+    return first_word(row[0])"
+9338bbc6aa9a35562258a057c82db17c821a71d992ec6e0b4ab3cd3c88d792cb,Name.000014,program,conditional,0,"```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return row[0]
+    name = row[0]
+    if re.match(r'^[A-Z][a-z]+ [A-Z][a-z]+$', name):
+        return first_word(name)
+    if re.match(r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$', name):
+        return first_word(name)
+    if re.match(r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$', name):
+        return first_word(name)
+    if re.match(r'^[A-Z][a-z]+$', name):
+        return name
+    return name
+```","```python
+import re
+import math
+import datetime
+import calendar
+
+def transform(row):
+    if len(row) == 0:
+        return """"
+    if len(row) > 1:
+        return row[0]
+    name = row[0]
+    if re.match(r'^[A-Z][a-z]+ [A-Z][a-z]+$', name):
+        return first_word(name)
+    if re.match(r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$', name):
+        return first_word(name)
+    if re.match(r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$', name):
+        return first_word(name)
+    if re.match(r'^[A-Z][a-z]+$', name):
+        return name
+    return name
+```"
+d1f7c4a046b9e448e36299ec359c6235260ae90d6b1f681d28432863c152888d,Name.000014,probe_label,label_plain,548f45b7776a,Artem,Artem
+cfd233ddbed081a656c534b0e0b75c763c01b597c34893ded9fb925946d9e48a,Name.000014,probe_label,label_rule,548f45b7776a,Artem,Artem
+07f3e947066bf9859954572c46ed307227017870d10d1b88c81ff8340e0e0d3f,Name.000014,probe_label,label_strict,548f45b7776a,Artem,Artem
+a1fdcc6f2d9a5c34069d21faa764d520b63070815d894f533f5f0c458fafc0de,Name.000014,probe_label,label_plain,c125cf526891,Aysu,Aysu
+3bb8af2e734c78b9ecc7e7f1d71508b50aacdf83ac1d909f3980489144d88d0c,Name.000014,probe_label,label_rule,c125cf526891,Aysu,Aysu
+4f2638f8b52259b7e2b74c046c7909f6e0c35375d8587b817de62dc8222d5fd9,Name.000014,probe_label,label_strict,c125cf526891,Aysu,Aysu
+b2a883436ff5d7591bbb1cc2f49c7092647f52d31a1c90486a909ddbaabfdeed,Name.000014,probe_label,label_plain,2477e9cc863c,aysu,aysu
+09cc69d6bb0ac901d1f1b17556bf6f738fe010f49e26e896d6697393ec2a7f6f,Name.000014,probe_label,label_rule,2477e9cc863c,aysu,aysu
+18ec4bfd1b942c3637736bec3f09d2d56733f5e787b2bd3cbebee0406621685f,Name.000014,probe_label,label_strict,2477e9cc863c,Aysu,Aysu
+e5e8677e2650e58ea4f66f220bafa542c478feddc65324b25ab0d35253aa2431,Name.000014,probe_label,label_plain,e8a62e55f108,AYSU,AYSU
+aea724dc07a9fce38f8472adeb1cc55100c72db19aecb6cb8c3e51942afd6ed7,Name.000014,probe_label,label_rule,e8a62e55f108,AYSU,AYSU
+5187f74379ea7287ff65944794efa4299dffc9749b401b639337664ca02c19b3,Name.000014,probe_label,label_strict,e8a62e55f108,AYSU,AYSU

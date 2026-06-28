@@ -1,0 +1,35 @@
+{
+  "count": 12,
+  "experiment": "qwen35_4b_trained_vs_frozen_repair_mdp",
+  "max_new_tokens": 180,
+  "offset": 0,
+  "path": "data/smoke_base_direct_train_records.jsonl",
+  "records": {
+    "candidate_count_mean": 2.9166666666666665,
+    "coverage": 0.5,
+    "distinct_behavior_rate_mean": 0.7777777777777778,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 1.3333333333333333,
+    "parse_success_mean": 2.75,
+    "records": 12,
+    "visible_candidates_mean": 1.5833333333333333,
+    "visible_coverage": 0.5,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "smoke_base_direct_train",
+  "samples_per_task": 3,
+  "seed": 20260625,
+  "split": "mbpp_train",
+  "temperatures": "0.2,0.7,1.0",
+  "token_usage": {
+    "calls": 36,
+    "completion_tokens": 4061,
+    "forward_tokens": 8525,
+    "prompt_tokens": 4464
+  },
+  "top_p": 0.95
+}

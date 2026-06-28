@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search-Augmented Rollout Distillation</title>
+  <style>
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; color: #1f2933; background: #f6f7f9; }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 20px 56px; }
+    section { background: #ffffff; border: 1px solid #d8dee6; border-radius: 8px; padding: 22px 24px; margin: 18px 0; }
+    h1 { font-size: 32px; margin: 0 0 10px; letter-spacing: 0; }
+    h2 { font-size: 21px; margin: 0 0 12px; letter-spacing: 0; }
+    p { line-height: 1.58; }
+    .verdict { border-left: 5px solid #5a67d8; }
+    img { max-width: 100%; height: auto; display: block; margin: 14px 0 4px; border: 1px solid #d8dee6; border-radius: 6px; }
+    table.data { border-collapse: collapse; width: 100%; font-size: 14px; }
+    table.data th, table.data td { border: 1px solid #d8dee6; padding: 8px 10px; text-align: right; }
+    table.data th:first-child, table.data td:first-child { text-align: left; }
+    table.data th { background: #eef2f6; }
+    code { background: #eef2f6; padding: 1px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Search-Augmented Rollout Distillation</h1>
+  <section class="verdict">
+    <h2>Verdict</h2>
+    <p>Search-augmented rollout distillation did not improve the main active VM controller. The behavior-cloned VM controller already produced the best active score on three of five splits, tied search on one, and search improved only val mixed from 6.2% to 12.5%, still far below native Qwen. The oracle teacher remained much higher at 68.8% to 100.0%, so the task and VM action space still have large headroom.</p>
+    <p>The behavior-cloned VM controller beat native Qwen on fresh paraphrase tasks when using active K&gt;0 edits (37.5% vs 25.0%). The search-distilled controller did not preserve that gain.</p>
+  </section>
+  <section>
+    <h2>What Was Tested</h2>
+    <p>This experiment trains <code>Qwen/Qwen3-4B</code> as a recurrent controller for a typed bytecode VM. Each recurrent step is one Qwen forward pass over the task prompt plus dense VM-state tokens. The model predicts one structured edit action or <code>STOP</code>; the VM executes the current program; then the updated VM state is fed back into the model.</p>
+    <p>The intervention is search-augmented rollout distillation: after behavior cloning, policy-visited states are repaired by bounded verified search, and the first action of the repaired trajectory becomes new supervision.</p>
+  </section>
+  <section>
+    <h2>Main Accuracy</h2>
+    <p>Scores are active K&gt;0 VM-editing scores except for the explicit blank column.</p>
+    <table border="1" class="dataframe data">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Split</th>
+      <th>Native Qwen</th>
+      <th>Blank K=0</th>
+      <th>BC VM active</th>
+      <th>Search VM active</th>
+      <th>Oracle teacher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Val mixed</td>
+      <td>43.8%</td>
+      <td>12.5%</td>
+      <td>6.2%</td>
+      <td>12.5%</td>
+      <td>100.0%</td>
+    </tr>
+    <tr>
+      <td>Fresh standard</td>
+      <td>50.0%</td>
+      <td>0.0%</td>
+      <td>12.5%</td>
+      <td>12.5%</td>
+      <td>87.5%</td>
+    </tr>
+    <tr>
+      <td>Fresh paraphrase</td>
+      <td>25.0%</td>
+      <td>0.0%</td>
+      <td>37.5%</td>
+      <td>31.2%</td>
+      <td>93.8%</td>
+    </tr>
+    <tr>
+      <td>Fresh paired</td>
+      <td>25.0%</td>
+      <td>37.5%</td>
+      <td>18.8%</td>
+      <td>18.8%</td>
+      <td>100.0%</td>
+    </tr>
+    <tr>
+      <td>Hard composition</td>
+      <td>50.0%</td>
+      <td>12.5%</td>
+      <td>37.5%</td>
+      <td>18.8%</td>
+      <td>68.8%</td>
+    </tr>
+  </tbody>
+</table>
+    <img src="../analysis/main_active_accuracy.png" alt="Main active accuracy chart">
+  </section>
+  <section>
+    <h2>K Curves</h2>
+    <p>The greedy learned policy shows no clean monotonic K-scaling. The oracle curve confirms that the VM environment has substantial reachable headroom.</p>
+    <img src="../analysis/main_k_curves_learned.png" alt="K curves">
+  </section>
+  <section>
+    <h2>Training Diagnostics</h2>
+    <table border="1" class="dataframe data">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Phase</th>
+      <th>Epoch</th>
+      <th>Action acc</th>
+      <th>Arg acc</th>
+      <th>STOP acc</th>
+      <th>Pair-rank acc</th>
+      <th>States</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bc_policy</td>
+      <td>1</td>
+      <td>37.3%</td>
+      <td>21.5%</td>
+      <td>87.8%</td>
+      <td>0.0%</td>
+      <td>901</td>
+    </tr>
+    <tr>
+      <td>bc_policy</td>
+      <td>2</td>
+      <td>60.0%</td>
+      <td>44.1%</td>
+      <td>80.5%</td>
+      <td>0.0%</td>
+      <td>901</td>
+    </tr>
+    <tr>
+      <td>search_r1_policy</td>
+      <td>1</td>
+      <td>38.2%</td>
+      <td>42.6%</td>
+      <td>73.4%</td>
+      <td>55.2%</td>
+      <td>1703</td>
+    </tr>
+    <tr>
+      <td>search_r1_policy</td>
+      <td>2</td>
+      <td>50.4%</td>
+      <td>59.5%</td>
+      <td>79.7%</td>
+      <td>62.1%</td>
+      <td>1703</td>
+    </tr>
+  </tbody>
+</table>
+    <img src="../analysis/main_training_metrics.png" alt="Training metrics">
+  </section>
+  <section>
+    <h2>Repair Diagnostics</h2>
+    <p>Search-state collection found verified completions for 787 of 802 policy-visited states (98.1%). It also saw 41 false-stop states and 43.8% rollout success before retraining.</p>
+    <img src="../analysis/main_repair_diagnostics.png" alt="Repair diagnostics">
+  </section>
+  <section>
+    <h2>Pilot Result</h2>
+    <p>Pairwise ranking with weight 0.5 did not improve rollout accuracy and made the next on-policy collection worse. The main recipe disabled ranking and trained two search epochs.</p>
+    <img src="../analysis/pilot_comparison.png" alt="Pilot comparison">
+  </section>
+  <section>
+    <h2>Interpretation</h2>
+    <p>The bottleneck is not simply obtaining verified repair labels: the main run found verified completions for 98.1% of policy-visited states. The problem is turning those labels into a policy that chooses useful global trajectories at inference time.</p>
+    <p>The next high-impact experiment should use rollout-level optimization: sample complete VM rollouts, score them with exact VM reward and false-stop penalties, then train preference or policy-gradient updates over full trajectories.</p>
+  </section>
+</main>
+</body>
+</html>

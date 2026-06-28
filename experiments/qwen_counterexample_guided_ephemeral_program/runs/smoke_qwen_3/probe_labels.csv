@@ -1,0 +1,9 @@
+task_id,family,probe_index,selected_mode,input,label,consensus,all_labels_json,candidate_disagreement,candidate_outputs_json
+City.000004,City,0,random,san fr,San Francisco,1.0,"[""San Francisco"", ""San Francisco"", ""San Francisco""]",1,"{""Sanfr"": 1}"
+City.000004,City,1,random,san francisoc,San Francisco,1.0,"[""San Francisco"", ""San Francisco"", ""San Francisco""]",1,"{""Sanfrancisoc"": 1}"
+DateTime.000116,DateTime,0,random,14-Mar-200,1PM-3PM,1.0,"[""1PM-3PM"", ""1PM-3PM"", ""1PM-3PM""]",1,"{"""": 1}"
+DateTime.000116,DateTime,1,random,31-Jan-203,5AM-7AM,1.0,"[""5AM-7AM"", ""5AM-7AM"", ""5AM-7AM""]",1,"{"""": 1}"
+Name.000014,Name,0,disagreement,Artem K,Artem,1.0,"[""Artem"", ""Artem"", ""Artem""]",2,"{""Artem"": 3, ""Artem K"": 1}"
+Name.000014,Name,1,disagreement,Aysu_Polat,Aysu,1.0,"[""Aysu"", ""Aysu"", ""Aysu""]",2,"{""Aysu"": 3, ""Aysu_Polat"": 1}"
+Name.000014,Name,0,random,aysu polat,aysu,0.6666666666666666,"[""aysu"", ""aysu"", ""Aysu""]",2,"{""aysu"": 3, ""aysu polat"": 1}"
+Name.000014,Name,1,random,AYSU POLAT,AYSU,1.0,"[""AYSU"", ""AYSU"", ""AYSU""]",2,"{""AYSU"": 3, ""AYSU POLAT"": 1}"

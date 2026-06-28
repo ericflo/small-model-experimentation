@@ -1,0 +1,59 @@
+[
+  {
+    "arm": "zero_task_value_gated",
+    "seed": -1,
+    "margin": 2.0
+  },
+  {
+    "arm": "zero_program_final_gated",
+    "seed": -1,
+    "margin": 2.0
+  },
+  {
+    "arm": "zero_program_trace_gated",
+    "seed": -1,
+    "margin": 2.0
+  },
+  {
+    "arm": "zero_trace_corrupt_gated",
+    "seed": -1,
+    "margin": 2.0
+  },
+  {
+    "arm": "zero_candidate_only_gated",
+    "seed": -1,
+    "margin": 2.625
+  },
+  {
+    "arm": "zero_prompt_only_gated",
+    "seed": -1,
+    "margin": 2.0
+  },
+  {
+    "arm": "feature_mlp",
+    "seed": 101,
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "trace_transformer",
+    "seed": 101,
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_program_final",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_readable_candidate_verifier/checkpoints/smoke_qwen_readable_candidate_verifier_v1/qwen_program_final_seed101.pt",
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_program_final_gated",
+    "seed": 101,
+    "margin": 2.0
+  },
+  {
+    "arm": "qwen_program_final_shuffled",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_readable_candidate_verifier/checkpoints/smoke_qwen_readable_candidate_verifier_v1/qwen_program_final_shuffled_seed101.pt",
+    "best_utility": -1000000000.0
+  }
+]

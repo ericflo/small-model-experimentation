@@ -1,0 +1,1137 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Counterfactual ICL Public Multiseed Gate</title><style>body{font-family:Inter,Arial,sans-serif;max-width:1200px;margin:32px auto;line-height:1.48;color:#1f2937}table{border-collapse:collapse;font-size:13px;margin:14px 0}td,th{border:1px solid #d1d5db;padding:4px 7px}th{background:#f3f4f6}img{max-width:100%;margin:14px 0;border:1px solid #e5e7eb}code{background:#f3f4f6;padding:1px 4px;border-radius:4px}h1,h2{color:#111827}</style></head><body><h1>Counterfactual ICL Public Multiseed Gate</h1>
+<h2>Question</h2>
+<p>Can LoRA posttraining on counterfactual few-shot episodes make Qwen3-4B rely more on the support examples of a text-transformation task, and does that transfer to a public benchmark rather than only to the synthetic generator?</p>
+<p>The training signal is answer-only. No public benchmark labels are used for training. The controls test whether the effect survives support shuffling, no-support prompts, ordinary synthetic training, and deliberately shuffled training support labels.</p>
+<h2>Headline</h2>
+<ul>
+<li>Public PROSE full-task exact: base <code>20.0%</code>; counterfactual adapter mean <code>60.7%</code> with seed spread <code>2.6%</code>; delta <code>40.7%</code>.</li>
+<li>Synthetic counterfactual full-task exact: base <code>38.3%</code>; counterfactual adapter mean <code>92.8%</code>.</li>
+<li>Public support controls for the counterfactual adapter: normal <code>60.7%</code>, shuffled <code>28.1%</code>, no support <code>1.5%</code>.</li>
+<li>Ordinary synthetic-training control on public PROSE: <code>64.4%</code>.</li>
+<li>Shuffled-label training control on public PROSE: <code>62.2%</code>.</li>
+</ul>
+<h2>Aggregate Metrics</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">arm</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: left;">support_mode</th>
+<th style="text-align: right;">runs</th>
+<th style="text-align: right;">tasks</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">row_exact_mean</th>
+<th style="text-align: left;">row_exact_std</th>
+<th style="text-align: left;">full_task_exact_mean</th>
+<th style="text-align: left;">full_task_exact_std</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">37.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">20.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">11.1%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">2.2%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">3.7%</td>
+<td style="text-align: left;">0.7%</td>
+<td style="text-align: left;">1.5%</td>
+<td style="text-align: left;">1.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">70.6%</td>
+<td style="text-align: left;">1.5%</td>
+<td style="text-align: left;">60.7%</td>
+<td style="text-align: left;">2.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">45.4%</td>
+<td style="text-align: left;">3.7%</td>
+<td style="text-align: left;">28.1%</td>
+<td style="text-align: left;">2.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">5.2%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">74.1%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">64.4%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">48.9%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">26.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">4.4%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">2.2%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">74.1%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">62.2%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">64.4%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">51.1%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">53.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">38.3%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">20.8%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">16.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">5.3%</td>
+<td style="text-align: left;">3.4%</td>
+<td style="text-align: left;">2.8%</td>
+<td style="text-align: left;">1.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">96.1%</td>
+<td style="text-align: left;">0.5%</td>
+<td style="text-align: left;">92.8%</td>
+<td style="text-align: left;">1.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">60.3%</td>
+<td style="text-align: left;">2.9%</td>
+<td style="text-align: left;">51.1%</td>
+<td style="text-align: left;">2.5%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">2.5%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">96.7%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">95.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">58.3%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">46.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">0.8%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">normal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">97.5%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">95.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: left;">shuffled</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">95.8%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">91.7%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+</tbody>
+</table>
+<h2>Seed-Level Normal-Support Metrics</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run_name</th>
+<th style="text-align: right;">seed</th>
+<th style="text-align: left;">arm</th>
+<th style="text-align: left;">split</th>
+<th style="text-align: right;">tasks</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">row_exact</th>
+<th style="text-align: left;">full_task_exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">37.0%</td>
+<td style="text-align: left;">20.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">53.3%</td>
+<td style="text-align: left;">38.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">68.9%</td>
+<td style="text-align: left;">57.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">95.8%</td>
+<td style="text-align: left;">91.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: right;">20260629</td>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">71.1%</td>
+<td style="text-align: left;">62.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: right;">20260629</td>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">96.7%</td>
+<td style="text-align: left;">95.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s3</td>
+<td style="text-align: right;">20260630</td>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">71.9%</td>
+<td style="text-align: left;">62.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s3</td>
+<td style="text-align: right;">20260630</td>
+<td style="text-align: left;">counterfactual_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">95.8%</td>
+<td style="text-align: left;">91.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">74.1%</td>
+<td style="text-align: left;">64.4%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordinary_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">ordinary_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">96.7%</td>
+<td style="text-align: left;">95.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_train_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">public_prose</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: left;">74.1%</td>
+<td style="text-align: left;">62.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">shuffled_train_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: left;">shuffled_label_adapter</td>
+<td style="text-align: left;">synthetic_counterfactual</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">97.5%</td>
+<td style="text-align: left;">95.0%</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>The synthetic counterfactual split shows the intended training effect: the adapter improves strict task consistency, and that improvement depends on intact support examples.
+The public split shows positive transfer from synthetic counterfactual episodes to unseen public text-transformation tasks.
+The public gain is support-sensitive: corrupting the support examples removes a material fraction of the effect.
+The ordinary synthetic control is close enough that the counterfactual ingredient is not isolated.
+The shuffled-label training control is close enough that a formatting explanation remains plausible.</p>
+<h2>Charts</h2>
+<p><img alt="Normal-support full-task exact across runs" src="../analysis/figures/aggregate_full_task_exact.png" /></p>
+<p><img alt="Synthetic learning versus public transfer" src="../analysis/figures/synthetic_vs_public_transfer.png" /></p>
+<p><img alt="Support-dependence controls" src="../analysis/figures/support_dependence.png" /></p>
+<p><img alt="Public task flips versus base" src="../analysis/figures/public_task_flips_by_seed.png" /></p>
+<p><img alt="Training loss by run" src="../analysis/figures/aggregate_training_loss.png" /></p>
+<h2>Public Task Flips Versus Base</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run_name</th>
+<th style="text-align: right;">seed</th>
+<th style="text-align: right;">helped</th>
+<th style="text-align: right;">hurt</th>
+<th style="text-align: right;">tied</th>
+<th style="text-align: right;">tasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: right;">20260628</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: right;">20260629</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s3</td>
+<td style="text-align: right;">20260630</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">45</td>
+</tr>
+</tbody>
+</table>
+<h2>Public Family Breakdown</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">family</th>
+<th style="text-align: right;">tasks_base</th>
+<th style="text-align: right;">tasks_counterfactual_adapter</th>
+<th style="text-align: left;">full_task_exact_base</th>
+<th style="text-align: left;">full_task_exact_counterfactual_adapter</th>
+<th style="text-align: left;">row_exact_base</th>
+<th style="text-align: left;">row_exact_counterfactual_adapter</th>
+<th style="text-align: left;">delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Column</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Currency</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">EmergencyCall</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">FilePath</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ShippingCode</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">88.9%</td>
+<td style="text-align: left;">33.3%</td>
+<td style="text-align: left;">92.6%</td>
+<td style="text-align: left;">88.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Number</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">10.0%</td>
+<td style="text-align: left;">63.3%</td>
+<td style="text-align: left;">30.0%</td>
+<td style="text-align: left;">72.2%</td>
+<td style="text-align: left;">53.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">53.3%</td>
+<td style="text-align: left;">20.0%</td>
+<td style="text-align: left;">68.9%</td>
+<td style="text-align: left;">53.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Phone</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">33.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">20.0%</td>
+<td style="text-align: left;">44.4%</td>
+<td style="text-align: left;">35.6%</td>
+<td style="text-align: left;">53.3%</td>
+<td style="text-align: left;">24.4%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Meteorite</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Email</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">50.0%</td>
+<td style="text-align: left;">50.0%</td>
+<td style="text-align: left;">83.3%</td>
+<td style="text-align: left;">83.3%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Song</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Address</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">66.7%</td>
+<td style="text-align: left;">-100.0%</td>
+</tr>
+</tbody>
+</table>
+<h2>Public Error Sample</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">run_name</th>
+<th style="text-align: left;">task_id</th>
+<th style="text-align: left;">family</th>
+<th style="text-align: left;">input</th>
+<th style="text-align: left;">target</th>
+<th style="text-align: left;">prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Address.000013</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">One Main Parkway, Allentown, ND 41230</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">One</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000016</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">Jan 10 1975</td>
+<td style="text-align: left;">Fri W2</td>
+<td style="text-align: left;">Wed W1</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000016</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">1 Feb 2013</td>
+<td style="text-align: left;">Fri W5</td>
+<td style="text-align: left;">Wed W5</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000016</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">12 Dec 2002</td>
+<td style="text-align: left;">Thu W50</td>
+<td style="text-align: left;">Wed W46</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000017</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">03302241</td>
+<td style="text-align: left;">30/3/2241</td>
+<td style="text-align: left;">3/3/2241</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000029</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">03302241</td>
+<td style="text-align: left;">Tuesday</td>
+<td style="text-align: left;">Monday</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000029</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">02-Aug-2160</td>
+<td style="text-align: left;">Saturday</td>
+<td style="text-align: left;">Monday</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000029</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">23 May 1984</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Thursday</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">09:53</td>
+<td style="text-align: left;">9:53 AM</td>
+<td style="text-align: left;">09:53 AM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000032</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">1956-12-16 20:18</td>
+<td style="text-align: left;">8:18 PM</td>
+<td style="text-align: left;">December 16, 1956 at 8:18 PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000041</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">4.2.1743</td>
+<td style="text-align: left;">2/4/1743</td>
+<td style="text-align: left;">4.2.1743</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000081</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">11:48PM</td>
+<td style="text-align: left;">11:45PM-12:15AM</td>
+<td style="text-align: left;">11:15PM-11:45PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000084</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">3/30/2241 16:15</td>
+<td style="text-align: left;">Tue 4:30 PM</td>
+<td style="text-align: left;">Fri 16:15</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000084</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">8/2/2160 23:48</td>
+<td style="text-align: left;">Sat 12:00 AM</td>
+<td style="text-align: left;">Wed 12:00 AM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000084</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">5/23/1984 22:24</td>
+<td style="text-align: left;">Wed 10:30 PM</td>
+<td style="text-align: left;">Thu 10:00 PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000086</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">16:15:08</td>
+<td style="text-align: left;">4:00PM</td>
+<td style="text-align: left;">4:15PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000086</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">23:48:20</td>
+<td style="text-align: left;">11:30PM</td>
+<td style="text-align: left;">11:48PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000086</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">22:24:59</td>
+<td style="text-align: left;">10:00PM</td>
+<td style="text-align: left;">10:24PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000109</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">21-Jan-1985 05:44:43</td>
+<td style="text-align: left;">Monday, January 21, 1985</td>
+<td style="text-align: left;">Wednesday, January 21, 1985</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000109</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">16-Aug-1985 01:11:56</td>
+<td style="text-align: left;">Friday, August 16, 1985</td>
+<td style="text-align: left;">Wednesday, August 16, 1985</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000109</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">20-Dec-2033 18:36:29</td>
+<td style="text-align: left;">Tuesday, December 20, 2033</td>
+<td style="text-align: left;">Friday, December 20, 2033</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000115</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">21-Jan-1985 05:44:43</td>
+<td style="text-align: left;">40-60</td>
+<td style="text-align: left;">0-20</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000115</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">16-Aug-1985 01:11:56</td>
+<td style="text-align: left;">40-60</td>
+<td style="text-align: left;">0-20</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">DateTime.000115</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">20-Dec-2033 18:36:29</td>
+<td style="text-align: left;">20-40</td>
+<td style="text-align: left;">0-20</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Email.000006</td>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">iñaki</td>
+<td style="text-align: left;">iñaki@proseware.com</td>
+<td style="text-align: left;">iñaki@contoso.com</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Meteorite.000001</td>
+<td style="text-align: left;">Meteorite</td>
+<td style="text-align: left;">Zunyi</td>
+<td style="text-align: left;">682</td>
+<td style="text-align: left;">2243-10-11 11:33:09</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Meteorite.000001</td>
+<td style="text-align: left;">Meteorite</td>
+<td style="text-align: left;">Elgin</td>
+<td style="text-align: left;">53648</td>
+<td style="text-align: left;">2139-04-25 19:02:49</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Meteorite.000001</td>
+<td style="text-align: left;">Meteorite</td>
+<td style="text-align: left;">New Haven</td>
+<td style="text-align: left;">066</td>
+<td style="text-align: left;">2041-05-26 22:15:47</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Name.000023</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Cecep Sutresna</td>
+<td style="text-align: left;">Sutr</td>
+<td style="text-align: left;">Sutre</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Name.000023</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Milica Zujovic</td>
+<td style="text-align: left;">Zujo</td>
+<td style="text-align: left;">Zujovic</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Marcela Kubatova</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">ova</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Name.000037</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Mr. Hadar Caspit</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">Mr.</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000008</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">-13578</td>
+<td style="text-align: left;">-135.78</td>
+<td style="text-align: left;">-13.578</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000008</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">-1961.1180</td>
+<td style="text-align: left;">-19.611180</td>
+<td style="text-align: left;">-19.6118</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">1284.42</td>
+<td style="text-align: left;">1285.00</td>
+<td style="text-align: left;">1280.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">23224.98</td>
+<td style="text-align: left;">23225.00</td>
+<td style="text-align: left;">23220.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000047</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">1024.21</td>
+<td style="text-align: left;">1025.00</td>
+<td style="text-align: left;">1020.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">1202.3433</td>
+<td style="text-align: left;">1200</td>
+<td style="text-align: left;">1202</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">23224.1</td>
+<td style="text-align: left;">23225</td>
+<td style="text-align: left;">23224</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">Number.000069</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: left;">-23224.1</td>
+<td style="text-align: left;">-23225</td>
+<td style="text-align: left;">-23224</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">ShippingCode.000002</td>
+<td style="text-align: left;">ShippingCode</td>
+<td style="text-align: left;">1Z I81 6QF 90 9601 169 4</td>
+<td style="text-align: left;">6QF</td>
+<td style="text-align: left;">I81</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s1</td>
+<td style="text-align: left;">ShippingCode.000002</td>
+<td style="text-align: left;">ShippingCode</td>
+<td style="text-align: left;">1Z O63 B7Z 35 2550 248 6</td>
+<td style="text-align: left;">B7Z</td>
+<td style="text-align: left;">O63</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">Address.000013</td>
+<td style="text-align: left;">Address</td>
+<td style="text-align: left;">One Main Parkway, Allentown, ND 41230</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">One</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000016</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">Jan 10 1975</td>
+<td style="text-align: left;">Fri W2</td>
+<td style="text-align: left;">Wed W52</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000016</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">12 Dec 2002</td>
+<td style="text-align: left;">Thu W50</td>
+<td style="text-align: left;">Thu W49</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000029</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">03302241</td>
+<td style="text-align: left;">Tuesday</td>
+<td style="text-align: left;">Monday</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000029</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">02-Aug-2160</td>
+<td style="text-align: left;">Saturday</td>
+<td style="text-align: left;">Monday</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000029</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">23 May 1984</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Monday</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000081</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">4:15PM</td>
+<td style="text-align: left;">4:15PM-4:45PM</td>
+<td style="text-align: left;">4:00PM-4:30PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000081</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">11:48PM</td>
+<td style="text-align: left;">11:45PM-12:15AM</td>
+<td style="text-align: left;">11:15PM-11:45PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000084</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">3/30/2241 16:15</td>
+<td style="text-align: left;">Tue 4:30 PM</td>
+<td style="text-align: left;">Fri 4:00 PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000084</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">8/2/2160 23:48</td>
+<td style="text-align: left;">Sat 12:00 AM</td>
+<td style="text-align: left;">Wed 12:00 AM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000084</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">5/23/1984 22:24</td>
+<td style="text-align: left;">Wed 10:30 PM</td>
+<td style="text-align: left;">Tue 10:00 PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000086</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">16:15:08</td>
+<td style="text-align: left;">4:00PM</td>
+<td style="text-align: left;">4:15PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000086</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">23:48:20</td>
+<td style="text-align: left;">11:30PM</td>
+<td style="text-align: left;">11:40PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000086</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">22:24:59</td>
+<td style="text-align: left;">10:00PM</td>
+<td style="text-align: left;">10:15PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000109</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">21-Jan-1985 05:44:43</td>
+<td style="text-align: left;">Monday, January 21, 1985</td>
+<td style="text-align: left;">Wednesday, January 21, 1985</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000109</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">16-Aug-1985 01:11:56</td>
+<td style="text-align: left;">Friday, August 16, 1985</td>
+<td style="text-align: left;">Monday, August 16, 1985</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000109</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">20-Dec-2033 18:36:29</td>
+<td style="text-align: left;">Tuesday, December 20, 2033</td>
+<td style="text-align: left;">Monday, December 20, 2033</td>
+</tr>
+<tr>
+<td style="text-align: left;">cf_s2</td>
+<td style="text-align: left;">DateTime.000115</td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">21-Jan-1985 05:44:43</td>
+<td style="text-align: left;">40-60</td>
+<td style="text-align: left;">0-20</td>
+</tr>
+</tbody>
+</table>
+<h2>Artifacts</h2>
+<ul>
+<li>Experiment root: <code>/workspace/experiments/qwen_counterfactual_icl_public_multiseed</code></li>
+<li>Large artifacts root: <code>/workspace/large_artifacts/qwen_counterfactual_icl_public_multiseed</code></li>
+<li>Per-run artifacts: <code>/workspace/experiments/qwen_counterfactual_icl_public_multiseed/runs</code></li>
+<li>Adapter checkpoints: <code>/workspace/large_artifacts/qwen_counterfactual_icl_public_multiseed/checkpoints</code></li>
+<li>Aggregate CSV: <code>/workspace/experiments/qwen_counterfactual_icl_public_multiseed/analysis/aggregate_summary.csv</code></li>
+<li>Combined row predictions: <code>/workspace/experiments/qwen_counterfactual_icl_public_multiseed/analysis/aggregate_row_predictions.csv</code></li>
+<li>Combined task metrics: <code>/workspace/experiments/qwen_counterfactual_icl_public_multiseed/analysis/aggregate_task_metrics.csv</code></li>
+</ul>
+<h2>Limitations</h2>
+<p>The public evaluation is capped for runtime, and exact-match scoring is strict. The main counterfactual arm is multiseed; ordinary and shuffled-label controls are single-seed controls in this run. The experiment tests transfer from a synthetic counterfactual training distribution, not broad open-ended transformation ability.</p></body></html>

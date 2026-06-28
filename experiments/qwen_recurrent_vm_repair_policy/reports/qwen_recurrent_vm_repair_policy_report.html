@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recurrent VM Repair Policy Attached to Frozen Qwen</title>
+<style>
+body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #1f2933; background: #f7f8fa; }
+main { max-width: 1120px; margin: 0 auto; padding: 40px 24px 72px; background: #ffffff; }
+h1 { font-size: 34px; margin: 0 0 8px; }
+h2 { font-size: 22px; margin-top: 36px; border-bottom: 1px solid #d8dee4; padding-bottom: 8px; }
+p, li { font-size: 16px; line-height: 1.55; }
+.dek { color: #536471; font-size: 18px; margin-bottom: 28px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 22px; font-size: 14px; }
+th, td { border: 1px solid #d8dee4; padding: 8px 10px; text-align: left; }
+th { background: #eef2f6; }
+figure { margin: 26px 0; }
+img { max-width: 100%; height: auto; border: 1px solid #d8dee4; background: #fff; }
+figcaption { color: #536471; font-size: 13px; margin-top: 6px; }
+code { background: #eef2f6; padding: 2px 5px; border-radius: 4px; }
+.callout { background: #f1f7ff; border-left: 4px solid #1565c0; padding: 12px 16px; margin: 18px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>Recurrent VM Repair Policy Attached to Frozen Qwen</h1>
+<p class="dek">A standalone experiment on learned private compute steps, typed bytecode, and DAgger policy learning.</p>
+<h2>Abstract</h2>
+<p>This experiment tests whether a frozen 4B language model can be given a learned recurrent program-repair loop at posttraining time. A compiler reads frozen <code>Qwen/Qwen3-4B</code> token hidden states and emits a typed stack-machine program. A repair policy observes the prompt, current program, and VM execution trace; chooses one edit or STOP; executes the edited program; and repeats for up to <code>K</code> private steps.</p>
+<div class="callout">Final learned recurrent accuracy improves over the seed compiler on every split, reaching 34.4% validation and 39.8% fresh-paraphrase accuracy. Oracle repair remains much higher, at 95.3%-100.0%.</div>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code>, frozen.</li>
+<li>Seed examples: 192. Recurrent-policy examples: 1024. Full-supervised ceiling examples: 1024 plus seed.</li>
+<li>Evaluation size: 128 per split.</li>
+<li>Recurrent budgets: <code>K = 0, 1, 2, 4, 8, 16</code>.</li>
+<li>Main run: <code>main_recurrent_vm_repair_crossattn_dagger3_s192_c1024</code>.</li>
+</ul>
+<h2>Main Results</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Split</th>
+      <th>Base</th>
+      <th>Learned STOP</th>
+      <th>Forced edits</th>
+      <th>Oracle repair</th>
+      <th>Full sup. direct</th>
+      <th>Full sup. search</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Validation</td>
+      <td>10.9%</td>
+      <td>34.4% (K=2)</td>
+      <td>32.0% (K=4)</td>
+      <td>100.0%</td>
+      <td>79.7%</td>
+      <td>93.0%</td>
+    </tr>
+    <tr>
+      <td>Fresh standard</td>
+      <td>10.9%</td>
+      <td>35.9% (K=2)</td>
+      <td>32.0% (K=4)</td>
+      <td>100.0%</td>
+      <td>75.0%</td>
+      <td>89.8%</td>
+    </tr>
+    <tr>
+      <td>Fresh paraphrase</td>
+      <td>15.6%</td>
+      <td>39.8% (K=4)</td>
+      <td>37.5% (K=4)</td>
+      <td>100.0%</td>
+      <td>84.4%</td>
+      <td>96.9%</td>
+    </tr>
+    <tr>
+      <td>Fresh paired</td>
+      <td>9.4%</td>
+      <td>32.0% (K=16)</td>
+      <td>29.7% (K=4)</td>
+      <td>100.0%</td>
+      <td>84.4%</td>
+      <td>93.0%</td>
+    </tr>
+    <tr>
+      <td>Hard composition</td>
+      <td>14.8%</td>
+      <td>31.2% (K=2)</td>
+      <td>33.6% (K=8)</td>
+      <td>95.3%</td>
+      <td>68.0%</td>
+      <td>89.8%</td>
+    </tr>
+  </tbody>
+</table>
+<figure><img src="../analysis/figures/main_final_k_curves.png" alt="Final recurrent repair K-curves"><figcaption>Final recurrent repair K-curves</figcaption></figure>
+<figure><img src="../analysis/figures/main_oracle_gap_by_split.png" alt="Learned recurrent policy versus reachable ceilings"><figcaption>Learned recurrent policy versus reachable ceilings</figcaption></figure>
+<h2>DAgger Dynamics</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Phase</th>
+      <th>Source success</th>
+      <th>Action acc.</th>
+      <th>Arg acc.</th>
+      <th>Val best</th>
+      <th>Hard best</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>teacher policy</td>
+      <td>100.0%</td>
+      <td>56.4%</td>
+      <td>27.0%</td>
+      <td>15.6% (K=2)</td>
+      <td>21.1% (K=2)</td>
+    </tr>
+    <tr>
+      <td>dagger policy r1</td>
+      <td>32.4%</td>
+      <td>56.9%</td>
+      <td>37.4%</td>
+      <td>25.0% (K=16)</td>
+      <td>29.7% (K=4)</td>
+    </tr>
+    <tr>
+      <td>dagger policy r2</td>
+      <td>42.2%</td>
+      <td>69.2%</td>
+      <td>61.6%</td>
+      <td>28.9% (K=16)</td>
+      <td>28.1% (K=4)</td>
+    </tr>
+    <tr>
+      <td>dagger policy r3</td>
+      <td>59.3%</td>
+      <td>80.6%</td>
+      <td>82.3%</td>
+      <td>34.4% (K=2)</td>
+      <td>31.2% (K=2)</td>
+    </tr>
+  </tbody>
+</table>
+<figure><img src="../analysis/figures/dagger_progress.png" alt="DAgger progress"><figcaption>DAgger progress</figcaption></figure>
+<p>Repeated on-policy correction is the main learned-policy lever. Rollout success rises from 32.4% after round 1 to 59.3% by round 3, while argument accuracy rises to 82.3%.</p>
+<h2>STOP Behavior</h2>
+<figure><img src="../analysis/figures/stop_behavior_final.png" alt="Learned STOP behavior"><figcaption>Learned STOP behavior</figcaption></figure>
+<p>Learned STOP is useful but imperfect. Several splits peak at moderate K, while larger K can add false STOPs or unnecessary edits. The oracle curve shows this is a policy-learning bottleneck, not a limit of the VM repair environment.</p>
+<h2>Compiler Ceiling</h2>
+<figure><img src="../analysis/figures/compiler_ceiling.png" alt="Compiler ceiling"><figcaption>Compiler ceiling</figcaption></figure>
+<p>The full-supervised compiler reaches 68.0-84.4% direct accuracy and 89.8-96.9% answer-verified search accuracy, confirming that the frozen hidden states carry enough information for much stronger program prediction.</p>
+<h2>Bottom Line</h2>
+<p>The recurrent VM loop works, but it is not yet close to the oracle. The next high-impact step is to add value learning or advantage-weighted imitation so STOP and edit decisions are trained against expected VM-state improvement rather than only next-action labels.</p>
+<h2>Artifacts</h2>
+<ul>
+<li><code>experiments/qwen_recurrent_vm_repair_policy/runs/main_recurrent_vm_repair_crossattn_dagger3_s192_c1024/</code></li>
+<li><code>experiments/qwen_recurrent_vm_repair_policy/analysis/</code></li>
+<li><code>large_artifacts/qwen_recurrent_vm_repair_policy/checkpoints/main_recurrent_vm_repair_crossattn_dagger3_s192_c1024/</code></li>
+</ul>
+</main>
+</body>
+</html>

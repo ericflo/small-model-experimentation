@@ -1,0 +1,3 @@
+phase,source_examples,states,stop_labels,edit_labels,start_correct_rate,teacher_success_rate,mean_states_per_example,mean_edits_before_stop
+teacher_trajectory,32,281,32,249,0.03125,0.1875,8.78125,7.78125
+dagger_trajectory,32,163,32,131,0.03125,0.03125,5.09375,3.875

@@ -1,0 +1,33 @@
+{
+  "dataset": "rule_family_diversity_scaling",
+  "objective": "Measure whether broader rule-family diversity during trace-conditioned repair training improves transfer to held-out rule structures.",
+  "base_model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+  "training": {
+    "method": "QLoRA",
+    "rank": 32,
+    "alpha": 64,
+    "dropout": 0.05,
+    "learning_rate": 0.00015,
+    "epochs": 3,
+    "max_length": 3072,
+    "gradient_accumulation_steps": 8,
+    "total_train_records_per_scale": 240
+  },
+  "scales": {
+    "scale3": 3,
+    "scale6": 6,
+    "scale12": 12
+  },
+  "controls": [
+    "frozen_trace",
+    "scale12_no_trace",
+    "scale12_shuffled_trace",
+    "scale12_trace_with_no_trace_input",
+    "scale12_trace_with_shuffled_trace_input"
+  ],
+  "artifact_split": {
+    "small_package": "experiments/rule_family_diversity_scaling",
+    "large_artifacts": "large_artifacts/rule_family_diversity_scaling"
+  }
+}

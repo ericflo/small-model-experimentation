@@ -1,0 +1,35 @@
+{
+  "phase": "smoke",
+  "seeds": [
+    123
+  ],
+  "arms": [
+    "max24_curriculum"
+  ],
+  "overrides": {
+    "stage_steps": "1,1,1",
+    "train_examples": "12",
+    "eval_examples": "4",
+    "paired_eval_pairs": "2",
+    "batch_size": "1",
+    "eval_batch_size": "2",
+    "head_width": "128",
+    "compiler_layers": "1",
+    "lora_r": "4",
+    "lora_alpha": "8",
+    "log_interval": "1",
+    "save_checkpoints": "0"
+  },
+  "started_at": "2026-06-24 23:20:36 UTC",
+  "runs": [
+    {
+      "run": "smoke_max24_curriculum_seed123",
+      "arm": "max24_curriculum",
+      "seed": 123,
+      "exit_code": 0,
+      "elapsed_sec": 37.114
+    }
+  ],
+  "analysis_exit_code": 0,
+  "finished_at": "2026-06-24 23:21:13 UTC"
+}

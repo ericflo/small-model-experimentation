@@ -1,0 +1,17 @@
+{
+  "run": "qwen_head_pilot_s384_u2048",
+  "model_name": "Qwen/Qwen3-4B",
+  "seed": 37,
+  "sizes": {
+    "seed_train": 384,
+    "unlabeled_train": 2048,
+    "full_supervised_train": 2048,
+    "val_mixed": 256,
+    "fresh_standard": 256,
+    "fresh_paraphrase": 256,
+    "fresh_paired": 256,
+    "hard_composition": 256
+  },
+  "hidden_size": 2560,
+  "backend": "frozen_qwen_hidden_states"
+}

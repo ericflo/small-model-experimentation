@@ -1,0 +1,168 @@
+{
+  "seed": 101,
+  "train_n": 24,
+  "eval_sizes": {
+    "eval_indist": 8,
+    "eval_composition": 8,
+    "eval_template_shift": 8
+  },
+  "train_sample": [
+    {
+      "example_id": "train_table_18",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: alpha=14, delta=14, beta=22, gamma=3. Take delta, multiply by 2, then add 9.",
+      "answer": "37",
+      "op_name": "lookup_mul_add",
+      "payload": {
+        "table": {
+          "alpha": 14,
+          "delta": 14,
+          "beta": 22,
+          "gamma": 3
+        },
+        "key": "delta",
+        "scale": 2,
+        "bias": 9
+      }
+    },
+    {
+      "example_id": "train_date_3",
+      "split": "train",
+      "family": "date",
+      "prompt": "Starting from 2026-04-21, add 4 weeks. Return the ISO date.",
+      "answer": "2026-05-19",
+      "op_name": "add_weeks",
+      "payload": {
+        "date": "2026-04-21",
+        "weeks": 4
+      }
+    },
+    {
+      "example_id": "train_unit_21",
+      "split": "train",
+      "family": "unit",
+      "prompt": "Start with 19 centimeters and add 22 centimeters. Return the total centimeters.",
+      "answer": "41",
+      "op_name": "add_centimeters",
+      "payload": {
+        "amount": 19,
+        "extra": 22
+      }
+    },
+    {
+      "example_id": "train_date_11",
+      "split": "train",
+      "family": "date",
+      "prompt": "Starting from 2026-11-05, add 2 weeks. Return the ISO date.",
+      "answer": "2026-11-19",
+      "op_name": "add_weeks",
+      "payload": {
+        "date": "2026-11-05",
+        "weeks": 2
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_table_2",
+        "split": "eval_indist",
+        "family": "table",
+        "prompt": "Table: beta=28, alpha=2, gamma=14, delta=10. Take gamma, multiply by 5, then add 9.",
+        "answer": "79",
+        "op_name": "lookup_mul_add",
+        "payload": {
+          "table": {
+            "beta": 28,
+            "alpha": 2,
+            "gamma": 14,
+            "delta": 10
+          },
+          "key": "gamma",
+          "scale": 5,
+          "bias": 9
+        }
+      },
+      {
+        "example_id": "eval_indist_date_3",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Starting from 2026-05-03, add 1 days. Return the ISO date.",
+        "answer": "2026-05-04",
+        "op_name": "add_days",
+        "payload": {
+          "date": "2026-05-03",
+          "days": 1
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_date_7",
+        "split": "eval_composition",
+        "family": "date",
+        "prompt": "Starting from 2026-07-11, add 2 weeks and 6 days. Return the ISO date.",
+        "answer": "2026-07-31",
+        "op_name": "weeks_plus_days",
+        "payload": {
+          "date": "2026-07-11",
+          "weeks": 2,
+          "days": 6
+        }
+      },
+      {
+        "example_id": "eval_composition_table_2",
+        "split": "eval_composition",
+        "family": "table",
+        "prompt": "Table: gamma=10, alpha=25, beta=8, delta=12. Add the values for beta and alpha, then add 4.",
+        "answer": "37",
+        "op_name": "sum_two_keys_plus",
+        "payload": {
+          "table": {
+            "gamma": 10,
+            "alpha": 25,
+            "beta": 8,
+            "delta": 12
+          },
+          "k1": "beta",
+          "k2": "alpha",
+          "bias": 4
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_string_4",
+        "split": "eval_template_shift",
+        "family": "string",
+        "prompt": "Compact identifier YQ-9523-XX by dropping hyphens. What are the first 3 symbols afterward?",
+        "answer": "YQ9",
+        "op_name": "take_prefix",
+        "payload": {
+          "code": "YQ-9523-XX",
+          "n": 3
+        }
+      },
+      {
+        "example_id": "eval_template_shift_table_2",
+        "split": "eval_template_shift",
+        "family": "table",
+        "prompt": "From lookup entries [alpha=24, beta=28, delta=18, gamma=10], scale gamma by 2 and increase by 3.",
+        "answer": "23",
+        "op_name": "lookup_mul_add",
+        "payload": {
+          "table": {
+            "alpha": 24,
+            "beta": 28,
+            "delta": 18,
+            "gamma": 10
+          },
+          "key": "gamma",
+          "scale": 2,
+          "bias": 3
+        }
+      }
+    ]
+  }
+}

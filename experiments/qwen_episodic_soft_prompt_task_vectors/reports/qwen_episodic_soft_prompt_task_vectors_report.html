@@ -1,0 +1,307 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Episodic Soft-Prompt Task Vectors</title><style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; margin: 40px; color: #111827; line-height: 1.5; }
+    h1 { font-size: 32px; margin-bottom: 4px; }
+    h2 { margin-top: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0 24px; font-size: 13px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 4px; }
+    figure { margin: 18px 0 26px; }
+    figcaption { color: #4b5563; font-size: 13px; margin-top: 6px; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+    </style></head><body><h1>Episodic Soft-Prompt Task Vectors</h1>
+<h2>Question</h2>
+<p>Can a frozen language model become more consistent on text-transformation tasks by learning a small continuous task vector from that task&#x27;s examples?</p>
+<p>Each task receives its own optimized soft prefix. The model weights are frozen. The prefix is trained on leave-one-out versions of the task&#x27;s training rows, then evaluated on held-out rows.</p>
+<h2>Setup</h2>
+<p>- Dataset root: <code>/workspace/large_artifacts/qwen_episodic_soft_prompt_task_vectors/prose-benchmarks</code></p>
+<p>- Run: <code>main_qwen_soft_prompt_40_s6_lr001</code></p>
+<p>- Model: <code>Qwen/Qwen3-4B</code></p>
+<p>- Tasks: 40</p>
+<p>- Soft tokens: 8</p>
+<p>- Optimization steps: 6</p>
+<p>- Learning rate: 0.01</p>
+<p>- Train examples per task: 4</p>
+<p>- Held-out cap per task: 4</p>
+<h2>Main Result</h2>
+<table>
+<tr><th>method</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th><th>parse_ok</th><th>avg_outputs</th></tr>
+<tr><td>direct_row</td><td>40</td><td>70.4%</td><td>52.5%</td><td>100.0%</td><td>3.750</td></tr>
+<tr><td>learned_soft_row</td><td>40</td><td>71.5%</td><td>52.5%</td><td>100.0%</td><td>3.750</td></tr>
+<tr><td>init_soft_row</td><td>40</td><td>71.7%</td><td>50.0%</td><td>100.0%</td><td>3.750</td></tr>
+<tr><td>shuffled_soft_row</td><td>40</td><td>63.5%</td><td>45.0%</td><td>100.0%</td><td>3.750</td></tr>
+<tr><td>learned_soft_batch</td><td>40</td><td>63.7%</td><td>42.5%</td><td>95.0%</td><td>3.750</td></tr>
+<tr><td>direct_batch</td><td>40</td><td>65.0%</td><td>40.0%</td><td>95.0%</td><td>3.750</td></tr>
+</table>
+<h2>Interpretation</h2>
+<p>The learned soft-prompt row method changes strict full-task exact by 0.0 points relative to direct row-by-row inference. It changes full-task exact by 2.5 points relative to the untrained initialized prefix and by 7.5 points relative to a prefix optimized on shuffled training outputs.</p>
+<p>The learned prefix changes row exact by 1.0 points relative to direct row-by-row inference. It helps 1 tasks and hurts 1 tasks on strict full-task exact. A positive result requires <code>learned_soft_row</code> to beat direct inference and both soft-prefix controls.</p>
+<p>This run is neutral for strict full-task exact and weakly positive only at row level. The learned prefix beats the shuffled-label control, showing that the optimization target matters, but it does not improve the number of fully solved tasks over direct row-by-row inference.</p>
+<h2>Charts</h2>
+<figure><img src="../analysis/figures/method_full_task_exact.png" alt="Full-task exact by method"><figcaption>Full-task exact by method</figcaption></figure>
+<figure><img src="../analysis/figures/row_vs_full_task.png" alt="Row versus full-task accuracy"><figcaption>Row versus full-task accuracy</figcaption></figure>
+<figure><img src="../analysis/figures/wins_losses_vs_direct.png" alt="Wins and losses versus direct"><figcaption>Wins and losses versus direct</figcaption></figure>
+<figure><img src="../analysis/figures/family_heatmap.png" alt="Family heatmap"><figcaption>Family heatmap</figcaption></figure>
+<figure><img src="../analysis/figures/train_loss_curves.png" alt="Train loss curves"><figcaption>Train loss curves</figcaption></figure>
+<h2>Deltas Versus Direct Row Baseline</h2>
+<table>
+<tr><th>method</th><th>tasks</th><th>full_task_delta</th><th>row_exact_delta</th><th>tasks_helped</th><th>tasks_hurt</th><th>tasks_tied</th></tr>
+<tr><td>learned_soft_row</td><td>40</td><td>0.0%</td><td>1.0%</td><td>1</td><td>1</td><td>38</td></tr>
+<tr><td>init_soft_row</td><td>40</td><td>-2.5%</td><td>1.2%</td><td>0</td><td>1</td><td>39</td></tr>
+<tr><td>shuffled_soft_row</td><td>40</td><td>-7.5%</td><td>-6.9%</td><td>1</td><td>4</td><td>35</td></tr>
+<tr><td>learned_soft_batch</td><td>40</td><td>-10.0%</td><td>-6.7%</td><td>0</td><td>4</td><td>36</td></tr>
+<tr><td>direct_batch</td><td>40</td><td>-12.5%</td><td>-5.4%</td><td>0</td><td>5</td><td>35</td></tr>
+</table>
+<h2>Task Details</h2>
+<table>
+<tr><th>task_id</th><th>family</th><th>method</th><th>row_exact</th><th>full_task_exact</th><th>parse_ok</th><th>parse_status</th><th>output_count</th></tr>
+<tr><td>Address.000002</td><td>Address</td><td>direct_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>direct_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>direct_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>direct_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>direct_batch</td><td>25.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>False</td><td>parse_fail</td><td>4</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>direct_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>False</td><td>parse_fail</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>direct_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>direct_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>direct_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>direct_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>direct_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>direct_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>direct_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>init_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>init_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>init_soft_row</td><td>75.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>init_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>init_soft_row</td><td>75.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>init_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>init_soft_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>init_soft_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>init_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>init_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>init_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>init_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>init_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>init_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>learned_soft_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>learned_soft_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>learned_soft_batch</td><td>25.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>learned_soft_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>learned_soft_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>learned_soft_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>learned_soft_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>learned_soft_batch</td><td>0.0%</td><td>False</td><td>False</td><td>parse_fail</td><td>4</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>learned_soft_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>learned_soft_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>learned_soft_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>learned_soft_batch</td><td>0.0%</td><td>False</td><td>False</td><td>parse_fail</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>learned_soft_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>learned_soft_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>learned_soft_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>learned_soft_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>learned_soft_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>learned_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>learned_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>learned_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>learned_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>learned_soft_row</td><td>75.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>learned_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>learned_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>learned_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>learned_soft_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>learned_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>learned_soft_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>learned_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>learned_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>learned_soft_row</td><td>75.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>learned_soft_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>learned_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>learned_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>learned_soft_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>learned_soft_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>learned_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>shuffled_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>shuffled_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>shuffled_soft_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>shuffled_soft_row</td><td>75.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>shuffled_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>shuffled_soft_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>shuffled_soft_row</td><td>75.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>shuffled_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>shuffled_soft_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>shuffled_soft_row</td><td>25.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+</table>
+<h2>Train Loss Log</h2>
+<table>
+<tr><th>arm</th><th>step</th><th>loss</th></tr>
+<tr><td>learned</td><td>0</td><td>1.059</td></tr>
+<tr><td>learned</td><td>1</td><td>0.747</td></tr>
+<tr><td>learned</td><td>2</td><td>0.588</td></tr>
+<tr><td>learned</td><td>3</td><td>0.487</td></tr>
+<tr><td>learned</td><td>4</td><td>0.372</td></tr>
+<tr><td>learned</td><td>5</td><td>0.289</td></tr>
+<tr><td>learned</td><td>6</td><td>0.248</td></tr>
+<tr><td>shuffled</td><td>0</td><td>3.920</td></tr>
+<tr><td>shuffled</td><td>1</td><td>3.429</td></tr>
+<tr><td>shuffled</td><td>2</td><td>3.038</td></tr>
+<tr><td>shuffled</td><td>3</td><td>2.631</td></tr>
+<tr><td>shuffled</td><td>4</td><td>2.213</td></tr>
+<tr><td>shuffled</td><td>5</td><td>1.868</td></tr>
+<tr><td>shuffled</td><td>6</td><td>1.580</td></tr>
+</table>
+<h2>Files</h2>
+<p>- <code>runs/main_qwen_soft_prompt_40_s6_lr001/task_details.csv</code></p>
+<p>- <code>runs/main_qwen_soft_prompt_40_s6_lr001/row_details.csv</code></p>
+<p>- <code>runs/main_qwen_soft_prompt_40_s6_lr001/train_log.csv</code></p>
+<p>- <code>runs/main_qwen_soft_prompt_40_s6_lr001/summary.csv</code></p>
+<p>- <code>runs/main_qwen_soft_prompt_40_s6_lr001/method_deltas.csv</code></p>
+<p>- <code>analysis/summary.csv</code></p>
+<p>- <code>analysis/method_deltas.csv</code></p>
+<p>- <code>analysis/task_details.csv</code></p>
+<p>- <code>analysis/row_details.csv</code></p>
+<p>- <code>analysis/train_log.csv</code></p></body></html>

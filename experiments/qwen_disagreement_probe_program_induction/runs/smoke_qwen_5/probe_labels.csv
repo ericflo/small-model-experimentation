@@ -1,0 +1,31 @@
+task_id,family,probe_kind,probe_index,variant,input,label,raw
+City.000011,City,disagreement,0,plain,New York City,New York City,New York City
+City.000011,City,disagreement,1,plain,NEW YORK CITY,New York City,New York City
+City.000011,City,disagreement,2,plain,n.y.c.,New York City,New York City
+City.000011,City,random,0,plain,New Yor,New York City,New York City
+City.000011,City,random,1,plain,.c.y.n,New York City,New York City
+City.000011,City,random,2,plain,NEW YORK CITY,New York City,New York City
+DateTime.000012,DateTime,disagreement,0,plain,1766,1766,1766
+DateTime.000012,DateTime,disagreement,1,plain,2050,2050,2050
+DateTime.000012,DateTime,disagreement,2,plain,2047,2047,2047
+DateTime.000012,DateTime,random,0,plain,2048,2048,2048
+DateTime.000012,DateTime,random,1,plain,10 March 1933,1933,1933
+DateTime.000012,DateTime,random,2,plain,2238,2238,2238
+Name.000028,Name,disagreement,0,plain,Maureen-Snorre,Maureen,Maureen
+Name.000028,Name,disagreement,1,plain,Artem,Artem,Artem
+Name.000028,Name,disagreement,2,plain,Hone,Hone,Hone
+Name.000028,Name,random,0,plain,artem milanesi,Artem,Artem
+Name.000028,Name,random,1,plain,Snezhana Panigrahi-Bidisha,Snezhana,Snezhana
+Name.000028,Name,random,2,plain,maureen-snorre ndiaye,Maureen,Maureen
+Number.000048,Number,disagreement,0,plain,4.82,5.00,5.00
+Number.000048,Number,disagreement,1,plain,71.2,71.0,71.0
+Number.000048,Number,disagreement,2,plain,81.4,81.0,81.0
+Number.000048,Number,random,0,plain,80.4,80.0,80.0
+Number.000048,Number,random,1,plain,71.8,72.0,72.0
+Number.000048,Number,random,2,plain,69.2,69.0,69.0
+Number.000081,Number,disagreement,0,plain,84,76-100,76-100
+Number.000081,Number,disagreement,1,plain,53,51-75,51-75
+Number.000081,Number,disagreement,2,plain,98,76-100,76-100
+Number.000081,Number,random,0,plain,44,26-50,26-50
+Number.000081,Number,random,1,plain,61,76-100,76-100
+Number.000081,Number,random,2,plain,50,51-75,51-75

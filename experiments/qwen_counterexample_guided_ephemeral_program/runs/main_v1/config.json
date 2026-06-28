@@ -1,0 +1,19 @@
+{
+  "answer_max_new_tokens": 56,
+  "batch_max_new_tokens": 220,
+  "code_max_new_tokens": 560,
+  "gate_probe_score": 0.75,
+  "heldout_cap": 4,
+  "min_confident_probes": 2,
+  "min_heldout": 3,
+  "min_probe_consensus": 0.6666666666666666,
+  "no_qwen": false,
+  "probe_count": 4,
+  "probe_label_styles": "plain,rule,strict",
+  "repair_rounds": 1,
+  "run_name": "main_v1",
+  "seed": 20260628,
+  "task_limit": 24,
+  "train_n": 4,
+  "variants": "direct,helpers,regex,conditional"
+}

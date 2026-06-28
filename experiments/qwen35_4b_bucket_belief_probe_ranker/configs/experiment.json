@@ -1,0 +1,32 @@
+{
+  "experiment": "qwen35_4b_bucket_belief_probe_ranker",
+  "date_utc": "2026-06-24",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "objective": "Train and evaluate Qwen3.5-4B as a bucket-belief ranker for choosing verifier probes.",
+  "hypothesis": "If Qwen can infer a useful non-uniform belief over which output bucket contains the hidden target program, then a bucket-belief ranker should beat target-independent split top-1 while staying below target-aware oracle ceilings.",
+  "data": {
+    "train_records_per_cell": 50,
+    "eval_records_per_cell": 20,
+    "visible_cases": 4,
+    "query_pool_cases": 96,
+    "hidden_cases": 16,
+    "train_library_sizes": [64, 128, 256],
+    "eval_library_sizes": [64, 128, 256, 512],
+    "templates": ["pair_affine_mod", "pair_compare_gate"],
+    "max_probe_budget": 3
+  },
+  "ranker": {
+    "candidate_probes_per_state": 8,
+    "bucket_options_per_probe": 8,
+    "training_target": "output bucket containing the hidden target program",
+    "rollout_choice": "minimum model-predicted expected survivors"
+  },
+  "arms": [
+    "split_top1",
+    "oracle_top8",
+    "fullpool_oracle",
+    "base_bucket_ranker",
+    "sft_bucket_ranker"
+  ],
+  "large_artifacts_root": "/workspace/large_artifacts/qwen35_4b_bucket_belief_probe_ranker"
+}

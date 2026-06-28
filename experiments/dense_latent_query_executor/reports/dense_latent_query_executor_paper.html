@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dense Latent Recurrent Execution from Sampled Query Labels</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; color: #202124; margin: 0; background: #fafafa; }
+main { max-width: 980px; margin: 0 auto; padding: 40px 24px 72px; background: white; }
+h1, h2, h3 { line-height: 1.2; color: #111827; }
+h1 { font-size: 2.1rem; margin-bottom: 0.3rem; }
+h2 { margin-top: 2rem; border-top: 1px solid #e5e7eb; padding-top: 1.2rem; }
+h3 { margin-top: 1.4rem; }
+code { background: #f3f4f6; padding: 0.1rem 0.25rem; border-radius: 4px; }
+pre { background: #111827; color: #f9fafb; padding: 1rem; overflow-x: auto; border-radius: 6px; }
+pre code { background: transparent; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.94rem; }
+th, td { border: 1px solid #e5e7eb; padding: 0.45rem 0.55rem; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { background: #f9fafb; font-weight: 650; }
+img { max-width: 100%; display: block; margin: 1rem auto; border: 1px solid #e5e7eb; border-radius: 6px; }
+blockquote { border-left: 4px solid #9ca3af; padding-left: 1rem; color: #374151; margin-left: 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>Dense Latent Recurrent Execution from Sampled Query Labels</h1>
+<p><strong>A controlled experiment on whether a fixed-width hidden state can learn sequential belief execution from one sampled final answer</strong></p>
+<h2>Abstract</h2>
+<p>This experiment tests whether a recurrent runtime with an ordinary dense hidden vector can learn to execute modular arithmetic and observation-filter programs when the loss supplies only one sampled final query value per example. Each example starts with an unknown pair of registers constrained by <code>B=A+d (mod p)</code>. A program applies arithmetic updates and bucket observations. The model receives one query type such as <code>A</code>, <code>B</code>, <code>A+B</code>, or <code>A-B</code>, and the training label is one value sampled from the exact final query distribution.</p>
+<p>The full final query distribution and full final belief distribution over <code>(A,B)</code> pairs are withheld from the loss and used only for evaluation. A separate frozen post-hoc probe is trained after executor training to test whether the dense hidden state contains recoverable belief-state information.</p>
+<p>On the scaled modulus-31 task, trained on lengths 1-8 and evaluated on lengths 4, 8, 12, 16, and 24, the dense recurrent executor shows a real compute threshold: performance rises when internal recurrent steps <code>K</code> reach program length <code>L</code>. At the first <code>K&gt;=L</code>, exact query target mass is 70.2%, 49.3%, 36.1%, 29.6%, and 21.5% for lengths 4, 8, 12, 16, and 24. A matched static compiler reaches 50.4%, 26.9%, 13.6%, 9.0%, and 5.5%. The dense recurrent state is therefore doing useful sequential work, but the result is not near-exact: sampled query supervision plus a generic dense state is insufficient to learn a high-fidelity belief executor at this scale.</p>
+<h2>Lay Summary</h2>
+<p>The model starts with partial knowledge:</p>
+<pre><code class="language-text">B = A + d (mod p)
+</code></pre>
+<p>That relation describes many possible <code>(A,B)</code> worlds. A program then changes the registers and sometimes filters the possible worlds:</p>
+<pre><code class="language-text">A = A + 7
+observe B % 5 = 3
+B = B - A
+query A + B
+</code></pre>
+<p>Training gives only one sampled final answer value. It does not give the whole answer distribution, and it does not give the set of possible <code>(A,B)</code> worlds. The question is whether a dense recurrent hidden state learns a reusable internal executor anyway.</p>
+<p>The answer is mixed. The dense recurrent model does learn something sequential: it improves sharply once it has enough internal steps to read the whole program, and it beats a static one-pass compiler on held-out lengths. But the learned dense state is approximate. It is much better than the static control, not a solved belief machine.</p>
+<h2>1. Question</h2>
+<p>The experiment asks whether sampled-answer supervision can induce a latent recurrent executor in a generic dense hidden state.</p>
+<p>The target evidence has five parts:</p>
+<ol>
+<li>Query quality should depend on internal step budget <code>K</code>.</li>
+<li>The threshold should align with program length <code>L</code>: weak when <code>K&lt;L</code>, stronger when <code>K&gt;=L</code>.</li>
+<li>The threshold should hold beyond the training length range.</li>
+<li>A post-hoc probe should recover nontrivial belief information from the dense state.</li>
+<li>Static and order-destroying controls should be weaker.</li>
+</ol>
+<p>This is a controlled mechanism test. It is not an open-ended language benchmark. The goal is to isolate whether recurrent latent computation emerges from low-bandwidth final-answer supervision.</p>
+<h2>2. Task</h2>
+<p>Programs operate over two registers modulo <code>p</code>.</p>
+<p>Initial belief:</p>
+<pre><code class="language-text">{(A, B): B = A + d mod p}
+</code></pre>
+<p>For <code>p=31</code>, the full state space has <code>31 * 31 = 961</code> register pairs, and the initial support contains 31 pairs.</p>
+<p>Operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A=A+c</code></td>
+<td>add a constant to <code>A</code></td>
+</tr>
+<tr>
+<td><code>A=A-c</code></td>
+<td>subtract a constant from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+c</code></td>
+<td>add a constant to <code>B</code></td>
+</tr>
+<tr>
+<td><code>B=B-c</code></td>
+<td>subtract a constant from <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A+B</code></td>
+<td>add <code>B</code> into <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B+A</code></td>
+<td>add <code>A</code> into <code>B</code></td>
+</tr>
+<tr>
+<td><code>A=A-B</code></td>
+<td>subtract <code>B</code> from <code>A</code></td>
+</tr>
+<tr>
+<td><code>B=B-A</code></td>
+<td>subtract <code>A</code> from <code>B</code></td>
+</tr>
+<tr>
+<td><code>OBS_A_BUCKET</code></td>
+<td>filter to states where <code>A % m = r</code></td>
+</tr>
+<tr>
+<td><code>OBS_B_BUCKET</code></td>
+<td>filter to states where <code>B % m = r</code></td>
+</tr>
+</tbody>
+</table>
+<p>Observation residues are sampled from the live support, so every target support is non-empty. For the scaled run, <code>p=31</code>, observation modulus is 5, and each instruction is an observation with probability 0.3.</p>
+<p>Each example samples one final query type:</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>Distribution being sampled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>final distribution of <code>A</code></td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td>final distribution of <code>B</code></td>
+</tr>
+<tr>
+<td><code>A_PLUS_B</code></td>
+<td>final distribution of <code>A+B mod p</code></td>
+</tr>
+<tr>
+<td><code>A_MINUS_B</code></td>
+<td>final distribution of <code>A-B mod p</code></td>
+</tr>
+</tbody>
+</table>
+<p>The training label is one value sampled from the exact query distribution. Evaluation computes the exact final query distribution and exact final pair belief.</p>
+<p>Training used lengths 1-8. Evaluation used lengths 4, 8, 12, 16, and 24. Lengths 12, 16, and 24 test length generalization.</p>
+<h2>3. Models</h2>
+<h3>Dense Recurrent Executor</h3>
+<p>The primary model stores only a dense hidden vector. It embeds the initial relation parameter <code>d</code>, then updates the hidden vector with a GRU-style cell, one program instruction per internal recurrent step. A query head maps the hidden state to logits over all query values for all query types.</p>
+<p>The dense state is not a categorical belief table and receives no direct belief supervision.</p>
+<h3>Static Compiler Control</h3>
+<p>The static control receives the whole program and initial relation, processes the instruction sequence with a small Transformer encoder, pools the sequence, and predicts query logits in one pass. It has no recurrent execution axis and no variable internal step budget.</p>
+<h3>Shuffled Recurrent Control</h3>
+<p>The shuffled recurrent control uses the same dense recurrent architecture as the primary model, but it sorts each program's active instructions before execution. This preserves instruction content while destroying the original order.</p>
+<h3>Frozen Belief Probe</h3>
+<p>After executor training, the executor is frozen. A separate MLP probe maps hidden states to distributions over <code>(A,B)</code> pairs. For the recurrent model, the probe is trained on hidden states from training-length prefixes. For the static model, it is trained on the final pooled state. Probe metrics audit hidden-state information; they are not executor training losses.</p>
+<h2>4. Metrics</h2>
+<p>The primary metrics evaluate the exact final query distribution:</p>
+<ul>
+<li><code>query_target_mass</code>: total probability assigned to the exact query support.</li>
+<li><code>query_top1_on_support</code>: whether the most likely queried value is inside the exact query support.</li>
+<li><code>query_target_nll</code>: cross-entropy against the exact query distribution.</li>
+</ul>
+<p>The audit metrics evaluate recoverable belief information:</p>
+<ul>
+<li><code>probe_belief_target_mass</code>: total probe probability assigned to the exact final <code>(A,B)</code> support.</li>
+<li><code>probe_belief_top1_on_support</code>: whether the most likely probed pair is inside the exact support.</li>
+<li><code>probe_belief_target_nll</code>: cross-entropy against the exact final pair distribution.</li>
+</ul>
+<p>The belief metrics are post-hoc probe measurements, not executor objectives.</p>
+<h2>5. Main Result</h2>
+<p>The dense recurrent executor shows a clear execution-threshold shape at modulus 31. Query mass is weak when <code>K&lt;L</code>, then rises when <code>K</code> reaches program length.</p>
+<p><img alt="Query top-1 heatmap" src="../analysis/figures/mod31_query_top1_heatmap.png" /></p>
+<p><img alt="Query mass heatmap" src="../analysis/figures/mod31_query_mass_heatmap.png" /></p>
+<p>The probe-belief audit shows the same qualitative threshold, but the recovered belief mass is much lower than an exact belief state would require.</p>
+<p><img alt="Probe belief mass heatmap" src="../analysis/figures/mod31_probe_belief_mass_heatmap.png" /></p>
+<p>The K curves show the threshold by length.</p>
+<p><img alt="Query mass K curves" src="../analysis/figures/mod31_query_mass_k_curves.png" /></p>
+<p><img alt="Probe belief mass K curves" src="../analysis/figures/mod31_probe_belief_mass_k_curves.png" /></p>
+<p>Numerically, averaged across query types:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Program length</th>
+<th style="text-align: right;">Best query mass when <code>K&lt;L</code></th>
+<th style="text-align: right;">Best probe belief mass when <code>K&lt;L</code></th>
+<th style="text-align: right;">First <code>K&gt;=L</code></th>
+<th style="text-align: right;">Query mass at first <code>K&gt;=L</code></th>
+<th style="text-align: right;">Probe belief mass at first <code>K&gt;=L</code></th>
+<th style="text-align: right;">Query top-1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">44.9%</td>
+<td style="text-align: right;">11.3%</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">70.2%</td>
+<td style="text-align: right;">41.6%</td>
+<td style="text-align: right;">79.1%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">21.8%</td>
+<td style="text-align: right;">2.5%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">49.3%</td>
+<td style="text-align: right;">18.8%</td>
+<td style="text-align: right;">59.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">14.9%</td>
+<td style="text-align: right;">1.4%</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">36.1%</td>
+<td style="text-align: right;">12.0%</td>
+<td style="text-align: right;">44.6%</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">10.8%</td>
+<td style="text-align: right;">0.8%</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">29.6%</td>
+<td style="text-align: right;">8.8%</td>
+<td style="text-align: right;">37.1%</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">6.0%</td>
+<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">21.5%</td>
+<td style="text-align: right;">5.7%</td>
+<td style="text-align: right;">28.8%</td>
+</tr>
+</tbody>
+</table>
+<p>The threshold is real, but the scale is limited. Length 24 improves from 6.0% query mass before the execution threshold to 21.5% at <code>K=24</code>. That is a meaningful gain, not a strong solution.</p>
+<h2>6. Query Types</h2>
+<p>All four query types show the same broad pattern: direct register queries are easiest, relational queries are harder, and all degrade with length.</p>
+<p>At length 24:</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th style="text-align: right;">Query mass at <code>K=24</code></th>
+<th style="text-align: right;">Probe belief mass at <code>K=24</code></th>
+<th style="text-align: right;">Query top-1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td style="text-align: right;">24.0%</td>
+<td style="text-align: right;">5.5%</td>
+<td style="text-align: right;">31.4%</td>
+</tr>
+<tr>
+<td><code>A_MINUS_B</code></td>
+<td style="text-align: right;">19.2%</td>
+<td style="text-align: right;">5.7%</td>
+<td style="text-align: right;">23.2%</td>
+</tr>
+<tr>
+<td><code>A_PLUS_B</code></td>
+<td style="text-align: right;">17.5%</td>
+<td style="text-align: right;">6.0%</td>
+<td style="text-align: right;">26.2%</td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td style="text-align: right;">25.4%</td>
+<td style="text-align: right;">5.7%</td>
+<td style="text-align: right;">34.2%</td>
+</tr>
+</tbody>
+</table>
+<p>Relational queries are important because they are harder to answer from shallow marginal cues. The dense recurrent executor improves them, but does not solve them.</p>
+<h2>7. Controls</h2>
+<p>The scaled static compiler control shows that the dense recurrent result is not merely one-pass sequence fitting.</p>
+<p><img alt="Control query mass" src="../analysis/figures/mod31_controls_query_mass.png" /></p>
+<p><img alt="Control probe belief mass" src="../analysis/figures/mod31_controls_probe_belief_mass.png" /></p>
+<p>At modulus 31, averaged across query types:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">L=4 query</th>
+<th style="text-align: right;">L=8 query</th>
+<th style="text-align: right;">L=12 query</th>
+<th style="text-align: right;">L=16 query</th>
+<th style="text-align: right;">L=24 query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dense recurrent</td>
+<td style="text-align: right;">70.2%</td>
+<td style="text-align: right;">49.3%</td>
+<td style="text-align: right;">36.1%</td>
+<td style="text-align: right;">29.6%</td>
+<td style="text-align: right;">21.5%</td>
+</tr>
+<tr>
+<td>Static compiler</td>
+<td style="text-align: right;">50.4%</td>
+<td style="text-align: right;">26.9%</td>
+<td style="text-align: right;">13.6%</td>
+<td style="text-align: right;">9.0%</td>
+<td style="text-align: right;">5.5%</td>
+</tr>
+</tbody>
+</table>
+<p>Probe belief target mass separates the models more sharply:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">L=4 probe belief</th>
+<th style="text-align: right;">L=8 probe belief</th>
+<th style="text-align: right;">L=12 probe belief</th>
+<th style="text-align: right;">L=16 probe belief</th>
+<th style="text-align: right;">L=24 probe belief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dense recurrent</td>
+<td style="text-align: right;">41.6%</td>
+<td style="text-align: right;">18.8%</td>
+<td style="text-align: right;">12.0%</td>
+<td style="text-align: right;">8.8%</td>
+<td style="text-align: right;">5.7%</td>
+</tr>
+<tr>
+<td>Static compiler</td>
+<td style="text-align: right;">13.0%</td>
+<td style="text-align: right;">3.7%</td>
+<td style="text-align: right;">0.8%</td>
+<td style="text-align: right;">0.4%</td>
+<td style="text-align: right;">0.2%</td>
+</tr>
+</tbody>
+</table>
+<p>The small-modulus order control also matters. At modulus 11, the dense recurrent model reached 89.3%, 72.0%, 55.7%, and 47.7% query mass at lengths 3, 6, 9, and 12. The shuffled recurrent control reached 75.8%, 43.1%, 26.3%, and 19.8%. Preserving instruction content while destroying order removes much of the length-generalizing behavior.</p>
+<h2>8. Small-Modulus Diagnostic</h2>
+<p>A modulus-11 diagnostic used training lengths 1-6 and evaluation lengths 3, 6, 9, and 12. It shows the same phenomenon in an easier state space.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">L=3 query</th>
+<th style="text-align: right;">L=6 query</th>
+<th style="text-align: right;">L=9 query</th>
+<th style="text-align: right;">L=12 query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dense recurrent</td>
+<td style="text-align: right;">89.3%</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">55.7%</td>
+<td style="text-align: right;">47.7%</td>
+</tr>
+<tr>
+<td>Static compiler</td>
+<td style="text-align: right;">74.0%</td>
+<td style="text-align: right;">46.2%</td>
+<td style="text-align: right;">25.1%</td>
+<td style="text-align: right;">18.7%</td>
+</tr>
+<tr>
+<td>Shuffled recurrent</td>
+<td style="text-align: right;">75.8%</td>
+<td style="text-align: right;">43.1%</td>
+<td style="text-align: right;">26.3%</td>
+<td style="text-align: right;">19.8%</td>
+</tr>
+</tbody>
+</table>
+<p>The dense recurrent model is consistently best, but it still degrades with length. The scaled modulus-31 result is therefore not a surprise failure; it is the harder version of the same approximate dense execution behavior.</p>
+<h2>9. Interpretation</h2>
+<p>The result supports a narrow mechanism claim:</p>
+<blockquote>
+<p>A generic dense recurrent hidden state can learn a partial sequential executor from one sampled final query label per example, and additional internal steps help when those steps correspond to consuming more program instructions.</p>
+</blockquote>
+<p>The result does not support the stronger claim that sampled final-answer supervision reliably induces an exact hidden belief machine in a generic dense vector.</p>
+<p>The evidence for useful sequential execution is:</p>
+<ol>
+<li>the <code>K=L</code> threshold in query metrics,</li>
+<li>the same threshold in post-hoc belief-probe metrics,</li>
+<li>length-generalized improvement beyond the training range,</li>
+<li>a clear gap over the scaled static compiler,</li>
+<li>weaker behavior from the order-destroying recurrent control at small modulus.</li>
+</ol>
+<p>The evidence against a strong dense executor is just as important:</p>
+<ol>
+<li>query target mass is only 49.3% at the maximum training length of 8,</li>
+<li>query target mass drops to 21.5% at length 24,</li>
+<li>probe belief target mass drops to 5.7% at length 24,</li>
+<li>relational queries remain notably weaker than direct register queries,</li>
+<li>the dense state does not preserve enough information for the post-hoc probe to reconstruct the final belief well.</li>
+</ol>
+<p>This is a useful boundary result. Dense recurrence alone creates a measurable serial-compute axis, but the architecture or objective needs more pressure if the target is robust hidden-state execution.</p>
+<h2>10. Limits</h2>
+<p>This is a structured experiment.</p>
+<ul>
+<li>The recurrent model uses a direct program counter.</li>
+<li>The instruction vocabulary is small and fixed.</li>
+<li>The operation family is modular arithmetic plus bucket observations.</li>
+<li>The largest completed state space has 961 pairs.</li>
+<li>Supervision is an exact sample from an exact query distribution.</li>
+<li>The belief probe is post-hoc and only measures recoverable information, not necessarily all information in the state.</li>
+</ul>
+<p>The dense model has no explicit categorical belief table, but the task itself is still synthetic and tightly controlled. The result should be read as a mechanistic signal, not as a claim about open-ended reasoning.</p>
+<h2>11. Next Tests</h2>
+<p>Useful next tests:</p>
+<ol>
+<li>Add auxiliary prefix-query losses or occasional belief distillation and measure whether the dense state becomes stable without fully supervising every example.</li>
+<li>Increase state dimension and compare whether the probe-belief bottleneck is capacity-limited or optimization-limited.</li>
+<li>Replace the GRU cell with a recurrent block that attends over the instruction sequence at each step rather than using a direct program counter.</li>
+<li>Train with randomized <code>K</code> and a monotonic refinement loss so later recurrent states are explicitly pressured to improve.</li>
+<li>Add a learned halt/no-op policy and test whether the model can choose compute budget.</li>
+</ol>
+<h2>12. Reproducibility</h2>
+<p>Primary files:</p>
+<ul>
+<li>Experiment script: <code>../src/dense_latent_query_executor_experiment.py</code></li>
+<li>Analysis script: <code>../src/analyze_dense_latent_query_executor.py</code></li>
+<li>Experiment log: <code>dense_latent_query_executor_experiment_log.md</code></li>
+<li>Results directory: <code>../runs/</code></li>
+<li>Analysis directory: <code>../analysis/</code></li>
+<li>Checkpoint manifest: <code>../checkpoint_manifest.csv</code></li>
+</ul>
+<p>Key run directories:</p>
+<ul>
+<li><code>../runs/main_dense_mod31</code></li>
+<li><code>../runs/control_static_mod31</code></li>
+<li><code>../runs/pilot_dense_mod11</code></li>
+<li><code>../runs/control_static_mod11</code></li>
+<li><code>../runs/control_shuffled_mod11</code></li>
+<li><code>../runs/smoke_dense_mod7</code></li>
+</ul>
+<p>Large checkpoint files are stored outside the experiment bundle under:</p>
+<pre><code class="language-text">../../../large_artifacts/dense_latent_query_executor/checkpoints/
+</code></pre>
+<p>Environment:</p>
+<ul>
+<li>Python 3.12.3</li>
+<li>PyTorch 2.8.0+cu128</li>
+<li>GPU: NVIDIA RTX 6000 Ada Generation</li>
+</ul>
+<h2>13. Bottom Line</h2>
+<p>The dense recurrent executor learned a real but weak latent execution strategy from sampled final query labels. The K-threshold is visible, it generalizes beyond the training length range, and it beats a full-budget static compiler. But the dense state does not become a high-fidelity belief state at modulus 31. The most defensible conclusion is that recurrent dense latent execution is learnable in this setup, but not strong enough without additional architectural or training pressure.</p>
+</main>
+</body>
+</html>

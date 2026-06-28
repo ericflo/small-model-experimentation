@@ -1,0 +1,181 @@
+{
+  "mode": "static",
+  "args": {
+    "mode": "static",
+    "seed": 22,
+    "modulus": 31,
+    "op_family": "const",
+    "train_min_len": 1,
+    "train_max_len": 8,
+    "eval_lengths": "4,8,12,16,24",
+    "eval_k": "0,1,2,4,8,12,16,24",
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "num_bases": 16,
+    "rank": 16,
+    "mem_dim": 48,
+    "dropout": 0.05,
+    "disable_memory": false,
+    "disable_dynamic": false,
+    "transition_temperature": 1.0,
+    "train_steps": 1000,
+    "batch_size": 2048,
+    "eval_batch_size": 1024,
+    "eval_examples": 2048,
+    "lr": 0.0005,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "log_every": 50,
+    "eval_every": 200,
+    "output_dir": "runs_latent_executor/static_mod31"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 3.451141834259033,
+      "pair_acc": 0.00146484375,
+      "grad_norm": 0.20159178972244263
+    },
+    {
+      "step": 50,
+      "loss": 3.272383213043213,
+      "pair_acc": 0.00341796875,
+      "grad_norm": 0.19084161520004272
+    },
+    {
+      "step": 100,
+      "loss": 3.0586633682250977,
+      "pair_acc": 0.0048828125,
+      "grad_norm": 0.16319604218006134
+    },
+    {
+      "step": 150,
+      "loss": 3.0152969360351562,
+      "pair_acc": 0.00732421875,
+      "grad_norm": 0.14472994208335876
+    },
+    {
+      "step": 200,
+      "loss": 3.019779682159424,
+      "pair_acc": 0.005859375,
+      "grad_norm": 0.14342312514781952
+    },
+    {
+      "step": 250,
+      "loss": 3.036735773086548,
+      "pair_acc": 0.005859375,
+      "grad_norm": 0.1399414837360382
+    },
+    {
+      "step": 300,
+      "loss": 3.02341890335083,
+      "pair_acc": 0.01220703125,
+      "grad_norm": 0.13166441023349762
+    },
+    {
+      "step": 350,
+      "loss": 2.992368459701538,
+      "pair_acc": 0.00927734375,
+      "grad_norm": 0.13369865715503693
+    },
+    {
+      "step": 400,
+      "loss": 3.019347906112671,
+      "pair_acc": 0.0068359375,
+      "grad_norm": 0.1516183614730835
+    }
+  ],
+  "eval": [
+    {
+      "step": 200,
+      "rows": [
+        {
+          "model": "static",
+          "length": 4,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.067626953125
+        },
+        {
+          "model": "static",
+          "length": 8,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.042236328125
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.00244140625,
+          "register_accuracy": 0.0302734375
+        },
+        {
+          "model": "static",
+          "length": 16,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03271484375
+        },
+        {
+          "model": "static",
+          "length": 24,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03173828125
+        }
+      ]
+    },
+    {
+      "step": 400,
+      "rows": [
+        {
+          "model": "static",
+          "length": 4,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.0625
+        },
+        {
+          "model": "static",
+          "length": 8,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.00048828125,
+          "register_accuracy": 0.032958984375
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.00048828125,
+          "register_accuracy": 0.0302734375
+        },
+        {
+          "model": "static",
+          "length": 16,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0322265625
+        },
+        {
+          "model": "static",
+          "length": 24,
+          "k": -1,
+          "n": 2048,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.031982421875
+        }
+      ]
+    }
+  ]
+}

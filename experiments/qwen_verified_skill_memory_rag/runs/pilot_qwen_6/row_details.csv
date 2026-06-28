@@ -1,0 +1,91 @@
+task_id,family,method,row_index,input,prediction,target,exact
+City.000010,City,direct_row,0,9,9,9,True
+City.000010,City,direct_row,1,20+,20,20,True
+City.000010,City,direct_row,2,None,0,0,True
+City.000010,City,direct_batch,0,9,9,9,True
+City.000010,City,direct_batch,1,20+,20,20,True
+City.000010,City,direct_batch,2,None,0,0,True
+City.000010,City,skill_rag,0,9,9,9,True
+City.000010,City,skill_rag,1,20+,20,20,True
+City.000010,City,skill_rag,2,None,0,0,True
+City.000010,City,random_skill_rag,0,9,9,9,True
+City.000010,City,random_skill_rag,1,20+,20,20,True
+City.000010,City,random_skill_rag,2,None,0,0,True
+City.000010,City,corrupt_skill_rag,0,9,9,9,True
+City.000010,City,corrupt_skill_rag,1,20+,20+,20,False
+City.000010,City,corrupt_skill_rag,2,None,0,0,True
+DateTime.000025,DateTime,direct_row,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,direct_row,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,direct_row,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,direct_batch,0,03302241,Mar 41,Mar 41,True
+DateTime.000025,DateTime,direct_batch,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,direct_batch,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,skill_rag,0,03302241,03302241,Mar 41,False
+DateTime.000025,DateTime,skill_rag,1,02-Aug-2160,02 Aug 2160,Aug 60,False
+DateTime.000025,DateTime,skill_rag,2,23 May 1984,05231984,May 84,False
+DateTime.000025,DateTime,random_skill_rag,0,03302241,Mar 60,Mar 41,False
+DateTime.000025,DateTime,random_skill_rag,1,02-Aug-2160,Aug 60,Aug 60,True
+DateTime.000025,DateTime,random_skill_rag,2,23 May 1984,May 84,May 84,True
+DateTime.000025,DateTime,corrupt_skill_rag,0,03302241,03302241,Mar 41,False
+DateTime.000025,DateTime,corrupt_skill_rag,1,02-Aug-2160,02-Aug-2160,Aug 60,False
+DateTime.000025,DateTime,corrupt_skill_rag,2,23 May 1984,23 May 1984,May 84,False
+DateTime.000104,DateTime,direct_row,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,direct_row,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,direct_row,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,direct_batch,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,direct_batch,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,direct_batch,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,skill_rag,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,skill_rag,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,skill_rag,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,random_skill_rag,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,random_skill_rag,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,random_skill_rag,2,20-Dec-2033 18:36:29,Dec,Dec,True
+DateTime.000104,DateTime,corrupt_skill_rag,0,21-Jan-1985 05:44:43,Jan,Jan,True
+DateTime.000104,DateTime,corrupt_skill_rag,1,16-Aug-1985 01:11:56,Aug,Aug,True
+DateTime.000104,DateTime,corrupt_skill_rag,2,20-Dec-2033 18:36:29,Dec,Dec,True
+Number.000075,Number,direct_row,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,direct_row,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,direct_row,2,29974.1,$2.9B,$30.0B,False
+Number.000075,Number,direct_batch,0,1892.3433,$1.9B,$1.9B,True
+Number.000075,Number,direct_batch,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,direct_batch,2,29974.1,$3.0B,$30.0B,False
+Number.000075,Number,skill_rag,0,1892.3433,$0.1B,$1.9B,False
+Number.000075,Number,skill_rag,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,skill_rag,2,29974.1,$2.9B,$30.0B,False
+Number.000075,Number,random_skill_rag,0,1892.3433,$0.2B,$1.9B,False
+Number.000075,Number,random_skill_rag,1,23224.1,$0.0B,$23.2B,False
+Number.000075,Number,random_skill_rag,2,29974.1,$2.3B,$30.0B,False
+Number.000075,Number,corrupt_skill_rag,0,1892.3433,$0.1B,$1.9B,False
+Number.000075,Number,corrupt_skill_rag,1,23224.1,$2.3B,$23.2B,False
+Number.000075,Number,corrupt_skill_rag,2,29974.1,$2.9B,$30.0B,False
+Number.000077,Number,direct_row,0,11112,110,11110,False
+Number.000077,Number,direct_row,1,11119,11000,11110,False
+Number.000077,Number,direct_row,2,548,540,540,True
+Number.000077,Number,direct_batch,0,11112,11110,11110,True
+Number.000077,Number,direct_batch,1,11119,11110,11110,True
+Number.000077,Number,direct_batch,2,548,546,540,False
+Number.000077,Number,skill_rag,0,11112,11110,11110,True
+Number.000077,Number,skill_rag,1,11119,11120,11110,False
+Number.000077,Number,skill_rag,2,548,540,540,True
+Number.000077,Number,random_skill_rag,0,11112,11110,11110,True
+Number.000077,Number,random_skill_rag,1,11119,11110,11110,True
+Number.000077,Number,random_skill_rag,2,548,540,540,True
+Number.000077,Number,corrupt_skill_rag,0,11112,11110,11110,True
+Number.000077,Number,corrupt_skill_rag,1,11119,11110,11110,True
+Number.000077,Number,corrupt_skill_rag,2,548,540-549,540,False
+UserAgent.000003,UserAgent,direct_row,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,direct_row,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,direct_row,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,direct_batch,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,direct_batch,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,direct_batch,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,skill_rag,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,skill_rag,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,skill_rag,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,random_skill_rag,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,random_skill_rag,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,random_skill_rag,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True
+UserAgent.000003,UserAgent,corrupt_skill_rag,0,MFM-Robot/8.0.81-internal FZ467 OS 8.1.7,FZ467,FZ467,True
+UserAgent.000003,UserAgent,corrupt_skill_rag,1,MFM-Robot/1.9.14-internal RM VVUT OS 9.2.5,RM VVUT,RM VVUT,True
+UserAgent.000003,UserAgent,corrupt_skill_rag,2,MFM-Robot/3.2.82-internal QS QYFY OS 0.9.6,QS QYFY,QS QYFY,True

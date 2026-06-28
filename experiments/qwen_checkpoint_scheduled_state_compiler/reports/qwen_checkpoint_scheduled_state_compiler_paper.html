@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Qwen Checkpoint-Selected Scheduled-State Compiler</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 980px; margin: 40px auto; padding: 0 24px; line-height: 1.55; color: #1f2933; }
+h1, h2, h3 { line-height: 1.2; color: #111827; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 14px; }
+th, td { border: 1px solid #d0d7de; padding: 6px 8px; text-align: left; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 2px 4px; border-radius: 4px; }
+pre code { display: block; padding: 12px; overflow-x: auto; }
+</style>
+</head>
+<body>
+<h1>Qwen Checkpoint-Selected Scheduled-State Compiler</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether intermediate-state supervision improves a QLoRA-adapted <code>Qwen/Qwen3-4B</code> numeric-copy compiler when the training process saves real validation checkpoints and reports the best saved checkpoint rather than the final optimizer step.</p>
+<p>Each prompt describes an initial value and a sequence of add, subtract, and multiply updates modulo 97. The model reads the prompt, copies the initial value, operation sequence, and operation arguments from token-level maps, then executes the copied program with an invisible modular-arithmetic runtime. The primary target is exact execution on length-24 programs, including paired standard/paraphrased renderings of the same latent program.</p>
+<p>The main result is positive but specific. Light intermediate-state supervision improves selected-checkpoint length-24 robustness. On a fresh held-out retest of selected checkpoints, the no-state compiler reaches 25.0% paired length-24 exact execution. Constant state loss weight 0.25 reaches 32.8%, and a full-early/light-long schedule reaches 32.2%. The full-early/light-long schedule also gives the best paired state consistency, 70.7%, versus 40.6% for the no-state compiler. In contrast, full early state loss followed by zero long-stage state loss underperforms at 19.1% paired length-24 exact execution.</p>
+<p>Checkpoint selection is essential. Every main arm's best selected checkpoint is at step 800, while the final step 900 checkpoint is worse on paired length-24 exact execution.</p>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code></li>
+<li>Loader: <code>AutoModelForCausalLM</code></li>
+<li>Quantization: 4-bit NF4</li>
+<li>Trainable update: LoRA rank 8, alpha 16, dropout 0.05, target <code>all-linear</code></li>
+<li>Trainable LoRA parameters: 16,515,072</li>
+<li>Compiler head width: 768</li>
+<li>Task: modular arithmetic programs modulo 97</li>
+<li>Curriculum: <code>short:1:4:200</code>, <code>medium:1:8:200</code>, <code>train:1:12:200</code>, <code>long:8:24:300</code></li>
+<li>Training examples: 512 paired programs per curriculum stage, rendered as standard/paraphrase pairs</li>
+<li>Training batch size: 4</li>
+<li>Validation size during training: 64 examples per unpaired split and 64 paired programs per paired split</li>
+<li>Fresh retest size: 256 standard length-24 programs, 256 paraphrase length-24 programs, and 256 paired length-24 programs per selected checkpoint</li>
+<li>Selection metric: <code>paired_len24_executor_accuracy</code></li>
+<li>Large checkpoint root: <code>large_artifacts/qwen_checkpoint_scheduled_state_compiler/checkpoints/</code></li>
+</ul>
+<p>The compiler predicts token positions for the initial value, ordered operation slots, and ordered argument slots. Values and operations are copied from deterministic token maps. The copied program is executed exactly modulo 97. For state-supervised arms, the differentiable executor also produces a distribution over the modular state after every active operation, and training includes NLL against the true state trajectory according to the schedule being tested.</p>
+<h2>Conditions</h2>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">State-loss schedule</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main_no_state_selected_s900</code></td>
+<td style="text-align: right;">all stages 0.0</td>
+<td>Matched compiler with no intermediate-state loss.</td>
+</tr>
+<tr>
+<td><code>main_state_w025_selected_s900</code></td>
+<td style="text-align: right;">all stages 0.25</td>
+<td>Constant light state supervision.</td>
+</tr>
+<tr>
+<td><code>main_state_l12_off_long_selected_s900</code></td>
+<td style="text-align: right;">1.0 through length-12 training, 0.0 in long stage</td>
+<td>Strong early state scaffold, removed for long programs.</td>
+</tr>
+<tr>
+<td><code>main_state_l12_w025_long_selected_s900</code></td>
+<td style="text-align: right;">1.0 through length-12 training, 0.25 in long stage</td>
+<td>Strong early state scaffold, light state objective for long programs.</td>
+</tr>
+</tbody>
+</table>
+<p>All main arms use the same base model, LoRA configuration, curriculum, paired training distribution, explicit training seed, and validation splits. Each arm is launched separately so it starts from the same base model rather than inheriting weights from another condition.</p>
+<h2>Selected Checkpoints</h2>
+<p>Each validation point saves an adapter and compiler-head checkpoint. The selected checkpoint is the saved checkpoint with the highest paired length-24 exact execution on the in-training validation split.</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">Selected step</th>
+<th style="text-align: right;">Paired L24 exact</th>
+<th style="text-align: right;">Paired state consistency</th>
+<th style="text-align: right;">Standard L24 exact</th>
+<th style="text-align: right;">Paraphrase L24 exact</th>
+<th style="text-align: right;">Final paired L24 exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No state</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">27.3%</td>
+<td style="text-align: right;">43.8%</td>
+<td style="text-align: right;">35.9%</td>
+<td style="text-align: right;">12.5%</td>
+<td style="text-align: right;">15.6%</td>
+</tr>
+<tr>
+<td>State 0.25 constant</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">30.5%</td>
+<td style="text-align: right;">60.9%</td>
+<td style="text-align: right;">34.4%</td>
+<td style="text-align: right;">26.6%</td>
+<td style="text-align: right;">12.5%</td>
+</tr>
+<tr>
+<td>State 1.0 then 0.0</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">22.7%</td>
+<td style="text-align: right;">32.8%</td>
+<td style="text-align: right;">34.4%</td>
+<td style="text-align: right;">4.7%</td>
+<td style="text-align: right;">18.0%</td>
+</tr>
+<tr>
+<td>State 1.0 then 0.25</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">30.5%</td>
+<td style="text-align: right;">75.0%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">21.9%</td>
+<td style="text-align: right;">15.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The selected-checkpoint table shows two things. First, light state loss improves the primary validation metric. Second, the final checkpoint is not a reliable estimator of best model quality: all four arms peak before step 900 on paired length-24 exact execution.</p>
+<h2>Fresh Retest</h2>
+<p>The selected checkpoints were retested on fresh length-24 programs generated with a different seed and larger sample size.</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align: right;">Standard L24 exact</th>
+<th style="text-align: right;">Paraphrase L24 exact</th>
+<th style="text-align: right;">Paired L24 exact</th>
+<th style="text-align: right;">Paired state consistency</th>
+<th style="text-align: right;">Paired both-correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No state</td>
+<td style="text-align: right;">32.0%</td>
+<td style="text-align: right;">19.5%</td>
+<td style="text-align: right;">25.0%</td>
+<td style="text-align: right;">40.6%</td>
+<td style="text-align: right;">17.2%</td>
+</tr>
+<tr>
+<td>State 0.25 constant</td>
+<td style="text-align: right;">34.0%</td>
+<td style="text-align: right;">31.2%</td>
+<td style="text-align: right;">32.8%</td>
+<td style="text-align: right;">55.9%</td>
+<td style="text-align: right;">29.7%</td>
+</tr>
+<tr>
+<td>State 1.0 then 0.0</td>
+<td style="text-align: right;">31.2%</td>
+<td style="text-align: right;">7.4%</td>
+<td style="text-align: right;">19.1%</td>
+<td style="text-align: right;">29.3%</td>
+<td style="text-align: right;">6.2%</td>
+</tr>
+<tr>
+<td>State 1.0 then 0.25</td>
+<td style="text-align: right;">34.0%</td>
+<td style="text-align: right;">28.1%</td>
+<td style="text-align: right;">32.2%</td>
+<td style="text-align: right;">70.7%</td>
+<td style="text-align: right;">30.1%</td>
+</tr>
+</tbody>
+</table>
+<p>The fresh retest confirms that the selected-checkpoint improvement is not just a validation-set artifact. Constant light state loss gives the highest fresh paired exact execution, 32.8%. The full-early/light-long schedule is nearly tied on exact execution at 32.2% and gives the strongest representation-level result, with 70.7% paired state consistency.</p>
+<p>The full-early/off-long schedule is worse than the no-state control. That result argues against treating strong state loss as a pure early scaffold that should simply be removed for long programs. Some light long-stage state pressure appears useful.</p>
+<h2>Interpretation</h2>
+<p>The experiment supports three claims.</p>
+<p>First, checkpoint selection is a real experimental requirement for this training setup. The best saved checkpoints occur at step 800, not the final step. Reporting only final checkpoints would reverse or obscure the main result.</p>
+<p>Second, intermediate-state supervision helps when it is light enough. Constant weight 0.25 is the best exact-execution arm on the fresh paired retest. The full-early/light-long schedule is the best state-consistency arm and is nearly tied on exact execution. Both outperform the no-state compiler on fresh paired length-24 exact execution.</p>
+<p>Third, strong state supervision is not automatically better. Full early state loss followed by zero long-stage state loss underperforms on paired exact execution, paraphrase exact execution, and paired state consistency. The state target is useful as a bias, but too much or poorly scheduled pressure can steer the compiler toward brittle slot/state behavior.</p>
+<p>The absolute accuracy remains modest. The best fresh paired length-24 exact execution is 32.8%, so the compiler is still limited by compounding slot and argument errors. The improvement is nevertheless meaningful because it appears on the hardest paired/paraphrased target and survives a fresh retest.</p>
+<h2>Limitations</h2>
+<ul>
+<li>Single main seed.</li>
+<li>Synthetic arithmetic task.</li>
+<li>The selected checkpoint is chosen on a validation split that is evaluated repeatedly during training; the fresh retest mitigates but does not replace multi-seed confirmation.</li>
+<li>The method improves a structured compiler interface, not the base model's unconstrained generation.</li>
+<li>The fresh retest evaluates selected checkpoints only, not every saved checkpoint on fresh data.</li>
+</ul>
+<h2>Next Experiment</h2>
+<p>The next experiment should replicate the two best arms with multiple seeds and one training-policy change: reduce or anneal the long-stage learning rate after step 800, or stop long-stage training at the selected checkpoint. The current result shows that useful models are being produced and then degraded. The most direct next question is whether the degradation is an optimizer schedule problem rather than an architecture or objective problem.</p>
+<h2>Artifacts</h2>
+<p>Small files:</p>
+<ul>
+<li>Source: <code>experiments/qwen_checkpoint_scheduled_state_compiler/src/</code></li>
+<li>Runs: <code>experiments/qwen_checkpoint_scheduled_state_compiler/runs/</code></li>
+<li>Analysis: <code>experiments/qwen_checkpoint_scheduled_state_compiler/analysis/</code></li>
+<li>Report: <code>experiments/qwen_checkpoint_scheduled_state_compiler/reports/qwen_checkpoint_scheduled_state_compiler_paper.md</code></li>
+<li>Experiment log: <code>experiments/qwen_checkpoint_scheduled_state_compiler/reports/qwen_checkpoint_scheduled_state_compiler_experiment_log.md</code></li>
+<li>Manifest: <code>experiments/qwen_checkpoint_scheduled_state_compiler/checkpoint_manifest.csv</code></li>
+</ul>
+<p>Large files:</p>
+<ul>
+<li>Checkpoints: <code>large_artifacts/qwen_checkpoint_scheduled_state_compiler/checkpoints/</code></li>
+</ul>
+</body>
+</html>

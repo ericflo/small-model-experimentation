@@ -1,0 +1,33 @@
+task_id,family,method,row_exact,full_task_exact,parse_ok,raw
+BillingCode.000002,BillingCode,direct_batch,0.0,False,True,"[""CPT-115"",""CPT-1153622"",""CPT-00340"",""CPT-11536"",""CPT-11222"",""CPT-115""]"
+City.000011,City,direct_batch,0.3333333333333333,False,True,"[""New York City"", ""New York City"", ""New York City""]"
+Currency.000004,Currency,direct_batch,1.0,True,True,"[""�"", ""$"", ""�"", ""$"", ""�"", ""�""]"
+DateTime.000012,DateTime,direct_batch,0.6666666666666666,False,True,"[""2033"","""",""1784"",""2130"","""",""2088""]"
+DateTime.000035,DateTime,direct_batch,1.0,True,True,"[""2002-09-12 16:15:08"", ""2002-09-12 23:48:20"", ""2002-09-12 22:24:59"", ""2002-09-12 04:29:27"", ""2002-09-12 15:25:29"", ""2002-09-12 08:14:07""]"
+DateTime.000077,DateTime,direct_batch,0.8333333333333334,False,True,"[""10:00-29:00"", ""40:00-59:00"", ""20:00-39:00"", ""20:00-39:00"", ""20:00-39:00"", ""0:00-19:00""]"
+DateTime.000083,DateTime,direct_batch,0.0,False,True,"[
+  ""Sat 4:15 PM"",
+  ""Thu 11:48 PM"",
+  ""Wed 10:24 PM"",
+  ""Fri 4:29 AM"",
+  ""Sat 3:25 PM"",
+  ""Wed 8:14 AM""
+]"
+DateTime.000088,DateTime,direct_batch,0.0,False,True,"[""4:15PM"", ""11:48PM"", ""10:24PM"", ""4:29AM"", ""3:25PM"", ""8:14AM""]"
+DateTime.000094,DateTime,direct_batch,1.0,True,True,"[""2006-02-21"", ""1997-12-19"", ""2004-09-30"", ""1967-05-18""]"
+DateTime.000098,DateTime,direct_batch,1.0,True,True,"[""September"", ""July"", ""June"", ""May"", ""October"", ""November""]"
+Email.000013,Email,direct_batch,1.0,True,True,"[""relecloud.com"", ""proseware.com"", ""treyresearch.net"", ""bellowscollege.com"", ""treyresearch.net"", ""contososuites.com""]"
+FilePath.000001,FilePath,direct_batch,1.0,True,True,"[""enim0"", ""enim3"", ""enim0"", ""enim6"", ""enim0"", ""enim4""]"
+Name.000013,Name,direct_batch,1.0,True,True,"[""C"", ""M"", ""R"", ""S"", ""O"", ""D""]"
+Name.000026,Name,direct_batch,1.0,True,True,"[""cs"", ""mz"", ""rb"", ""sb"", ""oa"", ""ds""]"
+Name.000028,Name,direct_batch,1.0,True,True,"[""Rodel"", ""Jan"", ""Antonia"", ""Barbara"", ""Meena"", ""Afonso""]"
+Number.000044,Number,direct_batch,1.0,True,True,"[""1015"",""2010"",""1002"",""1425"",""2345"",""1247""]"
+Number.000048,Number,direct_batch,1.0,True,True,"[""97.0"", ""75.0"", ""100.0"", ""79.0""]"
+Number.000074,Number,direct_batch,0.3333333333333333,False,True,"[""1202343.3"", ""-2322410"", ""2322410"", ""0"", ""010"", ""-010""]"
+Number.000075,Number,direct_batch,0.5,False,True,"[""$1.9B"", ""$23.2B"", ""$30.0B"", ""$0.0"", ""$0.0"", ""$0.0""]"
+Number.000081,Number,direct_batch,0.6666666666666666,False,True,"[""76-100"", ""26-50"", ""16-30"", ""1-5"", ""76-100"", ""26-50""]"
+Number.000088,Number,direct_batch,1.0,True,True,"[""000-26-4391"", ""000-08-9259"", ""000-60-1806"", ""000-73-7962"", ""000-68-8231"", ""000-52-8290""]"
+Number.000093,Number,direct_batch,0.6666666666666666,False,True,"[""04759"", ""10029"", ""7204""]"
+Phone.000005,Phone,direct_batch,1.0,True,True,"[""878-6628"", ""467-8177"", ""887-7925"", ""669-2909"", ""165-2603"", ""525-5024""]"
+Phone.000017,Phone,direct_batch,1.0,True,True,"[""518-655-6930"", ""181-857-5390"", ""633-296-0991"", ""510-563-8375"", ""760-549-1126"", ""634-729-5892""]"
+Rating.000001,Rating,direct_batch,1.0,True,True,"[""0"", ""0"", ""10"", ""7"", ""5"", ""5""]"

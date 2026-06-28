@@ -1,0 +1,42 @@
+{
+  "examples_per_task_mean": 4.066666666666666,
+  "max_per_task": 8,
+  "max_per_task_strategy": 2,
+  "mode": "shuffled",
+  "out": "data/main_strategy_shuffled_sft.jsonl",
+  "records_in": "data/main_train_k16_records.jsonl",
+  "rows": 244,
+  "semantic_strategy_counts": {
+    "COMPREHENSION": 28,
+    "DIRECT": 34,
+    "LOOP": 45,
+    "MATH": 19,
+    "RECURSION": 73,
+    "SET_DICT": 8,
+    "SORTING": 8,
+    "STRING_REGEX": 29
+  },
+  "source_records": 80,
+  "strategy_keys": [
+    "DIRECT",
+    "LOOP",
+    "COMPREHENSION",
+    "SORTING",
+    "SET_DICT",
+    "RECURSION",
+    "STRING_REGEX",
+    "MATH"
+  ],
+  "tasks_used": 60,
+  "tasks_with_correct": 60,
+  "train_strategy_counts": {
+    "COMPREHENSION": 36,
+    "DIRECT": 28,
+    "LOOP": 23,
+    "MATH": 31,
+    "RECURSION": 32,
+    "SET_DICT": 21,
+    "SORTING": 43,
+    "STRING_REGEX": 30
+  }
+}

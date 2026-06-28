@@ -1,0 +1,16 @@
+stage,split,n,max_steps,executor_accuracy,executor_target_mass,direct_accuracy,init_accuracy,op_accuracy,arg_accuracy,program_exact,state_accuracy,state_all_exact,state_prefix_fraction,state_mean_correct_prefix,run,arm,global_step,stage_idx,executor_pair_answer_consistency,executor_pair_both_correct,compiler_pair_program_consistency,compiler_pair_state_consistency
+stage1_max24,standard_L8,8,24,0.0,0.010305116884410381,nan,0.125,0.265625,0.03125,0.0,0.015625,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,paraphrase_L8,8,24,0.0,0.01030401373282075,nan,0.0,0.3125,0.0625,0.0,0.015625,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,heldout_L8,8,24,0.0,0.010304049123078585,nan,0.375,0.296875,0.046875,0.0,0.0,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,paired_L8,8,24,0.0,0.01030694181099534,nan,0.25,0.28125,0.0,0.0,0.0,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,0.25,0.0,0.25,0.25
+stage1_max24,paired_heldout_L8,8,24,0.0,0.010303620249032974,nan,0.5,0.359375,0.0,0.0,0.0,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,0.25,0.0,0.25,0.25
+stage1_max24,standard_L16,8,24,0.0,0.010302577633410692,nan,0.25,0.3203125,0.0390625,0.0,0.0,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,paraphrase_L16,8,24,0.0,0.010305809788405895,nan,0.25,0.4453125,0.0234375,0.0,0.015625,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,heldout_L16,8,24,0.0,0.010304210241883993,nan,0.0,0.296875,0.0625,0.0,0.015625,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,paired_L16,8,24,0.0,0.010303682181984186,nan,0.0,0.34375,0.0546875,0.0,0.0078125,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,0.0,0.0,0.0,0.0
+stage1_max24,paired_heldout_L16,8,24,0.0,0.01030876999720931,nan,0.25,0.2421875,0.0234375,0.0,0.0078125,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,0.0,0.0,0.0,0.0
+stage1_max24,standard_L24,8,24,0.0,0.010304977651685476,nan,0.0,0.3333333333333333,0.0625,0.0,0.010416666666666666,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,paraphrase_L24,8,24,0.0,0.010303618852049112,nan,0.0,0.359375,0.046875,0.0,0.010416666666666666,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,heldout_L24,8,24,0.0,0.010304729454219341,nan,0.0,0.3854166666666667,0.036458333333333336,0.0,0.010416666666666666,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,,,,
+stage1_max24,paired_L24,8,24,0.0,0.010304126888513565,nan,0.0,0.2708333333333333,0.0625,0.0,0.0,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,0.0,0.0,0.0,0.0
+stage1_max24,paired_heldout_L24,8,24,0.0,0.01030305027961731,nan,0.0,0.34375,0.041666666666666664,0.0,0.0,0.0,0.0,0.0,pilot_train_to16_eval24,train_to16_eval24,75,1,0.25,0.0,0.0,0.0

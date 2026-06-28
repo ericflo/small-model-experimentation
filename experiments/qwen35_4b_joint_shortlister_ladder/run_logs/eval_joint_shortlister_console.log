@@ -1,0 +1,82 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.80it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 159.91it/s]Loading weights:  22%|██▏       | 92/426 [00:00<00:00, 375.00it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 441.07it/s]Loading weights:  48%|████▊     | 204/426 [00:00<00:00, 485.55it/s]Loading weights:  61%|██████    | 259/426 [00:00<00:00, 498.81it/s]Loading weights:  75%|███████▍  | 319/426 [00:00<00:00, 530.02it/s]Loading weights:  90%|████████▉ | 382/426 [00:00<00:00, 560.73it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 475.95it/s]
+base_model:random:   0%|          | 0/16 [00:00<?, ?it/s]base_model:random:   6%|▋         | 1/16 [00:04<01:13,  4.91s/it]base_model:random:  12%|█▎        | 2/16 [00:09<01:06,  4.73s/it]base_model:random:  19%|█▉        | 3/16 [00:14<01:00,  4.65s/it]base_model:random:  25%|██▌       | 4/16 [00:18<00:54,  4.54s/it]base_model:random:  31%|███▏      | 5/16 [00:26<01:02,  5.71s/it]base_model:random:  38%|███▊      | 6/16 [00:34<01:04,  6.44s/it]base_model:random:  44%|████▍     | 7/16 [00:41<01:02,  6.90s/it]base_model:random:  50%|█████     | 8/16 [00:49<00:57,  7.13s/it]base_model:random:  56%|█████▋    | 9/16 [01:03<01:03,  9.13s/it]base_model:random:  62%|██████▎   | 10/16 [01:16<01:03, 10.54s/it]base_model:random:  69%|██████▉   | 11/16 [01:30<00:57, 11.44s/it]base_model:random:  75%|███████▌  | 12/16 [01:43<00:48, 12.11s/it]base_model:random:  81%|████████▏ | 13/16 [02:10<00:49, 16.48s/it]base_model:random:  88%|████████▊ | 14/16 [02:36<00:38, 19.47s/it]base_model:random:  94%|█████████▍| 15/16 [03:03<00:21, 21.53s/it]base_model:random: 100%|██████████| 16/16 [03:29<00:00, 22.89s/it]base_model:random: 100%|██████████| 16/16 [03:29<00:00, 13.07s/it]
+trained_model:random:   0%|          | 0/16 [00:00<?, ?it/s]trained_model:random:   6%|▋         | 1/16 [00:05<01:20,  5.34s/it]trained_model:random:  12%|█▎        | 2/16 [00:10<01:16,  5.49s/it]trained_model:random:  19%|█▉        | 3/16 [00:16<01:11,  5.50s/it]trained_model:random:  25%|██▌       | 4/16 [00:21<01:04,  5.41s/it]trained_model:random:  31%|███▏      | 5/16 [00:31<01:15,  6.83s/it]trained_model:random:  38%|███▊      | 6/16 [00:40<01:16,  7.69s/it]trained_model:random:  44%|████▍     | 7/16 [00:49<01:14,  8.24s/it]trained_model:random:  50%|█████     | 8/16 [00:58<01:08,  8.53s/it]trained_model:random:  56%|█████▋    | 9/16 [01:15<01:16, 10.94s/it]trained_model:random:  62%|██████▎   | 10/16 [01:31<01:15, 12.51s/it]trained_model:random:  69%|██████▉   | 11/16 [01:47<01:07, 13.55s/it]trained_model:random:  75%|███████▌  | 12/16 [02:03<00:57, 14.30s/it]trained_model:random:  81%|████████▏ | 13/16 [02:34<00:58, 19.42s/it]trained_model:random:  88%|████████▊ | 14/16 [03:04<00:45, 22.81s/it]trained_model:random:  88%|████████▊ | 14/16 [03:29<00:29, 15.00s/it]
+Traceback (most recent call last):
+  File "/workspace/experiments/qwen35_4b_joint_shortlister_ladder/scripts/eval_joint_shortlister.py", line 390, in <module>
+    main()
+  File "/workspace/experiments/qwen35_4b_joint_shortlister_ladder/scripts/eval_joint_shortlister.py", line 305, in main
+    evaluate_records(
+  File "/workspace/experiments/qwen35_4b_joint_shortlister_ladder/scripts/eval_joint_shortlister.py", line 173, in evaluate_records
+    pairs = constrained_pair_beams(
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/experiments/qwen35_4b_joint_shortlister_ladder/scripts/eval_joint_shortlister.py", line 109, in constrained_pair_beams
+    output = model.generate(
+             ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/peft/peft_model.py", line 2122, in generate
+    outputs = self.base_model.generate(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/generation/utils.py", line 2584, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/generation/utils.py", line 3271, in _beam_search
+    model_outputs = self._prefill(
+                    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/generation/utils.py", line 3830, in _prefill
+    return self(**model_inputs, return_dict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/generic.py", line 907, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1665, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/generic.py", line 1036, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/output_capturing.py", line 252, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1203, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/modeling_layers.py", line 93, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 784, in forward
+    hidden_states = self.linear_attn(
+                    ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 535, in forward
+    core_attn_out, last_recurrent_state = self.chunk_gated_delta_rule(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 323, in torch_chunk_gated_delta_rule
+    core_attn_out = core_attn_out.transpose(1, 2).contiguous().to(initial_dtype)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.40 GiB. GPU 0 has a total capacity of 47.37 GiB of which 1.79 GiB is free. Including non-PyTorch memory, this process has 45.57 GiB memory in use. Of the allocated memory 35.06 GiB is allocated by PyTorch, and 10.01 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

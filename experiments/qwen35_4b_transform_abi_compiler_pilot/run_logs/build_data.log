@@ -1,0 +1,15 @@
+{
+  "candidate_count_mean_eval": 29.541666666666668,
+  "eval_depth_counts": {
+    "1": 27,
+    "2": 15,
+    "3": 6
+  },
+  "eval_domain_counts": {
+    "csv_etl": 30,
+    "date_id_irregular": 18
+  },
+  "eval_n": 48,
+  "train_n": 180,
+  "validation_n": 40
+}

@@ -1,0 +1,12 @@
+run,filename,checkpoint_path_from_experiment_root,size_bytes,size_mb
+control_marginal_mod11,checkpoint_step00300.pt,../../large_artifacts/belief_filter_executor/checkpoints/control_marginal_mod11/checkpoint_step00300.pt,136323,0.13
+control_marginal_mod31,checkpoint_step00300.pt,../../large_artifacts/belief_filter_executor/checkpoints/control_marginal_mod31/checkpoint_step00300.pt,2872003,2.74
+control_static_mod11,checkpoint_step00300.pt,../../large_artifacts/belief_filter_executor/checkpoints/control_static_mod11/checkpoint_step00300.pt,7201765,6.87
+control_static_mod31,checkpoint_step00300.pt,../../large_artifacts/belief_filter_executor/checkpoints/control_static_mod31/checkpoint_step00300.pt,12452901,11.88
+main_joint_mod31,checkpoint_step00250.pt,../../large_artifacts/belief_filter_executor/checkpoints/main_joint_mod31/checkpoint_step00250.pt,2872323,2.74
+main_joint_mod31,checkpoint_step00500.pt,../../large_artifacts/belief_filter_executor/checkpoints/main_joint_mod31/checkpoint_step00500.pt,2875971,2.74
+pilot_joint_mod11,checkpoint_step00100.pt,../../large_artifacts/belief_filter_executor/checkpoints/pilot_joint_mod11/checkpoint_step00100.pt,136131,0.13
+pilot_joint_mod11,checkpoint_step00200.pt,../../large_artifacts/belief_filter_executor/checkpoints/pilot_joint_mod11/checkpoint_step00200.pt,138435,0.13
+pilot_joint_mod11,checkpoint_step00300.pt,../../large_artifacts/belief_filter_executor/checkpoints/pilot_joint_mod11/checkpoint_step00300.pt,140803,0.13
+smoke_joint_mod7,checkpoint_step00001.pt,../../large_artifacts/belief_filter_executor/checkpoints/smoke_joint_mod7/checkpoint_step00001.pt,39043,0.04
+smoke_joint_mod7,checkpoint_step00002.pt,../../large_artifacts/belief_filter_executor/checkpoints/smoke_joint_mod7/checkpoint_step00002.pt,39747,0.04

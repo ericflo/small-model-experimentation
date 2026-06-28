@@ -1,0 +1,7751 @@
+{
+  "actions": [
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0000",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 28,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0001",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 28,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0002",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 35,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0003",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 28,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0004",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0005",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 31,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0006",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 30,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0007",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 30,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0008",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 35,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0009",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 39,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0010",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 54,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0011",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 39,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0012",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 35,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0013",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 33,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0014",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 33,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0015",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0016",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 26,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0017",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 40,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0018",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 26,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0019",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 18,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 21,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 52,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 62,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 35,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 44,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 28,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 30,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 92,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 8,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 52,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 12,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 42,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 12,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 78,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 0,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 76,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 53,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 31,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 51,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 39,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 50,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 88,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 74,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 31,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 44,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 25,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 27,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 48,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 5,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 90,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 65,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 72,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 67,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 5,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 54,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 3,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 37,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 90,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 72,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 44,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 29,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 96,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 65,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 48,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 95,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 32,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 30,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 3,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 55,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 82,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0000",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 52,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0001",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 57,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0002",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 31,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0002",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 29,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0003",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 49,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0004",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 87,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0005",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0006",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 28,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0007",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 26,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0008",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 26,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0009",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0010",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 24,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0011",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0012",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 57,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0013",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 70,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0014",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 27,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0015",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 11,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0016",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 32,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0016",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 24,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0017",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 78,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0018",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 31,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0019",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 96,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 9,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 12,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 92,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 40,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 78,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 75,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 46,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 28,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 70,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 51,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 94,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 26,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 3,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 14,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 7,
+      "candidate_count": 76,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 95,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 67,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 50,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 61,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 47,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 65,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 62,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 55,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 51,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 21,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 74,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 45,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 14,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 33,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 29,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 7,
+      "candidate_count": 87,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 25,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 92,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 49,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 79,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 76,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 66,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 93,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 46,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 94,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 95,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 27,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 62,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 42,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 81,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 10,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 15,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 77,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 83,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 4,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 59,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 44,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 75,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 56,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 8,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 17,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 46,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 58,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 38,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 15,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 33,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 32,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 12,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 6,
+      "candidate_count": 64,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 54,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 51,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 86,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 32,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 43,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 92,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 32,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 45,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 24,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 97,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 66,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 43,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 88,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 61,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 52,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0000",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 35,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0001",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 32,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0002",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 21,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0003",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 11,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0003",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 24,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0004",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 37,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0005",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 74,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0006",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 62,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0007",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 48,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0008",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 22,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0008",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 27,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0009",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0010",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 30,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0011",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 27,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0012",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 79,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0013",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 95,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0014",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 14,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0014",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0015",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 38,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0016",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 98,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0017",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 77,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0018",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 26,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0019",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 27,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0019",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 11,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 42,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 50,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 25,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 54,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 48,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 68,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 26,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 54,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 89,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 4,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 72,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 16,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 1,
+      "candidate_count": 85,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 80,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 95,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 44,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 9,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 85,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 59,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 78,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 69,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 75,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 86,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 16,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 31,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 85,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 33,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 79,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 18,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 7,
+      "chosen_query_index": 26,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 8,
+      "chosen_query_index": 76,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 9,
+      "chosen_query_index": 39,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 40,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 46,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 33,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 40,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 24,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 20,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 72,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 65,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 46,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 69,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 20,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 70,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 54,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 25,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 42,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 92,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 26,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 90,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 86,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 9,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 7,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 72,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 88,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 71,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 28,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 36,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 20,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 8,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 22,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 67,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 26,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 46,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 36,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 6,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 97,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 10,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 93,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 87,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 32,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 47,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 64,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 4,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 63,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 83,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 80,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 15,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 2,
+      "candidate_count": 69,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 24,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 16,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 34,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 4,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 2,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 27,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 72,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 13,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 69,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 35,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 10,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 36,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 53,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0000",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 24,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0001",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 41,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0002",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 29,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0003",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 26,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0004",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 64,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0005",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 57,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0006",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 37,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0007",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 27,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0008",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 24,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0009",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 24,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0010",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0011",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 33,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0012",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 54,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0013",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 43,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0014",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 25,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0015",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 69,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0016",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 28,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0017",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 55,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0018",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "A",
+      "budget": 0,
+      "candidate_count": 30,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0019",
+      "template": "pair_affine_mod"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 38,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 70,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 80,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 29,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 35,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 76,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0000",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 57,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 63,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 78,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 66,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 93,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 69,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0001",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 66,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 23,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 84,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 0,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 67,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 99,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0002",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 57,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 5,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 83,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 61,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 81,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 62,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 7,
+      "candidate_count": 87,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 30,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 46,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 14,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 79,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 72,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 39,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 7,
+      "chosen_query_index": 63,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 8,
+      "chosen_query_index": 74,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 9,
+      "chosen_query_index": 34,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 44,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 92,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 10,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 11,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 64,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 95,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 7,
+      "chosen_query_index": 3,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 8,
+      "chosen_query_index": 15,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 9,
+      "chosen_query_index": 88,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 22,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 78,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 86,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 62,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 40,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 11,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 6,
+      "candidate_count": 44,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 93,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 51,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 62,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 40,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 15,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 75,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 84,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 7,
+      "chosen_query_index": 25,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 8,
+      "chosen_query_index": 95,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 9,
+      "candidate_count": 82,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 65,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 87,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 40,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 18,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 84,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 91,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 7,
+      "chosen_query_index": 62,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 8,
+      "chosen_query_index": 39,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 9,
+      "chosen_query_index": 94,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 7,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 12,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 70,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 33,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 41,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 83,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 6,
+      "candidate_count": 37,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 74,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 76,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 92,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 91,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 68,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0010",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 62,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 31,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 69,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 50,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 6,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 54,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 7,
+      "chosen_query_index": 92,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 8,
+      "chosen_query_index": 72,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 9,
+      "chosen_query_index": 53,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 56,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 10,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 15,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 22,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 4,
+      "candidate_count": 31,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 20,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 25,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 69,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 52,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0013",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 80,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 57,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 58,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 35,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 84,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 23,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0014",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 44,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 28,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 42,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 52,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 19,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 51,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 67,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 7,
+      "candidate_count": 58,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 30,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 15,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 28,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 34,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 61,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 54,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0016",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 66,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 21,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 80,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 3,
+      "candidate_count": 49,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0017",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 22,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 65,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 83,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 46,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 10,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "A",
+      "budget": 5,
+      "candidate_count": 38,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0018",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 0,
+      "chosen_query_index": 57,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 1,
+      "chosen_query_index": 32,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 2,
+      "chosen_query_index": 28,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 3,
+      "chosen_query_index": 48,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 4,
+      "chosen_query_index": 16,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 5,
+      "chosen_query_index": 45,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 6,
+      "chosen_query_index": 17,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 7,
+      "chosen_query_index": 63,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 8,
+      "chosen_query_index": 83,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    },
+    {
+      "action": "B",
+      "budget": 9,
+      "chosen_query_index": 51,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "template": "pair_compare_gate"
+    }
+  ],
+  "fixed_budget": 3,
+  "max_budget": 10,
+  "name": "threshold_100",
+  "policy": "threshold",
+  "records": [
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        31
+      ],
+      "target_pair": [
+        49,
+        46
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 28,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        60
+      ],
+      "target_pair": [
+        60,
+        63
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 28,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0002",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        16,
+        53
+      ],
+      "target_pair": [
+        63,
+        37
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 35,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0003",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        5,
+        57
+      ],
+      "target_pair": [
+        13,
+        58
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 28,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0004",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        45,
+        50
+      ],
+      "target_pair": [
+        58,
+        61
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0005",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        45,
+        59
+      ],
+      "target_pair": [
+        60,
+        47
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 31,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        27,
+        23
+      ],
+      "target_pair": [
+        44,
+        58
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 30,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        18,
+        61
+      ],
+      "target_pair": [
+        27,
+        58
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 30,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        46,
+        4
+      ],
+      "target_pair": [
+        47,
+        17
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 35,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        60
+      ],
+      "target_pair": [
+        56,
+        28
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 39,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0010",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        59
+      ],
+      "target_pair": [
+        45,
+        57
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 54,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        9
+      ],
+      "target_pair": [
+        51,
+        12
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 39,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        9,
+        49
+      ],
+      "target_pair": [
+        58,
+        55
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 35,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        9,
+        25
+      ],
+      "target_pair": [
+        30,
+        50
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 33,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        36,
+        39
+      ],
+      "target_pair": [
+        61,
+        53
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 33,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0015",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        24,
+        61
+      ],
+      "target_pair": [
+        40,
+        52
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0016",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        45,
+        35
+      ],
+      "target_pair": [
+        45,
+        35
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 26,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0017",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        45,
+        59
+      ],
+      "target_pair": [
+        57,
+        51
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 40,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        12,
+        60
+      ],
+      "target_pair": [
+        44,
+        62
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 26,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_affine_mod_0019",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        11,
+        52
+      ],
+      "target_pair": [
+        45,
+        47
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 62,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        11
+      ],
+      "target_pair": [
+        20,
+        63
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        18,
+        21,
+        52
+      ]
+    },
+    {
+      "candidate_count": 30,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        9,
+        20
+      ],
+      "target_pair": [
+        26,
+        48
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        35,
+        44,
+        28
+      ]
+    },
+    {
+      "candidate_count": 52,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0002",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        10,
+        16
+      ],
+      "target_pair": [
+        55,
+        37
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        92,
+        8
+      ]
+    },
+    {
+      "candidate_count": 42,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0003",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        20
+      ],
+      "target_pair": [
+        50,
+        53
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        12
+      ]
+    },
+    {
+      "candidate_count": 78,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0004",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        40
+      ],
+      "target_pair": [
+        61,
+        51
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        12
+      ]
+    },
+    {
+      "candidate_count": 53,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0005",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        2,
+        2
+      ],
+      "target_pair": [
+        56,
+        19
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        0,
+        76
+      ]
+    },
+    {
+      "candidate_count": 50,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        12,
+        28
+      ],
+      "target_pair": [
+        23,
+        62
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        31,
+        51,
+        39
+      ]
+    },
+    {
+      "candidate_count": 74,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        1,
+        38
+      ],
+      "target_pair": [
+        32,
+        49
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        88
+      ]
+    },
+    {
+      "candidate_count": 44,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        7,
+        5
+      ],
+      "target_pair": [
+        56,
+        33
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        31
+      ]
+    },
+    {
+      "candidate_count": 48,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        10
+      ],
+      "target_pair": [
+        32,
+        29
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        25,
+        27
+      ]
+    },
+    {
+      "candidate_count": 90,
+      "hidden_equivalent_candidates": 4,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0010",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        10,
+        50
+      ],
+      "target_pair": [
+        18,
+        28
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        5
+      ]
+    },
+    {
+      "candidate_count": 72,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        8
+      ],
+      "target_pair": [
+        27,
+        54
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        65
+      ]
+    },
+    {
+      "candidate_count": 54,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        35,
+        40
+      ],
+      "target_pair": [
+        61,
+        50
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        67,
+        5
+      ]
+    },
+    {
+      "candidate_count": 37,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        21,
+        16
+      ],
+      "target_pair": [
+        31,
+        21
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        3
+      ]
+    },
+    {
+      "candidate_count": 72,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        6,
+        2
+      ],
+      "target_pair": [
+        37,
+        0
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        90
+      ]
+    },
+    {
+      "candidate_count": 29,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0015",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        6,
+        11
+      ],
+      "target_pair": [
+        54,
+        49
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        44
+      ]
+    },
+    {
+      "candidate_count": 96,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0016",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        1,
+        2
+      ],
+      "target_pair": [
+        11,
+        2
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 48,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0017",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        6,
+        7
+      ],
+      "target_pair": [
+        32,
+        6
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        65
+      ]
+    },
+    {
+      "candidate_count": 30,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        4,
+        3
+      ],
+      "target_pair": [
+        22,
+        44
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        95,
+        32
+      ]
+    },
+    {
+      "candidate_count": 82,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "record_id": "eval_n64_pair_compare_gate_0019",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        11,
+        3
+      ],
+      "target_pair": [
+        50,
+        40
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        3,
+        55
+      ]
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        30,
+        24
+      ],
+      "target_pair": [
+        80,
+        94
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 52,
+      "hidden_equivalent_candidates": 19,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        33,
+        64
+      ],
+      "target_pair": [
+        80,
+        62
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 31,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0002",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        19,
+        89
+      ],
+      "target_pair": [
+        71,
+        47
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 1,
+      "used_query_indices": [
+        57
+      ]
+    },
+    {
+      "candidate_count": 29,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0003",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        82,
+        53
+      ],
+      "target_pair": [
+        85,
+        45
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 49,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0004",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        11
+      ],
+      "target_pair": [
+        96,
+        3
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 87,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0005",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        25,
+        50
+      ],
+      "target_pair": [
+        93,
+        60
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        62,
+        92
+      ],
+      "target_pair": [
+        74,
+        47
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 28,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        48,
+        58
+      ],
+      "target_pair": [
+        49,
+        62
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 26,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        82,
+        45
+      ],
+      "target_pair": [
+        89,
+        70
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 26,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        81,
+        68
+      ],
+      "target_pair": [
+        82,
+        62
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0010",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        84,
+        46
+      ],
+      "target_pair": [
+        87,
+        79
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 24,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        104,
+        97
+      ],
+      "target_pair": [
+        105,
+        91
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        69,
+        33
+      ],
+      "target_pair": [
+        72,
+        32
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 57,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        21,
+        77
+      ],
+      "target_pair": [
+        82,
+        77
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 70,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        28,
+        54
+      ],
+      "target_pair": [
+        54,
+        46
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 27,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0015",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        35,
+        60
+      ],
+      "target_pair": [
+        91,
+        61
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 32,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0016",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        62,
+        66
+      ],
+      "target_pair": [
+        100,
+        71
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 1,
+      "used_query_indices": [
+        11
+      ]
+    },
+    {
+      "candidate_count": 24,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0017",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        5,
+        101
+      ],
+      "target_pair": [
+        97,
+        100
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 78,
+      "hidden_equivalent_candidates": 18,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        43,
+        2
+      ],
+      "target_pair": [
+        56,
+        56
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 31,
+      "hidden_equivalent_candidates": 23,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_affine_mod_0019",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        52,
+        94
+      ],
+      "target_pair": [
+        95,
+        98
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 96,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        7,
+        4
+      ],
+      "target_pair": [
+        62,
+        18
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 40,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        55
+      ],
+      "target_pair": [
+        70,
+        59
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        9,
+        12,
+        92
+      ]
+    },
+    {
+      "candidate_count": 46,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0002",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        94,
+        10
+      ],
+      "target_pair": [
+        94,
+        31
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        78,
+        75
+      ]
+    },
+    {
+      "candidate_count": 76,
+      "hidden_equivalent_candidates": 9,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0003",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        36
+      ],
+      "target_pair": [
+        116,
+        82
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 7,
+      "used_query_indices": [
+        28,
+        70,
+        51,
+        94,
+        26,
+        3,
+        14
+      ]
+    },
+    {
+      "candidate_count": 47,
+      "hidden_equivalent_candidates": 5,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0004",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        19,
+        24
+      ],
+      "target_pair": [
+        68,
+        93
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        95,
+        67,
+        50,
+        61
+      ]
+    },
+    {
+      "candidate_count": 55,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0005",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        9,
+        27
+      ],
+      "target_pair": [
+        122,
+        27
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        65,
+        62
+      ]
+    },
+    {
+      "candidate_count": 87,
+      "hidden_equivalent_candidates": 26,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        0
+      ],
+      "target_pair": [
+        84,
+        109
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 7,
+      "used_query_indices": [
+        51,
+        21,
+        74,
+        45,
+        14,
+        33,
+        29
+      ]
+    },
+    {
+      "candidate_count": 49,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        26,
+        8
+      ],
+      "target_pair": [
+        99,
+        95
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        25,
+        92
+      ]
+    },
+    {
+      "candidate_count": 76,
+      "hidden_equivalent_candidates": 3,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        50
+      ],
+      "target_pair": [
+        114,
+        99
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        79
+      ]
+    },
+    {
+      "candidate_count": 95,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        104
+      ],
+      "target_pair": [
+        31,
+        125
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        66,
+        93,
+        46,
+        94
+      ]
+    },
+    {
+      "candidate_count": 42,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0010",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        2,
+        57
+      ],
+      "target_pair": [
+        3,
+        83
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        27,
+        62
+      ]
+    },
+    {
+      "candidate_count": 83,
+      "hidden_equivalent_candidates": 6,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        8,
+        110
+      ],
+      "target_pair": [
+        95,
+        2
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        81,
+        10,
+        15,
+        77
+      ]
+    },
+    {
+      "candidate_count": 59,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        1,
+        116
+      ],
+      "target_pair": [
+        103,
+        93
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        4
+      ]
+    },
+    {
+      "candidate_count": 75,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        8,
+        34
+      ],
+      "target_pair": [
+        9,
+        64
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        44
+      ]
+    },
+    {
+      "candidate_count": 46,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        8,
+        3
+      ],
+      "target_pair": [
+        54,
+        3
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        56,
+        8,
+        17
+      ]
+    },
+    {
+      "candidate_count": 64,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0015",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        118
+      ],
+      "target_pair": [
+        65,
+        18
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 6,
+      "used_query_indices": [
+        58,
+        38,
+        15,
+        33,
+        32,
+        12
+      ]
+    },
+    {
+      "candidate_count": 86,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0016",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        2,
+        1
+      ],
+      "target_pair": [
+        66,
+        69
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        54,
+        51
+      ]
+    },
+    {
+      "candidate_count": 92,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0017",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        1,
+        121
+      ],
+      "target_pair": [
+        33,
+        72
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        32,
+        43
+      ]
+    },
+    {
+      "candidate_count": 97,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        18,
+        125
+      ],
+      "target_pair": [
+        49,
+        125
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        32,
+        45,
+        24
+      ]
+    },
+    {
+      "candidate_count": 61,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "record_id": "eval_n128_pair_compare_gate_0019",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        2,
+        108
+      ],
+      "target_pair": [
+        62,
+        45
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        66,
+        43,
+        88
+      ]
+    },
+    {
+      "candidate_count": 52,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        23
+      ],
+      "target_pair": [
+        45,
+        84
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 35,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        62,
+        92
+      ],
+      "target_pair": [
+        67,
+        63
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 32,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0002",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        25,
+        196
+      ],
+      "target_pair": [
+        46,
+        83
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 11,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0003",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        8,
+        103
+      ],
+      "target_pair": [
+        8,
+        103
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 1,
+      "used_query_indices": [
+        21
+      ]
+    },
+    {
+      "candidate_count": 24,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0004",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        38,
+        101
+      ],
+      "target_pair": [
+        38,
+        101
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 37,
+      "hidden_equivalent_candidates": 23,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0005",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        50,
+        100
+      ],
+      "target_pair": [
+        90,
+        102
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 74,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        3
+      ],
+      "target_pair": [
+        75,
+        61
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 62,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        48,
+        10
+      ],
+      "target_pair": [
+        99,
+        43
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 22,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        54,
+        25
+      ],
+      "target_pair": [
+        75,
+        42
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 1,
+      "used_query_indices": [
+        48
+      ]
+    },
+    {
+      "candidate_count": 27,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        77
+      ],
+      "target_pair": [
+        60,
+        73
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0010",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        58,
+        18
+      ],
+      "target_pair": [
+        63,
+        49
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 30,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        53,
+        76
+      ],
+      "target_pair": [
+        99,
+        45
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 27,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        41,
+        39
+      ],
+      "target_pair": [
+        87,
+        102
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 79,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        57,
+        80
+      ],
+      "target_pair": [
+        101,
+        49
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 14,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        39,
+        79
+      ],
+      "target_pair": [
+        44,
+        73
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 1,
+      "used_query_indices": [
+        95
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0015",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        191,
+        190
+      ],
+      "target_pair": [
+        191,
+        190
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 38,
+      "hidden_equivalent_candidates": 19,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0016",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        62,
+        69
+      ],
+      "target_pair": [
+        73,
+        72
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 98,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0017",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        26,
+        61
+      ],
+      "target_pair": [
+        56,
+        66
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 77,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        6,
+        81
+      ],
+      "target_pair": [
+        86,
+        83
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 27,
+      "hidden_equivalent_candidates": 17,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_affine_mod_0019",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        45,
+        54
+      ],
+      "target_pair": [
+        59,
+        47
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 1,
+      "used_query_indices": [
+        26
+      ]
+    },
+    {
+      "candidate_count": 50,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        4,
+        138
+      ],
+      "target_pair": [
+        225,
+        253
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        11,
+        42
+      ]
+    },
+    {
+      "candidate_count": 54,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        1,
+        111
+      ],
+      "target_pair": [
+        205,
+        133
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        25
+      ]
+    },
+    {
+      "candidate_count": 54,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0002",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        7,
+        20
+      ],
+      "target_pair": [
+        190,
+        208
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        48,
+        68,
+        26
+      ]
+    },
+    {
+      "candidate_count": 72,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0003",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        25,
+        1
+      ],
+      "target_pair": [
+        43,
+        49
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        89,
+        4
+      ]
+    },
+    {
+      "candidate_count": 85,
+      "hidden_equivalent_candidates": 3,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0004",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        1,
+        3
+      ],
+      "target_pair": [
+        75,
+        67
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 1,
+      "used_query_indices": [
+        16
+      ]
+    },
+    {
+      "candidate_count": 59,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0005",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        12,
+        239
+      ],
+      "target_pair": [
+        30,
+        232
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        80,
+        95,
+        44,
+        9,
+        85
+      ]
+    },
+    {
+      "candidate_count": 75,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        4,
+        185
+      ],
+      "target_pair": [
+        138,
+        39
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        78,
+        69
+      ]
+    },
+    {
+      "candidate_count": 1841,
+      "hidden_equivalent_candidates": 18,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        18
+      ],
+      "target_pair": [
+        111,
+        90
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 10,
+      "used_query_indices": [
+        86,
+        16,
+        31,
+        85,
+        33,
+        79,
+        18,
+        26,
+        76,
+        39
+      ]
+    },
+    {
+      "candidate_count": 33,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        194
+      ],
+      "target_pair": [
+        59,
+        195
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        40,
+        46
+      ]
+    },
+    {
+      "candidate_count": 65,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        33,
+        192
+      ],
+      "target_pair": [
+        97,
+        219
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        40,
+        24,
+        20,
+        72
+      ]
+    },
+    {
+      "candidate_count": 54,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0010",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        23,
+        13
+      ],
+      "target_pair": [
+        23,
+        13
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        46,
+        69,
+        20,
+        70
+      ]
+    },
+    {
+      "candidate_count": 90,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        158
+      ],
+      "target_pair": [
+        139,
+        158
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        25,
+        42,
+        92,
+        26
+      ]
+    },
+    {
+      "candidate_count": 71,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        127,
+        114
+      ],
+      "target_pair": [
+        248,
+        48
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        86,
+        9,
+        7,
+        72,
+        88
+      ]
+    },
+    {
+      "candidate_count": 67,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        18,
+        135
+      ],
+      "target_pair": [
+        83,
+        170
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        28,
+        36,
+        20,
+        8,
+        22
+      ]
+    },
+    {
+      "candidate_count": 97,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        42
+      ],
+      "target_pair": [
+        126,
+        238
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        26,
+        46,
+        36,
+        6
+      ]
+    },
+    {
+      "candidate_count": 47,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0015",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        226
+      ],
+      "target_pair": [
+        196,
+        189
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        10,
+        93,
+        87,
+        32
+      ]
+    },
+    {
+      "candidate_count": 83,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0016",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        8,
+        153
+      ],
+      "target_pair": [
+        143,
+        188
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        64,
+        4,
+        63
+      ]
+    },
+    {
+      "candidate_count": 69,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0017",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        9
+      ],
+      "target_pair": [
+        35,
+        128
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 2,
+      "used_query_indices": [
+        80,
+        15
+      ]
+    },
+    {
+      "candidate_count": 27,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        5,
+        87
+      ],
+      "target_pair": [
+        51,
+        87
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        24,
+        16,
+        34,
+        4,
+        2
+      ]
+    },
+    {
+      "candidate_count": 36,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "record_id": "eval_n256_pair_compare_gate_0019",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        10,
+        135
+      ],
+      "target_pair": [
+        199,
+        153
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        72,
+        13,
+        69,
+        35,
+        10
+      ]
+    },
+    {
+      "candidate_count": 53,
+      "hidden_equivalent_candidates": 7,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        277,
+        155
+      ],
+      "target_pair": [
+        401,
+        90
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 24,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        13,
+        264
+      ],
+      "target_pair": [
+        289,
+        356
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 41,
+      "hidden_equivalent_candidates": 3,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0002",
+      "selected_hidden_all": true,
+      "selected_pair": [
+        63,
+        302
+      ],
+      "target_pair": [
+        63,
+        302
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 29,
+      "hidden_equivalent_candidates": 26,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0003",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        162,
+        438
+      ],
+      "target_pair": [
+        323,
+        372
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 26,
+      "hidden_equivalent_candidates": 25,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0004",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        264,
+        377
+      ],
+      "target_pair": [
+        327,
+        368
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 64,
+      "hidden_equivalent_candidates": 6,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0005",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        2,
+        119
+      ],
+      "target_pair": [
+        88,
+        387
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 57,
+      "hidden_equivalent_candidates": 5,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        374,
+        396
+      ],
+      "target_pair": [
+        383,
+        411
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 37,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        12,
+        359
+      ],
+      "target_pair": [
+        73,
+        359
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 27,
+      "hidden_equivalent_candidates": 5,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        23,
+        459
+      ],
+      "target_pair": [
+        60,
+        458
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 24,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        48,
+        444
+      ],
+      "target_pair": [
+        67,
+        369
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 24,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0010",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        69,
+        244
+      ],
+      "target_pair": [
+        400,
+        475
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        9,
+        1
+      ],
+      "target_pair": [
+        237,
+        254
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 33,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        30,
+        478
+      ],
+      "target_pair": [
+        168,
+        313
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 54,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        275,
+        93
+      ],
+      "target_pair": [
+        405,
+        96
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 43,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        300
+      ],
+      "target_pair": [
+        387,
+        303
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 25,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0015",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        62,
+        362
+      ],
+      "target_pair": [
+        86,
+        337
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 69,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0016",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        9
+      ],
+      "target_pair": [
+        155,
+        398
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 28,
+      "hidden_equivalent_candidates": 12,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0017",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        388,
+        312
+      ],
+      "target_pair": [
+        413,
+        367
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 55,
+      "hidden_equivalent_candidates": 3,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        45,
+        117
+      ],
+      "target_pair": [
+        209,
+        44
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 30,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_affine_mod_0019",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        264,
+        470
+      ],
+      "target_pair": [
+        321,
+        479
+      ],
+      "target_reachable": true,
+      "template": "pair_affine_mod",
+      "used_probes": 0,
+      "used_query_indices": []
+    },
+    {
+      "candidate_count": 76,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0000",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        10,
+        107
+      ],
+      "target_pair": [
+        102,
+        222
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        38,
+        70,
+        80,
+        29,
+        35
+      ]
+    },
+    {
+      "candidate_count": 69,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0001",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        2,
+        446
+      ],
+      "target_pair": [
+        20,
+        454
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        57,
+        63,
+        78,
+        66,
+        93
+      ]
+    },
+    {
+      "candidate_count": 99,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0002",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        50,
+        245
+      ],
+      "target_pair": [
+        141,
+        119
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        66,
+        23,
+        84,
+        0,
+        67
+      ]
+    },
+    {
+      "candidate_count": 87,
+      "hidden_equivalent_candidates": 60,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0003",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        5,
+        4
+      ],
+      "target_pair": [
+        394,
+        283
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 7,
+      "used_query_indices": [
+        57,
+        5,
+        83,
+        61,
+        81,
+        4,
+        62
+      ]
+    },
+    {
+      "candidate_count": 27332,
+      "hidden_equivalent_candidates": 4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0004",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        12
+      ],
+      "target_pair": [
+        380,
+        319
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 10,
+      "used_query_indices": [
+        30,
+        46,
+        14,
+        79,
+        72,
+        4,
+        39,
+        63,
+        74,
+        34
+      ]
+    },
+    {
+      "candidate_count": 17080,
+      "hidden_equivalent_candidates": 45,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0005",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        0,
+        33
+      ],
+      "target_pair": [
+        283,
+        233
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 10,
+      "used_query_indices": [
+        44,
+        92,
+        10,
+        11,
+        64,
+        95,
+        4,
+        3,
+        15,
+        88
+      ]
+    },
+    {
+      "candidate_count": 44,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0006",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        4,
+        17
+      ],
+      "target_pair": [
+        266,
+        187
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 6,
+      "used_query_indices": [
+        22,
+        78,
+        86,
+        62,
+        40,
+        11
+      ]
+    },
+    {
+      "candidate_count": 82,
+      "hidden_equivalent_candidates": 3,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0007",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        2,
+        6
+      ],
+      "target_pair": [
+        111,
+        52
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 9,
+      "used_query_indices": [
+        93,
+        51,
+        62,
+        40,
+        15,
+        75,
+        84,
+        25,
+        95
+      ]
+    },
+    {
+      "candidate_count": 9296,
+      "hidden_equivalent_candidates": 4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0008",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        3,
+        303
+      ],
+      "target_pair": [
+        343,
+        377
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 10,
+      "used_query_indices": [
+        65,
+        87,
+        4,
+        40,
+        18,
+        84,
+        91,
+        62,
+        39,
+        94
+      ]
+    },
+    {
+      "candidate_count": 37,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0009",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        107,
+        123
+      ],
+      "target_pair": [
+        185,
+        474
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 6,
+      "used_query_indices": [
+        7,
+        12,
+        70,
+        33,
+        41,
+        83
+      ]
+    },
+    {
+      "candidate_count": 68,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0010",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        4,
+        8
+      ],
+      "target_pair": [
+        123,
+        268
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        74,
+        76,
+        92,
+        91
+      ]
+    },
+    {
+      "candidate_count": 146,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0011",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        9,
+        218
+      ],
+      "target_pair": [
+        385,
+        83
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 10,
+      "used_query_indices": [
+        62,
+        31,
+        4,
+        69,
+        50,
+        6,
+        54,
+        92,
+        72,
+        53
+      ]
+    },
+    {
+      "candidate_count": 31,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0012",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        23,
+        342
+      ],
+      "target_pair": [
+        121,
+        468
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 4,
+      "used_query_indices": [
+        56,
+        10,
+        15,
+        22
+      ]
+    },
+    {
+      "candidate_count": 52,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0013",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        13,
+        282
+      ],
+      "target_pair": [
+        349,
+        290
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        20,
+        25,
+        69
+      ]
+    },
+    {
+      "candidate_count": 23,
+      "hidden_equivalent_candidates": 6,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0014",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        110,
+        18
+      ],
+      "target_pair": [
+        110,
+        70
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        80,
+        57,
+        58,
+        35,
+        84
+      ]
+    },
+    {
+      "candidate_count": 58,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0015",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        33,
+        51
+      ],
+      "target_pair": [
+        198,
+        51
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 7,
+      "used_query_indices": [
+        44,
+        28,
+        42,
+        52,
+        19,
+        51,
+        67
+      ]
+    },
+    {
+      "candidate_count": 54,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0016",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        26,
+        248
+      ],
+      "target_pair": [
+        481,
+        248
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        30,
+        15,
+        28,
+        34,
+        61
+      ]
+    },
+    {
+      "candidate_count": 49,
+      "hidden_equivalent_candidates": 1,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0017",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        12,
+        23
+      ],
+      "target_pair": [
+        133,
+        452
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 3,
+      "used_query_indices": [
+        66,
+        21,
+        80
+      ]
+    },
+    {
+      "candidate_count": 38,
+      "hidden_equivalent_candidates": 2,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0018",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        108,
+        376
+      ],
+      "target_pair": [
+        342,
+        493
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 5,
+      "used_query_indices": [
+        22,
+        65,
+        83,
+        46,
+        10
+      ]
+    },
+    {
+      "candidate_count": 367,
+      "hidden_equivalent_candidates": 21,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "record_id": "eval_n512_pair_compare_gate_0019",
+      "selected_hidden_all": false,
+      "selected_pair": [
+        12,
+        105
+      ],
+      "target_pair": [
+        312,
+        19
+      ],
+      "target_reachable": true,
+      "template": "pair_compare_gate",
+      "used_probes": 10,
+      "used_query_indices": [
+        57,
+        32,
+        28,
+        48,
+        16,
+        45,
+        17,
+        63,
+        83,
+        51
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "candidate_count_mean": 32.25,
+      "hidden_equivalent_candidates_mean": 5.9,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.05,
+      "selected_hidden_all": 0.2,
+      "template": "pair_affine_mod",
+      "used_probes_mean": 0.0
+    },
+    {
+      "candidate_count_mean": 57.15,
+      "hidden_equivalent_candidates_mean": 1.35,
+      "library_size": 64,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.0,
+      "selected_hidden_all": 0.0,
+      "template": "pair_compare_gate",
+      "used_probes_mean": 1.55
+    },
+    {
+      "candidate_count_mean": 38.55,
+      "hidden_equivalent_candidates_mean": 4.8,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.0,
+      "selected_hidden_all": 0.0,
+      "template": "pair_affine_mod",
+      "used_probes_mean": 0.1
+    },
+    {
+      "candidate_count_mean": 68.6,
+      "hidden_equivalent_candidates_mean": 3.55,
+      "library_size": 128,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.0,
+      "selected_hidden_all": 0.0,
+      "template": "pair_compare_gate",
+      "used_probes_mean": 2.95
+    },
+    {
+      "candidate_count_mean": 39.6,
+      "hidden_equivalent_candidates_mean": 3.85,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.15,
+      "selected_hidden_all": 0.25,
+      "template": "pair_affine_mod",
+      "used_probes_mean": 0.2
+    },
+    {
+      "candidate_count_mean": 151.45,
+      "hidden_equivalent_candidates_mean": 2.0,
+      "library_size": 256,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.05,
+      "selected_hidden_all": 0.05,
+      "template": "pair_compare_gate",
+      "used_probes_mean": 3.65
+    },
+    {
+      "candidate_count_mean": 38.4,
+      "hidden_equivalent_candidates_mean": 5.4,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.05,
+      "selected_hidden_all": 0.05,
+      "template": "pair_affine_mod",
+      "used_probes_mean": 0.0
+    },
+    {
+      "candidate_count_mean": 2754.4,
+      "hidden_equivalent_candidates_mean": 7.9,
+      "library_size": 512,
+      "policy": "threshold_100",
+      "records": 20,
+      "selected_exact_pair": 0.0,
+      "selected_hidden_all": 0.0,
+      "template": "pair_compare_gate",
+      "used_probes_mean": 6.45
+    }
+  ],
+  "threshold": 100
+}

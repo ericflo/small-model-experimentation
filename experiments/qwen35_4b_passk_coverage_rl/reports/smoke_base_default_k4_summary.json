@@ -1,0 +1,26 @@
+{
+  "adapter_dir": null,
+  "arm_name": "base_default_k4",
+  "count": 4,
+  "experiment": "qwen35_4b_passk_coverage_rl",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "records": {
+    "coverage": 1.0,
+    "forward_tokens": 3364,
+    "hidden_pass_candidates": 11,
+    "mean_candidates": 4.0,
+    "mean_distinct_functional_rate": 0.4375,
+    "mean_distinct_program_rate": 0.8125,
+    "pass1_proxy": 0.75,
+    "task_count": 4,
+    "visible_candidates": 11,
+    "visible_coverage": 1.0
+  },
+  "round_name": "smoke_base_default",
+  "samples_per_task": 4,
+  "seed": 20260626,
+  "split": "test",
+  "temperatures": "0.2,0.7,1.0",
+  "top_p": 0.95
+}

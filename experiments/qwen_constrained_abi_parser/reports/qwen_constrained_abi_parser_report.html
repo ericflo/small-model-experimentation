@@ -1,0 +1,143 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Qwen Constrained ABI Parser</title><style>body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1160px;margin:36px auto;line-height:1.5;color:#202124}table{border-collapse:collapse;width:100%;font-size:13px}td,th{border:1px solid #d4d7dc;padding:6px 8px;text-align:left}th{background:#f2f4f7}img{max-width:100%;border:1px solid #d4d7dc}figure{margin:24px 0}figcaption{color:#5f6368;font-size:13px}code{background:#f5f7fa;padding:1px 4px;border-radius:4px}</style></head><body><h1>Qwen Constrained ABI Parser</h1>
+
+<h2>Abstract</h2>
+
+<p>This standalone experiment tests whether a finite-state stack-ABI decoder and a canonical parse stage make a small model a more reliable compiler from natural language into executable procedures. The headline metric is external execution accuracy, not valid-program rate.</p>
+
+<h2>Method</h2>
+
+<p>Training examples contain one primitive operation. Evaluation uses held-out procedure depths 2, 3, 4, and 6, plus wording-shifted prompts at depths 2, 4, and 6. The task families are string, number, table, date, list, and path transformations.</p>
+
+<p>Three targets are trained: direct final answers, raw stack programs, and parse-plus-program outputs. The raw stack adapter is evaluated with free greedy decoding, finite-state constrained decoding, and a resample-to-valid baseline. The parse adapter is evaluated both by executing its free program section and by deterministically emitting a stack program from its parse block. Oracle parse and gold ABI sanity arms bound the decoder and interpreter.</p>
+
+<p>A valid-rate increase alone is pre-registered as insufficient. A useful constraint must improve execution accuracy while preserving correct-given-valid accuracy; otherwise the grammar merely forces wrong programs to become well formed.</p>
+
+<h2>Run Configuration</h2>
+
+<ul>
+<li>Primary suite: `main`.</li>
+<li>Seeds: `101,202,303,404,505`.</li>
+<li>Evaluation rows: `320` metric rows, `2560` scored examples across arms.</li>
+<li>QLoRA update steps per adapter: `24`.</li>
+<li>Large adapters are stored outside the experiment tree.</li>
+</ul>
+
+<h2>Primary Results</h2>
+
+<ul>
+<li>Depth-6 standard execution: free raw stack 60.0%; constrained raw stack 75.0%; constraint delta 15.0%.</li>
+<li>Depth-6 valid-rate/correct-given-valid: free valid 60.0%, cgv 100.0%; constrained valid 100.0%, cgv 75.0%.</li>
+<li>Depth-6 constrained raw stack beats free decoding on `5/5` seeds; mean per-seed delta 15.0%.</li>
+<li>Depth-6 divergence: constrained-only correct 15.0%; free-only correct 0.0%.</li>
+<li>Depth-6 resample-to-valid execution: 62.5%; delta versus free 2.5%; mean attempts 1.40.</li>
+<li>Depth-6 parse-then-emit execution: 60.0%; parse exactness 57.5%.</li>
+<li>Depth-6 direct-answer baseline: 0.0%.</li>
+<li>Template-shift depth-6 constrained execution: 75.0%; drop from standard constrained depth-6 0.0%.</li>
+<li>Template-shift depth-6 free execution: 47.5%; drop from standard free depth-6 12.5%.</li>
+<li>Template-shift depth-6 constraint delta over free: 27.5%.</li>
+<li>Oracle parse and gold ABI depth-6 sanity: oracle parse 100.0%; gold ABI 100.0%.</li>
+</ul>
+
+<table>
+<tr><th>arm</th><th>split</th><th>depth</th><th>runs</th><th>n_total</th><th>exec_accuracy_mean</th><th>exec_accuracy_std</th><th>valid_exec_rate_mean</th><th>correct_given_valid_mean</th><th>parse_exact_rate_mean</th><th>divergence_rate_mean</th><th>constrained_only_rate_mean</th><th>free_only_rate_mean</th><th>mean_attempts_mean</th></tr>
+<tr><td>answer_only</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>77.5%</td><td>13.7%</td><td>82.5%</td><td>93.8%</td><td>77.5%</td><td>7.5%</td><td>2.5%</td><td>2.5%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>77.5%</td><td>10.5%</td><td>80.0%</td><td>96.7%</td><td>77.5%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>92.5%</td><td>11.2%</td><td>100.0%</td><td>92.5%</td><td>0.0%</td><td>25.0%</td><td>17.5%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>75.0%</td><td>12.5%</td><td>75.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_comp_d2</td><td>2</td><td>5</td><td>40</td><td>75.0%</td><td>12.5%</td><td>75.0%</td><td>100.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.25</td></tr>
+<tr><td>answer_only</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>75.0%</td><td>12.5%</td><td>80.0%</td><td>94.2%</td><td>75.0%</td><td>2.5%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>75.0%</td><td>12.5%</td><td>80.0%</td><td>94.2%</td><td>75.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>82.5%</td><td>6.8%</td><td>100.0%</td><td>82.5%</td><td>0.0%</td><td>27.5%</td><td>10.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>72.5%</td><td>16.3%</td><td>77.5%</td><td>93.1%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_comp_d3</td><td>3</td><td>5</td><td>40</td><td>72.5%</td><td>16.3%</td><td>77.5%</td><td>93.1%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.23</td></tr>
+<tr><td>answer_only</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>55.0%</td><td>6.8%</td><td>62.5%</td><td>88.7%</td><td>55.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>55.0%</td><td>6.8%</td><td>62.5%</td><td>88.7%</td><td>55.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>80.0%</td><td>6.8%</td><td>100.0%</td><td>80.0%</td><td>0.0%</td><td>40.0%</td><td>20.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>60.0%</td><td>13.7%</td><td>60.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_comp_d4</td><td>4</td><td>5</td><td>40</td><td>67.5%</td><td>11.2%</td><td>67.5%</td><td>100.0%</td><td>0.0%</td><td>10.0%</td><td>7.5%</td><td>0.0%</td><td>1.40</td></tr>
+<tr><td>answer_only</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>60.0%</td><td>10.5%</td><td>60.0%</td><td>100.0%</td><td>57.5%</td><td>27.5%</td><td>17.5%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>42.5%</td><td>6.8%</td><td>45.0%</td><td>96.0%</td><td>57.5%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>75.0%</td><td>8.8%</td><td>100.0%</td><td>75.0%</td><td>0.0%</td><td>40.0%</td><td>15.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>60.0%</td><td>10.5%</td><td>60.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_comp_d6</td><td>6</td><td>5</td><td>40</td><td>62.5%</td><td>12.5%</td><td>62.5%</td><td>100.0%</td><td>0.0%</td><td>7.5%</td><td>2.5%</td><td>0.0%</td><td>1.40</td></tr>
+<tr><td>answer_only</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>95.0%</td><td>6.8%</td><td>97.5%</td><td>97.5%</td><td>95.0%</td><td>7.5%</td><td>2.5%</td><td>2.5%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>95.0%</td><td>6.8%</td><td>97.5%</td><td>97.5%</td><td>95.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>97.5%</td><td>5.6%</td><td>100.0%</td><td>97.5%</td><td>0.0%</td><td>2.5%</td><td>2.5%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>95.0%</td><td>11.2%</td><td>97.5%</td><td>97.1%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_indist_d1</td><td>1</td><td>5</td><td>40</td><td>92.5%</td><td>11.2%</td><td>95.0%</td><td>97.1%</td><td>0.0%</td><td>2.5%</td><td>0.0%</td><td>2.5%</td><td>1.05</td></tr>
+<tr><td>answer_only</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>37.5%</td><td>0.0%</td><td>42.5%</td><td>92.0%</td><td>32.5%</td><td>7.5%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>37.5%</td><td>0.0%</td><td>37.5%</td><td>100.0%</td><td>32.5%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>82.5%</td><td>14.3%</td><td>100.0%</td><td>82.5%</td><td>0.0%</td><td>52.5%</td><td>30.0%</td><td>2.5%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>55.0%</td><td>6.8%</td><td>57.5%</td><td>96.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_template_d2</td><td>2</td><td>5</td><td>40</td><td>57.5%</td><td>14.3%</td><td>62.5%</td><td>91.0%</td><td>0.0%</td><td>12.5%</td><td>5.0%</td><td>2.5%</td><td>1.43</td></tr>
+<tr><td>answer_only</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>22.5%</td><td>10.5%</td><td>25.0%</td><td>93.3%</td><td>22.5%</td><td>5.0%</td><td>0.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>22.5%</td><td>10.5%</td><td>22.5%</td><td>100.0%</td><td>22.5%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>77.5%</td><td>10.5%</td><td>100.0%</td><td>77.5%</td><td>0.0%</td><td>57.5%</td><td>35.0%</td><td>5.0%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>47.5%</td><td>13.7%</td><td>47.5%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_template_d4</td><td>4</td><td>5</td><td>40</td><td>47.5%</td><td>13.7%</td><td>50.0%</td><td>95.0%</td><td>0.0%</td><td>2.5%</td><td>0.0%</td><td>0.0%</td><td>1.50</td></tr>
+<tr><td>answer_only</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>gold_abi_constrained</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>oracle_parse_constrained</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>100.0%</td><td>0.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>0.00</td></tr>
+<tr><td>parse_then_emit_constrained</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>27.5%</td><td>18.5%</td><td>27.5%</td><td>100.0%</td><td>25.0%</td><td>22.5%</td><td>5.0%</td><td>0.0%</td><td>1.00</td></tr>
+<tr><td>parse_then_emit_free</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>22.5%</td><td>13.7%</td><td>25.0%</td><td>91.7%</td><td>25.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_constrained</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>75.0%</td><td>12.5%</td><td>100.0%</td><td>75.0%</td><td>0.0%</td><td>50.0%</td><td>30.0%</td><td>2.5%</td><td>1.00</td></tr>
+<tr><td>program_stack_free</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>47.5%</td><td>13.7%</td><td>55.0%</td><td>86.7%</td><td>0.0%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>1.00</td></tr>
+<tr><td>program_stack_resample_valid</td><td>eval_template_d6</td><td>6</td><td>5</td><td>40</td><td>47.5%</td><td>13.7%</td><td>52.5%</td><td>90.0%</td><td>0.0%</td><td>10.0%</td><td>0.0%</td><td>0.0%</td><td>1.48</td></tr>
+</table>
+
+<figure><img src="../analysis/figures/execution_by_depth.png" alt="Execution by depth"><figcaption>Execution by depth</figcaption></figure>
+
+<figure><img src="../analysis/figures/template_shift_by_depth.png" alt="Template shift by depth"><figcaption>Template shift by depth</figcaption></figure>
+
+<figure><img src="../analysis/figures/validity_vs_execution.png" alt="Validity versus execution"><figcaption>Validity versus execution</figcaption></figure>
+
+<figure><img src="../analysis/figures/decoder_divergence.png" alt="Decoder divergence"><figcaption>Decoder divergence</figcaption></figure>
+
+<figure><img src="../analysis/figures/parse_accuracy.png" alt="Parse accuracy"><figcaption>Parse accuracy</figcaption></figure>
+
+<figure><img src="../analysis/figures/failure_taxonomy.png" alt="Failure taxonomy"><figcaption>Failure taxonomy</figcaption></figure>
+
+<figure><img src="../analysis/figures/training_curves.png" alt="Training curves"><figcaption>Training curves</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>The experiment separates two possible bottlenecks. If constrained decoding increases validity and execution together, malformed syntax was suppressing an otherwise useful compiler. If validity rises while execution stays flat or correct-given-valid falls, malformed syntax was mainly a symptom of unresolved semantic uncertainty. The divergence diagnostics show whether the grammar rescues examples free decoding missed or overrides examples free decoding already had right.</p>
+<p>At depth 6, constrained decoding changes execution by 15.0% relative to free raw-stack decoding. The valid-rate change is 40.0%, and the correct-given-valid change is -25.0%.</p>
+<p>The resample-to-valid baseline is the cheap alternative. At depth 6 it is -12.5% versus the constrained decoder, so this comparison determines whether a full grammar adds value beyond simply rejecting invalid samples.</p>
+<p>The parse stage helps standard depth-6 execution relative to its own free program section: 60.0% versus 42.5%.</p>
+<p>But the parse stage does not solve wording shift in this form: template depth-6 parse-then-emit is 27.5%, far below constrained raw stack at 75.0%.</p>
+<p>For constrained raw-stack decoding on composition splits, generated procedures break down as: correct_exact 76.2%, wrong_op_order_or_choice 16.9%, correct_semantic_variant 6.2%, wrong_constant_or_argument 0.6%.</p>
+
+<h2>Limitations</h2>
+
+<p>This experiment tests robustness of compilation over a fixed known primitive library. It does not test invention of operations outside the ABI. The finite-state grammar is tied to the synthetic task schema and uses task-visible constants and type information.</p>
+
+<h2>Artifacts</h2>
+
+<ul>
+<li>Metrics: `analysis/summary_by_arm.csv` and `analysis/all_metrics.csv`</li>
+<li>Details: `analysis/all_details.csv`</li>
+<li>Training logs: `analysis/all_train_logs.csv`</li>
+<li>Checkpoints: `/workspace/large_artifacts/qwen_constrained_abi_parser/checkpoints`</li>
+</ul></body></html>

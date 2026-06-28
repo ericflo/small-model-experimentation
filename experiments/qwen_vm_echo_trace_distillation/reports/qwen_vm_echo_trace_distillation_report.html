@@ -1,0 +1,252 @@
+<!doctype html><html><head><meta charset='utf-8'><title>VM-ECHO Trace Distillation</title><style>
+body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; color: #18212f; background: #f7f8fb; }
+main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 64px; background: white; min-height: 100vh; }
+h1, h2 { color: #111827; }
+h1 { font-size: 34px; line-height: 1.1; margin-bottom: 12px; }
+h2 { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 24px; }
+p, li { line-height: 1.55; }
+code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 14px; }
+th, td { border: 1px solid #d9e0ea; padding: 8px 10px; text-align: left; }
+th { background: #edf2f7; }
+img { max-width: 100%; display: block; margin: 18px 0 30px; border: 1px solid #d9e0ea; }
+.note { color: #4b5563; font-size: 14px; }
+</style></head><body>
+<main>
+<p class="note">Standalone report generated from <code>main_vm_echo_s192_w003</code>.</p>
+<h1>VM-ECHO Trace Distillation for a Frozen-Qwen Bytecode Compiler</h1>
+<h2>Abstract</h2>
+<p>This standalone experiment tests whether a frozen-Qwen typed-bytecode compiler benefits from an auxiliary VM-observation objective. The baseline learns to emit bytecode and a final answer. The VM-ECHO arm gets the same program loss plus a low-weight loss for predicting execution observations: VM validity, final value, stack top after each active bytecode slot, and stack depth after each active bytecode slot.</p>
+<p>The result is mixed. VM-ECHO clearly learns the VM observation channels: in the main full-supervised arm, fresh-paired trace-top prediction rises from 0.7% to 43.1%. That extra semantic signal does not translate into a broad direct-accuracy jump. It gives modest local gains in some search/oracle settings, for example hard-composition expert-round-2 search rises from 46.9% to 51.6%, and full-supervised fresh-paired search rises from 93.0% to 96.1%. But full-supervised fresh-standard direct accuracy falls from 85.2% to 80.5%. This is not a universal improvement.</p>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code>, used only as a frozen hidden-state feature extractor.</li>
+<li>Compiler: transformer-decoder slot head over Qwen hidden states.</li>
+<li>VM: typed stack bytecode with <code>192</code> seed examples, <code>1024</code> unlabeled expert-iteration prompts, <code>1024</code> full-supervised examples, and <code>128</code> examples per fresh split.</li>
+<li>Main ECHO weight: <code>0.03</code>. Pilot weights <code>0.35</code>, <code>0.10</code>, and <code>0.03</code> were used only to choose a non-destructive auxiliary-loss scale.</li>
+<li>Checkpoints: <code>large_artifacts/qwen_vm_echo_trace_distillation/checkpoints/main_vm_echo_s192_w003/</code>.</li>
+</ul>
+<h2>Main Results</h2>
+<table>
+<thead>
+<tr>
+<th>Arm</th>
+<th>Phase</th>
+<th>Split</th>
+<th>Direct</th>
+<th>Search</th>
+<th>Program exact</th>
+<th>Trace-top acc.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline</td>
+<td>Expert R2</td>
+<td>fresh_paired</td>
+<td>10.9%</td>
+<td>50.0%</td>
+<td>0.8%</td>
+<td>1.1%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>Expert R2</td>
+<td>fresh_paraphrase</td>
+<td>14.1%</td>
+<td>43.0%</td>
+<td>0.8%</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>Expert R2</td>
+<td>fresh_standard</td>
+<td>17.2%</td>
+<td>50.0%</td>
+<td>4.7%</td>
+<td>0.9%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>Expert R2</td>
+<td>hard_composition</td>
+<td>8.6%</td>
+<td>46.9%</td>
+<td>3.1%</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>Full sup.</td>
+<td>fresh_paired</td>
+<td>84.4%</td>
+<td>93.0%</td>
+<td>69.5%</td>
+<td>0.7%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>Full sup.</td>
+<td>fresh_paraphrase</td>
+<td>72.7%</td>
+<td>88.3%</td>
+<td>52.3%</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>Full sup.</td>
+<td>fresh_standard</td>
+<td>85.2%</td>
+<td>93.8%</td>
+<td>63.3%</td>
+<td>1.1%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>Full sup.</td>
+<td>hard_composition</td>
+<td>64.8%</td>
+<td>85.2%</td>
+<td>47.7%</td>
+<td>1.5%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Expert R2</td>
+<td>fresh_paired</td>
+<td>13.3%</td>
+<td>52.3%</td>
+<td>3.1%</td>
+<td>12.0%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Expert R2</td>
+<td>fresh_paraphrase</td>
+<td>14.1%</td>
+<td>39.1%</td>
+<td>1.6%</td>
+<td>9.2%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Expert R2</td>
+<td>fresh_standard</td>
+<td>21.1%</td>
+<td>50.8%</td>
+<td>4.7%</td>
+<td>12.1%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Expert R2</td>
+<td>hard_composition</td>
+<td>8.6%</td>
+<td>51.6%</td>
+<td>3.1%</td>
+<td>7.7%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Full sup.</td>
+<td>fresh_paired</td>
+<td>84.4%</td>
+<td>96.1%</td>
+<td>65.6%</td>
+<td>43.1%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Full sup.</td>
+<td>fresh_paraphrase</td>
+<td>73.4%</td>
+<td>87.5%</td>
+<td>53.1%</td>
+<td>38.2%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Full sup.</td>
+<td>fresh_standard</td>
+<td>80.5%</td>
+<td>91.4%</td>
+<td>58.6%</td>
+<td>41.9%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>Full sup.</td>
+<td>hard_composition</td>
+<td>63.3%</td>
+<td>85.9%</td>
+<td>46.1%</td>
+<td>35.0%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Main phase curves" src="../analysis/figures/main_phase_curves.png" /></p>
+<p><img alt="Full-supervised split bars" src="../analysis/figures/full_supervised_split_bars.png" /></p>
+<h2>VM Observation Learning</h2>
+<p>The auxiliary heads learned the execution-observation task, especially stack depth. Trace-top accuracy also rose substantially in the full-supervised VM-ECHO arm, but final-value prediction stayed modest because it is a 97-way target and the main answer head already carries a separate final-answer signal.</p>
+<p><img alt="ECHO observation accuracy" src="../analysis/figures/echo_observation_accuracy.png" /></p>
+<h2>Expert Target Collection</h2>
+<p>VM-ECHO at weight <code>0.03</code> did not collapse the candidate set. It collected slightly more round-1 expert targets than the baseline and slightly fewer round-2 targets.</p>
+<table>
+<thead>
+<tr>
+<th>arm</th>
+<th>round</th>
+<th>targets</th>
+<th>found_rate</th>
+<th>candidate_valid_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline</td>
+<td>1</td>
+<td>381</td>
+<td>37.2%</td>
+<td>63.1%</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>2</td>
+<td>456</td>
+<td>44.5%</td>
+<td>63.4%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>1</td>
+<td>398</td>
+<td>38.9%</td>
+<td>63.7%</td>
+</tr>
+<tr>
+<td>vm_echo</td>
+<td>2</td>
+<td>436</td>
+<td>42.6%</td>
+<td>64.3%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Expert target rates" src="../analysis/figures/expert_target_rates.png" /></p>
+<h2>Weight Sweep</h2>
+<p>The pilot sweep showed why the main run used a low weight. At <code>0.35</code>, VM-ECHO learned observations but damaged candidate search. At <code>0.03</code>, it preserved the search surface better.</p>
+<p><img alt="Pilot weight sweep" src="../analysis/figures/pilot_weight_sweep.png" /></p>
+<h2>Interpretation</h2>
+<p>The useful finding is not that VM-ECHO is a breakthrough by itself. The useful finding is sharper: a consequence-prediction loss can be attached to a frozen-Qwen bytecode compiler without breaking typed decoding, and it can make the model learn nontrivial VM-state predictions. However, teacher-forced trace prediction is only weakly coupled to choosing better programs. The next version should condition the observation predictor on candidate programs sampled from the compiler, so the model learns consequences of its own actions rather than consequences of the gold target alone.</p>
+<h2>Artifacts</h2>
+<ul>
+<li><code>experiments/qwen_vm_echo_trace_distillation/runs/main_vm_echo_s192_w003/metrics.csv</code></li>
+<li><code>experiments/qwen_vm_echo_trace_distillation/runs/main_vm_echo_s192_w003/train_log.csv</code></li>
+<li><code>experiments/qwen_vm_echo_trace_distillation/analysis/main_metrics.csv</code></li>
+<li><code>experiments/qwen_vm_echo_trace_distillation/reports/qwen_vm_echo_trace_distillation_report.md</code></li>
+<li><code>experiments/qwen_vm_echo_trace_distillation/reports/qwen_vm_echo_trace_distillation_report.html</code></li>
+</ul>
+</main>
+</body></html>

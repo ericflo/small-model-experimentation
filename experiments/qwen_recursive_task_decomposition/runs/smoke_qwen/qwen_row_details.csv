@@ -1,0 +1,13 @@
+task_id,family,features,row_index,input,target,direct_prediction,locked_prediction,shuffled_prediction,direct_exact,locked_exact,shuffled_exact
+Address.000002,Address,Substring,1,"Muralixxxxx Hasmik Drakou 880 81th Place SE,Brasília,WY,(467) 817-7191,000-47-5407,17293",880 81th Place,880 81th Place SE,Muralixxxxx Hasmik Drakou 880 81th Place,880 81th Place SE,False,False,False
+Address.000002,Address,Substring,2,"Joyikuttyxxxxx Charles Arjun 256 32th Place NE,Kiev,AR,(666) 929-0960,000-14-1069,41230",256 32th Place,256 32th Place NE,Joyikuttyxxxxx Charles Arjun 256 32th Place,256 32th Place NE,False,False,False
+Address.000002,Address,Substring,3,"Elise Vadeboncoeur 526 03th Place NE,Curitiba,OH,(993) 525-5024,000-84-6131,03719",526 03th Place NE,526 03th Place NE,526 03th Place NE,526 03th Place NE,True,True,True
+Address.000009,Address,"Concatenation,Multicolumn",1,col0=Angola | col1=581,case 581: return Angola;,case 581: return Angola;,case 581: return Angola;,case 581: return San Francisco;,True,True,False
+Address.000009,Address,"Concatenation,Multicolumn",2,col0=Gambia | col1=955,case 955: return Gambia;,case 955: return Gambia;,case 955: return Gambia;,case 955: return San Francisco;,True,True,False
+Address.000009,Address,"Concatenation,Multicolumn",3,col0=Finland | col1=879,case 879: return Finland;,case 879: return Finland;,case 879: return Finland;,case 879: return Finland;,True,True,True
+City.000004,City,Conditional,1,sf,San Francisco,San Francisco,San Francisco,San Francisco,True,True,True
+City.000004,City,Conditional,2,sf,San Francisco,San Francisco,San Francisco,San Francisco,True,True,True
+City.000004,City,Conditional,3,sf,San Francisco,San Francisco,San Francisco,San Francisco,True,True,True
+City.000007,City,Conditional,1,None,,Empty,Empty,Empty,False,False,False
+City.000007,City,Conditional,2,SAN FRANCISCO,San Francisco,San Francisco,Empty,San Francisco,True,False,True
+City.000007,City,Conditional,3,san francisco,San Francisco,San Francisco,san francisco,San Francisco,True,False,True

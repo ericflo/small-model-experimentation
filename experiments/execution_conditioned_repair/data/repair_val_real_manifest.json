@@ -1,0 +1,5 @@
+{
+  "reason": "Official SWE-bench/SWE-smith execution requires Docker preflight to pass.",
+  "required_script": "scripts/eval_repair_swebench.py",
+  "status": "not_generated"
+}

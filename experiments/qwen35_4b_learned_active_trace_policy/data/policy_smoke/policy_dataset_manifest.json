@@ -1,0 +1,43 @@
+{
+  "eval_data": "data/seed/dsl_train.jsonl",
+  "eval_records": 8,
+  "eval_summary": {
+    "avg_target_actual_eliminated": 65.5,
+    "avg_target_entropy": 0.394,
+    "by_family": {
+      "contains_code": 1,
+      "scalar_branch_label": 1
+    },
+    "by_step": {
+      "1": 2
+    },
+    "examples": 2
+  },
+  "label": "oracle-elimination option among displayed candidate query choices",
+  "max_buckets": 6,
+  "max_options": 24,
+  "max_policy_candidates": 128,
+  "max_query_pool_cases": 48,
+  "max_steps": 3,
+  "max_total_programs_per_record": 4000,
+  "seed": 20260702,
+  "train_data": "data/static_bridge_80/dsl_train.jsonl",
+  "train_records": 12,
+  "train_summary": {
+    "avg_target_actual_eliminated": 14.0,
+    "avg_target_entropy": 1.125,
+    "by_family": {
+      "contains_count_label": 1,
+      "length_label": 1,
+      "length_mod_label": 1,
+      "scalar_branch_label": 3,
+      "sum_threshold_label": 2
+    },
+    "by_step": {
+      "1": 5,
+      "2": 2,
+      "3": 1
+    },
+    "examples": 8
+  }
+}

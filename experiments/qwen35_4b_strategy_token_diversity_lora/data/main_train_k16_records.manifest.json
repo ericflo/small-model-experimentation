@@ -1,0 +1,38 @@
+{
+  "arm_name": "train_k16",
+  "count": 80,
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/main_train_k16_records.jsonl",
+  "records": {
+    "candidate_count_mean": 13.025,
+    "coverage": 0.75,
+    "distinct_behavior_rate_mean": 0.5695726842601843,
+    "distinct_functional_rate_mean": 0.19440842143967144,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 6.525,
+    "parse_success_mean": 12.4125,
+    "records": 80,
+    "visible_candidates_mean": 7.2375,
+    "visible_coverage": 0.75,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "main_train_k16",
+  "samples_per_task": 16,
+  "seed": 20260625,
+  "split": "mbpp_train",
+  "temperatures": "0.2,0.8,1.1",
+  "token_usage": {
+    "calls": 1280,
+    "completion_tokens": 137488,
+    "forward_tokens": 303040,
+    "prompt_tokens": 165552
+  },
+  "top_p": 0.98,
+  "visible_tests": 1
+}

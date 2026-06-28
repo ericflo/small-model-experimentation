@@ -1,0 +1,3 @@
+run,variant,phase,local_step,step,loss,train_examples,quick_answer_head_accuracy,quick_bytecode_accuracy,quick_program_exact,op_loss,arg_loss,answer_loss
+smoke_semantic_prefix_value,frozen_compiler,compiler_train,1,1,8.29355525970459,32,0.0,0.0,0.0,2.6328580379486084,4.765225887298584,4.477358818054199
+smoke_semantic_prefix_value,frozen_compiler,compiler_train,5,5,4.725226402282715,32,0.0,0.0,0.0,1.7487925291061401,2.137866973876953,4.192833423614502

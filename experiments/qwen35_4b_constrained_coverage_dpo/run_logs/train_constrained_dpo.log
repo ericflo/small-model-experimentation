@@ -1,0 +1,139 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.76it/s]Loading weights:   6%|▋         | 27/426 [00:00<00:02, 152.54it/s]Loading weights:  21%|██        | 89/426 [00:00<00:00, 361.33it/s]Loading weights:  34%|███▍      | 146/426 [00:00<00:00, 441.46it/s]Loading weights:  47%|████▋     | 202/426 [00:00<00:00, 483.62it/s]Loading weights:  61%|██████    | 259/426 [00:00<00:00, 503.79it/s]Loading weights:  74%|███████▍  | 316/426 [00:00<00:00, 524.16it/s]Loading weights:  89%|████████▉ | 379/426 [00:00<00:00, 556.37it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 471.56it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+constrained_dpo:   0%|          | 0/10 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/utils/checkpoint.py:85: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+constrained_dpo:  10%|█         | 1/10 [00:11<01:43, 11.55s/it]constrained_dpo:  20%|██        | 2/10 [00:22<01:30, 11.32s/it]constrained_dpo:  30%|███       | 3/10 [00:33<01:18, 11.24s/it]constrained_dpo:  40%|████      | 4/10 [00:44<01:06, 11.13s/it]constrained_dpo:  50%|█████     | 5/10 [00:55<00:55, 11.01s/it]                                                               {"loss": 0.7065, "dpo_loss": 0.6916, "nll_loss": 0.1502, "anchor_loss": 0.036, "pi_margin": 0.0194, "ref_margin": -0.0424, "reward_margin": 0.0618, "chosen_win_rate": 1.0, "step": 5}
+constrained_dpo:  50%|█████     | 5/10 [00:55<00:55, 11.01s/it]constrained_dpo:  60%|██████    | 6/10 [01:06<00:43, 10.98s/it]constrained_dpo:  70%|███████   | 7/10 [01:17<00:32, 10.97s/it]constrained_dpo:  80%|████████  | 8/10 [01:28<00:21, 10.90s/it]constrained_dpo:  90%|█████████ | 9/10 [01:39<00:10, 10.96s/it]constrained_dpo: 100%|██████████| 10/10 [01:50<00:00, 10.87s/it]                                                                {"loss": 0.7199, "dpo_loss": 0.6915, "nll_loss": 0.3259, "anchor_loss": 0.0291, "pi_margin": -0.0728, "ref_margin": -0.1378, "reward_margin": 0.065, "chosen_win_rate": 0.0, "step": 10}
+constrained_dpo: 100%|██████████| 10/10 [01:50<00:00, 10.87s/it]constrained_dpo: 100%|██████████| 10/10 [01:50<00:00, 11.00s/it]
+{
+  "anchor_weight": 0.08,
+  "batch_size": 1,
+  "beta": 0.05,
+  "grad_accum": 4,
+  "learning_rate": 3e-05,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_r": 16,
+  "max_length": 1536,
+  "max_steps": 10,
+  "metrics": [
+    {
+      "anchor_loss": 0.0,
+      "chosen_win_rate": 1.0,
+      "dpo_loss": 0.6931471824645996,
+      "loss": 0.7098476886749268,
+      "nll_loss": 0.20875637233257294,
+      "pi_margin": 0.320059597492218,
+      "ref_margin": 0.320059597492218,
+      "reward_margin": 0.0,
+      "step": 1
+    },
+    {
+      "anchor_loss": 0.007909770123660564,
+      "chosen_win_rate": 0.0,
+      "dpo_loss": 0.6920759081840515,
+      "loss": 0.7043740153312683,
+      "nll_loss": 0.1458166390657425,
+      "pi_margin": -0.015685036778450012,
+      "ref_margin": -0.05855831503868103,
+      "reward_margin": 0.04287327826023102,
+      "step": 2
+    },
+    {
+      "anchor_loss": 0.0014237245777621865,
+      "chosen_win_rate": 1.0,
+      "dpo_loss": 0.6942905187606812,
+      "loss": 0.7157015204429626,
+      "nll_loss": 0.2662138044834137,
+      "pi_margin": 0.028500467538833618,
+      "ref_margin": 0.07420763373374939,
+      "reward_margin": -0.04570716619491577,
+      "step": 3
+    },
+    {
+      "anchor_loss": 0.030247576534748077,
+      "chosen_win_rate": 1.0,
+      "dpo_loss": 0.6916424036026001,
+      "loss": 0.7062240242958069,
+      "nll_loss": 0.1520226001739502,
+      "pi_margin": 0.03261406719684601,
+      "ref_margin": -0.027624934911727905,
+      "reward_margin": 0.060239002108573914,
+      "step": 4
+    },
+    {
+      "anchor_loss": 0.03597218915820122,
+      "chosen_win_rate": 1.0,
+      "dpo_loss": 0.6916025280952454,
+      "loss": 0.7064923048019409,
+      "nll_loss": 0.1501501351594925,
+      "pi_margin": 0.01944810152053833,
+      "ref_margin": -0.04238623380661011,
+      "reward_margin": 0.06183433532714844,
+      "step": 5
+    },
+    {
+      "anchor_loss": 0.006860001944005489,
+      "chosen_win_rate": 1.0,
+      "dpo_loss": 0.6904358267784119,
+      "loss": 0.7035138607025146,
+      "nll_loss": 0.15661539137363434,
+      "pi_margin": 0.5777745842933655,
+      "ref_margin": 0.469173789024353,
+      "reward_margin": 0.10860079526901245,
+      "step": 6
+    },
+    {
+      "anchor_loss": 0.007442657370120287,
+      "chosen_win_rate": 0.0,
+      "dpo_loss": 0.6940746307373047,
+      "loss": 0.702276885509491,
+      "nll_loss": 0.09508609026670456,
+      "pi_margin": -0.00322762131690979,
+      "ref_margin": 0.033853814005851746,
+      "reward_margin": -0.037081435322761536,
+      "step": 7
+    },
+    {
+      "anchor_loss": 0.016846589744091034,
+      "chosen_win_rate": 1.0,
+      "dpo_loss": 0.6946823596954346,
+      "loss": 0.7112929821014404,
+      "nll_loss": 0.1907864362001419,
+      "pi_margin": 0.01199042797088623,
+      "ref_margin": 0.07334813475608826,
+      "reward_margin": -0.061357706785202026,
+      "step": 8
+    },
+    {
+      "anchor_loss": 0.004341322463005781,
+      "chosen_win_rate": 1.0,
+      "dpo_loss": 0.6938793659210205,
+      "loss": 0.7198308706283569,
+      "nll_loss": 0.3200520873069763,
+      "pi_margin": 0.0651436448097229,
+      "ref_margin": 0.09441787004470825,
+      "reward_margin": -0.02927422523498535,
+      "step": 9
+    },
+    {
+      "anchor_loss": 0.029138023033738136,
+      "chosen_win_rate": 0.0,
+      "dpo_loss": 0.6915246844291687,
+      "loss": 0.7199268341064453,
+      "nll_loss": 0.3258892595767975,
+      "pi_margin": -0.0728350579738617,
+      "ref_margin": -0.13778749108314514,
+      "reward_margin": 0.06495243310928345,
+      "step": 10
+    }
+  ],
+  "nll_weight": 0.08,
+  "pair_rows": 58,
+  "pairs_in": "data/pairs_real.jsonl",
+  "run_name": "constrained_dpo",
+  "tokenized_pairs": 58
+}

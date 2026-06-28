@@ -1,0 +1,2 @@
+run,phase,n_examples,rollouts,states,success_rate,mean_reward,reward_std,false_stop_rate,invalid_final_rate,stop_rate,mean_steps,mean_advantage_abs,reachable_after_rate,destroyed_reachability_rate,mean_shaping_reward,shuffled_rewards
+pilot_shaped_echo_s32_20260624,grpo_echo_r1_rollouts,32,128,605,0.09375,-0.24062500894069672,0.5030155181884766,0.59375,0.15625,0.671875,4.0546875,0.852490296922932,0.5626204238921002,0.12716763005780346,-0.027454545454545447,0

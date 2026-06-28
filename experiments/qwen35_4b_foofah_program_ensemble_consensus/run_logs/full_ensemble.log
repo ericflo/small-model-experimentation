@@ -1,0 +1,90 @@
+[10/250 new, 10 total] best=first_visible_program 7/10 direct=6 oracle_union=7 visible_tasks=7
+[20/250 new, 20 total] best=first_visible_program 16/20 direct=11 oracle_union=16 visible_tasks=16
+[30/250 new, 30 total] best=first_visible_program 22/30 direct=16 oracle_union=22 visible_tasks=20
+[40/250 new, 40 total] best=first_visible_program 27/40 direct=21 oracle_union=27 visible_tasks=25
+[50/250 new, 50 total] best=first_visible_program 29/50 direct=23 oracle_union=29 visible_tasks=30
+[60/250 new, 60 total] best=first_visible_program 38/60 direct=32 oracle_union=39 visible_tasks=35
+[70/250 new, 70 total] best=first_visible_program 42/70 direct=36 oracle_union=43 visible_tasks=38
+[80/250 new, 80 total] best=first_visible_program 45/80 direct=38 oracle_union=46 visible_tasks=40
+[90/250 new, 90 total] best=first_visible_program 53/90 direct=47 oracle_union=55 visible_tasks=45
+[100/250 new, 100 total] best=first_visible_program 53/100 direct=47 oracle_union=55 visible_tasks=46
+[110/250 new, 110 total] best=first_visible_program 58/110 direct=52 oracle_union=60 visible_tasks=46
+[120/250 new, 120 total] best=first_visible_program 61/120 direct=55 oracle_union=64 visible_tasks=51
+[130/250 new, 130 total] best=first_visible_program 68/130 direct=61 oracle_union=71 visible_tasks=55
+[140/250 new, 140 total] best=first_visible_program 73/140 direct=62 oracle_union=76 visible_tasks=60
+[150/250 new, 150 total] best=first_visible_program 78/150 direct=67 oracle_union=81 visible_tasks=62
+[160/250 new, 160 total] best=first_visible_program 83/160 direct=71 oracle_union=86 visible_tasks=67
+[170/250 new, 170 total] best=first_visible_program 89/170 direct=74 oracle_union=92 visible_tasks=74
+[180/250 new, 180 total] best=first_visible_program 93/180 direct=78 oracle_union=96 visible_tasks=75
+[190/250 new, 190 total] best=first_visible_program 98/190 direct=82 oracle_union=102 visible_tasks=78
+[200/250 new, 200 total] best=first_visible_program 103/200 direct=87 oracle_union=107 visible_tasks=80
+[210/250 new, 210 total] best=first_visible_program 108/210 direct=90 oracle_union=112 visible_tasks=85
+[220/250 new, 220 total] best=first_visible_program 115/220 direct=95 oracle_union=119 visible_tasks=90
+[230/250 new, 230 total] best=first_visible_program 119/230 direct=100 oracle_union=124 visible_tasks=97
+[240/250 new, 240 total] best=first_visible_program 123/240 direct=104 oracle_union=128 visible_tasks=97
+[250/250 new, 250 total] best=first_visible_program 130/250 direct=111 oracle_union=135 visible_tasks=101
+{
+  "direct_exact": 111,
+  "direct_parse_ok": 234,
+  "mean_correct_visible_programs": 0.54,
+  "mean_unique_visible_outputs": 0.432,
+  "mean_visible_programs": 0.72,
+  "n": 250,
+  "oracle_union": 135,
+  "oracle_visible_program": 76,
+  "policies": {
+    "consensus_2": {
+      "accuracy": 0.488,
+      "consensus_commits": 53,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 11,
+      "exact": 122,
+      "program_commit_correct": 43,
+      "program_commit_precision": 0.8113207547169812,
+      "program_commits": 53
+    },
+    "consensus_3": {
+      "accuracy": 0.456,
+      "consensus_commits": 19,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 3,
+      "exact": 114,
+      "program_commit_correct": 16,
+      "program_commit_precision": 0.8421052631578947,
+      "program_commits": 19
+    },
+    "direct": {
+      "accuracy": 0.444,
+      "consensus_commits": 0,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 111,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "direct_or_program_agreement": {
+      "accuracy": 0.444,
+      "consensus_commits": 0,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 111,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "first_visible_program": {
+      "accuracy": 0.52,
+      "consensus_commits": 0,
+      "direct_correct_losses": 4,
+      "direct_miss_recoveries": 23,
+      "exact": 130,
+      "program_commit_correct": 74,
+      "program_commit_precision": 0.7326732673267327,
+      "program_commits": 101
+    }
+  },
+  "tasks_with_consensus_2": 53,
+  "tasks_with_two_plus_visible_programs": 57,
+  "tasks_with_visible_program": 101
+}

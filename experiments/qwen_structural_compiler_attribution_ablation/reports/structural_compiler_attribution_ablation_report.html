@@ -1,0 +1,232 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Structural Compiler Attribution Ablation</title><style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 40px auto; max-width: 1160px; line-height: 1.45; color: #17202a; }
+h1, h2 { letter-spacing: 0; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 28px; font-size: 13px; }
+th, td { border: 1px solid #d7dde5; padding: 6px 8px; text-align: left; vertical-align: top; }
+th { background: #eef3f8; }
+figure { margin: 24px 0; }
+img { max-width: 100%; border: 1px solid #d7dde5; }
+.bullet::before { content: "- "; }
+p { margin: 8px 0; }
+</style></head><body><h1>Structural Compiler Attribution Ablation</h1>
+
+<h2>Question</h2>
+
+<p>Which factor causes a one-shot executable latent compiler to learn length-24 modular programs: copied structural expansion, curriculum alone, random-slot expansion, no-curriculum training, or length extrapolation?</p>
+
+<h2>Method</h2>
+
+<p class="bullet">Every arm uses a Qwen causal LM plus a direct executable compiler head.</p>
+<p class="bullet">The compiler predicts one initial value plus typed operation and argument slots.</p>
+<p class="bullet">A differentiable modular executor supervises final answer probability and intermediate state traces.</p>
+<p class="bullet">The main controls separate copied structural expansion from curriculum, random new slots, no-curriculum training, and length extrapolation.</p>
+<p class="bullet">Evaluation includes standard templates, seen-family paraphrases, held-out wording templates, and paired consistency splits.</p>
+
+<h2>Runs</h2>
+
+<table><thead><tr><th>run</th><th>arm</th><th>elapsed_sec</th><th>model</th><th>stage_max_steps</th><th>stage_steps</th><th>train_examples</th><th>gpu</th></tr></thead><tbody>
+<tr><td>main_expand_copy_s750</td><td>expand_copy</td><td>1914</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>300,150,300</td><td>512</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_expand_random_new_slots_s750</td><td>expand_random_new_slots</td><td>1915</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>300,150,300</td><td>512</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_curriculum_s750</td><td>max24_curriculum</td><td>2726</td><td>Qwen/Qwen3-4B</td><td>24,24,24</td><td>300,150,300</td><td>512</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_max24_no_curriculum_s750</td><td>max24_no_curriculum</td><td>2697</td><td>Qwen/Qwen3-4B</td><td>24</td><td>750</td><td>512</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>main_train_to16_eval24_s750</td><td>train_to16_eval24</td><td>2442</td><td>Qwen/Qwen3-4B</td><td>24</td><td>750</td><td>512</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_expand_copy</td><td>expand_copy</td><td>105.5</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>30,15,30</td><td>96</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_expand_random_new_slots</td><td>expand_random_new_slots</td><td>106.3</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>30,15,30</td><td>96</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_max24_curriculum</td><td>max24_curriculum</td><td>157</td><td>Qwen/Qwen3-4B</td><td>24,24,24</td><td>30,15,30</td><td>96</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_max24_no_curriculum</td><td>max24_no_curriculum</td><td>134.7</td><td>Qwen/Qwen3-4B</td><td>24</td><td>75</td><td>96</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>pilot_train_to16_eval24</td><td>train_to16_eval24</td><td>125.3</td><td>Qwen/Qwen3-4B</td><td>24</td><td>75</td><td>96</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+<tr><td>smoke_random_new_slots</td><td>smoke_random_new_slots</td><td>10.16</td><td>Qwen/Qwen3-4B</td><td>8,16,24</td><td>1,1,1</td><td>4</td><td>NVIDIA RTX 6000 Ada Generation</td></tr>
+</tbody></table>
+
+<h2>Results</h2>
+
+<p>Attribution summary, final length-24 executable accuracy:</p>
+
+<table><thead><tr><th>arm</th><th>run</th><th>standard_L24</th><th>heldout_L24</th><th>paired_L24</th><th>paired_heldout_L24</th></tr></thead><tbody>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>96.9%</td><td>46.9%</td><td>89.1%</td><td>78.1%</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>4.7%</td><td>18.8%</td><td>9.4%</td><td>7.8%</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>1.6%</td><td>51.6%</td><td>29.7%</td><td>25.0%</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>1.6%</td><td>6.2%</td><td>14.1%</td><td>1.6%</td></tr>
+<tr><td>train_to16_eval24</td><td>main_train_to16_eval24_s750</td><td>0.0%</td><td>1.6%</td><td>1.6%</td><td>0.0%</td></tr>
+</tbody></table>
+
+<p>The strongest arm is the max-24 compiler trained from the start with the staged length curriculum. Copied structural expansion is not the winning explanation in this run.</p>
+
+<p>Final length-24 splits by arm:</p>
+
+<table><thead><tr><th>arm</th><th>run</th><th>split</th><th>executor_accuracy</th><th>program_exact</th><th>state_prefix_fraction</th><th>executor_pair_both_correct</th><th>compiler_pair_state_consistency</th></tr></thead><tbody>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>standard_L24</td><td>1.6%</td><td>0.0%</td><td>85.9%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>paraphrase_L24</td><td>75.0%</td><td>75.0%</td><td>97.3%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>heldout_L24</td><td>51.6%</td><td>51.6%</td><td>68.6%</td><td></td><td></td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>paired_L24</td><td>29.7%</td><td>29.7%</td><td>91.0%</td><td>0.0%</td><td>9.4%</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>paired_heldout_L24</td><td>25.0%</td><td>23.4%</td><td>74.1%</td><td>3.1%</td><td>0.0%</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>standard_L24</td><td>1.6%</td><td>0.0%</td><td>67.9%</td><td></td><td></td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>paraphrase_L24</td><td>29.7%</td><td>29.7%</td><td>85.6%</td><td></td><td></td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>heldout_L24</td><td>6.2%</td><td>4.7%</td><td>46.5%</td><td></td><td></td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>paired_L24</td><td>14.1%</td><td>14.1%</td><td>77.5%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>paired_heldout_L24</td><td>1.6%</td><td>0.0%</td><td>56.6%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>standard_L24</td><td>96.9%</td><td>96.9%</td><td>99.7%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>paraphrase_L24</td><td>81.2%</td><td>81.2%</td><td>98.8%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>heldout_L24</td><td>46.9%</td><td>45.3%</td><td>85.3%</td><td></td><td></td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>paired_L24</td><td>89.1%</td><td>89.1%</td><td>99.3%</td><td>78.1%</td><td>78.1%</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>paired_heldout_L24</td><td>78.1%</td><td>75.0%</td><td>91.1%</td><td>56.2%</td><td>50.0%</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>standard_L24</td><td>4.7%</td><td>0.0%</td><td>82.2%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>paraphrase_L24</td><td>15.6%</td><td>14.1%</td><td>89.1%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>heldout_L24</td><td>18.8%</td><td>18.8%</td><td>81.6%</td><td></td><td></td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>paired_L24</td><td>9.4%</td><td>7.8%</td><td>84.9%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>paired_heldout_L24</td><td>7.8%</td><td>6.2%</td><td>82.4%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>train_to16_eval24</td><td>main_train_to16_eval24_s750</td><td>standard_L24</td><td>0.0%</td><td>0.0%</td><td>62.0%</td><td></td><td></td></tr>
+<tr><td>train_to16_eval24</td><td>main_train_to16_eval24_s750</td><td>paraphrase_L24</td><td>0.0%</td><td>0.0%</td><td>69.6%</td><td></td><td></td></tr>
+<tr><td>train_to16_eval24</td><td>main_train_to16_eval24_s750</td><td>heldout_L24</td><td>1.6%</td><td>0.0%</td><td>61.9%</td><td></td><td></td></tr>
+<tr><td>train_to16_eval24</td><td>main_train_to16_eval24_s750</td><td>paired_L24</td><td>1.6%</td><td>0.0%</td><td>65.3%</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>train_to16_eval24</td><td>main_train_to16_eval24_s750</td><td>paired_heldout_L24</td><td>0.0%</td><td>0.0%</td><td>60.7%</td><td>0.0%</td><td>0.0%</td></tr>
+</tbody></table>
+
+<table><thead><tr><th>arm</th><th>run</th><th>stage</th><th>split</th><th>global_step</th><th>max_steps</th><th>executor_accuracy</th><th>program_exact</th><th>state_prefix_fraction</th><th>state_all_exact</th><th>executor_pair_both_correct</th><th>compiler_pair_state_consistency</th><th>length</th></tr></thead><tbody>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage1_max8</td><td>heldout_L8</td><td>300</td><td>8</td><td>75.0%</td><td>73.4%</td><td>84.2%</td><td>0.7344</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage1_max8</td><td>paired_L8</td><td>300</td><td>8</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage1_max8</td><td>paired_heldout_L8</td><td>300</td><td>8</td><td>82.8%</td><td>82.8%</td><td>91.8%</td><td>0.8281</td><td>65.6%</td><td>65.6%</td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage1_max8</td><td>paraphrase_L8</td><td>300</td><td>8</td><td>98.4%</td><td>98.4%</td><td>98.4%</td><td>0.9844</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage1_max8</td><td>standard_L8</td><td>300</td><td>8</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>heldout_L8</td><td>450</td><td>16</td><td>90.6%</td><td>90.6%</td><td>93.8%</td><td>0.9062</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>paired_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>paired_heldout_L8</td><td>450</td><td>16</td><td>95.3%</td><td>95.3%</td><td>97.9%</td><td>0.9531</td><td>90.6%</td><td>90.6%</td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>paraphrase_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>standard_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>heldout_L16</td><td>450</td><td>16</td><td>71.9%</td><td>71.9%</td><td>92.2%</td><td>0.7188</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>paired_L16</td><td>450</td><td>16</td><td>90.6%</td><td>90.6%</td><td>98.3%</td><td>0.9062</td><td>81.2%</td><td>81.2%</td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>paired_heldout_L16</td><td>450</td><td>16</td><td>70.3%</td><td>68.8%</td><td>92.8%</td><td>0.6875</td><td>46.9%</td><td>43.8%</td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>paraphrase_L16</td><td>450</td><td>16</td><td>93.8%</td><td>93.8%</td><td>99.5%</td><td>0.9375</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage2_max16</td><td>standard_L16</td><td>450</td><td>16</td><td>95.3%</td><td>95.3%</td><td>98.5%</td><td>0.9531</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>heldout_L8</td><td>750</td><td>24</td><td>79.7%</td><td>79.7%</td><td>82.8%</td><td>0.7969</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paired_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paired_heldout_L8</td><td>750</td><td>24</td><td>87.5%</td><td>87.5%</td><td>91.4%</td><td>0.875</td><td>75.0%</td><td>75.0%</td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paraphrase_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>standard_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>heldout_L16</td><td>750</td><td>24</td><td>73.4%</td><td>73.4%</td><td>77.9%</td><td>0.7344</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paired_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paired_heldout_L16</td><td>750</td><td>24</td><td>84.4%</td><td>84.4%</td><td>89.0%</td><td>0.8438</td><td>68.8%</td><td>68.8%</td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paraphrase_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>standard_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>heldout_L24</td><td>750</td><td>24</td><td>51.6%</td><td>51.6%</td><td>68.6%</td><td>0.5156</td><td></td><td></td><td>24</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paired_L24</td><td>750</td><td>24</td><td>29.7%</td><td>29.7%</td><td>91.0%</td><td>0.2969</td><td>0.0%</td><td>9.4%</td><td>24</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paired_heldout_L24</td><td>750</td><td>24</td><td>25.0%</td><td>23.4%</td><td>74.1%</td><td>0.2344</td><td>3.1%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>paraphrase_L24</td><td>750</td><td>24</td><td>75.0%</td><td>75.0%</td><td>97.3%</td><td>0.75</td><td></td><td></td><td>24</td></tr>
+<tr><td>expand_copy</td><td>main_expand_copy_s750</td><td>stage3_max24</td><td>standard_L24</td><td>750</td><td>24</td><td>1.6%</td><td>0.0%</td><td>85.9%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage1_max8</td><td>heldout_L8</td><td>300</td><td>8</td><td>81.2%</td><td>79.7%</td><td>87.9%</td><td>0.8125</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage1_max8</td><td>paired_L8</td><td>300</td><td>8</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage1_max8</td><td>paired_heldout_L8</td><td>300</td><td>8</td><td>95.3%</td><td>95.3%</td><td>97.7%</td><td>0.9531</td><td>90.6%</td><td>90.6%</td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage1_max8</td><td>paraphrase_L8</td><td>300</td><td>8</td><td>98.4%</td><td>98.4%</td><td>98.4%</td><td>0.9844</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage1_max8</td><td>standard_L8</td><td>300</td><td>8</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>heldout_L8</td><td>450</td><td>16</td><td>96.9%</td><td>96.9%</td><td>97.9%</td><td>0.9688</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>paired_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>paired_heldout_L8</td><td>450</td><td>16</td><td>93.8%</td><td>93.8%</td><td>96.1%</td><td>0.9375</td><td>87.5%</td><td>87.5%</td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>paraphrase_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>standard_L8</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>heldout_L16</td><td>450</td><td>16</td><td>79.7%</td><td>79.7%</td><td>90.4%</td><td>0.7969</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>paired_L16</td><td>450</td><td>16</td><td>98.4%</td><td>98.4%</td><td>98.7%</td><td>0.9844</td><td>96.9%</td><td>96.9%</td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>paired_heldout_L16</td><td>450</td><td>16</td><td>87.5%</td><td>87.5%</td><td>93.4%</td><td>0.875</td><td>75.0%</td><td>75.0%</td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>paraphrase_L16</td><td>450</td><td>16</td><td>95.3%</td><td>95.3%</td><td>96.9%</td><td>0.9531</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage2_max16</td><td>standard_L16</td><td>450</td><td>16</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>heldout_L8</td><td>750</td><td>24</td><td>57.8%</td><td>57.8%</td><td>71.9%</td><td>0.5781</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paired_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paired_heldout_L8</td><td>750</td><td>24</td><td>82.8%</td><td>82.8%</td><td>88.5%</td><td>0.8281</td><td>65.6%</td><td>65.6%</td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paraphrase_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>standard_L8</td><td>750</td><td>24</td><td>98.4%</td><td>98.4%</td><td>98.8%</td><td>0.9844</td><td></td><td></td><td>8</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>heldout_L16</td><td>750</td><td>24</td><td>40.6%</td><td>39.1%</td><td>59.7%</td><td>0.4062</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paired_L16</td><td>750</td><td>24</td><td>95.3%</td><td>95.3%</td><td>99.3%</td><td>0.9531</td><td>90.6%</td><td>90.6%</td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paired_heldout_L16</td><td>750</td><td>24</td><td>73.4%</td><td>70.3%</td><td>84.3%</td><td>0.7188</td><td>50.0%</td><td>46.9%</td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paraphrase_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>standard_L16</td><td>750</td><td>24</td><td>93.8%</td><td>93.8%</td><td>99.1%</td><td>0.9375</td><td></td><td></td><td>16</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>heldout_L24</td><td>750</td><td>24</td><td>6.2%</td><td>4.7%</td><td>46.5%</td><td>0.04688</td><td></td><td></td><td>24</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paired_L24</td><td>750</td><td>24</td><td>14.1%</td><td>14.1%</td><td>77.5%</td><td>0.1406</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paired_heldout_L24</td><td>750</td><td>24</td><td>1.6%</td><td>0.0%</td><td>56.6%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>paraphrase_L24</td><td>750</td><td>24</td><td>29.7%</td><td>29.7%</td><td>85.6%</td><td>0.2969</td><td></td><td></td><td>24</td></tr>
+<tr><td>expand_random_new_slots</td><td>main_expand_random_new_slots_s750</td><td>stage3_max24</td><td>standard_L24</td><td>750</td><td>24</td><td>1.6%</td><td>0.0%</td><td>67.9%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>heldout_L8</td><td>300</td><td>24</td><td>81.2%</td><td>81.2%</td><td>87.7%</td><td>0.8125</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paired_L8</td><td>300</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paired_heldout_L8</td><td>300</td><td>24</td><td>92.2%</td><td>92.2%</td><td>97.1%</td><td>0.9219</td><td>84.4%</td><td>84.4%</td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paraphrase_L8</td><td>300</td><td>24</td><td>98.4%</td><td>98.4%</td><td>98.4%</td><td>0.9844</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>standard_L8</td><td>300</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>heldout_L16</td><td>300</td><td>24</td><td>4.7%</td><td>3.1%</td><td>55.4%</td><td>0.03125</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paired_L16</td><td>300</td><td>24</td><td>50.0%</td><td>50.0%</td><td>89.2%</td><td>0.5</td><td>31.2%</td><td>31.2%</td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paired_heldout_L16</td><td>300</td><td>24</td><td>28.1%</td><td>28.1%</td><td>76.9%</td><td>0.2812</td><td>0.0%</td><td>0.0%</td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paraphrase_L16</td><td>300</td><td>24</td><td>26.6%</td><td>25.0%</td><td>81.8%</td><td>0.25</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>standard_L16</td><td>300</td><td>24</td><td>50.0%</td><td>48.4%</td><td>89.9%</td><td>0.4844</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>heldout_L24</td><td>300</td><td>24</td><td>0.0%</td><td>0.0%</td><td>37.2%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paired_L24</td><td>300</td><td>24</td><td>1.6%</td><td>0.0%</td><td>59.8%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paired_heldout_L24</td><td>300</td><td>24</td><td>1.6%</td><td>0.0%</td><td>46.0%</td><td>0</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>paraphrase_L24</td><td>300</td><td>24</td><td>1.6%</td><td>0.0%</td><td>57.8%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage1_max24</td><td>standard_L24</td><td>300</td><td>24</td><td>4.7%</td><td>1.6%</td><td>61.3%</td><td>0.01562</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>heldout_L8</td><td>450</td><td>24</td><td>34.4%</td><td>34.4%</td><td>60.0%</td><td>0.3438</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paired_L8</td><td>450</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paired_heldout_L8</td><td>450</td><td>24</td><td>60.9%</td><td>59.4%</td><td>76.0%</td><td>0.6094</td><td>21.9%</td><td>21.9%</td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paraphrase_L8</td><td>450</td><td>24</td><td>96.9%</td><td>96.9%</td><td>97.9%</td><td>0.9688</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>standard_L8</td><td>450</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>heldout_L16</td><td>450</td><td>24</td><td>10.9%</td><td>10.9%</td><td>42.1%</td><td>0.1094</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paired_L16</td><td>450</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paired_heldout_L16</td><td>450</td><td>24</td><td>59.4%</td><td>59.4%</td><td>72.1%</td><td>0.5938</td><td>18.8%</td><td>18.8%</td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paraphrase_L16</td><td>450</td><td>24</td><td>96.9%</td><td>96.9%</td><td>98.6%</td><td>0.9688</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>standard_L16</td><td>450</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>heldout_L24</td><td>450</td><td>24</td><td>1.6%</td><td>0.0%</td><td>32.5%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paired_L24</td><td>450</td><td>24</td><td>18.8%</td><td>17.2%</td><td>79.6%</td><td>0.1719</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paired_heldout_L24</td><td>450</td><td>24</td><td>15.6%</td><td>14.1%</td><td>60.0%</td><td>0.1406</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>paraphrase_L24</td><td>450</td><td>24</td><td>0.0%</td><td>0.0%</td><td>69.5%</td><td>0</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage2_max24</td><td>standard_L24</td><td>450</td><td>24</td><td>34.4%</td><td>34.4%</td><td>88.6%</td><td>0.3438</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>heldout_L8</td><td>750</td><td>24</td><td>90.6%</td><td>90.6%</td><td>93.4%</td><td>0.9062</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paired_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paired_heldout_L8</td><td>750</td><td>24</td><td>93.8%</td><td>93.8%</td><td>97.3%</td><td>0.9375</td><td>87.5%</td><td>87.5%</td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paraphrase_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>standard_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>heldout_L16</td><td>750</td><td>24</td><td>85.9%</td><td>85.9%</td><td>89.4%</td><td>0.8594</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paired_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paired_heldout_L16</td><td>750</td><td>24</td><td>90.6%</td><td>90.6%</td><td>94.1%</td><td>0.9062</td><td>81.2%</td><td>81.2%</td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paraphrase_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>standard_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>heldout_L24</td><td>750</td><td>24</td><td>46.9%</td><td>45.3%</td><td>85.3%</td><td>0.4531</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paired_L24</td><td>750</td><td>24</td><td>89.1%</td><td>89.1%</td><td>99.3%</td><td>0.8906</td><td>78.1%</td><td>78.1%</td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paired_heldout_L24</td><td>750</td><td>24</td><td>78.1%</td><td>75.0%</td><td>91.1%</td><td>0.75</td><td>56.2%</td><td>50.0%</td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>paraphrase_L24</td><td>750</td><td>24</td><td>81.2%</td><td>81.2%</td><td>98.8%</td><td>0.8125</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_curriculum</td><td>main_max24_curriculum_s750</td><td>stage3_max24</td><td>standard_L24</td><td>750</td><td>24</td><td>96.9%</td><td>96.9%</td><td>99.7%</td><td>0.9688</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>heldout_L8</td><td>750</td><td>24</td><td>93.8%</td><td>93.8%</td><td>96.5%</td><td>0.9375</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paired_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>8</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paired_heldout_L8</td><td>750</td><td>24</td><td>98.4%</td><td>98.4%</td><td>99.2%</td><td>0.9844</td><td>96.9%</td><td>96.9%</td><td>8</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paraphrase_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>standard_L8</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>8</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>heldout_L16</td><td>750</td><td>24</td><td>96.9%</td><td>96.9%</td><td>98.5%</td><td>0.9688</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paired_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>16</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paired_heldout_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td>100.0%</td><td>100.0%</td><td>16</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paraphrase_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>standard_L16</td><td>750</td><td>24</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>1</td><td></td><td></td><td>16</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>heldout_L24</td><td>750</td><td>24</td><td>18.8%</td><td>18.8%</td><td>81.6%</td><td>0.1875</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paired_L24</td><td>750</td><td>24</td><td>9.4%</td><td>7.8%</td><td>84.9%</td><td>0.07812</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paired_heldout_L24</td><td>750</td><td>24</td><td>7.8%</td><td>6.2%</td><td>82.4%</td><td>0.0625</td><td>0.0%</td><td>0.0%</td><td>24</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>paraphrase_L24</td><td>750</td><td>24</td><td>15.6%</td><td>14.1%</td><td>89.1%</td><td>0.1406</td><td></td><td></td><td>24</td></tr>
+<tr><td>max24_no_curriculum</td><td>main_max24_no_curriculum_s750</td><td>stage1_max24</td><td>standard_L24</td><td>750</td><td>24</td><td>4.7%</td><td>0.0%</td><td>82.2%</td><td>0</td><td></td><td></td><td>24</td></tr>
+</tbody></table>
+
+<h2>Figures</h2>
+
+<figure><img src="figures/executor_accuracy_by_length.png" alt="executor_accuracy_by_length.png"><figcaption>executor_accuracy_by_length.png</figcaption></figure>
+
+<figure><img src="figures/executor_accuracy_by_step.png" alt="executor_accuracy_by_step.png"><figcaption>executor_accuracy_by_step.png</figcaption></figure>
+
+<figure><img src="figures/program_exact_by_step.png" alt="program_exact_by_step.png"><figcaption>program_exact_by_step.png</figcaption></figure>
+
+<figure><img src="figures/state_prefix_by_step.png" alt="state_prefix_by_step.png"><figcaption>state_prefix_by_step.png</figcaption></figure>
+
+<figure><img src="figures/paired_state_consistency_by_step.png" alt="paired_state_consistency_by_step.png"><figcaption>paired_state_consistency_by_step.png</figcaption></figure>
+
+<figure><img src="figures/training_loss.png" alt="training_loss.png"><figcaption>training_loss.png</figcaption></figure>
+
+<figure><img src="figures/training_state_accuracy.png" alt="training_state_accuracy.png"><figcaption>training_state_accuracy.png</figcaption></figure>
+
+<h2>Interpretation</h2>
+
+<p>This report is intentionally standalone. The key readout is whether the copied-expansion arm beats same-budget max-24 curriculum and random-new-slot controls on length-24 standard, held-out wording, and paired consistency splits.</p>
+
+<h2>Artifacts</h2>
+
+<p class="bullet">Run outputs: `experiments/qwen_structural_compiler_attribution_ablation/runs/`</p>
+<p class="bullet">Reports and figures: `experiments/qwen_structural_compiler_attribution_ablation/reports/`</p>
+<p class="bullet">Large checkpoints: `large_artifacts/qwen_structural_compiler_attribution_ablation/checkpoints/`</p></body></html>

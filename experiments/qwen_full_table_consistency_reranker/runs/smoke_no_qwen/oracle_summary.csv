@@ -1,0 +1,7 @@
+task_id,family,features,heldout_rows,row_candidate_oracle,table_candidate_oracle,candidate_tables,row_candidate_median,direct_row_exact,direct_full_exact,majority_row_exact,majority_full_exact
+City.000010,City,"Conditional,Numeric",3,False,False,1,0.0,0.0,False,0.0,False
+DateTime.000025,DateTime,DateTime,4,False,False,1,0.0,0.0,False,0.0,False
+DateTime.000104,DateTime,DateTime,4,False,False,1,0.0,0.0,False,0.0,False
+Number.000075,Number,"Concatenation,Numeric",4,False,False,1,0.0,0.0,False,0.0,False
+Number.000077,Number,"Numeric,NumericRounding",3,False,False,1,0.0,0.0,False,0.0,False
+UserAgent.000003,UserAgent,Substring,4,False,False,1,0.0,0.0,False,0.0,False

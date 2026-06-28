@@ -1,0 +1,56 @@
+{
+  "baseline_records": "data/base_direct_k4_records.jsonl",
+  "candidate_pool": 80,
+  "experiment": "qwen35_4b_independent_retrieval_consensus",
+  "independence_gate": {
+    "independent_mean_pairwise_code_distance": 0.8025165730052081,
+    "independent_mean_pairwise_task_distance": 0.7003917585832092,
+    "passed": true,
+    "same_mean_pairwise_code_distance": 0.7005380036608798,
+    "same_mean_pairwise_task_distance": 0.6353108708268969
+  },
+  "independent": {
+    "mean_pairwise_code_distance": 0.8025165730052081,
+    "mean_pairwise_task_distance": 0.7003917585832092,
+    "mean_retrieval_score": 0.2261634260216806,
+    "min_retrieval_score": 0.0909520275920975
+  },
+  "library": "data/verified_algorithm_library.jsonl",
+  "library_entries": 364,
+  "mmr_lambda": 0.62,
+  "path": "data/independent_retrieval_plan.jsonl",
+  "residual_records": 24,
+  "residual_task_ids": [
+    15,
+    16,
+    22,
+    26,
+    31,
+    34,
+    35,
+    36,
+    39,
+    42,
+    43,
+    44,
+    48,
+    55,
+    59,
+    60,
+    67,
+    70,
+    73,
+    77,
+    81,
+    83,
+    84,
+    87
+  ],
+  "same_neighborhood": {
+    "mean_pairwise_code_distance": 0.7005380036608798,
+    "mean_pairwise_task_distance": 0.6353108708268969,
+    "mean_retrieval_score": 0.23655293776631112,
+    "min_retrieval_score": 0.12760901758958368
+  },
+  "top_k": 6
+}

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen Complete-Program Trace Reranker</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #1f2933;
+  --muted: #5f6c7b;
+  --line: #d9e2ec;
+  --panel: #f7f9fb;
+  --accent: #0f766e;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: #ffffff;
+  line-height: 1.55;
+}
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 28px 72px;
+}
+h1 {
+  font-size: 2.35rem;
+  margin: 0 0 1rem;
+  letter-spacing: 0;
+}
+h2 {
+  border-top: 1px solid var(--line);
+  padding-top: 1.3rem;
+  margin-top: 2.2rem;
+  font-size: 1.35rem;
+}
+p, li {
+  font-size: 1rem;
+}
+code {
+  background: var(--panel);
+  padding: 0.12rem 0.28rem;
+  border-radius: 4px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0 1.6rem;
+  font-size: 0.9rem;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.5rem 0.55rem;
+  text-align: right;
+  vertical-align: top;
+}
+th:first-child, td:first-child {
+  text-align: left;
+}
+th {
+  background: var(--panel);
+}
+img {
+  width: 100%;
+  max-width: 1050px;
+  display: block;
+  margin: 1.2rem auto 1.8rem;
+  border: 1px solid var(--line);
+}
+a {
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Qwen Complete-Program Trace Reranker</h1>
+<h2>Abstract</h2>
+<p>This experiment tests a complete-program posttraining route for improving a frozen local Qwen compiler. A Qwen3-4B hidden-state adapter emits a compact virtual-machine program. Around that program, the system enumerates local executable edits and trains a small context-conditioned verifier to select the best candidate using only prompt hidden-state context, candidate features, and execution traces. The verifier never sees the target answer at inference time.</p>
+<p>The result is diagnostic rather than successful. The candidate search contains answer-correct programs for 91.4% to 100.0% of the main evaluation prompts, so the executable candidate set has substantial reachable headroom. The learned verifier captures only small in-distribution gains and loses accuracy on paired and longer-chain splits. The bottleneck is therefore candidate selection and credit assignment, not candidate availability.</p>
+<h2>Question</h2>
+<p>Can a small posttraining module make a frozen Qwen-attached compiler select better complete programs by inspecting executable traces, without forcing the model to generate every intermediate reasoning step as text?</p>
+<h2>Method</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code>.</li>
+<li>Value space: arithmetic over modulus <code>97</code> with up to <code>10</code> VM steps.</li>
+<li>Frozen compiler: Qwen hidden states feed a trained hidden-VM compiler checkpoint.</li>
+<li>Candidate generator: local edits around the compiler argmax program, with top-k alternatives and up to <code>2</code> edits.</li>
+<li>Verifier input: candidate execution trace, scalar candidate features, and compact prompt hidden-state summaries.</li>
+<li>Main verifier: <code>3</code> trace-transformer layers, width <code>128</code>, <code>4</code> heads.</li>
+<li>Main training set: <code>384</code> prompts, length range <code>1</code> to <code>6</code>, positive label <code>answer</code>.</li>
+<li>Main checkpoint selection: best validation learned accuracy; selected epoch <code>14</code>.</li>
+</ul>
+<p>The key baselines are:</p>
+<ul>
+<li><code>base</code>: the frozen compiler argmax program.</li>
+<li><code>soft trace</code>: a differentiable executor scoring heuristic.</li>
+<li><code>learned</code>: the trained verifier top-1 selection.</li>
+<li><code>pair rerank</code>: pair-level consistency reranking for paraphrase pairs.</li>
+<li><code>oracle</code>: any answer-correct candidate in the generated local neighborhood.</li>
+</ul>
+<h2>Main Results</h2>
+<table>
+<thead>
+<tr>
+<th>split</th>
+<th style="text-align: right;">base</th>
+<th style="text-align: right;">soft trace</th>
+<th style="text-align: right;">learned</th>
+<th style="text-align: right;">pair rerank</th>
+<th style="text-align: right;">oracle</th>
+<th style="text-align: right;">learned gap recovered</th>
+<th style="text-align: right;">avg candidates</th>
+<th style="text-align: right;">answer positives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>validation mixed L6</td>
+<td style="text-align: right;">59.4%</td>
+<td style="text-align: right;">43.0%</td>
+<td style="text-align: right;">60.2%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">111.0</td>
+<td style="text-align: right;">30.4</td>
+</tr>
+<tr>
+<td>fresh standard L6</td>
+<td style="text-align: right;">68.8%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;">70.3%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;">5.3%</td>
+<td style="text-align: right;">111.0</td>
+<td style="text-align: right;">30.3</td>
+</tr>
+<tr>
+<td>fresh paraphrase L6</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">35.2%</td>
+<td style="text-align: right;">60.2%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">5.6%</td>
+<td style="text-align: right;">111.0</td>
+<td style="text-align: right;">27.9</td>
+</tr>
+<tr>
+<td>fresh paired L6</td>
+<td style="text-align: right;">57.3%</td>
+<td style="text-align: right;">43.2%</td>
+<td style="text-align: right;">55.2%</td>
+<td style="text-align: right;">54.7%</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;">-5.1%</td>
+<td style="text-align: right;">111.0</td>
+<td style="text-align: right;">30.2</td>
+</tr>
+<tr>
+<td>hard standard L8</td>
+<td style="text-align: right;">50.0%</td>
+<td style="text-align: right;">32.0%</td>
+<td style="text-align: right;">46.9%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;">-6.5%</td>
+<td style="text-align: right;">179.0</td>
+<td style="text-align: right;">44.7</td>
+</tr>
+<tr>
+<td>hard paraphrase L8</td>
+<td style="text-align: right;">38.3%</td>
+<td style="text-align: right;">27.3%</td>
+<td style="text-align: right;">35.9%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">96.9%</td>
+<td style="text-align: right;">-4.0%</td>
+<td style="text-align: right;">179.0</td>
+<td style="text-align: right;">43.2</td>
+</tr>
+<tr>
+<td>harder standard L10</td>
+<td style="text-align: right;">40.6%</td>
+<td style="text-align: right;">23.4%</td>
+<td style="text-align: right;">35.2%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;">-9.5%</td>
+<td style="text-align: right;">263.0</td>
+<td style="text-align: right;">47.6</td>
+</tr>
+<tr>
+<td>harder paraphrase L10</td>
+<td style="text-align: right;">17.2%</td>
+<td style="text-align: right;">23.4%</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">91.4%</td>
+<td style="text-align: right;">-4.2%</td>
+<td style="text-align: right;">263.0</td>
+<td style="text-align: right;">36.2</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Main accuracy by split" src="../analysis/figures/accuracy_by_split.png" /></p>
+<p><img alt="Oracle gap recovered" src="../analysis/figures/oracle_gap_recovered.png" /></p>
+<p>Fresh length-6 standard prompts improved from 68.8% to 70.3%, a 1.6% absolute gain. Fresh length-6 paraphrase prompts improved from 57.8% to 60.2%. These gains are real but small relative to the oracle.</p>
+<p>The same selector did not extrapolate. Fresh paired length-6 accuracy moved from 57.3% to 55.2%, a -2.1% absolute change. Harder standard length-10 moved from 40.6% to 35.2%, a -5.5% absolute change. The oracle stayed high on these splits, so the selector failed to locate available correct candidates.</p>
+<h2>Candidate Geometry</h2>
+<p><img alt="Candidate density" src="../analysis/figures/candidate_density.png" /></p>
+<p>The candidate generator is broad. On length-6 fresh splits it produces about 111 candidates per prompt, with roughly 28 to 30 answer-correct candidates. On length-10 splits it produces 263 candidates per prompt, with many answer-correct candidates but far fewer state-exact or program-exact candidates. This explains why answer-only labels are easy to satisfy but weakly identify the best computational trace.</p>
+<h2>Objective Pilots</h2>
+<p><img alt="Pilot objective comparison" src="../analysis/figures/pilot_comparison.png" /></p>
+<p>Several label objectives were tested before the main run:</p>
+<ul>
+<li>Answer-correct labels learned a nontrivial selector on validation but were noisy because many candidates share the final answer.</li>
+<li>State-exact labels were too conservative and mostly preserved the base program.</li>
+<li>Single-oracle labels were sharper but still mostly preserved the base program.</li>
+<li>Repair-focused weighting did not overcome the base-preservation tendency.</li>
+</ul>
+<p><img alt="Validation curves" src="../analysis/figures/validation_curves.png" /></p>
+<p>The main run eventually recovered the best validation learned accuracy at epoch 14, but validation gains were small while train accuracy rose strongly. That is the signature of a selector that can fit candidate artifacts without learning a robust preference rule for unseen prompts.</p>
+<h2>Domain Breakdown</h2>
+<table>
+<thead>
+<tr>
+<th>domain</th>
+<th style="text-align: right;">base</th>
+<th style="text-align: right;">learned</th>
+<th style="text-align: right;">oracle</th>
+<th style="text-align: right;">learned delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arithmetic</td>
+<td style="text-align: right;">31.2%</td>
+<td style="text-align: right;">34.4%</td>
+<td style="text-align: right;">96.9%</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>calendar</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">40.6%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>unit</td>
+<td style="text-align: right;">40.6%</td>
+<td style="text-align: right;">43.8%</td>
+<td style="text-align: right;">96.9%</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>list</td>
+<td style="text-align: right;">81.2%</td>
+<td style="text-align: right;">84.4%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td style="text-align: right;">87.5%</td>
+<td style="text-align: right;">78.1%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">-9.4%</td>
+</tr>
+<tr>
+<td>lookup</td>
+<td style="text-align: right;">65.6%</td>
+<td style="text-align: right;">65.6%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Domain breakdown" src="../analysis/figures/domain_breakdown.png" /></p>
+<p>The verifier helped arithmetic, calendar, unit, and list prompts modestly, left lookup unchanged, and hurt boolean prompts. Boolean has many answer-correct candidates but relatively little trace-identifying signal because final answers collapse to few values.</p>
+<h2>Interpretation</h2>
+<p>This experiment answers one useful subquestion: local executable candidate search is not the limiting factor. The oracle remains high even when the base compiler is weak. The limiting factor is how to train a verifier that identifies the right complete program from a dense equivalence class of answer-correct candidates.</p>
+<p>The current learned verifier is too passive. It sees traces and context, but its supervision says many different programs are equally good whenever they hit the final answer. Sharper labels alone did not fix this because the base program dominates many training groups and the correct non-base candidates are sparse. The result argues against scaling this exact reranker unchanged.</p>
+<h2>Most Impactful Next Options</h2>
+<ol>
+<li>
+<p>Train the selector from executable teacher traces, not just final answers.
+   Use the oracle candidate to produce dense supervision over every intermediate state and operation, then train the verifier or compiler with a margin that explicitly ranks state-consistent candidates above answer-only candidates. This directly targets the observed dense-label failure.</p>
+</li>
+<li>
+<p>Convert reranking into preference learning on repairable failures.
+   Filter training to groups where the base program is wrong and at least one non-base candidate is right, then train pairwise preferences with hard negatives that share the answer but diverge in state. This removes the base-preservation shortcut.</p>
+</li>
+<li>
+<p>Let Qwen read serialized candidate traces.
+   Instead of only a small verifier, serialize a small shortlist of candidate programs and traces back into Qwen hidden states or text tokens, then train a LoRA selector head. This tests whether the frozen model already has the semantic machinery needed to choose among executable candidates when the candidates are made legible.</p>
+</li>
+<li>
+<p>Train a differentiable interpreter objective upstream.
+   Backpropagate through the soft executor into the adapter with auxiliary losses on intermediate states, then use the discrete candidate oracle only for evaluation. This attacks the compiler's crystallized program quality rather than relying on post-hoc selection.</p>
+</li>
+</ol>
+<p>The first option is the cleanest next experiment because it directly matches the failure mode found here: answer-correct candidate availability is high, but answer-only selection is underdetermined.</p>
+<h2>Artifacts</h2>
+<ul>
+<li>Aggregate metrics: <code>experiments/qwen_complete_program_trace_reranker/analysis/all_final_metrics.csv</code></li>
+<li>Main metrics: <code>experiments/qwen_complete_program_trace_reranker/analysis/final_metrics.csv</code></li>
+<li>Training logs: <code>experiments/qwen_complete_program_trace_reranker/analysis/verifier_train_logs.csv</code></li>
+<li>Checkpoint manifest: <code>experiments/qwen_complete_program_trace_reranker/checkpoint_manifest.csv</code></li>
+<li>Large checkpoints: <code>large_artifacts/qwen_complete_program_trace_reranker/checkpoints</code></li>
+</ul>
+</main>
+</body>
+</html>

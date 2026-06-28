@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen Trace Bootstrap Retention</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #56616f;
+      --line: #d9e0e8;
+      --panel: #f6f8fb;
+      --accent: #0f766e;
+      --paper: #ffffff;
+    }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #edf1f5;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 40px 22px 64px;
+      background: var(--paper);
+    }
+    h1, h2 {
+      line-height: 1.18;
+      margin: 0 0 14px;
+    }
+    h1 {
+      font-size: 34px;
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-size: 24px;
+      margin-top: 34px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    p {
+      margin: 0 0 14px;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    pre {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 24px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--panel);
+    }
+    td:nth-child(n+2), th:nth-child(n+2) {
+      text-align: right;
+    }
+    td:first-child, th:first-child,
+    td:nth-child(2), th:nth-child(2) {
+      text-align: left;
+    }
+    ul {
+      margin: 0 0 14px 22px;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      margin: 14px 0 22px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: #eefaf8;
+      padding: 12px 14px;
+      margin: 18px 0;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Qwen Trace Bootstrap Retention</h1>
+
+  <h2>Abstract</h2>
+  <p class="lead">This experiment tests whether a structured latent program interface can be installed with symbol-trace supervision and then retained when training continues using only final-answer supervision.</p>
+  <p>A frozen Qwen3.5-4B encoder provides hidden states from modular arithmetic prompts. A small compiler reads those hidden states, emits an initial value and per-step program symbols, and a latent executor computes the final answer.</p>
+  <div class="callout">After trace bootstrap on 1-4 step programs, answer-only continuation on 1-8 step programs reaches 96.9% exact execution at held-out length 24.</div>
+
+  <h2>Task</h2>
+  <pre>Initial x = 42.
+Step: add 17.
+Step: multiply by 3.
+Step: subtract 5.</pre>
+  <p>The target is the final value of <code>x</code> modulo 97. The executor supports <code>ADD</code>, <code>SUB</code>, and <code>MUL</code>.</p>
+
+  <h2>Model</h2>
+  <p>Qwen3.5-4B is loaded in 4-bit and kept frozen. The trainable bridge reads selected hidden states, predicts initial value, operation, and argument logits, and a differentiable executor composes the predicted distributions during training. Strict evaluation argmaxes the compiled symbols and executes them exactly.</p>
+
+  <h2>Variants</h2>
+  <ul>
+    <li><code>direct</code>: direct answer classifier from frozen Qwen features.</li>
+    <li><code>compiler_answer_only</code>: latent compiler trained from final answer loss only.</li>
+    <li><code>compiler_trace</code>: latent compiler trained with trace supervision throughout.</li>
+    <li><code>compiler_trace_then_answer</code>: trace bootstrap followed by answer-only continuation.</li>
+    <li><code>compiler_trace_then_answer_low_lr</code>: same schedule with a lower learning rate during answer-only continuation.</li>
+  </ul>
+
+  <h2>Results</h2>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>L=4 exec</th><th>L=8 exec</th><th>L=12 exec</th><th>L=24 exec</th><th>L=24 mass</th><th>L=24 init</th><th>L=24 op</th><th>L=24 arg</th><th>L=24 program exact</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>direct</code></td><td>0.8%</td><td>0.8%</td><td>1.2%</td><td>0.4%</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+      <tr><td><code>compiler_trace</code></td><td>100.0%</td><td>100.0%</td><td>99.2%</td><td>96.1%</td><td>94.2%</td><td>100.0%</td><td>99.8%</td><td>100.0%</td><td>96.1%</td></tr>
+      <tr><td><code>compiler_answer_only</code></td><td>0.8%</td><td>1.2%</td><td>1.2%</td><td>0.8%</td><td>1.0%</td><td>0.8%</td><td>33.7%</td><td>0.0%</td><td>0.0%</td></tr>
+      <tr><td><code>compiler_trace_then_answer</code></td><td>100.0%</td><td>100.0%</td><td>99.6%</td><td>96.9%</td><td>95.3%</td><td>100.0%</td><td>99.9%</td><td>100.0%</td><td>96.9%</td></tr>
+      <tr><td><code>compiler_trace_then_answer_low_lr</code></td><td>100.0%</td><td>100.0%</td><td>99.2%</td><td>95.7%</td><td>92.8%</td><td>100.0%</td><td>99.8%</td><td>100.0%</td><td>95.7%</td></tr>
+    </tbody>
+  </table>
+  <img src="../analysis/figures/executor_accuracy.png" alt="Executor accuracy by length">
+  <img src="../analysis/figures/program_exact.png" alt="Program exactness by length">
+
+  <h2>Retention Dynamics</h2>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>Stage</th><th>Step</th><th>L=24 exec</th><th>L=24 mass</th><th>L=24 op</th><th>L=24 arg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>compiler_trace</code></td><td>trace bootstrap</td><td>800</td><td>85.2%</td><td>82.4%</td><td>99.3%</td><td>100.0%</td></tr>
+      <tr><td><code>compiler_trace</code></td><td>trace continuation</td><td>1600</td><td>96.1%</td><td>94.2%</td><td>99.8%</td><td>100.0%</td></tr>
+      <tr><td><code>compiler_trace_then_answer</code></td><td>trace bootstrap</td><td>800</td><td>87.1%</td><td>83.5%</td><td>99.4%</td><td>100.0%</td></tr>
+      <tr><td><code>compiler_trace_then_answer</code></td><td>answer retention</td><td>801</td><td>75.4%</td><td>71.5%</td><td>99.0%</td><td>100.0%</td></tr>
+      <tr><td><code>compiler_trace_then_answer</code></td><td>answer retention</td><td>1600</td><td>96.9%</td><td>95.3%</td><td>99.9%</td><td>100.0%</td></tr>
+      <tr><td><code>compiler_trace_then_answer_low_lr</code></td><td>trace bootstrap</td><td>800</td><td>87.1%</td><td>83.5%</td><td>99.4%</td><td>100.0%</td></tr>
+      <tr><td><code>compiler_trace_then_answer_low_lr</code></td><td>answer retention</td><td>801</td><td>89.8%</td><td>85.5%</td><td>99.6%</td><td>100.0%</td></tr>
+      <tr><td><code>compiler_trace_then_answer_low_lr</code></td><td>answer retention</td><td>1600</td><td>95.7%</td><td>92.8%</td><td>99.8%</td><td>100.0%</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Interpretation</h2>
+  <p>Final-answer supervision can maintain and refine a latent executor interface once trace supervision has installed it. The answer-only compiler does not learn initial values, arguments, or executable programs from scratch.</p>
+  <p>The direct answer head uses the same frozen Qwen features and remains at 97-way chance. The gain comes from decomposing the task into compiled symbols and executing those symbols with a fixed latent runtime.</p>
+
+  <h2>Limitations</h2>
+  <p>The task is synthetic modular arithmetic with standardized text templates. The executor operation set is fixed in advance. The successful recipe uses direct symbol traces during bootstrap. Qwen is frozen, so this experiment tests an attached runtime and bridge rather than full language-model posttraining.</p>
+
+  <h2>Artifact Layout</h2>
+  <pre>experiments/qwen_trace_bootstrap_retention/</pre>
+  <pre>large_artifacts/qwen_trace_bootstrap_retention/checkpoints/</pre>
+</main>
+</body>
+</html>

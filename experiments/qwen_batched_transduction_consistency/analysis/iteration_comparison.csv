@@ -1,0 +1,11 @@
+suite,iteration,method,tasks,full_task_exact,row_exact,parse_ok_rate
+main_v1,v1_batch_sweep,batch_2,40,0.4,0.7020833333333333,0.9916666666666666
+main_v1,v1_batch_sweep,batch_4,40,0.4,0.7166666666666667,0.9916666666666666
+main_v1,v1_batch_sweep,batch_all,40,0.45,0.725,1.0
+main_v1,v1_batch_sweep,batch_all_rule_hint,40,0.45,0.6895833333333333,1.0
+main_v1,v1_batch_sweep,batch_all_shuffled,40,0.425,0.6583333333333333,1.0
+main_v1,v1_batch_sweep,row_by_row,40,0.5,0.7208333333333333,1.0
+main_v2_prompt_iteration,v2_prompt_iteration,batch_all,40,0.45,0.725,1.0
+main_v2_prompt_iteration,v2_prompt_iteration,batch_all_structured,40,0.425,0.675,1.0
+main_v2_prompt_iteration,v2_prompt_iteration,batch_all_verify_hint,40,0.45,0.7,1.0
+main_v2_prompt_iteration,v2_prompt_iteration,row_by_row,40,0.5,0.7208333333333333,1.0

@@ -1,0 +1,5 @@
+mode,pair_kind,comparisons,picked_oracle,direct_full_exact,oracle_full_exact
+no_examples,direct_vs_correct,25,0.8,0.8,1.0
+normal,direct_vs_correct,50,0.9,0.8,1.0
+row_shuffled_candidate,direct_vs_correct,25,0.8,0.8,1.0
+shuffled_examples,direct_vs_correct,25,0.8,0.8,1.0

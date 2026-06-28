@@ -1,0 +1,6 @@
+run,variant,phase,local_step,step,loss,train_examples,quick_answer_head_accuracy,quick_bytecode_accuracy,quick_program_exact,op_loss,arg_loss,answer_loss
+pilot_budgeted_action_value_s128_advantage,frozen_compiler,compiler_train,1,1,7.578482627868652,128,0.0,0.09375,0.0,2.532188653945923,4.106976509094238,4.696588516235352
+pilot_budgeted_action_value_s128_advantage,frozen_compiler,compiler_train,55,55,1.1991575956344604,128,0.109375,0.109375,0.015625,0.1092015951871872,0.5573406219482422,2.663076877593994
+pilot_budgeted_action_value_s128_advantage,frozen_compiler,compiler_train,110,110,0.7745084166526794,128,0.09375,0.078125,0.0,0.03934090957045555,0.3538844585418701,1.9064152240753174
+pilot_budgeted_action_value_s128_advantage,frozen_compiler,compiler_train,165,165,0.4979289174079895,128,0.09375,0.078125,0.03125,0.011767784133553505,0.14663726091384888,1.6976194381713867
+pilot_budgeted_action_value_s128_advantage,frozen_compiler,compiler_train,220,220,0.34057751297950745,128,0.109375,0.125,0.046875,0.01006561890244484,0.04030060023069382,1.4510564804077148

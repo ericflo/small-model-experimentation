@@ -1,0 +1,12 @@
+arm,seed,split,k,n,final_accuracy,state_accuracy,mean_output_tokens
+frozen_direct_likelihood,-1,eval_len4,0,4,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len8,0,4,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len16,0,4,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len24,0,4,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_len32,0,4,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_comp16,0,4,0.0,nan,1.0
+frozen_direct_likelihood,-1,eval_comp24,0,4,0.0,nan,1.0
+frozen_cot_generate,-1,eval_len4,-1,2,0.5,0.5,512.0
+frozen_cot_generate,-1,eval_len8,-1,2,0.5,0.0,512.0
+frozen_cot_generate,-1,eval_len16,-1,2,0.0,0.0625,512.0
+frozen_cot_generate,-1,eval_len24,-1,2,0.0,0.0,512.0

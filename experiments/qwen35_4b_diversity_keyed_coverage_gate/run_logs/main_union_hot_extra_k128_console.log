@@ -1,0 +1,61 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   2%|▏         | 8/426 [00:00<00:05, 77.50it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:01, 228.22it/s]Loading weights:  19%|█▉        | 80/426 [00:00<00:01, 289.35it/s]Loading weights:  28%|██▊       | 118/426 [00:00<00:00, 315.82it/s]Loading weights:  35%|███▌      | 151/426 [00:00<00:00, 316.58it/s]Loading weights:  44%|████▎     | 186/426 [00:00<00:00, 321.31it/s]Loading weights:  51%|█████▏    | 219/426 [00:00<00:00, 319.08it/s]Loading weights:  59%|█████▉    | 252/426 [00:00<00:00, 314.82it/s]Loading weights:  67%|██████▋   | 284/426 [00:00<00:00, 310.23it/s]Loading weights:  74%|███████▍  | 316/426 [00:01<00:00, 287.52it/s]Loading weights:  83%|████████▎ | 353/426 [00:01<00:00, 306.30it/s]Loading weights:  90%|█████████ | 384/426 [00:01<00:00, 301.67it/s]Loading weights:  98%|█████████▊| 416/426 [00:01<00:00, 300.25it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 298.16it/s]
+zero-ladder-union_hot_extra:   0%|          | 0/11 [00:00<?, ?it/s]zero-ladder-union_hot_extra:   9%|▉         | 1/11 [01:22<13:45, 82.57s/it]zero-ladder-union_hot_extra:  18%|█▊        | 2/11 [02:51<12:55, 86.20s/it]zero-ladder-union_hot_extra:  27%|██▋       | 3/11 [04:53<13:42, 102.80s/it]zero-ladder-union_hot_extra:  36%|███▋      | 4/11 [07:05<13:19, 114.25s/it]zero-ladder-union_hot_extra:  45%|████▌     | 5/11 [07:56<09:08, 91.46s/it] zero-ladder-union_hot_extra:  55%|█████▍    | 6/11 [08:58<06:47, 81.47s/it]zero-ladder-union_hot_extra:  64%|██████▎   | 7/11 [11:03<06:22, 95.68s/it]zero-ladder-union_hot_extra:  73%|███████▎  | 8/11 [13:06<05:13, 104.35s/it]<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:17: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:17: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:17: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\.'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\.'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\.'
+<unknown>:8: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:8: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:8: SyntaxWarning: invalid escape sequence '\s'
+<unknown>:19: SyntaxWarning: invalid escape sequence '\*'
+<unknown>:19: SyntaxWarning: invalid escape sequence '\*'
+<unknown>:19: SyntaxWarning: invalid escape sequence '\*'
+zero-ladder-union_hot_extra:  82%|████████▏ | 9/11 [15:01<03:35, 107.57s/it]zero-ladder-union_hot_extra:  91%|█████████ | 10/11 [16:53<01:48, 108.85s/it]zero-ladder-union_hot_extra: 100%|██████████| 11/11 [18:40<00:00, 108.32s/it]zero-ladder-union_hot_extra: 100%|██████████| 11/11 [18:40<00:00, 101.83s/it]
+{
+  "arm_name": "union_hot_extra",
+  "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+  "extra_per_zero_task": 40,
+  "max_new_tokens": 220,
+  "path": "data/main_union_hot_extra_k128_records.jsonl",
+  "records": {
+    "candidate_count_mean": 29.3125,
+    "coverage": 0.8875,
+    "distinct_behavior_rate_mean": 0.6293906207377854,
+    "distinct_functional_rate_mean": 0.3378319238066158,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.9125,
+    "parse_success_mean": 26.9375,
+    "records": 80,
+    "visible_candidates_mean": 8.7875,
+    "visible_coverage": 0.8875,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 11,
+    "zero_to_one": 2,
+    "zero_to_one_rate": 0.18181818181818182
+  },
+  "records_in": "data/main_union_k32_records.jsonl",
+  "round_name": "main_union_hot_extra_k128",
+  "seed": 20260625,
+  "temperatures": "0.8,1.0,1.2",
+  "token_usage": {
+    "calls": 440,
+    "completion_tokens": 59931,
+    "forward_tokens": 115971,
+    "prompt_tokens": 56040
+  },
+  "top_p": 0.98,
+  "zero_base_records": 11
+}

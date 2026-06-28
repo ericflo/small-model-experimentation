@@ -1,0 +1,12 @@
+{
+  "examples": 12,
+  "hidden_positive_examples": 10,
+  "max_per_task": 2,
+  "mode": "verified",
+  "out": "data/smoke_verified_sft_r1.jsonl",
+  "records": [
+    "data/smoke_base_train_records.jsonl"
+  ],
+  "source_records": 10,
+  "visible_positive_examples": 12
+}

@@ -1,0 +1,1461 @@
+{
+  "dev_all_variants_first_visible": {
+    "accuracy": 0.4,
+    "direct_accuracy": 0.4,
+    "direct_correct_losses": 1,
+    "direct_exact": 4,
+    "direct_miss_recoveries": 1,
+    "exact": 4,
+    "n": 10,
+    "oracle_union": 5,
+    "oracle_union_accuracy": 0.5,
+    "oracle_visible_program": 3,
+    "policy": "first_visible_program",
+    "program_commit_correct": 3,
+    "program_commit_precision": 0.42857142857142855,
+    "program_commits": 7,
+    "total_forward_tokens": 87242,
+    "variants": [
+      "verified_structural",
+      "row_column_rule",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser"
+    ]
+  },
+  "dev_direct": {
+    "accuracy": 0.4,
+    "direct_accuracy": 0.4,
+    "direct_correct_losses": 0,
+    "direct_exact": 4,
+    "direct_miss_recoveries": 0,
+    "exact": 4,
+    "n": 10,
+    "oracle_union": 4,
+    "oracle_union_accuracy": 0.4,
+    "oracle_visible_program": 0,
+    "policy": "direct",
+    "program_commit_correct": 0,
+    "program_commit_precision": null,
+    "program_commits": 0,
+    "total_forward_tokens": 5235,
+    "variants": []
+  },
+  "dev_selected": {
+    "accuracy": 0.5,
+    "direct_accuracy": 0.4,
+    "direct_correct_losses": 0,
+    "direct_exact": 4,
+    "direct_miss_recoveries": 1,
+    "exact": 5,
+    "n": 10,
+    "oracle_union": 5,
+    "oracle_union_accuracy": 0.5,
+    "oracle_visible_program": 3,
+    "policy": "consensus_2",
+    "program_commit_correct": 2,
+    "program_commit_precision": 1.0,
+    "program_commits": 2,
+    "total_forward_tokens": 87242,
+    "variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ]
+  },
+  "greedy_trace": [
+    {
+      "added": "verified_structural",
+      "selected": [
+        "verified_structural"
+      ],
+      "step": 1,
+      "train_first_visible": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 2,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 11,
+        "oracle_union_accuracy": 0.36666666666666664,
+        "oracle_visible_program": 5,
+        "policy": "first_visible_program",
+        "program_commit_correct": 5,
+        "program_commit_precision": 0.4166666666666667,
+        "program_commits": 12,
+        "total_forward_tokens": 77932,
+        "variants": [
+          "verified_structural"
+        ]
+      }
+    },
+    {
+      "added": "cell_parser",
+      "selected": [
+        "verified_structural",
+        "cell_parser"
+      ],
+      "step": 2,
+      "train_first_visible": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 8,
+        "policy": "first_visible_program",
+        "program_commit_correct": 8,
+        "program_commit_precision": 0.4444444444444444,
+        "program_commits": 18,
+        "total_forward_tokens": 134739,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      }
+    },
+    {
+      "added": "row_column_rule",
+      "selected": [
+        "verified_structural",
+        "cell_parser",
+        "row_column_rule"
+      ],
+      "step": 3,
+      "train_first_visible": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 9,
+        "policy": "first_visible_program",
+        "program_commit_correct": 9,
+        "program_commit_precision": 0.47368421052631576,
+        "program_commits": 19,
+        "total_forward_tokens": 201200,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      }
+    },
+    {
+      "added": "header_aware",
+      "selected": [
+        "verified_structural",
+        "cell_parser",
+        "row_column_rule",
+        "header_aware"
+      ],
+      "step": 4,
+      "train_first_visible": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "first_visible_program",
+        "program_commit_correct": 10,
+        "program_commit_precision": 0.47619047619047616,
+        "program_commits": 21,
+        "total_forward_tokens": 279980,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      }
+    },
+    {
+      "added": "split_fold_unpivot",
+      "selected": [
+        "verified_structural",
+        "cell_parser",
+        "row_column_rule",
+        "header_aware",
+        "split_fold_unpivot"
+      ],
+      "step": 5,
+      "train_first_visible": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "first_visible_program",
+        "program_commit_correct": 10,
+        "program_commit_precision": 0.45454545454545453,
+        "program_commits": 22,
+        "total_forward_tokens": 341451,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      }
+    }
+  ],
+  "prefix_grid": [
+    {
+      "k": 0,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 9,
+        "oracle_union_accuracy": 0.3,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 23539,
+        "variants": []
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 11,
+        "oracle_union_accuracy": 0.36666666666666664,
+        "oracle_visible_program": 5,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 77932,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 2,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 11,
+        "oracle_union_accuracy": 0.36666666666666664,
+        "oracle_visible_program": 5,
+        "policy": "first_visible_program",
+        "program_commit_correct": 5,
+        "program_commit_precision": 0.4166666666666667,
+        "program_commits": 12,
+        "total_forward_tokens": 77932,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 11,
+        "oracle_union_accuracy": 0.36666666666666664,
+        "oracle_visible_program": 5,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 77932,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 11,
+        "oracle_union_accuracy": 0.36666666666666664,
+        "oracle_visible_program": 5,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 77932,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 8,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 134739,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 8,
+        "policy": "first_visible_program",
+        "program_commit_correct": 8,
+        "program_commit_precision": 0.4444444444444444,
+        "program_commits": 18,
+        "total_forward_tokens": 134739,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.3333333333333333,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 1,
+        "exact": 10,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 8,
+        "policy": "consensus_2",
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.5,
+        "program_commits": 6,
+        "total_forward_tokens": 134739,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 8,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 134739,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 9,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 201200,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 9,
+        "policy": "first_visible_program",
+        "program_commit_correct": 9,
+        "program_commit_precision": 0.47368421052631576,
+        "program_commits": 19,
+        "total_forward_tokens": 201200,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.3333333333333333,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 1,
+        "exact": 10,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 9,
+        "policy": "consensus_2",
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.4444444444444444,
+        "program_commits": 9,
+        "total_forward_tokens": 201200,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 9,
+        "policy": "consensus_3",
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.5,
+        "program_commits": 2,
+        "total_forward_tokens": 201200,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 279980,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "first_visible_program",
+        "program_commit_correct": 10,
+        "program_commit_precision": 0.47619047619047616,
+        "program_commits": 21,
+        "total_forward_tokens": 279980,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.3333333333333333,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 1,
+        "exact": 10,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "consensus_2",
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.4,
+        "program_commits": 10,
+        "total_forward_tokens": 279980,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "consensus_3",
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.5,
+        "program_commits": 2,
+        "total_forward_tokens": 279980,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.3,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 0,
+        "exact": 9,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 341451,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.36666666666666664,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 1,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 3,
+        "exact": 11,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "first_visible_program",
+        "program_commit_correct": 10,
+        "program_commit_precision": 0.45454545454545453,
+        "program_commits": 22,
+        "total_forward_tokens": 341451,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.3333333333333333,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 1,
+        "exact": 10,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "consensus_2",
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.4,
+        "program_commits": 10,
+        "total_forward_tokens": 341451,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.3333333333333333,
+        "direct_accuracy": 0.3,
+        "direct_correct_losses": 0,
+        "direct_exact": 9,
+        "direct_miss_recoveries": 1,
+        "exact": 10,
+        "n": 30,
+        "oracle_union": 12,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 10,
+        "policy": "consensus_3",
+        "program_commit_correct": 4,
+        "program_commit_precision": 0.4444444444444444,
+        "program_commits": 9,
+        "total_forward_tokens": 341451,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 0,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 5235,
+        "variants": []
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 19575,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "first_visible_program",
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.5,
+        "program_commits": 2,
+        "total_forward_tokens": 19575,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 19575,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 19575,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 35550,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "first_visible_program",
+        "program_commit_correct": 1,
+        "program_commit_precision": 0.5,
+        "program_commits": 2,
+        "total_forward_tokens": 35550,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "consensus_2",
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1,
+        "total_forward_tokens": 35550,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 4,
+        "oracle_union_accuracy": 0.4,
+        "oracle_visible_program": 1,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 35550,
+        "variants": [
+          "verified_structural",
+          "cell_parser"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 53485,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 1,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 1,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "first_visible_program",
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.5,
+        "program_commits": 4,
+        "total_forward_tokens": 53485,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "consensus_2",
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1,
+        "total_forward_tokens": 53485,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 53485,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 73253,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 1,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 1,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "first_visible_program",
+        "program_commit_correct": 2,
+        "program_commit_precision": 0.4,
+        "program_commits": 5,
+        "total_forward_tokens": 73253,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "consensus_2",
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1,
+        "total_forward_tokens": 73253,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 2,
+        "policy": "consensus_3",
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1,
+        "total_forward_tokens": 73253,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 3,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 87242,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 1,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 1,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 3,
+        "policy": "first_visible_program",
+        "program_commit_correct": 3,
+        "program_commit_precision": 0.42857142857142855,
+        "program_commits": 7,
+        "total_forward_tokens": 87242,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.5,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 1,
+        "exact": 5,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 3,
+        "policy": "consensus_2",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 87242,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0.4,
+        "direct_accuracy": 0.4,
+        "direct_correct_losses": 0,
+        "direct_exact": 4,
+        "direct_miss_recoveries": 0,
+        "exact": 4,
+        "n": 10,
+        "oracle_union": 5,
+        "oracle_union_accuracy": 0.5,
+        "oracle_visible_program": 3,
+        "policy": "consensus_3",
+        "program_commit_correct": 1,
+        "program_commit_precision": 1.0,
+        "program_commits": 1,
+        "total_forward_tokens": 87242,
+        "variants": [
+          "verified_structural",
+          "cell_parser",
+          "row_column_rule",
+          "header_aware",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    }
+  ],
+  "selection": {
+    "candidate_variants": [
+      "verified_structural",
+      "row_column_rule",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser"
+    ],
+    "family_splits": {
+      "dev": [
+        "potters_wheel_fold_2",
+        "synthetic_10",
+        "synthetic_17",
+        "synthetic_24",
+        "synthetic_30",
+        "synthetic_37",
+        "synthetic_40",
+        "synthetic_45",
+        "synthetic_46",
+        "synthetic_51"
+      ],
+      "test": [
+        "agriculture",
+        "crime_data_wrangler",
+        "potters_wheel_merge_split",
+        "potters_wheel_unfold",
+        "potters_wheel_unfold2",
+        "proactive_wrangling_fold",
+        "synthetic_12",
+        "synthetic_25",
+        "synthetic_48",
+        "synthetic_8"
+      ],
+      "train": [
+        "craigslist_data_wrangler",
+        "potters_wheel_divide",
+        "potters_wheel_fold",
+        "potters_wheel_split_fold",
+        "proactive_wrangling_complex",
+        "reshape_table_structure_data_wrangler",
+        "synthetic_11",
+        "synthetic_13",
+        "synthetic_15",
+        "synthetic_18",
+        "synthetic_19",
+        "synthetic_2",
+        "synthetic_22",
+        "synthetic_26",
+        "synthetic_27",
+        "synthetic_28",
+        "synthetic_29",
+        "synthetic_3",
+        "synthetic_33",
+        "synthetic_34",
+        "synthetic_36",
+        "synthetic_4",
+        "synthetic_41",
+        "synthetic_43",
+        "synthetic_44",
+        "synthetic_47",
+        "synthetic_49",
+        "synthetic_5",
+        "synthetic_6",
+        "synthetic_7"
+      ]
+    },
+    "greedy_order": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "selected_k": 5,
+    "selected_policy": "consensus_2",
+    "selected_variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ],
+    "selection_rule": "greedy ordered variants on train; choose prefix and selector maximizing dev exact accuracy with loss/precision/token tie-breaks"
+  },
+  "train_all_variants_first_visible": {
+    "accuracy": 0.26666666666666666,
+    "direct_accuracy": 0.3,
+    "direct_correct_losses": 3,
+    "direct_exact": 9,
+    "direct_miss_recoveries": 2,
+    "exact": 8,
+    "n": 30,
+    "oracle_union": 12,
+    "oracle_union_accuracy": 0.4,
+    "oracle_visible_program": 10,
+    "policy": "first_visible_program",
+    "program_commit_correct": 7,
+    "program_commit_precision": 0.3181818181818182,
+    "program_commits": 22,
+    "total_forward_tokens": 341451,
+    "variants": [
+      "verified_structural",
+      "row_column_rule",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser"
+    ]
+  },
+  "train_direct": {
+    "accuracy": 0.3,
+    "direct_accuracy": 0.3,
+    "direct_correct_losses": 0,
+    "direct_exact": 9,
+    "direct_miss_recoveries": 0,
+    "exact": 9,
+    "n": 30,
+    "oracle_union": 9,
+    "oracle_union_accuracy": 0.3,
+    "oracle_visible_program": 0,
+    "policy": "direct",
+    "program_commit_correct": 0,
+    "program_commit_precision": null,
+    "program_commits": 0,
+    "total_forward_tokens": 23539,
+    "variants": []
+  },
+  "train_selected": {
+    "accuracy": 0.3333333333333333,
+    "direct_accuracy": 0.3,
+    "direct_correct_losses": 0,
+    "direct_exact": 9,
+    "direct_miss_recoveries": 1,
+    "exact": 10,
+    "n": 30,
+    "oracle_union": 12,
+    "oracle_union_accuracy": 0.4,
+    "oracle_visible_program": 10,
+    "policy": "consensus_2",
+    "program_commit_correct": 4,
+    "program_commit_precision": 0.4,
+    "program_commits": 10,
+    "total_forward_tokens": 341451,
+    "variants": [
+      "verified_structural",
+      "cell_parser",
+      "row_column_rule",
+      "header_aware",
+      "split_fold_unpivot"
+    ]
+  }
+}

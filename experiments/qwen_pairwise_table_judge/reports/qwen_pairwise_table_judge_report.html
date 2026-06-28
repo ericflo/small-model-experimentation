@@ -1,0 +1,227 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Pairwise Table Judge</title><style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; margin: 40px; color: #111827; line-height: 1.5; }
+    h1 { font-size: 32px; margin-bottom: 4px; }
+    h2 { margin-top: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0 24px; font-size: 13px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 4px; }
+    figure { margin: 18px 0 26px; }
+    figcaption { color: #4b5563; font-size: 13px; margin-top: 6px; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+    </style></head><body><h1>Pairwise Table Judge</h1>
+<h2>Question</h2>
+<p>Can a model choose the more task-consistent full output table when shown examples, query rows, and two candidate tables?</p>
+<p>This experiment evaluates pairwise table judging on public text-transformation tasks. The primary deployable method is a tournament over a non-label shortlist of candidate tables. A separate diagnostic compares direct greedy tables against hidden-correct tables when the hidden-correct table is present.</p>
+<h2>Setup</h2>
+<p>- Benchmark root: <code>/workspace/large_artifacts/qwen_pairwise_table_judge/prose-benchmarks</code></p>
+<p>- Run: <code>main_qwen_pairwise_40</code></p>
+<p>- Tasks: 40</p>
+<p>- Candidate table rows: 1370</p>
+<p>- Pairwise judgment rows: 336</p>
+<p>- Shortlist size: 6</p>
+<p>- Train rows per task: 4</p>
+<p>- Held-out cap per task: 6</p>
+<h2>Main Result</h2>
+<table>
+<tr><th>method</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th><th>table_oracle_rate</th><th>median_candidate_tables</th></tr>
+<tr><td>row_repair_diagnostic</td><td>25</td><td>91.3%</td><td>80.0%</td><td>100.0%</td><td>9.00</td></tr>
+<tr><td>table_oracle</td><td>40</td><td>82.5%</td><td>62.5%</td><td>62.5%</td><td>9.50</td></tr>
+<tr><td>direct_row_greedy</td><td>40</td><td>72.3%</td><td>50.0%</td><td>62.5%</td><td>9.50</td></tr>
+<tr><td>pairwise_tournament</td><td>40</td><td>71.9%</td><td>47.5%</td><td>62.5%</td><td>9.50</td></tr>
+</table>
+<h2>Interpretation</h2>
+<p>The deployable pairwise tournament changes full-task exact by -2.5 points relative to direct greedy. The table oracle is 12.5 points above direct greedy, so any gap between tournament and oracle is selection headroom. In the all-oracle-task direct-vs-hidden-correct diagnostic, the normal judge picks the hidden-correct table 90.0% of the time, but that aggregate includes saturated tasks where direct and oracle are identical.</p>
+<p>On the actual headroom subset, where direct greedy is wrong and a hidden-correct table exists, the normal judge picks the hidden-correct table 0.0% when direct is candidate A and 100.0% when the hidden-correct table is candidate A. This is the critical diagnostic: a large base/swapped gap indicates position bias rather than semantic table judging.</p>
+<p>The row-repair diagnostic reaches 80.0% full-task exact. It is not deployable because it uses hidden oracle row alternatives; it measures whether the judge can accept correct row-level replacements when they are explicitly supplied.</p>
+<h2>Charts</h2>
+<figure><img src="../analysis/figures/full_task_by_method.png" alt="Full-task exact by method"><figcaption>Full-task exact by method</figcaption></figure>
+<figure><img src="../analysis/figures/row_vs_task.png" alt="Row versus task accuracy"><figcaption>Row versus task accuracy</figcaption></figure>
+<figure><img src="../analysis/figures/diagnostic_pick_oracle.png" alt="Diagnostic pick oracle"><figcaption>Diagnostic pick oracle</figcaption></figure>
+<figure><img src="../analysis/figures/diagnostic_headroom_pick_oracle.png" alt="Headroom diagnostic pick oracle"><figcaption>Headroom diagnostic pick oracle</figcaption></figure>
+<figure><img src="../analysis/figures/tournament_changes.png" alt="Tournament changes"><figcaption>Tournament changes</figcaption></figure>
+<figure><img src="../analysis/figures/family_heatmap.png" alt="Family heatmap"><figcaption>Family heatmap</figcaption></figure>
+<h2>Diagnostic Summary</h2>
+<table>
+<tr><th>mode</th><th>pair_kind</th><th>comparisons</th><th>picked_oracle</th><th>direct_full_exact</th><th>oracle_full_exact</th></tr>
+<tr><td>no_examples</td><td>direct_vs_correct</td><td>25</td><td>80.0%</td><td>80.0%</td><td>100.0%</td></tr>
+<tr><td>normal</td><td>direct_vs_correct</td><td>50</td><td>90.0%</td><td>80.0%</td><td>100.0%</td></tr>
+<tr><td>row_shuffled_candidate</td><td>direct_vs_correct</td><td>25</td><td>80.0%</td><td>80.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_examples</td><td>direct_vs_correct</td><td>25</td><td>80.0%</td><td>80.0%</td><td>100.0%</td></tr>
+</table>
+<h2>Headroom-Only Diagnostic</h2>
+<table>
+<tr><th>mode</th><th>order_tag</th><th>comparisons</th><th>unique_tasks</th><th>picked_oracle</th><th>picked_candidate_a</th></tr>
+<tr><td>no_examples</td><td>base</td><td>5</td><td>5</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>normal</td><td>base</td><td>5</td><td>5</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>normal</td><td>swapped</td><td>5</td><td>5</td><td>100.0%</td><td>100.0%</td></tr>
+<tr><td>row_shuffled_candidate</td><td>base</td><td>5</td><td>5</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>shuffled_examples</td><td>base</td><td>5</td><td>5</td><td>0.0%</td><td>100.0%</td></tr>
+</table>
+<h2>Selected Tables</h2>
+<table>
+<tr><th>task_id</th><th>family</th><th>method</th><th>source</th><th>row_exact</th><th>full_task_exact</th><th>candidate_tables</th><th>table_candidate_oracle</th></tr>
+<tr><td>Address.000002</td><td>Address</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>17</td><td>False</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>16</td><td>False</td></tr>
+<tr><td>City.000010</td><td>City</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>City.000011</td><td>City</td><td>direct_row_greedy</td><td>row_greedy</td><td>75.0%</td><td>False</td><td>12</td><td>False</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>44</td><td>True</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>16</td><td>True</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>88</td><td>False</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>12</td><td>False</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>14</td><td>True</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>14</td><td>False</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>10</td><td>True</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>16.7%</td><td>False</td><td>512</td><td>False</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>direct_row_greedy</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>11</td><td>False</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>16</td><td>False</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>224</td><td>True</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>83.3%</td><td>False</td><td>40</td><td>True</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>32</td><td>True</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>14</td><td>False</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>56</td><td>False</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>16</td><td>True</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>26</td><td>True</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>direct_row_greedy</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>direct_row_greedy</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>pairwise_tournament</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>pairwise_tournament</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>17</td><td>False</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>pairwise_tournament</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>16</td><td>False</td></tr>
+<tr><td>City.000010</td><td>City</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>City.000011</td><td>City</td><td>pairwise_tournament</td><td>row_greedy</td><td>75.0%</td><td>False</td><td>12</td><td>False</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>44</td><td>True</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>16</td><td>True</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>88</td><td>False</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>12</td><td>False</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>14</td><td>True</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>14</td><td>False</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>pairwise_tournament</td><td>batch_plain</td><td>83.3%</td><td>False</td><td>10</td><td>True</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>16.7%</td><td>False</td><td>512</td><td>False</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>pairwise_tournament</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>pairwise_tournament</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>11</td><td>False</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>16</td><td>False</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>224</td><td>True</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>83.3%</td><td>False</td><td>40</td><td>True</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>32</td><td>True</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>14</td><td>False</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>56</td><td>False</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>16</td><td>True</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>pairwise_tournament</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>26</td><td>True</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>pairwise_tournament</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>pairwise_tournament</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>City.000010</td><td>City</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>44</td><td>True</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>16</td><td>True</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>66.7%</td><td>False</td><td>14</td><td>True</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>10</td><td>True</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>33.3%</td><td>False</td><td>224</td><td>True</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>83.3%</td><td>False</td><td>40</td><td>True</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>32</td><td>True</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>66.7%</td><td>False</td><td>16</td><td>True</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>33.3%</td><td>False</td><td>26</td><td>True</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>row_repair_diagnostic</td><td>row_repair_diagnostic</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>table_oracle</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>table_oracle</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>17</td><td>False</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>table_oracle</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>16</td><td>False</td></tr>
+<tr><td>City.000010</td><td>City</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>City.000011</td><td>City</td><td>table_oracle</td><td>row_greedy</td><td>75.0%</td><td>False</td><td>12</td><td>False</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>44</td><td>True</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>16</td><td>True</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>table_oracle</td><td>row_combo</td><td>83.3%</td><td>False</td><td>88</td><td>False</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>12</td><td>False</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>table_oracle</td><td>row_combo</td><td>100.0%</td><td>True</td><td>14</td><td>True</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>table_oracle</td><td>batch_plain</td><td>66.7%</td><td>False</td><td>14</td><td>False</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>10</td><td>True</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>table_oracle</td><td>row_combo</td><td>66.7%</td><td>False</td><td>512</td><td>False</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>0.0%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>table_oracle</td><td>row_greedy</td><td>50.0%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>table_oracle</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>11</td><td>False</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>table_oracle</td><td>row_sample0</td><td>50.0%</td><td>False</td><td>16</td><td>False</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>table_oracle</td><td>row_combo</td><td>100.0%</td><td>True</td><td>224</td><td>True</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>table_oracle</td><td>row_combo</td><td>100.0%</td><td>True</td><td>40</td><td>True</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>32</td><td>True</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>table_oracle</td><td>row_greedy</td><td>66.7%</td><td>False</td><td>14</td><td>False</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>table_oracle</td><td>row_combo</td><td>75.0%</td><td>False</td><td>56</td><td>False</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>table_oracle</td><td>batch_plain</td><td>100.0%</td><td>True</td><td>16</td><td>True</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>table_oracle</td><td>row_combo</td><td>100.0%</td><td>True</td><td>26</td><td>True</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>table_oracle</td><td>row_greedy</td><td>33.3%</td><td>False</td><td>9</td><td>False</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>table_oracle</td><td>row_greedy</td><td>100.0%</td><td>True</td><td>9</td><td>True</td></tr>
+</table>
+<h2>Tournament Changes</h2>
+<table>
+<tr><th>task_id</th><th>family</th><th>direct_source</th><th>tournament_source</th><th>direct_row_exact</th><th>tournament_row_exact</th><th>direct_full_exact</th><th>tournament_full_exact</th><th>delta_row_exact</th><th>delta_full_exact</th></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>row_greedy</td><td>batch_plain</td><td>100.0%</td><td>83.3%</td><td>True</td><td>False</td><td>-16.7%</td><td>-100.0%</td></tr>
+</table>
+<h2>Files</h2>
+<p>- <code>runs/main_qwen_pairwise_40/table_candidates.csv</code></p>
+<p>- <code>runs/main_qwen_pairwise_40/oracle_summary.csv</code></p>
+<p>- <code>runs/main_qwen_pairwise_40/pairwise_judgments.csv</code></p>
+<p>- <code>runs/main_qwen_pairwise_40/judge_details.csv</code></p>
+<p>- <code>runs/main_qwen_pairwise_40/selected_tables.csv</code></p>
+<p>- <code>runs/main_qwen_pairwise_40/diagnostic_direct_vs_correct.csv</code></p>
+<p>- <code>analysis/summary.csv</code></p>
+<p>- <code>analysis/diagnostic_summary.csv</code></p>
+<p>- <code>analysis/diagnostic_headroom_summary.csv</code></p>
+<p>- <code>analysis/tournament_changes.csv</code></p>
+<p>- <code>analysis/selected_tables.csv</code></p>
+<p>- <code>analysis/judge_details.csv</code></p></body></html>

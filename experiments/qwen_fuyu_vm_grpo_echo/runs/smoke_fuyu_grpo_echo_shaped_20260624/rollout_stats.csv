@@ -1,0 +1,2 @@
+run,phase,n_examples,rollouts,states,success_rate,mean_reward,reward_std,false_stop_rate,invalid_final_rate,stop_rate,mean_steps,mean_advantage_abs,reachable_after_rate,destroyed_reachability_rate,mean_shaping_reward,shuffled_rewards
+smoke_fuyu_grpo_echo_shaped_20260624,grpo_echo_r1_rollouts,4,8,15,0.0,-0.4362500011920929,0.08320719748735428,0.875,0.125,0.875,1.0,0.6000000556310018,0.125,0.0,-0.10400000000000001,0

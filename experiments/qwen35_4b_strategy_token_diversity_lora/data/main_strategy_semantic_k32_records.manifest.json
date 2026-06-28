@@ -1,0 +1,46 @@
+{
+  "adapter_dir": "/workspace/large_artifacts/qwen35_4b_strategy_token_diversity_lora/models/semantic_strategy_lora",
+  "arm_name": "semantic_strategy_k32",
+  "base_records": "data/main_base_k4_records.jsonl",
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "max_new_tokens": 220,
+  "path": "data/main_strategy_semantic_k32_records.jsonl",
+  "records": {
+    "candidate_count_mean": 23.1,
+    "coverage": 0.8125,
+    "distinct_behavior_rate_mean": 0.42941675909423155,
+    "distinct_functional_rate_mean": 0.13803405825016013,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 10.1375,
+    "parse_success_mean": 22.8125,
+    "records": 80,
+    "visible_candidates_mean": 13.0875,
+    "visible_coverage": 0.8125,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 24,
+    "zero_to_one": 11,
+    "zero_to_one_rate": 0.4583333333333333
+  },
+  "records_in": "data/main_base_k4_records.jsonl",
+  "round_name": "main_strategy_semantic_k32",
+  "samples_per_strategy": 4,
+  "strategy_keys": [
+    "DIRECT",
+    "LOOP",
+    "COMPREHENSION",
+    "SORTING",
+    "SET_DICT",
+    "RECURSION",
+    "STRING_REGEX",
+    "MATH"
+  ],
+  "temperature": 0.8,
+  "token_usage": {
+    "calls": 2560,
+    "completion_tokens": 174824,
+    "forward_tokens": 627176,
+    "prompt_tokens": 452352
+  },
+  "top_p": 0.98
+}

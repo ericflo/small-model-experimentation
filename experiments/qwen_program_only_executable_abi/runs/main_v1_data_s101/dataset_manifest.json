@@ -1,0 +1,164 @@
+{
+  "seed": 101,
+  "train_n": 192,
+  "eval_sizes": {
+    "eval_indist": 24,
+    "eval_composition": 24,
+    "eval_template_shift": 24
+  },
+  "train_sample": [
+    {
+      "example_id": "train_string_84",
+      "split": "train",
+      "family": "string",
+      "prompt": "Reference code: BX-2680-TG. Remove hyphens, then return the last 3 characters.",
+      "answer": "0TG",
+      "op_name": "take_suffix",
+      "payload": {
+        "code": "BX-2680-TG",
+        "n": 3
+      }
+    },
+    {
+      "example_id": "train_table_182",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: delta=9, alpha=10, beta=17, gamma=29. Take gamma, then add 5.",
+      "answer": "34",
+      "op_name": "lookup_add",
+      "payload": {
+        "table": {
+          "delta": 9,
+          "alpha": 10,
+          "beta": 17,
+          "gamma": 29
+        },
+        "key": "gamma",
+        "bias": 5
+      }
+    },
+    {
+      "example_id": "train_table_10",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: delta=4, alpha=4, gamma=3, beta=20. Take beta, then multiply by 7.",
+      "answer": "140",
+      "op_name": "lookup_mul",
+      "payload": {
+        "table": {
+          "delta": 4,
+          "alpha": 4,
+          "gamma": 3,
+          "beta": 20
+        },
+        "key": "beta",
+        "scale": 7
+      }
+    },
+    {
+      "example_id": "train_table_42",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: beta=2, delta=14, alpha=6, gamma=17. Take beta, then multiply by 5.",
+      "answer": "10",
+      "op_name": "lookup_mul",
+      "payload": {
+        "table": {
+          "beta": 2,
+          "delta": 14,
+          "alpha": 6,
+          "gamma": 17
+        },
+        "key": "beta",
+        "scale": 5
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_date_11",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Starting from 2026-03-01, add 2 weeks. Return the ISO date.",
+        "answer": "2026-03-15",
+        "op_name": "add_weeks",
+        "payload": {
+          "date": "2026-03-01",
+          "weeks": 2
+        }
+      },
+      {
+        "example_id": "eval_indist_table_22",
+        "split": "eval_indist",
+        "family": "table",
+        "prompt": "Table: alpha=23, gamma=8, delta=22, beta=28. Take gamma, then add 7.",
+        "answer": "15",
+        "op_name": "lookup_add",
+        "payload": {
+          "table": {
+            "alpha": 23,
+            "gamma": 8,
+            "delta": 22,
+            "beta": 28
+          },
+          "key": "gamma",
+          "bias": 7
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_string_8",
+        "split": "eval_composition",
+        "family": "string",
+        "prompt": "Clean this code by deleting hyphens: JW-7630-CF. Reverse it and report the one-indexed span 3-6.",
+        "answer": "0367",
+        "op_name": "reverse_then_slice",
+        "payload": {
+          "code": "JW-7630-CF",
+          "start": 2,
+          "end": 6
+        }
+      },
+      {
+        "example_id": "eval_composition_unit_13",
+        "split": "eval_composition",
+        "family": "unit",
+        "prompt": "A cable is 1 meters plus 25 centimeters long. Report the total length in centimeters.",
+        "answer": "125",
+        "op_name": "meters_plus_centimeters",
+        "payload": {
+          "meters": 1,
+          "centimeters": 25
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_string_4",
+        "split": "eval_template_shift",
+        "family": "string",
+        "prompt": "Compact identifier YQ-9523-XX by dropping hyphens. What are the first 3 symbols afterward?",
+        "answer": "YQ9",
+        "op_name": "take_prefix",
+        "payload": {
+          "code": "YQ-9523-XX",
+          "n": 3
+        }
+      },
+      {
+        "example_id": "eval_template_shift_date_7",
+        "split": "eval_template_shift",
+        "family": "date",
+        "prompt": "Move 2026-07-04 forward by 3 weeks and write the date.",
+        "answer": "2026-07-25",
+        "op_name": "add_weeks",
+        "payload": {
+          "date": "2026-07-04",
+          "weeks": 3
+        }
+      }
+    ]
+  }
+}

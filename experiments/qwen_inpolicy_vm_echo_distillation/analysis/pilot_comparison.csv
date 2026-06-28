@@ -1,0 +1,13 @@
+run,split,phase,direct
+s96_w010,fresh paired,Answer distill,0.125
+s96_w010,fresh paired,VM-ECHO distill,0.21875
+s96_w010,hard composition,Answer distill,0.078125
+s96_w010,hard composition,VM-ECHO distill,0.171875
+s96_w035,fresh paired,Answer distill,0.125
+s96_w035,fresh paired,VM-ECHO distill,0.125
+s96_w035,hard composition,Answer distill,0.078125
+s96_w035,hard composition,VM-ECHO distill,0.109375
+s96_w010_r2,fresh paired,Answer distill,0.109375
+s96_w010_r2,fresh paired,VM-ECHO distill,0.125
+s96_w010_r2,hard composition,Answer distill,0.078125
+s96_w010_r2,hard composition,VM-ECHO distill,0.078125

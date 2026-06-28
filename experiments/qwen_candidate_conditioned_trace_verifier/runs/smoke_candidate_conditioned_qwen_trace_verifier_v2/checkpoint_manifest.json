@@ -1,0 +1,48 @@
+[
+  {
+    "arm": "feature_mlp",
+    "seed": 101,
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "trace_transformer",
+    "seed": 101,
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_rank",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/smoke_candidate_conditioned_qwen_trace_verifier_v2/qwen_rank_seed101.pt",
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_echo",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/smoke_candidate_conditioned_qwen_trace_verifier_v2/qwen_echo_seed101.pt",
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_shuffled",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/smoke_candidate_conditioned_qwen_trace_verifier_v2/qwen_shuffled_seed101.pt",
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_prompt_only",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/smoke_candidate_conditioned_qwen_trace_verifier_v2/qwen_prompt_only_seed101.pt",
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_candidate_only",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/smoke_candidate_conditioned_qwen_trace_verifier_v2/qwen_candidate_only_seed101.pt",
+    "best_utility": -1000000000.0
+  },
+  {
+    "arm": "qwen_trace_corrupt",
+    "seed": 101,
+    "checkpoint": "/workspace/large_artifacts/qwen_candidate_conditioned_trace_verifier/checkpoints/smoke_candidate_conditioned_qwen_trace_verifier_v2/qwen_trace_corrupt_seed101.pt",
+    "best_utility": -1000000000.0
+  }
+]

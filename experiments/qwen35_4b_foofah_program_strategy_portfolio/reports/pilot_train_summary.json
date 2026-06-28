@@ -1,0 +1,58 @@
+{
+  "direct_accuracy": 0.3,
+  "direct_exact": 9,
+  "direct_parse_ok": 29,
+  "mean_correct_visible_programs": 0.6333333333333333,
+  "mean_visible_programs": 1.6,
+  "n": 30,
+  "oracle_union": 12,
+  "oracle_union_accuracy": 0.4,
+  "oracle_visible_program": 10,
+  "policies": {
+    "consensus_2": {
+      "accuracy": 0.3333333333333333,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 1,
+      "exact": 10,
+      "program_commit_correct": 4,
+      "program_commit_precision": 0.4,
+      "program_commits": 10
+    },
+    "consensus_3": {
+      "accuracy": 0.3333333333333333,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 1,
+      "exact": 10,
+      "program_commit_correct": 4,
+      "program_commit_precision": 0.4444444444444444,
+      "program_commits": 9
+    },
+    "direct": {
+      "accuracy": 0.3,
+      "direct_correct_losses": 0,
+      "direct_miss_recoveries": 0,
+      "exact": 9,
+      "program_commit_correct": 0,
+      "program_commit_precision": null,
+      "program_commits": 0
+    },
+    "first_visible_program": {
+      "accuracy": 0.26666666666666666,
+      "direct_correct_losses": 3,
+      "direct_miss_recoveries": 2,
+      "exact": 8,
+      "program_commit_correct": 7,
+      "program_commit_precision": 0.3181818181818182,
+      "program_commits": 22
+    }
+  },
+  "tasks_with_visible_program": 22,
+  "total_forward_tokens": 341451,
+  "variants": [
+    "verified_structural",
+    "row_column_rule",
+    "split_fold_unpivot",
+    "header_aware",
+    "cell_parser"
+  ]
+}

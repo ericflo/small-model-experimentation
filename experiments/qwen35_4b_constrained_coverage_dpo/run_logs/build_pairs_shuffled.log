@@ -1,0 +1,59 @@
+{
+  "experiment": "qwen35_4b_constrained_coverage_dpo",
+  "mean_pairs_per_task": 2.9,
+  "pairs": 58,
+  "records": 36,
+  "seed": 2026062621,
+  "shuffle_labels": true,
+  "source": "data/train_pool_records.jsonl",
+  "stats": {
+    "tasks_with_pair_candidates": 20,
+    "tasks_with_visible_wrong": 5,
+    "tasks_without_negative": 8,
+    "tasks_without_positive": 8
+  },
+  "tasks_with_pairs": 20,
+  "top_pair_tasks": [
+    [
+      "mbpp_train_632",
+      4
+    ],
+    [
+      "mbpp_train_621",
+      4
+    ],
+    [
+      "mbpp_train_631",
+      4
+    ],
+    [
+      "mbpp_train_623",
+      4
+    ],
+    [
+      "mbpp_train_616",
+      4
+    ],
+    [
+      "mbpp_train_619",
+      4
+    ],
+    [
+      "mbpp_train_634",
+      4
+    ],
+    [
+      "mbpp_train_630",
+      4
+    ],
+    [
+      "mbpp_train_633",
+      4
+    ],
+    [
+      "mbpp_train_610",
+      4
+    ]
+  ],
+  "visible_wrong_pair_rate": 0.13793103448275862
+}

@@ -1,0 +1,17 @@
+{
+  "run_name": "smoke_no_qwen_v2",
+  "seed": 20260628,
+  "task_limit": 4,
+  "base_examples": 2,
+  "pool_examples": 4,
+  "eval_examples": 2,
+  "policy_budget": 3,
+  "folds": 2,
+  "max_new_tokens": 56,
+  "select_max_new_tokens": 16,
+  "no_qwen": true,
+  "tasks": 4,
+  "generation_records": 104,
+  "started_utc": "2026-06-28T02:52:37.191123+00:00",
+  "elapsed_sec": 1.004573106765747
+}

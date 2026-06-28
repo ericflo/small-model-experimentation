@@ -1,0 +1,63 @@
+# Experiment Log
+
+## 2026-06-27
+
+- Created standalone Foofah program-ensemble-consensus experiment.
+- Objective: test whether multiple independently prompted executable programs, filtered by the visible example and selected by output consensus, outperform direct JSON generation and single-program fallback.
+- Copied 250 Foofah cases into `data/cases.jsonl`.
+- Planned process:
+  - Build evaluator with direct JSON generation, diverse program generation, one visible-feedback repair per program, safe execution, and output clustering.
+  - Run a small smoke and inspect whether prompt variants produce non-identical visible-passing candidates.
+  - Iterate prompt set if the ensemble collapses to duplicates or fails to produce visible-passing programs.
+  - Run full 250-case evaluation.
+  - Generate report, figures, and validation evidence.
+- Built `scripts/eval_program_ensemble.py` with three program variants, one visible-feedback repair round, safe execution, and selector policies.
+- First six-case smoke:
+  - direct parser accepted only 1/6 due to valid JSON followed by stray markdown or an extra bracket.
+  - program candidates produced visible-passing correct programs on 5/6 cases.
+  - consensus-2 committed on 3/6 and was correct on all committed cases.
+  - Updated direct prompt to require first/last bracket and updated JSON extraction to accept the first valid array prefix before rerunning the smoke.
+- Second six-case smoke after parser/prompt fix:
+  - direct parse 6/6, direct exact 5/6.
+  - visible-program oracle 5/6.
+  - first visible-program fallback, consensus-2, and direct all reached 5/6.
+  - The easy prefix did not test direct-miss recovery, so selected a stride-10 25-case smoke next.
+- First stride-10 25-case smoke, three variants, one repair:
+  - direct 9/25.
+  - visible-program oracle 3/25 and oracle union 9/25, so programs added no direct-miss coverage.
+  - first visible-program fallback 8/25 with one direct-correct loss.
+  - consensus-2 committed 7 times but only 2/7 were hidden-correct.
+  - The `minimal_python` variant produced visible-passing hidden-wrong candidates and no correct visible programs.
+  - Replaced `minimal_python` with `verified_structural` and selected a second stride smoke with two repairs.
+- Second stride-10 smoke, revised variants with two repairs:
+  - stopped after 12/25 records because direct and program oracle were still tied at 6/12 and runtime was high.
+  - overlap inspection showed some formerly program-recoverable cases were now solved by the stricter direct prompt/parser, so the full run remains informative but should use resume support.
+  - Added `--resume` support to the evaluator before launching the full run.
+- Full 250-case run, revised three-variant ensemble, one repair per variant:
+  - direct JSON: 111/250 (44.4%), parse 234/250.
+  - first visible-passing program fallback: 130/250 (52.0%).
+  - consensus >= 2: 122/250 (48.8%).
+  - consensus >= 3: 114/250 (45.6%).
+  - oracle union of direct JSON or any visible-correct program: 135/250 (54.0%).
+  - tasks with at least one visible-passing program: 101/250.
+  - first visible-passing program recovered 23 direct misses and lost 4 direct-correct cases.
+  - consensus >= 2 committed 53 times with 43 correct (81.1% precision), recovering 11 direct misses with 0 direct-correct losses.
+  - consensus was safer but under-recovered; first visible-passing program was the best deployed selector.
+- Generated final report and figures:
+  - `reports/report.md`
+  - `reports/final_summary.json`
+  - `reports/variant_summary.json`
+  - `reports/family_summary.json`
+  - `reports/prefix_summary.json`
+  - `reports/consensus_diagnostics.json`
+  - `reports/figures/policy_accuracy.png`
+  - `reports/figures/selector_tradeoff.png`
+  - `reports/figures/prefix_progress.png`
+  - `reports/figures/variant_quality.png`
+  - `reports/figures/family_gains.png`
+- Validation:
+  - `data/cases.jsonl` and `reports/full_ensemble_records.jsonl` both contain 250 records.
+  - `python -m py_compile src/*.py scripts/*.py` passed.
+  - required report artifacts are non-empty.
+  - human-authored standalone-content grep found no broader-context references.
+  - no evaluator process remained after the run.

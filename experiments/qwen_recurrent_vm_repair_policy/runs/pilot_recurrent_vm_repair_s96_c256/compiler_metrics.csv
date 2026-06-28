@@ -1,0 +1,11 @@
+run,phase,n,direct_accuracy,valid_rate,program_exact,search_accuracy,oracle_accuracy,candidate_valid_rate,mean_candidates,split
+pilot_recurrent_vm_repair_s96_c256,seed_compiler,64,0.015625,1.0,0.0,0.09375,0.09375,0.6170998898035911,241.046875,val_mixed
+pilot_recurrent_vm_repair_s96_c256,seed_compiler,64,0.046875,1.0,0.0,0.109375,0.109375,0.6172943540545797,241.046875,fresh_standard
+pilot_recurrent_vm_repair_s96_c256,seed_compiler,64,0.015625,1.0,0.0,0.15625,0.15625,0.6168309128630706,241.0,fresh_paraphrase
+pilot_recurrent_vm_repair_s96_c256,seed_compiler,64,0.0,1.0,0.0,0.21875,0.21875,0.6170254149377593,241.0,fresh_paired
+pilot_recurrent_vm_repair_s96_c256,seed_compiler,64,0.03125,1.0,0.0,0.171875,0.171875,0.6178777468075453,241.046875,hard_composition
+pilot_recurrent_vm_repair_s96_c256,full_supervised_compiler,64,0.15625,1.0,0.0625,0.453125,0.453125,0.6355212855569234,241.140625,val_mixed
+pilot_recurrent_vm_repair_s96_c256,full_supervised_compiler,64,0.1875,1.0,0.0,0.453125,0.453125,0.638966254291081,241.234375,fresh_standard
+pilot_recurrent_vm_repair_s96_c256,full_supervised_compiler,64,0.046875,1.0,0.0,0.390625,0.390625,0.6372536307053942,241.0,fresh_paraphrase
+pilot_recurrent_vm_repair_s96_c256,full_supervised_compiler,64,0.078125,1.0,0.0,0.46875,0.46875,0.6421161825726142,241.0,fresh_paired
+pilot_recurrent_vm_repair_s96_c256,full_supervised_compiler,64,0.0625,1.0,0.015625,0.484375,0.484375,0.6444631633512603,241.140625,hard_composition

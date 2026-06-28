@@ -1,0 +1,1452 @@
+{
+  "dev_all_variants_first_visible": {
+    "accuracy": 1.0,
+    "direct_accuracy": 1.0,
+    "direct_correct_losses": 0,
+    "direct_exact": 2,
+    "direct_miss_recoveries": 0,
+    "exact": 2,
+    "n": 2,
+    "oracle_union": 2,
+    "oracle_union_accuracy": 1.0,
+    "oracle_visible_program": 2,
+    "policy": "first_visible_program",
+    "program_commit_correct": 2,
+    "program_commit_precision": 1.0,
+    "program_commits": 2,
+    "total_forward_tokens": 14801,
+    "variants": [
+      "verified_structural",
+      "row_column_rule",
+      "shape_first",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser",
+      "aggregation_grouping",
+      "transpose_restructure"
+    ]
+  },
+  "dev_direct": {
+    "accuracy": 1.0,
+    "direct_accuracy": 1.0,
+    "direct_correct_losses": 0,
+    "direct_exact": 2,
+    "direct_miss_recoveries": 0,
+    "exact": 2,
+    "n": 2,
+    "oracle_union": 2,
+    "oracle_union_accuracy": 1.0,
+    "oracle_visible_program": 0,
+    "policy": "direct",
+    "program_commit_correct": 0,
+    "program_commit_precision": null,
+    "program_commits": 0,
+    "total_forward_tokens": 988,
+    "variants": []
+  },
+  "dev_selected": {
+    "accuracy": 1.0,
+    "direct_accuracy": 1.0,
+    "direct_correct_losses": 0,
+    "direct_exact": 2,
+    "direct_miss_recoveries": 0,
+    "exact": 2,
+    "n": 2,
+    "oracle_union": 2,
+    "oracle_union_accuracy": 1.0,
+    "oracle_visible_program": 0,
+    "policy": "direct",
+    "program_commit_correct": 0,
+    "program_commit_precision": null,
+    "program_commits": 0,
+    "total_forward_tokens": 988,
+    "variants": []
+  },
+  "greedy_trace": [
+    {
+      "added": "verified_structural",
+      "selected": [
+        "verified_structural"
+      ],
+      "step": 1,
+      "train_first_visible": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural"
+        ]
+      }
+    },
+    {
+      "added": "transpose_restructure",
+      "selected": [
+        "verified_structural",
+        "transpose_restructure"
+      ],
+      "step": 2,
+      "train_first_visible": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      }
+    },
+    {
+      "added": "split_fold_unpivot",
+      "selected": [
+        "verified_structural",
+        "transpose_restructure",
+        "split_fold_unpivot"
+      ],
+      "step": 3,
+      "train_first_visible": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      }
+    },
+    {
+      "added": "shape_first",
+      "selected": [
+        "verified_structural",
+        "transpose_restructure",
+        "split_fold_unpivot",
+        "shape_first"
+      ],
+      "step": 4,
+      "train_first_visible": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      }
+    },
+    {
+      "added": "row_column_rule",
+      "selected": [
+        "verified_structural",
+        "transpose_restructure",
+        "split_fold_unpivot",
+        "shape_first",
+        "row_column_rule"
+      ],
+      "step": 5,
+      "train_first_visible": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      }
+    }
+  ],
+  "prefix_grid": [
+    {
+      "k": 0,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": []
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "first_visible_program",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 0,
+        "direct_accuracy": 0,
+        "direct_correct_losses": 0,
+        "direct_exact": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 0,
+        "n": 0,
+        "oracle_union": 0,
+        "oracle_union_accuracy": 0,
+        "oracle_visible_program": 0,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 0,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "train"
+    },
+    {
+      "k": 0,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 0,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 988,
+        "variants": []
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 1918,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "first_visible_program",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 1918,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_2",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 1918,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 1,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 1918,
+        "variants": [
+          "verified_structural"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 6632,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "first_visible_program",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 6632,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_2",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 6632,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 2,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_3",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 6632,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 7774,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "first_visible_program",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 7774,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_2",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 7774,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 3,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_3",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 7774,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 9773,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "first_visible_program",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 9773,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_2",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 9773,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 4,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_3",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 9773,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "direct",
+        "program_commit_correct": 0,
+        "program_commit_precision": null,
+        "program_commits": 0,
+        "total_forward_tokens": 10806,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "first_visible_program",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 10806,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_2",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 10806,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    },
+    {
+      "k": 5,
+      "metrics": {
+        "accuracy": 1.0,
+        "direct_accuracy": 1.0,
+        "direct_correct_losses": 0,
+        "direct_exact": 2,
+        "direct_miss_recoveries": 0,
+        "exact": 2,
+        "n": 2,
+        "oracle_union": 2,
+        "oracle_union_accuracy": 1.0,
+        "oracle_visible_program": 2,
+        "policy": "consensus_3",
+        "program_commit_correct": 2,
+        "program_commit_precision": 1.0,
+        "program_commits": 2,
+        "total_forward_tokens": 10806,
+        "variants": [
+          "verified_structural",
+          "transpose_restructure",
+          "split_fold_unpivot",
+          "shape_first",
+          "row_column_rule"
+        ]
+      },
+      "split": "dev"
+    }
+  ],
+  "selection": {
+    "candidate_variants": [
+      "verified_structural",
+      "row_column_rule",
+      "shape_first",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser",
+      "aggregation_grouping",
+      "transpose_restructure"
+    ],
+    "family_splits": {
+      "dev": [
+        "potters_wheel_fold_2",
+        "synthetic_10",
+        "synthetic_17",
+        "synthetic_24",
+        "synthetic_30",
+        "synthetic_37",
+        "synthetic_40",
+        "synthetic_45",
+        "synthetic_46",
+        "synthetic_51"
+      ],
+      "test": [
+        "agriculture",
+        "crime_data_wrangler",
+        "potters_wheel_merge_split",
+        "potters_wheel_unfold",
+        "potters_wheel_unfold2",
+        "proactive_wrangling_fold",
+        "synthetic_12",
+        "synthetic_25",
+        "synthetic_48",
+        "synthetic_8"
+      ],
+      "train": [
+        "craigslist_data_wrangler",
+        "potters_wheel_divide",
+        "potters_wheel_fold",
+        "potters_wheel_split_fold",
+        "proactive_wrangling_complex",
+        "reshape_table_structure_data_wrangler",
+        "synthetic_11",
+        "synthetic_13",
+        "synthetic_15",
+        "synthetic_18",
+        "synthetic_19",
+        "synthetic_2",
+        "synthetic_22",
+        "synthetic_26",
+        "synthetic_27",
+        "synthetic_28",
+        "synthetic_29",
+        "synthetic_3",
+        "synthetic_33",
+        "synthetic_34",
+        "synthetic_36",
+        "synthetic_4",
+        "synthetic_41",
+        "synthetic_43",
+        "synthetic_44",
+        "synthetic_47",
+        "synthetic_49",
+        "synthetic_5",
+        "synthetic_6",
+        "synthetic_7"
+      ]
+    },
+    "greedy_order": [
+      "verified_structural",
+      "transpose_restructure",
+      "split_fold_unpivot",
+      "shape_first",
+      "row_column_rule"
+    ],
+    "selected_k": 0,
+    "selected_policy": "direct",
+    "selected_variants": [],
+    "selection_rule": "greedy ordered variants on train; choose prefix and selector maximizing dev exact accuracy with loss/precision/token tie-breaks"
+  },
+  "train_all_variants_first_visible": {
+    "accuracy": 0,
+    "direct_accuracy": 0,
+    "direct_correct_losses": 0,
+    "direct_exact": 0,
+    "direct_miss_recoveries": 0,
+    "exact": 0,
+    "n": 0,
+    "oracle_union": 0,
+    "oracle_union_accuracy": 0,
+    "oracle_visible_program": 0,
+    "policy": "first_visible_program",
+    "program_commit_correct": 0,
+    "program_commit_precision": null,
+    "program_commits": 0,
+    "total_forward_tokens": 0,
+    "variants": [
+      "verified_structural",
+      "row_column_rule",
+      "shape_first",
+      "split_fold_unpivot",
+      "header_aware",
+      "cell_parser",
+      "aggregation_grouping",
+      "transpose_restructure"
+    ]
+  },
+  "train_direct": {
+    "accuracy": 0,
+    "direct_accuracy": 0,
+    "direct_correct_losses": 0,
+    "direct_exact": 0,
+    "direct_miss_recoveries": 0,
+    "exact": 0,
+    "n": 0,
+    "oracle_union": 0,
+    "oracle_union_accuracy": 0,
+    "oracle_visible_program": 0,
+    "policy": "direct",
+    "program_commit_correct": 0,
+    "program_commit_precision": null,
+    "program_commits": 0,
+    "total_forward_tokens": 0,
+    "variants": []
+  },
+  "train_selected": {
+    "accuracy": 0,
+    "direct_accuracy": 0,
+    "direct_correct_losses": 0,
+    "direct_exact": 0,
+    "direct_miss_recoveries": 0,
+    "exact": 0,
+    "n": 0,
+    "oracle_union": 0,
+    "oracle_union_accuracy": 0,
+    "oracle_visible_program": 0,
+    "policy": "direct",
+    "program_commit_correct": 0,
+    "program_commit_precision": null,
+    "program_commits": 0,
+    "total_forward_tokens": 0,
+    "variants": []
+  }
+}

@@ -1,0 +1,15 @@
+method,tasks,row_exact,full_task_exact,mean_budget
+base_plain,5,1.0,1.0,0.0
+entropy1_plain,5,1.0,1.0,1.0
+loo_portfolio_base,5,1.0,1.0,0.0
+entropy2_plain,5,1.0,1.0,2.0
+order1_plain,5,1.0,1.0,1.0
+oracle_among_tested_acquisitions,5,1.0,1.0,1.0
+qwen_choose2_plain,5,1.0,1.0,2.0
+qwen_choose1_plain,5,1.0,1.0,1.0
+order2_plain,5,1.0,1.0,2.0
+diverse1_plain,5,0.8666666666666666,0.8,1.0
+diverse2_plain,5,0.8,0.8,2.0
+random1_plain,5,0.8666666666666666,0.8,1.0
+random2_plain,5,0.8666666666666666,0.8,2.0
+qwen_choose2_shuffled_labels,5,0.6,0.4,2.0

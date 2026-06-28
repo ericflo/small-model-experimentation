@@ -1,0 +1,8 @@
+split,groups,avg_candidates,answer_positive_fraction,state_positive_fraction,base_executor_accuracy
+heldout_L24,16,19.0,0.875,0.875,0.8125
+paired_L24,16,19.0,1.0,1.0,1.0
+paired_heldout_L24,16,19.0,0.75,0.75,0.625
+paraphrase_L24,16,19.0,1.0,1.0,1.0
+standard_L24,16,19.0,0.9375,0.9375,0.875
+train_mixed_L24,24,19.0,1.0,1.0,1.0
+val_mixed_L24,12,19.0,1.0,1.0,1.0

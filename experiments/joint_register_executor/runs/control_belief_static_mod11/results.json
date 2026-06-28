@@ -1,0 +1,294 @@
+{
+  "mode": "static",
+  "args": {
+    "mode": "static",
+    "task": "belief_line",
+    "seed": 23,
+    "modulus": 11,
+    "op_family": "full",
+    "train_min_len": 1,
+    "train_max_len": 6,
+    "eval_lengths": "3,6,9,12",
+    "eval_k": "0,1,2,3,6,9,12",
+    "transition_temperature": 1.0,
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 2,
+    "dropout": 0.05,
+    "train_steps": 300,
+    "batch_size": 512,
+    "eval_batch_size": 512,
+    "eval_examples": 1024,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "log_every": 25,
+    "eval_every": 100,
+    "output_dir": "experiments/joint_register_executor/runs/control_belief_static_mod11",
+    "checkpoint_dir": "large_artifacts/joint_register_executor/checkpoints/control_belief_static_mod11"
+  },
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "device": "cuda",
+    "cuda_name": "NVIDIA RTX 6000 Ada Generation"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 4.81330680847168,
+      "pair_acc": 0.08984375,
+      "grad_norm": 0.20231597125530243
+    },
+    {
+      "step": 25,
+      "loss": 4.780508518218994,
+      "pair_acc": 0.146484375,
+      "grad_norm": 0.09643480181694031
+    },
+    {
+      "step": 50,
+      "loss": 4.695324420928955,
+      "pair_acc": 0.2578125,
+      "grad_norm": 0.1263684332370758
+    },
+    {
+      "step": 75,
+      "loss": 4.615285873413086,
+      "pair_acc": 0.244140625,
+      "grad_norm": 0.125777930021286
+    },
+    {
+      "step": 100,
+      "loss": 4.513310432434082,
+      "pair_acc": 0.23828125,
+      "grad_norm": 0.09511519223451614
+    },
+    {
+      "step": 125,
+      "loss": 4.406520843505859,
+      "pair_acc": 0.287109375,
+      "grad_norm": 0.11476808041334152
+    },
+    {
+      "step": 150,
+      "loss": 4.50686502456665,
+      "pair_acc": 0.25390625,
+      "grad_norm": 0.21332748234272003
+    },
+    {
+      "step": 175,
+      "loss": 4.409083366394043,
+      "pair_acc": 0.267578125,
+      "grad_norm": 0.1270049810409546
+    },
+    {
+      "step": 200,
+      "loss": 4.363996505737305,
+      "pair_acc": 0.296875,
+      "grad_norm": 0.1544819474220276
+    },
+    {
+      "step": 225,
+      "loss": 4.403125762939453,
+      "pair_acc": 0.271484375,
+      "grad_norm": 0.15729042887687683
+    },
+    {
+      "step": 250,
+      "loss": 4.374475002288818,
+      "pair_acc": 0.294921875,
+      "grad_norm": 0.15105579793453217
+    },
+    {
+      "step": 275,
+      "loss": 4.3181633949279785,
+      "pair_acc": 0.306640625,
+      "grad_norm": 0.19197875261306763
+    },
+    {
+      "step": 300,
+      "loss": 4.289544105529785,
+      "pair_acc": 0.2890625,
+      "grad_norm": 0.1584940403699875
+    }
+  ],
+  "eval": [
+    {
+      "step": 100,
+      "rows": [
+        {
+          "model": "static",
+          "length": 3,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.17578125,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1218254560546875,
+          "target_nll": 4.6795709140625,
+          "top1_on_support": 0.17578125
+        },
+        {
+          "model": "static",
+          "length": 6,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.10546875,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0962012109375,
+          "target_nll": 4.782914638671875,
+          "top1_on_support": 0.10546875
+        },
+        {
+          "model": "static",
+          "length": 9,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.0986328125,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.09100092578125,
+          "target_nll": 4.80517458984375,
+          "top1_on_support": 0.0986328125
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.076171875,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0911910576171875,
+          "target_nll": 4.802636146484375,
+          "top1_on_support": 0.076171875
+        }
+      ]
+    },
+    {
+      "step": 200,
+      "rows": [
+        {
+          "model": "static",
+          "length": 3,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.2421875,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.166449501953125,
+          "target_nll": 4.55965066015625,
+          "top1_on_support": 0.2421875
+        },
+        {
+          "model": "static",
+          "length": 6,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.1123046875,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0959849365234375,
+          "target_nll": 4.783015250976563,
+          "top1_on_support": 0.1123046875
+        },
+        {
+          "model": "static",
+          "length": 9,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.087890625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0930548427734375,
+          "target_nll": 4.793198109375,
+          "top1_on_support": 0.087890625
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.1015625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.09187921875,
+          "target_nll": 4.7991352080078125,
+          "top1_on_support": 0.1015625
+        }
+      ]
+    },
+    {
+      "step": 300,
+      "rows": [
+        {
+          "model": "static",
+          "length": 3,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.2529296875,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.1844290498046875,
+          "target_nll": 4.500460385742188,
+          "top1_on_support": 0.2529296875
+        },
+        {
+          "model": "static",
+          "length": 6,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.1103515625,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.101009751953125,
+          "target_nll": 4.765430926757812,
+          "top1_on_support": 0.1103515625
+        },
+        {
+          "model": "static",
+          "length": 9,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.0986328125,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0914890693359375,
+          "target_nll": 4.797176838867188,
+          "top1_on_support": 0.0986328125
+        },
+        {
+          "model": "static",
+          "length": 12,
+          "k": -1,
+          "n": 1024,
+          "pair_accuracy": 0.1005859375,
+          "a_accuracy": NaN,
+          "b_accuracy": NaN,
+          "register_accuracy": NaN,
+          "target_mass": 0.0910594765625,
+          "target_nll": 4.801716328125,
+          "top1_on_support": 0.1005859375
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    "large_artifacts/joint_register_executor/checkpoints/control_belief_static_mod11/checkpoint_step00100.pt",
+    "large_artifacts/joint_register_executor/checkpoints/control_belief_static_mod11/checkpoint_step00200.pt",
+    "large_artifacts/joint_register_executor/checkpoints/control_belief_static_mod11/checkpoint_step00300.pt"
+  ]
+}

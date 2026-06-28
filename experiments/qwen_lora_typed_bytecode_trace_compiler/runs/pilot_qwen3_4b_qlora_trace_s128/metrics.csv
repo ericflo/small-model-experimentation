@@ -1,0 +1,6 @@
+run,variant,phase,split,n,answer_head_accuracy,bytecode_accuracy,search_accuracy,oracle_accuracy,program_exact,direct_valid_rate,candidate_valid_rate,mean_candidates,found_rate,gap_recovered
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,val_mixed,32,0.125,0.09375,0.59375,0.59375,0.03125,1.0,0.6799116997792495,28.3125,0.59375,1.0
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,fresh_standard,32,0.15625,0.125,0.46875,0.46875,0.0,1.0,0.7373188405797102,34.5,0.46875,1.0
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,fresh_paraphrase,32,0.15625,0.1875,0.65625,0.65625,0.03125,1.0,0.6915584415584416,28.875,0.65625,1.0
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,fresh_paired,32,0.0625,0.03125,0.40625,0.40625,0.0,1.0,0.7137014314928425,30.5625,0.40625,1.0
+pilot_qwen3_4b_qlora_trace_s128,qlora_trace,trace_supervised,hard_composition,32,0.15625,0.21875,0.59375,0.59375,0.03125,1.0,0.7251908396946565,32.75,0.59375,1.0

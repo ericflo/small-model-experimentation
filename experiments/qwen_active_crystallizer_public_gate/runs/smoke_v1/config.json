@@ -1,0 +1,13 @@
+{
+  "suite": "smoke",
+  "limit": 35,
+  "qwen_task_limit": 12,
+  "train_n": 4,
+  "heldout_cap": 12,
+  "max_candidates": 40000,
+  "qwen_probes": 3,
+  "max_new_tokens": 64,
+  "sample_seed": 20260627,
+  "started_utc": "2026-06-27T04:37:26.904840+00:00",
+  "elapsed_sec": 46.766945
+}

@@ -1,0 +1,35 @@
+{
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "max_new_tokens": 260,
+  "max_sources_per_record": 2,
+  "path": "data/main_union_k32_repair_records.jsonl",
+  "records": {
+    "candidate_count_mean": 24.2625,
+    "coverage": 0.8625,
+    "distinct_behavior_rate_mean": 0.6361079829577109,
+    "distinct_functional_rate_mean": 0.339876956861977,
+    "false_repair_count": 2,
+    "false_repair_rate": 1.0,
+    "hidden_pass_candidates_mean": 2.875,
+    "parse_success_mean": 22.4,
+    "records": 80,
+    "visible_candidates_mean": 7.35,
+    "visible_coverage": 0.8625,
+    "visible_repair_pass_count": 2,
+    "zero_base_records": 11,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "records_in": "data/main_union_k32_records.jsonl",
+  "repair_visible_passers": false,
+  "repairs_per_source": 1,
+  "round_name": "main_union_k32_repair",
+  "temperature": 0.4,
+  "token_usage": {
+    "calls": 22,
+    "completion_tokens": 2805,
+    "forward_tokens": 12774,
+    "prompt_tokens": 9969
+  },
+  "top_p": 0.95
+}

@@ -1,0 +1,886 @@
+method,split,support_mode,task_id,family,rule_name,contrast_rule,query_index,input,target,prediction,exact
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,rie,True
+adapter,synthetic_counterfactual,normal,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,alt,True
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,emb,True
+adapter,synthetic_counterfactual,normal,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,lam,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,mail.test,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46,True
+adapter,synthetic_counterfactual,normal,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nectar18,True
+adapter,synthetic_counterfactual,normal,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,granite lambda,True
+adapter,synthetic_counterfactual,normal,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,fabric lambda,False
+adapter,synthetic_counterfactual,normal,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,Granite Lambda,True
+adapter,synthetic_counterfactual,normal,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,Fabble Lambda,False
+adapter,synthetic_counterfactual,normal,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,lam,True
+adapter,synthetic_counterfactual,normal,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,atl,True
+adapter,synthetic_counterfactual,normal,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,bda,True
+adapter,synthetic_counterfactual,normal,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,lta,True
+adapter,synthetic_counterfactual,normal,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,123,True
+adapter,synthetic_counterfactual,normal,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,247,True
+adapter,synthetic_counterfactual,normal,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,BinaryCA,True
+adapter,synthetic_counterfactual,normal,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,KernelNY,True
+adapter,synthetic_counterfactual,normal,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,delta fable,True
+adapter,synthetic_counterfactual,normal,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,ivory atlas,True
+adapter,synthetic_counterfactual,normal,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,DELTA FABLE,True
+adapter,synthetic_counterfactual,normal,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,IVORY ATLAS,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,lambda.lambda24,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,atlas.matrix92,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,normal,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,normal,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,atlas,False
+adapter,synthetic_counterfactual,normal,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,rie,True
+adapter,synthetic_counterfactual,normal,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,cob,True
+adapter,synthetic_counterfactual,normal,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,mat,True
+adapter,synthetic_counterfactual,normal,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,Orbit,True
+adapter,synthetic_counterfactual,normal,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,Ember,True
+adapter,synthetic_counterfactual,normal,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,AKO,True
+adapter,synthetic_counterfactual,normal,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,HAE,True
+adapter,synthetic_counterfactual,normal,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,861,True
+adapter,synthetic_counterfactual,normal,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,273,True
+adapter,synthetic_counterfactual,normal,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,AtlasNY,True
+adapter,synthetic_counterfactual,normal,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,IvoryTX,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,25,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,12,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,6026,True
+adapter,synthetic_counterfactual,normal,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,9113,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,ivory.nectar27,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,jupiter.jupiter77,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,normal,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,normal,cf_0012_letters,class,letters,digits,0,Jupiter-272-WA,JupiterWA,JupiterWA,True
+adapter,synthetic_counterfactual,normal,cf_0012_letters,class,letters,digits,1,Nectar-151-NY,NectarNY,NectarNY,True
+adapter,synthetic_counterfactual,normal,cf_0012_digits,class,digits,letters,0,Jupiter-272-WA,272,272,True
+adapter,synthetic_counterfactual,normal,cf_0012_digits,class,digits,letters,1,Nectar-151-NY,151,151,True
+adapter,synthetic_counterfactual,normal,cf_0013_pipe_0,delim,pipe_0,dash_1,0,Seattle-AK-690,Seattle-AK-690,Seattle-AK-690,True
+adapter,synthetic_counterfactual,normal,cf_0013_pipe_0,delim,pipe_0,dash_1,1,Boston-OH-462,Boston-OH-462,Boston-OH-462,True
+adapter,synthetic_counterfactual,normal,cf_0013_dash_1,delim,dash_1,pipe_0,0,Seattle-AK-690,AK,AK,True
+adapter,synthetic_counterfactual,normal,cf_0013_dash_1,delim,dash_1,pipe_0,1,Boston-OH-462,OH,OH,True
+adapter,synthetic_counterfactual,normal,cf_0014_email_user,email,email_user,email_domain,0,jupiter.matrix51@fabrikam.org,jupiter.matrix51,jupiter.matrix51,True
+adapter,synthetic_counterfactual,normal,cf_0014_email_user,email,email_user,email_domain,1,ivory.atlas53@northwind.io,ivory.atlas53,ivory.atlas53,True
+adapter,synthetic_counterfactual,normal,cf_0014_email_domain,email,email_domain,email_user,0,jupiter.matrix51@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,normal,cf_0014_email_domain,email,email_domain,email_user,1,ivory.atlas53@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,normal,cf_0015_last_word,words,last_word,second_word,0,Ava Johnson Cobalt,Cobalt,Cobalt,True
+adapter,synthetic_counterfactual,normal,cf_0015_last_word,words,last_word,second_word,1,Fatma Yilmaz Jupiter,Jupiter,Jupiter,True
+adapter,synthetic_counterfactual,normal,cf_0015_second_word,words,second_word,last_word,0,Ava Johnson Cobalt,Johnson,Johnson,True
+adapter,synthetic_counterfactual,normal,cf_0015_second_word,words,second_word,last_word,1,Fatma Yilmaz Jupiter,Yilmaz,Yilmaz,True
+adapter,synthetic_counterfactual,normal,cf_0016_number_last2,number,number_last2,number_plus_1,0,BINARY 8806,06,06,True
+adapter,synthetic_counterfactual,normal,cf_0016_number_last2,number,number_last2,number_plus_1,1,FABLE 595,95,5,False
+adapter,synthetic_counterfactual,normal,cf_0016_number_plus_1,number,number_plus_1,number_last2,0,BINARY 8806,8807,8807,True
+adapter,synthetic_counterfactual,normal,cf_0016_number_plus_1,number,number_plus_1,number_last2,1,FABLE 595,596,596,True
+adapter,synthetic_counterfactual,normal,cf_0017_last_three,span,last_three,first_three,0,jupiternectar,tar,ter,False
+adapter,synthetic_counterfactual,normal,cf_0017_last_three,span,last_three,first_three,1,cobaltgranite,ite,ite,True
+adapter,synthetic_counterfactual,normal,cf_0017_first_three,span,first_three,last_three,0,jupiternectar,jup,jug,False
+adapter,synthetic_counterfactual,normal,cf_0017_first_three,span,first_three,last_three,1,cobaltgranite,cob,cob,True
+adapter,synthetic_counterfactual,normal,cf_0018_first_word,words,first_word,second_word,0,Sonia Rees Ivory,Sonia,Sonia,True
+adapter,synthetic_counterfactual,normal,cf_0018_first_word,words,first_word,second_word,1,Hone Albert Atlas,Hone,Hone,True
+adapter,synthetic_counterfactual,normal,cf_0018_second_word,words,second_word,first_word,0,Sonia Rees Ivory,Rees,Rees,True
+adapter,synthetic_counterfactual,normal,cf_0018_second_word,words,second_word,first_word,1,Hone Albert Atlas,Albert,Albert,True
+adapter,synthetic_counterfactual,normal,cf_0019_email_domain,email,email_domain,email_user,0,ivory.granite57@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,normal,cf_0019_email_domain,email,email_domain,email_user,1,cobalt.lambda13@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,normal,cf_0019_email_user,email,email_user,email_domain,0,ivory.granite57@example.com,ivory.granite57,ivory.granite57,True
+adapter,synthetic_counterfactual,normal,cf_0019_email_user,email,email_user,email_domain,1,cobalt.lambda13@northwind.io,cobalt.lambda13,cobalt.lambda13,True
+adapter,synthetic_counterfactual,normal,cf_0020_email_user,email,email_user,email_domain,0,kernel.nectar88@fabrikam.org,kernel.nectar88,kernel.nectar88,True
+adapter,synthetic_counterfactual,normal,cf_0020_email_user,email,email_user,email_domain,1,granite.fable38@contoso.net,granite.fable38,granite.fable38,True
+adapter,synthetic_counterfactual,normal,cf_0020_email_domain,email,email_domain,email_user,0,kernel.nectar88@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,normal,cf_0020_email_domain,email,email_domain,email_user,1,granite.fable38@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,normal,cf_0021_letters,class,letters,digits,0,Kernel-555-OK,KernelOK,KernelOK,True
+adapter,synthetic_counterfactual,normal,cf_0021_letters,class,letters,digits,1,Ember-358-OK,EmberOK,EmberOK,True
+adapter,synthetic_counterfactual,normal,cf_0021_digits,class,digits,letters,0,Kernel-555-OK,555,555,True
+adapter,synthetic_counterfactual,normal,cf_0021_digits,class,digits,letters,1,Ember-358-OK,358,358,True
+adapter,synthetic_counterfactual,normal,cf_0022_email_user,email,email_user,email_domain,0,cobalt.orbit53@fabrikam.org,cobalt.orbit53,cobalt.orbit53,True
+adapter,synthetic_counterfactual,normal,cf_0022_email_user,email,email_user,email_domain,1,atlas.lambda29@northwind.io,atlas.lambda29,atlas.lambda29,True
+adapter,synthetic_counterfactual,normal,cf_0022_email_domain,email,email_domain,email_user,0,cobalt.orbit53@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,normal,cf_0022_email_domain,email,email_domain,email_user,1,atlas.lambda29@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,normal,cf_0023_email_user,email,email_user,email_domain,0,ivory.orbit78@fabrikam.org,ivory.orbit78,ivory.orbit78,True
+adapter,synthetic_counterfactual,normal,cf_0023_email_user,email,email_user,email_domain,1,jupiter.jupiter26@contoso.net,jupiter.jupiter26,jupiter.jupiter26,True
+adapter,synthetic_counterfactual,normal,cf_0023_email_domain,email,email_domain,email_user,0,ivory.orbit78@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,normal,cf_0023_email_domain,email,email_domain,email_user,1,jupiter.jupiter26@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,normal,cf_0024_initials,words,initials,last_word,0,Akila Kadija Ember,AKE,AKE,True
+adapter,synthetic_counterfactual,normal,cf_0024_initials,words,initials,last_word,1,Lucas Brown Delta,LBD,LBD,True
+adapter,synthetic_counterfactual,normal,cf_0024_last_word,words,last_word,initials,0,Akila Kadija Ember,Ember,Ember,True
+adapter,synthetic_counterfactual,normal,cf_0024_last_word,words,last_word,initials,1,Lucas Brown Delta,Delta,Delta,True
+adapter,synthetic_counterfactual,normal,cf_0025_last_three,span,last_three,first_three,0,prairieprairie,rie,rie,True
+adapter,synthetic_counterfactual,normal,cf_0025_last_three,span,last_three,first_three,1,lambdamatrix,rix,trix,False
+adapter,synthetic_counterfactual,normal,cf_0025_first_three,span,first_three,last_three,0,prairieprairie,pra,pra,True
+adapter,synthetic_counterfactual,normal,cf_0025_first_three,span,first_three,last_three,1,lambdamatrix,lam,lam,True
+adapter,synthetic_counterfactual,normal,cf_0026_digits,class,digits,letters,0,Binary-239-OK,239,239,True
+adapter,synthetic_counterfactual,normal,cf_0026_digits,class,digits,letters,1,Prairie-172-OH,172,172,True
+adapter,synthetic_counterfactual,normal,cf_0026_letters,class,letters,digits,0,Binary-239-OK,BinaryOK,BinaryOK,True
+adapter,synthetic_counterfactual,normal,cf_0026_letters,class,letters,digits,1,Prairie-172-OH,PrairieOH,PrairieOH,True
+adapter,synthetic_counterfactual,normal,cf_0027_last_three,span,last_three,first_three,0,nectarfable,ble,ble,True
+adapter,synthetic_counterfactual,normal,cf_0027_last_three,span,last_three,first_three,1,kernelivory,ory,ory,True
+adapter,synthetic_counterfactual,normal,cf_0027_first_three,span,first_three,last_three,0,nectarfable,nec,nec,True
+adapter,synthetic_counterfactual,normal,cf_0027_first_three,span,first_three,last_three,1,kernelivory,ker,ker,True
+adapter,synthetic_counterfactual,normal,cf_0028_first_three,span,first_three,last_three,0,atlasbinary,atl,ata,False
+adapter,synthetic_counterfactual,normal,cf_0028_first_three,span,first_three,last_three,1,fablecobalt,fab,fab,True
+adapter,synthetic_counterfactual,normal,cf_0028_last_three,span,last_three,first_three,0,atlasbinary,ary,ary,True
+adapter,synthetic_counterfactual,normal,cf_0028_last_three,span,last_three,first_three,1,fablecobalt,alt,cobalt,False
+adapter,synthetic_counterfactual,normal,cf_0029_lower,case,lower,upper,0,EMBER GRANITE,ember granite,ember granite,True
+adapter,synthetic_counterfactual,normal,cf_0029_lower,case,lower,upper,1,Harbor Orbit,harbor orbit,harbor orbit,True
+adapter,synthetic_counterfactual,normal,cf_0029_upper,case,upper,lower,0,EMBER GRANITE,EMBER GRANITE,EMBER GRANITE,True
+adapter,synthetic_counterfactual,normal,cf_0029_upper,case,upper,lower,1,Harbor Orbit,HARBOR ORBIT,HARBOR ORBIT,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,rie,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,alt,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,emb,True
+adapter,synthetic_counterfactual,shuffled,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,lam,True
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,example.com,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,example.com,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,delta.fable24,False
+adapter,synthetic_counterfactual,shuffled,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,lambda.nectar18,True
+adapter,synthetic_counterfactual,shuffled,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,matrix delta,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,lambda matrix,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,Matrix Delta,False
+adapter,synthetic_counterfactual,shuffled,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,Nectar Kernel,False
+adapter,synthetic_counterfactual,shuffled,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,lam,True
+adapter,synthetic_counterfactual,shuffled,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,del,False
+adapter,synthetic_counterfactual,shuffled,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,bda,True
+adapter,synthetic_counterfactual,shuffled,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,lta,True
+adapter,synthetic_counterfactual,shuffled,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,684,False
+adapter,synthetic_counterfactual,shuffled,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,429,False
+adapter,synthetic_counterfactual,shuffled,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,BinaryCA,True
+adapter,synthetic_counterfactual,shuffled,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,KernelNY,True
+adapter,synthetic_counterfactual,shuffled,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,delta fable,True
+adapter,synthetic_counterfactual,shuffled,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,ivory atlas,True
+adapter,synthetic_counterfactual,shuffled,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,DELTA FABLE,True
+adapter,synthetic_counterfactual,shuffled,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,IVORY ATLAS,True
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,lambda.lambda24,True
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,atlas.matrix92,True
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,shuffled,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,example.com,True
+adapter,synthetic_counterfactual,shuffled,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,atlas,False
+adapter,synthetic_counterfactual,shuffled,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,rie,True
+adapter,synthetic_counterfactual,shuffled,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,cob,True
+adapter,synthetic_counterfactual,shuffled,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,cob,False
+adapter,synthetic_counterfactual,shuffled,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,Orbit,True
+adapter,synthetic_counterfactual,shuffled,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,Ember,True
+adapter,synthetic_counterfactual,shuffled,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,NME,False
+adapter,synthetic_counterfactual,shuffled,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,NML,False
+adapter,synthetic_counterfactual,shuffled,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,580,False
+adapter,synthetic_counterfactual,shuffled,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,580,False
+adapter,synthetic_counterfactual,shuffled,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,AtlasNY,True
+adapter,synthetic_counterfactual,shuffled,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,IvoryTX,True
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,25,True
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,16,False
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,6026,True
+adapter,synthetic_counterfactual,shuffled,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,9113,True
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,ivory.nectar27,True
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,jupiter.jupiter77,True
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,shuffled,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,shuffled,cf_0012_letters,class,letters,digits,0,Jupiter-272-WA,JupiterWA,JupiterWA,True
+adapter,synthetic_counterfactual,shuffled,cf_0012_letters,class,letters,digits,1,Nectar-151-NY,NectarNY,NectarNY,True
+adapter,synthetic_counterfactual,shuffled,cf_0012_digits,class,digits,letters,0,Jupiter-272-WA,272,272,True
+adapter,synthetic_counterfactual,shuffled,cf_0012_digits,class,digits,letters,1,Nectar-151-NY,151,151,True
+adapter,synthetic_counterfactual,shuffled,cf_0013_pipe_0,delim,pipe_0,dash_1,0,Seattle-AK-690,Seattle-AK-690,Seattle-AK-690,True
+adapter,synthetic_counterfactual,shuffled,cf_0013_pipe_0,delim,pipe_0,dash_1,1,Boston-OH-462,Boston-OH-462,Boston-OH-462,True
+adapter,synthetic_counterfactual,shuffled,cf_0013_dash_1,delim,dash_1,pipe_0,0,Seattle-AK-690,AK,AK,True
+adapter,synthetic_counterfactual,shuffled,cf_0013_dash_1,delim,dash_1,pipe_0,1,Boston-OH-462,OH,OH,True
+adapter,synthetic_counterfactual,shuffled,cf_0014_email_user,email,email_user,email_domain,0,jupiter.matrix51@fabrikam.org,jupiter.matrix51,orbit.delta78,False
+adapter,synthetic_counterfactual,shuffled,cf_0014_email_user,email,email_user,email_domain,1,ivory.atlas53@northwind.io,ivory.atlas53,orbit.delta78,False
+adapter,synthetic_counterfactual,shuffled,cf_0014_email_domain,email,email_domain,email_user,0,jupiter.matrix51@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,shuffled,cf_0014_email_domain,email,email_domain,email_user,1,ivory.atlas53@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,shuffled,cf_0015_last_word,words,last_word,second_word,0,Ava Johnson Cobalt,Cobalt,Cobalt,True
+adapter,synthetic_counterfactual,shuffled,cf_0015_last_word,words,last_word,second_word,1,Fatma Yilmaz Jupiter,Jupiter,Jupiter,True
+adapter,synthetic_counterfactual,shuffled,cf_0015_second_word,words,second_word,last_word,0,Ava Johnson Cobalt,Johnson,Johnson,True
+adapter,synthetic_counterfactual,shuffled,cf_0015_second_word,words,second_word,last_word,1,Fatma Yilmaz Jupiter,Yilmaz,Yilmaz,True
+adapter,synthetic_counterfactual,shuffled,cf_0016_number_last2,number,number_last2,number_plus_1,0,BINARY 8806,06,26,False
+adapter,synthetic_counterfactual,shuffled,cf_0016_number_last2,number,number_last2,number_plus_1,1,FABLE 595,95,16,False
+adapter,synthetic_counterfactual,shuffled,cf_0016_number_plus_1,number,number_plus_1,number_last2,0,BINARY 8806,8807,8807,True
+adapter,synthetic_counterfactual,shuffled,cf_0016_number_plus_1,number,number_plus_1,number_last2,1,FABLE 595,596,596,True
+adapter,synthetic_counterfactual,shuffled,cf_0017_last_three,span,last_three,first_three,0,jupiternectar,tar,ter,False
+adapter,synthetic_counterfactual,shuffled,cf_0017_last_three,span,last_three,first_three,1,cobaltgranite,ite,ite,True
+adapter,synthetic_counterfactual,shuffled,cf_0017_first_three,span,first_three,last_three,0,jupiternectar,jup,pra,False
+adapter,synthetic_counterfactual,shuffled,cf_0017_first_three,span,first_three,last_three,1,cobaltgranite,cob,pra,False
+adapter,synthetic_counterfactual,shuffled,cf_0018_first_word,words,first_word,second_word,0,Sonia Rees Ivory,Sonia,Lucas,False
+adapter,synthetic_counterfactual,shuffled,cf_0018_first_word,words,first_word,second_word,1,Hone Albert Atlas,Hone,Lucas,False
+adapter,synthetic_counterfactual,shuffled,cf_0018_second_word,words,second_word,first_word,0,Sonia Rees Ivory,Rees,Rees,True
+adapter,synthetic_counterfactual,shuffled,cf_0018_second_word,words,second_word,first_word,1,Hone Albert Atlas,Albert,Brown,False
+adapter,synthetic_counterfactual,shuffled,cf_0019_email_domain,email,email_domain,email_user,0,ivory.granite57@example.com,example.com,northwind.io,False
+adapter,synthetic_counterfactual,shuffled,cf_0019_email_domain,email,email_domain,email_user,1,cobalt.lambda13@northwind.io,northwind.io,example.com,False
+adapter,synthetic_counterfactual,shuffled,cf_0019_email_user,email,email_user,email_domain,0,ivory.granite57@example.com,ivory.granite57,jupiter.ember78,False
+adapter,synthetic_counterfactual,shuffled,cf_0019_email_user,email,email_user,email_domain,1,cobalt.lambda13@northwind.io,cobalt.lambda13,binary.matrix83,False
+adapter,synthetic_counterfactual,shuffled,cf_0020_email_user,email,email_user,email_domain,0,kernel.nectar88@fabrikam.org,kernel.nectar88,lambda.ivory8,False
+adapter,synthetic_counterfactual,shuffled,cf_0020_email_user,email,email_user,email_domain,1,granite.fable38@contoso.net,granite.fable38,nectar.ember97,False
+adapter,synthetic_counterfactual,shuffled,cf_0020_email_domain,email,email_domain,email_user,0,kernel.nectar88@fabrikam.org,fabrikam.org,northwind.io,False
+adapter,synthetic_counterfactual,shuffled,cf_0020_email_domain,email,email_domain,email_user,1,granite.fable38@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,shuffled,cf_0021_letters,class,letters,digits,0,Kernel-555-OK,KernelOK,AtlasOK,False
+adapter,synthetic_counterfactual,shuffled,cf_0021_letters,class,letters,digits,1,Ember-358-OK,EmberOK,AtlasOK,False
+adapter,synthetic_counterfactual,shuffled,cf_0021_digits,class,digits,letters,0,Kernel-555-OK,555,555,True
+adapter,synthetic_counterfactual,shuffled,cf_0021_digits,class,digits,letters,1,Ember-358-OK,358,461,False
+adapter,synthetic_counterfactual,shuffled,cf_0022_email_user,email,email_user,email_domain,0,cobalt.orbit53@fabrikam.org,cobalt.orbit53,cobalt.orbit53,True
+adapter,synthetic_counterfactual,shuffled,cf_0022_email_user,email,email_user,email_domain,1,atlas.lambda29@northwind.io,atlas.lambda29,orbit.nectar34,False
+adapter,synthetic_counterfactual,shuffled,cf_0022_email_domain,email,email_domain,email_user,0,cobalt.orbit53@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,shuffled,cf_0022_email_domain,email,email_domain,email_user,1,atlas.lambda29@northwind.io,northwind.io,northwind.io,True
+adapter,synthetic_counterfactual,shuffled,cf_0023_email_user,email,email_user,email_domain,0,ivory.orbit78@fabrikam.org,ivory.orbit78,ivory.orbit78,True
+adapter,synthetic_counterfactual,shuffled,cf_0023_email_user,email,email_user,email_domain,1,jupiter.jupiter26@contoso.net,jupiter.jupiter26,jupiter.jupiter26,True
+adapter,synthetic_counterfactual,shuffled,cf_0023_email_domain,email,email_domain,email_user,0,ivory.orbit78@fabrikam.org,fabrikam.org,fabrikam.org,True
+adapter,synthetic_counterfactual,shuffled,cf_0023_email_domain,email,email_domain,email_user,1,jupiter.jupiter26@contoso.net,contoso.net,contoso.net,True
+adapter,synthetic_counterfactual,shuffled,cf_0024_initials,words,initials,last_word,0,Akila Kadija Ember,AKE,AKI,False
+adapter,synthetic_counterfactual,shuffled,cf_0024_initials,words,initials,last_word,1,Lucas Brown Delta,LBD,LBR,False
+adapter,synthetic_counterfactual,shuffled,cf_0024_last_word,words,last_word,initials,0,Akila Kadija Ember,Ember,Ember,True
+adapter,synthetic_counterfactual,shuffled,cf_0024_last_word,words,last_word,initials,1,Lucas Brown Delta,Delta,Delta,True
+adapter,synthetic_counterfactual,shuffled,cf_0025_last_three,span,last_three,first_three,0,prairieprairie,rie,rie,True
+adapter,synthetic_counterfactual,shuffled,cf_0025_last_three,span,last_three,first_three,1,lambdamatrix,rix,bda,False
+adapter,synthetic_counterfactual,shuffled,cf_0025_first_three,span,first_three,last_three,0,prairieprairie,pra,del,False
+adapter,synthetic_counterfactual,shuffled,cf_0025_first_three,span,first_three,last_three,1,lambdamatrix,lam,lam,True
+adapter,synthetic_counterfactual,shuffled,cf_0026_digits,class,digits,letters,0,Binary-239-OK,239,103,False
+adapter,synthetic_counterfactual,shuffled,cf_0026_digits,class,digits,letters,1,Prairie-172-OH,172,103,False
+adapter,synthetic_counterfactual,shuffled,cf_0026_letters,class,letters,digits,0,Binary-239-OK,BinaryOK,MatrixOK,False
+adapter,synthetic_counterfactual,shuffled,cf_0026_letters,class,letters,digits,1,Prairie-172-OH,PrairieOH,GraniteWA,False
+adapter,synthetic_counterfactual,shuffled,cf_0027_last_three,span,last_three,first_three,0,nectarfable,ble,ble,True
+adapter,synthetic_counterfactual,shuffled,cf_0027_last_three,span,last_three,first_three,1,kernelivory,ory,ory,True
+adapter,synthetic_counterfactual,shuffled,cf_0027_first_three,span,first_three,last_three,0,nectarfable,nec,lam,False
+adapter,synthetic_counterfactual,shuffled,cf_0027_first_three,span,first_three,last_three,1,kernelivory,ker,ker,True
+adapter,synthetic_counterfactual,shuffled,cf_0028_first_three,span,first_three,last_three,0,atlasbinary,atl,atla,False
+adapter,synthetic_counterfactual,shuffled,cf_0028_first_three,span,first_three,last_three,1,fablecobalt,fab,fab,True
+adapter,synthetic_counterfactual,shuffled,cf_0028_last_three,span,last_three,first_three,0,atlasbinary,ary,rary,False
+adapter,synthetic_counterfactual,shuffled,cf_0028_last_three,span,last_three,first_three,1,fablecobalt,alt,alt,True
+adapter,synthetic_counterfactual,shuffled,cf_0029_lower,case,lower,upper,0,EMBER GRANITE,ember granite,ember granite,True
+adapter,synthetic_counterfactual,shuffled,cf_0029_lower,case,lower,upper,1,Harbor Orbit,harbor orbit,harbor orbit,True
+adapter,synthetic_counterfactual,shuffled,cf_0029_upper,case,upper,lower,0,EMBER GRANITE,EMBER GRANITE,EMBER GRANITE,True
+adapter,synthetic_counterfactual,shuffled,cf_0029_upper,case,upper,lower,1,Harbor Orbit,HARBOR ORBIT,HARBOR ORBIT,True
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,Ember Prairie,False
+adapter,synthetic_counterfactual,none,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,λ₆,False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,Ember Prairie,False
+adapter,synthetic_counterfactual,none,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,λ₆,False
+adapter,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,你好，lambda.nectar18@mail.test。欢迎来到我们的社区！,False
+adapter,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,nectar.granite46@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,你好，lambda.nectar18@mail.test。欢迎来到我们的社区！,False
+adapter,synthetic_counterfactual,none,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,granite lambda,True
+adapter,synthetic_counterfactual,none,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,可行性λ,False
+adapter,synthetic_counterfactual,none,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,granite lambda,False
+adapter,synthetic_counterfactual,none,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,可行性λ,False
+adapter,synthetic_counterfactual,none,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,lambda,False
+adapter,synthetic_counterfactual,none,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,atlasdelta,False
+adapter,synthetic_counterfactual,none,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,lambda,False
+adapter,synthetic_counterfactual,none,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,atlasdelta,False
+adapter,synthetic_counterfactual,none,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,123号加州州立大学,False
+adapter,synthetic_counterfactual,none,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,247号楼纽约,False
+adapter,synthetic_counterfactual,none,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,123号加州州立大学,False
+adapter,synthetic_counterfactual,none,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,247号楼纽约,False
+adapter,synthetic_counterfactual,none,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,《德尔塔童话》,False
+adapter,synthetic_counterfactual,none,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,伊夫拉特 atlas,False
+adapter,synthetic_counterfactual,none,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,《德尔塔童话》,False
+adapter,synthetic_counterfactual,none,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,伊夫拉特 atlas,False
+adapter,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,lambda.lambda24@example.com,False
+adapter,synthetic_counterfactual,none,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,atlas.matrix92@example.com,False
+adapter,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,lambda.lambda24@example.com,False
+adapter,synthetic_counterfactual,none,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,atlas.matrix92@example.com,False
+adapter,synthetic_counterfactual,none,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,cobaltatlas,False
+adapter,synthetic_counterfactual,none,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,matrixprairie,False
+adapter,synthetic_counterfactual,none,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,cobaltatlas,False
+adapter,synthetic_counterfactual,none,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,matrixprairie,False
+adapter,synthetic_counterfactual,none,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,Akila Kadija Orbit,False
+adapter,synthetic_counterfactual,none,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,霍内·阿尔伯特·埃默,False
+adapter,synthetic_counterfactual,none,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,Akila Kadija Orbit,False
+adapter,synthetic_counterfactual,none,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,霍内·阿尔伯特·埃默,False
+adapter,synthetic_counterfactual,none,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,861-NY,False
+adapter,synthetic_counterfactual,none,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,273号德克萨斯州的象牙。,False
+adapter,synthetic_counterfactual,none,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,861-NY,False
+adapter,synthetic_counterfactual,none,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,273号德克萨斯州的象牙。,False
+adapter,synthetic_counterfactual,none,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,LAMBDA 6025,False
+adapter,synthetic_counterfactual,none,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,MATRIX 9112,False
+adapter,synthetic_counterfactual,none,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,LAMBDA 6025,False
+adapter,synthetic_counterfactual,none,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,MATRIX 9112,False
+adapter,synthetic_counterfactual,none,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,ivory.nectar27@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,jupiter.jupiter77@contoso.net,False
+adapter,synthetic_counterfactual,none,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,ivory.nectar27@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,jupiter.jupiter77@contoso.net,False
+adapter,synthetic_counterfactual,none,cf_0012_letters,class,letters,digits,0,Jupiter-272-WA,JupiterWA,金星-272-WA,False
+adapter,synthetic_counterfactual,none,cf_0012_letters,class,letters,digits,1,Nectar-151-NY,NectarNY,Nectar-151-NY,False
+adapter,synthetic_counterfactual,none,cf_0012_digits,class,digits,letters,0,Jupiter-272-WA,272,金星-272-WA,False
+adapter,synthetic_counterfactual,none,cf_0012_digits,class,digits,letters,1,Nectar-151-NY,151,Nectar-151-NY,False
+adapter,synthetic_counterfactual,none,cf_0013_pipe_0,delim,pipe_0,dash_1,0,Seattle-AK-690,Seattle-AK-690,塞勒姆-阿拉斯加-690,False
+adapter,synthetic_counterfactual,none,cf_0013_pipe_0,delim,pipe_0,dash_1,1,Boston-OH-462,Boston-OH-462,462,False
+adapter,synthetic_counterfactual,none,cf_0013_dash_1,delim,dash_1,pipe_0,0,Seattle-AK-690,AK,塞勒姆-阿拉斯加-690,False
+adapter,synthetic_counterfactual,none,cf_0013_dash_1,delim,dash_1,pipe_0,1,Boston-OH-462,OH,462,False
+adapter,synthetic_counterfactual,none,cf_0014_email_user,email,email_user,email_domain,0,jupiter.matrix51@fabrikam.org,jupiter.matrix51,jupiter.matrix51@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0014_email_user,email,email_user,email_domain,1,ivory.atlas53@northwind.io,ivory.atlas53,ivory.atlas53@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0014_email_domain,email,email_domain,email_user,0,jupiter.matrix51@fabrikam.org,fabrikam.org,jupiter.matrix51@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0014_email_domain,email,email_domain,email_user,1,ivory.atlas53@northwind.io,northwind.io,ivory.atlas53@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0015_last_word,words,last_word,second_word,0,Ava Johnson Cobalt,Cobalt,艾瓦·约翰逊·钴,False
+adapter,synthetic_counterfactual,none,cf_0015_last_word,words,last_word,second_word,1,Fatma Yilmaz Jupiter,Jupiter,费特玛·伊尔马兹朱庇特,False
+adapter,synthetic_counterfactual,none,cf_0015_second_word,words,second_word,last_word,0,Ava Johnson Cobalt,Johnson,艾瓦·约翰逊·钴,False
+adapter,synthetic_counterfactual,none,cf_0015_second_word,words,second_word,last_word,1,Fatma Yilmaz Jupiter,Yilmaz,费特玛·伊尔马兹朱庇特,False
+adapter,synthetic_counterfactual,none,cf_0016_number_last2,number,number_last2,number_plus_1,0,BINARY 8806,06,8806,False
+adapter,synthetic_counterfactual,none,cf_0016_number_last2,number,number_last2,number_plus_1,1,FABLE 595,95,595. 《狐狸和乌鸦》这则寓言告诉我们，不要轻信别人的奉承,False
+adapter,synthetic_counterfactual,none,cf_0016_number_plus_1,number,number_plus_1,number_last2,0,BINARY 8806,8807,8806,False
+adapter,synthetic_counterfactual,none,cf_0016_number_plus_1,number,number_plus_1,number_last2,1,FABLE 595,596,595. 《狐狸和乌鸦》这则寓言告诉我们，不要轻信别人的奉承,False
+adapter,synthetic_counterfactual,none,cf_0017_last_three,span,last_three,first_three,0,jupiternectar,tar,水手星蜜露,False
+adapter,synthetic_counterfactual,none,cf_0017_last_three,span,last_three,first_three,1,cobaltgranite,ite,钴岩,False
+adapter,synthetic_counterfactual,none,cf_0017_first_three,span,first_three,last_three,0,jupiternectar,jup,水手星蜜露,False
+adapter,synthetic_counterfactual,none,cf_0017_first_three,span,first_three,last_three,1,cobaltgranite,cob,钴岩,False
+adapter,synthetic_counterfactual,none,cf_0018_first_word,words,first_word,second_word,0,Sonia Rees Ivory,Sonia,莎拉·里兹·伊沃利,False
+adapter,synthetic_counterfactual,none,cf_0018_first_word,words,first_word,second_word,1,Hone Albert Atlas,Hone,霍纳尔·阿尔伯特·阿特拉斯,False
+adapter,synthetic_counterfactual,none,cf_0018_second_word,words,second_word,first_word,0,Sonia Rees Ivory,Rees,莎拉·里兹·伊沃利,False
+adapter,synthetic_counterfactual,none,cf_0018_second_word,words,second_word,first_word,1,Hone Albert Atlas,Albert,霍纳尔·阿尔伯特·阿特拉斯,False
+adapter,synthetic_counterfactual,none,cf_0019_email_domain,email,email_domain,email_user,0,ivory.granite57@example.com,example.com,ivory.granite57@example.com,False
+adapter,synthetic_counterfactual,none,cf_0019_email_domain,email,email_domain,email_user,1,cobalt.lambda13@northwind.io,northwind.io,cobalt.lambda13@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0019_email_user,email,email_user,email_domain,0,ivory.granite57@example.com,ivory.granite57,ivory.granite57@example.com,False
+adapter,synthetic_counterfactual,none,cf_0019_email_user,email,email_user,email_domain,1,cobalt.lambda13@northwind.io,cobalt.lambda13,cobalt.lambda13@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0020_email_user,email,email_user,email_domain,0,kernel.nectar88@fabrikam.org,kernel.nectar88,kernel.nectar88@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0020_email_user,email,email_user,email_domain,1,granite.fable38@contoso.net,granite.fable38,granite.fable38@contoso.net,False
+adapter,synthetic_counterfactual,none,cf_0020_email_domain,email,email_domain,email_user,0,kernel.nectar88@fabrikam.org,fabrikam.org,kernel.nectar88@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0020_email_domain,email,email_domain,email_user,1,granite.fable38@contoso.net,contoso.net,granite.fable38@contoso.net,False
+adapter,synthetic_counterfactual,none,cf_0021_letters,class,letters,digits,0,Kernel-555-OK,KernelOK,Kernel-555-OK,False
+adapter,synthetic_counterfactual,none,cf_0021_letters,class,letters,digits,1,Ember-358-OK,EmberOK,,False
+adapter,synthetic_counterfactual,none,cf_0021_digits,class,digits,letters,0,Kernel-555-OK,555,Kernel-555-OK,False
+adapter,synthetic_counterfactual,none,cf_0021_digits,class,digits,letters,1,Ember-358-OK,358,,False
+adapter,synthetic_counterfactual,none,cf_0022_email_user,email,email_user,email_domain,0,cobalt.orbit53@fabrikam.org,cobalt.orbit53,cobalt.orbit53@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0022_email_user,email,email_user,email_domain,1,atlas.lambda29@northwind.io,atlas.lambda29,atlas.lambda29@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0022_email_domain,email,email_domain,email_user,0,cobalt.orbit53@fabrikam.org,fabrikam.org,cobalt.orbit53@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0022_email_domain,email,email_domain,email_user,1,atlas.lambda29@northwind.io,northwind.io,atlas.lambda29@northwind.io,False
+adapter,synthetic_counterfactual,none,cf_0023_email_user,email,email_user,email_domain,0,ivory.orbit78@fabrikam.org,ivory.orbit78,ivory.orbit78@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0023_email_user,email,email_user,email_domain,1,jupiter.jupiter26@contoso.net,jupiter.jupiter26,jupiter.jupiter26@contoso.net,False
+adapter,synthetic_counterfactual,none,cf_0023_email_domain,email,email_domain,email_user,0,ivory.orbit78@fabrikam.org,fabrikam.org,ivory.orbit78@fabrikam.org,False
+adapter,synthetic_counterfactual,none,cf_0023_email_domain,email,email_domain,email_user,1,jupiter.jupiter26@contoso.net,contoso.net,jupiter.jupiter26@contoso.net,False
+adapter,synthetic_counterfactual,none,cf_0024_initials,words,initials,last_word,0,Akila Kadija Ember,AKE,阿基拉·卡迪雅·埃默,False
+adapter,synthetic_counterfactual,none,cf_0024_initials,words,initials,last_word,1,Lucas Brown Delta,LBD,拉斯·布朗·德尔塔,False
+adapter,synthetic_counterfactual,none,cf_0024_last_word,words,last_word,initials,0,Akila Kadija Ember,Ember,阿基拉·卡迪雅·埃默,False
+adapter,synthetic_counterfactual,none,cf_0024_last_word,words,last_word,initials,1,Lucas Brown Delta,Delta,拉斯·布朗·德尔塔,False
+adapter,synthetic_counterfactual,none,cf_0025_last_three,span,last_three,first_three,0,prairieprairie,rie,草原,False
+adapter,synthetic_counterfactual,none,cf_0025_last_three,span,last_three,first_three,1,lambdamatrix,rix,λ矩阵,False
+adapter,synthetic_counterfactual,none,cf_0025_first_three,span,first_three,last_three,0,prairieprairie,pra,草原,False
+adapter,synthetic_counterfactual,none,cf_0025_first_three,span,first_three,last_three,1,lambdamatrix,lam,λ矩阵,False
+adapter,synthetic_counterfactual,none,cf_0026_digits,class,digits,letters,0,Binary-239-OK,239,239,True
+adapter,synthetic_counterfactual,none,cf_0026_digits,class,digits,letters,1,Prairie-172-OH,172,172号草原,False
+adapter,synthetic_counterfactual,none,cf_0026_letters,class,letters,digits,0,Binary-239-OK,BinaryOK,239,False
+adapter,synthetic_counterfactual,none,cf_0026_letters,class,letters,digits,1,Prairie-172-OH,PrairieOH,172号草原,False
+adapter,synthetic_counterfactual,none,cf_0027_last_three,span,last_three,first_three,0,nectarfable,ble,nectarfable,False
+adapter,synthetic_counterfactual,none,cf_0027_last_three,span,last_three,first_three,1,kernelivory,ory,核色珍珠,False
+adapter,synthetic_counterfactual,none,cf_0027_first_three,span,first_three,last_three,0,nectarfable,nec,nectarfable,False
+adapter,synthetic_counterfactual,none,cf_0027_first_three,span,first_three,last_three,1,kernelivory,ker,核色珍珠,False
+adapter,synthetic_counterfactual,none,cf_0028_first_three,span,first_three,last_three,0,atlasbinary,atl,atlasbinary,False
+adapter,synthetic_counterfactual,none,cf_0028_first_three,span,first_three,last_three,1,fablecobalt,fab,翡翠蓝,False
+adapter,synthetic_counterfactual,none,cf_0028_last_three,span,last_three,first_three,0,atlasbinary,ary,atlasbinary,False
+adapter,synthetic_counterfactual,none,cf_0028_last_three,span,last_three,first_three,1,fablecobalt,alt,翡翠蓝,False
+adapter,synthetic_counterfactual,none,cf_0029_lower,case,lower,upper,0,EMBER GRANITE,ember granite,云母花岗岩,False
+adapter,synthetic_counterfactual,none,cf_0029_lower,case,lower,upper,1,Harbor Orbit,harbor orbit,城市天际线,False
+adapter,synthetic_counterfactual,none,cf_0029_upper,case,upper,lower,0,EMBER GRANITE,EMBER GRANITE,云母花岗岩,False
+adapter,synthetic_counterfactual,none,cf_0029_upper,case,upper,lower,1,Harbor Orbit,HARBOR ORBIT,城市天际线,False
+adapter,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,0,emberprairie,rie,emb,False
+adapter,synthetic_counterfactual,contrast,cf_0000_last_three,span,last_three,first_three,1,lambdacobalt,alt,lam,False
+adapter,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,0,emberprairie,emb,rie,False
+adapter,synthetic_counterfactual,contrast,cf_0000_first_three,span,first_three,last_three,1,lambdacobalt,lam,alt,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,0,nectar.granite46@northwind.io,northwind.io,nectar.granite46,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_domain,email,email_domain,email_user,1,lambda.nectar18@mail.test,mail.test,lambda.nectar18,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,0,nectar.granite46@northwind.io,nectar.granite46,northwind.io,False
+adapter,synthetic_counterfactual,contrast,cf_0001_email_user,email,email_user,email_domain,1,lambda.nectar18@mail.test,lambda.nectar18,mail.test,False
+adapter,synthetic_counterfactual,contrast,cf_0002_lower,case,lower,title,0,granite lambda,granite lambda,Granite Lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0002_lower,case,lower,title,1,fAbLe lAmBdA,fable lambda,Fabble Lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0002_title,case,title,lower,0,granite lambda,Granite Lambda,granite lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0002_title,case,title,lower,1,fAbLe lAmBdA,Fable Lambda,fabric lambda,False
+adapter,synthetic_counterfactual,contrast,cf_0003_first_three,span,first_three,last_three,0,lambdalambda,lam,bda,False
+adapter,synthetic_counterfactual,contrast,cf_0003_first_three,span,first_three,last_three,1,atlasdelta,atl,lta,False
+adapter,synthetic_counterfactual,contrast,cf_0003_last_three,span,last_three,first_three,0,lambdalambda,bda,lam,False
+adapter,synthetic_counterfactual,contrast,cf_0003_last_three,span,last_three,first_three,1,atlasdelta,lta,atl,False
+adapter,synthetic_counterfactual,contrast,cf_0004_digits,class,digits,letters,0,Binary-123-CA,123,BinaryCA,False
+adapter,synthetic_counterfactual,contrast,cf_0004_digits,class,digits,letters,1,Kernel-247-NY,247,KernelNY,False
+adapter,synthetic_counterfactual,contrast,cf_0004_letters,class,letters,digits,0,Binary-123-CA,BinaryCA,123,False
+adapter,synthetic_counterfactual,contrast,cf_0004_letters,class,letters,digits,1,Kernel-247-NY,KernelNY,247,False
+adapter,synthetic_counterfactual,contrast,cf_0005_lower,case,lower,upper,0,DELTA FABLE,delta fable,DELTA FABLE,False
+adapter,synthetic_counterfactual,contrast,cf_0005_lower,case,lower,upper,1,ivory atlas,ivory atlas,IVORY ATLAS,False
+adapter,synthetic_counterfactual,contrast,cf_0005_upper,case,upper,lower,0,DELTA FABLE,DELTA FABLE,delta fable,False
+adapter,synthetic_counterfactual,contrast,cf_0005_upper,case,upper,lower,1,ivory atlas,IVORY ATLAS,ivory atlas,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_user,email,email_user,email_domain,0,lambda.lambda24@example.com,lambda.lambda24,example.com,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_user,email,email_user,email_domain,1,atlas.matrix92@example.com,atlas.matrix92,example.com,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_domain,email,email_domain,email_user,0,lambda.lambda24@example.com,example.com,lambda.lambda24,False
+adapter,synthetic_counterfactual,contrast,cf_0006_email_domain,email,email_domain,email_user,1,atlas.matrix92@example.com,example.com,atlas.matrix92,False
+adapter,synthetic_counterfactual,contrast,cf_0007_last_three,span,last_three,first_three,0,cobaltatlas,las,cob,False
+adapter,synthetic_counterfactual,contrast,cf_0007_last_three,span,last_three,first_three,1,matrixprairie,rie,mat,False
+adapter,synthetic_counterfactual,contrast,cf_0007_first_three,span,first_three,last_three,0,cobaltatlas,cob,atlas,False
+adapter,synthetic_counterfactual,contrast,cf_0007_first_three,span,first_three,last_three,1,matrixprairie,mat,rie,False
+adapter,synthetic_counterfactual,contrast,cf_0008_last_word,words,last_word,initials,0,Akila Kadija Orbit,Orbit,AKO,False
+adapter,synthetic_counterfactual,contrast,cf_0008_last_word,words,last_word,initials,1,Hone Albert Ember,Ember,HAE,False
+adapter,synthetic_counterfactual,contrast,cf_0008_initials,words,initials,last_word,0,Akila Kadija Orbit,AKO,Orbit,False
+adapter,synthetic_counterfactual,contrast,cf_0008_initials,words,initials,last_word,1,Hone Albert Ember,HAE,Ember,False
+adapter,synthetic_counterfactual,contrast,cf_0009_digits,class,digits,letters,0,Atlas-861-NY,861,AtlasNY,False
+adapter,synthetic_counterfactual,contrast,cf_0009_digits,class,digits,letters,1,Ivory-273-TX,273,IvoryTX,False
+adapter,synthetic_counterfactual,contrast,cf_0009_letters,class,letters,digits,0,Atlas-861-NY,AtlasNY,861,False
+adapter,synthetic_counterfactual,contrast,cf_0009_letters,class,letters,digits,1,Ivory-273-TX,IvoryTX,273,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_last2,number,number_last2,number_plus_1,0,LAMBDA 6025,25,6026,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_last2,number,number_last2,number_plus_1,1,MATRIX 9112,12,9113,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_plus_1,number,number_plus_1,number_last2,0,LAMBDA 6025,6026,25,False
+adapter,synthetic_counterfactual,contrast,cf_0010_number_plus_1,number,number_plus_1,number_last2,1,MATRIX 9112,9113,12,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_user,email,email_user,email_domain,0,ivory.nectar27@fabrikam.org,ivory.nectar27,fabrikam.org,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_user,email,email_user,email_domain,1,jupiter.jupiter77@contoso.net,jupiter.jupiter77,contoso.net,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_domain,email,email_domain,email_user,0,ivory.nectar27@fabrikam.org,fabrikam.org,ivory.nectar27,False
+adapter,synthetic_counterfactual,contrast,cf_0011_email_domain,email,email_domain,email_user,1,jupiter.jupiter77@contoso.net,contoso.net,jupiter.jupiter77,False
+adapter,synthetic_counterfactual,contrast,cf_0012_letters,class,letters,digits,0,Jupiter-272-WA,JupiterWA,272,False
+adapter,synthetic_counterfactual,contrast,cf_0012_letters,class,letters,digits,1,Nectar-151-NY,NectarNY,151,False
+adapter,synthetic_counterfactual,contrast,cf_0012_digits,class,digits,letters,0,Jupiter-272-WA,272,JupiterWA,False
+adapter,synthetic_counterfactual,contrast,cf_0012_digits,class,digits,letters,1,Nectar-151-NY,151,NectarNY,False
+adapter,synthetic_counterfactual,contrast,cf_0013_pipe_0,delim,pipe_0,dash_1,0,Seattle-AK-690,Seattle-AK-690,AK,False
+adapter,synthetic_counterfactual,contrast,cf_0013_pipe_0,delim,pipe_0,dash_1,1,Boston-OH-462,Boston-OH-462,OH,False
+adapter,synthetic_counterfactual,contrast,cf_0013_dash_1,delim,dash_1,pipe_0,0,Seattle-AK-690,AK,Seattle-AK-690,False
+adapter,synthetic_counterfactual,contrast,cf_0013_dash_1,delim,dash_1,pipe_0,1,Boston-OH-462,OH,Boston-OH-462,False
+adapter,synthetic_counterfactual,contrast,cf_0014_email_user,email,email_user,email_domain,0,jupiter.matrix51@fabrikam.org,jupiter.matrix51,fabrikam.org,False
+adapter,synthetic_counterfactual,contrast,cf_0014_email_user,email,email_user,email_domain,1,ivory.atlas53@northwind.io,ivory.atlas53,northwind.io,False
+adapter,synthetic_counterfactual,contrast,cf_0014_email_domain,email,email_domain,email_user,0,jupiter.matrix51@fabrikam.org,fabrikam.org,jupiter.matrix51,False
+adapter,synthetic_counterfactual,contrast,cf_0014_email_domain,email,email_domain,email_user,1,ivory.atlas53@northwind.io,northwind.io,ivory.atlas53,False
+adapter,synthetic_counterfactual,contrast,cf_0015_last_word,words,last_word,second_word,0,Ava Johnson Cobalt,Cobalt,Johnson,False
+adapter,synthetic_counterfactual,contrast,cf_0015_last_word,words,last_word,second_word,1,Fatma Yilmaz Jupiter,Jupiter,Yilmaz,False
+adapter,synthetic_counterfactual,contrast,cf_0015_second_word,words,second_word,last_word,0,Ava Johnson Cobalt,Johnson,Cobalt,False
+adapter,synthetic_counterfactual,contrast,cf_0015_second_word,words,second_word,last_word,1,Fatma Yilmaz Jupiter,Yilmaz,Jupiter,False
+adapter,synthetic_counterfactual,contrast,cf_0016_number_last2,number,number_last2,number_plus_1,0,BINARY 8806,06,8807,False
+adapter,synthetic_counterfactual,contrast,cf_0016_number_last2,number,number_last2,number_plus_1,1,FABLE 595,95,596,False
+adapter,synthetic_counterfactual,contrast,cf_0016_number_plus_1,number,number_plus_1,number_last2,0,BINARY 8806,8807,06,False
+adapter,synthetic_counterfactual,contrast,cf_0016_number_plus_1,number,number_plus_1,number_last2,1,FABLE 595,596,5,False
+adapter,synthetic_counterfactual,contrast,cf_0017_last_three,span,last_three,first_three,0,jupiternectar,tar,jug,False
+adapter,synthetic_counterfactual,contrast,cf_0017_last_three,span,last_three,first_three,1,cobaltgranite,ite,cob,False
+adapter,synthetic_counterfactual,contrast,cf_0017_first_three,span,first_three,last_three,0,jupiternectar,jup,ter,False
+adapter,synthetic_counterfactual,contrast,cf_0017_first_three,span,first_three,last_three,1,cobaltgranite,cob,ite,False
+adapter,synthetic_counterfactual,contrast,cf_0018_first_word,words,first_word,second_word,0,Sonia Rees Ivory,Sonia,Rees,False
+adapter,synthetic_counterfactual,contrast,cf_0018_first_word,words,first_word,second_word,1,Hone Albert Atlas,Hone,Albert,False
+adapter,synthetic_counterfactual,contrast,cf_0018_second_word,words,second_word,first_word,0,Sonia Rees Ivory,Rees,Sonia,False
+adapter,synthetic_counterfactual,contrast,cf_0018_second_word,words,second_word,first_word,1,Hone Albert Atlas,Albert,Hone,False
+adapter,synthetic_counterfactual,contrast,cf_0019_email_domain,email,email_domain,email_user,0,ivory.granite57@example.com,example.com,ivory.granite57,False
+adapter,synthetic_counterfactual,contrast,cf_0019_email_domain,email,email_domain,email_user,1,cobalt.lambda13@northwind.io,northwind.io,cobalt.lambda13,False
+adapter,synthetic_counterfactual,contrast,cf_0019_email_user,email,email_user,email_domain,0,ivory.granite57@example.com,ivory.granite57,example.com,False
+adapter,synthetic_counterfactual,contrast,cf_0019_email_user,email,email_user,email_domain,1,cobalt.lambda13@northwind.io,cobalt.lambda13,northwind.io,False
+adapter,synthetic_counterfactual,contrast,cf_0020_email_user,email,email_user,email_domain,0,kernel.nectar88@fabrikam.org,kernel.nectar88,fabrikam.org,False
+adapter,synthetic_counterfactual,contrast,cf_0020_email_user,email,email_user,email_domain,1,granite.fable38@contoso.net,granite.fable38,contoso.net,False
+adapter,synthetic_counterfactual,contrast,cf_0020_email_domain,email,email_domain,email_user,0,kernel.nectar88@fabrikam.org,fabrikam.org,kernel.nectar88,False
+adapter,synthetic_counterfactual,contrast,cf_0020_email_domain,email,email_domain,email_user,1,granite.fable38@contoso.net,contoso.net,granite.fable38,False
+adapter,synthetic_counterfactual,contrast,cf_0021_letters,class,letters,digits,0,Kernel-555-OK,KernelOK,555,False
+adapter,synthetic_counterfactual,contrast,cf_0021_letters,class,letters,digits,1,Ember-358-OK,EmberOK,358,False
+adapter,synthetic_counterfactual,contrast,cf_0021_digits,class,digits,letters,0,Kernel-555-OK,555,KernelOK,False
+adapter,synthetic_counterfactual,contrast,cf_0021_digits,class,digits,letters,1,Ember-358-OK,358,EmberOK,False
+adapter,synthetic_counterfactual,contrast,cf_0022_email_user,email,email_user,email_domain,0,cobalt.orbit53@fabrikam.org,cobalt.orbit53,fabrikam.org,False
+adapter,synthetic_counterfactual,contrast,cf_0022_email_user,email,email_user,email_domain,1,atlas.lambda29@northwind.io,atlas.lambda29,northwind.io,False
+adapter,synthetic_counterfactual,contrast,cf_0022_email_domain,email,email_domain,email_user,0,cobalt.orbit53@fabrikam.org,fabrikam.org,cobalt.orbit53,False
+adapter,synthetic_counterfactual,contrast,cf_0022_email_domain,email,email_domain,email_user,1,atlas.lambda29@northwind.io,northwind.io,atlas.lambda29,False
+adapter,synthetic_counterfactual,contrast,cf_0023_email_user,email,email_user,email_domain,0,ivory.orbit78@fabrikam.org,ivory.orbit78,fabrikam.org,False
+adapter,synthetic_counterfactual,contrast,cf_0023_email_user,email,email_user,email_domain,1,jupiter.jupiter26@contoso.net,jupiter.jupiter26,contoso.net,False
+adapter,synthetic_counterfactual,contrast,cf_0023_email_domain,email,email_domain,email_user,0,ivory.orbit78@fabrikam.org,fabrikam.org,ivory.orbit78,False
+adapter,synthetic_counterfactual,contrast,cf_0023_email_domain,email,email_domain,email_user,1,jupiter.jupiter26@contoso.net,contoso.net,jupiter.jupiter26,False
+adapter,synthetic_counterfactual,contrast,cf_0024_initials,words,initials,last_word,0,Akila Kadija Ember,AKE,Ember,False
+adapter,synthetic_counterfactual,contrast,cf_0024_initials,words,initials,last_word,1,Lucas Brown Delta,LBD,Delta,False
+adapter,synthetic_counterfactual,contrast,cf_0024_last_word,words,last_word,initials,0,Akila Kadija Ember,Ember,AKE,False
+adapter,synthetic_counterfactual,contrast,cf_0024_last_word,words,last_word,initials,1,Lucas Brown Delta,Delta,LBD,False
+adapter,synthetic_counterfactual,contrast,cf_0025_last_three,span,last_three,first_three,0,prairieprairie,rie,pra,False
+adapter,synthetic_counterfactual,contrast,cf_0025_last_three,span,last_three,first_three,1,lambdamatrix,rix,lam,False
+adapter,synthetic_counterfactual,contrast,cf_0025_first_three,span,first_three,last_three,0,prairieprairie,pra,rie,False
+adapter,synthetic_counterfactual,contrast,cf_0025_first_three,span,first_three,last_three,1,lambdamatrix,lam,trix,False
+adapter,synthetic_counterfactual,contrast,cf_0026_digits,class,digits,letters,0,Binary-239-OK,239,BinaryOK,False
+adapter,synthetic_counterfactual,contrast,cf_0026_digits,class,digits,letters,1,Prairie-172-OH,172,PrairieOH,False
+adapter,synthetic_counterfactual,contrast,cf_0026_letters,class,letters,digits,0,Binary-239-OK,BinaryOK,239,False
+adapter,synthetic_counterfactual,contrast,cf_0026_letters,class,letters,digits,1,Prairie-172-OH,PrairieOH,172,False
+adapter,synthetic_counterfactual,contrast,cf_0027_last_three,span,last_three,first_three,0,nectarfable,ble,nec,False
+adapter,synthetic_counterfactual,contrast,cf_0027_last_three,span,last_three,first_three,1,kernelivory,ory,ker,False
+adapter,synthetic_counterfactual,contrast,cf_0027_first_three,span,first_three,last_three,0,nectarfable,nec,ble,False
+adapter,synthetic_counterfactual,contrast,cf_0027_first_three,span,first_three,last_three,1,kernelivory,ker,ory,False
+adapter,synthetic_counterfactual,contrast,cf_0028_first_three,span,first_three,last_three,0,atlasbinary,atl,ary,False
+adapter,synthetic_counterfactual,contrast,cf_0028_first_three,span,first_three,last_three,1,fablecobalt,fab,cobalt,False
+adapter,synthetic_counterfactual,contrast,cf_0028_last_three,span,last_three,first_three,0,atlasbinary,ary,ata,False
+adapter,synthetic_counterfactual,contrast,cf_0028_last_three,span,last_three,first_three,1,fablecobalt,alt,fab,False
+adapter,synthetic_counterfactual,contrast,cf_0029_lower,case,lower,upper,0,EMBER GRANITE,ember granite,EMBER GRANITE,False
+adapter,synthetic_counterfactual,contrast,cf_0029_lower,case,lower,upper,1,Harbor Orbit,harbor orbit,HARBOR ORBIT,False
+adapter,synthetic_counterfactual,contrast,cf_0029_upper,case,upper,lower,0,EMBER GRANITE,EMBER GRANITE,ember granite,False
+adapter,synthetic_counterfactual,contrast,cf_0029_upper,case,upper,lower,1,Harbor Orbit,HARBOR ORBIT,harbor orbit,False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-1153622],False
+adapter,public_prose,normal,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-00340,False
+adapter,public_prose,normal,Number.000086,Number,public,,0,13.76,10-15,10-15,True
+adapter,public_prose,normal,Number.000086,Number,public,,1,23.4,20-25,20-25,True
+adapter,public_prose,normal,Number.000086,Number,public,,2,23.53,20-25,20-25,True
+adapter,public_prose,normal,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,16:15,True
+adapter,public_prose,normal,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,23:48,True
+adapter,public_prose,normal,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,22:24,True
+adapter,public_prose,normal,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,425-247-6418,False
+adapter,public_prose,normal,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,425-880-8168,False
+adapter,public_prose,normal,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,425-177-1914536,False
+adapter,public_prose,normal,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+adapter,public_prose,normal,Name.000028,Name,public,,1,Jan Evans,Jan,Jan,True
+adapter,public_prose,normal,Name.000028,Name,public,,2,Antonia Lusis,Antonia,Antonia,True
+adapter,public_prose,normal,Number.000005,Number,public,,0,39571297341,7341,3441,False
+adapter,public_prose,normal,Number.000005,Number,public,,1,47641887866,7866,8786,False
+adapter,public_prose,normal,Number.000005,Number,public,,2,88081682946,2946,946,False
+adapter,public_prose,normal,Number.000056,Number,public,,0,13.24,13.24,13.24,True
+adapter,public_prose,normal,Number.000056,Number,public,,1,200.0,200.0,200.0,True
+adapter,public_prose,normal,Number.000056,Number,public,,2,4.62,4.62,4.62,True
+adapter,public_prose,normal,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,Cecep S,True
+adapter,public_prose,normal,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,Milica Z,True
+adapter,public_prose,normal,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,Radmilo B,True
+adapter,public_prose,normal,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,iñaki@contoso.com,False
+adapter,public_prose,normal,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,celtia@contoso.com,True
+adapter,public_prose,normal,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,nina@fabrikam.com,True
+adapter,public_prose,normal,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,425-247-641-8878,False
+adapter,public_prose,normal,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,425-880-8168294,False
+adapter,public_prose,normal,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,425-177-1914536,False
+adapter,public_prose,normal,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,30 Mar 2241,True
+adapter,public_prose,normal,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,2 Aug 2160,True
+adapter,public_prose,normal,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,23 May 1984,True
+adapter,public_prose,normal,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,01211985 5:44,True
+adapter,public_prose,normal,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,08161985 1:11,True
+adapter,public_prose,normal,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,12202033 18:36,True
+adapter,public_prose,normal,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,2.6 * 5.2,True
+adapter,public_prose,normal,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,92.3 * 7.2,True
+adapter,public_prose,normal,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,1.3 * 8.2,True
+adapter,public_prose,normal,DateTime.000096,DateTime,public,,0,2072--9--26,26,26,True
+adapter,public_prose,normal,DateTime.000096,DateTime,public,,1,8/7/2237,8,2237,False
+adapter,public_prose,normal,DateTime.000096,DateTime,public,,2,6.30.2220,30,2220,False
+adapter,public_prose,normal,Number.000082,Number,public,,0,3.145918E-001,0.3145918,0.3145918,True
+adapter,public_prose,normal,Number.000082,Number,public,,1,3.262529E-002,0.03262529,0.03262529,True
+adapter,public_prose,normal,Number.000082,Number,public,,2,6.876202E-001,0.6876202,0.6876202,True
+adapter,public_prose,normal,Number.000015,Number,public,,0,-22630,-22600,-22600,True
+adapter,public_prose,normal,Number.000015,Number,public,,1,-3269,-3250,-3250,True
+adapter,public_prose,normal,Number.000015,Number,public,,2,-3049,-3000,-3050,False
+adapter,public_prose,normal,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,Traver,True
+adapter,public_prose,normal,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,AdeniyiLabrecque,True
+adapter,public_prose,normal,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Kolstad,True
+adapter,public_prose,normal,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,contososuites.com,False
+adapter,public_prose,normal,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,33f@treyresearch.net,True
+adapter,public_prose,normal,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,northwindtraders.com,False
+adapter,public_prose,normal,ZipCode.000002,ZipCode,public,,0,"Amanda Haraldsen 34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",41230,41230,True
+adapter,public_prose,normal,ZipCode.000002,ZipCode,public,,1,"Marten Ruutli 7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",38891,38891,True
+adapter,public_prose,normal,ZipCode.000002,ZipCode,public,,2,"Oríowó Owólabi 3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",38891,38891,True
+adapter,public_prose,normal,DateTime.000101,DateTime,public,,0,21-Jan-1985 05:44:43,21,21,True
+adapter,public_prose,normal,DateTime.000101,DateTime,public,,1,16-Aug-1985 01:11:56,16,16,True
+adapter,public_prose,normal,DateTime.000101,DateTime,public,,2,20-Dec-2033 18:36:29,20,20,True
+adapter,public_prose,normal,DateTime.000073,DateTime,public,,0,4:15PM,4:00PM-4:30PM,4:00PM-4:30PM,True
+adapter,public_prose,normal,DateTime.000073,DateTime,public,,1,11:48PM,11:30PM-12:00AM,11:30PM-12:00AM,True
+adapter,public_prose,normal,DateTime.000073,DateTime,public,,2,10:24PM,10:00PM-10:30PM,10:30PM-11:00PM,False
+adapter,public_prose,normal,DateTime.000030,DateTime,public,,0,03302241,"Tuesday, March 30, 2241","Saturday, March 30, 2241",False
+adapter,public_prose,normal,DateTime.000030,DateTime,public,,1,02-Aug-2160,"Saturday, August 2, 2160","Monday, August 2, 2160",False
+adapter,public_prose,normal,DateTime.000030,DateTime,public,,2,23 May 1984,"Wednesday, May 23, 1984","Thursday, May 23, 1984",False
+adapter,public_prose,normal,Log.000020,Log,public,,0,type size = 185: Et.Consectetur.UtVoluptas type size = 175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,185->175,True
+adapter,public_prose,normal,Log.000020,Log,public,,1,type size = 82: Quasi.Fuga.EtMolestiaeModi type size = 229: Ut.Cum.Voluptatem,82->229,82->229,True
+adapter,public_prose,normal,Log.000020,Log,public,,2,type size = 234: Ratione.Cum.TemporaEt type size = 37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,234->37,True
+adapter,public_prose,normal,Phone.000007,Phone,public,,0,"Liidia Vadeboncoeur 678 First Place,Curitiba,OH,(993) 525-5024,000-84-6131,03719",525-5024,525-5024,True
+adapter,public_prose,normal,Phone.000007,Phone,public,,1,"Julia Erwin Mebratu 567 Fourth Court SE ,Orlando,AR,(285) 659-0518,000-64-5753,38891",659-0518,659-0518,True
+adapter,public_prose,normal,Phone.000007,Phone,public,,2,"Gordan Vukelic 56 Second Court,Dallas,AK,(382) 905-9906,000-27-9671,38891",905-9906,905-9906,True
+adapter,public_prose,normal,DateTime.000028,DateTime,public,,0,11 May 2215,W19,W15,False
+adapter,public_prose,normal,DateTime.000028,DateTime,public,,1,Oct 17 1892,W42,W10,False
+adapter,public_prose,normal,DateTime.000028,DateTime,public,,2,Tue wk 42 in 2222,W42,W42,True
+adapter,public_prose,normal,Number.000008,Number,public,,0,-13578,-135.78,-135.78,True
+adapter,public_prose,normal,Number.000008,Number,public,,1,-1961.1180,-19.611180,-19.61118,False
+adapter,public_prose,normal,Number.000008,Number,public,,2,-1829.29,-18.2929,-18.2929,True
+adapter,public_prose,normal,Number.000060,Number,public,,0,+626,+0626,+626,False
+adapter,public_prose,normal,Number.000060,Number,public,,1,+125,+0125,+125,False
+adapter,public_prose,normal,Number.000060,Number,public,,2,+43,+0043,+043,False
+adapter,public_prose,normal,Number.000052,Number,public,,0,124,125,125,True
+adapter,public_prose,normal,Number.000052,Number,public,,1,605,605,605,True
+adapter,public_prose,normal,Number.000052,Number,public,,2,842,840,843,False
+adapter,public_prose,normal,DateTime.000082,DateTime,public,,0,1953-04-22 23:34:17,1953-04-22 23:30,1953-04-22 23:15,False
+adapter,public_prose,normal,DateTime.000082,DateTime,public,,1,2168-06-05 23:53:17,2168-06-05 23:45,2168-06-05 23:45,True
+adapter,public_prose,normal,DateTime.000082,DateTime,public,,2,1868-06-22 19:36:20,1868-06-22 19:30,1868-06-22 19:15,False
+adapter,public_prose,normal,Email.000013,Email,public,,0,cjnz@relecloud.com,relecloud.com,relecloud.com,True
+adapter,public_prose,normal,Email.000013,Email,public,,1,m2zt1@proseware.com,proseware.com,proseware.com,True
+adapter,public_prose,normal,Email.000013,Email,public,,2,33f@treyresearch.net,treyresearch.net,treyresearch.net,True
+adapter,public_prose,normal,DateTime.000041,DateTime,public,,0,578/982/2010,578/982/2010,578/982/2010,True
+adapter,public_prose,normal,DateTime.000041,DateTime,public,,1,12/24/2045,12/24/2045,12/24/2045,True
+adapter,public_prose,normal,DateTime.000041,DateTime,public,,2,4.2.1743,2/4/1743,4/2/1743,False
+adapter,public_prose,normal,ShippingCode.000006,ShippingCode,public,,0,1Z I81 6QF 90 9601 169 4,4,4,True
+adapter,public_prose,normal,ShippingCode.000006,ShippingCode,public,,1,1Z O63 B7Z 35 2550 248 6,6,6,True
+adapter,public_prose,normal,ShippingCode.000006,ShippingCode,public,,2,1Z KDQ RE6 29 5028 565 9,9,9,True
+adapter,public_prose,normal,Phone.000002,Phone,public,,0,786-628-8081 x8294,x8294,x8294,True
+adapter,public_prose,normal,Phone.000002,Phone,public,,1,781-771-9145,NULL,NULL,True
+adapter,public_prose,normal,Phone.000002,Phone,public,,2,488-779-2563,NULL,NULL,True
+adapter,public_prose,normal,Log.000019,Log,public,,0,type size = 185: Et.Consectetur.UtVoluptas type size = 175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,185->175,True
+adapter,public_prose,normal,Log.000019,Log,public,,1,type size = 82: Quasi.Fuga.EtMolestiaeModi type size = 229: Ut.Cum.Voluptatem,82->229,82->229,True
+adapter,public_prose,normal,Log.000019,Log,public,,2,type size = 234: Ratione.Cum.TemporaEt type size = 37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,234->37,True
+adapter,public_prose,normal,Number.000066,Number,public,,0,14:5:25,14h 05m 25s,14h 05m 25s,True
+adapter,public_prose,normal,Number.000066,Number,public,,1,12:8:29,12h 08m 29s,12h 08m 29s,True
+adapter,public_prose,normal,Number.000066,Number,public,,2,15:29:9,15h 29m 09s,15h 29m 09s,True
+adapter,public_prose,normal,DateTime.000114,DateTime,public,,0,21-Jan-1985 05:44:43,30-45,15-30,False
+adapter,public_prose,normal,DateTime.000114,DateTime,public,,1,16-Aug-1985 01:11:56,0-15,15-30,False
+adapter,public_prose,normal,DateTime.000114,DateTime,public,,2,20-Dec-2033 18:36:29,30-45,15-30,False
+adapter,public_prose,normal,Address.000013,Address,public,,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+adapter,public_prose,normal,Address.000013,Address,public,,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+adapter,public_prose,normal,Address.000013,Address,public,,2,"One Main Parkway, Allentown, ND 41230",None,One,False
+adapter,public_prose,normal,Name.000024,Name,public,,0,Cecep Sutresna,c.s.,c.s.,True
+adapter,public_prose,normal,Name.000024,Name,public,,1,Milica Zujovic,m.z.,m.z.,True
+adapter,public_prose,normal,Name.000024,Name,public,,2,Radmilo Bogic,r.b.,r.b.,True
+adapter,public_prose,normal,DateTime.000104,DateTime,public,,0,21-Jan-1985 05:44:43,Jan,Jan,True
+adapter,public_prose,normal,DateTime.000104,DateTime,public,,1,16-Aug-1985 01:11:56,Aug,Aug,True
+adapter,public_prose,normal,DateTime.000104,DateTime,public,,2,20-Dec-2033 18:36:29,Dec,Dec,True
+adapter,public_prose,normal,DateTime.000014,DateTime,public,,0,1 Feb 2013,Friday #1 February 2013,Sunday #2 February 2013,False
+adapter,public_prose,normal,DateTime.000014,DateTime,public,,1,12 Dec 2002,Thursday #2 December 2002,Thursday #12 December 2002,False
+adapter,public_prose,normal,DateTime.000014,DateTime,public,,2,01 Sep 2012,Saturday #1 September 2012,Monday #1 September 2012,False
+adapter,public_prose,normal,Number.000065,Number,public,,0,1.58 | 8.26 | 8.28,1.6 + 8.3 + 8.3,1.6 + 8.3 + 8.3,True
+adapter,public_prose,normal,Number.000065,Number,public,,1,21.282 | 16.21 | 18.278,21.3 + 16.2 + 18.3,21.3 + 16.2 + 18.3,True
+adapter,public_prose,normal,Number.000065,Number,public,,2,1.43 | 1.2 | 1.82,1.4 + 1.2 + 1.8,1.4 + 1.2 + 1.8,True
+adapter,public_prose,normal,DateTime.000027,DateTime,public,,0,3302241,Q1 '2241,Q2 '241,False
+adapter,public_prose,normal,DateTime.000027,DateTime,public,,1,8022160,Q3 '2160,Q1 '2160,False
+adapter,public_prose,normal,DateTime.000027,DateTime,public,,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+adapter,public_prose,normal,Number.000062,Number,public,,0,8 | 16 | 2001,08/16/2001,08/16/2001,True
+adapter,public_prose,normal,Number.000062,Number,public,,1,2 | 21 | 2002,02/21/2002,02/21/2002,True
+adapter,public_prose,normal,Number.000062,Number,public,,2,9 | 21 | 2002,09/21/2002,09/21/2002,True
+adapter,public_prose,normal,DateTime.000003,DateTime,public,,0,16:15:08,16,16,True
+adapter,public_prose,normal,DateTime.000003,DateTime,public,,1,23:48:20,23,23,True
+adapter,public_prose,normal,DateTime.000003,DateTime,public,,2,22:24:59,22,22,True
+adapter,public_prose,normal,DateTime.000088,DateTime,public,,0,16:15:08,4:00PM,3:00PM,False
+adapter,public_prose,normal,DateTime.000088,DateTime,public,,1,23:48:20,10:00PM,10:00PM,True
+adapter,public_prose,normal,DateTime.000088,DateTime,public,,2,22:24:59,10:00PM,9:00PM,False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],[CPT-115],False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],[CPT-00350,False
+adapter,public_prose,shuffled,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],[CPT-11222],False
+adapter,public_prose,shuffled,Number.000086,Number,public,,0,13.76,10-15,15-20,False
+adapter,public_prose,shuffled,Number.000086,Number,public,,1,23.4,20-25,20-25,True
+adapter,public_prose,shuffled,Number.000086,Number,public,,2,23.53,20-25,20-25,True
+adapter,public_prose,shuffled,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,16:15,True
+adapter,public_prose,shuffled,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,23:48,True
+adapter,public_prose,shuffled,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,22:24,True
+adapter,public_prose,shuffled,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,247-641-8878,True
+adapter,public_prose,shuffled,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,880-816-8294,True
+adapter,public_prose,shuffled,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,177-191-4536,True
+adapter,public_prose,shuffled,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True
+adapter,public_prose,shuffled,Name.000028,Name,public,,1,Jan Evans,Jan,Kiriakos,False
+adapter,public_prose,shuffled,Name.000028,Name,public,,2,Antonia Lusis,Antonia,Kiriakos,False
+adapter,public_prose,shuffled,Number.000005,Number,public,,0,39571297341,7341,2967,False
+adapter,public_prose,shuffled,Number.000005,Number,public,,1,47641887866,7866,2967,False
+adapter,public_prose,shuffled,Number.000005,Number,public,,2,88081682946,2946,6829,False
+adapter,public_prose,shuffled,Number.000056,Number,public,,0,13.24,13.24,13.2,False
+adapter,public_prose,shuffled,Number.000056,Number,public,,1,200.0,200.0,200.0,True
+adapter,public_prose,shuffled,Number.000056,Number,public,,2,4.62,4.62,4.6,False
+adapter,public_prose,shuffled,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,Cecep S,True
+adapter,public_prose,shuffled,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,Milica Z,True
+adapter,public_prose,shuffled,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,Radmilo B,True
+adapter,public_prose,shuffled,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,maría@contoso.com,False
+adapter,public_prose,shuffled,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,maria@fabrikam.com,False
+adapter,public_prose,shuffled,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,maria@contoso.com,False
+adapter,public_prose,shuffled,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,425-247-6418,False
+adapter,public_prose,shuffled,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,425-880-8168,False
+adapter,public_prose,shuffled,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,425-177-1914,False
+adapter,public_prose,shuffled,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,15 May 2144,False
+adapter,public_prose,shuffled,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,15 Feb 2161,False
+adapter,public_prose,shuffled,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,15 Feb 2144,False
+adapter,public_prose,shuffled,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,01211985 5:44,True
+adapter,public_prose,shuffled,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,08161985 1:11,True
+adapter,public_prose,shuffled,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,12202033 18:36,True
+adapter,public_prose,shuffled,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,2.6 * 5.2,True
+adapter,public_prose,shuffled,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,7.2 * 13.0,False
+adapter,public_prose,shuffled,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,1.3 * 8.2,True
+adapter,public_prose,shuffled,DateTime.000096,DateTime,public,,0,2072--9--26,26,26,True
+adapter,public_prose,shuffled,DateTime.000096,DateTime,public,,1,8/7/2237,8,2237年8月7日,False
+adapter,public_prose,shuffled,DateTime.000096,DateTime,public,,2,6.30.2220,30,2220,False
+adapter,public_prose,shuffled,Number.000082,Number,public,,0,3.145918E-001,0.3145918,0.3145918,True
+adapter,public_prose,shuffled,Number.000082,Number,public,,1,3.262529E-002,0.03262529,0.03262529,True
+adapter,public_prose,shuffled,Number.000082,Number,public,,2,6.876202E-001,0.6876202,0.6876202,True
+adapter,public_prose,shuffled,Number.000015,Number,public,,0,-22630,-22600,22630,False
+adapter,public_prose,shuffled,Number.000015,Number,public,,1,-3269,-3250,3269,False
+adapter,public_prose,shuffled,Number.000015,Number,public,,2,-3049,-3000,31750,False
+adapter,public_prose,shuffled,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,Traver,True
+adapter,public_prose,shuffled,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,AdeniyiLabrecque,True
+adapter,public_prose,shuffled,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Kolstad,True
+adapter,public_prose,shuffled,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,None,True
+adapter,public_prose,shuffled,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,None,False
+adapter,public_prose,shuffled,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,None,True
+adapter,public_prose,shuffled,ZipCode.000002,ZipCode,public,,0,"Amanda Haraldsen 34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",41230,38891,False
+adapter,public_prose,shuffled,ZipCode.000002,ZipCode,public,,1,"Marten Ruutli 7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",38891,38891,True
+adapter,public_prose,shuffled,ZipCode.000002,ZipCode,public,,2,"Oríowó Owólabi 3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",38891,38891,True
+adapter,public_prose,shuffled,DateTime.000101,DateTime,public,,0,21-Jan-1985 05:44:43,21,21,True
+adapter,public_prose,shuffled,DateTime.000101,DateTime,public,,1,16-Aug-1985 01:11:56,16,16,True
+adapter,public_prose,shuffled,DateTime.000101,DateTime,public,,2,20-Dec-2033 18:36:29,20,20,True
+adapter,public_prose,shuffled,DateTime.000073,DateTime,public,,0,4:15PM,4:00PM-4:30PM,6:00PM-6:30PM,False
+adapter,public_prose,shuffled,DateTime.000073,DateTime,public,,1,11:48PM,11:30PM-12:00AM,6:30PM-7:00PM,False
+adapter,public_prose,shuffled,DateTime.000073,DateTime,public,,2,10:24PM,10:00PM-10:30PM,12:00AM-12:30AM,False
+adapter,public_prose,shuffled,DateTime.000030,DateTime,public,,0,03302241,"Tuesday, March 30, 2241","Monday, April 30, 2141",False
+adapter,public_prose,shuffled,DateTime.000030,DateTime,public,,1,02-Aug-2160,"Saturday, August 2, 2160","Monday, August 2, 2160",False
+adapter,public_prose,shuffled,DateTime.000030,DateTime,public,,2,23 May 1984,"Wednesday, May 23, 1984","Thursday, May 23, 1984",False
+adapter,public_prose,shuffled,Log.000020,Log,public,,0,type size = 185: Et.Consectetur.UtVoluptas type size = 175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,185->175,True
+adapter,public_prose,shuffled,Log.000020,Log,public,,1,type size = 82: Quasi.Fuga.EtMolestiaeModi type size = 229: Ut.Cum.Voluptatem,82->229,82->229,True
+adapter,public_prose,shuffled,Log.000020,Log,public,,2,type size = 234: Ratione.Cum.TemporaEt type size = 37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,234->37,True
+adapter,public_prose,shuffled,Phone.000007,Phone,public,,0,"Liidia Vadeboncoeur 678 First Place,Curitiba,OH,(993) 525-5024,000-84-6131,03719",525-5024,525-5024,True
+adapter,public_prose,shuffled,Phone.000007,Phone,public,,1,"Julia Erwin Mebratu 567 Fourth Court SE ,Orlando,AR,(285) 659-0518,000-64-5753,38891",659-0518,659-0518,True
+adapter,public_prose,shuffled,Phone.000007,Phone,public,,2,"Gordan Vukelic 56 Second Court,Dallas,AK,(382) 905-9906,000-27-9671,38891",905-9906,905-9906,True
+adapter,public_prose,shuffled,DateTime.000028,DateTime,public,,0,11 May 2215,W19,W35,False
+adapter,public_prose,shuffled,DateTime.000028,DateTime,public,,1,Oct 17 1892,W42,W27,False
+adapter,public_prose,shuffled,DateTime.000028,DateTime,public,,2,Tue wk 42 in 2222,W42,W42,True
+adapter,public_prose,shuffled,Number.000008,Number,public,,0,-13578,-135.78,135.78,False
+adapter,public_prose,shuffled,Number.000008,Number,public,,1,-1961.1180,-19.611180,19.61118,False
+adapter,public_prose,shuffled,Number.000008,Number,public,,2,-1829.29,-18.2929,18.2929,False
+adapter,public_prose,shuffled,Number.000060,Number,public,,0,+626,+0626,+0626,True
+adapter,public_prose,shuffled,Number.000060,Number,public,,1,+125,+0125,+00125,False
+adapter,public_prose,shuffled,Number.000060,Number,public,,2,+43,+0043,+0043,True
+adapter,public_prose,shuffled,Number.000052,Number,public,,0,124,125,124,False
+adapter,public_prose,shuffled,Number.000052,Number,public,,1,605,605,605,True
+adapter,public_prose,shuffled,Number.000052,Number,public,,2,842,840,840,True
+adapter,public_prose,shuffled,DateTime.000082,DateTime,public,,0,1953-04-22 23:34:17,1953-04-22 23:30,1938-05-04 23:27,False
+adapter,public_prose,shuffled,DateTime.000082,DateTime,public,,1,2168-06-05 23:53:17,2168-06-05 23:45,2168-06-05 23:53,False
+adapter,public_prose,shuffled,DateTime.000082,DateTime,public,,2,1868-06-22 19:36:20,1868-06-22 19:30,1868-06-22 19:36,False
+adapter,public_prose,shuffled,Email.000013,Email,public,,0,cjnz@relecloud.com,relecloud.com,relecloud.com,True
+adapter,public_prose,shuffled,Email.000013,Email,public,,1,m2zt1@proseware.com,proseware.com,proseware.com,True
+adapter,public_prose,shuffled,Email.000013,Email,public,,2,33f@treyresearch.net,treyresearch.net,treyresearch.net,True
+adapter,public_prose,shuffled,DateTime.000041,DateTime,public,,0,578/982/2010,578/982/2010,578/982/2010,True
+adapter,public_prose,shuffled,DateTime.000041,DateTime,public,,1,12/24/2045,12/24/2045,12/24/2045,True
+adapter,public_prose,shuffled,DateTime.000041,DateTime,public,,2,4.2.1743,2/4/1743,4.2.1743,False
+adapter,public_prose,shuffled,ShippingCode.000006,ShippingCode,public,,0,1Z I81 6QF 90 9601 169 4,4,4,True
+adapter,public_prose,shuffled,ShippingCode.000006,ShippingCode,public,,1,1Z O63 B7Z 35 2550 248 6,6,6,True
+adapter,public_prose,shuffled,ShippingCode.000006,ShippingCode,public,,2,1Z KDQ RE6 29 5028 565 9,9,9,True
+adapter,public_prose,shuffled,Phone.000002,Phone,public,,0,786-628-8081 x8294,x8294,NULL,False
+adapter,public_prose,shuffled,Phone.000002,Phone,public,,1,781-771-9145,NULL,x6418,False
+adapter,public_prose,shuffled,Phone.000002,Phone,public,,2,488-779-2563,NULL,x0339,False
+adapter,public_prose,shuffled,Log.000019,Log,public,,0,type size = 185: Et.Consectetur.UtVoluptas type size = 175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,185->175,True
+adapter,public_prose,shuffled,Log.000019,Log,public,,1,type size = 82: Quasi.Fuga.EtMolestiaeModi type size = 229: Ut.Cum.Voluptatem,82->229,82->229,True
+adapter,public_prose,shuffled,Log.000019,Log,public,,2,type size = 234: Ratione.Cum.TemporaEt type size = 37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,234->37,True
+adapter,public_prose,shuffled,Number.000066,Number,public,,0,14:5:25,14h 05m 25s,14h 05m 25s,True
+adapter,public_prose,shuffled,Number.000066,Number,public,,1,12:8:29,12h 08m 29s,12h 08m 29s,True
+adapter,public_prose,shuffled,Number.000066,Number,public,,2,15:29:9,15h 29m 09s,15h 29m 09s,True
+adapter,public_prose,shuffled,DateTime.000114,DateTime,public,,0,21-Jan-1985 05:44:43,30-45,45-60,False
+adapter,public_prose,shuffled,DateTime.000114,DateTime,public,,1,16-Aug-1985 01:11:56,0-15,45-60,False
+adapter,public_prose,shuffled,DateTime.000114,DateTime,public,,2,20-Dec-2033 18:36:29,30-45,45-60,False
+adapter,public_prose,shuffled,Address.000013,Address,public,,0,"89 123rd Blvd, Corona, CT 17293",89,89,True
+adapter,public_prose,shuffled,Address.000013,Address,public,,1,"234 Fourth Ct, Omsk, OK 41230",234,234,True
+adapter,public_prose,shuffled,Address.000013,Address,public,,2,"One Main Parkway, Allentown, ND 41230",None,412,False
+adapter,public_prose,shuffled,Name.000024,Name,public,,0,Cecep Sutresna,c.s.,c.s.,True
+adapter,public_prose,shuffled,Name.000024,Name,public,,1,Milica Zujovic,m.z.,m.z.,True
+adapter,public_prose,shuffled,Name.000024,Name,public,,2,Radmilo Bogic,r.b.,r.b.,True
+adapter,public_prose,shuffled,DateTime.000104,DateTime,public,,0,21-Jan-1985 05:44:43,Jan,Feb,False
+adapter,public_prose,shuffled,DateTime.000104,DateTime,public,,1,16-Aug-1985 01:11:56,Aug,Jul,False
+adapter,public_prose,shuffled,DateTime.000104,DateTime,public,,2,20-Dec-2033 18:36:29,Dec,Nov,False
+adapter,public_prose,shuffled,DateTime.000014,DateTime,public,,0,1 Feb 2013,Friday #1 February 2013,Tuesday #1 January 1975,False
+adapter,public_prose,shuffled,DateTime.000014,DateTime,public,,1,12 Dec 2002,Thursday #2 December 2002,Friday #1 January 1975,False
+adapter,public_prose,shuffled,DateTime.000014,DateTime,public,,2,01 Sep 2012,Saturday #1 September 2012,Monday #1 January 1975,False
+adapter,public_prose,shuffled,Number.000065,Number,public,,0,1.58 | 8.26 | 8.28,1.6 + 8.3 + 8.3,1.6 + 8.3 + 8.3,True
+adapter,public_prose,shuffled,Number.000065,Number,public,,1,21.282 | 16.21 | 18.278,21.3 + 16.2 + 18.3,16.2 + 16.2 + 18.3,False
+adapter,public_prose,shuffled,Number.000065,Number,public,,2,1.43 | 1.2 | 1.82,1.4 + 1.2 + 1.8,1.4 + 1.2 + 1.8,True
+adapter,public_prose,shuffled,DateTime.000027,DateTime,public,,0,3302241,Q1 '2241,Q2 '241,False
+adapter,public_prose,shuffled,DateTime.000027,DateTime,public,,1,8022160,Q3 '2160,Q4 '2002,False
+adapter,public_prose,shuffled,DateTime.000027,DateTime,public,,2,23 May 1984 22:24,Q2 '1984,Q2 '1984,True
+adapter,public_prose,shuffled,Number.000062,Number,public,,0,8 | 16 | 2001,08/16/2001,08/16/2001,True
+adapter,public_prose,shuffled,Number.000062,Number,public,,1,2 | 21 | 2002,02/21/2002,02/21/2002,True
+adapter,public_prose,shuffled,Number.000062,Number,public,,2,9 | 21 | 2002,09/21/2002,09/21/2002,True
+adapter,public_prose,shuffled,DateTime.000003,DateTime,public,,0,16:15:08,16,16,True
+adapter,public_prose,shuffled,DateTime.000003,DateTime,public,,1,23:48:20,23,19,False
+adapter,public_prose,shuffled,DateTime.000003,DateTime,public,,2,22:24:59,22,19,False
+adapter,public_prose,shuffled,DateTime.000088,DateTime,public,,0,16:15:08,4:00PM,6:00PM,False
+adapter,public_prose,shuffled,DateTime.000088,DateTime,public,,1,23:48:20,10:00PM,6:00PM,False
+adapter,public_prose,shuffled,DateTime.000088,DateTime,public,,2,22:24:59,10:00PM,6:00AM,False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,0,[CPT-115],[CPT-115]],115. 1997年，美国国家航空航天局（NASA）发射了“勇气号,False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,1,[CPT-1153622],[CPT-1153622]],1. 1999年10月1日，美国国会通过了《2000,False
+adapter,public_prose,none,BillingCode.000001,BillingCode,public,,2,[CPT-00340],[CPT-00340]],本研究旨在探讨不同光照条件对植物生长的影响。实验选择了三种光照条件：充足光照、适度光照,False
+adapter,public_prose,none,Number.000086,Number,public,,0,13.76,10-15,13.76,False
+adapter,public_prose,none,Number.000086,Number,public,,1,23.4,20-25,23.4,False
+adapter,public_prose,none,Number.000086,Number,public,,2,23.53,20-25,23.53,False
+adapter,public_prose,none,DateTime.000031,DateTime,public,,0,4:15:08 PM,16:15,下午4点15分08秒,False
+adapter,public_prose,none,DateTime.000031,DateTime,public,,1,11:48:20 PM,23:48,11:48:20 PM,False
+adapter,public_prose,none,DateTime.000031,DateTime,public,,2,10:24:59 PM,22:24,10:24:59 PM,False
+adapter,public_prose,none,Phone.000009,Phone,public,,0,247-641-8878,247-641-8878,247-641-8878,True
+adapter,public_prose,none,Phone.000009,Phone,public,,1,880-816-8294,880-816-8294,880-816-8294,True
+adapter,public_prose,none,Phone.000009,Phone,public,,2,(177) 191 4536,177-191-4536,1914536,False
+adapter,public_prose,none,Name.000028,Name,public,,0,Rodel-Habiba Chaiprasit,Rodel,โรเดล-ฮาบิบา ชาipelprasit,False
+adapter,public_prose,none,Name.000028,Name,public,,1,Jan Evans,Jan,简·埃文斯,False
+adapter,public_prose,none,Name.000028,Name,public,,2,Antonia Lusis,Antonia,Antonia Lusis,False
+adapter,public_prose,none,Number.000005,Number,public,,0,39571297341,7341,39571297341,False
+adapter,public_prose,none,Number.000005,Number,public,,1,47641887866,7866,47641887866,False
+adapter,public_prose,none,Number.000005,Number,public,,2,88081682946,2946,88081682946,False
+adapter,public_prose,none,Number.000056,Number,public,,0,13.24,13.24,13.24,True
+adapter,public_prose,none,Number.000056,Number,public,,1,200.0,200.0,200.0,True
+adapter,public_prose,none,Number.000056,Number,public,,2,4.62,4.62,4.62,True
+adapter,public_prose,none,Name.000018,Name,public,,0,Cecep Sutresna,Cecep S,他是印尼的演员和模特。,False
+adapter,public_prose,none,Name.000018,Name,public,,1,Milica Zujovic,Milica Z,米莉卡·祖乔维奇,False
+adapter,public_prose,none,Name.000018,Name,public,,2,Radmilo Bogic,Radmilo B,Радмило Богић,False
+adapter,public_prose,none,Email.000006,Email,public,,0,iñaki,iñaki@proseware.com,伊尼基,False
+adapter,public_prose,none,Email.000006,Email,public,,1,celtia@contoso.com,celtia@contoso.com,celtia@contoso.com,True
+adapter,public_prose,none,Email.000006,Email,public,,2,nina@fabrikam.com,nina@fabrikam.com,nina@fabrikam.com,True
+adapter,public_prose,none,Phone.000012,Phone,public,,0,247-641-8878,425-641-8878,247-641-8878,False
+adapter,public_prose,none,Phone.000012,Phone,public,,1,880-816-8294,425-816-8294,880-816-8294,False
+adapter,public_prose,none,Phone.000012,Phone,public,,2,(177) 191 4536,177-191-4536,1914536,False
+adapter,public_prose,none,DateTime.000018,DateTime,public,,0,03302241,30 Mar 2241,03302241,False
+adapter,public_prose,none,DateTime.000018,DateTime,public,,1,02-Aug-2160,2 Aug 2160,02-Aug-2160,False
+adapter,public_prose,none,DateTime.000018,DateTime,public,,2,23 May 1984,23 May 1984,1984年5月23日,False
+adapter,public_prose,none,DateTime.000110,DateTime,public,,0,21-Jan-1985 05:44:43,01211985 5:44,21-Jan-1985 05:44:43,False
+adapter,public_prose,none,DateTime.000110,DateTime,public,,1,16-Aug-1985 01:11:56,08161985 1:11,16-Aug-1985 01:11:56,False
+adapter,public_prose,none,DateTime.000110,DateTime,public,,2,20-Dec-2033 18:36:29,12202033 18:36,20-Dec-2033 18:36:29,False
+adapter,public_prose,none,Number.000061,Number,public,,0,2.62 | 5.2,2.6 * 5.2,5.2,False
+adapter,public_prose,none,Number.000061,Number,public,,1,92.252 | 7.15,92.3 * 7.2,92.252 | 7.15,False
+adapter,public_prose,none,Number.000061,Number,public,,2,1.252 | 8.2,1.3 * 8.2,1.252 | 8.2,False
+adapter,public_prose,none,DateTime.000096,DateTime,public,,0,2072--9--26,26,2072年9月26日,False
+adapter,public_prose,none,DateTime.000096,DateTime,public,,1,8/7/2237,8,8月7日2237年,False
+adapter,public_prose,none,DateTime.000096,DateTime,public,,2,6.30.2220,30,6.30.2220,False
+adapter,public_prose,none,Number.000082,Number,public,,0,3.145918E-001,0.3145918,0.3145918,True
+adapter,public_prose,none,Number.000082,Number,public,,1,3.262529E-002,0.03262529,0.03262529,True
+adapter,public_prose,none,Number.000082,Number,public,,2,6.876202E-001,0.6876202,0.6876202,True
+adapter,public_prose,none,Number.000015,Number,public,,0,-22630,-22600,22630,False
+adapter,public_prose,none,Number.000015,Number,public,,1,-3269,-3250,-3269,False
+adapter,public_prose,none,Number.000015,Number,public,,2,-3049,-3000,-3049,False
+adapter,public_prose,none,Email.000012,Email,public,,0,Anna.Traver@adventure-works.com,Traver,anna.traver@adventure-works.com,False
+adapter,public_prose,none,Email.000012,Email,public,,1,Ojerinde.AdeniyiLabrecque@fabrikamresidences.com,AdeniyiLabrecque,该电子邮件地址已被占用。,False
+adapter,public_prose,none,Email.000012,Email,public,,2,Snorre.Kolstad@woodgrovebank.com,Kolstad,Snorre.Kolstad@woodgrovebank.com,False
+adapter,public_prose,none,Email.000009,Email,public,,0,blanditiis ratione @ contososuites.com porro dolorum corrupti,None,blanditiis ratione @ contososuites.com porro dolorum corrupti,False
+adapter,public_prose,none,Email.000009,Email,public,,1,dolorem id vero soluta fuga 33f@treyresearch.net facilis,33f@treyresearch.net,facilis,False
+adapter,public_prose,none,Email.000009,Email,public,,2,repellat deleniti @ northwindtraders.com consequatur aut qui porro,None,repellat deleniti @ northwindtraders.com consequatur aut qui porro,False
+adapter,public_prose,none,ZipCode.000002,ZipCode,public,,0,"Amanda Haraldsen 34 First Way,Lansing,MS,(311) 343-5301,000-26-4391,41230",41230,奥尔森·阿玛迪亚·哈拉尔森，34岁，第一大道，兰,False
+adapter,public_prose,none,ZipCode.000002,ZipCode,public,,1,"Marten Ruutli 7890 Eighth Route ,Fargo,OH,(956) 100-1022,000-08-9259,38891",38891,马滕·鲁特利，7890第八条路，弗劳尔，俄亥俄,False
+adapter,public_prose,none,ZipCode.000002,ZipCode,public,,2,"Oríowó Owólabi 3456 Pecan Route,Basra,OR,(106) 620-5226,000-60-1806,38891",38891,"Oríowó Owólabi 3456 Pecan Route,Basra,OR,(1",False
+adapter,public_prose,none,DateTime.000101,DateTime,public,,0,21-Jan-1985 05:44:43,21,21-Jan-1985 05:44:43,False
+adapter,public_prose,none,DateTime.000101,DateTime,public,,1,16-Aug-1985 01:11:56,16,16-Aug-1985 01:11:56,False
+adapter,public_prose,none,DateTime.000101,DateTime,public,,2,20-Dec-2033 18:36:29,20,20-Dec-2033 18:36:29,False
+adapter,public_prose,none,DateTime.000073,DateTime,public,,0,4:15PM,4:00PM-4:30PM,下午4:15,False
+adapter,public_prose,none,DateTime.000073,DateTime,public,,1,11:48PM,11:30PM-12:00AM,11:48PM,False
+adapter,public_prose,none,DateTime.000073,DateTime,public,,2,10:24PM,10:00PM-10:30PM,10:24PM,False
+adapter,public_prose,none,DateTime.000030,DateTime,public,,0,03302241,"Tuesday, March 30, 2241",03302241,False
+adapter,public_prose,none,DateTime.000030,DateTime,public,,1,02-Aug-2160,"Saturday, August 2, 2160",02-Aug-2160,False
+adapter,public_prose,none,DateTime.000030,DateTime,public,,2,23 May 1984,"Wednesday, May 23, 1984",1984年5月23日,False
+adapter,public_prose,none,Log.000020,Log,public,,0,type size = 185: Et.Consectetur.UtVoluptas type size = 175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,,False
+adapter,public_prose,none,Log.000020,Log,public,,1,type size = 82: Quasi.Fuga.EtMolestiaeModi type size = 229: Ut.Cum.Voluptatem,82->229,,False
+adapter,public_prose,none,Log.000020,Log,public,,2,type size = 234: Ratione.Cum.TemporaEt type size = 37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,234: Ratione.Cum.TemporaEt 37: Pariatur.Veritatis.N,False
+adapter,public_prose,none,Phone.000007,Phone,public,,0,"Liidia Vadeboncoeur 678 First Place,Curitiba,OH,(993) 525-5024,000-84-6131,03719",525-5024,丽迪亚·瓦德博努尔678第一大道，库里蒂巴，俄亥俄州,False
+adapter,public_prose,none,Phone.000007,Phone,public,,1,"Julia Erwin Mebratu 567 Fourth Court SE ,Orlando,AR,(285) 659-0518,000-64-5753,38891",659-0518,"Julia Erwin Mebratu, 567 Fourth Court SE, Orlando, AR, (285)",False
+adapter,public_prose,none,Phone.000007,Phone,public,,2,"Gordan Vukelic 56 Second Court,Dallas,AK,(382) 905-9906,000-27-9671,38891",905-9906,戈兰·武克利奇，56号第二法院，达拉斯，阿拉斯加，(3,False
+adapter,public_prose,none,DateTime.000028,DateTime,public,,0,11 May 2215,W19,11 May 2215,False
+adapter,public_prose,none,DateTime.000028,DateTime,public,,1,Oct 17 1892,W42,1892年10月17日,False
+adapter,public_prose,none,DateTime.000028,DateTime,public,,2,Tue wk 42 in 2222,W42,2222年第四十二周星期二,False
+adapter,public_prose,none,Number.000008,Number,public,,0,-13578,-135.78,-13578,False
+adapter,public_prose,none,Number.000008,Number,public,,1,-1961.1180,-19.611180,1961年11月8日,False
+adapter,public_prose,none,Number.000008,Number,public,,2,-1829.29,-18.2929,-1829.29,False
+adapter,public_prose,none,Number.000060,Number,public,,0,+626,+0626,+626,False
+adapter,public_prose,none,Number.000060,Number,public,,1,+125,+0125,+125,False
+adapter,public_prose,none,Number.000060,Number,public,,2,+43,+0043,+43,False
+adapter,public_prose,none,Number.000052,Number,public,,0,124,125,124,False
+adapter,public_prose,none,Number.000052,Number,public,,1,605,605,605,True
+adapter,public_prose,none,Number.000052,Number,public,,2,842,840,842,False
+adapter,public_prose,none,DateTime.000082,DateTime,public,,0,1953-04-22 23:34:17,1953-04-22 23:30,1953年4月22日23:34:17,False
+adapter,public_prose,none,DateTime.000082,DateTime,public,,1,2168-06-05 23:53:17,2168-06-05 23:45,2168年6月5日23时53分17秒,False
+adapter,public_prose,none,DateTime.000082,DateTime,public,,2,1868-06-22 19:36:20,1868-06-22 19:30,1868年6月22日19:36:20,False
+adapter,public_prose,none,Email.000013,Email,public,,0,cjnz@relecloud.com,relecloud.com,cjnz@relecloud.com,False
+adapter,public_prose,none,Email.000013,Email,public,,1,m2zt1@proseware.com,proseware.com,m2zt1@proseware.com,False
+adapter,public_prose,none,Email.000013,Email,public,,2,33f@treyresearch.net,treyresearch.net,33f@treyresearch.net,False
+adapter,public_prose,none,DateTime.000041,DateTime,public,,0,578/982/2010,578/982/2010,578/982/2010,True
+adapter,public_prose,none,DateTime.000041,DateTime,public,,1,12/24/2045,12/24/2045,2045年12月24日,False
+adapter,public_prose,none,DateTime.000041,DateTime,public,,2,4.2.1743,2/4/1743,4.2.1743,False
+adapter,public_prose,none,ShippingCode.000006,ShippingCode,public,,0,1Z I81 6QF 90 9601 169 4,4,1Z I81 6QF 90 9601 169 4,False
+adapter,public_prose,none,ShippingCode.000006,ShippingCode,public,,1,1Z O63 B7Z 35 2550 248 6,6,1Z O63 B7Z 35 2550 248 6,False
+adapter,public_prose,none,ShippingCode.000006,ShippingCode,public,,2,1Z KDQ RE6 29 5028 565 9,9,1Z KDQ RE6 29 5028 565 9,False
+adapter,public_prose,none,Phone.000002,Phone,public,,0,786-628-8081 x8294,x8294,786-628-8081 x8294,False
+adapter,public_prose,none,Phone.000002,Phone,public,,1,781-771-9145,NULL,781-771-9145,False
+adapter,public_prose,none,Phone.000002,Phone,public,,2,488-779-2563,NULL,488-779-2563,False
+adapter,public_prose,none,Log.000019,Log,public,,0,type size = 185: Et.Consectetur.UtVoluptas type size = 175: Fugiat.Consequatur.VoluptasItaqueExercitationem SitQuis,185->175,,False
+adapter,public_prose,none,Log.000019,Log,public,,1,type size = 82: Quasi.Fuga.EtMolestiaeModi type size = 229: Ut.Cum.Voluptatem,82->229,,False
+adapter,public_prose,none,Log.000019,Log,public,,2,type size = 234: Ratione.Cum.TemporaEt type size = 37: Pariatur.Veritatis.Nihil IureCupiditateMinima,234->37,234: Ratione.Cum.TemporaEt 37: Pariatur.Veritatis.N,False
+adapter,public_prose,none,Number.000066,Number,public,,0,14:5:25,14h 05m 25s,14:5:25,False
+adapter,public_prose,none,Number.000066,Number,public,,1,12:8:29,12h 08m 29s,12:8:29,False
+adapter,public_prose,none,Number.000066,Number,public,,2,15:29:9,15h 29m 09s,15:29:9,False
+adapter,public_prose,none,DateTime.000114,DateTime,public,,0,21-Jan-1985 05:44:43,30-45,21-Jan-1985 05:44:43,False
+adapter,public_prose,none,DateTime.000114,DateTime,public,,1,16-Aug-1985 01:11:56,0-15,16-Aug-1985 01:11:56,False
+adapter,public_prose,none,DateTime.000114,DateTime,public,,2,20-Dec-2033 18:36:29,30-45,20-Dec-2033 18:36:29,False
+adapter,public_prose,none,Address.000013,Address,public,,0,"89 123rd Blvd, Corona, CT 17293",89,"89 123rd Blvd, Corona, CT 17293",False
+adapter,public_prose,none,Address.000013,Address,public,,1,"234 Fourth Ct, Omsk, OK 41230",234,"234 Fourth Ct, Omsk, OK 41230",False
+adapter,public_prose,none,Address.000013,Address,public,,2,"One Main Parkway, Allentown, ND 41230",None,"1 Main Parkway, Allentown, ND 41230",False
+adapter,public_prose,none,Name.000024,Name,public,,0,Cecep Sutresna,c.s.,他是印尼的演员和模特。,False
+adapter,public_prose,none,Name.000024,Name,public,,1,Milica Zujovic,m.z.,米莉卡·祖乔维奇,False
+adapter,public_prose,none,Name.000024,Name,public,,2,Radmilo Bogic,r.b.,Радмило Богић,False
+adapter,public_prose,none,DateTime.000104,DateTime,public,,0,21-Jan-1985 05:44:43,Jan,21-Jan-1985 05:44:43,False
+adapter,public_prose,none,DateTime.000104,DateTime,public,,1,16-Aug-1985 01:11:56,Aug,16-Aug-1985 01:11:56,False
+adapter,public_prose,none,DateTime.000104,DateTime,public,,2,20-Dec-2033 18:36:29,Dec,20-Dec-2033 18:36:29,False
+adapter,public_prose,none,DateTime.000014,DateTime,public,,0,1 Feb 2013,Friday #1 February 2013,1 февраля 2013 года,False
+adapter,public_prose,none,DateTime.000014,DateTime,public,,1,12 Dec 2002,Thursday #2 December 2002,12 декабря 2002 года,False
+adapter,public_prose,none,DateTime.000014,DateTime,public,,2,01 Sep 2012,Saturday #1 September 2012,2012年9月1日,False
+adapter,public_prose,none,Number.000065,Number,public,,0,1.58 | 8.26 | 8.28,1.6 + 8.3 + 8.3,1.58 | 8.26 | 8.28,False
+adapter,public_prose,none,Number.000065,Number,public,,1,21.282 | 16.21 | 18.278,21.3 + 16.2 + 18.3,21.282 | 16.21 | 18.278,False
+adapter,public_prose,none,Number.000065,Number,public,,2,1.43 | 1.2 | 1.82,1.4 + 1.2 + 1.8,1.43 | 1.2 | 1.82,False
+adapter,public_prose,none,DateTime.000027,DateTime,public,,0,3302241,Q1 '2241,3302241,False
+adapter,public_prose,none,DateTime.000027,DateTime,public,,1,8022160,Q3 '2160,8022160,False
+adapter,public_prose,none,DateTime.000027,DateTime,public,,2,23 May 1984 22:24,Q2 '1984,1984年5月23日 22:24,False
+adapter,public_prose,none,Number.000062,Number,public,,0,8 | 16 | 2001,08/16/2001,8 | 16 | 2001,False
+adapter,public_prose,none,Number.000062,Number,public,,1,2 | 21 | 2002,02/21/2002,2 | 21 | 2002,False
+adapter,public_prose,none,Number.000062,Number,public,,2,9 | 21 | 2002,09/21/2002,9月21日2002年,False
+adapter,public_prose,none,DateTime.000003,DateTime,public,,0,16:15:08,16,16:15:08,False
+adapter,public_prose,none,DateTime.000003,DateTime,public,,1,23:48:20,23,23:48:20,False
+adapter,public_prose,none,DateTime.000003,DateTime,public,,2,22:24:59,22,22:24:59,False
+adapter,public_prose,none,DateTime.000088,DateTime,public,,0,16:15:08,4:00PM,16:15:08,False
+adapter,public_prose,none,DateTime.000088,DateTime,public,,1,23:48:20,10:00PM,23:48:20,False
+adapter,public_prose,none,DateTime.000088,DateTime,public,,2,22:24:59,10:00PM,22:24:59,False

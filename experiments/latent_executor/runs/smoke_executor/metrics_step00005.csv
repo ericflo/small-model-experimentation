@@ -1,0 +1,16 @@
+model,length,k,n,pair_accuracy,register_accuracy
+executor,2,0,64,0.0,0.0078125
+executor,2,1,64,0.0,0.0078125
+executor,2,2,64,0.0,0.015625
+executor,2,4,64,0.0,0.015625
+executor,2,6,64,0.0,0.015625
+executor,4,0,64,0.0,0.0078125
+executor,4,1,64,0.0,0.015625
+executor,4,2,64,0.0,0.0078125
+executor,4,4,64,0.0,0.0078125
+executor,4,6,64,0.0,0.0078125
+executor,6,0,64,0.0,0.015625
+executor,6,1,64,0.0,0.0078125
+executor,6,2,64,0.0,0.0
+executor,6,4,64,0.0,0.0234375
+executor,6,6,64,0.0,0.0

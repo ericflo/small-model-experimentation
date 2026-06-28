@@ -1,0 +1,35 @@
+{
+  "experiment": "qwen35_4b_inventory_shortlister_training",
+  "model_family": "Qwen/Qwen3.5-4B",
+  "base_model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_inventory_shortlister_training",
+  "objective": "Train and evaluate an inventory-conditioned Qwen3.5-4B shortlister for two-hole 512-operator programs, measured by target pair coverage at fixed candidate budgets.",
+  "library_size": 512,
+  "operator_signature_under_test": "list[int] -> int",
+  "templates": [
+    "pair_affine_mod",
+    "pair_compare_gate"
+  ],
+  "train_records": 768,
+  "eval_records": 96,
+  "visible_cases": 6,
+  "hidden_cases": 18,
+  "query_pool_cases": 48,
+  "candidate_budgets": [1024, 4096, 16384],
+  "max_sequence_length": 5120,
+  "slot_topk_for_budgets": {
+    "1024": 32,
+    "4096": 64,
+    "16384": 128
+  },
+  "controls": [
+    "base_model",
+    "trained_model",
+    "trained_model_shuffled_inventory"
+  ],
+  "notes": [
+    "This is the first trained Qwen shortlister run in this standalone package.",
+    "Adapters and checkpoints are excluded from the experiment directory.",
+    "Shuffled inventory permutes operator descriptions relative to aliases at evaluation time."
+  ]
+}

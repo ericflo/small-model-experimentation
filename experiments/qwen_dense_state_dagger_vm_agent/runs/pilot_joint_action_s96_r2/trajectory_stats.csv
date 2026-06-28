@@ -1,0 +1,4 @@
+run,phase,n_examples,states,stop_labels,edit_labels,false_stop_states,rollout_success_rate,mean_states_per_example,mean_policy_steps
+pilot_joint_action_s96_r2,bc_teacher,96,679,91,588,0,0.9479166666666666,7.072916666666667,6.125
+pilot_joint_action_s96_r2,dagger_r1_states,96,114,15,99,81,0.15625,1.1875,0.1875
+pilot_joint_action_s96_r2,dagger_r2_states,96,603,34,569,51,0.3645833333333333,6.28125,5.395833333333333

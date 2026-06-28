@@ -1,0 +1,7 @@
+phase,epoch,loss,train_examples,quick_val_direct_accuracy,quick_val_search_accuracy,train_groups,val_groups,listwise_loss,pairwise_loss,base_contrast_loss,quality_loss,valid_loss,final_loss,trace_top_loss,trace_depth_loss,val_selected_correct_rate,val_selected_valid_rate,val_selected_program_exact_rate,val_selected_trace_consistent_rate,val_selected_quality_mean,val_oracle_found_rate,val_base_correct_rate,val_counterfactual_group_rate,val_gap_recovered
+seed_supervised,1,7.96893310546875,16,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+counterfactual_preference,1,4.082056045532227,,,,4,16,1.0444239377975464,0.8463529348373413,0.0,2.6786651611328125,0.776091456413269,4.5225958824157715,4.524317264556885,3.1954126358032227,0.0625,1.0,0.0,0.0,1.0625,0.0625,0.0625,0.0,0.0
+answer_verified_distill,1,5.506386947631836,20,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+preference_selected_distill,1,4.935445149739583,48,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+best_quality_distill,1,5.526221656799317,20,0.0625,0.0625,,,,,,,,,,,,,,,,,,,
+full_supervised,1,6.156688690185547,48,0.0625,0.0625,,,,,,,,,,,,,,,,,,,

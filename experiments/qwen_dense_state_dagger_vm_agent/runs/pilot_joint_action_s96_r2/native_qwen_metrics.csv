@@ -1,0 +1,6 @@
+run,split,accuracy,parse_rate
+pilot_joint_action_s96_r2,val_mixed,0.625,1.0
+pilot_joint_action_s96_r2,fresh_standard,0.375,1.0
+pilot_joint_action_s96_r2,fresh_paraphrase,0.5,1.0
+pilot_joint_action_s96_r2,fresh_paired,0.25,0.9375
+pilot_joint_action_s96_r2,hard_composition,0.4375,1.0

@@ -1,0 +1,513 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.67it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 159.94it/s]Loading weights:  21%|██        | 90/426 [00:00<00:00, 367.61it/s]Loading weights:  34%|███▍      | 146/426 [00:00<00:00, 437.33it/s]Loading weights:  47%|████▋     | 200/426 [00:00<00:00, 467.30it/s]Loading weights:  60%|██████    | 257/426 [00:00<00:00, 500.71it/s]Loading weights:  74%|███████▍  | 315/426 [00:00<00:00, 524.89it/s]Loading weights:  87%|████████▋ | 371/426 [00:00<00:00, 535.32it/s]Loading weights: 100%|█████████▉| 425/426 [00:00<00:00, 536.57it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 466.13it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+shuffled_strategy_lora:   0%|          | 0/120 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+shuffled_strategy_lora:   1%|          | 1/120 [00:05<10:23,  5.24s/it]shuffled_strategy_lora:   2%|▏         | 2/120 [00:09<09:37,  4.90s/it]shuffled_strategy_lora:   2%|▎         | 3/120 [00:14<09:20,  4.79s/it]shuffled_strategy_lora:   3%|▎         | 4/120 [00:19<09:02,  4.68s/it]shuffled_strategy_lora:   4%|▍         | 5/120 [00:23<08:44,  4.56s/it]shuffled_strategy_lora:   5%|▌         | 6/120 [00:28<08:41,  4.57s/it]shuffled_strategy_lora:   6%|▌         | 7/120 [00:32<08:36,  4.58s/it]shuffled_strategy_lora:   7%|▋         | 8/120 [00:37<08:28,  4.54s/it]shuffled_strategy_lora:   8%|▊         | 9/120 [00:41<08:24,  4.55s/it]shuffled_strategy_lora:   8%|▊         | 10/120 [00:46<08:23,  4.58s/it]                                                                        {"step": 10, "loss": 0.121}
+shuffled_strategy_lora:   8%|▊         | 10/120 [00:46<08:23,  4.58s/it]shuffled_strategy_lora:   9%|▉         | 11/120 [00:50<08:13,  4.52s/it]shuffled_strategy_lora:  10%|█         | 12/120 [00:55<08:02,  4.47s/it]shuffled_strategy_lora:  11%|█         | 13/120 [00:59<07:59,  4.49s/it]shuffled_strategy_lora:  12%|█▏        | 14/120 [01:03<07:54,  4.48s/it]shuffled_strategy_lora:  12%|█▎        | 15/120 [01:08<07:53,  4.51s/it]shuffled_strategy_lora:  13%|█▎        | 16/120 [01:13<07:51,  4.54s/it]shuffled_strategy_lora:  14%|█▍        | 17/120 [01:17<07:47,  4.54s/it]shuffled_strategy_lora:  15%|█▌        | 18/120 [01:22<07:41,  4.52s/it]shuffled_strategy_lora:  16%|█▌        | 19/120 [01:26<07:42,  4.57s/it]shuffled_strategy_lora:  17%|█▋        | 20/120 [01:31<07:34,  4.55s/it]                                                                        {"step": 20, "loss": 0.2662}
+shuffled_strategy_lora:  17%|█▋        | 20/120 [01:31<07:34,  4.55s/it]shuffled_strategy_lora:  18%|█▊        | 21/120 [01:35<07:30,  4.55s/it]shuffled_strategy_lora:  18%|█▊        | 22/120 [01:40<07:24,  4.53s/it]shuffled_strategy_lora:  19%|█▉        | 23/120 [01:44<07:14,  4.48s/it]shuffled_strategy_lora:  20%|██        | 24/120 [01:49<07:17,  4.56s/it]shuffled_strategy_lora:  21%|██        | 25/120 [01:53<07:09,  4.52s/it]shuffled_strategy_lora:  22%|██▏       | 26/120 [01:58<07:06,  4.53s/it]shuffled_strategy_lora:  22%|██▎       | 27/120 [02:03<07:01,  4.53s/it]shuffled_strategy_lora:  23%|██▎       | 28/120 [02:07<07:01,  4.58s/it]shuffled_strategy_lora:  24%|██▍       | 29/120 [02:12<06:56,  4.58s/it]shuffled_strategy_lora:  25%|██▌       | 30/120 [02:17<06:56,  4.63s/it]                                                                        {"step": 30, "loss": 0.2053}
+shuffled_strategy_lora:  25%|██▌       | 30/120 [02:17<06:56,  4.63s/it]shuffled_strategy_lora:  26%|██▌       | 31/120 [02:21<06:50,  4.62s/it]shuffled_strategy_lora:  27%|██▋       | 32/120 [02:25<06:37,  4.51s/it]shuffled_strategy_lora:  28%|██▊       | 33/120 [02:30<06:32,  4.51s/it]shuffled_strategy_lora:  28%|██▊       | 34/120 [02:35<06:30,  4.54s/it]shuffled_strategy_lora:  29%|██▉       | 35/120 [02:39<06:27,  4.55s/it]shuffled_strategy_lora:  30%|███       | 36/120 [02:44<06:22,  4.55s/it]shuffled_strategy_lora:  31%|███       | 37/120 [02:48<06:17,  4.55s/it]shuffled_strategy_lora:  32%|███▏      | 38/120 [02:53<06:14,  4.57s/it]shuffled_strategy_lora:  32%|███▎      | 39/120 [02:57<06:08,  4.55s/it]shuffled_strategy_lora:  33%|███▎      | 40/120 [03:02<05:58,  4.48s/it]                                                                        {"step": 40, "loss": 0.1742}
+shuffled_strategy_lora:  33%|███▎      | 40/120 [03:02<05:58,  4.48s/it]shuffled_strategy_lora:  34%|███▍      | 41/120 [03:06<05:56,  4.51s/it]shuffled_strategy_lora:  35%|███▌      | 42/120 [03:11<05:57,  4.58s/it]shuffled_strategy_lora:  36%|███▌      | 43/120 [03:16<05:52,  4.58s/it]shuffled_strategy_lora:  37%|███▋      | 44/120 [03:20<05:46,  4.57s/it]shuffled_strategy_lora:  38%|███▊      | 45/120 [03:25<05:44,  4.59s/it]shuffled_strategy_lora:  38%|███▊      | 46/120 [03:29<05:40,  4.60s/it]shuffled_strategy_lora:  39%|███▉      | 47/120 [03:34<05:37,  4.63s/it]shuffled_strategy_lora:  40%|████      | 48/120 [03:39<05:32,  4.62s/it]shuffled_strategy_lora:  41%|████      | 49/120 [03:43<05:27,  4.61s/it]shuffled_strategy_lora:  42%|████▏     | 50/120 [03:48<05:20,  4.58s/it]                                                                        {"step": 50, "loss": 0.2291}
+shuffled_strategy_lora:  42%|████▏     | 50/120 [03:48<05:20,  4.58s/it]shuffled_strategy_lora:  42%|████▎     | 51/120 [03:52<05:17,  4.60s/it]shuffled_strategy_lora:  43%|████▎     | 52/120 [03:57<05:14,  4.62s/it]shuffled_strategy_lora:  44%|████▍     | 53/120 [04:02<05:08,  4.60s/it]shuffled_strategy_lora:  45%|████▌     | 54/120 [04:06<04:59,  4.54s/it]shuffled_strategy_lora:  46%|████▌     | 55/120 [04:11<04:53,  4.52s/it]shuffled_strategy_lora:  47%|████▋     | 56/120 [04:15<04:50,  4.55s/it]shuffled_strategy_lora:  48%|████▊     | 57/120 [04:20<04:44,  4.52s/it]shuffled_strategy_lora:  48%|████▊     | 58/120 [04:24<04:40,  4.53s/it]shuffled_strategy_lora:  49%|████▉     | 59/120 [04:29<04:38,  4.57s/it]shuffled_strategy_lora:  50%|█████     | 60/120 [04:33<04:34,  4.57s/it]                                                                        {"step": 60, "loss": 0.1242}
+shuffled_strategy_lora:  50%|█████     | 60/120 [04:33<04:34,  4.57s/it]shuffled_strategy_lora:  51%|█████     | 61/120 [04:38<04:27,  4.54s/it]shuffled_strategy_lora:  52%|█████▏    | 62/120 [04:42<04:23,  4.54s/it]shuffled_strategy_lora:  52%|█████▎    | 63/120 [04:47<04:19,  4.55s/it]shuffled_strategy_lora:  53%|█████▎    | 64/120 [04:51<04:13,  4.53s/it]shuffled_strategy_lora:  54%|█████▍    | 65/120 [04:56<04:08,  4.52s/it]shuffled_strategy_lora:  55%|█████▌    | 66/120 [05:00<04:03,  4.50s/it]shuffled_strategy_lora:  56%|█████▌    | 67/120 [05:05<04:00,  4.53s/it]shuffled_strategy_lora:  57%|█████▋    | 68/120 [05:10<03:56,  4.55s/it]shuffled_strategy_lora:  57%|█████▊    | 69/120 [05:14<03:56,  4.63s/it]shuffled_strategy_lora:  58%|█████▊    | 70/120 [05:19<03:49,  4.60s/it]                                                                        {"step": 70, "loss": 0.0281}
+shuffled_strategy_lora:  58%|█████▊    | 70/120 [05:19<03:49,  4.60s/it]shuffled_strategy_lora:  59%|█████▉    | 71/120 [05:23<03:44,  4.58s/it]shuffled_strategy_lora:  60%|██████    | 72/120 [05:28<03:37,  4.53s/it]shuffled_strategy_lora:  61%|██████    | 73/120 [05:32<03:33,  4.54s/it]shuffled_strategy_lora:  62%|██████▏   | 74/120 [05:37<03:28,  4.53s/it]shuffled_strategy_lora:  62%|██████▎   | 75/120 [05:42<03:24,  4.55s/it]shuffled_strategy_lora:  63%|██████▎   | 76/120 [05:46<03:18,  4.50s/it]shuffled_strategy_lora:  64%|██████▍   | 77/120 [05:51<03:15,  4.54s/it]shuffled_strategy_lora:  65%|██████▌   | 78/120 [05:55<03:11,  4.55s/it]shuffled_strategy_lora:  66%|██████▌   | 79/120 [06:00<03:07,  4.58s/it]shuffled_strategy_lora:  67%|██████▋   | 80/120 [06:04<03:02,  4.56s/it]                                                                        {"step": 80, "loss": 0.2461}
+shuffled_strategy_lora:  67%|██████▋   | 80/120 [06:04<03:02,  4.56s/it]shuffled_strategy_lora:  68%|██████▊   | 81/120 [06:09<03:00,  4.62s/it]shuffled_strategy_lora:  68%|██████▊   | 82/120 [06:14<02:55,  4.62s/it]shuffled_strategy_lora:  69%|██████▉   | 83/120 [06:18<02:50,  4.60s/it]shuffled_strategy_lora:  70%|███████   | 84/120 [06:23<02:47,  4.65s/it]shuffled_strategy_lora:  71%|███████   | 85/120 [06:28<02:43,  4.68s/it]shuffled_strategy_lora:  72%|███████▏  | 86/120 [06:33<02:40,  4.71s/it]shuffled_strategy_lora:  72%|███████▎  | 87/120 [06:37<02:34,  4.69s/it]shuffled_strategy_lora:  73%|███████▎  | 88/120 [06:42<02:29,  4.66s/it]shuffled_strategy_lora:  74%|███████▍  | 89/120 [06:46<02:23,  4.63s/it]shuffled_strategy_lora:  75%|███████▌  | 90/120 [06:51<02:17,  4.58s/it]                                                                        {"step": 90, "loss": 0.1395}
+shuffled_strategy_lora:  75%|███████▌  | 90/120 [06:51<02:17,  4.58s/it]shuffled_strategy_lora:  76%|███████▌  | 91/120 [06:55<02:11,  4.53s/it]shuffled_strategy_lora:  77%|███████▋  | 92/120 [07:00<02:07,  4.54s/it]shuffled_strategy_lora:  78%|███████▊  | 93/120 [07:04<02:01,  4.50s/it]shuffled_strategy_lora:  78%|███████▊  | 94/120 [07:09<01:57,  4.50s/it]shuffled_strategy_lora:  79%|███████▉  | 95/120 [07:13<01:53,  4.54s/it]shuffled_strategy_lora:  80%|████████  | 96/120 [07:18<01:48,  4.51s/it]shuffled_strategy_lora:  81%|████████  | 97/120 [07:22<01:43,  4.49s/it]shuffled_strategy_lora:  82%|████████▏ | 98/120 [07:27<01:39,  4.53s/it]shuffled_strategy_lora:  82%|████████▎ | 99/120 [07:31<01:34,  4.52s/it]shuffled_strategy_lora:  83%|████████▎ | 100/120 [07:36<01:30,  4.53s/it]                                                                         {"step": 100, "loss": 0.106}
+shuffled_strategy_lora:  83%|████████▎ | 100/120 [07:36<01:30,  4.53s/it]shuffled_strategy_lora:  84%|████████▍ | 101/120 [07:40<01:26,  4.54s/it]shuffled_strategy_lora:  85%|████████▌ | 102/120 [07:45<01:21,  4.55s/it]shuffled_strategy_lora:  86%|████████▌ | 103/120 [07:50<01:17,  4.59s/it]shuffled_strategy_lora:  87%|████████▋ | 104/120 [07:54<01:13,  4.56s/it]shuffled_strategy_lora:  88%|████████▊ | 105/120 [07:59<01:09,  4.64s/it]shuffled_strategy_lora:  88%|████████▊ | 106/120 [08:03<01:04,  4.60s/it]shuffled_strategy_lora:  89%|████████▉ | 107/120 [08:08<01:00,  4.64s/it]shuffled_strategy_lora:  90%|█████████ | 108/120 [08:13<00:55,  4.66s/it]shuffled_strategy_lora:  91%|█████████ | 109/120 [08:18<00:51,  4.66s/it]shuffled_strategy_lora:  92%|█████████▏| 110/120 [08:22<00:46,  4.67s/it]                                                                         {"step": 110, "loss": 0.0912}
+shuffled_strategy_lora:  92%|█████████▏| 110/120 [08:22<00:46,  4.67s/it]shuffled_strategy_lora:  92%|█████████▎| 111/120 [08:27<00:41,  4.66s/it]shuffled_strategy_lora:  93%|█████████▎| 112/120 [08:31<00:36,  4.62s/it]shuffled_strategy_lora:  94%|█████████▍| 113/120 [08:36<00:32,  4.62s/it]shuffled_strategy_lora:  95%|█████████▌| 114/120 [08:41<00:27,  4.59s/it]shuffled_strategy_lora:  96%|█████████▌| 115/120 [08:45<00:22,  4.52s/it]shuffled_strategy_lora:  97%|█████████▋| 116/120 [08:50<00:18,  4.61s/it]shuffled_strategy_lora:  98%|█████████▊| 117/120 [08:55<00:13,  4.66s/it]shuffled_strategy_lora:  98%|█████████▊| 118/120 [08:59<00:09,  4.63s/it]shuffled_strategy_lora:  99%|█████████▉| 119/120 [09:04<00:04,  4.68s/it]shuffled_strategy_lora: 100%|██████████| 120/120 [09:09<00:00,  4.67s/it]                                                                         {"step": 120, "loss": 0.1461}
+shuffled_strategy_lora: 100%|██████████| 120/120 [09:09<00:00,  4.67s/it]shuffled_strategy_lora: 100%|██████████| 120/120 [09:09<00:00,  4.58s/it]
+{
+  "batch_size": 1,
+  "grad_accum": 4,
+  "learning_rate": 0.0001,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_r": 16,
+  "losses": [
+    {
+      "loss": 0.27845123410224915,
+      "step": 1
+    },
+    {
+      "loss": 0.32456910610198975,
+      "step": 2
+    },
+    {
+      "loss": 0.05359532684087753,
+      "step": 3
+    },
+    {
+      "loss": 0.09121516346931458,
+      "step": 4
+    },
+    {
+      "loss": 0.19602622091770172,
+      "step": 5
+    },
+    {
+      "loss": 0.0740065723657608,
+      "step": 6
+    },
+    {
+      "loss": 0.16990986466407776,
+      "step": 7
+    },
+    {
+      "loss": 0.3660997152328491,
+      "step": 8
+    },
+    {
+      "loss": 0.22326761484146118,
+      "step": 9
+    },
+    {
+      "loss": 0.12095692753791809,
+      "step": 10
+    },
+    {
+      "loss": 0.11589356511831284,
+      "step": 11
+    },
+    {
+      "loss": 0.14441736042499542,
+      "step": 12
+    },
+    {
+      "loss": 0.22830714285373688,
+      "step": 13
+    },
+    {
+      "loss": 0.08783484995365143,
+      "step": 14
+    },
+    {
+      "loss": 0.1185019239783287,
+      "step": 15
+    },
+    {
+      "loss": 0.07292096316814423,
+      "step": 16
+    },
+    {
+      "loss": 0.0962102860212326,
+      "step": 17
+    },
+    {
+      "loss": 0.3200717270374298,
+      "step": 18
+    },
+    {
+      "loss": 0.11910711228847504,
+      "step": 19
+    },
+    {
+      "loss": 0.2661544680595398,
+      "step": 20
+    },
+    {
+      "loss": 0.14908766746520996,
+      "step": 21
+    },
+    {
+      "loss": 0.11916792392730713,
+      "step": 22
+    },
+    {
+      "loss": 0.04119350016117096,
+      "step": 23
+    },
+    {
+      "loss": 0.2792896032333374,
+      "step": 24
+    },
+    {
+      "loss": 0.1879284679889679,
+      "step": 25
+    },
+    {
+      "loss": 0.06444304436445236,
+      "step": 26
+    },
+    {
+      "loss": 0.0584099180996418,
+      "step": 27
+    },
+    {
+      "loss": 0.2812897562980652,
+      "step": 28
+    },
+    {
+      "loss": 0.19522744417190552,
+      "step": 29
+    },
+    {
+      "loss": 0.20527198910713196,
+      "step": 30
+    },
+    {
+      "loss": 0.13441228866577148,
+      "step": 31
+    },
+    {
+      "loss": 0.20707035064697266,
+      "step": 32
+    },
+    {
+      "loss": 0.14293986558914185,
+      "step": 33
+    },
+    {
+      "loss": 0.7801318168640137,
+      "step": 34
+    },
+    {
+      "loss": 0.09783962368965149,
+      "step": 35
+    },
+    {
+      "loss": 0.17455892264842987,
+      "step": 36
+    },
+    {
+      "loss": 0.0534856915473938,
+      "step": 37
+    },
+    {
+      "loss": 0.0620311014354229,
+      "step": 38
+    },
+    {
+      "loss": 0.1623285859823227,
+      "step": 39
+    },
+    {
+      "loss": 0.17420870065689087,
+      "step": 40
+    },
+    {
+      "loss": 0.13002455234527588,
+      "step": 41
+    },
+    {
+      "loss": 0.2493155598640442,
+      "step": 42
+    },
+    {
+      "loss": 0.23239904642105103,
+      "step": 43
+    },
+    {
+      "loss": 0.4087063670158386,
+      "step": 44
+    },
+    {
+      "loss": 0.07260581105947495,
+      "step": 45
+    },
+    {
+      "loss": 0.2520880103111267,
+      "step": 46
+    },
+    {
+      "loss": 0.08187758922576904,
+      "step": 47
+    },
+    {
+      "loss": 0.12721647322177887,
+      "step": 48
+    },
+    {
+      "loss": 0.05007455497980118,
+      "step": 49
+    },
+    {
+      "loss": 0.22907286882400513,
+      "step": 50
+    },
+    {
+      "loss": 0.12360791116952896,
+      "step": 51
+    },
+    {
+      "loss": 0.08958402276039124,
+      "step": 52
+    },
+    {
+      "loss": 0.11188317835330963,
+      "step": 53
+    },
+    {
+      "loss": 0.14389105141162872,
+      "step": 54
+    },
+    {
+      "loss": 0.15022346377372742,
+      "step": 55
+    },
+    {
+      "loss": 0.0689118504524231,
+      "step": 56
+    },
+    {
+      "loss": 0.13363437354564667,
+      "step": 57
+    },
+    {
+      "loss": 0.18503132462501526,
+      "step": 58
+    },
+    {
+      "loss": 0.14004722237586975,
+      "step": 59
+    },
+    {
+      "loss": 0.124226413667202,
+      "step": 60
+    },
+    {
+      "loss": 0.20301225781440735,
+      "step": 61
+    },
+    {
+      "loss": 0.13082283735275269,
+      "step": 62
+    },
+    {
+      "loss": 0.1006024107336998,
+      "step": 63
+    },
+    {
+      "loss": 0.06599646806716919,
+      "step": 64
+    },
+    {
+      "loss": 0.29107019305229187,
+      "step": 65
+    },
+    {
+      "loss": 0.1936589926481247,
+      "step": 66
+    },
+    {
+      "loss": 0.057141128927469254,
+      "step": 67
+    },
+    {
+      "loss": 0.2354423999786377,
+      "step": 68
+    },
+    {
+      "loss": 0.056744348257780075,
+      "step": 69
+    },
+    {
+      "loss": 0.028134336695075035,
+      "step": 70
+    },
+    {
+      "loss": 0.12416820228099823,
+      "step": 71
+    },
+    {
+      "loss": 0.009000805206596851,
+      "step": 72
+    },
+    {
+      "loss": 0.06332708895206451,
+      "step": 73
+    },
+    {
+      "loss": 0.06652339547872543,
+      "step": 74
+    },
+    {
+      "loss": 0.14932946860790253,
+      "step": 75
+    },
+    {
+      "loss": 0.07988550513982773,
+      "step": 76
+    },
+    {
+      "loss": 0.08094467967748642,
+      "step": 77
+    },
+    {
+      "loss": 0.08923792093992233,
+      "step": 78
+    },
+    {
+      "loss": 0.10803918540477753,
+      "step": 79
+    },
+    {
+      "loss": 0.24605025351047516,
+      "step": 80
+    },
+    {
+      "loss": 0.062312543392181396,
+      "step": 81
+    },
+    {
+      "loss": 0.06752514094114304,
+      "step": 82
+    },
+    {
+      "loss": 0.17661961913108826,
+      "step": 83
+    },
+    {
+      "loss": 0.0496174693107605,
+      "step": 84
+    },
+    {
+      "loss": 0.1370183825492859,
+      "step": 85
+    },
+    {
+      "loss": 0.11434847861528397,
+      "step": 86
+    },
+    {
+      "loss": 0.1427794098854065,
+      "step": 87
+    },
+    {
+      "loss": 0.060401711612939835,
+      "step": 88
+    },
+    {
+      "loss": 0.23104003071784973,
+      "step": 89
+    },
+    {
+      "loss": 0.13946965336799622,
+      "step": 90
+    },
+    {
+      "loss": 0.0490567572414875,
+      "step": 91
+    },
+    {
+      "loss": 0.35767653584480286,
+      "step": 92
+    },
+    {
+      "loss": 0.022045936435461044,
+      "step": 93
+    },
+    {
+      "loss": 0.08739139139652252,
+      "step": 94
+    },
+    {
+      "loss": 0.21278950572013855,
+      "step": 95
+    },
+    {
+      "loss": 0.05878935009241104,
+      "step": 96
+    },
+    {
+      "loss": 0.2991587519645691,
+      "step": 97
+    },
+    {
+      "loss": 0.19499598443508148,
+      "step": 98
+    },
+    {
+      "loss": 0.027639737352728844,
+      "step": 99
+    },
+    {
+      "loss": 0.1059836596250534,
+      "step": 100
+    },
+    {
+      "loss": 0.08067449182271957,
+      "step": 101
+    },
+    {
+      "loss": 0.33885157108306885,
+      "step": 102
+    },
+    {
+      "loss": 0.04482103884220123,
+      "step": 103
+    },
+    {
+      "loss": 0.06721627712249756,
+      "step": 104
+    },
+    {
+      "loss": 0.12430358678102493,
+      "step": 105
+    },
+    {
+      "loss": 0.054217103868722916,
+      "step": 106
+    },
+    {
+      "loss": 0.06088859587907791,
+      "step": 107
+    },
+    {
+      "loss": 0.10823716223239899,
+      "step": 108
+    },
+    {
+      "loss": 0.26834142208099365,
+      "step": 109
+    },
+    {
+      "loss": 0.09116343408823013,
+      "step": 110
+    },
+    {
+      "loss": 0.05099865049123764,
+      "step": 111
+    },
+    {
+      "loss": 0.05214511603116989,
+      "step": 112
+    },
+    {
+      "loss": 0.09029301255941391,
+      "step": 113
+    },
+    {
+      "loss": 0.15105251967906952,
+      "step": 114
+    },
+    {
+      "loss": 0.12742285430431366,
+      "step": 115
+    },
+    {
+      "loss": 0.21780875325202942,
+      "step": 116
+    },
+    {
+      "loss": 0.10107926279306412,
+      "step": 117
+    },
+    {
+      "loss": 0.09504306316375732,
+      "step": 118
+    },
+    {
+      "loss": 0.13897450268268585,
+      "step": 119
+    },
+    {
+      "loss": 0.14613600075244904,
+      "step": 120
+    }
+  ],
+  "max_length": 1536,
+  "max_steps": 120,
+  "run_name": "shuffled_strategy_lora",
+  "tokenized_rows": 244,
+  "train_rows": 244
+}

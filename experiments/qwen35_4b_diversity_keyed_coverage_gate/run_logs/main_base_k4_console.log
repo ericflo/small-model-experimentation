@@ -1,0 +1,42 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.88it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:01, 237.35it/s]Loading weights:  19%|█▊        | 79/426 [00:00<00:01, 290.66it/s]Loading weights:  28%|██▊       | 118/426 [00:00<00:00, 328.56it/s]Loading weights:  36%|███▌      | 152/426 [00:00<00:00, 327.79it/s]Loading weights:  46%|████▌     | 195/426 [00:00<00:00, 355.58it/s]Loading weights:  54%|█████▍    | 231/426 [00:00<00:00, 356.12it/s]Loading weights:  63%|██████▎   | 267/426 [00:00<00:00, 341.11it/s]Loading weights:  72%|███████▏  | 305/426 [00:00<00:00, 348.87it/s]Loading weights:  80%|███████▉  | 340/426 [00:01<00:00, 341.65it/s]Loading weights:  88%|████████▊ | 375/426 [00:01<00:00, 342.67it/s]Loading weights:  96%|█████████▋| 411/426 [00:01<00:00, 346.78it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 326.89it/s]
+base-base_default:   0%|          | 0/80 [00:00<?, ?it/s]base-base_default:   1%|▏         | 1/80 [00:17<22:54, 17.40s/it]base-base_default:   2%|▎         | 2/80 [00:23<14:13, 10.94s/it]base-base_default:   4%|▍         | 3/80 [00:31<11:52,  9.25s/it]base-base_default:   5%|▌         | 4/80 [00:48<15:54, 12.56s/it]base-base_default:   6%|▋         | 5/80 [01:02<16:23, 13.12s/it]base-base_default:   8%|▊         | 6/80 [01:11<14:09, 11.48s/it]base-base_default:   9%|▉         | 7/80 [01:15<11:03,  9.09s/it]base-base_default:  10%|█         | 8/80 [01:21<09:48,  8.17s/it]base-base_default:  11%|█▏        | 9/80 [01:28<09:11,  7.77s/it]base-base_default:  12%|█▎        | 10/80 [01:52<14:55, 12.79s/it]base-base_default:  14%|█▍        | 11/80 [02:00<13:11, 11.47s/it]base-base_default:  15%|█▌        | 12/80 [02:07<11:29, 10.14s/it]base-base_default:  16%|█▋        | 13/80 [02:17<11:04,  9.92s/it]base-base_default:  18%|█▊        | 14/80 [02:28<11:13, 10.21s/it]base-base_default:  19%|█▉        | 15/80 [02:45<13:12, 12.19s/it]base-base_default:  20%|██        | 16/80 [02:57<12:58, 12.16s/it]base-base_default:  21%|██▏       | 17/80 [03:06<11:53, 11.32s/it]base-base_default:  22%|██▎       | 18/80 [03:23<13:28, 13.04s/it]base-base_default:  24%|██▍       | 19/80 [03:41<14:52, 14.63s/it]base-base_default:  25%|██▌       | 20/80 [04:05<17:14, 17.24s/it]base-base_default:  26%|██▋       | 21/80 [04:30<19:14, 19.56s/it]base-base_default:  28%|██▊       | 22/80 [04:52<19:48, 20.49s/it]base-base_default:  29%|██▉       | 23/80 [05:07<17:41, 18.62s/it]base-base_default:  30%|███       | 24/80 [05:31<19:07, 20.50s/it]base-base_default:  31%|███▏      | 25/80 [05:52<18:46, 20.48s/it]base-base_default:  32%|███▎      | 26/80 [06:21<20:46, 23.08s/it]base-base_default:  34%|███▍      | 27/80 [06:34<17:41, 20.03s/it]base-base_default:  35%|███▌      | 28/80 [06:50<16:26, 18.98s/it]base-base_default:  36%|███▋      | 29/80 [07:20<18:49, 22.15s/it]base-base_default:  38%|███▊      | 30/80 [07:29<15:09, 18.20s/it]base-base_default:  39%|███▉      | 31/80 [07:35<11:45, 14.41s/it]base-base_default:  40%|████      | 32/80 [07:45<10:38, 13.30s/it]base-base_default:  41%|████▏     | 33/80 [07:55<09:37, 12.28s/it]base-base_default:  42%|████▎     | 34/80 [08:02<08:06, 10.57s/it]base-base_default:  44%|████▍     | 35/80 [08:10<07:27,  9.95s/it]base-base_default:  45%|████▌     | 36/80 [08:19<06:56,  9.46s/it]base-base_default:  46%|████▋     | 37/80 [08:40<09:14, 12.89s/it]base-base_default:  48%|████▊     | 38/80 [09:08<12:17, 17.56s/it]base-base_default:  49%|████▉     | 39/80 [09:14<09:32, 13.97s/it]base-base_default:  50%|█████     | 40/80 [09:25<08:48, 13.22s/it]base-base_default:  51%|█████▏    | 41/80 [09:36<08:11, 12.59s/it]base-base_default:  52%|█████▎    | 42/80 [09:40<06:19,  9.99s/it]base-base_default:  54%|█████▍    | 43/80 [09:51<06:23, 10.36s/it]base-base_default:  55%|█████▌    | 44/80 [10:11<07:48, 13.02s/it]base-base_default:  56%|█████▋    | 45/80 [10:30<08:38, 14.82s/it]base-base_default:  57%|█████▊    | 46/80 [10:36<07:03, 12.46s/it]base-base_default:  59%|█████▉    | 47/80 [11:00<08:41, 15.81s/it]base-base_default:  60%|██████    | 48/80 [11:07<06:56, 13.00s/it]base-base_default:  61%|██████▏   | 49/80 [11:28<08:01, 15.52s/it]base-base_default:  62%|██████▎   | 50/80 [11:53<09:15, 18.52s/it]base-base_default:  64%|██████▍   | 51/80 [12:18<09:52, 20.44s/it]base-base_default:  65%|██████▌   | 52/80 [12:26<07:41, 16.47s/it]base-base_default:  66%|██████▋   | 53/80 [12:42<07:20, 16.31s/it]base-base_default:  68%|██████▊   | 54/80 [12:47<05:38, 13.01s/it]base-base_default:  69%|██████▉   | 55/80 [12:57<05:06, 12.25s/it]base-base_default:  70%|███████   | 56/80 [13:03<04:03, 10.13s/it]base-base_default:  71%|███████▏  | 57/80 [13:30<05:55, 15.46s/it]base-base_default:  72%|███████▎  | 58/80 [13:44<05:27, 14.90s/it]base-base_default:  74%|███████▍  | 59/80 [13:57<05:01, 14.35s/it]base-base_default:  75%|███████▌  | 60/80 [14:09<04:31, 13.59s/it]base-base_default:  76%|███████▋  | 61/80 [14:30<05:00, 15.80s/it]base-base_default:  78%|███████▊  | 62/80 [14:53<05:24, 18.04s/it]base-base_default:  79%|███████▉  | 63/80 [15:15<05:24, 19.08s/it]base-base_default:  80%|████████  | 64/80 [15:31<04:54, 18.42s/it]base-base_default:  81%|████████▏ | 65/80 [15:40<03:52, 15.52s/it]base-base_default:  82%|████████▎ | 66/80 [16:03<04:08, 17.78s/it]base-base_default:  84%|████████▍ | 67/80 [16:26<04:09, 19.21s/it]base-base_default:  85%|████████▌ | 68/80 [16:42<03:41, 18.43s/it]base-base_default:  86%|████████▋ | 69/80 [16:48<02:40, 14.63s/it]base-base_default:  88%|████████▊ | 70/80 [17:02<02:22, 14.24s/it]base-base_default:  89%|████████▉ | 71/80 [17:09<01:49, 12.18s/it]base-base_default:  90%|█████████ | 72/80 [17:22<01:38, 12.37s/it]base-base_default:  91%|█████████▏| 73/80 [17:30<01:17, 11.09s/it]base-base_default:  92%|█████████▎| 74/80 [17:38<01:00, 10.07s/it]base-base_default:  94%|█████████▍| 75/80 [17:47<00:49,  9.94s/it]base-base_default:  95%|█████████▌| 76/80 [18:04<00:48, 12.02s/it]base-base_default:  96%|█████████▋| 77/80 [18:19<00:38, 12.87s/it]base-base_default:  98%|█████████▊| 78/80 [18:25<00:21, 10.78s/it]base-base_default:  99%|█████████▉| 79/80 [18:29<00:08,  8.94s/it]base-base_default: 100%|██████████| 80/80 [18:42<00:00,  9.90s/it]base-base_default: 100%|██████████| 80/80 [18:42<00:00, 14.03s/it]
+{
+  "arm_name": "base_default",
+  "count": 80,
+  "experiment": "qwen35_4b_diversity_keyed_coverage_gate",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/main_base_k4_records.jsonl",
+  "records": {
+    "candidate_count_mean": 3.45,
+    "coverage": 0.7,
+    "distinct_behavior_rate_mean": 0.75625,
+    "distinct_functional_rate_mean": 0.4770833333333333,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 1.875,
+    "parse_success_mean": 3.3625,
+    "records": 80,
+    "visible_candidates_mean": 2.2625,
+    "visible_coverage": 0.7,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "main_base_k4",
+  "samples_per_task": 4,
+  "seed": 20260625,
+  "split": "mbpp_heldout",
+  "temperatures": "0.2,0.7,1.0",
+  "token_usage": {
+    "calls": 320,
+    "completion_tokens": 29741,
+    "forward_tokens": 69645,
+    "prompt_tokens": 39904
+  },
+  "top_p": 0.95,
+  "visible_tests": 1
+}

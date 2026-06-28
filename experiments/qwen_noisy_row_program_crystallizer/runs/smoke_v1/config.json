@@ -1,0 +1,14 @@
+{
+  "run_name": "smoke_v1",
+  "seed": 20260627,
+  "task_limit": 6,
+  "train_n": 4,
+  "heldout_cap": 6,
+  "min_examples": 5,
+  "min_heldout": 3,
+  "max_candidates": 8000,
+  "candidate_cache": "/workspace/experiments/qwen_full_table_consistency_reranker/runs/main_qwen_table_40/row_candidates.csv",
+  "tasks": 6,
+  "candidate_rows": 210,
+  "started_utc": "2026-06-27T09:45:13.861008+00:00"
+}

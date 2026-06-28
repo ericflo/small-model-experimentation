@@ -1,0 +1,1875 @@
+{
+  "eval": [
+    {
+      "adapter_dir": null,
+      "arm_name": "base_hot_k4",
+      "count": 24,
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "max_new_tokens": 220,
+      "offset": 0,
+      "path": "data/eval_base_hot_k4_records.jsonl",
+      "records": {
+        "candidate_count_mean": 3.8333333333333335,
+        "coverage": 0.625,
+        "distinct_behavior_rate_mean": 0.8680555555555555,
+        "distinct_functional_rate_mean": 0.5381944444444444,
+        "false_repair_count": 0,
+        "false_repair_rate": 0.0,
+        "forward_tokens": 20913,
+        "hidden_pass_candidates_mean": 1.5833333333333333,
+        "parse_success_mean": 3.7083333333333335,
+        "pass1_proxy": 0.5,
+        "records": 24,
+        "visible_candidates_mean": 2.125,
+        "visible_coverage": 0.625,
+        "visible_repair_pass_count": 0,
+        "zero_base_records": 0,
+        "zero_to_one": 0,
+        "zero_to_one_rate": 0.0
+      },
+      "round_name": "pilot_eval",
+      "samples_per_task": 4,
+      "seed": 2026062611,
+      "split": "mbpp_test",
+      "temperatures": [
+        1.0
+      ],
+      "token_usage": {
+        "calls": 96,
+        "completion_tokens": 9562,
+        "forward_tokens": 21542,
+        "prompt_tokens": 11980
+      },
+      "top_p": 0.98,
+      "visible_tests": 1
+    },
+    {
+      "adapter_dir": null,
+      "arm_name": "base_hot_k8_sample_more",
+      "count": 24,
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "max_new_tokens": 220,
+      "offset": 0,
+      "path": "data/eval_base_hot_k8_records.jsonl",
+      "records": {
+        "candidate_count_mean": 7.833333333333333,
+        "coverage": 0.6666666666666666,
+        "distinct_behavior_rate_mean": 0.7688492063492064,
+        "distinct_functional_rate_mean": 0.33903769841269843,
+        "false_repair_count": 0,
+        "false_repair_rate": 0.0,
+        "forward_tokens": 45854,
+        "hidden_pass_candidates_mean": 2.7916666666666665,
+        "parse_success_mean": 7.583333333333333,
+        "pass1_proxy": 0.2916666666666667,
+        "records": 24,
+        "visible_candidates_mean": 3.875,
+        "visible_coverage": 0.6666666666666666,
+        "visible_repair_pass_count": 0,
+        "zero_base_records": 0,
+        "zero_to_one": 0,
+        "zero_to_one_rate": 0.0
+      },
+      "round_name": "pilot_eval",
+      "samples_per_task": 8,
+      "seed": 2026062612,
+      "split": "mbpp_test",
+      "temperatures": [
+        1.0
+      ],
+      "token_usage": {
+        "calls": 192,
+        "completion_tokens": 22507,
+        "forward_tokens": 46467,
+        "prompt_tokens": 23960
+      },
+      "top_p": 0.98,
+      "visible_tests": 1
+    },
+    {
+      "adapter_dir": "/workspace/large_artifacts/qwen35_4b_offline_hard_negative_coverage_dpo/models/hard_negative_dpo_lora",
+      "arm_name": "hard_negative_dpo_k4",
+      "count": 24,
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "max_new_tokens": 220,
+      "offset": 0,
+      "path": "data/eval_hard_negative_dpo_k4_records.jsonl",
+      "records": {
+        "candidate_count_mean": 1.75,
+        "coverage": 0.0,
+        "distinct_behavior_rate_mean": 0.6666666666666666,
+        "distinct_functional_rate_mean": 0.6666666666666666,
+        "false_repair_count": 0,
+        "false_repair_rate": 0.0,
+        "forward_tokens": 5429,
+        "hidden_pass_candidates_mean": 0.0,
+        "parse_success_mean": 0.0,
+        "pass1_proxy": 0.0,
+        "records": 24,
+        "visible_candidates_mean": 0.0,
+        "visible_coverage": 0.0,
+        "visible_repair_pass_count": 0,
+        "zero_base_records": 0,
+        "zero_to_one": 0,
+        "zero_to_one_rate": 0.0
+      },
+      "round_name": "pilot_eval",
+      "samples_per_task": 4,
+      "seed": 2026062613,
+      "split": "mbpp_test",
+      "temperatures": [
+        1.0
+      ],
+      "token_usage": {
+        "calls": 96,
+        "completion_tokens": 680,
+        "forward_tokens": 12660,
+        "prompt_tokens": 11980
+      },
+      "top_p": 0.98,
+      "visible_tests": 1
+    },
+    {
+      "adapter_dir": "/workspace/large_artifacts/qwen35_4b_offline_hard_negative_coverage_dpo/models/shuffled_dpo_lora",
+      "arm_name": "shuffled_dpo_k4",
+      "count": 24,
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "max_new_tokens": 220,
+      "offset": 0,
+      "path": "data/eval_shuffled_dpo_k4_records.jsonl",
+      "records": {
+        "candidate_count_mean": 3.875,
+        "coverage": 0.0,
+        "distinct_behavior_rate_mean": 0.2604166666666667,
+        "distinct_functional_rate_mean": 0.2604166666666667,
+        "false_repair_count": 0,
+        "false_repair_rate": 0.0,
+        "forward_tokens": 27078,
+        "hidden_pass_candidates_mean": 0.0,
+        "parse_success_mean": 0.0,
+        "pass1_proxy": 0.0,
+        "records": 24,
+        "visible_candidates_mean": 0.0,
+        "visible_coverage": 0.0,
+        "visible_repair_pass_count": 0,
+        "zero_base_records": 0,
+        "zero_to_one": 0,
+        "zero_to_one_rate": 0.0
+      },
+      "round_name": "pilot_eval",
+      "samples_per_task": 4,
+      "seed": 2026062614,
+      "split": "mbpp_test",
+      "temperatures": [
+        1.0
+      ],
+      "token_usage": {
+        "calls": 96,
+        "completion_tokens": 16202,
+        "forward_tokens": 28182,
+        "prompt_tokens": 11980
+      },
+      "top_p": 0.98,
+      "visible_tests": 1
+    },
+    {
+      "adapter_dir": "/workspace/large_artifacts/qwen35_4b_offline_hard_negative_coverage_dpo/models/positive_sft_lora",
+      "arm_name": "positive_sft_k4",
+      "count": 24,
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "max_new_tokens": 220,
+      "offset": 0,
+      "path": "data/eval_positive_sft_k4_records.jsonl",
+      "records": {
+        "candidate_count_mean": 3.5833333333333335,
+        "coverage": 0.5416666666666666,
+        "distinct_behavior_rate_mean": 0.7777777777777778,
+        "distinct_functional_rate_mean": 0.44097222222222227,
+        "false_repair_count": 0,
+        "false_repair_rate": 0.0,
+        "forward_tokens": 18704,
+        "hidden_pass_candidates_mean": 1.3333333333333333,
+        "parse_success_mean": 3.5416666666666665,
+        "pass1_proxy": 0.4583333333333333,
+        "records": 24,
+        "visible_candidates_mean": 1.9583333333333333,
+        "visible_coverage": 0.5416666666666666,
+        "visible_repair_pass_count": 0,
+        "zero_base_records": 0,
+        "zero_to_one": 0,
+        "zero_to_one_rate": 0.0
+      },
+      "round_name": "pilot_eval",
+      "samples_per_task": 4,
+      "seed": 2026062615,
+      "split": "mbpp_test",
+      "temperatures": [
+        1.0
+      ],
+      "token_usage": {
+        "calls": 96,
+        "completion_tokens": 8347,
+        "forward_tokens": 20327,
+        "prompt_tokens": 11980
+      },
+      "top_p": 0.98,
+      "visible_tests": 1
+    },
+    {
+      "adapter_dir": "/workspace/large_artifacts/qwen35_4b_offline_hard_negative_coverage_dpo/models/conservative_dpo_lora",
+      "arm_name": "conservative_dpo_k4",
+      "count": 24,
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "max_new_tokens": 220,
+      "offset": 0,
+      "path": "data/eval_conservative_dpo_k4_records.jsonl",
+      "records": {
+        "candidate_count_mean": 3.875,
+        "coverage": 0.6666666666666666,
+        "distinct_behavior_rate_mean": 0.8506944444444445,
+        "distinct_functional_rate_mean": 0.579861111111111,
+        "false_repair_count": 0,
+        "false_repair_rate": 0.0,
+        "forward_tokens": 20466,
+        "hidden_pass_candidates_mean": 1.4583333333333333,
+        "parse_success_mean": 3.8333333333333335,
+        "pass1_proxy": 0.375,
+        "records": 24,
+        "visible_candidates_mean": 1.875,
+        "visible_coverage": 0.6666666666666666,
+        "visible_repair_pass_count": 0,
+        "zero_base_records": 0,
+        "zero_to_one": 0,
+        "zero_to_one_rate": 0.0
+      },
+      "round_name": "pilot_eval",
+      "samples_per_task": 4,
+      "seed": 2026062617,
+      "split": "mbpp_test",
+      "temperatures": [
+        1.0
+      ],
+      "token_usage": {
+        "calls": 96,
+        "completion_tokens": 8953,
+        "forward_tokens": 20933,
+        "prompt_tokens": 11980
+      },
+      "top_p": 0.98,
+      "visible_tests": 1
+    },
+    {
+      "adapter_dir": "/workspace/large_artifacts/qwen35_4b_offline_hard_negative_coverage_dpo/models/conservative_shuffled_dpo_lora",
+      "arm_name": "conservative_shuffled_dpo_k4",
+      "count": 24,
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "max_new_tokens": 220,
+      "offset": 0,
+      "path": "data/eval_conservative_shuffled_dpo_k4_records.jsonl",
+      "records": {
+        "candidate_count_mean": 3.9583333333333335,
+        "coverage": 0.5833333333333334,
+        "distinct_behavior_rate_mean": 0.8333333333333334,
+        "distinct_functional_rate_mean": 0.5034722222222222,
+        "false_repair_count": 0,
+        "false_repair_rate": 0.0,
+        "forward_tokens": 20723,
+        "hidden_pass_candidates_mean": 1.5416666666666667,
+        "parse_success_mean": 3.8333333333333335,
+        "pass1_proxy": 0.375,
+        "records": 24,
+        "visible_candidates_mean": 2.125,
+        "visible_coverage": 0.5833333333333334,
+        "visible_repair_pass_count": 0,
+        "zero_base_records": 0,
+        "zero_to_one": 0,
+        "zero_to_one_rate": 0.0
+      },
+      "round_name": "pilot_eval",
+      "samples_per_task": 4,
+      "seed": 2026062619,
+      "split": "mbpp_test",
+      "temperatures": [
+        1.0
+      ],
+      "token_usage": {
+        "calls": 96,
+        "completion_tokens": 8897,
+        "forward_tokens": 20877,
+        "prompt_tokens": 11980
+      },
+      "top_p": 0.98,
+      "visible_tests": 1
+    }
+  ],
+  "pairs": [
+    {
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "mean_pairs_per_task": 2.9,
+      "pairs": 58,
+      "records": 36,
+      "seed": 2026062606,
+      "shuffle_labels": false,
+      "source": "data/pilot_train_combined_records.jsonl",
+      "stats": {
+        "tasks_with_pair_candidates": 20,
+        "tasks_with_visible_wrong": 5,
+        "tasks_without_negative": 8,
+        "tasks_without_positive": 8
+      },
+      "tasks_with_pairs": 20,
+      "top_pair_tasks": [
+        [
+          "mbpp_train_610",
+          4
+        ],
+        [
+          "mbpp_train_616",
+          4
+        ],
+        [
+          "mbpp_train_630",
+          4
+        ],
+        [
+          "mbpp_train_623",
+          4
+        ],
+        [
+          "mbpp_train_619",
+          4
+        ],
+        [
+          "mbpp_train_631",
+          4
+        ],
+        [
+          "mbpp_train_633",
+          4
+        ],
+        [
+          "mbpp_train_634",
+          4
+        ],
+        [
+          "mbpp_train_621",
+          4
+        ],
+        [
+          "mbpp_train_632",
+          4
+        ]
+      ],
+      "visible_wrong_pair_rate": 0.13793103448275862
+    },
+    {
+      "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+      "mean_pairs_per_task": 2.9,
+      "pairs": 58,
+      "records": 36,
+      "seed": 2026062607,
+      "shuffle_labels": true,
+      "source": "data/pilot_train_combined_records.jsonl",
+      "stats": {
+        "tasks_with_pair_candidates": 20,
+        "tasks_with_visible_wrong": 5,
+        "tasks_without_negative": 8,
+        "tasks_without_positive": 8
+      },
+      "tasks_with_pairs": 20,
+      "top_pair_tasks": [
+        [
+          "mbpp_train_610",
+          4
+        ],
+        [
+          "mbpp_train_633",
+          4
+        ],
+        [
+          "mbpp_train_621",
+          4
+        ],
+        [
+          "mbpp_train_634",
+          4
+        ],
+        [
+          "mbpp_train_631",
+          4
+        ],
+        [
+          "mbpp_train_616",
+          4
+        ],
+        [
+          "mbpp_train_632",
+          4
+        ],
+        [
+          "mbpp_train_623",
+          4
+        ],
+        [
+          "mbpp_train_619",
+          4
+        ],
+        [
+          "mbpp_train_630",
+          4
+        ]
+      ],
+      "visible_wrong_pair_rate": 0.13793103448275862
+    }
+  ],
+  "training": [
+    {
+      "batch_size": 1,
+      "beta": 0.1,
+      "grad_accum": 4,
+      "learning_rate": 0.0001,
+      "logprob_normalization": "mean_token",
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "lora_r": 16,
+      "max_length": 1536,
+      "max_steps": 60,
+      "metrics": [
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6931471824645996,
+          "pi_margin": 0.12287479639053345,
+          "ref_margin": 0.12287479639053345,
+          "reward_margin": 0.0,
+          "step": 1
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6944302320480347,
+          "pi_margin": 0.18596568703651428,
+          "ref_margin": 0.21161015331745148,
+          "reward_margin": -0.025644466280937195,
+          "step": 2
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.7012249231338501,
+          "pi_margin": -0.041696786880493164,
+          "ref_margin": 0.11921215057373047,
+          "reward_margin": -0.16090893745422363,
+          "step": 3
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6950782537460327,
+          "pi_margin": -0.04663500189781189,
+          "ref_margin": -0.008050575852394104,
+          "reward_margin": -0.038584426045417786,
+          "step": 4
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6933408379554749,
+          "pi_margin": 0.31618624925613403,
+          "ref_margin": 0.320059597492218,
+          "reward_margin": -0.0038733482360839844,
+          "step": 5
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6902379393577576,
+          "pi_margin": 0.09429682791233063,
+          "ref_margin": 0.036026954650878906,
+          "reward_margin": 0.05826987326145172,
+          "step": 6
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6936388611793518,
+          "pi_margin": 0.2558395266532898,
+          "ref_margin": 0.26567089557647705,
+          "reward_margin": -0.009831368923187256,
+          "step": 7
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6983054280281067,
+          "pi_margin": 0.1901148557662964,
+          "ref_margin": 0.2930157780647278,
+          "reward_margin": -0.1029009222984314,
+          "step": 8
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6759848594665527,
+          "pi_margin": -0.10417860746383667,
+          "ref_margin": -0.4504227638244629,
+          "reward_margin": 0.3462441563606262,
+          "step": 9
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6977325677871704,
+          "pi_margin": 0.007267683744430542,
+          "ref_margin": 0.09876558184623718,
+          "reward_margin": -0.09149789810180664,
+          "step": 10
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6898409724235535,
+          "pi_margin": 0.06964641809463501,
+          "ref_margin": 0.003413170576095581,
+          "reward_margin": 0.06623324751853943,
+          "step": 11
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6787238717079163,
+          "pi_margin": 0.48940885066986084,
+          "ref_margin": 0.1988314688205719,
+          "reward_margin": 0.29057738184928894,
+          "step": 12
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6813884973526001,
+          "pi_margin": 0.3697972893714905,
+          "ref_margin": 0.13322508335113525,
+          "reward_margin": 0.23657220602035522,
+          "step": 13
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6910463571548462,
+          "pi_margin": 0.039861783385276794,
+          "ref_margin": -0.002199411392211914,
+          "reward_margin": 0.04206119477748871,
+          "step": 14
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6551474332809448,
+          "pi_margin": 0.7923661470413208,
+          "ref_margin": 0.0173586905002594,
+          "reward_margin": 0.7750074863433838,
+          "step": 15
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6410381197929382,
+          "pi_margin": 1.0675461292266846,
+          "ref_margin": -0.003287971019744873,
+          "reward_margin": 1.0708341598510742,
+          "step": 16
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6494250297546387,
+          "pi_margin": 0.9231680631637573,
+          "ref_margin": 0.02873125672340393,
+          "reward_margin": 0.8944368362426758,
+          "step": 17
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6524469256401062,
+          "pi_margin": 1.297890067100525,
+          "ref_margin": 0.4666155278682709,
+          "reward_margin": 0.8312745094299316,
+          "step": 18
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6443564295768738,
+          "pi_margin": 1.1340726613998413,
+          "ref_margin": 0.13322508335113525,
+          "reward_margin": 1.000847578048706,
+          "step": 19
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5530999898910522,
+          "pi_margin": 3.0655477046966553,
+          "ref_margin": 0.036026954650878906,
+          "reward_margin": 3.0295207500457764,
+          "step": 20
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6833541989326477,
+          "pi_margin": 0.19325155019760132,
+          "ref_margin": -0.0035768747329711914,
+          "reward_margin": 0.1968284249305725,
+          "step": 21
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.656099259853363,
+          "pi_margin": 0.653084933757782,
+          "ref_margin": -0.10212942957878113,
+          "reward_margin": 0.7552143335342407,
+          "step": 22
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5897746086120605,
+          "pi_margin": 2.4615116119384766,
+          "ref_margin": 0.2747500240802765,
+          "reward_margin": 2.1867616176605225,
+          "step": 23
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5355945825576782,
+          "pi_margin": 3.594167709350586,
+          "ref_margin": 0.14760473370552063,
+          "reward_margin": 3.4465630054473877,
+          "step": 24
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5076138377189636,
+          "pi_margin": 4.43591833114624,
+          "ref_margin": 0.3007781505584717,
+          "reward_margin": 4.135140419006348,
+          "step": 25
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6043158769607544,
+          "pi_margin": 1.8712341785430908,
+          "ref_margin": 0.007935285568237305,
+          "reward_margin": 1.8632988929748535,
+          "step": 26
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.49550285935401917,
+          "pi_margin": 4.7078857421875,
+          "ref_margin": 0.26567089557647705,
+          "reward_margin": 4.4422149658203125,
+          "step": 27
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.4121859073638916,
+          "pi_margin": 7.233797073364258,
+          "ref_margin": 0.5026097297668457,
+          "reward_margin": 6.731187343597412,
+          "step": 28
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.45691803097724915,
+          "pi_margin": 5.010662078857422,
+          "ref_margin": -0.4504227638244629,
+          "reward_margin": 5.461084842681885,
+          "step": 29
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.4051341116428375,
+          "pi_margin": 6.938117504119873,
+          "ref_margin": -0.003287971019744873,
+          "reward_margin": 6.941405296325684,
+          "step": 30
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.4186028838157654,
+          "pi_margin": 6.061487674713135,
+          "ref_margin": -0.4809187650680542,
+          "reward_margin": 6.5424065589904785,
+          "step": 31
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.4866220951080322,
+          "pi_margin": 4.663041114807129,
+          "ref_margin": -0.008050575852394104,
+          "reward_margin": 4.671091556549072,
+          "step": 32
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.18436990678310394,
+          "pi_margin": 16.499080657958984,
+          "ref_margin": 0.5269788503646851,
+          "reward_margin": 15.972102165222168,
+          "step": 33
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6735002398490906,
+          "pi_margin": 0.29474735260009766,
+          "ref_margin": -0.10212942957878113,
+          "reward_margin": 0.3968767821788788,
+          "step": 34
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5404638648033142,
+          "pi_margin": 3.3259658813476562,
+          "ref_margin": -0.0035768747329711914,
+          "reward_margin": 3.329542636871338,
+          "step": 35
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.11998451501131058,
+          "pi_margin": 20.646860122680664,
+          "ref_margin": 0.0488547682762146,
+          "reward_margin": 20.598005294799805,
+          "step": 36
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.27388644218444824,
+          "pi_margin": 11.748579025268555,
+          "ref_margin": 0.1988314688205719,
+          "reward_margin": 11.549747467041016,
+          "step": 37
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.008900662884116173,
+          "pi_margin": 46.597557067871094,
+          "ref_margin": -0.5742021203041077,
+          "reward_margin": 47.17176055908203,
+          "step": 38
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5337836742401123,
+          "pi_margin": 3.7019004821777344,
+          "ref_margin": 0.21161015331745148,
+          "reward_margin": 3.490290403366089,
+          "step": 39
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.09733105450868607,
+          "pi_margin": 22.998855590820312,
+          "ref_margin": 0.19308575987815857,
+          "reward_margin": 22.805768966674805,
+          "step": 40
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.1875917613506317,
+          "pi_margin": 15.905128479003906,
+          "ref_margin": 0.12287479639053345,
+          "reward_margin": 15.78225326538086,
+          "step": 41
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.07672050595283508,
+          "pi_margin": 25.59058380126953,
+          "ref_margin": 0.3007781505584717,
+          "reward_margin": 25.289806365966797,
+          "step": 42
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.4208565950393677,
+          "pi_margin": 6.1690216064453125,
+          "ref_margin": -0.30763518810272217,
+          "reward_margin": 6.476656913757324,
+          "step": 43
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.023622553795576096,
+          "pi_margin": 37.864166259765625,
+          "ref_margin": 0.5269788503646851,
+          "reward_margin": 37.337188720703125,
+          "step": 44
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.017941106110811234,
+          "pi_margin": 40.32837677001953,
+          "ref_margin": 0.21161015331745148,
+          "reward_margin": 40.11676788330078,
+          "step": 45
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.08500631898641586,
+          "pi_margin": 24.394336700439453,
+          "ref_margin": 0.17208224534988403,
+          "reward_margin": 24.222253799438477,
+          "step": 46
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.0048579261638224125,
+          "pi_margin": 53.43868637084961,
+          "ref_margin": 0.19155240058898926,
+          "reward_margin": 53.247135162353516,
+          "step": 47
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.051090508699417114,
+          "pi_margin": 29.634796142578125,
+          "ref_margin": 0.1497710645198822,
+          "reward_margin": 29.48502540588379,
+          "step": 48
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.003592421766370535,
+          "pi_margin": 56.32017517089844,
+          "ref_margin": 0.0488547682762146,
+          "reward_margin": 56.27132034301758,
+          "step": 49
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.1590050607919693,
+          "pi_margin": 17.579059600830078,
+          "ref_margin": -0.0035768747329711914,
+          "reward_margin": 17.5826358795166,
+          "step": 50
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.006105224601924419,
+          "pi_margin": 51.029781341552734,
+          "ref_margin": 0.07421806454658508,
+          "reward_margin": 50.955562591552734,
+          "step": 51
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.043826114386320114,
+          "pi_margin": 31.573135375976562,
+          "ref_margin": 0.5178124308586121,
+          "reward_margin": 31.055322647094727,
+          "step": 52
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.004024142865091562,
+          "pi_margin": 54.72857666015625,
+          "ref_margin": -0.4057275056838989,
+          "reward_margin": 55.13430404663086,
+          "step": 53
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.11307653784751892,
+          "pi_margin": 21.234127044677734,
+          "ref_margin": 0.007935285568237305,
+          "reward_margin": 21.226192474365234,
+          "step": 54
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.00042105329339392483,
+          "pi_margin": 77.75413513183594,
+          "ref_margin": 0.02873125672340393,
+          "reward_margin": 77.72540283203125,
+          "step": 55
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.031763024628162384,
+          "pi_margin": 34.41820526123047,
+          "ref_margin": 0.0829169899225235,
+          "reward_margin": 34.335289001464844,
+          "step": 56
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.05070781335234642,
+          "pi_margin": 29.081222534179688,
+          "ref_margin": -0.4809187650680542,
+          "reward_margin": 29.56214141845703,
+          "step": 57
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.017654461786150932,
+          "pi_margin": 39.97162628173828,
+          "ref_margin": -0.30763518810272217,
+          "reward_margin": 40.27926254272461,
+          "step": 58
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.0006293209735304117,
+          "pi_margin": 73.91715240478516,
+          "ref_margin": 0.21161015331745148,
+          "reward_margin": 73.7055435180664,
+          "step": 59
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.006361821666359901,
+          "pi_margin": 50.06166076660156,
+          "ref_margin": -0.4809187650680542,
+          "reward_margin": 50.542579650878906,
+          "step": 60
+        }
+      ],
+      "pair_rows": 58,
+      "pairs_in": "data/pilot_pairs_combined_real.jsonl",
+      "run_name": "hard_negative_dpo",
+      "tokenized_pairs": 58
+    },
+    {
+      "batch_size": 1,
+      "beta": 0.1,
+      "grad_accum": 4,
+      "learning_rate": 0.0001,
+      "logprob_normalization": "mean_token",
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "lora_r": 16,
+      "max_length": 1536,
+      "max_steps": 60,
+      "metrics": [
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6931471824645996,
+          "pi_margin": -0.18037480115890503,
+          "ref_margin": -0.18037480115890503,
+          "reward_margin": 0.0,
+          "step": 1
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6912422776222229,
+          "pi_margin": 0.3311506509780884,
+          "ref_margin": 0.2930157780647278,
+          "reward_margin": 0.038134872913360596,
+          "step": 2
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6926853656768799,
+          "pi_margin": -0.0532243549823761,
+          "ref_margin": -0.06246289610862732,
+          "reward_margin": 0.00923854112625122,
+          "step": 3
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6936572790145874,
+          "pi_margin": -0.007999755442142487,
+          "ref_margin": 0.002199411392211914,
+          "reward_margin": -0.0101991668343544,
+          "step": 4
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6858178377151489,
+          "pi_margin": 0.38732486963272095,
+          "ref_margin": 0.24019712209701538,
+          "reward_margin": 0.14712774753570557,
+          "step": 5
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6927222609519958,
+          "pi_margin": 0.0019171088933944702,
+          "ref_margin": -0.006583184003829956,
+          "reward_margin": 0.008500292897224426,
+          "step": 6
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6717919111251831,
+          "pi_margin": 0.010148301720619202,
+          "ref_margin": -0.4216175675392151,
+          "reward_margin": 0.4317658543586731,
+          "step": 7
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6943398714065552,
+          "pi_margin": -0.2669261693954468,
+          "ref_margin": -0.2430868148803711,
+          "reward_margin": -0.023839354515075684,
+          "step": 8
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6874915361404419,
+          "pi_margin": 0.23453405499458313,
+          "ref_margin": 0.12109974026679993,
+          "reward_margin": 0.1134343147277832,
+          "step": 9
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.695870578289032,
+          "pi_margin": -0.19218122959136963,
+          "ref_margin": -0.13778749108314514,
+          "reward_margin": -0.05439373850822449,
+          "step": 10
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6866814494132996,
+          "pi_margin": 0.34490102529525757,
+          "ref_margin": 0.21516531705856323,
+          "reward_margin": 0.12973570823669434,
+          "step": 11
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6914722323417664,
+          "pi_margin": -0.040812015533447266,
+          "ref_margin": -0.07433906197547913,
+          "reward_margin": 0.03352704644203186,
+          "step": 12
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.7031952142715454,
+          "pi_margin": 0.07478973269462585,
+          "ref_margin": 0.2747500240802765,
+          "reward_margin": -0.19996029138565063,
+          "step": 13
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6777914762496948,
+          "pi_margin": 0.2172086238861084,
+          "ref_margin": -0.09230068325996399,
+          "reward_margin": 0.3095093071460724,
+          "step": 14
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6620051264762878,
+          "pi_margin": 0.2112342119216919,
+          "ref_margin": -0.4216175675392151,
+          "reward_margin": 0.632851779460907,
+          "step": 15
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6310741901397705,
+          "pi_margin": 1.9793260097503662,
+          "ref_margin": 0.6967706680297852,
+          "reward_margin": 1.282555341720581,
+          "step": 16
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.680812418460846,
+          "pi_margin": 0.27586084604263306,
+          "ref_margin": 0.027624934911727905,
+          "reward_margin": 0.24823591113090515,
+          "step": 17
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6938008069992065,
+          "pi_margin": 0.037606462836265564,
+          "ref_margin": 0.050674885511398315,
+          "reward_margin": -0.013068422675132751,
+          "step": 18
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6993460655212402,
+          "pi_margin": -0.15436625480651855,
+          "ref_margin": -0.03077031672000885,
+          "reward_margin": -0.1235959380865097,
+          "step": 19
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6666412949562073,
+          "pi_margin": 0.611553430557251,
+          "ref_margin": 0.07421806454658508,
+          "reward_margin": 0.5373353958129883,
+          "step": 20
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6916140913963318,
+          "pi_margin": 0.560365617275238,
+          "ref_margin": 0.5296797752380371,
+          "reward_margin": 0.030685842037200928,
+          "step": 21
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.7015220522880554,
+          "pi_margin": -0.17977142333984375,
+          "ref_margin": -0.012969106435775757,
+          "reward_margin": -0.166802316904068,
+          "step": 22
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6854918003082275,
+          "pi_margin": 0.44671425223350525,
+          "ref_margin": 0.2930157780647278,
+          "reward_margin": 0.15369847416877747,
+          "step": 23
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6804026365280151,
+          "pi_margin": 0.173618882894516,
+          "ref_margin": -0.0829169899225235,
+          "reward_margin": 0.2565358877182007,
+          "step": 24
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5822075009346008,
+          "pi_margin": 3.0442376136779785,
+          "ref_margin": 0.6868310570716858,
+          "reward_margin": 2.3574066162109375,
+          "step": 25
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6806795597076416,
+          "pi_margin": 0.40639421343803406,
+          "ref_margin": 0.15546804666519165,
+          "reward_margin": 0.2509261667728424,
+          "step": 26
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6347290873527527,
+          "pi_margin": 1.1558961868286133,
+          "ref_margin": -0.0487208366394043,
+          "reward_margin": 1.2046170234680176,
+          "step": 27
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.683798611164093,
+          "pi_margin": 0.2676871120929718,
+          "ref_margin": 0.0798334926366806,
+          "reward_margin": 0.1878536194562912,
+          "step": 28
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.7190760970115662,
+          "pi_margin": -0.6817355155944824,
+          "ref_margin": -0.16971087455749512,
+          "reward_margin": -0.5120246410369873,
+          "step": 29
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5304652452468872,
+          "pi_margin": 3.5524842739105225,
+          "ref_margin": -0.01822483539581299,
+          "reward_margin": 3.570709228515625,
+          "step": 30
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.697982132434845,
+          "pi_margin": -0.20825260877609253,
+          "ref_margin": -0.11178737878799438,
+          "reward_margin": -0.09646522998809814,
+          "step": 31
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6566016674041748,
+          "pi_margin": 1.0377905368804932,
+          "ref_margin": 0.2930157780647278,
+          "reward_margin": 0.7447747588157654,
+          "step": 32
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.727357029914856,
+          "pi_margin": -0.8026837110519409,
+          "ref_margin": -0.12980368733406067,
+          "reward_margin": -0.6728800535202026,
+          "step": 33
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.3684200048446655,
+          "pi_margin": 8.773557662963867,
+          "ref_margin": 0.6868310570716858,
+          "reward_margin": 8.086726188659668,
+          "step": 34
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.4453291893005371,
+          "pi_margin": 6.020470142364502,
+          "ref_margin": 0.24019712209701538,
+          "reward_margin": 5.780272960662842,
+          "step": 35
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.7188981175422668,
+          "pi_margin": -0.6360893249511719,
+          "ref_margin": -0.12753620743751526,
+          "reward_margin": -0.508553147315979,
+          "step": 36
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6409538984298706,
+          "pi_margin": 1.238254189491272,
+          "ref_margin": 0.16563880443572998,
+          "reward_margin": 1.072615385055542,
+          "step": 37
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.4609224498271942,
+          "pi_margin": 5.438637733459473,
+          "ref_margin": 0.08635950088500977,
+          "reward_margin": 5.352278232574463,
+          "step": 38
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.8119640350341797,
+          "pi_margin": -2.280806541442871,
+          "ref_margin": -0.03077031672000885,
+          "reward_margin": -2.2500362396240234,
+          "step": 39
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5268599390983582,
+          "pi_margin": 3.5207247734069824,
+          "ref_margin": -0.13778749108314514,
+          "reward_margin": 3.6585123538970947,
+          "step": 40
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.8240644931793213,
+          "pi_margin": -2.540963888168335,
+          "ref_margin": -0.07433906197547913,
+          "reward_margin": -2.4666247367858887,
+          "step": 41
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.907781720161438,
+          "pi_margin": -3.9611501693725586,
+          "ref_margin": -0.0487208366394043,
+          "reward_margin": -3.9124293327331543,
+          "step": 42
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5683143138885498,
+          "pi_margin": 3.2046995162963867,
+          "ref_margin": 0.5296797752380371,
+          "reward_margin": 2.6750197410583496,
+          "step": 43
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6850875616073608,
+          "pi_margin": 0.12799406051635742,
+          "ref_margin": -0.033853814005851746,
+          "reward_margin": 0.16184787452220917,
+          "step": 44
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.3932422995567322,
+          "pi_margin": 7.210431098937988,
+          "ref_margin": -0.09230068325996399,
+          "reward_margin": 7.302731990814209,
+          "step": 45
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5809224247932434,
+          "pi_margin": 2.6795647144317627,
+          "ref_margin": 0.2930157780647278,
+          "reward_margin": 2.3865489959716797,
+          "step": 46
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.790823757648468,
+          "pi_margin": -2.0762581825256348,
+          "ref_margin": -0.20970112085342407,
+          "reward_margin": -1.8665571212768555,
+          "step": 47
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5810546875,
+          "pi_margin": 2.5491867065429688,
+          "ref_margin": 0.16563880443572998,
+          "reward_margin": 2.383547782897949,
+          "step": 48
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.732608437538147,
+          "pi_margin": -0.9439544677734375,
+          "ref_margin": -0.16971087455749512,
+          "reward_margin": -0.7742435932159424,
+          "step": 49
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.3019973039627075,
+          "pi_margin": 10.453039169311523,
+          "ref_margin": 0.027624934911727905,
+          "reward_margin": 10.425414085388184,
+          "step": 50
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.5263149738311768,
+          "pi_margin": 3.9465742111206055,
+          "ref_margin": 0.2747500240802765,
+          "reward_margin": 3.6718242168426514,
+          "step": 51
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.15911519527435303,
+          "pi_margin": 18.10212516784668,
+          "ref_margin": 0.5269788503646851,
+          "reward_margin": 17.575145721435547,
+          "step": 52
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.9431159496307373,
+          "pi_margin": -4.526553153991699,
+          "ref_margin": -0.02873125672340393,
+          "reward_margin": -4.497821807861328,
+          "step": 53
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.26543915271759033,
+          "pi_margin": 11.563009262084961,
+          "ref_margin": -0.34415048360824585,
+          "reward_margin": 11.907159805297852,
+          "step": 54
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.8485790491104126,
+          "pi_margin": -2.800464630126953,
+          "ref_margin": 0.09876558184623718,
+          "reward_margin": -2.8992302417755127,
+          "step": 55
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.08472338318824768,
+          "pi_margin": 24.250446319580078,
+          "ref_margin": -0.006583184003829956,
+          "reward_margin": 24.257028579711914,
+          "step": 56
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.16031616926193237,
+          "pi_margin": 17.475561141967773,
+          "ref_margin": -0.01822483539581299,
+          "reward_margin": 17.493785858154297,
+          "step": 57
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.857802152633667,
+          "pi_margin": -3.2100515365600586,
+          "ref_margin": -0.15012353658676147,
+          "reward_margin": -3.0599279403686523,
+          "step": 58
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.0577862374484539,
+          "pi_margin": 28.916494369506836,
+          "ref_margin": 0.6967706680297852,
+          "reward_margin": 28.219722747802734,
+          "step": 59
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.46755504608154297,
+          "pi_margin": 5.703365325927734,
+          "ref_margin": 0.5296797752380371,
+          "reward_margin": 5.173685550689697,
+          "step": 60
+        }
+      ],
+      "pair_rows": 58,
+      "pairs_in": "data/pilot_pairs_combined_shuffled.jsonl",
+      "run_name": "shuffled_dpo",
+      "tokenized_pairs": 58
+    },
+    {
+      "batch_size": 1,
+      "beta": 0.05,
+      "grad_accum": 4,
+      "learning_rate": 3e-05,
+      "logprob_normalization": "mean_token",
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "lora_r": 16,
+      "max_length": 1536,
+      "max_steps": 10,
+      "metrics": [
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6931471824645996,
+          "pi_margin": 0.21161015331745148,
+          "ref_margin": 0.21161015331745148,
+          "reward_margin": 0.0,
+          "step": 1
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6927943229675293,
+          "pi_margin": 0.050144270062446594,
+          "ref_margin": 0.036026954650878906,
+          "reward_margin": 0.014117315411567688,
+          "step": 2
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6863309741020203,
+          "pi_margin": 0.8005640506744385,
+          "ref_margin": 0.5269788503646851,
+          "reward_margin": 0.2735852003097534,
+          "step": 3
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6932573914527893,
+          "pi_margin": 0.18867594003677368,
+          "ref_margin": 0.19308575987815857,
+          "reward_margin": -0.004409819841384888,
+          "step": 4
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.693079948425293,
+          "pi_margin": 0.46930527687072754,
+          "ref_margin": 0.4666155278682709,
+          "reward_margin": 0.002689749002456665,
+          "step": 5
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6943790912628174,
+          "pi_margin": -0.15137484669685364,
+          "ref_margin": -0.10212942957878113,
+          "reward_margin": -0.04924541711807251,
+          "step": 6
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6926244497299194,
+          "pi_margin": 0.25608888268470764,
+          "ref_margin": 0.23517489433288574,
+          "reward_margin": 0.0209139883518219,
+          "step": 7
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6914085149765015,
+          "pi_margin": 0.33527812361717224,
+          "ref_margin": 0.26567089557647705,
+          "reward_margin": 0.06960722804069519,
+          "step": 8
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6921303868293762,
+          "pi_margin": 0.1904631406068802,
+          "ref_margin": 0.1497710645198822,
+          "reward_margin": 0.040692076086997986,
+          "step": 9
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6854829788208008,
+          "pi_margin": 0.3566060960292816,
+          "ref_margin": 0.0488547682762146,
+          "reward_margin": 0.307751327753067,
+          "step": 10
+        }
+      ],
+      "pair_rows": 58,
+      "pairs_in": "data/pilot_pairs_combined_real.jsonl",
+      "run_name": "conservative_dpo",
+      "tokenized_pairs": 58
+    },
+    {
+      "batch_size": 1,
+      "beta": 0.05,
+      "grad_accum": 4,
+      "learning_rate": 3e-05,
+      "logprob_normalization": "mean_token",
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "lora_r": 16,
+      "max_length": 1536,
+      "max_steps": 10,
+      "metrics": [
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6931471824645996,
+          "pi_margin": -0.0487208366394043,
+          "ref_margin": -0.0487208366394043,
+          "reward_margin": 0.0,
+          "step": 1
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6937827467918396,
+          "pi_margin": 0.24933668971061707,
+          "ref_margin": 0.2747500240802765,
+          "reward_margin": -0.025413334369659424,
+          "step": 2
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6924964189529419,
+          "pi_margin": 0.34700632095336914,
+          "ref_margin": 0.32096824049949646,
+          "reward_margin": 0.02603808045387268,
+          "step": 3
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6940425038337708,
+          "pi_margin": 0.17936640977859497,
+          "ref_margin": 0.21516531705856323,
+          "reward_margin": -0.03579890727996826,
+          "step": 4
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6942569613456726,
+          "pi_margin": -0.07513820379972458,
+          "ref_margin": -0.03077031672000885,
+          "reward_margin": -0.04436788707971573,
+          "step": 5
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6922315955162048,
+          "pi_margin": 0.030055731534957886,
+          "ref_margin": -0.006583184003829956,
+          "reward_margin": 0.03663891553878784,
+          "step": 6
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6942331790924072,
+          "pi_margin": -0.1689203977584839,
+          "ref_margin": -0.12550431489944458,
+          "reward_margin": -0.04341608285903931,
+          "step": 7
+        },
+        {
+          "chosen_win_rate": 0.0,
+          "loss": 0.6937748789787292,
+          "pi_margin": -0.08756309747695923,
+          "ref_margin": -0.06246289610862732,
+          "reward_margin": -0.02510020136833191,
+          "step": 8
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6890259981155396,
+          "pi_margin": 0.2441476583480835,
+          "ref_margin": 0.07895886898040771,
+          "reward_margin": 0.16518878936767578,
+          "step": 9
+        },
+        {
+          "chosen_win_rate": 1.0,
+          "loss": 0.6947396397590637,
+          "pi_margin": 0.08612272143363953,
+          "ref_margin": 0.1497710645198822,
+          "reward_margin": -0.06364834308624268,
+          "step": 10
+        }
+      ],
+      "pair_rows": 58,
+      "pairs_in": "data/pilot_pairs_combined_shuffled.jsonl",
+      "run_name": "conservative_shuffled_dpo",
+      "tokenized_pairs": 58
+    },
+    {
+      "batch_size": 1,
+      "grad_accum": 4,
+      "learning_rate": 0.0001,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "lora_r": 16,
+      "losses": [
+        {
+          "loss": 0.29713916778564453,
+          "step": 1
+        },
+        {
+          "loss": 0.11841677874326706,
+          "step": 2
+        },
+        {
+          "loss": 0.22068136930465698,
+          "step": 3
+        },
+        {
+          "loss": 0.289946585893631,
+          "step": 4
+        },
+        {
+          "loss": 0.41901910305023193,
+          "step": 5
+        },
+        {
+          "loss": 0.1832701414823532,
+          "step": 6
+        },
+        {
+          "loss": 0.1436694711446762,
+          "step": 7
+        },
+        {
+          "loss": 0.07313910126686096,
+          "step": 8
+        },
+        {
+          "loss": 0.05626766383647919,
+          "step": 9
+        },
+        {
+          "loss": 0.20821121335029602,
+          "step": 10
+        },
+        {
+          "loss": 0.21177081763744354,
+          "step": 11
+        },
+        {
+          "loss": 0.1257765144109726,
+          "step": 12
+        },
+        {
+          "loss": 0.11918042600154877,
+          "step": 13
+        },
+        {
+          "loss": 0.05509177967905998,
+          "step": 14
+        },
+        {
+          "loss": 0.024430636316537857,
+          "step": 15
+        },
+        {
+          "loss": 0.03070177137851715,
+          "step": 16
+        },
+        {
+          "loss": 0.027940599247813225,
+          "step": 17
+        },
+        {
+          "loss": 0.034545835107564926,
+          "step": 18
+        },
+        {
+          "loss": 0.08846534043550491,
+          "step": 19
+        },
+        {
+          "loss": 0.09426233172416687,
+          "step": 20
+        },
+        {
+          "loss": 0.037814170122146606,
+          "step": 21
+        },
+        {
+          "loss": 0.033908646553754807,
+          "step": 22
+        },
+        {
+          "loss": 0.029962433502078056,
+          "step": 23
+        },
+        {
+          "loss": 0.030831970274448395,
+          "step": 24
+        },
+        {
+          "loss": 0.09805920720100403,
+          "step": 25
+        },
+        {
+          "loss": 0.07788922637701035,
+          "step": 26
+        },
+        {
+          "loss": 0.056531134992837906,
+          "step": 27
+        },
+        {
+          "loss": 0.0857248455286026,
+          "step": 28
+        },
+        {
+          "loss": 0.019989464432001114,
+          "step": 29
+        },
+        {
+          "loss": 0.012810872867703438,
+          "step": 30
+        },
+        {
+          "loss": 0.008040253072977066,
+          "step": 31
+        },
+        {
+          "loss": 0.029223080724477768,
+          "step": 32
+        },
+        {
+          "loss": 0.03614039346575737,
+          "step": 33
+        },
+        {
+          "loss": 0.01912572979927063,
+          "step": 34
+        },
+        {
+          "loss": 0.038214609026908875,
+          "step": 35
+        },
+        {
+          "loss": 0.03813334181904793,
+          "step": 36
+        },
+        {
+          "loss": 0.07152308523654938,
+          "step": 37
+        },
+        {
+          "loss": 0.08769207447767258,
+          "step": 38
+        },
+        {
+          "loss": 0.008454844355583191,
+          "step": 39
+        },
+        {
+          "loss": 0.02388160675764084,
+          "step": 40
+        },
+        {
+          "loss": 0.02907012589275837,
+          "step": 41
+        },
+        {
+          "loss": 0.04689134657382965,
+          "step": 42
+        },
+        {
+          "loss": 0.09567926079034805,
+          "step": 43
+        },
+        {
+          "loss": 0.10829136520624161,
+          "step": 44
+        },
+        {
+          "loss": 0.0169058907777071,
+          "step": 45
+        },
+        {
+          "loss": 0.03244251012802124,
+          "step": 46
+        },
+        {
+          "loss": 0.00228325929492712,
+          "step": 47
+        },
+        {
+          "loss": 0.004111568443477154,
+          "step": 48
+        },
+        {
+          "loss": 0.025268515571951866,
+          "step": 49
+        },
+        {
+          "loss": 0.012144459411501884,
+          "step": 50
+        },
+        {
+          "loss": 0.004070377442985773,
+          "step": 51
+        },
+        {
+          "loss": 0.023786189034581184,
+          "step": 52
+        },
+        {
+          "loss": 0.05000465363264084,
+          "step": 53
+        },
+        {
+          "loss": 0.05749230086803436,
+          "step": 54
+        },
+        {
+          "loss": 0.019449668005108833,
+          "step": 55
+        },
+        {
+          "loss": 0.009695715270936489,
+          "step": 56
+        },
+        {
+          "loss": 0.04610443860292435,
+          "step": 57
+        },
+        {
+          "loss": 0.0021850906778126955,
+          "step": 58
+        },
+        {
+          "loss": 0.010824593715369701,
+          "step": 59
+        },
+        {
+          "loss": 0.0032401680946350098,
+          "step": 60
+        }
+      ],
+      "max_length": 1536,
+      "max_steps": 60,
+      "pair_rows": 58,
+      "pairs_in": "data/pilot_pairs_combined_real.jsonl",
+      "run_name": "positive_sft",
+      "tokenized_rows": 38
+    }
+  ]
+}

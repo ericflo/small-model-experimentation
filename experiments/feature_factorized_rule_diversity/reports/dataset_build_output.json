@@ -1,0 +1,239 @@
+{
+  "composite_families": [
+    "parity_labelled_shift",
+    "dedupe_join_wrap",
+    "tuple_min_offset",
+    "clamp_affine",
+    "contains_length_prefix",
+    "sum_threshold_label"
+  ],
+  "dataset": "feature_factorized_rule_diversity",
+  "factor_counts": {
+    "all": {
+      "aggregation": 280,
+      "arithmetic": 418,
+      "branching": 540,
+      "length": 116,
+      "modulo": 128,
+      "sequence_iteration": 116,
+      "sorting": 12,
+      "string_format": 234,
+      "string_match": 116,
+      "string_normalization": 116,
+      "string_rewrite": 28,
+      "tuple_access": 146
+    },
+    "train_composites": {
+      "aggregation": 120,
+      "arithmetic": 120,
+      "branching": 200,
+      "length": 40,
+      "modulo": 40,
+      "sequence_iteration": 40,
+      "string_format": 120,
+      "string_match": 40,
+      "string_normalization": 40,
+      "tuple_access": 40
+    },
+    "train_mixed": {
+      "aggregation": 90,
+      "arithmetic": 120,
+      "branching": 150,
+      "length": 30,
+      "modulo": 30,
+      "sequence_iteration": 30,
+      "string_format": 60,
+      "string_match": 30,
+      "string_normalization": 30,
+      "tuple_access": 60
+    },
+    "train_singletons": {
+      "aggregation": 24,
+      "arithmetic": 96,
+      "branching": 96,
+      "length": 24,
+      "modulo": 24,
+      "sequence_iteration": 24,
+      "string_match": 24,
+      "string_normalization": 24,
+      "string_rewrite": 24,
+      "tuple_access": 24
+    },
+    "val_composite_iid": {
+      "aggregation": 18,
+      "arithmetic": 18,
+      "branching": 30,
+      "length": 6,
+      "modulo": 6,
+      "sequence_iteration": 6,
+      "string_format": 18,
+      "string_match": 6,
+      "string_normalization": 6,
+      "tuple_access": 6
+    },
+    "val_recombination_holdout": {
+      "aggregation": 24,
+      "arithmetic": 48,
+      "branching": 48,
+      "length": 12,
+      "modulo": 24,
+      "sequence_iteration": 12,
+      "sorting": 12,
+      "string_format": 36,
+      "string_match": 12,
+      "string_normalization": 12,
+      "tuple_access": 12
+    },
+    "val_singleton_iid": {
+      "aggregation": 4,
+      "arithmetic": 16,
+      "branching": 16,
+      "length": 4,
+      "modulo": 4,
+      "sequence_iteration": 4,
+      "string_match": 4,
+      "string_normalization": 4,
+      "string_rewrite": 4,
+      "tuple_access": 4
+    }
+  },
+  "family_counts": {
+    "all": {
+      "affine_add": 58,
+      "clamp_affine": 46,
+      "contains_label": 58,
+      "contains_length_code_holdout": 12,
+      "contains_length_prefix": 46,
+      "dedupe_join_wrap": 76,
+      "length_label": 58,
+      "modulo_label": 28,
+      "normalize_join": 28,
+      "parity_labelled_shift": 76,
+      "parity_offset_holdout": 12,
+      "replace_wrap": 28,
+      "scale_shift": 28,
+      "sorted_join_holdout": 12,
+      "sum_offset": 28,
+      "sum_parity_shift_holdout": 12,
+      "sum_threshold_label": 76,
+      "threshold_label": 28,
+      "tuple_linear": 58,
+      "tuple_max_label_holdout": 12,
+      "tuple_min_offset": 76
+    },
+    "train_composites": {
+      "clamp_affine": 40,
+      "contains_length_prefix": 40,
+      "dedupe_join_wrap": 40,
+      "parity_labelled_shift": 40,
+      "sum_threshold_label": 40,
+      "tuple_min_offset": 40
+    },
+    "train_mixed": {
+      "affine_add": 30,
+      "contains_label": 30,
+      "dedupe_join_wrap": 30,
+      "length_label": 30,
+      "parity_labelled_shift": 30,
+      "sum_threshold_label": 30,
+      "tuple_linear": 30,
+      "tuple_min_offset": 30
+    },
+    "train_singletons": {
+      "affine_add": 24,
+      "contains_label": 24,
+      "length_label": 24,
+      "modulo_label": 24,
+      "normalize_join": 24,
+      "replace_wrap": 24,
+      "scale_shift": 24,
+      "sum_offset": 24,
+      "threshold_label": 24,
+      "tuple_linear": 24
+    },
+    "val_composite_iid": {
+      "clamp_affine": 6,
+      "contains_length_prefix": 6,
+      "dedupe_join_wrap": 6,
+      "parity_labelled_shift": 6,
+      "sum_threshold_label": 6,
+      "tuple_min_offset": 6
+    },
+    "val_recombination_holdout": {
+      "contains_length_code_holdout": 12,
+      "parity_offset_holdout": 12,
+      "sorted_join_holdout": 12,
+      "sum_parity_shift_holdout": 12,
+      "tuple_max_label_holdout": 12
+    },
+    "val_singleton_iid": {
+      "affine_add": 4,
+      "contains_label": 4,
+      "length_label": 4,
+      "modulo_label": 4,
+      "normalize_join": 4,
+      "replace_wrap": 4,
+      "scale_shift": 4,
+      "sum_offset": 4,
+      "threshold_label": 4,
+      "tuple_linear": 4
+    }
+  },
+  "holdout_families": [
+    "sorted_join_holdout",
+    "tuple_max_label_holdout",
+    "parity_offset_holdout",
+    "contains_length_code_holdout",
+    "sum_parity_shift_holdout"
+  ],
+  "invariants": [
+    "wrong-patched implementation fails visible counterexamples",
+    "target corrective diff applies to the wrong-patched implementation",
+    "target implementation passes visible and hidden tests",
+    "hidden test inputs do not overlap visible trace inputs",
+    "visible expected outputs appear in the failed execution trace",
+    "all training conditions use the same record budget"
+  ],
+  "mixed_families": [
+    "affine_add",
+    "contains_label",
+    "length_label",
+    "tuple_linear",
+    "parity_labelled_shift",
+    "dedupe_join_wrap",
+    "tuple_min_offset",
+    "sum_threshold_label"
+  ],
+  "paths": {
+    "all": "experiments/feature_factorized_rule_diversity/data/repair_all.jsonl",
+    "train_composites": "experiments/feature_factorized_rule_diversity/data/repair_train_composites.jsonl",
+    "train_mixed": "experiments/feature_factorized_rule_diversity/data/repair_train_mixed.jsonl",
+    "train_singletons": "experiments/feature_factorized_rule_diversity/data/repair_train_singletons.jsonl",
+    "val_composite_iid": "experiments/feature_factorized_rule_diversity/data/repair_val_composite_iid.jsonl",
+    "val_recombination_holdout": "experiments/feature_factorized_rule_diversity/data/repair_val_recombination_holdout.jsonl",
+    "val_singleton_iid": "experiments/feature_factorized_rule_diversity/data/repair_val_singleton_iid.jsonl"
+  },
+  "records": {
+    "all": 856,
+    "train_composites": 240,
+    "train_mixed": 240,
+    "train_singletons": 240,
+    "val_composite_iid": 36,
+    "val_recombination_holdout": 60,
+    "val_singleton_iid": 40
+  },
+  "seed": 20260621,
+  "singleton_families": [
+    "affine_add",
+    "scale_shift",
+    "threshold_label",
+    "modulo_label",
+    "normalize_join",
+    "replace_wrap",
+    "contains_label",
+    "length_label",
+    "tuple_linear",
+    "sum_offset"
+  ],
+  "total_train_records_per_condition": 240
+}

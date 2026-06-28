@@ -1,0 +1,49 @@
+run,suite,arm,seed,trained,split,example_id,family,op_name,answer,prediction,correct,valid,new_tokens,generated
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_date_11,date,add_days,2026-07-21,2026-07-21,1,1,34,PUSH_DATE 2026-07-17\nADD_DAYS 4\nFINAL 2026-07-21\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_date_3,date,add_days,2026-02-19,2026-02-19,1,1,34,PUSH_DATE 2026-02-16\nADD_DAYS 3\nFINAL 2026-02-19\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_unit_5,unit,kilograms_to_grams,17000,17000,1,1,23,PUSH 17\nMUL 1000\nFINAL 17000\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_table_2,table,lookup_mul_add,107,105,0,1,37,TABLE alpha:2 beta:28 delta:10 gamma:14\nLOOKUP gamma\nMUL 7\nADD 9\nFINAL 105\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_date_7,date,add_days,2026-01-17,2026-01-17,1,1,34,PUSH_DATE 2026-01-12\nADD_DAYS 5\nFINAL 2026-01-17\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_string_12,string,take_suffix,2YJ,2YJ,1,1,28,PUSH_CODE UE-2032-YJ\nSTRIP -\nTAKE_SUFFIX 3\nFINAL 2YJ\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_string_4,string,take_suffix,9RT,9RT,1,1,28,PUSH_CODE VY-2989-RT\nSTRIP -\nTAKE_SUFFIX 3\nFINAL 9RT\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_string_0,string,slice,H9446,H446,0,1,30,PUSH_CODE ZH-9446-JE\nSTRIP -\nSLICE 2 6\nFINAL H446\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_string_8,string,slice,W38,811,0,1,29,PUSH_CODE DW-3811-TP\nSTRIP -\nSLICE 2 4\nFINAL 811\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_table_14,table,lookup_add,17,17,1,1,32,TABLE alpha:11 beta:25 delta:20 gamma:29\nLOOKUP alpha\nADD 6\nFINAL 17\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_table_6,table,lookup_add,9,23,0,1,30,TABLE alpha:19 beta:24 delta:7 delta:7\nLOOKUP gamma\nADD 4\nFINAL 23\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_date_15,date,add_days,2026-04-10,2026-04-10,1,1,34,PUSH_DATE 2026-04-09\nADD_DAYS 1\nFINAL 2026-04-10\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_unit_13,unit,meters_to_centimeters,800,800,1,1,19,PUSH 8\nMUL 100\nFINAL 800\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_unit_9,unit,kilograms_to_grams,18000,18000,1,1,23,PUSH 18\nMUL 1000\nFINAL 18000\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_unit_1,unit,kilograms_to_grams,10000,10000,1,1,23,PUSH 10\nMUL 1000\nFINAL 10000\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_indist,eval_indist_table_10,table,lookup_add,35,35,1,1,31,TABLE alpha:6 beta:10 delta:26 gamma:26\nLOOKUP gamma\nADD 9\nFINAL 35\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_table_2,table,sum_two_keys_plus,37,133,0,1,38,TABLE alpha:25 beta:8 delta:12 gamma:10\nLOOKUP alpha\nLOOKUP beta\nADD\nADD 4\nFINAL 133\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_unit_5,unit,meters_plus_centimeters,340,340,1,1,24,PUSH 3\nMUL 100\nADD 40\nFINAL 340\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_table_14,table,sum_two_keys_plus,50,50,1,1,38,TABLE alpha:24 beta:23 delta:17 delta:23\nLOOKUP beta\nLOOKUP delta\nADD\nADD 4\nFINAL 50\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_date_11,date,weeks_plus_days,2026-06-01,2026-06-09,0,1,35,PUSH_DATE 2026-05-15\nADD_DAYS 15\nFINAL 2026-06-09\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_date_15,date,weeks_plus_days,2026-04-12,2026-04-15,0,1,40,PUSH_DATE 2026-04-03\nADD_WEEKS 1\nADD_DAYS 2\nFINAL 2026-04-15\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_string_8,string,reverse_then_slice,0367,630C,0,1,30,PUSH_CODE JW-7630-CF\nSTRIP -\nSLICE 3 6\nFINAL 630C\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_string_12,string,reverse_then_slice,DH519,519ZU,0,1,34,PUSH_CODE UZ-1915-HD\nSTRIP -\nREVERSE\nTAKE_PREFIX 5\nFINAL 519ZU\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_unit_1,unit,meters_plus_centimeters,325,325,1,1,24,PUSH 3\nMUL 100\nADD 25\nFINAL 325\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_date_3,date,weeks_plus_days,2026-05-29,2026-06-07,0,1,35,PUSH_DATE 2026-05-06\nADD_DAYS 21\nFINAL 2026-06-07\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_string_4,string,reverse_then_slice,771ZB,79PH,0,1,30,PUSH_CODE BZ-1779-PH\nSTRIP -\nSLICE 4 8\nFINAL 79PH\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_table_10,table,sum_two_keys_plus,42,72,0,1,38,TABLE alpha:15 beta:29 delta:23 gamma:13\nLOOKUP alpha\nLOOKUP delta\nADD\nADD 4\nFINAL 72\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_date_7,date,weeks_plus_days,2026-07-31,2026-07-25,0,1,35,PUSH_DATE 2026-07-11\nADD_DAYS 14\nFINAL 2026-07-25\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_unit_13,unit,meters_plus_centimeters,125,125,1,1,24,PUSH 1\nMUL 100\nADD 25\nFINAL 125\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_string_0,string,reverse_then_slice,008J,09K,0,1,34,PUSH_CODE TJ-8009-KS\nSTRIP -\nTAKE_SUFFIX 4\nTAKE_PREFIX 4\nFINAL 09K\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_unit_9,unit,meters_plus_centimeters,715,715,1,1,24,PUSH 7\nMUL 100\nADD 15\nFINAL 715\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_composition,eval_composition_table_6,table,sum_two_keys_plus,24,104,0,1,38,TABLE alpha:25 beta:5 delta:14 gamma:15\nLOOKUP delta\nLOOKUP beta\nADD\nADD 5\nFINAL 104\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_table_14,table,lookup_mul_add,138,138,1,1,37,TABLE alpha:8 beta:27 delta:19 gamma:26\nLOOKUP gamma\nMUL 5\nADD 8\nFINAL 138\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_string_0,string,take_suffix,7XP,727,0,1,28,PUSH_CODE WE-8727-XP\nSTRIP -\nTAKE_SUFFIX 3\nFINAL 727\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_date_11,date,add_days,2026-01-23,2026-02-13,0,1,35,PUSH_DATE 2026-01-11\nADD_DAYS 12\nFINAL 2026-02-13\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_table_2,table,lookup_add,7,12,0,1,26,TABLE alpha:19 beta:15 delta:7 delta:12 gamma:7\nFINAL 12\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_table_10,table,lookup_mul_add,34,34,1,1,37,TABLE alpha:26 beta:13 delta:12 gamma:8\nLOOKUP gamma\nMUL 3\nADD 10\nFINAL 34\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_date_3,date,add_days,2026-11-14,2026-11-14,1,1,35,PUSH_DATE 2026-11-02\nADD_DAYS 12\nFINAL 2026-11-14\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_string_4,string,take_suffix,1MJ,11MJ,0,1,28,PUSH_CODE UL-2311-MJ\nSTRIP -\nTAKE_SUFFIX 3\nFINAL 11MJ\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_table_6,table,lookup_add,29,29,1,1,48,TABLE alpha:15 beta:27 delta:5 gamma:28\nLOOKUP beta\nADD 2\nTABLE alpha:15 beta:29 delta:5 gamma:28\nFINAL 29\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_unit_9,unit,minutes_to_seconds,720,720,1,1,19,PUSH 12\nMUL 60\nFINAL 720\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_string_8,string,take_prefix,YE02,0259,0,1,29,PUSH_CODE YE-0259-LV\nSTRIP -\nTAKE_PREFIX 4\nFINAL 0259\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_string_12,string,take_suffix,63EK,63EK,1,1,28,PUSH_CODE QQ-2963-EK\nSTRIP -\nTAKE_SUFFIX 4\nFINAL 63EK\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_date_7,date,add_days,2026-09-14,2026-09-14,1,1,34,PUSH_DATE 2026-09-05\nADD_DAYS 9\nFINAL 2026-09-14\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_unit_5,unit,minutes_to_seconds,780,780,1,1,19,PUSH 13\nMUL 60\nFINAL 780\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_date_15,date,add_days,2026-07-31,2026-08-10,0,1,35,PUSH_DATE 2026-07-17\nADD_DAYS 14\nFINAL 2026-08-10\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_unit_1,unit,centimeters_to_millimeters,170,170,1,1,19,PUSH 17\nMUL 10\nFINAL 170\n
+pilot_v1_stack_s101,pilot,stack,101,1,eval_template_shift,eval_template_shift_unit_13,unit,minutes_to_seconds,960,960,1,1,19,PUSH 16\nMUL 60\nFINAL 960\n

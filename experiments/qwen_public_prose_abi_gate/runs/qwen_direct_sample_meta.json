@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen3-4B",
+  "sample_n": 60,
+  "actual_n": 60,
+  "seed": 20260627,
+  "train_n": 4,
+  "max_new_tokens": 64,
+  "elapsed_sec": 30.9
+}

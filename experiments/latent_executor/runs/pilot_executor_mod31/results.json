@@ -1,0 +1,773 @@
+{
+  "mode": "executor",
+  "args": {
+    "mode": "executor",
+    "seed": 21,
+    "modulus": 31,
+    "train_min_len": 1,
+    "train_max_len": 8,
+    "eval_lengths": "4,8,12,16,24",
+    "eval_k": "0,1,2,4,8,12,16,24",
+    "dim": 128,
+    "heads": 4,
+    "compiler_layers": 1,
+    "num_bases": 16,
+    "rank": 16,
+    "mem_dim": 48,
+    "dropout": 0.05,
+    "disable_memory": false,
+    "disable_dynamic": false,
+    "train_steps": 1000,
+    "batch_size": 512,
+    "eval_batch_size": 512,
+    "eval_examples": 1024,
+    "lr": 0.0005,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "log_every": 50,
+    "eval_every": 250,
+    "output_dir": "runs_latent_executor/pilot_executor_mod31"
+  },
+  "train": [
+    {
+      "step": 1,
+      "loss": 3.6087188720703125,
+      "pair_acc": 0.0,
+      "grad_norm": 0.5811763405799866,
+      "gate_entropy": 10.999177098274231,
+      "mem_rms": 0.13885721564292908
+    },
+    {
+      "step": 50,
+      "loss": 2.821141004562378,
+      "pair_acc": 0.01953125,
+      "grad_norm": 0.46821826696395874,
+      "gate_entropy": 9.65117871761322,
+      "mem_rms": 0.531837522983551
+    },
+    {
+      "step": 100,
+      "loss": 2.7674903869628906,
+      "pair_acc": 0.017578125,
+      "grad_norm": 0.4627982974052429,
+      "gate_entropy": 8.767057657241821,
+      "mem_rms": 0.5159477591514587
+    },
+    {
+      "step": 150,
+      "loss": 2.6937761306762695,
+      "pair_acc": 0.015625,
+      "grad_norm": 0.4883667826652527,
+      "gate_entropy": 3.9208683520555496,
+      "mem_rms": 0.6013717651367188
+    },
+    {
+      "step": 200,
+      "loss": 2.562485694885254,
+      "pair_acc": 0.017578125,
+      "grad_norm": 0.44592782855033875,
+      "gate_entropy": 0.8430413641035557,
+      "mem_rms": 0.9574517607688904
+    },
+    {
+      "step": 250,
+      "loss": 2.5297200679779053,
+      "pair_acc": 0.017578125,
+      "grad_norm": 0.43804192543029785,
+      "gate_entropy": 0.6040909551084042,
+      "mem_rms": 0.9890725612640381
+    },
+    {
+      "step": 300,
+      "loss": 2.531442165374756,
+      "pair_acc": 0.009765625,
+      "grad_norm": 0.43692418932914734,
+      "gate_entropy": 0.40271352604031563,
+      "mem_rms": 1.0519611835479736
+    },
+    {
+      "step": 350,
+      "loss": 2.4054431915283203,
+      "pair_acc": 0.01171875,
+      "grad_norm": 0.40071582794189453,
+      "gate_entropy": 0.26328720431774855,
+      "mem_rms": 1.030394196510315
+    },
+    {
+      "step": 400,
+      "loss": 2.42744779586792,
+      "pair_acc": 0.025390625,
+      "grad_norm": 0.3955957293510437,
+      "gate_entropy": 0.2711191773414612,
+      "mem_rms": 0.9590599536895752
+    },
+    {
+      "step": 450,
+      "loss": 2.4264488220214844,
+      "pair_acc": 0.029296875,
+      "grad_norm": 0.343288391828537,
+      "gate_entropy": 0.33434971794486046,
+      "mem_rms": 0.9640104174613953
+    },
+    {
+      "step": 500,
+      "loss": 2.432781219482422,
+      "pair_acc": 0.01171875,
+      "grad_norm": 0.4112797975540161,
+      "gate_entropy": 0.43623500131070614,
+      "mem_rms": 0.8641354441642761
+    }
+  ],
+  "eval": [
+    {
+      "step": 250,
+      "rows": [
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.01171875,
+          "register_accuracy": 0.115234375
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.0107421875,
+          "register_accuracy": 0.11376953125
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.0068359375,
+          "register_accuracy": 0.11328125
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.009765625,
+          "register_accuracy": 0.11572265625
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.009765625,
+          "register_accuracy": 0.11572265625
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.009765625,
+          "register_accuracy": 0.11572265625
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.009765625,
+          "register_accuracy": 0.11572265625
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.009765625,
+          "register_accuracy": 0.11572265625
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.044921875
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.04052734375
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0439453125
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.04345703125
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.0439453125
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.0439453125
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.0439453125
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.0439453125
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03564453125
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.037109375
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03759765625
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.0302734375
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.029296875
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.0302734375
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.033203125
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.029296875
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.03173828125
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0302734375
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0302734375
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.029296875
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03369140625
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0341796875
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03271484375
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.03173828125
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.03759765625
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0341796875
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.0341796875
+        }
+      ]
+    },
+    {
+      "step": 500,
+      "rows": [
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.01171875,
+          "register_accuracy": 0.09814453125
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.0107421875,
+          "register_accuracy": 0.1064453125
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.01171875,
+          "register_accuracy": 0.111328125
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.0126953125,
+          "register_accuracy": 0.115234375
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0126953125,
+          "register_accuracy": 0.115234375
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.0126953125,
+          "register_accuracy": 0.115234375
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0126953125,
+          "register_accuracy": 0.115234375
+        },
+        {
+          "model": "executor",
+          "length": 4,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0126953125,
+          "register_accuracy": 0.115234375
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.00390625,
+          "register_accuracy": 0.04345703125
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.00390625,
+          "register_accuracy": 0.0390625
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.0048828125,
+          "register_accuracy": 0.04541015625
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.04443359375
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.04248046875
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.04248046875
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.04248046875
+        },
+        {
+          "model": "executor",
+          "length": 8,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.04248046875
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03173828125
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.0322265625
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03125
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.033203125
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03955078125
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 12,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.0263671875
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.03173828125
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03271484375
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.03125
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.02978515625
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.0,
+          "register_accuracy": 0.0283203125
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.02783203125
+        },
+        {
+          "model": "executor",
+          "length": 16,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.02783203125
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 0,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.0283203125
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 1,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.02685546875
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 2,
+          "n": 1024,
+          "pair_accuracy": 0.00390625,
+          "register_accuracy": 0.03564453125
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 4,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.0341796875
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 8,
+          "n": 1024,
+          "pair_accuracy": 0.0009765625,
+          "register_accuracy": 0.03466796875
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 12,
+          "n": 1024,
+          "pair_accuracy": 0.001953125,
+          "register_accuracy": 0.02978515625
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 16,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.02734375
+        },
+        {
+          "model": "executor",
+          "length": 24,
+          "k": 24,
+          "n": 1024,
+          "pair_accuracy": 0.0029296875,
+          "register_accuracy": 0.029296875
+        }
+      ]
+    }
+  ]
+}

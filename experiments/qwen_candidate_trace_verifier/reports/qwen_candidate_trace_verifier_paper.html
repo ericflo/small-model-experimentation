@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen Candidate-Trace Verifier</title>
+<style>
+:root { color-scheme: light; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #202124; background: #f7f8fa; }
+main { max-width: 920px; margin: 0 auto; padding: 48px 24px 72px; background: #fff; min-height: 100vh; box-sizing: border-box; }
+h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 24px; }
+h2 { font-size: 1.35rem; margin: 34px 0 12px; padding-top: 8px; border-top: 1px solid #e5e7eb; }
+h3 { font-size: 1.05rem; margin: 24px 0 10px; }
+p, li { line-height: 1.55; font-size: 0.98rem; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #f0f2f4; padding: 0.1rem 0.25rem; border-radius: 4px; }
+pre { overflow-x: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 6px; }
+pre code { background: transparent; color: inherit; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 22px; font-size: 0.95rem; }
+th, td { border: 1px solid #d8dde3; padding: 8px 10px; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { background: #eef1f5; }
+</style>
+</head>
+<body>
+<main>
+<h1>Qwen Candidate-Trace Verifier</h1>
+<h2>Abstract</h2>
+<p>This experiment tests whether a transformer verifier over candidate execution
+traces can choose useful local repairs of programs compiled by a Qwen-attached
+numeric compiler. Each prompt describes 24 modular arithmetic updates. A fixed
+compiler copies an initial value, operation sequence, and argument sequence from
+the prompt, and a deterministic runtime executes the copied program modulo 97.</p>
+<p>For each prompt, the experiment enumerates 1,299 local repair candidates. Each
+candidate contains a full executable program and a predicted 24-step state
+trajectory. Offline labels identify candidates whose full state trajectory
+matches the true trajectory. At test time, the verifier does not receive the true
+answer or true states.</p>
+<p>The result is positive. On fresh paired length-24 programs, the base compiler
+reaches 30.3% exact execution. The candidate-trace verifier reaches 53.7%. A
+paired consistency reranker reaches 56.2%. The oracle trajectory-verifier ceiling
+is 88.1%. The trace verifier therefore recovers 40.5% of the base-to-oracle gap
+on the paired split.</p>
+<h2>Question</h2>
+<p>Can a learned verifier select the right local repair by reading the candidate
+program and its execution trace, rather than relying on the true state trajectory
+at test time?</p>
+<p>This is a direct test of whether local repair headroom can be converted into a
+non-oracle runtime mechanism. The verifier must decide among many plausible
+nearby programs using only candidate-local signals.</p>
+<h2>Setup</h2>
+<p>The fixed compiler reads a modular-arithmetic prompt and predicts:</p>
+<ul>
+<li>the initial value modulo 97;</li>
+<li>one operation per step from add, subtract, and multiply;</li>
+<li>one numeric argument per step.</li>
+</ul>
+<p>The candidate search uses the compiler's top local alternatives:</p>
+<table>
+<thead>
+<tr>
+<th>Candidate class</th>
+<th style="text-align: right;">Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base compiled program</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Alternate initial values</td>
+<td style="text-align: right;">top-3</td>
+</tr>
+<tr>
+<td>Alternate operations</td>
+<td style="text-align: right;">top-3 per active step</td>
+</tr>
+<tr>
+<td>Alternate arguments</td>
+<td style="text-align: right;">top-3 per active step</td>
+</tr>
+<tr>
+<td>Same-step operation and argument edits</td>
+<td style="text-align: right;">top-3 by slot</td>
+</tr>
+<tr>
+<td>Two-argument edits</td>
+<td style="text-align: right;">top-3 by slot, up to 24 slots</td>
+</tr>
+</tbody>
+</table>
+<p>For length 24, this produces 1,299 candidates per prompt.</p>
+<h2>Verifier Architecture</h2>
+<p>Each candidate is represented as a 25-token trace:</p>
+<ul>
+<li>one global token containing candidate prior, edit count, initial value, final
+  answer, and final soft-executor support;</li>
+<li>24 step tokens containing candidate operation, argument, predicted state,
+  base-program operation, base argument, base predicted state, edit flags,
+  compiler log-probabilities, margins, entropies, and state soft support.</li>
+</ul>
+<p>The model is a three-layer transformer encoder with width 128 and four attention
+heads. It also receives aggregate candidate features through a small projection
+layer. A groupwise ranking loss trains it to score correct trajectory candidates
+above incorrect candidates:</p>
+<pre><code class="language-text">loss = logsumexp(all candidate scores) - logsumexp(correct candidate scores)
+</code></pre>
+<p>When no correct candidate exists in a group, a small auxiliary term selects the
+base program.</p>
+<h2>Results</h2>
+<h3>Main Fresh Results</h3>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Base</th>
+<th style="text-align: right;">Trace verifier</th>
+<th style="text-align: right;">Pair rerank</th>
+<th style="text-align: right;">Oracle ceiling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fresh standard L24</td>
+<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">50.4%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">90.6%</td>
+</tr>
+<tr>
+<td>Fresh paraphrase L24</td>
+<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">55.5%</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">86.7%</td>
+</tr>
+<tr>
+<td>Fresh paired L24</td>
+<td style="text-align: right;">30.3%</td>
+<td style="text-align: right;">53.7%</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">88.1%</td>
+</tr>
+</tbody>
+</table>
+<p>The trace verifier improves every fresh split. On the paired split, it recovers:</p>
+<pre><code class="language-text">(53.7 - 30.3) / (88.1 - 30.3) = 40.5%
+</code></pre>
+<p>of the measured base-to-oracle gap.</p>
+<h3>Fresh Paired Details</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Base</th>
+<th style="text-align: right;">Trace verifier</th>
+<th style="text-align: right;">Pair rerank</th>
+<th style="text-align: right;">Oracle ceiling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executor accuracy</td>
+<td style="text-align: right;">30.3%</td>
+<td style="text-align: right;">53.7%</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">88.1%</td>
+</tr>
+<tr>
+<td>Program exact</td>
+<td style="text-align: right;">30.3%</td>
+<td style="text-align: right;">53.7%</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">87.7%</td>
+</tr>
+<tr>
+<td>State prefix fraction</td>
+<td style="text-align: right;">58.6%</td>
+<td style="text-align: right;">76.4%</td>
+<td style="text-align: right;">78.0%</td>
+<td style="text-align: right;">90.7%</td>
+</tr>
+<tr>
+<td>Pair both-correct</td>
+<td style="text-align: right;">28.1%</td>
+<td style="text-align: right;">39.8%</td>
+<td style="text-align: right;">52.3%</td>
+<td style="text-align: right;">85.9%</td>
+</tr>
+<tr>
+<td>Pair state consistency</td>
+<td style="text-align: right;">71.1%</td>
+<td style="text-align: right;">58.2%</td>
+<td style="text-align: right;">87.1%</td>
+<td style="text-align: right;">92.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The single-prompt trace verifier improves exact execution but reduces paired
+state consistency: two prompt renderings may choose different local repairs. A
+paired reranker that rewards agreement among the top trace-verifier candidates
+improves executor accuracy to 56.2%, paired both-correct accuracy to 52.3%, and
+paired state consistency to 87.1%.</p>
+<h3>Training Dynamics</h3>
+<p>The main run used 512 training examples and 128 validation examples. The best
+validation epoch was epoch 15.</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th style="text-align: right;">Base</th>
+<th style="text-align: right;">Trace verifier</th>
+<th style="text-align: right;">Oracle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train L24</td>
+<td style="text-align: right;">28.7%</td>
+<td style="text-align: right;">58.6%</td>
+<td style="text-align: right;">86.7%</td>
+</tr>
+<tr>
+<td>Validation L24</td>
+<td style="text-align: right;">32.0%</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">85.2%</td>
+</tr>
+</tbody>
+</table>
+<p>The fresh held-out paired result, 53.7%, is close to validation, suggesting that
+the learned signal transfers to new length-24 programs.</p>
+<h2>Iterations</h2>
+<p>The smoke run used a tiny top-2/one-edit candidate space to validate loading,
+trace construction, training, checkpointing, and metric writing.</p>
+<p>The first full-neighborhood pilot used a two-layer trace verifier with 128
+training examples. It reached 53.1% validation accuracy but only 40.6% fresh
+paired accuracy.</p>
+<p>The second pilot used a deeper three-layer trace verifier and 192 training
+examples. It reached 54.2% validation accuracy and 44.5% fresh paired accuracy.
+That configuration was selected for the main run.</p>
+<p>The main run scaled the selected configuration to 512 training examples and
+larger fresh held-out splits. It reached 53.7% fresh paired accuracy and 56.2%
+with paired reranking.</p>
+<h2>Interpretation</h2>
+<p>The experiment supports the central hypothesis: candidate execution traces
+contain useful non-oracle information for repair selection. A small transformer
+can read those traces and choose better repairs than the base compiler's top
+program.</p>
+<p>The result also shows that selection remains the bottleneck. The oracle ceiling
+is 88.1% on fresh paired programs, while the trace verifier reaches 53.7%. The
+candidate neighborhood contains correct programs far more often than the learned
+verifier can identify them.</p>
+<p>Pair consistency is a powerful additional signal when multiple renderings of the
+same latent program are available. It substantially improves paired both-correct
+accuracy and state consistency. It is not, however, a single-prompt method.</p>
+<h2>Limitations</h2>
+<ul>
+<li>The task is synthetic modular arithmetic.</li>
+<li>The compiler and executor are specialized.</li>
+<li>Offline labels use true state trajectories.</li>
+<li>The verifier still uses engineered trace fields, not raw prompt tokens.</li>
+<li>The main result is one fixed compiler checkpoint and one main verifier seed.</li>
+<li>Paired reranking requires two renderings of the same latent program.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>A candidate-trace verifier improves fresh paired length-24 exact execution from
+30.3% to 53.7%, and paired consistency reranking raises it to 56.2%. This is a
+substantial conversion of local repair headroom into a non-oracle mechanism, but
+the 88.1% oracle ceiling shows that much better selection is still possible.</p>
+<p>The next step should train the verifier and compiler together: either distill the
+trace verifier's successful choices back into the compiler, or train a verifier
+that consumes compact prompt-conditioned representations in addition to the
+candidate trace.</p>
+<h2>Artifacts</h2>
+<p>Small files live in:</p>
+<pre><code class="language-text">experiments/qwen_candidate_trace_verifier/
+</code></pre>
+<p>Large checkpoints live in:</p>
+<pre><code class="language-text">large_artifacts/qwen_candidate_trace_verifier/checkpoints/
+</code></pre>
+<p>Primary files:</p>
+<ul>
+<li><code>analysis/summary.md</code></li>
+<li><code>analysis/final_metrics.csv</code></li>
+<li><code>analysis/all_final_metrics.csv</code></li>
+<li><code>analysis/figures/executor_accuracy.png</code></li>
+<li><code>runs/main_trace_verifier_s512/metrics.csv</code></li>
+<li><code>runs/main_trace_verifier_s512/verifier_train_log.csv</code></li>
+<li><code>checkpoint_manifest.csv</code></li>
+</ul>
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+task_id,family,method,row_index,input,target,prediction,exact,raw
+City.000011,City,direct_row,0,new york city,New York City,New York City,True,New York City
+City.000011,City,direct_row,1,None,None,New York City,False,New York City
+City.000011,City,direct_row,2,SJ,San Jose,San Jose,True,San Jose
+DateTime.000012,DateTime,direct_row,0,2033,2033,2033,True,2033
+DateTime.000012,DateTime,direct_row,1,Unknown,None,Unknown,False,Unknown
+DateTime.000012,DateTime,direct_row,2,1784,1784,1784,True,1784
+Name.000028,Name,direct_row,0,Rodel-Habiba Chaiprasit,Rodel,Rodel,True,Rodel
+Name.000028,Name,direct_row,1,Jan Evans,Jan,Jan,True,Jan
+Name.000028,Name,direct_row,2,Antonia Lusis,Antonia,Antonia,True,Antonia
+Number.000048,Number,direct_row,0,96.7,97.0,97.0,True,97.0
+Number.000048,Number,direct_row,1,74.8,75.0,75.0,True,75.0
+Number.000048,Number,direct_row,2,99.9,100.0,100.0,True,100.0
+Number.000081,Number,direct_row,0,83,76-100,76-100,True,76-100
+Number.000081,Number,direct_row,1,46,26-50,26-50,True,26-50
+Number.000081,Number,direct_row,2,30,26-50,26-50,True,26-50

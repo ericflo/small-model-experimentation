@@ -1,0 +1,38 @@
+{
+  "arm_name": "train_smoke",
+  "count": 8,
+  "experiment": "qwen35_4b_strategy_token_diversity_lora",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "path": "data/smoke_train_k8_records.jsonl",
+  "records": {
+    "candidate_count_mean": 6.75,
+    "coverage": 0.75,
+    "distinct_behavior_rate_mean": 0.7724702380952381,
+    "distinct_functional_rate_mean": 0.2824404761904762,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "hidden_pass_candidates_mean": 2.875,
+    "parse_success_mean": 6.5,
+    "records": 8,
+    "visible_candidates_mean": 3.75,
+    "visible_coverage": 0.75,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "round_name": "smoke_train_k8",
+  "samples_per_task": 8,
+  "seed": 20260625,
+  "split": "mbpp_train",
+  "temperatures": "0.2,0.8,1.1",
+  "token_usage": {
+    "calls": 64,
+    "completion_tokens": 7804,
+    "forward_tokens": 15412,
+    "prompt_tokens": 7608
+  },
+  "top_p": 0.98,
+  "visible_tests": 1
+}

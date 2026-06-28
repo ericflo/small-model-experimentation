@@ -1,0 +1,3 @@
+split,source_examples,prefix_samples,exact_positive_samples,raw_semantic_positive_samples,semantic_positive_samples,raw_semantic_extra_positive_samples,semantic_extra_positive_samples,exact_negative_samples,semantic_negative_samples,exact_positive_rate,raw_semantic_positive_rate,semantic_positive_rate,raw_semantic_extra_positive_rate,semantic_extra_positive_rate
+train,128,12071,737,7878,5927,7141,5190,11334,6144,0.06105542208599122,0.652638555214978,0.49101151520172315,0.5915831331289868,0.4299560931157319
+val,64,5548,345,3342,2476,2997,2131,5203,3072,0.06218457101658255,0.6023792357606345,0.44628695025234316,0.5401946647440519,0.3841023792357606

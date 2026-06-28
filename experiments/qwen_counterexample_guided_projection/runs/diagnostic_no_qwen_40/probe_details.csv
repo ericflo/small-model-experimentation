@@ -1,0 +1,241 @@
+task_id,probe_index,probe,qwen_label,train_only_pred,qwen_projection_pred
+Abbreviation.000001,0,CONSECTETUR,,C,C
+Abbreviation.000001,1,Nihil Impedit 34,,NI,NI
+Abbreviation.000001,2,nihil impedit,,NI,NI
+Abbreviation.000001,3,Nihil Impedit 2026,,NI,NI
+Abbreviation.000001,4,NIHIL IMPEDIT,,NI,NI
+Abbreviation.000001,5,Consectetur Consectetur,,CC,CC
+Address.000009,0,col0=India | col1=359,,,
+Address.000009,1,col0=CARIBBEAN | col1=359,,,
+Address.000009,2,col0=Equatorial Caribbean | col1=359,,,
+Address.000009,3,col0=India Caribbean | col1=359,,,
+Address.000009,4,col0=INDIA | col1=550,,,
+Address.000009,5,col0=India Equatorial Guinea | col1=967,,,
+BillingCode.000002,0,[cpt-00350,,[cpt-00350],[cpt-00350]
+BillingCode.000002,1,[cpt-00340,,[cpt-00340],[cpt-00340]
+BillingCode.000002,2,[Cpt-11536,,[Cpt-11536],[Cpt-11536]
+BillingCode.000002,3,CPT[[CPT-00350,,CPT[[CPT-00350],CPT[[CPT-00350]
+BillingCode.000002,4,[Cpt-00350,,[Cpt-00350],[Cpt-00350]
+BillingCode.000002,5,[cpt-11536,,[cpt-11536],[cpt-11536]
+City.000007,0,SF-34,,,
+City.000007,1,sf,,,
+City.000007,2,Sf,,,
+City.000007,3,SF_SF,,,
+City.000007,4,SF-12,,,
+City.000007,5,SF 34,,,
+City.000008,0,sf,,,
+City.000008,1,SF-34,,,
+City.000008,2,"SF,07",,,
+City.000008,3,SF:SF,,,
+City.000008,4,SF/34,,,
+City.000008,5,Sf,,,
+City.000011,0,City.y.c.,,New York City,New York City
+City.000011,1,New York n  ,,New York City,New York City
+City.000011,2,New York City   34,,New York City,New York City
+City.000011,3,NEW YORK CITY,,New York City,New York City
+City.000011,4,City York City  ,,New York City,New York City
+City.000011,5,new york city  ,,New York City,New York City
+Currency.000003,0,Delta��9.92,,9.92,9.92
+Currency.000003,1,Delta$�9.92,,9.92,9.92
+Currency.000003,2,Beta$$45.20,,45.20,45.20
+Currency.000003,3,Beta�$47.36,,47.36,47.36
+Currency.000003,4,Delta�$45.20,,45.20,45.20
+Currency.000003,5,�9.40,,9.40,9.40
+DateTime.000009,0,1966-08-30T11:34:17Z:34,,30,30
+DateTime.000009,1,1976-06-13T09:44:40Z-20,,13,13
+DateTime.000009,2,1976-06-13T09:44:40Z-03,,13,13
+DateTime.000009,3,1945-03-21t07:00:20z,,21,21
+DateTime.000009,4,1966-08-30T11:34:17Z:10,,30,30
+DateTime.000009,5,1966-08-30t11:34:17z,,30,30
+DateTime.000019,0,col0=22 Jun 1868 | col1=None-2001,,,
+DateTime.000019,1,col0=06-Nov-2001 1868 | col1=None,,,
+DateTime.000019,2,col0=06-Nov-2001 | col1=None 2001,,,
+DateTime.000019,3,col0=09262072 | col1=Nov,,,
+DateTime.000019,4,col0=09262072 | col1=none,,,
+DateTime.000019,5,col0=Jun 07 1952 | col1=None,,,
+DateTime.000022,0,22 APR 1953,,,
+DateTime.000022,1,Mar-01311846,,,
+DateTime.000022,2,Oct 01311846,,,
+DateTime.000022,3,01311846-30,,,
+DateTime.000022,4,30-Oct-2143,,,
+DateTime.000022,5,Oct-Mar 30 2002,,,
+DateTime.000027,0,22 April 1953 23:34 30,,,
+DateTime.000027,1,22 april 1953 23:34,,,
+DateTime.000027,2,22,,,
+DateTime.000027,3,Mar-01311846,,,
+DateTime.000027,4,06-April-2143 18:25,,,
+DateTime.000027,5,22 APRIL 1953 23:34,,,
+DateTime.000030,0,22 Oct 1953,,,
+DateTime.000030,1,06-Apr-2143,,,
+DateTime.000030,2,06-oct-2143,,,
+DateTime.000030,3,22_Apr_1953,,,
+DateTime.000030,4,06-Oct-2143 01311846,,,
+DateTime.000030,5,mar 30 2002,,,
+DateTime.000040,0,WORD 3 WORD 30 WORD 2002 WORD,,,
+DateTime.000040,1,Word Word 3 Word 30 Word 2002 Word,,,
+DateTime.000040,2,Word 6 Word 6 Word 2143 Word,,,
+DateTime.000040,3,Word 10 Word 6 Word 2143 Word 2143,,,
+DateTime.000040,4,Word 10 Word 6 Word 2143 Word 3,,,
+DateTime.000040,5,Word-3-Word-30-Word-2002-Word,,,
+DateTime.000046,0,2143 75 100,,,
+DateTime.000046,1,Gamma 2192 100,,,
+DateTime.000046,2,75 100,,,
+DateTime.000046,3,2192 100 100,,,
+DateTime.000046,4,2192_100,,,
+DateTime.000046,5,2192 2143,,,
+DateTime.000049,0,Alpha:21:44:40,,,
+DateTime.000049,1,Delta:21:44:40,,,
+DateTime.000049,2,18:25:25,,,
+DateTime.000049,3,18:25:40,,,
+DateTime.000049,4,21:44:40:40,,,
+DateTime.000049,5,Gamma:21:44:40,,,
+DateTime.000061,0,Beta:11:12:29,,,
+DateTime.000061,1,Alpha:11:12:29,,,
+DateTime.000061,2,08:29:52:29,,,
+DateTime.000061,3,11:12:29:11,,,
+DateTime.000061,4,11:12:29:12,,,
+DateTime.000061,5,Delta:11:12:29,,,
+DateTime.000063,0,08:29:52:12,,,
+DateTime.000063,1,Beta:08:29:52,,,
+DateTime.000063,2,Beta:11:12:29,,,
+DateTime.000063,3,08:12:29,,,
+DateTime.000063,4,11:12:29:52,,,
+DateTime.000063,5,Delta:11:12:29,,,
+DateTime.000107,0,31-Jan-2031 05:54:18:2031,,2031,2031
+DateTime.000107,1,Mar-17-Jan-1990 13:32:01,,Jan-,Jan-
+DateTime.000107,2,14-feb-2034 05:36:07,,2034,2034
+DateTime.000107,3,17-Feb-1990 13:32:01,,1990,1990
+DateTime.000107,4,31-Jan-2031  05:54:18,,2031,2031
+DateTime.000107,5,14-FEB-2034 05:36:07,,2034,2034
+Email.000006,0,giftiantonio@fabrikam.com.2026,,,
+Email.000006,1,joyikutty@fabrikam.com@12,,,
+Email.000006,2,fabrikam.giftiantonio@fabrikam.com,,,
+Email.000006,3,Francis@Contoso.Com,,,
+Email.000006,4,giftiantonio@fabrikam.com@34,,,
+Email.000006,5,contoso@contoso.com,,,
+Email.000009,0,non recusandae quia unde l@humongousinsurance.com doloribus facilis,,,
+Email.000009,1,Vel @ Firstupconsultants.Com Quas Porro Sed Ad Et,,,
+Email.000009,2,eos @ woodgrovebank.com ipsam illum pariatur ad,,,
+Email.000009,3,eos_@_woodgrovebank.com_ipsam_illum_pariatur_doloribus,,,
+Email.000009,4,assumenda  iste  quia  natus  et  @  humongousinsurance.com  ad  nostrum  totam  harum  totam,,,
+Email.000009,5,non recusandae est unde l@humongousinsurance.com doloribus facilis 2026,,,
+Email.000010,0,Kiriakos.Sarlis@margiestravel.com.12,,margiestravel.com.12,margiestravel.com.12
+Email.000010,1,lamnahealtcare@Hone.Albert@southridgevideo.com,,Hone.Albert,Hone.Albert
+Email.000010,2,Lisandro.Milanesi@lamnahealtcare.com@12,,lamnahealtcare.com,lamnahealtcare.com
+Email.000010,3,KIRIAKOS.SARLIS@MARGIESTRAVEL.COM,,MARGIESTRAVEL.COM,MARGIESTRAVEL.COM
+Email.000010,4,ARTEM.KUZNETSOV@WOODGROVEBANK.COM,,WOODGROVEBANK.COM,WOODGROVEBANK.COM
+Email.000010,5,Kiriakos.Sarlis@Margiestravel.Com,,Margiestravel.Com,Margiestravel.Com
+Log.000018,0,type type =  206: Iste.Quia.Natus.DignissimosReiciendisAd type size =  96: Harum.Totam.DoloremqueEosAsperiores Illum,,,
+Log.000018,1,TYPE SIZE =  81: EVENIET.DICTA.QUO.FACILIS TYPE SIZE =  207: REPELLAT.DELENITI.QUISQUAMCONSEQUATUR,,,
+Log.000018,2,Type Size =  81: Eveniet.Dicta.Quo.Facilis Type Size =  207: Repellat.Deleniti.Quisquamconsequatur,,,
+Log.000018,3,type  size  =    206:  Iste.Quia.Natus.DignissimosReiciendisAd  type  size  =    96:  Harum.Totam.DoloremqueEosAsperiores  Illum,,,
+Log.000018,4,type_size_=__242:_Cumque.Non.EstUndeVitae_type_size_=__74:_Exercitationem.Doloribus.OmnisDoloremque,,,
+Log.000018,5,DoloremqueEosAsperiores.type size =  81: Eveniet.Dicta.Quo.Facilis type size =  207: Repellat.Deleniti.QuisquamConsequatur,,,
+Name.000010,0,Bratislav 794 337 Bratislav 410@718 878 825 735 858 Berthelette,,,
+Name.000010,1,86 838 170 644 826 219 Foluke 719_809 125 905 540 476 540 Abdirashkyzy,,,
+Name.000010,2,86 838 170 644 826 687 Foluke 719_809 125 905 189 476 540 Abdirashkyzy,,,
+Name.000010,3,86 838 170 644 826 219 Foluke 719_809 125 905 189 476 540 Abdirashkyzy@988,,,
+Name.000010,4,86 838 170 644 826 219 Foluke 719_809 125 905 189 476 540 Abdirashkyzy 442,,,
+Name.000010,5,699 526 934 687 546 81 Jan 988@642 343 957 Shakenuly,,,
+Name.000017,0,Kuznetsov Aysu Polat,,Kuzn,Kuzn
+Name.000017,1,Hone Albert 34,,Hone,Hone
+Name.000017,2,artem kuznetsov,,arte,arte
+Name.000017,3,Aysu_Polat,,Aysu,Aysu
+Name.000017,4,Aysu Hone Albert,,Aysu,Aysu
+Name.000017,5,hone albert,,hone,hone
+Name.000026,0,FATMA YILMAZ,,fy,fy
+Name.000026,1,fatma yilmaz,,fy,fy
+Name.000026,2,Polat Yilmaz,,py,py
+Name.000026,3,Hone Aysu Polat,,hap,hap
+Name.000026,4,Artem Kuznetsov 12,,ak,ak
+Name.000026,5,Fatma Kuznetsov,,fk,fk
+Name.000028,0,Snezhana-Snezhana Panigrahi,,Snezhana,Snezhana
+Name.000028,1,ARTEM MILANESI,,ARTEM,ARTEM
+Name.000028,2,Bidisha-Snezhana-Panigrahi,,Bidisha,Bidisha
+Name.000028,3,Hone-Kiriakos Yilmaz-07,,Hone,Hone
+Name.000028,4,HONE-KIRIAKOS YILMAZ,,HONE,HONE
+Name.000028,5,MAUREEN-SNORRE NDIAYE,,MAUREEN,MAUREEN
+Name.000032,0,"2,Fatma,2",,Fatma,Fatma
+Name.000032,1,"Fatma,2,Fatma",,Fatma Fatma,
+Name.000032,2,"Fatma,8,Anne",,Fatma Anne,
+Name.000032,3,"2,Anne",,Anne,Anne
+Name.000032,4,"8,ANNE",,ANNE,ANNE
+Name.000032,5,"8,anne",,anne,anne
+Name.000034,0,HONE ALBERT,,ALBERT,ALBERT
+Name.000034,1,Hone  Albert,,Albert,
+Name.000034,2,hone albert,,albert,albert
+Name.000034,3,Aysu Albert,,Albert,Albert
+Name.000034,4,Aysu Hone Albert,,Albert,Hone
+Name.000034,5,Hone_Albert,,,
+Number.000015,0,Gamma-31732,,,
+Number.000015,1,Gamma-5816,,,
+Number.000015,2,5816-31732,,,
+Number.000015,3,Delta-31732,,,
+Number.000015,4,5816-5816,,,
+Number.000015,5,Beta-31732,,,
+Number.000016,0,914/1199,,,
+Number.000016,1,914_1199,,,
+Number.000016,2,786_1199,,,
+Number.000016,3,Beta 786,,,
+Number.000016,4,Delta_914,,,
+Number.000016,5,"786,786",,,
+Number.000032,0,3.4.4567,,3.40,3.40
+Number.000032,1,4.4,,4.40,4.40
+Number.000032,2,123.4.123,,123.40,123.40
+Number.000032,3,Gamma.3.4,,3.40,3.40
+Number.000032,4,3.4.3,,3.40,3.40
+Number.000032,5,Beta.3.4,,3.40,3.40
+Number.000044,0,Delta_0930,,930,930
+Number.000044,1,"Gamma,1648",,1648,1648
+Number.000044,2,"0830,0830",,8300830,8300830
+Number.000044,3,Beta:1520,,1520,1520
+Number.000044,4,"0830,0930",,8300930,8300930
+Number.000044,5,Gamma:0930,,930,930
+Number.000047,0,247.10.249,,,
+Number.000047,1,249.60.247,,,
+Number.000047,2,Gamma.247.10,,,
+Number.000047,3,247.10.76,,,
+Number.000047,4,249.247,,,
+Number.000047,5,35.76,,,
+Number.000053,0,Gamma 324223,,,
+Number.000053,1,"Gamma,324223",,,
+Number.000053,2,Gamma/324223,,,
+Number.000053,3,"423531,423531",,,
+Number.000053,4,763827 423531,,,
+Number.000053,5,423531:763827,,,
+Number.000064,0,col0=617 | col1=95 | col2=9217-728,,,
+Number.000064,1,col0=91 | col1=52 | col2=728,,,
+Number.000064,2,col0=617 | col1=632 | col2=9217,,,
+Number.000064,3,col0=521 | col1=9217 | col2=2642,,,
+Number.000064,4,col0=728 | col1=95 | col2=9217,,,
+Number.000064,5,col0=9217 | col1=52 | col2=728,,,
+Number.000068,0,2345.23292.2345,,,
+Number.000068,1,2345,,,
+Number.000068,2,10.5,,,
+Number.000068,3,Gamma.243,,,
+Number.000068,4,2345.2345,,,
+Number.000068,5,5,,,
+Phone.000008,0,"AKSEL HEDEGAARD     1234 PECAN AVENUE,YANGON,NY,(023) 966-2677,000-94-0933,03719",,(023) 966-2677,(023) 966-2677
+Phone.000008,1,"(479) 143-0433, 41230, 000-37-0076, Cologne, WV, Bola Atanda         2345 Sixth Street",,Cologne,Cologne
+Phone.000008,2,"Jacqueline-Martin-----67-Ninth-Boulevard,Guadalajara,OH,(319)-094-6012,000-08-3119,38891",,(319)-094-6012,(319)-094-6012
+Phone.000008,3,"Bola_Atanda_________2345_Sixth_Street,Cologne,WV,(479)_143-0433,000-37-0076,41230",,(479)_143-0433,(479)_143-0433
+Phone.000008,4,"Aksel Hedegaard     1234 Pecan Avenue,Yangon,NY,(023) 966-2677,000-94-0933,03719)143",,(023) 966-2677,(023) 966-2677
+Phone.000008,5,"Jacqueline Martin     67 Ninth Boulevard,Guadalajara,WV,(319) 094-6012,000-08-3119,38891",,(319) 094-6012,(319) 094-6012
+ShippingCode.000001,0,1Z  NRC  49T  03  3957  129  7,,,
+ShippingCode.000001,1,1Z NRC 49T 03 3957 129 8,,NRC,NRC
+ShippingCode.000001,2,1Z 14Q 2VW 66 2880 816 8,,14Q,14Q
+ShippingCode.000001,3,1Z 14Q 1Vw 66 2880 816 8,,14Q,14Q
+ShippingCode.000001,4,1Z Nrc 49T 03 3957 129 7,,Nrc,Nrc
+ShippingCode.000001,5,1Z 14Q 1VW 129 2880 816 8,,14Q,14Q
+ShippingCode.000007,0,1Z-388-965-96-5014-296-7,,,
+ShippingCode.000007,1,1Z  388  965  96  5014  296  7,, , 
+ShippingCode.000007,2,1z 875 2x4 92 2464 908 9,,875 92,875 92
+ShippingCode.000007,3,1Z 965 2X4 92 2464 908 9,,965 92,965 92
+ShippingCode.000007,4,1Z 875 2X4 92 2464 908 9 388,,875 92,875 92
+ShippingCode.000007,5,Z 1Z 875 2X4 92 2464 908 9,,1Z 2X4,1Z 2X4
+UserAgent.000005,0,xPhone-5.2.59/xPhone-4.9,,4.9,4.9
+UserAgent.000005,1,xPad.MFM-8.9.06/xPhone-5.9,,5.9,5.9
+UserAgent.000005,2,MFM/MFM-1.4.29/xPad-6.7.0,,6.7.0,6.7.0
+UserAgent.000005,3,Mfm-5.2.59/Xphone-4.9,,4.9,4.9
+UserAgent.000005,4,MFM-1.4.29/XPAD-6.7.0,,6.7.0,6.7.0
+UserAgent.000005,5,xPad/MFM-6.4.90/xPad-8.9,,8.9,8.9

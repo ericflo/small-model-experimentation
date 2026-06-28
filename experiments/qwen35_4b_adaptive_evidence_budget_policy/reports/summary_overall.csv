@@ -1,0 +1,9 @@
+policy,records,selected_hidden_all,used_probes_mean,candidate_count_mean,hidden_equivalent_candidates_mean
+base_budget_policy,160,0.05,0.04375,3819.375,129.55625
+fixed_budget10,160,0.925,10.0,353.75625,3.64375
+fixed_budget3,160,0.45,3.0,1040.5375,12.93125
+fixed_budget6,160,0.74375,6.0,544.69375,8.79375
+oracle_stop,160,0.925,4.225,356.2,3.78125
+sft_budget_policy,160,0.925,4.80625,353.75625,3.64375
+threshold_100,160,0.06875,1.8625,397.55,4.34375
+threshold_1000,160,0.05,0.9375,600.725,4.80625

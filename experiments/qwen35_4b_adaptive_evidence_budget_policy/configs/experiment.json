@@ -1,0 +1,29 @@
+{
+  "experiment": "qwen35_4b_adaptive_evidence_budget_policy",
+  "date_utc": "2026-06-24",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "objective": "Train and evaluate Qwen3.5-4B as a STOP/MORE controller for an executable verifier with cheap active probes.",
+  "hypothesis": "A small QLoRA posttraining run can learn when additional executable observations are worth requesting, producing a better accuracy/probe tradeoff than fixed budgets or simple candidate-count thresholds.",
+  "data": {
+    "train_records_per_cell": 40,
+    "eval_records_per_cell": 20,
+    "visible_cases": 4,
+    "query_pool_cases": 96,
+    "hidden_cases": 16,
+    "train_library_sizes": [64, 128, 256],
+    "eval_library_sizes": [64, 128, 256, 512],
+    "templates": ["pair_affine_mod", "pair_compare_gate"],
+    "max_probe_budget": 10
+  },
+  "arms": [
+    "fixed_budget3",
+    "fixed_budget6",
+    "fixed_budget10",
+    "threshold_100",
+    "threshold_1000",
+    "oracle_stop",
+    "base_budget_policy",
+    "sft_budget_policy"
+  ],
+  "large_artifacts_root": "/workspace/large_artifacts/qwen35_4b_adaptive_evidence_budget_policy"
+}

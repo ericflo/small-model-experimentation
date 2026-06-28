@@ -1,0 +1,21 @@
+{
+  "answer_max_new_tokens": 64,
+  "batch_max_new_tokens": 320,
+  "code_max_new_tokens": 520,
+  "heldout_cap": 3,
+  "max_probe_pool": 40,
+  "min_heldout": 3,
+  "no_qwen": true,
+  "probe_count": 3,
+  "probe_label_variants": "plain",
+  "probe_score_min": 0.75,
+  "repair_max_new_tokens": 560,
+  "repair_rounds": 1,
+  "repair_variants": "minimal,broaden,conditional",
+  "run_name": "smoke_no_qwen",
+  "run_shuffled": true,
+  "sample_seed": 20260627,
+  "task_limit": 3,
+  "train_n": 4,
+  "variants": "monolithic,robust"
+}

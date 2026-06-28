@@ -1,0 +1,71 @@
+{
+  "arms": {
+    "full_sample_base": {
+      "coverage": 0.75,
+      "forward_tokens": 20906,
+      "hidden_pass_candidates": 48,
+      "mean_distinct_functional_rate": 0.2604166666666667,
+      "mean_distinct_program_rate": 0.875,
+      "pass1_proxy": 0.4166666666666667,
+      "task_count": 12,
+      "visible_candidates": 66,
+      "visible_coverage": 0.9166666666666666
+    },
+    "prefix_lexical_selected": {
+      "coverage": 0.6666666666666666,
+      "forward_tokens": 5592,
+      "hidden_pass_candidates": 13,
+      "mean_distinct_functional_rate": 0.75,
+      "mean_distinct_program_rate": 0.9583333333333334,
+      "pass1_proxy": 0.6666666666666666,
+      "task_count": 12,
+      "visible_candidates": 16,
+      "visible_coverage": 0.75
+    },
+    "prefix_oracle_selected": {
+      "coverage": 0.75,
+      "forward_tokens": 5541,
+      "hidden_pass_candidates": 15,
+      "mean_distinct_functional_rate": 0.7083333333333334,
+      "mean_distinct_program_rate": 0.9583333333333334,
+      "pass1_proxy": 0.75,
+      "task_count": 12,
+      "visible_candidates": 19,
+      "visible_coverage": 0.9166666666666666
+    },
+    "prefix_random_selected": {
+      "coverage": 0.5833333333333334,
+      "forward_tokens": 5614,
+      "hidden_pass_candidates": 11,
+      "mean_distinct_functional_rate": 0.7916666666666666,
+      "mean_distinct_program_rate": 1.0,
+      "pass1_proxy": 0.5,
+      "task_count": 12,
+      "visible_candidates": 14,
+      "visible_coverage": 0.6666666666666666
+    },
+    "prefix_union": {
+      "coverage": 0.75,
+      "forward_tokens": 18387,
+      "hidden_pass_candidates": 38,
+      "mean_distinct_functional_rate": 0.3333333333333333,
+      "mean_distinct_program_rate": 0.9756944444444445,
+      "pass1_proxy": 0.6666666666666666,
+      "task_count": 12,
+      "visible_candidates": 47,
+      "visible_coverage": 0.9166666666666666
+    }
+  },
+  "completion_budget_matched": true,
+  "completions_per_prefix": 2,
+  "count": 12,
+  "experiment": "qwen35_4b_prefix_value_guided_search",
+  "full_samples": 8,
+  "mean_valid_prefixes": 3.1666666666666665,
+  "offset": 0,
+  "prefix_count": 4,
+  "prefix_lines": 3,
+  "seed": 20260627,
+  "split": "test",
+  "temperature": 0.9
+}

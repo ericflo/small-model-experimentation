@@ -1,0 +1,276 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Verified Skill Memory RAG</title><style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; margin: 40px; color: #111827; line-height: 1.5; }
+    h1 { font-size: 32px; margin-bottom: 4px; }
+    h2 { margin-top: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0 24px; font-size: 13px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 4px; }
+    figure { margin: 18px 0 26px; }
+    figcaption { color: #4b5563; font-size: 13px; margin-top: 6px; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+    </style></head><body><h1>Verified Skill Memory RAG</h1>
+<h2>Question</h2>
+<p>Can a frozen language model solve text-transformation tasks more consistently when it retrieves analogous verified transformation skills from a train-only memory?</p>
+<p>The experiment evaluates strict full-task exact: a task is correct only if every held-out row is exactly correct.</p>
+<h2>Setup</h2>
+<p>- Dataset root: <code>/workspace/large_artifacts/qwen_verified_skill_memory_rag/prose-benchmarks</code></p>
+<p>- Run: <code>main_qwen_skill_memory_40_top1</code></p>
+<p>- Model: <code>Qwen/Qwen3-4B</code></p>
+<p>- Evaluation tasks: 40</p>
+<p>- Memory tasks: 269</p>
+<p>- Retrieved skills per task: 1</p>
+<p>- Skill-card examples: 4</p>
+<p>- Train examples per target task: 4</p>
+<p>- Held-out cap per task: 6</p>
+<p>- Generation rows: 364</p>
+<h2>Main Result</h2>
+<table>
+<tr><th>method</th><th>tasks</th><th>row_exact</th><th>full_task_exact</th><th>parse_ok</th><th>avg_outputs</th></tr>
+<tr><td>direct_row</td><td>40</td><td>70.8%</td><td>50.0%</td><td>100.0%</td><td>5.100</td></tr>
+<tr><td>skill_rag</td><td>40</td><td>65.2%</td><td>47.5%</td><td>100.0%</td><td>5.100</td></tr>
+<tr><td>corrupt_skill_rag</td><td>40</td><td>63.1%</td><td>45.0%</td><td>100.0%</td><td>5.100</td></tr>
+<tr><td>direct_batch</td><td>40</td><td>65.2%</td><td>42.5%</td><td>95.0%</td><td>5.100</td></tr>
+<tr><td>random_skill_rag</td><td>40</td><td>67.1%</td><td>42.5%</td><td>100.0%</td><td>5.100</td></tr>
+</table>
+<h2>Interpretation</h2>
+<p>The retrieved-skill method changes strict full-task exact by -2.5 points relative to row-by-row direct inference and by 5.0 points relative to direct batched inference.</p>
+<p>The random-skill control scores 42.5% full-task exact and the corrupted-skill control scores 45.0%. A retrieval-memory gain is only meaningful if <code>skill_rag</code> beats both controls and the direct baselines.</p>
+<p>This run is negative for the tested retrieval-memory mechanism. Top-1 retrieval found a same-family verified skill 77.5% of the time, so the retriever was not random, but <code>skill_rag</code> helped 0 tasks and hurt 1 task relative to row-by-row direct inference. The failure is therefore not retrieval failure alone; adding a verified analogous skill card did not reliably improve the model&#x27;s target transformation.</p>
+<h2>Charts</h2>
+<figure><img src="../analysis/figures/method_full_task_exact.png" alt="Full-task exact by method"><figcaption>Full-task exact by method</figcaption></figure>
+<figure><img src="../analysis/figures/row_vs_full_task.png" alt="Row versus full-task accuracy"><figcaption>Row versus full-task accuracy</figcaption></figure>
+<figure><img src="../analysis/figures/family_heatmap.png" alt="Family heatmap"><figcaption>Family heatmap</figcaption></figure>
+<figure><img src="../analysis/figures/retrieval_family_agreement.png" alt="Retrieval family agreement"><figcaption>Retrieval family agreement</figcaption></figure>
+<figure><img src="../analysis/figures/top_retrieval_scores.png" alt="Top retrieval scores"><figcaption>Top retrieval scores</figcaption></figure>
+<figure><img src="../analysis/figures/wins_losses_vs_direct.png" alt="Wins and losses versus direct"><figcaption>Wins and losses versus direct</figcaption></figure>
+<h2>Deltas Versus Direct Row Baseline</h2>
+<table>
+<tr><th>method</th><th>tasks</th><th>full_task_delta</th><th>row_exact_delta</th><th>tasks_helped</th><th>tasks_hurt</th><th>tasks_tied</th></tr>
+<tr><td>skill_rag</td><td>40</td><td>-2.5%</td><td>-5.6%</td><td>0</td><td>1</td><td>39</td></tr>
+<tr><td>corrupt_skill_rag</td><td>40</td><td>-5.0%</td><td>-7.7%</td><td>0</td><td>2</td><td>38</td></tr>
+<tr><td>direct_batch</td><td>40</td><td>-7.5%</td><td>-5.6%</td><td>0</td><td>3</td><td>37</td></tr>
+<tr><td>random_skill_rag</td><td>40</td><td>-7.5%</td><td>-3.7%</td><td>1</td><td>4</td><td>35</td></tr>
+</table>
+<h2>Retrieval Diagnostics</h2>
+<table>
+<tr><th>method</th><th>rank</th><th>mean_score</th><th>same_family</th></tr>
+<tr><td>corrupt_skill_rag</td><td>1</td><td>0.714</td><td>77.5%</td></tr>
+<tr><td>random_skill_rag</td><td>1</td><td>0.000</td><td>20.0%</td></tr>
+<tr><td>skill_rag</td><td>1</td><td>0.714</td><td>77.5%</td></tr>
+</table>
+<h2>Task Details</h2>
+<table>
+<tr><th>task_id</th><th>family</th><th>method</th><th>row_exact</th><th>full_task_exact</th><th>parse_ok</th><th>parse_status</th><th>output_count</th></tr>
+<tr><td>Address.000002</td><td>Address</td><td>corrupt_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>corrupt_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>corrupt_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>corrupt_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>corrupt_skill_rag</td><td>83.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>corrupt_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>corrupt_skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>corrupt_skill_rag</td><td>16.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>corrupt_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>corrupt_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>corrupt_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>corrupt_skill_rag</td><td>25.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>corrupt_skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>corrupt_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>corrupt_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>corrupt_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>direct_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>direct_batch</td><td>75.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>direct_batch</td><td>83.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>direct_batch</td><td>83.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>direct_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>direct_batch</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>direct_batch</td><td>16.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>False</td><td>parse_fail</td><td>6</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>direct_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>direct_batch</td><td>0.0%</td><td>False</td><td>False</td><td>parse_fail</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>direct_batch</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>direct_batch</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>direct_batch</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>direct_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>direct_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>direct_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>direct_row</td><td>0.0%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>direct_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>direct_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>direct_row</td><td>50.0%</td><td>False</td><td>True</td><td>row_clean</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>direct_row</td><td>66.7%</td><td>False</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>direct_row</td><td>33.3%</td><td>False</td><td>True</td><td>row_clean</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>direct_row</td><td>100.0%</td><td>True</td><td>True</td><td>row_clean</td><td>6</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>random_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>random_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>random_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>random_skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>random_skill_rag</td><td>83.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>random_skill_rag</td><td>83.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>random_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>random_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>random_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>random_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>random_skill_rag</td><td>83.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>random_skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>random_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>random_skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>random_skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>random_skill_rag</td><td>16.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>random_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>random_skill_rag</td><td>16.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>random_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>random_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>random_skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>random_skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>random_skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>random_skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Address.000002</td><td>Address</td><td>skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Address.000013</td><td>Address</td><td>skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>BillingCode.000007</td><td>BillingCode</td><td>skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000010</td><td>City</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>City.000011</td><td>City</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Column.000001</td><td>Column</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000004</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000007</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000017</td><td>DateTime</td><td>skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000025</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000027</td><td>DateTime</td><td>skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000034</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000051</td><td>DateTime</td><td>skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>DateTime.000076</td><td>DateTime</td><td>skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000081</td><td>DateTime</td><td>skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000094</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>DateTime.000104</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000108</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000111</td><td>DateTime</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000114</td><td>DateTime</td><td>skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000115</td><td>DateTime</td><td>skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>DateTime.000116</td><td>DateTime</td><td>skill_rag</td><td>50.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>FilePath.000001</td><td>FilePath</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Gender.000001</td><td>Gender</td><td>skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Language.000002</td><td>Language</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Name.000028</td><td>Name</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000008</td><td>Number</td><td>skill_rag</td><td>16.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000015</td><td>Number</td><td>skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000016</td><td>Number</td><td>skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000022</td><td>Number</td><td>skill_rag</td><td>33.3%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000028</td><td>Number</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000029</td><td>Number</td><td>skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Number.000043</td><td>Number</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000049</td><td>Number</td><td>skill_rag</td><td>25.0%</td><td>False</td><td>True</td><td>ok</td><td>4</td></tr>
+<tr><td>Number.000075</td><td>Number</td><td>skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Number.000077</td><td>Number</td><td>skill_rag</td><td>66.7%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>Phone.000008</td><td>Phone</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+<tr><td>Phone.000011</td><td>Phone</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>ShippingCode.000008</td><td>ShippingCode</td><td>skill_rag</td><td>0.0%</td><td>False</td><td>True</td><td>ok</td><td>3</td></tr>
+<tr><td>UserAgent.000003</td><td>UserAgent</td><td>skill_rag</td><td>100.0%</td><td>True</td><td>True</td><td>ok</td><td>6</td></tr>
+</table>
+<h2>Files</h2>
+<p>- <code>runs/main_qwen_skill_memory_40_top1/generations.csv</code></p>
+<p>- <code>runs/main_qwen_skill_memory_40_top1/task_details.csv</code></p>
+<p>- <code>runs/main_qwen_skill_memory_40_top1/row_details.csv</code></p>
+<p>- <code>runs/main_qwen_skill_memory_40_top1/retrieval_details.csv</code></p>
+<p>- <code>analysis/summary.csv</code></p>
+<p>- <code>analysis/task_details.csv</code></p>
+<p>- <code>analysis/row_details.csv</code></p>
+<p>- <code>analysis/retrieval_details.csv</code></p>
+<p>- <code>analysis/retrieval_summary.csv</code></p>
+<p>- <code>analysis/method_deltas.csv</code></p></body></html>

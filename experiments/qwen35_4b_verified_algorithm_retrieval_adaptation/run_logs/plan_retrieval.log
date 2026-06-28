@@ -1,0 +1,18 @@
+{
+  "base_miss_filter": true,
+  "base_miss_tasks": [
+    15,
+    16,
+    20,
+    21,
+    24,
+    25,
+    26,
+    31
+  ],
+  "eval_records": 8,
+  "experiment": "qwen35_4b_verified_algorithm_retrieval_adaptation",
+  "library_entries": 364,
+  "path": "data/retrieval_plan.jsonl",
+  "top_k": 3
+}

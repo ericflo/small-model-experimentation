@@ -1,0 +1,707 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Adaptive Cognitive Kernel Report</title><style><br>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 32px; line-height: 1.45; color: #1f2937; }<br>
+    main { max-width: 1100px; margin: 0 auto; }<br>
+    table { border-collapse: collapse; font-size: 13px; width: 100%; margin: 16px 0; }<br>
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; text-align: left; }<br>
+    th { background: #f3f4f6; }<br>
+    img { max-width: 100%; border: 1px solid #e5e7eb; margin: 12px 0 24px; }<br>
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }<br>
+    </style></head><body><main># Adaptive Cognitive Kernel Report<br>
+<br>
+## Summary<br>
+<br>
+This standalone experiment tests whether a task-conditioned recurrent runtime can use temporary adapter-style weight edits as a useful computation substrate. The runtime receives an initial two-register state and a sequence of symbolic operations. It must execute the program and predict both the final register pair and intermediate states.<br>
+<br>
+The result is **mixed but not a breakthrough: the dynamic ACK runtime learns an ordered conditioning signal and its intermediate-state accuracy is far above no-delta and shuffled-code controls, but it does not beat the ordinary fixed recurrent controller on the longest split.**<br>
+<br>
+Key longest-length metrics:<br>
+<br>
+- ACK ordered length-12 final-answer accuracy: **7.7%**.<br>
+- ACK shuffled-code length-12 final-answer accuracy: **5.7%**.<br>
+- ACK no-delta length-12 final-answer accuracy: **6.5%**.<br>
+- Fixed recurrent controller length-12 final-answer accuracy: **8.3%**.<br>
+- Direct transformer length-12 final-answer accuracy: **5.8%**.<br>
+<br>
+Strict final-pair accuracy on length 12:<br>
+<br>
+- ACK ordered: **0.7%**.<br>
+- ACK shuffled-code: **0.5%**.<br>
+- ACK no-delta: **0.5%**.<br>
+- Fixed recurrent controller: **0.7%**.<br>
+- Direct transformer: **0.3%**.<br>
+<br>
+Intermediate-state step accuracy on length 12:<br>
+<br>
+- ACK ordered: **11.6%**.<br>
+- ACK shuffled-code: **2.0%**.<br>
+- ACK no-delta: **4.0%**.<br>
+- Fixed recurrent controller: **14.4%**.<br>
+<br>
+Held-out-composition metrics:<br>
+<br>
+- ACK ordered composition-12 final-answer accuracy: **7.1%**.<br>
+- Fixed recurrent controller composition-12 final-answer accuracy: **7.0%**.<br>
+<br>
+## Mechanism Under Test<br>
+<br>
+The ACK arm maps each operation token to coefficients over a bank of learned low-rank transition atoms. At each recurrent step, those coefficients temporarily edit the transition applied to the runtime state. The same learned atom bank is reused across tasks and steps.<br>
+<br>
+The no-delta ACK arm keeps the same recurrent shell and operation-conditioned drive but disables the low-rank weight edits. The shuffled-code control keeps the trained ACK runtime and candidate operation codes but permutes the operation-conditioning sequence at evaluation time. A mechanism-level positive requires ACK ordered to outperform fixed controls and to degrade when codes are shuffled.<br>
+<br>
+## Dataset<br>
+<br>
+- Register values: integers modulo `17`.<br>
+- Operation set: `12` symbolic register operations.<br>
+- Training lengths: `2..6`.<br>
+- Held-out lengths: `8, 10, 12`.<br>
+- Held-out adjacent operation pairs: `swap -&gt; add_y_to_x, double_x -&gt; add_x_to_y, branch_x -&gt; mix_y, diff_y_x -&gt; double_y`.<br>
+- Evaluation examples per split: `768`.<br>
+- Online training examples: `True`.<br>
+- Training seeds: `101,202,303`.<br>
+<br>
+## Aggregate Results<br>
+<br>
+| arm                | control   | split       | final_pair_mean   | final_pair_std   | final_x_mean   | state_step_mean   | state_all_mean   | code_entropy_mean   |<br>
+|:-------------------|:----------|:------------|:------------------|:-----------------|:---------------|:------------------|:-----------------|:--------------------|<br>
+| ack_dynamic        | ordered   | eval_comp12 | 0.4%              | 0.2%             | 7.1%           | 11.1%             | 0.0%             | 0.332               |<br>
+| ack_dynamic        | random    | eval_comp12 | 0.6%              | 0.1%             | 6.0%           | 1.6%              | 0.0%             | 0.341               |<br>
+| ack_dynamic        | shuffle   | eval_comp12 | 0.3%              | 0.1%             | 6.2%           | 2.0%              | 0.0%             | 0.332               |<br>
+| ack_no_delta       | ordered   | eval_comp12 | 0.3%              | 0.2%             | 5.7%           | 4.1%              | 0.0%             | 0.002               |<br>
+| direct_transformer | ordered   | eval_comp12 | 0.5%              | 0.3%             | 6.6%           | 10.3%             | 0.0%             | n/a                 |<br>
+| fixed_gru          | ordered   | eval_comp12 | 0.4%              | 0.2%             | 7.0%           | 13.7%             | 0.0%             | n/a                 |<br>
+| ack_dynamic        | ordered   | eval_comp8  | 1.4%              | 0.4%             | 12.6%          | 16.5%             | 0.0%             | 0.328               |<br>
+| ack_dynamic        | random    | eval_comp8  | 0.3%              | 0.3%             | 5.6%           | 2.0%              | 0.0%             | 0.338               |<br>
+| ack_dynamic        | shuffle   | eval_comp8  | 0.6%              | 0.3%             | 7.8%           | 2.7%              | 0.0%             | 1.134               |<br>
+| ack_no_delta       | ordered   | eval_comp8  | 0.4%              | 0.2%             | 7.9%           | 5.2%              | 0.0%             | 0.002               |<br>
+| direct_transformer | ordered   | eval_comp8  | 0.6%              | 0.2%             | 8.3%           | 16.3%             | 0.0%             | n/a                 |<br>
+| fixed_gru          | ordered   | eval_comp8  | 0.8%              | 0.1%             | 11.2%          | 20.2%             | 0.0%             | n/a                 |<br>
+| ack_dynamic        | ordered   | eval_len10  | 0.9%              | 0.2%             | 8.7%           | 13.9%             | 0.0%             | 0.345               |<br>
+| ack_dynamic        | random    | eval_len10  | 0.2%              | 0.1%             | 6.1%           | 1.7%              | 0.0%             | 0.343               |<br>
+| ack_dynamic        | shuffle   | eval_len10  | 0.5%              | 0.4%             | 6.8%           | 2.4%              | 0.0%             | 0.750               |<br>
+| ack_no_delta       | ordered   | eval_len10  | 0.6%              | 0.3%             | 5.9%           | 4.5%              | 0.0%             | 0.002               |<br>
+| direct_transformer | ordered   | eval_len10  | 0.5%              | 0.3%             | 6.6%           | 12.6%             | 0.0%             | n/a                 |<br>
+| fixed_gru          | ordered   | eval_len10  | 0.7%              | 0.3%             | 8.1%           | 16.6%             | 0.0%             | n/a                 |<br>
+| ack_dynamic        | ordered   | eval_len12  | 0.7%              | 0.2%             | 7.7%           | 11.6%             | 0.0%             | 0.344               |<br>
+| ack_dynamic        | random    | eval_len12  | 0.4%              | 0.1%             | 6.0%           | 1.5%              | 0.0%             | 0.338               |<br>
+| ack_dynamic        | shuffle   | eval_len12  | 0.5%              | 0.2%             | 5.7%           | 2.0%              | 0.0%             | 0.344               |<br>
+| ack_no_delta       | ordered   | eval_len12  | 0.5%              | 0.1%             | 6.5%           | 4.0%              | 0.0%             | 0.002               |<br>
+| direct_transformer | ordered   | eval_len12  | 0.3%              | 0.1%             | 5.8%           | 10.5%             | 0.0%             | n/a                 |<br>
+| fixed_gru          | ordered   | eval_len12  | 0.7%              | 0.3%             | 8.3%           | 14.4%             | 0.0%             | n/a                 |<br>
+| ack_dynamic        | ordered   | eval_len4   | 10.5%             | 1.9%             | 35.3%          | 31.2%             | 5.6%             | 0.343               |<br>
+| ack_dynamic        | random    | eval_len4   | 0.4%              | 0.2%             | 7.3%           | 3.7%              | 0.0%             | 0.341               |<br>
+| ack_dynamic        | shuffle   | eval_len4   | 0.9%              | 0.3%             | 10.8%          | 4.5%              | 0.0%             | 1.934               |<br>
+| ack_no_delta       | ordered   | eval_len4   | 2.3%              | 0.3%             | 16.2%          | 10.2%             | 0.1%             | 0.002               |<br>
+| direct_transformer | ordered   | eval_len4   | 6.4%              | 0.3%             | 31.2%          | 35.0%             | 3.6%             | n/a                 |<br>
+| fixed_gru          | ordered   | eval_len4   | 9.3%              | 0.4%             | 33.4%          | 39.2%             | 4.8%             | n/a                 |<br>
+| ack_dynamic        | ordered   | eval_len6   | 3.5%              | 0.9%             | 18.4%          | 21.9%             | 0.3%             | 0.350               |<br>
+| ack_dynamic        | random    | eval_len6   | 0.3%              | 0.1%             | 6.7%           | 3.0%              | 0.0%             | 0.343               |<br>
+| ack_dynamic        | shuffle   | eval_len6   | 0.5%              | 0.3%             | 7.5%           | 3.2%              | 0.0%             | 1.550               |<br>
+| ack_no_delta       | ordered   | eval_len6   | 0.9%              | 0.2%             | 8.9%           | 7.2%              | 0.0%             | 0.002               |<br>
+| direct_transformer | ordered   | eval_len6   | 1.6%              | 0.3%             | 13.9%          | 24.5%             | 0.1%             | n/a                 |<br>
+| fixed_gru          | ordered   | eval_len6   | 2.8%              | 0.3%             | 17.7%          | 26.6%             | 0.6%             | n/a                 |<br>
+| ack_dynamic        | ordered   | eval_len8   | 2.0%              | 0.5%             | 13.2%          | 17.8%             | 0.0%             | 0.347               |<br>
+| ack_dynamic        | random    | eval_len8   | 0.3%              | 0.1%             | 5.9%           | 2.2%              | 0.0%             | 0.343               |<br>
+| ack_dynamic        | shuffle   | eval_len8   | 0.6%              | 0.3%             | 7.6%           | 2.8%              | 0.0%             | 1.148               |<br>
+| ack_no_delta       | ordered   | eval_len8   | 0.5%              | 0.3%             | 7.2%           | 5.6%              | 0.0%             | 0.002               |<br>
+| direct_transformer | ordered   | eval_len8   | 0.7%              | 0.3%             | 8.9%           | 16.7%             | 0.0%             | n/a                 |<br>
+| fixed_gru          | ordered   | eval_len8   | 1.5%              | 0.2%             | 12.6%          | 20.9%             | 0.0%             | n/a                 |<br>
+| ack_dynamic        | ordered   | val         | 15.0%             | 2.2%             | 36.2%          | 30.8%             | 10.9%            | 0.344               |<br>
+| ack_no_delta       | ordered   | val         | 2.9%              | 0.5%             | 17.1%          | 10.6%             | 1.0%             | 0.002               |<br>
+| direct_transformer | ordered   | val         | 12.9%             | 1.8%             | 32.6%          | 33.9%             | 11.2%            | n/a                 |<br>
+| fixed_gru          | ordered   | val         | 16.9%             | 1.2%             | 38.7%          | 38.1%             | 14.3%            | n/a                 |<br>
+<br>
+## Figures<br>
+<br>
+![Accuracy by split](../analysis/figures/accuracy_by_split.png)<br>
+<br>
+![Length curve](../analysis/figures/length_curve.png)<br>
+<br>
+![State accuracy](../analysis/figures/state_accuracy.png)<br>
+<br>
+![Training dynamics](../analysis/figures/training_dynamics.png)<br>
+<br>
+## Interpretation<br>
+<br>
+The central question is not whether a recurrent neural network can fit short programs. It is whether task-conditioned temporary weight edits create a reusable computation substrate that generalizes better than ordinary fixed-weight controllers. The shuffled-code evaluation is the load-bearing control: if it matches ordered ACK, then extra runtime capacity is not evidence of ordered computation.<br>
+<br>
+The held-out-length and held-out-composition splits are the primary readouts. Trained-length accuracy alone is insufficient, because a prompt transducer can memorize short input-output mappings without learning a reusable executor.<br>
+<br>
+The evidence separates two claims. First, task-conditioned ACK computation is not inert: randomizing or shuffling the conditioning stream collapses state accuracy, and disabling dynamic deltas substantially weakens the ACK runtime. Second, this is not enough to justify the stronger claim that temporary weight edits are a superior computation substrate. A conventional fixed recurrent controller remains as good or better on the longest held-out splits, and all arms show steep degradation as length grows beyond the training range.<br>
+<br>
+## Artifacts<br>
+<br>
+- Run directory: `/workspace/experiments/adaptive_cognitive_kernel/runs/main_ack_v1`<br>
+- Metrics CSV: `/workspace/experiments/adaptive_cognitive_kernel/runs/main_ack_v1/metrics.csv`<br>
+- Training log: `/workspace/experiments/adaptive_cognitive_kernel/runs/main_ack_v1/training_log.csv`<br>
+- Analysis directory: `/workspace/experiments/adaptive_cognitive_kernel/analysis`<br>
+- Large checkpoints: `/workspace/large_artifacts/adaptive_cognitive_kernel/checkpoints/main_ack_v1`<br>
+<h2>Rendered Summary Table</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>arm</th>
+      <th>control</th>
+      <th>split</th>
+      <th>n</th>
+      <th>final_pair_mean</th>
+      <th>final_pair_std</th>
+      <th>final_x_mean</th>
+      <th>state_step_mean</th>
+      <th>state_all_mean</th>
+      <th>code_entropy_mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>eval_comp12</td>
+      <td>2304</td>
+      <td>0.004340</td>
+      <td>0.001989</td>
+      <td>0.071181</td>
+      <td>0.110605</td>
+      <td>0.000000</td>
+      <td>0.332211</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>eval_comp8</td>
+      <td>2304</td>
+      <td>0.013889</td>
+      <td>0.003978</td>
+      <td>0.126302</td>
+      <td>0.164985</td>
+      <td>0.000434</td>
+      <td>0.327669</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>eval_len10</td>
+      <td>2304</td>
+      <td>0.009115</td>
+      <td>0.002255</td>
+      <td>0.086806</td>
+      <td>0.138976</td>
+      <td>0.000000</td>
+      <td>0.344514</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>eval_len12</td>
+      <td>2304</td>
+      <td>0.006944</td>
+      <td>0.001989</td>
+      <td>0.076823</td>
+      <td>0.116102</td>
+      <td>0.000000</td>
+      <td>0.344461</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>eval_len4</td>
+      <td>2304</td>
+      <td>0.105035</td>
+      <td>0.019196</td>
+      <td>0.353299</td>
+      <td>0.312391</td>
+      <td>0.055556</td>
+      <td>0.342671</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>eval_len6</td>
+      <td>2304</td>
+      <td>0.034722</td>
+      <td>0.008670</td>
+      <td>0.183594</td>
+      <td>0.219112</td>
+      <td>0.003038</td>
+      <td>0.350186</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>eval_len8</td>
+      <td>2304</td>
+      <td>0.020399</td>
+      <td>0.005262</td>
+      <td>0.131944</td>
+      <td>0.177572</td>
+      <td>0.000000</td>
+      <td>0.347245</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>ordered</td>
+      <td>val</td>
+      <td>2304</td>
+      <td>0.150174</td>
+      <td>0.022414</td>
+      <td>0.362413</td>
+      <td>0.307805</td>
+      <td>0.108941</td>
+      <td>0.344211</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>random</td>
+      <td>eval_comp12</td>
+      <td>2304</td>
+      <td>0.005642</td>
+      <td>0.000752</td>
+      <td>0.059896</td>
+      <td>0.015553</td>
+      <td>0.000000</td>
+      <td>0.340689</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>random</td>
+      <td>eval_comp8</td>
+      <td>2304</td>
+      <td>0.003038</td>
+      <td>0.002711</td>
+      <td>0.056424</td>
+      <td>0.020291</td>
+      <td>0.000000</td>
+      <td>0.337902</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>random</td>
+      <td>eval_len10</td>
+      <td>2304</td>
+      <td>0.002170</td>
+      <td>0.000752</td>
+      <td>0.060764</td>
+      <td>0.017491</td>
+      <td>0.000000</td>
+      <td>0.342585</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>random</td>
+      <td>eval_len12</td>
+      <td>2304</td>
+      <td>0.003906</td>
+      <td>0.001302</td>
+      <td>0.060330</td>
+      <td>0.015010</td>
+      <td>0.000000</td>
+      <td>0.338179</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>random</td>
+      <td>eval_len4</td>
+      <td>2304</td>
+      <td>0.004340</td>
+      <td>0.001504</td>
+      <td>0.072917</td>
+      <td>0.037001</td>
+      <td>0.000000</td>
+      <td>0.341103</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>random</td>
+      <td>eval_len6</td>
+      <td>2304</td>
+      <td>0.002604</td>
+      <td>0.001302</td>
+      <td>0.066840</td>
+      <td>0.029659</td>
+      <td>0.000000</td>
+      <td>0.342553</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>random</td>
+      <td>eval_len8</td>
+      <td>2304</td>
+      <td>0.003038</td>
+      <td>0.000752</td>
+      <td>0.058594</td>
+      <td>0.022135</td>
+      <td>0.000000</td>
+      <td>0.343201</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>shuffle</td>
+      <td>eval_comp12</td>
+      <td>2304</td>
+      <td>0.003472</td>
+      <td>0.000752</td>
+      <td>0.062066</td>
+      <td>0.020001</td>
+      <td>0.000000</td>
+      <td>0.332211</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>shuffle</td>
+      <td>eval_comp8</td>
+      <td>2304</td>
+      <td>0.006076</td>
+      <td>0.003277</td>
+      <td>0.077691</td>
+      <td>0.026747</td>
+      <td>0.000000</td>
+      <td>1.134446</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>shuffle</td>
+      <td>eval_len10</td>
+      <td>2304</td>
+      <td>0.004774</td>
+      <td>0.003978</td>
+      <td>0.067708</td>
+      <td>0.024479</td>
+      <td>0.000000</td>
+      <td>0.749801</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>shuffle</td>
+      <td>eval_len12</td>
+      <td>2304</td>
+      <td>0.004774</td>
+      <td>0.001989</td>
+      <td>0.057292</td>
+      <td>0.019748</td>
+      <td>0.000000</td>
+      <td>0.344461</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>shuffle</td>
+      <td>eval_len4</td>
+      <td>2304</td>
+      <td>0.009115</td>
+      <td>0.002604</td>
+      <td>0.108073</td>
+      <td>0.044813</td>
+      <td>0.000434</td>
+      <td>1.934233</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>shuffle</td>
+      <td>eval_len6</td>
+      <td>2304</td>
+      <td>0.005208</td>
+      <td>0.002604</td>
+      <td>0.074653</td>
+      <td>0.032480</td>
+      <td>0.000000</td>
+      <td>1.550179</td>
+    </tr>
+    <tr>
+      <td>ack_dynamic</td>
+      <td>shuffle</td>
+      <td>eval_len8</td>
+      <td>2304</td>
+      <td>0.005642</td>
+      <td>0.003277</td>
+      <td>0.075521</td>
+      <td>0.028103</td>
+      <td>0.000000</td>
+      <td>1.148122</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>eval_comp12</td>
+      <td>2304</td>
+      <td>0.003038</td>
+      <td>0.001989</td>
+      <td>0.057292</td>
+      <td>0.040618</td>
+      <td>0.000000</td>
+      <td>0.001947</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>eval_comp8</td>
+      <td>2304</td>
+      <td>0.003906</td>
+      <td>0.002255</td>
+      <td>0.078993</td>
+      <td>0.051866</td>
+      <td>0.000000</td>
+      <td>0.001937</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>eval_len10</td>
+      <td>2304</td>
+      <td>0.005642</td>
+      <td>0.002711</td>
+      <td>0.058594</td>
+      <td>0.045312</td>
+      <td>0.000000</td>
+      <td>0.001981</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>eval_len12</td>
+      <td>2304</td>
+      <td>0.005208</td>
+      <td>0.001302</td>
+      <td>0.064670</td>
+      <td>0.040365</td>
+      <td>0.000000</td>
+      <td>0.002020</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>eval_len4</td>
+      <td>2304</td>
+      <td>0.023437</td>
+      <td>0.002604</td>
+      <td>0.161892</td>
+      <td>0.101997</td>
+      <td>0.000868</td>
+      <td>0.002029</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>eval_len6</td>
+      <td>2304</td>
+      <td>0.008681</td>
+      <td>0.001989</td>
+      <td>0.089410</td>
+      <td>0.072049</td>
+      <td>0.000000</td>
+      <td>0.001968</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>eval_len8</td>
+      <td>2304</td>
+      <td>0.005208</td>
+      <td>0.002604</td>
+      <td>0.072483</td>
+      <td>0.056261</td>
+      <td>0.000000</td>
+      <td>0.002009</td>
+    </tr>
+    <tr>
+      <td>ack_no_delta</td>
+      <td>ordered</td>
+      <td>val</td>
+      <td>2304</td>
+      <td>0.028646</td>
+      <td>0.004695</td>
+      <td>0.170573</td>
+      <td>0.105866</td>
+      <td>0.010417</td>
+      <td>0.001980</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>eval_comp12</td>
+      <td>2304</td>
+      <td>0.004774</td>
+      <td>0.002711</td>
+      <td>0.065538</td>
+      <td>0.103443</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>eval_comp8</td>
+      <td>2304</td>
+      <td>0.006076</td>
+      <td>0.001989</td>
+      <td>0.083333</td>
+      <td>0.163032</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>eval_len10</td>
+      <td>2304</td>
+      <td>0.004774</td>
+      <td>0.003277</td>
+      <td>0.065538</td>
+      <td>0.125825</td>
+      <td>0.000434</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>eval_len12</td>
+      <td>2304</td>
+      <td>0.002604</td>
+      <td>0.001302</td>
+      <td>0.058160</td>
+      <td>0.104745</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>eval_len4</td>
+      <td>2304</td>
+      <td>0.064236</td>
+      <td>0.002711</td>
+      <td>0.311632</td>
+      <td>0.349718</td>
+      <td>0.035590</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>eval_len6</td>
+      <td>2304</td>
+      <td>0.016493</td>
+      <td>0.003277</td>
+      <td>0.138889</td>
+      <td>0.244502</td>
+      <td>0.001302</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>eval_len8</td>
+      <td>2304</td>
+      <td>0.006944</td>
+      <td>0.003277</td>
+      <td>0.088976</td>
+      <td>0.167155</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>direct_transformer</td>
+      <td>ordered</td>
+      <td>val</td>
+      <td>2304</td>
+      <td>0.129340</td>
+      <td>0.017726</td>
+      <td>0.325521</td>
+      <td>0.338958</td>
+      <td>0.111545</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>eval_comp12</td>
+      <td>2304</td>
+      <td>0.003906</td>
+      <td>0.002255</td>
+      <td>0.069878</td>
+      <td>0.137442</td>
+      <td>0.000434</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>eval_comp8</td>
+      <td>2304</td>
+      <td>0.008247</td>
+      <td>0.000752</td>
+      <td>0.111545</td>
+      <td>0.202257</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>eval_len10</td>
+      <td>2304</td>
+      <td>0.007378</td>
+      <td>0.002711</td>
+      <td>0.081163</td>
+      <td>0.166102</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>eval_len12</td>
+      <td>2304</td>
+      <td>0.006944</td>
+      <td>0.002711</td>
+      <td>0.082899</td>
+      <td>0.144170</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>eval_len4</td>
+      <td>2304</td>
+      <td>0.093316</td>
+      <td>0.003978</td>
+      <td>0.334201</td>
+      <td>0.392144</td>
+      <td>0.048177</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>eval_len6</td>
+      <td>2304</td>
+      <td>0.027778</td>
+      <td>0.003277</td>
+      <td>0.176649</td>
+      <td>0.266493</td>
+      <td>0.005642</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>eval_len8</td>
+      <td>2304</td>
+      <td>0.014757</td>
+      <td>0.001504</td>
+      <td>0.126302</td>
+      <td>0.209256</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>fixed_gru</td>
+      <td>ordered</td>
+      <td>val</td>
+      <td>2304</td>
+      <td>0.168837</td>
+      <td>0.011743</td>
+      <td>0.387153</td>
+      <td>0.380839</td>
+      <td>0.142795</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table></main></body></html>

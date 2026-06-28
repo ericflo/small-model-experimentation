@@ -1,0 +1,332 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Counterfactual Trace Preference Distillation</title><style>
+body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; color: #172033; background: #f5f7fb; }
+main { max-width: 1120px; margin: 0 auto; padding: 40px 24px 64px; background: white; min-height: 100vh; }
+h1 { font-size: 34px; line-height: 1.1; margin-bottom: 12px; color: #111827; }
+h2 { color: #111827; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 24px; }
+p, li { line-height: 1.56; }
+code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 13px; }
+th, td { border: 1px solid #d9e0ea; padding: 8px 9px; text-align: left; }
+th { background: #edf2f7; }
+img { max-width: 100%; display: block; margin: 18px 0 30px; border: 1px solid #d9e0ea; }
+.note { color: #4b5563; font-size: 14px; }
+</style></head><body><main><p class='note'>Standalone report generated from <code>main_counterfactual_trace_preference_s192_c1024</code>.</p><h1>Counterfactual Trace Preference Distillation</h1>
+<h2>Abstract</h2>
+<p>This standalone experiment tests whether a Qwen-attached typed-bytecode compiler can learn a no-answer repair selector from hard counterfactual execution traces. The compiler emits executable VM programs from frozen <code>Qwen/Qwen3-4B</code> hidden states. Each prompt gets a local candidate set; every candidate is executed; and candidates are ranked by this quality order:</p>
+<p><code>invalid &lt; valid_wrong &lt; answer_correct &lt; trace_consistent &lt; canonical</code></p>
+<p>The main run generated <code>246784</code> candidates from <code>1024</code> training prompts. The candidate surface was real: <code>45.5%</code> of prompts had an answer-correct candidate, while only <code>13.8%</code> were already correct at the base decode. That left <code>31.7%</code> true counterfactual repair groups.</p>
+<p>The result is mixed. The feature-bridged preference selector learned a weak but real signal on validation, reaching <code>14.8%</code> selection accuracy against a <code>41.4%</code> oracle. It did not generalize robustly across all held-out splits: fresh-paired selection was <code>11.7%</code> against a <code>47.7%</code> oracle.</p>
+<p>Distilling the learned selector produced small direct gains on the hardest held-out cells but degraded search relative to answer-verified targets. Fresh-paired direct accuracy was <code>15.6%</code> for preference-selected distillation versus <code>14.8%</code> for answer-verified distillation. Hard-composition direct accuracy was <code>14.8%</code> versus <code>10.2%</code>. But fresh-paired search was lower: <code>46.1%</code> versus <code>53.9%</code>.</p>
+<p>The full-supervised ceiling stayed high: <code>91.4%</code> direct and <code>97.7%</code> search on fresh paired, with <code>68.0%</code> direct on hard composition. The substrate can learn the executable compiler; the preference selector is still the bottleneck.</p>
+<h2>Setup</h2>
+<ul>
+<li>Base model: frozen <code>Qwen/Qwen3-4B</code> hidden-state extractor.</li>
+<li>Compiler: transformer slot decoder that emits typed stack-machine bytecode.</li>
+<li>Candidate generation: local edit/search around the base decode, capped at <code>256</code> candidates per prompt.</li>
+<li>Preference training set: only counterfactual groups where a better candidate exists than the base decode.</li>
+<li>Preference inputs: prompt feature, candidate bytecode, normalized program prior, prompt answer-head logprob of the candidate's VM final value, VM validity, and VM final value.</li>
+<li>Main run: <code>192</code> seed examples, <code>1024</code> candidate prompts, <code>128</code> examples per eval split.</li>
+<li>Large checkpoints: <code>large_artifacts/qwen_counterfactual_trace_preference_distillation/checkpoints/main_counterfactual_trace_preference_s192_c1024/</code>.</li>
+</ul>
+<h2>Main Results</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Split</th>
+<th style="text-align: right;">Direct</th>
+<th style="text-align: right;">Answer search</th>
+<th style="text-align: right;">Oracle</th>
+<th style="text-align: right;">Preference rerank</th>
+<th style="text-align: right;">Program exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seed</td>
+<td>fresh standard</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">38.3%</td>
+<td style="text-align: right;">38.3%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">16.4%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>fresh paired</td>
+<td style="text-align: right;">13.3%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>hard composition</td>
+<td style="text-align: right;">13.3%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Preference selector</td>
+<td>fresh standard</td>
+<td style="text-align: right;">14.1%</td>
+<td style="text-align: right;">38.3%</td>
+<td style="text-align: right;">38.3%</td>
+<td style="text-align: right;">9.4%</td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Preference selector</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">16.4%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;">11.7%</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>Preference selector</td>
+<td>fresh paired</td>
+<td style="text-align: right;">13.3%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;">11.7%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Preference selector</td>
+<td>hard composition</td>
+<td style="text-align: right;">13.3%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;">13.3%</td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Answer-verified</td>
+<td>fresh standard</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Answer-verified</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">18.0%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;">57.8%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3.9%</td>
+</tr>
+<tr>
+<td>Answer-verified</td>
+<td>fresh paired</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Answer-verified</td>
+<td>hard composition</td>
+<td style="text-align: right;">10.2%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;">53.1%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">2.3%</td>
+</tr>
+<tr>
+<td>Preference-selected</td>
+<td>fresh standard</td>
+<td style="text-align: right;">10.9%</td>
+<td style="text-align: right;">38.3%</td>
+<td style="text-align: right;">38.3%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Preference-selected</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">12.5%</td>
+<td style="text-align: right;">54.7%</td>
+<td style="text-align: right;">54.7%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Preference-selected</td>
+<td>fresh paired</td>
+<td style="text-align: right;">15.6%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;">46.1%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Preference-selected</td>
+<td>hard composition</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">48.4%</td>
+<td style="text-align: right;">48.4%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+<tr>
+<td>Best-quality</td>
+<td>fresh standard</td>
+<td style="text-align: right;">13.3%</td>
+<td style="text-align: right;">41.4%</td>
+<td style="text-align: right;">41.4%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Best-quality</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">18.0%</td>
+<td style="text-align: right;">57.0%</td>
+<td style="text-align: right;">57.0%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr>
+<td>Best-quality</td>
+<td>fresh paired</td>
+<td style="text-align: right;">14.8%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;">47.7%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Best-quality</td>
+<td>hard composition</td>
+<td style="text-align: right;">12.5%</td>
+<td style="text-align: right;">50.8%</td>
+<td style="text-align: right;">50.8%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1.6%</td>
+</tr>
+<tr>
+<td>Full supervised</td>
+<td>fresh standard</td>
+<td style="text-align: right;">85.9%</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;">98.4%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">76.6%</td>
+</tr>
+<tr>
+<td>Full supervised</td>
+<td>fresh paraphrase</td>
+<td style="text-align: right;">83.6%</td>
+<td style="text-align: right;">93.0%</td>
+<td style="text-align: right;">93.0%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">73.4%</td>
+</tr>
+<tr>
+<td>Full supervised</td>
+<td>fresh paired</td>
+<td style="text-align: right;">91.4%</td>
+<td style="text-align: right;">97.7%</td>
+<td style="text-align: right;">97.7%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">78.1%</td>
+</tr>
+<tr>
+<td>Full supervised</td>
+<td>hard composition</td>
+<td style="text-align: right;">68.0%</td>
+<td style="text-align: right;">87.5%</td>
+<td style="text-align: right;">87.5%</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">51.6%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Main accuracy" src="../analysis/figures/main_accuracy_by_phase.png" /></p>
+<h2>Candidate Surface</h2>
+<p><img alt="Candidate surface" src="../analysis/figures/candidate_surface.png" /></p>
+<p>The surface had enough headroom to test selection. Candidate-level answer correctness was only <code>7.6%</code>, but prompt-level oracle accuracy was <code>45.5%</code>. Trace-consistent and canonical candidates were much rarer: <code>0.9%</code> and <code>0.0%</code> at candidate level. That means the intended quality order was active, but most supervision was still effectively answer-correct versus valid-wrong.</p>
+<h2>Target Quality</h2>
+<table>
+<thead>
+<tr>
+<th>Target source</th>
+<th style="text-align: right;">Targets</th>
+<th style="text-align: right;">Correct</th>
+<th style="text-align: right;">Canonical</th>
+<th style="text-align: right;">Trace-consistent</th>
+<th style="text-align: right;">Mean quality</th>
+<th style="text-align: right;">Changed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>answer_verified_targets</td>
+<td style="text-align: right;">466</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">10.5%</td>
+<td style="text-align: right;">10.5%</td>
+<td style="text-align: right;">2.21</td>
+<td style="text-align: right;">69.7%</td>
+</tr>
+<tr>
+<td>best_quality_targets</td>
+<td style="text-align: right;">466</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">10.9%</td>
+<td style="text-align: right;">10.9%</td>
+<td style="text-align: right;">2.22</td>
+<td style="text-align: right;">69.7%</td>
+</tr>
+<tr>
+<td>preference_selected_targets</td>
+<td style="text-align: right;">1024</td>
+<td style="text-align: right;">12.2%</td>
+<td style="text-align: right;">1.4%</td>
+<td style="text-align: right;">1.4%</td>
+<td style="text-align: right;">1.15</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Target quality" src="../analysis/figures/target_quality.png" /></p>
+<p>Preference-selected targets were broad but noisy: <code>1024</code> targets with only <code>12.2%</code> answer-correct precision. Answer-verified and best-quality targets were perfectly answer-correct by construction, but they covered only <code>466</code> prompts. Best-quality targets slightly increased canonical/trace-consistent selection from <code>10.5%</code> to <code>10.9%</code>, but this was too small to change deployable accuracy.</p>
+<h2>Preference Selection</h2>
+<p><img alt="Preference selector" src="../analysis/figures/preference_selector_vs_oracle.png" /></p>
+<p>The preference selector did not solve no-answer credit assignment. Its best validation checkpoint improved over the base decode on validation, but on fresh standard, fresh paraphrase, and fresh paired it selected worse than the base direct program. The model learned to stay valid, but not reliably to identify the prompt-correct final value.</p>
+<h2>Iterations</h2>
+<p><img alt="Selector iterations" src="../analysis/figures/selector_iteration_comparison.png" /></p>
+<p>The first pilot had true counterfactual groups but a weak selector. Adding candidate features, especially the prompt answer-head logprob of the candidate's final value, improved the pilot selector substantially. The scaled main run retained a validation signal but lost much of the held-out gain, which points to calibration/generalization rather than candidate availability as the remaining issue.</p>
+<h2>Training</h2>
+<p><img alt="Training" src="../analysis/figures/training_and_preference_curves.png" /></p>
+<p>The full-supervised branch separated sharply after about eight epochs and reached the high ceiling. The repair-distillation branches trained smoothly but plateaued far below that ceiling, consistent with target quality and selector precision being the limiting factors.</p>
+<h2>Interpretation</h2>
+<p>The experiment answers the core question narrowly. Counterfactual trace preference learning can find some no-answer repair signal, and it can produce small direct gains on hard held-out cells. It does not yet provide a reliable path to folding the repair oracle into the compiler. The main failure is that selected preference targets are too noisy: the selector chooses valid programs almost always, but answer-correct programs only <code>12.2%</code> of the time.</p>
+<p>The most useful next step is not simply scaling this objective. The next design should either filter preference-selected targets by confidence to raise precision, or move candidate comparison into a richer Qwen-readable representation where the model can compare prompt semantics, VM final values, and execution traces more directly.</p>
+<h2>Artifacts</h2>
+<ul>
+<li><code>experiments/qwen_counterfactual_trace_preference_distillation/runs/main_counterfactual_trace_preference_s192_c1024/metrics.csv</code></li>
+<li><code>experiments/qwen_counterfactual_trace_preference_distillation/runs/main_counterfactual_trace_preference_s192_c1024/train_log.csv</code></li>
+<li><code>experiments/qwen_counterfactual_trace_preference_distillation/runs/main_counterfactual_trace_preference_s192_c1024/target_selection.csv</code></li>
+<li><code>experiments/qwen_counterfactual_trace_preference_distillation/analysis/main_metrics.csv</code></li>
+<li><code>experiments/qwen_counterfactual_trace_preference_distillation/reports/qwen_counterfactual_trace_preference_distillation_report.md</code></li>
+<li><code>experiments/qwen_counterfactual_trace_preference_distillation/reports/qwen_counterfactual_trace_preference_distillation_report.html</code></li>
+</ul></main></body></html>

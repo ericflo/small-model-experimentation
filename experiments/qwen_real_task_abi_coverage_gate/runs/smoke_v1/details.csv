@@ -1,0 +1,49 @@
+variant,max_depth,task_id,family,split,input_kind,description,n_train,n_test,train_match,test_match,program,program_depth,train_match_count,candidate_count,failure_reason
+core,1,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,False,False,,,0,66,no_train_match
+core,1,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,66,covered
+core,1,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,66,train_match_only
+core,1,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,False,False,,,0,13,no_train_match
+core,1,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,False,False,,,0,13,no_train_match
+core,1,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,False,False,,,0,13,no_train_match
+core,1,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,False,False,,,0,29,no_train_match
+core,1,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,13,no_train_match
+core,1,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,False,False,,,0,47,no_train_match
+core,2,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,False,False,,,0,14879,no_train_match
+core,2,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,14879,covered
+core,2,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,14879,train_match_only
+core,2,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,False,False,,,0,692,no_train_match
+core,2,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,False,False,,,0,692,no_train_match
+core,2,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,False,False,,,0,692,no_train_match
+core,2,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,False,False,,,0,2500,no_train_match
+core,2,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,692,no_train_match
+core,2,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,False,False,,,0,6818,no_train_match
+office_table,1,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,True,True,email_domain(FIELD(email)),1.0,1,84,covered
+office_table,1,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,True,True,email_company(FIELD(email)),1.0,1,84,covered
+office_table,1,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,True,True,phone_e164_us(FIELD(phone)),1.0,1,84,covered
+office_table,1,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,True,True,phone_last4(FIELD(phone)),1.0,1,84,covered
+office_table,1,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,84,covered
+office_table,1,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,84,train_match_only
+office_table,1,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,True,True,date_iso(FIELD(date)),1.0,1,22,covered
+office_table,1,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,True,True,date_month_name(FIELD(date)),1.0,1,22,covered
+office_table,1,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,True,True,date_quarter(FIELD(date)),1.0,1,22,covered
+office_table,1,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,True,True,"date_diff_days(FIELD(end),FIELD(start))",1.0,1,40,covered
+office_table,1,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,22,no_train_match
+office_table,1,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,True,True,money_cents(FIELD(price)),1.0,1,75,covered
+office_table,2,contact_email_domain,contact,calibration,row,Extract the lower-case email domain.,4,2,True,True,email_domain(FIELD(email)),1.0,1,23341,covered
+office_table,2,contact_email_company,contact,heldout_same_family,row,Convert the email domain root into a company-style title.,4,2,True,True,email_company(FIELD(email)),1.0,1,23341,covered
+office_table,2,contact_phone_e164,contact,calibration,row,Normalize a US phone number to E.164.,4,2,True,True,phone_e164_us(FIELD(phone)),1.0,1,23341,covered
+office_table,2,contact_phone_last4,contact,heldout_same_family,row,Extract the last four phone digits.,4,2,True,True,phone_last4(FIELD(phone)),1.0,1,23341,covered
+office_table,2,contact_name_initials,contact,calibration,row,Return initials from the contact name.,4,2,True,True,initials(FIELD(name)),1.0,1,23341,covered
+office_table,2,contact_normalize_name,contact,heldout_same_family,row,Normalize a messy person name into title case.,4,2,True,False,title(FIELD(name)),1.0,1,23341,train_match_only
+office_table,2,date_to_iso,date,calibration,row,Normalize dates to ISO format.,4,2,True,True,date_iso(FIELD(date)),1.0,1,2047,covered
+office_table,2,date_month_name,date,heldout_same_family,row,Return the month name.,4,2,True,True,date_month_name(FIELD(date)),1.0,1,2047,covered
+office_table,2,date_quarter_label,date,heldout_same_family,row,Return a QN-YYYY quarter label.,4,2,True,True,date_quarter(FIELD(date)),1.0,1,2047,covered
+office_table,2,date_days_between,date,heldout_composition,row,Return calendar days between two date fields.,4,2,True,True,"date_diff_days(FIELD(end),FIELD(start))",1.0,1,4845,covered
+office_table,2,date_fiscal_year_july,date,stress_out_of_abi,row,Return fiscal year where July starts the next fiscal year.,4,2,False,False,,,0,2047,no_train_match
+office_table,2,money_cents,money,calibration,row,Parse a currency amount as integer cents.,4,2,True,True,money_cents(FIELD(price)),1.0,1,20752,covered

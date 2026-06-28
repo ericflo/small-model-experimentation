@@ -1,0 +1,1282 @@
+{
+  "experiment": "qwen35_4b_tool_state_policy_lora",
+  "family_breakdown": {
+    "agriculture": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "craigslist_data_wrangler": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "potters_wheel_divide": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 1,
+      "oracle_accuracy": 0.2,
+      "program": 1,
+      "program_accuracy": 0.2,
+      "program_only": 1
+    },
+    "potters_wheel_split_fold": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 3,
+      "program_accuracy": 0.6,
+      "program_only": 0
+    },
+    "synthetic_28": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 0,
+      "oracle_accuracy": 0.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_30": {
+      "direct": 5,
+      "direct_accuracy": 1.0,
+      "n": 5,
+      "oracle": 5,
+      "oracle_accuracy": 1.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_34": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 0,
+      "oracle_accuracy": 0.0,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_40": {
+      "direct": 4,
+      "direct_accuracy": 0.8,
+      "n": 5,
+      "oracle": 4,
+      "oracle_accuracy": 0.8,
+      "program": 4,
+      "program_accuracy": 0.8,
+      "program_only": 0
+    },
+    "synthetic_46": {
+      "direct": 4,
+      "direct_accuracy": 0.8,
+      "n": 5,
+      "oracle": 4,
+      "oracle_accuracy": 0.8,
+      "program": 0,
+      "program_accuracy": 0.0,
+      "program_only": 0
+    },
+    "synthetic_8": {
+      "direct": 0,
+      "direct_accuracy": 0.0,
+      "n": 5,
+      "oracle": 4,
+      "oracle_accuracy": 0.8,
+      "program": 4,
+      "program_accuracy": 0.8,
+      "program_only": 4
+    }
+  },
+  "learned_rule": {
+    "results": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 43,
+          "PROGRAM": 7
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 7,
+        "program_correct": 5,
+        "program_precision": 0.7142857142857143,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 45,
+          "PROGRAM": 5
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 5,
+        "program_correct": 5,
+        "program_precision": 1.0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 136,
+          "PROGRAM": 14
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 14,
+        "program_correct": 8,
+        "program_precision": 0.5714285714285714,
+        "split": "train"
+      }
+    },
+    "selected": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 43,
+          "PROGRAM": 7
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule",
+        "program_commits": 7,
+        "program_correct": 5,
+        "program_precision": 0.7142857142857143,
+        "split": "dev"
+      },
+      "false_action": "DIRECT",
+      "feature": "direct_program_disagree_visible_pass",
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 136,
+          "PROGRAM": 14
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "rule",
+        "program_commits": 14,
+        "program_correct": 8,
+        "program_precision": 0.5714285714285714,
+        "split": "train"
+      },
+      "true_action": "PROGRAM"
+    },
+    "top_candidates": [
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 43,
+            "PROGRAM": 7
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 7,
+          "program_correct": 5,
+          "program_precision": 0.7142857142857143,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "direct_program_disagree_visible_pass",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 136,
+            "PROGRAM": 14
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 14,
+          "program_correct": 8,
+          "program_precision": 0.5714285714285714,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 40,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 8,
+          "program_precision": 0.8,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "final_round_0",
+        "train": {
+          "accuracy": 0.58,
+          "action_counts": {
+            "DIRECT": 116,
+            "PROGRAM": 34
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 87,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 34,
+          "program_correct": 28,
+          "program_precision": 0.8235294117647058,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 40,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 8,
+          "program_precision": 0.8,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "initial_visible_pass",
+        "train": {
+          "accuracy": 0.58,
+          "action_counts": {
+            "DIRECT": 116,
+            "PROGRAM": 34
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 87,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 34,
+          "program_correct": 28,
+          "program_precision": 0.8235294117647058,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 40,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 8,
+          "program_precision": 0.8,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "round_count_1",
+        "train": {
+          "accuracy": 0.58,
+          "action_counts": {
+            "DIRECT": 116,
+            "PROGRAM": 34
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 87,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 34,
+          "program_correct": 28,
+          "program_precision": 0.8235294117647058,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 39,
+            "PROGRAM": 11
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 11,
+          "program_correct": 9,
+          "program_precision": 0.8181818181818182,
+          "split": "dev"
+        },
+        "false_action": "PROGRAM",
+        "feature": "final_round_ge_2",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 102,
+            "PROGRAM": 48
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 48,
+          "program_correct": 38,
+          "program_precision": 0.7916666666666666,
+          "split": "train"
+        },
+        "true_action": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 39,
+            "PROGRAM": 11
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 11,
+          "program_correct": 9,
+          "program_precision": 0.8181818181818182,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "final_visible_pass",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 97,
+            "PROGRAM": 53
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 53,
+          "program_correct": 41,
+          "program_precision": 0.7735849056603774,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.66,
+          "action_counts": {
+            "DIRECT": 39,
+            "PROGRAM": 11
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 5,
+          "exact": 33,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 11,
+          "program_correct": 9,
+          "program_precision": 0.8181818181818182,
+          "split": "dev"
+        },
+        "false_action": "PROGRAM",
+        "feature": "round_count_ge_3",
+        "train": {
+          "accuracy": 0.6,
+          "action_counts": {
+            "DIRECT": 102,
+            "PROGRAM": 48
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 8,
+          "exact": 90,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 48,
+          "program_correct": 38,
+          "program_precision": 0.7916666666666666,
+          "split": "train"
+        },
+        "true_action": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.56,
+          "action_counts": {
+            "DIRECT": 49,
+            "PROGRAM": 1
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 28,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 1,
+          "program_correct": 0,
+          "program_precision": 0.0,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "direct_output_empty",
+        "train": {
+          "accuracy": 0.5466666666666666,
+          "action_counts": {
+            "DIRECT": 140,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 82,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 0,
+          "program_precision": 0.0,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      },
+      {
+        "dev": {
+          "accuracy": 0.56,
+          "action_counts": {
+            "DIRECT": 49,
+            "PROGRAM": 1
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 28,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 1,
+          "program_correct": 0,
+          "program_precision": 0.0,
+          "split": "dev"
+        },
+        "false_action": "PROGRAM",
+        "feature": "direct_parse_ok",
+        "train": {
+          "accuracy": 0.5466666666666666,
+          "action_counts": {
+            "DIRECT": 140,
+            "PROGRAM": 10
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 82,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 10,
+          "program_correct": 0,
+          "program_precision": 0.0,
+          "split": "train"
+        },
+        "true_action": "DIRECT"
+      },
+      {
+        "dev": {
+          "accuracy": 0.56,
+          "action_counts": {
+            "DIRECT": 46,
+            "PROGRAM": 4
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 28,
+          "n": 50,
+          "policy": "rule",
+          "program_commits": 4,
+          "program_correct": 4,
+          "program_precision": 1.0,
+          "split": "dev"
+        },
+        "false_action": "DIRECT",
+        "feature": "direct_program_agreement",
+        "train": {
+          "accuracy": 0.5466666666666666,
+          "action_counts": {
+            "DIRECT": 108,
+            "PROGRAM": 42
+          },
+          "direct_correct_losses": 0,
+          "direct_miss_recoveries": 0,
+          "exact": 82,
+          "n": 150,
+          "policy": "rule",
+          "program_commits": 42,
+          "program_correct": 33,
+          "program_precision": 0.7857142857142857,
+          "split": "train"
+        },
+        "true_action": "PROGRAM"
+      }
+    ]
+  },
+  "lora": {
+    "adapter_dir": "/workspace/experiments/qwen35_4b_tool_state_policy_lora/reports/adapters/lora_action_policy",
+    "losses": [
+      4.884097099304199,
+      3.2448999881744385,
+      1.2595030069351196,
+      0.3768948018550873,
+      0.34039077162742615,
+      0.2742123007774353,
+      0.27679067850112915,
+      0.41025516390800476,
+      0.1674545407295227,
+      0.022967958822846413,
+      0.05288808047771454,
+      0.06455828249454498,
+      0.12586016952991486,
+      0.02844395488500595,
+      0.003359301248565316,
+      0.000775824417360127,
+      0.5048019886016846,
+      0.13405071198940277,
+      0.0016230427427217364,
+      0.0035155133809894323,
+      0.007984571158885956,
+      0.00022339087445288897,
+      0.0003955033025704324,
+      0.0005660252645611763,
+      0.0003777022648137063,
+      0.0003712188918143511,
+      0.000536910374648869,
+      0.0014026903081685305,
+      0.011244065128266811,
+      0.013256601057946682,
+      0.010940326377749443,
+      0.014664561487734318,
+      0.0060239690355956554,
+      0.00703175226226449,
+      0.013908645138144493,
+      0.017756354063749313,
+      0.005093582905828953,
+      0.042570874094963074,
+      0.0002562801819294691,
+      0.05018989369273186,
+      0.000521395355463028,
+      0.0015078415162861347,
+      0.07282114028930664,
+      0.0011278133606538177,
+      0.0001643677824176848,
+      0.000455228378996253,
+      0.00045533227967098355,
+      0.0004846327065024525,
+      0.000417463161284104,
+      0.0003881589509546757,
+      0.00023949101159814745,
+      0.0003149289987049997,
+      0.0002634804113768041,
+      0.00020219454017933458,
+      0.0001547691208543256,
+      0.00022147629351820797,
+      0.00023103301646187901,
+      0.00017278840823564678,
+      0.00015629228437319398,
+      0.0001342441828455776,
+      9.121670154854655e-05,
+      0.00011758824985008687,
+      0.0001014073786791414,
+      0.00010692101932363585,
+      0.00013141254021320492,
+      0.00010304700117558241,
+      6.970331014599651e-05,
+      6.481612217612565e-05,
+      6.943486368982121e-05,
+      5.79325933358632e-05,
+      7.810676470398903e-05,
+      7.464910595444962e-05,
+      0.0001957752974703908,
+      5.560842328122817e-05,
+      6.734943599440157e-05,
+      6.395241507561877e-05,
+      5.244959538686089e-05,
+      6.964395288378e-05,
+      6.666396075161174e-05,
+      6.317748193396255e-05
+    ],
+    "num_tokenized_examples": 122,
+    "num_train_examples": 122,
+    "run_name": "lora_action_policy",
+    "shuffle_labels": false
+  },
+  "lora_shuffled": {
+    "adapter_dir": "/workspace/experiments/qwen35_4b_tool_state_policy_lora/reports/adapters/lora_shuffled_labels",
+    "losses": [
+      5.731186866760254,
+      2.691584825515747,
+      0.6844115257263184,
+      0.49695730209350586,
+      0.3858415186405182,
+      0.3778936564922333,
+      0.3610256314277649,
+      0.34360623359680176,
+      0.4138351380825043,
+      0.11988101899623871,
+      0.4577605128288269,
+      0.20996178686618805,
+      0.5917849540710449,
+      0.3943427801132202,
+      0.37759727239608765,
+      0.29330533742904663,
+      0.6160253882408142,
+      0.7007974982261658,
+      0.14528271555900574,
+      0.3602651357650757,
+      0.2525327503681183,
+      0.3077167570590973,
+      0.556445837020874,
+      0.3578660786151886,
+      0.3104281425476074,
+      0.3424651622772217,
+      0.3745308220386505,
+      0.2776024043560028,
+      0.20951570570468903,
+      0.17687968909740448,
+      0.21098293364048004,
+      0.33004340529441833,
+      0.3702317178249359,
+      0.18757493793964386,
+      0.332881897687912,
+      0.3803727328777313,
+      0.3517077565193176,
+      0.27740514278411865,
+      0.35936838388442993,
+      0.354312002658844,
+      0.24275721609592438,
+      0.27614542841911316,
+      0.14789558947086334,
+      0.5578775405883789,
+      0.17582064867019653,
+      0.3114895820617676,
+      0.29648324847221375,
+      0.37992024421691895,
+      0.25705286860466003,
+      0.20025154948234558,
+      0.42803826928138733,
+      0.3333318829536438,
+      0.12780117988586426,
+      0.3820292055606842,
+      0.24645157158374786,
+      0.3513008952140808,
+      0.2921126186847687,
+      0.3246777057647705,
+      0.4994823932647705,
+      0.3982531428337097,
+      0.5672128200531006,
+      0.43673235177993774,
+      0.3380061089992523,
+      0.14356264472007751,
+      0.6122993230819702,
+      0.4963938891887665,
+      0.3800453841686249,
+      0.358776330947876,
+      0.33428117632865906,
+      0.2602793276309967,
+      0.3174254298210144,
+      0.2889949381351471,
+      0.4850253462791443,
+      0.23565693199634552,
+      0.37216460704803467,
+      0.7447311878204346,
+      0.3326580226421356,
+      0.3712097704410553,
+      0.06720884144306183,
+      0.12911884486675262
+    ],
+    "num_tokenized_examples": 122,
+    "num_train_examples": 122,
+    "run_name": "lora_shuffled_labels",
+    "shuffle_labels": true
+  },
+  "model_path": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "policy_results": {
+    "base_zero_shot_action": {
+      "dev": {
+        "accuracy": 0.18,
+        "action_counts": {
+          "PROGRAM": 50
+        },
+        "direct_correct_losses": 24,
+        "direct_miss_recoveries": 5,
+        "exact": 9,
+        "n": 50,
+        "policy": "base_zero_shot_action",
+        "program_commits": 50,
+        "program_correct": 9,
+        "program_precision": 0.18,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.24,
+        "action_counts": {
+          "PROGRAM": 50
+        },
+        "direct_correct_losses": 21,
+        "direct_miss_recoveries": 5,
+        "exact": 12,
+        "n": 50,
+        "policy": "base_zero_shot_action",
+        "program_commits": 50,
+        "program_correct": 12,
+        "program_precision": 0.24,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.2733333333333333,
+        "action_counts": {
+          "PROGRAM": 150
+        },
+        "direct_correct_losses": 49,
+        "direct_miss_recoveries": 8,
+        "exact": 41,
+        "n": 150,
+        "policy": "base_zero_shot_action",
+        "program_commits": 150,
+        "program_correct": 41,
+        "program_precision": 0.2733333333333333,
+        "split": "train"
+      }
+    },
+    "direct_only": {
+      "dev": {
+        "accuracy": 0.56,
+        "action_counts": {
+          "DIRECT": 50
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 28,
+        "n": 50,
+        "policy": "direct_only",
+        "program_commits": 0,
+        "program_correct": 0,
+        "program_precision": null,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.56,
+        "action_counts": {
+          "DIRECT": 50
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 28,
+        "n": 50,
+        "policy": "direct_only",
+        "program_commits": 0,
+        "program_correct": 0,
+        "program_precision": null,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.5466666666666666,
+        "action_counts": {
+          "DIRECT": 150
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 82,
+        "n": 150,
+        "policy": "direct_only",
+        "program_commits": 0,
+        "program_correct": 0,
+        "program_precision": null,
+        "split": "train"
+      }
+    },
+    "learned_rule": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 43,
+          "PROGRAM": 7
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 7,
+        "program_correct": 5,
+        "program_precision": 0.7142857142857143,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 45,
+          "PROGRAM": 5
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 5,
+        "program_correct": 5,
+        "program_precision": 1.0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 136,
+          "PROGRAM": 14
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "rule_direct_program_disagree_visible_pass",
+        "program_commits": 14,
+        "program_correct": 8,
+        "program_precision": 0.5714285714285714,
+        "split": "train"
+      }
+    },
+    "lora_action_policy": {
+      "dev": {
+        "accuracy": 0.58,
+        "action_counts": {
+          "DIRECT": 49,
+          "PROGRAM": 1
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 1,
+        "exact": 29,
+        "n": 50,
+        "policy": "lora_action_policy",
+        "program_commits": 1,
+        "program_correct": 1,
+        "program_precision": 1.0,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.64,
+        "action_counts": {
+          "DIRECT": 46,
+          "PROGRAM": 4
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 32,
+        "n": 50,
+        "policy": "lora_action_policy",
+        "program_commits": 4,
+        "program_correct": 4,
+        "program_precision": 1.0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 142,
+          "PROGRAM": 8
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "lora_action_policy",
+        "program_commits": 8,
+        "program_correct": 8,
+        "program_precision": 1.0,
+        "split": "train"
+      }
+    },
+    "lora_shuffled_labels": {
+      "dev": {
+        "accuracy": 0.56,
+        "action_counts": {
+          "DIRECT": 37,
+          "PROGRAM": 13
+        },
+        "direct_correct_losses": 4,
+        "direct_miss_recoveries": 4,
+        "exact": 28,
+        "n": 50,
+        "policy": "lora_shuffled_labels",
+        "program_commits": 13,
+        "program_correct": 8,
+        "program_precision": 0.6153846153846154,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.46,
+        "action_counts": {
+          "DIRECT": 23,
+          "PROGRAM": 27
+        },
+        "direct_correct_losses": 10,
+        "direct_miss_recoveries": 5,
+        "exact": 23,
+        "n": 50,
+        "policy": "lora_shuffled_labels",
+        "program_commits": 27,
+        "program_correct": 12,
+        "program_precision": 0.4444444444444444,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.5,
+        "action_counts": {
+          "DIRECT": 82,
+          "PROGRAM": 68
+        },
+        "direct_correct_losses": 12,
+        "direct_miss_recoveries": 5,
+        "exact": 75,
+        "n": 150,
+        "policy": "lora_shuffled_labels",
+        "program_commits": 68,
+        "program_correct": 38,
+        "program_precision": 0.5588235294117647,
+        "split": "train"
+      }
+    },
+    "oracle_action": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 45,
+          "PROGRAM": 5
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "oracle_action",
+        "program_commits": 5,
+        "program_correct": 5,
+        "program_precision": 1.0,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 45,
+          "PROGRAM": 5
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "oracle_action",
+        "program_commits": 5,
+        "program_correct": 5,
+        "program_precision": 1.0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 142,
+          "PROGRAM": 8
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "oracle_action",
+        "program_commits": 8,
+        "program_correct": 8,
+        "program_precision": 1.0,
+        "split": "train"
+      }
+    },
+    "parse_fallback_program_else_direct": {
+      "dev": {
+        "accuracy": 0.56,
+        "action_counts": {
+          "DIRECT": 49,
+          "PROGRAM": 1
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 28,
+        "n": 50,
+        "policy": "parse_fallback_program_else_direct",
+        "program_commits": 1,
+        "program_correct": 0,
+        "program_precision": 0.0,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.64,
+        "action_counts": {
+          "DIRECT": 46,
+          "PROGRAM": 4
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 4,
+        "exact": 32,
+        "n": 50,
+        "policy": "parse_fallback_program_else_direct",
+        "program_commits": 4,
+        "program_correct": 4,
+        "program_precision": 1.0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.5466666666666666,
+        "action_counts": {
+          "DIRECT": 150
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 0,
+        "exact": 82,
+        "n": 150,
+        "policy": "parse_fallback_program_else_direct",
+        "program_commits": 0,
+        "program_correct": 0,
+        "program_precision": null,
+        "split": "train"
+      }
+    },
+    "program_if_visible_and_disagrees_else_direct": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 43,
+          "PROGRAM": 7
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "program_if_visible_and_disagrees_else_direct",
+        "program_commits": 7,
+        "program_correct": 5,
+        "program_precision": 0.7142857142857143,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 45,
+          "PROGRAM": 5
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "program_if_visible_and_disagrees_else_direct",
+        "program_commits": 5,
+        "program_correct": 5,
+        "program_precision": 1.0,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 136,
+          "PROGRAM": 14
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "program_if_visible_and_disagrees_else_direct",
+        "program_commits": 14,
+        "program_correct": 8,
+        "program_precision": 0.5714285714285714,
+        "split": "train"
+      }
+    },
+    "program_if_visible_else_direct": {
+      "dev": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 39,
+          "PROGRAM": 11
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "program_if_visible_else_direct",
+        "program_commits": 11,
+        "program_correct": 9,
+        "program_precision": 0.8181818181818182,
+        "split": "dev"
+      },
+      "test": {
+        "accuracy": 0.66,
+        "action_counts": {
+          "DIRECT": 36,
+          "PROGRAM": 14
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 5,
+        "exact": 33,
+        "n": 50,
+        "policy": "program_if_visible_else_direct",
+        "program_commits": 14,
+        "program_correct": 12,
+        "program_precision": 0.8571428571428571,
+        "split": "test"
+      },
+      "train": {
+        "accuracy": 0.6,
+        "action_counts": {
+          "DIRECT": 97,
+          "PROGRAM": 53
+        },
+        "direct_correct_losses": 0,
+        "direct_miss_recoveries": 8,
+        "exact": 90,
+        "n": 150,
+        "policy": "program_if_visible_else_direct",
+        "program_commits": 53,
+        "program_correct": 41,
+        "program_precision": 0.7735849056603774,
+        "split": "train"
+      }
+    }
+  },
+  "split_seed": 6137,
+  "splits": {
+    "dev": {
+      "direct_exact": 28,
+      "families": 10,
+      "family_names": [
+        "potters_wheel_merge_split",
+        "synthetic_25",
+        "synthetic_3",
+        "synthetic_33",
+        "synthetic_36",
+        "synthetic_37",
+        "synthetic_44",
+        "synthetic_49",
+        "synthetic_51",
+        "synthetic_7"
+      ],
+      "n": 50,
+      "oracle_action_labels": {
+        "DIRECT": 45,
+        "PROGRAM": 5
+      },
+      "oracle_union": 33,
+      "program_exact": 9
+    },
+    "test": {
+      "direct_exact": 28,
+      "families": 10,
+      "family_names": [
+        "agriculture",
+        "craigslist_data_wrangler",
+        "potters_wheel_divide",
+        "potters_wheel_split_fold",
+        "synthetic_28",
+        "synthetic_30",
+        "synthetic_34",
+        "synthetic_40",
+        "synthetic_46",
+        "synthetic_8"
+      ],
+      "n": 50,
+      "oracle_action_labels": {
+        "DIRECT": 45,
+        "PROGRAM": 5
+      },
+      "oracle_union": 33,
+      "program_exact": 12
+    },
+    "train": {
+      "direct_exact": 82,
+      "families": 30,
+      "family_names": [
+        "crime_data_wrangler",
+        "potters_wheel_fold",
+        "potters_wheel_fold_2",
+        "potters_wheel_unfold",
+        "potters_wheel_unfold2",
+        "proactive_wrangling_complex",
+        "proactive_wrangling_fold",
+        "reshape_table_structure_data_wrangler",
+        "synthetic_10",
+        "synthetic_11",
+        "synthetic_12",
+        "synthetic_13",
+        "synthetic_15",
+        "synthetic_17",
+        "synthetic_18",
+        "synthetic_19",
+        "synthetic_2",
+        "synthetic_22",
+        "synthetic_24",
+        "synthetic_26",
+        "synthetic_27",
+        "synthetic_29",
+        "synthetic_4",
+        "synthetic_41",
+        "synthetic_43",
+        "synthetic_45",
+        "synthetic_47",
+        "synthetic_48",
+        "synthetic_5",
+        "synthetic_6"
+      ],
+      "n": 150,
+      "oracle_action_labels": {
+        "DIRECT": 142,
+        "PROGRAM": 8
+      },
+      "oracle_union": 90,
+      "program_exact": 41
+    }
+  }
+}

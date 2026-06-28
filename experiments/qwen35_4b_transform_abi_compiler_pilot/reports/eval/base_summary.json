@@ -1,0 +1,60 @@
+{
+  "arm": "base",
+  "by_domain": {
+    "csv_etl": {
+      "candidate_count_mean": 33.266666666666666,
+      "filtered_accuracy": 0.9333333333333333,
+      "filtered_pass": 28,
+      "n": 30,
+      "raw_accuracy": 0.9333333333333333,
+      "raw_pass": 28,
+      "target_exact": 25,
+      "target_exact_rate": 0.8333333333333334,
+      "visible_pass": 30
+    },
+    "date_id_irregular": {
+      "candidate_count_mean": 23.333333333333332,
+      "filtered_accuracy": 0.8888888888888888,
+      "filtered_pass": 16,
+      "n": 18,
+      "raw_accuracy": 0.8888888888888888,
+      "raw_pass": 16,
+      "target_exact": 0,
+      "target_exact_rate": 0.0,
+      "visible_pass": 18
+    }
+  },
+  "depth_1": {
+    "candidate_count_mean": 37.666666666666664,
+    "filtered_accuracy": 0.9259259259259259,
+    "filtered_pass": 25,
+    "n": 27,
+    "raw_accuracy": 0.9259259259259259,
+    "raw_pass": 25,
+    "target_exact": 6,
+    "target_exact_rate": 0.2222222222222222,
+    "visible_pass": 27
+  },
+  "depth_2_plus": {
+    "candidate_count_mean": 19.095238095238095,
+    "filtered_accuracy": 0.9047619047619048,
+    "filtered_pass": 19,
+    "n": 21,
+    "raw_accuracy": 0.9047619047619048,
+    "raw_pass": 19,
+    "target_exact": 19,
+    "target_exact_rate": 0.9047619047619048,
+    "visible_pass": 21
+  },
+  "overall": {
+    "candidate_count_mean": 29.541666666666668,
+    "filtered_accuracy": 0.9166666666666666,
+    "filtered_pass": 44,
+    "n": 48,
+    "raw_accuracy": 0.9166666666666666,
+    "raw_pass": 44,
+    "target_exact": 25,
+    "target_exact_rate": 0.5208333333333334,
+    "visible_pass": 48
+  }
+}

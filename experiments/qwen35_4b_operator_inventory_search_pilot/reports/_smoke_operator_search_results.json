@@ -1,0 +1,4735 @@
+{
+  "active_rows": [
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 6,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 7,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 7,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 8,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 8,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 9,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 9,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 6,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 7,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 7,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 8,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 8,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "observed_count": 9,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_passes": 9,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 6,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 7,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 8,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 9,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 6,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 7,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 8,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 9,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 6,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 7,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 8,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 9,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 6,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 7,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 8,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_passes": 9,
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 7,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 8,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 9,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 7,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 8,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "observed_count": 9,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 7,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 8,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 9,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 6,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 7,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 8,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "observed_count": 9,
+      "operator": "prod",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "prod"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 7,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 8,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 9,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 7,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 8,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "observed_count": 9,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 6,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 7,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 8,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 9,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 6,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 7,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 8,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 9,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 6,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 7,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 8,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 9,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 6,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 7,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 8,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "observed_count": 9,
+      "operator": "sum",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "sum"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 0,
+      "operator_candidates": [],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_passes": 0,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 3,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 7,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 8,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 9,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 3,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 6,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 6,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 7,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 7,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 8,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 8,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "observed_count": 9,
+      "operator": "min",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "min"
+      ],
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_passes": 9,
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 2,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 2,
+      "operator_candidates": [
+        "first",
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 0,
+      "candidate_count": 2,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 2,
+      "operator_candidates": [
+        "first",
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 2,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 2,
+      "operator_candidates": [
+        "first",
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 0,
+      "candidate_count": 2,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 6,
+      "operator": "last",
+      "operator_candidate_count": 2,
+      "operator_candidates": [
+        "first",
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 0,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 6,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 1,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 7,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 1,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 7,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 2,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 8,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 2,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 8,
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "budget": 3,
+      "candidate_count": 1,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "observed_count": 9,
+      "operator": "last",
+      "operator_candidate_count": 1,
+      "operator_candidates": [
+        "last"
+      ],
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "queries_used": 3,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_passes": 9,
+      "template": "threshold_gate"
+    }
+  ],
+  "active_summary_by_status": [
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.4,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 1.0,
+      "budget": 1,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 2.0,
+      "budget": 2,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 3.0,
+      "budget": 3,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.4,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 1.0,
+      "budget": 1,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 2.0,
+      "budget": 2,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 3.0,
+      "budget": 3,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.333,
+      "avg_operator_candidate_count": 1.333,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 1.0,
+      "budget": 1,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 2.0,
+      "budget": 2,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 3.0,
+      "budget": 3,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.333,
+      "avg_operator_candidate_count": 1.333,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 1.0,
+      "budget": 1,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 2.0,
+      "budget": 2,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 3.0,
+      "budget": 3,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 1,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 2,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 3,
+      "operator_status": "held_out",
+      "policy": "active_max_split",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 1,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 2,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 0.0,
+      "avg_operator_candidate_count": 0.0,
+      "avg_queries_used": 0.0,
+      "budget": 3,
+      "operator_status": "held_out",
+      "policy": "oracle_elimination",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.333,
+      "avg_operator_candidate_count": 1.333,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 1.0,
+      "budget": 1,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 2.0,
+      "budget": 2,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 3.0,
+      "budget": 3,
+      "operator_status": "in_bank",
+      "policy": "active_max_split",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.333,
+      "avg_operator_candidate_count": 1.333,
+      "avg_queries_used": 0.0,
+      "budget": 0,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 1.0,
+      "budget": 1,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 2.0,
+      "budget": 2,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_candidate_count": 1.0,
+      "avg_operator_candidate_count": 1.0,
+      "avg_queries_used": 3.0,
+      "budget": 3,
+      "operator_status": "in_bank",
+      "policy": "oracle_elimination",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    }
+  ],
+  "arms": {
+    "arm0_full_inventory": [
+      "sum",
+      "first",
+      "last",
+      "max",
+      "min",
+      "prod",
+      "gcd"
+    ],
+    "arm1_closed_vocab": [
+      "sum",
+      "first",
+      "last"
+    ]
+  },
+  "budgets": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "candidate_rows": [
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": false,
+      "candidate_oracle_hidden_passes": 0,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "operator": "min",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_all": false,
+      "selected_visible_passes": 0,
+      "target_in_raw_candidates": false,
+      "target_in_visible_candidates": false,
+      "target_program": "(format \"A{}\" (add (min xs) offset))",
+      "template": "offset_format",
+      "visible_consistent_count": 0,
+      "visible_consistent_operator_count": 0,
+      "visible_consistent_operators": []
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "min_offset_format",
+      "id": "held_out_min_offset_format_0001",
+      "operator": "min",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"A{}\" (add (min xs) offset))",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(format \"A{}\" (add (min xs) offset))",
+      "template": "offset_format",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "min"
+      ]
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "operator": "last",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "in_bank",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(format \"A{}\" (add (last xs) offset))",
+      "template": "offset_format",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "last"
+      ]
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "last_offset_format",
+      "id": "in_bank_last_offset_format_0001",
+      "operator": "last",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "in_bank",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(format \"A{}\" (add (last xs) offset))",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(format \"A{}\" (add (last xs) offset))",
+      "template": "offset_format",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "last"
+      ]
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": false,
+      "candidate_oracle_hidden_passes": 0,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "operator": "prod",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_all": false,
+      "selected_visible_passes": 0,
+      "target_in_raw_candidates": false,
+      "target_in_visible_candidates": false,
+      "target_program": "(format \"M{}\" (mod (prod xs) m))",
+      "template": "mod_format",
+      "visible_consistent_count": 0,
+      "visible_consistent_operator_count": 0,
+      "visible_consistent_operators": []
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "prod_mod_format",
+      "id": "held_out_prod_mod_format_0001",
+      "operator": "prod",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(format \"M{}\" (mod (prod xs) m))",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(format \"M{}\" (mod (prod xs) m))",
+      "template": "mod_format",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "prod"
+      ]
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": false,
+      "candidate_oracle_hidden_passes": 0,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "operator": "prod",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_all": false,
+      "selected_visible_passes": 0,
+      "target_in_raw_candidates": false,
+      "target_in_visible_candidates": false,
+      "target_program": "(if (gt (prod xs) threshold) hi lo)",
+      "template": "threshold_gate",
+      "visible_consistent_count": 0,
+      "visible_consistent_operator_count": 0,
+      "visible_consistent_operators": []
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "prod_threshold_gate",
+      "id": "held_out_prod_threshold_gate_0000",
+      "operator": "prod",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "prod",
+      "selected_program": "(if (gt (prod xs) threshold) hi lo)",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(if (gt (prod xs) threshold) hi lo)",
+      "template": "threshold_gate",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "prod"
+      ]
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": false,
+      "candidate_oracle_hidden_passes": 0,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "operator": "min",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_all": false,
+      "selected_visible_passes": 0,
+      "target_in_raw_candidates": false,
+      "target_in_visible_candidates": false,
+      "target_program": "(if (gt (min xs) threshold) hi lo)",
+      "template": "threshold_gate",
+      "visible_consistent_count": 0,
+      "visible_consistent_operator_count": 0,
+      "visible_consistent_operators": []
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "min_threshold_gate",
+      "id": "held_out_min_threshold_gate_0001",
+      "operator": "min",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(if (gt (min xs) threshold) hi lo)",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(if (gt (min xs) threshold) hi lo)",
+      "template": "threshold_gate",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "min"
+      ]
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "operator": "sum",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "in_bank",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(format \"M{}\" (mod (sum xs) m))",
+      "template": "mod_format",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "sum"
+      ]
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "sum_mod_format",
+      "id": "in_bank_sum_mod_format_0000",
+      "operator": "sum",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "in_bank",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "sum",
+      "selected_program": "(format \"M{}\" (mod (sum xs) m))",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(format \"M{}\" (mod (sum xs) m))",
+      "template": "mod_format",
+      "visible_consistent_count": 1,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "sum"
+      ]
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": false,
+      "candidate_oracle_hidden_passes": 0,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "operator": "min",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": false,
+      "selected_hidden_passes": 0,
+      "selected_operator": null,
+      "selected_program": "",
+      "selected_visible_all": false,
+      "selected_visible_passes": 0,
+      "target_in_raw_candidates": false,
+      "target_in_visible_candidates": false,
+      "target_program": "(format \"M{}\" (mod (min xs) m))",
+      "template": "mod_format",
+      "visible_consistent_count": 0,
+      "visible_consistent_operator_count": 0,
+      "visible_consistent_operators": []
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "min_mod_format",
+      "id": "held_out_min_mod_format_0001",
+      "operator": "min",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "held_out",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "min",
+      "selected_program": "(format \"M{}\" (mod (min xs) m))",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(format \"M{}\" (mod (min xs) m))",
+      "template": "mod_format",
+      "visible_consistent_count": 3,
+      "visible_consistent_operator_count": 1,
+      "visible_consistent_operators": [
+        "min"
+      ]
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "operator": "last",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "in_bank",
+      "raw_candidate_count": 24,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(if (gt (last xs) threshold) hi lo)",
+      "template": "threshold_gate",
+      "visible_consistent_count": 2,
+      "visible_consistent_operator_count": 2,
+      "visible_consistent_operators": [
+        "first",
+        "last"
+      ]
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "candidate_oracle_hidden_all": true,
+      "candidate_oracle_hidden_passes": 18,
+      "composition_depth": 2,
+      "family": "last_threshold_gate",
+      "id": "in_bank_last_threshold_gate_0001",
+      "operator": "last",
+      "operator_inventory": [
+        "sum",
+        "first",
+        "last",
+        "max",
+        "min",
+        "prod",
+        "gcd"
+      ],
+      "operator_signature": "list[int] -> int",
+      "operator_status": "in_bank",
+      "raw_candidate_count": 56,
+      "selected_hidden_all": true,
+      "selected_hidden_passes": 18,
+      "selected_operator": "last",
+      "selected_program": "(if (gt (last xs) threshold) hi lo)",
+      "selected_visible_all": true,
+      "selected_visible_passes": 6,
+      "target_in_raw_candidates": true,
+      "target_in_visible_candidates": true,
+      "target_program": "(if (gt (last xs) threshold) hi lo)",
+      "template": "threshold_gate",
+      "visible_consistent_count": 2,
+      "visible_consistent_operator_count": 2,
+      "visible_consistent_operators": [
+        "first",
+        "last"
+      ]
+    }
+  ],
+  "data": "data/operator_inventory_eval.jsonl",
+  "max_candidates": 10000,
+  "records": 8,
+  "summary_by_operator": [
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.667,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "operator": "min",
+      "operator_status": "held_out",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "operator": "prod",
+      "operator_status": "held_out",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.5,
+      "avg_visible_consistent_operator_count": 1.5,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "operator": "last",
+      "operator_status": "in_bank",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator": "sum",
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 0.0,
+      "avg_visible_consistent_operator_count": 0.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "operator": "min",
+      "operator_status": "held_out",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "selected_visible_all": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "target_in_raw_candidates": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "target_in_visible_candidates": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 0.0,
+      "avg_visible_consistent_operator_count": 0.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "operator": "prod",
+      "operator_status": "held_out",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "selected_visible_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "target_in_raw_candidates": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "target_in_visible_candidates": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 1.5,
+      "avg_visible_consistent_operator_count": 1.5,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "operator": "last",
+      "operator_status": "in_bank",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator": "sum",
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      }
+    }
+  ],
+  "summary_by_status": [
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.4,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      },
+      "operator_status": "held_out",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 5,
+        "successes": 5
+      }
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.333,
+      "avg_visible_consistent_operator_count": 1.333,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "operator_status": "in_bank",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 0.0,
+      "avg_visible_consistent_operator_count": 0.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "operator_status": "held_out",
+      "records": 5,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "selected_visible_all": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "target_in_raw_candidates": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      },
+      "target_in_visible_candidates": {
+        "rate": 0.0,
+        "records": 5,
+        "successes": 0
+      }
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 1.333,
+      "avg_visible_consistent_operator_count": 1.333,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "operator_status": "in_bank",
+      "records": 3,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 3,
+        "successes": 3
+      }
+    }
+  ],
+  "summary_by_template": [
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 2.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "operator_status": "held_out",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator_status": "held_out",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "operator_status": "held_out",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 2,
+        "successes": 2
+      },
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm0_full_inventory",
+      "avg_raw_candidate_count": 56.0,
+      "avg_visible_consistent_count": 2.0,
+      "avg_visible_consistent_operator_count": 2.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 0.0,
+      "avg_visible_consistent_operator_count": 0.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "operator_status": "held_out",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "selected_visible_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "target_in_raw_candidates": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "target_in_visible_candidates": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 0.0,
+      "avg_visible_consistent_operator_count": 0.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "operator_status": "held_out",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "selected_visible_all": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "target_in_raw_candidates": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "target_in_visible_candidates": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 0.0,
+      "avg_visible_consistent_operator_count": 0.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "operator_status": "held_out",
+      "records": 2,
+      "selected_hidden_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "selected_visible_all": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "target_in_raw_candidates": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "target_in_visible_candidates": {
+        "rate": 0.0,
+        "records": 2,
+        "successes": 0
+      },
+      "template": "threshold_gate"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "template": "mod_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 1.0,
+      "avg_visible_consistent_operator_count": 1.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "template": "offset_format"
+    },
+    {
+      "arm": "arm1_closed_vocab",
+      "avg_raw_candidate_count": 24.0,
+      "avg_visible_consistent_count": 2.0,
+      "avg_visible_consistent_operator_count": 2.0,
+      "candidate_oracle_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "operator_status": "in_bank",
+      "records": 1,
+      "selected_hidden_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "selected_visible_all": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_raw_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "target_in_visible_candidates": {
+        "rate": 1.0,
+        "records": 1,
+        "successes": 1
+      },
+      "template": "threshold_gate"
+    }
+  ]
+}

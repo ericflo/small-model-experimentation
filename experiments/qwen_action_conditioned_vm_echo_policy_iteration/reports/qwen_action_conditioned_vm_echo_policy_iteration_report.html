@@ -1,0 +1,250 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Action-Conditioned VM-ECHO Policy Iteration</title><style>
+body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; color: #172033; background: #f6f7fb; }
+main { max-width: 1120px; margin: 0 auto; padding: 40px 24px 64px; background: white; min-height: 100vh; }
+h1 { font-size: 34px; line-height: 1.1; margin-bottom: 12px; color: #111827; }
+h2 { color: #111827; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 24px; }
+p, li { line-height: 1.55; }
+code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 14px; }
+th, td { border: 1px solid #d9e0ea; padding: 8px 10px; text-align: left; }
+th { background: #edf2f7; }
+img { max-width: 100%; display: block; margin: 18px 0 30px; border: 1px solid #d9e0ea; }
+.note { color: #4b5563; font-size: 14px; }
+</style></head><body><main><p class='note'>Standalone report generated from <code>main_action_vm_echo_s192_thr070</code>.</p><h1>Action-Conditioned VM-ECHO Policy Iteration</h1>
+<h2>Abstract</h2>
+<p>This experiment tests a candidate-conditioned route from program search to better direct program emission. A frozen-Qwen compiler first proposes typed bytecode candidates. A consequence model then receives the prompt representation and a candidate program, and learns from VM execution labels: validity, final value, stack trace, and whether that candidate solves the prompt. The learned selector is then used to choose policy-distillation targets for the compiler.</p>
+<p>The main result is mixed. The learned consequence selector did not close the oracle gap in the main run: on validation candidates it moved from 10.2% base top-1 accuracy to 10.9%, with an oracle of 36.7%. However, filtered learned-policy distillation still improved the compiler on several generalization splits. Fresh-paired direct accuracy increased from 18.0% to 22.7%, and hard-composition answer-search accuracy increased from 35.2% to 52.3%. The fully supervised ceiling remained much higher: fresh-paired direct accuracy reached 82.0%.</p>
+<h2>Setup</h2>
+<ul>
+<li>Base model: <code>Qwen/Qwen3-4B</code>, used only as a frozen hidden-state feature extractor.</li>
+<li>Seed examples: <code>192</code>.</li>
+<li>Candidate-training prompts: <code>1024</code>.</li>
+<li>Full-supervised examples: <code>1024</code>.</li>
+<li>Fresh split size: <code>128</code>.</li>
+<li>Candidate search: top-k <code>3</code>, second-order argument pairs <code>8</code>, max candidates <code>256</code>.</li>
+<li>Learned-target threshold: <code>0.7</code>.</li>
+<li>Checkpoints: <code>large_artifacts/qwen_action_conditioned_vm_echo_policy_iteration/checkpoints/main_action_vm_echo_s192_thr070/</code>.</li>
+</ul>
+<h2>Main Results</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Split</th>
+<th>Direct</th>
+<th>Answer search</th>
+<th>Oracle</th>
+<th>Learned selector</th>
+<th>Program exact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seed</td>
+<td>fresh_paired</td>
+<td>18.0%</td>
+<td>51.6%</td>
+<td>51.6%</td>
+<td></td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>fresh_paraphrase</td>
+<td>15.6%</td>
+<td>35.2%</td>
+<td>35.2%</td>
+<td></td>
+<td>3.1%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>fresh_standard</td>
+<td>14.8%</td>
+<td>44.5%</td>
+<td>44.5%</td>
+<td></td>
+<td>2.3%</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>hard_composition</td>
+<td>14.8%</td>
+<td>35.2%</td>
+<td>35.2%</td>
+<td></td>
+<td>1.6%</td>
+</tr>
+<tr>
+<td>Learned distill</td>
+<td>fresh_paired</td>
+<td>22.7%</td>
+<td>64.1%</td>
+<td>64.1%</td>
+<td>17.2%</td>
+<td>3.1%</td>
+</tr>
+<tr>
+<td>Learned distill</td>
+<td>fresh_paraphrase</td>
+<td>14.8%</td>
+<td>43.0%</td>
+<td>43.0%</td>
+<td>7.0%</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>Learned distill</td>
+<td>fresh_standard</td>
+<td>19.5%</td>
+<td>52.3%</td>
+<td>52.3%</td>
+<td>17.2%</td>
+<td>3.1%</td>
+</tr>
+<tr>
+<td>Learned distill</td>
+<td>hard_composition</td>
+<td>15.6%</td>
+<td>52.3%</td>
+<td>52.3%</td>
+<td>13.3%</td>
+<td>1.6%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>fresh_paired</td>
+<td>16.4%</td>
+<td>57.0%</td>
+<td>57.0%</td>
+<td>18.8%</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>fresh_paraphrase</td>
+<td>14.8%</td>
+<td>48.4%</td>
+<td>48.4%</td>
+<td>13.3%</td>
+<td>2.3%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>fresh_standard</td>
+<td>18.0%</td>
+<td>57.0%</td>
+<td>57.0%</td>
+<td>18.8%</td>
+<td>4.7%</td>
+</tr>
+<tr>
+<td>Answer distill</td>
+<td>hard_composition</td>
+<td>12.5%</td>
+<td>48.4%</td>
+<td>48.4%</td>
+<td>14.1%</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>fresh_paired</td>
+<td>82.0%</td>
+<td>94.5%</td>
+<td>94.5%</td>
+<td>32.0%</td>
+<td>70.3%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>fresh_paraphrase</td>
+<td>72.7%</td>
+<td>90.6%</td>
+<td>90.6%</td>
+<td>30.5%</td>
+<td>57.0%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>fresh_standard</td>
+<td>69.5%</td>
+<td>85.9%</td>
+<td>85.9%</td>
+<td>28.1%</td>
+<td>46.9%</td>
+</tr>
+<tr>
+<td>Full sup.</td>
+<td>hard_composition</td>
+<td>51.6%</td>
+<td>79.7%</td>
+<td>79.7%</td>
+<td>28.9%</td>
+<td>28.9%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Main accuracy" src="../analysis/figures/main_accuracy_by_phase.png" /></p>
+<h2>Learned Candidate Selection</h2>
+<p>The action-conditioned selector learned a real but weak signal. It selected mostly valid programs, but it did not reliably select answer-correct programs at main scale.</p>
+<p>Training candidate set:</p>
+<ul>
+<li>Groups: <code>1024</code> prompts.</li>
+<li>Candidates: <code>246910</code> programs.</li>
+<li>Positive candidate rate: 9.3%.</li>
+<li>Prompts with at least one positive candidate: 40.7%.</li>
+</ul>
+<p><img alt="Learned rerank gap" src="../analysis/figures/learned_rerank_gap.png" /></p>
+<h2>Policy-Distillation Targets</h2>
+<table>
+<thead>
+<tr>
+<th>phase</th>
+<th>targets</th>
+<th>oracle_found_rate</th>
+<th>selected_correct_rate</th>
+<th>selected_valid_rate</th>
+<th>changed_rate</th>
+<th>mean_selected_score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>learned_policy</td>
+<td>470</td>
+<td>40.7%</td>
+<td>28.9%</td>
+<td>99.6%</td>
+<td>100.0%</td>
+<td>0.884</td>
+</tr>
+<tr>
+<td>answer_verified</td>
+<td>417</td>
+<td>40.7%</td>
+<td>100.0%</td>
+<td>100.0%</td>
+<td>62.6%</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The learned selector chose more targets than answer verification, but with much lower known precision. The useful signal is that even imperfect learned targets improved some direct and search metrics, suggesting that consequence-conditioned filtering is not useless. The limiting factor is selector precision.</p>
+<p><img alt="Target selection" src="../analysis/figures/target_selection.png" /></p>
+<h2>Training Dynamics</h2>
+<p><img alt="Consequence training" src="../analysis/figures/consequence_training.png" /></p>
+<h2>Threshold Pilot</h2>
+<p>A small threshold sweep was used to avoid using every learned-selected target. The higher threshold traded volume for precision and produced better pilot direct accuracy.</p>
+<p><img alt="Pilot threshold comparison" src="../analysis/figures/pilot_threshold_comparison.png" /></p>
+<h2>Interpretation</h2>
+<p>The candidate-conditioned objective is closer to the desired mechanism than target-trace-only supervision: it asks what a proposed program will do, not only what the correct program should look like. But this implementation still underfits the hardest part: comparing candidate consequences to the prompt-implied answer. The next improvement should strengthen the selector, not the compiler head. Good next changes are pairwise preference training over candidates from the same prompt, harder negative mining, and using the compiler's answer representation directly inside the consequence model.</p>
+<h2>Artifacts</h2>
+<ul>
+<li><code>experiments/qwen_action_conditioned_vm_echo_policy_iteration/runs/main_action_vm_echo_s192_thr070/metrics.csv</code></li>
+<li><code>experiments/qwen_action_conditioned_vm_echo_policy_iteration/runs/main_action_vm_echo_s192_thr070/target_selection.csv</code></li>
+<li><code>experiments/qwen_action_conditioned_vm_echo_policy_iteration/runs/main_action_vm_echo_s192_thr070/consequence_train_log.csv</code></li>
+<li><code>experiments/qwen_action_conditioned_vm_echo_policy_iteration/analysis/main_metrics.csv</code></li>
+<li><code>experiments/qwen_action_conditioned_vm_echo_policy_iteration/reports/qwen_action_conditioned_vm_echo_policy_iteration_report.md</code></li>
+<li><code>experiments/qwen_action_conditioned_vm_echo_policy_iteration/reports/qwen_action_conditioned_vm_echo_policy_iteration_report.html</code></li>
+</ul></main></body></html>

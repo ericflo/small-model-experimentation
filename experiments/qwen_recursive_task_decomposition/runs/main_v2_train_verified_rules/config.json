@@ -1,0 +1,20 @@
+{
+  "started_utc": "2026-06-27T05:37:29.266844+00:00",
+  "suite": "main_v2_train_verified_rules",
+  "task_limit": 0,
+  "train_n": 4,
+  "heldout_cap": 50,
+  "max_candidates": 12000,
+  "recursive_depth": 2,
+  "child_limit": 5,
+  "run_qwen": true,
+  "qwen_task_limit": 30,
+  "qwen_heldout_cap": 6,
+  "qwen_min_heldout": 3,
+  "sample_seed": 20260627,
+  "rule_max_new_tokens": 150,
+  "answer_max_new_tokens": 56,
+  "rule_styles": "decompose,terse,conditional",
+  "train_verify_rules": true,
+  "reuse_static_from": "main_v1"
+}

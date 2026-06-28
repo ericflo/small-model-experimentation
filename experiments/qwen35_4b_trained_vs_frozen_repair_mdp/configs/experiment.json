@@ -1,0 +1,83 @@
+{
+  "experiment": "qwen35_4b_trained_vs_frozen_repair_mdp",
+  "date_utc": "2026-06-25",
+  "base_model": "/workspace/.cache/huggingface/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "large_artifacts_dir": "/workspace/large_artifacts/qwen35_4b_trained_vs_frozen_repair_mdp",
+  "objective": "Test whether trained repair expands held-out coding coverage beyond frozen self-repair at matched forward-token budget.",
+  "headline_metric": "zero_to_one_hidden_coverage_lift_on_heldout_tasks_with_no_direct_hidden_correct_candidate",
+  "task_splits": {
+    "train": {
+      "dataset": "google-research-datasets/mbpp",
+      "split": "train",
+      "smoke_n": 12,
+      "main_n": 100
+    },
+    "heldout": {
+      "dataset": "google-research-datasets/mbpp",
+      "split": "test",
+      "smoke_n": 24,
+      "main_n": 150
+    },
+    "transfer": {
+      "dataset": "openai/openai_humaneval",
+      "split": "test",
+      "smoke_n": 20,
+      "main_n": 80
+    }
+  },
+  "direct_sampling": {
+    "samples_per_task_smoke": 3,
+    "samples_per_task_main": 4,
+    "temperatures": "0.2,0.7,1.0",
+    "top_p": 0.95,
+    "max_new_tokens": 220,
+    "generation_batch_size": 4,
+    "visible_tests_mbpp": 1,
+    "visible_tests_humaneval": 3,
+    "timeout_seconds": 5.0
+  },
+  "repair_rollout": {
+    "max_rounds_smoke": 1,
+    "max_rounds_main": 1,
+    "max_sources_per_record": 2,
+    "repairs_per_source": 1,
+    "temperature": 0.4,
+    "top_p": 0.95,
+    "max_new_tokens": 260,
+    "repair_visible_passers": false
+  },
+  "training": {
+    "repair_sft_steps_smoke": 30,
+    "repair_sft_steps_main": 100,
+    "repair_dpo_steps_main": 80,
+    "batch_size": 1,
+    "grad_accum": 4,
+    "sft_learning_rate": 0.0001,
+    "dpo_learning_rate": 0.00005,
+    "max_length": 1536,
+    "max_examples_per_task": 2
+  },
+  "arms": [
+    "base_sample_only",
+    "frozen_repair",
+    "repair_sft",
+    "repair_sft_dpo",
+    "sample_more_token_matched",
+    "shuffled_trace_control"
+  ],
+  "pre_registered_gates": {
+    "smoke_generation": "Initial direct sampling and frozen repair must complete safely with nonzero repair successes or enough train repair examples to justify SFT.",
+    "sft_train": "Proceed to SFT only if verified repair rollouts produce at least 12 successful repair examples in smoke or enough examples in main train.",
+    "dpo_train": "Proceed to DPO only if same-state preference pairs exist and SFT repair beats or matches frozen repair on smoke without increasing false-repair rate.",
+    "positive_result": "Trained repair must beat frozen repair and sample_more_token_matched on held-out zero-to-one hidden lift at matched estimated forward-token budget."
+  },
+  "required_diagnostics": [
+    "zero_to_one_hidden_lift",
+    "trained_margin_over_frozen_repair",
+    "trained_margin_over_sample_more_token_matched",
+    "visible_pass_hidden_fail_false_repair_rate",
+    "distinct_behavior_signature_rate_by_round",
+    "estimated_forward_tokens",
+    "commit_selection_capture"
+  ]
+}

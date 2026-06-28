@@ -1,0 +1,41 @@
+{
+  "arm_name": "direct_sample_more_k12",
+  "experiment": "qwen35_4b_independent_retrieval_consensus",
+  "max_new_tokens": 220,
+  "path": "data/direct_sample_more_k12_records.jsonl",
+  "records": 24,
+  "round_name": "direct_sample_more",
+  "samples_per_task": 12,
+  "seed": 2026062627,
+  "summary": {
+    "candidate_count_mean": 11.5,
+    "coverage": 0.2916666666666667,
+    "distinct_behavior_rate_mean": 0.7263888888888889,
+    "distinct_functional_rate_mean": 0.2635416666666667,
+    "false_repair_count": 0,
+    "false_repair_rate": 0.0,
+    "forward_tokens": 72774,
+    "hidden_pass_candidates_mean": 0.5,
+    "parse_success_mean": 10.416666666666666,
+    "pass1_proxy": 0.041666666666666664,
+    "records": 24,
+    "visible_candidates_mean": 3.3333333333333335,
+    "visible_coverage": 0.2916666666666667,
+    "visible_repair_pass_count": 0,
+    "zero_base_records": 0,
+    "zero_to_one": 0,
+    "zero_to_one_rate": 0.0
+  },
+  "temperatures": [
+    0.7,
+    1.0,
+    1.2
+  ],
+  "token_usage": {
+    "calls": 288,
+    "completion_tokens": 38648,
+    "forward_tokens": 74780,
+    "prompt_tokens": 36132
+  },
+  "top_p": 0.98
+}

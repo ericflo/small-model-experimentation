@@ -1,0 +1,512 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:01,  6.96it/s]Loading weights:   5%|▌         | 23/426 [00:00<00:03, 111.88it/s]Loading weights:  15%|█▌        | 65/426 [00:00<00:01, 237.16it/s]Loading weights:  25%|██▍       | 106/426 [00:00<00:01, 296.34it/s]Loading weights:  36%|███▌      | 152/426 [00:00<00:00, 350.08it/s]Loading weights:  47%|████▋     | 201/426 [00:00<00:00, 388.64it/s]Loading weights:  59%|█████▉    | 251/426 [00:00<00:00, 421.96it/s]Loading weights:  69%|██████▉   | 294/426 [00:00<00:00, 406.12it/s]Loading weights:  80%|███████▉  | 340/426 [00:00<00:00, 421.64it/s]Loading weights:  90%|████████▉ | 383/426 [00:01<00:00, 417.74it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 419.26it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 360.07it/s]
+trainable params: 21,233,664 || all params: 4,226,984,960 || trainable%: 0.5023
+hard_negative_dpo:   0%|          | 0/60 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/utils/checkpoint.py:85: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+hard_negative_dpo:   2%|▏         | 1/60 [00:12<12:31, 12.74s/it]hard_negative_dpo:   3%|▎         | 2/60 [00:24<11:55, 12.34s/it]hard_negative_dpo:   5%|▌         | 3/60 [00:36<11:34, 12.19s/it]hard_negative_dpo:   7%|▋         | 4/60 [00:48<11:09, 11.95s/it]hard_negative_dpo:   8%|▊         | 5/60 [01:00<10:54, 11.90s/it]hard_negative_dpo:  10%|█         | 6/60 [01:11<10:34, 11.75s/it]hard_negative_dpo:  12%|█▏        | 7/60 [01:23<10:21, 11.72s/it]hard_negative_dpo:  13%|█▎        | 8/60 [01:34<10:08, 11.70s/it]hard_negative_dpo:  15%|█▌        | 9/60 [01:46<10:00, 11.78s/it]hard_negative_dpo:  17%|█▋        | 10/60 [01:58<09:45, 11.71s/it]                                                                  {"loss": 0.6977, "pi_margin": 0.0073, "ref_margin": 0.0988, "reward_margin": -0.0915, "chosen_win_rate": 1.0, "step": 10}
+hard_negative_dpo:  17%|█▋        | 10/60 [01:58<09:45, 11.71s/it]hard_negative_dpo:  18%|█▊        | 11/60 [02:10<09:37, 11.78s/it]hard_negative_dpo:  20%|██        | 12/60 [02:22<09:25, 11.79s/it]hard_negative_dpo:  22%|██▏       | 13/60 [02:34<09:14, 11.80s/it]hard_negative_dpo:  23%|██▎       | 14/60 [02:45<08:59, 11.73s/it]hard_negative_dpo:  25%|██▌       | 15/60 [02:57<08:53, 11.86s/it]hard_negative_dpo:  27%|██▋       | 16/60 [03:09<08:41, 11.85s/it]hard_negative_dpo:  28%|██▊       | 17/60 [03:21<08:23, 11.72s/it]hard_negative_dpo:  30%|███       | 18/60 [03:32<08:12, 11.74s/it]hard_negative_dpo:  32%|███▏      | 19/60 [03:44<07:57, 11.64s/it]hard_negative_dpo:  33%|███▎      | 20/60 [03:55<07:43, 11.60s/it]                                                                  {"loss": 0.5531, "pi_margin": 3.0655, "ref_margin": 0.036, "reward_margin": 3.0295, "chosen_win_rate": 1.0, "step": 20}
+hard_negative_dpo:  33%|███▎      | 20/60 [03:55<07:43, 11.60s/it]hard_negative_dpo:  35%|███▌      | 21/60 [04:07<07:38, 11.76s/it]hard_negative_dpo:  37%|███▋      | 22/60 [04:19<07:30, 11.84s/it]hard_negative_dpo:  38%|███▊      | 23/60 [04:31<07:18, 11.86s/it]hard_negative_dpo:  40%|████      | 24/60 [04:43<07:04, 11.80s/it]hard_negative_dpo:  42%|████▏     | 25/60 [04:55<06:57, 11.93s/it]hard_negative_dpo:  43%|████▎     | 26/60 [05:07<06:47, 11.97s/it]hard_negative_dpo:  45%|████▌     | 27/60 [05:19<06:34, 11.96s/it]hard_negative_dpo:  47%|████▋     | 28/60 [05:31<06:21, 11.94s/it]hard_negative_dpo:  48%|████▊     | 29/60 [05:43<06:08, 11.87s/it]hard_negative_dpo:  50%|█████     | 30/60 [05:55<05:56, 11.89s/it]                                                                  {"loss": 0.4051, "pi_margin": 6.9381, "ref_margin": -0.0033, "reward_margin": 6.9414, "chosen_win_rate": 1.0, "step": 30}
+hard_negative_dpo:  50%|█████     | 30/60 [05:55<05:56, 11.89s/it]hard_negative_dpo:  52%|█████▏    | 31/60 [06:07<05:44, 11.88s/it]hard_negative_dpo:  53%|█████▎    | 32/60 [06:18<05:32, 11.87s/it]hard_negative_dpo:  55%|█████▌    | 33/60 [06:30<05:19, 11.85s/it]hard_negative_dpo:  57%|█████▋    | 34/60 [06:42<05:08, 11.85s/it]hard_negative_dpo:  58%|█████▊    | 35/60 [06:54<04:54, 11.78s/it]hard_negative_dpo:  60%|██████    | 36/60 [07:06<04:43, 11.81s/it]hard_negative_dpo:  62%|██████▏   | 37/60 [07:17<04:31, 11.82s/it]hard_negative_dpo:  63%|██████▎   | 38/60 [07:29<04:18, 11.75s/it]hard_negative_dpo:  65%|██████▌   | 39/60 [07:41<04:07, 11.77s/it]hard_negative_dpo:  67%|██████▋   | 40/60 [07:53<03:57, 11.89s/it]                                                                  {"loss": 0.0973, "pi_margin": 22.9989, "ref_margin": 0.1931, "reward_margin": 22.8058, "chosen_win_rate": 1.0, "step": 40}
+hard_negative_dpo:  67%|██████▋   | 40/60 [07:53<03:57, 11.89s/it]hard_negative_dpo:  68%|██████▊   | 41/60 [08:05<03:45, 11.89s/it]hard_negative_dpo:  70%|███████   | 42/60 [08:17<03:35, 11.95s/it]hard_negative_dpo:  72%|███████▏  | 43/60 [08:29<03:22, 11.93s/it]hard_negative_dpo:  73%|███████▎  | 44/60 [08:41<03:11, 11.99s/it]hard_negative_dpo:  75%|███████▌  | 45/60 [08:53<03:00, 12.02s/it]hard_negative_dpo:  77%|███████▋  | 46/60 [09:05<02:48, 12.04s/it]hard_negative_dpo:  78%|███████▊  | 47/60 [09:17<02:34, 11.91s/it]hard_negative_dpo:  80%|████████  | 48/60 [09:29<02:22, 11.90s/it]hard_negative_dpo:  82%|████████▏ | 49/60 [09:41<02:10, 11.88s/it]hard_negative_dpo:  83%|████████▎ | 50/60 [09:52<01:58, 11.87s/it]                                                                  {"loss": 0.159, "pi_margin": 17.5791, "ref_margin": -0.0036, "reward_margin": 17.5826, "chosen_win_rate": 1.0, "step": 50}
+hard_negative_dpo:  83%|████████▎ | 50/60 [09:52<01:58, 11.87s/it]hard_negative_dpo:  85%|████████▌ | 51/60 [10:04<01:46, 11.81s/it]hard_negative_dpo:  87%|████████▋ | 52/60 [10:16<01:34, 11.83s/it]hard_negative_dpo:  88%|████████▊ | 53/60 [10:27<01:22, 11.72s/it]hard_negative_dpo:  90%|█████████ | 54/60 [10:39<01:10, 11.81s/it]hard_negative_dpo:  92%|█████████▏| 55/60 [10:51<00:59, 11.82s/it]hard_negative_dpo:  93%|█████████▎| 56/60 [11:04<00:47, 11.97s/it]hard_negative_dpo:  95%|█████████▌| 57/60 [11:16<00:36, 12.02s/it]hard_negative_dpo:  97%|█████████▋| 58/60 [11:28<00:24, 12.12s/it]hard_negative_dpo:  98%|█████████▊| 59/60 [11:40<00:12, 12.06s/it]hard_negative_dpo: 100%|██████████| 60/60 [11:52<00:00, 12.02s/it]                                                                  {"loss": 0.0064, "pi_margin": 50.0617, "ref_margin": -0.4809, "reward_margin": 50.5426, "chosen_win_rate": 1.0, "step": 60}
+hard_negative_dpo: 100%|██████████| 60/60 [11:52<00:00, 12.02s/it]hard_negative_dpo: 100%|██████████| 60/60 [11:52<00:00, 11.87s/it]
+{
+  "batch_size": 1,
+  "beta": 0.1,
+  "grad_accum": 4,
+  "learning_rate": 0.0001,
+  "logprob_normalization": "mean_token",
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_r": 16,
+  "max_length": 1536,
+  "max_steps": 60,
+  "metrics": [
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6931471824645996,
+      "pi_margin": 0.12287479639053345,
+      "ref_margin": 0.12287479639053345,
+      "reward_margin": 0.0,
+      "step": 1
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6944302320480347,
+      "pi_margin": 0.18596568703651428,
+      "ref_margin": 0.21161015331745148,
+      "reward_margin": -0.025644466280937195,
+      "step": 2
+    },
+    {
+      "chosen_win_rate": 0.0,
+      "loss": 0.7012249231338501,
+      "pi_margin": -0.041696786880493164,
+      "ref_margin": 0.11921215057373047,
+      "reward_margin": -0.16090893745422363,
+      "step": 3
+    },
+    {
+      "chosen_win_rate": 0.0,
+      "loss": 0.6950782537460327,
+      "pi_margin": -0.04663500189781189,
+      "ref_margin": -0.008050575852394104,
+      "reward_margin": -0.038584426045417786,
+      "step": 4
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6933408379554749,
+      "pi_margin": 0.31618624925613403,
+      "ref_margin": 0.320059597492218,
+      "reward_margin": -0.0038733482360839844,
+      "step": 5
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6902379393577576,
+      "pi_margin": 0.09429682791233063,
+      "ref_margin": 0.036026954650878906,
+      "reward_margin": 0.05826987326145172,
+      "step": 6
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6936388611793518,
+      "pi_margin": 0.2558395266532898,
+      "ref_margin": 0.26567089557647705,
+      "reward_margin": -0.009831368923187256,
+      "step": 7
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6983054280281067,
+      "pi_margin": 0.1901148557662964,
+      "ref_margin": 0.2930157780647278,
+      "reward_margin": -0.1029009222984314,
+      "step": 8
+    },
+    {
+      "chosen_win_rate": 0.0,
+      "loss": 0.6759848594665527,
+      "pi_margin": -0.10417860746383667,
+      "ref_margin": -0.4504227638244629,
+      "reward_margin": 0.3462441563606262,
+      "step": 9
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6977325677871704,
+      "pi_margin": 0.007267683744430542,
+      "ref_margin": 0.09876558184623718,
+      "reward_margin": -0.09149789810180664,
+      "step": 10
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6898409724235535,
+      "pi_margin": 0.06964641809463501,
+      "ref_margin": 0.003413170576095581,
+      "reward_margin": 0.06623324751853943,
+      "step": 11
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6787238717079163,
+      "pi_margin": 0.48940885066986084,
+      "ref_margin": 0.1988314688205719,
+      "reward_margin": 0.29057738184928894,
+      "step": 12
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6813884973526001,
+      "pi_margin": 0.3697972893714905,
+      "ref_margin": 0.13322508335113525,
+      "reward_margin": 0.23657220602035522,
+      "step": 13
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6910463571548462,
+      "pi_margin": 0.039861783385276794,
+      "ref_margin": -0.002199411392211914,
+      "reward_margin": 0.04206119477748871,
+      "step": 14
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6551474332809448,
+      "pi_margin": 0.7923661470413208,
+      "ref_margin": 0.0173586905002594,
+      "reward_margin": 0.7750074863433838,
+      "step": 15
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6410381197929382,
+      "pi_margin": 1.0675461292266846,
+      "ref_margin": -0.003287971019744873,
+      "reward_margin": 1.0708341598510742,
+      "step": 16
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6494250297546387,
+      "pi_margin": 0.9231680631637573,
+      "ref_margin": 0.02873125672340393,
+      "reward_margin": 0.8944368362426758,
+      "step": 17
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6524469256401062,
+      "pi_margin": 1.297890067100525,
+      "ref_margin": 0.4666155278682709,
+      "reward_margin": 0.8312745094299316,
+      "step": 18
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6443564295768738,
+      "pi_margin": 1.1340726613998413,
+      "ref_margin": 0.13322508335113525,
+      "reward_margin": 1.000847578048706,
+      "step": 19
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.5530999898910522,
+      "pi_margin": 3.0655477046966553,
+      "ref_margin": 0.036026954650878906,
+      "reward_margin": 3.0295207500457764,
+      "step": 20
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6833541989326477,
+      "pi_margin": 0.19325155019760132,
+      "ref_margin": -0.0035768747329711914,
+      "reward_margin": 0.1968284249305725,
+      "step": 21
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.656099259853363,
+      "pi_margin": 0.653084933757782,
+      "ref_margin": -0.10212942957878113,
+      "reward_margin": 0.7552143335342407,
+      "step": 22
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.5897746086120605,
+      "pi_margin": 2.4615116119384766,
+      "ref_margin": 0.2747500240802765,
+      "reward_margin": 2.1867616176605225,
+      "step": 23
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.5355945825576782,
+      "pi_margin": 3.594167709350586,
+      "ref_margin": 0.14760473370552063,
+      "reward_margin": 3.4465630054473877,
+      "step": 24
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.5076138377189636,
+      "pi_margin": 4.43591833114624,
+      "ref_margin": 0.3007781505584717,
+      "reward_margin": 4.135140419006348,
+      "step": 25
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6043158769607544,
+      "pi_margin": 1.8712341785430908,
+      "ref_margin": 0.007935285568237305,
+      "reward_margin": 1.8632988929748535,
+      "step": 26
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.49550285935401917,
+      "pi_margin": 4.7078857421875,
+      "ref_margin": 0.26567089557647705,
+      "reward_margin": 4.4422149658203125,
+      "step": 27
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.4121859073638916,
+      "pi_margin": 7.233797073364258,
+      "ref_margin": 0.5026097297668457,
+      "reward_margin": 6.731187343597412,
+      "step": 28
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.45691803097724915,
+      "pi_margin": 5.010662078857422,
+      "ref_margin": -0.4504227638244629,
+      "reward_margin": 5.461084842681885,
+      "step": 29
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.4051341116428375,
+      "pi_margin": 6.938117504119873,
+      "ref_margin": -0.003287971019744873,
+      "reward_margin": 6.941405296325684,
+      "step": 30
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.4186028838157654,
+      "pi_margin": 6.061487674713135,
+      "ref_margin": -0.4809187650680542,
+      "reward_margin": 6.5424065589904785,
+      "step": 31
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.4866220951080322,
+      "pi_margin": 4.663041114807129,
+      "ref_margin": -0.008050575852394104,
+      "reward_margin": 4.671091556549072,
+      "step": 32
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.18436990678310394,
+      "pi_margin": 16.499080657958984,
+      "ref_margin": 0.5269788503646851,
+      "reward_margin": 15.972102165222168,
+      "step": 33
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6735002398490906,
+      "pi_margin": 0.29474735260009766,
+      "ref_margin": -0.10212942957878113,
+      "reward_margin": 0.3968767821788788,
+      "step": 34
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.5404638648033142,
+      "pi_margin": 3.3259658813476562,
+      "ref_margin": -0.0035768747329711914,
+      "reward_margin": 3.329542636871338,
+      "step": 35
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.11998451501131058,
+      "pi_margin": 20.646860122680664,
+      "ref_margin": 0.0488547682762146,
+      "reward_margin": 20.598005294799805,
+      "step": 36
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.27388644218444824,
+      "pi_margin": 11.748579025268555,
+      "ref_margin": 0.1988314688205719,
+      "reward_margin": 11.549747467041016,
+      "step": 37
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.008900662884116173,
+      "pi_margin": 46.597557067871094,
+      "ref_margin": -0.5742021203041077,
+      "reward_margin": 47.17176055908203,
+      "step": 38
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.5337836742401123,
+      "pi_margin": 3.7019004821777344,
+      "ref_margin": 0.21161015331745148,
+      "reward_margin": 3.490290403366089,
+      "step": 39
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.09733105450868607,
+      "pi_margin": 22.998855590820312,
+      "ref_margin": 0.19308575987815857,
+      "reward_margin": 22.805768966674805,
+      "step": 40
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.1875917613506317,
+      "pi_margin": 15.905128479003906,
+      "ref_margin": 0.12287479639053345,
+      "reward_margin": 15.78225326538086,
+      "step": 41
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.07672050595283508,
+      "pi_margin": 25.59058380126953,
+      "ref_margin": 0.3007781505584717,
+      "reward_margin": 25.289806365966797,
+      "step": 42
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.4208565950393677,
+      "pi_margin": 6.1690216064453125,
+      "ref_margin": -0.30763518810272217,
+      "reward_margin": 6.476656913757324,
+      "step": 43
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.023622553795576096,
+      "pi_margin": 37.864166259765625,
+      "ref_margin": 0.5269788503646851,
+      "reward_margin": 37.337188720703125,
+      "step": 44
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.017941106110811234,
+      "pi_margin": 40.32837677001953,
+      "ref_margin": 0.21161015331745148,
+      "reward_margin": 40.11676788330078,
+      "step": 45
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.08500631898641586,
+      "pi_margin": 24.394336700439453,
+      "ref_margin": 0.17208224534988403,
+      "reward_margin": 24.222253799438477,
+      "step": 46
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.0048579261638224125,
+      "pi_margin": 53.43868637084961,
+      "ref_margin": 0.19155240058898926,
+      "reward_margin": 53.247135162353516,
+      "step": 47
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.051090508699417114,
+      "pi_margin": 29.634796142578125,
+      "ref_margin": 0.1497710645198822,
+      "reward_margin": 29.48502540588379,
+      "step": 48
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.003592421766370535,
+      "pi_margin": 56.32017517089844,
+      "ref_margin": 0.0488547682762146,
+      "reward_margin": 56.27132034301758,
+      "step": 49
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.1590050607919693,
+      "pi_margin": 17.579059600830078,
+      "ref_margin": -0.0035768747329711914,
+      "reward_margin": 17.5826358795166,
+      "step": 50
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.006105224601924419,
+      "pi_margin": 51.029781341552734,
+      "ref_margin": 0.07421806454658508,
+      "reward_margin": 50.955562591552734,
+      "step": 51
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.043826114386320114,
+      "pi_margin": 31.573135375976562,
+      "ref_margin": 0.5178124308586121,
+      "reward_margin": 31.055322647094727,
+      "step": 52
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.004024142865091562,
+      "pi_margin": 54.72857666015625,
+      "ref_margin": -0.4057275056838989,
+      "reward_margin": 55.13430404663086,
+      "step": 53
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.11307653784751892,
+      "pi_margin": 21.234127044677734,
+      "ref_margin": 0.007935285568237305,
+      "reward_margin": 21.226192474365234,
+      "step": 54
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.00042105329339392483,
+      "pi_margin": 77.75413513183594,
+      "ref_margin": 0.02873125672340393,
+      "reward_margin": 77.72540283203125,
+      "step": 55
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.031763024628162384,
+      "pi_margin": 34.41820526123047,
+      "ref_margin": 0.0829169899225235,
+      "reward_margin": 34.335289001464844,
+      "step": 56
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.05070781335234642,
+      "pi_margin": 29.081222534179688,
+      "ref_margin": -0.4809187650680542,
+      "reward_margin": 29.56214141845703,
+      "step": 57
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.017654461786150932,
+      "pi_margin": 39.97162628173828,
+      "ref_margin": -0.30763518810272217,
+      "reward_margin": 40.27926254272461,
+      "step": 58
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.0006293209735304117,
+      "pi_margin": 73.91715240478516,
+      "ref_margin": 0.21161015331745148,
+      "reward_margin": 73.7055435180664,
+      "step": 59
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.006361821666359901,
+      "pi_margin": 50.06166076660156,
+      "ref_margin": -0.4809187650680542,
+      "reward_margin": 50.542579650878906,
+      "step": 60
+    }
+  ],
+  "pair_rows": 58,
+  "pairs_in": "data/pilot_pairs_combined_real.jsonl",
+  "run_name": "hard_negative_dpo",
+  "tokenized_pairs": 58
+}

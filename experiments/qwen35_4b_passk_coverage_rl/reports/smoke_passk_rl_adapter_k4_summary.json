@@ -1,0 +1,26 @@
+{
+  "adapter_dir": "/workspace/large_artifacts/qwen35_4b_passk_coverage_rl/smoke_passk_rl_adapter",
+  "arm_name": "passk_rl_adapter_k4",
+  "count": 4,
+  "experiment": "qwen35_4b_passk_coverage_rl",
+  "max_new_tokens": 220,
+  "offset": 0,
+  "records": {
+    "coverage": 0.5,
+    "forward_tokens": 3871,
+    "hidden_pass_candidates": 5,
+    "mean_candidates": 4.0,
+    "mean_distinct_functional_rate": 0.5625,
+    "mean_distinct_program_rate": 1.0,
+    "pass1_proxy": 0.25,
+    "task_count": 4,
+    "visible_candidates": 6,
+    "visible_coverage": 0.75
+  },
+  "round_name": "smoke_passk_rl_eval",
+  "samples_per_task": 4,
+  "seed": 20260629,
+  "split": "test",
+  "temperatures": "0.9",
+  "top_p": 0.95
+}

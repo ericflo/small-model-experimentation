@@ -1,0 +1,91 @@
+task_id,family,features,method,row_exact,full_task_exact,parse_ok,parse_status,output_count,outputs_json,targets_json,raw
+City.000010,City,"Conditional,Numeric",direct_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",direct_batch,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]"
+City.000010,City,"Conditional,Numeric",init_soft_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",learned_soft_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",shuffled_soft_row,1.0,True,True,row_clean,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","9
+---
+20
+---
+0"
+City.000010,City,"Conditional,Numeric",learned_soft_batch,1.0,True,True,ok,3,"[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]","[""9"", ""20"", ""0""]"
+DateTime.000025,DateTime,DateTime,direct_row,1.0,True,True,row_clean,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","Mar 41
+---
+Aug 60
+---
+May 84"
+DateTime.000025,DateTime,DateTime,direct_batch,1.0,True,True,ok,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]"
+DateTime.000025,DateTime,DateTime,init_soft_row,1.0,True,True,row_clean,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","Mar 41
+---
+Aug 60
+---
+May 84"
+DateTime.000025,DateTime,DateTime,learned_soft_row,1.0,True,True,row_clean,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","Mar 41
+---
+Aug 60
+---
+May 84"
+DateTime.000025,DateTime,DateTime,shuffled_soft_row,1.0,True,True,row_clean,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","Mar 41
+---
+Aug 60
+---
+May 84"
+DateTime.000025,DateTime,DateTime,learned_soft_batch,1.0,True,True,ok,3,"[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]","[""Mar 41"", ""Aug 60"", ""May 84""]"
+Number.000077,Number,"Numeric,NumericRounding",direct_row,0.3333333333333333,False,True,row_clean,3,"[""110"", ""11000"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+11000
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",direct_batch,0.6666666666666666,False,True,ok,3,"[""11110"", ""11110"", ""546""]","[""11110"", ""11110"", ""540""]","[""11110"", ""11110"", ""546""]"
+Number.000077,Number,"Numeric,NumericRounding",init_soft_row,0.3333333333333333,False,True,row_clean,3,"[""110"", ""110"", ""540""]","[""11110"", ""11110"", ""540""]","110
+---
+110
+---
+540"
+Number.000077,Number,"Numeric,NumericRounding",learned_soft_row,0.0,False,True,row_clean,3,"[""11000"", ""11000"", ""110""]","[""11110"", ""11110"", ""540""]","11000
+---
+11000
+---
+110"
+Number.000077,Number,"Numeric,NumericRounding",shuffled_soft_row,0.0,False,True,row_clean,3,"[""11000"", ""11000"", ""110""]","[""11110"", ""11110"", ""540""]","11000
+---
+11000
+---
+110"
+Number.000077,Number,"Numeric,NumericRounding",learned_soft_batch,0.0,False,True,ok,3,"[""0: 11110"", ""1: 11110"", ""2: 540""]","[""11110"", ""11110"", ""540""]","```json
+[""0: 11110"", ""1: 11110"", ""2: 540""]
+```"
+UserAgent.000003,UserAgent,Substring,direct_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,direct_batch,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"
+UserAgent.000003,UserAgent,Substring,init_soft_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,learned_soft_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,shuffled_soft_row,1.0,True,True,row_clean,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","FZ467
+---
+RM VVUT
+---
+QS QYFY"
+UserAgent.000003,UserAgent,Substring,learned_soft_batch,1.0,True,True,ok,3,"[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]","[""FZ467"", ""RM VVUT"", ""QS QYFY""]"

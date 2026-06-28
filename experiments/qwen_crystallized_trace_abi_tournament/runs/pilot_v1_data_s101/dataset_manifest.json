@@ -1,0 +1,163 @@
+{
+  "seed": 101,
+  "train_n": 96,
+  "eval_sizes": {
+    "eval_indist": 16,
+    "eval_composition": 16,
+    "eval_template_shift": 16
+  },
+  "train_sample": [
+    {
+      "example_id": "train_date_43",
+      "split": "train",
+      "family": "date",
+      "prompt": "Starting from 2026-01-12, add 1 days. Return the ISO date.",
+      "answer": "2026-01-13",
+      "op_name": "add_days",
+      "payload": {
+        "date": "2026-01-12",
+        "delta_days": 1
+      }
+    },
+    {
+      "example_id": "train_table_86",
+      "split": "train",
+      "family": "table",
+      "prompt": "Table: gamma=3, beta=28, delta=25, alpha=24. Take beta, then add 10.",
+      "answer": "38",
+      "op_name": "lookup_add",
+      "payload": {
+        "table": {
+          "gamma": 3,
+          "beta": 28,
+          "delta": 25,
+          "alpha": 24
+        },
+        "key": "beta",
+        "bias": 10
+      }
+    },
+    {
+      "example_id": "train_unit_73",
+      "split": "train",
+      "family": "unit",
+      "prompt": "How many millimeters are equal to 18 centimeters?",
+      "answer": "180",
+      "op_name": "centimeters_to_millimeters",
+      "payload": {
+        "amount": 18,
+        "src": "centimeters",
+        "dst": "millimeters",
+        "factor": 10
+      }
+    },
+    {
+      "example_id": "train_string_84",
+      "split": "train",
+      "family": "string",
+      "prompt": "Reference code: SF-8943-ZN. Remove hyphens, then return the last 3 characters.",
+      "answer": "3ZN",
+      "op_name": "take_suffix",
+      "payload": {
+        "code": "SF-8943-ZN",
+        "clean": "SF8943ZN",
+        "n": 3
+      }
+    }
+  ],
+  "eval_sample": {
+    "eval_indist": [
+      {
+        "example_id": "eval_indist_date_11",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Date 2026-07-17: move forward by 4 days.",
+        "answer": "2026-07-21",
+        "op_name": "add_days",
+        "payload": {
+          "date": "2026-07-17",
+          "delta_days": 4
+        }
+      },
+      {
+        "example_id": "eval_indist_date_3",
+        "split": "eval_indist",
+        "family": "date",
+        "prompt": "Starting from 2026-02-16, add 3 days. Return the ISO date.",
+        "answer": "2026-02-19",
+        "op_name": "add_days",
+        "payload": {
+          "date": "2026-02-16",
+          "delta_days": 3
+        }
+      }
+    ],
+    "eval_composition": [
+      {
+        "example_id": "eval_composition_table_2",
+        "split": "eval_composition",
+        "family": "table",
+        "prompt": "Using gamma=10, alpha=25, beta=8, delta=12, compute value(beta) + value(alpha) + 4.",
+        "answer": "37",
+        "op_name": "sum_two_keys_plus",
+        "payload": {
+          "table": {
+            "gamma": 10,
+            "alpha": 25,
+            "beta": 8,
+            "delta": 12
+          },
+          "k1": "beta",
+          "k2": "alpha",
+          "bias": 4
+        }
+      },
+      {
+        "example_id": "eval_composition_unit_5",
+        "split": "eval_composition",
+        "family": "unit",
+        "prompt": "A cable is 3 meters plus 40 centimeters long. Report the total length in centimeters.",
+        "answer": "340",
+        "op_name": "meters_plus_centimeters",
+        "payload": {
+          "meters": 3,
+          "centimeters": 40
+        }
+      }
+    ],
+    "eval_template_shift": [
+      {
+        "example_id": "eval_template_shift_table_14",
+        "split": "eval_template_shift",
+        "family": "table",
+        "prompt": "From lookup entries [delta=19, beta=27, gamma=26, alpha=8], scale gamma by 5 and increase by 8.",
+        "answer": "138",
+        "op_name": "lookup_mul_add",
+        "payload": {
+          "table": {
+            "delta": 19,
+            "beta": 27,
+            "gamma": 26,
+            "alpha": 8
+          },
+          "key": "gamma",
+          "scale": 5,
+          "bias": 8
+        }
+      },
+      {
+        "example_id": "eval_template_shift_string_0",
+        "split": "eval_template_shift",
+        "family": "string",
+        "prompt": "Compact identifier WE-8727-XP by dropping hyphens. What are the final 3 symbols afterward?",
+        "answer": "7XP",
+        "op_name": "take_suffix",
+        "payload": {
+          "code": "WE-8727-XP",
+          "clean": "WE8727XP",
+          "n": 3
+        }
+      }
+    ]
+  }
+}

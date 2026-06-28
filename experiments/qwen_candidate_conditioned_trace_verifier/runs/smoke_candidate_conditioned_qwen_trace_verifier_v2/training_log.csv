@@ -1,0 +1,17 @@
+arm,seed,epoch,train_loss,val_utility,val_n,val_accuracy,val_state_accuracy,val_base_accuracy,val_oracle_accuracy,val_shortlist_oracle_accuracy,val_gap_capture,val_shortlist_gap_capture,val_coverage_capture,val_shortlist_coverage_capture,val_changed_fraction,val_no_op_fraction,val_damage_rate,val_recovery_rate
+feature_mlp,101,1,1.1845469623804092,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan
+feature_mlp,101,2,0.048875064589083195,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan
+trace_transformer,101,1,0.4057048953914091,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan
+trace_transformer,101,2,0.003242948254410294,nan,4.0,1.0,1.0,1.0,1.0,1.0,nan,nan,1.0,1.0,0.0,1.0,0.0,nan
+qwen_rank,101,1,1.771065765991807,nan,,0.5,,,,,,,,,,,0.5,nan
+qwen_rank,101,2,1.3999938108026981,nan,,0.75,,,,,,,,,,,0.25,nan
+qwen_echo,101,1,3.561603158712387,nan,,0.75,,,,,,,,,,,0.25,nan
+qwen_echo,101,2,2.765080913901329,nan,,0.75,,,,,,,,,,,0.25,nan
+qwen_shuffled,101,1,1.922526380047202,nan,,0.0,,,,,,,,,,,1.0,nan
+qwen_shuffled,101,2,1.99527039937675,nan,,0.0,,,,,,,,,,,1.0,nan
+qwen_prompt_only,101,1,1.9099413584917784,nan,,1.0,,,,,,,,,,,0.0,nan
+qwen_prompt_only,101,2,1.912569135427475,nan,,1.0,,,,,,,,,,,0.0,nan
+qwen_candidate_only,101,1,1.895579969510436,nan,,0.0,,,,,,,,,,,1.0,nan
+qwen_candidate_only,101,2,1.8827624320983887,nan,,0.0,,,,,,,,,,,1.0,nan
+qwen_trace_corrupt,101,1,1.7861218359321356,nan,,0.0,,,,,,,,,,,1.0,nan
+qwen_trace_corrupt,101,2,1.4954187329858541,nan,,0.0,,,,,,,,,,,1.0,nan

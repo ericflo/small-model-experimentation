@@ -1,0 +1,2 @@
+run,phase,n_examples,states,stop_labels,edit_labels,false_stop_states,repair_found_states,search_states,mean_search_candidates,rollout_success_rate,mean_states_per_example,mean_policy_steps
+smoke_fuyu_grpo_echo_20260624,bc_teacher,4,28,4,24,0,28,0,0.0,1.0,7.0,6.0

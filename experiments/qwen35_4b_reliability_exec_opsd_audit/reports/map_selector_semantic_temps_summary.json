@@ -1,0 +1,54 @@
+{
+  "candidate_records": [
+    "data/retrieval_adapt_semantic_t0p0_top3_records.jsonl",
+    "data/retrieval_adapt_semantic_t0p1_top3_records.jsonl",
+    "data/retrieval_adapt_semantic_t0p2_top3_records.jsonl"
+  ],
+  "experiment": "qwen35_4b_reliability_exec_opsd_audit",
+  "path": "data/map_selector_semantic_temps_records.jsonl",
+  "pool_coverage": 0.3333333333333333,
+  "pool_names": [
+    "semantic_t0p0",
+    "semantic_t0p1",
+    "semantic_t0p2"
+  ],
+  "records": 24,
+  "selectors": {
+    "first_visible": {
+      "commit_count": 14,
+      "commit_rate": 0.5833333333333334,
+      "records": 24,
+      "selected_false_pass_rate": 0.42857142857142855,
+      "selected_hidden_correct": 8,
+      "selected_recovery_rate": 0.3333333333333333,
+      "selected_visible_hidden_wrong": 6,
+      "selector": "first_visible"
+    },
+    "map_mean": {
+      "commit_count": 14,
+      "commit_rate": 0.5833333333333334,
+      "records": 24,
+      "selected_false_pass_rate": 0.5714285714285714,
+      "selected_hidden_correct": 6,
+      "selected_recovery_rate": 0.25,
+      "selected_visible_hidden_wrong": 8,
+      "selector": "map_mean"
+    },
+    "oracle_hidden": {
+      "commit_count": 8,
+      "commit_rate": 0.3333333333333333,
+      "records": 24,
+      "selected_false_pass_rate": 0.0,
+      "selected_hidden_correct": 8,
+      "selected_recovery_rate": 0.3333333333333333,
+      "selected_visible_hidden_wrong": 0,
+      "selector": "oracle_hidden"
+    }
+  },
+  "usage_estimate": {
+    "completion_tokens_estimate": 19843,
+    "forward_tokens_estimate": 43793,
+    "prompt_tokens_estimate": 23950,
+    "scored_candidates": 201
+  }
+}

@@ -1,0 +1,25 @@
+task_id,probe_index,probe,qwen_label,train_only_pred,qwen_projection_pred
+City.000010,0,none,0,,
+City.000010,1,None+None,0,,
+City.000010,2,43+30,73,,
+City.000010,3,30,30,,
+DateTime.000025,0,01311846-1953,Jan 46-53,,
+DateTime.000025,1,06-oct-2143,Oct 43,,
+DateTime.000025,2,30-Oct-2143,Oct 43,,
+DateTime.000025,3,Apr 30 2002,Apr 02,,
+DateTime.000104,0,14-Jan-2034 05:36:07,Jan,Jan,Jan
+DateTime.000104,1,31-Jan-2031 05:54:18 17,Jan,Jan,Jan
+DateTime.000104,2,14-Feb-2034 05:36:07-2034,Feb,Feb,Feb
+DateTime.000104,3,31-Jan-2031-05:54:18,Jan,Jan,Jan
+Number.000075,0,Delta.2345.23292,$2.3B,,
+Number.000075,1,1202.3433.5,$1.2B,,
+Number.000075,2,12.2345,$0.0B,,
+Number.000075,3,2345.23292.3433,$2.3B,,
+Number.000077,0,"112,112","110,110",110,110
+Number.000077,1,117/112,110/110,110,110
+Number.000077,2,"Beta,112","Beta,110",110,110
+Number.000077,3,Gamma/117,Gamma/110,110,110
+UserAgent.000003,0,Mfm-Robot/4.1.24-Internal Mf-W878 Os 6.6.2,Mf-W878,,
+UserAgent.000003,1,mfm-robot/8.9.63-internal za659 os 6.5.0,za659,,
+UserAgent.000003,2,MF.MFM-Robot/4.1.24-internal MF-W878 OS 6.6.2,MF-W878,,
+UserAgent.000003,3,MFM-Robot/4.1.24-internal-MF-W878-OS-6.6.2,MF-W878-OS-6.6.2,,

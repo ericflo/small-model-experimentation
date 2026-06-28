@@ -1,0 +1,2784 @@
+[
+  {
+    "task_id": "contact_email_domain",
+    "family": "contact",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Extract the lower-case email domain.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "name": "  jane   DOE ",
+          "email": "Jane.Doe@Acme-Tools.com",
+          "phone": "(415) 555-0134"
+        },
+        "output": "acme-tools.com"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "MIGUEL santos",
+          "email": "m.santos@northwind.io",
+          "phone": "1-212-555-0199"
+        },
+        "output": "northwind.io"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "Priya  Shah",
+          "email": "pshah@contoso.co",
+          "phone": "617.555.0101"
+        },
+        "output": "contoso.co"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "LI WEI",
+          "email": "li.wei@example.org",
+          "phone": "+1 303 555 0188"
+        },
+        "output": "example.org"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "anne-marie o'neil",
+          "email": "am.oneil@blue-river.net",
+          "phone": "2065550177"
+        },
+        "output": "blue-river.net"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "Omar   Haddad",
+          "email": "omar@fabrikam.com",
+          "phone": "(512) 555 0166"
+        },
+        "output": "fabrikam.com"
+      }
+    ]
+  },
+  {
+    "task_id": "contact_email_company",
+    "family": "contact",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Convert the email domain root into a company-style title.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "name": "  jane   DOE ",
+          "email": "Jane.Doe@Acme-Tools.com",
+          "phone": "(415) 555-0134"
+        },
+        "output": "Acme Tools"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "MIGUEL santos",
+          "email": "m.santos@northwind.io",
+          "phone": "1-212-555-0199"
+        },
+        "output": "Northwind"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "Priya  Shah",
+          "email": "pshah@contoso.co",
+          "phone": "617.555.0101"
+        },
+        "output": "Contoso"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "LI WEI",
+          "email": "li.wei@example.org",
+          "phone": "+1 303 555 0188"
+        },
+        "output": "Example"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "anne-marie o'neil",
+          "email": "am.oneil@blue-river.net",
+          "phone": "2065550177"
+        },
+        "output": "Blue River"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "Omar   Haddad",
+          "email": "omar@fabrikam.com",
+          "phone": "(512) 555 0166"
+        },
+        "output": "Fabrikam"
+      }
+    ]
+  },
+  {
+    "task_id": "contact_phone_e164",
+    "family": "contact",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Normalize a US phone number to E.164.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "name": "  jane   DOE ",
+          "email": "Jane.Doe@Acme-Tools.com",
+          "phone": "(415) 555-0134"
+        },
+        "output": "+14155550134"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "MIGUEL santos",
+          "email": "m.santos@northwind.io",
+          "phone": "1-212-555-0199"
+        },
+        "output": "+12125550199"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "Priya  Shah",
+          "email": "pshah@contoso.co",
+          "phone": "617.555.0101"
+        },
+        "output": "+16175550101"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "LI WEI",
+          "email": "li.wei@example.org",
+          "phone": "+1 303 555 0188"
+        },
+        "output": "+13035550188"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "anne-marie o'neil",
+          "email": "am.oneil@blue-river.net",
+          "phone": "2065550177"
+        },
+        "output": "+12065550177"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "Omar   Haddad",
+          "email": "omar@fabrikam.com",
+          "phone": "(512) 555 0166"
+        },
+        "output": "+15125550166"
+      }
+    ]
+  },
+  {
+    "task_id": "contact_phone_last4",
+    "family": "contact",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Extract the last four phone digits.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "name": "  jane   DOE ",
+          "email": "Jane.Doe@Acme-Tools.com",
+          "phone": "(415) 555-0134"
+        },
+        "output": "0134"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "MIGUEL santos",
+          "email": "m.santos@northwind.io",
+          "phone": "1-212-555-0199"
+        },
+        "output": "0199"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "Priya  Shah",
+          "email": "pshah@contoso.co",
+          "phone": "617.555.0101"
+        },
+        "output": "0101"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "LI WEI",
+          "email": "li.wei@example.org",
+          "phone": "+1 303 555 0188"
+        },
+        "output": "0188"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "anne-marie o'neil",
+          "email": "am.oneil@blue-river.net",
+          "phone": "2065550177"
+        },
+        "output": "0177"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "Omar   Haddad",
+          "email": "omar@fabrikam.com",
+          "phone": "(512) 555 0166"
+        },
+        "output": "0166"
+      }
+    ]
+  },
+  {
+    "task_id": "contact_name_initials",
+    "family": "contact",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Return initials from the contact name.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "name": "  jane   DOE ",
+          "email": "Jane.Doe@Acme-Tools.com",
+          "phone": "(415) 555-0134"
+        },
+        "output": "JD"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "MIGUEL santos",
+          "email": "m.santos@northwind.io",
+          "phone": "1-212-555-0199"
+        },
+        "output": "MS"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "Priya  Shah",
+          "email": "pshah@contoso.co",
+          "phone": "617.555.0101"
+        },
+        "output": "PS"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "LI WEI",
+          "email": "li.wei@example.org",
+          "phone": "+1 303 555 0188"
+        },
+        "output": "LW"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "anne-marie o'neil",
+          "email": "am.oneil@blue-river.net",
+          "phone": "2065550177"
+        },
+        "output": "AMON"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "Omar   Haddad",
+          "email": "omar@fabrikam.com",
+          "phone": "(512) 555 0166"
+        },
+        "output": "OH"
+      }
+    ]
+  },
+  {
+    "task_id": "contact_normalize_name",
+    "family": "contact",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Normalize a messy person name into title case.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "name": "  jane   DOE ",
+          "email": "Jane.Doe@Acme-Tools.com",
+          "phone": "(415) 555-0134"
+        },
+        "output": "Jane Doe"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "MIGUEL santos",
+          "email": "m.santos@northwind.io",
+          "phone": "1-212-555-0199"
+        },
+        "output": "Miguel Santos"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "Priya  Shah",
+          "email": "pshah@contoso.co",
+          "phone": "617.555.0101"
+        },
+        "output": "Priya Shah"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "name": "LI WEI",
+          "email": "li.wei@example.org",
+          "phone": "+1 303 555 0188"
+        },
+        "output": "Li Wei"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "anne-marie o'neil",
+          "email": "am.oneil@blue-river.net",
+          "phone": "2065550177"
+        },
+        "output": "Anne Marie O Neil"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "name": "Omar   Haddad",
+          "email": "omar@fabrikam.com",
+          "phone": "(512) 555 0166"
+        },
+        "output": "Omar Haddad"
+      }
+    ]
+  },
+  {
+    "task_id": "date_to_iso",
+    "family": "date",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Normalize dates to ISO format.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "date": "Jan 5, 2024"
+        },
+        "output": "2024-01-05"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "02/14/2025"
+        },
+        "output": "2025-02-14"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "2023/07/03"
+        },
+        "output": "2023-07-03"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "19 Aug 2026"
+        },
+        "output": "2026-08-19"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "March 9, 2022"
+        },
+        "output": "2022-03-09"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "11/30/24"
+        },
+        "output": "2024-11-30"
+      }
+    ]
+  },
+  {
+    "task_id": "date_month_name",
+    "family": "date",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Return the month name.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "date": "Jan 5, 2024"
+        },
+        "output": "January"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "02/14/2025"
+        },
+        "output": "February"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "2023/07/03"
+        },
+        "output": "July"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "19 Aug 2026"
+        },
+        "output": "August"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "March 9, 2022"
+        },
+        "output": "March"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "11/30/24"
+        },
+        "output": "November"
+      }
+    ]
+  },
+  {
+    "task_id": "date_quarter_label",
+    "family": "date",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Return a QN-YYYY quarter label.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "date": "Jan 5, 2024"
+        },
+        "output": "Q1-2024"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "02/14/2025"
+        },
+        "output": "Q1-2025"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "2023/07/03"
+        },
+        "output": "Q3-2023"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "19 Aug 2026"
+        },
+        "output": "Q3-2026"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "March 9, 2022"
+        },
+        "output": "Q1-2022"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "11/30/24"
+        },
+        "output": "Q4-2024"
+      }
+    ]
+  },
+  {
+    "task_id": "date_days_between",
+    "family": "date",
+    "split": "heldout_composition",
+    "input_kind": "row",
+    "description": "Return calendar days between two date fields.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "start": "2024-01-01",
+          "end": "2024-01-05"
+        },
+        "output": 4
+      },
+      {
+        "phase": "train",
+        "input": {
+          "start": "2025-02-01",
+          "end": "2025-02-14"
+        },
+        "output": 13
+      },
+      {
+        "phase": "train",
+        "input": {
+          "start": "2023-07-01",
+          "end": "2023-07-03"
+        },
+        "output": 2
+      },
+      {
+        "phase": "train",
+        "input": {
+          "start": "2026-08-10",
+          "end": "2026-08-19"
+        },
+        "output": 9
+      },
+      {
+        "phase": "test",
+        "input": {
+          "start": "2022-03-01",
+          "end": "2022-03-09"
+        },
+        "output": 8
+      },
+      {
+        "phase": "test",
+        "input": {
+          "start": "2024-11-01",
+          "end": "2024-11-30"
+        },
+        "output": 29
+      }
+    ]
+  },
+  {
+    "task_id": "date_fiscal_year_july",
+    "family": "date",
+    "split": "stress_out_of_abi",
+    "input_kind": "row",
+    "description": "Return fiscal year where July starts the next fiscal year.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "date": "Jan 5, 2024"
+        },
+        "output": 2024
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "02/14/2025"
+        },
+        "output": 2025
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "2023/07/03"
+        },
+        "output": 2024
+      },
+      {
+        "phase": "train",
+        "input": {
+          "date": "19 Aug 2026"
+        },
+        "output": 2027
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "March 9, 2022"
+        },
+        "output": 2022
+      },
+      {
+        "phase": "test",
+        "input": {
+          "date": "11/30/24"
+        },
+        "output": 2025
+      }
+    ]
+  },
+  {
+    "task_id": "money_cents",
+    "family": "money",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Parse a currency amount as integer cents.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "price": "$1,245.50",
+          "qty": 2,
+          "discount": "15%"
+        },
+        "output": 124550
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "87.99",
+          "qty": 5,
+          "discount": "7.5%"
+        },
+        "output": 8799
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "$12.00",
+          "qty": 12,
+          "discount": "0%"
+        },
+        "output": 1200
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "1,999.95",
+          "qty": 1,
+          "discount": "20%"
+        },
+        "output": 199995
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "$4.25",
+          "qty": 40,
+          "discount": "5%"
+        },
+        "output": 425
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "310.10",
+          "qty": 3,
+          "discount": "12%"
+        },
+        "output": 31010
+      }
+    ]
+  },
+  {
+    "task_id": "money_percent_decimal",
+    "family": "money",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Parse a percent into decimal form.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "price": "$1,245.50",
+          "qty": 2,
+          "discount": "15%"
+        },
+        "output": 0.15
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "87.99",
+          "qty": 5,
+          "discount": "7.5%"
+        },
+        "output": 0.075
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "$12.00",
+          "qty": 12,
+          "discount": "0%"
+        },
+        "output": 0.0
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "1,999.95",
+          "qty": 1,
+          "discount": "20%"
+        },
+        "output": 0.2
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "$4.25",
+          "qty": 40,
+          "discount": "5%"
+        },
+        "output": 0.05
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "310.10",
+          "qty": 3,
+          "discount": "12%"
+        },
+        "output": 0.12
+      }
+    ]
+  },
+  {
+    "task_id": "money_line_total_cents",
+    "family": "money",
+    "split": "heldout_composition",
+    "input_kind": "row",
+    "description": "Return price times quantity in cents.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "price": "$1,245.50",
+          "qty": 2,
+          "discount": "15%"
+        },
+        "output": 249100
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "87.99",
+          "qty": 5,
+          "discount": "7.5%"
+        },
+        "output": 43995
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "$12.00",
+          "qty": 12,
+          "discount": "0%"
+        },
+        "output": 14400
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "1,999.95",
+          "qty": 1,
+          "discount": "20%"
+        },
+        "output": 199995
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "$4.25",
+          "qty": 40,
+          "discount": "5%"
+        },
+        "output": 17000
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "310.10",
+          "qty": 3,
+          "discount": "12%"
+        },
+        "output": 93030
+      }
+    ]
+  },
+  {
+    "task_id": "money_discounted_total",
+    "family": "money",
+    "split": "stress_out_of_abi",
+    "input_kind": "row",
+    "description": "Return discounted line total in dollars rounded to cents.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "price": "$1,245.50",
+          "qty": 2,
+          "discount": "15%"
+        },
+        "output": 2117.35
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "87.99",
+          "qty": 5,
+          "discount": "7.5%"
+        },
+        "output": 406.95
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "$12.00",
+          "qty": 12,
+          "discount": "0%"
+        },
+        "output": 144.0
+      },
+      {
+        "phase": "train",
+        "input": {
+          "price": "1,999.95",
+          "qty": 1,
+          "discount": "20%"
+        },
+        "output": 1599.96
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "$4.25",
+          "qty": 40,
+          "discount": "5%"
+        },
+        "output": 161.5
+      },
+      {
+        "phase": "test",
+        "input": {
+          "price": "310.10",
+          "qty": 3,
+          "discount": "12%"
+        },
+        "output": 818.66
+      }
+    ]
+  },
+  {
+    "task_id": "url_domain",
+    "family": "url_file",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Extract URL domain.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://docs.example.com/reports/q1-summary",
+          "path": "/mnt/reports/q1-summary.xlsx"
+        },
+        "output": "docs.example.com"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "http://shop.acme.io/products/red-widget",
+          "path": "C:/exports/orders_2025_02.csv"
+        },
+        "output": "shop.acme.io"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://support.contoso.com/kb/reset-password",
+          "path": "/tmp/raw/customer-list.json"
+        },
+        "output": "support.contoso.com"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://blog.northwind.net/2024/launch-notes",
+          "path": "/home/me/archive/photo.final.PNG"
+        },
+        "output": "blog.northwind.net"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://data.fabrikam.com/files/monthly-rollup",
+          "path": "/var/log/app/server.log"
+        },
+        "output": "data.fabrikam.com"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://example.org/a/b/invoice-status",
+          "path": "s3://bucket/folder/items.parquet"
+        },
+        "output": "example.org"
+      }
+    ]
+  },
+  {
+    "task_id": "url_last_slug",
+    "family": "url_file",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Extract the final URL path slug.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://docs.example.com/reports/q1-summary",
+          "path": "/mnt/reports/q1-summary.xlsx"
+        },
+        "output": "q1-summary"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "http://shop.acme.io/products/red-widget",
+          "path": "C:/exports/orders_2025_02.csv"
+        },
+        "output": "red-widget"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://support.contoso.com/kb/reset-password",
+          "path": "/tmp/raw/customer-list.json"
+        },
+        "output": "reset-password"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://blog.northwind.net/2024/launch-notes",
+          "path": "/home/me/archive/photo.final.PNG"
+        },
+        "output": "launch-notes"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://data.fabrikam.com/files/monthly-rollup",
+          "path": "/var/log/app/server.log"
+        },
+        "output": "monthly-rollup"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://example.org/a/b/invoice-status",
+          "path": "s3://bucket/folder/items.parquet"
+        },
+        "output": "invoice-status"
+      }
+    ]
+  },
+  {
+    "task_id": "url_slug_to_title",
+    "family": "url_file",
+    "split": "heldout_composition",
+    "input_kind": "row",
+    "description": "Turn the final URL slug into a title.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://docs.example.com/reports/q1-summary",
+          "path": "/mnt/reports/q1-summary.xlsx"
+        },
+        "output": "Q1 Summary"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "http://shop.acme.io/products/red-widget",
+          "path": "C:/exports/orders_2025_02.csv"
+        },
+        "output": "Red Widget"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://support.contoso.com/kb/reset-password",
+          "path": "/tmp/raw/customer-list.json"
+        },
+        "output": "Reset Password"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://blog.northwind.net/2024/launch-notes",
+          "path": "/home/me/archive/photo.final.PNG"
+        },
+        "output": "Launch Notes"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://data.fabrikam.com/files/monthly-rollup",
+          "path": "/var/log/app/server.log"
+        },
+        "output": "Monthly Rollup"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://example.org/a/b/invoice-status",
+          "path": "s3://bucket/folder/items.parquet"
+        },
+        "output": "Invoice Status"
+      }
+    ]
+  },
+  {
+    "task_id": "file_extension",
+    "family": "url_file",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Extract the file extension.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://docs.example.com/reports/q1-summary",
+          "path": "/mnt/reports/q1-summary.xlsx"
+        },
+        "output": "xlsx"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "http://shop.acme.io/products/red-widget",
+          "path": "C:/exports/orders_2025_02.csv"
+        },
+        "output": "csv"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://support.contoso.com/kb/reset-password",
+          "path": "/tmp/raw/customer-list.json"
+        },
+        "output": "json"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://blog.northwind.net/2024/launch-notes",
+          "path": "/home/me/archive/photo.final.PNG"
+        },
+        "output": "png"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://data.fabrikam.com/files/monthly-rollup",
+          "path": "/var/log/app/server.log"
+        },
+        "output": "log"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://example.org/a/b/invoice-status",
+          "path": "s3://bucket/folder/items.parquet"
+        },
+        "output": "parquet"
+      }
+    ]
+  },
+  {
+    "task_id": "file_stem_title",
+    "family": "url_file",
+    "split": "heldout_composition",
+    "input_kind": "row",
+    "description": "Turn a file stem into a readable title.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://docs.example.com/reports/q1-summary",
+          "path": "/mnt/reports/q1-summary.xlsx"
+        },
+        "output": "Q1 Summary"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "http://shop.acme.io/products/red-widget",
+          "path": "C:/exports/orders_2025_02.csv"
+        },
+        "output": "Orders 2025 02"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://support.contoso.com/kb/reset-password",
+          "path": "/tmp/raw/customer-list.json"
+        },
+        "output": "Customer List"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "url": "https://blog.northwind.net/2024/launch-notes",
+          "path": "/home/me/archive/photo.final.PNG"
+        },
+        "output": "Photo"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://data.fabrikam.com/files/monthly-rollup",
+          "path": "/var/log/app/server.log"
+        },
+        "output": "Server"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "url": "https://example.org/a/b/invoice-status",
+          "path": "s3://bucket/folder/items.parquet"
+        },
+        "output": "Items"
+      }
+    ]
+  },
+  {
+    "task_id": "sku_prefix",
+    "family": "product",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Extract the product family prefix.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "sku": "AB-123-red",
+          "code": "INV:000145",
+          "status": "paid"
+        },
+        "output": "AB"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "ZX-9-blue",
+          "code": "PO:55421",
+          "status": "OPEN"
+        },
+        "output": "ZX"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "mn-777-green",
+          "code": "CASE:77",
+          "status": "complete"
+        },
+        "output": "MN"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "TT-42-black",
+          "code": "REQ:0099",
+          "status": "inactive"
+        },
+        "output": "TT"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "Q5-808-white",
+          "code": "INV:990001",
+          "status": "unpaid"
+        },
+        "output": "Q5"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "rr-5-orange",
+          "code": "BUG:331",
+          "status": "yes"
+        },
+        "output": "RR"
+      }
+    ]
+  },
+  {
+    "task_id": "sku_suffix",
+    "family": "product",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Extract the final SKU segment.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "sku": "AB-123-red",
+          "code": "INV:000145",
+          "status": "paid"
+        },
+        "output": "RED"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "ZX-9-blue",
+          "code": "PO:55421",
+          "status": "OPEN"
+        },
+        "output": "BLUE"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "mn-777-green",
+          "code": "CASE:77",
+          "status": "complete"
+        },
+        "output": "GREEN"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "TT-42-black",
+          "code": "REQ:0099",
+          "status": "inactive"
+        },
+        "output": "BLACK"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "Q5-808-white",
+          "code": "INV:990001",
+          "status": "unpaid"
+        },
+        "output": "WHITE"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "rr-5-orange",
+          "code": "BUG:331",
+          "status": "yes"
+        },
+        "output": "ORANGE"
+      }
+    ]
+  },
+  {
+    "task_id": "code_after_colon",
+    "family": "product",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Extract the code after a colon.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "sku": "AB-123-red",
+          "code": "INV:000145",
+          "status": "paid"
+        },
+        "output": "000145"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "ZX-9-blue",
+          "code": "PO:55421",
+          "status": "OPEN"
+        },
+        "output": "55421"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "mn-777-green",
+          "code": "CASE:77",
+          "status": "complete"
+        },
+        "output": "77"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "TT-42-black",
+          "code": "REQ:0099",
+          "status": "inactive"
+        },
+        "output": "0099"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "Q5-808-white",
+          "code": "INV:990001",
+          "status": "unpaid"
+        },
+        "output": "990001"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "rr-5-orange",
+          "code": "BUG:331",
+          "status": "yes"
+        },
+        "output": "331"
+      }
+    ]
+  },
+  {
+    "task_id": "status_boolean",
+    "family": "product",
+    "split": "heldout_new_family",
+    "input_kind": "row",
+    "description": "Map common status words to booleans.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "sku": "AB-123-red",
+          "code": "INV:000145",
+          "status": "paid"
+        },
+        "output": true
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "ZX-9-blue",
+          "code": "PO:55421",
+          "status": "OPEN"
+        },
+        "output": false
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "mn-777-green",
+          "code": "CASE:77",
+          "status": "complete"
+        },
+        "output": true
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "TT-42-black",
+          "code": "REQ:0099",
+          "status": "inactive"
+        },
+        "output": false
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "Q5-808-white",
+          "code": "INV:990001",
+          "status": "unpaid"
+        },
+        "output": false
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "rr-5-orange",
+          "code": "BUG:331",
+          "status": "yes"
+        },
+        "output": true
+      }
+    ]
+  },
+  {
+    "task_id": "sku_middle_segment",
+    "family": "product",
+    "split": "stress_out_of_abi",
+    "input_kind": "row",
+    "description": "Extract the middle SKU segment.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "sku": "AB-123-red",
+          "code": "INV:000145",
+          "status": "paid"
+        },
+        "output": "123"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "ZX-9-blue",
+          "code": "PO:55421",
+          "status": "OPEN"
+        },
+        "output": "9"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "mn-777-green",
+          "code": "CASE:77",
+          "status": "complete"
+        },
+        "output": "777"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "sku": "TT-42-black",
+          "code": "REQ:0099",
+          "status": "inactive"
+        },
+        "output": "42"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "Q5-808-white",
+          "code": "INV:990001",
+          "status": "unpaid"
+        },
+        "output": "808"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "sku": "rr-5-orange",
+          "code": "BUG:331",
+          "status": "yes"
+        },
+        "output": "5"
+      }
+    ]
+  },
+  {
+    "task_id": "address_zip5",
+    "family": "address",
+    "split": "heldout_new_family",
+    "input_kind": "row",
+    "description": "Extract five-digit ZIP code.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "address": "144 Market St, San Francisco, CA 94105-1234"
+        },
+        "output": "94105"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "9 Lake Road, Seattle, WA 98101"
+        },
+        "output": "98101"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "77 Main Ave, Austin, TX 78701"
+        },
+        "output": "78701"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "12 Broadway, New York, NY 10004"
+        },
+        "output": "10004"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "address": "8 Pearl St, Boston, MA 02110-2201"
+        },
+        "output": "02110"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "address": "500 Pine, Denver, CO 80202"
+        },
+        "output": "80202"
+      }
+    ]
+  },
+  {
+    "task_id": "address_state",
+    "family": "address",
+    "split": "heldout_new_family",
+    "input_kind": "row",
+    "description": "Extract two-letter state code.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "address": "144 Market St, San Francisco, CA 94105-1234"
+        },
+        "output": "CA"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "9 Lake Road, Seattle, WA 98101"
+        },
+        "output": "WA"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "77 Main Ave, Austin, TX 78701"
+        },
+        "output": "TX"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "12 Broadway, New York, NY 10004"
+        },
+        "output": "NY"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "address": "8 Pearl St, Boston, MA 02110-2201"
+        },
+        "output": "MA"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "address": "500 Pine, Denver, CO 80202"
+        },
+        "output": "CO"
+      }
+    ]
+  },
+  {
+    "task_id": "address_city",
+    "family": "address",
+    "split": "heldout_new_family",
+    "input_kind": "row",
+    "description": "Extract city before state and ZIP.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "address": "144 Market St, San Francisco, CA 94105-1234"
+        },
+        "output": "San Francisco"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "9 Lake Road, Seattle, WA 98101"
+        },
+        "output": "Seattle"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "77 Main Ave, Austin, TX 78701"
+        },
+        "output": "Austin"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "address": "12 Broadway, New York, NY 10004"
+        },
+        "output": "New York"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "address": "8 Pearl St, Boston, MA 02110-2201"
+        },
+        "output": "Boston"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "address": "500 Pine, Denver, CO 80202"
+        },
+        "output": "Denver"
+      }
+    ]
+  },
+  {
+    "task_id": "text_normalize_spaces",
+    "family": "text",
+    "split": "calibration",
+    "input_kind": "row",
+    "description": "Normalize whitespace.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "text": "  Alpha   beta\tGamma  ",
+          "phrase": "quarterly revenue report"
+        },
+        "output": "Alpha beta Gamma"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "hello---world!!",
+          "phrase": "customer support ticket"
+        },
+        "output": "hello---world!!"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": " ACME, Inc. ",
+          "phrase": "north east region"
+        },
+        "output": "ACME, Inc."
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "foo_bar baz",
+          "phrase": "product launch plan"
+        },
+        "output": "foo_bar baz"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "Line   Item #42",
+          "phrase": "data quality review"
+        },
+        "output": "Line Item #42"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "two   spaces",
+          "phrase": "monthly close checklist"
+        },
+        "output": "two spaces"
+      }
+    ]
+  },
+  {
+    "task_id": "text_alnum_upper",
+    "family": "text",
+    "split": "heldout_composition",
+    "input_kind": "row",
+    "description": "Keep alphanumerics and uppercase.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "text": "  Alpha   beta\tGamma  ",
+          "phrase": "quarterly revenue report"
+        },
+        "output": "ALPHABETAGAMMA"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "hello---world!!",
+          "phrase": "customer support ticket"
+        },
+        "output": "HELLOWORLD"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": " ACME, Inc. ",
+          "phrase": "north east region"
+        },
+        "output": "ACMEINC"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "foo_bar baz",
+          "phrase": "product launch plan"
+        },
+        "output": "FOOBARBAZ"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "Line   Item #42",
+          "phrase": "data quality review"
+        },
+        "output": "LINEITEM42"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "two   spaces",
+          "phrase": "monthly close checklist"
+        },
+        "output": "TWOSPACES"
+      }
+    ]
+  },
+  {
+    "task_id": "phrase_initials",
+    "family": "text",
+    "split": "heldout_same_family",
+    "input_kind": "row",
+    "description": "Return phrase initials.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "text": "  Alpha   beta\tGamma  ",
+          "phrase": "quarterly revenue report"
+        },
+        "output": "QRR"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "hello---world!!",
+          "phrase": "customer support ticket"
+        },
+        "output": "CST"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": " ACME, Inc. ",
+          "phrase": "north east region"
+        },
+        "output": "NER"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "foo_bar baz",
+          "phrase": "product launch plan"
+        },
+        "output": "PLP"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "Line   Item #42",
+          "phrase": "data quality review"
+        },
+        "output": "DQR"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "two   spaces",
+          "phrase": "monthly close checklist"
+        },
+        "output": "MCC"
+      }
+    ]
+  },
+  {
+    "task_id": "phrase_slug",
+    "family": "text",
+    "split": "stress_out_of_abi",
+    "input_kind": "row",
+    "description": "Convert a phrase to kebab-case slug.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": {
+          "text": "  Alpha   beta\tGamma  ",
+          "phrase": "quarterly revenue report"
+        },
+        "output": "quarterly-revenue-report"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "hello---world!!",
+          "phrase": "customer support ticket"
+        },
+        "output": "customer-support-ticket"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": " ACME, Inc. ",
+          "phrase": "north east region"
+        },
+        "output": "north-east-region"
+      },
+      {
+        "phase": "train",
+        "input": {
+          "text": "foo_bar baz",
+          "phrase": "product launch plan"
+        },
+        "output": "product-launch-plan"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "Line   Item #42",
+          "phrase": "data quality review"
+        },
+        "output": "data-quality-review"
+      },
+      {
+        "phase": "test",
+        "input": {
+          "text": "two   spaces",
+          "phrase": "monthly close checklist"
+        },
+        "output": "monthly-close-checklist"
+      }
+    ]
+  },
+  {
+    "task_id": "table_count_rows",
+    "family": "table",
+    "split": "heldout_new_family",
+    "input_kind": "table",
+    "description": "Count rows in a small table.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 120.0,
+            "qty": 2,
+            "date": "2024-01-05"
+          },
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 80.0,
+            "qty": 1,
+            "date": "2024-01-09"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 35.0,
+            "qty": 3,
+            "date": "2024-01-12"
+          }
+        ],
+        "output": 3
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "South",
+            "status": "paid",
+            "amount": 10.0,
+            "qty": 1,
+            "date": "2024-02-01"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 15.0,
+            "qty": 2,
+            "date": "2024-02-02"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 40.0,
+            "qty": 4,
+            "date": "2024-02-03"
+          }
+        ],
+        "output": 3
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 99.0,
+            "qty": 5,
+            "date": "2024-03-01"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 11.0,
+            "qty": 1,
+            "date": "2024-03-04"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 45.0,
+            "qty": 2,
+            "date": "2024-03-07"
+          }
+        ],
+        "output": 3
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 70.0,
+            "qty": 1,
+            "date": "2024-04-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 30.0,
+            "qty": 2,
+            "date": "2024-04-03"
+          },
+          {
+            "region": "South",
+            "status": "open",
+            "amount": 60.0,
+            "qty": 2,
+            "date": "2024-04-05"
+          }
+        ],
+        "output": 3
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 22.0,
+            "qty": 1,
+            "date": "2024-05-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 18.0,
+            "qty": 1,
+            "date": "2024-05-02"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 77.0,
+            "qty": 3,
+            "date": "2024-05-09"
+          }
+        ],
+        "output": 3
+      }
+    ]
+  },
+  {
+    "task_id": "table_sum_amount",
+    "family": "table",
+    "split": "heldout_new_family",
+    "input_kind": "table",
+    "description": "Sum the amount column.",
+    "constants": [],
+    "examples": [
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 120.0,
+            "qty": 2,
+            "date": "2024-01-05"
+          },
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 80.0,
+            "qty": 1,
+            "date": "2024-01-09"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 35.0,
+            "qty": 3,
+            "date": "2024-01-12"
+          }
+        ],
+        "output": 235.0
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "South",
+            "status": "paid",
+            "amount": 10.0,
+            "qty": 1,
+            "date": "2024-02-01"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 15.0,
+            "qty": 2,
+            "date": "2024-02-02"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 40.0,
+            "qty": 4,
+            "date": "2024-02-03"
+          }
+        ],
+        "output": 65.0
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 99.0,
+            "qty": 5,
+            "date": "2024-03-01"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 11.0,
+            "qty": 1,
+            "date": "2024-03-04"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 45.0,
+            "qty": 2,
+            "date": "2024-03-07"
+          }
+        ],
+        "output": 155.0
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 70.0,
+            "qty": 1,
+            "date": "2024-04-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 30.0,
+            "qty": 2,
+            "date": "2024-04-03"
+          },
+          {
+            "region": "South",
+            "status": "open",
+            "amount": 60.0,
+            "qty": 2,
+            "date": "2024-04-05"
+          }
+        ],
+        "output": 160.0
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 22.0,
+            "qty": 1,
+            "date": "2024-05-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 18.0,
+            "qty": 1,
+            "date": "2024-05-02"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 77.0,
+            "qty": 3,
+            "date": "2024-05-09"
+          }
+        ],
+        "output": 117.0
+      }
+    ]
+  },
+  {
+    "task_id": "table_sum_paid_amount",
+    "family": "table",
+    "split": "heldout_composition",
+    "input_kind": "table",
+    "description": "Sum amount where status is paid.",
+    "constants": [
+      "paid"
+    ],
+    "examples": [
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 120.0,
+            "qty": 2,
+            "date": "2024-01-05"
+          },
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 80.0,
+            "qty": 1,
+            "date": "2024-01-09"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 35.0,
+            "qty": 3,
+            "date": "2024-01-12"
+          }
+        ],
+        "output": 155.0
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "South",
+            "status": "paid",
+            "amount": 10.0,
+            "qty": 1,
+            "date": "2024-02-01"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 15.0,
+            "qty": 2,
+            "date": "2024-02-02"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 40.0,
+            "qty": 4,
+            "date": "2024-02-03"
+          }
+        ],
+        "output": 50.0
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 99.0,
+            "qty": 5,
+            "date": "2024-03-01"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 11.0,
+            "qty": 1,
+            "date": "2024-03-04"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 45.0,
+            "qty": 2,
+            "date": "2024-03-07"
+          }
+        ],
+        "output": 110.0
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 70.0,
+            "qty": 1,
+            "date": "2024-04-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 30.0,
+            "qty": 2,
+            "date": "2024-04-03"
+          },
+          {
+            "region": "South",
+            "status": "open",
+            "amount": 60.0,
+            "qty": 2,
+            "date": "2024-04-05"
+          }
+        ],
+        "output": 100.0
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 22.0,
+            "qty": 1,
+            "date": "2024-05-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 18.0,
+            "qty": 1,
+            "date": "2024-05-02"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 77.0,
+            "qty": 3,
+            "date": "2024-05-09"
+          }
+        ],
+        "output": 95.0
+      }
+    ]
+  },
+  {
+    "task_id": "table_count_west",
+    "family": "table",
+    "split": "heldout_composition",
+    "input_kind": "table",
+    "description": "Count rows where region is West.",
+    "constants": [
+      "West"
+    ],
+    "examples": [
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 120.0,
+            "qty": 2,
+            "date": "2024-01-05"
+          },
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 80.0,
+            "qty": 1,
+            "date": "2024-01-09"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 35.0,
+            "qty": 3,
+            "date": "2024-01-12"
+          }
+        ],
+        "output": 2
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "South",
+            "status": "paid",
+            "amount": 10.0,
+            "qty": 1,
+            "date": "2024-02-01"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 15.0,
+            "qty": 2,
+            "date": "2024-02-02"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 40.0,
+            "qty": 4,
+            "date": "2024-02-03"
+          }
+        ],
+        "output": 2
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 99.0,
+            "qty": 5,
+            "date": "2024-03-01"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 11.0,
+            "qty": 1,
+            "date": "2024-03-04"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 45.0,
+            "qty": 2,
+            "date": "2024-03-07"
+          }
+        ],
+        "output": 1
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 70.0,
+            "qty": 1,
+            "date": "2024-04-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 30.0,
+            "qty": 2,
+            "date": "2024-04-03"
+          },
+          {
+            "region": "South",
+            "status": "open",
+            "amount": 60.0,
+            "qty": 2,
+            "date": "2024-04-05"
+          }
+        ],
+        "output": 2
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 22.0,
+            "qty": 1,
+            "date": "2024-05-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 18.0,
+            "qty": 1,
+            "date": "2024-05-02"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 77.0,
+            "qty": 3,
+            "date": "2024-05-09"
+          }
+        ],
+        "output": 1
+      }
+    ]
+  },
+  {
+    "task_id": "table_sum_west_qty",
+    "family": "table",
+    "split": "heldout_composition",
+    "input_kind": "table",
+    "description": "Sum quantity where region is West.",
+    "constants": [
+      "West"
+    ],
+    "examples": [
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 120.0,
+            "qty": 2,
+            "date": "2024-01-05"
+          },
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 80.0,
+            "qty": 1,
+            "date": "2024-01-09"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 35.0,
+            "qty": 3,
+            "date": "2024-01-12"
+          }
+        ],
+        "output": 5
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "South",
+            "status": "paid",
+            "amount": 10.0,
+            "qty": 1,
+            "date": "2024-02-01"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 15.0,
+            "qty": 2,
+            "date": "2024-02-02"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 40.0,
+            "qty": 4,
+            "date": "2024-02-03"
+          }
+        ],
+        "output": 6
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 99.0,
+            "qty": 5,
+            "date": "2024-03-01"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 11.0,
+            "qty": 1,
+            "date": "2024-03-04"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 45.0,
+            "qty": 2,
+            "date": "2024-03-07"
+          }
+        ],
+        "output": 2
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 70.0,
+            "qty": 1,
+            "date": "2024-04-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 30.0,
+            "qty": 2,
+            "date": "2024-04-03"
+          },
+          {
+            "region": "South",
+            "status": "open",
+            "amount": 60.0,
+            "qty": 2,
+            "date": "2024-04-05"
+          }
+        ],
+        "output": 3
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 22.0,
+            "qty": 1,
+            "date": "2024-05-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 18.0,
+            "qty": 1,
+            "date": "2024-05-02"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 77.0,
+            "qty": 3,
+            "date": "2024-05-09"
+          }
+        ],
+        "output": 1
+      }
+    ]
+  },
+  {
+    "task_id": "table_latest_paid_amount",
+    "family": "table",
+    "split": "stress_out_of_abi",
+    "input_kind": "table",
+    "description": "Return amount from latest paid order.",
+    "constants": [
+      "paid"
+    ],
+    "examples": [
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 120.0,
+            "qty": 2,
+            "date": "2024-01-05"
+          },
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 80.0,
+            "qty": 1,
+            "date": "2024-01-09"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 35.0,
+            "qty": 3,
+            "date": "2024-01-12"
+          }
+        ],
+        "output": 35.0
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "South",
+            "status": "paid",
+            "amount": 10.0,
+            "qty": 1,
+            "date": "2024-02-01"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 15.0,
+            "qty": 2,
+            "date": "2024-02-02"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 40.0,
+            "qty": 4,
+            "date": "2024-02-03"
+          }
+        ],
+        "output": 40.0
+      },
+      {
+        "phase": "train",
+        "input": [
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 99.0,
+            "qty": 5,
+            "date": "2024-03-01"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 11.0,
+            "qty": 1,
+            "date": "2024-03-04"
+          },
+          {
+            "region": "West",
+            "status": "open",
+            "amount": 45.0,
+            "qty": 2,
+            "date": "2024-03-07"
+          }
+        ],
+        "output": 11.0
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 70.0,
+            "qty": 1,
+            "date": "2024-04-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 30.0,
+            "qty": 2,
+            "date": "2024-04-03"
+          },
+          {
+            "region": "South",
+            "status": "open",
+            "amount": 60.0,
+            "qty": 2,
+            "date": "2024-04-05"
+          }
+        ],
+        "output": 30.0
+      },
+      {
+        "phase": "test",
+        "input": [
+          {
+            "region": "East",
+            "status": "open",
+            "amount": 22.0,
+            "qty": 1,
+            "date": "2024-05-01"
+          },
+          {
+            "region": "West",
+            "status": "paid",
+            "amount": 18.0,
+            "qty": 1,
+            "date": "2024-05-02"
+          },
+          {
+            "region": "East",
+            "status": "paid",
+            "amount": 77.0,
+            "qty": 3,
+            "date": "2024-05-09"
+          }
+        ],
+        "output": 77.0
+      }
+    ]
+  }
+]

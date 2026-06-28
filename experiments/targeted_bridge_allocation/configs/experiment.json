@@ -1,0 +1,107 @@
+{
+  "experiment": "targeted_bridge_allocation",
+  "question": "Does fixed-budget targeted bridge allocation improve trace-conditioned recombination repair compared with uniform bridge allocation?",
+  "seed": 20260622,
+  "model": {
+    "model_id": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5"
+  },
+  "training": {
+    "records_per_condition": 240,
+    "epochs": 3.0,
+    "learning_rate": 0.00015,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "max_length": 3072,
+    "gradient_accumulation_steps": 8,
+    "save_steps": 30,
+    "eval_steps": 30
+  },
+  "evaluation": {
+    "splits": [
+      "seen_iid",
+      "format_shift",
+      "recombination_holdout"
+    ],
+    "max_new_tokens": 256
+  },
+  "allocation_plans": {
+    "uniform2": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 2,
+        "length_contains_code": 2,
+        "tuple_branch_label": 2,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2
+      }
+    },
+    "uniform4": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 4,
+        "length_contains_code": 4,
+        "tuple_branch_label": 4,
+        "sorted_contains_count": 4,
+        "sorted_tuple_affine": 4
+      }
+    },
+    "hard_target": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 8,
+        "length_contains_code": 8,
+        "tuple_branch_label": 8,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2
+      }
+    },
+    "hard_target_seen_preserving": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 6,
+        "length_contains_code": 6,
+        "tuple_branch_label": 6,
+        "sorted_contains_count": 1,
+        "sorted_tuple_affine": 1
+      }
+    },
+    "easy_target_control": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 2,
+        "length_contains_code": 2,
+        "tuple_branch_label": 2,
+        "sorted_contains_count": 11,
+        "sorted_tuple_affine": 11
+      }
+    },
+    "modulo16": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 16,
+        "length_contains_code": 2,
+        "tuple_branch_label": 2,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2
+      }
+    },
+    "length16": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 2,
+        "length_contains_code": 16,
+        "tuple_branch_label": 2,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2
+      }
+    },
+    "tuple16": {
+      "bridge_counts_by_family": {
+        "modulo_sum_label": 2,
+        "length_contains_code": 2,
+        "tuple_branch_label": 16,
+        "sorted_contains_count": 2,
+        "sorted_tuple_affine": 2
+      }
+    }
+  },
+  "artifact_layout": {
+    "compact_dir": "experiments/targeted_bridge_allocation",
+    "large_artifact_dir": "large_artifacts/targeted_bridge_allocation/models"
+  }
+}

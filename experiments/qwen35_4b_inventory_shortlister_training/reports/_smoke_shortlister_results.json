@@ -1,0 +1,740 @@
+{
+  "beam_width": 16,
+  "candidate_budgets": [
+    1024,
+    4096,
+    16384
+  ],
+  "max_length": 5120,
+  "prediction_rows": [
+    {
+      "control": "trained_model",
+      "id": "eval_pair_compare_gate_00025",
+      "left_beams": [
+        "op_111",
+        "op_119",
+        "op_121",
+        "op_114",
+        "op_113",
+        "op_118",
+        "op_112",
+        "op_115",
+        "op_110",
+        "op_191",
+        "op_131",
+        "op_101",
+        "op_141",
+        "op_411",
+        "op_129",
+        "op_116"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_114",
+        "op_118",
+        "op_119",
+        "op_121",
+        "op_112",
+        "op_110",
+        "op_115",
+        "op_113",
+        "op_191",
+        "op_116",
+        "op_141",
+        "op_101",
+        "op_181",
+        "op_129",
+        "op_124"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_406",
+      "target_right_alias": "op_012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "id": "eval_pair_compare_gate_00081",
+      "left_beams": [
+        "op_111",
+        "op_121",
+        "op_114",
+        "op_118",
+        "op_119",
+        "op_112",
+        "op_110",
+        "op_115",
+        "op_113",
+        "op_191",
+        "op_141",
+        "op_116",
+        "op_101",
+        "op_151",
+        "op_161",
+        "op_131"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_114",
+        "op_119",
+        "op_112",
+        "op_110",
+        "op_115",
+        "op_113",
+        "op_118",
+        "op_121",
+        "op_191",
+        "op_141",
+        "op_116",
+        "op_411",
+        "op_181",
+        "op_161",
+        "op_151"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_503",
+      "target_right_alias": "op_419",
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model",
+      "id": "eval_pair_affine_mod_00034",
+      "left_beams": [
+        "op_111",
+        "op_114",
+        "op_119",
+        "op_121",
+        "op_118",
+        "op_115",
+        "op_112",
+        "op_113",
+        "op_110",
+        "op_141",
+        "op_116",
+        "op_191",
+        "op_181",
+        "op_161",
+        "op_129",
+        "op_128"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_114",
+        "op_119",
+        "op_141",
+        "op_121",
+        "op_113",
+        "op_110",
+        "op_118",
+        "op_112",
+        "op_115",
+        "op_151",
+        "op_191",
+        "op_181",
+        "op_116",
+        "op_131",
+        "op_161"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_135",
+      "target_right_alias": "op_353",
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "id": "eval_pair_compare_gate_00031",
+      "left_beams": [
+        "op_111",
+        "op_114",
+        "op_118",
+        "op_119",
+        "op_121",
+        "op_112",
+        "op_110",
+        "op_115",
+        "op_113",
+        "op_191",
+        "op_116",
+        "op_141",
+        "op_161",
+        "op_129",
+        "op_124",
+        "op_131"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_114",
+        "op_119",
+        "op_121",
+        "op_118",
+        "op_115",
+        "op_112",
+        "op_113",
+        "op_110",
+        "op_141",
+        "op_101",
+        "op_191",
+        "op_131",
+        "op_116",
+        "op_411",
+        "op_161"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_365",
+      "target_right_alias": "op_068",
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_pair_compare_gate_00025",
+      "left_beams": [
+        "op_111",
+        "op_118",
+        "op_114",
+        "op_119",
+        "op_121",
+        "op_112",
+        "op_113",
+        "op_110",
+        "op_115",
+        "op_141",
+        "op_161",
+        "op_191",
+        "op_131",
+        "op_101",
+        "op_116",
+        "op_151"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_114",
+        "op_118",
+        "op_119",
+        "op_121",
+        "op_112",
+        "op_110",
+        "op_115",
+        "op_113",
+        "op_191",
+        "op_101",
+        "op_161",
+        "op_116",
+        "op_141",
+        "op_181",
+        "op_129"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_406",
+      "target_right_alias": "op_012",
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_pair_compare_gate_00081",
+      "left_beams": [
+        "op_111",
+        "op_118",
+        "op_114",
+        "op_119",
+        "op_121",
+        "op_112",
+        "op_113",
+        "op_110",
+        "op_115",
+        "op_191",
+        "op_141",
+        "op_181",
+        "op_131",
+        "op_101",
+        "op_116",
+        "op_161"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_118",
+        "op_110",
+        "op_112",
+        "op_114",
+        "op_119",
+        "op_121",
+        "op_141",
+        "op_113",
+        "op_115",
+        "op_191",
+        "op_181",
+        "op_151",
+        "op_161",
+        "op_131",
+        "op_411"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_503",
+      "target_right_alias": "op_419",
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_pair_affine_mod_00034",
+      "left_beams": [
+        "op_111",
+        "op_121",
+        "op_110",
+        "op_114",
+        "op_119",
+        "op_118",
+        "op_191",
+        "op_141",
+        "op_112",
+        "op_115",
+        "op_113",
+        "op_129",
+        "op_151",
+        "op_131",
+        "op_411",
+        "op_161"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_121",
+        "op_114",
+        "op_118",
+        "op_119",
+        "op_112",
+        "op_113",
+        "op_110",
+        "op_115",
+        "op_411",
+        "op_191",
+        "op_141",
+        "op_129",
+        "op_131",
+        "op_116",
+        "op_101"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_135",
+      "target_right_alias": "op_353",
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "id": "eval_pair_compare_gate_00031",
+      "left_beams": [
+        "op_111",
+        "op_118",
+        "op_110",
+        "op_112",
+        "op_114",
+        "op_119",
+        "op_121",
+        "op_115",
+        "op_113",
+        "op_191",
+        "op_101",
+        "op_141",
+        "op_116",
+        "op_161",
+        "op_129",
+        "op_181"
+      ],
+      "left_top1": "op_111",
+      "left_top128_hit": false,
+      "left_top1_hit": false,
+      "left_top32_hit": false,
+      "left_top64_hit": false,
+      "pair_budget1024_hit": false,
+      "pair_budget16384_hit": false,
+      "pair_budget4096_hit": false,
+      "pair_top1_hit": false,
+      "right_beams": [
+        "op_111",
+        "op_118",
+        "op_110",
+        "op_112",
+        "op_114",
+        "op_119",
+        "op_121",
+        "op_115",
+        "op_113",
+        "op_191",
+        "op_141",
+        "op_161",
+        "op_101",
+        "op_151",
+        "op_116",
+        "op_131"
+      ],
+      "right_top1": "op_111",
+      "right_top128_hit": false,
+      "right_top1_hit": false,
+      "right_top32_hit": false,
+      "right_top64_hit": false,
+      "target_left_alias": "op_365",
+      "target_right_alias": "op_068",
+      "template": "pair_compare_gate"
+    }
+  ],
+  "prediction_summary_by_control": [
+    {
+      "control": "trained_model",
+      "left_top1_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_budget1024_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_budget16384_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_budget4096_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_top1_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "records": 4,
+      "right_top1_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      }
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_top1_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_budget1024_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_budget16384_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_budget4096_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "pair_top1_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      },
+      "records": 4,
+      "right_top1_hit": {
+        "rate": 0.0,
+        "records": 4,
+        "successes": 0
+      }
+    }
+  ],
+  "prediction_summary_by_control_template": [
+    {
+      "control": "trained_model",
+      "left_top1_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_budget1024_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_budget16384_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_budget4096_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_top1_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "records": 1,
+      "right_top1_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model",
+      "left_top1_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_budget1024_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_budget16384_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_budget4096_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_top1_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "records": 3,
+      "right_top1_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_top1_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_budget1024_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_budget16384_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_budget4096_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "pair_top1_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "records": 1,
+      "right_top1_hit": {
+        "rate": 0.0,
+        "records": 1,
+        "successes": 0
+      },
+      "template": "pair_affine_mod"
+    },
+    {
+      "control": "trained_model_shuffled_inventory",
+      "left_top1_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_budget1024_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_budget16384_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_budget4096_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "pair_top1_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "records": 3,
+      "right_top1_hit": {
+        "rate": 0.0,
+        "records": 3,
+        "successes": 0
+      },
+      "template": "pair_compare_gate"
+    }
+  ],
+  "probe_rows": [
+    {
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_visible": true,
+      "designed_visible_consistent_count": 3345,
+      "id": "eval_pair_compare_gate_00025",
+      "oracle_hidden_all": true,
+      "raw_candidate_count": 262144,
+      "selected_hidden_all": true,
+      "target_in_visible": true,
+      "template": "pair_compare_gate",
+      "visible_consistent_count": 3116
+    },
+    {
+      "designed_oracle_hidden_all": true,
+      "designed_queries": 6,
+      "designed_selected_hidden_all": true,
+      "designed_target_in_visible": true,
+      "designed_visible_consistent_count": 16813,
+      "id": "eval_pair_compare_gate_00081",
+      "oracle_hidden_all": true,
+      "raw_candidate_count": 262144,
+      "selected_hidden_all": true,
+      "target_in_visible": true,
+      "template": "pair_compare_gate",
+      "visible_consistent_count": 31842
+    }
+  ],
+  "probe_summary": {
+    "designed_selected_hidden_all": {
+      "rate": 1.0,
+      "records": 2,
+      "successes": 2
+    },
+    "designed_target_in_visible": {
+      "rate": 1.0,
+      "records": 2,
+      "successes": 2
+    },
+    "designed_visible_consistent_count": 10079.0,
+    "random_selected_hidden_all": {
+      "rate": 1.0,
+      "records": 2,
+      "successes": 2
+    },
+    "random_target_in_visible": {
+      "rate": 1.0,
+      "records": 2,
+      "successes": 2
+    },
+    "random_visible_consistent_count": 17479.0,
+    "records": 2
+  },
+  "records": 4,
+  "slot_topk_for_budgets": {
+    "1024": 32,
+    "4096": 64,
+    "16384": 128
+  }
+}

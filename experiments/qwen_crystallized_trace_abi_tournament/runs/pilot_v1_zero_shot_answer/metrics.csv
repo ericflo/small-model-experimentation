@@ -1,0 +1,4 @@
+run,suite,arm,seed,trained,split,n,answer_accuracy,valid_rate,mean_new_tokens,acc_string,acc_unit,acc_table,acc_date
+pilot_v1_zero_shot_answer,pilot,zero_shot_answer,0,0,eval_indist,16,0.0,0.0625,32.0,0.0,0.0,0.0,0.0
+pilot_v1_zero_shot_answer,pilot,zero_shot_answer,0,0,eval_composition,16,0.0,0.125,32.0,0.0,0.0,0.0,0.0
+pilot_v1_zero_shot_answer,pilot,zero_shot_answer,0,0,eval_template_shift,16,0.0,0.0625,32.0,0.0,0.0,0.0,0.0

@@ -1,0 +1,3 @@
+run,variant,epoch,loss,action_ce,observation_ce,train_examples,action_tokens,observation_tokens
+pilot_vm_agent_echo_blank_exactstop_a128,echo,1,0.7089737207116429,0.4982245339890664,0.121901669445722,128,5553,166072
+pilot_vm_agent_echo_blank_exactstop_a128,echo,2,0.1984263233018263,0.2477016223351847,0.07584740001661863,128,5553,166072

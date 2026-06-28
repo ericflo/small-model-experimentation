@@ -1,0 +1,98 @@
+{
+  "batch_size": 1,
+  "beta": 0.05,
+  "grad_accum": 4,
+  "learning_rate": 3e-05,
+  "logprob_normalization": "mean_token",
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_r": 16,
+  "max_length": 1536,
+  "max_steps": 10,
+  "metrics": [
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6931471824645996,
+      "pi_margin": 0.21161015331745148,
+      "ref_margin": 0.21161015331745148,
+      "reward_margin": 0.0,
+      "step": 1
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6927943229675293,
+      "pi_margin": 0.050144270062446594,
+      "ref_margin": 0.036026954650878906,
+      "reward_margin": 0.014117315411567688,
+      "step": 2
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6863309741020203,
+      "pi_margin": 0.8005640506744385,
+      "ref_margin": 0.5269788503646851,
+      "reward_margin": 0.2735852003097534,
+      "step": 3
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6932573914527893,
+      "pi_margin": 0.18867594003677368,
+      "ref_margin": 0.19308575987815857,
+      "reward_margin": -0.004409819841384888,
+      "step": 4
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.693079948425293,
+      "pi_margin": 0.46930527687072754,
+      "ref_margin": 0.4666155278682709,
+      "reward_margin": 0.002689749002456665,
+      "step": 5
+    },
+    {
+      "chosen_win_rate": 0.0,
+      "loss": 0.6943790912628174,
+      "pi_margin": -0.15137484669685364,
+      "ref_margin": -0.10212942957878113,
+      "reward_margin": -0.04924541711807251,
+      "step": 6
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6926244497299194,
+      "pi_margin": 0.25608888268470764,
+      "ref_margin": 0.23517489433288574,
+      "reward_margin": 0.0209139883518219,
+      "step": 7
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6914085149765015,
+      "pi_margin": 0.33527812361717224,
+      "ref_margin": 0.26567089557647705,
+      "reward_margin": 0.06960722804069519,
+      "step": 8
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6921303868293762,
+      "pi_margin": 0.1904631406068802,
+      "ref_margin": 0.1497710645198822,
+      "reward_margin": 0.040692076086997986,
+      "step": 9
+    },
+    {
+      "chosen_win_rate": 1.0,
+      "loss": 0.6854829788208008,
+      "pi_margin": 0.3566060960292816,
+      "ref_margin": 0.0488547682762146,
+      "reward_margin": 0.307751327753067,
+      "step": 10
+    }
+  ],
+  "pair_rows": 58,
+  "pairs_in": "data/pilot_pairs_combined_real.jsonl",
+  "run_name": "conservative_dpo",
+  "tokenized_pairs": 58
+}

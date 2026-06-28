@@ -1,0 +1,61 @@
+{
+  "arms": {
+    "full_sample_base": {
+      "coverage": 0.0,
+      "forward_tokens": 0,
+      "mean_distinct_functional_rate": 0.0,
+      "mean_distinct_program_rate": 0.0,
+      "pass1_proxy": 0.0,
+      "task_count": 2,
+      "visible_coverage": 0.0
+    },
+    "prefix_lexical_selected": {
+      "coverage": 0.0,
+      "forward_tokens": 0,
+      "mean_distinct_functional_rate": 0.0,
+      "mean_distinct_program_rate": 0.0,
+      "pass1_proxy": 0.0,
+      "task_count": 2,
+      "visible_coverage": 0.0
+    },
+    "prefix_oracle_selected": {
+      "coverage": 0.0,
+      "forward_tokens": 0,
+      "mean_distinct_functional_rate": 0.0,
+      "mean_distinct_program_rate": 0.0,
+      "pass1_proxy": 0.0,
+      "task_count": 2,
+      "visible_coverage": 0.0
+    },
+    "prefix_random_selected": {
+      "coverage": 0.0,
+      "forward_tokens": 0,
+      "mean_distinct_functional_rate": 0.0,
+      "mean_distinct_program_rate": 0.0,
+      "pass1_proxy": 0.0,
+      "task_count": 2,
+      "visible_coverage": 0.0
+    },
+    "prefix_union": {
+      "coverage": 0.0,
+      "forward_tokens": 0,
+      "mean_distinct_functional_rate": 0.0,
+      "mean_distinct_program_rate": 0.0,
+      "pass1_proxy": 0.0,
+      "task_count": 2,
+      "visible_coverage": 0.0
+    }
+  },
+  "completion_budget_matched": true,
+  "completions_per_prefix": 2,
+  "count": 2,
+  "experiment": "qwen35_4b_prefix_value_guided_search",
+  "full_samples": 4,
+  "mean_valid_prefixes": 2.0,
+  "offset": 0,
+  "prefix_count": 2,
+  "prefix_lines": 3,
+  "seed": 20260626,
+  "split": "test",
+  "temperature": 0.9
+}

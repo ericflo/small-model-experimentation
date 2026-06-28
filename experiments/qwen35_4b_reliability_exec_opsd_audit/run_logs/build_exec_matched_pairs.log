@@ -1,0 +1,27 @@
+<unknown>:3: SyntaxWarning: invalid escape sequence '\B'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\B'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\B'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\B'
+{
+  "experiment": "qwen35_4b_reliability_exec_opsd_audit",
+  "fork_strata": {
+    "hint_overlap": 162,
+    "task_specific": 54
+  },
+  "forks": 216,
+  "matched_pairs": 59,
+  "path": "data/exec_matched_pairs.jsonl",
+  "source_arms": [
+    "retrieval_adapt_semantic_t0p0_top3_records.jsonl",
+    "retrieval_adapt_semantic_t0p1_top3_records.jsonl",
+    "retrieval_adapt_semantic_t0p2_top3_records.jsonl",
+    "retrieval_adapt_random_top3_records.jsonl",
+    "retrieval_adapt_shuffled_top3_records.jsonl",
+    "retrieval_copy_rename_top3_records.jsonl"
+  ],
+  "tasks": [
+    35,
+    44,
+    87
+  ]
+}

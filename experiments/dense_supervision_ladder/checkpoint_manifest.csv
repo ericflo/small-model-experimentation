@@ -1,0 +1,16 @@
+run,filename,checkpoint_path_from_experiment_root,size_bytes,size_mb
+main_full_belief_mod31,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/main_full_belief_mod31/checkpoint_final.pt,14166995,13.51
+main_prefix_query_mod31,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/main_prefix_query_mod31/checkpoint_final.pt,14166995,13.51
+main_sampled_final_mod31,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/main_sampled_final_mod31/checkpoint_final.pt,14166995,13.51
+main_soft_final_query_mod31,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/main_soft_final_query_mod31/checkpoint_final.pt,14166995,13.51
+main_sparse_belief_mod31,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/main_sparse_belief_mod31/checkpoint_final.pt,14166995,13.51
+pilot_full_belief_mod11,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/pilot_full_belief_mod11/checkpoint_final.pt,7073043,6.75
+pilot_prefix_query_mod11,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/pilot_prefix_query_mod11/checkpoint_final.pt,7073043,6.75
+pilot_sampled_final_mod11,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/pilot_sampled_final_mod11/checkpoint_final.pt,7073043,6.75
+pilot_soft_final_query_mod11,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/pilot_soft_final_query_mod11/checkpoint_final.pt,7073043,6.75
+pilot_sparse_belief_mod11,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/pilot_sparse_belief_mod11/checkpoint_final.pt,7073043,6.75
+smoke_full_belief_mod7,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/smoke_full_belief_mod7/checkpoint_final.pt,176851,0.17
+smoke_prefix_query_mod7,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/smoke_prefix_query_mod7/checkpoint_final.pt,176851,0.17
+smoke_sampled_final_mod7,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/smoke_sampled_final_mod7/checkpoint_final.pt,176851,0.17
+smoke_soft_final_query_mod7,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/smoke_soft_final_query_mod7/checkpoint_final.pt,176915,0.17
+smoke_sparse_belief_mod7,checkpoint_final.pt,../../large_artifacts/dense_supervision_ladder/checkpoints/smoke_sparse_belief_mod7/checkpoint_final.pt,176851,0.17

@@ -1,0 +1,4 @@
+run,suite,arm,seed,trained,split,n,primary_accuracy,final_accuracy,exec_accuracy,valid_final_rate,valid_exec_rate,no_final_rate,leak_string_rate,mean_new_tokens,acc_string,acc_unit,acc_table,acc_date
+main_v1_zero_shot_answer,main,zero_shot_answer,0,0,eval_indist,24,0.375,0.375,0.0,0.6666666666666666,0.0,0.3333333333333333,0.7083333333333334,24.0,0.16666666666666666,0.8333333333333334,0.5,0.0
+main_v1_zero_shot_answer,main,zero_shot_answer,0,0,eval_composition,24,0.041666666666666664,0.041666666666666664,0.0,0.25,0.0,0.75,0.25,24.0,0.0,0.16666666666666666,0.0,0.0
+main_v1_zero_shot_answer,main,zero_shot_answer,0,0,eval_template_shift,24,0.375,0.375,0.0,0.75,0.0,0.25,0.4583333333333333,24.0,0.0,0.6666666666666666,0.5,0.3333333333333333

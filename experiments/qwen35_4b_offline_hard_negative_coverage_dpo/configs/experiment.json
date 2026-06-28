@@ -1,0 +1,44 @@
+{
+  "experiment": "qwen35_4b_offline_hard_negative_coverage_dpo",
+  "date": "2026-06-26",
+  "model": "Qwen/Qwen3.5-4B local snapshot",
+  "dataset": "MBPP full",
+  "visible_tests": 1,
+  "objective": "Train a small QLoRA adapter with offline hidden-correct-vs-hard-negative candidate preferences and test whether it improves held-out pass@K coverage at matched sample budget.",
+  "primary_success_criteria": [
+    "DPO coverage@K on held-out MBPP exceeds tuned-hot base sampling at the same K beyond the pilot noise floor.",
+    "DPO pass@1 proxy does not regress relative to tuned-hot base sampling.",
+    "DPO functional diversity does not collapse relative to tuned-hot base sampling.",
+    "Shuffled-pair DPO underperforms real hard-negative DPO."
+  ],
+  "pilot_plan": {
+    "train_sampling": {
+      "split": "train",
+      "count": 48,
+      "offset": 0,
+      "samples_per_task": 12,
+      "temperatures": [0.2, 0.7, 1.0, 1.2],
+      "top_p": 0.98
+    },
+    "heldout_eval": {
+      "split": "test",
+      "count": 24,
+      "offset": 0,
+      "samples_per_task": [4, 8],
+      "base_temperatures": {
+        "tuned_hot": [1.0],
+        "mixed": [0.2, 0.7, 1.0]
+      }
+    },
+    "training": {
+      "max_steps": 80,
+      "batch_size": 1,
+      "grad_accum": 4,
+      "learning_rate": 0.0001,
+      "beta": 0.1,
+      "lora_r": 16,
+      "lora_alpha": 32
+    }
+  }
+}
+

@@ -1,0 +1,11 @@
+variant,path,bytes
+main_gru_mlp_d256,../../large_artifacts/dense_teacher_distillation/checkpoints/main_gru_mlp_d256/checkpoint_final.pt,14187731
+main_gru_mlp_d512,../../large_artifacts/dense_teacher_distillation/checkpoints/main_gru_mlp_d512/checkpoint_final.pt,39485779
+main_residual_mlp_d512,../../large_artifacts/dense_teacher_distillation/checkpoints/main_residual_mlp_d512/checkpoint_final.pt,46450435
+pilot_gru_lowrank_d256_r16,../../large_artifacts/dense_teacher_distillation/checkpoints/pilot_gru_lowrank_d256_r16/checkpoint_final.pt,8100691
+pilot_gru_mlp_d128,../../large_artifacts/dense_teacher_distillation/checkpoints/pilot_gru_mlp_d128/checkpoint_final.pt,2149395
+pilot_gru_mlp_d256,../../large_artifacts/dense_teacher_distillation/checkpoints/pilot_gru_mlp_d256/checkpoint_final.pt,7087891
+pilot_residual_mlp_d256,../../large_artifacts/dense_teacher_distillation/checkpoints/pilot_residual_mlp_d256/checkpoint_final.pt,8934083
+smoke_gru_lowrank_d32_r4,../../large_artifacts/dense_teacher_distillation/checkpoints/smoke_gru_lowrank_d32_r4/checkpoint_final.pt,194067
+smoke_gru_mlp_d32,../../large_artifacts/dense_teacher_distillation/checkpoints/smoke_gru_mlp_d32/checkpoint_final.pt,188435
+smoke_residual_mlp_d32,../../large_artifacts/dense_teacher_distillation/checkpoints/smoke_residual_mlp_d32/checkpoint_final.pt,225475

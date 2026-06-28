@@ -1,0 +1,31 @@
+{
+  "experiment": "bridge_dose_recombination_curriculum",
+  "date": "2026-06-21",
+  "question": "How many exact bridge examples are needed before trace-conditioned repair generalizes across withheld factor-pair cells?",
+  "model_id": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+  "seed": 20260621,
+  "training": {
+    "total_records_per_condition": 240,
+    "bridge_doses_per_heldout_pair": [0, 1, 2, 4, 8],
+    "epochs": 3.0,
+    "learning_rate": 0.00015,
+    "max_length": 3072,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "gradient_accumulation": 8,
+    "save_steps": 30,
+    "eval_steps": 30
+  },
+  "evaluation": {
+    "splits": ["seen_iid", "format_shift", "recombination_holdout"],
+    "max_new_tokens": 256,
+    "repair_metric": "visible and hidden tests pass after generated diff is applied"
+  },
+  "artifact_policy": {
+    "compact_dir": "experiments/bridge_dose_recombination_curriculum",
+    "large_artifact_dir": "large_artifacts/bridge_dose_recombination_curriculum",
+    "large_files_excluded_from_compact_dir": true
+  }
+}
