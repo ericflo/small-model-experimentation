@@ -23,6 +23,7 @@ Use this protocol before creating a new experiment. It is lighter than a proposa
 ## Outcomes
 
 - Create a new experiment with `make new-experiment`.
+- Create a new experiment from a queued proposal with `make from-queue PROPOSAL=<future_queue_id>`.
 - Create a new program with `make new-program`.
 - Add a synthesis note instead of running a duplicate experiment.
 - Write a decision record if the idea changes portfolio direction.

@@ -51,6 +51,7 @@ Create new scaffolds with the repository tools:
 ```bash
 make new-program PROGRAM=multimodal_small_models TITLE="Multimodal Small Models" FOCUS="Test how small models use image, audio, and structured visual evidence."
 make new-experiment EXPERIMENT=multimodal_table_probe PROGRAM=multimodal_small_models TITLE="Multimodal Table Probe"
+make from-queue PROPOSAL=visible_abstention_selector_benchmark
 ```
 
 Regenerate indexes after changing experiments or programs:

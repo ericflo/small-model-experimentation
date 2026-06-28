@@ -18,6 +18,14 @@ Create the experiment scaffold before the expensive run:
 make new-experiment EXPERIMENT=<id> PROGRAM=<program-id> TITLE="<Title>"
 ```
 
+If the idea already appears in the future queue, scaffold from that item instead:
+
+```bash
+make from-queue PROPOSAL=<future_queue_id>
+```
+
+This creates the experiment, copies the queue item into `queue_proposal.json`, and pre-fills `idea_intake.md`. Candidate program lines remain context until they are promoted into `research_programs/registry.yaml`; the scaffold is attached to registered programs.
+
 Keep the question narrow enough that a single result can move belief.
 
 The README should include:

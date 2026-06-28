@@ -20,7 +20,7 @@ GENERATED_PATHS := \
 	knowledge/source_tracks.md \
 	knowledge/tag_index.md
 
-.PHONY: catalog validate py-compile check-links check-text generated-clean lint check related new-program new-experiment
+.PHONY: catalog validate py-compile check-links check-text generated-clean lint check related new-program new-experiment from-queue
 
 catalog:
 	$(PYTHON) scripts/build_knowledgebase.py
@@ -52,3 +52,6 @@ new-program:
 
 new-experiment:
 	$(PYTHON) scripts/scaffold_experiment.py "$(EXPERIMENT)" --program "$(PROGRAM)" --title "$(TITLE)" --summary "$(SUMMARY)" $(EXTRA_ARGS)
+
+from-queue:
+	$(PYTHON) scripts/scaffold_from_queue.py "$(PROPOSAL)" $(EXTRA_ARGS)
