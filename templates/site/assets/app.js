@@ -275,9 +275,14 @@ function programStats(experiments) {
 }
 
 function filteredPrograms() {
+  // a free-text search matches experiment text (model/corpus terms), not program prose — so also
+  // keep programs SPANNED by a currently-matching experiment, agreeing with the "N programs
+  // spanned" metric and the lit map nodes (otherwise the cards falsely empty on common queries)
+  const spanned = state.search.trim() ? programStats(filteredExperiments()) : null;
   return DATA.programs.filter((p) => {
     if (state.program !== "all" && p.id !== state.program) return false;
-    return matchesSearch(p); // same matcher as every other panel (normalize + token-AND)
+    if (matchesSearch(p)) return true; // same matcher as every other panel (normalize + token-AND)
+    return spanned ? (spanned.get(p.id)?.count || 0) > 0 : false;
   });
 }
 function filtersActive() {
@@ -307,10 +312,25 @@ function setSearch(value) { state.search = value; syncControls(); render(); }
 
 /* ---------------------------------------------------------------- drawer */
 let lastFocused = null;
+let lastFocusedSel = null; // re-queryable selector for the drawer trigger (survives the close-time re-render)
 let openingFromHistory = false; // true while opening from popstate/deep-link (don't push)
 let drawerPushed = false; // did opening this drawer add a history entry we should pop on close?
+/* Build a selector that re-finds the drawer trigger after render() rebuilds the entity containers,
+   so closing returns focus to the exact row/card/node the user opened (ARIA APG), not <body>. */
+function triggerSelector(el) {
+  if (!el || !el.closest) return null;
+  const esc = (v) => (window.CSS && CSS.escape) ? CSS.escape(v) : v;
+  const row = el.closest("[data-experiment]");
+  if (row && el.closest(".row-open")) return `#experimentTable [data-experiment="${esc(row.getAttribute("data-experiment"))}"] .row-open`;
+  for (const a of ["data-details", "data-open-claim", "data-open", "data-mapnode", "data-program", "data-bar"]) {
+    const host = el.closest(`[${a}]`);
+    if (host) return `[${a}="${esc(host.getAttribute(a))}"]`;
+  }
+  return null;
+}
 function openDrawer(eyebrow, title, lead, rows, extra = "", hash = "") {
   lastFocused = document.activeElement;
+  lastFocusedSel = triggerSelector(lastFocused);
   const detail = rows
     .filter((r) => r[1] !== undefined && r[1] !== "" && r[1] !== null)
     .map(([label, value]) => `<dt>${escapeHtml(label)}</dt><dd>${value}</dd>`)
@@ -352,7 +372,12 @@ function closeDrawer() {
   els.drawerScrim.classList.remove("open");
   els.drawer.setAttribute("aria-hidden", "true");
   setBackgroundInert(false);
-  if (lastFocused && lastFocused.focus) lastFocused.focus();
+  // return focus to the trigger; if render() detached it (the close path re-renders first),
+  // re-resolve it by selector, and only then fall back to a stable control — never <body>
+  let target = (lastFocused && lastFocused.isConnected) ? lastFocused : null;
+  if (!target && lastFocusedSel) target = document.querySelector(lastFocusedSel);
+  if (target && target.focus) target.focus();
+  else restoreFilterFocus();
   // never leave a stale entity hash (covers deep-link opens that didn't push)
   if (location.hash && /^#(exp|claim|queue|program)\//.test(location.hash)) {
     try { history.replaceState(null, "", `${location.pathname}${location.search}`); } catch (_) {}
@@ -492,7 +517,9 @@ function metricValue(key) {
   const fexp = filteredExperiments();
   switch (key) {
     case "experiments": return fexp.length;
-    case "programs": return new Set(fexp.flatMap((e) => e.programs || [])).size;
+    // count only ESTABLISHED programs spanned (experiments may also tag candidate/proposed ids) so
+    // the figure never exceeds the 11 total and agrees with the Programs panel + lit map nodes
+    case "programs": { const known = new Set(DATA.programs.map((p) => p.id)); return new Set(fexp.flatMap((e) => (e.programs || []).filter((id) => known.has(id)))).size; }
     case "anchor_ready": return fexp.filter((e) => e.anchor_ready === "yes").length;
     case "needs_curation": return fexp.filter((e) => e.anchor_ready !== "yes").length;
     case "future_proposals": return filteredQueue().length;
@@ -999,7 +1026,7 @@ function renderExperiments() {
       <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<button class="prog-chip pill-link" type="button" data-program-pill="${escapeHtml(id)}" style="background:${programColor(id)}" title="Filter to ${escapeHtml(titleForProgram(id))}" aria-label="Filter to ${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</button>`).join("")}</span></td>
       <td data-label="Status"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Not anchor-ready"}</span></td>
       <td class="col-enum" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
-      <td class="col-mono" data-label="Curation tasks">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
+      <td class="col-enum col-tasks" data-label="Curation tasks">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
     </tr>`).join("");
   const note = all.length > TABLE_LIMIT ? `<div class="table-toolbar">Showing first ${TABLE_LIMIT} of ${formatNumber(all.length)} — narrow with search or filters.</div>` : "";
   document.getElementById("experimentTable").innerHTML = all.length
@@ -1033,7 +1060,7 @@ function openExperiment(e) {
   if (!e) return;
   const hasSmoke = e.smoke_command && !["no", "none", ""].includes(String(e.smoke_command).toLowerCase());
   openDrawer("Experiment", cleanTitle(e.title), e.summary, [
-    ["Id", `<span class="mono-val">${escapeHtml(e.id)}</span>`],
+    ["Experiment id", `<span class="mono-val">${escapeHtml(e.id)}</span>`],
     ["Programs", e.programs.map((id) => programPill(id)).join(" ")],
     ["Status", `<span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Not anchor-ready"}</span>`],
     ["Run surface", e.run_surface ? `<span class="mono-val">${escapeHtml(humanizeToken(e.run_surface))}</span>` : ""],

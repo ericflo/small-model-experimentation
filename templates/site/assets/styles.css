@@ -26,7 +26,7 @@
   /* Signal palette — semantic, used consistently everywhere */
   --teal: #0a666e;
   --blue: #2b5fae;
-  --green: #2c7d54;
+  --green: #15703b; /* match app.js COLORS.green — one semantic ready/confirmed hue across CSS + JS */
   --amber: #b9720f;
   --rose: #c0344a;
   --violet: #6a4fbb;
@@ -1339,10 +1339,11 @@ tbody tr:last-child td { border-bottom: none; }
 }
 .sort-caret { color: var(--faint); font-size: 0.7em; }
 .sort-caret.on { color: var(--teal); }
-.col-mono { color: var(--muted); font-family: var(--sans); font-size: 0.82rem; }
-.col-mono .none, .muted-val { color: var(--faint); }
-/* run-surface is a controlled enum (mono) — match its own chart axis and the row's other machine columns */
+/* run-surface + curation tasks are controlled vocabularies (mono) — match their own readiness-chart
+   axis labels and the row's other machine columns; .col-tasks allows the comma-joined cell to wrap */
 .col-enum { color: var(--muted); font-family: var(--mono); font-size: 0.8rem; }
+.col-enum.col-tasks { font-size: 0.78rem; }
+.col-enum .none, .muted-val { color: var(--faint); }
 
 /* ---- drawer actions ------------------------------------------------------ */
 .drawer-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 20px; }
@@ -1366,7 +1367,9 @@ tbody tr:last-child td { border-bottom: none; }
    ========================================================================== */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes popIn { from { opacity: 0; transform: scale(0.55); } to { opacity: 1; transform: scale(1); } }
-@keyframes wipeGauge { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+/* vertical reveal: the bar grows up so the green/amber (ready/not-ready) split stays truthful at
+   every frame — a horizontal wipe would reveal the left-hand green slice first */
+@keyframes wipeGauge { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
 
 @media (prefers-reduced-motion: no-preference) {
   /* hero entrance */
@@ -1482,7 +1485,7 @@ tbody tr:last-child td { border-bottom: none; }
     padding-top: 2px;
   }
   tbody td > * { text-align: right; }
-  tbody td.col-mono, tbody td.col-enum { text-align: right; }
+  tbody td.col-enum { text-align: right; }
   /* primary identifier cell: full-width left-aligned block */
   tbody td:first-child { flex-direction: column; align-items: flex-start; gap: 3px; }
   tbody td:first-child > * { text-align: left; }
