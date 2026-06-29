@@ -123,6 +123,9 @@ const programColorMap = new Map(DATA.programs.map((p, i) => [p.id, PROGRAM_PALET
 const programIndex = new Map(DATA.programs.map((p, i) => [p.id, i]));
 /* one canonical program order (by size) shared across map, legend, heatmap, claim matrix */
 const PROGRAMS_BY_SIZE = DATA.programs.slice().sort((a, b) => b.experiment_count - a.experiment_count);
+/* candidate programs are proposed lines named by queue probes but not yet in the corpus */
+const candidateById = new Map((DATA.candidate_programs || []).map((c) => [c.id, c]));
+function isEstablishedProgram(id) { return programById.has(id); }
 
 /* ---------------------------------------------------------------- helpers */
 function escapeHtml(value) {
@@ -140,11 +143,16 @@ function formatBytes(bytes) {
 }
 function programColor(id) { return programColorMap.get(id) || COLORS.muted; }
 function titleForProgram(id) {
-  const p = programById.get(id);
-  return p ? humanizeTitle(p.title) : humanizeToken(id); // unknown ids (e.g. candidate programs) -> readable
+  const p = programById.get(id) || candidateById.get(id);
+  return p ? humanizeTitle(p.title) : humanizeTitle(humanizeToken(id));
 }
 function programPill(id) {
-  return `<button class="pill dot pill-link" type="button" data-program-pill="${escapeHtml(id)}" style="--pill-color:${programColor(id)}" title="Filter to ${escapeHtml(titleForProgram(id))}">${escapeHtml(titleForProgram(id))}</button>`;
+  const name = titleForProgram(id);
+  if (!isEstablishedProgram(id)) {
+    // proposed program — not yet in the corpus, so it's informational, not a filter
+    return `<span class="pill proposed" title="Proposed program — not yet in the corpus">${escapeHtml(name)}<span class="proposed-tag">proposed</span></span>`;
+  }
+  return `<button class="pill dot pill-link" type="button" data-program-pill="${escapeHtml(id)}" style="--pill-color:${programColor(id)}" title="Filter to ${escapeHtml(name)}">${escapeHtml(name)}</button>`;
 }
 function repoLink(path) { return path ? `${DATA.repo.github}/blob/main/${path}` : ""; }
 function splitList(value) {
@@ -245,14 +253,13 @@ function programStats(experiments) {
 }
 
 function filteredPrograms() {
-  const s = state.search.toLowerCase();
   return DATA.programs.filter((p) => {
     if (state.program !== "all" && p.id !== state.program) return false;
-    return !s || textBlob(p).includes(s);
+    return matchesSearch(p); // same matcher as every other panel (normalize + token-AND)
   });
 }
 function filtersActive() {
-  return state.search || state.program !== "all" || state.ready !== "all" || state.need !== "all";
+  return !!state.search || state.program !== "all" || state.ready !== "all" || state.need !== "all";
 }
 
 function prefersReducedMotion() {
@@ -279,6 +286,7 @@ function setSearch(value) { state.search = value; syncControls(); render(); }
 /* ---------------------------------------------------------------- drawer */
 let lastFocused = null;
 let openingFromHistory = false; // true while opening from popstate/deep-link (don't push)
+let drawerPushed = false; // did opening this drawer add a history entry we should pop on close?
 function openDrawer(eyebrow, title, lead, rows, extra = "", hash = "") {
   lastFocused = document.activeElement;
   const detail = rows
@@ -298,10 +306,21 @@ function openDrawer(eyebrow, title, lead, rows, extra = "", hash = "") {
   els.drawer.setAttribute("aria-hidden", "false");
   setBackgroundInert(true);
   els.drawerClose.focus();
-  // make the open entity a shareable URL + let Back/Forward close/reopen it
+  // make the open entity a shareable URL + let Back/Forward close/reopen it.
+  // switching entities replaces (one drawer entry total) so a single Back always closes.
   if (hash && !openingFromHistory) {
-    try { history.pushState({ drawer: 1 }, "", `${location.pathname}${location.search}#${hash}`); } catch (_) {}
+    try {
+      const url = `${location.pathname}${location.search}#${hash}`;
+      if (drawerPushed) history.replaceState({ drawer: 1 }, "", url);
+      else history.pushState({ drawer: 1 }, "", url);
+      drawerPushed = true;
+    } catch (_) {}
   }
+}
+/* user-initiated close (X / Esc / scrim): pop the history entry so no dead trail accrues */
+function dismissDrawer() {
+  if (drawerPushed) { try { history.back(); return; } catch (_) {} }
+  closeDrawer();
 }
 function closeDrawer() {
   if (!els.drawer.classList.contains("open")) return;
@@ -311,10 +330,11 @@ function closeDrawer() {
   els.drawer.setAttribute("aria-hidden", "true");
   setBackgroundInert(false);
   if (lastFocused && lastFocused.focus) lastFocused.focus();
-  // drop the entity hash so the URL reflects "no drawer" (no extra history entry)
-  if (location.hash && /^#(exp|claim|queue|program)\//.test(location.hash)) {
+  // if we still hold a drawer entry (programmatic close), strip the hash in place
+  if (drawerPushed && location.hash && /^#(exp|claim|queue|program)\//.test(location.hash)) {
     try { history.replaceState(null, "", `${location.pathname}${location.search}`); } catch (_) {}
   }
+  drawerPushed = false;
 }
 function openEntityFromHash(h) {
   const slash = h.indexOf("/");
@@ -486,7 +506,7 @@ function barChart(targetId, rows, options = {}) {
   const height = top + bottom + rows.length * rowH;
   const maxValue = Math.max(1, ...rows.map((r) => Number(r.value || 0)));
   const plotW = width - labelW - rightPad;
-  const chart = svg("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": options.label || "bar chart", preserveAspectRatio: "xMinYMin meet" });
+  const chart = svg("svg", { viewBox: `0 0 ${width} ${height}`, role: typeof options.onBar === "function" ? "group" : "img", "aria-label": options.label || "bar chart", preserveAspectRatio: "xMinYMin meet" });
   rows.forEach((row, i) => {
     const y = top + i * rowH;
     const value = Number(row.value || 0);
@@ -520,6 +540,8 @@ function programNetwork(fstats, fcount) {
   const target = document.getElementById("programNetwork");
   clear(target);
   const stats = fstats || programStats(DATA.experiments);
+  const fqByProg = {}; filteredQueue().forEach((i) => (i.programs || []).forEach((id) => { fqByProg[id] = (fqByProg[id] || 0) + 1; }));
+  const fcByProg = {}; filteredClaims().forEach((c) => splitList(c.programs).forEach((id) => { fcByProg[id] = (fcByProg[id] || 0) + 1; }));
   const W = 760, H = 446, cx = W / 2, cy = H / 2 - 6, ringR = 156;
   const progs = PROGRAMS_BY_SIZE;
   const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Corpus map: research programs sized by experiments, ring shows percent anchor-ready" });
@@ -565,14 +587,16 @@ function programNetwork(fstats, fcount) {
       "aria-label": `${titleForProgram(p.id)}: ${s.count} experiments, ${Math.round(ratio * 100)} percent anchor-ready. Activate to filter.`,
       style: `cursor:pointer; opacity:${opacity}; --i:${i}` });
     g.appendChild(svg("circle", { cx: x, cy: y, r, fill: color, stroke: active ? "#fff" : "rgba(255,255,255,0.25)", "stroke-width": active ? 3 : 1.5 }));
-    const rr = r + 5, circ = 2 * Math.PI * rr;
-    g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#d99a3a", "stroke-width": 3, opacity: 0.8 }));
+    // readiness band: a gap off the disk + a thicker stroke so green/amber split reads clearly
+    const rr = r + 7, circ = 2 * Math.PI * rr;
+    g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#e0a93f", "stroke-width": 5, opacity: 0.9 }));
     g.appendChild(svg("circle", {
-      cx: x, cy: y, r: rr, fill: "none", stroke: "#46d39a", "stroke-width": 3,
+      cx: x, cy: y, r: rr, fill: "none", stroke: "#4cd79e", "stroke-width": 5,
       "stroke-dasharray": `${ratio * circ} ${circ}`, transform: `rotate(-90 ${x} ${y})`
     }));
     g.appendChild(text(programCode(p), { x, y: y + 4, "text-anchor": "middle", class: "node-code", style: `font-size:${r > 26 ? 13 : 11}px` }));
-    attachTooltip(g, `<strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${s.count} experiments · ${Math.round(ratio * 100)}% ready · ${p.queue_count} queued · ${p.claim_count} claims</span>`);
+    const qN = fqByProg[p.id] || 0, cN = fcByProg[p.id] || 0;
+    attachTooltip(g, `<strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${s.count} experiments · ${Math.round(ratio * 100)}% ready · ${qN} queued · ${cN} claims</span>`);
     onActivate(g, () => setProgram(p.id));
     chart.appendChild(g);
   });
@@ -643,19 +667,17 @@ function scatterPlot() {
   const plotW = W - left - right, plotH = H - top - bottom;
   const n = rows.length;
   const bw = Math.max(1.5, plotW / n - 1);
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Files per experiment, sorted", preserveAspectRatio: "xMinYMin meet" });
-  // baseline
+  const readyN = rows.filter((e) => e.anchor_ready === "yes").length;
+  // single image with a summary label; the table is the keyboard path (no 155 tab stops)
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `Files per experiment for ${n} experiments, sorted high to low; ${readyN} ready, ${n - readyN} need curation. Use the table to open an experiment.`, preserveAspectRatio: "xMinYMin meet" });
   chart.appendChild(svg("line", { x1: left, y1: H - bottom, x2: W - right, y2: H - bottom, stroke: COLORS.line }));
   rows.forEach((e, i) => {
     const x = left + (i / n) * plotW;
     const h = Math.max(1.5, (e.total_files / maxFiles) * plotH);
     const color = e.anchor_ready === "yes" ? COLORS.green : COLORS.amber;
-    const bar = svg("rect", { x, y: H - bottom - h, width: bw, height: h, rx: bw > 3 ? 1.5 : 0, fill: color, opacity: 0.85,
-      tabindex: 0, role: "button", "aria-label": `${e.id}: ${e.total_files} files, ${e.anchor_ready === "yes" ? "ready" : "needs curation"}`, style: "cursor:pointer" });
-    // widen the hit/focus target for hairline bars
+    const bar = svg("rect", { x, y: H - bottom - h, width: bw, height: h, rx: bw > 3 ? 1.5 : 0, fill: color, opacity: 0.85, style: "cursor:pointer" });
     const hit = svg("rect", { x: x - 1, y: top, width: Math.max(bw + 2, 4), height: plotH, fill: "transparent", style: "cursor:pointer" });
     attachTooltip(bar, `<strong>${escapeHtml(e.id)}</strong><br><span class="tip-meta">${formatNumber(e.total_files)} files · ${e.anchor_ready === "yes" ? "ready" : "needs curation"}</span>`);
-    onActivate(bar, () => openExperiment(e));
     hit.addEventListener("click", () => openExperiment(e));
     chart.appendChild(hit);
     chart.appendChild(bar);
@@ -1109,7 +1131,22 @@ function renderCharts() {
 }
 
 /* ---------------------------------------------------------------- render */
+/* capture a selector for the focused control so we can restore it after a re-render */
+function focusKey() {
+  const ae = document.activeElement;
+  if (!ae || ae === document.body) return null;
+  const prog = ae.getAttribute && ae.getAttribute("data-program");
+  if (prog) return ae.closest("#programLegend") ? `#programLegend [data-program="${prog}"]` : `#programCards [data-program="${prog}"]`;
+  const metric = ae.getAttribute && ae.getAttribute("data-metric");
+  if (metric) return `[data-metric="${metric}"]`;
+  const sortTh = ae.closest && ae.closest("[data-sort]");
+  if (sortTh) return `[data-sort="${sortTh.getAttribute("data-sort")}"] .th-btn`;
+  return null;
+}
+
 function render() {
+  hideTooltip(); // re-render destroys the hovered/focused chart node; don't strand its tooltip
+  const fk = focusKey();
   updateFilterStatus();
   updateMetrics();
   renderPrograms();
@@ -1118,6 +1155,7 @@ function render() {
   renderClaims();
   renderCharts();
   syncURL();
+  if (fk) { const el = document.querySelector(fk); if (el) el.focus(); }
 }
 
 /* Mirror filter state into ?query so a filtered view is shareable/deep-linkable
@@ -1187,8 +1225,8 @@ function bindEvents() {
   [els.need, els.needTop].forEach((c) => c && c.addEventListener("change", (e) => { state.need = e.target.value; syncControls(); render(); }));
   [els.reset, els.resetTop].forEach((c) => c && c.addEventListener("click", resetFilters));
 
-  els.drawerClose.addEventListener("click", closeDrawer);
-  els.drawerScrim.addEventListener("click", closeDrawer);
+  els.drawerClose.addEventListener("click", dismissDrawer);
+  els.drawerScrim.addEventListener("click", dismissDrawer);
 
   // cross-linking: any program pill anywhere filters the atlas
   document.addEventListener("click", (e) => {
@@ -1201,18 +1239,23 @@ function bindEvents() {
     gotoSection("experiments");
   });
 
-  // Back/Forward: close the drawer, or (re)open the entity the URL points to
+  // Back/Forward is authoritative for BOTH the filter scope and the open entity
   window.addEventListener("popstate", () => {
+    state.program = "all"; state.ready = "all"; state.need = "all"; state.search = "";
+    seedStateFromURL();
+    syncControls();
+    render();
     const h = decodeURIComponent(location.hash.replace(/^#/, ""));
     if (/^(exp|claim|queue|program)\//.test(h)) {
       openingFromHistory = true; openEntityFromHash(h); openingFromHistory = false;
     } else if (els.drawer.classList.contains("open")) {
+      drawerPushed = false; // the entry was already popped by this navigation
       closeDrawer();
     }
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeDrawer();
+    if (e.key === "Escape") dismissDrawer();
     trapDrawerFocus(e);
     const typing = ["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement?.tagName);
     const drawerOpen = els.drawer.classList.contains("open");

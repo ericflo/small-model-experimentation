@@ -613,6 +613,19 @@ input:focus, select:focus {
   color: #fff;
   background: var(--pill-color, var(--ink));
 }
+/* proposed (candidate) program — visually distinct from the established 11, not a filter */
+.pill.proposed {
+  gap: 6px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px dashed var(--line);
+}
+.pill.proposed .proposed-tag {
+  font-size: 0.86em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
 
 /* ============================================================================
    Experiment table
