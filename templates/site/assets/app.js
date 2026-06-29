@@ -703,12 +703,14 @@ function donutChart(experiments) {
   const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pct} percent anchor-ready in this view: ${ready} ready, ${needs} not ready`, preserveAspectRatio: "xMinYMin meet" });
   chart.appendChild(text(`${pct}%`, { x: padX, y: 50, class: "chart-value", style: "font-size:46px;font-family:var(--display);letter-spacing:-0.03em" }));
   chart.appendChild(text("ANCHOR-READY", { x: padX + 2, y: 70, class: "axis-label" }));
-  // gauge: amber base (to-curate), green fill (ready)
-  chart.appendChild(svg("rect", { x: padX, y: barY, width: barW, height: barH, rx: 7, fill: amber }));
-  const fill = svg("rect", { x: padX, y: barY, width: readyW, height: barH, rx: 7, fill: COLORS.green, class: "gauge-fill" });
-  chart.appendChild(fill);
-  // quartile ticks
-  [0.25, 0.5, 0.75].forEach((t) => chart.appendChild(svg("line", { x1: padX + barW * t, y1: barY, x2: padX + barW * t, y2: barY + barH, stroke: "rgba(255,255,255,0.5)", "stroke-width": 1 })));
+  // gauge: amber base (not-ready) + green fill (ready) + ticks, wrapped so the reveal wipes the
+  // whole gauge as one unit (the ready/not-ready ratio stays truthful at every frame, unlike
+  // animating the green fill width alone)
+  const gaugeG = svg("g", { class: "gauge-wipe" });
+  gaugeG.appendChild(svg("rect", { x: padX, y: barY, width: barW, height: barH, rx: 7, fill: amber }));
+  gaugeG.appendChild(svg("rect", { x: padX, y: barY, width: readyW, height: barH, rx: 7, fill: COLORS.green }));
+  [0.25, 0.5, 0.75].forEach((t) => gaugeG.appendChild(svg("line", { x1: padX + barW * t, y1: barY, x2: padX + barW * t, y2: barY + barH, stroke: "rgba(255,255,255,0.5)", "stroke-width": 1 })));
+  chart.appendChild(gaugeG);
   // legend
   chart.appendChild(svg("rect", { x: padX, y: H - 18, width: 11, height: 11, rx: 2, fill: COLORS.green }));
   chart.appendChild(text(`${formatNumber(ready)} ready`, { x: padX + 17, y: H - 9, class: "chart-label" }));
@@ -730,7 +732,7 @@ function scatterPlot() {
   const bw = Math.max(1.5, plotW / n - 1);
   const readyN = rows.filter((e) => e.anchor_ready === "yes").length;
   // single image with a summary label; the table is the keyboard path (no 155 tab stops)
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `Files per experiment for ${n} experiments, sorted high to low; ${readyN} ready, ${n - readyN} need curation. Use the table to open an experiment.`, preserveAspectRatio: "xMinYMin meet" });
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `Files per experiment for ${n} experiments, sorted high to low; ${readyN} ready, ${n - readyN} not ready. Use the table to open an experiment.`, preserveAspectRatio: "xMinYMin meet" });
   chart.appendChild(svg("line", { x1: left, y1: H - bottom, x2: W - right, y2: H - bottom, stroke: COLORS.line }));
   rows.forEach((e, i) => {
     const x = left + (i / n) * plotW;
@@ -952,7 +954,7 @@ function openProgram(p) {
         <a class="text-link" href="${repoLink(p.path)}">Open charter on GitHub <span class="arr">→</span></a>
       </div>`, `program/${p.id}`);
   const btn = document.getElementById("drawerFilterBtn");
-  if (btn) btn.addEventListener("click", () => { closeDrawer(); setProgram(p.id); gotoSection("experiments"); });
+  if (btn) btn.addEventListener("click", () => { closeDrawer(); setProgram(p.id); restoreFilterFocus(); gotoSection("experiments"); });
 }
 
 /* ---------------------------------------------------------------- experiments table */
@@ -996,7 +998,7 @@ function renderExperiments() {
       <td data-label="Experiment"><button class="row-open" type="button" aria-label="${escapeHtml(e.id)} — open details"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(cleanTitle(e.title))}</span></button></td>
       <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<button class="prog-chip pill-link" type="button" data-program-pill="${escapeHtml(id)}" style="background:${programColor(id)}" title="Filter to ${escapeHtml(titleForProgram(id))}" aria-label="Filter to ${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</button>`).join("")}</span></td>
       <td data-label="Status"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Not anchor-ready"}</span></td>
-      <td class="col-mono" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
+      <td class="col-enum" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
       <td class="col-mono" data-label="Curation tasks">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
     </tr>`).join("");
   const note = all.length > TABLE_LIMIT ? `<div class="table-toolbar">Showing first ${TABLE_LIMIT} of ${formatNumber(all.length)} — narrow with search or filters.</div>` : "";
@@ -1178,7 +1180,8 @@ function renderCharts() {
   const exp = fexp;
   const needRows = countRows(exp, (e) => e.needs || []);
   barChart("needsChart", needRows.length ? needRows : DATA.charts.needs.map((r) => ({ ...r, label: humanizeToken(r.id) })), {
-    label: "curation tasks", labelW: 190, color: COLORS.rose, empty: "No curation tasks in this view.",
+    // neutral slate (matches the other magnitude charts) — keeps rose exclusively the negative-result signal
+    label: "curation tasks", labelW: 190, color: "#455468", empty: "No curation tasks in this view.",
     onBar: (id) => { setNeed(id); gotoSection("experiments"); }
   });
   const runRows = countRows(exp, (e) => e.run_surface);
@@ -1318,6 +1321,7 @@ function bindEvents() {
     const id = pill.getAttribute("data-program-pill");
     if (els.drawer.classList.contains("open")) closeDrawer();
     state.program = id; syncControls(); render();
+    restoreFilterFocus(); // the activated pill is destroyed by re-render — park focus on a stable control
     gotoSection("experiments");
   });
 
