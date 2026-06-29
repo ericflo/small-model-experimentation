@@ -154,11 +154,17 @@ function splitList(value) {
 }
 function listText(items) { return (items || []).join(", "); }
 function textBlob(item) {
-  return Object.values(item).flatMap((v) => (Array.isArray(v) ? v : [v])).join(" ").toLowerCase();
+  const base = Object.values(item).flatMap((v) => (Array.isArray(v) ? v : [v])).join(" ");
+  // also index the humanized program names so people can search by what they see
+  const progNames = item.programs ? splitList(item.programs).map(titleForProgram).join(" ") : "";
+  return `${base} ${progNames}`.toLowerCase();
 }
+const normSep = (s) => s.replace(/[-_]/g, " ");
 function matchesSearch(item) {
-  const q = state.search.trim().toLowerCase();
-  return !q || textBlob(item).includes(q);
+  const q = normSep(state.search.trim().toLowerCase());
+  if (!q) return true;
+  const blob = normSep(textBlob(item));
+  return q.split(/\s+/).filter(Boolean).every((t) => blob.includes(t)); // token-AND
 }
 function matchesProgram(item, field = "programs") {
   if (state.program === "all") return true;
@@ -409,8 +415,8 @@ function gotoSection(id) {
 const METRICS = [
   { label: "Experiments", key: "experiments", help: "Self-contained experiment folders", color: COLORS.teal, action: () => gotoSection("experiments") },
   { label: "Programs", key: "programs", help: "Durable lines of inquiry", color: COLORS.ink, action: () => gotoSection("programs") },
-  { label: "Anchor-ready", key: "anchor_ready", help: "Citeable and reusable as-is", color: COLORS.green, filters: true, action: () => { setReady("yes"); gotoSection("readiness"); } },
-  { label: "Needs curation", key: "needs_curation", help: "Not yet anchor-ready", color: COLORS.amber, filters: true, action: () => { setReady("no"); gotoSection("readiness"); } },
+  { label: "Anchor-ready", key: "anchor_ready", help: "Citable and reusable as-is", color: COLORS.green, filters: true, readyVal: "yes", action: () => { setReady(state.ready === "yes" ? "all" : "yes"); gotoSection("readiness"); } },
+  { label: "Needs curation", key: "needs_curation", help: "Not yet anchor-ready", color: COLORS.amber, filters: true, readyVal: "no", action: () => { setReady(state.ready === "no" ? "all" : "no"); gotoSection("readiness"); } },
   { label: "Future queue", key: "future_proposals", help: "Structured next probes", color: COLORS.blue, action: () => gotoSection("queue") },
   { label: "Claims", key: "claims", help: "Shared evidence statements", color: COLORS.violet, action: () => gotoSection("claims") },
   { label: "Files indexed", key: "total_files", help: "Tracked corpus files", color: COLORS.ink, action: () => gotoSection("artifacts") },
@@ -436,7 +442,7 @@ function metricValue(key) {
 function renderMetrics() {
   document.getElementById("metricGrid").innerHTML = METRICS
     .map((m, i) => `
-      <button class="metric-card${m.filters ? " is-filter" : ""}" type="button" data-metric="${i}" style="--accent:${m.color};--i:${i}">
+      <button class="metric-card${m.filters ? " is-filter" : ""}" type="button" data-metric="${i}"${m.readyVal ? ' aria-pressed="false"' : ""} style="--accent:${m.color};--i:${i}">
         <span class="eyebrow">${escapeHtml(m.label)}</span>
         <span class="metric-value" data-mv="${i}"></span>
         <span class="metric-help">${escapeHtml(m.help)}<span class="metric-go" aria-hidden="true">${m.filters ? "filter →" : "view →"}</span></span>
@@ -461,6 +467,10 @@ function updateMetrics() {
     const showOf = filtering && v !== total;
     node.innerHTML = `${escapeHtml(value.n)}${value.unit ? `<span class="unit">${escapeHtml(value.unit)}</span>` : ""}` +
       (showOf ? `<span class="metric-of">of ${escapeHtml(m.isBytes ? formatBytes(total).n + " " + formatBytes(total).unit : formatNumber(total))}</span>` : "");
+    if (m.readyVal) {
+      const card = document.querySelector(`[data-metric="${i}"]`);
+      if (card) card.setAttribute("aria-pressed", String(state.ready === m.readyVal));
+    }
   });
 }
 
@@ -485,8 +495,20 @@ function barChart(targetId, rows, options = {}) {
     const label = row.label || row.id;
     chart.appendChild(text(label, { x: 0, y: y + rowH / 2 + 4, class: "chart-label" }));
     chart.appendChild(svg("rect", { x: labelW, y: y + rowH / 2 - 9, width: plotW, height: 18, rx: 5, fill: COLORS.tint }));
-    const bar = svg("rect", { x: labelW, y: y + rowH / 2 - 9, width: bw, height: 18, rx: 5, fill: color });
+    const interactive = typeof options.onBar === "function";
+    const barAttrs = { x: labelW, y: y + rowH / 2 - 9, width: bw, height: 18, rx: 5, fill: color };
+    if (interactive) {
+      Object.assign(barAttrs, { tabindex: 0, role: "button", "aria-label": `${label}: ${value}. Activate to filter.`, style: "cursor:pointer" });
+    }
+    const bar = svg("rect", barAttrs);
     attachTooltip(bar, `<strong>${escapeHtml(label)}</strong><br><span class="tip-meta">${formatNumber(value)}</span>`);
+    if (interactive) {
+      // widen the hit target across the whole row for easy clicking/focus
+      const hit = svg("rect", { x: labelW, y, width: plotW, height: rowH, fill: "transparent", style: "cursor:pointer" });
+      hit.addEventListener("click", () => options.onBar(row.id));
+      chart.appendChild(hit);
+      onActivate(bar, () => options.onBar(row.id));
+    }
     chart.appendChild(bar);
     chart.appendChild(text(formatNumber(value), { x: labelW + bw + 7, y: y + rowH / 2 + 4, class: "chart-value" }));
   });
@@ -506,9 +528,11 @@ function programNetwork(fstats, fcount) {
     chart.appendChild(svg("circle", { cx, cy, r, fill: "none", stroke: COLORS.lineInv, "stroke-width": 1, opacity: 0.5 }));
   });
 
-  const maxCount = Math.max(1, ...progs.map((p) => p.experiment_count));
-  const nodeR = (c) => 16 + (Math.sqrt(c) / Math.sqrt(maxCount)) * 24;
   const filtering = state.program !== "all" || state.ready !== "all" || state.need !== "all" || !!state.search;
+  // disk size encodes experiments IN THE CURRENT VIEW so it never contradicts the legend/center
+  const sizeOf = (p) => filtering ? (stats.get(p.id)?.count || 0) : p.experiment_count;
+  const maxCount = Math.max(1, ...progs.map(sizeOf));
+  const nodeR = (c) => (c <= 0 ? 9 : 14 + (Math.sqrt(c) / Math.sqrt(maxCount)) * 26);
 
   progs.forEach((p, i) => {
     const angle = -Math.PI / 2 + (i / progs.length) * Math.PI * 2;
@@ -518,7 +542,7 @@ function programNetwork(fstats, fcount) {
     chart.appendChild(svg("line", {
       x1: cx, y1: cy, x2: x, y2: y,
       stroke: active ? programColor(p.id) : COLORS.lineInv,
-      "stroke-width": active ? 2.4 : 1 + (p.experiment_count / maxCount) * 1.4,
+      "stroke-width": active ? 2.4 : 1 + (sizeOf(p) / maxCount) * 1.4,
       opacity: filtering && !inView ? 0.12 : active ? 0.9 : 0.5
     }));
   });
@@ -530,7 +554,7 @@ function programNetwork(fstats, fcount) {
   progs.forEach((p, i) => {
     const angle = -Math.PI / 2 + (i / progs.length) * Math.PI * 2;
     const x = cx + Math.cos(angle) * ringR, y = cy + Math.sin(angle) * ringR;
-    const r = nodeR(p.experiment_count);
+    const r = nodeR(sizeOf(p));
     const color = programColor(p.id);
     const active = state.program === p.id;
     const s = stats.get(p.id) || { count: 0, ready: 0 };
@@ -553,7 +577,7 @@ function programNetwork(fstats, fcount) {
     chart.appendChild(g);
   });
 
-  chart.appendChild(text("disk = experiments    green ring = % anchor-ready, amber = to curate", { x: cx, y: H - 6, "text-anchor": "middle", class: "axis-label-inv" }));
+  chart.appendChild(text("disk = experiments  ·  ring = % anchor-ready (green) / to curate (amber)", { x: cx, y: H - 6, "text-anchor": "middle", class: "axis-label-inv" }));
 
   target.appendChild(chart);
   renderProgramLegend(stats);
@@ -590,7 +614,7 @@ function donutChart(experiments) {
   const W = 260, H = 232, cx = W / 2, cy = 104, radius = 72;
   const circ = 2 * Math.PI * radius;
   const readyArc = (ready / total) * circ;
-  const track = "#c8d0da"; // visible "to curate" tone (was invisible lineSoft)
+  const track = "#d99a3a"; // amber "to curate" — matches the map ring + curation accents
   const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pct}% anchor-ready in this view (${ready} of ${total})` });
   chart.appendChild(svg("circle", { cx, cy, r: radius, fill: "none", stroke: track, "stroke-width": 22 }));
   const arc = svg("circle", {
@@ -669,17 +693,19 @@ function programHeatmap(fstats) {
   const target = document.getElementById("programHeatmap");
   clear(target);
   const stats = fstats || programStats(DATA.experiments);
-  // Exp + %Ready reflect the filtered view; Queued/Claims are program-level attributes.
+  // every column reflects the filtered view
   const metrics = [
-    { key: "exp", label: "Exp", color: "#566b86", mode: "count" },
+    { key: "exp", label: "Exp", color: "#455468", mode: "count" },
     { key: "ready", label: "% Ready", color: COLORS.green, mode: "ratio" },
-    { key: "queue_count", label: "Queued", color: COLORS.amber, mode: "count" },
-    { key: "claim_count", label: "Claims", color: COLORS.violet, mode: "count" }
+    { key: "queue", label: "Queued", color: COLORS.amber, mode: "count" },
+    { key: "claims", label: "Claims", color: COLORS.violet, mode: "count" }
   ];
   const W = 620, labelW = 270, gutter = 12, fontPx = 9.5;
   const cellW = (W - labelW) / metrics.length, rowH = 30, top = 32;
   const progs = PROGRAMS_BY_SIZE;
-  const rowOf = (p) => { const s = stats.get(p.id) || { count: 0, ready: 0 }; return { exp: s.count, ready: s.ready, queue_count: p.queue_count, claim_count: p.claim_count, expTotal: s.count }; };
+  const fqByProg = {}; filteredQueue().forEach((i) => (i.programs || []).forEach((id) => { fqByProg[id] = (fqByProg[id] || 0) + 1; }));
+  const fcByProg = {}; filteredClaims().forEach((c) => splitList(c.programs).forEach((id) => { fcByProg[id] = (fcByProg[id] || 0) + 1; }));
+  const rowOf = (p) => { const s = stats.get(p.id) || { count: 0, ready: 0 }; return { exp: s.count, ready: s.ready, queue: fqByProg[p.id] || 0, claims: fcByProg[p.id] || 0, expTotal: s.count }; };
   const data = progs.map((p) => ({ p, v: rowOf(p) }));
   const H = top + progs.length * rowH + 6;
   const maxes = {};
@@ -881,7 +907,7 @@ function renderExperiments() {
   const body = shown.map((e) => `
     <tr data-experiment="${escapeHtml(e.id)}">
       <td data-label="Experiment"><button class="row-open" type="button" aria-label="${escapeHtml(e.id)} — open details"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(cleanTitle(e.title))}</span></button></td>
-      <td class="col-progs" data-label="Programs" title="${escapeHtml(e.programs.map(titleForProgram).join(", "))}"><span class="prog-dots">${e.programs.map((id) => `<span class="prog-dot" style="background:${programColor(id)}"></span>`).join("")}${e.programs.length > 1 ? `<span class="prog-count">${e.programs.length}</span>` : ""}</span></td>
+      <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<span class="prog-chip" style="background:${programColor(id)}" title="${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</span>`).join("")}</span><span class="sr-only">${escapeHtml(e.programs.map(titleForProgram).join(", "))}</span></td>
       <td data-label="Ready"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Ready" : "Needs curation"}</span></td>
       <td class="col-mono" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
       <td class="col-mono" data-label="Needs">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
@@ -941,6 +967,11 @@ const QUEUE_META = {
 function renderQueue() {
   const rows = filteredQueue();
   document.getElementById("queueCount").innerHTML = `<b>${formatNumber(rows.length)}</b> of ${formatNumber(DATA.queue.length)} shown`;
+  if (!rows.length) {
+    document.getElementById("queueBoard").innerHTML = emptyState("No queued probes match the active filters.");
+    wireEmptyReset();
+    return;
+  }
   const priorities = ["P0", "P1", "P2"];
   document.getElementById("queueBoard").innerHTML = priorities.map((pr) => {
     const items = rows.filter((i) => i.priority === pr);
@@ -1057,7 +1088,10 @@ function renderCharts() {
   // explorer charts react to the active filters (consistent with the scatter + table)
   const exp = fexp;
   const needRows = countRows(exp, (e) => e.needs || []);
-  barChart("needsChart", needRows.length ? needRows : DATA.charts.needs.map((r) => ({ ...r, label: humanizeToken(r.id) })), { label: "curation needs", labelW: 190, color: COLORS.rose, empty: "No curation gaps in this view." });
+  barChart("needsChart", needRows.length ? needRows : DATA.charts.needs.map((r) => ({ ...r, label: humanizeToken(r.id) })), {
+    label: "curation needs", labelW: 190, color: COLORS.rose, empty: "No curation needs in this view.",
+    onBar: (id) => { setNeed(id); gotoSection("experiments"); }
+  });
   const runRows = countRows(exp, (e) => e.run_surface);
   barChart("runSurfaceChart", runRows, { label: "run surfaces", labelW: 170, rowH: 30, color: COLORS.teal, empty: "No experiments in this view." });
   // priority mix reacts to the active filter (consistent with the queue board)
@@ -1069,8 +1103,9 @@ function renderCharts() {
     label: "queue priorities", labelW: 50, rowH: 34, empty: "No queued probes in this view.",
     colors: { P0: COLORS.rose, P1: COLORS.amber, P2: COLORS.blue }
   });
-  barChart("artifactKindChart", DATA.charts.artifact_kinds.map((r) => ({ ...r, label: humanizeToken(r.id) })), { label: "artifact manifest kinds", labelW: 130, color: COLORS.violet });
-  barChart("extensionChart", DATA.charts.extensions, { label: "file extension counts", labelW: 70, rowH: 24, color: COLORS.blue });
+  // descriptive (non-status) magnitude charts use one neutral hue so status colors stay meaningful
+  barChart("artifactKindChart", DATA.charts.artifact_kinds.map((r) => ({ ...r, label: humanizeToken(r.id) })), { label: "artifact manifest kinds", labelW: 130, color: "#455468" });
+  barChart("extensionChart", DATA.charts.extensions, { label: "file extension counts", labelW: 70, rowH: 24, color: "#455468" });
 }
 
 /* ---------------------------------------------------------------- render */
@@ -1107,7 +1142,8 @@ function seedStateFromURL() {
   const ready = params.get("ready");
   if (ready === "yes" || ready === "no") state.ready = ready;
   const need = params.get("need");
-  if (need) state.need = need;
+  const knownNeeds = new Set(DATA.experiments.flatMap((e) => e.needs || []));
+  if (need && knownNeeds.has(need)) state.need = need; // ignore stale ?need= values
   const q = params.get("q");
   if (q) state.search = q;
 }
@@ -1179,7 +1215,12 @@ function bindEvents() {
     if (e.key === "Escape") closeDrawer();
     trapDrawerFocus(e);
     const typing = ["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement?.tagName);
-    if (e.key === "/" && !typing) { e.preventDefault(); (els.search || els.searchTop)?.focus(); }
+    const drawerOpen = els.drawer.classList.contains("open");
+    if (e.key === "/" && !typing && !drawerOpen) {
+      e.preventDefault();
+      const rail = els.filterRail && els.filterRail.classList.contains("visible");
+      (rail ? els.searchTop : els.search || els.searchTop)?.focus();
+    }
   });
 }
 

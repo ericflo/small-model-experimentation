@@ -284,14 +284,14 @@ h1, h2, h3 {
 }
 
 .hero-copy { min-width: 0; }
-.hero-copy h2 {
+.hero-copy h1 {
   margin: 0;
   font-size: clamp(2.3rem, 5.4vw, 4.6rem);
   line-height: 0.98;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
-.hero-copy h2 .hl { color: var(--teal); }
+.hero-copy h1 .hl { color: var(--teal); }
 .lede {
   margin: 22px 0 0;
   max-width: 56ch;
@@ -471,6 +471,8 @@ input:focus, select:focus {
 }
 .visual svg { width: 100%; height: auto; display: block; }
 .visual.network-visual { padding: 8px 12px 14px; }
+/* keep the compact donut from ballooning when its panel goes full-width (<=1180) */
+#readinessDonut svg { max-width: 380px; margin-inline: auto; }
 
 .legend {
   display: flex;
@@ -661,9 +663,21 @@ tbody tr:last-child td { border-bottom: none; }
 .cell-id { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--ink); word-break: break-word; }
 .cell-title { display: block; margin-top: 2px; color: var(--muted); font-size: 0.82rem; }
 .col-progs { white-space: nowrap; }
-.prog-dots { display: inline-flex; align-items: center; gap: 4px; }
-.prog-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
-.prog-count { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); margin-left: 2px; }
+.prog-chips { display: inline-flex; align-items: center; gap: 3px; flex-wrap: wrap; }
+.prog-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 21px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 4px;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  flex: none;
+}
 .col-needs { color: var(--muted); font-family: var(--mono); font-size: 0.76rem; }
 .status-tag {
   display: inline-flex;
@@ -1020,6 +1034,8 @@ tbody tr:last-child td { border-bottom: none; }
   outline-offset: 2px;
   border-radius: 3px;
 }
+/* brighter ring on the dark signature surface so it clears non-text contrast */
+.panel-signature :focus-visible { outline-color: #5fc6d1; }
 
 /* hero controls footer with reset */
 .controls-foot {
@@ -1275,25 +1291,21 @@ tbody tr:last-child td { border-bottom: none; }
 }
 
 @media (max-width: 720px) {
-  .topbar {
-    position: static;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    padding: 12px var(--pad-x);
-  }
+  /* keep the nav sticky (scrolls horizontally) so section-jump survives the long page */
+  .topbar { gap: 12px; padding: 10px var(--pad-x); }
+  .brand { flex: 0 1 auto; min-width: 0; }
+  .wordmark { font-size: 0.92rem; overflow: hidden; text-overflow: ellipsis; }
   .topnav {
+    flex: 1 1 auto;
     justify-content: flex-start;
     gap: 2px;
     overflow-x: auto;
     flex-wrap: nowrap;
-    margin: 0 calc(-1 * var(--pad-x));
-    padding: 0 var(--pad-x) 2px;
     -webkit-overflow-scrolling: touch;
   }
   .topnav a { white-space: nowrap; }
   .filter-rail { display: none; }
-  .band { scroll-margin-top: 12px; }
+  .band { scroll-margin-top: calc(var(--header-h) + 12px); }
   .global-controls, .metric-grid { grid-template-columns: 1fr; }
   .hero-copy h1 { font-size: clamp(2rem, 9vw, 2.9rem); }
   .drawer dl { grid-template-columns: 1fr; }
