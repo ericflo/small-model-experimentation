@@ -120,7 +120,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Status: `Open`
 - Programs: `posttraining_and_adaptation`, `process_control_and_tool_use`
 - Summary: LoRA, DPO, distillation, GRPO, and DAgger are promising, but their value is unclear unless compared against frozen sampling, verification, retrieval, and tool-control alternatives.
-- Implication: Posttraining runs should include frozen inference-time alternatives and explicit deployability boundaries.
+- Implication: Post-training runs should include frozen inference-time alternatives and explicit deployability boundaries.
 
 ### Evidence
 

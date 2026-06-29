@@ -1238,6 +1238,8 @@ function focusKey() {
   if (!ae || ae === document.body) return null;
   const prog = ae.getAttribute && ae.getAttribute("data-program");
   if (prog) return ae.closest("#programLegend") ? `#programLegend [data-program="${prog}"]` : `#programCards [data-program="${prog}"]`;
+  const filt = ae.getAttribute && ae.getAttribute("data-filter"); // program-card "Filter to this program" CTA
+  if (filt) return `#programCards [data-filter="${filt}"]`;
   const metric = ae.getAttribute && ae.getAttribute("data-metric");
   if (metric) return `[data-metric="${metric}"]`;
   const mapnode = ae.getAttribute && ae.getAttribute("data-mapnode");

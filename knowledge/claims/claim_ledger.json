@@ -147,7 +147,7 @@
           "id": "qwen35_4b_oracle_process_grpo"
         }
       ],
-      "implication": "Posttraining runs should include frozen inference-time alternatives and explicit deployability boundaries.",
+      "implication": "Post-training runs should include frozen inference-time alternatives and explicit deployability boundaries.",
       "next_tests": [
         "Run one update method against frozen inference-time alternatives on the same selector or compiler benchmark."
       ],
