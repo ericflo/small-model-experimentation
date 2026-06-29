@@ -58,7 +58,8 @@
   --maxw: 1560px;
   /* horizontal padding that also centers content within --maxw on ultra-wide screens */
   --pad-edge: max(var(--pad-x), calc((100% - var(--maxw)) / 2));
-  --header-h: 66px;
+  --header-h: 66px; /* measured & overridden by JS so wrapped nav never occludes content */
+  --rail-h: 54px;
 }
 
 * { box-sizing: border-box; }
@@ -234,7 +235,7 @@ h1, h2, h3 {
 .band {
   padding: var(--pad-band) var(--pad-edge);
   /* clear both the sticky topbar and the filter rail when anchor-jumping */
-  scroll-margin-top: calc(var(--header-h) + 72px);
+  scroll-margin-top: calc(var(--header-h) + var(--rail-h) + 12px);
 }
 .band.tight { padding-top: clamp(24px, 3vw, 40px); }
 .muted-band { background: var(--paper-deep); }
@@ -370,11 +371,16 @@ input:focus, select:focus {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 18%, transparent);
 }
 
-/* ---- Hero metric ledger -------------------------------------------------- */
+/* ---- Hero metric ledger: one bordered instrument panel, hairline-divided ---- */
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 .metric-card {
   position: relative;
@@ -382,17 +388,21 @@ input:focus, select:focus {
   flex-direction: column;
   gap: 6px;
   padding: 16px 16px 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border: none;
+  border-right: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: 0;
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
+.metric-card:nth-child(2n) { border-right: none; }
+.metric-card:nth-last-child(-n+2) { border-bottom: none; }
 .metric-card::before {
   content: "";
   position: absolute;
-  left: 0; top: 0; bottom: 0;
+  left: 0; top: 14px; bottom: 14px;
   width: 3px;
+  border-radius: 0 2px 2px 0;
   background: var(--accent, var(--teal));
 }
 .metric-card .eyebrow { margin: 0; }
@@ -459,7 +469,8 @@ input:focus, select:focus {
 .chart-side { display: flex; flex-direction: column; gap: var(--gap); min-width: 0; }
 .split-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
 
-.sticky-side { position: sticky; top: calc(var(--header-h) + 16px); }
+/* clear the sticky topbar AND the on-scroll filter rail so panel tops aren't occluded */
+.sticky-side { position: sticky; top: calc(var(--header-h) + var(--rail-h) + 12px); }
 .artifact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
 .artifact-col { display: flex; flex-direction: column; gap: var(--gap); min-width: 0; }
 .explorer-layout { grid-template-columns: minmax(280px, 0.42fr) minmax(0, 1fr); align-items: start; }
@@ -480,6 +491,20 @@ input:focus, select:focus {
   gap: 6px 14px;
   padding: 0 18px 16px;
 }
+.panel-link {
+  display: inline-block;
+  margin: 0 18px 16px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--teal);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--teal) 40%, transparent);
+  padding-bottom: 1px;
+}
+.panel-link:hover { border-bottom-color: var(--teal); }
+.panel-link .arr { display: inline-block; transition: transform 120ms ease; }
+.panel-link:hover .arr { transform: translateX(2px); }
 .legend-item {
   display: inline-flex;
   align-items: center;
@@ -1082,10 +1107,10 @@ tbody tr:last-child td { border-bottom: none; }
   text-align: left;
   font-family: inherit;
   cursor: pointer;
-  transition: transform 130ms ease, box-shadow 130ms ease, border-color 130ms ease;
+  transition: background 130ms ease;
 }
-.metric-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent, var(--teal)) 45%, var(--line)); }
-.metric-card .metric-help { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.metric-card:hover, .metric-card:focus-visible { background: var(--surface-tint); }
+.metric-card .metric-help { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
 .metric-go {
   flex: none;
   font-family: var(--mono);
@@ -1093,10 +1118,10 @@ tbody tr:last-child td { border-bottom: none; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--accent, var(--teal));
-  opacity: 0.55;
-  transition: opacity 130ms ease, transform 130ms ease;
+  opacity: 0.9; /* AA contrast even at rest */
+  transition: transform 130ms ease;
 }
-.metric-card:hover .metric-go, .metric-card:focus-visible .metric-go { opacity: 1; transform: translateX(2px); }
+.metric-card:hover .metric-go, .metric-card:focus-visible .metric-go { transform: translateX(2px); }
 .metric-of {
   display: block;
   margin-top: 4px;

@@ -167,7 +167,7 @@ function textBlob(item) {
   const progNames = item.programs ? splitList(item.programs).map(titleForProgram).join(" ") : "";
   return `${base} ${progNames}`.toLowerCase();
 }
-const normSep = (s) => s.replace(/[-_]/g, " ");
+const normSep = (s) => s.replace(/[^a-z0-9]+/gi, " "); // commas, hyphens, slashes, dots -> spaces
 function matchesSearch(item) {
   const q = normSep(state.search.trim().toLowerCase());
   if (!q) return true;
@@ -536,7 +536,7 @@ function barChart(targetId, rows, options = {}) {
     const interactive = typeof options.onBar === "function";
     const barAttrs = { x: labelW, y: y + rowH / 2 - 9, width: bw, height: 18, rx: 5, fill: color };
     if (interactive) {
-      Object.assign(barAttrs, { tabindex: 0, role: "button", "aria-label": `${label}: ${value}. Activate to filter.`, style: "cursor:pointer" });
+      Object.assign(barAttrs, { tabindex: 0, role: "button", "data-bar": row.id, "aria-label": `${label}: ${value}. Activate to filter.`, style: "cursor:pointer" });
     }
     const bar = svg("rect", barAttrs);
     attachTooltip(bar, `<strong>${escapeHtml(label)}</strong><br><span class="tip-meta">${formatNumber(value)}</span>`);
@@ -602,7 +602,7 @@ function programNetwork(fstats, fcount) {
     const inView = s.count > 0;
     const ratio = s.count ? s.ready / s.count : 0;
     const opacity = filtering && !inView ? 0.22 : 1;
-    const g = svg("g", { tabindex: 0, role: "button", class: "map-node",
+    const g = svg("g", { tabindex: 0, role: "button", class: "map-node", "data-mapnode": p.id,
       "aria-label": `${titleForProgram(p.id)}: ${s.count} experiments, ${Math.round(ratio * 100)} percent anchor-ready. Activate to filter.`,
       style: `cursor:pointer; opacity:${opacity}; --i:${i}` });
     g.appendChild(svg("circle", { cx: x, cy: y, r, fill: color, stroke: active ? "#fff" : "rgba(255,255,255,0.25)", "stroke-width": active ? 3 : 1.5 }));
@@ -657,7 +657,7 @@ function donutChart(experiments) {
   const W = 260, H = 232, cx = W / 2, cy = 104, radius = 72;
   const circ = 2 * Math.PI * radius;
   const readyArc = (ready / total) * circ;
-  const track = "#d99a3a"; // amber "to curate" — matches the map ring + curation accents
+  const track = "#b9720f"; // amber "to curate" — AA non-text contrast, matches curation accents
   const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pct}% anchor-ready in this view (${ready} of ${total})` });
   chart.appendChild(svg("circle", { cx, cy, r: radius, fill: "none", stroke: track, "stroke-width": 22 }));
   const arc = svg("circle", {
@@ -719,6 +719,14 @@ function ellipsize(str, maxWidth, fontPx) {
   return str.slice(0, Math.max(1, maxChars - 1)).trimEnd() + "…";
 }
 
+/* linear interpolate two hex colors (t in 0..1) — used for the absolute %Ready ramp */
+function lerpColor(a, b, t) {
+  const ph = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+  const [ar, ag, ab] = ph(a), [br, bg, bb] = ph(b);
+  const m = (x, y) => Math.round(x + (y - x) * t).toString(16).padStart(2, "0");
+  return `#${m(ar, br)}${m(ag, bg)}${m(ab, bb)}`;
+}
+
 /* choose ink/white text for a hex fill blended onto white at `alpha`, using true
    WCAG relative luminance; white only on genuinely dark cells so values stay AA-legible. */
 function readableText(hex, alpha) {
@@ -751,17 +759,17 @@ function programHeatmap(fstats) {
   const H = top + progs.length * rowH + 6;
   const maxes = {};
   metrics.forEach((m) => { maxes[m.key] = Math.max(1, ...data.map((d) => d.v[m.key])); });
-  // expand the %Ready color range across programs that have experiments in view,
-  // so an under-ready program is distinguishable from a 100% one (labels stay exact)
-  const ratios = data.filter((d) => d.v.expTotal > 0).map((d) => d.v.ready / d.v.expTotal);
-  const minR = ratios.length ? Math.min(...ratios) : 0, maxR = ratios.length ? Math.max(...ratios) : 1;
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Program scorecard: experiments, percent ready, queued, claims", preserveAspectRatio: "xMinYMin meet" });
+  // Queued/Claims can't honor a readiness/need filter; mark rows with 0 in-view experiments
+  const scopeNote = state.ready !== "all" || state.need !== "all";
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H + (scopeNote ? 16 : 0)}`, role: "group", "aria-label": "Program scorecard: experiments, percent ready, queued, claims", preserveAspectRatio: "xMinYMin meet" });
   metrics.forEach((m, ci) => {
     chart.appendChild(text(m.label, { x: labelW + ci * cellW + cellW / 2, y: 18, "text-anchor": "middle", class: "axis-label" }));
   });
+  const READY_GREEN = "#1f8a4d", CURATE_AMBER = "#b9720f";
   data.forEach(({ p, v }, ri) => {
     const y = top + ri * rowH;
     const active = state.program === p.id;
+    const outOfView = v.expTotal === 0;
     const rowG = svg("g", {});
     if (active) chart.appendChild(svg("rect", { x: 0, y: y - 1, width: W, height: rowH, fill: COLORS.tint, rx: 5 }));
     rowG.appendChild(svg("rect", { x: 0, y: y + rowH / 2 - 7, width: 5, height: 14, rx: 2, fill: programColor(p.id) }));
@@ -771,31 +779,33 @@ function programHeatmap(fstats) {
     rowG.appendChild(label);
     metrics.forEach((m, ci) => {
       const value = v[m.key];
-      const ratio = m.mode === "ratio" ? value / Math.max(1, v.expTotal) : value / maxes[m.key];
-      // color intensity: counts by magnitude; %Ready normalized across the visible spread
-      const colorRatio = m.mode === "ratio"
-        ? (v.expTotal === 0 ? 0 : (maxR > minR ? (ratio - minR) / (maxR - minR) : ratio))
-        : ratio;
-      const alpha = m.mode === "ratio" && v.expTotal === 0 ? 0.06 : 0.12 + colorRatio * 0.78;
       const cellX = labelW + ci * cellW;
+      // Queued/Claims for an out-of-view program under a readiness/need filter -> "—"
+      const suppressed = scopeNote && outOfView && (m.key === "queue" || m.key === "claims");
+      let fill, alpha, textColor, shown;
+      if (m.mode === "ratio") {
+        const ratio = value / Math.max(1, v.expTotal);
+        if (outOfView) { fill = "#eef1f4"; alpha = 1; textColor = COLORS.faint; shown = "—"; }
+        else { fill = lerpColor(CURATE_AMBER, READY_GREEN, ratio); alpha = 1; textColor = readableText(fill, 1); shown = `${Math.round(ratio * 100)}%`; }
+      } else if (suppressed) {
+        fill = "#eef1f4"; alpha = 1; textColor = COLORS.faint; shown = "—";
+      } else {
+        alpha = 0.12 + (value / maxes[m.key]) * 0.78; fill = m.color; textColor = readableText(m.color, alpha); shown = formatNumber(value);
+      }
       const cell = svg("rect", {
         x: cellX + 3, y: y + 3, width: cellW - 6, height: rowH - 6, rx: 5,
-        fill: m.color, opacity: alpha, tabindex: 0, role: "button",
-        "aria-label": `${full}, ${m.label}: ${m.mode === "ratio" ? Math.round(ratio * 100) + " percent" : value}. Activate to filter.`,
+        fill, opacity: alpha, tabindex: 0, role: "button", "data-cell": p.id,
+        "aria-label": `${full}, ${m.label}: ${shown === "—" ? "not in view" : shown}. Activate to filter.`,
         style: "cursor:pointer"
       });
-      const valLabel = m.mode === "ratio" ? `${Math.round(ratio * 100)}% (${formatNumber(value)}/${formatNumber(v.expTotal)})` : formatNumber(value);
-      attachTooltip(cell, `<strong>${escapeHtml(full)}</strong><br><span class="tip-meta">${m.label}: ${valLabel}</span>`);
+      attachTooltip(cell, `<strong>${escapeHtml(full)}</strong><br><span class="tip-meta">${m.label}: ${m.mode === "ratio" && !outOfView ? `${Math.round((value / Math.max(1, v.expTotal)) * 100)}% (${formatNumber(value)}/${formatNumber(v.expTotal)})` : (shown === "—" ? "not in current view" : formatNumber(value))}</span>`);
       onActivate(cell, () => setProgram(p.id));
       rowG.appendChild(cell);
-      const shown = m.mode === "ratio" ? (v.expTotal ? `${Math.round(ratio * 100)}%` : "—") : formatNumber(value);
-      rowG.appendChild(text(shown, {
-        x: cellX + cellW / 2, y: y + rowH / 2 + 4, "text-anchor": "middle",
-        class: "chart-value", style: `fill:${readableText(m.color, alpha)}`
-      }));
+      rowG.appendChild(text(shown, { x: cellX + cellW / 2, y: y + rowH / 2 + 4, "text-anchor": "middle", class: "chart-value", style: `fill:${textColor}` }));
     });
     chart.appendChild(rowG);
   });
+  if (scopeNote) chart.appendChild(text("Queued & Claims reflect program + search scope only", { x: W, y: H + 10, "text-anchor": "end", class: "axis-label" }));
   target.appendChild(chart);
 }
 
@@ -810,7 +820,8 @@ function claimGraph() {
   const H = top + progs.length * rowH + 8;
   const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Claims linked to programs matrix" });
   const visibleClaims = new Set(filteredClaims().map((c) => c.id));
-  const dimClaim = (c) => visibleClaims.size && !visibleClaims.has(c.id);
+  // when any filter is active, dim claims outside the view (incl. the zero-match case)
+  const dimClaim = (c) => filtersActive() && !visibleClaims.has(c.id);
   // column headers (claim ids, status dot above)
   claims.forEach((c, ci) => {
     const x = labelW + ci * colW + colW / 2;
@@ -838,7 +849,7 @@ function claimGraph() {
       const op = Math.min(rowDim, dimClaim(c) ? 0.25 : 1);
       if (linked) {
         const dot = svg("circle", { cx: x, cy: y + rowH / 2, r: 6.5, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op,
-          tabindex: 0, role: "button", "aria-label": `${c.id} relates to ${titleForProgram(p.id)}: ${c.title}`, style: "cursor:pointer" });
+          tabindex: 0, role: "button", "aria-label": `${c.id} (${humanizeStatus(c.status)}) relates to ${titleForProgram(p.id)}: ${c.title}`, style: "cursor:pointer" });
         attachTooltip(dot, `<strong>${escapeHtml(c.id)}</strong> ↔ <strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${escapeHtml(c.title)}</span>`);
         onActivate(dot, () => openClaim(c));
         chart.appendChild(dot);
@@ -954,7 +965,7 @@ function renderExperiments() {
     <tr data-experiment="${escapeHtml(e.id)}">
       <td data-label="Experiment"><button class="row-open" type="button" aria-label="${escapeHtml(e.id)} — open details"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(cleanTitle(e.title))}</span></button></td>
       <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<span class="prog-chip" style="background:${programColor(id)}" title="${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</span>`).join("")}</span><span class="sr-only">${escapeHtml(e.programs.map(titleForProgram).join(", "))}</span></td>
-      <td data-label="Ready"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Ready" : "Needs curation"}</span></td>
+      <td data-label="Ready"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span></td>
       <td class="col-mono" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
       <td class="col-mono" data-label="Needs">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
     </tr>`).join("");
@@ -967,6 +978,8 @@ function renderExperiments() {
       const key = th.getAttribute("data-sort");
       if (state.sort.key === key) state.sort.dir *= -1; else state.sort = { key, dir: 1 };
       renderExperiments();
+      // renderExperiments re-creates the header; keep focus on the column the user sorted
+      document.querySelector(`[data-sort="${key}"] .th-btn`)?.focus();
     });
   });
   const openRow = (el) => openExperiment(experimentById.get(el.closest("[data-experiment]").getAttribute("data-experiment")));
@@ -1161,6 +1174,12 @@ function focusKey() {
   if (prog) return ae.closest("#programLegend") ? `#programLegend [data-program="${prog}"]` : `#programCards [data-program="${prog}"]`;
   const metric = ae.getAttribute && ae.getAttribute("data-metric");
   if (metric) return `[data-metric="${metric}"]`;
+  const mapnode = ae.getAttribute && ae.getAttribute("data-mapnode");
+  if (mapnode) return `[data-mapnode="${mapnode}"]`;
+  const cell = ae.getAttribute && ae.getAttribute("data-cell");
+  if (cell) return `#programHeatmap [data-cell="${cell}"]`;
+  const bar = ae.getAttribute && ae.getAttribute("data-bar");
+  if (bar) return `[data-bar="${bar}"]`;
   const sortTh = ae.closest && ae.closest("[data-sort]");
   if (sortTh) return `[data-sort="${sortTh.getAttribute("data-sort")}"] .th-btn`;
   return null;
@@ -1309,6 +1328,17 @@ function setupMotion() {
   targets.forEach((t) => obs.observe(t));
 }
 
+/* keep the --header-h / --rail-h tokens accurate so sticky panels + anchor jumps clear the chrome */
+function setupChromeSizing() {
+  const topbar = document.querySelector(".topbar");
+  const apply = () => {
+    if (topbar && topbar.offsetHeight) document.documentElement.style.setProperty("--header-h", `${topbar.offsetHeight}px`);
+    if (els.filterRail && els.filterRail.offsetHeight) document.documentElement.style.setProperty("--rail-h", `${els.filterRail.offsetHeight}px`);
+  };
+  apply();
+  window.addEventListener("resize", apply);
+}
+
 /* Reveal the sticky filter rail once the hero controls scroll out of view. */
 function setupFilterRail() {
   if (!els.filterRail) return;
@@ -1331,6 +1361,7 @@ syncControls();
 bindEvents();
 setupScrollSpy();
 setupFilterRail();
+setupChromeSizing();
 setupMotion();
 render();
 
