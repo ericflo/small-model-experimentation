@@ -374,7 +374,7 @@ function closeDrawer() {
   setBackgroundInert(false);
   // return focus to the trigger; if render() detached it (the close path re-renders first),
   // re-resolve it by selector, and only then fall back to a stable control — never <body>
-  let target = (lastFocused && lastFocused.isConnected) ? lastFocused : null;
+  let target = (lastFocused && lastFocused !== document.body && lastFocused.isConnected) ? lastFocused : null;
   if (!target && lastFocusedSel) target = document.querySelector(lastFocusedSel);
   if (target && target.focus) target.focus();
   else restoreFilterFocus();
@@ -465,7 +465,11 @@ function wireChips(host, chips) {
 /* park keyboard focus on a stable control after a filter chip / reset destroys the active element */
 function restoreFilterFocus() {
   const rail = els.filterRail && els.filterRail.classList.contains("visible");
-  const target = rail ? (els.resetTop || els.searchTop) : (els.search || els.searchTop);
+  // skip the rail Reset when it is hidden (a full clear hides it) — focusing a [hidden] control is a
+  // no-op that strands focus on <body>; the rail search field is always present
+  const target = rail
+    ? ((els.resetTop && !els.resetTop.hidden) ? els.resetTop : els.searchTop)
+    : (els.search || els.searchTop);
   if (target && target.focus) target.focus();
 }
 
