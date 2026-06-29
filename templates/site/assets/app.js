@@ -161,11 +161,13 @@ function splitList(value) {
   return String(value).split(";").map((s) => s.trim()).filter(Boolean);
 }
 function listText(items) { return (items || []).join(", "); }
+function plural(n, word) { return `${formatNumber(n)} ${word}${Number(n) === 1 ? "" : "s"}`; }
 function textBlob(item) {
   const base = Object.values(item).flatMap((v) => (Array.isArray(v) ? v : [v])).join(" ");
-  // also index the humanized program names so people can search by what they see
+  // index the humanized program names + readiness status so people can search by what they see
   const progNames = item.programs ? splitList(item.programs).map(titleForProgram).join(" ") : "";
-  return `${base} ${progNames}`.toLowerCase();
+  const status = item.anchor_ready ? (item.anchor_ready === "yes" ? "anchor-ready" : "needs curation") : "";
+  return `${base} ${progNames} ${status}`.toLowerCase();
 }
 const normSep = (s) => s.replace(/[^a-z0-9]+/gi, " "); // commas, hyphens, slashes, dots -> spaces
 function matchesSearch(item) {
@@ -259,7 +261,7 @@ function filteredPrograms() {
   });
 }
 function filtersActive() {
-  return !!state.search || state.program !== "all" || state.ready !== "all" || state.need !== "all";
+  return !!state.search.trim() || state.program !== "all" || state.ready !== "all" || state.need !== "all";
 }
 
 function prefersReducedMotion() {
@@ -317,9 +319,10 @@ function openDrawer(eyebrow, title, lead, rows, extra = "", hash = "") {
     } catch (_) {}
   }
 }
-/* user-initiated close (X / Esc / scrim): pop the history entry so no dead trail accrues */
+/* user-initiated close (X / Esc / scrim): pop the history entry so no dead trail accrues.
+   Clear the flag BEFORE history.back() so a repeat key/double-click can't double-pop off-page. */
 function dismissDrawer() {
-  if (drawerPushed) { try { history.back(); return; } catch (_) {} }
+  if (drawerPushed) { drawerPushed = false; try { history.back(); return; } catch (_) {} }
   closeDrawer();
 }
 function closeDrawer() {
@@ -395,7 +398,7 @@ function activeChips() {
   if (state.ready === "yes") chips.push({ label: "Anchor-ready", clear: () => setReady("all") });
   if (state.ready === "no") chips.push({ label: "Needs curation", clear: () => setReady("all") });
   if (state.need !== "all") chips.push({ label: humanizeToken(state.need), clear: () => setNeed("all") });
-  if (state.search) chips.push({ label: `“${state.search}”`, clear: () => setSearch("") });
+  if (state.search.trim()) chips.push({ label: `“${state.search.trim()}”`, clear: () => setSearch("") });
   return chips;
 }
 
@@ -620,7 +623,7 @@ function programNetwork(fstats, fcount) {
     }));
     g.appendChild(text(programCode(p), { x, y: y + 4, "text-anchor": "middle", class: "node-code", style: `font-size:${r > 26 ? 13 : 11}px` }));
     const qN = fqByProg[p.id] || 0, cN = fcByProg[p.id] || 0;
-    attachTooltip(g, `<strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${s.count} experiments · ${Math.round(ratio * 100)}% ready · ${qN} queued · ${cN} claims</span>`);
+    attachTooltip(g, `<strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${plural(s.count, "experiment")} · ${Math.round(ratio * 100)}% ready · ${plural(qN, "probe")} · ${plural(cN, "claim")}</span>`);
     onActivate(g, () => setProgram(p.id));
     chart.appendChild(g);
   });
@@ -659,24 +662,24 @@ function donutChart(experiments) {
   const ready = exp.filter((e) => e.anchor_ready === "yes").length;
   const needs = Math.max(0, total - ready);
   const pct = Math.round((ready / total) * 100);
-  const W = 260, H = 232, cx = W / 2, cy = 104, radius = 72;
-  const circ = 2 * Math.PI * radius;
-  const readyArc = (ready / total) * circ;
-  const track = "#b9720f"; // amber "to curate" — AA non-text contrast, matches curation accents
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pct}% anchor-ready in this view (${ready} of ${total})` });
-  chart.appendChild(svg("circle", { cx, cy, r: radius, fill: "none", stroke: track, "stroke-width": 22 }));
-  const arc = svg("circle", {
-    cx, cy, r: radius, fill: "none", stroke: COLORS.green, "stroke-width": 22, class: "donut-arc",
-    "stroke-dasharray": `${readyArc} ${circ - readyArc}`, transform: `rotate(-90 ${cx} ${cy})`,
-    style: `--dash:${readyArc}`
-  });
-  chart.appendChild(arc);
-  chart.appendChild(text(`${pct}%`, { x: cx, y: cy + 2, "text-anchor": "middle", class: "chart-value", style: "font-size:34px;font-family:var(--display)" }));
-  chart.appendChild(text("anchor-ready", { x: cx, y: cy + 22, "text-anchor": "middle", class: "axis-label" }));
-  chart.appendChild(svg("rect", { x: 30, y: H - 20, width: 10, height: 10, rx: 2, fill: COLORS.green }));
-  chart.appendChild(text(`${formatNumber(ready)} ready`, { x: 46, y: H - 11, class: "chart-label" }));
-  chart.appendChild(svg("rect", { x: 144, y: H - 20, width: 10, height: 10, rx: 2, fill: track }));
-  chart.appendChild(text(`${formatNumber(needs)} to curate`, { x: 160, y: H - 11, class: "chart-label" }));
+  // horizontal fuel gauge (reuses the bar vocabulary; no stock pie beside the bespoke map)
+  const amber = "#b9720f";
+  const W = 320, H = 168, padX = 8, barY = 78, barH = 30, barW = W - padX * 2;
+  const readyW = (ready / total) * barW;
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pct} percent anchor-ready in this view: ${ready} ready, ${needs} to curate`, preserveAspectRatio: "xMinYMin meet" });
+  chart.appendChild(text(`${pct}%`, { x: padX, y: 50, class: "chart-value", style: "font-size:46px;font-family:var(--display);letter-spacing:-0.03em" }));
+  chart.appendChild(text("ANCHOR-READY", { x: padX + 2, y: 70, class: "axis-label" }));
+  // gauge: amber base (to-curate), green fill (ready)
+  chart.appendChild(svg("rect", { x: padX, y: barY, width: barW, height: barH, rx: 7, fill: amber }));
+  const fill = svg("rect", { x: padX, y: barY, width: readyW, height: barH, rx: 7, fill: COLORS.green, class: "gauge-fill" });
+  chart.appendChild(fill);
+  // quartile ticks
+  [0.25, 0.5, 0.75].forEach((t) => chart.appendChild(svg("line", { x1: padX + barW * t, y1: barY, x2: padX + barW * t, y2: barY + barH, stroke: "rgba(255,255,255,0.5)", "stroke-width": 1 })));
+  // legend
+  chart.appendChild(svg("rect", { x: padX, y: H - 18, width: 11, height: 11, rx: 2, fill: COLORS.green }));
+  chart.appendChild(text(`${formatNumber(ready)} ready`, { x: padX + 17, y: H - 9, class: "chart-label" }));
+  chart.appendChild(svg("rect", { x: padX + 116, y: H - 18, width: 11, height: 11, rx: 2, fill: amber }));
+  chart.appendChild(text(`${formatNumber(needs)} to curate`, { x: padX + 133, y: H - 9, class: "chart-label" }));
   target.appendChild(chart);
 }
 
@@ -740,7 +743,10 @@ function readableText(hex, alpha) {
   const mix = (c) => c * alpha + 255 * (1 - alpha);
   const r = mix(parseInt(h.slice(0, 2), 16)), g = mix(parseInt(h.slice(2, 4), 16)), b = mix(parseInt(h.slice(4, 6), 16));
   const lum = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-  return lum < 0.34 ? "#ffffff" : COLORS.ink; // flip to white earlier so mid-fill values stay AA
+  // pick whichever of white / ink actually has the higher WCAG contrast on this fill
+  const cWhite = 1.05 / (lum + 0.05);
+  const cInk = (lum + 0.05) / (0.013 + 0.05); // ink #111a24 luminance ~0.013
+  return cWhite >= cInk ? "#ffffff" : COLORS.ink;
 }
 
 function programHeatmap(fstats) {
@@ -787,11 +793,12 @@ function programHeatmap(fstats) {
       const cellX = labelW + ci * cellW;
       // Queued/Claims for an out-of-view program under a readiness/need filter -> "—"
       const suppressed = scopeNote && outOfView && (m.key === "queue" || m.key === "claims");
+      const ratio = m.mode === "ratio" ? value / Math.max(1, v.expTotal) : 0;
+      const isGauge = m.mode === "ratio" && !outOfView; // %Ready -> inline gauge (quantitative + AA)
       let fill, alpha, textColor, shown;
       if (m.mode === "ratio") {
-        const ratio = value / Math.max(1, v.expTotal);
         if (outOfView) { fill = "#eef1f4"; alpha = 1; textColor = COLORS.faint; shown = "—"; }
-        else { fill = lerpColor(CURATE_AMBER, READY_GREEN, ratio); alpha = 1; textColor = readableText(fill, 1); shown = `${Math.round(ratio * 100)}%`; }
+        else { fill = "#edf1f5"; alpha = 1; textColor = COLORS.ink; shown = `${Math.round(ratio * 100)}%`; }
       } else if (suppressed) {
         fill = "#eef1f4"; alpha = 1; textColor = COLORS.faint; shown = "—";
       } else {
@@ -803,10 +810,15 @@ function programHeatmap(fstats) {
         "aria-label": `${full}, ${m.label}: ${shown === "—" ? "not in view" : shown}. Activate to filter.`,
         style: "cursor:pointer"
       });
-      attachTooltip(cell, `<strong>${escapeHtml(full)}</strong><br><span class="tip-meta">${m.label}: ${m.mode === "ratio" && !outOfView ? `${Math.round((value / Math.max(1, v.expTotal)) * 100)}% (${formatNumber(value)}/${formatNumber(v.expTotal)})` : (shown === "—" ? "not in current view" : formatNumber(value))}</span>`);
+      attachTooltip(cell, `<strong>${escapeHtml(full)}</strong><br><span class="tip-meta">${m.label}: ${isGauge ? `${Math.round(ratio * 100)}% (${formatNumber(value)}/${formatNumber(v.expTotal)})` : (shown === "—" ? "not in current view" : formatNumber(value))}</span>`);
       onActivate(cell, () => setProgram(p.id));
       rowG.appendChild(cell);
-      rowG.appendChild(text(shown, { x: cellX + cellW / 2, y: y + rowH / 2 + 4, "text-anchor": "middle", class: "chart-value", style: `fill:${textColor}` }));
+      if (isGauge) {
+        // green fill proportional to absolute readiness (truthful, scannable by length)
+        rowG.appendChild(svg("rect", { x: cellX + 3, y: y + 3, width: (cellW - 6) * ratio, height: rowH - 6, rx: 5, fill: READY_GREEN, style: "pointer-events:none" }));
+      }
+      rowG.appendChild(text(shown, { x: cellX + cellW / 2, y: y + rowH / 2 + 4, "text-anchor": "middle", class: "chart-value",
+        style: `fill:${isGauge ? (ratio > 0.62 ? "#ffffff" : COLORS.ink) : textColor}; paint-order:stroke; ${isGauge ? "stroke:rgba(255,255,255,0.0)" : ""}` }));
     });
     chart.appendChild(rowG);
   });
@@ -934,9 +946,9 @@ function openProgram(p) {
 const TABLE_COLS = [
   { key: "id", label: "Experiment" },
   { key: "programs", label: "Programs" },
-  { key: "anchor_ready", label: "Ready" },
+  { key: "anchor_ready", label: "Status" },
   { key: "run_surface", label: "Run surface" },
-  { key: "needs", label: "Needs" }
+  { key: "needs", label: "Curation tasks" }
 ];
 const TABLE_LIMIT = 200;
 
@@ -970,9 +982,9 @@ function renderExperiments() {
     <tr data-experiment="${escapeHtml(e.id)}">
       <td data-label="Experiment"><button class="row-open" type="button" aria-label="${escapeHtml(e.id)} — open details"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(cleanTitle(e.title))}</span></button></td>
       <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<button class="prog-chip pill-link" type="button" data-program-pill="${escapeHtml(id)}" style="background:${programColor(id)}" title="Filter to ${escapeHtml(titleForProgram(id))}" aria-label="Filter to ${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</button>`).join("")}</span></td>
-      <td data-label="Ready"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span></td>
+      <td data-label="Status"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span></td>
       <td class="col-mono" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
-      <td class="col-mono" data-label="Needs">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
+      <td class="col-mono" data-label="Curation tasks">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
     </tr>`).join("");
   const note = all.length > TABLE_LIMIT ? `<div class="table-toolbar">Showing first ${TABLE_LIMIT} of ${formatNumber(all.length)} — narrow with search or filters.</div>` : "";
   document.getElementById("experimentTable").innerHTML = all.length
@@ -1011,7 +1023,7 @@ function openExperiment(e) {
     ["Status", `<span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span>`],
     ["Run surface", e.run_surface ? `<span class="mono-val">${escapeHtml(humanizeToken(e.run_surface))}</span>` : ""],
     ["Smoke test", hasSmoke ? `<code>${escapeHtml(e.smoke_command)}</code>` : '<span class="muted-val">none yet</span>'],
-    ["Needs", (e.needs || []).length ? (e.needs || []).map((n) => `<span class="pill">${escapeHtml(humanizeToken(n))}</span>`).join(" ") : '<span class="muted-val">none</span>'],
+    ["Curation tasks", (e.needs || []).length ? (e.needs || []).map((n) => `<span class="pill">${escapeHtml(humanizeToken(n))}</span>`).join(" ") : '<span class="muted-val">none</span>'],
     ["Tags", (e.tags || []).length ? (e.tags || []).map((t) => `<span class="pill">${escapeHtml(t)}</span>`).join(" ") : ""],
     ["Artifacts", listText(e.recognized_artifacts) ? escapeHtml(listText(e.recognized_artifacts)) : ""],
     ["Files", `${formatNumber(e.total_files)} · ${formatBytes(e.total_size_bytes).n} ${formatBytes(e.total_size_bytes).unit}`]
@@ -1023,11 +1035,11 @@ function openExperiment(e) {
 }
 
 /* ---------------------------------------------------------------- queue board */
-/* priority = one urgency ramp (dark -> pale), not the claim-status hues it used to borrow */
+/* priority = one warm urgency ramp (hot -> calm); headings are ink, ramp is on the spine/bar only */
 const QUEUE_META = {
-  P0: { color: "#334155", meaning: "do next" },
-  P1: { color: "#64748b", meaning: "soon" },
-  P2: { color: "#9aa7b8", meaning: "later" }
+  P0: { color: "#c2410c", meaning: "do next" },
+  P1: { color: "#dd8a3e", meaning: "soon" },
+  P2: { color: "#e8c69c", meaning: "later" }
 };
 function renderQueue() {
   const rows = filteredQueue();
@@ -1042,7 +1054,7 @@ function renderQueue() {
     const items = rows.filter((i) => i.priority === pr);
     const meta = QUEUE_META[pr] || { color: COLORS.muted, meaning: "" };
     const cards = items.length ? items.map((item) => `
-      <article class="queue-card" data-queue="${escapeHtml(item.id)}" style="border-left:3px solid ${meta.color}">
+      <article class="queue-card" data-queue="${escapeHtml(item.id)}" style="border-left:4px solid ${meta.color}">
         <div class="meta-line"><span>${escapeHtml(humanizeStatus(item.status))}</span><span class="effort-chip">${escapeHtml(humanizeStatus(item.effort))} effort</span></div>
         <h4><button class="card-open" type="button" data-open="${escapeHtml(item.id)}">${escapeHtml(cleanTitle(item.title))}</button></h4>
         <p class="question">${escapeHtml(item.question)}</p>
@@ -1303,7 +1315,7 @@ function bindEvents() {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") dismissDrawer();
+    if (e.key === "Escape" && !e.repeat && els.drawer.classList.contains("open")) dismissDrawer();
     trapDrawerFocus(e);
     const typing = ["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement?.tagName);
     const drawerOpen = els.drawer.classList.contains("open");

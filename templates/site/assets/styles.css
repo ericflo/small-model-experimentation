@@ -458,6 +458,9 @@ input:focus, select:focus {
   letter-spacing: -0.015em;
   font-weight: 700;
 }
+.panel-sub { margin: 4px 0 0; font-family: var(--mono); font-size: 0.72rem; color: var(--faintInv); }
+.panel-signature .panel-sub { color: var(--faintInv); }
+.tool-panel:not(.panel-signature) .panel-sub { color: var(--muted); }
 
 .chart-strip, .split-layout, .artifact-grid, .explorer-layout {
   display: grid;
@@ -762,7 +765,7 @@ tbody tr:last-child td { border-bottom: none; }
   font-family: var(--mono);
   font-size: 0.95rem;
   letter-spacing: 0.02em;
-  color: var(--col-color, var(--ink));
+  color: var(--ink); /* AA text; the priority hue lives on the border + spine, not the label */
 }
 .queue-col-head .count {
   font-family: var(--mono);
@@ -853,7 +856,7 @@ tbody tr:last-child td { border-bottom: none; }
   border: 1px solid var(--line-soft);
 }
 .narrative-card h3 { margin: 0; font-size: 0.96rem; font-family: var(--display); }
-.narrative-card p { margin: 8px 0 12px; color: var(--muted); font-size: 0.86rem; line-height: 1.5; }
+.narrative-card p { margin: 8px 0 12px; max-width: 62ch; color: var(--muted); font-size: 0.86rem; line-height: 1.5; text-wrap: pretty; }
 .text-link {
   font-family: var(--mono);
   font-size: 0.74rem;
@@ -1314,7 +1317,7 @@ tbody tr:last-child td { border-bottom: none; }
    ========================================================================== */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes popIn { from { opacity: 0; transform: scale(0.55); } to { opacity: 1; transform: scale(1); } }
-@keyframes drawArc { from { stroke-dashoffset: var(--dash, 0); } to { stroke-dashoffset: 0; } }
+@keyframes growGauge { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 @media (prefers-reduced-motion: no-preference) {
   /* hero entrance */
@@ -1337,9 +1340,10 @@ tbody tr:last-child td { border-bottom: none; }
     animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: calc(var(--i, 0) * 0.04s);
   }
-  .js-motion .play-once .donut-arc {
-    stroke-dashoffset: var(--dash, 0);
-    animation: drawArc 0.9s ease-out 0.1s both;
+  .js-motion .play-once .gauge-fill {
+    transform-box: fill-box;
+    transform-origin: left center;
+    animation: growGauge 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
   }
 }
 
@@ -1353,6 +1357,11 @@ tbody tr:last-child td { border-bottom: none; }
   .queue-board { grid-template-columns: 1fr; }
   .global-controls { grid-template-columns: 1fr 1fr; }
   .sticky-side { position: static; }
+  /* ledger spans full width as one row when the hero stacks — no lopsided right gutter */
+  .metric-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; }
+  .metric-card:nth-child(2n) { border-right: 1px solid var(--line-soft); }
+  .metric-card:nth-child(4n) { border-right: none; }
+  .metric-card:nth-last-child(-n+4) { border-bottom: none; }
 }
 
 @media (max-width: 720px) {
