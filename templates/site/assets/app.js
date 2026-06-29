@@ -33,6 +33,16 @@ const STATUS_COLORS = {
   Retired: "#7c8794"
 };
 
+/* A second, non-color channel for claim status so the evidence matrix reads without color
+   vision (Confirmed-green vs Negative-red are near-isoluminant): each status maps to a glyph. */
+const STATUS_GLYPH = {
+  Confirmed: "✓",
+  Promising: "+",
+  Negative: "✕",
+  Open: "?",
+  Retired: "–"
+};
+
 /* 11 mutually distinct categorical hues for programs, hue-spaced so no two collide and
    none lands on the reserved status green; all dark enough for white-on-fill AA (code badges)
    and text-on-white AA (CTAs). Identity is reinforced by 2-letter initials + the legend. */
@@ -429,7 +439,7 @@ function updateFilterStatus() {
   const active = chips.length > 0;
   els.filterStatus.textContent = active
     ? "Scoping the atlas — remove a chip to widen."
-    : "Filters scope every panel below.";
+    : "Filters scope every panel below (Artifacts stays corpus-wide).";
   [els.reset, els.resetTop].forEach((b) => b && (b.hidden = !active));
   if (els.filterRail) els.filterRail.classList.toggle("has-active", active); // mobile: show only when filtering
   // rail chips (with clear-all) and hero chips (compact)
@@ -452,13 +462,17 @@ function gotoSection(id) {
 
 const METRICS = [
   { label: "Experiments", key: "experiments", help: "Self-contained experiment folders", color: COLORS.teal, action: () => gotoSection("experiments") },
-  { label: "Programs", key: "programs", help: "Durable lines of inquiry", color: COLORS.ink, action: () => gotoSection("programs") },
+  // when filtered, "N spanned in view" is a multi-program reach — route to the map, whose legend
+  // visualizes that spanned set; #programs hard-filters to the single selected program (would show 1)
+  { label: "Programs", key: "programs", help: "Durable lines of inquiry", color: COLORS.ink, action: () => gotoSection(state.program !== "all" ? "map" : "programs") },
   { label: "Anchor-ready", key: "anchor_ready", help: "Citable and buildable today", color: COLORS.green, filters: true, readyVal: "yes", action: () => { setReady(state.ready === "yes" ? "all" : "yes"); gotoSection("readiness"); } },
   { label: "Needs curation", key: "needs_curation", help: "Not yet anchor-ready", color: COLORS.amber, filters: true, readyVal: "no", action: () => { setReady(state.ready === "no" ? "all" : "no"); gotoSection("readiness"); } },
-  { label: "Future queue", key: "future_proposals", help: "Structured next probes", color: COLORS.blue, action: () => gotoSection("queue") },
+  { label: "Future queue", key: "future_proposals", help: "Structured next probes", color: "#c2410c", action: () => gotoSection("queue") },
   { label: "Claims", key: "claims", help: "Shared evidence statements", color: COLORS.violet, action: () => gotoSection("claims") },
-  { label: "Files indexed", key: "total_files", help: "Tracked corpus files", color: COLORS.ink, action: () => gotoSection("artifacts") },
-  { label: "Tracked size", key: "total_size_bytes", help: "Repository-local footprint", color: COLORS.ink, isBytes: true, action: () => gotoSection("artifacts") }
+  // corpus-wide: these describe the whole tree (the Artifacts charts are non-reactive), so the
+  // headline stays the whole-tree total even under a filter — no "of N", matching the destination
+  { label: "Files indexed", key: "total_files", help: "Tracked corpus files", color: COLORS.ink, corpusWide: true, action: () => gotoSection("artifacts") },
+  { label: "Tracked size", key: "total_size_bytes", help: "Repository-local footprint", color: COLORS.ink, isBytes: true, corpusWide: true, action: () => gotoSection("artifacts") }
 ];
 
 /* live value for a metric over the current filter scope */
@@ -500,9 +514,9 @@ function updateMetrics() {
     const node = document.querySelector(`[data-mv="${i}"]`);
     if (!node) return;
     const total = m.key === "programs" ? DATA.programs.length : s[m.key];
-    const v = filtering ? metricValue(m.key) : total;
+    const v = (filtering && !m.corpusWide) ? metricValue(m.key) : total;
     const value = m.isBytes ? formatBytes(v) : { n: formatNumber(v), unit: "" };
-    const showOf = filtering && v !== total;
+    const showOf = filtering && !m.corpusWide && v !== total;
     // "Programs" under a program filter is a multi-tag reach, not "N of 11" — reframe it
     const ofText = m.key === "programs" && state.program !== "all"
       ? "spanned in view"
@@ -610,25 +624,33 @@ function programNetwork(fstats, fcount) {
     const ratio = s.count ? s.ready / s.count : 0;
     const opacity = filtering && !inView ? 0.22 : 1;
     const g = svg("g", { tabindex: 0, role: "button", class: "map-node", "data-mapnode": p.id,
-      "aria-label": `${titleForProgram(p.id)}: ${s.count} experiments, ${Math.round(ratio * 100)} percent anchor-ready. Activate to filter.`,
+      "aria-label": `${titleForProgram(p.id)}: ${inView ? `${s.count} experiments, ${Math.round(ratio * 100)} percent anchor-ready` : "no experiments in this view"}. Activate to filter.`,
       style: `cursor:pointer; opacity:${opacity}; --i:${i}` });
     g.appendChild(svg("circle", { cx: x, cy: y, r, fill: color, stroke: active ? "#fff" : "rgba(255,255,255,0.25)", "stroke-width": active ? 3 : 1.5 }));
-    // readiness band: full green base, amber arc marks ONLY the to-curate deficit (1-ratio),
-    // so 100% reads clean green and lower readiness shows a clearly larger amber notch
+    // readiness ring: a faint track with a GREEN ARC whose LENGTH = % anchor-ready.
+    // Encoding readiness as arc length over a luminance-contrasting track (green on faint
+    // grey) makes it readable without color vision and positionally, and the unfilled track
+    // reads as the still-to-curate remainder. Programs with zero experiments in view get a
+    // neutral dashed ring — no false "0% ready" amber alarm contradicting the scorecard "—".
     const rr = r + 7, circ = 2 * Math.PI * rr;
-    g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#3fbf86", "stroke-width": 5 }));
-    if (ratio < 0.999) g.appendChild(svg("circle", {
-      cx: x, cy: y, r: rr, fill: "none", stroke: "#e0a93f", "stroke-width": 5,
-      "stroke-dasharray": `${(1 - ratio) * circ} ${circ}`, transform: `rotate(-90 ${x} ${y})`
-    }));
+    if (inView) {
+      g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "rgba(255,255,255,0.16)", "stroke-width": 5 }));
+      if (ratio > 0.001) g.appendChild(svg("circle", {
+        cx: x, cy: y, r: rr, fill: "none", stroke: "#3fbf86", "stroke-width": 5,
+        "stroke-dasharray": `${ratio * circ} ${circ}`, "stroke-linecap": ratio > 0.985 ? "butt" : "round",
+        transform: `rotate(-90 ${x} ${y})`
+      }));
+    } else {
+      g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: COLORS.lineInv, "stroke-width": 2, "stroke-dasharray": "2 4" }));
+    }
     g.appendChild(text(programCode(p), { x, y: y + 4, "text-anchor": "middle", class: "node-code", style: `font-size:${r > 26 ? 13 : 11}px` }));
     const qN = fqByProg[p.id] || 0, cN = fcByProg[p.id] || 0;
-    attachTooltip(g, `<strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${plural(s.count, "experiment")} · ${Math.round(ratio * 100)}% ready · ${plural(qN, "probe")} · ${plural(cN, "claim")}</span>`);
+    attachTooltip(g, `<strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${inView ? `${plural(s.count, "experiment")} · ${Math.round(ratio * 100)}% ready · ${plural(qN, "probe")} · ${plural(cN, "claim")}` : "no experiments in this view"}</span>`);
     onActivate(g, () => setProgram(p.id));
     chart.appendChild(g);
   });
 
-  chart.appendChild(text("disk = experiments (may span programs)  ·  ring = % anchor-ready (green) / to curate (amber)", { x: cx, y: H - 6, "text-anchor": "middle", class: "axis-label-inv" }));
+  chart.appendChild(text("disk = experiments (may span programs)  ·  green ring arc = % anchor-ready", { x: cx, y: H - 6, "text-anchor": "middle", class: "axis-label-inv" }));
 
   target.appendChild(chart);
   renderProgramLegend(stats);
@@ -727,28 +749,6 @@ function ellipsize(str, maxWidth, fontPx) {
   return str.slice(0, Math.max(1, maxChars - 1)).trimEnd() + "…";
 }
 
-/* linear interpolate two hex colors (t in 0..1) — used for the absolute %Ready ramp */
-function lerpColor(a, b, t) {
-  const ph = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
-  const [ar, ag, ab] = ph(a), [br, bg, bb] = ph(b);
-  const m = (x, y) => Math.round(x + (y - x) * t).toString(16).padStart(2, "0");
-  return `#${m(ar, br)}${m(ag, bg)}${m(ab, bb)}`;
-}
-
-/* choose ink/white text for a hex fill blended onto white at `alpha`, using true
-   WCAG relative luminance; white only on genuinely dark cells so values stay AA-legible. */
-function readableText(hex, alpha) {
-  const h = hex.replace("#", "");
-  const lin = (v) => { const c = v / 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
-  const mix = (c) => c * alpha + 255 * (1 - alpha);
-  const r = mix(parseInt(h.slice(0, 2), 16)), g = mix(parseInt(h.slice(2, 4), 16)), b = mix(parseInt(h.slice(4, 6), 16));
-  const lum = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-  // pick whichever of white / ink actually has the higher WCAG contrast on this fill
-  const cWhite = 1.05 / (lum + 0.05);
-  const cInk = (lum + 0.05) / (0.013 + 0.05); // ink #111a24 luminance ~0.013
-  return cWhite >= cInk ? "#ffffff" : COLORS.ink;
-}
-
 function programHeatmap(fstats) {
   const target = document.getElementById("programHeatmap");
   clear(target);
@@ -776,7 +776,7 @@ function programHeatmap(fstats) {
   metrics.forEach((m, ci) => {
     chart.appendChild(text(m.label, { x: labelW + ci * cellW + cellW / 2, y: 18, "text-anchor": "middle", class: "axis-label" }));
   });
-  const READY_GREEN = "#15703b", CURATE_AMBER = "#b9720f";
+  const READY_GREEN = "#15703b", TRACK = "#e7ecf1", MUTED_TRACK = "#eef1f4";
   data.forEach(({ p, v }, ri) => {
     const y = top + ri * rowH;
     const active = state.program === p.id;
@@ -790,35 +790,34 @@ function programHeatmap(fstats) {
     rowG.appendChild(label);
     metrics.forEach((m, ci) => {
       const value = v[m.key];
-      const cellX = labelW + ci * cellW;
+      const cellX = labelW + ci * cellW, trackX = cellX + 3, trackW = cellW - 6;
+      const isRatio = m.mode === "ratio";
       // Queued/Claims for an out-of-view program under a readiness/need filter -> "—"
       const suppressed = scopeNote && outOfView && (m.key === "queue" || m.key === "claims");
-      const ratio = m.mode === "ratio" ? value / Math.max(1, v.expTotal) : 0;
-      const isGauge = m.mode === "ratio" && !outOfView; // %Ready -> inline gauge (quantitative + AA)
-      let fill, alpha, textColor, shown;
-      if (m.mode === "ratio") {
-        if (outOfView) { fill = "#eef1f4"; alpha = 1; textColor = COLORS.faint; shown = "—"; }
-        else { fill = "#edf1f5"; alpha = 1; textColor = COLORS.ink; shown = `${Math.round(ratio * 100)}%`; }
-      } else if (suppressed) {
-        fill = "#eef1f4"; alpha = 1; textColor = COLORS.faint; shown = "—";
-      } else {
-        alpha = 0.12 + (value / maxes[m.key]) * 0.78; fill = m.color; textColor = readableText(m.color, alpha); shown = formatNumber(value);
-      }
+      const muted = (isRatio && outOfView) || suppressed;
+      const ratio = isRatio ? value / Math.max(1, v.expTotal) : 0;
+      // EVERY column is an inline LENGTH gauge now: %Ready fills by ratio, counts by value/colMax.
+      // Length (not fill darkness) carries magnitude, so 43 vs 37 separate at a glance and all
+      // four columns share one chart grammar.
+      const frac = muted ? 0 : (isRatio ? ratio : value / maxes[m.key]);
+      const shown = muted ? "—" : (isRatio ? `${Math.round(ratio * 100)}%` : formatNumber(value));
       const cell = svg("rect", {
-        x: cellX + 3, y: y + 3, width: cellW - 6, height: rowH - 6, rx: 5,
-        fill, opacity: alpha, tabindex: 0, role: "button", "data-cell": p.id,
-        "aria-label": `${full}, ${m.label}: ${shown === "—" ? "not in view" : shown}. Activate to filter.`,
+        x: trackX, y: y + 3, width: trackW, height: rowH - 6, rx: 5,
+        fill: muted ? MUTED_TRACK : TRACK, tabindex: 0, role: "button", "data-cell": p.id,
+        "aria-label": `${full}, ${m.label}: ${muted ? "not in view" : shown}. Activate to filter.`,
         style: "cursor:pointer"
       });
-      attachTooltip(cell, `<strong>${escapeHtml(full)}</strong><br><span class="tip-meta">${m.label}: ${isGauge ? `${Math.round(ratio * 100)}% (${formatNumber(value)}/${formatNumber(v.expTotal)})` : (shown === "—" ? "not in current view" : formatNumber(value))}</span>`);
+      attachTooltip(cell, `<strong>${escapeHtml(full)}</strong><br><span class="tip-meta">${m.label}: ${muted ? "not in current view" : (isRatio ? `${Math.round(ratio * 100)}% (${formatNumber(value)}/${formatNumber(v.expTotal)})` : formatNumber(value))}</span>`);
       onActivate(cell, () => setProgram(p.id));
       rowG.appendChild(cell);
-      if (isGauge) {
-        // green fill proportional to absolute readiness (truthful, scannable by length)
-        rowG.appendChild(svg("rect", { x: cellX + 3, y: y + 3, width: (cellW - 6) * ratio, height: rowH - 6, rx: 5, fill: READY_GREEN, style: "pointer-events:none" }));
+      if (frac > 0.001) {
+        rowG.appendChild(svg("rect", { x: trackX, y: y + 3, width: Math.max(3, trackW * Math.min(1, frac)), height: rowH - 6, rx: 5,
+          fill: isRatio ? READY_GREEN : m.color, style: "pointer-events:none" }));
       }
+      // ink digits with a real white halo (paint-order:stroke) -> AA on the light track AND on the
+      // saturated fill, so legibility never depends on where the gauge edge falls under the text
       rowG.appendChild(text(shown, { x: cellX + cellW / 2, y: y + rowH / 2 + 4, "text-anchor": "middle", class: "chart-value",
-        style: `fill:${isGauge ? (ratio > 0.62 ? "#ffffff" : COLORS.ink) : textColor}; paint-order:stroke; ${isGauge ? "stroke:rgba(255,255,255,0.0)" : ""}` }));
+        style: `fill:${muted ? COLORS.faint : COLORS.ink}; paint-order:stroke; stroke:#ffffff; stroke-width:${muted ? 0 : 3}px; stroke-linejoin:round` }));
     });
     chart.appendChild(rowG);
   });
@@ -843,8 +842,9 @@ function claimGraph() {
   claims.forEach((c, ci) => {
     const x = labelW + ci * colW + colW / 2;
     const op = dimClaim(c) ? 0.25 : 1;
-    chart.appendChild(svg("circle", { cx: x, cy: 18, r: 6, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op }));
-    const t = text(c.id, { x, y: 44, "text-anchor": "middle", class: "chart-value", opacity: op,
+    chart.appendChild(svg("circle", { cx: x, cy: 18, r: 7, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op }));
+    chart.appendChild(text(STATUS_GLYPH[c.status] || "·", { x, y: 21.5, "text-anchor": "middle", opacity: op, style: "fill:#fff;font-size:9px;font-weight:700;font-family:var(--sans);pointer-events:none" }));
+    const t = text(c.id, { x, y: 46, "text-anchor": "middle", class: "chart-value", opacity: op,
       tabindex: 0, role: "button", "aria-label": `Claim ${c.id}: ${c.title}, ${humanizeStatus(c.status)}`, style: "cursor:pointer" });
     onActivate(t, () => openClaim(c));
     attachTooltip(t, `<strong>${escapeHtml(c.id)}: ${escapeHtml(c.title)}</strong><br><span class="tip-meta">${escapeHtml(humanizeStatus(c.status))}</span>`);
@@ -865,11 +865,12 @@ function claimGraph() {
       const x = labelW + ci * colW + colW / 2;
       const op = Math.min(rowDim, dimClaim(c) ? 0.25 : 1);
       if (linked) {
-        const dot = svg("circle", { cx: x, cy: y + rowH / 2, r: 6.5, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op,
+        const dot = svg("circle", { cx: x, cy: y + rowH / 2, r: 7, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op,
           tabindex: 0, role: "button", "aria-label": `${c.id} (${humanizeStatus(c.status)}) relates to ${titleForProgram(p.id)}: ${c.title}`, style: "cursor:pointer" });
         attachTooltip(dot, `<strong>${escapeHtml(c.id)}</strong> ↔ <strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${escapeHtml(c.title)}</span>`);
         onActivate(dot, () => openClaim(c));
         chart.appendChild(dot);
+        chart.appendChild(text(STATUS_GLYPH[c.status] || "·", { x, y: y + rowH / 2 + 3.5, "text-anchor": "middle", opacity: op, style: "fill:#fff;font-size:9px;font-weight:700;font-family:var(--sans);pointer-events:none" }));
       } else {
         chart.appendChild(svg("circle", { cx: x, cy: y + rowH / 2, r: 2, fill: COLORS.line, opacity: op }));
       }
@@ -886,7 +887,7 @@ function renderClaimStatusLegend() {
   const present = new Set(DATA.claims.map((c) => c.status));
   host.innerHTML = order.filter((s) => present.has(s)).map((s) => {
     const n = DATA.claims.filter((c) => c.status === s).length;
-    return `<span class="legend-item" style="cursor:default"><span class="legend-swatch" style="background:${STATUS_COLORS[s] || COLORS.violet}"></span>${escapeHtml(s)} <b>${n}</b></span>`;
+    return `<span class="legend-item" style="cursor:default"><span class="legend-swatch legend-glyph" style="background:${STATUS_COLORS[s] || COLORS.violet}">${STATUS_GLYPH[s] || ""}</span>${escapeHtml(s)} <b>${n}</b></span>`;
   }).join("");
 }
 
@@ -1132,6 +1133,7 @@ function renderNarrative() {
   ];
   document.getElementById("narrativeCards").innerHTML = items.map(([title, body, path]) => `
     <article class="narrative-card">
+      <p class="narrative-path">${escapeHtml(path)}</p>
       <h3>${escapeHtml(title)}</h3>
       <p>${escapeHtml(body || "Open the source document for current notes.")}</p>
       <a class="text-link" href="${repoLink(path)}">Open document <span class="arr">→</span></a>
@@ -1315,7 +1317,10 @@ function bindEvents() {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !e.repeat && els.drawer.classList.contains("open")) dismissDrawer();
+    if (e.key === "Escape" && !e.repeat) {
+      if (els.drawer.classList.contains("open")) dismissDrawer();
+      else if (els.tooltip.classList.contains("visible")) hideTooltip(); // WCAG 1.4.13: dismissible without moving focus
+    }
     trapDrawerFocus(e);
     const typing = ["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement?.tagName);
     const drawerOpen = els.drawer.classList.contains("open");
@@ -1325,6 +1330,8 @@ function bindEvents() {
       (rail ? els.searchTop : els.search || els.searchTop)?.focus();
     }
   });
+  // a focus-anchored tooltip is position:fixed; drop it on scroll so it can't strand mid-page
+  window.addEventListener("scroll", () => { if (els.tooltip.classList.contains("visible")) hideTooltip(); }, { passive: true });
 }
 
 /* Restrained load reveal + one signature moment (corpus map / donut draw-in). */
@@ -1349,9 +1356,25 @@ function setupMotion() {
 /* keep the --header-h / --rail-h tokens accurate so sticky panels + anchor jumps clear the chrome */
 function setupChromeSizing() {
   const topbar = document.querySelector(".topbar");
+  // Measure the filter rail's RENDERED height even while it is hidden (it is display:none until
+  // scrolled, and wraps to ~2 rows on mobile). A nav-jump always ends with the rail visible, so
+  // .band scroll-margin must reserve its real height at every breakpoint or mobile headings land
+  // under the sticky chrome. visibility:hidden + position:fixed makes this measure flash-free.
+  const measureRail = () => {
+    const rail = els.filterRail;
+    if (!rail) return null;
+    if (rail.classList.contains("visible")) return rail.offsetHeight || null;
+    rail.style.visibility = "hidden";
+    rail.classList.add("visible");
+    const h = rail.offsetHeight;
+    rail.classList.remove("visible");
+    rail.style.visibility = "";
+    return h || null;
+  };
   const apply = () => {
     if (topbar && topbar.offsetHeight) document.documentElement.style.setProperty("--header-h", `${topbar.offsetHeight}px`);
-    if (els.filterRail && els.filterRail.offsetHeight) document.documentElement.style.setProperty("--rail-h", `${els.filterRail.offsetHeight}px`);
+    const rh = measureRail();
+    if (rh) document.documentElement.style.setProperty("--rail-h", `${rh}px`);
   };
   apply();
   window.addEventListener("resize", apply);
@@ -1387,4 +1410,10 @@ render();
 (() => {
   const h = decodeURIComponent(location.hash.replace(/^#/, ""));
   if (/^(exp|claim|queue|program)\//.test(h)) { openingFromHistory = true; openEntityFromHash(h); openingFromHistory = false; }
+  else if (h && document.getElementById(h)) {
+    // plain section anchor (#queue, #experiments, …): the browser's one-time fragment jump ran
+    // against empty containers before render() injected content, landing at the top. Re-align to
+    // the now-populated section so fresh-load / shared / bookmarked section URLs work.
+    requestAnimationFrame(() => document.getElementById(h).scrollIntoView({ behavior: "auto", block: "start" }));
+  }
 })();
