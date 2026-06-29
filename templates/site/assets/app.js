@@ -225,13 +225,18 @@ function showTooltip(event, html) {
   tip.style.top = `${event.clientY + (below ? 16 : 0)}px`;
 }
 function hideTooltip() { els.tooltip.classList.remove("visible"); }
+let lastTooltipFocusAt = -1e9; // guards the scroll-hide against the scroll-into-view a focus triggers
 function attachTooltip(el, html) {
   el.addEventListener("mousemove", (e) => showTooltip(e, html));
   el.addEventListener("mouseleave", hideTooltip);
-  // keyboard/touch parity: show on focus relative to the element's box
+  // keyboard/touch parity: show on focus relative to the element's box. Read the rect on the next
+  // frame so it reflects the post-scroll-into-view position when focus moves an off-screen node.
   el.addEventListener("focus", () => {
-    const r = el.getBoundingClientRect();
-    showTooltip({ clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }, html);
+    lastTooltipFocusAt = performance.now();
+    requestAnimationFrame(() => {
+      const r = el.getBoundingClientRect();
+      showTooltip({ clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }, html);
+    });
   });
   el.addEventListener("blur", hideTooltip);
 }
@@ -1330,8 +1335,14 @@ function bindEvents() {
       (rail ? els.searchTop : els.search || els.searchTop)?.focus();
     }
   });
-  // a focus-anchored tooltip is position:fixed; drop it on scroll so it can't strand mid-page
-  window.addEventListener("scroll", () => { if (els.tooltip.classList.contains("visible")) hideTooltip(); }, { passive: true });
+  // a focus-anchored tooltip is position:fixed; drop it on a genuine scroll so it can't strand
+  // mid-page — but ignore the scroll-into-view that a focus itself triggers (or it would hide the
+  // tooltip the focus just showed)
+  window.addEventListener("scroll", () => {
+    if (!els.tooltip.classList.contains("visible")) return;
+    if (performance.now() - lastTooltipFocusAt < 250) return;
+    hideTooltip();
+  }, { passive: true });
 }
 
 /* Restrained load reveal + one signature moment (corpus map / donut draw-in). */
