@@ -5,7 +5,7 @@ const DATA = JSON.parse(document.getElementById("site-data").textContent);
 const COLORS = {
   teal: "#0a666e",
   blue: "#2b5fae",
-  green: "#1f8a4d",
+  green: "#15703b",
   amber: "#b9720f",
   amberText: "#8a5400",
   rose: "#c0344a",
@@ -33,12 +33,12 @@ const STATUS_COLORS = {
   Retired: "#7c8794"
 };
 
-/* 11 muted, mutually distinct categorical hues for programs (lower saturation than the
-   status signals; identity is reinforced by node initials + the legend, not color alone).
-   Tuned so text-on-white (CTAs) and white-on-fill (code badges) both clear WCAG AA. */
+/* 11 mutually distinct categorical hues for programs, hue-spaced so no two collide and
+   none lands on the reserved status green; all dark enough for white-on-fill AA (code badges)
+   and text-on-white AA (CTAs). Identity is reinforced by 2-letter initials + the legend. */
 const PROGRAM_PALETTE = [
-  "#3d6fa6", "#1f7068", "#6d5bb0", "#a44a7e", "#8a5f26", "#4a7a33",
-  "#2f7888", "#a7644a", "#646f2b", "#9c4f9c", "#455468"
+  "#3a6ea5", "#14807f", "#634bbf", "#a83a7e", "#9c6418", "#8f5226",
+  "#2c7088", "#a8443a", "#6f7218", "#7a3f9c", "#4a6178"
 ];
 
 /* Lowercase minor words for display title-case; fix a few corpus spellings. */
@@ -382,7 +382,7 @@ function renderFilters() {
   ].join("");
   const needs = Array.from(new Set(DATA.experiments.flatMap((e) => e.needs || []))).sort();
   const needOpts = [
-    '<option value="all">All needs</option>',
+    '<option value="all">All tasks</option>',
     ...needs.map((n) => `<option value="${escapeHtml(n)}">${escapeHtml(humanizeToken(n))}</option>`)
   ].join("");
   [els.program, els.programTop].forEach((c) => c && (c.innerHTML = programOpts));
@@ -500,8 +500,12 @@ function updateMetrics() {
     const v = filtering ? metricValue(m.key) : total;
     const value = m.isBytes ? formatBytes(v) : { n: formatNumber(v), unit: "" };
     const showOf = filtering && v !== total;
+    // "Programs" under a program filter is a multi-tag reach, not "N of 11" — reframe it
+    const ofText = m.key === "programs" && state.program !== "all"
+      ? "spanned in view"
+      : `of ${escapeHtml(m.isBytes ? formatBytes(total).n + " " + formatBytes(total).unit : formatNumber(total))}`;
     node.innerHTML = `${escapeHtml(value.n)}${value.unit ? `<span class="unit">${escapeHtml(value.unit)}</span>` : ""}` +
-      (showOf ? `<span class="metric-of">of ${escapeHtml(m.isBytes ? formatBytes(total).n + " " + formatBytes(total).unit : formatNumber(total))}</span>` : "");
+      (showOf ? `<span class="metric-of">${ofText}</span>` : "");
     if (m.readyVal) {
       const card = document.querySelector(`[data-metric="${i}"]`);
       if (card) card.setAttribute("aria-pressed", String(state.ready === m.readyVal));
@@ -572,8 +576,8 @@ function programNetwork(fstats, fcount) {
   // disk size encodes experiments IN THE CURRENT VIEW so it never contradicts the legend/center
   const sizeOf = (p) => filtering ? (stats.get(p.id)?.count || 0) : p.experiment_count;
   const maxCount = Math.max(1, ...progs.map(sizeOf));
-  // area ∝ count (small floor) so the largest program reads as genuinely larger
-  const nodeR = (c) => (c <= 0 ? 9 : 9 + Math.sqrt(c / maxCount) * 33);
+  // true sqrt-area scale (area ∝ count) with a small legibility clamp
+  const nodeR = (c) => (c <= 0 ? 9 : Math.max(11, Math.sqrt(c / maxCount) * 41));
 
   progs.forEach((p, i) => {
     const angle = -Math.PI / 2 + (i / progs.length) * Math.PI * 2;
@@ -606,12 +610,13 @@ function programNetwork(fstats, fcount) {
       "aria-label": `${titleForProgram(p.id)}: ${s.count} experiments, ${Math.round(ratio * 100)} percent anchor-ready. Activate to filter.`,
       style: `cursor:pointer; opacity:${opacity}; --i:${i}` });
     g.appendChild(svg("circle", { cx: x, cy: y, r, fill: color, stroke: active ? "#fff" : "rgba(255,255,255,0.25)", "stroke-width": active ? 3 : 1.5 }));
-    // readiness band: a gap off the disk; weight balanced so identity (disk color) still leads
+    // readiness band: full green base, amber arc marks ONLY the to-curate deficit (1-ratio),
+    // so 100% reads clean green and lower readiness shows a clearly larger amber notch
     const rr = r + 7, circ = 2 * Math.PI * rr;
-    g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#e0a93f", "stroke-width": 4, opacity: 0.85 }));
-    g.appendChild(svg("circle", {
-      cx: x, cy: y, r: rr, fill: "none", stroke: "#4cd79e", "stroke-width": 4,
-      "stroke-dasharray": `${ratio * circ} ${circ}`, transform: `rotate(-90 ${x} ${y})`
+    g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#3fbf86", "stroke-width": 5 }));
+    if (ratio < 0.999) g.appendChild(svg("circle", {
+      cx: x, cy: y, r: rr, fill: "none", stroke: "#e0a93f", "stroke-width": 5,
+      "stroke-dasharray": `${(1 - ratio) * circ} ${circ}`, transform: `rotate(-90 ${x} ${y})`
     }));
     g.appendChild(text(programCode(p), { x, y: y + 4, "text-anchor": "middle", class: "node-code", style: `font-size:${r > 26 ? 13 : 11}px` }));
     const qN = fqByProg[p.id] || 0, cN = fcByProg[p.id] || 0;
@@ -706,7 +711,7 @@ function scatterPlot() {
   chart.appendChild(svg("rect", { x: W - right - 150, y: H - 16, width: 9, height: 9, rx: 2, fill: COLORS.green }));
   chart.appendChild(text("ready", { x: W - right - 137, y: H - 8, class: "chart-tick" }));
   chart.appendChild(svg("rect", { x: W - right - 92, y: H - 16, width: 9, height: 9, rx: 2, fill: COLORS.amber }));
-  chart.appendChild(text("needs curation", { x: W - right - 79, y: H - 8, class: "chart-tick" }));
+  chart.appendChild(text("to curate", { x: W - right - 79, y: H - 8, class: "chart-tick" }));
   target.appendChild(chart);
 }
 
@@ -735,7 +740,7 @@ function readableText(hex, alpha) {
   const mix = (c) => c * alpha + 255 * (1 - alpha);
   const r = mix(parseInt(h.slice(0, 2), 16)), g = mix(parseInt(h.slice(2, 4), 16)), b = mix(parseInt(h.slice(4, 6), 16));
   const lum = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-  return lum < 0.18 ? "#ffffff" : COLORS.ink;
+  return lum < 0.34 ? "#ffffff" : COLORS.ink; // flip to white earlier so mid-fill values stay AA
 }
 
 function programHeatmap(fstats) {
@@ -765,7 +770,7 @@ function programHeatmap(fstats) {
   metrics.forEach((m, ci) => {
     chart.appendChild(text(m.label, { x: labelW + ci * cellW + cellW / 2, y: 18, "text-anchor": "middle", class: "axis-label" }));
   });
-  const READY_GREEN = "#1f8a4d", CURATE_AMBER = "#b9720f";
+  const READY_GREEN = "#15703b", CURATE_AMBER = "#b9720f";
   data.forEach(({ p, v }, ri) => {
     const y = top + ri * rowH;
     const active = state.program === p.id;
@@ -964,7 +969,7 @@ function renderExperiments() {
   const body = shown.map((e) => `
     <tr data-experiment="${escapeHtml(e.id)}">
       <td data-label="Experiment"><button class="row-open" type="button" aria-label="${escapeHtml(e.id)} — open details"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(cleanTitle(e.title))}</span></button></td>
-      <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<span class="prog-chip" style="background:${programColor(id)}" title="${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</span>`).join("")}</span><span class="sr-only">${escapeHtml(e.programs.map(titleForProgram).join(", "))}</span></td>
+      <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<button class="prog-chip pill-link" type="button" data-program-pill="${escapeHtml(id)}" style="background:${programColor(id)}" title="Filter to ${escapeHtml(titleForProgram(id))}" aria-label="Filter to ${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</button>`).join("")}</span></td>
       <td data-label="Ready"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span></td>
       <td class="col-mono" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
       <td class="col-mono" data-label="Needs">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
@@ -985,7 +990,7 @@ function renderExperiments() {
   const openRow = (el) => openExperiment(experimentById.get(el.closest("[data-experiment]").getAttribute("data-experiment")));
   document.querySelectorAll("#experimentTable .row-open").forEach((btn) => btn.addEventListener("click", () => openRow(btn)));
   document.querySelectorAll("#experimentTable [data-experiment]").forEach((tr) => {
-    tr.addEventListener("click", (e) => { if (e.target.closest(".row-open")) return; openRow(tr); });
+    tr.addEventListener("click", (e) => { if (e.target.closest(".row-open") || e.target.closest("[data-program-pill]")) return; openRow(tr); });
   });
   wireEmptyReset();
 }
@@ -1018,10 +1023,11 @@ function openExperiment(e) {
 }
 
 /* ---------------------------------------------------------------- queue board */
+/* priority = one urgency ramp (dark -> pale), not the claim-status hues it used to borrow */
 const QUEUE_META = {
-  P0: { color: COLORS.rose, meaning: "do next" },
-  P1: { color: COLORS.amber, meaning: "soon" },
-  P2: { color: COLORS.blue, meaning: "later" }
+  P0: { color: "#334155", meaning: "do next" },
+  P1: { color: "#64748b", meaning: "soon" },
+  P2: { color: "#9aa7b8", meaning: "later" }
 };
 function renderQueue() {
   const rows = filteredQueue();
@@ -1146,7 +1152,7 @@ function renderCharts() {
   const exp = fexp;
   const needRows = countRows(exp, (e) => e.needs || []);
   barChart("needsChart", needRows.length ? needRows : DATA.charts.needs.map((r) => ({ ...r, label: humanizeToken(r.id) })), {
-    label: "curation needs", labelW: 190, color: COLORS.rose, empty: "No curation needs in this view.",
+    label: "curation tasks", labelW: 190, color: COLORS.rose, empty: "No curation tasks in this view.",
     onBar: (id) => { setNeed(id); gotoSection("experiments"); }
   });
   const runRows = countRows(exp, (e) => e.run_surface);
@@ -1158,7 +1164,7 @@ function renderCharts() {
   const prioRows = ["P0", "P1", "P2"].map((id) => ({ id, value: prioCounts[id] }));
   barChart("queuePriorityChart", prioRows, {
     label: "queue priorities", labelW: 50, rowH: 34, empty: "No queued probes in this view.",
-    colors: { P0: COLORS.rose, P1: COLORS.amber, P2: COLORS.blue }
+    colors: { P0: QUEUE_META.P0.color, P1: QUEUE_META.P1.color, P2: QUEUE_META.P2.color }
   });
   // descriptive (non-status) magnitude charts use one neutral hue so status colors stay meaningful
   barChart("artifactKindChart", DATA.charts.artifact_kinds.map((r) => ({ ...r, label: humanizeToken(r.id) })), { label: "artifact manifest kinds", labelW: 130, color: "#455468" });
