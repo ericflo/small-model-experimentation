@@ -330,8 +330,8 @@ function closeDrawer() {
   els.drawer.setAttribute("aria-hidden", "true");
   setBackgroundInert(false);
   if (lastFocused && lastFocused.focus) lastFocused.focus();
-  // if we still hold a drawer entry (programmatic close), strip the hash in place
-  if (drawerPushed && location.hash && /^#(exp|claim|queue|program)\//.test(location.hash)) {
+  // never leave a stale entity hash (covers deep-link opens that didn't push)
+  if (location.hash && /^#(exp|claim|queue|program)\//.test(location.hash)) {
     try { history.replaceState(null, "", `${location.pathname}${location.search}`); } catch (_) {}
   }
   drawerPushed = false;
@@ -340,10 +340,14 @@ function openEntityFromHash(h) {
   const slash = h.indexOf("/");
   if (slash < 0) return;
   const kind = h.slice(0, slash), id = h.slice(slash + 1);
-  if (kind === "exp" && experimentById.has(id)) openExperiment(experimentById.get(id));
-  else if (kind === "claim") { const c = DATA.claims.find((x) => x.id === id); if (c) openClaim(c); }
-  else if (kind === "queue") { const i = DATA.queue.find((x) => x.id === id); if (i) openQueue(i); }
-  else if (kind === "program" && programById.has(id)) openProgram(programById.get(id));
+  const section = { exp: "experiments", claim: "claims", queue: "queue", program: "programs" }[kind];
+  let opened = false;
+  if (kind === "exp" && experimentById.has(id)) { openExperiment(experimentById.get(id)); opened = true; }
+  else if (kind === "claim") { const c = DATA.claims.find((x) => x.id === id); if (c) { openClaim(c); opened = true; } }
+  else if (kind === "queue") { const i = DATA.queue.find((x) => x.id === id); if (i) { openQueue(i); opened = true; } }
+  else if (kind === "program" && programById.has(id)) { openProgram(programById.get(id)); opened = true; }
+  // orient the reader: leave the owning section in view behind the drawer
+  if (opened && section) gotoSection(section);
 }
 function setBackgroundInert(on) {
   ["main", ".topbar", ".site-footer", "#filterRail"].forEach((sel) => {
@@ -403,8 +407,18 @@ function chipMarkup(chips, withClearAll) {
 function wireChips(host, chips) {
   host.querySelectorAll("[data-chip]").forEach((b) => {
     const key = b.getAttribute("data-chip");
-    b.addEventListener("click", () => (key === "reset" ? resetFilters() : chips[Number(key)].clear()));
+    b.addEventListener("click", () => {
+      if (key === "reset") { resetFilters(); return; }
+      chips[Number(key)].clear(); // chip element is destroyed on re-render — park focus somewhere stable
+      restoreFilterFocus();
+    });
   });
+}
+/* park keyboard focus on a stable control after a filter chip / reset destroys the active element */
+function restoreFilterFocus() {
+  const rail = els.filterRail && els.filterRail.classList.contains("visible");
+  const target = rail ? (els.resetTop || els.searchTop) : (els.search || els.searchTop);
+  if (target && target.focus) target.focus();
 }
 
 function updateFilterStatus() {
@@ -414,6 +428,7 @@ function updateFilterStatus() {
     ? "Scoping the atlas — remove a chip to widen."
     : "Filters scope every panel below.";
   [els.reset, els.resetTop].forEach((b) => b && (b.hidden = !active));
+  if (els.filterRail) els.filterRail.classList.toggle("has-active", active); // mobile: show only when filtering
   // rail chips (with clear-all) and hero chips (compact)
   if (els.filterChips) {
     els.filterChips.innerHTML = active ? chipMarkup(chips, true) : '<span class="chips-empty">No filters active</span>';
@@ -435,7 +450,7 @@ function gotoSection(id) {
 const METRICS = [
   { label: "Experiments", key: "experiments", help: "Self-contained experiment folders", color: COLORS.teal, action: () => gotoSection("experiments") },
   { label: "Programs", key: "programs", help: "Durable lines of inquiry", color: COLORS.ink, action: () => gotoSection("programs") },
-  { label: "Anchor-ready", key: "anchor_ready", help: "Citable and reusable as-is", color: COLORS.green, filters: true, readyVal: "yes", action: () => { setReady(state.ready === "yes" ? "all" : "yes"); gotoSection("readiness"); } },
+  { label: "Anchor-ready", key: "anchor_ready", help: "Citable and buildable today", color: COLORS.green, filters: true, readyVal: "yes", action: () => { setReady(state.ready === "yes" ? "all" : "yes"); gotoSection("readiness"); } },
   { label: "Needs curation", key: "needs_curation", help: "Not yet anchor-ready", color: COLORS.amber, filters: true, readyVal: "no", action: () => { setReady(state.ready === "no" ? "all" : "no"); gotoSection("readiness"); } },
   { label: "Future queue", key: "future_proposals", help: "Structured next probes", color: COLORS.blue, action: () => gotoSection("queue") },
   { label: "Claims", key: "claims", help: "Shared evidence statements", color: COLORS.violet, action: () => gotoSection("claims") },
@@ -506,7 +521,10 @@ function barChart(targetId, rows, options = {}) {
   const height = top + bottom + rows.length * rowH;
   const maxValue = Math.max(1, ...rows.map((r) => Number(r.value || 0)));
   const plotW = width - labelW - rightPad;
-  const chart = svg("svg", { viewBox: `0 0 ${width} ${height}`, role: typeof options.onBar === "function" ? "group" : "img", "aria-label": options.label || "bar chart", preserveAspectRatio: "xMinYMin meet" });
+  // fold the data into the label so screen readers get the distribution, not just "bar chart"
+  const summary = rows.slice(0, 8).map((r) => `${r.label || r.id} ${formatNumber(r.value)}`).join(", ");
+  const ariaLabel = `${options.label || "bar chart"}: ${summary}`;
+  const chart = svg("svg", { viewBox: `0 0 ${width} ${height}`, role: typeof options.onBar === "function" ? "group" : "img", "aria-label": ariaLabel, preserveAspectRatio: "xMinYMin meet" });
   rows.forEach((row, i) => {
     const y = top + i * rowH;
     const value = Number(row.value || 0);
@@ -554,7 +572,8 @@ function programNetwork(fstats, fcount) {
   // disk size encodes experiments IN THE CURRENT VIEW so it never contradicts the legend/center
   const sizeOf = (p) => filtering ? (stats.get(p.id)?.count || 0) : p.experiment_count;
   const maxCount = Math.max(1, ...progs.map(sizeOf));
-  const nodeR = (c) => (c <= 0 ? 9 : 14 + (Math.sqrt(c) / Math.sqrt(maxCount)) * 26);
+  // area ∝ count (small floor) so the largest program reads as genuinely larger
+  const nodeR = (c) => (c <= 0 ? 9 : 9 + Math.sqrt(c / maxCount) * 33);
 
   progs.forEach((p, i) => {
     const angle = -Math.PI / 2 + (i / progs.length) * Math.PI * 2;
@@ -587,11 +606,11 @@ function programNetwork(fstats, fcount) {
       "aria-label": `${titleForProgram(p.id)}: ${s.count} experiments, ${Math.round(ratio * 100)} percent anchor-ready. Activate to filter.`,
       style: `cursor:pointer; opacity:${opacity}; --i:${i}` });
     g.appendChild(svg("circle", { cx: x, cy: y, r, fill: color, stroke: active ? "#fff" : "rgba(255,255,255,0.25)", "stroke-width": active ? 3 : 1.5 }));
-    // readiness band: a gap off the disk + a thicker stroke so green/amber split reads clearly
+    // readiness band: a gap off the disk; weight balanced so identity (disk color) still leads
     const rr = r + 7, circ = 2 * Math.PI * rr;
-    g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#e0a93f", "stroke-width": 5, opacity: 0.9 }));
+    g.appendChild(svg("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#e0a93f", "stroke-width": 4, opacity: 0.85 }));
     g.appendChild(svg("circle", {
-      cx: x, cy: y, r: rr, fill: "none", stroke: "#4cd79e", "stroke-width": 5,
+      cx: x, cy: y, r: rr, fill: "none", stroke: "#4cd79e", "stroke-width": 4,
       "stroke-dasharray": `${ratio * circ} ${circ}`, transform: `rotate(-90 ${x} ${y})`
     }));
     g.appendChild(text(programCode(p), { x, y: y + 4, "text-anchor": "middle", class: "node-code", style: `font-size:${r > 26 ? 13 : 11}px` }));
@@ -601,7 +620,7 @@ function programNetwork(fstats, fcount) {
     chart.appendChild(g);
   });
 
-  chart.appendChild(text("disk = experiments  ·  ring = % anchor-ready (green) / to curate (amber)", { x: cx, y: H - 6, "text-anchor": "middle", class: "axis-label-inv" }));
+  chart.appendChild(text("disk = experiments (may span programs)  ·  ring = % anchor-ready (green) / to curate (amber)", { x: cx, y: H - 6, "text-anchor": "middle", class: "axis-label-inv" }));
 
   target.appendChild(chart);
   renderProgramLegend(stats);
@@ -732,16 +751,18 @@ function programHeatmap(fstats) {
   const H = top + progs.length * rowH + 6;
   const maxes = {};
   metrics.forEach((m) => { maxes[m.key] = Math.max(1, ...data.map((d) => d.v[m.key])); });
+  // expand the %Ready color range across programs that have experiments in view,
+  // so an under-ready program is distinguishable from a 100% one (labels stay exact)
+  const ratios = data.filter((d) => d.v.expTotal > 0).map((d) => d.v.ready / d.v.expTotal);
+  const minR = ratios.length ? Math.min(...ratios) : 0, maxR = ratios.length ? Math.max(...ratios) : 1;
   const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "group", "aria-label": "Program scorecard: experiments, percent ready, queued, claims", preserveAspectRatio: "xMinYMin meet" });
-  const filtering = filtersActive();
   metrics.forEach((m, ci) => {
     chart.appendChild(text(m.label, { x: labelW + ci * cellW + cellW / 2, y: 18, "text-anchor": "middle", class: "axis-label" }));
   });
   data.forEach(({ p, v }, ri) => {
     const y = top + ri * rowH;
     const active = state.program === p.id;
-    const rowG = svg("g", {}); // dim programs with nothing in the current view
-    if (filtering && v.exp === 0) rowG.setAttribute("opacity", "0.4");
+    const rowG = svg("g", {});
     if (active) chart.appendChild(svg("rect", { x: 0, y: y - 1, width: W, height: rowH, fill: COLORS.tint, rx: 5 }));
     rowG.appendChild(svg("rect", { x: 0, y: y + rowH / 2 - 7, width: 5, height: 14, rx: 2, fill: programColor(p.id) }));
     const full = titleForProgram(p.id);
@@ -751,7 +772,11 @@ function programHeatmap(fstats) {
     metrics.forEach((m, ci) => {
       const value = v[m.key];
       const ratio = m.mode === "ratio" ? value / Math.max(1, v.expTotal) : value / maxes[m.key];
-      const alpha = 0.1 + ratio * 0.8;
+      // color intensity: counts by magnitude; %Ready normalized across the visible spread
+      const colorRatio = m.mode === "ratio"
+        ? (v.expTotal === 0 ? 0 : (maxR > minR ? (ratio - minR) / (maxR - minR) : ratio))
+        : ratio;
+      const alpha = m.mode === "ratio" && v.expTotal === 0 ? 0.06 : 0.12 + colorRatio * 0.78;
       const cellX = labelW + ci * cellW;
       const cell = svg("rect", {
         x: cellX + 3, y: y + 3, width: cellW - 6, height: rowH - 6, rx: 5,
@@ -845,11 +870,10 @@ function renderPrograms() {
   host.innerHTML = rows.map((p) => {
     const active = state.program === p.id;
     return `
-    <article class="program-card${active ? " active" : ""}" tabindex="0" role="button" aria-pressed="${active}"
-      aria-label="Filter the atlas to ${escapeHtml(titleForProgram(p.id))}" data-program="${escapeHtml(p.id)}" style="--accent:${programColor(p.id)}">
+    <article class="program-card${active ? " active" : ""}" data-program="${escapeHtml(p.id)}" style="--accent:${programColor(p.id)}">
       <div class="card-head">
         <span class="card-code" style="background:${programColor(p.id)}">${escapeHtml(programCode(p))}</span>
-        <h4>${escapeHtml(titleForProgram(p.id))}</h4>
+        <h3>${escapeHtml(titleForProgram(p.id))}</h3>
       </div>
       <p class="focus">${escapeHtml(p.focus)}</p>
       <div class="stat-row">
@@ -859,17 +883,17 @@ function renderPrograms() {
         <div class="stat"><span class="n" style="color:${COLORS.violet}">${formatNumber(p.claim_count)}</span><span class="k">claims</span></div>
       </div>
       <div class="card-actions">
-        <span class="card-cta">${active ? "Filtering — click to clear" : "Filter to this program"}</span>
+        <button class="card-cta-btn" type="button" data-filter="${escapeHtml(p.id)}" aria-pressed="${active}">${active ? "Filtering — clear" : "Filter to this program"}</button>
         <button class="text-link details-btn" type="button" data-details="${escapeHtml(p.id)}">Details <span class="arr">→</span></button>
       </div>
     </article>`;
   }).join("");
-  host.querySelectorAll("[data-program]").forEach((card) => {
-    const id = card.getAttribute("data-program");
-    onActivate(card, () => { setProgram(id); if (state.program === id) gotoSection("experiments"); });
-  });
-  host.querySelectorAll("[data-details]").forEach((btn) => {
-    btn.addEventListener("click", (e) => { e.stopPropagation(); openProgram(programById.get(btn.getAttribute("data-details"))); });
+  const filterTo = (id) => { setProgram(id); if (state.program === id) gotoSection("experiments"); };
+  host.querySelectorAll("[data-filter]").forEach((btn) => btn.addEventListener("click", () => filterTo(btn.getAttribute("data-filter"))));
+  host.querySelectorAll("[data-details]").forEach((btn) => btn.addEventListener("click", () => openProgram(programById.get(btn.getAttribute("data-details")))));
+  // whole card is a mouse shortcut to filter; buttons handle themselves
+  host.querySelectorAll(".program-card").forEach((card) => {
+    card.addEventListener("click", (e) => { if (e.target.closest("button")) return; filterTo(card.getAttribute("data-program")); });
   });
 }
 
@@ -999,9 +1023,9 @@ function renderQueue() {
     const items = rows.filter((i) => i.priority === pr);
     const meta = QUEUE_META[pr] || { color: COLORS.muted, meaning: "" };
     const cards = items.length ? items.map((item) => `
-      <article class="queue-card" data-queue="${escapeHtml(item.id)}" tabindex="0" role="button" aria-label="${escapeHtml(cleanTitle(item.title))}" style="border-left:3px solid ${meta.color}">
+      <article class="queue-card" data-queue="${escapeHtml(item.id)}" style="border-left:3px solid ${meta.color}">
         <div class="meta-line"><span>${escapeHtml(humanizeStatus(item.status))}</span><span class="effort-chip">${escapeHtml(humanizeStatus(item.effort))} effort</span></div>
-        <h4>${escapeHtml(cleanTitle(item.title))}</h4>
+        <h4><button class="card-open" type="button" data-open="${escapeHtml(item.id)}">${escapeHtml(cleanTitle(item.title))}</button></h4>
         <p class="question">${escapeHtml(item.question)}</p>
         <div class="pill-row">${(item.programs || []).slice(0, 3).map((id) => programPill(id)).join("")}</div>
       </article>`).join("") : '<div class="queue-empty">No matching probes.</div>';
@@ -1010,11 +1034,10 @@ function renderQueue() {
       ${cards}
     </div>`;
   }).join("");
-  document.querySelectorAll("[data-queue]").forEach((card) => {
-    onActivate(card, (e) => {
-      if (e && e.target.closest("[data-program-pill]")) return; // let the pill cross-link
-      openQueue(DATA.queue.find((i) => i.id === card.getAttribute("data-queue")));
-    });
+  const openQ = (id) => openQueue(DATA.queue.find((i) => i.id === id));
+  document.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", () => openQ(b.getAttribute("data-open"))));
+  document.querySelectorAll(".queue-card").forEach((card) => {
+    card.addEventListener("click", (e) => { if (e.target.closest("button")) return; openQ(card.getAttribute("data-queue")); });
   });
 }
 
@@ -1041,21 +1064,20 @@ function renderClaims() {
   if (!claims.length) { host.innerHTML = emptyState("No claims match the active filters."); wireEmptyReset(); return; }
   host.innerHTML = claims.map((c) => {
     const color = STATUS_COLORS[c.status] || COLORS.violet;
-    return `<article class="claim-card" data-claim="${escapeHtml(c.id)}" tabindex="0" role="button" aria-label="Claim ${escapeHtml(c.id)}: ${escapeHtml(c.title)}" style="--accent:${color}">
+    return `<article class="claim-card" data-claim="${escapeHtml(c.id)}" style="--accent:${color}">
       <div class="claim-top">
         <span class="claim-id">${escapeHtml(c.id)}</span>
         <span class="status-chip" style="--status-color:${color}">${escapeHtml(humanizeStatus(c.status))}</span>
       </div>
-      <h4>${escapeHtml(c.title)}</h4>
+      <h4><button class="card-open" type="button" data-open-claim="${escapeHtml(c.id)}">${escapeHtml(c.title)}</button></h4>
       <p class="claim-summary">${escapeHtml(c.summary)}</p>
       <div class="pill-row">${splitList(c.programs).map((id) => programPill(id)).join("")}</div>
     </article>`;
   }).join("");
-  host.querySelectorAll("[data-claim]").forEach((card) => {
-    onActivate(card, (e) => {
-      if (e && e.target.closest("[data-program-pill]")) return; // let the pill cross-link
-      openClaim(DATA.claims.find((c) => c.id === card.getAttribute("data-claim")));
-    });
+  const openC = (id) => openClaim(DATA.claims.find((c) => c.id === id));
+  host.querySelectorAll("[data-open-claim]").forEach((b) => b.addEventListener("click", () => openC(b.getAttribute("data-open-claim"))));
+  host.querySelectorAll(".claim-card").forEach((card) => {
+    card.addEventListener("click", (e) => { if (e.target.closest("button")) return; openC(card.getAttribute("data-claim")); });
   });
 }
 
@@ -1208,6 +1230,7 @@ function resetFilters() {
   state.search = ""; state.program = "all"; state.ready = "all"; state.need = "all";
   syncControls();
   render();
+  restoreFilterFocus(); // the Reset control hides itself on clear — don't strand focus on body
 }
 
 let searchTimer = null;
