@@ -181,7 +181,7 @@ function textBlob(item) {
   const base = Object.values(item).flatMap((v) => (Array.isArray(v) ? v : [v])).join(" ");
   // index the humanized program names + readiness status so people can search by what they see
   const progNames = item.programs ? splitList(item.programs).map(titleForProgram).join(" ") : "";
-  const status = item.anchor_ready ? (item.anchor_ready === "yes" ? "anchor-ready" : "needs curation") : "";
+  const status = item.anchor_ready ? (item.anchor_ready === "yes" ? "anchor-ready" : "not anchor-ready needs curation") : "";
   return `${base} ${progNames} ${status}`.toLowerCase();
 }
 const normSep = (s) => s.replace(/[^a-z0-9]+/gi, " "); // commas, hyphens, slashes, dots -> spaces
@@ -738,7 +738,7 @@ function scatterPlot() {
     const color = e.anchor_ready === "yes" ? COLORS.green : COLORS.amber;
     const bar = svg("rect", { x, y: H - bottom - h, width: bw, height: h, rx: bw > 3 ? 1.5 : 0, fill: color, opacity: 0.85, style: "cursor:pointer" });
     const hit = svg("rect", { x: x - 1, y: top, width: Math.max(bw + 2, 4), height: plotH, fill: "transparent", style: "cursor:pointer" });
-    attachTooltip(bar, `<strong>${escapeHtml(e.id)}</strong><br><span class="tip-meta">${formatNumber(e.total_files)} files · ${e.anchor_ready === "yes" ? "ready" : "needs curation"}</span>`);
+    attachTooltip(bar, `<strong>${escapeHtml(e.id)}</strong><br><span class="tip-meta">${formatNumber(e.total_files)} files · ${e.anchor_ready === "yes" ? "ready" : "not ready"}</span>`);
     hit.addEventListener("click", () => openExperiment(e));
     chart.appendChild(hit);
     chart.appendChild(bar);
