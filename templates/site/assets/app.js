@@ -7,7 +7,7 @@ const COLORS = {
   blue: "#2b5fae",
   green: "#15703b",
   amber: "#b9720f",
-  amberText: "#8a5400",
+  queue: "#c2410c", // future-queue brand (also QUEUE_META.P0) — one hue for the queue concept everywhere
   rose: "#c0344a",
   violet: "#6a4fbb",
   ink: "#111a24",
@@ -42,6 +42,11 @@ const STATUS_GLYPH = {
   Open: "?",
   Retired: "–"
 };
+
+/* "Negative" in the source means a recorded negative RESULT (an approach tested and found wanting),
+   not that the claim itself is refuted — spell that out so the label can't be misread. */
+const STATUS_LABEL = { Negative: "Negative result" };
+function statusLabel(status) { return STATUS_LABEL[status] || humanizeStatus(status); }
 
 /* 11 mutually distinct categorical hues for programs, hue-spaced so no two collide and
    none lands on the reserved status green; all dark enough for white-on-fill AA (code badges)
@@ -411,7 +416,7 @@ function activeChips() {
   const chips = [];
   if (state.program !== "all") chips.push({ label: titleForProgram(state.program), clear: () => setProgram(state.program) });
   if (state.ready === "yes") chips.push({ label: "Anchor-ready", clear: () => setReady("all") });
-  if (state.ready === "no") chips.push({ label: "Needs curation", clear: () => setReady("all") });
+  if (state.ready === "no") chips.push({ label: "Not anchor-ready", clear: () => setReady("all") });
   if (state.need !== "all") chips.push({ label: humanizeToken(state.need), clear: () => setNeed("all") });
   if (state.search.trim()) chips.push({ label: `“${state.search.trim()}”`, clear: () => setSearch("") });
   return chips;
@@ -449,7 +454,9 @@ function updateFilterStatus() {
   if (els.filterRail) els.filterRail.classList.toggle("has-active", active); // mobile: show only when filtering
   // rail chips (with clear-all) and hero chips (compact)
   if (els.filterChips) {
-    els.filterChips.innerHTML = active ? chipMarkup(chips, true) : '<span class="chips-empty">No filters active</span>';
+    // no "Clear all" here: it would be appended inside the clip-overflow rail (so it's the control
+    // that vanishes once chips wrap) and it duplicates the always-visible "Reset" button beside it
+    els.filterChips.innerHTML = active ? chipMarkup(chips, false) : '<span class="chips-empty">No filters active</span>';
     wireChips(els.filterChips, chips);
   }
   const heroChips = document.getElementById("filterChipsHero");
@@ -466,13 +473,13 @@ function gotoSection(id) {
 }
 
 const METRICS = [
-  { label: "Experiments", key: "experiments", help: "Self-contained experiment folders", color: COLORS.teal, action: () => gotoSection("experiments") },
+  { label: "Experiments", key: "experiments", help: "Self-contained experiments", color: COLORS.teal, action: () => gotoSection("experiments") },
   // when filtered, "N spanned in view" is a multi-program reach — route to the map, whose legend
   // visualizes that spanned set; #programs hard-filters to the single selected program (would show 1)
   { label: "Programs", key: "programs", help: "Durable lines of inquiry", color: COLORS.ink, action: () => gotoSection(state.program !== "all" ? "map" : "programs") },
   { label: "Anchor-ready", key: "anchor_ready", help: "Citable and buildable today", color: COLORS.green, filters: true, readyVal: "yes", action: () => { setReady(state.ready === "yes" ? "all" : "yes"); gotoSection("readiness"); } },
-  { label: "Needs curation", key: "needs_curation", help: "Not yet anchor-ready", color: COLORS.amber, filters: true, readyVal: "no", action: () => { setReady(state.ready === "no" ? "all" : "no"); gotoSection("readiness"); } },
-  { label: "Future queue", key: "future_proposals", help: "Structured next probes", color: "#c2410c", action: () => gotoSection("queue") },
+  { label: "Not anchor-ready", key: "needs_curation", help: "Has pending curation tasks", color: COLORS.amber, filters: true, readyVal: "no", action: () => { setReady(state.ready === "no" ? "all" : "no"); gotoSection("readiness"); } },
+  { label: "Future queue", key: "future_proposals", help: "Structured next probes", color: COLORS.queue, action: () => gotoSection("queue") },
   { label: "Claims", key: "claims", help: "Shared evidence statements", color: COLORS.violet, action: () => gotoSection("claims") },
   // corpus-wide: these describe the whole tree (the Artifacts charts are non-reactive), so the
   // headline stays the whole-tree total even under a filter — no "of N", matching the destination
@@ -693,7 +700,7 @@ function donutChart(experiments) {
   const amber = "#b9720f";
   const W = 320, H = 168, padX = 8, barY = 78, barH = 30, barW = W - padX * 2;
   const readyW = (ready / total) * barW;
-  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pct} percent anchor-ready in this view: ${ready} ready, ${needs} to curate`, preserveAspectRatio: "xMinYMin meet" });
+  const chart = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pct} percent anchor-ready in this view: ${ready} ready, ${needs} not ready`, preserveAspectRatio: "xMinYMin meet" });
   chart.appendChild(text(`${pct}%`, { x: padX, y: 50, class: "chart-value", style: "font-size:46px;font-family:var(--display);letter-spacing:-0.03em" }));
   chart.appendChild(text("ANCHOR-READY", { x: padX + 2, y: 70, class: "axis-label" }));
   // gauge: amber base (to-curate), green fill (ready)
@@ -706,7 +713,7 @@ function donutChart(experiments) {
   chart.appendChild(svg("rect", { x: padX, y: H - 18, width: 11, height: 11, rx: 2, fill: COLORS.green }));
   chart.appendChild(text(`${formatNumber(ready)} ready`, { x: padX + 17, y: H - 9, class: "chart-label" }));
   chart.appendChild(svg("rect", { x: padX + 116, y: H - 18, width: 11, height: 11, rx: 2, fill: amber }));
-  chart.appendChild(text(`${formatNumber(needs)} to curate`, { x: padX + 133, y: H - 9, class: "chart-label" }));
+  chart.appendChild(text(`${formatNumber(needs)} not ready`, { x: padX + 133, y: H - 9, class: "chart-label" }));
   target.appendChild(chart);
 }
 
@@ -741,7 +748,7 @@ function scatterPlot() {
   chart.appendChild(svg("rect", { x: W - right - 150, y: H - 16, width: 9, height: 9, rx: 2, fill: COLORS.green }));
   chart.appendChild(text("ready", { x: W - right - 137, y: H - 8, class: "chart-tick" }));
   chart.appendChild(svg("rect", { x: W - right - 92, y: H - 16, width: 9, height: 9, rx: 2, fill: COLORS.amber }));
-  chart.appendChild(text("to curate", { x: W - right - 79, y: H - 8, class: "chart-tick" }));
+  chart.appendChild(text("not ready", { x: W - right - 79, y: H - 8, class: "chart-tick" }));
   target.appendChild(chart);
 }
 
@@ -762,7 +769,7 @@ function programHeatmap(fstats) {
   const metrics = [
     { key: "exp", label: "Exp", color: "#455468", mode: "count" },
     { key: "ready", label: "% Ready", color: COLORS.green, mode: "ratio" },
-    { key: "queue", label: "Queued", color: COLORS.amber, mode: "count" },
+    { key: "queue", label: "Queued", color: COLORS.queue, mode: "count" },
     { key: "claims", label: "Claims", color: COLORS.violet, mode: "count" }
   ];
   const W = 620, labelW = 270, gutter = 12, fontPx = 9.5;
@@ -808,7 +815,7 @@ function programHeatmap(fstats) {
       const shown = muted ? "—" : (isRatio ? `${Math.round(ratio * 100)}%` : formatNumber(value));
       const cell = svg("rect", {
         x: trackX, y: y + 3, width: trackW, height: rowH - 6, rx: 5,
-        fill: muted ? MUTED_TRACK : TRACK, tabindex: 0, role: "button", "data-cell": p.id,
+        fill: muted ? MUTED_TRACK : TRACK, tabindex: 0, role: "button", "data-cell": p.id, "data-col": m.key,
         "aria-label": `${full}, ${m.label}: ${muted ? "not in view" : shown}. Activate to filter.`,
         style: "cursor:pointer"
       });
@@ -850,9 +857,9 @@ function claimGraph() {
     chart.appendChild(svg("circle", { cx: x, cy: 18, r: 7, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op }));
     chart.appendChild(text(STATUS_GLYPH[c.status] || "·", { x, y: 21.5, "text-anchor": "middle", opacity: op, style: "fill:#fff;font-size:9px;font-weight:700;font-family:var(--sans);pointer-events:none" }));
     const t = text(c.id, { x, y: 46, "text-anchor": "middle", class: "chart-value", opacity: op,
-      tabindex: 0, role: "button", "aria-label": `Claim ${c.id}: ${c.title}, ${humanizeStatus(c.status)}`, style: "cursor:pointer" });
+      tabindex: 0, role: "button", "aria-label": `Claim ${c.id}: ${c.title}, ${statusLabel(c.status)}`, style: "cursor:pointer" });
     onActivate(t, () => openClaim(c));
-    attachTooltip(t, `<strong>${escapeHtml(c.id)}: ${escapeHtml(c.title)}</strong><br><span class="tip-meta">${escapeHtml(humanizeStatus(c.status))}</span>`);
+    attachTooltip(t, `<strong>${escapeHtml(c.id)}: ${escapeHtml(c.title)}</strong><br><span class="tip-meta">${escapeHtml(statusLabel(c.status))}</span>`);
     chart.appendChild(t);
   });
   progs.forEach((p, ri) => {
@@ -871,7 +878,7 @@ function claimGraph() {
       const op = Math.min(rowDim, dimClaim(c) ? 0.25 : 1);
       if (linked) {
         const dot = svg("circle", { cx: x, cy: y + rowH / 2, r: 7, fill: STATUS_COLORS[c.status] || COLORS.violet, opacity: op,
-          tabindex: 0, role: "button", "aria-label": `${c.id} (${humanizeStatus(c.status)}) relates to ${titleForProgram(p.id)}: ${c.title}`, style: "cursor:pointer" });
+          tabindex: 0, role: "button", "aria-label": `${c.id} (${statusLabel(c.status)}) relates to ${titleForProgram(p.id)}: ${c.title}`, style: "cursor:pointer" });
         attachTooltip(dot, `<strong>${escapeHtml(c.id)}</strong> ↔ <strong>${escapeHtml(titleForProgram(p.id))}</strong><br><span class="tip-meta">${escapeHtml(c.title)}</span>`);
         onActivate(dot, () => openClaim(c));
         chart.appendChild(dot);
@@ -892,7 +899,7 @@ function renderClaimStatusLegend() {
   const present = new Set(DATA.claims.map((c) => c.status));
   host.innerHTML = order.filter((s) => present.has(s)).map((s) => {
     const n = DATA.claims.filter((c) => c.status === s).length;
-    return `<span class="legend-item" style="cursor:default"><span class="legend-swatch legend-glyph" style="background:${STATUS_COLORS[s] || COLORS.violet}">${STATUS_GLYPH[s] || ""}</span>${escapeHtml(s)} <b>${n}</b></span>`;
+    return `<span class="legend-item" style="cursor:default"><span class="legend-swatch legend-glyph" style="background:${STATUS_COLORS[s] || COLORS.violet}">${STATUS_GLYPH[s] || ""}</span>${escapeHtml(statusLabel(s))} <b>${n}</b></span>`;
   }).join("");
 }
 
@@ -913,7 +920,7 @@ function renderPrograms() {
       <div class="stat-row">
         <div class="stat"><span class="n">${formatNumber(p.experiment_count)}</span><span class="k">exp</span></div>
         <div class="stat"><span class="n" style="color:${COLORS.green}">${formatNumber(p.anchor_ready_count)}</span><span class="k">ready</span></div>
-        <div class="stat"><span class="n" style="color:${COLORS.amberText}">${formatNumber(p.queue_count)}</span><span class="k">queued</span></div>
+        <div class="stat"><span class="n" style="color:${COLORS.queue}">${formatNumber(p.queue_count)}</span><span class="k">queued</span></div>
         <div class="stat"><span class="n" style="color:${COLORS.violet}">${formatNumber(p.claim_count)}</span><span class="k">claims</span></div>
       </div>
       <div class="card-actions">
@@ -988,7 +995,7 @@ function renderExperiments() {
     <tr data-experiment="${escapeHtml(e.id)}">
       <td data-label="Experiment"><button class="row-open" type="button" aria-label="${escapeHtml(e.id)} — open details"><span class="cell-id">${escapeHtml(e.id)}</span><span class="cell-title">${escapeHtml(cleanTitle(e.title))}</span></button></td>
       <td class="col-progs" data-label="Programs"><span class="prog-chips">${e.programs.map((id) => `<button class="prog-chip pill-link" type="button" data-program-pill="${escapeHtml(id)}" style="background:${programColor(id)}" title="Filter to ${escapeHtml(titleForProgram(id))}" aria-label="Filter to ${escapeHtml(titleForProgram(id))}">${escapeHtml(programCode(programById.get(id) || { id, title: titleForProgram(id) }))}</button>`).join("")}</span></td>
-      <td data-label="Status"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span></td>
+      <td data-label="Status"><span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Not anchor-ready"}</span></td>
       <td class="col-mono" data-label="Run surface">${escapeHtml(humanizeToken(e.run_surface) || "—")}</td>
       <td class="col-mono" data-label="Curation tasks">${(e.needs || []).length ? escapeHtml((e.needs || []).map(humanizeToken).join(", ")) : '<span class="none">none</span>'}</td>
     </tr>`).join("");
@@ -1026,7 +1033,7 @@ function openExperiment(e) {
   openDrawer("Experiment", cleanTitle(e.title), e.summary, [
     ["Id", `<span class="mono-val">${escapeHtml(e.id)}</span>`],
     ["Programs", e.programs.map((id) => programPill(id)).join(" ")],
-    ["Status", `<span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Needs curation"}</span>`],
+    ["Status", `<span class="status-tag ${e.anchor_ready === "yes" ? "ready" : "notready"}">${e.anchor_ready === "yes" ? "Anchor-ready" : "Not anchor-ready"}</span>`],
     ["Run surface", e.run_surface ? `<span class="mono-val">${escapeHtml(humanizeToken(e.run_surface))}</span>` : ""],
     ["Smoke test", hasSmoke ? `<code>${escapeHtml(e.smoke_command)}</code>` : '<span class="muted-val">none yet</span>'],
     ["Curation tasks", (e.needs || []).length ? (e.needs || []).map((n) => `<span class="pill">${escapeHtml(humanizeToken(n))}</span>`).join(" ") : '<span class="muted-val">none</span>'],
@@ -1104,7 +1111,7 @@ function renderClaims() {
     return `<article class="claim-card" data-claim="${escapeHtml(c.id)}" style="--accent:${color}">
       <div class="claim-top">
         <span class="claim-id">${escapeHtml(c.id)}</span>
-        <span class="status-chip" style="--status-color:${color}">${escapeHtml(humanizeStatus(c.status))}</span>
+        <span class="status-chip has-glyph" style="--status-color:${color}"><span class="status-glyph-badge" style="background:${color}">${STATUS_GLYPH[c.status] || ""}</span>${escapeHtml(statusLabel(c.status))}</span>
       </div>
       <h4><button class="card-open" type="button" data-open-claim="${escapeHtml(c.id)}">${escapeHtml(c.title)}</button></h4>
       <p class="claim-summary">${escapeHtml(c.summary)}</p>
@@ -1122,7 +1129,7 @@ function openClaim(c) {
   if (!c) return;
   const color = STATUS_COLORS[c.status] || COLORS.violet;
   openDrawer(`Claim ${c.id}`, c.title, c.summary, [
-    ["Status", `<span class="status-chip" style="--status-color:${color}">${escapeHtml(humanizeStatus(c.status))}</span>`],
+    ["Status", `<span class="status-chip has-glyph" style="--status-color:${color}"><span class="status-glyph-badge" style="background:${color}">${STATUS_GLYPH[c.status] || ""}</span>${escapeHtml(statusLabel(c.status))}</span>`],
     ["Programs", splitList(c.programs).map((id) => programPill(id)).join(" ")],
     ["Evidence", escapeHtml(c.evidence)],
     ["Implication", escapeHtml(c.implication)]
@@ -1202,7 +1209,7 @@ function focusKey() {
   const mapnode = ae.getAttribute && ae.getAttribute("data-mapnode");
   if (mapnode) return `[data-mapnode="${mapnode}"]`;
   const cell = ae.getAttribute && ae.getAttribute("data-cell");
-  if (cell) return `#programHeatmap [data-cell="${cell}"]`;
+  if (cell) { const col = ae.getAttribute("data-col"); return `#programHeatmap [data-cell="${cell}"]${col ? `[data-col="${col}"]` : ""}`; }
   const bar = ae.getAttribute && ae.getAttribute("data-bar");
   if (bar) return `[data-bar="${bar}"]`;
   const sortTh = ae.closest && ae.closest("[data-sort]");
@@ -1262,7 +1269,15 @@ function setupScrollSpy() {
       if (entry.isIntersecting) {
         links.forEach((a) => a.classList.remove("active"));
         const link = map.get(entry.target.id);
-        if (link) link.classList.add("active");
+        if (link) {
+          link.classList.add("active");
+          // on mobile the topnav is a horizontally-scrollable strip; keep the active item in view
+          // so the "you are here" indicator isn't stranded off-screen-right
+          const nav = link.parentElement;
+          if (nav && nav.scrollWidth > nav.clientWidth + 4) {
+            link.scrollIntoView({ inline: "nearest", block: "nearest", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+          }
+        }
       }
     });
   }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });

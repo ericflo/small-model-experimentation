@@ -92,6 +92,7 @@ h1, h2, h3 {
   font-weight: 800;
   letter-spacing: -0.02em;
   font-feature-settings: "ss01";
+  line-height: 1.15; /* tight heading default; specific headings override — never inherit body 1.5 */
 }
 
 /* ---- Eyebrows / labels: the "machine-generated" mono voice ---------------- */
@@ -860,6 +861,14 @@ tbody tr:last-child td { border-bottom: none; }
   background: color-mix(in srgb, var(--status-color, var(--muted)) 14%, var(--surface));
 }
 .status-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--status-color, var(--muted)); }
+/* glyph badge gives the claim card the same non-color status channel as the matrix/legend */
+.status-chip.has-glyph::before { content: none; }
+.status-chip.has-glyph { padding-left: 3px; }
+.status-glyph-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 15px; height: 15px; border-radius: 4px;
+  color: #fff; font-size: 10px; font-weight: 700; line-height: 1;
+}
 .claim-card .claim-summary { margin: 8px 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
 
 /* ---- Narrative ----------------------------------------------------------- */
@@ -888,7 +897,7 @@ tbody tr:last-child td { border-bottom: none; }
   color: var(--faint);
   word-break: break-word;
 }
-.narrative-card h3 { margin: 0; font-size: 0.96rem; font-family: var(--display); font-weight: 700; }
+.narrative-card h3 { margin: 0; font-size: 1.06rem; font-family: var(--display); font-weight: 700; }
 .narrative-card p { margin: 8px 0 12px; max-width: 62ch; color: var(--muted); font-size: 0.86rem; line-height: 1.5; text-wrap: pretty; }
 .text-link {
   font-family: var(--mono);
@@ -1153,7 +1162,10 @@ tbody tr:last-child td { border-bottom: none; }
   transition: background 130ms ease;
 }
 .metric-card:hover, .metric-card:focus-visible { background: var(--surface-tint); }
-.metric-card .metric-help { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
+/* the ledger clips overflow to round its corners, which truncates an outline ring on perimeter
+   tiles — paint an INSET ring instead so the keyboard focus cue is always fully visible */
+.metric-card:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--teal); }
+.metric-card .metric-help { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; margin-top: auto; }
 .metric-go {
   flex: none;
   font-family: var(--mono);

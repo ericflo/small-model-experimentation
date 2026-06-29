@@ -35,7 +35,7 @@
     </header>
 
     <!-- Sticky filter rail: appears once the hero controls scroll out of view -->
-    <div id="filterRail" class="filter-rail" aria-label="Active filters">
+    <div id="filterRail" class="filter-rail" role="region" aria-label="Active filters">
       <div class="rail-controls">
         <label class="rail-search">
           <span class="sr-only">Search</span>
@@ -50,7 +50,9 @@
         </select>
         <select id="needFilterTop" aria-label="Curation need filter"></select>
       </div>
-      <div id="filterChips" class="filter-chips" aria-live="polite"></div>
+      <!-- not a live region: the always-announceable hero chips (#filterChipsHero) are the single
+           filter-change announcement; this rail copy is visibility:hidden when inactive -->
+      <div id="filterChips" class="filter-chips"></div>
       <button id="resetFiltersTop" class="rail-reset" type="button">Reset</button>
     </div>
 
@@ -79,7 +81,7 @@
               <select id="readyFilter">
                 <option value="all">All</option>
                 <option value="yes">Anchor-ready</option>
-                <option value="no">Needs curation</option>
+                <option value="no">Not anchor-ready</option>
               </select>
             </label>
             <label class="control">
@@ -191,6 +193,7 @@
               <div>
                 <p class="eyebrow">Top tasks</p>
                 <h3>Open curation tasks</h3>
+                <p class="panel-sub">Counted across all experiments — anchor-ready ones still carry optional tasks.</p>
               </div>
             </div>
             <div id="needsChart" class="visual"></div>
