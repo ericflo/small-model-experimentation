@@ -109,3 +109,9 @@ programs:
     seed_experiments:
       - "qwen_compiler_multiseed_reattribution"
       - "qwen35_4b_sampler_portfolio_scheduler"
+  - id: "test_time_reasoning_budget"
+    title: "Test-Time Reasoning Budget"
+    charter: "research_programs/test_time_reasoning_budget/charter.md"
+    focus: "Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled."
+    seed_tags: []
+    seed_experiments: []

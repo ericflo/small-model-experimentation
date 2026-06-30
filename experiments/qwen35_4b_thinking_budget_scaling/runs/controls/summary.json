@@ -1,0 +1,40 @@
+{
+  "tag": "full",
+  "n_tasks": 100,
+  "k": 8,
+  "budgets": [
+    "no_think",
+    "256",
+    "512",
+    "1024",
+    "2048",
+    "unbudgeted"
+  ],
+  "controls": false,
+  "model": "Qwen/Qwen3.5-4B",
+  "gen_secs": 11139.2,
+  "conditions": {
+    "shuffle_512": {
+      "n_tasks": 100,
+      "greedy_pass@1": 0.8,
+      "sampled_pass@1": 0.7925,
+      "pass@8_oracle": 0.93,
+      "visible_selector@1": 0.89,
+      "oracle_minus_deployable": 0.04,
+      "mean_think_tokens": 411.4,
+      "mean_total_tokens": 491.2,
+      "forced_close_frac": 0.429
+    },
+    "shuffle_2048": {
+      "n_tasks": 100,
+      "greedy_pass@1": 0.86,
+      "sampled_pass@1": 0.8662,
+      "pass@8_oracle": 0.94,
+      "visible_selector@1": 0.92,
+      "oracle_minus_deployable": 0.02,
+      "mean_think_tokens": 607.6,
+      "mean_total_tokens": 681.1,
+      "forced_close_frac": 0.065
+    }
+  }
+}

@@ -1,0 +1,21 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_thinking_budget_controller"
+external_artifacts: []
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "data/greedy_records.jsonl, data/tasks.json"
+    reason: "greedy generations + MBPP test metadata copied from qwen35_4b_thinking_budget_scaling/runs/main (keeps this experiment self-contained)"
+  - path: "data/greedy_with_visible.jsonl"
+    reason: "cached visible-test (first-assert) pass results, regenerable by scripts/run.py"
+  - path: "runs/summary.json, analysis/pareto_table.md, analysis/pareto.png"
+    reason: "small generated result artifacts"
+reproducibility:
+  smoke_command: "../../.venv/bin/python scripts/run.py --smoke"
+  full_command: "../../.venv/bin/python scripts/run.py"
+  note: "Offline: no model call at run time. Inputs derive from qwen35_4b_thinking_budget_scaling."
+  required_external_artifacts: []
+notes: >-
+  Deployable strategies read only the visible test (first assert); full-test accuracy and the
+  oracle ceiling use hidden asserts and are reported as non-deployable. false-visible-commit is the
+  C2 false-pass rate that bounds the deployable gap to the oracle.

@@ -1,0 +1,30 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_thinking_budget_scaling"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B), ~9.3 GB bf16"
+    required_for: "all generation"
+    checksum: ""
+    regenerate: "huggingface_hub.snapshot_download('Qwen/Qwen3.5-4B')"
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "runs/main/{summary.json,generations.jsonl,verified.jsonl,tasks.json}"
+    reason: "small text run artifacts (6-budget sweep); kept for reanalysis"
+  - path: "runs/controls/{summary.json,generations.jsonl,verified.jsonl,tasks.json}"
+    reason: "shuffled-thinking control run artifacts"
+  - path: "analysis/*.png, analysis/*_summary.md, analysis/*_deeper.md"
+    reason: "generated figures and tables"
+reproducibility:
+  smoke_command: "HF_HUB_OFFLINE=1 ../../.venv/bin/python scripts/run.py --smoke"
+  full_command: >-
+    HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    ../../.venv/bin/python scripts/run.py --tasks 100 --k 8
+    --budgets no_think,256,512,1024,2048,unbudgeted --out runs/main
+  controls_command: "../../.venv/bin/python scripts/run.py --tasks 100 --k 8 --only-controls --out runs/controls"
+  env: "torch 2.12.1+cu130, transformers 5.12.1 (native qwen3_5), single RTX 4090 (24GB), WSL; project .venv via uv"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: >-
+  Deployable metrics (greedy@1, visible-selector@1) use visible info only; pass@8 is a
+  non-deployable oracle ceiling reported separately. Generation cost is dominated by the
+  linear-attention torch fallback (fast path needs causal-conv1d, not built).

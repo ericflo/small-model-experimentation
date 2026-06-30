@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 8
+- Claims: 9
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 1 |
+| Promising | 2 |
 
 ## Program Counts
 
@@ -25,9 +25,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `interpretability_and_diagnostics` | 1 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 1 |
-| `process_control_and_tool_use` | 2 |
+| `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
 | `structured_execution_and_compilers` | 1 |
+| `test_time_reasoning_budget` | 1 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -200,3 +201,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 ### Avoid
 
 - Treating process as complete when it no longer improves research memory.
+
+## C9: Native thinking is an unused deployable lever — a budget to control, not free reasoning
+
+- Status: `Promising`
+- Programs: `test_time_reasoning_budget`, `process_control_and_tool_use`
+- Summary: Enabling Qwen3.5-4B's native thinking (disabled across the corpus: enable_thinking=False x48, True x0) raises deployable MBPP greedy pass@1 0.76->0.91 (+15pp), moving the deployable line MORE than the oracle ceiling (pass@8 0.91->0.96) and closing the selection gap — so C2 (coverage >> deployable selection) does not hold for the thinking axis here. But accuracy is non-monotonic in the thinking budget (optimum ~512-1024, then decline; unbudgeted worse than a cap), and a shuffled-thinking control reproduces much of the gain, so a large share is compute+scaffold+token-presence rather than coherent reasoning. A deployable visible-test budget controller is an EFFICIENCY win (Pareto-dominates fixed budgets except the peak: ~0.88 acc at 113 vs fixed 246-404 mean thinking tokens) but not an ACCURACY win (cannot beat the best fixed budget 0.91); its gap to the oracle (0.93) is bounded by visible-test false-passes ~8-11% (C2).
+- Implication: Re-baseline corpus results that used structured/'silent' machinery as a CoT substitute against a fair, budgeted native-thinking baseline. Treat the thinking budget as a controllable axis with a real overthinking cost; do not deploy unbudgeted thinking.
+
+### Evidence
+
+- [`qwen35_4b_thinking_budget_scaling`](../../experiments/qwen35_4b_thinking_budget_scaling/reports/report.md)
+- [`qwen35_4b_thinking_budget_controller`](../../experiments/qwen35_4b_thinking_budget_controller/reports/report.md)
+- [`qwen_python_shaped_silent_executor`](../../experiments/qwen_python_shaped_silent_executor/reports/qwen_python_shaped_silent_executor_report.md)
+
+### Next Tests
+
+- Learned thinking-budget controller with richer visible signals (entropy, self-consistency) to close the 0.89->0.93 oracle gap.
+- Stronger content control: substitute a different task's thinking to remove token-presence.
+- Replicate on harder substrates (full MBPP, LiveCodeBench, math): does the optimum move, does the C2 false-pass rate grow?
+
+### Avoid
+
+- Claiming thinking gains are 'reasoning' without a content control that removes token-presence.
+- Pinning an exact optimal budget from single-seed n=100 gaps.

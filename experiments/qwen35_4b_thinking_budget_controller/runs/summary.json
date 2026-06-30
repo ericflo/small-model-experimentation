@@ -1,0 +1,141 @@
+{
+  "n_tasks": 100,
+  "fixed": {
+    "no_think": {
+      "accuracy": 0.76,
+      "mean_think": 0.0,
+      "commit_dist": {
+        "no_think": 100
+      },
+      "false_visible_commit": 0.08
+    },
+    "think_256": {
+      "accuracy": 0.87,
+      "mean_think": 246.19,
+      "commit_dist": {
+        "think_256": 100
+      },
+      "false_visible_commit": 0.07
+    },
+    "think_512": {
+      "accuracy": 0.87,
+      "mean_think": 403.95,
+      "commit_dist": {
+        "think_512": 100
+      },
+      "false_visible_commit": 0.07
+    },
+    "think_1024": {
+      "accuracy": 0.91,
+      "mean_think": 507.49,
+      "commit_dist": {
+        "think_1024": 100
+      },
+      "false_visible_commit": 0.06
+    },
+    "think_2048": {
+      "accuracy": 0.86,
+      "mean_think": 595.55,
+      "commit_dist": {
+        "think_2048": 100
+      },
+      "false_visible_commit": 0.05
+    },
+    "think_unbudgeted": {
+      "accuracy": 0.84,
+      "mean_think": 472.67,
+      "commit_dist": {
+        "think_unbudgeted": 100
+      },
+      "false_visible_commit": 0.05
+    }
+  },
+  "controllers": {
+    "esc[256-512-1024]": {
+      "accuracy": 0.89,
+      "mean_think": 317.16,
+      "commit_dist": {
+        "think_256": 94,
+        "think_512": 1,
+        "think_1024": 5
+      },
+      "false_visible_commit": 0.08
+    },
+    "esc[256-512-1024] +continue": {
+      "accuracy": 0.89,
+      "mean_think": 276.97,
+      "commit_dist": {
+        "think_256": 94,
+        "think_512": 1,
+        "think_1024": 5
+      },
+      "false_visible_commit": 0.08
+    },
+    "esc[256-512-1024-2048]": {
+      "accuracy": 0.89,
+      "mean_think": 359.07,
+      "commit_dist": {
+        "think_256": 94,
+        "think_512": 1,
+        "think_1024": 2,
+        "think_2048": 3
+      },
+      "false_visible_commit": 0.08
+    },
+    "esc[256-512-1024-2048] +continue": {
+      "accuracy": 0.89,
+      "mean_think": 298.34,
+      "commit_dist": {
+        "think_256": 94,
+        "think_512": 1,
+        "think_1024": 2,
+        "think_2048": 3
+      },
+      "false_visible_commit": 0.08
+    },
+    "esc[nothink-256-512-1024]": {
+      "accuracy": 0.87,
+      "mean_think": 81.21,
+      "commit_dist": {
+        "no_think": 84,
+        "think_256": 12,
+        "think_512": 1,
+        "think_1024": 3
+      },
+      "false_visible_commit": 0.11
+    },
+    "esc[nothink-256-512-1024] +continue": {
+      "accuracy": 0.87,
+      "mean_think": 56.38,
+      "commit_dist": {
+        "no_think": 84,
+        "think_256": 12,
+        "think_512": 1,
+        "think_1024": 3
+      },
+      "false_visible_commit": 0.11
+    },
+    "esc[nothink-1024] (2-tier)": {
+      "accuracy": 0.88,
+      "mean_think": 113.22,
+      "commit_dist": {
+        "no_think": 84,
+        "think_1024": 16
+      },
+      "false_visible_commit": 0.1
+    },
+    "esc[nothink-1024] (2-tier) +continue": {
+      "accuracy": 0.88,
+      "mean_think": 113.22,
+      "commit_dist": {
+        "no_think": 84,
+        "think_1024": 16
+      },
+      "false_visible_commit": 0.1
+    }
+  },
+  "oracle_ceiling": {
+    "accuracy": 0.93,
+    "mean_think": 131.91
+  }
+}

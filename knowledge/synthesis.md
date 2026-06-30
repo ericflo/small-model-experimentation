@@ -11,6 +11,7 @@ For the machine-checkable claim ledger, use [claims/index.md](claims/index.md).
 3. `Confirmed`: candidate generation is often easier than deployable selection. Evidence-conditioned selection should be treated as a first-class research program.
 4. `Promising`: memory, retrieval, operator banks, and active evidence can add coverage, but only when tied to verification, constraints, or selection. Plain prompt context is not enough.
 5. `Open`: the most valuable next work is portfolio growth: new programs, new substrates, new diagnostics, and new evidence loops that make future experiments less likely to repeat old mistakes.
+6. `Promising`: the corpus's biggest self-imposed blind spot was running the model only in **no-think** mode. Turning native thinking on is a real deployable lever (MBPP greedy +15pp) and, notably, here it moves the *deployable* line more than the oracle ceiling — so the central C2 selection bottleneck does **not** hold for the thinking axis. But thinking is a *budget* with an overthinking cost, and a shuffled-thinking control shows much of the gain is compute/scaffold, not reasoning. See [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md) and claim C9.
 
 ## How To Read Prior Results
 
@@ -42,6 +43,18 @@ Seed evidence includes [qwen_structural_latent_compiler_expansion](../experiment
 ### Infrastructure Is A Research Program
 
 The repository itself needs to improve as experiments accumulate. Program charters, generated indexes, claim ledgers, artifact rules, and validation gates are not bureaucracy; they are what let many future agents build on shared memory instead of restarting.
+
+### Native Thinking Was The Corpus's Blind Spot
+
+[qwen35_4b_thinking_budget_scaling](../experiments/qwen35_4b_thinking_budget_scaling/reports/report.md)
+turned on the native reasoning mode the corpus universally disabled and swept the thinking-token
+budget on MBPP. Native thinking lifts deployable greedy pass@1 0.76→0.91; the deployable gain
+exceeds the oracle-ceiling gain and narrows the selection gap, so the corpus's central C2 pattern
+does not hold for this axis. Two cautions travel with it: accuracy is non-monotonic in the budget
+(overthinking hurts; `unbudgeted` is a poor default), and a shuffled-thinking control reproduces
+much of the gain (so a large share is compute + scaffold + token-presence, not coherent reasoning).
+The strategic implication: any prior result built as a CoT substitute should be re-baselined
+against a fair, budgeted native-thinking baseline before its mechanism is credited.
 
 ## Portfolio Implications
 

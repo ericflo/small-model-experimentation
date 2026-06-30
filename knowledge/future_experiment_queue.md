@@ -4,8 +4,8 @@ Generated from `knowledge/future_experiment_queue.json`. Edit the JSON source, n
 
 This queue is intentionally broader than the imported prototype corpus. It is a launchpad for future experiments, candidate programs, infrastructure work, and falsifiable probes.
 
-- Proposals: 35
-- Existing research programs covered: 11 / 11
+- Proposals: 37
+- Existing research programs covered: 12 / 12
 - Candidate program lines: 5
 
 ## Status Counts
@@ -14,14 +14,14 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 | --- | ---: |
 | `infrastructure` | 6 |
 | `program-seed` | 15 |
-| `ready-for-intake` | 14 |
+| `ready-for-intake` | 16 |
 
 ## Priority Counts
 
 | Priority | Proposals |
 | --- | ---: |
 | `P0` | 12 |
-| `P1` | 16 |
+| `P1` | 18 |
 | `P2` | 7 |
 
 ## Candidate Program Lines
@@ -110,12 +110,13 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 
 ### Process Control And Tool Use
 
-- Proposals: 7
+- Proposals: 8
 
 - `acquisition_policy_comparison_pool` (`P0`, `ready-for-intake`): Which acquisition rule wins when uncertainty, disagreement, information gain, and learned policies share one pool?
 - `stop_more_controller_visible_labels` (`P0`, `ready-for-intake`): Can a controller decide when to gather more evidence using only visible training labels?
 - `noisy_tool_controller_stress` (`P1`, `program-seed`): Do process policies still help when tools are flaky, delayed, or misleading?
 - `latency_ceiling_selector_rerun` (`P1`, `program-seed`): Which selector or tool-control gains survive strict latency, token, and call ceilings?
+- `thinking_budget_controller` (`P1`, `ready-for-intake`): Can a deployable controller allocate the thinking-token budget better than the fixed ~1024 optimum, given thinking has an overthinking cost?
 - `pressure_diagnostic_preflight` (`P2`, `program-seed`): Can cheap token-pressure and execution-pressure probes predict when an expensive run is worth doing?
 - `ui_state_tool_execution_probe` (`P2`, `program-seed`): Can process-control policies transfer from text/table tools to UI-state observations?
 - `committee_verifier_critic_loop` (`P2`, `program-seed`): Can a committee decide when critique or verification is worth another step?
@@ -133,10 +134,11 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 
 ### Interpretability And Diagnostics
 
-- Proposals: 3
+- Proposals: 4
 
 - `supervision_causality_ablation` (`P1`, `ready-for-intake`): Is the lift from state-prefix supervision, final-answer supervision, program-token supervision, or data filtering?
 - `diagnostics_failure_slicing_template` (`P1`, `ready-for-intake`): Which failure slices should every major experiment report before influencing strategy?
+- `thinking_content_vs_compute_control` (`P1`, `ready-for-intake`): How much of the native-thinking gain is coherent reasoning versus compute + scaffold + token-presence?
 - `pressure_diagnostic_preflight` (`P2`, `program-seed`): Can cheap token-pressure and execution-pressure probes predict when an expensive run is worth doing?
 
 ### Reliability And Safety
@@ -166,6 +168,13 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 - `proposal_deduplication_audit` (`P1`, `infrastructure`): Can the repo detect repeated experiment ideas before they become new runs?
 - `static_research_navigation_dashboard` (`P1`, `infrastructure`): Can a static dashboard help humans and agents choose better next experiments than Markdown indexes alone?
 - `evidence_branching_ui_probe` (`P2`, `program-seed`): What interface lets a researcher branch from one result into controls, replications, or new programs fastest?
+
+### Test-Time Reasoning Budget
+
+- Proposals: 2
+
+- `thinking_budget_controller` (`P1`, `ready-for-intake`): Can a deployable controller allocate the thinking-token budget better than the fixed ~1024 optimum, given thinking has an overthinking cost?
+- `thinking_content_vs_compute_control` (`P1`, `ready-for-intake`): How much of the native-thinking gain is coherent reasoning versus compute + scaffold + token-presence?
 
 ### Data Generation And Synthetic Curriculum Design
 
@@ -241,3 +250,5 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 | P2 | program-seed | medium | `compressed_memory_budget_probe` | `on_device_and_latency_constrained_agents`, [Algorithmic Memory And Retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md) | Can memory remain useful when context and storage are severely compressed? | Use memory mode comparison suite once its schema exists. | [source](../knowledge/future_program_seeds.md) |
 | P1 | infrastructure | medium | `static_research_navigation_dashboard` | `human_agent_research_interfaces`, [Collective Experimentation Infrastructure](../research_programs/collective_experimentation_infrastructure/charter.md) | Can a static dashboard help humans and agents choose better next experiments than Markdown indexes alone? | Start with generated data files already produced by make catalog. | [source](../knowledge/future_program_seeds.md) |
 | P2 | program-seed | medium | `evidence_branching_ui_probe` | `human_agent_research_interfaces`, [Collective Experimentation Infrastructure](../research_programs/collective_experimentation_infrastructure/charter.md) | What interface lets a researcher branch from one result into controls, replications, or new programs fastest? | Use high-impact claim evidence as the first anchor set. | [source](../knowledge/future_program_seeds.md) |
+| P1 | ready-for-intake | medium | `thinking_budget_controller` | [Test-Time Reasoning Budget](../research_programs/test_time_reasoning_budget/charter.md), [Process Control And Tool Use](../research_programs/process_control_and_tool_use/charter.md) | Can a deployable controller allocate the thinking-token budget better than the fixed ~1024 optimum, given thinking has an overthinking cost? | Anchor on qwen35_4b_thinking_budget_scaling and the evidence-budget controller experiments. | [source](../research_programs/test_time_reasoning_budget/backlog.md) |
+| P1 | ready-for-intake | small | `thinking_content_vs_compute_control` | [Test-Time Reasoning Budget](../research_programs/test_time_reasoning_budget/charter.md), [Interpretability And Diagnostics](../research_programs/interpretability_and_diagnostics/charter.md) | How much of the native-thinking gain is coherent reasoning versus compute + scaffold + token-presence? | Extend qwen35_4b_thinking_budget_scaling controls with foreign-task thinking. | [source](../research_programs/test_time_reasoning_budget/backlog.md) |

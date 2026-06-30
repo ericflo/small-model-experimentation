@@ -102,3 +102,12 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 - Strong anchors: `knowledge/research_program_index.md`, `knowledge/claims/initial_claims.md`, `docs/quality_gates.md`.
 - Avoid repeating: adding process that slows pilots without improving memory or decision quality.
 - Evidence that advances the program: navigation artifacts reduce duplicate proposals and improve citation of prior evidence.
+
+## Test-Time Reasoning Budget
+
+- Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
+- Current read: the corpus disabled native thinking everywhere; turning it on is a real deployable lever (MBPP greedy +15pp, claim C9), but a budget to control (overthinking hurts) and partly a compute/scaffold effect rather than reasoning.
+- Best next experiment: a deployable STOP/MORE controller over the thinking budget vs the fixed ~1024 optimum at matched mean tokens; and a stronger content control (substitute a different task's thinking).
+- Strong anchors: `qwen35_4b_thinking_budget_scaling`, `qwen_python_shaped_silent_executor`, `qwen35_4b_adaptive_evidence_budget_policy`.
+- Avoid repeating: reporting a thinking-budget win without a shuffled/foreign-thinking control or without the overthinking decline; claiming an exact optimal budget from single-seed gaps.
+- Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.

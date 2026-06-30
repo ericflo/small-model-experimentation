@@ -1,0 +1,26 @@
+Using the latest cached version of the dataset since google-research-datasets/mbpp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sanitized' at /home/ericflo/.cache/huggingface/datasets/google-research-datasets___mbpp/sanitized/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c (last modified on Mon Jun 29 12:07:21 2026).
+[full] 100 MBPP tasks, k=8, conditions=['no_think', 'think_256', 'think_512', 'think_1024', 'think_2048', 'think_unbudgeted']
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<03:44,  1.89it/s]Loading weights:   5%|▌         | 23/426 [00:00<00:08, 47.19it/s]Loading weights:   9%|▉         | 39/426 [00:00<00:05, 71.64it/s]Loading weights:  12%|█▏        | 53/426 [00:00<00:05, 73.91it/s]Loading weights:  16%|█▌        | 67/426 [00:01<00:04, 87.39it/s]Loading weights:  19%|█▉        | 81/426 [00:01<00:03, 96.51it/s]Loading weights:  22%|██▏       | 95/426 [00:01<00:03, 106.75it/s]Loading weights:  25%|██▌       | 108/426 [00:01<00:02, 108.30it/s]Loading weights:  28%|██▊       | 121/426 [00:01<00:02, 113.02it/s]Loading weights:  31%|███▏      | 134/426 [00:01<00:02, 112.46it/s]Loading weights:  35%|███▌      | 151/426 [00:01<00:02, 123.19it/s]Loading weights:  39%|███▉      | 167/426 [00:01<00:01, 130.92it/s]Loading weights:  42%|████▏     | 181/426 [00:01<00:01, 130.56it/s]Loading weights:  46%|████▌     | 196/426 [00:02<00:01, 134.95it/s]Loading weights:  49%|████▉     | 210/426 [00:02<00:01, 113.79it/s]Loading weights:  53%|█████▎    | 225/426 [00:02<00:01, 122.00it/s]Loading weights:  58%|█████▊    | 248/426 [00:02<00:01, 145.52it/s]Loading weights:  62%|██████▏   | 264/426 [00:02<00:01, 147.94it/s]Loading weights:  66%|██████▌   | 280/426 [00:02<00:01, 144.98it/s]Loading weights:  69%|██████▉   | 295/426 [00:02<00:00, 139.74it/s]Loading weights:  73%|███████▎  | 310/426 [00:02<00:00, 122.92it/s]Loading weights:  77%|███████▋  | 329/426 [00:03<00:00, 129.13it/s]Loading weights:  81%|████████  | 344/426 [00:03<00:00, 127.32it/s]Loading weights:  84%|████████▍ | 358/426 [00:03<00:00, 126.87it/s]Loading weights:  88%|████████▊ | 376/426 [00:03<00:00, 140.34it/s]Loading weights:  92%|█████████▏| 391/426 [00:03<00:00, 140.91it/s]Loading weights:  96%|█████████▌| 407/426 [00:03<00:00, 141.16it/s]Loading weights:  99%|█████████▉| 422/426 [00:03<00:00, 108.26it/s]Loading weights: 100%|██████████| 426/426 [00:03<00:00, 111.16it/s]
+model loaded in 6s
+/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+  [gen] no_think           think_tok=0 tot_tok=121 forced=0.00 [672s]
+  [gen] think_256          think_tok=246 tot_tok=337 forced=0.85 [1422s]
+  [gen] think_512          think_tok=408 tot_tok=494 forced=0.42 [1873s]
+  [gen] think_1024         think_tok=530 tot_tok=605 forced=0.13 [4354s]
+  [gen] think_2048         think_tok=629 tot_tok=706 forced=0.07 [9652s]
+  [gen] think_unbudgeted   think_tok=572 tot_tok=811 forced=0.00 [13137s]
+generation done in 31110s; freeing GPU and verifying...
+
+=== THINKING-BUDGET SWEEP SUMMARY ===
+condition          greedy@1  pass@1  pass@8  sel@1  think  total forced
+no_think              0.760   0.776   0.910  0.840      0    121   0.00
+think_256             0.870   0.833   0.930  0.880    246    337   0.85
+think_512             0.870   0.858   0.940  0.890    408    494   0.42
+think_1024            0.910   0.879   0.960  0.910    530    605   0.13
+think_2048            0.860   0.864   0.960  0.920    629    706   0.07
+think_unbudgeted      0.840   0.864   0.950  0.920    572    811   0.00
+
+wrote runs/main/summary.json and runs/main/verified.jsonl

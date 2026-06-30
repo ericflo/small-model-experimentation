@@ -15,6 +15,12 @@ EXPERIMENTS = ROOT / "experiments"
 KNOWLEDGE = ROOT / "knowledge"
 PROGRAMS = ROOT / "research_programs"
 MAX_GITHUB_FILE_BYTES = 100 * 1024 * 1024
+# Working-tree directories that are gitignored / ephemeral and must never be scanned
+# for "tracked" hygiene checks (large files, stray caches): they cannot be committed.
+IGNORED_DIRS = {
+    ".git", ".venv", "venv", "large_artifacts", "site", "node_modules",
+    ".pytest_cache", ".ruff_cache", ".mypy_cache",
+}
 MIN_RESEARCH_PROGRAMS = 8
 MIN_FUTURE_PROPOSALS = 24
 CLAIM_STATUSES = {"Confirmed", "Promising", "Negative", "Open", "Retired"}
@@ -26,6 +32,10 @@ ARTIFACT_MANIFEST_FIELDS = ["schema_version:", "external_artifacts:", "omitted_a
 
 def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
+
+
+def in_ignored_dir(path: Path) -> bool:
+    return any(part in IGNORED_DIRS for part in path.parts)
 
 
 def fail(errors: list[str], message: str) -> None:
@@ -418,14 +428,14 @@ def validate() -> int:
 
     for pattern in ["*:Zone.Identifier", "*.pyc"]:
         for path in ROOT.rglob(pattern):
-            if ".git" not in path.parts:
+            if not in_ignored_dir(path):
                 fail(errors, f"generated/copy artifact should not be tracked: {rel(path)}")
     for path in ROOT.rglob("__pycache__"):
-        if ".git" not in path.parts:
+        if not in_ignored_dir(path):
             fail(errors, f"python cache directory should not be present: {rel(path)}")
 
     for path in ROOT.rglob("*"):
-        if path.is_file() and ".git" not in path.parts and path.stat().st_size > MAX_GITHUB_FILE_BYTES:
+        if path.is_file() and not in_ignored_dir(path) and path.stat().st_size > MAX_GITHUB_FILE_BYTES:
             fail(errors, f"file exceeds GitHub hard limit: {rel(path)}")
 
     if (ROOT / ".git").exists():

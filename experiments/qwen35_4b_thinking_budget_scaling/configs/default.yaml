@@ -1,0 +1,31 @@
+# Thinking-budget scaling sweep configuration.
+model: "Qwen/Qwen3.5-4B"
+dtype: bfloat16
+attn_implementation: sdpa
+
+dataset:
+  name: "google-research-datasets/mbpp"
+  config: sanitized
+  split: test
+  tasks: 100
+  offset: 0
+
+sweep:
+  k: 8                      # sampled candidates per task (oracle pass@k)
+  budgets: [no_think, 256, 512, 1024, 2048, unbudgeted]
+  controls: false          # set true to add shuffle_512, shuffle_2048
+
+decoding:
+  think:   {temperature: 0.6, top_p: 0.95, top_k: 20}   # Qwen official thinking preset
+  nothink: {temperature: 0.7, top_p: 0.8,  top_k: 20}    # Qwen official no-think preset
+  answer_max: 512
+  think_cap: 4096          # cap for unbudgeted thinking
+
+# Think token ids verified empirically for Qwen3.5-4B (differ from Qwen3-4B):
+think_tokens: {open: 248068, close: 248069}
+
+batch_sizes:               # conservative; generate() auto-subdivides on CUDA OOM
+  no_think: 24
+  le_512: 16
+  le_1024: 10
+  gt_1024: 6

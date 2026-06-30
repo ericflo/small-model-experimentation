@@ -2,8 +2,8 @@
 
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
-- Programs: 11
-- Experiments: 155
+- Programs: 12
+- Experiments: 157
 
 ## Structured Execution And Compilers
 
@@ -141,7 +141,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 53
+- Assigned experiments: 54
 
 ### Seed Evidence
 
@@ -179,6 +179,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
@@ -240,7 +241,7 @@ Choose or synthesize the next visible example, probe, test, or trace that collap
 Use libraries of verified algorithms, examples, traces, skills, or failures as reusable memory.
 
 - Charter: [algorithmic_memory_and_retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md)
-- Assigned experiments: 21
+- Assigned experiments: 22
 
 ### Seed Evidence
 
@@ -265,6 +266,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
@@ -302,7 +304,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 43
+- Assigned experiments: 45
 
 ### Seed Evidence
 
@@ -332,6 +334,8 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
 - `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
 - `qwen35_4b_strategy_token_diversity_lora` (track-z): [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md)
+- `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
+- `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
@@ -362,7 +366,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 22
+- Assigned experiments: 24
 
 ### Seed Evidence
 
@@ -385,6 +389,8 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
 - `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
 - `qwen35_4b_strategy_token_diversity_lora` (track-z): [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md)
+- `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
+- `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
@@ -498,7 +504,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 37
+- Assigned experiments: 38
 
 ### Seed Evidence
 
@@ -523,6 +529,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
@@ -552,7 +559,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 42
+- Assigned experiments: 43
 
 ### Seed Evidence
 
@@ -581,6 +588,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
@@ -624,6 +632,18 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 - `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
 - `qwen_compiler_multiseed_reattribution` (track-y): [README](../experiments/qwen_compiler_multiseed_reattribution/README.md)
 - `rule_family_diversity_scaling` (track-z): [README](../experiments/rule_family_diversity_scaling/README.md)
+
+## Test-Time Reasoning Budget
+
+Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
+
+- Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
+- Assigned experiments: 2
+
+### Assigned Experiments
+
+- `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
+- `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 
 ## Program Review Needed
 
