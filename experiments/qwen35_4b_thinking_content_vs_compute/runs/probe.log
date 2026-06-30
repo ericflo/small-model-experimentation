@@ -1,0 +1,13 @@
+  [no_think] best L30 AUC=0.682 CI[0.603,0.765] shuf=0.472 pass=0.76 vis-passer AUC=0.538 (n=642)
+  [foreign] best L32 AUC=0.994 CI[0.985,0.998] shuf=0.470 pass=0.04 vis-passer AUC=nan (n=34)
+  [shuffle] best L20 AUC=0.636 CI[0.581,0.699] shuf=0.524 pass=0.74 vis-passer AUC=0.571 (n=621)
+  [real] best L18 AUC=0.676 CI[0.600,0.765] shuf=0.509 pass=0.86 vis-passer AUC=0.614 (n=716)
+
+| condition | base pass | best layer | probe AUC | 95% CI | shuffled-label | visible-passer AUC (n) |
+| --- | ---: | ---: | ---: | :---: | ---: | ---: |
+| no_think | 0.76 | 30 | 0.682 | [0.60,0.77] | 0.472 | 0.538 (642) |
+| foreign | 0.04 | 32 | 0.994 | [0.98,1.00] | 0.470 | None (34) |
+| shuffle | 0.74 | 20 | 0.636 | [0.58,0.70] | 0.524 | 0.571 (621) |
+| real | 0.86 | 18 | 0.676 | [0.60,0.77] | 0.509 | 0.614 (716) |
+
+wrote runs/probe_results.json, analysis/probe_summary.md, analysis/auc_vs_layer.png

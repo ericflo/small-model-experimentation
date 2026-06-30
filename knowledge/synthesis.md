@@ -11,7 +11,7 @@ For the machine-checkable claim ledger, use [claims/index.md](claims/index.md).
 3. `Confirmed`: candidate generation is often easier than deployable selection. Evidence-conditioned selection should be treated as a first-class research program.
 4. `Promising`: memory, retrieval, operator banks, and active evidence can add coverage, but only when tied to verification, constraints, or selection. Plain prompt context is not enough.
 5. `Open`: the most valuable next work is portfolio growth: new programs, new substrates, new diagnostics, and new evidence loops that make future experiments less likely to repeat old mistakes.
-6. `Promising`: the corpus's biggest self-imposed blind spot was running the model only in **no-think** mode. Turning native thinking on is a real deployable lever (MBPP greedy +15pp) and, notably, here it moves the *deployable* line more than the oracle ceiling — so the central C2 selection bottleneck does **not** hold for the thinking axis. But thinking is a *budget* with an overthinking cost, and a shuffled-thinking control shows much of the gain is compute/scaffold, not reasoning. See [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md) and claim C9.
+6. `Promising`: the corpus's biggest self-imposed blind spot was running the model only in **no-think** mode. Turning native thinking on is a real deployable lever (MBPP greedy +15pp) and, notably, here it moves the *deployable* line more than the oracle ceiling — so the central C2 selection bottleneck does **not** hold for the thinking axis. But thinking is a *budget* with an overthinking cost; and a foreign-task-thinking control shows the model uses thinking as *content* (irrelevant thinking collapses accuracy to ~4%), so at the efficient budget the gain is genuine coherent reasoning — though it washes out at high budgets and is not clearly reflected internally. See [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md) and claim C9.
 
 ## How To Read Prior Results
 
@@ -53,14 +53,16 @@ exceeds the oracle-ceiling gain and narrows the selection gap, so the corpus's c
 does not hold for this axis. Two cautions travel with it: accuracy is non-monotonic in the budget
 (overthinking hurts; `unbudgeted` is a poor default), and a shuffled-thinking control reproduces
 much of the gain (so a large share is compute + scaffold + token-presence, not coherent reasoning).
-A follow-up linear-probe study
-([qwen35_4b_thinking_separability_probe](../experiments/qwen35_4b_thinking_separability_probe/reports/report.md))
-confirms "thinking isn't (mostly) reasoning" at the **representational** level: correctness is
-moderately decodable from the answer-token activation, thinking raises that decodability, but
-shuffled thinking does so equally — so behaviorally and internally, the active ingredient is
-compute/scaffold/presence. The strategic implication: any prior result built as a CoT substitute
-should be re-baselined against a fair, budgeted native-thinking baseline before its mechanism is
-credited — and thinking gains should not be credited as "reasoning" without a content control.
+A **foreign-task-thinking control**
+([qwen35_4b_thinking_content_vs_compute](../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md))
+then **corrected** that caveat: the model *uses thinking as content* — splicing a different task's
+thinking collapses accuracy to ~4% (it solves the wrong problem), scrambled relevant thinking ≈ no
+thinking, and coherent thinking adds +12pp. So at the **efficient budget the behavioral gain is
+genuine coherent reasoning** over relevant content; the "mostly compute/scaffold" read was a
+greedy-metric artifact that holds mainly at high budgets (overthinking) and at the representational
+level (separability differences are small/noisy). Strategic implications: re-baseline CoT-substitute
+results against a fair, budgeted native-thinking baseline; and judge "is it reasoning?" with explicit
+content controls (a single behavioral or greedy number can mislead in either direction).
 
 ## Portfolio Implications
 

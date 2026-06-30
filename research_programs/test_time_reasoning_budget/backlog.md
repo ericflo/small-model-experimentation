@@ -7,19 +7,22 @@
 - `qwen35_4b_thinking_budget_controller`: fixed-rule visible-test escalation controller — an
   efficiency win (Pareto-dominates fixed budgets except the peak), bounded by C2 false-passes.
 - `qwen35_4b_thinking_separability_probe`: per-layer probes on answer-token activations. Correctness
-  is moderately decodable (AUC 0.64–0.76); thinking raises decodability at every layer; but shuffled
-  thinking matches/exceeds real thinking — "thinking isn't reasoning" now holds at the representational
-  level too (converges with C9). Weak probe signal on C2 false-passes only under thinking.
+  is moderately decodable (AUC 0.64–0.76); thinking raises decodability; shuffled ≈ real in
+  decodability (representational side is noisy across experiments). Weak probe signal on C2 false-passes.
+- `qwen35_4b_thinking_content_vs_compute`: foreign-task-thinking ladder. The model uses thinking as
+  CONTENT (foreign collapses to 0.04 — solves the wrong problem); at the efficient budget the gain is
+  coherent reasoning (real 0.86 > shuffle ≈ no_think 0.74). **Corrected** the earlier "mostly
+  compute/scaffold" claim (greedy-metric artifact; held mainly at high budgets / representationally).
 
 ## Next Experiments
 
+- **Filler/pause-token arm**: B contentless tokens (no semantics) to isolate PURE compute — foreign
+  adds *misleading* content (which the model follows), not contentless compute, so it can't separate
+  compute from content. Completes the {compute, presence, relevance, order} attribution.
+- **Foreign/shuffle/real ladder at a high budget** (1024/2048) to confirm the coherence advantage
+  shrinks (overthinking) — i.e. that the "compute/scaffold" reading is the high-budget regime.
 - **Learned thinking-budget controller with richer visible signals** (token entropy/logprob,
-  self-consistency across 2 cheap samples): can it close the deployable→oracle gap (0.89→0.93) the
-  single visible test leaves? (Queue: `thinking_budget_controller`.)
-- **Foreign-task-thinking control** (`thinking_content_vs_compute_control`): substitute a *different*
-  task's thinking (remove token-presence, not just order) — does it drop accuracy AND separability
-  below shuffled? If even foreign thinking holds up, the active ingredient is pure compute. (The
-  separability probe already showed shuffled ≈ real; this isolates presence vs compute.)
+  self-consistency): can it close the deployable→oracle gap (0.89→0.93)? (Queue: `thinking_budget_controller`.)
 - Thinking-budget sweep on the **silent_executor substrate** (modular-program execution):
   its CoT collapsed to 0% at len-24 at a fixed 768-token budget — does a larger thinking
   budget rescue length generalization? Direct pressure-test of the silent-compute thesis.

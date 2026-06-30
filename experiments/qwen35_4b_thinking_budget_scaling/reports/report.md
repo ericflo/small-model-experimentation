@@ -171,3 +171,15 @@ HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
 ```
 
 Env: torch 2.12.1+cu130, transformers 5.12.1 (native `qwen3_5`), single RTX 4090 (24 GB), WSL.
+
+## Refinement (added after the foreign-thinking control)
+
+This report's "much of the gain is scaffold + compute, not coherent reasoning" (Finding 3 /
+shuffle control) was later found **overstated**. A foreign-task-thinking ladder
+([`qwen35_4b_thinking_content_vs_compute`](../../qwen35_4b_thinking_content_vs_compute/reports/report.md))
+showed the model *uses thinking as content* (splicing a different task's thinking collapses accuracy
+to ~4% — it solves the wrong problem), that scrambled thinking ≈ no-think on **sampled** full-pass
+(the "shuffle recovers ~⅓" here was a **greedy-metric** artifact), and that coherent thinking adds
++12pp at the 512 budget. So at the efficient budget the behavioral gain **is** coherent reasoning;
+the compute/scaffold reading holds mainly at high budgets (the 2048 shuffle ≈ real overthinking
+result above) and at the representational level. See claim C9 for the corrected statement.

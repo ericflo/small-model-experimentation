@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 158
+- Experiments: 159
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 114
+- Assigned experiments: 115
 
 ### Seed Evidence
 
@@ -63,6 +63,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_thinking_content_vs_compute` (new): [README](../experiments/qwen35_4b_thinking_content_vs_compute/README.md)
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
 - `qwen35_4b_transform_abi_compiler_pilot` (track-z): [README](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md)
@@ -642,12 +643,13 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 3
+- Assigned experiments: 4
 
 ### Assigned Experiments
 
 - `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
+- `qwen35_4b_thinking_content_vs_compute` (new): [README](../experiments/qwen35_4b_thinking_content_vs_compute/README.md)
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 
 ## Program Review Needed

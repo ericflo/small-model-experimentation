@@ -1,0 +1,16 @@
+Using the latest cached version of the dataset since google-research-datasets/mbpp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sanitized' at /home/ericflo/.cache/huggingface/datasets/google-research-datasets___mbpp/sanitized/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c (last modified on Mon Jun 29 12:07:21 2026).
+100 tasks, k=8, budget=512
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:05,  6.45it/s]Loading weights:  12%|█▏        | 53/426 [00:00<00:01, 247.69it/s]Loading weights:  25%|██▍       | 106/426 [00:00<00:00, 355.27it/s]Loading weights:  36%|███▌      | 154/426 [00:00<00:00, 399.90it/s]Loading weights:  47%|████▋     | 201/426 [00:00<00:00, 422.26it/s]Loading weights:  59%|█████▉    | 252/426 [00:00<00:00, 442.74it/s]Loading weights:  70%|██████▉   | 298/426 [00:00<00:00, 442.77it/s]Loading weights:  81%|████████  | 345/426 [00:00<00:00, 441.24it/s]Loading weights:  92%|█████████▏| 390/426 [00:00<00:00, 440.88it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 397.98it/s]
+model loaded in 4s, 32 layers
+/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+  [real] generated, mean_think=412 [1241s]
+  [shuffle] answers regenerated [470s]
+  [foreign] answers regenerated [475s]
+  [no_think] generated [421s]
+  [no_think] acts (800, 33, 2560) [17s]
+  [foreign] acts (800, 33, 2560) [41s]
+  [shuffle] acts (800, 33, 2560) [41s]
+  [real] acts (800, 33, 2560) [41s]
+done in 2748s

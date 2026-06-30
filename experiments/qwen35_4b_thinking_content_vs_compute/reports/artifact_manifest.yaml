@@ -1,0 +1,30 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_thinking_content_vs_compute"
+external_artifacts:
+  - name: "answer-token activations"
+    storage: "large_artifacts/qwen35_4b_thinking_content_vs_compute/acts_<cond>.npy (~0.5 GB, float16 [N,33,2560])"
+    required_for: "fitting the per-layer separability probes"
+    regenerate: "../../.venv/bin/python scripts/run.py --tasks 100 --k 8 --budget 512"
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "generation + activation extraction"
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "data/records.jsonl, data/labels.jsonl, data/tasks.json"
+    reason: "small per-sample records + execution labels + task metadata"
+  - path: "runs/probe_results.json, analysis/decomposition.md, analysis/probe_summary.md, analysis/auc_vs_layer.png"
+    reason: "small probe outputs, ladder decomposition, and figure"
+reproducibility:
+  smoke_command: "../../.venv/bin/python scripts/run.py --smoke"
+  full_command: >-
+    HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    ../../.venv/bin/python scripts/run.py --tasks 100 --k 8 --budget 512
+  verify_command: "../../.venv/bin/python scripts/verify.py"
+  probe_command: "../../.venv/bin/python analysis/probe.py"
+  decompose_command: "../../.venv/bin/python analysis/decompose.py"
+  required_external_artifacts: ["answer-token activations", "Qwen3.5-4B weights"]
+notes: >-
+  Ladder no_think -> foreign -> shuffle -> real shares one thinking-token multiset (real generated
+  once; shuffle permutes, foreign uses a different task's thinking) so only relevance/order vary.
+  Probes are a non-deployable decodability diagnostic.

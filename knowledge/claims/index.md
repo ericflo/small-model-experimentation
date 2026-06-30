@@ -202,25 +202,26 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 - Treating process as complete when it no longer improves research memory.
 
-## C9: Native thinking is an unused deployable lever — a budget to control, not free reasoning
+## C9: Native thinking is an unused deployable lever; at the efficient budget its accuracy gain is coherent reasoning
 
 - Status: `Promising`
 - Programs: `test_time_reasoning_budget`, `process_control_and_tool_use`
-- Summary: Enabling Qwen3.5-4B's native thinking (disabled across the corpus: enable_thinking=False x48, True x0) raises deployable MBPP greedy pass@1 0.76->0.91 (+15pp), moving the deployable line MORE than the oracle ceiling (pass@8 0.91->0.96) and closing the selection gap — so C2 (coverage >> deployable selection) does not hold for the thinking axis here. But accuracy is non-monotonic in the thinking budget (optimum ~512-1024, then decline; unbudgeted worse than a cap), and a shuffled-thinking control reproduces much of the gain, so a large share is compute+scaffold+token-presence rather than coherent reasoning. A deployable visible-test budget controller is an EFFICIENCY win (Pareto-dominates fixed budgets except the peak: ~0.88 acc at 113 vs fixed 246-404 mean thinking tokens) but not an ACCURACY win (cannot beat the best fixed budget 0.91); its gap to the oracle (0.93) is bounded by visible-test false-passes ~8-11% (C2). A linear-probe study confirms this at the REPRESENTATIONAL level: correctness is moderately decodable from the answer-token activation (AUC 0.64-0.76), thinking raises decodability at every layer, but shuffled thinking matches/exceeds real thinking — so the thinking benefit is compute/scaffold/presence, not coherent reasoning, behaviorally AND internally. The probe gives a weak verifier-free signal on C2 false-passes only under thinking.
-- Implication: Re-baseline corpus results that used structured/'silent' machinery as a CoT substitute against a fair, budgeted native-thinking baseline. Treat the thinking budget as a controllable axis with a real overthinking cost; do not deploy unbudgeted thinking.
+- Summary: Enabling Qwen3.5-4B's native thinking (disabled corpus-wide) raises deployable MBPP greedy pass@1 +15pp (0.76->0.91); accuracy is non-monotonic (optimum ~512-1024, then decline; unbudgeted worse than a cap). A visible-test budget controller is an efficiency (not accuracy) win, bounded by C2 false-passes. ON THE NATURE OF THE GAIN (corrected by the foreign-task-thinking ladder): the model USES thinking as content -- splicing a different task's thinking collapses accuracy to ~4% because the model follows it to the wrong problem; relevant-but-scrambled thinking ~= no thinking; coherent thinking adds +12pp. So at the efficient budget the behavioral gain IS coherent reasoning over relevant content. The earlier 'mostly compute/scaffold, not reasoning' read was overstated -- a greedy-metric artifact (greedy shuffle recovered ~1/3, sampled ~0) that holds mainly at HIGH budgets (2048 shuffle~=real, overthinking) and at the REPRESENTATIONAL level (separability probe: thinking raises decodability but shuffle>=real, and content-vs-compute decodability differences are small/noisy).
+- Implication: Re-baseline CoT-substitute results against a fair, budgeted native-thinking baseline. Credit thinking as 'reasoning' only with content controls (foreign + filler); note the effect is budget-dependent (washes out when overthinking) and behavioral-vs-representational dissociated.
 
 ### Evidence
 
 - [`qwen35_4b_thinking_budget_scaling`](../../experiments/qwen35_4b_thinking_budget_scaling/reports/report.md)
 - [`qwen35_4b_thinking_budget_controller`](../../experiments/qwen35_4b_thinking_budget_controller/reports/report.md)
 - [`qwen35_4b_thinking_separability_probe`](../../experiments/qwen35_4b_thinking_separability_probe/reports/report.md)
+- [`qwen35_4b_thinking_content_vs_compute`](../../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md)
 - [`qwen_python_shaped_silent_executor`](../../experiments/qwen_python_shaped_silent_executor/reports/qwen_python_shaped_silent_executor_report.md)
 
 ### Next Tests
 
-- Foreign-task-thinking arm (remove token-presence, not just order) — does separability drop below shuffled?
-- Combine the internal probe with the visible test as a controller signal vs the 0.91/0.93 wall.
-- Replicate on a contamination-controlled / harder substrate where the no-think baseline is weaker.
+- Filler/pause-token arm (contentless) to isolate pure compute from the content effects (foreign = misleading content, not contentless).
+- Repeat the foreign/shuffle/real ladder at a high budget (1024/2048) to confirm the coherence advantage shrinks.
+- Combine the internal probe with the visible test as a controller signal; contamination-controlled / harder substrate.
 
 ### Avoid
 

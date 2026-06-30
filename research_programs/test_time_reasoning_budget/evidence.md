@@ -24,6 +24,8 @@
   (offline, reuses the sweep's greedy answers) — the deployable controller.
 - [`qwen35_4b_thinking_separability_probe`](../../experiments/qwen35_4b_thinking_separability_probe/reports/report.md)
   (per-layer linear probes on answer-token activations) — the interpretability/internal-signal angle.
+- [`qwen35_4b_thinking_content_vs_compute`](../../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md)
+  (foreign-task-thinking ladder) — the decisive content control.
 
 ## Confirmed Claims
 
@@ -49,13 +51,21 @@
   task's thinking) before claiming the gain is "reasoning."
 - The exact optimum (1024) and the never-solved-bucket effect (3/9 tasks) rest on small n /
   single-seed; treat as suggestive, not pinned.
-- **"Thinking isn't reasoning" now holds at the representational level too.** Linear probes on the
-  answer-token activation show correctness is moderately decodable (AUC 0.64–0.76), thinking raises
-  decodability at every layer (no_think ~0.64 → thinking ~0.71–0.76), BUT shuffled thinking matches/
-  exceeds real thinking — falsifying the hypothesis that reasoning content would raise separability.
-  So the thinking benefit is compute/scaffold/presence at both the behavioral (C9) and internal
-  levels. Weak deployable spinoff: the probe partially flags C2 false-passes (visible-passer AUC
+- **The model uses thinking as CONTENT (separability probe + foreign control).** Linear probes show
+  correctness is moderately decodable from the answer-token activation (AUC 0.64–0.76). The
+  foreign-task-thinking ladder is decisive: splicing a *different* task's thinking collapses accuracy to
+  ~4% (the model follows it to the wrong problem) — so thinking is not a content-free compute/scaffold
+  crutch. Weak deployable spinoff: the probe partially flags C2 false-passes (visible-passer AUC
   ~0.60–0.68) only under thinking.
+
+## Correction
+
+- **"Thinking is mostly compute/scaffold, not reasoning" was overstated.** The foreign ladder shows
+  the efficient-budget behavioral gain IS coherent reasoning over relevant content: foreign (irrelevant)
+  collapses to 0.04, shuffle (relevant, scrambled) ≈ no_think (0.74 vs 0.76 on sampled full-pass), real
+  (coherent) 0.86. The "mostly compute" read was a greedy-metric artifact (greedy shuffle recovered ~⅓,
+  sampled ~0), held mainly at high budgets (2048 shuffle ≈ real, overthinking), and at the
+  representational level (separability differences small/noisy). See claim C9 (corrected).
 
 ## Current Read
 
@@ -63,9 +73,13 @@ Turning thinking on is a real, cheap deployable lever the corpus left unused —
 *budget* to be controlled, and the controller experiment shows the budget knob is mostly an
 **efficiency** lever (near-iso-accuracy at much lower cost), not a new accuracy frontier: a
 near-optimal fixed budget already sits close to the oracle, and the deployable controller is
-capped by C2 false-passes. Combined with the sweep's shuffle-control caveat (much of the gain is
-compute/scaffold, not reasoning), the honest read is: *use thinking, cap it, and a cheap controller
-buys back most of the cost — but do not over-credit it as reasoning or as an accuracy unlock.*
-Priority follow-ups: a learned controller with richer visible signals (entropy, self-consistency)
-to chase the oracle gap; the stronger content control; and replication on harder substrates where
-the optimum may move and the C2 false-pass rate may grow.
+capped by C2 false-passes. The foreign control then refined the *nature* of the gain: at the
+**efficient budget** the behavioral gain **is coherent reasoning over relevant content** (the model
+uses thinking as content — irrelevant thinking is catastrophic), though that advantage washes out at
+high budgets (overthinking) and is not clearly reflected in internal correctness-decodability. Honest
+read: *use thinking, cap it, and a cheap controller buys back most of the cost; at the efficient budget
+the gain is genuine reasoning (don't dismiss it as mere compute) — but it is budget-dependent and
+behavioral ≠ representational.* Priority follow-ups: the **filler/pause-token arm** (isolate pure
+compute, since foreign adds misleading content not contentless compute); the foreign/shuffle/real
+ladder at a high budget; a learned controller with richer visible signals; harder/contamination-
+controlled substrates.
