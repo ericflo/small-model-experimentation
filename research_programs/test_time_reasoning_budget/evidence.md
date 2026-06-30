@@ -22,6 +22,8 @@
   (n=100 MBPP test, k=8; numbers independently recomputed from raw data and audited) — the sweep.
 - [`qwen35_4b_thinking_budget_controller`](../../experiments/qwen35_4b_thinking_budget_controller/reports/report.md)
   (offline, reuses the sweep's greedy answers) — the deployable controller.
+- [`qwen35_4b_thinking_separability_probe`](../../experiments/qwen35_4b_thinking_separability_probe/reports/report.md)
+  (per-layer linear probes on answer-token activations) — the interpretability/internal-signal angle.
 
 ## Confirmed Claims
 
@@ -47,6 +49,13 @@
   task's thinking) before claiming the gain is "reasoning."
 - The exact optimum (1024) and the never-solved-bucket effect (3/9 tasks) rest on small n /
   single-seed; treat as suggestive, not pinned.
+- **"Thinking isn't reasoning" now holds at the representational level too.** Linear probes on the
+  answer-token activation show correctness is moderately decodable (AUC 0.64–0.76), thinking raises
+  decodability at every layer (no_think ~0.64 → thinking ~0.71–0.76), BUT shuffled thinking matches/
+  exceeds real thinking — falsifying the hypothesis that reasoning content would raise separability.
+  So the thinking benefit is compute/scaffold/presence at both the behavioral (C9) and internal
+  levels. Weak deployable spinoff: the probe partially flags C2 false-passes (visible-passer AUC
+  ~0.60–0.68) only under thinking.
 
 ## Current Read
 

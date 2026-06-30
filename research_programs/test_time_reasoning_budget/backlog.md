@@ -6,14 +6,20 @@
   shuffled-thinking control. (+15pp greedy, overthinking optimum ~1024, much of the gain is compute/scaffold.)
 - `qwen35_4b_thinking_budget_controller`: fixed-rule visible-test escalation controller — an
   efficiency win (Pareto-dominates fixed budgets except the peak), bounded by C2 false-passes.
+- `qwen35_4b_thinking_separability_probe`: per-layer probes on answer-token activations. Correctness
+  is moderately decodable (AUC 0.64–0.76); thinking raises decodability at every layer; but shuffled
+  thinking matches/exceeds real thinking — "thinking isn't reasoning" now holds at the representational
+  level too (converges with C9). Weak probe signal on C2 false-passes only under thinking.
 
 ## Next Experiments
 
 - **Learned thinking-budget controller with richer visible signals** (token entropy/logprob,
   self-consistency across 2 cheap samples): can it close the deployable→oracle gap (0.89→0.93) the
   single visible test leaves? (Queue: `thinking_budget_controller`.)
-- **Stronger content control** (`thinking_content_vs_compute_control`): substitute a *different*
-  task's thinking (remove token-presence, not just order) to settle reasoning vs compute+scaffold.
+- **Foreign-task-thinking control** (`thinking_content_vs_compute_control`): substitute a *different*
+  task's thinking (remove token-presence, not just order) — does it drop accuracy AND separability
+  below shuffled? If even foreign thinking holds up, the active ingredient is pure compute. (The
+  separability probe already showed shuffled ≈ real; this isolates presence vs compute.)
 - Thinking-budget sweep on the **silent_executor substrate** (modular-program execution):
   its CoT collapsed to 0% at len-24 at a fixed 768-token budget — does a larger thinking
   budget rescue length generalization? Direct pressure-test of the silent-compute thesis.

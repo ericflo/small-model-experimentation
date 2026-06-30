@@ -1,0 +1,32 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_thinking_separability_probe"
+external_artifacts:
+  - name: "answer-token activations"
+    storage: "large_artifacts/qwen35_4b_thinking_separability_probe/acts_<cond>.npy (~0.7 GB total, float16 [N, 33, 2560])"
+    required_for: "fitting the per-layer probes"
+    checksum: ""
+    regenerate: "../../.venv/bin/python scripts/run.py --tasks 100 --k 8"
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "generation + activation extraction"
+    regenerate: "huggingface_hub.snapshot_download('Qwen/Qwen3.5-4B')"
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "data/records.jsonl, data/labels.jsonl, data/tasks.json"
+    reason: "small per-sample records + execution labels + task metadata"
+  - path: "runs/probe_results.json, analysis/probe_summary.md, analysis/auc_vs_layer.png"
+    reason: "small probe outputs and figure"
+reproducibility:
+  smoke_command: "../../.venv/bin/python scripts/run.py --smoke"
+  full_command: >-
+    HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    ../../.venv/bin/python scripts/run.py --tasks 100 --k 8
+  verify_command: "../../.venv/bin/python scripts/verify_probe.py"
+  probe_command: "../../.venv/bin/python analysis/probe.py"
+  required_external_artifacts: ["answer-token activations", "Qwen3.5-4B weights"]
+notes: >-
+  Probes are trained on hidden-test pass labels and are a non-deployable DECODABILITY diagnostic;
+  the visible-passer false-pass AUC is the deployable selection angle (does the probe catch C2
+  false-passes the visible test misses). Activations use a clean right-padded forward pass so the
+  linear-attention recurrence is not corrupted by left padding.

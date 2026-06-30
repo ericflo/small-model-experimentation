@@ -1,0 +1,13 @@
+Using the latest cached version of the dataset since google-research-datasets/mbpp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sanitized' at /home/ericflo/.cache/huggingface/datasets/google-research-datasets___mbpp/sanitized/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c (last modified on Mon Jun 29 12:07:21 2026).
+100 tasks, k=8, conditions=['no_think', 'think_512', 'shuffle_512', 'think_1024', 'shuffle_1024']
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:04,  6.59it/s]Loading weights:  12%|█▏        | 50/426 [00:00<00:01, 239.31it/s]Loading weights:  23%|██▎       | 98/426 [00:00<00:00, 334.78it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 387.98it/s]Loading weights:  47%|████▋     | 200/426 [00:00<00:00, 433.86it/s]Loading weights:  58%|█████▊    | 248/426 [00:00<00:00, 448.42it/s]Loading weights:  69%|██████▉   | 295/426 [00:00<00:00, 444.27it/s]Loading weights:  81%|████████  | 345/426 [00:00<00:00, 456.67it/s]Loading weights:  92%|█████████▏| 393/426 [00:00<00:00, 458.11it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 403.32it/s]
+model loaded in 3s, 32 layers
+  [no_think] (800, 33, 2560) acts, mean_think=0 [434s]
+/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+  [think_512] (800, 33, 2560) acts, mean_think=411 [1280s]
+  [shuffle_512] (800, 33, 2560) acts, mean_think=413 [1189s]
+  [think_1024] (800, 33, 2560) acts, mean_think=537 [1960s]
+  [shuffle_1024] (800, 33, 2560) acts, mean_think=528 [1677s]
+done in 6541s; acts in /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_thinking_separability_probe

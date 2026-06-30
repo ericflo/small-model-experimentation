@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 157
+- Experiments: 158
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 113
+- Assigned experiments: 114
 
 ### Seed Evidence
 
@@ -63,6 +63,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
+- `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
 - `qwen35_4b_transform_abi_compiler_pilot` (track-z): [README](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md)
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
@@ -141,7 +142,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 54
+- Assigned experiments: 55
 
 ### Seed Evidence
 
@@ -180,6 +181,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
+- `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
@@ -504,7 +506,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 38
+- Assigned experiments: 39
 
 ### Seed Evidence
 
@@ -530,6 +532,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
+- `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
@@ -559,7 +562,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 43
+- Assigned experiments: 44
 
 ### Seed Evidence
 
@@ -589,6 +592,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
+- `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
@@ -638,12 +642,13 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 2
+- Assigned experiments: 3
 
 ### Assigned Experiments
 
 - `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
+- `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 
 ## Program Review Needed
 

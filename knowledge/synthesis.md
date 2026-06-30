@@ -53,8 +53,14 @@ exceeds the oracle-ceiling gain and narrows the selection gap, so the corpus's c
 does not hold for this axis. Two cautions travel with it: accuracy is non-monotonic in the budget
 (overthinking hurts; `unbudgeted` is a poor default), and a shuffled-thinking control reproduces
 much of the gain (so a large share is compute + scaffold + token-presence, not coherent reasoning).
-The strategic implication: any prior result built as a CoT substitute should be re-baselined
-against a fair, budgeted native-thinking baseline before its mechanism is credited.
+A follow-up linear-probe study
+([qwen35_4b_thinking_separability_probe](../experiments/qwen35_4b_thinking_separability_probe/reports/report.md))
+confirms "thinking isn't (mostly) reasoning" at the **representational** level: correctness is
+moderately decodable from the answer-token activation, thinking raises that decodability, but
+shuffled thinking does so equally — so behaviorally and internally, the active ingredient is
+compute/scaffold/presence. The strategic implication: any prior result built as a CoT substitute
+should be re-baselined against a fair, budgeted native-thinking baseline before its mechanism is
+credited — and thinking gains should not be credited as "reasoning" without a content control.
 
 ## Portfolio Implications
 

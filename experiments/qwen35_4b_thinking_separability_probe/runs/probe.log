@@ -1,0 +1,17 @@
+  [no_think] best L24 AUC=0.642 CI[0.549,0.738] shuf=0.514 pass=0.77 vis-passer AUC=0.518 (n=647)
+  [think_512] best L11 AUC=0.708 CI[0.649,0.773] shuf=0.482 pass=0.85 vis-passer AUC=0.684 (n=722)
+  [shuffle_512] best L6 AUC=0.733 CI[0.674,0.813] shuf=0.511 pass=0.79 vis-passer AUC=0.626 (n=661)
+  [think_1024] best L10 AUC=0.720 CI[0.614,0.807] shuf=0.456 pass=0.85 vis-passer AUC=0.598 (n=716)
+  [shuffle_1024] best L16 AUC=0.755 CI[0.684,0.810] shuf=0.520 pass=0.83 vis-passer AUC=0.669 (n=696)
+/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_thinking_separability_probe/analysis/probe.py:123: UserWarning: linestyle is redundantly defined by the 'linestyle' keyword argument and the fmt string "-" (-> linestyle='-'). The keyword argument will take precedence.
+  ax.plot(range(len(results[c]["layer_auc"])), results[c]["layer_auc"], "-",
+
+| condition | base pass | best layer | probe AUC | 95% CI | shuffled-label | visible-passer AUC (n) |
+| --- | ---: | ---: | ---: | :---: | ---: | ---: |
+| no_think | 0.77 | 24 | 0.642 | [0.55,0.74] | 0.514 | 0.518 (647) |
+| think_512 | 0.85 | 11 | 0.708 | [0.65,0.77] | 0.482 | 0.684 (722) |
+| shuffle_512 | 0.79 | 6 | 0.733 | [0.67,0.81] | 0.511 | 0.626 (661) |
+| think_1024 | 0.85 | 10 | 0.720 | [0.61,0.81] | 0.456 | 0.598 (716) |
+| shuffle_1024 | 0.83 | 16 | 0.755 | [0.68,0.81] | 0.520 | 0.669 (696) |
+
+wrote runs/probe_results.json, analysis/probe_summary.md, analysis/auc_vs_layer.png

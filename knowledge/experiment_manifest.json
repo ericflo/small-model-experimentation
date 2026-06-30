@@ -2644,6 +2644,49 @@
   {
     "file_counts": {
       ".json": 2,
+      ".jsonl": 2,
+      ".log": 2,
+      ".md": 5,
+      ".png": 1,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "generated_on": "2026-06-30",
+    "id": "qwen35_4b_thinking_separability_probe",
+    "path": "experiments/qwen35_4b_thinking_separability_probe",
+    "primary_readme": "experiments/qwen35_4b_thinking_separability_probe/README.md",
+    "primary_report": "experiments/qwen35_4b_thinking_separability_probe/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "the model's internal state predict its own correctness (attacking C2 from inside the model)? (the shuffle control showed much of the gain is compute/scaffold, and said it could not isolate the coherent-reasoning contribution); [`qwen35_4b_thinking_budget_controller`](../qwen35_4b_thinking_budget_controller/reports/report.md) (bounded by visible-test false-passes \u2014 C2); the corpus's synthetic hidden-state probes (`qwen_readable_candidate_verifier`, `qwen_candidate_conditioned_trace_verifier`, `qwen_prefix_state_process_verifier`).",
+    "tags": [
+      "abi",
+      "latent-state",
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B Thinking Separability Probe",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 20,
+    "total_size_bytes": 2202874
+  },
+  {
+    "file_counts": {
+      ".json": 2,
       ".jsonl": 5,
       ".log": 2,
       ".md": 3,
