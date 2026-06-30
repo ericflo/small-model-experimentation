@@ -37,5 +37,12 @@ Probe.py fix logged: the copied analysis/probe.py initially pointed ACTS at the 
 separability experiment's large_artifacts dir (loaded wrong no_think, crashed on acts_foreign);
 fixed to this experiment's dir.
 
-Remaining arm: filler/pause-token (contentless) to isolate pure compute (foreign adds misleading
-content, not contentless compute).
+## Filler arm (added)
+
+Added the filler/pause-token arm via `scripts/add_filler.py` (reuses the existing data: contentless
+"." tokens matched per-example to real thinking length, answer-only regeneration). Complete behavioral
+attribution (no_think 0.749, filler 0.744, shuffle 0.739, real 0.861, foreign 0.040): pure compute
+(filler-no_think) -0.005; relevance (shuffle-filler) -0.005; coherent content (real-shuffle) +0.122;
+misleading content (foreign) -0.709. So pure compute buys NOTHING — the efficient-budget gain is 100%
+coherent reasoning content, conclusively correcting the earlier "mostly compute/scaffold" claim.
+Separability remained noisy (overlapping CIs; foreign AUC artifact).

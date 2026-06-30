@@ -1,13 +1,15 @@
-  [no_think] best L30 AUC=0.682 CI[0.603,0.765] shuf=0.472 pass=0.76 vis-passer AUC=0.538 (n=642)
-  [foreign] best L32 AUC=0.994 CI[0.985,0.998] shuf=0.470 pass=0.04 vis-passer AUC=nan (n=34)
-  [shuffle] best L20 AUC=0.636 CI[0.581,0.699] shuf=0.524 pass=0.74 vis-passer AUC=0.571 (n=621)
-  [real] best L18 AUC=0.676 CI[0.600,0.765] shuf=0.509 pass=0.86 vis-passer AUC=0.614 (n=716)
+  [no_think] best L32 AUC=0.646 CI[0.573,0.718] shuf=0.482 pass=0.75 vis-passer AUC=0.494 (n=645)
+  [filler] best L20 AUC=0.703 CI[0.626,0.778] shuf=0.502 pass=0.74 vis-passer AUC=0.599 (n=631)
+  [foreign] best L30 AUC=0.987 CI[0.977,0.994] shuf=0.443 pass=0.04 vis-passer AUC=0.032 (n=33)
+  [shuffle] best L15 AUC=0.645 CI[0.593,0.704] shuf=0.555 pass=0.74 vis-passer AUC=0.655 (n=625)
+  [real] best L29 AUC=0.722 CI[0.645,0.801] shuf=0.549 pass=0.86 vis-passer AUC=0.622 (n=722)
 
 | condition | base pass | best layer | probe AUC | 95% CI | shuffled-label | visible-passer AUC (n) |
 | --- | ---: | ---: | ---: | :---: | ---: | ---: |
-| no_think | 0.76 | 30 | 0.682 | [0.60,0.77] | 0.472 | 0.538 (642) |
-| foreign | 0.04 | 32 | 0.994 | [0.98,1.00] | 0.470 | None (34) |
-| shuffle | 0.74 | 20 | 0.636 | [0.58,0.70] | 0.524 | 0.571 (621) |
-| real | 0.86 | 18 | 0.676 | [0.60,0.77] | 0.509 | 0.614 (716) |
+| no_think | 0.75 | 32 | 0.646 | [0.57,0.72] | 0.482 | 0.494 (645) |
+| filler | 0.74 | 20 | 0.703 | [0.63,0.78] | 0.502 | 0.599 (631) |
+| foreign | 0.04 | 30 | 0.987 | [0.98,0.99] | 0.443 | 0.032 (33) |
+| shuffle | 0.74 | 15 | 0.645 | [0.59,0.70] | 0.555 | 0.655 (625) |
+| real | 0.86 | 29 | 0.722 | [0.65,0.80] | 0.549 | 0.622 (722) |
 
 wrote runs/probe_results.json, analysis/probe_summary.md, analysis/auc_vs_layer.png

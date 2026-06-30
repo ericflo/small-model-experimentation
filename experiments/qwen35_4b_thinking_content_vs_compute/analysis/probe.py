@@ -49,7 +49,7 @@ def boot_auc_ci(y, proba, groups, n=100):
 
 def main():
     by_cond = load()
-    conds = [c for c in ["no_think", "foreign", "shuffle", "real"] if c in by_cond]
+    conds = [c for c in ["no_think", "filler", "foreign", "shuffle", "real"] if c in by_cond]
     results = {}
     for cond in conds:
         recs = sorted(by_cond[cond], key=lambda r: r["row"])
@@ -114,7 +114,8 @@ def main():
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    colors = {"no_think": "#264653", "foreign": "#8d99ae", "shuffle": "#f4a261", "real": "#2a9d8f"}
+    colors = {"no_think": "#264653", "filler": "#a8dadc", "foreign": "#8d99ae",
+              "shuffle": "#f4a261", "real": "#2a9d8f"}
     fig, ax = plt.subplots(figsize=(8, 5))
     for c in conds:
         if c not in results:

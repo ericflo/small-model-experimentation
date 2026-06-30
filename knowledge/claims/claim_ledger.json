@@ -264,7 +264,7 @@
         "test_time_reasoning_budget",
         "process_control_and_tool_use"
       ],
-      "summary": "Enabling Qwen3.5-4B's native thinking (disabled corpus-wide) raises deployable MBPP greedy pass@1 +15pp (0.76->0.91); accuracy is non-monotonic (optimum ~512-1024, then decline; unbudgeted worse than a cap). A visible-test budget controller is an efficiency (not accuracy) win, bounded by C2 false-passes. ON THE NATURE OF THE GAIN (corrected by the foreign-task-thinking ladder): the model USES thinking as content -- splicing a different task's thinking collapses accuracy to ~4% because the model follows it to the wrong problem; relevant-but-scrambled thinking ~= no thinking; coherent thinking adds +12pp. So at the efficient budget the behavioral gain IS coherent reasoning over relevant content. The earlier 'mostly compute/scaffold, not reasoning' read was overstated -- a greedy-metric artifact (greedy shuffle recovered ~1/3, sampled ~0) that holds mainly at HIGH budgets (2048 shuffle~=real, overthinking) and at the REPRESENTATIONAL level (separability probe: thinking raises decodability but shuffle>=real, and content-vs-compute decodability differences are small/noisy).",
+      "summary": "Enabling Qwen3.5-4B's native thinking (disabled corpus-wide) raises deployable MBPP greedy pass@1 +15pp (0.76->0.91); accuracy is non-monotonic (optimum ~512-1024, then decline; unbudgeted worse than a cap). A visible-test budget controller is an efficiency (not accuracy) win, bounded by C2 false-passes. ON THE NATURE OF THE GAIN (corrected by the foreign-task-thinking ladder): the model USES thinking as content -- splicing a different task's thinking collapses accuracy to ~4% because the model follows it to the wrong problem; relevant-but-scrambled thinking ~= no thinking; coherent thinking adds +12pp. So at the efficient budget the behavioral gain IS coherent reasoning over relevant content. The earlier 'mostly compute/scaffold, not reasoning' read was overstated -- a greedy-metric artifact (greedy shuffle recovered ~1/3, sampled ~0) that holds mainly at HIGH budgets (2048 shuffle~=real, overthinking) and at the REPRESENTATIONAL level (separability probe: thinking raises decodability but shuffle>=real, and content-vs-compute decodability differences are small/noisy). The decomposition is now COMPLETE (filler/pause-token arm added): at the efficient budget pure compute (contentless '.' filler) = no_think (0.744 vs 0.749), scrambled relevant tokens = no_think (shuffle 0.739), and coherent content is the entire +0.122 (real 0.861); misleading content (foreign) -0.71. So pure compute buys ~0 and the efficient-budget gain is 100% coherent reasoning content -- the 'mostly compute/scaffold' reading was wrong for the efficient budget and survives only at high budgets / representationally.",
       "evidence": [
         {
           "kind": "experiment",
@@ -289,9 +289,9 @@
       ],
       "implication": "Re-baseline CoT-substitute results against a fair, budgeted native-thinking baseline. Credit thinking as 'reasoning' only with content controls (foreign + filler); note the effect is budget-dependent (washes out when overthinking) and behavioral-vs-representational dissociated.",
       "next_tests": [
-        "Filler/pause-token arm (contentless) to isolate pure compute from the content effects (foreign = misleading content, not contentless).",
-        "Repeat the foreign/shuffle/real ladder at a high budget (1024/2048) to confirm the coherence advantage shrinks.",
-        "Combine the internal probe with the visible test as a controller signal; contamination-controlled / harder substrate."
+        "High-budget (1024/2048) ladder to confirm the coherence advantage shrinks under overthinking.",
+        "Contamination-controlled / harder substrate where the no-think baseline is weaker (more headroom).",
+        "A learned controller using internal/uncertainty signals vs the visible-test C2 wall."
       ],
       "avoid": [
         "Claiming thinking gains are 'reasoning' without a content control that removes token-presence.",

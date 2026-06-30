@@ -11,7 +11,7 @@ from collections import defaultdict
 from pathlib import Path
 
 EXP = Path(__file__).resolve().parents[1]
-ORDER = ["no_think", "foreign", "shuffle", "real"]
+ORDER = ["no_think", "filler", "foreign", "shuffle", "real"]
 
 
 def behavioral():
@@ -29,11 +29,13 @@ def main():
     if p.exists():
         pr = json.loads(p.read_text())
 
-    rows = ["| rung | full-pass | visible-pass | best-layer probe AUC | what it adds vs the rung below |",
+    rows = ["| rung | full-pass | visible-pass | best-layer probe AUC | description |",
             "| --- | ---: | ---: | ---: | --- |"]
-    adds = {"no_think": "(baseline)", "foreign": "compute + scaffold (irrelevant thinking)",
-            "shuffle": "token-presence / relevance (relevant tokens, scrambled)",
-            "real": "coherent order"}
+    adds = {"no_think": "no thinking (baseline)",
+            "filler": "pure compute + scaffold (contentless '.' tokens)",
+            "foreign": "off-ladder: a DIFFERENT task's thinking (misleading content)",
+            "shuffle": "relevant tokens, scrambled order",
+            "real": "relevant tokens, coherent order"}
     for c in ORDER:
         if c not in beh:
             continue
@@ -42,15 +44,16 @@ def main():
         rows.append(f"| {c} | {fp:.3f} | {vp:.3f} | {auc if auc is not None else '-'} | {adds[c]} |")
     table = "\n".join(rows)
 
-    # decomposition deltas (behavioral full-pass)
+    # additive ladder no_think -> filler -> shuffle -> real (foreign is the misleading-content outlier)
     def d(a, b):
         return beh[a][0] - beh[b][0] if a in beh and b in beh else float("nan")
     decomp = [
-        "\n## Decomposition of the behavioral thinking gain (full-pass)",
-        f"- compute + scaffold (foreign - no_think): {d('foreign','no_think'):+.3f}",
-        f"- token-presence / relevance (shuffle - foreign): {d('shuffle','foreign'):+.3f}",
+        "\n## Decomposition (additive ladder no_think -> filler -> shuffle -> real; full-pass)",
+        f"- pure compute + scaffold (filler - no_think): {d('filler','no_think'):+.3f}",
+        f"- token-presence / relevance (shuffle - filler): {d('shuffle','filler'):+.3f}",
         f"- coherent order (real - shuffle): {d('real','shuffle'):+.3f}",
         f"- total (real - no_think): {d('real','no_think'):+.3f}",
+        f"- [off-ladder] misleading content (foreign - no_think): {d('foreign','no_think'):+.3f}",
     ]
     out = table + "\n" + "\n".join(decomp) + "\n"
     (EXP / "analysis" / "decomposition.md").write_text(out)

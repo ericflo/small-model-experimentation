@@ -60,12 +60,14 @@
 
 ## Correction
 
-- **"Thinking is mostly compute/scaffold, not reasoning" was overstated.** The foreign ladder shows
-  the efficient-budget behavioral gain IS coherent reasoning over relevant content: foreign (irrelevant)
-  collapses to 0.04, shuffle (relevant, scrambled) ≈ no_think (0.74 vs 0.76 on sampled full-pass), real
-  (coherent) 0.86. The "mostly compute" read was a greedy-metric artifact (greedy shuffle recovered ~⅓,
-  sampled ~0), held mainly at high budgets (2048 shuffle ≈ real, overthinking), and at the
-  representational level (separability differences small/noisy). See claim C9 (corrected).
+- **"Thinking is mostly compute/scaffold, not reasoning" was wrong for the efficient budget.** The full
+  content ladder (pure-compute filler arm included) gives, at budget 512: no_think 0.749, **filler 0.744**,
+  shuffle 0.739, **real 0.861**, foreign 0.040. Attribution: pure compute (filler − no_think) **−0.005**;
+  relevance (shuffle − filler) **−0.005**; coherent content (real − shuffle) **+0.122**; misleading content
+  (foreign) **−0.709**. So pure compute buys ~0 and the efficient-budget gain is **100% coherent reasoning
+  content**, which the model uses (foreign → wrong problem). The "mostly compute" read was a greedy-metric
+  artifact; it survives only at high budgets (2048 shuffle ≈ real, overthinking) and in the noisy
+  representational slice. See claim C9 (corrected).
 
 ## Current Read
 

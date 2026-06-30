@@ -56,24 +56,27 @@ HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
 
 Full results in [reports/report.md](reports/report.md). Behavioral ladder (full-pass, n=100):
 
-| no_think | foreign | shuffle | real |
-| ---: | ---: | ---: | ---: |
-| 0.764 | **0.043** | 0.739 | **0.859** |
+| no_think | filler | shuffle | real | foreign |
+| ---: | ---: | ---: | ---: | ---: |
+| 0.749 | 0.744 | 0.739 | **0.861** | 0.040 |
 
-- **Foreign thinking collapses accuracy to 4%** — the model *follows* the foreign reasoning to the
-  wrong problem (verified: a string task + a matrix-sort thought emits `sort_matrix`). So the model
-  uses thinking as **content**, not a content-free compute/format crutch.
-- **Shuffle ≈ no_think** (0.739 vs 0.764): scrambled relevant thinking ≈ no thinking (sampled full-pass).
-- **Real beats shuffle by +12pp**: at the efficient 512 budget the gain **is coherent reasoning**.
-- Separability is noisy here (no_think 0.682, shuffle 0.636, real 0.676 — overlapping CIs; foreign
-  0.994 is an imbalance artifact), so only the behavioral ladder is robust.
+Complete attribution (additive ladder no_think → filler → shuffle → real):
+- **pure compute + scaffold** (filler − no_think): **−0.005** — contentless `.` tokens buy nothing.
+- **token-presence / relevance** (shuffle − filler): **−0.005** — scrambled relevant tokens buy nothing.
+- **coherent content** (real − shuffle): **+0.122** — the entire gain.
+- **misleading content** (foreign − no_think): **−0.709** — the model follows foreign thinking to the
+  wrong problem (verified: a string task + a matrix-sort thought emits `sort_matrix`).
+
+So at the efficient 512 budget on MBPP, **100% of the behavioral thinking gain is coherent reasoning
+content** — not compute, not scaffold, not token-presence. Separability is noisy (overlapping CIs; the
+foreign AUC is an imbalance artifact), so only the behavioral ladder is robust.
 
 ## Interpretation
 
-This **corrects** the earlier "much of the gain is compute/scaffold, not reasoning" (a greedy-metric
-artifact that held mainly at high budgets / in the noisy decodability slice). At the efficient budget,
-the behavioral gain is genuine coherent reasoning over relevant content. Remaining piece: a
-filler/pause-token arm to isolate pure compute (foreign adds *misleading* content, not contentless compute).
+This **conclusively corrects** the earlier "much of the gain is compute/scaffold, not reasoning": pure
+compute (filler) contributes ~0. At the efficient budget the gain is entirely coherent reasoning the
+model uses. The "compute/scaffold" reading survives only at high budgets (overthinking) and in the noisy
+decodability slice. Next: a high-budget ladder to confirm the coherence advantage shrinks under overthinking.
 
 ## Artifacts
 

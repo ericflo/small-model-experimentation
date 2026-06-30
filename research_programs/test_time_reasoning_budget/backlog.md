@@ -9,18 +9,16 @@
 - `qwen35_4b_thinking_separability_probe`: per-layer probes on answer-token activations. Correctness
   is moderately decodable (AUC 0.64–0.76); thinking raises decodability; shuffled ≈ real in
   decodability (representational side is noisy across experiments). Weak probe signal on C2 false-passes.
-- `qwen35_4b_thinking_content_vs_compute`: foreign-task-thinking ladder. The model uses thinking as
-  CONTENT (foreign collapses to 0.04 — solves the wrong problem); at the efficient budget the gain is
-  coherent reasoning (real 0.86 > shuffle ≈ no_think 0.74). **Corrected** the earlier "mostly
-  compute/scaffold" claim (greedy-metric artifact; held mainly at high budgets / representationally).
+- `qwen35_4b_thinking_content_vs_compute`: full content ladder (no_think / **filler** / shuffle / real /
+  foreign). Complete attribution at budget 512: pure compute (filler) ≈ 0, token-presence (shuffle) ≈ 0,
+  coherent content = the entire +0.122, misleading content (foreign) −0.71 (the model follows it to the
+  wrong problem). **Conclusively corrected** the earlier "mostly compute/scaffold" claim — pure compute
+  buys nothing; the efficient-budget gain is 100% coherent reasoning content.
 
 ## Next Experiments
 
-- **Filler/pause-token arm**: B contentless tokens (no semantics) to isolate PURE compute — foreign
-  adds *misleading* content (which the model follows), not contentless compute, so it can't separate
-  compute from content. Completes the {compute, presence, relevance, order} attribution.
-- **Foreign/shuffle/real ladder at a high budget** (1024/2048) to confirm the coherence advantage
-  shrinks (overthinking) — i.e. that the "compute/scaffold" reading is the high-budget regime.
+- **High-budget (1024/2048) content ladder** to confirm the coherence advantage shrinks (overthinking) —
+  i.e. that the residual "compute/scaffold" reading is purely the high-budget regime.
 - **Learned thinking-budget controller with richer visible signals** (token entropy/logprob,
   self-consistency): can it close the deployable→oracle gap (0.89→0.93)? (Queue: `thinking_budget_controller`.)
 - Thinking-budget sweep on the **silent_executor substrate** (modular-program execution):
