@@ -28,16 +28,18 @@ class Cond:
     shuffle: bool = False
 
     def batch(self) -> int:
-        # generate() auto-subdivides on CUDA OOM and we use expandable_segments,
-        # so we can run larger batches for throughput and fall back safely.
+        # Batch sizes validated by benchmark on the RTX 4090 *with the qwen3_5 fast path*
+        # (causal-conv1d + flash-linear-attention): throughput scales ~linearly with batch
+        # and VRAM stays <16GB. generate() auto-subdivides on CUDA OOM as a safety net.
+        # Measured: bs128@512 ~1460 tok/s (15.7GB); bs48@2048 ~670 tok/s (13.7GB).
         if not self.think:
-            return 48
+            return 96
         b = self.budget or 4096
         if b <= 512:
-            return 32
+            return 64
         if b <= 1024:
-            return 16
-        return 10
+            return 48
+        return 40
 
 
 def build_conditions(budgets: list[str], controls: bool, only_controls: bool = False) -> list[Cond]:

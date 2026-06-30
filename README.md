@@ -16,6 +16,7 @@ The imported prototype corpus is seed evidence and working examples. It is not t
 - [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md) for the full experiment inventory.
 - The generated research atlas is published by GitHub Pages from `.github/workflows/pages.yml`.
 - [docs/agent_handbook.md](docs/agent_handbook.md) for future agents.
+- [docs/compute_environment.md](docs/compute_environment.md) for the GPU/env setup and how to keep inference fast (fast path + batch sizing).
 - [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md) before adding a new experiment.
 - [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md) before adding a new line of inquiry.
 - [docs/artifact_policy.md](docs/artifact_policy.md) before adding large outputs, adapters, or external artifacts.
