@@ -1,0 +1,43 @@
+{
+  "n_tasks": 100,
+  "k": 8,
+  "pass@1": 0.771,
+  "oracle": 0.89,
+  "selectors": {
+    "pass@1 (random single)": {
+      "accuracy": 0.771,
+      "est_tokens_per_task": 120
+    },
+    "visible-only (first visible-pass)": {
+      "accuracy": 0.85,
+      "est_tokens_per_task": 960
+    },
+    "no-think verifier (max P_A)": {
+      "accuracy": 0.8,
+      "est_tokens_per_task": 960
+    },
+    "thinking verifier (max P_A)": {
+      "accuracy": 0.86,
+      "est_tokens_per_task": 4960
+    },
+    "visible + no-think verifier": {
+      "accuracy": 0.87,
+      "est_tokens_per_task": 960
+    },
+    "visible + thinking verifier": {
+      "accuracy": 0.87,
+      "est_tokens_per_task": 4960
+    },
+    "ORACLE pass@k (non-deployable)": {
+      "accuracy": 0.89,
+      "est_tokens_per_task": 960
+    }
+  },
+  "c2_false_pass": {
+    "visible_pass_rate": 0.818,
+    "false_pass_rate_among_visible": 0.066,
+    "n_false_passes": 43,
+    "among_visible_passers_verifier_auroc_think": 0.758,
+    "among_visible_passers_verifier_auroc_nothink": 0.701
+  }
+}

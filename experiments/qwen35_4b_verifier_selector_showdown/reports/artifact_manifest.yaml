@@ -1,0 +1,18 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_verifier_selector_showdown"
+external_artifacts: []
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "data/pool.jsonl, data/gv_records.jsonl, data/gv_labels.jsonl, data/tasks.json"
+    reason: "candidate pool (reused from qwen35_4b_generator_verifier_gap) + visible-test labels"
+  - path: "runs/summary.json, analysis/selectors.png"
+    reason: "metrics + figure"
+reproducibility:
+  smoke_command: "../../.venv/bin/python scripts/build_pool.py"
+  full_command: "../../.venv/bin/python scripts/build_pool.py && ../../.venv/bin/python analysis/analyze.py"
+  required_external_artifacts: []
+notes: >-
+  Offline (no GPU generation): reuses the generator-verifier candidate pool + P(A) verifier signals; only
+  the visible-test label is newly computed. Token costs are stated estimates, not measured per-item; the
+  accuracy ranking is exact.

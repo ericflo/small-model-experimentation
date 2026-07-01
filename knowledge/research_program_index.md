@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 161
+- Experiments: 162
 
 ## Structured Execution And Compilers
 
@@ -144,7 +144,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 56
+- Assigned experiments: 57
 
 ### Seed Evidence
 
@@ -189,6 +189,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
 - `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
 - `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
 - `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)
@@ -510,7 +511,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 40
+- Assigned experiments: 41
 
 ### Seed Evidence
 
@@ -541,6 +542,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
 - `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
 - `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
 - `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)
@@ -567,7 +569,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 45
+- Assigned experiments: 46
 
 ### Seed Evidence
 
@@ -602,6 +604,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
 - `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
 - `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
 - `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)

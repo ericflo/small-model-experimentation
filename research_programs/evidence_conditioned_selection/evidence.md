@@ -16,10 +16,17 @@
   (no-think 24%). Foreign-solution reject rate 1.00. So the model CAN tell its own good solutions from bad —
   once it thinks — and selection has real headroom.
 
+- [qwen35_4b_verifier_selector_showdown](../../experiments/qwen35_4b_verifier_selector_showdown/reports/report.md)
+  (matched-cost follow-up): on one k=8 pool, the thinking-verifier is **Pareto-dominated** when a cheap visible
+  test exists — standalone 0.860 ≈ visible-only 0.850 at ~5× cost; the deployable sweet spot is **visible +
+  free no-think verifier (0.870**, 83% of the pass@1→oracle gap). Expensive thinking-verification only earns
+  its cost in verifier-only settings. So the C2 wall is fixable with *cheap* plumbing.
+
 ## Current Read
 
-The biggest strategic gap is selection under deployable evidence — and C10 says that gap is *fixable*: the
-model's own thinking-verifier is a strong, deployable, zero-training selection signal. Future selection work
+The biggest strategic gap is selection under deployable evidence — and C10 says that gap is *fixable* with
+cheap plumbing: a visible/execution signal + a free no-think self-verifier (visible+no-think-verifier 0.870);
+thinking-verification is reserved for verifier-only settings. Future selection work
 should (a) benchmark against the thinking-verifier before building trained selectors, (b) treat native
 thinking as a verification lever (not only generation), and (c) still report oracle coverage only as a
 diagnostic with the deployable decision rule as the main object. Top follow-up: wire the thinking-verifier

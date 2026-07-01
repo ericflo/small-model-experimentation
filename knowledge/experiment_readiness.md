@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 161
-- Anchor-ready: 146
-- Human-authored READMEs: 148
+- Experiments: 162
+- Anchor-ready: 147
+- Human-authored READMEs: 149
 - Generated README stubs: 13
-- Primary reports: 161
-- Experiment logs: 65
-- Smoke commands: 30
-- Artifact manifests: 133
+- Primary reports: 162
+- Experiment logs: 66
+- Smoke commands: 31
+- Artifact manifests: 134
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 50 |
+| `documented-scripts` | 51 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -115,6 +115,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_verified_algorithm_retrieval_adaptation`](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/reports/final_report.md) | no | `documented-scripts` | no | large-artifact, run-data | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_verified_edit_closure`](../experiments/qwen35_4b_verified_edit_closure/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_verified_edit_closure/reports/qwen35_4b_verified_edit_closure_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
 | no | [`qwen35_4b_verifier_guided_self_improvement`](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, reliability_and_safety | `generated-stub` | [report](../experiments/qwen35_4b_verifier_guided_self_improvement/reports/qwen35_4b_verifier_guided_self_improvement_report.md) | no | `scripts-undocumented` | yes | run-data | replace-generated-readme, add-experiment-log, document-run-path |
+| yes | [`qwen35_4b_verifier_selector_showdown`](../experiments/qwen35_4b_verifier_selector_showdown/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_verifier_selector_showdown/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen_action_conditioned_vm_echo_policy_iteration`](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md) | posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/reports/qwen_action_conditioned_vm_echo_policy_iteration_report.md) | yes | `source-or-analysis` | no | checkpoint, dataset | document-run-path, add-smoke-command |
 | yes | [`qwen_active_crystallizer_public_gate`](../experiments/qwen_active_crystallizer_public_gate/README.md) | active_evidence_acquisition, benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen_active_crystallizer_public_gate/reports/qwen_active_crystallizer_public_gate_report.md) | yes | `source-or-analysis` | no |  | document-run-path, add-smoke-command, add-artifact-manifest |
 | yes | [`qwen_active_example_acquisition`](../experiments/qwen_active_example_acquisition/README.md) | active_evidence_acquisition, benchmark_generalization | `human-authored` | [report](../experiments/qwen_active_example_acquisition/reports/qwen_active_example_acquisition_report.md) | yes | `source-or-analysis` | no |  | document-run-path, add-smoke-command, add-artifact-manifest |
