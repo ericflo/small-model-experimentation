@@ -1,0 +1,37 @@
+=== COLLECT 01:41:03 ===
+train pool 450 (depths [1, 2, 3]), eval 75 (depths [1, 2, 3, 4, 5])
+collected 189 verified (prompt->code) pairs from 146/450 solved tasks
+  depth 1: 104/150 tasks solved
+  depth 2: 29/150 tasks solved
+  depth 3: 13/150 tasks solved
+wrote data/train.jsonl, data/eval_tasks.jsonl
+train pairs: 189
+=== TRAIN 03:01:06 ===
+training on 189 verified (prompt->code) pairs
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+{'loss': '0.1974', 'grad_norm': '1.93', 'learning_rate': '0.0001991', 'epoch': '0.2116'}
+{'loss': '0.1814', 'grad_norm': '1.387', 'learning_rate': '0.0001888', 'epoch': '0.4233'}
+{'loss': '0.1371', 'grad_norm': '2.354', 'learning_rate': '0.0001683', 'epoch': '0.6349'}
+{'loss': '0.1512', 'grad_norm': '0.6076', 'learning_rate': '0.0001398', 'epoch': '0.8466'}
+{'loss': '0.1196', 'grad_norm': '0.6456', 'learning_rate': '0.0001068', 'epoch': '1.042'}
+{'loss': '0.06936', 'grad_norm': '0.9188', 'learning_rate': '7.302e-05', 'epoch': '1.254'}
+{'loss': '0.06153', 'grad_norm': '0.4868', 'learning_rate': '4.233e-05', 'epoch': '1.466'}
+{'loss': '0.0715', 'grad_norm': '0.4133', 'learning_rate': '1.83e-05', 'epoch': '1.677'}
+{'loss': '0.06516', 'grad_norm': '0.6899', 'learning_rate': '3.708e-06', 'epoch': '1.889'}
+{'train_runtime': '291.2', 'train_samples_per_second': '1.298', 'train_steps_per_second': '0.165', 'train_loss': '0.1134', 'epoch': '2'}
+saved adapter to /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_neurosymbolic_repl_substrate/runs/lora_adapter
+=== EVAL FROZEN 03:06:08 ===
+eval frozen: 75 tasks, k=5, think=False
+frozen  (n=75)
+  nothink_greedy@1   0.000   d1:0.00  d2:0.00  d3:0.00  d4:0.00  d5:0.00
+  think_greedy@1     0.147   d1:0.60  d2:0.00  d3:0.13  d4:0.00  d5:0.00
+  think_pass@5       0.187   d1:0.80  d2:0.00  d3:0.13  d4:0.00  d5:0.00
+wrote runs/eval_frozen.json
+=== EVAL TRAINED 03:23:12 ===
+eval trained(runs/lora_adapter): 75 tasks, k=5, think=False
+trained(runs/lora_adapter)  (n=75)
+  nothink_greedy@1   0.013   d1:0.07  d2:0.00  d3:0.00  d4:0.00  d5:0.00
+  think_greedy@1     0.213   d1:0.87  d2:0.13  d3:0.07  d4:0.00  d5:0.00
+  think_pass@5       0.253   d1:0.87  d2:0.20  d3:0.20  d4:0.00  d5:0.00
+wrote runs/eval_trained.json
+=== M3_DONE 03:47:17 ===

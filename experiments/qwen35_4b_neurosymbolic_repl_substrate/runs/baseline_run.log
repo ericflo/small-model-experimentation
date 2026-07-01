@@ -1,0 +1,19 @@
+90 tasks over depths [1, 2, 3, 4, 5, 6] (n=15/depth)
+reference oracle solvable: 90/90
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:12,  5.89it/s]Loading weights:  11%|█         | 45/426 [00:00<00:01, 202.12it/s]Loading weights:  22%|██▏       | 94/426 [00:00<00:01, 306.02it/s]Loading weights:  34%|███▎      | 143/426 [00:00<00:00, 364.51it/s]Loading weights:  44%|████▎     | 186/426 [00:00<00:00, 382.73it/s]Loading weights:  55%|█████▌    | 235/426 [00:00<00:00, 413.76it/s]Loading weights:  66%|██████▋   | 283/426 [00:00<00:00, 432.74it/s]Loading weights:  78%|███████▊  | 331/426 [00:00<00:00, 433.47it/s]Loading weights:  90%|████████▉ | 383/426 [00:01<00:00, 457.97it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 381.59it/s]
+model loaded 4s
+greedy@1 done [430s]
+/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+pass@6 done [1582s]
+
+=== FROZEN 4B FAILURE PROFILE (thinking on) ===
+depth    n  greedy@1   pass@6  oracle
+    1   15     0.667    0.933   1.000
+    2   15     0.133    0.333   1.000
+    3   15     0.133    0.133   1.000
+    4   15     0.000    0.067   1.000
+    5   15     0.000    0.000   1.000
+    6   15     0.000    0.000   1.000
+OVERALL greedy@1 0.156  pass@6 0.244  coverage->deployment gap +0.089
+wrote runs/baseline.json, analysis/failure_profile.png

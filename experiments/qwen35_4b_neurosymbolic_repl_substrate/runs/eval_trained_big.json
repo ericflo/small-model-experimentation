@@ -1,0 +1,29 @@
+{
+  "tag": "trained(runs/lora_adapter)",
+  "n_tasks": 135,
+  "k": 5,
+  "nothink_greedy@1": {
+    "overall": 0.0,
+    "by_depth": {
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0
+    }
+  },
+  "think_greedy@1": {
+    "overall": 0.378,
+    "by_depth": {
+      "1": 0.689,
+      "2": 0.333,
+      "3": 0.111
+    }
+  },
+  "think_pass@5": {
+    "overall": 0.437,
+    "by_depth": {
+      "1": 0.844,
+      "2": 0.356,
+      "3": 0.111
+    }
+  }
+}

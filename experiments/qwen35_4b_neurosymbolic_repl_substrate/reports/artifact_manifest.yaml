@@ -1,0 +1,29 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_neurosymbolic_repl_substrate"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "generation, REPL loop, QLoRA training"
+omitted_artifacts:
+  - name: "runs/lora_adapter (QLoRA adapter, ~170MB)"
+    reason: "regenerable training artifact; kept out of git"
+in_repo_artifacts:
+  - path: "data/tasks.jsonl, data/repl_tasks.jsonl, data/eval_tasks.jsonl"
+    reason: "procedurally-generated task sets (contamination-free; regenerable by seed)"
+  - path: "data/baseline_records.jsonl, data/repl_records.jsonl, data/train.jsonl"
+    reason: "per-task results + REPL trajectories + verified (prompt->code) training pairs"
+  - path: "runs/baseline.json, runs/repl_summary.json, runs/eval_frozen.json, runs/eval_trained.json"
+    reason: "M1/M2/M3 metrics"
+  - path: "analysis/failure_profile.png, analysis/repl_vs_samplemore.png"
+    reason: "figures"
+reproducibility:
+  env_note: "requires peft (0.19.1) + bitsandbytes (0.49.2) in the .venv"
+  m1_command: "../../.venv/bin/python scripts/run_baseline.py --per-depth 15 --depths 1 2 3 4 5 6 --k 6"
+  m2_command: "../../.venv/bin/python scripts/run_repl.py --per-depth 20 --depths 1 2 3 4 --turns 5 --budget 512 --seed 101"
+  m3_command: "bash scripts/m3_chain.sh"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: >-
+  Contamination-free substrate: tasks are random primitive compositions graded by held-out execution, so no
+  memorization confound. QLoRA trainer uses AutoModelForCausalLM (matches the eval runtime gen_lib) so the
+  adapter's module paths are frozen<->trained compatible.

@@ -7,6 +7,21 @@
 - [qwen35_4b_live_tool_dagger](../../experiments/qwen35_4b_live_tool_dagger/reports/report.md)
 - [qwen35_4b_oracle_process_grpo](../../experiments/qwen35_4b_oracle_process_grpo/reports/qwen35_4b_oracle_process_grpo_report.md)
 
+## Key Result
+
+- [qwen35_4b_neurosymbolic_repl_substrate](../../experiments/qwen35_4b_neurosymbolic_repl_substrate/reports/report.md)
+  (claim C11): the corpus's **first self-training WIN**. QLoRA-SFT on the 4B's OWN 189 execution-verified
+  solutions (no teacher) improved held-out fresh single-shot on a contamination-free substrate: think-greedy@1
+  0.224→0.319 (+0.095, ~2.2 SE, N=210), pass@5 up (NO diversity collapse), two seeds. This **works where the
+  corpus's MBPP self-improvement regressed** (`qwen35_4b_verifier_guided_self_improvement`) — implicating
+  contamination/substrate, not the method. (Test-time execution-feedback self-correction, by contrast, did
+  NOT beat matched-compute sampling — same experiment, M2.)
+
 ## Current Read
 
-Adaptation is useful only when the target behavior is well specified and controls expose whether training changed the intended mechanism.
+Adaptation is useful only when the target behavior is well specified and controls expose whether training
+changed the intended mechanism — AND on a substrate where a gain is even measurable. C11 shows honest
+self-training (own verified solutions, no teacher) banks capability into single-shot on a CONTAMINATION-FREE
+substrate, reversing the corpus's earlier "self-training loses to sample-more" reads that were likely
+confounded by contaminated/saturated benchmarks. Priority: scale the self-training loop (expert iteration),
+test cross-substrate transfer, and re-run the failed MBPP self-improvement with contamination controls.

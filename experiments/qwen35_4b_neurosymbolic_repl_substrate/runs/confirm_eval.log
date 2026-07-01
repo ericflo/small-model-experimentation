@@ -1,0 +1,15 @@
+=== CONFIRM EVAL FROZEN 03:48:33 ===
+eval frozen: 135 tasks, k=5, think=False
+frozen  (n=135)
+  nothink_greedy@1   0.000   d1:0.00  d2:0.00  d3:0.00
+  think_greedy@1     0.267   d1:0.60  d2:0.13  d3:0.07
+  think_pass@5       0.378   d1:0.76  d2:0.31  d3:0.07
+wrote runs/eval_frozen_big.json
+=== CONFIRM EVAL TRAINED 04:18:39 ===
+eval trained(runs/lora_adapter): 135 tasks, k=5, think=False
+trained(runs/lora_adapter)  (n=135)
+  nothink_greedy@1   0.000   d1:0.00  d2:0.00  d3:0.00
+  think_greedy@1     0.378   d1:0.69  d2:0.33  d3:0.11
+  think_pass@5       0.437   d1:0.84  d2:0.36  d3:0.11
+wrote runs/eval_trained_big.json
+=== CONFIRM_DONE 04:58:50 ===

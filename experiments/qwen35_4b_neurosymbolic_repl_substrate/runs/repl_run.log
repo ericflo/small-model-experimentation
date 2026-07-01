@@ -1,0 +1,32 @@
+80 tasks over depths [1, 2, 3, 4]; turns/samples=5
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:09,  6.12it/s]Loading weights:   8%|▊         | 36/426 [00:00<00:02, 164.62it/s]Loading weights:  18%|█▊        | 77/426 [00:00<00:01, 256.85it/s]Loading weights:  28%|██▊       | 119/426 [00:00<00:01, 305.06it/s]Loading weights:  40%|███▉      | 169/426 [00:00<00:00, 368.79it/s]Loading weights:  51%|█████     | 217/426 [00:00<00:00, 400.89it/s]Loading weights:  62%|██████▏   | 266/426 [00:00<00:00, 426.09it/s]Loading weights:  73%|███████▎  | 311/426 [00:00<00:00, 432.92it/s]Loading weights:  85%|████████▌ | 363/426 [00:00<00:00, 455.40it/s]Loading weights:  97%|█████████▋| 413/426 [00:01<00:00, 462.87it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 379.83it/s]
+model loaded 4s
+  greedy1 done [254s]
+  [repl_real] (sampled turns)
+    real turn 1: 64 active
+    real turn 2: 58 active
+    real turn 3: 56 active
+    real turn 4: 55 active
+    real turn 5: 55 active
+  repl_real done [1200s]
+  [repl_nofb] (paired: reuses real's turn-0)
+    nofb turn 2: 60 active
+    nofb turn 3: 58 active
+    nofb turn 4: 56 active
+    nofb turn 5: 56 active
+  [sample_more]
+/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+  all arms done [2652s]
+
+=== M2: REPL vs SAMPLE-MORE (hidden acc, thinking on) ===
+  greedy1      acc 0.263  mean_gens 1.00   d1:0.65  d2:0.35  d3:0.00  d4:0.05
+  sample_more  acc 0.338  mean_gens 5.00   d1:0.80  d2:0.50  d3:0.00  d4:0.05
+  repl_nofb    acc 0.263  mean_gens 3.98   d1:0.60  d2:0.40  d3:0.00  d4:0.05
+  repl_real    acc 0.287  mean_gens 3.91   d1:0.60  d2:0.45  d3:0.00  d4:0.10
+  sample_more selected curve (by #samples): {1: 0.2, 2: 0.237, 3: 0.263, 4: 0.325, 5: 0.338}
+  sample_more pass@5 oracle (coverage): 0.338
+
+KEY: repl_real (0.287 @ 3.9 gens) vs sample_more curve -> does feedback beat independent sampling at MATCHED compute?
+     repl_real 0.287 vs repl_nofb 0.263 -> is it the execution-feedback CONTENT?
+wrote runs/repl_summary.json, analysis/repl_vs_samplemore.png

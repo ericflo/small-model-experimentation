@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 134
-- Manifest files: 430
+- Experiments with manifests: 135
+- Manifest files: 431
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 7 |
+| `standard-artifact` | 8 |
 
 ## Manifests
 
@@ -108,6 +108,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_model_in_loop_counterexamples` | `dataset` | [manifest](../experiments/qwen35_4b_model_in_loop_counterexamples/data/dataset_manifest.json) |
 | `qwen35_4b_model_in_loop_counterexamples` | `dataset` | [manifest](../experiments/qwen35_4b_model_in_loop_counterexamples/data/model_loop/dataset_manifest.json) |
 | `qwen35_4b_model_in_loop_counterexamples` | `large-artifact` | [manifest](../experiments/qwen35_4b_model_in_loop_counterexamples/large_artifacts_manifest.md) |
+| `qwen35_4b_neurosymbolic_repl_substrate` | `standard-artifact` | [manifest](../experiments/qwen35_4b_neurosymbolic_repl_substrate/reports/artifact_manifest.yaml) |
 | `qwen35_4b_offline_hard_negative_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/data/eval_base_hot_k4_records.manifest.json) |
 | `qwen35_4b_offline_hard_negative_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/data/eval_base_hot_k8_records.manifest.json) |
 | `qwen35_4b_offline_hard_negative_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/data/eval_conservative_dpo_k4_records.manifest.json) |

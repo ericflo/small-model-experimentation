@@ -1,0 +1,29 @@
+{
+  "tag": "frozen",
+  "n_tasks": 135,
+  "k": 5,
+  "nothink_greedy@1": {
+    "overall": 0.0,
+    "by_depth": {
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0
+    }
+  },
+  "think_greedy@1": {
+    "overall": 0.267,
+    "by_depth": {
+      "1": 0.6,
+      "2": 0.133,
+      "3": 0.067
+    }
+  },
+  "think_pass@5": {
+    "overall": 0.378,
+    "by_depth": {
+      "1": 0.756,
+      "2": 0.311,
+      "3": 0.067
+    }
+  }
+}

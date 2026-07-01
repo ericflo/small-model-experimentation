@@ -1,0 +1,61 @@
+{
+  "n_tasks": 90,
+  "depths": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "k": 6,
+  "by_depth": [
+    {
+      "depth": 1,
+      "n": 15,
+      "greedy@1": 0.667,
+      "pass@6": 0.933,
+      "oracle": 1.0
+    },
+    {
+      "depth": 2,
+      "n": 15,
+      "greedy@1": 0.133,
+      "pass@6": 0.333,
+      "oracle": 1.0
+    },
+    {
+      "depth": 3,
+      "n": 15,
+      "greedy@1": 0.133,
+      "pass@6": 0.133,
+      "oracle": 1.0
+    },
+    {
+      "depth": 4,
+      "n": 15,
+      "greedy@1": 0.0,
+      "pass@6": 0.067,
+      "oracle": 1.0
+    },
+    {
+      "depth": 5,
+      "n": 15,
+      "greedy@1": 0.0,
+      "pass@6": 0.0,
+      "oracle": 1.0
+    },
+    {
+      "depth": 6,
+      "n": 15,
+      "greedy@1": 0.0,
+      "pass@6": 0.0,
+      "oracle": 1.0
+    }
+  ],
+  "overall": {
+    "greedy@1": 0.156,
+    "pass@6": 0.244,
+    "coverage_deployment_gap": 0.089
+  }
+}

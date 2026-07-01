@@ -14,3 +14,7 @@ experiments/**/reports/adapters/
 tmp/
 *.tmp
 /site/
+
+# QLoRA adapters (large, regenerable — see artifact manifests)
+**/runs/lora_adapter/
+**/*.safetensors
