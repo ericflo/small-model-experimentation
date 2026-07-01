@@ -42,16 +42,25 @@ def main():
     ap.add_argument("--eval-seed", type=int, default=303)
     ap.add_argument("--eval-depths", type=int, nargs="+", default=[1, 2, 3, 4, 5])
     ap.add_argument("--eval-per-depth", type=int, default=20)
+    ap.add_argument("--adapter", type=str, default=None, help="generate with this LoRA adapter (expert iteration)")
+    ap.add_argument("--out", type=str, default="data/train.jsonl", help="output train file (relative to EXP)")
+    ap.add_argument("--append", action="store_true", help="merge into --out, dedup by (task_id, code)")
+    ap.add_argument("--skip-eval-gen", action="store_true")
     args = ap.parse_args()
 
     train_tasks = G.build_dataset(args.train_depths, args.per_depth, seed=args.train_seed)
-    eval_tasks = G.build_dataset(args.eval_depths, args.eval_per_depth, seed=args.eval_seed)
     (EXP / "data").mkdir(exist_ok=True)
-    (EXP / "data" / "eval_tasks.jsonl").write_text("\n".join(json.dumps(t) for t in eval_tasks) + "\n")
-    print(f"train pool {len(train_tasks)} (depths {args.train_depths}), eval {len(eval_tasks)} (depths {args.eval_depths})", flush=True)
+    if not args.skip_eval_gen:
+        eval_tasks = G.build_dataset(args.eval_depths, args.eval_per_depth, seed=args.eval_seed)
+        (EXP / "data" / "eval_tasks.jsonl").write_text("\n".join(json.dumps(t) for t in eval_tasks) + "\n")
+    print(f"train pool {len(train_tasks)} (depths {args.train_depths}); generator={args.adapter or 'frozen'}", flush=True)
 
     import gen_lib as GL
     p = GL.Probe()
+    if args.adapter:
+        from peft import PeftModel
+        p.model = PeftModel.from_pretrained(p.model, args.adapter)
+        p.model.eval()
     prompts = [G.prompt_for(t) for t in train_tasks]
     rep = [pr for pr in prompts for _ in range(args.k)]
     print(f"sampling {len(rep)} drafts (k={args.k}, thinking, budget {args.budget})...", flush=True)
@@ -73,12 +82,23 @@ def main():
             solved_tasks.add(t["task_id"])
             per_depth_solved[t["depth"]] += 1
 
-    (EXP / "data" / "train.jsonl").write_text("\n".join(json.dumps(r) for r in pairs) + "\n")
-    print(f"collected {len(pairs)} verified (prompt->code) pairs from {len(solved_tasks)}/{len(train_tasks)} solved tasks")
+    out_path = EXP / args.out
+    n_new = len(pairs)
+    if args.append and out_path.exists():
+        existing = [json.loads(l) for l in out_path.read_text().splitlines() if l.strip()]
+        seen_keys = {(r["task_id"], r["code"]) for r in existing}
+        merged = existing + [r for r in pairs if (r["task_id"], r["code"]) not in seen_keys]
+        added = len(merged) - len(existing)
+        out_path.write_text("\n".join(json.dumps(r) for r in merged) + "\n")
+        print(f"round solved {len(solved_tasks)}/{len(train_tasks)}; +{added} NEW pairs (total {len(merged)})")
+        pairs = merged
+    else:
+        out_path.write_text("\n".join(json.dumps(r) for r in pairs) + "\n")
+        print(f"collected {n_new} verified (prompt->code) pairs from {len(solved_tasks)}/{len(train_tasks)} solved tasks")
     for d in sorted(per_depth_solved):
         n = sum(1 for t in train_tasks if t["depth"] == d)
         print(f"  depth {d}: {per_depth_solved[d]}/{n} tasks solved")
-    print("wrote data/train.jsonl, data/eval_tasks.jsonl")
+    print(f"wrote {args.out}" + ("" if args.skip_eval_gen else " + data/eval_tasks.jsonl"))
 
 
 if __name__ == "__main__":

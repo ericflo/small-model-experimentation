@@ -36,15 +36,15 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | Extension | Files |
 | --- | ---: |
 | `.csv` | 2134 |
-| `.json` | 1798 |
-| `.png` | 805 |
-| `.py` | 709 |
+| `.json` | 1802 |
+| `.png` | 806 |
+| `.py` | 710 |
 | `.md` | 616 |
-| `.jsonl` | 494 |
-| `.log` | 470 |
+| `.jsonl` | 495 |
+| `.log` | 471 |
 | `.yaml` | 179 |
 | `.html` | 90 |
-| `.sh` | 9 |
+| `.sh` | 10 |
 | `.txt` | 4 |
 
 ## Largest Files

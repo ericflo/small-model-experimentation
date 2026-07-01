@@ -1,0 +1,29 @@
+{
+  "tag": "trained(runs/ei_adapter_3)",
+  "n_tasks": 135,
+  "k": 5,
+  "nothink_greedy@1": {
+    "overall": 0.089,
+    "by_depth": {
+      "1": 0.156,
+      "2": 0.089,
+      "3": 0.022
+    }
+  },
+  "think_greedy@1": {
+    "overall": 0.393,
+    "by_depth": {
+      "1": 0.8,
+      "2": 0.289,
+      "3": 0.089
+    }
+  },
+  "think_pass@5": {
+    "overall": 0.467,
+    "by_depth": {
+      "1": 0.889,
+      "2": 0.311,
+      "3": 0.2
+    }
+  }
+}

@@ -60,5 +60,12 @@ Full write-up in [reports/report.md](reports/report.md).
   (no diversity collapse), confirmed on two fresh seeds. Works on this contamination-free substrate where
   the corpus's prior MBPP self-improvement regressed.
 
-**Arc:** cleverer *test-time* readout (execution feedback) does not unearth capability, but *self-training*
-on verified self-solutions banks it into the weights — and it needs clean, uncontaminated data to show up.
+- **M4** (expert-iteration flywheel, 3 rounds): the banking gain **compounds monotonically but with
+  diminishing returns** — held-out greedy@1 0.267 → 0.356 → 0.385 → 0.393 (+0.126, +47%), pass@5 rising
+  (no collapse), each round's better model harvesting more data (107→144→162 solved). Lifts depths 1–2 but
+  **does not crack the depth-3 frontier** the model can't sample — coverage-bounded, as M2 predicts.
+
+**Arc:** cleverer *test-time* readout (execution feedback) does not unearth capability; *self-training* on
+verified self-solutions banks it into the weights (and needs clean data to show); *iterating* that is a real
+but bounded flywheel — it widens the deployable footprint of the model's own distribution without extending
+its frontier.

@@ -14,7 +14,12 @@ single-shot** — held-out fresh think-greedy@1 0.224 → 0.319 (+0.095, ~2.2 SE
 pass@5 up (no diversity collapse), confirmed on two fresh seeds. Net: for this small model, the lever that
 unearths latent capability is **self-training on verified self-solutions**, not test-time self-correction —
 and this self-training works on a **contamination-free** substrate where the corpus's prior MBPP STaR run
-regressed, implicating substrate/contamination in that earlier failure.
+regressed, implicating substrate/contamination in that earlier failure. (M4) **Scaled into an
+expert-iteration flywheel (3 rounds), the banking gain COMPOUNDS but with diminishing returns** — held-out
+greedy@1 0.267 → 0.356 → 0.385 → 0.393 (+0.126, +47%), pass@5 rising throughout (no collapse), and each
+round's improved model harvests more training data (107 → 144 → 162 / 360 tasks solved). It lifts depths
+1–2 where coverage exists but does **not** crack the depth-3 frontier the model can't sample — coverage-
+bounded, exactly as M2 predicts.
 
 ## Research Program Fit
 
@@ -89,6 +94,29 @@ the in-distribution training depths and holds on both fresh seeds.
   held-out think-greedy@1 gain — +0.103 vs the original +0.111 (frozen 0.267) on the same held-out seed-404
   set. The effect is robust to the training data, not a lucky adapter.
 
+### M4 — expert-iteration flywheel (3 rounds)
+Each round: solve a fixed 360-task pool (depths 1–3, seed 202) with the CURRENT model, accumulate verified
+(prompt→code) pairs, retrain a fresh LoRA from base, eval on the fixed held-out (seed 404, n=135).
+
+| round | 0 (frozen) | 1 | 2 | 3 |
+| --- | ---: | ---: | ---: | ---: |
+| held-out greedy@1 | 0.267 | 0.356 | 0.385 | 0.393 |
+| held-out pass@5 | 0.378 | 0.407 | 0.459 | 0.467 |
+| train-pool solved (/360) | 107 | 144 | 162 | — |
+| accumulated pairs | 147 | 219 | 287 | — |
+| depth-1 / depth-2 / depth-3 greedy | .60/.13/.07 | .69/.27/.11 | .78/.31/.07 | .80/.29/.09 |
+
+Figure: `analysis/ei_trajectory.png`.
+
+- **The flywheel compounds monotonically** — 0.267 → 0.356 → 0.385 → 0.393 (+0.126, +47% over frozen) — but
+  with **clearly diminishing returns** (+0.089, +0.029, +0.008), plateauing by round 3.
+- **The engine works:** each round's improved model harvests MORE verified data (107→144→162 solved;
+  147→287 pairs), and pass@5 keeps rising (no diversity collapse) — genuine self-improvement, not resampling.
+- **But it is coverage-bounded:** depth-1 climbs steadily (.60→.80), depth-2 plateaus (~.30), and the
+  **depth-3 frontier never cracks** (~.09 throughout). The loop converts more of the model's *reachable*
+  distribution into deployable single-shot; it cannot manufacture solutions the model fundamentally can't
+  sample — exactly what M2 predicts.
+
 ## Controls
 
 Reference oracle (100% solvable) proves every failure is the model's. `repl_nofb` is **paired** to real's
@@ -112,6 +140,10 @@ Two contrasting levers, cleanly separated on the same contamination-free substra
 - **Self-training on verified self-solutions DOES** (M3). QLoRA-SFT on the model's own execution-verified
   solutions moves the *weights*, banking sampling-accessible capability into deployable single-shot with a
   significant, generalizing +0.095 on held-out fresh tasks and no diversity collapse.
+- **Iterating it is a real but bounded flywheel** (M4). Expert iteration compounds the gain (+0.126 over 3
+  rounds, +47%) — each round's better model harvests more verified data — but with diminishing returns that
+  plateau, and it cannot crack the depth-3 frontier the model can't sample. Self-training *widens the
+  deployable footprint of the model's own distribution; it does not extend the distribution's frontier.*
 
 The synthesis: for a small model, you don't unearth latent capability by reading the frozen weights more
 cleverly at test time — you **bank it into the weights** by training on what the model can already verify.

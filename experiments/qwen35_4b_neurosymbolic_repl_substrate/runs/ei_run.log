@@ -1,0 +1,52 @@
+===== ROUND 1 COLLECT (generator=frozen) 08:03:56 =====
+train pool 360 (depths [1, 2, 3]); generator=frozen
+collected 147 verified (prompt->code) pairs from 107/360 solved tasks
+  depth 1: 77/120 tasks solved
+  depth 2: 21/120 tasks solved
+  depth 3: 9/120 tasks solved
+===== ROUND 1 TRAIN 09:07:10 =====
+training on 147 verified (prompt->code) pairs
+{'train_runtime': '233.2', 'train_samples_per_second': '1.261', 'train_steps_per_second': '0.163', 'train_loss': '0.1359', 'epoch': '2'}
+saved adapter to runs/ei_adapter_1
+===== ROUND 1 EVAL 09:11:14 =====
+eval trained(runs/ei_adapter_1): 135 tasks, k=5, think=False
+trained(runs/ei_adapter_1)  (n=135)
+  nothink_greedy@1   0.000   d1:0.00  d2:0.00  d3:0.00
+  think_greedy@1     0.356   d1:0.69  d2:0.27  d3:0.11
+  think_pass@5       0.407   d1:0.78  d2:0.29  d3:0.16
+wrote runs/ei_eval_1.json
+===== ROUND 2 COLLECT (generator=runs/ei_adapter_1) 09:53:34 =====
+train pool 360 (depths [1, 2, 3]); generator=runs/ei_adapter_1
+round solved 144/360; +72 NEW pairs (total 219)
+  depth 1: 99/120 tasks solved
+  depth 2: 32/120 tasks solved
+  depth 3: 13/120 tasks solved
+===== ROUND 2 TRAIN 11:22:00 =====
+training on 219 verified (prompt->code) pairs
+{'train_runtime': '347.9', 'train_samples_per_second': '1.259', 'train_steps_per_second': '0.161', 'train_loss': '0.1263', 'epoch': '2'}
+saved adapter to runs/ei_adapter_2
+===== ROUND 2 EVAL 11:27:58 =====
+eval trained(runs/ei_adapter_2): 135 tasks, k=5, think=False
+trained(runs/ei_adapter_2)  (n=135)
+  nothink_greedy@1   0.000   d1:0.00  d2:0.00  d3:0.00
+  think_greedy@1     0.385   d1:0.78  d2:0.31  d3:0.07
+  think_pass@5       0.459   d1:0.89  d2:0.33  d3:0.16
+wrote runs/ei_eval_2.json
+===== ROUND 3 COLLECT (generator=runs/ei_adapter_2) 12:10:14 =====
+train pool 360 (depths [1, 2, 3]); generator=runs/ei_adapter_2
+round solved 162/360; +68 NEW pairs (total 287)
+  depth 1: 104/120 tasks solved
+  depth 2: 38/120 tasks solved
+  depth 3: 20/120 tasks solved
+===== ROUND 3 TRAIN 13:37:08 =====
+training on 287 verified (prompt->code) pairs
+{'train_runtime': '454.5', 'train_samples_per_second': '1.263', 'train_steps_per_second': '0.158', 'train_loss': '0.1314', 'epoch': '2'}
+saved adapter to runs/ei_adapter_3
+===== ROUND 3 EVAL 13:44:53 =====
+eval trained(runs/ei_adapter_3): 135 tasks, k=5, think=False
+trained(runs/ei_adapter_3)  (n=135)
+  nothink_greedy@1   0.089   d1:0.16  d2:0.09  d3:0.02
+  think_greedy@1     0.393   d1:0.80  d2:0.29  d3:0.09
+  think_pass@5       0.467   d1:0.89  d2:0.31  d3:0.20
+wrote runs/ei_eval_3.json
+===== ei_DONE 14:24:17 =====

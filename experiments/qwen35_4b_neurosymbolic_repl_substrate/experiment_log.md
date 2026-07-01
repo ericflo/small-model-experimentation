@@ -63,3 +63,17 @@ data (seed 505, depths 1-2) reproduced the gain on the held-out seed-404 set: +0
 Contrast with M2 (test-time feedback negative) and with the corpus's MBPP verifier_guided_self_improvement
 (regressed) -- works on contamination-free data. Adapters (~170MB) gitignored + removed before commit
 (regenerable via scripts/m3_chain.sh; replication via scripts/replicate.sh).
+
+## M4 results (see runs/ei_summary.json, analysis/ei_trajectory.png)
+
+Expert-iteration flywheel (scripts/ei_loop.sh): 3 rounds, each solving a fixed 360-task pool (depths 1-3,
+seed 202) with the CURRENT model, accumulating verified pairs, retraining a fresh LoRA from base, evaluating
+on held-out (seed 404, n=135). Held-out greedy@1: frozen 0.267 -> R1 0.356 -> R2 0.385 -> R3 0.393 (+0.126,
++47%); pass@5 0.378->0.407->0.459->0.467 (rising, no collapse). Train-pool solved 107->144->162/360; pairs
+147->219->287. By depth: d1 .60->.80 (climbs), d2 ~.30 (plateaus), d3 ~.09 (never cracks).
+
+**COMPOUNDS but BOUNDED:** monotonic gain with clear diminishing returns (+.089,+.029,+.008), plateauing by
+R3. The engine works (better model -> more verified data each round, coverage grows, no collapse) but it is
+coverage-bounded -- widens the deployable footprint of the model's OWN distribution without extending its
+frontier (depth-3 unreachable throughout), exactly as M2 predicts. Added --adapter/--append to
+collect_solutions.py for the flywheel; adapters removed before commit.
