@@ -56,7 +56,10 @@ POOLED N=210 -- think_greedy@1: frozen 0.224 -> trained 0.319 (+0.095, ~2.2 SE, 
 on no-think targets transferred to the thinking path). By depth (confirm greedy): d1 .60->.69, d2 .13->.33,
 d3 .07->.11 -- broad, both seeds.
 
-**POSITIVE, confirmed:** self-training on own verified solutions banks capability into deployable single-shot
-on held-out fresh tasks, no diversity collapse. Contrast with M2 (test-time feedback negative) and with the
-corpus's MBPP verifier_guided_self_improvement (regressed) -- works on contamination-free data. Note: adapter
-saved to runs/lora_adapter (~170MB), gitignored + removed before commit (regenerable via scripts/m3_chain.sh).
+**POSITIVE, confirmed + REPLICATED:** self-training on own verified solutions banks capability into
+deployable single-shot on held-out fresh tasks, no diversity collapse. A second adapter trained on fresh
+data (seed 505, depths 1-2) reproduced the gain on the held-out seed-404 set: +0.103 vs the original +0.111
+(frozen 0.267) -- robust to training data. (The seed-505 adapter also banked a no-think path: 0.0->0.274.)
+Contrast with M2 (test-time feedback negative) and with the corpus's MBPP verifier_guided_self_improvement
+(regressed) -- works on contamination-free data. Adapters (~170MB) gitignored + removed before commit
+(regenerable via scripts/m3_chain.sh; replication via scripts/replicate.sh).

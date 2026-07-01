@@ -1,0 +1,18 @@
+=== COLLECT seed 505 05:05:43 ===
+collected 167 verified (prompt->code) pairs from 121/240 solved tasks
+  depth 1: 90/120 tasks solved
+  depth 2: 31/120 tasks solved
+wrote data/train.jsonl, data/eval_tasks.jsonl
+seed505 pairs: 167
+=== TRAIN adapter2 05:46:56 ===
+training on 167 verified (prompt->code) pairs
+{'train_runtime': '256.4', 'train_samples_per_second': '1.302', 'train_steps_per_second': '0.164', 'train_loss': '0.1353', 'epoch': '2'}
+saved adapter to runs/lora_adapter2
+=== EVAL trained2 on held-out seed404 05:51:22 ===
+eval trained(runs/lora_adapter2): 135 tasks, k=5, think=False
+trained(runs/lora_adapter2)  (n=135)
+  nothink_greedy@1   0.274   d1:0.53  d2:0.24  d3:0.04
+  think_greedy@1     0.370   d1:0.71  d2:0.29  d3:0.11
+  think_pass@5       0.444   d1:0.80  d2:0.38  d3:0.16
+wrote runs/eval_trained2_big.json
+=== REPLICATE_DONE 06:32:43 ===

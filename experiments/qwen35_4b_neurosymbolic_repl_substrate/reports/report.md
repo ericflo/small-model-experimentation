@@ -82,8 +82,12 @@ the in-distribution training depths and holds on both fresh seeds.
   tasks — a real, generalizing improvement from the model's OWN verified solutions, no teacher.
 - **No diversity collapse:** pass@5 rises (0.310→0.371), the opposite of the STaR failure mode that sank
   the corpus's contaminated-MBPP self-improvement run.
-- **No-think stays ~0:** the model still needs thinking; the adapter (trained on no-think targets)
-  transferred its task knowledge to the *thinking* path, not a new no-think one-shot path.
+- **No-think stays ~0** for the depths-1–3 adapter; the model still needs thinking (the adapter transferred
+  its task knowledge to the *thinking* path). Notably a **replication** adapter trained on depths-1–2 data
+  did bank a no-think one-shot path (0.0 → 0.274 at n=135), suggesting the banked path depends on the data mix.
+- **Replicated:** a second, independently-trained adapter (fresh training data, seed 505) reproduced the
+  held-out think-greedy@1 gain — +0.103 vs the original +0.111 (frozen 0.267) on the same held-out seed-404
+  set. The effect is robust to the training data, not a lucky adapter.
 
 ## Controls
 
