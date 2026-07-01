@@ -23,8 +23,8 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `src/` | 151 |
 | `runs/` | 99 |
 | `analysis/` | 89 |
-| `data/` | 72 |
 | `scripts/` | 72 |
+| `data/` | 71 |
 | `configs/` | 69 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
