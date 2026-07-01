@@ -11,7 +11,7 @@ For the machine-checkable claim ledger, use [claims/index.md](claims/index.md).
 3. `Confirmed`: candidate generation is often easier than deployable selection. Evidence-conditioned selection should be treated as a first-class research program.
 4. `Promising`: memory, retrieval, operator banks, and active evidence can add coverage, but only when tied to verification, constraints, or selection. Plain prompt context is not enough.
 5. `Open`: the most valuable next work is portfolio growth: new programs, new substrates, new diagnostics, and new evidence loops that make future experiments less likely to repeat old mistakes.
-6. `Promising`: the corpus's biggest self-imposed blind spot was running the model only in **no-think** mode. Turning native thinking on is a real deployable lever (MBPP greedy +15pp) and, notably, here it moves the *deployable* line more than the oracle ceiling — so the central C2 selection bottleneck does **not** hold for the thinking axis. But thinking is a *budget* with an overthinking cost; and a foreign-task-thinking control shows the model uses thinking as *content* (irrelevant thinking collapses accuracy to ~4%), so at the efficient budget the gain is genuine coherent reasoning — though it washes out at high budgets and is not clearly reflected internally. See [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md) and claim C9.
+6. `Promising`: the corpus's biggest self-imposed blind spot was running the model only in **no-think** mode. Turning native thinking on is a real deployable lever (MBPP greedy +15pp) and, notably, here it moves the *deployable* line more than the oracle ceiling — so the central C2 selection bottleneck does **not** hold for the thinking axis. But thinking is a *budget* with an overthinking cost; and content controls (foreign/filler/shuffle across budgets 512/1024/2048) show the model uses thinking as *content* — irrelevant thinking collapses accuracy to ~4%, pure compute (contentless filler) ≈ no-think, and coherent reasoning is the entire gain, growing with budget (real−shuffle +0.105→+0.150). So the thinking accuracy gain is genuine coherent reasoning content at *every* budget; the "thinking ≈ compute" reading only appeared through a greedy-metric lens. See [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md) and claim C9.
 
 ## How To Read Prior Results
 
@@ -56,13 +56,15 @@ much of the gain (so a large share is compute + scaffold + token-presence, not c
 A **foreign-task-thinking control**
 ([qwen35_4b_thinking_content_vs_compute](../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md))
 then **corrected** that caveat: the model *uses thinking as content* — splicing a different task's
-thinking collapses accuracy to ~4% (it solves the wrong problem), scrambled relevant thinking ≈ no
-thinking, and coherent thinking adds +12pp. So at the **efficient budget the behavioral gain is
-genuine coherent reasoning** over relevant content; the "mostly compute/scaffold" read was a
-greedy-metric artifact that holds mainly at high budgets (overthinking) and at the representational
-level (separability differences are small/noisy). Strategic implications: re-baseline CoT-substitute
-results against a fair, budgeted native-thinking baseline; and judge "is it reasoning?" with explicit
-content controls (a single behavioral or greedy number can mislead in either direction).
+thinking collapses accuracy to ~4% (it solves the wrong problem), a contentless filler arm ≈ no-think
+(pure compute buys ~0), scrambled relevant thinking ≈ no-think, and coherent thinking is the entire
+gain. A budget sweep (512/1024/2048) then showed the coherence advantage **grows** with budget
+(+0.105→+0.150), refuting the overthinking-washout idea and exposing the scaling run's "2048 shuffle ≈
+real" as a shuffle-protocol artifact. So **the behavioral gain is genuine coherent reasoning content at
+every budget**; the "mostly compute/scaffold" read only appeared through a greedy-metric lens (the
+separability/representational slice is separate and noisy). Strategic implications: re-baseline
+CoT-substitute results against a fair, budgeted native-thinking baseline; and judge "is it reasoning?"
+with explicit content controls — a single behavioral or greedy number misled here.
 
 ## Portfolio Implications
 

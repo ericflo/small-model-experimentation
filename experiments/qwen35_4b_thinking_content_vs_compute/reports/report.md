@@ -116,3 +116,13 @@ in internal correctness-decodability.
 
 See `artifact_manifest.yaml`. Activations (~0.65 GB, 5 conditions) external/regenerable; records, labels,
 decomposition, probe results, and figure in-repo.
+
+## Refinement (added after the budget sweep)
+
+This report says the coherence advantage is "expected to shrink at high budgets (overthinking)" and that
+the compute reading survives as the high-budget regime. The follow-up budget sweep
+([`qwen35_4b_overthinking_content_ladder`](../../qwen35_4b_overthinking_content_ladder/reports/report.md))
+**refuted** this: the coherence advantage `real − shuffle` does not shrink but **grows** with budget
+(+0.105 → +0.108 → +0.150 at 512/1024/2048), and pure-compute filler ≈ no-think at every budget. So the
+gain is coherent reasoning content at *all* budgets; the "compute" reading only ever appeared through a
+greedy-metric lens and the scaling run's shuffle-protocol artifact. See claim C9 (corrected).

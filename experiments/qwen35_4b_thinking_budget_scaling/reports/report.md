@@ -180,6 +180,10 @@ shuffle control) was later found **overstated**. A foreign-task-thinking ladder
 showed the model *uses thinking as content* (splicing a different task's thinking collapses accuracy
 to ~4% — it solves the wrong problem), that scrambled thinking ≈ no-think on **sampled** full-pass
 (the "shuffle recovers ~⅓" here was a **greedy-metric** artifact), and that coherent thinking adds
-+12pp at the 512 budget. So at the efficient budget the behavioral gain **is** coherent reasoning;
-the compute/scaffold reading holds mainly at high budgets (the 2048 shuffle ≈ real overthinking
-result above) and at the representational level. See claim C9 for the corrected statement.
++12pp at the 512 budget. A later budget sweep
+([`qwen35_4b_overthinking_content_ladder`](../../qwen35_4b_overthinking_content_ladder/reports/report.md))
+went further: the coherence advantage **grows** with budget (+0.105 → +0.150 at 512→2048) and
+pure-compute filler ≈ no-think everywhere, so the gain is coherent reasoning at *every* budget. Notably,
+**this report's own "2048 shuffle ≈ real" was a shuffle-protocol artifact** — that run shuffled a fresh
+thinking sample; the tighter ladder (reusing real's exact tokens) shows real ≫ shuffle at 2048. See claim
+C9 for the corrected statement.

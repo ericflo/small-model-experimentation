@@ -1,0 +1,22 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_overthinking_content_ladder"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "generation"
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "data/records.jsonl, data/labels.jsonl, data/tasks.json"
+    reason: "small per-sample records + execution labels + task metadata"
+  - path: "analysis/curve.md, analysis/coherence_vs_budget.png, analysis/ladder_vs_budget.png"
+    reason: "small generated table + figures"
+reproducibility:
+  smoke_command: "../../.venv/bin/python scripts/run.py --smoke"
+  full_command: >-
+    HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    ../../.venv/bin/python scripts/run.py --tasks 100 --k 8 --budgets 512,1024,2048
+  verify_command: "../../.venv/bin/python scripts/verify.py"
+  curve_command: "../../.venv/bin/python analysis/curve.py"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: "Behavioral-only (no activations cached). Tests whether real-shuffle shrinks with budget (overthinking)."

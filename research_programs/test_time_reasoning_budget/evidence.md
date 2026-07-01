@@ -65,9 +65,11 @@
   shuffle 0.739, **real 0.861**, foreign 0.040. Attribution: pure compute (filler − no_think) **−0.005**;
   relevance (shuffle − filler) **−0.005**; coherent content (real − shuffle) **+0.122**; misleading content
   (foreign) **−0.709**. So pure compute buys ~0 and the efficient-budget gain is **100% coherent reasoning
-  content**, which the model uses (foreign → wrong problem). The "mostly compute" read was a greedy-metric
-  artifact; it survives only at high budgets (2048 shuffle ≈ real, overthinking) and in the noisy
-  representational slice. See claim C9 (corrected).
+  content**, which the model uses (foreign → wrong problem). A budget sweep (512/1024/2048) then showed the
+  coherence advantage (real − shuffle) does not shrink but **grows** (+0.105 → +0.108 → +0.150) — so this
+  holds at **every** budget, and the scaling run's "2048 shuffle ≈ real" was a shuffle-protocol artifact.
+  The "mostly compute" read only appeared through a greedy-metric lens (the representational slice is
+  separate and noisy). See claim C9 (corrected).
 
 ## Current Read
 
@@ -76,12 +78,13 @@ Turning thinking on is a real, cheap deployable lever the corpus left unused —
 **efficiency** lever (near-iso-accuracy at much lower cost), not a new accuracy frontier: a
 near-optimal fixed budget already sits close to the oracle, and the deployable controller is
 capped by C2 false-passes. The foreign control then refined the *nature* of the gain: at the
-**efficient budget** the behavioral gain **is coherent reasoning over relevant content** (the model
-uses thinking as content — irrelevant thinking is catastrophic), though that advantage washes out at
-high budgets (overthinking) and is not clearly reflected in internal correctness-decodability. Honest
-read: *use thinking, cap it, and a cheap controller buys back most of the cost; at the efficient budget
-the gain is genuine reasoning (don't dismiss it as mere compute) — but it is budget-dependent and
-behavioral ≠ representational.* Priority follow-ups: the **filler/pause-token arm** (isolate pure
-compute, since foreign adds misleading content not contentless compute); the foreign/shuffle/real
-ladder at a high budget; a learned controller with richer visible signals; harder/contamination-
-controlled substrates.
+behavioral gain **is coherent reasoning over relevant content** at every budget (the model uses thinking
+as content — irrelevant thinking is catastrophic; pure-compute filler ≈ no-think; and the coherence
+advantage *grows* with budget). It is not clearly reflected in internal correctness-decodability
+(separability noisy). Honest read: *use thinking, cap it (greedy overthinking optimum ~1024), and a cheap
+controller buys back most of the cost; the accuracy gain is genuine reasoning content the model uses at
+all budgets — don't dismiss it as compute; behavioral ≠ representational.* The filler arm (pure compute ≈
+0) and the budget sweep (coherence grows) are now done. Priority follow-ups: a learned controller with
+richer visible signals to chase the C2 wall; and a **contamination-controlled / harder substrate** — does
+coherent reasoning still carry the whole gain when the no-think baseline is weaker and memorization is
+defeated? (This is the most load-bearing open question given MBPP is basic and likely partly contaminated.)

@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 159
-- Anchor-ready: 144
-- Human-authored READMEs: 146
+- Experiments: 160
+- Anchor-ready: 145
+- Human-authored READMEs: 147
 - Generated README stubs: 13
-- Primary reports: 159
-- Experiment logs: 63
-- Smoke commands: 28
-- Artifact manifests: 131
+- Primary reports: 160
+- Experiment logs: 64
+- Smoke commands: 29
+- Artifact manifests: 132
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 48 |
+| `documented-scripts` | 49 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -91,6 +91,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | no | [`qwen35_4b_oracle_distilled_semantic_verifier`](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, reliability_and_safety, structured_execution_and_compilers | `generated-stub` | [report](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/reports/qwen35_4b_oracle_distilled_semantic_verifier_report.md) | no | `documented-scripts` | no | dataset | replace-generated-readme, add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_oracle_probe_synthesis_mdp`](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, operator_and_skill_inventories, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/reports/qwen35_4b_oracle_probe_synthesis_mdp_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_oracle_process_grpo`](../experiments/qwen35_4b_oracle_process_grpo/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, operator_and_skill_inventories, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_oracle_process_grpo/reports/qwen35_4b_oracle_process_grpo_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
+| yes | [`qwen35_4b_overthinking_content_ladder`](../experiments/qwen35_4b_overthinking_content_ladder/README.md) | benchmark_generalization, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_overthinking_content_ladder/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | no | [`qwen35_4b_passk_coverage_rl`](../experiments/qwen35_4b_passk_coverage_rl/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use | `generated-stub` | [report](../experiments/qwen35_4b_passk_coverage_rl/reports/final_report.md) | no | `documented-scripts` | no |  | replace-generated-readme, add-experiment-log, add-smoke-command, add-artifact-manifest |
 | no | [`qwen35_4b_prefix_value_guided_search`](../experiments/qwen35_4b_prefix_value_guided_search/README.md) | structured_execution_and_compilers | `generated-stub` | [report](../experiments/qwen35_4b_prefix_value_guided_search/reports/final_report.md) | no | `scripts-undocumented` | no |  | replace-generated-readme, add-experiment-log, document-run-path, add-smoke-command, add-artifact-manifest |
 | no | [`qwen35_4b_real_sample_verify_commit`](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `generated-stub` | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) | no | `documented-scripts` | no | dataset | replace-generated-readme, add-experiment-log, add-smoke-command |

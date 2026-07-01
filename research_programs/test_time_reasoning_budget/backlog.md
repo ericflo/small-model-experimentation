@@ -3,7 +3,8 @@
 ## Done
 
 - `qwen35_4b_thinking_budget_scaling`: MBPP scaling curve; oracle-vs-deployable decomposition;
-  shuffled-thinking control. (+15pp greedy, overthinking optimum ~1024, much of the gain is compute/scaffold.)
+  shuffled-thinking control. (+15pp greedy, greedy overthinking optimum ~1024. NOTE: its "gain is mostly
+  compute/scaffold" and "2048 shuffle ≈ real" readings were later corrected — see the content ladders.)
 - `qwen35_4b_thinking_budget_controller`: fixed-rule visible-test escalation controller — an
   efficiency win (Pareto-dominates fixed budgets except the peak), bounded by C2 false-passes.
 - `qwen35_4b_thinking_separability_probe`: per-layer probes on answer-token activations. Correctness
@@ -14,11 +15,14 @@
   coherent content = the entire +0.122, misleading content (foreign) −0.71 (the model follows it to the
   wrong problem). **Conclusively corrected** the earlier "mostly compute/scaffold" claim — pure compute
   buys nothing; the efficient-budget gain is 100% coherent reasoning content.
+- `qwen35_4b_overthinking_content_ladder`: the content ladder across budgets {512,1024,2048}. The
+  coherence advantage (real − shuffle) **grows** with budget (+0.105 → +0.108 → +0.150), refuting the
+  overthinking-washout hypothesis; pure compute (filler) ≈ no-think and foreign catastrophic at every
+  budget. So coherent reasoning is the entire gain at ALL budgets; the scaling run's "2048 shuffle ≈ real"
+  was a shuffle-protocol artifact.
 
 ## Next Experiments
 
-- **High-budget (1024/2048) content ladder** to confirm the coherence advantage shrinks (overthinking) —
-  i.e. that the residual "compute/scaffold" reading is purely the high-budget regime.
 - **Learned thinking-budget controller with richer visible signals** (token entropy/logprob,
   self-consistency): can it close the deployable→oracle gap (0.89→0.93)? (Queue: `thinking_budget_controller`.)
 - Thinking-budget sweep on the **silent_executor substrate** (modular-program execution):

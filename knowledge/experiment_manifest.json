@@ -2142,6 +2142,45 @@
   },
   {
     "file_counts": {
+      ".json": 1,
+      ".jsonl": 2,
+      ".log": 2,
+      ".md": 5,
+      ".png": 2,
+      ".py": 6,
+      ".sh": 1,
+      ".yaml": 3
+    },
+    "generated_on": "2026-06-30",
+    "id": "qwen35_4b_overthinking_content_ladder",
+    "path": "experiments/qwen35_4b_overthinking_content_ladder",
+    "primary_readme": "experiments/qwen35_4b_overthinking_content_ladder/README.md",
+    "primary_report": "experiments/qwen35_4b_overthinking_content_ladder/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "grows (overthinking)? i.e. is the residual \"compute/scaffold, not reasoning\" reading purely the high-budget regime? content: filler \u2248 shuffle \u2248 no_think, real +12pp, foreign collapses) and `qwen35_4b_thinking_budget_scaling` (behavioral overthinking optimum ~1024; its 2048 shuffle \u2248 real hinted coherence stops mattering).",
+    "tags": [
+      "curriculum",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Overthinking Content Ladder",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 22,
+    "total_size_bytes": 4811483
+  },
+  {
+    "file_counts": {
       ".json": 14,
       ".jsonl": 9,
       ".log": 13,
@@ -2639,7 +2678,7 @@
       "src"
     ],
     "total_files": 38,
-    "total_size_bytes": 6338449
+    "total_size_bytes": 6338767
   },
   {
     "file_counts": {
@@ -2677,7 +2716,7 @@
       "src"
     ],
     "total_files": 24,
-    "total_size_bytes": 2155690
+    "total_size_bytes": 2156443
   },
   {
     "file_counts": {
