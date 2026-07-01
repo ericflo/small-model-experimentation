@@ -1,0 +1,10 @@
+Using the latest cached version of the dataset since google-research-datasets/mbpp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sanitized' at /home/ericflo/.cache/huggingface/datasets/google-research-datasets___mbpp/sanitized/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c (last modified on Mon Jun 29 12:07:21 2026).
+100 tasks, k=8, judge budget=1024
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:06,  6.44it/s]Loading weights:  11%|█         | 46/426 [00:00<00:01, 218.87it/s]Loading weights:  23%|██▎       | 100/426 [00:00<00:00, 344.38it/s]Loading weights:  35%|███▌      | 151/426 [00:00<00:00, 404.47it/s]Loading weights:  47%|████▋     | 200/426 [00:00<00:00, 429.73it/s]Loading weights:  59%|█████▉    | 252/426 [00:00<00:00, 453.52it/s]Loading weights:  71%|███████   | 301/426 [00:00<00:00, 458.80it/s]Loading weights:  82%|████████▏ | 348/426 [00:00<00:00, 453.19it/s]Loading weights:  93%|█████████▎| 397/426 [00:00<00:00, 460.51it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 383.47it/s]
+model loaded in 3s
+  generated 800 candidates [422s]
+  judged own (no-think) [15s]
+  judged own (think) [1920s]
+  judged foreign (both) [1655s]
+done in 4010s; wrote data/records.jsonl

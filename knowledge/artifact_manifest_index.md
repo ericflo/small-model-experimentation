@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 132
-- Manifest files: 428
+- Experiments with manifests: 133
+- Manifest files: 429
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 5 |
+| `standard-artifact` | 6 |
 
 ## Manifests
 
@@ -85,6 +85,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_foofah_program_ensemble_consensus` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_program_ensemble_consensus/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_program_repair_agent` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_program_repair_agent/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_selective_program_fallback` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_selective_program_fallback/large_artifacts_manifest.md) |
+| `qwen35_4b_generator_verifier_gap` | `standard-artifact` | [manifest](../experiments/qwen35_4b_generator_verifier_gap/reports/artifact_manifest.yaml) |
 | `qwen35_4b_graphir_self_repair` | `dataset` | [manifest](../experiments/qwen35_4b_graphir_self_repair/data/dataset_manifest.json) |
 | `qwen35_4b_graphir_self_repair` | `large-artifact` | [manifest](../experiments/qwen35_4b_graphir_self_repair/large_artifacts_manifest.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | `dataset` | [manifest](../experiments/qwen35_4b_humaneval_adaptive_budget/data/dataset_manifest.json) |

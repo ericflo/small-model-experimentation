@@ -1476,6 +1476,47 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".jsonl": 2,
+      ".log": 1,
+      ".md": 4,
+      ".png": 1,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "generated_on": "2026-06-30",
+    "id": "qwen35_4b_generator_verifier_gap",
+    "path": "experiments/qwen35_4b_generator_verifier_gap",
+    "primary_readme": "experiments/qwen35_4b_generator_verifier_gap/README.md",
+    "primary_report": "experiments/qwen35_4b_generator_verifier_gap/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "(the model can't tell right from wrong any better than it can produce right) or a **plumbing** limit (verification is good, but current selectors waste it)? the whole selection program builds trained selectors and reports SELECTED accuracy but never isolates the upstream black-box primitive of self-verification. Claim C9 (thinking helps generation content).",
+    "tags": [
+      "execution",
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B Generator-Verifier Gap",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 18,
+    "total_size_bytes": 681279
+  },
+  {
+    "file_counts": {
       ".json": 12,
       ".jsonl": 11,
       ".log": 16,

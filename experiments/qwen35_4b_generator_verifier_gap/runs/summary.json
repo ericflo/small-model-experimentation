@@ -1,0 +1,37 @@
+{
+  "n_tasks": 100,
+  "n_candidates": 800,
+  "generation": {
+    "pass@1": 0.771,
+    "pass@8_oracle": 0.89
+  },
+  "verification_intrinsic": {
+    "no_think": {
+      "auroc": 0.773,
+      "balanced_acc": 0.627,
+      "raw_acc": 0.814,
+      "say_A_rate": 0.912
+    },
+    "think": {
+      "auroc": 0.926,
+      "balanced_acc": 0.827,
+      "raw_acc": 0.909,
+      "say_A_rate": 0.828
+    }
+  },
+  "verifier_selected": {
+    "pass@1_random": 0.771,
+    "no_think_selected": 0.8,
+    "think_selected": 0.86,
+    "oracle": 0.89,
+    "gap_closed_no_think": 0.242,
+    "gap_closed_think": 0.747
+  },
+  "foreign_control": {
+    "mean_pa_nothink": 0.009,
+    "reject_rate_nothink": 1.0,
+    "mean_pa_think": 0.0,
+    "reject_rate_think": 1.0
+  },
+  "forced_think_frac": 0.374
+}

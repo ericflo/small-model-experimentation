@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 9
+- Claims: 10
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 2 |
+| Promising | 3 |
 
 ## Program Counts
 
@@ -21,14 +21,14 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
-| `evidence_conditioned_selection` | 2 |
+| `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 1 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 1 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
 | `structured_execution_and_compilers` | 1 |
-| `test_time_reasoning_budget` | 1 |
+| `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -228,3 +228,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 - Claiming thinking gains are 'reasoning' without a content control that removes token-presence.
 - Pinning an exact optimal budget from single-seed n=100 gaps.
+
+## C10: The C2 selection wall is plumbing not capability: a thinking-verifier closes most of it
+
+- Status: `Promising`
+- Programs: `evidence_conditioned_selection`, `test_time_reasoning_budget`
+- Summary: For a frozen Qwen3.5-4B on MBPP, intrinsic black-box self-verification (judge a candidate correct/incorrect from the A/B logit, no execution/hidden tests) is WEAK with no-think (balanced-acc 0.627, AUROC 0.773, heavy yes-bias: says 'correct' 0.91 vs base pass 0.771) but STRONG with thinking (balanced-acc 0.827, AUROC 0.926). The model's own thinking-verifier, zero-training and fully deployable (no execution), selects best-of-8 at 0.860, closing 75% of the pass@1(0.771)->oracle(0.890) gap (no-think closes only 24%); foreign-solution reject rate is 1.00. So the C2 coverage-vs-selection wall is a plumbing/evidence problem, not a verification-CAPABILITY limit -- the selection program has real headroom and the lever is thinking-augmented self-verification (cheaper/stronger than the trained selectors the corpus favored). This inverts C9: thinking helps VERIFICATION (+0.20 balanced-acc) at least as much as GENERATION -- its deepest value may be helping the model recognize correct answers, not just produce them.
+- Implication: Selection work should try the model's own thinking-verifier before elaborate trained selectors; and native thinking should be evaluated as a verification/selection lever, not only a generation lever. Wire the thinking-verifier as a controller signal (vs/with the visible test).
+
+### Evidence
+
+- [`qwen35_4b_generator_verifier_gap`](../../experiments/qwen35_4b_generator_verifier_gap/reports/report.md)
+
+### Next Tests
+
+- Wire the thinking-verifier as the controller signal vs/with the visible test; deployable accuracy-vs-token Pareto.
+- Verify a think-generated (harder-negative) candidate pool, and on a contamination-controlled substrate.
+- Iterated generate->self-verify->revise self-correction loop driven by the strong thinking-verifier.
+
+### Avoid
+
+- Reporting no-think self-verification as strong -- it is yes-biased (0.91) and weak (AUROC 0.77).
+- Treating verifier-selected accuracy as the oracle -- it is deployable but below the pass@k ceiling.

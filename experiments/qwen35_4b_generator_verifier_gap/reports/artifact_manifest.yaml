@@ -1,0 +1,25 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_generator_verifier_gap"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "generation + verification judging"
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "data/records.jsonl, data/labels.jsonl, data/tasks.json"
+    reason: "candidate codes + P(correct) judgments + execution labels + task metadata"
+  - path: "runs/summary.json, analysis/gen_verify.png"
+    reason: "metrics + figure"
+reproducibility:
+  smoke_command: "../../.venv/bin/python scripts/run.py --smoke"
+  full_command: >-
+    HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    ../../.venv/bin/python scripts/run.py --tasks 100 --k 8 --budget 1024
+  verify_command: "../../.venv/bin/python scripts/verify.py"
+  analyze_command: "../../.venv/bin/python analysis/analyze.py"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: >-
+  Verification is BLACK-BOX (no execution/hidden tests): P(correct) read from the A(=correct)/B(=incorrect)
+  logit at a forced answer position. Balanced accuracy + AUROC control for the class imbalance/yes-bias;
+  foreign-solution judgments are a floor control that the verifier reads the task.

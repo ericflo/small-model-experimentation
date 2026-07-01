@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 160
+- Experiments: 161
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 115
+- Assigned experiments: 116
 
 ### Seed Evidence
 
@@ -50,6 +50,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_foofah_program_repair_agent` (track-z): [README](../experiments/qwen35_4b_foofah_program_repair_agent/README.md)
 - `qwen35_4b_foofah_program_strategy_portfolio` (track-z): [README](../experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md)
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
@@ -143,7 +144,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 55
+- Assigned experiments: 56
 
 ### Seed Evidence
 
@@ -166,6 +167,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
@@ -508,7 +510,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 39
+- Assigned experiments: 40
 
 ### Seed Evidence
 
@@ -522,6 +524,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
@@ -564,7 +567,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 44
+- Assigned experiments: 45
 
 ### Seed Evidence
 
@@ -581,6 +584,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
