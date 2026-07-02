@@ -225,12 +225,13 @@ a.chip:hover { text-decoration: none; border-color: var(--baseline); color: var(
 
 .viz-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
 .viz-chart {
-  margin: 0; padding: 14px 16px 10px;
+  margin: 0; padding: 16px 18px 12px;
   background: var(--surface); border: 1px solid var(--grid); border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
-.viz-chart figcaption { font-size: 14px; margin-bottom: 10px; }
-.viz-chart figcaption strong { font-weight: 650; }
+.viz-chart figcaption { margin-bottom: 12px; }
+.viz-chart figcaption strong { display: block; font-weight: 650; font-size: 15.5px; line-height: 1.4; }
+.viz-chart figcaption .muted { display: block; font-size: 13.5px; margin-top: 3px; max-width: 62ch; }
 .viz-svg { display: block; width: 100%; height: auto; }
 .viz-svg [data-viz-pt] { cursor: pointer; }
 .viz-svg [data-viz-pt]:hover { opacity: 0.8; }

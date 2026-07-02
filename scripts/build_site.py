@@ -1066,12 +1066,16 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
     y_format = spec.get("y_format", "number")
     ticks = _nice_ticks(lo, hi)
 
+    is_line = spec["kind"] == "line"
     width = 360 if mini else 720
-    plot_h = 128 if mini else 240
-    m_left = 8 if mini else 52
-    m_right = 8 if mini else 14
-    m_top = 16 if mini else 12
-    m_bottom = 22 if mini else 34
+    plot_h = 128 if mini else 250
+    m_left = 8 if mini else 50
+    m_right = 10 if mini else 16
+    if is_line and not mini:  # room for direct series labels at line ends
+        longest = max(len(str(entry["label"])[:20]) for entry in spec["series"])
+        m_right = max(70, min(140, longest * 6 + 16))
+    m_top = 18 if mini else (30 if spec.get("y_label") else 16)
+    m_bottom = 22 if mini else 36
     plot_w = width - m_left - m_right
     height = plot_h + m_top + m_bottom
 
@@ -1079,12 +1083,18 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
         return m_top + plot_h - (v - lo) / (hi - lo) * plot_h
 
     parts: list[str] = []
+    if not mini and spec.get("y_label"):
+        parts.append(
+            f'<text x="4" y="13" font-size="11.5" fill="var(--muted)">{esc(str(spec["y_label"]))}'
+            + (f' <tspan fill="var(--baseline)">·</tspan> {esc(str(spec["x_label"]))} →' if spec["kind"] == "line" and spec.get("x_label") else "")
+            + "</text>"
+        )
     for tick in ticks:
         y = sy(tick)
         parts.append(f'<line x1="{m_left}" x2="{width - m_right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)" stroke-width="1"/>')
         if not mini:
             parts.append(
-                f'<text x="{m_left - 6}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(tick, y_format))}</text>'
+                f'<text x="{m_left - 7}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(tick, y_format))}</text>'
             )
     zero_y = sy(0)
     parts.append(f'<line x1="{m_left}" x2="{width - m_right}" y1="{zero_y:.1f}" y2="{zero_y:.1f}" stroke="var(--baseline)" stroke-width="1"/>')
@@ -1096,26 +1106,31 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
         n_groups = len(cats)
         n_series = len(series)
         group_w = plot_w / max(n_groups, 1)
-        bar_w = min(24.0, max(6.0, (group_w - 18) / n_series - 4))
-        cluster_w = n_series * bar_w + (n_series - 1) * 4
+        gap = 2 if mini else 3
+        bar_w = min(30.0 if mini else 38.0, max(7.0, (group_w * 0.74) / n_series - gap))
+        cluster_w = n_series * bar_w + (n_series - 1) * gap
         total_bars = n_groups * n_series
-        show_labels = total_bars <= (6 if mini else 10)
+        show_labels = bar_w >= 17 and total_bars <= (6 if mini else 16)
+        label_font = 10 if mini else 10.5
         for gi, cat in enumerate(cats):
             gx = m_left + gi * group_w + (group_w - cluster_w) / 2
             for si, entry in enumerate(series):
                 value = entry["values"][gi]
-                x = gx + si * (bar_w + 4)
+                x = gx + si * (bar_w + gap)
                 y0, y1 = sy(max(0.0, value)), sy(min(0.0, value))
-                bar_h = max(1.0, y1 - y0)
+                bar_h = max(1.5, y1 - y0)
                 label = f'{esc(entry["label"])} · {esc(cat)}: {esc(_fmt_val(value, y_format))}' if len(series) > 1 else f'{esc(cat)}: {esc(_fmt_val(value, y_format))}'
                 parts.append(
-                    f'<rect x="{x:.1f}" y="{y0:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" rx="2" '
+                    f'<rect x="{x:.1f}" y="{y0:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" rx="2.5" '
                     f'fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{label}"/>'
                 )
                 if show_labels:
+                    ly = y1 + 12 if value < 0 else y0 - 4
+                    if bar_w < 27 and n_series > 1 and si % 2:
+                        ly += 12 if value < 0 else -11  # stagger: narrow neighbors collide
                     parts.append(
-                        f'<text x="{x + bar_w / 2:.1f}" y="{y0 - 4:.1f}" text-anchor="middle" font-size="{10 if mini else 11}" '
-                        f'fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(value, y_format))}</text>'
+                        f'<text x="{x + bar_w / 2:.1f}" y="{ly:.1f}" text-anchor="middle" font-size="{label_font}" '
+                        f'font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(value, y_format))}</text>'
                     )
                 total_pts += 1
             if not mini or n_groups <= 4:  # crowded mini labels collide; the card links to the full chart
@@ -1135,12 +1150,13 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
         def sx(v: float) -> float:
             return m_left + (v - x_lo) / (x_hi - x_lo) * plot_w
 
+        end_labels: list[tuple[float, int, str]] = []
         for si, entry in enumerate(series):
             pts = sorted(entry["points"], key=lambda p: p[0])
             if len(pts) > 1:
                 path = " ".join(f"{sx(p[0]):.1f},{sy(p[1]):.1f}" for p in pts)
                 parts.append(
-                    f'<polyline points="{path}" fill="none" stroke="{_series_color(si)}" stroke-width="2" '
+                    f'<polyline points="{path}" fill="none" stroke="{_series_color(si)}" stroke-width="2.25" '
                     f'stroke-linejoin="round" stroke-linecap="round" data-viz-series-line="{si}"/>'
                 )
             marker_r = (3 if mini else 3.5) if len(pts) > 1 else (4.5 if mini else 5.5)
@@ -1151,6 +1167,20 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
                     f'data-viz-pt data-viz-series="{si}" data-viz-label="{label}"/>'
                 )
                 total_pts += 1
+            end_labels.append((sy(pts[-1][1]), si, str(entry["label"])[:20]))
+        if not mini:  # name each series at its line end: no eye travel to a legend
+            end_labels.sort()
+            placed: list[float] = []
+            for y, si, text in end_labels:
+                for prev in placed:
+                    if abs(y - prev) < 13:
+                        y = prev + 13
+                y = min(max(y, m_top + 6), m_top + plot_h - 2)
+                placed.append(y)
+                parts.append(
+                    f'<text x="{width - m_right + 7}" y="{y + 3.5:.1f}" font-size="11" font-weight="600" '
+                    f'fill="{_series_color(si)}" data-viz-series-label="{si}">{esc(text)}</text>'
+                )
         x_ticks = _nice_ticks(x_lo, x_hi)[:6]
         if mini and len(x_ticks) > 3:
             x_ticks = [x_ticks[0], x_ticks[len(x_ticks) // 2], x_ticks[-1]]
@@ -1159,11 +1189,7 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
                 f'<text x="{sx(tick):.1f}" y="{m_top + plot_h + (14 if mini else 16)}" text-anchor="middle" '
                 f'font-size="{10 if mini else 11}" fill="var(--ink-2)">{esc(_fmt_val(tick, "number"))}</text>'
             )
-        if not mini and spec.get("x_label"):
-            parts.append(
-                f'<text x="{m_left + plot_w / 2:.1f}" y="{height - 3}" text-anchor="middle" font-size="11" '
-                f'fill="var(--muted)">{esc(spec["x_label"])}</text>'
-            )
+        # (x_label rides in the top-left metric line for line charts)
 
     title = str(spec.get("title", ""))
     aria = f'{title}: {spec.get("note", "")}' if spec.get("note") else title
@@ -1177,7 +1203,7 @@ def chart_figure(spec: dict, exp: dict, index: int) -> str:
     """Full chart block: caption, svg, legend, data-table twin, source."""
     svg = chart_svg(spec, mini=False, uid=f'{exp["id"]}-{index}')
     legend = ""
-    if len(spec["series"]) > 1:
+    if spec["kind"] == "bar" and len(spec["series"]) > 1:  # lines carry direct end labels
         chips = "".join(
             f'<button type="button" class="viz-key" data-viz-toggle="{si}">'
             f'<span class="dot" style="background:{_series_color(si)}"></span>{esc(entry["label"])}</button>'
