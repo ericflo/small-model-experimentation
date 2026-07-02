@@ -1076,6 +1076,43 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".jsonl": 3,
+      ".log": 2,
+      ".md": 5,
+      ".png": 2,
+      ".py": 10,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-02",
+    "id": "qwen35_4b_depth_wall_anatomy",
+    "path": "experiments/qwen35_4b_depth_wall_anatomy",
+    "primary_readme": "experiments/qwen35_4b_depth_wall_anatomy/README.md",
+    "primary_report": "experiments/qwen35_4b_depth_wall_anatomy/reports/report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "compositional frontier \u2014 insight-first: laws and mechanisms, not another lever. experiment decomposes that wall into measurable parts, with **pre-registered predictions** (`reports/prereg.md`) logged before each phase ran.",
+    "tags": [
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Depth-Wall Anatomy",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 27,
+    "total_size_bytes": 999558
+  },
+  {
+    "file_counts": {
       ".json": 11,
       ".jsonl": 9,
       ".log": 8,

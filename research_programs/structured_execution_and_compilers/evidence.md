@@ -10,6 +10,14 @@
 
 ## Key Result
 
+- [qwen35_4b_depth_wall_anatomy](../../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md)
+  (claim C13): pre-registered anatomy of the compositional wall. It is **identification, not execution** —
+  plan-given execution 0.90–1.00 through depth 4 (zero execution deficit) while bare identification runs at
+  ~2× over chance per composed op (odds fall ~30×/op; wall at depth 2), insensitive to op type, and barely
+  helped by shown intermediates (segmentation deficit). Retro-explains C10/C11/C12 with one mechanism:
+  the fixed 4B is a reliable compiler starved of hypothesis search — tools identify, the model compiles.
+  Also: 40% of nominal depth-3 tasks were shallower-equivalent (min-depth audit; C12 corrected).
+
 - [qwen35_4b_decompose_compose_frontier](../../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md)
   (claim C12): **the frontier is extendable without a teacher.** A decompose-and-compose search (4B ranks
   next primitive → interpreter executes → recurse) cracks depth-3 monolithic sampling can't (0.125→0.40+,

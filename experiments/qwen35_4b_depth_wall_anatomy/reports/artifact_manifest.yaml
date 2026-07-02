@@ -1,0 +1,28 @@
+schema_version: 1
+experiment_id: "qwen35_4b_depth_wall_anatomy"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "grid + discriminator generation, planner letter-logit slice"
+omitted_artifacts: []
+in_repo_artifacts:
+  - path: "data/min_depth_audit.json"
+    reason: "Phase-0 behavioral min-depth audit of all existing M1/M2/C12 tasks"
+  - path: "data/grid_tasks.jsonl, data/grid_records.jsonl"
+    reason: "verified-depth factorial grid tasks + per-task results (greedy/pass@6/false-pass/planner-rank)"
+  - path: "data/discriminator_records.jsonl"
+    reason: "Phase-2 bare vs plan-given vs intermediates-shown per-task results"
+  - path: "runs/grid_analysis.json, analysis/grid_main.png"
+    reason: "analysis vs pre-registered predictions + headline figure"
+  - path: "reports/prereg.md"
+    reason: "pre-registered hypotheses/predictions P0-P9, logged before each phase ran"
+reproducibility:
+  phase0_command: "../../.venv/bin/python scripts/min_depth_audit.py"
+  phase1_command: "../../.venv/bin/python scripts/run_grid.py --n-per-cell 25 --k-samples 6 --budget 512 --seed 1234"
+  phase2_command: "../../.venv/bin/python scripts/run_discriminator.py --per-cell 20"
+  analyze_command: "../../.venv/bin/python analysis/analyze_grid.py"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: >-
+  Insight-first experiment with pre-registered predictions. Verified-depth generation (exact BFS rejection
+  of shallower-equivalent compositions) removes the collapse artifact Phase 0 discovered in all prior
+  substrate data. No training in this experiment; all measures are frozen-model behavioral.

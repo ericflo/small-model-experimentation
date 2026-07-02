@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 12
+- Claims: 13
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 5 |
+| Promising | 6 |
 
 ## Program Counts
 
@@ -22,12 +22,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 3 |
-| `interpretability_and_diagnostics` | 1 |
+| `interpretability_and_diagnostics` | 2 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 3 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 3 |
+| `structured_execution_and_compilers` | 4 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -296,3 +296,26 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Claiming the MODEL out-searches brute force -- on coverage it does not; guidance is an efficiency win.
 - Overstating banking -- absolutes stay low; greedy@1 +0.05 is ~1.5 SE (pass@5 +0.112 is ~2.6 SE), one seed n=80.
 - Using nominal composition depth as difficulty without a behavioral min-depth check -- 40% of random depth-3 compositions are shallower-equivalent.
+
+## C13: The fixed 4B's compositional wall is hypothesis identification, not execution (a compiler starved of search)
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `interpretability_and_diagnostics`
+- Summary: Pre-registered anatomy of the compositional 'depth wall' (experiment qwen35_4b_depth_wall_anatomy). (1) MEASUREMENT: a behavioral min-depth audit found 40% of nominal depth-3 substrate tasks are shallower-equivalent; true monolithic depth-3 solves were 0 corpus-wide (C12 retro-corrected). (2) LAW: on a verified factorial grid (17 cells, depth 1-5 x destructive-ops 0-3, n=25/cell, 425 tasks), the pre-registered information-destruction hypothesis DIED (k=0 deep compositions unsolvable; op type irrelevant: logistic coefs -3.24 vs -3.87) and a uniform law replaced it: solve odds fall ~30x per composed op (~-3.5 logits/op) -- against the 63-op space, identification beyond the first primitive is only ~2x better than chance, walling at depth TWO. (3) MECHANISM (three-condition discriminator, same verified tasks): plan-given execution is 0.90-1.00 through depth 4 at every destruction level -- ZERO execution deficit -- while bare identification is 0.00-0.10 and even intermediates-shown only reaches 0.00-0.30 (the model cannot SEGMENT observed state-chains into the depth-1 identifications it performs at 0.88). Convergent constant: the ~2x-over-chance/op law independently equals C12's ~2x guided-vs-brute search efficiency. One mechanism -- a reliable compiler starved of hypothesis search -- quantitatively retro-explains C10 (verify>>generate: verification is execution-shaped), C11 (banking is coverage-bounded because SFT teaches production, not identification), C12 (decompose+interpreter works because it externalizes segmentation+search; its modest guidance edge IS the 2x constant), and M2 (execution feedback fails because identification, not correction, binds).
+- Implication: For fixed small models: plan-conditioned execution is nearly free capability -- give the model the plan and it compiles reliably; the scarce resource is hypothesis identification/search, which cheap external tools (enumeration + interpreter) supply. Build systems where tools identify and the model compiles. Do not spend training on execution (already ~1.0); target identification/segmentation if training at all. And never trust nominal composition depth without a behavioral min-depth check.
+
+### Evidence
+
+- [`qwen35_4b_depth_wall_anatomy`](../../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md)
+
+### Next Tests
+
+- Segmented-presentation probe: per-step transition mini-examples -- does the deficit localize to segmentation?
+- Two-alternative pipeline discrimination (identification without generation).
+- Thinking-budget sweep at fixed depth (unsaturate P6; serial-workspace test).
+- Cross-substrate transfer of the ~30x/op identification decay constant.
+
+### Avoid
+
+- Reading the 1.00 plan-given as 'composition solved' -- identification remains the binding constraint end-to-end.
+- Generalizing the exact 30x/op constant beyond this 63-op substrate without the cross-substrate test.
