@@ -1,0 +1,26 @@
+schema_version: 1
+experiment_id: "qwen35_4b_context_composition"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "all conditions"
+omitted_artifacts:
+  - name: "runs/adapter_sim (QLoRA adapter ~170MB)"
+    reason: "regenerable via scripts/train_lora.py on data/train_sim.jsonl (committed)"
+in_repo_artifacts:
+  - path: "reports/prereg.md"
+    reason: "pre-registered predictions P-C1..P-C5 + decision mapping, logged before data"
+  - path: "data/ladder_tasks.jsonl, data/train_sim.jsonl"
+    reason: "reused keystone task set (exact comparability) + SIM training data"
+  - path: "runs/ctx_base.json, runs/ctx_sim.json"
+    reason: "per-task results, all conditions"
+  - path: "analysis/context_composition.png"
+    reason: "headline figure"
+reproducibility:
+  adapter_command: "../../.venv/bin/python scripts/train_lora.py --train data/train_sim.jsonl --out runs/adapter_sim --epochs 2"
+  full_command: "bash scripts/full_chain.sh"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: >-
+  Third installation mechanism (context), completing the tools/weights/context triptych. Same tasks and
+  2AFC decoys as qwen35_4b_simulation_keystone_repair via fixed seed. Includes a retro-correction of the
+  keystone's P12 protocol (budget + parser artifacts).

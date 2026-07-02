@@ -19,13 +19,13 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Directory | Experiments |
 | --- | ---: |
-| `reports/` | 166 |
-| `src/` | 154 |
-| `runs/` | 102 |
-| `analysis/` | 92 |
-| `scripts/` | 75 |
-| `data/` | 74 |
-| `configs/` | 72 |
+| `reports/` | 167 |
+| `src/` | 155 |
+| `runs/` | 103 |
+| `analysis/` | 93 |
+| `scripts/` | 76 |
+| `data/` | 75 |
+| `configs/` | 73 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `figures/` | 10 |
@@ -36,15 +36,15 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | Extension | Files |
 | --- | ---: |
 | `.csv` | 2134 |
-| `.json` | 1814 |
-| `.png` | 810 |
-| `.py` | 743 |
-| `.md` | 630 |
-| `.jsonl` | 509 |
-| `.log` | 482 |
-| `.yaml` | 188 |
+| `.json` | 1816 |
+| `.png` | 811 |
+| `.py` | 751 |
+| `.md` | 635 |
+| `.jsonl` | 511 |
+| `.log` | 484 |
+| `.yaml` | 191 |
 | `.html` | 90 |
-| `.sh` | 14 |
+| `.sh` | 15 |
 | `.txt` | 4 |
 
 ## Largest Files

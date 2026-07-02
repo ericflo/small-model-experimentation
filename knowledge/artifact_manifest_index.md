@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 138
-- Manifest files: 434
+- Experiments with manifests: 139
+- Manifest files: 435
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 11 |
+| `standard-artifact` | 12 |
 
 ## Manifests
 
@@ -62,6 +62,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_constrained_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/data/eval_constrained_dpo_k4_records.manifest.json) |
 | `qwen35_4b_constrained_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/data/eval_constrained_shuffled_dpo_k4_records.manifest.json) |
 | `qwen35_4b_constrained_coverage_dpo` | `large-artifact` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/large_artifacts_manifest.md) |
+| `qwen35_4b_context_composition` | `standard-artifact` | [manifest](../experiments/qwen35_4b_context_composition/reports/artifact_manifest.yaml) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/counterexample/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/random/dataset_manifest.json) |
