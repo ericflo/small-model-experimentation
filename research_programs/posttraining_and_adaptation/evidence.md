@@ -9,6 +9,12 @@
 
 ## Key Result
 
+- [qwen35_4b_decompose_compose_frontier](../../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md)
+  (claim C12): banking search+interpreter-harvested solutions (QLoRA-SFT, no teacher) that the model could NOT
+  monolithically sample EXTENDS its frontier into the weights — monolithic held-out pass@5 0.125→0.237
+  (+0.112, ~2.6 SE), depth-3 pass@5 4×. This breaks M4's coverage bound: self-training on data from OUTSIDE
+  the sampling support (harvested by tool-augmented search) pulls it into the distribution. Frontier
+  extension without a teacher.
 - [qwen35_4b_neurosymbolic_repl_substrate](../../experiments/qwen35_4b_neurosymbolic_repl_substrate/reports/report.md)
   (claim C11): the corpus's **first self-training WIN**. QLoRA-SFT on the 4B's OWN 189 execution-verified
   solutions (no teacher) improved held-out fresh single-shot on a contamination-free substrate: think-greedy@1

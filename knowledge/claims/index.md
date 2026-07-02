@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 11
+- Claims: 12
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 4 |
+| Promising | 5 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 1 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 2 |
+| `posttraining_and_adaptation` | 3 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 2 |
+| `structured_execution_and_compilers` | 3 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -273,3 +273,26 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 - Reading M2 as 'feedback is useless' -- it is specifically that feedback does not beat matched-compute sampling for THIS 4B on THIS substrate.
 - Still one substrate + one model; generalization across substrates/models is untested.
+
+## C12: The fixed 4B's compositional frontier extends without a teacher via tool-augmented search + banking
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: On the contamination-free depth-graded program-synthesis substrate, C11/M4 left the depth-3 frontier uncrackable by self-training (coverage-bounded). A decompose-and-compose search (the 4B ranks the next primitive via a letter-logit read of current-state->target; the interpreter executes it to materialize the intermediate state; recurse/backtrack over 23 primitives) CRACKS it: hidden-generalizing depth-3 solve rate monolithic 0.125 -> decompose 0.40-0.43 (3.4x). BUT against the brute-force bar (23 primitives -> blind enumeration already solves depth-3), the model's GUIDANCE buys EFFICIENCY not COVERAGE: guided solves with ~2.5x fewer interpreter calls and wins the low-budget regime, but PLATEAUS (planner-wall -- where its ranking misses it never recovers) while brute-force enumeration matches/beats it at high budget (d2 guided 0.575 vs brute 0.875; d3 converge ~0.40). So the frontier crack is the composition-structure + interpreter, not the model's planning -- the wall RELOCATES to the planner. Crucially, BANKING the search-found solutions (QLoRA-SFT on 327 (prompt->code) traces, no teacher) EXTENDS the frontier into the weights: monolithic held-out pass@5 0.125->0.237 (+0.112, ~2.6 SE), depth-3 pass@5 0.025->0.100 (4x), greedy@1 0.075->0.125 (+0.05, ~1.5 SE), no-think one-shot 0->0.062. This is the exact bound M4 (confined to the sampling distribution) could not break: search+interpreter harvested solutions OUTSIDE the sampling support and banking pulled them INTO it. REPLICATED: a second harvest seed reproduces banking (greedy 0.125 identical; pass@5 0.263; d3 pass@5 0.175). RETRO-AUDIT CORRECTION (behavioral min-depth): the generator did not exclude shallower-equivalent compositions -- 40% of nominal depth-3 tasks are behaviorally depth<=2. Re-sliced, decompose solved 16/16 collapsed but only 4/24 (17%) TRUE depth-3 (monolithic true-d3 = 0/24, and 0 corpus-wide); the banking eval is ~30% collapsed at d3 (mixed-population caveat). The frontier extension is real (17% > 0) but far more modest than nominal numbers; every prior 'depth-3' figure in the arc was inflated by this artifact. Verified-depth follow-up: depth-wall anatomy experiment.
+- Implication: To extend a fixed small model's frontier without a teacher: use tool-augmented search (composition + an interpreter, both allowed calculators/algorithms) to harvest execution-verified solutions OUTSIDE its sampling support, then self-train on them. The model's own planning helps search EFFICIENCY but not COVERAGE -- the search structure + interpreter carry the crack, so don't credit the model with out-searching brute force.
+
+### Evidence
+
+- [`qwen35_4b_decompose_compose_frontier`](../../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md)
+
+### Next Tests
+
+- Iterate as a frontier flywheel (harvest -> bank -> re-harvest with the improved model): does the extended frontier compound or re-saturate?
+- Larger primitive vocabulary where brute-force enumeration explodes -- there the model's guidance must carry the search; does it?
+- Deeper depths (4-5): does banked composition generalize to compositions deeper than any trained?
+
+### Avoid
+
+- Claiming the MODEL out-searches brute force -- on coverage it does not; guidance is an efficiency win.
+- Overstating banking -- absolutes stay low; greedy@1 +0.05 is ~1.5 SE (pass@5 +0.112 is ~2.6 SE), one seed n=80.
+- Using nominal composition depth as difficulty without a behavioral min-depth check -- 40% of random depth-3 compositions are shallower-equivalent.

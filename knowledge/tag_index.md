@@ -6,6 +6,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 - `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` (track-z): [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
 - `qwen35_4b_foofah_direct_vs_abi` (track-z): [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md)
 - `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
@@ -142,6 +143,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 ## distillation
 
 - `dense_teacher_distillation` (track-y): [README](../experiments/dense_teacher_distillation/README.md)
+- `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
 - `qwen35_4b_neurosymbolic_repl_substrate` (new): [README](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md)
 - `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
@@ -278,6 +280,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `latent_executor` (track-y): [README](../experiments/latent_executor/README.md)
 - `learned_sparse_slot_executor` (track-y): [README](../experiments/learned_sparse_slot_executor/README.md)
 - `query_filter_executor` (track-y): [README](../experiments/query_filter_executor/README.md)
+- `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
 - `qwen35_4b_prefix_value_guided_search` (track-z): [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md)
@@ -435,6 +438,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
+- `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)

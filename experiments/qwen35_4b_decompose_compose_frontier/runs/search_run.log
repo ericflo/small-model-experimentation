@@ -1,0 +1,18 @@
+80 held-out tasks (depths [2, 3], 40/depth, k_visible=10)
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:14,  5.73it/s]Loading weights:  12%|█▏        | 51/426 [00:00<00:01, 227.05it/s]Loading weights:  23%|██▎       | 100/426 [00:00<00:00, 326.67it/s]Loading weights:  35%|███▌      | 151/426 [00:00<00:00, 388.93it/s]Loading weights:  47%|████▋     | 201/426 [00:00<00:00, 421.81it/s]Loading weights:  59%|█████▉    | 252/426 [00:00<00:00, 445.29it/s]Loading weights:  71%|███████   | 301/426 [00:00<00:00, 454.83it/s]Loading weights:  82%|████████▏ | 348/426 [00:00<00:00, 450.16it/s]Loading weights:  92%|█████████▏| 394/426 [00:01<00:00, 439.00it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 389.36it/s]
+model loaded 3s
+  guided done [122s]
+  brute done [2s]
+/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+  monolithic done [1272s]
+
+=== FRONTIER SEARCH (hidden-generalizing solve rate) ===
+depth 2 (n=40): monolithic 0.325 | guided 0.575 (158 calls) | brute 0.875 (825 calls)
+   guided curve: {50: 0.25, 100: 0.275, 200: 0.3, 400: 0.575, 800: 0.575, 1500: 0.575, 3000: 0.575, 4000: 0.575}
+   brute  curve: {50: 0.1, 100: 0.175, 200: 0.2, 400: 0.3, 800: 0.525, 1500: 0.75, 3000: 0.825, 4000: 0.875}
+depth 3 (n=40): monolithic 0.125 | guided 0.400 (350 calls) | brute 0.425 (895 calls)
+   guided curve: {50: 0.075, 100: 0.15, 200: 0.2, 400: 0.325, 800: 0.35, 1500: 0.375, 3000: 0.4, 4000: 0.4}
+   brute  curve: {50: 0.025, 100: 0.075, 200: 0.175, 400: 0.225, 800: 0.3, 1500: 0.325, 3000: 0.4, 4000: 0.425}
+
+saved 57 hidden-generalizing solutions for banking -> data/found_solutions.jsonl

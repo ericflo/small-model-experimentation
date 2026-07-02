@@ -1,0 +1,26 @@
+schema_version: 1
+experiment_id: "qwen35_4b_decompose_compose_frontier"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "primitive ranking, monolithic baseline, QLoRA banking"
+omitted_artifacts:
+  - name: "runs/frontier_adapter (QLoRA adapter ~170MB)"
+    reason: "regenerable via scripts/bank_chain.sh; kept out of git"
+in_repo_artifacts:
+  - path: "data/search_tasks.jsonl, data/frontier_train.jsonl, data/frontier_eval.jsonl, data/found_solutions.jsonl"
+    reason: "held-out search tasks + harvested (prompt->code) solutions + eval tasks"
+  - path: "runs/search_summary.json, runs/eval_frozen.json, runs/eval_trained.json"
+    reason: "search curves + banking metrics"
+  - path: "analysis/search_curve.png"
+    reason: "solve-rate vs call-budget figure"
+reproducibility:
+  env_note: "requires peft + bitsandbytes in the .venv"
+  search_command: "../../.venv/bin/python scripts/run_search.py --per-depth 40 --depths 2 3 --beam 50 --top-p 8"
+  harvest_command: "../../.venv/bin/python scripts/harvest.py"
+  bank_command: "bash scripts/bank_chain.sh"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: >-
+  On-mission frontier attack: interpreter (a calculator) + brute-force search (a deterministic algorithm) +
+  the 4B's own primitive ranking; no teacher, no other model, no contaminated data. The brute-force bar is
+  the honesty criterion (model guidance must beat matched-budget enumeration to count as elicitation).

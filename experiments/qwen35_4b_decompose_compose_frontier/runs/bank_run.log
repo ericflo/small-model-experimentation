@@ -1,0 +1,19 @@
+=== TRAIN 16:39:45 (327 solutions) ===
+training on 327 verified (prompt->code) pairs
+{'train_runtime': '528.1', 'train_samples_per_second': '1.238', 'train_steps_per_second': '0.155', 'train_loss': '0.1137', 'epoch': '2'}
+saved adapter to runs/frontier_adapter
+=== EVAL FROZEN 16:48:44 ===
+eval frozen: 80 tasks, k=5, think=False
+frozen  (n=80)
+  nothink_greedy@1   0.000   d2:0.00  d3:0.00
+  think_greedy@1     0.075   d2:0.12  d3:0.03
+  think_pass@5       0.125   d2:0.23  d3:0.03
+wrote runs/eval_frozen.json
+=== EVAL TRAINED 17:09:25 ===
+eval trained(runs/frontier_adapter): 80 tasks, k=5, think=False
+trained(runs/frontier_adapter)  (n=80)
+  nothink_greedy@1   0.062   d2:0.07  d3:0.05
+  think_greedy@1     0.125   d2:0.17  d3:0.07
+  think_pass@5       0.237   d2:0.38  d3:0.10
+wrote runs/eval_trained.json
+=== BANK_DONE 17:36:27 ===

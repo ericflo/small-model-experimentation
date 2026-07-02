@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 163
-- Anchor-ready: 148
-- Human-authored READMEs: 150
+- Experiments: 164
+- Anchor-ready: 149
+- Human-authored READMEs: 151
 - Generated README stubs: 13
-- Primary reports: 163
-- Experiment logs: 67
-- Smoke commands: 32
-- Artifact manifests: 135
+- Primary reports: 164
+- Experiment logs: 68
+- Smoke commands: 33
+- Artifact manifests: 136
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 52 |
+| `documented-scripts` | 53 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -63,6 +63,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_code_abi_oracle_coverage_ladder`](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md) | algorithmic_memory_and_retrieval, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/reports/final_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_constrained_coverage_dpo`](../experiments/qwen35_4b_constrained_coverage_dpo/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_constrained_coverage_dpo/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_counterexample_directed_dsl`](../experiments/qwen35_4b_counterexample_directed_dsl/README.md) | benchmark_generalization, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_counterexample_directed_dsl/reports/qwen35_4b_counterexample_directed_dsl_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
+| yes | [`qwen35_4b_decompose_compose_frontier`](../experiments/qwen35_4b_decompose_compose_frontier/README.md) | posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_deployable_information_ceiling_sweep`](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md) | evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | no | [`qwen35_4b_diversity_keyed_coverage_gate`](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `generated-stub` | [report](../experiments/qwen35_4b_diversity_keyed_coverage_gate/reports/qwen35_4b_diversity_keyed_coverage_gate_report.md) | no | `scripts-undocumented` | no | run-data | replace-generated-readme, add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_executable_program_posttraining`](../experiments/qwen35_4b_executable_program_posttraining/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_executable_program_posttraining/reports/qwen35_4b_executable_program_posttraining_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |

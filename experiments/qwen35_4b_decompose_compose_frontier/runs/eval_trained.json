@@ -1,0 +1,26 @@
+{
+  "tag": "trained(runs/frontier_adapter)",
+  "n_tasks": 80,
+  "k": 5,
+  "nothink_greedy@1": {
+    "overall": 0.062,
+    "by_depth": {
+      "2": 0.075,
+      "3": 0.05
+    }
+  },
+  "think_greedy@1": {
+    "overall": 0.125,
+    "by_depth": {
+      "2": 0.175,
+      "3": 0.075
+    }
+  },
+  "think_pass@5": {
+    "overall": 0.237,
+    "by_depth": {
+      "2": 0.375,
+      "3": 0.1
+    }
+  }
+}

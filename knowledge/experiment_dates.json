@@ -1,0 +1,1542 @@
+{
+ "note": "Run windows recovered from in-repo records on 2026-07-01. Git history collapses most experiment dirs onto the 2026-06-28 corpus import commit; these windows restore the real chronology from dated experiment-log headings, config date keys, epoch timestamps in run artifacts, git history for post-import dirs, and file mtimes for in-place work. Entries with confidence 'none' were searched and have no recoverable record. Audit or extend with scripts/extract_experiment_dates.py.",
+ "recovered_on": "2026-07-01",
+ "experiments": {
+  "adaptive_cognitive_kernel": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "experiments/adaptive_cognitive_kernel/experiment_log.md: fully undated narrative (paths like /workspace/experiments/...)",
+    "experiments/adaptive_cognitive_kernel/runs/*/run_summary.json: only elapsed_sec, no timestamps; checkpoint_manifest.csv has no time column"
+   ],
+   "caveat": "metadata.yaml generated_on: 2026-07-01 is the catalog sweep, not a run date; file mtimes are all 2026-06-29+ (import era)"
+  },
+  "belief_filter_executor": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "exhaustive scan of README.md, reports/belief_filter_executor_experiment_log.md, runs/*/results.json (keys: mode/args/env/train/eval/checkpoints — no time keys), runs/*/metrics_step*.csv, checkpoint_manifest.csv (run,filename,size only): zero date/timestamp records"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 (catalog sweep); decimal metric values in analysis/*.csv false-match epoch regexes"
+  },
+  "bridge_dose_recombination_curriculum": {
+   "start": "2026-06-21",
+   "end": "2026-06-22",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-21' heading",
+    "configs/experiment.json:'\"date\": \"2026-06-21\"'",
+    "reports/training/training_jobs.json:epoch started_at 1782075307 = 2026-06-21T20:55Z (min)",
+    "reports/final/final_evaluation_jobs.json:epoch finished_at up to 2026-06-22T02:48Z (max)"
+   ]
+  },
+  "counterexample_rule_repair": {
+   "start": "2026-06-20",
+   "end": "2026-06-20",
+   "confidence": "high",
+   "sources": [
+    "counterexample_rule_repair/logs/experiment_log.md: headings '## 2026-06-20 Setup' through '## 2026-06-20 Final Verification' (11 dated sections, single day)",
+    "counterexample_rule_repair/configs/experiment.json: \"date_utc\": \"2026-06-20\"",
+    "counterexample_rule_repair/reports/counterexample_rule_repair_paper.md: 2026-06-20"
+   ],
+   "caveat": "reports/pilot_*.json contain float metrics (e.g. generation_seconds 5.1767578125) whose digit substrings look like unix epochs; metadata.yaml dated 2026-07-01 is the catalog sweep"
+  },
+  "cyclic_transition_ladder": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/cyclic_transition_ladder_experiment_log.md: dated section headings '## 2026-06-21 Setup' through '## 2026-06-21 Final Audit' (lines 76-222) covering smoke/pilot/main/scale/audit all on one day"
+   ],
+   "caveat": "analysis/*.csv metric values produce false-positive unix epochs as substrings (e.g. 0.11767578125 -> '1767578125' = 2026-01-05); no real epochs in this dir"
+  },
+  "dense_latent_query_executor": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "metadata.yaml:generated_on 2026-07-01 (catalog sweep, not a run date)",
+    "reports/dense_latent_query_executor_experiment_log.md:no dated headings; runs/*/results.json have no time-ish keys; checkpoint_manifest.csv has no timestamp column"
+   ]
+  },
+  "dense_supervision_ladder": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "reports/dense_supervision_ladder_experiment_log.md: undated section headings only (Objective/Smoke/Pilot/Main)",
+    "runs/*/results.json: keys mode/args/env/train/eval — no time keys",
+    "checkpoint_manifest.csv: run,filename,size only — no dates"
+   ],
+   "caveat": "metadata.yaml generated_on: 2026-07-01 is catalog sweep; long float mantissas in metrics CSV/JSON false-match unix-epoch regexes (e.g. 1760249137 fragments); seed=53 not date-encoded. Only bound: imported in git 42c23ac 2026-06-28, so ran on/before 2026-06-28."
+  },
+  "dense_teacher_distillation": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/dense_teacher_distillation_experiment_log.md:dated headings '## 2026-06-21 Setup|Smoke Tests|Pilot Sweep|Main Sweep' (lines 52,73,92,120)"
+   ],
+   "caveat": "float substrings in runs/main_gru_mlp_d256/results.json and analysis/all_metrics_long.csv match compact-date regex (e.g. 0.08292026072740555 -> '20260727'); ignore numeric-context matches"
+  },
+  "end_to_end_structured_slot_executor": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/end_to_end_structured_slot_experiment_log.md: six phase headings '## 2026-06-21 Setup' ... '## 2026-06-21 Final Audit' (lines 79-229)"
+   ],
+   "caveat": "decimal metric fractions in runs/*/results.json and analysis/all_metrics_long.csv (e.g. 0.41477441787719727) coincidentally contain 10-digit epoch-looking substrings after the decimal point -> NOT timestamps; metadata.yaml generated_on 2026-07-01 is sweep"
+  },
+  "episodic_echo_ttt": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: per-run bullets '- Started: 2026-06-26 03:48:57 UTC' … '- Started: 2026-06-26 03:58:38 UTC' (5 runs)",
+    "runs/*/run_summary.json elapsed_sec ≤ 336s confirms all runs ended same day"
+   ],
+   "caveat": "metadata.yaml 2026-07-01; epoch-like numeric column values in runs/pilot_episodic_echo_ttt_batched_v3/details_seed_101_eval_indist.csv are data"
+  },
+  "execution_conditioned_repair": {
+   "start": "2026-06-19",
+   "end": "2026-06-20",
+   "confidence": "high",
+   "sources": [
+    "reports/lab_notebook.md:'## 2026-06-19 Environment Setup' ... six '## 2026-06-20 ...' headings",
+    "logs/packaging_log.md:'## 2026-06-20'"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep, not a run date)"
+  },
+  "factor_recombination_ladder": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "factor_recombination_ladder/logs/experiment_log.md: heading '## 2026-06-21'",
+    "factor_recombination_ladder/reports/training/training_jobs.json: started_at/finished_at epochs 1782059406..1782061... = 2026-06-21 16:30-16:58 UTC",
+    "factor_recombination_ladder/reports/final/final_evaluation_jobs.json: 60 started_at/finished_at epochs spanning 2026-06-21 16:59-20:24 UTC"
+   ],
+   "caveat": "metadata.yaml 2026-07-01 (catalog sweep); run_logs/*.log have no timestamps"
+  },
+  "feature_factorized_rule_diversity": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md: heading '## 2026-06-21'",
+    "reports/training/training_jobs.json: unix floats 1782019942.1-1782022059.5 = 2026-06-21 05:32-06:07 UTC",
+    "reports/final/final_evaluation_jobs.json: unix floats up to 2026-06-21 08:58:00 UTC",
+    "configs/experiment.json: \"date_created\": \"2026-06-21\""
+   ]
+  },
+  "joint_register_executor": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "metadata.yaml:generated_on 2026-07-01 (catalog sweep only)",
+    "reports/joint_register_executor_experiment_log.md:no dates; runs/*/results.json keys mode/args/env/train/eval only; git history starts at 2026-06-28 corpus import"
+   ]
+  },
+  "latent_executor": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "reports/latent_executor_experiment_log.md: undated headings only",
+    "runs/*/results.json: keys mode/args/train/eval — no time keys"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 (catalog sweep); seed defaults 11 (not date-encoded). Bound: imported 2026-06-28."
+  },
+  "learned_sparse_slot_executor": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/learned_sparse_slot_experiment_log.md:dated headings '## 2026-06-21 Setup|Smoke Tests|Pilot Sweep|Main Sweep|Final Audit' (lines 73-204)"
+   ]
+  },
+  "query_filter_executor": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "reports/query_filter_executor_experiment_log.md: no dates",
+    "runs/*/results.json: keys mode/args/env/train/eval only (env = python/torch/GPU, no time)"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep"
+  },
+  "qwen35_4b_active_counterexample_trace_selection": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md: headings '## 2026-06-24 02:26 UTC' … '## 2026-06-24 04:40 UTC'",
+    "run_logs/*.log: ISO timestamps 2026-06-24 02:26 → 2026-06-24 04:40"
+   ]
+  },
+  "qwen35_4b_adaptive_evidence_budget_policy": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "configs/experiment.json:'\"date_utc\": \"2026-06-24\"' (only dated record; logs/experiment_log.md has no dates, run_logs carry no timestamps)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen35_4b_adaptive_tool_controller": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "medium",
+   "sources": [
+    "qwen35_4b_adaptive_tool_controller/logs/experiment_log.md: heading '## 2026-06-28'",
+    "qwen35_4b_adaptive_tool_controller/configs/experiment.json: \"date_utc\": \"2026-06-28\""
+   ],
+   "caveat": "date equals the corpus-import day (commit 42c23ac 2026-06-28 12:34 -0700), so flagged medium; no time-of-day evidence to prove it preceded import"
+  },
+  "qwen35_4b_balanced_discriminative_bridge": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "low",
+   "sources": [
+    "configs/experiment.json:11: \"seed\": 20260627 (date-derived seed; convention confirmed by qwen_batched_transduction_consistency which used sample_seed 20260627 on its timestamp-verified 2026-06-27 run)",
+    "logs/experiment_log.md:25,43: 'Build/Built datasets with seed `20260627`'",
+    "git: dir imported in 42c23ac dated 2026-06-28 (upper bound only)"
+   ],
+   "caveat": "scripts/mine_model_counterexamples.py:184 default seed 20260624 is a code default copied from an earlier sibling, not a run date; no ISO dates or epochs anywhere; run_logs/*.log are console logs with tqdm timers only"
+  },
+  "qwen35_4b_bucket_belief_probe_ranker": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "configs/experiment.json:\"date_utc\": \"2026-06-24\""
+   ],
+   "caveat": "run_logs/*.log console logs carry no timestamps; logs/experiment_log.md has no dated headings"
+  },
+  "qwen35_4b_code_abi_compiler_heldout_primitive_pilot": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "configs/experiment.json:3 \"date\": \"2026-06-27\"",
+    "logs/experiment_log.md:3 heading '## 2026-06-27' (single-day log)"
+   ],
+   "caveat": "run_logs/*.log are pure JSON metric dumps with no timestamps; metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "qwen35_4b_code_abi_oracle_coverage_ladder": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-27' covering all three ladder runs",
+    "configs/experiment.json:3 '\"date\": \"2026-06-27\"'"
+   ]
+  },
+  "qwen35_4b_constrained_coverage_dpo": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-26'",
+    "configs/experiment.json:3 \"date\": \"2026-06-26\""
+   ]
+  },
+  "qwen35_4b_counterexample_directed_dsl": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "medium",
+   "sources": [
+    "logs/experiment_log.md: single dated heading '## 2026-06-22' (run_logs/*.log contain no timestamps)"
+   ]
+  },
+  "qwen35_4b_decompose_compose_frontier": {
+   "start": "2026-07-01",
+   "end": "2026-07-01",
+   "confidence": "medium",
+   "sources": [
+    "runs/* file mtimes 2026-07-01T16:36-18:15 local (dir is untracked/new, never imported, so mtimes are real)",
+    "metadata.yaml:2026-07-01",
+    "runs/bank_run.log:wall-clock-only stamps '=== TRAIN 16:39:45 ===' consistent with mtimes"
+   ]
+  },
+  "qwen35_4b_deployable_information_ceiling_sweep": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "qwen35_4b_deployable_information_ceiling_sweep/configs/experiment.json: \"date_utc\": \"2026-06-24\" (the date_utc key is validated against experiment_log dates in 5 sibling dirs)"
+   ],
+   "caveat": "logs/experiment_log.md exists but carries no dates; run_logs/*.log have no timestamps; reports/eval/*.json epoch-looking numbers are float-metric digit substrings, not timestamps"
+  },
+  "qwen35_4b_diversity_keyed_coverage_gate": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3: 'Date: 2026-06-25'",
+    "configs/experiment.json:3: \"date\": \"2026-06-25\"",
+    "reports/qwen35_4b_diversity_keyed_coverage_gate_report.md:3: 'Date: 2026-06-25' (also hardcoded in scripts/make_report.py:275)"
+   ]
+  },
+  "qwen35_4b_executable_program_posttraining": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-22' dated log heading ('Created standalone experiment directory')"
+   ]
+  },
+  "qwen35_4b_foofah_adaptive_program_budget_router": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "configs/experiment.json:3 \"date\": \"2026-06-28\"",
+    "logs/experiment_log.md:3 heading '## 2026-06-28' (single-day log)"
+   ],
+   "caveat": "Foofah table-transformation benchmark: data/ could contain dates-as-data, though no ISO/slash dates found in this dir's data files; metadata.yaml generated_on 2026-07-01 is sweep. Date 2026-06-28 is credible despite equaling import day: import commit was 12:34 -0700 (19:34 UTC), leaving the run window earlier that day (cf. sibling counterexample dir ran 03:23-04:20 UTC same day)."
+  },
+  "qwen35_4b_foofah_direct_vs_abi": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-27' (smoke through 'Full run complete' same entry)",
+    "configs/experiment.json:3 '\"date\": \"2026-06-27\"'"
+   ],
+   "caveat": "Foofah benchmark is table-transformation data; any dates inside data/abi_* or case tables are task DATA, not run dates (none were used as evidence)"
+  },
+  "qwen35_4b_foofah_ephemeral_program_induction": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-27'",
+    "configs/experiment.json:3 \"date\": \"2026-06-27\""
+   ],
+   "caveat": "Foofah is a table-transformation benchmark so dates could appear as task DATA, but data/ contains no 2026 strings; both cited dates are run metadata, not fixtures"
+  },
+  "qwen35_4b_foofah_external_transform_gate": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "configs/experiment.json: \"date\": \"2026-06-27\"",
+    "logs/experiment_log.md: heading '## 2026-06-27'"
+   ],
+   "caveat": "foofah is a string/table-transform benchmark — treat any date-like strings in data/ and run_logs as task data (none found in this dir's data/)"
+  },
+  "qwen35_4b_foofah_program_ensemble_consensus": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-27' heading",
+    "configs/experiment.json:'\"date\": \"2026-06-27\"'"
+   ],
+   "caveat": "data/cases.jsonl contains ~30 date-like strings (Foofah table-transform inputs/outputs = data, not run dates)"
+  },
+  "qwen35_4b_foofah_program_repair_agent": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "qwen35_4b_foofah_program_repair_agent/logs/experiment_log.md: heading '## 2026-06-27'",
+    "qwen35_4b_foofah_program_repair_agent/configs/experiment.json: \"date_utc\": \"2026-06-27\""
+   ],
+   "caveat": "foofah benchmark processes table data, but no date-valued task cells were found in this dir; run_logs/*.log have no timestamps"
+  },
+  "qwen35_4b_foofah_program_strategy_portfolio": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "medium",
+   "sources": [
+    "logs/experiment_log.md:3: heading '## 2026-06-28'",
+    "configs/experiment.json:3: \"date\": \"2026-06-28\""
+   ],
+   "caveat": "Foofah is a table-transformation benchmark: data/cases.jsonl and reports/*records.jsonl cells may contain date-like strings (none matched ISO scan). Date equals the repo-import day (42c23ac 2026-06-28) so it cannot be cross-checked against git, but it follows the same log+config date convention as verified siblings"
+  },
+  "qwen35_4b_foofah_selective_program_fallback": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-27' dated heading",
+    "configs/experiment.json:\"date\": \"2026-06-27\""
+   ],
+   "caveat": "foofah is a table-transform benchmark; any dates inside data/ or result records are task content, not run dates (none conflicted here)"
+  },
+  "qwen35_4b_foofah_strategy_discovery_live": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "configs/experiment.json:3 \"date\": \"2026-06-28\"",
+    "logs/experiment_log.md:3 heading '## 2026-06-28'"
+   ],
+   "caveat": "Same foofah dates-as-data risk (none actually present); metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "qwen35_4b_generator_verifier_gap": {
+   "start": "2026-06-29",
+   "end": "2026-06-30",
+   "confidence": "medium",
+   "sources": [
+    "runs/run.log:2 HF dataset cache 'last modified on Mon Jun 29 12:07:21 2026' (lower bound; run took 4010s)",
+    "git commit cd7093e 2026-06-30 21:34:47 -0700 'Add generator-verifier gap' (upper bound; dir first appears post-import)"
+   ]
+  },
+  "qwen35_4b_graphir_self_repair": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "logs/experiment_log.md: undated (unlike sibling qwen35_4b_* logs)",
+    "configs/experiment.json: no date key; run_logs/*console.log: console output with zero timestamps"
+   ],
+   "caveat": "seed 20260701 (configs/experiment.json, data/dataset_manifest.json, scripts/build_dataset.py) is date-shaped but is an RNG seed and postdates the 2026-06-28 git import, so it cannot be the run date; metadata.yaml generated_on 2026-07-01 is sweep. Bracketing only: imported 2026-06-28, siblings ran 06-22..06-28"
+  },
+  "qwen35_4b_humaneval_adaptive_budget": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "low",
+   "sources": [
+    "data/dataset_manifest.json: \"seed\": 20260625 (date-shaped seed; only date-bearing artifact in dir — logs/experiment_log.md and reports/eval/*.json are undated)"
+   ],
+   "caveat": "date-shaped seeds proven unreliable elsewhere (static_bridge seed 20260630 pre-existed the 2026-06-28 import); metadata.yaml 2026-07-01"
+  },
+  "qwen35_4b_independent_code_abi_coverage_gate": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-27' heading",
+    "configs/experiment.json:'\"date\": \"2026-06-27\"'"
+   ]
+  },
+  "qwen35_4b_independent_retrieval_consensus": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "qwen35_4b_independent_retrieval_consensus/logs/experiment_log.md: multiple headings '## 2026-06-26 ...' (Retrieval Independence Gate, Adaptation Pools, Direct Sample-More Baseline)",
+    "qwen35_4b_independent_retrieval_consensus/configs/experiment.json: \"date_utc\": \"2026-06-26\"",
+    "qwen35_4b_independent_retrieval_consensus/reports/final_report.md: 2026-06-26"
+   ],
+   "caveat": "data/verified_algorithm_library.jsonl contains 2026-01-02 (task data); scripts/make_report.py hardcodes the report date"
+  },
+  "qwen35_4b_inventory_shortlister_training": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3: heading '## 2026-06-24'"
+   ],
+   "caveat": "run_logs/*_console.log contain only relative tqdm timers, no dates"
+  },
+  "qwen35_4b_joint_shortlister_ladder": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-24' dated heading"
+   ]
+  },
+  "qwen35_4b_learned_active_trace_policy": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md: 14 timestamped headings '## 2026-06-24 05:00 UTC' through '## 2026-06-24 08:10 UTC'"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "qwen35_4b_live_tool_dagger": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-28' (smoke, initial full pass, split2 pilot, final readout)",
+    "configs/experiment.json + scripts/run_live_tool_dagger.py: date-derived seed 20260628",
+    "included in the 2026-06-28 corpus-import commit, so cannot postdate it"
+   ],
+   "caveat": "date equals import day; verified it is a tier-1 dated log heading plus matching seed, not a sweep artifact"
+  },
+  "qwen35_4b_model_in_loop_counterexamples": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "medium",
+   "sources": [
+    "logs/experiment_log.md:3 single dated heading '## 2026-06-22' covering the whole workflow (Dataset Build -> Report)"
+   ],
+   "caveat": "configs/experiment.json has no date key (unlike dpo/foofah/grpo siblings), so single-source"
+  },
+  "qwen35_4b_neurosymbolic_repl_substrate": {
+   "start": "2026-06-30",
+   "end": "2026-07-01",
+   "confidence": "high",
+   "sources": [
+    "file mtimes (in-place work, post-import): configs/default.yaml 2026-06-30 23:41 → analysis/failure_profile.png 2026-07-01 00:24 → reports/report.md 2026-07-01 14:26",
+    "git log: c928ffa 2026-07-01 05:03 -0700 adds experiment; bc7a408 2026-07-01 14:29 -0700 M4 flywheel"
+   ],
+   "caveat": "metadata.yaml 2026-07-01 17:03 is catalog sweep; runs/*.json have no time keys"
+  },
+  "qwen35_4b_offline_hard_negative_coverage_dpo": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-26' heading",
+    "configs/experiment.json:'\"date\": \"2026-06-26\"'"
+   ]
+  },
+  "qwen35_4b_operator_inventory_scaling_stress": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "qwen35_4b_operator_inventory_scaling_stress/logs/experiment_log.md: heading '## 2026-06-24' (only dated entry)"
+   ],
+   "caveat": "run_logs/*.log (5 console logs) have no timestamps; metadata.yaml 2026-07-01 catalog sweep"
+  },
+  "qwen35_4b_operator_inventory_search_pilot": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3: heading '## 2026-06-24'"
+   ]
+  },
+  "qwen35_4b_opsd_pressure_locality_audit": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-26' dated heading",
+    "configs/experiment.json:\"date_utc\": \"2026-06-26\""
+   ],
+   "caveat": "data/verified_algorithm_library.jsonl contains 2026-01-02 as algorithm-library data"
+  },
+  "qwen35_4b_oracle_distilled_semantic_verifier": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "low",
+   "sources": [
+    "data/dataset_manifest.json:47 \"seed\": 20260625 (date-encoded seed)",
+    "scripts/build_dataset.py:68, train_verifier_sft.py:50, eval_verifier.py:82 argparse default seed 20260625"
+   ],
+   "caveat": "No dated log headings or timestamp keys anywhere. Date-encoded seeds match the true run date elsewhere (counterexample dir: seed 20260628 == logged 2026-06-28 runs) but are contradicted in verified_edit_closure (seed 20260630 yet git-imported 2026-06-28), so seed evidence is weak. 2026-06-25 is plausible: fits between dated neighbors (candidate_conditioned 06-25, retrieval 06-26) and precedes import."
+  },
+  "qwen35_4b_oracle_probe_synthesis_mdp": {
+   "start": "2026-06-24",
+   "end": "2026-06-26",
+   "confidence": "medium",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-24'",
+    "configs/experiment.json:3 '\"date_utc\": \"2026-06-24\"'",
+    "date-derived seed defaults: scripts/build_dataset.py+train_sft_policy.py=20260624, train_dpo_policy.py+train_grpo_policy.py=20260625, scripts/eval_policy.py=20260626; data/dataset_manifest.json '\"seed\": 20260624'"
+   ],
+   "caveat": "reports/eval/base_mined8.json '20260286' is a float substring, not a date; end date rests on the seed-equals-date convention (start is high-confidence, end medium)"
+  },
+  "qwen35_4b_oracle_process_grpo": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-24'",
+    "configs/experiment.json:3 \"date_utc\": \"2026-06-24\""
+   ]
+  },
+  "qwen35_4b_overthinking_content_ladder": {
+   "start": "2026-06-30",
+   "end": "2026-06-30",
+   "confidence": "high",
+   "sources": [
+    "file mtimes (in-place work): configs/default.yaml 2026-06-30 13:37 → reports/report.md 2026-06-30 18:53",
+    "git log: 817fb6f 2026-06-30 18:58 -0700 'Add overthinking content ladder'"
+   ],
+   "caveat": "metadata.yaml 2026-07-01 17:03 catalog sweep"
+  },
+  "qwen35_4b_passk_coverage_rl": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:six running-note bullets '- 2026-06-26: ...' covering smoke->pilot->final",
+    "configs/experiment.json:'\"date\": \"2026-06-26\"'"
+   ]
+  },
+  "qwen35_4b_prefix_value_guided_search": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "qwen35_4b_prefix_value_guided_search/logs/experiment_log.md: bullets '- 2026-06-26: Created...', '- 2026-06-26: Smoke run...', '- 2026-06-26: Pilot run...', '- 2026-06-26: Gate decision...'",
+    "qwen35_4b_prefix_value_guided_search/configs/experiment.json: \"date_utc\": \"2026-06-26\""
+   ]
+  },
+  "qwen35_4b_real_sample_verify_commit": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3: 'Date: 2026-06-25'"
+   ]
+  },
+  "qwen35_4b_reliability_exec_opsd_audit": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-26' plus timestamped headings '## 2026-06-26T22:13:20Z'..'## 2026-06-26T22:30:00Z'",
+    "configs/experiment.json:\"date_utc\": \"2026-06-26\"",
+    "reports/final_report.md:2026-06-26 mention"
+   ],
+   "caveat": "data/verified_algorithm_library.jsonl 2026-01-02 is data"
+  },
+  "qwen35_4b_retrieval_adapt_verify_scale": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "configs/experiment.json:3 \"date_utc\": \"2026-06-26\"",
+    "logs/experiment_log.md:3 heading '## 2026-06-26'"
+   ],
+   "caveat": "data/verified_algorithm_library.jsonl contains date-format-conversion code and example dates (e.g. 2026-01-02, regex \\d{4})-(\\d{1,2})-(\\d{1,2}) — DATA, not run dates."
+  },
+  "qwen35_4b_sampler_portfolio_scheduler": {
+   "start": "2026-06-25",
+   "end": "2026-06-26",
+   "confidence": "medium",
+   "sources": [
+    "configs/experiment.json:3 '\"date\": \"2026-06-26\"' and logs/experiment_log.md:3 '## 2026-06-26'",
+    "data/train_policy_pool_records.manifest.json '\"seed\": 20260625' (pool-generation day, date-derived seed)",
+    "subset manifests seeds 2026062624/2026062625/2026062626 (20260626-derived)"
+   ],
+   "caveat": "start of 2026-06-25 rests on the seed-equals-date convention; 2026-06-26 alone is high-confidence"
+  },
+  "qwen35_4b_sketch_coverage_shift_probe": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md: seven timestamped headings '## 2026-06-24 08:20 UTC' through '## 2026-06-24 09:14 UTC'"
+   ]
+  },
+  "qwen35_4b_static_bridge_ceiling_breaker": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "only date-shaped token is \"seed\": 20260630 in configs/experiment.json and data/dataset_manifest.json, but git show 42c23ac (import commit dated 2026-06-28 12:34 -0700) already contains that seed — a 2026-06-30 'date' cannot be the run date of work imported 06-28, so the seed is a fabricated constant; logs/experiment_log.md and run_logs/*.log carry no timestamps"
+   ],
+   "caveat": "seed 20260630 is date-shaped but provably not a run date; metadata.yaml 2026-07-01"
+  },
+  "qwen35_4b_strategy_token_diversity_lora": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'Date: 2026-06-25' header line",
+    "configs/experiment.json:'\"date\": \"2026-06-25\"'"
+   ]
+  },
+  "qwen35_4b_substrate_coverage_ladder": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "qwen35_4b_substrate_coverage_ladder/logs/experiment_log.md: six bullets '- 2026-06-26: ...' from package creation through main ladder run",
+    "qwen35_4b_substrate_coverage_ladder/configs/experiment.json: \"date_utc\": \"2026-06-26\""
+   ],
+   "caveat": "data/mbpp_train_library.jsonl contains 2026-01-02 (task data)"
+  },
+  "qwen35_4b_thinking_budget_controller": {
+   "start": "2026-06-30",
+   "end": "2026-06-30",
+   "confidence": "low",
+   "sources": [
+    "git commit d8a42b4 authored 2026-06-30 07:05:24 -0700: dedicated post-import commit that created this dir (NOT part of the 2026-06-28 corpus import, so its git date is meaningful)",
+    "experiment_log.md: describes an offline analysis ('no new generation') reusing the sibling qwen35_4b_thinking_budget_scaling sweep from the same commit"
+   ],
+   "caveat": "No internal timestamps at all; runs/summary.json and data/*.jsonl are date-free"
+  },
+  "qwen35_4b_thinking_budget_scaling": {
+   "start": "2026-06-30",
+   "end": "2026-06-30",
+   "confidence": "medium",
+   "sources": [
+    "git log:runs/main/summary.json added 2026-06-30 in commit d8a42b4 'Add test-time reasoning-budget program'; metadata.yaml source_track: \"new\" (repo-era experiment, so git dates ARE run dates)",
+    "experiment_log.md:describes migrated-box env setup, no calendar dates inside artifacts"
+   ],
+   "caveat": "no in-artifact timestamps at all; runs/*/summary.json and console logs are timestamp-free"
+  },
+  "qwen35_4b_thinking_content_vs_compute": {
+   "start": "2026-06-30",
+   "end": "2026-06-30",
+   "confidence": "medium",
+   "sources": [
+    "git: dir first added e405cf0 2026-06-30 12:19:18 -0700 'Add foreign-thinking control', then 8ceb592 12:41 (filler arm), 817fb6f 18:58 (overthinking ladder) — all experiment-specific work commits, post-import so credible",
+    "large_artifacts/qwen35_4b_thinking_content_vs_compute/*.npy mtimes 2026-06-30 12:05-12:36 (untracked activation dumps corroborate)"
+   ],
+   "caveat": "experiment_log.md is undated; runs/probe_results.json has no time keys; metadata.yaml generated_on 2026-07-01 is sweep. Only later commit touching dir (c928ffa 07-01) is catalog/metadata churn."
+  },
+  "qwen35_4b_thinking_separability_probe": {
+   "start": "2026-06-29",
+   "end": "2026-06-30",
+   "confidence": "medium",
+   "sources": [
+    "runs/extract.log:2 HF dataset cache 'last modified on Mon Jun 29 12:07:21 2026' (lower bound; extract took 6541s)",
+    "git commit 531fa77 2026-06-30 10:39:41 -0700 'Add thinking separability probe' (upper bound; dir first appears post-import)"
+   ]
+  },
+  "qwen35_4b_tool_state_policy_lora": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "medium",
+   "sources": [
+    "logs/experiment_log.md:3 heading '## 2026-06-28' -- same day as the corpus import commit (42c23ac, 2026-06-28 12:34 -0700) but the log is part of the imported content, so a real same-morning run is plausible"
+   ],
+   "caveat": "date coincides with import day; cannot distinguish morning-of-import run from import-time write beyond the log being in the import commit itself"
+  },
+  "qwen35_4b_trained_vs_frozen_repair_mdp": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "configs/experiment.json: \"date_utc\": \"2026-06-25\"",
+    "logs/experiment_log.md: 'Date: 2026-06-25'",
+    "reports/qwen35_4b_trained_vs_frozen_repair_mdp_report.md: 2026-06-25"
+   ]
+  },
+  "qwen35_4b_transform_abi_compiler_pilot": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-27' heading",
+    "configs/experiment.json:'\"date\": \"2026-06-27\"'"
+   ]
+  },
+  "qwen35_4b_typed_sketch_synthesis": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "qwen35_4b_typed_sketch_synthesis/logs/experiment_log.md: no dates anywhere; configs/experiment.json has no date_utc; run_logs/*.log (15 files) contain no timestamps; reports/eval/*.json have no time keys"
+   ],
+   "caveat": "configs/experiment.json \"seed\": 20260701 is date-shaped but is a seed (and post-dates the 2026-06-28 import that added this dir in commit 42c23ac, so it cannot be a run date); metadata.yaml 2026-07-01 is the catalog sweep. Only bound: dir existed by 2026-06-28 (import commit)"
+  },
+  "qwen35_4b_unsaturated_frontier_active_bridge": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3: heading '## 2026-06-22'"
+   ]
+  },
+  "qwen35_4b_verified_algorithm_retrieval_adaptation": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-26' dated heading",
+    "configs/experiment.json:\"date\": \"2026-06-26\""
+   ],
+   "caveat": "data/verified_algorithm_library.jsonl 2026-01-02 is data"
+  },
+  "qwen35_4b_verified_edit_closure": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "logs/experiment_log.md: undated step log, only references seed 20260630",
+    "run_logs/*console.log: no timestamps or clock strings at all"
+   ],
+   "caveat": "configs/experiment.json \"seed\": 20260630 LOOKS like a run date but is impossible — the file was committed in the 2026-06-28 import (42c23ac), proving date-encoded seeds are not reliable run dates. Bound: ran on/before 2026-06-28."
+  },
+  "qwen35_4b_verifier_guided_self_improvement": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:3 'Date: 2026-06-25'",
+    "configs/experiment.json:3 '\"date_utc\": \"2026-06-25\"'",
+    "12 occurrences of '\"seed\": 20260625' across configs/data manifests",
+    "reports/qwen35_4b_verifier_guided_self_improvement_report.md:3 '2026-06-25'"
+   ]
+  },
+  "qwen35_4b_verifier_selector_showdown": {
+   "start": "2026-06-30",
+   "end": "2026-06-30",
+   "confidence": "medium",
+   "sources": [
+    "git: dir first added in commit 7fcc8b6 'Add selector showdown...' 2026-06-30 21:57:49 -0700 (NOT part of the 06-28 corpus import, so git date is the real record)",
+    "experiment_log.md/reports: no internal dates; offline reuse of an existing candidate pool, consistent with a single-day 06-30 run"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep"
+  },
+  "qwen_action_conditioned_vm_echo_policy_iteration": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "checkpoint_manifest.csv: created_unix column, 5 rows spanning 1782261141… = 2026-06-24 00:32 → 00:45 UTC",
+    "experiment_log.md: heading '## 2026-06-24'"
+   ]
+  },
+  "qwen_active_crystallizer_public_gate": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:per-run lines 'Started: 2026-06-27 04:36:01 UTC' (smoke/pilot/main)",
+    "runs/{smoke_v1,pilot_v1,main_v1}/config.json:'\"started_utc\": \"2026-06-27T04:37..-04:42..\"'",
+    "runs/qwen_direct_full_meta.json:'\"started_utc\": \"2026-06-27T04:50:02\"' (latest)"
+   ],
+   "caveat": "runs/*/static_details.csv and analysis/static_details.csv contain DateTime-benchmark task dates (e.g. 2026-04-15T09:44:40Z, 2026-12-30T06:25:57Z, 2002-2025 dates) as DATA"
+  },
+  "qwen_active_example_acquisition": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "qwen_active_example_acquisition/experiment_log.md: heading '## 2026-06-27'",
+    "qwen_active_example_acquisition/runs/{smoke_v1,main_v1,main_v2_diverse,main_final}/config.json: each contains 2026-06-27"
+   ],
+   "caveat": "runs/*/generations.csv and method_details.csv and analysis/method_details.csv contain 2002-09-12 (task data)"
+  },
+  "qwen_batched_transduction_consistency": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: '- Time UTC: `2026-06-27T06:16:05...`' through '`2026-06-27T06:32:43...`' (+357.6s elapsed) for smoke/main_v1/main_v2",
+    "runs/*/config.json and runs/*/done.json: ISO date fields 2026-06-27",
+    "config in log: sample_seed 20260627 (date-derived seed matches)"
+   ],
+   "caveat": "analysis/row_details.csv and runs/*/row_details.csv contain DateTime-benchmark DATA dates (2002-09-12, 2038-05-17, 2048-11-30 etc.) — not run dates"
+  },
+  "qwen_budgeted_action_value_compiler": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:'## 2026-06-23' dated heading",
+    "checkpoint_manifest.csv:created_unix epochs 1782254785..1782255396 = 2026-06-23 22:46..23:10 UTC"
+   ]
+  },
+  "qwen_candidate_conditioned_trace_verifier": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: 5 headings '### 2026-06-25 Scaffold' ... '### 2026-06-25 Main Iteration 2'"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "qwen_candidate_trace_verifier": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "exhaustive grep for ISO dates, compact YYYYMMDD, epoch numbers, HH:MM:SS, month-name formats found nothing except metadata.yaml 'generated_on: 2026-07-01' (catalog sweep, excluded); reports/qwen_candidate_trace_verifier_experiment_log.md headings are undated ('### Smoke/Pilot/Main')"
+   ],
+   "caveat": "metadata.yaml generated_on=2026-07-01 is the catalog sweep, not a run date; upper bound only: imported 2026-06-28"
+  },
+  "qwen_checkpoint_scheduled_state_compiler": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "medium",
+   "sources": [
+    "reports/qwen_checkpoint_scheduled_state_compiler_experiment_log.md:50 heading '### 2026-06-22' (only dated entry)"
+   ]
+  },
+  "qwen_compiler_multiseed_reattribution": {
+   "start": "2026-06-24",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "smoke_suite_manifest.json: started_at 2026-06-24 23:20:36 UTC",
+    "main_suite_manifest.json: started_at 2026-06-24 23:30:35 UTC → finished_at 2026-06-25 05:38:54 UTC",
+    "experiment_log.md: heading '## 2026-06-24'"
+   ]
+  },
+  "qwen_complete_program_trace_reranker": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md:'## 2026-06-23' heading (only dated record in dir)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_compositional_curriculum_abi": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "qwen_compositional_curriculum_abi/experiment_log.md: '- Started: 2026-06-26 18:29:58 UTC' and '- Started: 2026-06-26 18:40:18 UTC' run entries"
+   ],
+   "caveat": "runs/{pilot_v1,main_v1}/details.csv and analysis/all_details.csv contain 16-47 dates spanning 2026-01 to 2027-01 (DateTime-task data, NOT run dates)"
+  },
+  "qwen_constrained_abi_parser": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:5: '- Created: 2026-06-26 UTC'",
+    "experiment_log.md:18,36,54: '- Started: 2026-06-26 15:43:38 / 15:56:19 / 16:08:48 UTC'; main_v1 completed in 4058.7s -> finished ~17:16 UTC same day"
+   ],
+   "caveat": "runs/main_v1/details.csv, runs/pilot_v1/details.csv, analysis/all_details.csv are full of task DATA calendar dates (2026-01-03 ... 2026-07-24, incl. dates after the run) — parser benchmark inputs, not run dates"
+  },
+  "qwen_context_trace_verifier": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:'## 2026-06-23' dated heading covering the whole run"
+   ],
+   "caveat": "checkpoint_manifest.csv here has no created_unix column (descriptions only)"
+  },
+  "qwen_counterexample_guided_ephemeral_program": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: per-run bullets 'Time UTC: `2026-06-28T03:23:44.477998+00:00`' through main_v1 at 2026-06-28T03:56:44 + 1410.9s elapsed (ends ~04:20 UTC), all before the 19:34 UTC import commit",
+    "experiment_log.md configs: \"seed\": 20260628 matches run date"
+   ],
+   "caveat": "HEAVY dates-as-data: runs/main_v1/probe_labels.csv, analysis/probe_labels.csv and reports/*report.{md,html} contain DateTime-benchmark cells (2026-04-15, 2026-12-30, malformed 2026-12-30T06.25.57Z, 'Apr 2026'/'Dec 2026') — task inputs/outputs, NOT run dates."
+  },
+  "qwen_counterexample_guided_projection": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: timestamped headings '### 2026-06-27 06:48 UTC' through '### 2026-06-27 07:05 UTC - Report hardening'",
+    "runs/*/config.json '\"created_utc\": \"2026-06-27T07:08:21...+00:00\"' (main_qwen_probe_40)"
+   ]
+  },
+  "qwen_counterfactual_episodic_icl": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: five entries '- Time UTC: 2026-06-28T04:16:45...' through '...T04:27:24' -- these precede the import commit (2026-06-28 19:34 UTC), so they are a genuine run record, not import artifacts"
+   ],
+   "caveat": "date equals import day but timestamps (04:16-04:27 UTC) predate the import commit"
+  },
+  "qwen_counterfactual_icl_public_multiseed": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: per-run bullets '- Time UTC: `2026-06-28T05:50:51.863838+00:00`' … '2026-06-28T06:30:03+00:00' — real run records, and all precede the import commit (2026-06-28 19:34 UTC), so not import artifacts"
+   ],
+   "caveat": "runs/ JSON contains many dates as ICL task DATA (2004-09-30, 2006-02-21, 2002-12-12, …) — never use runs/ dates here"
+  },
+  "qwen_counterfactual_trace_preference_distillation": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md:'## 2026-06-24' heading (only dated record in dir)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_crystallized_trace_abi_tournament": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "qwen_crystallized_trace_abi_tournament/experiment_log.md: '- Created: 2026-06-26 UTC' plus '- Started: 2026-06-26 04:20:46/04:24:02/04:30:45 UTC' run entries"
+   ],
+   "caveat": "runs/**/details.csv (9-41 dates each, 2026-01 to 2027-01) and runs/*_data_*/dataset_manifest.json (e.g. 2026-05-10, 2026-05-16) are DateTime benchmark data, NOT run dates — the May dates here are the biggest trap in this slice"
+  },
+  "qwen_dense_state_dagger_vm_agent": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:3: heading '## 2026-06-24'",
+    "checkpoint_manifest.csv: created_unix column 1782279827-1782292925 = 2026-06-24 05:43-09:22 UTC"
+   ]
+  },
+  "qwen_disagreement_probe_program_induction": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:'- Time UTC: `2026-06-27T18:05:55..18:37:15+00:00`' bullets",
+    "runs/main_v1/generations.csv:ISO timestamps 2026-06-27T18:11:20..18:37:14",
+    "runs/smoke_qwen_5/generations.csv:2026-06-27 timestamps"
+   ]
+  },
+  "qwen_episodic_soft_prompt_task_vectors": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: headings '### 2026-06-27 09:08 UTC - Scaffold' ... '### 2026-06-27 09:25 UTC - Report Hardening'",
+    "runs/*/config.json \"created_utc\": 2026-06-27T09:09:05 ... 2026-06-27T09:24:41 (6 run dirs, all same day)"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "qwen_extrapolation_bound_abi": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: '- Started: 2026-06-26 20:32:31 UTC' (smoke_v1), '2026-06-26 20:40:44' (pilot_v1), '2026-06-26 21:01:36' (main_v1) with 'Completed `main_v1` in 4804.4s' (ends ~22:21 same day)"
+   ],
+   "caveat": "HEAVY: analysis/all_details.csv and runs/*/details.csv contain DSL DATE-task benchmark dates ('DATE 2026-05-18', 2026-07-20, 2026-12-15, etc.) - these are DATA, never run dates"
+  },
+  "qwen_fastweight_hook": {
+   "start": "2026-06-19",
+   "end": "2026-06-19",
+   "confidence": "high",
+   "sources": [
+    "runs/*/results.json + runs/*/eval_only_results.json: 13 files with \"created_unix\" (e.g. 1781909611.9) and \"created_utc\" strings spanning 2026-06-19T22:50:25Z to 2026-06-19T23:33:21Z"
+   ]
+  },
+  "qwen_full_table_consistency_reranker": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: dated headings '### 2026-06-27 07:19 UTC - Scaffold' → '### 2026-06-27 07:32 UTC - Report hardening'"
+   ],
+   "caveat": "DateTime/table-transform benchmark: runs/ and analysis/ are saturated with dates as DATA (324x '2002-09-12', '23/5/1984', impossible '2/8/2160', …) — only the log headings are run dates"
+  },
+  "qwen_fuyu_vm_grpo_echo": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md:'## 2026-06-24' heading (only dated record in dir)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_hidden_vm_curriculum_repair": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "qwen_hidden_vm_curriculum_repair/experiment_log.md: heading '## 2026-06-23' (only dated entry)"
+   ]
+  },
+  "qwen_hidden_vm_mixed_domains": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:3: heading '## 2026-06-23'"
+   ],
+   "caveat": "checkpoint_manifest.csv here has no timestamp column (run,artifact_path,bytes only)"
+  },
+  "qwen_hidden_vm_onpolicy_canonical_repair": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:'## 2026-06-23' dated heading"
+   ]
+  },
+  "qwen_inpolicy_vm_echo_distillation": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md:3 single dated heading '## 2026-06-24' covering setup + iteration notes"
+   ],
+   "caveat": "Only one dated heading, no timestamps in runs/ or checkpoint_manifest.csv; end date assumes the single-day log covers the whole run."
+  },
+  "qwen_iterative_repair_policy": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:3 single dated heading '## 2026-06-23' covering setup, smoke, pilots 1-2, main, and report artifacts"
+   ]
+  },
+  "qwen_large_abi_nested_compiler": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md lines 11/30/55: '- Started: 2026-06-26 23:01:46 UTC', 23:12:48, 23:39:21"
+   ],
+   "caveat": "only Started timestamps recorded (23:01-23:39 UTC); runs may have finished early 2026-06-27 UTC but no end timestamp exists"
+  },
+  "qwen_latent_beam_program_compiler": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "exhaustive scan: experiment_log.md is undated (narrative-only run sections), runs/*/results.json + latest_status.json + train_log.csv have no time keys (only step/loss/accuracy), checkpoint_manifest.csv is run,artifact,path only"
+   ],
+   "caveat": "metadata.yaml 2026-07-01 catalog sweep"
+  },
+  "qwen_learned_active_interrogation": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "runs/*/config.json:'\"started_utc\": \"2026-06-28T02:20:47..02:37:52+00:00\"' across smoke_no_qwen/smoke_qwen_5/etc. (real run records; predate the 2026-06-28 19:34Z import commit, so not import noise)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_learned_repair_verifier": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "qwen_learned_repair_verifier/reports/qwen_learned_repair_verifier_experiment_log.md: undated sections only; runs/*/results.json metadata has python/platform/gpu_name/train_seconds but no wall-clock; checkpoint_manifest.csv has no created_unix column; no YYYY-MM-DD or epoch anywhere except metadata.yaml 2026-07-01 (catalog sweep)"
+   ],
+   "caveat": "file layout and the same RTX-6000-Ada metadata style match qwen_shared_parser_compiler (2026-06-21), suggesting the same era, but that is inference not evidence. Only bound: existed by 2026-06-28 import"
+  },
+  "qwen_lora_parser_compiler": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/qwen_lora_parser_compiler_experiment_log.md:33: single dated section '### 2026-06-21' covering the full smoke->pilot->main sequence"
+   ],
+   "caveat": "checkpoint_manifest.csv has no timestamp column"
+  },
+  "qwen_lora_typed_bytecode_trace_compiler": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:'## 2026-06-23' dated heading",
+    "checkpoint_manifest.csv:created_unix epochs 1782247979..1782248447 = 2026-06-23 20:52..21:15 UTC"
+   ]
+  },
+  "qwen_mixed_domain_trace_verifier": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md:3 single dated heading '## 2026-06-23'"
+   ],
+   "caveat": "Single dated heading only; no corroborating timestamps in runs/ artifacts."
+  },
+  "qwen_noisy_row_program_crystallizer": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:3 heading '## 2026-06-27' covering smoke_v1 through main_final",
+    "runs/*/config.json '\"started_utc\"' values 2026-06-27T09:45:13 through 2026-06-27T10:00:55 UTC",
+    "runs/*/config.json + src '\"seed\": 20260627' date-derived seeds"
+   ],
+   "caveat": "row-transform experiment: dates inside noisy-row task inputs/outputs are DATA; only meta keys (started_utc, log heading, seed) were used"
+  },
+  "qwen_numeric_copy_compiler": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "medium",
+   "sources": [
+    "reports/qwen_numeric_copy_compiler_experiment_log.md:33 heading '### 2026-06-21' (only dated entry)"
+   ]
+  },
+  "qwen_onpolicy_repair_compiler": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md: single dated heading '## 2026-06-23' (no other timestamps in dir; checkpoint_manifest.csv lacks created_unix)"
+   ]
+  },
+  "qwen_oracle_distilled_acquisition_policy": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "runs/*/config.json:'\"started_utc\": \"2026-06-28T02:51:42..03:01:45+00:00\"' (real run records predating the import commit)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_pairwise_table_judge": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "qwen_pairwise_table_judge/experiment_log.md: timestamped headings '### 2026-06-27 08:06 UTC - Scaffold', '### 2026-06-27 08:07 UTC - No-Qwen Smoke', ...",
+    "qwen_pairwise_table_judge/runs/*/config.json: \"created_utc\": \"2026-06-27T08:06:53...\"..\"2026-06-27T08:12:24...\""
+   ],
+   "caveat": "table_candidates.csv / selected_tables.csv / tournament_changes.csv contain dates 2002-09-12..2048-11-30 (table-judging task data)"
+  },
+  "qwen_prefix_state_process_verifier": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:3: heading '## 2026-06-23'",
+    "checkpoint_manifest.csv: created_unix 1782250838-1782251802 = 2026-06-23 21:40-21:56 UTC"
+   ]
+  },
+  "qwen_program_only_executable_abi": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:'- Created: 2026-06-26 UTC' and '- Started: 2026-06-26 06:06:48 / 06:09:13 / 06:15:31 UTC'"
+   ],
+   "caveat": "MASSIVE: runs/**/details.csv, analysis/*_details.csv, runs/*/dataset_manifest.json are date-arithmetic task data ('Starting from 2026-12-12, add 10 days...') spanning 2025-07..2026-12 — hundreds of fake dates; only experiment_log.md is trustworthy"
+  },
+  "qwen_progressive_repair_compiler": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "reports/qwen_progressive_repair_compiler_experiment_log.md: undated headings (Objective/Planned Runs/Running Notes)",
+    "runs/*/results.json + metrics.csv: no time keys/columns; seeds 7/17/94001 not date-encoded"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep. Bound: imported 2026-06-28."
+  },
+  "qwen_public_prose_abi_gate": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: '- Started: 2026-06-27 03:43:06 UTC' (smoke_v1), '03:44:21' (pilot_v1), '03:47:49' (main_v1) with 'Completed in 45.4/179.9/511.5s'",
+    "runs/*/config.json 2026-06-27; runs/qwen_direct_sample_meta.json and reports report contain 20260627"
+   ],
+   "caveat": "PROSE is a table-transformation benchmark; dates in task tables are DATA (none used)"
+  },
+  "qwen_python_shaped_silent_executor": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "experiment_log.md: fully undated",
+    "runs/*/run_config.json + run_summary.json: hyperparams and elapsed_sec only, no timestamps"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep"
+  },
+  "qwen_readable_candidate_verifier": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: 8 dated phase headings '### 2026-06-25 Scaffold' → '### 2026-06-25 Main Iteration 5', all same day"
+   ]
+  },
+  "qwen_real_task_abi_coverage_gate": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:'Started: 2026-06-27 03:15:25' / '03:23:19' per-run lines",
+    "runs/{smoke_v1,pilot_v1,main_v1}/config.json:'\"started_utc\": \"2026-06-27T03:15..-03:23..\"'"
+   ]
+  },
+  "qwen_recurrent_vm_repair_policy": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "qwen_recurrent_vm_repair_policy/experiment_log.md: heading '## 2026-06-24'",
+    "qwen_recurrent_vm_repair_policy/checkpoint_manifest.csv: created_unix column, 8 epochs 1782266690..~1782269xxx = 2026-06-24 02:04-02:47 UTC"
+   ]
+  },
+  "qwen_recursive_ephemeral_program_induction": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:13-57: five entries '- Time UTC: `2026-06-27T10:43:22...`' through '`2026-06-27T11:32:03...`'",
+    "runs/*/generations.csv: 2026-06-27 run stamps"
+   ],
+   "caveat": "runs/main_v1/{batch_rows,direct_rows,candidates,generations}.csv contain DATA dates from transduction tasks (2002-09-12, 2004-09-30, 2013-11-14, ...)"
+  },
+  "qwen_recursive_task_decomposition": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "runs/*/config.json:started_utc 2026-06-27T05:12:09..05:37:29",
+    "runs/*/done.json:finished_utc 2026-06-27T05:12:36..05:49:25",
+    "experiment_log.md:'- Time UTC: `2026-06-27T05:12:36...`' bullets"
+   ],
+   "caveat": "runs/*/static_details.csv and analysis/static_details.csv contain 2025-07-22 / 2026-04-15 / 2026-12-30 as task data"
+  },
+  "qwen_register_structured_runtime": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "reports/qwen_register_structured_runtime_experiment_log.md: undated run sections (Smoke/Pilot/Main/Control)",
+    "runs/*: no timestamps; src argparse seed default 7"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep. Bound: imported 2026-06-28."
+  },
+  "qwen_register_token_latent_compiler": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "exhaustive grep for ISO dates, compact YYYYMMDD, epoch numbers, HH:MM:SS, month-name formats found nothing except metadata.yaml 'generated_on: 2026-07-01' (catalog sweep, excluded); reports experiment log headings are undated"
+   ],
+   "caveat": "metadata.yaml generated_on=2026-07-01 is the catalog sweep; upper bound only: imported 2026-06-28"
+  },
+  "qwen_register_trace_refiner": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "reports/qwen_register_trace_refiner_experiment_log.md: no dates",
+    "runs/*/results.json metadata: python/platform/torch/GPU + train_seconds only, no wall-clock timestamps"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep; results.json mentions Qwen/Qwen3-4B compiler checkpoint (model id, not a date source)"
+  },
+  "qwen_search_augmented_rollout_distillation": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "checkpoint_manifest.csv: created_unix 1782294225… = 2026-06-24 09:43 → 11:15 UTC (5 rows)",
+    "run name embeds date: smoke_search_rollout_distill_20260624",
+    "experiment_log.md: heading '## 2026-06-24'"
+   ]
+  },
+  "qwen_semantic_prefix_value_model": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md:'## 2026-06-23' heading (only dated record in dir)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_shared_parser_compiler": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "qwen_shared_parser_compiler/reports/qwen_shared_parser_compiler_experiment_log.md: headings '## 2026-06-21 Setup' through '## 2026-06-21 Final Audit' (8 dated sections, single day)"
+   ],
+   "caveat": "runs/*/results.json and analysis/final_metrics.csv contain epoch-looking 10-digit substrings that are decimals of float metrics (e.g. 0.1767578125) — an epoch regex without a decimal-point guard falsely reads them as 2026-01-05"
+  },
+  "qwen_slot_repair_distillation": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "metadata.yaml: generated_on 2026-07-01 is the catalog sweep, not a run date — the ONLY date in the dir",
+    "checkpoint_manifest.csv: run,artifact_path,bytes format, no timestamp column",
+    "runs/*/results.json: seeds are small ints (61-66/61001-66001), not date-derived; no time keys; reports/*_experiment_log.md has no dated headings"
+   ],
+   "caveat": "By topic (frozen numeric-compiler repair, track-y sibling of the 06-21..06-24 qwen_* cluster) a ~2026-06-21..24 window is plausible but there is no citable record; imported into git 2026-06-28 (upper bound only)"
+  },
+  "qwen_slot_stability_compiler": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/qwen_slot_stability_compiler_experiment_log.md:'### 2026-06-21' dated heading"
+   ]
+  },
+  "qwen_span_free_compiler": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/qwen_span_free_compiler_experiment_log.md: 7 headings '## 2026-06-21 Setup' through '## 2026-06-21 Final Audit'"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "qwen_state_ladder_compiler": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/qwen_state_ladder_compiler_experiment_log.md:37 single dated heading '### 2026-06-21' covering smoke, 400-step pilot, 900-step mains, and w025 ablation"
+   ]
+  },
+  "qwen_structural_compiler_attribution_ablation": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md:3 heading '## 2026-06-24' (only dated entry)"
+   ]
+  },
+  "qwen_structural_latent_compiler_expansion": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "medium",
+   "sources": [
+    "experiment_log.md: single dated heading '## 2026-06-24' (checkpoint_manifest.csv has selection-metric schema, no created_unix)"
+   ]
+  },
+  "qwen_structured_bridge": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "medium",
+   "sources": [
+    "reports/qwen_structured_bridge_experiment_log.md:six '## 2026-06-21 ...' headings ('Main Qwen Run', 'Length Scale Check', 'Final Audit') — single file, single day"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_support_contrastive_meta_icl": {
+   "start": "2026-06-28",
+   "end": "2026-06-28",
+   "confidence": "high",
+   "sources": [
+    "qwen_support_contrastive_meta_icl/experiment_log.md: entries '- Time UTC: `2026-06-28T16:41:31.417074+00:00`' through '- Time UTC: `2026-06-28T17:58:05.949981+00:00`' — microsecond-precision stamps that precede the 2026-06-28 19:34 UTC import commit, so credible despite the >=06-28 rule"
+   ],
+   "caveat": "runs/*/row_predictions.csv and analysis/aggregate_row_predictions.csv contain dates 2002-2045 and epoch-like numbers (row-transform task data)"
+  },
+  "qwen_tail_repair_stability_critic": {
+   "start": "2026-06-25",
+   "end": "2026-06-25",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:21-71: dated sections '### 2026-06-25 Initial Scaffold' / 'Smoke Iteration 1' / 'Main Iteration 1' / 'Main Iteration 2'"
+   ]
+  },
+  "qwen_teacher_distilled_slot_compiler": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "high",
+   "sources": [
+    "reports/qwen_teacher_distilled_slot_compiler_experiment_log.md:'### 2026-06-22' dated heading"
+   ]
+  },
+  "qwen_trace_bootstrap_retention": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/qwen_trace_bootstrap_retention_experiment_log.md: 5 headings '## 2026-06-21 Setup' through '## 2026-06-21 Final Audit'"
+   ],
+   "caveat": "metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "qwen_trace_procedure_depth_stress": {
+   "start": "2026-06-26",
+   "end": "2026-06-26",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: '- Created: 2026-06-26 UTC', '- Started: 2026-06-26 07:14:05 UTC' (smoke_v1), '07:25:33' (pilot_v1), '07:35:04' (main_v1) with 'Completed `main_v1` in 2743.2s'"
+   ],
+   "caveat": "HEAVY: runs/*/details.csv contain DSL DATE-task data ('DATE 2026-01-02', 2026-02-15, 2026-07-24, impossible dates, etc.) - DATA, not run dates"
+  },
+  "qwen_typed_bytecode_expert_iteration": {
+   "start": "2026-06-23",
+   "end": "2026-06-23",
+   "confidence": "high",
+   "sources": [
+    "checkpoint_manifest.csv: created_unix column, 8 rows spanning 1782241073-1782242966 = 2026-06-23T18:57:53Z to 2026-06-23T19:29:26Z"
+   ]
+  },
+  "qwen_verified_skill_memory_rag": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: dated headings '### 2026-06-27 08:45 UTC - Scaffold' → '### 2026-06-27 08:59 UTC - Report Hardening'"
+   ]
+  },
+  "qwen_verifier_guided_slot_repair": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "medium",
+   "sources": [
+    "reports/qwen_verifier_guided_slot_repair_experiment_log.md:'### 2026-06-22' log heading (only dated record in dir)"
+   ],
+   "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
+  },
+  "qwen_vm_agent_echo_qlora": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "qwen_vm_agent_echo_qlora/experiment_log.md: heading '## 2026-06-24'",
+    "qwen_vm_agent_echo_qlora/checkpoint_manifest.csv: created_unix column, 6 epochs 1782270295..~1782278xxx = 2026-06-24 03:04-05:12 UTC"
+   ]
+  },
+  "qwen_vm_echo_trace_distillation": {
+   "start": "2026-06-24",
+   "end": "2026-06-24",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md:3: heading '## 2026-06-24'",
+    "checkpoint_manifest.csv: created_unix 1782259722-1782260158 = 2026-06-24 00:08-00:15 UTC"
+   ]
+  },
+  "real_transform_abi_gate_with_counterexamples": {
+   "start": "2026-06-27",
+   "end": "2026-06-27",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-27' dated heading",
+    "configs/experiment.json:\"date\": \"2026-06-27\""
+   ],
+   "caveat": "data/task_records.jsonl contains 2025-01-01 as data; experiment includes a 'date_id_irregular' domain, so any date in data/ or run outputs is task content"
+  },
+  "rule_family_diversity_scaling": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md: 14 headings '## 2026-06-21 Setup' ... '## 2026-06-21 Final Verification'",
+    "reports/rule_family_diversity_scaling_paper.md:3 'Date: 2026-06-21'",
+    "scripts/make_report.py:377 hardcodes 'Date: 2026-06-21' (report template, consistent)"
+   ],
+   "caveat": "figures/*.png tEXt only carries 'Matplotlib version 3.11.0' — no dates; metadata.yaml generated_on 2026-07-01 is sweep."
+  },
+  "sampled_query_filter_executor": {
+   "start": "",
+   "end": "",
+   "confidence": "none",
+   "sources": [
+    "exhaustive grep for ISO dates, compact YYYYMMDD, epoch numbers, HH:MM:SS, month-name formats found nothing except metadata.yaml 'generated_on: 2026-07-01' (catalog sweep, excluded); reports experiment log headings are undated ('## Smoke Test', '## Main Run: ...')"
+   ],
+   "caveat": "metadata.yaml generated_on=2026-07-01 is the catalog sweep; upper bound only: imported 2026-06-28"
+  },
+  "sparse_support_memory_executor": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/sparse_support_memory_experiment_log.md: six phase headings '## 2026-06-21 Setup' ... '## 2026-06-21 Final Audit' (lines 68-183)"
+   ]
+  },
+  "structured_slot_initializer_ladder": {
+   "start": "2026-06-21",
+   "end": "2026-06-21",
+   "confidence": "high",
+   "sources": [
+    "reports/structured_slot_initializer_ladder_experiment_log.md: dated phase headings '2026-06-21 Setup' → '2026-06-21 Final Audit' (7 entries, all same day)"
+   ],
+   "caveat": "metadata.yaml 2026-07-01; epoch-like numeric values in analysis/all_metrics_query_mean.csv are metric data"
+  },
+  "targeted_bridge_allocation": {
+   "start": "2026-06-22",
+   "end": "2026-06-22",
+   "confidence": "high",
+   "sources": [
+    "logs/experiment_log.md:'## 2026-06-22' heading",
+    "reports/training/training_jobs.json:epoch started_at = 2026-06-22T03:28Z (min)",
+    "reports/final/final_evaluation_jobs.json:epoch finished_at up to 2026-06-22T09:17Z (max)"
+   ]
+  },
+  "trace_keyed_symbol_repair": {
+   "start": "2026-06-20",
+   "end": "2026-06-20",
+   "confidence": "high",
+   "sources": [
+    "trace_keyed_symbol_repair/logs/experiment_log.md: headings '## 2026-06-20 Setup', '## 2026-06-20 Dataset Design and First Build', ... (single day)",
+    "trace_keyed_symbol_repair/configs/experiment.json: \"date_utc\": \"2026-06-20\"",
+    "trace_keyed_symbol_repair/reports/trace_keyed_symbol_repair_paper.md: 2026-06-20"
+   ]
+  }
+ }
+}

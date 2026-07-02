@@ -3,314 +3,46 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Small Model Experimentation · Research Atlas</title>
-    <meta name="description" content="A generated, navigable atlas of the small-model experimentation corpus: experiments, research programs, claims under test, the future queue, and curation readiness.">
-    <meta name="color-scheme" content="light">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="assets/styles.css">
+    <title>%%TITLE%%</title>
+    <meta name="description" content="%%DESCRIPTION%%">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="%%ROOT%%assets/styles.css">
+    %%EXTRA_HEAD%%
   </head>
-  <body>
+  <body data-root="%%ROOT%%">
     <a class="skip-link" href="#main">Skip to content</a>
-
     <header class="topbar">
-      <a class="brand" href="#overview">
+      <a class="brand" href="%%ROOT%%">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-text">
-          <span class="kicker">Research Atlas</span>
+          <span class="kicker">Research log</span>
           <span class="wordmark">Small Model Experimentation</span>
         </span>
       </a>
-      <nav class="topnav" aria-label="Primary">
-        <a href="#overview">Overview</a>
-        <a href="#map">Map</a>
-        <a href="#programs">Programs</a>
-        <a href="#experiments">Experiments</a>
-        <a href="#readiness">Readiness</a>
-        <a href="#claims">Claims</a>
-        <a href="#queue">Queue</a>
-        <a href="#artifacts">Artifacts</a>
-      </nav>
+      <nav class="topnav" aria-label="Primary">%%NAV%%</nav>
+      <div class="topbar-tools">
+        <div class="site-search">
+          <input id="site-search" type="search" placeholder="Search… ( / )" autocomplete="off"
+                 aria-label="Search the site" role="combobox" aria-expanded="false" aria-controls="search-results">
+          <ul id="search-results" role="listbox" hidden></ul>
+        </div>
+        <a class="gh-link" href="https://github.com/ericflo/small-model-experimentation" aria-label="Repository on GitHub">GitHub</a>
+      </div>
     </header>
-
-    <!-- Sticky filter rail: appears once the hero controls scroll out of view -->
-    <div id="filterRail" class="filter-rail" role="region" aria-label="Active filters">
-      <div class="rail-controls">
-        <label class="rail-search">
-          <span class="sr-only">Search</span>
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <input id="globalSearchTop" type="search" autocomplete="off" placeholder="Search the atlas…">
-        </label>
-        <select id="programFilterTop" aria-label="Program filter"></select>
-        <select id="readyFilterTop" aria-label="Readiness filter">
-          <option value="all">All readiness</option>
-          <option value="yes">Anchor-ready</option>
-          <option value="no">Not anchor-ready</option>
-        </select>
-        <select id="needFilterTop" aria-label="Curation task filter"></select>
-      </div>
-      <!-- not a live region: the always-announceable hero chips (#filterChipsHero) are the single
-           filter-change announcement; this rail copy is visibility:hidden when inactive -->
-      <div id="filterChips" class="filter-chips"></div>
-      <button id="resetFiltersTop" class="rail-reset" type="button">Reset</button>
-    </div>
-
     <main id="main" tabindex="-1">
-      <!-- ============================ HERO ============================ -->
-      <section id="overview" class="band hero-band">
-        <div class="hero-copy">
-          <p class="eyebrow accent" id="heroStamp">Generated from the repository knowledgebase</p>
-          <h1>The <span class="nowrap">small-model</span> research corpus, <span class="hl">mapped</span> and searchable.</h1>
-          <p class="lede" id="heroLede">
-            Every experiment, research program, claim under test, and queued probe&nbsp;— indexed,
-            cross-linked, and explorable from one page.
-          </p>
-          <form class="global-controls" aria-label="Filter the atlas" onsubmit="return false">
-            <label class="control search-field">
-              <span>Search</span>
-              <svg class="search-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-              <input id="globalSearch" type="search" autocomplete="off" placeholder="selector, compiler, memory, smoke-test command…">
-            </label>
-            <label class="control">
-              <span>Program</span>
-              <select id="programFilter"></select>
-            </label>
-            <label class="control">
-              <span>Readiness</span>
-              <select id="readyFilter">
-                <option value="all">All readiness</option>
-                <option value="yes">Anchor-ready</option>
-                <option value="no">Not anchor-ready</option>
-              </select>
-            </label>
-            <label class="control">
-              <span>Curation task</span>
-              <select id="needFilter"></select>
-            </label>
-            <div class="hero-chips" id="filterChipsHero" aria-live="polite"></div>
-            <div class="controls-foot">
-              <p class="field-hint" id="filterStatus">Filters scope every panel below (Artifacts stays corpus-wide).</p>
-              <button id="resetFilters" class="reset-link" type="button" hidden>Reset filters</button>
-            </div>
-          </form>
-        </div>
-        <div id="metricGrid" class="metric-grid" aria-label="Corpus metrics"></div>
-      </section>
-
-      <!-- ====================== PORTFOLIO MAP ======================== -->
-      <section id="map" class="band tight" aria-labelledby="mapHeading">
-        <h2 id="mapHeading" class="sr-only">Corpus map</h2>
-        <div class="chart-strip">
-          <div class="tool-panel panel-signature">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Corpus map</p>
-                <h3>Programs by size &amp; readiness</h3>
-                <p class="panel-sub">Select a program to filter the whole atlas.</p>
-              </div>
-            </div>
-            <div id="programNetwork" class="visual network-visual"></div>
-            <div id="programLegend" class="legend" aria-label="Program legend"></div>
-          </div>
-          <div class="chart-side">
-            <div class="tool-panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Readiness</p>
-                  <h3>Anchor status</h3>
-                </div>
-              </div>
-              <div id="readinessDonut" class="visual"></div>
-              <a class="panel-link" href="#readiness">Full readiness breakdown <span class="arr">→</span></a>
-            </div>
-            <div class="tool-panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Future queue</p>
-                  <h3>Priority mix</h3>
-                </div>
-              </div>
-              <div id="queuePriorityChart" class="visual"></div>
-              <a class="panel-link" href="#queue">Open the future queue <span class="arr">→</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========================= PROGRAMS ========================== -->
-      <section id="programs" class="band muted-band">
-        <div class="section-heading">
-          <p class="eyebrow">Research programs</p>
-          <h2>Durable lines of inquiry</h2>
-          <p class="sub">Every experiment advances one or more of these programs — many span several, so program counts sum to more than the corpus total. Select a card to filter the whole atlas to its work.</p>
-        </div>
-        <div id="programCards" class="program-grid"></div>
-      </section>
-
-      <!-- ======================= EXPERIMENTS ========================= -->
-      <section id="experiments" class="band">
-        <div class="section-heading inline-heading">
-          <div>
-            <p class="eyebrow">Experiment explorer</p>
-            <h2>Search, filter, and inspect the corpus</h2>
-          </div>
-          <div id="experimentCount" class="result-count" aria-live="polite"></div>
-        </div>
-        <div class="explorer-layout">
-          <div class="tool-panel sticky-side">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Distribution</p>
-                <h3>Run surface</h3>
-              </div>
-            </div>
-            <div id="runSurfaceChart" class="visual"></div>
-            <div class="panel-heading" style="border-top:1px solid var(--line-soft)">
-              <div>
-                <p class="eyebrow">Scale</p>
-                <h3>Files per experiment</h3>
-              </div>
-            </div>
-            <div id="experimentScatter" class="visual"></div>
-          </div>
-          <div class="tool-panel table-panel">
-            <div id="experimentTable"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ======================== READINESS ========================== -->
-      <section id="readiness" class="band muted-band">
-        <div class="section-heading">
-          <p class="eyebrow">Curation work</p>
-          <h2>What needs attention before reuse</h2>
-          <p class="sub">Anchor-ready experiments can be cited and built on directly; many still have optional curation tasks. Those not yet anchor-ready carry the most pressing ones.</p>
-        </div>
-        <div class="split-layout">
-          <div class="tool-panel sticky-side">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Top tasks</p>
-                <h3>Open curation tasks</h3>
-                <p class="panel-sub">Counted across all experiments — anchor-ready ones still carry optional tasks.</p>
-              </div>
-            </div>
-            <div id="needsChart" class="visual"></div>
-          </div>
-          <div class="tool-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Scorecard</p>
-                <h3>Program scorecard</h3>
-              </div>
-            </div>
-            <div id="programHeatmap" class="visual"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========================== CLAIMS =========================== -->
-      <section id="claims" class="band muted-band">
-        <div class="section-heading">
-          <p class="eyebrow">Claims &amp; evidence</p>
-          <h2>Shared knowledge under test</h2>
-          <p class="sub">Cross-program claims, each tagged with a status and linked to the programs whose evidence supports or challenges it.</p>
-        </div>
-        <div class="split-layout">
-          <div class="tool-panel sticky-side">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Evidence graph</p>
-                <h3>Claims linked to programs</h3>
-              </div>
-            </div>
-            <div id="claimGraph" class="visual"></div>
-            <div id="claimStatusLegend" class="legend" aria-label="Claim status legend"></div>
-          </div>
-          <div id="claimCards" class="claim-list"></div>
-        </div>
-      </section>
-
-      <!-- ========================== QUEUE ============================ -->
-      <section id="queue" class="band">
-        <div class="section-heading inline-heading">
-          <div>
-            <p class="eyebrow">Future experiment queue</p>
-            <h2>A structured launchpad for new work</h2>
-          </div>
-          <div id="queueCount" class="result-count" aria-live="polite"></div>
-        </div>
-        <div id="queueBoard" class="queue-board"></div>
-      </section>
-
-      <!-- ========================= ARTIFACTS ========================= -->
-      <section id="artifacts" class="band">
-        <div class="section-heading">
-          <p class="eyebrow">Artifacts &amp; shape</p>
-          <h2>Manifests, file types, and shared memory</h2>
-          <p class="sub">A corpus-wide portrait of the repository — these charts describe the whole tree, not the active filters.</p>
-        </div>
-        <div class="artifact-grid">
-          <div class="artifact-col">
-            <div class="tool-panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Manifest types</p>
-                  <h3>Artifact coverage</h3>
-                </div>
-              </div>
-              <div id="artifactKindChart" class="visual"></div>
-            </div>
-            <div class="tool-panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">File extensions</p>
-                  <h3>Corpus texture</h3>
-                </div>
-              </div>
-              <div id="extensionChart" class="visual"></div>
-            </div>
-          </div>
-          <div class="tool-panel sticky-side">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Narrative</p>
-                <h3>From shared memory</h3>
-              </div>
-            </div>
-            <div id="narrativeCards" class="narrative-list"></div>
-          </div>
-        </div>
-      </section>
+%%CONTENT%%
     </main>
-
     <footer class="site-footer">
-      <div class="footer-brand">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <div>
-          <p class="footer-title">Small Model Experimentation</p>
-          <p class="gen-stamp" id="footerStamp">Generated research atlas</p>
-        </div>
-      </div>
-      <p class="footer-note">A self-contained map built from the repository knowledgebase — programs, experiments, claims, the future queue, and curation readiness.</p>
-      <a id="footerRepo" class="footer-link" href="#">View the repository ↗</a>
+      <p>Generated %%GENERATED%% from the repository knowledgebase.
+        <a href="https://github.com/ericflo/small-model-experimentation">ericflo/small-model-experimentation</a></p>
+      <p class="footer-note">One fixed Qwen3.5-4B; the mission is unearthing latent capability — no scaling, no teachers, beat "sample more".</p>
     </footer>
-
-    <div id="drawerScrim" class="scrim"></div>
-    <aside id="detailDrawer" class="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog" aria-modal="true" inert>
-      <div class="drawer-head">
-        <div>
-          <p class="drawer-eyebrow" id="drawerEyebrow"></p>
-          <h2 id="drawerTitle"></h2>
-        </div>
-        <button id="drawerClose" class="drawer-close" type="button" title="Close (Esc)" aria-label="Close details">✕</button>
-      </div>
-      <div id="drawerContent" class="drawer-body"></div>
-    </aside>
-    <div id="tooltip" class="tooltip" aria-hidden="true"></div>
-
-    <script id="site-data" type="application/json">__SITE_DATA__</script>
-    <script src="assets/app.js"></script>
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Figure viewer" hidden>
+      <button class="lightbox-close" type="button" aria-label="Close">&#10005;</button>
+      <button class="lightbox-prev" type="button" aria-label="Previous figure">&#8592;</button>
+      <figure><img alt=""><figcaption></figcaption></figure>
+      <button class="lightbox-next" type="button" aria-label="Next figure">&#8594;</button>
+    </div>
+    <script src="%%ROOT%%assets/app.js"></script>
   </body>
 </html>
