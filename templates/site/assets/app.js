@@ -362,6 +362,52 @@ const ROOT = document.body.dataset.root || "";
   });
 })();
 
+/* ------------------------------------------------------------ chart polish */
+
+(function initCharts() {
+  const charts = document.querySelectorAll(".viz-chart");
+  if (!charts.length) return;
+  const tip = document.createElement("div");
+  tip.className = "viz-tip";
+  tip.hidden = true;
+  document.body.appendChild(tip);
+
+  function moveTip(event) {
+    const pad = 12;
+    let x = event.clientX + pad;
+    let y = event.clientY + pad;
+    const rect = tip.getBoundingClientRect();
+    if (x + rect.width > window.innerWidth - 8) x = event.clientX - rect.width - pad;
+    if (y + rect.height > window.innerHeight - 8) y = event.clientY - rect.height - pad;
+    tip.style.left = `${x}px`;
+    tip.style.top = `${y}px`;
+  }
+
+  charts.forEach((chart) => {
+    chart.querySelectorAll("[data-viz-pt]").forEach((pt) => {
+      pt.addEventListener("mouseenter", (event) => {
+        tip.textContent = pt.dataset.vizLabel || "";
+        tip.hidden = !tip.textContent;
+        moveTip(event);
+      });
+      pt.addEventListener("mousemove", moveTip);
+      pt.addEventListener("mouseleave", () => { tip.hidden = true; });
+    });
+    chart.querySelectorAll(".viz-key").forEach((key) => {
+      key.addEventListener("click", () => {
+        const index = key.dataset.vizToggle;
+        const off = key.classList.toggle("off");
+        chart
+          .querySelectorAll(`[data-viz-series="${index}"], [data-viz-series-line="${index}"], [data-viz-series-label="${index}"]`)
+          .forEach((el) => {
+            el.style.opacity = off ? "0.1" : "";
+            if (el.hasAttribute("data-viz-pt")) el.style.pointerEvents = off ? "none" : "";
+          });
+      });
+    });
+  });
+})();
+
 /* ------------------------------------------------------------ data preview */
 
 (function initDataPreview() {

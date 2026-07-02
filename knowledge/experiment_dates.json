@@ -626,6 +626,14 @@
    ],
    "caveat": "start of 2026-06-25 rests on the seed-equals-date convention; 2026-06-26 alone is high-confidence"
   },
+  "qwen35_4b_simulation_keystone_repair": {
+   "start": "2026-07-02",
+   "end": "2026-07-02",
+   "confidence": "high",
+   "sources": [
+    "git: dir created in dedicated post-import commits on 2026-07-02 (P12 capstone follow-up) — not part of the 2026-06-28 corpus import, so git dates are the real run record"
+   ]
+  },
   "qwen35_4b_sketch_coverage_shift_probe": {
    "start": "2026-06-24",
    "end": "2026-06-24",

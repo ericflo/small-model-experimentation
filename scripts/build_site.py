@@ -13,6 +13,7 @@ import csv
 import datetime as dt
 import html
 import json
+import math
 import re
 import shutil
 import subprocess
@@ -964,6 +965,265 @@ def activity_chart(experiments: list[dict]) -> str:
     )
 
 
+# ------------------------------------------------------------- native charts
+
+
+def load_viz() -> dict[str, list[dict]]:
+    """Verified chart specs extracted from each experiment's own result files."""
+    path = KNOWLEDGE / "experiment_viz.json"
+    if not path.exists():
+        return {}
+    payload = read_json(path)
+    entries = payload.get("experiments", {}) if isinstance(payload, dict) else {}
+    out: dict[str, list[dict]] = {}
+    for exp_id, entry in entries.items():
+        charts = entry.get("charts", []) if isinstance(entry, dict) else []
+        valid = [spec for spec in charts if _valid_spec(spec)]
+        if valid:
+            out[str(exp_id)] = valid
+    return out
+
+
+def _valid_spec(spec: object) -> bool:
+    if not isinstance(spec, dict) or spec.get("kind") not in {"bar", "line"}:
+        return False
+    series = spec.get("series")
+    if not isinstance(series, list) or not series:
+        return False
+    if spec["kind"] == "bar":
+        cats = spec.get("categories")
+        if not isinstance(cats, list) or not cats:
+            return False
+        for entry in series:
+            values = entry.get("values") if isinstance(entry, dict) else None
+            if not isinstance(values, list) or len(values) != len(cats):
+                return False
+            if not all(isinstance(v, (int, float)) for v in values):
+                return False
+    else:
+        for entry in series:
+            points = entry.get("points") if isinstance(entry, dict) else None
+            if not isinstance(points, list) or not points:  # single points render as reference markers
+                return False
+            if not all(isinstance(p, list) and len(p) == 2 and all(isinstance(v, (int, float)) for v in p) for p in points):
+                return False
+    return True
+
+
+def _fmt_val(value: float, y_format: str) -> str:
+    if y_format in {"percent01", "percent100"}:
+        pct = value * 100 if y_format == "percent01" else value
+        text = f"{pct:.1f}".rstrip("0").rstrip(".")
+        return f"{text}%"
+    if value == int(value) and abs(value) < 10000:
+        return str(int(value))
+    return f"{value:.3g}"
+
+
+def _nice_ticks(lo: float, hi: float) -> list[float]:
+    span = hi - lo
+    if span <= 0:
+        return [lo]
+    raw = span / 4
+    mag = 10 ** math.floor(math.log10(raw))
+    step = next((m * mag for m in (1, 2, 2.5, 5, 10) if raw <= m * mag), 10 * mag)
+    first = math.ceil(lo / step) * step
+    ticks = []
+    tick = first
+    while tick <= hi + step * 0.01:
+        ticks.append(round(tick, 10))
+        tick += step
+    return ticks
+
+
+_SERIES_SLOTS = [1, 2, 3, 5, 8, 6, 7, 4]  # hue-separated order (slots 2 and 4 are both greens)
+
+
+def _series_color(index: int) -> str:
+    return f"var(--slot-{_SERIES_SLOTS[index % len(_SERIES_SLOTS)]})"
+
+
+def _spec_values(spec: dict) -> list[float]:
+    out: list[float] = []
+    for entry in spec["series"]:
+        if spec["kind"] == "bar":
+            out.extend(entry["values"])
+        else:
+            out.extend(p[1] for p in entry["points"])
+    return out
+
+
+def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
+    """Render one chart spec as a clean SVG (single scale, palette slots,
+    thin bars, light gridlines). Interactive polish rides on data attrs."""
+    values = _spec_values(spec)
+    lo = min(0.0, min(values))
+    hi = max(0.0, max(values))
+    if lo == hi:
+        hi = lo + 1
+    pad_hi = (hi - lo) * 0.12
+    hi += pad_hi
+    y_format = spec.get("y_format", "number")
+    ticks = _nice_ticks(lo, hi)
+
+    width = 360 if mini else 720
+    plot_h = 128 if mini else 240
+    m_left = 8 if mini else 52
+    m_right = 8 if mini else 14
+    m_top = 16 if mini else 12
+    m_bottom = 22 if mini else 34
+    plot_w = width - m_left - m_right
+    height = plot_h + m_top + m_bottom
+
+    def sy(v: float) -> float:
+        return m_top + plot_h - (v - lo) / (hi - lo) * plot_h
+
+    parts: list[str] = []
+    for tick in ticks:
+        y = sy(tick)
+        parts.append(f'<line x1="{m_left}" x2="{width - m_right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)" stroke-width="1"/>')
+        if not mini:
+            parts.append(
+                f'<text x="{m_left - 6}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(tick, y_format))}</text>'
+            )
+    zero_y = sy(0)
+    parts.append(f'<line x1="{m_left}" x2="{width - m_right}" y1="{zero_y:.1f}" y2="{zero_y:.1f}" stroke="var(--baseline)" stroke-width="1"/>')
+
+    series = spec["series"]
+    total_pts = 0
+    if spec["kind"] == "bar":
+        cats = [str(c) for c in spec.get("categories", [])]
+        n_groups = len(cats)
+        n_series = len(series)
+        group_w = plot_w / max(n_groups, 1)
+        bar_w = min(24.0, max(6.0, (group_w - 18) / n_series - 4))
+        cluster_w = n_series * bar_w + (n_series - 1) * 4
+        total_bars = n_groups * n_series
+        show_labels = total_bars <= (6 if mini else 10)
+        for gi, cat in enumerate(cats):
+            gx = m_left + gi * group_w + (group_w - cluster_w) / 2
+            for si, entry in enumerate(series):
+                value = entry["values"][gi]
+                x = gx + si * (bar_w + 4)
+                y0, y1 = sy(max(0.0, value)), sy(min(0.0, value))
+                bar_h = max(1.0, y1 - y0)
+                label = f'{esc(entry["label"])} · {esc(cat)}: {esc(_fmt_val(value, y_format))}' if len(series) > 1 else f'{esc(cat)}: {esc(_fmt_val(value, y_format))}'
+                parts.append(
+                    f'<rect x="{x:.1f}" y="{y0:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" rx="2" '
+                    f'fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{label}"/>'
+                )
+                if show_labels:
+                    parts.append(
+                        f'<text x="{x + bar_w / 2:.1f}" y="{y0 - 4:.1f}" text-anchor="middle" font-size="{10 if mini else 11}" '
+                        f'fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(value, y_format))}</text>'
+                    )
+                total_pts += 1
+            if not mini or n_groups <= 4:  # crowded mini labels collide; the card links to the full chart
+                label_font = 10 if mini else 11
+                max_chars = max(4, int(group_w / (5.4 if mini else 6.2)))
+                cat_text = cat if len(cat) <= max_chars else cat[: max_chars - 1] + "…"
+                parts.append(
+                    f'<text x="{m_left + gi * group_w + group_w / 2:.1f}" y="{m_top + plot_h + (14 if mini else 16)}" '
+                    f'text-anchor="middle" font-size="{label_font}" fill="var(--ink-2)">{esc(cat_text)}</text>'
+                )
+    else:
+        xs = [p[0] for entry in series for p in entry["points"]]
+        x_lo, x_hi = min(xs), max(xs)
+        if x_lo == x_hi:
+            x_hi = x_lo + 1
+
+        def sx(v: float) -> float:
+            return m_left + (v - x_lo) / (x_hi - x_lo) * plot_w
+
+        for si, entry in enumerate(series):
+            pts = sorted(entry["points"], key=lambda p: p[0])
+            if len(pts) > 1:
+                path = " ".join(f"{sx(p[0]):.1f},{sy(p[1]):.1f}" for p in pts)
+                parts.append(
+                    f'<polyline points="{path}" fill="none" stroke="{_series_color(si)}" stroke-width="2" '
+                    f'stroke-linejoin="round" stroke-linecap="round" data-viz-series-line="{si}"/>'
+                )
+            marker_r = (3 if mini else 3.5) if len(pts) > 1 else (4.5 if mini else 5.5)
+            for p in pts:
+                label = f'{esc(entry["label"])} · {esc(_fmt_val(p[0], "number"))}: {esc(_fmt_val(p[1], y_format))}'
+                parts.append(
+                    f'<circle cx="{sx(p[0]):.1f}" cy="{sy(p[1]):.1f}" r="{marker_r}" fill="{_series_color(si)}" '
+                    f'data-viz-pt data-viz-series="{si}" data-viz-label="{label}"/>'
+                )
+                total_pts += 1
+        x_ticks = _nice_ticks(x_lo, x_hi)[:6]
+        if mini and len(x_ticks) > 3:
+            x_ticks = [x_ticks[0], x_ticks[len(x_ticks) // 2], x_ticks[-1]]
+        for tick in x_ticks:
+            parts.append(
+                f'<text x="{sx(tick):.1f}" y="{m_top + plot_h + (14 if mini else 16)}" text-anchor="middle" '
+                f'font-size="{10 if mini else 11}" fill="var(--ink-2)">{esc(_fmt_val(tick, "number"))}</text>'
+            )
+        if not mini and spec.get("x_label"):
+            parts.append(
+                f'<text x="{m_left + plot_w / 2:.1f}" y="{height - 3}" text-anchor="middle" font-size="11" '
+                f'fill="var(--muted)">{esc(spec["x_label"])}</text>'
+            )
+
+    title = str(spec.get("title", ""))
+    aria = f'{title}: {spec.get("note", "")}' if spec.get("note") else title
+    return (
+        f'<svg viewBox="0 0 {width} {height}" role="img" aria-label="{esc(aria)}" preserveAspectRatio="xMidYMid meet" '
+        f'class="viz-svg{" viz-mini" if mini else ""}">{"".join(parts)}</svg>'
+    )
+
+
+def chart_figure(spec: dict, exp: dict, index: int) -> str:
+    """Full chart block: caption, svg, legend, data-table twin, source."""
+    svg = chart_svg(spec, mini=False, uid=f'{exp["id"]}-{index}')
+    legend = ""
+    if len(spec["series"]) > 1:
+        chips = "".join(
+            f'<button type="button" class="viz-key" data-viz-toggle="{si}">'
+            f'<span class="dot" style="background:{_series_color(si)}"></span>{esc(entry["label"])}</button>'
+            for si, entry in enumerate(spec["series"])
+        )
+        legend = f'<div class="viz-legend">{chips}</div>'
+    y_format = spec.get("y_format", "number")
+    if spec["kind"] == "bar":
+        head = "".join(f"<th>{esc(entry['label'])}</th>" for entry in spec["series"])
+        rows = "".join(
+            "<tr><td>"
+            + esc(str(cat))
+            + "</td>"
+            + "".join(f'<td style="text-align:right">{esc(_fmt_val(entry["values"][ci], y_format))}</td>' for entry in spec["series"])
+            + "</tr>"
+            for ci, cat in enumerate(spec["categories"])
+        )
+        table_head = f"<tr><th>{esc(spec.get('x_label') or 'condition')}</th>{head}</tr>"
+    else:
+        xs = sorted({p[0] for entry in spec["series"] for p in entry["points"]})
+        head = "".join(f"<th>{esc(entry['label'])}</th>" for entry in spec["series"])
+        table_head = f"<tr><th>{esc(spec.get('x_label') or 'x')}</th>{head}</tr>"
+        rows = ""
+        for x in xs:
+            cells = ""
+            for entry in spec["series"]:
+                match = next((p[1] for p in entry["points"] if p[0] == x), None)
+                cells += f'<td style="text-align:right">{esc(_fmt_val(match, y_format)) if match is not None else "—"}</td>'
+            rows += f"<tr><td>{esc(_fmt_val(x, 'number'))}</td>{cells}</tr>"
+    table = (
+        '<details class="chart-table"><summary>Data table</summary><div class="table-wrap">'
+        f'<table class="md-table"><thead>{table_head}</thead><tbody>{rows}</tbody></table></div></details>'
+    )
+    source = str(spec.get("source", ""))
+    if "/" in source or source.endswith((".json", ".csv")):
+        src_html = f'<a href="{GITHUB}/blob/main/experiments/{esc(exp["id"])}/{esc(source)}"><code>{esc(source)}</code></a>'
+    else:
+        src_html = esc(source)
+    note = f' <span class="muted">{esc(spec.get("note", ""))}</span>' if spec.get("note") else ""
+    return (
+        f'<figure class="viz-chart"><figcaption><strong>{esc(spec.get("title", ""))}</strong>{note}</figcaption>'
+        f"{svg}{legend}{table}"
+        f'<p class="viz-src muted">Numbers from {src_html}</p></figure>'
+    )
+
+
 def stat_tile(label: str, value: str, sub: str = "", href: str = "") -> str:
     body = (
         f'<span class="stat-label">{esc(label)}</span>'
@@ -1029,6 +1289,7 @@ class SiteBuilder:
                     self.claims_by_exp[str(evidence.get("id"))].append(claim)
         self.program_ids = {str(p["id"]) for p in self.programs}
         self.claim_anchor_ids = {slugify(str(claim.get("id"))) for claim in self.claims}
+        self.viz = load_viz()
         self.dropped_notes: list[str] = []
 
     # ------------------------------------------------------------- utilities
@@ -1048,6 +1309,13 @@ class SiteBuilder:
         """Escape plain text, then link claim ids and experiment slugs it mentions."""
         out = linkify_claims(esc(text), prefix, self.claim_anchor_ids)
         return linkify_experiments(out, prefix, self.roster)
+
+    def headline_chart(self, exp_id: str) -> str:
+        specs = self.viz.get(exp_id, [])
+        if not specs:
+            return ""
+        spec = next((s for s in specs if s.get("headline")), specs[0])
+        return chart_svg(spec, mini=True, uid=f"{exp_id}-mini")
 
     # ------------------------------------------------------------ experiment
 
@@ -1082,6 +1350,15 @@ class SiteBuilder:
                 if items:
                     subs = f"<ol>{items}</ol>"
             side_toc.append(f'<li><a href="#{anchor}">{heading.split("<")[0] if "<" in heading else heading}</a>{subs}</li>')
+
+        viz_specs = self.viz.get(exp_id, [])
+        if viz_specs:
+            blocks = "".join(chart_figure(spec, exp, index) for index, spec in enumerate(viz_specs))
+            add_section(
+                "charts",
+                f'Results at a glance <span class="count">{len(viz_specs)}</span>',
+                f'<div class="viz-grid">{blocks}</div>',
+            )
 
         if exp["readme_text"]:
             resolver = ExperimentResolver(exp, exp["readme_path"], prefix, self.roster, copied)
@@ -1638,7 +1915,11 @@ class SiteBuilder:
         recent = [exp for exp in self.experiments if exp["recent"]]
         feed = recent[:12] if recent else self.experiments[:12]
         feed_cards = "".join(
-            feed_card(exp, prefix, self.slots, self.program_titles, big=True, rich=self.rich_text) for exp in feed
+            feed_card(
+                exp, prefix, self.slots, self.program_titles,
+                big=True, rich=self.rich_text, chart=self.headline_chart(exp["id"]),
+            )
+            for exp in feed
         )
 
         cited_counts = Counter()
@@ -1763,6 +2044,7 @@ class SiteBuilder:
                 "finding": exp["finding"][:500],
                 "finding_source": exp["finding_source"],
                 "figures": len(exp["figures"]),
+                "charts": len(self.viz.get(exp["id"], [])),
                 "data_files": len(exp["data_files"]),
                 "url": f"experiments/{exp['id']}/",
                 "path": exp["path"],
