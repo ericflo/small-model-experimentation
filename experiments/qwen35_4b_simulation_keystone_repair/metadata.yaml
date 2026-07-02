@@ -14,7 +14,6 @@ tags:
 research_programs:
   - "structured_execution_and_compilers"
 top_level_dirs:
-  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -30,5 +29,5 @@ file_counts:
   sh: 1
   yaml: 3
 total_files: 26
-total_size_bytes: 1738817
+total_size_bytes: 1738802
 generated_on: "2026-07-02"
