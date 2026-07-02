@@ -135,15 +135,30 @@ Same verified cells, two pre-registered probes (P10/P11 logged before running):
   single forward pass, despite executing stated pipelines at ~1.0 when asked to produce code. (Caveat:
   no-think logit read; deliberate thinking-simulation may rescue discrimination.)
 
-**Completed capability ladder** (same tasks throughout): execution **1.00** → 2AFC discrimination
-**~0.73** → segmented identification **0.50→0.00** → bare identification **~0.0**. Only the *forward*
-direction (program→behavior) is intact; every *inverse* task (behavior→program) is weak and decays with
-composition length, even when search and segmentation are externalized.
+**P12 (thinking-mode 2AFC, pre-registered, predicted ≥0.9): REFUTED — 0.50 overall, chance**, and
+*worse* than the no-think logit read (0.73; Δ≈3.6 SE at n=120, same items/decoys). Asked to "work through
+the examples step by step," the model's mental execution of composed pipelines is systematically wrong and
+overwrites the weak-but-real surface signal the instant read used. (Parse rate 0.88; budget 512.)
+
+**Completed capability ladder** (same tasks throughout): plan→code transcription **1.00** → no-think
+discrimination **~0.73** → segmented identification **0.50→0.00** → thinking discrimination **0.50** →
+bare identification **~0.0**. The plan-given 1.00 is **transcription, not semantic execution** — the
+interpreter executed; the model only wrote code. What is intact: single-step recognition (0.88) and
+program→code transcription. What is broken: **multi-step mental simulation** — every task requiring
+internal state-tracking across composed ops (identify, segment, discriminate, simulate-and-compare)
+is weak and decays with length.
 
 ## Interpretation
 
-**The fixed 4B is a reliable compiler, not a hypothesis-searcher — and more precisely, not an
-inverse-inferencer.** The compositional wall decomposes as:
+**The fixed 4B is a reliable transcriber with a broken internal simulator.** The wall is not search
+alone, not segmentation alone, not inverse inference alone — all of those reduce to one deficit:
+**multi-step mental state-tracking**. The model cannot reliably run a composed program in its head
+(P12: thinking-simulation performs at chance and *below* its own no-think surface heuristics), so every
+capability that requires it — identifying a composition from behavior, segmenting a shown chain, checking
+a hypothesis against examples, using execution feedback (M2) — collapses with composition length, while
+capabilities that don't (single-step recognition, program→code transcription) stay near ceiling. This
+also reframes C9: thinking helps when its content is coherent reasoning; here the required content is
+*simulation*, which the model generates incorrectly, so thinking hurts. The compositional wall decomposes as:
 (i) a large measurement artifact (40% shallower-equivalents; true monolithic depth-3 was always 0);
 (ii) **zero** execution deficit (plan-given ≈ 1.00 through depth 4); (iii) a hard **identification** wall —
 on genuinely novel compositions the model identifies each additional composed op at only ~2× better than

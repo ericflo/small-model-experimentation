@@ -1,0 +1,9 @@
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   1%|▏         | 6/426 [00:00<00:07, 59.66it/s]Loading weights:   6%|▋         | 27/426 [00:00<00:02, 145.53it/s]Loading weights:  11%|█         | 46/426 [00:00<00:02, 159.22it/s]Loading weights:  19%|█▊        | 79/426 [00:00<00:01, 219.78it/s]Loading weights:  24%|██▎       | 101/426 [00:00<00:01, 210.14it/s]Loading weights:  31%|███       | 132/426 [00:00<00:01, 240.24it/s]Loading weights:  37%|███▋      | 157/426 [00:00<00:01, 234.58it/s]Loading weights:  44%|████▎     | 186/426 [00:00<00:00, 247.47it/s]Loading weights:  50%|████▉     | 211/426 [00:00<00:00, 241.07it/s]Loading weights:  58%|█████▊    | 248/426 [00:01<00:00, 273.27it/s]Loading weights:  65%|██████▌   | 277/426 [00:01<00:00, 272.79it/s]Loading weights:  72%|███████▏  | 306/426 [00:01<00:00, 263.47it/s]Loading weights:  78%|███████▊  | 333/426 [00:01<00:00, 261.49it/s]Loading weights:  85%|████████▍ | 360/426 [00:01<00:00, 261.40it/s]Loading weights:  91%|█████████ | 387/426 [00:01<00:00, 259.73it/s]Loading weights:  97%|█████████▋| 413/426 [00:01<00:00, 258.57it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 241.89it/s]
+=== THINKING 2AFC (greedy, budget 512) [393s] ===
+  d2k0: 0.70 (n=20)
+  d2k2: 0.40 (n=20)
+  d3k0: 0.55 (n=20)
+  d3k2: 0.50 (n=20)
+  d4k0: 0.50 (n=20)
+  d4k2: 0.35 (n=20)
+  overall: 0.50; parse rate 0.88

@@ -94,3 +94,10 @@ code; (c) INTERMEDIATES-SHOWN — visible examples show full state chains input-
   plan-execution competence (P7 ~1.0) implies it can execute-and-compare internally; predict 2AFC
   accuracy >= 0.8 everywhere. If 2AFC ~ 0.5 (chance), the model cannot even VERIFY a stated hypothesis
   against I/O — identification fails at the discrimination stage, not just generation.
+
+## P12 (thinking-mode 2AFC) — logged before running
+
+Same 2AFC items, but the model THINKS (budget 512) before answering A/B. If deliberate simulate-and-
+compare is available in thinking-space, accuracy should approach plan-execution levels (>=0.9). If it
+stays ~0.75, inverse verification is weak even with deliberation — the wall is deeper than "no scratch
+space in one forward pass."

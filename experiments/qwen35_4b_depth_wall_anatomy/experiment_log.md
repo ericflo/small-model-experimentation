@@ -60,3 +60,14 @@ execution 1.00 > 2AFC ~0.73 > segmented 0.50->0.00 > bare ~0.0. Only the forward
 (program->behavior) is intact; inverse inference (behavior->program) is the wall, decaying with length.
 Ops note: first probe launch crashed (fla kernel, long segmented prompts at batch 48 -> batch 20 fix);
 a kill-preamble self-match killed the second launch (use clean launches).
+
+## P12 results (thinking 2AFC -- REFUTED at chance; the simulator is the wall)
+
+Thinking-mode 2AFC (same items/decoys as no-think, greedy, budget 512): 0.50 overall (d2k0 .70 ... d4k2
+.35), WORSE than the no-think logit read (0.73; ~3.6 SE, n=120). Deliberate simulate-and-compare fails --
+the model's mental execution of composed pipelines is systematically wrong and destroys the surface
+signal. REFRAME: plan-given 1.00 = TRANSCRIPTION (interpreter executed; model wrote code). Intact:
+single-step recognition (0.88), program->code transcription (1.0). Broken: MULTI-STEP MENTAL SIMULATION
+-- the single deficit underlying identify/segment/discriminate/feedback-use. Also reframes C9: thinking
+helps when its content is coherent; here the required content is simulation, generated wrongly, so
+thinking HURTS. Caveats: budget 512, parse rate 0.88, one decoy family (one-op edits).
