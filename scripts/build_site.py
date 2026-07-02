@@ -975,17 +975,15 @@ def stat_tile(label: str, value: str, sub: str = "", href: str = "") -> str:
     return f'<div class="stat-tile">{body}</div>'
 
 
-def feed_card(exp: dict, prefix: str, slots: dict[str, int], titles: dict[str, str], *, big: bool, rich=None) -> str:
+def feed_card(
+    exp: dict, prefix: str, slots: dict[str, int], titles: dict[str, str], *, big: bool, rich=None, chart: str = ""
+) -> str:
+    """Card visual is a native mini-chart of the experiment's own numbers —
+    never a raw figure PNG (user preference: the data deserves better)."""
     url = f'{prefix}experiments/{esc(exp["id"])}/'
     thumb = ""
-    if big and exp["figures"]:
-        src = figure_url(exp["id"], exp["figures"][0], prefix)
-        size = png_size(EXPERIMENTS_DIR / exp["id"] / exp["figures"][0])
-        dims = f' width="{size[0]}" height="{size[1]}"' if size else ""
-        thumb = (
-            f'<a class="card-thumb" href="{url}" tabindex="-1" aria-hidden="true">'
-            f'<img src="{esc(src)}" alt=""{dims} loading="lazy"></a>'
-        )
+    if big and chart:
+        thumb = f'<a class="card-thumb" href="{url}" tabindex="-1" aria-hidden="true">{chart}</a>'
     chips = "".join(program_chip(pid, prefix, slots, titles) for pid in exp["programs"][:3])
     if not big:
         chips += "".join(f'<span class="chip tag">{esc(tag)}</span>' for tag in exp["tags"][:3])
