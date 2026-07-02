@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 13
+- Claims: 14
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 6 |
+| Promising | 7 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 2 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 3 |
+| `posttraining_and_adaptation` | 4 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 4 |
+| `structured_execution_and_compilers` | 5 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -321,3 +321,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 - Reading the 1.00 plan-given as 'composition solved' -- identification remains the binding constraint end-to-end.
 - Generalizing the exact 30x/op constant beyond this 63-op substrate without the cross-substrate test.
+
+## C14: Repairing a broken primitive does not propagate: capability is format-local in the fixed 4B
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: Pre-registered intervention test of C13's causal claim (experiment qwen35_4b_simulation_keystone_repair). QLoRA-SFT on interpreter-generated state-chain traces FULLY REPAIRED the broken simulator (output exact-match 0.80-0.84 through depth 5 vs base 0.30-0.36; +54pp LENGTH-GENERALIZATION beyond trained depths; held-out-primitive transfer 0.42->0.85 -- a genuine skill, not memorization). Yet the inverse-capability ladder DID NOT MOVE: bare identification 0.08->0.09, segmented 0.14->0.17. The matched-token control (PROD: direct I/O->code SFT) moved segmented identification 3x (0.14->0.41) -- transfer follows FORMAT ADJACENCY, not primitive dependency -- while degrading plan-given transcription (0.93->0.72), and both adapters crashed thinking-2AFC to ~0.10 via verified FORMAT CAPTURE (answering the A/B question in their trained output format). Phase-0 bonus (P-K0b refuted): thinking HELPS single-pipeline simulation (0.58 vs 0.46 at d3) -- deliberate simulation is length-fragile, not globally wrong; C13/P12's chance-level 2AFC was the double-simulation+comparison load. VERDICT (locked decision rules): KEYSTONE REFUTED, separable-representation branch. Capability in the fixed 4B is organized by input->output FORMAT MAPPINGS, not shared internal primitives: repairing the underlying skill does not propagate, cross-task transfer is format-adjacent, and narrow-format SFT taxes unrelated instruction-following.
+- Implication: Mechanistic diagnoses do not license training-transfer predictions: SFT buys the trained mapping plus its format neighborhood, nothing more. This bounds the banking program (C11/C12 teach mappings, not components -- explaining why banking never moved the planner or verification) and reinforces C13's deployment rule: externalize missing primitives with tools rather than installing them and hoping they propagate. When SFT-ing small models, expect format capture: narrow-format training damages unrelated instruction-following (mix formats or isolate adapters per task).
+
+### Evidence
+
+- [`qwen35_4b_simulation_keystone_repair`](../../experiments/qwen35_4b_simulation_keystone_repair/reports/report.md)
+
+### Next Tests
+
+- Mixed-format SIM training (chains + A/B + code): does format diversity prevent capture and unlock cross-format use?
+- Prompt-bridging: instruct the SIM model to use its repaired simulator inside identification -- can prompting compose what SFT does not?
+- Full fine-tuning vs QLoRA on the same design (is separability an adapter artifact?).
+
+### Avoid
+
+- Reading the 2AFC crash as discrimination ability -- for the adapters that rung measures instruction-robustness under format capture.
+- Generalizing beyond QLoRA/this substrate without the full-FT and cross-family tests.

@@ -25,3 +25,14 @@ before Phase 1 ran).
 ## Phases 1-2
 
 Running (scripts/phase12_chain.sh): train SIM + PROD -> simbench x2 -> ladder x3.
+
+## Phase 1-2 results (VERDICT: keystone REFUTED -- separable/format-local branch)
+
+Simulator REPAIRED: SIM 0.92/0.82/0.80/0.84/0.76 by depth (base 0.96/0.88/0.58/0.30/0.36); +54pp at
+untrained d4 (P-K2 ok); held-out prims 0.42->0.85 (P-K6 ok); P-K1's d3 letter missed by 8pp (+22 vs +30)
+but d4/d5 vastly exceed. LADDER FLAT for SIM: bare 0.08->0.09, segmented 0.14->0.17, afc_nothink
+0.75->0.78 (P-K3 fail). P-K4 INVERTED: PROD tripled segmented (0.14->0.41; d3k0 0.20->0.65) -- format-
+adjacent transfer -- and degraded plan-given 0.93->0.72. Both adapters crashed afc_think to 0.10-0.15:
+verified FORMAT CAPTURE on raw generations (SIM answers the A/B question with ```python blocks).
+Locked-rule verdict: REFUTED-separable. Insight: capability is FORMAT-LOCAL in the fixed 4B (claim C14).
+Chain runtime ~5.6h total (SIM train 2406s loss 0.021; PROD 898s loss 0.116; 3 ladders ~1-1.5h each).

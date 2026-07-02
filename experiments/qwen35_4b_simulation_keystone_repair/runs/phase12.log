@@ -1,1 +1,64 @@
 === TRAIN SIM 05:04:04 ===
+training on 1500 verified (prompt->code) pairs
+{'train_runtime': '2406', 'train_samples_per_second': '1.247', 'train_steps_per_second': '0.156', 'train_loss': '0.02056', 'epoch': '2'}
+saved adapter to runs/adapter_sim
+=== TRAIN PROD 05:44:21 ===
+training on 554 verified (prompt->code) pairs
+{'train_runtime': '898.4', 'train_samples_per_second': '1.233', 'train_steps_per_second': '0.156', 'train_loss': '0.1159', 'epoch': '2'}
+saved adapter to runs/adapter_prod
+=== SIMBENCH SIM 05:59:31 ===
+  nothink done [133s]
+  think done [871s]
+  nothink  d1k0:1.00  d2k0:0.96  d2k2:0.92  d3k0:0.92  d3k2:0.96  d4k0:0.80  d4k2:0.60  d5k0:0.56  d5k2:0.72
+  think    d1k0:0.92  d2k0:0.92  d2k2:0.72  d3k0:0.72  d3k2:0.88  d4k0:0.76  d4k2:0.92  d5k0:0.68  d5k2:0.84
+wrote runs/simbench_sim.json
+=== SIMBENCH PROD 06:14:11 ===
+  nothink done [155s]
+  think done [1109s]
+  nothink  d1k0:0.76  d2k0:0.64  d2k2:0.56  d3k0:0.48  d3k2:0.44  d4k0:0.32  d4k2:0.24  d5k0:0.28  d5k2:0.28
+  think    d1k0:0.88  d2k0:0.96  d2k2:1.00  d3k0:0.88  d3k2:0.88  d4k0:0.60  d4k2:0.60  d5k0:0.28  d5k2:0.44
+wrote runs/simbench_prod.json
+=== LADDER BASE 06:32:50 ===
+120 ladder tasks
+  bare done [914s]
+  plan done [1533s]
+  segmented done [3508s]
+  2AFC no-think done [3511s]
+  2AFC think done [3903s]
+  d2k0        0.35        0.60        0.85        0.50        0.95
+  d2k2        0.00        0.00        0.85        0.50        1.00
+  d3k0        0.05        0.20        0.80        0.45        1.00
+  d3k2        0.10        0.00        0.90        0.40        1.00
+  d4k0        0.00        0.00        0.55        0.60        0.75
+  d4k2        0.00        0.05        0.55        0.35        0.90
+  OVERALL        0.08        0.14        0.75        0.47        0.93
+wrote runs/ladder_base.json
+=== LADDER SIM 07:39:39 ===
+  bare done [1277s]
+  plan done [2030s]
+  segmented done [4822s]
+  2AFC no-think done [4826s]
+  2AFC think done [5357s]
+  d2k0        0.40        0.50        0.75        0.05        1.00
+  d2k2        0.10        0.05        0.95        0.15        0.90
+  d3k0        0.05        0.30        0.70        0.10        1.00
+  d3k2        0.00        0.05        0.80        0.05        0.85
+  d4k0        0.00        0.00        0.65        0.10        0.85
+  d4k2        0.00        0.10        0.80        0.15        0.80
+  OVERALL        0.09        0.17        0.78        0.10        0.90
+wrote runs/ladder_sim.json
+=== LADDER PROD 09:09:06 ===
+  bare done [1255s]
+  plan done [2203s]
+  segmented done [4916s]
+  2AFC no-think done [4920s]
+  2AFC think done [5487s]
+  d2k0        0.55        0.75        0.85        0.30        0.90
+  d2k2        0.15        0.35        1.00        0.10        0.75
+  d3k0        0.05        0.65        0.80        0.20        0.70
+  d3k2        0.05        0.15        0.90        0.20        0.65
+  d4k0        0.00        0.45        0.60        0.05        0.65
+  d4k2        0.00        0.10        0.80        0.05        0.65
+  OVERALL        0.13        0.41        0.82        0.15        0.72
+wrote runs/ladder_prod.json
+=== PHASE12_DONE 10:40:43 ===

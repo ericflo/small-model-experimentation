@@ -14,6 +14,7 @@ tags:
 research_programs:
   - "structured_execution_and_compilers"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -21,13 +22,14 @@ top_level_dirs:
   - "scripts"
   - "src"
 file_counts:
-  json: 1
-  jsonl: 3
+  json: 6
+  jsonl: 4
   log: 2
   md: 5
+  png: 1
   py: 11
   sh: 1
   yaml: 3
-total_files: 26
-total_size_bytes: 1738802
+total_files: 33
+total_size_bytes: 2193421
 generated_on: "2026-07-02"

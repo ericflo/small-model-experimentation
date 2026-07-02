@@ -52,6 +52,20 @@ architectural serial compute. **Every branch is a durable law.**
 bash scripts/phase12_chain.sh                                             # train arms + all retests
 ```
 
-## Results
+## Results (verdict: KEYSTONE REFUTED — capability is format-local)
 
-Phase 1–2 pending — `runs/simbench_{sim,prod}.json`, `runs/ladder_{base,sim,prod}.json`.
+Full write-up in `reports/report.md`; figure `analysis/keystone.png`.
+
+- **The simulator was fully repaired**: 0.80–0.84 through depth 5 (base 0.30–0.36), +54pp length-
+  generalization beyond trained depths, held-out-primitive transfer 0.42→0.85 (a skill, not memorization).
+- **The inverse ladder did not move**: bare 0.08→0.09, segmented 0.14→0.17 — with a working simulator.
+- **Transfer follows format adjacency**: PROD (I/O→code SFT) tripled segmented identification (0.14→0.41)
+  — same output format — while degrading transcription (0.93→0.72); both adapters crashed thinking-2AFC
+  (~0.10) via verified **format capture** (answering A/B questions in their trained output format).
+- Phase-0 bonus: thinking *helps* single-pipeline simulation — deliberate simulation is length-fragile,
+  not globally wrong (refines C13/P12).
+
+**Insight (claim C14): capability in a fixed small model is organized by input→output format mappings,
+not shared internal primitives.** Repairing the underlying skill doesn't propagate; SFT buys the trained
+mapping plus its format neighborhood; mechanism diagnoses don't license training-transfer predictions.
+The efficient strategy remains C13's: externalize missing primitives with tools.
