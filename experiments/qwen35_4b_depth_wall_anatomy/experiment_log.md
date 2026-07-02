@@ -48,3 +48,15 @@ full observability of intermediate states barely rescues (the model cannot SEGME
 depth-1 identifications it does at 0.88). Convergent constant: the grid's ~2x-over-chance/op law equals
 C12's ~2x guided-vs-brute efficiency, measured independently. Headline: the fixed 4B is a reliable
 compiler starved of hypothesis search. Runtime: 2725s for 1440 gens.
+
+## Phase 3 results (probes -- P10 partial, P11 mostly refuted; ladder completed)
+
+Segmented (pre-segmented per-step blocks): d2k0 0.50, d3k0 0.25, d4 0.00 -- helps vs intermediates-shown
+but does NOT recover the 0.88 isolated-d1 rate: per-step identification DEGRADES in composite context
+(interference beyond search/segmentation). 2AFC (true pipeline vs one-op decoy, no-think logit): 0.50-0.85
+-- weak discrimination despite perfect plan-execution; the model cannot verify a stated hypothesis against
+I/O in one forward (caveat: no-think; thinking-simulation untested). COMPLETED LADDER on the same tasks:
+execution 1.00 > 2AFC ~0.73 > segmented 0.50->0.00 > bare ~0.0. Only the forward direction
+(program->behavior) is intact; inverse inference (behavior->program) is the wall, decaying with length.
+Ops note: first probe launch crashed (fla kernel, long segmented prompts at batch 48 -> batch 20 fix);
+a kill-preamble self-match killed the second launch (use clean launches).

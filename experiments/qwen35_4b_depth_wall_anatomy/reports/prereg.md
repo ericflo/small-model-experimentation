@@ -84,3 +84,13 @@ code; (c) INTERMEDIATES-SHOWN — visible examples show full state chains input-
   observability (e.g., harder per-step inference even when states are visible).
 - P9 (planner slice, from Phase-1 data): first-op letter-logit rank degrades with k (destroyed
   observability), not with d at fixed k. Operational: median rank at (d3,k0) better than (d2,k2).
+
+## Phase 3 (probes) predictions — logged before Phase 3 runs
+
+- P10 (segmented presentation): if the Phase-2 intermediates failure is SEGMENTATION, pre-segmented
+  per-step transition blocks recover solve rates toward the d1 identification rate: >= 0.5 at d2-d3.
+  If it stays < 0.2, isolated per-step identification itself breaks in composite context.
+- P11 (2AFC discrimination): given the true pipeline vs a one-op decoy (both stated), the model's
+  plan-execution competence (P7 ~1.0) implies it can execute-and-compare internally; predict 2AFC
+  accuracy >= 0.8 everywhere. If 2AFC ~ 0.5 (chance), the model cannot even VERIFY a stated hypothesis
+  against I/O — identification fails at the discrimination stage, not just generation.

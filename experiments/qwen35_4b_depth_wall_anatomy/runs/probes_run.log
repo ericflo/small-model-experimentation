@@ -1,0 +1,110 @@
+120 tasks over [(2, 0), (2, 2), (3, 0), (3, 2), (4, 0), (4, 2)]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:48,  8.69it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:02, 150.60it/s]Loading weights:  12%|█▏        | 53/426 [00:00<00:01, 192.08it/s]Loading weights:  20%|█▉        | 85/426 [00:00<00:01, 239.60it/s]Loading weights:  26%|██▌       | 110/426 [00:00<00:01, 241.93it/s]Loading weights:  33%|███▎      | 142/426 [00:00<00:01, 257.66it/s]Loading weights:  39%|███▉      | 168/426 [00:00<00:01, 256.41it/s]Loading weights:  47%|████▋     | 199/426 [00:00<00:00, 267.19it/s]Loading weights:  53%|█████▎    | 226/426 [00:00<00:00, 253.73it/s]Loading weights:  60%|██████    | 257/426 [00:01<00:00, 265.31it/s]Loading weights:  69%|██████▉   | 293/426 [00:01<00:00, 289.01it/s]Loading weights:  76%|███████▌  | 323/426 [00:01<00:00, 264.55it/s]Loading weights:  83%|████████▎ | 352/426 [00:01<00:00, 271.23it/s]Loading weights:  89%|████████▉ | 380/426 [00:01<00:00, 272.70it/s]Loading weights:  96%|█████████▋| 411/426 [00:01<00:00, 283.16it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 253.97it/s]
+model loaded 4s
+/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+Traceback (most recent call last):
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_depth_wall_anatomy/scripts/run_probes.py", line 173, in <module>
+    main()
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_depth_wall_anatomy/scripts/run_probes.py", line 149, in main
+    gens = p.gen_sequences(rep, think=True, budget=args.budget, greedy=False, batch_size=48)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_depth_wall_anatomy/src/gen_lib.py", line 96, in gen_sequences
+    process(order, batch_size)
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_depth_wall_anatomy/src/gen_lib.py", line 87, in process
+    outs = self._seq_batch([prompts[i] for i in sub], think, budget, shuffle,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_depth_wall_anatomy/src/gen_lib.py", line 130, in _seq_batch
+    gen2 = self._gen(cont, answer_max, sampling)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_depth_wall_anatomy/src/gen_lib.py", line 72, in _gen
+    out = self.model.generate(input_ids=inp, attention_mask=attn, max_new_tokens=max_new,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2584, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2784, in _sample
+    outputs = self._prefill(
+              ^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 3830, in _prefill
+    return self(**model_inputs, return_dict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 907, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1665, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 1036, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 252, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1203, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py", line 93, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 784, in forward
+    hidden_states = self.linear_attn(
+                    ^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 535, in forward
+    core_attn_out, last_recurrent_state = self.chunk_gated_delta_rule(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1298, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/fla/ops/gated_delta_rule/chunk.py", line 546, in chunk_gated_delta_rule
+    o, final_state = ChunkGatedDeltaRuleFunction.apply(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/autograd/function.py", line 596, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/fla/utils/_decorators.py", line 152, in wrapper
+    return fn(*processed_args, **processed_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/amp/autocast_mode.py", line 493, in decorate_fwd
+    return fwd(*args, **kwargs)  # pyrefly: ignore [not-callable]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/fla/ops/gated_delta_rule/chunk.py", line 279, in forward
+    g, o, A, final_state, initial_state, g_input = chunk_gated_delta_rule_fwd(
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/fla/ops/gated_delta_rule/chunk.py", line 106, in chunk_gated_delta_rule_fwd
+    o = chunk_fwd_o(
+        ^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/fla/ops/common/chunk_o.py", line 526, in chunk_fwd_o
+    o = torch.empty_like(v)
+        ^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA driver error: device not ready

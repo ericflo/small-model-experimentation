@@ -1,0 +1,14 @@
+120 tasks over [(2, 0), (2, 2), (3, 0), (3, 2), (4, 0), (4, 2)]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.75it/s]Loading weights:   6%|▌         | 26/426 [00:00<00:02, 148.37it/s]Loading weights:  11%|█         | 46/426 [00:00<00:02, 157.14it/s]Loading weights:  18%|█▊        | 75/426 [00:00<00:01, 205.74it/s]Loading weights:  23%|██▎       | 98/426 [00:00<00:01, 207.31it/s]Loading weights:  28%|██▊       | 119/426 [00:00<00:01, 203.94it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:01, 226.43it/s]Loading weights:  40%|███▉      | 170/426 [00:00<00:01, 224.03it/s]Loading weights:  46%|████▌     | 196/426 [00:00<00:00, 232.35it/s]Loading weights:  52%|█████▏    | 220/426 [00:01<00:00, 224.95it/s]Loading weights:  58%|█████▊    | 249/426 [00:01<00:00, 240.58it/s]Loading weights:  65%|██████▍   | 276/426 [00:01<00:00, 247.11it/s]Loading weights:  71%|███████▏  | 304/426 [00:01<00:00, 255.97it/s]Loading weights:  77%|███████▋  | 330/426 [00:01<00:00, 225.89it/s]Loading weights:  84%|████████▍ | 359/426 [00:01<00:00, 236.03it/s]Loading weights:  90%|█████████ | 384/426 [00:01<00:00, 226.52it/s]Loading weights:  97%|█████████▋| 412/426 [00:01<00:00, 238.48it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 221.11it/s]
+model loaded 4s
+segmented done [1933s]
+2AFC done [1937s]
+
+=== PHASE 3 PROBES (segmented pass@4 | 2AFC accuracy) ===
+  d2k0: segmented 0.50 | 2AFC 0.80  (n=20)
+  d2k2: segmented 0.15 | 2AFC 0.70  (n=20)
+  d3k0: segmented 0.25 | 2AFC 0.75  (n=20)
+  d3k2: segmented 0.05 | 2AFC 0.75  (n=20)
+  d4k0: segmented 0.00 | 2AFC 0.85  (n=20)
+  d4k2: segmented 0.00 | 2AFC 0.50  (n=20)
+wrote data/probe_records.jsonl

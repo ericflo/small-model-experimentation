@@ -113,9 +113,37 @@ Phase-2's plan-given condition controls task content exactly (same tasks, inform
 
 All measures deployable (visible info only; hidden-graded). Reference oracle bounds everything at 1.0.
 
+### Phase 3 — probes: the deficit is inverse-inference itself, not just search
+
+Same verified cells, two pre-registered probes (P10/P11 logged before running):
+
+| cell | segmented pass@4 | 2AFC accuracy | (recall: bare / plan-given) |
+| --- | ---: | ---: | --- |
+| d2k0 | 0.50 | 0.80 | 0.05 / 1.00 |
+| d2k2 | 0.15 | 0.70 | 0.10 / 1.00 |
+| d3k0 | 0.25 | 0.75 | 0.00 / 1.00 |
+| d3k2 | 0.05 | 0.75 | 0.00 / 1.00 |
+| d4k0 | 0.00 | 0.85 | 0.00 / 1.00 |
+| d4k2 | 0.00 | 0.50 | 0.00 / 0.90 |
+
+- **P10 partially refuted**: pre-segmented per-step blocks (each an isolated depth-1 identification the
+  model does at 0.88) help — but only to 0.50/0.25 at d2/d3, decaying to 0.00 at d4. If per-step
+  identification stayed at its isolated rate, d3 would be ~0.68. So identification **degrades per-step in
+  composite context** — an interference effect beyond segmentation/search.
+- **P11 mostly refuted**: shown the true pipeline and a one-op decoy, no-think discrimination is only
+  ~0.70–0.85 (chance at d4k2) — the model cannot reliably *verify* a stated hypothesis against I/O in a
+  single forward pass, despite executing stated pipelines at ~1.0 when asked to produce code. (Caveat:
+  no-think logit read; deliberate thinking-simulation may rescue discrimination.)
+
+**Completed capability ladder** (same tasks throughout): execution **1.00** → 2AFC discrimination
+**~0.73** → segmented identification **0.50→0.00** → bare identification **~0.0**. Only the *forward*
+direction (program→behavior) is intact; every *inverse* task (behavior→program) is weak and decays with
+composition length, even when search and segmentation are externalized.
+
 ## Interpretation
 
-**The fixed 4B is a reliable compiler, not a hypothesis-searcher.** The compositional wall decomposes as:
+**The fixed 4B is a reliable compiler, not a hypothesis-searcher — and more precisely, not an
+inverse-inferencer.** The compositional wall decomposes as:
 (i) a large measurement artifact (40% shallower-equivalents; true monolithic depth-3 was always 0);
 (ii) **zero** execution deficit (plan-given ≈ 1.00 through depth 4); (iii) a hard **identification** wall —
 on genuinely novel compositions the model identifies each additional composed op at only ~2× better than
