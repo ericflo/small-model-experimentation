@@ -272,6 +272,14 @@
    ],
    "caveat": "logs/experiment_log.md exists but carries no dates; run_logs/*.log have no timestamps; reports/eval/*.json epoch-looking numbers are float-metric digit substrings, not timestamps"
   },
+  "qwen35_4b_depth_wall_anatomy": {
+   "start": "2026-07-02",
+   "end": "2026-07-02",
+   "confidence": "high",
+   "sources": [
+    "git: dir created and iterated in three dedicated post-import commits on 2026-07-02 (0844e60 03:18, 035e8cb 04:13, 151c9cd 04:24 -0700) — not part of the 2026-06-28 corpus import, so git dates are the real run record"
+   ]
+  },
   "qwen35_4b_diversity_keyed_coverage_gate": {
    "start": "2026-06-25",
    "end": "2026-06-25",

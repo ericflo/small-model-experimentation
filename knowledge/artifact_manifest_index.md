@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 137
-- Manifest files: 433
+- Experiments with manifests: 138
+- Manifest files: 434
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 10 |
+| `standard-artifact` | 11 |
 
 ## Manifests
 
@@ -154,6 +154,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_sampler_portfolio_scheduler` | `run-data` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/data/subset_constrained_dpo_k4_records.manifest.json) |
 | `qwen35_4b_sampler_portfolio_scheduler` | `run-data` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/data/train_policy_pool_records.manifest.json) |
 | `qwen35_4b_sampler_portfolio_scheduler` | `large-artifact` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/large_artifacts_manifest.md) |
+| `qwen35_4b_simulation_keystone_repair` | `standard-artifact` | [manifest](../experiments/qwen35_4b_simulation_keystone_repair/reports/artifact_manifest.yaml) |
 | `qwen35_4b_sketch_coverage_shift_probe` | `dataset` | [manifest](../experiments/qwen35_4b_sketch_coverage_shift_probe/data/dataset_manifest.json) |
 | `qwen35_4b_sketch_coverage_shift_probe` | `large-artifact` | [manifest](../experiments/qwen35_4b_sketch_coverage_shift_probe/large_artifacts_manifest.md) |
 | `qwen35_4b_static_bridge_ceiling_breaker` | `dataset` | [manifest](../experiments/qwen35_4b_static_bridge_ceiling_breaker/data/dataset_manifest.json) |

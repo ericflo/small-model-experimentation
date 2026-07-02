@@ -1,0 +1,25 @@
+schema_version: 1
+experiment_id: "qwen35_4b_simulation_keystone_repair"
+external_artifacts:
+  - name: "Qwen3.5-4B weights"
+    storage: "HuggingFace cache (~9.3 GB bf16)"
+    required_for: "microbenchmark, QLoRA arms, ladder retests"
+omitted_artifacts:
+  - name: "runs/adapter_sim, runs/adapter_prod (QLoRA adapters ~170MB each)"
+    reason: "regenerable via scripts/phase12_chain.sh; kept out of git"
+in_repo_artifacts:
+  - path: "reports/prereg.md"
+    reason: "pre-registered predictions P-K0..P-K6 + locked decision rules, logged before each phase"
+  - path: "data/simbench_tasks.jsonl, data/ladder_tasks.jsonl, data/train_sim.jsonl, data/train_prod.jsonl"
+    reason: "task sets + matched-token training data (SIM chains vs PROD code)"
+  - path: "runs/simbench*.json, runs/ladder_*.json"
+    reason: "per-task results for all arms"
+reproducibility:
+  phase0_command: "../../.venv/bin/python scripts/run_simbench.py --n-per-cell 25"
+  data_command: "../../.venv/bin/python scripts/make_training_data.py 500"
+  phase12_command: "bash scripts/phase12_chain.sh"
+  required_external_artifacts: ["Qwen3.5-4B weights"]
+notes: >-
+  Intervention test of C13. SIM and PROD arms are equally supervised with unlimited generator ground truth;
+  the only difference is supervised content (state chains vs code). Held-out primitives {rotate_k,
+  dedup_adjacent, running_max} excluded from both arms' training. No teacher; interpreter-generated data.

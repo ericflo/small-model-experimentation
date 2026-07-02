@@ -1,0 +1,10 @@
+225 tasks over [(1, 0), (2, 0), (2, 2), (3, 0), (3, 2), (4, 0), (4, 2), (5, 0), (5, 2)]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   8%|▊         | 36/426 [00:00<00:01, 343.67it/s]Loading weights:  17%|█▋        | 71/426 [00:00<00:01, 315.49it/s]Loading weights:  24%|██▍       | 103/426 [00:00<00:01, 306.52it/s]Loading weights:  33%|███▎      | 142/426 [00:00<00:00, 333.84it/s]Loading weights:  42%|████▏     | 178/426 [00:00<00:00, 342.76it/s]Loading weights:  50%|█████     | 213/426 [00:00<00:00, 331.29it/s]Loading weights:  59%|█████▉    | 252/426 [00:00<00:00, 343.98it/s]Loading weights:  67%|██████▋   | 287/426 [00:00<00:00, 335.78it/s]Loading weights:  75%|███████▌  | 321/426 [00:01<00:00, 264.63it/s]Loading weights:  82%|████████▏ | 350/426 [00:01<00:00, 210.78it/s]Loading weights:  88%|████████▊ | 375/426 [00:01<00:00, 180.78it/s]Loading weights:  93%|█████████▎| 396/426 [00:01<00:00, 185.00it/s]Loading weights:  98%|█████████▊| 417/426 [00:01<00:00, 184.28it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 249.69it/s]
+model loaded (frozen)
+  nothink done [218s]
+  think done [910s]
+
+=== SIMULATOR MICROBENCHMARK (frozen; output exact-match) ===
+  nothink  d1k0:0.84  d2k0:0.68  d2k2:0.36  d3k0:0.48  d3k2:0.44  d4k0:0.36  d4k2:0.24  d5k0:0.08  d5k2:0.24
+  think    d1k0:0.96  d2k0:0.92  d2k2:0.84  d3k0:0.52  d3k2:0.64  d4k0:0.28  d4k2:0.32  d5k0:0.20  d5k2:0.52
+wrote runs/simbench.json

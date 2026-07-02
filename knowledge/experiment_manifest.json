@@ -2582,6 +2582,45 @@
   },
   {
     "file_counts": {
+      ".json": 1,
+      ".jsonl": 3,
+      ".log": 2,
+      ".md": 5,
+      ".py": 11,
+      ".sh": 1,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-02",
+    "id": "qwen35_4b_simulation_keystone_repair",
+    "path": "experiments/qwen35_4b_simulation_keystone_repair",
+    "primary_readme": "experiments/qwen35_4b_simulation_keystone_repair/README.md",
+    "primary_report": "experiments/qwen35_4b_simulation_keystone_repair/reports/report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "**pre-registered** (`reports/prereg.md`, predictions + decision rules locked before each phase). simulation \u2014 under every inverse capability (identification, segmentation, discrimination, feedback-use). This experiment **repairs the primitive and watches whether the untrained capabilities move.** Executes C13's next_tests #1 and #2.",
+    "tags": [
+      "abi",
+      "latent-state",
+      "repair",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Simulation Keystone Repair",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 26,
+    "total_size_bytes": 1738817
+  },
+  {
+    "file_counts": {
       ".csv": 3,
       ".json": 4,
       ".jsonl": 1,
