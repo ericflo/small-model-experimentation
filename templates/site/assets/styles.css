@@ -185,6 +185,19 @@ a.stat-tile:hover { text-decoration: none; border-color: var(--baseline); }
 .strip-legend .status-half { color: var(--accent); }
 .strip-legend .status-open { color: var(--muted); }
 
+.glossary-box {
+  margin: 14px 0 0; padding: 10px 16px; font-size: 14px;
+  background: var(--surface); border: 1px solid var(--grid); border-radius: var(--radius);
+}
+.glossary-box summary { cursor: pointer; color: var(--accent-ink); font-weight: 600; font-size: 13px; }
+.glossary-box dl { display: grid; grid-template-columns: minmax(120px, max-content) 1fr; gap: 6px 16px; margin: 12px 0 4px; }
+.glossary-box dt { font: 600 13px var(--mono); color: var(--ink); }
+.glossary-box dd { margin: 0; color: var(--ink-2); font-size: 13.5px; }
+@media (max-width: 640px) {
+  .glossary-box dl { grid-template-columns: 1fr; gap: 2px; }
+  .glossary-box dd { margin: 0 0 8px; }
+}
+
 /* ----------------------------------------------------------------- chips */
 
 .chip {
@@ -304,11 +317,12 @@ a.chip:hover { text-decoration: none; border-color: var(--baseline); color: var(
 
 .mobile-toc { display: none; }
 .empty-note { color: var(--ink-2); padding: 20px 0; }
-.empty-note button {
+.empty-note button, #filter-reset {
   font: 600 13px var(--sans); color: var(--accent-ink);
   background: var(--surface); border: 1px solid var(--grid); border-radius: 8px;
   padding: 6px 12px; cursor: pointer;
 }
+#filter-reset:hover { border-color: var(--baseline); }
 .claim-card:target, .queue-card:target {
   outline: 2px solid var(--accent); outline-offset: 2px;
 }
@@ -331,8 +345,19 @@ pre {
 :not(pre) > code { background: var(--surface); border: 1px solid var(--grid); border-radius: 5px; padding: 1px 5px; }
 pre code { border: 0; background: none; padding: 0; }
 
-.table-wrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--grid); border-radius: 8px; }
-.md-table { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--surface); }
+.table-wrap {
+  overflow-x: auto; margin: 14px 0; border: 1px solid var(--grid); border-radius: 8px;
+  /* scroll shadows: hint that wide tables pan sideways */
+  background:
+    linear-gradient(to right, var(--surface) 30%, transparent) left / 40px 100%,
+    linear-gradient(to left, var(--surface) 30%, transparent) right / 40px 100%,
+    radial-gradient(farthest-side at 0 50%, var(--ring), transparent) left / 14px 100%,
+    radial-gradient(farthest-side at 100% 50%, var(--ring), transparent) right / 14px 100%;
+  background-repeat: no-repeat;
+  background-color: var(--surface);
+  background-attachment: local, local, scroll, scroll;
+}
+.md-table { border-collapse: collapse; width: 100%; font-size: 14px; background: transparent; }
 .md-table th, .md-table td { padding: 7px 12px; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }
 .md-table td { font-variant-numeric: tabular-nums; }
 .md-table tbody tr:last-child td { border-bottom: 0; }
@@ -365,7 +390,7 @@ pre code { border: 0; background: none; padding: 0; }
   width: 42px; height: 42px; font-size: 17px; cursor: pointer; flex: none;
 }
 .lightbox button:hover { background: rgba(255, 255, 255, 0.24); }
-.lightbox-close { position: absolute; top: 18px; right: 18px; }
+.lightbox .lightbox-close { position: absolute; top: 18px; right: 18px; }
 
 /* ------------------------------------------------------------- data files */
 
@@ -480,8 +505,15 @@ pre code { border: 0; background: none; padding: 0; }
   .site-search input, .site-search input:focus { width: 100%; padding: 9px 10px; }
   #search-results { left: 12px; right: 12px; width: auto; } /* anchors to the sticky topbar */
   .gh-link { padding: 9px 4px; }
-  [id] { scroll-margin-top: 108px; } /* two-row sticky topbar */
+  [id] { scroll-margin-top: 128px; } /* two-row sticky topbar (~116px) + breathing room */
   .filter-row { position: static; }
+  /* sub-16px inputs make iOS Safari zoom the page on focus */
+  .site-search input, .filter-row input[type="search"], .filter-row select { font-size: 16px; }
+  .lightbox { padding: 8px; gap: 0; }
+  .lightbox figure { max-width: 97vw; }
+  .lightbox img { max-width: 97vw; max-height: 74vh; }
+  .lightbox .lightbox-prev { position: absolute; bottom: 14px; left: 14px; }
+  .lightbox .lightbox-next { position: absolute; bottom: 14px; right: 14px; }
   .feed-grid, .explorer-list { grid-template-columns: 1fr; }
   .stat-value { font-size: 24px; }
   .claim-pill { padding: 8px 11px; }

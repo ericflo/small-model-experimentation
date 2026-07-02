@@ -72,13 +72,16 @@ const ROOT = document.body.dataset.root || "";
     if (hits.length === 0) {
       meta.textContent = `No matches for “${query}”`;
     } else {
-      const a = document.createElement("a");
-      a.href = `${ROOT}experiments/?q=${encodeURIComponent(query)}`;
-      const shown = Math.min(hits.length, 10);
-      a.textContent = hits.length > shown
-        ? `${hits.length} matches — search all experiments →`
-        : `${hits.length} match${hits.length === 1 ? "" : "es"} — open in the explorer →`;
-      meta.appendChild(a);
+      const expCount = hits.filter((hit) => hit.k === "experiment").length;
+      const label = `${hits.length} match${hits.length === 1 ? "" : "es"}`;
+      if (expCount > 0) {
+        const a = document.createElement("a");
+        a.href = `${ROOT}experiments/?q=${encodeURIComponent(query)}`;
+        a.textContent = `${label} — open ${expCount} experiment${expCount === 1 ? "" : "s"} in the explorer →`;
+        meta.appendChild(a);
+      } else {
+        meta.textContent = `${label} (no experiments — claims, programs, and queue hits are listed above)`;
+      }
     }
     list.appendChild(meta);
     list.hidden = false;
@@ -194,15 +197,19 @@ const ROOT = document.body.dataset.root || "";
       if (show) shown += 1;
     });
     const key = sort.value;
+    // rank = build order (matches the prev/next pager chain on detail pages)
+    const rank = (el) => Number(el.dataset.rank || 0);
     const sorted = items.slice().sort((a, b) => {
       if (key === "title") return (a.dataset.title || "").localeCompare(b.dataset.title || "");
-      if (key === "figs") return Number(b.dataset.figs || 0) - Number(a.dataset.figs || 0);
-      if (key === "date-asc") return (a.dataset.date || "9999").localeCompare(b.dataset.date || "9999") || (a.dataset.title || "").localeCompare(b.dataset.title || "");
-      return (b.dataset.date || "").localeCompare(a.dataset.date || "") || (a.dataset.title || "").localeCompare(b.dataset.title || "");
+      if (key === "figs") return Number(b.dataset.figs || 0) - Number(a.dataset.figs || 0) || rank(a) - rank(b);
+      if (key === "date-asc") return (a.dataset.date || "9999").localeCompare(b.dataset.date || "9999") || rank(b) - rank(a);
+      return (b.dataset.date || "").localeCompare(a.dataset.date || "") || rank(a) - rank(b);
     });
     sorted.forEach((item) => listEl.appendChild(item));
     count.textContent = `${shown} of ${items.length}` + (rangeFilter ? ` · ${rangeFilter.label}` : "");
     if (empty) empty.hidden = shown !== 0;
+    const reset = document.getElementById("filter-reset");
+    if (reset) reset.hidden = !(search.value || program.value || track.value || rangeFilter);
   }
 
   let timer = 0;
@@ -212,17 +219,18 @@ const ROOT = document.body.dataset.root || "";
     timer = window.setTimeout(apply, 120);
   });
   [program, track, sort].forEach((el) => el.addEventListener("change", apply));
-  const clear = document.getElementById("explorer-clear");
-  if (clear) {
-    clear.addEventListener("click", () => {
-      search.value = "";
-      program.value = "";
-      track.value = "";
-      rangeFilter = null;
-      window.history.replaceState(null, "", window.location.pathname);
-      apply();
-    });
+  function resetFilters() {
+    search.value = "";
+    program.value = "";
+    track.value = "";
+    rangeFilter = null;
+    window.history.replaceState(null, "", window.location.pathname);
+    apply();
   }
+  ["explorer-clear", "filter-reset"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", resetFilters);
+  });
   const params = new URLSearchParams(window.location.search);
   const dayParam = params.get("day");
   const weekParam = params.get("week");

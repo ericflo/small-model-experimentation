@@ -36,7 +36,7 @@ SITE_NAME = "Small Model Experimentation"
 
 FIGURE_EXTS = {".png", ".svg", ".jpg", ".jpeg", ".gif", ".webp"}
 FIGURE_MAX_BYTES = 8_000_000
-DATA_FILE_RE = re.compile(r"(summary|results?|metrics|report|eval|scores?|pareto|table)", re.I)
+DATA_FILE_RE = re.compile(r"(summary|results?|metrics|report|eval|scores?|pareto|table|baseline)", re.I)
 DATA_DIRS = ("runs", "reports", "analysis")
 DATA_MAX_BYTES = 200_000
 DATA_MAX_FILES = 24
@@ -113,7 +113,7 @@ def format_size(size: int) -> str:
     return f"{size / 1_000_000:.1f} MB"
 
 RESULT_HEADING_RE = re.compile(
-    r"^(final result snapshot|final results?|headline results?|results?( and analysis)?|findings?|outcome|what we found|key numbers)\b",
+    r"^(final result snapshot|final results?|headline results?|results?( and analysis)?|key findings?|findings?|outcome|what we found|key numbers)\b",
     re.I,
 )
 SUMMARY_HEADING_RE = re.compile(r"^(summary|abstract|executive summary|tl;?dr)\b", re.I)
@@ -269,48 +269,111 @@ def _sections(text: str) -> list[tuple[str, int, str]]:
 _EXCERPT_DROP_RE = re.compile(
     r"(?i)\b(?:table|figure|chart|plot|section)s?\s+(?:above|below)\b"
     r"|/(?:root|workspace)/|\.codex\b|\battachments?/"
+    r"|\bprimary outputs?\b|\bintentionally outside\b|\blarge_artifacts/"
+)
+_PATH_SENTENCE_RE = re.compile(r"[\w./-]+\.(?:md|csv|json|png|yaml|yml|txt)[.,;]?")
+_TABLE_POINTER = " (table on the experiment page)."
+_SUMMARY_MARKER_RE = re.compile(r"^(?:Arc|Bottom line|Net|Takeaway|Overall|Conclusion|Verdict)\b\s*[:,—–-]")
+_RESULT_VERB_RE = re.compile(
+    r"(?i)\b(?:win|wins|won|beat|beats|fail|fails|failed|improv\w*|gain\w*|drop\w*|collaps\w*|regress\w*"
+    r"|match\w*|refut\w*|confirm\w*|hold|holds|held|generaliz\w*|transfer\w*|outperform\w*|underperform\w*"
+    r"|dominat\w*|null|no effect|does not|doesn.t|works|worked|solve[sd]?)\b"
 )
 
 
-def _excerpt(markdown_body: str, limit: int) -> str:
+def _result_score(sentence: str) -> int:
+    score = 0
+    if re.search(r"%|→|±|\bpp\b|@\d|pass@|\d\.\d", sentence):
+        score += 2
+    if re.search(r"\d", sentence):
+        score += 1
+    if _RESULT_VERB_RE.search(sentence):
+        score += 1
+    return score
+
+
+def _flatten(markdown_body: str) -> str:
+    """Markdown -> running prose. Skips fences/tables/headings; drops intro
+    lines left dangling by a skipped table ("Headline results:")."""
     parts: list[str] = []
     in_fence = False
+
+    def fix_dangler(kind: str = "") -> None:
+        # the previous line introduced content we are about to skip: drop short
+        # labels ("Headline results:"), keep real sentences and say where the
+        # skipped content lives
+        if not parts or not parts[-1].endswith(":"):
+            return
+        if len(parts[-1]) < 60:
+            parts.pop()
+        elif kind == "table":
+            parts[-1] = parts[-1][:-1].rstrip() + _TABLE_POINTER
+        else:
+            parts[-1] = parts[-1][:-1].rstrip() + "."
+
     for line in markdown_body.splitlines():
         stripped = line.strip()
         if stripped.startswith("```"):
             in_fence = not in_fence
+            fix_dangler("code")
             continue
-        if in_fence or not stripped or stripped.startswith(("|", "#", "![", "<")):
+        if in_fence or not stripped:
+            continue
+        if stripped.startswith(("|", "#", "![", "<")):
+            fix_dangler("table" if stripped.startswith("|") else "")
             continue
         stripped = re.sub(r"^(?:[-*+]|\d{1,3}[.)])\s+", "", stripped)
         plain = strip_inline(stripped)
         if plain:
             parts.append(plain)
-        if sum(len(part) for part in parts) > limit * 1.6:
-            break
     text = " ".join(parts).strip()
     # drop leading pointer phrases ("Full results in reports/report.md; figure x.png.")
-    text = re.sub(
+    return re.sub(
         r"^(?:(?i:full|see|figures?|detailed|complete)\b[^.]{0,140}?\.(?:md|png|csv|json)\b[).;,\s]*)+",
         "",
         text,
     ).lstrip()
-    # drop sentences that reference context the excerpt cannot carry
-    sentences = re.split(r"(?<=[.!?])\s+", text)
-    kept = [s for s in sentences if not _EXCERPT_DROP_RE.search(s)]
-    if kept:
-        text = " ".join(kept)
-    if len(text) > limit:
+
+
+def _excerpt(markdown_body: str, limit: int) -> str:
+    """Findings excerpt: prefer the author's own summary sentence, else start at
+    the first result-bearing sentence; mark any truncation with an ellipsis."""
+    text = _flatten(markdown_body)
+    sentences = [
+        s
+        for s in re.split(r"(?<=[.!?])\s+", text)
+        if s and not _EXCERPT_DROP_RE.search(s) and not _PATH_SENTENCE_RE.fullmatch(s.strip())
+    ]
+    if not sentences:
+        return ""
+    for index, sentence in enumerate(sentences):
+        if _SUMMARY_MARKER_RE.match(sentence) and len(sentence) >= 60:
+            sentences = sentences[index:]
+            break
+    else:
+        first_result = next((i for i, s in enumerate(sentences) if _result_score(s) >= 2), None)
+        if first_result is not None and first_result > 1:
+            sentences = sentences[first_result:]
+    kept: list[str] = []
+    used = 0
+    truncated = False
+    for sentence in sentences:
+        if kept and used + len(sentence) + 1 > limit:
+            truncated = True
+            break
+        kept.append(sentence)
+        used += len(sentence) + 1
+    while kept and kept[-1].endswith(":"):  # trailing lead-in with its content elsewhere
+        kept.pop()
+        truncated = True
+    if not kept:
+        return ""
+    text = " ".join(kept)
+    if len(text) > limit * 1.3:  # single overlong sentence: cut at a word boundary
         cut = text[:limit]
-        last_stop = None
-        for match in re.finditer(r"[.!?](?=\s|$)", cut):
-            last_stop = match
-        if last_stop and last_stop.end() >= limit * 0.55:  # prefer whole sentences
-            text = cut[: last_stop.end()]
-        else:
-            cut = cut[: cut.rfind(" ")] if " " in cut else cut
-            text = cut.rstrip(",;:") + "…"
-    return text
+        text = (cut[: cut.rfind(" ")] if " " in cut else cut).rstrip(",;:")
+        truncated = True
+    return text + (" …" if truncated else "")
 
 
 _VOCAB_WORD_RE = re.compile(r"[a-z0-9][a-z0-9@._/-]{2,29}")
@@ -332,7 +395,7 @@ def search_vocab(*texts: str, cap: int = 700) -> str:
     return " ".join(seen)
 
 
-def extract_finding(readme: str, report: str, fallback: str, limit: int = 460) -> tuple[str, str]:
+def extract_finding(readme: str, report: str, fallback: str, limit: int = 620) -> tuple[str, str]:
     """Best-effort 'what we found' excerpt and its source label."""
     candidates: list[tuple[str, str]] = []
     for head, _, body in _sections(readme):
@@ -349,8 +412,11 @@ def extract_finding(readme: str, report: str, fallback: str, limit: int = 460) -
             candidates.append((body, f"report · {head}"))
     for body, label in candidates:
         text = _excerpt(body, limit)
-        if len(text) >= 60 and not text.lower().startswith(("pending", "tbd", "todo")):
-            return text, label
+        if len(text) < 60 or text.lower().startswith(("pending", "tbd", "todo")):
+            continue
+        if text.endswith(_TABLE_POINTER.strip()) and "." not in text[: -len(_TABLE_POINTER)]:
+            continue  # nothing but a table lead-in: the numbers live in the table
+        return text, label
     for source, label in ((readme, "README"), (report, "report")):
         text = _excerpt(source, limit)
         if len(text) >= 60:
@@ -514,17 +580,23 @@ def discover_files(exp_dir: Path) -> tuple[list[Path], list[Path]]:
         ):
             data.append(rel)
     data.sort(key=lambda rel: (len(rel.parts), str(rel)))
-    return figures, data[:DATA_MAX_FILES]
+    return figures, data[:DATA_MAX_FILES], max(0, len(data) - DATA_MAX_FILES)
 
 
 def find_log(exp_dir: Path) -> Path | None:
-    for candidate in (exp_dir / "experiment_log.md", exp_dir / "logs" / "experiment_log.md"):
+    for candidate in (
+        exp_dir / "experiment_log.md",
+        exp_dir / "logs" / "experiment_log.md",
+        exp_dir / "lab_notebook.md",
+        exp_dir / "logs" / "lab_notebook.md",
+    ):
         if candidate.exists():
             return candidate
     reports = exp_dir / "reports"
     if reports.exists():
-        for candidate in sorted(reports.glob("*experiment_log*.md")):
-            return candidate
+        for pattern in ("*experiment_log*.md", "*lab_notebook*.md"):
+            for candidate in sorted(reports.glob(pattern)):
+                return candidate
     return None
 
 
@@ -555,7 +627,7 @@ def build_experiments(programs: list[dict]) -> list[dict]:
         readme_text = read_text(readme_path) if readme_path and readme_path.exists() else ""
         report_text = read_text(report_path) if report_path and report_path.exists() else ""
         finding, finding_source = extract_finding(readme_text, report_text, row["summary"])
-        figures, data_files = discover_files(exp_dir)
+        figures, data_files, data_dropped = discover_files(exp_dir)
         info = dates.get(exp_id, {})
         title = row["title"].strip()
         if not title or "_" in title or title == exp_id:
@@ -580,6 +652,7 @@ def build_experiments(programs: list[dict]) -> list[dict]:
             "finding_source": finding_source,
             "figures": figures,
             "data_files": data_files,
+            "data_dropped": data_dropped,
             "first": str(info.get("first", "")),
             "last": str(info.get("last", "")),
             "commits": int(info.get("commits", 0) or 0),
@@ -606,10 +679,10 @@ def build_experiments(programs: list[dict]) -> list[dict]:
     return experiments
 
 
-def full_command_from_manifest(exp_dir: Path) -> tuple[str, str]:
+def full_command_from_manifest(exp_dir: Path) -> tuple[str, str, bool]:
     manifest = exp_dir / "reports" / "artifact_manifest.yaml"
     if not manifest.exists():
-        return "", ""
+        return "", "", False
     commands = {"smoke_command": "", "full_command": ""}
     lines = read_text(manifest).splitlines()
     for index, line in enumerate(lines):
@@ -629,7 +702,7 @@ def full_command_from_manifest(exp_dir: Path) -> tuple[str, str]:
             commands[key] = joiner.join(block)
         else:
             commands[key] = value.strip('"').strip("'")
-    return commands["smoke_command"], commands["full_command"]
+    return commands["smoke_command"], commands["full_command"], True
 
 
 # ----------------------------------------------------------------- html bits
@@ -689,7 +762,7 @@ def program_chip(pid: str, prefix: str, slots: dict[str, int], titles: dict[str,
     if pid not in titles:  # placeholder or candidate program: no page to link
         return (
             '<span class="chip prog pending" data-slot="0" title="Proposed program — no dedicated page yet">'
-            f'<span class="dot" aria-hidden="true"></span>{esc(label)}</span>'
+            f'<span class="dot" aria-hidden="true"></span>{esc(label)} · proposed</span>'
         )
     return (
         f'<a class="chip prog" data-slot="{slot}" href="{prefix}programs/{esc(pid)}/">'
@@ -758,17 +831,15 @@ def figure_url(exp_id: str, rel: Path | str, prefix: str) -> str:
 
 _TAG_SPLIT_RE = re.compile(r"(<[^>]+>)")
 _CLAIM_REF_RE = re.compile(r"\b(C\d{1,2})\b")
+_EXP_REF_RE = re.compile(r"\b([a-z][a-z0-9]*(?:_[a-z0-9]+){2,})\b")
 
 
-def linkify_claims(html_text: str, prefix: str, claim_ids: set[str]) -> str:
-    """Turn bare claim mentions ("claim C9") in rendered prose into links.
-
-    Only touches text nodes outside <a> and <code>, so quoted identifiers and
-    existing links stay untouched.
-    """
+def _transform_text_nodes(html_text: str, transform, skip_inline_code: bool) -> str:
+    """Apply transform to text nodes outside <a> and <pre> (and optionally <code>)."""
     parts = _TAG_SPLIT_RE.split(html_text)
     anchor_depth = 0
     code_depth = 0
+    pre_depth = 0
     for index, part in enumerate(parts):
         if part.startswith("<"):
             tag = part[1:].split(None, 1)[0].rstrip(">").lower()
@@ -776,22 +847,51 @@ def linkify_claims(html_text: str, prefix: str, claim_ids: set[str]) -> str:
                 anchor_depth += 1
             elif tag == "/a":
                 anchor_depth = max(0, anchor_depth - 1)
-            elif tag in {"code", "pre"}:
+            elif tag == "code":
                 code_depth += 1
-            elif tag in {"/code", "/pre"}:
+            elif tag == "/code":
                 code_depth = max(0, code_depth - 1)
+            elif tag == "pre":
+                pre_depth += 1
+            elif tag == "/pre":
+                pre_depth = max(0, pre_depth - 1)
             continue
-        if anchor_depth or code_depth:
+        if anchor_depth or pre_depth or (skip_inline_code and code_depth):
             continue
-        parts[index] = _CLAIM_REF_RE.sub(
+        parts[index] = transform(part)
+    return "".join(parts)
+
+
+def linkify_claims(html_text: str, prefix: str, claim_ids: set[str]) -> str:
+    """Turn bare claim mentions ("claim C9") in rendered prose into links."""
+
+    def transform(text: str) -> str:
+        return _CLAIM_REF_RE.sub(
             lambda m: (
                 f'<a href="{prefix}claims/#{m.group(1).lower()}">{m.group(1)}</a>'
                 if m.group(1).lower() in claim_ids
                 else m.group(1)
             ),
-            part,
+            text,
         )
-    return "".join(parts)
+
+    return _transform_text_nodes(html_text, transform, skip_inline_code=True)
+
+
+def linkify_experiments(html_text: str, prefix: str, roster: set[str]) -> str:
+    """Link bare experiment ids in prose (including inline code) to their pages."""
+
+    def transform(text: str) -> str:
+        return _EXP_REF_RE.sub(
+            lambda m: (
+                f'<a href="{prefix}experiments/{m.group(1)}/">{m.group(1)}</a>'
+                if m.group(1) in roster
+                else m.group(1)
+            ),
+            text,
+        )
+
+    return _transform_text_nodes(html_text, transform, skip_inline_code=False)
 
 
 def activity_chart(experiments: list[dict]) -> str:
@@ -875,7 +975,7 @@ def stat_tile(label: str, value: str, sub: str = "", href: str = "") -> str:
     return f'<div class="stat-tile">{body}</div>'
 
 
-def feed_card(exp: dict, prefix: str, slots: dict[str, int], titles: dict[str, str], *, big: bool) -> str:
+def feed_card(exp: dict, prefix: str, slots: dict[str, int], titles: dict[str, str], *, big: bool, rich=None) -> str:
     url = f'{prefix}experiments/{esc(exp["id"])}/'
     thumb = ""
     if big and exp["figures"]:
@@ -892,7 +992,7 @@ def feed_card(exp: dict, prefix: str, slots: dict[str, int], titles: dict[str, s
     meta_bits = [date_span(exp), track_chip(exp["track"])]
     if exp["figures"]:
         meta_bits.append(f'<span class="muted">{len(exp["figures"])} figure{"s" if len(exp["figures"]) != 1 else ""}</span>')
-    finding = esc(exp["finding"])
+    finding = rich(exp["finding"], prefix) if rich else esc(exp["finding"])
     return (
         f'<article class="feed-card{" big" if big else ""}">{thumb}<div class="card-body">'
         f'<div class="card-meta">{"".join(meta_bits)}</div>'
@@ -945,6 +1045,11 @@ class SiteBuilder:
 
     def chip_row(self, exp: dict, prefix: str) -> str:
         return "".join(program_chip(pid, prefix, self.slots, self.program_titles) for pid in exp["programs"])
+
+    def rich_text(self, text: str, prefix: str) -> str:
+        """Escape plain text, then link claim ids and experiment slugs it mentions."""
+        out = linkify_claims(esc(text), prefix, self.claim_anchor_ids)
+        return linkify_experiments(out, prefix, self.roster)
 
     # ------------------------------------------------------------ experiment
 
@@ -1032,15 +1137,21 @@ class SiteBuilder:
                     f'<a href="files/{esc(rel_posix)}"><code>{esc(rel_posix)}</code></a>'
                     f'<span class="muted">{format_size(size)}</span></li>'
                 )
+            more = ""
+            if exp["data_dropped"]:
+                more = (
+                    f'<p class="muted">{exp["data_dropped"]} more result file{"s" if exp["data_dropped"] != 1 else ""} '
+                    f'not shown here — <a href="{GITHUB}/tree/main/{esc(exp["path"])}">browse the full folder on GitHub</a>.</p>'
+                )
             body = (
                 '<p class="muted">Result tables and metrics copied from the experiment folder — preview inline or open the raw file.</p>'
-                f'<ul class="data-list">{"".join(rows)}</ul>'
+                f'<ul class="data-list">{"".join(rows)}</ul>{more}'
                 '<div class="data-viewer" hidden><div class="data-viewer-head"><code class="data-viewer-name"></code>'
                 '<button class="data-viewer-close" type="button">close</button></div><div class="data-viewer-body"></div></div>'
             )
             add_section("data", f'Data files <span class="count">{len(exp["data_files"])}</span>', body)
 
-        smoke, full = full_command_from_manifest(exp_dir)
+        smoke, full, has_manifest = full_command_from_manifest(exp_dir)
         # readiness CSV's smoke_command is a yes/no availability flag, never a command
         if smoke.lower() in {"yes", "no", "none", ""}:
             smoke = ""
@@ -1052,6 +1163,8 @@ class SiteBuilder:
         if full:
             repro_bits.append(f"<p>Full run</p><pre><code>{esc(full)}</code></pre>")
         surface_note = RUN_SURFACE_NOTE.get(exp["run_surface"], "")
+        if exp["run_surface"] == "documented-command" and not has_manifest:
+            surface_note = "The run commands are documented inside the experiment folder (see the README)."
         if surface_note:
             repro_bits.append(f'<p class="muted" title="run surface: {esc(exp["run_surface"])}">{esc(surface_note)}</p>')
         if repro_bits:
@@ -1119,7 +1232,7 @@ class SiteBuilder:
             src_label = f"from {origin}" + (f" · “{esc(section_name)}”" if section_name else "")
             finding_block = (
                 f'<div class="finding-callout"><p class="finding-label">Finding <span class="muted">{src_label}</span></p>'
-                f'<p>{esc(exp["finding"])}</p></div>'
+                f'<p>{self.rich_text(exp["finding"], prefix)}</p></div>'
             )
 
         updated = ""
@@ -1167,24 +1280,24 @@ class SiteBuilder:
             for track in sorted({exp["track"] for exp in self.experiments})
         )
         cards = []
-        for exp in self.experiments:
+        for index, exp in enumerate(self.experiments):
             text = " ".join(
                 [exp["id"], exp["title"], exp["finding"], " ".join(exp["tags"]), " ".join(exp["programs"])]
             ).lower()
             cards.append(
                 f'<li class="explorer-item" data-programs="{esc(" ".join(exp["programs"]))}" data-track="{esc(exp["track"])}" '
                 f'data-date="{esc(exp["when"] or "")}" data-figs="{len(exp["figures"])}" data-title="{esc(exp["title"].lower())}" '
-                f'data-text="{esc(text)}">'
-                + feed_card(exp, prefix, self.slots, self.program_titles, big=False)
+                f'data-rank="{index}" data-text="{esc(text)}">'
+                + feed_card(exp, prefix, self.slots, self.program_titles, big=False, rich=self.rich_text)
                 + "</li>"
             )
         imported_count = sum(1 for exp in self.experiments if exp["track"] != "new")
         content = (
             '<header class="page-head"><h1>Experiments</h1>'
             f'<p class="lede">{len(self.experiments)} experiments, newest first. '
-            f'{imported_count} arrived in the 2026-06-28 import from the predecessor working repo (two research lines, Y and Z); '
-            'their run dates are recovered from records inside each experiment folder. '
-            'Filters combine; search matches titles, findings, tags, programs, and overview text.</p></header>'
+            f'{imported_count} arrived in the 2026-06-28 import from the predecessor working repo — its two parallel '
+            'working tracks are labeled lines Y and Z here; their run dates are recovered from records inside each '
+            'experiment folder. Filters combine; search matches titles, findings, tags, programs, and overview text.</p></header>'
             + activity_chart(self.experiments)
             + '<form id="explorer-controls" class="filter-row" onsubmit="return false">'
             '<input id="explorer-search" type="search" placeholder="Search experiments…" aria-label="Search experiments">'
@@ -1193,7 +1306,8 @@ class SiteBuilder:
             '<select id="explorer-sort" aria-label="Sort"><option value="date">Newest first</option>'
             '<option value="date-asc">Oldest first</option>'
             '<option value="title">Title A–Z</option><option value="figs">Most figures</option></select>'
-            '<span id="explorer-count" class="result-count" aria-live="polite"></span></form>'
+            '<span id="explorer-count" class="result-count" aria-live="polite"></span>'
+            '<button id="filter-reset" type="button" hidden>Reset ✕</button></form>'
             f'<ol id="explorer" class="explorer-list">{"".join(cards)}</ol>'
             '<p id="explorer-empty" class="empty-note" hidden>No experiments match these filters. '
             '<button id="explorer-clear" type="button">Clear filters</button></p>'
@@ -1256,7 +1370,9 @@ class SiteBuilder:
                     continue
                 resolver = KnowledgeResolver(doc, page_prefix, self.roster, self.program_ids)
                 rendered = render_markdown(strip_leading_h1(read_text(doc)), resolver=resolver, slug_prefix=f"{name.split('.')[0]}-", heading_shift=1)
-                doc_html = linkify_claims(rendered.html, page_prefix, self.claim_anchor_ids)
+                doc_html = linkify_experiments(
+                    linkify_claims(rendered.html, page_prefix, self.claim_anchor_ids), page_prefix, self.roster
+                )
                 if collapsed:
                     parts.append(
                         f'<section class="doc-section"><h2>{heading}</h2><details><summary>Show {name}</summary>{doc_html}</details></section>'
@@ -1335,7 +1451,9 @@ class SiteBuilder:
                     if evidence.get("kind") == "experiment" and str(evidence.get("id")) in self.roster:
                         eid = str(evidence.get("id"))
                         evidence_items.append(
-                            f'<li><a href="{prefix}experiments/{esc(eid)}/">{esc(self.by_id[eid]["title"])}</a></li>'
+                            f'<li>{date_span(self.by_id[eid])} '
+                            f'<a href="{prefix}experiments/{esc(eid)}/">{esc(self.by_id[eid]["title"])}</a>'
+                            f'<p class="muted clamp">{esc(self.by_id[eid]["finding"][:180])}</p></li>'
                         )
                     elif evidence.get("kind") == "doc":
                         path = str(evidence.get("path", ""))
@@ -1493,7 +1611,9 @@ class SiteBuilder:
             prefix = "../../"
             resolver = KnowledgeResolver(doc, prefix, self.roster, self.program_ids)
             rendered = render_markdown(strip_leading_h1(read_text(doc)), resolver=resolver, heading_shift=1)
-            doc_html = linkify_claims(rendered.html, prefix, self.claim_anchor_ids)
+            doc_html = linkify_experiments(
+                linkify_claims(rendered.html, prefix, self.claim_anchor_ids), prefix, self.roster
+            )
             toc_items = "".join(
                 f'<li class="lv{level}"><a href="#{esc(slug_)}">{esc(text)}</a></li>' for level, slug_, text in rendered.toc if level <= 3
             )
@@ -1519,7 +1639,9 @@ class SiteBuilder:
         prefix = ""
         recent = [exp for exp in self.experiments if exp["recent"]]
         feed = recent[:12] if recent else self.experiments[:12]
-        feed_cards = "".join(feed_card(exp, prefix, self.slots, self.program_titles, big=True) for exp in feed)
+        feed_cards = "".join(
+            feed_card(exp, prefix, self.slots, self.program_titles, big=True, rich=self.rich_text) for exp in feed
+        )
 
         cited_counts = Counter()
         for exp_id, claims in self.claims_by_exp.items():
@@ -1529,7 +1651,7 @@ class SiteBuilder:
         bearing_cards = "".join(
             f'<li><a href="experiments/{esc(exp["id"])}/">{esc(exp["title"])}</a>'
             f'<span class="muted"> · cited by {cited_counts[exp["id"]]} claim{"s" if cited_counts[exp["id"]] != 1 else ""}</span>'
-            f'<p class="muted clamp">{esc(exp["finding"][:200])}</p></li>'
+            f'<p class="muted clamp">{self.rich_text(exp["finding"][:200], prefix)}</p></li>'
             for exp in bearing
         )
 
@@ -1539,7 +1661,9 @@ class SiteBuilder:
             if head.strip().lower() == "executive read":
                 resolver = KnowledgeResolver(KNOWLEDGE / "synthesis.md", prefix, self.roster, self.program_ids)
                 exec_read = render_markdown(body, resolver=resolver, slug_prefix="exec-", heading_shift=2).html
-                exec_read = linkify_claims(exec_read, prefix, self.claim_anchor_ids)
+                exec_read = linkify_experiments(
+                    linkify_claims(exec_read, prefix, self.claim_anchor_ids), prefix, self.roster
+                )
                 break
 
         claim_counts = Counter(str(claim.get("status")) for claim in self.claims)
@@ -1570,6 +1694,24 @@ class SiteBuilder:
             'Each links to its evidence.</p>'
         )
 
+        glossary_terms = [
+            ("deployable", "a setting you could actually ship: greedy decoding, one sample, no oracle reranking"),
+            ("greedy@1", "single deterministic answer (temperature 0) — the strictest deployable metric"),
+            ("pass@k", "chance that at least one of k samples passes the hidden tests"),
+            ("coverage", "fraction of tasks where at least one sample in the pool is correct — the ceiling that self-training can bank"),
+            ("oracle", "the score if you could always pick the pool's best sample — an upper bound, not deployable"),
+            ("visible / hidden tests", "the checks the model may see and run, vs the held-out checks that decide correctness"),
+            ("false-pass", "a candidate that passes the visible tests but fails the hidden ones"),
+            ("thinking / no-think", "generation with the model's native reasoning channel enabled vs disabled"),
+            ("banking", "fine-tuning the fixed model on its own verified successes, so sampled wins become its greedy default"),
+            ("import (lines Y / Z)", "the 2026-06-28 bulk import of the predecessor repo's two parallel working tracks"),
+        ]
+        glossary = (
+            '<details id="glossary" class="glossary-box"><summary>Glossary — the corpus vocabulary, one line each</summary><dl>'
+            + "".join(f"<dt>{esc(term)}</dt><dd>{esc(definition)}</dd>" for term, definition in glossary_terms)
+            + "</dl></details>"
+        )
+
         imported_count = sum(1 for exp in self.experiments if exp["track"] != "new")
         content = (
             '<section class="hero"><h1>What has this corpus learned?</h1>'
@@ -1577,7 +1719,7 @@ class SiteBuilder:
             'This site is the reading surface for that effort — the latest findings, the evidence behind every claim, and each experiment rendered in full. '
             f'{imported_count} of the {len(self.experiments)} experiments were imported on 2026-06-28 from the predecessor working repo; new work lands here first.</p>'
             f'<div class="stat-row">{tiles}</div>'
-            f'<div class="claim-strip" aria-label="Claims">{claim_strip}</div>{strip_legend}</section>'
+            f'<div class="claim-strip" aria-label="Claims">{claim_strip}</div>{strip_legend}{glossary}</section>'
             f'<section id="latest-feed" class="band"><div class="section-head"><h2>Latest findings</h2>'
             f'<a class="more" href="experiments/">All experiments →</a></div><div class="feed-grid">{feed_cards}</div></section>'
             + (
