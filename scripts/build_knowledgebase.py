@@ -468,7 +468,7 @@ def write_catalog_md(records: list[dict[str, object]]) -> None:
     lines = [
         "# Experiment Catalog",
         "",
-        f"Generated from `experiments/` on {dt.date.today().isoformat()}.",
+        f"Generated from `experiments/` on {dt.datetime.now(dt.timezone.utc).date().isoformat()}.",
         "",
         f"- Experiments: {len(records)}",
         f"- Source track Y provenance: {track_counts['track-y']}",
