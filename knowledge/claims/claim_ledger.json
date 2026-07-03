@@ -465,6 +465,33 @@
         "Treating 0.95 parse-conditional as deployable (conditions on the surviving half; upper bound).",
         "Reading identification's 0.13 as movement (~1 SE from 0.09)."
       ]
+    },
+    {
+      "id": "C16",
+      "title": "Cross-substrate: the compiler and the generation-wall are model-level LAWS; simulation fidelity is substrate-dependent (C15's decay constant was list-specific)",
+      "status": "Promising",
+      "programs": [
+        "structured_execution_and_compilers",
+        "posttraining_and_adaptation"
+      ],
+      "summary": "Pre-registered cross-family generality test (experiment qwen35_4b_crossfamily_laws) of the C13-C15 ladder on TWO genuinely different fresh, execution-verified, collapse-rejected families -- STRING (char edits) and REGISTER (3-register int machine) -- alongside the LIST anchor, 100 verified tasks/family (25 x depth 1-4), one shared harness. Verdict SCOPED, and the split is the finding. LAW #1 (transcription/compiler): plan-given execution ~1.00 at EVERY depth in ALL THREE families (min 0.92) -- the curves collapse to one flat line; the fixed 4B is a universal reliable compiler. LAW #2 (generation wall): bare identification of novel compositions collapses toward chance with depth in ALL families (transcription-identification gap >=0.84 at depth>=3); 'the model executes what it cannot invent' is model-level, so 'tools identify, the model compiles' is substrate-general. SUBSTRATE-DEPENDENT: simulation fidelity is NOT a family-invariant decay constant (normalized cross-family spread up to 0.84). It is governed by the cost of tracking the STATE REPRESENTATION: register (compact 3-int state) is robust and ~flat (0.92->0.72); list decays (1.00->0.56, the C15 curve); string (mutating char sequence) is floored near-zero even at depth 1 (0.24->0.00). NEW SUB-LAW: the wall's FLOOR ~ f(hypothesis-space size, simulability) -- register alone is both small-enough-to-search (12 ops) AND simulable, and alone keeps a nonzero deep-identification floor (0.16/0.08); list (large space) and string (unsimulable) hit zero; both factors jointly necessary. Per-depth (d1-4): transcription list 1.00/0.92/1.00/1.00, string 1.00/1.00/1.00/1.00, register 1.00/1.00/1.00/1.00; simulation list 0.76/1.00/0.84/0.56, string 0.24/0.12/0.00/0.00, register 0.92/0.80/0.72/0.72; identification list 0.80/0.12/0.00/0.00, string 0.84/0.16/0.00/0.00, register 0.56/0.36/0.16/0.08. Pre-registered: P-L1 (transcription law) and P-L4 (ordering) HOLD; P-L3 (wall) holds string, holds qualitatively register (floor 0.16); P-L2 (invariant decay) REFUTED (spread 0.84). Controls: identical collapse-rejection BFS across families, oracle 100% pass, n=25/cell; a family-aware Step-parser fix caught a spurious string-sim-0.00 'law' (unquoted-correct outputs) before any scored run.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_crossfamily_laws"
+        }
+      ],
+      "implication": "C13 is PROMOTED to a model-level law across substrates: plan-conditioned execution is nearly free everywhere; spend external tools (enumeration+interpreter) on hypothesis search, never on execution. C15 is NARROWED: externalize simulation to a tool only when the state representation is expensive to track (strings: even single steps; lists: past depth ~3) -- for compact integer state the model simulates reliably to depth 4+, so a tool call there is wasted. Representation choice is itself a capability lever. The floor sub-law predicts where a test-time generate-and-test loop can gain traction (small + simulable substrates) vs is pinned to zero, unifying C11 (coverage-bounded banking) and C12 (decompose-search edge).",
+      "next_tests": [
+        "Add a non-Python-expressible substrate (named-graph walk described, not coded) to test whether the transcription law survives when the plan cannot be a code snippet.",
+        "Hold simulability fixed, vary register op-menu size, measure deep-identification floor vs |ops| to test the floor sub-law directly.",
+        "Representation-swap: re-encode string tasks as integer-tuple (char->ordinal) state and test whether simulation jumps to register-like levels (would confirm representation, not task, drives simulation)."
+      ],
+      "avoid": [
+        "Do not treat C15's simulation-decay curve as a model constant -- it is list-specific; register barely decays and string is floored.",
+        "Do not conclude 'the model cannot simulate' from one substrate; simulability is a property of the state representation.",
+        "Do not read the register 0.16 deep-identification floor as 'no wall' -- 0.56->0.08 is a wall with a raised floor set by a small op space + simulability."
+      ]
     }
   ]
 }

@@ -1,0 +1,61 @@
+{
+ "P-L1_transcription": {
+  "string": {
+   "min_all": 1.0,
+   "min_d<=3": 1.0,
+   "hold": true,
+   "refuted": false
+  },
+  "register": {
+   "min_all": 1.0,
+   "min_d<=3": 1.0,
+   "hold": true,
+   "refuted": false
+  }
+ },
+ "P-L2_decay": {
+  "d4_sim": {
+   "string": 0.0,
+   "register": 0.72
+  },
+  "d4<=0.5_both": false,
+  "max_norm_spread": 0.84,
+  "strong_invariant(<=0.15)": false
+ },
+ "P-L3_generation_wall": {
+  "string": {
+   "max_bare_d>=3": 0.0,
+   "min_gap_d>=3": 1.0,
+   "wall": true,
+   "gap>=0.6": true
+  },
+  "register": {
+   "max_bare_d>=3": 0.16,
+   "min_gap_d>=3": 0.84,
+   "wall": false,
+   "gap>=0.6": true
+  }
+ },
+ "P-L4_ordering_d3": {
+  "list": {
+   "trans": 1.0,
+   "sim": 0.84,
+   "bare": 0.0,
+   "order_holds": true
+  },
+  "string": {
+   "trans": 1.0,
+   "sim": 0.0,
+   "bare": 0.0,
+   "order_holds": true
+  },
+  "register": {
+   "trans": 1.0,
+   "sim": 0.72,
+   "bare": 0.16,
+   "order_holds": true
+  }
+ },
+ "VERDICT": "SCOPED",
+ "strong_invariant_decay": false
+}

@@ -1035,6 +1035,43 @@
   {
     "file_counts": {
       ".json": 4,
+      ".jsonl": 3,
+      ".md": 5,
+      ".png": 1,
+      ".py": 6,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-02",
+    "id": "qwen35_4b_crossfamily_laws",
+    "path": "experiments/qwen35_4b_crossfamily_laws",
+    "primary_readme": "experiments/qwen35_4b_crossfamily_laws/README.md",
+    "primary_report": "experiments/qwen35_4b_crossfamily_laws/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "C11\u2013C15 all rest on ONE substrate (integer-list pipelines). Is transcription \u2248 1.0 / simulation-decays / identification-walls a **model-level law** or a **list artifact**? Rerun the ladder on genuinely different fresh families and see which constants replicate.",
+    "tags": [
+      "curriculum",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Cross-Family Laws",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 22,
+    "total_size_bytes": 457624
+  },
+  {
+    "file_counts": {
+      ".json": 4,
       ".jsonl": 5,
       ".log": 4,
       ".md": 4,

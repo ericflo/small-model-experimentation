@@ -1,0 +1,10 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_crossfamily_laws"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/run_family.py --family string --smoke"
+  full_command: "for f in list string register; do python scripts/run_family.py --family $f --n-per-depth 25 --depths 1 2 3 4 --budget 512 --seed 303; done && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "Inference-only, no training. ~70 min total on one RTX 4090 (~23 min/family). Outputs: runs/ladder_{list,string,register}.json, runs/verdict.json, analysis/crossfamily_ladder.png, data/tasks_*.jsonl. Verdict SCOPED (claim C16): transcription-compiler and generation-wall are model-level laws; simulation fidelity is substrate-dependent."

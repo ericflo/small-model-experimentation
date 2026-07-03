@@ -10,6 +10,18 @@
 
 ## Key Result
 
+- [qwen35_4b_crossfamily_laws](../../experiments/qwen35_4b_crossfamily_laws/reports/report.md)
+  (claim C16): **cross-substrate generality test** of the C13–C15 ladder on two genuinely different fresh,
+  execution-verified, collapse-rejected families (STRING char-edits, REGISTER 3-int machine) vs the LIST
+  anchor, 100 verified tasks/family. Verdict SCOPED, and the split is the finding: **two rungs are
+  model-level LAWS** — transcription/compiler (plan-given execution ~1.00 at every depth in all three
+  families; the curves collapse to one line) and the **generation wall** (bare identification collapses with
+  depth everywhere; trans−ident gap ≥0.84 at depth≥3) — so *tools identify, the model compiles* is
+  substrate-general. But **simulation fidelity is substrate-dependent** (C15's decay constant was
+  list-specific): register (compact state) is robust ~flat (0.92→0.72), list decays (1.00→0.56), string is
+  floored near-zero (0.24→0.00). New sub-law: the wall's *floor* ≈ f(hypothesis-space size, simulability) —
+  register alone (small op-menu + simulable) keeps a nonzero deep-ident floor (0.16/0.08). Promotes C13,
+  narrows C15. (Caught a spurious string-sim-0.00 "law" — a quote-blind parser — before any scored run.)
 - [qwen35_4b_depth_wall_anatomy](../../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md)
   (claim C13): pre-registered anatomy of the compositional wall. It is **identification, not execution** —
   plan-given execution 0.90–1.00 through depth 4 (zero execution deficit) while bare identification runs at

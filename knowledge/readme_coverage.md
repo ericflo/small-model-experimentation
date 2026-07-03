@@ -49,6 +49,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_constrained_coverage_dpo` | [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md) | [report](../experiments/qwen35_4b_constrained_coverage_dpo/reports/final_report.md) |
 | `qwen35_4b_context_composition` | [README](../experiments/qwen35_4b_context_composition/README.md) | [report](../experiments/qwen35_4b_context_composition/reports/report.md) |
 | `qwen35_4b_counterexample_directed_dsl` | [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md) | [report](../experiments/qwen35_4b_counterexample_directed_dsl/reports/qwen35_4b_counterexample_directed_dsl_report.md) |
+| `qwen35_4b_crossfamily_laws` | [README](../experiments/qwen35_4b_crossfamily_laws/README.md) | [report](../experiments/qwen35_4b_crossfamily_laws/reports/report.md) |
 | `qwen35_4b_decompose_compose_frontier` | [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md) | [report](../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md) |
 | `qwen35_4b_deployable_information_ceiling_sweep` | [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md) | [report](../experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md) |
 | `qwen35_4b_depth_wall_anatomy` | [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md) | [report](../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md) |
