@@ -520,6 +520,33 @@
         "Do not treat selection-freeness as example-count-independent: with fewer visible examples overfit traps (and a real selection problem) would grow.",
         "Do not treat C16's register floor as a simulability effect -- it is coverage (op-space size) driven."
       ]
+    },
+    {
+      "id": "C18",
+      "title": "Banking self-verified solutions does BOTH: concentrates coverage into single-shot (easy depth) and EXPANDS the coverage ceiling on held-out tasks (harder depth) -- shifting the proposal distribution, the lever C17 named",
+      "status": "Promising",
+      "programs": [
+        "structured_execution_and_compilers",
+        "posttraining_and_adaptation"
+      ],
+      "summary": "Correctly-aimed follow-through to C17 (the generation wall is proposal-COVERAGE; only shifting the proposal distribution can beat sample-more). Experiment qwen35_4b_coverage_banking: harvest the fixed 4B's OWN execution-verified identification solutions on TRAIN list tasks (sample K=40 think, keep hidden-correct, cap 12/task -> 80 SFT {prompt,code} pairs from 33/90 solved tasks, by depth {1:49,2:24,3:7}; 57/90 tasks yielded nothing = C17 wall), QLoRA-SFT single-shot no-teacher, eval on DISJOINT held-out tasks in 4 arms {base,banked}x{no-think,think}, greedy@1 + coverage@16. ANSWER -- banking does BOTH, depth-dependent: DEPTH 1 CONCENTRATION (think greedy@1 0.60->0.80, +0.20; ceiling flat 1.00->0.90 -- coverage pulled into single-shot). DEPTH 2 EXPANSION (banked think coverage@16 0.15->0.45, 3x, on HELD-OUT tasks -- proposes correct depth-2 compositions the base never sampled; unique-program count even DROPS 11.5->10.85, so banking concentrated the proposal MASS onto correct compositions, not more diversity -- exactly C17's 'shift the proposal distribution' lever). DEPTH 3-4 no-move (7 / 0 training examples; wall holds, coverage 0). Bounded: does NOT beat think-mode sample-more at k=1 (banked greedy 0.80<1.00 d1, 0.10<0.15 d2), but banking+sample-more > base+sample-more (banked cov 0.45 vs base 0.15 at d2). No diversity collapse. Refuted own P3 (concentration-only) in the optimistic direction; P2 (beat sample-more at k=1) refuted; P1 supported at d1 only; P4 (no lift at untrained d4) held.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_coverage_banking"
+        }
+      ],
+      "implication": "The coverage wall is NOT immovable by self-training: banking the fixed 4B's OWN verified solutions expands the coverage ceiling for held-out tasks at depths with enough training signal (d2 24 pairs -> 3x), genuine cross-task generalization. Two mechanisms separated by depth: CONCENTRATION where the base already covers (deployable single-shot rises), EXPANSION where it barely covers (ceiling rises). C11/C12's 'banking lifts pass@k' = both of these. To push the wall DEEPER (d3+, where plain sampling harvests ~0), seed the training set with tool-augmented harvest (C12 decompose-search) -- the concrete path C18->C12. Deployment recipe: bank verified self-solutions, then sample-more on the banked model; the coverage ceiling itself rises where you have training signal.",
+      "next_tests": [
+        "Tool-seeded banking: harvest depth-3 solutions via C12 decompose-search (sampling gets ~0), bank, test whether the depth-3 held-out coverage ceiling expands -- the wall-crossing test.",
+        "Expert iteration: does a 2nd banking round pull the expanded depth-2 coverage (0.45) into greedy@1 (still 0.10)?",
+        "Dose-response: vary depth-2 training pairs (4/12/24/48) to map expansion vs example count."
+      ],
+      "avoid": [
+        "Do not claim banking beats sample-more at single-shot -- it does not at k=1; it EXPANDS what sample-more reaches (bank then sample).",
+        "Do not expect banking to help a depth with too few verified examples (d3 7 pairs, d4 0 -> no move); plain sampling cannot harvest deep-wall solutions, so tool-search is needed to seed them.",
+        "Do not read the depth-2 expansion as added diversity -- unique programs dropped; banking sharpened the proposal distribution onto correct compositions."
+      ]
     }
   ]
 }

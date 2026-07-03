@@ -10,6 +10,17 @@
 
 ## Key Result
 
+- [qwen35_4b_coverage_banking](../../experiments/qwen35_4b_coverage_banking/reports/report.md)
+  (claim C18): **banking self-verified solutions does BOTH — concentrates AND expands.** The correctly-aimed
+  follow-through to C17 (only shifting the proposal distribution can beat sample-more). Harvest the fixed 4B's
+  OWN execution-verified identification solutions (80 SFT pairs, no teacher), QLoRA-SFT single-shot, eval on
+  DISJOINT held-out tasks (4 arms, base/banked × no-think/think). **Depth 1: CONCENTRATION** — think greedy@1
+  0.60→0.80, ceiling flat. **Depth 2: EXPANSION** — banked coverage@16 0.15→**0.45 (3×)** on held-out tasks:
+  proposes correct compositions the base never sampled (unique-program count even drops — the proposal *mass*
+  moved onto correct programs, C17's lever working). **Depth 3–4: no move** (7 / 0 training examples; wall
+  holds). Bounded: doesn't beat think sample-more at k=1, but banking+sample-more > base+sample-more. To push
+  the wall deeper you need verified deep examples plain sampling can't harvest → seed with tool-search (C12).
+  Refuted its own concentration-only prediction (P3) in the optimistic direction.
 - [qwen35_4b_coverage_vs_selection](../../experiments/qwen35_4b_coverage_vs_selection/reports/report.md)
   (claim C17): **the generation wall is COVERAGE, not selection.** Pre-registered decomposition — draw K=32
   identification samples/task (list + register, depths 1–4, 8 visible + 8 hidden examples), grade vs

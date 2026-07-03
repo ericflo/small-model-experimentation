@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_coverage_banking"
+external_artifacts:
+  - name: "banked QLoRA adapter"
+    storage: "scratchpad/banking_artifacts/banked_adapter (moved out of repo; 182MB > GitHub limit)"
+    required_for: "re-running banked-model evaluation without retraining"
+    checksum: ""
+    regenerate: "python scripts/harvest.py && python scripts/train_lora.py --train data/train.jsonl --out runs/banked_adapter"
+omitted_artifacts:
+  - path: "runs/banked_adapter/"
+    reason: "trained QLoRA adapter (182MB, exceeds GitHub hard limit); regenerate via harvest + train_lora"
+reproducibility:
+  smoke_command: "python scripts/harvest.py --smoke && python scripts/train_lora.py --train data/train.jsonl --out runs/smoke_adapter --smoke && python scripts/eval_ladder.py --tag base --smoke"
+  full_command: "bash runs/launch.sh && bash runs/launch2.sh"
+  required_external_artifacts: []
+notes: "Self-training (QLoRA-SFT) on the fixed 4B's OWN execution-verified solutions, no teacher. Harvest ~2h, train ~5min, 4 eval arms (base/banked x no-think/think) ~2h. Outputs: data/train.jsonl (80 verified SFT pairs), runs/eval_*.json, runs/verdict.json, analysis/banking_coverage.png. Adapter runs/banked_adapter omitted from git."

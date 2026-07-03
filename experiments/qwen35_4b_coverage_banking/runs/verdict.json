@@ -1,0 +1,57 @@
+{
+ "K": 16,
+ "per_depth": {
+  "1": {
+   "base_think_greedy": 0.6,
+   "sample_more_covK": 1.0,
+   "banked_nt_greedy": 0.45,
+   "banked_think_greedy": 0.8,
+   "banked_think_covK": 0.9,
+   "d_greedy_think": 0.2,
+   "d_cov_vs_samplemore": -0.1,
+   "banked_beats_sample_more": false,
+   "verdict": "concentration",
+   "uniq_base_think": 9.45,
+   "uniq_banked_think": 7.95
+  },
+  "2": {
+   "base_think_greedy": 0.05,
+   "sample_more_covK": 0.15,
+   "banked_nt_greedy": 0.05,
+   "banked_think_greedy": 0.1,
+   "banked_think_covK": 0.45,
+   "d_greedy_think": 0.05,
+   "d_cov_vs_samplemore": 0.3,
+   "banked_beats_sample_more": false,
+   "verdict": "EXPANSION",
+   "uniq_base_think": 11.5,
+   "uniq_banked_think": 10.85
+  },
+  "3": {
+   "base_think_greedy": 0.0,
+   "sample_more_covK": 0.0,
+   "banked_nt_greedy": 0.0,
+   "banked_think_greedy": 0.0,
+   "banked_think_covK": 0.0,
+   "d_greedy_think": 0.0,
+   "d_cov_vs_samplemore": 0.0,
+   "banked_beats_sample_more": true,
+   "verdict": "no-move",
+   "uniq_base_think": 13.0,
+   "uniq_banked_think": 13.45
+  },
+  "4": {
+   "base_think_greedy": 0.0,
+   "sample_more_covK": 0.0,
+   "banked_nt_greedy": 0.0,
+   "banked_think_greedy": 0.0,
+   "banked_think_covK": 0.0,
+   "d_greedy_think": 0.0,
+   "d_cov_vs_samplemore": 0.0,
+   "banked_beats_sample_more": true,
+   "verdict": "no-move",
+   "uniq_base_think": 13.55,
+   "uniq_banked_think": 14.85
+  }
+ }
+}

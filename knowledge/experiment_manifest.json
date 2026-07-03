@@ -1034,6 +1034,48 @@
   },
   {
     "file_counts": {
+      ".json": 5,
+      ".jsonl": 3,
+      ".md": 5,
+      ".png": 1,
+      ".py": 8,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-03",
+    "id": "qwen35_4b_coverage_banking",
+    "path": "experiments/qwen35_4b_coverage_banking",
+    "primary_readme": "experiments/qwen35_4b_coverage_banking/README.md",
+    "primary_report": "experiments/qwen35_4b_coverage_banking/reports/report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "beat sample-more. Does banking the model's own verified solutions do that \u2014 by CONCENTRATION or EXPANSION?",
+    "tags": [
+      "coverage",
+      "memory",
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B Coverage Banking: does banking shift the proposal distribution?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 25,
+    "total_size_bytes": 511048
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 2,
       ".md": 5,
