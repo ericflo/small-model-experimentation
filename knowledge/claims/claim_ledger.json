@@ -547,6 +547,34 @@
         "Do not expect banking to help a depth with too few verified examples (d3 7 pairs, d4 0 -> no move); plain sampling cannot harvest deep-wall solutions, so tool-search is needed to seed them.",
         "Do not read the depth-2 expansion as added diversity -- unique programs dropped; banking sharpened the proposal distribution onto correct compositions."
       ]
+    },
+    {
+      "id": "C19",
+      "title": "Inside the wall: the composition is linearly encoded but under-expressed at shallow depth (latent capability) and thins to a thread at the deep wall (information gap) -- the wall's nature changes with depth",
+      "status": "Promising",
+      "programs": [
+        "structured_execution_and_compilers",
+        "posttraining_and_adaptation"
+      ],
+      "summary": "First mechanistic (representation-level) probe of the C13-C18 generation wall (experiment qwen35_4b_latent_composition_probe). Linear probes (PCA128 + L2 logistic, held-out) on residual-stream activations captured at the last identification-prompt token, decoding the composition's FIRST operation (confound-robust: buried under later ops), 1500 verified-depth list tasks (500 each at depths 1/2/3). FINDING -- the wall's nature CHANGES with depth. Depth 1: first-op linearly decoded at 0.99 (rises from chance at embedding to ~0.99 by layer 15, plateaus) while the model NAMES it only 0.44 and generates it 0.68 -> representation >> expression. Depth 2: probe 0.42 (real signal 0.34 over shuffled floor 0.09) vs behavior ~0.13 -> encoded ~3x better than expressed. Depth 3 (the wall): probe 0.27 but shuffled floor 0.14, so real signal ~0.13 ~= behavioral naming 0.13 -> the representation itself has thinned to a thread. So the generation wall is an EXPRESSION failure at shallow depth (info present, unexpressed = latent capability) but a REPRESENTATION failure at the deep wall (info not computed = information gap). Controls: layer-0/embedding probe stays at chance (0.07/0.07/0.04) so the signal is computed not surface; shuffled-label floor ~chance at d1-2; depth-1=positive control validates methodology; first-op probe decays monotonically 0.99->0.42->0.27 mirroring the behavioral wall. Verdict: GRADIENT/crossover, not clean LATENT or ABSENT.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_latent_composition_probe"
+        }
+      ],
+      "implication": "Adjudicates the steering hope honestly: activation steering has real headroom at depth 1-2 (info present but unexpressed) but almost nothing to steer toward at the true wall (depth 3+, representation is a thread) -- no readout conjures information the forward pass never computed. Explains WHY banking (C18) was necessary and worked: the base's depth-2 representation of the composition is weak (0.42) and depth-3 is a thread (0.13); banking INSTALLS the missing representation, which is why only proposal-installation (banking/tools, C18/C12), not test-time readout, crosses the deep wall. Refines C13/C16: inverse-inference is computed-but-not-routed for shallow structure and simply not-computed for deep structure -- a depth-graded mixture of expression and representation failure.",
+      "next_tests": [
+        "Activation steering: add the depth-2 first-op probe direction to the residual stream at generation time; does identification/coverage rise? (the LATENT verdict's real usability test).",
+        "Probe the C18 banked model: does banking raise the depth-2/3 first-op probe accuracy? (direct test that banking installs the missing representation).",
+        "Full-composition probe: decode op-2 and op-3, not just op-1, to map how much of the WHOLE pipeline is latent vs the first step only."
+      ],
+      "avoid": [
+        "Do not claim the deep wall (depth 3) is a pure expression/latent failure -- the representation itself thins to ~the overfitting floor there; it is predominantly an information gap.",
+        "Do not read 'linearly decodable' as 'usable for generation' -- presence != routing; the steering follow-up is the usability test.",
+        "Do not use raw presence-probe accuracy (base-rate confounded); first-op multiclass is the confound-robust target.",
+        "Do not over-read the depth-1 latent gap -- partly a naming-task artifact (the model DOES use the first op to generate at 0.68); the cleanest latent signal is depth 2."
+      ]
     }
   ]
 }

@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_latent_composition_probe"
+external_artifacts:
+  - name: "residual-stream activations"
+    storage: "scratchpad/probe_artifacts/acts.npy (moved out of repo; 241MB > GitHub limit)"
+    required_for: "re-running scripts/probe.py without recomputing forward passes"
+    checksum: ""
+    regenerate: "python scripts/capture.py --n-per-depth 500 --n-behavioral 150 --depths 1 2 3"
+omitted_artifacts:
+  - path: "data/acts.npy"
+    reason: "residual-stream activations [1500, 33, 2560] float16 (241MB, exceeds GitHub hard limit); regenerate via scripts/capture.py"
+reproducibility:
+  smoke_command: "python scripts/capture.py --smoke && python scripts/probe.py"
+  full_command: "python scripts/capture.py --n-per-depth 500 --n-behavioral 150 --depths 1 2 3 && python scripts/probe.py && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "Inference-only (forward passes + sklearn linear probes). Capture ~2min activations + ~44min behavioral; probe ~5min CPU. Outputs: data/{present.npy,labels.json,tasks.jsonl}, runs/probe_results.json, analysis/latent_probe.png. acts.npy (241MB) omitted from git."

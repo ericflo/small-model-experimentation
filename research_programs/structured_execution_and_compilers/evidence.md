@@ -10,6 +10,18 @@
 
 ## Key Result
 
+- [qwen35_4b_latent_composition_probe](../../experiments/qwen35_4b_latent_composition_probe/reports/report.md)
+  (claim C19): **first look INSIDE the wall.** Linear probes on residual-stream activations (last
+  identification-prompt token, all 33 layers, 1500 verified tasks) decode the composition's first operation.
+  **The wall's nature changes with depth:** depth-1 first-op is decoded at **0.99** (rises to ~0.99 by layer 15)
+  while the model names it 0.44 / generates it 0.68 → representation ≫ expression = latent capability; depth-2
+  probe 0.42 vs behavior ~0.13; depth-3 (the wall) probe 0.27 but the shuffled floor is 0.14, so the real
+  signal (~0.13) ≈ behavior — the representation itself has thinned to a thread. So the wall is an EXPRESSION
+  failure when shallow (info present, unexpressed) and a REPRESENTATION failure when deep (info not computed).
+  Layer-0 stays at chance (signal is computed, not surface). **Implication:** steering has headroom at depth
+  1–2 but almost nothing to steer toward at the deep wall; explains why banking (C18) was necessary — it
+  *installs* the representation the base lacks. Only proposal-installation, not test-time readout, crosses the
+  deep wall.
 - [qwen35_4b_coverage_banking](../../experiments/qwen35_4b_coverage_banking/reports/report.md)
   (claim C18): **banking self-verified solutions does BOTH — concentrates AND expands.** The correctly-aimed
   follow-through to C17 (only shifting the proposal distribution can beat sample-more). Harvest the fixed 4B's

@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 170
-- Anchor-ready: 155
-- Human-authored READMEs: 157
+- Experiments: 171
+- Anchor-ready: 156
+- Human-authored READMEs: 158
 - Generated README stubs: 13
-- Primary reports: 170
-- Experiment logs: 74
-- Smoke commands: 39
-- Artifact manifests: 142
+- Primary reports: 171
+- Experiment logs: 75
+- Smoke commands: 40
+- Artifact manifests: 143
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 59 |
+| `documented-scripts` | 60 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -88,6 +88,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_independent_retrieval_consensus`](../experiments/qwen35_4b_independent_retrieval_consensus/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection | `human-authored` | [report](../experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_inventory_shortlister_training`](../experiments/qwen35_4b_inventory_shortlister_training/README.md) | operator_and_skill_inventories, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_inventory_shortlister_training/reports/qwen35_4b_inventory_shortlister_training_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_joint_shortlister_ladder`](../experiments/qwen35_4b_joint_shortlister_ladder/README.md) | benchmark_generalization, operator_and_skill_inventories, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_joint_shortlister_ladder/reports/qwen35_4b_joint_shortlister_ladder_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
+| yes | [`qwen35_4b_latent_composition_probe`](../experiments/qwen35_4b_latent_composition_probe/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_latent_composition_probe/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_learned_active_trace_policy`](../experiments/qwen35_4b_learned_active_trace_policy/README.md) | active_evidence_acquisition, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_learned_active_trace_policy/reports/qwen35_4b_learned_active_trace_policy_report.md) | no | `documented-scripts` | no | dataset, large-artifact, other | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_live_tool_dagger`](../experiments/qwen35_4b_live_tool_dagger/README.md) | posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_live_tool_dagger/reports/report.md) | no | `documented-scripts` | yes | large-artifact, other | add-experiment-log |
 | yes | [`qwen35_4b_model_in_loop_counterexamples`](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md) | benchmark_generalization, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_model_in_loop_counterexamples/reports/qwen35_4b_model_in_loop_counterexamples_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
