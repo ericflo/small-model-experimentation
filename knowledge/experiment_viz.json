@@ -40823,6 +40823,144 @@
      "note": "The banked model proposes correct depth-2 compositions the base never sampled \u2014 unique-program count even drops, so banking moved the proposal mass onto correct compositions (C17's lever)."
     }
    ]
+  },
+  "qwen35_4b_context_composition": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Context composes the module (0.95) but format capture crushes deployable 2AFC (0.51)",
+     "categories": [
+      "base plain",
+      "base orch",
+      "base ICL",
+      "SIM plain",
+      "SIM orch"
+     ],
+     "series": [
+      {
+       "label": "2AFC raw (deployable)",
+       "values": [
+        0.74,
+        0.83,
+        0.78,
+        0.46,
+        0.51
+       ]
+      },
+      {
+       "label": "2AFC parse-conditional",
+       "values": [
+        0.79,
+        0.83,
+        0.81,
+        0.87,
+        0.95
+       ]
+      },
+      {
+       "label": "parse rate",
+       "values": [
+        0.94,
+        1.0,
+        0.97,
+        0.53,
+        0.53
+       ]
+      }
+     ],
+     "y_label": "2AFC accuracy / parse rate",
+     "y_format": "percent01",
+     "note": "An explicit simulate-both-compare procedure lifts base 2AFC to 0.83. The weight-installed SIM module reaches 0.95 parse-conditional (it genuinely composes in-context) but format capture (parse 0.53) hijacks the output channel half the time, crushing deployable accuracy to 0.51 \u2014 capability = module x interface x procedure."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "No context strategy moves hypothesis generation (the un-composable wall)",
+     "categories": [
+      "base",
+      "SIM adapter"
+     ],
+     "series": [
+      {
+       "label": "identification (generate-and-test)",
+       "values": [
+        0.08,
+        0.13
+       ]
+      }
+     ],
+     "y_label": "bare identification",
+     "y_format": "percent01",
+     "note": "Neither a procedure, worked demos, nor a working simulator moves generation \u2014 proposal cannot be assembled in-context from forward primitives."
+    }
+   ]
+  },
+  "qwen_vm_agent_echo_qlora": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "VM-agent loop works (10%->43%), but ECHO does not help; the oracle gap remains",
+     "categories": [
+      "Validation",
+      "Fresh std",
+      "Fresh paraphrase",
+      "Fresh paired",
+      "Hard comp.",
+      "Average"
+     ],
+     "series": [
+      {
+       "label": "Native Qwen (direct)",
+       "values": [
+        0.312,
+        0.406,
+        0.375,
+        0.344,
+        0.406,
+        0.369
+       ]
+      },
+      {
+       "label": "Action-only K=8",
+       "values": [
+        0.469,
+        0.562,
+        0.219,
+        0.344,
+        0.562,
+        0.431
+       ]
+      },
+      {
+       "label": "ECHO K=8",
+       "values": [
+        0.5,
+        0.375,
+        0.219,
+        0.25,
+        0.469,
+        0.362
+       ]
+      },
+      {
+       "label": "Oracle K=8",
+       "values": [
+        0.781,
+        0.812,
+        0.656,
+        0.625,
+        0.812,
+        0.738
+       ]
+      }
+     ],
+     "y_label": "K=8 rollout accuracy",
+     "y_format": "percent01",
+     "note": "The recurrent model-VM edit loop lifts a 10% blank baseline to 43.1% average and beats native Qwen by 6.2%. ECHO (also training on VM observation tokens) reached 36.2% (-6.9% vs action-only) despite far lower observation CE \u2014 modeling the textual VM state does not optimize the action policy. The oracle teacher (73.8%) marks the remaining policy gap."
+    }
+   ]
   }
  }
 }

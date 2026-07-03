@@ -187,6 +187,9 @@ def main() -> int:
 
     print(f"created experiment: experiments/{experiment_id}")
     print("next: implement the smoke path, update program evidence/backlog, then run make check")
+    print(f'REQUIRED: add >=1 native chart under experiments["{experiment_id}"].charts in '
+          "knowledge/experiment_viz.json (bar/line spec from your results) — `make validate` fails "
+          "without one, and matplotlib PNGs do not count.")
     return 0
 
 

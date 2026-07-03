@@ -288,6 +288,41 @@ def experiment_has_artifact_manifest(exp: Path) -> bool:
     return any(candidate.exists() for candidate in candidates)
 
 
+def _valid_chart_spec(spec: object) -> bool:
+    """Mirror of build_site._valid_spec: a spec renders as a native site chart iff it is a bar/line with
+    well-formed series. Kept in sync deliberately (a chart that won't render must not satisfy the gate)."""
+    if not isinstance(spec, dict) or spec.get("kind") not in {"bar", "line"}:
+        return False
+    series = spec.get("series")
+    if not isinstance(series, list) or not series:
+        return False
+    if spec["kind"] == "bar":
+        cats = spec.get("categories")
+        if not isinstance(cats, list) or not cats:
+            return False
+        for entry in series:
+            values = entry.get("values") if isinstance(entry, dict) else None
+            if not isinstance(values, list) or len(values) != len(cats):
+                return False
+            if not all(isinstance(v, (int, float)) for v in values):
+                return False
+    else:
+        for entry in series:
+            points = entry.get("points") if isinstance(entry, dict) else None
+            if not isinstance(points, list) or not points:
+                return False
+            if not all(isinstance(p, list) and len(p) == 2 and all(isinstance(v, (int, float)) for v in p) for p in points):
+                return False
+    return True
+
+
+def experiment_chart_count(exp_id: str, viz: dict) -> int:
+    """Number of valid native chart specs registered for an experiment in experiment_viz.json."""
+    entry = viz.get(exp_id) if isinstance(viz, dict) else None
+    charts = entry.get("charts", []) if isinstance(entry, dict) else []
+    return sum(1 for spec in charts if _valid_chart_spec(spec))
+
+
 def is_artifact_manifest_file(path: Path) -> bool:
     name = path.name
     if name in {"artifact_manifest.yaml", "large_artifacts_manifest.md", "checkpoint_manifest.csv", "split_manifest.json"}:
@@ -391,6 +426,17 @@ def validate() -> int:
         fail(errors, "experiments/ contains no experiment directories")
     exp_ids = {path.name for path in experiments}
 
+    viz_path = KNOWLEDGE / "experiment_viz.json"
+    viz_experiments: dict = {}
+    if not viz_path.exists():
+        fail(errors, "missing knowledge/experiment_viz.json (holds the native chart specs)")
+    else:
+        try:
+            viz_payload = json.loads(viz_path.read_text(encoding="utf-8"))
+            viz_experiments = viz_payload.get("experiments", {}) if isinstance(viz_payload, dict) else {}
+        except (json.JSONDecodeError, OSError):
+            fail(errors, "knowledge/experiment_viz.json is not valid JSON")
+
     for exp in experiments:
         readme = exp / "README.md"
         metadata = exp / "metadata.yaml"
@@ -420,6 +466,11 @@ def validate() -> int:
         useful_files = [name for name in ["experiment_log.md", "checkpoint_manifest.csv"] if (exp / name).exists()]
         if not useful_dirs and not useful_files:
             fail(errors, f"experiment has no recognized artifacts: {rel(exp)}")
+        if experiment_chart_count(exp.name, viz_experiments) < 1:
+            fail(errors, f"experiment has no native chart: {rel(exp)} — add at least one bar/line spec "
+                         f"under experiments[\"{exp.name}\"].charts in knowledge/experiment_viz.json so the "
+                         f"site shows a graph (matplotlib PNGs do not count). See knowledge/experiment_viz.json "
+                         f"for the format; one spec should set \"headline\": true.")
         standard_manifest = exp / "reports" / "artifact_manifest.yaml"
         if standard_manifest.exists():
             validate_standard_artifact_manifest(errors, standard_manifest, exp)
