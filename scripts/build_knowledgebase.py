@@ -404,7 +404,9 @@ def write_missing_readme(record: dict[str, object]) -> bool:
 def collect_records() -> list[dict[str, object]]:
     if not EXPERIMENTS.exists():
         raise SystemExit("experiments/ does not exist")
-    generated_on = dt.date.today().isoformat()
+    # Use UTC so local-timezone commits match CI (which runs in UTC); otherwise an
+    # evening commit west of UTC stamps yesterday's date and fails generated-clean.
+    generated_on = dt.datetime.now(dt.timezone.utc).date().isoformat()
     records: list[dict[str, object]] = []
     for exp in sorted(path for path in EXPERIMENTS.iterdir() if path.is_dir()):
         primary_report = find_primary_report(exp)
