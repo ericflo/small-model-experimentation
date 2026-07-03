@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 140
-- Manifest files: 436
+- Experiments with manifests: 141
+- Manifest files: 437
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 13 |
+| `standard-artifact` | 14 |
 
 ## Manifests
 
@@ -67,6 +67,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/random/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `large-artifact` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/large_artifacts_manifest.md) |
+| `qwen35_4b_coverage_vs_selection` | `standard-artifact` | [manifest](../experiments/qwen35_4b_coverage_vs_selection/reports/artifact_manifest.yaml) |
 | `qwen35_4b_crossfamily_laws` | `standard-artifact` | [manifest](../experiments/qwen35_4b_crossfamily_laws/reports/artifact_manifest.yaml) |
 | `qwen35_4b_decompose_compose_frontier` | `standard-artifact` | [manifest](../experiments/qwen35_4b_decompose_compose_frontier/reports/artifact_manifest.yaml) |
 | `qwen35_4b_deployable_information_ceiling_sweep` | `large-artifact` | [manifest](../experiments/qwen35_4b_deployable_information_ceiling_sweep/large_artifacts_manifest.md) |

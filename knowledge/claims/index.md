@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 16
+- Claims: 17
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 9 |
+| Promising | 10 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 2 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 6 |
+| `posttraining_and_adaptation` | 7 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 7 |
+| `structured_execution_and_compilers` | 8 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -388,3 +388,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not treat C15's simulation-decay curve as a model constant -- it is list-specific; register barely decays and string is floored.
 - Do not conclude 'the model cannot simulate' from one substrate; simulability is a property of the state representation.
 - Do not read the register 0.16 deep-identification floor as 'no wall' -- 0.56->0.08 is a wall with a raised floor set by a small op space + simulability.
+
+## C17: The generation wall is COVERAGE, not selection: with enough examples selection is free; only shifting the proposal distribution beats sample-more
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: Pre-registered decomposition (experiment qwen35_4b_coverage_vs_selection) of the C13/C16 generation wall into COVERAGE (correct program never proposed) vs SELECTION (proposed but not selected). Fresh verified-depth list+register tasks, depths 1-4, K=32 identification samples/task, 8 visible + 8 hidden examples, repo-standard sampling. ANSWER: the wall is COVERAGE. SELECTION IS FREE: max(coverage - vfilter) = 0.00 across all 8 cells -- whenever the correct program is sampled, an 8-example execution-filter, the model's own C10-style verifier, AND even a random pick among visible-consistent candidates all deploy it (they are identical to the coverage ceiling in every cell). 90.2% of visible-passers also pass hidden, so passing 8 visible examples ~ being correct. Single-shot massively undersells accessible capability and sample+filter recovers it: first@1 -> coverage@32 = 0.10->0.30 (list d2, 3x), 0.45->0.90 (register d1), 0.15->0.60 (register d2, 4x), 0.05->0.25 (register d3, 5x) -- but this IS sample-more; free selection only makes coverage deployable. The coverage wall's DEPTH is set by hypothesis-space size: list coverage collapses at depth 3 (crossover d*=3, cov 0.05), register stays sample-accessible through depth 4 (0.90/0.60/0.25/0.10) because its smaller 12-op menu is sampled more often -- mechanistically explaining C16's register identification floor as COVERAGE-driven (sampling prob ~ 1/hypothesis-space), not special simulability. Residual: overfit traps -- 13/74 tasks-with-visible-passers have a program passing all 8 visible yet failing hidden; execution-filter and model-verifier both false-deploy it (concentrated at deep register d3 3/8, d4 3/5). A calibration/abstention gap, not a recovery gap. Refuted own predictions: P3 (a selection gap exists) REFUTED (cov-vfilter=0 everywhere); P4 (verifier elicits selection) REFUTED as stated (mverify=rndVP -- the verifier adds nothing because selection is trivial, NOT because it is weak); list crossover d*=3 not 4.
+- Implication: You CANNOT beat sample-more by better test-time SELECTION on this substrate -- selection is already free. The lever that beats sample-more must shift the PROPOSAL distribution: tool-enumeration that restructures proposal (C12 decompose-and-compose) or banking verified solutions into the weights (C11/C12) so the right program is proposed at k=1. Confirms C10 ('selection is plumbing not capability') in strong form, and sharpens C13/C16: the wall is PROPOSAL-coverage (the correct composition is never proposed at depth>=3 list / >=5 register), not a selection failure. Deployable recipe at shallow depth: sample K + execute-filter recovers 2-5x over single-shot for free; at deep depth only proposal-shifting helps; beware overfit-trap false-deploys (an abstention problem no example-filter solves).
+
+### Evidence
+
+- [`qwen35_4b_coverage_vs_selection`](../../experiments/qwen35_4b_coverage_vs_selection/reports/report.md)
+
+### Next Tests
+
+- Stress the verifier: shrink visible examples 8->3->1 until overfit traps dominate; find the regime where the C10 verifier actually beats execution-filter and random (a genuine hard-selection test).
+- Attack coverage directly: does banking/tool-enumeration move k=1 proposal to where sample+filter is today (list d2 0.10->0.30)? The correctly-aimed 'beat sample-more' test.
+- Abstention: can verifier entropy or cluster-agreement flag the overfit-trap tasks to abstain instead of false-deploy?
+
+### Avoid
+
+- Do not read mverify's apparent perfection as a strong-verifier result -- it equals random-among-visible-passers because selection is trivial with 8 examples.
+- Do not pursue better test-time SELECTORS to beat sample-more here; selection is free -- spend effort on shifting proposal (tools/banking).
+- Do not treat selection-freeness as example-count-independent: with fewer visible examples overfit traps (and a real selection problem) would grow.
+- Do not treat C16's register floor as a simulability effect -- it is coverage (op-space size) driven.

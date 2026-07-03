@@ -10,6 +10,19 @@
 
 ## Key Result
 
+- [qwen35_4b_coverage_vs_selection](../../experiments/qwen35_4b_coverage_vs_selection/reports/report.md)
+  (claim C17): **the generation wall is COVERAGE, not selection.** Pre-registered decomposition — draw K=32
+  identification samples/task (list + register, depths 1–4, 8 visible + 8 hidden examples), grade vs
+  visible+hidden, compare selectors to the coverage ceiling. **Selection is free:** max(coverage − vfilter)
+  = 0.00 in every cell; 90% of visible-passers also pass hidden, so an 8-example execution-filter, the
+  model's own C10-verifier, and even a random pick among visible-consistent candidates all recover the full
+  coverage ceiling identically. Single-shot undersells 2–5× (first@1→cov@32: list d2 0.10→0.30, register d2
+  0.15→0.60, d3 0.05→0.25) and sample+filter recovers it — but that IS sample-more. The coverage wall's
+  depth is set by hypothesis-space size (list collapses at d3; register survives to d4 via a smaller op
+  menu), mechanistically explaining C16's register floor as coverage-driven. **Implication:** you cannot
+  beat sample-more by better selection — the lever is shifting the PROPOSAL distribution (C12 tool-search /
+  C11-C12 banking). Refuted its own selection-centric predictions (P3, P4). Residual: overfit traps
+  (visible-pass, hidden-fail) false-deploy at deep register — an abstention gap no example-filter catches.
 - [qwen35_4b_crossfamily_laws](../../experiments/qwen35_4b_crossfamily_laws/reports/report.md)
   (claim C16): **cross-substrate generality test** of the C13–C15 ladder on two genuinely different fresh,
   execution-verified, collapse-rejected families (STRING char-edits, REGISTER 3-int machine) vs the LIST

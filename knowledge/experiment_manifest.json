@@ -1034,6 +1034,45 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".jsonl": 2,
+      ".md": 5,
+      ".png": 1,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-03",
+    "id": "qwen35_4b_coverage_vs_selection",
+    "path": "experiments/qwen35_4b_coverage_vs_selection",
+    "primary_readme": "experiments/qwen35_4b_coverage_vs_selection/README.md",
+    "primary_report": "experiments/qwen35_4b_coverage_vs_selection/reports/report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "proposed) or a SELECTION deficit (proposed but not selected)?",
+    "tags": [
+      "coverage",
+      "memory",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Coverage vs Selection: anatomy of the generation wall",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 18,
+    "total_size_bytes": 408150
+  },
+  {
+    "file_counts": {
       ".json": 4,
       ".jsonl": 3,
       ".md": 5,

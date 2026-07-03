@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 168
+- Experiments: 169
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 122
+- Assigned experiments: 123
 
 ### Seed Evidence
 
@@ -42,6 +42,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_context_composition` (new): [README](../experiments/qwen35_4b_context_composition/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
+- `qwen35_4b_coverage_vs_selection` (new): [README](../experiments/qwen35_4b_coverage_vs_selection/README.md)
 - `qwen35_4b_crossfamily_laws` (new): [README](../experiments/qwen35_4b_crossfamily_laws/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_depth_wall_anatomy` (new): [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md)
@@ -150,7 +151,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 57
+- Assigned experiments: 58
 
 ### Seed Evidence
 
@@ -169,6 +170,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
+- `qwen35_4b_coverage_vs_selection` (new): [README](../experiments/qwen35_4b_coverage_vs_selection/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
@@ -253,7 +255,7 @@ Choose or synthesize the next visible example, probe, test, or trace that collap
 Use libraries of verified algorithms, examples, traces, skills, or failures as reusable memory.
 
 - Charter: [algorithmic_memory_and_retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md)
-- Assigned experiments: 22
+- Assigned experiments: 23
 
 ### Seed Evidence
 
@@ -269,6 +271,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
+- `qwen35_4b_coverage_vs_selection` (new): [README](../experiments/qwen35_4b_coverage_vs_selection/README.md)
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
 - `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
 - `qwen35_4b_independent_retrieval_consensus` (track-z): [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md)
