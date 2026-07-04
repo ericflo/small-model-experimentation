@@ -653,6 +653,33 @@
         "Do not expect banking one rung to leap two (depth-4 stayed 0.00); each rung must be seeded by the explorer.",
         "Do not conflate the explorer with the model -- the depth-3 crack is interpreter+composition-structure (brute~=guided per C12), a tool, not the model's planning; that's the point (tools identify, the model/banking installs)."
       ]
+    },
+    {
+      "id": "C23",
+      "title": "The depth-3 install is DATA-LIMITED, not a representational cap: tool-seeded banking scales monotonically with #solutions into DEPLOYABLE single-shot",
+      "status": "Promising",
+      "programs": [
+        "structured_execution_and_compilers",
+        "posttraining_and_adaptation"
+      ],
+      "summary": "Dose-response follow-up to C22 (experiment qwen35_4b_depth3_dose_response; design hardened by an adversarial multi-agent workflow review). C22 crossed the depth-3 wall via tool-seeded banking but WEAKLY (think coverage@16 0.125, deployable ~0), leaving open: data-limited or representational cap? Bank C21's exact depth-1+2 pairs + N tool-found depth-3 pairs (interpreter brute-search over the substrate's own 16-op DSL, 640/640 solved), N in {40,160,640} nested, epochs=3. Eval on ONE frozen paired held-out set deduped by function-signature AND op-composition (0 leakage verified -> genuine generalization to NOVEL depth-3 rules), n=80, Wilson CIs. RESULT: DATA-LIMITED, decisively. Depth-3 think coverage@16 rises MONOTONICALLY 0.00 -> 0.087 -> 0.212 -> 0.375 at N=0/40/160/640, NO plateau; top-dose lower CI (0.28) > low-dose upper CI (0.17) (clean non-overlapping increase, not a bare n.s.). Crucially the DEPLOYABLE install scales too: no-think coverage@16 0.00 -> 0.338 and no-think single-shot greedy@1 0.00 -> 0.10 at N=640 (vs ~0 at C22's N=130). Depth-2 guardrail rose (0.175->0.50; scaffold intact). So C22's 'weak, test-time-dominated' install was insufficient DATA, not a hard representational bottleneck: the thin depth-3 thread (C19) thickens smoothly with more tool-found training data and converts into deployable single-shot. P1 (monotone) held; P2 DATA-LIMITED; P3 (deployable scales) held; P4 (0 leakage) held.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_depth3_dose_response"
+        }
+      ],
+      "implication": "The deep compositional wall is a DATA bottleneck, not a hard representational cap (at the depths tested): banking installs progressively more novel-depth-3 capability with more explorer-found solutions, scaling into deployable single-shot. Completes and quantifies the C13->C23 recipe: an explorer the base lacks (tool-search) reaches the rung and yields verified solutions; banking installs them; and the AMOUNT installed scales with the number of explorer-found solutions, into deployable single-shot. Self-training is the installer, external search is the explorer, data is the throttle. This is 'extend capability by a lot without a larger model' demonstrated and SCALING -- the only external ingredient is an interpreter-backed search (a tool); everything installed is the fixed 4B's own verified compositions.",
+      "next_tests": [
+        "Push doses past 640 (1280/2560) to find where (if) the curve saturates; characterize program-length/search-difficulty of solved vs unsolved held-out tasks.",
+        "Fixed-step + upsampled-40 control to split data-diversity from gradient exposure (currently confounded at fixed epochs).",
+        "Iterate the rung: with depth-3 now deployable at N=640, does tool-search harvest depth-4 more cheaply / does depth-4 banking now install?"
+      ],
+      "avoid": [
+        "Do not cite C22's weak install as evidence of a representational cap -- it was data-limited; more tool-found depth-3 pairs keep installing more (through N=640).",
+        "Do not over-claim a pure information bound: at fixed epochs 'more data' is confounded with 'more gradient exposure' (same event); the claim is applied (more distinct tool pairs -> more installed).",
+        "Do not ignore the single-seed / search-easy-bias limits: CIs are eval-noise only (no seed error bars), and a cap could appear past N=640 on harder compositions (untested)."
+      ]
     }
   ]
 }

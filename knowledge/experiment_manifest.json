@@ -1268,6 +1268,46 @@
   },
   {
     "file_counts": {
+      ".json": 9,
+      ".jsonl": 8,
+      ".md": 6,
+      ".png": 1,
+      ".py": 8,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-04",
+    "id": "qwen35_4b_depth3_dose_response",
+    "path": "experiments/qwen35_4b_depth3_dose_response",
+    "primary_readme": "experiments/qwen35_4b_depth3_dose_response/README.md",
+    "primary_report": "experiments/qwen35_4b_depth3_dose_response/reports/report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Pre-registered (`reports/prereg.md`, hardened by `reports/design_review.md`): DATA-LIMITED if depth-3 think coverage rises with N (top-dose CI above low-dose CI); CAP if it plateaus.",
+    "tags": [
+      "coverage",
+      "latent-state",
+      "memory",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Depth-3 Dose-Response: data-limited or representational cap?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 35,
+    "total_size_bytes": 3407222
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 5,
       ".log": 5,

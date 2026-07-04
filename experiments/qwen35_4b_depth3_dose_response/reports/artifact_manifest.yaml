@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_depth3_dose_response"
+external_artifacts:
+  - name: "dose adapters banked_{40,160,640}"
+    storage: "scratchpad/dose_artifacts/ (moved out of repo; ~180MB each)"
+    required_for: "re-running dose evaluations without retraining"
+    checksum: ""
+    regenerate: "python scripts/tool_harvest.py --n-depth3 640 && build train_N.jsonl && python scripts/train_lora.py --train data/train_N.jsonl --out runs/banked_N_adapter"
+omitted_artifacts:
+  - path: "runs/banked_*_adapter/"
+    reason: "trained QLoRA adapters (~180MB each, exceed GitHub hard limit); regenerate via harvest + train"
+reproducibility:
+  smoke_command: "python scripts/tool_harvest.py --smoke"
+  full_command: "python scripts/tool_harvest.py --n-depth3 640 && bash runs/launch.sh && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "Explorer = CPU interpreter brute-search over the 16-op DSL (no external model), 640/640 depth-3 solved. 3 QLoRA trains + 8 paired evals (~6h). Verdict DATA-LIMITED (claim C23): depth-3 think coverage 0.00->0.375 across N=0/40/160/640, deployable no-think greedy@1 0.00->0.10 at N=640. Adapters moved out of repo."

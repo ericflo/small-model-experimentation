@@ -1,0 +1,59 @@
+{
+ "think_depth3": {
+  "0": {
+   "covK": 0.0,
+   "wilson": [
+    0.0,
+    0,
+    0.046
+   ],
+   "per_sample": 0.0,
+   "greedy": 0.0
+  },
+  "40": {
+   "covK": 0.0875,
+   "wilson": [
+    0.087,
+    0.043,
+    0.17
+   ],
+   "per_sample": 0.016,
+   "greedy": 0.0125
+  },
+  "160": {
+   "covK": 0.2125,
+   "wilson": [
+    0.212,
+    0.137,
+    0.314
+   ],
+   "per_sample": 0.045,
+   "greedy": 0.0375
+  },
+  "640": {
+   "covK": 0.375,
+   "wilson": [
+    0.375,
+    0.277,
+    0.485
+   ],
+   "per_sample": 0.108,
+   "greedy": 0.1375
+  }
+ },
+ "rise_40_to_640": 0.287,
+ "top_lowerCI": 0.277,
+ "low_upperCI": 0.17,
+ "deployable_nothink_depth3": {
+  "base_covK": 0.0,
+  "banked640_covK": 0.3375,
+  "banked640_per_sample": 0.12,
+  "banked640_greedy": 0.1,
+  "reaches_deployable": true
+ },
+ "VERDICT": "DATA-LIMITED",
+ "depth2_guardrail": {
+  "base_covK": 0.175,
+  "banked640_covK": 0.5
+ }
+}

@@ -10,6 +10,17 @@
 
 ## Key Result
 
+- [qwen35_4b_depth3_dose_response](../../experiments/qwen35_4b_depth3_dose_response/reports/report.md)
+  (claim C23): **the depth-3 install is DATA-LIMITED, not a representational cap — and it scales into
+  deployable single-shot.** C22 left open whether its weak depth-3 install was data-limited or capped. Bank N
+  tool-found depth-3 pairs (N ∈ {40,160,640} nested, interpreter search over the 16-op DSL); eval on a frozen
+  paired held-out set with **0 leakage** (function-sig AND op-composition dedup → novel rules only). Depth-3
+  think coverage@16 rises MONOTONICALLY **0.00 → 0.087 → 0.212 → 0.375**, no plateau; top-dose Wilson lower CI
+  (0.28) > low-dose upper CI (0.17). The DEPLOYABLE install scales too: no-think coverage 0.00→0.338, no-think
+  single-shot greedy@1 0.00→**0.10** at N=640 (≈0 at C22's N=130). Depth-2 guardrail rose (scaffold intact). So
+  the deep wall is a DATA bottleneck, not a hard cap: the thin depth-3 thread (C19) thickens with more
+  explorer-found data and converts to deployable single-shot. Design hardened by an adversarial workflow
+  review. Limits: single seed, fixed epochs (data~gradient confound), search-easy bias (untested past 640).
 - [qwen35_4b_tool_seeded_banking](../../experiments/qwen35_4b_tool_seeded_banking/reports/report.md)
   (claim C22): **the C21 positive control — tool-seeded banking crosses the depth-3 wall self-banking couldn't,
   but weakly.** Harvest depth-3 via an interpreter-backed explorer (CPU brute-search over the substrate's own

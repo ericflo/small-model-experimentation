@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 146
-- Manifest files: 442
+- Experiments with manifests: 147
+- Manifest files: 443
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 19 |
+| `standard-artifact` | 20 |
 
 ## Manifests
 
@@ -73,6 +73,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_crossfamily_laws` | `standard-artifact` | [manifest](../experiments/qwen35_4b_crossfamily_laws/reports/artifact_manifest.yaml) |
 | `qwen35_4b_decompose_compose_frontier` | `standard-artifact` | [manifest](../experiments/qwen35_4b_decompose_compose_frontier/reports/artifact_manifest.yaml) |
 | `qwen35_4b_deployable_information_ceiling_sweep` | `large-artifact` | [manifest](../experiments/qwen35_4b_deployable_information_ceiling_sweep/large_artifacts_manifest.md) |
+| `qwen35_4b_depth3_dose_response` | `standard-artifact` | [manifest](../experiments/qwen35_4b_depth3_dose_response/reports/artifact_manifest.yaml) |
 | `qwen35_4b_depth_wall_anatomy` | `standard-artifact` | [manifest](../experiments/qwen35_4b_depth_wall_anatomy/reports/artifact_manifest.yaml) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | `run-data` | [manifest](../experiments/qwen35_4b_diversity_keyed_coverage_gate/data/main_base_k4_records.manifest.json) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | `run-data` | [manifest](../experiments/qwen35_4b_diversity_keyed_coverage_gate/data/main_default_extra_k32_records.manifest.json) |
