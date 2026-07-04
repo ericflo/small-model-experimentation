@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_tool_seeded_banking"
+external_artifacts:
+  - name: "banked_tool QLoRA adapter (depth-1+2 self + tool-depth-3)"
+    storage: "scratchpad/toolbank_artifacts/banked_tool_adapter (moved out of repo; ~180MB > GitHub limit)"
+    required_for: "re-running banked_tool evaluation without retraining"
+    checksum: ""
+    regenerate: "python scripts/tool_harvest.py --n-depth3 130 && python scripts/train_lora.py --train data/train.jsonl --out runs/banked_tool_adapter"
+omitted_artifacts:
+  - path: "runs/banked_tool_adapter/"
+    reason: "trained QLoRA adapter (~180MB, exceeds GitHub hard limit); regenerate via tool_harvest + train_lora"
+reproducibility:
+  smoke_command: "python scripts/tool_harvest.py --smoke"
+  full_command: "python scripts/tool_harvest.py --n-depth3 130 && bash runs/launch.sh && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "Explorer = CPU interpreter brute-search over families' own 16-op DSL (no external model); harvest ~30s. Train ~10min; 4 paired evals (think+no-think x base+banked) ~3h. Verdict CROSSED-BUT-WEAK (claim C22): depth-3 think coverage 0.00->0.125, deployable ~0. Adapter moved out of repo."

@@ -10,6 +10,16 @@
 
 ## Key Result
 
+- [qwen35_4b_tool_seeded_banking](../../experiments/qwen35_4b_tool_seeded_banking/reports/report.md)
+  (claim C22): **the C21 positive control — tool-seeded banking crosses the depth-3 wall self-banking couldn't,
+  but weakly.** Harvest depth-3 via an interpreter-backed explorer (CPU brute-search over the substrate's own
+  16-op DSL, no external model, 130/130 solved — what sampling gets ≈0 of), add to C21's exact depth-1+2 pairs,
+  bank. On a frozen paired held-out set (behavioral dedup; design hardened by an adversarial multi-agent
+  review): depth-3 think coverage@16 **0.00 (0/40) → 0.125 (5/40 distinct novel tasks)** — a significant unlock
+  vs the hard 0/40 floor where C21 self-banking gave exactly 0. Validates the recipe: **tools explore, banking
+  installs.** But CROSSED-BUT-WEAK — the install is test-time-dominated (no-think depth-3 0.025, greedy@1 0.00)
+  vs depth-2 which installs deployably (greedy@1 0.15). New nuance: **the installer's efficacy decays with
+  depth** (echoes C19). No free next rung (depth-4 stayed 0). Each rung must be seeded by the explorer.
 - [qwen35_4b_wall_climbing](../../experiments/qwen35_4b_wall_climbing/reports/report.md)
   (claim C21): **self-banking is coverage-seed-bounded — it can't climb the wall.** Apex bootstrapping test:
   bank ONLY depth-1+2 self-solutions (130 pairs, 83 at depth 2, no depth-3 examples), does the banked model

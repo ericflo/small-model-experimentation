@@ -41831,6 +41831,267 @@
      "note": "The banked model's depth-2 coverage climbs to 0.36 with more samples, but its depth-3 coverage is flat at 0.00 -- identical to base. Banking a depth-2 skill buys nothing at depth 3."
     }
    ]
+  },
+  "qwen35_4b_tool_seeded_banking": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Tool-seeded banking crosses depth-3 (0->0.125) where self-banking gave 0 -- but weakly",
+     "categories": [
+      "depth 2",
+      "depth 3 (the wall)",
+      "depth 4"
+     ],
+     "series": [
+      {
+       "label": "base think cov@16",
+       "values": [
+        0.225,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "label": "banked_tool think cov@16",
+       "values": [
+        0.425,
+        0.125,
+        0.0
+       ]
+      },
+      {
+       "label": "banked_tool no-think greedy@1 (deployable)",
+       "values": [
+        0.15,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "y_label": "coverage / greedy@1 (held-out)",
+     "y_format": "percent01",
+     "note": "C21: self-banking depth-1+2 gave depth-3 coverage exactly 0.00 (base samples ~0 depth-3 to bank). Here we harvest depth-3 via an interpreter-backed explorer (CPU, no external model, 130/130 solved), add to the SAME depth-1+2 pairs, and bank. Depth-3 think coverage crosses 0.00->0.125 (5/40 distinct novel held-out tasks, significant vs the 0/40 floor) -- validating the recipe: tools explore, banking installs. BUT the install is weak and test-time-dominated: depth-3 no-think greedy@1 stays 0.00, vs depth-2 which installs deployably (greedy@1 0.15). The installer's efficacy decays with depth (echoing C19: depth-3 representation is a thread)."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Depth-3 coverage@k (think): banked_tool lifts off zero; base stays pinned",
+     "series": [
+      {
+       "label": "depth 3 base",
+       "points": [
+        [
+         1,
+         0.0
+        ],
+        [
+         2,
+         0.0
+        ],
+        [
+         3,
+         0.0
+        ],
+        [
+         4,
+         0.0
+        ],
+        [
+         5,
+         0.0
+        ],
+        [
+         6,
+         0.0
+        ],
+        [
+         7,
+         0.0
+        ],
+        [
+         8,
+         0.0
+        ],
+        [
+         9,
+         0.0
+        ],
+        [
+         10,
+         0.0
+        ],
+        [
+         11,
+         0.0
+        ],
+        [
+         12,
+         0.0
+        ],
+        [
+         13,
+         0.0
+        ],
+        [
+         14,
+         0.0
+        ],
+        [
+         15,
+         0.0
+        ],
+        [
+         16,
+         0.0
+        ]
+       ]
+      },
+      {
+       "label": "depth 3 banked_tool",
+       "points": [
+        [
+         1,
+         0.023
+        ],
+        [
+         2,
+         0.043
+        ],
+        [
+         3,
+         0.058
+        ],
+        [
+         4,
+         0.071
+        ],
+        [
+         5,
+         0.082
+        ],
+        [
+         6,
+         0.09
+        ],
+        [
+         7,
+         0.097
+        ],
+        [
+         8,
+         0.103
+        ],
+        [
+         9,
+         0.108
+        ],
+        [
+         10,
+         0.111
+        ],
+        [
+         11,
+         0.115
+        ],
+        [
+         12,
+         0.117
+        ],
+        [
+         13,
+         0.12
+        ],
+        [
+         14,
+         0.122
+        ],
+        [
+         15,
+         0.123
+        ],
+        [
+         16,
+         0.125
+        ]
+       ]
+      },
+      {
+       "label": "depth 2 banked_tool (contrast)",
+       "points": [
+        [
+         1,
+         0.153
+        ],
+        [
+         2,
+         0.219
+        ],
+        [
+         3,
+         0.26
+        ],
+        [
+         4,
+         0.289
+        ],
+        [
+         5,
+         0.31
+        ],
+        [
+         6,
+         0.327
+        ],
+        [
+         7,
+         0.341
+        ],
+        [
+         8,
+         0.353
+        ],
+        [
+         9,
+         0.364
+        ],
+        [
+         10,
+         0.374
+        ],
+        [
+         11,
+         0.383
+        ],
+        [
+         12,
+         0.392
+        ],
+        [
+         13,
+         0.401
+        ],
+        [
+         14,
+         0.409
+        ],
+        [
+         15,
+         0.417
+        ],
+        [
+         16,
+         0.425
+        ]
+       ]
+      }
+     ],
+     "x_label": "k (samples)",
+     "y_label": "coverage@k (think)",
+     "y_format": "percent01",
+     "note": "The banked model's depth-3 think-coverage climbs to 0.125 with more samples while base is flat at 0.00. Depth-2 (contrast) climbs to 0.42. The crossing is real but modest, and it is test-time think-search coverage; deployable no-think single-shot barely moves at depth 3."
+    }
+   ]
   }
  }
 }

@@ -1,0 +1,84 @@
+{
+ "think": {
+  "2": {
+   "base_cov": 0.225,
+   "bank_cov": 0.425,
+   "d_cov": 0.2,
+   "base_greedy": 0.0,
+   "bank_greedy": 0.15,
+   "n_unlocked_bank": 17,
+   "n_base": 40
+  },
+  "3": {
+   "base_cov": 0.0,
+   "bank_cov": 0.125,
+   "d_cov": 0.125,
+   "base_greedy": 0.0,
+   "bank_greedy": 0.0,
+   "n_unlocked_bank": 5,
+   "n_base": 40
+  },
+  "4": {
+   "base_cov": 0.0,
+   "bank_cov": 0.0,
+   "d_cov": 0.0,
+   "base_greedy": 0.0,
+   "bank_greedy": 0.0,
+   "n_unlocked_bank": 0,
+   "n_base": 40
+  }
+ },
+ "nothink": {
+  "2": {
+   "base_cov": 0.025,
+   "bank_cov": 0.175,
+   "d_cov": 0.15,
+   "base_greedy": 0.025,
+   "bank_greedy": 0.075,
+   "n_unlocked_bank": 7,
+   "n_base": 40
+  },
+  "3": {
+   "base_cov": 0.0,
+   "bank_cov": 0.025,
+   "d_cov": 0.025,
+   "base_greedy": 0.0,
+   "bank_greedy": 0.0,
+   "n_unlocked_bank": 1,
+   "n_base": 40
+  },
+  "4": {
+   "base_cov": 0.0,
+   "bank_cov": 0.0,
+   "d_cov": 0.0,
+   "base_greedy": 0.0,
+   "bank_greedy": 0.0,
+   "n_unlocked_bank": 0,
+   "n_base": 40
+  }
+ },
+ "K": 16,
+ "P2_unlock_depth3_think": {
+  "base_cov": 0.0,
+  "banked_cov": 0.125,
+  "delta": 0.125,
+  "n_distinct_unlocked": 5,
+  "n": 40,
+  "base_upper_95ci": 0.075,
+  "significant_unlock": true,
+  "clears_strong_bar_0.15": false
+ },
+ "P4_deployable_depth3_nothink": {
+  "base_greedy": 0.0,
+  "banked_greedy": 0.0,
+  "base_cov": 0.0,
+  "banked_cov": 0.025,
+  "banked_into_weights": false
+ },
+ "P4_next_rung_depth4_think": {
+  "base_cov": 0.0,
+  "banked_cov": 0.0,
+  "delta": 0.0
+ },
+ "VERDICT": "CROSSED-BUT-WEAK (significant depth-3 unlock vs base 0, but modest and test-time-dominated)"
+}

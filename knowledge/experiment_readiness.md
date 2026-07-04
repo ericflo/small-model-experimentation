@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 173
-- Anchor-ready: 158
-- Human-authored READMEs: 160
+- Experiments: 174
+- Anchor-ready: 159
+- Human-authored READMEs: 161
 - Generated README stubs: 13
-- Primary reports: 173
-- Experiment logs: 77
-- Smoke commands: 42
-- Artifact manifests: 145
+- Primary reports: 174
+- Experiment logs: 78
+- Smoke commands: 43
+- Artifact manifests: 146
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 62 |
+| `documented-scripts` | 63 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -117,6 +117,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_thinking_budget_scaling`](../experiments/qwen35_4b_thinking_budget_scaling/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_thinking_budget_scaling/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_thinking_content_vs_compute`](../experiments/qwen35_4b_thinking_content_vs_compute/README.md) | structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_thinking_separability_probe`](../experiments/qwen35_4b_thinking_separability_probe/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_thinking_separability_probe/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_tool_seeded_banking`](../experiments/qwen35_4b_tool_seeded_banking/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_tool_seeded_banking/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_tool_state_policy_lora`](../experiments/qwen35_4b_tool_state_policy_lora/README.md) | posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_tool_state_policy_lora/reports/report.md) | no | `documented-scripts` | no |  | add-experiment-log, add-smoke-command, add-artifact-manifest |
 | no | [`qwen35_4b_trained_vs_frozen_repair_mdp`](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use | `generated-stub` | [report](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/reports/qwen35_4b_trained_vs_frozen_repair_mdp_report.md) | no | `scripts-undocumented` | no | run-data | replace-generated-readme, add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_transform_abi_compiler_pilot`](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transform_abi_compiler_pilot/reports/report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |

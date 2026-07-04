@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 21
+- Claims: 22
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 14 |
+| Promising | 15 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 2 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 11 |
+| `posttraining_and_adaptation` | 12 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 12 |
+| `structured_execution_and_compilers` | 13 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -503,3 +503,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not expect self-banking to climb the depth frontier -- it is coverage-seed-bounded; banking installs only depths already samplable.
 - Do not read the depth-3 zero as a weak install -- the depth-2 install was strong (tripled, held-out); the failure is specifically CROSS-depth generalization.
 - To extend the frontier one depth, you MUST externally generate (tool-search) solutions at that depth to seed banking; plain sampling harvests ~0 there.
+
+## C22: Tool-seeded banking crosses the depth-3 wall self-banking couldn't (validates C21 recipe: tools explore, banking installs) -- but the installer's efficacy DECAYS with depth (crossed-but-weak)
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: The C21 positive control (experiment qwen35_4b_tool_seeded_banking; design hardened by an adversarial multi-agent workflow review). C21 showed self-banking gives ZERO depth-3 coverage (base 0.00->banked 0.00) because the base samples ~0 depth-3 solutions to bank. Fix: seed banking with depth-3 solutions found by an EXPLORER the base lacks. Explorer = interpreter-backed brute search over the substrate's OWN 16-op DSL (families.py, CPU-only, no external model): solved 130/130 depth-3 tasks (mean depth 3.00, sandbox-verified) -- what monolithic sampling gets ~0 of. Rendered to code, ADDED to C21's exact 130 depth-1+2 pairs (only delta vs C21's banked1 = the depth-3 seeds), QLoRA-SFT -> banked_tool. Eval on a FROZEN PAIRED held-out set with behavioral function-signature dedup (n=40/depth), think (primary, matched to C21) + no-think (deployable). RESULT: CROSSED-BUT-WEAK. Depth-3 think coverage@16: base 0.00 (0/40) -> banked_tool 0.125 (5/40 DISTINCT novel held-out tasks) -- a statistically significant unlock vs the hard 0/40 floor (above base's 95% upper CI ~0.075, p<0.01), where C21 self-banking gave EXACTLY 0. So tools explore + banking installs crosses the wall. BUT the install is weak and test-time-dominated: no-think depth-3 only 0.025 (1/40), greedy@1 = 0.00 -- vs depth-2 which installs strongly (think 0.42, no-think 0.17, deployable greedy@1 0.15). Depth-4 stayed 0.00 (no free next rung). Landed at 0.125, just under the pre-registered 0.15 strong bar but clearing the >=5-distinct, >=base+0.10, and >base-CI criteria. P1 (explorer) held strongly; P2 crossed-but-weak; P3 (generalization) held; P4 (deployable) refuted -- depth-3 gain is test-time, not banked into single-shot.
+- Implication: Validates the C21 recipe in direction: the frontier IS extendable by self-training PROVIDED an external search (tool/enumeration) seeds each rung the base cannot reach -- tools are the explorer, banking is the installer, both required. NEW nuance: the installer's efficacy DECAYS with depth -- banking installs depth-2 robustly and deployably (greedy@1 0.15) but depth-3 only weakly and mostly at test-time (greedy@1 0.00), even with perfect training data. Consistent with C19 (depth-3 inverse barely represented) and C20 (not steerable): the deep wall resists INSTALLATION too. Precise full recipe: (1) an explorer the base lacks reaches the next rung; (2) banking installs it but weakly, mostly test-time-accessible not single-shot; (3) each rung must be seeded (no free leap) -- diminishing installation efficiency the deeper you go.
+
+### Evidence
+
+- [`qwen35_4b_tool_seeded_banking`](../../experiments/qwen35_4b_tool_seeded_banking/reports/report.md)
+
+### Next Tests
+
+- Dose-response: vary depth-3 tool-pairs (40/130/400) and epochs -- does depth-3 install strengthen toward deployable greedy@1, or plateau (representational cap, C19)?
+- Iterate the rung: after banking depth-3, does tool-search on the banked model harvest depth-4 more cheaply (does installed depth-3 ease depth-4)?
+
+### Avoid
+
+- Do not claim tool-seeded banking cleanly installs depth-3 -- the crossing is significant but WEAK and mostly test-time (no-think 0.025, greedy 0.00); it landed 0.125, just under the pre-registered strong bar.
+- Do not expect banking one rung to leap two (depth-4 stayed 0.00); each rung must be seeded by the explorer.
+- Do not conflate the explorer with the model -- the depth-3 crack is interpreter+composition-structure (brute~=guided per C12), a tool, not the model's planning; that's the point (tools identify, the model/banking installs).

@@ -3190,6 +3190,47 @@
   },
   {
     "file_counts": {
+      ".json": 5,
+      ".jsonl": 4,
+      ".md": 6,
+      ".png": 1,
+      ".py": 8,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-04",
+    "id": "qwen35_4b_tool_seeded_banking",
+    "path": "experiments/qwen35_4b_tool_seeded_banking",
+    "primary_readme": "experiments/qwen35_4b_tool_seeded_banking/README.md",
+    "primary_report": "experiments/qwen35_4b_tool_seeded_banking/reports/report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "C21: self-banking gives depth-3 coverage 0.00 (base samples ~0 depth-3 to bank). Does harvesting depth-3 via an interpreter-backed explorer, then banking, install depth-3?",
+    "tags": [
+      "coverage",
+      "memory",
+      "small-model",
+      "tools"
+    ],
+    "title": "Qwen3.5-4B Tool-Seeded Banking: does tool-search + banking cross the depth-3 wall?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 27,
+    "total_size_bytes": 977743
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 5,
       ".log": 2,
