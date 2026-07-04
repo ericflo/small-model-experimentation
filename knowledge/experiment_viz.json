@@ -41578,6 +41578,259 @@
      "note": "steer_true sits marginally above steer_random and steer_wrong at low coef (a directional whiff) but the gap is within noise; beyond coef ~12 fluency degrades and all conditions fall. No usable steering effect. Baseline (no steer) = 0.12."
     }
    ]
+  },
+  "qwen35_4b_wall_climbing": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Banking depth-1+2 installs depth-2 (3x) but unlocks ZERO depth-3 coverage",
+     "categories": [
+      "depth 2",
+      "depth 3 (unlock test)",
+      "depth 4"
+     ],
+     "series": [
+      {
+       "label": "base coverage@16",
+       "values": [
+        0.12,
+        0.0,
+        0.04
+       ]
+      },
+      {
+       "label": "banked1 coverage@16 (depth 1+2)",
+       "values": [
+        0.36,
+        0.0,
+        0.04
+       ]
+      }
+     ],
+     "y_label": "coverage@16 (held-out, think)",
+     "y_format": "percent01",
+     "note": "Apex bootstrapping test: bank ONLY depth-1+2 self-solutions (83 depth-2 pairs, no depth-3 examples), does the banked model now sample depth-3? Depth 2 install works and generalizes to held-out tasks (0.12->0.36, tripled). But depth 3 stays at exactly 0.00 -- a strong depth-2 composition skill does NOT length-generalize up. DEPTH-LOCAL: self-banking installs only depths already samplable; it cannot climb the wall. To extend the frontier you must SEED each rung externally with tool-search (C12), then bank."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Depth-3 coverage@k: base and banked1 both pinned to zero (no unlock)",
+     "series": [
+      {
+       "label": "depth 3 base",
+       "points": [
+        [
+         1,
+         0.0
+        ],
+        [
+         2,
+         0.0
+        ],
+        [
+         3,
+         0.0
+        ],
+        [
+         4,
+         0.0
+        ],
+        [
+         5,
+         0.0
+        ],
+        [
+         6,
+         0.0
+        ],
+        [
+         7,
+         0.0
+        ],
+        [
+         8,
+         0.0
+        ],
+        [
+         9,
+         0.0
+        ],
+        [
+         10,
+         0.0
+        ],
+        [
+         11,
+         0.0
+        ],
+        [
+         12,
+         0.0
+        ],
+        [
+         13,
+         0.0
+        ],
+        [
+         14,
+         0.0
+        ],
+        [
+         15,
+         0.0
+        ],
+        [
+         16,
+         0.0
+        ]
+       ]
+      },
+      {
+       "label": "depth 3 banked1",
+       "points": [
+        [
+         1,
+         0.0
+        ],
+        [
+         2,
+         0.0
+        ],
+        [
+         3,
+         0.0
+        ],
+        [
+         4,
+         0.0
+        ],
+        [
+         5,
+         0.0
+        ],
+        [
+         6,
+         0.0
+        ],
+        [
+         7,
+         0.0
+        ],
+        [
+         8,
+         0.0
+        ],
+        [
+         9,
+         0.0
+        ],
+        [
+         10,
+         0.0
+        ],
+        [
+         11,
+         0.0
+        ],
+        [
+         12,
+         0.0
+        ],
+        [
+         13,
+         0.0
+        ],
+        [
+         14,
+         0.0
+        ],
+        [
+         15,
+         0.0
+        ],
+        [
+         16,
+         0.0
+        ]
+       ]
+      },
+      {
+       "label": "depth 2 banked1 (for contrast)",
+       "points": [
+        [
+         1,
+         0.125
+        ],
+        [
+         2,
+         0.171
+        ],
+        [
+         3,
+         0.2
+        ],
+        [
+         4,
+         0.221
+        ],
+        [
+         5,
+         0.238
+        ],
+        [
+         6,
+         0.253
+        ],
+        [
+         7,
+         0.266
+        ],
+        [
+         8,
+         0.278
+        ],
+        [
+         9,
+         0.289
+        ],
+        [
+         10,
+         0.3
+        ],
+        [
+         11,
+         0.31
+        ],
+        [
+         12,
+         0.32
+        ],
+        [
+         13,
+         0.33
+        ],
+        [
+         14,
+         0.34
+        ],
+        [
+         15,
+         0.35
+        ],
+        [
+         16,
+         0.36
+        ]
+       ]
+      }
+     ],
+     "x_label": "k (samples)",
+     "y_label": "coverage@k",
+     "y_format": "percent01",
+     "note": "The banked model's depth-2 coverage climbs to 0.36 with more samples, but its depth-3 coverage is flat at 0.00 -- identical to base. Banking a depth-2 skill buys nothing at depth 3."
+    }
+   ]
   }
  }
 }

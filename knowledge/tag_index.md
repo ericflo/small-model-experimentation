@@ -125,6 +125,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_real_task_abi_coverage_gate` (track-y): [README](../experiments/qwen_real_task_abi_coverage_gate/README.md)
 - `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)
 
@@ -366,6 +367,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_real_task_abi_coverage_gate` (track-y): [README](../experiments/qwen_real_task_abi_coverage_gate/README.md)
 - `qwen_verified_skill_memory_rag` (track-y): [README](../experiments/qwen_verified_skill_memory_rag/README.md)
 - `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)
@@ -513,6 +515,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
+- `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
 - `qwen_active_example_acquisition` (track-y): [README](../experiments/qwen_active_example_acquisition/README.md)

@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 20
+- Claims: 21
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 13 |
+| Promising | 14 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 2 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 10 |
+| `posttraining_and_adaptation` | 11 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 11 |
+| `structured_execution_and_compilers` | 12 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -481,3 +481,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not claim latent capability (C19) is elicitable for free by steering -- standard ActAdd does not move it, even for the near-perfectly-decodable depth-1 direction.
 - Do not over-read the marginal depth-2 whiff as a positive -- it is within noise of the random control and below the pre-registered threshold.
 - Do not generalize the negative to ALL steering -- it is a clean negative for mean-difference/ActAdd at a single layer; patching / optimized vectors are untested.
+
+## C21: Self-banking is coverage-seed-bounded: banking installs & expands WITHIN a depth but does NOT climb ACROSS depths -- the wall is not climbable by pure self-training
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: Apex bootstrapping test of the C13-C20 wall arc (experiment qwen35_4b_wall_climbing). Can banking be iterated to climb the wall? Bank ONLY depth-1+2 verified self-solutions (which the base can harvest), then test whether the banked model now SAMPLES depth-3 compositions the base never could. Harvest depth-1+2 only: 130 verified {prompt,code} pairs {depth-1:47, depth-2:83} (3x C18's depth-2 set, NO depth-3 examples), QLoRA-SFT single-shot -> banked1. Eval coverage@16 (think, held-out) at depths 2/3/4, base vs banked1. RESULT: DEPTH-LOCAL. Depth 2: base cov 0.12 -> banked1 0.36 (+0.24) -- the install WORKED and generalized to held-out depth-2 tasks (tripled, clean replication of C18's within-depth expansion). Depth 3 (unlock test): base 0.00 -> banked1 0.00 (+0.00) -- ZERO unlock. A strong depth-2 composition skill does NOT length-generalize up to make even one depth-3 task samplable. Depth 4 unchanged (0.04). No diversity collapse (uniq d2 11.0->9.2). Pre-registered P1 (install) HELD; P2 (unlock) REFUTED; P3 (no two-rung leap) HELD; P4 (round-2 climb) N/A (nothing to harvest).
+- Implication: Self-banking installs only depths the base can already sample; it cannot bootstrap the frontier upward -- composition skill does not generalize across a depth (36% at depth 2, a cliff to exactly 0% at depth 3). Completes the mechanistic picture of the wall: depth-3 composition is not represented (C19), not steerable (C20), and not reachable by banking-shallow (C21) -- all three self-training/test-time shortcuts fail at the deep wall by the same fact (the composition is not in the model's reach at depth). The ONLY way up is to SEED each rung externally: tool-augmented harvest (C12 decompose-search reaches depth-3 that sampling can't) -> execution-verify -> bank. Recipe: tools reach the next rung, banking installs it, then the base samples it -- repeat. Self-training is the installer, not the explorer. Sharpens C11-M4 (coverage-bounded) into a hard cross-depth wall.
+
+### Evidence
+
+- [`qwen35_4b_wall_climbing`](../../experiments/qwen35_4b_wall_climbing/reports/report.md)
+
+### Next Tests
+
+- Tool-seeded banking (the positive control this predicts): harvest depth-3 via C12 decompose-search (not sampling), bank, confirm depth-3 held-out coverage rises -- showing the missing ingredient was the explorer, not the installer.
+- Re-probe (C19) the banked1 model: does banking depth-2 raise the depth-2 first-op probe while leaving depth-3 a thread? Confirms banking installs representation exactly at the trained depth.
+
+### Avoid
+
+- Do not expect self-banking to climb the depth frontier -- it is coverage-seed-bounded; banking installs only depths already samplable.
+- Do not read the depth-3 zero as a weak install -- the depth-2 install was strong (tripled, held-out); the failure is specifically CROSS-depth generalization.
+- To extend the frontier one depth, you MUST externally generate (tool-search) solutions at that depth to seed banking; plain sampling harvests ~0 there.

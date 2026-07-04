@@ -1,0 +1,44 @@
+{
+ "per_depth": {
+  "2": {
+   "base_cov": 0.12,
+   "banked1_cov": 0.36,
+   "d_cov": 0.24,
+   "base_greedy": 0.04,
+   "banked1_greedy": 0.08,
+   "uniq_base": 11.0,
+   "uniq_banked1": 9.2
+  },
+  "3": {
+   "base_cov": 0.0,
+   "banked1_cov": 0.0,
+   "d_cov": 0.0,
+   "base_greedy": 0.0,
+   "banked1_greedy": 0.0,
+   "uniq_base": 12.0,
+   "uniq_banked1": 11.9
+  },
+  "4": {
+   "base_cov": 0.04,
+   "banked1_cov": 0.04,
+   "d_cov": 0.0,
+   "base_greedy": 0.0,
+   "banked1_greedy": 0.0,
+   "uniq_base": 13.3,
+   "uniq_banked1": 12.2
+  }
+ },
+ "P1_install": true,
+ "P2_unlock_depth3": {
+  "base_cov": 0.0,
+  "banked1_cov": 0.0,
+  "delta": 0.0,
+  "unlocked": false,
+  "depth_local": true
+ },
+ "P3_no_two_rung_leap": {
+  "banked1_depth4_cov": 0.04,
+  "stays_near_zero": false
+ },
+ "VERDICT": "DEPTH-LOCAL"
+}

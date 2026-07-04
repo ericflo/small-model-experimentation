@@ -3559,6 +3559,45 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".jsonl": 3,
+      ".md": 5,
+      ".png": 1,
+      ".py": 8,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-04",
+    "id": "qwen35_4b_wall_climbing",
+    "path": "experiments/qwen35_4b_wall_climbing",
+    "primary_readme": "experiments/qwen35_4b_wall_climbing/README.md",
+    "primary_report": "experiments/qwen35_4b_wall_climbing/reports/report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "depth-3 sampling? extends the frontier), C11-M4 (banking is coverage-bounded).",
+    "tags": [
+      "coverage",
+      "memory",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Wall Climbing: does banking shallow composition unlock deeper coverage?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 23,
+    "total_size_bytes": 495137
+  },
+  {
+    "file_counts": {
       ".csv": 44,
       ".html": 1,
       ".json": 10,

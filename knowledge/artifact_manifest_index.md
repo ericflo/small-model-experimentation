@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 144
-- Manifest files: 440
+- Experiments with manifests: 145
+- Manifest files: 441
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 17 |
+| `standard-artifact` | 18 |
 
 ## Manifests
 
@@ -236,6 +236,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/smoke_selftrain_verified_r1_heldout_records.manifest.json) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/smoke_verified_sft_r1.manifest.json) |
 | `qwen35_4b_verifier_selector_showdown` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verifier_selector_showdown/reports/artifact_manifest.yaml) |
+| `qwen35_4b_wall_climbing` | `standard-artifact` | [manifest](../experiments/qwen35_4b_wall_climbing/reports/artifact_manifest.yaml) |
 | `qwen_action_conditioned_vm_echo_policy_iteration` | `checkpoint` | [manifest](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/checkpoint_manifest.csv) |
 | `qwen_action_conditioned_vm_echo_policy_iteration` | `dataset` | [manifest](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/runs/main_action_vm_echo_s192_thr070/dataset_manifest.json) |
 | `qwen_action_conditioned_vm_echo_policy_iteration` | `dataset` | [manifest](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/runs/pilot_action_vm_echo_s96/dataset_manifest.json) |

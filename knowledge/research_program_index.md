@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 172
+- Experiments: 173
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 126
+- Assigned experiments: 127
 
 ### Seed Evidence
 
@@ -81,6 +81,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
 - `qwen_budgeted_action_value_compiler` (track-y): [README](../experiments/qwen_budgeted_action_value_compiler/README.md)
@@ -154,7 +155,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 59
+- Assigned experiments: 60
 
 ### Seed Evidence
 
@@ -202,6 +203,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
+- `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_candidate_conditioned_trace_verifier` (track-y): [README](../experiments/qwen_candidate_conditioned_trace_verifier/README.md)
 - `qwen_candidate_trace_verifier` (track-y): [README](../experiments/qwen_candidate_trace_verifier/README.md)
 - `qwen_complete_program_trace_reranker` (track-y): [README](../experiments/qwen_complete_program_trace_reranker/README.md)
@@ -259,7 +261,7 @@ Choose or synthesize the next visible example, probe, test, or trace that collap
 Use libraries of verified algorithms, examples, traces, skills, or failures as reusable memory.
 
 - Charter: [algorithmic_memory_and_retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md)
-- Assigned experiments: 24
+- Assigned experiments: 25
 
 ### Seed Evidence
 
@@ -290,6 +292,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_real_task_abi_coverage_gate` (track-y): [README](../experiments/qwen_real_task_abi_coverage_gate/README.md)
 - `qwen_verified_skill_memory_rag` (track-y): [README](../experiments/qwen_verified_skill_memory_rag/README.md)
 - `real_transform_abi_gate_with_counterexamples` (track-z): [README](../experiments/real_transform_abi_gate_with_counterexamples/README.md)

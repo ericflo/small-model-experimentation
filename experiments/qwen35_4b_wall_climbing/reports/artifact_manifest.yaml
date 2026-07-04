@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_wall_climbing"
+external_artifacts:
+  - name: "banked1 QLoRA adapter (depth-1+2)"
+    storage: "scratchpad/climbing_artifacts/banked1_adapter (moved out of repo; ~180MB > GitHub limit)"
+    required_for: "re-running banked1 evaluation without retraining"
+    checksum: ""
+    regenerate: "python scripts/harvest.py --depth-tasks 1:20,2:90 --K 40 && python scripts/train_lora.py --train data/train.jsonl --out runs/banked1_adapter"
+omitted_artifacts:
+  - path: "runs/banked1_adapter/"
+    reason: "trained QLoRA adapter (~180MB, exceeds GitHub hard limit); regenerate via harvest + train_lora"
+reproducibility:
+  smoke_command: "python scripts/harvest.py --smoke"
+  full_command: "bash runs/launch_r1.sh && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "Self-training (QLoRA-SFT) on depth-1+2 verified self-solutions, no teacher. Harvest ~2h, train ~6min, 2 think-mode coverage evals ~1.3h. Verdict DEPTH-LOCAL (claim C21): depth-2 install works (0.12->0.36) but depth-3 coverage stays 0.00. Adapter moved out of repo."

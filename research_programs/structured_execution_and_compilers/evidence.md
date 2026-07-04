@@ -10,6 +10,16 @@
 
 ## Key Result
 
+- [qwen35_4b_wall_climbing](../../experiments/qwen35_4b_wall_climbing/reports/report.md)
+  (claim C21): **self-banking is coverage-seed-bounded — it can't climb the wall.** Apex bootstrapping test:
+  bank ONLY depth-1+2 self-solutions (130 pairs, 83 at depth 2, no depth-3 examples), does the banked model
+  now sample depth-3? **DEPTH-LOCAL.** Depth-2 install works and generalizes to held-out tasks (coverage
+  0.12→0.36, tripled — clean C18 replication) but depth-3 coverage stays at exactly **0.00** (base 0.00 too) —
+  a strong depth-2 composition skill does NOT length-generalize up. Banking installs only depths the base can
+  already sample; it cannot bootstrap the frontier. Completes the wall picture: depth-3 is not represented
+  (C19), not steerable (C20), not reachable by banking-shallow (C21). **The only way up is to seed each rung
+  externally** — tool-augmented harvest (C12 decompose-search) → verify → bank. Sharpens C11-M4 into a hard
+  cross-depth wall. Pre-registered P2 (unlock) refuted; P1/P3 held.
 - [qwen35_4b_activation_steering](../../experiments/qwen35_4b_activation_steering/reports/report.md)
   (claim C20): **decodability ≠ steerability.** Causal follow-up to C19: build mean-difference (ActAdd)
   directions for the first op from C19's cached activations and add them back to the residual stream during
