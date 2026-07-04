@@ -1,0 +1,194 @@
+{
+ "per_depth": {
+  "2": {
+   "n": 150,
+   "layer": 22,
+   "resid_norm": 17.0,
+   "baseline": 0.12,
+   "naming": {
+    "baseline@0": {
+     "naming_acc": 0.12,
+     "parse": 1.0
+    },
+    "steer_true@2": {
+     "naming_acc": 0.16,
+     "parse": 1.0
+    },
+    "steer_wrong@2": {
+     "naming_acc": 0.127,
+     "parse": null
+    },
+    "steer_random@2": {
+     "naming_acc": 0.12,
+     "parse": null
+    },
+    "steer_true@4": {
+     "naming_acc": 0.167,
+     "parse": 1.0
+    },
+    "steer_wrong@4": {
+     "naming_acc": 0.113,
+     "parse": null
+    },
+    "steer_random@4": {
+     "naming_acc": 0.133,
+     "parse": null
+    },
+    "steer_true@6": {
+     "naming_acc": 0.167,
+     "parse": 1.0
+    },
+    "steer_wrong@6": {
+     "naming_acc": 0.127,
+     "parse": null
+    },
+    "steer_random@6": {
+     "naming_acc": 0.147,
+     "parse": null
+    },
+    "steer_true@8": {
+     "naming_acc": 0.173,
+     "parse": 0.993
+    },
+    "steer_wrong@8": {
+     "naming_acc": 0.113,
+     "parse": null
+    },
+    "steer_random@8": {
+     "naming_acc": 0.147,
+     "parse": null
+    },
+    "steer_true@12": {
+     "naming_acc": 0.147,
+     "parse": 0.92
+    },
+    "steer_wrong@12": {
+     "naming_acc": 0.073,
+     "parse": null
+    },
+    "steer_random@12": {
+     "naming_acc": 0.127,
+     "parse": null
+    },
+    "steer_true@20": {
+     "naming_acc": 0.133,
+     "parse": 0.573
+    },
+    "steer_wrong@20": {
+     "naming_acc": 0.073,
+     "parse": null
+    },
+    "steer_random@20": {
+     "naming_acc": 0.087,
+     "parse": null
+    }
+   },
+   "ident_coef": 8.0,
+   "ident": {
+    "baseline": 0.027,
+    "steer_true": 0.027
+   }
+  },
+  "1": {
+   "n": 150,
+   "layer": 15,
+   "resid_norm": 6.8,
+   "baseline": 0.327,
+   "naming": {
+    "baseline@0": {
+     "naming_acc": 0.327,
+     "parse": 1.0
+    },
+    "steer_true@2": {
+     "naming_acc": 0.347,
+     "parse": 1.0
+    },
+    "steer_wrong@2": {
+     "naming_acc": 0.38,
+     "parse": null
+    },
+    "steer_random@2": {
+     "naming_acc": 0.347,
+     "parse": null
+    },
+    "steer_true@4": {
+     "naming_acc": 0.36,
+     "parse": 1.0
+    },
+    "steer_wrong@4": {
+     "naming_acc": 0.32,
+     "parse": null
+    },
+    "steer_random@4": {
+     "naming_acc": 0.353,
+     "parse": null
+    },
+    "steer_true@6": {
+     "naming_acc": 0.327,
+     "parse": 1.0
+    },
+    "steer_wrong@6": {
+     "naming_acc": 0.353,
+     "parse": null
+    },
+    "steer_random@6": {
+     "naming_acc": 0.347,
+     "parse": null
+    },
+    "steer_true@8": {
+     "naming_acc": 0.307,
+     "parse": 1.0
+    },
+    "steer_wrong@8": {
+     "naming_acc": 0.233,
+     "parse": null
+    },
+    "steer_random@8": {
+     "naming_acc": 0.287,
+     "parse": null
+    },
+    "steer_true@12": {
+     "naming_acc": 0.28,
+     "parse": 0.92
+    },
+    "steer_wrong@12": {
+     "naming_acc": 0.213,
+     "parse": null
+    },
+    "steer_random@12": {
+     "naming_acc": 0.3,
+     "parse": null
+    },
+    "steer_true@20": {
+     "naming_acc": 0.2,
+     "parse": 0.613
+    },
+    "steer_wrong@20": {
+     "naming_acc": 0.107,
+     "parse": null
+    },
+    "steer_random@20": {
+     "naming_acc": 0.213,
+     "parse": null
+    }
+   }
+  }
+ },
+ "supplementary": {
+  "earlier_layers_depth2_naming_at_coef8": {
+   "layer8": {
+    "baseline": 0.12,
+    "steer_true": 0.15,
+    "steer_wrong": 0.13,
+    "steer_random": 0.13
+   },
+   "layer12": {
+    "baseline": 0.12,
+    "steer_true": 0.15,
+    "steer_wrong": 0.17,
+    "steer_random": 0.13
+   }
+  }
+ },
+ "note": "Main sweep at C19 probe-best layers; earlier-layer (8,12) checks and the no-think identification arm both null."
+}

@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 171
+- Experiments: 172
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 125
+- Assigned experiments: 126
 
 ### Seed Evidence
 
@@ -34,6 +34,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `latent_executor` (track-y): [README](../experiments/latent_executor/README.md)
 - `learned_sparse_slot_executor` (track-y): [README](../experiments/learned_sparse_slot_executor/README.md)
 - `query_filter_executor` (track-y): [README](../experiments/query_filter_executor/README.md)
+- `qwen35_4b_activation_steering` (new): [README](../experiments/qwen35_4b_activation_steering/README.md)
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)

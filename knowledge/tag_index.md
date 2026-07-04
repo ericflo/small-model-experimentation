@@ -285,6 +285,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `latent_executor` (track-y): [README](../experiments/latent_executor/README.md)
 - `learned_sparse_slot_executor` (track-y): [README](../experiments/learned_sparse_slot_executor/README.md)
 - `query_filter_executor` (track-y): [README](../experiments/query_filter_executor/README.md)
+- `qwen35_4b_activation_steering` (new): [README](../experiments/qwen35_4b_activation_steering/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_depth_wall_anatomy` (new): [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
@@ -440,6 +441,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 ## small-model
 
+- `qwen35_4b_activation_steering` (new): [README](../experiments/qwen35_4b_activation_steering/README.md)
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)

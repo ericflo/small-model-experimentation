@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 143
-- Manifest files: 439
+- Experiments with manifests: 144
+- Manifest files: 440
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 16 |
+| `standard-artifact` | 17 |
 
 ## Manifests
 
@@ -44,6 +44,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `latent_executor` | `checkpoint` | [manifest](../experiments/latent_executor/checkpoint_manifest.csv) |
 | `learned_sparse_slot_executor` | `checkpoint` | [manifest](../experiments/learned_sparse_slot_executor/checkpoint_manifest.csv) |
 | `query_filter_executor` | `checkpoint` | [manifest](../experiments/query_filter_executor/checkpoint_manifest.csv) |
+| `qwen35_4b_activation_steering` | `standard-artifact` | [manifest](../experiments/qwen35_4b_activation_steering/reports/artifact_manifest.yaml) |
 | `qwen35_4b_active_counterexample_trace_selection` | `dataset` | [manifest](../experiments/qwen35_4b_active_counterexample_trace_selection/data/dataset_manifest.json) |
 | `qwen35_4b_active_counterexample_trace_selection` | `large-artifact` | [manifest](../experiments/qwen35_4b_active_counterexample_trace_selection/large_artifacts_manifest.md) |
 | `qwen35_4b_adaptive_evidence_budget_policy` | `dataset` | [manifest](../experiments/qwen35_4b_adaptive_evidence_budget_policy/data/dataset_manifest.json) |

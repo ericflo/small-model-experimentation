@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 171
-- Anchor-ready: 156
-- Human-authored READMEs: 158
+- Experiments: 172
+- Anchor-ready: 157
+- Human-authored READMEs: 159
 - Generated README stubs: 13
-- Primary reports: 171
-- Experiment logs: 75
-- Smoke commands: 40
-- Artifact manifests: 143
+- Primary reports: 172
+- Experiment logs: 76
+- Smoke commands: 41
+- Artifact manifests: 144
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 60 |
+| `documented-scripts` | 61 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -54,6 +54,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`latent_executor`](../experiments/latent_executor/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/latent_executor/reports/latent_executor_paper.md) | no | `documented-command` | no | checkpoint | add-experiment-log, add-smoke-command |
 | yes | [`learned_sparse_slot_executor`](../experiments/learned_sparse_slot_executor/README.md) | algorithmic_memory_and_retrieval, structured_execution_and_compilers | `human-authored` | [report](../experiments/learned_sparse_slot_executor/reports/learned_sparse_slot_paper.md) | no | `documented-command` | yes | checkpoint | add-experiment-log |
 | yes | [`query_filter_executor`](../experiments/query_filter_executor/README.md) | active_evidence_acquisition, structured_execution_and_compilers | `human-authored` | [report](../experiments/query_filter_executor/reports/query_filter_executor_paper.md) | no | `documented-command` | no | checkpoint | add-experiment-log, add-smoke-command |
+| yes | [`qwen35_4b_activation_steering`](../experiments/qwen35_4b_activation_steering/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_activation_steering/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_active_counterexample_trace_selection`](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md) | active_evidence_acquisition, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_active_counterexample_trace_selection/reports/qwen35_4b_active_counterexample_trace_selection_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_adaptive_evidence_budget_policy`](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md) | active_evidence_acquisition, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_adaptive_tool_controller`](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | benchmark_generalization, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) | no | `documented-scripts` | no |  | add-experiment-log, add-smoke-command, add-artifact-manifest |

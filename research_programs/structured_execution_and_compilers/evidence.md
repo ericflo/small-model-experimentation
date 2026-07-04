@@ -10,6 +10,16 @@
 
 ## Key Result
 
+- [qwen35_4b_activation_steering](../../experiments/qwen35_4b_activation_steering/reports/report.md)
+  (claim C20): **decodability ≠ steerability.** Causal follow-up to C19: build mean-difference (ActAdd)
+  directions for the first op from C19's cached activations and add them back to the residual stream during
+  generation (forward hook). **INERT** — at depth 1 (cleanest direction, probe 0.99) steering toward the true
+  op never beats baseline and only degrades at high strength; at depth 2 a faint predicted-direction whiff
+  (+0.05, within noise of the random control, below the +0.10 pre-reg bar); null at earlier layers (8, 12) and
+  on identification (0.03→0.03). All pre-registered predictions refuted. The latent signal C19 found is
+  *readable but not writable into behavior*. Strengthens the throughline: test-time interventions (selection
+  C17, steering C20) don't move the wall; only weight edits (banking C18) and tools (C12) do. Honest limit: a
+  clean negative for standard ActAdd — patching / optimized vectors untested.
 - [qwen35_4b_latent_composition_probe](../../experiments/qwen35_4b_latent_composition_probe/reports/report.md)
   (claim C19): **first look INSIDE the wall.** Linear probes on residual-stream activations (last
   identification-prompt token, all 33 layers, 1500 verified tasks) decode the composition's first operation.

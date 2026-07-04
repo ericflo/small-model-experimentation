@@ -1,0 +1,5 @@
+{"note": "robustness checks beyond the main (best-layer) sweep",
+ "earlier_layers_depth2_naming": {
+   "layer8": {"baseline": 0.12, "steer_true@8": 0.15, "steer_wrong@8": 0.13, "steer_random@8": 0.13},
+   "layer12": {"baseline": 0.12, "steer_true@8": 0.15, "steer_wrong@8": 0.17, "steer_random@8": 0.13}},
+ "identification_arm_depth2_layer22_nothink": {"baseline_pass1": 0.027, "steer_true@8_pass1": 0.027}}

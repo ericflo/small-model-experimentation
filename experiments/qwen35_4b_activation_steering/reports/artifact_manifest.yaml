@@ -1,0 +1,16 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_activation_steering"
+external_artifacts:
+  - name: "C19 residual-stream activations (steering directions source)"
+    storage: "scratchpad/probe_artifacts/acts.npy (from qwen35_4b_latent_composition_probe; 241MB, out of repo)"
+    required_for: "rebuilding the mean-difference steering directions"
+    checksum: ""
+    regenerate: "python ../qwen35_4b_latent_composition_probe/scripts/capture.py --n-per-depth 500 --depths 1 2 3"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/steer.py --n 30 --coefs 0 6 12 --depths 1"
+  full_command: "python scripts/steer.py --n 150 --coefs 0 2 4 6 8 12 20 --depths 2 1 && python scripts/analyze.py"
+  required_external_artifacts:
+    - "scratchpad/probe_artifacts/acts.npy"
+notes: "Inference-only + a forward hook (ActAdd). Directions from C19's cached activations. Verdict INERT (claim C20): the decodable first-op direction does not move behavior when added back. runs/steer_results.json is the canonical result."

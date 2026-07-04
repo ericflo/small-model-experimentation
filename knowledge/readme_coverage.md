@@ -39,6 +39,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `latent_executor` | [README](../experiments/latent_executor/README.md) | [report](../experiments/latent_executor/reports/latent_executor_paper.md) |
 | `learned_sparse_slot_executor` | [README](../experiments/learned_sparse_slot_executor/README.md) | [report](../experiments/learned_sparse_slot_executor/reports/learned_sparse_slot_paper.md) |
 | `query_filter_executor` | [README](../experiments/query_filter_executor/README.md) | [report](../experiments/query_filter_executor/reports/query_filter_executor_paper.md) |
+| `qwen35_4b_activation_steering` | [README](../experiments/qwen35_4b_activation_steering/README.md) | [report](../experiments/qwen35_4b_activation_steering/reports/report.md) |
 | `qwen35_4b_active_counterexample_trace_selection` | [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md) | [report](../experiments/qwen35_4b_active_counterexample_trace_selection/reports/qwen35_4b_active_counterexample_trace_selection_report.md) |
 | `qwen35_4b_adaptive_evidence_budget_policy` | [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md) | [report](../experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md) |
 | `qwen35_4b_adaptive_tool_controller` | [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) |

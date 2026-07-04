@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 19
+- Claims: 20
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 12 |
+| Promising | 13 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 2 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 9 |
+| `posttraining_and_adaptation` | 10 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 10 |
+| `structured_execution_and_compilers` | 11 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -459,3 +459,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read 'linearly decodable' as 'usable for generation' -- presence != routing; the steering follow-up is the usability test.
 - Do not use raw presence-probe accuracy (base-rate confounded); first-op multiclass is the confound-robust target.
 - Do not over-read the depth-1 latent gap -- partly a naming-task artifact (the model DOES use the first op to generate at 0.68); the cleanest latent signal is depth 2.
+
+## C20: Decodability != steerability: the latent first-op direction (C19) is readable but adding it back via activation steering does NOT change behavior -- test-time readout cannot elicit the wall's latent capability
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: Causal follow-up to C19 (experiment qwen35_4b_activation_steering). C19 found the composition's first op is linearly DECODABLE from the residual stream far above behavior (depth-1 probe 0.99 vs naming 0.44). This tests whether it is causally USABLE: build mean-difference (ActAdd) directions d_c=mean(acts[first_op==c,L])-mean(acts[all,L]) from C19's cached activations, and add coef*d_c to the residual stream during generation via a forward hook on decoder layer L-1, on fresh held-out tasks; measure first-op naming (forced-answer, clean readout, baseline parse ~1.0). RESULT: INERT. Depth 1 (cleanest direction, probe 0.99): steer_true never exceeds the no-steer baseline (0.33); all conditions decline together as coef grows (fluency degrades) -- max steer_true-baseline +0.03. Depth 2: a faint predicted-direction whiff (steer_true 0.16-0.17 vs baseline 0.12 vs steer_wrong 0.07-0.13) but the gap over the steer_random control is ~0.02-0.03, within noise at n=150, far below the pre-registered +0.10 bar (max +0.05). Robust: null at earlier layers 8 and 12 as well as probe-best 22; identification arm flat (0.027->0.027). All pre-registered predictions (P1 usability, P2 specificity, P3 depth-1 sanity, P4 ident lift) REFUTED. Decodability != steerability: the latent signal is readable but adding it back does not route it into behavior.
+- Implication: The representation-expression gap C19 found is NOT bridged by simple linear intervention -- the 'unexpressed' information is not trivially writable into the output pathway. Strengthens the arc's throughline from a new angle: test-time interventions keep failing to move the wall (sampling+selection is free but adds no coverage, C17; activation steering cannot elicit the latent signal, C20). The only levers that move deployable capability remain weight edits (banking, C18) and externalization (tools, C12) -- installing capability, not reading it out. The mission's 'steer it out for free' hope does not pan out with the standard method.
+
+### Evidence
+
+- [`qwen35_4b_activation_steering`](../../experiments/qwen35_4b_activation_steering/reports/report.md)
+
+### Next Tests
+
+- Activation PATCHING (replace, not add, the class-c subspace) or gradient-optimized steering vectors tuned to change the OUTPUT (not the probe) -- does a stronger intervention move it? One ActAdd negative does not fully close the door.
+- Probe the C18 banked model: does banking RAISE the first-op probe (install the representation)? The complementary test -- banking works by adding what steering cannot inject.
+
+### Avoid
+
+- Do not claim latent capability (C19) is elicitable for free by steering -- standard ActAdd does not move it, even for the near-perfectly-decodable depth-1 direction.
+- Do not over-read the marginal depth-2 whiff as a positive -- it is within noise of the random control and below the pre-registered threshold.
+- Do not generalize the negative to ALL steering -- it is a clean negative for mean-difference/ActAdd at a single layer; patching / optimized vectors are untested.

@@ -1,8 +1,8 @@
 # Experiment Catalog
 
-Generated from `experiments/` on 2026-07-03.
+Generated from `experiments/` on 2026-07-04.
 
-- Experiments: 171
+- Experiments: 172
 - Source track Y provenance: 91
 - Source track Z provenance: 64
 
@@ -25,6 +25,7 @@ Generated from `experiments/` on 2026-07-03.
 | structured_execution_and_compilers | track-y | `latent_executor` | execution, latent-state | This controlled experiment tests whether a neural runtime can execute two-register modular programs one hidden recurrent step at a time. | [README](../experiments/latent_executor/README.md) | [report](../experiments/latent_executor/reports/latent_executor_paper.md) |
 | algorithmic_memory_and_retrieval, structured_execution_and_compilers | track-y | `learned_sparse_slot_executor` | execution, latent-state, memory | This experiment tests whether a neural recurrent runtime can learn to use an explicit slot memory for modular belief-state execution. | [README](../experiments/learned_sparse_slot_executor/README.md) | [report](../experiments/learned_sparse_slot_executor/reports/learned_sparse_slot_paper.md) |
 | active_evidence_acquisition, structured_execution_and_compilers | track-y | `query_filter_executor` | active-learning, execution, latent-state | This experiment tests latent recurrent execution over correlated belief states when training supervision is limited to final query answers. | [README](../experiments/query_filter_executor/README.md) | [report](../experiments/query_filter_executor/reports/query_filter_executor_paper.md) |
+| structured_execution_and_compilers | new | `qwen35_4b_activation_steering` | latent-state, small-model | out of the residual stream (training-free) and make the model use it? | [README](../experiments/qwen35_4b_activation_steering/README.md) | [report](../experiments/qwen35_4b_activation_steering/reports/report.md) |
 | active_evidence_acquisition, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | track-z | `qwen35_4b_active_counterexample_trace_selection` | active-learning, counterexamples, execution, small-model | Standalone experiment package for testing active execution-case acquisition after typed sketch synthesis. | [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md) | [report](../experiments/qwen35_4b_active_counterexample_trace_selection/reports/qwen35_4b_active_counterexample_trace_selection_report.md) |
 | active_evidence_acquisition, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | track-z | `qwen35_4b_adaptive_evidence_budget_policy` | execution, policy, small-model, table-transform, verification | This standalone experiment tests whether Qwen3.5-4B can be posttrained as a STOP/MORE controller for an executable verifier. | [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md) | [report](../experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md) |
 | benchmark_generalization, process_control_and_tool_use, structured_execution_and_compilers | track-z | `qwen35_4b_adaptive_tool_controller` | execution, small-model, table-transform, tools | This standalone experiment evaluates a small adaptive controller over a fixed table-transformation candidate pool. Each task has a direct JSON attempt and five executable-program tool attempts. The controller decides... | [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) |

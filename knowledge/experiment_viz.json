@@ -41434,6 +41434,150 @@
      "note": "Depth-1 first-op rises from chance at the embedding to ~0.99 by layer 15 and plateaus (computed in early-mid layers). Deeper compositions are represented progressively less: depth 2 plateaus ~0.4, depth 3 hovers ~0.2 -- above the 0.10 chance line but a thread. The inverse-inference the model needs to propose is computed for shallow structure and largely not computed for deep structure."
     }
    ]
+  },
+  "qwen35_4b_activation_steering": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Steering the decodable first-op direction does NOT move behavior (best coef)",
+     "categories": [
+      "depth 1 (probe 0.99)",
+      "depth 2 (probe 0.42)"
+     ],
+     "series": [
+      {
+       "label": "baseline (no steer)",
+       "values": [
+        0.327,
+        0.12
+       ]
+      },
+      {
+       "label": "steer \u2192 TRUE first-op",
+       "values": [
+        0.36,
+        0.173
+       ]
+      },
+      {
+       "label": "steer \u2192 wrong op",
+       "values": [
+        0.32,
+        0.113
+       ]
+      },
+      {
+       "label": "steer \u2192 random",
+       "values": [
+        0.353,
+        0.147
+       ]
+      }
+     ],
+     "y_label": "first-op naming accuracy",
+     "y_format": "percent01",
+     "note": "C19 showed the first op is linearly DECODABLE (depth-1 probe 0.99). Adding that same mean-difference direction back to the residual stream during generation does NOT make the model use it: at depth 1 steering toward the true op (0.36) is no better than baseline (0.33) or random (0.35); at depth 2 a faint whiff (0.17 vs 0.12) is within noise of the random control and below the pre-registered +0.10 bar. Decodability != steerability -- the latent signal is readable but not writable into behavior. Only weight edits (banking C18) and tools (C12) move the wall."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Depth-2 naming vs steering coefficient (all conditions flat/overlapping)",
+     "series": [
+      {
+       "label": "steer \u2192 TRUE",
+       "points": [
+        [
+         2.0,
+         0.16
+        ],
+        [
+         4.0,
+         0.167
+        ],
+        [
+         6.0,
+         0.167
+        ],
+        [
+         8.0,
+         0.173
+        ],
+        [
+         12.0,
+         0.147
+        ],
+        [
+         20.0,
+         0.133
+        ]
+       ]
+      },
+      {
+       "label": "steer \u2192 wrong",
+       "points": [
+        [
+         2.0,
+         0.127
+        ],
+        [
+         4.0,
+         0.113
+        ],
+        [
+         6.0,
+         0.127
+        ],
+        [
+         8.0,
+         0.113
+        ],
+        [
+         12.0,
+         0.073
+        ],
+        [
+         20.0,
+         0.073
+        ]
+       ]
+      },
+      {
+       "label": "steer \u2192 random",
+       "points": [
+        [
+         2.0,
+         0.12
+        ],
+        [
+         4.0,
+         0.133
+        ],
+        [
+         6.0,
+         0.147
+        ],
+        [
+         8.0,
+         0.147
+        ],
+        [
+         12.0,
+         0.127
+        ],
+        [
+         20.0,
+         0.087
+        ]
+       ]
+      }
+     ],
+     "x_label": "steering coefficient",
+     "y_label": "first-op naming accuracy",
+     "y_format": "percent01",
+     "note": "steer_true sits marginally above steer_random and steer_wrong at low coef (a directional whiff) but the gap is within noise; beyond coef ~12 fluency degrades and all conditions fall. No usable steering effect. Baseline (no steer) = 0.12."
+    }
+   ]
   }
  }
 }
