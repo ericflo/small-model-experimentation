@@ -95,4 +95,4 @@ This corpus was produced through an intensive, largely autonomous experimentatio
 
 ## License
 
-No license is currently declared, so default copyright applies (all rights reserved). If you'd like others to reuse this work, add a `LICENSE` file.
+Licensed under the [Apache License 2.0](LICENSE). You're free to use, modify, and build on this work, including commercially, provided you retain the license and attribution.
