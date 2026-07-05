@@ -42760,6 +42760,44 @@
      "note": "The clean lookahead test (step 1: current==input, goal 3 ops away, NO intermediate state materialized). Across 0/1024/2048 thinking tokens, step-1 next-op ranking accuracy hovers at chance (0.031) with a whisper of upward creep (0.025->0.075) that is not significant (Wilson CIs all overlap). Contrast with C25, where BANKING lifted this same step-1 metric 0.013->0.138 dose-dependently. So for the multi-step PLANNING/lookahead gap, training (banking) is the lever; test-time serial compute (thinking) is not."
     }
    ]
+  },
+  "qwen35_4b_banking_thinking_stack": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Banking + thinking stack ADDITIVELY on recognition, not at all on planning",
+     "categories": [
+      "base + no-think",
+      "base + think",
+      "banked + no-think",
+      "banked + think"
+     ],
+     "series": [
+      {
+       "label": "step-1 next-op top-1 (PLANNING, goal 3 ops away)",
+       "values": [
+        0.025,
+        0.075,
+        0.175,
+        0.15
+       ]
+      },
+      {
+       "label": "step-3 next-op top-1 (RECOGNITION, goal 1 op away)",
+       "values": [
+        0.275,
+        0.6,
+        0.525,
+        0.85
+       ]
+      }
+     ],
+     "y_label": "next-op top-1 ranking accuracy (chance 0.031)",
+     "y_format": "percent01",
+     "note": "2x2 {base,banked_1280} x {no-think,think} on per-step next-op ranking (channel-matched think->RANK), n=40 true-depth-3 held-out. RECOGNITION (step-3, goal 1 op away): the two levers STACK almost EXACTLY additively -- 0.275 -> +banking 0.525 -> +thinking 0.850 = additive prediction, interaction ~0.00. PLANNING (step-1, goal 3 ops away, the clean test): banking lifts (0.025->0.175) but test-time thinking adds ~0 to base OR banked -- NO stacking (banking owns the planning axis). CRITICAL SCOPE: the banked model was trained NO-THINK, so 'test-time thinking adds no planning' is about test-time thinking on a model never trained to reason about this task -- NOT that thinking is useless for planning. This is a BASELINE motivating the bank-the-thoughts experiment (SFT on prompt->reasoning-trace->code)."
+    }
+   ]
   }
  }
 }

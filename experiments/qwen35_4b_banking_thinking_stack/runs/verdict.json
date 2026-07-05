@@ -1,0 +1,23 @@
+{
+ "step1_planning": {
+  "bank_effect": 0.15,
+  "think_effect_on_base": 0.05,
+  "additive_prediction": 0.225,
+  "observed_banked_think": 0.15,
+  "interaction(obs-pred)": -0.075
+ },
+ "step3_recognition": {
+  "bank_effect": 0.25,
+  "think_effect_on_base": 0.325,
+  "additive_prediction": 0.85,
+  "observed_banked_think": 0.85,
+  "interaction(obs-pred)": 0.0
+ },
+ "banked_think_step1_vs_banked_nothink": {
+  "nothink": 0.175,
+  "think2048": 0.15,
+  "think_adds_planning": false
+ },
+ "verdict": "Levers STACK additively on RECOGNITION (step-3) but NOT on PLANNING (step-1): banking owns the planning lift, test-time thinking adds ~0 to planning on base OR banked. SCOPE: banking is no-think SFT -> 'thinking adds no planning' is test-time-only; motivates bank-the-thoughts.",
+ "caveat": "n=40, one seed/budget; base cells inherited from C26 (identical slice/harness). Banked adapter was trained NO-THINK; its thinking channel is intact (traces coherent, median ~2500 chars)."
+}

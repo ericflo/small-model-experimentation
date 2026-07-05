@@ -1,0 +1,14 @@
+schema_version: 1
+experiment_id: "qwen35_4b_banking_thinking_stack"
+external_artifacts:
+  - name: "C24 banked_1280 adapter"
+    storage: "scratchpad/scaling_adapters/banked_1280_adapter (~180MB)"
+    required_for: "reproducing the banked cells"
+    checksum: ""
+    regenerate: "see qwen35_4b_depth_scaling_controls"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/run_thinking.py --tag banked1280 --adapter <banked_1280> --n 8 --budgets 0 1024 --steps 1"
+  full_command: "python scripts/run_thinking.py --tag banked1280 --adapter <banked_1280> --budgets 0 1024 2048 --steps 1 2 3 && python scripts/analyze.py"
+  required_external_artifacts: ["C24 banked_1280 adapter"]
+notes: "No training here (test-time only). base cells inherited from C26 (identical n=40 slice/harness). Verdict (C27, Exploratory): banking+thinking stack additively on recognition, not on planning; scoped baseline motivating bank-the-thoughts. Banked model trained no-think -> the planning null is test-time-only."

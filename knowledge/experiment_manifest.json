@@ -824,6 +824,43 @@
   },
   {
     "file_counts": {
+      ".json": 4,
+      ".jsonl": 1,
+      ".md": 5,
+      ".png": 1,
+      ".py": 9,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-05",
+    "id": "qwen35_4b_banking_thinking_stack",
+    "path": "experiments/qwen35_4b_banking_thinking_stack",
+    "primary_readme": "experiments/qwen35_4b_banking_thinking_stack/README.md",
+    "primary_report": "experiments/qwen35_4b_banking_thinking_stack/reports/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/run_thinking.py --tag banked1280 --adapter <C24 banked_1280> --budgets 0 1024 2048 --steps 1 2 3` then `python scripts/analyze.py`",
+    "tags": [
+      "lora",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Do Banking and Thinking Stack?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 23,
+    "total_size_bytes": 567475
+  },
+  {
+    "file_counts": {
       ".csv": 4,
       ".json": 10,
       ".jsonl": 5,

@@ -11,7 +11,9 @@
 ## Key Result
 
 - [qwen35_4b_thinking_lookahead](../../experiments/qwen35_4b_thinking_lookahead/reports/report.md)
-  (claim C26): **thinking does NOT breach the lookahead wall — it amplifies recognition, not planning.** C25
+  (claim C26): **TEST-TIME thinking (on a model never trained to reason about this task) does NOT breach the
+  lookahead wall — it amplifies recognition, not planning.** *(Scope: leaves open whether banking successful
+  reasoning traces would install planning-via-thinking — the clean untested version.)* C25
   found the fixed 4B can't plan the first of 3 ops in one forward pass. Does *thinking* (serial test-time
   compute, the dormant C9 lever) breach it with no training? Channel-matched test (think→RANK vs no-think→RANK,
   parse-immune), headlined on STEP 1 (the only clean lookahead test). **Step-1 stays at chance across budgets**
@@ -24,7 +26,9 @@
   Design hardened by an adversarial review. Limits: closed-set ranking, n=40, budgets ≤ 2048.
 - [qwen35_4b_latent_decomposition](../../experiments/qwen35_4b_latent_decomposition/reports/report.md)
   (claim C25): **"be your own tool-search" — the fixed model has depth-1 recognition but NO lookahead; banking
-  installs transferable planning.** Can the fixed 4B climb depth by ranking the next DSL op step-by-step? (1)
+  improves next-op ranking at lookahead distance** *(a lift I earlier termed "planning"; the honest measured
+  quantity is improved next-op ranking, a behavioral transfer, not a demonstrated internal search mechanism)*.
+  Can the fixed 4B climb depth by ranking the next DSL op step-by-step? (1)
   **Lookahead wall:** base per-step next-op top-1 = 0.013/0.062/0.237 at step 1/2/3 (goal 3/2/1 ops away; chance
   0.031) — at/below chance for planning the first move. So base as its own search guide is **worse than random**
   (coverage 0.013 vs 0.025 vs brute 0.287 @ matched budget). (2) I predicted banking (C24) would be *monolithic

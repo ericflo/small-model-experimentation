@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 26
+- Claims: 27
 
 ## Status Counts
 
@@ -10,7 +10,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | Confirmed | 5 |
 | Negative | 1 |
-| Open | 1 |
+| Open | 2 |
 | Promising | 19 |
 
 ## Program Counts
@@ -27,8 +27,8 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `posttraining_and_adaptation` | 15 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 17 |
-| `test_time_reasoning_budget` | 3 |
+| `structured_execution_and_compilers` | 18 |
+| `test_time_reasoning_budget` | 4 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -573,11 +573,11 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not use raw base as the depth-4 baseline: the depth-3 scaffold transfers to 0.067 on depth-4, so the install must be measured against the scaffold (banked_640), not base ~0.
 - Do not treat depth-4 as strongly installed: it is test-time-only (greedy flat 0.033) and marginally significant -- the weak stage, expected to strengthen with a depth-4 dose ladder.
 
-## C25: 'Be your own tool-search': the fixed model has depth-1 recognition but NO lookahead; banking installs TRANSFERABLE planning (refuting the monolithic-compilation hypothesis)
+## C25: 'Be your own tool-search': the fixed model has depth-1 recognition but NO lookahead; banking IMPROVES step-wise next-op ranking including at lookahead distance (a lift I termed 'planning')
 
 - Status: `Promising`
 - Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`, `interpretability_and_diagnostics`
-- Summary: Experiment qwen35_4b_latent_decomposition. Can the FIXED 4B climb the depth wall by proposing+verifying one DSL op at a time (it ranks the 32 list-DSL ops given current lists->goal; interpreter applies+verifies; beam search)? Pivoted after an adversarial workflow review (verdict FLAWED) showed the 'is depth-3 latent' framing was unfair and C12 already ran the base version. Adopted all fixes: VISIBLE-only search termination (hidden-graded), brute-force honesty bar, 80 min-depth-VERIFIED true-depth-3 held-out, pruning ablation. (1) LOOKAHEAD WALL: base per-step next-op top-1 ranking (chance 0.031) is 0.013/0.062/0.237 at step 1/2/3 (goal 3/2/1 ops away) -- at/BELOW chance for planning the first move, ~8x chance for a 1-step transform. So base-guided search is WORSE THAN RANDOM: hidden depth-3 coverage at matched ~1088 interp/task = base-guided 0.013 vs random 0.025 vs brute 0.287 (its confident-but-wrong first-op proposals mislead the beam). (2) BANKING INSTALLS TRANSFERABLE LOOKAHEAD (refuting my pre-registered 'monolithic compilation' hypothesis): banked_640/1280 (C24 adapters) rank the next op far better at EVERY step including lookahead, DOSE-DEPENDENTLY -- step1 0.013->0.125->0.138, step2 0.062->0.138->0.250, step3 0.237->0.463->0.550 (base/640/1280). Monolithic prompt->code depth-3 SFT installs a reusable multi-step PLANNING improvement that transfers to the step-wise search-guide role. (3) This upgrades the guide from worse-than-random to COMPETITIVE: banked1280-guided coverage 0.013->0.225 at matched budget (~17x), ~matching brute at low budget (still < brute's high-budget 0.81; one beam tested). (4) Controls: random+distance-pruning reaches only 0.037 (pruning alone doesn't crack depth-3); brute+pruning 0.487 -- the solver is real proposals + pruning, so banking's lift is a genuine model improvement. P1 held; P2 refuted-my-hypothesis (banking = planning not just compilation); P3 base-worse-than-brute, banked-competitive-not-superior; P4 held.
+- Summary: [WORDING, added 2026-07-05] 'Planning' here means banking measurably improves the model's next-op RANKING at lookahead distances (step-1/2), transferring from monolithic prompt->code training to the step-wise ranking channel -- NOT proven to be internal search/planning; the honest measured claim is 'banking improves lookahead-distance next-op prediction'. Experiment qwen35_4b_latent_decomposition. Can the FIXED 4B climb the depth wall by proposing+verifying one DSL op at a time (it ranks the 32 list-DSL ops given current lists->goal; interpreter applies+verifies; beam search)? Pivoted after an adversarial workflow review (verdict FLAWED) showed the 'is depth-3 latent' framing was unfair and C12 already ran the base version. Adopted all fixes: VISIBLE-only search termination (hidden-graded), brute-force honesty bar, 80 min-depth-VERIFIED true-depth-3 held-out, pruning ablation. (1) LOOKAHEAD WALL: base per-step next-op top-1 ranking (chance 0.031) is 0.013/0.062/0.237 at step 1/2/3 (goal 3/2/1 ops away) -- at/BELOW chance for planning the first move, ~8x chance for a 1-step transform. So base-guided search is WORSE THAN RANDOM: hidden depth-3 coverage at matched ~1088 interp/task = base-guided 0.013 vs random 0.025 vs brute 0.287 (its confident-but-wrong first-op proposals mislead the beam). (2) BANKING INSTALLS TRANSFERABLE LOOKAHEAD (refuting my pre-registered 'monolithic compilation' hypothesis): banked_640/1280 (C24 adapters) rank the next op far better at EVERY step including lookahead, DOSE-DEPENDENTLY -- step1 0.013->0.125->0.138, step2 0.062->0.138->0.250, step3 0.237->0.463->0.550 (base/640/1280). Monolithic prompt->code depth-3 SFT installs a reusable multi-step PLANNING improvement that transfers to the step-wise search-guide role. (3) This upgrades the guide from worse-than-random to COMPETITIVE: banked1280-guided coverage 0.013->0.225 at matched budget (~17x), ~matching brute at low budget (still < brute's high-budget 0.81; one beam tested). (4) Controls: random+distance-pruning reaches only 0.037 (pruning alone doesn't crack depth-3); brute+pruning 0.487 -- the solver is real proposals + pruning, so banking's lift is a genuine model improvement. P1 held; P2 refuted-my-hypothesis (banking = planning not just compilation); P3 base-worse-than-brute, banked-competitive-not-superior; P4 held.
 - Implication: Two things. (a) The single-shot depth wall (C19-C24) has a specific mechanism: a LOOKAHEAD/planning gap -- the fixed forward pass can recognize a one-step transform but cannot plan the first of a multi-step composition, so the model cannot serve as its own multi-step search heuristic (it is worse than random). (b) Banking (self-training on execution-verified solutions, C24) is NOT merely monolithic memorization/compilation: it installs TRANSFERABLE compositional PLANNING that improves the model's step-wise lookahead and upgrades its search-guidance, dose-dependently. This elevates the C22-C24 banking story from 'installs the answer' to 'installs reusable planning machinery that transfers across task formats (monolithic training -> step-wise guidance)'. It also reconciles with C12: base decompose-guidance buys efficiency-not-coverage (here, worse-than-random), but BANKED guidance is a real capability lift. For the mission: self-training genuinely improves the model's latent compositional planning, not just its input->output lookup.
 
 ### Evidence
@@ -592,16 +592,17 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 ### Avoid
 
+- Do not over-read 'planning': the evidence is improved next-op RANKING at lookahead distance (a behavioral lift), not a demonstrated internal planning/search mechanism.
 - Do not claim 'depth-3 is latent / the wall is just orchestration': the base model is WORSE THAN RANDOM as its own guide (lookahead wall); training-free search does not elicit it.
 - Do not credit the interpreter's distance-pruning with the solve: random+pruning only reaches 0.037; exhaustive proposals are required.
 - Do not overstate banking: it makes the guide COMPETITIVE with brute at matched budget, not superior (brute still wins at high budget); only one beam width was tested.
 - Do not repeat the 'monolithic compilation' assumption for banking: banking demonstrably transfers to step-wise planning (dose-dependent lookahead lift).
 
-## C26: Thinking does NOT breach the lookahead wall (it amplifies recognition, not planning) -- so for the planning gap, banking/training is required, not test-time compute
+## C26: TEST-TIME thinking (on a model never trained to reason about this task) does NOT breach the lookahead wall; it amplifies recognition, not planning
 
 - Status: `Promising`
 - Programs: `structured_execution_and_compilers`, `test_time_reasoning_budget`, `interpretability_and_diagnostics`
-- Summary: Experiment qwen35_4b_thinking_lookahead. C25 found the fixed 4B has a LOOKAHEAD WALL (single forward pass can't plan the first of 3 ops; step-1 next-op ranking ~chance). Does THINKING (serial test-time compute, the dormant C9 lever) breach it with NO training? Design hardened by an adversarial workflow review (verdict sound_with_fixes): PRIMARY metric = think->RANK vs no-think->RANK (think B tokens, close </think>, then the SAME 32-way likelihood ranking as C25 -- channel-matched, parse-immune); HEADLINE = STEP 1 (goal 3 ops away, no intermediate state materialized -- the only clean lookahead test; steps 2/3 are handed the true intermediate list so a lift there is state-materialization not planning). RESULT (n=40, chance 0.031): step-1 stays at chance across budgets -- 0.025 -> 0.050 -> 0.075 at B=0/1024/2048, Wilson CIs all overlapping. THINKING DOES NOT BREACH THE WALL. But the benefit pattern is diagnostic: thinking's lift scales INVERSELY with lookahead distance -- step-3 (1 away, recognition) 0.275 -> 0.600, step-2 (2 away) 0.000 -> 0.325, step-1 (3 away, real planning) ~flat. So thinking AMPLIFIES RECOGNITION, not PLANNING, and only where the interpreter materializes the true intermediate state. Internal-brute-force REFUTED: if the model could simulate the depth-3 path in its scratchpad, step-1 would rise -- it doesn't (traces show confused meta-reasoning, not enumerate-and-test). P1 NO (wall survives thinking); P2 held (contamination); P3 internal-simulation refuted.
+- Summary: [SCOPE, added 2026-07-05] This tests TEST-TIME thinking on a model NOT trained to reason about this substrate -- it does NOT show thinking is fundamentally useless for planning; it leaves open whether BANKING successful reasoning traces (prompt->thinking->code) would install planning-via-thinking (see C28-ish follow-up). Experiment qwen35_4b_thinking_lookahead. C25 found the fixed 4B has a LOOKAHEAD WALL (single forward pass can't plan the first of 3 ops; step-1 next-op ranking ~chance). Does THINKING (serial test-time compute, the dormant C9 lever) breach it with NO training? Design hardened by an adversarial workflow review (verdict sound_with_fixes): PRIMARY metric = think->RANK vs no-think->RANK (think B tokens, close </think>, then the SAME 32-way likelihood ranking as C25 -- channel-matched, parse-immune); HEADLINE = STEP 1 (goal 3 ops away, no intermediate state materialized -- the only clean lookahead test; steps 2/3 are handed the true intermediate list so a lift there is state-materialization not planning). RESULT (n=40, chance 0.031): step-1 stays at chance across budgets -- 0.025 -> 0.050 -> 0.075 at B=0/1024/2048, Wilson CIs all overlapping. THINKING DOES NOT BREACH THE WALL. But the benefit pattern is diagnostic: thinking's lift scales INVERSELY with lookahead distance -- step-3 (1 away, recognition) 0.275 -> 0.600, step-2 (2 away) 0.000 -> 0.325, step-1 (3 away, real planning) ~flat. So thinking AMPLIFIES RECOGNITION, not PLANNING, and only where the interpreter materializes the true intermediate state. Internal-brute-force REFUTED: if the model could simulate the depth-3 path in its scratchpad, step-1 would rise -- it doesn't (traces show confused meta-reasoning, not enumerate-and-test). P1 NO (wall survives thinking); P2 held (contamination); P3 internal-simulation refuted.
 - Implication: The two capability levers are qualitatively DIFFERENT for multi-step composition: C25 showed BANKING lifts step-1 lookahead (0.013->0.138, dose-dependent), while this shows THINKING does not (step-1 flat at chance up to 2048 tokens). So FOR THE PLANNING/LOOKAHEAD GAP, TRAINING (banking on execution-verified solutions) IS REQUIRED; test-time serial compute alone cannot elicit it. For RECOGNITION (which single op maps X->Y, or the remainder given a materialized intermediate state) thinking is a powerful amplifier (step-3 0.275->0.600). This reconciles with C23 (base think single-shot depth-3 coverage = 0: thinking can't do the whole composition because it can't plan the first steps) and sharpens the mission read: 'elicit latent capability without training / beat sample-more' WORKS for recognition (thinking helps) but FAILS for multi-step planning (thinking doesn't; banking is the lever). Practically: spend thinking budget on recognition-heavy subproblems, spend banking on installing the planning/lookahead the forward pass lacks.
 
 ### Evidence
@@ -616,7 +617,30 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 ### Avoid
 
+- Do NOT read this as 'thinking can't help planning even in principle': the model was never trained to reason about this substrate, so this is test-time elicitation WITHOUT training-to-think; banking the thoughts is the untested clean version.
 - Do not claim thinking elicits latent DEPTH/planning: step-1 (the clean lookahead test) stays at chance up to 2048 thinking tokens.
 - Do not read steps 2/3 lifts as lookahead: the harness materializes the true intermediate state, so those measure recognition-given-scaffold, not planning.
 - Do not conflate the two levers: banking (C25) lifts planning; thinking (C26) lifts only recognition -- for multi-step planning, training is required.
 - Do not use raw think-GENERATION vs C25's ranking floor (channel artifact); the parse-immune think->RANK is the valid comparison.
+
+## C27: Banking and TEST-TIME thinking stack additively on RECOGNITION but not on PLANNING (a baseline motivating bank-the-thoughts, NOT a claim that thinking can't help planning)
+
+- Status: `Open`
+- Programs: `structured_execution_and_compilers`, `test_time_reasoning_budget`
+- Summary: Experiment qwen35_4b_banking_thinking_stack. 2x2 {base, banked_1280} x {no-think, think} on per-step next-op ranking (think->RANK, channel-matched to C25/C26), n=40 true-depth-3 held-out. Banked cells measured in-run; base cells inherited from C26 (identical slice/harness). RESULT: on RECOGNITION (step-3, goal 1 op away) the levers STACK almost EXACTLY additively -- base+nothink 0.275 -> +banking 0.525 -> +thinking 0.850 = additive prediction (0.275+0.25+0.325), interaction ~0.00. On PLANNING (step-1, goal 3 ops away, the clean test) there is NO stacking: banking lifts (0.025->0.175) but test-time thinking adds ~0 to base (0.025->0.075) OR banked (0.175->0.150). The banked thinking channel is INTACT (traces coherent, median ~2500 chars). CRITICAL SCOPE (surfaced by user): the banked adapter was trained NO-THINK, so 'test-time thinking adds no planning even to the banked model' is about TEST-TIME thinking on a model never trained to reason about this substrate -- it is NOT evidence that thinking is fundamentally useless for planning. This is a BASELINE, not a conclusion; the clean version is bank-the-thoughts (SFT on prompt->reasoning-trace->code).
+- Implication: Test-time thinking and answer-banking are orthogonal on recognition (additive stacking) and non-interacting on planning (thinking contributes ~0 to planning regardless of banking). This refines C25/C26 but does NOT resolve whether TRAINING the model to reason (banking successful thinking traces) installs planning-via-thinking -- because this model was only ever trained to emit answers. That open question is the motivation for the bank-the-thoughts follow-up. Meta: a 'stack two levers' framing is only clean when the levers are independent AND the model was trained for the mode being tested; here banking (no-think) and test-time thinking act partly on the same axis via different mechanisms, so the honest read is a scoped baseline.
+
+### Evidence
+
+- [`qwen35_4b_banking_thinking_stack`](../../experiments/qwen35_4b_banking_thinking_stack/reports/report.md)
+
+### Next Tests
+
+- BANK-THE-THOUGHTS: rejection-sample verified-correct depth-3 reasoning traces, SFT on prompt->thinking->code, test whether it installs deployable planning that stacks with multi-sampling (coverage@k, greedy@1) vs no-think-banking matched on data.
+- Re-run the 2x2 at n=80 for tighter step-1 CIs if the planning-stacking question needs resolving.
+
+### Avoid
+
+- Do NOT cite this as 'thinking can't help planning even after banking': the banked model was trained NO-THINK; this is test-time thinking on a not-trained-to-reason model. The clean test is bank-the-thoughts.
+- Do not headline this as a positive 'stacking' result: it stacks only on recognition (expected -- both levers help recognition); on planning there is nothing to stack because test-time thinking's planning effect is ~0.
+- Do not treat the step-1 'no stacking' as a tight null: n=40 CIs are wide; it means the thinking-on-planning effect is ~0 and not significant.
