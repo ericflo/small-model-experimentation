@@ -4,7 +4,20 @@
 
 This repository is a research log built around a single question: take *one* fixed [Qwen3.5-4B](https://qwen.ai) — never scaled, never distilled from a larger teacher, never turned into a different model — and find out how much latent capability can be *elicited* from the weights it already has. The bar every method has to beat is the cheapest baseline there is: **just sample more.**
 
-📊 **[Read the findings-first research site →](https://ericflo.github.io/small-model-experimentation/)** — every experiment rendered in full, with native interactive charts, an evidence-linked claim ledger, and the latest results first.
+## 📊 Explore the research site
+
+**→ [ericflo.github.io/small-model-experimentation](https://ericflo.github.io/small-model-experimentation/)**
+
+The site is the best way in. Every experiment is rendered in full with native interactive charts, the latest findings first, and each claim linked to its evidence. Start anywhere:
+
+| | |
+|---|---|
+| **[Latest findings](https://ericflo.github.io/small-model-experimentation/)** | what the corpus discovered most recently |
+| **[All 179 experiments](https://ericflo.github.io/small-model-experimentation/experiments/)** | searchable, filterable, charted |
+| **[Claim ledger](https://ericflo.github.io/small-model-experimentation/claims/)** | 27 evidence-linked claims, each pointing at its experiments |
+| **[Research programs](https://ericflo.github.io/small-model-experimentation/programs/)** | the 12 durable lines of inquiry |
+| **[Synthesis](https://ericflo.github.io/small-model-experimentation/notebook/synthesis/)** | the living cross-program read |
+| **[What's next](https://ericflo.github.io/small-model-experimentation/queue/)** | scored, protocol-ready future experiments |
 
 ---
 
@@ -24,19 +37,19 @@ The result is **179 experiments across 12 research programs**, distilled into a 
 
 The corpus tells a connected story. A curated path through it:
 
-- **Structured intermediates are a real lever, but selection is often the wall.** Executable or structured intermediate representations reliably improve small-model reliability (**C1**). But candidate *generation* is usually easier than deployable *selection* — a model's sample pool often contains a correct answer it can't reliably pick out (**C2**).
+- **Structured intermediates are a real lever, but selection is often the wall.** Executable or structured intermediate representations reliably improve small-model reliability (**[C1](https://ericflo.github.io/small-model-experimentation/claims/#c1)**). But candidate *generation* is usually easier than deployable *selection* — a model's sample pool often contains a correct answer it can't reliably pick out (**[C2](https://ericflo.github.io/small-model-experimentation/claims/#c2)**).
 
-- **That selection wall is plumbing, not a capability limit.** A frozen 4B's own zero-training thinking-verifier selects best-of-8 well enough to close **~75%** of the pass@1→oracle gap — and when a cheap visible test exists, a free no-think verifier captures **83%** of it. The bottleneck was tooling, not intelligence (**C10**).
+- **That selection wall is plumbing, not a capability limit.** A frozen 4B's own zero-training thinking-verifier selects best-of-8 well enough to close **~75%** of the pass@1→oracle gap — and when a cheap visible test exists, a free no-think verifier captures **83%** of it. The bottleneck was tooling, not intelligence (**[C10](https://ericflo.github.io/small-model-experimentation/claims/#c10)**).
 
-- **Native "thinking" is an unused deployable lever.** Turning on the model's reasoning channel is worth **+15pp** on MBPP greedy decoding — and controls prove it's *coherent reasoning content*, not just extra compute: irrelevant thinking collapses accuracy, contentless filler ≈ no-think, and coherent content is the entire gain (**C9**).
+- **Native "thinking" is an unused deployable lever.** Turning on the model's reasoning channel is worth **+15pp** on MBPP greedy decoding — and controls prove it's *coherent reasoning content*, not just extra compute: irrelevant thinking collapses accuracy, contentless filler ≈ no-think, and coherent content is the entire gain (**[C9](https://ericflo.github.io/small-model-experimentation/claims/#c9)**).
 
-- **A small model can teach itself — no teacher required.** On a fresh, contamination-free program-synthesis substrate, test-time execution feedback does *not* beat sampling — but QLoRA-SFT on the model's **own** verified solutions banks capability into single-shot deployment (+42% held-out greedy@1), and iterating it compounds into a flywheel (**C11**). Tool-augmented search then extends the frontier *past* the sampling ceiling and banks that too (**C12**).
+- **A small model can teach itself — no teacher required.** On a fresh, contamination-free program-synthesis substrate, test-time execution feedback does *not* beat sampling — but QLoRA-SFT on the model's **own** verified solutions banks capability into single-shot deployment (+42% held-out greedy@1), and iterating it compounds into a flywheel (**[C11](https://ericflo.github.io/small-model-experimentation/claims/#c11)**). Tool-augmented search then extends the frontier *past* the sampling ceiling and banks that too (**[C12](https://ericflo.github.io/small-model-experimentation/claims/#c12)**).
 
-- **The compositional "wall" has a precise mechanism.** Where the fixed model fails at multi-step composition, the failure is **broken multi-step mental simulation / hypothesis identification** — *not* execution. Given the plan, the model executes at 0.90–1.00 through depth 4; left to identify the plan itself, it runs barely above chance. It stays a reliable compiler starved of search (**C13**). Capability turns out to be organized by input→output *format* rather than shared internal primitives (**C14**), and deployable capability factors as **module × interface × procedure** (**C15**).
+- **The compositional "wall" has a precise mechanism.** Where the fixed model fails at multi-step composition, the failure is **broken multi-step mental simulation / hypothesis identification** — *not* execution. Given the plan, the model executes at 0.90–1.00 through depth 4; left to identify the plan itself, it runs barely above chance. It stays a reliable compiler starved of search (**[C13](https://ericflo.github.io/small-model-experimentation/claims/#c13)**). Capability turns out to be organized by input→output *format* rather than shared internal primitives (**[C14](https://ericflo.github.io/small-model-experimentation/claims/#c14)**), and deployable capability factors as **module × interface × procedure** (**[C15](https://ericflo.github.io/small-model-experimentation/claims/#c15)**).
 
 The recipe that emerges from all of it: **tools generate, context orchestrates, the model simulates and transcribes.**
 
-> The full arc runs to **C27** and is still growing. The [live claim ledger](https://ericflo.github.io/small-model-experimentation/claims/) and [cross-program synthesis](https://ericflo.github.io/small-model-experimentation/notebook/synthesis/) carry every claim with its evidence.
+> The full arc runs to **[C27](https://ericflo.github.io/small-model-experimentation/claims/#c27)** and is still growing. The [live claim ledger](https://ericflo.github.io/small-model-experimentation/claims/) and [cross-program synthesis](https://ericflo.github.io/small-model-experimentation/notebook/synthesis/) carry every claim with its evidence.
 
 ## What's in here
 
