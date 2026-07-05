@@ -1,0 +1,30 @@
+{
+ "step1_by_budget": {
+  "0": 0.025,
+  "1024": 0.05,
+  "2048": 0.075
+ },
+ "step1_wilson": {
+  "0": [
+   0.004,
+   0.129
+  ],
+  "1024": [
+   0.014,
+   0.165
+  ],
+  "2048": [
+   0.026,
+   0.199
+  ]
+ },
+ "no_think_step1": 0.025,
+ "best_budget": 2048,
+ "step1_lift": 0.05,
+ "breaches_wall(step1 >=0.10 & CI above no-think)": false,
+ "contamination_step1_lift_vs_step3_lift": {
+  "step1": 0.049999999999999996,
+  "step3": 0.32499999999999996
+ },
+ "verdict": "thinking does NOT breach the wall (step-1 stays ~chance)"
+}

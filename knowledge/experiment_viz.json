@@ -42672,6 +42672,94 @@
      "note": "End-to-end decomposition-search coverage on 80 true-depth-3 held-out tasks (terminates on VISIBLE only, graded on HIDDEN). At matched budget (~1088 interp/task) the BASE-guided search (0.013) is WORSE than random (0.025) and far below brute-force (0.287) -- the base model's confident-but-wrong first-op proposals mislead the beam. Banking upgrades it ~17x to 0.225, roughly matching brute at low budget (still below brute's 0.81 at high budget). Control: random+distance-pruning reaches only 0.037, so the interpreter's pruning alone does NOT crack depth-3 -- exhaustive/real proposals are required, and banking's lift is a genuine model improvement."
     }
    ]
+  },
+  "qwen35_4b_thinking_lookahead": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Thinking amplifies RECOGNITION, not PLANNING: next-op accuracy by step, across thinking budgets",
+     "categories": [
+      "step 1 (goal 3 ops away = lookahead)",
+      "step 2 (2 away, state given)",
+      "step 3 (1 away = recognition)"
+     ],
+     "series": [
+      {
+       "label": "no-think (B=0)",
+       "values": [
+        0.025,
+        0.0,
+        0.275
+       ]
+      },
+      {
+       "label": "think B=1024",
+       "values": [
+        0.05,
+        0.125,
+        0.6
+       ]
+      },
+      {
+       "label": "think B=2048",
+       "values": [
+        0.075,
+        0.325,
+        0.6
+       ]
+      }
+     ],
+     "y_label": "next-op top-1 ranking accuracy (chance 0.031)",
+     "y_format": "percent01",
+     "note": "Can THINKING breach the lookahead wall (C25)? Channel-matched test: think B tokens, close </think>, then the SAME 32-way likelihood ranking C25 used (parse-immune). STEP 1 is the only clean lookahead test (goal 3 ops away, no intermediate state) -- and it STAYS AT CHANCE across budgets (0.025->0.050->0.075, CIs overlap). THINKING DOES NOT BREACH THE WALL. The benefit scales INVERSELY with lookahead distance: huge for step-3 recognition (goal 1 op away, 0.275->0.600), moderate at step-2 (0->0.325), ~zero at step-1 (real planning). So thinking amplifies RECOGNITION, not PLANNING -- and only where the interpreter materializes the true intermediate state (steps 2/3). Internal-brute-force refuted: if the model could simulate the depth-3 path in its scratchpad, step-1 would rise; it doesn't."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Step-1 lookahead stays at chance no matter the thinking budget",
+     "series": [
+      {
+       "label": "step-1 next-op top-1 (think->rank)",
+       "points": [
+        [
+         0,
+         0.025
+        ],
+        [
+         1024,
+         0.05
+        ],
+        [
+         2048,
+         0.075
+        ]
+       ]
+      },
+      {
+       "label": "chance (1/32)",
+       "points": [
+        [
+         0,
+         0.031
+        ],
+        [
+         1024,
+         0.031
+        ],
+        [
+         2048,
+         0.031
+        ]
+       ]
+      }
+     ],
+     "x_label": "thinking budget (tokens)",
+     "y_label": "STEP-1 next-op top-1",
+     "y_format": "percent01",
+     "note": "The clean lookahead test (step 1: current==input, goal 3 ops away, NO intermediate state materialized). Across 0/1024/2048 thinking tokens, step-1 next-op ranking accuracy hovers at chance (0.031) with a whisper of upward creep (0.025->0.075) that is not significant (Wilson CIs all overlap). Contrast with C25, where BANKING lifted this same step-1 metric 0.013->0.138 dose-dependently. So for the multi-step PLANNING/lookahead gap, training (banking) is the lever; test-time serial compute (thinking) is not."
+    }
+   ]
   }
  }
 }

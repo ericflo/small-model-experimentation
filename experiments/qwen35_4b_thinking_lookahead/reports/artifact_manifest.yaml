@@ -1,0 +1,10 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_thinking_lookahead"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/run_thinking.py --n 8 --budgets 0 1024 --steps 1"
+  full_command: "python scripts/run_thinking.py --n 40 --budgets 0 1024 2048 --steps 1 2 3 && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "No training (test-time only, fixed weights). think->RANK: generate <=B thinking tokens, close </think>, then likelihood-rank the 32 ops (chunked -- a long thinking prefix makes the full-vocab logits tensor huge; batch a few ops per forward). Thinking generation batched across tasks. Verdict (C26): thinking does NOT breach the lookahead wall (step-1 ~chance across budgets); it amplifies recognition (step-3 0.275->0.600) not planning."

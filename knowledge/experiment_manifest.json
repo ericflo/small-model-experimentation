@@ -3260,6 +3260,42 @@
   },
   {
     "file_counts": {
+      ".json": 5,
+      ".jsonl": 1,
+      ".log": 1,
+      ".md": 6,
+      ".png": 1,
+      ".py": 10,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-05",
+    "id": "qwen35_4b_thinking_lookahead",
+    "path": "experiments/qwen35_4b_thinking_lookahead",
+    "primary_readme": "experiments/qwen35_4b_thinking_lookahead/README.md",
+    "primary_report": "experiments/qwen35_4b_thinking_lookahead/reports/report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/run_thinking.py --n 40 --budgets 0 1024 2048 --steps 1 2 3` then `python scripts/analyze.py`",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Thinking vs the Lookahead Wall",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 27,
+    "total_size_bytes": 640732
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 2,
       ".log": 2,

@@ -514,6 +514,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_thinking_content_vs_compute` (new): [README](../experiments/qwen35_4b_thinking_content_vs_compute/README.md)
+- `qwen35_4b_thinking_lookahead` (new): [README](../experiments/qwen35_4b_thinking_lookahead/README.md)
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_tool_seeded_banking` (new): [README](../experiments/qwen35_4b_tool_seeded_banking/README.md)
 - `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)

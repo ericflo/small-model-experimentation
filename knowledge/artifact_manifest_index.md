@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 149
-- Manifest files: 445
+- Experiments with manifests: 150
+- Manifest files: 446
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 22 |
+| `standard-artifact` | 23 |
 
 ## Manifests
 
@@ -191,6 +191,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_thinking_budget_controller` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_budget_controller/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_budget_scaling` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_budget_scaling/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_content_vs_compute` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_content_vs_compute/reports/artifact_manifest.yaml) |
+| `qwen35_4b_thinking_lookahead` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_lookahead/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_separability_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_separability_probe/reports/artifact_manifest.yaml) |
 | `qwen35_4b_tool_seeded_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_tool_seeded_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/base_direct_heldout_records.manifest.json) |

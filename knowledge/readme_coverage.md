@@ -104,6 +104,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_thinking_budget_controller` | [README](../experiments/qwen35_4b_thinking_budget_controller/README.md) | [report](../experiments/qwen35_4b_thinking_budget_controller/reports/report.md) |
 | `qwen35_4b_thinking_budget_scaling` | [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md) | [report](../experiments/qwen35_4b_thinking_budget_scaling/reports/report.md) |
 | `qwen35_4b_thinking_content_vs_compute` | [README](../experiments/qwen35_4b_thinking_content_vs_compute/README.md) | [report](../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md) |
+| `qwen35_4b_thinking_lookahead` | [README](../experiments/qwen35_4b_thinking_lookahead/README.md) | [report](../experiments/qwen35_4b_thinking_lookahead/reports/report.md) |
 | `qwen35_4b_thinking_separability_probe` | [README](../experiments/qwen35_4b_thinking_separability_probe/README.md) | [report](../experiments/qwen35_4b_thinking_separability_probe/reports/report.md) |
 | `qwen35_4b_tool_seeded_banking` | [README](../experiments/qwen35_4b_tool_seeded_banking/README.md) | [report](../experiments/qwen35_4b_tool_seeded_banking/reports/report.md) |
 | `qwen35_4b_tool_state_policy_lora` | [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md) | [report](../experiments/qwen35_4b_tool_state_policy_lora/reports/report.md) |

@@ -10,6 +10,18 @@
 
 ## Key Result
 
+- [qwen35_4b_thinking_lookahead](../../experiments/qwen35_4b_thinking_lookahead/reports/report.md)
+  (claim C26): **thinking does NOT breach the lookahead wall — it amplifies recognition, not planning.** C25
+  found the fixed 4B can't plan the first of 3 ops in one forward pass. Does *thinking* (serial test-time
+  compute, the dormant C9 lever) breach it with no training? Channel-matched test (think→RANK vs no-think→RANK,
+  parse-immune), headlined on STEP 1 (the only clean lookahead test). **Step-1 stays at chance across budgets**
+  (0.025 → 0.050 → 0.075 at B=0/1024/2048; Wilson CIs overlap). But thinking's benefit scales *inversely* with
+  lookahead distance: step-3 recognition (1 op away) 0.275 → **0.600**, step-2 0 → 0.325, step-1 (3 away, real
+  planning) ~flat. So thinking **amplifies recognition, not planning** — and internal-brute-force is refuted
+  (step-1 would rise if the model could simulate the path; it doesn't). **The juxtaposition with C25:** banking
+  lifted step-1 lookahead (0.013 → 0.138) while thinking does not — so *for the planning gap, training is
+  required; test-time compute alone can't elicit it*. Reconciles with C23 (base think single-shot depth-3 = 0).
+  Design hardened by an adversarial review. Limits: closed-set ranking, n=40, budgets ≤ 2048.
 - [qwen35_4b_latent_decomposition](../../experiments/qwen35_4b_latent_decomposition/reports/report.md)
   (claim C25): **"be your own tool-search" — the fixed model has depth-1 recognition but NO lookahead; banking
   installs transferable planning.** Can the fixed 4B climb depth by ranking the next DSL op step-by-step? (1)
