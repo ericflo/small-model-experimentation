@@ -1,0 +1,40 @@
+{
+ "arm1_saturation": {
+  "covK": {
+   "0": 0.0,
+   "40": 0.0875,
+   "160": 0.2125,
+   "640": 0.375,
+   "1280": 0.5375
+  },
+  "distinct": {
+   "0": 0,
+   "40": 39,
+   "160": 153,
+   "640": 555,
+   "1280": 1156
+  },
+  "top_dose": 1280,
+  "rise_640_to_1280": 0.162,
+  "top_two_CIs_overlap(plateau)": true,
+  "still_rising_top_vs_prev": false,
+  "note": "2560 dose dropped (training ~2x slower than estimated); top dose = 1280 (1156 distinct funcs)"
+ },
+ "arm2_data_vs_compute": {
+  "N40_covK": 0.0875,
+  "up40_covK": 0.1625,
+  "train640_covK": 0.375,
+  "diversity_wins_at_fixed_compute": true,
+  "compute_helps_at_fixed_diversity": false,
+  "interpretation": "data-diversity dominates"
+ },
+ "arm3_depth4": {
+  "base_covK": 0.0,
+  "scaffold_covK": 0.06666666666666667,
+  "banked_d4_covK": 0.18333333333333332,
+  "banked_d4_greedy": 0.03333333333333333,
+  "depth3_guardrail": 0.425,
+  "recipe_repeats(installs_vs_scaffold)": false,
+  "delta_vs_scaffold": 0.117
+ }
+}

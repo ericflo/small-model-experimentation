@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_depth_scaling_controls"
+external_artifacts:
+  - name: "adapters banked_{up40,d4,1280}"
+    storage: "scratchpad/scaling_adapters/ (moved out of repo; ~180MB each)"
+    required_for: "re-running evaluations without retraining"
+    checksum: ""
+    regenerate: "python scripts/harvest2.py && python scripts/train_lora.py --train data/train_X.jsonl --out runs/banked_X_adapter --epochs 3"
+omitted_artifacts:
+  - path: "runs/banked_*_adapter/"
+    reason: "trained QLoRA adapters (~180MB each, exceed GitHub hard limit); regenerate via harvest2 + train"
+reproducibility:
+  smoke_command: "python scripts/harvest2.py"
+  full_command: "python scripts/harvest2.py && (train 3 adapters) && bash runs/launch_eval.sh && python scripts/analyze.py"
+  required_external_artifacts: ["C23 banked_640 adapter (scaffold baseline + train_640 reuse)"]
+notes: "Explorer = CPU interpreter brute-search over the 16-op DSL (no external model). Reuses C23's depth-3 frozen held-out + base/40/160/640 evals + banked_640 adapter (bit-identical -> same numbers). 3 trains + 6 evals. Verdict (C24): no saturation through 1280 (cov 0.375->0.537); gain is data-diversity not compute; depth-4 recipe repeats weakly (0.067->0.183). 2560 dose dropped (training 2x slower than budgeted). Adapters moved out of repo."

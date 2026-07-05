@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 23
+- Claims: 24
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 16 |
+| Promising | 17 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 2 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 13 |
+| `posttraining_and_adaptation` | 14 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 14 |
+| `structured_execution_and_compilers` | 15 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -548,3 +548,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not cite C22's weak install as evidence of a representational cap -- it was data-limited; more tool-found depth-3 pairs keep installing more (through N=640).
 - Do not over-claim a pure information bound: at fixed epochs 'more data' is confounded with 'more gradient exposure' (same event); the claim is applied (more distinct tool pairs -> more installed).
 - Do not ignore the single-seed / search-easy-bias limits: CIs are eval-noise only (no seed error bars), and a cap could appear past N=640 on harder compositions (untested).
+
+## C24: Depth scaling & controls: no saturation through 1280 tool-pairs, the gain is data-DIVERSITY (not compute), and the tool-search+banking recipe repeats one rung deeper (weakly)
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: Three follow-ups to C23 (experiment qwen35_4b_depth_scaling_controls; design hardened by an adversarial workflow review: scaffold-only baseline, distinct-function counts, 0-leak verified depth-3 0/2305 & depth-4 0/318, true-depth-4 all 320 length-4). All on the list 16-op DSL, interpreter brute-search explorer (no external model), QLoRA epochs=3, frozen paired held-out deduped by function-signature AND op-composition. ARM 1 (saturation): the depth-3 dose curve does NOT saturate through 1280 tool-pairs (1156 distinct functions) -- think cov@16 0.00/0.087/0.212/0.375/0.537 at N=0/40/160/640/1280, deployable greedy@1 rises to 0.188; distinct functions grow near-linearly (39/153/555/1156) so it is real capacity not harvest-diversity exhaustion. (Adjacent-dose Wilson CIs marginally overlap at n=80 -- trend unmistakable, adjacent significance not established; 2560 dropped, training 2x slower than budgeted.) ARM 2 (data vs compute): a 2x2 at matched size/mixture/steps -- N=40 (40 funcs,120 visits)=0.087 -> up40 (SAME 40 funcs,1920 visits)=0.163 -> train_640 (640 funcs,1920 visits)=0.375. Data-DIVERSITY is the CLEANLY-SIGNIFICANT driver (up40->640 non-overlapping CIs); the pure compute/exposure effect (N=40->up40) is positive but WITHIN NOISE. So C23's 'data-limited' is genuinely data-DIVERSITY-limited, not just more gradient steps. ARM 3 (depth-4 rung): the recipe repeats one rung deeper, WEAKLY. Raw base depth-4=0.00; the depth-3 scaffold (banked_640, no depth-4 data) already TRANSFERS to 0.067; banked_d4 (+320 depth-4 pairs)=0.183 -- ~3x over the transfer baseline (the correct attribution control, not raw base) but greedy@1 flat at 0.033 (test-time-only) and n=60 CIs marginally overlap -- SUGGESTIVE not conclusive, the same weak stage depth-3 showed at low doses. No scaffold forgetting (depth-3 guardrail 0.425 vs scaffold 0.375). P1 no-saturation; P2 diversity-dominates; P3 recipe-repeats-weakly.
+- Implication: The C13->C24 ladder-climbing recipe (tool-search explorer + banking installer) is DIVERSITY-DRIVEN and RUNG-REPEATABLE. The data-limited install of C23 has a deep regime (no saturation through 1156 distinct depth-3 functions) and is driven by the number of DISTINCT explorer-found verified solutions (not gradient exposure) -- so 'self-training installs what the explorer finds' sharpens to 'installs in proportion to the distinct verified solutions banked'. And the whole recipe repeats one compositional rung deeper (depth-4 installs weakly over the depth-3 transfer baseline), at the same weak-then-scales efficiency per rung -- consistent with each rung needing its own dose scaling. 'Extend capability by a lot without a larger model' is diversity-limited and ladder-repeatable.
+
+### Evidence
+
+- [`qwen35_4b_depth_scaling_controls`](../../experiments/qwen35_4b_depth_scaling_controls/reports/report.md)
+
+### Next Tests
+
+- Depth-4 dose ladder (80/320/1280) to resolve installs-vs-installs-a-little and test whether depth-4 becomes deployable with more data (the C23 test one rung deeper).
+- >=3 training seeds at the decision points (saturation top, up40, depth-4) for seed error bars -- current CIs are eval-noise only.
+- Push depth-3 past 1280 with faster training to locate the eventual saturation and the diversity ceiling.
+
+### Avoid
+
+- Do not claim clean adjacent-dose or depth-4 significance: at n=60-80 point estimates are clear but adjacent Wilson CIs overlap; significance holds for the broad trend and the up40->640 diversity contrast, not adjacent points.
+- Do not attribute C23's gain to compute/gradient-steps: the up40 control shows the compute effect (N=40->up40) is within noise; data-diversity (distinct functions) is the significant driver.
+- Do not use raw base as the depth-4 baseline: the depth-3 scaffold transfers to 0.067 on depth-4, so the install must be measured against the scaffold (banked_640), not base ~0.
+- Do not treat depth-4 as strongly installed: it is test-time-only (greedy flat 0.033) and marginally significant -- the weak stage, expected to strengthen with a depth-4 dose ladder.

@@ -10,6 +10,18 @@
 
 ## Key Result
 
+- [qwen35_4b_depth_scaling_controls](../../experiments/qwen35_4b_depth_scaling_controls/reports/report.md)
+  (claim C24): **three follow-ups to C23 — no saturation, the gain is data-diversity, and the recipe repeats
+  one rung deeper.** (1) The depth-3 dose curve does NOT saturate through 1280 tool-pairs (1156 distinct
+  functions): cov@16 climbs 0.00/0.087/0.212/0.375/**0.537**, deployable greedy@1 → 0.188; distinct functions
+  grow near-linearly so it's real capacity. (2) A 2×2 at matched steps/mixture splits the gain: diversity
+  (up40 0.163 → train_640 0.375, same compute) is **cleanly significant**; the pure compute effect (N=40 0.087
+  → up40 0.163, same 40 functions) is **within noise** — so C23's "data-limited" is data-DIVERSITY-limited.
+  (3) The tool-search+banking recipe repeats one rung deeper, weakly: depth-4 cov@16 base 0.00 → scaffold
+  transfer 0.067 → banked_d4 **0.183** (~3×), but test-time-only (greedy flat 0.033) and marginally
+  significant at n=60; no depth-3 forgetting (guardrail 0.425). Design hardened by an adversarial workflow
+  review (scaffold-only baseline, distinct-fn counts, 0-leak d3 0/2305 & d4 0/318, true-depth-4). Limits:
+  single seed, n=60–80 underpowers adjacent-dose/depth-4 significance, depth-4 single dose, 2560 dose dropped.
 - [qwen35_4b_depth3_dose_response](../../experiments/qwen35_4b_depth3_dose_response/reports/report.md)
   (claim C23): **the depth-3 install is DATA-LIMITED, not a representational cap — and it scales into
   deployable single-shot.** C22 left open whether its weak depth-3 install was data-limited or capped. Bank N

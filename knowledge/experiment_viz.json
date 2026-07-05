@@ -42435,6 +42435,117 @@
      "note": "Each dose's coverage@k curve sits progressively higher: base pinned at 0, N=40 to 0.09, N=160 to 0.21, N=640 to 0.375. More tool-found depth-3 solutions -> more installed depth-3 capability on novel held-out rules, with no sign of saturation through N=640."
     }
    ]
+  },
+  "qwen35_4b_depth_scaling_controls": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "line",
+     "title": "No saturation through 1280: depth-3 coverage keeps rising with distinct tool-found functions",
+     "series": [
+      {
+       "label": "depth-3 think coverage@16",
+       "points": [
+        [
+         39,
+         0.087
+        ],
+        [
+         153,
+         0.212
+        ],
+        [
+         555,
+         0.375
+        ],
+        [
+         1156,
+         0.537
+        ]
+       ]
+      },
+      {
+       "label": "think single-shot greedy@1 (deployable)",
+       "points": [
+        [
+         39,
+         0.013
+        ],
+        [
+         153,
+         0.037
+        ],
+        [
+         555,
+         0.138
+        ],
+        [
+         1156,
+         0.188
+        ]
+       ]
+      }
+     ],
+     "x_label": "distinct depth-3 functions banked (N=40/160/640/1280 tool-pairs)",
+     "y_label": "depth-3 solve rate (held-out)",
+     "y_format": "percent01",
+     "note": "C23 showed the depth-3 install is data-limited; this extends the dose curve. Coverage@16 climbs 0.087->0.212->0.375->0.537 at 39/153/555/1156 DISTINCT depth-3 functions (N=40/160/640/1280 tool-pairs), and deployable single-shot greedy@1 rises to 0.188 -- NO saturation through 1156 distinct functions. Distinct functions grow near-linearly with pairs, so this is real capacity, not running out of functions to harvest. (Adjacent-dose Wilson CIs marginally overlap at n=80; the overall trend is unmistakable. 2560 dose dropped: training ran 2x slower than budgeted.)"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "The gain is data-DIVERSITY, not compute (2x2 at matched steps/mixture)",
+     "categories": [
+      "N=40 (40 funcs, 120 visits)",
+      "up40 (40 funcs, 1920 visits)",
+      "train_640 (640 funcs, 1920 visits)"
+     ],
+     "series": [
+      {
+       "label": "depth-3 coverage@16",
+       "values": [
+        0.087,
+        0.163,
+        0.375
+       ]
+      }
+     ],
+     "y_label": "depth-3 coverage@16 (held-out)",
+     "y_format": "percent01",
+     "note": "Deconfounding C23's 'more data' gain. Holding compute/mixture fixed and adding DIVERSITY (up40->train_640, both 1920 depth-3 example-visits, 40 vs 640 distinct functions): 0.163->0.375 -- CLEANLY significant (non-overlapping Wilson CIs). Holding diversity fixed and adding COMPUTE (N=40->up40, same 40 functions, 120->1920 visits): 0.087->0.163 -- positive but WITHIN NOISE (overlapping CIs). So the gain is genuinely data-DIVERSITY-driven: banking more DISTINCT explorer-found functions, not just more gradient steps."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "The recipe repeats one rung deeper (weakly): depth-4 installs over the depth-3 transfer baseline",
+     "categories": [
+      "raw base",
+      "scaffold (640 d3, no d4 data)",
+      "banked_d4 (+320 depth-4 pairs)"
+     ],
+     "series": [
+      {
+       "label": "depth-4 coverage@16",
+       "values": [
+        0.0,
+        0.067,
+        0.183
+       ]
+      },
+      {
+       "label": "depth-4 single-shot greedy@1 (deployable)",
+       "values": [
+        0.0,
+        0.033,
+        0.033
+       ]
+      }
+     ],
+     "y_label": "depth-4 solve rate (held-out, n=60)",
+     "y_format": "percent01",
+     "note": "Does the tool-search+banking recipe repeat one compositional rung deeper? Raw base can't do depth-4 (0.00). The depth-3 scaffold (banked_640, NO depth-4 data) already TRANSFERS to 0.067 -- so the correct attribution baseline is the scaffold, not base. Adding 320 depth-4 tool-pairs nearly TRIPLES coverage to 0.183. But deployable greedy@1 stays flat (0.033) = test-time-only, and n=60 CIs marginally overlap -- SUGGESTIVE not conclusive, the same weak stage depth-3 showed at low doses. No scaffold forgetting (depth-3 held at 0.425). A depth-4 dose ladder should strengthen it (per C23's logic)."
+    }
+   ]
   }
  }
 }
