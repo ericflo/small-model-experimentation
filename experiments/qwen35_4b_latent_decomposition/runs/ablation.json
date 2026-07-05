@@ -1,0 +1,68 @@
+[
+ {
+  "mode": "brute",
+  "beam": 8,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.4875,
+  "coverage_visible": 0.5,
+  "interp_per_task": 4352.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "brute",
+  "beam": 8,
+  "k": 32,
+  "pruned": false,
+  "n": 80,
+  "coverage_hidden": 0.2625,
+  "coverage_visible": 0.2625,
+  "interp_per_task": 41216.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "random",
+  "beam": 8,
+  "k": 8,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.0375,
+  "coverage_visible": 0.0375,
+  "interp_per_task": 1088.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "random",
+  "beam": 8,
+  "k": 8,
+  "pruned": false,
+  "n": 80,
+  "coverage_hidden": 0.0125,
+  "coverage_visible": 0.0125,
+  "interp_per_task": 4672.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "model",
+  "beam": 4,
+  "k": 4,
+  "pruned": true,
+  "n": 40,
+  "coverage_hidden": 0.025,
+  "coverage_visible": 0.025,
+  "interp_per_task": 288.0,
+  "fwd_per_task": 9.0
+ },
+ {
+  "mode": "model",
+  "beam": 4,
+  "k": 4,
+  "pruned": false,
+  "n": 40,
+  "coverage_hidden": 0.05,
+  "coverage_visible": 0.05,
+  "interp_per_task": 672.0,
+  "fwd_per_task": 21.0
+ }
+]

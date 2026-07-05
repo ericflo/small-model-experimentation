@@ -42546,6 +42546,132 @@
      "note": "Does the tool-search+banking recipe repeat one compositional rung deeper? Raw base can't do depth-4 (0.00). The depth-3 scaffold (banked_640, NO depth-4 data) already TRANSFERS to 0.067 -- so the correct attribution baseline is the scaffold, not base. Adding 320 depth-4 tool-pairs nearly TRIPLES coverage to 0.183. But deployable greedy@1 stays flat (0.033) = test-time-only, and n=60 CIs marginally overlap -- SUGGESTIVE not conclusive, the same weak stage depth-3 showed at low doses. No scaffold forgetting (depth-3 held at 0.425). A depth-4 dose ladder should strengthen it (per C23's logic)."
     }
    ]
+  },
+  "qwen35_4b_latent_decomposition": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The lookahead wall & banking's fix: per-step next-op ranking accuracy (base vs banked)",
+     "categories": [
+      "step 1 (goal 3 ops away)",
+      "step 2 (2 away)",
+      "step 3 (1 away)"
+     ],
+     "series": [
+      {
+       "label": "base",
+       "values": [
+        0.013,
+        0.062,
+        0.237
+       ]
+      },
+      {
+       "label": "banked N=640",
+       "values": [
+        0.125,
+        0.138,
+        0.463
+       ]
+      },
+      {
+       "label": "banked N=1280",
+       "values": [
+        0.138,
+        0.25,
+        0.55
+       ]
+      }
+     ],
+     "y_label": "top-1 next-op ranking accuracy (chance 0.031)",
+     "y_format": "percent01",
+     "note": "'Be your own tool-search': the fixed model ranks the 32 DSL ops given current-lists->goal; can it plan a depth-3 composition step by step? BASE has a LOOKAHEAD WALL -- at/below chance (0.031) for planning the first of 3 ops (step1 0.013), but ~8x chance for a 1-step transform (step3 0.237). It has depth-1 recognition, no lookahead, so as its own search guide it is WORSE THAN RANDOM (coverage 0.013 vs random 0.025 vs brute 0.287 at matched budget). I predicted banking (C24) would be monolithic compilation (lift only step-3). REFUTED: banking lifts EVERY step including lookahead, dose-dependently -- banking installs TRANSFERABLE PLANNING that transfers from monolithic prompt->code training to step-wise search-guidance."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Banking upgrades the search-guide from worse-than-random to competitive with brute-force",
+     "series": [
+      {
+       "label": "brute-force (all 32 ops)",
+       "points": [
+        [
+         1280,
+         0.287
+        ],
+        [
+         2304,
+         0.35
+        ],
+        [
+         4352,
+         0.487
+        ],
+        [
+         8448,
+         0.688
+        ],
+        [
+         16640,
+         0.762
+        ],
+        [
+         24832,
+         0.812
+        ]
+       ]
+      },
+      {
+       "label": "random proposals",
+       "points": [
+        [
+         80,
+         0.0
+        ],
+        [
+         288,
+         0.0
+        ],
+        [
+         1088,
+         0.025
+        ],
+        [
+         4224,
+         0.263
+        ],
+        [
+         16640,
+         0.75
+        ]
+       ]
+      },
+      {
+       "label": "base-guided (beam 8)",
+       "points": [
+        [
+         1088,
+         0.013
+        ]
+       ]
+      },
+      {
+       "label": "banked N=1280-guided (beam 8)",
+       "points": [
+        [
+         1088,
+         0.225
+        ]
+       ]
+      }
+     ],
+     "x_label": "interpreter calls per task (budget)",
+     "y_label": "hidden-generalizing depth-3 coverage",
+     "y_format": "percent01",
+     "note": "End-to-end decomposition-search coverage on 80 true-depth-3 held-out tasks (terminates on VISIBLE only, graded on HIDDEN). At matched budget (~1088 interp/task) the BASE-guided search (0.013) is WORSE than random (0.025) and far below brute-force (0.287) -- the base model's confident-but-wrong first-op proposals mislead the beam. Banking upgrades it ~17x to 0.225, roughly matching brute at low budget (still below brute's 0.81 at high budget). Control: random+distance-pruning reaches only 0.037, so the interpreter's pruning alone does NOT crack depth-3 -- exhaustive/real proposals are required, and banking's lift is a genuine model improvement."
+    }
+   ]
   }
  }
 }

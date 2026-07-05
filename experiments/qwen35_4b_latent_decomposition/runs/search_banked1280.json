@@ -1,0 +1,13 @@
+[
+ {
+  "mode": "model",
+  "beam": 8,
+  "k": 8,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.225,
+  "coverage_visible": 0.225,
+  "interp_per_task": 1088.0,
+  "fwd_per_task": 17.0
+ }
+]

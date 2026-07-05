@@ -294,6 +294,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_depth_wall_anatomy` (new): [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_latent_composition_probe` (new): [README](../experiments/qwen35_4b_latent_composition_probe/README.md)
+- `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
 - `qwen35_4b_prefix_value_guided_search` (track-z): [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md)
 - `qwen35_4b_simulation_keystone_repair` (new): [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md)
@@ -486,6 +487,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_inventory_shortlister_training` (track-z): [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
 - `qwen35_4b_joint_shortlister_ladder` (track-z): [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md)
 - `qwen35_4b_latent_composition_probe` (new): [README](../experiments/qwen35_4b_latent_composition_probe/README.md)
+- `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
@@ -671,6 +673,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
 - `qwen35_4b_context_composition` (new): [README](../experiments/qwen35_4b_context_composition/README.md)
+- `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
 - `qwen35_4b_tool_seeded_banking` (new): [README](../experiments/qwen35_4b_tool_seeded_banking/README.md)
 - `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)

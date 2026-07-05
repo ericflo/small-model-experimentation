@@ -1,0 +1,57 @@
+[
+ {
+  "mode": "random",
+  "beam": 2,
+  "k": 2,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.0,
+  "coverage_visible": 0.0,
+  "interp_per_task": 80.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "random",
+  "beam": 4,
+  "k": 4,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.0,
+  "coverage_visible": 0.0,
+  "interp_per_task": 288.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "random",
+  "beam": 8,
+  "k": 8,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.025,
+  "coverage_visible": 0.0375,
+  "interp_per_task": 1088.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "random",
+  "beam": 16,
+  "k": 16,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.2625,
+  "coverage_visible": 0.2625,
+  "interp_per_task": 4224.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "random",
+  "beam": 32,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.75,
+  "coverage_visible": 0.7625,
+  "interp_per_task": 16640.0,
+  "fwd_per_task": 0.0
+ }
+]

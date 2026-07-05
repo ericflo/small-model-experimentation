@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 24
+- Claims: 25
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 1 |
-| Promising | 17 |
+| Promising | 18 |
 
 ## Program Counts
 
@@ -22,12 +22,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 3 |
-| `interpretability_and_diagnostics` | 2 |
+| `interpretability_and_diagnostics` | 3 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 14 |
+| `posttraining_and_adaptation` | 15 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 15 |
+| `structured_execution_and_compilers` | 16 |
 | `test_time_reasoning_budget` | 2 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -572,3 +572,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not attribute C23's gain to compute/gradient-steps: the up40 control shows the compute effect (N=40->up40) is within noise; data-diversity (distinct functions) is the significant driver.
 - Do not use raw base as the depth-4 baseline: the depth-3 scaffold transfers to 0.067 on depth-4, so the install must be measured against the scaffold (banked_640), not base ~0.
 - Do not treat depth-4 as strongly installed: it is test-time-only (greedy flat 0.033) and marginally significant -- the weak stage, expected to strengthen with a depth-4 dose ladder.
+
+## C25: 'Be your own tool-search': the fixed model has depth-1 recognition but NO lookahead; banking installs TRANSFERABLE planning (refuting the monolithic-compilation hypothesis)
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`, `interpretability_and_diagnostics`
+- Summary: Experiment qwen35_4b_latent_decomposition. Can the FIXED 4B climb the depth wall by proposing+verifying one DSL op at a time (it ranks the 32 list-DSL ops given current lists->goal; interpreter applies+verifies; beam search)? Pivoted after an adversarial workflow review (verdict FLAWED) showed the 'is depth-3 latent' framing was unfair and C12 already ran the base version. Adopted all fixes: VISIBLE-only search termination (hidden-graded), brute-force honesty bar, 80 min-depth-VERIFIED true-depth-3 held-out, pruning ablation. (1) LOOKAHEAD WALL: base per-step next-op top-1 ranking (chance 0.031) is 0.013/0.062/0.237 at step 1/2/3 (goal 3/2/1 ops away) -- at/BELOW chance for planning the first move, ~8x chance for a 1-step transform. So base-guided search is WORSE THAN RANDOM: hidden depth-3 coverage at matched ~1088 interp/task = base-guided 0.013 vs random 0.025 vs brute 0.287 (its confident-but-wrong first-op proposals mislead the beam). (2) BANKING INSTALLS TRANSFERABLE LOOKAHEAD (refuting my pre-registered 'monolithic compilation' hypothesis): banked_640/1280 (C24 adapters) rank the next op far better at EVERY step including lookahead, DOSE-DEPENDENTLY -- step1 0.013->0.125->0.138, step2 0.062->0.138->0.250, step3 0.237->0.463->0.550 (base/640/1280). Monolithic prompt->code depth-3 SFT installs a reusable multi-step PLANNING improvement that transfers to the step-wise search-guide role. (3) This upgrades the guide from worse-than-random to COMPETITIVE: banked1280-guided coverage 0.013->0.225 at matched budget (~17x), ~matching brute at low budget (still < brute's high-budget 0.81; one beam tested). (4) Controls: random+distance-pruning reaches only 0.037 (pruning alone doesn't crack depth-3); brute+pruning 0.487 -- the solver is real proposals + pruning, so banking's lift is a genuine model improvement. P1 held; P2 refuted-my-hypothesis (banking = planning not just compilation); P3 base-worse-than-brute, banked-competitive-not-superior; P4 held.
+- Implication: Two things. (a) The single-shot depth wall (C19-C24) has a specific mechanism: a LOOKAHEAD/planning gap -- the fixed forward pass can recognize a one-step transform but cannot plan the first of a multi-step composition, so the model cannot serve as its own multi-step search heuristic (it is worse than random). (b) Banking (self-training on execution-verified solutions, C24) is NOT merely monolithic memorization/compilation: it installs TRANSFERABLE compositional PLANNING that improves the model's step-wise lookahead and upgrades its search-guidance, dose-dependently. This elevates the C22-C24 banking story from 'installs the answer' to 'installs reusable planning machinery that transfers across task formats (monolithic training -> step-wise guidance)'. It also reconciles with C12: base decompose-guidance buys efficiency-not-coverage (here, worse-than-random), but BANKED guidance is a real capability lift. For the mission: self-training genuinely improves the model's latent compositional planning, not just its input->output lookup.
+
+### Evidence
+
+- [`qwen35_4b_latent_decomposition`](../../experiments/qwen35_4b_latent_decomposition/reports/report.md)
+
+### Next Tests
+
+- Full coverage-vs-budget curve for the banked guide (parity with brute, or does it eventually beat brute at some budget?).
+- Free-generation proposal variant (does the lookahead lift survive without the closed-set 32-op menu, i.e. is it a generative capability?).
+- Repeat the dissection one rung deeper: does banking depth-4 install depth-4 lookahead?
+
+### Avoid
+
+- Do not claim 'depth-3 is latent / the wall is just orchestration': the base model is WORSE THAN RANDOM as its own guide (lookahead wall); training-free search does not elicit it.
+- Do not credit the interpreter's distance-pruning with the solve: random+pruning only reaches 0.037; exhaustive proposals are required.
+- Do not overstate banking: it makes the guide COMPETITIVE with brute at matched budget, not superior (brute still wins at high budget); only one beam width was tested.
+- Do not repeat the 'monolithic compilation' assumption for banking: banking demonstrably transfers to step-wise planning (dose-dependent lookahead lift).

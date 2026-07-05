@@ -1,0 +1,32 @@
+{
+ "rank": {
+  "base": {
+   "1": 0.0125,
+   "2": 0.0625,
+   "3": 0.2375
+  },
+  "banked1280": {
+   "1": 0.1375,
+   "2": 0.25,
+   "3": 0.55
+  },
+  "lookahead_wall_base": true,
+  "banking_lifts_lookahead(step12)": 0.156,
+  "banking_lifts_terminal(step3)": 0.313,
+  "verdict": "banking installs LOOKAHEAD"
+ },
+ "search": {
+  "base_guided_max_cov": 0.0125,
+  "banked_guided_max_cov": 0.225,
+  "brute_max_cov": 0.8125,
+  "guide_beats_brute_on_coverage": false
+ },
+ "ablation": {
+  "brute_pruned": 0.4875,
+  "brute_unpruned": 0.2625,
+  "random_pruned": 0.0375,
+  "random_unpruned": 0.0125,
+  "model_pruned": 0.025,
+  "model_unpruned": 0.05
+ }
+}

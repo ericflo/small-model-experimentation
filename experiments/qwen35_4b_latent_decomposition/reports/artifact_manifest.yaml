@@ -1,0 +1,15 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_latent_decomposition"
+external_artifacts:
+  - name: "C24 banked_640 / banked_1280 adapters (the banked guides)"
+    storage: "scratchpad/dose_artifacts/banked_640_adapter, scratchpad/scaling_adapters/banked_1280_adapter (~180MB each)"
+    required_for: "reproducing the banked-guide rank + search results"
+    checksum: ""
+    regenerate: "see experiments/qwen35_4b_depth3_dose_response and qwen35_4b_depth_scaling_controls (harvest + QLoRA train)"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/decompose.py   # model vs brute vs random on 8 tasks"
+  full_command: "python scripts/run.py --tag base --search --with-controls && python scripts/run.py --tag banked1280 --adapter <banked_1280> --search && python scripts/analyze.py"
+  required_external_artifacts: ["C24 banked_640 adapter", "C24 banked_1280 adapter"]
+notes: "No training here (test-time, fixed weights + reused C24 adapters). Model op-scoring is vectorized; each score_ops ~1.25s (batch-32 over the DSL prompt). Verdict (C25): base model has a LOOKAHEAD WALL (worse-than-random as its own guide); banking installs TRANSFERABLE lookahead (dose-dependent, refuting the monolithic-compilation hypothesis), upgrading the guide to competitive-with-brute."

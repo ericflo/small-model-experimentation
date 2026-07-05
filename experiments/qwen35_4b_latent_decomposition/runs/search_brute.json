@@ -1,0 +1,68 @@
+[
+ {
+  "mode": "brute",
+  "beam": 2,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.2875,
+  "coverage_visible": 0.3,
+  "interp_per_task": 1280.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "brute",
+  "beam": 4,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.35,
+  "coverage_visible": 0.3625,
+  "interp_per_task": 2304.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "brute",
+  "beam": 8,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.4875,
+  "coverage_visible": 0.5,
+  "interp_per_task": 4352.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "brute",
+  "beam": 16,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.6875,
+  "coverage_visible": 0.7,
+  "interp_per_task": 8448.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "brute",
+  "beam": 32,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.7625,
+  "coverage_visible": 0.775,
+  "interp_per_task": 16640.0,
+  "fwd_per_task": 0.0
+ },
+ {
+  "mode": "brute",
+  "beam": 64,
+  "k": 32,
+  "pruned": true,
+  "n": 80,
+  "coverage_hidden": 0.8125,
+  "coverage_visible": 0.825,
+  "interp_per_task": 24832.0,
+  "fwd_per_task": 0.0
+ }
+]

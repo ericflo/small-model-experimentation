@@ -10,6 +10,19 @@
 
 ## Key Result
 
+- [qwen35_4b_latent_decomposition](../../experiments/qwen35_4b_latent_decomposition/reports/report.md)
+  (claim C25): **"be your own tool-search" — the fixed model has depth-1 recognition but NO lookahead; banking
+  installs transferable planning.** Can the fixed 4B climb depth by ranking the next DSL op step-by-step? (1)
+  **Lookahead wall:** base per-step next-op top-1 = 0.013/0.062/0.237 at step 1/2/3 (goal 3/2/1 ops away; chance
+  0.031) — at/below chance for planning the first move. So base as its own search guide is **worse than random**
+  (coverage 0.013 vs 0.025 vs brute 0.287 @ matched budget). (2) I predicted banking (C24) would be *monolithic
+  compilation* — **refuted**: banking lifts every step including lookahead, dose-dependently (step1
+  0.013→0.125→0.138, step3 0.237→0.463→0.550 for base/640/1280). Banking installs **transferable planning**. (3)
+  This upgrades the guide 0.013→0.225 (~17×), competitive with brute at low budget. (4) Control: random+pruning
+  only 0.037 (pruning alone isn't the solver). Pivoted mid-experiment after an adversarial review (verdict
+  *flawed*) revealed the original "is depth-3 latent" framing was unfair + redundant with C12; adopted all
+  fixes (visible-only termination, brute honesty bar, min-depth-verified, pruning ablation). Limits: closed-set
+  ranking easier than generation, single seed/beam.
 - [qwen35_4b_depth_scaling_controls](../../experiments/qwen35_4b_depth_scaling_controls/reports/report.md)
   (claim C24): **three follow-ups to C23 — no saturation, the gain is data-diversity, and the recipe repeats
   one rung deeper.** (1) The depth-3 dose curve does NOT saturate through 1280 tool-pairs (1156 distinct
