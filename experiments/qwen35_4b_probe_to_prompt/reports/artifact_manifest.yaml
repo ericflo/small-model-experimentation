@@ -1,0 +1,16 @@
+schema_version: 1
+experiment_id: "qwen35_4b_probe_to_prompt"
+external_artifacts:
+  - name: "probes.pkl"
+    storage: "scratchpad/p2p/probes.pkl (fitted C19 first-op probes, mid-layer + layer-0)"
+    required_for: "re-running run_hints without refitting"
+    checksum: ""
+    regenerate: "python scripts/fit_probe.py --n-per-depth 500"
+omitted_artifacts:
+  - path: "data/acts.npy"
+    reason: "residual activations [1500,33,2560] ~400MB; regenerate via fit_probe"
+reproducibility:
+  smoke_command: "python scripts/fit_probe.py --n-per-depth 30 && python scripts/run_hints.py --n-per-depth 12 --k 2 --depths 2 3"
+  full_command: "fit_probe --n-per-depth 500; run_hints --n-per-depth 100 --depths 2 3; analyze"
+  required_external_artifacts: []
+notes: "Builds on C19 (qwen35_4b_latent_composition_probe) -- reuses its probe method (replicated: d1 0.99 d2 0.45 d3 0.23). Verdict (C30): externalizing the readout (decode->prompt) elicits deployable depth-2 (oracle_full 6x) where steering (C20) failed; but the decodable op-TYPE only narrows sampling -- the PARAMETER is the deployable bottleneck, so the type-only probe nets to zero. Layer-0 leak control at chance (model-computed)."

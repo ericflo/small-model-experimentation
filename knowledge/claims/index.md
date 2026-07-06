@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 29
+- Claims: 30
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 21 |
+| Promising | 22 |
 
 ## Program Counts
 
@@ -22,12 +22,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 4 |
-| `interpretability_and_diagnostics` | 4 |
+| `interpretability_and_diagnostics` | 5 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 17 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 19 |
+| `structured_execution_and_compilers` | 20 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -694,3 +694,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read the pre-DPO 2AFC=0.81 as 'the model can select': it discriminates GIVEN both samples (read-only), but preference-training that ability destroys generation; whether it can SELECT at inference is untested.
 - Do not credit DPO with the small 0.25-epoch bump (0.037->0.050): within noise at n=80 (1 task), coverage flat, and it collapses immediately after.
 - Do not ignore the compute confound: SFT@3 was UNDERTRAINED (greedy 0.037); SFT@6 (SFT_2x) tripled it (0.113) -- always compute-match / report the SFT epoch dose.
+
+## C30: Externalizing the latent readout (decode->prompt) elicits deployable depth-2 where steering (C20) failed -- but the decodable op-TYPE only narrows sampling; the PARAMETER is the deployable bottleneck
+
+- Status: `Promising`
+- Programs: `interpretability_and_diagnostics`, `structured_execution_and_compilers`
+- Summary: Experiment qwen35_4b_probe_to_prompt. The untried seam between C17/C19/C20: C17 test-time SELECTION is free but adds no coverage; C19 the composition first-op is linearly DECODABLE from the base residual far above behavior at depth-1/2 (0.99/0.42) but a thread at depth-3; C20 that direction is NOT steerable (ActAdd inert). This EXTERNALIZES the readout: refit C19's probe (replicates it: d1 0.99@L15, d2 0.45@L21, d3 0.23@L19), decode the first-op from the base model's OWN activation on FRESH fsig-disjoint tasks, and inject it as a PROMPT hint (shift the proposal, the only lever C17 allows) rather than steering the residual. Six arms (no-think, n=100/depth): no-hint, neutral(placebo), oracle-type, oracle-full(+param), probe(decoded), wrong(random). RESULTS: (1) Externalization ELICITS deployable depth-2 where steering failed: oracle-full lifts depth-2 greedy@1 6x (0.03->0.19) and cov 6x (0.05->0.31) -- the FIRST test-time intervention in the arc to move deployable capability. (2) But the deployable bottleneck is the PARAMETER, not the op-TYPE C19 decodes: oracle-TYPE lifts COVERAGE (0.05->0.19, narrows sampling) but NOT greedy (0.02); only oracle-FULL (with param) lifts greedy. (3) The C19 type-only probe (eval acc 0.32 fsig-disjoint) can't cash out: probe-hint ~= no-hint, though the effect is genuine self-elicitation (probe-correct subset cov 0.156 vs no-hint 0.094; probe-wrong hurts) that washes out at 0.32 accuracy. (4) Graded by depth exactly as C19 predicts: real at d2 (headroom), ~0 at d3 (thread; oracle-full only 0.01). (5) Controls clean: neutral~=no-hint (format), wrong<no-hint (content-causal), layer-0 probe at chance 0.05 (model-computed not surface-readable).
+- Implication: The latent readout (C19) IS usable at test time -- by EXTERNALIZING it (decode->prompt), NOT by steering (C20). Adds the first test-time lever that moves deployable capability, bounded by the representation (works depth-2, fades depth-3). But finds a NEW wall: the DECODABLE quantity (op TYPE) is not the DEPLOYABLE one (the PARAMETER). Knowing the op-type narrows sampling (coverage) without fixing the greedy mode; the concrete parameter is the missing piece. Reconciles C20 (decodable-but-not-steerable): the info is writable, just via context not residual surgery -- but the part C19 can decode isn't the deployment-limiting part.
+
+### Evidence
+
+- [`qwen35_4b_probe_to_prompt`](../../experiments/qwen35_4b_probe_to_prompt/reports/report.md)
+
+### Next Tests
+
+- Decode the (op, PARAMETER) from the residual -- is the parameter latently decodable too? If a full-op probe reaches useful accuracy, a probe-hint would deliver the oracle-full lift (training-free elicitation). If NOT decodable, that pinpoints exactly what the forward pass fails to compute.
+- Probe-hint the full op where the param IS surface-inferable (some params are visible from I/O magnitudes) vs where it isn't.
+- Compliance instrumentation (parse generated first-op) + >=2 seeds.
+
+### Avoid
+
+- Do not claim the C19 probe-hint deploys capability: type-only probe-hint ~= no-hint (nets to zero at 0.32 acc). The MECHANISM (externalization) works (oracle-full 6x) but the DECODABLE quantity (op type) is not the deployable bottleneck (the param is).
+- Do not conflate coverage and greedy: oracle-TYPE lifts coverage (narrows sampling) but not greedy; you need the concrete (op,param) for single-shot deployability.
+- Do not read a probe-hint gain as leak: layer-0 (embedding) probe is at chance (0.05/0.02) on the eval set, so the decoded first-op is the model's COMPUTATION, not surface-readable I/O; and the benefit concentrates on probe-correct tasks (genuine self-elicitation).
+- Do not expect depth-3 elicitation: the representation is a thread (C19); oracle-full only 0.01 at d3 -- no readout conjures uncomputed information.

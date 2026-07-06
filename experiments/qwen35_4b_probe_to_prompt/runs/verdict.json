@@ -1,0 +1,77 @@
+{
+ "probe_eval_acc": {
+  "2": 0.32,
+  "3": 0.18
+ },
+ "layer0_leak": {
+  "2": 0.05,
+  "3": 0.02
+ },
+ "majority": {
+  "2": 0.19,
+  "3": 0.11
+ },
+ "by_depth": {
+  "2": {
+   "nohint": {
+    "greedy": 0.03,
+    "cov": 0.05
+   },
+   "neutral": {
+    "greedy": 0.02,
+    "cov": 0.05
+   },
+   "oracle_type": {
+    "greedy": 0.02,
+    "cov": 0.19
+   },
+   "oracle_full": {
+    "greedy": 0.19,
+    "cov": 0.31
+   },
+   "probe": {
+    "greedy": 0.01,
+    "cov": 0.06
+   },
+   "wrong": {
+    "greedy": 0.0,
+    "cov": 0.0
+   }
+  },
+  "3": {
+   "nohint": {
+    "greedy": 0.0,
+    "cov": 0.01
+   },
+   "neutral": {
+    "greedy": 0.0,
+    "cov": 0.0
+   },
+   "oracle_type": {
+    "greedy": 0.01,
+    "cov": 0.03
+   },
+   "oracle_full": {
+    "greedy": 0.01,
+    "cov": 0.03
+   },
+   "probe": {
+    "greedy": 0.0,
+    "cov": 0.0
+   },
+   "wrong": {
+    "greedy": 0.0,
+    "cov": 0.0
+   }
+  }
+ },
+ "probe_decomp_d2": {
+  "probe_correct_n": 32,
+  "probe_wrong_n": 68,
+  "cov_probe_on_correct": 0.156,
+  "cov_nohint_on_correct": 0.094,
+  "cov_probe_on_wrong": 0.015,
+  "cov_nohint_on_wrong": 0.029
+ },
+ "verdict": "Externalizing the latent readout (decode->PROMPT) ELICITS deployable depth-2 capability where steering (C20) was inert: oracle_full lifts depth-2 greedy@1 0.03->0.19 and cov 0.05->0.31. BUT the deployable bottleneck is the PARAMETER, not the op-TYPE C19 decodes: oracle_TYPE lifts coverage (0.19, narrows sampling) but NOT greedy (0.02); only oracle_FULL (with param) lifts greedy. The C19 type-only probe (eval acc 0.32) nets to ~zero (benefit concentrated on probe-correct tasks 0.156 vs no-hint 0.094, but 68% wrong-type hurts). Graded by depth: fades at depth-3 (thread, C19). Controls: neutral~=no-hint (format), wrong<no-hint (content-causal), layer-0 at chance {'2': 0.05, '3': 0.02} (model-computed, not surface)."
+}

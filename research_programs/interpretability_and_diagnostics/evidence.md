@@ -10,3 +10,5 @@
 ## Current Read
 
 Diagnostics should become standard infrastructure. They are how future agents avoid retesting the same mistaken explanations.
+
+- [qwen35_4b_probe_to_prompt](../../experiments/qwen35_4b_probe_to_prompt/reports/report.md) (claim C30): EXTERNALIZING the latent readout (decode C19's first-op probe -> inject as a PROMPT hint) elicits deployable depth-2 (oracle_full 6x) where steering (C20) was inert -- the first test-time lever to move the wall. But the decodable op-TYPE only narrows sampling; the PARAMETER is the deployable bottleneck, so the type-only probe nets to zero. Graded by depth (fades at depth-3 thread). Layer-0 leak control at chance.

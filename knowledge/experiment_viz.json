@@ -43082,6 +43082,87 @@
      "note": "User question: does anchoring BOTH distributions equally (strong NLL(chosen) anchor) prevent the DPO collapse? The collapse is the 'both-go-down' pathology -- DPO grows the margin by dropping logp(rejected) AND logp(chosen), so the model stops GENERATING the correct code. Strengthening the anchor DIRECTIONALLY helps (greedy 0.013->0.025, coverage 0.013->0.062 as lambda 0.05->1.0), confirming the diagnosis. But it's NOT enough: even fully balanced (lambda=1.0) at 3 epochs ends BELOW plain SFT (0.025<0.037) and far below SFT_2x (0.113); the margin still blew to ~53. The accumulated negative push over 522 steps degrades generation faster than the anchor holds it. Safe regime = strong anchor + FEW steps, but there the DPO nudge is tiny and it ~= plain SFT. Conclusion stands: preference training can't beat 'just more SFT'."
     }
    ]
+  },
+  "qwen35_4b_probe_to_prompt": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Externalize the latent readout: the FULL first op elicits depth-2 (6x), but the op-TYPE C19 decodes only narrows sampling",
+     "categories": [
+      "no-hint",
+      "neutral (placebo)",
+      "oracle TYPE",
+      "oracle FULL (+param)",
+      "probe (C19 readout)",
+      "wrong (content ctrl)"
+     ],
+     "series": [
+      {
+       "label": "coverage@6 (depth-2)",
+       "values": [
+        0.05,
+        0.05,
+        0.19,
+        0.31,
+        0.06,
+        0.0
+       ]
+      },
+      {
+       "label": "greedy@1 (depth-2, deployable)",
+       "values": [
+        0.03,
+        0.02,
+        0.02,
+        0.19,
+        0.01,
+        0.0
+       ]
+      }
+     ],
+     "y_label": "depth-2 solve rate (no-think, fsig-disjoint eval)",
+     "y_format": "percent01",
+     "note": "C19: the composition first-op is linearly DECODABLE from the base residual far above behavior (depth-2 0.42) but a thread at depth-3. C20: that direction is NOT steerable (ActAdd inert). C17: test-time selection is free but adds no coverage. This EXTERNALIZES the readout: decode the first-op with C19's probe and inject it as a PROMPT hint. RESULT: (1) externalization ELICITS deployable depth-2 where steering failed -- oracle_FULL (true op+param in the prompt) lifts greedy@1 6x (0.03->0.19) and coverage 6x (0.05->0.31), the FIRST test-time intervention in the arc to move deployable capability. (2) But the deployable bottleneck is the PARAMETER, not the op-TYPE C19 decodes: oracle_TYPE lifts COVERAGE (0.05->0.19, narrows sampling) but NOT greedy (0.02); only the full op deploys single-shot. (3) The type-only C19 probe (0.32 eval acc) nets to ~zero. Controls: neutral~=no-hint (format), wrong HURTS (content-causal), layer-0 probe at chance 0.05 (model-computed, not surface). Graded by depth: fades at depth-3 (thread)."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Graded by depth: elicitation works at depth-2 (headroom) and vanishes at depth-3 (thread, C19)",
+     "categories": [
+      "no-hint",
+      "oracle TYPE",
+      "oracle FULL (+param)",
+      "probe",
+      "wrong"
+     ],
+     "series": [
+      {
+       "label": "depth-2 greedy@1",
+       "values": [
+        0.03,
+        0.02,
+        0.19,
+        0.01,
+        0.0
+       ]
+      },
+      {
+       "label": "depth-3 greedy@1",
+       "values": [
+        0.0,
+        0.01,
+        0.01,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "y_label": "greedy@1 (no-think, fsig-disjoint eval)",
+     "y_format": "percent01",
+     "note": "The elicitation is bounded by the representation, exactly as C19 predicts. At depth-2 the first-op is latently present (probe 0.42) so giving the concrete op (oracle_full) lifts deployable greedy@1 6x. At depth-3 the representation is a thread (C19 real signal ~0.13) -- even oracle_full (telling the model the true first op) barely moves it (0.00->0.01). No readout conjures information the forward pass never computed: externalization can cash out latent headroom but cannot cross the true wall."
+    }
+   ]
   }
  }
 }
