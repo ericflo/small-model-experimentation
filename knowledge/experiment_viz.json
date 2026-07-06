@@ -42901,6 +42901,116 @@
      "note": "The user's LITERAL ask: rejection-sample the banked model's OWN verified reasoning and bank it. On 101 tasks the model can solve (20% yield; model-thinking median 3071 chars -- long rambly rationalizations), matched arms with IDENTICAL canonical code differing only in the trace. RESULT: banking the model's OWN thoughts (T_self 0.087) does NOT beat banking answers (A_self 0.087); banking an EXPLICIT correct decomposition plan (T_synth 0.225) does (~2.6x). So it's the PLAN QUALITY, not reasoning-as-such and not test-compute -- T_self spends MORE thinking (3071 vs 576 chars) yet is worse. The model's own rejection-sampled 'thoughts' are post-hoc rationalizations of an answer it already knows -- inert to bank. Genuine forward PLANS install the capability; rationalizations don't."
     }
    ]
+  },
+  "qwen35_4b_learn_from_failures": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Learn from failures: DPO collapses; the coverage->deployable gap closes with MORE SFT",
+     "categories": [
+      "base",
+      "SFT (banking, 3ep)",
+      "SFT_2x (6ep)",
+      "DPO (0.25ep)",
+      "DPO (3ep)",
+      "DPO-shuffled"
+     ],
+     "series": [
+      {
+       "label": "coverage@16 (sampling ceiling)",
+       "values": [
+        0.0,
+        0.113,
+        0.212,
+        0.113,
+        0.013,
+        0.062
+       ]
+      },
+      {
+       "label": "greedy@1 (deployable single-shot)",
+       "values": [
+        0.0,
+        0.037,
+        0.113,
+        0.05,
+        0.013,
+        0.037
+       ]
+      }
+     ],
+     "y_label": "depth-3 solve rate (no-think, held-out n=80)",
+     "y_format": "percent01",
+     "note": "Every prior training in the arc was SFT-on-positives, which raises coverage@16 but not deployable greedy@1. Does DPO on the model's OWN (correct, incorrect) samples raise greedy@1? The SFT model ALREADY discriminates its own correct-vs-wrong at 2AFC=0.81 (strong latent verifier), BUT preference-optimizing it COLLAPSES generation: DPO greedy@1 bumps to 0.050 at 0.25 epochs (within noise of SFT 0.037), then craters -- 0.000 by 0.5ep, 0.013 by 3ep (both greedy AND coverage crash; classic over-optimization, margin blew to ~61). DPO never beats SFT_2x. The EFFECTIVE lever is just MORE SFT: SFT_2x (6 vs 3 epochs) TRIPLES greedy@1 (0.037->0.113) and doubles coverage. Shuffled control (0.037) confirms it's not pure loss-shape; real DPO (0.013) is even worse. NET: you can't close the coverage->deployable gap by preferring correct-over-wrong (that destroys generation) -- train longer on the correct ones (SFT). Strong latent sample-discrimination (0.81) is READ-ONLY; it doesn't transfer to a generation gain via DPO. (Extends prior MBPP DPO work here to the controlled depth-3 substrate.)"
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "DPO collapse trajectory: greedy@1 and coverage crash with more preference optimization",
+     "series": [
+      {
+       "label": "greedy@1",
+       "points": [
+        [
+         0,
+         0.037
+        ],
+        [
+         0.25,
+         0.05
+        ],
+        [
+         0.5,
+         0.0
+        ],
+        [
+         3.0,
+         0.013
+        ]
+       ]
+      },
+      {
+       "label": "coverage@16",
+       "points": [
+        [
+         0,
+         0.113
+        ],
+        [
+         0.25,
+         0.113
+        ],
+        [
+         0.5,
+         0.075
+        ],
+        [
+         3.0,
+         0.013
+        ]
+       ]
+      },
+      {
+       "label": "SFT_2x greedy (the winner)",
+       "points": [
+        [
+         0,
+         0.113
+        ],
+        [
+         3.0,
+         0.113
+        ]
+       ]
+      }
+     ],
+     "x_label": "DPO epochs (continued from SFT)",
+     "y_label": "depth-3 solve rate (no-think)",
+     "y_format": "percent01",
+     "note": "DPO from the SFT model: a within-noise greedy@1 bump at 0.25 epochs (0.037->0.050, coverage flat), then catastrophic collapse -- greedy 0.000 by 0.5 epochs, both greedy and coverage cratered to 0.013 by 3 epochs. The reward margin (logp_chosen - logp_rejected) grew unchecked to ~61: classic DPO over-optimization / distribution collapse. It never reaches SFT_2x's greedy@1 of 0.113 (just training SFT twice as long). Preference training on the model's own failures is fragile and does not close the deployable gap."
+    }
+   ]
   }
  }
 }

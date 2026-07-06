@@ -80,6 +80,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_joint_shortlister_ladder` | [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md) | [report](../experiments/qwen35_4b_joint_shortlister_ladder/reports/qwen35_4b_joint_shortlister_ladder_report.md) |
 | `qwen35_4b_latent_composition_probe` | [README](../experiments/qwen35_4b_latent_composition_probe/README.md) | [report](../experiments/qwen35_4b_latent_composition_probe/reports/report.md) |
 | `qwen35_4b_latent_decomposition` | [README](../experiments/qwen35_4b_latent_decomposition/README.md) | [report](../experiments/qwen35_4b_latent_decomposition/reports/report.md) |
+| `qwen35_4b_learn_from_failures` | [README](../experiments/qwen35_4b_learn_from_failures/README.md) | [report](../experiments/qwen35_4b_learn_from_failures/reports/report.md) |
 | `qwen35_4b_learned_active_trace_policy` | [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md) | [report](../experiments/qwen35_4b_learned_active_trace_policy/reports/qwen35_4b_learned_active_trace_policy_report.md) |
 | `qwen35_4b_live_tool_dagger` | [README](../experiments/qwen35_4b_live_tool_dagger/README.md) | [report](../experiments/qwen35_4b_live_tool_dagger/reports/report.md) |
 | `qwen35_4b_model_in_loop_counterexamples` | [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md) | [report](../experiments/qwen35_4b_model_in_loop_counterexamples/reports/qwen35_4b_model_in_loop_counterexamples_report.md) |

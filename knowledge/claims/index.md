@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 28
+- Claims: 29
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 20 |
+| Promising | 21 |
 
 ## Program Counts
 
@@ -21,10 +21,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
-| `evidence_conditioned_selection` | 3 |
+| `evidence_conditioned_selection` | 4 |
 | `interpretability_and_diagnostics` | 4 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 16 |
+| `posttraining_and_adaptation` | 17 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
 | `structured_execution_and_compilers` | 19 |
@@ -669,3 +669,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not attribute T's win purely to test-compute: T_corrupt uses the same thinking channel and collapses to 0.113, so the advantage over A is the correct-reasoning CONTENT.
 - Do not read this as the model's own thoughts: Phase 1 uses SYNTHETIC explicit decomposition plans; the model's-own-thoughts version (Phase 2) is a separate run.
 - Do not deploy T no-think: T needs test-time thinking to work (no-think ~0.013); the reason-then-solve skill is a test-time channel.
+
+## C29: Preference training on the model's own failures does NOT close the coverage->deployable gap -- DPO collapses generation; the gap closes with MORE SFT instead
+
+- Status: `Promising`
+- Programs: `posttraining_and_adaptation`, `evidence_conditioned_selection`
+- Summary: Experiment qwen35_4b_learn_from_failures. Across the arc, SFT-on-positives (banking) raises depth-3 coverage@16 (~0.3-0.5) but not deployable greedy@1 (0.05-0.19). Does DPO/contrastive training on the model's OWN (correct, incorrect) samples raise greedy@1? Design hardened by an adversarial review (extends prior MBPP DPO work here -- constrained_coverage_dpo, offline_hard_negative_coverage_dpo, which found constrained DPO preserved pass@1 but didn't beat sample-more on coverage; demanded compute + shuffled controls + early-stopping). Harvested 174 same-task (chosen=verified-correct, rejected=verified-wrong) pairs from banked_1280's own no-think samples (chosen/rejected identical median length 151 chars). RESULT (no-think depth-3, n=80): the SFT model is already a strong verifier of its own samples (pre-DPO 2AFC=0.810, matches C13 ~0.73), BUT preference-optimizing that discrimination COLLAPSES generation: DPO greedy@1 bumps to 0.050 at 0.25 epochs (within noise of SFT 0.037; coverage flat) then craters -- 0.000 by 0.5ep, 0.013 by 3ep (both greedy AND coverage crash; classic over-optimization, margin logp_c-logp_r blew to ~61). DPO never beats SFT_2x. The EFFECTIVE lever is just MORE SFT: SFT_2x (6 vs 3 epochs) triples greedy@1 (0.037->0.113) and doubles coverage (0.113->0.212). Shuffled control (0.037) confirms it's not pure loss-shape; real DPO (0.013) is even WORSE, so the same-task signal made collapse worse.
+- Implication: You cannot close the coverage->deployable gap by teaching the model to PREFER its correct over its wrong samples (DPO) -- that destroys generation. Just train longer on the correct samples (SFT). The model's strong latent sample-discrimination (2AFC 0.81) is a READ-ONLY verifier ability that does NOT transfer to a WRITE/generation gain via preference training. Extends the prior MBPP DPO finding (DPO didn't beat sample-more) to the controlled depth-3 substrate, adding: DPO is fragile/collapses, and the deployable gap is best closed by more SFT-on-positives. For the mission's 'beat sample-more' / make-coverage-deployable goal: preference-on-failures is a dead end here; the lever is more banking (SFT epochs).
+
+### Evidence
+
+- [`qwen35_4b_learn_from_failures`](../../experiments/qwen35_4b_learn_from_failures/reports/report.md)
+
+### Next Tests
+
+- Heavily-constrained DPO (fewer steps, heavier NLL/KL anchor, dev-coverage early-stop, like the prior MBPP run) to test whether a collapse-free DPO gives ANY gain -- current recipe collapsed by 0.5 epochs.
+- How far does more-SFT go? SFT epoch dose-response (3/6/12/24) -- does greedy@1 keep rising, and does it approach coverage@16 (closing the gap by training alone)?
+- Test-time latent selection: the 2AFC=0.81 verifier -- can it SELECT the correct sample from k candidates at inference (no training), closing the gap without collapse?
+
+### Avoid
+
+- Do not claim DPO/preference-on-failures helps deployability: it collapses the model (greedy AND coverage crash) and never beats SFT_2x across 0.25-3 epochs.
+- Do not read the pre-DPO 2AFC=0.81 as 'the model can select': it discriminates GIVEN both samples (read-only), but preference-training that ability destroys generation; whether it can SELECT at inference is untested.
+- Do not credit DPO with the small 0.25-epoch bump (0.037->0.050): within noise at n=80 (1 task), coverage flat, and it collapses immediately after.
+- Do not ignore the compute confound: SFT@3 was UNDERTRAINED (greedy 0.037); SFT@6 (SFT_2x) tripled it (0.113) -- always compute-match / report the SFT epoch dose.

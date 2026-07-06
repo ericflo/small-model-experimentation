@@ -2261,6 +2261,44 @@
   },
   {
     "file_counts": {
+      ".json": 8,
+      ".jsonl": 4,
+      ".md": 5,
+      ".png": 1,
+      ".py": 11,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-06",
+    "id": "qwen35_4b_learn_from_failures",
+    "path": "experiments/qwen35_4b_learn_from_failures",
+    "primary_readme": "experiments/qwen35_4b_learn_from_failures/README.md",
+    "primary_report": "experiments/qwen35_4b_learn_from_failures/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "posttraining_and_adaptation"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/harvest_pairs.py --adapter <banked_1280> --pool 500 --k 16` then `build_shuffled.py`, `train_lora.py` (SFT/SFT_2x), `train_dpo.py`, `eval_ladder.py`, `analyze.py`.",
+    "tags": [
+      "curriculum",
+      "lora",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Learn from Your Own Failures (DPO)",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 32,
+    "total_size_bytes": 855712
+  },
+  {
+    "file_counts": {
       ".csv": 4,
       ".json": 11,
       ".jsonl": 18,

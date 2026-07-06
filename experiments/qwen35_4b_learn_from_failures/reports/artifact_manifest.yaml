@@ -1,0 +1,16 @@
+schema_version: 1
+experiment_id: "qwen35_4b_learn_from_failures"
+external_artifacts:
+  - name: "adapters SFT/SFT2x/DPO/DPOe*/DPOshuf"
+    storage: "scratchpad/lff_adapters/ (~180MB each)"
+    required_for: "re-running evaluations without retraining"
+    checksum: ""
+    regenerate: "harvest_pairs + build_shuffled + train_lora/train_dpo"
+omitted_artifacts:
+  - path: "runs/adapter_*/"
+    reason: "trained QLoRA adapters (~180MB each); regenerate via harvest + train"
+reproducibility:
+  smoke_command: "python scripts/harvest_pairs.py --adapter <banked_1280> --pool 32 --k 8"
+  full_command: "harvest_pairs (pool 500 k 16) + build_shuffled + train SFT/SFT2x + train_dpo (0.25/0.5/3 ep) + shuffled + eval all + analyze"
+  required_external_artifacts: ["C24 banked_1280 adapter (harvest source)"]
+notes: "Manual cached-reference DPO on QLoRA (trl unavailable): loss=-log sigmoid(beta*((logp_pol(c)-logp_ref(c))-(logp_pol(r)-logp_ref(r)))) + NLL anchor; ref=frozen SFT model. Verdict (C29): DPO collapses generation (over-optimization); the coverage->deployable gap closes with MORE SFT (SFT_2x), not preference training. Pre-DPO 2AFC=0.81 (read-only verifier)."

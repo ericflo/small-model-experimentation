@@ -1,0 +1,44 @@
+{
+ "deploy": {
+  "base": {
+   "n": 80,
+   "greedy": 0.0,
+   "cov16": 0.0
+  },
+  "SFT": {
+   "n": 80,
+   "greedy": 0.037,
+   "cov16": 0.113
+  },
+  "SFT2x": {
+   "n": 80,
+   "greedy": 0.113,
+   "cov16": 0.212
+  },
+  "DPOe0.25": {
+   "n": 80,
+   "greedy": 0.05,
+   "cov16": 0.113
+  },
+  "DPOe0.5": {
+   "n": 80,
+   "greedy": 0.0,
+   "cov16": 0.075
+  },
+  "DPO": {
+   "n": 80,
+   "greedy": 0.013,
+   "cov16": 0.013
+  },
+  "DPOshuf": {
+   "n": 80,
+   "greedy": 0.037,
+   "cov16": 0.062
+  }
+ },
+ "pre_dpo_2afc": 0.81,
+ "SFT2x_beats_SFT_greedy": 0.076,
+ "best_DPO_greedy": 0.05,
+ "DPO_collapses": true,
+ "verdict": "DPO on own failures does NOT close the coverage->deployable gap: it is catastrophically fragile (a within-noise bump at 0.25ep, collapse by 0.5ep, crater by 3ep) and never beats SFT_2x. The gap is closed instead by MORE SFT-on-positives (SFT_2x triples greedy@1). Strong latent sample-discrimination (2AFC 0.81) does NOT convert to deployable gains via preference training."
+}

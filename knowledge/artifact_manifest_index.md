@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 152
-- Manifest files: 448
+- Experiments with manifests: 153
+- Manifest files: 449
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 25 |
+| `standard-artifact` | 26 |
 
 ## Manifests
 
@@ -112,6 +112,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_joint_shortlister_ladder` | `large-artifact` | [manifest](../experiments/qwen35_4b_joint_shortlister_ladder/large_artifacts_manifest.md) |
 | `qwen35_4b_latent_composition_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_latent_composition_probe/reports/artifact_manifest.yaml) |
 | `qwen35_4b_latent_decomposition` | `standard-artifact` | [manifest](../experiments/qwen35_4b_latent_decomposition/reports/artifact_manifest.yaml) |
+| `qwen35_4b_learn_from_failures` | `standard-artifact` | [manifest](../experiments/qwen35_4b_learn_from_failures/reports/artifact_manifest.yaml) |
 | `qwen35_4b_learned_active_trace_policy` | `dataset` | [manifest](../experiments/qwen35_4b_learned_active_trace_policy/data/dataset_manifest.json) |
 | `qwen35_4b_learned_active_trace_policy` | `other` | [manifest](../experiments/qwen35_4b_learned_active_trace_policy/data/policy/policy_dataset_manifest.json) |
 | `qwen35_4b_learned_active_trace_policy` | `other` | [manifest](../experiments/qwen35_4b_learned_active_trace_policy/data/policy_smoke/policy_dataset_manifest.json) |
