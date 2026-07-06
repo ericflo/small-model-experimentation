@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 31
+- Claims: 32
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 23 |
+| Promising | 24 |
 
 ## Program Counts
 
@@ -22,12 +22,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 4 |
-| `interpretability_and_diagnostics` | 6 |
+| `interpretability_and_diagnostics` | 7 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 17 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 21 |
+| `structured_execution_and_compilers` | 22 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -741,3 +741,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not use a last-token layer-0 probe as a surface control: RoPE makes the fixed-template embedding constant across tasks, so layer-0~=chance is degenerate (affects C19/C30 too). Use an EXTERNAL classifier on raw I/O features.
 - Do not over-read probe_full's small lift: the two-term decomposition shows it's a faithful readout (=oracle on decode-correct tasks) bounded by 26% concrete accuracy, not a special effect.
 - Do NOT claim the op-type is surface-readable: the residual probe beats the external-I/O baseline (0.413 vs 0.272) at depth-2 -- the type IS model-computed (elicitable). It's only the param that isn't.
+
+## C32: The compositional wall is STRUCTURE, not values: the model cannot propose the op-sequence (failures are wrong-skeleton), but once structure is known values are trivially searchable
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `interpretability_and_diagnostics`
+- Summary: Experiment qwen35_4b_structure_or_values. Motivated by C31 (model computes op-TYPE structure, reads param off surface I/O). Never-tested question: is depth-3 FAILURE a STRUCTURE error (wrong op-type sequence) or a VALUE-binding error (right skeleton, wrong params)? DESIGN PIVOT (review+smoke): op-seq GENERATION fails at 0.00 even depth-1 (format handicap), and 'skeletonfill>>direct=>values' is a false dichotomy; so use model NATIVE Python + a format-immune STRUCTURE signal (does the model program's BEHAVIOR match the true op-type skeleton with ANY params?) + oracle-skeletonfill (true structure + value-search) + random-skeletonfill (value-fungibility control), on MIN-DEPTH-verified true-depth tasks (n=120/depth). RESULT: the depth-3 wall is STRUCTURE, decisively. (1) NO VALUE TAX: model STRUCTURE-coverage (right op-type sequence, any param) 0.017 = concrete coverage 0.017 at depth-3 (depth-2 tax +0.017) -- failures are wrong-skeleton, not right-skeleton-wrong-param; there is no hidden pool of right-structure-wrong-value solutions. (2) oracle-skeletonfill=1.000: knowing the op-type sequence, cheap value-search ALWAYS finishes (values trivial given structure; consistent with C31 param surface-readable). (3) random-skeletonfill low (R200=0.108 at depth-3): the DSL is NOT value-fungible, so structure genuinely matters. REFUTED the initial 'wall is values' hypothesis.
+- Implication: The compositional wall is a STRUCTURE-PROPOSAL problem: the model cannot propose which operations in which order at depth-3; once structure is known, values are free. UNIFIES the arc -- C19 (depth-3 first-op is a representational thread), C25 (no step-1 lookahead), C31 (param surface-readable) all point to the same dichotomy: the model reads/computes VALUES easily but cannot propose deep STRUCTURE. Explains WHY tool-enumerated STRUCTURE seeds (C22) and banking (installs structure) were necessary, and why value-side interventions (C31 param-hint, DPO) don't move the wall. Deployable recipe: structure-search (tool/enumeration) + cheap value-fill = tool-augmented search (C12/C17 family), not a forward-pass gain.
+
+### Evidence
+
+- [`qwen35_4b_structure_or_values`](../../experiments/qwen35_4b_structure_or_values/reports/report.md)
+
+### Next Tests
+
+- Cross-substrate: is the structure-not-values dichotomy a model-level law (string/register) or list-DSL-specific?
+- At what depth does structure-proposal collapse (depth-2 tax +0.017 tiny, depth-3 +0.000)? Fine-grained depth sweep of the value tax.
+- Does banking install STRUCTURE specifically? Re-probe: banked model structure-coverage vs base (should jump if banking installs the skeleton).
+
+### Avoid
+
+- Do not claim the wall is a value-binding problem: the value tax (structure-cov - concrete-cov) is +0.000 at depth-3 -- the model's failures are wrong-STRUCTURE, not wrong-value. C31's param-surface-readable is about a KNOWN op's param; the WALL is not knowing WHICH ops.
+- Do not read oracle-skeletonfill=1.0 as deep: it is partly by construction (the fill enumerator has the exact discrete param support) -- it shows values are searchable given structure, not a surprising fact.
+- Do not use op-seq GENERATION to measure structural knowledge: it fails at 0.00 even depth-1 (format handicap). Use the model's native Python behavior matched against the true skeleton (format-immune).
+- Do not treat skeleton-then-fill as a forward-pass elicitation: it is tool-augmented execute-filter SEARCH (C17 selection-free / sample-more); the deployable gain is from providing/searching STRUCTURE, not from the model.

@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_structure_or_values"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/skeleton_fill.py --n-per-depth 15 --k 4 --randR 4 30 --depths 2 3"
+  full_command: "python scripts/skeleton_fill.py --n-per-depth 120 --k 8 --randR 8 50 200 --depths 2 3; python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C32): the compositional wall is STRUCTURE, not values. Model STRUCTURE-coverage = concrete coverage (value tax +0.000 at depth-3) -> failures are wrong-skeleton; oracle-skeletonfill=1.0 -> values trivial given structure; random-skeletonfill low -> DSL not value-fungible. op-seq GENERATION fails at 0.00 (format handicap, documented separately). Structure signal is format-immune (model native Python behavior matched to true skeleton)."

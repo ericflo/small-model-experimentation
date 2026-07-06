@@ -43238,6 +43238,89 @@
      "note": "Externalize the decoded full first op as a prompt hint, on PARAM-first-op tasks (where the parameter matters). The parameter IS the deployable bottleneck: oracle_full (true op+param) 0.095 >> oracle_type (type only) 0.007 -- confirms C30, isolated to param tasks. But the model probe barely delivers (probe_full 0.014) and the CHEAP surface pipeline delivers MORE (surface_full 0.027): you do not need the 4B for the parameter. wrong_param (true type, wrong param) 0.000 -- content-causal. Two-term check textbook clean: probe_full deploys EXACTLY like the oracle on the tasks it decodes correctly (0.091=0.091) and like no-hint on those it gets wrong (0.0=0.0) -- a faithful readout bounded by 26% concrete accuracy. Sharp localization: the model computes the op-type but only reads the parameter off surface I/O."
     }
    ]
+  },
+  "qwen35_4b_structure_or_values": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Is the compositional wall STRUCTURE or VALUES? It is STRUCTURE (value tax ~0; oracle=1.0)",
+     "categories": [
+      "mono greedy@1",
+      "mono cov@8",
+      "model STRUCTURE-cov@8 (any param)",
+      "oracle-skeletonfill (true structure)"
+     ],
+     "series": [
+      {
+       "label": "depth 2",
+       "values": [
+        0.033,
+        0.092,
+        0.108,
+        1.0
+       ]
+      },
+      {
+       "label": "depth 3",
+       "values": [
+        0.008,
+        0.017,
+        0.017,
+        1.0
+       ]
+      }
+     ],
+     "y_label": "solve rate (min-depth-verified, n=120/depth)",
+     "y_format": "percent01",
+     "note": "C31 showed the model computes the op-TYPE (structure) but reads the PARAMETER off surface I/O (values). Sharp untested question about the WALL: is depth-3 FAILURE a structure error (wrong op-sequence) or a value error (right skeleton, wrong params)? Measured format-immune (the model's native Python BEHAVIOR matched against the true op-type skeleton with any params). RESULT: the wall is STRUCTURE, decisively. NO VALUE TAX -- the model's STRUCTURE-coverage (right op-type sequence, any param) 0.017 EQUALS its concrete coverage 0.017 at depth-3 -- failures are wrong-skeleton, not right-skeleton-wrong-param. oracle-skeletonfill=1.0 -- if you KNOW the op-type sequence, cheap value-search always finishes (values trivial given structure). So the model cannot propose which operations in which order; once structure is known, values are free. Unifies C19 (depth-3 first-op is a representational thread), C25 (no step-1 lookahead), C31 (param surface-readable). REFUTED the initial 'wall is values' hypothesis. Op-seq GENERATION is a separate 0.00 format failure (not used for the structure signal)."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Random structure barely cracks depth-3 (R200=0.11): the DSL is NOT value-fungible -- structure genuinely matters",
+     "series": [
+      {
+       "label": "depth 2 random-skeletonfill",
+       "points": [
+        [
+         8,
+         0.033
+        ],
+        [
+         50,
+         0.225
+        ],
+        [
+         200,
+         0.6
+        ]
+       ]
+      },
+      {
+       "label": "depth 3 random-skeletonfill",
+       "points": [
+        [
+         8,
+         0.0
+        ],
+        [
+         50,
+         0.042
+        ],
+        [
+         200,
+         0.108
+        ]
+       ]
+      }
+     ],
+     "x_label": "R = number of RANDOM op-type skeletons tried (each param-filled + execute-filtered)",
+     "y_label": "skeletonfill solve rate",
+     "y_format": "percent01",
+     "note": "Value-fungibility control: do RANDOM op-type skeletons + value-search crack the tasks (which would make skeletonfill uninformative about structure)? At depth-3, even 200 random skeletons -> only 0.108 (vs oracle=1.0 with the TRUE skeleton). So it is NOT that any skeleton fills -- the correct STRUCTURE is genuinely required, and finding it is the hard part. Depth-2 is more fungible (R200=0.60) because there are fewer/shorter op-sequences. This confirms the wall is a structure-search problem: the model can't propose the structure, and random structure is far from enough -- which is why tool-enumerated structure seeds (C22) and banking (installs structure) were necessary."
+    }
+   ]
   }
  }
 }

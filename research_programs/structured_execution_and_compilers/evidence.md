@@ -10,6 +10,8 @@
 
 ## Key Result
 
+- [qwen35_4b_structure_or_values](../../experiments/qwen35_4b_structure_or_values/reports/report.md) (claim C32): the compositional wall is STRUCTURE, not values. The model's STRUCTURE-coverage (right op-type sequence, any param) = its concrete coverage (value tax +0.000 at depth-3) -> failures are wrong-skeleton; oracle-skeletonfill=1.0 (values trivial given structure); random-skeletonfill low (DSL not value-fungible). Unifies C19/C25/C31; explains why tool-structure-seeds (C22)+banking were necessary. (op-seq generation fails at 0.00 = separate format handicap.)
+
 - [qwen35_4b_thinking_lookahead](../../experiments/qwen35_4b_thinking_lookahead/reports/report.md)
   (claim C26): **TEST-TIME thinking (on a model never trained to reason about this task) does NOT breach the
   lookahead wall — it amplifies recognition, not planning.** *(Scope: leaves open whether banking successful

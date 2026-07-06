@@ -1,0 +1,3130 @@
+{
+ "rows": [
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": true,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 2,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 2,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 3,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 3,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 2,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": true,
+   "mono_cov": 4,
+   "mono_struct_greedy": true,
+   "mono_struct_cov": 4,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 1,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 1,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 1,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 1,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 1,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 1,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": true,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 1,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": true,
+   "mono_cov": 8,
+   "mono_struct_greedy": true,
+   "mono_struct_cov": 8,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 2,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 2,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": true,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": true,
+   "mono_cov": 0,
+   "mono_struct_greedy": true,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 2,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 2,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": true,
+   "mono_cov": 8,
+   "mono_struct_greedy": true,
+   "mono_struct_cov": 8,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": true,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": true,
+   "mono_cov": 3,
+   "mono_struct_greedy": true,
+   "mono_struct_cov": 3,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 2,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 2,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 1,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 1,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": true,
+    "200": true
+   }
+  },
+  {
+   "depth": 3,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  },
+  {
+   "depth": 2,
+   "mono_greedy": false,
+   "mono_cov": 0,
+   "mono_struct_greedy": false,
+   "mono_struct_cov": 0,
+   "oracle_skelfill": true,
+   "rand_skelfill": {
+    "8": false,
+    "50": false,
+    "200": false
+   }
+  }
+ ],
+ "k": 8,
+ "randR": [
+  8,
+  50,
+  200
+ ]
+}

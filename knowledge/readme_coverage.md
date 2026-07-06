@@ -105,6 +105,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_sketch_coverage_shift_probe` | [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md) | [report](../experiments/qwen35_4b_sketch_coverage_shift_probe/reports/qwen35_4b_sketch_coverage_shift_probe_report.md) |
 | `qwen35_4b_static_bridge_ceiling_breaker` | [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md) | [report](../experiments/qwen35_4b_static_bridge_ceiling_breaker/reports/qwen35_4b_static_bridge_ceiling_breaker_report.md) |
 | `qwen35_4b_strategy_token_diversity_lora` | [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md) | [report](../experiments/qwen35_4b_strategy_token_diversity_lora/reports/final_report.md) |
+| `qwen35_4b_structure_or_values` | [README](../experiments/qwen35_4b_structure_or_values/README.md) | [report](../experiments/qwen35_4b_structure_or_values/reports/report.md) |
 | `qwen35_4b_substrate_coverage_ladder` | [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md) | [report](../experiments/qwen35_4b_substrate_coverage_ladder/reports/final_report.md) |
 | `qwen35_4b_thinking_budget_controller` | [README](../experiments/qwen35_4b_thinking_budget_controller/README.md) | [report](../experiments/qwen35_4b_thinking_budget_controller/reports/report.md) |
 | `qwen35_4b_thinking_budget_scaling` | [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md) | [report](../experiments/qwen35_4b_thinking_budget_scaling/reports/report.md) |

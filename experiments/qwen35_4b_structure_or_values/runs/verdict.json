@@ -1,0 +1,31 @@
+{
+ "by_depth": {
+  "2": {
+   "n": 120,
+   "mono_greedy": 0.033,
+   "mono_cov": 0.092,
+   "struct_cov": 0.108,
+   "value_tax": 0.017,
+   "oracle_skelfill": 1.0,
+   "random_skelfill": {
+    "8": 0.033,
+    "50": 0.225,
+    "200": 0.6
+   }
+  },
+  "3": {
+   "n": 120,
+   "mono_greedy": 0.008,
+   "mono_cov": 0.017,
+   "struct_cov": 0.017,
+   "value_tax": 0.0,
+   "oracle_skelfill": 1.0,
+   "random_skelfill": {
+    "8": 0.0,
+    "50": 0.042,
+    "200": 0.108
+   }
+  }
+ },
+ "verdict": "The depth-3 wall is STRUCTURE, not values. The model's STRUCTURE-coverage (right op-type sequence, ANY param) 0.017 = its concrete coverage 0.017 (value tax +0.000): its depth-3 failures are WRONG-SKELETON, not right-skeleton-wrong-param. Meanwhile oracle-skeletonfill=1.000 (values are TRIVIALLY searchable once the op-type structure is known) and random-skeletonfill is low (R200=0.108: the DSL is NOT value-fungible, so structure genuinely matters). So the compositional wall is a STRUCTURE-PROPOSAL problem; once structure is known values are free (oracle 1.0; C31: param surface-readable). This is why tool-enumerated structure seeds (C22) and banking (installs structure) were necessary. (Also: op-seq GENERATION is 0.00 even at depth-1 -- the model cannot emit op-sequences, a format failure separate from structural knowledge.)"
+}
