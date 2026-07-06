@@ -42798,6 +42798,78 @@
      "note": "2x2 {base,banked_1280} x {no-think,think} on per-step next-op ranking (channel-matched think->RANK), n=40 true-depth-3 held-out. RECOGNITION (step-3, goal 1 op away): the two levers STACK almost EXACTLY additively -- 0.275 -> +banking 0.525 -> +thinking 0.850 = additive prediction, interaction ~0.00. PLANNING (step-1, goal 3 ops away, the clean test): banking lifts (0.025->0.175) but test-time thinking adds ~0 to base OR banked -- NO stacking (banking owns the planning axis). CRITICAL SCOPE: the banked model was trained NO-THINK, so 'test-time thinking adds no planning' is about test-time thinking on a model never trained to reason about this task -- NOT that thinking is useless for planning. This is a BASELINE motivating the bank-the-thoughts experiment (SFT on prompt->reasoning-trace->code)."
     }
    ]
+  },
+  "qwen35_4b_bank_the_thoughts": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Banking correct decomposition PLANS beats banking ANSWERS (and wrong plans HURT)",
+     "categories": [
+      "base",
+      "A = answers (no-think)",
+      "T = plans (think)",
+      "T_corrupt = wrong plans (think)",
+      "T = plans (no-think)"
+     ],
+     "series": [
+      {
+       "label": "coverage@16 (multi-sampling)",
+       "values": [
+        0.0,
+        0.2,
+        0.325,
+        0.113,
+        0.013
+       ]
+      },
+      {
+       "label": "greedy@1 (deployable single-shot)",
+       "values": [
+        0.0,
+        0.025,
+        0.05,
+        0.013,
+        0.013
+       ]
+      }
+     ],
+     "y_label": "depth-3 solve rate (frozen held-out, n=80)",
+     "y_format": "percent01",
+     "note": "Does training on the REASONING install more usable depth-3 than training on the ANSWER? Three fresh QLoRA from base on MATCHED data (identical prompt+code; only the trace differs): A={prompt->code}, T={prompt->correct decomposition plan->code}, T_corrupt={same code, MISMATCHED plan}. Banking the PLAN beats banking the ANSWER and stacks with multi-sampling: T coverage@16 0.325 vs A 0.200 (greedy@1 0.050 vs 0.025). CONTENT-CAUSAL: T_corrupt (same code + same think channel but WRONG plan) collapses to 0.113 -- BELOW A -- so it's the plan CONTENT, not the think-format or extra test-compute; teaching wrong reasoning actively HURTS. TEST-TIME CHANNEL: T deployed no-think = 0.013 (~broken) -- banking plans installs a reason-then-solve skill that needs thinking to cash out. This RESOLVES C26/C27: test-time thinking on a NO-THINK-trained model added nothing, but once the reasoning is BANKED, thinking helps a lot. Phase 1 uses SYNTHETIC plans; Phase 2 (the model's own rejection-sampled thoughts) is the follow-up."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Step-1 next-op ranking (partial): banking answers lifts ranking; T needs thinking",
+     "categories": [
+      "base",
+      "A = answers",
+      "T = plans"
+     ],
+     "series": [
+      {
+       "label": "step-1 no-think top-1",
+       "values": [
+        0.017,
+        0.1,
+        0.0
+       ]
+      },
+      {
+       "label": "step-1 think(2048) top-1",
+       "values": [
+        0.1,
+        0.117,
+        0.0
+       ]
+      }
+     ],
+     "y_label": "step-1 next-op top-1 (chance 0.031)",
+     "y_format": "percent01",
+     "note": "Rationalization-robust primary (only genuine lookahead lifts step-1). A=answers lifts step-1 no-think ranking to 0.100 (replicating C25: banking improves lookahead-distance next-op ranking). T=plans has step-1 no-think 0.000 (it needs to generate its plan to work). NOTE: T's step-1-THINK ranking eval did not complete this session -- the trained-to-plan model generates degenerate long thinking, making the per-node ranking eval impractically slow (shown as 0). So whether banking plans installs step-1 LOOKAHEAD specifically (vs coverage-via-reasoning) remains OPEN."
+    }
+   ]
   }
  }
 }

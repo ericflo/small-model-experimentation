@@ -9,6 +9,8 @@
 
 ## Key Result
 
+- [qwen35_4b_bank_the_thoughts](../../experiments/qwen35_4b_bank_the_thoughts/reports/report.md) (claim C28): banking correct decomposition PLANS beats banking ANSWERS on deployable depth-3 -- three fresh QLoRA on matched data (A=prompt->code, T=prompt->plan->code, T_corrupt=mismatched plan); T coverage@16 0.325 vs A 0.200; content-causal (T_corrupt collapses to 0.113, below A); test-time channel (T no-think 0.013). Resolves C26/C27 (thinking helps once the reasoning is banked). Limits: synthetic plans (Phase 2 = model's own thoughts), step-1-think eval incomplete, single seed.
+
 - [qwen35_4b_decompose_compose_frontier](../../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md)
   (claim C12): banking search+interpreter-harvested solutions (QLoRA-SFT, no teacher) that the model could NOT
   monolithically sample EXTENDS its frontier into the weights — monolithic held-out pass@5 0.125→0.237

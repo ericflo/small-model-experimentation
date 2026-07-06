@@ -1,0 +1,41 @@
+{
+ "deploy": {
+  "base_nt": {
+   "cov16": 0.0,
+   "greedy": 0.0
+  },
+  "A_nt": {
+   "cov16": 0.2,
+   "greedy": 0.025
+  },
+  "T_th": {
+   "cov16": 0.325,
+   "greedy": 0.05
+  },
+  "Tcorrupt_th": {
+   "cov16": 0.113,
+   "greedy": 0.013
+  },
+  "T_nt": {
+   "cov16": 0.013,
+   "greedy": 0.013
+  }
+ },
+ "T_beats_A_greedy": false,
+ "T_beats_A_cov16": true,
+ "content_causal_greedy(T vs Tcorrupt)": 0.038,
+ "step1": {
+  "base": {
+   "0": 0.016666666666666666,
+   "2048": 0.1
+  },
+  "A": {
+   "0": 0.1,
+   "2048": 0.11666666666666667
+  },
+  "T": {
+   "0": 0.0
+  }
+ },
+ "T_installs_planning(step1 think > A)": false
+}

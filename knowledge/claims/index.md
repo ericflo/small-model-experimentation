@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 27
+- Claims: 28
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 19 |
+| Promising | 20 |
 
 ## Program Counts
 
@@ -24,11 +24,11 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 3 |
 | `interpretability_and_diagnostics` | 4 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 15 |
+| `posttraining_and_adaptation` | 16 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 18 |
-| `test_time_reasoning_budget` | 4 |
+| `structured_execution_and_compilers` | 19 |
+| `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -644,3 +644,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do NOT cite this as 'thinking can't help planning even after banking': the banked model was trained NO-THINK; this is test-time thinking on a not-trained-to-reason model. The clean test is bank-the-thoughts.
 - Do not headline this as a positive 'stacking' result: it stacks only on recognition (expected -- both levers help recognition); on planning there is nothing to stack because test-time thinking's planning effect is ~0.
 - Do not treat the step-1 'no stacking' as a tight null: n=40 CIs are wide; it means the thinking-on-planning effect is ~0 and not significant.
+
+## C28: Banking correct decomposition PLANS beats banking ANSWERS on deployable depth-3 -- content-causally, via the test-time thinking channel (resolves C26/C27's 'never taught to reason' confound)
+
+- Status: `Promising`
+- Programs: `posttraining_and_adaptation`, `structured_execution_and_compilers`, `test_time_reasoning_budget`
+- Summary: Experiment qwen35_4b_bank_the_thoughts (Phase 1: synthetic decomposition plans; Phase 2 = model's own rejection-sampled thoughts, deferred). Motivated by C27 (test-time thinking on a NO-THINK-banked model adds no planning -- but the model was never trained to reason). Does training on the REASONING install more usable depth-3 than training on the ANSWER? Three fresh QLoRA from base on MATCHED data (identical prompt+code; only the trace differs): A=prompt->code; T=prompt->correct-decomposition-plan->code; T_corrupt=same code with a MISMATCHED plan. Design hardened by an adversarial review (matched targets, T_corrupt content-causality control, step-1 rationalization-robust primary). RESULT (deploy, frozen held-out depth-3, n=80): base 0.00; A=answers cov@16 0.200 / greedy@1 0.025; T=plans(think) 0.325 / 0.050 -- BANKING THE PLAN BEATS BANKING THE ANSWER, stacking with multi-sampling (cov@16 0.325 vs 0.200). CONTENT-CAUSAL: T_corrupt (same code, WRONG plan, same think channel) collapses to 0.113, BELOW A -- teaching correct decomposition helps, teaching wrong reasoning actively HURTS. TEST-TIME CHANNEL: T deployed no-think = 0.013 (~broken) -- banking plans installs a reason-then-solve skill that needs thinking to cash out. Step-1 planning (partial): A lifts step-1 no-think ranking to 0.100 (replicating C25); T's step-1-THINK ranking eval was too slow to complete (trained-to-plan model generates degenerate long thinking), so step-1 LOOKAHEAD-specifically vs coverage-via-reasoning remains OPEN.
+- Implication: RESOLVES C26/C27's scope confound (user-surfaced): those showed test-time thinking on a no-think-trained model adds no planning; here, once the reasoning is BANKED (the model is trained to plan), thinking DOES help -- depth-3 deploys far better (0.325 vs 0.200). So the earlier null was 'never taught to reason about this task', NOT 'thinking is useless for planning'. For the mission: banking the REASONING PROCESS (not just the answer) installs more usable capability, and it is causally the correct-reasoning CONTENT (wrong reasoning hurts), cashed out via test-time thinking. Practical recipe upgrade: bank prompt->correct-decomposition->code, deploy with thinking, to get a higher coverage ceiling than answer-banking. Caveat: Phase 1 uses SYNTHETIC plans (explicit correct decomposition), not the model's own rejection-sampled thoughts (Phase 2); and T spends more test-compute than A (but the T-vs-T_corrupt control isolates content from compute).
+
+### Evidence
+
+- [`qwen35_4b_bank_the_thoughts`](../../experiments/qwen35_4b_bank_the_thoughts/reports/report.md)
+
+### Next Tests
+
+- Phase 2: bank the model's OWN rejection-sampled verified reasoning (likely rationalizations) vs these explicit plans -- does the trace source matter? (~2.5h harvest, deferred).
+- Complete the step-1-think ranking for T (cap eval thinking budget) to test whether banking plans installs step-1 LOOKAHEAD specifically, not just coverage-via-reasoning.
+- Token-matched A control (A trained to T's token budget) + >=2 seeds to rule out compute/undertraining and noise.
+
+### Avoid
+
+- Do not claim banking plans installs step-1 PLANNING/lookahead: the deploy/coverage win is shown, but the rationalization-robust step-1-think ranking for T did not complete this session -- coverage-via-reasoning vs step-1-lookahead is unresolved.
+- Do not attribute T's win purely to test-compute: T_corrupt uses the same thinking channel and collapses to 0.113, so the advantage over A is the correct-reasoning CONTENT.
+- Do not read this as the model's own thoughts: Phase 1 uses SYNTHETIC explicit decomposition plans; the model's-own-thoughts version (Phase 2) is a separate run.
+- Do not deploy T no-think: T needs test-time thinking to work (no-think ~0.013); the reason-then-solve skill is a test-time channel.

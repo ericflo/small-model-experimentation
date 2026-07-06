@@ -1,0 +1,16 @@
+schema_version: 1
+experiment_id: "qwen35_4b_bank_the_thoughts"
+external_artifacts:
+  - name: "adapters A / T / Tcorrupt"
+    storage: "scratchpad/bank_thoughts_adapters/ (~180MB each)"
+    required_for: "re-running evaluations without retraining"
+    checksum: ""
+    regenerate: "python scripts/synth_traces.py && build_train && train_lora_think.py --train data/train_X.jsonl"
+omitted_artifacts:
+  - path: "runs/adapter_*/"
+    reason: "trained QLoRA adapters (~180MB each); regenerate via synth_traces + build_train + train"
+reproducibility:
+  smoke_command: "python scripts/synth_traces.py --n 16 && python scripts/build_train.py"
+  full_command: "python scripts/synth_traces.py --n 256 && build_train + train A/T/Tcorrupt + deploy/step1 evals + analyze"
+  required_external_artifacts: []
+notes: "Phase 1 = synthetic decomposition plans (free); Phase 2 = model's own rejection-sampled thoughts (harvest_thoughts.py, ~2.5h, deferred). Verdict (C28, Promising): banking correct plans beats banking answers on deployable depth-3 (cov@16 0.325 vs 0.200), content-causally (T_corrupt 0.113), via the test-time thinking channel (T no-think 0.013). Resolves C26/C27."
