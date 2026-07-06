@@ -221,6 +221,45 @@ a.chip:hover { text-decoration: none; border-color: var(--baseline); color: var(
 .card-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
 .clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 2px 0 0; font-size: 13px; }
 
+/* ------------------------------------------------ practitioner brief (top) */
+
+.verdict-banner { display: flex; align-items: center; gap: 10px; margin: 4px 0 16px; }
+.verdict-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--slot-0); flex: none; }
+.verdict-banner.tone-positive .verdict-dot { background: var(--good); }
+.verdict-banner.tone-negative .verdict-dot { background: var(--critical); }
+.verdict-banner.tone-mixed .verdict-dot { background: var(--slot-3); }
+.verdict-banner.tone-neutral .verdict-dot { background: var(--slot-0); }
+.verdict-tag { font-size: 22px; font-weight: 650; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); }
+
+.practitioner-brief {
+  background: var(--surface); border: 1px solid var(--grid); border-left: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 20px 24px; margin: 0 0 30px; box-shadow: var(--shadow);
+}
+.practitioner-brief .brief-row { padding: 14px 0; border-top: 1px solid var(--grid); }
+.practitioner-brief .brief-row:first-child { padding-top: 2px; border-top: 0; }
+.practitioner-brief .brief-row .kicker { margin: 0 0 4px; }
+.practitioner-brief .brief-row p:last-child { margin: 0; font-size: 16.5px; line-height: 1.6; color: var(--ink); }
+.practitioner-brief .brief-kpis { margin: 16px 0 2px; gap: 10px; }
+.practitioner-brief .brief-kpis .stat-tile { flex: 1 1 130px; min-width: 130px; padding: 11px 13px; }
+.practitioner-brief .brief-kpis .stat-value { font-size: 21px; }
+
+/* chart plain framing */
+.viz-read {
+  margin: 2px 0 12px; padding: 10px 14px; border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--grid));
+}
+.viz-read .kicker { margin: 0 0 3px; color: var(--accent-ink); }
+.viz-read p:last-child { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink-2); }
+.viz-takeaway { margin: 10px 0 2px; font-size: 14.5px; color: var(--ink); }
+.viz-takeaway span { font-weight: 650; }
+.viz-technical { margin: 8px 0 0; }
+.viz-technical > summary { cursor: pointer; font-size: 12px; color: var(--muted); }
+.viz-technical p { margin: 6px 0 0; font-size: 12.5px; line-height: 1.5; }
+
+.finding-callout.demoted { border-left-color: var(--baseline); box-shadow: none; }
+.finding-callout.demoted .finding-label { color: var(--muted); }
+
 /* ------------------------------------------------------------ native charts */
 
 .viz-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }

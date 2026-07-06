@@ -10,6 +10,13 @@
 
 A new program should be broad enough to host multiple future experiments and specific enough that progress can be recognized.
 
+## Keep The Site Current
+
+After adding experiments, run `make site-content` to auto-fill run dates from git
+and report which experiments still need result charts or a plain-language brief,
+then run the enrichment passes in `scripts/enrichment/`. Full guide:
+[`docs/site_maintenance.md`](docs/site_maintenance.md).
+
 ## Add An Experiment
 
 1. Pick a research program or create a new one.

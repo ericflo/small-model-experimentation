@@ -169,6 +169,14 @@
    ],
    "caveat": "metadata.yaml generated_on 2026-07-01 is sweep"
   },
+  "qwen35_4b_activation_steering": {
+   "start": "2026-07-03",
+   "end": "2026-07-03",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_active_counterexample_trace_selection": {
    "start": "2026-06-24",
    "end": "2026-06-24",
@@ -208,6 +216,22 @@
    ],
    "caveat": "scripts/mine_model_counterexamples.py:184 default seed 20260624 is a code default copied from an earlier sibling, not a run date; no ISO dates or epochs anywhere; run_logs/*.log are console logs with tqdm timers only"
   },
+  "qwen35_4b_bank_the_thoughts": {
+   "start": "2026-07-05",
+   "end": "2026-07-05",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_banking_thinking_stack": {
+   "start": "2026-07-05",
+   "end": "2026-07-05",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_bucket_belief_probe_ranker": {
    "start": "2026-06-24",
    "end": "2026-06-24",
@@ -245,12 +269,44 @@
     "configs/experiment.json:3 \"date\": \"2026-06-26\""
    ]
   },
+  "qwen35_4b_context_composition": {
+   "start": "2026-07-02",
+   "end": "2026-07-02",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_counterexample_directed_dsl": {
    "start": "2026-06-22",
    "end": "2026-06-22",
    "confidence": "medium",
    "sources": [
     "logs/experiment_log.md: single dated heading '## 2026-06-22' (run_logs/*.log contain no timestamps)"
+   ]
+  },
+  "qwen35_4b_coverage_banking": {
+   "start": "2026-07-03",
+   "end": "2026-07-03",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_coverage_vs_selection": {
+   "start": "2026-07-03",
+   "end": "2026-07-03",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_crossfamily_laws": {
+   "start": "2026-07-02",
+   "end": "2026-07-02",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_decompose_compose_frontier": {
@@ -271,6 +327,22 @@
     "qwen35_4b_deployable_information_ceiling_sweep/configs/experiment.json: \"date_utc\": \"2026-06-24\" (the date_utc key is validated against experiment_log dates in 5 sibling dirs)"
    ],
    "caveat": "logs/experiment_log.md exists but carries no dates; run_logs/*.log have no timestamps; reports/eval/*.json epoch-looking numbers are float-metric digit substrings, not timestamps"
+  },
+  "qwen35_4b_depth3_dose_response": {
+   "start": "2026-07-04",
+   "end": "2026-07-04",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_depth_scaling_controls": {
+   "start": "2026-07-05",
+   "end": "2026-07-05",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
   },
   "qwen35_4b_depth_wall_anatomy": {
    "start": "2026-07-02",
@@ -451,6 +523,22 @@
    "confidence": "high",
    "sources": [
     "logs/experiment_log.md:'## 2026-06-24' dated heading"
+   ]
+  },
+  "qwen35_4b_latent_composition_probe": {
+   "start": "2026-07-03",
+   "end": "2026-07-03",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_latent_decomposition": {
+   "start": "2026-07-05",
+   "end": "2026-07-05",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_learned_active_trace_policy": {
@@ -700,6 +788,14 @@
    ],
    "caveat": "experiment_log.md is undated; runs/probe_results.json has no time keys; metadata.yaml generated_on 2026-07-01 is sweep. Only later commit touching dir (c928ffa 07-01) is catalog/metadata churn."
   },
+  "qwen35_4b_thinking_lookahead": {
+   "start": "2026-07-05",
+   "end": "2026-07-05",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_thinking_separability_probe": {
    "start": "2026-06-29",
    "end": "2026-06-30",
@@ -707,6 +803,14 @@
    "sources": [
     "runs/extract.log:2 HF dataset cache 'last modified on Mon Jun 29 12:07:21 2026' (lower bound; extract took 6541s)",
     "git commit 531fa77 2026-06-30 10:39:41 -0700 'Add thinking separability probe' (upper bound; dir first appears post-import)"
+   ]
+  },
+  "qwen35_4b_tool_seeded_banking": {
+   "start": "2026-07-04",
+   "end": "2026-07-04",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_tool_state_policy_lora": {
@@ -794,6 +898,14 @@
     "experiment_log.md/reports: no internal dates; offline reuse of an existing candidate pool, consistent with a single-day 06-30 run"
    ],
    "caveat": "metadata.yaml generated_on 2026-07-01 is sweep"
+  },
+  "qwen35_4b_wall_climbing": {
+   "start": "2026-07-03",
+   "end": "2026-07-03",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
   },
   "qwen_action_conditioned_vm_echo_policy_iteration": {
    "start": "2026-06-24",

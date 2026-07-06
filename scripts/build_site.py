@@ -984,6 +984,20 @@ def load_viz() -> dict[str, list[dict]]:
     return out
 
 
+def load_briefs() -> dict[str, dict]:
+    """Plain-language practitioner briefs (see knowledge/experiment_brief.json).
+
+    Page-level fields render the verdict banner + brief card; each brief's
+    `charts` list carries per-chart plain framing keyed by chart index. Absent
+    or partial entries degrade gracefully — the page just shows less."""
+    path = KNOWLEDGE / "experiment_brief.json"
+    if not path.exists():
+        return {}
+    payload = read_json(path)
+    entries = payload.get("experiments", {}) if isinstance(payload, dict) else {}
+    return {str(key): value for key, value in entries.items() if isinstance(value, dict)}
+
+
 def _valid_spec(spec: object) -> bool:
     if not isinstance(spec, dict) or spec.get("kind") not in {"bar", "line"}:
         return False
@@ -1053,9 +1067,12 @@ def _spec_values(spec: dict) -> list[float]:
     return out
 
 
-def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
+def chart_svg(spec: dict, *, mini: bool = False, uid: str = "", plain_axes: bool = False) -> str:
     """Render one chart spec as a clean SVG (single scale, palette slots,
-    thin bars, light gridlines). Interactive polish rides on data attrs."""
+    thin bars, light gridlines). Interactive polish rides on data attrs.
+
+    plain_axes suppresses the jargon axis-title line — used when a
+    practitioner "how to read" panel already translates the axes."""
     values = _spec_values(spec)
     lo = min(0.0, min(values))
     hi = max(0.0, max(values))
@@ -1074,7 +1091,8 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
     if is_line and not mini:  # room for direct series labels at line ends
         longest = max(len(str(entry["label"])[:20]) for entry in spec["series"])
         m_right = max(70, min(140, longest * 6 + 16))
-    m_top = 18 if mini else (30 if spec.get("y_label") else 16)
+    show_axis_title = bool(spec.get("y_label")) and not plain_axes
+    m_top = 18 if mini else (30 if show_axis_title else 16)
     m_bottom = 22 if mini else 36
     plot_w = width - m_left - m_right
     height = plot_h + m_top + m_bottom
@@ -1083,7 +1101,7 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
         return m_top + plot_h - (v - lo) / (hi - lo) * plot_h
 
     parts: list[str] = []
-    if not mini and spec.get("y_label"):
+    if not mini and show_axis_title:
         parts.append(
             f'<text x="4" y="13" font-size="11.5" fill="var(--muted)">{esc(str(spec["y_label"]))}'
             + (f' <tspan fill="var(--baseline)">·</tspan> {esc(str(spec["x_label"]))} →' if spec["kind"] == "line" and spec.get("x_label") else "")
@@ -1199,9 +1217,16 @@ def chart_svg(spec: dict, *, mini: bool = False, uid: str = "") -> str:
     )
 
 
-def chart_figure(spec: dict, exp: dict, index: int) -> str:
-    """Full chart block: caption, svg, legend, data-table twin, source."""
-    svg = chart_svg(spec, mini=False, uid=f'{exp["id"]}-{index}')
+def chart_figure(spec: dict, exp: dict, index: int, plain: dict | None = None) -> str:
+    """Full chart block: caption, svg, legend, data-table twin, source.
+
+    When `plain` (chart_plain_title/chart_read/chart_takeaway) is present, the
+    chart is framed for a practitioner — plain headline, a "how to read" helper
+    before the chart, a bold takeaway after — and the jargon title+note are
+    demoted to a muted technical line."""
+    plain = plain or {}
+    has_plain = bool(str(plain.get("chart_read", "")).strip() or str(plain.get("chart_plain_title", "")).strip())
+    svg = chart_svg(spec, mini=False, uid=f'{exp["id"]}-{index}', plain_axes=has_plain)
     legend = ""
     if spec["kind"] == "bar" and len(spec["series"]) > 1:  # lines carry direct end labels
         chips = "".join(
@@ -1242,7 +1267,32 @@ def chart_figure(spec: dict, exp: dict, index: int) -> str:
         src_html = f'<a href="{GITHUB}/blob/main/experiments/{esc(exp["id"])}/{esc(source)}"><code>{esc(source)}</code></a>'
     else:
         src_html = esc(source)
-    note = f' <span class="muted">{esc(spec.get("note", ""))}</span>' if spec.get("note") else ""
+    plain_title = str(plain.get("chart_plain_title", "")).strip()
+    read = str(plain.get("chart_read", "")).strip()
+    takeaway = str(plain.get("chart_takeaway", "")).strip()
+    tech_note = str(spec.get("note", "")).strip()
+
+    if plain_title or read or takeaway:
+        headline = plain_title or str(spec.get("title", ""))
+        caption = f'<figcaption><strong>{esc(headline)}</strong></figcaption>'
+        read_html = (
+            f'<div class="viz-read"><p class="kicker">How to read</p><p>{esc(read)}</p></div>' if read else ""
+        )
+        take_html = (
+            f'<p class="viz-takeaway"><span>Takeaway →</span> {esc(takeaway)}</p>' if takeaway else ""
+        )
+        tech_bits = [b for b in (str(spec.get("title", "")).strip() if plain_title else "", tech_note) if b]
+        tech_html = (
+            f'<details class="viz-technical"><summary>Technical framing</summary><p class="muted">{esc(" — ".join(tech_bits))}</p></details>'
+            if tech_bits
+            else ""
+        )
+        return (
+            f'<figure class="viz-chart">{caption}{read_html}{svg}{take_html}{legend}{table}'
+            f'<p class="viz-src muted">Numbers from {src_html}</p>{tech_html}</figure>'
+        )
+
+    note = f' <span class="muted">{esc(tech_note)}</span>' if tech_note else ""
     return (
         f'<figure class="viz-chart"><figcaption><strong>{esc(spec.get("title", ""))}</strong>{note}</figcaption>'
         f"{svg}{legend}{table}"
@@ -1316,6 +1366,7 @@ class SiteBuilder:
         self.program_ids = {str(p["id"]) for p in self.programs}
         self.claim_anchor_ids = {slugify(str(claim.get("id"))) for claim in self.claims}
         self.viz = load_viz()
+        self.briefs = load_briefs()
         self.dropped_notes: list[str] = []
 
     # ------------------------------------------------------------- utilities
@@ -1335,6 +1386,56 @@ class SiteBuilder:
         """Escape plain text, then link claim ids and experiment slugs it mentions."""
         out = linkify_claims(esc(text), prefix, self.claim_anchor_ids)
         return linkify_experiments(out, prefix, self.roster)
+
+    def practitioner_brief(self, exp: dict) -> str:
+        """Verdict banner + plain-language brief card for the top of the page.
+
+        Plain fields are escaped only (never claim/experiment linkified — the
+        brief is deliberately jargon-free per the content ban-list)."""
+        brief = self.briefs.get(exp["id"])
+        if not brief:
+            return ""
+        tone = str(brief.get("verdict_tone", "neutral")).strip() or "neutral"
+        if tone not in {"positive", "negative", "mixed", "neutral"}:
+            tone = "neutral"
+        tag = str(brief.get("verdict_tag", "")).strip()
+        banner = (
+            f'<div class="verdict-banner tone-{tone}"><span class="verdict-dot" aria-hidden="true"></span>'
+            f'<span class="verdict-tag">{esc(tag)}</span></div>'
+            if tag
+            else ""
+        )
+        rows = []
+        for label, field in (
+            ("The one idea you need", "concept_primer"),
+            ("The question", "plain_question"),
+            ("What we found", "plain_answer"),
+            ("Why it matters", "why_it_matters"),
+        ):
+            value = str(brief.get(field, "")).strip()
+            if value:
+                rows.append(f'<div class="brief-row"><p class="kicker">{label}</p><p>{esc(value)}</p></div>')
+        kpis = ""
+        numbers = brief.get("key_numbers", [])
+        if isinstance(numbers, list):
+            tiles = "".join(
+                stat_tile(str(n.get("label", "")), str(n.get("value", "")), str(n.get("sub", "")))
+                for n in numbers[:4]
+                if isinstance(n, dict) and n.get("value")
+            )
+            if tiles:
+                kpis = f'<div class="brief-kpis stat-row">{tiles}</div>'
+        card = f'<div class="practitioner-brief">{"".join(rows)}{kpis}</div>' if (rows or kpis) else ""
+        return banner + card
+
+    def brief_chart_plain(self, exp_id: str) -> dict[int, dict]:
+        brief = self.briefs.get(exp_id)
+        out: dict[int, dict] = {}
+        if brief and isinstance(brief.get("charts"), list):
+            for chart in brief["charts"]:
+                if isinstance(chart, dict) and isinstance(chart.get("index"), int):
+                    out[chart["index"]] = chart
+        return out
 
     def headline_chart(self, exp_id: str) -> str:
         specs = self.viz.get(exp_id, [])
@@ -1379,7 +1480,11 @@ class SiteBuilder:
 
         viz_specs = self.viz.get(exp_id, [])
         if viz_specs:
-            blocks = "".join(chart_figure(spec, exp, index) for index, spec in enumerate(viz_specs))
+            plain_charts = self.brief_chart_plain(exp_id)
+            blocks = "".join(
+                chart_figure(spec, exp, index, plain=plain_charts.get(index))
+                for index, spec in enumerate(viz_specs)
+            )
             add_section(
                 "charts",
                 f'Results at a glance <span class="count">{len(viz_specs)}</span>',
@@ -1552,9 +1657,27 @@ class SiteBuilder:
         mobile_toc = (
             f'<details class="mobile-toc"><summary>On this page</summary>{toc_list}</details>' if side_toc else ""
         )
+        brief_block = self.practitioner_brief(exp)
+        # With a plain brief, it becomes the headline; the jargon finding callout
+        # is demoted and slots in just below the charts, above the full documents.
+        top_block = brief_block or finding_block
+        demoted_finding = ""
+        if brief_block and finding_block:
+            demoted_finding = finding_block.replace(
+                'class="finding-callout"', 'class="finding-callout demoted"', 1
+            )
+        body_parts: list[str] = []
+        placed_finding = False
+        for anchor, body in sections:
+            body_parts.append(body)
+            if anchor == "charts" and demoted_finding:
+                body_parts.append(demoted_finding)
+                placed_finding = True
+        if demoted_finding and not placed_finding:
+            body_parts.insert(0, demoted_finding)
         content = (
-            f'<div class="detail-layout"><div class="detail-main">{header}{finding_block}{mobile_toc}'
-            + "".join(body for _, body in sections)
+            f'<div class="detail-layout"><div class="detail-main">{header}{top_block}{mobile_toc}'
+            + "".join(body_parts)
             + (f'<div class="pager-row">{"".join(pager)}</div>' if pager else "")
             + "</div>"
             + f'<aside class="detail-side"><nav class="side-toc" aria-label="On this page"><p>On this page</p>{toc_list}</nav></aside></div>'

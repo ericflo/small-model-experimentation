@@ -35,6 +35,10 @@ jobs:
       - name: Build site
         run: make site-check
 
+      - name: Report site-content coverage (informational)
+        if: always()
+        run: python3 scripts/site_content_status.py || true
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:

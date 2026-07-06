@@ -45,6 +45,7 @@ EPOCH_KEY_RE = re.compile(r'"(?:created_unix|start_unix|end_unix|timestamp)"\s*:
 TEXT_SUFFIXES = {".md", ".txt", ".log", ".json", ".jsonl", ".csv", ".yaml", ".yml", ".py", ".sh", ".toml", ".cfg"}
 SKIP_NAMES = {"metadata.yaml"}  # generated_on there is the catalog sweep, not a run date
 MAX_TEXT_BYTES = 30_000_000
+IMPORT_DATE = "2026-06-28"  # the bulk corpus-import commit; git dates before/on it are collapsed and untrustworthy
 
 
 def parse_epoch(value: str) -> str | None:
@@ -164,10 +165,102 @@ def suggest_entry(evidence: Evidence) -> dict[str, str] | None:
     }
 
 
+def git_run_window(exp_id: str) -> tuple[str | None, str | None]:
+    """First/last commit dates that touched a NON-metadata file in the dir.
+
+    Excludes commits that only touch metadata.yaml, so the periodic catalog
+    regeneration sweep (which restamps every experiment's metadata) cannot
+    masquerade as a run date.
+    """
+    rel = f"experiments/{exp_id}"
+    out = subprocess.run(
+        ["git", "log", "--format=D%ad", "--date=short", "--name-only", "--", rel],
+        cwd=ROOT, capture_output=True, text=True,
+    ).stdout
+    dates: list[str] = []
+    current: str | None = None
+    touched_real = False
+    for line in out.splitlines():
+        if re.match(r"D\d{4}-\d{2}-\d{2}$", line):
+            if current and touched_real:
+                dates.append(current)
+            current = line[1:]
+            touched_real = False
+        elif line.startswith(rel + "/") and not line.endswith("/metadata.yaml"):
+            touched_real = True
+    if current and touched_real:
+        dates.append(current)
+    if not dates:
+        return None, None
+    return min(dates), max(dates)
+
+
+def auto_entry(exp_id: str, evidence: Evidence) -> dict | None:
+    """Deterministic dates entry for a POST-IMPORT experiment (git-reliable).
+
+    Post-import dirs are committed in dedicated same-day commits, so their git
+    window is the real run window. Prefer in-dir precise records when present;
+    otherwise use the metadata-sweep-filtered git window. Returns None for
+    imported/undatable dirs (those need record extraction, not git)."""
+    first, last = git_run_window(exp_id)
+    if first is None or first <= IMPORT_DATE:
+        return None  # imported (git collapsed) or no real commits — not safe to auto-fill
+    if evidence.precise:
+        days = sorted(d for d in evidence.precise if d >= IMPORT_DATE) or sorted(evidence.precise)
+        start, end = days[0], days[-1]
+        # widen to cover the git window too, since records may capture only one day
+        start, end = min(start, first), max(end, last)
+        source = "dated records in the dir + git history (post-import)"
+    else:
+        start, end = first, last
+        source = "git history (post-import; metadata-only sweeps excluded)"
+    return {
+        "start": start,
+        "end": end,
+        "confidence": "high",
+        "sources": [f"{source} — auto-filled by scripts/extract_experiment_dates.py --apply"],
+    }
+
+
+def apply_autofill() -> tuple[int, list[str]]:
+    """Fill missing dates entries for post-import experiments; return (added, still_missing)."""
+    payload: dict = {"experiments": {}}
+    if DATES_PATH.exists():
+        loaded = json.loads(DATES_PATH.read_text(encoding="utf-8"))
+        if isinstance(loaded, dict):
+            payload = loaded
+    experiments = payload.setdefault("experiments", {})
+    added: list[str] = []
+    still_missing: list[str] = []
+    for exp_id in catalog_ids():
+        if exp_id in experiments:
+            continue
+        exp_dir = EXPERIMENTS / exp_id
+        if not exp_dir.is_dir():
+            continue
+        entry = auto_entry(exp_id, gather_evidence(exp_dir))
+        if entry:
+            experiments[exp_id] = entry
+            added.append(exp_id)
+        else:
+            still_missing.append(exp_id)
+    if added:
+        payload["experiments"] = dict(sorted(experiments.items()))
+        DATES_PATH.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    return len(added), still_missing
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--suggest", action="store_true", help="print JSON entries for dirs missing from the dates file")
+    parser.add_argument("--apply", action="store_true", help="auto-fill missing entries for post-import experiments from git history, then audit")
     args = parser.parse_args()
+
+    if args.apply:
+        added, still_missing = apply_autofill()
+        print(f"auto-filled {added} post-import experiment date entr{'y' if added == 1 else 'ies'}")
+        for exp_id in still_missing:
+            print(f"- still missing (imported or undatable, needs record extraction): {exp_id}")
 
     recorded: dict[str, dict] = {}
     if DATES_PATH.exists():
