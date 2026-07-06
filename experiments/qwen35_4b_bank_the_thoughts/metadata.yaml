@@ -22,7 +22,7 @@ top_level_dirs:
   - "scripts"
   - "src"
 file_counts:
-  json: 15
+  json: 19
   jsonl: 12
   log: 3
   md: 5
@@ -30,6 +30,6 @@ file_counts:
   py: 18
   sh: 3
   yaml: 3
-total_files: 61
-total_size_bytes: 6225410
+total_files: 65
+total_size_bytes: 6227490
 generated_on: "2026-07-06"

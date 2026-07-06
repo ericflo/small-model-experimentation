@@ -1,0 +1,20 @@
+[
+ {
+  "step": 1,
+  "budget": 0,
+  "n": 40,
+  "top1": 0.025,
+  "top6": 0.25,
+  "mean_rank": 16.85,
+  "median_rank": 15.5
+ },
+ {
+  "step": 1,
+  "budget": 768,
+  "n": 40,
+  "top1": 0.05,
+  "top6": 0.1,
+  "mean_rank": 19.775,
+  "median_rank": 24.0
+ }
+]

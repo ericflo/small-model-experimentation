@@ -81,10 +81,26 @@ own thoughts, **T_synth** = an explicit forward-decomposition plan.
   **it does not stack** — the model's own thoughts add nothing over the answer. Genuine forward *plans* do.
 - (T_selfcorrupt — mismatched model thoughts — was still running at write time; the core 3-arm result stands.)
 
+## Step-1 planning ranking (Phase-2 models, capped budget 768, n=40)
+| model | step-1 no-think | step-1 think(768) |
+|---|---|---|
+| base | 0.025 | 0.025 |
+| A_self = answers | 0.075 | 0.075 |
+| T_self = model's thoughts | 0.025 | 0.050 |
+| T_synth = explicit plan | 0.000 | 0.025 |
+
+**None of the Phase-2 models install clean step-1 lookahead** — all ≈ chance (0.031), *including* T_synth which
+deploys best (coverage 0.225). So T_synth's deployment advantage is **coverage-via-reasoning** (it learned a
+reason-then-solve procedure that reaches solutions more often when sampled), **not** installed single-
+forward-pass lookahead. Caveat: the ranking probe (rank one op given state→goal) is **off-distribution** for the
+plan-trained model — it was trained to *generate* a full plan, not rank a single op — and it structurally
+favors the answer-format models (A_self is highest at 0.075). So the step-1 probe does not cleanly measure the
+plan-trained model's planning; the valid finding is the deploy coverage. Net: banking explicit plans raises the
+deployable coverage ceiling, but does not install the step-1 lookahead the base forward pass lacks (C25/C26).
+
 ## Next
-- Finish the step-1-think ranking (cap the thinking budget for the eval); add token-matched A + a seed.
-- Try banking the model's own thoughts *filtered/compressed* to genuine plans (strip the rationalization) — is
-  it the length/rambliness or the post-hoc-ness that makes them inert?
+- Length-vs-content control (verbose *correct* plan padded to ~3000 chars): is it the rambliness or the
+  post-hoc-ness that makes the model's own thoughts inert? Add token-matched A + a seed.
 
 ## Artifact Manifest
 See `reports/artifact_manifest.yaml`. Adapters (~180MB each) moved out of repo.
