@@ -1,0 +1,18 @@
+{
+ "deploy": {
+  "p2_Aself_nt": {
+   "cov16": 0.087,
+   "greedy": 0.013
+  },
+  "p2_Tself_th": {
+   "cov16": 0.087,
+   "greedy": 0.037
+  },
+  "p2_Tsynth_th": {
+   "cov16": 0.225,
+   "greedy": 0.05
+  }
+ },
+ "Tself_beats_Aself_cov16": 0.0,
+ "Tself_vs_Tsynth_cov16": -0.138
+}

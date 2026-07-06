@@ -42868,6 +42868,37 @@
      "y_label": "step-1 next-op top-1 (chance 0.031)",
      "y_format": "percent01",
      "note": "Rationalization-robust primary (only genuine lookahead lifts step-1). A=answers lifts step-1 no-think ranking to 0.100 (replicating C25: banking improves lookahead-distance next-op ranking). T=plans has step-1 no-think 0.000 (it needs to generate its plan to work). NOTE: T's step-1-THINK ranking eval did not complete this session -- the trained-to-plan model generates degenerate long thinking, making the per-node ranking eval impractically slow (shown as 0). So whether banking plans installs step-1 LOOKAHEAD specifically (vs coverage-via-reasoning) remains OPEN."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Phase 2: the model's OWN thoughts don't help beyond answers; explicit plans do (same tasks)",
+     "categories": [
+      "A_self = answers",
+      "T_self = model's OWN thoughts",
+      "T_synth = explicit plan"
+     ],
+     "series": [
+      {
+       "label": "coverage@16 (multi-sampling)",
+       "values": [
+        0.087,
+        0.087,
+        0.225
+       ]
+      },
+      {
+       "label": "greedy@1 (deployable)",
+       "values": [
+        0.013,
+        0.037,
+        0.05
+       ]
+      }
+     ],
+     "y_label": "depth-3 solve rate (held-out, n=80)",
+     "y_format": "percent01",
+     "note": "The user's LITERAL ask: rejection-sample the banked model's OWN verified reasoning and bank it. On 101 tasks the model can solve (20% yield; model-thinking median 3071 chars -- long rambly rationalizations), matched arms with IDENTICAL canonical code differing only in the trace. RESULT: banking the model's OWN thoughts (T_self 0.087) does NOT beat banking answers (A_self 0.087); banking an EXPLICIT correct decomposition plan (T_synth 0.225) does (~2.6x). So it's the PLAN QUALITY, not reasoning-as-such and not test-compute -- T_self spends MORE thinking (3071 vs 576 chars) yet is worse. The model's own rejection-sampled 'thoughts' are post-hoc rationalizations of an answer it already knows -- inert to bank. Genuine forward PLANS install the capability; rationalizations don't."
     }
    ]
   }

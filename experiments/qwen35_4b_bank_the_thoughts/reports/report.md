@@ -59,10 +59,32 @@ step-1 *lookahead* specifically (vs coverage-via-reasoning) remains **open**.
 - Token-matched-A control (A trained to T's token budget) deferred; single seed; n=80 deploy / n=60 step-1;
   step-1-T-think incomplete.
 
+## Phase 2 (the user's literal ask): bank the model's OWN rejection-sampled thoughts
+
+Harvested 101 tasks the banked model solves with thinking (its own verified reasoning; 20% yield; **model
+thinking median 3071 chars — long rambly rationalizations**). On these *same 101 tasks* with *identical
+canonical code*, three matched arms (only the trace differs): **A_self** = answers, **T_self** = the model's
+own thoughts, **T_synth** = an explicit forward-decomposition plan.
+
+| arm (same 101 tasks, matched code) | coverage@16 | greedy@1 |
+|---|---|---|
+| A_self = answers (no-think) | 0.087 | 0.013 |
+| **T_self = model's OWN thoughts (think)** | **0.087** | 0.037 |
+| **T_synth = explicit plan (think)** | **0.225** | 0.050 |
+
+- **Banking the model's OWN reasoning does NOT beat banking answers** (T_self 0.087 = A_self 0.087 on
+  coverage). **Banking an EXPLICIT correct plan does** (T_synth 0.225, ~2.6×).
+- So it is the **plan QUALITY**, not "banking reasoning" per se, and not test-compute: T_self *spends more*
+  test-time thinking (3071-char rambles) than T_synth's 576-char plan, yet is **worse**. The model's own
+  rejection-sampled "thoughts" are post-hoc **rationalizations** of an answer it already knows — inert to bank.
+- Direct answer to the literal ask ("rejection-sample successful thoughts and bank those, see if it stacks"):
+  **it does not stack** — the model's own thoughts add nothing over the answer. Genuine forward *plans* do.
+- (T_selfcorrupt — mismatched model thoughts — was still running at write time; the core 3-arm result stands.)
+
 ## Next
-- Phase 2: bank the model's OWN rejection-sampled reasoning (rationalizations) vs these explicit plans — does
-  the source matter? (harvest is ~2.5h; deferred to a dedicated run).
-- Finish the step-1-think ranking for T (cap the thinking budget for the eval); add token-matched A + a seed.
+- Finish the step-1-think ranking (cap the thinking budget for the eval); add token-matched A + a seed.
+- Try banking the model's own thoughts *filtered/compressed* to genuine plans (strip the rationalization) — is
+  it the length/rambliness or the post-hoc-ness that makes them inert?
 
 ## Artifact Manifest
 See `reports/artifact_manifest.yaml`. Adapters (~180MB each) moved out of repo.
