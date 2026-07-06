@@ -53,3 +53,24 @@ Single seed, n=80.
 
 ## Artifact Manifest
 See `reports/artifact_manifest.yaml`. Adapters (~180MB each) moved out of repo.
+
+## Addendum: does anchoring BOTH distributions equally prevent the collapse? (partial, still loses)
+
+Follow-up (user question): the collapse is the "both-go-down" pathology (DPO grows the margin by dropping
+logp_rejected AND logp_chosen). Fix attempt: strengthen the NLL(chosen) anchor so the positive distribution is
+held up while the negative is pushed away — "balance both so neither collapses." Swept the anchor weight λ at 3
+epochs:
+| DPO anchor λ | greedy@1 | cov@16 |
+|---|---|---|
+| 0.05 (original) | 0.013 | 0.013 |
+| 0.3 | 0.013 | 0.037 |
+| 1.0 (balanced) | 0.025 | 0.062 |
+
+**Directionally the fix works** — stronger anchor → less collapse (greedy 0.013 → 0.025, coverage 0.013 →
+0.062). This confirms the both-go-down diagnosis. **But it is not enough:** even fully balanced (λ=1.0) it ends
+*below plain SFT* (0.025 < 0.037) and far below SFT_2x (0.113), and the margin still blew to ~53 — the
+accumulated negative push over 522 steps degrades generation faster than the anchor holds it. The only safe
+regime is strong-anchor **+ few steps**, but there the DPO term is a tiny nudge and the objective ≈ plain SFT.
+So the conclusion stands: preference training can't beat "just more SFT" here; anchoring mitigates but does not
+overcome the collapse. (Untested: strong anchor + early-stop + DPOP positive-constraint together — likely
+≈ SFT.)

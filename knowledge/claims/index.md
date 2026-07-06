@@ -689,6 +689,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 ### Avoid
 
+- Do not claim balancing/anchoring the DPO fixes the collapse: a stronger NLL(chosen) anchor DIRECTIONALLY reduces it (greedy 0.013->0.025, cov 0.013->0.062 as lambda 0.05->1.0) but even fully balanced (lambda=1.0) at 3 epochs ends BELOW plain SFT (0.025<0.037) and far below SFT_2x (0.113); the safe regime (strong anchor + few steps) reduces to ~SFT.
 - Do not claim DPO/preference-on-failures helps deployability: it collapses the model (greedy AND coverage crash) and never beats SFT_2x across 0.25-3 epochs.
 - Do not read the pre-DPO 2AFC=0.81 as 'the model can select': it discriminates GIVEN both samples (read-only), but preference-training that ability destroys generation; whether it can SELECT at inference is untested.
 - Do not credit DPO with the small 0.25-epoch bump (0.037->0.050): within noise at n=80 (1 task), coverage flat, and it collapses immediately after.

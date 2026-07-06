@@ -43009,6 +43009,77 @@
      "y_label": "depth-3 solve rate (no-think)",
      "y_format": "percent01",
      "note": "DPO from the SFT model: a within-noise greedy@1 bump at 0.25 epochs (0.037->0.050, coverage flat), then catastrophic collapse -- greedy 0.000 by 0.5 epochs, both greedy and coverage cratered to 0.013 by 3 epochs. The reward margin (logp_chosen - logp_rejected) grew unchecked to ~61: classic DPO over-optimization / distribution collapse. It never reaches SFT_2x's greedy@1 of 0.113 (just training SFT twice as long). Preference training on the model's own failures is fragile and does not close the deployable gap."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Anchoring both distributions reduces the DPO collapse but never recovers to SFT",
+     "series": [
+      {
+       "label": "DPO greedy@1 vs anchor weight lambda",
+       "points": [
+        [
+         0.05,
+         0.013
+        ],
+        [
+         0.3,
+         0.013
+        ],
+        [
+         1.0,
+         0.025
+        ]
+       ]
+      },
+      {
+       "label": "DPO coverage@16 vs lambda",
+       "points": [
+        [
+         0.05,
+         0.013
+        ],
+        [
+         0.3,
+         0.037
+        ],
+        [
+         1.0,
+         0.062
+        ]
+       ]
+      },
+      {
+       "label": "plain SFT greedy (0.037)",
+       "points": [
+        [
+         0.05,
+         0.037
+        ],
+        [
+         1.0,
+         0.037
+        ]
+       ]
+      },
+      {
+       "label": "SFT_2x greedy (0.113, the winner)",
+       "points": [
+        [
+         0.05,
+         0.113
+        ],
+        [
+         1.0,
+         0.113
+        ]
+       ]
+      }
+     ],
+     "x_label": "NLL(chosen) anchor weight lambda (3 epochs DPO)",
+     "y_label": "depth-3 solve rate (no-think)",
+     "y_format": "percent01",
+     "note": "User question: does anchoring BOTH distributions equally (strong NLL(chosen) anchor) prevent the DPO collapse? The collapse is the 'both-go-down' pathology -- DPO grows the margin by dropping logp(rejected) AND logp(chosen), so the model stops GENERATING the correct code. Strengthening the anchor DIRECTIONALLY helps (greedy 0.013->0.025, coverage 0.013->0.062 as lambda 0.05->1.0), confirming the diagnosis. But it's NOT enough: even fully balanced (lambda=1.0) at 3 epochs ends BELOW plain SFT (0.025<0.037) and far below SFT_2x (0.113); the margin still blew to ~53. The accumulated negative push over 522 steps degrades generation faster than the anchor holds it. Safe regime = strong anchor + FEW steps, but there the DPO nudge is tiny and it ~= plain SFT. Conclusion stands: preference training can't beat 'just more SFT'."
     }
    ]
   }
