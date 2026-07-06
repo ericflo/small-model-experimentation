@@ -1,0 +1,16 @@
+schema_version: 1
+experiment_id: "qwen35_4b_probe_the_parameter"
+external_artifacts:
+  - name: "probes_full.pkl"
+    storage: "scratchpad/ptp/probes_full.pkl (16-way type + 32-way concrete probes)"
+    required_for: "re-running decode_eval / run_hints_full without refitting"
+    checksum: ""
+    regenerate: "python scripts/fit_probe_full.py --n-per-depth 600"
+omitted_artifacts:
+  - path: "data/acts.npy"
+    reason: "residual activations ~large; regenerate via fit_probe_full"
+reproducibility:
+  smoke_command: "python scripts/fit_probe_full.py --n-per-depth 60 && python scripts/decode_eval.py --n-per-depth 60"
+  full_command: "fit_probe_full 600; decode_eval 600; run_hints_full 130; analyze"
+  required_external_artifacts: []
+notes: "Follow-up to C30. Verdict (C31): the op-TYPE is model-latent (residual probe > external-I/O baseline) but the PARAMETER is surface-readable (external I/O matches/beats the probe, and deploys better). REAL surface control = external classifier on raw I/O features (the last-token layer-0 probe is degenerate under RoPE). Sharp localization: the model computes the type, only reads the param off surface I/O."

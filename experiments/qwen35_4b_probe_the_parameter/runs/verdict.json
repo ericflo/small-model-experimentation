@@ -1,0 +1,94 @@
+{
+ "decode": {
+  "2": {
+   "n": 600,
+   "n_param": 396,
+   "probe_concrete": 0.258,
+   "ext_io_concrete": 0.163,
+   "probe_type": 0.413,
+   "ext_io_type": 0.272,
+   "probe_param|type": 0.493,
+   "ext_param|type": 0.529,
+   "param|type_chance": 0.303,
+   "n_paramtype_correct": 144
+  },
+  "3": {
+   "n": 600,
+   "n_param": 262,
+   "probe_concrete": 0.147,
+   "ext_io_concrete": 0.097,
+   "probe_type": 0.193,
+   "ext_io_type": 0.198,
+   "probe_param|type": 0.358,
+   "ext_param|type": 0.41,
+   "param|type_chance": 0.302,
+   "n_paramtype_correct": 53
+  }
+ },
+ "deploy": {
+  "param-first-op": {
+   "n": 148,
+   "nohint": {
+    "greedy": 0.0,
+    "cov": 0.007
+   },
+   "oracle_type": {
+    "greedy": 0.007,
+    "cov": 0.034
+   },
+   "oracle_full": {
+    "greedy": 0.095,
+    "cov": 0.169
+   },
+   "probe_full": {
+    "greedy": 0.014,
+    "cov": 0.034
+   },
+   "surface_full": {
+    "greedy": 0.027,
+    "cov": 0.054
+   },
+   "wrong_param": {
+    "greedy": 0.0,
+    "cov": 0.007
+   }
+  },
+  "non-param": {
+   "n": 112,
+   "nohint": {
+    "greedy": 0.045,
+    "cov": 0.062
+   },
+   "oracle_type": {
+    "greedy": 0.045,
+    "cov": 0.134
+   },
+   "oracle_full": {
+    "greedy": 0.062,
+    "cov": 0.116
+   },
+   "probe_full": {
+    "greedy": 0.045,
+    "cov": 0.08
+   },
+   "surface_full": {
+    "greedy": 0.009,
+    "cov": 0.045
+   },
+   "wrong_param": {
+    "greedy": 0.062,
+    "cov": 0.143
+   }
+  }
+ },
+ "probe_conc_acc": 0.173,
+ "surf_conc_acc": 0.127,
+ "two_term": {
+  "conc_acc_paramtasks": 0.149,
+  "probe_on_concCorrect": 0.091,
+  "oracle_on_concCorrect": 0.091,
+  "probe_on_concWrong": 0.0,
+  "nohint_on_concWrong": 0.0
+ },
+ "verdict": "Is the parameter latent? NO -- it is SURFACE-READABLE, not model-computed. The op-TYPE is model-latent (depth-2 probe 0.413 > external-I/O 0.272), but the PARAMETER given type is decoded as well by a trivial I/O classifier as by the model residual (probe 0.493 vs surface 0.529, chance 0.303). DEPLOYABILITY on param-first-op tasks: the param IS the deployable bottleneck (oracle_full 0.095 >> oracle_type 0.007), but the model probe barely delivers (probe_full 0.014) and the CHEAP SURFACE pipeline delivers as well or better (surface_full 0.027) -- you do not need the model for the param. wrong_param 0.0 (content-causal). Sharp localization of C30: the forward pass COMPUTES the op-type (latent, elicitable) but only READS the parameter off surface I/O (no privileged model knowledge to elicit)."
+}

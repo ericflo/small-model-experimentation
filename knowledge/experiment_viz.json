@@ -43163,6 +43163,81 @@
      "note": "The elicitation is bounded by the representation, exactly as C19 predicts. At depth-2 the first-op is latently present (probe 0.42) so giving the concrete op (oracle_full) lifts deployable greedy@1 6x. At depth-3 the representation is a thread (C19 real signal ~0.13) -- even oracle_full (telling the model the true first op) barely moves it (0.00->0.01). No readout conjures information the forward pass never computed: externalization can cash out latent headroom but cannot cross the true wall."
     }
    ]
+  },
+  "qwen35_4b_probe_the_parameter": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Is the parameter latent? The op-TYPE is model-computed (probe>surface); the PARAMETER is surface-readable (surface>=probe)",
+     "categories": [
+      "op-TYPE",
+      "CONCRETE (op+param)",
+      "PARAMETER | type"
+     ],
+     "series": [
+      {
+       "label": "model probe (4B residual)",
+       "values": [
+        0.413,
+        0.258,
+        0.493
+       ]
+      },
+      {
+       "label": "external I/O classifier (no 4B)",
+       "values": [
+        0.272,
+        0.163,
+        0.529
+       ]
+      }
+     ],
+     "y_label": "decode accuracy (depth-2, fsig-disjoint eval)",
+     "y_format": "percent01",
+     "note": "C30 found the deployable bottleneck is the concrete first op's PARAMETER, not the op-TYPE C19 decodes. Is the parameter model-LATENT or surface-readable? The real surface control is an external classifier on raw I/O features (list lengths, sums, min/max, elementwise diffs) with NO 4B forward pass (the layer-0 probe is degenerate: RoPE makes the fixed-template last-token embedding constant across tasks). FINDING: the op-TYPE is genuinely MODEL-LATENT -- the residual probe (0.41) beats the surface classifier (0.27). But the PARAMETER given the type is SURFACE-READABLE -- the trivial I/O classifier (0.53) decodes it as well as / better than the model residual (0.49), both above chance (0.30). So the forward pass COMPUTES the op-type (latent capability, elicitable via C30's externalization) but only READS the parameter off I/O magnitudes -- no privileged model knowledge to elicit. Retroactively strengthens C19/C30: the external-I/O baseline is the correct surface control and confirms the op-type is model-latent."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Deployability on PARAM-first-op tasks: the full op deploys (oracle_full >> oracle_type), but the cheap surface pipeline >= the model probe",
+     "categories": [
+      "no-hint",
+      "oracle_type",
+      "oracle_full",
+      "probe_full",
+      "surface_full",
+      "wrong_param"
+     ],
+     "series": [
+      {
+       "label": "coverage@6",
+       "values": [
+        0.007,
+        0.034,
+        0.169,
+        0.034,
+        0.054,
+        0.007
+       ]
+      },
+      {
+       "label": "greedy@1 (deployable)",
+       "values": [
+        0.0,
+        0.007,
+        0.095,
+        0.014,
+        0.027,
+        0.0
+       ]
+      }
+     ],
+     "y_label": "solve rate on param-first-op tasks (no-think)",
+     "y_format": "percent01",
+     "note": "Externalize the decoded full first op as a prompt hint, on PARAM-first-op tasks (where the parameter matters). The parameter IS the deployable bottleneck: oracle_full (true op+param) 0.095 >> oracle_type (type only) 0.007 -- confirms C30, isolated to param tasks. But the model probe barely delivers (probe_full 0.014) and the CHEAP surface pipeline delivers MORE (surface_full 0.027): you do not need the 4B for the parameter. wrong_param (true type, wrong param) 0.000 -- content-causal. Two-term check textbook clean: probe_full deploys EXACTLY like the oracle on the tasks it decodes correctly (0.091=0.091) and like no-hint on those it gets wrong (0.0=0.0) -- a faithful readout bounded by 26% concrete accuracy. Sharp localization: the model computes the op-type but only reads the parameter off surface I/O."
+    }
+   ]
   }
  }
 }

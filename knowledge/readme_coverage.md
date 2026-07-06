@@ -95,6 +95,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_overthinking_content_ladder` | [README](../experiments/qwen35_4b_overthinking_content_ladder/README.md) | [report](../experiments/qwen35_4b_overthinking_content_ladder/reports/report.md) |
 | `qwen35_4b_passk_coverage_rl` | [README](../experiments/qwen35_4b_passk_coverage_rl/README.md) | [report](../experiments/qwen35_4b_passk_coverage_rl/reports/final_report.md) |
 | `qwen35_4b_prefix_value_guided_search` | [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md) | [report](../experiments/qwen35_4b_prefix_value_guided_search/reports/final_report.md) |
+| `qwen35_4b_probe_the_parameter` | [README](../experiments/qwen35_4b_probe_the_parameter/README.md) | [report](../experiments/qwen35_4b_probe_the_parameter/reports/report.md) |
 | `qwen35_4b_probe_to_prompt` | [README](../experiments/qwen35_4b_probe_to_prompt/README.md) | [report](../experiments/qwen35_4b_probe_to_prompt/reports/report.md) |
 | `qwen35_4b_real_sample_verify_commit` | [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) |
 | `qwen35_4b_reliability_exec_opsd_audit` | [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md) | [report](../experiments/qwen35_4b_reliability_exec_opsd_audit/reports/final_report.md) |

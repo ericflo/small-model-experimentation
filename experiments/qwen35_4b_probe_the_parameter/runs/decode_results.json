@@ -1,0 +1,26 @@
+{
+ "2": {
+  "n": 600,
+  "n_param": 396,
+  "probe_concrete": 0.258,
+  "ext_io_concrete": 0.163,
+  "probe_type": 0.413,
+  "ext_io_type": 0.272,
+  "probe_param|type": 0.493,
+  "ext_param|type": 0.529,
+  "param|type_chance": 0.303,
+  "n_paramtype_correct": 144
+ },
+ "3": {
+  "n": 600,
+  "n_param": 262,
+  "probe_concrete": 0.147,
+  "ext_io_concrete": 0.097,
+  "probe_type": 0.193,
+  "ext_io_type": 0.198,
+  "probe_param|type": 0.358,
+  "ext_param|type": 0.41,
+  "param|type_chance": 0.302,
+  "n_paramtype_correct": 53
+ }
+}

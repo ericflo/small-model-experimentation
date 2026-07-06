@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 30
+- Claims: 31
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 22 |
+| Promising | 23 |
 
 ## Program Counts
 
@@ -22,12 +22,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 4 |
-| `interpretability_and_diagnostics` | 5 |
+| `interpretability_and_diagnostics` | 6 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 17 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 20 |
+| `structured_execution_and_compilers` | 21 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -718,3 +718,26 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not conflate coverage and greedy: oracle-TYPE lifts coverage (narrows sampling) but not greedy; you need the concrete (op,param) for single-shot deployability.
 - Do not read a probe-hint gain as leak: layer-0 (embedding) probe is at chance (0.05/0.02) on the eval set, so the decoded first-op is the model's COMPUTATION, not surface-readable I/O; and the benefit concentrates on probe-correct tasks (genuine self-elicitation).
 - Do not expect depth-3 elicitation: the representation is a thread (C19); oracle-full only 0.01 at d3 -- no readout conjures uncomputed information.
+
+## C31: The op-TYPE is model-computed (latent, elicitable) but the PARAMETER is only read off surface I/O -- sharp localization of C30's deployable bottleneck
+
+- Status: `Promising`
+- Programs: `interpretability_and_diagnostics`, `structured_execution_and_compilers`
+- Summary: Experiment qwen35_4b_probe_the_parameter, follow-up to C30 (which found the deployable bottleneck is the concrete first op's PARAMETER, not the op-TYPE C19 decodes). Question: is the parameter model-LATENT or surface-readable? Fit a 16-way op-TYPE probe + 32-way CONCRETE-op probe on residual activations. CRITICAL review fix: the layer-0 probe is a DEGENERATE surface control (RoPE => the fixed-template last-token embedding is constant across tasks); the real control is an EXTERNAL classifier on raw I/O features (lengths, sums, min/max, elementwise diffs) with NO 4B forward pass. DECODABILITY (depth-2, fsig-disjoint): the op-TYPE is genuinely MODEL-LATENT (residual probe 0.413 > external-I/O 0.272) but the PARAMETER given type is SURFACE-READABLE (probe 0.493 vs external-I/O 0.529, chance 0.303) -- a trivial I/O classifier decodes the param as well as the model residual. DEPLOYABILITY on param-first-op tasks: the param IS the deployable bottleneck (oracle_full 0.095 >> oracle_type 0.007, confirming C30), but the model probe barely delivers (probe_full 0.014) and the CHEAP surface pipeline delivers MORE (surface_full 0.027) -- you don't need the 4B for the param. wrong_param 0.000 (content-causal). Two-term check textbook clean: probe_full deploys exactly like the oracle on tasks it decodes right (0.091=0.091) and like no-hint on those it gets wrong (0.0=0.0) -- faithful readout, just 26% accurate.
+- Implication: Sharp localization of the wall and of C30: the forward pass genuinely COMPUTES the op-type (a real latent capability, elicitable training-free via C30's externalization) but has NO privileged representation of the PARAMETER -- it just reads it off surface I/O, which any trivial classifier does equally. The training-free latent-elicitation ceiling is the op-type; the parameter is not a model-latent thing to unearth (it's feature-engineering the model isn't special at). Closes the C30 loop: the 'deployable bottleneck' (param) is real but not locked-in-the-weights capability. Also RETROACTIVELY strengthens C19/C30 methodology: 'layer-0 at chance' was a weak surface control (RoPE degenerate); the external-I/O baseline is the correct one, and it CONFIRMS the op-type is model-latent (probe>surface) while sharpening that the param is not.
+
+### Evidence
+
+- [`qwen35_4b_probe_the_parameter`](../../experiments/qwen35_4b_probe_the_parameter/reports/report.md)
+
+### Next Tests
+
+- Compose type-probe (model) + param-from-I/O (surface) into one hybrid hint pipeline -- does it deliver oracle_full's lift? Both pieces are cheap/training-free.
+- Re-examine other C19-style 'latent' claims with an external-I/O baseline: which decodable quantities are model-computed vs surface-readable?
+
+### Avoid
+
+- Do not treat the parameter as latent model capability to elicit: an external I/O classifier decodes it as well as the residual probe (0.529 vs 0.493) and DEPLOYS better (surface_full 0.027 > probe_full 0.014). The model has no privileged param representation.
+- Do not use a last-token layer-0 probe as a surface control: RoPE makes the fixed-template embedding constant across tasks, so layer-0~=chance is degenerate (affects C19/C30 too). Use an EXTERNAL classifier on raw I/O features.
+- Do not over-read probe_full's small lift: the two-term decomposition shows it's a faithful readout (=oracle on decode-correct tasks) bounded by 26% concrete accuracy, not a special effect.
+- Do NOT claim the op-type is surface-readable: the residual probe beats the external-I/O baseline (0.413 vs 0.272) at depth-2 -- the type IS model-computed (elicitable). It's only the param that isn't.

@@ -2877,6 +2877,43 @@
   },
   {
     "file_counts": {
+      ".json": 5,
+      ".md": 5,
+      ".png": 1,
+      ".py": 9,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-06",
+    "id": "qwen35_4b_probe_the_parameter",
+    "path": "experiments/qwen35_4b_probe_the_parameter",
+    "primary_readme": "experiments/qwen35_4b_probe_the_parameter/README.md",
+    "primary_report": "experiments/qwen35_4b_probe_the_parameter/reports/report.md",
+    "research_programs": [
+      "interpretability_and_diagnostics",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/fit_probe_full.py --n-per-depth 600` then `decode_eval.py` (decodability + surface baseline) then `run_hints_full.py` (deployability) then `analyze.py`.",
+    "tags": [
+      "abi",
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Is the Parameter Latent? (probe the full first op)",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 23,
+    "total_size_bytes": 963142
+  },
+  {
+    "file_counts": {
       ".json": 3,
       ".md": 5,
       ".png": 1,
