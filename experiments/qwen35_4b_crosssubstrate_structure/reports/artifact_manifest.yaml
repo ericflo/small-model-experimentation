@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_crosssubstrate_structure"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/cross_substrate.py --family string --n 12 --k 4 --randR 4 30"
+  full_command: "for f in string register list: cross_substrate.py --family $f --n 100 --k 8 --randR 8 50 200; analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C36): C32 (wall-is-structure) + C34 (brute-search dominates) are MODEL-LEVEL LAWS -- replicate on string (char edits) + register (int machine) + list. Base ~0, structure-cov = concrete-cov (value tax ~0), oracle-skelfill 1.0, random low, brute-deploy ~1.0 on all three. Register somewhat more value-fungible (smaller space). Base-model findings generalized; banking (C33), depth-collapse (C35), probing (C31) were list-only, owed cross-substrate."

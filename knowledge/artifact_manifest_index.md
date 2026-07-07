@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 158
-- Manifest files: 454
+- Experiments with manifests: 159
+- Manifest files: 455
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 31 |
+| `standard-artifact` | 32 |
 
 ## Manifests
 
@@ -74,6 +74,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_coverage_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_coverage_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_coverage_vs_selection` | `standard-artifact` | [manifest](../experiments/qwen35_4b_coverage_vs_selection/reports/artifact_manifest.yaml) |
 | `qwen35_4b_crossfamily_laws` | `standard-artifact` | [manifest](../experiments/qwen35_4b_crossfamily_laws/reports/artifact_manifest.yaml) |
+| `qwen35_4b_crosssubstrate_structure` | `standard-artifact` | [manifest](../experiments/qwen35_4b_crosssubstrate_structure/reports/artifact_manifest.yaml) |
 | `qwen35_4b_decompose_compose_frontier` | `standard-artifact` | [manifest](../experiments/qwen35_4b_decompose_compose_frontier/reports/artifact_manifest.yaml) |
 | `qwen35_4b_deployable_information_ceiling_sweep` | `large-artifact` | [manifest](../experiments/qwen35_4b_deployable_information_ceiling_sweep/large_artifacts_manifest.md) |
 | `qwen35_4b_depth3_dose_response` | `standard-artifact` | [manifest](../experiments/qwen35_4b_depth3_dose_response/reports/artifact_manifest.yaml) |

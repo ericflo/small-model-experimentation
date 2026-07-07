@@ -1,0 +1,1514 @@
+{
+ "family": "register",
+ "n": 100,
+ "k": 8,
+ "depth": 3,
+ "space": 1728,
+ "randR": [
+  8,
+  50,
+  200
+ ],
+ "rows": [
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 6
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 21
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 12
+  },
+  {
+   "greedy": false,
+   "cov": 1,
+   "struct_greedy": false,
+   "struct_cov": 1,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": true,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 21
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 5
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 7
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 12
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": true,
+   "cov": 5,
+   "struct_greedy": true,
+   "struct_cov": 5,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 12
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 6
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": true,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 6
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 2,
+   "struct_greedy": false,
+   "struct_cov": 2,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": true,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 6
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 12
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 7
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 1
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": true,
+   "cov": 4,
+   "struct_greedy": true,
+   "struct_cov": 4,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 6
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 21
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": true,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 12
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": true
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 3
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 6
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 2
+  },
+  {
+   "greedy": false,
+   "cov": 0,
+   "struct_greedy": false,
+   "struct_cov": 0,
+   "oracle": true,
+   "rand": {
+    "8": false,
+    "50": false,
+    "200": false
+   },
+   "brute_cov": true,
+   "brute_deploy": true,
+   "brute_skels": 4
+  }
+ ]
+}

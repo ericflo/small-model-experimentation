@@ -43448,6 +43448,115 @@
      "note": "Brute-force structure-search enumerates 16^depth skeletons: 4096 (d3) -> 65536 (d4) -> ~1M (d5). It becomes intractable around depth-5. BUT banking's forward-pass structure has already collapsed to 0.10 at depth-4 (would be ~0 at depth-5). So there is a depth-5+ regime where NEITHER works cheaply -- brute intractable, model collapsed -- but the model never WINS. The model degrades with depth faster than brute's cost forces you to abandon it, so the crossover where the model's structure-pruning would help never materializes on this substrate."
     }
    ]
+  },
+  "qwen35_4b_crosssubstrate_structure": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Do the structure findings generalize? YES -- same pattern on string/register/list (base ~0, oracle=1.0, brute-search near-solves)",
+     "categories": [
+      "base greedy@1",
+      "base STRUCTURE-cov",
+      "oracle-skeletonfill",
+      "brute-force search DEPLOY"
+     ],
+     "series": [
+      {
+       "label": "string (space 2,197)",
+       "values": [
+        0.0,
+        0.01,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "label": "register (space 1,728)",
+       "values": [
+        0.02,
+        0.04,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "label": "list (space 4,096)",
+       "values": [
+        0.0,
+        0.0,
+        1.0,
+        0.98
+       ]
+      }
+     ],
+     "y_label": "rate (depth-3, n=100)",
+     "y_format": "percent01",
+     "note": "C16 cross-substrate-tested the EARLY ladder (C13-15); the recent sharp findings (C32 wall-is-structure, C34 brute-dominates) were never generalized. Family-generic replication on STRING (char edits), REGISTER (3-register machine), LIST (anchor), depth-3, min-depth-verified, n=100. RESULT: C32+C34 are MODEL-LEVEL LAWS -- identical pattern on all three. (1) The wall is STRUCTURE: base structure-coverage = concrete-coverage (value tax +0.01 string, +0.00 register/list) -- failures are wrong-skeleton, not right-skeleton-wrong-param. (2) Values trivially searchable given structure: oracle-skeletonfill = 1.000 everywhere. (3) Structure matters (random-skeletonfill low, see 2nd chart). (4) Brute-force structure-search + value-fill + execution-consensus DOMINATES the model: brute-deploy ~1.0 (string 1.00, register 1.00, list 0.98) vs base ~0. So the fixed 4B is a VALUE-computer, not a deep-STRUCTURE-proposer, across genuinely different substrates. The deployable lever is the TOOL, not the weights, everywhere."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Structure genuinely matters on all 3: random op-type skeletons rarely solve (far below brute-deploy ~1.0)",
+     "series": [
+      {
+       "label": "string random-skeletonfill",
+       "points": [
+        [
+         8,
+         0.0
+        ],
+        [
+         50,
+         0.05
+        ],
+        [
+         200,
+         0.17
+        ]
+       ]
+      },
+      {
+       "label": "register random-skeletonfill",
+       "points": [
+        [
+         8,
+         0.02
+        ],
+        [
+         50,
+         0.11
+        ],
+        [
+         200,
+         0.32
+        ]
+       ]
+      },
+      {
+       "label": "list random-skeletonfill",
+       "points": [
+        [
+         8,
+         0.0
+        ],
+        [
+         50,
+         0.05
+        ],
+        [
+         200,
+         0.09
+        ]
+       ]
+      }
+     ],
+     "x_label": "R = random op-type skeletons tried (each value-filled + execute-checked)",
+     "y_label": "random-skeletonfill solve rate",
+     "y_format": "percent01",
+     "note": "Value-fungibility control across substrates: do RANDOM op-type skeletons + value-search crack the tasks (which would make the wall trivially value-fungible)? On all three, random structure stays far below the brute-full deploy (~1.0 with the TRUE structure enumerated) -- so the correct STRUCTURE is genuinely required everywhere. Register is somewhat more fungible (R200=0.32) than string (0.17) and list (0.09) because its structure space is smaller (1728) and its arithmetic ops have more behaviorally-equivalent orderings. But the pattern -- structure is the bottleneck, not values -- holds on all three."
+    }
+   ]
   }
  }
 }

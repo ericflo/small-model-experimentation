@@ -1,0 +1,66 @@
+{
+ "string": {
+  "space": 2197,
+  "n": 100,
+  "greedy": 0.0,
+  "cov": 0.0,
+  "struct_cov": 0.01,
+  "oracle": 1.0,
+  "random": {
+   "8": 0.0,
+   "50": 0.05,
+   "200": 0.17
+  },
+  "brute_deploy": 1.0,
+  "brute_cov": 1.0,
+  "value_tax": 0.01,
+  "Rs": [
+   8,
+   50,
+   200
+  ]
+ },
+ "register": {
+  "space": 1728,
+  "n": 100,
+  "greedy": 0.02,
+  "cov": 0.04,
+  "struct_cov": 0.04,
+  "oracle": 1.0,
+  "random": {
+   "8": 0.02,
+   "50": 0.11,
+   "200": 0.32
+  },
+  "brute_deploy": 1.0,
+  "brute_cov": 1.0,
+  "value_tax": 0.0,
+  "Rs": [
+   8,
+   50,
+   200
+  ]
+ },
+ "list": {
+  "space": 4096,
+  "n": 100,
+  "greedy": 0.0,
+  "cov": 0.0,
+  "struct_cov": 0.0,
+  "oracle": 1.0,
+  "random": {
+   "8": 0.0,
+   "50": 0.05,
+   "200": 0.09
+  },
+  "brute_deploy": 0.98,
+  "brute_cov": 1.0,
+  "value_tax": 0.0,
+  "Rs": [
+   8,
+   50,
+   200
+  ]
+ },
+ "verdict": "The recent structure findings (C32 wall-is-structure, C34 brute-dominates) are MODEL-LEVEL LAWS, not list-DSL artifacts. On STRING (char edits), REGISTER (3-register machine), and LIST alike, at depth-3: (1) the wall is STRUCTURE -- base structure-coverage = concrete-coverage (value tax string +0.010, register +0.000, list +0.000): failures are wrong-skeleton, not right-skeleton-wrong-param. (2) Values are trivially searchable given structure -- oracle-skeletonfill = 1.000 on all three. (3) Structure genuinely matters -- random-skeletonfill is low (R200: string 0.17, register 0.32, list 0.09; register is somewhat more value-fungible). (4) Brute-force structure-search + value-fill + execution-consensus DOMINATES the model -- brute-deploy ~1.0 (string 1.0, register 1.0, list 0.98) vs base model ~0. So the fixed 4B is a VALUE-computer, not a deep-STRUCTURE-proposer, across substrates; the compositional wall is structure-proposal; and with an interpreter, brute-force structure-search dominates the weights outright -- on string edits, register machines, and list DSLs alike."
+}

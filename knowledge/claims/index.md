@@ -2,13 +2,13 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 35
+- Claims: 36
 
 ## Status Counts
 
 | Status | Claims |
 | --- | ---: |
-| Confirmed | 5 |
+| Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
 | Promising | 27 |
@@ -22,12 +22,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
-| `interpretability_and_diagnostics` | 7 |
+| `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 18 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 25 |
+| `structured_execution_and_compilers` | 26 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -836,3 +836,26 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read banked_d4's low depth-4 structure-cov (0.10) as a measurement artifact: brute-full deploys 0.967 on the SAME held-out tasks, so the tasks are solvable -- the model just doesn't propose the depth-4 structure.
 - Do not claim the model can cheaply prune the search: extracting the model's structure via behavioral inference costs a full 16^depth enumeration (as slow as brute), and op-seq generation is broken (C32). The model's structure is a forward-pass asset, not a cheap search prior.
 - Do not generalize 'brute always wins' past its cost ceiling: brute is exponential (16^depth) and becomes intractable ~depth-5; the finding is that the model doesn't take over THERE either (it has already collapsed).
+
+## C36: The recent structure findings are MODEL-LEVEL LAWS: wall-is-structure (C32) and brute-search-dominates (C34) replicate on string + register substrates
+
+- Status: `Confirmed`
+- Programs: `structured_execution_and_compilers`, `interpretability_and_diagnostics`
+- Summary: Experiment qwen35_4b_crosssubstrate_structure. C16 cross-substrate-tested the EARLY ladder (C13-15); the recent sharp findings (C32 wall-is-structure, C34 brute-dominates) were never generalized. Family-generic replication on STRING (char edits, 13 prims), REGISTER (3-register machine, 12 prims), LIST (anchor, 16 prims), depth-3, min-depth-verified, n=100 each. Base model + search (no banking). RESULT: C32 + C34 are MODEL-LEVEL LAWS -- essentially identical pattern on all three substrates. (1) Wall is STRUCTURE: base structure-cov = concrete-cov (value tax string +0.010, register +0.000, list +0.000) -- failures are wrong-skeleton not right-skeleton-wrong-param. (2) Values trivially searchable given structure: oracle-skeletonfill = 1.000 on all three. (3) Structure matters (not value-fungible): random-skeletonfill low (R200 string 0.17, list 0.09, register 0.32 -- register somewhat more fungible, smaller space). (4) Brute-force structure-search + value-fill + execution-consensus DOMINATES the model: brute-deploy ~1.0 (string 1.00, register 1.00, list 0.98) vs base ~0.
+- Implication: The fixed Qwen3.5-4B is a VALUE-computer, not a deep-STRUCTURE-proposer, across genuinely different substrates (string edits, register machines, list DSLs). The compositional wall is structure-proposal everywhere; and with an interpreter, brute-force structure-search dominates the weights outright everywhere. Combined with C16 (early ladder cross-family) and C33/C35 (banking installs structure but collapses with depth), the ENTIRE compositional arc is established as model-level, not an artifact of one hand-built DSL. The deployable 'beat sample-more' lever is the TOOL (structure-search + value-fill + execution-select), not the weights, on every substrate tested. Elevates C32/C34 from list-specific to model-level laws.
+
+### Evidence
+
+- [`qwen35_4b_crosssubstrate_structure`](../../experiments/qwen35_4b_crosssubstrate_structure/reports/report.md)
+
+### Next Tests
+
+- Cross-substrate banking (C33) and depth-collapse (C35): train banked string/register models -- does banking-installs-structure and its depth-collapse also generalize? (currently list-only).
+- Cross-substrate C31 (op-type model-latent vs param surface-readable via activation probing + external-I/O baseline) -- does the structure/value representational split generalize?
+- Why is register more value-fungible (random 0.32)? Substrate structure-space geometry (aliasing) vs a deployability difference.
+
+### Avoid
+
+- Do not treat C32/C34 as list-DSL-specific: they replicate on string (char edits) and register (int machine) -- the wall is structure and brute-search dominates on all three.
+- Do not over-read register's higher value-fungibility (random 0.32 at R200): it is a substrate property (smaller 1728-space, arithmetic ops alias more), not a break in the pattern -- brute-deploy is still 1.0 and the wall is still structure (value tax +0.00).
+- Scope: this generalized the BASE-model findings (C32 wall, C34 brute-dominates); banking (C33) and depth-collapse (C35) and probing (C31) were list-only and are owed cross-substrate.

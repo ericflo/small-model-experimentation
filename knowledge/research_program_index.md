@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 186
+- Experiments: 187
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 138
+- Assigned experiments: 139
 
 ### Seed Evidence
 
@@ -48,6 +48,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_coverage_vs_selection` (new): [README](../experiments/qwen35_4b_coverage_vs_selection/README.md)
 - `qwen35_4b_crossfamily_laws` (new): [README](../experiments/qwen35_4b_crossfamily_laws/README.md)
+- `qwen35_4b_crosssubstrate_structure` (new): [README](../experiments/qwen35_4b_crosssubstrate_structure/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_depth3_dose_response` (new): [README](../experiments/qwen35_4b_depth3_dose_response/README.md)
 - `qwen35_4b_depth_scaling_controls` (new): [README](../experiments/qwen35_4b_depth_scaling_controls/README.md)

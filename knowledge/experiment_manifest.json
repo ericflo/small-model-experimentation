@@ -1301,6 +1301,40 @@
   {
     "file_counts": {
       ".json": 4,
+      ".md": 4,
+      ".png": 1,
+      ".py": 6,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-07",
+    "id": "qwen35_4b_crosssubstrate_structure",
+    "path": "experiments/qwen35_4b_crosssubstrate_structure",
+    "primary_readme": "experiments/qwen35_4b_crosssubstrate_structure/README.md",
+    "primary_report": "experiments/qwen35_4b_crosssubstrate_structure/reports/report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/cross_substrate.py --family {string,register,list} --n 100 --k 8 --randR 8 50 200` then `python scripts/analyze.py`.",
+    "tags": [
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Do the Structure Findings Generalize? (string/register)",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 18,
+    "total_size_bytes": 275744
+  },
+  {
+    "file_counts": {
+      ".json": 4,
       ".jsonl": 5,
       ".log": 4,
       ".md": 4,
