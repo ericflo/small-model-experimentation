@@ -504,6 +504,14 @@
    ],
    "caveat": "date-shaped seeds proven unreliable elsewhere (static_bridge seed 20260630 pre-existed the 2026-06-28 import); metadata.yaml 2026-07-01"
   },
+  "qwen35_4b_icl_retrieval_vs_induction": {
+   "start": "2026-07-07",
+   "end": "2026-07-07",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_independent_code_abi_coverage_gate": {
    "start": "2026-06-27",
    "end": "2026-06-27",
