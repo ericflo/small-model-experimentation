@@ -1240,6 +1240,34 @@
         "Do not interpret OOF affine without its execute ceiling (0.46): affine OOF induction is partly execution-limited, not purely an induction-transfer failure (the C39 cipher-trap gate).",
         "Answer-only SFT causes CATASTROPHIC FORGETTING (execute 0.72->0.09) -- a poor vehicle; do not read the induction gain without noting the execution cost. Single seed; shift->affine is procedure-specificity, NOT a general-induction test (needs multi-family leave-one-out)."
       ]
+    },
+    {
+      "id": "C44",
+      "title": "The forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge limit: reasoning-SFT induces held-out rules PERFECTLY via generation (1.00) but at CHANCE in one forward pass (0.01) -- the CoT is 100% load-bearing",
+      "status": "Promising",
+      "programs": [
+        "posttraining_and_adaptation",
+        "benchmark_generalization"
+      ],
+      "summary": "Experiment qwen35_4b_meta_induction (reasoning arm, follow-up to C43). Resolves the deepest open question: is induction a KNOWLEDGE limit or a SERIAL-COMPUTE limit? Train the same base on plain-words CoT demonstrating the induction procedure (find positions -> derive shift k=(j-i)%10 -> apply (p+k)%10). Full eval matrix (forced-digit vs generation). RESULTS (held-out shift, n=200): reasoning-SFT induces PERFECTLY via generation (1.00) but at CHANCE forced-digit (0.01) -- the CoT is ~100% LOAD-BEARING (induction lives in the serial tokens, not the weights). Base own-reasoning 0.00, base+strategy-hint 0.00 (no SFT). Forgetting: answer-only SFT crashed execute to 0.09, but reasoning-SFT largely PRESERVED it (0.57 vs base 0.72). OOF affine (generation) 0.13 (shift-specific). Faithfulness: the emitted CoT genuinely computes the position-arithmetic.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_meta_induction"
+        }
+      ],
+      "implication": "The forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge-storage limit. The model literally cannot do the induction computation in one forward pass -- even after SFT -- but can do it PERFECTLY by unrolling the steps over tokens. This RESOLVES C43 (answer-only tried to cram induction into the forward pass -> 0.40 + catastrophic forgetting; reasoning-SFT unrolls it serially -> 1.00 + preserved execution). Unifies the arc's induction findings: C38 (test-time thinking rescues induction to 0.50), C13 (broken mental SIMULATION), C42 (multi-step reasoning), C40/C41 (confidence). The model's core limit is running MULTI-STEP COMPUTATION in a forward pass; give it serial tokens and it works. FOR THE MISSION: to elicit induction/multi-step reasoning from the fixed 4B, ALWAYS give it serial compute (chain-of-thought / scratchpad); never expect a forward-pass answer. Answer-only SFT is the wrong vehicle (forces a serial computation into one step, where it can't live, and forgets execution).",
+      "next_tests": [
+        "MULTI-family reasoning-SFT with leave-one-family-out generation eval (train shift+reflection+affine-a3 CoT, hold out a=7) -- does the model learn GENERAL induction-via-reasoning, or only the taught procedures? (The affine OOF 0.13 says shift-only doesn't transfer.)",
+        "A GENERIC-strategy CoT the model can actually execute (step-counting not position-arithmetic) as base+strategy, to cleanly test serial-compute-WITHOUT-teaching (the current base+strategy 0.00 is confounded by position-arithmetic being too hard).",
+        "Token/step budget: plot induction accuracy vs #CoT tokens; is there a minimal serial depth below which it fails?"
+      ],
+      "avoid": [
+        "Do not claim reasoning-SFT installs GENERAL induction: it is shift-SPECIFIC (OOF affine 0.13). The CoT hand-codes the shift algorithm, so in-family 1.00 = executing a TAUGHT serial procedure perfectly (C39 execute-a-procedure, unrolled), not spontaneous general induction.",
+        "Do not read base+strategy-hint 0.00 as 'serial compute doesn't help': it is confounded -- the position-arithmetic in the hint is itself too hard for the untrained base to execute (base EXECUTE of the simpler step-counting rule was 0.72). Need a base-executable strategy to test serial-compute-without-teaching cleanly.",
+        "The DECISIVE, clean result is the reasoning-SFT forced-digit (0.01) vs generation (1.00) dissociation = the CoT is load-bearing = serial-compute limit. That does NOT depend on the confounded base+strategy arm.",
+        "Single seed; answer-only-generation cell not run (adapter moved external). General-induction (multi-family leave-one-out) owed."
+      ]
     }
   ]
 }

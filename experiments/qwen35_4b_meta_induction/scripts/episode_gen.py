@@ -58,3 +58,17 @@ def render_execute(ep):
     return (f"The digits are arranged in this fixed order: {' '.join(ep['order'])}.\n"
             f"Rule: {rule}.\n\nApply the rule to: {ep['query']}\n"
             f"Reason briefly in plain words (no code), then end with exactly `Answer: <digit>`.")
+
+
+def render_strategy(ep):
+    """Base + STRATEGY hint (no SFT): hand over the PROCEDURE (how to find the rule) but NOT the answer. If the base
+    can now induce, the wall was a missing-strategy gap elicitable by prompting = serial-compute/latent, not a
+    knowledge-absent limit that must be SFT-injected."""
+    return (f"The digits are arranged in this fixed order: {' '.join(ep['order'])}.\n"
+            f"A hidden rule maps each digit to another digit. Here are examples:\n"
+            + "\n".join(f"{x} -> {y}" for x, y in ep["examples"]) +
+            f"\n\nHint: to find the rule, take one example x -> y, find the 0-indexed positions of x and y in the "
+            f"order, and compute the shift k = (position of y - position of x) mod 10. Then apply: find the query's "
+            f"position p and the answer is the digit at position (p + k) mod 10.\n\n"
+            f"Apply the rule to: {ep['query']}\nReason step by step in plain words (no code), then end with exactly "
+            f"`Answer: <digit>`.")

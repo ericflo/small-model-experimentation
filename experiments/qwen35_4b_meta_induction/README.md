@@ -16,8 +16,12 @@ Shift induce: base 0.087 -> SFT-4k 0.35 -> SFT-8k 0.40 (data-limited) but platea
 ## Interpretation
 The induction wall is neither a hard architectural bound nor cleanly liftable: partial, procedure-specific install with catastrophic forgetting. Trained to induce, the fixed 4B learns a specific procedure, not the general skill -- an executor at heart.
 
+## Reasoning arm (C44): serial-compute vs knowledge limit
+- `scripts/gen_cot.py` (CoT traces demonstrating the induction procedure), `scripts/train_lora.py` (reasoning-SFT), `scripts/eval_induction.py` (--mode induce_gen/strategy), `scripts/analyze_reasoning.py`.
+- Result: reasoning-SFT induces held-out shifts PERFECTLY via generation (1.00) but at CHANCE forced-digit (0.01) -> the CoT is 100% load-bearing -> the forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge limit. Execution largely preserved (0.57 vs answer-only 0.09). OOF affine 0.13 (shift-specific). See `reports/report_reasoning.md`, `analysis/induction_serial_compute.png`.
+
 ## Knowledgebase Update
-- Claim ledger: C43
+- Claim ledger: C43, C44
 
 ## Artifacts
 - `scripts/episode_gen.py`, `scripts/gen_data.py`, `scripts/train_lora.py` (answer-only QLoRA), `scripts/eval_induction.py` (forced-digit induce + execute ceiling), `scripts/analyze.py`

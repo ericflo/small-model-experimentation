@@ -10456,32 +10456,28 @@
    "charts": []
   },
   "qwen35_4b_meta_induction": {
-   "verdict_tag": "Training installs a trick, not the skill",
+   "verdict_tag": "Induction lives in the reasoning, not the weights",
    "concept_primer": "The model's core weakness (established across this project) is INDUCTION: figuring out a hidden rule from a few examples. This asks the biggest question -- can you TRAIN that missing skill into the fixed model so it works on rules it never saw?",
    "plain_question": "Can fine-tuning teach the small model the general skill of figuring out a hidden rule from examples -- lifting its central limitation?",
-   "plain_answer": "Only partway. Trained on thousands of 'here are examples, infer the rule' puzzles of one type (a shift), the model goes from chance (9%) to 35-40% on brand-new shift puzzles -- a real gain that keeps growing with more training data. But it stalls well short of what the model can do when simply TOLD the rule (72%), so the skill is only half-installed. Worse, when tested on a DIFFERENT type of rule it wasn't trained on, it barely improves (21% -> 30%) -- it learned the specific trick, not general rule-finding. And the training badly damaged what the model was already good at: its ability to apply a stated rule collapsed from 72% to 9%. So fine-tuning can nudge the model toward induction but cannot install the general skill, and it costs the model its existing competence.",
-   "why_it_matters": "This is the definitive test of whether the model's central limitation can be trained away, and the answer bounds what's possible: the induction wall is neither permanent nor cleanly fixable. Trained to figure out rules, the model memorizes a specific procedure rather than acquiring general rule-finding -- it stays an executor of given procedures at heart. For practitioners: don't expect fine-tuning to give a small model general rule-induction; and beware that narrow answer-only fine-tuning can wreck abilities it already had.",
-   "verdict_tone": "mixed",
+   "plain_answer": "Partly, and the deeper finding is WHERE it can live. Answer-only fine-tuning (forcing a direct answer) only reaches ~40% on new shift puzzles and wrecks the model's other skills. But training the model to REASON THROUGH the procedure step by step changes everything: it then solves brand-new shift puzzles PERFECTLY (100%) when allowed to think on paper -- yet the SAME trained model is back at chance (1%) if forced to answer in a single step. So the reasoning steps are doing 100% of the work: the model literally cannot do this computation 'in its head' in one pass, even after training, but can do it flawlessly by writing out the steps. The limitation is about serial thinking-room, not stored knowledge. (It still only learned the specific shift trick -- a different rule type it wasn't trained on stays near chance.)",
+   "why_it_matters": "This resolves what KIND of limit the model's central weakness is: not missing knowledge, but an inability to run a multi-step computation in a single forward pass. The practical rule is decisive: to get a small model to do multi-step reasoning, ALWAYS give it room to think step by step (chain-of-thought / a scratchpad) -- never expect a one-shot answer, and don't fine-tune it to answer directly (that forces the computation into a place it can't live, and destroys skills it already had).",
+   "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "infer a hidden shift, base",
-     "value": "0.09 (chance)"
+     "label": "reasoning-SFT, allowed to reason (new shifts)",
+     "value": "1.00"
     },
     {
-     "label": "infer a hidden shift, after training (8k)",
+     "label": "same model, forced to answer in one step",
+     "value": "0.01"
+    },
+    {
+     "label": "answer-only fine-tune (one step)",
      "value": "0.40"
     },
     {
-     "label": "apply a STATED shift (ceiling)",
-     "value": "0.72"
-    },
-    {
-     "label": "different rule type it wasn't trained on",
-     "value": "0.21 -> 0.30"
-    },
-    {
-     "label": "apply a stated rule AFTER training (forgetting)",
-     "value": "0.72 -> 0.09"
+     "label": "execution kept? reasoning-SFT vs answer-only",
+     "value": "0.57 vs 0.09"
     }
    ],
    "charts": []

@@ -1,0 +1,9 @@
+--- SERIAL-COMPUTE-ALONE (no SFT): does the base induce with its own reasoning / with a strategy hint? ---
+[eval] base INDUCE_GEN heldout_shift.jsonl: acc=0.000 (n=200, chance 0.1)
+[eval] base STRATEGY heldout_shift.jsonl: acc=0.000 (n=200, chance 0.1)
+--- REASONING-SFT: install + load-bearing (gen vs forced) + forgetting + OOF ---
+[eval] rsft INDUCE_GEN heldout_shift.jsonl: acc=1.000 (n=200, chance 0.1)
+[eval] rsft INDUCE heldout_shift.jsonl: acc=0.010 (n=200, chance 0.1) | top=[('5', 46), ('8', 45), ('4', 38)]
+[eval] rsft EXECUTE heldout_shift.jsonl: acc=0.570 (n=200)
+[eval] rsft INDUCE_GEN test_affine.jsonl: acc=0.130 (n=200, chance 0.1)
+MATRIXDONE

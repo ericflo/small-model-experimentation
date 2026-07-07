@@ -1,0 +1,28 @@
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:12,  5.85it/s]Loading weights:  12%|█▏        | 53/426 [00:00<00:01, 237.84it/s]Loading weights:  25%|██▍       | 106/426 [00:00<00:00, 349.34it/s]Loading weights:  39%|███▉      | 166/426 [00:00<00:00, 431.73it/s]Loading weights:  53%|█████▎    | 224/426 [00:00<00:00, 461.81it/s]Loading weights:  67%|██████▋   | 285/426 [00:00<00:00, 506.37it/s]Loading weights:  79%|███████▉  | 338/426 [00:00<00:00, 481.66it/s]Loading weights:  91%|█████████ | 388/426 [00:00<00:00, 461.50it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 422.87it/s]
+Traceback (most recent call last):
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/peft/config.py", line 317, in _get_peft_type
+    config_file = hf_hub_download(
+                  ^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 84, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 129, in validate_repo_id
+    raise HFValidationError(f"Repo id must be a string, not {type(repo_id)}: '{repo_id}'.")
+huggingface_hub.errors.HFValidationError: Repo id must be a string, not <class 'pathlib.PosixPath'>: 'runs/lora_shift8k'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_meta_induction/scripts/eval_induction.py", line 122, in <module>
+    main()
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_meta_induction/scripts/eval_induction.py", line 99, in main
+    model, tok = load(a.adapter)
+                 ^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_meta_induction/scripts/eval_induction.py", line 22, in load
+    from peft import PeftModel; model = PeftModel.from_pretrained(model, adapter)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/peft/peft_model.py", line 473, in from_pretrained
+    config = PEFT_TYPE_TO_CONFIG_MAPPING[PeftConfig._get_peft_type(model_id, **hf_kwargs)].from_pretrained(
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/peft/config.py", line 323, in _get_peft_type
+    raise ValueError(f"Can't find '{CONFIG_NAME}' at '{model_id}'")
+ValueError: Can't find 'adapter_config.json' at 'runs/lora_shift8k'

@@ -9,6 +9,8 @@
 
 ## Key Result
 
+- [qwen35_4b_meta_induction (reasoning arm)](../../experiments/qwen35_4b_meta_induction/reports/report_reasoning.md) (claim C44): the forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge limit -- reasoning-SFT induces held-out shifts perfectly via generation (1.00) but at chance in one forward pass (0.01); the CoT is 100% load-bearing. Give the model serial tokens and induction works; it cannot be compressed into a forward pass.
+
 - [qwen35_4b_meta_induction](../../experiments/qwen35_4b_meta_induction/reports/report.md) (claim C43): can SFT install the induction skill? PARTIALLY -- shift induction 0.087 (chance) -> 0.40 (data-limited) but plateaus below the execute ceiling (0.72), is shift-specific (OOF affine 0.30), and answer-only SFT catastrophically forgets execution (0.72 -> 0.09). The wall is neither a hard bound nor cleanly liftable; trained to induce, the model learns a specific procedure, not the general skill.
 
 - [qwen35_4b_learn_from_failures](../../experiments/qwen35_4b_learn_from_failures/reports/report.md) (claim C29): preference training on the model's OWN failures does NOT close the coverage->deployable gap -- DPO collapses generation (greedy@1 & coverage crash; pre-DPO 2AFC=0.81 verifier but preference-optimizing it destroys the model). The gap closes with MORE SFT: SFT_2x triples greedy@1 (0.037->0.113). Extends prior MBPP DPO work to the controlled depth-3 substrate. Limits: DPO not heavily constrained, single seed.

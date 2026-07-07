@@ -1,0 +1,14 @@
+{
+ "base_forced": 0.087,
+ "base_gen": 0.0,
+ "base_strategy_gen": 0.0,
+ "answeronly_forced": 0.4,
+ "answeronly_execute": 0.093,
+ "reasoning_gen": 1.0,
+ "reasoning_forced": 0.01,
+ "reasoning_execute": 0.57,
+ "reasoning_affine_gen": 0.13,
+ "shift_execute_ceiling": 0.72,
+ "chance": 0.1,
+ "verdict": "The forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge-storage limit. THE DISSOCIATION: the reasoning-SFT model (taught the induction procedure as chain-of-thought) induces held-out shifts PERFECTLY when it can reason step-by-step (generation 1.0) but is at CHANCE when forced to answer in a single forward pass (forced-digit 0.01) -- the CoT is ~100% LOAD-BEARING, so induction lives in the serial tokens, not the weights. This RESOLVES C43: answer-only SFT tried to force induction into the forward pass and got only 0.4 + catastrophic forgetting (execute 0.093); reasoning-SFT lets it unroll serially -> 1.0 + execution largely preserved (0.57 vs base 0.72). The emitted CoT genuinely computes the position-arithmetic (faithful). HONEST CAVEATS (per review): the CoT hand-codes the SHIFT algorithm, so this shows the model can EXECUTE a taught serial induction-procedure perfectly (C39's execute-a-procedure, unrolled over tokens) -- NOT that it learned GENERAL induction: out-of-family affine stays near chance (0.13), and base+strategy-hint is 0.00 (the position-arithmetic is itself too hard for the base to execute). So: the forward pass fundamentally cannot do the induction computation; a learned/taught induction procedure can ONLY be run by unrolling it serially over tokens."
+}

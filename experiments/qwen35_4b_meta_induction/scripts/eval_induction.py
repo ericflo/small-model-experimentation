@@ -55,10 +55,39 @@ def execute_acc(model, tok, recs, batch_size=48, max_new=256):
     return correct / len(recs)
 
 
+@torch.no_grad()
+def induce_gen_acc(model, tok, recs, batch_size=32, max_new=256):
+    """Generate from the INDUCE prompt (let the model reason), parse Answer -- for reasoning-SFT models."""
+    correct = 0
+    for s in range(0, len(recs), batch_size):
+        sub = recs[s:s + batch_size]
+        prompts = [chat(tok, r["ep"]["_prompt"]) for r in sub]
+        enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to("cuda")
+        out = model.generate(**enc, max_new_tokens=max_new, do_sample=False, pad_token_id=tok.pad_token_id)
+        for r, seq in zip(sub, out):
+            txt = tok.decode(seq[enc["input_ids"].shape[1]:], skip_special_tokens=True)
+            m = ANS.findall(txt); correct += int((m[-1] if m else "") == r["ep"]["answer"])
+    return correct / len(recs)
+
+
+@torch.no_grad()
+def strategy_acc(model, tok, recs, batch_size=32, max_new=320):
+    correct = 0
+    for s in range(0, len(recs), batch_size):
+        sub = recs[s:s + batch_size]
+        prompts = [chat(tok, EG.render_strategy(r["ep"])) for r in sub]
+        enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to("cuda")
+        out = model.generate(**enc, max_new_tokens=max_new, do_sample=False, pad_token_id=tok.pad_token_id)
+        for r, seq in zip(sub, out):
+            txt = tok.decode(seq[enc["input_ids"].shape[1]:], skip_special_tokens=True)
+            m = ANS.findall(txt); correct += int((m[-1] if m else "") == r["ep"]["answer"])
+    return correct / len(recs)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", type=Path, required=True); ap.add_argument("--adapter", type=Path, default=None)
-    ap.add_argument("--mode", choices=["induce", "execute"], default="induce")
+    ap.add_argument("--mode", choices=["induce", "execute", "induce_gen", "strategy"], default="induce")
     ap.add_argument("--tag", default="base"); ap.add_argument("--limit", type=int, default=300)
     a = ap.parse_args()
     rows = [json.loads(l) for l in a.data.read_text().splitlines() if l.strip()][:a.limit]
@@ -73,6 +102,14 @@ def main():
         acc, dist = induce_acc(model, tok, recs, render)
         print(f"[eval] {a.tag} INDUCE {a.data.name}: acc={acc:.3f} (n={len(recs)}, chance 0.1) | top={dist.most_common(3)}", flush=True)
         res = {"tag": a.tag, "mode": "induce", "data": a.data.name, "acc": round(acc, 3), "n": len(recs), "dist": dict(dist)}
+    elif a.mode == "induce_gen":
+        acc = induce_gen_acc(model, tok, recs)
+        print(f"[eval] {a.tag} INDUCE_GEN {a.data.name}: acc={acc:.3f} (n={len(recs)}, chance 0.1)", flush=True)
+        res = {"tag": a.tag, "mode": "induce_gen", "data": a.data.name, "acc": round(acc, 3), "n": len(recs)}
+    elif a.mode == "strategy":
+        acc = strategy_acc(model, tok, recs)
+        print(f"[eval] {a.tag} STRATEGY {a.data.name}: acc={acc:.3f} (n={len(recs)}, chance 0.1)", flush=True)
+        res = {"tag": a.tag, "mode": "strategy", "data": a.data.name, "acc": round(acc, 3), "n": len(recs)}
     else:
         acc = execute_acc(model, tok, recs)
         print(f"[eval] {a.tag} EXECUTE {a.data.name}: acc={acc:.3f} (n={len(recs)})", flush=True)

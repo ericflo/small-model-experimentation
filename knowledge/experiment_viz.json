@@ -44137,6 +44137,35 @@
    "charts": [
     {
      "headline": true,
+     "kind": "bar",
+     "title": "Is the induction wall a knowledge or serial-compute limit? SERIAL-COMPUTE: the model induces via reasoning (1.00) but at chance in one forward pass (0.01)",
+     "categories": [
+      "base (1 forward pass)",
+      "base (own reasoning)",
+      "base+strategy hint",
+      "answer-only SFT (1 pass)",
+      "reasoning-SFT (1 pass)",
+      "reasoning-SFT (reasoning)"
+     ],
+     "series": [
+      {
+       "label": "held-out shift induction accuracy (execute ceiling 0.72, chance 0.1)",
+       "values": [
+        0.087,
+        0.0,
+        0.0,
+        0.4,
+        0.01,
+        1.0
+       ]
+      }
+     ],
+     "y_label": "held-out shift induction accuracy",
+     "y_format": "number",
+     "note": "The deepest question of the arc, resolved. C43 showed answer-only SFT only PARTIALLY installs scrambled-order shift induction (0.40) and catastrophically forgets execution. Here the SAME base is trained on plain-words chain-of-thought demonstrating the induction procedure (find positions -> derive shift -> apply). THE DISSOCIATION: the reasoning-SFT model induces held-out shifts PERFECTLY when it can reason step-by-step (generation 1.00) but is at CHANCE when forced to answer in a single forward pass (0.01). The chain-of-thought is ~100% LOAD-BEARING -- induction lives entirely in the serial tokens, not the weights. The model literally cannot do the induction computation in one forward pass, even after training; it can only unroll it. So the forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge-storage limit. And unlike answer-only SFT (which crashed execution to 0.09), reasoning-SFT largely preserved it (0.57). Caveat: the CoT hand-codes the shift algorithm, so this is executing a taught serial procedure perfectly -- out-of-family affine stays near chance (0.13), so it did not learn GENERAL induction. Connects C38 (thinking rescues induction to 0.50), C13 (broken mental simulation): the model's core limit is running multi-step computation in a forward pass -- give it serial tokens and it works."
+    },
+    {
+     "headline": false,
      "kind": "line",
      "title": "Can SFT install the skill of induction? Partially: shift induction climbs (data-limited) but plateaus below the execute ceiling; OOF affine barely moves",
      "series": [
