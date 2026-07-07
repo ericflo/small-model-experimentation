@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 193
+- Experiments: 194
 
 ## Structured Execution And Compilers
 
@@ -344,7 +344,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 52
+- Assigned experiments: 53
 
 ### Seed Evidence
 
@@ -371,6 +371,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_learn_from_failures` (new): [README](../experiments/qwen35_4b_learn_from_failures/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_meta_induction` (new): [README](../experiments/qwen35_4b_meta_induction/README.md)
 - `qwen35_4b_neurosymbolic_repl_substrate` (new): [README](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md)
 - `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
 - `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)

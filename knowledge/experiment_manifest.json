@@ -2626,6 +2626,46 @@
   },
   {
     "file_counts": {
+      ".jinja": 2,
+      ".json": 16,
+      ".jsonl": 3,
+      ".log": 6,
+      ".md": 6,
+      ".png": 1,
+      ".py": 7,
+      ".safetensors": 2,
+      ".yaml": 3,
+      "[none]": 1
+    },
+    "generated_on": "2026-07-07",
+    "id": "qwen35_4b_meta_induction",
+    "path": "experiments/qwen35_4b_meta_induction",
+    "primary_readme": "experiments/qwen35_4b_meta_induction/README.md",
+    "primary_report": "experiments/qwen35_4b_meta_induction/reports/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/gen_data.py --n-train 8000`; `python scripts/train_lora.py --train data/train_shift.jsonl --out runs/lora_shift8k --epochs 2`; `python scripts/eval_induction.py --data data/heldout_shift.jsonl --mode induce --adapter runs/lora_shift8k`; `python scripts/analyze.py`.",
+    "tags": [
+      "lora",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Can SFT Install the Skill of Induction?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 47,
+    "total_size_bytes": 383635639
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".log": 2,
       ".md": 5,

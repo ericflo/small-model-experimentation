@@ -1,0 +1,4 @@
+[eval] sft INDUCE heldout_shift.jsonl: acc=0.350 (n=300, chance 0.1) | top=[('8', 111), ('9', 51), ('4', 45)]
+[eval] sft INDUCE test_affine.jsonl: acc=0.267 (n=300, chance 0.1) | top=[('8', 96), ('5', 53), ('9', 52)]
+[eval] sft EXECUTE heldout_shift.jsonl: acc=0.093 (n=300)
+SFTDONE

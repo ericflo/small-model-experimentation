@@ -1,0 +1,19 @@
+{
+ "shift_induce": {
+  "base": 0.087,
+  "sft4k": 0.35,
+  "sft8k": 0.4
+ },
+ "shift_execute_ceiling": 0.72,
+ "affine_induce": {
+  "base": 0.213,
+  "sft4k": 0.267,
+  "sft8k": 0.297
+ },
+ "affine_execute_ceiling": 0.457,
+ "shift_execute_after_sft4k": 0.093,
+ "chance": 0.1,
+ "sft8k_shift_top_answer_frac": 0.2,
+ "sft4k_shift_top_answer_frac": 0.37,
+ "verdict": "SFT PARTIALLY lifts the induction wall but does NOT cleanly install the skill. In-family (held-out shift): answer-only SFT moves induction from chance (0.087) to 0.35 (4k) to 0.4 (8k) -- DATA-LIMITED and improving, but plateauing well BELOW the base EXECUTE ceiling (0.72), so the skill is only partially installed. OUT-OF-FAMILY (affine, a different structure): induction barely moves (0.213 -> 0.297), far below in-family -- the model learned a SHIFT-SPECIFIC procedure, not general induction. Two costs: (1) CATASTROPHIC FORGETTING -- answer-only SFT crashed the model's EXECUTE ability from 0.72 to 0.093; (2) a default-fallback BIAS (over-outputs one digit) that shrinks with data (0.37 at 4k -> 0.2 at 8k). CONCLUSION: the induction wall is neither a hard architectural bound (SFT lifts it ~4.6x above chance, scaling with data) nor cleanly liftable (partial, procedure-specific, forgets execution) -- consistent with the arc's 'executor, not inducer': trained to induce, the model learns a specific procedure, not the general skill, and trades away its executor competence."
+}

@@ -9,6 +9,8 @@
 
 ## Key Result
 
+- [qwen35_4b_meta_induction](../../experiments/qwen35_4b_meta_induction/reports/report.md) (claim C43): can SFT install the induction skill? PARTIALLY -- shift induction 0.087 (chance) -> 0.40 (data-limited) but plateaus below the execute ceiling (0.72), is shift-specific (OOF affine 0.30), and answer-only SFT catastrophically forgets execution (0.72 -> 0.09). The wall is neither a hard bound nor cleanly liftable; trained to induce, the model learns a specific procedure, not the general skill.
+
 - [qwen35_4b_learn_from_failures](../../experiments/qwen35_4b_learn_from_failures/reports/report.md) (claim C29): preference training on the model's OWN failures does NOT close the coverage->deployable gap -- DPO collapses generation (greedy@1 & coverage crash; pre-DPO 2AFC=0.81 verifier but preference-optimizing it destroys the model). The gap closes with MORE SFT: SFT_2x triples greedy@1 (0.037->0.113). Extends prior MBPP DPO work to the controlled depth-3 substrate. Limits: DPO not heavily constrained, single seed.
 
 - [qwen35_4b_bank_the_thoughts](../../experiments/qwen35_4b_bank_the_thoughts/reports/report.md) (claim C28): banking correct decomposition PLANS beats banking ANSWERS on deployable depth-3 -- three fresh QLoRA on matched data (A=prompt->code, T=prompt->plan->code, T_corrupt=mismatched plan); T coverage@16 0.325 vs A 0.200; content-causal (T_corrupt collapses to 0.113, below A); test-time channel (T no-think 0.013). Resolves C26/C27 (thinking helps once the reasoning is banked). Limits: synthetic plans (Phase 2 = model's own thoughts), step-1-think eval incomplete, single seed.

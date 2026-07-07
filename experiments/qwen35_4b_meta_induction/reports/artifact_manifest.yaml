@@ -1,0 +1,11 @@
+schema_version: 1
+experiment_id: "qwen35_4b_meta_induction"
+external_artifacts:
+  - path: "runs/lora_shift, runs/lora_shift8k"
+    reason: "QLoRA adapters (~170MB); regenerate via train_lora.py"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/train_lora.py --train data/train_shift.jsonl --smoke"
+  full_command: "gen_data.py --n-train 8000; train_lora.py (2 epochs); eval_induction.py (induce+execute, base+adapter); analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C43): SFT PARTIALLY lifts the induction wall (shift 0.087->0.40, data-limited) but plateaus below the execute ceiling (0.72), is shift-specific (OOF affine 0.30), and answer-only SFT catastrophically forgets execution (0.72->0.09). Base execute ceiling is the mandatory gate. Single seed; owed: reasoning-SFT arm, multi-family leave-one-out for GENERAL induction, mix-execute to prevent forgetting."

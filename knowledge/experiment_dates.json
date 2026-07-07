@@ -386,6 +386,14 @@
     "reports/qwen35_4b_diversity_keyed_coverage_gate_report.md:3: 'Date: 2026-06-25' (also hardcoded in scripts/make_report.py:275)"
    ]
   },
+  "qwen35_4b_error_localization": {
+   "start": "2026-07-07",
+   "end": "2026-07-07",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_executable_program_posttraining": {
    "start": "2026-06-22",
    "end": "2026-06-22",

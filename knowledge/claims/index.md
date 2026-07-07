@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 42
+- Claims: 43
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 33 |
+| Promising | 34 |
 
 ## Program Counts
 
@@ -19,12 +19,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 7 |
+| `benchmark_generalization` | 8 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 18 |
+| `posttraining_and_adaptation` | 19 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
 | `structured_execution_and_compilers` | 28 |
@@ -1004,3 +1004,28 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not use INDUCE-mode or scrambled/novel orders under forced-scaffold: the model applies a systematic WRONG rule -> every step locally-wrong, no single origin to localize (the premise collapses). Use EXECUTE-mode familiar order (genuine slips).
 - Do not claim clean first-error localization on MULTI-slip chains: argmin finds AN error 0.76 but the FIRST only 0.27. The single-origin/repair story holds for single-slip chains (38% of error-chains).
 - Greedy re-sampling for repair is a NO-OP (reproduces the same wrong digit); the reported repair is oracle-downstream (isolates 'found the right origin'). Deployable model-downstream repair needs temperature. Single seed; execute-mode arithmetic slips only.
+
+## C43: SFT PARTIALLY lifts the induction wall but does not cleanly install the skill: data-limited (0.087->0.40) yet below the execute ceiling, procedure-specific (weak OOF transfer), and catastrophically forgets execution
+
+- Status: `Promising`
+- Programs: `posttraining_and_adaptation`, `benchmark_generalization`
+- Summary: Experiment qwen35_4b_meta_induction. The mission-core 'lift the wall' test. Each episode = a random SCRAMBLED digit order (stated) + a hidden rule + 6 examples + a query; the model must INFER the rule and apply. Base fails at chance (C39). Families: shift f(order[i])=order[(i+k)%10] (train) and affine order[(a*i+b)%10], a in {3,7,9} (out-of-family). Answer-only QLoRA r32/a64. Review's mandatory GATE: base EXECUTE ceiling per family (an induction failure is meaningful only if the base can execute the rule). Eval = forced 'Answer:' argmax over the 10 digit tokens. RESULTS: shift-induce base 0.087 (chance) -> SFT-4k 0.35 -> SFT-8k 0.40 (~4.6x chance, DATA-LIMITED/still rising) but PLATEAUS below the base execute ceiling (0.72) -> only partial install. Affine (OOF) barely moves (0.213->0.297, below in-family and its own 0.457 ceiling) -> SHIFT-SPECIFIC procedure, not general induction. TWO COSTS: (1) catastrophic FORGETTING -- answer-only SFT crashed shift-execute from 0.72 to 0.093; (2) default-fallback digit BIAS shrinking with data (0.37 at 4k -> 0.20 at 8k). Frequency baseline ~0.10, so SFT-8k 0.40 is mostly real induction.
+- Implication: The induction wall (C38/C39) is NEITHER a hard architectural bound (SFT lifts it several-fold above chance, scaling with data) NOR cleanly liftable (partial, plateaus below the execute ceiling, procedure-specific, forgets execution). Consistent with the arc's 'executor, not inducer': trained to induce, the fixed 4B learns a SPECIFIC procedure, not the GENERAL skill, and trades away its executor competence. Relates to the banking arc: C22/C23 showed the EXECUTION wall is data-limited/crossable via tool-seeded banking; C43 shows the INDUCTION wall is only PARTIALLY liftable and procedure-specific -- induction is harder to install than execution. For the mission: SFT can nudge the model toward induction but cannot install a general induction skill in the fixed weights; and answer-only SFT is a poor vehicle (catastrophic forgetting).
+
+### Evidence
+
+- [`qwen35_4b_meta_induction`](../../experiments/qwen35_4b_meta_induction/reports/report.md)
+
+### Next Tests
+
+- MULTI-family leave-one-out (train shift+reflection+affine-a3, test held-out a=7) to test GENERAL induction rather than shift-specificity (the review's stronger design).
+- Reasoning-SFT arm (train the induction PROCEDURE as plain-words CoT): does teaching the procedure explicitly install it better AND avoid catastrophic forgetting? Answer-only-fails-but-reasoning-works would say the wall is a forward-pass/serial-depth limit (consistent with C38 thinking-rescue), not a knowledge limit.
+- Mix execute examples into SFT to prevent catastrophic forgetting; measure whether induction install and execution retention can co-exist.
+- Dose-response to saturation (16k, 32k): does shift-induction reach the execute ceiling (0.72) with enough data, or plateau below it?
+
+### Avoid
+
+- Do not claim SFT INSTALLS induction cleanly: it plateaus at 0.40 well below the base execute ceiling (0.72) and is procedure-specific (OOF affine 0.30). It is a PARTIAL, biased install.
+- Do not claim induction is UN-installable: SFT lifts it ~4.6x above chance (0.087->0.40) and it scales with data (4k->8k). The wall is partially liftable.
+- Do not interpret OOF affine without its execute ceiling (0.46): affine OOF induction is partly execution-limited, not purely an induction-transfer failure (the C39 cipher-trap gate).
+- Answer-only SFT causes CATASTROPHIC FORGETTING (execute 0.72->0.09) -- a poor vehicle; do not read the induction gain without noting the execution cost. Single seed; shift->affine is procedure-specificity, NOT a general-induction test (needs multi-family leave-one-out).

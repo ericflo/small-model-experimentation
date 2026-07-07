@@ -44132,6 +44132,106 @@
      "note": "On single-slip chains (exactly one error = one well-posed origin, n=137), does the lowest-confidence step pinpoint the slip? The position-controlled DE-TRENDED confidence localizes it at 0.56 (raw confidence 0.64), ~3x the uniform 1/depth baseline (0.19) and clearly beating a position-prior baseline (guess the highest-error position, 0.36) and always-guess-last-step (0.01). So confidence carries genuine WHERE-information beyond position. Deployable: redo the chain from the located step (oracle-downstream) fixes 56% of single-slip chains at avg 3.8 steps vs 5.6 for redo-all -- cheaper targeted repair. Caveat: on MULTI-slip chains (n=224) the argmin finds AN error 76% of the time but the FIRST only 27% (several low-confidence steps compete), so the clean single-origin/repair story holds when the model slips once."
     }
    ]
+  },
+  "qwen35_4b_meta_induction": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "line",
+     "title": "Can SFT install the skill of induction? Partially: shift induction climbs (data-limited) but plateaus below the execute ceiling; OOF affine barely moves",
+     "series": [
+      {
+       "label": "IN-FAMILY: shift induction (held-out rules)",
+       "points": [
+        [
+         0,
+         0.087
+        ],
+        [
+         1,
+         0.35
+        ],
+        [
+         2,
+         0.4
+        ]
+       ]
+      },
+      {
+       "label": "OUT-OF-FAMILY: affine induction",
+       "points": [
+        [
+         0,
+         0.213
+        ],
+        [
+         1,
+         0.267
+        ],
+        [
+         2,
+         0.297
+        ]
+       ]
+      },
+      {
+       "label": "shift EXECUTE ceiling (base can apply a stated rule)",
+       "points": [
+        [
+         0,
+         0.72
+        ],
+        [
+         2,
+         0.72
+        ]
+       ]
+      },
+      {
+       "label": "chance",
+       "points": [
+        [
+         0,
+         0.1
+        ],
+        [
+         2,
+         0.1
+        ]
+       ]
+      }
+     ],
+     "x_label": "0=base, 1=SFT 4k episodes, 2=SFT 8k episodes",
+     "y_label": "induction accuracy (held-out rules)",
+     "y_format": "number",
+     "note": "The mission-core 'lift the wall' test. Each episode = a random SCRAMBLED digit order (stated) + a hidden rule + examples + a query; the model must INFER the rule and apply. Base fails at chance (shift-induce 0.087) though it CAN EXECUTE a stated rule (0.72 -- so the wall is induction, not execution, the review's mandatory gate). Answer-only QLoRA on random shift episodes, tested on HELD-OUT shifts (in-family) and AFFINE rules (out-of-family). SFT PARTIALLY lifts the wall and it is DATA-LIMITED: shift induction climbs 0.087 -> 0.35 (4k) -> 0.40 (8k), ~4.6x chance and still rising -- but PLATEAUS well below the execute ceiling (0.72), so only partly installed. Out-of-family affine barely moves (0.21 -> 0.30) -- the model learned a SHIFT-SPECIFIC procedure, not general induction. So the induction wall is neither a hard architectural bound nor cleanly liftable: trained to induce, the fixed 4B learns a specific procedure, not the general skill -- it remains an executor at heart."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "The cost: answer-only SFT installs partial induction (+0.31) but CATASTROPHICALLY FORGETS execution (0.72 -> 0.09)",
+     "categories": [
+      "shift EXECUTE (base)",
+      "shift EXECUTE (after answer-only SFT)",
+      "shift INDUCE (base)",
+      "shift INDUCE (SFT 8k)"
+     ],
+     "series": [
+      {
+       "label": "accuracy",
+       "values": [
+        0.72,
+        0.093,
+        0.087,
+        0.4
+       ]
+      }
+     ],
+     "y_label": "accuracy",
+     "y_format": "number",
+     "note": "Answer-only SFT (training the model to output the answer directly) lifts shift induction from chance (0.087) to 0.40, but at a steep cost: it CATASTROPHICALLY FORGETS execution -- the model's ability to APPLY a stated rule crashes from 0.72 to 0.093. So answer-only SFT trades the model's executor competence for a partial, biased induction heuristic. This is consistent with the whole arc's law (the fixed 4B is an executor, not an inducer): even trained to induce, it does not cleanly acquire the general skill, and the training damages what it was good at. Owed: a reasoning-SFT arm (teach the procedure as plain-words chain-of-thought), mixing execute examples to prevent forgetting, and a multi-family leave-one-out design to test GENERAL (not shift-specific) induction."
+    }
+   ]
   }
  }
 }

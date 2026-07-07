@@ -1,0 +1,5 @@
+[eval] base INDUCE heldout_shift.jsonl: acc=0.087 (n=300, chance 0.1) | top=[('5', 53), ('4', 43), ('2', 43)]
+[eval] base EXECUTE heldout_shift.jsonl: acc=0.720 (n=300)
+[eval] base INDUCE test_affine.jsonl: acc=0.213 (n=300, chance 0.1) | top=[('9', 53), ('5', 41), ('7', 38)]
+[eval] base EXECUTE test_affine.jsonl: acc=0.457 (n=300)
+BASEDONE
