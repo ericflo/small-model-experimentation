@@ -10,3 +10,5 @@
 ## Current Read
 
 The imported tracks include strong shift probes. Future work should make shift evaluation a cross-program norm rather than a special case.
+
+- [qwen35_4b_language_reasoning_wall](../../experiments/qwen35_4b_language_reasoning_wall/reports/report.md) (claim C37): the compositional wall does NOT exist in language. The model chains depth-3+ multi-step SIMULATION in natural language near-perfectly (no-think), unlike the depth-3 formal-composition wall -- the wall is formal-modality-specific, not a general multi-step limit. Made-up-relation control confirms it is MODALITY not a semantic prior. Formal-dict triggers code-mode. Tests SIMULATION (C13), not the C32/C36 proposal wall.

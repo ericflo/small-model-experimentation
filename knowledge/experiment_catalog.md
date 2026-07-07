@@ -2,7 +2,7 @@
 
 Generated from `experiments/` on 2026-07-07.
 
-- Experiments: 187
+- Experiments: 188
 - Source track Y provenance: 91
 - Source track Z provenance: 64
 
@@ -66,6 +66,7 @@ Generated from `experiments/` on 2026-07-07.
 | algorithmic_memory_and_retrieval, evidence_conditioned_selection | track-z | `qwen35_4b_independent_retrieval_consensus` | memory, small-model | Standalone experiment for independent-retrieval consensus selection on MBPP residual tasks. | [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md) | [report](../experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md) |
 | operator_and_skill_inventories, posttraining_and_adaptation | track-z | `qwen35_4b_inventory_shortlister_training` | lora, operator-search, small-model | Standalone Qwen3.5-4B QLoRA experiment for inventory-conditioned operator shortlisting. | [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md) | [report](../experiments/qwen35_4b_inventory_shortlister_training/reports/qwen35_4b_inventory_shortlister_training_report.md) |
 | benchmark_generalization, operator_and_skill_inventories, structured_execution_and_compilers | track-z | `qwen35_4b_joint_shortlister_ladder` | curriculum, execution, operator-search, small-model | This standalone experiment tests whether Qwen3.5-4B can use an in-context typed operator inventory to emit a joint two-operator shortlist for programs of the form `LEFT(xs), RIGHT(xs)`. | [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md) | [report](../experiments/qwen35_4b_joint_shortlister_ladder/reports/qwen35_4b_joint_shortlister_ladder_report.md) |
+| benchmark_generalization | new | `qwen35_4b_language_reasoning_wall` | small-model | `python scripts/eval_reasoning.py --render {ling_sem,ling_sym,formal} --n-per-depth 80 [--think]` then `python scripts/analyze.py`. | [README](../experiments/qwen35_4b_language_reasoning_wall/README.md) | [report](../experiments/qwen35_4b_language_reasoning_wall/reports/report.md) |
 | structured_execution_and_compilers | new | `qwen35_4b_latent_composition_probe` | latent-state, small-model | activations (latent, an expression failure) or ABSENT (a representation/information gap)? | [README](../experiments/qwen35_4b_latent_composition_probe/README.md) | [report](../experiments/qwen35_4b_latent_composition_probe/reports/report.md) |
 | process_control_and_tool_use, structured_execution_and_compilers | new | `qwen35_4b_latent_decomposition` | latent-state, small-model, tools | tool-search)? WHERE does it break, and does banking (C24) fix it? | [README](../experiments/qwen35_4b_latent_decomposition/README.md) | [report](../experiments/qwen35_4b_latent_decomposition/reports/report.md) |
 | benchmark_generalization, posttraining_and_adaptation | new | `qwen35_4b_learn_from_failures` | curriculum, lora, small-model | `python scripts/harvest_pairs.py --adapter <banked_1280> --pool 500 --k 16` then `build_shuffled.py`, `train_lora.py` (SFT/SFT_2x), `train_dpo.py`, `eval_ladder.py`, `analyze.py`. | [README](../experiments/qwen35_4b_learn_from_failures/README.md) | [report](../experiments/qwen35_4b_learn_from_failures/reports/report.md) |

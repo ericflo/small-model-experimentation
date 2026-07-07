@@ -43557,6 +43557,108 @@
      "note": "Value-fungibility control across substrates: do RANDOM op-type skeletons + value-search crack the tasks (which would make the wall trivially value-fungible)? On all three, random structure stays far below the brute-full deploy (~1.0 with the TRUE structure enumerated) -- so the correct STRUCTURE is genuinely required everywhere. Register is somewhat more fungible (R200=0.32) than string (0.17) and list (0.09) because its structure space is smaller (1728) and its arithmetic ops have more behaviorally-equivalent orderings. But the pattern -- structure is the bottleneck, not values -- holds on all three."
     }
    ]
+  },
+  "qwen35_4b_language_reasoning_wall": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "line",
+     "title": "Does the compositional wall exist in LANGUAGE? NO -- the model chains depth-3+ reasoning steps in natural language near-perfectly",
+     "series": [
+      {
+       "label": "linguistic-semantic (no-think)",
+       "points": [
+        [
+         1,
+         0.99
+        ],
+        [
+         2,
+         1.0
+        ],
+        [
+         3,
+         0.99
+        ],
+        [
+         4,
+         0.94
+        ],
+        [
+         5,
+         0.76
+        ],
+        [
+         6,
+         0.78
+        ]
+       ]
+      },
+      {
+       "label": "linguistic-symbolic 'gorps' (no-think, made-up relation control)",
+       "points": [
+        [
+         1,
+         0.95
+        ],
+        [
+         2,
+         0.99
+        ],
+        [
+         3,
+         1.0
+        ],
+        [
+         4,
+         0.55
+        ],
+        [
+         5,
+         0.01
+        ],
+        [
+         6,
+         0.0
+        ]
+       ]
+      },
+      {
+       "label": "formal-dict (no-think) -- triggers code-mode (confounded)",
+       "points": [
+        [
+         1,
+         0.03
+        ],
+        [
+         2,
+         0.79
+        ],
+        [
+         3,
+         0.75
+        ],
+        [
+         4,
+         0.29
+        ],
+        [
+         5,
+         0.06
+        ],
+        [
+         6,
+         0.42
+        ]
+       ]
+      }
+     ],
+     "x_label": "reasoning depth (number of hops to chain)",
+     "y_label": "accuracy (no-think = mental simulation, n=80/depth)",
+     "y_format": "percent01",
+     "note": "All 36 prior claims were formal/procedural. This tests C13's mental-SIMULATION wall (NOT the C32/C36 proposal wall) in the model's NATIVE domain. Contamination-free successor-chains over made-up entities, same chain rendered linguistically vs as a Python dict; shortcut-hardened (answer interior/never sink, random start, recency baseline 0.04). No-think is the PRIMARY (forces mental simulation). RESULT: the model does depth-3 multi-step reasoning in natural language NEAR-PERFECTLY (linguistic-semantic d1-d4 = 0.99/1.00/0.99/0.94), and the made-up-relation control ('gorps') is ALSO perfect through depth-3 (1.00) -> genuine MODALITY effect, not a semantic prior. Both degrade only at depth 5-6 (semantic to 0.76; made-up relation collapses to 0.00 -- semantics aids DEEP chaining). STARK contrast to the formal-composition wall (depth-3, C13-C36): the model chains 3-4 reasoning steps in language near-perfectly, so the 'compositional wall' is NOT a general multi-step limit -- it is specific to FORMAL/procedural composition. Relocates C13's 'broken mental simulation' to the formal modality. SECONDARY: the formal-DICT surface form triggers CODE-MODE (the model echoes the dict as a code block instead of simulating, d1=0.03) -- the presentation determines whether the model REASONS or CODES. Scope: tests SIMULATION (C13), not the structure-PROPOSAL wall (C32/C36); think conditions truncation-confounded (budget 1024)."
+    }
+   ]
   }
  }
 }

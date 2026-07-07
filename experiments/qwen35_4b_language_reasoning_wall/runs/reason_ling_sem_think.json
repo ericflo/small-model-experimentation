@@ -1,0 +1,44 @@
+{
+ "render": "ling_sem",
+ "think": true,
+ "n_per_depth": 80,
+ "mean_prompt_tokens": 397,
+ "by_depth": {
+  "1": {
+   "n": 80,
+   "acc": 0.35,
+   "offby1": 0.425,
+   "recency_base": 0.113
+  },
+  "2": {
+   "n": 80,
+   "acc": 0.325,
+   "offby1": 0.1,
+   "recency_base": 0.037
+  },
+  "3": {
+   "n": 80,
+   "acc": 0.537,
+   "offby1": 0.0,
+   "recency_base": 0.062
+  },
+  "4": {
+   "n": 80,
+   "acc": 0.812,
+   "offby1": 0.013,
+   "recency_base": 0.025
+  },
+  "5": {
+   "n": 80,
+   "acc": 0.613,
+   "offby1": 0.1,
+   "recency_base": 0.037
+  },
+  "6": {
+   "n": 80,
+   "acc": 0.8,
+   "offby1": 0.037,
+   "recency_base": 0.037
+  }
+ }
+}

@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 36
+- Claims: 37
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 27 |
+| Promising | 28 |
 
 ## Program Counts
 
@@ -19,7 +19,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 1 |
+| `benchmark_generalization` | 2 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 8 |
@@ -27,7 +27,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `posttraining_and_adaptation` | 18 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 26 |
+| `structured_execution_and_compilers` | 27 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -859,3 +859,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not treat C32/C34 as list-DSL-specific: they replicate on string (char edits) and register (int machine) -- the wall is structure and brute-search dominates on all three.
 - Do not over-read register's higher value-fungibility (random 0.32 at R200): it is a substrate property (smaller 1728-space, arithmetic ops alias more), not a break in the pattern -- brute-deploy is still 1.0 and the wall is still structure (value tax +0.00).
 - Scope: this generalized the BASE-model findings (C32 wall, C34 brute-dominates); banking (C33) and depth-collapse (C35) and probing (C31) were list-only and are owed cross-substrate.
+
+## C37: The compositional wall does NOT exist in language: the model chains depth-3+ multi-step SIMULATION in natural language near-perfectly -- the wall is formal-modality-specific, not a general multi-step limit
+
+- Status: `Promising`
+- Programs: `benchmark_generalization`, `structured_execution_and_compilers`
+- Summary: Experiment qwen35_4b_language_reasoning_wall. All 36 prior claims are formal/procedural; the model's native linguistic-reasoning domain was untouched. Tests C13's mental-SIMULATION wall (NOT the C32/C36 proposal wall) in language: contamination-free successor-chain traversal over made-up entities + distractor chains, same chain rendered linguistic-semantic ('X is directly followed by Y') / linguistic-symbolic ('X gorps Y', made-up-relation control) / formal-dict, no-think PRIMARY (forces mental simulation), depths 1-6, n=80. Shortcut-hardened (answer interior/never sink, random start, recency baseline 0.04). RESULT: NO depth-3 wall in language. Linguistic-semantic no-think d1-d4 = 0.99/1.00/0.99/0.94 (degrades gracefully to 0.76-0.78 at d5-6); the made-up-relation control is ALSO perfect through depth-3 (1.00) -> genuine MODALITY effect, not a semantic prior. Both collapse only at depth 5-6 (semantic 0.76 vs symbolic 0.00 -- semantics aids DEEP chaining). STARK contrast to the formal-composition wall (depth-3, C13-C36): the model chains 3-4 reasoning steps in language near-perfectly, so the wall is NOT a general multi-step limit -- it is specific to formal/procedural composition. SECONDARY: the formal-DICT rendering triggers CODE-MODE (the model echoes the dict as a ```python block instead of simulating, d1=0.03 gate-fail) -- surface presentation determines whether the model REASONS or CODES (formal arm confounded).
+- Implication: The compositional wall this project spent 36 claims mapping is a property of FORMAL composition, not of the model's ability to reason multi-step. In its native language, there is NO depth-3 wall -- the model's mental simulation is INTACT for multi-step linguistic reasoning (depth 4-5). Relocates C13's 'broken mental simulation' to the FORMAL modality specifically. The surface presentation (natural language vs code/dict) determines whether the model REASONS or CODES -- a striking, deployable-relevant finding (present tasks linguistically to elicit reasoning). SCOPE: tests SIMULATION (C13, chain-given traversal), NOT the C32/C36 structure-PROPOSAL wall -- the 'value-computer not structure-proposer' headline is untouched (a linguistic PROPOSAL task is the owed follow-up).
+
+### Evidence
+
+- [`qwen35_4b_language_reasoning_wall`](../../experiments/qwen35_4b_language_reasoning_wall/reports/report.md)
+
+### Next Tests
+
+- Linguistic PROPOSAL task (infer a hidden multi-hop rule from I/O examples, mirroring C32): does the value-computer-not-structure-proposer law (C36) extend to language, or is proposal also easier linguistically?
+- Clean think-vs-no-think (transcription vs mental simulation) with a higher think budget / better answer extraction.
+- Where exactly does linguistic simulation wall (depth 5-6 collapse)? Is it working-memory (# facts) or depth? Vary distractor load vs depth.
+
+### Avoid
+
+- Do not claim this addresses the C32/C36 structure-PROPOSAL wall or the 'value-computer not structure-proposer' law: it tests SIMULATION (chain given -> traverse), C13, only. Nothing here asks the model to propose a hidden structure.
+- Do not read the formal-dict collapse as a formal-SIMULATION deficit: the dict format triggers CODE-MODE (the model echoes the dict, d1=0.03 gate-fail) -- the formal arm is confounded by surface form, not a clean simulation-capacity measurement.
+- Do not interpret the think conditions: budget 1024 truncates (the model over-reasons trivial tasks and exhausts the budget before answering) -- no-think is the clean primary for mental simulation.
+- Do not overclaim 'no wall in language at any depth': linguistic simulation DOES degrade at depth 5-6 (semantic to 0.76, made-up-relation to 0.00); the finding is specifically NO depth-3 wall (where formal composition walls).

@@ -2257,6 +2257,39 @@
   },
   {
     "file_counts": {
+      ".json": 7,
+      ".md": 5,
+      ".png": 1,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-07",
+    "id": "qwen35_4b_language_reasoning_wall",
+    "path": "experiments/qwen35_4b_language_reasoning_wall",
+    "primary_readme": "experiments/qwen35_4b_language_reasoning_wall/README.md",
+    "primary_report": "experiments/qwen35_4b_language_reasoning_wall/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/eval_reasoning.py --render {ling_sem,ling_sym,formal} --n-per-depth 80 [--think]` then `python scripts/analyze.py`.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Does the Compositional Wall Exist in Language?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 21,
+    "total_size_bytes": 239016
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 1,
       ".md": 5,

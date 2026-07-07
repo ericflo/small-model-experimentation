@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_language_reasoning_wall"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/eval_reasoning.py --render ling_sem --n-per-depth 10 --depths 1 2 3 4"
+  full_command: "for r in ling_sem formal ling_sym: eval_reasoning.py --render $r --n-per-depth 80 [--think for ling_sem/formal]; analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C37): the compositional wall does NOT exist in language -- the model chains depth-3+ multi-step SIMULATION in natural language near-perfectly (no-think), unlike the depth-3 formal-composition wall. Formal-modality-specific. Made-up-relation control confirms it is MODALITY not semantic prior. Formal-dict triggers code-mode (confounded, d1=0.03). Tests SIMULATION (C13), NOT the C32/C36 proposal wall. Think confounded by truncation (budget 1024)."

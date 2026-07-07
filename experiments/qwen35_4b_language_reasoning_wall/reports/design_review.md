@@ -1,0 +1,71 @@
+# Adversarial design review (workflow) — verdict: sound_with_fixes
+
+## fair_modality_comparison
+Same-chain-two-modalities is the RIGHT skeleton for isolating surface form, but as specified the two presentations differ in far more than modality, so a wall-depth gap would be uninterpretable without three controls.
+
+(1) LENGTH/RETRIEVAL confound: "Vor comes right before Kel." is ~6-8 tokens/fact; a dict entry "Vor: Kel" is ~3. With N chains x length L + distractors, the NL context is 2-3x longer, so relevant facts are farther apart. If formal walls shallower, that could be pure context-length/needle-distance, not "formal-ness." MUST measure per-modality token count and either equalize (terse NL vs padded dict) or covary accuracy against context length and show the wall isn't tracking it.
+
+(2) NOTATION confound: `succ^D(e0)` is unusual function-iteration notation the model may simply not parse. That injects an artifactual formal deficit that is comprehension, not simulation. Replace with explicit iterated phrasing ("apply succ D times starting from e0"). Add a DEPTH-1 COMPREHENSION-FLOOR GATE: both modalities must be at/near ceiling at depth-1 no-think; if they already differ at depth-1, the whole depth comparison is confounded by parsing, not simulation.
+
+(3) DICT-AS-DRILLED-SKILL asymmetry (the design's own worry, and it cuts toward "formal deeper"): step-by-step dict lookup is a habitual code pattern the model executes reliably. So "formal deeper" could mean "this specific lookup pattern is memorized," not "formal simulation is better." Disambiguate by varying the formal surface (Python dict vs list of assignments vs arrow notation "a->b"); a real modality effect should survive across formal surfaces.
+
+Everything else is genuinely matched (same chain, same hop-count, same underlying computation), and that is the strength — but the comparison is only clean once length, notation, and formal-surface are controlled and depth-1 is verified at ceiling in both.
+
+## simulation_vs_proposal
+Yes — the framing is correct and this is the single most important thing to get right in the writeup. Handing the model the FULL chain and asking it to traverse D hops is SIMULATION/transduction (mental forward execution of a given map). That is C13/C14's "broken multi-step mental simulation," NOT C32/C36's structure-PROPOSAL wall (propose which 3 ops from I/O). You must NOT claim this addresses the proposal wall or the C36 model-level law. State explicitly: even a striking modality-dependence result here only RELOCATES/refines C13's simulation wall; it leaves C32/C36 (the "value-computer not structure-proposer" headline) untouched, because nothing here asks the model to propose a hidden structure.
+
+There is a subtlety you must confront, or a reviewer will: C13 found forward EXECUTION intact (plan-given execution 0.90-1.00 = "transcription"), and broke only the INVERSE/discrimination and the internal simulator microbenchmark (C14 Phase 0). Chain-given traversal is forward. So the arc PREDICTS two regimes: (a) no-think = pure MENTAL simulation (predicted noisy/walled per C14); (b) think with an explicit step-by-step scratchpad = externalized TRANSCRIPTION (predicted near-intact). Exploit this: make NO-THINK the PRIMARY (it forces mental simulation and is where the wall should live), and make the think condition an explicit per-step externalized chain (maps to transcription). The no-think-vs-think gap per modality IS the simulation deficit. Report it that way rather than lumping think/no-think.
+
+On adding a linguistic PROPOSAL task: valuable but DO NOT put it in this run — it would conflate simulation and proposal and muddy the clean isolation. Run it as a separate matched follow-up (infer a hidden multi-hop linguistic rule from I/O examples, mirroring C32) to test whether the C36 law extends to language. Keep this experiment simulation-only and scope it to C13.
+
+## contamination_and_shortcuts
+CONTAMINATION: made-up pronounceable entities are the right call, but harden: (a) screen against real-word/wordlist hits in multiple languages and against being substrings of each other (Vor/Vora causes match/tokenization artifacts); (b) draw entities from a fixed pool matched on TOKEN COUNT and string length — nonsense words tokenize into 1-4 subwords and unequal token-length changes retrieval difficulty and would confound with modality.
+
+RELATION — made-up token vs semantic is a genuine tension, so make it a CONTROLLED FACTOR rather than a choice. A purely symbolic token ("Vor gorps Kel") is contamination-clean but is no longer really tapping the NATIVE linguistic domain — it is symbolic-with-sentence-syntax, which undercuts the whole "does the wall exist in language" premise. A semantic relation ("comes right before"/"north of") taps native language but leaks pretraining ordering/transitivity priors that could spuriously make the linguistic arm look deeper. Resolution: run BOTH (symbolic token AND semantic before/after) as a factor, and use the SAME relation in the formal arm so any prior is available to both modalities equally (do NOT pit "semantic NL" against "abstract dict" — that confounds semantics with modality). A modality effect only counts as MODALITY if it replicates with the made-up token; if it appears only under the semantic relation it is the prior, not language.
+
+SHORTCUTS to kill: (1) recency/"last entity mentioned" — regress correctness on the answer-entity's position in the shuffled text; must be flat, and answer-position must be uniform and uncorrelated with depth. (2) Terminal-entity shortcut — make each chain LONGER than max query depth so the answer is never the chain's sink; distractors also get sinks. (3) e0-always-head — randomize the query start entity to any interior position with >=D remaining successors, so depth is not readable as "line number." (4) Distractors must be CONFUSABLE: same entity-name distribution, same chain length/count, disjoint in entities (each entity exactly one successor to keep traversal deterministic), enough of them that "find e0 and read the only other thing" fails. With disjoint distractor chains the task legitimately becomes find-e0's-chain then traverse (a working-memory + segmentation task) — that is fine and on-target, but only if distractor load is high enough that segmentation isn't trivial.
+
+## metrics_and_baseline
+Accuracy-vs-depth per modality per think-mode is sound; the wall = first depth where the accuracy CI drops to the trivial-heuristic ceiling. But sharpen the baseline and power:
+
+BASELINE: 1/N-candidates is a floor but too weak. Define N as the empirical answer-eligible pool and ALSO report trivial-heuristic baselines that a shortcut-seeker would hit: a recency/"last-mentioned-entity" guesser and a "nearest-to-e0-in-text" guesser. The wall should be declared where accuracy is indistinguishable from the BEST trivial heuristic, not from 1/N.
+
+POWER: use a PAIRED design — same underlying chains rendered in both modalities and both think-modes — and test the modality effect at each depth with McNemar. Paired is far more powerful than the arc's usual unpaired cells. n >= 100-150/cell (Wilson half-width ~0.1 at p=0.5, enough to locate the wall within one depth and to separate e.g. 0.3 vs 0.6). Grid: depth 1-6 x {NL, formal} x {no-think, think} x {symbolic, semantic} — pilot to prune.
+
+WHAT PROVES MODALITY-DEPENDENCE (language deeper): linguistic accuracy stays above the best trivial baseline to depth d_L, formal drops at d_F, d_L > d_F by >=1 depth, paired-significant at the crossover depths, AND it replicates with the made-up-token relation (else it's the prior). Critically characterize the think-mode interaction: if language is deeper ONLY in think, that is "language affords a better externalized scratchpad," a different and weaker claim than "native chaining is deeper" (which should show in NO-THINK). DOMAIN-GENERAL: curves overlap within CI, wall co-located across modalities.
+
+FAILURE ANALYSIS is load-bearing and must be pre-registered: log the full predicted entity and bin errors into (a) off-by-k on the CORRECT chain (report the |k| distribution) = simulation MISCOUNT, (b) an entity from a DISTRACTOR chain = retrieval/segmentation failure, (c) hallucinated non-entity. The interpretation of the "wall" DEPENDS on this split: off-by-one dominance => genuine forward-simulation slip (supports C13/C14); distractor dominance => the "wall" is a retrieval/working-memory artifact, which would weaken the simulation reading and reopen the length confound. Report the bin mix at every depth.
+
+NULL GUARD: because the chain is GIVEN, think may solve BOTH modalities to depth 6 (transcription-easy). Then you measured retrieval, not the simulation wall. Pre-register no-think as the wall locus and be prepared to extend depth beyond 6 or raise distractor load until a wall appears in no-think.
+
+## Confounds
+- Context-length/needle-distance: NL renders 2-3x longer than the dict, so a formal advantage could be pure context length, not modality. Measure per-modality token counts; equalize or covary.
+- Notation comprehension: `succ^D(e0)` may be unparsed, faking a formal deficit. Use explicit iterated phrasing and a depth-1 comprehension-floor gate (both modalities ceiling at depth-1).
+- Dict-lookup as a drilled skill: step-by-step dict lookup is a habitual code pattern executed reliably, biasing formal EASIER for reasons unrelated to general 'formal simulation'. Vary formal surface (dict vs assignments vs arrow notation).
+- Semantic-ordering prior leakage: 'before/after' relations leak pretraining transitivity priors that can spuriously deepen the linguistic arm; confounds semantics with modality unless relation-type is a controlled factor and the same relation is used in both arms.
+- Transcription-vs-simulation regime: chain-given traversal is 'transcription' (C13 intact) when externalized in think, but 'mental simulation' (C14 broken) in no-think; mixing them blurs the wall. No-think must be primary.
+- Entity tokenization: nonsense words tokenize into unequal subword counts; unmatched token-length changes retrieval difficulty and confounds with modality. Match entities on token count and string length.
+- Positional/recency shortcut: answer-entity position correlating with depth or end-of-text lets the model pattern-match instead of traverse. Randomize start entity and answer position; verify flat.
+- Terminal-entity shortcut: if max-depth answer is the chain sink, 'pick the entity with no successor' bypasses traversal. Make chains longer than max query depth; give distractors sinks too.
+- Both-easy null: if think solves both modalities to depth 6, the design measured retrieval not the wall; must extend depth/distractor load until a no-think wall appears.
+
+## Must-fix
+- Add a depth-1 comprehension-floor gate (both modalities near-ceiling, no-think) and replace `succ^D(e0)` with explicit iterated phrasing; if depth-1 differs across modalities the whole depth comparison is a parsing confound, not simulation.
+- Match modalities on everything but surface form: same shuffled facts, SAME distractor chains inside the dict, measured/equalized token length, entities matched on token count and string length; report per-modality context length and show the wall does not track it.
+- Make relation-type a controlled factor (made-up symbolic token AND semantic before/after) and use the SAME relation in the formal arm; a modality effect only counts if it replicates with the made-up token (else it is the semantic prior).
+- Vary the formal surface (dict vs assignments vs arrow notation) so a formal advantage cannot be attributed to a single drilled dict-lookup pattern.
+- Make NO-THINK the primary condition (forces mental simulation = the wall locus); make the think condition an explicit step-by-step externalized scratchpad (maps to C13 transcription). Report the no-think-vs-think gap per modality as the simulation deficit.
+- Pre-register error binning: off-by-k on the correct chain (simulation miscount) vs distractor-chain entity (retrieval/segmentation) vs hallucination; the wall's interpretation depends on this split (off-by-one => simulation; distractor => retrieval artifact).
+- Kill positional shortcuts: randomize query start-entity (interior, >=D successors), make chains longer than max depth (dead terminal shortcut), regress correctness on answer position (must be flat), and report recency/nearest-to-e0 trivial-heuristic baselines beyond 1/N.
+- Scope the claim to C13/C14 SIMULATION only; state explicitly it does NOT test and cannot overturn the C32/C36 PROPOSAL/structure wall (the model-level-law headline). A strong result here refines C13, not C36.
+- Run the linguistic PROPOSAL task (infer a hidden multi-hop rule from examples) as a SEPARATE matched follow-up, not in this run, to actually probe whether C36 extends to language.
+- Use a paired design (same chains across modalities/think-modes), n>=100-150/cell, McNemar at each depth; pre-register a both-easy null guard (extend depth beyond 6 / raise distractor load until a no-think wall appears).
+
+## How addressed
+- SCOPE: tests C13 mental-SIMULATION wall in language, NOT C32/C36 proposal wall -- framed explicitly; proposal-in-language is a separate follow-up.
+- NO-THINK is PRIMARY (forces mental simulation); think = externalized transcription; report the gap.
+- Symbolic-relation control (made-up 'gorps') alongside semantic ('directly followed by') -- modality effect must survive the made-up token to count as modality not prior.
+- Shortcut-hardened generator: answer is INTERIOR (chain longer than depth, never the sink), random interior start (depth != line number), high confusable distractor load; report recency baseline (should be ~chance).
+- Entity screening: no substrings/superstrings.
+- Report per-render prompt token counts (length-confound check); NL is longer, so 'NL better despite longer context' is robust to the length confound (opposite direction).
+- Depth-1 comprehension-floor gate; entity-match parsing (formal 'Answer: X' fixed).
