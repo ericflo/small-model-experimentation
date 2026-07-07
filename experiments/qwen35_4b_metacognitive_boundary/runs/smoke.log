@@ -1,0 +1,6 @@
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:59,  7.11it/s]Loading weights:  11%|█         | 47/426 [00:00<00:01, 232.22it/s]Loading weights:  23%|██▎       | 98/426 [00:00<00:00, 345.61it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 397.47it/s]Loading weights:  47%|████▋     | 199/426 [00:00<00:00, 435.81it/s]Loading weights:  57%|█████▋    | 244/426 [00:00<00:00, 429.50it/s]Loading weights:  68%|██████▊   | 288/426 [00:00<00:00, 426.60it/s]Loading weights:  78%|███████▊  | 332/426 [00:00<00:00, 422.11it/s]Loading weights:  88%|████████▊ | 375/426 [00:00<00:00, 422.89it/s]Loading weights:  98%|█████████▊| 418/426 [00:01<00:00, 413.83it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 391.70it/s]
+[meta] familiar_execute: acc=1.00 mean_p_answer=1.00 mean_p_true=0.44
+[meta] familiar_induce: acc=0.45 mean_p_answer=0.44 mean_p_true=0.35
+[meta] reversal_induce: acc=0.15 mean_p_answer=0.26 mean_p_true=0.39
+[meta] novel_induce: acc=0.05 mean_p_answer=0.14 mean_p_true=0.38
+[meta] wrote 80 records

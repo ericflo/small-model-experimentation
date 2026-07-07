@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 39
+- Claims: 40
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 30 |
+| Promising | 31 |
 
 ## Program Counts
 
@@ -19,7 +19,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 4 |
+| `benchmark_generalization` | 5 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 8 |
@@ -932,3 +932,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not use think-mode as primary here: it triggers code-mode (```python) on 'apply-a-rule' tasks, confounding extraction (familiar-stated codemode 0.50-1.00). No-think reasons in prose and is code-mode-free.
 - Do not use character-level string tasks (ciphers) as the vehicle: the 4B floors on char-assembly (application-only 0.20) regardless of induction -- a substrate artifact, not a capability signal.
 - Single seed; familiar induction only 0.45 (imperfect). The clean signal is the EXECUTE-vs-INDUCE x FAMILIAR-vs-NOVEL interaction, not absolute levels.
+
+## C40: The model knows when it will fail IMPLICITLY (answer-token probability, within-cell AUROC 0.95) but NOT EXPLICITLY (self-verification P(True) at chance, verbalized confidence a constant 100)
+
+- Status: `Promising`
+- Programs: `benchmark_generalization`
+- Summary: Experiment qwen35_4b_metacognitive_boundary. First metacognition/calibration claim. Uses C39's VERIFIED competence boundary (execute ~1.0, familiar-induce ~0.45, novel-induce ~chance) as crisp ground truth. Format-equalized single-value task; TWO non-degenerate logit signals (verbalized 0-100 is degenerate = constant 100): IMPLICIT P(answer) = the model's probability on the digit it emits (softmax over the 10 digit tokens at 'Answer: ', one forward pass), EXPLICIT P(True) = Kadavath self-verification. RESULTS (n=150/cond): condition-level, mean P(answer) tracks accuracy near-perfectly (1.00/0.44/0.29/0.15 vs acc 1.00/0.40/0.19/0.10) while P(True) is FLAT (~0.4, even underconfident on the perfect execute cell). HEADLINE -- WITHIN the surface-matched familiar-induce cell (acc 0.40), P(answer) predicts per-item correctness at AUROC 0.95 (CI 0.90-0.99), CRUSHING the external surface-feature baseline (0.61) and explicit P(True) (0.46 = chance). Selective prediction by low P(answer) lifts accuracy-on-attempted from 0.23 to ~1.0. Novel-induce failures are high-entropy scatter (only 0.11 natural-successor intrusion), not confident consistent-wrong.
+- Implication: The model KNOWS when it will fail -- but only in its OUTPUT DISTRIBUTION, not in anything it can SAY. Implicit metacognition (answer-token probability) is excellent and carries genuine item-level self-knowledge beyond surface features; explicit self-assessment (P(True), verbalized confidence) is broken. This is a deployable latent capability UNEARTHED: read the answer-token probability (or margin/entropy) as a confidence/abstain/route signal (selective prediction works); do NOT trust the model's explicit self-report. Nuance vs C10 (strong verifier on code): self-verification of its OWN answer on this task is at chance -- explicit verification does not transfer to a usable self-confidence here. Reframes deployment: the fixed 4B has usable uncertainty, but it lives in the logits, not the words.
+
+### Evidence
+
+- [`qwen35_4b_metacognitive_boundary`](../../experiments/qwen35_4b_metacognitive_boundary/reports/report.md)
+
+### Next Tests
+
+- Does the implicit P(answer) signal generalize as a confidence detector to OTHER task families (code/MBPP, the DSL substrates) -- is answer-token probability a general-purpose abstain signal, or cyclic-order-specific?
+- Why is explicit P(True) at chance while C10 found a strong code-verifier? Test self-verification vs other-verification on the SAME task (is it self-specific, format, or task-specific?).
+- Combine with the arc: a compute-optimal deploy policy that abstains/routes on low P(answer) (novel-structure induction) and attempts on high P(answer) (retrieval) -- measure the accuracy-vs-coverage Pareto frontier.
+
+### Avoid
+
+- Do not claim the model has metacognition full-stop: it is IMPLICIT-only. Explicit self-assessment (P(True) AUROC 0.46, verbalized confidence constant 100) is at/below chance. The knowledge is in the logits, not the self-report.
+- Do not read condition-level confidence tracking as self-knowledge on its own: between-condition mean-confidence is surface-confounded (a deployment heuristic). The clean self-knowledge result is the WITHIN-cell AUROC (familiar-induce 0.95) beating the external surface baseline (0.61).
+- Do not use verbalized 0-100 confidence for a 4B: it is a degenerate constant (~100). Use the answer-token probability / margin / entropy (logit-based) instead.
+- reversal_induce was intended as a scrambled-looking-but-easy dissociation but is genuinely hard (0.19); the surface-vs-competence contrast rests on the external surface baseline, not reversal. Single seed; P(True)-at-chance partly elicitation-dependent.

@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_metacognitive_boundary"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/eval_metacog.py --n 20"
+  full_command: "eval_metacog.py --n 150; analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C40): the model knows when it will fail IMPLICITLY (answer-token probability, within-familiar-induce AUROC 0.95 >> surface 0.61) but NOT EXPLICITLY (P(True) 0.46=chance; verbalized confidence constant 100). Uses C39's verified competence boundary as ground truth. Deployable: read logits, not self-report. Single seed; reversal_induce not the intended easy dissociation."

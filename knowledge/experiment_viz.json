@@ -43810,6 +43810,80 @@
      "note": "Does more data rescue novel-structure induction? No -- for both familiar and novel structure, MORE few-shot examples make induction WORSE (familiar 0.45->0.25, novel 0.15->0.05), sinking toward chance (0.10). So the model's failure to induce a novel rule is bounded by structural FAMILIARITY, not by how many examples it sees -- it is not integrating more examples into a better rule estimate (consistent with retrieval/matching rather than genuine induction). Longer prompts also tax this small model's working memory."
     }
    ]
+  },
+  "qwen35_4b_metacognitive_boundary": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Does the model know when it will fail? YES implicitly (answer-token probability tracks accuracy), NO explicitly (self-verification is flat)",
+     "categories": [
+      "familiar_execute",
+      "familiar_induce",
+      "reversal_induce",
+      "novel_induce"
+     ],
+     "series": [
+      {
+       "label": "actual accuracy",
+       "values": [
+        1.0,
+        0.4,
+        0.19,
+        0.1
+       ]
+      },
+      {
+       "label": "IMPLICIT: mean P(answer)",
+       "values": [
+        1.0,
+        0.44,
+        0.29,
+        0.15
+       ]
+      },
+      {
+       "label": "EXPLICIT: mean P(True) self-verification",
+       "values": [
+        0.42,
+        0.35,
+        0.38,
+        0.38
+       ]
+      }
+     ],
+     "y_label": "probability / accuracy",
+     "y_format": "percent01",
+     "note": "Uses C39's VERIFIED competence boundary as crisp ground truth (rare in calibration research). Task: 'advance k in a cyclic order', format-equalized, across a competence spectrum. Two non-degenerate logit confidence signals (verbalized 0-100 is a useless constant 100): IMPLICIT P(answer) = the model's own probability on the digit it emits (softmax over the 10 digit tokens, one forward pass); EXPLICIT P(True) = Kadavath-style self-verification ('is your answer correct? A/B'). RESULT: implicit P(answer) tracks accuracy almost perfectly (1.00/0.44/0.29/0.15 vs acc 1.00/0.40/0.19/0.10), while explicit P(True) is FLAT (~0.4) and even underconfident on the perfect execute cell. The model's uncertainty lives in its output distribution, not its self-report."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Item-level self-knowledge WITHIN the surface-matched familiar-induce cell: implicit P(answer) beats surface features and explicit self-report",
+     "categories": [
+      "P(answer) implicit",
+      "margin",
+      "-entropy",
+      "P(True) explicit",
+      "surface baseline"
+     ],
+     "series": [
+      {
+       "label": "AUROC predicting per-item correctness (within familiar_induce, acc 0.40)",
+       "values": [
+        0.95,
+        0.9,
+        0.9,
+        0.46,
+        0.61
+       ]
+      }
+     ],
+     "y_label": "within-cell AUROC",
+     "y_format": "number",
+     "note": "The clean self-knowledge test (review-mandated): WITHIN the surface-matched intermediate cell (familiar_induce, acc 0.40, where both correct and incorrect items exist), can a signal predict WHICH items the model gets right? The implicit P(answer) achieves AUROC 0.95 (95% CI 0.90-0.99) -- it knows its own per-item correctness. It CRUSHES the external surface-feature baseline (0.61 -- a logistic classifier on prompt features like k, gap-to-seen, so this is genuine self-knowledge, not surface-reading) and the explicit P(True) self-verification (0.46 = chance). So the model has real item-level self-knowledge in its logits but cannot verbalize or self-verify it. Deployable: selective prediction by low P(answer) lifts accuracy-on-attempted from 0.23 to ~1.0. AUROC 0.5 = chance."
+    }
+   ]
   }
  }
 }

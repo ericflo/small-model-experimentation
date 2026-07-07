@@ -1,0 +1,58 @@
+{
+ "summary": {
+  "familiar_execute": {
+   "n": 150,
+   "acc": 1.0,
+   "mean_p_answer": 1.0,
+   "mean_p_true": 0.422,
+   "mean_entropy": 0.0,
+   "auroc_p_answer": null,
+   "auroc_neg_entropy": null,
+   "auroc_margin": null,
+   "auroc_p_true": null,
+   "auroc_surface": null
+  },
+  "familiar_induce": {
+   "n": 150,
+   "acc": 0.4,
+   "mean_p_answer": 0.435,
+   "mean_p_true": 0.348,
+   "mean_entropy": 0.457,
+   "auroc_p_answer": 0.951,
+   "auroc_neg_entropy": 0.909537037037037,
+   "auroc_margin": 0.9019444444444444,
+   "auroc_p_true": 0.462,
+   "auroc_surface": 0.612
+  },
+  "reversal_induce": {
+   "n": 150,
+   "acc": 0.193,
+   "mean_p_answer": 0.288,
+   "mean_p_true": 0.381,
+   "mean_entropy": 1.096,
+   "auroc_p_answer": 0.931,
+   "auroc_neg_entropy": 0.895839270447421,
+   "auroc_margin": 0.9008264462809917,
+   "auroc_p_true": 0.464,
+   "auroc_surface": 0.555
+  },
+  "novel_induce": {
+   "n": 150,
+   "acc": 0.1,
+   "mean_p_answer": 0.146,
+   "mean_p_true": 0.382,
+   "mean_entropy": 1.608,
+   "auroc_p_answer": 0.359,
+   "auroc_neg_entropy": 0.4330864197530864,
+   "auroc_margin": 0.5945679012345679,
+   "auroc_p_true": 0.474,
+   "auroc_surface": 0.584
+  }
+ },
+ "familiar_induce_p_answer_auroc_ci": [
+  0.9038709308302787,
+  0.9865643318302931
+ ],
+ "novel_natural_intrusion": 0.1111111111111111,
+ "verdict": "The model has IMPLICIT metacognition (its answer-token distribution tracks competence) but NOT EXPLICIT self-assessment. CONDITION-LEVEL: mean P(answer) tracks accuracy almost perfectly (1.0/0.435/0.288/0.146 vs acc 1.0/0.4/0.193/0.1), while explicit P(True) self-verification is FLAT (~0.4) and even UNDERCONFIDENT on the perfect execute cell (0.422). WITHIN the surface-matched headline cell (familiar_induce, acc 0.4): P(answer) AUROC 0.951 (95% CI (0.9038709308302787, 0.9865643318302931)) vs external surface baseline 0.612 vs explicit P(True) AUROC 0.462. So the model's answer-probability predicts its own per-item correctness beyond surface features (genuine item-level self-knowledge) -- but it CANNOT verbalize/verify it (P(True) is flat). On novel_induce, 0.11 of wrong answers are the NATURAL-successor intrusion (applying the familiar rule instead of the novel one) -- a consistent wrong-rule, not random scatter. DEPLOYABLE: read the model's answer-token probability (implicit) for a usable confidence/abstain signal; do NOT trust its explicit self-assessment."
+}

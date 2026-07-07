@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 162
-- Manifest files: 458
+- Experiments with manifests: 163
+- Manifest files: 459
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 35 |
+| `standard-artifact` | 36 |
 
 ## Manifests
 
@@ -124,6 +124,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_learned_active_trace_policy` | `large-artifact` | [manifest](../experiments/qwen35_4b_learned_active_trace_policy/large_artifacts_manifest.md) |
 | `qwen35_4b_live_tool_dagger` | `large-artifact` | [manifest](../experiments/qwen35_4b_live_tool_dagger/large_artifacts_manifest.md) |
 | `qwen35_4b_live_tool_dagger` | `other` | [manifest](../experiments/qwen35_4b_live_tool_dagger/reports/split_manifest.json) |
+| `qwen35_4b_metacognitive_boundary` | `standard-artifact` | [manifest](../experiments/qwen35_4b_metacognitive_boundary/reports/artifact_manifest.yaml) |
 | `qwen35_4b_model_in_loop_counterexamples` | `dataset` | [manifest](../experiments/qwen35_4b_model_in_loop_counterexamples/data/dataset_manifest.json) |
 | `qwen35_4b_model_in_loop_counterexamples` | `dataset` | [manifest](../experiments/qwen35_4b_model_in_loop_counterexamples/data/model_loop/dataset_manifest.json) |
 | `qwen35_4b_model_in_loop_counterexamples` | `large-artifact` | [manifest](../experiments/qwen35_4b_model_in_loop_counterexamples/large_artifacts_manifest.md) |

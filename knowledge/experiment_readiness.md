@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 190
-- Anchor-ready: 175
-- Human-authored READMEs: 177
+- Experiments: 191
+- Anchor-ready: 176
+- Human-authored READMEs: 178
 - Generated README stubs: 13
-- Primary reports: 190
-- Experiment logs: 94
-- Smoke commands: 59
-- Artifact manifests: 162
+- Primary reports: 191
+- Experiment logs: 95
+- Smoke commands: 60
+- Artifact manifests: 163
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 79 |
+| `documented-scripts` | 80 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -103,6 +103,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_learn_from_failures`](../experiments/qwen35_4b_learn_from_failures/README.md) | benchmark_generalization, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_learn_from_failures/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_learned_active_trace_policy`](../experiments/qwen35_4b_learned_active_trace_policy/README.md) | active_evidence_acquisition, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_learned_active_trace_policy/reports/qwen35_4b_learned_active_trace_policy_report.md) | no | `documented-scripts` | no | dataset, large-artifact, other | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_live_tool_dagger`](../experiments/qwen35_4b_live_tool_dagger/README.md) | posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_live_tool_dagger/reports/report.md) | no | `documented-scripts` | yes | large-artifact, other | add-experiment-log |
+| yes | [`qwen35_4b_metacognitive_boundary`](../experiments/qwen35_4b_metacognitive_boundary/README.md) | benchmark_generalization | `human-authored` | [report](../experiments/qwen35_4b_metacognitive_boundary/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_model_in_loop_counterexamples`](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md) | benchmark_generalization, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_model_in_loop_counterexamples/reports/qwen35_4b_model_in_loop_counterexamples_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_neurosymbolic_repl_substrate`](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md) | posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_neurosymbolic_repl_substrate/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_offline_hard_negative_coverage_dpo`](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, posttraining_and_adaptation, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |

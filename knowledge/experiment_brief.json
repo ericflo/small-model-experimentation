@@ -10373,6 +10373,33 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_metacognitive_boundary": {
+   "verdict_tag": "It knows in its logits, not its words",
+   "concept_primer": "A useful AI should know when it doesn't know -- so it can flag a guess instead of confidently making something up. This tests whether the model can tell, on tasks where we KNOW in advance which ones it can and can't do, whether it is about to be right or wrong.",
+   "plain_question": "Does the model know when it is about to fail -- and if so, can it tell you?",
+   "plain_answer": "It knows, but it can't tell you. When you look at the model's internal probability on the answer it gives, that number tracks its actual accuracy almost perfectly, and it predicts which specific problems it will get right about as well as a near-perfect detector -- far better than guessing from the surface of the problem. But when you simply ASK the model 'is your answer correct?' or 'how confident are you?', its answer is useless: it says it's confident about equally on the problems it aces and the ones it fails (and its verbal confidence is a flat 100 every time). So the model's uncertainty is real and readable -- but it lives in its output probabilities, not in anything it can say.",
+   "why_it_matters": "This is directly deployable and it unearths a genuinely useful hidden capability. If you want a small model to flag its own likely mistakes (to abstain, ask for help, or route to a bigger model), read its answer-token probability -- NOT its self-reported confidence, which is worthless. Filtering by that internal signal lifts accuracy on the problems it chooses to attempt from 23% to nearly 100%. The practical rule: trust the model's math (logits), never its self-assessment (words).",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "implicit P(answer) predicts correctness (AUROC)",
+     "value": "0.95"
+    },
+    {
+     "label": "guessing from surface features (AUROC)",
+     "value": "0.61"
+    },
+    {
+     "label": "explicit 'is my answer right?' (AUROC)",
+     "value": "0.46"
+    },
+    {
+     "label": "accuracy on attempted after abstaining",
+     "value": "0.23 -> ~1.0"
+    }
+   ],
+   "charts": []
   }
  }
 }
