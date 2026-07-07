@@ -609,6 +609,14 @@
    ],
    "caveat": "date equals import day; verified it is a tier-1 dated log heading plus matching seed, not a sweep artifact"
   },
+  "qwen35_4b_metacognitive_boundary": {
+   "start": "2026-07-07",
+   "end": "2026-07-07",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_model_in_loop_counterexamples": {
    "start": "2026-06-22",
    "end": "2026-06-22",
