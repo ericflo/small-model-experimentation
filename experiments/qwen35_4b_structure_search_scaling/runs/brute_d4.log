@@ -1,0 +1,5 @@
+  15/60 [88s] deploy-so-far 1.000
+  30/60 [177s] deploy-so-far 0.967
+  45/60 [265s] deploy-so-far 0.978
+  60/60 [353s] deploy-so-far 0.967
+[brute d4] n=60 | brute-full DEPLOY 0.967 | coverage 1.000 | mean surviving skeletons/task 6.1 | enumerated 16^4=65536/task | 353s total

@@ -43379,6 +43379,75 @@
      "note": "End-to-end confirmation of the bank+value-fill recipe, with the decisive brute-force control. The banked model emits Python, so recover its proposed STRUCTURE from behavior (infer which op-type skeleton each of k=8 samples implements, no oracle), value-fill against the true outputs, deploy via execution-consensus (plurality output-vector on 16 fresh probe inputs, leakage-free per C17). RESULT: (1) bank-fill deploys at 0.463 = the banked model's structure-coverage 0.475 -> CONFIRMS C33's inferred ~0.51. (2) BUT brute-force structure enumeration (all 4096 depth-3 skeletons, structure NOT from the model) + value-fill + consensus deploys at 0.975 -- near-solving depth-3 without the model. After the 8-visible filter only ~2 skeletons survive (the DSL isn't value-fungible, C32) and consensus picks the right one 97.5% (visible-overfit 2.7%). (3) Using the model's structure is WORSE than ignoring it: bank-fill is CAPPED at struct-cov 0.475 because the banked model proposes the right skeleton only ~48%, while brute enumeration always contains it. NET: with the interpreter available (free selection per C17), free structure-SEARCH dominates the model at deploy; banking's structure (0.20->0.475, C33) is a FORWARD-PASS asset only. Scope: brute-force wins because the depth-3 structure space (4096) is enumerable; the model's structure-pruning would only matter when the space is too large to brute-force."
     }
    ]
+  },
+  "qwen35_4b_structure_search_scaling": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "line",
+     "title": "When does the model's structure beat brute-force? Never: the scissors WIDENS with depth (0.51->0.10 model vs 0.98->0.97 brute)",
+     "series": [
+      {
+       "label": "model structure-coverage (banked, forward pass)",
+       "points": [
+        [
+         3,
+         0.512
+        ],
+        [
+         4,
+         0.1
+        ]
+       ]
+      },
+      {
+       "label": "brute-force structure-search DEPLOY (tool)",
+       "points": [
+        [
+         3,
+         0.975
+        ],
+        [
+         4,
+         0.967
+        ]
+       ]
+      }
+     ],
+     "x_label": "composition depth",
+     "y_label": "deploy / structure rate (held-out)",
+     "y_format": "percent01",
+     "note": "C34 left open: brute-force wins at depth-3 because the 4096-skeleton space is enumerable; the model's structure-pruning would only win when the space is too large to brute-force. Tested at depth-4 (space 16^4=65536, 16x larger) with a depth-4-banked model + held-out depth-4 tasks (n=60). RESULT: the hypothesized regime does NOT appear -- the scissors widens, never crosses. (1) Banking's structure-installation COLLAPSES with depth: banked_d4 structure-coverage at depth-4 = 0.10 vs 0.51 for banked_1280 at depth-3. (2) Brute-force structure-search + value-fill + execution-consensus STAYS near-perfect: deploy 0.967 at depth-4 (vs 0.975 at depth-3), because the 8-visible filter is depth-invariant (~6 skeletons survive at depth-4 vs ~2 at depth-3). (3) The model-vs-brute deploy gap GROWS from -0.46 to -0.87. The model never wins because banking's structure degrades faster than brute's exponential cost (16^depth) grows intractable, AND the model's structure can't be cheaply injected into a search (behavioral inference costs a full enumeration; op-seq generation broken, C32). With the interpreter, the TOOL is the deployable lever; the weights are never the better structure-proposer."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Brute-force's cost is exponential (16^depth) -- its ceiling is ~depth-5, but banking's structure collapses BEFORE brute becomes intractable",
+     "series": [
+      {
+       "label": "brute-force structure space",
+       "points": [
+        [
+         3,
+         4096
+        ],
+        [
+         4,
+         65536
+        ],
+        [
+         5,
+         1048576
+        ]
+       ]
+      }
+     ],
+     "x_label": "composition depth",
+     "y_label": "skeletons to enumerate (16^depth)",
+     "y_format": "number",
+     "note": "Brute-force structure-search enumerates 16^depth skeletons: 4096 (d3) -> 65536 (d4) -> ~1M (d5). It becomes intractable around depth-5. BUT banking's forward-pass structure has already collapsed to 0.10 at depth-4 (would be ~0 at depth-5). So there is a depth-5+ regime where NEITHER works cheaply -- brute intractable, model collapsed -- but the model never WINS. The model degrades with depth faster than brute's cost forces you to abandon it, so the crossover where the model's structure-pruning would help never materializes on this substrate."
+    }
+   ]
   }
  }
 }

@@ -1,0 +1,14 @@
+schema_version: 1
+experiment_id: "qwen35_4b_structure_search_scaling"
+external_artifacts:
+  - name: "banked_d4 adapter"
+    storage: "scratchpad/scaling_adapters/banked_d4_adapter (depth-4-banked QLoRA)"
+    required_for: "the gate (banked_d4 structure-coverage)"
+    checksum: ""
+    regenerate: "see qwen35_4b_depth_scaling_controls (train_d4.jsonl)"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/brute_only.py  # brute-full deploy, no model"
+  full_command: "bank_structure --tag banked_d4 --adapter <banked_d4> --eval-file data/eval_frozen_d4.jsonl (gate); brute_only.py; analyze"
+  required_external_artifacts: ["banked_d4 adapter"]
+notes: "Verdict (C35): the model's structure never beats brute-force search. Depth-4: banked_d4 structure-cov 0.10 (vs 0.51 depth-3), brute-full deploy 0.967 (vs 0.975) -> scissors widens. Banking's structure collapses with depth faster than brute's exponential cost grows intractable; model structure can't be cheaply injected into search (behavioral inference = full enumeration; op-seq gen broken)."

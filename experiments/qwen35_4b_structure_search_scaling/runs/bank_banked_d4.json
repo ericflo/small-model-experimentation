@@ -1,0 +1,367 @@
+{
+ "tag": "banked_d4",
+ "k": 8,
+ "n": 60,
+ "rows": [
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 1,
+   "struct_cov": 1
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": true,
+   "cov": 0,
+   "struct_cov": 6
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 1
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": true,
+   "struct_greedy": true,
+   "cov": 5,
+   "struct_cov": 5
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": true,
+   "struct_greedy": true,
+   "cov": 3,
+   "struct_cov": 6
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 0,
+   "struct_cov": 0
+  },
+  {
+   "greedy": false,
+   "struct_greedy": false,
+   "cov": 1,
+   "struct_cov": 1
+  }
+ ]
+}

@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 34
+- Claims: 35
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 26 |
+| Promising | 27 |
 
 ## Program Counts
 
@@ -21,13 +21,13 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 1 |
 | `collective_experimentation_infrastructure` | 2 |
-| `evidence_conditioned_selection` | 5 |
+| `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 7 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 18 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 24 |
+| `structured_execution_and_compilers` | 25 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -812,3 +812,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not report coverage as the bank+fill result: coverage is tautological (>=struct-cov by construction; brute coverage ~1.0). DEPLOY under single-pick is the only discriminating metric.
 - Do not generalize brute-force-dominates beyond ENUMERABLE structure spaces: at depth-3 with 16 ops (4096 skeletons) brute-force wins; for larger spaces the model's structure-pruning may be necessary (untested).
 - Do not read this as 'banking is useless': banking installs the structure into the forward pass (C33, 0.20->0.475), which is the deployable asset when NO interpreter is available. The result is that with the interpreter, the tool dominates the weights.
+
+## C35: The model's structure never beats brute-force search: as depth grows banking's structure collapses (0.51->0.10) while brute-search stays near-perfect (0.975->0.967) -- the scissors widens
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `evidence_conditioned_selection`
+- Summary: Experiment qwen35_4b_structure_search_scaling. Tests C34's open hypothesis (brute-force wins because the depth-3 space is enumerable; the model's structure-pruning would win when the space is too large to brute-force) at DEPTH-4 (structure space 16^4=65536, 16x larger) with a depth-4-banked model (banked_d4) + held-out depth-4 tasks (n=60). RESULT: the hypothesized regime does NOT appear -- the scissors widens, never crosses. (1) Banking's structure-installation COLLAPSES with depth: banked_d4 structure-cov at depth-4 = 0.10 vs 0.51 for banked_1280 at depth-3. (2) Brute-force structure-search + value-fill + execution-consensus stays near-perfect: deploy 0.967 at depth-4 (vs 0.975 at depth-3), because the 8-visible filter is depth-invariant (~6 skeletons survive at depth-4 vs ~2 at depth-3). (3) So the model-vs-brute deploy gap GROWS from -0.46 (depth-3) to -0.87 (depth-4). Reasons the model never wins: banking's structure degrades faster than brute's exponential cost (4096->65536->1M) grows intractable (brute ceiling ~depth-5, but model already collapsed to 0.10 at depth-4); and the model's structure can't be cheaply INJECTED into a search anyway (behavioral inference costs a full 16^depth enumeration; op-seq generation broken, C32).
+- Implication: Closes the C32->C33->C34->C35 arc. The compositional wall is STRUCTURE (C32); banking installs structure into the FORWARD PASS (C33) but that installation COLLAPSES with depth (0.51->0.10); and with an interpreter available, brute-force structure-search + value-fill + execution-select DOMINATES the weights outright (C34, C35) up to its exponential-cost ceiling (~depth-4/5 enumerable). The model -- even banked -- is never the better deployable structure-proposer when the tool is available; banking's value is forward-pass-only (no-interpreter) and degrades with depth. There is a depth-5+ regime where NEITHER works cheaply (brute intractable, model collapsed) but the model never WINS. For the mission: the deployable 'beat sample-more' lever is the TOOL (structure-enumeration + value-fill + execution-select), not the weights, whenever the structure space is enumerable.
+
+### Evidence
+
+- [`qwen35_4b_structure_search_scaling`](../../experiments/qwen35_4b_structure_search_scaling/reports/report.md)
+
+### Next Tests
+
+- The depth-5+ regime where brute is intractable: is there ANY cheap structure-proposer (e.g. step-wise decompose-search, C25, guided by a model trained to depth-5) -- or is deep composition simply out of reach for both model and enumerable search?
+- Does banking's structure-collapse-with-depth have a fix (curriculum, deeper-dose banking)? banked_d4 0.10 vs banked_1280 0.51 -- is it dose (d4 trained less) or a genuine depth barrier?
+- No-interpreter deploy by depth: banking's structure (0.51 d3, 0.10 d4) vs base (0) -- the forward-pass-only value, quantified.
+
+### Avoid
+
+- Do not expect the model's structure to beat brute-force search at greater depth: banking's structure COLLAPSES with depth (0.51->0.10) faster than brute's cost grows intractable, so the crossover never happens on this substrate.
+- Do not read banked_d4's low depth-4 structure-cov (0.10) as a measurement artifact: brute-full deploys 0.967 on the SAME held-out tasks, so the tasks are solvable -- the model just doesn't propose the depth-4 structure.
+- Do not claim the model can cheaply prune the search: extracting the model's structure via behavioral inference costs a full 16^depth enumeration (as slow as brute), and op-seq generation is broken (C32). The model's structure is a forward-pass asset, not a cheap search prior.
+- Do not generalize 'brute always wins' past its cost ceiling: brute is exponential (16^depth) and becomes intractable ~depth-5; the finding is that the model doesn't take over THERE either (it has already collapsed).

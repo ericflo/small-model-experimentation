@@ -1,0 +1,23 @@
+{
+ "by_depth": {
+  "3": {
+   "space": 4096,
+   "model_struct_cov": 0.512,
+   "brute_deploy": 0.975,
+   "banked": "banked_1280"
+  },
+  "4": {
+   "space": 65536,
+   "model_struct_cov": 0.1,
+   "brute_deploy": 0.967,
+   "banked": "banked_d4"
+  }
+ },
+ "brute_d4": {
+  "n": 60,
+  "brute_deploy": 0.967,
+  "brute_cov": 1.0,
+  "enum_per_task": 65536
+ },
+ "verdict": "On this substrate the model's structure NEVER beats brute-force search; the scissors WIDENS with depth. Banking's structure-installation COLLAPSES from depth-3 0.512 (banked_1280) to depth-4 0.1 (banked_d4), while brute-force structure-search + value-fill + execution-consensus stays near-perfect (0.975 -> 0.967). So the model-vs-brute deploy gap GROWS from +0.46 (depth-3) to +0.87 (depth-4). The hypothesized regime where the model's structure-pruning wins does NOT appear: (1) brute-force stays near-perfect because the 8-visible filter is depth-invariant (~6 skeletons survive at depth-4 vs ~2 at depth-3), so structure-SEARCH near-solves while the space is enumerable; (2) banking's structure degrades with depth faster than brute's cost (16^depth: 4096 -> 65536 -> 1M) grows intractable; (3) the model's structure can't even be cheaply INJECTED into a search -- behavioral skeleton-inference costs a full 16^depth enumeration and op-seq generation is broken (C32). The only regime where brute fails is depth-5+ (1M+ skeletons, intractable), but the model has already collapsed there (0.10 at depth-4 -> ~0 at depth-5). So there is a regime where NEITHER works cheaply, but the model never WINS. Net: with the interpreter, the TOOL (structure-search + value-fill + execution-select) is the deployable lever up to its exponential-cost ceiling (~depth-4 enumerable); the model -- even banked -- is never the better deployable structure-proposer, and banking's forward-pass structure collapses with depth."
+}

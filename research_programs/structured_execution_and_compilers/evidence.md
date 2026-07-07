@@ -10,6 +10,8 @@
 
 ## Key Result
 
+- [qwen35_4b_structure_search_scaling](../../experiments/qwen35_4b_structure_search_scaling/reports/report.md) (claim C35): the model's structure NEVER beats brute-force search. At depth-4 banking's structure-cov collapses to 0.10 (vs 0.51 at depth-3) while brute-full deploy stays 0.967 (vs 0.975) -- scissors widens. Banking's structure degrades with depth faster than brute's exponential cost grows intractable. Closes C32->C33->C34->C35: with an interpreter, the tool dominates the weights.
+
 - qwen35_4b_banking_installs_structure phase 2 (claim C34): end-to-end bank+value-fill deploy. bank-fill deploys 0.463 (= banked structure-cov, confirms C33) BUT brute-force structure enumeration + value-fill + execution-consensus deploys 0.975 (near-solves depth-3) WITHOUT the model. With the interpreter, free structure-search dominates; banking's structure is forward-pass-only. Extends C17 (selection free) to structure-search. Scope: brute wins because the 4096-skeleton space is enumerable.
 
 - [qwen35_4b_banking_installs_structure](../../experiments/qwen35_4b_banking_installs_structure/reports/report.md) (claim C33): banking installs STRUCTURE -- base op-sequence structure-coverage 0.00 -> banked 0.51 (held-out depth-3, generalizable). Banking converts the wall from structure-bound (base) to value-bound (banked struct 0.51 > concrete 0.36, value tax +0.15, fillable). Mechanistic closure of C32: banking = structure-installation. Unifies C22-24/C31/C32.

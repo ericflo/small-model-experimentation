@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 157
-- Manifest files: 453
+- Experiments with manifests: 158
+- Manifest files: 454
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 30 |
+| `standard-artifact` | 31 |
 
 ## Manifests
 
@@ -194,6 +194,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_strategy_token_diversity_lora` | `run-data` | [manifest](../experiments/qwen35_4b_strategy_token_diversity_lora/data/smoke_strategy_shuffled_sft.manifest.json) |
 | `qwen35_4b_strategy_token_diversity_lora` | `run-data` | [manifest](../experiments/qwen35_4b_strategy_token_diversity_lora/data/smoke_train_k8_records.manifest.json) |
 | `qwen35_4b_structure_or_values` | `standard-artifact` | [manifest](../experiments/qwen35_4b_structure_or_values/reports/artifact_manifest.yaml) |
+| `qwen35_4b_structure_search_scaling` | `standard-artifact` | [manifest](../experiments/qwen35_4b_structure_search_scaling/reports/artifact_manifest.yaml) |
 | `qwen35_4b_substrate_coverage_ladder` | `dataset` | [manifest](../experiments/qwen35_4b_substrate_coverage_ladder/data/dataset_manifest.json) |
 | `qwen35_4b_thinking_budget_controller` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_budget_controller/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_budget_scaling` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_budget_scaling/reports/artifact_manifest.yaml) |
