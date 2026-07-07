@@ -12,7 +12,7 @@
    "key_numbers": [
     {
      "label": "Answer correct, short vs long programs",
-     "value": "35% → 8%",
+     "value": "35% \u2192 8%",
      "sub": "self-rewiring runtime collapses toward random-guess as programs lengthen"
     },
     {
@@ -81,7 +81,7 @@
    "key_numbers": [
     {
      "label": "Confidence on correct answers, at the threshold",
-     "value": "under 14% → 91-96%",
+     "value": "under 14% \u2192 91-96%",
      "sub": "once the model takes one step per instruction"
     },
     {
@@ -144,7 +144,7 @@
    "key_numbers": [
     {
      "label": "Unseen combinations solved, no bridges vs. some",
-     "value": "7% → 30%",
+     "value": "7% \u2192 30%",
      "sub": "success on withheld skill-pairs after adding a few combined examples"
     },
     {
@@ -159,7 +159,7 @@
     },
     {
      "label": "Ordinary-task success at the heaviest dose",
-     "value": "86% → 58%",
+     "value": "86% \u2192 58%",
      "sub": "over-dosing crowds out normal practice"
     }
    ],
@@ -212,12 +212,12 @@
    "key_numbers": [
     {
      "label": "Correct fixes on familiar tasks",
-     "value": "0% → 91%",
+     "value": "0% \u2192 91%",
      "sub": "untrained vs. trained to read failing cases"
     },
     {
      "label": "Same model with the failing cases removed",
-     "value": "91% → 0%",
+     "value": "91% \u2192 0%",
      "sub": "it was genuinely reading the cases"
     },
     {
@@ -269,22 +269,22 @@
    "key_numbers": [
     {
      "label": "Correct-answer confidence, longest program",
-     "value": "23% → 100%",
+     "value": "23% \u2192 100%",
      "sub": "generic network vs. clock-structured network"
     },
     {
      "label": "Exact-state confidence, longest program",
-     "value": "6% → 100%",
+     "value": "6% \u2192 100%",
      "sub": "same comparison, stricter full-state test"
     },
     {
      "label": "Program length still handled perfectly",
-     "value": "up to 3× practice",
+     "value": "up to 3\u00d7 practice",
      "sub": "structured network, no accuracy drop"
     },
     {
      "label": "Accuracy on a much bigger clock",
-     "value": "≈ 100%",
+     "value": "\u2248 100%",
      "sub": "structured network at roughly triple the number range"
     }
    ],
@@ -325,7 +325,7 @@
    "key_numbers": [
     {
      "label": "Right-answer share, longest programs",
-     "value": "6% → 21%",
+     "value": "6% \u2192 21%",
      "sub": "step-by-step model, before vs after it gets enough internal steps"
     },
     {
@@ -447,7 +447,7 @@
     {
      "index": 4,
      "chart_plain_title": "Direct-read questions are easier than arithmetic ones",
-     "chart_read": "Bars group four question kinds — read A, read B, their sum, their difference — with one bar per training recipe. Taller means the model's best guess was a valid answer more often. Higher is better.",
+     "chart_read": "Bars group four question kinds \u2014 read A, read B, their sum, their difference \u2014 with one bar per training recipe. Taller means the model's best guess was a valid answer more often. Higher is better.",
      "chart_takeaway": "Sum and difference questions sit lower than plain read-A or read-B for every recipe, and full feedback is tallest across all four."
     },
     {
@@ -605,7 +605,7 @@
    "key_numbers": [
     {
      "label": "Studying real observations",
-     "value": "25% → 25%",
+     "value": "25% \u2192 25%",
      "sub": "no change from random guessing"
     },
     {
@@ -666,15 +666,15 @@
   },
   "execution_conditioned_repair": {
    "verdict_tag": "Repair training memorizes, does not transfer",
-   "concept_primer": "Researchers trained the model to fix its own broken code after seeing the error it caused, like a student drilling worked examples — then tested whether that skill carried over to brand-new kinds of bugs.",
+   "concept_primer": "Researchers trained the model to fix its own broken code after seeing the error it caused, like a student drilling worked examples \u2014 then tested whether that skill carried over to brand-new kinds of bugs.",
    "plain_question": "Does training the model to fix its own broken code, using the error message it saw, help it fix kinds of bugs it never practiced on?",
-   "plain_answer": "No. The training let the model fix 100% of bugs like the ones it practiced on, up from about 10% before, but 0% of unseen bug types — it memorized the practice templates instead of learning to repair.",
+   "plain_answer": "No. The training let the model fix 100% of bugs like the ones it practiced on, up from about 10% before, but 0% of unseen bug types \u2014 it memorized the practice templates instead of learning to repair.",
    "why_it_matters": "A perfect score on familiar practice bugs can hide zero real skill; always test a repair model on bug types it has never trained on before trusting it.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
      "label": "Familiar-type bugs fixed",
-     "value": "10% → 100%",
+     "value": "10% \u2192 100%",
      "sub": "untrained model vs after repair training, same bug families"
     },
     {
@@ -693,43 +693,43 @@
      "index": 0,
      "chart_plain_title": "Fixes collapse from perfect to zero on unseen bug types",
      "chart_read": "Each group along the bottom is a way of training the model to fix its broken code; bar height is the share of bugs it fixed after its first failed try. One color is bugs like those it practiced, the other is brand-new bug types. Taller is better.",
-     "chart_takeaway": "The practiced-bug bars reach full height for the repair-trained methods, while every brand-new-bug-type bar sits flat at zero — memorization, not real repair."
+     "chart_takeaway": "The practiced-bug bars reach full height for the repair-trained methods, while every brand-new-bug-type bar sits flat at zero \u2014 memorization, not real repair."
     },
     {
      "index": 1,
      "chart_plain_title": "A specialist coding model recovers only a sliver on new bug types",
      "chart_read": "Bars grouped by training method; height is the share of bugs fixed. One color is familiar practiced bugs, the other is unseen bug types. Taller is better. This uses a model already specialized for coding.",
-     "chart_takeaway": "Familiar-bug bars again reach full height, but the new-bug-type bars barely lift off the floor even with the error message shown — too tiny to credit."
+     "chart_takeaway": "Familiar-bug bars again reach full height, but the new-bug-type bars barely lift off the floor even with the error message shown \u2014 too tiny to credit."
     },
     {
      "index": 2,
      "chart_plain_title": "Patches apply cleanly yet fix nothing on new bug types",
      "chart_read": "Bars grouped by how much information the prompt gives the model; one color is the share of patches that apply without error, the other is the share that actually fix the bug. Taller is better.",
-     "chart_takeaway": "The apply-cleanly bars stand tall while every actual-fix bar is zero — getting a patch to apply is not the same as fixing the bug."
+     "chart_takeaway": "The apply-cleanly bars stand tall while every actual-fix bar is zero \u2014 getting a patch to apply is not the same as fixing the bug."
     },
     {
      "index": 3,
      "chart_plain_title": "More training memorizes the practice set but adds no transfer",
      "chart_read": "Two bars for how long the model was trained; one color is fixes on the 20 practiced bugs, the other is fixes on set-aside bugs it never saw. Taller is better.",
-     "chart_takeaway": "Longer training lifts practiced-bug fixes from 15% to 95%, yet the set-aside bugs stay flat at zero — pure memorization."
+     "chart_takeaway": "Longer training lifts practiced-bug fixes from 15% to 95%, yet the set-aside bugs stay flat at zero \u2014 pure memorization."
     },
     {
      "index": 4,
      "chart_plain_title": "On new bug types, patches pass the shown test but fail hidden ones",
-     "chart_read": "Bars grouped by training method; one color is the share of patches that apply, the other is the share that pass the one visible test but fail hidden tests. A tall second bar is bad — it means gaming, not fixing.",
-     "chart_takeaway": "For the repair-trained methods nearly every applied patch passes the visible test yet fails the hidden ones — the model games the one test it can see."
+     "chart_read": "Bars grouped by training method; one color is the share of patches that apply, the other is the share that pass the one visible test but fail hidden tests. A tall second bar is bad \u2014 it means gaming, not fixing.",
+     "chart_takeaway": "For the repair-trained methods nearly every applied patch passes the visible test yet fails the hidden ones \u2014 the model games the one test it can see."
     },
     {
      "index": 5,
      "chart_plain_title": "Trying three fixes per bug still repairs none of the new types",
      "chart_read": "Bars grouped by training method; one color is the share of bugs fixed when keeping the best of three tries, the other is the share of patches that apply. A taller fix bar is better.",
-     "chart_takeaway": "The best-of-three fix bars are all zero while patches still apply — extra attempts buy nothing on unseen bug types."
+     "chart_takeaway": "The best-of-three fix bars are all zero while patches still apply \u2014 extra attempts buy nothing on unseen bug types."
     },
     {
      "index": 6,
      "chart_plain_title": "Early pilot cleaned up formatting but never fixed the bug",
      "chart_read": "Bars grouped by training method; colors show the share of patches that apply, that are valid code, and that actually fix the bug. A taller actual-fix bar is better.",
-     "chart_takeaway": "The apply and valid-code bars climb toward 71% while the actual-fix bar stays at zero for every method — surface polish, no repair."
+     "chart_takeaway": "The apply and valid-code bars climb toward 71% while the actual-fix bar stays at zero for every method \u2014 surface polish, no repair."
     }
    ]
   },
@@ -767,7 +767,7 @@
      "index": 0,
      "chart_plain_title": "Fixing familiar problems versus brand-new skill combinations",
      "chart_read": "Each cluster is one training method; bars show the share of bugs fixed (taller is better) on familiar problems, the same problems reworded, and brand-new skill combinations.",
-     "chart_takeaway": "The brand-new-combination bars stay tiny (about 8-10%) for every method, while familiar bars reach 64-81% — combining skills is a hard wall."
+     "chart_takeaway": "The brand-new-combination bars stay tiny (about 8-10%) for every method, while familiar bars reach 64-81% \u2014 combining skills is a hard wall."
     },
     {
      "index": 1,
@@ -791,7 +791,7 @@
      "index": 4,
      "chart_plain_title": "Do the extra skill labels matter, or the worked solution?",
      "chart_read": "Each cluster is a different test-time prompt; bars show the share fixed (taller is better) on familiar, reworded, and brand-new-combination problems.",
-     "chart_takeaway": "Stripping the skill labels barely hurts (81% to 75%), but removing the worked solution collapses it to about 22% — the worked solution does the work."
+     "chart_takeaway": "Stripping the skill labels barely hurts (81% to 75%), but removing the worked solution collapses it to about 22% \u2014 the worked solution does the work."
     },
     {
      "index": 5,
@@ -885,12 +885,12 @@
     },
     {
      "label": "Too few steps vs enough steps",
-     "value": "≈4% → 87%",
+     "value": "\u22484% \u2192 87%",
      "sub": "jump once thinking steps match the number of instructions"
     },
     {
      "label": "Simpler link-blind models",
-     "value": "≈ random-guess",
+     "value": "\u2248 random-guess",
      "sub": "never beat 1-in-31 odds at any length"
     }
    ],
@@ -1155,12 +1155,12 @@
    "key_numbers": [
     {
      "label": "First step named right, easier problems",
-     "value": "33% → 36%",
+     "value": "33% \u2192 36%",
      "sub": "nudging with the true clue barely moves it"
     },
     {
      "label": "First step named right, harder problems",
-     "value": "12% → 17%",
+     "value": "12% \u2192 17%",
      "sub": "a faint whiff, but within random-noise range"
     },
     {
@@ -1244,7 +1244,7 @@
    "key_numbers": [
     {
      "label": "Tasks solved, before vs after training",
-     "value": "5% → 92%",
+     "value": "5% \u2192 92%",
      "sub": "the untrained model quit almost immediately; training taught it to keep going"
     },
     {
@@ -1286,7 +1286,7 @@
   },
   "qwen35_4b_adaptive_tool_controller": {
    "verdict_tag": "Smart tool switch helps only partway",
-   "concept_primer": "Facing a messy data table, the model can answer straight from memory or pause to run a small program (a \"tool\"). The controller is a rule deciding which, per task — like knowing when to reach for a calculator.",
+   "concept_primer": "Facing a messy data table, the model can answer straight from memory or pause to run a small program (a \"tool\"). The controller is a rule deciding which, per task \u2014 like knowing when to reach for a calculator.",
    "plain_question": "Can a simple learned rule decide when the model should run a tool instead of just answering a data-table question directly?",
    "plain_answer": "Partly. The learned rule lifts correct answers from 42% to 50% at low extra cost, but a simpler hand-set rule does better, reaching 58%. So the idea works, yet leaves gains on the table.",
    "why_it_matters": "Reaching for a tool pays off only on a narrow slice of table tasks. A cheap switch captures the easy wins; grabbing the harder wins needs calling more tools, not just a smarter switch.",
@@ -1344,7 +1344,7 @@
    "key_numbers": [
     {
      "label": "Even practice set, tough new tasks",
-     "value": "60% → 99%",
+     "value": "60% \u2192 99%",
      "sub": "share of new tasks solved completely"
     },
     {
@@ -1395,7 +1395,7 @@
     {
      "label": "Coached with the worked-out steps",
      "value": "32%",
-     "sub": "same problems, many tries — best of the group"
+     "sub": "same problems, many tries \u2014 best of the group"
     },
     {
      "label": "Coached with wrong steps",
@@ -1404,7 +1404,7 @@
     },
     {
      "label": "Reasoning-coached but kept silent",
-     "value": "≈ 1%",
+     "value": "\u2248 1%",
      "sub": "near-broken unless it thinks the steps aloud"
     }
    ],
@@ -1413,13 +1413,13 @@
      "index": 0,
      "chart_plain_title": "Coaching with worked-out steps wins; wrong steps backfire",
      "chart_read": "Each cluster is one coaching style; bar height is how often the model solved fresh three-step problems, so taller is better. Two bars per cluster: given many tries versus a single try. The untrained model sits at zero.",
-     "chart_takeaway": "The worked-out-steps cluster is the tallest, while the wrong-steps and kept-silent clusters drop below the answer-only bars — correct, spoken reasoning is what carries the gain."
+     "chart_takeaway": "The worked-out-steps cluster is the tallest, while the wrong-steps and kept-silent clusters drop below the answer-only bars \u2014 correct, spoken reasoning is what carries the gain."
     },
     {
      "index": 1,
      "chart_plain_title": "A partial, unfinished side-check on picking the right next step",
      "chart_read": "Three coaching styles along the bottom; bar height is how often the model picked the correct next step, compared against a random-guess line. Two bars each: thinking silently versus thinking aloud. Taller is better.",
-     "chart_takeaway": "The answer-coached bars clear the random-guess line, but the steps-coached bars sit flat at zero because that measurement never finished running — so this panel stays inconclusive."
+     "chart_takeaway": "The answer-coached bars clear the random-guess line, but the steps-coached bars sit flat at zero because that measurement never finished running \u2014 so this panel stays inconclusive."
     }
    ]
   },
@@ -1433,12 +1433,12 @@
    "key_numbers": [
     {
      "label": "Right step-sequence, brand-new puzzles",
-     "value": "0% → 51%",
+     "value": "0% \u2192 51%",
      "sub": "untrained model vs after the tune-up"
     },
     {
      "label": "Fully solved outright",
-     "value": "0% → 36%",
+     "value": "0% \u2192 36%",
      "sub": "needs both the right steps and right numbers"
     },
     {
@@ -1472,12 +1472,12 @@
    "key_numbers": [
     {
      "label": "Easy step: no help to both boosts",
-     "value": "27% → 85%",
+     "value": "27% \u2192 85%",
      "sub": "picking the right next move when the goal is one step away"
     },
     {
      "label": "Hard step: drilling alone",
-     "value": "2% → 18%",
+     "value": "2% \u2192 18%",
      "sub": "drilling raises correct picks when the goal is three steps away"
     },
     {
@@ -1544,7 +1544,7 @@
    "key_numbers": [
     {
      "label": "New problems the toolbox could solve",
-     "value": "84% → 14%",
+     "value": "84% \u2192 14%",
      "sub": "familiar practice problems vs brand-new ones"
     },
     {
@@ -1554,7 +1554,7 @@
     },
     {
      "label": "Solutions that looked right but were actually wrong",
-     "value": "9% → 70%",
+     "value": "9% \u2192 70%",
      "sub": "familiar problems vs new problems"
     }
    ],
@@ -1581,7 +1581,7 @@
   },
   "qwen35_4b_code_abi_oracle_coverage_ladder": {
    "verdict_tag": "Kit can express most tasks, not auto-solve them",
-   "concept_primer": "Imagine a box of pre-built, individually tested code pieces—like a kit of snap-together blocks. The question: can every coding task's solution be built by combining pieces from this fixed kit?",
+   "concept_primer": "Imagine a box of pre-built, individually tested code pieces\u2014like a kit of snap-together blocks. The question: can every coding task's solution be built by combining pieces from this fixed kit?",
    "plain_question": "Can a fixed kit of pre-tested code building blocks express most everyday Python coding tasks?",
    "plain_answer": "Mostly. The full kit can build 84% of 160 tasks, up from 13% with a tiny kit. But automatically picking the correct build works only 59% of the time, so the kit is a foundation, not a finished solver.",
    "why_it_matters": "A shared kit of verified building blocks is worth investing in, but you must still check each candidate against real tests before trusting it. Never rely on a single passing example.",
@@ -1589,7 +1589,7 @@
    "key_numbers": [
     {
      "label": "Tasks the kit can build",
-     "value": "13% → 84%",
+     "value": "13% \u2192 84%",
      "sub": "share of 160 tasks, tiny kit vs full kit"
     },
     {
@@ -1599,7 +1599,7 @@
     },
     {
      "label": "Fooled by a single example test",
-     "value": "58% → 9%",
+     "value": "58% \u2192 9%",
      "sub": "tasks that passed one test but were wrong, tiny vs full kit"
     },
     {
@@ -1613,7 +1613,7 @@
      "index": 0,
      "chart_plain_title": "Bigger kit builds more tasks, but auto-picks the right one less reliably",
      "chart_read": "Left to right the building-block kit grows from tiny to full. For each kit, one bar shows how many of 160 tasks the kit can build at all, the other how often the first plausible build is actually right. Taller is better.",
-     "chart_takeaway": "Both bars rise as the kit grows, but the 'first plausible build is right' bar stays far below the 'can be built' bar—expressible does not mean auto-solved."
+     "chart_takeaway": "Both bars rise as the kit grows, but the 'first plausible build is right' bar stays far below the 'can be built' bar\u2014expressible does not mean auto-solved."
     },
     {
      "index": 1,
@@ -1624,14 +1624,14 @@
     {
      "index": 2,
      "chart_plain_title": "A single example test fools far fewer builds as the kit grows",
-     "chart_read": "Left to right the kit grows from tiny to full. Each bar is the share of tasks where a build passed the one shown example yet was still wrong. Here lower is better—fewer tasks fooled by a single test.",
+     "chart_read": "Left to right the kit grows from tiny to full. Each bar is the share of tasks where a build passed the one shown example yet was still wrong. Here lower is better\u2014fewer tasks fooled by a single test.",
      "chart_takeaway": "The fooled-by-one-test bar falls from 58% to 9% as the kit grows, but real checking is still needed since most individual builds remain wrong."
     },
     {
      "index": 3,
      "chart_plain_title": "Most solved tasks need just one building block",
      "chart_read": "Each bar is how many of the 134 solved tasks were built using a chain of that many blocks: a single block, two chained, or three. Taller means more tasks at that complexity.",
-     "chart_takeaway": "The single-block bar towers over the rest—94 of 134 tasks need just one piece, so genuine multi-block assembly covers only 40 tasks."
+     "chart_takeaway": "The single-block bar towers over the rest\u201494 of 134 tasks need just one piece, so genuine multi-block assembly covers only 40 tasks."
     }
    ]
   },
@@ -1645,7 +1645,7 @@
    "key_numbers": [
     {
      "label": "Problems solved, 4 tries (plain vs nudged)",
-     "value": "58% → 62%",
+     "value": "58% \u2192 62%",
      "sub": "share of 24 problems with a working answer"
     },
     {
@@ -1660,7 +1660,7 @@
     },
     {
      "label": "First-try success (plain vs nudged)",
-     "value": "38% → 42%",
+     "value": "38% \u2192 42%",
      "sub": "share solved on the very first attempt"
     }
    ],
@@ -1695,7 +1695,7 @@
    "key_numbers": [
     {
      "label": "Plain prompt vs a written procedure",
-     "value": "74% → 83%",
+     "value": "74% \u2192 83%",
      "sub": "general model, spot-the-right-answer task"
     },
     {
@@ -1739,12 +1739,12 @@
    "key_numbers": [
     {
      "label": "First-try fixes, random vs targeted examples",
-     "value": "51% → 58%",
+     "value": "51% \u2192 58%",
      "sub": "share of buggy programs fully fixed on the first attempt"
     },
     {
      "label": "Best-of-several fixes, random vs targeted",
-     "value": "64% → 61%",
+     "value": "64% \u2192 61%",
      "sub": "no real gain when picking the best of a few tries"
     },
     {
@@ -1754,7 +1754,7 @@
     },
     {
      "label": "Coherent vs scrambled examples",
-     "value": "58% → 22%",
+     "value": "58% \u2192 22%",
      "sub": "scrambling the examples badly hurts, proving they are used"
     }
    ],
@@ -1783,19 +1783,19 @@
    "verdict_tag": "Self-study raises the solving ceiling",
    "concept_primer": "Imagine a student who reviews only their own past correct solutions. That self-study could pay off two ways: nailing familiar problems on the first try, or finally cracking harder ones they never solved before.",
    "plain_question": "If a small AI reviews its own correct answers, does it just get faster at what it already knew, or can it start solving problems it never could?",
-   "plain_answer": "Both. After the model studied its own verified correct answers, it solved easy problems on the first try far more often (60% to 80%) and tripled how many harder problems it could ever solve (15% to 45%) — beating the do-nothing option of just retrying the original model.",
+   "plain_answer": "Both. After the model studied its own verified correct answers, it solved easy problems on the first try far more often (60% to 80%) and tripled how many harder problems it could ever solve (15% to 45%) \u2014 beating the do-nothing option of just retrying the original model.",
    "why_it_matters": "If you plan to let a model make several attempts anyway, first have it study its own past correct solutions: the ceiling of what it can solve rises, not just its speed. But self-study cannot teach a difficulty it never once solved.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
      "label": "Easy problems solved on first try",
-     "value": "60% → 80%",
+     "value": "60% \u2192 80%",
      "sub": "faster at what it already knew (self-study)"
     },
     {
      "label": "Harder problems ever solved",
-     "value": "15% → 45%",
-     "sub": "tripled — cracked ones it never had before"
+     "value": "15% \u2192 45%",
+     "sub": "tripled \u2014 cracked ones it never had before"
     },
     {
      "label": "Hardest problems solved",
@@ -1828,7 +1828,7 @@
    "key_numbers": [
     {
      "label": "One try vs many tries (medium puzzle)",
-     "value": "15% → 60%",
+     "value": "15% \u2192 60%",
      "sub": "share solved when you make many attempts instead of one"
     },
     {
@@ -1873,7 +1873,7 @@
    "key_numbers": [
     {
      "label": "Following written steps",
-     "value": "≈ 100%",
+     "value": "\u2248 100%",
      "sub": "correct code, every puzzle type, every depth"
     },
     {
@@ -1883,7 +1883,7 @@
     },
     {
      "label": "Guessing the hidden rule, deeper puzzles",
-     "value": "≈ random guess",
+     "value": "\u2248 random guess",
      "sub": "collapses in all three puzzle types"
     }
    ],
@@ -1962,17 +1962,17 @@
    "key_numbers": [
     {
      "label": "Hardest-task solve rate",
-     "value": "13% → 40%",
+     "value": "13% \u2192 40%",
      "sub": "one leap vs step-by-step search"
     },
     {
      "label": "Genuinely deep tasks solved",
-     "value": "0% → 17%",
+     "value": "0% \u2192 17%",
      "sub": "one leap never solved these; step search sometimes did"
     },
     {
      "label": "One-shot skill after self-training",
-     "value": "13% → 24%",
+     "value": "13% \u2192 24%",
      "sub": "practicing on the found solutions"
     }
    ],
@@ -2063,12 +2063,12 @@
    "key_numbers": [
     {
      "label": "New puzzles solved with several tries",
-     "value": "0% → 38%",
+     "value": "0% \u2192 38%",
      "sub": "no examples vs the most examples"
     },
     {
      "label": "Solved in one try, no scratch-work",
-     "value": "0% → 10%",
+     "value": "0% \u2192 10%",
      "sub": "usable out of the box, at the most examples"
     },
     {
@@ -2102,22 +2102,22 @@
    "key_numbers": [
     {
      "label": "Solve rate with several tries",
-     "value": "38% → 54%",
+     "value": "38% \u2192 54%",
      "sub": "after doubling practice variety"
     },
     {
      "label": "Single best-answer solve rate",
-     "value": "14% → 19%",
+     "value": "14% \u2192 19%",
      "sub": "the deployable, one-shot number"
     },
     {
      "label": "Same practice, more variety",
-     "value": "16% → 38%",
+     "value": "16% \u2192 38%",
      "sub": "gain from variety alone, at equal effort"
     },
     {
      "label": "One step harder puzzle",
-     "value": "7% → 18%",
+     "value": "7% \u2192 18%",
      "sub": "recipe repeats a level deeper, weakly"
     }
    ],
@@ -2152,12 +2152,12 @@
    "key_numbers": [
     {
      "label": "Solving when told the recipe",
-     "value": "≈ 100%",
+     "value": "\u2248 100%",
      "sub": "runs even four-step puzzles near-perfectly"
     },
     {
      "label": "Solving when it must infer the recipe",
-     "value": "≈ 0%",
+     "value": "\u2248 0%",
      "sub": "drops to nothing past two steps"
     },
     {
@@ -2202,8 +2202,8 @@
    "verdict_tag": "Varied retries recover most failures",
    "concept_primer": "Picture a capable student who fails a problem only because they tried one approach and stopped; ask them for several different attempts and one usually works.",
    "plain_question": "When our small model fails a coding task, is it because it truly can't do it, or just because it didn't try enough different approaches?",
-   "plain_answer": "Mostly the latter. A handful of tries solved 70% of tasks; asking for many varied attempts lifted that to 89%, rescuing most earlier failures. The ability was there — it just needed more varied shots.",
-   "why_it_matters": "Before retraining a small model to fix failures, first spend effort on diverse retries — much of the apparent weakness is untapped and cheaply recoverable. Re-editing wrong answers, by contrast, added nothing here.",
+   "plain_answer": "Mostly the latter. A handful of tries solved 70% of tasks; asking for many varied attempts lifted that to 89%, rescuing most earlier failures. The ability was there \u2014 it just needed more varied shots.",
+   "why_it_matters": "Before retraining a small model to fix failures, first spend effort on diverse retries \u2014 much of the apparent weakness is untapped and cheaply recoverable. Re-editing wrong answers, by contrast, added nothing here.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
@@ -2232,7 +2232,7 @@
      "index": 0,
      "chart_plain_title": "Share of tasks solved as retries grow more varied",
      "chart_read": "Bars left to right go from a few tries to many varied tries; height is the share of tasks solved, and taller is better. The rightmost bars include a step that re-edits wrong answers.",
-     "chart_takeaway": "Bars climb steadily from 70% to 89%, but the last two are identical — more varied sampling keeps helping while re-editing wrong answers adds nothing."
+     "chart_takeaway": "Bars climb steadily from 70% to 89%, but the last two are identical \u2014 more varied sampling keeps helping while re-editing wrong answers adds nothing."
     },
     {
      "index": 1,
@@ -2263,12 +2263,12 @@
     },
     {
      "label": "Without vs with worked steps",
-     "value": "33% → 75%",
+     "value": "33% \u2192 75%",
      "sub": "full success on new problems, no steps versus aligned steps"
     },
     {
      "label": "Hardest problem type, after extra practice",
-     "value": "0% → 29%",
+     "value": "0% \u2192 29%",
      "sub": "the two-part-condition type, before and after adding practice examples"
     }
    ],
@@ -2303,12 +2303,12 @@
    "key_numbers": [
     {
      "label": "Tables fixed correctly",
-     "value": "42% → 58%",
+     "value": "42% \u2192 58%",
      "sub": "quick answer alone vs the cheap rule"
     },
     {
      "label": "Effort spent per table",
-     "value": "17,801 → 9,017",
+     "value": "17,801 \u2192 9,017",
      "sub": "always running everything vs the cheap rule"
     },
     {
@@ -2512,7 +2512,7 @@
    "concept_primer": "Instead of answering directly, the model writes small programs that reshape a messy table, and each program can be checked against one worked example before you trust its answer.",
    "plain_question": "When the model writes several table-reshaping programs, does requiring them to agree beat just using the first one that matches the worked example?",
    "plain_answer": "No. Requiring several programs to agree was safer on each pick but far too cautious; simply using the first program that matched the worked example solved the most tables, 52% versus 44% for asking the model directly.",
-   "why_it_matters": "Prefer the simplest reliable filter — trust the first program that reproduces the worked example. Demanding agreement across programs raises confidence per answer but skips too many solvable tables to be worth it.",
+   "why_it_matters": "Prefer the simplest reliable filter \u2014 trust the first program that reproduces the worked example. Demanding agreement across programs raises confidence per answer but skips too many solvable tables to be worth it.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
@@ -2528,7 +2528,7 @@
     {
      "label": "Requiring agreement",
      "value": "49%",
-     "sub": "make at least two programs agree first — fewer tables solved"
+     "sub": "make at least two programs agree first \u2014 fewer tables solved"
     },
     {
      "label": "Best any program could do",
@@ -2573,12 +2573,12 @@
    "key_numbers": [
     {
      "label": "Recipe correctness after fixing",
-     "value": "16% → 25%",
+     "value": "16% \u2192 25%",
      "sub": "share of tables the recipe got right on real data, up after fixing rounds"
     },
     {
      "label": "Tables solved when both paths combine",
-     "value": "55% → 62%",
+     "value": "55% \u2192 62%",
      "sub": "extra tables caught by adding the recipe path to direct answering"
     },
     {
@@ -2772,26 +2772,26 @@
   },
   "qwen35_4b_generator_verifier_gap": {
    "verdict_tag": "Self-checking works, but only when it thinks",
-   "concept_primer": "Think of a student who writes a coding answer, then proofreads their own attempts to spot which one is actually right—without running the code. This is the model grading its own work.",
+   "concept_primer": "Think of a student who writes a coding answer, then proofreads their own attempts to spot which one is actually right\u2014without running the code. This is the model grading its own work.",
    "plain_question": "Can the model reliably tell which of its own coding answers are right, just by reading them rather than running them?",
-   "plain_answer": "Yes, once it reasons first. Given time to think, the model grades its own answers correctly about 83% of the time and picks its best of eight tries at 86%—near the 89% best-possible—versus mostly rubber-stamping everything without thinking.",
+   "plain_answer": "Yes, once it reasons first. Given time to think, the model grades its own answers correctly about 83% of the time and picks its best of eight tries at 86%\u2014near the 89% best-possible\u2014versus mostly rubber-stamping everything without thinking.",
    "why_it_matters": "Rather than training a separate judge, let the model reason before grading its own drafts. It becomes a strong self-critic for free, cheaply lifting answer quality by choosing its best attempt.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
      "label": "Picking its best of eight answers",
-     "value": "77% → 86%",
+     "value": "77% \u2192 86%",
      "sub": "up from a random pick, near the 89% best-possible"
     },
     {
      "label": "Grading its own answers correctly",
-     "value": "63% → 83%",
+     "value": "63% \u2192 83%",
      "sub": "without vs with thinking first"
     },
     {
      "label": "Rubber-stamping without thinking",
      "value": "91% called correct",
-     "sub": "vs a true 77% right—mostly agreeing with itself"
+     "sub": "vs a true 77% right\u2014mostly agreeing with itself"
     }
    ],
    "charts": [
@@ -2835,7 +2835,7 @@
     },
     {
      "label": "Patching pre-broken diagrams",
-     "value": "3% → 27%",
+     "value": "3% \u2192 27%",
      "sub": "patch works when the flaw is planted, not self-made"
     }
    ],
@@ -2880,7 +2880,7 @@
     },
     {
      "label": "Sample runs the trained model used",
-     "value": "8 → 3.8",
+     "value": "8 \u2192 3.8",
      "sub": "cheaper stopping, but zero accuracy gain"
     }
    ],
@@ -2909,7 +2909,7 @@
    "key_numbers": [
     {
      "label": "Tasks solved from the toolbox",
-     "value": "37% → 14%",
+     "value": "37% \u2192 14%",
      "sub": "familiar tasks vs brand-new tasks"
     },
     {
@@ -3004,17 +3004,17 @@
    "key_numbers": [
     {
      "label": "Right pair found, before vs after training",
-     "value": "0% → 0%",
+     "value": "0% \u2192 0%",
      "sub": "the shortlist never included the correct two-part combination"
     },
     {
      "label": "Options left after six test questions",
-     "value": "22,400 → 5,700",
+     "value": "22,400 \u2192 5,700",
      "sub": "designed questions narrow the field far more than random ones"
     },
     {
      "label": "Picked the correct program",
-     "value": "29% → 43%",
+     "value": "29% \u2192 43%",
      "sub": "with designed questions versus random test cases"
     }
    ],
@@ -3060,12 +3060,12 @@
     },
     {
      "label": "One tool named right, untrained then trained",
-     "value": "0% → 13%",
+     "value": "0% \u2192 13%",
      "sub": "training nudged it up, but reshuffling the codebook kept the same score, so not real reading"
     },
     {
      "label": "Training error, start to end",
-     "value": "3.3 → 1.0",
+     "value": "3.3 \u2192 1.0",
      "sub": "the model learned the answer format but not how to use the codebook"
     }
    ],
@@ -3110,7 +3110,7 @@
     },
     {
      "label": "Answer readable inside, hardest problems",
-     "value": "≈ random-guess level",
+     "value": "\u2248 random-guess level",
      "sub": "barely above chance, so the model never figured it out"
     }
    ],
@@ -3139,7 +3139,7 @@
    "key_numbers": [
     {
      "label": "Planning the first of three moves",
-     "value": "1% → 14%",
+     "value": "1% \u2192 14%",
      "sub": "how often the correct opening move is picked, untrained vs after self-training"
     },
     {
@@ -3149,7 +3149,7 @@
     },
     {
      "label": "Full puzzles solved by self-guidance",
-     "value": "1% → 23%",
+     "value": "1% \u2192 23%",
      "sub": "same effort budget, untrained vs self-trained"
     },
     {
@@ -3183,12 +3183,12 @@
    "key_numbers": [
     {
      "label": "One-shot solve rate, practice longer",
-     "value": "3.7% → 11%",
+     "value": "3.7% \u2192 11%",
      "sub": "Tripled by simply training twice as long on correct answers"
     },
     {
      "label": "One-shot solve rate, reward right-over-wrong",
-     "value": "3.7% → 0%",
+     "value": "3.7% \u2192 0%",
      "sub": "Preference training collapsed the model's ability to answer"
     },
     {
@@ -3228,12 +3228,12 @@
    "key_numbers": [
     {
      "label": "Harder set, one extra test",
-     "value": "69% → 71%",
+     "value": "69% \u2192 71%",
      "sub": "learned picker edged out the hand-coded rule"
     },
     {
      "label": "Main set, one extra test",
-     "value": "91% → 87%",
+     "value": "91% \u2192 87%",
      "sub": "learned picker slipped below the simple rule"
     },
     {
@@ -3271,7 +3271,7 @@
   },
   "qwen35_4b_live_tool_dagger": {
    "verdict_tag": "Writing and running code recovers cases",
-   "concept_primer": "Faced with a table to reshape, the model can either answer from memory or write a small program, run it, and check the result — with a \"decider\" step picking which answer to submit.",
+   "concept_primer": "Faced with a table to reshape, the model can either answer from memory or write a small program, run it, and check the result \u2014 with a \"decider\" step picking which answer to submit.",
    "plain_question": "Does letting the model write and run a small program, instead of only answering from memory, help it reshape tables correctly without making things worse?",
    "plain_answer": "Yes. Writing and running a small program, with a decider choosing when to trust it, solved 2 of 12 new tables that answer-only got wrong, and never broke a case the model would otherwise have gotten right.",
    "why_it_matters": "Adding a run-the-code check with a decider is a safe, cheap upgrade: it only recovers misses and causes no new mistakes. A trained decider reaches the same result with far less tool effort than always running code.",
@@ -3279,7 +3279,7 @@
    "key_numbers": [
     {
      "label": "Tables solved: answer-only vs writing code",
-     "value": "0 → 2 of 12",
+     "value": "0 \u2192 2 of 12",
      "sub": "cases recovered that answering from memory missed"
     },
     {
@@ -3289,7 +3289,7 @@
     },
     {
      "label": "Work to solve the same two tables",
-     "value": "30 → 6 steps",
+     "value": "30 \u2192 6 steps",
      "sub": "always-run needs 12 programs plus 18 fixes; trained decider uses 6 programs, no fixes"
     }
    ],
@@ -3297,20 +3297,20 @@
     {
      "index": 0,
      "chart_plain_title": "How often each strategy reshapes the new table exactly right",
-     "chart_read": "Each bar is one answering strategy; height is how often it got the table exactly right on new, unseen tasks — taller is better. The far-left bar answers from memory only; the middle bars write and run a program; the scrambled-decider bar is a sanity check.",
-     "chart_takeaway": "Every write-and-run strategy clears the answer-only bar, which solves none, while the scrambled-decider control also drops to zero — running the code is what recovers the extra cases."
+     "chart_read": "Each bar is one answering strategy; height is how often it got the table exactly right on new, unseen tasks \u2014 taller is better. The far-left bar answers from memory only; the middle bars write and run a program; the scrambled-decider bar is a sanity check.",
+     "chart_takeaway": "Every write-and-run strategy clears the answer-only bar, which solves none, while the scrambled-decider control also drops to zero \u2014 running the code is what recovers the extra cases."
     },
     {
      "index": 1,
      "chart_plain_title": "Familiar practice tasks versus new tasks: the drop-off",
      "chart_read": "Two bars per strategy: the lighter bar is familiar practice tasks, the darker bar is new unseen tasks; height is how often the table came out exactly right, taller is better.",
-     "chart_takeaway": "Every strategy's new-task bar is far shorter than its practice bar — accuracy falls sharply on unfamiliar tables, and even ideal choices top out at 2 of 12."
+     "chart_takeaway": "Every strategy's new-task bar is far shorter than its practice bar \u2014 accuracy falls sharply on unfamiliar tables, and even ideal choices top out at 2 of 12."
     },
     {
      "index": 2,
      "chart_plain_title": "Same accuracy, very different amount of tool work",
      "chart_read": "For strategies that all score the same on new tasks, the bars show tool effort on 12 tasks: one color is programs written, the other is fix attempts. Lower bars mean cheaper.",
-     "chart_takeaway": "Always-running code needs 12 programs plus 18 fixes, while the trained decider reaches the identical score with 6 programs and no fixes — a large cost cut for equal accuracy."
+     "chart_takeaway": "Always-running code needs 12 programs plus 18 fixes, while the trained decider reaches the identical score with 6 programs and no fixes \u2014 a large cost cut for equal accuracy."
     }
    ]
   },
@@ -3324,12 +3324,12 @@
    "key_numbers": [
     {
      "label": "Tricky-case success, before vs after adding practice",
-     "value": "64% → 100%",
+     "value": "64% \u2192 100%",
      "sub": "getting the whole little program right on unseen inputs"
     },
     {
      "label": "Hardest case type, before vs after",
-     "value": "25% → 100%",
+     "value": "25% \u2192 100%",
      "sub": "the one weak spot both practice sets fully repaired"
     },
     {
@@ -3361,10 +3361,10 @@
   },
   "qwen35_4b_neurosymbolic_repl_substrate": {
    "verdict_tag": "Self-correction did not beat resampling",
-   "concept_primer": "Picture a coder who writes a program, runs it, sees the wrong output, and edits it — instead of just rewriting from scratch a few times. This test lets the model do exactly that, using real results from running its code.",
+   "concept_primer": "Picture a coder who writes a program, runs it, sees the wrong output, and edits it \u2014 instead of just rewriting from scratch a few times. This test lets the model do exactly that, using real results from running its code.",
    "plain_question": "Does letting the model run its own code and fix its mistakes beat simply having it try several fresh times?",
    "plain_answer": "No. Running the code and feeding back the real result barely helped (about 29% of tasks solved), while just trying five fresh independent times did better (about 34%). The extra tries were the smarter use of the same effort.",
-   "why_it_matters": "For a small model, don't burn effort on run-and-fix loops at answer time — plain independent retries do as well or better. Durable gains come instead from training it on the answers it can already verify are correct.",
+   "why_it_matters": "For a small model, don't burn effort on run-and-fix loops at answer time \u2014 plain independent retries do as well or better. Durable gains come instead from training it on the answers it can already verify are correct.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
@@ -3379,7 +3379,7 @@
     },
     {
      "label": "Learning from its own wins",
-     "value": "22% → 32%",
+     "value": "22% \u2192 32%",
      "sub": "single-shot accuracy after training on verified successes"
     }
    ],
@@ -3388,7 +3388,7 @@
      "index": 0,
      "chart_plain_title": "Fixing its own code barely beats a single try",
      "chart_read": "Each bar is one strategy; bar height is the share of unseen tasks solved, and taller is better. Left to right: one try, run-and-fix using real results, run-and-fix told nothing, and five fresh independent tries.",
-     "chart_takeaway": "The rightmost bar (five fresh tries) is clearly tallest, while the run-and-fix bar sits barely above a single try — live feedback adds almost nothing."
+     "chart_takeaway": "The rightmost bar (five fresh tries) is clearly tallest, while the run-and-fix bar sits barely above a single try \u2014 live feedback adds almost nothing."
     },
     {
      "index": 1,
@@ -3400,13 +3400,13 @@
      "index": 2,
      "chart_plain_title": "Training on its own verified wins lifts accuracy",
      "chart_read": "Two task groups (one-shot answers, and best-of-five coverage); paired bars compare the untrained model against one trained on its own verified solutions. Taller is better.",
-     "chart_takeaway": "The trained bars are taller in both groups, and coverage rises rather than shrinking — a real gain with no loss of variety."
+     "chart_takeaway": "The trained bars are taller in both groups, and coverage rises rather than shrinking \u2014 a real gain with no loss of variety."
     },
     {
      "index": 3,
      "chart_plain_title": "Repeated self-training compounds but flattens out",
      "chart_read": "The horizontal axis is training rounds (0 = untrained); three lines track one-shot accuracy, best-of-five coverage, and the very hardest tasks on unseen problems. Higher is better.",
-     "chart_takeaway": "The top lines climb then plateau by round three, while the hardest-task line stays flat near the bottom — the gains hit a ceiling."
+     "chart_takeaway": "The top lines climb then plateau by round three, while the hardest-task line stays flat near the bottom \u2014 the gains hit a ceiling."
     }
    ]
   },
@@ -3420,7 +3420,7 @@
    "key_numbers": [
     {
      "label": "Problems eventually solved",
-     "value": "62% → 67%",
+     "value": "62% \u2192 67%",
      "sub": "gentle coaching vs the untrained model"
     },
     {
@@ -3430,8 +3430,8 @@
     },
     {
      "label": "First answer correct",
-     "value": "50% → 37%",
-     "sub": "dropped after coaching — the catch"
+     "value": "50% \u2192 37%",
+     "sub": "dropped after coaching \u2014 the catch"
     },
     {
      "label": "Heavy coaching version",
@@ -3470,7 +3470,7 @@
    "key_numbers": [
     {
      "label": "Two-blank programs picked correctly",
-     "value": "75% → 46%",
+     "value": "75% \u2192 46%",
      "sub": "drops as the drawer grows from 8 to 512 tools"
     },
     {
@@ -3576,12 +3576,12 @@
    "key_numbers": [
     {
      "label": "Extra help at the real decision points",
-     "value": "≈ none",
+     "value": "\u2248 none",
      "sub": "basically no change from giving no hint"
     },
     {
      "label": "Extra help from a scrambled fake hint",
-     "value": "≈ none",
+     "value": "\u2248 none",
      "sub": "the meaningless control scored the same"
     },
     {
@@ -3626,12 +3626,12 @@
    "key_numbers": [
     {
      "label": "Right pick, familiar problems",
-     "value": "72% → 81%",
+     "value": "72% \u2192 81%",
      "sub": "untrained grader vs trained grader"
     },
     {
      "label": "Trained grader vs naive picking",
-     "value": "44% → 81%",
+     "value": "44% \u2192 81%",
      "sub": "grabbing the first surface-correct program vs the trained grader"
     },
     {
@@ -3665,12 +3665,12 @@
    "key_numbers": [
     {
      "label": "Smarter question menu",
-     "value": "42.5% → 49.4%",
+     "value": "42.5% \u2192 49.4%",
      "sub": "success at solving with three questions"
     },
     {
      "label": "After light training",
-     "value": "47.5% → 51.2%",
+     "value": "47.5% \u2192 51.2%",
      "sub": "trained model vs untrained, same menu"
     },
     {
@@ -3680,7 +3680,7 @@
     },
     {
      "label": "Hard puzzle headroom",
-     "value": "5% → 73.8%",
+     "value": "5% \u2192 73.8%",
      "sub": "untrained model vs full-list best chooser"
     }
    ],
@@ -3715,7 +3715,7 @@
    "key_numbers": [
     {
      "label": "Puzzles solved, untrained then trained",
-     "value": "33% → 44%",
+     "value": "33% \u2192 44%",
      "sub": "share of hidden answers pinned down within three questions"
     },
     {
@@ -3760,17 +3760,17 @@
    "key_numbers": [
     {
      "label": "Reasoning's edge as thinking room grows",
-     "value": "11% → 15%",
+     "value": "11% \u2192 15%",
      "sub": "how much genuine reasoning beats the same words scrambled, at short then long thinking"
     },
     {
      "label": "Payoff of meaningless filler",
-     "value": "≈ 0",
+     "value": "\u2248 0",
      "sub": "padding the scratchpad with blank dots gave no gain over not thinking at all"
     },
     {
      "label": "Result of pasting a wrong problem's reasoning",
-     "value": "≈ 3%",
+     "value": "\u2248 3%",
      "sub": "another task's thinking sends the model to the wrong answer almost every time"
     }
    ],
@@ -3809,7 +3809,7 @@
     },
     {
      "label": "Change from coaching",
-     "value": "50% → 44%",
+     "value": "50% \u2192 44%",
      "sub": "coaching lowered its own starting point"
     },
     {
@@ -3895,16 +3895,16 @@
     {
      "label": "Reading the kind of action",
      "value": "41% vs 27%",
-     "sub": "from inside the model vs from the examples — the model wins, so it is computed internally"
+     "sub": "from inside the model vs from the examples \u2014 the model wins, so it is computed internally"
     },
     {
      "label": "Reading the exact number",
      "value": "49% vs 53%",
-     "sub": "from inside vs from the examples — the examples win, so it is not stored inside"
+     "sub": "from inside vs from the examples \u2014 the examples win, so it is not stored inside"
     },
     {
      "label": "Puzzles solved once given the number",
-     "value": "0.7% → 9.5%",
+     "value": "0.7% \u2192 9.5%",
      "sub": "handing the model the right number is what unlocks the puzzle"
     }
    ],
@@ -3913,13 +3913,13 @@
      "index": 0,
      "chart_plain_title": "Can you read the hidden rule from the model, or from the examples?",
      "chart_read": "Each pair of bars shows how often a hidden-rule detail is correctly recovered from the model's internal activity versus from the examples alone; taller is better. Left group is the kind of action, right group is the exact number.",
-     "chart_takeaway": "The model bar tops the examples bar for the kind of action but drops below it for the exact number — so the action is computed inside, the number is merely read off the examples."
+     "chart_takeaway": "The model bar tops the examples bar for the kind of action but drops below it for the exact number \u2014 so the action is computed inside, the number is merely read off the examples."
     },
     {
      "index": 1,
      "chart_plain_title": "Giving the model the exact number is what lets it solve the puzzles",
      "chart_read": "Bars show the share of puzzles solved under different hints; taller is better. One color is solved on the first try, the other solved within a few tries. Hints range from nothing, to the kind of action only, to the full rule including its number.",
-     "chart_takeaway": "The bar for the full rule with its number towers over the bar for the kind of action alone, and a deliberately wrong number solves nothing — the exact number is what unlocks solving."
+     "chart_takeaway": "The bar for the full rule with its number towers over the bar for the kind of action alone, and a deliberately wrong number solves nothing \u2014 the exact number is what unlocks solving."
     }
    ]
   },
@@ -3933,18 +3933,18 @@
    "key_numbers": [
     {
      "label": "First-try solve, medium puzzles (full first step given)",
-     "value": "3% → 19%",
+     "value": "3% \u2192 19%",
      "sub": "six times higher than no hint"
     },
     {
      "label": "Solve within several tries (full first step given)",
-     "value": "5% → 31%",
+     "value": "5% \u2192 31%",
      "sub": "six times higher than no hint"
     },
     {
      "label": "The model's own read-out hint alone",
      "value": "no real change",
-     "sub": "5% → 6%, essentially no gain"
+     "sub": "5% \u2192 6%, essentially no gain"
     }
    ],
    "charts": [
@@ -3982,12 +3982,12 @@
     },
     {
      "label": "Easy-set drafts needed with smart stopping",
-     "value": "5.5 → 1.7",
+     "value": "5.5 \u2192 1.7",
      "sub": "same score, far fewer tries"
     },
     {
      "label": "Hard set traded for cheaper stopping",
-     "value": "60% → 55%",
+     "value": "60% \u2192 55%",
      "sub": "small accuracy given back to save tries"
     }
    ],
@@ -4033,7 +4033,7 @@
   "qwen35_4b_reliability_exec_opsd_audit": {
    "verdict_tag": "Cheap reliability shortcuts all fell short",
    "concept_primer": "Think of a proofreader choosing which draft to trust. The test here: does handing them a specific worked example of a mistake help more than handing them the same notes randomly shuffled?",
-   "plain_question": "Can a cheap trick — a worked failing example, or the model's own confidence — reliably pick the correct code before doing any training?",
+   "plain_question": "Can a cheap trick \u2014 a worked failing example, or the model's own confidence \u2014 reliably pick the correct code before doing any training?",
    "plain_answer": "No. A real worked failing example pointed the model toward the fix no better than randomly shuffled notes, and ranking drafts by the model's own confidence picked fewer correct answers than simply taking the first draft that passed the visible checks.",
    "why_it_matters": "Before teaching a model to judge its own code, confirm the judging signal actually beats a shuffled control. Here it didn't, so the payoff lies in gathering independent behavioral evidence rather than another learned judge.",
    "verdict_tone": "negative",
@@ -4041,7 +4041,7 @@
     {
      "label": "Nudge toward the fix from a real worked example",
      "value": "0.063 vs 0.079",
-     "sub": "real evidence nudged less than randomly shuffled fake evidence — so it added nothing genuine"
+     "sub": "real evidence nudged less than randomly shuffled fake evidence \u2014 so it added nothing genuine"
     },
     {
      "label": "Correct drafts picked by model's own confidence",
@@ -4071,7 +4071,7 @@
      "index": 2,
      "chart_plain_title": "Colder, less-random decoding didn't improve the fixes",
      "chart_read": "Bars are grouped by how randomly the model writes code, coldest on the left. The dark bar is the share of tasks where a working draft existed; the light bar is the share solved on the first try. Higher is better on both; no setting clearly wins.",
-     "chart_takeaway": "The bars stay essentially level across temperatures — the coldest setting nudges first-try success up but drops coverage, so nothing beats the existing baseline."
+     "chart_takeaway": "The bars stay essentially level across temperatures \u2014 the coldest setting nudges first-try success up but drops coverage, so nothing beats the existing baseline."
     }
    ]
   },
@@ -4091,11 +4091,11 @@
     {
      "label": "Stuck tasks rescued by looking up a similar solved problem",
      "value": "33%",
-     "sub": "8 of 24 — double the 17% from random lookup"
+     "sub": "8 of 24 \u2014 double the 17% from random lookup"
     },
     {
      "label": "Best possible coverage if every good rescue were picked",
-     "value": "70% → 80%",
+     "value": "70% \u2192 80%",
      "sub": "only with flawless picking"
     },
     {
@@ -4130,7 +4130,7 @@
     {
      "label": "Best a shippable manager reached",
      "value": "67%",
-     "sub": "problems solved — same as just sampling more, no gain"
+     "sub": "problems solved \u2014 same as just sampling more, no gain"
     },
     {
      "label": "If you always picked the right style",
@@ -4139,7 +4139,7 @@
     },
     {
      "label": "Compute for that ceiling",
-     "value": "≈ half",
+     "value": "\u2248 half",
      "sub": "about 22k vs 44k units, cheaper than sampling more"
     }
    ],
@@ -4174,7 +4174,7 @@
    "key_numbers": [
     {
      "label": "Tracing accuracy, short vs long process",
-     "value": "96% → 30%",
+     "value": "96% \u2192 30%",
      "sub": "one step chained versus four steps chained"
     },
     {
@@ -4184,7 +4184,7 @@
     },
     {
      "label": "Accuracy kept per added step",
-     "value": "92% → 52%",
+     "value": "92% \u2192 52%",
      "sub": "each new step in the chain costs more than the last"
     }
    ],
@@ -4224,7 +4224,7 @@
     },
     {
      "label": "New-operation task, hand-written blueprint",
-     "value": "17% → 100%",
+     "value": "17% \u2192 100%",
      "sub": "naming the operation in the blueprint fixes it completely"
     },
     {
@@ -4264,17 +4264,17 @@
    "key_numbers": [
     {
      "label": "New unseen problems fixed",
-     "value": "20% → 44%",
+     "value": "20% \u2192 44%",
      "sub": "without vs with worked examples"
     },
     {
      "label": "Practiced problems fixed",
-     "value": "53% → 100%",
+     "value": "53% \u2192 100%",
      "sub": "worked examples saturate the familiar cases"
     },
     {
      "label": "Fixes when the example is removed",
-     "value": "38% → 15%",
+     "value": "38% \u2192 15%",
      "sub": "success collapses without a correct worked example"
     }
    ],
@@ -4324,7 +4324,7 @@
     },
     {
      "label": "Problems solved overall",
-     "value": "70% → 82%",
+     "value": "70% \u2192 82%",
      "sub": "base handful of tries vs style-labeled retries"
     }
    ],
@@ -4397,17 +4397,17 @@
    "key_numbers": [
     {
      "label": "Model writes the recipe (3 vs 4 steps)",
-     "value": "51% → 10%",
+     "value": "51% \u2192 10%",
      "sub": "collapses as tasks get longer"
     },
     {
      "label": "Try-everything search (3 vs 4 steps)",
-     "value": "98% → 97%",
+     "value": "98% \u2192 97%",
      "sub": "stays near-perfect"
     },
     {
      "label": "How far the model trails search",
-     "value": "46 pts → 87 pts",
+     "value": "46 pts \u2192 87 pts",
      "sub": "the gap widens, never closes"
     }
    ],
@@ -4437,7 +4437,7 @@
     {
      "label": "Hard tasks solved by reusing adapted past solutions",
      "value": "0 of 9",
-     "sub": "none — the reuse idea failed"
+     "sub": "none \u2014 the reuse idea failed"
     },
     {
      "label": "Hard tasks solved by parts hand-built per task",
@@ -4487,7 +4487,7 @@
    "key_numbers": [
     {
      "label": "Thinking effort per task",
-     "value": "507 → 113",
+     "value": "507 \u2192 113",
      "sub": "best fixed level vs the quick-check rule"
     },
     {
@@ -4532,7 +4532,7 @@
    "key_numbers": [
     {
      "label": "Problems solved, off vs on",
-     "value": "76% → 91%",
+     "value": "76% \u2192 91%",
      "sub": "its committed answer, thinking off then on"
     },
     {
@@ -4542,7 +4542,7 @@
     },
     {
      "label": "Harder problems, off vs on",
-     "value": "70% → 92%",
+     "value": "70% \u2192 92%",
      "sub": "middling-difficulty coding tasks"
     }
    ],
@@ -4628,22 +4628,22 @@
    "concept_primer": "Picture a 3-move puzzle. Recognizing an almost-finished puzzle (one move left) is easy; planning the very first move toward a goal still three moves away is the hard part.",
    "plain_question": "Can letting the model think longer out loud let it plan the first move toward a goal that is still three moves away?",
    "plain_answer": "No. Longer thinking leaves the model at random-guess level when it must plan the first of three moves toward a distant goal, even though the same thinking nearly doubles its accuracy when the goal is only one move away.",
-   "why_it_matters": "For genuine multi-step planning, more thinking time won't rescue a model — that gap needs actual training. Reserve extra thinking for recognizing near-finished problems, where it clearly pays off.",
+   "why_it_matters": "For genuine multi-step planning, more thinking time won't rescue a model \u2014 that gap needs actual training. Reserve extra thinking for recognizing near-finished problems, where it clearly pays off.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
      "label": "First move toward a 3-away goal",
-     "value": "3% → 8%",
+     "value": "3% \u2192 8%",
      "sub": "still random-guess level even with the most thinking"
     },
     {
      "label": "Move when goal is 1 away",
-     "value": "28% → 60%",
+     "value": "28% \u2192 60%",
      "sub": "thinking more than doubles recognition"
     },
     {
      "label": "Move when goal is 2 away",
-     "value": "0% → 33%",
+     "value": "0% \u2192 33%",
      "sub": "thinking helps once the goal is closer"
     },
     {
@@ -4692,7 +4692,7 @@
     },
     {
      "label": "Cheating safety check",
-     "value": "≈ 50",
+     "value": "\u2248 50",
      "sub": "detector drops to coin-flip on fake labels"
     }
    ],
@@ -4721,13 +4721,13 @@
    "verdict_tag": "Outside search plus practice crosses the wall, weakly",
    "concept_primer": "These puzzles are solved by chaining small transformations in a row, like a recipe with nested sub-steps. Each extra link makes the chain much harder; three links deep is a wall this model cannot reach on its own.",
    "plain_question": "If we feed the model worked-out answers to hard three-step problems, can it then solve brand-new three-step problems by itself?",
-   "plain_answer": "Partly. Studying worked answers let it solve about 13% of new three-step problems, up from zero when it had to teach itself — a real gain. But this only shows up when it thinks things through, not in a quick single answer.",
+   "plain_answer": "Partly. Studying worked answers let it solve about 13% of new three-step problems, up from zero when it had to teach itself \u2014 a real gain. But this only shows up when it thinks things through, not in a quick single answer.",
    "why_it_matters": "To push a model past its natural ceiling, use an outside search to find answers it can't reach, then train on them. Expect each harder level to stick less well, stay locked behind slow thinking, and need its own fresh seeding.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
      "label": "New three-step problems solved (thinking)",
-     "value": "0% → 13%",
+     "value": "0% \u2192 13%",
      "sub": "was flat zero; now roughly 1 in 8"
     },
     {
@@ -4737,12 +4737,12 @@
     },
     {
      "label": "Easier two-step problems solved (thinking)",
-     "value": "23% → 43%",
+     "value": "23% \u2192 43%",
      "sub": "shallower problems absorb far more strongly"
     },
     {
      "label": "Four-step problems",
-     "value": "0% → 0%",
+     "value": "0% \u2192 0%",
      "sub": "no free jump to the next level"
     }
    ],
@@ -4751,7 +4751,7 @@
      "index": 0,
      "chart_plain_title": "Worked answers cross the three-step wall, but only while thinking",
      "chart_read": "Bars are grouped by difficulty (two, three, four steps); height is the share of new problems solved, taller is better. One color is the model before study, one is after study while thinking, one is after study in quick single-answer mode.",
-     "chart_takeaway": "At three steps the before-study bar sits flat at zero while the after-thinking bar rises to about 13% — a real crossing — yet the quick-answer bar stays at zero."
+     "chart_takeaway": "At three steps the before-study bar sits flat at zero while the after-thinking bar rises to about 13% \u2014 a real crossing \u2014 yet the quick-answer bar stays at zero."
     },
     {
      "index": 1,
@@ -4813,10 +4813,10 @@
   },
   "qwen35_4b_trained_vs_frozen_repair_mdp": {
    "verdict_tag": "Training the retry step made it worse",
-   "concept_primer": "Give a coding model its own failed program back and ask it to fix the bug — a \"retry\" step. We tested whether training that retry step beats an untrained one, and whether either beats just trying fresh a few more times.",
+   "concept_primer": "Give a coding model its own failed program back and ask it to fix the bug \u2014 a \"retry\" step. We tested whether training that retry step beats an untrained one, and whether either beats just trying fresh a few more times.",
    "plain_question": "If the model spends extra effort fixing its broken code, does training that fix-it step solve more problems than just trying again?",
    "plain_answer": "No. For the same extra effort, simply generating a few more fresh attempts solved the most previously-unsolved problems (5 of 57), beating both the untrained retry (3) and the trained retry (2); training the retry step actually made it slightly worse.",
-   "why_it_matters": "When you have spare compute, spend it on more varied fresh attempts rather than on training a dedicated fix-it step — and watch for fixes that pass the visible checks but still fail the hidden ones.",
+   "why_it_matters": "When you have spare compute, spend it on more varied fresh attempts rather than on training a dedicated fix-it step \u2014 and watch for fixes that pass the visible checks but still fail the hidden ones.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
@@ -4831,12 +4831,12 @@
     },
     {
      "label": "Share of problems solved overall",
-     "value": "62% → 65%",
+     "value": "62% \u2192 65%",
      "sub": "base attempts vs. best use of extra effort"
     },
     {
      "label": "Fixes that looked right but were wrong",
-     "value": "25% → 29%",
+     "value": "25% \u2192 29%",
      "sub": "untrained vs. trained retry; training raised this"
     }
    ],
@@ -4871,17 +4871,17 @@
    "key_numbers": [
     {
      "label": "Tasks with correct output",
-     "value": "92% → 100%",
+     "value": "92% \u2192 100%",
      "sub": "untuned model vs after light tuning"
     },
     {
      "label": "Multi-step tasks correct",
-     "value": "90% → 100%",
+     "value": "90% \u2192 100%",
      "sub": "recipes needing several chained steps"
     },
     {
      "label": "Picked the exact intended recipe",
-     "value": "52% → 100%",
+     "value": "52% \u2192 100%",
      "sub": "untuned model vs after light tuning"
     }
    ],
@@ -4916,7 +4916,7 @@
    "key_numbers": [
     {
      "label": "Hardest problems solved",
-     "value": "33% → 88%",
+     "value": "33% \u2192 88%",
      "sub": "model writes the whole fix, vs template plus checker combined"
     },
     {
@@ -4960,7 +4960,7 @@
    "key_numbers": [
     {
      "label": "Evenly-spread practice",
-     "value": "52% → 98%",
+     "value": "52% \u2192 98%",
      "sub": "unseen tasks solved, versus no extra practice"
     },
     {
@@ -5005,7 +5005,7 @@
    "key_numbers": [
     {
      "label": "Problems solved overall",
-     "value": "67% → 79%",
+     "value": "67% \u2192 79%",
      "sub": "with a matched past solution to adapt"
     },
     {
@@ -5050,7 +5050,7 @@
    "key_numbers": [
     {
      "label": "Hardest tasks fully fixed",
-     "value": "39% → 52%",
+     "value": "39% \u2192 52%",
      "sub": "raw best pick vs. adding tested edits"
     },
     {
@@ -5060,7 +5060,7 @@
     },
     {
      "label": "Tasks made worse",
-     "value": "8 → 4",
+     "value": "8 \u2192 4",
      "sub": "halved by only accepting fully-tested fixes"
     }
    ],
@@ -5095,17 +5095,17 @@
    "key_numbers": [
     {
      "label": "New problems solved, after self-teaching",
-     "value": "65% → 65%",
+     "value": "65% \u2192 65%",
      "sub": "No real change versus the original model"
     },
     {
      "label": "New problems solved, just trying more times",
-     "value": "65% → 69%",
+     "value": "65% \u2192 69%",
      "sub": "The approach that actually helped"
     },
     {
      "label": "Practiced problems solved",
-     "value": "70% → 71%",
+     "value": "70% \u2192 71%",
      "sub": "The only place self-teaching nudged up, and it did not carry over"
     }
    ],
@@ -5152,7 +5152,7 @@
    "key_numbers": [
     {
      "label": "Right attempt picked",
-     "value": "77% → 87%",
+     "value": "77% \u2192 87%",
      "sub": "random single pick vs the best cheap rule"
     },
     {
@@ -5191,23 +5191,23 @@
    "verdict_tag": "Practicing shallow chains doesn't unlock deeper ones",
    "concept_primer": "Each task is solved by chaining small steps: an easy one needs two steps, a harder one needs three. The question is whether getting fluent at two-step tasks carries over to three-step ones.",
    "plain_question": "If we drill the model on its own correct two-step solutions, does it start solving three-step tasks it never could before?",
-   "plain_answer": "No. Drilling the model on its own two-step solutions tripled its two-step success rate, from 12% to 36%, but produced zero three-step solutions — it never learned to reach one step deeper.",
+   "plain_answer": "No. Drilling the model on its own two-step solutions tripled its two-step success rate, from 12% to 36%, but produced zero three-step solutions \u2014 it never learned to reach one step deeper.",
    "why_it_matters": "To extend a model to harder tasks, first find deeper solutions with a search tool, then drill on those. Self-practice only sharpens skills the model can already do, never adds new depth.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
      "label": "Two-step tasks solved",
-     "value": "12% → 36%",
+     "value": "12% \u2192 36%",
      "sub": "tripled after self-practice"
     },
     {
      "label": "Three-step tasks solved",
-     "value": "0% → 0%",
+     "value": "0% \u2192 0%",
      "sub": "no change, none unlocked"
     },
     {
      "label": "Four-step tasks solved",
-     "value": "4% → 4%",
+     "value": "4% \u2192 4%",
      "sub": "unchanged, no leap"
     }
    ],
@@ -5230,13 +5230,13 @@
    "verdict_tag": "Learning from its own drafts barely helped",
    "concept_primer": "The model writes tiny programs to solve puzzles, and it can actually run each draft to see what it computes. The idea: let it learn from running its own drafts to pick and reuse the good ones.",
    "plain_question": "Can the model get better at writing correct little programs by running its own drafts and learning which ones actually work?",
-   "plain_answer": "Partly. Learning to judge its own drafts barely beat the model's gut instinct for picking one, but reusing the best drafts still nudged its direct writing up from 18% to 23% of puzzles solved — far below the 82% it reaches when simply shown correct answers.",
+   "plain_answer": "Partly. Learning to judge its own drafts barely beat the model's gut instinct for picking one, but reusing the best drafts still nudged its direct writing up from 18% to 23% of puzzles solved \u2014 far below the 82% it reaches when simply shown correct answers.",
    "why_it_matters": "Running your own drafts to reuse the good ones gives a small, real lift, but the payoff is capped by how well the model can tell a right draft from a wrong one. Improve that judgment first.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
      "label": "Fresh puzzles solved by writing directly",
-     "value": "18% → 23%",
+     "value": "18% \u2192 23%",
      "sub": "before vs after reusing its own best drafts"
     },
     {
@@ -5251,7 +5251,7 @@
     },
     {
      "label": "Hard puzzles solved when allowed to search drafts",
-     "value": "35% → 52%",
+     "value": "35% \u2192 52%",
      "sub": "biggest gain from reusing its own drafts"
     }
    ],
@@ -5304,7 +5304,7 @@
     {
      "label": "Recipe picked using scrambled judgments",
      "value": "22.5%",
-     "sub": "the same setup with judgments deliberately jumbled — nearly a tie"
+     "sub": "the same setup with judgments deliberately jumbled \u2014 nearly a tie"
     },
     {
      "label": "Model answering cases one at a time",
@@ -5490,7 +5490,7 @@
    "key_numbers": [
     {
      "label": "Learned picker vs plain search",
-     "value": "67% → 70%",
+     "value": "67% \u2192 70%",
      "sub": "correct answers on new everyday tasks; only a tiny lift"
     },
     {
@@ -5505,7 +5505,7 @@
     },
     {
      "label": "Hardest multi-step tasks",
-     "value": "56% → 57%",
+     "value": "56% \u2192 57%",
      "sub": "learned picker gives essentially no gain here"
     }
    ],
@@ -5570,7 +5570,7 @@
    "key_numbers": [
     {
      "label": "Fix-picker accuracy",
-     "value": "44% → 44%",
+     "value": "44% \u2192 44%",
      "sub": "reading the fixes gained nothing over doing nothing"
     },
     {
@@ -5677,19 +5677,19 @@
   "qwen_checkpoint_scheduled_state_compiler": {
    "verdict_tag": "A light dose of step coaching helps",
    "concept_primer": "Picture teaching someone a long string of mental math by having them say each running total out loud; a little of this \"show your work\" coaching during practice can make the final answers more reliable.",
-   "plain_question": "Does coaching the model to show its running totals — and keeping the best version instead of the last — help it solve long arithmetic chains?",
-   "plain_answer": "It depends. A light amount of running-total coaching, kept on the whole way, beat giving no coaching at all — but heavy coaching that was switched off for the hardest, longest problems did worse than none.",
+   "plain_question": "Does coaching the model to show its running totals \u2014 and keeping the best version instead of the last \u2014 help it solve long arithmetic chains?",
+   "plain_answer": "It depends. A light amount of running-total coaching, kept on the whole way, beat giving no coaching at all \u2014 but heavy coaching that was switched off for the hardest, longest problems did worse than none.",
    "why_it_matters": "Add a small, steady amount of running-total coaching rather than a heavy dose you drop later, and always keep the best-scoring version from training, not whatever the run happens to end on.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
      "label": "Long chains solved correctly",
-     "value": "25% → 33%",
+     "value": "25% \u2192 33%",
      "sub": "no coaching vs light coaching kept on throughout"
     },
     {
      "label": "Same steps whether worded plainly or reworded",
-     "value": "41% → 71%",
+     "value": "41% \u2192 71%",
      "sub": "no coaching vs light coaching kept on late"
     },
     {
@@ -5714,7 +5714,7 @@
     {
      "index": 2,
      "chart_plain_title": "Coaching mainly protects the reworded problems",
-     "chart_read": "Bars are grouped by wording — plainly stated, reworded, and both-must-match — with one colored bar per coaching recipe. Taller is better.",
+     "chart_read": "Bars are grouped by wording \u2014 plainly stated, reworded, and both-must-match \u2014 with one colored bar per coaching recipe. Taller is better.",
      "chart_takeaway": "Recipes barely differ on plainly worded problems but split widely on reworded ones, where light coaching stays high and 'switched off late' collapses."
     }
    ]
@@ -5722,9 +5722,9 @@
   "qwen_compiler_multiseed_reattribution": {
    "verdict_tag": "Length-24 learning is seed-fragile",
    "concept_primer": "Think of re-running the same training three times, each from a different random starting point (\"seed\"). A recipe is only trustworthy if it works no matter which starting point you happen to draw.",
-   "plain_question": "When this small model is trained to run 24-step number programs, does it reliably learn — and does one training recipe consistently come out on top?",
+   "plain_question": "When this small model is trained to run 24-step number programs, does it reliably learn \u2014 and does one training recipe consistently come out on top?",
    "plain_answer": "No. The same recipe swings from total failure to strong success depending only on the random starting point, so no recipe can be crowned a reliable winner. The best average reaches about 43% on plain wording, but that hides runs scoring anywhere from 0% to 81%.",
-   "why_it_matters": "Never trust a single lucky training run here — judge a recipe only across several random starting points, since one good run can look impressive while a repeat of it collapses to near-zero.",
+   "why_it_matters": "Never trust a single lucky training run here \u2014 judge a recipe only across several random starting points, since one good run can look impressive while a repeat of it collapses to near-zero.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
@@ -5734,7 +5734,7 @@
     },
     {
      "label": "Same recipe, three random starts",
-     "value": "0% → 81%",
+     "value": "0% \u2192 81%",
      "sub": "swings from total failure to strong"
     },
     {
@@ -5783,7 +5783,7 @@
      "index": 5,
      "chart_plain_title": "Familiar reworded questions are far easier than the plain ones",
      "chart_read": "Each run has two bars: accuracy on the plain question wording versus on reworded versions of the same programs. Height is share run correctly; higher is better.",
-     "chart_takeaway": "Most runs handle the reworded questions far better than the plain ones — some near 100% reworded while plain wording is near zero — revealing sensitivity to phrasing."
+     "chart_takeaway": "Most runs handle the reworded questions far better than the plain ones \u2014 some near 100% reworded while plain wording is near zero \u2014 revealing sensitivity to phrasing."
     },
     {
      "index": 6,
@@ -5808,12 +5808,12 @@
     },
     {
      "label": "Easy problems, before to after",
-     "value": "69% → 70%",
+     "value": "69% \u2192 70%",
      "sub": "picking helper barely improves accuracy"
     },
     {
      "label": "Longer problems, before to after",
-     "value": "41% → 35%",
+     "value": "41% \u2192 35%",
      "sub": "the helper does worse than doing nothing"
     },
     {
@@ -5871,17 +5871,17 @@
    "key_numbers": [
     {
      "label": "Correct on six-step problems",
-     "value": "72% → 83%",
+     "value": "72% \u2192 83%",
      "sub": "single-step-only training vs. adding short multi-step practice"
     },
     {
      "label": "Correct on eight-step problems",
-     "value": "78% → 89%",
+     "value": "78% \u2192 89%",
      "sub": "same before-and-after on longer unseen problems"
     },
     {
      "label": "Wrong-order mistakes on long problems",
-     "value": "25% → 14%",
+     "value": "25% \u2192 14%",
      "sub": "share of programs with steps in the wrong order"
     }
    ],
@@ -5922,7 +5922,7 @@
    "key_numbers": [
     {
      "label": "Correct on hardest requests",
-     "value": "60% → 75%",
+     "value": "60% \u2192 75%",
      "sub": "plain writing vs grammar guardrail"
     },
     {
@@ -5932,7 +5932,7 @@
     },
     {
      "label": "When the request is reworded",
-     "value": "47.5% → 75%",
+     "value": "47.5% \u2192 75%",
      "sub": "plain writing vs guardrail"
     },
     {
@@ -5978,12 +5978,12 @@
    "key_numbers": [
     {
      "label": "Easy prompts answered right",
-     "value": "69% → 70%",
+     "value": "69% \u2192 70%",
      "sub": "picker barely moved the model's own choice"
     },
     {
      "label": "Hardest prompts answered right",
-     "value": "41% → 35%",
+     "value": "41% \u2192 35%",
      "sub": "picker actually made harder prompts worse"
     },
     {
@@ -6110,7 +6110,7 @@
    "key_numbers": [
     {
      "label": "Tasks solved completely",
-     "value": "50% → 20%",
+     "value": "50% \u2192 20%",
      "sub": "answering row by row versus forcing one fixed recipe"
     },
     {
@@ -6179,12 +6179,12 @@
    "key_numbers": [
     {
      "label": "Whole puzzles solved, look-alike set",
-     "value": "25% → 92%",
+     "value": "25% \u2192 92%",
      "sub": "before vs after the extra training"
     },
     {
      "label": "Whole tasks solved, real-world formats",
-     "value": "23% → 57%",
+     "value": "23% \u2192 57%",
      "sub": "the skill carried over to fresh tasks"
     },
     {
@@ -6230,12 +6230,12 @@
    "key_numbers": [
     {
      "label": "Real-task score: untrained then trained",
-     "value": "20% → 61%",
+     "value": "20% \u2192 61%",
      "sub": "getting every line of a task right"
     },
     {
      "label": "Score with sample examples removed",
-     "value": "≈ random-guess level",
+     "value": "\u2248 random-guess level",
      "sub": "the trained model needs the examples"
     },
     {
@@ -6304,7 +6304,7 @@
     },
     {
      "label": "Accuracy on the hardest questions",
-     "value": "13% → 15%",
+     "value": "13% \u2192 15%",
      "sub": "small nudge from the new self-picked targets"
     },
     {
@@ -6378,7 +6378,7 @@
     },
     {
      "label": "Words used to answer",
-     "value": "10 → 29-64",
+     "value": "10 \u2192 29-64",
      "sub": "answer-only versus the step-writing styles"
     },
     {
@@ -6430,7 +6430,7 @@
    "key_numbers": [
     {
      "label": "Mixed tasks solved",
-     "value": "22% → 41%",
+     "value": "22% \u2192 41%",
      "sub": "answering directly vs the step-by-step agent"
     },
     {
@@ -6562,7 +6562,7 @@
    "key_numbers": [
     {
      "label": "Tasks fully solved, plain vs tuned note",
-     "value": "52.5% → 52.5%",
+     "value": "52.5% \u2192 52.5%",
      "sub": "identical; no gain from the tuned warm-up"
     },
     {
@@ -6572,12 +6572,12 @@
     },
     {
      "label": "Single-item accuracy, plain vs tuned",
-     "value": "70% → 71%",
+     "value": "70% \u2192 71%",
      "sub": "a tiny drift, not a real improvement"
     },
     {
      "label": "Tuning difficulty, start to finish",
-     "value": "1.06 → 0.25",
+     "value": "1.06 \u2192 0.25",
      "sub": "note learned cleanly, so the null is not a training failure"
     }
    ],
@@ -6640,7 +6640,7 @@
     },
     {
      "label": "12-step tasks: before to after",
-     "value": "67% → 94%",
+     "value": "67% \u2192 94%",
      "sub": "single-step vs short-recipe training"
     },
     {
@@ -6691,12 +6691,12 @@
     },
     {
      "label": "No steps vs. extra steps",
-     "value": "21% → 20%",
+     "value": "21% \u2192 20%",
      "sub": "bigger recheck: extra thinking did not help"
     },
     {
      "label": "Small-test promise, then rechecked",
-     "value": "27% → 20%",
+     "value": "27% \u2192 20%",
      "sub": "the early gain evaporated on more questions"
     }
    ],
@@ -6805,17 +6805,17 @@
    "key_numbers": [
     {
      "label": "Accuracy before vs after coaching",
-     "value": "10% → 7%",
+     "value": "10% \u2192 7%",
      "sub": "imitation policy vs after one reward round"
     },
     {
      "label": "Best-of-eight solve rate",
-     "value": "14% → 0%",
+     "value": "14% \u2192 0%",
      "sub": "collapsed after the trial-and-error round"
     },
     {
      "label": "Deciding 'done' correctly",
-     "value": "85% → 29%",
+     "value": "85% \u2192 29%",
      "sub": "stop-timing broke during tuning"
     },
     {
@@ -6885,7 +6885,7 @@
    "key_numbers": [
     {
      "label": "Matched-problem accuracy",
-     "value": "72% → 35%",
+     "value": "72% \u2192 35%",
      "sub": "plain step-by-step training vs corrected-worksheet coaching"
     },
     {
@@ -6895,7 +6895,7 @@
     },
     {
      "label": "A correct worksheet sits nearby",
-     "value": "≈ 99%",
+     "value": "\u2248 99%",
      "sub": "even when the model's own guess is wrong"
     }
    ],
@@ -6958,7 +6958,7 @@
     },
     {
      "label": "Hidden recipe, before vs after training",
-     "value": "29% → 78%",
+     "value": "29% \u2192 78%",
      "sub": "started near random, ended well above"
     }
    ],
@@ -7003,10 +7003,10 @@
   },
   "qwen_hidden_vm_onpolicy_canonical_repair": {
    "verdict_tag": "Extra repair training added nothing",
-   "concept_primer": "Instead of blurting an answer, the model quietly writes out a step-by-step recipe that a fixed calculator then runs and checks — like showing your work so a machine can execute it.",
+   "concept_primer": "Instead of blurting an answer, the model quietly writes out a step-by-step recipe that a fixed calculator then runs and checks \u2014 like showing your work so a machine can execute it.",
    "plain_question": "Does teaching the model from auto-fixed versions of its own recipes make it better than plain training?",
    "plain_answer": "No. Writing hidden recipes lifted accuracy from 9% to 61% versus answering directly, but training on the auto-fixed recipes matched simpler training almost exactly (a 2-point gap that is not a real change) and made long tasks no better.",
-   "why_it_matters": "Use the checker to pick or rerank good recipes at answer time, not to retrain the writer — folding fixes back in just reproduces plain training and can hurt on longer tasks.",
+   "why_it_matters": "Use the checker to pick or rerank good recipes at answer time, not to retrain the writer \u2014 folding fixes back in just reproduces plain training and can hurt on longer tasks.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
@@ -7022,7 +7022,7 @@
     {
      "label": "Gain from the extra repair training",
      "value": "+2 pts",
-     "sub": "vs simpler training — not a real change"
+     "sub": "vs simpler training \u2014 not a real change"
     },
     {
      "label": "If a checker fixes the recipe",
@@ -7091,7 +7091,7 @@
    "key_numbers": [
     {
      "label": "Hardest-puzzle best-of-many success",
-     "value": "48% → 52%",
+     "value": "48% \u2192 52%",
      "sub": "after answer-checking vs after watching its own programs"
     },
     {
@@ -7203,7 +7203,7 @@
    "key_numbers": [
     {
      "label": "Hardest branching recipes solved right",
-     "value": "7% → 87%",
+     "value": "7% \u2192 87%",
      "sub": "never-shown-branches vs shown-a-few-branches"
     },
     {
@@ -7441,12 +7441,12 @@
    "key_numbers": [
     {
      "label": "Short 4-step problems solved, best case",
-     "value": "≈0% → 41%",
+     "value": "\u22480% \u2192 41%",
      "sub": "coached model versus plain answer-training"
     },
     {
      "label": "Reading the number inside each step",
-     "value": "≈80%",
+     "value": "\u224880%",
      "sub": "too noisy to chain many steps correctly"
     },
     {
@@ -7486,12 +7486,12 @@
    "key_numbers": [
     {
      "label": "Answer-only teaching vs worked-recipe teaching",
-     "value": "15% → 68%",
+     "value": "15% \u2192 68%",
      "sub": "share of new prompts solved with a runnable recipe"
     },
     {
      "label": "Adding a quick check of a few nearby tries",
-     "value": "68% → 86%",
+     "value": "68% \u2192 86%",
      "sub": "keeping whichever version matches the answer"
     },
     {
@@ -7590,7 +7590,7 @@
     {
      "index": 1,
      "chart_plain_title": "The helper improves accuracy on every task type, easy to hard",
-     "chart_read": "Three bars per task type — the frozen model alone, the learned helper, and a perfect picker — across task types ordered easy to hard. Higher is better; the perfect-picker bar marks each ceiling.",
+     "chart_read": "Three bars per task type \u2014 the frozen model alone, the learned helper, and a perfect picker \u2014 across task types ordered easy to hard. Higher is better; the perfect-picker bar marks each ceiling.",
      "chart_takeaway": "The helper bar sits above the frozen-model bar in every group, including harder longer tasks it never trained on, yet stays far under the ceiling."
     },
     {
@@ -7608,7 +7608,7 @@
     {
      "index": 4,
      "chart_plain_title": "Only the learned helper beats the frozen model; simpler pickers do not",
-     "chart_read": "Bars for five ways to pick a recipe — no edit, a prior-based pick, a support-based pick, the learned helper, and a perfect picker — shown for two task types. Taller is better.",
+     "chart_read": "Bars for five ways to pick a recipe \u2014 no edit, a prior-based pick, a support-based pick, the learned helper, and a perfect picker \u2014 shown for two task types. Taller is better.",
      "chart_takeaway": "The prior-based pick just ties the frozen model and the support-based pick drops below it; only the learned helper rises above, though well short of the ceiling."
     },
     {
@@ -7715,7 +7715,7 @@
    "key_numbers": [
     {
      "label": "Short chains solved exactly",
-     "value": "3% → 90%",
+     "value": "3% \u2192 90%",
      "sub": "writing the answer vs marking and copying"
     },
     {
@@ -7725,7 +7725,7 @@
     },
     {
      "label": "Just writing the final answer",
-     "value": "≈ random guessing",
+     "value": "\u2248 random guessing",
      "sub": "never rose off the floor at any length"
     }
    ],
@@ -7760,12 +7760,12 @@
    "key_numbers": [
     {
      "label": "New instructions answered correctly",
-     "value": "29% → 99%",
+     "value": "29% \u2192 99%",
      "sub": "before vs after practice"
     },
     {
      "label": "Both wordings of a task correct",
-     "value": "27% → 98%",
+     "value": "27% \u2192 98%",
      "sub": "same task phrased two ways"
     },
     {
@@ -7891,7 +7891,7 @@
    "key_numbers": [
     {
      "label": "Fully correct tables: first try vs judged pick",
-     "value": "50% → 47.5%",
+     "value": "50% \u2192 47.5%",
      "sub": "the comparison step did not help; it was slightly worse"
     },
     {
@@ -7960,12 +7960,12 @@
    "key_numbers": [
     {
      "label": "Everyday problems: chosen program correct",
-     "value": "64% → 65%",
+     "value": "64% \u2192 65%",
      "sub": "plain first guess vs coach-guided pick, barely moves"
     },
     {
      "label": "Harder multi-step problems: chosen program correct",
-     "value": "41% → 44%",
+     "value": "41% \u2192 44%",
      "sub": "coach adds only a few points"
     },
     {
@@ -8015,15 +8015,15 @@
   },
   "qwen_program_only_executable_abi": {
    "verdict_tag": "Runnable recipes beat stated answers",
-   "concept_primer": "Instead of teaching the model to simply state an answer, you can teach it to write a short recipe of steps that a calculator then runs — like showing your work as instructions a machine can follow, rather than just guessing the result.",
+   "concept_primer": "Instead of teaching the model to simply state an answer, you can teach it to write a short recipe of steps that a calculator then runs \u2014 like showing your work as instructions a machine can follow, rather than just guessing the result.",
    "plain_question": "Does teaching the model to write a runnable recipe of steps, instead of just stating an answer, help it handle brand-new multi-step tasks?",
    "plain_answer": "Yes, teaching the 4B model to write a runnable recipe solved 73% of brand-new multi-step tasks versus 44% when it just stated an answer. But the gain swung a lot between training runs, so it is a promising lever, not a finished recipe.",
-   "why_it_matters": "When tasks can be checked by running code, have the model emit runnable steps rather than a bare answer — it composes new procedures better. Watch for overfitting to prompt wording and run-to-run swings before relying on it.",
+   "why_it_matters": "When tasks can be checked by running code, have the model emit runnable steps rather than a bare answer \u2014 it composes new procedures better. Watch for overfitting to prompt wording and run-to-run swings before relying on it.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
      "label": "New multi-step tasks solved",
-     "value": "44% → 73%",
+     "value": "44% \u2192 73%",
      "sub": "stating the answer vs. writing a runnable recipe"
     },
     {
@@ -8033,12 +8033,12 @@
     },
     {
      "label": "Recipe correct vs. answer typed",
-     "value": "40% → 94%",
+     "value": "40% \u2192 94%",
      "sub": "same model: running its steps vs. its stated answer"
     },
     {
      "label": "Words written per task",
-     "value": "10 → 29",
+     "value": "10 \u2192 29",
      "sub": "bare answer vs. runnable recipe"
     }
    ],
@@ -8150,7 +8150,7 @@
     },
     {
      "label": "Search size vs. payoff",
-     "value": "109 → 56,833",
+     "value": "109 \u2192 56,833",
      "sub": "500x more recipes tried, still under 20% solved"
     }
    ],
@@ -8384,7 +8384,7 @@
    "key_numbers": [
     {
      "label": "Correct answers, one-shot vs fix-and-retry",
-     "value": "11% → 34%",
+     "value": "11% \u2192 34%",
      "sub": "share right on the main test set"
     },
     {
@@ -8394,12 +8394,12 @@
     },
     {
      "label": "How often the model's own fixes worked",
-     "value": "32% → 59%",
+     "value": "32% \u2192 59%",
      "sub": "over three rounds of practice"
     },
     {
      "label": "Getting the numbers right in a fix",
-     "value": "27% → 82%",
+     "value": "27% \u2192 82%",
      "sub": "same three practice rounds"
     }
    ],
@@ -8443,7 +8443,7 @@
     },
     {
      "label": "Tasks the recipe broke",
-     "value": "6 → 0",
+     "value": "6 \u2192 0",
      "sub": "raw recipes vs the gated version, out of 25"
     }
    ],
@@ -8575,7 +8575,7 @@
     },
     {
      "label": "24-step recipes solved",
-     "value": "4% → 25%",
+     "value": "4% \u2192 25%",
      "sub": "with the extra training trick vs without it"
     },
     {
@@ -8625,7 +8625,7 @@
     },
     {
      "label": "Just guessing the answer",
-     "value": "≈ 1%",
+     "value": "\u2248 1%",
      "sub": "random-guess level"
     }
    ],
@@ -8678,7 +8678,7 @@
    "key_numbers": [
     {
      "label": "Right answers, plain problems",
-     "value": "23% → 27%",
+     "value": "23% \u2192 27%",
      "sub": "original recipe vs. after edits"
     },
     {
@@ -8688,7 +8688,7 @@
     },
     {
      "label": "Right answers, reworded problems",
-     "value": "5% → 5%",
+     "value": "5% \u2192 5%",
      "sub": "no improvement at all"
     },
     {
@@ -8728,12 +8728,12 @@
    "key_numbers": [
     {
      "label": "Fix-retraining on reworded tasks",
-     "value": "37.5% → 31.2%",
+     "value": "37.5% \u2192 31.2%",
      "sub": "the extra retraining slightly lowered the simpler controller's best score"
     },
     {
      "label": "Trained controller vs the plain model",
-     "value": "25% → 37.5%",
+     "value": "25% \u2192 37.5%",
      "sub": "the simply-trained editor did beat the plain model on reworded tasks"
     },
     {
@@ -8773,7 +8773,7 @@
    "key_numbers": [
     {
      "label": "Everyday tasks solved, best scorer",
-     "value": "69% → 71%",
+     "value": "69% \u2192 71%",
      "sub": "strict exact-match scoring adds a little"
     },
     {
@@ -8788,7 +8788,7 @@
     },
     {
      "label": "Hard tasks, with answer peeking",
-     "value": "52% → 79%",
+     "value": "52% \u2192 79%",
      "sub": "upper limit when the answer is allowed"
     }
    ],
@@ -8845,7 +8845,7 @@
     },
     {
      "label": "Longest recipe (24 steps)",
-     "value": "≈ chance",
+     "value": "\u2248 chance",
      "sub": "execution fails almost completely"
     },
     {
@@ -8903,12 +8903,12 @@
    "key_numbers": [
     {
      "label": "Correct answers on new questions",
-     "value": "25% → 25%",
+     "value": "25% \u2192 25%",
      "sub": "the trained fixer left new-question accuracy essentially unchanged"
     },
     {
      "label": "Correct on reworded questions",
-     "value": "25% → 19%",
+     "value": "25% \u2192 19%",
      "sub": "the fixer actually lowered accuracy here"
     },
     {
@@ -8966,7 +8966,7 @@
    "key_numbers": [
     {
      "label": "Guess-the-answer method",
-     "value": "≈ random",
+     "value": "\u2248 random",
      "sub": "never solved the task at any length"
     },
     {
@@ -8976,7 +8976,7 @@
     },
     {
      "label": "Longest reworded problems",
-     "value": "16% → 23%",
+     "value": "16% \u2192 23%",
      "sub": "the sameness nudge's one clear gain"
     },
     {
@@ -9034,7 +9034,7 @@
    "key_numbers": [
     {
      "label": "Full sequence solved, practiced style",
-     "value": "≈ 1% → 100%",
+     "value": "\u2248 1% \u2192 100%",
      "sub": "shortcut methods vs the guided translator"
     },
     {
@@ -9109,7 +9109,7 @@
    "key_numbers": [
     {
      "label": "Longest chains solved, ordinary training",
-     "value": "≈ chance",
+     "value": "\u2248 chance",
      "sub": "final-answer-only model on 24-step programs"
     },
     {
@@ -9194,7 +9194,7 @@
     },
     {
      "label": "Every approach on shorter programs",
-     "value": "≈100%",
+     "value": "\u2248100%",
      "sub": "all of them ace the 8- and 16-step versions"
     },
     {
@@ -9303,7 +9303,7 @@
    "key_numbers": [
     {
      "label": "Asking for the answer directly",
-     "value": "≈ random-guess",
+     "value": "\u2248 random-guess",
      "sub": "same model, no explicit steps"
     },
     {
@@ -9348,12 +9348,12 @@
    "key_numbers": [
     {
      "label": "Tasks solved with real examples",
-     "value": "18% → 50%",
+     "value": "18% \u2192 50%",
      "sub": "untrained model vs this method"
     },
     {
      "label": "Same model, examples scrambled",
-     "value": "50% → 7%",
+     "value": "50% \u2192 7%",
      "sub": "proof it genuinely reads them"
     },
     {
@@ -9411,7 +9411,7 @@
    "key_numbers": [
     {
      "label": "Programs that run correctly",
-     "value": "45% → 45%",
+     "value": "45% \u2192 45%",
      "sub": "unchanged after the learned proofreader"
     },
     {
@@ -9421,7 +9421,7 @@
     },
     {
      "label": "Weakest program source, with peeking",
-     "value": "2% → 78%",
+     "value": "2% \u2192 78%",
      "sub": "where nearly all missed gains sit"
     },
     {
@@ -9478,12 +9478,12 @@
     },
     {
      "label": "Agreement when reworded",
-     "value": "73% → 55%",
+     "value": "73% \u2192 55%",
      "sub": "heavier hints made rewording consistency worse"
     },
     {
      "label": "Reworded accuracy, fragile hint version",
-     "value": "27% → 12%",
+     "value": "27% \u2192 12%",
      "sub": "one hint setup collapses when wording changes"
     }
    ],
@@ -9523,12 +9523,12 @@
     },
     {
      "label": "Hardest problems solved, final-answers-only helper",
-     "value": "≈ 1%",
+     "value": "\u2248 1%",
      "sub": "no better than random guessing"
     },
     {
      "label": "Hardest problems solved, plain answer-guesser",
-     "value": "≈ 0%",
+     "value": "\u2248 0%",
      "sub": "same information, no step method"
     }
    ],
@@ -9563,7 +9563,7 @@
    "key_numbers": [
     {
      "label": "Six-step tasks solved, direct answer vs written recipe",
-     "value": "0% → 63%",
+     "value": "0% \u2192 63%",
      "sub": "answering in-head collapses; the machine-run recipe holds up"
     },
     {
@@ -9573,7 +9573,7 @@
     },
     {
      "label": "Six-step recipe when the task is reworded",
-     "value": "63% → 42%",
+     "value": "63% \u2192 42%",
      "sub": "same task, different wording, so wording is the weak spot"
     }
    ],
@@ -9614,7 +9614,7 @@
    "key_numbers": [
     {
      "label": "First-try accuracy, before to after self-teaching",
-     "value": "62% → 73%",
+     "value": "62% \u2192 73%",
      "sub": "getting the problem right unaided"
     },
     {
@@ -9624,7 +9624,7 @@
     },
     {
      "label": "Same method on a real 4B model's reading",
-     "value": "18% → 50%",
+     "value": "18% \u2192 50%",
      "sub": "self-teaching nearly tripled its accuracy"
     },
     {
@@ -9688,7 +9688,7 @@
    "key_numbers": [
     {
      "label": "Tasks fully correct, plain vs with recipe card",
-     "value": "50% → 47%",
+     "value": "50% \u2192 47%",
      "sub": "share of tasks where every row was exactly right; the card slightly hurt"
     },
     {
@@ -9763,7 +9763,7 @@
    "key_numbers": [
     {
      "label": "Exactly-correct 24-step runs",
-     "value": "27% → 91%",
+     "value": "27% \u2192 91%",
      "sub": "before vs after fixing one or two bad steps"
     },
     {
@@ -9808,7 +9808,7 @@
    "key_numbers": [
     {
      "label": "One-shot guess vs edit-and-run loop",
-     "value": "10% → 43%",
+     "value": "10% \u2192 43%",
      "sub": "average tasks solved when the model works in a loop"
     },
     {
@@ -9841,17 +9841,17 @@
    "key_numbers": [
     {
      "label": "Predicting what a program does",
-     "value": "1% → 43%",
+     "value": "1% \u2192 43%",
      "sub": "new outcome-guessing skill the helper gained"
     },
     {
      "label": "Success after retry attempts",
-     "value": "93% → 96%",
+     "value": "93% \u2192 96%",
      "sub": "small gain on the paired everyday test"
     },
     {
      "label": "First-try success, standard test",
-     "value": "85% → 81%",
+     "value": "85% \u2192 81%",
      "sub": "a slight drop, not an improvement"
     }
    ],
@@ -9891,7 +9891,7 @@
     },
     {
      "label": "Messy date and ID jobs solved",
-     "value": "95% → 85%",
+     "value": "95% \u2192 85%",
      "sub": "trick tests removed 2 lucky-looking wrong answers"
     },
     {
@@ -9942,7 +9942,7 @@
    "key_numbers": [
     {
      "label": "Never-seen problem types fixed",
-     "value": "0% → 29%",
+     "value": "0% \u2192 29%",
      "sub": "as training variety grew from 3 to 12 types"
     },
     {
@@ -10021,7 +10021,7 @@
     },
     {
      "label": "Internal picture the model was never taught",
-     "value": "2.5% → 98%",
+     "value": "2.5% \u2192 98%",
      "sub": "built on its own over training"
     }
    ],
@@ -10113,12 +10113,12 @@
    "key_numbers": [
     {
      "label": "Answer landing on the exact right target",
-     "value": "55.5% → 98.1%",
+     "value": "55.5% \u2192 98.1%",
      "sub": "generic network vs constrained setup"
     },
     {
      "label": "Values that got their own slot",
-     "value": "50% → 100%",
+     "value": "50% \u2192 100%",
      "sub": "generic network vs constrained setup"
     },
     {
@@ -10164,7 +10164,7 @@
    "key_numbers": [
     {
      "label": "Even spread vs concentrated on hard cases",
-     "value": "28% → 33%",
+     "value": "28% \u2192 33%",
      "sub": "share of never-seen skill-combinations repaired"
     },
     {
@@ -10174,7 +10174,7 @@
     },
     {
      "label": "With correct solution vs without",
-     "value": "33% → 8%",
+     "value": "33% \u2192 8%",
      "sub": "removing the step-by-step solution collapses repair"
     }
    ],
@@ -10239,12 +10239,12 @@
    "key_numbers": [
     {
      "label": "Cases fixed after training to use the error message",
-     "value": "0% → 100%",
+     "value": "0% \u2192 100%",
      "sub": "none fixed before, all 60 fixed after"
     },
     {
      "label": "Same trained model when the error message is taken away",
-     "value": "100% → 0%",
+     "value": "100% \u2192 0%",
      "sub": "the message content, not the format, carries the answer"
     },
     {
@@ -10291,6 +10291,33 @@
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
     }
    ]
+  },
+  "qwen35_4b_language_reasoning_wall": {
+   "verdict_tag": "The reasoning wall is formal, not linguistic",
+   "concept_primer": "The model fails at chaining 3+ steps of a hand-built symbolic operation (a 'compositional wall' this project mapped in depth). But it is a language model. This asks whether the same 3-step wall appears when the identical chaining task is posed in plain English instead of formal code.",
+   "plain_question": "Does the model's 3-step 'compositional wall' also appear when the same multi-step chain is presented as natural-language reasoning instead of formal code?",
+   "plain_answer": "No. Asked to follow a chain of made-up facts ('Kel is directly followed by Vor') three steps in plain English, the model is right ~99% of the time -- and still ~100% with a totally made-up relation word, so it is the language framing, not a memorized meaning, that carries it. That is the exact depth where formal composition collapses. So the 'wall' is a property of the formal/code modality, not of the model's ability to reason step-by-step. A striking side effect: handing the model the same facts as a Python dictionary makes it dump the dictionary back as code instead of reasoning -- the surface form decides whether it reasons or codes.",
+   "why_it_matters": "The whole project spent 36 findings proving this small model is bad at deep composition -- but that was measured only on formal symbolic tasks. In its native domain, plain language, the same model chains 3-4 reasoning steps almost perfectly. For practitioners: present a multi-step task in natural language, not as code/data structures, to elicit the model's reasoning rather than trigger a code-dump. And it relocates the research question -- the barrier is formal-symbol manipulation, not step-count.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "linguistic reasoning, 3 steps (no-think)",
+     "value": "0.99"
+    },
+    {
+     "label": "made-up-relation control, 3 steps",
+     "value": "1.00"
+    },
+    {
+     "label": "formal composition wall (this project)",
+     "value": "depth 3"
+    },
+    {
+     "label": "formal-dict, 1 step (triggers code-mode)",
+     "value": "0.03"
+    }
+   ],
+   "charts": []
   }
  }
 }
