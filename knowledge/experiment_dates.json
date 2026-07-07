@@ -541,6 +541,14 @@
     "logs/experiment_log.md:'## 2026-06-24' dated heading"
    ]
   },
+  "qwen35_4b_language_proposal_wall": {
+   "start": "2026-07-07",
+   "end": "2026-07-07",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_language_reasoning_wall": {
    "start": "2026-07-07",
    "end": "2026-07-07",
