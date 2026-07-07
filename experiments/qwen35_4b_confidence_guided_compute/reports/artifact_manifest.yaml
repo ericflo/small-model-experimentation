@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_confidence_guided_compute"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/eval_sampling.py --n 15 --k 8"
+  full_command: "eval_sampling.py --n 80 --k 12; analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C41): beat sample-more via confidence-SELECT (argmax P(answer), verification-free) 0.62 vs flat self-consistency 0.48; max P(answer) predicts solvability AUROC 0.83 for abstention. Allocation ~tied with uniform confidence-select. Single toy substrate + seed; design-review agent died on API error (self-vetted vs C10/C17). Real-code generalization owed."

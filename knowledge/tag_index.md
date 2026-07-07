@@ -472,6 +472,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
 - `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` (track-z): [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_confidence_guided_compute` (new): [README](../experiments/qwen35_4b_confidence_guided_compute/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_context_composition` (new): [README](../experiments/qwen35_4b_context_composition/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)

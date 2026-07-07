@@ -1061,6 +1061,40 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".log": 2,
+      ".md": 4,
+      ".png": 1,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-07",
+    "id": "qwen35_4b_confidence_guided_compute",
+    "path": "experiments/qwen35_4b_confidence_guided_compute",
+    "primary_readme": "experiments/qwen35_4b_confidence_guided_compute/README.md",
+    "primary_report": "experiments/qwen35_4b_confidence_guided_compute/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/eval_sampling.py --n 80 --k 12` then `python scripts/analyze.py`.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Beating Sample-More with the Model's Own Uncertainty",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 17,
+    "total_size_bytes": 334540
+  },
+  {
+    "file_counts": {
       ".json": 10,
       ".jsonl": 7,
       ".log": 9,

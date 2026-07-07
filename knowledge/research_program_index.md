@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 191
+- Experiments: 192
 
 ## Structured Execution And Compilers
 
@@ -457,7 +457,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 88
+- Assigned experiments: 89
 
 ### Seed Evidence
 
@@ -478,6 +478,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
 - `qwen35_4b_bank_the_thoughts` (new): [README](../experiments/qwen35_4b_bank_the_thoughts/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
+- `qwen35_4b_confidence_guided_compute` (new): [README](../experiments/qwen35_4b_confidence_guided_compute/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_crossfamily_laws` (new): [README](../experiments/qwen35_4b_crossfamily_laws/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)

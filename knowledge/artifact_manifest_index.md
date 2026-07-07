@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 163
-- Manifest files: 459
+- Experiments with manifests: 164
+- Manifest files: 460
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 36 |
+| `standard-artifact` | 37 |
 
 ## Manifests
 
@@ -61,6 +61,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_bucket_belief_probe_ranker` | `large-artifact` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/large_artifacts_manifest.md) |
 | `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | `large-artifact` | [manifest](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/large_artifacts_manifest.md) |
 | `qwen35_4b_code_abi_oracle_coverage_ladder` | `large-artifact` | [manifest](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/large_artifacts_manifest.md) |
+| `qwen35_4b_confidence_guided_compute` | `standard-artifact` | [manifest](../experiments/qwen35_4b_confidence_guided_compute/reports/artifact_manifest.yaml) |
 | `qwen35_4b_constrained_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/data/eval_base_hot_k4_records.manifest.json) |
 | `qwen35_4b_constrained_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/data/eval_base_hot_k8_records.manifest.json) |
 | `qwen35_4b_constrained_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/data/eval_constrained_dpo_k4_records.manifest.json) |

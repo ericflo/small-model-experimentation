@@ -1,0 +1,5 @@
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:35,  4.47it/s]Loading weights:  10%|▉         | 41/426 [00:00<00:02, 152.13it/s]Loading weights:  19%|█▉        | 80/426 [00:00<00:01, 230.30it/s]Loading weights:  27%|██▋       | 116/426 [00:00<00:01, 272.26it/s]Loading weights:  35%|███▍      | 148/426 [00:00<00:00, 280.17it/s]Loading weights:  43%|████▎     | 185/426 [00:00<00:00, 307.08it/s]Loading weights:  52%|█████▏    | 220/426 [00:00<00:00, 316.37it/s]Loading weights:  60%|█████▉    | 254/426 [00:00<00:00, 310.08it/s]Loading weights:  69%|██████▊   | 292/426 [00:01<00:00, 325.31it/s]Loading weights:  77%|███████▋  | 330/426 [00:01<00:00, 338.66it/s]Loading weights:  86%|████████▌ | 365/426 [00:01<00:00, 323.24it/s]Loading weights:  96%|█████████▌| 408/426 [00:01<00:00, 347.41it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 292.48it/s]
+[cgc] execute: greedy_acc=1.00 pass@12=1.00 mean_greedy_p=1.00
+[cgc] familiar_induce: greedy_acc=0.21 pass@12=0.90 mean_greedy_p=0.27
+[cgc] novel_induce: greedy_acc=0.07 pass@12=0.59 mean_greedy_p=0.16
+[cgc] wrote 240 problem records (k=12)

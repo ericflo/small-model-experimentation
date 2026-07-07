@@ -10400,6 +10400,33 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_confidence_guided_compute": {
+   "verdict_tag": "Trust the confident sample, not the common one",
+   "concept_primer": "A common way to boost a model is to sample many answers and take a majority vote ('sample-more'). This asks whether the model's own internal confidence can do better -- picking which of its many tries to trust, and knowing when trying more is hopeless.",
+   "plain_question": "Can the model's own confidence make 'sample many answers' actually pay off -- and tell you when it won't?",
+   "plain_answer": "Yes, in two ways. First, the standard trick -- sample a dozen answers and take the majority vote -- does NOTHING for this model: accuracy stays flat no matter how many you draw, because on hard problems the model confidently repeats the SAME wrong answer. But if you instead pick the single answer the model was most confident in (readable straight from its output probabilities, no checking required), accuracy climbs from 0.47 to 0.62 and keeps rising with more samples. The reason: when the model actually works out the right answer it is confident about it, so the most-confident try beats the most-common try. Second, that same confidence tells you when sampling is futile -- it flags the problems the model simply can't do, so you can skip them (or hand them off) and be right ~100% of the time on the ones you keep.",
+   "why_it_matters": "It's a free, verifier-free way to get more out of a small model's test-time compute. Don't majority-vote its samples -- pick its most-confident sample, and abstain on the ones where even its best guess is low-confidence. Both signals come straight from the model's output probabilities, no extra model and no answer-checking needed.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "majority vote (self-consistency)",
+     "value": "0.48 (flat)"
+    },
+    {
+     "label": "pick most-confident sample",
+     "value": "0.62"
+    },
+    {
+     "label": "best possible (oracle)",
+     "value": "0.83"
+    },
+    {
+     "label": "predicting solvability for abstention (AUROC)",
+     "value": "0.83"
+    }
+   ],
+   "charts": []
   }
  }
 }

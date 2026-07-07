@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 40
+- Claims: 41
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 31 |
+| Promising | 32 |
 
 ## Program Counts
 
@@ -19,7 +19,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 5 |
+| `benchmark_generalization` | 6 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 8 |
@@ -956,3 +956,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read condition-level confidence tracking as self-knowledge on its own: between-condition mean-confidence is surface-confounded (a deployment heuristic). The clean self-knowledge result is the WITHIN-cell AUROC (familiar-induce 0.95) beating the external surface baseline (0.61).
 - Do not use verbalized 0-100 confidence for a 4B: it is a degenerate constant (~100). Use the answer-token probability / margin / entropy (logit-based) instead.
 - reversal_induce was intended as a scrambled-looking-but-easy dissociation but is genuinely hard (0.19); the surface-vs-competence contrast rests on the external surface baseline, not reversal. Single seed; P(True)-at-chance partly elicitation-dependent.
+
+## C41: Beat sample-more with the model's own uncertainty: confidence-select (argmax P(answer), verification-free) beats self-consistency, which is flat; max P(answer) predicts solvability (AUROC 0.83) for abstention
+
+- Status: `Promising`
+- Programs: `benchmark_generalization`
+- Summary: Experiment qwen35_4b_confidence_guided_compute. Turns C40's calibrated implicit confidence into a compute tool (mission: beat sample-more). Mix of C40 successor problems spanning easy (execute), COVERAGE-limited (familiar-induce, greedy 0.21 -> pass@12 0.90), CAPABILITY-limited (novel-induce, greedy 0.07 -> pass@12 0.59, BELOW pure-luck 0.72 -- the model concentrates on wrong rules). Sample k=12, read each sample's P(answer) (one forward pass). RESULTS (n=80/cond): (1) two failure modes of sample-more (coverage vs capability limited). (2) VERIFICATION-FREE SELECTION -- confidence-select (argmax per-sample P(answer)) picks a correct sample 0.62 vs self-consistency/majority 0.48 vs random 0.44 (oracle 0.83); across budgets self-consistency is FLAT (~0.48, sample-more wasted) while confidence-select RISES 0.47->0.62 and beats majority at every budget. Works because P(answer) is calibrated (C40): the model's MODE is confidently wrong on hard problems, but its high-confidence samples are right, so most-confident beats most-common. (3) ABSTENTION -- max per-sample P(answer) predicts per-problem solvability at AUROC 0.83; abstaining on low-confidence gives ~1.0 accuracy on the confident top third. Confidence-guided ALLOCATION is ~tied with uniform confidence-select (selection+abstention, not allocation, is the win).
+- Implication: Deployable use of C40's unearthed self-knowledge, and it BEATS the standard verifier-free method (self-consistency). Sample-more via majority-vote is FLAT for this model (its mode is often confidently wrong); sample-more via CONFIDENCE-SELECT (the C40 logit, no execution/verifier) genuinely converts compute into accuracy. Plus the confidence signal knows WHEN sampling is futile (capability-limited problems) -> abstain/escalate. Refines the arc's selection story: C17 said 'selection works with enough examples' via execution-consensus; C41 shows selection works VERIFICATION-FREE via the calibrated logit, and that it beats self-consistency. For the mission ('beat sample-more'): don't sample-and-majority-vote; sample-and-confidence-select, and abstain on low max-P(answer).
+
+### Evidence
+
+- [`qwen35_4b_confidence_guided_compute`](../../experiments/qwen35_4b_confidence_guided_compute/reports/report.md)
+
+### Next Tests
+
+- Generalize to REAL code (MBPP/HumanEval): does sequence-logprob / self-consistency-via-execution-clustering / P(True) give the same confidence-select-beats-majority + abstention result on a task where sample-more is the standard baseline?
+- Why does confidence-guided ALLOCATION not beat uniform confidence-select here? Is there a better cheap allocation signal (sample diversity/entropy after 2 probes) that concentrates budget on coverage-limited problems?
+- Combine with the compute-optimal policy: confidence-select + abstain-on-low-maxP + route capability-limited to a tool/bigger model -- measure the full accuracy-vs-compute Pareto frontier.
+
+### Avoid
+
+- Do not claim adaptive ALLOCATION beats uniform: it is ~tied with uniform confidence-select here. The win is SELECTION (confidence vs majority) and ABSTENTION, not budget allocation.
+- Do not use self-consistency (majority vote) as the selection method for this model: it is FLAT across budgets because the model's mode is often confidently wrong (natural-successor intrusion etc.). Use argmax per-sample P(answer).
+- Single toy substrate (successor task); the confidence signal is a single digit's P(answer). Real code needs a program-level confidence (sequence-logprob / execution-clustering / P(True)) -- untested here.
+- Single seed; the design-review agent died (API error) so the design was self-vetted against C10/C17. Novel bit vs C17 is verification-FREE selection (logit, no execution) beating self-consistency.

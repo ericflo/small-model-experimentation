@@ -1,0 +1,204 @@
+{
+ "summary": {
+  "execute": {
+   "n": 80,
+   "greedy_acc": 1.0,
+   "pass_k": 1.0,
+   "self_consistency_acc": 1.0,
+   "confidence_select_acc": 1.0,
+   "mean_greedy_p": 1.0,
+   "mean_agreement": 0.996
+  },
+  "familiar_induce": {
+   "n": 80,
+   "greedy_acc": 0.212,
+   "pass_k": 0.9,
+   "self_consistency_acc": 0.375,
+   "confidence_select_acc": 0.825,
+   "mean_greedy_p": 0.275,
+   "mean_agreement": 0.396
+  },
+  "novel_induce": {
+   "n": 80,
+   "greedy_acc": 0.075,
+   "pass_k": 0.588,
+   "self_consistency_acc": 0.062,
+   "confidence_select_acc": 0.025,
+   "mean_greedy_p": 0.163,
+   "mean_agreement": 0.301
+  }
+ },
+ "signal_auroc_for_solvability": {
+  "greedy_p": 0.706,
+  "max_sample_p": 0.828,
+  "agreement": 0.715,
+  "greedy_correct": 0.7
+ },
+ "selection_at_k": {
+  "random": 0.438,
+  "self_consistency": 0.479,
+  "confidence_argmaxP": 0.617,
+  "oracle_passk": 0.829
+ },
+ "frontier": {
+  "uniform_sc": [
+   0.467,
+   0.463,
+   0.454,
+   0.429,
+   0.479,
+   0.467,
+   0.471,
+   0.479,
+   0.467,
+   0.438,
+   0.479,
+   0.467
+  ],
+  "uniform_confpick": [
+   0.471,
+   0.467,
+   0.517,
+   0.579,
+   0.517,
+   0.583,
+   0.588,
+   0.608,
+   0.588,
+   0.6,
+   0.621,
+   0.613
+  ]
+ },
+ "budgets": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12
+ ],
+ "adaptive_points": [
+  [
+   1.59,
+   0.458
+  ],
+  [
+   2.77,
+   0.504
+  ],
+  [
+   3.37,
+   0.525
+  ],
+  [
+   3.96,
+   0.558
+  ],
+  [
+   5.14,
+   0.575
+  ],
+  [
+   5.73,
+   0.575
+  ],
+  [
+   6.92,
+   0.596
+  ],
+  [
+   7.51,
+   0.6
+  ],
+  [
+   8.1,
+   0.604
+  ]
+ ],
+ "abstention": [
+  [
+   0.1,
+   1.0
+  ],
+  [
+   0.15,
+   1.0
+  ],
+  [
+   0.2,
+   1.0
+  ],
+  [
+   0.25,
+   1.0
+  ],
+  [
+   0.3,
+   1.0
+  ],
+  [
+   0.35,
+   1.0
+  ],
+  [
+   0.4,
+   1.0
+  ],
+  [
+   0.45,
+   1.0
+  ],
+  [
+   0.5,
+   1.0
+  ],
+  [
+   0.55,
+   0.977
+  ],
+  [
+   0.6,
+   0.965
+  ],
+  [
+   0.65,
+   0.917
+  ],
+  [
+   0.7,
+   0.869
+  ],
+  [
+   0.75,
+   0.811
+  ],
+  [
+   0.8,
+   0.766
+  ],
+  [
+   0.85,
+   0.721
+  ],
+  [
+   0.9,
+   0.685
+  ],
+  [
+   0.95,
+   0.649
+  ],
+  [
+   1.0,
+   0.617
+  ]
+ ],
+ "verdict": "Sample-more only helps if you select by CONFIDENCE, not by majority -- and the confidence signal also tells you when sampling is futile. (1) Two regimes: familiar_induce is COVERAGE-limited (greedy 0.212 -> pass@12 0.9), novel_induce CAPABILITY-limited (greedy 0.075 -> pass@12 0.588, below pure-luck). (2) VERIFICATION-FREE SELECTION: picking the highest per-sample P(answer) gets 0.617 vs self-consistency/majority 0.479 vs random 0.438 (oracle 0.829) -- and across budgets self-consistency is FLAT (~0.48) while confidence-select RISES to 0.62. It works because when the model derives the right rule it is confident, so the most-confident sample beats the most-common one (C40: P(answer) is calibrated). (3) ABSTENTION: max per-sample P(answer) predicts solvability at AUROC 0.83; abstaining on low-confidence gives ~1.0 accuracy on the confident top third. (Confidence-guided ALLOCATION is ~tied with uniform confidence-select -- selection, not allocation, is where the win is.)"
+}

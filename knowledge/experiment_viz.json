@@ -43884,6 +43884,171 @@
      "note": "The clean self-knowledge test (review-mandated): WITHIN the surface-matched intermediate cell (familiar_induce, acc 0.40, where both correct and incorrect items exist), can a signal predict WHICH items the model gets right? The implicit P(answer) achieves AUROC 0.95 (95% CI 0.90-0.99) -- it knows its own per-item correctness. It CRUSHES the external surface-feature baseline (0.61 -- a logistic classifier on prompt features like k, gap-to-seen, so this is genuine self-knowledge, not surface-reading) and the explicit P(True) self-verification (0.46 = chance). So the model has real item-level self-knowledge in its logits but cannot verbalize or self-verify it. Deployable: selective prediction by low P(answer) lifts accuracy-on-attempted from 0.23 to ~1.0. AUROC 0.5 = chance."
     }
    ]
+  },
+  "qwen35_4b_confidence_guided_compute": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "line",
+     "title": "Sample-more only helps if you SELECT by confidence, not majority: self-consistency is flat, confidence-select rises (verification-free)",
+     "series": [
+      {
+       "label": "self-consistency (majority vote)",
+       "points": [
+        [
+         1,
+         0.467
+        ],
+        [
+         2,
+         0.463
+        ],
+        [
+         3,
+         0.454
+        ],
+        [
+         4,
+         0.429
+        ],
+        [
+         5,
+         0.479
+        ],
+        [
+         6,
+         0.467
+        ],
+        [
+         7,
+         0.471
+        ],
+        [
+         8,
+         0.479
+        ],
+        [
+         9,
+         0.467
+        ],
+        [
+         10,
+         0.438
+        ],
+        [
+         11,
+         0.479
+        ],
+        [
+         12,
+         0.467
+        ]
+       ]
+      },
+      {
+       "label": "confidence-select (argmax P(answer), verification-free)",
+       "points": [
+        [
+         1,
+         0.471
+        ],
+        [
+         2,
+         0.467
+        ],
+        [
+         3,
+         0.517
+        ],
+        [
+         4,
+         0.579
+        ],
+        [
+         5,
+         0.517
+        ],
+        [
+         6,
+         0.583
+        ],
+        [
+         7,
+         0.588
+        ],
+        [
+         8,
+         0.608
+        ],
+        [
+         9,
+         0.588
+        ],
+        [
+         10,
+         0.6
+        ],
+        [
+         11,
+         0.621
+        ],
+        [
+         12,
+         0.613
+        ]
+       ]
+      },
+      {
+       "label": "oracle / pass@12 (upper bound)",
+       "points": [
+        [
+         1,
+         0.829
+        ],
+        [
+         12,
+         0.829
+        ]
+       ]
+      }
+     ],
+     "x_label": "samples per problem (budget)",
+     "y_label": "accuracy",
+     "y_format": "number",
+     "note": "Mission = beat sample-more. C40 unearthed a calibrated implicit confidence signal (answer-token probability P(answer)). Here: sample k=12 per problem on a mix of the C40 successor task, and compare ways to pick the answer at matched budget. Self-consistency (majority vote -- the standard verifier-free method) is FLAT at ~0.48 across ALL budgets: sample-more is WASTED, because on hard problems the model's MODE is confidently wrong (it repeats a wrong rule). Confidence-select (pick the sample with the highest P(answer), verification-FREE -- no execution, no verifier) RISES from 0.47 to 0.62 and beats majority at every budget, closing most of the gap to the oracle/pass@12 upper bound (0.83). It works because P(answer) is calibrated (C40): when the model derives the right rule it is confident, so the most-CONFIDENT sample beats the most-COMMON one. Turning naive sample-more into a rising accuracy-vs-compute curve."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Two failure modes of sample-more, and abstention: max P(answer) predicts which problems are solvable (AUROC 0.83)",
+     "categories": [
+      "execute",
+      "familiar_induce (coverage-limited)",
+      "novel_induce (capability-limited)"
+     ],
+     "series": [
+      {
+       "label": "greedy (1 sample)",
+       "values": [
+        1.0,
+        0.21,
+        0.07
+       ]
+      },
+      {
+       "label": "pass@12 (sample-more ceiling)",
+       "values": [
+        1.0,
+        0.9,
+        0.59
+       ]
+      }
+     ],
+     "y_label": "accuracy",
+     "y_format": "percent01",
+     "note": "Sample-more has TWO failure modes. Coverage-limited (familiar_induce): greedy gets it right only 21% but pass@12 reaches 90% -- more samples help enormously. Capability-limited (novel_induce): greedy 7%, pass@12 only 59% (BELOW the pure-luck ceiling of 72% at chance 0.10 -- the model concentrates its samples on WRONG rules, so sampling is largely futile). The model's confidence distinguishes them: the max per-sample P(answer) predicts per-problem solvability at AUROC 0.83, so abstaining on low-confidence problems yields ~100% accuracy on the confident top third -- a working abstain/escalate signal for exactly the capability-limited problems where sampling does not pay. (Confidence-guided budget ALLOCATION was roughly tied with uniform confidence-select; the win is in SELECTION and ABSTENTION, not allocation.)"
+    }
+   ]
   }
  }
 }
