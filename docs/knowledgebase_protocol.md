@@ -1,5 +1,16 @@
 # Knowledgebase Protocol
 
+## Pending: process the claim re-grade first
+
+Before adding or promoting any claim, apply the outstanding corrections in
+[`knowledge/claims/claim_review_todo.md`](../knowledge/claims/claim_review_todo.md)
+(from the 2026-07-06 adversarial review). Hold `Confirmed` to a high bar
+(replicated across seeds, controlled, ≥2 substrates); never state a 1–5-task
+difference as "significant"/"decisively" without the actual test or an
+eval-noise caveat; headline the **deployable** (no-think, single-shot) metric,
+not the think-mode/oracle/cov@k one; and when a later claim refutes an earlier
+one, update the earlier claim's status and cross-reference in the same pass.
+
 ## What Belongs In The Knowledgebase
 
 Put cross-experiment claims in `knowledge/` only when they cite or link to specific experiments. The knowledgebase should make reuse easier without flattening uncertainty.

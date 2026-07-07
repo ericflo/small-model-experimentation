@@ -1,5 +1,18 @@
 # Agent Handbook
 
+## ⚠️ Current priority: claim-ledger re-grade
+
+An adversarial review (2026-07-06) verified **102 findings** across the 41 claims:
+the data is sound but the **statuses, headline numbers, and superlatives are
+inflated**, and several corrections never propagated. Before adding new claims,
+work the checklist in [`knowledge/claims/claim_review_todo.md`](../knowledge/claims/claim_review_todo.md)
+(full review: [`knowledge/claims/claim_review.md`](../knowledge/claims/claim_review.md)).
+These are corrections — downgrades, scope-narrowing, number fixes — not
+retractions; the underlying data mostly supports the softened versions. Do the
+HIGH items first (over-issued `Confirmed` on C1/C6/C7/C8/C36; "p<0.01" on
+1–5-task differences; think/oracle numbers standing in for a ~0 deployable
+metric; stale cross-references and a self-contradicting synthesis).
+
 ## Mission
 
 This repository exists to make small-model research compound across many research programs. Your job is not only to run another experiment; it is to make the next experiment and the next research line smarter because this one exists.
