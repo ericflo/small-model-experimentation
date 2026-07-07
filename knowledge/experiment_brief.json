@@ -10345,6 +10345,34 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_icl_retrieval_vs_induction": {
+   "verdict_tag": "It recognizes rules, it doesn't invent them",
+   "concept_primer": "In-context learning is the headline trick of modern AI: show a model a few examples and it 'figures out' the pattern. But is it truly inferring a new rule, or just recognizing a rule it already knows? This experiment separates the two.",
+   "plain_question": "When the model 'learns' a rule from a few examples, is it genuinely inferring a new rule, or just recognizing a familiar one?",
+   "plain_answer": "Just recognizing familiar ones. Given examples of 'move forward k steps' in the normal 0-9 number order, the model figures out the rule about half the time. Given the SAME kind of rule but in a scrambled, unfamiliar order, it drops to chance -- it cannot infer it from any number of examples. Yet when you simply TELL it that scrambled rule instead of making it guess, it applies it almost perfectly (97%). So the model can run an unfamiliar rule flawlessly; it just can't DISCOVER one from examples. Its 'in-context learning' is recognizing structure it already knows, not inventing new structure.",
+   "why_it_matters": "This explains the whole research arc in one line: the model is an executor and retriever of familiar structure, not an inventor of new structure. It reframes what 'in-context learning' buys you -- point the model at a pattern it already knows (it will recognize and apply it), but don't expect it to reverse-engineer a genuinely novel pattern from examples, no matter how many you provide. More examples don't help; they slightly hurt.",
+   "why_it_matters_short": "ICL recognizes familiar rules; it can't invent new ones.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "EXECUTE a novel rule (told it)",
+     "value": "0.97"
+    },
+    {
+     "label": "INDUCE a novel rule (from examples)",
+     "value": "0.12"
+    },
+    {
+     "label": "INDUCE a familiar rule (from examples)",
+     "value": "0.45"
+    },
+    {
+     "label": "chance",
+     "value": "0.10"
+    }
+   ],
+   "charts": []
   }
  }
 }

@@ -2097,6 +2097,42 @@
   },
   {
     "file_counts": {
+      ".json": 10,
+      ".log": 7,
+      ".md": 5,
+      ".png": 1,
+      ".py": 7,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-07",
+    "id": "qwen35_4b_icl_retrieval_vs_induction",
+    "path": "experiments/qwen35_4b_icl_retrieval_vs_induction",
+    "primary_readme": "experiments/qwen35_4b_icl_retrieval_vs_induction/README.md",
+    "primary_report": "experiments/qwen35_4b_icl_retrieval_vs_induction/reports/report.md",
+    "research_programs": [
+      "algorithmic_memory_and_retrieval",
+      "benchmark_generalization"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/eval_succ.py --n 60` (2x2), then `python scripts/analyze.py`.",
+    "tags": [
+      "memory",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Is In-Context Learning Retrieval or Induction?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 33,
+    "total_size_bytes": 224040
+  },
+  {
+    "file_counts": {
       ".json": 6,
       ".jsonl": 4,
       ".log": 1,

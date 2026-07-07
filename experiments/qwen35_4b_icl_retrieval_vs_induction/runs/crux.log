@@ -1,0 +1,6 @@
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:20,  5.29it/s]Loading weights:  11%|█         | 46/426 [00:00<00:01, 196.07it/s]Loading weights:  23%|██▎       | 98/426 [00:00<00:01, 315.32it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 369.40it/s]Loading weights:  46%|████▌     | 196/426 [00:00<00:00, 408.99it/s]Loading weights:  58%|█████▊    | 245/426 [00:00<00:00, 433.89it/s]Loading weights:  69%|██████▊   | 292/426 [00:00<00:00, 440.70it/s]Loading weights:  79%|███████▉  | 338/426 [00:00<00:00, 402.84it/s]Loading weights:  89%|████████▉ | 380/426 [00:01<00:00, 266.80it/s]Loading weights:  97%|█████████▋| 414/426 [00:01<00:00, 238.94it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 288.84it/s]
+[succ] familiar_fewshot: acc=0.40 (finished 1.00, codemode 0.66)
+[succ] novel_fewshot: acc=0.26 (finished 1.00, codemode 0.14)
+[succ] familiar_stated: acc=0.82 (finished 1.00, codemode 1.00)
+[succ] novel_stated: acc=0.82 (finished 1.00, codemode 0.46)
+[succ] wrote runs/succ_crux.json

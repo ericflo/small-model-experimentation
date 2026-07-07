@@ -1,0 +1,34 @@
+{
+ "familiar_fewshot": {
+  "kind": "familiar",
+  "mode": "fewshot",
+  "n": 60,
+  "acc": 0.45,
+  "finished": 0.0,
+  "codemode_rate": 0.0
+ },
+ "novel_fewshot": {
+  "kind": "novel",
+  "mode": "fewshot",
+  "n": 60,
+  "acc": 0.117,
+  "finished": 0.0,
+  "codemode_rate": 0.0
+ },
+ "familiar_stated": {
+  "kind": "familiar",
+  "mode": "stated",
+  "n": 60,
+  "acc": 1.0,
+  "finished": 0.0,
+  "codemode_rate": 0.0
+ },
+ "novel_stated": {
+  "kind": "novel",
+  "mode": "stated",
+  "n": 60,
+  "acc": 0.967,
+  "finished": 0.0,
+  "codemode_rate": 0.0
+ }
+}

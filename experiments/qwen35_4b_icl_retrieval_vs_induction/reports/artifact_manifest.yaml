@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_icl_retrieval_vs_induction"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/eval_succ.py --n 20"
+  full_command: "eval_succ.py --n 60 (no-think 2x2); moreex robustness; analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C39): ICL = retrieval of familiar structure, not induction of novel structure. 2x2 (n=60): EXECUTE familiar 1.00 / novel 0.97 (familiarity-independent); INDUCE familiar 0.45 / novel 0.12 (=chance). Novel induction not rescued by more examples (0.15->0.05). No-think primary (think triggers code-mode). NOTE: original letter-cipher substrate floored (char-assembly, application-only 0.20) -- pivoted to single-value; ciphers kept as methodological lesson."

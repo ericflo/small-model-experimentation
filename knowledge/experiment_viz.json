@@ -43741,6 +43741,75 @@
      "note": "No-think forward-pass accuracy by rule depth. INDUCTION (infer the hidden rule from examples) sits at chance (~0.06) at every depth -- the model cannot infer a rule in a single forward pass, even a depth-1 rule (identify which of 4 relations fits the examples). APPLICATION (execute a GIVEN rule) is easy at depth-1 (0.86) but degrades at depth 2+ (0.28-0.46) because chaining 2-3 full-16-entry bijection lookups is hard for the small model without thinking. The clean induction-vs-application dissociation is at depth-1 (0.00 vs 0.86); deeper, the multi-relation application confound prevents clean isolation, but induction is already floored at chance."
     }
    ]
+  },
+  "qwen35_4b_icl_retrieval_vs_induction": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Is in-context learning retrieval or induction? The model EXECUTES a novel rule (0.97) but cannot INDUCE it (0.12 = chance)",
+     "categories": [
+      "EXECUTE (rule stated)",
+      "INDUCE (few-shot)"
+     ],
+     "series": [
+      {
+       "label": "FAMILIAR order (0-9)",
+       "values": [
+        1.0,
+        0.45
+       ]
+      },
+      {
+       "label": "NOVEL order (scrambled, stated)",
+       "values": [
+        0.97,
+        0.12
+       ]
+      }
+     ],
+     "y_label": "accuracy (no-think, n=60)",
+     "y_format": "percent01",
+     "note": "Capstone for the arc: if the model can't induce a novel rule (C38), what is in-context learning doing? Execution-safe single-value task ('advance k steps in a cyclic order', output one digit). Crux (adversarial review): FAMILIAR structure (natural order 0-9, retrievable) vs NOVEL structure (a STATED random cyclic order) at matched 1-parameter complexity, crossed with EXECUTE (rule given) vs INDUCE (rule inferred from few-shot examples). RESULT: EXECUTION is near-perfect and familiarity-INDEPENDENT (familiar 1.00, novel 0.97 -- the model applies the novel scrambled-order rule almost perfectly WHEN TOLD it). INDUCTION is familiarity-BOUND and collapses (familiar 0.45 vs novel 0.12 = chance 0.10): the model CANNOT induce the novel rule from examples, even though it EXECUTES that exact rule at 0.97. So in-context 'learning' surfaces/RETRIEVES familiar structure; it does not create/INDUCE novel structure. Unifies the arc: the model is an EXECUTOR/RETRIEVER of pretrained structure (C37 execution intact), not an INDUCER of novel structure (C38, C32/C36). ICL is the retrieval half of reasoning, not the induction half. Chance = 1/10."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Novel induction is FAMILIARITY-bound, not DATA-bound: more examples do not rescue it (it gets worse)",
+     "series": [
+      {
+       "label": "FAMILIAR induction",
+       "points": [
+        [
+         5,
+         0.45
+        ],
+        [
+         8,
+         0.25
+        ]
+       ]
+      },
+      {
+       "label": "NOVEL induction",
+       "points": [
+        [
+         5,
+         0.15
+        ],
+        [
+         8,
+         0.05
+        ]
+       ]
+      }
+     ],
+     "x_label": "# few-shot examples",
+     "y_label": "induction accuracy (n=40)",
+     "y_format": "percent01",
+     "note": "Does more data rescue novel-structure induction? No -- for both familiar and novel structure, MORE few-shot examples make induction WORSE (familiar 0.45->0.25, novel 0.15->0.05), sinking toward chance (0.10). So the model's failure to induce a novel rule is bounded by structural FAMILIARITY, not by how many examples it sees -- it is not integrating more examples into a better rule estimate (consistent with retrieval/matching rather than genuine induction). Longer prompts also tax this small model's working memory."
+    }
+   ]
   }
  }
 }

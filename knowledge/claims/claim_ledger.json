@@ -1102,6 +1102,34 @@
         "Do not read C38 as contradicting C37: they are COMPLEMENTARY -- C37 = simulation (execution) is easy in language; C38 = proposal (induction) is hard in language. Together they dissociate the two wall components by modality.",
         "Scope: think depths 2-4 not completed (very slow at budget 4096); single seed; the deeper induction curve is owed."
       ]
+    },
+    {
+      "id": "C39",
+      "title": "In-context learning is RETRIEVAL of familiar structure, not INDUCTION of novel structure: the model executes a novel rule perfectly (0.97) but cannot induce it from examples (0.12=chance)",
+      "status": "Promising",
+      "programs": [
+        "benchmark_generalization"
+      ],
+      "summary": "Experiment qwen35_4b_icl_retrieval_vs_induction. Capstone: if the model can't induce a novel rule (C38), what is ICL doing? Execution-safe single-value task ('advance k in a cyclic order', output one digit). Crux (adversarial review): FAMILIAR structure (natural order 0-9, retrievable) vs NOVEL structure (a STATED random cyclic order) at matched 1-param complexity, crossed with EXECUTE (rule stated) vs INDUCE (few-shot). No-think (code-mode-free), chance 1/10. RESULT (n=60): EXECUTION is near-perfect and FAMILIARITY-INDEPENDENT (familiar-stated 1.00, novel-stated 0.97 -- the model applies a novel scrambled-order rule almost perfectly WHEN TOLD it). INDUCTION is FAMILIARITY-BOUND and collapses (familiar-fewshot 0.45 vs novel-fewshot 0.12 = chance): the model CANNOT induce the novel rule from examples even though it EXECUTES that exact rule at 0.97. NOT data-limited: more examples make novel induction WORSE (0.15->0.05 at 8 examples). METHODOLOGICAL: the first vehicle (letter ciphers) FLOORED -- the 4B can't apply even a GIVEN cipher (application-only 0.20, a char-assembly limit); pivoted to single-value after confirming the floor was harness/char-manipulation. Think-mode triggers code-mode on these tasks; no-think is the clean primary.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_icl_retrieval_vs_induction"
+        }
+      ],
+      "implication": "Unifies the whole arc (C13-C38). In-context 'learning' SURFACES/RETRIEVES familiar (pretrained) structure; it does NOT create/INDUCE novel structure. The model is an EXECUTOR/RETRIEVER of pretrained structure (C37 execution intact; here 0.97-1.00), not an INDUCER of novel structure (C38, C32/C36). ICL = the retrieval half of 'reasoning', not the induction half. FOR THE MISSION: 'unearthing latent capability' = surfacing structure the model ALREADY has (familiar/pretrained); the fixed 4B cannot acquire genuinely novel structure in-context, regardless of #examples. This reframes elicitation: give/point-to familiar structure (retrieval works), do not expect the model to induce novel structure from data.",
+      "next_tests": [
+        "Graded familiarity: interpolate between natural and fully-scrambled order (e.g. k adjacent transpositions) -- does induction degrade smoothly with distance-from-familiar? Pins 'familiarity' as a continuous IV.",
+        "Does banking/SFT install NOVEL-structure induction (train on many novel orders, test held-out) -- or is the retrieval-boundary un-installable (mirrors C38 bankability question)?",
+        "Replicate with a non-cyclic familiar structure (e.g. sorting by a familiar vs given-arbitrary key) to show the retrieval-vs-induction split is not specific to cyclic-order digits."
+      ],
+      "avoid": [
+        "Do not claim the model does NO induction: familiar-structure induction works (0.45 >> chance). The claim is that induction is BOUNDED to familiar/retrievable structure; NOVEL-structure induction is at chance (0.12).",
+        "Do not attribute the novel-induction failure to execution difficulty: the novel-STATED control is 0.97 (executing the novel rule is easy). The bottleneck is inducing it, not applying it.",
+        "Do not use think-mode as primary here: it triggers code-mode (```python) on 'apply-a-rule' tasks, confounding extraction (familiar-stated codemode 0.50-1.00). No-think reasons in prose and is code-mode-free.",
+        "Do not use character-level string tasks (ciphers) as the vehicle: the 4B floors on char-assembly (application-only 0.20) regardless of induction -- a substrate artifact, not a capability signal.",
+        "Single seed; familiar induction only 0.45 (imperfect). The clean signal is the EXECUTE-vs-INDUCE x FAMILIAR-vs-NOVEL interaction, not absolute levels."
+      ]
     }
   ]
 }

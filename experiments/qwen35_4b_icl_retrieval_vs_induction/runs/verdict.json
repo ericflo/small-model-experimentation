@@ -1,0 +1,16 @@
+{
+ "crux_2x2": {
+  "familiar_fewshot": 0.45,
+  "novel_fewshot": 0.117,
+  "familiar_stated": 1.0,
+  "novel_stated": 0.967
+ },
+ "more_examples": {
+  "familiar_ex5": 0.45,
+  "familiar_ex8": 0.25,
+  "novel_ex5": 0.15,
+  "novel_ex8": 0.05
+ },
+ "chance": 0.1,
+ "verdict": "ICL 'induction' is RETRIEVAL of familiar structure, not induction of novel structure. Execution-safe single-value task ('advance k in a cyclic order'). EXECUTION (rule stated) is near-perfect and FAMILIARITY-INDEPENDENT: familiar order 1.00, novel (scrambled) order 0.97 -- the model applies a novel rule perfectly when TOLD it. But INDUCTION (few-shot) is FAMILIARITY-BOUND: familiar 0.45 vs novel 0.12 (= chance 0.1). The model INDUCES a familiar-structure rule but CANNOT induce a novel-structure rule from examples -- even though it executes that same novel rule near-perfectly (0.97). And it is NOT data-limited: more examples do not rescue novel induction (novel 5ex 0.15 -> 8ex 0.05, it gets WORSE). So in-context learning surfaces/retrieves FAMILIAR structure; it does not create NOVEL structure. Unifies the arc: the model is an EXECUTOR/RETRIEVER of pretrained structure (C37, execution intact), not an INDUCER of novel structure (C38, C32/C36) -- ICL is the retrieval half, not the induction half."
+}
