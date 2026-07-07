@@ -43354,6 +43354,29 @@
      "y_label": "solve rate (held-out depth-3, n=80, no-think)",
      "y_format": "percent01",
      "note": "C32 showed the compositional wall is structure-proposal (base can't propose the depth-3 op-sequence; failures are wrong-skeleton) while values are trivially searchable given structure (oracle-skeletonfill=1.0). C22-24 showed banking crosses depth-3. So banking must install STRUCTURE. Ran C32's format-immune structure-coverage (does the model program's BEHAVIOR match the true op-type skeleton with ANY params?) on base vs banked_1280, held-out depth-3 (disjoint from banked's training). RESULT: base has NO structure (structure-cov 0.000 = concrete-cov 0.000). Banking lifts structure-cov to 0.512 on HELD-OUT tasks -> banking installs GENERALIZABLE op-sequence structure (not memorized). And banking CONVERTS the wall from structure-bound to value-bound: the banked model proposes the right skeleton 51% of the time but nails the full concrete program only 36% -- a VALUE TAX of +0.15 (right-skeleton-wrong-param failures the base never had, because it had no skeletons). Since oracle-skeletonfill=1.0 (C32), value-filling the banked model's skeletons would deploy at ~0.51 vs 0.36 alone. Mechanistic closure of C32: banking = STRUCTURE-installation. Explains why value-side interventions (C31 param-hint, C29 DPO) never moved the BASE wall (the base's problem is structure, not values)."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Bank+value-fill DEPLOY: the model's structure (0.46) is DOMINATED by brute-force structure-search (0.975)",
+     "categories": [
+      "banked greedy@1 (forward pass)",
+      "bank-fill (model structure + fill + select)",
+      "brute-fill (SEARCH structure + fill + select)"
+     ],
+     "series": [
+      {
+       "label": "deploy rate (held-out depth-3, execution-consensus select)",
+       "values": [
+        0.2,
+        0.463,
+        0.975
+       ]
+      }
+     ],
+     "y_label": "deploy rate (held-out depth-3, n=80)",
+     "y_format": "percent01",
+     "note": "End-to-end confirmation of the bank+value-fill recipe, with the decisive brute-force control. The banked model emits Python, so recover its proposed STRUCTURE from behavior (infer which op-type skeleton each of k=8 samples implements, no oracle), value-fill against the true outputs, deploy via execution-consensus (plurality output-vector on 16 fresh probe inputs, leakage-free per C17). RESULT: (1) bank-fill deploys at 0.463 = the banked model's structure-coverage 0.475 -> CONFIRMS C33's inferred ~0.51. (2) BUT brute-force structure enumeration (all 4096 depth-3 skeletons, structure NOT from the model) + value-fill + consensus deploys at 0.975 -- near-solving depth-3 without the model. After the 8-visible filter only ~2 skeletons survive (the DSL isn't value-fungible, C32) and consensus picks the right one 97.5% (visible-overfit 2.7%). (3) Using the model's structure is WORSE than ignoring it: bank-fill is CAPPED at struct-cov 0.475 because the banked model proposes the right skeleton only ~48%, while brute enumeration always contains it. NET: with the interpreter available (free selection per C17), free structure-SEARCH dominates the model at deploy; banking's structure (0.20->0.475, C33) is a FORWARD-PASS asset only. Scope: brute-force wins because the depth-3 structure space (4096) is enumerable; the model's structure-pruning would only matter when the space is too large to brute-force."
     }
    ]
   }

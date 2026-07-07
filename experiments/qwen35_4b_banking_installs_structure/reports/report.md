@@ -43,3 +43,37 @@ structure, not values; only after banking installs structure does a (fillable) v
 
 ## Artifact Manifest
 See `reports/artifact_manifest.yaml`. Uses the external banked_1280 adapter (C24, in scratchpad).
+
+## Addendum (phase 2): end-to-end bank + value-fill DEPLOY — and the brute-force control that flips the conclusion
+
+C33 inferred bank+value-fill "would deploy at ~0.51". Phase 2 runs it end-to-end (no oracle) and — following the
+review — adds the decisive **brute-force-all-4096 deploy control**. Recipe: the banked model emits Python, so
+recover its proposed STRUCTURE from behavior (run each of k=8 samples, infer which op-type skeleton it implements),
+value-fill against the true outputs, and deploy via **execution-consensus** (plurality output-vector on 16 fresh
+probe inputs — leakage-free, C17-legal). Coverage is tautological (≥ struct-cov), so **DEPLOY is the headline**.
+
+### Result (held-out depth-3, n=80)
+| recipe | deploy | coverage |
+|---|---|---|
+| banked model alone (greedy@1, forward pass) | 0.200 | (cov@8 0.325) |
+| **bank-fill** (model's structure + value-fill + select) | 0.463 ±0.10 | 0.475 |
+| **brute-fill** (all-4096 structure + value-fill + select) | **0.975 ±0.03** | 1.000 |
+
+- **C33 confirmed:** bank-fill deploys at 0.463 ≈ the banked model's structure-coverage (0.475) — the value-fill
+  recovers the value tax exactly on the tasks where the model proposes the structure.
+- **But the model's structure is DOMINATED by brute-force search.** Brute-force structure enumeration + value-fill
+  + execution-consensus deploys at **0.975** — near-solving depth-3 *without the model*. After the 8-visible filter
+  only ~2 skeletons survive per task (the DSL isn't value-fungible, C32), and consensus picks the right one 97.5%
+  of the time (visible-overfit 2.7%).
+- **Using the model's structure is WORSE than ignoring it:** bank-fill (0.463) is *capped* at the model's
+  structure-coverage because the banked model proposes the right skeleton only ~48% of the time, while brute
+  enumeration always contains it.
+
+### Implication
+With the interpreter available (mission-legal, free selection per C17), **free structure-SEARCH dominates the
+model at deploy** (0.975 vs 0.46 vs 0.20). Banking's installed structure (C33: 0.20 → 0.475) is a **forward-pass
+asset** — it matters only if you must deploy in a single pass with no interpreter; the moment you can
+search+execute, brute-force structure enumeration + value-fill + consensus near-solves the wall and the model is
+unnecessary. **Scope:** brute-force wins *because* the depth-3 structure space (4096) is enumerable; the model's
+structure-pruning would only become a deployable lever when the space is too large to brute-force (larger
+op-inventory or deeper compositions).

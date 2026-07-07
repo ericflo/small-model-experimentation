@@ -1,0 +1,16 @@
+{
+ "banked_greedy": 0.2,
+ "banked_cov8": 0.325,
+ "struct_cov": 0.475,
+ "bank_deploy": 0.463,
+ "bank_cov": 0.475,
+ "brute_deploy": 0.975,
+ "brute_cov": 1.0,
+ "brute_overfit": 0.027,
+ "mean_brute_skels": 2.4,
+ "mean_bank_inferred": 7.9,
+ "infer_yield": 1.0,
+ "bank_deploy_ci": 0.104,
+ "brute_deploy_ci": 0.033,
+ "verdict": "End-to-end bank+value-fill CONFIRMS C33's ~0.51 (bank-fill deploy 0.463 +/-0.104, ~= struct-cov 0.475) BUT the decisive brute-force control reveals the real story: brute-force structure enumeration (all 4096 depth-3 skeletons) + value-fill + execution-consensus deploys at 0.975 +/-0.033 (near-solving depth-3) using NO model structure -- because after the 8-visible filter only ~2.4 skeletons survive and consensus picks the right one (visible-overfit 0.027). Using the MODEL's structure (bank-fill) CAPS deploy at the model's structure-coverage 0.475 -- worse than ignoring the model (0.975), because the model proposes the right structure only ~48% of the time. So with the interpreter available (mission-legal, free selection per C17), free structure-SEARCH dominates the model at deploy; banking's structure is a forward-PASS asset (0.20->0.475, C33), NOT a deploy-with-interpreter asset. Scope: brute-force wins because the depth-3 structure space (4096) is enumerable; the model's structure-pruning would only matter when the space is too large to brute-force."
+}

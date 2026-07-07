@@ -963,6 +963,34 @@
         "Do not expect value-side interventions to help the BASE: the base has no skeletons (struct=concrete=0), so there is no right-structure-wrong-value pool to fix; the base's wall is pure structure.",
         "Do not over-read the +0.15 value tax: wide CI at n=80; and the bank+fill ~0.51 deploy is inferred (structure-cov + C32 oracle-skelfill=1.0), not run end-to-end."
       ]
+    },
+    {
+      "id": "C34",
+      "title": "With the interpreter, brute-force structure-search + value-fill + execution-consensus near-solves depth-3 (0.975), dominating the model; banking's structure is a forward-pass-only asset",
+      "status": "Promising",
+      "programs": [
+        "structured_execution_and_compilers",
+        "evidence_conditioned_selection"
+      ],
+      "summary": "Experiment qwen35_4b_banking_installs_structure phase 2 -- end-to-end bank+value-fill DEPLOY (confirming C33's inferred ~0.51), with the decisive brute-force control the review demanded. Recipe (no oracle): banked model emits Python, recover its proposed STRUCTURE from behavior (infer op-type skeleton each of k=8 samples implements), value-fill against true outputs, deploy via execution-consensus (plurality output-vector on 16 fresh probe inputs, leakage-free C17-legal). Coverage is tautological (>=struct-cov); DEPLOY is the headline. Held-out depth-3, n=80. RESULT: (1) bank-fill deploys at 0.463 = the banked model's structure-coverage 0.475 -> CONFIRMS C33's ~0.51 (value-fill recovers the value tax exactly where the model proposes structure). (2) BUT brute-force structure enumeration (all 4096 depth-3 skeletons) + value-fill + execution-consensus deploys at 0.975 (near-solving depth-3) using NO model structure -- after the 8-visible filter only ~2 skeletons survive (DSL not value-fungible, C32) and consensus picks the right one 97.5% (visible-overfit 2.7%). (3) Using the MODEL's structure is WORSE than ignoring it: bank-fill is CAPPED at struct-cov 0.475 because the banked model proposes the right skeleton only ~48%, while brute enumeration always contains it.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_banking_installs_structure"
+        }
+      ],
+      "implication": "With the interpreter available (mission-legal, free selection per C17), free structure-SEARCH dominates the model at deploy (brute 0.975 vs bank-fill 0.46 vs forward-pass 0.20). Banking's installed structure (C33: 0.20->0.475) is a FORWARD-PASS asset -- it matters only if you must deploy in a single pass with no interpreter; the moment you can search+execute, brute-force structure enumeration + value-fill + consensus near-solves the wall and the model is unnecessary. This is the arc's cleanest 'beat sample-more' deployable result, but the lever is the TOOL (structure-search + interpreter), not the weights. Extends C17 (selection free) to STRUCTURE-search: enumerate structure + fill values + execute-select ~= solves depth-3. SCOPE: brute-force wins because the depth-3 structure space (4096) is ENUMERABLE; the model's structure-pruning would only become a deployable lever when the space is too large to brute-force (larger op-inventory or deeper compositions) -- that is where model-guided vs brute (C25) matters.",
+      "next_tests": [
+        "Push to a structure space too large to brute-force (bigger op-inventory or depth-4/5): does the model's structure-pruning then beat brute-force at matched budget? (the regime where banking's structure becomes a deployable lever).",
+        "Deploy WITHOUT the interpreter (pure forward pass): banking's structure (0.475) vs base (0) is the relevant number -- quantify the no-interpreter deployable gap.",
+        "Is the execution-consensus selector robust to harder overfit traps (more probe inputs, adversarial params)?"
+      ],
+      "avoid": [
+        "Do not claim bank+value-fill is the best deployable recipe: it deploys at 0.46 (capped by the model's structure-coverage) and is DOMINATED by brute-force structure-search (0.975). Use brute-fill when the interpreter + enumerable structure space are available.",
+        "Do not report coverage as the bank+fill result: coverage is tautological (>=struct-cov by construction; brute coverage ~1.0). DEPLOY under single-pick is the only discriminating metric.",
+        "Do not generalize brute-force-dominates beyond ENUMERABLE structure spaces: at depth-3 with 16 ops (4096 skeletons) brute-force wins; for larger spaces the model's structure-pruning may be necessary (untested).",
+        "Do not read this as 'banking is useless': banking installs the structure into the forward pass (C33, 0.20->0.475), which is the deployable asset when NO interpreter is available. The result is that with the interpreter, the tool dominates the weights."
+      ]
     }
   ]
 }

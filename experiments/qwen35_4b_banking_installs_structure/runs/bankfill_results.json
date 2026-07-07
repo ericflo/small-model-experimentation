@@ -1,0 +1,1767 @@
+{
+ "k": 8,
+ "n": 80,
+ "probes": 16,
+ "rows": [
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 10,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 11,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 12,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 6,
+   "bank_skels": 19,
+   "brute_cands": 6,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    6
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 14,
+   "brute_cands": 9,
+   "bank_cands": 9,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    9
+   ],
+   "bank_overfit": [
+    0,
+    9
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 7,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 2,
+   "brute_cands": 1,
+   "bank_cands": 1,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    1
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 1,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 6,
+   "bank_skels": 12,
+   "brute_cands": 6,
+   "bank_cands": 6,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": false,
+   "bank_deploy": false,
+   "brute_overfit": [
+    3,
+    6
+   ],
+   "bank_overfit": [
+    3,
+    6
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 11,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 6,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 15,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 1,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 11,
+   "brute_cands": 1,
+   "bank_cands": 1,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    1
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 5,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 3,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 9,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 7,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 8,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 1,
+   "brute_cands": 1,
+   "bank_cands": 1,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    1
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 3,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 3,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 3,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 8,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 3,
+   "brute_cands": 6,
+   "bank_cands": 6,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    6
+   ],
+   "bank_overfit": [
+    0,
+    6
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 8,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 4,
+   "bank_skels": 7,
+   "brute_cands": 5,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    5
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 2,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 9,
+   "bank_cands": 9,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    9
+   ],
+   "bank_overfit": [
+    0,
+    9
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 8,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 3,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 4,
+   "bank_skels": 6,
+   "brute_cands": 4,
+   "bank_cands": 4,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    4
+   ],
+   "bank_overfit": [
+    0,
+    4
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 6,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 6,
+   "bank_cands": 6,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    6
+   ],
+   "bank_overfit": [
+    0,
+    6
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 1,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 7,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 5,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 6,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 9,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 108,
+   "brute_cands": 9,
+   "bank_cands": 9,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    9
+   ],
+   "bank_overfit": [
+    0,
+    9
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 6,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 5,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 1,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 5,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 6,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 6,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 3,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 9,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 4,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 4,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 7,
+   "brute_cands": 6,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    6
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 8,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 10,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 2,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 3,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 2,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 20,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 8,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 1,
+   "brute_cands": 1,
+   "bank_cands": 1,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    1
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 4,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 6,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 5,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 7,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 3,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 4,
+   "bank_skels": 6,
+   "brute_cands": 5,
+   "bank_cands": 5,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    5
+   ],
+   "bank_overfit": [
+    0,
+    5
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 4,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 5,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 8,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 3,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 2,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 4,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 6,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 4,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 6,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 9,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 9,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": false,
+   "bank_deploy": null,
+   "brute_overfit": [
+    1,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 8,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 3,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 1,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 2,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 6,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 3,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 3,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 12,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 4,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 2,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 1,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 12,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 12,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 14,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": true,
+   "b_cov": 8,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 2,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 11,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 9,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 1,
+   "bank_skels": 2,
+   "brute_cands": 1,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    1
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 7,
+   "brute_cands": 3,
+   "bank_cands": 3,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    2,
+    3
+   ],
+   "bank_overfit": [
+    2,
+    3
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 3,
+   "brute_cands": 2,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 4,
+   "struct": true,
+   "infer_yield": 1,
+   "brute_skels": 2,
+   "bank_skels": 5,
+   "brute_cands": 2,
+   "bank_cands": 2,
+   "brute_cov": true,
+   "bank_cov": true,
+   "brute_deploy": true,
+   "bank_deploy": true,
+   "brute_overfit": [
+    0,
+    2
+   ],
+   "bank_overfit": [
+    0,
+    2
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 12,
+   "brute_cands": 5,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    5
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  },
+  {
+   "b_greedy": false,
+   "b_cov": 0,
+   "struct": false,
+   "infer_yield": 1,
+   "brute_skels": 3,
+   "bank_skels": 3,
+   "brute_cands": 3,
+   "bank_cands": 0,
+   "brute_cov": true,
+   "bank_cov": false,
+   "brute_deploy": true,
+   "bank_deploy": null,
+   "brute_overfit": [
+    0,
+    3
+   ],
+   "bank_overfit": [
+    0,
+    0
+   ]
+  }
+ ]
+}

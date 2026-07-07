@@ -10,6 +10,8 @@
 
 ## Key Result
 
+- qwen35_4b_banking_installs_structure phase 2 (claim C34): end-to-end bank+value-fill deploy. bank-fill deploys 0.463 (= banked structure-cov, confirms C33) BUT brute-force structure enumeration + value-fill + execution-consensus deploys 0.975 (near-solves depth-3) WITHOUT the model. With the interpreter, free structure-search dominates; banking's structure is forward-pass-only. Extends C17 (selection free) to structure-search. Scope: brute wins because the 4096-skeleton space is enumerable.
+
 - [qwen35_4b_banking_installs_structure](../../experiments/qwen35_4b_banking_installs_structure/reports/report.md) (claim C33): banking installs STRUCTURE -- base op-sequence structure-coverage 0.00 -> banked 0.51 (held-out depth-3, generalizable). Banking converts the wall from structure-bound (base) to value-bound (banked struct 0.51 > concrete 0.36, value tax +0.15, fillable). Mechanistic closure of C32: banking = structure-installation. Unifies C22-24/C31/C32.
 
 - [qwen35_4b_structure_or_values](../../experiments/qwen35_4b_structure_or_values/reports/report.md) (claim C32): the compositional wall is STRUCTURE, not values. The model's STRUCTURE-coverage (right op-type sequence, any param) = its concrete coverage (value tax +0.000 at depth-3) -> failures are wrong-skeleton; oracle-skeletonfill=1.0 (values trivial given structure); random-skeletonfill low (DSL not value-fungible). Unifies C19/C25/C31; explains why tool-structure-seeds (C22)+banking were necessary. (op-seq generation fails at 0.00 = separate format handicap.)
