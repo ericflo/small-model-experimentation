@@ -224,6 +224,14 @@
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_banking_installs_structure": {
+   "start": "2026-07-06",
+   "end": "2026-07-06",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_banking_thinking_stack": {
    "start": "2026-07-05",
    "end": "2026-07-05",
@@ -304,6 +312,14 @@
   "qwen35_4b_crossfamily_laws": {
    "start": "2026-07-02",
    "end": "2026-07-02",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_crosssubstrate_structure": {
+   "start": "2026-07-06",
+   "end": "2026-07-06",
    "confidence": "high",
    "sources": [
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
@@ -541,6 +557,14 @@
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_learn_from_failures": {
+   "start": "2026-07-06",
+   "end": "2026-07-06",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_learned_active_trace_policy": {
    "start": "2026-06-24",
    "end": "2026-06-24",
@@ -674,6 +698,22 @@
     "qwen35_4b_prefix_value_guided_search/configs/experiment.json: \"date_utc\": \"2026-06-26\""
    ]
   },
+  "qwen35_4b_probe_the_parameter": {
+   "start": "2026-07-06",
+   "end": "2026-07-06",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_probe_to_prompt": {
+   "start": "2026-07-06",
+   "end": "2026-07-06",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_real_sample_verify_commit": {
    "start": "2026-06-25",
    "end": "2026-06-25",
@@ -746,6 +786,22 @@
    "sources": [
     "logs/experiment_log.md:'Date: 2026-06-25' header line",
     "configs/experiment.json:'\"date\": \"2026-06-25\"'"
+   ]
+  },
+  "qwen35_4b_structure_or_values": {
+   "start": "2026-07-06",
+   "end": "2026-07-06",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_structure_search_scaling": {
+   "start": "2026-07-06",
+   "end": "2026-07-06",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_substrate_coverage_ladder": {

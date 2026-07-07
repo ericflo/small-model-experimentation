@@ -1423,6 +1423,45 @@
     }
    ]
   },
+  "qwen35_4b_banking_installs_structure": {
+   "verdict_tag": "Training installs the missing step-blueprint",
+   "concept_primer": "Solving these multi-step puzzles takes two things, like a recipe: the right sequence of steps (the blueprint) and the right specific numbers to plug into each step. Getting the blueprint is the hard part.",
+   "plain_question": "Can a short training tune-up teach the model the correct step-by-step blueprint for these puzzles, the part it could not figure out on its own?",
+   "plain_answer": "Yes. On fresh puzzles it never trained on, the tune-up took the model from essentially never getting the blueprint right to getting it right about half the time, versus roughly never for the untrained model.",
+   "why_it_matters": "If you must answer in one pass, this tune-up is worth it: it teaches the step-sequence the model cannot invent alone. But if you can test candidate answers with a checker, exhaustive search fills that role and the model's blueprint adds little.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "Right step-sequence, brand-new puzzles",
+     "value": "0% → 51%",
+     "sub": "untrained model vs after the tune-up"
+    },
+    {
+     "label": "Fully solved outright",
+     "value": "0% → 36%",
+     "sub": "needs both the right steps and right numbers"
+    },
+    {
+     "label": "Solved when a checker tests options",
+     "value": "about 98%",
+     "sub": "trying every blueprint, no model needed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Untrained model never gets the blueprint; the tune-up lifts it to about half",
+     "chart_read": "Bars group three success measures: solving a puzzle on the first try, solving it within a few tries, and just getting the step-order right regardless of exact numbers. One color is the untrained model, the other after the tune-up; taller is better.",
+     "chart_takeaway": "The untrained bars sit flat at zero across all three measures, while the tuned-up model reaches about half on getting the step-order right, so the tune-up installs the missing blueprint."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "When a checker can test options, brute search beats the model's blueprint",
+     "chart_read": "Three bars show the share of new puzzles fully solved under three recipes: the tuned model answering in one pass, the model's blueprint with numbers filled in by testing, and trying every possible blueprint with numbers filled by testing. Taller is better.",
+     "chart_takeaway": "The try-every-blueprint bar towers near fully-solved, far above the model's own blueprint recipe, meaning exhaustive search makes the model unnecessary once you can test candidate answers."
+    }
+   ]
+  },
   "qwen35_4b_banking_thinking_stack": {
    "verdict_tag": "Two boosts add up only on easy steps",
    "concept_primer": "Picture two ways to help someone solve a multi-step puzzle: drilling them on worked examples beforehand, and giving them time to think it through before answering. This test checks whether using both at once beats either alone.",
@@ -1866,6 +1905,50 @@
      "chart_plain_title": "Guessing the hidden rule collapses toward random in every puzzle type",
      "chart_read": "Left to right stacks more steps; height is how often the model reverse-engineered the hidden rule from examples alone. One line per puzzle type; higher is better, but all lines start moderate and plunge toward the bottom.",
      "chart_takeaway": "Every line dives to the floor as steps stack up, showing the model can run rules it cannot invent, uniformly across all three puzzle types."
+    }
+   ]
+  },
+  "qwen35_4b_crosssubstrate_structure": {
+   "verdict_tag": "External step-search wins on every puzzle type",
+   "concept_primer": "Think of each puzzle as flat-pack furniture: getting the right sequence of assembly steps (the blueprint) is the hard part, while plugging in the exact screws (the numbers) is easy once the blueprint is set.",
+   "plain_question": "Does the trick of searching for the right sequence of steps still work on completely different kinds of puzzles?",
+   "plain_answer": "Yes. On all three puzzle types, the model on its own almost never found the right blueprint, but an external search that tries blueprints and plugs in the numbers solved nearly every task, far beating the model's near-zero.",
+   "why_it_matters": "For a model this size, don't expect it to plan multi-step solutions on its own. Pair it with an external tool that proposes candidate blueprints and checks them; the numbers fall into place easily once the sequence is right.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "Solved by the model alone",
+     "value": "0-2%",
+     "sub": "across all three puzzle types"
+    },
+    {
+     "label": "Solved by searching step-sequences",
+     "value": "98-100%",
+     "sub": "the external tool, every puzzle type"
+    },
+    {
+     "label": "Solved once the sequence is given",
+     "value": "100%",
+     "sub": "filling in the numbers is trivial"
+    },
+    {
+     "label": "Solved by wrong-order sequences",
+     "value": "as low as ~9%",
+     "sub": "the exact order of steps matters"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Model alone fails; searching the step-sequence solves nearly every puzzle",
+     "chart_read": "Bars group four approaches (the model's first guess, whether its own steps match the needed sequence, filling numbers into a correct given sequence, and an external search over sequences), colored by puzzle type; taller means more puzzles solved.",
+     "chart_takeaway": "The two left bars sit near the floor while the two right bars nearly touch the ceiling on every puzzle type: the model alone fails, but supplying or searching the step-sequence solves almost everything."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Wrong-order step-sequences rarely work on any puzzle type",
+     "chart_read": "Each line is one puzzle type; the horizontal axis is how many randomly-ordered step-sequences were tried, the vertical axis is the share of puzzles solved, so higher means wrong-order sequences still worked.",
+     "chart_takeaway": "All three lines climb only modestly and stay far below the near-100% of the correct-sequence search, confirming the exact order of steps, not the numbers, is the real obstacle."
     }
    ]
   },
@@ -3090,6 +3173,51 @@
     }
    ]
   },
+  "qwen35_4b_learn_from_failures": {
+   "verdict_tag": "Rewarding right-over-wrong backfires; practice more instead",
+   "concept_primer": "Think of a chef who can taste two dishes and pick the better one almost every time, yet that judging skill is separate from cooking a great dish from scratch on the first try.",
+   "plain_question": "Can the model get better at answering by learning to prefer its own correct attempts over its wrong ones?",
+   "plain_answer": "No. Training it to favor its correct answers over its wrong ones broke its ability to write answers at all, dropping its one-shot solve rate to zero. Simply practicing longer on the correct answers alone worked far better.",
+   "why_it_matters": "Being good at judging your own answers does not make you good at producing them. To lift real single-shot performance, just train longer on verified-correct examples rather than on correct-versus-wrong comparisons.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "One-shot solve rate, practice longer",
+     "value": "3.7% → 11%",
+     "sub": "Tripled by simply training twice as long on correct answers"
+    },
+    {
+     "label": "One-shot solve rate, reward right-over-wrong",
+     "value": "3.7% → 0%",
+     "sub": "Preference training collapsed the model's ability to answer"
+    },
+    {
+     "label": "Judging its own answers",
+     "value": "81% correct",
+     "sub": "It reliably tells its right answer from its wrong one"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Practicing longer beats rewarding correct-over-wrong answers",
+     "chart_read": "Six training recipes along the bottom; height is the share of unseen problems solved, higher is better. Each recipe has two bars: solved within several tries, and solved on the single best-guess try.",
+     "chart_takeaway": "The train-twice-as-long bar is tallest on both measures, while the reward-correct-over-wrong bars shrink toward zero, meaning preference training loses to plain extra practice."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Rewarding correct-over-wrong quickly breaks the model",
+     "chart_read": "Left-to-right is more rounds of reward-the-correct-answer training; height is share of problems solved, higher is better. Lines track single best-guess and several-tries success, with a flat line marking the practice-longer winner.",
+     "chart_takeaway": "Both success lines nose-dive toward zero after a brief early blip and never reach the flat winner line, showing the training rapidly destroys the model's answering ability."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "Propping up correct answers softens but never fixes the collapse",
+     "chart_read": "Left-to-right is more effort spent holding up the correct answers during training; height is share solved, higher is better. Two flat reference lines mark plain practice and the practice-longer winner.",
+     "chart_takeaway": "The training lines rise slightly with more propping-up but stay below even plain practice, confirming the fix eases the collapse without recovering lost performance."
+    }
+   ]
+  },
   "qwen35_4b_learned_active_trace_policy": {
    "verdict_tag": "Learned test-picker helps on some sets",
    "concept_primer": "After the model drafts many possible answers, it can ask one more test input to rule some out, like a game of twenty questions where a sharper question eliminates more wrong guesses at once.",
@@ -3756,6 +3884,84 @@
     }
    ]
   },
+  "qwen35_4b_probe_the_parameter": {
+   "verdict_tag": "The exact number is not hidden inside",
+   "concept_primer": "The model solves each puzzle with a hidden rule that has a specific number in it, like \"add 3.\" We test whether that number lives inside the model's mind or can just be read straight off the example inputs and outputs.",
+   "plain_question": "When the model solves these puzzles with a hidden rule like \"add 3,\" is the exact number stored inside its mind, or just readable from the examples?",
+   "plain_answer": "Just readable. Simple arithmetic on the examples recovers the exact number as well as, or better than, peeking at the model's internal activity, so it is not hidden knowledge to unearth. The kind of action, by contrast, the model genuinely does work out internally.",
+   "why_it_matters": "Before hunting for hidden ability in a model, try a dumb baseline: if plain arithmetic on the examples recovers a detail equally well, that detail is not locked in the weights. Spend effort only where the model truly computes something.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Reading the kind of action",
+     "value": "41% vs 27%",
+     "sub": "from inside the model vs from the examples — the model wins, so it is computed internally"
+    },
+    {
+     "label": "Reading the exact number",
+     "value": "49% vs 53%",
+     "sub": "from inside vs from the examples — the examples win, so it is not stored inside"
+    },
+    {
+     "label": "Puzzles solved once given the number",
+     "value": "0.7% → 9.5%",
+     "sub": "handing the model the right number is what unlocks the puzzle"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Can you read the hidden rule from the model, or from the examples?",
+     "chart_read": "Each pair of bars shows how often a hidden-rule detail is correctly recovered from the model's internal activity versus from the examples alone; taller is better. Left group is the kind of action, right group is the exact number.",
+     "chart_takeaway": "The model bar tops the examples bar for the kind of action but drops below it for the exact number — so the action is computed inside, the number is merely read off the examples."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Giving the model the exact number is what lets it solve the puzzles",
+     "chart_read": "Bars show the share of puzzles solved under different hints; taller is better. One color is solved on the first try, the other solved within a few tries. Hints range from nothing, to the kind of action only, to the full rule including its number.",
+     "chart_takeaway": "The bar for the full rule with its number towers over the bar for the kind of action alone, and a deliberately wrong number solves nothing — the exact number is what unlocks solving."
+    }
+   ]
+  },
+  "qwen35_4b_probe_to_prompt": {
+   "verdict_tag": "Hints help, but not the decoded one",
+   "concept_primer": "When solving a multi-step coding puzzle, the model internally forms a hunch about what the first step should be. This test reads that hunch out and writes it back into the instructions as a reminder.",
+   "plain_question": "Can reading the model's internal hunch about a puzzle's first step, then writing it into the prompt, help it solve more?",
+   "plain_answer": "It depends. Reminding the model of the complete first step, the action and its specific value, roughly six-tupled the first-try solve rate on medium puzzles. But the hunch we can actually read captures only the action, not the value, so it changed nothing on its own.",
+   "why_it_matters": "Feeding the model a concrete first step in the prompt can unlock harder puzzles it otherwise fumbles, but only when the hint includes the specific value, not just the kind of action. The model's readable hunch stops short of that, and nothing helps once a puzzle is beyond its internal reach.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "First-try solve, medium puzzles (full first step given)",
+     "value": "3% → 19%",
+     "sub": "six times higher than no hint"
+    },
+    {
+     "label": "Solve within several tries (full first step given)",
+     "value": "5% → 31%",
+     "sub": "six times higher than no hint"
+    },
+    {
+     "label": "The model's own read-out hint alone",
+     "value": "no real change",
+     "sub": "5% → 6%, essentially no gain"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only the complete first step lifts solving; a partial hint does nothing",
+     "chart_read": "Each bar group is a different prompt hint, from no hint through the true first step (its kind only, or kind plus its specific value) to a wrong step. Taller is better; one color counts first-try solves, the other solves within several tries.",
+     "chart_takeaway": "Only the 'full first step' bars stand tall; the kind-only and the model's decoded-hunch bars stay as low as no hint, so the specific value is what unlocks solving."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The hint works on medium puzzles but does nothing on the hardest",
+     "chart_read": "Bars compare the first-try solve rate on medium-depth puzzles against the hardest puzzles, across five hints, with the two colors marking the two difficulty levels. Taller is better.",
+     "chart_takeaway": "Every bar for the hardest puzzles stays flat near zero, so even handing the model the true first step cannot help when its internal reasoning never worked that step out."
+    }
+   ]
+  },
   "qwen35_4b_real_sample_verify_commit": {
    "verdict_tag": "Finding answers is the wall, not picking them",
    "concept_primer": "Think of the model writing several draft answers to a problem, then an automatic picker choosing one to submit. Success needs both: at least one correct draft must exist, and the picker must choose it.",
@@ -4134,6 +4340,89 @@
      "chart_plain_title": "Share of all coding problems solved, by retry method",
      "chart_read": "Each bar is one retry method; height is the share of all 80 problems solved, taller is better. Bars rise from a few base tries on the left to large multi-batch pools on the right, with the style-labeled methods in the middle.",
      "chart_takeaway": "The style-labeled bars land in the same 81-83% band as ordinary extra attempts, so adding labeled strategies did not lift overall problems solved."
+    }
+   ]
+  },
+  "qwen35_4b_structure_or_values": {
+   "verdict_tag": "The bottleneck is the steps, not the numbers",
+   "concept_primer": "Solving these tasks is like following a recipe: you need the right sequence of steps and the right amounts to plug in. This brief asks which of the two the model actually gets stuck on.",
+   "plain_question": "When the model fails these multi-step problems, is it choosing the wrong sequence of steps, or the right steps with the wrong numbers plugged in?",
+   "plain_answer": "The steps. The model fails because it can't find the right sequence of steps; whenever it is handed the correct steps, filling in the numbers always succeeds, so wrong numbers are never the hidden problem.",
+   "why_it_matters": "To crack these problems, put effort into helping the model find the right sequence of steps, for example by searching or enumerating step-orders, rather than fixing the numbers, which take care of themselves.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Solved when handed the correct steps",
+     "value": "100%",
+     "sub": "filling in the numbers always finishes"
+    },
+    {
+     "label": "Solved on its own (3-step tasks)",
+     "value": "about 2%",
+     "sub": "it rarely finds the right steps"
+    },
+    {
+     "label": "Extra solved from right steps but wrong numbers",
+     "value": "0%",
+     "sub": "no hidden wrong-number failures to unlock"
+    },
+    {
+     "label": "Solved by trying 200 random step-sequences",
+     "value": "11%",
+     "sub": "random steps are far from enough"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Right steps, not right numbers, is what the model lacks",
+     "chart_read": "Each cluster is one way of solving the tasks; taller means more solved. Left to right: the model's one try, its best of several tries, whether its steps matched the correct sequence, and the model simply handed the correct steps. Within a cluster, one bar is easier 2-step tasks, the other harder 3-step tasks.",
+     "chart_takeaway": "The 'steps matched' bar is exactly as tall as the model's own success, while 'handed the correct steps' jumps to full height, so misses are wrong-step, not wrong-number."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Random step-sequences barely crack the hard tasks",
+     "chart_read": "Lines show solve rate (higher is better) as more randomly guessed step-sequences are tried, each filled in with searched numbers. The upper line is easier 2-step tasks, the lower line the harder 3-step tasks.",
+     "chart_takeaway": "Even after 200 random step-sequences the 3-step line reaches only about 11%, far short of full success when the correct steps are known, so random steps can't stand in for the right ones."
+    }
+   ]
+  },
+  "qwen35_4b_structure_search_scaling": {
+   "verdict_tag": "Brute-force search keeps beating the model",
+   "concept_primer": "Think of each task as a multi-step recipe. You can either have the model write the recipe from memory, or mechanically try every possible recipe and keep the one a calculator confirms works.",
+   "plain_question": "As tasks need more steps, does the model's own recipe-writing ever start beating a try-everything search?",
+   "plain_answer": "No. Going from 3-step to 4-step tasks, the model's recipe-writing collapsed from 51% to 10%, while try-everything search stayed near-perfect at 97%, so the gap only widened.",
+   "why_it_matters": "When a calculator-style tool is available, lean on mechanical search to assemble multi-step solutions. Longer tasks make the model a worse structure-proposer, not a better one, so don't expect its instincts to take over.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Model writes the recipe (3 vs 4 steps)",
+     "value": "51% → 10%",
+     "sub": "collapses as tasks get longer"
+    },
+    {
+     "label": "Try-everything search (3 vs 4 steps)",
+     "value": "98% → 97%",
+     "sub": "stays near-perfect"
+    },
+    {
+     "label": "How far the model trails search",
+     "value": "46 pts → 87 pts",
+     "sub": "the gap widens, never closes"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "As tasks get longer, the model falls further behind mechanical search",
+     "chart_read": "Two lines over task length (3 vs 4 steps); vertical axis is success rate, higher is better. One line is the model writing the recipe from memory, the other is trying every possible recipe with a tool.",
+     "chart_takeaway": "The model's line plunges while the search line stays flat near the top; longer tasks make the model worse, so the two lines spread apart rather than crossing."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Number of recipes to test explodes as tasks get longer",
+     "chart_read": "A single rising line over task length (3 to 5 steps); vertical axis counts how many possible recipes a full search must check, which multiplies roughly 16-fold per added step.",
+     "chart_takeaway": "The line rockets from a few thousand to about a million by 5 steps, so search eventually gets too costly, but the model's recipe-writing has already collapsed before that point."
     }
    ]
   },
