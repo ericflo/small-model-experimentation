@@ -36,18 +36,16 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | Extension | Files |
 | --- | ---: |
 | `.csv` | 2134 |
-| `.json` | 1973 |
+| `.json` | 1967 |
 | `.py` | 959 |
 | `.png` | 840 |
-| `.md` | 773 |
+| `.md` | 771 |
 | `.jsonl` | 568 |
 | `.log` | 511 |
 | `.yaml` | 272 |
 | `.html` | 90 |
 | `.sh` | 19 |
 | `.txt` | 4 |
-| `.jinja` | 2 |
-| `.safetensors` | 2 |
 | `.npy` | 1 |
 | `[none]` | 1 |
 
@@ -55,10 +53,6 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Size MB | File |
 | ---: | --- |
-| 162.0 | `experiments/qwen35_4b_meta_induction/runs/lora_shift8k/adapter_model.safetensors` |
-| 162.0 | `experiments/qwen35_4b_meta_induction/runs/lora_shift/adapter_model.safetensors` |
-| 19.1 | `experiments/qwen35_4b_meta_induction/runs/lora_shift8k/tokenizer.json` |
-| 19.1 | `experiments/qwen35_4b_meta_induction/runs/lora_shift/tokenizer.json` |
 | 14.1 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/policy_rows.json` |
 | 10.4 | `experiments/qwen35_4b_reliability_exec_opsd_audit/data/exec_token_pressure_scores.jsonl` |
 | 8.5 | `experiments/qwen35_4b_learned_active_trace_policy/data/static_bridge_80/dsl_train.jsonl` |
@@ -85,3 +79,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 4.7 | `experiments/qwen35_4b_joint_shortlister_ladder/data/train_records.jsonl` |
 | 4.7 | `experiments/rule_family_diversity_scaling/data/repair_all.jsonl` |
 | 4.6 | `experiments/qwen35_4b_oracle_probe_synthesis_mdp/reports/all_eval_records.json` |
+| 4.5 | `experiments/qwen35_4b_adaptive_evidence_budget_policy/data/train_budget_states.jsonl` |
+| 4.2 | `experiments/qwen35_4b_foofah_strategy_discovery_live/data/test_baseline_records.jsonl` |
+| 4.2 | `experiments/qwen35_4b_foofah_program_strategy_portfolio/reports/test_records.jsonl` |
+| 4.2 | `experiments/qwen35_4b_foofah_adaptive_program_budget_router/data/test_records.jsonl` |
