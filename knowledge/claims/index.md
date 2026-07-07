@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 32
+- Claims: 33
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 5 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 24 |
+| Promising | 25 |
 
 ## Program Counts
 
@@ -24,10 +24,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `evidence_conditioned_selection` | 4 |
 | `interpretability_and_diagnostics` | 7 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 17 |
+| `posttraining_and_adaptation` | 18 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 22 |
+| `structured_execution_and_compilers` | 23 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -765,3 +765,26 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read oracle-skeletonfill=1.0 as deep: it is partly by construction (the fill enumerator has the exact discrete param support) -- it shows values are searchable given structure, not a surprising fact.
 - Do not use op-seq GENERATION to measure structural knowledge: it fails at 0.00 even depth-1 (format handicap). Use the model's native Python behavior matched against the true skeleton (format-immune).
 - Do not treat skeleton-then-fill as a forward-pass elicitation: it is tool-augmented execute-filter SEARCH (C17 selection-free / sample-more); the deployable gain is from providing/searching STRUCTURE, not from the model.
+
+## C33: Banking installs STRUCTURE: base op-sequence structure-coverage 0.00 -> banked 0.51 (held-out), converting the wall from structure-bound to value-bound
+
+- Status: `Promising`
+- Programs: `structured_execution_and_compilers`, `posttraining_and_adaptation`
+- Summary: Experiment qwen35_4b_banking_installs_structure, mechanistic follow-up to C32 (the compositional wall is structure-proposal; base can't propose the depth-3 op-sequence; values trivially searchable given structure). Ran C32's FORMAT-IMMUNE structure-coverage (does the model program's BEHAVIOR match the true op-type skeleton with ANY params?) on BASE vs BANKED_1280 (C24), on held-out depth-3 (banked's frozen eval, disjoint from training), min-depth-verified, no-think, n=80. RESULT: base structure-coverage 0.000 = concrete-coverage 0.000 (no skeletons, exactly C32). Banking lifts structure-coverage to 0.512 on HELD-OUT tasks -> banking installs GENERALIZABLE op-sequence structure (not memorized). And banking CONVERTS the wall from structure-bound to value-bound: base has no skeletons (struct=concrete=0), but the banked model proposes the right skeleton 0.512 while nailing the full concrete program only 0.362 -- a VALUE TAX of +0.150 (right-skeleton-wrong-param failures the base never had). Since oracle-skeletonfill=1.0 (C32), value-filling the banked model's proposed skeletons would deploy at ~0.512 vs 0.362 alone (bank installs structure; value-fill recovers the value tax).
+- Implication: Mechanistic confirmation and closure of C32: the compositional wall is structure-proposal (base can't), and banking's ENTIRE lever is installing that structure (0 -> 0.51 held-out). Once structure is present, the residual is a small, fillable value gap. Unifies C22-24 (banking crosses depth-3), C32 (wall is structure), C31 (values surface/searchable): BANKING = STRUCTURE-INSTALLATION. Explains why value-side interventions (C31 param-hint, C29 DPO) never moved the BASE wall -- the base's problem is structure not values; only after banking installs structure does a fillable value gap exist. Deployable recipe: bank (installs structure) + cheap value-fill (recovers the value tax) -> ~0.51 vs 0.36 banked-alone.
+
+### Evidence
+
+- [`qwen35_4b_banking_installs_structure`](../../experiments/qwen35_4b_banking_installs_structure/reports/report.md)
+
+### Next Tests
+
+- Run the bank+value-fill deployment end-to-end (fill the banked model's proposed skeletons) to confirm the ~0.51 deploy (currently inferred from structure-cov + oracle-skelfill=1.0).
+- Does banking a SHALLOWER dose install proportionally less structure? Structure-coverage vs banking dose (C24 doses).
+- Cross-substrate: is banking=structure-installation a model-level law (string/register)?
+
+### Avoid
+
+- Do not attribute banking's gain to values/memorization: structure-coverage rises on HELD-OUT tasks (0->0.512), i.e. banking installs generalizable STRUCTURE. The value tax (+0.15) is a SIDE effect that appears only after structure is installed.
+- Do not expect value-side interventions to help the BASE: the base has no skeletons (struct=concrete=0), so there is no right-structure-wrong-value pool to fix; the base's wall is pure structure.
+- Do not over-read the +0.15 value tax: wide CI at n=80; and the bank+fill ~0.51 deploy is inferred (structure-cov + C32 oracle-skelfill=1.0), not run end-to-end.

@@ -1,0 +1,23 @@
+{
+ "base": {
+  "n": 80,
+  "K": 8,
+  "greedy": 0.0,
+  "cov": 0.0,
+  "struct_cov": 0.0,
+  "struct_greedy": 0.013,
+  "value_tax": 0.0,
+  "struct_cov_ci": 0.0
+ },
+ "banked": {
+  "n": 80,
+  "K": 8,
+  "greedy": 0.2,
+  "cov": 0.362,
+  "struct_cov": 0.512,
+  "struct_greedy": 0.312,
+  "value_tax": 0.15,
+  "struct_cov_ci": 0.105
+ },
+ "verdict": "Banking installs STRUCTURE. Base structure-coverage 0.0 -> banked 0.512 on HELD-OUT depth-3 (generalizable, not memorized): banking installs the op-sequence STRUCTURE the base cannot propose (C32). And banking CONVERTS the wall from structure-bound to value-bound: the base has no skeletons (struct=concrete=0.0), but the banked model proposes the right skeleton 0.512 of the time while nailing the full program only 0.362 -- a VALUE TAX of +0.150 (right-skeleton-wrong-param failures the base never had). Since oracle-skeletonfill=1.0 (C32), value-filling the banked model's proposed skeletons would deploy at ~0.512 (bank installs structure; value-fill recovers the value tax). Mechanistic confirmation of C22-24: banking's lever IS structure-proposal."
+}

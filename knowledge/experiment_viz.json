@@ -43321,6 +43321,41 @@
      "note": "Value-fungibility control: do RANDOM op-type skeletons + value-search crack the tasks (which would make skeletonfill uninformative about structure)? At depth-3, even 200 random skeletons -> only 0.108 (vs oracle=1.0 with the TRUE skeleton). So it is NOT that any skeleton fills -- the correct STRUCTURE is genuinely required, and finding it is the hard part. Depth-2 is more fungible (R200=0.60) because there are fewer/shorter op-sequences. This confirms the wall is a structure-search problem: the model can't propose the structure, and random structure is far from enough -- which is why tool-enumerated structure seeds (C22) and banking (installs structure) were necessary."
     }
    ]
+  },
+  "qwen35_4b_banking_installs_structure": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Does banking install STRUCTURE? YES: base structure-cov 0.00 -> banked 0.51 (held-out depth-3)",
+     "categories": [
+      "greedy@1",
+      "cov@8",
+      "STRUCTURE-cov@8 (right op-sequence, any param)"
+     ],
+     "series": [
+      {
+       "label": "base",
+       "values": [
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "label": "banked (banked_1280)",
+       "values": [
+        0.2,
+        0.362,
+        0.512
+       ]
+      }
+     ],
+     "y_label": "solve rate (held-out depth-3, n=80, no-think)",
+     "y_format": "percent01",
+     "note": "C32 showed the compositional wall is structure-proposal (base can't propose the depth-3 op-sequence; failures are wrong-skeleton) while values are trivially searchable given structure (oracle-skeletonfill=1.0). C22-24 showed banking crosses depth-3. So banking must install STRUCTURE. Ran C32's format-immune structure-coverage (does the model program's BEHAVIOR match the true op-type skeleton with ANY params?) on base vs banked_1280, held-out depth-3 (disjoint from banked's training). RESULT: base has NO structure (structure-cov 0.000 = concrete-cov 0.000). Banking lifts structure-cov to 0.512 on HELD-OUT tasks -> banking installs GENERALIZABLE op-sequence structure (not memorized). And banking CONVERTS the wall from structure-bound to value-bound: the banked model proposes the right skeleton 51% of the time but nails the full concrete program only 36% -- a VALUE TAX of +0.15 (right-skeleton-wrong-param failures the base never had, because it had no skeletons). Since oracle-skeletonfill=1.0 (C32), value-filling the banked model's skeletons would deploy at ~0.51 vs 0.36 alone. Mechanistic closure of C32: banking = STRUCTURE-installation. Explains why value-side interventions (C31 param-hint, C29 DPO) never moved the BASE wall (the base's problem is structure, not values)."
+    }
+   ]
   }
  }
 }

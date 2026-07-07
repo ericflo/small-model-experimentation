@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 156
-- Manifest files: 452
+- Experiments with manifests: 157
+- Manifest files: 453
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 29 |
+| `standard-artifact` | 30 |
 
 ## Manifests
 
@@ -53,6 +53,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_balanced_discriminative_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_balanced_discriminative_bridge/data/model_discriminative/dataset_manifest.json) |
 | `qwen35_4b_balanced_discriminative_bridge` | `large-artifact` | [manifest](../experiments/qwen35_4b_balanced_discriminative_bridge/large_artifacts_manifest.md) |
 | `qwen35_4b_bank_the_thoughts` | `standard-artifact` | [manifest](../experiments/qwen35_4b_bank_the_thoughts/reports/artifact_manifest.yaml) |
+| `qwen35_4b_banking_installs_structure` | `standard-artifact` | [manifest](../experiments/qwen35_4b_banking_installs_structure/reports/artifact_manifest.yaml) |
 | `qwen35_4b_banking_thinking_stack` | `standard-artifact` | [manifest](../experiments/qwen35_4b_banking_thinking_stack/reports/artifact_manifest.yaml) |
 | `qwen35_4b_bucket_belief_probe_ranker` | `run-data` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_eval_examples.manifest.json) |
 | `qwen35_4b_bucket_belief_probe_ranker` | `run-data` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_train_examples.manifest.json) |

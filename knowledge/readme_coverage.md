@@ -45,6 +45,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_adaptive_tool_controller` | [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) |
 | `qwen35_4b_balanced_discriminative_bridge` | [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md) | [report](../experiments/qwen35_4b_balanced_discriminative_bridge/reports/qwen35_4b_balanced_discriminative_bridge_report.md) |
 | `qwen35_4b_bank_the_thoughts` | [README](../experiments/qwen35_4b_bank_the_thoughts/README.md) | [report](../experiments/qwen35_4b_bank_the_thoughts/reports/report.md) |
+| `qwen35_4b_banking_installs_structure` | [README](../experiments/qwen35_4b_banking_installs_structure/README.md) | [report](../experiments/qwen35_4b_banking_installs_structure/reports/report.md) |
 | `qwen35_4b_banking_thinking_stack` | [README](../experiments/qwen35_4b_banking_thinking_stack/README.md) | [report](../experiments/qwen35_4b_banking_thinking_stack/reports/report.md) |
 | `qwen35_4b_bucket_belief_probe_ranker` | [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md) | [report](../experiments/qwen35_4b_bucket_belief_probe_ranker/reports/qwen35_4b_bucket_belief_probe_ranker_report.md) |
 | `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md) | [report](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/reports/final_report.md) |

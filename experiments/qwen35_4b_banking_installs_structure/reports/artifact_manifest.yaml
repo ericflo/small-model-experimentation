@@ -1,0 +1,14 @@
+schema_version: 1
+experiment_id: "qwen35_4b_banking_installs_structure"
+external_artifacts:
+  - name: "banked_1280 adapter"
+    storage: "scratchpad/scaling_adapters/banked_1280_adapter (C24 tool-seeded banking QLoRA)"
+    required_for: "the banked arm"
+    checksum: ""
+    regenerate: "see qwen35_4b_depth_scaling_controls (train_1280.jsonl)"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/bank_structure.py --tag base --k 4"
+  full_command: "bank_structure --tag base; bank_structure --tag banked --adapter <banked_1280>; analyze"
+  required_external_artifacts: ["banked_1280 adapter (C24)"]
+notes: "Verdict (C33): banking installs STRUCTURE. base structure-coverage 0.000 -> banked 0.512 (held-out depth-3). Banking converts the wall from structure-bound to value-bound (banked value tax +0.15, fillable via oracle-skelfill=1.0). Structure signal is format-immune (model native Python behavior matched to true skeleton)."

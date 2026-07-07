@@ -1,8 +1,8 @@
 # Experiment Catalog
 
-Generated from `experiments/` on 2026-07-06.
+Generated from `experiments/` on 2026-07-07.
 
-- Experiments: 184
+- Experiments: 185
 - Source track Y provenance: 91
 - Source track Z provenance: 64
 
@@ -31,6 +31,7 @@ Generated from `experiments/` on 2026-07-06.
 | benchmark_generalization, process_control_and_tool_use, structured_execution_and_compilers | track-z | `qwen35_4b_adaptive_tool_controller` | execution, small-model, table-transform, tools | This standalone experiment evaluates a small adaptive controller over a fixed table-transformation candidate pool. Each task has a direct JSON attempt and five executable-program tool attempts. The controller decides... | [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) |
 | algorithmic_memory_and_retrieval, benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation, structured_execution_and_compilers | track-z | `qwen35_4b_balanced_discriminative_bridge` | bridge, coverage, execution, lora, memory, small-model | This standalone experiment tests whether equal frontier-family bridge coverage improves when visible traces are selected to discriminate against hard alias programs and seed-adapter mistakes. | [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md) | [report](../experiments/qwen35_4b_balanced_discriminative_bridge/reports/qwen35_4b_balanced_discriminative_bridge_report.md) |
 | benchmark_generalization, posttraining_and_adaptation | new | `qwen35_4b_bank_the_thoughts` | curriculum, lora, small-model | `python scripts/synth_traces.py --n 256 && python scripts/build_train.py` then train A/T/Tcorrupt via `train_lora_think.py`, eval via `eval_ladder.py` (deploy) + `run_thinking.py` (step-1), `python scripts/analyze.py`. | [README](../experiments/qwen35_4b_bank_the_thoughts/README.md) | [report](../experiments/qwen35_4b_bank_the_thoughts/reports/report.md) |
+| posttraining_and_adaptation, structured_execution_and_compilers | new | `qwen35_4b_banking_installs_structure` | lora, small-model | `python scripts/bank_structure.py --tag base` and `python scripts/bank_structure.py --tag banked --adapter <banked_1280>`, then `python scripts/analyze.py`. | [README](../experiments/qwen35_4b_banking_installs_structure/README.md) | [report](../experiments/qwen35_4b_banking_installs_structure/reports/report.md) |
 | posttraining_and_adaptation, structured_execution_and_compilers | new | `qwen35_4b_banking_thinking_stack` | lora, small-model | `python scripts/run_thinking.py --tag banked1280 --adapter <C24 banked_1280> --budgets 0 1024 2048 --steps 1 2 3` then `python scripts/analyze.py` | [README](../experiments/qwen35_4b_banking_thinking_stack/README.md) | [report](../experiments/qwen35_4b_banking_thinking_stack/reports/report.md) |
 | posttraining_and_adaptation, process_control_and_tool_use | track-z | `qwen35_4b_bucket_belief_probe_ranker` | policy, small-model | This standalone experiment tests whether Qwen3.5-4B can convert target-aware probe headroom into a deployable probe-ranking policy. | [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md) | [report](../experiments/qwen35_4b_bucket_belief_probe_ranker/reports/qwen35_4b_bucket_belief_probe_ranker_report.md) |
 | structured_execution_and_compilers | track-z | `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | abi, small-model | Standalone experiment for a frozen code-primitive ABI compiler pilot. | [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md) | [report](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/reports/final_report.md) |
