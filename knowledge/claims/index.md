@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 37
+- Claims: 38
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 28 |
+| Promising | 29 |
 
 ## Program Counts
 
@@ -19,7 +19,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 2 |
+| `benchmark_generalization` | 3 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 8 |
@@ -27,7 +27,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `posttraining_and_adaptation` | 18 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
-| `structured_execution_and_compilers` | 27 |
+| `structured_execution_and_compilers` | 28 |
 | `test_time_reasoning_budget` | 5 |
 
 ## C1: Structured intermediates improve small-model reliability
@@ -883,3 +883,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read the formal-dict collapse as a formal-SIMULATION deficit: the dict format triggers CODE-MODE (the model echoes the dict, d1=0.03 gate-fail) -- the formal arm is confounded by surface form, not a clean simulation-capacity measurement.
 - Do not interpret the think conditions: budget 1024 truncates (the model over-reasons trivial tasks and exhausts the budget before answering) -- no-think is the clean primary for mental simulation.
 - Do not overclaim 'no wall in language at any depth': linguistic simulation DOES degrade at depth 5-6 (semantic to 0.76, made-up-relation to 0.00); the finding is specifically NO depth-3 wall (where formal composition walls).
+
+## C38: The structure-PROPOSAL wall persists in language: the model executes a given rule but cannot induce one -- proposal/induction is modality-general, while simulation is formal-specific (C37)
+
+- Status: `Promising`
+- Programs: `benchmark_generalization`, `structured_execution_and_compilers`
+- Summary: Experiment qwen35_4b_language_proposal_wall, complement to C37 (simulation intact in language). Tests whether the C32/C36 structure-PROPOSAL wall persists in language: relational-composition INDUCTION -- R=4 made-up relations (random bijections over ~16 made-up entities), a hidden depth-D rule; give the relation KB + k examples (start->answer) + a query start NOT in the examples; the model must INFER which relations compose and apply. Min-depth-verified, uniqueness-pinned, contamination-free. CRITICAL control (review): an application-only arm (rule GIVEN) -- this multi-relation substrate is harder to EXECUTE than C37's chains, so induction failure is meaningful only where application is easy. RESULT: clean forward-pass dissociation at DEPTH-1 (where application is easy): the model EXECUTES a given relational rule (app no-think 0.86) but CANNOT INFER one from examples (induction no-think 0.00 = chance) in a single forward pass. Induction is at chance no-think at ALL depths (0.00/0.04/0.08/0.02). Thinking only PARTIALLY rescues induction (0.50 at depth-1, budget 4096, verified no truncation -- reasoning correct but error-prone), still below application (0.75 think) and far below C37's linguistic simulation (0.99). So the model is an EXECUTOR, not an INDUCER, in language as in formal domains.
+- Implication: C37 + C38 together: the compositional wall has TWO components that DISSOCIATE BY MODALITY. SIMULATION/execution is modality-DEPENDENT (the formal depth-3 wall vanishes in language, C37). PROPOSAL/INDUCTION is modality-GENERAL (hard in both formal C32/C36 and language) -- the deeper, more fundamental limit. The model reasons multi-step in language but does NOT induce rules; the structure-proposal wall is the one part of the whole arc that holds even in the model's native domain. Corroborates C32/C36 ('value-computer/executor, not structure-proposer') as a cross-modality law. For the mission: elicitation/deployment should give the model STRUCTURE to execute (its strength across modalities), not ask it to induce structure (its weakness across modalities).
+
+### Evidence
+
+- [`qwen35_4b_language_proposal_wall`](../../experiments/qwen35_4b_language_proposal_wall/reports/report.md)
+
+### Next Tests
+
+- Clean deeper induction (think, depths 2-4) on a substrate whose APPLICATION is easy at all depths (e.g. single-relation chains like C37 but with a hidden which-hops rule) -- to get the induction depth-curve without the multi-relation application confound.
+- Does banking/few-shot install induction in language (like banking installs formal structure, C33)? Or is induction un-bankable?
+- Where between C37 (simulation) and C38 (induction) does the model transition -- e.g. rule STATED ambiguously, or 1 example (transduction) vs many (induction)?
+
+### Avoid
+
+- Do not claim induction is a HARD wall in language: thinking partially rescues it (depth-1 0.00 no-think -> 0.50 think, no truncation). The claim is that induction PERSISTS as a difficulty (unlike simulation which is intact), not that it is impossible.
+- Do not compare induction to application at depth 2+ on this substrate: application ITSELF degrades there (multi-relation bijection chaining is hard for the small model no-think), so induction is only cleanly isolable at depth-1 (app 0.86 vs induce 0.00).
+- Do not read C38 as contradicting C37: they are COMPLEMENTARY -- C37 = simulation (execution) is easy in language; C38 = proposal (induction) is hard in language. Together they dissociate the two wall components by modality.
+- Scope: think depths 2-4 not completed (very slow at budget 4096); single seed; the deeper induction curve is owed.

@@ -1,0 +1,13 @@
+{
+ "render": "app",
+ "think": true,
+ "n_ent": 16,
+ "guess_base": 0.062,
+ "by_depth": {
+  "1": {
+   "n": 24,
+   "acc": 0.75,
+   "finished": 1.0
+  }
+ }
+}

@@ -43659,6 +43659,88 @@
      "note": "All 36 prior claims were formal/procedural. This tests C13's mental-SIMULATION wall (NOT the C32/C36 proposal wall) in the model's NATIVE domain. Contamination-free successor-chains over made-up entities, same chain rendered linguistically vs as a Python dict; shortcut-hardened (answer interior/never sink, random start, recency baseline 0.04). No-think is the PRIMARY (forces mental simulation). RESULT: the model does depth-3 multi-step reasoning in natural language NEAR-PERFECTLY (linguistic-semantic d1-d4 = 0.99/1.00/0.99/0.94), and the made-up-relation control ('gorps') is ALSO perfect through depth-3 (1.00) -> genuine MODALITY effect, not a semantic prior. Both degrade only at depth 5-6 (semantic to 0.76; made-up relation collapses to 0.00 -- semantics aids DEEP chaining). STARK contrast to the formal-composition wall (depth-3, C13-C36): the model chains 3-4 reasoning steps in language near-perfectly, so the 'compositional wall' is NOT a general multi-step limit -- it is specific to FORMAL/procedural composition. Relocates C13's 'broken mental simulation' to the formal modality. SECONDARY: the formal-DICT surface form triggers CODE-MODE (the model echoes the dict as a code block instead of simulating, d1=0.03) -- the presentation determines whether the model REASONS or CODES. Scope: tests SIMULATION (C13), not the structure-PROPOSAL wall (C32/C36); think conditions truncation-confounded (budget 1024)."
     }
    ]
+  },
+  "qwen35_4b_language_proposal_wall": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Does the structure-PROPOSAL wall exist in language? YES -- the model executes a given rule (0.86) but cannot induce one (0.00)",
+     "categories": [
+      "application (execute given rule) no-think",
+      "application think",
+      "INDUCTION (infer rule) no-think",
+      "INDUCTION think"
+     ],
+     "series": [
+      {
+       "label": "accuracy at depth-1 (guess baseline 0.06; C37 simulation = 0.99)",
+       "values": [
+        0.86,
+        0.75,
+        0.0,
+        0.5
+       ]
+      }
+     ],
+     "y_label": "accuracy at depth-1",
+     "y_format": "percent01",
+     "note": "Complement to C37 (the model SIMULATES multi-step reasoning in language perfectly). This tests whether the C32/C36 structure-PROPOSAL wall persists in language: relational-composition INDUCTION (R=4 made-up relations = random bijections over made-up entities, hidden depth-D rule; infer which relations compose from examples + apply to a new query). Critical control (review): an application-only arm (rule GIVEN) -- this multi-relation substrate is harder to EXECUTE than C37's chains, so induction failure is meaningful only where application is easy. RESULT: clean forward-pass dissociation at depth-1 (where application IS easy, 0.86): the model EXECUTES a given rule (0.86) but CANNOT INFER one from examples (0.00 = chance). Induction is at chance no-think at all depths. Thinking only PARTIALLY rescues induction (0.50 at depth-1, budget 4096, no truncation -- reasoning correct but error-prone), still far below application (0.75) and C37's simulation (0.99). So the model is an EXECUTOR, not an INDUCER, in language as in formal domains -- corroborating C32/C36 as a cross-modality law. C37+C38: the compositional wall has TWO components that dissociate by modality -- SIMULATION is modality-dependent (formal walls, language does not), PROPOSAL/INDUCTION is modality-general (hard in both). Caveat: this substrate's application degrades at depth 2+, so induction is cleanly isolable only at depth-1."
+    },
+    {
+     "headline": false,
+     "kind": "line",
+     "title": "Induction is at CHANCE at all depths in a forward pass; application is easy at depth-1 (degrades deeper on this multi-relation substrate)",
+     "series": [
+      {
+       "label": "application (execute given rule), no-think",
+       "points": [
+        [
+         1,
+         0.86
+        ],
+        [
+         2,
+         0.28
+        ],
+        [
+         3,
+         0.46
+        ],
+        [
+         4,
+         0.12
+        ]
+       ]
+      },
+      {
+       "label": "INDUCTION (infer rule), no-think",
+       "points": [
+        [
+         1,
+         0.0
+        ],
+        [
+         2,
+         0.04
+        ],
+        [
+         3,
+         0.08
+        ],
+        [
+         4,
+         0.02
+        ]
+       ]
+      }
+     ],
+     "x_label": "rule depth (relations to compose)",
+     "y_label": "accuracy (no-think forward pass)",
+     "y_format": "percent01",
+     "note": "No-think forward-pass accuracy by rule depth. INDUCTION (infer the hidden rule from examples) sits at chance (~0.06) at every depth -- the model cannot infer a rule in a single forward pass, even a depth-1 rule (identify which of 4 relations fits the examples). APPLICATION (execute a GIVEN rule) is easy at depth-1 (0.86) but degrades at depth 2+ (0.28-0.46) because chaining 2-3 full-16-entry bijection lookups is hard for the small model without thinking. The clean induction-vs-application dissociation is at depth-1 (0.00 vs 0.86); deeper, the multi-relation application confound prevents clean isolation, but induction is already floored at chance."
+    }
+   ]
   }
  }
 }

@@ -1,0 +1,4 @@
+[prop] 24 well-posed tasks | render=ling think=True
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:52,  8.03it/s]Loading weights:  11%|█▏        | 48/426 [00:00<00:01, 254.25it/s]Loading weights:  22%|██▏       | 94/426 [00:00<00:00, 339.80it/s]Loading weights:  32%|███▏      | 138/426 [00:00<00:00, 374.70it/s]Loading weights:  43%|████▎     | 185/426 [00:00<00:00, 398.27it/s]Loading weights:  56%|█████▌    | 237/426 [00:00<00:00, 436.04it/s]Loading weights:  66%|██████▌   | 282/426 [00:00<00:00, 435.46it/s]Loading weights:  77%|███████▋  | 329/426 [00:00<00:00, 445.54it/s]Loading weights:  88%|████████▊ | 374/426 [00:00<00:00, 430.84it/s]Loading weights:  98%|█████████▊| 418/426 [00:01<00:00, 409.41it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 393.43it/s]
+[prop] ling_think (guess 0.062): d1=0.50
+[prop] wrote runs/prop_ling_think.json

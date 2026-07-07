@@ -1,0 +1,23 @@
+{
+ "application_nothink": {
+  "1": 0.86,
+  "2": 0.28,
+  "3": 0.46,
+  "4": 0.12
+ },
+ "application_think_d1": {
+  "1": 0.75
+ },
+ "induction_nothink": {
+  "1": 0.0,
+  "2": 0.04,
+  "3": 0.08,
+  "4": 0.02
+ },
+ "induction_think_d1": {
+  "1": 0.5
+ },
+ "guess_baseline": 0.062,
+ "sim_C37_d3_nothink": 0.99,
+ "verdict": "The structure-PROPOSAL wall DOES exist in language -- unlike simulation (C37, intact). CLEAN forward-pass dissociation at depth-1 (where application is easy, so induction is isolable): the model EXECUTES a given relational rule (0.86) but CANNOT INFER one from examples (0.0, = chance) in a single forward pass. Induction is at chance no-think at ALL depths ({1: 0.0, 2: 0.04, 3: 0.08, 4: 0.02}). Thinking only PARTIALLY rescues induction (0.5 at depth-1, budget 4096, no truncation) -- still error-prone at the simplest depth and far below application (0.75 think) and below C37's linguistic simulation (0.99 no-think at depth-3). So the model is an EXECUTOR, not an INDUCER, in language as in formal domains -- corroborating C32/C36 as a CROSS-MODALITY property. This DISSOCIATES the two components of the compositional wall: SIMULATION/execution is modality-dependent (formal walls at depth-3, language does not -- C37); PROPOSAL/INDUCTION is hard in BOTH modalities (formal C32/C36, language here) -- the deeper, more fundamental limit. Honest caveat: this multi-relation substrate's application itself degrades at depth 2+ ({1: 0.86, 2: 0.28, 3: 0.46, 4: 0.12}), so induction is cleanly isolable only at depth-1; but induction is already at chance there."
+}

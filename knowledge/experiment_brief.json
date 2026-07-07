@@ -10318,6 +10318,33 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_language_proposal_wall": {
+   "verdict_tag": "It reasons but doesn't figure out rules",
+   "concept_primer": "There are two skills in multi-step reasoning: FOLLOWING a rule you're given, and FIGURING OUT a hidden rule from examples. A companion experiment showed this small model follows rules in plain English almost perfectly. This one tests the second skill: can it infer a hidden rule from examples?",
+   "plain_question": "In plain language, can the model FIGURE OUT a hidden multi-step rule from examples (not just follow one it's told)?",
+   "plain_answer": "Barely. Told the rule explicitly, it applies it correctly ~86% of the time. But asked to infer the same kind of hidden rule from worked examples, it is at chance (0%) in a single pass -- it cannot figure out even a one-step rule. Letting it think out loud only gets it to ~50% on the easiest case, and its reasoning is on the right track but error-prone. So the model can EXECUTE a rule it's handed but cannot reliably DISCOVER one -- in plain language just as in code.",
+   "why_it_matters": "Together with the companion result, this pins down exactly what the model can and can't do. Following steps (execution) is easy and gets easier in natural language. Discovering the rule (induction) is hard everywhere -- language doesn't rescue it. For practitioners: give the model the procedure to run; don't expect it to reverse-engineer the procedure from examples. This is the one limitation that holds even in the model's native domain.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "apply a GIVEN rule (1 step)",
+     "value": "0.86"
+    },
+    {
+     "label": "INFER a hidden rule (1 step, single pass)",
+     "value": "0.00"
+    },
+    {
+     "label": "INFER a hidden rule (1 step, thinking)",
+     "value": "0.50"
+    },
+    {
+     "label": "following a rule in language (companion, C37)",
+     "value": "0.99"
+    }
+   ],
+   "charts": []
   }
  }
 }

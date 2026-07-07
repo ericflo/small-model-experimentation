@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 160
-- Manifest files: 456
+- Experiments with manifests: 161
+- Manifest files: 457
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 33 |
+| `standard-artifact` | 34 |
 
 ## Manifests
 
@@ -112,6 +112,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_inventory_shortlister_training` | `large-artifact` | [manifest](../experiments/qwen35_4b_inventory_shortlister_training/large_artifacts_manifest.md) |
 | `qwen35_4b_joint_shortlister_ladder` | `dataset` | [manifest](../experiments/qwen35_4b_joint_shortlister_ladder/data/dataset_manifest.json) |
 | `qwen35_4b_joint_shortlister_ladder` | `large-artifact` | [manifest](../experiments/qwen35_4b_joint_shortlister_ladder/large_artifacts_manifest.md) |
+| `qwen35_4b_language_proposal_wall` | `standard-artifact` | [manifest](../experiments/qwen35_4b_language_proposal_wall/reports/artifact_manifest.yaml) |
 | `qwen35_4b_language_reasoning_wall` | `standard-artifact` | [manifest](../experiments/qwen35_4b_language_reasoning_wall/reports/artifact_manifest.yaml) |
 | `qwen35_4b_latent_composition_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_latent_composition_probe/reports/artifact_manifest.yaml) |
 | `qwen35_4b_latent_decomposition` | `standard-artifact` | [manifest](../experiments/qwen35_4b_latent_decomposition/reports/artifact_manifest.yaml) |

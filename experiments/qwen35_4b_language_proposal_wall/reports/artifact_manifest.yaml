@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_language_proposal_wall"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/eval_proposal.py --render app --n-per-depth 12 --depths 1 2 3"
+  full_command: "eval_proposal.py --render {app,ling} --depths 1 2 3 4 [--think, budget 4096, batch 8]; analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C38): the structure-PROPOSAL wall persists in language. Depth-1 dissociation: application (rule given) 0.86 vs INDUCTION (rule inferred) 0.00 no-think; think half-rescues (0.50). The model executes but does not induce, in language as in formal domains. Complement to C37 (simulation intact). Caveat: multi-relation application degrades at depth 2+, so induction isolable cleanly only at depth-1; think depths 2-4 not completed (slow). Application-only arm is the mandatory control."

@@ -2257,6 +2257,41 @@
   },
   {
     "file_counts": {
+      ".json": 6,
+      ".log": 3,
+      ".md": 5,
+      ".png": 1,
+      ".py": 6,
+      ".sh": 1,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-07",
+    "id": "qwen35_4b_language_proposal_wall",
+    "path": "experiments/qwen35_4b_language_proposal_wall",
+    "primary_readme": "experiments/qwen35_4b_language_proposal_wall/README.md",
+    "primary_report": "experiments/qwen35_4b_language_proposal_wall/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/eval_proposal.py --render {ling,app,formal} --depths 1 2 3 4 [--think]` then `python scripts/analyze.py`.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Does the Structure-Proposal Wall Exist in Language?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 25,
+    "total_size_bytes": 207722
+  },
+  {
+    "file_counts": {
       ".json": 7,
       ".md": 5,
       ".png": 1,

@@ -80,6 +80,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_independent_retrieval_consensus` | [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md) | [report](../experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md) |
 | `qwen35_4b_inventory_shortlister_training` | [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md) | [report](../experiments/qwen35_4b_inventory_shortlister_training/reports/qwen35_4b_inventory_shortlister_training_report.md) |
 | `qwen35_4b_joint_shortlister_ladder` | [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md) | [report](../experiments/qwen35_4b_joint_shortlister_ladder/reports/qwen35_4b_joint_shortlister_ladder_report.md) |
+| `qwen35_4b_language_proposal_wall` | [README](../experiments/qwen35_4b_language_proposal_wall/README.md) | [report](../experiments/qwen35_4b_language_proposal_wall/reports/report.md) |
 | `qwen35_4b_language_reasoning_wall` | [README](../experiments/qwen35_4b_language_reasoning_wall/README.md) | [report](../experiments/qwen35_4b_language_reasoning_wall/reports/report.md) |
 | `qwen35_4b_latent_composition_probe` | [README](../experiments/qwen35_4b_latent_composition_probe/README.md) | [report](../experiments/qwen35_4b_latent_composition_probe/reports/report.md) |
 | `qwen35_4b_latent_decomposition` | [README](../experiments/qwen35_4b_latent_decomposition/README.md) | [report](../experiments/qwen35_4b_latent_decomposition/reports/report.md) |
