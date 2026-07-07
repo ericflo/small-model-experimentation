@@ -70,3 +70,25 @@ make check
 Then update the human knowledge pages when the result changes strategy.
 
 Also update the owning program's `evidence.md` and `backlog.md` when the result changes what should be tried next.
+
+## 6. Publish To The Site (required)
+
+Every experiment must reach the public site with a **plain-language practitioner
+brief** — the friendly top-of-page summary (verdict, plain question/answer,
+why-it-matters, KPI numbers, per-chart how-to-read). Charts and dates are handled
+automatically (charts via your result data; dates via git), but the brief is
+model-authored and is a **hard gate**: `make check` fails until it exists.
+
+After a new experiment is committed, author its brief:
+
+```bash
+make site-dates          # git-fill the run date (deterministic)
+# author the brief for the new experiment id(s):
+#   run the workflow scripts/enrichment/enrich_briefs.workflow.js with args = the id(s),
+#   then: python3 scripts/enrichment/merge_briefs.py --in <workflow-output.json>
+make site-content        # confirm coverage is 100%
+```
+
+The brief must stay jargon-free (all the precise technical detail already lives in
+the README/report below the fold). Full guide: [`site_maintenance.md`](site_maintenance.md).
+`make check` will not pass until every experiment has a brief.

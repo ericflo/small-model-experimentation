@@ -61,7 +61,7 @@ def has_brief(entry: object) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--strict", action="store_true", help="exit non-zero when any experiment lacks charts or a brief")
+    parser.add_argument("--strict", action="store_true", help="exit non-zero when any experiment lacks a practitioner brief (the enforced layer; charts/dates stay informational)")
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON of the gaps")
     args = parser.parse_args()
 
@@ -99,7 +99,12 @@ def main() -> int:
                 shown = ", ".join(missing[:12]) + (f" … (+{len(missing) - 12})" if len(missing) > 12 else "")
                 print(f"- {len(missing)} {label} → {fix}\n    {shown}")
 
-    if args.strict and (gaps["charts"] or gaps["brief"]):
+    if args.strict and gaps["brief"]:
+        print(
+            f"\nSTRICT: {len(gaps['brief'])} experiment(s) lack a practitioner brief. "
+            "Author them before committing — see docs/site_maintenance.md "
+            "(run scripts/enrichment/enrich_briefs.workflow.js for the ids above, then merge_briefs.py)."
+        )
         return 1
     return 0
 

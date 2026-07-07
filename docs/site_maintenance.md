@@ -12,9 +12,19 @@ can derive and are stored as committed artifacts:
 | `knowledge/experiment_brief.json` | plain-language practitioner brief (top of each experiment page) | agent enrichment pass |
 
 The build **degrades gracefully**: an experiment with no entry in any of these
-just shows less (no chart section, no brief, a git-derived or "in progress"
-date). Nothing breaks. So the site never *regresses* as experiments land — it
-only lacks the enriched layer until the passes below run.
+just shows less. Nothing breaks. So the site never *regresses* as experiments
+land — it only lacks the enriched layer until the passes below run.
+
+**What stays current on its own:**
+- **Dates** self-correct at *build time*: `build_site.py` git-derives a run
+  window (metadata-sweeps excluded) for any post-import experiment missing a
+  curated `experiment_dates.json` entry, so the site always shows a real date.
+  `make site-dates` also writes those entries into the artifact.
+- **Charts** are committed by the experiment pipeline alongside each experiment.
+- **Briefs** are the one layer that needs authoring per experiment, so they are
+  **enforced**: `make check` runs `site_content_status.py --strict` and *fails*
+  until every experiment has a brief. This is the guardrail that keeps briefs
+  from drifting — a new experiment cannot pass checks without one.
 
 ## The maintenance loop
 
@@ -51,8 +61,25 @@ enrichment workflows kept in [`scripts/enrichment/`](../scripts/enrichment):
 
 Both are [Workflow tool](../CONTRIBUTING.md) scripts run by the orchestrating
 agent; both are **resumable** and only need to cover experiments the status
-report flags as missing. After a pass, re-check with `make site-content` and
-commit the updated `knowledge/experiment_*.json` artifacts.
+report flags as missing.
+
+The brief pass is gap-driven and turnkey:
+
+```bash
+# 1. find the ids missing a brief
+python3 scripts/site_content_status.py --json
+# 2. author them (Workflow tool; pass the missing ids as args):
+#    Workflow(scripts/enrichment/enrich_briefs.workflow.js, args=[<ids>])
+# 3. clean + lint + merge the authored briefs into the artifact:
+python3 scripts/enrichment/merge_briefs.py --in <workflow-output.json>
+# 4. re-check and rebuild
+make site-content && python3 scripts/build_site.py --out site
+```
+
+`merge_briefs.py` normalizes HTML entities/arrows, applies safe de-jargon fixes,
+lints against the ban-list, merges only clean briefs, and prints any that still
+need a re-author (e.g. an over-long verdict tag). After a pass, commit the
+updated `knowledge/experiment_brief.json` (and `experiment_dates.json`).
 
 ## Guardrails
 

@@ -611,6 +611,25 @@ def recorded_dates() -> dict[str, dict[str, str]]:
     return {str(key): value for key, value in entries.items() if isinstance(value, dict)}
 
 
+IMPORT_DATE = "2026-06-28"  # bulk corpus import; git dates on/before it are collapsed
+
+
+def _run_window(recorded: dict, git_info: dict) -> dict:
+    """Run window for an experiment. Prefer the curated dates entry; otherwise
+    fall back to the metadata-sweep-filtered git window for POST-import dirs, so
+    a new experiment always shows a real date even before the dates artifact is
+    updated (dates never drift on the site)."""
+    start = str(recorded.get("start", ""))
+    end = str(recorded.get("end", ""))
+    confidence = str(recorded.get("confidence", ""))
+    if not start:
+        git_first = str(git_info.get("first", ""))
+        git_last = str(git_info.get("last", ""))
+        if git_first and git_first > IMPORT_DATE:  # created after the import → git is real
+            start, end, confidence = git_first, git_last, "high"
+    return {"ran_start": start, "ran_end": end, "date_confidence": confidence}
+
+
 def build_experiments(programs: list[dict]) -> list[dict]:
     catalog = read_csv(KNOWLEDGE / "experiment_catalog.csv")
     readiness = {row["id"]: row for row in read_csv(KNOWLEDGE / "experiment_readiness.csv")}
@@ -657,9 +676,7 @@ def build_experiments(programs: list[dict]) -> list[dict]:
             "first": str(info.get("first", "")),
             "last": str(info.get("last", "")),
             "commits": int(info.get("commits", 0) or 0),
-            "ran_start": str(recorded.get(exp_id, {}).get("start", "")),
-            "ran_end": str(recorded.get(exp_id, {}).get("end", "")),
-            "date_confidence": str(recorded.get(exp_id, {}).get("confidence", "")),
+            **_run_window(recorded.get(exp_id, {}), info),
             "run_surface": ready.get("run_surface", ""),
             "smoke_command": ready.get("smoke_command", ""),
             "anchor_ready": ready.get("anchor_ready", ""),
