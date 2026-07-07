@@ -10427,6 +10427,33 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_error_localization": {
+   "verdict_tag": "Its confidence dips right where it slips",
+   "concept_primer": "When a model reasons in several steps and gets the answer wrong, a useful thing would be to know WHICH step went wrong -- so you can redo just that step instead of the whole chain. This tests whether the model's own confidence pinpoints the failing step.",
+   "plain_question": "When the model makes an error partway through a multi-step calculation, does its confidence reveal WHICH step went wrong?",
+   "plain_answer": "Yes. As the model works step by step, we can read how confident it is in each step from its output probabilities. When it makes a slip, its confidence dips -- and the dip lands exactly on the step where it first went wrong (high just before, lowest right at the error, recovering after). We had to be careful: the model's confidence naturally rises over the course of a chain, so we removed that trend first; the pinpointing survives. When the model slips exactly once, reading its confidence finds the bad step about 56% of the time -- roughly triple random guessing and well above guessing from step-position alone -- so you can redo just from there instead of the whole chain (cheaper). The one limit: if the model slips several times in a chain, its confidence flags a bad step (76% of the time) but not always the FIRST one.",
+   "why_it_matters": "It extends the earlier finding (the model knows when it's wrong, in its output probabilities) from single answers to multi-step reasoning, and makes it actionable: read the per-step confidence to find and re-try just the failing step -- targeted repair instead of redoing everything. Combined with the confidence-select result, it suggests a cheap self-repair loop for a small model, with no verifier and no execution.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "localizes the slip (single-slip chains, position-controlled)",
+     "value": "0.56"
+    },
+    {
+     "label": "guessing from step-position alone",
+     "value": "0.36"
+    },
+    {
+     "label": "random (1/depth)",
+     "value": "0.19"
+    },
+    {
+     "label": "targeted-repair cost vs redo-all",
+     "value": "3.8 vs 5.6 steps"
+    }
+   ],
+   "charts": []
   }
  }
 }

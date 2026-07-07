@@ -1603,6 +1603,40 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".log": 2,
+      ".md": 5,
+      ".png": 1,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-07",
+    "id": "qwen35_4b_error_localization",
+    "path": "experiments/qwen35_4b_error_localization",
+    "primary_readme": "experiments/qwen35_4b_error_localization/README.md",
+    "primary_report": "experiments/qwen35_4b_error_localization/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization"
+    ],
+    "source_track": "new",
+    "summary": "`python scripts/eval_localize.py --n-per-cond 150` then `python scripts/analyze.py`.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B: Can the Model Localize Its Own Errors in Multi-Step Reasoning?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 18,
+    "total_size_bytes": 528022
+  },
+  {
+    "file_counts": {
       ".json": 8,
       ".jsonl": 6,
       ".log": 12,

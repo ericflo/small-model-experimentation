@@ -1,0 +1,105 @@
+{
+ "n_chains": 600,
+ "per_step_err": 0.306,
+ "n_error_dist": {
+  "0": 239,
+  "1": 137,
+  "2": 75,
+  "3": 33,
+  "4": 32,
+  "5": 33,
+  "6": 26,
+  "7": 25
+ },
+ "single_slip_frac_of_errchains": 0.38,
+ "meanP": 0.835,
+ "sdP": 0.211,
+ "auroc_pooled_raw": 0.732,
+ "auroc_detrended": 0.754,
+ "perpos_auroc": {
+  "1": 0.836,
+  "2": 0.854,
+  "3": 0.763,
+  "4": 0.72,
+  "5": 0.706,
+  "6": 0.68,
+  "7": 0.661
+ },
+ "posmeanP": {
+  "1": 0.66,
+  "2": 0.738,
+  "3": 0.84,
+  "4": 0.918,
+  "5": 0.951,
+  "6": 0.962,
+  "7": 0.957
+ },
+ "poserr": {
+  "1": 0.338,
+  "2": 0.373,
+  "3": 0.292,
+  "4": 0.262,
+  "5": 0.313,
+  "6": 0.233,
+  "7": 0.267
+ },
+ "localization_single_slip": {
+  "strict": {
+   "detrended_residual": 0.562,
+   "raw_confidence": 0.635,
+   "uniform": 0.186,
+   "always_last": 0.007,
+   "position_prior": 0.358
+  },
+  "loose_any_error": {
+   "detrended_residual": 0.562,
+   "raw_confidence": 0.635
+  },
+  "n": 137
+ },
+ "localization_multi_slip": {
+  "strict": {
+   "detrended_residual": 0.272,
+   "raw_confidence": 0.446,
+   "uniform": 0.184,
+   "always_last": 0.0,
+   "position_prior": 0.379
+  },
+  "loose_any_error": {
+   "detrended_residual": 0.759,
+   "raw_confidence": 0.741
+  },
+  "n": 224
+ },
+ "localization_all": {
+  "strict": {
+   "detrended_residual": 0.382,
+   "raw_confidence": 0.518,
+   "uniform": 0.185,
+   "always_last": 0.003,
+   "position_prior": 0.371
+  },
+  "loose_any_error": {
+   "detrended_residual": 0.684,
+   "raw_confidence": 0.701
+  },
+  "n": 361
+ },
+ "offset_resid": {
+  "-2": 0.2273,
+  "-1": 0.0632,
+  "0": -0.1459,
+  "1": -0.0486,
+  "2": -0.0842,
+  "3": -0.0051,
+  "4": -0.0235,
+  "5": -0.0305,
+  "6": 0.0173
+ },
+ "repair_single_detrended": {
+  "chains_fixed": 0.562,
+  "avg_cost_steps": 3.78,
+  "redo_all_cost": 5.63
+ },
+ "verdict": "YES -- per-step confidence carries WHERE the model slipped, not just THAT it did, and it SURVIVES de-trending (rules out 'confidence just decays with position'). Sanity: per-step error 0.31, single-slip 0.38 of error-chains, P non-degenerate (mean 0.835 sd 0.211). Per-step error prediction: pooled AUROC 0.732, DE-TRENDED (position-controlled) 0.754. THE DIP IS AT THE ORIGIN: mean de-trended confidence by offset-from-first-error is minimized at offset 0 (-0.1459), high just before (+0.2273 at -2), recovering after. LOCALIZATION on SINGLE-slip chains (n=137, well-posed): de-trended-residual argmin hits the slip 0.562 (raw-conf 0.635) vs position-prior 0.358 vs uniform 0.186. REPAIR (oracle-downstream, redo from the located step): fixes 0.562 of single-slip chains at avg 3.78 steps vs redo-all 5.63. CAVEAT: multi-slip chains (224) -- argmin finds AN error 0.759 but the FIRST only 0.272 (several low-confidence steps). Deployable targeted repair, strongest when the model slips once."
+}

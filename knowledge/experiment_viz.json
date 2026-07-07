@@ -44049,6 +44049,89 @@
      "note": "Sample-more has TWO failure modes. Coverage-limited (familiar_induce): greedy gets it right only 21% but pass@12 reaches 90% -- more samples help enormously. Capability-limited (novel_induce): greedy 7%, pass@12 only 59% (BELOW the pure-luck ceiling of 72% at chance 0.10 -- the model concentrates its samples on WRONG rules, so sampling is largely futile). The model's confidence distinguishes them: the max per-sample P(answer) predicts per-problem solvability at AUROC 0.83, so abstaining on low-confidence problems yields ~100% accuracy on the confident top third -- a working abstain/escalate signal for exactly the capability-limited problems where sampling does not pay. (Confidence-guided budget ALLOCATION was roughly tied with uniform confidence-select; the win is in SELECTION and ABSTENTION, not allocation.)"
     }
    ]
+  },
+  "qwen35_4b_error_localization": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "line",
+     "title": "The confidence dip marks the error origin: de-trended confidence is minimized exactly AT the first slip (offset 0)",
+     "series": [
+      {
+       "label": "mean de-trended confidence (residual) vs step-offset from the first error",
+       "points": [
+        [
+         -2,
+         0.227
+        ],
+        [
+         -1,
+         0.063
+        ],
+        [
+         0,
+         -0.146
+        ],
+        [
+         1,
+         -0.049
+        ],
+        [
+         2,
+         -0.084
+        ],
+        [
+         3,
+         -0.005
+        ],
+        [
+         4,
+         -0.024
+        ],
+        [
+         5,
+         -0.031
+        ],
+        [
+         6,
+         0.017
+        ]
+       ]
+      }
+     ],
+     "x_label": "step offset from first error",
+     "y_label": "mean de-trended confidence (residual)",
+     "y_format": "number",
+     "note": "Extends C40 (single-step metacognition) to MULTI-step: does per-step confidence show WHERE the model first slips? The model advances k steps in a cyclic order over depth-4-7 chains via scaffolded decoding (force 'Step i: <digit>', read the digit distribution at each step). Because confidence RISES with step position (a confound), we DE-TREND (subtract the per-position mean) and plot the residual against the offset from the model's first slip. The dip is EXACTLY at the origin: mean residual confidence is high just before the error (+0.23 at offset -2), plunges to its minimum AT the first error (-0.15 at offset 0), and recovers afterward. So the confidence dip marks the ORIGIN of the error, not merely late positions -- genuine, position-controlled localization. Per-step error prediction also survives de-trending (AUROC 0.75 vs 0.73 raw)."
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Localizing the slip (single-slip chains): de-trended confidence beats position baselines -- deployable targeted repair",
+     "categories": [
+      "de-trended residual",
+      "raw confidence",
+      "position prior",
+      "always last",
+      "uniform 1/D"
+     ],
+     "series": [
+      {
+       "label": "localization accuracy = argmin-confidence step is the first slip (single-slip chains, n=137)",
+       "values": [
+        0.56,
+        0.64,
+        0.36,
+        0.01,
+        0.19
+       ]
+      }
+     ],
+     "y_label": "localization accuracy",
+     "y_format": "number",
+     "note": "On single-slip chains (exactly one error = one well-posed origin, n=137), does the lowest-confidence step pinpoint the slip? The position-controlled DE-TRENDED confidence localizes it at 0.56 (raw confidence 0.64), ~3x the uniform 1/depth baseline (0.19) and clearly beating a position-prior baseline (guess the highest-error position, 0.36) and always-guess-last-step (0.01). So confidence carries genuine WHERE-information beyond position. Deployable: redo the chain from the located step (oracle-downstream) fixes 56% of single-slip chains at avg 3.8 steps vs 5.6 for redo-all -- cheaper targeted repair. Caveat: on MULTI-slip chains (n=224) the argmin finds AN error 76% of the time but the FIRST only 27% (several low-confidence steps compete), so the clean single-origin/repair story holds when the model slips once."
+    }
+   ]
   }
  }
 }

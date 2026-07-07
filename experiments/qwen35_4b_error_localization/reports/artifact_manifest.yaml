@@ -1,0 +1,9 @@
+schema_version: 1
+experiment_id: "qwen35_4b_error_localization"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python scripts/eval_localize.py --n-per-cond 25"
+  full_command: "eval_localize.py --n-per-cond 150; analyze.py"
+  required_external_artifacts: []
+notes: "Verdict (C42): per-step confidence localizes the first slip (single-slip localization 0.56 de-trended >> position-prior 0.36; dip at offset 0), surviving de-trending. Scaffolded decoding (force Step i: <digit>). Execute-mode familiar-order arithmetic slips (novel/reversal collapse to systematic wrong-rule under forced scaffold). Repair is oracle-downstream (greedy re-try is a no-op). Multi-slip first-error pinpointing weak (0.27). Single seed."

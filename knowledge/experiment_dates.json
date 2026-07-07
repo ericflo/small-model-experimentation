@@ -268,6 +268,14 @@
     "configs/experiment.json:3 '\"date\": \"2026-06-27\"'"
    ]
   },
+  "qwen35_4b_confidence_guided_compute": {
+   "start": "2026-07-07",
+   "end": "2026-07-07",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_constrained_coverage_dpo": {
    "start": "2026-06-26",
    "end": "2026-06-26",

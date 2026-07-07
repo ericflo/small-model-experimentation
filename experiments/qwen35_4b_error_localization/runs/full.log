@@ -1,0 +1,7 @@
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:11,  5.97it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:02, 186.68it/s]Loading weights:  20%|█▉        | 85/426 [00:00<00:01, 273.93it/s]Loading weights:  30%|███       | 128/426 [00:00<00:00, 327.71it/s]Loading weights:  39%|███▉      | 168/426 [00:00<00:00, 349.04it/s]Loading weights:  48%|████▊     | 205/426 [00:00<00:00, 352.49it/s]Loading weights:  59%|█████▉    | 252/426 [00:00<00:00, 386.18it/s]Loading weights:  69%|██████▉   | 293/426 [00:00<00:00, 387.76it/s]Loading weights:  80%|███████▉  | 339/426 [00:00<00:00, 406.78it/s]Loading weights:  89%|████████▉ | 381/426 [00:01<00:00, 398.46it/s]Loading weights:  99%|█████████▉| 422/426 [00:01<00:00, 365.51it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 341.64it/s]
+[loc] 600 chains | per-step local-correct=0.69 | final-correct=0.44
+   familiar d4: final-correct=0.54 has-error=0.51
+   familiar d5: final-correct=0.47 has-error=0.57
+   familiar d6: final-correct=0.43 has-error=0.63
+   familiar d7: final-correct=0.32 has-error=0.70
+[loc] wrote runs/localize.json

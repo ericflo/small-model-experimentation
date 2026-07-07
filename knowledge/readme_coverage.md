@@ -64,6 +64,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_depth_scaling_controls` | [README](../experiments/qwen35_4b_depth_scaling_controls/README.md) | [report](../experiments/qwen35_4b_depth_scaling_controls/reports/report.md) |
 | `qwen35_4b_depth_wall_anatomy` | [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md) | [report](../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md) | [report](../experiments/qwen35_4b_diversity_keyed_coverage_gate/reports/qwen35_4b_diversity_keyed_coverage_gate_report.md) |
+| `qwen35_4b_error_localization` | [README](../experiments/qwen35_4b_error_localization/README.md) | [report](../experiments/qwen35_4b_error_localization/reports/report.md) |
 | `qwen35_4b_executable_program_posttraining` | [README](../experiments/qwen35_4b_executable_program_posttraining/README.md) | [report](../experiments/qwen35_4b_executable_program_posttraining/reports/qwen35_4b_executable_program_posttraining_report.md) |
 | `qwen35_4b_foofah_adaptive_program_budget_router` | [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md) | [report](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/reports/report.md) |
 | `qwen35_4b_foofah_direct_vs_abi` | [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md) | [report](../experiments/qwen35_4b_foofah_direct_vs_abi/reports/report.md) |

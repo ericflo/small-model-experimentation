@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 164
-- Manifest files: 460
+- Experiments with manifests: 165
+- Manifest files: 461
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 37 |
+| `standard-artifact` | 38 |
 
 ## Manifests
 
@@ -90,6 +90,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_diversity_keyed_coverage_gate` | `run-data` | [manifest](../experiments/qwen35_4b_diversity_keyed_coverage_gate/data/main_union_k32_repair_records.manifest.json) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | `run-data` | [manifest](../experiments/qwen35_4b_diversity_keyed_coverage_gate/data/smoke_base_k4_records.manifest.json) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | `run-data` | [manifest](../experiments/qwen35_4b_diversity_keyed_coverage_gate/data/smoke_hot_extra_records.manifest.json) |
+| `qwen35_4b_error_localization` | `standard-artifact` | [manifest](../experiments/qwen35_4b_error_localization/reports/artifact_manifest.yaml) |
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/and_bridge/dataset_manifest.json) |
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/dataset_manifest.json) |
 | `qwen35_4b_executable_program_posttraining` | `large-artifact` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/large_artifacts_manifest.md) |

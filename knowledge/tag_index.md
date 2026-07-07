@@ -486,6 +486,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_depth_scaling_controls` (new): [README](../experiments/qwen35_4b_depth_scaling_controls/README.md)
 - `qwen35_4b_depth_wall_anatomy` (new): [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md)
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
+- `qwen35_4b_error_localization` (new): [README](../experiments/qwen35_4b_error_localization/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
 - `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
 - `qwen35_4b_foofah_direct_vs_abi` (track-z): [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md)

@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 41
+- Claims: 42
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 32 |
+| Promising | 33 |
 
 ## Program Counts
 
@@ -19,7 +19,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 6 |
+| `benchmark_generalization` | 7 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 8 |
@@ -980,3 +980,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not use self-consistency (majority vote) as the selection method for this model: it is FLAT across budgets because the model's mode is often confidently wrong (natural-successor intrusion etc.). Use argmax per-sample P(answer).
 - Single toy substrate (successor task); the confidence signal is a single digit's P(answer). Real code needs a program-level confidence (sequence-logprob / execution-clustering / P(True)) -- untested here.
 - Single seed; the design-review agent died (API error) so the design was self-vetted against C10/C17. Novel bit vs C17 is verification-FREE selection (logit, no execution) beating self-consistency.
+
+## C42: The model can localize its own errors: per-step confidence dips exactly at the first slip (surviving de-trending), enabling targeted repair -- C40's metacognition is step-resolved
+
+- Status: `Promising`
+- Programs: `benchmark_generalization`
+- Summary: Experiment qwen35_4b_error_localization. Extends C40 (single-step implicit metacognition) to MULTI-step. The model advances k steps in a cyclic order over depth-4-7 chains via SCAFFOLDED decoding (force 'Step i: <digit>', read the digit distribution at each step = live per-step commitment confidence). Ground truth = LOCAL correctness (m_i == successor of the model's OWN previous m_{i-1}); first local error = origin. Familiar (natural) order -> genuine arithmetic SLIPS ~31%/step (novel/reversal dropped: forced-scaffold -> systematic wrong-rule, no single origin -- review's failure case). MAKE-OR-BREAK CONTROL = de-trending: confidence RISES with position (0.66->0.96), so localization must survive subtracting the per-position mean. RESULTS (600 chains): (1) per-step error prediction survives de-trending (AUROC 0.75 detrended vs 0.73 raw). (2) THE DIP IS AT THE ORIGIN: mean de-trended confidence by offset-from-first-error is minimized EXACTLY at offset 0 (-0.15), high just before (+0.23 at -2), recovering after. (3) Localization on single-slip chains (n=137): de-trended-residual argmin hits the slip 0.56 (raw 0.64) vs position-prior 0.36 vs uniform 0.19 vs always-last 0.01. (4) Repair (oracle-downstream, redo from located step) fixes 0.56 of single-slip chains at avg 3.8 steps vs redo-all 5.6. CAVEAT: multi-slip chains (n=224) -- argmin finds AN error 0.76 but the FIRST only 0.27.
+- Implication: C40's implicit metacognition is STEP-RESOLVED: the per-step confidence carries WHERE the model slipped, not just THAT it did. The confidence dip sits at the ORIGIN of the error (offset 0), controlling for position -- so it is genuine localization, not position-decay. Deployable: read per-step confidence to find the first slip and re-do just from there (targeted repair, cheaper than redo-all), strongest when the model slips once. Extends the C40->C41 confidence thread from single-answer to multi-step reasoning (the arc's home turf). Combined with C41 (confidence-select), a deployable loop: localize the low-confidence step, re-sample it, keep the high-confidence fix.
+
+### Evidence
+
+- [`qwen35_4b_error_localization`](../../experiments/qwen35_4b_error_localization/reports/report.md)
+
+### Next Tests
+
+- Model-downstream repair with TEMPERATURE re-sampling at the located step (greedy re-try is a no-op) + best-of-n by confidence -- does the deployable repair (not oracle) actually fix chains?
+- Reduce multi-slip via shallower chains / easier k to raise single-slip dominance; or a sequential localizer (find+fix first error, re-run, repeat) for multi-slip chains.
+- Does localization hold on a non-arithmetic multi-step task (e.g. multi-hop language reasoning C37) -- is step-resolved confidence general or arithmetic-specific?
+
+### Avoid
+
+- Do not report raw pooled AUROC or raw-confidence localization as the headline: confidence RISES with position, so you MUST de-trend (subtract per-position mean). The position-controlled numbers (AUROC 0.75, single-slip localization 0.56) are the claim.
+- Do not use INDUCE-mode or scrambled/novel orders under forced-scaffold: the model applies a systematic WRONG rule -> every step locally-wrong, no single origin to localize (the premise collapses). Use EXECUTE-mode familiar order (genuine slips).
+- Do not claim clean first-error localization on MULTI-slip chains: argmin finds AN error 0.76 but the FIRST only 0.27. The single-origin/repair story holds for single-slip chains (38% of error-chains).
+- Greedy re-sampling for repair is a NO-OP (reproduces the same wrong digit); the reported repair is oracle-downstream (isolates 'found the right origin'). Deployable model-downstream repair needs temperature. Single seed; execute-mode arithmetic slips only.
