@@ -9,6 +9,7 @@
 - Regenerates and validates the future experiment queue so every program keeps a launchpad for new work.
 - Regenerates the structured claim index and verifies claim references.
 - Validates experiment, program, artifact, and adapter invariants.
+- Enforces the benchmarks firewall: no Python file under experiments/ may import or reference benchmark family internals — held-out suites are run-only (see benchmarks/README.md).
 - Validates standard artifact-manifest presence for new experiments and documentation for local adapter directories.
 - Compiles repository maintenance scripts without writing cache files.
 - Keeps the related-work discovery script available for idea routing.
