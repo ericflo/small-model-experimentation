@@ -1,0 +1,11 @@
+{
+ "tag": "rand",
+ "n_candidates": 777,
+ "n_correct": 47,
+ "auroc_pooled": 0.896,
+ "auroc_within_mean": 0.8,
+ "n_mixed_tasks": 17,
+ "mean_p_true": 0.287,
+ "mean_p_true_correct": 0.671,
+ "mean_p_true_incorrect": 0.263
+}

@@ -10542,6 +10542,32 @@
      "chart_takeaway": "The one-token self-judge score beats the other no-test selectors and lands close to the best possible pick among the 8 attempts."
     }
    ]
+  },
+  "qwen35_4b_verifier_free_banking": {
+   "verdict_tag": "Confidence can judge, but cannot feed the training loop",
+   "concept_primer": "Earlier work built a self-training loop: the model solves practice tasks, a code-runner checks which solutions are right, and the model is fine-tuned on its own verified wins. Separately, the model can score its own answers by reading the probability of a one-token 'this is correct' verdict. This experiment asks whether that self-score can replace the code-runner inside the training loop, which would let self-training work in domains where nothing can be executed.",
+   "plain_question": "Can the model's own confidence score replace the code-runner that filters its practice solutions before fine-tuning?",
+   "plain_answer": "No for training, yes for judging. First, the instant one-token score cannot even tell right from wrong solutions here unless the model thinks step-by-step before scoring (instant: coin-flip; with thinking: strong). Second, even with the strong thinking-based filter, fine-tuning on confidence-picked solutions helped exactly as little as fine-tuning on unfiltered ones -- only the code-runner-verified set taught anything, and even its gain was small because 70 examples is simply too few. The good news: the judge itself is not damaged by self-training -- a model fine-tuned on its own approved answers still ranks right above wrong just as well, though its raw scores drift upward on its own mistakes.",
+   "why_it_matters": "It locates exactly where a real verifier is irreplaceable: filtering training data. For picking answers at inference time, the model's own (thinking-based) score works and even survives repeated self-training if you keep the top-ranked answers rather than everything above a fixed score cutoff, which silently rots as scores inflate.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "instant vs thinking self-score, telling right from wrong within a task (AUROC)",
+     "value": "0.47 (chance) vs 0.85"
+    },
+    {
+     "label": "depth-2 single-shot after fine-tuning: verified vs confidence-picked vs unfiltered data",
+     "value": "0.24 vs 0.12 vs 0.12 (base 0.08)"
+    },
+    {
+     "label": "judge quality after self-training on its own approvals (fixed candidates)",
+     "value": "0.872 -> 0.883 (intact)"
+    },
+    {
+     "label": "score inflation on its own wrong answers after self-training",
+     "value": "0.09 -> 0.20 (doubled)"
+    }
+   ]
   }
  }
 }

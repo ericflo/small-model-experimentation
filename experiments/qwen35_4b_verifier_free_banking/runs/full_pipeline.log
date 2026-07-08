@@ -1,0 +1,311 @@
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/judge_pool_think.py
+[poolthink] 2130/2130 candidates to think-judge (budget 512)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[poolthink] done: 2130 judged, forced-close rate 0.99 [2911s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/build_arms.py
+{
+ "score_key": "p_true_think",
+ "gate": {
+  "pool_n": 2130,
+  "pool_pass_rate": 0.033,
+  "pool_auroc_pooled": 0.961,
+  "pool_auroc_within_mean": 0.845,
+  "n_mixed_tasks": 20,
+  "n_pairs": 70,
+  "score_by_depth": {
+   "1": 0.363,
+   "2": 0.097,
+   "3": 0.069
+  },
+  "quota_conf_strat": {
+   "1": 15,
+   "2": 30,
+   "3": 25
+  },
+  "exec_conf_strat_jaccard": 0.273
+ },
+ "exec": {
+  "n_pairs": 70,
+  "purity_full_pass": 1.0,
+  "visible_pass_rate": 1.0,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 43,
+   "2": 20,
+   "3": 7
+  },
+  "mean_score": 0.611,
+  "min_score_kept": 0.014,
+  "mean_p_true_nothink": 0.476,
+  "mean_freq": 10.7
+ },
+ "conf_strat": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.429,
+  "visible_pass_rate": 0.429,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 15,
+   "2": 30,
+   "3": 25
+  },
+  "mean_score": 0.69,
+  "min_score_kept": 0.392,
+  "mean_p_true_nothink": 0.632,
+  "mean_freq": 6.3
+ },
+ "conf_global": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.614,
+  "visible_pass_rate": 0.614,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 36,
+   "2": 29,
+   "3": 5
+  },
+  "mean_score": 0.753,
+  "min_score_kept": 0.523,
+  "mean_p_true_nothink": 0.641,
+  "mean_freq": 8.9
+ },
+ "rand": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.029,
+  "visible_pass_rate": 0.029,
+  "distinct_tasks": 42,
+  "depth_mix": {
+   "3": 34,
+   "2": 29,
+   "1": 7
+  },
+  "mean_score": 0.107,
+  "min_score_kept": 0.0,
+  "mean_p_true_nothink": 0.235,
+  "mean_freq": 1.0
+ }
+}
+wrote data/train_{exec,conf_strat,conf_global,rand}.jsonl (70 pairs each)
+
+[GATE] PASS: pool AUROC 0.961 >= 0.65 | PASS: conf_strat-rand purity gap 0.400 >= 0.10 | PASS: n_pairs 70 >= 60
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/train_lora.py --train data/train_exec.jsonl --out runs/lora_exec
+training on 70 verified (prompt->code) pairs
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+{'loss': '0.2986', 'grad_norm': '1.454', 'learning_rate': '0.0001935', 'epoch': '0.5714'}
+{'loss': '0.1834', 'grad_norm': '0.6938', 'learning_rate': '0.0001568', 'epoch': '1.114'}
+{'loss': '0.1608', 'grad_norm': '3.974', 'learning_rate': '0.0001', 'epoch': '1.686'}
+{'loss': '0.1116', 'grad_norm': '0.4307', 'learning_rate': '4.319e-05', 'epoch': '2.229'}
+{'loss': '0.07411', 'grad_norm': '0.7904', 'learning_rate': '6.498e-06', 'epoch': '2.8'}
+{'train_runtime': '186.8', 'train_samples_per_second': '1.124', 'train_steps_per_second': '0.145', 'train_loss': '0.1624', 'epoch': '3'}
+saved adapter to runs/lora_exec
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/train_lora.py --train data/train_conf_strat.jsonl --out runs/lora_conf_strat
+training on 70 verified (prompt->code) pairs
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+{'loss': '0.2215', 'grad_norm': '0.8135', 'learning_rate': '0.0001935', 'epoch': '0.5714'}
+{'loss': '0.1448', 'grad_norm': '0.7408', 'learning_rate': '0.0001568', 'epoch': '1.114'}
+{'loss': '0.1177', 'grad_norm': '0.7847', 'learning_rate': '0.0001', 'epoch': '1.686'}
+{'loss': '0.09304', 'grad_norm': '0.5043', 'learning_rate': '4.319e-05', 'epoch': '2.229'}
+{'loss': '0.05384', 'grad_norm': '0.3832', 'learning_rate': '6.498e-06', 'epoch': '2.8'}
+{'train_runtime': '173.4', 'train_samples_per_second': '1.211', 'train_steps_per_second': '0.156', 'train_loss': '0.1221', 'epoch': '3'}
+saved adapter to runs/lora_conf_strat
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/train_lora.py --train data/train_conf_global.jsonl --out runs/lora_conf_global
+training on 70 verified (prompt->code) pairs
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+{'loss': '0.1966', 'grad_norm': '2.257', 'learning_rate': '0.0001935', 'epoch': '0.5714'}
+{'loss': '0.1889', 'grad_norm': '0.7455', 'learning_rate': '0.0001568', 'epoch': '1.114'}
+{'loss': '0.08462', 'grad_norm': '0.3422', 'learning_rate': '0.0001', 'epoch': '1.686'}
+{'loss': '0.1128', 'grad_norm': '0.5305', 'learning_rate': '4.319e-05', 'epoch': '2.229'}
+{'loss': '0.06686', 'grad_norm': '0.4451', 'learning_rate': '6.498e-06', 'epoch': '2.8'}
+{'train_runtime': '177.5', 'train_samples_per_second': '1.183', 'train_steps_per_second': '0.152', 'train_loss': '0.1239', 'epoch': '3'}
+saved adapter to runs/lora_conf_global
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/train_lora.py --train data/train_rand.jsonl --out runs/lora_rand
+training on 70 verified (prompt->code) pairs
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+{'loss': '0.3108', 'grad_norm': '0.7796', 'learning_rate': '0.0001935', 'epoch': '0.5714'}
+{'loss': '0.2478', 'grad_norm': '0.5306', 'learning_rate': '0.0001568', 'epoch': '1.114'}
+{'loss': '0.1465', 'grad_norm': '0.4868', 'learning_rate': '0.0001', 'epoch': '1.686'}
+{'loss': '0.1268', 'grad_norm': '0.588', 'learning_rate': '4.319e-05', 'epoch': '2.229'}
+{'loss': '0.08394', 'grad_norm': '0.9426', 'learning_rate': '6.498e-06', 'epoch': '2.8'}
+{'train_runtime': '178.1', 'train_samples_per_second': '1.179', 'train_steps_per_second': '0.152', 'train_loss': '0.1766', 'epoch': '3'}
+saved adapter to runs/lora_rand
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag base_nothink --K 16 --n-per-depth 25 --depths 1 2 3
+[base_nothink] generated 75 FROZEN eval tasks (dedup vs 74 train rules by function-signature AND op-composition; 0 leakage by construction) -> eval_frozen.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[base_nothink] generation done [763s]
+
+=== base_nothink (no-think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.24     5.0/16  11.6
+    2  25      0.00     0.3/16  14.8
+    3  25      0.04     0.0/16  14.1
+wrote runs/eval_base_nothink.json [801s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag base_think --K 16 --n-per-depth 25 --depths 1 2 3 --think
+[base_think] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[base_think] generation done [2383s]
+
+=== base_think (think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.56     8.3/16   7.7
+    2  25      0.08     1.1/16  12.5
+    3  25      0.00     0.0/16  12.5
+wrote runs/eval_base_think.json [2412s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag exec_nothink --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_exec
+[exec_nothink] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[exec_nothink] loaded adapter runs/lora_exec
+[exec_nothink] generation done [572s]
+
+=== exec_nothink (no-think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.28     4.6/16   5.9
+    2  25      0.00     0.4/16   9.4
+    3  25      0.00     0.0/16   9.2
+wrote runs/eval_exec_nothink.json [593s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag exec_think --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_exec --think
+[exec_think] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[exec_think] loaded adapter runs/lora_exec
+[exec_think] generation done [2861s]
+
+=== exec_think (think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.44     7.4/16   7.8
+    2  25      0.24     1.7/16  11.9
+    3  25      0.00     0.1/16  12.4
+wrote runs/eval_exec_think.json [2891s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag conf_strat_nothink --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_conf_strat
+[conf_strat_nothink] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[conf_strat_nothink] loaded adapter runs/lora_conf_strat
+[conf_strat_nothink] generation done [675s]
+
+=== conf_strat_nothink (no-think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.28     5.2/16   6.6
+    2  25      0.00     0.4/16  10.4
+    3  25      0.00     0.0/16   9.8
+wrote runs/eval_conf_strat_nothink.json [699s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag conf_strat_think --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_conf_strat --think
+[conf_strat_think] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[conf_strat_think] loaded adapter runs/lora_conf_strat
+[conf_strat_think] generation done [2975s]
+
+=== conf_strat_think (think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.56     8.8/16   8.1
+    2  25      0.12     1.2/16  12.4
+    3  25      0.00     0.0/16  13.8
+wrote runs/eval_conf_strat_think.json [3006s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag conf_global_nothink --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_conf_global
+[conf_global_nothink] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[conf_global_nothink] loaded adapter runs/lora_conf_global
+[conf_global_nothink] generation done [437s]
+
+=== conf_global_nothink (no-think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.24     4.2/16   5.6
+    2  25      0.00     0.1/16   8.4
+    3  25      0.00     0.0/16   8.1
+wrote runs/eval_conf_global_nothink.json [455s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag rand_nothink --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_rand
+[rand_nothink] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[rand_nothink] loaded adapter runs/lora_rand
+[rand_nothink] generation done [912s]
+
+=== rand_nothink (no-think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.36     4.3/16   7.8
+    2  25      0.04     0.7/16   9.4
+    3  25      0.00     0.0/16   9.6
+wrote runs/eval_rand_nothink.json [938s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/eval_ladder.py --tag rand_think --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_rand --think
+[rand_think] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[rand_think] loaded adapter runs/lora_rand
+[rand_think] generation done [2870s]
+
+=== rand_think (think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.44     7.1/16   9.0
+    2  25      0.12     1.2/16  12.8
+    3  25      0.00     0.0/16  13.6
+wrote runs/eval_rand_think.json [2902s]
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag base
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] built judge set: 777 candidates, pass-rate 0.06 [544s]
+{"tag": "base", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.879, "auroc_within_mean": 0.679, "n_mixed_tasks": 17, "mean_p_true": 0.239, "mean_p_true_correct": 0.608, "mean_p_true_incorrect": 0.215}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag base --think-judge
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{"tag": "base", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.961, "auroc_within_mean": 0.872, "n_mixed_tasks": 17, "mean_p_true": 0.129, "mean_p_true_correct": 0.613, "mean_p_true_incorrect": 0.098, "forced_close_rate": 0.996}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag base --self-dist --think-judge
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib:self] 451 own candidates, pass-rate 0.12 [1079s]
+{"tag": "base", "n_candidates": 451, "n_correct": 54, "auroc_pooled": 0.93, "auroc_within_mean": 0.842, "n_mixed_tasks": 24, "mean_p_true": 0.144, "mean_p_true_correct": 0.539, "mean_p_true_incorrect": 0.091, "forced_close_rate": 1.0, "self_pass_rate": 0.12}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag exec --adapter runs/lora_exec
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] loaded adapter runs/lora_exec
+{"tag": "exec", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.887, "auroc_within_mean": 0.815, "n_mixed_tasks": 17, "mean_p_true": 0.308, "mean_p_true_correct": 0.654, "mean_p_true_incorrect": 0.285}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag exec --think-judge --adapter runs/lora_exec
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] loaded adapter runs/lora_exec
+{"tag": "exec", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.962, "auroc_within_mean": 0.873, "n_mixed_tasks": 17, "mean_p_true": 0.183, "mean_p_true_correct": 0.708, "mean_p_true_incorrect": 0.149, "forced_close_rate": 0.99}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag conf_strat --adapter runs/lora_conf_strat
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] loaded adapter runs/lora_conf_strat
+{"tag": "conf_strat", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.866, "auroc_within_mean": 0.792, "n_mixed_tasks": 17, "mean_p_true": 0.313, "mean_p_true_correct": 0.651, "mean_p_true_incorrect": 0.291}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag conf_strat --think-judge --adapter runs/lora_conf_strat
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] loaded adapter runs/lora_conf_strat
+{"tag": "conf_strat", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.957, "auroc_within_mean": 0.883, "n_mixed_tasks": 17, "mean_p_true": 0.174, "mean_p_true_correct": 0.682, "mean_p_true_incorrect": 0.141, "forced_close_rate": 0.99}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag conf_strat --self-dist --think-judge --adapter runs/lora_conf_strat
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] loaded adapter runs/lora_conf_strat
+[calib:self] 472 own candidates, pass-rate 0.09 [1330s]
+{"tag": "conf_strat", "n_candidates": 472, "n_correct": 44, "auroc_pooled": 0.923, "auroc_within_mean": 0.878, "n_mixed_tasks": 18, "mean_p_true": 0.249, "mean_p_true_correct": 0.686, "mean_p_true_incorrect": 0.204, "forced_close_rate": 0.992, "self_pass_rate": 0.093}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag conf_global --adapter runs/lora_conf_global
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] loaded adapter runs/lora_conf_global
+{"tag": "conf_global", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.878, "auroc_within_mean": 0.713, "n_mixed_tasks": 17, "mean_p_true": 0.325, "mean_p_true_correct": 0.679, "mean_p_true_incorrect": 0.302}
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/calib_eval.py --tag rand --adapter runs/lora_rand
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[calib] loaded adapter runs/lora_rand
+{"tag": "rand", "n_candidates": 777, "n_correct": 47, "auroc_pooled": 0.896, "auroc_within_mean": 0.8, "n_mixed_tasks": 17, "mean_p_true": 0.287, "mean_p_true_correct": 0.671, "mean_p_true_incorrect": 0.263}
+
+PIPELINE COMPLETE -- run analyze.py

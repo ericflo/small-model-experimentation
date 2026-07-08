@@ -1,0 +1,11 @@
+{
+ "tag": "conf_global",
+ "n_candidates": 777,
+ "n_correct": 47,
+ "auroc_pooled": 0.878,
+ "auroc_within_mean": 0.713,
+ "n_mixed_tasks": 17,
+ "mean_p_true": 0.325,
+ "mean_p_true_correct": 0.679,
+ "mean_p_true_incorrect": 0.302
+}

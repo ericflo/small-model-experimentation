@@ -1,0 +1,11 @@
+{
+ "tag": "smconf",
+ "n_candidates": 14,
+ "n_correct": 3,
+ "auroc_pooled": 0.909,
+ "auroc_within_mean": 0.0,
+ "n_mixed_tasks": 1,
+ "mean_p_true": 0.321,
+ "mean_p_true_correct": 0.767,
+ "mean_p_true_incorrect": 0.199
+}

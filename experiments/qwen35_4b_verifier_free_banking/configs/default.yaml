@@ -1,0 +1,28 @@
+# Pipeline constants (single source of truth for the README; scripts carry these as CLI defaults)
+harvest:
+  depth_tasks: {1: 20, 2: 35, 3: 35}   # C18-identical
+  K: 40
+  think_budget: 512
+  seed: 101
+arms:
+  cap_per_task: 12
+  rand_seed: 202                        # rand arm: draw-frequency-weighted (Efraimidis-Spirakis)
+  conf_strat_quota: judge-score-mass  # per-depth quotas from pool think-P(True) mass (attempt-2 pivot; counts allocate slots where wrong candidates explode)
+gate:                                   # run.py hard gate after build_arms
+  pool_auroc_min: 0.65
+  purity_gap_min: 0.10                  # conf_strat - rand
+  n_pairs_min: 60
+train:                                  # C18-identical, all arms
+  rank: 32
+  alpha: 64
+  epochs: 3.0
+  lr: 2.0e-4
+eval:
+  n_per_depth: 25
+  depths: [1, 2, 3]                     # no depth-4 (C18 comparability cell dropped deliberately)
+  K: 16
+  think_budget: 512
+  think_arms: [base, exec, conf_strat, rand]   # conf_global is a nothink-only ablation
+calib:
+  judge_set_K: 12                       # base no-think samples on frozen eval tasks (fixed judge set)
+  self_K: 8                             # self-distribution pass: own think-mode candidates

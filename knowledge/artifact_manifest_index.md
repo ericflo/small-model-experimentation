@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 168
-- Manifest files: 464
+- Experiments with manifests: 169
+- Manifest files: 465
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 41 |
+| `standard-artifact` | 42 |
 
 ## Manifests
 
@@ -242,6 +242,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_verified_algorithm_retrieval_adaptation` | `large-artifact` | [manifest](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/large_artifacts_manifest.md) |
 | `qwen35_4b_verified_edit_closure` | `dataset` | [manifest](../experiments/qwen35_4b_verified_edit_closure/data/dataset_manifest.json) |
 | `qwen35_4b_verified_edit_closure` | `large-artifact` | [manifest](../experiments/qwen35_4b_verified_edit_closure/large_artifacts_manifest.md) |
+| `qwen35_4b_verifier_free_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verifier_free_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_heldout_records.manifest.json) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_train_records.manifest.json) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_transfer_records.manifest.json) |

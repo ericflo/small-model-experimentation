@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 196
-- Anchor-ready: 181
-- Human-authored READMEs: 183
+- Experiments: 197
+- Anchor-ready: 182
+- Human-authored READMEs: 184
 - Generated README stubs: 13
-- Primary reports: 196
-- Experiment logs: 100
-- Smoke commands: 65
-- Artifact manifests: 168
+- Primary reports: 197
+- Experiment logs: 101
+- Smoke commands: 66
+- Artifact manifests: 169
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 85 |
+| `documented-scripts` | 86 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -147,6 +147,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_unsaturated_frontier_active_bridge`](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md) | active_evidence_acquisition, benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/reports/qwen35_4b_unsaturated_frontier_active_bridge_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_verified_algorithm_retrieval_adaptation`](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/reports/final_report.md) | no | `documented-scripts` | no | large-artifact, run-data | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_verified_edit_closure`](../experiments/qwen35_4b_verified_edit_closure/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_verified_edit_closure/reports/qwen35_4b_verified_edit_closure_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
+| yes | [`qwen35_4b_verifier_free_banking`](../experiments/qwen35_4b_verifier_free_banking/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_verifier_free_banking/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | no | [`qwen35_4b_verifier_guided_self_improvement`](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, reliability_and_safety | `generated-stub` | [report](../experiments/qwen35_4b_verifier_guided_self_improvement/reports/qwen35_4b_verifier_guided_self_improvement_report.md) | no | `scripts-undocumented` | yes | run-data | replace-generated-readme, add-experiment-log, document-run-path |
 | yes | [`qwen35_4b_verifier_selector_showdown`](../experiments/qwen35_4b_verifier_selector_showdown/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_verifier_selector_showdown/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_wall_climbing`](../experiments/qwen35_4b_wall_climbing/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_wall_climbing/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

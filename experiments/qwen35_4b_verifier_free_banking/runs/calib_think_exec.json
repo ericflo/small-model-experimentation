@@ -1,0 +1,12 @@
+{
+ "tag": "exec",
+ "n_candidates": 777,
+ "n_correct": 47,
+ "auroc_pooled": 0.962,
+ "auroc_within_mean": 0.873,
+ "n_mixed_tasks": 17,
+ "mean_p_true": 0.183,
+ "mean_p_true_correct": 0.708,
+ "mean_p_true_incorrect": 0.149,
+ "forced_close_rate": 0.99
+}

@@ -1,0 +1,11 @@
+[conf_global_think] loaded 75 FROZEN eval tasks from eval_frozen.jsonl (paired) | leakage vs train: 0 func-sig, 0 op-composition (must be 0)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[conf_global_think] loaded adapter runs/lora_conf_global
+[conf_global_think] generation done [2825s]
+
+=== conf_global_think (think) ===
+depth   n  greedy@1  cov_full/K  uniq
+    1  25      0.48     6.6/16   8.6
+    2  25      0.04     1.0/16  12.3
+    3  25      0.00     0.0/16  12.5
+wrote runs/eval_conf_global_think.json [2853s]

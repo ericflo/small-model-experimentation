@@ -1,0 +1,87 @@
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/harvest_pool.py
+[pool] 90 train tasks, K=40
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[pool] sampling done [6208s]
+[pool] graded 2130 unique [6280s]
+[pool] judged 2130 unique [6357s]
+[pool] 2130 candidates | pass-rate 0.03 | solved tasks 31/90 | CANARY pooled AUROC P(True) vs full_pass = 0.749 | by (depth,pass): {(1, True): 43, (1, False): 79, (2, False): 915, (2, True): 20, (3, False): 1066, (3, True): 7}
+wrote data/pool.jsonl
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/build_arms.py
+{
+ "gate": {
+  "pool_n": 2130,
+  "pool_pass_rate": 0.033,
+  "pool_auroc_pooled": 0.749,
+  "pool_auroc_within_mean": 0.471,
+  "n_mixed_tasks": 20,
+  "n_pairs": 70,
+  "p_true_by_depth": {
+   "1": 0.382,
+   "2": 0.254,
+   "3": 0.203
+  },
+  "exec_conf_strat_jaccard": 0.053
+ },
+ "exec": {
+  "n_pairs": 70,
+  "purity_full_pass": 1.0,
+  "visible_pass_rate": 1.0,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 43,
+   "2": 20,
+   "3": 7
+  },
+  "mean_p_true": 0.476,
+  "min_p_true_kept": 0.039,
+  "mean_freq": 10.7
+ },
+ "conf_strat": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.1,
+  "visible_pass_rate": 0.1,
+  "distinct_tasks": 26,
+  "depth_mix": {
+   "1": 4,
+   "2": 31,
+   "3": 35
+  },
+  "mean_p_true": 0.777,
+  "min_p_true_kept": 0.637,
+  "mean_freq": 2.8
+ },
+ "conf_global": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.243,
+  "visible_pass_rate": 0.243,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 16,
+   "2": 34,
+   "3": 20
+  },
+  "mean_p_true": 0.816,
+  "min_p_true_kept": 0.699,
+  "mean_freq": 5.9
+ },
+ "rand": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.029,
+  "visible_pass_rate": 0.029,
+  "distinct_tasks": 42,
+  "depth_mix": {
+   "3": 34,
+   "2": 29,
+   "1": 7
+  },
+  "mean_p_true": 0.235,
+  "min_p_true_kept": 0.003,
+  "mean_freq": 1.0
+ }
+}
+wrote data/train_{exec,conf_strat,conf_global,rand}.jsonl (70 pairs each)
+
+[GATE] PASS: pool AUROC 0.749 >= 0.65 | FAIL: conf_strat-rand purity gap 0.071 >= 0.10 | PASS: n_pairs 70 >= 60
+GATE FAILED -- the informative negative is 'P(True) judge does not transfer to this substrate / pool too weak'. Document it; do not burn training+evals. (--force to override.)

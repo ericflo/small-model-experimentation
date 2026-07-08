@@ -4320,6 +4320,49 @@
   },
   {
     "file_counts": {
+      ".json": 29,
+      ".jsonl": 17,
+      ".log": 5,
+      ".md": 6,
+      ".png": 1,
+      ".py": 14,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-08",
+    "id": "qwen35_4b_verifier_free_banking",
+    "path": "experiments/qwen35_4b_verifier_free_banking",
+    "primary_readme": "experiments/qwen35_4b_verifier_free_banking/README.md",
+    "primary_report": "experiments/qwen35_4b_verifier_free_banking/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Does banking the model's own **high-P(True)** solutions \u2014 with NO execution anywhere in the training pipeline \u2014 recover the capability gain of banking **execution-verified** solutions? And does the calibration signal itself SURVIVE being trained on (flywheel viability), or does self-training inflate P(True) / collapse the judge?",
+    "tags": [
+      "abi",
+      "execution",
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B: Can Confidence Replace the Verifier in the Banking Flywheel?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 75,
+    "total_size_bytes": 2408488
+  },
+  {
+    "file_counts": {
       ".csv": 2,
       ".json": 64,
       ".jsonl": 16,

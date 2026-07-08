@@ -276,14 +276,6 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
-  "qwen35_4b_humaneval_code_confidence": {
-   "start": "2026-07-08",
-   "end": "2026-07-08",
-   "confidence": "high",
-   "sources": [
-    "experiment_log.md dated 2026-07-08 and git history (post-import)"
-   ]
-  },
   "qwen35_4b_confidence_guided_compute": {
    "start": "2026-07-07",
    "end": "2026-07-07",
@@ -535,6 +527,14 @@
     "data/dataset_manifest.json: \"seed\": 20260625 (date-shaped seed; only date-bearing artifact in dir — logs/experiment_log.md and reports/eval/*.json are undated)"
    ],
    "caveat": "date-shaped seeds proven unreliable elsewhere (static_bridge seed 20260630 pre-existed the 2026-06-28 import); metadata.yaml 2026-07-01"
+  },
+  "qwen35_4b_humaneval_code_confidence": {
+   "start": "2026-07-08",
+   "end": "2026-07-08",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md dated 2026-07-08 and git history (post-import)"
+   ]
   },
   "qwen35_4b_icl_retrieval_vs_induction": {
    "start": "2026-07-07",
@@ -1005,6 +1005,14 @@
     "run_logs/*console.log: no timestamps or clock strings at all"
    ],
    "caveat": "configs/experiment.json \"seed\": 20260630 LOOKS like a run date but is impossible — the file was committed in the 2026-06-28 import (42c23ac), proving date-encoded seeds are not reliable run dates. Bound: ran on/before 2026-06-28."
+  },
+  "qwen35_4b_verifier_free_banking": {
+   "start": "2026-07-07",
+   "end": "2026-07-08",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
   },
   "qwen35_4b_verifier_guided_self_improvement": {
    "start": "2026-06-25",

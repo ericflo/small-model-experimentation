@@ -1,0 +1,45 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_verifier_free_banking"
+external_artifacts:
+  - name: "exec-arm QLoRA adapter (execution-verified ceiling)"
+    storage: "scratchpad/verifier_free_banking_artifacts/lora_exec (moved out of repo; 182MB > GitHub limit)"
+    required_for: "re-running exec-arm eval/calibration without retraining"
+    checksum: ""
+    regenerate: "python scripts/train_lora.py --train data/train_exec.jsonl --out runs/lora_exec"
+  - name: "conf_strat-arm QLoRA adapter (PRIMARY verifier-free arm)"
+    storage: "scratchpad/verifier_free_banking_artifacts/lora_conf_strat"
+    required_for: "re-running conf_strat eval/calibration (incl. self-distribution) without retraining"
+    checksum: ""
+    regenerate: "python scripts/train_lora.py --train data/train_conf_strat.jsonl --out runs/lora_conf_strat"
+  - name: "conf_global-arm QLoRA adapter (global top-score ablation)"
+    storage: "scratchpad/verifier_free_banking_artifacts/lora_conf_global"
+    required_for: "re-running conf_global eval/calibration without retraining"
+    checksum: ""
+    regenerate: "python scripts/train_lora.py --train data/train_conf_global.jsonl --out runs/lora_conf_global"
+  - name: "rand-arm QLoRA adapter (no-filter floor)"
+    storage: "scratchpad/verifier_free_banking_artifacts/lora_rand"
+    required_for: "re-running rand eval/calibration without retraining"
+    checksum: ""
+    regenerate: "python scripts/train_lora.py --train data/train_rand.jsonl --out runs/lora_rand"
+omitted_artifacts:
+  - path: "runs/lora_exec/"
+    reason: "trained QLoRA adapter (182MB, exceeds GitHub hard limit); regenerate from committed data/train_exec.jsonl"
+  - path: "runs/lora_conf_strat/"
+    reason: "trained QLoRA adapter (182MB); regenerate from committed data/train_conf_strat.jsonl"
+  - path: "runs/lora_conf_global/"
+    reason: "trained QLoRA adapter (182MB); regenerate from committed data/train_conf_global.jsonl"
+  - path: "runs/lora_rand/"
+    reason: "trained QLoRA adapter (182MB); regenerate from committed data/train_rand.jsonl"
+  - path: "runs/lora_smoke/"
+    reason: "smoke-run adapter (182MB); regenerate via python scripts/run.py --smoke"
+reproducibility:
+  smoke_command: "python scripts/run.py --smoke"
+  full_command: "python scripts/run.py && python scripts/eval_ladder.py --tag conf_global_think --K 16 --n-per-depth 25 --depths 1 2 3 --adapter runs/lora_conf_global --think && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "All training pairs, the shared judged pool (data/pool.jsonl with p_true + p_true_think), the frozen
+  eval set, the fixed judge set, and every eval/calibration JSON are committed -- adapters are the only
+  external artifacts and are fully regenerable from committed data (~3 min each on the RTX 4090; single
+  LoRA seed, so regenerated adapters reproduce the recipe, not bit-identical weights). The
+  conf_global_think eval in full_command is the registered-prediction test (report Result 6), run after
+  the main pipeline. Pipeline is idempotent; total ~12 h on an RTX 4090."

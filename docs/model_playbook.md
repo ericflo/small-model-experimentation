@@ -34,6 +34,11 @@ changes a rule here, update the rule in the same commit.
   with an A/B "is this correct?" judge prompt and read P(A) after `Answer: ` — one no-think
   forward pass (C46, following the C10 readout). Sequence mean-logprob dilutes the signal
   below deployable significance on programs, and verbalized confidence is a constant (C40).
+  **Substrate scoping (C47): the no-think readout only works where correctness is semantically
+  readable** (docstring-style code). Where correctness must be COMPUTED (procedural
+  candidates checked against I/O examples) it is within-task CHANCE (0.471) — let the model
+  think before the same A/B readout (0.471 → 0.845 within-task, even 99% budget-truncated at
+  512): C44's serial-compute law governs the judge seat too.
 - **Sample-and-confidence-select; don't majority-vote.** Confidence-select beats
   self-consistency at every budget (toy: 0.62 vs 0.48, C41; MBPP: 0.762 vs public-output
   majority 0.721, p=0.014, C46) because the mode is often confidently wrong while
@@ -50,8 +55,19 @@ changes a rule here, update the rule in the same commit.
   cannot sample.** Self-training on execution-verified self-solutions banks deployable
   capability (C11, C18) but only for depths the base already samples (C21); deeper rungs need
   an external explorer (tool search) to harvest training data (C22–C24). The gain is
-  data-DIVERSITY-driven (C24). To install a *skill* rather than answers, teach a GENERAL
-  serial strategy across diverse families and deploy with CoT (C45).
+  data-DIVERSITY-driven (C24) — and dose-limited: C18's 3× headline was a low-dose
+  overestimate (matched-dose rerun flat under the strict eval; C47/C18 audit). To install a
+  *skill* rather than answers, teach a GENERAL serial strategy across diverse families and
+  deploy with CoT (C45).
+- **Confidence cannot replace the execution verifier at the TRAINING seat.** Banking
+  top-think-P(True) solutions (purity 0.43, ~15× random) gains exactly as much as banking
+  unfiltered data — only 100%-pure execution-verified data teaches at C18-scale dose (C47;
+  untested at larger harvests, where a top-rank slice could be both pure and diverse). But the judge
+  SURVIVES self-training as a ranker (within-AUROC 0.872 → 0.883 even when trained on its own
+  approvals), while raw scores inflate on the model's own new mistakes (0.091 → 0.204). If a
+  flywheel must run verifier-free: filter by RANK within depth strata each round (quotas by
+  judge-score mass, never candidate counts — wrong candidates explode at hard depths), never
+  by a fixed P(True) threshold.
 
 ## Evaluation-method rules (not fooling ourselves)
 
@@ -70,6 +86,11 @@ changes a rule here, update the rule in the same commit.
   whether reasoning is load-bearing (C44).
 - **Never trust nominal composition depth** — ~40% of random depth-3 compositions are
   shallower-equivalent; verify behavioral min-depth (C13).
+- **A post-SFT no-think coverage drop is not necessarily capability loss.** No-think SFT
+  reallocates the no-think proposal prior onto the banked op-family (correct mass conserved,
+  off-family tasks lose coverage) while CoT re-derivation shields think-mode sampling —
+  evaluate think-mode before concluding damage, and check WHICH task families lost coverage
+  against the training mix (C47).
 - **Don't conclude "thinking hurts" from an unstructured prompt** — that artifact retracted a
   finding once (C15); give a procedure before judging the thinking channel. And a
   shuffled-thinking control separates compute/scaffold effects from coherent reasoning (C9).

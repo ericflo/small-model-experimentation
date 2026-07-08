@@ -1,0 +1,12 @@
+{
+ "tag": "conf_strat",
+ "n_candidates": 777,
+ "n_correct": 47,
+ "auroc_pooled": 0.957,
+ "auroc_within_mean": 0.883,
+ "n_mixed_tasks": 17,
+ "mean_p_true": 0.174,
+ "mean_p_true_correct": 0.682,
+ "mean_p_true_incorrect": 0.141,
+ "forced_close_rate": 0.99
+}

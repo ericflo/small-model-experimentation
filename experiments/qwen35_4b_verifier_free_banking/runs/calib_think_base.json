@@ -1,0 +1,12 @@
+{
+ "tag": "base",
+ "n_candidates": 777,
+ "n_correct": 47,
+ "auroc_pooled": 0.961,
+ "auroc_within_mean": 0.872,
+ "n_mixed_tasks": 17,
+ "mean_p_true": 0.129,
+ "mean_p_true_correct": 0.613,
+ "mean_p_true_incorrect": 0.098,
+ "forced_close_rate": 0.996
+}

@@ -44487,6 +44487,122 @@
      "note": "Standalone HumanEval replication of C46. All 164 tasks are included with no public probes, so public-output majority and visible-test execution are deliberately unavailable. P(True) beats mean-logprob by +0.049 (paired bootstrap CI 0.012-0.091, p=0.011) and random by +0.069. Greedy solvability AUROC is 0.862 for P(True) vs 0.734 for mean-logprob."
     }
    ]
+  },
+  "qwen35_4b_verifier_free_banking": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Fine-tuning on self-picked solutions: only execution-verified data teaches; confidence-picked = unfiltered",
+     "categories": [
+      "base (no training)",
+      "execution-verified (purity 1.00)",
+      "confidence-picked (purity 0.43)",
+      "unfiltered random (purity 0.03)"
+     ],
+     "series": [
+      {
+       "label": "depth-2 single-shot accuracy, thinking mode (n=25, frozen paired eval)",
+       "values": [
+        0.08,
+        0.24,
+        0.12,
+        0.12
+       ]
+      }
+     ],
+     "y_label": "greedy@1, depth 2 (think)",
+     "y_format": "percent01",
+     "note": "All arms fine-tune on 70 same-size pairs from the SAME candidate pool; only the filter differs. The ~15x purity advantage of the confidence filter buys nothing over no filter (trichotomy verdict: conf~rand; post-hoc cell, exec-vs-base CI [+0.04,+0.32], p=0.011). Banking tolerates almost no confidently-wrong data.",
+     "source": "runs/verdict.json (think.greedy_full.d2.POSTHOC), runs/eval_*_think.json"
+    },
+    {
+     "kind": "bar",
+     "title": "The one-token self-score is blind here unless the model thinks before scoring",
+     "categories": [
+      "instant (no-think) judge",
+      "thinking judge (512-token budget)"
+     ],
+     "series": [
+      {
+       "label": "within-task AUROC (right vs wrong, same task)",
+       "values": [
+        0.471,
+        0.845
+       ]
+      },
+      {
+       "label": "pooled AUROC (inflated by task difficulty)",
+       "values": [
+        0.749,
+        0.961
+       ]
+      }
+     ],
+     "y_label": "AUROC",
+     "y_format": "number",
+     "note": "On this substrate correctness must be mentally EXECUTED, not read off a docstring -- the C46 single-token law is substrate-scoped, and C44's serial-compute law governs the judge seat: 99% of thinking judgments hit the 512-token budget and the rescue still holds. Pooled AUROC conceals the failure: gate on within-task.",
+     "source": "data/pool.jsonl recompute (no-think series; documented in reports/report.md), runs/arms_summary.json gate (think series), runs/judge_think_diag.json (forced-close/budget note)"
+    },
+    {
+     "kind": "bar",
+     "title": "Does the judge survive self-training? Ranking intact, scores inflate on its own mistakes",
+     "categories": [
+      "base",
+      "trained on verified data",
+      "trained on its OWN approvals"
+     ],
+     "series": [
+      {
+       "label": "within-task AUROC, fixed 777 candidates (thinking judge)",
+       "values": [
+        0.872,
+        0.873,
+        0.883
+       ]
+      },
+      {
+       "label": "P(True) given INCORRECT, fixed set",
+       "values": [
+        0.098,
+        0.149,
+        0.141
+       ]
+      }
+     ],
+     "y_label": "AUROC / P(True)",
+     "y_format": "number",
+     "note": "Every model judges the IDENTICAL 777 candidates, so any change is a change in the judge. Discrimination survives even for the arm trained on its own approvals; on its OWN new candidates the score on wrong answers doubles (0.091 -> 0.204). Flywheel rule: filter by rank each round, never by a fixed score threshold.",
+     "source": "runs/calib_think_*.json, runs/calib_self_think_*.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Side effect: banking reallocates the no-think proposal distribution onto the banked op-family",
+     "categories": [
+      "base",
+      "execution-verified",
+      "confidence-stratified",
+      "confidence-global",
+      "unfiltered random"
+     ],
+     "series": [
+      {
+       "label": "depth-1 coverage@16, no-think (frozen paired eval)",
+       "values": [
+        0.72,
+        0.36,
+        0.76,
+        0.32,
+        0.4
+       ]
+      }
+     ],
+     "y_label": "coverage@16, depth 1 (no-think)",
+     "y_format": "percent01",
+     "note": "Not capability loss: correct samples are conserved (126/115/130/106/108 per 400) but crammed onto the banked program family -- the dedup-op family drops from 9/10 tasks covered to 0/10. The stratified arm banks only 15 depth-1 pairs (sub-threshold dose) and is spared. Chain-of-thought re-derivation shields think-mode sampling, which is what a flywheel harvests.",
+     "source": "runs/eval_*_nothink.json + per-task forensics in reports/report.md (Result 6)"
+    }
+   ]
   }
  }
 }

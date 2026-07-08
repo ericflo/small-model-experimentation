@@ -1,0 +1,82 @@
+{
+ "score_key": "p_true_think",
+ "gate": {
+  "pool_n": 2130,
+  "pool_pass_rate": 0.033,
+  "pool_auroc_pooled": 0.961,
+  "pool_auroc_within_mean": 0.845,
+  "n_mixed_tasks": 20,
+  "n_pairs": 70,
+  "score_by_depth": {
+   "1": 0.363,
+   "2": 0.097,
+   "3": 0.069
+  },
+  "quota_conf_strat": {
+   "1": 15,
+   "2": 30,
+   "3": 25
+  },
+  "exec_conf_strat_jaccard": 0.273
+ },
+ "exec": {
+  "n_pairs": 70,
+  "purity_full_pass": 1.0,
+  "visible_pass_rate": 1.0,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 43,
+   "2": 20,
+   "3": 7
+  },
+  "mean_score": 0.611,
+  "min_score_kept": 0.014,
+  "mean_p_true_nothink": 0.476,
+  "mean_freq": 10.7
+ },
+ "conf_strat": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.429,
+  "visible_pass_rate": 0.429,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 15,
+   "2": 30,
+   "3": 25
+  },
+  "mean_score": 0.69,
+  "min_score_kept": 0.392,
+  "mean_p_true_nothink": 0.632,
+  "mean_freq": 6.3
+ },
+ "conf_global": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.614,
+  "visible_pass_rate": 0.614,
+  "distinct_tasks": 31,
+  "depth_mix": {
+   "1": 36,
+   "2": 29,
+   "3": 5
+  },
+  "mean_score": 0.753,
+  "min_score_kept": 0.523,
+  "mean_p_true_nothink": 0.641,
+  "mean_freq": 8.9
+ },
+ "rand": {
+  "n_pairs": 70,
+  "purity_full_pass": 0.029,
+  "visible_pass_rate": 0.029,
+  "distinct_tasks": 42,
+  "depth_mix": {
+   "3": 34,
+   "2": 29,
+   "1": 7
+  },
+  "mean_score": 0.107,
+  "min_score_kept": 0.0,
+  "mean_p_true_nothink": 0.235,
+  "mean_freq": 1.0
+ }
+}

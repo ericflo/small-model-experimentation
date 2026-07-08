@@ -1,0 +1,64 @@
+{
+ "gate": {
+  "pool_n": 12,
+  "pool_pass_rate": 0.25,
+  "pool_auroc_pooled": 1.0,
+  "pool_auroc_within_mean": null,
+  "n_mixed_tasks": 0,
+  "n_pairs": 3,
+  "p_true_by_depth": {
+   "1": 0.811,
+   "2": 0.095
+  },
+  "exec_conf_strat_jaccard": 0.2
+ },
+ "exec": {
+  "n_pairs": 3,
+  "purity_full_pass": 1.0,
+  "visible_pass_rate": 1.0,
+  "distinct_tasks": 2,
+  "depth_mix": {
+   "1": 3
+  },
+  "mean_p_true": 0.811,
+  "min_p_true_kept": 0.547,
+  "mean_freq": 4.7
+ },
+ "conf_strat": {
+  "n_pairs": 3,
+  "purity_full_pass": 0.333,
+  "visible_pass_rate": 0.333,
+  "distinct_tasks": 3,
+  "depth_mix": {
+   "1": 1,
+   "2": 2
+  },
+  "mean_p_true": 0.487,
+  "min_p_true_kept": 0.215,
+  "mean_freq": 1.7
+ },
+ "conf_global": {
+  "n_pairs": 3,
+  "purity_full_pass": 1.0,
+  "visible_pass_rate": 1.0,
+  "distinct_tasks": 2,
+  "depth_mix": {
+   "1": 3
+  },
+  "mean_p_true": 0.811,
+  "min_p_true_kept": 0.547,
+  "mean_freq": 4.7
+ },
+ "rand": {
+  "n_pairs": 3,
+  "purity_full_pass": 0.0,
+  "visible_pass_rate": 0.0,
+  "distinct_tasks": 2,
+  "depth_mix": {
+   "2": 3
+  },
+  "mean_p_true": 0.135,
+  "min_p_true_kept": 0.027,
+  "mean_freq": 1.0
+ }
+}

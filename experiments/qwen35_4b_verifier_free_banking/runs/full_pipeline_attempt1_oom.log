@@ -1,0 +1,42 @@
+
+>>> /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/harvest_pool.py
+[pool] 90 train tasks, K=40
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Traceback (most recent call last):
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/harvest_pool.py", line 114, in <module>
+    main()
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/scripts/harvest_pool.py", line 67, in main
+    gens = p.gen_sequences(rep, think=True, budget=args.budget, greedy=False, answer_max=420, batch_size=48)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/src/gen_lib.py", line 96, in gen_sequences
+    process(order, batch_size)
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/src/gen_lib.py", line 87, in process
+    outs = self._seq_batch([prompts[i] for i in sub], think, budget, shuffle,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/src/gen_lib.py", line 112, in _seq_batch
+    gen1 = self._gen(prefix, budget, sampling)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_verifier_free_banking/src/gen_lib.py", line 72, in _gen
+    out = self.model.generate(input_ids=inp, attention_mask=attn, max_new_tokens=max_new,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2584, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2791, in _sample
+    while self._has_unfinished_sequences(this_peer_finished, synced_gpus, device=input_ids.device):
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2610, in _has_unfinished_sequences
+    elif this_peer_finished:
+         ^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

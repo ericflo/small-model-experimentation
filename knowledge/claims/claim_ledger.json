@@ -529,7 +529,7 @@
         "structured_execution_and_compilers",
         "posttraining_and_adaptation"
       ],
-      "summary": "Correctly-aimed follow-through to C17 (the generation wall is proposal-COVERAGE; only shifting the proposal distribution can beat sample-more). Experiment qwen35_4b_coverage_banking: harvest the fixed 4B's OWN execution-verified identification solutions on TRAIN list tasks (sample K=40 think, keep hidden-correct, cap 12/task -> 80 SFT {prompt,code} pairs from 33/90 solved tasks, by depth {1:49,2:24,3:7}; 57/90 tasks yielded nothing = C17 wall), QLoRA-SFT single-shot no-teacher, eval on DISJOINT held-out tasks in 4 arms {base,banked}x{no-think,think}, greedy@1 + coverage@16. ANSWER -- banking does BOTH, depth-dependent: DEPTH 1 CONCENTRATION (think greedy@1 0.60->0.80, +0.20; ceiling flat 1.00->0.90 -- coverage pulled into single-shot). DEPTH 2 EXPANSION (banked think coverage@16 0.15->0.45, 3x, on HELD-OUT tasks -- proposes correct depth-2 compositions the base never sampled; unique-program count even DROPS 11.5->10.85, so banking concentrated the proposal MASS onto correct compositions, not more diversity -- exactly C17's 'shift the proposal distribution' lever). DEPTH 3-4 no-move (7 / 0 training examples; wall holds, coverage 0). Bounded: does NOT beat think-mode sample-more at k=1 (banked greedy 0.80<1.00 d1, 0.10<0.15 d2), but banking+sample-more > base+sample-more (banked cov 0.45 vs base 0.15 at d2). No diversity collapse. Refuted own P3 (concentration-only) in the optimistic direction; P2 (beat sample-more at k=1) refuted; P1 supported at d1 only; P4 (no lift at untrained d4) held.",
+      "summary": "Correctly-aimed follow-through to C17 (the generation wall is proposal-COVERAGE; only shifting the proposal distribution can beat sample-more). Experiment qwen35_4b_coverage_banking: harvest the fixed 4B's OWN execution-verified identification solutions on TRAIN list tasks (sample K=40 think, keep hidden-correct, cap 12/task -> 80 SFT {prompt,code} pairs from 33/90 solved tasks, by depth {1:49,2:24,3:7}; 57/90 tasks yielded nothing = C17 wall), QLoRA-SFT single-shot no-teacher, eval on DISJOINT held-out tasks in 4 arms {base,banked}x{no-think,think}, greedy@1 + coverage@16. ANSWER -- banking does BOTH, depth-dependent: DEPTH 1 CONCENTRATION (think greedy@1 0.60->0.80, +0.20; ceiling flat 1.00->0.90 -- coverage pulled into single-shot). DEPTH 2 EXPANSION (banked think coverage@16 0.15->0.45, 3x, on HELD-OUT tasks -- proposes correct depth-2 compositions the base never sampled; unique-program count even DROPS 11.5->10.85, so banking concentrated the proposal MASS onto correct compositions, not more diversity -- exactly C17's 'shift the proposal distribution' lever). DEPTH 3-4 no-move (7 / 0 training examples; wall holds, coverage 0). Bounded: does NOT beat think-mode sample-more at k=1 (banked greedy 0.80<1.00 d1, 0.10<0.15 d2), but banking+sample-more > base+sample-more (banked cov 0.45 vs base 0.15 at d2). No diversity collapse. Refuted own P3 (concentration-only) in the optimistic direction; P2 (beat sample-more at k=1) refuted; P1 supported at d1 only; P4 (no lift at untrained d4) held. [2026-07-08 audit (qwen35_4b_verifier_free_banking): the 0.15->0.45 headline was 3/20 vs 9/20 (Fisher p=0.082) on a leak-permissive eval -- exact-ops dedup only, 3/20 d2 eval tasks train-identical under the canonical probe-set func-sig, leak-excluded 2/17 vs 7/17 (p=0.118); a matched-dose re-run under the frozen leak-proof eval is FLAT (0.28->0.28). The expansion effect stands via C22/C23 at 3.5x dose (C23: 0.175->0.50, p=0.004) and C24's diversity dose law; C18's point estimate was a low-dose overestimate.]",
       "evidence": [
         {
           "kind": "experiment",
@@ -545,7 +545,8 @@
       "avoid": [
         "Do not claim banking beats sample-more at single-shot -- it does not at k=1; it EXPANDS what sample-more reaches (bank then sample).",
         "Do not expect banking to help a depth with too few verified examples (d3 7 pairs, d4 0 -> no move); plain sampling cannot harvest deep-wall solutions, so tool-search is needed to seed them.",
-        "Do not read the depth-2 expansion as added diversity -- unique programs dropped; banking sharpened the proposal distribution onto correct compositions."
+        "Do not read the depth-2 expansion as added diversity -- unique programs dropped; banking sharpened the proposal distribution onto correct compositions.",
+        "Do not cite the 3x depth-2 point estimate as the banking effect size: it does not reproduce at matched dose under the frozen leak-proof eval (C47 exec arm, 0.28->0.28 flat); cite C23's frozen-eval replication at 3.5x dose and C24's dose law instead."
       ]
     },
     {
@@ -1329,6 +1330,35 @@
         "Do not compare self-consistency on HumanEval all-task no-probe runs: with no public probes, public-output majority and visible-test execution are undefined. Use the 68-task public-probe subset only as a ceiling-limited diagnostic.",
         "Headline AUROC must be WITHIN-problem on mixed problems with a length baseline (pooled AUROC is difficulty-inflated; verbose code is the confound on real programs).",
         "Still single seed, k=8, no-think only. MBPP selection deltas are modest in absolute terms (+4.1pp over public-output majority), and HumanEval public-probe subset is ceiling-limited."
+      ]
+    },
+    {
+      "id": "C47",
+      "title": "Confidence cannot replace the execution verifier at the TRAINING seat (conf-filtered banking ~ random banking) -- but the judge itself SURVIVES self-training: rank-filter flywheels stay viable while fixed-threshold filters silently degrade",
+      "status": "Promising",
+      "programs": [
+        "posttraining_and_adaptation",
+        "evidence_conditioned_selection"
+      ],
+      "summary": "Experiment qwen35_4b_verifier_free_banking -- first connection of the banking arc (C11-C24) to the confidence arc (C40-C46). Shared pool: 90 list-DSL identification tasks x K=40 think -> 2,130 unique candidates (pass rate 0.033); four matched-size arms (n=70, identical C18 QLoRA recipe; only the keep-test varies): exec (execution-verified, purity 1.0), conf_strat (PRIMARY: depth-stratified top think-P(True), score-mass quotas, purity 0.429), conf_global (global top-score, 0.614), rand (draw-weighted, 0.029). Frozen paired eval (75 tasks, 0 behavioral leakage), paired bootstrap. FOUR RESULTS. (1) The NO-think P(True) judge is at CHANCE within-task on this substrate (0.471; pooled 0.749 = difficulty) -- C46's within-problem law is substrate-scoped to semantically-readable correctness; here correctness must be COMPUTED. (2) CoT judging rescues it: within-task 0.471->0.845 (pooled 0.961), P(True) correct/incorrect 0.61/0.08 full-pool, at 99% budget-truncated thinking -- C44's serial-compute law governs the judge seat. (3) MAIN: trichotomy = conf~rand. No pre-registered cell cleared exec-base >= 0.10; in the post-hoc cell where exec moved (d2 think greedy 0.08->0.24, CI [+0.04,+0.32], p=0.011), conf_strat +0.04 = rand +0.04 exactly despite ~15x purity; recovery 0.25, CI [-1,+1]. Banking tolerates almost no confidently-wrong data at this dose -- and the exec ceiling itself is dose-limited: first matched-dose C18 re-run under the strict eval is FLAT (d2 think cov 0.28->0.28), resolving C18 as a low-dose overestimate (see C18 audit note). (4) Calibration SURVIVES banking as a ranker: fixed-set (777 identical candidates) think-judge within-AUROC 0.872->0.873 (exec) / 0.883 (conf_strat trained on its own approvals); but P(True) on own INCORRECT candidates doubles on the self-distribution (0.091->0.204; fixed-set drift only +0.043) and own pass-rate does not improve (0.120->0.093). Mechanism bonus: no-think SFT reallocates the no-think proposal prior onto the banked op-family (d1 cov@16 0.72->0.32-0.40, conserved correct mass, dedup-family 9/10->0/10 tasks; conf_strat's d3-heavy quota is sub-threshold at 0.76) while CoT re-derivation shields the think distribution (think uniq unchanged) -- flywheel harvests sample think-mode, i.e. from the shielded distribution.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_verifier_free_banking"
+        }
+      ],
+      "implication": "The verifier is load-bearing at the TRAINING seat, not the JUDGING seat. P(True) as a SELECTOR approaches execution (C41/C46); as a TRAINING FILTER it fails -- not because it ranks badly (0.845 within-task) but because banking at C18-scale dose tolerates ~no confidently-wrong pairs, and the wrongs a confidence filter admits are exactly the plausible ones. The flywheel's failure mode is NOT feedback collapse (ranks survive round 2); it is dose (C24). Deployment rules: (1) on computational substrates never filter with the no-think judge -- spend the serial compute, think-judge even hard-truncated at 512 tokens; (2) filter by RANK within depth strata (quotas by judge-score mass, not candidate counts -- counts allocate slots where wrong candidates explode), never by a fixed P(True) threshold (+0.113 inflation on own incorrect at round 2); (3) to bank verifier-free, scale the harvest until the top-rank slice is pure AND diverse, or keep the executable verifier.",
+      "next_tests": [
+        "Scale the harvest (K=160+, more tasks) and bank the same top-rank slice: does purity x diversity at larger dose cross the banking threshold verifier-free? (Direct test that dose, not filter quality, binds.)",
+        "Run an actual flywheel round 2: rank-filtered (predicted viable) vs fixed-threshold-filtered (predicted purity decay via the +0.113 self-distribution inflation).",
+        "Semantically-readable substrate (NL task descriptions, C37): does no-think within-task discrimination return, making the cheap filter viable there?",
+        "Judge-budget dose-response: think scores fall by depth (0.36/0.10/0.07) at budget 512 with 99% forced-close -- does 1024/2048 lift deep-candidate ranking?"
+      ],
+      "avoid": [
+        "Do not use pooled AUROC to qualify a filter for banking: pooled 0.749 concealed within-task chance (0.471); gate on WITHIN-task AUROC with an external difficulty control.",
+        "Do not allocate stratified quotas by candidate counts -- wrong candidates explode combinatorially at hard depths (d2 915/20, d3 1066/7); allocate by judge-score mass.",
+        "Do not filter a flywheel by a fixed P(True) threshold across rounds; scores inflate on the self-distribution while ranks survive -- re-rank each round.",
+        "Do not read a banked model's no-think coverage drop as capability loss -- it is mode reallocation onto the banked family and CoT sampling is shielded; evaluate think-mode before concluding damage."
       ]
     }
   ]

@@ -1,0 +1,52 @@
+{
+ "records": [
+  {
+   "tag": "smbase_nothink",
+   "depth": 1,
+   "K": 6,
+   "greedy_full": true,
+   "cov_full": 6,
+   "n_unique": 1
+  },
+  {
+   "tag": "smbase_nothink",
+   "depth": 1,
+   "K": 6,
+   "greedy_full": false,
+   "cov_full": 0,
+   "n_unique": 3
+  },
+  {
+   "tag": "smbase_nothink",
+   "depth": 1,
+   "K": 6,
+   "greedy_full": true,
+   "cov_full": 6,
+   "n_unique": 1
+  },
+  {
+   "tag": "smbase_nothink",
+   "depth": 2,
+   "K": 6,
+   "greedy_full": false,
+   "cov_full": 0,
+   "n_unique": 4
+  },
+  {
+   "tag": "smbase_nothink",
+   "depth": 2,
+   "K": 6,
+   "greedy_full": false,
+   "cov_full": 0,
+   "n_unique": 6
+  },
+  {
+   "tag": "smbase_nothink",
+   "depth": 2,
+   "K": 6,
+   "greedy_full": false,
+   "cov_full": 0,
+   "n_unique": 6
+  }
+ ]
+}

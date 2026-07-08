@@ -77,6 +77,17 @@ Hard-won failure knowledge — read before launching anything training-scale:
 - **OOM can masquerade as "device not ready"** under `expandable_segments`; to surface the
   real error, re-run without `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` or with
   `CUDA_LAUNCH_BLOCKING=1`.
+- **torch 2.12 raises generation OOM as `torch.AcceleratorError`**, NOT
+  `torch.cuda.OutOfMemoryError` — any batch-halving/OOM-resilience `except` clause must catch
+  BOTH (`(torch.cuda.OutOfMemoryError, getattr(torch, "AcceleratorError", ...))`), or the
+  designed graceful degradation becomes a hard crash. Every experiment that copied the shared
+  `gen_lib.py` before 2026-07-08 has the narrow catch.
+- **Set the alloc config in the orchestrator, not the shell**: launching a pipeline without
+  `expandable_segments:True` OOM'd a harvest that runs fine with it at the same batch size.
+  `os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")` at the top of
+  the experiment's run.py makes the requirement un-forgettable.
+- **`cmd | grep | tee | tail` reports the LAST pipe stage's exit code** — a crashed run looks
+  like exit 0 to the harness. Use `set -o pipefail` in every launch command.
 
 ### Memory-safe large-vocab logits
 
