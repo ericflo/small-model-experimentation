@@ -11,7 +11,7 @@ import torch
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP))
-from src.coverage_utils import sampling_prompt, candidate_from_completion, mbpp_record  # noqa: E402
+from src.coverage_utils import sampling_prompt, candidate_from_completion, mbpp_record, load_humaneval_records  # noqa: E402
 sys.path.insert(0, str(EXP / "src"))
 import gen_lib as GL  # noqa: E402
 
@@ -72,13 +72,20 @@ def mean_logprobs(p, prompt_texts, gens, batch_size=4, chunk=128):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--dataset", choices=["mbpp", "humaneval"], default="mbpp")
     ap.add_argument("--n", type=int, default=150)
     ap.add_argument("--k", type=int, default=8)
     ap.add_argument("--offset", type=int, default=0)
+    ap.add_argument("--visible-tests", type=int, default=1)
     ap.add_argument("--answer-max", type=int, default=420)
+    ap.add_argument("--out-name", default=None)
     a = ap.parse_args()
-    records = load_sanitized_test(a.n, a.offset)
-    print(f"[cc] {len(records)} MBPP test records", flush=True)
+    if a.dataset == "humaneval":
+        records = load_humaneval_records(a.n, a.offset, a.visible_tests, timeout_s=5.0)
+    else:
+        records = load_sanitized_test(a.n, a.offset, visible_tests=a.visible_tests)
+    out_name = a.out_name or ("code_conf" if a.dataset == "mbpp" else f"{a.dataset}_code_conf")
+    print(f"[cc] {len(records)} {a.dataset} test records", flush=True)
     p = GL.Probe()
     prompts = [sampling_prompt(r, p.tok) for r in records]
 
@@ -99,13 +106,20 @@ def main():
         entries.append(("greedy", g))
         for j in range(a.k):
             entries.append((f"s{j}", samp_g[ri * a.k + j]))
-        row = {"task_id": rec["task_id"], "cands": []}
+        row = {
+            "task_id": rec["task_id"],
+            "dataset": rec.get("dataset", a.dataset),
+            "public_case_count": len(rec.get("public_cases", [])),
+            "cands": [],
+        }
         for tag, g in entries:
             text = p.tok.decode(g["seq_ids"][plen:], skip_special_tokens=True)
             cand = candidate_from_completion(text, rec, source=tag, order=len(row["cands"]))
             row["cands"].append({"tag": tag, "full_pass": bool(cand["full_pass"]),
                                  "visible_all_pass": bool(cand.get("visible_all_pass", False)),
                                  "behavior_signature": cand.get("behavior_signature", ""),
+                                 "deployable_behavior_signature": cand.get("deployable_behavior_signature", ""),
+                                 "public_signature": cand.get("public_signature", ""),
                                  "parse_ok": cand["parse_status"] == "parsed",
                                  "code": cand["code"], "code_len": len(cand["code"])})
             gen_index.append((ri, len(row["cands"]) - 1))
@@ -113,7 +127,7 @@ def main():
         out_records.append(row)
         if (ri + 1) % 25 == 0: print(f"[cc] executed {ri+1}/{len(records)}", flush=True)
     (EXP / "runs").mkdir(exist_ok=True)
-    json.dump(out_records, open(EXP / "runs" / "code_conf_checkpoint.json", "w"))  # persist before logprob phase
+    json.dump(out_records, open(EXP / "runs" / f"{out_name}_checkpoint.json", "w"))  # persist before logprob phase
     print("[cc] checkpoint saved; computing mean logprobs...", flush=True)
     lps = mean_logprobs(p, prompts, all_gens)
     for (ri, ci), lp in zip(gen_index, lps):
@@ -130,10 +144,10 @@ def main():
     for (ri, ci), v in zip(jidx, ptrue):
         out_records[ri]["cands"][ci]["p_true"] = round(v, 4)
     (EXP / "runs").mkdir(exist_ok=True)
-    json.dump(out_records, open(EXP / "runs" / "code_conf.json", "w"))
+    json.dump(out_records, open(EXP / "runs" / f"{out_name}.json", "w"))
     n_pass = sum(c["full_pass"] for r in out_records for c in r["cands"])
     n_all = sum(len(r["cands"]) for r in out_records)
-    print(f"[cc] wrote {len(out_records)} problems x {1+a.k} cands | overall pass-rate {n_pass/n_all:.2f}", flush=True)
+    print(f"[cc] wrote runs/{out_name}.json | {len(out_records)} problems x {1+a.k} cands | overall pass-rate {n_pass/n_all:.2f}", flush=True)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 ## Summary
 
-Yes — with an inversion. On 244 MBPP problems (greedy + 8 samples each, 2,196 candidates), the model's own logits discriminate correct from incorrect programs well above a length/verbosity surface baseline, and verification-free confidence-selection beats self-consistency, generalizing C40/C41 off the toy substrate. But the WINNING signal is not the toy's implicit mean-logprob — it is the single-token P(True) judge readout (P of the "A = correct" token under a self-judge prompt, no-think, one forward pass per candidate). Sequence mean-logprob is diluted over hundreds of tokens and does not significantly beat majority vote. Abstention transfers almost exactly: greedy-solvability AUROC 0.837 on code vs 0.83 on the toy; keeping the top third by P(True) gives ~0.95 accuracy vs 0.70 unfiltered.
+Yes — with an inversion. On 244 MBPP problems (greedy + 8 samples each, 2,196 candidates), the model's own logits discriminate correct from incorrect programs well above a length/verbosity surface baseline, and verification-free confidence-selection beats self-consistency (public-output majority), generalizing C40/C41 off the toy substrate. But the WINNING signal is not the toy's implicit mean-logprob — it is the single-token P(True) judge readout (P of the "A = correct" token under a self-judge prompt, no-think, one forward pass per candidate). Sequence mean-logprob is diluted over hundreds of tokens and does not significantly beat majority vote. Abstention transfers almost exactly: greedy-solvability AUROC 0.837 on code vs 0.83 on the toy; keeping the top third by P(True) gives ~0.95 accuracy vs 0.70 unfiltered.
 
 ## Research Program Fit
 
@@ -22,13 +22,13 @@ Yes — with an inversion. On 244 MBPP problems (greedy + 8 samples each, 2,196 
 | random / length | 0.548 (length) | 0.688 (length) | 0.696 |
 | mean-logprob (implicit) | 0.693 (CI 0.631–0.751) | 0.760 | 0.730 |
 | **P(True) no-think** | **0.738 (CI 0.665–0.808)** | **0.837** | **0.762** |
-| self-consistency | — | — | 0.717 |
+| self-consistency (public-output majority) | — | — | 0.721 |
 | visible-test execution | — | — | 0.816 |
 | oracle pass@k | — | — | 0.844 |
 
-Significance (paired bootstrap over 244 problems): P(True) > self-consistency +0.045 (CI 0.012–0.082, p=0.005); P(True) > mean-logprob +0.033 (p=0.034); mean-logprob vs self-consistency n.s. (p=0.28). Within-problem paired diff vs length: logprob +0.242 (CI 0.145–0.338), P(True) +0.287 (CI 0.183–0.386).
+Significance (paired bootstrap over 244 problems): P(True) > self-consistency +0.041 (CI 0.004–0.078, p=0.014); P(True) > mean-logprob +0.033 (p=0.034); mean-logprob vs self-consistency n.s. (p=0.37). Within-problem paired diff vs length: logprob +0.242 (CI 0.145–0.338), P(True) +0.287 (CI 0.183–0.386).
 
-Abstention on greedy ranked by P(True): coverage 0.33 → accuracy 0.94; coverage 0.20 → 0.96; unfiltered 0.701. Duplicate rate among samples 0.516.
+Abstention on greedy ranked by P(True): coverage 0.33 → accuracy 0.94; coverage 0.20 → 0.96; unfiltered 0.701. Duplicate rate among samples (public outputs) 0.775. Note: self-consistency clusters on PUBLIC outputs only (visible-test behavior) so the baseline is strictly deployable — hidden-test outputs never inform any selector.
 
 ## Controls
 

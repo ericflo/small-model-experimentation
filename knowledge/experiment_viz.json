@@ -44306,7 +44306,7 @@
        "label": "selection accuracy (k=8, 244 MBPP problems)",
        "values": [
         0.696,
-        0.717,
+        0.721,
         0.73,
         0.762,
         0.816,
@@ -44316,7 +44316,7 @@
      ],
      "y_label": "selection accuracy",
      "y_format": "percent01",
-     "note": "The C41 generalization test on real code. Per MBPP problem: 8 temperature samples; each selector picks ONE; scored by hidden asserts. Verification-free P(True) (ask the model 'is this correct, A or B?' and read P(A) -- one forward pass, no execution) beats self-consistency (execution-cluster majority) by +0.045 (paired bootstrap CI 0.012-0.082, p=0.005) and random by +0.066. The toy substrate's star signal, sequence mean-logprob, does NOT significantly beat majority voting (p=0.28) -- averaging logprob over hundreds of program tokens dilutes the calibrated signal. Honest hierarchy: executing even the single visible test (0.816) crushes every verification-free signal. Confidence is the lever for the verifier-free regime, where it recovers ~45% of the random-to-oracle headroom at zero execution cost."
+     "note": "The C41 generalization test on real code. Per MBPP problem: 8 temperature samples; each selector picks ONE; scored by hidden asserts. Verification-free P(True) (ask the model 'is this correct, A or B?' and read P(A) -- one forward pass, no execution) beats self-consistency (public-output majority, strictly deployable) by +0.041 (paired bootstrap CI 0.004-0.078, p=0.014) and random by +0.066. The toy substrate's star signal, sequence mean-logprob, does NOT significantly beat majority voting (p=0.37) -- averaging logprob over hundreds of program tokens dilutes the calibrated signal. Honest hierarchy: executing even the single visible test (0.816) crushes every verification-free signal. Confidence is the lever for the verifier-free regime, where it recovers ~45% of the random-to-oracle headroom at zero execution cost."
     },
     {
      "kind": "bar",

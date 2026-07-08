@@ -4,7 +4,8 @@
  "greedy_acc": 0.701,
  "mixed_problems": 78,
  "mixed_frac": 0.32,
- "duplicate_rate": 0.516,
+ "public_probe_problems": 244,
+ "duplicate_rate": 0.775,
  "within_problem_auroc": {
   "mean_logprob": {
    "mean": 0.693,
@@ -38,19 +39,11 @@
   "random": 0.696,
   "mean_logprob (verification-free)": 0.73,
   "p_true no-think (verification-free)": 0.762,
-  "self-consistency (execution-cluster majority)": 0.717,
+  "self-consistency (public-output majority)": 0.721,
   "visible-test execution": 0.816,
   "oracle pass@k": 0.844
  },
  "significance": {
-  "p_true_vs_self_consistency": {
-   "diff": 0.045,
-   "ci": [
-    0.012,
-    0.082
-   ],
-   "p_one_sided": 0.0054
-  },
   "p_true_vs_random": {
    "diff": 0.066,
    "ci": [
@@ -59,18 +52,10 @@
    ],
    "p_one_sided": 0.0
   },
-  "logprob_vs_self_consistency": {
-   "diff": 0.012,
-   "ci": [
-    -0.02,
-    0.045
-   ],
-   "p_one_sided": 0.2759
-  },
   "logprob_vs_random": {
    "diff": 0.033,
    "ci": [
-    0.009,
+    0.008,
     0.059
    ],
    "p_one_sided": 0.0054
@@ -79,9 +64,25 @@
    "diff": 0.033,
    "ci": [
     0.0,
-    0.066
+    0.07
    ],
-   "p_one_sided": 0.0337
+   "p_one_sided": 0.0357
+  },
+  "p_true_vs_self_consistency": {
+   "diff": 0.041,
+   "ci": [
+    0.004,
+    0.078
+   ],
+   "p_one_sided": 0.0135
+  },
+  "logprob_vs_self_consistency": {
+   "diff": 0.008,
+   "ci": [
+    -0.025,
+    0.041
+   ],
+   "p_one_sided": 0.3701
   },
   "within_logprob_minus_length": {
    "diff": 0.242,
@@ -296,5 +297,5 @@
    0.713
   ]
  ],
- "verdict": "The confidence toolkit TRANSFERS to real code -- but the HIERARCHY INVERTS: the single-token P(True) readout, not the sequence mean-logprob, is the program-level confidence. C40 analog (within-problem, surface-matched, 78/244 mixed problems): mean-logprob AUROC 0.693 (CI [0.631, 0.751]) vs P(True)-no-think 0.738 vs length-baseline 0.548 (paired diff vs length: logprob 0.242 CI [0.145, 0.338], P(True) 0.287 CI [0.183, 0.386] -- NOT verbosity). Deployment: greedy problem-level AUROC logprob 0.76 / P(True) 0.837 (greedy acc 0.701). C41 analog (selection at k=8): random 0.696 | mean_logprob (verification-free) 0.73 | p_true no-think (verification-free) 0.762 | self-consistency (execution-cluster majority) 0.717 | visible-test execution 0.816 | oracle pass@k 0.844. SIGNIFICANCE (paired bootstrap over problems): P(True)-select beats self-consistency +0.045 (CI [0.012, 0.082], p=0.0054) and beats mean-logprob +0.033 (p=0.0337); mean-logprob does NOT significantly beat self-consistency (p=0.2759). Duplicate rate 0.516."
+ "verdict": "The confidence toolkit TRANSFERS to real code -- but the HIERARCHY INVERTS: the single-token P(True) readout, not the sequence mean-logprob, is the program-level confidence. C40 analog (within-problem, surface-matched, 78/244 mixed problems): mean-logprob AUROC 0.693 (CI [0.631, 0.751]) vs P(True)-no-think 0.738 vs length-baseline 0.548 (paired diff vs length: logprob 0.242 CI [0.145, 0.338], P(True) 0.287 CI [0.183, 0.386] -- NOT verbosity). Deployment: greedy problem-level AUROC logprob 0.76 / P(True) 0.837 (greedy acc 0.701). C41 analog (selection at k=8): random 0.696 | mean_logprob (verification-free) 0.73 | p_true no-think (verification-free) 0.762 | self-consistency (public-output majority) 0.721 | visible-test execution 0.816 | oracle pass@k 0.844. SIGNIFICANCE (paired bootstrap over problems): P(True)-select beats self-consistency +0.041 (CI [0.004, 0.078], p=0.0135); mean-logprob vs self-consistency p=0.3701. P(True)-select vs mean-logprob 0.033 (p=0.0357); P(True)-select vs random 0.066 (p=0.0). Duplicate rate 0.775 on public-probe rows."
 }

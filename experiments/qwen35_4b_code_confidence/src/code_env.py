@@ -101,6 +101,8 @@ def parse_assert_case(assertion: str) -> dict[str, Any] | None:
 
 
 def extract_doctest_public_tests(prompt: str, entry_point: str, limit: int) -> list[dict[str, Any]]:
+    if limit <= 0:
+        return []
     try:
         tree = ast.parse(prompt)
         fn = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == entry_point)
