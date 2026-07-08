@@ -363,6 +363,30 @@ def validate_root_readme(errors: list[str]) -> None:
                      "): counts drift with every pipeline commit — describe without numbers; the site carries live counts")
 
 
+def validate_benchmark_firewall(errors: list[str]) -> None:
+    if not (ROOT / "benchmarks").exists():
+        return
+    forbidden_patterns = [
+        "menagerie/families",
+        "benchmarks.menagerie",
+        "from families",
+        "import families",
+    ]
+    for path in EXPERIMENTS.rglob("*.py"):
+        if in_ignored_dir(path):
+            continue
+        experiment_root = next((parent for parent in path.parents if parent.parent == EXPERIMENTS), None)
+        has_local_families = experiment_root is not None and (experiment_root / "src" / "families.py").exists()
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for pattern in forbidden_patterns:
+            if pattern in text:
+                if pattern in {"from families", "import families"} and has_local_families:
+                    continue
+                fail(errors, f"benchmark firewall violation in {rel(path)}: matched {pattern!r}; "
+                             "experiments may only invoke benchmarks/menagerie/run.py as a subprocess "
+                             "(that usage does not contain the forbidden strings)")
+
+
 def validate() -> int:
     errors: list[str] = []
 
@@ -610,6 +634,7 @@ def validate() -> int:
     validate_claim_ledger(errors, set(program_ids), exp_ids)
     validate_future_queue(errors, set(program_ids))
     validate_root_readme(errors)
+    validate_benchmark_firewall(errors)
 
     gitattributes = ROOT / ".gitattributes"
     if not gitattributes.exists():

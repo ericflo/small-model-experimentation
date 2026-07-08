@@ -1,5 +1,6 @@
 PYTHON ?= python3
 SITE_DIR ?= site
+TIER ?= quick
 GENERATED_PATHS := \
 	experiments/*/metadata.yaml \
 	knowledge/artifact_index.md \
@@ -21,7 +22,7 @@ GENERATED_PATHS := \
 	knowledge/source_tracks.md \
 	knowledge/tag_index.md
 
-.PHONY: catalog validate py-compile check-links check-text generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate
+.PHONY: catalog validate py-compile check-links check-text generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate bench bench-validate
 
 catalog:
 	$(PYTHON) scripts/build_knowledgebase.py
@@ -63,6 +64,12 @@ check: catalog generated-clean validate lint site-check briefs-gate
 # site. Fails the check until briefs are authored — see docs/site_maintenance.md.
 briefs-gate:
 	$(PYTHON) scripts/site_content_status.py --strict
+
+bench:
+	cd benchmarks/menagerie && $(PYTHON) run.py --tier $(TIER)
+
+bench-validate:
+	cd benchmarks/menagerie && $(PYTHON) validate_suite.py
 
 related:
 	$(PYTHON) scripts/find_related.py "$(QUERY)" $(EXTRA_ARGS)
