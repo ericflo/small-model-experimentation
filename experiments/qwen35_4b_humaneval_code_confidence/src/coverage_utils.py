@@ -10,7 +10,10 @@ from datasets import load_dataset
 
 from src.code_env import (
     execute_public_and_asserts,
+    execute_humaneval,
+    extract_doctest_public_tests,
     extract_candidate_code,
+    humaneval_sampling_prompt,
     mbpp_sampling_prompt,
     parse_assert_case,
     parse_entry_from_assert,
@@ -132,8 +135,46 @@ def load_mbpp_records(split: str, count: int, offset: int, visible_tests: int, t
     return records
 
 
+def humaneval_record(raw: dict[str, Any], split: str, visible_tests: int, timeout_s: float) -> dict[str, Any] | None:
+    entry = raw.get("entry_point")
+    prompt = raw.get("prompt", "")
+    official_test = raw.get("test", "")
+    if not entry or not prompt or not official_test:
+        return None
+    public_cases = extract_doctest_public_tests(prompt, entry, visible_tests)
+    if visible_tests > 0 and not public_cases:
+        return None
+    return {
+        "record_id": f"humaneval_{split}_{raw['task_id']}",
+        "dataset": "humaneval",
+        "split": split,
+        "task_id": raw["task_id"],
+        "task_text": prompt,
+        "entry_point": entry,
+        "public_cases": public_cases,
+        "official_test": official_test,
+        "reference_code": prompt + raw.get("canonical_solution", ""),
+        "timeout_s": timeout_s,
+    }
+
+
+def load_humaneval_records(count: int, offset: int, visible_tests: int, timeout_s: float) -> list[dict[str, Any]]:
+    dataset = load_dataset("openai/openai_humaneval", split="test")
+    records = []
+    for raw in list(dataset)[offset : offset + count * 2]:
+        record = humaneval_record(raw, "heldout", visible_tests, timeout_s)
+        if record is not None:
+            records.append(record)
+        if len(records) >= count:
+            break
+    return records
+
+
 def sampling_prompt(record: dict[str, Any], tokenizer: Any) -> str:
-    prompt = mbpp_sampling_prompt(record, record["entry_point"], [case["assert_src"] for case in record["public_cases"]])
+    if record.get("dataset") == "humaneval":
+        prompt = humaneval_sampling_prompt(record, record["public_cases"])
+    else:
+        prompt = mbpp_sampling_prompt(record, record["entry_point"], [case["assert_src"] for case in record["public_cases"]])
     return code_chat_prompt(tokenizer, prompt)
 
 
@@ -218,24 +259,48 @@ def candidate_from_completion(
                 "public_signature": "parse_failed",
                 "failure_bits": "parse_failed",
                 "functional_signature": "parse_failed",
+                "behavior_signature": "parse_failed",
+                "deployable_behavior_signature": "parse_failed",
             }
         )
         return candidate
-    result = execute_public_and_asserts(
-        code,
-        record["public_cases"],
-        record.get("hidden_asserts", []),
-        setup_code=record.get("setup_code", ""),
-        timeout_s=float(record.get("timeout_s", 5.0)),
-    )
+    if record.get("dataset") == "humaneval":
+        result = execute_humaneval(
+            code,
+            record["public_cases"],
+            record["entry_point"],
+            record["official_test"],
+            timeout_s=float(record.get("timeout_s", 5.0)),
+        )
+    else:
+        result = execute_public_and_asserts(
+            code,
+            record["public_cases"],
+            record.get("hidden_asserts", []),
+            setup_code=record.get("setup_code", ""),
+            timeout_s=float(record.get("timeout_s", 5.0)),
+        )
     candidate.update(result)
     candidate["public_signature"] = public_signature(candidate)
-    failure = evaluate_failure_bits(code, record)
-    candidate["failure_bits"] = failure["failure_bits"]
-    candidate["test_errors"] = failure["test_errors"]
-    candidate["functional_signature"] = failure["failure_bits"]
+    if record.get("dataset") == "humaneval":
+        candidate["failure_bits"] = "H1" if candidate.get("full_pass") else "H0"
+        candidate["test_errors"] = []
+        candidate["functional_signature"] = candidate["failure_bits"]
+    else:
+        failure = evaluate_failure_bits(code, record)
+        candidate["failure_bits"] = failure["failure_bits"]
+        candidate["test_errors"] = failure["test_errors"]
+        candidate["functional_signature"] = failure["failure_bits"]
     candidate["behavior_signature"] = behavior_signature(candidate)
+    candidate["deployable_behavior_signature"] = deployable_behavior_signature(candidate)
     return candidate
+
+
+def deployable_behavior_signature(candidate: dict[str, Any]) -> str:
+    if candidate.get("parse_status") != "parsed":
+        return "parse_failed"
+    status = "V1" if candidate.get("visible_all_pass") else "V0"
+    return f"{status}:{candidate.get('public_signature', '')}"
 
 
 def behavior_signature(candidate: dict[str, Any]) -> str:

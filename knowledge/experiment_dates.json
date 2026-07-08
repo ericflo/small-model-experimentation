@@ -276,6 +276,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_humaneval_code_confidence": {
+   "start": "2026-07-08",
+   "end": "2026-07-08",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md dated 2026-07-08 and git history (post-import)"
+   ]
+  },
   "qwen35_4b_confidence_guided_compute": {
    "start": "2026-07-07",
    "end": "2026-07-07",

@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_code_confidence"
 primary_readme: "experiments/qwen35_4b_code_confidence/README.md"
 primary_report: "experiments/qwen35_4b_code_confidence/reports/report.md"
-summary: "C41's verdict-free selection win was demonstrated on a TOY substrate where confidence = one digit's P(answer). Real code has no single answer token. Which program-level confidence — sequence mean-logprob (implicit), single-token P(True) judge readout (explicit-framed logit), execution-cluster/public-output majority (self-consistency) — carries the calibrated signal on MBPP and HumanEval, and does verification-free selection still beat sample-more baselines?"
+summary: "C41's verdict-free selection win was demonstrated on a TOY substrate where confidence = one digit's P(answer). Real code has no single answer token. Which program-level confidence — sequence mean-logprob (implicit), single-token P(True) judge readout (explicit-framed logit), execution-cluster majority (self-consistency) — carries the calibrated signal on MBPP, and does verification-free selection still beat self-consistency?"
 tags:
   - "execution"
   - "small-model"
@@ -26,12 +26,12 @@ top_level_dirs:
   - "scripts"
   - "src"
 file_counts:
-  json: 10
+  json: 3
   log: 3
   md: 5
-  png: 3
+  png: 1
   py: 9
   yaml: 3
-total_files: 33
-total_size_bytes: 7707760
+total_files: 24
+total_size_bytes: 2458099
 generated_on: "2026-07-08"

@@ -25,6 +25,10 @@ This file plus `docs/` and `knowledge/` are the complete operating context: ever
 - **In ambiguity, follow the repo's evident convention** — not whatever is easiest to set up. If the corpus overwhelmingly does X, do X and solve the tooling friction.
 - Treat the imported tracks as prototypes, not as the repo boundary.
 - Keep experiments self-contained under `experiments/<id>/`.
+- Follow-up benchmarks, replications, and design variants get their own experiment
+  directory. Copy the prior harness or artifacts you need into the new experiment
+  and modify there; do not extend an existing result-bearing experiment with a new
+  substrate or follow-up result.
 - Attach every new experiment to a research program, or create a new program.
 - Use an idea intake note for material new directions and name the closest near-duplicate before running.
 - Run an adversarial design review before the expensive run and save it as `reports/design_review.md` (reviews have caught peeking bugs, redundant framings, and missing controls before they burned GPU-days).

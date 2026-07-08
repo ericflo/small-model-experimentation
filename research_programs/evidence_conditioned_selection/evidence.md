@@ -23,10 +23,15 @@
   its cost in verifier-only settings. So the C2 wall is fixable with *cheap* plumbing.
 
 - [qwen35_4b_code_confidence](../../experiments/qwen35_4b_code_confidence/reports/report.md)
-  (claim C46): in the verifier-free code regime, single-token P(True) is the selector to beat. MBPP P(True)
-  selection 0.762 beats public-output majority 0.721 and random 0.696; all-task HumanEval no-probe P(True)
-  0.835 beats mean-logprob 0.787 and random 0.766. When a visible test exists, execute it first (MBPP
-  visible-test execution 0.816), then use confidence for abstain/route or no-test settings.
+  (claim C46, MBPP leg): in the verifier-free code regime, single-token P(True) is the selector to beat. MBPP
+  P(True) selection 0.762 beats public-output majority 0.721 and random 0.696. When a visible test exists,
+  execute it first (MBPP visible-test execution 0.816), then use confidence for abstain/route or no-test
+  settings.
+
+- [qwen35_4b_humaneval_code_confidence](../../experiments/qwen35_4b_humaneval_code_confidence/reports/report.md)
+  (claim C46, HumanEval replication): in the strict no-public-probe setting, P(True) selection 0.835 beats
+  mean-logprob 0.787 and random 0.766, with oracle pass@8 0.872. This is the clean no-verifier selection
+  replication.
 
 ## Current Read
 

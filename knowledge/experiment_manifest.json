@@ -1061,10 +1061,10 @@
   },
   {
     "file_counts": {
-      ".json": 10,
+      ".json": 3,
       ".log": 3,
       ".md": 5,
-      ".png": 3,
+      ".png": 1,
       ".py": 9,
       ".yaml": 3
     },
@@ -1082,7 +1082,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "C41's verdict-free selection win was demonstrated on a TOY substrate where confidence = one digit's P(answer). Real code has no single answer token. Which program-level confidence \u2014 sequence mean-logprob (implicit), single-token P(True) judge readout (explicit-framed logit), execution-cluster/public-output majority (self-consistency) \u2014 carries the calibrated signal on MBPP and HumanEval, and does verification-free selection still beat sample-more baselines?",
+    "summary": "C41's verdict-free selection win was demonstrated on a TOY substrate where confidence = one digit's P(answer). Real code has no single answer token. Which program-level confidence \u2014 sequence mean-logprob (implicit), single-token P(True) judge readout (explicit-framed logit), execution-cluster majority (self-consistency) \u2014 carries the calibrated signal on MBPP, and does verification-free selection still beat self-consistency?",
     "tags": [
       "execution",
       "small-model",
@@ -1098,8 +1098,8 @@
       "scripts",
       "src"
     ],
-    "total_files": 33,
-    "total_size_bytes": 7707760
+    "total_files": 24,
+    "total_size_bytes": 2458099
   },
   {
     "file_counts": {
@@ -2204,6 +2204,43 @@
     ],
     "total_files": 34,
     "total_size_bytes": 1758020
+  },
+  {
+    "file_counts": {
+      ".json": 7,
+      ".md": 5,
+      ".png": 2,
+      ".py": 9,
+      ".yaml": 3
+    },
+    "generated_on": "2026-07-08",
+    "id": "qwen35_4b_humaneval_code_confidence",
+    "path": "experiments/qwen35_4b_humaneval_code_confidence",
+    "primary_readme": "experiments/qwen35_4b_humaneval_code_confidence/README.md",
+    "primary_report": "experiments/qwen35_4b_humaneval_code_confidence/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
+    "source_track": "new",
+    "summary": "Standalone HumanEval replication of the C46 code-confidence result: test whether the P(True) judgment-token readout beats verifier-free sample-more baselines on HumanEval.",
+    "tags": [
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B: Does Code Confidence Replicate on HumanEval?",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 26,
+    "total_size_bytes": 5337132
   },
   {
     "file_counts": {

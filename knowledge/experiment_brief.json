@@ -10486,17 +10486,13 @@
    "verdict_tag": "Confidence works on real code -- read the judge token, not the average",
    "concept_primer": "Earlier experiments showed this small model 'knows when it will fail' on a toy digit task: the probability it assigns its own answer predicts whether the answer is right. But real code has no single answer token -- a solution is hundreds of tokens long. This experiment asks which program-level confidence signal, if any, carries that same self-knowledge.",
    "plain_question": "Can the model's own confidence pick its best code attempt and know when to abstain -- without running any tests?",
-   "plain_answer": "Yes -- but only if you read the RIGHT confidence. Averaging how 'fluent' the model felt while writing the code is too diluted to be useful. What works: show the model its own code and ask 'is this correct, A or B?', then read the probability it puts on 'A' (one cheap forward pass, no test execution). On MBPP, picking the sample that maximizes that judge-token probability beats majority voting across samples; on all HumanEval tasks with no public tests, it beats mean-logprob and random selection. Actually running even one test still beats every confidence trick -- confidence is for when you have no tests to run, or for abstaining/routing before spending more compute.",
-   "why_it_matters": "This is a free reliability lever for real code generation: no training, no external checker -- just the model's own logits. It generalizes the project's metacognition findings off the toy substrate and across two real-code substrates, and sharpens the recipe: on long outputs, concentrate the model's self-knowledge into a single judgment token and read THAT. Sample several tries, self-judge each, keep the most confident, abstain when even the best looks doubtful.",
+   "plain_answer": "Yes -- but only if you read the RIGHT confidence. Averaging how 'fluent' the model felt while writing the code is too diluted to be useful. What works: show the model its own code and ask 'is this correct, A or B?', then read the probability it puts on 'A' (one cheap forward pass, no test execution). On MBPP, picking the sample that maximizes that judge-token probability beats majority voting across samples. Actually running even one test still beats every confidence trick -- confidence is for when you have no tests to run, or for abstaining/routing before spending more compute.",
+   "why_it_matters": "This is a free reliability lever for real code generation: no training, no external checker -- just the model's own logits. It generalizes the project's metacognition findings off the toy substrate and sharpens the recipe for long code outputs: concentrate the model's self-knowledge into a single judgment token and read THAT. Sample several tries, self-judge each, keep the most confident, abstain when even the best looks doubtful.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
      "label": "pick-1-of-8 accuracy: P(True) self-judge vs majority vote vs random",
      "value": "0.76 vs 0.72 vs 0.70"
-    },
-    {
-     "label": "HumanEval no-public-test pick-1-of-8: P(True) vs mean-logprob vs random",
-     "value": "0.84 vs 0.79 vs 0.77"
     },
     {
      "label": "run-the-visible-test selection (execution still king) / oracle",
@@ -10512,6 +10508,40 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_humaneval_code_confidence": {
+   "verdict_tag": "The HumanEval rerun confirms the judge-token signal",
+   "concept_primer": "The MBPP code experiment found that the model can score its own code if we ask a yes/no correctness question and read the probability of the yes answer. This rerun checks the same idea on HumanEval, with no public tests available.",
+   "plain_question": "When there are no tests to run, can the model still pick its best HumanEval code attempt by judging its own code?",
+   "plain_answer": "Yes. Across all 164 HumanEval tasks, the model picked better code when it used the one-token 'this is correct' score than when it picked a random sample or trusted the average probability of the whole code completion. The best possible pick among the 8 samples was 0.87; the self-judge reached 0.84, close to that ceiling, without running tests.",
+   "why_it_matters": "This separates the deployment rule from the benchmark: when tests exist, run them. When tests are missing, use the model's own one-token correctness score to choose among samples or decide whether to route the problem elsewhere.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "pick-1-of-8: P(True) vs mean-logprob vs random",
+     "value": "0.84 vs 0.79 vs 0.77"
+    },
+    {
+     "label": "best possible pick among 8",
+     "value": "0.87"
+    },
+    {
+     "label": "within-problem AUROC: P(True) vs code length",
+     "value": "0.78 vs 0.57"
+    },
+    {
+     "label": "greedy solvability prediction: P(True) vs mean-logprob",
+     "value": "0.86 vs 0.73"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Choosing one HumanEval sample without running tests",
+     "chart_read": "Each bar shows how often a selector chose a correct program from 8 attempts. Taller is better. The oracle bar is the best possible choice if you already knew which attempts passed.",
+     "chart_takeaway": "The one-token self-judge score beats the other no-test selectors and lands close to the best possible pick among the 8 attempts."
+    }
+   ]
   }
  }
 }

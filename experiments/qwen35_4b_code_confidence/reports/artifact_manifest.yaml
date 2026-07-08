@@ -5,6 +5,6 @@ external_artifacts: []
 omitted_artifacts: []
 reproducibility:
   smoke_command: "python scripts/run.py --smoke"
-  full_command: "python scripts/run.py && python scripts/run.py --dataset humaneval --visible-tests 0 --n 164 --k 8 --out-name humaneval_code_conf_novis --title 'HumanEval all tasks, no public probes' --judge-batch-size 1 && python scripts/run.py --dataset humaneval --visible-tests 1 --n 164 --k 8"
+  full_command: "python scripts/run.py"
   required_external_artifacts: []
-notes: "No external artifacts: no training, no adapters. Requires the HF datasets google-research-datasets/mbpp and openai/openai_humaneval plus local Qwen3.5-4B weights. MBPP regenerates in ~35 min on an RTX 4090; all-task HumanEval no-probe took ~27 min and requires --judge-batch-size 1 to avoid long-prompt P(True) judge OOM on this 24 GB GPU. Per-candidate JSON outputs and figures are checked in."
+notes: "No external artifacts: no training, no adapters. Requires the offline HF cache of google-research-datasets/mbpp (sanitized config) and the local Qwen3.5-4B weights. Full outputs regenerate in ~35 min on an RTX 4090; runs/code_conf.json (1.1 MB) and runs/verdict.json are checked in."

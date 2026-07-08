@@ -3,7 +3,7 @@
 - Date: 2026-07-08
 - Status: accepted
 - Programs: benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation
-- Experiments: qwen35_4b_code_confidence, qwen35_4b_meta_induction
+- Experiments: qwen35_4b_code_confidence, qwen35_4b_humaneval_code_confidence, qwen35_4b_meta_induction
 - Claims: C41, C45, C46
 
 ## Decision
@@ -14,7 +14,7 @@ The confidence line remains the immediate priority because C46 is cheap, verifie
 
 ## Context
 
-C41 showed confidence-select beating self-consistency on a toy single-token substrate. C46 resolves the owed real-code generalization: on MBPP and HumanEval, the transferable confidence readout is P(True), a concentrated judgment-token logit, not sequence mean-logprob. Visible execution still wins when available, so P(True) is the verifier-free select/abstain/route lever.
+C41 showed confidence-select beating self-consistency on a toy single-token substrate. C46 resolves the owed real-code generalization through separate MBPP and HumanEval experiments: the transferable confidence readout is P(True), a concentrated judgment-token logit, not sequence mean-logprob. Visible execution still wins when available, so P(True) is the verifier-free select/abstain/route lever.
 
 C45 showed that reasoning-SFT can install a general hypothesize-and-verify procedure within an affine menu, but its own caveats leave open whether this is true grammar search or menu verification. A flat held-out non-affine family is low-information: if the family appears in the enumerated candidate set, success can be menu verification; if it is outside the taught hypothesis class, failure mostly repeats the known proposal wall.
 
@@ -30,6 +30,7 @@ C45 showed that reasoning-SFT can install a general hypothesize-and-verify proce
 - Future induction experiments should report held-out combinations, held-out productions, and held-out composition depth separately.
 - Every compositional-grammar induction run needs execute-given-rule ceilings, token-budget/truncation checks, mixed execute examples to prevent forgetting, and automated example-set sufficiency checks so examples determine the rule while not handing out a lookup table.
 - Updated knowledgebase pages: C46 in the claim ledger, shared synthesis, benchmark/evidence selection program evidence, scorecards, and program backlogs.
+- Repo-boundary correction: HumanEval replication is now a standalone experiment (`qwen35_4b_humaneval_code_confidence`) rather than an extension of the MBPP experiment.
 
 ## Reversal Criteria
 

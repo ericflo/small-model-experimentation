@@ -28,6 +28,11 @@ This creates the experiment, copies the queue item into `queue_proposal.json`, a
 
 Keep the question narrow enough that a single result can move belief.
 
+If the work is a follow-up benchmark, replication, ablation, or design variant of
+an existing result-bearing experiment, create a new experiment directory and copy
+the prior harness/artifacts into it before modifying. Do not append a new
+substrate or follow-up result to the prior experiment.
+
 The README should include:
 
 - Research program.

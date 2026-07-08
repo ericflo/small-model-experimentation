@@ -1,0 +1,23 @@
+model: Qwen/Qwen3.5-4B
+dataset: humaneval
+tasks: 164
+visible_tests: 0
+samples_per_problem: 8
+generation:
+  mode: no-think
+  greedy_candidates: 1
+  sample_temperature: 0.7
+  top_p: 0.8
+  top_k: 20
+  answer_max_tokens: 420
+confidence_signals:
+  - mean_logprob
+  - p_true_judgment_token
+controls:
+  - random_pick_expectation
+  - code_length_surface_baseline
+  - oracle_pass_at_8
+diagnostic_runs:
+  - name: humaneval_code_conf
+    visible_tests: 1
+    note: 68-task parseable-doctest subset for public-output majority and visible-execution comparisons.
