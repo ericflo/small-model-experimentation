@@ -52,8 +52,8 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Posttraining And Adaptation
 
 - Program: [charter](../research_programs/posttraining_and_adaptation/charter.md)
-- Current read: adaptation can reshape behavior, but oracle-supervised gains and deployable gains must be separated carefully.
-- Best next experiment: run one update method against frozen inference-time alternatives on the same evidence-selection or compiler benchmark.
+- Current read: adaptation can reshape behavior, but oracle-supervised gains and deployable gains must be separated carefully; induction gains live in serial reasoning tokens, not a forced forward pass.
+- Best next experiment: compositional-grammar reasoning-SFT after C45 -- held-out combinations, held-out productions, and held-out composition-depth with execute-ceiling, token-budget, and value-fill gates.
 - Strong anchors: `qwen35_4b_constrained_coverage_dpo`, `qwen35_4b_live_tool_dagger`, `qwen35_4b_oracle_process_grpo`.
 - Avoid repeating: adapter or preference runs whose artifacts cannot be audited or whose labels are not deployable.
 - Evidence that advances the program: a trained behavior beats strong frozen/tool baselines without hidden-label leakage.
@@ -70,8 +70,8 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Benchmark Generalization
 
 - Program: [charter](../research_programs/benchmark_generalization/charter.md)
-- Current read: many mechanisms look good in-family; the repository needs standard transfer stress before strategic claims harden.
-- Best next experiment: define a small cross-program generalization suite used by compiler, selector, memory, and adaptation work.
+- Current read: many mechanisms look good in-family; the repository needs standard transfer stress before strategic claims harden. C46 shows the confidence toolkit survives MBPP->HumanEval only after the signal is re-expressed as a single-token P(True) readout.
+- Best next experiment: compositional-grammar induction as the C45 stress test, plus a small cross-program generalization suite used by compiler, selector, memory, and adaptation work.
 - Strong anchors: `factor_recombination_ladder`, `feature_factorized_rule_diversity`, `targeted_bridge_allocation`.
 - Avoid repeating: reporting only IID or narrow held-out splits for a mechanism meant to generalize.
 - Evidence that advances the program: transfer across substrate, family, length, and real-task variants with a clear failure taxonomy.

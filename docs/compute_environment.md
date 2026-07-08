@@ -90,6 +90,11 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   into one GPU sync — a loop with `.item()` per candidate is ~10× slower (32 syncs). And with
   a long prompt prefix, score a few candidates per forward: 32 ops × ~1200 tokens × 152K vocab
   × float is a 23 GB tensor.
+- **Single-token P(True) judging can still OOM on long code prompts.** Even with
+  `logits_to_keep=1`, long HumanEval candidate+judge prefixes at batch 16 OOMed on the 24 GB
+  4090 during `qwen35_4b_code_confidence`; the same run succeeded with
+  `--judge-batch-size 1`. Treat P(True) judge batch size as a memory knob distinct from
+  generation batch size, and save an intermediate logprob-scored artifact before the judge pass.
 
 ## Training (QLoRA) throughput
 

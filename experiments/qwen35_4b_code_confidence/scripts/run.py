@@ -18,6 +18,8 @@ def main() -> int:
     parser.add_argument("--n", type=int, default=260)
     parser.add_argument("--k", type=int, default=8)
     parser.add_argument("--visible-tests", type=int, default=1)
+    parser.add_argument("--answer-max", type=int, default=420)
+    parser.add_argument("--judge-batch-size", type=int, default=16)
     parser.add_argument("--out-name", default=None)
     parser.add_argument("--title", default=None)
     args = parser.parse_args()
@@ -31,6 +33,10 @@ def main() -> int:
         args.dataset,
         "--visible-tests",
         str(args.visible_tests),
+        "--answer-max",
+        str(args.answer_max),
+        "--judge-batch-size",
+        str(args.judge_batch_size),
         "--out-name",
         out_name,
     ]

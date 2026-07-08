@@ -78,6 +78,7 @@ def main():
     ap.add_argument("--offset", type=int, default=0)
     ap.add_argument("--visible-tests", type=int, default=1)
     ap.add_argument("--answer-max", type=int, default=420)
+    ap.add_argument("--judge-batch-size", type=int, default=16)
     ap.add_argument("--out-name", default=None)
     a = ap.parse_args()
     if a.dataset == "humaneval":
@@ -132,6 +133,7 @@ def main():
     lps = mean_logprobs(p, prompts, all_gens)
     for (ri, ci), lp in zip(gen_index, lps):
         out_records[ri]["cands"][ci]["mean_logprob"] = round(lp, 4)
+    json.dump(out_records, open(EXP / "runs" / f"{out_name}_logprob.json", "w"))
     # explicit P(True), no-think, for every candidate with parsed code
     print("[cc] computing P(True) judge...", flush=True)
     jp, jidx = [], []
@@ -140,7 +142,7 @@ def main():
             if c["parse_ok"] and c["code"]:
                 jp.append(p.judge_prompt(records[ri]["task_text"], c["code"], enable_thinking=False))
                 jidx.append((ri, ci))
-    ptrue = p.judge_nothink(jp, batch_size=16)
+    ptrue = p.judge_nothink(jp, batch_size=a.judge_batch_size)
     for (ri, ci), v in zip(jidx, ptrue):
         out_records[ri]["cands"][ci]["p_true"] = round(v, 4)
     (EXP / "runs").mkdir(exist_ok=True)

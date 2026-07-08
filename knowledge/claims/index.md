@@ -21,7 +21,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 11 |
 | `collective_experimentation_infrastructure` | 2 |
-| `evidence_conditioned_selection` | 6 |
+| `evidence_conditioned_selection` | 7 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 21 |
@@ -970,7 +970,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 ### Next Tests
 
-- Generalize to REAL code (MBPP/HumanEval): does sequence-logprob / self-consistency-via-execution-clustering / P(True) give the same confidence-select-beats-majority + abstention result on a task where sample-more is the standard baseline?
+- C46 resolves the real-code generalization: use single-token P(True), not sequence mean-logprob, as the program-level confidence readout. Next test is the full select + abstain + route policy vs matched-compute sample-more.
 - Why does confidence-guided ALLOCATION not beat uniform confidence-select here? Is there a better cheap allocation signal (sample diversity/entropy after 2 probes) that concentrates budget on coverage-limited problems?
 - Combine with the compute-optimal policy: confidence-select + abstain-on-low-maxP + route capability-limited to a tool/bigger model -- measure the full accuracy-vs-compute Pareto frontier.
 
@@ -978,7 +978,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 - Do not claim adaptive ALLOCATION beats uniform: it is ~tied with uniform confidence-select here. The win is SELECTION (confidence vs majority) and ABSTENTION, not budget allocation.
 - Do not use self-consistency (majority vote) as the selection method for this model: it is FLAT across budgets because the model's mode is often confidently wrong (natural-successor intrusion etc.). Use argmax per-sample P(answer).
-- Single toy substrate (successor task); the confidence signal is a single digit's P(answer). Real code needs a program-level confidence (sequence-logprob / execution-clustering / P(True)) -- untested here.
+- Single toy substrate (successor task); C46 is the real-code follow-up and shows the transferable recipe is not sequence-logprob but a concentrated P(True) judgment-token readout.
 - Single seed; the design-review agent died (API error) so the design was self-vetted against C10/C17. Novel bit vs C17 is verification-FREE selection (logit, no execution) beating self-consistency.
 
 ## C42: The model can localize its own errors: per-step confidence dips exactly at the first slip (surviving de-trending), enabling targeted repair -- C40's metacognition is step-resolved
@@ -1078,12 +1078,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Induction here is SERIAL (via generation, needs ~296 CoT tokens); it does NOT live in the forward pass (C44: forced-digit 0.01). Always eval/deploy with generation + adequate token budget (256 truncates the general CoT -> false 0.00).
 - Single seed; batch-2 training (GPU-corruption workaround). The general-CoT eval needs max_new>=400 (the enumerate-verify CoT is long).
 
-## C46: The confidence toolkit TRANSFERS to real code (MBPP) -- but the hierarchy INVERTS: the single-token P(True) judge readout, not sequence mean-logprob, is the program-level confidence (P(True)-select 0.762 beats self-consistency 0.721 verification-free; P(True) abstention keeps a top-third at ~0.95)
+## C46: The confidence toolkit TRANSFERS to real code (MBPP + HumanEval) -- but the hierarchy INVERTS: the single-token P(True) judge readout, not sequence mean-logprob, is the program-level confidence
 
 - Status: `Promising`
-- Programs: `benchmark_generalization`
-- Summary: Experiment qwen35_4b_code_confidence -- the generalization test owed by C41 ('real code needs a PROGRAM-level confidence'). MBPP sanitized test (244 problems), greedy + k=8 no-think samples (T=0.7), 2196 candidates; ground truth = hidden-assert execution (pass rate 0.70). Signals per candidate: sequence mean-logprob (implicit, teacher-forced), P(True) (P of the 'A = correct' token under a strict-reviewer A/B self-judge prompt, no-think, one forward pass), public-output majority (self-consistency; clusters on VISIBLE-test behavior only, strictly deployable), code length (surface control). RESULTS: (1) C40 analog, within-problem AUROC on the 78 mixed problems: mean-logprob 0.693 (CI 0.631-0.751), P(True) 0.738 (CI 0.665-0.808), length 0.548; paired diff vs length +0.242/+0.287 (CIs exclude 0) -- confidence, not verbosity. (2) C41 analog, selection at k=8: random 0.696, mean-logprob 0.730, P(True) 0.762, self-consistency 0.721, visible-test execution 0.816, oracle pass@k 0.844; paired bootstrap over problems: P(True) > self-consistency +0.041 (CI 0.004-0.078, p=0.014), P(True) > mean-logprob +0.033 (p=0.034), mean-logprob vs self-consistency NOT significant (p=0.37). (3) Abstention: greedy problem-level solvability AUROC P(True) 0.837 (the toy's was 0.83), mean-logprob 0.760, length 0.688; keeping the top third of greedy attempts by P(True) scores 0.94-0.96 vs 0.701 unfiltered. Duplicate rate among samples (public outputs) 0.775 -- majority vote adds little (+0.025 over random), echoing C41's flat self-consistency.
-- Implication: C40's law refines rather than breaks on real code: calibrated uncertainty lives in CONCENTRATED SINGLE-TOKEN logit readouts -- the answer digit's P on the toy, the judgment token's P(A=correct) on programs -- and sequence-averaged logprob DILUTES it below deployable significance. 'Read logits, not self-report' survives (P(True) IS a logit read, not a sampled verbalization), but the toy's implicit-beats-explicit hierarchy inverts on long-form outputs with no single answer token. DEPLOYABLE RECIPE (verifier-free regime): sample k, self-judge each candidate with a no-think A/B prompt (one batchable forward pass each), pick argmax P(True); abstain on low max-P(True). When ANY visible test exists, execute it instead -- 0.816 crushes every verification-free signal and nearly closes the oracle gap. Verification-free confidence recovers ~45% of the random-to-oracle selection headroom at zero execution cost: the mission's beat-sample-more lever, now demonstrated on real code.
+- Programs: `benchmark_generalization`, `evidence_conditioned_selection`
+- Summary: Experiment qwen35_4b_code_confidence -- the generalization test owed by C41 ('real code needs a PROGRAM-level confidence'), now on MBPP and HumanEval. Signals per candidate: sequence mean-logprob (implicit, teacher-forced), P(True) (P of the 'A = correct' token under a strict-reviewer A/B self-judge prompt, no-think, one forward pass), public-output majority where public probes exist (self-consistency; clusters on visible-test behavior only, strictly deployable), and code length (surface control). MBPP sanitized test: 244 problems, greedy + k=8 samples, 2196 candidates, one visible test. RESULTS: within-problem AUROC on 78 mixed problems: mean-logprob 0.693 (CI 0.631-0.751), P(True) 0.738 (CI 0.670-0.809), length 0.548; paired diff vs length +0.242/+0.287. Selection at k=8: random 0.696, mean-logprob 0.730, P(True) 0.762, public-output majority 0.721, visible-test execution 0.816, oracle pass@k 0.844; P(True) > public-output majority +0.041 (CI 0.004-0.078, p=0.014), P(True) > mean-logprob +0.033 (p=0.036), mean-logprob vs self-consistency not significant (p=0.37). HumanEval all-task verifier-free replication: 164 tasks, no public probes, greedy + k=8. Within-problem AUROC on 51 mixed problems: mean-logprob 0.672 (CI 0.568-0.767), P(True) 0.779 (CI 0.695-0.857), length 0.573; P(True)-length diff +0.351 (CI 0.229-0.475). Selection at k=8: random 0.766, mean-logprob 0.787, P(True) 0.835, oracle 0.872; P(True) > mean-logprob +0.049 (CI 0.012-0.091, p=0.011), P(True) > random +0.069. HumanEval public-probe subset (68 tasks) is ceiling-limited: random 0.904, P(True) 0.941, visible execution 0.941, public-output majority 0.926, oracle 0.971; P(True) beats random but not public-output majority or mean-logprob significantly.
+- Implication: C40's law refines rather than breaks on real code: calibrated uncertainty lives in CONCENTRATED SINGLE-TOKEN logit readouts -- the answer digit's P on the toy, the judgment token's P(A=correct) on programs -- and sequence-averaged logprob DILUTES it. 'Read logits, not self-report' survives (P(True) IS a logit read, not a sampled verbalization), but the toy's implicit-beats-explicit hierarchy inverts on long-form outputs with no single answer token. DEPLOYABLE RECIPE (verifier-free regime): sample k, self-judge each candidate with a no-think A/B prompt, pick argmax P(True), and abstain/route on low max-P(True). When ANY visible executable test exists, execute it first -- MBPP visible-test execution (0.816) beats every verification-free signal and nearly closes the oracle gap. Confidence is the lever when execution is unavailable: all-task HumanEval no-probe shows P(True) beating mean-logprob and random under the strict verifier-free setting.
 
 ### Evidence
 
@@ -1091,14 +1091,15 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 ### Next Tests
 
-- HumanEval replication (second real-code substrate; MBPP problems are short ~10-line functions).
 - Thinking-judge P(True) (judge_think exists in gen_lib): does deliberation improve the readout enough to pay for its tokens?
 - The full select + abstain + route policy vs MATCHED-COMPUTE sample-more (the C41 owed compute-optimal curve; P(True) costs one extra forward pass per candidate).
 - Step-resolved P(True) on code for targeted repair (C42 bridge): localize the low-confidence region and resample only it.
+- Test confidence-pruned hypothesis search after the compositional-grammar induction line has per-hypothesis verify steps.
 
 ### Avoid
 
 - Do NOT deploy mean-logprob selection on code -- it does not significantly beat self-consistency (p=0.37); the toy's implicit-confidence star does not transfer as the selector. Use the single-token P(True) readout.
 - Do not claim confidence beats EXECUTION: one visible test (0.816) beats every verification-free signal. Confidence is for the verifier-free regime only.
+- Do not compare self-consistency on HumanEval all-task no-probe runs: with no public probes, public-output majority and visible-test execution are undefined. Use the 68-task public-probe subset only as a ceiling-limited diagnostic.
 - Headline AUROC must be WITHIN-problem on mixed problems with a length baseline (pooled AUROC is difficulty-inflated; verbose code is the confound on real programs).
-- Single benchmark (MBPP sanitized), single seed, k=8, no-think only; within-problem n=78 mixed problems. Selection deltas are modest in absolute terms (+4.1pp over majority).
+- Still single seed, k=8, no-think only. MBPP selection deltas are modest in absolute terms (+4.1pp over public-output majority), and HumanEval public-probe subset is ceiling-limited.

@@ -44320,6 +44320,30 @@
     },
     {
      "kind": "bar",
+     "title": "HumanEval with no public probes: P(True) beats mean-logprob and random in the strict verifier-free setting",
+     "categories": [
+      "random pick",
+      "mean-logprob (implicit)",
+      "P(True) self-judge (1 token)",
+      "oracle pass@8"
+     ],
+     "series": [
+      {
+       "label": "selection accuracy (k=8, 164 HumanEval tasks)",
+       "values": [
+        0.766,
+        0.787,
+        0.835,
+        0.872
+       ]
+      }
+     ],
+     "y_label": "selection accuracy",
+     "y_format": "percent01",
+     "note": "This is the cleaner verifier-free replication: all 164 HumanEval tasks are included, but no public probes are available, so public-output majority and visible-test execution are deliberately not reported. P(True) beats mean-logprob by +0.049 (paired bootstrap CI 0.012-0.091, p=0.011) and random by +0.069. Greedy solvability AUROC is 0.862 for P(True) vs 0.734 for mean-logprob."
+    },
+    {
+     "kind": "bar",
      "title": "Is it confidence or just verbosity? Within-problem AUROC vs a code-length surface baseline",
      "categories": [
       "mean-logprob (implicit)",

@@ -6,10 +6,12 @@ The review-workflow agent returned no verdict; the design was self-vetted agains
 
 1. **Verbosity/length**: on real code, verbose commented solutions could inflate mean-logprob or judge scores. Control: code-length surface baseline (both signs) in every AUROC comparison, paired per-problem. Outcome: confidence beats length by +0.24/+0.29 (CIs exclude 0).
 2. **Problem difficulty**: pooled AUROC mixes "which problems are hard" with "which samples are wrong". Control: headline AUROC is WITHIN-problem, on mixed problems only (78/244); pooled reported separately and labeled.
-3. **Small paired deltas**: selection differences of a few points on 244 problems can be noise. Control: paired bootstrap over problems for every selection delta; the honest negative (mean-logprob n.s. vs self-consistency, p=0.28) is reported in the verdict.
+3. **Small paired deltas**: selection differences of a few points on 244 problems can be noise. Control: paired bootstrap over problems for every selection delta; the honest negative (mean-logprob n.s. vs self-consistency, p=0.37 after public-output-only self-consistency) is reported in the verdict.
 4. **Selection floor/ceiling**: random-pick expectation (0.696) and oracle pass@k (0.844) bracket every method; headroom capture is stated against that 0.148 gap, not in absolute points.
+5. **HumanEval baseline availability**: all-task HumanEval has no uniform public probe, so public-output majority and visible execution are undefined rather than weak. Control: run all 164 tasks with `--visible-tests 0` for verifier-free P(True)/logprob/random/oracle only, plus a separate 68-task public-probe subset for the public-output/visible-execution diagnostic.
 
 ## Must-fix
 
 - ~~mean_logprobs OOM (full-vocab float32 log-softmax)~~ — fixed: bf16 logits, chunked float32 log-softmax, batch 4.
+- ~~P(True) judge OOM on long HumanEval prompts at batch 16~~ — fixed: configurable `--judge-batch-size`, all-task HumanEval succeeds with batch 1.
 - ~~Abstention ranked only by mean-logprob~~ — fixed: P(True)-ranked curve added (it is the better signal, AUROC 0.837 vs 0.760).

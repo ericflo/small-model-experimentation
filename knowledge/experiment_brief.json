@@ -10486,13 +10486,17 @@
    "verdict_tag": "Confidence works on real code -- read the judge token, not the average",
    "concept_primer": "Earlier experiments showed this small model 'knows when it will fail' on a toy digit task: the probability it assigns its own answer predicts whether the answer is right. But real code has no single answer token -- a solution is hundreds of tokens long. This experiment asks which program-level confidence signal, if any, carries that same self-knowledge.",
    "plain_question": "Can the model's own confidence pick its best code attempt and know when to abstain -- without running any tests?",
-   "plain_answer": "Yes -- but only if you read the RIGHT confidence. Averaging how 'fluent' the model felt while writing the code is too diluted to be useful. What works: show the model its own code and ask 'is this correct, A or B?', then read the probability it puts on 'A' (one cheap forward pass, no test execution). Picking the sample that maximizes that judge-token probability beats majority voting across samples, and the third of problems where the judge is most confident are ~95% right (vs 70% overall). Actually running even one test still beats every confidence trick -- confidence is for when you have no tests to run.",
-   "why_it_matters": "This is a free reliability lever for real code generation: no training, no test harness, no external checker -- just the model's own logits. It generalizes the project's metacognition findings off the toy substrate and sharpens the recipe: on long outputs, concentrate the model's self-knowledge into a single judgment token and read THAT. Sample several tries, self-judge each, keep the most confident, abstain when even the best looks doubtful.",
+   "plain_answer": "Yes -- but only if you read the RIGHT confidence. Averaging how 'fluent' the model felt while writing the code is too diluted to be useful. What works: show the model its own code and ask 'is this correct, A or B?', then read the probability it puts on 'A' (one cheap forward pass, no test execution). On MBPP, picking the sample that maximizes that judge-token probability beats majority voting across samples; on all HumanEval tasks with no public tests, it beats mean-logprob and random selection. Actually running even one test still beats every confidence trick -- confidence is for when you have no tests to run, or for abstaining/routing before spending more compute.",
+   "why_it_matters": "This is a free reliability lever for real code generation: no training, no external checker -- just the model's own logits. It generalizes the project's metacognition findings off the toy substrate and across two real-code substrates, and sharpens the recipe: on long outputs, concentrate the model's self-knowledge into a single judgment token and read THAT. Sample several tries, self-judge each, keep the most confident, abstain when even the best looks doubtful.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
      "label": "pick-1-of-8 accuracy: P(True) self-judge vs majority vote vs random",
      "value": "0.76 vs 0.72 vs 0.70"
+    },
+    {
+     "label": "HumanEval no-public-test pick-1-of-8: P(True) vs mean-logprob vs random",
+     "value": "0.84 vs 0.79 vs 0.77"
     },
     {
      "label": "run-the-visible-test selection (execution still king) / oracle",

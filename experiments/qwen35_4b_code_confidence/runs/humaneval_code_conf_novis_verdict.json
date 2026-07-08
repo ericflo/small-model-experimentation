@@ -1,0 +1,219 @@
+{
+ "n_problems": 164,
+ "k": 8,
+ "greedy_acc": 0.768,
+ "mixed_problems": 51,
+ "mixed_frac": 0.311,
+ "public_probe_problems": 0,
+ "duplicate_rate": null,
+ "within_problem_auroc": {
+  "mean_logprob": {
+   "mean": 0.672,
+   "ci": [
+    0.568,
+    0.767
+   ],
+   "n": 51
+  },
+  "p_true_nothink": {
+   "mean": 0.779,
+   "ci": [
+    0.695,
+    0.857
+   ],
+   "n": 51
+  },
+  "length_short_better": 0.427,
+  "length_long_better": 0.573
+ },
+ "pooled_auroc": {
+  "mean_logprob": 0.724,
+  "p_true": 0.883
+ },
+ "greedy_problem_auroc": {
+  "mean_logprob": 0.734,
+  "p_true": 0.862,
+  "length": 0.612
+ },
+ "selection_at_k": {
+  "random": 0.766,
+  "mean_logprob (verification-free)": 0.787,
+  "p_true no-think (verification-free)": 0.835,
+  "oracle pass@k": 0.872
+ },
+ "significance": {
+  "p_true_vs_random": {
+   "diff": 0.069,
+   "ci": [
+    0.04,
+    0.1
+   ],
+   "p_one_sided": 0.0
+  },
+  "logprob_vs_random": {
+   "diff": 0.021,
+   "ci": [
+    -0.013,
+    0.054
+   ],
+   "p_one_sided": 0.1167
+  },
+  "p_true_vs_logprob": {
+   "diff": 0.049,
+   "ci": [
+    0.012,
+    0.091
+   ],
+   "p_one_sided": 0.0114
+  },
+  "within_logprob_minus_length": {
+   "diff": 0.245,
+   "ci": [
+    0.087,
+    0.394
+   ],
+   "p_one_sided": 0.0015
+  },
+  "within_p_true_minus_length": {
+   "diff": 0.351,
+   "ci": [
+    0.229,
+    0.475
+   ],
+   "p_one_sided": 0.0
+  }
+ },
+ "abstain_on_greedy": [
+  [
+   0.06,
+   1.0
+  ],
+  [
+   0.12,
+   0.85
+  ],
+  [
+   0.18,
+   0.9
+  ],
+  [
+   0.24,
+   0.925
+  ],
+  [
+   0.3,
+   0.9
+  ],
+  [
+   0.37,
+   0.917
+  ],
+  [
+   0.43,
+   0.9
+  ],
+  [
+   0.49,
+   0.887
+  ],
+  [
+   0.55,
+   0.889
+  ],
+  [
+   0.61,
+   0.86
+  ],
+  [
+   0.67,
+   0.855
+  ],
+  [
+   0.73,
+   0.858
+  ],
+  [
+   0.79,
+   0.831
+  ],
+  [
+   0.85,
+   0.821
+  ],
+  [
+   0.91,
+   0.807
+  ],
+  [
+   0.98,
+   0.781
+  ]
+ ],
+ "abstain_on_greedy_p_true": [
+  [
+   0.06,
+   1.0
+  ],
+  [
+   0.12,
+   1.0
+  ],
+  [
+   0.18,
+   1.0
+  ],
+  [
+   0.24,
+   0.975
+  ],
+  [
+   0.3,
+   0.98
+  ],
+  [
+   0.37,
+   0.967
+  ],
+  [
+   0.43,
+   0.971
+  ],
+  [
+   0.49,
+   0.963
+  ],
+  [
+   0.55,
+   0.944
+  ],
+  [
+   0.61,
+   0.94
+  ],
+  [
+   0.67,
+   0.909
+  ],
+  [
+   0.73,
+   0.883
+  ],
+  [
+   0.79,
+   0.862
+  ],
+  [
+   0.85,
+   0.857
+  ],
+  [
+   0.91,
+   0.827
+  ],
+  [
+   0.98,
+   0.787
+  ]
+ ],
+ "verdict": "The confidence toolkit TRANSFERS to real code -- but the HIERARCHY INVERTS: the single-token P(True) readout, not the sequence mean-logprob, is the program-level confidence. C40 analog (within-problem, surface-matched, 51/164 mixed problems): mean-logprob AUROC 0.672 (CI [0.568, 0.767]) vs P(True)-no-think 0.779 vs length-baseline 0.573 (paired diff vs length: logprob 0.245 CI [0.087, 0.394], P(True) 0.351 CI [0.229, 0.475] -- NOT verbosity). Deployment: greedy problem-level AUROC logprob 0.734 / P(True) 0.862 (greedy acc 0.768). C41 analog (selection at k=8): random 0.766 | mean_logprob (verification-free) 0.787 | p_true no-think (verification-free) 0.835 | oracle pass@k 0.872. SIGNIFICANCE (paired bootstrap over problems): Self-consistency and visible-test execution are unavailable because this run has no public probes. P(True)-select vs mean-logprob 0.049 (p=0.0114); P(True)-select vs random 0.069 (p=0.0). Duplicate rate over public outputs is unavailable."
+}

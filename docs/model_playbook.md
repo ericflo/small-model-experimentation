@@ -35,10 +35,12 @@ changes a rule here, update the rule in the same commit.
   forward pass (C46, following the C10 readout). Sequence mean-logprob dilutes the signal
   below deployable significance on programs, and verbalized confidence is a constant (C40).
 - **Sample-and-confidence-select; don't majority-vote.** Confidence-select beats
-  self-consistency at every budget (toy: 0.62 vs 0.48, C41; MBPP: 0.762 vs 0.717, p=0.005,
-  C46) because the mode is confidently wrong on hard problems while high-confidence samples
-  are right. Abstain on low max-confidence: the top third by P(True) runs ~0.95 on MBPP vs
-  0.70 unfiltered (C46), AUROC ≈0.83–0.84 for solvability on both substrates (C41/C46).
+  self-consistency at every budget (toy: 0.62 vs 0.48, C41; MBPP: 0.762 vs public-output
+  majority 0.721, p=0.014, C46) because the mode is often confidently wrong while
+  high-confidence samples are right. On all-task HumanEval with no public probes,
+  P(True)-select beats mean-logprob 0.835 vs 0.787 (C46). Abstain on low max-confidence:
+  the top third by P(True) runs ~0.95 on MBPP vs 0.70 unfiltered (C46), AUROC ≈0.83–0.86
+  for solvability across toy/MBPP/HumanEval substrates (C41/C46).
 - **When any executable test exists, execute it — confidence is for the verifier-free
   regime.** One visible test (0.816 selection) beats every verification-free signal (C46);
   execution-filtering recovers the coverage ceiling for free (C17).

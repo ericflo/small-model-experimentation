@@ -19,14 +19,21 @@
 - [qwen35_4b_verifier_selector_showdown](../../experiments/qwen35_4b_verifier_selector_showdown/reports/report.md)
   (matched-cost follow-up): on one k=8 pool, the thinking-verifier is **Pareto-dominated** when a cheap visible
   test exists — standalone 0.860 ≈ visible-only 0.850 at ~5× cost; the deployable sweet spot is **visible +
-  free no-think verifier (0.870**, 83% of the pass@1→oracle gap). Expensive thinking-verification only earns
+  free no-think verifier (0.870)**, 83% of the pass@1→oracle gap. Expensive thinking-verification only earns
   its cost in verifier-only settings. So the C2 wall is fixable with *cheap* plumbing.
+
+- [qwen35_4b_code_confidence](../../experiments/qwen35_4b_code_confidence/reports/report.md)
+  (claim C46): in the verifier-free code regime, single-token P(True) is the selector to beat. MBPP P(True)
+  selection 0.762 beats public-output majority 0.721 and random 0.696; all-task HumanEval no-probe P(True)
+  0.835 beats mean-logprob 0.787 and random 0.766. When a visible test exists, execute it first (MBPP
+  visible-test execution 0.816), then use confidence for abstain/route or no-test settings.
 
 ## Current Read
 
-The biggest strategic gap is selection under deployable evidence — and C10 says that gap is *fixable* with
-cheap plumbing: a visible/execution signal + a free no-think self-verifier (visible+no-think-verifier 0.870);
-thinking-verification is reserved for verifier-only settings. Future selection work
+The biggest strategic gap is selection under deployable evidence — and C10/C46 say that gap is *fixable* with
+cheap plumbing: execute visible evidence when it exists, then use a free no-think P(True) readout for
+verifier-free selection, abstention, or routing. Thinking-verification is reserved for verifier-only settings
+where its added cost beats the no-think readout. Future selection work
 should (a) benchmark against the thinking-verifier before building trained selectors, (b) treat native
 thinking as a verification lever (not only generation), and (c) still report oracle coverage only as a
 diagnostic with the deployable decision rule as the main object. Top follow-up: wire the thinking-verifier

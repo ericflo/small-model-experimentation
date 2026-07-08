@@ -1061,10 +1061,10 @@
   },
   {
     "file_counts": {
-      ".json": 6,
+      ".json": 10,
       ".log": 3,
       ".md": 5,
-      ".png": 2,
+      ".png": 3,
       ".py": 9,
       ".yaml": 3
     },
@@ -1082,7 +1082,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "C41's verdict-free selection win was demonstrated on a TOY substrate where confidence = one digit's P(answer). Real code has no single answer token. Which program-level confidence \u2014 sequence mean-logprob (implicit), single-token P(True) judge readout (explicit-framed logit), execution-cluster majority (self-consistency) \u2014 carries the calibrated signal on MBPP, and does verification-free selection still beat self-consistency?",
+    "summary": "C41's verdict-free selection win was demonstrated on a TOY substrate where confidence = one digit's P(answer). Real code has no single answer token. Which program-level confidence \u2014 sequence mean-logprob (implicit), single-token P(True) judge readout (explicit-framed logit), execution-cluster/public-output majority (self-consistency) \u2014 carries the calibrated signal on MBPP and HumanEval, and does verification-free selection still beat sample-more baselines?",
     "tags": [
       "execution",
       "small-model",
@@ -1098,8 +1098,8 @@
       "scripts",
       "src"
     ],
-    "total_files": 28,
-    "total_size_bytes": 3564543
+    "total_files": 33,
+    "total_size_bytes": 7707760
   },
   {
     "file_counts": {
