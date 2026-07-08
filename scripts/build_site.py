@@ -217,7 +217,7 @@ def git_dates() -> dict[str, dict[str, object]]:
     """
     try:
         out = subprocess.run(
-            ["git", "log", "--format=D%ad", "--date=short", "--name-only", "--", "experiments"],
+            ["git", "log", "--format=D%ad %at", "--date=short", "--name-only", "--", "experiments"],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -228,10 +228,12 @@ def git_dates() -> dict[str, dict[str, object]]:
         return {}
     dates: dict[str, dict[str, object]] = {}
     current_date = ""
+    current_ts = 0
     seen_this_commit: set[str] = set()
     for line in out.splitlines():
-        if line.startswith("D") and re.match(r"D\d{4}-\d{2}-\d{2}$", line):
-            current_date = line[1:]
+        m = re.match(r"D(\d{4}-\d{2}-\d{2}) (\d+)$", line)
+        if m:
+            current_date, current_ts = m.group(1), int(m.group(2))
             seen_this_commit = set()
             continue
         if not line.startswith("experiments/"):
@@ -240,7 +242,8 @@ def git_dates() -> dict[str, dict[str, object]]:
         if len(parts) < 3 or parts[-1] == "metadata.yaml":
             continue
         exp_id = parts[1]
-        entry = dates.setdefault(exp_id, {"first": current_date, "last": current_date, "commits": 0})
+        entry = dates.setdefault(exp_id, {"first": current_date, "last": current_date,
+                                          "last_ts": current_ts, "commits": 0})
         entry["first"] = current_date  # log is newest-first; last assignment wins
         if exp_id not in seen_this_commit:
             entry["commits"] = int(entry["commits"]) + 1
@@ -675,6 +678,7 @@ def build_experiments(programs: list[dict]) -> list[dict]:
             "data_dropped": data_dropped,
             "first": str(info.get("first", "")),
             "last": str(info.get("last", "")),
+            "last_ts": int(info.get("last_ts", 0) or 0),
             "commits": int(info.get("commits", 0) or 0),
             **_run_window(recorded.get(exp_id, {}), info),
             "run_surface": ready.get("run_surface", ""),
@@ -690,7 +694,10 @@ def build_experiments(programs: list[dict]) -> list[dict]:
         exp["recent"] = bool(exp["last"]) and exp["last"] > floor
         # chronological anchor: post-import git activity wins, else the recorded run window
         exp["when"] = exp["last"] if exp["recent"] else (exp["ran_end"] or exp["ran_start"] or exp["last"])
-    experiments.sort(key=lambda exp: (exp["when"] or "0000-00-00", exp["ran_start"] or "0000-00-00", exp["id"]), reverse=True)
+    # day-level date first, then the exact commit timestamp so several experiments
+    # landed on the same day still list in true chronological order
+    experiments.sort(key=lambda exp: (exp["when"] or "0000-00-00", exp["last_ts"],
+                                      exp["ran_start"] or "0000-00-00", exp["id"]), reverse=True)
     known_programs = {str(program["id"]) for program in programs}
     for exp in experiments:
         exp["programs"] = [pid for pid in exp["programs"] if pid in known_programs] or exp["programs"]
