@@ -16,6 +16,7 @@
 - Builds and validates the generated static research atlas.
 - Checks local markdown links in navigation and knowledge surfaces.
 - Scans for stale repository framing and temporary scaffold residue.
+- Keeps the root README principles-only: it fails on claim-specific anchors (`claims/#cN`) or hardcoded corpus counts, which go stale with every pipeline commit — findings and counts live on the generated site.
 - Requires GitHub workflow, issue, and pull request templates to stay present.
 - Requires idea-intake, decision-record, and program-scorecard surfaces to stay present.
 

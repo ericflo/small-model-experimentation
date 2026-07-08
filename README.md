@@ -10,11 +10,11 @@
 
 This repository is a research log built around that single question: take *one* [Qwen3.5-4B](https://qwen.ai) and see how far it can be pushed — drawing out what its weights already hold and installing what they don't — **without ever importing capability from a larger model**: no scaling to something bigger, no distillation from a stronger teacher, no bigger model anywhere in the loop. *How* new capability gets installed is deliberately open: training on the model's own verified solutions, on its failures, on tool-found data, on token patterns that build generalized skills — anything qualifies so long as the signal doesn't come from a bigger model. The bar every method has to beat is the cheapest baseline there is: **just sample more.**
 
-![Self-training compounds into a flywheel: held-out single-shot accuracy climbs 0.267 to 0.393 over three expert-iteration rounds, with no diversity collapse.](experiments/qwen35_4b_neurosymbolic_repl_substrate/analysis/ei_trajectory.png)
+![One example: held-out single-shot accuracy climbs across three rounds of the model training on its own verified solutions.](experiments/qwen35_4b_neurosymbolic_repl_substrate/analysis/ei_trajectory.png)
 
-*Headline result (C11): a Qwen3.5-4B trained only on its own verified solutions banks capability into single-shot deployment — and it compounds across rounds, though the depth-3 frontier it can't yet sample stays uncracked.*
+*One thread from the corpus: the model fine-tuned on its own verified solutions climbs on unseen tasks across three self-training rounds — no larger model anywhere in the loop.*
 
-**→ Explore it all on the [research site](https://ericflo.github.io/small-model-experimentation/)**, where every experiment renders in full with native interactive charts, latest findings first, each claim linked to its evidence.
+**→ The [research site](https://ericflo.github.io/small-model-experimentation/) is the living index of everything here** — every experiment, every claim with its current status and evidence, every chart rendered natively from the experiment's own data, latest findings first. This README deliberately sticks to what doesn't change: the question, the rules, and how the corpus is organized. (There's a gate for that: `make check` fails if claim-specific references or hardcoded corpus counts creep back into this file.)
 
 ---
 
@@ -28,45 +28,21 @@ So the constraint here is about the *source* of capability, and it is absolute:
 - **Provenance, not a weight freeze — and not one recipe.** The rule is not "don't change the weights" — it's "don't import intelligence from a bigger model." Both levers are in scope: *eliciting* latent capability at test time (structured intermediates, verification, tool-augmented search, thinking budgets, context orchestration, activation probes) **and** *installing* new capability by training. The install signal is itself an open research variable: self-training on verified or tool-found solutions is the best-studied so far, but training on failures, on token patterns that build generalized skills, or on anything else the 4B and its environment can produce is equally in-bounds. Only a larger/other model and plain scaling are off-limits.
 - **A real bar to beat.** "Sample more" is free and strong. A method only counts if it beats matched-compute sampling on held-out, contamination-controlled tasks.
 
-The result is a corpus of experiments across a dozen research programs, condensed into a **machine-checkable claim ledger** where every claim points at the experiments that support or challenge it, with charts rendered directly from each experiment's own result files.
+## The operating principles
 
-## What we found
+The corpus is produced by an agent-driven loop running many experiments. These are the rules that keep it compounding instead of sprawling — they change rarely, which is why they live here:
 
-The corpus tells a connected story. A curated path through it:
+- **One narrow question per experiment**, self-contained in its own directory with code, data, runs, and report — narrow enough that a single result can move belief.
+- **Controls live next to the result**: shuffled/random baselines, frozen-vs-trained comparisons, and matched-compute sampling arms ship inside the same experiment, because controls are the difference between a result and a story.
+- **Deployable and oracle numbers never mix.** What ships (single-shot, no oracle, no hidden-test peeking) is headlined separately from ceilings (oracle selection, best-of-k coverage), which are labeled non-deployable.
+- **Contamination discipline.** Capability-gain claims require fresh or procedurally generated substrates; saturated public benchmarks are for measurement studies only.
+- **Negative results are first-class.** Ruled-out levers are recorded with the same care as wins, so the next experiment doesn't re-run a dead end.
+- **Durable beliefs live in a machine-checkable claim ledger.** Every claim cites the experiments that support or challenge it, carries a status that moves with evidence, and is validated by CI — the ledger, not any narrative, is the corpus's memory.
+- **Everything is gated.** `make check` validates catalogs, claims, links, charts, and plain-language briefs before anything lands; the site regenerates from the repository on every push.
 
-**A calibration note first.** The opening thread — structured intermediates and the coverage-vs-selection wall (**C1/C2**) — is **Confirmed** in the ledger. The deeper findings below — the thinking lever, self-teaching, and the compositional-wall mechanism (**C9–C26**) — are the corpus's live, mostly single-substrate, small-n (n≈40–100) results, marked **Promising** rather than settled law (C11 and C12 were replicated on a second seed; most others are single- or two-seed); the newest, **C27**, is still **Open**. The [live ledger](https://ericflo.github.io/small-model-experimentation/claims/) and [synthesis](https://ericflo.github.io/small-model-experimentation/notebook/synthesis/) carry each claim's status, confidence, and limits.
-
-**Terms in plain English.** *Single-try accuracy* (pass@1 / greedy@1) is how often one attempt is correct; *best-of-8* picks one answer out of 8 samples; the *oracle gap* is the headroom left if the model always picked a correct answer from among its samples; *held-out* means problems it wasn't trained on; *QLoRA-SFT* is lightweight fine-tuning; *MBPP* is a standard Python coding benchmark; *no-think verifier* is a checker run with the model's reasoning channel off; *+15pp* means 15 percentage points.
-
-- **Structured intermediates are a real lever, but selection is often the wall.** Executable or structured intermediate representations reliably improve small-model reliability (**[C1](https://ericflo.github.io/small-model-experimentation/claims/#c1)**). But candidate *generation* is usually easier than deployable *selection* — a model's sample pool often contains a correct answer it can't reliably pick out (**[C2](https://ericflo.github.io/small-model-experimentation/claims/#c2)**).
-
-- **That selection wall is plumbing, not a capability limit.** When a cheap visible test exists, that test plus a *free no-think verifier* (a checker run with the model's reasoning channel off) selects best-of-8 well enough to close **83%** of the single-try→oracle gap — the cheap, deployable answer. Where no cheap execution signal exists, the model's own zero-training *thinking-verifier* still closes **~75%** of the gap, but at roughly 5× the token cost, so reserve it for verifier-only settings. Either way the bottleneck was tooling, not intelligence (**[C10](https://ericflo.github.io/small-model-experimentation/claims/#c10)**).
-
-- **Native "thinking" is an unused deployable lever.** Turning on the model's reasoning channel is worth **+15pp** (15 percentage points) on MBPP greedy decoding — and controls *indicate* it's *coherent reasoning content*, not just extra compute: irrelevant thinking collapses accuracy, contentless filler ≈ no-think, and coherent content is the entire gain (**[C9](https://ericflo.github.io/small-model-experimentation/claims/#c9)**). (This is a within-MBPP think-vs-no-think delta — largely robust to contamination since both arms share it, but not itself a contamination-controlled elicitation result; that tier is the fresh-substrate arc, C11 onward.)
-
-- **A small model can teach itself — no teacher required.** On a fresh, contamination-free program-synthesis substrate, test-time execution feedback does *not* beat sampling — but QLoRA-SFT (lightweight fine-tuning) on the model's **own** verified solutions banks capability into single-shot deployment (**+42% relative, 0.224→0.319 held-out** single-try accuracy), and iterating it compounds into a flywheel (**[C11](https://ericflo.github.io/small-model-experimentation/claims/#c11)**). Tool-augmented search then extends the frontier *modestly* past the sampling ceiling and banks that gain too (**[C12](https://ericflo.github.io/small-model-experimentation/claims/#c12)**) — real, but a behavioral min-depth audit later showed the true-depth-3 extension is small (decompose solves ~17% of genuine depth-3, up from 0 for monolithic sampling), and the crack comes from the interpreter + composition structure, not the model's planning.
-
-- **The compositional "wall" has a precise mechanism.** Where the fixed model fails at multi-step composition, the failure is **broken multi-step mental simulation / hypothesis identification** — *not* execution. Given the plan, the model **transcribes it to code at 0.90–1.00 through depth 4** (the interpreter executes); left to identify the plan itself, it runs barely above chance. It stays a reliable compiler starved of search (**[C13](https://ericflo.github.io/small-model-experimentation/claims/#c13)**).
-
-- **So capability is format-local, not built from shared primitives.** Repairing a broken primitive doesn't propagate — capability is organized by input→output *format* rather than shared internal primitives (**[C14](https://ericflo.github.io/small-model-experimentation/claims/#c14)**) — and what's deployable factors as **module × interface × procedure** (**[C15](https://ericflo.github.io/small-model-experimentation/claims/#c15)**).
-
-- **Several intuitive levers provably fail — and we headline the negatives.** Selection is already free, so no cleverer test-time *selector* beats sample-more (**[C17](https://ericflo.github.io/small-model-experimentation/claims/#c17)**); the latent composition signal is readable but **not steerable** — activation steering does not move behavior (**[C20](https://ericflo.github.io/small-model-experimentation/claims/#c20)**); and self-banking only shallow depths **cannot climb** to the next rung (**[C21](https://ericflo.github.io/small-model-experimentation/claims/#c21)**). These are clean, ruled-out negatives — because controls are the difference between a result and a story (**[C6](https://ericflo.github.io/small-model-experimentation/claims/#c6)**).
-
-- **The payoff: extending capability without a bigger model.** Tool-augmented harvest plus banking crosses the depth-3 wall self-training alone could not, one rung at a time — and the install is **dose-responsive and non-saturating** through 1,280 tool-found solutions, driven by data *diversity* rather than extra compute (**[C22](https://ericflo.github.io/small-model-experimentation/claims/#c22)**–**[C24](https://ericflo.github.io/small-model-experimentation/claims/#c24)**). What banks is **reusable compositional planning, not lookup**: self-training measurably improves the model's step-wise lookahead ranking (**[C25](https://ericflo.github.io/small-model-experimentation/claims/#c25)**). The honest limit — test-time serial compute (thinking) alone amplifies recognition but does *not* cross the planning gap; for that, training on the model's own verified solutions is required (**[C26](https://ericflo.github.io/small-model-experimentation/claims/#c26)**).
-
-The recipe that emerges from all of it **so far**: **tools generate and simulate, context orchestrates, the model recognizes and transcribes** — and where the forward pass falls short, the best-performing install found to date is self-training on the model's own verified solutions. That's the current front-runner, not the boundary of the search — failure-driven data, generalized token-pattern curricula, and other self-sourced signals are open lanes.
-
-> The full arc runs through **[C27](https://ericflo.github.io/small-model-experimentation/claims/#c27)** and is still growing. The [live claim ledger](https://ericflo.github.io/small-model-experimentation/claims/) and [cross-program synthesis](https://ericflo.github.io/small-model-experimentation/notebook/synthesis/) carry every claim with its evidence, status, and limits.
-
-**Standout experiments** — jump straight to a self-contained protocol and its data:
-
-- Thinking-budget scaling (C9) — [`experiments/qwen35_4b_thinking_budget_scaling/reports/report.md`](experiments/qwen35_4b_thinking_budget_scaling/reports/report.md)
-- Depth-wall anatomy (C13) — [`experiments/qwen35_4b_depth_wall_anatomy/reports/report.md`](experiments/qwen35_4b_depth_wall_anatomy/reports/report.md)
-- Neurosymbolic REPL substrate (C11) — [`experiments/qwen35_4b_neurosymbolic_repl_substrate/reports/report.md`](experiments/qwen35_4b_neurosymbolic_repl_substrate/reports/report.md)
+For what the corpus has actually *found*, read the living [synthesis](https://ericflo.github.io/small-model-experimentation/notebook/synthesis/) and the [claim ledger](https://ericflo.github.io/small-model-experimentation/claims/) — they are regenerated with the corpus and always current.
 
 ## Explore the corpus
-
-> **179** experiments · **12** research programs · **27** evidence-linked claims · **792** result charts.
 
 The site is the best way in; the source files are one click deeper. Start anywhere:
 
@@ -81,7 +57,7 @@ The site is the best way in; the source files are one click deeper. Start anywhe
 
 ## What's in here
 
-Each of the **179** experiments is self-contained (README, code, data, runs, analysis, report); each of the **12** programs has a charter, backlog, and evidence file; the **27** claims form a shared belief ledger where every claim cites its experiments; and every one of the **792** charts is rendered natively from an experiment's own data files.
+Every experiment is self-contained (README, code, data, runs, analysis, report); every research program has a charter, backlog, and evidence file; the claims form a shared belief ledger where every claim cites its experiments; and every chart on the site is rendered natively from an experiment's own data files.
 
 ```text
 research_programs/<program-id>/   durable research lines
@@ -99,21 +75,6 @@ templates/    starting points for new experiments and programs
 ```
 
 **One model throughout — Qwen3.5-4B.** Its weights may be improved by anything the model, its tools, and its environment can produce, but a larger or different model is never in the loop — that constraint is the entire point.
-
-**The twelve programs:**
-
-- Structured execution & compilers
-- Evidence-conditioned selection
-- Active evidence acquisition
-- Algorithmic memory & retrieval
-- Operator & skill inventories
-- Posttraining & adaptation
-- Process control & tool use
-- Benchmark generalization
-- Interpretability & diagnostics
-- Reliability & safety
-- Test-time reasoning budget
-- Collective experimentation infrastructure *(meta)* — the repository treats itself as a research instrument
 
 ## Reproducing an experiment
 

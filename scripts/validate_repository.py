@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -342,6 +343,26 @@ def validate_standard_artifact_manifest(errors: list[str], path: Path, exp: Path
         fail(errors, f"artifact manifest experiment_id mismatch in {rel(path)}; expected {expected}")
 
 
+def validate_root_readme(errors: list[str]) -> None:
+    # The root README is principles-only by policy (owner decision, 2026-07-08):
+    # findings, per-claim narratives, and corpus counts go stale with every
+    # pipeline commit and belong on the generated site, which is always current.
+    readme = ROOT / "README.md"
+    if not readme.exists():
+        fail(errors, "missing README.md")
+        return
+    text = readme.read_text(encoding="utf-8", errors="replace")
+    claim_anchors = sorted(set(re.findall(r"claims/#c\d+", text, flags=re.IGNORECASE)))
+    if claim_anchors:
+        fail(errors, "root README references specific claim anchors (" + ", ".join(claim_anchors[:5]) +
+                     "): the README is principles-only — link the live claim ledger instead of individual claims")
+    counts = re.findall(r"\*\*\d[\d,]*\*\*\s*(?:result |evidence-linked )?(?:experiments?|research programs?|programs?|claims?|charts?)",
+                        text, flags=re.IGNORECASE)
+    if counts:
+        fail(errors, "root README hardcodes corpus counts (" + "; ".join(counts[:5]) +
+                     "): counts drift with every pipeline commit — describe without numbers; the site carries live counts")
+
+
 def validate() -> int:
     errors: list[str] = []
 
@@ -584,6 +605,7 @@ def validate() -> int:
 
     validate_claim_ledger(errors, set(program_ids), exp_ids)
     validate_future_queue(errors, set(program_ids))
+    validate_root_readme(errors)
 
     gitattributes = ROOT / ".gitattributes"
     if not gitattributes.exists():
