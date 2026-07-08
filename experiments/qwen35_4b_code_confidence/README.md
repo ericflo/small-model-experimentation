@@ -67,7 +67,6 @@ C40's law survives contact with real code in refined form: what carries calibrat
 - `src/` — generation/judging library (gen_lib), MBPP execution utilities (coverage_utils, code_env)
 - `scripts/` — `eval_code_conf.py` (run), `analyze.py` (verdict + figure), `run.py` (orchestrator)
 - `configs/`
-- `data/` — none (offline HF cache)
 - `runs/` — `code_conf.json` (per-candidate records), `verdict.json`, logs
 - `analysis/` — `code_confidence.png`
 - `reports/` — `report.md`

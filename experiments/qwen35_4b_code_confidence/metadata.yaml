@@ -21,7 +21,6 @@ research_programs:
 top_level_dirs:
   - "analysis"
   - "configs"
-  - "data"
   - "reports"
   - "runs"
   - "scripts"
@@ -34,5 +33,5 @@ file_counts:
   py: 9
   yaml: 3
 total_files: 24
-total_size_bytes: 2455964
+total_size_bytes: 2455915
 generated_on: "2026-07-08"

@@ -25,7 +25,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `analysis/` | 121 |
 | `scripts/` | 104 |
 | `configs/` | 101 |
-| `data/` | 94 |
+| `data/` | 93 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `figures/` | 10 |
