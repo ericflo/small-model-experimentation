@@ -1,0 +1,32 @@
+Using the latest cached version of the dataset since google-research-datasets/mbpp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sanitized' at /home/ericflo/.cache/huggingface/datasets/google-research-datasets___mbpp/sanitized/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c (last modified on Mon Jun 29 12:07:21 2026).
+[cc] 244 MBPP test records
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:19,  5.34it/s]Loading weights:  12%|█▏        | 50/426 [00:00<00:01, 213.77it/s]Loading weights:  23%|██▎       | 100/426 [00:00<00:01, 320.72it/s]Loading weights:  37%|███▋      | 156/426 [00:00<00:00, 404.39it/s]Loading weights:  48%|████▊     | 205/426 [00:00<00:00, 426.50it/s]Loading weights:  61%|██████    | 258/426 [00:00<00:00, 445.28it/s]Loading weights:  73%|███████▎  | 311/426 [00:00<00:00, 466.91it/s]Loading weights:  85%|████████▍ | 360/426 [00:00<00:00, 460.75it/s]Loading weights:  96%|█████████▋| 411/426 [00:01<00:00, 470.04it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 402.85it/s]
+[cc] executed 25/244
+[cc] executed 50/244
+[cc] executed 75/244
+[cc] executed 100/244
+[cc] executed 125/244
+[cc] executed 150/244
+[cc] executed 175/244
+[cc] executed 200/244
+[cc] executed 225/244
+[cc] computing mean logprobs...
+Traceback (most recent call last):
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/scripts/eval_code_conf.py", line 132, in <module>
+    main()
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/scripts/eval_code_conf.py", line 110, in main
+    lps = mean_logprobs(p, prompts, all_gens)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/scripts/eval_code_conf.py", line 62, in mean_logprobs
+    out[i] = float(span.mean()) if span.numel() else -99.0
+             ^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

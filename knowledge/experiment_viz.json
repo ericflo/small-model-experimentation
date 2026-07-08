@@ -44286,6 +44286,178 @@
      "note": "Answer-only SFT (training the model to output the answer directly) lifts shift induction from chance (0.087) to 0.40, but at a steep cost: it CATASTROPHICALLY FORGETS execution -- the model's ability to APPLY a stated rule crashes from 0.72 to 0.093. So answer-only SFT trades the model's executor competence for a partial, biased induction heuristic. This is consistent with the whole arc's law (the fixed 4B is an executor, not an inducer): even trained to induce, it does not cleanly acquire the general skill, and the training damages what it was good at. Owed: a reasoning-SFT arm (teach the procedure as plain-words chain-of-thought), mixing execute examples to prevent forgetting, and a multi-family leave-one-out design to test GENERAL (not shift-specific) induction."
     }
    ]
+  },
+  "qwen35_4b_code_confidence": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Picking 1 of 8 code samples: the single-token P(True) self-judgment beats majority voting, verification-free; running a test still wins",
+     "categories": [
+      "random pick",
+      "self-consistency (majority)",
+      "mean-logprob (implicit)",
+      "P(True) self-judge (1 token)",
+      "run the visible test",
+      "oracle pass@8"
+     ],
+     "series": [
+      {
+       "label": "selection accuracy (k=8, 244 MBPP problems)",
+       "values": [
+        0.696,
+        0.717,
+        0.73,
+        0.762,
+        0.816,
+        0.844
+       ]
+      }
+     ],
+     "y_label": "selection accuracy",
+     "y_format": "percent01",
+     "note": "The C41 generalization test on real code. Per MBPP problem: 8 temperature samples; each selector picks ONE; scored by hidden asserts. Verification-free P(True) (ask the model 'is this correct, A or B?' and read P(A) -- one forward pass, no execution) beats self-consistency (execution-cluster majority) by +0.045 (paired bootstrap CI 0.012-0.082, p=0.005) and random by +0.066. The toy substrate's star signal, sequence mean-logprob, does NOT significantly beat majority voting (p=0.28) -- averaging logprob over hundreds of program tokens dilutes the calibrated signal. Honest hierarchy: executing even the single visible test (0.816) crushes every verification-free signal. Confidence is the lever for the verifier-free regime, where it recovers ~45% of the random-to-oracle headroom at zero execution cost."
+    },
+    {
+     "kind": "bar",
+     "title": "Is it confidence or just verbosity? Within-problem AUROC vs a code-length surface baseline",
+     "categories": [
+      "mean-logprob (implicit)",
+      "P(True) self-judge (explicit-framed)",
+      "code length (surface baseline)"
+     ],
+     "series": [
+      {
+       "label": "within-problem AUROC (78 mixed problems)",
+       "values": [
+        0.693,
+        0.738,
+        0.548
+       ]
+      }
+     ],
+     "y_label": "within-problem AUROC",
+     "y_format": "number",
+     "note": "The C40 analog, review-hardened: AUROC computed WITHIN each problem that has both passing and failing samples (pooled AUROC is inflated by problem difficulty), against the natural confound on real code -- verbose solutions could fake 'confidence'. Paired per-problem difference vs the length baseline: mean-logprob +0.242 (CI 0.145-0.338), P(True) +0.287 (CI 0.183-0.386) -- the signal is genuine self-knowledge, not verbosity. Both are far below the toy's 0.95: real-code confidence is real but attenuated, and the toy hierarchy INVERTS -- the concentrated single-token readout beats the sequence average."
+    },
+    {
+     "kind": "line",
+     "title": "Abstention: keep only the problems the model is confident on and accuracy jumps from 0.70 to ~0.95",
+     "series": [
+      {
+       "label": "ranked by P(True)",
+       "points": [
+        [
+         0.04,
+         0.9
+        ],
+        [
+         0.08,
+         0.95
+        ],
+        [
+         0.16,
+         0.95
+        ],
+        [
+         0.2,
+         0.96
+        ],
+        [
+         0.29,
+         0.957
+        ],
+        [
+         0.41,
+         0.92
+        ],
+        [
+         0.53,
+         0.9
+        ],
+        [
+         0.66,
+         0.856
+        ],
+        [
+         0.78,
+         0.811
+        ],
+        [
+         0.9,
+         0.773
+        ],
+        [
+         1.0,
+         0.701
+        ]
+       ]
+      },
+      {
+       "label": "ranked by mean-logprob",
+       "points": [
+        [
+         0.04,
+         0.8
+        ],
+        [
+         0.08,
+         0.9
+        ],
+        [
+         0.16,
+         0.85
+        ],
+        [
+         0.29,
+         0.857
+        ],
+        [
+         0.41,
+         0.85
+        ],
+        [
+         0.53,
+         0.854
+        ],
+        [
+         0.66,
+         0.831
+        ],
+        [
+         0.78,
+         0.816
+        ],
+        [
+         0.9,
+         0.75
+        ],
+        [
+         1.0,
+         0.701
+        ]
+       ]
+      },
+      {
+       "label": "no abstention",
+       "points": [
+        [
+         0.04,
+         0.701
+        ],
+        [
+         1.0,
+         0.701
+        ]
+       ]
+      }
+     ],
+     "x_label": "coverage (fraction of greedy attempts kept)",
+     "y_label": "accuracy on attempted",
+     "y_format": "percent01",
+     "note": "Deployment calibration on the model's single greedy attempt per problem: rank all 244 problems by the confidence signal, keep only the top fraction (x-axis), measure accuracy on what was kept. P(True) solvability AUROC is 0.837 -- essentially identical to the toy substrate's 0.83 (C41) -- and dominates mean-logprob (0.760) everywhere. The abstention half of the C41 recipe transfers to real code almost exactly: a coder that knows which third of its answers to trust at ~95%."
+    }
+   ]
   }
  }
 }

@@ -1,0 +1,7 @@
+Using the latest cached version of the dataset since google-research-datasets/mbpp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sanitized' at /home/ericflo/.cache/huggingface/datasets/google-research-datasets___mbpp/sanitized/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c (last modified on Mon Jun 29 12:07:21 2026).
+[cc] 8 MBPP test records
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:22,  5.18it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:02, 174.01it/s]Loading weights:  19%|█▊        | 79/426 [00:00<00:01, 245.27it/s]Loading weights:  26%|██▌       | 109/426 [00:00<00:01, 259.82it/s]Loading weights:  34%|███▍      | 144/426 [00:00<00:00, 286.10it/s]Loading weights:  41%|████      | 175/426 [00:00<00:00, 281.12it/s]Loading weights:  48%|████▊     | 205/426 [00:00<00:00, 277.95it/s]Loading weights:  58%|█████▊    | 248/426 [00:00<00:00, 316.67it/s]Loading weights:  68%|██████▊   | 291/426 [00:01<00:00, 344.87it/s]Loading weights:  77%|███████▋  | 328/426 [00:01<00:00, 351.98it/s]Loading weights:  85%|████████▌ | 364/426 [00:01<00:00, 354.13it/s]Loading weights:  97%|█████████▋| 412/426 [00:01<00:00, 391.08it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 309.50it/s]
+[cc] computing mean logprobs...
+[cc] computing P(True) judge...
+[cc] wrote 8 problems x 4 cands | overall pass-rate 0.88

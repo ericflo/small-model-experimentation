@@ -1,0 +1,16 @@
+Using the latest cached version of the dataset since google-research-datasets/mbpp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sanitized' at /home/ericflo/.cache/huggingface/datasets/google-research-datasets___mbpp/sanitized/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c (last modified on Mon Jun 29 12:07:21 2026).
+[cc] 244 MBPP test records
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:29,  4.76it/s]Loading weights:  11%|█         | 46/426 [00:00<00:02, 183.24it/s]Loading weights:  22%|██▏       | 95/426 [00:00<00:01, 289.30it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:00, 363.62it/s]Loading weights:  46%|████▌     | 195/426 [00:00<00:00, 397.17it/s]Loading weights:  57%|█████▋    | 241/426 [00:00<00:00, 416.73it/s]Loading weights:  68%|██████▊   | 291/426 [00:00<00:00, 435.94it/s]Loading weights:  80%|████████  | 341/426 [00:00<00:00, 453.22it/s]Loading weights:  93%|█████████▎| 397/426 [00:01<00:00, 479.31it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 389.78it/s]
+[cc] executed 25/244
+[cc] executed 50/244
+[cc] executed 75/244
+[cc] executed 100/244
+[cc] executed 125/244
+[cc] executed 150/244
+[cc] executed 175/244
+[cc] executed 200/244
+[cc] executed 225/244
+[cc] checkpoint saved; computing mean logprobs...
+[cc] computing P(True) judge...
+[cc] wrote 244 problems x 9 cands | overall pass-rate 0.70

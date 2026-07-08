@@ -1,0 +1,300 @@
+{
+ "n_problems": 244,
+ "k": 8,
+ "greedy_acc": 0.701,
+ "mixed_problems": 78,
+ "mixed_frac": 0.32,
+ "duplicate_rate": 0.516,
+ "within_problem_auroc": {
+  "mean_logprob": {
+   "mean": 0.693,
+   "ci": [
+    0.631,
+    0.751
+   ],
+   "n": 78
+  },
+  "p_true_nothink": {
+   "mean": 0.738,
+   "ci": [
+    0.67,
+    0.809
+   ],
+   "n": 78
+  },
+  "length_short_better": 0.452,
+  "length_long_better": 0.548
+ },
+ "pooled_auroc": {
+  "mean_logprob": 0.754,
+  "p_true": 0.812
+ },
+ "greedy_problem_auroc": {
+  "mean_logprob": 0.76,
+  "p_true": 0.837,
+  "length": 0.688
+ },
+ "selection_at_k": {
+  "random": 0.696,
+  "mean_logprob (verification-free)": 0.73,
+  "p_true no-think (verification-free)": 0.762,
+  "self-consistency (execution-cluster majority)": 0.717,
+  "visible-test execution": 0.816,
+  "oracle pass@k": 0.844
+ },
+ "significance": {
+  "p_true_vs_self_consistency": {
+   "diff": 0.045,
+   "ci": [
+    0.012,
+    0.082
+   ],
+   "p_one_sided": 0.0054
+  },
+  "p_true_vs_random": {
+   "diff": 0.066,
+   "ci": [
+    0.037,
+    0.095
+   ],
+   "p_one_sided": 0.0
+  },
+  "logprob_vs_self_consistency": {
+   "diff": 0.012,
+   "ci": [
+    -0.02,
+    0.045
+   ],
+   "p_one_sided": 0.2759
+  },
+  "logprob_vs_random": {
+   "diff": 0.033,
+   "ci": [
+    0.009,
+    0.059
+   ],
+   "p_one_sided": 0.0054
+  },
+  "p_true_vs_logprob": {
+   "diff": 0.033,
+   "ci": [
+    0.0,
+    0.066
+   ],
+   "p_one_sided": 0.0337
+  },
+  "within_logprob_minus_length": {
+   "diff": 0.242,
+   "ci": [
+    0.145,
+    0.338
+   ],
+   "p_one_sided": 0.0
+  },
+  "within_p_true_minus_length": {
+   "diff": 0.287,
+   "ci": [
+    0.183,
+    0.386
+   ],
+   "p_one_sided": 0.0
+  }
+ },
+ "abstain_on_greedy": [
+  [
+   0.04,
+   0.8
+  ],
+  [
+   0.08,
+   0.9
+  ],
+  [
+   0.12,
+   0.867
+  ],
+  [
+   0.16,
+   0.85
+  ],
+  [
+   0.2,
+   0.86
+  ],
+  [
+   0.25,
+   0.867
+  ],
+  [
+   0.29,
+   0.857
+  ],
+  [
+   0.33,
+   0.85
+  ],
+  [
+   0.37,
+   0.856
+  ],
+  [
+   0.41,
+   0.85
+  ],
+  [
+   0.45,
+   0.864
+  ],
+  [
+   0.49,
+   0.858
+  ],
+  [
+   0.53,
+   0.854
+  ],
+  [
+   0.57,
+   0.857
+  ],
+  [
+   0.61,
+   0.833
+  ],
+  [
+   0.66,
+   0.831
+  ],
+  [
+   0.7,
+   0.824
+  ],
+  [
+   0.74,
+   0.822
+  ],
+  [
+   0.78,
+   0.816
+  ],
+  [
+   0.82,
+   0.8
+  ],
+  [
+   0.86,
+   0.776
+  ],
+  [
+   0.9,
+   0.75
+  ],
+  [
+   0.94,
+   0.73
+  ],
+  [
+   0.98,
+   0.708
+  ]
+ ],
+ "abstain_on_greedy_p_true": [
+  [
+   0.04,
+   0.9
+  ],
+  [
+   0.08,
+   0.95
+  ],
+  [
+   0.12,
+   0.933
+  ],
+  [
+   0.16,
+   0.95
+  ],
+  [
+   0.2,
+   0.96
+  ],
+  [
+   0.25,
+   0.95
+  ],
+  [
+   0.29,
+   0.957
+  ],
+  [
+   0.33,
+   0.938
+  ],
+  [
+   0.37,
+   0.911
+  ],
+  [
+   0.41,
+   0.92
+  ],
+  [
+   0.45,
+   0.927
+  ],
+  [
+   0.49,
+   0.917
+  ],
+  [
+   0.53,
+   0.9
+  ],
+  [
+   0.57,
+   0.886
+  ],
+  [
+   0.61,
+   0.873
+  ],
+  [
+   0.66,
+   0.856
+  ],
+  [
+   0.7,
+   0.847
+  ],
+  [
+   0.74,
+   0.833
+  ],
+  [
+   0.78,
+   0.811
+  ],
+  [
+   0.82,
+   0.805
+  ],
+  [
+   0.86,
+   0.786
+  ],
+  [
+   0.9,
+   0.773
+  ],
+  [
+   0.94,
+   0.743
+  ],
+  [
+   0.98,
+   0.713
+  ]
+ ],
+ "verdict": "The confidence toolkit TRANSFERS to real code -- but the HIERARCHY INVERTS: the single-token P(True) readout, not the sequence mean-logprob, is the program-level confidence. C40 analog (within-problem, surface-matched, 78/244 mixed problems): mean-logprob AUROC 0.693 (CI [0.631, 0.751]) vs P(True)-no-think 0.738 vs length-baseline 0.548 (paired diff vs length: logprob 0.242 CI [0.145, 0.338], P(True) 0.287 CI [0.183, 0.386] -- NOT verbosity). Deployment: greedy problem-level AUROC logprob 0.76 / P(True) 0.837 (greedy acc 0.701). C41 analog (selection at k=8): random 0.696 | mean_logprob (verification-free) 0.73 | p_true no-think (verification-free) 0.762 | self-consistency (execution-cluster majority) 0.717 | visible-test execution 0.816 | oracle pass@k 0.844. SIGNIFICANCE (paired bootstrap over problems): P(True)-select beats self-consistency +0.045 (CI [0.012, 0.082], p=0.0054) and beats mean-logprob +0.033 (p=0.0337); mean-logprob does NOT significantly beat self-consistency (p=0.2759). Duplicate rate 0.516."
+}
