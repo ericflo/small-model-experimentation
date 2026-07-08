@@ -61,6 +61,51 @@ Recommended batch sizes (used in `experiments/qwen35_4b_thinking_budget_scaling/
 runtime auto-halves a batch that OOMs). Going much past bs≈48 for long (≥2048-token) generations gave
 diminishing/negative returns, so cap long-sequence batches there.
 
+## OOM, CUDA corruption, and recovery (WSL2)
+
+Hard-won failure knowledge — read before launching anything training-scale:
+
+- **An OOM during training can corrupt the CUDA context persistently** (observed: batch-16 ×
+  maxlen-640 QLoRA OOM). Symptom: `RuntimeError: CUDA driver error: device not ready` that
+  SURVIVES process kills and long waits. The corruption has a **size threshold**: small ops and
+  model loading work, but any training-scale forward+loss (the large cross-entropy over the
+  ~150K vocab) crashes. Recovery without a WSL restart: train *under* the threshold
+  (per-device batch 2 + gradient accumulation — slow but works). The clean fix is
+  `wsl --shutdown` (user action).
+- **Do not launch a second GPU job while one is running.** A competing job is how the OOM →
+  corruption sequence gets triggered; single-tenant the 4090.
+- **OOM can masquerade as "device not ready"** under `expandable_segments`; to surface the
+  real error, re-run without `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` or with
+  `CUDA_LAUNCH_BLOCKING=1`.
+
+### Memory-safe large-vocab logits
+
+The full-vocab logits tensor is the recurring OOM source (~150K vocab):
+
+- **Teacher-forced sequence logprobs:** never `log_softmax` the whole sequence in float32
+  (OOMs at batch 8 × ~800 tokens on 24 GB). Keep model logits bf16 and log-softmax in float32
+  over **sequence chunks** (~128 tokens), gathering target-token logprobs per chunk — see
+  `experiments/qwen35_4b_code_confidence/scripts/eval_code_conf.py::mean_logprobs`.
+- **Scoring N candidate continuations** (ranking ops/answers): vectorize the logprob gather
+  into one GPU sync — a loop with `.item()` per candidate is ~10× slower (32 syncs). And with
+  a long prompt prefix, score a few candidates per forward: 32 ops × ~1200 tokens × 152K vocab
+  × float is a 23 GB tensor.
+
+## Training (QLoRA) throughput
+
+- Reference recipe: QLoRA r32/α64 on short episodes at **batch 16, grad-accum 1, maxlen 384 →
+  ~1 s/step** (a 4k-episode × 2-epoch run ≈ 8 min). The same run at batch 1 is ~2.8 h. After
+  the corruption workaround (batch 2 + accumulation) expect ~6–7 s/step.
+- **Verify a training launch before trusting it:** the edit actually applied (grep the
+  script), GPU memory rising to training scale (~15 GB), and step time in the expected range.
+- PeftModel (adapter) forward is ~1.5× slower than base — budget adapter-heavy eval sweeps
+  accordingly; at n=80 a think-mode eval is ~55 min.
+- Training time scales with dataset size; do **not** queue several long trains ahead of the
+  cheap headline eval — interleave, or put the longest train last-and-optional.
+- Adapters are ~180 MB each: keep them OUT of the working tree (the validator scans the
+  filesystem, not just git, and GitHub hard-fails >100 MB files). Store externally and declare
+  in `reports/artifact_manifest.yaml` (see `docs/artifact_policy.md`).
+
 ## Known limitations / future levers
 
 - **HF batch-gating:** `model.generate` advances a whole batch until the *slowest* sequence finishes,

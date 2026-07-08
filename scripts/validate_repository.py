@@ -485,6 +485,12 @@ def validate() -> int:
         if not in_ignored_dir(path):
             fail(errors, f"python cache directory should not be present: {rel(path)}")
 
+    # git cannot track empty directories, so an empty dir exists locally but not in a fresh
+    # CI checkout — catalog regeneration then diverges and generated-clean fails only in CI
+    for path in EXPERIMENTS.rglob("*"):
+        if path.is_dir() and not in_ignored_dir(path) and not any(path.iterdir()):
+            fail(errors, f"empty directory (untrackable by git; will diverge in CI): {rel(path)}")
+
     for path in ROOT.rglob("*"):
         if path.is_file() and not in_ignored_dir(path) and path.stat().st_size > MAX_GITHUB_FILE_BYTES:
             fail(errors, f"file exceeds GitHub hard limit: {rel(path)}")

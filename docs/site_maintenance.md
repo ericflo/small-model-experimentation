@@ -81,6 +81,34 @@ lints against the ban-list, merges only clean briefs, and prints any that still
 need a re-author (e.g. an over-long verdict tag). After a pass, commit the
 updated `knowledge/experiment_brief.json` (and `experiment_dates.json`).
 
+## Design principles (owner preferences — do not regress)
+
+- **Light theme only.** White background, no `prefers-color-scheme: dark` variant —
+  "learning and discovery should be joyous." Keep only the light palette in
+  `templates/site/assets/styles.css`.
+- **Native charts, never matplotlib PNGs as lead visuals.** Card headers/hero visuals come
+  from `knowledge/experiment_viz.json` specs rendered as interactive SVG by `build_site.py`.
+  A report's embedded `![](analysis/*.png)` figure does NOT count as a site chart; original
+  PNGs may appear further down the detail page only. `make validate` fails an experiment
+  with no valid bar/line spec.
+- **Experiments list newest-first with intra-day precision** — the sort uses the exact commit
+  timestamp behind the day-level date, so several experiments landed on one day still order
+  chronologically.
+
+## Verifying rendered pages
+
+- For a local preview run `python3 scripts/build_site.py --out <tmpdir>` directly — `make
+  site`/`make check` first run `make catalog`, which rewrites tracked generated files (only
+  regenerate + commit those together).
+- Generated HTML is single-line: `grep -c` counts lines, so use `grep -o <pattern> | wc -l`
+  for occurrence counts.
+- Judge visual output by numbers, not eyeballs: assert with `getComputedStyle` /
+  `getBoundingClientRect` / pixel probes — eyeballing screenshots once cost several debug
+  rounds on a lightbox that had been rendering correctly all along.
+- Chart specs must use only verified numbers from the experiment's own result files; the
+  format and a headless-render recipe are in the spec comments of
+  `scripts/validate_repository.py::_valid_chart_spec` and `build_site.py::chart_svg`.
+
 ## Guardrails
 
 - `make site-content` is safe to run any time; dates auto-fill is idempotent.
