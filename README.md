@@ -6,9 +6,9 @@
 
 ### How far one Qwen3.5-4B goes without a bigger teacher
 
-**How much more can a small model do when it not only uses the capability already in its weights but *extends* them by training on its own verified solutions — without ever borrowing from a larger model?**
+**How much capability can you elicit from — and install into — one small model, without ever borrowing from a larger one?**
 
-This repository is a research log built around that single question: take *one* [Qwen3.5-4B](https://qwen.ai) and see how far its capability can be pushed — and extended — **without ever importing capability from a larger model**: no scaling to something bigger, no distillation from a stronger teacher, no bigger model anywhere in the loop. Training the 4B on its *own* verified or tool-found solutions — even self-distillation from its own outputs — is fair game; borrowing intelligence from a bigger model is not. The bar every method has to beat is the cheapest baseline there is: **just sample more.**
+This repository is a research log built around that single question: take *one* [Qwen3.5-4B](https://qwen.ai) and see how far it can be pushed — drawing out what its weights already hold and installing what they don't — **without ever importing capability from a larger model**: no scaling to something bigger, no distillation from a stronger teacher, no bigger model anywhere in the loop. *How* new capability gets installed is deliberately open: training on the model's own verified solutions, on its failures, on tool-found data, on token patterns that build generalized skills — anything qualifies so long as the signal doesn't come from a bigger model. The bar every method has to beat is the cheapest baseline there is: **just sample more.**
 
 ![Self-training compounds into a flywheel: held-out single-shot accuracy climbs 0.267 to 0.393 over three expert-iteration rounds, with no diversity collapse.](experiments/qwen35_4b_neurosymbolic_repl_substrate/analysis/ei_trajectory.png)
 
@@ -20,12 +20,12 @@ This repository is a research log built around that single question: take *one* 
 
 ## Why this exists
 
-The field's default answer to "make the model better" is *make the model bigger* — more parameters, more data, a stronger teacher to distill from. Those levers work, but they say nothing about a question that matters just as much for anyone deploying a small model on real hardware: **how much more can this exact model do — both by using its weights better and by training it on its own work — before you reach for a bigger one?**
+The field's default answer to "make the model better" is *make the model bigger* — more parameters, more data, a stronger teacher to distill from. Those levers work, but they say nothing about a question that matters just as much for anyone deploying a small model on real hardware: **how much more can this exact model do — both by using its weights better and by improving them with what it can generate and gather itself — before you reach for a bigger one?**
 
 So the constraint here is about the *source* of capability, and it is absolute:
 
-- **One model, always Qwen3.5-4B.** Never a larger or different model — no scaling, no distillation, no stronger teacher anywhere in the loop, not even to generate training data. The weights may change, but only by training the 4B on its own verified or tool-found solutions.
-- **Provenance, not a weight freeze.** The rule is not "don't change the weights" — it's "don't import intelligence from a bigger model." Both levers are in scope: *eliciting* latent capability at test time (structured intermediates, verification, tool-augmented search, thinking budgets, context orchestration, activation probes) **and** *extending* the 4B by training it on its own verified or tool-found outputs (self-training / banking). Only a larger/other model and plain scaling are off-limits.
+- **One model, always Qwen3.5-4B.** Never a larger or different model — no scaling, no distillation, no stronger teacher anywhere in the loop, not even to generate training data. The weights are free to change; the capability *source* is not.
+- **Provenance, not a weight freeze — and not one recipe.** The rule is not "don't change the weights" — it's "don't import intelligence from a bigger model." Both levers are in scope: *eliciting* latent capability at test time (structured intermediates, verification, tool-augmented search, thinking budgets, context orchestration, activation probes) **and** *installing* new capability by training. The install signal is itself an open research variable: self-training on verified or tool-found solutions is the best-studied so far, but training on failures, on token patterns that build generalized skills, or on anything else the 4B and its environment can produce is equally in-bounds. Only a larger/other model and plain scaling are off-limits.
 - **A real bar to beat.** "Sample more" is free and strong. A method only counts if it beats matched-compute sampling on held-out, contamination-controlled tasks.
 
 The result is a corpus of experiments across a dozen research programs, condensed into a **machine-checkable claim ledger** where every claim points at the experiments that support or challenge it, with charts rendered directly from each experiment's own result files.
@@ -54,7 +54,7 @@ The corpus tells a connected story. A curated path through it:
 
 - **The payoff: extending capability without a bigger model.** Tool-augmented harvest plus banking crosses the depth-3 wall self-training alone could not, one rung at a time — and the install is **dose-responsive and non-saturating** through 1,280 tool-found solutions, driven by data *diversity* rather than extra compute (**[C22](https://ericflo.github.io/small-model-experimentation/claims/#c22)**–**[C24](https://ericflo.github.io/small-model-experimentation/claims/#c24)**). What banks is **reusable compositional planning, not lookup**: self-training measurably improves the model's step-wise lookahead ranking (**[C25](https://ericflo.github.io/small-model-experimentation/claims/#c25)**). The honest limit — test-time serial compute (thinking) alone amplifies recognition but does *not* cross the planning gap; for that, training on the model's own verified solutions is required (**[C26](https://ericflo.github.io/small-model-experimentation/claims/#c26)**).
 
-The recipe that emerges from all of it: **tools generate and simulate, context orchestrates, the model recognizes and transcribes** — and where the forward pass falls short, self-training on the model's own verified solutions banks the missing capability into the weights.
+The recipe that emerges from all of it **so far**: **tools generate and simulate, context orchestrates, the model recognizes and transcribes** — and where the forward pass falls short, the best-performing install found to date is self-training on the model's own verified solutions. That's the current front-runner, not the boundary of the search — failure-driven data, generalized token-pattern curricula, and other self-sourced signals are open lanes.
 
 > The full arc runs through **[C27](https://ericflo.github.io/small-model-experimentation/claims/#c27)** and is still growing. The [live claim ledger](https://ericflo.github.io/small-model-experimentation/claims/) and [cross-program synthesis](https://ericflo.github.io/small-model-experimentation/notebook/synthesis/) carry every claim with its evidence, status, and limits.
 
@@ -98,7 +98,7 @@ scripts/      indexing, validation, and static-site generation
 templates/    starting points for new experiments and programs
 ```
 
-**One model throughout — Qwen3.5-4B.** Its own weights may be self-trained on its own verified or tool-found solutions, but a larger or different model is never in the loop — that constraint is the entire point.
+**One model throughout — Qwen3.5-4B.** Its weights may be improved by anything the model, its tools, and its environment can produce, but a larger or different model is never in the loop — that constraint is the entire point.
 
 **The twelve programs:**
 
@@ -137,14 +137,14 @@ This is a largely agent-driven research loop rather than an open PR queue, but t
 
 ## A note on provenance
 
-This corpus was produced through an intensive, largely agent-driven experimentation loop — the experiments, reports, and evidence-linked claims were generated by an AI agent workflow, not hand-authored by a human researcher. That orchestration agent drives the loop; the fixed Qwen3.5-4B remains the object of study, never the author. Individual experiments are working research artifacts, not polished libraries — the value is in the *aggregate*: the reusable patterns, the controlled comparisons, and the evidence-linked claims that make each next experiment less likely to repeat an old mistake. The repository is built to keep growing, with every result connecting upward into shared program evidence and the claim ledger.
+This corpus was produced through an intensive, largely agent-driven experimentation loop — the experiments, reports, and evidence-linked claims were generated by an AI agent workflow, not hand-authored by a human researcher. That orchestration agent drives the loop; the Qwen3.5-4B remains the object of study, never the author. Individual experiments are working research artifacts, not polished libraries — the value is in the *aggregate*: the reusable patterns, the controlled comparisons, and the evidence-linked claims that make each next experiment less likely to repeat an old mistake. The repository is built to keep growing, with every result connecting upward into shared program evidence and the claim ledger.
 
 ## How to cite
 
 ```bibtex
 @misc{florenzano2026smallmodel,
   author       = {Florenzano, Eric},
-  title        = {Small Model Experimentation: Extending Capability in a Fixed Qwen3.5-4B Without a Larger Teacher},
+  title        = {Small Model Experimentation: Eliciting and Installing Capability in a Single Qwen3.5-4B Without a Larger Teacher},
   year         = {2026},
   howpublished = {\url{https://ericflo.github.io/small-model-experimentation/}},
   note         = {Research log}
