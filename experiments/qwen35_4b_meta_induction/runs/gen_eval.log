@@ -1,0 +1,7 @@
+--- IN-FAMILY (trained: a1,a3,a9) ---
+[eval] gen INDUCE_GEN gen_infam_a1.jsonl: acc=0.000 (n=200, chance 0.1)
+[eval] gen INDUCE_GEN gen_infam_a3.jsonl: acc=0.000 (n=200, chance 0.1)
+[eval] gen INDUCE_GEN gen_infam_a9.jsonl: acc=0.000 (n=200, chance 0.1)
+--- HELD-OUT FAMILY (a7, never trained) ---
+[eval] gen INDUCE_GEN gen_heldfam_a7.jsonl: acc=0.000 (n=200, chance 0.1)
+GENEVALDONE

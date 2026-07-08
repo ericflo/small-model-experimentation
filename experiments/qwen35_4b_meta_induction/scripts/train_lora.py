@@ -92,8 +92,8 @@ def main():
     model.print_trainable_parameters()
 
     targs = TrainingArguments(
-        output_dir=str(args.out), num_train_epochs=args.epochs, per_device_train_batch_size=16,
-        gradient_accumulation_steps=1, learning_rate=args.lr, lr_scheduler_type="cosine",
+        output_dir=str(args.out), num_train_epochs=args.epochs, per_device_train_batch_size=2,
+        gradient_accumulation_steps=args.grad_accum, learning_rate=args.lr, lr_scheduler_type="cosine",
         warmup_ratio=0.03, bf16=True, logging_steps=5, save_strategy="no", report_to=[],
         gradient_checkpointing=True, optim="paged_adamw_8bit")
     Trainer(model=model, args=targs, train_dataset=SftData(recs, tok, args.max_length),

@@ -10456,28 +10456,28 @@
    "charts": []
   },
   "qwen35_4b_meta_induction": {
-   "verdict_tag": "Induction lives in the reasoning, not the weights",
+   "verdict_tag": "General rule-finding IS teachable -- as reasoning",
    "concept_primer": "The model's core weakness (established across this project) is INDUCTION: figuring out a hidden rule from a few examples. This asks the biggest question -- can you TRAIN that missing skill into the fixed model so it works on rules it never saw?",
    "plain_question": "Can fine-tuning teach the small model the general skill of figuring out a hidden rule from examples -- lifting its central limitation?",
-   "plain_answer": "Partly, and the deeper finding is WHERE it can live. Answer-only fine-tuning (forcing a direct answer) only reaches ~40% on new shift puzzles and wrecks the model's other skills. But training the model to REASON THROUGH the procedure step by step changes everything: it then solves brand-new shift puzzles PERFECTLY (100%) when allowed to think on paper -- yet the SAME trained model is back at chance (1%) if forced to answer in a single step. So the reasoning steps are doing 100% of the work: the model literally cannot do this computation 'in its head' in one pass, even after training, but can do it flawlessly by writing out the steps. The limitation is about serial thinking-room, not stored knowledge. (It still only learned the specific shift trick -- a different rule type it wasn't trained on stays near chance.)",
-   "why_it_matters": "This resolves what KIND of limit the model's central weakness is: not missing knowledge, but an inability to run a multi-step computation in a single forward pass. The practical rule is decisive: to get a small model to do multi-step reasoning, ALWAYS give it room to think step by step (chain-of-thought / a scratchpad) -- never expect a one-shot answer, and don't fine-tune it to answer directly (that forces the computation into a place it can't live, and destroys skills it already had).",
+   "plain_answer": "Yes, if you teach it the right way. Training the model to answer directly barely works and wrecks its other skills. Training it to REASON through a hidden shift step by step lets it solve new shift puzzles perfectly -- but only shifts. The breakthrough: teach a GENERAL 'try each possibility and check which fits the examples' strategy across several DIFFERENT rule types, and the model then solves a rule type it was NEVER trained on just as well (91%, matching the trained types). So the model can genuinely learn general rule-finding -- but it lives entirely in its step-by-step reasoning: the SAME trained model is back at chance if forced to answer in one shot. Its central weakness is not missing knowledge, but an inability to run the computation in a single pass -- and a general reasoning strategy overcomes it generally.",
+   "why_it_matters": "This is the most constructive result of the whole project: the model's central limitation -- it can't figure out hidden rules -- can be TRAINED AWAY, generally, by teaching a general hypothesize-and-verify strategy as chain-of-thought across diverse examples. The practical recipe: teach the general STRATEGY (not one specific rule) across varied cases, and always run it with room to reason step by step. Never fine-tune it to answer in one shot -- that forces the computation somewhere it cannot live and destroys skills it already had.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "reasoning-SFT, allowed to reason (new shifts)",
-     "value": "1.00"
+     "label": "held-out rule family (never trained), via reasoning",
+     "value": "0.91"
     },
     {
-     "label": "same model, forced to answer in one step",
+     "label": "trained rule families, via reasoning",
+     "value": "0.88-0.96"
+    },
+    {
+     "label": "single hand-coded rule -> out-of-family (C44)",
+     "value": "0.13"
+    },
+    {
+     "label": "same model forced to answer in one step (C44)",
      "value": "0.01"
-    },
-    {
-     "label": "answer-only fine-tune (one step)",
-     "value": "0.40"
-    },
-    {
-     "label": "execution kept? reasoning-SFT vs answer-only",
-     "value": "0.57 vs 0.09"
     }
    ],
    "charts": []

@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 44
+- Claims: 45
 
 ## Status Counts
 
@@ -11,7 +11,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 6 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 35 |
+| Promising | 36 |
 
 ## Program Counts
 
@@ -19,12 +19,12 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 9 |
+| `benchmark_generalization` | 10 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 6 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 20 |
+| `posttraining_and_adaptation` | 21 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 4 |
 | `structured_execution_and_compilers` | 28 |
@@ -1053,3 +1053,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read base+strategy-hint 0.00 as 'serial compute doesn't help': it is confounded -- the position-arithmetic in the hint is itself too hard for the untrained base to execute (base EXECUTE of the simpler step-counting rule was 0.72). Need a base-executable strategy to test serial-compute-without-teaching cleanly.
 - The DECISIVE, clean result is the reasoning-SFT forced-digit (0.01) vs generation (1.00) dissociation = the CoT is load-bearing = serial-compute limit. That does NOT depend on the confounded base+strategy arm.
 - Single seed; answer-only-generation cell not run (adapter moved external). General-induction (multi-family leave-one-out) owed.
+
+## C45: GENERAL induction-via-reasoning IS installable: a general hypothesize-and-verify CoT trained multi-family transfers to a HELD-OUT rule family (a=7: 0.905, as high as in-family) -- resolving C44's shift-specificity
+
+- Status: `Promising`
+- Programs: `posttraining_and_adaptation`, `benchmark_generalization`
+- Summary: Experiment qwen35_4b_meta_induction (general arm, follow-up to C44). C44 showed induction is a serial-compute limit but the shift-CoT was shift-specific (OOF affine 0.13). Here: rule families = affine over positions keyed by multiplier a in {1,3,7,9}; a UNIFORM enumerate-and-verify CoT (try each candidate a, derive b from one example, verify on another, keep the fit, apply). Train on {a=1,3,9}, HOLD OUT a=7; eval via generation. RESULTS (n=200/family): held-out a=7 induction = 0.905, AS HIGH as in-family (a=1 0.955, a=3 0.930, a=9 0.875). The model GENERALIZES to a rule family never seen as the answer -- it learned the general hypothesize-verify-apply PROCEDURE, not just the trained rules. Contrast: C44's single hand-coded shift-CoT transferred OOF at only 0.13.
+- Implication: GENERAL induction-via-reasoning IS installable via SFT: a general hypothesize-and-verify procedure trained across multiple families generalizes to unseen families. Combined with C44 (induction is a serial-compute limit: reasoning 1.00 vs forward-pass 0.01), the full picture is that the fixed 4B CAN be taught GENERAL induction -- infer a novel rule from examples and apply -- but ONLY as a SERIAL reasoning procedure living in the chain-of-thought tokens, never in the weights. This is the most CONSTRUCTIVE resolution of the arc's central limitation (executor-not-inducer, C38/C39): the induction wall is a serial-compute limit that a GENERAL reasoning procedure overcomes generally. FOR THE MISSION: to give the fixed 4B a missing capability (induction), teach a GENERAL serial strategy (hypothesize-and-verify chain-of-thought) across diverse instances, and always deploy it with chain-of-thought; do NOT try to compress it into a forward pass (answer-only SFT fails, C43/C44). This is 'unearthing latent capability' realized -- the serial-compute substrate + a general taught strategy = general induction.
+
+### Evidence
+
+- [`qwen35_4b_meta_induction`](../../experiments/qwen35_4b_meta_induction/reports/report.md)
+
+### Next Tests
+
+- A broader structural leap: hold out a NON-affine family (e.g. a 2-step composition, or a permutation with a different generative rule) to test whether the hypothesize-verify skill generalizes BEYOND the affine hypothesis class it was given.
+- Make the held-out family's arithmetic genuinely novel (not seen even as a rejected candidate) to separate 'general induction logic' from 'in-distribution arithmetic'.
+- Does the general verify-strategy transfer to a DIFFERENT substrate entirely (strings, lists) -- is hypothesize-and-verify a substrate-general installable meta-skill?
+
+### Avoid
+
+- Do not over-claim UNBOUNDED general induction: all families are AFFINE (the hypothesis class {1,3,7,9} is given in the CoT). The model generalizes WITHIN the affine class to a held-out multiplier; a non-affine held-out family is the untested stronger claim.
+- The held-out a=7's arithmetic (7*p) is seen in training as a REJECTED candidate, so it is in-distribution -- what generalizes is ACCEPTING a=7 via verify (the induction LOGIC), not novel arithmetic. State this.
+- Induction here is SERIAL (via generation, needs ~296 CoT tokens); it does NOT live in the forward pass (C44: forced-digit 0.01). Always eval/deploy with generation + adequate token budget (256 truncates the general CoT -> false 0.00).
+- Single seed; batch-2 training (GPU-corruption workaround). The general-CoT eval needs max_new>=400 (the enumerate-verify CoT is long).

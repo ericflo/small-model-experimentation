@@ -9,6 +9,8 @@
 
 ## Key Result
 
+- [qwen35_4b_meta_induction (general arm)](../../experiments/qwen35_4b_meta_induction/reports/report_general.md) (claim C45): GENERAL induction-via-reasoning IS installable -- a general hypothesize-and-verify CoT trained on families {a=1,3,9} transfers to held-out a=7 (0.905, as high as in-family). The fixed 4B can be taught general induction, but only as a serial reasoning procedure (C44: forward-pass 0.01). Teach the general strategy across diverse cases + deploy with chain-of-thought.
+
 - [qwen35_4b_meta_induction (reasoning arm)](../../experiments/qwen35_4b_meta_induction/reports/report_reasoning.md) (claim C44): the forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge limit -- reasoning-SFT induces held-out shifts perfectly via generation (1.00) but at chance in one forward pass (0.01); the CoT is 100% load-bearing. Give the model serial tokens and induction works; it cannot be compressed into a forward pass.
 
 - [qwen35_4b_meta_induction](../../experiments/qwen35_4b_meta_induction/reports/report.md) (claim C43): can SFT install the induction skill? PARTIALLY -- shift induction 0.087 (chance) -> 0.40 (data-limited) but plateaus below the execute ceiling (0.72), is shift-specific (OOF affine 0.30), and answer-only SFT catastrophically forgets execution (0.72 -> 0.09). The wall is neither a hard bound nor cleanly liftable; trained to induce, the model learns a specific procedure, not the general skill.

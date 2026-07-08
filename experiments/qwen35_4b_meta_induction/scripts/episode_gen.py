@@ -20,6 +20,8 @@ def gen_episode(family, seed, n_examples=6):
         a, b = 1, rng.randint(2, 8)
     elif family == "affine":
         a, b = rng.choice([3, 7, 9]), rng.randint(1, 9)
+    elif family in ("a1", "a3", "a7", "a9"):
+        a, b = int(family[1:]), rng.randint(1, 9)
     else:
         raise ValueError(family)
     f = {d: order[(a * pos[d] + b) % 10] for d in DIGITS}

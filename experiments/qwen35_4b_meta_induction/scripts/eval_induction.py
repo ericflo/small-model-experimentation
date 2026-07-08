@@ -56,7 +56,7 @@ def execute_acc(model, tok, recs, batch_size=48, max_new=256):
 
 
 @torch.no_grad()
-def induce_gen_acc(model, tok, recs, batch_size=32, max_new=256):
+def induce_gen_acc(model, tok, recs, batch_size=32, max_new=400):
     """Generate from the INDUCE prompt (let the model reason), parse Answer -- for reasoning-SFT models."""
     correct = 0
     for s in range(0, len(recs), batch_size):
