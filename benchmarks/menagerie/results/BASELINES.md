@@ -12,17 +12,17 @@ are per-family means, and aggregate is the mean of family means.
 
 | family | quick | medium | slow | deep | what it measures |
 | --- | ---: | ---: | ---: | ---: | --- |
-| chronicle | 0.000 | 0.000 | 0.154 | 0.222 | event-stream state tracking |
+| chronicle | 0.000 | 0.300 | 0.154 | 0.222 | event-stream state tracking |
 | lockpick | 0.000 | 0.000 | 0.115 | 0.028 | active rule induction → exploit |
-| menders | 0.000 | 0.048 | 0.038 | 0.111 | program repair from failing traces |
+| menders | 0.000 | 0.100 | 0.038 | 0.111 | program repair from failing traces |
 | mirage | 0.000 | 0.000 | 0.000 | 0.056 | calibrated abstention (provable unsolvability) |
-| rites | 0.000 | 0.000 | 0.077 | 0.111 | state-machine / spec compliance |
-| siftstack | 0.000 | 0.000 | 0.038 | 0.083 | information triage under noise/contradiction |
-| sirens | 0.500 | 0.238 | 0.462 | 0.389 | goal fidelity under prompt injection |
-| stockade | 0.120 | 0.000 | 0.080 | 0.055 | bounded optimization vs brute-forced optimum |
-| toolsmith | 0.375 | 0.200 | 0.355 | 0.357 | dependent tool-call chaining |
-| warren | 0.125 | 0.032 | 0.064 | 0.264 | partially-observable exploration + memory |
-| **aggregate** | **0.112** | **0.052** | **0.138** | **0.168** | |
+| rites | 0.000 | 0.100 | 0.077 | 0.111 | state-machine / spec compliance |
+| siftstack | 0.000 | 0.100 | 0.038 | 0.083 | information triage under noise/contradiction |
+| sirens | 0.500 | 0.400 | 0.462 | 0.389 | goal fidelity under prompt injection |
+| stockade | 0.120 | 0.191 | 0.080 | 0.055 | bounded optimization vs brute-forced optimum |
+| toolsmith | 0.375 | 0.272 | 0.355 | 0.357 | dependent tool-call chaining |
+| warren | 0.125 | 0.000 | 0.064 | 0.264 | partially-observable exploration + memory |
+| **aggregate** | **0.112** | **0.146** | **0.138** | **0.168** | |
 
 Absolute scores are **not** comparable across tiers because tiers use different
 level mixes and budgets. Tiers are longitudinal instruments: compare the same
@@ -33,7 +33,7 @@ tier across checkpoints.
 | tier | measured wall | budget | headroom | items | rounds |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | quick | 43.8 s | 60 s | 27% | 80 | 1 |
-| medium | 165.4 s | 300 s | 45% | 210 | 4 |
+| medium | 187.2 s | 300 s | 38% | 100 | 4 |
 | slow | 548.3 s | 1200 s | 54% | 260 | 10 |
 | deep | 1190.6 s | 3600 s | 67% | 360 | 14 |
 
@@ -42,21 +42,44 @@ tier across checkpoints.
 | tier | atom think budget | episode think budget per turn |
 | --- | ---: | ---: |
 | quick | 1024 | 1024 |
-| medium | 1024 | 1024 |
+| medium | 2048 | 2048 |
 | slow | 2048 | 2048 |
 | deep | 4096 | 2048 |
 
 The 1024-token floor exists because 256 and 512 tokens sit in the
 empirically-proven truncation-harm zone: approximately 100% forced-close and
 approximately 90% no-answer. Budgets escalate above that floor because the
-model consumes essentially any budget given. The measured forced-close
-fractions were 79/80 generations on quick, 306/311 on medium, 399/414 on slow,
-and 726/787 on deep; deep had a mean think length of 2588 tokens, and 222/240
-atoms hit the full 4096-token budget. Score keeps responding to compute on the
-harder tiers: slow scored 0.138 at 2048 and deep scored 0.168 at 4096, versus
-quick at 0.112 with 1024. Deep's `episode_think_budget=2048` is a wall-clock
-bound on the 14-round horizon, not a context workaround. `--think-budget N`
-overrides both atom and episode budgets for explicit compute-response studies.
+model consumes essentially any budget given. The measured forced-close counts
+were 79/80 generations on quick; medium's `forced_think_closes` was 131 across
+its multi-turn generations; and the counts were 399/414 on slow and 726/787 on
+deep. Deep had a mean think length of 2588 tokens, and 222/240 atoms hit the
+full 4096-token budget. Score keeps responding to compute on the harder tiers:
+slow scored 0.138 at 2048 and deep scored 0.168 at 4096, versus quick at 0.112
+with 1024. Deep's `episode_think_budget=2048` is a wall-clock bound on the
+14-round horizon, not a context workaround. `--think-budget N` overrides both
+atom and episode budgets for explicit compute-response studies.
+
+### Medium is a fast subsample of slow
+
+The original medium ran at think 1024 with L3 atoms and scored 0.052—below
+quick's 0.112—because its hardest items were truncated with no compute: it was
+a scaled-up quick. Medium was rebuilt as a scaled-down slow at the same 2048
+budget and with the same construct, L1-L4 atoms plus multi-turn episodes. Its
+aggregate is 0.146, and its per-family rank Spearman against slow is 0.717, the
+highest of any tier pair. Medium now tracks slow as an approximately 3×-faster
+proxy.
+
+Medium reads marginally above slow (0.146 versus 0.138) because both share the
+2048 think budget while medium carries less hard content: no L4-heavy atom mass
+and no L3/10-turn episodes. At equal compute, the lighter tier scores slightly
+higher. The ladder is therefore monotonic along the compute axis—quick (1024) <
+medium/slow (2048) < deep (4096)—with medium and slow statistically tied: their
+0.008 gap is within the instrument noise floor, while the HF/vLLM aggregate gap
+on quick alone is 0.011. The pathological medium-below-quick dip is eliminated.
+Medium uses representative mid-difficulty L2 episodes at 6-turn depth and a
+2048 budget. It cannot afford slow's hard L3/8-turn episodes within the 300 s
+wall: a tested L3-episode medium variant hit 278 s, leaving 7% headroom, and
+re-inverted to 0.108, below quick.
 
 ## Truncation history
 
@@ -116,13 +139,13 @@ rank-correlates at Spearman 1.000 for every tier pair.
 | tier | eps=0.0 | eps=0.25 | eps=0.5 | eps=0.75 | eps=1.0 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | quick | 1.000 | 0.675 | 0.463 | 0.250 | 0.013 |
-| medium | 1.000 | 0.762 | 0.513 | 0.278 | 0.027 |
+| medium | 1.000 | 0.738 | 0.492 | 0.274 | 0.024 |
 | slow | 1.000 | 0.747 | 0.510 | 0.263 | 0.016 |
 | deep | 1.000 | 0.747 | 0.467 | 0.247 | 0.016 |
 
 Real floored-model per-family ranks remain tie-dominated and unstable across
-tiers. Measured family-rank Spearman correlations were `quick|medium` 0.74,
-`quick|slow` 0.60, `quick|deep` 0.65, `medium|slow` 0.41, `medium|deep` 0.78,
+tiers. Measured family-rank Spearman correlations were `quick|medium` 0.46,
+`quick|slow` 0.60, `quick|deep` 0.65, `medium|slow` 0.72, `medium|deep` 0.57,
 and `slow|deep` 0.49. Trust quick for relative progress during training, then
 confirm conclusions on slow/deep.
 
@@ -150,7 +173,7 @@ uv pip sync --python .venv-vllm/bin/python --torch-backend=cu129 requirements-vl
 Baseline artifacts:
 
 - `results/quick_qwen35_base_think1024_seed31337.json`
-- `results/medium_qwen35_base_think1024_seed31337.json`
+- `results/medium_qwen35_base_think2048_seed31337.json`
 - `results/slow_qwen35_base_think2048_seed31337.json`
 - `results/deep_qwen35_base_think4096_seed31337.json`
 - `results/quick_qwen35_base_think1024_seed31337_hf.json`

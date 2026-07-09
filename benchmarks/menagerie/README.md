@@ -40,7 +40,7 @@ compute-response studies.
 | Tier | Budget | Think budget | Atoms | Episodes | Total items |
 | --- | ---: | ---: | --- | --- | ---: |
 | `quick` | 60 s | 1024 | L1-L2, 4/level (80 items) | none | 80 |
-| `medium` | 300 s | 1024 | L1-L3, 5/level (150 items) | L1-L2, 3/level, max 4 turns (60 items) | 210 |
+| `medium` | 300 s | 2048 | L1-L4, 2/level (80 items) | L2, 2/level, max 6 turns (20 items) | 100 |
 | `slow` | 1200 s | 2048 | L1-L4, 5/level (200 items) | L1-L3, 2/level, max 10 turns (60 items) | 260 |
 | `deep` | 3600 s | 4096 (episodes capped at 2048/turn) | L1-L4, 6/level (240 items) | L1-L4, 3/level, max 14 turns (120 items) | 360 |
 
@@ -64,7 +64,7 @@ families: 10 (assumed)
 model load time excluded (~35 s once, vLLM)
 tier     atom_think ep_think    worst_s  expected_s no_think_worst_s no_think_expected_s ctx_worst  budget_s     flag
 quick          1024     1024       58.0        42.5              3.4                 2.6      1888        60   WITHIN
-medium         1024     1024      288.0       191.6             21.8                15.0      2920       300   WITHIN
+medium         2048     2048      284.2       189.2             11.1                 7.6      4444       300   WITHIN
 slow           2048     2048     1139.2       740.1             46.9                31.7      5444      1200   WITHIN
 deep           4096     2048     3066.9      1981.9            117.8                78.2      6444      3600   WITHIN
 ```
@@ -84,7 +84,7 @@ The instrument was validated with a noisy-oracle ladder from
 | Tier | eps=0.0 | eps=0.25 | eps=0.5 | eps=0.75 | eps=1.0 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `quick` | 1.000 | 0.675 | 0.463 | 0.250 | 0.013 |
-| `medium` | 1.000 | 0.762 | 0.513 | 0.278 | 0.027 |
+| `medium` | 1.000 | 0.738 | 0.492 | 0.274 | 0.024 |
 | `slow` | 1.000 | 0.747 | 0.510 | 0.263 | 0.016 |
 | `deep` | 1.000 | 0.747 | 0.467 | 0.247 | 0.016 |
 

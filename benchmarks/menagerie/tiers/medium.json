@@ -1,1 +1,1 @@
-{"tier": "medium", "budget_s": 300, "think_budget": 1024, "atoms": {"levels": [1, 2, 3], "n_per_level": 5}, "episodes": {"levels": [1, 2], "n_per_level": 3, "max_turns": 4}, "max_new_tokens": {"atom": 64, "episode": 96}}
+{"tier": "medium", "budget_s": 300, "think_budget": 2048, "atoms": {"levels": [1, 2, 3, 4], "n_per_level": 2}, "episodes": {"levels": [2], "n_per_level": 2, "max_turns": 6}, "max_new_tokens": {"atom": 64, "episode": 96}}
