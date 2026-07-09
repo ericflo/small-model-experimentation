@@ -4,8 +4,8 @@
 - FlashInfer is enabled by default and works via the pinned stack's precompiled flashinfer-cubin (no nvcc needed); set MENAGERIE_VLLM_NO_FLASHINFER=1 to fall back to native torch sampling.
 - This runner is the benchmark's PERSISTENT-SERVER sibling of the repo's reusable one-shot experiment runner templates/experiment/src/vllm_runner.py, sharing the same pinned venv (../../.venv-vllm from requirements-vllm.lock.txt) and the same two-phase thinking semantics; see docs/vllm_inference.md.
 - vLLM V1 uses spawn on WSL, hence the __main__ guard.
-- Model is Qwen3.5-4B, a hybrid model: at gpu_memory_utilization=0.5 only about 93 Mamba cache blocks exist, so max_num_seqs MUST be capped (<=93) or CUDA-graph capture fails with "max_num_seqs exceeds available Mamba cache blocks". We use max_num_seqs=64.
-- THINKING BUDGET method: default is TWO-PHASE (env MENAGERIE_VLLM_BUDGET=two_phase), which mirrors the HF `qwen` backend token-for-token (generate up to B think tokens; if </think> was not emitted, force it via close_ids "</think>\\n\\n"; then regenerate the answer with the mode's answer budget using prefix caching). This was chosen as the default because it reproduces the HF backend's scores EXACTLY (identical aggregate on the quick tier), which is required for cross-backend comparability.
+- Model is Qwen3.5-4B, a hybrid model. Defaults are gpu_memory_utilization=0.85 and max_model_len=16384; more Mamba cache blocks exist at 0.85, so max_num_seqs stays 64 and is safely under the available block count.
+- THINKING BUDGET method: budgets may differ by mode, and a per-prompt context guard caps them against MAX_MODEL_LEN after reserving the mode's answer budget and a margin. The default is TWO-PHASE (env MENAGERIE_VLLM_BUDGET=two_phase), which mirrors the HF `qwen` backend token-for-token (generate up to B think tokens; if </think> was not emitted, force it via close_ids "</think>\\n\\n"; then regenerate the answer with the mode's answer budget using prefix caching). This was chosen as the default because it reproduces the HF backend's scores EXACTLY (identical aggregate on the quick tier), which is required for cross-backend comparability.
 - The vLLM-NATIVE budget (env MENAGERIE_VLLM_BUDGET=native, single pass) also works and was EMPIRICALLY VERIFIED on vllm 0.24.0 to cap think tokens at B (budget=32 -> exactly 31 sampled think tokens then a forced </think>; the uncapped baseline never closed within 512 tokens). Native requires reasoning_parser="qwen3" and is a faster single pass, but its post-forced-close answer conditioning differs slightly from the HF backend, so scores can diverge in low-budget/truncated regimes; use it for speed, two_phase for exact HF parity.
 - MENAGERIE_VLLM_ADAPTER points at a PEFT LoRA adapter directory to load.
 - Adapter validation is cribbed from templates/experiment/src/vllm_runner.py.
@@ -28,20 +28,20 @@ except ImportError:
 
 
 THINK_CLOSE = 248069  # id of "</think>"
+MAX_MODEL_LEN = int(os.environ.get("MENAGERIE_VLLM_MAXLEN", "16384"))
 
 
 def _engine_kwargs(method, adapter_info=None) -> dict:
     model_id = os.environ.get("MENAGERIE_VLLM_MODEL", "Qwen/Qwen3.5-4B")
-    gmu = float(os.environ.get("MENAGERIE_VLLM_GMU", "0.5"))
+    gmu = float(os.environ.get("MENAGERIE_VLLM_GMU", "0.85"))
     kwargs = dict(
         model=model_id,
         gpu_memory_utilization=gmu,
         language_model_only=True,
-        # 8192, not 4096: deep-tier episodes accumulate multi-turn history plus a
-        # 2048-token think budget, which overflows 4096. Not 16384: at
-        # gpu_memory_utilization 0.5 on a 24 GB card the KV budget caps out near
-        # ~12k (verified: engine init fails at 16384/0.5).
-        max_model_len=8192,
+        # The old 8192 cap was an artifact of the conservative
+        # gpu_memory_utilization=0.5, not a model limit; the model supports far
+        # more. 16384 covers deep-tier episodes with full escalated think budgets.
+        max_model_len=MAX_MODEL_LEN,
         max_num_seqs=64,
     )
     if method == "native":
@@ -66,7 +66,14 @@ def _load_llm(method, adapter_info=None):
             file=sys.stderr,
             flush=True,
         )
-        return LLM(enforce_eager=True, **kwargs)
+        try:
+            return LLM(enforce_eager=True, **kwargs)
+        except Exception:  # noqa: BLE001
+            raise RuntimeError(
+                "vLLM engine init failed. If the GPU is shared or memory-constrained, retry with "
+                "MENAGERIE_VLLM_GMU=0.5 MENAGERIE_VLLM_MAXLEN=8192, or fall back to "
+                "--backend qwen (HF)."
+            ) from exc
 
 
 def _job_lora_request(job, lora_request, adapter_path):
@@ -92,23 +99,51 @@ def _answer_budget(max_new, mode):
     return int(max_new)
 
 
+def _think_budget(think_budget, mode):
+    if isinstance(think_budget, dict):
+        return int(think_budget[mode])
+    return int(think_budget)
+
+
 def _run_no_think(llm, tok, prompt_ids, modes, max_new, temperature, eos_ids, lora_request=None):
     from vllm import SamplingParams
     from vllm.inputs import TokensPrompt
 
+    answer_budgets = [
+        max(0, min(_answer_budget(max_new, modes[i]), MAX_MODEL_LEN - len(prompt_ids[i]) - 16))
+        for i in range(len(prompt_ids))
+    ]
+    active = [i for i in range(len(prompt_ids)) if answer_budgets[i] > 0]
     sps = [
         SamplingParams(
             temperature=temperature,
-            max_tokens=_answer_budget(max_new, modes[i]),
+            max_tokens=answer_budgets[i],
             skip_special_tokens=False,
         )
+        for i in active
+    ]
+    outs = (
+        llm.generate(
+            [TokensPrompt(prompt_token_ids=prompt_ids[i]) for i in active],
+            sps,
+            lora_request=lora_request,
+        )
+        if active
+        else []
+    )
+    res = [
+        {
+            "answer": "",
+            "think_tokens": 0,
+            "forced_close": False,
+            "prompt_tokens": len(prompt_ids[i]),
+            "context_capped": False,
+        }
         for i in range(len(prompt_ids))
     ]
-    outs = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sps, lora_request=lora_request)
-    res = []
-    for o in outs:
+    for i, o in zip(active, outs):
         ids = _trim_eos(list(o.outputs[0].token_ids), eos_ids)
-        res.append({"answer": tok.decode(ids, skip_special_tokens=True), "think_tokens": 0, "forced_close": False})
+        res[i]["answer"] = tok.decode(ids, skip_special_tokens=True)
     return res
 
 
@@ -116,24 +151,31 @@ def _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature,
     from vllm import SamplingParams
     from vllm.inputs import TokensPrompt
 
+    budgets = [_think_budget(think_budget, mode) for mode in modes]
+    answer_budgets = [_answer_budget(max_new, mode) for mode in modes]
+    allowed_think = [
+        max(0, min(budgets[i], MAX_MODEL_LEN - len(prompt_ids[i]) - answer_budgets[i] - 16))
+        for i in range(len(prompt_ids))
+    ]
+    context_capped = [allowed_think[i] < budgets[i] for i in range(len(prompt_ids))]
     sps = [
         SamplingParams(
             temperature=temperature,
-            max_tokens=think_budget + _answer_budget(max_new, modes[i]),
-            thinking_token_budget=think_budget,
+            max_tokens=allowed_think[i] + answer_budgets[i],
+            thinking_token_budget=allowed_think[i],
             skip_special_tokens=False,
         )
         for i in range(len(prompt_ids))
     ]
     outs = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sps, lora_request=lora_request)
     res = []
-    for o in outs:
+    for i, o in enumerate(outs):
         ids = list(o.outputs[0].token_ids)
         if THINK_CLOSE in ids:
             ci = ids.index(THINK_CLOSE)
             think_tokens = ci
             ans_ids = _trim_eos(ids[ci + 1 :], eos_ids)
-            forced = ci >= think_budget - 1
+            forced = ci >= allowed_think[i] - 1
         else:
             think_tokens = len(ids)
             ans_ids = []
@@ -143,6 +185,8 @@ def _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature,
                 "answer": tok.decode(ans_ids, skip_special_tokens=True),
                 "think_tokens": think_tokens,
                 "forced_close": bool(forced),
+                "prompt_tokens": len(prompt_ids[i]),
+                "context_capped": context_capped[i],
             }
         )
     return res
@@ -152,15 +196,42 @@ def _run_two_phase(llm, tok, prompt_ids, modes, max_new, think_budget, temperatu
     from vllm import SamplingParams
     from vllm.inputs import TokensPrompt
 
-    sp1 = SamplingParams(temperature=temperature, max_tokens=think_budget, skip_special_tokens=False)
-    outs1 = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sp1, lora_request=lora_request)
+    budgets = [_think_budget(think_budget, mode) for mode in modes]
+    answer_budgets = [_answer_budget(max_new, mode) for mode in modes]
+    allowed_think = [
+        max(0, min(budgets[i], MAX_MODEL_LEN - len(prompt_ids[i]) - answer_budgets[i] - 16))
+        for i in range(len(prompt_ids))
+    ]
+    context_capped = [allowed_think[i] < budgets[i] for i in range(len(prompt_ids))]
+    active = [i for i in range(len(prompt_ids)) if allowed_think[i] > 0]
+    sp1 = [
+        SamplingParams(temperature=temperature, max_tokens=allowed_think[i], skip_special_tokens=False)
+        for i in active
+    ]
+    outs1 = (
+        llm.generate(
+            [TokensPrompt(prompt_token_ids=prompt_ids[i]) for i in active],
+            sp1,
+            lora_request=lora_request,
+        )
+        if active
+        else []
+    )
+    outs_by_idx = dict(zip(active, outs1))
     n = len(prompt_ids)
     res = [None] * n
     think_tokens = [0] * n
     forced = [False] * n
     conts = []
     cont_idx = []
-    for i, o in enumerate(outs1):
+    for i in range(n):
+        if allowed_think[i] == 0:
+            thinking = []
+            forced[i] = True
+            conts.append(TokensPrompt(prompt_token_ids=prompt_ids[i] + close_ids))
+            cont_idx.append(i)
+            continue
+        o = outs_by_idx[i]
         ids = list(o.outputs[0].token_ids)
         if THINK_CLOSE in ids:
             ci = ids.index(THINK_CLOSE)
@@ -172,6 +243,8 @@ def _run_two_phase(llm, tok, prompt_ids, modes, max_new, think_budget, temperatu
                     "answer": tok.decode(_trim_eos(rest, eos_ids), skip_special_tokens=True),
                     "think_tokens": len(thinking),
                     "forced_close": False,
+                    "prompt_tokens": len(prompt_ids[i]),
+                    "context_capped": context_capped[i],
                 }
                 continue
         else:
@@ -196,6 +269,8 @@ def _run_two_phase(llm, tok, prompt_ids, modes, max_new, think_budget, temperatu
                 "answer": tok.decode(aids, skip_special_tokens=True),
                 "think_tokens": think_tokens[j],
                 "forced_close": forced[j],
+                "prompt_tokens": len(prompt_ids[j]),
+                "context_capped": context_capped[j],
             }
     return res
 
@@ -247,7 +322,7 @@ def main():
         prompts = job["prompts"]
         modes = job.get("modes") or ["atom"] * len(prompts)
         think = bool(job["think"])
-        think_budget = int(job["think_budget"])
+        think_budget = job["think_budget"]
         temperature = float(job.get("temperature", 0.0))
         max_new = job["max_new_tokens"]
         job_lora_request = _job_lora_request(job, lora_request, adapter_info["path"] if adapter_info else None)

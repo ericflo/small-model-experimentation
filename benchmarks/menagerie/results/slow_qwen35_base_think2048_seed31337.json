@@ -1,0 +1,2603 @@
+{
+  "adapter": null,
+  "aggregate": 0.13842948717948717,
+  "backend": "qwen_vllm",
+  "backend_stats": {
+    "calls": 10,
+    "context_capped": 0,
+    "forced_think_closes": 399,
+    "generated_think_tokens": 833530,
+    "max_prompt_tokens": 1318,
+    "max_think_tokens": 2048,
+    "think_token_counts": [
+      2048,
+      2048,
+      1878,
+      1715,
+      1869,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      1706,
+      2048,
+      2048,
+      1641,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      351,
+      2048,
+      2048,
+      584,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      1952,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      301,
+      2048,
+      451,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      850,
+      2048,
+      2048,
+      2048,
+      644,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      1088,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      465,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      883,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048,
+      2048
+    ]
+  },
+  "budget_s": 1200,
+  "generated_at": "2026-07-09T22:34:08.165348+00:00",
+  "per_family": {
+    "chronicle": {
+      "n": 26,
+      "score": 0.15384615384615385,
+      "wall_s": 25.054
+    },
+    "lockpick": {
+      "n": 26,
+      "score": 0.11538461538461539,
+      "wall_s": 68.627
+    },
+    "menders": {
+      "n": 26,
+      "score": 0.038461538461538464,
+      "wall_s": 50.899
+    },
+    "mirage": {
+      "n": 26,
+      "score": 0.0,
+      "wall_s": 25.054
+    },
+    "rites": {
+      "n": 26,
+      "score": 0.07692307692307693,
+      "wall_s": 93.24
+    },
+    "siftstack": {
+      "n": 26,
+      "score": 0.038461538461538464,
+      "wall_s": 25.054
+    },
+    "sirens": {
+      "n": 26,
+      "score": 0.46153846153846156,
+      "wall_s": 82.459
+    },
+    "stockade": {
+      "n": 26,
+      "score": 0.08012820512820513,
+      "wall_s": 33.935
+    },
+    "toolsmith": {
+      "n": 26,
+      "score": 0.35544871794871796,
+      "wall_s": 52.021
+    },
+    "warren": {
+      "n": 26,
+      "score": 0.0641025641025641,
+      "wall_s": 91.916
+    }
+  },
+  "per_item": [
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L1-31337-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L1-31337-1",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L1-31337-2",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L1-31337-3",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L1-31337-4",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L2-31337-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L2-31337-1",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L2-31337-2",
+      "level": 2,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L2-31337-3",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L2-31337-4",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L3-31337-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L3-31337-1",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L3-31337-2",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L3-31337-3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L3-31337-4",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L4-31337-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L4-31337-1",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L4-31337-2",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L4-31337-3",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-atom-L4-31337-4",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-episode-L1-31337-0",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-episode-L1-31337-1",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-episode-L2-31337-0",
+      "level": 2,
+      "mode": "episode",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-episode-L2-31337-1",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-episode-L3-31337-0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "chronicle",
+      "id": "chronicle-episode-L3-31337-1",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L1-atom-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L1-atom-1",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L1-atom-2",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L1-atom-3",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L1-atom-4",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L2-atom-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L2-atom-1",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L2-atom-2",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L2-atom-3",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L2-atom-4",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L3-atom-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L3-atom-1",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L3-atom-2",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L3-atom-3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L3-atom-4",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L4-atom-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L4-atom-1",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L4-atom-2",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L4-atom-3",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L4-atom-4",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L1-episode-0",
+      "level": 1,
+      "mode": "episode",
+      "score": 1.0,
+      "turns": 3
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L1-episode-1",
+      "level": 1,
+      "mode": "episode",
+      "score": 1.0,
+      "turns": 4
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L2-episode-0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L2-episode-1",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L3-episode-0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 10
+    },
+    {
+      "family": "lockpick",
+      "id": "lockpick-31337-L3-episode-1",
+      "level": 3,
+      "mode": "episode",
+      "score": 1.0,
+      "turns": 4
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-1-atom-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-1-atom-1",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-1-atom-2",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-1-atom-3",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-1-atom-4",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-2-atom-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-2-atom-1",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-2-atom-2",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-2-atom-3",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-2-atom-4",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-3-atom-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-3-atom-1",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-3-atom-2",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-3-atom-3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-3-atom-4",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-4-atom-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-4-atom-1",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-4-atom-2",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-4-atom-3",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-4-atom-4",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-1-episode-0",
+      "level": 1,
+      "mode": "episode",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-1-episode-1",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 3
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-2-episode-0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 3
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-2-episode-1",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 3
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-3-episode-0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 6
+    },
+    {
+      "family": "menders",
+      "id": "menders-31337-3-episode-1",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 6
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L1-31337-0-S",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L1-31337-2-U",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L1-31337-1-U",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L1-31337-1-S",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L1-31337-0-U",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L2-31337-0-U",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L2-31337-1-S",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L2-31337-0-S",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L2-31337-2-U",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L2-31337-1-U",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L3-31337-1-U",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L3-31337-1-S",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L3-31337-0-U",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L3-31337-2-U",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L3-31337-0-S",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L4-31337-0-U",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L4-31337-2-S",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L4-31337-0-S",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L4-31337-1-S",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-atom-L4-31337-1-U",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-episode-L1-31337-0-S",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-episode-L1-31337-0-U",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-episode-L2-31337-0-U",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-episode-L2-31337-0-S",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-episode-L3-31337-0-S",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "mirage",
+      "id": "mirage-episode-L3-31337-0-U",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L1-atom-000-000000074bd64292",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L1-atom-001-000000074bd64293",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L1-atom-002-000000074bd64294",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L1-atom-003-000000074bd64295",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L1-atom-004-000000074bd64296",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L2-atom-000-000000074bd669a9",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L2-atom-001-000000074bd669aa",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L2-atom-002-000000074bd669ab",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L2-atom-003-000000074bd669ac",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L2-atom-004-000000074bd669ad",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L3-atom-000-000000074bd690c0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L3-atom-001-000000074bd690c1",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L3-atom-002-000000074bd690c2",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L3-atom-003-000000074bd690c3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L3-atom-004-000000074bd690c4",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L4-atom-000-000000074bd6b7d7",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L4-atom-001-000000074bd6b7d8",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L4-atom-002-000000074bd6b7d9",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L4-atom-003-000000074bd6b7da",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L4-atom-004-000000074bd6b7db",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L1-episode-000-000000074bd642f7",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L1-episode-001-000000074bd642f8",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L2-episode-000-000000074bd66a0e",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L2-episode-001-000000074bd66a0f",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L3-episode-000-000000074bd69125",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 10
+    },
+    {
+      "family": "rites",
+      "id": "rites-31337-L3-episode-001-000000074bd69126",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 10
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-1-atom-0-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-1-atom-1-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-1-atom-2-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-1-atom-3-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-1-atom-4-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-2-atom-0-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-2-atom-1-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-2-atom-2-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-2-atom-3-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-2-atom-4-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-3-atom-0-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-3-atom-1-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-3-atom-2-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-3-atom-3-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-3-atom-4-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-4-atom-0-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-4-atom-1-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-4-atom-2-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-4-atom-3-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-4-atom-4-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-1-episode-0-0",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-1-episode-1-0",
+      "level": 1,
+      "mode": "episode",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-2-episode-0-0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-2-episode-1-0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-3-episode-0-0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "siftstack",
+      "id": "siftstack-31337-3-episode-1-0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L1-a0",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L1-a1",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L1-a2",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L1-a3",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L1-a4",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L2-a0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L2-a1",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L2-a2",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L2-a3",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L2-a4",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L3-a0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L3-a1",
+      "level": 3,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L3-a2",
+      "level": 3,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L3-a3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L3-a4",
+      "level": 3,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L4-a0",
+      "level": 4,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L4-a1",
+      "level": 4,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L4-a2",
+      "level": 4,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L4-a3",
+      "level": 4,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L4-a4",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L1-e0",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L1-e1",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L2-e0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L2-e1",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L3-e0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 9
+    },
+    {
+      "family": "sirens",
+      "id": "sirens-s31337-L3-e1",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 9
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L1-31337-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L1-31337-1",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L1-31337-2",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L1-31337-3",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L1-31337-4",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L2-31337-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L2-31337-1",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L2-31337-2",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L2-31337-3",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L2-31337-4",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L3-31337-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L3-31337-1",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L3-31337-2",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L3-31337-3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L3-31337-4",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L4-31337-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L4-31337-1",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L4-31337-2",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L4-31337-3",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-atom-L4-31337-4",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-episode-L1-31337-0",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 2
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-episode-L1-31337-1",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.8333333333333334,
+      "turns": 2
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-episode-L2-31337-0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.25,
+      "turns": 2
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-episode-L2-31337-1",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 2
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-episode-L3-31337-0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 3
+    },
+    {
+      "family": "stockade",
+      "id": "stockade-episode-L3-31337-1",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 3
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L1-a0",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L1-a1",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L1-a2",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L1-a3",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L1-a4",
+      "level": 1,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L2-a0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.16666666666666666,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L2-a1",
+      "level": 2,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L2-a2",
+      "level": 2,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L2-a3",
+      "level": 2,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L2-a4",
+      "level": 2,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L3-a0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.375,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L3-a1",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.375,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L3-a2",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L3-a3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.25,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L3-a4",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.375,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L4-a0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L4-a1",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L4-a2",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.3,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L4-a3",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.3,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L4-a4",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.1,
+      "turns": 1
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L1-e0",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L1-e1",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L2-e0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L2-e1",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L3-e0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 5
+    },
+    {
+      "family": "toolsmith",
+      "id": "toolsmith-s31337-L3-e1",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 5
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L1-atom-0",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L1-atom-1",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L1-atom-2",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L1-atom-3",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L1-atom-4",
+      "level": 1,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L2-atom-0",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L2-atom-1",
+      "level": 2,
+      "mode": "atom",
+      "score": 1.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L2-atom-2",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L2-atom-3",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L2-atom-4",
+      "level": 2,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L3-atom-0",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L3-atom-1",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L3-atom-2",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L3-atom-3",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L3-atom-4",
+      "level": 3,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L4-atom-0",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L4-atom-1",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L4-atom-2",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L4-atom-3",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L4-atom-4",
+      "level": 4,
+      "mode": "atom",
+      "score": 0.0,
+      "turns": 1
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L1-episode-0",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L1-episode-1",
+      "level": 1,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L2-episode-0",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.6666666666666666,
+      "turns": 3
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L2-episode-1",
+      "level": 2,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 4
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L3-episode-0",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 10
+    },
+    {
+      "family": "warren",
+      "id": "warren-31337-L3-episode-1",
+      "level": 3,
+      "mode": "episode",
+      "score": 0.0,
+      "turns": 10
+    }
+  ],
+  "rounds": 10,
+  "seed": 31337,
+  "suite_version": "0.1.0",
+  "think": true,
+  "think_budget": {
+    "atom": 2048,
+    "episode": 2048
+  },
+  "tier": "slow",
+  "tier_config": {
+    "atoms": {
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "n_per_level": 5
+    },
+    "budget_s": 1200,
+    "episodes": {
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "max_turns": 10,
+      "n_per_level": 2
+    },
+    "max_new_tokens": {
+      "atom": 64,
+      "episode": 96
+    },
+    "think_budget": 2048,
+    "tier": "slow"
+  },
+  "wall_total_s": 548.2710130440537,
+  "within_budget": true
+}

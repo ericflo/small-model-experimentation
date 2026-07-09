@@ -112,7 +112,7 @@ class QwenBackend:
         model_id: str = "Qwen/Qwen3.5-4B",
         device: str = "cuda:0",
         think: bool = False,
-        think_budget: int = 512,
+        think_budget: int | dict[str, int] = 512,
         max_batch: int = 96,
         max_new_tokens: dict | None = None,
         adapter: str | None = None,
@@ -237,7 +237,8 @@ class QwenBackend:
             generated = self._generate_resilient(prompts, self.max_new_tokens[mode])
             return [(records[idx][0], self._decode(ids)) for idx, ids in enumerate(generated)]
 
-        thoughts = self._generate_resilient(prompts, self.think_budget)
+        think_budget = int(self.think_budget[mode]) if isinstance(self.think_budget, dict) else int(self.think_budget)
+        thoughts = self._generate_resilient(prompts, think_budget)
         answers: list[tuple[int, str] | None] = [None] * len(records)
         continuations = []
         continuation_indices = []
@@ -301,7 +302,7 @@ class QwenVllmBackend:
         model_id="Qwen/Qwen3.5-4B",
         device="cuda:0",
         think=False,
-        think_budget=512,
+        think_budget: int | dict[str, int] = 512,
         max_batch=96,
         max_new_tokens=None,
         adapter=None,
@@ -316,6 +317,8 @@ class QwenVllmBackend:
             "forced_think_closes": 0,
             "max_think_tokens": 0,
             "think_token_counts": [],
+            "context_capped": 0,
+            "max_prompt_tokens": 0,
         }
         runner = str(Path(__file__).resolve().parent / "vllm_runner.py")
         env = dict(os.environ)
@@ -325,6 +328,10 @@ class QwenVllmBackend:
         env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
         if adapter is not None:
             env["MENAGERIE_VLLM_ADAPTER"] = str(adapter)
+        if not Path(self.VENV_PYTHON).exists():
+            raise RuntimeError(
+                "vLLM venv not found at /home/ericflo/Development/smx-menagerie/.venv-vllm. Build it with: uv venv --python 3.12 .venv-vllm && uv pip sync --python .venv-vllm/bin/python --torch-backend=cu129 requirements-vllm.lock.txt (see docs/vllm_inference.md), or fall back to --backend qwen (HF backend, slower)."
+            )
         self.proc = subprocess.Popen(
             [self.VENV_PYTHON, runner],
             stdin=subprocess.PIPE,
@@ -372,10 +379,14 @@ class QwenVllmBackend:
         self.stats["calls"] += 1
         for comp in completions:
             tt = int(comp.get("think_tokens", 0))
+            prompt_tokens = int(comp.get("prompt_tokens", 0))
             self.stats["generated_think_tokens"] += tt
             self.stats["max_think_tokens"] = max(self.stats["max_think_tokens"], tt)
+            self.stats["max_prompt_tokens"] = max(self.stats["max_prompt_tokens"], prompt_tokens)
             if comp.get("forced_close"):
                 self.stats["forced_think_closes"] += 1
+            if comp.get("context_capped"):
+                self.stats["context_capped"] += 1
             if self.think:
                 self.stats["think_token_counts"].append(tt)
         return [comp["answer"] for comp in completions]
