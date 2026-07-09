@@ -1,11 +1,13 @@
 ---
 name: codex-exec
-description: Delegate coding, analysis, and review tasks to the OpenAI Codex CLI (`codex exec`, GPT-5.5 at xhigh reasoning) running non-interactively. Use when you want a second autonomous coding agent — parallel workers, structured JSON extraction from a codebase, an independent code review, or a self-contained implementation task. Covers exact flags, sandbox modes, sessions, JSONL events, exit-code semantics, and the prompt style GPT-5.5 responds to.
+description: Delegate coding, analysis, and review tasks to the OpenAI Codex CLI (`codex exec`, GPT-5.6-sol at max reasoning) running non-interactively. Use when you want a second autonomous coding agent — parallel workers, structured JSON extraction from a codebase, an independent code review, or a self-contained implementation task. Covers exact flags, sandbox modes, sessions, JSONL events, exit-code semantics, and the prompt style the GPT-5.x agents respond to.
 ---
 
-# Driving `codex exec` (GPT-5.5, xhigh)
+# Driving `codex exec` (GPT-5.6-sol, max)
 
-`codex exec` runs OpenAI's Codex agent headlessly: one prompt in, agent works (reads files, runs commands, edits), final message out. The configured default here is **gpt-5.5 at `model_reasoning_effort=xhigh`** — an exceptionally literal, precise instruction-follower. Treat every prompt as a spec, not a wish: it will do exactly what you say, resolve what you leave open without asking, and verify what you tell it to verify.
+`codex exec` runs OpenAI's Codex agent headlessly: one prompt in, agent works (reads files, runs commands, edits), final message out. The configured default here is **gpt-5.6-sol at `model_reasoning_effort=max`** — an exceptionally literal, precise instruction-follower. Treat every prompt as a spec, not a wish: it will do exactly what you say, resolve what you leave open without asking, and verify what you tell it to verify. (The behavioral findings in this skill were measured on gpt-5.5 xhigh and spot-verified to carry over to 5.6-sol; the interface is identical.)
+
+**5.6 prompting delta:** GPT-5.6 measurably rewards *shorter* prompts — OpenAI reports 10–15% quality gains while cutting prompt tokens 41–66%. Keep the precision doctrine below (byte-exact constraints, decide every ambiguity, fence the scope) but trim scaffolding: state priorities instead of exhaustive rule lists, skip generic "be careful/be thorough" filler, keep structure guidance lightweight.
 
 Health check if anything seems off: `codex doctor` (auth via ChatGPT account; config in `~/.codex/config.toml`).
 
@@ -92,8 +94,9 @@ Network without full yolo: `-c sandbox_workspace_write.network_access=true`. Whe
 
 ## Key flags & config
 
-- `-m gpt-5.5` — default already. Others available (`gpt-5.4`, `gpt-5.4-mini`, `gpt-5.3-codex-spark`); stay on gpt-5.5.
-- `-c model_reasoning_effort=low|medium|high|xhigh` — default xhigh. **Effort scales with task difficulty, not a fixed tax**: trivial Q&A returns in ~3 s at every level, and xhigh spent only ~1.2k reasoning tokens on a small refactor. Don't downgrade for real work.
+- `-m gpt-5.6-sol` — the configured default and OpenAI's flagship (alias `gpt-5.6`; 1.05M context; same $5/$30 MTok price as gpt-5.5 but reaches the same quality with fewer output tokens). Cheaper tiers for mechanical bulk work: `gpt-5.6-terra` ($2.50/$15), `gpt-5.6-luna` ($1/$6). Legacy: `gpt-5.5`, `gpt-5.4`, `gpt-5.4-mini`.
+- `-c model_reasoning_effort=none|low|medium|high|xhigh|max` — default max (OpenAI: reserve `max` for the hardest quality-first workloads; `medium` is the balanced starting point). **Effort scales with task difficulty, not a fixed tax**: trivial Q&A returns in ~3 s at every level, and high effort spent only ~1.2k reasoning tokens on a small refactor. Don't downgrade for real work; consider terra/luna + lower effort for trivial format probes.
+- Cost note: prompt-cache *writes* bill at 1.25× uncached input on 5.6; cached reads are 10× cheaper than fresh input.
 - `codex --search exec ...` — live web search. **`--search` must come BEFORE `exec`** (exec rejects it after).
 - `-i img.png` — attach image(s).
 - `--ephemeral` — no session persisted (not resumable).
@@ -190,6 +193,8 @@ codex exec resume "$sid" "The plan is approved. Execute step 1 only, then stop."
 ```
 
 ## Gotchas checklist
+
+- `codex exec review --base <branch>` rejects a custom prompt alongside it (despite the usage string suggesting otherwise) — use plain `--base` for branch reviews; custom review instructions only work with `--uncommitted`-style default scope.
 
 - `</dev/null` on every scripted call — stdin is read unconditionally; the redirect prevents hangs (the stderr "Reading additional input..." line still appears; ignore it).
 - Keep the workdir clean — codex reads every file in it, including your orchestration artifacts, and they shape its behavior. `-o`/logs/schemas go outside `-C`.
