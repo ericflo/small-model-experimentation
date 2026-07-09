@@ -44603,6 +44603,109 @@
      "source": "runs/eval_*_nothink.json + per-task forensics in reports/report.md (Result 6)"
     }
    ]
+  },
+  "qwen35_4b_hypothesize_verify_wall": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The taught search routine doubles structure proposal at its practiced depth -- and moves nothing one step deeper",
+     "categories": [
+      "depth 2 (practiced)",
+      "depth 3 (one deeper)"
+     ],
+     "series": [
+      {
+       "label": "base (lists)",
+       "values": [
+        0.367,
+        0.033
+       ]
+      },
+      {
+       "label": "procedure-trained (lists)",
+       "values": [
+        0.7,
+        0.1
+       ]
+      },
+      {
+       "label": "base (strings)",
+       "values": [
+        0.333,
+        0.067
+       ]
+      },
+      {
+       "label": "procedure-trained (strings)",
+       "values": [
+        0.567,
+        0.067
+       ]
+      }
+     ],
+     "y_label": "probe-robust structure coverage@12",
+     "y_format": "percent01",
+     "note": "QLoRA on 1,476 truth-blind hypothesize-and-verify traces (depths 1-2 only, think channel). Depth-2 proposal doubles with parse-rate 1.00 and zero depth-1 forgetting; the pooled depth-3 contrast is not significant (Holm p=0.55). Serial-strategy installs are depth-local.",
+     "source": "runs/verdict.json (cells), runs/eval_{base,dsl_sft}.json"
+    },
+    {
+     "kind": "bar",
+     "title": "All three routes into the wall fail the pre-registered depth-3 contrast",
+     "categories": [
+      "base",
+      "+ procedure scaffold (prompt only)",
+      "prior-skill adapter zero-shot",
+      "DSL procedure-SFT"
+     ],
+     "series": [
+      {
+       "label": "pooled list+string depth-3 coverage@12",
+       "values": [
+        0.05,
+        0.083,
+        0.033,
+        0.083
+       ]
+      }
+     ],
+     "y_label": "probe-robust structure coverage@12",
+     "y_format": "percent01",
+     "note": "One-sided paired bootstrap vs base, Holm-corrected: +0.033 (p=0.41), -0.017 (p=0.82), +0.033 (p=0.55). The wall replicates in-house (base no-think anchor at the historical floor; thinking@1024 alone does not clear it). The scaffold null is format-confounded (parse rate 0.89 -> 0.44-0.67).",
+     "source": "runs/verdict.json (primary)"
+    },
+    {
+     "kind": "bar",
+     "title": "The routine is substrate-local: the verified prior adapter interferes instead of transferring",
+     "categories": [
+      "own substrate (held-out family)",
+      "list depth-2",
+      "string depth-2"
+     ],
+     "series": [
+      {
+       "label": "C45 adapter",
+       "values": [
+        0.92,
+        0.0,
+        0.067
+       ]
+      },
+      {
+       "label": "reference (committed C45 headline / base model on DSLs)",
+       "values": [
+        0.905,
+        0.367,
+        0.333
+       ]
+      }
+     ],
+     "y_label": "accuracy / structure coverage@12",
+     "y_format": "percent01",
+     "note": "First pair: the regenerated adapter (0.920) vs the COMMITTED C45 adapter headline (0.905) on its own held-out family -- the rebuild is faithful (gate-verified before the DSL eval was spent). DSL pairs: the same adapter vs the plain base model -- ~zero transfer, dragging list depth-2 below base with degraded parsing (0.70-0.79). 'General induction' was family-general, not substrate-general.",
+     "source": "runs/gate_c45.json, runs/verdict.json (cells), meta_induction verdict_general.json (0.905)"
+    }
+   ]
   }
  }
 }

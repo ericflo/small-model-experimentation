@@ -58,7 +58,13 @@ changes a rule here, update the rule in the same commit.
   data-DIVERSITY-driven (C24) — and dose-limited: C18's 3× headline was a low-dose
   overestimate (matched-dose rerun flat under the strict eval; C47/C18 audit). To install a
   *skill* rather than answers, teach a GENERAL serial strategy across diverse families and
-  deploy with CoT (C45).
+  deploy with CoT (C45) — but expect the install to be DEPTH-LOCAL: C48's procedure-SFT
+  doubles structure proposal at its practiced depths (d2 0.37→0.70, zero forgetting via the
+  think-channel recipe) and moves nothing one composition step deeper; nothing measured (answers
+  C21, diversity C24, procedure C48) banks depth across. Use procedure-SFT to consolidate depths
+  the model already touches; keep external search (C34/C35) for the frontier. Never deploy a
+  trained-strategy adapter outside its training substrate — C48's c45_zero arm shows ~zero
+  transfer with ACTIVE interference (list d2 0.37→0.00).
 - **Confidence cannot replace the execution verifier at the TRAINING seat.** Banking
   top-think-P(True) solutions (purity 0.43, ~15× random) gains exactly as much as banking
   unfiltered data — only 100%-pure execution-verified data teaches at C18-scale dose (C47;
@@ -79,7 +85,11 @@ changes a rule here, update the rule in the same commit.
   inflated by item difficulty, and RoPE makes last-token layer-0 a degenerate "surface"
   control, so use an external baseline (C40, C30/C31, C46).
 - **Paired bootstrap over items for every selection/method delta** — few-point deltas on
-  n≈250 look real and aren't; report the honest negatives alongside (C46).
+  n≈250 look real and aren't; report the honest negatives alongside (C46). Pair on a FULLY
+  QUALIFYING key — task ids are only unique within a family, and a bare-id dict pairing
+  silently matched cross-family rows, inflating a published contrast +0.050 → +0.083 until an
+  adversarial audit caught it (C48). Never hand-compute a published statistic: extend the
+  committed analyzer so the number is regenerable.
 - **Forced-answer evals (argmax over the answer-token set after `Answer: `)** give a fast,
   deterministic, fair comparison between base and SFT'd models — the base otherwise rambles
   without concluding (C43). Compare the SAME model in forced vs generation mode to localize
@@ -96,6 +106,14 @@ changes a rule here, update the rule in the same commit.
   shuffled-thinking control separates compute/scaffold effects from coherent reasoning (C9).
 - **Unit-test parsers on the exact failing case before any scored run** — a quote-blind parser
   nearly fabricated a false cross-substrate law (C16).
+- **Behavioral structure metrics must be probe-hardened** — a program that hardcodes the visible
+  examples passes a visible-only behavioral skeleton metric by construction; require the SAME
+  skeleton fill to also match fresh probe inputs, and report the mimicry rate (C48). And check
+  PARSE RATE before reading any prompt-scaffold null: long procedure prompts collapse output
+  formatting (0.89→0.44) before they change behavior (C48).
+- **Calibrate reproduction gates to the source experiment's committed artifact number**, never a
+  neighboring claim's headline from memory — a 0.95 gate built from C44's shift number stopped a
+  pipeline whose regenerated C45 adapter (0.920) actually EXCEEDED C45's real 0.905 (C48).
 - **Interrogate whether two levers act on the same axis before running the comparison** — the
   banking arc almost conflated "thinking is useless" with "the model was never trained to
   think in this mode" (C26 scope caveat).

@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 169
-- Manifest files: 465
+- Experiments with manifests: 170
+- Manifest files: 466
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 42 |
+| `standard-artifact` | 43 |
 
 ## Manifests
 
@@ -106,6 +106,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_graphir_self_repair` | `large-artifact` | [manifest](../experiments/qwen35_4b_graphir_self_repair/large_artifacts_manifest.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | `dataset` | [manifest](../experiments/qwen35_4b_humaneval_adaptive_budget/data/dataset_manifest.json) |
 | `qwen35_4b_humaneval_code_confidence` | `standard-artifact` | [manifest](../experiments/qwen35_4b_humaneval_code_confidence/reports/artifact_manifest.yaml) |
+| `qwen35_4b_hypothesize_verify_wall` | `standard-artifact` | [manifest](../experiments/qwen35_4b_hypothesize_verify_wall/reports/artifact_manifest.yaml) |
 | `qwen35_4b_icl_retrieval_vs_induction` | `standard-artifact` | [manifest](../experiments/qwen35_4b_icl_retrieval_vs_induction/reports/artifact_manifest.yaml) |
 | `qwen35_4b_independent_code_abi_coverage_gate` | `large-artifact` | [manifest](../experiments/qwen35_4b_independent_code_abi_coverage_gate/large_artifacts_manifest.md) |
 | `qwen35_4b_independent_retrieval_consensus` | `run-data` | [manifest](../experiments/qwen35_4b_independent_retrieval_consensus/data/consensus_selector_records.manifest.json) |

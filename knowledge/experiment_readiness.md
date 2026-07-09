@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 197
-- Anchor-ready: 182
-- Human-authored READMEs: 184
+- Experiments: 198
+- Anchor-ready: 183
+- Human-authored READMEs: 185
 - Generated README stubs: 13
-- Primary reports: 197
-- Experiment logs: 101
-- Smoke commands: 66
-- Artifact manifests: 169
+- Primary reports: 198
+- Experiment logs: 102
+- Smoke commands: 67
+- Artifact manifests: 170
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 86 |
+| `documented-scripts` | 87 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -95,6 +95,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_graphir_self_repair`](../experiments/qwen35_4b_graphir_self_repair/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_graphir_self_repair/reports/qwen35_4b_graphir_self_repair_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
 | no | [`qwen35_4b_humaneval_adaptive_budget`](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `generated-stub` | [report](../experiments/qwen35_4b_humaneval_adaptive_budget/reports/qwen35_4b_humaneval_adaptive_budget_report.md) | no | `documented-scripts` | no | dataset | replace-generated-readme, add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_humaneval_code_confidence`](../experiments/qwen35_4b_humaneval_code_confidence/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_humaneval_code_confidence/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_hypothesize_verify_wall`](../experiments/qwen35_4b_hypothesize_verify_wall/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_hypothesize_verify_wall/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_icl_retrieval_vs_induction`](../experiments/qwen35_4b_icl_retrieval_vs_induction/README.md) | algorithmic_memory_and_retrieval, benchmark_generalization | `human-authored` | [report](../experiments/qwen35_4b_icl_retrieval_vs_induction/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_independent_code_abi_coverage_gate`](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_independent_code_abi_coverage_gate/reports/final_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_independent_retrieval_consensus`](../experiments/qwen35_4b_independent_retrieval_consensus/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection | `human-authored` | [report](../experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |

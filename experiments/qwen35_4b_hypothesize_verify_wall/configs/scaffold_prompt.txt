@@ -1,0 +1,6 @@
+Before writing any code, reason through this procedure:
+1. EVIDENCE. For each example, compare input and output: did the length change (grow, shrink, unchanged)? Did values change (sign, magnitude, new values, repeats removed or added)? Did order change (sorted, reversed, shifted)?
+2. SHORTLIST. Working backward from these observations, list for each stage of the transformation 2-4 candidate elementary operations that could explain that part of the change. Do not guess a full pipeline yet.
+3. COMPOSE AND CHECK. Combine the most promising candidates into one pipeline. Apply it by hand to example 1, writing the intermediate value after every stage. Compare with the expected output. If it fails, find the FIRST stage where the intermediate value went wrong, replace only that stage from your shortlist, and check example 1 again. When example 1 passes, verify on examples 2 and 3 the same way.
+4. Only after a pipeline passes at least three examples, write the final function implementing it.
+Never hardcode the given examples or return outputs by lookup; the function must implement the general rule.

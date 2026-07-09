@@ -1,0 +1,34 @@
+{
+ "cells": {
+  "list_d2": {
+   "n": 30,
+   "oracle": 30,
+   "rand": 2,
+   "oracle_rate": 1.0,
+   "rand_rate": 0.0667
+  },
+  "list_d3": {
+   "n": 30,
+   "oracle": 30,
+   "rand": 0,
+   "oracle_rate": 1.0,
+   "rand_rate": 0.0
+  },
+  "string_d2": {
+   "n": 30,
+   "oracle": 30,
+   "rand": 1,
+   "oracle_rate": 1.0,
+   "rand_rate": 0.0333
+  },
+  "string_d3": {
+   "n": 30,
+   "oracle": 30,
+   "rand": 0,
+   "oracle_rate": 1.0,
+   "rand_rate": 0.0
+  }
+ },
+ "threshold": 0.85,
+ "passed": true
+}

@@ -1,0 +1,37 @@
+# Pre-registered constants -- single source of truth for the README (review-hardened 2026-07-08).
+model: Qwen/Qwen3.5-4B
+families: [list, string]
+eval:
+  depths: [2, 3]
+  n_per_cell: 30              # 30 x 2 families x 2 depths = 120 frozen tasks; PRIMARY contrast pools families at depth 3 (n=60)
+  seed: 71
+  k_visible: 8
+  m_hidden: 6
+  n_probe_inputs: 6           # fresh probe inputs for the mimicry-robust skeleton metric (labels never shown)
+  K: 12                       # sampled attempts per task per arm
+  budget: 1024                # think budget, all arms
+  answer_max: 512
+  temperature: 0.8
+  top_p: 0.95
+arms: [base, scaffold, c45_zero, dsl_sft]   # + base no-think anchor pass (cheap, C36 continuity)
+scaffold_prompt: configs/scaffold_prompt.txt  # VERBATIM frozen treatment; zero op names
+sft:
+  trace_target_n: 1500        # depth-1/2 traces, list+string, truth-blind factorized procedure
+  trace_depths: [1, 2]
+  trace_seed: 303
+  max_checks_per_trace: 6     # blind-procedure budget; unsolved-within-budget tasks dropped (rate reported)
+  epochs: 2
+  lora: {r: 32, alpha: 64, bs: 2, grad_accum: 8}   # C45 recipe; traces train into the THINK channel
+c45_regen:
+  train: ../qwen35_4b_meta_induction/data/train_general.jsonl
+  seed: 17
+  gate_n_episodes: 200        # must reproduce a7 induction-via-generation >= gates.c45_headline_min (0.87)
+gates:
+  oracle_skelfill_min: 0.85   # trap gate per family x depth
+  install_format_min: 0.80    # dsl_sft trace-format on held-out depth-1
+  install_d1_collapse_max: 0.15  # dsl_sft depth-1 correctness may not drop more than this vs base
+  c45_headline_min: 0.87  # CORRECTED 2026-07-08: historical C45 a7 = 0.905 (verdict_general.json), minus 2x binomial SE at n=200; 0.95 was miscalibrated from C44's shift number
+decision:
+  primary: "pooled list+string depth-3 probe-robust skeleton-coverage@K, one-sided paired bootstrap, Holm across 3 arm-vs-base contrasts"
+  falsify_c36: "corrected CI lower bound > 0 AND diff >= 0.10, in the zero-or-one-trained-window stratum"
+  forced_close_contingency: 0.50  # if a null arm exceeds this at depth 3 -> budget-2048 probe before concluding

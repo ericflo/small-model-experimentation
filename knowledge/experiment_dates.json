@@ -536,6 +536,14 @@
     "experiment_log.md dated 2026-07-08 and git history (post-import)"
    ]
   },
+  "qwen35_4b_hypothesize_verify_wall": {
+   "start": "2026-07-08",
+   "end": "2026-07-09",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_icl_retrieval_vs_induction": {
    "start": "2026-07-07",
    "end": "2026-07-07",

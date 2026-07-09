@@ -80,6 +80,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_graphir_self_repair` | [README](../experiments/qwen35_4b_graphir_self_repair/README.md) | [report](../experiments/qwen35_4b_graphir_self_repair/reports/qwen35_4b_graphir_self_repair_report.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md) | [report](../experiments/qwen35_4b_humaneval_adaptive_budget/reports/qwen35_4b_humaneval_adaptive_budget_report.md) |
 | `qwen35_4b_humaneval_code_confidence` | [README](../experiments/qwen35_4b_humaneval_code_confidence/README.md) | [report](../experiments/qwen35_4b_humaneval_code_confidence/reports/report.md) |
+| `qwen35_4b_hypothesize_verify_wall` | [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md) | [report](../experiments/qwen35_4b_hypothesize_verify_wall/reports/report.md) |
 | `qwen35_4b_icl_retrieval_vs_induction` | [README](../experiments/qwen35_4b_icl_retrieval_vs_induction/README.md) | [report](../experiments/qwen35_4b_icl_retrieval_vs_induction/reports/report.md) |
 | `qwen35_4b_independent_code_abi_coverage_gate` | [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md) | [report](../experiments/qwen35_4b_independent_code_abi_coverage_gate/reports/final_report.md) |
 | `qwen35_4b_independent_retrieval_consensus` | [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md) | [report](../experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md) |

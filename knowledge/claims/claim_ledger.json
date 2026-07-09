@@ -626,7 +626,8 @@
       "avoid": [
         "Do not expect self-banking to climb the depth frontier -- it is coverage-seed-bounded; banking installs only depths already samplable.",
         "Do not read the depth-3 zero as a weak install -- the depth-2 install was strong (tripled, held-out); the failure is specifically CROSS-depth generalization.",
-        "To extend the frontier one depth, you MUST externally generate (tool-search) solutions at that depth to seed banking; plain sampling harvests ~0 there."
+        "To extend the frontier one depth, you MUST externally generate (tool-search) solutions at that depth to seed banking; plain sampling harvests ~0 there.",
+        "The cross-depth negative extends from banked ANSWERS to banked PROCEDURES: C48's hypothesize-and-verify SFT (d1/d2 traces) doubles depth-2 structure proposal yet moves nothing at depth-3 -- do not expect any within-depth training signal, content or procedure, to climb a composition step."
       ]
     },
     {
@@ -1295,7 +1296,8 @@
         "Do not over-claim UNBOUNDED general induction: all families are AFFINE (the hypothesis class {1,3,7,9} is given in the CoT). The model generalizes WITHIN the affine class to a held-out multiplier; a non-affine held-out family is the untested stronger claim.",
         "The held-out a=7's arithmetic (7*p) is seen in training as a REJECTED candidate, so it is in-distribution -- what generalizes is ACCEPTING a=7 via verify (the induction LOGIC), not novel arithmetic. State this.",
         "Induction here is SERIAL (via generation, needs ~296 CoT tokens); it does NOT live in the forward pass (C44: forced-digit 0.01). Always eval/deploy with generation + adequate token budget (256 truncates the general CoT -> false 0.00).",
-        "Single seed; batch-2 training (GPU-corruption workaround). The general-CoT eval needs max_new>=400 (the enumerate-verify CoT is long)."
+        "Single seed; batch-2 training (GPU-corruption workaround). The general-CoT eval needs max_new>=400 (the enumerate-verify CoT is long).",
+        "C48 scopes this claim: the installed strategy is family-general WITHIN its substrate/depth regime only. Zero-shot to the list/string DSLs it transfers at ~zero and actively interferes (list d2 0.37->0.00, parse degraded). Do not deploy a C45-style adapter outside its training substrate."
       ]
     },
     {
@@ -1359,6 +1361,36 @@
         "Do not allocate stratified quotas by candidate counts -- wrong candidates explode combinatorially at hard depths (d2 915/20, d3 1066/7); allocate by judge-score mass.",
         "Do not filter a flywheel by a fixed P(True) threshold across rounds; scores inflate on the self-distribution while ranks survive -- re-rank each round.",
         "Do not read a banked model's no-think coverage drop as capability loss -- it is mode reallocation onto the banked family and CoT sampling is shielded; evaluate think-mode before concluding damage."
+      ]
+    },
+    {
+      "id": "C48",
+      "title": "The structure wall is NOT a missing procedure: the installable hypothesize-and-verify strategy doubles structure proposal WITHIN its taught depths and moves NOTHING one depth deeper -- serial-strategy installs are depth-local, and C45's skill is substrate-local",
+      "status": "Promising",
+      "programs": [
+        "structured_execution_and_compilers",
+        "posttraining_and_adaptation"
+      ],
+      "summary": "Experiment qwen35_4b_hypothesize_verify_wall -- the collision cell where C36 (wall is un-proposable structure, a model-level law) and C45 (hypothesize-and-verify is installable serial compute) make opposite predictions; first experiment to aim a TAUGHT search procedure at the wall (prior wall negatives were direct sampling C17, logit-guided search C25/C34, steering C20). Frozen committed eval (list+string DSLs, 30 tasks x family x depth {2,3}, 8 visible + 6 hidden + 6 probe inputs, min-depth verified); 4 arms at matched K=12 think@1024: base, verbatim-frozen procedure scaffold (zero op vocabulary), regenerated C45 adapter zero-shot (gated: 0.920 >= its 0.905 headline on held-out a7), and dsl_sft = QLoRA on 1,476 PROGRAMMATIC truth-blind traces (evidence -> feature->candidate shortlists -> fixed-order compose -> mentally-executed checks -> revise-at-first-divergence; depths 1-2 ONLY; op-type-sequence dedup vs eval = 0; byte-verified oracle-blind; THINK-channel targets). Primary metric: probe-robust skeleton-coverage@12 (C36 behavioral metric + same-fill must match 6 fresh probe inputs -- kills lookup-table mimicry; mimicry <=0.014 everywhere). RESULTS: (1) wall replicates (base d3 0.033/0.067, no-think anchor at C36 floor; think@1024 alone does NOT clear it) and HOLDS -- pooled d3 Holm contrasts all n.s. (dsl_sft +0.033 p=0.55, scaffold +0.033 p=0.41, c45_zero -0.017), zero-or-one-trained-window stratum +0.019 n.s. (2) The procedure INSTALLS within taught depths: d2 probe-robust cov list 0.367->0.700, string 0.333->0.567, deployable greedy@1 list 0.100->0.367, parse 1.00, trace-format adoption 1.00, ZERO d1 forgetting (0.85->0.85; think-channel recipe avoids C43's answer-only collapse). (3) c45_zero: ~zero substrate transfer with ACTIVE INTERFERENCE (list d2 0.37->0.00, parse 0.70-0.79). (4) Scaffold null is format-confounded per pre-registration (parse collapses 0.89->0.44-0.67). Gates: oracle-skelfill 1.00 all cells; rand-skelfill@12 <=0.07; c45 regen-sanity initially failed at a MISCALIBRATED 0.95 threshold (C44's shift number, not C45's 0.905 artifact) -- corrected to historical-2SE, measurement unchanged. (5) Pre-committed budget-2048 d3 contingency (d3 forced-close at 1024: base 0.84, scaffold/c45_zero 1.00; dsl_sft 0.32 did not trigger): c45_zero 0.017 (null doubly confirmed); scaffold 0.150 BUT the post-hoc base@2048 control doubles too (0.050->0.100, forced-close 0.84->0.75) and the paired matched-budget scaffold edge is +0.050 (one-sided CI-lo +0.000, p 0.043-0.051 across seeds, post-hoc, borderline -- not verdict-grade) -- serial-compute DOSE is the operative depth-3 margin (procedure-beyond-dose unresolved at this n) (2x budget ~ 2x coverage from a 0.05 floor, C44-consistent), and even 2048 truncates 75-100% of thinking: the d3 budget dose-curve (4096+) is the open edge, not a settled wall.",
+      "evidence": [
+        {
+          "kind": "experiment",
+          "id": "qwen35_4b_hypothesize_verify_wall"
+        }
+      ],
+      "implication": "Depth itself is the resource, and nothing yet banks it across: answers don't climb (C21), diversity is in-depth dose (C24), and now PROCEDURE doesn't climb either -- the model learns, formats, and executes the full search loop exactly where practiced and gains nothing one composition step deeper. C36 survives its strongest challenger and sharpens: the wall is not fixable by teaching HOW to search. C45 gains a regime clause: family-general within substrate+depth, zero (negative) across substrates. Deployable: DSL-native procedure-SFT is the strongest measured in-depth structure-proposal lever (d2 cov 0.70, greedy 0.37, compute-favorable at parse 1.00) -- use it to consolidate the depths you can already sample; for the depth frontier keep external search (C34/C35 brute dominance unbroken).",
+      "next_tests": [
+        "Depth-3 budget dose-curve 4096/8192 on the frozen d3 subset (all arms, n=60, cheap): does the wall asymptote or keep yielding to serial compute? (base doubled 0.05->0.10 at 1024->2048, still truncation-bound -- sharpens both C36 and C44)",
+        "Cross-substrate procedure transfer: train traces on list only, eval string+register at matched depth -- is procedure-SFT substrate-local like the C45 adapter?",
+        "Format-hardened scaffold rerun (parse collapse 0.44-0.67 is mechanical) to isolate elicitation from formatting.",
+        "Skeleton-level P(True) + judge-pruned beam at depth 4-5 (proposal is walled; RECOGNITION of partial structure remains untested -- the standing C46 next-test)."
+      ],
+      "avoid": [
+        "Do not read a scaffold-arm null as 'elicitation fails' without checking parse rate -- long procedure prompts disrupt output formatting (0.89->0.44) before they change search behavior.",
+        "Do not evaluate structure proposal with the legacy visible-only behavioral metric alone; require the SAME skeleton fill to match fresh probe inputs (lookup-table code passes the legacy metric by construction).",
+        "Do not deploy a trained-strategy adapter outside its training substrate (c45_zero: zero transfer, active interference).",
+        "Do not calibrate a reproduction gate from a neighboring claim's headline; use the source experiment's committed artifact number (the 0.95-vs-0.905 gate stop).",
+        "Do not train procedure traces into the answer channel; the think-channel recipe is what preserved d1 competence (0.85->0.85) where C43's answer-only SFT collapsed it."
       ]
     }
   ]

@@ -1,0 +1,8294 @@
+{
+ "arm": "scaffold",
+ "tag": "scaffold",
+ "think": true,
+ "K": 12,
+ "budget": 2048,
+ "answer_max": 512,
+ "temperature": 0.8,
+ "top_p": 0.95,
+ "adapter": null,
+ "n_tasks": 60,
+ "rows": [
+  {
+   "task_id": 1,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 512,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2097,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 2,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 598,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2395,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2145,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 3,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 559,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2094,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 4,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 674,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2073,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2081,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 5,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 623,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2134,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 6,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 577,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2140,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 7,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 589,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2077,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 8,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 530,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 9,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 609,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": false,
+     "mimicry": true,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2128,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": false,
+     "mimicry": true,
+     "full": false,
+     "gen_tokens": 2076,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 10,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 662,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2210,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2190,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 11,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 622,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2080,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2091,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 12,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 640,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 13,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 634,
+   "greedy": {
+    "parsed": true,
+    "legacy": true,
+    "probe_robust": true,
+    "mimicry": false,
+    "full": true,
+    "gen_tokens": 2085,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2075,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2078,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2075,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2131,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2108,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2078,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2075,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 14,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 607,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2192,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 15,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 737,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2077,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2127,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 16,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 634,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 17,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 558,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2293,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 18,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 660,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2117,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2155,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2144,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 19,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 649,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2104,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 20,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 565,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 21,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 681,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2114,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 22,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 604,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2107,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2123,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 23,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 634,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2100,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 24,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 613,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2082,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2123,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2073,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 25,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 592,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 26,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 633,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2100,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 27,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 503,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2165,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 28,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 701,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2194,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2287,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2077,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2121,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2082,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2162,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2165,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 29,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 616,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2243,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2151,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2187,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 30,
+   "family": "list",
+   "depth": 3,
+   "prompt_tokens": 568,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2109,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 1,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 441,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 2,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 408,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 3,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 420,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 4,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 403,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 5,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 412,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 6,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 414,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2200,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2073,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 7,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 422,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2140,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2124,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2190,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 8,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 415,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2072,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 9,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 421,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 10,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 424,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 11,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 400,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2082,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": false,
+     "mimicry": true,
+     "full": false,
+     "gen_tokens": 2086,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2082,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2082,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2086,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 12,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 455,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 13,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 427,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 14,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 413,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 15,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 407,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2111,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2078,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2078,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2092,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2080,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 16,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 410,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2090,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 17,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 411,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 18,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 416,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 19,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 414,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": false,
+     "mimicry": true,
+     "full": true,
+     "gen_tokens": 2207,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2135,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2139,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 20,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 478,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2083,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": true,
+     "probe_robust": true,
+     "mimicry": false,
+     "full": true,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 21,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 441,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2086,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 22,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 408,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2085,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 23,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 457,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 24,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 410,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2068,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 25,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 407,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 26,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 426,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2113,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2078,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 27,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 433,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2140,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2151,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 28,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 411,
+   "greedy": {
+    "parsed": true,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 29,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 414,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  },
+  {
+   "task_id": 30,
+   "family": "string",
+   "depth": 3,
+   "prompt_tokens": 402,
+   "greedy": {
+    "parsed": false,
+    "legacy": false,
+    "probe_robust": false,
+    "mimicry": false,
+    "full": false,
+    "gen_tokens": 2562,
+    "n_think": 2048,
+    "forced": true
+   },
+   "samples": [
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": false,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    },
+    {
+     "parsed": true,
+     "legacy": false,
+     "probe_robust": false,
+     "mimicry": false,
+     "full": false,
+     "gen_tokens": 2562,
+     "n_think": 2048,
+     "forced": true
+    }
+   ]
+  }
+ ]
+}

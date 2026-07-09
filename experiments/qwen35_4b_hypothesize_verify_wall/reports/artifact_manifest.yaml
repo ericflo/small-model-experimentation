@@ -1,0 +1,31 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_hypothesize_verify_wall"
+external_artifacts:
+  - name: "dsl_sft QLoRA adapter (procedure-trained arm)"
+    storage: "scratchpad/hypothesize_verify_wall_artifacts/lora_dsl (moved out of repo; ~182MB > GitHub limit)"
+    required_for: "re-running dsl_sft eval without retraining"
+    checksum: ""
+    regenerate: "python scripts/gen_traces.py && python scripts/train_think.py --train data/traces.jsonl --out runs/lora_dsl"
+  - name: "regenerated C45 adapter (c45_zero arm)"
+    storage: "scratchpad/hypothesize_verify_wall_artifacts/lora_c45"
+    required_for: "re-running c45_zero eval + regen-sanity gate without retraining"
+    checksum: ""
+    regenerate: "python scripts/train_lora.py --train ../qwen35_4b_meta_induction/data/train_general.jsonl --out runs/lora_c45 --epochs 2 --seed 17"
+omitted_artifacts:
+  - path: "runs/lora_dsl/"
+    reason: "trained QLoRA adapter (~182MB, exceeds GitHub hard limit); regenerate from committed data/traces.jsonl"
+  - path: "runs/lora_c45/"
+    reason: "regenerated C45 adapter (~182MB); regenerate from meta_induction's committed train_general.jsonl (seed 17; gate-verified 0.920 on held-out a7)"
+  - path: "runs/lora_dsl_smoke/ and runs/lora_c45_smoke/"
+    reason: "smoke adapters; regenerate via python scripts/run.py --smoke"
+reproducibility:
+  smoke_command: "python scripts/run.py --smoke"
+  full_command: "python scripts/run.py && python scripts/eval_arms.py --arm scaffold --budget-override 2048 --depths-only 3 --out-suffix _b2048 && python scripts/eval_arms.py --arm c45_zero --adapter runs/lora_c45 --budget-override 2048 --depths-only 3 --out-suffix _b2048 && python scripts/eval_arms.py --arm base --budget-override 2048 --depths-only 3 --out-suffix _b2048 && python scripts/analyze.py"
+  required_external_artifacts: []
+notes: "Frozen eval tasks (with probe inputs), 1,476 truth-blind procedure traces, SFT/gate task sets,
+  all eval/gate/verdict JSONs, and the verbatim scaffold treatment are committed -- adapters are the
+  only external artifacts, fully regenerable from committed data (~1-1.5h each on the RTX 4090;
+  single LoRA seed). The three _b2048 evals are the forced-close contingency probes (2 pre-committed + 1 post-hoc
+  base dose control; report Result 5). Full pipeline ~6h incl. 2 trains + 5 evals; think-eval batch 32 (16 at budget
+  >=2048) per the empty_cache/OOM lessons in docs/compute_environment.md."

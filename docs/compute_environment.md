@@ -88,6 +88,12 @@ Hard-won failure knowledge — read before launching anything training-scale:
   the experiment's run.py makes the requirement un-forgettable.
 - **`cmd | grep | tee | tail` reports the LAST pipe stage's exit code** — a crashed run looks
   like exit 0 to the harness. Use `set -o pipefail` in every launch command.
+- **`torch.cuda.empty_cache()` inside an OOM-recovery path can ITSELF raise
+  `torch.AcceleratorError`** and turn designed batch-halving into a hard crash (observed
+  2026-07-08 under memory pressure from long prompts × 1024-token thinking KV at batch 48). Wrap
+  the CLEANUP call too — retry once after a pause and never let it propagate (see
+  `_safe_empty_cache` in `experiments/qwen35_4b_hypothesize_verify_wall/src/gen_lib.py`), and
+  drop think-eval batch to ~32 (16 at budget ≥2048) when prompts run long.
 
 ### Memory-safe large-vocab logits
 

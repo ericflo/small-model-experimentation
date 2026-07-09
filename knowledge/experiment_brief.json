@@ -10568,6 +10568,32 @@
      "value": "0.09 -> 0.20 (doubled)"
     }
    ]
+  },
+  "qwen35_4b_hypothesize_verify_wall": {
+   "verdict_tag": "Teaching the model how to search does not break the depth wall",
+   "concept_primer": "Two earlier findings pointed in opposite directions. One: the model cannot invent the multi-step structure of an unfamiliar transformation (its oldest, most replicated failure). Two: the model CAN be taught a general 'guess, check against the examples, revise' routine that works on a held-out puzzle family. This experiment forces the two findings to fight: teach the routine on the exact substrates where the structure failure lives, and see if the failure moves.",
+   "plain_question": "If we teach the model a systematic guess-and-check search routine, can it finally figure out three-step transformations it has never been able to crack?",
+   "plain_answer": "No -- and the way it fails is the insight. The model learned the routine perfectly: on two-step transformations (the depth it practiced on), its success at proposing the right structure DOUBLED (0.37 to 0.70 on lists), with flawless formatting and no loss of old skills. But on three-step transformations -- one step deeper than its practice -- it gained nothing at all. The routine also does not travel: the earlier experiment's trained adapter, re-verified as working on its own puzzles, scored near zero here and even hurt performance. Teaching HOW to search only helps at the depth where the search was practiced.",
+   "why_it_matters": "It pins down what the model's hardest limit actually is: not a missing method, but depth itself. Answers, data variety, and now explicit search procedures all fail to carry the model one composition step past its training. Practical rule: use procedure-training to consolidate depths the model can already touch, and use external brute-force search for anything deeper.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "two-step structure proposal after procedure training (lists)",
+     "value": "0.37 -> 0.70"
+    },
+    {
+     "label": "three-step (one deeper than practice), all three arms vs base",
+     "value": "all n.s. (base 0.05)"
+    },
+    {
+     "label": "old-skill retention after training",
+     "value": "0.85 -> 0.85 (zero forgetting)"
+    },
+    {
+     "label": "prior adapter transferred to new substrate",
+     "value": "0.37 -> 0.00 (active interference)"
+    }
+   ]
   }
  }
 }
