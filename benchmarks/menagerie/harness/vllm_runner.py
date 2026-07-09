@@ -1,7 +1,8 @@
 """Isolated vLLM runner for the Menagerie Qwen backend.
 
 - This script is run by /home/ericflo/Development/smx-menagerie/.venv-vllm/bin/python only.
-- VLLM_USE_FLASHINFER_SAMPLER=0 is required because this box has no nvcc; this routes sampling to native torch with identical greedy output.
+- FlashInfer is enabled by default and works via the pinned stack's precompiled flashinfer-cubin (no nvcc needed); set MENAGERIE_VLLM_NO_FLASHINFER=1 to fall back to native torch sampling.
+- This runner is the benchmark's PERSISTENT-SERVER sibling of the repo's reusable one-shot experiment runner templates/experiment/src/vllm_runner.py, sharing the same pinned venv (../../.venv-vllm from requirements-vllm.lock.txt) and the same two-phase thinking semantics; see docs/vllm_inference.md.
 - vLLM V1 uses spawn on WSL, hence the __main__ guard.
 - Model is Qwen3.5-4B, a hybrid model: at gpu_memory_utilization=0.5 only about 93 Mamba cache blocks exist, so max_num_seqs MUST be capped (<=93) or CUDA-graph capture fails with "max_num_seqs exceeds available Mamba cache blocks". We use max_num_seqs=64.
 - THINKING BUDGET method: default is TWO-PHASE (env MENAGERIE_VLLM_BUDGET=two_phase), which mirrors the HF `qwen` backend token-for-token (generate up to B think tokens; if </think> was not emitted, force it via close_ids "</think>\\n\\n"; then regenerate the answer with the mode's answer budget using prefix caching). This was chosen as the default because it reproduces the HF backend's scores EXACTLY (identical aggregate on the quick tier), which is required for cross-backend comparability.
@@ -9,7 +10,9 @@
 """
 
 import os
-os.environ.setdefault("VLLM_USE_FLASHINFER_SAMPLER", "0")
+_no_flashinfer = os.environ.get("MENAGERIE_VLLM_NO_FLASHINFER")
+if _no_flashinfer and _no_flashinfer.lower() not in {"0", "false", "no", "off"}:
+    os.environ["VLLM_USE_FLASHINFER_SAMPLER"] = "0"
 
 import json
 import sys
