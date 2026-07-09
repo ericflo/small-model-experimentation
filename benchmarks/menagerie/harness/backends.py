@@ -115,6 +115,7 @@ class QwenBackend:
         think_budget: int = 512,
         max_batch: int = 96,
         max_new_tokens: dict | None = None,
+        adapter: str | None = None,
     ):
         try:
             import torch
@@ -153,6 +154,15 @@ class QwenBackend:
             eos_ids.add(cfg_eos)
         elif cfg_eos:
             eos_ids.update(int(value) for value in cfg_eos)
+        if adapter:
+            try:
+                from peft import PeftModel
+            except ImportError as exc:
+                raise ImportError(
+                    "The qwen backend needs peft to load --adapter; peft is required in the HF venv "
+                    "/home/ericflo/Development/small-model-experimentation/.venv and must not be auto-installed."
+                ) from exc
+            model = PeftModel.from_pretrained(model, adapter, is_trainable=False).eval()
         self.eos_ids = eos_ids
         self.THINK_CLOSE = 248069
         self.close_ids = tok("</think>\n\n", add_special_tokens=False).input_ids
@@ -294,10 +304,12 @@ class QwenVllmBackend:
         think_budget=512,
         max_batch=96,
         max_new_tokens=None,
+        adapter=None,
     ):
         self.think = think
         self.think_budget = think_budget
         self.max_new_tokens = max_new_tokens or {"atom": 64, "episode": 96}
+        self.adapter = str(adapter) if adapter is not None else None
         self.stats = {
             "calls": 0,
             "generated_think_tokens": 0,
@@ -311,6 +323,8 @@ class QwenVllmBackend:
         env["MENAGERIE_VLLM_MODEL"] = model_id
         env.setdefault("MENAGERIE_VLLM_BUDGET", "two_phase")
         env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+        if adapter is not None:
+            env["MENAGERIE_VLLM_ADAPTER"] = str(adapter)
         self.proc = subprocess.Popen(
             [self.VENV_PYTHON, runner],
             stdin=subprocess.PIPE,
@@ -347,6 +361,8 @@ class QwenVllmBackend:
             "max_new_tokens": self.max_new_tokens,
             "temperature": 0.0,
         }
+        if self.adapter is not None:
+            job["adapter"] = self.adapter
         self.proc.stdin.write(json.dumps(job) + "\n")
         self.proc.stdin.flush()
         resp = json.loads(self._read_line())

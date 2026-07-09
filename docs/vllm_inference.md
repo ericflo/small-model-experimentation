@@ -10,6 +10,10 @@ The runner is for bulk generation, including runtime PEFT LoRA inference. Transf
 necessary for training, hidden-state/activation work, arbitrary forward passes, and any probability
 readout that has not passed a backend-parity check.
 
+The Menagerie benchmark's persistent-server sibling runner lives at
+`benchmarks/menagerie/harness/vllm_runner.py`; it shares this pinned venv and the same two-phase
+thinking semantics.
+
 ## Install on the current RunPod
 
 Keep vLLM isolated from a Transformers training environment because vLLM pins its own Torch build.
@@ -33,6 +37,10 @@ The resolved, validated core stack is:
 - Torch `2.11.0+cu129`
 - Transformers `5.13.0`
 - Qwen/Qwen3.5-4B revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`
+
+Also validated: RTX 4090 24 GB, WSL2, CUDA-13 driver, and no CUDA toolkit. The same pinned lock works
+there out of the box: FlashInfer sampling uses the precompiled `flashinfer-cubin` wheels, and the
+remaining kernels are Triton-JIT, so `nvcc` is not required. First-launch JIT warnings are expected.
 
 If this is moved to a host with a different driver or GPU, rerun the CUDA and model smoke instead of
 assuming minor-version compatibility. Do not replace the pinned wheel with a floating nightly. If a
@@ -165,6 +173,18 @@ Qwen3.5's hybrid GDN/Mamba prefix-cache `align` mode is experimental in vLLM 0.2
 `--enable-prefix-caching` only when prompts actually share long prefixes, then re-run parity checks.
 MTP is primarily a low-concurrency latency optimization and may reduce high-concurrency throughput;
 it is intentionally absent from the initial wrapper.
+
+Sharing the GPU with a training run usually means lowering `--gpu-memory-utilization` (for example,
+`0.5`) so vLLM leaves room on the card. Two knobs then bind on a 24 GB card (both verified on the
+RTX 4090):
+
+- `--max-model-len`: at utilization 0.5 the default 16,384 no longer fits the KV budget — engine
+  init fails, reporting an estimated max around ~12k. Drop to 8,192 or what the workload needs.
+- `--max-num-seqs`: Qwen3.5-4B is a hybrid model with Mamba/linear-attention cache blocks, and the
+  available Mamba blocks scale roughly with the memory budget (≈93 at utilization 0.5 on 24 GB); if
+  vLLM reports that `--max-num-seqs` exceeds the available Mamba cache blocks, the reusable runner
+  logs a loud warning and auto-clamps `max_num_seqs` plus its tied CUDA-graph capture cap for the
+  single retry.
 
 Tune `--max-model-len`, `--max-num-seqs`, and `--max-num-batched-tokens` on the real workload. Record
 the chosen values from the metadata sidecar. Throughput measurements must exclude model-load time but

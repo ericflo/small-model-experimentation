@@ -15,7 +15,7 @@ from time import perf_counter
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 from harness import SUITE_VERSION
-from harness import backends, engine
+from harness import adapter_spec, backends, engine
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -161,8 +161,10 @@ def run_tier(
     }
 
 
-def default_out_path(tier_cfg: dict, backend_spec: str, seed: int) -> Path:
+def default_out_path(tier_cfg: dict, backend_spec: str, seed: int, adapter_info: dict | None = None) -> Path:
     safe_backend = backend_spec.replace(":", "-")
+    if adapter_info is not None:
+        return SCRIPT_DIR / "results" / f"{tier_cfg['tier']}_{safe_backend}_seed{seed}_adapter-{adapter_info['weights_sha256'][:8]}.json"
     return SCRIPT_DIR / "results" / f"{tier_cfg['tier']}_{safe_backend}_seed{seed}.json"
 
 
@@ -277,6 +279,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--no-transcripts", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--model-id", default="Qwen/Qwen3.5-4B")
+    parser.add_argument(
+        "--adapter",
+        default=None,
+        help="path to a PEFT LoRA adapter dir trained on Qwen/Qwen3.5-4B; validated at startup, applied by the qwen and qwen_vllm backends",
+    )
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--estimate", action="store_true", help="print token-math wall-time estimates")
     parser.add_argument("--assume-families", type=int, default=10)
@@ -291,6 +298,12 @@ def main(argv: list[str] | None = None) -> int:
         validate_model_id(args.model_id)
     except ValueError as exc:
         parser.error(str(exc))
+    adapter_info = None
+    if args.adapter is not None:
+        try:
+            adapter_info = adapter_spec.validate_adapter(args.adapter)
+        except ValueError as exc:
+            parser.error(str(exc))
     if args.no_transcripts and args.debug_artifacts:
         parser.error("--debug-artifacts restores transcripts and details; do not combine it with --no-transcripts")
 
@@ -308,13 +321,15 @@ def main(argv: list[str] | None = None) -> int:
         print_estimates(tier_requests, families_dir, args.assume_families, args.think_budget)
         return 0
 
+    if adapter_info is not None and args.backend not in ("qwen", "qwen_vllm"):
+        parser.error("--adapter requires --backend qwen or qwen_vllm")
     if args.backend is None:
         parser.error("--backend is required unless --estimate")
     tier_cfg = load_tier(tier_requests[0])
     effective_think_budget = (
         int(args.think_budget) if args.think_budget is not None else int(tier_cfg.get("think_budget", 512))
     )
-    out_path = Path(args.out) if args.out else default_out_path(tier_cfg, args.backend, args.seed)
+    out_path = Path(args.out) if args.out else default_out_path(tier_cfg, args.backend, args.seed, adapter_info)
     if args.debug_artifacts:
         if "DO_NOT_TRAIN" not in out_path.name:
             parser.error("--debug-artifacts requires an output filename containing DO_NOT_TRAIN")
@@ -331,6 +346,7 @@ def main(argv: list[str] | None = None) -> int:
         "think_budget": effective_think_budget,
         "max_batch": max_batch,
         "max_new_tokens": tier_cfg["max_new_tokens"],
+        "adapter": adapter_info["path"] if adapter_info else None,
     }
     backend_obj = backends.make_backend(args.backend, seed=args.seed, qwen_opts=qwen_opts)
     result = run_tier(
@@ -343,6 +359,7 @@ def main(argv: list[str] | None = None) -> int:
         think=args.think,
         think_budget=effective_think_budget,
     )
+    result["adapter"] = adapter_info
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as fh:
