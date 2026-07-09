@@ -2,6 +2,7 @@ PYTHON ?= python3
 SITE_DIR ?= site
 TIER ?= quick
 BACKEND ?= qwen_vllm
+BENCH_PYTHON = $(if $(findstring /,$(PYTHON)),$(abspath $(PYTHON)),$(PYTHON))
 GENERATED_PATHS := \
 	experiments/*/metadata.yaml \
 	knowledge/artifact_index.md \
@@ -67,10 +68,10 @@ briefs-gate:
 	$(PYTHON) scripts/site_content_status.py --strict
 
 bench:
-	cd benchmarks/menagerie && $(PYTHON) run.py --tier $(TIER) --backend $(BACKEND)
+	cd benchmarks/menagerie && PYTHONDONTWRITEBYTECODE=1 $(BENCH_PYTHON) run.py --tier $(TIER) --backend $(BACKEND)
 
 bench-validate:
-	cd benchmarks/menagerie && $(PYTHON) validate_suite.py
+	cd benchmarks/menagerie && PYTHONDONTWRITEBYTECODE=1 $(BENCH_PYTHON) validate_suite.py
 
 related:
 	$(PYTHON) scripts/find_related.py "$(QUERY)" $(EXTRA_ARGS)

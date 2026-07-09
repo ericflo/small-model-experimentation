@@ -369,6 +369,7 @@ def validate_benchmark_firewall(errors: list[str]) -> None:
     forbidden_patterns = [
         "menagerie/families",
         "benchmarks.menagerie",
+        "benchmarks/menagerie",
         "from families",
         "import families",
     ]
@@ -376,8 +377,16 @@ def validate_benchmark_firewall(errors: list[str]) -> None:
         if in_ignored_dir(path):
             continue
         experiment_root = next((parent for parent in path.parents if parent.parent == EXPERIMENTS), None)
-        has_local_families = experiment_root is not None and (experiment_root / "src" / "families.py").exists()
         text = path.read_text(encoding="utf-8", errors="replace")
+        experiment_src = experiment_root / "src" if experiment_root is not None else None
+        has_local_families = (path.parent / "families.py").exists() or (
+            experiment_src is not None
+            and (experiment_src / "families.py").exists()
+            and (
+                path.is_relative_to(experiment_src)
+                or bool(re.search(r'''sys\.path\.(?:insert|append)\([^)]*(?:/|joinpath\()\s*["']src["']''', text))
+            )
+        )
         for pattern in forbidden_patterns:
             if pattern in text:
                 if pattern in {"from families", "import families"} and has_local_families:
