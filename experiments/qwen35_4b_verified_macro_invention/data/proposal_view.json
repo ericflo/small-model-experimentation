@@ -1,0 +1,6827 @@
+{
+  "programs": [
+    {
+      "id": "train-0171",
+      "io": [
+        {
+          "input": [
+            1,
+            8,
+            4,
+            15,
+            7
+          ],
+          "output": [
+            0,
+            10,
+            9,
+            3,
+            6
+          ]
+        },
+        {
+          "input": [
+            0,
+            12,
+            9,
+            13,
+            0
+          ],
+          "output": [
+            15,
+            14,
+            11,
+            2,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "SWAP",
+        "ADD1",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0045",
+      "io": [
+        {
+          "input": [
+            9,
+            5,
+            10,
+            0,
+            15
+          ],
+          "output": [
+            1,
+            8,
+            9,
+            13,
+            3
+          ]
+        },
+        {
+          "input": [
+            4,
+            6,
+            3,
+            2,
+            11
+          ],
+          "output": [
+            7,
+            14,
+            15,
+            16,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "SORT",
+        "ADD1",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0165",
+      "io": [
+        {
+          "input": [
+            15,
+            5,
+            11,
+            3,
+            8
+          ],
+          "output": [
+            3,
+            3,
+            12,
+            0,
+            3
+          ]
+        },
+        {
+          "input": [
+            16,
+            12,
+            12,
+            10,
+            16
+          ],
+          "output": [
+            2,
+            2,
+            5,
+            8,
+            3
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "NEG",
+        "PREFIX",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0146",
+      "io": [
+        {
+          "input": [
+            12,
+            14,
+            13,
+            14,
+            13
+          ],
+          "output": [
+            11,
+            14,
+            7,
+            4,
+            16
+          ]
+        },
+        {
+          "input": [
+            8,
+            6,
+            10,
+            3,
+            13
+          ],
+          "output": [
+            0,
+            14,
+            10,
+            16,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "PREFIX",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0609",
+      "io": [
+        {
+          "input": [
+            10,
+            0,
+            5,
+            3,
+            10
+          ],
+          "output": [
+            2,
+            5,
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "input": [
+            12,
+            1,
+            4,
+            14,
+            10
+          ],
+          "output": [
+            2,
+            3,
+            9,
+            11,
+            15
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "DIFF",
+        "SORT",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0301",
+      "io": [
+        {
+          "input": [
+            10,
+            10,
+            11,
+            6,
+            5
+          ],
+          "output": [
+            1,
+            6,
+            9,
+            12,
+            16
+          ]
+        },
+        {
+          "input": [
+            11,
+            9,
+            7,
+            16,
+            7
+          ],
+          "output": [
+            7,
+            8,
+            8,
+            14,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0452",
+      "io": [
+        {
+          "input": [
+            5,
+            10,
+            5,
+            8,
+            3
+          ],
+          "output": [
+            14,
+            7,
+            1,
+            11,
+            7
+          ]
+        },
+        {
+          "input": [
+            10,
+            1,
+            15,
+            4,
+            14
+          ],
+          "output": [
+            15,
+            9,
+            4,
+            14,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "SORT",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0457",
+      "io": [
+        {
+          "input": [
+            9,
+            3,
+            15,
+            9,
+            13
+          ],
+          "output": [
+            10,
+            1,
+            4,
+            9,
+            6
+          ]
+        },
+        {
+          "input": [
+            9,
+            15,
+            16,
+            15,
+            0
+          ],
+          "output": [
+            6,
+            16,
+            16,
+            3,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0413",
+      "io": [
+        {
+          "input": [
+            12,
+            0,
+            10,
+            1,
+            8
+          ],
+          "output": [
+            1,
+            10,
+            15,
+            14,
+            0
+          ]
+        },
+        {
+          "input": [
+            15,
+            13,
+            12,
+            2,
+            1
+          ],
+          "output": [
+            15,
+            4,
+            13,
+            10,
+            8
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ROTL",
+        "MUL2",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0656",
+      "io": [
+        {
+          "input": [
+            2,
+            5,
+            11,
+            15,
+            8
+          ],
+          "output": [
+            7,
+            13,
+            11,
+            14,
+            14
+          ]
+        },
+        {
+          "input": [
+            12,
+            1,
+            1,
+            16,
+            13
+          ],
+          "output": [
+            3,
+            2,
+            0,
+            11,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "DIFF",
+        "NEG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0422",
+      "io": [
+        {
+          "input": [
+            7,
+            11,
+            15,
+            13,
+            1
+          ],
+          "output": [
+            10,
+            6,
+            1,
+            14,
+            16
+          ]
+        },
+        {
+          "input": [
+            1,
+            8,
+            13,
+            0,
+            4
+          ],
+          "output": [
+            16,
+            11,
+            7,
+            0,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0248",
+      "io": [
+        {
+          "input": [
+            13,
+            1,
+            14,
+            14,
+            16
+          ],
+          "output": [
+            11,
+            4,
+            13,
+            13,
+            0
+          ]
+        },
+        {
+          "input": [
+            6,
+            9,
+            5,
+            0,
+            16
+          ],
+          "output": [
+            12,
+            2,
+            14,
+            3,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ADD1",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0388",
+      "io": [
+        {
+          "input": [
+            8,
+            4,
+            4,
+            5,
+            11
+          ],
+          "output": [
+            7,
+            12,
+            9,
+            9,
+            1
+          ]
+        },
+        {
+          "input": [
+            13,
+            0,
+            15,
+            9,
+            9
+          ],
+          "output": [
+            16,
+            16,
+            4,
+            0,
+            8
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "REV",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0122",
+      "io": [
+        {
+          "input": [
+            0,
+            8,
+            11,
+            9,
+            14
+          ],
+          "output": [
+            10,
+            5,
+            5,
+            9,
+            5
+          ]
+        },
+        {
+          "input": [
+            0,
+            15,
+            10,
+            8,
+            8
+          ],
+          "output": [
+            15,
+            14,
+            3,
+            2,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "REV",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0751",
+      "io": [
+        {
+          "input": [
+            14,
+            11,
+            0,
+            13,
+            5
+          ],
+          "output": [
+            0,
+            1,
+            8,
+            13,
+            15
+          ]
+        },
+        {
+          "input": [
+            8,
+            6,
+            10,
+            0,
+            10
+          ],
+          "output": [
+            1,
+            3,
+            11,
+            12,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "MUL2",
+        "MUL2",
+        "ADD1",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0304",
+      "io": [
+        {
+          "input": [
+            8,
+            15,
+            14,
+            13,
+            14
+          ],
+          "output": [
+            1,
+            5,
+            14,
+            8,
+            5
+          ]
+        },
+        {
+          "input": [
+            11,
+            12,
+            4,
+            15,
+            3
+          ],
+          "output": [
+            6,
+            12,
+            2,
+            11,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "NEG",
+        "SORT",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0579",
+      "io": [
+        {
+          "input": [
+            7,
+            16,
+            12,
+            15,
+            14
+          ],
+          "output": [
+            2,
+            9,
+            16,
+            3,
+            3
+          ]
+        },
+        {
+          "input": [
+            5,
+            16,
+            11,
+            4,
+            6
+          ],
+          "output": [
+            2,
+            7,
+            15,
+            9,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "ADD1",
+        "PREFIX",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0710",
+      "io": [
+        {
+          "input": [
+            8,
+            9,
+            6,
+            12,
+            14
+          ],
+          "output": [
+            4,
+            12,
+            9,
+            8,
+            10
+          ]
+        },
+        {
+          "input": [
+            15,
+            14,
+            10,
+            15,
+            4
+          ],
+          "output": [
+            16,
+            11,
+            11,
+            0,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "ADD1",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0371",
+      "io": [
+        {
+          "input": [
+            12,
+            5,
+            1,
+            5,
+            4
+          ],
+          "output": [
+            2,
+            7,
+            11,
+            6,
+            11
+          ]
+        },
+        {
+          "input": [
+            4,
+            0,
+            5,
+            7,
+            0
+          ],
+          "output": [
+            6,
+            6,
+            6,
+            10,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0717",
+      "io": [
+        {
+          "input": [
+            2,
+            11,
+            1,
+            1,
+            0
+          ],
+          "output": [
+            4,
+            3,
+            13,
+            2,
+            3
+          ]
+        },
+        {
+          "input": [
+            15,
+            1,
+            4,
+            7,
+            16
+          ],
+          "output": [
+            0,
+            9,
+            3,
+            1,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "ADD1",
+        "REV",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0115",
+      "io": [
+        {
+          "input": [
+            9,
+            14,
+            12,
+            13,
+            13
+          ],
+          "output": [
+            16,
+            7,
+            14,
+            8,
+            11
+          ]
+        },
+        {
+          "input": [
+            15,
+            14,
+            7,
+            0,
+            9
+          ],
+          "output": [
+            15,
+            0,
+            6,
+            11,
+            9
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0310",
+      "io": [
+        {
+          "input": [
+            5,
+            2,
+            11,
+            5,
+            5
+          ],
+          "output": [
+            12,
+            3,
+            6,
+            6,
+            6
+          ]
+        },
+        {
+          "input": [
+            1,
+            5,
+            9,
+            10,
+            4
+          ],
+          "output": [
+            10,
+            6,
+            2,
+            5,
+            11
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "ROTL",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0111",
+      "io": [
+        {
+          "input": [
+            9,
+            5,
+            5,
+            13,
+            9
+          ],
+          "output": [
+            11,
+            4,
+            14,
+            10,
+            13
+          ]
+        },
+        {
+          "input": [
+            5,
+            1,
+            5,
+            12,
+            14
+          ],
+          "output": [
+            12,
+            5,
+            6,
+            2,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "MUL2",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0415",
+      "io": [
+        {
+          "input": [
+            9,
+            10,
+            4,
+            1,
+            11
+          ],
+          "output": [
+            14,
+            8,
+            0,
+            9,
+            7
+          ]
+        },
+        {
+          "input": [
+            15,
+            3,
+            8,
+            9,
+            9
+          ],
+          "output": [
+            10,
+            9,
+            15,
+            9,
+            3
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ROTL",
+        "ZIGZAG",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0578",
+      "io": [
+        {
+          "input": [
+            4,
+            14,
+            12,
+            12,
+            1
+          ],
+          "output": [
+            5,
+            11,
+            15,
+            0,
+            7
+          ]
+        },
+        {
+          "input": [
+            14,
+            3,
+            10,
+            8,
+            11
+          ],
+          "output": [
+            12,
+            10,
+            1,
+            9,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "DIFF",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0519",
+      "io": [
+        {
+          "input": [
+            6,
+            5,
+            12,
+            16,
+            10
+          ],
+          "output": [
+            6,
+            8,
+            12,
+            2,
+            13
+          ]
+        },
+        {
+          "input": [
+            14,
+            12,
+            15,
+            4,
+            9
+          ],
+          "output": [
+            3,
+            9,
+            4,
+            14,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "SWAP",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0431",
+      "io": [
+        {
+          "input": [
+            9,
+            9,
+            11,
+            16,
+            11
+          ],
+          "output": [
+            14,
+            6,
+            0,
+            14,
+            6
+          ]
+        },
+        {
+          "input": [
+            15,
+            4,
+            12,
+            2,
+            1
+          ],
+          "output": [
+            1,
+            3,
+            12,
+            8,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0437",
+      "io": [
+        {
+          "input": [
+            11,
+            7,
+            3,
+            11,
+            11
+          ],
+          "output": [
+            13,
+            9,
+            8,
+            0,
+            13
+          ]
+        },
+        {
+          "input": [
+            11,
+            1,
+            11,
+            13,
+            15
+          ],
+          "output": [
+            13,
+            0,
+            2,
+            2,
+            3
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "ADD1",
+        "ADD1",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0467",
+      "io": [
+        {
+          "input": [
+            11,
+            1,
+            1,
+            5,
+            13
+          ],
+          "output": [
+            0,
+            6,
+            12,
+            3,
+            15
+          ]
+        },
+        {
+          "input": [
+            14,
+            5,
+            0,
+            3,
+            15
+          ],
+          "output": [
+            3,
+            6,
+            8,
+            2,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "DIFF",
+        "ROTL",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0392",
+      "io": [
+        {
+          "input": [
+            10,
+            3,
+            0,
+            7,
+            8
+          ],
+          "output": [
+            3,
+            11,
+            14,
+            2,
+            3
+          ]
+        },
+        {
+          "input": [
+            4,
+            11,
+            3,
+            0,
+            3
+          ],
+          "output": [
+            8,
+            1,
+            11,
+            6,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "SWAP",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0416",
+      "io": [
+        {
+          "input": [
+            11,
+            14,
+            9,
+            7,
+            6
+          ],
+          "output": [
+            5,
+            11,
+            15,
+            2,
+            4
+          ]
+        },
+        {
+          "input": [
+            5,
+            7,
+            14,
+            15,
+            13
+          ],
+          "output": [
+            2,
+            6,
+            5,
+            3,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0619",
+      "io": [
+        {
+          "input": [
+            3,
+            2,
+            1,
+            12,
+            9
+          ],
+          "output": [
+            4,
+            6,
+            9,
+            11,
+            15
+          ]
+        },
+        {
+          "input": [
+            2,
+            12,
+            8,
+            5,
+            8
+          ],
+          "output": [
+            12,
+            16,
+            7,
+            7,
+            15
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "DIFF",
+        "DIFF",
+        "SORT",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0765",
+      "io": [
+        {
+          "input": [
+            10,
+            3,
+            5,
+            10,
+            7
+          ],
+          "output": [
+            15,
+            15,
+            15,
+            14,
+            0
+          ]
+        },
+        {
+          "input": [
+            2,
+            4,
+            2,
+            5,
+            10
+          ],
+          "output": [
+            0,
+            16,
+            15,
+            16,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0275",
+      "io": [
+        {
+          "input": [
+            4,
+            5,
+            5,
+            6,
+            1
+          ],
+          "output": [
+            15,
+            1,
+            12,
+            5,
+            1
+          ]
+        },
+        {
+          "input": [
+            3,
+            3,
+            15,
+            3,
+            14
+          ],
+          "output": [
+            10,
+            5,
+            1,
+            6,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "NEG",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0224",
+      "io": [
+        {
+          "input": [
+            0,
+            8,
+            11,
+            10,
+            2
+          ],
+          "output": [
+            15,
+            14,
+            7,
+            2,
+            13
+          ]
+        },
+        {
+          "input": [
+            3,
+            8,
+            15,
+            4,
+            2
+          ],
+          "output": [
+            9,
+            8,
+            10,
+            0,
+            11
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "MUL2",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0299",
+      "io": [
+        {
+          "input": [
+            2,
+            8,
+            13,
+            15,
+            7
+          ],
+          "output": [
+            0,
+            10,
+            5,
+            7,
+            9
+          ]
+        },
+        {
+          "input": [
+            9,
+            8,
+            11,
+            12,
+            14
+          ],
+          "output": [
+            0,
+            6,
+            6,
+            7,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ADD1",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0264",
+      "io": [
+        {
+          "input": [
+            16,
+            15,
+            8,
+            6,
+            14
+          ],
+          "output": [
+            7,
+            2,
+            2,
+            9,
+            15
+          ]
+        },
+        {
+          "input": [
+            2,
+            5,
+            0,
+            4,
+            2
+          ],
+          "output": [
+            5,
+            12,
+            13,
+            2,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "DIFF",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0444",
+      "io": [
+        {
+          "input": [
+            13,
+            12,
+            12,
+            10,
+            7
+          ],
+          "output": [
+            13,
+            11,
+            8,
+            13,
+            14
+          ]
+        },
+        {
+          "input": [
+            12,
+            5,
+            7,
+            9,
+            5
+          ],
+          "output": [
+            6,
+            10,
+            6,
+            8,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "ZIGZAG",
+        "REV",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0483",
+      "io": [
+        {
+          "input": [
+            4,
+            2,
+            4,
+            7,
+            1
+          ],
+          "output": [
+            6,
+            1,
+            0,
+            3,
+            3
+          ]
+        },
+        {
+          "input": [
+            12,
+            9,
+            10,
+            9,
+            14
+          ],
+          "output": [
+            8,
+            8,
+            13,
+            9,
+            11
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ZIGZAG",
+        "REV",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0398",
+      "io": [
+        {
+          "input": [
+            12,
+            7,
+            9,
+            3,
+            0
+          ],
+          "output": [
+            2,
+            1,
+            7,
+            8,
+            15
+          ]
+        },
+        {
+          "input": [
+            5,
+            8,
+            1,
+            15,
+            11
+          ],
+          "output": [
+            6,
+            3,
+            11,
+            14,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "SORT",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0406",
+      "io": [
+        {
+          "input": [
+            2,
+            14,
+            12,
+            8,
+            15
+          ],
+          "output": [
+            12,
+            14,
+            12,
+            3,
+            0
+          ]
+        },
+        {
+          "input": [
+            1,
+            16,
+            12,
+            7,
+            12
+          ],
+          "output": [
+            12,
+            13,
+            12,
+            2,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0439",
+      "io": [
+        {
+          "input": [
+            10,
+            6,
+            7,
+            4,
+            8
+          ],
+          "output": [
+            11,
+            1,
+            3,
+            12,
+            6
+          ]
+        },
+        {
+          "input": [
+            0,
+            1,
+            2,
+            10,
+            10
+          ],
+          "output": [
+            2,
+            11,
+            0,
+            4,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "MUL2",
+        "MUL2",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0649",
+      "io": [
+        {
+          "input": [
+            6,
+            3,
+            14,
+            15,
+            4
+          ],
+          "output": [
+            4,
+            7,
+            13,
+            16,
+            6
+          ]
+        },
+        {
+          "input": [
+            0,
+            16,
+            10,
+            0,
+            7
+          ],
+          "output": [
+            16,
+            3,
+            13,
+            4,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "NEG",
+        "MUL2",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0321",
+      "io": [
+        {
+          "input": [
+            10,
+            3,
+            12,
+            12,
+            15
+          ],
+          "output": [
+            9,
+            15,
+            13,
+            4,
+            3
+          ]
+        },
+        {
+          "input": [
+            16,
+            7,
+            2,
+            2,
+            5
+          ],
+          "output": [
+            12,
+            11,
+            5,
+            7,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ADD1",
+        "REV",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0016",
+      "io": [
+        {
+          "input": [
+            7,
+            6,
+            15,
+            4,
+            10
+          ],
+          "output": [
+            16,
+            9,
+            6,
+            6,
+            7
+          ]
+        },
+        {
+          "input": [
+            0,
+            10,
+            15,
+            11,
+            15
+          ],
+          "output": [
+            10,
+            5,
+            13,
+            4,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "NEG",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0514",
+      "io": [
+        {
+          "input": [
+            7,
+            0,
+            2,
+            6,
+            3
+          ],
+          "output": [
+            1,
+            4,
+            8,
+            11,
+            8
+          ]
+        },
+        {
+          "input": [
+            4,
+            4,
+            9,
+            7,
+            3
+          ],
+          "output": [
+            9,
+            10,
+            13,
+            9,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "MUL2",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0003",
+      "io": [
+        {
+          "input": [
+            8,
+            0,
+            12,
+            5,
+            1
+          ],
+          "output": [
+            16,
+            8,
+            16,
+            11,
+            16
+          ]
+        },
+        {
+          "input": [
+            16,
+            6,
+            10,
+            10,
+            11
+          ],
+          "output": [
+            14,
+            15,
+            3,
+            13,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "PREFIX",
+        "REV",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0243",
+      "io": [
+        {
+          "input": [
+            11,
+            3,
+            1,
+            13,
+            12
+          ],
+          "output": [
+            5,
+            3,
+            8,
+            0,
+            15
+          ]
+        },
+        {
+          "input": [
+            16,
+            14,
+            4,
+            7,
+            3
+          ],
+          "output": [
+            15,
+            2,
+            3,
+            5,
+            3
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "MUL2",
+        "DIFF",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0441",
+      "io": [
+        {
+          "input": [
+            10,
+            15,
+            6,
+            4,
+            13
+          ],
+          "output": [
+            7,
+            0,
+            15,
+            6,
+            12
+          ]
+        },
+        {
+          "input": [
+            1,
+            0,
+            9,
+            2,
+            14
+          ],
+          "output": [
+            14,
+            4,
+            3,
+            15,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "SWAP",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0753",
+      "io": [
+        {
+          "input": [
+            7,
+            9,
+            6,
+            4,
+            7
+          ],
+          "output": [
+            11,
+            1,
+            2,
+            0,
+            11
+          ]
+        },
+        {
+          "input": [
+            5,
+            2,
+            12,
+            7,
+            9
+          ],
+          "output": [
+            3,
+            4,
+            11,
+            9,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "MUL2",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0414",
+      "io": [
+        {
+          "input": [
+            10,
+            12,
+            13,
+            3,
+            5
+          ],
+          "output": [
+            12,
+            7,
+            14,
+            4,
+            5
+          ]
+        },
+        {
+          "input": [
+            12,
+            3,
+            6,
+            12,
+            2
+          ],
+          "output": [
+            15,
+            5,
+            5,
+            11,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "REV",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0465",
+      "io": [
+        {
+          "input": [
+            9,
+            6,
+            3,
+            12,
+            15
+          ],
+          "output": [
+            8,
+            16,
+            2,
+            15,
+            4
+          ]
+        },
+        {
+          "input": [
+            10,
+            13,
+            16,
+            2,
+            9
+          ],
+          "output": [
+            7,
+            13,
+            15,
+            4,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "DIFF",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0426",
+      "io": [
+        {
+          "input": [
+            2,
+            13,
+            16,
+            6,
+            7
+          ],
+          "output": [
+            2,
+            6,
+            7,
+            9,
+            15
+          ]
+        },
+        {
+          "input": [
+            16,
+            2,
+            14,
+            4,
+            8
+          ],
+          "output": [
+            3,
+            6,
+            7,
+            11,
+            15
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "PREFIX",
+        "NEG",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0010",
+      "io": [
+        {
+          "input": [
+            15,
+            14,
+            10,
+            14,
+            6
+          ],
+          "output": [
+            11,
+            4,
+            16,
+            9,
+            13
+          ]
+        },
+        {
+          "input": [
+            4,
+            14,
+            0,
+            14,
+            13
+          ],
+          "output": [
+            4,
+            14,
+            10,
+            16,
+            3
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "DIFF",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0594",
+      "io": [
+        {
+          "input": [
+            5,
+            15,
+            8,
+            9,
+            16
+          ],
+          "output": [
+            7,
+            7,
+            8,
+            15,
+            6
+          ]
+        },
+        {
+          "input": [
+            7,
+            7,
+            8,
+            7,
+            6
+          ],
+          "output": [
+            6,
+            14,
+            6,
+            15,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ADD1",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0423",
+      "io": [
+        {
+          "input": [
+            14,
+            8,
+            16,
+            3,
+            11
+          ],
+          "output": [
+            7,
+            1,
+            14,
+            4,
+            5
+          ]
+        },
+        {
+          "input": [
+            4,
+            13,
+            12,
+            12,
+            1
+          ],
+          "output": [
+            7,
+            8,
+            4,
+            12,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "SWAP",
+        "ROTL",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0544",
+      "io": [
+        {
+          "input": [
+            13,
+            2,
+            6,
+            2,
+            7
+          ],
+          "output": [
+            9,
+            6,
+            1,
+            5,
+            9
+          ]
+        },
+        {
+          "input": [
+            9,
+            7,
+            13,
+            8,
+            9
+          ],
+          "output": [
+            9,
+            10,
+            11,
+            10,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "REV",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0652",
+      "io": [
+        {
+          "input": [
+            15,
+            16,
+            3,
+            6,
+            13
+          ],
+          "output": [
+            1,
+            15,
+            7,
+            3,
+            2
+          ]
+        },
+        {
+          "input": [
+            12,
+            12,
+            6,
+            7,
+            4
+          ],
+          "output": [
+            1,
+            12,
+            8,
+            12,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "ROTL",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0089",
+      "io": [
+        {
+          "input": [
+            4,
+            16,
+            15,
+            13,
+            11
+          ],
+          "output": [
+            2,
+            1,
+            9,
+            15,
+            3
+          ]
+        },
+        {
+          "input": [
+            5,
+            6,
+            14,
+            13,
+            14
+          ],
+          "output": [
+            2,
+            10,
+            14,
+            6,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "MUL2",
+        "MUL2",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0339",
+      "io": [
+        {
+          "input": [
+            0,
+            13,
+            11,
+            5,
+            0
+          ],
+          "output": [
+            3,
+            8,
+            3,
+            13,
+            12
+          ]
+        },
+        {
+          "input": [
+            16,
+            10,
+            11,
+            0,
+            4
+          ],
+          "output": [
+            11,
+            8,
+            1,
+            3,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0633",
+      "io": [
+        {
+          "input": [
+            16,
+            15,
+            9,
+            14,
+            6
+          ],
+          "output": [
+            9,
+            4,
+            6,
+            6,
+            14
+          ]
+        },
+        {
+          "input": [
+            15,
+            2,
+            3,
+            3,
+            6
+          ],
+          "output": [
+            15,
+            10,
+            2,
+            6,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0364",
+      "io": [
+        {
+          "input": [
+            0,
+            13,
+            9,
+            7,
+            16
+          ],
+          "output": [
+            5,
+            16,
+            12,
+            7,
+            7
+          ]
+        },
+        {
+          "input": [
+            5,
+            5,
+            16,
+            1,
+            5
+          ],
+          "output": [
+            9,
+            7,
+            0,
+            10,
+            15
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0253",
+      "io": [
+        {
+          "input": [
+            1,
+            16,
+            1,
+            13,
+            14
+          ],
+          "output": [
+            3,
+            9,
+            15,
+            5,
+            12
+          ]
+        },
+        {
+          "input": [
+            14,
+            2,
+            13,
+            7,
+            3
+          ],
+          "output": [
+            14,
+            8,
+            3,
+            10,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "REV",
+        "PREFIX",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0463",
+      "io": [
+        {
+          "input": [
+            11,
+            3,
+            8,
+            16,
+            4
+          ],
+          "output": [
+            9,
+            5,
+            8,
+            5,
+            10
+          ]
+        },
+        {
+          "input": [
+            0,
+            0,
+            9,
+            7,
+            2
+          ],
+          "output": [
+            0,
+            9,
+            15,
+            12,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "ROTL",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0328",
+      "io": [
+        {
+          "input": [
+            6,
+            2,
+            9,
+            3,
+            11
+          ],
+          "output": [
+            14,
+            9,
+            5,
+            8,
+            4
+          ]
+        },
+        {
+          "input": [
+            7,
+            0,
+            5,
+            8,
+            12
+          ],
+          "output": [
+            16,
+            11,
+            13,
+            12,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "DIFF",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0629",
+      "io": [
+        {
+          "input": [
+            12,
+            2,
+            7,
+            2,
+            2
+          ],
+          "output": [
+            11,
+            13,
+            13,
+            1,
+            4
+          ]
+        },
+        {
+          "input": [
+            10,
+            8,
+            14,
+            1,
+            15
+          ],
+          "output": [
+            3,
+            5,
+            5,
+            15,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "SWAP",
+        "DIFF",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0226",
+      "io": [
+        {
+          "input": [
+            5,
+            7,
+            14,
+            7,
+            5
+          ],
+          "output": [
+            7,
+            14,
+            5,
+            5,
+            7
+          ]
+        },
+        {
+          "input": [
+            10,
+            3,
+            7,
+            0,
+            10
+          ],
+          "output": [
+            3,
+            7,
+            10,
+            10,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0500",
+      "io": [
+        {
+          "input": [
+            9,
+            6,
+            5,
+            14,
+            13
+          ],
+          "output": [
+            6,
+            9,
+            13,
+            4,
+            11
+          ]
+        },
+        {
+          "input": [
+            1,
+            16,
+            10,
+            11,
+            8
+          ],
+          "output": [
+            8,
+            14,
+            6,
+            5,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "NEG",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0074",
+      "io": [
+        {
+          "input": [
+            11,
+            2,
+            12,
+            4,
+            12
+          ],
+          "output": [
+            5,
+            5,
+            6,
+            13,
+            15
+          ]
+        },
+        {
+          "input": [
+            7,
+            8,
+            0,
+            12,
+            13
+          ],
+          "output": [
+            5,
+            4,
+            9,
+            10,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "NEG",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0446",
+      "io": [
+        {
+          "input": [
+            0,
+            16,
+            10,
+            12,
+            14
+          ],
+          "output": [
+            0,
+            0,
+            7,
+            15,
+            16
+          ]
+        },
+        {
+          "input": [
+            6,
+            1,
+            10,
+            3,
+            0
+          ],
+          "output": [
+            2,
+            8,
+            11,
+            12,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "DIFF",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0086",
+      "io": [
+        {
+          "input": [
+            10,
+            2,
+            11,
+            9,
+            5
+          ],
+          "output": [
+            4,
+            7,
+            11,
+            16,
+            13
+          ]
+        },
+        {
+          "input": [
+            11,
+            1,
+            12,
+            6,
+            7
+          ],
+          "output": [
+            4,
+            8,
+            12,
+            14,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0766",
+      "io": [
+        {
+          "input": [
+            2,
+            3,
+            10,
+            3,
+            8
+          ],
+          "output": [
+            4,
+            11,
+            6,
+            3,
+            8
+          ]
+        },
+        {
+          "input": [
+            7,
+            6,
+            11,
+            13,
+            4
+          ],
+          "output": [
+            13,
+            3,
+            8,
+            15,
+            11
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ROTL",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0330",
+      "io": [
+        {
+          "input": [
+            8,
+            15,
+            16,
+            9,
+            6
+          ],
+          "output": [
+            10,
+            8,
+            10,
+            14,
+            16
+          ]
+        },
+        {
+          "input": [
+            8,
+            9,
+            13,
+            12,
+            8
+          ],
+          "output": [
+            16,
+            5,
+            16,
+            13,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "SWAP",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0189",
+      "io": [
+        {
+          "input": [
+            14,
+            3,
+            2,
+            0,
+            13
+          ],
+          "output": [
+            8,
+            4,
+            2,
+            5,
+            8
+          ]
+        },
+        {
+          "input": [
+            1,
+            4,
+            7,
+            3,
+            10
+          ],
+          "output": [
+            3,
+            8,
+            11,
+            11,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "REV",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0612",
+      "io": [
+        {
+          "input": [
+            6,
+            0,
+            16,
+            15,
+            14
+          ],
+          "output": [
+            0,
+            1,
+            2,
+            8,
+            16
+          ]
+        },
+        {
+          "input": [
+            9,
+            12,
+            12,
+            2,
+            10
+          ],
+          "output": [
+            4,
+            14,
+            14,
+            11,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "ADD1",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0600",
+      "io": [
+        {
+          "input": [
+            14,
+            13,
+            10,
+            1,
+            15
+          ],
+          "output": [
+            2,
+            2,
+            4,
+            10,
+            2
+          ]
+        },
+        {
+          "input": [
+            11,
+            9,
+            2,
+            1,
+            11
+          ],
+          "output": [
+            1,
+            3,
+            8,
+            2,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "DIFF",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0503",
+      "io": [
+        {
+          "input": [
+            12,
+            15,
+            16,
+            14,
+            11
+          ],
+          "output": [
+            13,
+            2,
+            2,
+            11,
+            13
+          ]
+        },
+        {
+          "input": [
+            12,
+            2,
+            9,
+            2,
+            8
+          ],
+          "output": [
+            3,
+            8,
+            14,
+            12,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0555",
+      "io": [
+        {
+          "input": [
+            13,
+            15,
+            12,
+            3,
+            11
+          ],
+          "output": [
+            10,
+            4,
+            11,
+            8,
+            12
+          ]
+        },
+        {
+          "input": [
+            1,
+            16,
+            11,
+            9,
+            1
+          ],
+          "output": [
+            15,
+            2,
+            15,
+            12,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "SORT",
+        "ZIGZAG",
+        "NEG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0482",
+      "io": [
+        {
+          "input": [
+            7,
+            9,
+            14,
+            10,
+            10
+          ],
+          "output": [
+            2,
+            12,
+            4,
+            15,
+            4
+          ]
+        },
+        {
+          "input": [
+            16,
+            2,
+            6,
+            10,
+            7
+          ],
+          "output": [
+            5,
+            13,
+            15,
+            16,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0638",
+      "io": [
+        {
+          "input": [
+            11,
+            2,
+            3,
+            8,
+            2
+          ],
+          "output": [
+            12,
+            11,
+            1,
+            13,
+            13
+          ]
+        },
+        {
+          "input": [
+            10,
+            5,
+            2,
+            3,
+            13
+          ],
+          "output": [
+            14,
+            13,
+            11,
+            8,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ROTL",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0012",
+      "io": [
+        {
+          "input": [
+            15,
+            7,
+            16,
+            10,
+            0
+          ],
+          "output": [
+            0,
+            16,
+            14,
+            7,
+            14
+          ]
+        },
+        {
+          "input": [
+            7,
+            11,
+            13,
+            0,
+            9
+          ],
+          "output": [
+            0,
+            13,
+            7,
+            16,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "SORT",
+        "PREFIX",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0639",
+      "io": [
+        {
+          "input": [
+            9,
+            0,
+            13,
+            7,
+            1
+          ],
+          "output": [
+            14,
+            15,
+            7,
+            11,
+            11
+          ]
+        },
+        {
+          "input": [
+            5,
+            2,
+            9,
+            7,
+            5
+          ],
+          "output": [
+            8,
+            13,
+            1,
+            9,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "REV",
+        "ADD1",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0720",
+      "io": [
+        {
+          "input": [
+            1,
+            4,
+            2,
+            1,
+            14
+          ],
+          "output": [
+            3,
+            4,
+            6,
+            16,
+            3
+          ]
+        },
+        {
+          "input": [
+            6,
+            6,
+            14,
+            12,
+            1
+          ],
+          "output": [
+            8,
+            8,
+            14,
+            16,
+            3
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "SORT",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0366",
+      "io": [
+        {
+          "input": [
+            2,
+            11,
+            9,
+            12,
+            12
+          ],
+          "output": [
+            8,
+            8,
+            6,
+            2,
+            5
+          ]
+        },
+        {
+          "input": [
+            16,
+            7,
+            1,
+            8,
+            10
+          ],
+          "output": [
+            16,
+            4,
+            0,
+            15,
+            3
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "MUL2",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0128",
+      "io": [
+        {
+          "input": [
+            11,
+            8,
+            11,
+            1,
+            16
+          ],
+          "output": [
+            0,
+            12,
+            2,
+            12,
+            9
+          ]
+        },
+        {
+          "input": [
+            1,
+            9,
+            1,
+            13,
+            6
+          ],
+          "output": [
+            7,
+            2,
+            14,
+            2,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "ADD1",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0105",
+      "io": [
+        {
+          "input": [
+            7,
+            2,
+            15,
+            3,
+            3
+          ],
+          "output": [
+            8,
+            16,
+            6,
+            15,
+            8
+          ]
+        },
+        {
+          "input": [
+            11,
+            8,
+            8,
+            10,
+            1
+          ],
+          "output": [
+            4,
+            7,
+            1,
+            1,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "ADD1",
+        "MUL2",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0221",
+      "io": [
+        {
+          "input": [
+            3,
+            6,
+            14,
+            6,
+            6
+          ],
+          "output": [
+            0,
+            10,
+            16,
+            6,
+            2
+          ]
+        },
+        {
+          "input": [
+            9,
+            2,
+            11,
+            11,
+            12
+          ],
+          "output": [
+            2,
+            15,
+            2,
+            1,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "DIFF",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0123",
+      "io": [
+        {
+          "input": [
+            16,
+            12,
+            5,
+            0,
+            10
+          ],
+          "output": [
+            7,
+            13,
+            11,
+            7,
+            14
+          ]
+        },
+        {
+          "input": [
+            6,
+            0,
+            12,
+            13,
+            5
+          ],
+          "output": [
+            14,
+            2,
+            10,
+            2,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "ROTL",
+        "ROTL",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0337",
+      "io": [
+        {
+          "input": [
+            6,
+            11,
+            7,
+            1,
+            8
+          ],
+          "output": [
+            12,
+            9,
+            13,
+            16,
+            15
+          ]
+        },
+        {
+          "input": [
+            3,
+            3,
+            8,
+            5,
+            7
+          ],
+          "output": [
+            6,
+            10,
+            1,
+            10,
+            11
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "DIFF",
+        "ROTL",
+        "REV",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0492",
+      "io": [
+        {
+          "input": [
+            8,
+            1,
+            14,
+            2,
+            16
+          ],
+          "output": [
+            16,
+            4,
+            0,
+            10,
+            2
+          ]
+        },
+        {
+          "input": [
+            2,
+            1,
+            12,
+            15,
+            13
+          ],
+          "output": [
+            3,
+            6,
+            0,
+            16,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ADD1",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0714",
+      "io": [
+        {
+          "input": [
+            6,
+            8,
+            3,
+            5,
+            4
+          ],
+          "output": [
+            4,
+            8,
+            12,
+            14,
+            11
+          ]
+        },
+        {
+          "input": [
+            3,
+            16,
+            0,
+            1,
+            11
+          ],
+          "output": [
+            9,
+            14,
+            13,
+            0,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "SWAP",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0013",
+      "io": [
+        {
+          "input": [
+            12,
+            13,
+            1,
+            14,
+            2
+          ],
+          "output": [
+            6,
+            4,
+            9,
+            4,
+            3
+          ]
+        },
+        {
+          "input": [
+            1,
+            8,
+            0,
+            12,
+            3
+          ],
+          "output": [
+            14,
+            11,
+            10,
+            9,
+            9
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "ROTL",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0039",
+      "io": [
+        {
+          "input": [
+            0,
+            8,
+            2,
+            1,
+            12
+          ],
+          "output": [
+            14,
+            2,
+            0,
+            5,
+            4
+          ]
+        },
+        {
+          "input": [
+            2,
+            11,
+            12,
+            9,
+            2
+          ],
+          "output": [
+            0,
+            3,
+            14,
+            16,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ADD1",
+        "REV",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0560",
+      "io": [
+        {
+          "input": [
+            0,
+            5,
+            13,
+            10,
+            8
+          ],
+          "output": [
+            3,
+            0,
+            4,
+            10,
+            8
+          ]
+        },
+        {
+          "input": [
+            12,
+            0,
+            8,
+            12,
+            12
+          ],
+          "output": [
+            14,
+            14,
+            12,
+            9,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0181",
+      "io": [
+        {
+          "input": [
+            9,
+            10,
+            6,
+            0,
+            15
+          ],
+          "output": [
+            10,
+            7,
+            16,
+            1,
+            6
+          ]
+        },
+        {
+          "input": [
+            12,
+            10,
+            4,
+            1,
+            3
+          ],
+          "output": [
+            12,
+            4,
+            15,
+            13,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "SWAP",
+        "ROTL",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0711",
+      "io": [
+        {
+          "input": [
+            3,
+            11,
+            6,
+            10,
+            0
+          ],
+          "output": [
+            6,
+            13,
+            4,
+            0,
+            7
+          ]
+        },
+        {
+          "input": [
+            0,
+            5,
+            16,
+            1,
+            12
+          ],
+          "output": [
+            1,
+            6,
+            0,
+            0,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "SORT",
+        "PREFIX",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0770",
+      "io": [
+        {
+          "input": [
+            3,
+            11,
+            12,
+            16,
+            6
+          ],
+          "output": [
+            16,
+            5,
+            10,
+            11,
+            5
+          ]
+        },
+        {
+          "input": [
+            10,
+            13,
+            3,
+            9,
+            10
+          ],
+          "output": [
+            9,
+            13,
+            10,
+            1,
+            8
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "PREFIX",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0680",
+      "io": [
+        {
+          "input": [
+            16,
+            16,
+            3,
+            13,
+            14
+          ],
+          "output": [
+            11,
+            12,
+            9,
+            11,
+            6
+          ]
+        },
+        {
+          "input": [
+            12,
+            8,
+            15,
+            1,
+            4
+          ],
+          "output": [
+            8,
+            5,
+            11,
+            12,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "REV",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0166",
+      "io": [
+        {
+          "input": [
+            7,
+            14,
+            6,
+            8,
+            6
+          ],
+          "output": [
+            12,
+            6,
+            12,
+            12,
+            9
+          ]
+        },
+        {
+          "input": [
+            16,
+            14,
+            8,
+            4,
+            0
+          ],
+          "output": [
+            0,
+            8,
+            15,
+            16,
+            15
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0303",
+      "io": [
+        {
+          "input": [
+            6,
+            4,
+            14,
+            14,
+            16
+          ],
+          "output": [
+            0,
+            10,
+            2,
+            15,
+            7
+          ]
+        },
+        {
+          "input": [
+            11,
+            12,
+            7,
+            15,
+            11
+          ],
+          "output": [
+            16,
+            5,
+            4,
+            9,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "DIFF",
+        "SORT",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0742",
+      "io": [
+        {
+          "input": [
+            9,
+            5,
+            0,
+            2,
+            6
+          ],
+          "output": [
+            0,
+            2,
+            8,
+            13,
+            5
+          ]
+        },
+        {
+          "input": [
+            3,
+            15,
+            15,
+            10,
+            8
+          ],
+          "output": [
+            15,
+            8,
+            16,
+            14,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "ROTL",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0050",
+      "io": [
+        {
+          "input": [
+            15,
+            14,
+            14,
+            14,
+            13
+          ],
+          "output": [
+            0,
+            14,
+            9,
+            2,
+            9
+          ]
+        },
+        {
+          "input": [
+            16,
+            1,
+            6,
+            8,
+            16
+          ],
+          "output": [
+            1,
+            3,
+            12,
+            13,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0781",
+      "io": [
+        {
+          "input": [
+            15,
+            1,
+            4,
+            12,
+            3
+          ],
+          "output": [
+            2,
+            16,
+            15,
+            3,
+            16
+          ]
+        },
+        {
+          "input": [
+            12,
+            6,
+            7,
+            12,
+            16
+          ],
+          "output": [
+            5,
+            6,
+            0,
+            5,
+            15
+          ]
+        }
+      ],
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "SWAP",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0673",
+      "io": [
+        {
+          "input": [
+            7,
+            15,
+            14,
+            3,
+            5
+          ],
+          "output": [
+            0,
+            16,
+            7,
+            13,
+            0
+          ]
+        },
+        {
+          "input": [
+            9,
+            1,
+            3,
+            9,
+            2
+          ],
+          "output": [
+            3,
+            16,
+            4,
+            4,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "ADD1",
+        "ROTL",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0634",
+      "io": [
+        {
+          "input": [
+            11,
+            14,
+            9,
+            11,
+            2
+          ],
+          "output": [
+            15,
+            6,
+            3,
+            8,
+            6
+          ]
+        },
+        {
+          "input": [
+            1,
+            6,
+            16,
+            10,
+            3
+          ],
+          "output": [
+            14,
+            16,
+            11,
+            1,
+            7
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "NEG",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0576",
+      "io": [
+        {
+          "input": [
+            7,
+            13,
+            6,
+            12,
+            7
+          ],
+          "output": [
+            11,
+            16,
+            10,
+            14,
+            7
+          ]
+        },
+        {
+          "input": [
+            16,
+            9,
+            10,
+            3,
+            4
+          ],
+          "output": [
+            14,
+            11,
+            1,
+            9,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "REV",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0434",
+      "io": [
+        {
+          "input": [
+            13,
+            15,
+            12,
+            10,
+            7
+          ],
+          "output": [
+            15,
+            12,
+            10,
+            7,
+            2
+          ]
+        },
+        {
+          "input": [
+            9,
+            13,
+            15,
+            11,
+            7
+          ],
+          "output": [
+            13,
+            15,
+            11,
+            7,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "SWAP",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0587",
+      "io": [
+        {
+          "input": [
+            2,
+            10,
+            4,
+            4,
+            11
+          ],
+          "output": [
+            12,
+            3,
+            3,
+            14,
+            10
+          ]
+        },
+        {
+          "input": [
+            6,
+            3,
+            5,
+            7,
+            10
+          ],
+          "output": [
+            11,
+            7,
+            15,
+            10,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0376",
+      "io": [
+        {
+          "input": [
+            9,
+            14,
+            6,
+            2,
+            9
+          ],
+          "output": [
+            6,
+            14,
+            14,
+            5,
+            0
+          ]
+        },
+        {
+          "input": [
+            4,
+            8,
+            7,
+            2,
+            15
+          ],
+          "output": [
+            4,
+            16,
+            15,
+            6,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ROTL",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0153",
+      "io": [
+        {
+          "input": [
+            3,
+            10,
+            2,
+            15,
+            15
+          ],
+          "output": [
+            3,
+            4,
+            3,
+            10,
+            10
+          ]
+        },
+        {
+          "input": [
+            14,
+            9,
+            3,
+            15,
+            15
+          ],
+          "output": [
+            4,
+            16,
+            9,
+            6,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ADD1",
+        "PREFIX",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0569",
+      "io": [
+        {
+          "input": [
+            12,
+            9,
+            12,
+            2,
+            11
+          ],
+          "output": [
+            10,
+            10,
+            2,
+            5,
+            12
+          ]
+        },
+        {
+          "input": [
+            7,
+            16,
+            13,
+            8,
+            5
+          ],
+          "output": [
+            0,
+            6,
+            3,
+            11,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "SWAP",
+        "DIFF",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0627",
+      "io": [
+        {
+          "input": [
+            8,
+            6,
+            6,
+            1,
+            13
+          ],
+          "output": [
+            11,
+            16,
+            4,
+            9,
+            11
+          ]
+        },
+        {
+          "input": [
+            5,
+            12,
+            6,
+            3,
+            0
+          ],
+          "output": [
+            14,
+            0,
+            5,
+            11,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "NEG",
+        "ROTL",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0085",
+      "io": [
+        {
+          "input": [
+            10,
+            16,
+            13,
+            10,
+            0
+          ],
+          "output": [
+            5,
+            7,
+            3,
+            0,
+            1
+          ]
+        },
+        {
+          "input": [
+            9,
+            14,
+            4,
+            12,
+            8
+          ],
+          "output": [
+            1,
+            8,
+            0,
+            4,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "REV",
+        "PREFIX",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0674",
+      "io": [
+        {
+          "input": [
+            9,
+            7,
+            9,
+            14,
+            9
+          ],
+          "output": [
+            3,
+            13,
+            0,
+            7,
+            10
+          ]
+        },
+        {
+          "input": [
+            3,
+            3,
+            3,
+            14,
+            3
+          ],
+          "output": [
+            11,
+            0,
+            0,
+            12,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "DIFF",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0412",
+      "io": [
+        {
+          "input": [
+            0,
+            13,
+            11,
+            1,
+            13
+          ],
+          "output": [
+            16,
+            6,
+            0,
+            14,
+            4
+          ]
+        },
+        {
+          "input": [
+            0,
+            2,
+            4,
+            10,
+            5
+          ],
+          "output": [
+            16,
+            11,
+            2,
+            15,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "ADD1",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0640",
+      "io": [
+        {
+          "input": [
+            13,
+            13,
+            0,
+            8,
+            6
+          ],
+          "output": [
+            0,
+            13,
+            13,
+            6,
+            8
+          ]
+        },
+        {
+          "input": [
+            10,
+            14,
+            4,
+            1,
+            10
+          ],
+          "output": [
+            4,
+            10,
+            14,
+            10,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0324",
+      "io": [
+        {
+          "input": [
+            7,
+            8,
+            5,
+            8,
+            1
+          ],
+          "output": [
+            0,
+            14,
+            7,
+            6,
+            8
+          ]
+        },
+        {
+          "input": [
+            5,
+            6,
+            8,
+            1,
+            2
+          ],
+          "output": [
+            13,
+            6,
+            5,
+            7,
+            11
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "SWAP",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0348",
+      "io": [
+        {
+          "input": [
+            16,
+            3,
+            8,
+            12,
+            5
+          ],
+          "output": [
+            10,
+            14,
+            7,
+            9,
+            9
+          ]
+        },
+        {
+          "input": [
+            2,
+            14,
+            0,
+            11,
+            13
+          ],
+          "output": [
+            10,
+            12,
+            9,
+            11,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "DIFF",
+        "SORT",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0430",
+      "io": [
+        {
+          "input": [
+            9,
+            5,
+            4,
+            9,
+            6
+          ],
+          "output": [
+            1,
+            4,
+            2,
+            2,
+            7
+          ]
+        },
+        {
+          "input": [
+            14,
+            13,
+            13,
+            14,
+            9
+          ],
+          "output": [
+            6,
+            3,
+            3,
+            1,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0435",
+      "io": [
+        {
+          "input": [
+            0,
+            4,
+            4,
+            9,
+            0
+          ],
+          "output": [
+            15,
+            0,
+            15,
+            8,
+            10
+          ]
+        },
+        {
+          "input": [
+            10,
+            5,
+            6,
+            5,
+            12
+          ],
+          "output": [
+            14,
+            6,
+            2,
+            16,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ADD1",
+        "SWAP",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0746",
+      "io": [
+        {
+          "input": [
+            11,
+            9,
+            8,
+            8,
+            13
+          ],
+          "output": [
+            14,
+            9,
+            3,
+            14,
+            13
+          ]
+        },
+        {
+          "input": [
+            3,
+            12,
+            13,
+            12,
+            15
+          ],
+          "output": [
+            6,
+            4,
+            3,
+            1,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "ADD1",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0526",
+      "io": [
+        {
+          "input": [
+            15,
+            4,
+            4,
+            14,
+            12
+          ],
+          "output": [
+            12,
+            14,
+            4,
+            4,
+            6
+          ]
+        },
+        {
+          "input": [
+            6,
+            3,
+            6,
+            1,
+            16
+          ],
+          "output": [
+            16,
+            1,
+            6,
+            3,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "SWAP",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0528",
+      "io": [
+        {
+          "input": [
+            9,
+            16,
+            4,
+            6,
+            9
+          ],
+          "output": [
+            3,
+            3,
+            10,
+            14,
+            0
+          ]
+        },
+        {
+          "input": [
+            13,
+            6,
+            11,
+            12,
+            8
+          ],
+          "output": [
+            7,
+            9,
+            11,
+            14,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "SORT",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0476",
+      "io": [
+        {
+          "input": [
+            4,
+            16,
+            3,
+            10,
+            11
+          ],
+          "output": [
+            1,
+            6,
+            7,
+            4,
+            12
+          ]
+        },
+        {
+          "input": [
+            4,
+            9,
+            8,
+            6,
+            9
+          ],
+          "output": [
+            3,
+            8,
+            15,
+            16,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "REV",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0316",
+      "io": [
+        {
+          "input": [
+            5,
+            2,
+            2,
+            9,
+            14
+          ],
+          "output": [
+            2,
+            1,
+            14,
+            10,
+            13
+          ]
+        },
+        {
+          "input": [
+            7,
+            7,
+            13,
+            2,
+            14
+          ],
+          "output": [
+            7,
+            3,
+            11,
+            14,
+            1
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0466",
+      "io": [
+        {
+          "input": [
+            9,
+            15,
+            16,
+            4,
+            2
+          ],
+          "output": [
+            4,
+            1,
+            13,
+            15,
+            8
+          ]
+        },
+        {
+          "input": [
+            9,
+            5,
+            12,
+            14,
+            6
+          ],
+          "output": [
+            12,
+            1,
+            10,
+            7,
+            11
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0495",
+      "io": [
+        {
+          "input": [
+            8,
+            2,
+            14,
+            3,
+            15
+          ],
+          "output": [
+            9,
+            7,
+            16,
+            14,
+            2
+          ]
+        },
+        {
+          "input": [
+            9,
+            16,
+            0,
+            8,
+            14
+          ],
+          "output": [
+            2,
+            1,
+            14,
+            3,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "MUL2",
+        "ZIGZAG",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0490",
+      "io": [
+        {
+          "input": [
+            0,
+            11,
+            13,
+            2,
+            3
+          ],
+          "output": [
+            2,
+            8,
+            4,
+            1,
+            2
+          ]
+        },
+        {
+          "input": [
+            0,
+            13,
+            7,
+            5,
+            15
+          ],
+          "output": [
+            5,
+            6,
+            2,
+            2,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ROTL",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0220",
+      "io": [
+        {
+          "input": [
+            10,
+            8,
+            5,
+            16,
+            0
+          ],
+          "output": [
+            16,
+            12,
+            11,
+            15,
+            2
+          ]
+        },
+        {
+          "input": [
+            2,
+            15,
+            10,
+            4,
+            3
+          ],
+          "output": [
+            14,
+            12,
+            3,
+            13,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "ADD1",
+        "ROTL",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0068",
+      "io": [
+        {
+          "input": [
+            0,
+            3,
+            11,
+            3,
+            1
+          ],
+          "output": [
+            2,
+            14,
+            9,
+            8,
+            2
+          ]
+        },
+        {
+          "input": [
+            9,
+            0,
+            16,
+            3,
+            3
+          ],
+          "output": [
+            10,
+            9,
+            1,
+            13,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "ADD1",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0059",
+      "io": [
+        {
+          "input": [
+            0,
+            6,
+            3,
+            9,
+            5
+          ],
+          "output": [
+            11,
+            3,
+            12,
+            5,
+            1
+          ]
+        },
+        {
+          "input": [
+            2,
+            2,
+            16,
+            13,
+            16
+          ],
+          "output": [
+            15,
+            8,
+            5,
+            9,
+            14
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "DIFF",
+        "DIFF",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0645",
+      "io": [
+        {
+          "input": [
+            15,
+            3,
+            15,
+            8,
+            9
+          ],
+          "output": [
+            2,
+            2,
+            3,
+            6,
+            16
+          ]
+        },
+        {
+          "input": [
+            6,
+            12,
+            9,
+            11,
+            1
+          ],
+          "output": [
+            2,
+            3,
+            9,
+            11,
+            15
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "ADD1",
+        "REV",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0130",
+      "io": [
+        {
+          "input": [
+            4,
+            9,
+            1,
+            16,
+            6
+          ],
+          "output": [
+            3,
+            1,
+            13,
+            4,
+            1
+          ]
+        },
+        {
+          "input": [
+            15,
+            5,
+            6,
+            2,
+            9
+          ],
+          "output": [
+            5,
+            9,
+            10,
+            6,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0019",
+      "io": [
+        {
+          "input": [
+            1,
+            15,
+            13,
+            12,
+            11
+          ],
+          "output": [
+            2,
+            2,
+            4,
+            6,
+            15
+          ]
+        },
+        {
+          "input": [
+            2,
+            15,
+            5,
+            12,
+            3
+          ],
+          "output": [
+            3,
+            1,
+            3,
+            8,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "DIFF",
+        "REV",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0564",
+      "io": [
+        {
+          "input": [
+            3,
+            8,
+            10,
+            0,
+            4
+          ],
+          "output": [
+            16,
+            6,
+            12,
+            0,
+            15
+          ]
+        },
+        {
+          "input": [
+            3,
+            11,
+            1,
+            14,
+            4
+          ],
+          "output": [
+            16,
+            4,
+            12,
+            5,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "MUL2",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0637",
+      "io": [
+        {
+          "input": [
+            0,
+            10,
+            2,
+            13,
+            16
+          ],
+          "output": [
+            13,
+            1,
+            0,
+            2,
+            5
+          ]
+        },
+        {
+          "input": [
+            6,
+            3,
+            15,
+            16,
+            12
+          ],
+          "output": [
+            6,
+            7,
+            9,
+            7,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "ADD1",
+        "ADD1",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0411",
+      "io": [
+        {
+          "input": [
+            10,
+            12,
+            14,
+            0,
+            9
+          ],
+          "output": [
+            6,
+            15,
+            0,
+            2,
+            12
+          ]
+        },
+        {
+          "input": [
+            16,
+            5,
+            12,
+            16,
+            7
+          ],
+          "output": [
+            1,
+            11,
+            2,
+            11,
+            8
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "MUL2",
+        "ADD1",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0204",
+      "io": [
+        {
+          "input": [
+            13,
+            2,
+            7,
+            7,
+            14
+          ],
+          "output": [
+            4,
+            5,
+            0,
+            6,
+            1
+          ]
+        },
+        {
+          "input": [
+            0,
+            3,
+            0,
+            13,
+            1
+          ],
+          "output": [
+            2,
+            0,
+            1,
+            2,
+            10
+          ]
+        }
+      ],
+      "program": [
+        "SORT",
+        "ADD1",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0761",
+      "io": [
+        {
+          "input": [
+            0,
+            16,
+            7,
+            16,
+            0
+          ],
+          "output": [
+            8,
+            8,
+            16,
+            16,
+            7
+          ]
+        },
+        {
+          "input": [
+            9,
+            9,
+            7,
+            15,
+            1
+          ],
+          "output": [
+            6,
+            7,
+            7,
+            14,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "NEG",
+        "PREFIX",
+        "SORT",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0659",
+      "io": [
+        {
+          "input": [
+            11,
+            15,
+            1,
+            2,
+            14
+          ],
+          "output": [
+            7,
+            13,
+            14,
+            16,
+            5
+          ]
+        },
+        {
+          "input": [
+            14,
+            15,
+            3,
+            7,
+            15
+          ],
+          "output": [
+            5,
+            7,
+            4,
+            12,
+            5
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "SORT",
+        "MUL2",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0190",
+      "io": [
+        {
+          "input": [
+            14,
+            6,
+            14,
+            0,
+            11
+          ],
+          "output": [
+            12,
+            15,
+            2,
+            5,
+            7
+          ]
+        },
+        {
+          "input": [
+            6,
+            10,
+            5,
+            14,
+            16
+          ],
+          "output": [
+            10,
+            1,
+            3,
+            15,
+            9
+          ]
+        }
+      ],
+      "program": [
+        "NEG",
+        "MUL2",
+        "MUL2",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0110",
+      "io": [
+        {
+          "input": [
+            2,
+            9,
+            5,
+            6,
+            0
+          ],
+          "output": [
+            1,
+            2,
+            13,
+            11,
+            7
+          ]
+        },
+        {
+          "input": [
+            15,
+            15,
+            15,
+            3,
+            14
+          ],
+          "output": [
+            5,
+            15,
+            0,
+            11,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "DIFF",
+        "ROTL",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0590",
+      "io": [
+        {
+          "input": [
+            7,
+            10,
+            15,
+            2,
+            0
+          ],
+          "output": [
+            15,
+            11,
+            14,
+            7,
+            9
+          ]
+        },
+        {
+          "input": [
+            8,
+            10,
+            2,
+            10,
+            5
+          ],
+          "output": [
+            0,
+            2,
+            8,
+            5,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0042",
+      "io": [
+        {
+          "input": [
+            11,
+            0,
+            10,
+            4,
+            0
+          ],
+          "output": [
+            3,
+            5,
+            9,
+            5,
+            12
+          ]
+        },
+        {
+          "input": [
+            6,
+            6,
+            4,
+            4,
+            8
+          ],
+          "output": [
+            8,
+            0,
+            8,
+            13,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "ROTL",
+        "MUL2",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0453",
+      "io": [
+        {
+          "input": [
+            12,
+            12,
+            6,
+            11,
+            16
+          ],
+          "output": [
+            5,
+            13,
+            4,
+            7,
+            0
+          ]
+        },
+        {
+          "input": [
+            8,
+            4,
+            14,
+            16,
+            5
+          ],
+          "output": [
+            2,
+            1,
+            8,
+            12,
+            12
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "REV",
+        "PREFIX",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0679",
+      "io": [
+        {
+          "input": [
+            12,
+            10,
+            16,
+            5,
+            2
+          ],
+          "output": [
+            13,
+            5,
+            3,
+            12,
+            2
+          ]
+        },
+        {
+          "input": [
+            6,
+            0,
+            8,
+            6,
+            12
+          ],
+          "output": [
+            15,
+            16,
+            16,
+            10,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "REV",
+        "PREFIX",
+        "SORT",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0480",
+      "io": [
+        {
+          "input": [
+            3,
+            8,
+            11,
+            9,
+            5
+          ],
+          "output": [
+            4,
+            13,
+            9,
+            16,
+            10
+          ]
+        },
+        {
+          "input": [
+            11,
+            12,
+            11,
+            1,
+            15
+          ],
+          "output": [
+            9,
+            5,
+            14,
+            12,
+            13
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0479",
+      "io": [
+        {
+          "input": [
+            5,
+            3,
+            8,
+            11,
+            11
+          ],
+          "output": [
+            4,
+            6,
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "input": [
+            4,
+            2,
+            6,
+            3,
+            3
+          ],
+          "output": [
+            4,
+            4,
+            4,
+            11,
+            0
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "DIFF",
+        "SORT",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0323",
+      "io": [
+        {
+          "input": [
+            0,
+            10,
+            14,
+            12,
+            4
+          ],
+          "output": [
+            3,
+            1,
+            8,
+            2,
+            3
+          ]
+        },
+        {
+          "input": [
+            12,
+            4,
+            4,
+            0,
+            15
+          ],
+          "output": [
+            6,
+            0,
+            1,
+            8,
+            4
+          ]
+        }
+      ],
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "SORT",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0225",
+      "io": [
+        {
+          "input": [
+            8,
+            2,
+            9,
+            1,
+            10
+          ],
+          "output": [
+            15,
+            16,
+            9,
+            1,
+            1
+          ]
+        },
+        {
+          "input": [
+            8,
+            16,
+            10,
+            15,
+            1
+          ],
+          "output": [
+            1,
+            16,
+            15,
+            8,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "REV",
+        "DIFF",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    }
+  ],
+  "schema_version": 1
+}

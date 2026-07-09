@@ -1,0 +1,96 @@
+{
+  "generation_reserve_tokens": 322,
+  "max_model_len": 16384,
+  "max_prompt_plus_reserve_tokens": 1223,
+  "max_prompt_tokens": 901,
+  "min_prompt_tokens": 888,
+  "n_records": 12,
+  "pass": true,
+  "records": [
+    {
+      "id": "smoke-no-reuse-000::mined_hint",
+      "input_record_sha256": "fc9a18a632f312a7ed255e4ac6454ef3c208421efd3fdb218694da663afff7a7",
+      "prompt_plus_reserve_tokens": 1218,
+      "prompt_tokens": 896,
+      "rendered_prompt_sha256": "8ddafe4d2b247074b395c4df0bc1dbfe2e6197638b0ac71c91c1e27517fa9ebe"
+    },
+    {
+      "id": "smoke-no-reuse-001::mined_hint",
+      "input_record_sha256": "24b038d0fd3f197027e2e6199037d1547d6ce27d43eb83c99a255205061347bc",
+      "prompt_plus_reserve_tokens": 1215,
+      "prompt_tokens": 893,
+      "rendered_prompt_sha256": "7529b20695339ea137aa0fc48260b1ea5626f74ab756d995d9f84a6e0b2783bb"
+    },
+    {
+      "id": "smoke-no-reuse-002::mined_hint",
+      "input_record_sha256": "9d7d529da34d9f94214ebfaaac1d211fdfd4dbcc761843677cd1a9263499669b",
+      "prompt_plus_reserve_tokens": 1214,
+      "prompt_tokens": 892,
+      "rendered_prompt_sha256": "74729ffbb5ac7fa40897424a727c181f29ba47c4cb0de02eec14c7dfeb78bbf7"
+    },
+    {
+      "id": "smoke-no-reuse-003::mined_hint",
+      "input_record_sha256": "2a31727f03b7d22d35b8e659e8b19d72a5a6a8f45545dd4f4437343477946ccc",
+      "prompt_plus_reserve_tokens": 1223,
+      "prompt_tokens": 901,
+      "rendered_prompt_sha256": "a59481b84de4fc277c70d10b5d0e954b889baf1b24c749bcb1c694a16df114fb"
+    },
+    {
+      "id": "smoke-no-reuse-004::mined_hint",
+      "input_record_sha256": "1d261d8f29353d88eeeeafe3a6d4799390bf863ca59c3def636216a20a51de57",
+      "prompt_plus_reserve_tokens": 1218,
+      "prompt_tokens": 896,
+      "rendered_prompt_sha256": "68872d602f3de37dd991b86e468bbe2d3b1b7b1be69f873d35e11da49d642778"
+    },
+    {
+      "id": "smoke-no-reuse-005::mined_hint",
+      "input_record_sha256": "b6f8e31b17d1f8665f79723021e1a3bcc9317bdf47bb44d18075ec6772344a0b",
+      "prompt_plus_reserve_tokens": 1217,
+      "prompt_tokens": 895,
+      "rendered_prompt_sha256": "51f02dd927d94e23ed43e23a85329ef821dd2dbe0d458c34eaf6e9eb5b4b3bc7"
+    },
+    {
+      "id": "smoke-reuse-000::mined_hint",
+      "input_record_sha256": "d5a3e96ab28f068641a26582284d443dfc233369a8c464f73b7fe3f11881c1de",
+      "prompt_plus_reserve_tokens": 1214,
+      "prompt_tokens": 892,
+      "rendered_prompt_sha256": "3a3e3be0ab28889c78c7d189f1a043a0fd6ccf65f144cd71f32f36b0ba1d8322"
+    },
+    {
+      "id": "smoke-reuse-001::mined_hint",
+      "input_record_sha256": "667de32e814ba16b270bd5884a7fa6a0b54e9825345299ba93233208df618437",
+      "prompt_plus_reserve_tokens": 1217,
+      "prompt_tokens": 895,
+      "rendered_prompt_sha256": "7bd797e25b7f0b15386b1a7bc9c9603911acb163395b63770bf53196d09900ac"
+    },
+    {
+      "id": "smoke-reuse-002::mined_hint",
+      "input_record_sha256": "6901fb8729324f3d4439a1b40d3e8572c83b749ca805452e58e1815dfdad3b8a",
+      "prompt_plus_reserve_tokens": 1210,
+      "prompt_tokens": 888,
+      "rendered_prompt_sha256": "548c27e1ac5207d4ca9422c494e1e2281aced03084df1b6b97cc3146a1e92697"
+    },
+    {
+      "id": "smoke-reuse-003::mined_hint",
+      "input_record_sha256": "a65df149857ae13f44e7c2aff0fc81ce5ee8acbe116befbf96b78375202821ad",
+      "prompt_plus_reserve_tokens": 1219,
+      "prompt_tokens": 897,
+      "rendered_prompt_sha256": "06cc9948c884b64ec13e37366e44bb2adbf31c38f92c2e285ebbe3b3d6c2e582"
+    },
+    {
+      "id": "smoke-reuse-004::mined_hint",
+      "input_record_sha256": "f20eb9275889e5c565612a64fa692b582d5aabf79a62a6279a019497f7fb94dd",
+      "prompt_plus_reserve_tokens": 1214,
+      "prompt_tokens": 892,
+      "rendered_prompt_sha256": "16e61a22dd28b244596d029963280d6ac4f20bc104db951f1ee3313432ab0ccf"
+    },
+    {
+      "id": "smoke-reuse-005::mined_hint",
+      "input_record_sha256": "3f09a545f8de54a964b5436de6a204d52ddef463053a4913b4e05c920190a3f6",
+      "prompt_plus_reserve_tokens": 1218,
+      "prompt_tokens": 896,
+      "rendered_prompt_sha256": "94e0377c234e286b2699658c1b6d97532d09de8df0a27d233eabb0550a23bd3b"
+    }
+  ],
+  "schema_version": 1
+}

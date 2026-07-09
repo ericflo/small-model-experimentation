@@ -1,0 +1,96 @@
+{
+  "generation_reserve_tokens": 322,
+  "max_model_len": 16384,
+  "max_prompt_plus_reserve_tokens": 1218,
+  "max_prompt_tokens": 896,
+  "min_prompt_tokens": 883,
+  "n_records": 12,
+  "pass": true,
+  "records": [
+    {
+      "id": "smoke-no-reuse-000::random_1",
+      "input_record_sha256": "c99a6cac3fd32fcb7936790ad09d9d2420114723b6a73c845d13e2217b8bce53",
+      "prompt_plus_reserve_tokens": 1213,
+      "prompt_tokens": 891,
+      "rendered_prompt_sha256": "9471d9c6d2e61e4ccf5f1e71a081b9ea264c500893015e649da7bae464d5bbd8"
+    },
+    {
+      "id": "smoke-no-reuse-001::random_1",
+      "input_record_sha256": "683144a1419b3ebcffd46a75054e16a642c52d762ad410ba9925d651e14d7de6",
+      "prompt_plus_reserve_tokens": 1210,
+      "prompt_tokens": 888,
+      "rendered_prompt_sha256": "4f8e4dd112eafdfbe0d39e9d854ead7f1c7ff7589c057e3f477707952f4d4f46"
+    },
+    {
+      "id": "smoke-no-reuse-002::random_1",
+      "input_record_sha256": "8660ed083b08fa25d05447b92133383edb33a867ae4bf30cc6c07bc25652e9d3",
+      "prompt_plus_reserve_tokens": 1209,
+      "prompt_tokens": 887,
+      "rendered_prompt_sha256": "a5db0ed31aeafe764059669f80a81c7a220d4091dff0773561bebfbcb9dad576"
+    },
+    {
+      "id": "smoke-no-reuse-003::random_1",
+      "input_record_sha256": "d65be30f6d3884944464fae27660833e128e4c66b4ecea397fe2ec85ee466f93",
+      "prompt_plus_reserve_tokens": 1218,
+      "prompt_tokens": 896,
+      "rendered_prompt_sha256": "79a711fb4116e92dd79fc3e1f536cc7449e46940784699f3e1a9c459df465d5e"
+    },
+    {
+      "id": "smoke-no-reuse-004::random_1",
+      "input_record_sha256": "00f336e0208ee2f4640183c410fe5e67b682f3ae5de02d8bb8640471e243838b",
+      "prompt_plus_reserve_tokens": 1213,
+      "prompt_tokens": 891,
+      "rendered_prompt_sha256": "efa034989b5540cc41908081983170d9a073f464dcedb627853bbf24a71fbd5c"
+    },
+    {
+      "id": "smoke-no-reuse-005::random_1",
+      "input_record_sha256": "609408be8a249ec7a7b3a744b196014cf4c8dfc827c9d1ea4710711d6f023bdf",
+      "prompt_plus_reserve_tokens": 1212,
+      "prompt_tokens": 890,
+      "rendered_prompt_sha256": "154afd4188369a16194fcb479e011ec944649d276ccd508994a4f221a7c090b9"
+    },
+    {
+      "id": "smoke-reuse-000::random_1",
+      "input_record_sha256": "b17610053df8607a402b45e6c78c9b175dc32cf4e9b1938c8072187c2976cdab",
+      "prompt_plus_reserve_tokens": 1209,
+      "prompt_tokens": 887,
+      "rendered_prompt_sha256": "b51766766526e50005e8bfc440180aa51dfa4ec615b270ddb28840334ddec69d"
+    },
+    {
+      "id": "smoke-reuse-001::random_1",
+      "input_record_sha256": "8f0c55098a3a92e6dc72e2a0f6a0cd7531421af82d2ab33109e5cf2777637b28",
+      "prompt_plus_reserve_tokens": 1212,
+      "prompt_tokens": 890,
+      "rendered_prompt_sha256": "1b6c9055b906656123ac51c72ae3a47e54a0122cd9f5de1383244446ffe0929f"
+    },
+    {
+      "id": "smoke-reuse-002::random_1",
+      "input_record_sha256": "ce678d207b194db26d977c5773adc118d074943766ed5e914ff3ed483912117f",
+      "prompt_plus_reserve_tokens": 1205,
+      "prompt_tokens": 883,
+      "rendered_prompt_sha256": "20bc04fb3c0b3a28d370f7beb41bead0579f06a58f6d3f664cae2e311167ed37"
+    },
+    {
+      "id": "smoke-reuse-003::random_1",
+      "input_record_sha256": "67d271c767d24f27b5218e58da42f9d3de81c67e7a967457c161ffe2e07f78c8",
+      "prompt_plus_reserve_tokens": 1214,
+      "prompt_tokens": 892,
+      "rendered_prompt_sha256": "bbb7076f9d2f4a0976d2e8aac8ea943d0553440e1b4ace9d144b3aa2d3387d93"
+    },
+    {
+      "id": "smoke-reuse-004::random_1",
+      "input_record_sha256": "fe48303180f926ce2fe47148e56963fe3ccca6fe63b023d7d98fbd57693a3952",
+      "prompt_plus_reserve_tokens": 1209,
+      "prompt_tokens": 887,
+      "rendered_prompt_sha256": "9892b9ec0cd85fc793823e5bdc1915b05e6c3df9ef084e708a94d6e9492b0854"
+    },
+    {
+      "id": "smoke-reuse-005::random_1",
+      "input_record_sha256": "09e8bb80a3edca2ecd6d5b752b2dee143ed75fff957ecd102f6ccb8f83503b60",
+      "prompt_plus_reserve_tokens": 1213,
+      "prompt_tokens": 891,
+      "rendered_prompt_sha256": "dfc68b73f15acc43bd389e5c46e479ac13b62612c5d3ebe585fffd66641d6b4f"
+    }
+  ],
+  "schema_version": 1
+}

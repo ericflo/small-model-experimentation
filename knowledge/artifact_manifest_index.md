@@ -2,19 +2,19 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 170
-- Manifest files: 466
+- Experiments with manifests: 171
+- Manifest files: 469
 
 ## Manifest Types
 
 | Type | Files |
 | --- | ---: |
 | `checkpoint` | 83 |
-| `dataset` | 128 |
+| `dataset` | 130 |
 | `large-artifact` | 50 |
 | `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 43 |
+| `standard-artifact` | 44 |
 
 ## Manifests
 
@@ -243,6 +243,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_verified_algorithm_retrieval_adaptation` | `large-artifact` | [manifest](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/large_artifacts_manifest.md) |
 | `qwen35_4b_verified_edit_closure` | `dataset` | [manifest](../experiments/qwen35_4b_verified_edit_closure/data/dataset_manifest.json) |
 | `qwen35_4b_verified_edit_closure` | `large-artifact` | [manifest](../experiments/qwen35_4b_verified_edit_closure/large_artifacts_manifest.md) |
+| `qwen35_4b_verified_macro_invention` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_invention/data/dataset_manifest.json) |
+| `qwen35_4b_verified_macro_invention` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/dataset_manifest.json) |
+| `qwen35_4b_verified_macro_invention` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verified_macro_invention/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verifier_free_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verifier_free_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_heldout_records.manifest.json) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_train_records.manifest.json) |

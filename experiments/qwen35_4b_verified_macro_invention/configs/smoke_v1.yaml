@@ -1,0 +1,59 @@
+# Pre-registered constants. Keep the analyzer and README synchronized with this file.
+model: Qwen/Qwen3.5-4B
+seeds:
+  data: 20260709
+  proposal_view: 417
+  macro_random: 991
+  macro_random_draws: [991, 992, 993, 994, 995]
+  qwen_random_draws: [1091, 1092, 1093, 1094, 1095]
+  vllm_proposal: 1701
+  vllm_solver: 2701
+data:
+  train_programs: 800
+  proposal_view_programs: 150
+  solver_demonstrations: 3
+  demonstration_io_examples: 2
+  smoke_tasks_per_split: 6
+  full_reuse_tasks: 80
+  full_no_reuse_tasks: 40
+  visible_examples: 8
+  hidden_examples: 8
+  probe_inputs: 8
+  eval_base_depths: [5]
+macros:
+  count: 8
+  min_expansion: 2
+  max_expansion: 3
+  min_train_support: 3
+inference:
+  backend: vllm
+  thinking: budget
+  smoke_thinking_budget: 192
+  full_thinking_budget: 768
+  answer_max_tokens: 128
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  macro_k: 12
+  base_max_k: 24
+  proposal_n: 16
+  arms: [base, mined, mined_hint, qwen_ranked, random_0, random_1, random_2, random_3, random_4, designed_ceiling]
+  max_model_len: 16384
+  max_num_seqs: 128
+  max_num_batched_tokens: 32768
+decision:
+  primary_min_delta: 0.10
+  callable_vs_hint_min_delta: 0.05
+  mined_vs_random_min_delta: 0.05
+  qwen_vs_random_min_delta: 0.05
+  qwen_within_mined: 0.05
+  qwen_required_verified_macros: 8
+  qwen_min_exclusive_correct: 2
+  bootstrap_repetitions: 10000
+  bootstrap_seed: 8102
+  smoke_min_parse_rate: 0.50
+  smoke_min_macro_candidates: 2
+  smoke_max_answer_truncation: 0.05
+  forced_close_contingency: 0.50
+  contingency_thinking_budget: 1536
+  contingency_tasks: 20

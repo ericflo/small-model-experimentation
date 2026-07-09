@@ -1,0 +1,43 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_verified_macro_invention"
+external_artifacts: []
+omitted_artifacts: []
+preserved_artifacts:
+  - path: "configs/smoke_v1.yaml"
+    purpose: "exact failed-v1 configuration"
+  - path: "data/smoke_v1_frozen/"
+    purpose: "failed-v1 smoke tasks and manifests"
+  - path: "runs/proposal_v1_failed/"
+    purpose: "raw failed proposal outputs, preflight, and vLLM metadata"
+  - path: "runs/smoke_v1_failed/"
+    purpose: "raw failed solver outputs, preflights, and vLLM metadata"
+  - path: "analysis/smoke_v1_failed/"
+    purpose: "derived failed-v1 tables, summary, and verdict"
+  - path: "archive/smoke_v1_source/"
+    purpose: "exact source snapshot that produced smoke v1"
+  - path: "configs/interface_v2.yaml"
+    purpose: "exact failed interface-attempt-2 configuration"
+  - path: "runs/interface_v2_failed/"
+    purpose: "raw failed plan-given outputs, preflight, and vLLM metadata"
+  - path: "analysis/interface_v2_gate_failed.json"
+    purpose: "machine-readable failed interface-attempt-2 verdict"
+  - path: "archive/interface_v2_source/"
+    purpose: "exact source snapshot that produced interface attempt 2"
+  - path: "configs/interface_v3.yaml"
+    purpose: "exact failed interface-attempt-3 no-think configuration"
+  - path: "runs/interface_v3_failed/"
+    purpose: "raw failed no-think plan-given outputs, preflight, and vLLM metadata"
+  - path: "analysis/interface_v3_gate_failed.json"
+    purpose: "machine-readable failed interface-attempt-3 verdict"
+  - path: "analysis/interface_v3_audit.json"
+    purpose: "regenerable exact expansion and over-aliasing taxonomy for attempt 3"
+  - path: "archive/interface_v3_source/"
+    purpose: "exact source snapshot that produced interface attempt 3"
+reproducibility:
+  prepare_command: ".venv-vllm/bin/python experiments/qwen35_4b_verified_macro_invention/scripts/run.py --prepare"
+  smoke_command: ".venv-vllm/bin/python experiments/qwen35_4b_verified_macro_invention/scripts/run.py --smoke"
+  full_command: ".venv-vllm/bin/python experiments/qwen35_4b_verified_macro_invention/scripts/run.py --full"
+  interface_audit_command: ".venv-vllm/bin/python experiments/qwen35_4b_verified_macro_invention/scripts/analyze_interface_failure.py"
+  required_external_artifacts: []
+notes: "All model-facing inference used the experiment-local vLLM runner. Smoke v1 and plan-given interface attempts 2 and 3 are preserved in git. Attempt 3 failed amendment 2's final gate, so the experiment stopped. No fresh v2 induction-smoke or full prompt was ever generated; the verified-macro hypothesis is unresolved and no claim-ledger update is warranted."

@@ -1,0 +1,40 @@
+{
+  "artifact_sha256": {
+    "construction_corpus.json": "b32a6608923bd6068069432efa3856bd6fb29068681e7cc34b03d4a72e891e94",
+    "cpu_gate.json": "4372a1e268ab718f66e8f7dd2fb3946e39ab1bed2e42a7581911c5db180fa08b",
+    "demonstrations.json": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf",
+    "proposal_view.json": "206343ac2d643edc94b237b01a5bf5cb9e134e8b1f56affa672eaedc6fc2e011",
+    "tasks.json": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073"
+  },
+  "config_sha256": "89cfa5dc882fba4cb87582404f39ac0acf3cbca46401cb8a8bbff728d3ee2b42",
+  "counts": {
+    "construction_programs": 800,
+    "demonstrations": 3,
+    "proposal_view_programs": 150,
+    "tasks": 132
+  },
+  "cpu_gate_sha256": "fe6929943c8e7fe170eba7897b36d9d3bd2437203cf44753eb321c3b53344dc1",
+  "data_seed": 20260709,
+  "prepared_library_sha256_by_arm": {
+    "base": "462ddf886c5fb28ce087f30ff5bb816c3b4d6068d98dcb2afee2d4bf454f4e58",
+    "designed_ceiling": "c8ba999ba054bbc0153fa8c4251b8fb464860cfbc638b4dc96cf6d94dac0b456",
+    "mined": "74a5a61a998ead0e95188098e81c08ba250b3ac794c30e5170bcc5ec7d304a70",
+    "mined_hint": "c778244b224aaa886bd2019a91a054b0f24c11e23fa5c4873e64cf2ddd02d392",
+    "random_0": "52c93dba5b38a672e86a1d60e2a0d40b54ccf7bb358237a7e0f317e7d0080fc7",
+    "random_1": "3cb53879867aecb0c2832ea5bbdb85162c229a85a39e655f7fde88b164b47cb2",
+    "random_2": "875517162c48840c821e5acbfc9b1b8ab1841c0ac0f562fcb2d6ad7ebf7dd58a",
+    "random_3": "8ae7e32587b72cf3266fc8684febc882cf387dde65e98c699e958c2d4c2e703d",
+    "random_4": "74352003582256e361b1f3f31ed8f1e482f0b7ceff074c78fe96ad23148d67ee"
+  },
+  "schema_version": 1,
+  "semantic_sha256": {
+    "construction_programs": "5cd8f1db0ebac5122f9e6c69c370e1128bdb2aa6227d75cb6ae9011d678a1643",
+    "demonstrations": "362c7bd374ea26d2c8017b85ec7a3f1ed06103f18909ae8158f8cf2ca4bd59f3",
+    "proposal_view": "a47911b8a42f9b2d074f392b17dfdd27ae21051f5d9ce930bfacc6da6a43d19e",
+    "tasks": "80358090f6cd7e4963a6164a829d08c7ce98a4369beeb8232bb3477c6cc1fdf1"
+  },
+  "smoke_attempt": 2,
+  "smoke_seed": 20260710,
+  "v1_full_evaluation_sha256": "16838c0b8b85b105023b72e3459035b78bcf20bf5f3e28f00ed7c93311680c24",
+  "v2_smoke_sha256": "cf2467a05bd11d279e692c30a64a0a3508a9ccde7bc2979ba6f6addb4a3ff5db"
+}

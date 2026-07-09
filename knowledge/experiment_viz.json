@@ -44706,6 +44706,53 @@
      "source": "runs/gate_c45.json, runs/verdict.json (cells), meta_induction verdict_general.json (0.905)"
     }
    ]
+  },
+  "qwen35_4b_verified_macro_invention": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Exact plan transcription never cleared the 3-of-4 interface gate",
+     "categories": [
+      "thinking at 768 tokens",
+      "thinking off"
+     ],
+     "series": [
+      {
+       "label": "records with any exact optimal output",
+       "values": [2, 1]
+      },
+      {
+       "label": "records required to pass",
+       "values": [3, 3]
+      }
+     ],
+     "y_label": "Records (4 tested per attempt)",
+     "note": "The primitive plan was supplied, so this is an interface check rather than an induction result. Both attempts failed before the fresh scientific smoke or full evaluation was shown to the model.",
+     "source": "reports/report.md (Results); analysis/interface_v{2,3}_gate_failed.json"
+    },
+    {
+     "kind": "bar",
+     "title": "No-think fixed formatting and truncation, but not exact shortcut placement",
+     "categories": [
+      "thinking at 768 tokens",
+      "thinking off"
+     ],
+     "series": [
+      {
+       "label": "strictly parsed samples",
+       "values": [4, 16]
+      },
+      {
+       "label": "answer-truncated samples",
+       "values": [12, 0]
+      }
+     ],
+     "y_label": "Samples (16 generated per attempt)",
+     "note": "Thinking off made all 16 outputs parse and removed all truncation. Exact expansion still failed on 13 samples because the model added unrelated aliases and exceeded the five-primitive limit.",
+     "source": "reports/report.md (Results); analysis/interface_v3_audit.json"
+    }
+   ]
   }
  }
 }

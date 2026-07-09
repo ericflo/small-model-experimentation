@@ -1,0 +1,114 @@
+{
+  "accepted_occurrences": 0,
+  "construction_status": "insufficient_candidates",
+  "dropped_behavioral_aliases": [],
+  "eval_data_used": false,
+  "parse_failures": 16,
+  "parsed_samples": 0,
+  "proposal_jsonl_sha256": "026cafd6856a7a8026598e44b4fc67ce074f97df43352f5a6fb505d99c89f0fa",
+  "proposal_view_sha256": "a47911b8a42f9b2d074f392b17dfdd27ae21051f5d9ce930bfacc6da6a43d19e",
+  "ranked_candidates": [],
+  "ranking_rule": "votes, summed inverse output position, first occurrence, lexical",
+  "samples": [
+    {
+      "accepted": [],
+      "parse_error": "returned 10 macros, limit is 8",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 0
+    },
+    {
+      "accepted": [],
+      "parse_error": "returned 9 macros, limit is 8",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 1
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'I will scan the provided training data for recurring sequences of operations. I need to identify patterns that appear frequently in the `PROGRAM` field and can be compressed into a macro using 2 or 3 base tokens.'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 2
+    },
+    {
+      "accepted": [],
+      "parse_error": "markdown fence must enclose the entire final answer",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 3
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'I need to identify macros that appear frequently or solve common patterns in the provided training data. The macros must expand to exactly 2 or 3 BASE primitive tokens. I will scan the list of programs to find recurring sequences.'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 4
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'SWAP | MUL2 | ROTL'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 5
+    },
+    {
+      "accepted": [],
+      "parse_error": "returned 12 macros, limit is 8",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 6
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'I need to identify reusable patterns of 2 or 3 tokens from the provided list.'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 7
+    },
+    {
+      "accepted": [],
+      "parse_error": "returned 10 macros, limit is 8",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 8
+    },
+    {
+      "accepted": [],
+      "parse_error": "returned 10 macros, limit is 8",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 9
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'Based on an analysis of the verified training programs, several patterns of 2 or 3 operations appear frequently with specific semantic functions.'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 10
+    },
+    {
+      "accepted": [],
+      "parse_error": "returned 9 macros, limit is 8",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 11
+    },
+    {
+      "accepted": [],
+      "parse_error": "returned 10 macros, limit is 8",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 12
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'MACRO: ADD1 | ADD1 = ADD2'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 13
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'I will check the user\\'s request again. The user wants me to propose macros based on the provided training data. The training data consists of programs and their I/O. I need to find sequences of 2 or 3 tokens that appear frequently enough to be considered \"reusable structure\" or \"recuring\".'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 14
+    },
+    {
+      "accepted": [],
+      "parse_error": "invalid macro line 1: 'Based on the analysis of the provided training programs, several recurring sub-sequence patterns emerge that can be compressed into 2-3 token macros. These patterns often appear in pairs or triplets related to sorting, prefixing, and specific permutations.'",
+      "record_id": "macro-proposal-v1",
+      "sample_index": 15
+    }
+  ],
+  "schema_version": 1,
+  "target_count": 8,
+  "unique_supported_candidates": 0,
+  "unique_supported_exact_expansions": 0
+}

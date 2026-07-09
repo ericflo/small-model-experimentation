@@ -10594,6 +10594,50 @@
      "value": "0.37 -> 0.00 (active interference)"
     }
    ]
+  },
+  "qwen35_4b_verified_macro_invention": {
+   "verdict_tag": "Named shortcuts failed their interface check",
+   "concept_primer": "Imagine replacing a repeated two-step instruction with a short nickname. Before asking whether those nicknames help solve new puzzles, we first handed the model the full correct instruction list and checked whether it could rewrite that list faithfully.",
+   "plain_question": "Can the model reliably rewrite a supplied five-step plan using exact named shortcuts?",
+   "plain_answer": "No. Letting it reason caused most answers to run out of space. Turning reasoning off fixed the formatting completely, but only one of four supplied plans had even one fully correct rewrite. The model often chose the right first nickname and then added unrelated nicknames that changed the plan.",
+   "why_it_matters": "A well-formatted tool call is not necessarily a correct tool call. Test a new action language on plans whose answers are already known before spending compute on whether that language helps solve harder problems.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Original task-smoke answers cut off",
+     "value": "607 / 1,440",
+     "sub": "the first smoke used too little reasoning room"
+    },
+    {
+     "label": "No-think outputs formatted and using shortcuts",
+     "value": "16 / 16",
+     "sub": "formatting alone looked perfect"
+    },
+    {
+     "label": "Supplied plans rewritten exactly at least once",
+     "value": "1 / 4",
+     "sub": "below the required 3 of 4"
+    },
+    {
+     "label": "Failed no-think samples that grew past the limit",
+     "value": "13 / 13",
+     "sub": "extra nicknames changed the supplied plan"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Exact rewrites stayed below the pass line",
+     "chart_read": "Each group shows one interface attempt. The dark bar counts supplied plans with at least one exact rewrite; the comparison bar marks the three-of-four requirement.",
+     "chart_takeaway": "Neither reasoning mode reached the pass line, so the harder shortcut experiment never started."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Formatting was repaired, correctness was not",
+     "chart_read": "Bars count well-formatted and cut-off outputs among 16 tries. Turning reasoning off moves every output into the well-formatted bar and removes the cut-off bar.",
+     "chart_takeaway": "Perfect formatting did not make the rewrites faithful: the separate exact checker still rejected most of them."
+    }
+   ]
   }
  }
 }

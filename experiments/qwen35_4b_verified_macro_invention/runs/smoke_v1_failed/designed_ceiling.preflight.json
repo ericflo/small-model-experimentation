@@ -1,0 +1,96 @@
+{
+  "generation_reserve_tokens": 322,
+  "max_model_len": 16384,
+  "max_prompt_plus_reserve_tokens": 1217,
+  "max_prompt_tokens": 895,
+  "min_prompt_tokens": 882,
+  "n_records": 12,
+  "pass": true,
+  "records": [
+    {
+      "id": "smoke-no-reuse-000::designed_ceiling",
+      "input_record_sha256": "7b6b00c2a874f370da61638420ccd54ba6364136b2f14eaf432968a873be9c69",
+      "prompt_plus_reserve_tokens": 1212,
+      "prompt_tokens": 890,
+      "rendered_prompt_sha256": "ac56a75044d2ff839f7996d8bc28602f20cca4f27defc1d242aac90d40a82c91"
+    },
+    {
+      "id": "smoke-no-reuse-001::designed_ceiling",
+      "input_record_sha256": "a39be022851d577945dd49ff07d6060dbe3e29ef9135a6df0a4c8e8a4186afe3",
+      "prompt_plus_reserve_tokens": 1209,
+      "prompt_tokens": 887,
+      "rendered_prompt_sha256": "99fa515961efd7081e50faf19f08bf28b49b0a863a1e1e3be82d53e39e0a36bf"
+    },
+    {
+      "id": "smoke-no-reuse-002::designed_ceiling",
+      "input_record_sha256": "c0188ddaa031013773d0cb9574891533bb8d6da7433f726042e3b7ed103b6bb8",
+      "prompt_plus_reserve_tokens": 1208,
+      "prompt_tokens": 886,
+      "rendered_prompt_sha256": "d47822d70804ce4aea7ddfbcf96b4cd5dfece90930c62a5d02565703030e9abf"
+    },
+    {
+      "id": "smoke-no-reuse-003::designed_ceiling",
+      "input_record_sha256": "75b9ffbaefcfaeac7b68a32b2be90fbe8981aa9302c9c2d5c37051700cc133c5",
+      "prompt_plus_reserve_tokens": 1217,
+      "prompt_tokens": 895,
+      "rendered_prompt_sha256": "0bc547db5f1309873dcc473f57714f8423ae73cab3b71949ad9fa2b78d00f2e8"
+    },
+    {
+      "id": "smoke-no-reuse-004::designed_ceiling",
+      "input_record_sha256": "8b392e7fcf42683ee5463491c6d32e45ce2bb4f4a5cfdcafc0bffe9bbad44167",
+      "prompt_plus_reserve_tokens": 1212,
+      "prompt_tokens": 890,
+      "rendered_prompt_sha256": "eac614157bbf8efa201eca029a731d0ae30fb9154990749d955369ad54d868e9"
+    },
+    {
+      "id": "smoke-no-reuse-005::designed_ceiling",
+      "input_record_sha256": "52d83a4353e2323336625c70df25590f77f0a518360be9d789346f7fdee18c66",
+      "prompt_plus_reserve_tokens": 1211,
+      "prompt_tokens": 889,
+      "rendered_prompt_sha256": "4ea5ba5d056a09c8c2cfc961ac54cc45385b6971e0f6e06738ca8029f988740b"
+    },
+    {
+      "id": "smoke-reuse-000::designed_ceiling",
+      "input_record_sha256": "e54ae1ca6a588116da0fec655be1eadbd2c2f4808ed8b08957d30384a8e84040",
+      "prompt_plus_reserve_tokens": 1208,
+      "prompt_tokens": 886,
+      "rendered_prompt_sha256": "07403baa9ba371bffc32bf96a547c734773e9c016e0ddce5be6bdd3f24276d5a"
+    },
+    {
+      "id": "smoke-reuse-001::designed_ceiling",
+      "input_record_sha256": "00d2bf1d3b2c002aa434453f21a8fd3289cd78056fdc5890c7c05a8022755d29",
+      "prompt_plus_reserve_tokens": 1211,
+      "prompt_tokens": 889,
+      "rendered_prompt_sha256": "bcf9d2a25dc3514335424697ff5f907ab3662d9adcdbecd76c02e353197fae52"
+    },
+    {
+      "id": "smoke-reuse-002::designed_ceiling",
+      "input_record_sha256": "87b6bb03396129979d9eaf81edec3cbd0fa8eaf9b52a1b6af25624653144fdb5",
+      "prompt_plus_reserve_tokens": 1204,
+      "prompt_tokens": 882,
+      "rendered_prompt_sha256": "6eb7eee38e052680195f581b491e7dbe52614492c28c54b27a2669e0303d833d"
+    },
+    {
+      "id": "smoke-reuse-003::designed_ceiling",
+      "input_record_sha256": "0bc737b50bf051b5b7539e9ea8147bffef0177e61717d09599a537fa49a718cd",
+      "prompt_plus_reserve_tokens": 1213,
+      "prompt_tokens": 891,
+      "rendered_prompt_sha256": "feac9ce99dc22d8c60fd87ee02a4040274ca34b0c305379183f571e50c5f7e63"
+    },
+    {
+      "id": "smoke-reuse-004::designed_ceiling",
+      "input_record_sha256": "dfa73eaf89a15289c33b60a6f1f8794ad3e9605f6629ee420dc79fcb53041995",
+      "prompt_plus_reserve_tokens": 1208,
+      "prompt_tokens": 886,
+      "rendered_prompt_sha256": "705efdd708a83cc54913e36b1244ad46ca0a2b199efe4f176155fcbbc753f804"
+    },
+    {
+      "id": "smoke-reuse-005::designed_ceiling",
+      "input_record_sha256": "21d342873f34e67fad89125af0c91a245d8e42043dd685bc7aee0c6251b6b5f4",
+      "prompt_plus_reserve_tokens": 1212,
+      "prompt_tokens": 890,
+      "rendered_prompt_sha256": "b64dc1ca39cc64baa30e8217900f62b2801837db432ad052c04f2a1235c7671c"
+    }
+  ],
+  "schema_version": 1
+}

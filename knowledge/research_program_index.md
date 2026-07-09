@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 12
-- Experiments: 198
+- Experiments: 199
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 142
+- Assigned experiments: 143
 
 ### Seed Evidence
 
@@ -95,6 +95,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
@@ -170,7 +171,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 66
+- Assigned experiments: 67
 
 ### Seed Evidence
 
@@ -221,6 +222,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
@@ -327,7 +329,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 Grow, search, shortlist, compose, and stress-test reusable operator and skill banks.
 
 - Charter: [operator_and_skill_inventories](../research_programs/operator_and_skill_inventories/charter.md)
-- Assigned experiments: 7
+- Assigned experiments: 8
 
 ### Seed Evidence
 
@@ -344,6 +346,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 - `qwen35_4b_operator_inventory_search_pilot` (track-z): [README](../experiments/qwen35_4b_operator_inventory_search_pilot/README.md)
 - `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
 - `qwen_recurrent_vm_repair_policy` (track-y): [README](../experiments/qwen_recurrent_vm_repair_policy/README.md)
 
 ## Posttraining And Adaptation
@@ -468,7 +471,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 92
+- Assigned experiments: 93
 
 ### Seed Evidence
 
@@ -523,6 +526,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
 - `qwen_active_example_acquisition` (track-y): [README](../experiments/qwen_active_example_acquisition/README.md)
 - `qwen_batched_transduction_consistency` (track-y): [README](../experiments/qwen_batched_transduction_consistency/README.md)
@@ -577,7 +581,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 48
+- Assigned experiments: 49
 
 ### Seed Evidence
 
@@ -613,6 +617,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
@@ -642,7 +647,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 51
+- Assigned experiments: 52
 
 ### Seed Evidence
 
@@ -680,6 +685,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
+- `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)

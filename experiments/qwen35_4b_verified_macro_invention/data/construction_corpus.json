@@ -1,0 +1,9205 @@
+{
+  "programs": [
+    {
+      "id": "train-0000",
+      "program": [
+        "REV",
+        "ADD1",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0001",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0002",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0003",
+      "program": [
+        "REV",
+        "PREFIX",
+        "REV",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0004",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0005",
+      "program": [
+        "SORT",
+        "PREFIX",
+        "SWAP",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0006",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0007",
+      "program": [
+        "SORT",
+        "DIFF",
+        "MUL2",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0008",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0009",
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "REV",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0010",
+      "program": [
+        "REV",
+        "DIFF",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0011",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "PREFIX",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0012",
+      "program": [
+        "NEG",
+        "SORT",
+        "PREFIX",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0013",
+      "program": [
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "ROTL",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0014",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0015",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "REV",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0016",
+      "program": [
+        "REV",
+        "NEG",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0017",
+      "program": [
+        "SORT",
+        "SWAP",
+        "ZIGZAG",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0018",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0019",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "REV",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0020",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0021",
+      "program": [
+        "REV",
+        "PREFIX",
+        "SWAP",
+        "ZIGZAG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0022",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0023",
+      "program": [
+        "DIFF",
+        "SORT",
+        "MUL2",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0024",
+      "program": [
+        "ADD1",
+        "REV",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0025",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "ZIGZAG",
+        "MUL2",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0026",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0027",
+      "program": [
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0028",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0029",
+      "program": [
+        "PREFIX",
+        "PREFIX",
+        "REV",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0030",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "SWAP",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0031",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "NEG",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0032",
+      "program": [
+        "REV",
+        "PREFIX",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0033",
+      "program": [
+        "ZIGZAG",
+        "PREFIX",
+        "NEG",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0034",
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0035",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0036",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0037",
+      "program": [
+        "REV",
+        "DIFF",
+        "DIFF",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0038",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0039",
+      "program": [
+        "NEG",
+        "ADD1",
+        "REV",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0040",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0041",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "MUL2",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0042",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0043",
+      "program": [
+        "SORT",
+        "SWAP",
+        "PREFIX",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0044",
+      "program": [
+        "REV",
+        "NEG",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0045",
+      "program": [
+        "NEG",
+        "SORT",
+        "ADD1",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0046",
+      "program": [
+        "MUL2",
+        "NEG",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0047",
+      "program": [
+        "MUL2",
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0048",
+      "program": [
+        "ADD1",
+        "REV",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0049",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "DIFF",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0050",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0051",
+      "program": [
+        "SORT",
+        "SWAP",
+        "ADD1",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0052",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0053",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "NEG",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0054",
+      "program": [
+        "NEG",
+        "MUL2",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0055",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "SORT",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0056",
+      "program": [
+        "DIFF",
+        "REV",
+        "ROTL",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0057",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "ZIGZAG",
+        "REV",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0058",
+      "program": [
+        "ROTL",
+        "ROTL",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0059",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "DIFF",
+        "DIFF",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0060",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "MUL2",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0061",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "DIFF",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0062",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0063",
+      "program": [
+        "NEG",
+        "DIFF",
+        "SORT",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0064",
+      "program": [
+        "REV",
+        "SWAP",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0065",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "MUL2",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0066",
+      "program": [
+        "MUL2",
+        "REV",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0067",
+      "program": [
+        "MUL2",
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0068",
+      "program": [
+        "NEG",
+        "ADD1",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0069",
+      "program": [
+        "SORT",
+        "SWAP",
+        "NEG",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0070",
+      "program": [
+        "PREFIX",
+        "REV",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0071",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "SORT",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0072",
+      "program": [
+        "ADD1",
+        "SORT",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0073",
+      "program": [
+        "ZIGZAG",
+        "REV",
+        "NEG",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0074",
+      "program": [
+        "SORT",
+        "NEG",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0075",
+      "program": [
+        "REV",
+        "DIFF",
+        "ADD1",
+        "REV",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0076",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0077",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "PREFIX",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0078",
+      "program": [
+        "SORT",
+        "REV",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0079",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "PREFIX",
+        "SORT",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0080",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0081",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ZIGZAG",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0082",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0083",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "PREFIX",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0084",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0085",
+      "program": [
+        "SORT",
+        "REV",
+        "PREFIX",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0086",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0087",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "ROTL",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0088",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0089",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "MUL2",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0090",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "REV",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0091",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "ZIGZAG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0092",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "NEG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0093",
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "MUL2",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0094",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0095",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "DIFF",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0096",
+      "program": [
+        "REV",
+        "ROTL",
+        "ROTL",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0097",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "PREFIX",
+        "NEG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0098",
+      "program": [
+        "SORT",
+        "ADD1",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0099",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "DIFF",
+        "ROTL",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0100",
+      "program": [
+        "REV",
+        "NEG",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0101",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "DIFF",
+        "SORT",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0102",
+      "program": [
+        "ADD1",
+        "ROTL",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0103",
+      "program": [
+        "ROTL",
+        "ROTL",
+        "ADD1",
+        "PREFIX",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0104",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0105",
+      "program": [
+        "REV",
+        "ADD1",
+        "MUL2",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0106",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "MUL2",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0107",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "DIFF",
+        "SORT",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0108",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0109",
+      "program": [
+        "REV",
+        "PREFIX",
+        "NEG",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0110",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0111",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "MUL2",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0112",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0113",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "REV",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0114",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0115",
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0116",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0117",
+      "program": [
+        "REV",
+        "ADD1",
+        "ROTL",
+        "NEG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0118",
+      "program": [
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0119",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "ZIGZAG",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0120",
+      "program": [
+        "MUL2",
+        "SORT",
+        "REV",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0121",
+      "program": [
+        "MUL2",
+        "NEG",
+        "DIFF",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0122",
+      "program": [
+        "DIFF",
+        "REV",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0123",
+      "program": [
+        "ADD1",
+        "ROTL",
+        "ROTL",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0124",
+      "program": [
+        "REV",
+        "MUL2",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0125",
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "ROTL",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0126",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0127",
+      "program": [
+        "NEG",
+        "DIFF",
+        "ZIGZAG",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0128",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0129",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "SORT",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0130",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0131",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "PREFIX",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0132",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0133",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "MUL2",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0134",
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0135",
+      "program": [
+        "ROTL",
+        "SWAP",
+        "ADD1",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0136",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0137",
+      "program": [
+        "NEG",
+        "ADD1",
+        "SORT",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0138",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0139",
+      "program": [
+        "SWAP",
+        "NEG",
+        "DIFF",
+        "MUL2",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0140",
+      "program": [
+        "NEG",
+        "REV",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0141",
+      "program": [
+        "ADD1",
+        "NEG",
+        "REV",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0142",
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0143",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0144",
+      "program": [
+        "SORT",
+        "ADD1",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0145",
+      "program": [
+        "PREFIX",
+        "SORT",
+        "NEG",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0146",
+      "program": [
+        "REV",
+        "PREFIX",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0147",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "ADD1",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0148",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "ROTL",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0149",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "MUL2",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0150",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0151",
+      "program": [
+        "SORT",
+        "REV",
+        "ZIGZAG",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0152",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0153",
+      "program": [
+        "SORT",
+        "ADD1",
+        "PREFIX",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0154",
+      "program": [
+        "MUL2",
+        "SORT",
+        "ROTL",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0155",
+      "program": [
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "SORT",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0156",
+      "program": [
+        "REV",
+        "ADD1",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0157",
+      "program": [
+        "ADD1",
+        "ROTL",
+        "PREFIX",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0158",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0159",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "SORT",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0160",
+      "program": [
+        "REV",
+        "SWAP",
+        "NEG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0161",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "ROTL",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0162",
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0163",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "SORT",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0164",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0165",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "PREFIX",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0166",
+      "program": [
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0167",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "PREFIX",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0168",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "SORT",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0169",
+      "program": [
+        "PREFIX",
+        "SORT",
+        "ROTL",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0170",
+      "program": [
+        "NEG",
+        "MUL2",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0171",
+      "program": [
+        "SORT",
+        "SWAP",
+        "ADD1",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0172",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "SORT",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0173",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "SORT",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0174",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0175",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "SORT",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0176",
+      "program": [
+        "MUL2",
+        "REV",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0177",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "ADD1",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0178",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0179",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "SORT",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0180",
+      "program": [
+        "MUL2",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0181",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "ROTL",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0182",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0183",
+      "program": [
+        "NEG",
+        "MUL2",
+        "REV",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0184",
+      "program": [
+        "SORT",
+        "ROTL",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0185",
+      "program": [
+        "REV",
+        "SWAP",
+        "ROTL",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0186",
+      "program": [
+        "NEG",
+        "REV",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0187",
+      "program": [
+        "ZIGZAG",
+        "DIFF",
+        "SWAP",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0188",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0189",
+      "program": [
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "REV",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0190",
+      "program": [
+        "NEG",
+        "MUL2",
+        "MUL2",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0191",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "REV",
+        "MUL2",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0192",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "ADD1",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0193",
+      "program": [
+        "ADD1",
+        "NEG",
+        "MUL2",
+        "MUL2",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0194",
+      "program": [
+        "DIFF",
+        "DIFF",
+        "NEG",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0195",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0196",
+      "program": [
+        "DIFF",
+        "NEG",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0197",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0198",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0199",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "MUL2",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0200",
+      "program": [
+        "MUL2",
+        "NEG",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0201",
+      "program": [
+        "PREFIX",
+        "REV",
+        "SWAP",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0202",
+      "program": [
+        "MUL2",
+        "REV",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0203",
+      "program": [
+        "NEG",
+        "MUL2",
+        "ROTL",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0204",
+      "program": [
+        "SORT",
+        "ADD1",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0205",
+      "program": [
+        "ADD1",
+        "ROTL",
+        "NEG",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0206",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0207",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "ROTL",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0208",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0209",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0210",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0211",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0212",
+      "program": [
+        "ADD1",
+        "SORT",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0213",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "MUL2",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0214",
+      "program": [
+        "MUL2",
+        "REV",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0215",
+      "program": [
+        "DIFF",
+        "REV",
+        "DIFF",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0216",
+      "program": [
+        "NEG",
+        "ROTL",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0217",
+      "program": [
+        "NEG",
+        "SORT",
+        "SWAP",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0218",
+      "program": [
+        "SORT",
+        "MUL2",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0219",
+      "program": [
+        "DIFF",
+        "REV",
+        "DIFF",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0220",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "ROTL",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0221",
+      "program": [
+        "DIFF",
+        "DIFF",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0222",
+      "program": [
+        "ROTL",
+        "NEG",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0223",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0224",
+      "program": [
+        "ADD1",
+        "MUL2",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0225",
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "REV",
+        "DIFF",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0226",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0227",
+      "program": [
+        "DIFF",
+        "SORT",
+        "SWAP",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0228",
+      "program": [
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0229",
+      "program": [
+        "SORT",
+        "PREFIX",
+        "NEG",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0230",
+      "program": [
+        "DIFF",
+        "REV",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0231",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "ROTL",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0232",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0233",
+      "program": [
+        "SORT",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0234",
+      "program": [
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0235",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0236",
+      "program": [
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0237",
+      "program": [
+        "REV",
+        "PREFIX",
+        "SORT",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0238",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0239",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "PREFIX",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0240",
+      "program": [
+        "SORT",
+        "DIFF",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0241",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "SWAP",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0242",
+      "program": [
+        "NEG",
+        "SWAP",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0243",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "DIFF",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0244",
+      "program": [
+        "ROTL",
+        "NEG",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0245",
+      "program": [
+        "NEG",
+        "ROTL",
+        "MUL2",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0246",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0247",
+      "program": [
+        "ROTL",
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0248",
+      "program": [
+        "SORT",
+        "ADD1",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0249",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "REV",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0250",
+      "program": [
+        "NEG",
+        "SWAP",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0251",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "DIFF",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0252",
+      "program": [
+        "ROTL",
+        "NEG",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0253",
+      "program": [
+        "NEG",
+        "REV",
+        "PREFIX",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0254",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0255",
+      "program": [
+        "NEG",
+        "MUL2",
+        "ADD1",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0256",
+      "program": [
+        "SORT",
+        "DIFF",
+        "MUL2",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0257",
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "DIFF",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0258",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0259",
+      "program": [
+        "ROTL",
+        "ROTL",
+        "NEG",
+        "SWAP",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0260",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0261",
+      "program": [
+        "SORT",
+        "MUL2",
+        "NEG",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0262",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0263",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "REV",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0264",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0265",
+      "program": [
+        "SORT",
+        "DIFF",
+        "SORT",
+        "SWAP",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0266",
+      "program": [
+        "NEG",
+        "DIFF",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0267",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ZIGZAG",
+        "NEG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0268",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0269",
+      "program": [
+        "ADD1",
+        "SORT",
+        "ZIGZAG",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0270",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0271",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "DIFF",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0272",
+      "program": [
+        "REV",
+        "DIFF",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0273",
+      "program": [
+        "DIFF",
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0274",
+      "program": [
+        "ROTL",
+        "ROTL",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0275",
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "NEG",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0276",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0277",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "MUL2",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0278",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0279",
+      "program": [
+        "ADD1",
+        "SORT",
+        "ADD1",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0280",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0281",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "SORT",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0282",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0283",
+      "program": [
+        "PREFIX",
+        "SORT",
+        "ROTL",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0284",
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0285",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "MUL2",
+        "ADD1",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0286",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0287",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "MUL2",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0288",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0289",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "ADD1",
+        "PREFIX",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0290",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0291",
+      "program": [
+        "DIFF",
+        "REV",
+        "PREFIX",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0292",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0293",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "ADD1",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0294",
+      "program": [
+        "ADD1",
+        "ROTL",
+        "MUL2",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0295",
+      "program": [
+        "SWAP",
+        "NEG",
+        "REV",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0296",
+      "program": [
+        "ADD1",
+        "ROTL",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0297",
+      "program": [
+        "DIFF",
+        "SORT",
+        "DIFF",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0298",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0299",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ADD1",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0300",
+      "program": [
+        "DIFF",
+        "NEG",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0301",
+      "program": [
+        "ROTL",
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0302",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0303",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "SORT",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0304",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "SORT",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0305",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "MUL2",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0306",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0307",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "SWAP",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0308",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0309",
+      "program": [
+        "REV",
+        "NEG",
+        "PREFIX",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0310",
+      "program": [
+        "REV",
+        "ROTL",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0311",
+      "program": [
+        "REV",
+        "PREFIX",
+        "MUL2",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0312",
+      "program": [
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0313",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "ZIGZAG",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0314",
+      "program": [
+        "NEG",
+        "ADD1",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0315",
+      "program": [
+        "SORT",
+        "NEG",
+        "PREFIX",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0316",
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0317",
+      "program": [
+        "SORT",
+        "REV",
+        "ZIGZAG",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0318",
+      "program": [
+        "SWAP",
+        "NEG",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0319",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "DIFF",
+        "ZIGZAG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0320",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "SORT",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0321",
+      "program": [
+        "NEG",
+        "ADD1",
+        "REV",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0322",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0323",
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "SORT",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0324",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0325",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "PREFIX",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0326",
+      "program": [
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0327",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "REV",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0328",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0329",
+      "program": [
+        "SORT",
+        "ZIGZAG",
+        "ADD1",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0330",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0331",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0332",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0333",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "MUL2",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0334",
+      "program": [
+        "REV",
+        "NEG",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0335",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "DIFF",
+        "SORT",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0336",
+      "program": [
+        "SWAP",
+        "NEG",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0337",
+      "program": [
+        "DIFF",
+        "DIFF",
+        "ROTL",
+        "REV",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0338",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0339",
+      "program": [
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0340",
+      "program": [
+        "SORT",
+        "ROTL",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0341",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "ADD1",
+        "SWAP",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0342",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0343",
+      "program": [
+        "MUL2",
+        "NEG",
+        "MUL2",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0344",
+      "program": [
+        "SORT",
+        "PREFIX",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0345",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "SORT",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0346",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0347",
+      "program": [
+        "NEG",
+        "ZIGZAG",
+        "REV",
+        "ROTL",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0348",
+      "program": [
+        "REV",
+        "DIFF",
+        "SORT",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0349",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "ADD1",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0350",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0351",
+      "program": [
+        "PREFIX",
+        "SORT",
+        "REV",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0352",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0353",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "MUL2",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0354",
+      "program": [
+        "NEG",
+        "SORT",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0355",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "ZIGZAG",
+        "NEG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0356",
+      "program": [
+        "REV",
+        "DIFF",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0357",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "DIFF",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0358",
+      "program": [
+        "PREFIX",
+        "PREFIX",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0359",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "MUL2",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0360",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0361",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "SORT",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0362",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "ADD1",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0363",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "MUL2",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0364",
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0365",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0366",
+      "program": [
+        "SORT",
+        "MUL2",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0367",
+      "program": [
+        "DIFF",
+        "DIFF",
+        "ADD1",
+        "SWAP",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0368",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0369",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "MUL2",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0370",
+      "program": [
+        "NEG",
+        "ROTL",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0371",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0372",
+      "program": [
+        "SORT",
+        "MUL2",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0373",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "SORT",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0374",
+      "program": [
+        "ADD1",
+        "MUL2",
+        "DIFF",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0375",
+      "program": [
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0376",
+      "program": [
+        "SORT",
+        "ROTL",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0377",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "PREFIX",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0378",
+      "program": [
+        "REV",
+        "ADD1",
+        "MUL2",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0379",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "MUL2",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0380",
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "REV",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0381",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0382",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0383",
+      "program": [
+        "ADD1",
+        "SORT",
+        "ROTL",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0384",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ZIGZAG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0385",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "NEG",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0386",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0387",
+      "program": [
+        "MUL2",
+        "NEG",
+        "PREFIX",
+        "SORT",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0388",
+      "program": [
+        "MUL2",
+        "REV",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0389",
+      "program": [
+        "SORT",
+        "ZIGZAG",
+        "REV",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0390",
+      "program": [
+        "REV",
+        "ADD1",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0391",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "MUL2",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0392",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0393",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "DIFF",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0394",
+      "program": [
+        "DIFF",
+        "REV",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0395",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "SWAP",
+        "NEG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0396",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "REV",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0397",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "ADD1",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0398",
+      "program": [
+        "MUL2",
+        "SORT",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0399",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "NEG",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0400",
+      "program": [
+        "DIFF",
+        "DIFF",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0401",
+      "program": [
+        "ZIGZAG",
+        "PREFIX",
+        "ROTL",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0402",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0403",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "ROTL",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0404",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0405",
+      "program": [
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0406",
+      "program": [
+        "SORT",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0407",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "ROTL",
+        "MUL2",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0408",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0409",
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "MUL2",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0410",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "SORT",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0411",
+      "program": [
+        "ADD1",
+        "MUL2",
+        "ADD1",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0412",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0413",
+      "program": [
+        "NEG",
+        "ROTL",
+        "MUL2",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0414",
+      "program": [
+        "ROTL",
+        "REV",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0415",
+      "program": [
+        "SORT",
+        "ROTL",
+        "ZIGZAG",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0416",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0417",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "DIFF",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0418",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0419",
+      "program": [
+        "MUL2",
+        "REV",
+        "PREFIX",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0420",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0421",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "DIFF",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0422",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0423",
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "SWAP",
+        "ROTL",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0424",
+      "program": [
+        "SORT",
+        "DIFF",
+        "SWAP",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0425",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "SORT",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0426",
+      "program": [
+        "SORT",
+        "PREFIX",
+        "NEG",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0427",
+      "program": [
+        "DIFF",
+        "SORT",
+        "PREFIX",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0428",
+      "program": [
+        "DIFF",
+        "SORT",
+        "REV",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0429",
+      "program": [
+        "PREFIX",
+        "SORT",
+        "REV",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0430",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0431",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0432",
+      "program": [
+        "DIFF",
+        "REV",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0433",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "ROTL",
+        "ZIGZAG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0434",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0435",
+      "program": [
+        "NEG",
+        "ADD1",
+        "SWAP",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0436",
+      "program": [
+        "MUL2",
+        "SORT",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0437",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "ADD1",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0438",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "NEG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0439",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "MUL2",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0440",
+      "program": [
+        "REV",
+        "NEG",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0441",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "SWAP",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0442",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0443",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0444",
+      "program": [
+        "ZIGZAG",
+        "REV",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0445",
+      "program": [
+        "SORT",
+        "SWAP",
+        "NEG",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0446",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0447",
+      "program": [
+        "MUL2",
+        "NEG",
+        "PREFIX",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0448",
+      "program": [
+        "PREFIX",
+        "REV",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0449",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "SWAP",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0450",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0451",
+      "program": [
+        "SORT",
+        "ADD1",
+        "ADD1",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0452",
+      "program": [
+        "MUL2",
+        "SORT",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0453",
+      "program": [
+        "ADD1",
+        "REV",
+        "PREFIX",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0454",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0455",
+      "program": [
+        "MUL2",
+        "NEG",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0456",
+      "program": [
+        "REV",
+        "ADD1",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0457",
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0458",
+      "program": [
+        "MUL2",
+        "REV",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0459",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "NEG",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0460",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0461",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ROTL",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0462",
+      "program": [
+        "DIFF",
+        "REV",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0463",
+      "program": [
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "ROTL",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0464",
+      "program": [
+        "SORT",
+        "MUL2",
+        "MUL2",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0465",
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "DIFF",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0466",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0467",
+      "program": [
+        "SORT",
+        "DIFF",
+        "ROTL",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0468",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0469",
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "PREFIX",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0470",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0471",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "SORT",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0472",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "SORT",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0473",
+      "program": [
+        "ADD1",
+        "MUL2",
+        "SORT",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0474",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "NEG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0475",
+      "program": [
+        "REV",
+        "SWAP",
+        "ROTL",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0476",
+      "program": [
+        "NEG",
+        "REV",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0477",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "ROTL",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0478",
+      "program": [
+        "SORT",
+        "DIFF",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0479",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "SORT",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0480",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0481",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "ROTL",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0482",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0483",
+      "program": [
+        "NEG",
+        "ZIGZAG",
+        "REV",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0484",
+      "program": [
+        "MUL2",
+        "SWAP",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0485",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "DIFF",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0486",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0487",
+      "program": [
+        "NEG",
+        "DIFF",
+        "SORT",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0488",
+      "program": [
+        "ZIGZAG",
+        "PREFIX",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0489",
+      "program": [
+        "SWAP",
+        "NEG",
+        "MUL2",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0490",
+      "program": [
+        "SORT",
+        "ROTL",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0491",
+      "program": [
+        "PREFIX",
+        "ADD1",
+        "NEG",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0492",
+      "program": [
+        "NEG",
+        "ADD1",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0493",
+      "program": [
+        "MUL2",
+        "PREFIX",
+        "ROTL",
+        "ZIGZAG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0494",
+      "program": [
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0495",
+      "program": [
+        "ADD1",
+        "MUL2",
+        "ZIGZAG",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0496",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0497",
+      "program": [
+        "NEG",
+        "SWAP",
+        "DIFF",
+        "SORT",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0498",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0499",
+      "program": [
+        "NEG",
+        "MUL2",
+        "SORT",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0500",
+      "program": [
+        "ROTL",
+        "NEG",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0501",
+      "program": [
+        "NEG",
+        "MUL2",
+        "MUL2",
+        "REV",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0502",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0503",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0504",
+      "program": [
+        "SORT",
+        "SWAP",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0505",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "PREFIX",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0506",
+      "program": [
+        "MUL2",
+        "SORT",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0507",
+      "program": [
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0508",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0509",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0510",
+      "program": [
+        "REV",
+        "SWAP",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0511",
+      "program": [
+        "ROTL",
+        "SWAP",
+        "NEG",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0512",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0513",
+      "program": [
+        "SORT",
+        "DIFF",
+        "SWAP",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0514",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0515",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "NEG",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0516",
+      "program": [
+        "PREFIX",
+        "REV",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0517",
+      "program": [
+        "ADD1",
+        "ROTL",
+        "ZIGZAG",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0518",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0519",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "SWAP",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0520",
+      "program": [
+        "NEG",
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0521",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0522",
+      "program": [
+        "DIFF",
+        "REV",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0523",
+      "program": [
+        "REV",
+        "MUL2",
+        "SWAP",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0524",
+      "program": [
+        "REV",
+        "PREFIX",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0525",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "DIFF",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0526",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0527",
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "DIFF",
+        "ADD1",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0528",
+      "program": [
+        "MUL2",
+        "SORT",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0529",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "DIFF",
+        "REV",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0530",
+      "program": [
+        "ROTL",
+        "SWAP",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0531",
+      "program": [
+        "NEG",
+        "ADD1",
+        "MUL2",
+        "SWAP",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0532",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0533",
+      "program": [
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0534",
+      "program": [
+        "NEG",
+        "REV",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0535",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "PREFIX",
+        "ROTL",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0536",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0537",
+      "program": [
+        "SORT",
+        "SWAP",
+        "PREFIX",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0538",
+      "program": [
+        "ADD1",
+        "MUL2",
+        "MUL2",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0539",
+      "program": [
+        "NEG",
+        "SORT",
+        "ADD1",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0540",
+      "program": [
+        "REV",
+        "PREFIX",
+        "NEG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0541",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "PREFIX",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0542",
+      "program": [
+        "MUL2",
+        "NEG",
+        "SORT",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0543",
+      "program": [
+        "MUL2",
+        "REV",
+        "ROTL",
+        "NEG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0544",
+      "program": [
+        "SORT",
+        "REV",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0545",
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "REV",
+        "ZIGZAG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0546",
+      "program": [
+        "NEG",
+        "REV",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0547",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0548",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0549",
+      "program": [
+        "PREFIX",
+        "REV",
+        "PREFIX",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0550",
+      "program": [
+        "NEG",
+        "SWAP",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0551",
+      "program": [
+        "PREFIX",
+        "PREFIX",
+        "REV",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0552",
+      "program": [
+        "PREFIX",
+        "PREFIX",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0553",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0554",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0555",
+      "program": [
+        "MUL2",
+        "SORT",
+        "ZIGZAG",
+        "NEG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0556",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0557",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "ZIGZAG",
+        "NEG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0558",
+      "program": [
+        "ADD1",
+        "SORT",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0559",
+      "program": [
+        "NEG",
+        "ADD1",
+        "ROTL",
+        "PREFIX",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0560",
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0561",
+      "program": [
+        "DIFF",
+        "SORT",
+        "REV",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0562",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0563",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "MUL2",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0564",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0565",
+      "program": [
+        "NEG",
+        "ZIGZAG",
+        "SWAP",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0566",
+      "program": [
+        "NEG",
+        "ADD1",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0567",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "MUL2",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0568",
+      "program": [
+        "NEG",
+        "ROTL",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0569",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "DIFF",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0570",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0571",
+      "program": [
+        "ADD1",
+        "NEG",
+        "PREFIX",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0572",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0573",
+      "program": [
+        "SORT",
+        "PREFIX",
+        "REV",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0574",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0575",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "SWAP",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0576",
+      "program": [
+        "NEG",
+        "REV",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0577",
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "ADD1",
+        "ROTL",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0578",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0579",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "PREFIX",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0580",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0581",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ROTL",
+        "ROTL",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0582",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0583",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "ZIGZAG",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0584",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "MUL2",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0585",
+      "program": [
+        "REV",
+        "ADD1",
+        "ADD1",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0586",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "MUL2",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0587",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0588",
+      "program": [
+        "DIFF",
+        "ROTL",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0589",
+      "program": [
+        "ADD1",
+        "SORT",
+        "ADD1",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0590",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0591",
+      "program": [
+        "SWAP",
+        "NEG",
+        "DIFF",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0592",
+      "program": [
+        "ZIGZAG",
+        "PREFIX",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0593",
+      "program": [
+        "SORT",
+        "SWAP",
+        "PREFIX",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0594",
+      "program": [
+        "SORT",
+        "ADD1",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0595",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "DIFF",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0596",
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0597",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "DIFF",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0598",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0599",
+      "program": [
+        "ZIGZAG",
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0600",
+      "program": [
+        "SORT",
+        "DIFF",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0601",
+      "program": [
+        "NEG",
+        "ZIGZAG",
+        "PREFIX",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0602",
+      "program": [
+        "ZIGZAG",
+        "DIFF",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0603",
+      "program": [
+        "ADD1",
+        "PREFIX",
+        "SORT",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0604",
+      "program": [
+        "PREFIX",
+        "NEG",
+        "SORT",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0605",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "REV",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0606",
+      "program": [
+        "NEG",
+        "MUL2",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0607",
+      "program": [
+        "SORT",
+        "ZIGZAG",
+        "NEG",
+        "SWAP",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0608",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0609",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "SORT",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0610",
+      "program": [
+        "NEG",
+        "MUL2",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0611",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0612",
+      "program": [
+        "REV",
+        "ADD1",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0613",
+      "program": [
+        "MUL2",
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0614",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0615",
+      "program": [
+        "ADD1",
+        "NEG",
+        "PREFIX",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0616",
+      "program": [
+        "ZIGZAG",
+        "PREFIX",
+        "REV",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0617",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "SWAP",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0618",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0619",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "DIFF",
+        "SORT",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0620",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "DIFF",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0621",
+      "program": [
+        "ADD1",
+        "REV",
+        "DIFF",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0622",
+      "program": [
+        "SORT",
+        "ROTL",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0623",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "ROTL",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0624",
+      "program": [
+        "SORT",
+        "PREFIX",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0625",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "PREFIX",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0626",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0627",
+      "program": [
+        "SORT",
+        "NEG",
+        "ROTL",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0628",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "NEG",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0629",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "DIFF",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0630",
+      "program": [
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0631",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "MUL2",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0632",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "NEG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0633",
+      "program": [
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0634",
+      "program": [
+        "REV",
+        "NEG",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0635",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "DIFF",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0636",
+      "program": [
+        "SORT",
+        "NEG",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0637",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "ADD1",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0638",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ROTL",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0639",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ADD1",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0640",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0641",
+      "program": [
+        "NEG",
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0642",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0643",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "PREFIX",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0644",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0645",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "REV",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0646",
+      "program": [
+        "ZIGZAG",
+        "REV",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0647",
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "ROTL",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0648",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0649",
+      "program": [
+        "ADD1",
+        "NEG",
+        "MUL2",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0650",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0651",
+      "program": [
+        "NEG",
+        "REV",
+        "ADD1",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0652",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "PREFIX",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0653",
+      "program": [
+        "PREFIX",
+        "SORT",
+        "ZIGZAG",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0654",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0655",
+      "program": [
+        "NEG",
+        "ADD1",
+        "SORT",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0656",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "NEG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0657",
+      "program": [
+        "DIFF",
+        "DIFF",
+        "SWAP",
+        "ROTL",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0658",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0659",
+      "program": [
+        "NEG",
+        "SORT",
+        "MUL2",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0660",
+      "program": [
+        "NEG",
+        "DIFF",
+        "SORT",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0661",
+      "program": [
+        "REV",
+        "PREFIX",
+        "SORT",
+        "SWAP",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0662",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0663",
+      "program": [
+        "REV",
+        "ADD1",
+        "SWAP",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0664",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0665",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "REV",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0666",
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "SWAP",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0667",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ZIGZAG",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0668",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0669",
+      "program": [
+        "NEG",
+        "SORT",
+        "DIFF",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0670",
+      "program": [
+        "NEG",
+        "DIFF",
+        "ADD1",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0671",
+      "program": [
+        "ZIGZAG",
+        "PREFIX",
+        "SORT",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0672",
+      "program": [
+        "DIFF",
+        "REV",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0673",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "ROTL",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0674",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0675",
+      "program": [
+        "ROTL",
+        "MUL2",
+        "REV",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0676",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0677",
+      "program": [
+        "SORT",
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0678",
+      "program": [
+        "SORT",
+        "NEG",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0679",
+      "program": [
+        "REV",
+        "PREFIX",
+        "SORT",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0680",
+      "program": [
+        "MUL2",
+        "REV",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0681",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "PREFIX",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0682",
+      "program": [
+        "ADD1",
+        "SORT",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0683",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "DIFF",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0684",
+      "program": [
+        "ADD1",
+        "NEG",
+        "SORT",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0685",
+      "program": [
+        "REV",
+        "ZIGZAG",
+        "NEG",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0686",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0687",
+      "program": [
+        "ZIGZAG",
+        "ZIGZAG",
+        "ADD1",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0688",
+      "program": [
+        "REV",
+        "PREFIX",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0689",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0690",
+      "program": [
+        "REV",
+        "ADD1",
+        "MUL2",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0691",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "MUL2",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0692",
+      "program": [
+        "ZIGZAG",
+        "PREFIX",
+        "ADD1",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0693",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "DIFF",
+        "DIFF",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0694",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0695",
+      "program": [
+        "DIFF",
+        "REV",
+        "ROTL",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0696",
+      "program": [
+        "SORT",
+        "REV",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0697",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "SORT",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0698",
+      "program": [
+        "ADD1",
+        "SORT",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0699",
+      "program": [
+        "ZIGZAG",
+        "DIFF",
+        "ADD1",
+        "DIFF",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0700",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "DIFF",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0701",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "ADD1",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0702",
+      "program": [
+        "REV",
+        "ADD1",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0703",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "ZIGZAG",
+        "ROTL",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0704",
+      "program": [
+        "ZIGZAG",
+        "DIFF",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0705",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "PREFIX",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0706",
+      "program": [
+        "DIFF",
+        "ADD1",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0707",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "MUL2",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0708",
+      "program": [
+        "NEG",
+        "DIFF",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0709",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0710",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0711",
+      "program": [
+        "NEG",
+        "SORT",
+        "PREFIX",
+        "SWAP",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0712",
+      "program": [
+        "REV",
+        "DIFF",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0713",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "DIFF",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0714",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "DIFF",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0715",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0716",
+      "program": [
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0717",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "REV",
+        "ADD1",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0718",
+      "program": [
+        "DIFF",
+        "NEG",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0719",
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "ZIGZAG",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0720",
+      "program": [
+        "ADD1",
+        "SORT",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0721",
+      "program": [
+        "NEG",
+        "SORT",
+        "ADD1",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0722",
+      "program": [
+        "REV",
+        "PREFIX",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0723",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "MUL2",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0724",
+      "program": [
+        "MUL2",
+        "ADD1",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0725",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "NEG",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0726",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "SORT",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0727",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "DIFF",
+        "MUL2",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0728",
+      "program": [
+        "ZIGZAG",
+        "MUL2",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0729",
+      "program": [
+        "PREFIX",
+        "REV",
+        "ADD1",
+        "ZIGZAG",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0730",
+      "program": [
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0731",
+      "program": [
+        "ZIGZAG",
+        "ADD1",
+        "MUL2",
+        "REV",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0732",
+      "program": [
+        "PREFIX",
+        "SWAP",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0733",
+      "program": [
+        "MUL2",
+        "NEG",
+        "DIFF",
+        "SORT",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0734",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0735",
+      "program": [
+        "PREFIX",
+        "MUL2",
+        "ADD1",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0736",
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0737",
+      "program": [
+        "DIFF",
+        "ZIGZAG",
+        "REV",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0738",
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0739",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "DIFF",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0740",
+      "program": [
+        "DIFF",
+        "MUL2",
+        "DIFF",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0741",
+      "program": [
+        "DIFF",
+        "REV",
+        "ADD1",
+        "ADD1",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0742",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0743",
+      "program": [
+        "SORT",
+        "REV",
+        "MUL2",
+        "SWAP",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0744",
+      "program": [
+        "MUL2",
+        "ROTL",
+        "ZIGZAG",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0745",
+      "program": [
+        "PREFIX",
+        "ZIGZAG",
+        "SWAP",
+        "PREFIX",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0746",
+      "program": [
+        "ADD1",
+        "ADD1",
+        "ADD1",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0747",
+      "program": [
+        "MUL2",
+        "SORT",
+        "ZIGZAG",
+        "PREFIX",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0748",
+      "program": [
+        "NEG",
+        "SORT",
+        "SWAP",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0749",
+      "program": [
+        "ROTL",
+        "DIFF",
+        "ZIGZAG",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0750",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0751",
+      "program": [
+        "NEG",
+        "MUL2",
+        "MUL2",
+        "ADD1",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0752",
+      "program": [
+        "NEG",
+        "ZIGZAG",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0753",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "MUL2",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0754",
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0755",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "SWAP",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0756",
+      "program": [
+        "NEG",
+        "REV",
+        "ADD1",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0757",
+      "program": [
+        "REV",
+        "PREFIX",
+        "ROTL",
+        "ROTL",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0758",
+      "program": [
+        "ADD1",
+        "REV",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0759",
+      "program": [
+        "PREFIX",
+        "ROTL",
+        "ROTL",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0760",
+      "program": [
+        "DIFF",
+        "SWAP",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0761",
+      "program": [
+        "ADD1",
+        "NEG",
+        "PREFIX",
+        "SORT",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0762",
+      "program": [
+        "ADD1",
+        "NEG",
+        "REV",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0763",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "ROTL",
+        "DIFF",
+        "NEG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0764",
+      "program": [
+        "SWAP",
+        "DIFF",
+        "NEG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0765",
+      "program": [
+        "SORT",
+        "NEG",
+        "ADD1",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0766",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ROTL",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0767",
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "ZIGZAG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0768",
+      "program": [
+        "ROTL",
+        "ADD1",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0769",
+      "program": [
+        "ROTL",
+        "PREFIX",
+        "PREFIX",
+        "NEG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0770",
+      "program": [
+        "NEG",
+        "PREFIX",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0771",
+      "program": [
+        "REV",
+        "DIFF",
+        "ADD1",
+        "ZIGZAG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0772",
+      "program": [
+        "DIFF",
+        "DIFF",
+        "ROTL",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0773",
+      "program": [
+        "SWAP",
+        "PREFIX",
+        "ZIGZAG",
+        "PREFIX",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0774",
+      "program": [
+        "ADD1",
+        "DIFF",
+        "DIFF",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0775",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "MUL2",
+        "NEG",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0776",
+      "program": [
+        "REV",
+        "SWAP",
+        "ZIGZAG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0777",
+      "program": [
+        "ZIGZAG",
+        "DIFF",
+        "ROTL",
+        "DIFF",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0778",
+      "program": [
+        "SWAP",
+        "REV",
+        "MUL2",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0779",
+      "program": [
+        "SORT",
+        "SWAP",
+        "DIFF",
+        "ADD1",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0780",
+      "program": [
+        "DIFF",
+        "REV",
+        "ADD1",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0781",
+      "program": [
+        "ZIGZAG",
+        "NEG",
+        "SWAP",
+        "ROTL",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0782",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0783",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "ADD1",
+        "ZIGZAG",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0784",
+      "program": [
+        "SWAP",
+        "ROTL",
+        "ADD1",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0785",
+      "program": [
+        "MUL2",
+        "DIFF",
+        "ADD1",
+        "ZIGZAG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0786",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "NEG",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0787",
+      "program": [
+        "PREFIX",
+        "REV",
+        "PREFIX",
+        "ADD1",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0788",
+      "program": [
+        "NEG",
+        "ROTL",
+        "ROTL",
+        "SWAP"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0789",
+      "program": [
+        "ROTL",
+        "ZIGZAG",
+        "PREFIX",
+        "PREFIX",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0790",
+      "program": [
+        "ADD1",
+        "SWAP",
+        "PREFIX",
+        "SORT"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0791",
+      "program": [
+        "SWAP",
+        "ADD1",
+        "PREFIX",
+        "SORT",
+        "ROTL"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0792",
+      "program": [
+        "SORT",
+        "ROTL",
+        "NEG",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0793",
+      "program": [
+        "ADD1",
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0794",
+      "program": [
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0795",
+      "program": [
+        "MUL2",
+        "ZIGZAG",
+        "DIFF",
+        "REV",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0796",
+      "program": [
+        "NEG",
+        "SORT",
+        "ZIGZAG",
+        "ZIGZAG"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0797",
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "NEG",
+        "DIFF",
+        "DIFF"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0798",
+      "program": [
+        "SWAP",
+        "ZIGZAG",
+        "REV",
+        "PREFIX"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0799",
+      "program": [
+        "SORT",
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    }
+  ],
+  "schema_version": 1
+}

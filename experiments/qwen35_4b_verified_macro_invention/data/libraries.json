@@ -1,0 +1,703 @@
+{
+  "libraries": {
+    "base": {
+      "id": "base-469fc2a9dc4782c6",
+      "macros": [],
+      "provenance": "base primitives only"
+    },
+    "designed_ceiling": {
+      "id": "designed_ceiling-1ebbde85d208cc40",
+      "macros": [
+        {
+          "expansion": [
+            "REV",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "REV_ADD",
+          "support": 12,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "ROTL",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "ROTL_PREFIX",
+          "support": 10,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "SWAP",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "SWAP_MUL",
+          "support": 11,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "REV",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "DECOY_10",
+          "support": 12,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "DECOY_02",
+          "support": 10,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "ROTL",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "DECOY_15",
+          "support": 10,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "DECOY_01",
+          "support": 9,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "DECOY_04",
+          "support": 9,
+          "token": "M7"
+        }
+      ],
+      "provenance": "generator-known recurrent motifs; non-discovery ceiling"
+    },
+    "mined": {
+      "id": "mined-c222f7b9d9f67843",
+      "macros": [
+        {
+          "expansion": [
+            "REV",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 12,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "REV",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 12,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "SWAP"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 11,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "SWAP",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 11,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "DIFF",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "NEG",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M7"
+        }
+      ],
+      "provenance": "deterministic frequency-ranked nondegenerate train-only subsequences"
+    },
+    "mined_hint": {
+      "id": "mined_hint-6a56d2d30e6d92b4",
+      "macros": [
+        {
+          "expansion": [
+            "REV",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 12,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "REV",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 12,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "SWAP"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 11,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "SWAP",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 11,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "DIFF",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "NEG",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "DETERMINISTIC_MINER",
+          "support": 10,
+          "token": "M7"
+        }
+      ],
+      "provenance": "identical mined chunks displayed but forbidden as callable output actions"
+    },
+    "random_0": {
+      "draw_seed": 991,
+      "id": "random_0-e96f0d1e5e0e0a00",
+      "macros": [
+        {
+          "expansion": [
+            "MUL2",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 9,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "PREFIX",
+            "SORT"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 8,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "DIFF",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 8,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 9,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "ROTL",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 10,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 9,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 8,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "SORT",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_991",
+          "support": 8,
+          "token": "M7"
+        }
+      ],
+      "provenance": "train-only non-selected placebo matched to mined length/support bins"
+    },
+    "random_1": {
+      "draw_seed": 992,
+      "id": "random_1-52f2f91283981858",
+      "macros": [
+        {
+          "expansion": [
+            "DIFF",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 8,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "ROTL",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 10,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "PREFIX",
+            "SORT"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 8,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "SORT",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 8,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 9,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 9,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "SWAP",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 8,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_992",
+          "support": 8,
+          "token": "M7"
+        }
+      ],
+      "provenance": "train-only non-selected placebo matched to mined length/support bins"
+    },
+    "random_2": {
+      "draw_seed": 993,
+      "id": "random_2-3fa20f7a92a4a246",
+      "macros": [
+        {
+          "expansion": [
+            "ADD1",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 9,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 8,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "SORT",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 8,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 9,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "SWAP",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 8,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "DIFF",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 8,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "ROTL",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 10,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "PREFIX",
+            "SORT"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_993",
+          "support": 8,
+          "token": "M7"
+        }
+      ],
+      "provenance": "train-only non-selected placebo matched to mined length/support bins"
+    },
+    "random_3": {
+      "draw_seed": 994,
+      "id": "random_3-c4d57b8a4a83770f",
+      "macros": [
+        {
+          "expansion": [
+            "ADD1",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 9,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "DIFF",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 8,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "ROTL",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 10,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "PREFIX",
+            "SORT"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 8,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 8,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "PREFIX"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 9,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "DIFF",
+            "SWAP"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 9,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_994",
+          "support": 9,
+          "token": "M7"
+        }
+      ],
+      "provenance": "train-only non-selected placebo matched to mined length/support bins"
+    },
+    "random_4": {
+      "draw_seed": 995,
+      "id": "random_4-816ba5230a60ccf4",
+      "macros": [
+        {
+          "expansion": [
+            "DIFF",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 8,
+          "token": "M0"
+        },
+        {
+          "expansion": [
+            "DIFF",
+            "SWAP"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 9,
+          "token": "M1"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "DIFF"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 9,
+          "token": "M2"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "MUL2"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 8,
+          "token": "M3"
+        },
+        {
+          "expansion": [
+            "ADD1",
+            "ROTL"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 9,
+          "token": "M4"
+        },
+        {
+          "expansion": [
+            "SORT",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 8,
+          "token": "M5"
+        },
+        {
+          "expansion": [
+            "PREFIX",
+            "SORT"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 8,
+          "token": "M6"
+        },
+        {
+          "expansion": [
+            "MUL2",
+            "ADD1"
+          ],
+          "length": 2,
+          "source_name": "PLACEBO_SEED_995",
+          "support": 9,
+          "token": "M7"
+        }
+      ],
+      "provenance": "train-only non-selected placebo matched to mined length/support bins"
+    }
+  },
+  "schema_version": 1
+}

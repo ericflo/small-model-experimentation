@@ -1,0 +1,535 @@
+{
+  "experiment_id": "qwen35_4b_verified_macro_invention",
+  "interface_attempt": 3,
+  "metrics": {
+    "exact_expansion_samples": 3,
+    "failed_expanded_depth_counts": {
+      "10": 1,
+      "6": 3,
+      "7": 2,
+      "8": 5,
+      "9": 2
+    },
+    "failed_samples": 13,
+    "failed_samples_over_expanded_depth_five": 13,
+    "failed_samples_with_designated_alias": 10,
+    "failed_samples_with_multiple_macros": 13,
+    "failed_samples_without_designated_alias": 3,
+    "macro_using_samples": 16,
+    "optimal_success_samples": 3,
+    "records": 4,
+    "samples": 16,
+    "strictly_parsed_samples": 16,
+    "successful_record_ids": [
+      "interface-v3-00::designed_ceiling"
+    ],
+    "successful_records": 1,
+    "truncated_samples": 0
+  },
+  "samples": [
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M0",
+      "exact_expansion": false,
+      "expanded_depth": 7,
+      "expanded_program": [
+        "REV",
+        "ADD1",
+        "ROTL",
+        "PREFIX",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "macro_tokens": [
+        "M0",
+        "M1"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M0",
+        "M1",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "record_id": "interface-v3-00::designed_ceiling",
+      "sample_index": 0,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M0",
+      "exact_expansion": true,
+      "expanded_depth": 5,
+      "expanded_program": [
+        "REV",
+        "ADD1",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "macro_tokens": [
+        "M0"
+      ],
+      "optimal_success": true,
+      "parse_error": null,
+      "program": [
+        "M0",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "record_id": "interface-v3-00::designed_ceiling",
+      "sample_index": 1,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M0",
+      "exact_expansion": true,
+      "expanded_depth": 5,
+      "expanded_program": [
+        "REV",
+        "ADD1",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "macro_tokens": [
+        "M0"
+      ],
+      "optimal_success": true,
+      "parse_error": null,
+      "program": [
+        "M0",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "record_id": "interface-v3-00::designed_ceiling",
+      "sample_index": 2,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M0",
+      "exact_expansion": true,
+      "expanded_depth": 5,
+      "expanded_program": [
+        "REV",
+        "ADD1",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "macro_tokens": [
+        "M0"
+      ],
+      "optimal_success": true,
+      "parse_error": null,
+      "program": [
+        "M0",
+        "NEG",
+        "SORT",
+        "ZIGZAG"
+      ],
+      "record_id": "interface-v3-00::designed_ceiling",
+      "sample_index": 3,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M1",
+      "exact_expansion": false,
+      "expanded_depth": 6,
+      "expanded_program": [
+        "ROTL",
+        "PREFIX",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "DIFF"
+      ],
+      "macro_tokens": [
+        "M1",
+        "M2",
+        "M7"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M1",
+        "M2",
+        "M7"
+      ],
+      "record_id": "interface-v3-01::designed_ceiling",
+      "sample_index": 0,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M1",
+      "exact_expansion": false,
+      "expanded_depth": 6,
+      "expanded_program": [
+        "ROTL",
+        "PREFIX",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "DIFF"
+      ],
+      "macro_tokens": [
+        "M1",
+        "M2",
+        "M7"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M1",
+        "M2",
+        "M7"
+      ],
+      "record_id": "interface-v3-01::designed_ceiling",
+      "sample_index": 1,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M1",
+      "exact_expansion": false,
+      "expanded_depth": 6,
+      "expanded_program": [
+        "ROTL",
+        "PREFIX",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "DIFF"
+      ],
+      "macro_tokens": [
+        "M1",
+        "M2",
+        "M7"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M1",
+        "M2",
+        "M7"
+      ],
+      "record_id": "interface-v3-01::designed_ceiling",
+      "sample_index": 2,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M1",
+      "exact_expansion": false,
+      "expanded_depth": 10,
+      "expanded_program": [
+        "ROTL",
+        "PREFIX",
+        "SWAP",
+        "MUL2",
+        "MUL2",
+        "DIFF",
+        "REV",
+        "ADD1",
+        "ROTL",
+        "DIFF"
+      ],
+      "macro_tokens": [
+        "M1",
+        "M2",
+        "M7",
+        "M0",
+        "M5"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M1",
+        "M2",
+        "M7",
+        "M0",
+        "M5"
+      ],
+      "record_id": "interface-v3-01::designed_ceiling",
+      "sample_index": 3,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M2",
+      "exact_expansion": false,
+      "expanded_depth": 9,
+      "expanded_program": [
+        "SWAP",
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "ROTL",
+        "PREFIX"
+      ],
+      "macro_tokens": [
+        "M2",
+        "M1",
+        "M1",
+        "M1"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M2",
+        "M1",
+        "NEG",
+        "M1",
+        "M1"
+      ],
+      "record_id": "interface-v3-02::designed_ceiling",
+      "sample_index": 0,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M2",
+      "exact_expansion": false,
+      "expanded_depth": 7,
+      "expanded_program": [
+        "SWAP",
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "NEG",
+        "ROTL",
+        "ROTL"
+      ],
+      "macro_tokens": [
+        "M2",
+        "M1"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M2",
+        "M1",
+        "NEG",
+        "ROTL",
+        "ROTL"
+      ],
+      "record_id": "interface-v3-02::designed_ceiling",
+      "sample_index": 1,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M2",
+      "exact_expansion": false,
+      "expanded_depth": 9,
+      "expanded_program": [
+        "SWAP",
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "NEG",
+        "ROTL",
+        "PREFIX",
+        "ROTL",
+        "PREFIX"
+      ],
+      "macro_tokens": [
+        "M2",
+        "M1",
+        "M1",
+        "M1"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M2",
+        "M1",
+        "NEG",
+        "M1",
+        "M1"
+      ],
+      "record_id": "interface-v3-02::designed_ceiling",
+      "sample_index": 2,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M2",
+      "exact_expansion": false,
+      "expanded_depth": 8,
+      "expanded_program": [
+        "SWAP",
+        "MUL2",
+        "ROTL",
+        "PREFIX",
+        "NEG",
+        "ROTL",
+        "REV",
+        "ADD1"
+      ],
+      "macro_tokens": [
+        "M2",
+        "M1",
+        "M0"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M2",
+        "M1",
+        "NEG",
+        "ROTL",
+        "M0"
+      ],
+      "record_id": "interface-v3-02::designed_ceiling",
+      "sample_index": 3,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": true,
+      "designated_alias": "M3",
+      "exact_expansion": false,
+      "expanded_depth": 8,
+      "expanded_program": [
+        "REV",
+        "PREFIX",
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "macro_tokens": [
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M3",
+        "M1",
+        "SORT",
+        "M2",
+        "NEG"
+      ],
+      "record_id": "interface-v3-03::designed_ceiling",
+      "sample_index": 0,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": false,
+      "designated_alias": "M3",
+      "exact_expansion": false,
+      "expanded_depth": 8,
+      "expanded_program": [
+        "REV",
+        "ADD1",
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "macro_tokens": [
+        "M0",
+        "M1",
+        "M2"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M0",
+        "M1",
+        "SORT",
+        "M2",
+        "NEG"
+      ],
+      "record_id": "interface-v3-03::designed_ceiling",
+      "sample_index": 1,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": false,
+      "designated_alias": "M3",
+      "exact_expansion": false,
+      "expanded_depth": 8,
+      "expanded_program": [
+        "REV",
+        "ADD1",
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "macro_tokens": [
+        "M0",
+        "M1",
+        "M2"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M0",
+        "M1",
+        "SORT",
+        "M2",
+        "NEG"
+      ],
+      "record_id": "interface-v3-03::designed_ceiling",
+      "sample_index": 2,
+      "truncated": false
+    },
+    {
+      "contains_designated_alias": false,
+      "designated_alias": "M3",
+      "exact_expansion": false,
+      "expanded_depth": 8,
+      "expanded_program": [
+        "REV",
+        "ADD1",
+        "ROTL",
+        "PREFIX",
+        "SORT",
+        "SWAP",
+        "MUL2",
+        "NEG"
+      ],
+      "macro_tokens": [
+        "M0",
+        "M1",
+        "M2"
+      ],
+      "optimal_success": false,
+      "parse_error": null,
+      "program": [
+        "M0",
+        "M1",
+        "SORT",
+        "M2",
+        "NEG"
+      ],
+      "record_id": "interface-v3-03::designed_ceiling",
+      "sample_index": 3,
+      "truncated": false
+    }
+  ],
+  "schema_version": 1,
+  "source": "runs/interface_v3_failed/designed_ceiling.jsonl"
+}

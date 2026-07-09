@@ -1,0 +1,29 @@
+{
+  "run": "smoke",
+  "smoke_gate": {
+    "gates": {
+      "answer_truncation": false,
+      "base_parse": true,
+      "designed_oracle_not_below_base": false,
+      "designed_parse": true,
+      "designed_valid_macro_candidates": false,
+      "overall_parse": true
+    },
+    "metrics": {
+      "base_oracle_hidden_coverage": 0.08333333333333333,
+      "base_parse_rate": 0.6111111111111112,
+      "designed_oracle_hidden_coverage": 0.0,
+      "designed_parse_rate": 0.5694444444444444,
+      "designed_valid_macro_using_candidates": 0,
+      "overall_parse_rate": 0.5972222222222222,
+      "overall_truncation_rate": 0.40046296296296297
+    },
+    "pass": false,
+    "reasons": [
+      "designed_valid_macro_candidates",
+      "answer_truncation",
+      "designed_oracle_not_below_base"
+    ],
+    "required_arms_present": true
+  }
+}

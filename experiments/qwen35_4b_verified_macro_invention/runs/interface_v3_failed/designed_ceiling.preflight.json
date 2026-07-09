@@ -1,0 +1,40 @@
+{
+  "generation_reserve_tokens": 128,
+  "max_model_len": 16384,
+  "max_prompt_plus_reserve_tokens": 345,
+  "max_prompt_tokens": 217,
+  "min_prompt_tokens": 214,
+  "n_records": 4,
+  "pass": true,
+  "records": [
+    {
+      "id": "interface-v3-00::designed_ceiling",
+      "input_record_sha256": "178d3089fc5bf988a76e1b84f8f9680a12c0ca03517d9effb23aaa7e80a7471e",
+      "prompt_plus_reserve_tokens": 345,
+      "prompt_tokens": 217,
+      "rendered_prompt_sha256": "116eb6feffc14abd8444afc4c4f9f4d8925a01ed1e548ff5fd1e92844c3bc0ba"
+    },
+    {
+      "id": "interface-v3-01::designed_ceiling",
+      "input_record_sha256": "971224052307d509d00b7a2d93308824b855abca685cec05744cdedcd17e8ee9",
+      "prompt_plus_reserve_tokens": 343,
+      "prompt_tokens": 215,
+      "rendered_prompt_sha256": "78ade4af334170baa32846b54fb3bc704315846d75fbd6ad22f67176a55ca419"
+    },
+    {
+      "id": "interface-v3-02::designed_ceiling",
+      "input_record_sha256": "531ef958a675c67b241f6c6498c6b1603ed2dd6be08e96cc8c576680ef5dddb7",
+      "prompt_plus_reserve_tokens": 344,
+      "prompt_tokens": 216,
+      "rendered_prompt_sha256": "cde76ed4043df1866e1dd74298801897fbd8dc7885f8984355fea74939c46f57"
+    },
+    {
+      "id": "interface-v3-03::designed_ceiling",
+      "input_record_sha256": "32af7a89c6a70dc8e5be2def923167f3055b37170107af658a032eb6d5e9fb80",
+      "prompt_plus_reserve_tokens": 342,
+      "prompt_tokens": 214,
+      "rendered_prompt_sha256": "94af51f483e51e32d243adff60b74ba01778185a286760393a43a2f7728fe8de"
+    }
+  ],
+  "schema_version": 1
+}

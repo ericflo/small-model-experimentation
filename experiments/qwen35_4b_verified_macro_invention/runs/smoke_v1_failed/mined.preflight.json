@@ -1,0 +1,96 @@
+{
+  "generation_reserve_tokens": 322,
+  "max_model_len": 16384,
+  "max_prompt_plus_reserve_tokens": 1218,
+  "max_prompt_tokens": 896,
+  "min_prompt_tokens": 883,
+  "n_records": 12,
+  "pass": true,
+  "records": [
+    {
+      "id": "smoke-no-reuse-000::mined",
+      "input_record_sha256": "61bd727cd38f2bb171b55cab303c02643c2d43a334b1ddb1f73f6dd634868058",
+      "prompt_plus_reserve_tokens": 1213,
+      "prompt_tokens": 891,
+      "rendered_prompt_sha256": "26ae6a3ec20cd12a609bd6329bb4bd3a84e5a46d5d46bd49f65fe2f381fd24e2"
+    },
+    {
+      "id": "smoke-no-reuse-001::mined",
+      "input_record_sha256": "871f9430a0c1627147c2993ef69b8ff964e6a5e188a3e1f09463dfb094bb4521",
+      "prompt_plus_reserve_tokens": 1210,
+      "prompt_tokens": 888,
+      "rendered_prompt_sha256": "1f80603857acef0b769a2a46fcf9b701368c80805e8267ee4665ca5900fe8a2f"
+    },
+    {
+      "id": "smoke-no-reuse-002::mined",
+      "input_record_sha256": "8be36da1c9568f71fbf4bff4a4ec74ab7eca0f630932bedae81106e44511e65c",
+      "prompt_plus_reserve_tokens": 1209,
+      "prompt_tokens": 887,
+      "rendered_prompt_sha256": "6cce16aae76ab88b4cfea6c2f478c34f0bccbfbe38207c2fa36cb7b0c0aec036"
+    },
+    {
+      "id": "smoke-no-reuse-003::mined",
+      "input_record_sha256": "6b98fe471f21d1cb1a44d735397a5ad89a6b27fb01117f976c3ab03d498c6022",
+      "prompt_plus_reserve_tokens": 1218,
+      "prompt_tokens": 896,
+      "rendered_prompt_sha256": "4271cb2f10ce9e3a7a4b97d4719f53276879006cdc260947b139be157ce90571"
+    },
+    {
+      "id": "smoke-no-reuse-004::mined",
+      "input_record_sha256": "232856f1b1b7d7a3809dc222a7afb1f4ef5447abf087f5ef4178653a80fc5f30",
+      "prompt_plus_reserve_tokens": 1213,
+      "prompt_tokens": 891,
+      "rendered_prompt_sha256": "f69c74ee11668001695f59240249e7671985f4cab27a0aa3a8585b9c7feb24a9"
+    },
+    {
+      "id": "smoke-no-reuse-005::mined",
+      "input_record_sha256": "1ebec4058851468dc77ca3819a4283d7512c935ef87900116b1efa1d48c07ddc",
+      "prompt_plus_reserve_tokens": 1212,
+      "prompt_tokens": 890,
+      "rendered_prompt_sha256": "3c551c66ab9fb0b4fdf86e3d0dc2bdfc83ddc616befd27ffae5d14e94e8fa40a"
+    },
+    {
+      "id": "smoke-reuse-000::mined",
+      "input_record_sha256": "f1424cad953e232f1712fb43c38d38626c561b2acf19fa732b31510bb57b604a",
+      "prompt_plus_reserve_tokens": 1209,
+      "prompt_tokens": 887,
+      "rendered_prompt_sha256": "3f1aec9fc585fe08e5be76f1d5cd078d7cf34b548aa9544a419bd189dc93a004"
+    },
+    {
+      "id": "smoke-reuse-001::mined",
+      "input_record_sha256": "12cde3eebbeec7799ceb58673536b70e33f558b63cc1432226b46defed3e3f4e",
+      "prompt_plus_reserve_tokens": 1212,
+      "prompt_tokens": 890,
+      "rendered_prompt_sha256": "baa151169d54d6904d4df16b60721db098fd229ae9d7a6894dd07a4dcd4cd8eb"
+    },
+    {
+      "id": "smoke-reuse-002::mined",
+      "input_record_sha256": "52b0f89e73e6f057cffbe2239b31d07a5f76ea921c573466e5e4672dbb7bfe18",
+      "prompt_plus_reserve_tokens": 1205,
+      "prompt_tokens": 883,
+      "rendered_prompt_sha256": "acc11ad6441fb1459296f8f4e2e9b653be4352b66c99a9e238a91c36d02d3a68"
+    },
+    {
+      "id": "smoke-reuse-003::mined",
+      "input_record_sha256": "d1fa50318d6e324a521ee7cba954ddae393bfe2f3684ea01abbf09d83a6b527a",
+      "prompt_plus_reserve_tokens": 1214,
+      "prompt_tokens": 892,
+      "rendered_prompt_sha256": "b0da6d8c83ff8334ac5550e24778ddd63d18e563440e793089a2d25ceaa32da6"
+    },
+    {
+      "id": "smoke-reuse-004::mined",
+      "input_record_sha256": "da2301489739012df6e6288454a5192586aeee50e3564f19d5abb022fcc6844e",
+      "prompt_plus_reserve_tokens": 1209,
+      "prompt_tokens": 887,
+      "rendered_prompt_sha256": "2228cc6405c0106e3c3b9bbad91ce637bec5611be486402d6e363902185af1ca"
+    },
+    {
+      "id": "smoke-reuse-005::mined",
+      "input_record_sha256": "2999662cafb1462c6fc98d2b94c7cca72362a47f52675af7d501f6bba94c9f07",
+      "prompt_plus_reserve_tokens": 1213,
+      "prompt_tokens": 891,
+      "rendered_prompt_sha256": "5fc931f3f3bbeac4c8791aafae13aac1485a3abf8a245de8ac733bf3544bba2f"
+    }
+  ],
+  "schema_version": 1
+}

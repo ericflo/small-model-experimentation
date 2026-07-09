@@ -1,0 +1,21 @@
+{
+  "eval_data_used": false,
+  "metrics": {
+    "answer_truncation_rate": 0.75,
+    "macro_using_samples": 4,
+    "records": 4,
+    "samples": 16,
+    "successful_record_ids": [
+      "interface-v2-00::designed_ceiling",
+      "interface-v2-02::designed_ceiling"
+    ],
+    "successful_records": 2,
+    "valid_samples": 4
+  },
+  "pass": false,
+  "requirements": {
+    "answer_truncation_below_0_05": false,
+    "successful_records_at_least_three": false
+  },
+  "schema_version": 1
+}

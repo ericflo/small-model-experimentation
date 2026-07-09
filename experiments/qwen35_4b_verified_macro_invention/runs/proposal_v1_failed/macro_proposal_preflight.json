@@ -1,0 +1,19 @@
+{
+  "generation_reserve_tokens": 898,
+  "max_model_len": 16384,
+  "max_prompt_plus_reserve_tokens": 14449,
+  "max_prompt_tokens": 13551,
+  "min_prompt_tokens": 13551,
+  "n_records": 1,
+  "pass": true,
+  "records": [
+    {
+      "id": "macro-proposal-v1",
+      "input_record_sha256": "cb98048365016fc439f2e1fac167b21f7887e36a9cd76c2de84c718fce27cdce",
+      "prompt_plus_reserve_tokens": 14449,
+      "prompt_tokens": 13551,
+      "rendered_prompt_sha256": "4f77f7c5d3ccf30c125f8f9576bbc67daca3d1b2215ab3da80add503c6c68658"
+    }
+  ],
+  "schema_version": 1
+}

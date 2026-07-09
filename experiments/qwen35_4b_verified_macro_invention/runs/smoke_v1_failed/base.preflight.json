@@ -1,0 +1,96 @@
+{
+  "generation_reserve_tokens": 322,
+  "max_model_len": 16384,
+  "max_prompt_plus_reserve_tokens": 1160,
+  "max_prompt_tokens": 838,
+  "min_prompt_tokens": 825,
+  "n_records": 12,
+  "pass": true,
+  "records": [
+    {
+      "id": "smoke-no-reuse-000::base",
+      "input_record_sha256": "f853cd9cd9380c418499d60f6baaf8710db1fc9292a695b30b2c9a2e1e8fd30a",
+      "prompt_plus_reserve_tokens": 1155,
+      "prompt_tokens": 833,
+      "rendered_prompt_sha256": "17f056e73e3c0900b0145b4cc7ccda37349810662022594697aaa15a49f5b9cf"
+    },
+    {
+      "id": "smoke-no-reuse-001::base",
+      "input_record_sha256": "40e956bf76cda86a1e86b740a429444b707fa1e799b35921634a740a83d0204e",
+      "prompt_plus_reserve_tokens": 1152,
+      "prompt_tokens": 830,
+      "rendered_prompt_sha256": "f68a03031516fdb53b36fb166c36a0b7b1146a8faf0656bfe99560e1cdfb92f5"
+    },
+    {
+      "id": "smoke-no-reuse-002::base",
+      "input_record_sha256": "38e0affbca386f3a4a1442be9db2e28c06c524c6b8f3b80bb8b5d8f5d054960f",
+      "prompt_plus_reserve_tokens": 1151,
+      "prompt_tokens": 829,
+      "rendered_prompt_sha256": "9b83709db976b295527829a0dc0376d846dc7f0b02786e637dc14c9975357189"
+    },
+    {
+      "id": "smoke-no-reuse-003::base",
+      "input_record_sha256": "894bcb831509d47025958bd01e27a8947d850db601de2822ae3358175ce1959a",
+      "prompt_plus_reserve_tokens": 1160,
+      "prompt_tokens": 838,
+      "rendered_prompt_sha256": "64b37f4a9fc627c9a570e361d0317f99984c64cc9114b72f619a97e17a7a5a61"
+    },
+    {
+      "id": "smoke-no-reuse-004::base",
+      "input_record_sha256": "6ce2a18ce883cb0820fb47be28f30089ddcb79d5db99b684b97c140ec500c010",
+      "prompt_plus_reserve_tokens": 1155,
+      "prompt_tokens": 833,
+      "rendered_prompt_sha256": "8af4c5953bb2a0a6811f52d3daf42ea47a27d5e7f7ff6eb2eacf30e9d3f69e60"
+    },
+    {
+      "id": "smoke-no-reuse-005::base",
+      "input_record_sha256": "a3f3855de3a61b8d826e4d6d39f5397b3abc6cc34daf0730f2b0f03e4f978581",
+      "prompt_plus_reserve_tokens": 1154,
+      "prompt_tokens": 832,
+      "rendered_prompt_sha256": "9f7d0bfdafd7b31528157240a6e2d94af7e19f4d05422a5c280cbdcc9eced302"
+    },
+    {
+      "id": "smoke-reuse-000::base",
+      "input_record_sha256": "942b51c36184d67c5692523705e7d79a4bc64ebf4bf04371e548c06cb29b248e",
+      "prompt_plus_reserve_tokens": 1151,
+      "prompt_tokens": 829,
+      "rendered_prompt_sha256": "3be9c9d5f7afd466125dfa6fbda647886517d2007a93f518c3e8080de86ccd0f"
+    },
+    {
+      "id": "smoke-reuse-001::base",
+      "input_record_sha256": "7f33806f5b502e08c69edc03c67b6300d4ee9cb0b0db4c13189b50d0e8a2c269",
+      "prompt_plus_reserve_tokens": 1154,
+      "prompt_tokens": 832,
+      "rendered_prompt_sha256": "c03641d810fd3a00741211f3e35998de209c355168147e8b8707571b543eee53"
+    },
+    {
+      "id": "smoke-reuse-002::base",
+      "input_record_sha256": "8db1001670af76fa7e7d0d7898b5220f7ce5ad3e18c320c7b90eb3ffd00ecf17",
+      "prompt_plus_reserve_tokens": 1147,
+      "prompt_tokens": 825,
+      "rendered_prompt_sha256": "d5e5868d39535a5f2529c83c571aa462c6e6a3d3d95e1af16373c4bbc852dee3"
+    },
+    {
+      "id": "smoke-reuse-003::base",
+      "input_record_sha256": "6c7c4786de04a599fc718a16748f69b3361b52415b6ac4b1f979c92585e7c257",
+      "prompt_plus_reserve_tokens": 1156,
+      "prompt_tokens": 834,
+      "rendered_prompt_sha256": "775b618d3944accdb4471a48f4cdb3e775531f9374b88a70ffa46657a582e1d1"
+    },
+    {
+      "id": "smoke-reuse-004::base",
+      "input_record_sha256": "f167b0d8a2e102160637e1fd961dc64837608f010f9ad886b72a372cfb174f69",
+      "prompt_plus_reserve_tokens": 1151,
+      "prompt_tokens": 829,
+      "rendered_prompt_sha256": "b5649e147746981ac3c166e933964fe77a783dbfe39302ce038e6d615b1a13ec"
+    },
+    {
+      "id": "smoke-reuse-005::base",
+      "input_record_sha256": "280c464c505666446162cd6fa4414118fe402adc628b76b646d8d4d14725984f",
+      "prompt_plus_reserve_tokens": 1155,
+      "prompt_tokens": 833,
+      "rendered_prompt_sha256": "2b141d237393d341b5732911942197b5aa686e218eec0f3c6bfb456317a2e63e"
+    }
+  ],
+  "schema_version": 1
+}
