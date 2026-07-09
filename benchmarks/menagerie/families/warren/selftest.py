@@ -1,6 +1,7 @@
 import ast
 import json
 import random
+import re
 import sys
 import time
 from pathlib import Path
@@ -21,6 +22,7 @@ def main():
     gate_6_monotone_difficulty()
     gate_7_budgets()
     gate_8_purity()
+    gate_9_bare_answer_fallback()
     print("warren selftest: ALL GATES PASSED")
 
 
@@ -202,6 +204,38 @@ def gate_8_purity():
                 bad.append(node.module or "")
     assert not bad, f"gate 8 purity failed; non-stdlib imports: {bad}"
     print("gate 8 purity: PASS")
+
+
+def gate_9_bare_answer_fallback():
+    scores = {"bare": [], "empty": [], "constant": [], "echo": []}
+    for level in LEVELS:
+        for item in family.generate(23, level, 18, "atom"):
+            obs = family.Env(item).reset()
+            oracle_out = family.oracle_policy(item, [])
+            bare = re.sub(r"(?i)^\s*answer\s*:\s*", "", oracle_out)
+            result = family.score(item, [{"obs": obs, "action": bare}])
+            assert result["score"] == 1.0, f"gate 9 bare oracle failed for {item['id']}: {result}"
+            scores["bare"].append(result["score"])
+
+            for policy_name, action in (
+                ("empty", ""),
+                ("constant", "ANSWER: 2"),
+                ("echo", obs),
+            ):
+                result = family.score(item, [{"obs": obs, "action": action}])
+                scores[policy_name].append(result["score"])
+
+    means = {policy_name: _mean(values) for policy_name, values in scores.items()}
+    for policy_name in ("empty", "constant", "echo"):
+        assert means[policy_name] <= 0.1, (
+            f"gate 9 fallback resistance failed for {policy_name}: "
+            f"{means[policy_name]:.4f} > 0.1"
+        )
+    print(
+        "gate 9 bare answer fallback: PASS "
+        f"bare={means['bare']:.4f}, empty={means['empty']:.4f}, "
+        f"constant={means['constant']:.4f}, echo={means['echo']:.4f}"
+    )
 
 
 def _tokens_for_seed(seed):

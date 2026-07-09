@@ -70,7 +70,10 @@ def score(item: dict, transcript: list[dict]) -> dict:
                 parts.append("" if entry.get("action") is None else str(entry.get("action")))
             else:
                 parts.append("" if entry is None else str(entry))
-        got_raw = _extract_answer("\n".join(parts))
+        joined_text = "\n".join(parts)
+        got_raw = _extract_answer(joined_text)
+        if got_raw is None:
+            got_raw = _fallback_bare_answer(joined_text, item)
         got = "" if got_raw is None else got_raw.strip()
         expected = item.get("forced_answer", "")
         if _is_impossible(expected):
@@ -409,6 +412,19 @@ def _extract_answer(text):
     if not matches:
         return None
     return matches[-1]
+
+
+def _fallback_bare_answer(text, item):
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    if not lines:
+        return None
+    candidate = lines[-1].strip()
+    if candidate.upper() == "IMPOSSIBLE":
+        return "IMPOSSIBLE"
+    matches = [token for token in item.get("cycle", []) if token.casefold() == candidate.casefold()]
+    if len(matches) == 1:
+        return matches[0]
+    return None
 
 
 def _is_impossible(value):

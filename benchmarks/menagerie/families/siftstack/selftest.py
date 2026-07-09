@@ -19,6 +19,7 @@ GATES = {
     6: "Monotone difficulty: noisy-oracle (eps=0.5: each turn, 50% oracle action / 50% random) mean score is non-increasing L1->L4 (tolerance 0.05).",
     7: "Budgets: prompt/observation char limits, max_turns caps, generation+scoring < 50 ms/item.",
     8: "Purity: module imports nothing beyond the stdlib.",
+    9: "Bare-answer fallback: bare-answer-oracle scores 1.0; echo/constant/empty stay <= 0.1.",
 }
 
 
@@ -31,6 +32,7 @@ def main():
     gate_6()
     gate_7()
     gate_8()
+    gate_9()
 
 
 def _dump(items):
@@ -197,6 +199,28 @@ def gate_8():
     _assert(not bad, 8, f"Non-stdlib imports: {bad}.")
     importlib.invalidate_caches()
     print(f"PASS gate 8: {GATES[8]}")
+
+
+def gate_9():
+    items = []
+    for level in range(1, 5):
+        for mode in ("atom", "episode"):
+            items.extend(_items(13, level, mode, 40))
+    most_common_gold, _count = Counter(item["gold"] for item in items).most_common(1)[0]
+
+    bare_scores = [_score_action(item, str(item["gold"])) for item in items]
+    empty_scores = [_score_action(item, "") for item in items]
+    constant_scores = [_score_action(item, "ANSWER: " + most_common_gold) for item in items]
+    echo_scores = []
+    for item in items:
+        obs = family.Env(item).reset()
+        echo_scores.append(_score_action(item, obs))
+
+    _assert(_mean(bare_scores) == 1.0, 9, f"Bare-answer mean was {_mean(bare_scores):.4f}.")
+    _assert(_mean(empty_scores) <= 0.1, 9, f"Empty mean was {_mean(empty_scores):.4f}.")
+    _assert(_mean(constant_scores) <= 0.1, 9, f"Constant mean was {_mean(constant_scores):.4f}.")
+    _assert(_mean(echo_scores) <= 0.1, 9, f"Echo mean was {_mean(echo_scores):.4f}.")
+    print(f"PASS gate 9: {GATES[9]}")
 
 
 if __name__ == "__main__":

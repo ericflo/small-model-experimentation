@@ -39,6 +39,7 @@ FORMAT: ENACT <action>
 S=<start>;G=<goal>;F=<flag=0,...|->
 RULES: <rule>; <rule>; ...
 KEY: a:x>y?f=1 moves x->y if f=1. a:!f@x?g=0 flips f at x if g=0. State/flags hidden after this. ACCEPTED applies; REFUSED/MALFORMED do not; all consume turns.
+Reply: ENACT <action>
 ```
 
 Action grammar:
@@ -56,11 +57,11 @@ Rules have two action kinds:
 
 Per-turn feedback strings are exactly:
 
-- `ACCEPTED.` for a legal action that does not complete the rite.
+- `ACCEPTED. Reply: ENACT <action>` for a legal action that does not complete the rite.
 - `THE RITE IS COMPLETE.` for a legal action that moves the marker to the goal; `done=True`.
-- `REFUSED: wrong place.` when the action's source state or state restriction is unsatisfied.
-- `REFUSED: condition unmet.` when the state requirement is satisfied but a guard is false.
-- `REFUSED: unknown action.` when the line is well-formed but the action name is not in the spec.
+- `REFUSED: wrong place. Reply: ENACT <action>` when the action's source state or state restriction is unsatisfied.
+- `REFUSED: condition unmet. Reply: ENACT <action>` when the state requirement is satisfied but a guard is false.
+- `REFUSED: unknown action. Reply: ENACT <action>` when the line is well-formed but the action name is not in the spec.
 - `MALFORMED. Reply exactly: ENACT <action-name>` when the line does not match the action grammar.
 - `THE RITE STALLS.` when `max_turns` is hit without reaching the goal; `done=True`.
 
@@ -125,15 +126,16 @@ FORMAT: ENACT <action>
 S=pyne;G=zulu;F=wawa=0
 RULES: haza:bifi>zulu?wawa=1; kyxi:bifi>zuvo; xoxo:pyne>zuvo; goqa:zuvo>pyne; doha:ticu>zuvo; lune:!wawa@bifi; zucu:pyne>bifi
 KEY: a:x>y?f=1 moves x->y if f=1. a:!f@x?g=0 flips f at x if g=0. State/flags hidden after this. ACCEPTED applies; REFUSED/MALFORMED do not; all consume turns.
+Reply: ENACT <action>
 ```
 
 Oracle transcript:
 
 ```text
 Turn 1 action: ENACT zucu
-Turn 1 observation: ACCEPTED.
+Turn 1 observation: ACCEPTED. Reply: ENACT <action>
 Turn 2 action: ENACT lune
-Turn 2 observation: ACCEPTED.
+Turn 2 observation: ACCEPTED. Reply: ENACT <action>
 Turn 3 action: ENACT haza
 Turn 3 observation: THE RITE IS COMPLETE.
 ```

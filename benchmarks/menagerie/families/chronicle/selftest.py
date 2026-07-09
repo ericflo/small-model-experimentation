@@ -21,7 +21,9 @@ def main():
     gate_monotone_difficulty()
     gate_budgets()
     gate_purity()
-    print("PASS chronicle selftest: 8 contract gates passed")
+    gate_bare_answer_fallback()
+    gate_answer_format_last_line()
+    print("PASS chronicle selftest: 10 contract gates passed")
 
 
 def all_items(seed=7, n=BATCH):
@@ -78,6 +80,12 @@ def gate_oracle_perfection():
     for (level, mode), items in all_items().items():
         scores = [score_action(item, family.oracle_policy(item, [])) for item in items]
         assert all(score == 1.0 for score in scores), f"Gate 3 oracle failed for L{level} {mode}"
+
+
+def gate_bare_answer_fallback():
+    for (level, mode), items in all_items().items():
+        scores = [score_action(item, item["gold"]) for item in items]
+        assert all(score == 1.0 for score in scores), f"Gate 9 bare answer failed for L{level} {mode}"
 
 
 def gate_random_floor():
@@ -155,6 +163,14 @@ def gate_purity():
             imported.add(node.module.split(".", 1)[0])
     non_stdlib = sorted(name for name in imported if name not in sys.stdlib_module_names)
     assert not non_stdlib, f"Gate 8 purity failed: non-stdlib imports {non_stdlib}"
+
+
+def gate_answer_format_last_line():
+    for level in LEVELS:
+        items = family.generate(7, level, BATCH, "atom")
+        for item in items:
+            last_line = item["prompt"].splitlines()[-1]
+            assert "answer:" in last_line.lower(), f"Gate 10 answer format failed for {item['id']}"
 
 
 if __name__ == "__main__":
