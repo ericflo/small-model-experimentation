@@ -1,6 +1,7 @@
 import ast
 import json
 import random
+import re
 import sys
 import time
 from pathlib import Path
@@ -22,6 +23,7 @@ def main():
     _gate_3_oracle_perfection()
     random_means = _gate_4_random_floor()
     _gate_5_degenerate_resistance()
+    _gate_5_bare_answer_oracle()
     noisy_means = _gate_6_monotone_difficulty()
     ms_per_item = _gate_7_budgets()
     _gate_8_purity()
@@ -128,6 +130,26 @@ def _gate_5_degenerate_resistance():
         assert mean <= 0.1, (
             "Gate 5 Degenerate resistance: %s mean %.6f > 0.1" % (name, mean)
         )
+
+
+def _gate_5_bare_answer_oracle():
+    items = _all_items(29, 32)
+    scores = []
+    for item in items:
+        transcript, _seen = _rollout(item, _bare_answer_oracle_policy)
+        result = family.score(item, transcript)
+        scores.append(result["score"])
+        assert result["score"] == 1.0, (
+            "Gate 5 Bare-answer oracle: %s scored %.6f" % (item["id"], result["score"])
+        )
+    mean = sum(scores) / len(scores)
+    assert mean >= 1.0 - 1e-9, (
+        "Gate 5 Bare-answer oracle: mean %.6f < 1.0" % mean
+    )
+
+
+def _bare_answer_oracle_policy(it, hist, obs):
+    return re.sub(r"^\s*ANSWER\s*:\s*", "", family.oracle_policy(it, hist), flags=re.IGNORECASE)
 
 
 def _gate_6_monotone_difficulty():

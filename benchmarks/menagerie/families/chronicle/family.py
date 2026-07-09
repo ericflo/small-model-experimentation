@@ -137,6 +137,8 @@ def score(item: dict, transcript: list[dict]) -> dict:
                 action = str(last)
         action = "" if action is None else str(action)
         raw = _extract_answer(action)
+        if raw is None:
+            raw = _extract_bare_answer(action)
         got = "" if raw is None else raw.strip()
         got_canon = _canonical(got)
         accepted = {_canonical(value) for value in item.get("accepted", [])}
@@ -721,6 +723,20 @@ def _extract_answer(action):
         if match:
             found = match.group(1)
     return found
+
+
+def _extract_bare_answer(action):
+    last_line = None
+    for line in str(action).splitlines():
+        stripped = line.strip()
+        if stripped:
+            last_line = stripped
+    if last_line is None:
+        return None
+    canon = _canonical(last_line)
+    if re.fullmatch(r"[a-z]{4}", canon):
+        return canon
+    return None
 
 
 def _canonical(value):

@@ -71,6 +71,34 @@ def _last_answer_text(action):
     return last_answer
 
 
+def _bare_action_plan(action, item):
+    for raw_line in reversed(str(action).splitlines()):
+        line = raw_line.strip()
+        if not line:
+            continue
+        tokens = line.split()
+        documented = set(item["_actions"])
+        if tokens and all(token.lower() in documented for token in tokens):
+            return line
+        return None
+    return None
+
+
+def _extract_atom_answer(item, transcript):
+    last_answer = None
+    for turn in transcript:
+        answer = _last_answer_text(turn.get("action", ""))
+        if answer is not None:
+            last_answer = answer
+    if last_answer is not None:
+        return last_answer
+    for turn in reversed(transcript):
+        plan = _bare_action_plan(turn.get("action", ""), item)
+        if plan is not None:
+            return plan
+    return None
+
+
 def generate(seed, level, n, mode):
     if level not in _LEVELS:
         raise ValueError("level must be one of 1, 2, 3, 4")
@@ -122,7 +150,7 @@ class Env:
 
         if self.item["mode"] == "atom":
             self.done = True
-            answer = _last_answer_text(action)
+            answer = _extract_atom_answer(self.item, [{"action": action}])
             if answer is not None and _score_atom(self.item, answer)["completed"]:
                 self.terminal_obs = "THE RITE IS COMPLETE."
             else:
@@ -144,13 +172,13 @@ class Env:
                     self.done = True
                     self.terminal_obs = "THE RITE IS COMPLETE."
                     return self.terminal_obs, True
-                obs = "ACCEPTED."
+                obs = "ACCEPTED. Reply: ENACT <action>"
             elif reason == "unknown":
-                obs = "REFUSED: unknown action."
+                obs = "REFUSED: unknown action. Reply: ENACT <action>"
             elif reason == "condition":
-                obs = "REFUSED: condition unmet."
+                obs = "REFUSED: condition unmet. Reply: ENACT <action>"
             else:
-                obs = "REFUSED: wrong place."
+                obs = "REFUSED: wrong place. Reply: ENACT <action>"
 
         if self.turns >= self.item["max_turns"]:
             self.done = True
@@ -161,19 +189,15 @@ class Env:
 
 def score(item, transcript):
     if item["mode"] == "atom":
-        last_answer = None
-        for turn in transcript:
-            answer = _last_answer_text(turn.get("action", ""))
-            if answer is not None:
-                last_answer = answer
-        if last_answer is None:
+        answer = _extract_atom_answer(item, transcript)
+        if answer is None:
             return {
                 "score": 0.0,
                 "turns_used": 0,
                 "optimal_len": item["_optimal_len"],
                 "completed": False,
             }
-        return _score_atom(item, last_answer)
+        return _score_atom(item, answer)
     return _score_episode(item, transcript)
 
 
@@ -404,7 +428,8 @@ def _episode_observation(item):
         "RULES: %s\n"
         "KEY: a:x>y?f=1 moves x->y if f=1. a:!f@x?g=0 flips f at x if g=0. "
         "State/flags hidden after this. ACCEPTED applies; REFUSED/MALFORMED do not; "
-        "all consume turns."
+        "all consume turns.\n"
+        "Reply: ENACT <action>"
         % (
             item["_rite"],
             item["_start"],

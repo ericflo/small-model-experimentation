@@ -57,6 +57,7 @@ _DENYLIST = {
 
 _MEND_RE = re.compile(r"^\s*mend\s+([1-9][0-9]*)\s*:\s*(.*?)\s*$", re.IGNORECASE)
 _ANSWER_RE = re.compile(r"^\s*answer\s*:\s*([1-9][0-9]*)\s*:\s*(.*?)\s*$", re.IGNORECASE)
+_BARE_RE = re.compile(r"^\s*([1-9][0-9]*)\s*:\s*(\S.*?)\s*$")
 _BAD_MEND = "Bad action. Use: MEND <line#>: <replacement source line>"
 _BAD_ANSWER = "Bad action. Use: ANSWER: <line#>: <replacement source line>"
 
@@ -591,6 +592,17 @@ def _extract_answer(text):
     return _extract_last(_ANSWER_RE, text)
 
 
+def _extract_bare(text):
+    return _extract_last(_BARE_RE, text)
+
+
+def _extract_edit(action, mode):
+    parsed = _extract_answer(action) if mode == "atom" else _extract_mend(action)
+    if parsed is None:
+        parsed = _extract_bare(action)
+    return parsed
+
+
 def _apply_replacement(item, program, line_no, source):
     if line_no < 1 or line_no > len(program):
         return None
@@ -608,7 +620,7 @@ def _program_from_mends(item, transcript):
     program = item["program"][:]
     for turn in transcript:
         action = turn.get("action", "") if isinstance(turn, dict) else ""
-        parsed = _extract_mend(action)
+        parsed = _extract_edit(action, "episode")
         if parsed is None:
             continue
         updated = _apply_replacement(item, program, parsed[0], parsed[1])
@@ -621,7 +633,7 @@ def _program_from_answer(item, transcript):
     answer = None
     for turn in transcript:
         action = turn.get("action", "") if isinstance(turn, dict) else ""
-        parsed = _extract_answer(action)
+        parsed = _extract_edit(action, "atom")
         if parsed is not None:
             answer = parsed
     program = item["program"][:]
@@ -641,14 +653,9 @@ class Env:
         return _render(self.item, self.program, atom=(self.item["mode"] == "atom"))
 
     def step(self, action):
-        if self.item["mode"] == "atom":
-            parsed = _extract_answer(action)
-            if parsed is None:
-                return _BAD_ANSWER, False
-        else:
-            parsed = _extract_mend(action)
-            if parsed is None:
-                return _BAD_MEND, False
+        parsed = _extract_edit(action, self.item["mode"])
+        if parsed is None:
+            return _BAD_ANSWER if self.item["mode"] == "atom" else _BAD_MEND, False
         updated = _apply_replacement(self.item, self.program, parsed[0], parsed[1])
         if updated is None:
             return _BAD_ANSWER if self.item["mode"] == "atom" else _BAD_MEND, False

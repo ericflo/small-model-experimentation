@@ -22,6 +22,7 @@ def main():
         ("6. Monotone difficulty", gate_monotone_difficulty),
         ("7. Budgets", gate_budgets),
         ("8. Purity", gate_purity),
+        ("9. Fallback bare-answer", gate_fallback_bare_answer),
     ]
     results = {}
     for label, gate in gates:
@@ -35,7 +36,7 @@ def main():
             print(f"OK {label}")
         else:
             print(f"OK {label}: {result}")
-    print("mirage selftest: ALL 8 GATES PASSED")
+    print("mirage selftest: ALL 9 GATES PASSED")
 
 
 def gate_determinism():
@@ -109,6 +110,34 @@ def gate_degenerate_resistance():
             raise AssertionError(f"{name} mean {mean:.4f} exceeds {cap:.2f}")
         means.append(name + "=" + _fmt(mean))
     return " ".join(means)
+
+
+def gate_fallback_bare_answer():
+    bare_scores = []
+    for item in _batch(seed=29, n=10):
+        result = _run_action(item, item["forced_answer"])
+        if result["score"] != 1.0:
+            raise AssertionError(f"bare-answer oracle failed {item['id']}: {result}")
+        bare_scores.append(result["score"])
+
+    pool = _batch(seed=23, n=60)
+    modal_token = _modal([item["forced_answer"] for item in pool if item["label"] == "solvable"])
+    policies = (
+        ("empty-string", lambda item, obs: "", 0.10),
+        ("echo-the-observation", lambda item, obs: obs, 0.10),
+        ("constant most-common value-token", lambda item, obs: "ANSWER: " + modal_token, 0.10),
+    )
+    means = []
+    for name, policy, cap in policies:
+        scores = []
+        for item in pool:
+            obs = family.Env(item).reset()
+            scores.append(_run_action(item, policy(item, obs), obs)["score"])
+        mean = _mean(scores)
+        if mean > cap:
+            raise AssertionError(f"{name} mean {mean:.4f} exceeds {cap:.2f}")
+        means.append(name + "=" + _fmt(mean))
+    return "bare_answer_mean=" + _fmt(_mean(bare_scores)) + " " + " ".join(means)
 
 
 def gate_monotone_difficulty():

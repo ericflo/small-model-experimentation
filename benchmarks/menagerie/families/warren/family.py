@@ -463,6 +463,13 @@ def _score_atom(item, transcript):
             if candidate is not None:
                 tokens = candidate
     if tokens is None:
+        known_lower = {tunnel.lower() for chamber in item["journal"].values() for tunnel in chamber}
+        for turn in transcript:
+            if isinstance(turn, dict):
+                candidate = _bare_path_tokens(turn.get("action", ""), known_lower)
+                if candidate is not None:
+                    tokens = candidate
+    if tokens is None:
         return {"score": 0.0, "valid": False, "reached": False, "turns_used": 0, "sp": item["sp"]}
 
     current = item["start"]
@@ -494,6 +501,16 @@ def _last_answer_tokens(action):
         match = _ANSWER_RE.match(line.strip())
         if match:
             tokens = match.group(1).split()
+    return tokens
+
+
+def _bare_path_tokens(action, known_lower):
+    tokens = None
+    text = action if isinstance(action, str) else "" if action is None else str(action)
+    for line in text.splitlines():
+        parts = line.strip().split()
+        if parts and all(part.lower() in known_lower for part in parts):
+            tokens = parts
     return tokens
 
 

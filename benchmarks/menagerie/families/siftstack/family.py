@@ -79,7 +79,10 @@ def score(item: dict, transcript: list[dict]) -> dict:
         if transcript:
             last = transcript[-1]
             if isinstance(last, dict):
-                got_text = _extract_answer(last.get("action"))
+                action = last.get("action")
+                got_text = _extract_answer(action)
+                if got_text is None:
+                    got_text = _fallback_bare_answer(action, item.get("gold_type"))
     except Exception:
         got_text = None
 
@@ -661,6 +664,25 @@ def _extract_answer(action):
         if match:
             last = match.group(1).strip()
     return last
+
+
+def _fallback_bare_answer(action, gold_type):
+    if action is None:
+        return None
+    last = None
+    for line in str(action).splitlines():
+        text = line.strip()
+        if text:
+            last = text
+    if last is None:
+        return None
+    if gold_type == "int":
+        if re.fullmatch(r"[+-]?\d+", last):
+            return last
+        return None
+    if re.fullmatch(r"[a-z]{4,}", last):
+        return last
+    return None
 
 
 def _parse_int(text):

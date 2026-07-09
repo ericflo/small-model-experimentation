@@ -14,10 +14,11 @@ def main():
     gate_oracle_perfection()
     gate_random_floor()
     gate_degenerate_resistance()
+    gate_bare_answer_fallback()
     noisy_means = gate_monotone_difficulty()
     gate_budgets()
     gate_purity()
-    print("lockpick selftest: ALL 8 GATES PASSED")
+    print("lockpick selftest: ALL 9 GATES PASSED")
     print(
         "lockpick noisy-oracle means: "
         + ", ".join(f"L{level}={noisy_means[level]:.4f}" for level in range(1, 5))
@@ -130,6 +131,49 @@ def gate_degenerate_resistance():
             f"level=all mode=all item={name} observed={mean:.4f}"
         )
     print("gate 5 Degenerate resistance: passed")
+
+
+def gate_bare_answer_fallback():
+    scores = []
+    for level in range(1, 5):
+        for mode in ("atom", "episode"):
+            for item in family.generate(29, level, 6, mode):
+                if mode == "atom":
+                    obs = family.Env(item).reset()
+                    action = _bare_answer_action(item, [])
+                    transcript = [{"obs": obs, "action": action}]
+                else:
+                    transcript = _drive_episode(item, _bare_answer_action)
+                result = family.score(item, transcript)
+                assert result["score"] == 1.0, (
+                    "Bare-answer fallback: bare-answer oracle (no ANSWER: prefix) scores 1.0 on every item. "
+                    f"level={level} mode={mode} item={item['id']} observed={result}"
+                )
+                scores.append(result["score"])
+    degenerates = {
+        "empty-string": _empty_action,
+        "constant-target": _constant_target_action,
+        "echo-observation": None,
+    }
+    for name, policy in degenerates.items():
+        dscores = []
+        for level in range(1, 5):
+            for mode in ("atom", "episode"):
+                for item in family.generate(29, level, 6, mode):
+                    if name == "echo-observation":
+                        transcript = _drive_echo(item)
+                    elif mode == "atom":
+                        obs = family.Env(item).reset()
+                        transcript = [{"obs": obs, "action": policy(item, [])}]
+                    else:
+                        transcript = _drive_episode(item, policy)
+                    dscores.append(family.score(item, transcript)["score"])
+        dmean = sum(dscores) / len(dscores)
+        assert dmean <= 0.1, (
+            "Bare-answer fallback: adding the bare fallback must not lift empty/echo/constant policies above 0.1. "
+            f"level=all mode=all item={name} observed={dmean:.4f}"
+        )
+    print(f"gate 9 Bare-answer fallback: passed bare_oracle_mean={sum(scores) / len(scores):.4f}")
 
 
 def gate_monotone_difficulty():
@@ -328,6 +372,12 @@ def _constant_target_action(item, history):
     if item["mode"] == "atom":
         return f"ANSWER: {_seq_text(item['target'])}"
     return f"OPEN {_seq_text(item['target'])}"
+
+
+def _bare_answer_action(item, history):
+    if item["mode"] == "atom":
+        return _seq_text(item["solution"])
+    return family.oracle_policy(item, history)
 
 
 def _noisy_action(item, history, rng):

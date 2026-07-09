@@ -110,14 +110,17 @@ class Env:
         seq = parsed["seq"]
         if parsed["verb"] == "PROBE":
             if self.probes_left <= 0:
-                return f"No probes left. OPEN {_placeholder(self.item['seq_len'])} to attempt the lock.", False
+                return (
+                    "No probes left. Make your final attempt.\n"
+                    + _grammar_reminder(self.item)
+                ), False
             self.probes_left -= 1
             out = _apply_rule(seq, self.item["rule_spec"], self.item["alphabet"])
             obs = (
                 f"PROBE {_seq_text(seq)} -> {_seq_text(out)}. "
                 f"Probes left: {self.probes_left}. Target: {_seq_text(self.item['target'])}."
             )
-            return obs, False
+            return obs + "\n" + _grammar_reminder(self.item), False
 
         self.done = True
         out = _apply_rule(seq, self.item["rule_spec"], self.item["alphabet"])
@@ -432,8 +435,7 @@ def _informative_sequences(alphabet, length, minimum):
 
 
 def _episode_prompt(item, probes_left):
-    placeholder = _placeholder(item["seq_len"])
-    return (
+    body = (
         "Fictional glyph lock: infer the hidden machine by probing, then open it. "
         f"Alphabet: {_seq_text(item['alphabet'])}. Sequence length: {item['seq_len']}. "
         "Machine: a fixed composition of hidden moves - position rotations, reversals, "
@@ -441,9 +443,9 @@ def _episode_prompt(item, probes_left):
         "some moves may be conditional on the input. "
         f"Hidden moves: {_LEVELS[item['level']]['depth']}. "
         f"Target output: {_seq_text(item['target'])}. Probes remaining: {probes_left}. "
-        f"Max turns: {item['max_turns']}. Grammar: submit one line like PROBE {placeholder} "
-        f"or OPEN {placeholder}; use alphabet glyphs only."
+        f"Max turns: {item['max_turns']}."
     )
+    return body + "\n" + _grammar_reminder(item)
 
 
 def _atom_prompt(item):
@@ -451,16 +453,16 @@ def _atom_prompt(item):
         f"{_seq_text(pair['input'])} -> {_seq_text(pair['output'])}" for pair in item["atom_probe_pairs"]
     )
     placeholder = _placeholder(item["seq_len"])
-    return (
+    body = (
         "Fictional glyph lock: infer the hidden machine from these probe pairs. "
         f"Alphabet: {_seq_text(item['alphabet'])}. Sequence length: {item['seq_len']}. "
         "Machine: a fixed composition of hidden moves - position rotations, reversals, "
         "position swaps, and glyph shifts along the alphabet as listed (wrapping); "
         "some moves may be conditional on the input. "
         f"Hidden moves: {_LEVELS[item['level']]['depth']}. "
-        f"Probe pairs: {pairs}. Target output: {_seq_text(item['target'])}. "
-        f"End with a final line in the form ANSWER: {placeholder}."
+        f"Probe pairs: {pairs}. Target output: {_seq_text(item['target'])}."
     )
+    return body + "\n" + f"End with a final line in the form ANSWER: {placeholder}."
 
 
 def _parse_episode_action(action, item):
@@ -489,16 +491,15 @@ def _parse_episode_action(action, item):
 
 
 def _corrective(parsed, item):
-    placeholder = _placeholder(item["seq_len"])
-    fmt = f"PROBE {placeholder} or OPEN {placeholder}"
+    reminder = _grammar_reminder(item)
     if parsed["error"] == "wrong_length":
-        return f"Wrong length: use {item['seq_len']} glyphs. Format: {fmt}."
+        return f"Wrong length: use {item['seq_len']} glyphs.\n{reminder}"
     if parsed["error"] == "unknown_glyph":
         token = parsed["token"]
         if len(token) > 24:
             token = token[:24] + "..."
-        return f"Unknown glyph: {token}. Use alphabet glyphs. Format: {fmt}."
-    return f"Use one line: {fmt}."
+        return f"Unknown glyph: {token}. Use alphabet glyphs.\n{reminder}"
+    return f"Use one line.\n{reminder}"
 
 
 def _score_episode(item, transcript):
@@ -554,6 +555,9 @@ def _parse_answer(action, item):
         if match:
             answer = match.group(1)
     if answer is None:
+        seq = _bare_glyph_sequence(text, item)
+        if seq is not None:
+            return seq, None
         return None, "no_answer"
     tokens = answer.split()
     if len(tokens) != item["seq_len"]:
@@ -566,6 +570,30 @@ def _parse_answer(action, item):
             return None, "unknown_glyph"
         seq.append(glyph)
     return seq, None
+
+
+def _bare_glyph_sequence(text, item):
+    glyphs = {glyph.lower(): glyph for glyph in item["alphabet"]}
+    for line in reversed(text.splitlines()):
+        stripped = line.strip()
+        if not stripped:
+            continue
+        tokens = stripped.split()
+        if len(tokens) != item["seq_len"]:
+            return None
+        seq = []
+        for token in tokens:
+            glyph = glyphs.get(token.lower())
+            if glyph is None:
+                return None
+            seq.append(glyph)
+        return seq
+    return None
+
+
+def _grammar_reminder(item):
+    placeholder = _placeholder(item["seq_len"])
+    return f"Grammar: reply ONE line, PROBE {placeholder} or OPEN {placeholder}; alphabet glyphs only."
 
 
 def _placeholder(length):

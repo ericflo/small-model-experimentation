@@ -67,6 +67,16 @@ def _echo_policy(item, history):
     return history[-1]["obs"] if history else ""
 
 
+def _bare_oracle_policy(item, history):
+    full = family.oracle_policy(item, history)
+    parsed = family._extract_answer(full)
+    if parsed is None:
+        parsed = family._extract_mend(full)
+    if parsed is None:
+        return ""
+    return "%d: %s" % (parsed[0], parsed[1])
+
+
 def _noisy_policy(item, history, rng):
     if rng.random() < 0.5:
         return family.oracle_policy(item, history)
@@ -156,6 +166,66 @@ def gate_5_degenerate_resistance(observations):
             "most-plausible-answer policy, and echo-the-observation policy "
             "each score <= 0.1 mean; %s mean=%.4f" % (name, mean)
         )
+
+
+def gate_9_bare_fallback(observations):
+    # 9. Bare fallback: bare valid repairs work, but degenerate bare/echo/empty actions still fail.
+    for level in LEVELS:
+        atom_items = family.generate(43, level, 24, "atom")
+        for item in atom_items:
+            obs = family.Env(item).reset()
+            observations.append((item["mode"], obs))
+
+            action = _bare_oracle_policy(item, [])
+            score = family.score(item, [{"obs": obs, "action": action}])["score"]
+            assert score == 1.0, (
+                "Gate 9 Bare fallback: atom bare-answer oracle failed %s score=%s"
+                % (item["id"], score)
+            )
+
+            score = family.score(item, [{"obs": obs, "action": obs}])["score"]
+            assert score <= 0.1, (
+                "Gate 9 Bare fallback: atom echo observation degenerate failed %s score=%s"
+                % (item["id"], score)
+            )
+
+            score = family.score(item, [{"obs": obs, "action": "1: set a 0"}])["score"]
+            assert score <= 0.1, (
+                "Gate 9 Bare fallback: atom bare constant degenerate failed %s score=%s"
+                % (item["id"], score)
+            )
+
+            score = family.score(item, [{"obs": obs, "action": ""}])["score"]
+            assert score <= 0.1, (
+                "Gate 9 Bare fallback: atom empty degenerate failed %s score=%s"
+                % (item["id"], score)
+            )
+
+        episode_items = family.generate(43, level, 24, "episode")
+        for item in episode_items:
+            score = _run_item(item, _bare_oracle_policy, None, observations)
+            assert score == 1.0, (
+                "Gate 9 Bare fallback: episode bare-answer oracle failed %s score=%s"
+                % (item["id"], score)
+            )
+
+            score = _run_item(item, _echo_policy, None, observations)
+            assert score <= 0.1, (
+                "Gate 9 Bare fallback: episode echo observation degenerate failed %s score=%s"
+                % (item["id"], score)
+            )
+
+            score = _run_item(item, _constant_policy, None, observations)
+            assert score <= 0.1, (
+                "Gate 9 Bare fallback: episode constant degenerate failed %s score=%s"
+                % (item["id"], score)
+            )
+
+            score = _run_item(item, _empty_policy, None, observations)
+            assert score <= 0.1, (
+                "Gate 9 Bare fallback: episode empty degenerate failed %s score=%s"
+                % (item["id"], score)
+            )
 
 
 def gate_6_monotone_difficulty(observations):
@@ -258,10 +328,14 @@ def main():
     gate_3_oracle_perfection(observations)
     gate_4_random_floor(observations)
     gate_5_degenerate_resistance(observations)
+    gate_9_bare_fallback(observations)
     means = gate_6_monotone_difficulty(observations)
     gate_7_budgets(observations)
     gate_8_purity()
-    print("menders selftest PASS; noisy means=%s" % ",".join("%.3f" % x for x in means))
+    print(
+        "menders selftest PASS; gate9 bare fallback PASS; noisy means=%s"
+        % ",".join("%.3f" % x for x in means)
+    )
 
 
 if __name__ == "__main__":
