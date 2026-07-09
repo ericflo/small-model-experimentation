@@ -64,6 +64,13 @@ _ACTION_RE = re.compile(r"^\s*ENACT\s+([a-z]{4,6})\s*$", re.IGNORECASE)
 _ANSWER_RE = re.compile(r"^\s*ANSWER\s*:\s*(.*?)\s*$", re.IGNORECASE | re.MULTILINE)
 
 
+def _last_answer_text(action):
+    last_answer = None
+    for match in _ANSWER_RE.finditer(str(action)):
+        last_answer = match.group(1)
+    return last_answer
+
+
 def generate(seed, level, n, mode):
     if level not in _LEVELS:
         raise ValueError("level must be one of 1, 2, 3, 4")
@@ -115,8 +122,8 @@ class Env:
 
         if self.item["mode"] == "atom":
             self.done = True
-            result = _score_atom(self.item, action)
-            if result["completed"]:
+            answer = _last_answer_text(action)
+            if answer is not None and _score_atom(self.item, answer)["completed"]:
                 self.terminal_obs = "THE RITE IS COMPLETE."
             else:
                 self.terminal_obs = "THE RITE STALLS."
@@ -156,8 +163,9 @@ def score(item, transcript):
     if item["mode"] == "atom":
         last_answer = None
         for turn in transcript:
-            for match in _ANSWER_RE.finditer(str(turn.get("action", ""))):
-                last_answer = match.group(1)
+            answer = _last_answer_text(turn.get("action", ""))
+            if answer is not None:
+                last_answer = answer
         if last_answer is None:
             return {
                 "score": 0.0,
