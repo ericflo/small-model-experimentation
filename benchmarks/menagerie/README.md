@@ -31,42 +31,46 @@ source, or scores-as-labels.
 
 ## Tiers
 
-Tier budgets are for a resident model with thinking enabled, greedy decoding
+Tier budgets are for a resident model with thinking enabled and greedy decoding
 (`do_sample=False`). Thinking is the default deployment mode; `--no-think` is
-an explicit opt-out. The thinking budget is part of the tier ladder and can be
-overridden with `--think-budget`.
+an explicit opt-out. Think budgets floor at 1024 tokens and escalate by tier.
+`--think-budget N` overrides both atom and episode budgets for explicit
+compute-response studies.
 
-| Tier | Target | Config budget_s | Think budget | Atoms | Episodes | Max episode turns |
-| --- | ---: | ---: | ---: | --- | --- | ---: |
-| `quick` | <60s | 60 | 256 | L1-L2, 4 per level | none | n/a |
-| `medium` | <300s | 300 | 512 | L1-L3, 2 per level | L1-L2, 2 per level | 4 |
-| `slow` | <1200s | 1200 | 1024 | L1-L4, 3 per level | L1-L3, 1 per level | 10 |
-| `deep` | <3600s | 3600 | 2048 | L1-L4, 4 per level | L1-L4, 1 per level | 14 |
+| Tier | Budget | Think budget | Atoms | Episodes | Total items |
+| --- | ---: | ---: | --- | --- | ---: |
+| `quick` | 60 s | 1024 | L1-L2, 4/level (80 items) | none | 80 |
+| `medium` | 300 s | 1024 | L1-L3, 5/level (150 items) | L1-L2, 3/level, max 4 turns (60 items) | 210 |
+| `slow` | 1200 s | 2048 | L1-L4, 5/level (200 items) | L1-L3, 2/level, max 10 turns (60 items) | 260 |
+| `deep` | 3600 s | 4096 (episodes capped at 2048/turn) | L1-L4, 6/level (240 items) | L1-L4, 3/level, max 14 turns (120 items) | 360 |
 
-Speed comes from three choices in the harness and contract:
+Speed comes from the harness and contract:
 
 - Atoms run as one batched pass.
 - Episodes are lockstep-batched, so wall clock scales with horizon and batch
   count, not with serial item count.
 - The action protocol is terse: atoms end with `ANSWER: <value>`; episodes use
   one-line actions and a 96-token action budget.
-- Thinking uses batch size 48 by default. `--no-think` uses batch size 96 unless
-  `--max-batch` overrides it.
+- The HF backend chunks work at `--max-batch`: 48 items with thinking or 96
+  with `--no-think` by default.
+- The default vLLM backend schedules internally with `max_num_seqs=64` and is
+  approximately four times faster than HF.
 
 Current token-math projections from
-`python3 run.py --tier all --estimate`:
+`python3 run.py --estimate --tier all`:
 
 ```text
-families: 10 (discovered)
-model load time excluded (~60 s once)
-tier     think_budget batch    worst_s  expected_s no_think_worst_s no_think_expected_s  budget_s     flag
-quick             256    48       54.2        28.6              6.6                 4.1        60   WITHIN
-medium            512    48      295.7       152.4             43.3                25.4       300   WITHIN
-slow             1024    48     1176.6       598.1            105.0                61.5      1200   WITHIN
-deep             2048    48     3104.1      1565.6            141.8                82.9      3600   WITHIN
+families: 10 (assumed)
+model load time excluded (~35 s once, vLLM)
+tier     atom_think ep_think    worst_s  expected_s no_think_worst_s no_think_expected_s ctx_worst  budget_s     flag
+quick          1024     1024       58.0        42.5              3.4                 2.6      1888        60   WITHIN
+medium         1024     1024      288.0       191.6             21.8                15.0      2920       300   WITHIN
+slow           2048     2048     1139.2       740.1             46.9                31.7      5444      1200   WITHIN
+deep           4096     2048     3066.9      1981.9            117.8                78.2      6444      3600   WITHIN
 ```
 
-Real-model timing is pending the first GPU-idle window.
+Measured seed-31337 baselines and walls live in
+[`results/BASELINES.md`](results/BASELINES.md).
 
 ## Tier Predictiveness
 
@@ -79,27 +83,28 @@ The instrument was validated with a noisy-oracle ladder from
 
 | Tier | eps=0.0 | eps=0.25 | eps=0.5 | eps=0.75 | eps=1.0 |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `deep` | 1.000000 | 0.718315 | 0.490457 | 0.254583 | 0.012480 |
-| `medium` | 1.000000 | 0.776111 | 0.494881 | 0.305944 | 0.037960 |
-| `quick` | 1.000000 | 0.675000 | 0.462500 | 0.250000 | 0.012500 |
-| `slow` | 1.000000 | 0.725278 | 0.492276 | 0.279444 | 0.016639 |
+| `quick` | 1.000 | 0.675 | 0.463 | 0.250 | 0.013 |
+| `medium` | 1.000 | 0.762 | 0.513 | 0.278 | 0.027 |
+| `slow` | 1.000 | 0.747 | 0.510 | 0.263 | 0.016 |
+| `deep` | 1.000 | 0.747 | 0.467 | 0.247 | 0.016 |
 
 Pairwise Spearman rank stability across the eps ladder, rounded to the printed
 validation precision:
 
 | Pair | Spearman |
 | --- | ---: |
-| `deep|medium` | 1.000 |
-| `deep|quick` | 1.000 |
-| `deep|slow` | 1.000 |
-| `medium|quick` | 1.000 |
-| `medium|slow` | 1.000 |
-| `quick|slow` | 1.000 |
+| `deep\|medium` | 1.000 |
+| `deep\|quick` | 1.000 |
+| `deep\|slow` | 1.000 |
+| `medium\|quick` | 1.000 |
+| `medium\|slow` | 1.000 |
+| `quick\|slow` | 1.000 |
 
 This validates the instrument as a tiered measurement device: when policies are
 synthetically degraded by increasing `eps`, every tier ranks the policies
-consistently. It does not validate that real-model scores on quick, medium,
-slow, and deep will correlate; that remains to confirm once checkpoints exist.
+consistently. It validates the instrument, not real-model cross-tier agreement;
+see [`results/BASELINES.md`](results/BASELINES.md) for the measured real-model
+correlations.
 
 ## Usage
 
@@ -111,20 +116,29 @@ CPU policy smoke run:
 python3 run.py --tier quick --backend oracle --seed 1001 --out results/quick_oracle_seed1001.json
 ```
 
-Qwen backend run, using the required repository virtualenv interpreter:
+Qwen run using the default `qwen_vllm` backend and the required repository
+virtualenv interpreter:
 
 ```bash
-/home/ericflo/Development/small-model-experimentation/.venv/bin/python /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/run.py --tier quick --backend qwen --seed 1001 --out /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/results/quick_qwen_seed1001.json
+/home/ericflo/Development/small-model-experimentation/.venv/bin/python /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/run.py --tier quick --seed 1001 --out /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/results/quick_qwen_seed1001.json
 ```
 
+The harness process itself, including default vLLM runs, must run under that
+required HF-virtualenv interpreter. The vLLM engine lives in `.venv-vllm` and
+is spawned as a subprocess; if that environment is missing, the runner reports
+an actionable error with the commands from
+[`docs/vllm_inference.md`](../../docs/vllm_inference.md) needed to build it. Use
+`--backend qwen` for the approximately four-times-slower HF deterministic parity
+oracle.
+
 Qwen runs use tier thinking budgets by default. Add `--no-think` only for an
-explicit no-thinking reference run, or `--think-budget N` to override the tier
-budget.
+explicit no-thinking reference run, or `--think-budget N` to override both atom
+and episode budgets.
 
 Checkpoint run:
 
 ```bash
-/home/ericflo/Development/small-model-experimentation/.venv/bin/python /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/run.py --tier quick --backend qwen --model-id /path/to/checkpoint --device cuda:0 --seed 1001 --out /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/results/quick_qwen_seed1001.json
+/home/ericflo/Development/small-model-experimentation/.venv/bin/python /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/run.py --tier quick --model-id /path/to/checkpoint --device cuda:0 --seed 1001 --out /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/results/quick_qwen_seed1001.json
 ```
 
 Instrument validation:
@@ -140,8 +154,10 @@ make bench TIER=quick
 ```
 
 Use a fresh `--seed` for each real evaluation so generated items remain
-unexposed across training loops. Runs are deterministic for a fixed seed, tier,
-backend, model, and decoding configuration.
+unexposed across training loops. Compare runs only with matched seed, tier,
+backend, model, decoding setup, and engine configuration. The HF parity oracle
+is deterministic; vLLM continuous batching can introduce small item-level
+variation.
 
 ## Interpreting Results
 
@@ -149,13 +165,17 @@ The runner writes one JSON file per run. The important fields are:
 
 - `per_family`: family-level mean score, item count, and family wall time.
 - `aggregate`: mean of the family means.
-- `per_item`: item-level records, including transcripts unless
-  `--no-transcripts` was used.
+- `per_item`: score-only per-item records by default (`id`, `family`, `level`,
+  `mode`, `score`, `turns`, and `wall_s`). Full transcripts and score details
+  require `--debug-artifacts` with an output filename containing
+  `DO_NOT_TRAIN`; these artifacts must never enter the repository.
+- `think_budget`: when thinking is enabled, an `{atom, episode}` budget object.
 - `within_budget`: whether observed wall time stayed inside the tier budget.
 
-Compare runs only when `seed`, `tier`, and decoding setup match. For model
-selection during a training loop, use a fresh seed for each evaluation event,
-then compare checkpoints evaluated on that same fresh seed and tier.
+Compare runs only when seed, tier, backend, engine configuration, and decoding
+setup match. For model selection during a training loop, use a fresh seed for
+each evaluation event, then compare checkpoints evaluated on that same fresh
+seed and tier.
 
 ## Extending
 

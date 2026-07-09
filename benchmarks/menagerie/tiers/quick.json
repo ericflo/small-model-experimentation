@@ -1,1 +1,1 @@
-{"tier": "quick", "budget_s": 60, "think_budget": 256, "atoms": {"levels": [1, 2], "n_per_level": 4}, "episodes": null, "max_new_tokens": {"atom": 64, "episode": 96}}
+{"tier": "quick", "budget_s": 60, "think_budget": 1024, "atoms": {"levels": [1, 2], "n_per_level": 4}, "episodes": null, "max_new_tokens": {"atom": 64, "episode": 96}}

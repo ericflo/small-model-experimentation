@@ -6,7 +6,6 @@ import argparse
 from collections import defaultdict
 from datetime import datetime, timezone
 import json
-import math
 import os
 from pathlib import Path
 import sys
@@ -23,10 +22,24 @@ TIER_NAMES = ("quick", "medium", "slow", "deep")
 ALLOWED_MODEL_ID_PREFIX = "Qwen/Qwen3.5-4B"
 SCORE_ONLY_PER_ITEM_KEYS = ("id", "family", "level", "mode", "score", "turns", "wall_s")
 
-# Constants documented from docs/compute_environment.md: per-sequence decode is
-# about 12-13 tok/s regardless of batch on this box; model load time is excluded.
-PER_SEQ_DECODE_TOKS_PER_S = 12.5
-PREFILL_OVERHEAD_S_PER_BATCH = 1.5
+# measured on RTX 4090 (WSL2), vLLM 0.24.0 at gpu_memory_utilization 0.85,
+# model-resident Qwen3.5-4B, two-phase thinking, seed 31337: quick = 80 gens
+# think@1024 (79/80 budget-bound), ~85.2k gen tokens / 43.83 s = ~1944 tok/s;
+# medium = 286 gens over 4 lockstep rounds, ~302.7k gen tokens / 147.98 s =
+# ~2046 tok/s. Sustained aggregate ~1950 tok/s at >=60 concurrent sequences;
+# 1500 remains a conservative floor for late-round concurrency decay as
+# episodes terminate.
+VLLM_SUSTAINED_TOKS_PER_S = 1950.0
+VLLM_WORST_TOKS_PER_S = 1500.0
+EXPECTED_THINK_FRACTION = 0.95  # Measured bind fraction is 0.97 at budget 1024; larger budgets close earlier, so this overestimates -> safe.
+# Measured horizon use was 0.69 (medium, seed 31337: 166 of 240 turn-gens);
+# 0.85 stays as the conservative blend for harder tiers.
+EXPECTED_HORIZON_FRACTION = 0.85
+# Context-bound check constants. Measured maxima were 392 prompt tokens for
+# quick atoms and 637 for medium 4-turn episodes (~61/turn): a 3-4x margin.
+EST_BASE_PROMPT_TOKENS = 800
+EST_TOKENS_PER_TURN = 250
+VLLM_MAX_MODEL_LEN = 16384  # Must match the harness/vllm_runner.py default.
 
 
 def validate_model_id(model_id: str) -> None:
@@ -104,12 +117,25 @@ def run_tier(
     include_transcripts: bool = False,
     backend_spec: str = "",
     think: bool = True,
-    think_budget: int | None = None,
+    think_budget: int | dict[str, int] | None = None,
 ) -> dict:
     """Run a tier over already-discovered families with a constructed backend."""
 
+    # Tier think budgets escalate 1024/1024/2048/4096, with a 1024 floor because
+    # 256/512 are in the measured truncation-harm zone (~100% forced-close).
+    # Above that floor only the tail of long-chain items binds. Deep episodes use
+    # a separate 2048 per-turn cap purely to bound the 14-round worst-case wall
+    # clock; --think-budget overrides both for compute-response studies.
     if think_budget is None:
-        think_budget = int(tier_cfg.get("think_budget", 512))
+        atom_tb = int(tier_cfg["think_budget"])
+        episode_tb = int(tier_cfg.get("episode_think_budget", tier_cfg["think_budget"]))
+    elif isinstance(think_budget, dict):
+        atom_tb = int(think_budget["atom"])
+        episode_tb = int(think_budget["episode"])
+    else:
+        atom_tb = int(think_budget)
+        episode_tb = int(think_budget)
+    think_budget = {"atom": atom_tb, "episode": episode_tb}
 
     all_episodes = []
     items_by_family = collect_items(families, tier_cfg, seed)
@@ -179,48 +205,57 @@ def print_result_table(result: dict) -> None:
     print(f"wall_total_s={result['wall_total_s']:.3f} budget_s={result['budget_s']} within_budget={status}")
 
 
-def discover_or_assume_count(families_dir: Path, assume_families: int) -> tuple[int, str]:
-    families = engine.discover_families(families_dir)
-    if families:
-        return len(families), "discovered"
-    return assume_families, "assumed"
-
-
 def estimate_tier(
     tier_cfg: dict,
     family_count: int,
-    max_batch: int,
     think: bool,
     think_budget: int | None = None,
-) -> tuple[float, float]:
-    token_add = int(think_budget if think_budget is not None else tier_cfg["think_budget"]) if think else 0
-    atom_tokens = tier_cfg["max_new_tokens"]["atom"] + token_add
-    episode_tokens = tier_cfg["max_new_tokens"]["episode"] + token_add
-    n_atoms = family_count * len(tier_cfg["atoms"]["levels"]) * tier_cfg["atoms"]["n_per_level"]
-    episodes_cfg = tier_cfg.get("episodes")
-    if episodes_cfg is None:
-        n_epis = 0
-        episode_rounds = 0
+) -> tuple[float, float, int]:
+    if think:
+        if think_budget is None:
+            atom_tb = int(tier_cfg["think_budget"])
+            ep_tb = int(tier_cfg.get("episode_think_budget", tier_cfg["think_budget"]))
+        else:
+            atom_tb = int(think_budget)
+            ep_tb = int(think_budget)
     else:
-        n_epis = family_count * len(episodes_cfg["levels"]) * episodes_cfg["n_per_level"]
-        episode_rounds = episodes_cfg["max_turns"]
+        atom_tb = 0
+        ep_tb = 0
 
-    atom_batches = math.ceil(n_atoms / max_batch) if n_atoms else 0
-    episode_batches = math.ceil(n_epis / max_batch) if n_epis else 0
-    # run_lockstep calls the backend once for every live episode each round:
-    # token work is n_epis * max_turns * (think_budget + action_new_tokens).
-    # Wall time is batch-shaped because batch members decode concurrently.
-    episode_turns = n_epis * episode_rounds
-    episode_batch_turns = episode_rounds * episode_batches if episode_turns else 0
-    atom_decode = atom_batches * (atom_tokens / PER_SEQ_DECODE_TOKS_PER_S)
-    atom_prefill = atom_batches * PREFILL_OVERHEAD_S_PER_BATCH
-    episode_decode = episode_batch_turns * (episode_tokens / PER_SEQ_DECODE_TOKS_PER_S)
-    episode_prefill = episode_batch_turns * PREFILL_OVERHEAD_S_PER_BATCH
-    atom_time = atom_decode + atom_prefill
-    episode_time = episode_decode + episode_prefill
-    expected = (atom_decode + episode_decode) * 0.5 + atom_prefill + episode_prefill
-    worst = atom_time + episode_time
-    return worst, expected
+    atom_answer_tokens = int(tier_cfg["max_new_tokens"]["atom"])
+    episode_answer_tokens = int(tier_cfg["max_new_tokens"]["episode"])
+    atom_cfg = tier_cfg["atoms"]
+    n_atom_gens = family_count * len(atom_cfg["levels"]) * atom_cfg["n_per_level"]
+
+    episode_cfg = tier_cfg.get("episodes")
+    if episode_cfg is None:
+        n_episodes = 0
+        max_turns = 0
+    else:
+        n_episodes = family_count * len(episode_cfg["levels"]) * episode_cfg["n_per_level"]
+        max_turns = int(episode_cfg["max_turns"])
+    worst_turn_gens = n_episodes * max_turns
+    expected_turn_gens = worst_turn_gens * EXPECTED_HORIZON_FRACTION
+
+    worst_s = (
+        n_atom_gens * (atom_tb + atom_answer_tokens)
+        + worst_turn_gens * (ep_tb + episode_answer_tokens)
+    ) / VLLM_WORST_TOKS_PER_S
+    expected_s = (
+        n_atom_gens * (atom_tb * EXPECTED_THINK_FRACTION + atom_answer_tokens)
+        + expected_turn_gens * (ep_tb * EXPECTED_THINK_FRACTION + episode_answer_tokens)
+    ) / VLLM_SUSTAINED_TOKS_PER_S
+
+    ctx_worst = EST_BASE_PROMPT_TOKENS + atom_tb + atom_answer_tokens
+    if episode_cfg is not None:
+        episode_ctx_worst = (
+            EST_BASE_PROMPT_TOKENS
+            + max_turns * EST_TOKENS_PER_TURN
+            + ep_tb
+            + episode_answer_tokens
+        )
+        ctx_worst = max(ctx_worst, episode_ctx_worst)
+    return worst_s, expected_s, ctx_worst
 
 
 def print_estimates(
@@ -229,28 +264,43 @@ def print_estimates(
     assume_families: int,
     think_budget_override: int | None = None,
 ) -> None:
-    family_count, source = discover_or_assume_count(families_dir, assume_families)
-    if source == "assumed":
-        print(f"families: {family_count} (assumption; discovery found 0)")
-    else:
-        print(f"families: {family_count} (discovered)")
-    print("model load time excluded (~60 s once)")
+    # Estimation uses the explicit family-count assumption and never imports
+    # held-out benchmark family modules.
+    family_count = assume_families
+    print(f"families: {family_count} (assumed)")
+    print("model load time excluded (~35 s once, vLLM)")
     print(
-        f"{'tier':<8} {'think_budget':>12} {'batch':>5} {'worst_s':>10} "
+        f"{'tier':<8} {'atom_think':>10} {'ep_think':>8} {'worst_s':>10} "
         f"{'expected_s':>11} {'no_think_worst_s':>16} {'no_think_expected_s':>19} "
-        f"{'budget_s':>9} {'flag':>8}"
+        f"{'ctx_worst':>9} {'budget_s':>9} {'flag':>8}"
     )
     for tier_request in tier_names:
         tier_cfg = load_tier(tier_request)
-        think_budget = int(think_budget_override if think_budget_override is not None else tier_cfg.get("think_budget", 512))
-        worst, expected = estimate_tier(tier_cfg, family_count, 48, True, think_budget)
-        no_think_worst, no_think_expected = estimate_tier(tier_cfg, family_count, 96, False)
-        expected_cap = 0.7 * tier_cfg["budget_s"]
-        flag = "WITHIN" if worst <= tier_cfg["budget_s"] and expected <= expected_cap else "OVER"
+        if think_budget_override is None:
+            atom_think = int(tier_cfg["think_budget"])
+            ep_think = int(tier_cfg.get("episode_think_budget", tier_cfg["think_budget"]))
+        else:
+            atom_think = int(think_budget_override)
+            ep_think = int(think_budget_override)
+        worst, expected, ctx_worst = estimate_tier(
+            tier_cfg, family_count, True, think_budget_override
+        )
+        no_think_worst, no_think_expected, _ = estimate_tier(tier_cfg, family_count, False)
+        # quick is pinned at 8 atoms/family by validate_suite's random-floor gate
+        # (>=8 items keeps one chance hit at <=0.125), which puts its expected
+        # wall at ~73% of the 60 s budget; 0.75 encodes 'fits with all the
+        # headroom the instrument gates allow'. Other tiers sit at 50-65%.
+        expected_cap = 0.75 * tier_cfg["budget_s"]
+        if ctx_worst > VLLM_MAX_MODEL_LEN:
+            flag = "CTX-OVER"
+        elif worst <= tier_cfg["budget_s"] and expected <= expected_cap:
+            flag = "WITHIN"
+        else:
+            flag = "OVER"
         print(
-            f"{tier_cfg['tier']:<8} {think_budget:>12} {48:>5} {worst:>10.1f} "
+            f"{tier_cfg['tier']:<8} {atom_think:>10} {ep_think:>8} {worst:>10.1f} "
             f"{expected:>11.1f} {no_think_worst:>16.1f} {no_think_expected:>19.1f} "
-            f"{tier_cfg['budget_s']:>9} {flag:>8}"
+            f"{ctx_worst:>9} {tier_cfg['budget_s']:>9} {flag:>8}"
         )
 
 
@@ -264,12 +314,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--tier", help="quick|medium|slow|deep, a JSON path, or all with --estimate", default=None)
-    parser.add_argument("--backend", help="qwen|qwen_vllm|oracle|random|noisy:EPS|const:TEXT")
+    parser.add_argument("--backend", default="qwen_vllm", help="qwen_vllm (default; fast vLLM path) | qwen (HF; deterministic parity oracle) | oracle | random | noisy:EPS | const:TEXT")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--out", help="output JSON file")
     parser.set_defaults(think=True)
     parser.add_argument("--no-think", action="store_false", dest="think", help="disable qwen thinking mode")
-    parser.add_argument("--think-budget", type=int, default=None, help="override the tier thinking budget")
+    parser.add_argument(
+        "--think-budget",
+        type=int,
+        default=None,
+        help="override BOTH the tier atom and episode thinking budgets with one value (for explicit compute-response studies)",
+    )
     parser.add_argument("--max-batch", type=int, default=None)
     parser.add_argument("--families-dir", default=str(SCRIPT_DIR / "families"))
     parser.add_argument(
@@ -323,12 +378,19 @@ def main(argv: list[str] | None = None) -> int:
 
     if adapter_info is not None and args.backend not in ("qwen", "qwen_vllm"):
         parser.error("--adapter requires --backend qwen or qwen_vllm")
-    if args.backend is None:
-        parser.error("--backend is required unless --estimate")
     tier_cfg = load_tier(tier_requests[0])
-    effective_think_budget = (
-        int(args.think_budget) if args.think_budget is not None else int(tier_cfg.get("think_budget", 512))
+    # Tier think budgets escalate 1024/1024/2048/4096, with a 1024 floor because
+    # 256/512 are in the measured truncation-harm zone (~100% forced-close).
+    # Above that floor only the tail of long-chain items binds. Deep episodes use
+    # a separate 2048 per-turn cap purely to bound the 14-round worst-case wall
+    # clock; --think-budget overrides both for compute-response studies.
+    atom_tb = int(args.think_budget) if args.think_budget is not None else int(tier_cfg["think_budget"])
+    episode_tb = (
+        int(args.think_budget)
+        if args.think_budget is not None
+        else int(tier_cfg.get("episode_think_budget", tier_cfg["think_budget"]))
     )
+    effective_think_budget = {"atom": atom_tb, "episode": episode_tb}
     out_path = Path(args.out) if args.out else default_out_path(tier_cfg, args.backend, args.seed, adapter_info)
     if args.debug_artifacts:
         if "DO_NOT_TRAIN" not in out_path.name:

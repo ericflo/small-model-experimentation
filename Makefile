@@ -1,7 +1,7 @@
 PYTHON ?= python3
 SITE_DIR ?= site
 TIER ?= quick
-BACKEND ?= qwen
+BACKEND ?= qwen_vllm
 GENERATED_PATHS := \
 	experiments/*/metadata.yaml \
 	knowledge/artifact_index.md \
