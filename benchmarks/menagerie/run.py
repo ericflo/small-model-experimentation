@@ -103,10 +103,13 @@ def run_tier(
     seed: int,
     include_transcripts: bool = False,
     backend_spec: str = "",
-    think: bool = False,
-    think_budget: int = 512,
+    think: bool = True,
+    think_budget: int | None = None,
 ) -> dict:
     """Run a tier over already-discovered families with a constructed backend."""
+
+    if think_budget is None:
+        think_budget = int(tier_cfg.get("think_budget", 512))
 
     all_episodes = []
     items_by_family = collect_items(families, tier_cfg, seed)
@@ -146,7 +149,7 @@ def run_tier(
         "tier_config": tier_cfg,
         "backend": backend_spec,
         "think": think,
-        "think_budget": think_budget,
+        "think_budget": think_budget if think else None,
         "per_family": per_family,
         "aggregate": aggregate,
         "per_item": per_item,
@@ -181,8 +184,14 @@ def discover_or_assume_count(families_dir: Path, assume_families: int) -> tuple[
     return assume_families, "assumed"
 
 
-def estimate_tier(tier_cfg: dict, family_count: int, max_batch: int, think: bool) -> tuple[float, float]:
-    token_add = 512 if think else 0
+def estimate_tier(
+    tier_cfg: dict,
+    family_count: int,
+    max_batch: int,
+    think: bool,
+    think_budget: int | None = None,
+) -> tuple[float, float]:
+    token_add = int(think_budget if think_budget is not None else tier_cfg["think_budget"]) if think else 0
     atom_tokens = tier_cfg["max_new_tokens"]["atom"] + token_add
     episode_tokens = tier_cfg["max_new_tokens"]["episode"] + token_add
     n_atoms = family_count * len(tier_cfg["atoms"]["levels"]) * tier_cfg["atoms"]["n_per_level"]
@@ -196,12 +205,15 @@ def estimate_tier(tier_cfg: dict, family_count: int, max_batch: int, think: bool
 
     atom_batches = math.ceil(n_atoms / max_batch) if n_atoms else 0
     episode_batches = math.ceil(n_epis / max_batch) if n_epis else 0
+    # run_lockstep calls the backend once for every live episode each round:
+    # token work is n_epis * max_turns * (think_budget + action_new_tokens).
+    # Wall time is batch-shaped because batch members decode concurrently.
+    episode_turns = n_epis * episode_rounds
+    episode_batch_turns = episode_rounds * episode_batches if episode_turns else 0
     atom_decode = atom_batches * (atom_tokens / PER_SEQ_DECODE_TOKS_PER_S)
     atom_prefill = atom_batches * PREFILL_OVERHEAD_S_PER_BATCH
-    episode_decode = episode_rounds * episode_batches * (
-        episode_tokens / PER_SEQ_DECODE_TOKS_PER_S
-    )
-    episode_prefill = episode_rounds * episode_batches * PREFILL_OVERHEAD_S_PER_BATCH
+    episode_decode = episode_batch_turns * (episode_tokens / PER_SEQ_DECODE_TOKS_PER_S)
+    episode_prefill = episode_batch_turns * PREFILL_OVERHEAD_S_PER_BATCH
     atom_time = atom_decode + atom_prefill
     episode_time = episode_decode + episode_prefill
     expected = (atom_decode + episode_decode) * 0.5 + atom_prefill + episode_prefill
@@ -209,23 +221,35 @@ def estimate_tier(tier_cfg: dict, family_count: int, max_batch: int, think: bool
     return worst, expected
 
 
-def print_estimates(tier_names: list[str], families_dir: Path, assume_families: int) -> None:
+def print_estimates(
+    tier_names: list[str],
+    families_dir: Path,
+    assume_families: int,
+    think_budget_override: int | None = None,
+) -> None:
     family_count, source = discover_or_assume_count(families_dir, assume_families)
     if source == "assumed":
         print(f"families: {family_count} (assumption; discovery found 0)")
     else:
         print(f"families: {family_count} (discovered)")
     print("model load time excluded (~60 s once)")
-    print(f"{'tier':<8} {'mode':<10} {'batch':>5} {'worst_s':>10} {'expected_s':>11} {'budget_s':>9} {'flag':>8}")
+    print(
+        f"{'tier':<8} {'think_budget':>12} {'batch':>5} {'worst_s':>10} "
+        f"{'expected_s':>11} {'no_think_worst_s':>16} {'no_think_expected_s':>19} "
+        f"{'budget_s':>9} {'flag':>8}"
+    )
     for tier_request in tier_names:
         tier_cfg = load_tier(tier_request)
-        for label, batch, think in (("no-think", 96, False), ("think512", 48, True)):
-            worst, expected = estimate_tier(tier_cfg, family_count, batch, think)
-            flag = "WITHIN" if worst <= tier_cfg["budget_s"] else "OVER"
-            print(
-                f"{tier_cfg['tier']:<8} {label:<10} {batch:>5} {worst:>10.1f} "
-                f"{expected:>11.1f} {tier_cfg['budget_s']:>9} {flag:>8}"
-            )
+        think_budget = int(think_budget_override if think_budget_override is not None else tier_cfg.get("think_budget", 512))
+        worst, expected = estimate_tier(tier_cfg, family_count, 48, True, think_budget)
+        no_think_worst, no_think_expected = estimate_tier(tier_cfg, family_count, 96, False)
+        expected_cap = 0.7 * tier_cfg["budget_s"]
+        flag = "WITHIN" if worst <= tier_cfg["budget_s"] and expected <= expected_cap else "OVER"
+        print(
+            f"{tier_cfg['tier']:<8} {think_budget:>12} {48:>5} {worst:>10.1f} "
+            f"{expected:>11.1f} {no_think_worst:>16.1f} {no_think_expected:>19.1f} "
+            f"{tier_cfg['budget_s']:>9} {flag:>8}"
+        )
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
@@ -241,8 +265,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--backend", help="qwen|oracle|random|noisy:EPS|const:TEXT")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--out", help="output JSON file")
-    parser.add_argument("--think", action="store_true", help="enable qwen thinking mode")
-    parser.add_argument("--think-budget", type=int, default=512)
+    parser.set_defaults(think=True)
+    parser.add_argument("--no-think", action="store_false", dest="think", help="disable qwen thinking mode")
+    parser.add_argument("--think-budget", type=int, default=None, help="override the tier thinking budget")
     parser.add_argument("--max-batch", type=int, default=None)
     parser.add_argument("--families-dir", default=str(SCRIPT_DIR / "families"))
     parser.add_argument(
@@ -280,12 +305,15 @@ def main(argv: list[str] | None = None) -> int:
 
     families_dir = Path(args.families_dir)
     if args.estimate:
-        print_estimates(tier_requests, families_dir, args.assume_families)
+        print_estimates(tier_requests, families_dir, args.assume_families, args.think_budget)
         return 0
 
     if args.backend is None:
         parser.error("--backend is required unless --estimate")
     tier_cfg = load_tier(tier_requests[0])
+    effective_think_budget = (
+        int(args.think_budget) if args.think_budget is not None else int(tier_cfg.get("think_budget", 512))
+    )
     out_path = Path(args.out) if args.out else default_out_path(tier_cfg, args.backend, args.seed)
     if args.debug_artifacts:
         if "DO_NOT_TRAIN" not in out_path.name:
@@ -300,7 +328,7 @@ def main(argv: list[str] | None = None) -> int:
         "model_id": args.model_id,
         "device": args.device,
         "think": args.think,
-        "think_budget": args.think_budget,
+        "think_budget": effective_think_budget,
         "max_batch": max_batch,
         "max_new_tokens": tier_cfg["max_new_tokens"],
     }
@@ -313,7 +341,7 @@ def main(argv: list[str] | None = None) -> int:
         include_transcripts=args.debug_artifacts,
         backend_spec=args.backend,
         think=args.think,
-        think_budget=args.think_budget,
+        think_budget=effective_think_budget,
     )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)

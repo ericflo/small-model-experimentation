@@ -31,15 +31,17 @@ source, or scores-as-labels.
 
 ## Tiers
 
-Tier budgets are for a resident model, no thinking mode, greedy decoding
-(`do_sample=False`). They assume the harness defaults unless overridden.
+Tier budgets are for a resident model with thinking enabled, greedy decoding
+(`do_sample=False`). Thinking is the default deployment mode; `--no-think` is
+an explicit opt-out. The thinking budget is part of the tier ladder and can be
+overridden with `--think-budget`.
 
-| Tier | Target | Config budget_s | Atoms | Episodes | Max episode turns |
-| --- | ---: | ---: | --- | --- | ---: |
-| `quick` | <60s | 60 | L1-L2, 4 per level | none | n/a |
-| `medium` | <300s | 300 | L1-L3, 6 per level | L1-L2, 3 per level | 4 |
-| `slow` | <1200s | 1200 | L1-L4, 8 per level | L1-L3, 6 per level | 10 |
-| `deep` | <3600s | 3600 | L1-L4, 16 per level | L1-L4, 10 per level | 14 |
+| Tier | Target | Config budget_s | Think budget | Atoms | Episodes | Max episode turns |
+| --- | ---: | ---: | ---: | --- | --- | ---: |
+| `quick` | <60s | 60 | 256 | L1-L2, 4 per level | none | n/a |
+| `medium` | <300s | 300 | 512 | L1-L3, 2 per level | L1-L2, 2 per level | 4 |
+| `slow` | <1200s | 1200 | 1024 | L1-L4, 3 per level | L1-L3, 1 per level | 10 |
+| `deep` | <3600s | 3600 | 2048 | L1-L4, 4 per level | L1-L4, 1 per level | 14 |
 
 Speed comes from three choices in the harness and contract:
 
@@ -48,6 +50,8 @@ Speed comes from three choices in the harness and contract:
   count, not with serial item count.
 - The action protocol is terse: atoms end with `ANSWER: <value>`; episodes use
   one-line actions and a 96-token action budget.
+- Thinking uses batch size 48 by default. `--no-think` uses batch size 96 unless
+  `--max-batch` overrides it.
 
 Current token-math projections from
 `python3 run.py --tier all --estimate`:
@@ -55,23 +59,19 @@ Current token-math projections from
 ```text
 families: 10 (discovered)
 model load time excluded (~60 s once)
-tier     mode       batch    worst_s  expected_s  budget_s     flag
-quick    no-think      96        6.6         4.1        60   WITHIN
-quick    think512      48       95.2        49.1        60     OVER
-medium   no-think      96       50.0        29.5       300   WITHIN
-medium   think512      48      591.4       304.7       300     OVER
-slow     no-think      96      210.1       123.0      1200   WITHIN
-slow     think512      48     2338.7      1204.6      1200     OVER
-deep     no-think      96      688.9       402.2      3600   WITHIN
-deep     think512      48     6983.8      3596.9      3600     OVER
+tier     think_budget batch    worst_s  expected_s no_think_worst_s no_think_expected_s  budget_s     flag
+quick             256    48       54.2        28.6              6.6                 4.1        60   WITHIN
+medium            512    48      295.7       152.4             43.3                25.4       300   WITHIN
+slow             1024    48     1176.6       598.1            105.0                61.5      1200   WITHIN
+deep             2048    48     3104.1      1565.6            141.8                82.9      3600   WITHIN
 ```
 
 Real-model timing is pending the first GPU-idle window.
 
 ## Tier Predictiveness
 
-All tiers use the same generators. The tiers scale difficulty, horizon, and
-item count; they do not swap in a different task distribution.
+All tiers use the same generators. The tiers scale difficulty, horizon, item
+count, and thinking budget; they do not swap in a different task distribution.
 
 The instrument was validated with a noisy-oracle ladder from
 `results/instrument_validation.json` at seed `0`. `eps=0.0` is the oracle;
@@ -79,10 +79,10 @@ The instrument was validated with a noisy-oracle ladder from
 
 | Tier | eps=0.0 | eps=0.25 | eps=0.5 | eps=0.75 | eps=1.0 |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `deep` | 1.000000 | 0.739360 | 0.477786 | 0.255211 | 0.019029 |
-| `medium` | 1.000000 | 0.758406 | 0.485615 | 0.263288 | 0.023373 |
+| `deep` | 1.000000 | 0.718315 | 0.490457 | 0.254583 | 0.012480 |
+| `medium` | 1.000000 | 0.776111 | 0.494881 | 0.305944 | 0.037960 |
 | `quick` | 1.000000 | 0.675000 | 0.462500 | 0.250000 | 0.012500 |
-| `slow` | 1.000000 | 0.739309 | 0.488960 | 0.252655 | 0.025030 |
+| `slow` | 1.000000 | 0.725278 | 0.492276 | 0.279444 | 0.016639 |
 
 Pairwise Spearman rank stability across the eps ladder, rounded to the printed
 validation precision:
@@ -116,6 +116,10 @@ Qwen backend run, using the required repository virtualenv interpreter:
 ```bash
 /home/ericflo/Development/small-model-experimentation/.venv/bin/python /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/run.py --tier quick --backend qwen --seed 1001 --out /home/ericflo/Development/smx-menagerie/benchmarks/menagerie/results/quick_qwen_seed1001.json
 ```
+
+Qwen runs use tier thinking budgets by default. Add `--no-think` only for an
+explicit no-thinking reference run, or `--think-budget N` to override the tier
+budget.
 
 Checkpoint run:
 
