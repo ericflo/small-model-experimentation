@@ -37,6 +37,7 @@ import math
 import os
 import platform
 import random
+import re
 import subprocess
 import sys
 import time
@@ -64,6 +65,17 @@ if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 RUNNER_SCHEMA_VERSION = 2
+
+_MAMBA_CACHE_BLOCKS_RE = re.compile(
+    r"max_num_seqs\b.*?(?:exceeds?|greater\s+than|larger\s+than|more\s+than)"
+    r".*?available.*?mamba.*?cache.*?blocks?\D+(\d+)",
+    re.IGNORECASE | re.DOTALL,
+)
+_MAMBA_CACHE_REEXEC_ENV = "QWEN_RUNNER_MAMBA_REEXEC"
+_MAMBA_CACHE_REEXEC_HINT = (
+    "lower --max-num-seqs or raise --gpu-memory-utilization; "
+    "hybrid Qwen3.5 Mamba cache scales with GPU memory"
+)
 
 THINK_TEMPERATURE = 0.6
 THINK_TOP_P = 0.95
@@ -100,6 +112,49 @@ def _run_text(command: Sequence[str]) -> str:
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         return ""
+
+
+def _available_mamba_cache_blocks(exc: BaseException) -> int | None:
+    """Return vLLM's reported Mamba cache block count for the known hybrid-arch cap."""
+    pending: list[BaseException | None] = [exc]
+    seen: set[int] = set()
+    while pending:
+        current = pending.pop(0)
+        if current is None or id(current) in seen:
+            continue
+        seen.add(id(current))
+        texts = [str(current), *(str(arg) for arg in current.args)]
+        for text in texts:
+            match = _MAMBA_CACHE_BLOCKS_RE.search(text)
+            if match:
+                return int(match.group(1))
+        pending.extend((current.__cause__, current.__context__))
+    return None
+
+
+def _rewrite_max_num_seqs_argv(
+    argv: Sequence[str], max_num_seqs: int
+) -> list[str]:
+    """Replace every CLI spelling of max-num-seqs with one trailing value."""
+    rewritten: list[str] = []
+    index = 0
+    while index < len(argv):
+        argument = argv[index]
+        if argument == "--max-num-seqs":
+            index += 2
+            continue
+        if argument.startswith("--max-num-seqs="):
+            index += 1
+            continue
+        rewritten.append(argument)
+        index += 1
+    rewritten.extend(("--max-num-seqs", str(max_num_seqs)))
+    return rewritten
+
+
+def _mamba_reexec_decision(reexec_guard: str | None) -> str:
+    """Choose one process re-exec, then an actionable error on recurrence."""
+    return "exec" if reexec_guard is None else "raise"
 
 
 def _installed_packages() -> dict[str, str]:
@@ -454,11 +509,53 @@ class VLLMRunner:
                 max_lora_rank=self.adapter_info["rank"],
             )
 
+        mamba_reexec_requested = os.environ.get(_MAMBA_CACHE_REEXEC_ENV)
         try:
             from vllm import LLM
 
             started = time.perf_counter()
-            self.llm = LLM(**engine_args)
+            try:
+                self.llm = LLM(**engine_args)
+            except Exception as exc:
+                available_blocks = _available_mamba_cache_blocks(exc)
+                if (
+                    available_blocks is None
+                    or available_blocks < 1
+                    or available_blocks >= config.max_num_seqs
+                ):
+                    raise
+                original_message = str(exc)
+                if _mamba_reexec_decision(mamba_reexec_requested) == "raise":
+                    exc.args = (
+                        f"{original_message}\n\nThe Qwen3.5 hybrid-Mamba cache "
+                        "limit recurred after the runner already re-executed once "
+                        f"({_MAMBA_CACHE_REEXEC_ENV}={mamba_reexec_requested!r}). "
+                        f"Hint: {_MAMBA_CACHE_REEXEC_HINT}.",
+                    )
+                    raise
+
+                rewritten_argv = _rewrite_max_num_seqs_argv(
+                    sys.argv, available_blocks
+                )
+                print(
+                    "[vllm_runner] *** WARNING: Qwen3.5-4B hybrid Mamba cache "
+                    "process re-exec *** "
+                    "vLLM reported only "
+                    f"{available_blocks} available Mamba cache blocks at "
+                    f"gpu_memory_utilization={config.gpu_memory_utilization}. "
+                    "Qwen3.5 is a hybrid model whose Mamba/linear-attention cache "
+                    "capacity scales with the GPU memory budget. The runner is "
+                    f"re-executing itself with --max-num-seqs {available_blocks} "
+                    f"(clamped from {config.max_num_seqs}); the tied CUDA-graph "
+                    "capture cap will use the same value, and the replacement "
+                    "process starts with clean GPU state.",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                os.environ[_MAMBA_CACHE_REEXEC_ENV] = str(config.max_num_seqs)
+                sys.stdout.flush()
+                sys.stderr.flush()
+                os.execv(sys.executable, [sys.executable] + rewritten_argv)
             self.load_seconds = time.perf_counter() - started
         finally:
             random.setstate(python_rng_state)
@@ -469,6 +566,9 @@ class VLLMRunner:
             elif torch.cuda.is_initialized():
                 torch.cuda.manual_seed_all(torch_initial_seed)
         self.engine_args = engine_args
+        if mamba_reexec_requested is not None:
+            self.engine_args["requested_max_num_seqs"] = int(mamba_reexec_requested)
+            self.engine_args["effective_max_num_seqs"] = config.max_num_seqs
 
         self.lora_request = None
         if self.adapter_info is not None:

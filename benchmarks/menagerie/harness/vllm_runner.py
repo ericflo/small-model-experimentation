@@ -7,8 +7,12 @@
 - Model is Qwen3.5-4B, a hybrid model: at gpu_memory_utilization=0.5 only about 93 Mamba cache blocks exist, so max_num_seqs MUST be capped (<=93) or CUDA-graph capture fails with "max_num_seqs exceeds available Mamba cache blocks". We use max_num_seqs=64.
 - THINKING BUDGET method: default is TWO-PHASE (env MENAGERIE_VLLM_BUDGET=two_phase), which mirrors the HF `qwen` backend token-for-token (generate up to B think tokens; if </think> was not emitted, force it via close_ids "</think>\\n\\n"; then regenerate the answer with the mode's answer budget using prefix caching). This was chosen as the default because it reproduces the HF backend's scores EXACTLY (identical aggregate on the quick tier), which is required for cross-backend comparability.
 - The vLLM-NATIVE budget (env MENAGERIE_VLLM_BUDGET=native, single pass) also works and was EMPIRICALLY VERIFIED on vllm 0.24.0 to cap think tokens at B (budget=32 -> exactly 31 sampled think tokens then a forced </think>; the uncapped baseline never closed within 512 tokens). Native requires reasoning_parser="qwen3" and is a faster single pass, but its post-forced-close answer conditioning differs slightly from the HF backend, so scores can diverge in low-budget/truncated regimes; use it for speed, two_phase for exact HF parity.
+- MENAGERIE_VLLM_ADAPTER points at a PEFT LoRA adapter directory to load.
+- Adapter validation is cribbed from templates/experiment/src/vllm_runner.py.
+- max_lora_rank is sized from the adapter instead of vLLM's rank-16 default.
 """
 
+import hashlib
 import os
 _no_flashinfer = os.environ.get("MENAGERIE_VLLM_NO_FLASHINFER")
 if _no_flashinfer and _no_flashinfer.lower() not in {"0", "false", "no", "off"}:
@@ -17,24 +21,43 @@ if _no_flashinfer and _no_flashinfer.lower() not in {"0", "false", "no", "off"}:
 import json
 import sys
 
+try:
+    from harness.adapter_spec import validate_adapter
+except ImportError:
+    from adapter_spec import validate_adapter
+
 
 THINK_CLOSE = 248069  # id of "</think>"
 
 
-def _load_llm(method):
-    from vllm import LLM
-
+def _engine_kwargs(method, adapter_info=None) -> dict:
     model_id = os.environ.get("MENAGERIE_VLLM_MODEL", "Qwen/Qwen3.5-4B")
     gmu = float(os.environ.get("MENAGERIE_VLLM_GMU", "0.5"))
     kwargs = dict(
         model=model_id,
         gpu_memory_utilization=gmu,
         language_model_only=True,
-        max_model_len=4096,
+        # 8192, not 4096: deep-tier episodes accumulate multi-turn history plus a
+        # 2048-token think budget, which overflows 4096. Not 16384: at
+        # gpu_memory_utilization 0.5 on a 24 GB card the KV budget caps out near
+        # ~12k (verified: engine init fails at 16384/0.5).
+        max_model_len=8192,
         max_num_seqs=64,
     )
     if method == "native":
         kwargs["reasoning_parser"] = "qwen3"
+    if adapter_info is not None:
+        kwargs["enable_lora"] = True
+        kwargs["max_loras"] = 1
+        kwargs["max_cpu_loras"] = 1
+        kwargs["max_lora_rank"] = adapter_info["rank"]
+    return kwargs
+
+
+def _load_llm(method, adapter_info=None):
+    from vllm import LLM
+
+    kwargs = _engine_kwargs(method, adapter_info)
     try:
         return LLM(enforce_eager=False, **kwargs)
     except Exception as exc:  # noqa: BLE001
@@ -44,6 +67,16 @@ def _load_llm(method):
             flush=True,
         )
         return LLM(enforce_eager=True, **kwargs)
+
+
+def _job_lora_request(job, lora_request, adapter_path):
+    if not job.get("adapter"):
+        return None
+    if adapter_path is None:
+        raise ValueError("job requested an adapter but the runner was not started with MENAGERIE_VLLM_ADAPTER")
+    if str(job["adapter"]) != adapter_path:
+        raise ValueError(f"job adapter {job['adapter']!r} does not match runner adapter {adapter_path!r}")
+    return lora_request
 
 
 def _trim_eos(ids, eos_ids):
@@ -59,7 +92,7 @@ def _answer_budget(max_new, mode):
     return int(max_new)
 
 
-def _run_no_think(llm, tok, prompt_ids, modes, max_new, temperature, eos_ids):
+def _run_no_think(llm, tok, prompt_ids, modes, max_new, temperature, eos_ids, lora_request=None):
     from vllm import SamplingParams
     from vllm.inputs import TokensPrompt
 
@@ -71,7 +104,7 @@ def _run_no_think(llm, tok, prompt_ids, modes, max_new, temperature, eos_ids):
         )
         for i in range(len(prompt_ids))
     ]
-    outs = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sps)
+    outs = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sps, lora_request=lora_request)
     res = []
     for o in outs:
         ids = _trim_eos(list(o.outputs[0].token_ids), eos_ids)
@@ -79,7 +112,7 @@ def _run_no_think(llm, tok, prompt_ids, modes, max_new, temperature, eos_ids):
     return res
 
 
-def _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature, eos_ids):
+def _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature, eos_ids, lora_request=None):
     from vllm import SamplingParams
     from vllm.inputs import TokensPrompt
 
@@ -92,7 +125,7 @@ def _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature,
         )
         for i in range(len(prompt_ids))
     ]
-    outs = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sps)
+    outs = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sps, lora_request=lora_request)
     res = []
     for o in outs:
         ids = list(o.outputs[0].token_ids)
@@ -115,12 +148,12 @@ def _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature,
     return res
 
 
-def _run_two_phase(llm, tok, prompt_ids, modes, max_new, think_budget, temperature, eos_ids, close_ids):
+def _run_two_phase(llm, tok, prompt_ids, modes, max_new, think_budget, temperature, eos_ids, close_ids, lora_request=None):
     from vllm import SamplingParams
     from vllm.inputs import TokensPrompt
 
     sp1 = SamplingParams(temperature=temperature, max_tokens=think_budget, skip_special_tokens=False)
-    outs1 = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sp1)
+    outs1 = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompt_ids], sp1, lora_request=lora_request)
     n = len(prompt_ids)
     res = [None] * n
     think_tokens = [0] * n
@@ -156,7 +189,7 @@ def _run_two_phase(llm, tok, prompt_ids, modes, max_new, think_budget, temperatu
             )
             for j in cont_idx
         ]
-        outs2 = llm.generate(conts, sp2)
+        outs2 = llm.generate(conts, sp2, lora_request=lora_request)
         for j, o in zip(cont_idx, outs2):
             aids = _trim_eos(list(o.outputs[0].token_ids), eos_ids)
             res[j] = {
@@ -178,11 +211,19 @@ def main():
     proto = os.fdopen(proto_fd, "w", buffering=1)
     sys.stdout = sys.stderr
 
+    adapter_env = os.environ.get("MENAGERIE_VLLM_ADAPTER") or None
+    adapter_info = validate_adapter(adapter_env) if adapter_env else None
+    method = os.environ.get("MENAGERIE_VLLM_BUDGET", "two_phase")
     from vllm import SamplingParams  # noqa: F401
     from vllm.inputs import TokensPrompt  # noqa: F401
 
-    method = os.environ.get("MENAGERIE_VLLM_BUDGET", "two_phase")
-    llm = _load_llm(method)
+    llm = _load_llm(method, adapter_info)
+    lora_request = None
+    if adapter_info is not None:
+        from vllm.lora.request import LoRARequest
+
+        name_hash = hashlib.sha256(adapter_info["path"].encode("utf-8")).hexdigest()[:12]
+        lora_request = LoRARequest(f"menagerie-{name_hash}", 1, adapter_info["path"])
     from transformers import AutoTokenizer
 
     tok = AutoTokenizer.from_pretrained(
@@ -193,7 +234,7 @@ def main():
     eos_ids = set()
     if getattr(tok, "eos_token_id", None) is not None:
         eos_ids.add(tok.eos_token_id)
-    proto.write(json.dumps({"ready": True, "method": method}) + "\n")
+    proto.write(json.dumps({"ready": True, "method": method, "adapter": adapter_info["path"] if adapter_info else None}) + "\n")
     proto.flush()
 
     for line in sys.stdin:
@@ -209,6 +250,7 @@ def main():
         think_budget = int(job["think_budget"])
         temperature = float(job.get("temperature", 0.0))
         max_new = job["max_new_tokens"]
+        job_lora_request = _job_lora_request(job, lora_request, adapter_info["path"] if adapter_info else None)
         prompt_ids = []
         for msgs in prompts:
             try:
@@ -222,9 +264,9 @@ def main():
                 text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
             prompt_ids.append(tok(text, add_special_tokens=False).input_ids)
         if not think:
-            completions = _run_no_think(llm, tok, prompt_ids, modes, max_new, temperature, eos_ids)
+            completions = _run_no_think(llm, tok, prompt_ids, modes, max_new, temperature, eos_ids, job_lora_request)
         elif method == "native":
-            completions = _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature, eos_ids)
+            completions = _run_native(llm, tok, prompt_ids, modes, max_new, think_budget, temperature, eos_ids, job_lora_request)
         else:
             completions = _run_two_phase(
                 llm,
@@ -236,6 +278,7 @@ def main():
                 temperature,
                 eos_ids,
                 close_ids,
+                job_lora_request,
             )
         proto.write(json.dumps({"completions": completions}) + "\n")
         proto.flush()
