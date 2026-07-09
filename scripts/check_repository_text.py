@@ -20,7 +20,7 @@ DEFAULT_TARGETS = [
     "scripts",
     "experiments",
 ]
-EXCLUDED_PARTS = {".git", "__pycache__"}
+EXCLUDED_PARTS = {".git", ".ipynb_checkpoints", "__pycache__"}
 EXCLUDED_FILES = {"scripts/check_repository_text.py"}
 STALE_PHRASES = [
     "two intensive tracks",

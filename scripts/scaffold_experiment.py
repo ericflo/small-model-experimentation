@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -184,6 +185,7 @@ def main() -> int:
     (exp_dir / "experiment_log.md").write_text(f"# {title} Experiment Log\n\n## Scaffold\n\nCreated as a new experiment scaffold.\n", encoding="utf-8")
     (exp_dir / "configs" / "default.yaml").write_text("# Experiment configuration goes here.\n", encoding="utf-8")
     (exp_dir / "src" / "README.md").write_text("# Source\n\nPut experiment-local code here.\n", encoding="utf-8")
+    shutil.copyfile(TEMPLATE / "src" / "vllm_runner.py", exp_dir / "src" / "vllm_runner.py")
 
     print(f"created experiment: experiments/{experiment_id}")
     print("next: implement the smoke path, update program evidence/backlog, then run make check")

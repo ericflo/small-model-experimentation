@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -205,6 +206,10 @@ def main() -> int:
     )
     (exp_dir / "configs" / "default.yaml").write_text("# Experiment configuration goes here.\n", encoding="utf-8")
     (exp_dir / "src" / "README.md").write_text("# Source\n\nPut experiment-local code here.\n", encoding="utf-8")
+    shutil.copyfile(
+        scaffold_experiment.TEMPLATE / "src" / "vllm_runner.py",
+        exp_dir / "src" / "vllm_runner.py",
+    )
     write_idea_intake(exp_dir, proposal, programs, candidate_programs)
     write_queue_context(exp_dir, proposal)
     write_readme_context(exp_dir, proposal, candidate_programs)

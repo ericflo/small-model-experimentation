@@ -13,14 +13,16 @@ This file plus `docs/` and `knowledge/` are the complete operating context: ever
 5. Read [knowledge/synthesis.md](knowledge/synthesis.md).
 6. Read [docs/model_playbook.md](docs/model_playbook.md) — how to elicit and evaluate Qwen3.5-4B correctly (distilled from the claim ledger).
 7. Read [docs/compute_environment.md](docs/compute_environment.md) — how to run on the current box, including GPU failure recovery.
-8. Use `make related QUERY="<rough idea>"`, [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md), and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
-9. Before adding work, read [docs/discovery_workflow.md](docs/discovery_workflow.md), [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md), [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), [docs/artifact_policy.md](docs/artifact_policy.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
-10. Use [docs/quality_gates.md](docs/quality_gates.md) to understand what `make check` enforces and how to fix its common failures.
+8. Read [docs/vllm_inference.md](docs/vllm_inference.md) before bulk generation — the pinned high-throughput runner, LoRA path, parity gates, and backend-mixing prohibition.
+9. Use `make related QUERY="<rough idea>"`, [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md), and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
+10. Before adding work, read [docs/discovery_workflow.md](docs/discovery_workflow.md), [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md), [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), [docs/artifact_policy.md](docs/artifact_policy.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
+11. Use [docs/quality_gates.md](docs/quality_gates.md) to understand what `make check` enforces and how to fix its common failures.
 
 ## Non-Negotiables
 
 - **One model, always `Qwen/Qwen3.5-4B` — absolute.** Never load, run, or even suggest any other model, for ANY purpose: not as a distillation teacher, trace generator, judge, or capability source, and never an older Qwen (3-4B, 2.5) for tooling convenience. Distillation and scaling are off-mission because they push the capability problem up the scaling stack. The only acceptable switch is a strictly newer, better Qwen ~4B if one is released. See the constraint section in [README.md](README.md).
 - **"Sample more" is the baseline to beat, not the answer.** A method counts only if it beats matched-compute sampling on held-out, contamination-controlled tasks.
+- **Use the vLLM template for bulk generation unless the measurement requires Transformers internals.** Keep every arm and matched-compute baseline on the same inference backend; equal seeds do not make HF and vLLM samples comparable. Preserve the exact backend and runner metadata with results.
 - **Contamination invalidates self-training claims.** Training-on-own-solutions results must use contamination-free (procedural/fresh) substrates — self-training that gains on clean data has regressed on contaminated MBPP (C11). Saturated public benchmarks are acceptable for *measurement* studies (calibration, confidence), not for capability-gain claims.
 - **In ambiguity, follow the repo's evident convention** — not whatever is easiest to set up. If the corpus overwhelmingly does X, do X and solve the tooling friction.
 - Treat the imported tracks as prototypes, not as the repo boundary.

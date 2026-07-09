@@ -14,10 +14,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main() -> int:
     scripts = sorted((ROOT / "scripts").glob("*.py"))
+    scripts.extend(sorted((ROOT / "templates" / "experiment" / "src").glob("*.py")))
     with tempfile.TemporaryDirectory() as tempdir:
         temp = Path(tempdir)
-        for script in scripts:
-            py_compile.compile(str(script), cfile=str(temp / f"{script.name}c"), doraise=True)
+        for index, script in enumerate(scripts):
+            py_compile.compile(
+                str(script), cfile=str(temp / f"{index}_{script.name}c"), doraise=True
+            )
     print("python syntax check passed")
     return 0
 

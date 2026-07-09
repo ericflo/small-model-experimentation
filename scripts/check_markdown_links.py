@@ -20,6 +20,7 @@ DEFAULT_TARGETS = [
     "research_programs",
     "templates",
 ]
+EXCLUDED_PARTS = {".ipynb_checkpoints"}
 
 
 def iter_markdown(paths: list[str]) -> list[Path]:
@@ -31,7 +32,13 @@ def iter_markdown(paths: list[str]) -> list[Path]:
         if path.is_file() and path.suffix == ".md":
             found.append(path)
         elif path.is_dir():
-            found.extend(sorted(path.rglob("*.md")))
+            found.extend(
+                sorted(
+                    candidate
+                    for candidate in path.rglob("*.md")
+                    if not any(part in EXCLUDED_PARTS for part in candidate.parts)
+                )
+            )
     return sorted(set(found))
 
 

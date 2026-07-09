@@ -45,7 +45,7 @@ gate failures:
 4. **Commit** the experiment + knowledge edits (the date filler reads git history, so the
    commit must exist first).
 5. `make catalog` — the date filler only covers experiments already in the catalog.
-6. `.venv/bin/python scripts/extract_experiment_dates.py --apply` — git-fills the date entry.
+6. `python3 scripts/extract_experiment_dates.py --apply` — git-fills the date entry.
 7. `make catalog` twice (manifest fixpoint), then `make check`; amend the regenerated files
    into the commit. `git status --short | wc -l` must be 0 afterward (determinism check).
 8. Push, then **check `gh run list`** — local `make check` can pass while CI diverges (below).

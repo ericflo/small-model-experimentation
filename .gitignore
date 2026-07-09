@@ -1,10 +1,12 @@
 __pycache__/
+.ipynb_checkpoints/
 *.py[cod]
 *:Zone.Identifier
 .DS_Store
 .env
 .env.*
 .venv/
+.venv-vllm/
 venv/
 .pytest_cache/
 .ruff_cache/

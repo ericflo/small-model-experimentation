@@ -3,12 +3,19 @@
 How this repo runs on the current box, and how to keep inference fast. Keep this current when the
 environment or model changes.
 
-## Box
+## Current box
 
-- Single **RTX 4090 (24 GB)**, **WSL**. CUDA toolkits at `/usr/local/cuda-13.2` (and `/usr/local/cuda` → 13.2).
-- Standard project **`.venv`** (gitignored), created with `uv` (no sudo; system Python lacks `ensurepip`).
-- Stack: **torch 2.12.1+cu130**, **transformers 5.12.1** (native `qwen3_5`), datasets, accelerate,
-  bitsandbytes, matplotlib, pandas, **flash-linear-attention**, **causal-conv1d 1.6.2.post1**.
+- RunPod Linux container with one **RTX 6000 Ada (48 GB)**, driver **550.127.05** (CUDA 12.4
+  interface), CUDA 12.8 toolkit, Python 3.12.3, and `uv 0.9.0`.
+- The high-throughput environment is **`.venv-vllm`** (gitignored), created with `uv`. Its validated
+  core stack is vLLM **0.24.0+cu129**, torch **2.11.0+cu129**, and transformers **5.13.0**. CUDA 12
+  minor-version compatibility works on this driver: a CUDA allocation and full Qwen3.5 load/generate
+  smoke both passed. Install the complete pinned graph from `requirements-vllm.lock.txt`.
+- There is not yet a shared Transformers training `.venv` on this fresh pod. Create it separately
+  from `.venv-vllm`; vLLM pins Torch and should not be allowed to rewrite the training stack.
+- The Transformers throughput, OOM, and training measurements later in this document came from the
+  previous single **RTX 4090 (24 GB), WSL** environment. They remain recovery/reference evidence, not
+  measurements of this RunPod.
 
 ## Model
 
@@ -17,7 +24,53 @@ All experiments use **Qwen/Qwen3.5-4B** (`model_type: qwen3_5`) — never an old
 `AutoModelForCausalLM(trust_remote_code=True, dtype=torch.bfloat16)` (`Qwen3_5ForCausalLM`, ~8.4 GB
 VRAM). Think-token ids: `<think>`=248068, `</think>`=248069 (differ from Qwen3-4B; verify per model).
 
-## Fast path (REQUIRED — do not regress)
+## vLLM bulk-generation path
+
+For ordinary text generation and runtime LoRA evaluation, use the single-file experiment template
+at `templates/experiment/src/vllm_runner.py`; new experiment scaffolds copy it automatically. Setup,
+CLI examples, thinking-budget semantics, parity gates, and backend-mixing rules live in
+[`docs/vllm_inference.md`](vllm_inference.md).
+
+Validated current behavior:
+
+- pinned Qwen3.5 revision loads in text-only bf16 using about **8.0 GiB VRAM**;
+- cached checkpoint weight loading is about **2 seconds**; a full cached engine startup is about
+  **16 seconds** for the 4k/32-sequence smoke configuration;
+- the first launch builds FlashInfer's sampling extension and may take roughly a minute; the result
+  is cached under `/root/.cache/flashinfer`;
+- the wrapper's no-thinking and legacy two-stage forced-thinking smoke paths both complete and write
+  exact token/accounting metadata;
+- runtime LoRA loading passed with a generated zero rank-8 adapter and produced 4/4 token-identical
+  greedy outputs versus the base model; this validates plumbing, not a real adapter's behavior;
+- invoke all prompts together and use `n` sampling so continuous batching can eliminate HF's
+  slowest-sequence batch gate.
+
+Warm measurements on this RTX 6000 Ada, excluding engine load but including all generation stages:
+
+| workload | sampled completions | sampled tokens | wall time | aggregate tok/s |
+| --- | ---: | ---: | ---: | ---: |
+| no-think, 128 prompts × `n=4` (very short outputs; median 6 sampled tokens) | 512 | 4,480 | 2.33 s | 1,921 |
+| think@512 legacy two-stage, 64 prompts × `n=2` (median 161 thinking tokens; 15 forced closes) | 128 | 29,675 | 13.96 s | 2,126 |
+
+The no-think command was repeated and all **512/512 raw and cleaned token sequences were identical**.
+On four frozen C48 smoke tasks, vLLM prompt-token counts matched the committed HF harness exactly
+(4/4), and the unchanged C48 answer parser successfully consumed vLLM's two-stage outputs. As
+expected, sampled candidates were not byte-identical across backends.
+These are infrastructure benchmarks, not a fair head-to-head with the historical 4090 HF table below:
+the GPU, prompts, and termination distribution differ. Benchmark the frozen prompts from a target
+experiment before projecting its wall time.
+
+The default runner uses a 16,384-token model limit, 128 sequences, 32,768 batched tokens, and 0.90
+GPU memory utilization. It deliberately leaves MTP and experimental GDN/Mamba prefix caching off.
+Tune against the real workload and retain the metadata sidecar. Base generation and synthetic LoRA
+plumbing are validated; an actual repository rank-32 adapter still requires its separate behavioral
+parity gate after restoration.
+
+## Historical Transformers fast path (previous 4090 only)
+
+The recipe below describes the previous WSL/torch-cu130 environment. Do not run it verbatim on the
+current RunPod; there is no shared Transformers environment here yet, and its Torch/CUDA pins must be
+chosen and validated separately when an internals-dependent experiment needs one.
 
 The qwen3_5 fast path needs **both** `flash-linear-attention` (Triton; `is_flash_linear_attention_available()`)
 and **`causal-conv1d`** (`is_causal_conv1d_available()`). If either is missing the model prints
@@ -38,7 +91,7 @@ CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=8.9 CAUSAL_CONV1D_FORCE_BUILD=TRU
   uv pip install --python .venv/bin/python --no-build-isolation --no-binary :all: causal-conv1d
 ```
 
-## Throughput is batch-bound, not VRAM-bound
+## Historical Transformers throughput is batch-bound, not VRAM-bound
 
 Per-sequence decode is ~12–13 tok/s **regardless of batch** — the hybrid arch has high per-token
 kernel-dispatch overhead, and `causal-conv1d` mainly speeds prefill (only ~+16% on decode). The lever
@@ -61,7 +114,7 @@ Recommended batch sizes (used in `experiments/qwen35_4b_thinking_budget_scaling/
 runtime auto-halves a batch that OOMs). Going much past bs≈48 for long (≥2048-token) generations gave
 diminishing/negative returns, so cap long-sequence batches there.
 
-## OOM, CUDA corruption, and recovery (WSL2)
+## Historical OOM, CUDA corruption, and recovery (WSL2/4090)
 
 Hard-won failure knowledge — read before launching anything training-scale:
 
@@ -113,7 +166,7 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   `--judge-batch-size 1`. Treat P(True) judge batch size as a memory knob distinct from
   generation batch size, and save an intermediate logprob-scored artifact before the judge pass.
 
-## Training (QLoRA) throughput
+## Historical training (QLoRA) throughput
 
 - Reference recipe: QLoRA r32/α64 on short episodes at **batch 16, grad-accum 1, maxlen 384 →
   ~1 s/step** (a 4k-episode × 2-epoch run ≈ 8 min). The same run at batch 1 is ~2.8 h. After
@@ -136,6 +189,6 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   `cache_implementation="static"` + compile path **fails** on qwen3_5 with
   `KeyError('linear_attention')` — the static cache does not model the hybrid linear-attention layers.
   Adopting it would need a custom hybrid-cache-compatible compile path; not worth it for now.
-- **vLLM:** continuous batching would remove the gating and add faster kernels — the biggest potential
-  win — but vLLM pins its own torch and qwen3_5 (new hybrid arch) support is unverified. If pursued, do
-  it in a **separate** venv so the working HF env (above) is not disturbed.
+- **vLLM coverage boundary:** bulk generation and the two-stage thinking protocol are now validated.
+  Keep Transformers for activations, training, and arbitrary forward passes; validate LoRA and any
+  log-probability readout separately before migrating a result-bearing harness.

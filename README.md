@@ -80,7 +80,7 @@ templates/    starting points for new experiments and programs
 
 Each experiment folder is self-contained. Its `README.md` states the question and result; `reports/` holds the write-up; `data/` and `runs/` hold the inputs and logs. Large regenerable artifacts (adapters, checkpoints) are excluded by design — see each experiment's `reports/artifact_manifest.yaml` for how to regenerate them.
 
-**Environment at a glance:** every experiment runs on a single **RTX 4090 (24 GB)** in a `uv`-managed `.venv` (PyTorch + Transformers), always against **Qwen3.5-4B**. Full environment and GPU setup are in [`docs/compute_environment.md`](docs/compute_environment.md).
+**Environment at a glance:** the current RunPod has one **RTX 6000 Ada (48 GB)**. Bulk generation uses the pinned vLLM stack in a `uv`-managed `.venv-vllm`; training and measurements that require model internals use a separate Transformers environment. Both paths run only **Qwen3.5-4B**. Full setup and historical hardware notes are in [`docs/compute_environment.md`](docs/compute_environment.md).
 
 ## Building the site locally
 

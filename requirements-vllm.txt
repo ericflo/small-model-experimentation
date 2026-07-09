@@ -1,0 +1,4 @@
+# Human-maintained input for requirements-vllm.lock.txt. Install the lock, not this file.
+# The CUDA 12.9 release wheel is intentional. See docs/vllm_inference.md for the driver preflight.
+https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0%2Bcu129-cp38-abi3-manylinux_2_28_x86_64.whl
+transformers==5.13.0

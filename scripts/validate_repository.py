@@ -19,8 +19,8 @@ MAX_GITHUB_FILE_BYTES = 100 * 1024 * 1024
 # Working-tree directories that are gitignored / ephemeral and must never be scanned
 # for "tracked" hygiene checks (large files, stray caches): they cannot be committed.
 IGNORED_DIRS = {
-    ".git", ".venv", "venv", "large_artifacts", "site", "node_modules",
-    ".pytest_cache", ".ruff_cache", ".mypy_cache",
+    ".git", ".venv", ".venv-vllm", "venv", "large_artifacts", "site", "node_modules",
+    ".ipynb_checkpoints", ".pytest_cache", ".ruff_cache", ".mypy_cache",
 }
 MIN_RESEARCH_PROGRAMS = 8
 MIN_FUTURE_PROPOSALS = 24
@@ -403,6 +403,9 @@ def validate() -> int:
         KNOWLEDGE / "decision_records" / "README.md",
         ROOT / "docs" / "idea_intake_protocol.md",
         ROOT / "docs" / "artifact_policy.md",
+        ROOT / "docs" / "vllm_inference.md",
+        ROOT / "requirements-vllm.txt",
+        ROOT / "requirements-vllm.lock.txt",
         ROOT / "scripts" / "scaffold_research_program.py",
         ROOT / "scripts" / "scaffold_experiment.py",
         ROOT / "scripts" / "check_markdown_links.py",
@@ -428,6 +431,7 @@ def validate() -> int:
         ROOT / "templates" / "experiment" / "README.md",
         ROOT / "templates" / "experiment" / "metadata.yaml",
         ROOT / "templates" / "experiment" / "reports" / "artifact_manifest.yaml",
+        ROOT / "templates" / "experiment" / "src" / "vllm_runner.py",
         ROOT / "templates" / "idea_intake.md",
         ROOT / "templates" / "decision_record.md",
     ]:
