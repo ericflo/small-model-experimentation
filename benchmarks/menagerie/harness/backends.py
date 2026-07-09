@@ -3,8 +3,13 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import os
 import random
+import subprocess
+import sys
 from collections import defaultdict
+from pathlib import Path
 
 
 class _RngCache:
@@ -270,6 +275,113 @@ class QwenBackend:
         return [result if result is not None else "" for result in results]
 
 
+class QwenVllmBackend:
+    """Opt-in vLLM backend: runs vLLM in an isolated .venv-vllm subprocess.
+
+    The HF harness process never imports vllm/torch. Per batch_act call we send a
+    JSON job (one line) to a long-lived subprocess and read one JSON response line.
+    The subprocess loads Qwen3.5-4B once and enforces the SAME thinking budget as
+    the HF `qwen` backend, so scores are comparable.
+    """
+
+    VENV_PYTHON = "/home/ericflo/Development/smx-menagerie/.venv-vllm/bin/python"
+
+    def __init__(
+        self,
+        model_id="Qwen/Qwen3.5-4B",
+        device="cuda:0",
+        think=False,
+        think_budget=512,
+        max_batch=96,
+        max_new_tokens=None,
+    ):
+        self.think = think
+        self.think_budget = think_budget
+        self.max_new_tokens = max_new_tokens or {"atom": 64, "episode": 96}
+        self.stats = {
+            "calls": 0,
+            "generated_think_tokens": 0,
+            "forced_think_closes": 0,
+            "max_think_tokens": 0,
+            "think_token_counts": [],
+        }
+        runner = str(Path(__file__).resolve().parent / "vllm_runner.py")
+        env = dict(os.environ)
+        env["VLLM_USE_FLASHINFER_SAMPLER"] = "0"
+        env["MENAGERIE_VLLM_MODEL"] = model_id
+        env.setdefault("MENAGERIE_VLLM_BUDGET", "two_phase")
+        env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+        self.proc = subprocess.Popen(
+            [self.VENV_PYTHON, runner],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=None,
+            text=True,
+            bufsize=1,
+            env=env,
+        )
+        ready = self._read_line()
+        info = json.loads(ready)
+        if not info.get("ready"):
+            raise RuntimeError(f"vllm_runner did not report ready: {ready!r}")
+        self.method = info.get("method")
+
+    def _read_line(self):
+        line = self.proc.stdout.readline()
+        if line == "":
+            code = self.proc.poll()
+            raise RuntimeError(f"vllm_runner subprocess exited (code={code}) before responding; check its stderr above")
+        return line
+
+    def batch_act(self, contexts):
+        prompts = []
+        modes = []
+        for ctx in contexts:
+            prompts.append(build_chat_messages(ctx["meta"], ctx["history"], ctx["obs"]))
+            modes.append(ctx["mode"])
+        job = {
+            "prompts": prompts,
+            "modes": modes,
+            "think": self.think,
+            "think_budget": self.think_budget,
+            "max_new_tokens": self.max_new_tokens,
+            "temperature": 0.0,
+        }
+        self.proc.stdin.write(json.dumps(job) + "\n")
+        self.proc.stdin.flush()
+        resp = json.loads(self._read_line())
+        completions = resp["completions"]
+        if len(completions) != len(contexts):
+            raise ValueError(f"vllm_runner returned {len(completions)} completions for {len(contexts)} contexts")
+        self.stats["calls"] += 1
+        for comp in completions:
+            tt = int(comp.get("think_tokens", 0))
+            self.stats["generated_think_tokens"] += tt
+            self.stats["max_think_tokens"] = max(self.stats["max_think_tokens"], tt)
+            if comp.get("forced_close"):
+                self.stats["forced_think_closes"] += 1
+            if self.think:
+                self.stats["think_token_counts"].append(tt)
+        return [comp["answer"] for comp in completions]
+
+    def close(self):
+        proc = getattr(self, "proc", None)
+        if proc is None or proc.poll() is not None:
+            return
+        try:
+            proc.stdin.write(json.dumps({"cmd": "shutdown"}) + "\n")
+            proc.stdin.flush()
+            proc.wait(timeout=30)
+        except Exception:  # noqa: BLE001
+            proc.kill()
+
+    def __del__(self):
+        try:
+            self.close()
+        except Exception:  # noqa: BLE001
+            pass
+
+
 def make_backend(spec: str, *, seed: int = 0, qwen_opts: dict | None = None):
     """Construct a backend from a CLI/backend spec string."""
 
@@ -287,4 +399,6 @@ def make_backend(spec: str, *, seed: int = 0, qwen_opts: dict | None = None):
         return ConstBackend(spec.split(":", 1)[1])
     if spec == "qwen":
         return QwenBackend(**(qwen_opts or {}))
-    raise ValueError("unknown backend spec; valid specs are oracle, random, noisy:EPS, const:TEXT, qwen")
+    if spec == "qwen_vllm":
+        return QwenVllmBackend(**(qwen_opts or {}))
+    raise ValueError("unknown backend spec; valid specs are oracle, random, noisy:EPS, const:TEXT, qwen, qwen_vllm")
