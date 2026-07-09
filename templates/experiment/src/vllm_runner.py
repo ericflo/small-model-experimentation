@@ -72,6 +72,7 @@ _MAMBA_CACHE_BLOCKS_RE = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 _MAMBA_CACHE_REEXEC_ENV = "QWEN_RUNNER_MAMBA_REEXEC"
+_RUNNING_AS_CLI = False
 _MAMBA_CACHE_REEXEC_HINT = (
     "lower --max-num-seqs or raise --gpu-memory-utilization; "
     "hybrid Qwen3.5 Mamba cache scales with GPU memory"
@@ -152,9 +153,9 @@ def _rewrite_max_num_seqs_argv(
     return rewritten
 
 
-def _mamba_reexec_decision(reexec_guard: str | None) -> str:
-    """Choose one process re-exec, then an actionable error on recurrence."""
-    return "exec" if reexec_guard is None else "raise"
+def _mamba_reexec_decision(reexec_guard: str | None, running_as_cli: bool) -> str:
+    """Choose one CLI process re-exec, then an actionable error."""
+    return "exec" if running_as_cli and reexec_guard is None else "raise"
 
 
 def _installed_packages() -> dict[str, str]:
@@ -525,12 +526,24 @@ class VLLMRunner:
                 ):
                     raise
                 original_message = str(exc)
-                if _mamba_reexec_decision(mamba_reexec_requested) == "raise":
+                if _mamba_reexec_decision(
+                    mamba_reexec_requested, _RUNNING_AS_CLI
+                ) == "raise":
+                    if _RUNNING_AS_CLI:
+                        detail = (
+                            "limit recurred after the runner already re-executed once "
+                            f"({_MAMBA_CACHE_REEXEC_ENV}={mamba_reexec_requested!r}). "
+                            f"Hint: {_MAMBA_CACHE_REEXEC_HINT}."
+                        )
+                    else:
+                        detail = (
+                            "limit cannot trigger automatic process re-exec when VLLMRunner "
+                            "is imported as a library. Construct EngineConfig with a lower "
+                            f"max_num_seqs (at most {available_blocks} for this load). "
+                            f"Hint: {_MAMBA_CACHE_REEXEC_HINT}."
+                        )
                     exc.args = (
-                        f"{original_message}\n\nThe Qwen3.5 hybrid-Mamba cache "
-                        "limit recurred after the runner already re-executed once "
-                        f"({_MAMBA_CACHE_REEXEC_ENV}={mamba_reexec_requested!r}). "
-                        f"Hint: {_MAMBA_CACHE_REEXEC_HINT}.",
+                        f"{original_message}\n\nThe Qwen3.5 hybrid-Mamba cache {detail}",
                     )
                     raise
 
@@ -1182,6 +1195,8 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    global _RUNNING_AS_CLI
+    _RUNNING_AS_CLI = True
     args = _parse_args(argv)
     metadata_path = args.metadata or args.output.with_name(args.output.name + ".meta.json")
     if args.output.resolve() == metadata_path.resolve():
