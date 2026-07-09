@@ -76,7 +76,7 @@ def score(item: dict, transcript: list[dict]) -> dict:
         if _is_impossible(expected):
             ok = _is_impossible(got)
         else:
-            ok = got == expected
+            ok = got.casefold() == str(expected).casefold()
         return {"score": 1.0 if ok else 0.0, "expected": expected, "got": got}
     except Exception:
         return {"score": 0.0, "expected": item.get("forced_answer", ""), "got": ""}

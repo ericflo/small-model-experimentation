@@ -73,7 +73,7 @@ The tight turn budgets are deliberate: chain length plus submit, with at most 1 
 
 ## Generation Notes
 
-Seed-local syllable generation uses compact pseudo-syllables with mandatory rare anchors (`q`, `x`, `z`, or `v`) and an injective mixed-radix salt included in every generated tool, type, and value token: 3 characters for seeds below 420, plus one marker-free extension character up to seed 7139; `generate` raises `ValueError` outside `[0, 7140)`. Tokens are checked for uniqueness within the item and against the action grammar words. Cross-seed token disjointness is guaranteed by construction through injective salts, the category marker immediately after the salt, and the marker-free extension alphabet while keeping L4 observations below the 800-character contract budget.
+Seed-local syllable generation uses compact pseudo-syllables with mandatory rare anchors (`q`, `x`, `z`, or `v`) supplied by the category marker in every generated tool, type, and value token. The salt first zig-zag maps any signed Python integer seed to a non-negative integer, then encodes it with a no-leading-zero variable-length base alphabet that excludes the category markers. This is injective by construction, accepts negative seeds and seeds at or beyond the old 7140 boundary, and keeps cross-seed token disjointness because the marker immediately follows the salt and cannot be mistaken for a salt character. Tokens are checked for uniqueness within the item and against the action grammar words.
 
 ## Example Item + Oracle Transcript
 

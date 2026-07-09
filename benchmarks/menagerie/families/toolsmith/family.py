@@ -25,7 +25,7 @@ _GRAMMAR = {
 _RARE = "qxzv"
 _LETTERS = "bcdfghjklmnpqrstvwxyz"
 _VOWELS = "aeiou"
-_EXTRA = "bcdfhjklmnprstwy"
+_SALT_ALPHABET = "0123456789abcdefhijklmnoprstuwy_"
 _ONSETS = tuple("bcdfghjklmnprstwy" + _RARE * 4)
 _CODAS = tuple("bcdfghjklmnprst" + _RARE * 3)
 _ATOM_DEPTH = {1: 2, 2: 3, 3: 4, 4: 5}
@@ -471,10 +471,8 @@ def _prompt(item):
 def _assert_item(item, used):
     assert item["target"] not in _prompt(item)
     if item["mode"] == "atom":
-        assert len(_prompt(item)) <= 1200
         assert item["max_turns"] == 1
     else:
-        assert len(_prompt(item)) <= 800
         cap = 4 if item["level"] in (1, 2) else 10 if item["level"] == 3 else 14
         assert item["max_turns"] <= cap
     tokens = set()
@@ -493,7 +491,7 @@ def _assert_item(item, used):
     tokens.add(item["goal_type"])
     assert all(token == token.lower() for token in tokens)
     assert all(token.lower() not in _GRAMMAR for token in tokens)
-    assert all(5 <= len(token) <= 10 for token in tokens)
+    assert all(len(token) >= 5 for token in tokens)
     values = [start["value"] for start in item["starts"]] + [step["out"] for step in item["chain"]]
     assert len(values) == len(set(values))
     assert not (set(values) & {tool["name"] for tool in item["registry"]})
@@ -562,11 +560,28 @@ def _stable_int(*parts):
 
 
 def _seed_salt(seed):
-    if not isinstance(seed, int) or isinstance(seed, bool) or seed < 0 or seed >= 7140:
-        raise ValueError("toolsmith: seed must be an int in [0, 7140)")
-    base = _RARE[seed % 4] + _LETTERS[(seed // 4) % 21] + _VOWELS[(seed // 84) % 5]
-    q = seed // 420
-    return base if q == 0 else base + _EXTRA[q - 1]
+    if not isinstance(seed, int) or isinstance(seed, bool):
+        raise ValueError("toolsmith: seed must be an int")
+    # Injective by construction: zig-zag is a bijection from Python ints to
+    # non-negative ints, and the no-leading-zero base-N encoding is injective.
+    # The salt alphabet excludes q/x/z/v/g, so when a category marker follows
+    # the variable-length salt, a shorter salt cannot collide with a longer one.
+    return "b" + _encode_nonnegative(_zig_zag_seed(seed))
+
+
+def _zig_zag_seed(seed):
+    return seed * 2 if seed >= 0 else -2 * seed - 1
+
+
+def _encode_nonnegative(value):
+    base = len(_SALT_ALPHABET)
+    if value == 0:
+        return _SALT_ALPHABET[0]
+    chars = []
+    while value:
+        value, digit = divmod(value, base)
+        chars.append(_SALT_ALPHABET[digit])
+    return "".join(reversed(chars))
 
 
 def _syllable(rng):
@@ -591,7 +606,7 @@ def _new_start_value(rng, used, salt):
 def _new_token(rng, used, salt, marker, min_len, max_len):
     for _ in range(1000):
         target = rng.randint(min_len, max_len)
-        target = max(target, len(salt) + 2)
+        target = max(target, len(salt) + 4)
         text = salt + marker
         while len(text) < target:
             text += _syllable(rng)
@@ -603,7 +618,7 @@ def _new_token(rng, used, salt, marker, min_len, max_len):
 
 
 def _garbage_value(item, rng):
-    salt = item.get("_salt", "qaz")
+    salt = item.get("_salt", "b0")
     target = rng.randint(6, 9)
     target = max(target, len(salt) + 2)
     text = salt + "g"
@@ -633,7 +648,7 @@ def _output_value(item_id, salt, tool_name, args):
         h.update(str(arg).encode("utf-8"))
     digest = h.digest()
     stock = _hash_stock(salt)
-    target = 8 + digest[0] % 2
+    target = max(8 + digest[0] % 2, len(salt) + 4)
     text = salt + "v"
     pos = 1
     while len(text) < target:

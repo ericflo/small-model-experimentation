@@ -16,11 +16,19 @@ moves scores *here* moved something general.
 
 - Experiments may **run** these suites (via each suite's `run.py`) and record
   scores. That is the entire permitted surface.
+- Agents must not even read contents under benchmark suite subdirectories:
+  family sources, generated items, transcripts, and result details contaminate
+  the orchestrating agent's context and can leak into experiments it later
+  writes. The only permitted interactions are invoking a suite's `run.py` or
+  `validate_suite.py` CLI and reading aggregate scores.
 - Experiments must never: import family modules, read family source or
   generated items, train on transcripts/items/scores-as-labels derived from
   these suites, or copy family content into training data. If benchmark
   content leaks into training, the instrument is destroyed — there is no way
   to un-leak it.
+- Directory names themselves, including suite and family names, are deliberately
+  public metadata and are acceptable to see in `git status` or command output;
+  the contents behind those names remain read-forbidden.
 - Fresh instances are cheap: every run can use a new `--seed`, so there is
   never a reason to reuse (and thereby expose) a fixed item set.
 
