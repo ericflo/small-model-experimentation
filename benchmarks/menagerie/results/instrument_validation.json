@@ -41,7 +41,7 @@
         "random": 0.0
       },
       "selftest_pass": true,
-      "selftest_tail": "gate 1 Determinism: passed\ngate 2 Seed disjointness: passed\ngate 3 Oracle perfection: passed\ngate 4 Random floor: passed mean=0.0104\ngate 5 Degenerate resistance: passed\ngate 6 Monotone difficulty: passed L1=0.4557, L2=0.3672, L3=0.3073, L4=0.2891\ngate 7 Budgets: passed avg_generate_score=0.388ms/item\ngate 8 Purity: passed\nlockpick selftest: ALL 8 GATES PASSED\nlockpick noisy-oracle means: L1=0.4557, L2=0.3672, L3=0.3073, L4=0.2891",
+      "selftest_tail": "gate 1 Determinism: passed\ngate 2 Seed disjointness: passed\ngate 3 Oracle perfection: passed\ngate 4 Random floor: passed mean=0.0104\ngate 5 Degenerate resistance: passed\ngate 6 Monotone difficulty: passed L1=0.4557, L2=0.3672, L3=0.3073, L4=0.2891\ngate 7 Budgets: passed avg_generate_score=0.380ms/item\ngate 8 Purity: passed\nlockpick selftest: ALL 8 GATES PASSED\nlockpick noisy-oracle means: L1=0.4557, L2=0.3672, L3=0.3073, L4=0.2891",
       "slow": {
         "oracle": 1.0,
         "random": 0.0
@@ -81,7 +81,7 @@
         "random": 0.125
       },
       "selftest_pass": true,
-      "selftest_tail": "OK 1. Determinism\nOK 2. Seed disjointness\nOK 3. Oracle perfection\nOK 4. Random floor: mean=0.036589\nOK 5. Degenerate resistance: empty-string=0.000000 constant most-common value-token=0.004167 echo-the-observation=0.000000 constant IMPOSSIBLE=0.500000\nOK 6. Monotone difficulty: L1=0.525000 L2=0.513021 L3=0.510417 L4=0.506250\nOK 7. Budgets: generation+scoring=0.049662ms/item\nOK 8. Purity\nmirage selftest: ALL 8 GATES PASSED",
+      "selftest_tail": "OK 1. Determinism\nOK 2. Seed disjointness\nOK 3. Oracle perfection\nOK 4. Random floor: mean=0.036589\nOK 5. Degenerate resistance: empty-string=0.000000 constant most-common value-token=0.004167 echo-the-observation=0.000000 constant IMPOSSIBLE=0.500000\nOK 6. Monotone difficulty: L1=0.525000 L2=0.513021 L3=0.510417 L4=0.506250\nOK 7. Budgets: generation+scoring=0.050669ms/item\nOK 8. Purity\nmirage selftest: ALL 8 GATES PASSED",
       "slow": {
         "oracle": 1.0,
         "random": 0.08
@@ -101,7 +101,7 @@
         "random": 0.0
       },
       "selftest_pass": true,
-      "selftest_tail": "random_means L1=0.069792 L2=0.000000 L3=0.000000 L4=0.000000\nnoisy_means L1=0.524306 L2=0.406250 L3=0.381436 L4=0.215555\nbudget_ms_per_item 1.620\nSELFTEST PASS rites",
+      "selftest_tail": "random_means L1=0.069792 L2=0.000000 L3=0.000000 L4=0.000000\nnoisy_means L1=0.524306 L2=0.406250 L3=0.381436 L4=0.215555\nbudget_ms_per_item 2.224\nSELFTEST PASS rites",
       "slow": {
         "oracle": 1.0,
         "random": 0.02
@@ -161,7 +161,7 @@
         "random": 0.0
       },
       "selftest_pass": true,
-      "selftest_tail": "random-floor mean: 0.093653\nnoisy-oracle means: L1=0.547695 L2=0.510652 L3=0.519231 L4=0.537534\nbudget ms/item: 0.205558\nstockade selftest: PASS",
+      "selftest_tail": "random-floor mean: 0.093653\nnoisy-oracle means: L1=0.547695 L2=0.510652 L3=0.519231 L4=0.537534\nbudget ms/item: 0.252078\nstockade selftest: PASS",
       "slow": {
         "oracle": 1.0,
         "random": 0.07308627651504239
@@ -170,21 +170,21 @@
     "toolsmith": {
       "deep": {
         "oracle": 1.0,
-        "random": 0.006009615384615385
+        "random": 0.011217948717948718
       },
       "medium": {
         "oracle": 1.0,
-        "random": 0.015625
+        "random": 0.010416666666666666
       },
       "quick": {
         "oracle": 1.0,
         "random": 0.03125
       },
       "selftest_pass": true,
-      "selftest_tail": "gate 1 determinism: ok\ngate 2 seed disjointness: ok\ngate 3 oracle perfection: ok\ngate 4 random floor: ok mean=0.0119\ngate 5 degenerate resistance: ok constant-call=0.0000 constant-submit=0.0000 echo=0.0000 empty=0.0000\ngate 6 monotone difficulty: ok atom[L1=0.5062 L2=0.4950 L3=0.4919 L4=0.4900] episode[L1=0.4387 L2=0.2775 L3=0.2369 L4=0.1804]\ngate 7 budgets: ok mean_ms=0.603 items=64\ngate 8 purity: ok imports=hashlib,random,re\ntoolsmith selftest: all gates passed",
+      "selftest_tail": "gate 1 determinism: ok\ngate 2 seed disjointness: ok\ngate 3 oracle perfection: ok\ngate 4 random floor: ok mean=0.0105\ngate 5 degenerate resistance: ok constant-call=0.0000 constant-submit=0.0000 echo=0.0000 empty=0.0000\ngate 6 monotone difficulty: ok atom[L1=0.5100 L2=0.4950 L3=0.4913 L4=0.4925] episode[L1=0.4350 L2=0.2717 L3=0.2406 L4=0.1775]\ngate 7 budgets: ok mean_ms=0.608 items=64\ngate 8 purity: ok imports=hashlib,random,re\ntoolsmith selftest: all gates passed",
       "slow": {
         "oracle": 1.0,
-        "random": 0.0075
+        "random": 0.005
       }
     },
     "warren": {
@@ -201,27 +201,27 @@
         "random": 0.0
       },
       "selftest_pass": true,
-      "selftest_tail": "gate 1 determinism: PASS\ngate 2 seed disjointness: PASS (570 vs 572 tokens)\ngate 3 oracle perfection: PASS\ngate 4 random floor: PASS pooled_mean=0.0581\n  L1: episode=0.1319, atom=0.0000\n  L2: episode=0.2292, atom=0.0000\n  L3: episode=0.1035, atom=0.0000\n  L4: episode=0.0000, atom=0.0000\ngate 5 degenerate resistance: PASS empty=0.0000, constant=0.0000, echo=0.0000\ngate 6 monotone difficulty: PASS L1=0.5671, L2=0.5058, L3=0.5219, L4=0.3919\ngate 7 budgets: PASS generation+scoring=14.818 ms/item\ngate 8 purity: PASS\nwarren selftest: ALL GATES PASSED",
+      "selftest_tail": "gate 1 determinism: PASS\ngate 2 seed disjointness: PASS (570 vs 572 tokens)\ngate 3 oracle perfection: PASS\ngate 4 random floor: PASS pooled_mean=0.0581\n  L1: episode=0.1319, atom=0.0000\n  L2: episode=0.2292, atom=0.0000\n  L3: episode=0.1035, atom=0.0000\n  L4: episode=0.0000, atom=0.0000\ngate 5 degenerate resistance: PASS empty=0.0000, constant=0.0000, echo=0.0000\ngate 6 monotone difficulty: PASS L1=0.5671, L2=0.5058, L3=0.5219, L4=0.3919\ngate 7 budgets: PASS generation+scoring=14.421 ms/item\ngate 8 purity: PASS\nwarren selftest: ALL GATES PASSED",
       "slow": {
         "oracle": 1.0,
         "random": 0.08444444444444445
       }
     }
   },
-  "generated_at": "2026-07-09T01:36:00.341061+00:00",
+  "generated_at": "2026-07-09T02:08:13.573610+00:00",
   "ladder": {
     "deep": {
       "0.0": 1.0,
-      "0.25": 0.7393596911919862,
-      "0.5": 0.47778631990605575,
-      "0.75": 0.255210671847998,
-      "1.0": 0.0190287694873592
+      "0.25": 0.7398404604227554,
+      "0.5": 0.47822702503426084,
+      "0.75": 0.2562122744121006,
+      "1.0": 0.020535179743769456
     },
     "medium": {
       "0.0": 1.0,
       "0.25": 0.7584056712962963,
-      "0.5": 0.4856149742736077,
-      "0.75": 0.26328844333004,
+      "0.5": 0.48613580760694103,
+      "0.75": 0.26380927666337334,
       "1.0": 0.023373068056367297
     },
     "quick": {
@@ -233,10 +233,10 @@
     },
     "slow": {
       "0.0": 1.0,
-      "0.25": 0.7393085317460317,
-      "0.5": 0.4889598233452003,
-      "0.75": 0.252654836282264,
-      "1.0": 0.025029769954961416
+      "0.25": 0.7391418650793651,
+      "0.5": 0.48845982334520033,
+      "0.75": 0.25332150294893063,
+      "1.0": 0.025363103288294754
     }
   },
   "pass": true,

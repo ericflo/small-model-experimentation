@@ -35,9 +35,22 @@ def gate_1_determinism():
 
 
 def gate_2_seed_disjointness():
-    salts = [family._seed_salt(seed) for seed in range(7140)]
+    sweep = list(range(-10000, 10001)) + [987654321, -987654321]
+    salts = [family._seed_salt(seed) for seed in sweep]
     _require(len(salts) == len(set(salts)), "gate 2 salt injectivity failed")
-    for left, right in ((7, 8), (0, 63), (419, 420)):
+    for seed in (7140, 987654321, -987654321):
+        for mode in MODES:
+            sample = family.generate(seed, 1, 2, mode)
+            _require(len(sample) == 2, "gate 2 seed domain failed for %s %s" % (seed, mode))
+    for left, right in (
+        (7, 8),
+        (0, 63),
+        (419, 420),
+        (7139, 7140),
+        (7140, 7141),
+        (-1, 0),
+        (-987654321, 987654321),
+    ):
         tokens_left = _tokens_for_seed(left)
         tokens_right = _tokens_for_seed(right)
         shared = sorted(tokens_left & tokens_right)

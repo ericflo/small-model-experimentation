@@ -9,6 +9,7 @@ import json
 import math
 import os
 from pathlib import Path
+import sys
 from time import perf_counter
 
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
@@ -19,11 +20,40 @@ from harness import backends, engine
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 TIER_NAMES = ("quick", "medium", "slow", "deep")
+ALLOWED_MODEL_ID_PREFIX = "Qwen/Qwen3.5-4B"
+SCORE_ONLY_PER_ITEM_KEYS = ("id", "family", "level", "mode", "score", "turns", "wall_s")
 
 # Constants documented from docs/compute_environment.md: per-sequence decode is
 # about 12-13 tok/s regardless of batch on this box; model load time is excluded.
 PER_SEQ_DECODE_TOKS_PER_S = 12.5
 PREFILL_OVERHEAD_S_PER_BATCH = 1.5
+
+
+def validate_model_id(model_id: str) -> None:
+    """Enforce the repository's one-model rule for Menagerie runs."""
+
+    if not model_id.startswith(ALLOWED_MODEL_ID_PREFIX):
+        raise ValueError(
+            "--model-id violates the repo one-model rule in AGENTS.md Non-Negotiables: "
+            "only Qwen/Qwen3.5-4B or revision variants starting with Qwen/Qwen3.5-4B are allowed"
+        )
+
+
+def score_only_per_item(item: dict) -> dict:
+    """Return the public, benchmark-content-free per-item record."""
+
+    return {key: item[key] for key in SCORE_ONLY_PER_ITEM_KEYS if key in item}
+
+
+def warn_debug_artifacts(out_path: Path) -> None:
+    print("", file=sys.stderr)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", file=sys.stderr)
+    print("WARNING: --debug-artifacts output contains held-out benchmark content.", file=sys.stderr)
+    print("It includes transcripts and score details and must NEVER enter this repo", file=sys.stderr)
+    print("or any training data.", file=sys.stderr)
+    print(f"Writing debug artifact to: {out_path}", file=sys.stderr)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", file=sys.stderr)
+    print("", file=sys.stderr)
 
 
 def load_tier(name_or_path: str) -> dict:
@@ -71,7 +101,7 @@ def run_tier(
     tier_cfg: dict,
     backend_obj,
     seed: int,
-    include_transcripts: bool = True,
+    include_transcripts: bool = False,
     backend_spec: str = "",
     think: bool = False,
     think_budget: int = 512,
@@ -106,7 +136,7 @@ def run_tier(
 
     per_item = engine_result["per_item"]
     if not include_transcripts:
-        per_item = [{key: value for key, value in item.items() if key != "transcript"} for item in per_item]
+        per_item = [score_only_per_item(item) for item in per_item]
 
     return {
         "suite_version": SUITE_VERSION,
@@ -215,7 +245,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--think-budget", type=int, default=512)
     parser.add_argument("--max-batch", type=int, default=None)
     parser.add_argument("--families-dir", default=str(SCRIPT_DIR / "families"))
-    parser.add_argument("--no-transcripts", action="store_true")
+    parser.add_argument(
+        "--debug-artifacts",
+        action="store_true",
+        help="write full transcripts and score details; requires an output filename containing DO_NOT_TRAIN",
+    )
+    parser.add_argument("--no-transcripts", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--model-id", default="Qwen/Qwen3.5-4B")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--estimate", action="store_true", help="print token-math wall-time estimates")
@@ -226,6 +261,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     parser = build_arg_parser()
     args = parser.parse_args(argv)
+
+    try:
+        validate_model_id(args.model_id)
+    except ValueError as exc:
+        parser.error(str(exc))
+    if args.no_transcripts and args.debug_artifacts:
+        parser.error("--debug-artifacts restores transcripts and details; do not combine it with --no-transcripts")
 
     max_batch = args.max_batch
     if max_batch is None:
@@ -244,6 +286,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.backend is None:
         parser.error("--backend is required unless --estimate")
     tier_cfg = load_tier(tier_requests[0])
+    out_path = Path(args.out) if args.out else default_out_path(tier_cfg, args.backend, args.seed)
+    if args.debug_artifacts:
+        if "DO_NOT_TRAIN" not in out_path.name:
+            parser.error("--debug-artifacts requires an output filename containing DO_NOT_TRAIN")
+        warn_debug_artifacts(out_path)
+
     families = engine.discover_families(families_dir)
     if not families:
         raise SystemExit(f"no runnable families found in {families_dir}")
@@ -262,13 +310,12 @@ def main(argv: list[str] | None = None) -> int:
         tier_cfg,
         backend_obj,
         args.seed,
-        include_transcripts=not args.no_transcripts,
+        include_transcripts=args.debug_artifacts,
         backend_spec=args.backend,
         think=args.think,
         think_budget=args.think_budget,
     )
 
-    out_path = Path(args.out) if args.out else default_out_path(tier_cfg, args.backend, args.seed)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as fh:
         json.dump(result, fh, indent=2, sort_keys=True)

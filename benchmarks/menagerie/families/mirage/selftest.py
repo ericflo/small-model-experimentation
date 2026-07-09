@@ -71,6 +71,10 @@ def gate_oracle_perfection():
         result = _run_action(item, family.oracle_policy(item, []))
         if result["score"] != 1.0:
             raise AssertionError(f"oracle failed {item['id']}: {result}")
+        if item["label"] == "solvable":
+            upper_result = _run_action(item, "ANSWER: " + item["forced_answer"].upper())
+            if upper_result["score"] != 1.0:
+                raise AssertionError(f"uppercase answer failed {item['id']}: {upper_result}")
 
 
 def gate_random_floor():

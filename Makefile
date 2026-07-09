@@ -1,6 +1,7 @@
 PYTHON ?= python3
 SITE_DIR ?= site
 TIER ?= quick
+BACKEND ?= qwen
 GENERATED_PATHS := \
 	experiments/*/metadata.yaml \
 	knowledge/artifact_index.md \
@@ -66,7 +67,7 @@ briefs-gate:
 	$(PYTHON) scripts/site_content_status.py --strict
 
 bench:
-	cd benchmarks/menagerie && $(PYTHON) run.py --tier $(TIER)
+	cd benchmarks/menagerie && $(PYTHON) run.py --tier $(TIER) --backend $(BACKEND)
 
 bench-validate:
 	cd benchmarks/menagerie && $(PYTHON) validate_suite.py
