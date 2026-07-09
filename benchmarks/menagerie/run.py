@@ -262,7 +262,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--tier", help="quick|medium|slow|deep, a JSON path, or all with --estimate", default=None)
-    parser.add_argument("--backend", help="qwen|oracle|random|noisy:EPS|const:TEXT")
+    parser.add_argument("--backend", help="qwen|qwen_vllm|oracle|random|noisy:EPS|const:TEXT")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--out", help="output JSON file")
     parser.set_defaults(think=True)
