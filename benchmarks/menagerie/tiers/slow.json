@@ -1,0 +1,1 @@
+{"tier": "slow", "budget_s": 1200, "atoms": {"levels": [1, 2, 3, 4], "n_per_level": 8}, "episodes": {"levels": [1, 2, 3], "n_per_level": 6, "max_turns": 10}, "max_new_tokens": {"atom": 64, "episode": 96}}
