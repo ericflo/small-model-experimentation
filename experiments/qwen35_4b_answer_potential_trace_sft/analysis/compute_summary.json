@@ -1,0 +1,21 @@
+{
+  "final_cumulative_logical_counts": {
+    "rollout_prompt_tokens": 11110544,
+    "rollout_sampled_tokens": 656650,
+    "score_prefill_tokens": 19474315,
+    "score_sampled_tokens": 26702,
+    "thought_prompt_tokens": 490784,
+    "thought_sampled_tokens": 1046911
+  },
+  "gpu_operation_elapsed_seconds_sum": 3128.7682070182636,
+  "stage_elapsed_seconds": {
+    "potential": 531.2944086045027,
+    "potential_foreign": 342.11480142828077,
+    "potential_format_variant": 340.2967587420717,
+    "potential_premember": 8.31994200963527,
+    "potential_token_shuffled": 340.40559221524745,
+    "rollouts": 1120.3705327371135,
+    "thoughts": 445.96617128141224
+  },
+  "total_counted_logical_tokens": 32805906
+}

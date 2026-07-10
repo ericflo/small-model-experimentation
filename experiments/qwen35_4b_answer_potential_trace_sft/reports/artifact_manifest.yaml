@@ -1,22 +1,19 @@
 # Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
 schema_version: 1
 experiment_id: "qwen35_4b_answer_potential_trace_sft"
-external_artifacts:
-  - name: trained QLoRA adapters and merged composite checkpoints
-    storage: /workspace/large_artifacts/qwen35_4b_answer_potential_trace_sft
-    required_for: trained-arm evaluation and exact reruns
-    checksum: recorded after each artifact is created
-    regenerate: python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage train
-omitted_artifacts:
-  - path: runs/full_raw_token_rows/
-    reason: large raw N=128 token pools may be externalized after compact scored rows and checksums are preserved
+external_artifacts: []
+omitted_artifacts: []
 reproducibility:
   smoke_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --smoke
   parity_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/parity_check.py
-  full_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage full
+  calibration_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage calibrate
+  reduction_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage analyze-g0
+  table_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/analyze.py
+  refusal_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage full
   required_external_artifacts: []
 notes: >-
-  The design commit precedes GPU-scale work. The interrupted first smoke and corrected smoke are
-  documented in the preregistration and experiment log. Compact gates, score tables, selected datasets,
-  evaluation summaries, and verdicts remain in git. Adapter/merged-checkpoint paths and SHA256
-  values are filled after training; no model binary is placed in the repository tree.
+  The design commit precedes GPU-scale work. G0 failed and the full-stage guard refused the N=128
+  harvest and SFT, so no adapter, merged checkpoint, full token pool, or external artifact was created.
+  The complete calibration rows, metadata, checksums, compact tables, refusal receipt, and terminal
+  verdict remain in git. The interrupted first smoke and corrected smoke are documented in the
+  preregistration and experiment log.

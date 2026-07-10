@@ -22,6 +22,8 @@ For the machine-checkable claim ledger, use [claims/index.md](claims/index.md).
 
 13. `Promising`: **the first blackbox-arbitrated install — breadth defeats locality at the emission seam** (`qwen35_4b_gauntlet_breadth_round1`, claims C49/C50, 2026-07-10). A firewall-clean 12-family agentic gym (invented content aligned only to menagerie's public axis descriptions; machine-checkable verifiers) + fast expert-iteration loop moved **menagerie quick from 0.140→0.363 and 0.152→0.446 on two fresh paired seeds** (HF backend, deterministic) — the first method in the corpus ever measured to move the held-out instrument, at ~7-9× the pre-registered bar. Gym-internal mean rose 0.184→0.701 **including two never-trained held-out families (+0.54/+0.61)** and a family with zero training examples (+0.40): the C43/C45/C48 substrate-locality laws do not extend to this regime. Two mechanism lessons: (a) full-weight SFT on the model's own verified naturally-closed chains installs ~nothing (near-self-distillation); the working recipe canonicalizes targets to the terse deployable answer, includes forced-close **recovery** examples (truncated chain as context, loss on the commit), and concentrates loss on the answer/action emission seam (think 0.2/answer 1.0) — **signal placement beat dose**; (b) the binding deployed constraint at these difficulty levels is the truncation cascade (consume any budget → force-close → verbose restart → no parseable answer), and repairing commit-from-partial-reasoning transfers substrate-generally. **Instrument hazard (C49, Confirmed): vLLM 0.24 runtime LoRA silently does not apply Qwen3.5-4B PEFT adapters** (name-tree mismatch, no error) — every vLLM adapter arm ever run measured the base model; gate adapter arms with an on-vs-off diff, deploy merged composite checkpoints, and use menagerie's HF backend for adapter events. See `research_programs/agentic_breadth_installation`.
 
+14. `Stopped`: **canonical-answer likelihood after a cap-bound thought is a real but non-actionable selector** (`qwen35_4b_answer_potential_trace_sft`, claim C51, 2026-07-10). The RL-free idea passed meaningful mechanism controls—real thoughts beat token-shuffled (+0.555 nats) and foreign (+4.791) thoughts, and answer-format ranks were stable (tau 0.830)—but failed its preregistered outcome gate: within-task AUROC 0.617 < 0.65, top-choice uplifts +0.073/+0.058 < +0.10, and only 56.9% passed before answer mention. The key diagnosis is deployment mismatch: 99.37% of 2,048 thoughts hit the 512-token cap; fresh forced-close answers parsed only 13.2%, although parsed answers were 86.9% correct. Teacher forcing measured a useful counterfactual answer state after an injected close, not one the model reliably reached. G0 correctly refused N=128 and SFT. This sharpens C50 at the selection seat: **the close/commit seam must be part of the scored event**, and more samples cannot repair a cap-bound interface.
+
 ## How To Read Prior Results
 
 Do not read the imported tracks as a closed agenda. Read them as seed data for research-program design:
@@ -110,6 +112,13 @@ the next brute crossover, and make feasible-domain/residual state explicit befor
 
 [qwen35_4b_retrieval_adapt_verify_scale](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) found additional hidden-correct candidates, but deployable selectors still made too many wrong commits. Future work should treat selection as its own research object, with precision, recall, abstention, and hidden-oracle ceilings separated.
 
+[qwen35_4b_answer_potential_trace_sft](../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md)
+adds a distinct failure mode: a dense oracle-side score can pass relevance controls and still rank a
+counterfactual state rather than a deployable one. Answer gain modestly improved top-trace outcomes, but
+missed its frozen actionability margins while nearly every thought was force-closed. Trace selection now
+needs three gates before banking: within-task discrimination, practical top-choice lift, and autonomous
+termination/parseability at the exact scored seam.
+
 ### Memory Must Be Mechanistic
 
 [qwen_verified_skill_memory_rag](../experiments/qwen_verified_skill_memory_rag/reports/qwen_verified_skill_memory_rag_report.md) is a negative seed result for naive skill-card prompting, while retrieval-adaptation experiments show candidate coverage can improve. The useful memory program should test memory as candidates, constraints, tests, invariants, and evidence, not just prompt examples.
@@ -143,6 +152,11 @@ every budget**; the "mostly compute/scaffold" read only appeared through a greed
 separability/representational slice is separate and noisy). Strategic implications: re-baseline
 CoT-substitute results against a fair, budgeted native-thinking baseline; and judge "is it reasoning?"
 with explicit content controls — a single behavioral or greedy number misled here.
+
+C51 adds a termination corollary. A thinking budget is not just how many tokens are available: if almost
+every trace contacts the cap, injecting `</think>` and teacher-forcing an answer evaluates a state the model
+did not autonomously reach. For trace-valuing or trace-SFT work, calibrate on the actual workload, gate
+natural closure and parseability before scaling, and score the close/commit event rather than assuming it.
 
 ## Portfolio Implications
 

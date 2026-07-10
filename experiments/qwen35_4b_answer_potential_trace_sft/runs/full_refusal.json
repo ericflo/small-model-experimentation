@@ -1,0 +1,17 @@
+{
+  "design_commit": "3441dd230e530a832957457acc7371df3fc5672b",
+  "g0_criteria": {
+    "auroc": false,
+    "beats_foreign": true,
+    "beats_length_and_prior_auroc": false,
+    "beats_token_shuffled": true,
+    "format_rank_stability": true,
+    "premember": false,
+    "top1_random_uplift": false,
+    "top1_shortest_uplift": false
+  },
+  "g0_path": "runs/calibration/g0.json",
+  "reason": "preregistered G0 did not pass",
+  "refused": true,
+  "schema_version": 1
+}

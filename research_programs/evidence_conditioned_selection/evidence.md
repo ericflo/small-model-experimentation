@@ -41,6 +41,13 @@
   mean-logprob 0.787 and random 0.766, with oracle pass@8 0.872. This is the clean no-verifier selection
   replication.
 
+- [qwen35_4b_answer_potential_trace_sft](../../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md)
+  (claim C51): same-model canonical-answer likelihood after a sampled thought is **real but not
+  actionable** under the tested forced-close protocol. Within-task AUROC was 0.617 (gate 0.65), and
+  top-one success beat random/shortest by +0.073/+0.058 but missed the frozen +0.10 bar. Real thoughts
+  beat token-shuffled and foreign controls and format ranks were stable, yet 99.37% of thoughts hit the
+  cap and autonomous answers parsed only 13.2%. G0 failed and correctly stopped before SFT.
+
 ## Current Read
 
 The biggest strategic gap is selection under deployable evidence — and C10/C46 say that gap is *fixable* with
@@ -56,3 +63,8 @@ The partial-structure result narrows that optimism: confidence is useful when co
 completed candidate, but an existential unfinished-state judgment can collapse to task difficulty. Any
 controller follow-up must report task-macro discrimination, sibling recall at the deployed beam, a task-
 shuffled evidence canary, and prefill-inclusive compute—not just pooled AUROC.
+
+C51 adds a second boundary: a score may contain trace-specific information and still condition on an
+unreachable deployment state. Oracle-side trace selectors must predict fresh autonomous outcomes within
+task, clear a practical top-choice effect-size gate, and include termination/parseability in validation.
+Do not scale a dense score because its corruption controls pass; first prove the scored seam is deployable.

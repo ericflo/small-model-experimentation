@@ -8103,27 +8103,65 @@
   "qwen35_4b_answer_potential_trace_sft": {
    "charts": [
     {
-     "title": "Pre-calibration likelihood plumbing parity",
+     "title": "Answer potential misses every outcome launch gate",
      "kind": "bar",
      "categories": [
-      "observed max delta",
-      "frozen tolerance"
+      "within-task AUROC",
+      "uplift vs random",
+      "uplift vs shortest",
+      "positive before mention"
      ],
      "series": [
       {
-       "label": "absolute mean nats per answer token",
+       "label": "observed",
        "values": [
-        0.05981588363647461,
-        0.15
+        0.6167234612388482,
+        0.07327586206896551,
+        0.05818965517241379,
+        0.5689655172413793
+       ]
+      },
+      {
+       "label": "frozen minimum",
+       "values": [
+        0.65,
+        0.1,
+        0.1,
+        0.75
        ]
       }
      ],
-     "x_label": "HF/vLLM plumbing diagnostic",
-     "y_label": "Absolute likelihood difference (nats/token)",
-     "y_format": "number",
-     "note": "The targeted vLLM readout passed the plumbing-only HF parity tolerance. These four smoke rows are not scientific evidence for the trace selector.",
-     "source": "experiments/qwen35_4b_answer_potential_trace_sft/runs/smoke/hf_parity.json",
+     "x_label": "Preregistered G0 diagnostic",
+     "y_label": "Observed statistic and required minimum",
+     "y_format": "percent01",
+     "note": "All four outcome/anti-copying diagnostics missed their frozen launch bars. Three separate mechanism booleans passed, but the conjunction failed and no SFT was authorized.",
+     "source": "experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/g0.json",
      "headline": true
+    },
+    {
+     "title": "The forced-close answer seam is the dominant failure",
+     "kind": "bar",
+     "categories": [
+      "thought closes naturally",
+      "answer rollout parses",
+      "correct given parsed"
+     ],
+     "series": [
+      {
+       "label": "rate",
+       "values": [
+        0.00634765625,
+        0.13213900862068967,
+        0.8690112130479103
+       ]
+      }
+     ],
+     "x_label": "Termination and answer-emission stage",
+     "y_label": "Rate",
+     "y_format": "percent01",
+     "note": "Only 13 of 2,048 thoughts closed naturally. Fresh forced-close answers rarely parsed, but parsed answers were usually correct, locating the loss at close/commit rather than answer content.",
+     "source": "experiments/qwen35_4b_answer_potential_trace_sft/analysis/g0_summary.json",
+     "headline": false
     }
    ]
   },

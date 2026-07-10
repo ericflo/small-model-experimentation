@@ -33,6 +33,13 @@
   contamination/substrate, not the method. (Test-time execution-feedback self-correction, by contrast, did
   NOT beat matched-compute sampling — same experiment, M2.)
 
+- [qwen35_4b_answer_potential_trace_sft](../../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md)
+  (claim C51): a dense reference-answer score did not earn the right to become an SFT curriculum. It
+  carried modest within-task signal and passed shuffled/foreign/format controls, but missed its AUROC and
+  practical top-choice uplift gates. Almost every thought was cap-bound and only 13.2% of forced-close
+  answers parsed. The preregistered guard stopped before N=128, selection, or training, so this is a scorer
+  negative—not an SFT negative.
+
 ## Current Read
 
 Adaptation is useful only when the target behavior is well specified and controls expose whether training
@@ -41,3 +48,8 @@ self-training (own verified solutions, no teacher) banks capability into single-
 substrate, reversing the corpus's earlier "self-training loses to sample-more" reads that were likely
 confounded by contaminated/saturated benchmarks. Priority: scale the self-training loop (expert iteration),
 test cross-substrate transfer, and re-run the failed MBPP self-improvement with contamination controls.
+
+C51 sharpens the curation prerequisite: before comparing posttraining arms, prove that the proposed dense
+label selects deployably better traces at useful effect size. A teacher-forced answer state after an injected
+close is not automatically a valid SFT target source, even when corruption controls say the score notices
+relevant content.

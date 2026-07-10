@@ -2,6 +2,9 @@
 
 ## Next Experiments
 
+- Only as a new preregistered experiment, compare joint close-plus-answer likelihood against C51's
+  answer-only potential after first passing natural-close and autonomous-parse gates; retain within-task,
+  length, prior, shuffled, and foreign controls.
 - Test listwise sibling selection only after enriching partial states with feasible-domain and residual
   evidence; gate it against random, surface, no-think, and task-shuffled controls before any search run.
 - Compare visible-only stability/simplicity selectors on exact solver pools to close the observed 60/60
@@ -25,3 +28,6 @@ Do not continue selector variants that improve selected accuracy only by silentl
 
 Do not promote partial-state confidence from pooled AUROC: it must clear within-task discrimination and the
 deployed recall@beam gate. Type-only independent P(viable) is stopped until the state changes materially.
+
+Do not retry C51 by increasing N or retuning answer-gain thresholds. At 99.37% cap contact, a follow-up
+must change the measured event or termination interface before another harvest is justified.

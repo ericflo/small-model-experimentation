@@ -1,0 +1,590 @@
+{
+  "burrowmaze-L1-s61001-0000": {
+    "answer": "up",
+    "checkpoint": {
+      "n_tokens": 96,
+      "text_chars": 335,
+      "trace_id": "burrowmaze-L1-s61001-0000::t001::premember"
+    },
+    "mention_char": 358,
+    "no_answer_mention": false,
+    "trace_id": "burrowmaze-L1-s61001-0000::t001"
+  },
+  "burrowmaze-L1-s61001-0001": {
+    "answer": "4",
+    "checkpoint": {
+      "n_tokens": 126,
+      "text_chars": 413,
+      "trace_id": "burrowmaze-L1-s61001-0001::t010::premember"
+    },
+    "mention_char": 413,
+    "no_answer_mention": false,
+    "trace_id": "burrowmaze-L1-s61001-0001::t010"
+  },
+  "burrowmaze-L1-s61001-0002": {
+    "answer": "4",
+    "checkpoint": {
+      "n_tokens": 204,
+      "text_chars": 677,
+      "trace_id": "burrowmaze-L1-s61001-0002::t019::premember"
+    },
+    "mention_char": 692,
+    "no_answer_mention": false,
+    "trace_id": "burrowmaze-L1-s61001-0002::t019"
+  },
+  "burrowmaze-L2-s61001-0000": {
+    "answer": "north",
+    "checkpoint": {
+      "n_tokens": 76,
+      "text_chars": 326,
+      "trace_id": "burrowmaze-L2-s61001-0000::t007::premember"
+    },
+    "mention_char": 327,
+    "no_answer_mention": false,
+    "trace_id": "burrowmaze-L2-s61001-0000::t007"
+  },
+  "burrowmaze-L2-s61001-0001": {
+    "answer": "east, east",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "burrowmaze-L2-s61001-0001::t022"
+  },
+  "burrowmaze-L2-s61001-0002": {
+    "answer": "up, east",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "burrowmaze-L2-s61001-0002::t030"
+  },
+  "caravan-L1-s61001-0000": {
+    "answer": "5",
+    "checkpoint": {
+      "n_tokens": 141,
+      "text_chars": 508,
+      "trace_id": "caravan-L1-s61001-0000::t011::premember"
+    },
+    "mention_char": 550,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L1-s61001-0000::t011"
+  },
+  "caravan-L1-s61001-0001": {
+    "answer": "2",
+    "checkpoint": {
+      "n_tokens": 138,
+      "text_chars": 545,
+      "trace_id": "caravan-L1-s61001-0001::t003::premember"
+    },
+    "mention_char": 553,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L1-s61001-0001::t003"
+  },
+  "caravan-L1-s61001-0002": {
+    "answer": "1",
+    "checkpoint": {
+      "n_tokens": 35,
+      "text_chars": 153,
+      "trace_id": "caravan-L1-s61001-0002::t028::premember"
+    },
+    "mention_char": 159,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L1-s61001-0002::t028"
+  },
+  "caravan-L1-s61001-0003": {
+    "answer": "3",
+    "checkpoint": {
+      "n_tokens": 63,
+      "text_chars": 217,
+      "trace_id": "caravan-L1-s61001-0003::t012::premember"
+    },
+    "mention_char": 247,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L1-s61001-0003::t012"
+  },
+  "caravan-L2-s61001-0000": {
+    "answer": "4",
+    "checkpoint": {
+      "n_tokens": 45,
+      "text_chars": 192,
+      "trace_id": "caravan-L2-s61001-0000::t030::premember"
+    },
+    "mention_char": 201,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L2-s61001-0000::t030"
+  },
+  "caravan-L2-s61001-0001": {
+    "answer": "7",
+    "checkpoint": {
+      "n_tokens": 216,
+      "text_chars": 716,
+      "trace_id": "caravan-L2-s61001-0001::t003::premember"
+    },
+    "mention_char": 725,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L2-s61001-0001::t003"
+  },
+  "caravan-L2-s61001-0002": {
+    "answer": "4",
+    "checkpoint": {
+      "n_tokens": 39,
+      "text_chars": 169,
+      "trace_id": "caravan-L2-s61001-0002::t000::premember"
+    },
+    "mention_char": 198,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L2-s61001-0002::t000"
+  },
+  "caravan-L2-s61001-0003": {
+    "answer": "1",
+    "checkpoint": {
+      "n_tokens": 132,
+      "text_chars": 554,
+      "trace_id": "caravan-L2-s61001-0003::t011::premember"
+    },
+    "mention_char": 554,
+    "no_answer_mention": false,
+    "trace_id": "caravan-L2-s61001-0003::t011"
+  },
+  "ferrier-L1-s61001-0000": {
+    "answer": "berthing(brinesilk)",
+    "checkpoint": {
+      "n_tokens": 214,
+      "text_chars": 683,
+      "trace_id": "ferrier-L1-s61001-0000::t016::premember"
+    },
+    "mention_char": 709,
+    "no_answer_mention": false,
+    "trace_id": "ferrier-L1-s61001-0000::t016"
+  },
+  "ferrier-L1-s61001-0001": {
+    "answer": "quayage(gladeamber)",
+    "checkpoint": {
+      "n_tokens": 226,
+      "text_chars": 756,
+      "trace_id": "ferrier-L1-s61001-0001::t017::premember"
+    },
+    "mention_char": 779,
+    "no_answer_mention": false,
+    "trace_id": "ferrier-L1-s61001-0001::t017"
+  },
+  "ferrier-L1-s61001-0002": {
+    "answer": "weighdeck(gladeamber)",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "ferrier-L1-s61001-0002::t004"
+  },
+  "ferrier-L2-s61001-0000": {
+    "answer": "hoisting(SC-UX7V)",
+    "checkpoint": {
+      "n_tokens": 366,
+      "text_chars": 1020,
+      "trace_id": "ferrier-L2-s61001-0000::t010::premember"
+    },
+    "mention_char": 1022,
+    "no_answer_mention": false,
+    "trace_id": "ferrier-L2-s61001-0000::t010"
+  },
+  "ferrier-L2-s61001-0001": {
+    "answer": "gauging(frostpith)",
+    "checkpoint": {
+      "n_tokens": 204,
+      "text_chars": 582,
+      "trace_id": "ferrier-L2-s61001-0001::t026::premember"
+    },
+    "mention_char": 583,
+    "no_answer_mention": false,
+    "trace_id": "ferrier-L2-s61001-0001::t026"
+  },
+  "ferrier-L2-s61001-0002": {
+    "answer": "clerking(DO-2FR9)",
+    "checkpoint": {
+      "n_tokens": 382,
+      "text_chars": 1177,
+      "trace_id": "ferrier-L2-s61001-0002::t017::premember"
+    },
+    "mention_char": 1198,
+    "no_answer_mention": false,
+    "trace_id": "ferrier-L2-s61001-0002::t017"
+  },
+  "foundry_ledger-L1-s61001-0000": {
+    "answer": "4",
+    "checkpoint": {
+      "n_tokens": 367,
+      "text_chars": 903,
+      "trace_id": "foundry_ledger-L1-s61001-0000::t012::premember"
+    },
+    "mention_char": 903,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L1-s61001-0000::t012"
+  },
+  "foundry_ledger-L1-s61001-0001": {
+    "answer": "362",
+    "checkpoint": {
+      "n_tokens": 431,
+      "text_chars": 1033,
+      "trace_id": "foundry_ledger-L1-s61001-0001::t011::premember"
+    },
+    "mention_char": 1045,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L1-s61001-0001::t011"
+  },
+  "foundry_ledger-L1-s61001-0002": {
+    "answer": "602",
+    "checkpoint": {
+      "n_tokens": 471,
+      "text_chars": 1144,
+      "trace_id": "foundry_ledger-L1-s61001-0002::t009::premember"
+    },
+    "mention_char": 1162,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L1-s61001-0002::t009"
+  },
+  "foundry_ledger-L1-s61001-0003": {
+    "answer": "2",
+    "checkpoint": {
+      "n_tokens": 112,
+      "text_chars": 351,
+      "trace_id": "foundry_ledger-L1-s61001-0003::t013::premember"
+    },
+    "mention_char": 351,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L1-s61001-0003::t013"
+  },
+  "foundry_ledger-L2-s61001-0000": {
+    "answer": "66",
+    "checkpoint": {
+      "n_tokens": 261,
+      "text_chars": 704,
+      "trace_id": "foundry_ledger-L2-s61001-0000::t008::premember"
+    },
+    "mention_char": 711,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L2-s61001-0000::t008"
+  },
+  "foundry_ledger-L2-s61001-0001": {
+    "answer": "165",
+    "checkpoint": {
+      "n_tokens": 295,
+      "text_chars": 721,
+      "trace_id": "foundry_ledger-L2-s61001-0001::t031::premember"
+    },
+    "mention_char": 728,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L2-s61001-0001::t031"
+  },
+  "foundry_ledger-L2-s61001-0002": {
+    "answer": "5",
+    "checkpoint": {
+      "n_tokens": 152,
+      "text_chars": 424,
+      "trace_id": "foundry_ledger-L2-s61001-0002::t029::premember"
+    },
+    "mention_char": 431,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L2-s61001-0002::t029"
+  },
+  "foundry_ledger-L2-s61001-0003": {
+    "answer": "150",
+    "checkpoint": {
+      "n_tokens": 287,
+      "text_chars": 863,
+      "trace_id": "foundry_ledger-L2-s61001-0003::t008::premember"
+    },
+    "mention_char": 870,
+    "no_answer_mention": false,
+    "trace_id": "foundry_ledger-L2-s61001-0003::t008"
+  },
+  "gatepost-L1-s61001-0000": {
+    "answer": "64",
+    "checkpoint": {
+      "n_tokens": 141,
+      "text_chars": 507,
+      "trace_id": "gatepost-L1-s61001-0000::t001::premember"
+    },
+    "mention_char": 557,
+    "no_answer_mention": false,
+    "trace_id": "gatepost-L1-s61001-0000::t001"
+  },
+  "gatepost-L1-s61001-0001": {
+    "answer": "69",
+    "checkpoint": {
+      "n_tokens": 150,
+      "text_chars": 524,
+      "trace_id": "gatepost-L1-s61001-0001::t001::premember"
+    },
+    "mention_char": 559,
+    "no_answer_mention": false,
+    "trace_id": "gatepost-L1-s61001-0001::t001"
+  },
+  "gatepost-L1-s61001-0002": {
+    "answer": "Quillan",
+    "checkpoint": {
+      "n_tokens": 136,
+      "text_chars": 482,
+      "trace_id": "gatepost-L1-s61001-0002::t019::premember"
+    },
+    "mention_char": 492,
+    "no_answer_mention": false,
+    "trace_id": "gatepost-L1-s61001-0002::t019"
+  },
+  "gatepost-L2-s61001-0000": {
+    "answer": "61",
+    "checkpoint": {
+      "n_tokens": 327,
+      "text_chars": 1171,
+      "trace_id": "gatepost-L2-s61001-0000::t002::premember"
+    },
+    "mention_char": 1255,
+    "no_answer_mention": false,
+    "trace_id": "gatepost-L2-s61001-0000::t002"
+  },
+  "gatepost-L2-s61001-0001": {
+    "answer": "owlmark",
+    "checkpoint": {
+      "n_tokens": 182,
+      "text_chars": 618,
+      "trace_id": "gatepost-L2-s61001-0001::t019::premember"
+    },
+    "mention_char": 649,
+    "no_answer_mention": false,
+    "trace_id": "gatepost-L2-s61001-0001::t019"
+  },
+  "gatepost-L2-s61001-0002": {
+    "answer": "90",
+    "checkpoint": {
+      "n_tokens": 146,
+      "text_chars": 514,
+      "trace_id": "gatepost-L2-s61001-0002::t031::premember"
+    },
+    "mention_char": 549,
+    "no_answer_mention": false,
+    "trace_id": "gatepost-L2-s61001-0002::t031"
+  },
+  "glyphgate-L1-s61001-0000": {
+    "answer": "ke-fen-mu",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "glyphgate-L1-s61001-0000::t009"
+  },
+  "glyphgate-L1-s61001-0001": {
+    "answer": "lus-lus-ke",
+    "checkpoint": {
+      "n_tokens": 464,
+      "text_chars": 1234,
+      "trace_id": "glyphgate-L1-s61001-0001::t025::premember"
+    },
+    "mention_char": 1262,
+    "no_answer_mention": false,
+    "trace_id": "glyphgate-L1-s61001-0001::t025"
+  },
+  "glyphgate-L1-s61001-0002": {
+    "answer": "ke-ro-ti",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "glyphgate-L1-s61001-0002::t002"
+  },
+  "glyphgate-L2-s61001-0000": {
+    "answer": "mu-ti-ke-ke",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "glyphgate-L2-s61001-0000::t016"
+  },
+  "glyphgate-L2-s61001-0001": {
+    "answer": "za-gor-gor-lus",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "glyphgate-L2-s61001-0001::t021"
+  },
+  "glyphgate-L2-s61001-0002": {
+    "answer": "mu-fen-za-gor",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "glyphgate-L2-s61001-0002::t000"
+  },
+  "kilnrite-L1-s61001-0000": {
+    "answer": "Emberfast",
+    "checkpoint": {
+      "n_tokens": 71,
+      "text_chars": 261,
+      "trace_id": "kilnrite-L1-s61001-0000::t011::premember"
+    },
+    "mention_char": 286,
+    "no_answer_mention": false,
+    "trace_id": "kilnrite-L1-s61001-0000::t011"
+  },
+  "kilnrite-L1-s61001-0001": {
+    "answer": "Ashdraw",
+    "checkpoint": {
+      "n_tokens": 298,
+      "text_chars": 1078,
+      "trace_id": "kilnrite-L1-s61001-0001::t030::premember"
+    },
+    "mention_char": 1081,
+    "no_answer_mention": false,
+    "trace_id": "kilnrite-L1-s61001-0001::t030"
+  },
+  "kilnrite-L1-s61001-0002": {
+    "answer": "Ashdraw",
+    "checkpoint": {
+      "n_tokens": 138,
+      "text_chars": 477,
+      "trace_id": "kilnrite-L1-s61001-0002::t025::premember"
+    },
+    "mention_char": 483,
+    "no_answer_mention": false,
+    "trace_id": "kilnrite-L1-s61001-0002::t025"
+  },
+  "kilnrite-L2-s61001-0000": {
+    "answer": "RAISED",
+    "checkpoint": {
+      "n_tokens": 199,
+      "text_chars": 636,
+      "trace_id": "kilnrite-L2-s61001-0000::t013::premember"
+    },
+    "mention_char": 651,
+    "no_answer_mention": false,
+    "trace_id": "kilnrite-L2-s61001-0000::t013"
+  },
+  "kilnrite-L2-s61001-0001": {
+    "answer": "Emberfast",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "kilnrite-L2-s61001-0001::t004"
+  },
+  "kilnrite-L2-s61001-0002": {
+    "answer": "Ashdraw",
+    "mention_char": null,
+    "no_answer_mention": true,
+    "trace_id": "kilnrite-L2-s61001-0002::t023"
+  },
+  "loomfix-L1-s61001-0000": {
+    "answer": "3",
+    "checkpoint": {
+      "n_tokens": 49,
+      "text_chars": 177,
+      "trace_id": "loomfix-L1-s61001-0000::t004::premember"
+    },
+    "mention_char": 185,
+    "no_answer_mention": false,
+    "trace_id": "loomfix-L1-s61001-0000::t004"
+  },
+  "loomfix-L1-s61001-0001": {
+    "answer": "1",
+    "checkpoint": {
+      "n_tokens": 30,
+      "text_chars": 138,
+      "trace_id": "loomfix-L1-s61001-0001::t023::premember"
+    },
+    "mention_char": 138,
+    "no_answer_mention": false,
+    "trace_id": "loomfix-L1-s61001-0001::t023"
+  },
+  "loomfix-L1-s61001-0002": {
+    "answer": "1",
+    "checkpoint": {
+      "n_tokens": 134,
+      "text_chars": 347,
+      "trace_id": "loomfix-L1-s61001-0002::t008::premember"
+    },
+    "mention_char": 347,
+    "no_answer_mention": false,
+    "trace_id": "loomfix-L1-s61001-0002::t008"
+  },
+  "loomfix-L2-s61001-0000": {
+    "answer": "3",
+    "checkpoint": {
+      "n_tokens": 186,
+      "text_chars": 476,
+      "trace_id": "loomfix-L2-s61001-0000::t000::premember"
+    },
+    "mention_char": 476,
+    "no_answer_mention": false,
+    "trace_id": "loomfix-L2-s61001-0000::t000"
+  },
+  "loomfix-L2-s61001-0001": {
+    "answer": "8",
+    "checkpoint": {
+      "n_tokens": 69,
+      "text_chars": 162,
+      "trace_id": "loomfix-L2-s61001-0001::t010::premember"
+    },
+    "mention_char": 166,
+    "no_answer_mention": false,
+    "trace_id": "loomfix-L2-s61001-0001::t010"
+  },
+  "loomfix-L2-s61001-0002": {
+    "answer": "1",
+    "checkpoint": {
+      "n_tokens": 150,
+      "text_chars": 408,
+      "trace_id": "loomfix-L2-s61001-0002::t021::premember"
+    },
+    "mention_char": 408,
+    "no_answer_mention": false,
+    "trace_id": "loomfix-L2-s61001-0002::t021"
+  },
+  "runeward-L1-s61001-0000": {
+    "answer": "2",
+    "checkpoint": {
+      "n_tokens": 122,
+      "text_chars": 448,
+      "trace_id": "runeward-L1-s61001-0000::t012::premember"
+    },
+    "mention_char": 448,
+    "no_answer_mention": false,
+    "trace_id": "runeward-L1-s61001-0000::t012"
+  },
+  "runeward-L1-s61001-0001": {
+    "answer": "6",
+    "checkpoint": {
+      "n_tokens": 205,
+      "text_chars": 623,
+      "trace_id": "runeward-L1-s61001-0001::t014::premember"
+    },
+    "mention_char": 633,
+    "no_answer_mention": false,
+    "trace_id": "runeward-L1-s61001-0001::t014"
+  },
+  "runeward-L1-s61001-0002": {
+    "answer": "4",
+    "checkpoint": {
+      "n_tokens": 67,
+      "text_chars": 222,
+      "trace_id": "runeward-L1-s61001-0002::t023::premember"
+    },
+    "mention_char": 231,
+    "no_answer_mention": false,
+    "trace_id": "runeward-L1-s61001-0002::t023"
+  },
+  "runeward-L2-s61001-0000": {
+    "answer": "6",
+    "checkpoint": {
+      "n_tokens": 109,
+      "text_chars": 290,
+      "trace_id": "runeward-L2-s61001-0000::t006::premember"
+    },
+    "mention_char": 290,
+    "no_answer_mention": false,
+    "trace_id": "runeward-L2-s61001-0000::t006"
+  },
+  "runeward-L2-s61001-0001": {
+    "answer": "7",
+    "checkpoint": {
+      "n_tokens": 241,
+      "text_chars": 610,
+      "trace_id": "runeward-L2-s61001-0001::t024::premember"
+    },
+    "mention_char": 638,
+    "no_answer_mention": false,
+    "trace_id": "runeward-L2-s61001-0001::t024"
+  },
+  "runeward-L2-s61001-0002": {
+    "answer": "9",
+    "checkpoint": {
+      "n_tokens": 27,
+      "text_chars": 92,
+      "trace_id": "runeward-L2-s61001-0002::t004::premember"
+    },
+    "mention_char": 144,
+    "no_answer_mention": false,
+    "trace_id": "runeward-L2-s61001-0002::t004"
+  }
+}

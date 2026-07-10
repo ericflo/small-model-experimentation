@@ -16,10 +16,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Evidence-Conditioned Selection
 
 - Program: [charter](../research_programs/evidence_conditioned_selection/charter.md)
-- Current read: confidence can rank completed candidates, but existential partial reachability is not automatically readable; pooled scores can be pure task-difficulty signal.
-- Best next experiment: close the exact-pool visible-selector gap, then test residualized listwise sibling selection behind task-macro and recall@beam gates.
-- Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_generator_verifier_gap`, `qwen35_4b_code_confidence`.
-- Avoid repeating: pooled-AUROC confidence claims, type-only partial judges, or accuracy gains that hide abstention/commit-rate changes.
+- Current read: confidence can rank completed candidates, but existential partial reachability is not automatically readable; C51 further shows that a trace score may contain real task-relevant signal while conditioning on a post-thought state the model rarely reaches.
+- Best next experiment: close the exact-pool visible-selector gap; for thought selection, test joint autonomous-close-plus-answer potential only after termination/parse gates, not a larger C51 pool.
+- Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_generator_verifier_gap`, `qwen35_4b_code_confidence`, `qwen35_4b_answer_potential_trace_sft`.
+- Avoid repeating: pooled-AUROC confidence claims, type-only partial judges, answer-only potential over cap-bound traces, or accuracy gains that hide abstention/commit-rate changes.
 - Evidence that advances the program: deployable selection gains under family-held-out candidate pools and adversarial visible examples.
 
 ## Active Evidence Acquisition
@@ -52,10 +52,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Posttraining And Adaptation
 
 - Program: [charter](../research_programs/posttraining_and_adaptation/charter.md)
-- Current read: adaptation can reshape behavior, but oracle-supervised gains and deployable gains must be separated carefully; induction gains live in serial reasoning tokens, not a forced forward pass.
-- Best next experiment: compositional-grammar reasoning-SFT after C45 -- held-out combinations, held-out productions, and held-out composition-depth with execute-ceiling, token-budget, and value-fill gates.
-- Strong anchors: `qwen35_4b_constrained_coverage_dpo`, `qwen35_4b_live_tool_dagger`, `qwen35_4b_oracle_process_grpo`.
-- Avoid repeating: adapter or preference runs whose artifacts cannot be audited or whose labels are not deployable.
+- Current read: adaptation can reshape behavior, but C50/C51 locate a decisive prerequisite at the answer-emission seam: train on deployable commit states, and do not promote a dense trace label to SFT until it predicts autonomous outcomes at useful effect size.
+- Best next experiment: C50 recovery-arm/breadth ablations; separately, a new joint close-plus-answer scorer gate before any answer-potential SFT.
+- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`, `qwen35_4b_bank_the_thoughts`, `qwen35_4b_answer_potential_trace_sft`.
+- Avoid repeating: adapter or preference runs whose artifacts cannot be audited, hidden-label wins without frozen alternatives, or SFT launched from a scorer that missed its outcome gate.
 - Evidence that advances the program: a trained behavior beats strong frozen/tool baselines without hidden-label leakage.
 
 ## Process Control And Tool Use
@@ -106,10 +106,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Test-Time Reasoning Budget
 
 - Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
-- Current read: the corpus disabled native thinking everywhere; turning it on is a real deployable lever (MBPP greedy +15pp, claim C9), but a budget to control (overthinking hurts) and partly a compute/scaffold effect rather than reasoning.
-- Best next experiment: a deployable STOP/MORE controller over the thinking budget vs the fixed ~1024 optimum at matched mean tokens; and a stronger content control (substitute a different task's thinking).
-- Strong anchors: `qwen35_4b_thinking_budget_scaling`, `qwen_python_shaped_silent_executor`, `qwen35_4b_adaptive_evidence_budget_policy`.
-- Avoid repeating: reporting a thinking-budget win without a shuffled/foreign-thinking control or without the overthinking decline; claiming an exact optimal budget from single-seed gaps.
+- Current read: native thinking is a real coherent-content lever, but its budget and termination are workload-specific. C51 shows that 99.37% cap contact can make an answer-potential score describe a counterfactual forced-close state instead of deployable reasoning.
+- Best next experiment: the registered loop-control line; for trace value, a fresh close-plus-answer potential gate with natural-closure and autonomous-parse prerequisites.
+- Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`.
+- Avoid repeating: thinking-budget wins without content controls, calibration on a different workload class, cap-bound score interpretation, or larger-N trace harvesting before termination works.
 - Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.
 
 ## Agentic Breadth Installation
@@ -120,4 +120,3 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 - Strong anchors: `qwen35_4b_gauntlet_breadth_round1`.
 - Avoid repeating: evaluating adapters through vLLM runtime LoRA (C49 silent no-op — on-vs-off gate mandatory); training full-weight on the model's own verbatim naturally-closed chains (near-self-distillation); filtering training data to naturally-closed chains only (excludes the deployment-critical force-closed state); comparing HF-backend and vLLM-backend menagerie scores.
 - Evidence that advances the program: compounding menagerie deltas across iteration rounds on fresh paired seeds; ablations attributing the delta between protocol-emission repair and axis competence; medium/slow-tier confirmations once the host fla-kernel fault is resolved.
-

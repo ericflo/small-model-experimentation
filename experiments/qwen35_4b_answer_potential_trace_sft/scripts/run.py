@@ -290,7 +290,7 @@ def run_calibration(config: dict[str, Any]) -> dict[str, Any]:
         auroc_min=float(gate_config["within_task_auroc_min"]),
         uplift_min=float(gate_config["top1_uplift_min"]),
         kendall_min=float(gate_config["kendall_tau_min"]),
-        premention_fraction_min=float(gate_config["premember_fraction_min"]),
+        premention_fraction_min=float(gate_config["premention_fraction_min"]),
         bootstrap_resamples=int(gate_config["bootstrap_resamples"]),
         bootstrap_seed=int(gate_config["bootstrap_seed"]),
         random_seed=int(sampling["control_seed"]),
@@ -306,6 +306,66 @@ def run_calibration(config: dict[str, Any]) -> dict[str, Any]:
     return gate
 
 
+def analyze_existing_calibration(config: dict[str, Any]) -> dict[str, Any]:
+    """Resume the CPU-only G0 reduction from complete saved GPU artifacts."""
+    design_boundary_receipt(config)
+    required = {
+        "thoughts": CAL_DIR / "thoughts.jsonl",
+        "canonical": CAL_DIR / "potential.jsonl",
+        "format": CAL_DIR / "potential_format_variant.jsonl",
+        "shuffled": CAL_DIR / "potential_token_shuffled.jsonl",
+        "foreign": CAL_DIR / "potential_foreign.jsonl",
+        "rollouts": CAL_DIR / "rollouts.jsonl",
+        "premember": CAL_DIR / "potential_premember.jsonl",
+        "premember_diagnostics": CAL_DIR / "premember_diagnostics.json",
+    }
+    missing = [str(path) for path in required.values() if not path.is_file()]
+    if missing:
+        raise RuntimeError(f"cannot resume G0; missing artifact(s): {missing}")
+    all_items = read_jsonl(DATA_DIR / "calibration.jsonl")
+    scorable_ids = {str(row["id"]) for row in all_items if row["potential_scorable"]}
+    traces = [
+        row for row in read_jsonl(required["thoughts"])
+        if str(row["task_id"]) in scorable_ids
+    ]
+    gate_config = config["scorer_gate"]
+    sampling = config["sampling"]
+    gate = evaluate_g0(
+        traces=traces,
+        canonical_scores=read_jsonl(required["canonical"]),
+        format_scores=read_jsonl(required["format"]),
+        shuffled_scores=read_jsonl(required["shuffled"]),
+        foreign_scores=read_jsonl(required["foreign"]),
+        rollout_rows=read_jsonl(required["rollouts"]),
+        premention_scores=read_jsonl(required["premember"]),
+        premention_diagnostics=read_json(required["premember_diagnostics"]),
+        auroc_min=float(gate_config["within_task_auroc_min"]),
+        uplift_min=float(gate_config["top1_uplift_min"]),
+        kendall_min=float(gate_config["kendall_tau_min"]),
+        premention_fraction_min=float(gate_config["premention_fraction_min"]),
+        bootstrap_resamples=int(gate_config["bootstrap_resamples"]),
+        bootstrap_seed=int(gate_config["bootstrap_seed"]),
+        random_seed=int(sampling["control_seed"]),
+    )
+    gate["resumed_from_saved_artifacts"] = True
+    gate["artifact_receipts"] = {
+        name: artifact_receipt(path, rows=len(read_jsonl(path)))
+        for name, path in required.items()
+        if path.suffix == ".jsonl"
+    }
+    write_json(CAL_DIR / "g0.json", gate)
+    write_json(
+        CAL_DIR / "selector_freeze.json",
+        {
+            "schema_version": 1,
+            "source": "configs/default.yaml preregistered defaults; no post-result tuning",
+            **config["selector"],
+        },
+    )
+    print(f"[analyze-g0] passed={gate['passed']} criteria={gate['criteria']}", flush=True)
+    return gate
+
+
 def require_passing_g0(config: dict[str, Any]) -> dict[str, Any]:
     design_boundary_receipt(config)
     path = CAL_DIR / "g0.json"
@@ -313,6 +373,17 @@ def require_passing_g0(config: dict[str, Any]) -> dict[str, Any]:
         raise RuntimeError("full run requires runs/calibration/g0.json; run --stage calibrate first")
     gate = read_json(path)
     if gate.get("gate") != "G0" or gate.get("passed") is not True:
+        write_json(
+            RUNS_DIR / "full_refusal.json",
+            {
+                "schema_version": 1,
+                "refused": True,
+                "reason": "preregistered G0 did not pass",
+                "g0_path": str(path.relative_to(EXP)),
+                "g0_criteria": gate.get("criteria"),
+                "design_commit": config["design_boundary"]["commit"],
+            },
+        )
         raise RuntimeError("full run is prohibited because preregistered G0 did not pass")
     return gate
 
@@ -324,7 +395,11 @@ def run_full(config: dict[str, Any]) -> dict[str, Any]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--stage", choices=("data", "smoke", "calibrate", "full"), default="smoke")
+    parser.add_argument(
+        "--stage",
+        choices=("data", "smoke", "calibrate", "analyze-g0", "full"),
+        default="smoke",
+    )
     parser.add_argument("--smoke", action="store_true", help="compatibility alias for --stage smoke")
     args = parser.parse_args(argv)
     if args.smoke:
@@ -337,6 +412,8 @@ def main(argv: list[str] | None = None) -> int:
         run_smoke(config)
     elif args.stage == "calibrate":
         run_calibration(config)
+    elif args.stage == "analyze-g0":
+        analyze_existing_calibration(config)
     else:
         run_full(config)
     return 0

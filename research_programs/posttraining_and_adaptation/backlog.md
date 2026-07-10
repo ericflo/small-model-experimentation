@@ -2,6 +2,8 @@
 
 ## Next Experiments
 
+- Treat any C51 follow-up as a new close/commit-scoring experiment, not a larger rejection-sampling run;
+  require autonomous termination and parse gates before training.
 - Compare DPO, SFT, process distillation, and DAgger on one shared candidate/evidence substrate.
 - Add adapter-free reproducibility manifests for every trained run.
 - Measure catastrophic narrowing: does an update improve one substrate while hurting direct baselines?
@@ -19,3 +21,6 @@
 ## Stop Conditions
 
 Do not retain trained adapters in git. Do not claim a posttraining method works if it beats only a weak baseline and fails frozen or shuffled controls.
+
+Do not spend SFT compute on a trace score that has not cleared a preregistered within-task outcome gate and
+practical top-selection margin. C51 is stopped before training under its current answer-only potential event.

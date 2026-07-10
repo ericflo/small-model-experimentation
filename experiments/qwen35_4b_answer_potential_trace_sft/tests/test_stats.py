@@ -9,7 +9,7 @@ from pathlib import Path
 SRC = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(SRC))
 
-from stats import kendall_tau_b, paired_bootstrap, quantile, roc_auc  # noqa: E402
+from stats import kendall_tau_b, mean, paired_bootstrap, quantile, roc_auc  # noqa: E402
 
 
 class StatisticsTests(unittest.TestCase):
@@ -37,6 +37,9 @@ class StatisticsTests(unittest.TestCase):
 
     def test_quantile_interpolates(self) -> None:
         self.assertTrue(math.isclose(quantile([0, 10], 0.25), 2.5))
+
+    def test_empty_mean_is_nan_for_internal_diagnostics(self) -> None:
+        self.assertTrue(math.isnan(mean([])))
 
 
 if __name__ == "__main__":

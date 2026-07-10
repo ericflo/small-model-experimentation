@@ -101,6 +101,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 - `counterexample_rule_repair` (track-z): [README](../experiments/counterexample_rule_repair/README.md)
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
+- `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
 - `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
@@ -301,6 +302,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `learned_sparse_slot_executor` (track-y): [README](../experiments/learned_sparse_slot_executor/README.md)
 - `query_filter_executor` (track-y): [README](../experiments/query_filter_executor/README.md)
 - `qwen35_4b_activation_steering` (new): [README](../experiments/qwen35_4b_activation_steering/README.md)
+- `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_crosssubstrate_structure` (new): [README](../experiments/qwen35_4b_crosssubstrate_structure/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_depth3_dose_response` (new): [README](../experiments/qwen35_4b_depth3_dose_response/README.md)
@@ -350,6 +352,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 - `adaptive_cognitive_kernel` (track-y): [README](../experiments/adaptive_cognitive_kernel/README.md)
 - `execution_conditioned_repair` (track-z): [README](../experiments/execution_conditioned_repair/README.md)
+- `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
 - `qwen35_4b_bank_the_thoughts` (new): [README](../experiments/qwen35_4b_bank_the_thoughts/README.md)
 - `qwen35_4b_banking_installs_structure` (new): [README](../experiments/qwen35_4b_banking_installs_structure/README.md)

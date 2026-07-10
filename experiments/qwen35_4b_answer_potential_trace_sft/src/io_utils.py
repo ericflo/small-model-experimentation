@@ -23,7 +23,13 @@ def sha256_file(path: Path) -> str:
 
 
 def canonical_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    return json.dumps(
+        value,
+        sort_keys=True,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        allow_nan=False,
+    )
 
 
 def read_json(path: Path) -> Any:
@@ -62,7 +68,17 @@ def _atomic_text(path: Path, text: str) -> None:
 
 
 def write_json(path: Path, value: Any) -> None:
-    _atomic_text(path, json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+    _atomic_text(
+        path,
+        json.dumps(
+            value,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+            allow_nan=False,
+        )
+        + "\n",
+    )
 
 
 def write_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> None:

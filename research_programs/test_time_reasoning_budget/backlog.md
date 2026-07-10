@@ -20,9 +20,15 @@
   overthinking-washout hypothesis; pure compute (filler) ≈ no-think and foreign catastrophic at every
   budget. So coherent reasoning is the entire gain at ALL budgets; the scaling run's "2048 shuffle ≈ real"
   was a shuffle-protocol artifact.
+- `qwen35_4b_answer_potential_trace_sft`: terminal `SCORER_NEGATIVE`. Answer gain had modest real
+  within-task signal but missed its actionability bars; 99.37% cap contact and 13.2% answer parsing exposed
+  a forced-close deployment-seam mismatch. No N=128 harvest or SFT ran.
 
 ## Next Experiments
 
+- **Close/commit potential follow-up (new experiment only):** compare joint probability of autonomously
+  closing and emitting the canonical answer against answer-only potential, after a frozen natural-close and
+  parseability calibration gate. Do not reuse C51's observed tasks to tune thresholds.
 - **Symmetric loop-control follow-up (next; new experiment):** the exact-capture verified-macro
   ladder is terminal `pass=false`, with no selected budget and no authorized K=12/semantic stage.
   Its clean 61k envelope still produced 40/48 exact loops, 8/48 unresolved contacts, and 4/48
@@ -54,9 +60,12 @@
 - Matched-compute control: compare conditions at equal total forward tokens (the corpus's
   matched-compute methodology), so gains are not just "more tokens".
 - Shift check: difficulty / length slices (does the optimal budget move with task length?).
+- For trace selection, report natural-close rate and autonomous answer parse rate before scaling the pool.
 
 ## Stop Conditions
 
 - Retire/demote if, across substrates and at matched compute, thinking never raises the
   deployable line beyond shuffled-thinking — i.e., only the scaffold + extra compute help.
 - Branch a new program if a thinking-budget *controller* becomes a rich line of its own.
+- Stop answer-only trace-potential scaling when the thought pool is cap-bound; changing N does not repair
+  an injected close/commit seam.

@@ -1,0 +1,13 @@
+{
+  "family_cap": 140,
+  "high_gain_quantile": 0.9,
+  "max_per_item": 2,
+  "near_best_answer_nats_per_token": 0.1,
+  "normalized_template_cap": 12,
+  "prior_percentile_floor": 0.05,
+  "schema_version": 1,
+  "source": "configs/default.yaml preregistered defaults; no post-result tuning",
+  "target_max_rows": 1200,
+  "target_min_rows": 900,
+  "trigram_duplicate_jaccard": 0.9
+}

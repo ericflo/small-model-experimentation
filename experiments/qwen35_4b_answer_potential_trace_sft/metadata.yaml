@@ -5,14 +5,20 @@ source_track: "new"
 path: "experiments/qwen35_4b_answer_potential_trace_sft"
 primary_readme: "experiments/qwen35_4b_answer_potential_trace_sft/README.md"
 primary_report: "experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md"
-summary: "Design frozen and committed before any GPU-scale run; implementation and the four-trace GPU smoke are complete, while G0 calibration has not yet run. The first repository commit containing this directory is the permanent pre-run design boundary."
+summary: "**Terminal verdict: `SCORER_NEGATIVE`.** The preregistered G0 calibration failed, so the gated orchestrator refused the N=128 harvest and no selector, adapter, or SFT evaluation was run. The answer-potential signal was real but not actionable under this protocol: task-macro within-task AUROC was 0.617 versus the 0.65 gate, and top-one rollout-success uplifts over seeded-random and shortest selection were +0.073 and +0.058 versus the required +0.10."
 tags:
+  - "counterexamples"
+  - "latent-state"
+  - "lora"
   - "small-model"
 research_programs:
   - "evidence_conditioned_selection"
   - "posttraining_and_adaptation"
+  - "reliability_and_safety"
+  - "structured_execution_and_compilers"
   - "test_time_reasoning_budget"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -21,10 +27,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 4
-  jsonl: 8
-  md: 7
-  py: 28
+  csv: 3
+  json: 17
+  jsonl: 15
+  md: 8
+  py: 30
   yaml: 3
-total_files: 50
-total_size_bytes: 2095115
+total_files: 76
+total_size_bytes: 38119912

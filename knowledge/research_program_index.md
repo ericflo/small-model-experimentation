@@ -10,7 +10,7 @@ Generated from `research_programs/registry.yaml` and experiment metadata. The im
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 148
+- Assigned experiments: 149
 
 ### Seed Evidence
 
@@ -38,6 +38,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
 - `qwen35_4b_banking_installs_structure` (new): [README](../experiments/qwen35_4b_banking_installs_structure/README.md)
 - `qwen35_4b_banking_thinking_stack` (new): [README](../experiments/qwen35_4b_banking_thinking_stack/README.md)
@@ -670,7 +671,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 56
+- Assigned experiments: 57
 
 ### Seed Evidence
 
@@ -684,6 +685,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `counterexample_rule_repair` (track-z): [README](../experiments/counterexample_rule_repair/README.md)
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)

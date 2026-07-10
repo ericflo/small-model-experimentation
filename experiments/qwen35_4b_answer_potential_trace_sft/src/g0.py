@@ -236,13 +236,19 @@ def evaluate_g0(
         seed=bootstrap_seed + 3,
     )
 
+    gain_auc_macro = mean(list(gain_auc_by_task.values()))
+    length_auc_macro = mean(list(length_auc_by_task.values()))
+    prior_auc_macro = (
+        mean(list(prior_auc_by_task.values())) if prior_auc_by_task else None
+    )
     metrics = {
         "n_tasks": len(by_task),
         "n_traces": len(rows),
         "within_task_auroc": {
-            "gain_task_macro": mean(list(gain_auc_by_task.values())),
-            "negative_length_task_macro": mean(list(length_auc_by_task.values())),
-            "prior_mean_logprob_task_macro": mean(list(prior_auc_by_task.values())),
+            "gain_task_macro": gain_auc_macro,
+            "negative_length_task_macro": length_auc_macro,
+            "prior_mean_logprob_task_macro": prior_auc_macro,
+            "prior_mean_logprob_available": bool(prior_auc_by_task),
             "mixed_tasks_gain": len(gain_auc_by_task),
             "by_task": {
                 "gain": gain_auc_by_task,
@@ -270,7 +276,7 @@ def evaluate_g0(
         },
     }
     criteria = {
-        "auroc": metrics["within_task_auroc"]["gain_task_macro"] >= auroc_min,
+        "auroc": gain_auc_macro >= auroc_min,
         "top1_random_uplift": (
             top_random_bootstrap["mean_delta"] >= uplift_min
             and top_random_bootstrap["ci95_low"] > 0.0
@@ -280,10 +286,9 @@ def evaluate_g0(
             and top_short_bootstrap["ci95_low"] > 0.0
         ),
         "beats_length_and_prior_auroc": (
-            metrics["within_task_auroc"]["gain_task_macro"]
-            > metrics["within_task_auroc"]["negative_length_task_macro"]
-            and metrics["within_task_auroc"]["gain_task_macro"]
-            > metrics["within_task_auroc"]["prior_mean_logprob_task_macro"]
+            prior_auc_macro is not None
+            and gain_auc_macro > length_auc_macro
+            and gain_auc_macro > prior_auc_macro
         ),
         "beats_token_shuffled": (
             shuffled["task_macro_mean_gain_advantage"] > 0.0

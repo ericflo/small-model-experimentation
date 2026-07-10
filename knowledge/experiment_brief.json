@@ -1335,40 +1335,46 @@
    ]
   },
   "qwen35_4b_answer_potential_trace_sft": {
-   "verdict_tag": "Plumbing is ready; the real test remains",
-   "concept_primer": "Before trusting a measuring stick, compare it with an independent one. This project first checks whether two implementations assign nearly the same score to a known answer after the same written reasoning.",
+   "verdict_tag": "The score sees something, but the model cannot reliably cash it out",
+   "concept_primer": "A known correct answer can be used as a measuring probe: after each sampled reasoning trace, ask how probable that answer is without actually sampling it. The probe is useful only if high-scoring traces also produce better fresh answers on their own.",
    "plain_question": "Can answer scores identify the model's most useful self-written reasoning, so those examples teach it better than ordinary success filtering?",
-   "plain_answer": "Not yet. The four-trace smoke run and independent score cross-check passed, but the main ranking and training tests have not run. This is a verified launch state, not evidence that the method improves answers.",
-   "why_it_matters": "The setup can now fail cheaply if the proposed score does not predict fresh answer success. That protects the much larger data collection and training run from being launched on a broken measurement.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No under this protocol. High answer-potential traces did beat random and short traces modestly, and relevance controls passed, but the score missed the pre-set ranking and effect-size gates. Almost every reasoning trace was force-closed; fresh answers rarely appeared in the expected form. The guard therefore stopped before data harvesting or training.",
+   "why_it_matters": "A dense score can contain genuine information while still measuring a state the model rarely reaches in deployment. Validating the score first avoided a much larger sample-and-train run and exposed the next real problem: make closing and committing part of the scored event.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Frozen procedural problems",
-     "value": "1,264",
-     "sub": "across calibration, training, and three unseen evaluation splits"
+     "label": "Gate checks passed",
+     "value": "3 / 8",
+     "sub": "terminal scorer-negative verdict; no training launched"
     },
     {
-     "label": "Real-model smoke traces",
-     "value": "4 / 4",
-     "sub": "produced finite answer scores"
+     "label": "Within-problem ranking",
+     "value": "0.617 vs 0.650",
+     "sub": "observed AUROC versus the pre-set launch bar"
     },
     {
-     "label": "Independent score difference",
-     "value": "0.060 vs 0.15",
-     "sub": "observed nats per token versus the pre-set plumbing limit"
+     "label": "Fresh-answer success",
+     "value": "20.3% vs 12.9% / 14.4%",
+     "sub": "top answer-potential trace versus seeded random / shortest"
     },
     {
-     "label": "Local implementation checks",
-     "value": "25 / 25",
-     "sub": "passed before the main run"
+     "label": "Close → parse → correct",
+     "value": "0.63% → 13.2% → 86.9%",
+     "sub": "natural thought closure; rollout parsing; correctness if parsed"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Independent answer-score cross-check passes",
-     "chart_read": "The two bars show the largest observed disagreement between implementations and the pre-set allowed limit. Lower is better, and the observed bar must remain below the limit bar.",
-     "chart_takeaway": "The observed bar is under half the allowed height, so the score-reading machinery is accurate enough to launch the main test."
+     "chart_plain_title": "The answer score helps, but not enough to launch training",
+     "chart_read": "Each pair compares the observed validation statistic with its pre-set minimum. The observed bar must reach the gate bar in all four groups; none does.",
+     "chart_takeaway": "The score has measurable signal, including positive top-choice gains, but it misses every outcome and anti-copying launch threshold."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The real bottleneck is closing and committing",
+     "chart_read": "The first bar is the share of thoughts that ended naturally, the second is the share of forced-close rollouts that produced a parseable answer, and the third is correctness among those parsed answers.",
+     "chart_takeaway": "When an answer appears in the expected form it is usually right, but the model almost never closes the thought naturally and rarely emits that form after a forced close."
     }
    ]
   },

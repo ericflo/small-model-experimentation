@@ -2,12 +2,64 @@
 
 ## Status
 
-Design frozen and committed before any GPU-scale run; implementation and the four-trace GPU smoke are
-complete, while G0 calibration has not yet run. The first repository commit containing this directory
-is the permanent pre-run design boundary.
+**Terminal verdict: `SCORER_NEGATIVE`.** The preregistered G0 calibration failed, so the gated
+orchestrator refused the N=128 harvest and no selector, adapter, or SFT evaluation was run. The
+answer-potential signal was real but not actionable under this protocol: task-macro within-task
+AUROC was 0.617 versus the 0.65 gate, and top-one rollout-success uplifts over seeded-random and
+shortest selection were +0.073 and +0.058 versus the required +0.10.
 
 The full plan is in [`reports/preregistration.md`](reports/preregistration.md), and the adversarial
-review is in [`reports/design_review.md`](reports/design_review.md).
+review is in [`reports/design_review.md`](reports/design_review.md). Both were frozen in commit
+`3441dd23` before any GPU-scale work. The terminal report is in
+[`reports/report.md`](reports/report.md), with compact result tables in [`analysis/`](analysis/).
+
+## Result
+
+Calibration sampled 2,048 thoughts for 64 fresh procedural prompts; 58 prompts (1,856 thoughts)
+admitted a finite confirmatory answer event. Three of eight implementation-level gate booleans
+passed:
+
+| diagnostic | observed | frozen requirement | result |
+| --- | ---: | ---: | :---: |
+| within-task answer-gain AUROC | 0.617 | at least 0.65 | fail |
+| top gain minus seeded random | +0.073 | at least +0.10 and CI lower > 0 | fail |
+| top gain minus shortest | +0.058 | at least +0.10 and CI lower > 0 | fail |
+| beats length and trace prior | beat length by +0.116 AUROC; prior unavailable | beat both | fail closed |
+| real minus token-shuffled gain | +0.555 nats, CI [0.201, 0.978] | CI lower > 0 | pass |
+| real minus foreign gain | +4.791 nats, CI [3.513, 6.164] | CI lower > 0 | pass |
+| answer-format rank stability | Kendall tau 0.830 | at least 0.80 | pass |
+| positive before answer mention | 0.569 | at least 0.75 | fail |
+
+The score therefore detects some task-relevant structure but does not reliably identify a best
+deployable thought. Its top choice succeeded on 20.3% of fresh continuations versus 12.9% for the
+seeded-random choice and 14.4% for the shortest choice; both gains had positive paired confidence
+intervals, but both missed the preregistered effect-size bar.
+
+The most important failure was the deployment seam. Only 13/2,048 thoughts closed naturally;
+2,035/2,048 contacted the 512-token cap. After force-closing and asking for a short answer, only
+13.2% of 14,848 rollouts parsed, although 86.9% of parsed answers were correct. Teacher-forcing the
+canonical answer after an injected `</think>\n\nANSWER:` boundary measured a useful counterfactual
+answer state, but usually not one the model could enter and express on its own.
+
+One instrumentation limitation is preserved rather than repaired post-result: thought-generation
+log-probabilities were not requested, so the trace-prior comparison was unavailable and its
+criterion failed closed. This does not determine the verdict: AUROC, both +0.10 top-one uplift gates,
+and the pre-answer-mention gate independently failed.
+
+## Learned Lessons
+
+1. Canonical-answer likelihood is not mere answer-format leakage here: real thoughts beat
+   length-matched shuffled and foreign controls, and rankings survived an answer-format change.
+2. A statistically positive selector lift is not automatically large enough to justify banking.
+   The top-gain trace beat both cheap selectors, but not by the frozen actionable margin.
+3. Score the state that deployment can actually reach. A forced-close teacher-forced seam can be
+   informative while remaining a poor proxy for autonomous continuation success.
+4. Natural closure and answer parseability belong in the launch gate, not only in downstream
+   diagnostics. Increasing `N` would multiply mostly cap-bound traces and is not a licensed fix.
+5. Any follow-up should be a new experiment that first repairs or models the close/commit seam—for
+   example, compare joint likelihood of `</think>\n\nANSWER: y*` with answer-only potential, or
+   restrict to genuinely early-closing traces after demonstrating adequate coverage. It must not
+   simply rerun this selector with more samples.
 
 ## Research Program
 
@@ -269,19 +321,27 @@ Calibration gate:
 .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage calibrate
 ```
 
-Full gated pipeline:
+CPU-only reduction from the preserved calibration artifacts:
+
+```bash
+.venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage analyze-g0
+.venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/analyze.py
+```
+
+Full-stage guard (expected to refuse for this terminal result):
 
 ```bash
 .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage full
 ```
 
-The orchestrator must refuse `--stage full` without a committed design-boundary receipt and a
-passing G0 artifact unless an explicit diagnostic-only override is recorded.
+The orchestrator refuses `--stage full` without a committed design-boundary receipt and a passing
+G0 artifact. The preserved [`runs/full_refusal.json`](runs/full_refusal.json) confirms that it did so.
 
 ## Results
 
-No scientific result yet. This README records the pre-run design and will be updated additively after
-the gated run; the frozen design remains available in `reports/preregistration.md` and git history.
+G0 is terminally negative; see the Result section above and
+[`reports/report.md`](reports/report.md). The frozen pre-run design remains available in
+`reports/preregistration.md`, commit `3441dd23`, and git history. No downstream training result exists.
 
 ## Interpretation
 
@@ -292,8 +352,8 @@ than binary rejection sampling for the fixed 4B.
 
 ## Knowledgebase Update
 
-After the terminal result, update all owning program evidence/backlogs, C28/C50 or a new claim as
-warranted, shared synthesis if strategy changes, the practitioner brief, and a native chart spec.
+The terminal result is recorded as claim C51 and integrated into all three owning program ledgers,
+shared synthesis, the model playbook, the practitioner brief, and native chart specifications.
 
 ## Artifacts
 
@@ -302,6 +362,6 @@ warranted, shared synthesis if strategy changes, the practitioner brief, and a n
 - `reports/design_review.md`: pre-run adversarial review
 - `configs/default.yaml`: frozen counts, seeds, thresholds, and recipes
 - `src/vllm_runner.py`: pinned common inference backend
-- `reports/artifact_manifest.yaml`: external adapters/checkpoints and regeneration commands
+- `reports/artifact_manifest.yaml`: terminal no-external-artifact receipt and regeneration commands
 - `runs/`: compact receipts, gates, summaries, and scored rows
 - `analysis/`: derived tables and plots

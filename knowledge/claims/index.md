@@ -2,14 +2,14 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 50
+- Claims: 51
 
 ## Status Counts
 
 | Status | Claims |
 | --- | ---: |
 | Confirmed | 7 |
-| Negative | 1 |
+| Negative | 2 |
 | Open | 2 |
 | Promising | 40 |
 
@@ -22,14 +22,14 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 12 |
 | `collective_experimentation_infrastructure` | 2 |
-| `evidence_conditioned_selection` | 8 |
+| `evidence_conditioned_selection` | 9 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 24 |
+| `posttraining_and_adaptation` | 25 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 5 |
 | `structured_execution_and_compilers` | 29 |
-| `test_time_reasoning_budget` | 5 |
+| `test_time_reasoning_budget` | 6 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -1673,3 +1673,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - 9
 - )
 - .
+
+## C51: Answer-only potential after cap-bound thoughts is a real but NON-ACTIONABLE selector: it detects relevant trace content yet fails G0 because the teacher-forced answer seam is rarely deployable
+
+- Status: `Negative`
+- Programs: `evidence_conditioned_selection`, `posttraining_and_adaptation`, `test_time_reasoning_budget`
+- Summary: Experiment qwen35_4b_answer_potential_trace_sft. A preregistered RL-free gate asked whether the same Qwen3.5-4B model's teacher-forced likelihood of the canonical answer after a sampled thought could rank thoughts worth banking. On 64 fresh procedural atom prompts, N=32 produced 2,048 thoughts; 58 prompts/1,856 thoughts admitted a finite confirmatory answer event, and each thought received eight disjoint-seed short answer rollouts. RESULT: terminal SCORER_NEGATIVE, 3/8 stored gate booleans passed, and the full-stage guard refused N=128/SFT. The dense score had modest real signal: task-macro within-task AUROC 0.617 (gate 0.65); top-gain rollout success 0.203 versus seeded-random 0.129 (+0.073, CI [0.017,0.138]) and shortest 0.144 (+0.058, CI [0.011,0.114]), both below the frozen +0.10 actionability bar. Mechanism controls passed: real-minus-token-shuffled gain +0.555 nats (CI [0.201,0.978]), real-minus-foreign +4.791 (CI [3.513,6.164]), and answer-format Kendall tau 0.830. But only 56.9% of selected traces showed positive gain before first answer mention/no mention (gate 75%), and the declared trace-prior comparator was not captured, so that criterion failed closed. Dominant interface failure: only 13/2,048 thoughts closed naturally, 99.37% hit the 512-token cap, and forced-close answer rollouts parsed only 13.2% even though parsed answers were 86.9% correct. The score measured a useful counterfactual state after an injected close-token + ANSWER seam, not one the model reliably reached and expressed autonomously.
+- Implication: Canonical-answer likelihood can contain trace-specific, task-relevant information without being a valid training-data selector. Before banking, validate within task against fresh autonomous continuations, require a practical top-choice effect size, and gate natural closure/parseability. Under cap-bound thinking, answer-only teacher forcing conditions on an artificial answer state and should not be scaled merely by sampling more. This sharpens C50's answer-emission-seam lesson at the selection seat: the seam must be part of the scored event, not injected after scoring has already chosen the trace.
+
+### Evidence
+
+- [`qwen35_4b_answer_potential_trace_sft`](../../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md)
+
+### Next Tests
+
+- In a new preregistered experiment, compare joint likelihood of the autonomous close-token + ANSWER + y* event against answer-only potential, with the same within-task rollout and corruption gates.
+- Calibrate on the actual workload until a frozen natural-close/parseability gate passes, then test whether potential works on genuinely early-closing traces; report coverage loss explicitly.
+- Capture trace-prior log-probabilities at generation time and assert every declared comparator before the first scientific shard.
+
+### Avoid
+
+- Do not describe 0.617 AUROC or positive selector-delta confidence intervals as a successful selector: the preregistered actionability bars failed.
+- Do not generalize this result to all answer-conditioned scoring; it tests answer-only potential after mostly force-closed 512-token thoughts on fresh procedural atoms.
+- Do not increase N or tune thresholds on these results. At 99.37% cap contact, more sampling mostly multiplies unfinished traces.
+- Do not claim an SFT result: the gate correctly stopped before harvest, selection, or training.

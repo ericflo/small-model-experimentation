@@ -92,6 +92,13 @@ changes a rule here, update the rule in the same commit.
   baseline** (length/verbosity for code, external I/O features generally) — pooled AUROC is
   inflated by item difficulty, and RoPE makes last-token layer-0 a degenerate "surface"
   control, so use an external baseline (C40, C30/C31, C46).
+- **A trace-value score must include the deployment seam it assumes.** C51's canonical-answer
+  likelihood after an injected close contained real thought-specific signal and beat shuffled/foreign
+  controls, but missed its outcome gate while 99.37% of thoughts were cap-bound and only 13.2% of
+  forced-close answers parsed. Before scaling or SFT, gate natural closure and autonomous parsing,
+  validate within task against fresh continuations, and require a practical top-choice effect size.
+  If deployment must emit `</think>` and commit, score that joint event; do not teacher-force the seam
+  away and interpret the resulting answer likelihood as deployable value.
 - **Paired bootstrap over items for every selection/method delta** — few-point deltas on
   n≈250 look real and aren't; report the honest negatives alongside (C46). Pair on a FULLY
   QUALIFYING key — task ids are only unique within a family, and a bare-id dict pairing

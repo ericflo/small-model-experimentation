@@ -26,6 +26,8 @@
   (per-layer linear probes on answer-token activations) — the interpretability/internal-signal angle.
 - [`qwen35_4b_thinking_content_vs_compute`](../../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md)
   (foreign-task-thinking ladder) — the decisive content control.
+- [`qwen35_4b_answer_potential_trace_sft`](../../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md)
+  (claim C51) — answer-potential selection over sampled thinking, stopped at its scorer gate.
 - [`qwen35_4b_verified_macro_long_context_rerun`](../../experiments/qwen35_4b_verified_macro_long_context_rerun/)
   (contamination-free procedural macro induction) — a workload-shift stress test for budget
   calibration and anti-censoring, still in progress.
@@ -88,6 +90,10 @@
   gate termination before correctness, stop increasing context once the registered ladder is
   exhausted, and never interpret a cap-bound score. No decoded or scored content informed these
   decisions.
+- **Answer-conditioned trace scores can validate an artificial post-thinking state.** In C51, 99.37%
+  of 2,048 thoughts hit the 512-token cap. Canonical-answer gain after an injected close contained real
+  trace information, but fresh answers parsed only 13.2% and the scorer missed its actionable G0 bars.
+  Natural closure and autonomous commit must be launch gates when thinking traces feed selection or SFT.
 - **The model uses thinking as CONTENT (separability probe + foreign control).** Linear probes show
   correctness is moderately decodable from the answer-token activation (AUC 0.64–0.76). The
   foreign-task-thinking ladder is decisive: splicing a *different* task's thinking collapses accuracy to
@@ -125,3 +131,6 @@ all budgets — don't dismiss it as compute; behavioral ≠ representational.* T
 richer visible signals to chase the C2 wall; and a **contamination-controlled / harder substrate** — does
 coherent reasoning still carry the whole gain when the no-think baseline is weaker and memorization is
 defeated? (This is the most load-bearing open question given MBPP is basic and likely partly contaminated.)
+C51 adds that a thinking budget is not merely a token count: when almost every trace is force-closed, a
+teacher-forced answer score can describe a counterfactual state rather than deployable reasoning. Calibrate
+termination on the actual workload and include the close/commit event in any trace-value measurement.

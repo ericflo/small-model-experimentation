@@ -1,0 +1,9 @@
+metric,observed,threshold,passed,detail
+within_task_answer_gain_auroc,0.6167234612388482,0.65,False,45 mixed tasks
+top_gain_minus_seeded_random,0.07327586206896551,0.1,False,"95% CI [0.017241, 0.137931]"
+top_gain_minus_shortest,0.05818965517241379,0.1,False,"95% CI [0.010776, 0.114224]"
+beats_length_and_trace_prior,0.11636780715842687,strictly beats both,False,"gain beat length; trace-prior logprob was not captured, so this criterion failed closed"
+real_minus_token_shuffled_gain_nats,0.5554122776201601,95% lower > 0,True,"95% CI [0.201385, 0.978059]"
+real_minus_foreign_gain_nats,4.7905845049820845,95% lower > 0,True,"95% CI [3.513183, 6.164078]"
+format_rank_kendall_tau,0.8300683699013909,0.8,True,58 tasks
+positive_before_answer_mention_fraction,0.5689655172413793,0.75,False,10 selected traces never mentioned the answer
