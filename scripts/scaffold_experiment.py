@@ -68,7 +68,6 @@ def write_metadata(exp_dir: Path, experiment_id: str, title: str, summary: str, 
             "file_counts: {}",
             "total_files: 0",
             "total_size_bytes: 0",
-            'generated_on: ""',
             "",
         ]
     )

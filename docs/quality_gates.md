@@ -59,9 +59,12 @@ gate failures:
   - **Empty directories** — git can't track them, so they exist locally but not in CI, and
     the catalog's `top_level_dirs`/file counts diverge. `make validate` now fails on empty
     dirs under `experiments/` before this reaches CI; delete the dir.
-  - **Local-vs-UTC date stamps** — `generated_on` stamps must use UTC
-    (`build_knowledgebase.py` does since 2026-07-03); an evening PDT commit with a local-date
-    stamp reddens CI. If a date-shaped diff appears, check for a new non-UTC stamp site.
+  - **Wall-clock stamps** — tracked generated files must be a pure function of repo
+    content: no `datetime.now()`/`date.today()` output may reach them. The old
+    `generated_on` stamps did exactly that and reddened every branch at UTC midnight
+    (even after the 2026-07-03 UTC fix), so they were removed on 2026-07-09. If a
+    date-shaped diff appears, a new wall-clock stamp site has crept into a generator —
+    remove the stamp rather than re-dating the files.
   - **Stale fixpoint** — `make catalog` must run twice; the manifest reaches a fixpoint on
     the second pass.
   - To debug a red run: `gh run view <id> --log-failed` and read the embedded `diff --git`.

@@ -1,6 +1,6 @@
 # Experiment Catalog
 
-Generated from `experiments/` on 2026-07-10.
+Generated from `experiments/` by `scripts/build_knowledgebase.py`.
 
 - Experiments: 199
 - Source track Y provenance: 91

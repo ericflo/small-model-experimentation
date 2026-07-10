@@ -43,7 +43,7 @@ CONFIG_DATE_KEY_RE = re.compile(r'"(?:date|date_utc|run_date|started(?:_at)?)"\s
 EPOCH_KEY_RE = re.compile(r'"(?:created_unix|start_unix|end_unix|timestamp)"\s*:\s*(1\d{9})(?:\.\d+)?')
 
 TEXT_SUFFIXES = {".md", ".txt", ".log", ".json", ".jsonl", ".csv", ".yaml", ".yml", ".py", ".sh", ".toml", ".cfg"}
-SKIP_NAMES = {"metadata.yaml"}  # generated_on there is the catalog sweep, not a run date
+SKIP_NAMES = {"metadata.yaml"}  # generated catalog output, never a run-date source
 MAX_TEXT_BYTES = 30_000_000
 IMPORT_DATE = "2026-06-28"  # the bulk corpus-import commit; git dates before/on it are collapsed and untrustworthy
 

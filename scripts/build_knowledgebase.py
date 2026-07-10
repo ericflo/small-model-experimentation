@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Build repository catalogs from self-contained experiment folders."""
+"""Build repository catalogs from self-contained experiment folders.
+
+Output must be a pure function of repo content — byte-stable regardless of run
+date. Never write wall-clock values into the generated files (enforced by
+scripts/validate_repository.py); the old generated_on stamps dirtied every
+branch at UTC midnight.
+"""
 
 from __future__ import annotations
 
 import csv
-import datetime as dt
 import json
 import re
 from collections import Counter, defaultdict
@@ -366,7 +371,6 @@ def write_metadata(record: dict[str, object]) -> None:
             *[f"  {key.lstrip('.') if key.startswith('.') else key}: {counts[key]}" for key in sorted(counts)],
             f"total_files: {record['total_files']}",
             f"total_size_bytes: {record['total_size_bytes']}",
-            f"generated_on: {yaml_scalar(str(record['generated_on']))}",
             "",
         ]
     )
@@ -404,9 +408,6 @@ def write_missing_readme(record: dict[str, object]) -> bool:
 def collect_records() -> list[dict[str, object]]:
     if not EXPERIMENTS.exists():
         raise SystemExit("experiments/ does not exist")
-    # Use UTC so local-timezone commits match CI (which runs in UTC); otherwise an
-    # evening commit west of UTC stamps yesterday's date and fails generated-clean.
-    generated_on = dt.datetime.now(dt.timezone.utc).date().isoformat()
     records: list[dict[str, object]] = []
     for exp in sorted(path for path in EXPERIMENTS.iterdir() if path.is_dir()):
         primary_report = find_primary_report(exp)
@@ -427,7 +428,6 @@ def collect_records() -> list[dict[str, object]]:
             "file_counts": dict(counts),
             "total_files": total_files,
             "total_size_bytes": total_size,
-            "generated_on": generated_on,
         }
         records.append(record)
     return records
@@ -468,7 +468,7 @@ def write_catalog_md(records: list[dict[str, object]]) -> None:
     lines = [
         "# Experiment Catalog",
         "",
-        f"Generated from `experiments/` on {dt.datetime.now(dt.timezone.utc).date().isoformat()}.",
+        "Generated from `experiments/` by `scripts/build_knowledgebase.py`.",
         "",
         f"- Experiments: {len(records)}",
         f"- Source track Y provenance: {track_counts['track-y']}",

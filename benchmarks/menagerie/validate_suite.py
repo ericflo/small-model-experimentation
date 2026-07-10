@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import importlib.util
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -66,8 +66,12 @@ def selftest_family(families_dir: Path, name: str) -> dict:
         stderr=subprocess.STDOUT,
         check=False,
     )
-    lines = proc.stdout.splitlines()
-    return {"returncode": proc.returncode, "tail": "\n".join(lines[-20:])}
+    lines = proc.stdout.splitlines()[-20:]
+    # Redact machine-timing measurements (every family prints them on its budget
+    # gate line, each in its own format) so the stored tail — and the tracked
+    # results file — is byte-stable across re-runs.
+    lines = [re.sub(r"\d+\.\d+", "<t>", line) if re.search(r"budget", line, re.I) else line for line in lines]
+    return {"returncode": proc.returncode, "tail": "\n".join(lines)}
 
 
 def run_validation(families_dir: Path, tiers_dir: Path, seed: int) -> dict:
@@ -160,8 +164,9 @@ def run_validation(families_dir: Path, tiers_dir: Path, seed: int) -> dict:
             if cur > prev + 0.05:
                 checks["monotone_eps"] = False
 
+    # No wall-clock stamp: this payload is deterministic (CPU policies, fixed seed),
+    # so the tracked results file must be byte-stable across re-runs.
     return {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
         "seed": seed,
         "suite_version": SUITE_VERSION,
         "families": family_results,

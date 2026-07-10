@@ -37,6 +37,11 @@ Use these labels in synthesis notes:
 
 ## Updating Generated Files
 
+Generated tracked files are a pure function of repo content: generators must never
+write wall-clock values (`datetime.now()`, `date.today()`) into them, so regenerating
+on any day is byte-identical unless content actually changed. `make validate` enforces
+this on `scripts/` and `benchmarks/`.
+
 Do not hand-edit generated files:
 
 - `knowledge/claims/index.md`

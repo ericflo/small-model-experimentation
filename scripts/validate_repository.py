@@ -396,6 +396,32 @@ def validate_benchmark_firewall(errors: list[str]) -> None:
                              "(that usage does not contain the forbidden strings)")
 
 
+# Generators of tracked files must be pure functions of repo content: a wall-clock
+# stamp in their output dirties tracked files at every UTC rollover (the generated_on
+# failure mode removed on 2026-07-09). Content-derived timestamps (epochs, mtimes)
+# are fine; only "now" calls are forbidden. Exemptions: build_site.py writes only the
+# gitignored site/ tree, and menagerie run.py records genuine per-run GPU provenance.
+WALL_CLOCK_RE = re.compile(r"datetime\.now\(|date\.today\(|utcnow\(")
+WALL_CLOCK_EXEMPT = {"scripts/build_site.py", "benchmarks/menagerie/run.py"}
+
+
+def validate_no_wall_clock_stamps(errors: list[str]) -> None:
+    for scan_root in [ROOT / "scripts", ROOT / "benchmarks"]:
+        if not scan_root.exists():
+            continue
+        for path in sorted(scan_root.rglob("*.py")):
+            if in_ignored_dir(path) or rel(path) in WALL_CLOCK_EXEMPT:
+                continue
+            for lineno, line in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+                if WALL_CLOCK_RE.search(line):
+                    fail(
+                        errors,
+                        f"wall-clock call in {rel(path)}:{lineno}: tracked generated files must be "
+                        "byte-stable across regeneration — derive dates from content or keep the "
+                        "stamp out of tracked output (see docs/quality_gates.md)",
+                    )
+
+
 def validate() -> int:
     errors: list[str] = []
 
@@ -644,6 +670,7 @@ def validate() -> int:
     validate_future_queue(errors, set(program_ids))
     validate_root_readme(errors)
     validate_benchmark_firewall(errors)
+    validate_no_wall_clock_stamps(errors)
 
     gitattributes = ROOT / ".gitattributes"
     if not gitattributes.exists():
