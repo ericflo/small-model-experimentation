@@ -1,0 +1,53 @@
+# Frozen exact-CUDA-graph follow-up. Every model call uses only
+# Qwen/Qwen3.5-4B through this experiment's vLLM runner.
+model: Qwen/Qwen3.5-4B
+model_revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+predecessor:
+  experiment_id: qwen35_4b_verified_macro_capacity_fit_rerun
+  predecessor_runner_sha256: fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782
+  implicit_capture_maxima_by_rung: [16, 8]
+  artifacts_decision_eligible: false
+  artifacts_may_be_pooled_or_promoted: false
+data:
+  tasks_sha256: 82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073
+  demonstrations_sha256: 1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf
+  libraries_sha256: a2ae3663753a3a0d0c9614a5d7c1d250506c74fd7879e11e99b66f5c1e43f865
+  smoke_tasks: 12
+inference:
+  backend: vllm
+  thinking: budget
+  thinking_budget_ladder: [49152, 61440]
+  max_num_seqs_by_rung: [19, 15]
+  cudagraph_capture_sizes_49152: [1, 2, 4, 8, 16, 19]
+  cudagraph_capture_sizes_61440: [1, 2, 4, 8, 15]
+  exact_capture_resolution_required: true
+  max_model_len: 65536
+  gpu_memory_utilization: 0.9
+  max_num_batched_tokens: 32768
+  enable_prefix_caching: false
+  enforce_eager: false
+  async_scheduling: false
+  answer_max_tokens: 512
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  run_seed: 2701
+  probe_k: 4
+  matrix_k: 12
+  matrix_arms: [base, designed_ceiling]
+decision:
+  max_unresolved_cap_rate: 0.05
+  max_answer_limit_rate: 0.05
+  max_periodic_loop_rate: 0.25
+  smoke_matched_k: 12
+  smoke_min_parse_rate: 0.50
+  smoke_min_macro_reuse_tasks: 2
+  designed_reuse_oracle_not_below_base: true
+  loop_override_min_budget: 16384
+  loop_tail_tokens: 8192
+  loop_max_period_tokens: 2048
+  loop_min_match_rate: 0.99
+artifacts:
+  external_root: /workspace/large_artifacts/qwen35_4b_verified_macro_exact_cudagraph_rerun/scientific_smoke_v1
+  environment_override: QWEN35_MACRO_EXACT_CUDAGRAPH_ARTIFACT_ROOT
+  forbidden_roots: [/workspace/large_artifacts/qwen35_4b_verified_macro_capacity_fit_rerun/scientific_smoke_v1, /workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/scientific_smoke_v1]

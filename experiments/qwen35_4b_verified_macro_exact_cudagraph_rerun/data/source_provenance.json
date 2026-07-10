@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+  "closest_near_duplicate": "qwen35_4b_verified_macro_capacity_fit_rerun",
+  "copy_boundary": "Frozen inputs and unchanged harness files were copied by exact SHA-256. No predecessor rows, metadata, receipts, decoded output, scores, or selection artifacts were copied or inspected for this experiment.",
+  "copied_files": {
+    "data/tasks.json": {
+      "source": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/data/tasks.json",
+      "sha256": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073"
+    },
+    "data/demonstrations.json": {
+      "source": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/data/demonstrations.json",
+      "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf"
+    },
+    "data/libraries.json": {
+      "source": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/data/libraries.json",
+      "sha256": "a2ae3663753a3a0d0c9614a5d7c1d250506c74fd7879e11e99b66f5c1e43f865"
+    },
+    "data/prompt_manifest.json": {
+      "source": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/data/prompt_manifest.json",
+      "sha256": "f453b1ade590b3374be868dff2e8e7333e2d6e6044f6db9bf26dd033de98277f"
+    },
+    "src/macro_domain.py": {
+      "source": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/src/macro_domain.py",
+      "sha256": "3a59b931faf42a6731ad73e31f9e8cdedf44c29423db4d8645b4e50a66ab21a7"
+    },
+    "src/model_harness.py": {
+      "source": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/src/model_harness.py",
+      "sha256": "a43fb0e76f65819e5d1048f965e74c06409da870e77c7ce46f6df247257fa552"
+    }
+  },
+  "runner_derivation": {
+    "source": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/src/vllm_runner.py",
+    "source_sha256": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782",
+    "derived_sha256": "3a98eb8da787054aded56a1ec3fd040ee2edaacc7d0694b4aec5a0309488774a",
+    "only_intended_inference_change": "Accept explicit CUDA-graph capture sizes, require their maximum to equal max_num_seqs, pass them to vLLM, and fail unless vLLM resolves the exact requested sizes and maximum under a full-decode CUDA-graph mode."
+  },
+  "predecessor_artifacts": {
+    "decision_eligible": false,
+    "may_be_pooled_or_promoted": false,
+    "forbidden_external_roots": [
+      "/workspace/large_artifacts/qwen35_4b_verified_macro_capacity_fit_rerun/scientific_smoke_v1",
+      "/workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/scientific_smoke_v1"
+    ]
+  }
+}

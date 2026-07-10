@@ -4254,6 +4254,83 @@
   },
   {
     "file_counts": {
+      ".json": 7,
+      ".md": 7,
+      ".py": 9,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_verified_macro_capacity_fit_rerun",
+    "path": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun",
+    "primary_readme": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md",
+    "primary_report": "experiments/qwen35_4b_verified_macro_capacity_fit_rerun/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "operator_and_skill_inventories",
+      "reliability_and_safety",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "Status: **the capacity-fit 49,152-token K=4 probe is termination-inadequate. The fresh 61,440-token K=4 probe passed its live-capacity preflight, then was manually stopped before any result after a CUDA-graph capture-geometry problem was identified. Its preflight-only artifact is preserved; no decoded or scored content has been inspected, and there is no macro claim.**",
+    "tags": [
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B verified-macro capacity-fit vLLM rerun",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 26,
+    "total_size_bytes": 1252855
+  },
+  {
+    "file_counts": {
+      ".json": 9,
+      ".md": 7,
+      ".py": 9,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+    "path": "experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun",
+    "primary_readme": "experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md",
+    "primary_report": "experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "operator_and_skill_inventories",
+      "reliability_and_safety",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "Status: **terminal setup negative. Both fresh exact-capture K=4 probes are complete and termination-inadequate. No K=12 matrix, semantic analysis, or macro result is eligible, and no decoded or scored content has been inspected.**",
+    "tags": [
+      "counterexamples",
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B verified-macro exact CUDA-graph vLLM rerun",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 28,
+    "total_size_bytes": 1271944
+  },
+  {
+    "file_counts": {
       ".csv": 1,
       ".json": 45,
       ".jsonl": 12,
@@ -4292,7 +4369,52 @@
       "tests"
     ],
     "total_files": 101,
-    "total_size_bytes": 14079800
+    "total_size_bytes": 14080795
+  },
+  {
+    "file_counts": {
+      ".json": 30,
+      ".jsonl": 2,
+      ".md": 20,
+      ".py": 16,
+      ".yaml": 3,
+      "[none]": 1
+    },
+    "id": "qwen35_4b_verified_macro_long_context_rerun",
+    "path": "experiments/qwen35_4b_verified_macro_long_context_rerun",
+    "primary_readme": "experiments/qwen35_4b_verified_macro_long_context_rerun/README.md",
+    "primary_report": "experiments/qwen35_4b_verified_macro_long_context_rerun/reports/report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "operator_and_skill_inventories",
+      "reliability_and_safety",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "**Status:** ongoing anti-censoring rerun; no fresh task output has been scored. The corrected plan-given interface passed 16/16 records at think@16,384, overturning the parent's apparent low-budget interface limit. The fresh base-smoke arm then proved that 16,384 was still binding for induction (131/144 unresolved contacts and 60/144 answer truncations), so those rows were excluded and think@32,768 also rejected from content-blind finish/count metadata plus the preregistered token-ID periodicity test: 81/144 exact loops, 63/144 unresolved contacts, and 37/144 answer-limit contacts. The max-seqs-64 K=4 probe at think@49,152 then finished with 34/48 exact loops, 14/48 unresolved contacts, and 13/48 answer-limit contacts, but amendment 12 had already made it diagnostic-only from pre-result cache-capacity evidence. Fresh long-rung selection moved to the capacity-fit follow-up, whose 61k attempt was stopped before a receipt after an audit found that its implicit CUDA-graph list did not cover the active batch width. A separate exact-capture follow-up then rejected fresh 49k and 61k probes even though both live-KV and exact-graph gates passed. Its terminal selector records `pass=false` and no selected budget, so no K=12 matrix, semantic analysis, or macro claim is authorized.",
+    "tags": [
+      "active-learning",
+      "latent-state",
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B Verified Macro Invention Long-Context Rerun",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 72,
+    "total_size_bytes": 16493220
   },
   {
     "file_counts": {

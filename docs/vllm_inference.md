@@ -107,9 +107,9 @@ around single samples:
 The output contains exact token IDs, finish reasons, parent and effective per-sample seeds, thinking
 and answer counts, injected-token accounting, and separate logical stage-one/stage-two prompt-token
 counts (important when `n > 1` or forced continuations re-prefill a prefix). `OUTPUT.meta.json`
-records the runner hash, pinned model revision, adapter hashes, engine/sampling arguments, the full
-installed-package inventory, environment-lock digest, GPU/driver, Git state, and load/generation
-throughput.
+records the runner hash, pinned model revision, adapter hashes, requested engine/sampling arguments,
+resolved CUDA-graph geometry and mode, the full installed-package inventory, environment-lock
+digest, GPU/driver, Git state, and load/generation throughput.
 
 ## Thinking modes
 
@@ -123,7 +123,7 @@ throughput.
 - `--shuffle-thinking` deterministically shuffles the retained reasoning tokens before the forced
   close. It exists only for the established content-control experiment.
 
-Runner schema 3 directly enforces `A` only on the forced continuation. A naturally closed first
+Runner schema 4 directly enforces `A` only on the forced continuation. A naturally closed first
 call can contain `A` or more answer tokens while ending normally. Any experiment claiming a shared
 answer allowance must conservatively classify `n_answer_tokens >= A` as an answer-limit contact (in
 addition to a stage-two `length` finish) and reject/escalate that tier. Do not infer a nonbinding
@@ -196,6 +196,39 @@ RTX 4090):
 Tune `--max-model-len`, `--max-num-seqs`, and `--max-num-batched-tokens` on the real workload. Record
 the chosen values from the metadata sidecar. Throughput measurements must exclude model-load time but
 include both stages and every sampled token for budgeted thinking.
+
+For long-context batches, `max_num_seqs` must also fit the live KV-token capacity—not merely pass
+engine initialization. After constructing the engine and before generation, read its resolved cache
+token count and block size, round the largest prompt-plus-generation reservation up to that block
+size, and require:
+
+```text
+min(number_of_logical_sequences, max_num_seqs) * rounded_sequence_reservation
+    <= live_kv_cache_tokens
+```
+
+Record every term and the remaining margin in the preflight/receipt. vLLM 0.24 can otherwise admit
+too many long sequences, then preempt a running request by freeing its cache blocks and resetting its
+computed-token count. With prefix caching disabled, the evicted prefix is recomputed from zero. GPU
+utilization can remain near 100% while aggregate sampled-token throughput and wall time deteriorate,
+so “the card is busy” is not evidence that concurrency is efficient. Treat a concurrency change as
+a new inference protocol on Ada and use the same capacity-fit value for every compared arm at a rung.
+
+Cache fit and CUDA-graph coverage are separate gates. In vLLM 0.24's balanced mode, specifying only
+an off-stride `max_cudagraph_capture_size` does **not** guarantee that endpoint is captured: the
+implicit list is `1, 2, 4` and then multiples of eight. For example, requested maxima 15 and 19
+resolve to 8 and 16, and larger decode batches fall back to no CUDA graph. For an off-stride
+`max_num_seqs`, pass an explicit increasing `cudagraph_capture_sizes` list whose last value equals
+the requested maximum (for example `[1, 2, 4, 8, 15]` or `[1, 2, 4, 8, 16, 19]`). After engine
+construction, fail closed unless the resolved list and maximum match exactly, the resolved mode has
+full decode CUDA graphs, and the live KV-capacity check still passes. Record the resolved mode and
+sizes in the receipt; graph allocation can itself change available cache capacity.
+
+Do not infer useful compute from sampled-token throughput alone when cache preemption is possible.
+Recomputed prefixes consume forward work without increasing the emitted-token counter. A deliberately
+overcommitted scheduler can therefore look faster in emitted tokens per second while doing more
+unrecorded model work, which is unsuitable for a matched-compute comparison unless preemptions and
+actual computed tokens are measured.
 
 ### Reproducibility boundary on Ada
 

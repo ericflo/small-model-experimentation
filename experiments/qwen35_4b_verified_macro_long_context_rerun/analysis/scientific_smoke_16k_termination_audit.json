@@ -27,13 +27,17 @@
     "cap_contacts": 144,
     "periodic_loop_contacts": 13,
     "unresolved_cap_contacts": 131,
-    "answer_truncations": 60
+    "answer_truncations": 60,
+    "answer_limit_contacts": 60,
+    "stage2_truncations": 60
   },
   "rates": {
     "cap_contact": 1.0,
     "periodic_loop": 0.09027777777777778,
     "unresolved_cap_contact": 0.9097222222222222,
-    "answer_truncation": 0.4166666666666667
+    "answer_truncation": 0.4166666666666667,
+    "answer_limit_contact": 0.4166666666666667,
+    "stage2_truncation": 0.4166666666666667
   },
   "periodic_loop_period_tokens": [
     31,
@@ -69,22 +73,28 @@
   },
   "artifacts": {
     "rows": {
-      "path": "runs/smoke_tiers/think_16384/base.jsonl",
+      "path": "external:smoke_tiers/think_16384/base.jsonl",
       "bytes": 30753957,
       "sha256": "f4d243db4faf066a322c784a409c691280ab388f101138878326a9f0ae3cfb4c"
     },
     "metadata": {
-      "path": "runs/smoke_tiers/think_16384/base.meta.json",
+      "path": "external:smoke_tiers/think_16384/base.meta.json",
       "sha256": "8f9984519a5fbce74c886b0e046a0d9446b5fdbf05274997f214cdaf8f906f0a"
     },
     "preflight": {
-      "path": "runs/smoke_tiers/think_16384/base.preflight.json",
+      "path": "external:smoke_tiers/think_16384/base.preflight.json",
       "sha256": "7729a1546ce389cecb4f96e5b9271d98bf6f5882201e1b0d6073866b0c615ccc"
     },
     "interrupted_designed_preflight": {
-      "path": "runs/smoke_tiers/think_16384/designed_ceiling.preflight.json",
+      "path": "external:smoke_tiers/think_16384/designed_ceiling.preflight.json",
       "sha256": "6aba0230c7b7f72e97a7c1b1a9115a01f3a927e48c88a0772df5de8b36b6c6b8"
     },
+    "receipt": {
+      "path": "external:smoke_tiers/think_16384/base.receipt.json",
+      "bytes": 7295,
+      "sha256": "eedc90dac5841726bddc48f2f77340ce7a3957e94cbdf3e6e3d4227e4eb2c8f4"
+    },
+    "external_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/scientific_smoke_v1",
     "runner_sha256": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782",
     "pre_amendment_config_sha256": "c709d9e3d094814990e0ab60e415d05fbbc5de6aeb22b3558b277ceda7377d87"
   }

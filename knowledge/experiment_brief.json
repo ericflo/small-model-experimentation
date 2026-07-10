@@ -10599,7 +10599,7 @@
    "verdict_tag": "Original shortcut test was budget-censored",
    "concept_primer": "Imagine replacing a repeated two-step instruction with a short nickname. Before asking whether those nicknames help solve new puzzles, we first handed the model the full correct instruction list and checked whether it could rewrite that list faithfully.",
    "plain_question": "Can the model reliably rewrite a supplied five-step plan using exact named shortcuts?",
-   "plain_answer": "This original run could not answer. Its reasoning-enabled attempts hit their token limits, while turning reasoning off fixed formatting but changed the computation being tested. A dedicated long-context follow-up later rewrote all 16 held-out supplied plans exactly at least once, showing that this stop was a setup limit rather than a durable shortcut-interface failure.",
+   "plain_answer": "This original run could not answer. Its reasoning-enabled attempts hit their token limits, while turning reasoning off fixed formatting but changed the computation being tested. A dedicated long-context follow-up later rewrote all 16 separate supplied plans exactly at least once, showing that this stop was a setup limit rather than a durable shortcut-interface failure.",
    "why_it_matters": "A well-formatted tool call is not necessarily correct, but a token-capped one is not clean negative evidence either. Test a new action language on known plans, provision the real workload, and separate resource exhaustion from semantic failure before judging harder tasks.",
    "verdict_tone": "mixed",
    "key_numbers": [
@@ -10640,11 +10640,11 @@
    ]
   },
   "qwen35_4b_verified_macro_long_context_rerun": {
-   "verdict_tag": "Longer reasoning repaired the shortcut interface",
+   "verdict_tag": "The shortcut interface works; the terminal context ladder selected nothing",
    "concept_primer": "A verified macro is a short nickname for an exact multi-step action. This study first separates two questions: can the model write the right nickname when the full plan is supplied, and does having those nicknames help it discover a plan for a new puzzle?",
    "plain_question": "Once the model has enough room to reason, can exact reusable shortcuts improve new-puzzle accuracy beyond spending the same generation budget on more ordinary attempts?",
-   "plain_answer": "We cannot answer the new-puzzle question yet. The corrected supplied-plan check passed on all 16 records, so the old interface stop was not a durable limitation. But the first fresh-puzzle arm outgrew the same 16k reasoning allowance: 131 of 144 attempts hit the reasoning limit without an exact-repeat tail, and 60 answers were cut off. Those rows were discarded before scoring, and the vLLM run is escalating to a larger registered allowance.",
-   "why_it_matters": "Reaching a generation limit is missing evidence, not task failure. Calibrate on the real workload, check reasoning and answer cutoffs before reading accuracy, and keep shortcuts and the more-sampling baseline on one shared inference envelope.",
+   "plain_answer": "We still cannot answer the new-puzzle question. The corrected supplied-plan check passed on all 16 records, but fresh induction reached the reasoning boundary at every registered allowance. The terminal exact-capture 61k K=4 probe passed FULL-graph and live-KV gates yet still produced 40 exact loops, 8 unresolved contacts, and 4 answer-limit contacts among 48 samples. The selector ended pass=false with no selected budget. No K=12 matrix, semantic analysis, or macro claim was authorized, and no decoded or scored content was inspected.",
+   "why_it_matters": "Reaching a generation limit is missing evidence, and increasing the token cap without fitting scheduler concurrency can add recomputation rather than usable reasoning. This ladder now also shows that fitting cache and graph geometry does not guarantee useful termination. Stop increasing context, gate termination before reading accuracy, and test any loop intervention symmetrically in a fresh preregistered experiment while retaining the unresolved-contact and answer-limit gates.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
@@ -10653,33 +10653,121 @@
      "sub": "the corrected record-level interface passed"
     },
     {
-     "label": "Non-loop reasoning-limit contacts: setup to fresh",
-     "value": "4.7% -> 91.0%",
-     "sub": "the setup check did not transfer to induction"
+     "label": "Diagnostic 49k termination",
+     "value": "14 unresolved / 34 loops",
+     "sub": "all 48 samples force-closed; 13 answers hit 512"
     },
     {
-     "label": "Fresh-arm answers cut off",
-     "value": "60 / 144",
-     "sub": "the 16k rung was excluded before scoring"
+     "label": "Diagnostic generation",
+     "value": "2,366,620 tokens",
+     "sub": "4,035.356 seconds, or 586.47 tokens/s"
     },
     {
-     "label": "Measured vLLM generation rate",
-     "value": "1,118 tok/s",
-     "sub": "2.39M sampled tokens in the rejected arm"
+     "label": "Overcommitted cache demand",
+     "value": "2,433,024 vs 995,328",
+     "sub": "eligibility was revoked before the receipt"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Setup checks underestimated fresh puzzles' reasoning needs",
-     "chart_read": "Each group is a 16k workload. Bars show reasoning-limit contacts not classified as exact-repeat tails and answers that reached their final limit; lower is better.",
-     "chart_takeaway": "The plan-given checks were adequately provisioned, but fresh induction had 91% non-loop cap contacts and 42% answer cutoffs, so none of that rung's scores counted."
+     "chart_plain_title": "Longer caps changed the failure mode, not evidence eligibility",
+     "chart_read": "Each group is a base-only termination run. Bars show the shares of samples left unresolved, classified as exact periodic loops, and reaching the answer limit; lower is better. The 16k and 32k groups have 144 samples each, while the diagnostic 49k probe has 48.",
+     "chart_takeaway": "Every sample at every allowance reached the reasoning boundary. The 49k max-seqs-64 probe had already been made diagnostic-only because its scheduler geometry overcommitted KV cache, so none of these rows is a macro-quality result."
     },
     {
      "index": 1,
      "chart_plain_title": "Enough reasoning made exact shortcut rewrites usable",
      "chart_read": "The dark bar counts supplied plans rewritten exactly at least once across four attempts; the comparison bar is the pre-set pass requirement.",
      "chart_takeaway": "All 16 plans cleared the 12-plan requirement, repairing the original low-budget interface diagnosis."
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_capacity_fit_rerun": {
+   "verdict_tag": "The cache-fit 49k rung failed; implicit-capture 61k stopped pre-receipt",
+   "concept_primer": "Long-context batching needs two limits to agree: how long each sequence may become and how many such sequences the scheduler may keep active. A generous per-sequence allowance can still thrash if their combined block-rounded KV-cache demand exceeds the live cache.",
+   "plain_question": "Does fresh verified-macro induction terminate cleanly when vLLM concurrency is fitted to the live KV cache instead of retaining max-seqs 64 from a shorter-context setup?",
+   "plain_answer": "The fresh base-only K=4 probe at think@49,152 fit its live KV cache but still failed the content-blind termination gate. All 48 samples contacted the reasoning boundary: token-ID periodicity found 37 loops, 11 contacts remained unresolved, and 9 answers reached their limit. No decoded or scored content was inspected. The 61k attempt was stopped before a receipt after an audit found that vLLM's implicit sparse graph list covered only through width 8 rather than max-seqs 15; it left no reusable rows. Long-rung escalation moved to a separate exact-capture experiment.",
+   "why_it_matters": "This separates cache validity from graph coverage, throughput, and the research hypothesis. Max-seqs 19 fit the cache, yet the run was 19.6% slower than the predecessor's overcommitted max-seqs-64 diagnostic; the implicit capture lists also missed active widths 17-19 and 9-15. Cache-safe concurrency is necessary but not automatically throughput-optimal, and a failed termination probe remains a provisioning boundary rather than evidence against verified macros.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "49k termination",
+     "value": "11 unresolved / 37 loops",
+     "sub": "all 48 contacted the boundary; 9 answers hit 512"
+    },
+    {
+     "label": "Capacity-fit demand",
+     "value": "963,072 tokens",
+     "sub": "of 997,888 live tokens; 34,816 headroom"
+    },
+    {
+     "label": "Capacity-fit throughput",
+     "value": "471.754 tokens/s",
+     "sub": "19.6% below the old max-seqs-64 diagnostic"
+    },
+    {
+     "label": "61k implicit-capture attempt",
+     "value": "stopped pre-receipt",
+     "sub": "resolved graph maximum 8 vs active width 15; no reusable rows"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Capacity fitting moves worst-case demand below live KV capacity",
+     "chart_read": "For each scheduler setup, the dark bar is block-rounded worst-case cache demand and the comparison bar is measured live cache capacity. Demand above capacity implies eviction and recomputation risk; demand below capacity has explicit headroom.",
+     "chart_takeaway": "The predecessor could admit 48 long sequences demanding 2.43M cache tokens from about 995k. The completed 49k rerun capped concurrency at 19 and fit 963,072 tokens into 997,888, validating its geometry even though its termination gate failed."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Capacity fitting did not clear the 49k termination boundary",
+     "chart_read": "Bars show the shares of the 48 fresh K=4 samples classified as unresolved boundary contacts, exact periodic loops, and answer-limit contacts. Each is compared with its registered maximum.",
+     "chart_takeaway": "The cache-fit run still failed every termination threshold. Its 61k successor stopped before a receipt after the implicit graph geometry proved incomplete; no decoded or scored content was inspected."
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
+   "verdict_tag": "Exact runtime gates passed; the terminal context ladder still failed",
+   "concept_primer": "CUDA graphs accelerate repeated decode batch shapes, but asking vLLM for a maximum does not guarantee its implicit sparse capture list includes that active width. This follow-up freezes and verifies the exact graph-size list alongside live KV-cache capacity.",
+   "plain_question": "Does explicitly capturing every registered active batch width repair the long-context vLLM envelope enough for fresh verified-macro induction to clear its content-blind termination gate?",
+   "plain_answer": "Exact graph and cache resolution worked at both long rungs, but neither fresh K=4 probe terminated adequately. At 49k, all 48 samples reached the boundary: 38 exact loops, 10 unresolved contacts, and 6 answer-limit contacts at 491.396 sampled tokens/s. At terminal 61k, the counts were 40, 8, and 4 at 397.688 sampled tokens/s despite FULL graph coverage and 47,488 cache tokens of headroom. The selector ended pass=false with no selected budget. No K=12 arm, semantic analysis, or macro claim was authorized, and no decoded or scored content was inspected.",
+   "why_it_matters": "Binding live cache geometry and the resolved compilation configuration repaired the inference envelope but isolated a genuine termination problem: more context shifted a small number of unresolved and answer contacts into exact loops without clearing any registered gate, while throughput fell. The next study should stop increasing context and preregister one symmetric loop-control mechanism while preserving the unresolved-contact and answer-limit gates.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Exact-capture 49k termination",
+     "value": "10 unresolved / 38 loops",
+     "sub": "all 48 contacted the boundary; 6 answers hit 512"
+    },
+    {
+     "label": "Exact graph resolution",
+     "value": "[1, 2, 4, 8, 16, 19]",
+     "sub": "requested and resolved lists match; active width 19 covered"
+    },
+    {
+     "label": "Exact-capture throughput",
+     "value": "491.396 tokens/s",
+     "sub": "2,363,163 tokens in 4,809.081 seconds; descriptive +4.16%"
+    },
+    {
+     "label": "Terminal exact-capture 61k",
+     "value": "8 unresolved / 40 loops",
+     "sub": "4 answers hit 512; 397.688 tokens/s; pass=false"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Explicit graph lists cover every registered active width",
+     "chart_read": "Each group compares the scheduler's active batch width with vLLM's largest resolved full-decode graph. The implicit configurations stop short; the explicit configurations match exactly. Both exact groups are completed fresh probes.",
+     "chart_takeaway": "The follow-up repaired the compilation-envelope defect at both long rungs, so the terminal failure cannot be attributed to missing active-width graph coverage."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "More context increased loops without clearing termination",
+     "chart_read": "For each completed fresh K=4 probe, bars show the shares of 48 samples classified as unresolved boundary contacts, exact periodic loops, and answer-limit contacts. The registered maxima are 5%, 25%, and 5% respectively.",
+     "chart_takeaway": "The 61k probe slightly reduced unresolved and answer-limit contacts but increased the already-dominant loop share. The terminal selector therefore remained pass=false with no selected budget."
     }
    ]
   }

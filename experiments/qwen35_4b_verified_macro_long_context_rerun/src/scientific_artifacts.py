@@ -49,6 +49,71 @@ SELECTION_LOGICAL_PATH = "analysis/smoke_budget_selection.json"
 RECEIPT_SCHEMA_VERSION = 1
 CATALOG_SCHEMA_VERSION = 2
 PROTOCOL_BINDING_SCHEMA_VERSION = 1
+RUNNER_SCHEMA_VERSION = 3
+
+# Amendment 10/11 scientific geometry is an independent storage invariant, not
+# a value delegated to whichever orchestration config happens to call us.
+SCIENTIFIC_BUDGETS = (16384, 32768, 49152, 61440)
+SCIENTIFIC_MATRIX_ARMS = ("base", "designed_ceiling")
+SCIENTIFIC_MATRIX_K = 12
+SCIENTIFIC_PROBE_K = 4
+SCIENTIFIC_N_RECORDS = 12
+SCIENTIFIC_RUN_SEED = 2701
+
+_EXPECTED_ENGINE = {
+    "max_model_len": 65536,
+    "gpu_memory_utilization": 0.9,
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 32768,
+    "enable_prefix_caching": False,
+    "enforce_eager": False,
+    "adapter": None,
+}
+_EXPECTED_ENGINE_ARGS = {
+    "model": MODEL_ID,
+    "revision": MODEL_REVISION,
+    "tokenizer_revision": MODEL_REVISION,
+    "language_model_only": True,
+    "trust_remote_code": True,
+    "dtype": "bfloat16",
+    "tensor_parallel_size": 1,
+    "gpu_memory_utilization": 0.9,
+    "max_model_len": 65536,
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 32768,
+    "max_cudagraph_capture_size": 64,
+    "enable_prefix_caching": False,
+    "enforce_eager": False,
+    "generation_config": "vllm",
+    "seed": 0,
+    "max_logprobs": 20,
+    "async_scheduling": False,
+    "mamba_cache_mode": "none",
+}
+_EXPECTED_RESOLVED_SAMPLING = {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "repetition_penalty": 1.0,
+}
+_EXPECTED_THINK_TOKEN_IDS = {
+    "open": 248068,
+    "close": 248069,
+    "forced_close_sequence": [248069, 271],
+    "thinking_prompt_suffix": [248045, 74455, 198, 248068, 198],
+    "no_thinking_prompt_suffix": [248045, 74455, 198, 248068, 271, 248069, 271],
+}
+_EXPECTED_TERMINATION = {
+    "hf_model_eos_token_id": 248044,
+    "vllm_tokenizer_eos_ignored": 248046,
+}
+_EXPECTED_RNG_ISOLATION = {
+    "engine_seed": 0,
+    "caller_global_rng_state_restored": True,
+}
 
 _PROTOCOL_FILES = (
     "configs/default.yaml",
@@ -63,7 +128,7 @@ _PROTOCOL_SOURCES = (
     "src/scientific_artifacts.py",
     "src/vllm_runner.py",
 )
-_SMOKE_LIBRARY_ARMS = ("base", "designed_ceiling")
+_SMOKE_LIBRARY_ARMS = SCIENTIFIC_MATRIX_ARMS
 
 _NAMESPACES = {"smoke_tiers", "smoke_budget_probes"}
 _ARM_RE = re.compile(r"^[a-z][a-z0-9_]*$")
@@ -198,6 +263,51 @@ def safe_path(root: str | Path, relative: str | Path) -> Path:
     return candidate
 
 
+def _geometry(namespace: str, budget: int, arm: str) -> tuple[int, int]:
+    _require(
+        budget in SCIENTIFIC_BUDGETS,
+        f"unregistered scientific thinking budget: {budget}",
+    )
+    if namespace == "smoke_tiers":
+        _require(
+            arm in SCIENTIFIC_MATRIX_ARMS,
+            f"scientific matrix arm must be one of {SCIENTIFIC_MATRIX_ARMS}: {arm!r}",
+        )
+        return SCIENTIFIC_MATRIX_K, SCIENTIFIC_N_RECORDS
+    _require(namespace == "smoke_budget_probes", f"invalid scientific namespace: {namespace}")
+    _require(arm == "base", f"termination probes are base-only: {arm!r}")
+    return SCIENTIFIC_PROBE_K, SCIENTIFIC_N_RECORDS
+
+
+def _expected_sampling(*, budget: int, k: int) -> dict[str, Any]:
+    return {
+        "thinking": "budget",
+        "thinking_budget": budget,
+        "n": k,
+        "max_tokens": ANSWER_MAX_TOKENS,
+        "answer_max_tokens": ANSWER_MAX_TOKENS,
+        "greedy": False,
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "min_p": 0.0,
+        "presence_penalty": 0.0,
+        "frequency_penalty": 0.0,
+        "repetition_penalty": 1.0,
+        "run_seed": SCIENTIFIC_RUN_SEED,
+        "shuffle_thinking": False,
+        "logprobs": None,
+        "prompt_logprobs": None,
+        "logprob_token_ids": [],
+        "allow_custom_prompts": False,
+    }
+
+
+def _stable_seed(run_seed: int, record_id: str, sample_index: int, stage: str) -> int:
+    payload = f"{run_seed}\0{record_id}\0{sample_index}\0{stage}".encode("utf-8")
+    return int.from_bytes(hashlib.blake2b(payload, digest_size=8).digest(), "big") % (2**31)
+
+
 def _validate_prefix(relative_prefix: str | Path) -> tuple[str, int, str, str]:
     normalized = _normalize_relative(relative_prefix, where="artifact bundle prefix")
     parts = PurePosixPath(normalized).parts
@@ -212,7 +322,9 @@ def _validate_prefix(relative_prefix: str | Path) -> tuple[str, int, str, str]:
     arm = parts[2]
     _require(_ARM_RE.fullmatch(arm) is not None, f"invalid scientific arm: {arm!r}")
     namespace = parts[0]
-    return normalized, int(match.group(1)), arm, namespace
+    budget = int(match.group(1))
+    _geometry(namespace, budget, arm)
+    return normalized, budget, arm, namespace
 
 
 def bundle_paths(root: str | Path, relative_prefix: str | Path) -> BundlePaths:
@@ -240,6 +352,39 @@ def _fsync_directory(path: Path) -> None:
         os.fsync(descriptor)
     finally:
         os.close(descriptor)
+
+
+def fsync_tree_and_parent(root: str | Path) -> None:
+    """Durably flush a validated staged tree, its directories, and its parent.
+
+    Migration uses a directory rename as its commit point.  Fsyncing only the
+    files is insufficient: the copied directory entries and the later rename
+    also need durable directory metadata.  The helper is model-free and rejects
+    the same symlinks/unknown layout as catalog construction.
+    """
+
+    root_path = resolve_artifact_root(root)
+    _require(root_path.is_dir(), f"scientific artifact tree is missing: {root_path}")
+    files = _walk_files(root_path)
+    for path in files:
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        descriptor = os.open(path, flags)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+    directories = {root_path}
+    for path in files:
+        current = path.parent
+        while True:
+            directories.add(current)
+            if current == root_path:
+                break
+            current = current.parent
+    for directory in sorted(directories, key=lambda item: len(item.parts), reverse=True):
+        _fsync_directory(directory)
+    _assert_absolute_no_symlinks(root_path.parent, where="scientific artifact tree parent")
+    _fsync_directory(root_path.parent)
 
 
 def _atomic_bytes(path: Path, payload: bytes) -> None:
@@ -375,10 +520,12 @@ def _string(value: Any, *, where: str) -> str:
 
 
 def _ordered_records(preflight: Mapping[str, Any]) -> list[dict[str, Any]]:
+    _require(preflight.get("schema_version") == 1, "preflight schema mismatch")
     _require(preflight.get("pass") is True, "preflight did not pass")
     max_model_len = _integer(
         preflight.get("max_model_len"), where="preflight.max_model_len", minimum=1
     )
+    _require(max_model_len == 65536, "scientific preflight max_model_len must be 65536")
     reserve = _integer(
         preflight.get("generation_reserve_tokens"),
         where="preflight.generation_reserve_tokens",
@@ -439,6 +586,24 @@ def _ordered_records(preflight: Mapping[str, Any]) -> list[dict[str, Any]]:
     return ordered
 
 
+def _validate_ordered_geometry(
+    ordered: Sequence[Mapping[str, Any]], *, arm: str, expected_n_records: int
+) -> None:
+    _require(
+        len(ordered) == expected_n_records == SCIENTIFIC_N_RECORDS,
+        f"scientific bundle must contain exactly {SCIENTIFIC_N_RECORDS} records",
+    )
+    task_ids: list[str] = []
+    for record in ordered:
+        record_id = str(record["id"])
+        suffix = f"::{arm}"
+        _require(record_id.endswith(suffix), f"record id/arm mismatch: {record_id}")
+        task_id = record_id[: -len(suffix)]
+        _require(bool(task_id), f"record id lacks task identity: {record_id}")
+        task_ids.append(task_id)
+    _require(len(set(task_ids)) == len(task_ids), "scientific task ids must be unique")
+
+
 def write_preflight_only(
     root: str | Path,
     relative_prefix: str | Path,
@@ -447,9 +612,13 @@ def write_preflight_only(
     """Freeze a preflight as the one valid incomplete/resumable bundle state."""
 
     root_path = resolve_artifact_root(root)
-    prefix, budget, _, _ = _validate_prefix(relative_prefix)
+    prefix, budget, arm, namespace = _validate_prefix(relative_prefix)
+    _, expected_n_records = _geometry(namespace, budget, arm)
     paths = bundle_paths(root_path, prefix)
-    _ordered_records(preflight)
+    ordered = _ordered_records(preflight)
+    _validate_ordered_geometry(
+        ordered, arm=arm, expected_n_records=expected_n_records
+    )
     _require(
         preflight.get("generation_reserve_tokens")
         == budget + FORCED_CLOSE_TOKENS + ANSWER_MAX_TOKENS,
@@ -477,6 +646,7 @@ def _validate_rows_identity(
     arm: str,
 ) -> None:
     row_count = 0
+    seen_task_ids: set[str] = set()
     try:
         handle = rows_path.open("r", encoding="utf-8")
     except FileNotFoundError as exc:
@@ -495,6 +665,31 @@ def _validate_rows_identity(
             expected = ordered_records[row_count]
             record_id = str(expected["id"])
             _require(row.get("id") == record_id, f"runner row order/id mismatch for {record_id}")
+            meta = row.get("meta")
+            _require(isinstance(meta, Mapping), f"runner row {record_id} lacks task metadata")
+            task_id = _string(meta.get("task_id"), where=f"runner row {record_id}.meta.task_id")
+            _require(task_id not in seen_task_ids, f"duplicate runner task id: {task_id}")
+            seen_task_ids.add(task_id)
+            _require(record_id == f"{task_id}::{arm}", f"runner row task/id mismatch: {record_id}")
+            _require(meta.get("arm") == arm, f"runner row arm mismatch for {record_id}")
+            _string(meta.get("library_id"), where=f"runner row {record_id}.meta.library_id")
+            _require(
+                meta.get("split") in {"smoke_reuse", "smoke_no_reuse"},
+                f"runner row split mismatch for {record_id}",
+            )
+            _require(
+                meta.get("prompt_kind") == "solve_program",
+                f"runner row prompt kind mismatch for {record_id}",
+            )
+            _require(
+                meta.get("max_surface_calls") == 5
+                and meta.get("max_expanded_primitive_depth") == 5,
+                f"runner row solver geometry mismatch for {record_id}",
+            )
+            _require(
+                isinstance(meta.get("macros_callable"), bool),
+                f"runner row macros_callable missing for {record_id}",
+            )
             _require(
                 row.get("prompt_sha256") == expected["rendered_prompt_sha256"],
                 f"runner prompt hash mismatch for {record_id}",
@@ -503,19 +698,96 @@ def _validate_rows_identity(
                 row.get("n_prompt_tokens") == expected["prompt_tokens"],
                 f"runner prompt-token count mismatch for {record_id}",
             )
+            _require(
+                row.get("prompt_channel") == "thinking",
+                f"runner prompt channel mismatch for {record_id}",
+            )
+            _require(
+                row.get("prompt_logprobs") is None,
+                f"scientific runner prompt logprobs must be disabled for {record_id}",
+            )
             outputs = row.get("outputs")
             _require(
                 isinstance(outputs, list) and len(outputs) == k,
                 f"runner K mismatch for {record_id}",
             )
-            indices = [
-                output.get("sample_index") if isinstance(output, Mapping) else None
-                for output in outputs
-            ]
+            indices: list[Any] = []
+            stage1_parent_seed = _stable_seed(
+                SCIENTIFIC_RUN_SEED, record_id, -1, "stage1"
+            )
+            for output in outputs:
+                _require(isinstance(output, Mapping), f"runner output for {record_id} is invalid")
+                sample_index = output.get("sample_index")
+                sample_index_value = _integer(
+                    sample_index,
+                    where=f"runner output {record_id}.sample_index",
+                )
+                indices.append(sample_index)
+                _require(
+                    output.get("stage1_parent_seed") == stage1_parent_seed,
+                    f"runner stage-1 parent seed mismatch for {record_id}/{sample_index}",
+                )
+                _require(
+                    output.get("seed_stage1") == stage1_parent_seed + sample_index_value,
+                    f"runner stage-1 seed mismatch for {record_id}/{sample_index}",
+                )
+                seed_stage2 = output.get("seed_stage2")
+                if seed_stage2 is None:
+                    _require(
+                        output.get("injected_token_ids") == [],
+                        f"natural close has injected tokens for {record_id}/{sample_index}",
+                    )
+                else:
+                    _require(
+                        seed_stage2
+                        == _stable_seed(
+                            SCIENTIFIC_RUN_SEED, record_id, sample_index_value, "stage2"
+                        ),
+                        f"runner stage-2 seed mismatch for {record_id}/{sample_index}",
+                    )
+                    _require(
+                        output.get("injected_token_ids")
+                        == _EXPECTED_THINK_TOKEN_IDS["forced_close_sequence"],
+                        f"stage-2 close sequence mismatch for {record_id}/{sample_index}",
+                    )
+                _require(
+                    output.get("thinking_closed") is True,
+                    f"scientific output lacks a closed thinking region for {record_id}/{sample_index}",
+                )
+                _require(
+                    isinstance(output.get("forced_close"), bool),
+                    f"scientific output lacks forced-close metadata for {record_id}/{sample_index}",
+                )
+                for token_field in ("token_ids", "stage1_token_ids", "injected_token_ids", "stage2_token_ids"):
+                    token_ids = output.get(token_field)
+                    _require(
+                        isinstance(token_ids, list)
+                        and all(isinstance(token, int) and not isinstance(token, bool) for token in token_ids),
+                        f"runner {token_field} is invalid for {record_id}/{sample_index}",
+                    )
+                for count_field in (
+                    "n_thinking_tokens",
+                    "n_answer_tokens",
+                    "n_sampled_tokens",
+                    "n_injected_tokens",
+                    "n_completion_tokens",
+                    "n_terminal_tokens_trimmed",
+                    "n_stage1_prompt_tokens",
+                    "n_stage2_prompt_tokens",
+                ):
+                    _integer(
+                        output.get(count_field),
+                        where=f"runner output {record_id}/{sample_index}.{count_field}",
+                    )
+                _require(
+                    output.get("n_stage1_prompt_tokens") == expected["prompt_tokens"],
+                    f"runner stage-1 prompt count mismatch for {record_id}/{sample_index}",
+                )
+                _require(
+                    output.get("n_injected_tokens") == len(output["injected_token_ids"]),
+                    f"runner injected-token accounting mismatch for {record_id}/{sample_index}",
+                )
             _require(indices == list(range(k)), f"runner sample order mismatch for {record_id}")
-            meta = row.get("meta")
-            if isinstance(meta, Mapping) and "arm" in meta:
-                _require(meta.get("arm") == arm, f"runner row arm mismatch for {record_id}")
             row_count += 1
     _require(
         row_count == len(ordered_records),
@@ -528,7 +800,12 @@ def _identity_from_metadata(
     *,
     n_records: int,
     k: int,
+    thinking_budget: int,
 ) -> dict[str, Any]:
+    _require(
+        metadata.get("schema_version") == RUNNER_SCHEMA_VERSION,
+        f"runner metadata schema must be {RUNNER_SCHEMA_VERSION}",
+    )
     model = _string(metadata.get("model"), where="runner metadata.model")
     _require(model == MODEL_ID, f"runner metadata used forbidden model: {model}")
     revision = _string(
@@ -539,27 +816,113 @@ def _identity_from_metadata(
         metadata.get("runner_sha256"), where="runner metadata.runner_sha256"
     )
     _require(runner_sha256 == RUNNER_SHA256, "runner metadata runner hash mismatch")
+    _require(metadata.get("adapter") is None, "scientific smoke must not use an adapter")
     sampling = metadata.get("sampling")
+    resolved_sampling = metadata.get("resolved_sampling")
     engine = metadata.get("engine")
+    engine_args = metadata.get("engine_args")
+    think_token_ids = metadata.get("think_token_ids")
+    termination = metadata.get("termination")
+    rng_isolation = metadata.get("rng_isolation")
     _require(isinstance(sampling, Mapping), "runner metadata.sampling must be an object")
+    _require(
+        isinstance(resolved_sampling, Mapping),
+        "runner metadata.resolved_sampling must be an object",
+    )
     _require(isinstance(engine, Mapping), "runner metadata.engine must be an object")
+    _require(isinstance(engine_args, Mapping), "runner metadata.engine_args must be an object")
+    _require(
+        isinstance(think_token_ids, Mapping),
+        "runner metadata.think_token_ids must be an object",
+    )
+    _require(isinstance(termination, Mapping), "runner metadata.termination must be an object")
+    _require(
+        isinstance(rng_isolation, Mapping),
+        "runner metadata.rng_isolation must be an object",
+    )
     sampling_json = _json_clone(dict(sampling), where="runner metadata.sampling")
+    resolved_sampling_json = _json_clone(
+        dict(resolved_sampling), where="runner metadata.resolved_sampling"
+    )
     engine_json = _json_clone(dict(engine), where="runner metadata.engine")
+    engine_args_json = _json_clone(dict(engine_args), where="runner metadata.engine_args")
+    think_token_ids_json = _json_clone(
+        dict(think_token_ids), where="runner metadata.think_token_ids"
+    )
+    termination_json = _json_clone(
+        dict(termination), where="runner metadata.termination"
+    )
+    rng_isolation_json = _json_clone(
+        dict(rng_isolation), where="runner metadata.rng_isolation"
+    )
+    _require(
+        sampling_json == _expected_sampling(budget=thinking_budget, k=k),
+        "runner metadata sampling protocol mismatch",
+    )
+    _require(
+        resolved_sampling_json == _EXPECTED_RESOLVED_SAMPLING,
+        "runner metadata resolved sampling protocol mismatch",
+    )
+    _require(engine_json == _EXPECTED_ENGINE, "runner metadata engine protocol mismatch")
+    _require(
+        engine_args_json == _EXPECTED_ENGINE_ARGS,
+        "runner metadata engine_args protocol mismatch",
+    )
+    _require(
+        think_token_ids_json == _EXPECTED_THINK_TOKEN_IDS,
+        "runner metadata think-token protocol mismatch",
+    )
+    _require(
+        termination_json == _EXPECTED_TERMINATION,
+        "runner metadata termination protocol mismatch",
+    )
+    _require(
+        rng_isolation_json == _EXPECTED_RNG_ISOLATION,
+        "runner metadata RNG-isolation protocol mismatch",
+    )
     counts = metadata.get("counts")
     _require(isinstance(counts, Mapping), "runner metadata.counts must be an object")
+    expected_count_fields = {
+        "requests",
+        "completions",
+        "unique_input_prompt_tokens",
+        "stage1_logical_prompt_tokens",
+        "stage2_logical_prompt_tokens",
+        "logical_model_input_tokens",
+        "sampled_tokens",
+        "injected_tokens",
+    }
+    _require(set(counts) == expected_count_fields, "runner metadata count fields mismatch")
+    for field in expected_count_fields:
+        _integer(counts.get(field), where=f"runner metadata.counts.{field}")
     _require(counts.get("requests") == n_records, "runner metadata request count mismatch")
     _require(
         counts.get("completions") == n_records * k,
         "runner metadata completion count mismatch",
     )
+    _require(
+        counts.get("logical_model_input_tokens")
+        == counts.get("stage1_logical_prompt_tokens")
+        + counts.get("stage2_logical_prompt_tokens"),
+        "runner metadata logical prompt accounting mismatch",
+    )
     return {
+        "runner_schema_version": RUNNER_SCHEMA_VERSION,
         "model": model,
         "model_revision": revision,
         "runner_sha256": runner_sha256,
+        "adapter": None,
         "sampling": sampling_json,
         "sampling_sha256": _sha256_value(sampling_json),
+        "resolved_sampling": resolved_sampling_json,
+        "resolved_sampling_sha256": _sha256_value(resolved_sampling_json),
         "engine": engine_json,
         "engine_sha256": _sha256_value(engine_json),
+        "engine_args": engine_args_json,
+        "engine_args_sha256": _sha256_value(engine_args_json),
+        "think_token_ids": think_token_ids_json,
+        "termination": termination_json,
+        "rng_isolation": rng_isolation_json,
     }
 
 
@@ -637,12 +1000,15 @@ def commit_receipt(
     root_path = resolve_artifact_root(root)
     prefix, prefix_budget, prefix_arm, namespace = _validate_prefix(relative_prefix)
     paths = bundle_paths(root_path, prefix)
+    expected_k, expected_n_records = _geometry(
+        namespace, prefix_budget, prefix_arm
+    )
     expected_role, expected_mode = _role_for_namespace(namespace)
     _require(role == expected_role, f"role {role!r} does not match namespace {namespace}")
     _require(tier_mode == expected_mode, f"tier mode {tier_mode!r} does not match namespace")
     _require(thinking_budget == prefix_budget, "receipt budget differs from its directory")
     _require(arm == prefix_arm, "receipt arm differs from its filename")
-    _integer(k, where="receipt K", minimum=1)
+    _require(k == expected_k, f"receipt K must be {expected_k} for {namespace}")
 
     if _lexists(paths.receipt):
         return verify_receipt(
@@ -663,7 +1029,15 @@ def commit_receipt(
     _assert_absolute_no_symlinks(paths.rows, where="runner rows")
     _require(paths.rows.is_file(), f"missing runner rows: {paths.rows}")
     ordered = _ordered_records(preflight)
-    identity = _identity_from_metadata(metadata, n_records=len(ordered), k=k)
+    _validate_ordered_geometry(
+        ordered, arm=arm, expected_n_records=expected_n_records
+    )
+    identity = _identity_from_metadata(
+        metadata,
+        n_records=len(ordered),
+        k=k,
+        thinking_budget=thinking_budget,
+    )
     _validate_protocol_cross_bindings(
         preflight, identity, thinking_budget=thinking_budget, k=k
     )
@@ -713,6 +1087,7 @@ def verify_receipt(
     root_path = resolve_artifact_root(root)
     prefix, budget, arm, namespace = _validate_prefix(relative_prefix)
     paths = bundle_paths(root_path, prefix)
+    expected_k, expected_n_records = _geometry(namespace, budget, arm)
     receipt = _read_json(paths.receipt, where="scientific receipt")
     _require(receipt.get("schema_version") == RECEIPT_SCHEMA_VERSION, "receipt schema mismatch")
     _require(receipt.get("experiment_id") == EXPERIMENT_ID, "receipt experiment mismatch")
@@ -724,15 +1099,21 @@ def verify_receipt(
     _require(receipt.get("thinking_budget") == budget, "receipt budget mismatch")
     _require(receipt.get("arm") == arm, "receipt arm mismatch")
     k = _integer(receipt.get("k"), where="receipt.k", minimum=1)
+    _require(k == expected_k, f"receipt K must be {expected_k} for {namespace}")
     _require(receipt.get("commit_state") == "complete", "receipt is not committed")
 
     preflight = _read_json(paths.preflight, where="runner preflight")
     metadata = _read_json(paths.metadata, where="runner metadata")
     ordered = _ordered_records(preflight)
+    _validate_ordered_geometry(
+        ordered, arm=arm, expected_n_records=expected_n_records
+    )
     _require(receipt.get("ordered_records") == ordered, "receipt ordered prompt identity mismatch")
     _require(receipt.get("n_records") == len(ordered), "receipt record count mismatch")
     _require(receipt.get("n_completions") == len(ordered) * k, "receipt completion count mismatch")
-    identity = _identity_from_metadata(metadata, n_records=len(ordered), k=k)
+    identity = _identity_from_metadata(
+        metadata, n_records=len(ordered), k=k, thinking_budget=budget
+    )
     _validate_protocol_cross_bindings(preflight, identity, thinking_budget=budget, k=k)
     _require(receipt.get("identity") == identity, "receipt runner identity mismatch")
     _require(
@@ -750,6 +1131,7 @@ def bundle_state(root: str | Path, relative_prefix: str | Path) -> dict[str, Any
     root_path = resolve_artifact_root(root)
     prefix, budget, arm, namespace = _validate_prefix(relative_prefix)
     paths = bundle_paths(root_path, prefix)
+    expected_k, expected_n_records = _geometry(namespace, budget, arm)
     present = {
         "preflight": _lexists(paths.preflight),
         "rows": _lexists(paths.rows),
@@ -761,6 +1143,9 @@ def bundle_state(root: str | Path, relative_prefix: str | Path) -> dict[str, Any
     if present == {"preflight": True, "rows": False, "metadata": False, "receipt": False}:
         preflight = _read_json(paths.preflight, where="runner preflight")
         ordered = _ordered_records(preflight)
+        _validate_ordered_geometry(
+            ordered, arm=arm, expected_n_records=expected_n_records
+        )
         _require(
             preflight.get("generation_reserve_tokens")
             == budget + FORCED_CLOSE_TOKENS + ANSWER_MAX_TOKENS,
@@ -774,7 +1159,7 @@ def bundle_state(root: str | Path, relative_prefix: str | Path) -> dict[str, Any
             "tier_mode": tier_mode,
             "thinking_budget": budget,
             "arm": arm,
-            "k": None,
+            "k": expected_k,
             "n_records": len(ordered),
             "ordered_records": ordered,
             "files": {"preflight": _file_digest(root_path, paths.preflight)},
@@ -886,6 +1271,311 @@ def _tree_digest(root: Path, files: Sequence[Path]) -> dict[str, Any]:
     }
 
 
+def _entry_artifact_hashes(entry: Mapping[str, Any], *, where: str) -> dict[str, str]:
+    files = entry.get("files")
+    receipt = entry.get("receipt")
+    _require(isinstance(files, Mapping), f"{where} lacks file identities")
+    _require(isinstance(receipt, Mapping), f"{where} lacks receipt identity")
+    result: dict[str, str] = {}
+    for selection_name, entry_name in (
+        ("rows", "rows"),
+        ("meta", "metadata"),
+        ("preflight", "preflight"),
+    ):
+        identity = files.get(entry_name)
+        _require(isinstance(identity, Mapping), f"{where} lacks {entry_name} identity")
+        result[selection_name] = _sha256(
+            identity.get("sha256"), where=f"{where}.{entry_name}.sha256"
+        )
+    result["receipt"] = _sha256(
+        receipt.get("sha256"), where=f"{where}.receipt.sha256"
+    )
+    return result
+
+
+def _selection_artifacts_match_entry(
+    artifacts: Any,
+    entry: Mapping[str, Any],
+    *,
+    where: str,
+) -> None:
+    _require(isinstance(artifacts, Mapping), f"{where} lacks artifact hashes")
+    normalized = {
+        str(key): _sha256(value, where=f"{where}.artifacts.{key}")
+        for key, value in artifacts.items()
+    }
+    _require(
+        normalized == _entry_artifact_hashes(entry, where=where),
+        f"{where} artifact hashes differ from the scientific catalog",
+    )
+
+
+def validate_selection(
+    selection_file: str | Path,
+    catalog: Mapping[str, Any],
+    *,
+    budget_ladder: Sequence[int],
+    arms: Sequence[str],
+) -> dict[str, Any]:
+    """Validate a hashed smoke selection as a coherent first-adequate history.
+
+    Callers pass their config values deliberately; this helper proves those
+    values still equal the independently frozen storage geometry.  It then
+    binds every completed arm/probe audit back to the corresponding catalog
+    receipt instead of treating a selection-file hash as semantic validation.
+    """
+
+    ladder = tuple(
+        _integer(value, where="selection budget ladder entry", minimum=1)
+        for value in budget_ladder
+    )
+    arm_order = tuple(str(arm) for arm in arms)
+    _require(ladder == SCIENTIFIC_BUDGETS, "selection budget ladder drifted")
+    _require(arm_order == SCIENTIFIC_MATRIX_ARMS, "selection arm order drifted")
+
+    selection_path = Path(selection_file)
+    _assert_absolute_no_symlinks(selection_path, where="smoke budget selection")
+    selection = _read_json(selection_path, where="smoke budget selection")
+    _require(selection.get("schema_version") == 1, "smoke selection schema mismatch")
+    _require(selection.get("run") == "smoke", "smoke selection run mismatch")
+    _require(
+        selection.get("selection_uses_output_content") is False,
+        "smoke selection must be content-blind",
+    )
+    _require(
+        selection.get("lower_tiers_excluded_from_scoring") is True,
+        "smoke selection must exclude lower tiers",
+    )
+    _require(
+        selection.get("scientific_probe_k") == SCIENTIFIC_PROBE_K,
+        "smoke selection probe K mismatch",
+    )
+    _require(
+        selection.get("probes_excluded_from_promotion_scoring_and_prefix_pooling") is True,
+        "smoke selection did not exclude probes",
+    )
+
+    selected_pointer = catalog.get("selected")
+    passed = selection.get("pass")
+    _require(isinstance(passed, bool), "smoke selection pass flag must be boolean")
+    selected_budget = selection.get("selected_thinking_budget")
+    if passed:
+        selected_budget = _integer(
+            selected_budget, where="smoke selected thinking budget", minimum=1
+        )
+        _require(selected_budget in ladder, "smoke selected budget is unregistered")
+        _require(
+            isinstance(selected_pointer, Mapping),
+            "passing smoke selection lacks a catalog pointer",
+        )
+        _require(
+            selected_pointer.get("thinking_budget") == selected_budget,
+            "selection/catalog selected budget mismatch",
+        )
+        _require(
+            selected_pointer.get("selection_path") == SELECTION_LOGICAL_PATH,
+            "selection/catalog logical path mismatch",
+        )
+        _require(
+            selected_pointer.get("selection_bytes") == selection_path.stat().st_size
+            and selected_pointer.get("selection_sha256") == _sha256_file(selection_path),
+            "selection/catalog file identity mismatch",
+        )
+    else:
+        _require(selected_budget is None, "failed smoke selection has a selected budget")
+        _require(selected_pointer is None, "failed smoke selection has a catalog pointer")
+
+    entries = catalog.get("entries")
+    _require(isinstance(entries, list), "scientific catalog entries are missing")
+    entry_by_id: dict[str, Mapping[str, Any]] = {}
+    for raw_entry in entries:
+        _require(isinstance(raw_entry, Mapping), "scientific catalog entry is invalid")
+        entry_id = _string(raw_entry.get("id"), where="scientific catalog entry.id")
+        _require(entry_id not in entry_by_id, f"duplicate scientific catalog entry: {entry_id}")
+        entry_by_id[entry_id] = raw_entry
+
+    raw_tiers = selection.get("tiers")
+    _require(isinstance(raw_tiers, list) and bool(raw_tiers), "smoke selection has no tiers")
+    tier_budgets = [
+        _integer(
+            tier.get("budget") if isinstance(tier, Mapping) else None,
+            where=f"smoke selection tier {index}.budget",
+            minimum=1,
+        )
+        for index, tier in enumerate(raw_tiers)
+    ]
+    _require(
+        tuple(tier_budgets) == ladder[: len(tier_budgets)],
+        "smoke selection tiers are not an exact contiguous ladder prefix",
+    )
+    _require(len(raw_tiers) <= len(ladder), "smoke selection has too many tiers")
+
+    adequate_indices: list[int] = []
+    for tier_index, raw_tier in enumerate(raw_tiers):
+        _require(isinstance(raw_tier, Mapping), f"smoke tier {tier_index} is invalid")
+        tier = raw_tier
+        budget = tier_budgets[tier_index]
+        complete = tier.get("complete")
+        adequate = tier.get("adequate")
+        _require(isinstance(complete, bool), f"smoke tier {budget} complete flag is invalid")
+        _require(isinstance(adequate, bool), f"smoke tier {budget} adequate flag is invalid")
+        if adequate:
+            adequate_indices.append(tier_index)
+            _require(complete is True, f"adequate smoke tier {budget} is incomplete")
+            _require(tier.get("status") == "selectable", f"adequate smoke tier {budget} is not selectable")
+            _require(
+                tier.get("tier_mode") == "complete_k12_matrix",
+                f"adequate smoke tier {budget} has the wrong mode",
+            )
+
+        raw_arm_states = tier.get("arms")
+        _require(isinstance(raw_arm_states, Mapping), f"smoke tier {budget} lacks arms")
+        _require(
+            tuple(raw_arm_states.keys()) == arm_order,
+            f"smoke tier {budget} arm order/set mismatch",
+        )
+        arm_statuses: list[str] = []
+        completed_arm_adequacy: list[bool] = []
+        for arm in arm_order:
+            raw_arm_state = raw_arm_states.get(arm)
+            _require(
+                isinstance(raw_arm_state, Mapping),
+                f"smoke tier {budget}/{arm} state is invalid",
+            )
+            status = raw_arm_state.get("status")
+            _require(
+                status in {"complete", "skipped"},
+                f"smoke tier {budget}/{arm} status is invalid",
+            )
+            arm_statuses.append(str(status))
+            if status == "complete":
+                entry_id = f"matrix/think_{budget}/{arm}"
+                entry = entry_by_id.get(entry_id)
+                _require(entry is not None, f"selection references missing {entry_id}")
+                _require(
+                    entry.get("status") == "complete"
+                    and entry.get("role") == "complete_matrix_arm"
+                    and entry.get("k") == SCIENTIFIC_MATRIX_K
+                    and entry.get("n_records") == SCIENTIFIC_N_RECORDS,
+                    f"selection references invalid matrix entry {entry_id}",
+                )
+                termination = raw_arm_state.get("termination")
+                _require(
+                    isinstance(termination, Mapping)
+                    and isinstance(termination.get("adequate"), bool),
+                    f"smoke tier {budget}/{arm} termination audit is invalid",
+                )
+                completed_arm_adequacy.append(bool(termination.get("adequate")))
+                _selection_artifacts_match_entry(
+                    raw_arm_state.get("artifacts"),
+                    entry,
+                    where=f"smoke tier {budget}/{arm}",
+                )
+                if adequate:
+                    _require(
+                        termination.get("adequate") is True,
+                        f"selected smoke tier {budget}/{arm} is termination-inadequate",
+                    )
+            elif adequate:
+                raise ScientificArtifactError(
+                    f"adequate smoke tier {budget} skipped required arm {arm}"
+                )
+
+        computed_complete = all(status == "complete" for status in arm_statuses)
+        computed_adequate = computed_complete and all(completed_arm_adequacy)
+        _require(
+            complete is computed_complete,
+            f"smoke tier {budget} complete flag disagrees with its arms",
+        )
+        _require(
+            adequate is computed_adequate,
+            f"smoke tier {budget} adequate flag disagrees with its arms",
+        )
+        if not adequate:
+            _require(
+                tier.get("status") in {"rejected", "probe_only_rejected"},
+                f"inadequate smoke tier {budget} has an invalid status",
+            )
+
+        probe = tier.get("scientific_probe")
+        if budget <= 32768:
+            _require(probe is None, f"smoke tier {budget} must not use a probe")
+        else:
+            _require(probe is not None, f"higher smoke tier {budget} lacks its base probe")
+        if probe is not None:
+            _require(isinstance(probe, Mapping), f"smoke tier {budget} probe is invalid")
+            _require(
+                probe.get("status") == "complete"
+                and probe.get("role") == "termination_only_budget_probe"
+                and probe.get("budget") == budget
+                and probe.get("arm") == "base"
+                and probe.get("k") == SCIENTIFIC_PROBE_K
+                and probe.get("records") == SCIENTIFIC_N_RECORDS,
+                f"smoke tier {budget} probe geometry mismatch",
+            )
+            termination = probe.get("termination")
+            _require(
+                isinstance(termination, Mapping)
+                and isinstance(termination.get("adequate"), bool),
+                f"smoke tier {budget} probe termination audit is invalid",
+            )
+            if tier.get("status") == "probe_only_rejected":
+                _require(
+                    termination.get("adequate") is False,
+                    f"probe-rejected tier {budget} has an adequate probe",
+                )
+                _require(
+                    tier.get("tier_mode") == "termination_probe_only",
+                    f"probe-rejected tier {budget} has the wrong mode",
+                )
+            else:
+                _require(
+                    termination.get("adequate") is True,
+                    f"matrix tier {budget} followed an inadequate probe",
+                )
+            probe_entry_id = f"probe/think_{budget}/base"
+            probe_entry = entry_by_id.get(probe_entry_id)
+            _require(probe_entry is not None, f"selection references missing {probe_entry_id}")
+            _require(
+                probe_entry.get("status") == "complete"
+                and probe_entry.get("role") == "termination_probe"
+                and probe_entry.get("k") == SCIENTIFIC_PROBE_K
+                and probe_entry.get("n_records") == SCIENTIFIC_N_RECORDS,
+                f"selection references invalid probe entry {probe_entry_id}",
+            )
+            _selection_artifacts_match_entry(
+                probe.get("artifacts"),
+                probe_entry,
+                where=f"smoke tier {budget} probe",
+            )
+        if tier.get("status") != "probe_only_rejected":
+            _require(
+                tier.get("tier_mode") == "complete_k12_matrix",
+                f"matrix tier {budget} has the wrong mode",
+            )
+
+    if passed:
+        _require(
+            adequate_indices == [len(raw_tiers) - 1],
+            "passing smoke selection did not choose the first/only adequate tier",
+        )
+        _require(
+            tier_budgets[-1] == selected_budget,
+            "selected budget is not the final adequate tier",
+        )
+        selected_arms = selected_pointer.get("arms")  # type: ignore[union-attr]
+        _require(isinstance(selected_arms, Mapping), "catalog selected arms are missing")
+        _require(tuple(selected_arms.keys()) == arm_order, "catalog selected arm order/set mismatch")
+        _require(
+            selected_arms
+            == {arm: f"matrix/think_{selected_budget}/{arm}" for arm in arm_order},
+            "catalog selected arm pointers are not the exact K12 matrix",
+        )
+    else:
+        _require(not adequate_indices, "failed smoke selection contains an adequate tier")
+    return selection
+
+
 def build_catalog(
     root: str | Path,
     *,
@@ -921,16 +1611,25 @@ def build_catalog(
         "selection_file, selected_budget, and selected_entries must be provided together",
     )
     selected: dict[str, Any] | None = None
+    selection_path: Path | None = None
     if all(provided):
         selection_path = Path(selection_file)  # type: ignore[arg-type]
         _assert_absolute_no_symlinks(selection_path, where="smoke budget selection")
         _require(selection_path.is_file(), f"missing smoke budget selection: {selection_path}")
         budget_value = _integer(selected_budget, where="selected budget", minimum=1)
+        _require(budget_value in SCIENTIFIC_BUDGETS, "selected budget is unregistered")
         arm_entries = {
             str(arm): str(entry_id)
             for arm, entry_id in sorted(dict(selected_entries or {}).items())
         }
-        _require(bool(arm_entries), "selected entries must not be empty")
+        expected_arm_entries = {
+            arm: f"matrix/think_{budget_value}/{arm}"
+            for arm in SCIENTIFIC_MATRIX_ARMS
+        }
+        _require(
+            arm_entries == expected_arm_entries,
+            "selected entries must be the exact base/designed K12 matrix",
+        )
         entry_by_id = {str(entry["id"]): entry for entry in entries}
         for arm, entry_id in arm_entries.items():
             _require(_ARM_RE.fullmatch(arm) is not None, f"invalid selected arm: {arm!r}")
@@ -943,6 +1642,11 @@ def build_catalog(
             )
             _require(entry["thinking_budget"] == budget_value, "selected entry budget mismatch")
             _require(entry["arm"] == arm, "selected entry arm mismatch")
+            _require(
+                entry["k"] == SCIENTIFIC_MATRIX_K
+                and entry["n_records"] == SCIENTIFIC_N_RECORDS,
+                "selected entry scientific geometry mismatch",
+            )
         selected = {
             "thinking_budget": budget_value,
             "selection_path": SELECTION_LOGICAL_PATH,
@@ -951,7 +1655,7 @@ def build_catalog(
             "arms": arm_entries,
         }
 
-    return {
+    catalog = {
         "schema_version": CATALOG_SCHEMA_VERSION,
         "experiment_id": EXPERIMENT_ID,
         "storage": {
@@ -966,6 +1670,14 @@ def build_catalog(
         "selected": selected,
         "tree": _tree_digest(root_path, files),
     }
+    if selection_path is not None:
+        validate_selection(
+            selection_path,
+            catalog,
+            budget_ladder=SCIENTIFIC_BUDGETS,
+            arms=SCIENTIFIC_MATRIX_ARMS,
+        )
+    return catalog
 
 
 def write_catalog(path: str | Path, catalog: Mapping[str, Any]) -> None:
@@ -1026,11 +1738,18 @@ def selected_bundle_prefixes(
     budget = _integer(
         selected.get("thinking_budget"), where="selected smoke budget", minimum=1
     )
+    _require(budget in SCIENTIFIC_BUDGETS, "selected smoke budget is unregistered")
     raw_arms = selected.get("arms")
     _require(isinstance(raw_arms, Mapping), "scientific catalog selected arms are missing")
     arm_order = [str(arm) for arm in expected_arms]
-    _require(bool(arm_order) and len(set(arm_order)) == len(arm_order), "invalid expected arms")
-    _require(set(raw_arms) == set(arm_order), "selected smoke arm set mismatch")
+    _require(
+        tuple(arm_order) == SCIENTIFIC_MATRIX_ARMS,
+        "selected smoke expected arms drifted from the fixed matrix",
+    )
+    _require(
+        tuple(raw_arms.keys()) == SCIENTIFIC_MATRIX_ARMS,
+        "selected smoke arm order/set mismatch",
+    )
     entries = catalog.get("entries")
     _require(isinstance(entries, list), "scientific catalog entries are missing")
     by_id = {
@@ -1047,6 +1766,11 @@ def selected_bundle_prefixes(
         _require(entry.get("role") == "complete_matrix_arm", f"selected {arm} is a probe")
         _require(entry.get("thinking_budget") == budget, f"selected {arm} budget mismatch")
         _require(entry.get("arm") == arm, f"selected {arm} identity mismatch")
+        _require(
+            entry.get("k") == SCIENTIFIC_MATRIX_K
+            and entry.get("n_records") == SCIENTIFIC_N_RECORDS,
+            f"selected {arm} scientific geometry mismatch",
+        )
         prefix = entry.get("relative_prefix")
         _require(isinstance(prefix, str), f"selected {arm} prefix is missing")
         _validate_prefix(prefix)
@@ -1065,6 +1789,13 @@ __all__ = [
     "MODEL_ID",
     "MODEL_REVISION",
     "RUNNER_SHA256",
+    "RUNNER_SCHEMA_VERSION",
+    "SCIENTIFIC_BUDGETS",
+    "SCIENTIFIC_MATRIX_ARMS",
+    "SCIENTIFIC_MATRIX_K",
+    "SCIENTIFIC_N_RECORDS",
+    "SCIENTIFIC_PROBE_K",
+    "SCIENTIFIC_RUN_SEED",
     "SELECTION_LOGICAL_PATH",
     "ScientificArtifactError",
     "build_catalog",
@@ -1073,9 +1804,11 @@ __all__ = [
     "bundle_state",
     "commit_receipt",
     "discover_bundle_prefixes",
+    "fsync_tree_and_parent",
     "resolve_artifact_root",
     "safe_path",
     "selected_bundle_prefixes",
+    "validate_selection",
     "verify_catalog",
     "verify_receipt",
     "write_catalog",

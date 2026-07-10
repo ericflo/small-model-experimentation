@@ -970,12 +970,15 @@ class ArtifactIntegrationTests(unittest.TestCase):
                 shutil.copy2(source_exp / relative, destination)
             external = exp / "external"
             (exp / "configs" / "default.yaml").write_text(
-                f"""scientific_smoke:\n  external_root: {external}\ninference:\n  arms: [base, designed_ceiling]\n  smoke_arms: [base, designed_ceiling]\ndecision:\n  bootstrap_repetitions: 20\n  bootstrap_seed: 7\n  smoke_matched_k: 1\n  smoke_min_parse_rate: 0.50\n  smoke_min_macro_candidates: 2\n  smoke_max_answer_truncation: 0.05\n  scored_max_cap_contact: 0.05\n""",
+                f"""scientific_smoke:\n  external_root: {external}\ninference:\n  arms: [base, designed_ceiling]\n  smoke_arms: [base, designed_ceiling]\n  thinking_budget_ladder: [16384, 32768, 49152, 61440]\ndecision:\n  bootstrap_repetitions: 20\n  bootstrap_seed: 7\n  smoke_matched_k: 12\n  smoke_min_parse_rate: 0.50\n  smoke_min_macro_candidates: 2\n  smoke_max_answer_truncation: 0.05\n  scored_max_cap_contact: 0.05\n""",
                 encoding="utf-8",
             )
             tasks = []
-            for index in range(2):
-                task = normalized_task(f"s{index}", split="smoke_reuse")
+            for index in range(12):
+                task = normalized_task(
+                    f"s{index}",
+                    split="smoke_no_reuse" if index < 6 else "smoke_reuse",
+                )
                 tasks.append(
                     {
                         **task,
@@ -1007,40 +1010,81 @@ class ArtifactIntegrationTests(unittest.TestCase):
                 json.dumps({"schema_version": 1, "demonstrations": []}) + "\n",
                 encoding="utf-8",
             )
+            completed_artifacts = {}
             for arm, program, library_id in (
                 ("base", "PROGRAM: CONST_ONE | NOOP", "lib-base"),
                 ("designed_ceiling", "PROGRAM: M0", "lib-designed"),
             ):
                 rows = []
                 prompt_sha256 = hashlib.sha256(f"prompt:{arm}".encode()).hexdigest()
-                for index in range(2):
+                for index in range(12):
+                    record_id = f"s{index}::{arm}"
+                    parent_seed = analyze.scientific_store._stable_seed(
+                        analyze.scientific_store.SCIENTIFIC_RUN_SEED,
+                        record_id,
+                        -1,
+                        "stage1",
+                    )
+                    outputs = [
+                        {
+                            "sample_index": sample_index,
+                            "stage1_parent_seed": parent_seed,
+                            "seed_stage1": parent_seed + sample_index,
+                            "seed_stage2": None,
+                            "text": program,
+                            "token_ids": [248069, sample_index + 1],
+                            "stage1_token_ids": [248069, sample_index + 1, 248044],
+                            "injected_token_ids": [],
+                            "stage2_token_ids": [],
+                            "n_thinking_tokens": 0,
+                            "n_answer_tokens": 1,
+                            "n_sampled_tokens": 3,
+                            "n_injected_tokens": 0,
+                            "n_completion_tokens": 2,
+                            "n_terminal_tokens_trimmed": 1,
+                            "n_stage1_prompt_tokens": 5,
+                            "n_stage2_prompt_tokens": 0,
+                            "thinking_closed": True,
+                            "forced_close": False,
+                            "finish_reason": "stop",
+                            "stop_reason": 248044,
+                            "stage1_finish_reason": "stop",
+                            "stage1_stop_reason": 248044,
+                            "truncated": False,
+                        }
+                        for sample_index in range(12)
+                    ]
                     rows.append(
                         {
-                            "id": f"s{index}::{arm}",
+                            "id": record_id,
                             "meta": {
                                 "task_id": f"s{index}",
-                                "split": "smoke_reuse",
+                                "split": "smoke_no_reuse" if index < 6 else "smoke_reuse",
                                 "arm": arm,
                                 "library_id": library_id,
                                 "max_surface_calls": 5,
                                 "max_expanded_primitive_depth": 5,
+                                "macros_callable": arm != "base",
+                                "prompt_kind": "solve_program",
                             },
                             "prompt_sha256": prompt_sha256,
                             "n_prompt_tokens": 5,
-                            "outputs": [output(0, program)],
+                            "prompt_channel": "thinking",
+                            "prompt_logprobs": None,
+                            "outputs": outputs,
                         }
                     )
-                prefix = f"smoke_tiers/think_4/{arm}"
+                prefix = f"smoke_tiers/think_32768/{arm}"
                 paths = analyze.scientific_store.bundle_paths(external, prefix)
                 preflight = {
                     "schema_version": 1,
                     "pass": True,
                     "max_model_len": 65536,
-                    "generation_reserve_tokens": 518,
-                    "n_records": 2,
+                    "generation_reserve_tokens": 33282,
+                    "n_records": 12,
                     "min_prompt_tokens": 5,
                     "max_prompt_tokens": 5,
-                    "max_prompt_plus_reserve_tokens": 523,
+                    "max_prompt_plus_reserve_tokens": 33287,
                     "records": [
                         {
                             "id": f"s{index}::{arm}",
@@ -1049,9 +1093,9 @@ class ArtifactIntegrationTests(unittest.TestCase):
                             ).hexdigest(),
                             "rendered_prompt_sha256": prompt_sha256,
                             "prompt_tokens": 5,
-                            "prompt_plus_reserve_tokens": 523,
+                            "prompt_plus_reserve_tokens": 33287,
                         }
-                        for index in range(2)
+                        for index in range(12)
                     ],
                 }
                 analyze.scientific_store.write_preflight_only(external, prefix, preflight)
@@ -1062,13 +1106,26 @@ class ArtifactIntegrationTests(unittest.TestCase):
                     **summary(rows),
                     "schema_version": analyze.local_vllm.RUNNER_SCHEMA_VERSION,
                     "runner_sha256": analyze.scientific_store.RUNNER_SHA256,
-                    "engine": {"fixture": True, "max_model_len": 65536},
-                    "sampling": {
-                        "thinking": "budget",
-                        "thinking_budget": 4,
-                        "answer_max_tokens": 512,
-                        "n": 1,
-                    },
+                    "adapter": None,
+                    "engine": dict(analyze.scientific_store._EXPECTED_ENGINE),
+                    "engine_args": dict(
+                        analyze.scientific_store._EXPECTED_ENGINE_ARGS
+                    ),
+                    "sampling": analyze.scientific_store._expected_sampling(
+                        budget=32768, k=12
+                    ),
+                    "resolved_sampling": dict(
+                        analyze.scientific_store._EXPECTED_RESOLVED_SAMPLING
+                    ),
+                    "think_token_ids": json.loads(
+                        json.dumps(analyze.scientific_store._EXPECTED_THINK_TOKEN_IDS)
+                    ),
+                    "termination": dict(
+                        analyze.scientific_store._EXPECTED_TERMINATION
+                    ),
+                    "rng_isolation": dict(
+                        analyze.scientific_store._EXPECTED_RNG_ISOLATION
+                    ),
                 }
                 paths.metadata.write_text(
                     json.dumps(
@@ -1081,9 +1138,9 @@ class ArtifactIntegrationTests(unittest.TestCase):
                     prefix,
                     role="complete_matrix_arm",
                     tier_mode="complete_k12_matrix",
-                    thinking_budget=4,
+                    thinking_budget=32768,
                     arm=arm,
-                    k=1,
+                    k=12,
                     expected_identity={
                         "model": analyze.harness.REQUIRED_MODEL_ID,
                         "model_revision": analyze.harness.MODEL_REVISION,
@@ -1092,9 +1149,61 @@ class ArtifactIntegrationTests(unittest.TestCase):
                         "engine": metadata["engine"],
                     },
                 )
+                completed_artifacts[arm] = {
+                    "rows": hashlib.sha256(paths.rows.read_bytes()).hexdigest(),
+                    "meta": hashlib.sha256(paths.metadata.read_bytes()).hexdigest(),
+                    "preflight": hashlib.sha256(paths.preflight.read_bytes()).hexdigest(),
+                    "receipt": hashlib.sha256(paths.receipt.read_bytes()).hexdigest(),
+                }
             selection_path = exp / "analysis" / "smoke_budget_selection.json"
             selection_path.write_text(
-                json.dumps({"pass": True, "selected_thinking_budget": 4}) + "\n",
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "run": "smoke",
+                        "pass": True,
+                        "selected_thinking_budget": 32768,
+                        "selection_rule": "first adequate tier",
+                        "selection_uses_output_content": False,
+                        "lower_tiers_excluded_from_scoring": True,
+                        "scientific_probe_k": 4,
+                        "probe_policy": "fixture",
+                        "probes_excluded_from_promotion_scoring_and_prefix_pooling": True,
+                        "tiers": [
+                            {
+                                "budget": 16384,
+                                "status": "rejected",
+                                "tier_mode": "complete_k12_matrix",
+                                "complete": False,
+                                "adequate": False,
+                                "rejecting_arm": "base",
+                                "scientific_probe": None,
+                                "arms": {
+                                    "base": {"status": "skipped"},
+                                    "designed_ceiling": {"status": "skipped"},
+                                },
+                            },
+                            {
+                                "budget": 32768,
+                                "status": "selectable",
+                                "tier_mode": "complete_k12_matrix",
+                                "complete": True,
+                                "adequate": True,
+                                "rejecting_arm": None,
+                                "scientific_probe": None,
+                                "arms": {
+                                    arm: {
+                                        "status": "complete",
+                                        "termination": {"adequate": True},
+                                        "artifacts": completed_artifacts[arm],
+                                    }
+                                    for arm in ("base", "designed_ceiling")
+                                },
+                            },
+                        ],
+                    }
+                )
+                + "\n",
                 encoding="utf-8",
             )
             protocol = analyze.scientific_store.build_protocol_binding(exp)
@@ -1102,10 +1211,10 @@ class ArtifactIntegrationTests(unittest.TestCase):
                 external,
                 protocol_binding=protocol,
                 selection_file=selection_path,
-                selected_budget=4,
+                selected_budget=32768,
                 selected_entries={
-                    "base": "matrix/think_4/base",
-                    "designed_ceiling": "matrix/think_4/designed_ceiling",
+                    "base": "matrix/think_32768/base",
+                    "designed_ceiling": "matrix/think_32768/designed_ceiling",
                 },
             )
             analyze.scientific_store.write_catalog(

@@ -59,9 +59,35 @@
   verified-macro follow-up, a train-only plan-given calibration selected think@16,384 and a
   disjoint plan-given interface passed 16/16 records with zero unresolved caps. The fresh induction
   base at the identical budget then contacted the cap in 144/144 samples; only 13 were exact loops,
-  leaving 131/144 unresolved and 60 answer-stage truncations. This is setup evidence, not a task
-  result: calibrate on the actual workload class, gate termination before correctness, and escalate
-  rather than interpreting a cap-bound score.
+  leaving 131/144 unresolved and 60 answer-limit contacts. Doubling the allowance did not clear the
+  workload: at think@32,768 all 144 samples again contacted the boundary, with 81 exact loops,
+  63 unresolved contacts, and 37 answer-limit contacts. Both rungs were excluded before decoding or
+  scoring. A max-seqs-64 K=4 probe at think@49,152 later force-closed all 48 samples (34 loops, 14
+  unresolved, 13 answer-limit contacts) while generating 2,366,620 tokens in 4,035.356 seconds
+  (586.47 tokens/s), but Amendment 12 had already made it diagnostic-only before its receipt:
+  block-rounded demand was 2,433,024 tokens against 995,328 of cache. No decoded or scored content
+  was inspected. The independent capacity-fit follow-up then completed a fresh K=4 probe with
+  max-seqs 19; its live audit fit 963,072 tokens into a 997,888-token cache, leaving 34,816. All 48
+  samples still contacted the boundary (37 exact token-ID loops, 11 unresolved, 9 answer-limit), so
+  49k was rejected before decoding or scoring. It sampled 2,364,643 tokens in 5,012.451 seconds
+  (471.754 tokens/s), 19.6% slower than the max-seqs-64 diagnostic's 586.471 tokens/s. The subsequent
+  61k attempt was stopped before a receipt after an audit found that its implicit CUDA-graph list
+  covered only through width 8 rather than max-seqs 15, leaving no reusable rows. A separate
+  exact-capture follow-up then passed both live-KV and exact-graph gates at 49k: 963,072 required
+  tokens fit into 996,864 live tokens, and `[1, 2, 4, 8, 16, 19]` resolved exactly. Termination still
+  failed with 38/48 periodic loops, 10/48 unresolved contacts, and 6/48 answer-limit contacts. That
+  probe generated 2,363,163 tokens in 4,809.081 seconds (491.396 tokens/s), descriptively 4.16%
+  faster than the implicit-capture capacity-fit probe. The terminal exact-capture 61k probe passed
+  the same runtime gates: 950,400 required tokens fit into 997,888 with 47,488 headroom, and FULL
+  decode graphs resolved exactly at `[1, 2, 4, 8, 15]`. Termination nevertheless failed with 40/48
+  periodic loops, 8/48 unresolved contacts, and 4/48 answer-limit contacts; 2,951,995 sampled tokens
+  took 7,422.886 seconds (397.688 tokens/s). The selector ended `pass=false` with no selected
+  budget, authorizing no K=12 arm or semantic analysis. Cache-safe concurrency and active-width
+  graph coverage are both required for a clean inference envelope, but neither guarantees useful
+  termination. This is setup evidence, not a task result: calibrate on the actual workload class,
+  gate termination before correctness, stop increasing context once the registered ladder is
+  exhausted, and never interpret a cap-bound score. No decoded or scored content informed these
+  decisions.
 - **The model uses thinking as CONTENT (separability probe + foreign control).** Linear probes show
   correctness is moderately decodable from the answer-token activation (AUC 0.64–0.76). The
   foreign-task-thinking ladder is decisive: splicing a *different* task's thinking collapses accuracy to

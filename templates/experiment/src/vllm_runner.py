@@ -27,6 +27,8 @@ Scientific invariants:
   pre-Hopper sampled tokens are not batch-order invariant.
 * vLLM asynchronous scheduling is disabled so the scheduler mode is explicit.
   This does not make pre-Hopper execution batch-invariant.
+* Explicit CUDA-graph capture sizes are checked against vLLM's resolved list,
+  endpoint, and full-decode mode before generation.
 * vLLM and Transformers samples are not RNG-identical.  Never mix backends
   between experimental arms or matched-compute baselines.
 """
@@ -69,7 +71,7 @@ if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-RUNNER_SCHEMA_VERSION = 3
+RUNNER_SCHEMA_VERSION = 4
 
 _MAMBA_CACHE_BLOCKS_RE = re.compile(
     r"max_num_seqs\b.*?(?:exceeds?|greater\s+than|larger\s+than|more\s+than)"
@@ -77,6 +79,7 @@ _MAMBA_CACHE_BLOCKS_RE = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 _MAMBA_CACHE_REEXEC_ENV = "QWEN_RUNNER_MAMBA_REEXEC"
+_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV = "QWEN_RUNNER_MAMBA_REEXEC_CUDAGRAPH"
 _RUNNING_AS_CLI = False
 _MAMBA_CACHE_REEXEC_HINT = (
     "lower --max-num-seqs or raise --gpu-memory-utilization; "
@@ -139,9 +142,11 @@ def _available_mamba_cache_blocks(exc: BaseException) -> int | None:
 
 
 def _rewrite_max_num_seqs_argv(
-    argv: Sequence[str], max_num_seqs: int
+    argv: Sequence[str],
+    max_num_seqs: int,
+    cudagraph_capture_sizes: tuple[int, ...] | None = None,
 ) -> list[str]:
-    """Replace every CLI spelling of max-num-seqs with one trailing value."""
+    """Rewrite CLI concurrency and, when supplied, its tied graph geometry."""
     rewritten: list[str] = []
     index = 0
     while index < len(argv):
@@ -152,13 +157,81 @@ def _rewrite_max_num_seqs_argv(
         if argument.startswith("--max-num-seqs="):
             index += 1
             continue
+        if cudagraph_capture_sizes is not None:
+            if argument == "--cudagraph-capture-size":
+                index += 2
+                continue
+            if argument.startswith("--cudagraph-capture-size="):
+                index += 1
+                continue
         rewritten.append(argument)
         index += 1
     rewritten.extend(("--max-num-seqs", str(max_num_seqs)))
+    if cudagraph_capture_sizes is not None:
+        for size in cudagraph_capture_sizes:
+            rewritten.extend(("--cudagraph-capture-size", str(size)))
     return rewritten
 
 
-def _mamba_reexec_decision(reexec_guard: str | None, running_as_cli: bool) -> str:
+def _clamp_cudagraph_capture_sizes(
+    sizes: tuple[int, ...], max_num_seqs: int
+) -> tuple[int, ...]:
+    """Keep an explicit capture list valid when Mamba capacity lowers concurrency."""
+    if max_num_seqs < 1:
+        raise ValueError("max_num_seqs must be positive")
+    if not sizes:
+        raise ValueError("cannot clamp an empty CUDA-graph capture list")
+    return (*tuple(size for size in sizes if size < max_num_seqs), max_num_seqs)
+
+
+def _parse_mamba_reexec_geometry(
+    max_num_seqs_guard: str | None, cudagraph_guard: str | None
+) -> tuple[int | None, tuple[int, ...] | None]:
+    """Validate provenance carried across the one permitted Mamba re-exec."""
+    if max_num_seqs_guard is None:
+        if cudagraph_guard is not None:
+            raise RuntimeError(
+                f"orphaned {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
+            )
+        return None, None
+    try:
+        requested_max_num_seqs = int(max_num_seqs_guard)
+    except ValueError as exc:
+        raise RuntimeError(
+            f"invalid {_MAMBA_CACHE_REEXEC_ENV} re-exec guard"
+        ) from exc
+    if requested_max_num_seqs < 1:
+        raise RuntimeError(f"invalid {_MAMBA_CACHE_REEXEC_ENV} re-exec guard")
+    if cudagraph_guard is None:
+        return requested_max_num_seqs, None
+    try:
+        raw_sizes = json.loads(cudagraph_guard)
+    except (TypeError, json.JSONDecodeError) as exc:
+        raise RuntimeError(
+            f"invalid {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
+        ) from exc
+    if (
+        not isinstance(raw_sizes, list)
+        or not raw_sizes
+        or any(
+            not isinstance(size, int) or isinstance(size, bool) or size < 1
+            for size in raw_sizes
+        )
+    ):
+        raise RuntimeError(
+            f"invalid {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
+        )
+    sizes = tuple(raw_sizes)
+    if tuple(sorted(set(sizes))) != sizes or sizes[-1] != requested_max_num_seqs:
+        raise RuntimeError(
+            f"inconsistent {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
+        )
+    return requested_max_num_seqs, sizes
+
+
+def _mamba_reexec_decision(
+    reexec_guard: int | str | None, running_as_cli: bool
+) -> str:
     """Choose one CLI process re-exec, then an actionable error."""
     return "exec" if running_as_cli and reexec_guard is None else "raise"
 
@@ -214,6 +287,66 @@ def _jsonable_logprobs(value: Any) -> Any:
     raise TypeError(f"cannot serialize logprob object of type {type(value).__name__}")
 
 
+def _resolved_cudagraph_metadata(compilation_config: Any) -> dict[str, Any]:
+    """Read the effective CUDA-graph geometry from vLLM's resolved config."""
+    try:
+        sizes = tuple(
+            int(size) for size in compilation_config.cudagraph_capture_sizes
+        )
+        maximum = int(compilation_config.max_cudagraph_capture_size)
+        mode = compilation_config.cudagraph_mode
+        mode_name = str(mode.name)
+        decode_mode = str(mode.decode_mode().name)
+        mixed_mode = str(mode.mixed_mode().name)
+        has_full = bool(mode.has_full_cudagraphs())
+    except (AttributeError, TypeError, ValueError) as exc:
+        raise RuntimeError(
+            "vLLM did not expose resolved CUDA-graph geometry"
+        ) from exc
+    return {
+        "source": "llm_engine.vllm_config.compilation_config",
+        "cudagraph_capture_sizes": list(sizes),
+        "max_cudagraph_capture_size": maximum,
+        "mode": mode_name,
+        "decode_mode": decode_mode,
+        "mixed_mode": mixed_mode,
+        "has_full_cudagraphs": has_full,
+    }
+
+
+def _validate_explicit_cudagraph_resolution(
+    requested: tuple[int, ...], resolved: dict[str, Any]
+) -> None:
+    """Fail closed unless vLLM honored an explicit full-decode graph request."""
+    resolved_sizes = tuple(int(size) for size in resolved["cudagraph_capture_sizes"])
+    resolved_maximum = int(resolved["max_cudagraph_capture_size"])
+    mode_name = str(resolved["mode"])
+    decode_mode = str(resolved["decode_mode"])
+    mixed_mode = str(resolved["mixed_mode"])
+    has_full = bool(resolved["has_full_cudagraphs"])
+    supported_mode_geometry = {
+        "FULL": ("FULL", "FULL"),
+        "FULL_DECODE_ONLY": ("FULL", "NONE"),
+        "FULL_AND_PIECEWISE": ("FULL", "PIECEWISE"),
+    }
+    geometry_matches = (
+        resolved_sizes == requested and resolved_maximum == requested[-1]
+    )
+    mode_matches = (
+        mode_name in supported_mode_geometry
+        and (decode_mode, mixed_mode) == supported_mode_geometry[mode_name]
+        and has_full
+    )
+    if not geometry_matches or not mode_matches:
+        raise RuntimeError(
+            "vLLM did not honor the explicit full-decode CUDA-graph request: "
+            f"requested={requested}, resolved={resolved_sizes}, "
+            f"resolved_max={resolved_maximum}, mode={mode_name}, "
+            f"decode_mode={decode_mode}, mixed_mode={mixed_mode}, "
+            f"has_full_cudagraphs={has_full}"
+        )
+
+
 @dataclasses.dataclass(frozen=True)
 class EngineConfig:
     """Engine settings chosen once, before the model is loaded."""
@@ -225,6 +358,7 @@ class EngineConfig:
     enable_prefix_caching: bool = False
     enforce_eager: bool = False
     adapter: Path | None = None
+    cudagraph_capture_sizes: tuple[int, ...] | None = None
 
     def validate(self) -> None:
         if self.max_model_len < 256:
@@ -233,6 +367,27 @@ class EngineConfig:
             raise ValueError("gpu_memory_utilization must be in [0.1, 1.0)")
         if self.max_num_seqs < 1 or self.max_num_batched_tokens < 1:
             raise ValueError("max_num_seqs and max_num_batched_tokens must be positive")
+        if self.cudagraph_capture_sizes is not None:
+            sizes = self.cudagraph_capture_sizes
+            if not sizes or any(
+                not isinstance(size, int) or isinstance(size, bool) or size < 1
+                for size in sizes
+            ):
+                raise ValueError(
+                    "cudagraph_capture_sizes must contain positive integers"
+                )
+            if tuple(sorted(set(sizes))) != sizes:
+                raise ValueError(
+                    "cudagraph_capture_sizes must be strictly increasing and unique"
+                )
+            if sizes[-1] != self.max_num_seqs:
+                raise ValueError(
+                    "the largest cudagraph capture size must equal max_num_seqs"
+                )
+            if self.enforce_eager:
+                raise ValueError(
+                    "explicit cudagraph capture sizes are incompatible with enforce_eager"
+                )
 
 
 @dataclasses.dataclass(frozen=True)
@@ -429,6 +584,36 @@ class VLLMRunner:
 
     def __init__(self, config: EngineConfig = EngineConfig()):
         config.validate()
+        mamba_reexec_requested, mamba_reexec_requested_cudagraph = (
+            _parse_mamba_reexec_geometry(
+                os.environ.get(_MAMBA_CACHE_REEXEC_ENV),
+                os.environ.get(_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV),
+            )
+        )
+        if (
+            mamba_reexec_requested is not None
+            and (mamba_reexec_requested_cudagraph is None)
+            != (config.cudagraph_capture_sizes is None)
+        ):
+            raise RuntimeError(
+                "Mamba re-exec changed whether CUDA-graph geometry is explicit; "
+                "refusing ambiguous engine configuration"
+            )
+        if mamba_reexec_requested is not None:
+            if config.max_num_seqs >= mamba_reexec_requested:
+                raise RuntimeError(
+                    "Mamba re-exec did not lower max_num_seqs; refusing stale or "
+                    "ambiguous re-exec guards"
+                )
+            if mamba_reexec_requested_cudagraph is not None:
+                expected_cudagraph = _clamp_cudagraph_capture_sizes(
+                    mamba_reexec_requested_cudagraph, config.max_num_seqs
+                )
+                if config.cudagraph_capture_sizes != expected_cudagraph:
+                    raise RuntimeError(
+                        "Mamba re-exec did not deterministically clamp the explicit "
+                        "CUDA-graph list; refusing ambiguous engine configuration"
+                    )
         self.config = config
         self.adapter_info = _validate_adapter(config.adapter)
         self._closed = False
@@ -498,7 +683,6 @@ class VLLMRunner:
             "gpu_memory_utilization": config.gpu_memory_utilization,
             "max_num_seqs": config.max_num_seqs,
             "max_num_batched_tokens": config.max_num_batched_tokens,
-            "max_cudagraph_capture_size": config.max_num_seqs,
             "language_model_only": True,
             "enable_prefix_caching": config.enable_prefix_caching,
             "mamba_cache_mode": "align" if config.enable_prefix_caching else "none",
@@ -512,6 +696,13 @@ class VLLMRunner:
             # cross-budget prefix-identical samples.
             "async_scheduling": False,
         }
+        if config.cudagraph_capture_sizes is None:
+            engine_args["max_cudagraph_capture_size"] = config.max_num_seqs
+        else:
+            engine_args.update(
+                cudagraph_capture_sizes=list(config.cudagraph_capture_sizes),
+                max_cudagraph_capture_size=config.cudagraph_capture_sizes[-1],
+            )
         if self.adapter_info is not None:
             engine_args.update(
                 enable_lora=True,
@@ -520,7 +711,6 @@ class VLLMRunner:
                 max_lora_rank=self.adapter_info["rank"],
             )
 
-        mamba_reexec_requested = os.environ.get(_MAMBA_CACHE_REEXEC_ENV)
         try:
             from vllm import LLM
 
@@ -546,10 +736,17 @@ class VLLMRunner:
                             f"Hint: {_MAMBA_CACHE_REEXEC_HINT}."
                         )
                     else:
+                        capture_hint = (
+                            " and clamp cudagraph_capture_sizes to a list ending "
+                            f"at {available_blocks}"
+                            if config.cudagraph_capture_sizes is not None
+                            else ""
+                        )
                         detail = (
                             "limit cannot trigger automatic process re-exec when VLLMRunner "
                             "is imported as a library. Construct EngineConfig with a lower "
-                            f"max_num_seqs (at most {available_blocks} for this load). "
+                            f"max_num_seqs (at most {available_blocks} for this load)"
+                            f"{capture_hint}. "
                             f"Hint: {_MAMBA_CACHE_REEXEC_HINT}."
                         )
                     exc.args = (
@@ -557,9 +754,28 @@ class VLLMRunner:
                     )
                     raise
 
-                rewritten_argv = _rewrite_max_num_seqs_argv(
-                    sys.argv, available_blocks
+                clamped_cudagraph_capture_sizes = (
+                    _clamp_cudagraph_capture_sizes(
+                        config.cudagraph_capture_sizes, available_blocks
+                    )
+                    if config.cudagraph_capture_sizes is not None
+                    else None
                 )
+                rewritten_argv = _rewrite_max_num_seqs_argv(
+                    sys.argv,
+                    available_blocks,
+                    clamped_cudagraph_capture_sizes,
+                )
+                if clamped_cudagraph_capture_sizes is None:
+                    cudagraph_detail = (
+                        "the tied CUDA-graph capture cap will use the same value"
+                    )
+                else:
+                    cudagraph_detail = (
+                        "the explicit CUDA-graph capture list will be rewritten "
+                        f"from {config.cudagraph_capture_sizes} to "
+                        f"{clamped_cudagraph_capture_sizes} so its endpoint remains tied"
+                    )
                 print(
                     "[vllm_runner] *** WARNING: Qwen3.5-4B hybrid Mamba cache "
                     "process re-exec *** "
@@ -569,13 +785,19 @@ class VLLMRunner:
                     "Qwen3.5 is a hybrid model whose Mamba/linear-attention cache "
                     "capacity scales with the GPU memory budget. The runner is "
                     f"re-executing itself with --max-num-seqs {available_blocks} "
-                    f"(clamped from {config.max_num_seqs}); the tied CUDA-graph "
-                    "capture cap will use the same value, and the replacement "
+                    f"(clamped from {config.max_num_seqs}); {cudagraph_detail}, "
+                    "and the replacement "
                     "process starts with clean GPU state.",
                     file=sys.stderr,
                     flush=True,
                 )
                 os.environ[_MAMBA_CACHE_REEXEC_ENV] = str(config.max_num_seqs)
+                if config.cudagraph_capture_sizes is None:
+                    os.environ.pop(_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV, None)
+                else:
+                    os.environ[_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV] = json.dumps(
+                        list(config.cudagraph_capture_sizes), separators=(",", ":")
+                    )
                 sys.stdout.flush()
                 sys.stderr.flush()
                 os.execv(sys.executable, [sys.executable] + rewritten_argv)
@@ -590,8 +812,28 @@ class VLLMRunner:
                 torch.cuda.manual_seed_all(torch_initial_seed)
         self.engine_args = engine_args
         if mamba_reexec_requested is not None:
-            self.engine_args["requested_max_num_seqs"] = int(mamba_reexec_requested)
+            self.engine_args["requested_max_num_seqs"] = mamba_reexec_requested
             self.engine_args["effective_max_num_seqs"] = config.max_num_seqs
+        if mamba_reexec_requested_cudagraph is not None:
+            self.engine_args["requested_cudagraph_capture_sizes"] = (
+                list(mamba_reexec_requested_cudagraph)
+            )
+            self.engine_args["effective_cudagraph_capture_sizes"] = list(
+                config.cudagraph_capture_sizes or ()
+            )
+
+        try:
+            compilation_config = self.llm.llm_engine.vllm_config.compilation_config
+            self.resolved_cudagraph = _resolved_cudagraph_metadata(
+                compilation_config
+            )
+            if config.cudagraph_capture_sizes is not None:
+                _validate_explicit_cudagraph_resolution(
+                    config.cudagraph_capture_sizes, self.resolved_cudagraph
+                )
+        except (AttributeError, RuntimeError):
+            self.close()
+            raise
 
         self.lora_request = None
         if self.adapter_info is not None:
@@ -1048,6 +1290,7 @@ class VLLMRunner:
                 key: str(value) if isinstance(value, Path) else value
                 for key, value in self.engine_args.items()
             },
+            "resolved_cudagraph": self.resolved_cudagraph,
             "sampling": dataclasses.asdict(sampling),
             "resolved_sampling": sampling.resolved_sampling(),
             "adapter": self.adapter_info,
@@ -1160,7 +1403,7 @@ def _write_json_atomic(path: Path, value: Any, *, jsonl: bool = False) -> None:
 
 
 def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--input", type=Path, help="input JSONL")
     source.add_argument("--smoke", type=int, metavar="N", help="use N built-in smoke prompts")
@@ -1194,6 +1437,16 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.90)
     parser.add_argument("--max-num-seqs", type=int, default=128)
     parser.add_argument("--max-num-batched-tokens", type=int, default=32_768)
+    parser.add_argument(
+        "--cudagraph-capture-size",
+        type=int,
+        action="append",
+        default=None,
+        help=(
+            "explicit CUDA-graph capture size; repeat in strictly increasing order "
+            "and end at --max-num-seqs"
+        ),
+    )
     parser.add_argument("--enable-prefix-caching", action="store_true")
     parser.add_argument("--enforce-eager", action="store_true")
     parser.add_argument(
@@ -1232,6 +1485,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         gpu_memory_utilization=args.gpu_memory_utilization,
         max_num_seqs=args.max_num_seqs,
         max_num_batched_tokens=args.max_num_batched_tokens,
+        cudagraph_capture_sizes=(
+            tuple(args.cudagraph_capture_size)
+            if args.cudagraph_capture_size is not None
+            else None
+        ),
         enable_prefix_caching=args.enable_prefix_caching,
         enforce_eager=args.enforce_eager,
         adapter=args.adapter,

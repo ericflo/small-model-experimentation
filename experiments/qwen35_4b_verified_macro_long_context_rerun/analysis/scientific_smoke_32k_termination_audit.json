@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_long_context_rerun",
+  "stage": "smoke",
+  "arm": "base",
+  "thinking_budget": 32768,
+  "answer_max_tokens": 512,
+  "inspection_boundary": {
+    "used_for_decision": [
+      "runner timing and token accounting",
+      "finish and forced-intervention metadata",
+      "token-id periodic-tail classification",
+      "artifact receipts and hashes"
+    ],
+    "not_inspected": [
+      "decoded model output",
+      "parse status",
+      "visible-example score",
+      "hidden-example score",
+      "candidate correctness"
+    ]
+  },
+  "counts": {
+    "requests": 12,
+    "samples": 144,
+    "sampled_tokens": 4739527,
+    "cap_contacts": 144,
+    "thinking_tokens_at_budget": 144,
+    "naturally_closed_reasoning_samples": 0,
+    "stage1_length_finishes": 144,
+    "forced_interventions": 144,
+    "reasoning_boundary_contacts": 144,
+    "answer_restarts_after_natural_close": 0,
+    "periodic_loop_contacts": 81,
+    "unresolved_cap_contacts": 63,
+    "answer_limit_contacts": 37,
+    "answer_tokens_at_limit": 37,
+    "stage2_truncations": 37
+  },
+  "rates": {
+    "forced_intervention": 1.0,
+    "reasoning_boundary_contact": 1.0,
+    "answer_restart_after_natural_close": 0.0,
+    "periodic_loop": 0.5625,
+    "unresolved_cap_contact": 0.4375,
+    "answer_limit_contact": 0.2569444444444444,
+    "stage2_truncation": 0.2569444444444444
+  },
+  "token_metadata": {
+    "p99_thinking_tokens": 32768,
+    "p99_naturally_closed_thinking_tokens": null,
+    "p99_answer_tokens": 512
+  },
+  "periodicity_test": {
+    "tail_tokens": 8192,
+    "max_period_tokens": 2048,
+    "minimum_match_rate": 0.99,
+    "detected_samples": 81,
+    "exact_match_rate_samples": 81,
+    "observed_period_tokens_min": 3,
+    "observed_period_tokens_max": 1693
+  },
+  "timing": {
+    "generation_seconds": 5971.182307352312,
+    "sampled_tokens_per_second": 793.733427660419
+  },
+  "decision": {
+    "termination_adequate": false,
+    "rung_can_be_selected": false,
+    "designed_arm_needed_to_reject_rung": false,
+    "higher_rung_action": "run the preregistered non-scored K=4 base probe at think@49152",
+    "lower_rung_rows_excluded_from_scoring": true,
+    "selection_uses_output_content": false,
+    "selection_uses_decoded_or_scored_content": false,
+    "selection_uses_token_identity_for_periodicity": true,
+    "thresholds": {
+      "unresolved_cap_contact_rate_below": 0.05,
+      "periodic_loop_rate_at_most": 0.25,
+      "answer_limit_contact_rate_below": 0.05
+    },
+    "gate_failures": {
+      "unresolved_cap_contact": true,
+      "periodic_loop": true,
+      "answer_limit_contact": true
+    }
+  },
+  "artifacts": {
+    "external_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/scientific_smoke_v1",
+    "relative_prefix": "smoke_tiers/think_32768/base",
+    "rows": {
+      "bytes": 61500639,
+      "sha256": "6f3c60361bb9166bc3e7fbc510060a17c6907cb3e3ce8ea94a62c04bc343b00b"
+    },
+    "metadata": {
+      "bytes": 9801,
+      "sha256": "1f46b916cbe674d92915415e63db5aa2828a9847dbbacc6d430b77282073ad4a"
+    },
+    "preflight": {
+      "bytes": 4101,
+      "sha256": "6c9c059202989781d1c4910bc1f4c56accec1d79cd82f3ef11e72c0c2a8df1a8"
+    },
+    "receipt": {
+      "bytes": 7295,
+      "sha256": "d7efed41b53a2d15f05c0e73aa4d7f65ddc8f9dc0abc17a642653123b2606d65"
+    },
+    "runner_sha256": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782",
+    "config_sha256": "29bc583bf67c5b28cddefd35639994d0ad4b56967bd1232bd067d3fedd6560f3",
+    "scientific_protocol_binding_sha256": "1148be5972f09b21a26ff4d30e3e0695a8716ffa1bbe2165b5b9faeb2bad036e",
+    "classifier_run_py_sha256": "e9673be8e6be2b9221d051652839a649fcc8e0c90d53e8f16f5a670af50d99e2",
+    "classifier_analyze_py_sha256": "331098ce797869c1601540b2a485383127b28dff609b164b23c5df290bf734a6"
+  }
+}

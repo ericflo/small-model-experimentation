@@ -17,7 +17,15 @@ changes a rule here, update the rule in the same commit.
 - **Budget the CoT generously and check truncation.** The general hypothesize-and-verify CoT
   needs ≥400 generated tokens; a 256 cap truncated it into a false 0.00 (C45). Thinking-budget
   accuracy is non-monotonic: optimum ≈512–1024 thinking tokens, and *unbudgeted* is worse than
-  a cap (C9). Record generation lengths and report the truncation rate.
+  a cap (C9). Record generation lengths and report the truncation rate. Do not transfer a budget
+  from a supplied-plan or otherwise easier calibration workload to fresh induction: the
+  [verified-macro long-context rerun](../experiments/qwen35_4b_verified_macro_long_context_rerun/reports/report.md)
+  cleared its plan-given gate at 16k, yet its fresh base workload was still censored at both 16k
+  and 32k. Before reading correctness, separately gate unresolved reasoning-boundary contacts,
+  exact periodic loops, and answer-limit contacts; exclude a binding rung and locate the next
+  allowance with a small non-scored workload probe. If a preregistered ladder exhausts its terminal
+  rung with exact loops dominant, stop increasing context; branch a fresh, symmetric loop-control
+  protocol while keeping the unresolved-contact and answer-limit gates intact.
 - **Modality matters: natural language elicits reasoning; dict/JSON format triggers
   code-mode.** The compositional execution wall exists in formal task presentations but not in
   natural language (C37). No-think mode avoids code-mode on tasks where code is a distractor

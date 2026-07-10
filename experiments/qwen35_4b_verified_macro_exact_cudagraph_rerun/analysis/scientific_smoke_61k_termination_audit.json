@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+  "audit_scope": "content-blind termination, live-capacity metadata, and resolved CUDA-graph geometry only",
+  "decoded_or_scored_content_inspected": false,
+  "artifact_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_exact_cudagraph_rerun/scientific_smoke_v1",
+  "bundle": {
+    "relative_prefix": "smoke_budget_probes/think_61440/base",
+    "role": "termination_probe",
+    "thinking_budget": 61440,
+    "k": 4,
+    "n_records": 12,
+    "n_completions": 48,
+    "receipt": {
+      "bytes": 17956,
+      "sha256": "8f00535a773e347ec4f90a48eb6b00960935d7010c3500af7ccdf57fedd6f2e1"
+    },
+    "files": {
+      "preflight": {
+        "bytes": 7621,
+        "sha256": "b4135ff9181e9247df8445484c48cf1be81d9529adf8bc4ca62432de5797cede"
+      },
+      "rows": {
+        "bytes": 39502533,
+        "sha256": "f51c3d747bf48272b0302287e0236dfdbc816b2cd44b202a12ad0b9aa10247b0"
+      },
+      "metadata": {
+        "bytes": 10306,
+        "sha256": "23b381cf8c0af2e4d622acfdd8bed67d213e10cc601399313a7c2b5967b6af2e"
+      }
+    },
+    "receipt_verification": "passed",
+    "catalog_verification": {
+      "passed": true,
+      "state_at_audit": [
+        "probe/think_49152/base:complete",
+        "probe/think_61440/base:complete"
+      ],
+      "selected": null,
+      "external_tree_at_audit": {
+        "files": 8,
+        "bytes": 70191578,
+        "sha256": "4aa311ab579c301f2b2d7383591e3e68ed66035d184bbaaa2659d59bd95542d3"
+      }
+    }
+  },
+  "capacity_fit": {
+    "pass": true,
+    "max_num_seqs": 15,
+    "live_kv_cache_tokens": 997888,
+    "block_size_tokens": 528,
+    "rounded_tokens_per_sequence": 63360,
+    "required_cache_tokens": 950400,
+    "cache_margin_tokens": 47488
+  },
+  "cudagraph_resolution": {
+    "pass": true,
+    "decode_mode": "FULL",
+    "has_full_cudagraphs": true,
+    "requested_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      15
+    ],
+    "resolved_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      15
+    ],
+    "active_width_covered": true
+  },
+  "termination": {
+    "adequate": false,
+    "samples": 48,
+    "stage1_length_finishes": 48,
+    "forced_interventions": 48,
+    "reasoning_boundary_contacts": 48,
+    "answer_restarts_after_natural_close": 0,
+    "unresolved_cap_contacts": 8,
+    "unresolved_cap_contact_rate": 0.16666666666666666,
+    "periodic_loop_contacts": 40,
+    "periodic_loop_rate": 0.8333333333333334,
+    "period_tokens": [
+      3,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      31,
+      32,
+      35,
+      37,
+      65,
+      74,
+      97,
+      100,
+      118,
+      120,
+      163,
+      173,
+      190,
+      202,
+      265,
+      266,
+      275,
+      341,
+      347,
+      374,
+      398,
+      409,
+      457,
+      510,
+      519,
+      530,
+      700,
+      824,
+      869,
+      1269,
+      1881
+    ],
+    "answer_limit_contacts": 4,
+    "answer_limit_contact_rate": 0.08333333333333333,
+    "thresholds": {
+      "unresolved_cap_contact_rate_below": 0.05,
+      "periodic_loop_rate_at_most": 0.25,
+      "answer_limit_contact_rate_below": 0.05
+    },
+    "selection_uses_decoded_or_scored_content": false,
+    "selection_uses_token_identity_for_periodicity": true
+  },
+  "generation": {
+    "sampled_tokens": 2951995,
+    "generation_seconds": 7422.885983,
+    "sampled_tokens_per_second": 397.688312,
+    "model_load_seconds": 100.29358
+  },
+  "terminal_selection": {
+    "bytes": 5549,
+    "sha256": "acbaf7cdb84ee5633e4f86b0716360c382f2262eb50e79ca92ce02b6e157fb07",
+    "pass": false,
+    "selected_thinking_budget": null
+  },
+  "decision": {
+    "rung": "rejected",
+    "reason": "The terminal 61,440-token K=4 probe failed all three registered termination thresholds.",
+    "next_action": "Stop this ladder. No K=12 arm, semantic analysis, or macro result is authorized.",
+    "macro_claim": "none",
+    "semantic_analysis_authorized": false
+  }
+}

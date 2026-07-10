@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_capacity_fit_rerun",
+  "audit_scope": "content-blind termination and live-capacity metadata only",
+  "decoded_or_scored_content_inspected": false,
+  "artifact_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_capacity_fit_rerun/scientific_smoke_v1",
+  "bundle": {
+    "relative_prefix": "smoke_budget_probes/think_49152/base",
+    "role": "termination_probe",
+    "thinking_budget": 49152,
+    "k": 4,
+    "n_records": 12,
+    "n_completions": 48,
+    "receipt": {
+      "bytes": 17283,
+      "sha256": "5c1b8bc77e71fb5c23302b4cb850b4347859ad5b4941246078cb96ea1a59c24a"
+    },
+    "files": {
+      "preflight": {
+        "bytes": 7053,
+        "sha256": "ad151d2ce62e154ce901321282e17e0ac0691d371c9836ed3dc85e5033a13c39"
+      },
+      "rows": {
+        "bytes": 31608130,
+        "sha256": "42f598027795973ef5384439d4cbe597e8b9eef5e330bea9dfffd336ae38b626"
+      },
+      "metadata": {
+        "bytes": 9799,
+        "sha256": "6817b6dd9b35f36e932184d19dc8857c198d9b4048ec268aa091ef67c59893e4"
+      }
+    },
+    "receipt_verification": "passed",
+    "catalog_verification": {
+      "passed": true,
+      "state_at_audit": [
+        "probe/think_49152/base:complete",
+        "probe/think_61440/base:preflight_only"
+      ],
+      "external_tree_at_audit": {
+        "files": 5,
+        "bytes": 31649318,
+        "sha256": "0bf398db12f349a4c49b99770e7d5f07e5ca3b2dcc2c172aec17e844a6a78b6b"
+      },
+      "note": "The tree snapshot includes the active 61,440-token probe preflight and will change when that bundle commits."
+    }
+  },
+  "capacity_fit": {
+    "pass": true,
+    "max_num_seqs": 19,
+    "live_kv_cache_tokens": 997888,
+    "block_size_tokens": 528,
+    "rounded_tokens_per_sequence": 50688,
+    "required_cache_tokens": 963072,
+    "cache_margin_tokens": 34816
+  },
+  "termination": {
+    "adequate": false,
+    "samples": 48,
+    "stage1_length_finishes": 48,
+    "forced_interventions": 48,
+    "reasoning_boundary_contacts": 48,
+    "answer_restarts_after_natural_close": 0,
+    "unresolved_cap_contacts": 11,
+    "unresolved_cap_contact_rate": 0.22916666666666666,
+    "periodic_loop_contacts": 37,
+    "periodic_loop_rate": 0.7708333333333334,
+    "period_tokens": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      25,
+      29,
+      35,
+      40,
+      45,
+      45,
+      130,
+      158,
+      243,
+      286,
+      287,
+      330,
+      358,
+      378,
+      401,
+      469,
+      694,
+      717,
+      725,
+      780,
+      823,
+      939,
+      960,
+      966,
+      1222,
+      1228,
+      1397,
+      1667
+    ],
+    "answer_limit_contacts": 9,
+    "answer_limit_contact_rate": 0.1875,
+    "thresholds": {
+      "unresolved_cap_contact_rate_below": 0.05,
+      "periodic_loop_rate_at_most": 0.25,
+      "answer_limit_contact_rate_below": 0.05
+    },
+    "selection_uses_decoded_or_scored_content": false,
+    "selection_uses_token_identity_for_periodicity": true
+  },
+  "generation": {
+    "sampled_tokens": 2364643,
+    "generation_seconds": 5012.451158896089,
+    "sampled_tokens_per_second": 471.75382363641313
+  },
+  "throughput_comparison": {
+    "diagnostic_max_num_seqs_64_tokens_per_second": 586.471,
+    "capacity_fit_max_num_seqs_19_tokens_per_second": 471.75382363641313,
+    "capacity_fit_fraction_slower": 0.195605880536,
+    "interpretation": "The strictly cache-safe run was 19.6% slower than the predecessor's overcommitted diagnostic. Cache-safe concurrency is necessary for validity but is not automatically throughput-optimal."
+  },
+  "decision": {
+    "rung": "rejected",
+    "reason": "The 49,152-token K=4 probe failed all three registered termination thresholds.",
+    "next_action": "Run the fresh base-only K=4 probe at thinking budget 61,440 with max_num_seqs=15.",
+    "macro_claim": "none"
+  }
+}

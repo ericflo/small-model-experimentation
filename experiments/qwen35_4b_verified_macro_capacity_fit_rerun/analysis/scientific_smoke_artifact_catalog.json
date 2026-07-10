@@ -1,0 +1,288 @@
+{
+  "checksum_scheme": "sha256 over sorted relative-path NUL file-sha256 newline records",
+  "entries": [
+    {
+      "arm": "base",
+      "files": {
+        "metadata": {
+          "bytes": 9799,
+          "relative_path": "smoke_budget_probes/think_49152/base.meta.json",
+          "sha256": "6817b6dd9b35f36e932184d19dc8857c198d9b4048ec268aa091ef67c59893e4"
+        },
+        "preflight": {
+          "bytes": 7053,
+          "relative_path": "smoke_budget_probes/think_49152/base.preflight.json",
+          "sha256": "ad151d2ce62e154ce901321282e17e0ac0691d371c9836ed3dc85e5033a13c39"
+        },
+        "rows": {
+          "bytes": 31608130,
+          "relative_path": "smoke_budget_probes/think_49152/base.jsonl",
+          "sha256": "42f598027795973ef5384439d4cbe597e8b9eef5e330bea9dfffd336ae38b626"
+        }
+      },
+      "id": "probe/think_49152/base",
+      "k": 4,
+      "n_records": 12,
+      "protocol_binding": {
+        "binding_sha256": "7583edbc2bc211c4123b3bdd65db228941b49954377a80b70ff82e8ee6d52fda",
+        "experiment_id": "qwen35_4b_verified_macro_capacity_fit_rerun",
+        "files": [
+          {
+            "bytes": 1842,
+            "path": "configs/default.yaml",
+            "sha256": "757be5ada83f7a6c86c331b617f59d30a3fc0a93e93cd3db5f89375750484397"
+          },
+          {
+            "bytes": 827691,
+            "path": "data/tasks.json",
+            "sha256": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073"
+          },
+          {
+            "bytes": 2133,
+            "path": "data/demonstrations.json",
+            "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf"
+          },
+          {
+            "bytes": 7416,
+            "path": "data/prompt_manifest.json",
+            "sha256": "f453b1ade590b3374be868dff2e8e7333e2d6e6044f6db9bf26dd033de98277f"
+          },
+          {
+            "bytes": 1429,
+            "path": "data/source_provenance.json",
+            "sha256": "0fbf805ccc38388044fe0a415eae83e907b4e9b239eb564f01b310cff86f0824"
+          },
+          {
+            "bytes": 17915,
+            "path": "scripts/analyze.py",
+            "sha256": "c26264d22c1463669bb7e536ce587a5f1cab469658ae97cb7ff8a5a6151002c3"
+          },
+          {
+            "bytes": 33280,
+            "path": "scripts/run.py",
+            "sha256": "960fe2f69bb44d09029cf8d1a34f6243b13691de66dfcb2d200b12ba115663ab"
+          },
+          {
+            "bytes": 41825,
+            "path": "src/macro_domain.py",
+            "sha256": "3a59b931faf42a6731ad73e31f9e8cdedf44c29423db4d8645b4e50a66ab21a7"
+          },
+          {
+            "bytes": 41287,
+            "path": "src/model_harness.py",
+            "sha256": "a43fb0e76f65819e5d1048f965e74c06409da870e77c7ce46f6df247257fa552"
+          },
+          {
+            "bytes": 79921,
+            "path": "src/scientific_artifacts.py",
+            "sha256": "bdb6824f29fa40d745ee953edcc4dd951c39e35eed7bb369e6570435b9b2f37a"
+          },
+          {
+            "bytes": 50090,
+            "path": "src/vllm_runner.py",
+            "sha256": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782"
+          }
+        ],
+        "library_scope": "base and designed_ceiling only; later Qwen-only library additions are excluded",
+        "schema_version": 1,
+        "smoke_libraries": {
+          "base": {
+            "content_sha256": "462ddf886c5fb28ce087f30ff5bb816c3b4d6068d98dcb2afee2d4bf454f4e58",
+            "library_id": "base-469fc2a9dc4782c6"
+          },
+          "designed_ceiling": {
+            "content_sha256": "c8ba999ba054bbc0153fa8c4251b8fb464860cfbc638b4dc96cf6d94dac0b456",
+            "library_id": "designed_ceiling-1ebbde85d208cc40"
+          }
+        }
+      },
+      "receipt": {
+        "bytes": 17283,
+        "relative_path": "smoke_budget_probes/think_49152/base.receipt.json",
+        "sha256": "5c1b8bc77e71fb5c23302b4cb850b4347859ad5b4941246078cb96ea1a59c24a"
+      },
+      "relative_prefix": "smoke_budget_probes/think_49152/base",
+      "role": "termination_probe",
+      "status": "complete",
+      "thinking_budget": 49152,
+      "tier_mode": "termination_probe_only"
+    },
+    {
+      "arm": "base",
+      "files": {
+        "preflight": {
+          "bytes": 7053,
+          "relative_path": "smoke_budget_probes/think_61440/base.preflight.json",
+          "sha256": "a2a3ef1f4ba9e68909374460030bc947712f10a488870a0db1bf081e368b8a5a"
+        }
+      },
+      "id": "probe/think_61440/base",
+      "k": 4,
+      "n_records": 12,
+      "ordered_records": [
+        {
+          "id": "smoke-v2-no-reuse-000::base",
+          "input_record_sha256": "c876efadaff48a27c521968d22a7975b3f7d30000d263f28c6834f845a8f3e61",
+          "prompt_tokens": 978,
+          "rendered_prompt_sha256": "4a46ea5e19048dd6b1859caf31aadf0483e3126095d75d38a6f8a0ae4972eaad"
+        },
+        {
+          "id": "smoke-v2-no-reuse-001::base",
+          "input_record_sha256": "141839b12e9221139d8bba48e5bd498a3a5436ec576198674c67bf79e8c67441",
+          "prompt_tokens": 990,
+          "rendered_prompt_sha256": "3b99cf9ff9b199634407bed695ee5ad973fe7805702f10882512ab7c994353cf"
+        },
+        {
+          "id": "smoke-v2-no-reuse-002::base",
+          "input_record_sha256": "5a64a881818591a5aa34d0ae6eaa35663b46111d8c378b8a713cb25b78cea7cb",
+          "prompt_tokens": 980,
+          "rendered_prompt_sha256": "4e99fdbeff870659c57ee750870715ecf3e7196a4cdccc43c8d5063a1c4e32c3"
+        },
+        {
+          "id": "smoke-v2-no-reuse-003::base",
+          "input_record_sha256": "fd202a2b64e5e7719c7b389152a52ba394c539d04f360301547adf8100922003",
+          "prompt_tokens": 986,
+          "rendered_prompt_sha256": "1c5c358105adeacbc79f60ce45e303eecbb367f68b84feaae91e670e92bc7940"
+        },
+        {
+          "id": "smoke-v2-no-reuse-004::base",
+          "input_record_sha256": "0f7d69d56612afa3f379a1402e5d6a985c1c9c31d70a828ad05a479342a7f3d8",
+          "prompt_tokens": 974,
+          "rendered_prompt_sha256": "3f9b475ddf5898db675dfa00d8dc1a6492d577d41dc21e3a3df8b5a351699735"
+        },
+        {
+          "id": "smoke-v2-no-reuse-005::base",
+          "input_record_sha256": "3b6840e124aa760ed9cd7821b826e4b1bd52a021664b371348b521f573031f1f",
+          "prompt_tokens": 980,
+          "rendered_prompt_sha256": "39c71657b85adb5243f0ffe3a4fb91f31300d1ab1906d09db4e02a34b559cab3"
+        },
+        {
+          "id": "smoke-v2-reuse-000::base",
+          "input_record_sha256": "41fe5ba1dd3d0ac4bcf4830765fa25f8bbc71729979661d6ec9342f9fa8bee16",
+          "prompt_tokens": 975,
+          "rendered_prompt_sha256": "5cf2a33dd4f0fcda20a079a555a3a964294ee14634c7d8eeb4fd6a82d548b839"
+        },
+        {
+          "id": "smoke-v2-reuse-001::base",
+          "input_record_sha256": "1fd4c93a78f96d78f6a5069a59bfd0833f2ee3bd7a70a121cbb12d45f882fc43",
+          "prompt_tokens": 985,
+          "rendered_prompt_sha256": "a5949e1c049b05e91c8cc440d0d2f8718c074d1947c82cb40a98e7da000e55e7"
+        },
+        {
+          "id": "smoke-v2-reuse-002::base",
+          "input_record_sha256": "ca9f5ddec2e405db7e8888d622320d54e632d2303f96644431cec60fecc7a298",
+          "prompt_tokens": 987,
+          "rendered_prompt_sha256": "aae89f471dcfd73f7fcf3dce1d60da9f3a5e04e5473cdd7deba28f1e4aa719ed"
+        },
+        {
+          "id": "smoke-v2-reuse-003::base",
+          "input_record_sha256": "4b02708215796ce48caeee21d942e5d19d04c739fefd684edc39ed75ce5837d2",
+          "prompt_tokens": 984,
+          "rendered_prompt_sha256": "998981cbfbe6b74160035b60ddbdb337cfac1351e234048bc0dfe0007da2b696"
+        },
+        {
+          "id": "smoke-v2-reuse-004::base",
+          "input_record_sha256": "adf73b85d571705477fd3fc6e93b58eb7bf1a86ceb30dadbf1ddbb1956e37e33",
+          "prompt_tokens": 982,
+          "rendered_prompt_sha256": "eb87fac08dd5cc80d28f8e7c3775220bf35640eff862fb0113f2c26e28c6bdff"
+        },
+        {
+          "id": "smoke-v2-reuse-005::base",
+          "input_record_sha256": "5113196e8b623989e9766ee893b6488d12d1cd2d10d0c27fad88bf784574cb10",
+          "prompt_tokens": 983,
+          "rendered_prompt_sha256": "85c5894b6cdef5077af454eb3cd5cb6ee6bd9fbe00e66361f964138da5df0ba3"
+        }
+      ],
+      "relative_prefix": "smoke_budget_probes/think_61440/base",
+      "role": "termination_probe",
+      "status": "preflight_only",
+      "thinking_budget": 61440,
+      "tier_mode": "termination_probe_only"
+    }
+  ],
+  "experiment_id": "qwen35_4b_verified_macro_capacity_fit_rerun",
+  "protocol_binding": {
+    "binding_sha256": "7583edbc2bc211c4123b3bdd65db228941b49954377a80b70ff82e8ee6d52fda",
+    "experiment_id": "qwen35_4b_verified_macro_capacity_fit_rerun",
+    "files": [
+      {
+        "bytes": 1842,
+        "path": "configs/default.yaml",
+        "sha256": "757be5ada83f7a6c86c331b617f59d30a3fc0a93e93cd3db5f89375750484397"
+      },
+      {
+        "bytes": 827691,
+        "path": "data/tasks.json",
+        "sha256": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073"
+      },
+      {
+        "bytes": 2133,
+        "path": "data/demonstrations.json",
+        "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf"
+      },
+      {
+        "bytes": 7416,
+        "path": "data/prompt_manifest.json",
+        "sha256": "f453b1ade590b3374be868dff2e8e7333e2d6e6044f6db9bf26dd033de98277f"
+      },
+      {
+        "bytes": 1429,
+        "path": "data/source_provenance.json",
+        "sha256": "0fbf805ccc38388044fe0a415eae83e907b4e9b239eb564f01b310cff86f0824"
+      },
+      {
+        "bytes": 17915,
+        "path": "scripts/analyze.py",
+        "sha256": "c26264d22c1463669bb7e536ce587a5f1cab469658ae97cb7ff8a5a6151002c3"
+      },
+      {
+        "bytes": 33280,
+        "path": "scripts/run.py",
+        "sha256": "960fe2f69bb44d09029cf8d1a34f6243b13691de66dfcb2d200b12ba115663ab"
+      },
+      {
+        "bytes": 41825,
+        "path": "src/macro_domain.py",
+        "sha256": "3a59b931faf42a6731ad73e31f9e8cdedf44c29423db4d8645b4e50a66ab21a7"
+      },
+      {
+        "bytes": 41287,
+        "path": "src/model_harness.py",
+        "sha256": "a43fb0e76f65819e5d1048f965e74c06409da870e77c7ce46f6df247257fa552"
+      },
+      {
+        "bytes": 79921,
+        "path": "src/scientific_artifacts.py",
+        "sha256": "bdb6824f29fa40d745ee953edcc4dd951c39e35eed7bb369e6570435b9b2f37a"
+      },
+      {
+        "bytes": 50090,
+        "path": "src/vllm_runner.py",
+        "sha256": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782"
+      }
+    ],
+    "library_scope": "base and designed_ceiling only; later Qwen-only library additions are excluded",
+    "schema_version": 1,
+    "smoke_libraries": {
+      "base": {
+        "content_sha256": "462ddf886c5fb28ce087f30ff5bb816c3b4d6068d98dcb2afee2d4bf454f4e58",
+        "library_id": "base-469fc2a9dc4782c6"
+      },
+      "designed_ceiling": {
+        "content_sha256": "c8ba999ba054bbc0153fa8c4251b8fb464860cfbc638b4dc96cf6d94dac0b456",
+        "library_id": "designed_ceiling-1ebbde85d208cc40"
+      }
+    }
+  },
+  "schema_version": 2,
+  "selected": null,
+  "storage": {
+    "default_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_capacity_fit_rerun/scientific_smoke_v1",
+    "override_environment_variable": "QWEN35_MACRO_CAPACITY_FIT_ARTIFACT_ROOT"
+  },
+  "tree": {
+    "bytes": 31649318,
+    "files": 5,
+    "sha256": "0bf398db12f349a4c49b99770e7d5f07e5ca3b2dcc2c172aec17e844a6a78b6b"
+  }
+}

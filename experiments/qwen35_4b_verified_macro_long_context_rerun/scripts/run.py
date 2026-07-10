@@ -416,6 +416,10 @@ def _validate_config(config: Mapping[str, Any]) -> None:
         == "/workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/full",
         "canonical full external root drifted",
     )
+    _require(
+        int(full_run.get("catalog_schema", -1)) == full_store.FULL_CATALOG_SCHEMA_VERSION,
+        "Amendment-11 full catalog schema drifted",
+    )
     frozen_full = {
         "triplets": 40,
         "base_shards": 20,
@@ -1750,19 +1754,8 @@ def _stage_tasks(tasks_payload: Mapping[str, Any], run: str, config: Mapping[str
 
 
 def _arm_order(config: Mapping[str, Any], libraries: Mapping[str, Any]) -> list[str]:
-    configured = [str(arm) for arm in config["inference"]["arms"]]
-    order: list[str] = []
-    for arm in configured:
-        if arm in libraries and arm not in order:
-            order.append(arm)
-        if arm == "qwen_ranked":
-            order.extend(
-                arm_name
-                for arm_name in sorted(libraries)
-                if arm_name.startswith("qwen_random_") and arm_name not in order
-            )
-    order.extend(arm for arm in sorted(libraries) if arm not in order)
-    return order
+    del config
+    return full_store.validate_full_arm_set(libraries)
 
 
 def _expected_engine_metadata(harness: Any, config: Mapping[str, Any]) -> dict[str, Any]:
@@ -2010,6 +2003,19 @@ def _scientific_catalog_path() -> Path:
     return ANALYSIS / "scientific_smoke_artifact_catalog.json"
 
 
+def _local_scientific_paths() -> list[Path]:
+    return [RUNS / "smoke_tiers", RUNS / "smoke_budget_probes", RUNS / "smoke"]
+
+
+def _require_no_repository_local_scientific() -> None:
+    local = [path for path in _local_scientific_paths() if path.exists()]
+    _require(
+        not local,
+        "repository-local scientific artifacts require verified migration/removal: "
+        + ", ".join(str(path) for path in local),
+    )
+
+
 def _scientific_prefix(*, probe: bool, budget: int, arm: str) -> str:
     namespace = "smoke_budget_probes" if probe else "smoke_tiers"
     return f"{namespace}/think_{budget}/{arm}"
@@ -2029,24 +2035,151 @@ def _scientific_expected_identity(
     }
 
 
+def _build_scientific_catalog_from_checkpoint(
+    config: Mapping[str, Any], checkpoint: Mapping[str, Any]
+) -> tuple[dict[str, Any], Path | None]:
+    selected = checkpoint.get("selected")
+    kwargs: dict[str, Any] = {"protocol_binding": _scientific_protocol_binding()}
+    selection_file: Path | None = None
+    if selected is not None:
+        _require(isinstance(selected, Mapping), "scientific catalog selected pointer is invalid")
+        arms = selected.get("arms")
+        _require(isinstance(arms, Mapping), "scientific catalog selected arms are invalid")
+        selection_file = ANALYSIS / "smoke_budget_selection.json"
+        kwargs.update(
+            {
+                "selection_file": selection_file,
+                "selected_budget": selected.get("thinking_budget"),
+                "selected_entries": {str(key): str(value) for key, value in arms.items()},
+            }
+        )
+    return (
+        scientific_store.build_catalog(_scientific_external_root(config), **kwargs),
+        selection_file,
+    )
+
+
+def _require_receipt_checkpoint_advancement(
+    checkpoint: Mapping[str, Any], rebuilt: Mapping[str, Any]
+) -> None:
+    """Allow only preflight-only -> receipt-valid transitions since checkpoint."""
+
+    for field in (
+        "schema_version",
+        "experiment_id",
+        "storage",
+        "checksum_scheme",
+        "protocol_binding",
+        "selected",
+    ):
+        _require(
+            checkpoint.get(field) == rebuilt.get(field),
+            f"stale scientific catalog {field} drift is not reconcilable",
+        )
+    old_entries = checkpoint.get("entries")
+    new_entries = rebuilt.get("entries")
+    _require(isinstance(old_entries, list), "stale scientific catalog entries are invalid")
+    _require(isinstance(new_entries, list), "rebuilt scientific catalog entries are invalid")
+    old_by_id = {
+        str(entry.get("id")): entry
+        for entry in old_entries
+        if isinstance(entry, Mapping)
+    }
+    new_by_id = {
+        str(entry.get("id")): entry
+        for entry in new_entries
+        if isinstance(entry, Mapping)
+    }
+    _require(
+        len(old_by_id) == len(old_entries)
+        and len(new_by_id) == len(new_entries)
+        and set(old_by_id) == set(new_by_id),
+        "stale scientific catalog bundle set drift is not reconcilable",
+    )
+    advanced = False
+    invariant_fields = (
+        "id",
+        "relative_prefix",
+        "role",
+        "tier_mode",
+        "thinking_budget",
+        "arm",
+        "k",
+        "n_records",
+    )
+    for entry_id, old_entry in old_by_id.items():
+        new_entry = new_by_id[entry_id]
+        if old_entry == new_entry:
+            continue
+        _require(
+            old_entry.get("status") == "preflight_only"
+            and new_entry.get("status") == "complete",
+            f"scientific bundle drift is not a receipt checkpoint: {entry_id}",
+        )
+        for field in invariant_fields:
+            _require(
+                old_entry.get(field) == new_entry.get(field),
+                f"scientific receipt checkpoint changed {field}: {entry_id}",
+            )
+        old_files = old_entry.get("files")
+        new_files = new_entry.get("files")
+        _require(
+            isinstance(old_files, Mapping)
+            and isinstance(new_files, Mapping)
+            and old_files.get("preflight") == new_files.get("preflight"),
+            f"scientific receipt checkpoint changed preflight bytes: {entry_id}",
+        )
+        advanced = True
+    _require(advanced, "scientific catalog drift is not a committed-receipt checkpoint")
+
+
 def _verify_scientific_catalog(
-    config: Mapping[str, Any], *, require_selected: bool = False
+    config: Mapping[str, Any], *, require_selected: bool = False, reconcile: bool = False
 ) -> dict[str, Any]:
     catalog_path = _scientific_catalog_path()
     _require(catalog_path.is_file(), f"missing scientific artifact catalog: {catalog_path}")
     raw_catalog = _read_json(catalog_path)
     _require(isinstance(raw_catalog, dict), "scientific artifact catalog must be an object")
-    selection_file = (
+    selection_file: Path | None = (
         ANALYSIS / "smoke_budget_selection.json"
         if raw_catalog.get("selected") is not None
         else None
     )
-    catalog = scientific_store.verify_catalog(
-        catalog_path,
-        _scientific_external_root(config),
-        protocol_binding=_scientific_protocol_binding(),
-        selection_file=selection_file,
-    )
+    protocol = _scientific_protocol_binding()
+    if reconcile:
+        _require(
+            raw_catalog.get("protocol_binding") == protocol,
+            "scientific protocol/source drift cannot be reconciled",
+        )
+    try:
+        catalog = scientific_store.verify_catalog(
+            catalog_path,
+            _scientific_external_root(config),
+            protocol_binding=protocol,
+            selection_file=selection_file,
+        )
+    except scientific_store.ScientificArtifactError:
+        if not reconcile:
+            raise
+        rebuilt, rebuilt_selection = _build_scientific_catalog_from_checkpoint(
+            config, raw_catalog
+        )
+        _require(rebuilt_selection == selection_file, "scientific selection checkpoint drift")
+        _require_receipt_checkpoint_advancement(raw_catalog, rebuilt)
+        scientific_store.write_catalog(catalog_path, rebuilt)
+        catalog = scientific_store.verify_catalog(
+            catalog_path,
+            _scientific_external_root(config),
+            protocol_binding=protocol,
+            selection_file=selection_file,
+        )
+    if selection_file is not None:
+        scientific_store.validate_selection(
+            selection_file,
+            catalog,
+            budget_ladder=config["inference"]["thinking_budget_ladder"],
+            arms=config["inference"]["smoke_arms"],
+        )
     if require_selected:
         _require(catalog.get("selected") is not None, "scientific smoke has no selected tier")
     return catalog
@@ -2055,13 +2188,10 @@ def _verify_scientific_catalog(
 def _initialize_scientific_catalog(config: Mapping[str, Any]) -> dict[str, Any]:
     catalog_path = _scientific_catalog_path()
     if catalog_path.exists():
-        return _verify_scientific_catalog(config)
-    local_scientific = [RUNS / "smoke_tiers", RUNS / "smoke_budget_probes", RUNS / "smoke"]
-    _require(
-        not any(path.exists() for path in local_scientific),
-        "repository-local scientific artifacts require explicit "
-        "--migrate-scientific-artifacts before smoke can resume",
-    )
+        catalog = _verify_scientific_catalog(config, reconcile=True)
+        _require_no_repository_local_scientific()
+        return catalog
+    _require_no_repository_local_scientific()
     root = _scientific_external_root(config)
     if root.exists():
         _require(
@@ -2258,6 +2388,8 @@ def _copy_local_scientific_tree(stage: Path) -> list[Path]:
         if not source.exists():
             continue
         _require(source.is_dir() and not source.is_symlink(), f"unsafe migration source: {source}")
+        if not any(source.iterdir()):
+            continue
         for item in source.rglob("*"):
             _require(not item.is_symlink(), f"migration source contains symlink: {item}")
         destination = stage / name
@@ -2436,7 +2568,85 @@ def _remove_local_scientific_after_verified_migration(paths: Sequence[Path]) -> 
             shutil.rmtree(path)
 
 
-def migrate_scientific_artifacts(
+def _require_scientific_catalog_subset(
+    local_catalog: Mapping[str, Any], external_catalog: Mapping[str, Any]
+) -> None:
+    """Prove every still-local bundle is an exact state contained externally.
+
+    Cleanup is intentionally monotonic: an interrupted prior cleanup may leave
+    only one namespace, while the external cache may have advanced a local
+    preflight-only bundle to a receipt-valid completion. Neither case requires
+    the local tree to equal the complete external inventory.
+    """
+
+    _require(
+        local_catalog.get("protocol_binding")
+        == external_catalog.get("protocol_binding"),
+        "local/external scientific protocol binding differs",
+    )
+    raw_local = local_catalog.get("entries")
+    raw_external = external_catalog.get("entries")
+    _require(isinstance(raw_local, list), "local scientific catalog lacks entries")
+    _require(isinstance(raw_external, list), "external scientific catalog lacks entries")
+    external_by_id = {
+        str(entry.get("id")): entry
+        for entry in raw_external
+        if isinstance(entry, Mapping)
+    }
+    _require(
+        len(external_by_id) == len(raw_external),
+        "external scientific catalog has invalid or duplicate entries",
+    )
+    identity_fields = (
+        "id",
+        "relative_prefix",
+        "role",
+        "tier_mode",
+        "thinking_budget",
+        "arm",
+        "k",
+        "n_records",
+    )
+    for local_entry in raw_local:
+        _require(isinstance(local_entry, Mapping), "local scientific catalog entry is invalid")
+        entry_id = str(local_entry.get("id"))
+        external_entry = external_by_id.get(entry_id)
+        _require(
+            isinstance(external_entry, Mapping),
+            f"local scientific bundle is absent externally: {entry_id}",
+        )
+        for field in identity_fields:
+            _require(
+                local_entry.get(field) == external_entry.get(field),
+                f"local/external scientific {field} differs for {entry_id}",
+            )
+        local_status = local_entry.get("status")
+        external_status = external_entry.get("status")
+        _require(
+            local_status in {"preflight_only", "complete"}
+            and external_status in {"preflight_only", "complete"},
+            f"invalid local/external state for {entry_id}",
+        )
+        local_files = local_entry.get("files")
+        external_files = external_entry.get("files")
+        _require(
+            isinstance(local_files, Mapping) and isinstance(external_files, Mapping),
+            f"local/external file identities missing for {entry_id}",
+        )
+        for name, identity in local_files.items():
+            _require(
+                external_files.get(name) == identity,
+                f"local scientific {name} is not byte-identical externally: {entry_id}",
+            )
+        if local_status == "complete":
+            _require(
+                external_status == "complete"
+                and local_entry.get("receipt") == external_entry.get("receipt"),
+                f"complete local scientific bundle is not exact externally: {entry_id}",
+            )
+
+
+def _migrate_scientific_artifacts_locked(
     config: Mapping[str, Any], *, remove_local: bool = False
 ) -> dict[str, Any]:
     """Stage, validate, receipt, and atomically install local scientific caches.
@@ -2465,7 +2675,7 @@ def migrate_scientific_artifacts(
 
     if root.exists():
         if catalog_path.is_file():
-            catalog = _verify_scientific_catalog(config)
+            catalog = _verify_scientific_catalog(config, reconcile=True)
         else:
             # Recover only the narrow crash window after the fully receipted
             # staging directory was atomically installed but before its tracked
@@ -2486,7 +2696,7 @@ def migrate_scientific_artifacts(
             catalog = _verify_scientific_catalog(config)
         # Re-stage local bytes when they remain, proving idempotence and exact
         # equivalence rather than trusting path existence.
-        if local_sources:
+        if any(any(path.iterdir()) for path in local_sources):
             root.parent.mkdir(parents=True, exist_ok=True)
             stage = Path(tempfile.mkdtemp(prefix=f".{root.name}.verify-", dir=root.parent))
             try:
@@ -2506,11 +2716,7 @@ def migrate_scientific_artifacts(
                 existing_unselected = scientific_store.build_catalog(
                     root, protocol_binding=protocol
                 )
-                _require(
-                    staged["tree"] == existing_unselected["tree"]
-                    and staged["entries"] == existing_unselected["entries"],
-                    "existing external root differs from repository-local migration source",
-                )
+                _require_scientific_catalog_subset(staged, existing_unselected)
             finally:
                 shutil.rmtree(stage, ignore_errors=True)
         removal_paths = [*local_sources, *([legacy] if legacy is not None else [])]
@@ -2531,7 +2737,7 @@ def migrate_scientific_artifacts(
     temporary_catalog = ANALYSIS / f".scientific_smoke_artifact_catalog.migrate-{os.getpid()}.json"
     installed = False
     try:
-        copied = _copy_local_scientific_tree(stage)
+        _copy_local_scientific_tree(stage)
         _validate_and_receipt_migration_stage(
             stage=stage,
             harness=harness,
@@ -2546,7 +2752,9 @@ def migrate_scientific_artifacts(
         scientific_store.verify_catalog(
             temporary_catalog, stage, protocol_binding=protocol
         )
+        scientific_store.fsync_tree_and_parent(stage)
         os.replace(stage, root)
+        scientific_store.fsync_tree_and_parent(root)
         installed = True
         scientific_store.verify_catalog(
             temporary_catalog, root, protocol_binding=protocol
@@ -2555,7 +2763,7 @@ def migrate_scientific_artifacts(
         scientific_store.verify_catalog(
             catalog_path, root, protocol_binding=protocol
         )
-        removal_paths = [*copied, *([legacy] if legacy is not None else [])]
+        removal_paths = [*local_sources, *([legacy] if legacy is not None else [])]
         if remove_local:
             _remove_local_scientific_after_verified_migration(removal_paths)
         return {
@@ -2575,6 +2783,17 @@ def migrate_scientific_artifacts(
         temporary_catalog.unlink(missing_ok=True)
         if not installed:
             shutil.rmtree(stage, ignore_errors=True)
+
+
+def migrate_scientific_artifacts(
+    config: Mapping[str, Any], *, remove_local: bool = False
+) -> dict[str, Any]:
+    """Acquire the shared lock before reading or mutating migration state."""
+
+    with full_store.experiment_stage_lock(_full_external_root(config)):
+        return _migrate_scientific_artifacts_locked(
+            config, remove_local=remove_local
+        )
 
 
 def _full_external_root(config: Mapping[str, Any]) -> Path:
@@ -2657,6 +2876,47 @@ def _full_early_fail_reason(
     return None
 
 
+def _current_full_protocol_identity(runner: Any, sampling: Any) -> dict[str, Any]:
+    """Freeze the current equality-critical runner state before cache use/generation."""
+
+    import vllm_runner as local_vllm  # type: ignore[import-not-found]
+
+    summary = {
+        "schema_version": local_vllm.RUNNER_SCHEMA_VERSION,
+        "model": local_vllm.MODEL_ID,
+        "model_revision": local_vllm.MODEL_REVISION,
+        "runner_sha256": _sha256_file(SRC / "vllm_runner.py"),
+        "engine": {
+            key: str(value) if isinstance(value, Path) else value
+            for key, value in dataclasses.asdict(runner.config).items()
+        },
+        "engine_args": {
+            key: str(value) if isinstance(value, Path) else value
+            for key, value in runner.engine_args.items()
+        },
+        "sampling": dataclasses.asdict(sampling),
+        "resolved_sampling": sampling.resolved_sampling(),
+        "adapter": runner.adapter_info,
+        "think_token_ids": {
+            "open": runner.think_open_id,
+            "close": runner.think_close_id,
+            "forced_close_sequence": list(runner.close_ids),
+            "thinking_prompt_suffix": list(runner.thinking_prompt_suffix_ids),
+            "no_thinking_prompt_suffix": list(runner.no_thinking_prompt_suffix_ids),
+        },
+        "termination": {
+            "hf_model_eos_token_id": runner.hf_eos_id,
+            "vllm_tokenizer_eos_ignored": runner.tokenizer.eos_token_id,
+        },
+        "rng_isolation": {
+            "engine_seed": runner.engine_args["seed"],
+            "caller_global_rng_state_restored": True,
+        },
+        "runtime": runner.runtime_metadata(),
+    }
+    return full_store.protocol_identity(summary)
+
+
 def _validate_cached_full_shard(
     shard_dir: Path,
     *,
@@ -2671,6 +2931,7 @@ def _validate_cached_full_shard(
     sampling: Any,
     harness: Any,
     config: Mapping[str, Any],
+    expected_protocol_identity: Mapping[str, Any],
 ) -> dict[str, Any] | None:
     if not shard_dir.exists():
         return None
@@ -2685,6 +2946,7 @@ def _validate_cached_full_shard(
         shard_index=shard_index,
         task_ids=task_ids,
         k=k,
+        expected_protocol_identity=expected_protocol_identity,
     )
     _require(
         _validate_runner_artifact(
@@ -2717,10 +2979,16 @@ def _generate_atomic_full_shard(
     k: int,
     records: Sequence[dict[str, Any]],
     sampling: Any,
+    expected_protocol_identity: Mapping[str, Any],
 ) -> dict[str, Any]:
     """Generate one all-or-nothing external shard and commit its directory."""
 
     _require(not shard_dir.exists(), f"refusing to overwrite final full shard: {shard_dir}")
+    _require(
+        _current_full_protocol_identity(runner, sampling)
+        == dict(expected_protocol_identity),
+        "current full protocol identity drifted before generation",
+    )
     shard_dir.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(
         tempfile.mkdtemp(prefix=f".{shard_dir.name}.tmp-", dir=shard_dir.parent)
@@ -2730,6 +2998,11 @@ def _generate_atomic_full_shard(
         batch = harness.generate_vllm_batch(runner, records, sampling)
         _atomic_jsonl(temporary / "rows.jsonl", batch.rows)
         _atomic_json(temporary / "runner.meta.json", batch.summary)
+        full_store.require_protocol_identity(
+            batch.summary,
+            expected_protocol_identity,
+            where=f"new full shard {budget}/{arm}/{shard_index}",
+        )
         _require(
             _validate_runner_artifact(
                 temporary / "rows.jsonl",
@@ -2764,6 +3037,7 @@ def _generate_atomic_full_shard(
             shard_index=shard_index,
             task_ids=task_ids,
             k=k,
+            expected_protocol_identity=expected_protocol_identity,
             allow_temporary_name=True,
         )
         full_store.fsync_directory(temporary)
@@ -2784,6 +3058,7 @@ def _generate_atomic_full_shard(
         shard_index=shard_index,
         task_ids=task_ids,
         k=k,
+        expected_protocol_identity=expected_protocol_identity,
     )
 
 
@@ -2791,97 +3066,26 @@ def _write_full_artifact_catalog(
     *,
     root: Path,
     plan: Mapping[str, Any],
-    selection: Mapping[str, Any],
+    config: Mapping[str, Any],
+    selection: Mapping[str, Any] | None,
+    status: str,
+    starting_budget: int,
+    protocol_binding: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Verify every completed receipt and atomically write the tracked catalog."""
+    """Rebuild inventory after every durable event, then atomically checkpoint it."""
 
-    selected = selection.get("selected_thinking_budget")
-    _require(isinstance(selected, int), "cannot catalog a full run without a selected budget")
-    plan_hash = full_store.plan_sha256(plan)
-    completed: list[dict[str, Any]] = []
-    selected_entries: list[dict[str, Any]] = []
-    identity_by_arm_tier: dict[tuple[int, str], Mapping[str, Any]] = {}
-    tiers = selection.get("tiers")
-    _require(isinstance(tiers, list), "full budget selection lacks tiers")
-    for tier in tiers:
-        _require(isinstance(tier, Mapping), "full budget tier must be an object")
-        budget = int(tier["budget"])
-        arms = tier.get("arms")
-        _require(isinstance(arms, Mapping), "full budget tier lacks arms")
-        for arm, arm_record in arms.items():
-            if not isinstance(arm_record, Mapping):
-                continue
-            shard_records = arm_record.get("shards", [])
-            _require(isinstance(shard_records, list), f"full arm {arm} shards must be a list")
-            for shard_record in shard_records:
-                _require(isinstance(shard_record, Mapping), "full shard audit must be an object")
-                if shard_record.get("status") != "complete":
-                    continue
-                shard_index = int(shard_record["shard_index"])
-                spec = full_store.shard_spec(plan, str(arm), shard_index)
-                shard_dir = full_store.shard_directory(
-                    root, budget=budget, arm=str(arm), shard_index=shard_index
-                )
-                key = (budget, str(arm))
-                receipt = full_store.validate_shard_directory(
-                    shard_dir,
-                    root=root,
-                    shard_plan_sha256=plan_hash,
-                    budget=budget,
-                    arm=str(arm),
-                    shard_index=shard_index,
-                    task_ids=spec["task_ids"],
-                    k=int(spec["k"]),
-                    expected_identity=identity_by_arm_tier.get(key),
-                )
-                identity_by_arm_tier.setdefault(key, receipt["identity"])
-                entry = full_store.catalog_shard_entry(root, shard_dir, receipt)
-                completed.append(entry)
-                if budget == selected:
-                    selected_entries.append(entry)
-
-    arm_order = [str(arm) for arm in plan["arm_order"]]
-    expected_selected = sum(int(plan["arms"][arm]["shard_count"]) for arm in arm_order)
-    _require(
-        len(selected_entries) == expected_selected,
-        "selected full tier does not contain every planned shard",
+    smoke_hash = _sha256_file(ANALYSIS / "smoke_budget_selection.json")
+    catalog = full_store.build_full_catalog(
+        exp=EXP,
+        root=root,
+        plan=plan,
+        budgets=_budget_ladder(config),
+        protocol_binding=protocol_binding,
+        status=status,
+        starting_budget=starting_budget,
+        smoke_selection_sha256=smoke_hash,
+        selection=selection,
     )
-    selected_keys = {(entry["arm"], entry["shard_index"]) for entry in selected_entries}
-    expected_keys = {
-        (arm, index)
-        for arm in arm_order
-        for index in range(int(plan["arms"][arm]["shard_count"]))
-    }
-    _require(selected_keys == expected_keys, "selected full tier shard set drifted")
-    selection_path = ANALYSIS / "full_budget_selection.json"
-    plan_path = ANALYSIS / "full_shard_plan.json"
-    catalog = {
-        "schema_version": full_store.FULL_ARTIFACT_SCHEMA_VERSION,
-        "experiment_id": EXP.name,
-        "canonical_external_root": str(root.resolve(strict=True)),
-        "shard_plan": {
-            "path": "analysis/full_shard_plan.json",
-            "sha256": _sha256_file(plan_path),
-            "content_sha256": plan_hash,
-        },
-        "budget_selection": {
-            "path": "analysis/full_budget_selection.json",
-            "sha256": _sha256_file(selection_path),
-        },
-        "selected_tier": {
-            "thinking_budget": selected,
-            "relative_path": f"think_{selected}",
-            "logical_promotion_only": True,
-            "repository_raw_copy": None,
-        },
-        "arm_order": arm_order,
-        "completed_shards": sorted(
-            completed, key=lambda row: (row["budget"], arm_order.index(row["arm"]), row["shard_index"])
-        ),
-        "selected_shards": sorted(
-            selected_entries, key=lambda row: (arm_order.index(row["arm"]), row["shard_index"])
-        ),
-    }
     _atomic_json(ANALYSIS / "full_artifact_catalog.json", catalog)
     return catalog
 
@@ -2897,7 +3101,7 @@ def _run_full_scientific_stage(
     demonstrations: Sequence[Mapping[str, Any]],
     starting_budget: int,
 ) -> int:
-    """Run/resume the full matrix under Amendment 8's external shard contract."""
+    """Run Amendment 11's inventory-first, two-pass resumable full matrix."""
 
     ladder = _budget_ladder(config)
     _require(starting_budget in ladder, "full starting budget is not registered")
@@ -2912,6 +3116,18 @@ def _run_full_scientific_stage(
     _freeze_json(ANALYSIS / "full_shard_plan.json", plan)
     root = _full_external_root(config)
     root.mkdir(parents=True, exist_ok=True)
+    binding = full_store.build_full_binding(EXP)
+    smoke_hash = _sha256_file(ANALYSIS / "smoke_budget_selection.json")
+    _write_full_artifact_catalog(
+        root=root,
+        plan=plan,
+        config=config,
+        selection=None,
+        status="in_progress",
+        starting_budget=starting_budget,
+        protocol_binding=binding,
+    )
+
     tasks_by_id = {str(task["id"]): task for task in tasks}
     _require(len(tasks_by_id) == len(tasks), "full tasks contain duplicate ids")
     zero_counts = {
@@ -2923,27 +3139,28 @@ def _run_full_scientific_stage(
         "stage2_truncations": 0,
     }
     tiers: list[dict[str, Any]] = []
-    selected: int | None = None
 
     for budget in ladder[ladder.index(starting_budget) :]:
-        per_arm: dict[str, Any] = {}
-        rejecting_arm: str | None = None
-        for arm_index, arm in enumerate(arms):
+        # Pass one is deliberately global to the active rung.  Every existing
+        # final, even one in a downstream arm that would later be skipped, is
+        # exact-validated before the first missing shard can generate.
+        prepared: dict[tuple[str, int], dict[str, Any]] = {}
+        cached: dict[tuple[str, int], dict[str, Any]] = {}
+        protocol_by_arm: dict[str, Mapping[str, Any]] = {}
+        for arm in arms:
             arm_plan = plan["arms"][arm]
             k = int(arm_plan["k"])
             sampling = _solver_sampling(harness, config, budget=budget, n=k)
-            totals = dict(zero_counts)
-            shard_audits: list[dict[str, Any]] = []
-            early_reason: str | None = None
+            protocol = _current_full_protocol_identity(runner, sampling)
+            protocol_by_arm[arm] = protocol
             for raw_spec in arm_plan["shards"]:
                 spec = dict(raw_spec)
                 shard_index = int(spec["shard_index"])
                 task_ids = [str(task_id) for task_id in spec["task_ids"]]
-                shard_tasks = [tasks_by_id[task_id] for task_id in task_ids]
                 records = _solver_records(
                     harness=harness,
                     domain=domain,
-                    tasks=shard_tasks,
+                    tasks=[tasks_by_id[task_id] for task_id in task_ids],
                     arm=arm,
                     library=libraries[arm],
                     demonstrations=demonstrations,
@@ -2955,6 +3172,14 @@ def _run_full_scientific_stage(
                 shard_dir = full_store.shard_directory(
                     root, budget=budget, arm=arm, shard_index=shard_index
                 )
+                prepared[(arm, shard_index)] = {
+                    "spec": spec,
+                    "task_ids": task_ids,
+                    "records": records,
+                    "sampling": sampling,
+                    "shard_dir": shard_dir,
+                    "k": k,
+                }
                 receipt = _validate_cached_full_shard(
                     shard_dir,
                     root=root,
@@ -2968,11 +3193,28 @@ def _run_full_scientific_stage(
                     sampling=sampling,
                     harness=harness,
                     config=config,
+                    expected_protocol_identity=protocol,
                 )
+                if receipt is not None:
+                    cached[(arm, shard_index)] = receipt
+
+        per_arm: dict[str, Any] = {}
+        rejecting_arm: str | None = None
+        for arm_index, arm in enumerate(arms):
+            arm_plan = plan["arms"][arm]
+            totals = dict(zero_counts)
+            shard_audits: list[dict[str, Any]] = []
+            early_reason: str | None = None
+            for raw_spec in arm_plan["shards"]:
+                shard_index = int(raw_spec["shard_index"])
+                item = prepared[(arm, shard_index)]
+                shard_dir = item["shard_dir"]
+                receipt = cached.get((arm, shard_index))
                 if receipt is None:
                     print(
                         f"[run] full/think_{budget}/{arm}/shard_{shard_index:03d}: "
-                        f"{len(records)} prompts x K={k} (144 completions) through vLLM",
+                        f"{len(item['records'])} prompts x K={item['k']} "
+                        "(144 completions) through vLLM",
                         flush=True,
                     )
                     receipt = _generate_atomic_full_shard(
@@ -2985,10 +3227,22 @@ def _run_full_scientific_stage(
                         budget=budget,
                         arm=arm,
                         shard_index=shard_index,
-                        task_ids=task_ids,
-                        k=k,
-                        records=records,
-                        sampling=sampling,
+                        task_ids=item["task_ids"],
+                        k=int(item["k"]),
+                        records=item["records"],
+                        sampling=item["sampling"],
+                        expected_protocol_identity=protocol_by_arm[arm],
+                    )
+                    # The rename is already durable.  Rebuilding inventory here
+                    # reconciles the exact crash window between rename/catalog.
+                    _write_full_artifact_catalog(
+                        root=root,
+                        plan=plan,
+                        config=config,
+                        selection=None,
+                        status="in_progress",
+                        starting_budget=starting_budget,
+                        protocol_binding=binding,
                     )
                 else:
                     print(
@@ -3004,15 +3258,15 @@ def _run_full_scientific_stage(
                     config=config,
                     require_headroom=False,
                 )
-                shard_counts = _full_termination_counts(termination)
-                _require(shard_counts["samples"] == 144, "full shard completion count drifted")
-                totals = _merge_full_termination_counts(totals, shard_counts)
+                counts = _full_termination_counts(termination)
+                _require(counts["samples"] == 144, "full shard completion count drifted")
+                totals = _merge_full_termination_counts(totals, counts)
                 shard_audits.append(
                     {
                         "shard_index": shard_index,
                         "status": "complete",
-                        "task_ids": task_ids,
-                        "termination": _summarize_full_termination(shard_counts, config),
+                        "task_ids": item["task_ids"],
+                        "termination": _summarize_full_termination(counts, config),
                         "artifact": full_store.catalog_shard_entry(root, shard_dir, receipt),
                     }
                 )
@@ -3070,9 +3324,7 @@ def _run_full_scientific_stage(
             }
 
         tier_complete = all(per_arm.get(arm, {}).get("complete") is True for arm in arms)
-        tier_adequate = tier_complete and all(
-            per_arm[arm].get("adequate") is True for arm in arms
-        )
+        tier_adequate = tier_complete and all(per_arm[arm].get("adequate") is True for arm in arms)
         tiers.append(
             {
                 "budget": budget,
@@ -3083,13 +3335,17 @@ def _run_full_scientific_stage(
                 "arms": per_arm,
             }
         )
-        if tier_adequate:
-            selected = budget
+        selected = budget if tier_adequate else None
         selection = {
             "schema_version": full_store.FULL_ARTIFACT_SCHEMA_VERSION,
             "run": "full",
             "pass": selected is not None,
             "selected_thinking_budget": selected,
+            "starting_thinking_budget": starting_budget,
+            "passed_smoke_selection": {
+                "path": "analysis/smoke_budget_selection.json",
+                "sha256": smoke_hash,
+            },
             "shard_plan_sha256": plan_hash,
             "canonical_external_root": str(root.resolve(strict=True)),
             "selection_rule": (
@@ -3101,11 +3357,46 @@ def _run_full_scientific_stage(
             "logical_promotion_only": True,
             "tiers": tiers,
         }
+        full_store.validate_budget_selection(
+            selection,
+            plan=plan,
+            ladder=ladder,
+            full_run=config["full_run"],
+            expected_starting_budget=starting_budget,
+            expected_smoke_selection_sha256=smoke_hash,
+            final=selected is not None,
+        )
         _atomic_json(ANALYSIS / "full_budget_selection.json", selection)
+        _write_full_artifact_catalog(
+            root=root,
+            plan=plan,
+            config=config,
+            selection=selection,
+            status="selected" if selected is not None else "rung_rejected",
+            starting_budget=starting_budget,
+            protocol_binding=binding,
+        )
         if selected is not None:
-            _write_full_artifact_catalog(root=root, plan=plan, selection=selection)
             return selected
 
+    full_store.validate_budget_selection(
+        selection,
+        plan=plan,
+        ladder=ladder,
+        full_run=config["full_run"],
+        expected_starting_budget=starting_budget,
+        expected_smoke_selection_sha256=smoke_hash,
+        final=True,
+    )
+    _write_full_artifact_catalog(
+        root=root,
+        plan=plan,
+        config=config,
+        selection=selection,
+        status="setup_inconclusive",
+        starting_budget=starting_budget,
+        protocol_binding=binding,
+    )
     raise ValueError(
         "full setup-inconclusive: every registered thinking-budget rung crossed a "
         "termination-inadequacy bound"
@@ -3509,7 +3800,120 @@ def _run_scientific_stage(
     return selected
 
 
-def run_model_stage(run: str, config: Mapping[str, Any]) -> None:
+def _full_prerequisites_before_model(
+    *,
+    harness: Any,
+    domain: Any,
+    config: Mapping[str, Any],
+    tasks_payload: Mapping[str, Any],
+    libraries: Mapping[str, Any],
+    demonstrations: Sequence[Mapping[str, Any]],
+) -> int:
+    """Verify every model-free full prerequisite while the full lock is held."""
+
+    _require_no_repository_local_scientific()
+    _verify_scientific_catalog(config, require_selected=True, reconcile=True)
+    _passed_budget(ANALYSIS / "interface_gate.json")
+    smoke_tasks = _stage_tasks(tasks_payload, "smoke", config)
+    smoke_arms = [str(arm) for arm in config["inference"]["smoke_arms"]]
+    smoke_budget = _passed_budget(ANALYSIS / "smoke_budget_selection.json")
+    catalog_budget, selected_paths = _selected_scientific_smoke_paths(config, smoke_arms)
+    _require(catalog_budget == smoke_budget, "smoke selection and scientific catalog budget disagree")
+    for arm in smoke_arms:
+        k = int(config["decision"]["smoke_matched_k"])
+        records = _solver_records(
+            harness=harness,
+            domain=domain,
+            tasks=smoke_tasks,
+            arm=arm,
+            library=libraries[arm],
+            demonstrations=demonstrations,
+        )
+        _require(
+            _validate_cached_arm(
+                selected_paths[arm].rows,
+                arm=arm,
+                records=records,
+                sampling=_solver_sampling(harness, config, budget=smoke_budget, n=k),
+                harness=harness,
+                config=config,
+                expected_n=k,
+            ),
+            f"full requires complete frozen smoke arm {arm}",
+        )
+    _require_smoke_gate()
+
+    full_store.reject_repository_local_full_raw(RUNS / "full")
+    stage_tasks = _stage_tasks(tasks_payload, "full", config)
+    arms = _arm_order(config, libraries)
+    plan = full_store.build_shard_plan(
+        stage_tasks,
+        arms,
+        base_k=int(config["inference"]["base_max_k"]),
+        macro_k=int(config["inference"]["macro_k"]),
+    )
+    root = _full_external_root(config)
+    catalog_path = ANALYSIS / "full_artifact_catalog.json"
+    if len(arms) == len(full_store.NON_QWEN_ARMS):
+        inventory = full_store.inventory_full_root(
+            root, plan=plan, budgets=_budget_ladder(config)
+        )
+        has_artifacts = bool(
+            inventory["completed_shards"] or inventory["temporary_shards"]
+        )
+        _require(
+            not has_artifacts,
+            "full external artifacts exist before the post-proposal arm set is frozen",
+        )
+        _require(
+            not catalog_path.exists(),
+            "full catalog exists before the post-proposal arm set is frozen",
+        )
+        return smoke_budget
+
+    _freeze_json(ANALYSIS / "full_shard_plan.json", plan)
+    binding = full_store.build_full_binding(EXP)
+    selection_path = ANALYSIS / "full_budget_selection.json"
+    selection: Mapping[str, Any] | None = None
+    status = "in_progress"
+    if selection_path.exists():
+        raw_selection = _read_json(selection_path)
+        _require(isinstance(raw_selection, Mapping), "full budget selection must be an object")
+        selection = raw_selection
+        tiers = raw_selection.get("tiers")
+        _require(isinstance(tiers, list), "full budget selection lacks tiers")
+        eligible_count = len(_budget_ladder(config)) - _budget_ladder(config).index(smoke_budget)
+        final_null = raw_selection.get("selected_thinking_budget") is None and len(tiers) == eligible_count
+        full_store.validate_budget_selection(
+            raw_selection,
+            plan=plan,
+            ladder=_budget_ladder(config),
+            full_run=config["full_run"],
+            expected_starting_budget=smoke_budget,
+            expected_smoke_selection_sha256=_sha256_file(ANALYSIS / "smoke_budget_selection.json"),
+            final=raw_selection.get("pass") is True or final_null,
+        )
+        status = "selected" if raw_selection.get("pass") is True else "setup_inconclusive" if final_null else "rung_rejected"
+    if catalog_path.exists():
+        old = _read_json(catalog_path)
+        _require(isinstance(old, Mapping), "full artifact catalog must be an object")
+        _require(old.get("schema_version") == full_store.FULL_CATALOG_SCHEMA_VERSION, "full catalog schema mismatch")
+        _require(old.get("experiment_id") == EXP.name, "full catalog experiment mismatch")
+        _require(old.get("protocol_binding") == binding, "full catalog protocol/evaluation binding drift")
+        _require(old.get("starting_thinking_budget") == smoke_budget, "full catalog starting budget drift")
+    _write_full_artifact_catalog(
+        root=root,
+        plan=plan,
+        config=config,
+        selection=selection,
+        status=status,
+        starting_budget=smoke_budget,
+        protocol_binding=binding,
+    )
+    return smoke_budget
+
+
+def _run_model_stage_locked(run: str, config: Mapping[str, Any]) -> None:
     _require(run in {"smoke", "full"}, "run must be smoke or full")
     _verify_frozen_data(config)
 
@@ -3525,6 +3929,16 @@ def run_model_stage(run: str, config: Mapping[str, Any]) -> None:
         # This is deliberately before model allocation.  A missing, corrupt, or
         # un-migrated scientific cache must fail without consuming GPU memory.
         _initialize_scientific_catalog(config)
+        full_starting_budget: int | None = None
+    else:
+        full_starting_budget = _full_prerequisites_before_model(
+            harness=harness,
+            domain=domain,
+            config=config,
+            tasks_payload=tasks_payload,
+            libraries=libraries,
+            demonstrations=demonstrations,
+        )
     proposal_record = _macro_proposal_record(
         harness=harness,
         domain=domain,
@@ -3561,43 +3975,11 @@ def run_model_stage(run: str, config: Mapping[str, Any]) -> None:
             )
             starting_budget = int(interface["selected_thinking_budget"])
         else:
-            _passed_budget(ANALYSIS / "interface_gate.json")
-            smoke_tasks = _stage_tasks(tasks_payload, "smoke", config)
-            smoke_arms = [str(arm) for arm in config["inference"]["smoke_arms"]]
-            smoke_budget = _passed_budget(ANALYSIS / "smoke_budget_selection.json")
-            catalog_budget, selected_paths = _selected_scientific_smoke_paths(
-                config, smoke_arms
-            )
             _require(
-                catalog_budget == smoke_budget,
-                "smoke selection and scientific catalog budget disagree",
+                full_starting_budget is not None,
+                "full pre-model audit did not select a starting budget",
             )
-            for arm in smoke_arms:
-                library = libraries[arm]
-                k = int(config["decision"]["smoke_matched_k"])
-                records = _solver_records(
-                    harness=harness,
-                    domain=domain,
-                    tasks=smoke_tasks,
-                    arm=arm,
-                    library=library,
-                    demonstrations=demonstrations,
-                )
-                _require(
-                    _validate_cached_arm(
-                        selected_paths[arm].rows,
-                        arm=arm,
-                        records=records,
-                        sampling=_solver_sampling(
-                            harness, config, budget=smoke_budget, n=k
-                        ),
-                        harness=harness,
-                        config=config,
-                        expected_n=k,
-                    ),
-                    f"full requires complete frozen smoke arm {arm}",
-                )
-            _require_smoke_gate()
+            smoke_budget = full_starting_budget
 
             # Qwen proposals are secondary and train-only.  Defer their vLLM
             # cost until the primary base/designed smoke has actually passed.
@@ -3654,6 +4036,14 @@ def run_model_stage(run: str, config: Mapping[str, Any]) -> None:
         gate = verdict["smoke_gate"]
         if gate.get("pass") is not True:
             raise RuntimeError(f"smoke gate failed closed: {gate.get('reasons', [])}")
+
+
+def run_model_stage(run: str, config: Mapping[str, Any]) -> None:
+    """Acquire the shared lock before frozen-data checks, catalogs, or model work."""
+
+    _require(run in {"smoke", "full"}, "run must be smoke or full")
+    with full_store.experiment_stage_lock(_full_external_root(config)):
+        _run_model_stage_locked(run, config)
 
 
 def prepare(config: Mapping[str, Any]) -> None:

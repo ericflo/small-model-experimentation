@@ -170,7 +170,16 @@ def main() -> int:
         print(f"experiment already exists: experiments/{experiment_id}", file=sys.stderr)
         return 2
 
-    for dirname in ["src", "scripts", "configs", "data", "runs", "analysis", "reports"]:
+    for dirname in [
+        "src",
+        "scripts",
+        "configs",
+        "data",
+        "runs",
+        "analysis",
+        "reports",
+        "tests",
+    ]:
         (exp_dir / dirname).mkdir(parents=True, exist_ok=True)
 
     title = args.title.strip() or title_from_slug(experiment_id)
@@ -185,6 +194,10 @@ def main() -> int:
     (exp_dir / "configs" / "default.yaml").write_text("# Experiment configuration goes here.\n", encoding="utf-8")
     (exp_dir / "src" / "README.md").write_text("# Source\n\nPut experiment-local code here.\n", encoding="utf-8")
     shutil.copyfile(TEMPLATE / "src" / "vllm_runner.py", exp_dir / "src" / "vllm_runner.py")
+    shutil.copyfile(
+        TEMPLATE / "tests" / "test_vllm_runner.py",
+        exp_dir / "tests" / "test_vllm_runner.py",
+    )
 
     print(f"created experiment: experiments/{experiment_id}")
     print("next: implement the smoke path, update program evidence/backlog, then run make check")

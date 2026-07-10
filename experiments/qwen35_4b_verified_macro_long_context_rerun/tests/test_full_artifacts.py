@@ -627,6 +627,38 @@ class ReceiptTests(unittest.TestCase):
                     k=2,
                     expected_protocol_identity=expected,
                 )
+            metadata["runtime"]["packages"]["vllm"] = "0.24.0"
+            metadata["runtime"]["gpu"] = "different GPU/driver/memory"
+            metadata_path.write_text(
+                json.dumps(metadata, sort_keys=True) + "\n", encoding="utf-8"
+            )
+            gpu_drift_receipt = full_store.make_receipt(
+                shard,
+                shard_plan_sha256="7" * 64,
+                budget=32768,
+                arm="base",
+                shard_index=0,
+                task_ids=("t0", "t1"),
+                k=2,
+            )
+            (shard / "receipt.json").write_text(
+                json.dumps(gpu_drift_receipt, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(
+                full_store.FullArtifactError, "protocol identity drift"
+            ):
+                full_store.validate_shard_directory(
+                    shard,
+                    root=root,
+                    shard_plan_sha256="7" * 64,
+                    budget=32768,
+                    arm="base",
+                    shard_index=0,
+                    task_ids=("t0", "t1"),
+                    k=2,
+                    expected_protocol_identity=expected,
+                )
 
     def test_receipt_rejects_escape_and_unexpected_files(self) -> None:
         with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as other:
@@ -817,18 +849,45 @@ class ReceiptTests(unittest.TestCase):
                 "run": "full",
                 "pass": True,
                 "selected_thinking_budget": budget,
+                "starting_thinking_budget": budget,
                 "shard_plan_sha256": plan_hash,
                 "canonical_external_root": str(root.resolve()),
+                "passed_smoke_selection": {
+                    "path": "analysis/smoke_budget_selection.json",
+                    "sha256": "pending",
+                },
                 "tiers": [
                     {
                         "budget": budget,
                         "status": "selectable",
                         "complete": True,
                         "adequate": True,
+                        "rejecting_arm": None,
                         "arms": selection_arms,
                     }
                 ],
             }
+            smoke_path = analysis_dir / "smoke_budget_selection.json"
+            smoke_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "pass": True,
+                        "selected_thinking_budget": budget,
+                    },
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (analysis_dir / "interface_gate.json").write_text(
+                '{"pass":true}\n', encoding="utf-8"
+            )
+            (analysis_dir / "smoke_verdict.json").write_text(
+                '{"smoke_gate":{"pass":true}}\n', encoding="utf-8"
+            )
+            smoke_hash = full_store.file_integrity(smoke_path)["sha256"]
+            selection["passed_smoke_selection"]["sha256"] = smoke_hash
             selection_path = analysis_dir / "full_budget_selection.json"
             selection_path.write_text(
                 json.dumps(selection, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -837,19 +896,24 @@ class ReceiptTests(unittest.TestCase):
                 key=lambda row: (arms.index(str(row["arm"])), int(row["shard_index"]))
             )
             catalog = {
-                "schema_version": 1,
+                "schema_version": full_store.FULL_CATALOG_SCHEMA_VERSION,
                 "experiment_id": fixture_exp.name,
+                "status": "selected",
                 "canonical_external_root": str(root.resolve()),
+                "protocol_binding": {"binding": "fixed"},
                 "shard_plan": {
                     "path": "analysis/full_shard_plan.json",
-                    "sha256": full_store.file_integrity(
-                        analysis_dir / "full_shard_plan.json"
-                    )["sha256"],
+                    **full_store.file_integrity(analysis_dir / "full_shard_plan.json"),
                     "content_sha256": plan_hash,
                 },
                 "budget_selection": {
                     "path": "analysis/full_budget_selection.json",
-                    "sha256": full_store.file_integrity(selection_path)["sha256"],
+                    **full_store.file_integrity(selection_path),
+                },
+                "starting_thinking_budget": budget,
+                "passed_smoke_selection": {
+                    "path": "analysis/smoke_budget_selection.json",
+                    "sha256": smoke_hash,
                 },
                 "selected_tier": {
                     "thinking_budget": budget,
@@ -859,17 +923,26 @@ class ReceiptTests(unittest.TestCase):
                 },
                 "arm_order": arms,
                 "completed_shards": completed_entries,
+                "temporary_shards": [],
                 "selected_shards": completed_entries,
             }
             (analysis_dir / "full_artifact_catalog.json").write_text(
                 json.dumps(catalog, indent=2, sort_keys=True) + "\n", encoding="utf-8"
             )
-            verified = analyze._verify_full_artifact_catalog(
-                exp=fixture_exp,
-                config=config,
-                tasks=tasks,
-                libraries=libraries,
-            )
+            with (
+                mock.patch.object(analyze, "_expected_full_arm_order", return_value=arms),
+                mock.patch.object(
+                    analyze.full_store,
+                    "build_full_binding",
+                    return_value={"binding": "fixed"},
+                ),
+            ):
+                verified = analyze._verify_full_artifact_catalog(
+                    exp=fixture_exp,
+                    config=config,
+                    tasks=tasks,
+                    libraries=libraries,
+                )
             self.assertEqual(verified["selected_budget"], budget)
             self.assertEqual(len(verified["selected_entries"]), 30)
             base_rows, base_summary = analyze._load_full_arm_artifacts(verified, "base")
@@ -881,7 +954,15 @@ class ReceiptTests(unittest.TestCase):
 
             with selection_path.open("a", encoding="utf-8") as handle:
                 handle.write(" \n")
-            with self.assertRaisesRegex(ValueError, "budget selection file hash mismatch"):
+            with (
+                mock.patch.object(analyze, "_expected_full_arm_order", return_value=arms),
+                mock.patch.object(
+                    analyze.full_store,
+                    "build_full_binding",
+                    return_value={"binding": "fixed"},
+                ),
+                self.assertRaisesRegex(ValueError, "selection reference drift"),
+            ):
                 analyze._verify_full_artifact_catalog(
                     exp=fixture_exp,
                     config=config,
@@ -912,6 +993,11 @@ class FullRunnerTests(unittest.TestCase):
             with (
                 mock.patch.object(run, "_preflight_records", return_value=preflight),
                 mock.patch.object(run, "_validate_runner_artifact", return_value=True),
+                mock.patch.object(
+                    run,
+                    "_current_full_protocol_identity",
+                    return_value=full_store.protocol_identity(batch.summary),
+                ),
             ):
                 receipt = run._generate_atomic_full_shard(
                     runner=object(),
@@ -927,6 +1013,7 @@ class FullRunnerTests(unittest.TestCase):
                     k=2,
                     records=(record,),
                     sampling=object(),
+                    expected_protocol_identity=full_store.protocol_identity(batch.summary),
                 )
             self.assertTrue(final.is_dir())
             self.assertEqual(
@@ -983,7 +1070,12 @@ class FullRunnerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "external"
             analysis_dir = Path(directory) / "analysis"
+            analysis_dir.mkdir()
+            (analysis_dir / "smoke_budget_selection.json").write_text(
+                "{}\n", encoding="utf-8"
+            )
             config["full_run"]["external_root"] = str(root)
+            libraries = {arm: {} for arm in full_store.NON_QWEN_ARMS}
             with (
                 mock.patch.object(run, "ANALYSIS", analysis_dir),
                 mock.patch.object(run, "_solver_records", side_effect=records),
@@ -993,8 +1085,10 @@ class FullRunnerTests(unittest.TestCase):
                     return_value=types.SimpleNamespace(thinking_budget=61440),
                 ),
                 mock.patch.object(run, "_validate_cached_full_shard", return_value={"status": "complete"}) as validate,
+                mock.patch.object(run, "_current_full_protocol_identity", return_value={"protocol": "fixed"}),
                 mock.patch.object(run, "_read_jsonl", return_value=[{"sealed": True}]),
                 mock.patch.object(run, "_termination_metrics", return_value=termination),
+                mock.patch.object(run.full_store, "build_full_binding", return_value={"binding": "fixed"}),
                 mock.patch.object(
                     run.full_store,
                     "catalog_shard_entry",
@@ -1009,12 +1103,12 @@ class FullRunnerTests(unittest.TestCase):
                         domain=object(),
                         config=config,
                         tasks=tasks,
-                        libraries={"base": {}, "mined": {}},
+                        libraries=libraries,
                         demonstrations=[],
                         starting_budget=61440,
                     )
-            self.assertEqual(validate.call_count, 1)
-            catalog.assert_not_called()
+            self.assertEqual(validate.call_count, 100)
+            self.assertEqual(catalog.call_count, 3)
             selection = json.loads(
                 (analysis_dir / "full_budget_selection.json").read_text(encoding="utf-8")
             )
@@ -1023,7 +1117,12 @@ class FullRunnerTests(unittest.TestCase):
             self.assertEqual(base["termination"]["unresolved_cap_contacts"], 144)
             self.assertEqual(base["shards"][0]["status"], "complete")
             self.assertTrue(all(row["status"] == "skipped" for row in base["shards"][1:]))
-            self.assertEqual(selection["tiers"][0]["arms"]["mined"]["status"], "skipped")
+            self.assertTrue(
+                all(
+                    selection["tiers"][0]["arms"][arm]["status"] == "skipped"
+                    for arm in full_store.NON_QWEN_ARMS[1:]
+                )
+            )
 
 
 class CompactAnalysisTests(unittest.TestCase):

@@ -2,6 +2,15 @@
 
 ## Next Experiments
 
+- **Symmetric loop-control verified-macro rerun (next; new experiment):** stop increasing context.
+  The exact-capture ladder ended `pass=false` with no selected budget even though the 61k probe
+  passed FULL-graph and live-KV gates: 40/48 exact loops, 8/48 unresolved contacts, 4/48
+  answer-limit contacts, and 397.688 sampled tokens/s (versus 38/10/6 and 491.396 tokens/s at
+  49k). Before generation, preregister one loop intervention applied identically to every compared
+  arm and matched-compute baseline, freeze fresh artifacts, and preserve the existing unresolved-
+  contact and answer-limit thresholds. Do not treat loop detection as task success or inspect
+  capped semantics to design the intervention; no K=12 or semantic analysis is authorized until a
+  fresh same-protocol termination matrix passes.
 - **Exactly-one-macro slot-conditioned sweep (conditional follow-up, new experiment):** use fresh,
   contamination-controlled procedural data and give every treated prompt exactly one explicit
   macro slot. Run mined, support-matched random, and designed libraries under identical slot

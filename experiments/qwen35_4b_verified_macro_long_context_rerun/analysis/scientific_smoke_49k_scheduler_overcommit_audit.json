@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_long_context_rerun",
+  "stage": "smoke_budget_probe",
+  "arm": "base",
+  "thinking_budget": 49152,
+  "answer_max_tokens": 512,
+  "protocol_role": "scheduler_overcommitted_diagnostic_only",
+  "inspection_boundary": {
+    "used_for_diagnostic": [
+      "runner timing and sampled-token accounting",
+      "finish and forced-intervention metadata",
+      "token-id periodic-tail classification",
+      "artifact receipt, catalog, sizes, and hashes"
+    ],
+    "not_inspected": [
+      "decoded model output",
+      "parse status",
+      "visible-example score",
+      "hidden-example score",
+      "candidate correctness"
+    ]
+  },
+  "scheduler_diagnosis": {
+    "preregistered_before_probe_receipt": true,
+    "preregistration": "reports/preregistration_amendment_12.md",
+    "max_num_seqs": 64,
+    "historical_engine_kv_cache_tokens": 995328,
+    "block_size_tokens": 528,
+    "logical_sequences": 48,
+    "rounded_worst_sequence_tokens": 50688,
+    "admitted_active_sequences": 48,
+    "required_cache_tokens_without_eviction": 2433024,
+    "required_minus_capacity_tokens": 1437696,
+    "prefix_caching": false,
+    "vllm_preemption_effect": "evicted requests reset computed-token count and recompute their prefix",
+    "budget_selection_eligible": false,
+    "promotion_pooling_or_scoring_eligible": false
+  },
+  "counts": {
+    "requests": 12,
+    "samples": 48,
+    "sampled_tokens": 2366620,
+    "cap_contacts": 48,
+    "thinking_tokens_at_budget": 48,
+    "naturally_closed_reasoning_samples": 0,
+    "stage1_length_finishes": 48,
+    "forced_interventions": 48,
+    "reasoning_boundary_contacts": 48,
+    "answer_restarts_after_natural_close": 0,
+    "periodic_loop_contacts": 34,
+    "unresolved_cap_contacts": 14,
+    "answer_limit_contacts": 13,
+    "answer_tokens_at_limit": 13,
+    "stage2_truncations": 13
+  },
+  "rates": {
+    "forced_intervention": 1.0,
+    "reasoning_boundary_contact": 1.0,
+    "answer_restart_after_natural_close": 0.0,
+    "periodic_loop": 0.7083333333333334,
+    "unresolved_cap_contact": 0.2916666666666667,
+    "answer_limit_contact": 0.2708333333333333,
+    "stage2_truncation": 0.2708333333333333
+  },
+  "token_metadata": {
+    "p99_thinking_tokens": 49152,
+    "p99_naturally_closed_thinking_tokens": null,
+    "p99_answer_tokens": 512
+  },
+  "periodicity_test": {
+    "tail_tokens": 8192,
+    "max_period_tokens": 2048,
+    "minimum_match_rate": 0.99,
+    "detected_samples": 34,
+    "exact_match_rate_samples": 34,
+    "observed_period_tokens_min": 3,
+    "observed_period_tokens_max": 1379
+  },
+  "timing": {
+    "model_load_seconds": 20.142025135457516,
+    "generation_seconds": 4035.3561880951747,
+    "sampled_tokens_per_second": 586.4711538926443
+  },
+  "decision": {
+    "termination_adequate": false,
+    "budget_selection_eligible": false,
+    "rung_or_matrix_authorized": false,
+    "selection_uses_decoded_or_scored_content": false,
+    "selection_uses_token_identity_for_periodicity": true,
+    "thresholds": {
+      "unresolved_cap_contact_rate_below": 0.05,
+      "periodic_loop_rate_at_most": 0.25,
+      "answer_limit_contact_rate_below": 0.05
+    },
+    "gate_failures": {
+      "unresolved_cap_contact": true,
+      "periodic_loop": true,
+      "answer_limit_contact": true
+    },
+    "higher_action": "run a fresh K=4 base probe at think@49152 with max_num_seqs=19 in qwen35_4b_verified_macro_capacity_fit_rerun"
+  },
+  "artifacts": {
+    "external_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/scientific_smoke_v1",
+    "relative_prefix": "smoke_budget_probes/think_49152/base",
+    "rows": {
+      "bytes": 31066805,
+      "sha256": "1983f33bf707f426a5912d6e1b7db0d9785173e617ecb244f7cd33d8b8d333c1"
+    },
+    "metadata": {
+      "bytes": 9799,
+      "sha256": "6b0fda8b35c4a45bbf426f7bbdca568a84b4dbdb08552bd1b4d1f30aa128e139"
+    },
+    "preflight": {
+      "bytes": 4101,
+      "sha256": "4056d356d0360a3ea7bd60c59a22eb247a90e125f09af47784dfb3178baf0dc1"
+    },
+    "receipt": {
+      "bytes": 7325,
+      "sha256": "5ab864bb531da013da30ab58eacdf599278a05eae014222ed342b638b0aeaa77"
+    },
+    "runner_sha256": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782",
+    "config_sha256": "29bc583bf67c5b28cddefd35639994d0ad4b56967bd1232bd067d3fedd6560f3",
+    "scientific_protocol_binding_sha256": "1148be5972f09b21a26ff4d30e3e0695a8716ffa1bbe2165b5b9faeb2bad036e",
+    "classifier_run_py_sha256": "e9673be8e6be2b9221d051652839a649fcc8e0c90d53e8f16f5a670af50d99e2",
+    "classifier_analyze_py_sha256": "331098ce797869c1601540b2a485383127b28dff609b164b23c5df290bf734a6"
+  }
+}

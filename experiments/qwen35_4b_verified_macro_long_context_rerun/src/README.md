@@ -8,8 +8,11 @@
 - `macro_domain.py`: deterministic procedural task generation, exact DSL execution, behavioral
   depth checks, macro mining, and compression utilities inherited from the parent.
 - `full_artifacts.py`: model-free canonical sharding, atomic-receipt, path-containment, checksum,
-  and multi-shard summary validation shared by the full runner and analyzer. It never loads a
-  model and is not an alternate inference wrapper.
+  strict nine/fifteen-arm boundary, protocol/evaluation byte binding, shared nonblocking
+  migration/smoke/full stage lock,
+  external-tree inventory, schema-2 catalog, registered selection proof, and multi-shard summary
+  validation shared by the full runner and analyzer. It never loads a model and is not an
+  alternate inference wrapper.
 - `scientific_artifacts.py`: model-free external storage, preflight-only/receipt-last transaction,
   path-containment, exact receipt, protocol binding, deterministic catalog, and logical smoke-tier
   selection validation. It never loads a model and never creates a repository-local promoted copy.

@@ -1,0 +1,302 @@
+{
+  "checksum_scheme": "sha256 over sorted relative-path NUL file-sha256 newline records",
+  "entries": [
+    {
+      "arm": "base",
+      "files": {
+        "metadata": {
+          "bytes": 10336,
+          "relative_path": "smoke_budget_probes/think_49152/base.meta.json",
+          "sha256": "b2f141e2723eb831b159344c3283a5c3ac249760efd493c1e0fc180e71866077"
+        },
+        "preflight": {
+          "bytes": 7641,
+          "relative_path": "smoke_budget_probes/think_49152/base.preflight.json",
+          "sha256": "0827590ca763b395ba6e69314f9a11381f886d25ad6c8586adb535be027c382c"
+        },
+        "rows": {
+          "bytes": 30617193,
+          "relative_path": "smoke_budget_probes/think_49152/base.jsonl",
+          "sha256": "9765b18d26f1f828ddd14c75319d6c9029930b8edf6cca97b3d7e56c093315f1"
+        }
+      },
+      "id": "probe/think_49152/base",
+      "k": 4,
+      "n_records": 12,
+      "protocol_binding": {
+        "binding_sha256": "9d2692c6acad35d3b7ab56ddf368c9974c1ddaf6e0a06997b01015c0de397158",
+        "experiment_id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+        "files": [
+          {
+            "bytes": 2103,
+            "path": "configs/default.yaml",
+            "sha256": "933b9686f074258dbf454fbedf0e2aa80e730e76ae28c3ca71ca5920aac3bb82"
+          },
+          {
+            "bytes": 827691,
+            "path": "data/tasks.json",
+            "sha256": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073"
+          },
+          {
+            "bytes": 2133,
+            "path": "data/demonstrations.json",
+            "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf"
+          },
+          {
+            "bytes": 7416,
+            "path": "data/prompt_manifest.json",
+            "sha256": "f453b1ade590b3374be868dff2e8e7333e2d6e6044f6db9bf26dd033de98277f"
+          },
+          {
+            "bytes": 2619,
+            "path": "data/source_provenance.json",
+            "sha256": "1220a674152a9595eec8364f71ebd14758081d581d72ffd5db980849d78f164d"
+          },
+          {
+            "bytes": 17915,
+            "path": "scripts/analyze.py",
+            "sha256": "c26264d22c1463669bb7e536ce587a5f1cab469658ae97cb7ff8a5a6151002c3"
+          },
+          {
+            "bytes": 35949,
+            "path": "scripts/run.py",
+            "sha256": "dffde4cf2ec56c44cc5682c0a77226c9c07ad0f97b6d67f914a5ceb1ded69e6d"
+          },
+          {
+            "bytes": 41825,
+            "path": "src/macro_domain.py",
+            "sha256": "3a59b931faf42a6731ad73e31f9e8cdedf44c29423db4d8645b4e50a66ab21a7"
+          },
+          {
+            "bytes": 41287,
+            "path": "src/model_harness.py",
+            "sha256": "a43fb0e76f65819e5d1048f965e74c06409da870e77c7ce46f6df247257fa552"
+          },
+          {
+            "bytes": 87610,
+            "path": "src/scientific_artifacts.py",
+            "sha256": "310b9ab214dcfa0c1b69517b879630891e561d5916e63eb272c3c63aa29ae703"
+          },
+          {
+            "bytes": 54192,
+            "path": "src/vllm_runner.py",
+            "sha256": "3a98eb8da787054aded56a1ec3fd040ee2edaacc7d0694b4aec5a0309488774a"
+          }
+        ],
+        "library_scope": "base and designed_ceiling only; later Qwen-only library additions are excluded",
+        "schema_version": 1,
+        "smoke_libraries": {
+          "base": {
+            "content_sha256": "462ddf886c5fb28ce087f30ff5bb816c3b4d6068d98dcb2afee2d4bf454f4e58",
+            "library_id": "base-469fc2a9dc4782c6"
+          },
+          "designed_ceiling": {
+            "content_sha256": "c8ba999ba054bbc0153fa8c4251b8fb464860cfbc638b4dc96cf6d94dac0b456",
+            "library_id": "designed_ceiling-1ebbde85d208cc40"
+          }
+        }
+      },
+      "receipt": {
+        "bytes": 17992,
+        "relative_path": "smoke_budget_probes/think_49152/base.receipt.json",
+        "sha256": "61da6f616365bf080e97f341bd0c2305b889998c4d161c61e63d06e5dfb5923c"
+      },
+      "relative_prefix": "smoke_budget_probes/think_49152/base",
+      "role": "termination_probe",
+      "status": "complete",
+      "thinking_budget": 49152,
+      "tier_mode": "termination_probe_only"
+    },
+    {
+      "arm": "base",
+      "files": {
+        "metadata": {
+          "bytes": 10306,
+          "relative_path": "smoke_budget_probes/think_61440/base.meta.json",
+          "sha256": "23b381cf8c0af2e4d622acfdd8bed67d213e10cc601399313a7c2b5967b6af2e"
+        },
+        "preflight": {
+          "bytes": 7621,
+          "relative_path": "smoke_budget_probes/think_61440/base.preflight.json",
+          "sha256": "b4135ff9181e9247df8445484c48cf1be81d9529adf8bc4ca62432de5797cede"
+        },
+        "rows": {
+          "bytes": 39502533,
+          "relative_path": "smoke_budget_probes/think_61440/base.jsonl",
+          "sha256": "f51c3d747bf48272b0302287e0236dfdbc816b2cd44b202a12ad0b9aa10247b0"
+        }
+      },
+      "id": "probe/think_61440/base",
+      "k": 4,
+      "n_records": 12,
+      "protocol_binding": {
+        "binding_sha256": "9d2692c6acad35d3b7ab56ddf368c9974c1ddaf6e0a06997b01015c0de397158",
+        "experiment_id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+        "files": [
+          {
+            "bytes": 2103,
+            "path": "configs/default.yaml",
+            "sha256": "933b9686f074258dbf454fbedf0e2aa80e730e76ae28c3ca71ca5920aac3bb82"
+          },
+          {
+            "bytes": 827691,
+            "path": "data/tasks.json",
+            "sha256": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073"
+          },
+          {
+            "bytes": 2133,
+            "path": "data/demonstrations.json",
+            "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf"
+          },
+          {
+            "bytes": 7416,
+            "path": "data/prompt_manifest.json",
+            "sha256": "f453b1ade590b3374be868dff2e8e7333e2d6e6044f6db9bf26dd033de98277f"
+          },
+          {
+            "bytes": 2619,
+            "path": "data/source_provenance.json",
+            "sha256": "1220a674152a9595eec8364f71ebd14758081d581d72ffd5db980849d78f164d"
+          },
+          {
+            "bytes": 17915,
+            "path": "scripts/analyze.py",
+            "sha256": "c26264d22c1463669bb7e536ce587a5f1cab469658ae97cb7ff8a5a6151002c3"
+          },
+          {
+            "bytes": 35949,
+            "path": "scripts/run.py",
+            "sha256": "dffde4cf2ec56c44cc5682c0a77226c9c07ad0f97b6d67f914a5ceb1ded69e6d"
+          },
+          {
+            "bytes": 41825,
+            "path": "src/macro_domain.py",
+            "sha256": "3a59b931faf42a6731ad73e31f9e8cdedf44c29423db4d8645b4e50a66ab21a7"
+          },
+          {
+            "bytes": 41287,
+            "path": "src/model_harness.py",
+            "sha256": "a43fb0e76f65819e5d1048f965e74c06409da870e77c7ce46f6df247257fa552"
+          },
+          {
+            "bytes": 87610,
+            "path": "src/scientific_artifacts.py",
+            "sha256": "310b9ab214dcfa0c1b69517b879630891e561d5916e63eb272c3c63aa29ae703"
+          },
+          {
+            "bytes": 54192,
+            "path": "src/vllm_runner.py",
+            "sha256": "3a98eb8da787054aded56a1ec3fd040ee2edaacc7d0694b4aec5a0309488774a"
+          }
+        ],
+        "library_scope": "base and designed_ceiling only; later Qwen-only library additions are excluded",
+        "schema_version": 1,
+        "smoke_libraries": {
+          "base": {
+            "content_sha256": "462ddf886c5fb28ce087f30ff5bb816c3b4d6068d98dcb2afee2d4bf454f4e58",
+            "library_id": "base-469fc2a9dc4782c6"
+          },
+          "designed_ceiling": {
+            "content_sha256": "c8ba999ba054bbc0153fa8c4251b8fb464860cfbc638b4dc96cf6d94dac0b456",
+            "library_id": "designed_ceiling-1ebbde85d208cc40"
+          }
+        }
+      },
+      "receipt": {
+        "bytes": 17956,
+        "relative_path": "smoke_budget_probes/think_61440/base.receipt.json",
+        "sha256": "8f00535a773e347ec4f90a48eb6b00960935d7010c3500af7ccdf57fedd6f2e1"
+      },
+      "relative_prefix": "smoke_budget_probes/think_61440/base",
+      "role": "termination_probe",
+      "status": "complete",
+      "thinking_budget": 61440,
+      "tier_mode": "termination_probe_only"
+    }
+  ],
+  "experiment_id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+  "protocol_binding": {
+    "binding_sha256": "9d2692c6acad35d3b7ab56ddf368c9974c1ddaf6e0a06997b01015c0de397158",
+    "experiment_id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+    "files": [
+      {
+        "bytes": 2103,
+        "path": "configs/default.yaml",
+        "sha256": "933b9686f074258dbf454fbedf0e2aa80e730e76ae28c3ca71ca5920aac3bb82"
+      },
+      {
+        "bytes": 827691,
+        "path": "data/tasks.json",
+        "sha256": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073"
+      },
+      {
+        "bytes": 2133,
+        "path": "data/demonstrations.json",
+        "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf"
+      },
+      {
+        "bytes": 7416,
+        "path": "data/prompt_manifest.json",
+        "sha256": "f453b1ade590b3374be868dff2e8e7333e2d6e6044f6db9bf26dd033de98277f"
+      },
+      {
+        "bytes": 2619,
+        "path": "data/source_provenance.json",
+        "sha256": "1220a674152a9595eec8364f71ebd14758081d581d72ffd5db980849d78f164d"
+      },
+      {
+        "bytes": 17915,
+        "path": "scripts/analyze.py",
+        "sha256": "c26264d22c1463669bb7e536ce587a5f1cab469658ae97cb7ff8a5a6151002c3"
+      },
+      {
+        "bytes": 35949,
+        "path": "scripts/run.py",
+        "sha256": "dffde4cf2ec56c44cc5682c0a77226c9c07ad0f97b6d67f914a5ceb1ded69e6d"
+      },
+      {
+        "bytes": 41825,
+        "path": "src/macro_domain.py",
+        "sha256": "3a59b931faf42a6731ad73e31f9e8cdedf44c29423db4d8645b4e50a66ab21a7"
+      },
+      {
+        "bytes": 41287,
+        "path": "src/model_harness.py",
+        "sha256": "a43fb0e76f65819e5d1048f965e74c06409da870e77c7ce46f6df247257fa552"
+      },
+      {
+        "bytes": 87610,
+        "path": "src/scientific_artifacts.py",
+        "sha256": "310b9ab214dcfa0c1b69517b879630891e561d5916e63eb272c3c63aa29ae703"
+      },
+      {
+        "bytes": 54192,
+        "path": "src/vllm_runner.py",
+        "sha256": "3a98eb8da787054aded56a1ec3fd040ee2edaacc7d0694b4aec5a0309488774a"
+      }
+    ],
+    "library_scope": "base and designed_ceiling only; later Qwen-only library additions are excluded",
+    "schema_version": 1,
+    "smoke_libraries": {
+      "base": {
+        "content_sha256": "462ddf886c5fb28ce087f30ff5bb816c3b4d6068d98dcb2afee2d4bf454f4e58",
+        "library_id": "base-469fc2a9dc4782c6"
+      },
+      "designed_ceiling": {
+        "content_sha256": "c8ba999ba054bbc0153fa8c4251b8fb464860cfbc638b4dc96cf6d94dac0b456",
+        "library_id": "designed_ceiling-1ebbde85d208cc40"
+      }
+    }
+  },
+  "schema_version": 2,
+  "selected": null,
+  "storage": {
+    "default_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_exact_cudagraph_rerun/scientific_smoke_v1",
+    "override_environment_variable": "QWEN35_MACRO_EXACT_CUDAGRAPH_ARTIFACT_ROOT"
+  },
+  "tree": {
+    "bytes": 70191578,
+    "files": 8,
+    "sha256": "4aa311ab579c301f2b2d7383591e3e68ed66035d184bbaaa2659d59bd95542d3"
+  }
+}

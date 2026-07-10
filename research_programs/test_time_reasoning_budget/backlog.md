@@ -23,13 +23,22 @@
 
 ## Next Experiments
 
+- **Symmetric loop-control follow-up (next; new experiment):** the exact-capture verified-macro
+  ladder is terminal `pass=false`, with no selected budget and no authorized K=12/semantic stage.
+  Its clean 61k envelope still produced 40/48 exact loops, 8/48 unresolved contacts, and 4/48
+  answer-limit contacts at 397.688 sampled tokens/s; 49k produced 38/10/6 at 491.396 tokens/s.
+  Stop increasing context. Preregister one loop-control intervention symmetrically across all arms
+  and matched-compute baselines, keep the unresolved-contact and answer-limit gates unchanged, and
+  use fresh artifacts. Loop detection is a termination mechanism, not evidence of correctness.
 - **Learned thinking-budget controller with richer visible signals** (token entropy/logprob,
   self-consistency): can it close the deployable→oracle gap (0.89→0.93)? (Queue: `thinking_budget_controller`.)
 - Thinking-budget sweep on the **silent_executor substrate** (modular-program execution):
   its CoT collapsed to 0% at len-24 at a fixed 768-token budget — does a larger thinking
   budget rescue length generalization? Direct pressure-test of the silent-compute thesis.
-- **Distill long-thinking into short/no-think**: SFT on the model's own correct long-think
-  traces, measure retained accuracy per token (compression of reasoning).
+- **Matched-compute scratchpad compression at inference time:** periodically ask the same
+  Qwen3.5-4B call protocol to replace a long intermediate state with a short verified checkpoint,
+  then spend the saved context on continued reasoning. Compare against ordinary sampling at equal
+  model-forward tokens; no teacher, distillation, or cross-model trace source is permitted.
 - **Thinking as verifier vs generator** under matched token budget: spend the budget on a
   thinking *generator* vs a thinking *verifier/selector* over no-think candidates — which
   buys more deployable accuracy? (Couples to evidence_conditioned_selection / C2.)

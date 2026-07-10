@@ -5,26 +5,36 @@ source_track: "new"
 path: "experiments/qwen35_4b_verified_macro_long_context_rerun"
 primary_readme: "experiments/qwen35_4b_verified_macro_long_context_rerun/README.md"
 primary_report: "experiments/qwen35_4b_verified_macro_long_context_rerun/reports/report.md"
-summary: "Active vLLM follow-up: the corrected plan-given macro interface passed 16/16 records, while fresh induction rejected think@16k as censored and is escalating on a frozen 16k--61k ladder before scoring."
+summary: "**Status:** ongoing anti-censoring rerun; no fresh task output has been scored. The corrected plan-given interface passed 16/16 records at think@16,384, overturning the parent's apparent low-budget interface limit. The fresh base-smoke arm then proved that 16,384 was still binding for induction (131/144 unresolved contacts and 60/144 answer truncations), so those rows were excluded and think@32,768 also rejected from content-blind finish/count metadata plus the preregistered token-ID periodicity test: 81/144 exact loops, 63/144 unresolved contacts, and 37/144 answer-limit contacts. The max-seqs-64 K=4 probe at think@49,152 then finished with 34/48 exact loops, 14/48 unresolved contacts, and 13/48 answer-limit contacts, but amendment 12 had already made it diagnostic-only from pre-result cache-capacity evidence. Fresh long-rung selection moved to the capacity-fit follow-up, whose 61k attempt was stopped before a receipt after an audit found that its implicit CUDA-graph list did not cover the active batch width. A separate exact-capture follow-up then rejected fresh 49k and 61k probes even though both live-KV and exact-graph gates passed. Its terminal selector records `pass=false` and no selected budget, so no K=12 matrix, semantic analysis, or macro claim is authorized."
 tags:
+  - "active-learning"
+  - "latent-state"
   - "small-model"
   - "verification"
-  - "vllm"
-  - "thinking-budget"
-  - "procedural"
 research_programs:
-  - "operator_and_skill_inventories"
-  - "structured_execution_and_compilers"
+  - "active_evidence_acquisition"
   - "benchmark_generalization"
+  - "evidence_conditioned_selection"
+  - "interpretability_and_diagnostics"
+  - "operator_and_skill_inventories"
+  - "reliability_and_safety"
+  - "structured_execution_and_compilers"
   - "test_time_reasoning_budget"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
+  - "runs"
   - "scripts"
   - "src"
   - "tests"
-file_counts: {}
-total_files: 0
-total_size_bytes: 0
-generated_on: "2026-07-09"
+file_counts:
+  json: 30
+  jsonl: 2
+  md: 20
+  py: 16
+  yaml: 3
+  [none]: 1
+total_files: 72
+total_size_bytes: 16493220

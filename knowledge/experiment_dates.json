@@ -1014,9 +1014,33 @@
    ],
    "caveat": "configs/experiment.json \"seed\": 20260630 LOOKS like a run date but is impossible — the file was committed in the 2026-06-28 import (42c23ac), proving date-encoded seeds are not reliable run dates. Bound: ran on/before 2026-06-28."
   },
+  "qwen35_4b_verified_macro_capacity_fit_rerun": {
+   "start": "2026-07-10",
+   "end": "2026-07-10",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
+   "start": "2026-07-10",
+   "end": "2026-07-10",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_verified_macro_invention": {
    "start": "2026-07-09",
    "end": "2026-07-09",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_verified_macro_long_context_rerun": {
+   "start": "2026-07-10",
+   "end": "2026-07-10",
    "confidence": "high",
    "sources": [
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"

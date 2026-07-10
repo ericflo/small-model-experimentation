@@ -106,8 +106,8 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Test-Time Reasoning Budget
 
 - Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
-- Current read: the corpus disabled native thinking everywhere; turning it on is a real deployable lever (MBPP greedy +15pp, claim C9), but a budget to control (overthinking hurts) and partly a compute/scaffold effect rather than reasoning.
-- Best next experiment: a deployable STOP/MORE controller over the thinking budget vs the fixed ~1024 optimum at matched mean tokens; and a stronger content control (substitute a different task's thinking).
-- Strong anchors: `qwen35_4b_thinking_budget_scaling`, `qwen_python_shaped_silent_executor`, `qwen35_4b_adaptive_evidence_budget_policy`.
-- Avoid repeating: reporting a thinking-budget win without a shuffled/foreign-thinking control or without the overthinking decline; claiming an exact optimal budget from single-seed gaps.
-- Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.
+- Current read: native thinking is a real deployable lever (MBPP greedy +15pp, claim C9), and the completed filler/shuffle/foreign controls show that its gain comes from coherent relevant content rather than free compute. Budget remains workload-specific and non-monotonic: a visible-test controller saves tokens but does not beat the best fixed budget, while fresh verified-macro induction outgrew allowances that were adequate for supplied plans.
+- Best next experiment: a learned STOP/MORE controller with richer visible signals versus fixed budgets at matched mean tokens, replicated on a fresh procedural workload whose budget is calibrated on the actual task class.
+- Strong anchors: `qwen35_4b_thinking_budget_scaling`, `qwen35_4b_thinking_budget_controller`, `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_verified_macro_long_context_rerun`.
+- Avoid repeating: interpreting cap-bound rows as failures, transferring a budget between workload classes without a termination gate, or reporting a thinking-budget win without filler/shuffle/foreign controls and the overthinking decline.
+- Evidence that advances the program: a controller that Pareto-beats strong fixed budgets on contamination-controlled tasks, or a content-blind workload calibration rule that survives task-class shift without censoring the scored comparison.

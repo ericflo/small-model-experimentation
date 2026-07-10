@@ -10,21 +10,63 @@ experiment-domain imports.
 from __future__ import annotations
 
 import copy
+import errno
+import fcntl
 import hashlib
 import json
 import os
 import re
+import stat
+from contextlib import contextmanager
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
 
 FULL_ARTIFACT_SCHEMA_VERSION = 1
+FULL_CATALOG_SCHEMA_VERSION = 2
 RECEIPT_FILE = "receipt.json"
 PAYLOAD_FILES = ("preflight.json", "rows.jsonl", "runner.meta.json")
 SHARD_DIR_RE = re.compile(r"^shard_[0-9]{3}$")
+TEMP_SHARD_DIR_RE = re.compile(r"^\.shard_([0-9]{3})\.tmp-[A-Za-z0-9._-]+$")
+BUDGET_DIR_RE = re.compile(r"^think_([1-9][0-9]*)$")
 ARM_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+NON_QWEN_ARMS = (
+    "base",
+    "mined",
+    "mined_hint",
+    "random_0",
+    "random_1",
+    "random_2",
+    "random_3",
+    "random_4",
+    "designed_ceiling",
+)
+QWEN_ARMS = (
+    "qwen_ranked",
+    "qwen_random_0",
+    "qwen_random_1",
+    "qwen_random_2",
+    "qwen_random_3",
+    "qwen_random_4",
+)
+FULL_BINDING_PATHS = (
+    "configs/default.yaml",
+    "data/tasks.json",
+    "data/libraries.json",
+    "data/demonstrations.json",
+    "data/dataset_manifest.json",
+    "data/source_provenance.json",
+    "analysis/interface_gate.json",
+    "analysis/smoke_budget_selection.json",
+    "analysis/smoke_verdict.json",
+    "scripts/run.py",
+    "scripts/analyze.py",
+    "src/full_artifacts.py",
+    "src/model_harness.py",
+    "src/macro_domain.py",
+)
 PROTOCOL_RUNTIME_KEYS = (
     "python",
     "python_executable",
@@ -45,6 +87,157 @@ class FullArtifactError(ValueError):
 def _require(condition: bool, message: str) -> None:
     if not condition:
         raise FullArtifactError(message)
+
+
+def _require_plain_directory(path: Path, *, allow_absent: bool = False) -> None:
+    """Reject absent/non-directory/symlink paths without following the final link."""
+
+    try:
+        metadata = path.lstat()
+    except FileNotFoundError:
+        _require(allow_absent, f"missing full artifact directory: {path}")
+        return
+    _require(not stat.S_ISLNK(metadata.st_mode), f"full artifact directory may not be a symlink: {path}")
+    _require(stat.S_ISDIR(metadata.st_mode), f"full artifact path is not a directory: {path}")
+
+
+def validate_full_arm_set(libraries: Mapping[str, Any]) -> list[str]:
+    """Return the only two legal full arm sets in their registered order."""
+
+    names = set(str(name) for name in libraries)
+    non_qwen = set(NON_QWEN_ARMS)
+    all_arms = non_qwen | set(QWEN_ARMS)
+    _require(names == non_qwen or names == all_arms, (
+        "full libraries must contain exactly the nine registered non-Qwen arms "
+        "or those nine plus the complete six-arm Qwen ensemble"
+    ))
+    order = [
+        "base",
+        "mined",
+        "mined_hint",
+        *(QWEN_ARMS if names == all_arms else ()),
+        "random_0",
+        "random_1",
+        "random_2",
+        "random_3",
+        "random_4",
+        "designed_ceiling",
+    ]
+    if names == all_arms:
+        ranked = libraries.get("qwen_ranked")
+        _require(isinstance(ranked, Mapping), "qwen_ranked library must be an object")
+        macros = ranked.get("macros")
+        _require(
+            isinstance(macros, list) and len(macros) == 8,
+            "qwen_ranked must contain exactly eight verified macros",
+        )
+        for arm in QWEN_ARMS[1:]:
+            control = libraries.get(arm)
+            _require(isinstance(control, Mapping), f"missing complete Qwen control {arm}")
+            _require(
+                isinstance(control.get("macros"), list)
+                and len(control["macros"]) == 8,
+                f"{arm} must contain exactly eight matched-control macros",
+            )
+    return order
+
+
+def build_full_binding(exp: Path) -> dict[str, Any]:
+    """Bind every byte source that can construct, select, or score the full run."""
+
+    exp = exp.resolve(strict=True)
+    files: dict[str, dict[str, Any]] = {}
+    for relative in FULL_BINDING_PATHS:
+        path = exp / relative
+        _require(not path.is_symlink(), f"full protocol binding may not follow a symlink: {path}")
+        _require(path.is_file(), f"full protocol binding file is missing: {path}")
+        files[relative] = file_integrity(path)
+    binding = {
+        "schema_version": 1,
+        "protocol": "preregistration_amendment_11_exact_full_binding",
+        "files": files,
+    }
+    binding["sha256"] = value_sha256(binding)
+    return binding
+
+
+def require_full_binding(exp: Path, expected: Mapping[str, Any]) -> dict[str, Any]:
+    actual = build_full_binding(exp)
+    _require(actual == dict(expected), "full protocol/evaluation byte binding drift")
+    return actual
+
+
+@contextmanager
+def experiment_stage_lock(root: Path):
+    """Hold the persistent experiment lock shared by smoke/migrate/full.
+
+    ``root`` is the fixed full-artifact root, even for smoke and migration.
+    Using that stable coordination path prevents an environment override for
+    scientific-smoke storage from creating a second, non-coordinating lock.
+    """
+
+    _require(root.is_absolute(), "scientific artifact root must be absolute")
+    parent = root.parent
+    _require_plain_directory(parent)
+    lock_path = parent / f".{root.name}.lock"
+    flags = os.O_RDWR | os.O_CREAT | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(lock_path, flags, 0o600)
+    except OSError as exc:
+        raise FullArtifactError(
+            f"cannot safely open persistent scientific-stage lock {lock_path}: {exc}"
+        ) from exc
+    try:
+        metadata = os.fstat(descriptor)
+        _require(
+            stat.S_ISREG(metadata.st_mode),
+            f"scientific-stage lock is not a regular file: {lock_path}",
+        )
+        path_metadata = lock_path.lstat()
+        _require(
+            path_metadata.st_dev == metadata.st_dev
+            and path_metadata.st_ino == metadata.st_ino,
+            f"scientific-stage lock path changed while opening: {lock_path}",
+        )
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError as exc:
+            if exc.errno in {errno.EACCES, errno.EAGAIN}:
+                raise FullArtifactError(
+                    f"another scientific invocation already holds {lock_path}"
+                ) from exc
+            raise
+        os.ftruncate(descriptor, 0)
+        os.write(descriptor, f"pid={os.getpid()}\n".encode("ascii"))
+        os.fsync(descriptor)
+        yield lock_path
+    finally:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
+        finally:
+            os.close(descriptor)
+
+
+@contextmanager
+def full_stage_lock(root: Path):
+    """Compatibility alias for the shared scientific-stage lock."""
+
+    with experiment_stage_lock(root) as lock_path:
+        yield lock_path
+
+
+def reject_repository_local_full_raw(path: Path) -> None:
+    """Reject stale local full JSONL and any symlink before model construction."""
+
+    if not path.exists() and not path.is_symlink():
+        return
+    _require_plain_directory(path)
+    for candidate in path.rglob("*"):
+        _require(not candidate.is_symlink(), f"repository-local full path may not be a symlink: {candidate}")
+        _require(
+            not (candidate.is_file() and candidate.suffix == ".jsonl"),
+            f"repository-local full raw rows are forbidden: {candidate}",
+        )
 
 
 def canonical_bytes(value: Any, *, pretty: bool = False) -> bytes:
@@ -1059,6 +1252,277 @@ def require_catalog_shard_entry(
     actual = catalog_shard_entry(root, shard_dir, receipt)
     _require(actual == dict(expected), f"full catalog shard entry drift: {shard_dir}")
     return actual
+
+
+def inventory_full_root(
+    root: Path,
+    *,
+    plan: Mapping[str, Any],
+    budgets: Sequence[int],
+    expected_protocol_by_arm_tier: Mapping[tuple[int, str], Mapping[str, Any]] | None = None,
+) -> dict[str, list[dict[str, Any]]]:
+    """Audit the complete external tree and inventory finals and nonreusable temps.
+
+    This function is intentionally stricter than a recursive glob: every path
+    component must have a registered name and type.  Thus an unexplained file,
+    symlink, budget, arm, or shard is an error rather than an ignored cache miss.
+    """
+
+    _require(root.is_absolute(), "full artifact root must be absolute")
+    ladder = [int(value) for value in budgets]
+    _require(
+        bool(ladder) and len(set(ladder)) == len(ladder) and all(value > 0 for value in ladder),
+        "full inventory budgets must be unique positive integers",
+    )
+    arms = plan.get("arms")
+    _require(isinstance(arms, Mapping) and bool(arms), "full inventory plan lacks arms")
+    completed: list[dict[str, Any]] = []
+    temporary: list[dict[str, Any]] = []
+    if not root.exists() and not root.is_symlink():
+        return {"completed_shards": completed, "temporary_shards": temporary}
+    _require_plain_directory(root)
+    plan_hash = plan_sha256(plan)
+    observed_identity: dict[tuple[int, str], Mapping[str, Any]] = {}
+    for budget_path in sorted(root.iterdir(), key=lambda path: path.name):
+        _require(not budget_path.is_symlink(), f"full root entry may not be a symlink: {budget_path}")
+        match = BUDGET_DIR_RE.fullmatch(budget_path.name)
+        _require(match is not None, f"unknown full root entry: {budget_path}")
+        budget = int(match.group(1))
+        _require(budget in ladder, f"unregistered full budget directory: {budget_path}")
+        _require_plain_directory(budget_path)
+        for arm_path in sorted(budget_path.iterdir(), key=lambda path: path.name):
+            _require(not arm_path.is_symlink(), f"full budget entry may not be a symlink: {arm_path}")
+            arm = arm_path.name
+            _require(arm in arms, f"unknown full arm directory: {arm_path}")
+            _require_plain_directory(arm_path)
+            arm_plan = arms[arm]
+            _require(isinstance(arm_plan, Mapping), f"invalid full plan arm {arm}")
+            shard_count = int(arm_plan.get("shard_count", -1))
+            for shard_path in sorted(arm_path.iterdir(), key=lambda path: path.name):
+                _require(not shard_path.is_symlink(), f"full shard entry may not be a symlink: {shard_path}")
+                final_match = SHARD_DIR_RE.fullmatch(shard_path.name)
+                temp_match = TEMP_SHARD_DIR_RE.fullmatch(shard_path.name)
+                _require(
+                    final_match is not None or temp_match is not None,
+                    f"unknown full shard entry: {shard_path}",
+                )
+                _require_plain_directory(shard_path)
+                shard_index = int(
+                    shard_path.name.removeprefix("shard_")
+                    if final_match is not None
+                    else temp_match.group(1)  # type: ignore[union-attr]
+                )
+                _require(
+                    0 <= shard_index < shard_count,
+                    f"unregistered full shard index: {shard_path}",
+                )
+                if temp_match is not None:
+                    files: dict[str, dict[str, Any]] = {}
+                    for child in sorted(shard_path.iterdir(), key=lambda path: path.name):
+                        _require(not child.is_symlink(), f"temporary shard file may not be a symlink: {child}")
+                        _require(child.is_file(), f"temporary shard contains a non-file: {child}")
+                        _require(
+                            child.name in set(PAYLOAD_FILES) | {RECEIPT_FILE},
+                            f"temporary shard contains an unknown file: {child}",
+                        )
+                        files[child.name] = file_integrity(child)
+                    temporary.append(
+                        {
+                            "budget": budget,
+                            "arm": arm,
+                            "shard_index": shard_index,
+                            "relative_path": shard_path.relative_to(root).as_posix(),
+                            "reusable": False,
+                            "files": files,
+                        }
+                    )
+                    continue
+                spec = shard_spec(plan, arm, shard_index)
+                key = (budget, arm)
+                expected = (
+                    expected_protocol_by_arm_tier.get(key)
+                    if expected_protocol_by_arm_tier is not None
+                    else observed_identity.get(key)
+                )
+                receipt = validate_shard_directory(
+                    shard_path,
+                    root=root,
+                    shard_plan_sha256=plan_hash,
+                    budget=budget,
+                    arm=arm,
+                    shard_index=shard_index,
+                    task_ids=spec["task_ids"],
+                    k=int(spec["k"]),
+                    expected_protocol_identity=expected,
+                )
+                observed_identity.setdefault(key, receipt_protocol_identity(receipt))
+                completed.append(catalog_shard_entry(root, shard_path, receipt))
+    arm_order = [str(arm) for arm in plan.get("arm_order", [])]
+    order = {arm: index for index, arm in enumerate(arm_order)}
+    completed.sort(key=lambda row: (int(row["budget"]), order[str(row["arm"])], int(row["shard_index"])))
+    temporary.sort(key=lambda row: (int(row["budget"]), order[str(row["arm"])], int(row["shard_index"]), str(row["relative_path"])))
+    return {"completed_shards": completed, "temporary_shards": temporary}
+
+
+def _crossed_registered_bound(
+    arm_record: Mapping[str, Any], *, arm: str, full_run: Mapping[str, Any]
+) -> bool:
+    termination = arm_record.get("termination")
+    if not isinstance(termination, Mapping):
+        return False
+    prefix = "base" if arm == "base" else "macro"
+    bounds = {
+        "unresolved_cap_contacts": int(full_run[f"{prefix}_early_unresolved"]),
+        "answer_limit_contacts": int(full_run[f"{prefix}_early_answer_limit"]),
+        "periodic_loop_contacts": int(full_run[f"{prefix}_early_periodic_loops"]),
+    }
+    return any(
+        isinstance(termination.get(field), int)
+        and not isinstance(termination.get(field), bool)
+        and int(termination[field]) >= threshold
+        for field, threshold in bounds.items()
+    )
+
+
+def validate_budget_selection(
+    selection: Mapping[str, Any],
+    *,
+    plan: Mapping[str, Any],
+    ladder: Sequence[int],
+    full_run: Mapping[str, Any],
+    expected_starting_budget: int,
+    expected_smoke_selection_sha256: str,
+    final: bool,
+) -> dict[str, Any]:
+    """Prove the registered contiguous-prefix and first-adequate selection rule."""
+
+    _require(selection.get("schema_version") == FULL_ARTIFACT_SCHEMA_VERSION, "full selection schema mismatch")
+    _require(selection.get("run") == "full", "full selection run mismatch")
+    _require(selection.get("starting_thinking_budget") == expected_starting_budget, "full selection starting budget mismatch")
+    smoke_ref = selection.get("passed_smoke_selection")
+    _require(isinstance(smoke_ref, Mapping), "full selection lacks passed smoke binding")
+    _require(smoke_ref.get("path") == "analysis/smoke_budget_selection.json", "full selection smoke path drifted")
+    _require(smoke_ref.get("sha256") == expected_smoke_selection_sha256, "full selection smoke hash drifted")
+    registered = [int(value) for value in ladder]
+    _require(expected_starting_budget in registered, "full selection start is not registered")
+    eligible = registered[registered.index(expected_starting_budget) :]
+    tiers = selection.get("tiers")
+    _require(isinstance(tiers, list) and bool(tiers), "full selection tiers must be non-empty")
+    budgets = [
+        int(tier.get("budget"))
+        if isinstance(tier, Mapping)
+        and isinstance(tier.get("budget"), int)
+        and not isinstance(tier.get("budget"), bool)
+        else -1
+        for tier in tiers
+    ]
+    _require(budgets == eligible[: len(budgets)], "full selection tiers are skipped, reordered, duplicated, or unregistered")
+    _require(len(budgets) <= len(eligible), "full selection has too many tiers")
+    arms = [str(arm) for arm in plan.get("arm_order", [])]
+    selected = selection.get("selected_thinking_budget")
+    _require(selected is None or (isinstance(selected, int) and not isinstance(selected, bool)), "invalid selected full budget")
+    adequate_budgets: list[int] = []
+    for index, tier in enumerate(tiers):
+        _require(isinstance(tier, Mapping), "full selection tier must be an object")
+        per_arm = tier.get("arms")
+        _require(isinstance(per_arm, Mapping), "full selection tier lacks arms")
+        complete = tier.get("complete") is True
+        adequate = tier.get("adequate") is True
+        if complete and adequate:
+            _require(set(per_arm) == set(arms), "adequate full tier does not contain the exact arm set")
+            _require(
+                all(
+                    isinstance(per_arm[arm], Mapping)
+                    and per_arm[arm].get("complete") is True
+                    and per_arm[arm].get("adequate") is True
+                    for arm in arms
+                ),
+                "adequate full tier has an incomplete or inadequate arm",
+            )
+            adequate_budgets.append(budgets[index])
+        else:
+            rejecting_arm = tier.get("rejecting_arm")
+            _require(rejecting_arm in arms, "rejected full tier lacks a registered rejecting arm")
+            arm_record = per_arm.get(rejecting_arm)
+            _require(isinstance(arm_record, Mapping), "rejected full tier lacks rejecting-arm evidence")
+            _require(
+                arm_record.get("status") == "irreversibly_rejected"
+                and _crossed_registered_bound(arm_record, arm=str(rejecting_arm), full_run=full_run),
+                "rejected full tier did not cross a registered irreversible integer bound",
+            )
+    expected_selected = adequate_budgets[0] if adequate_budgets else None
+    _require(selected == expected_selected, "selected budget is not the first complete adequate tier")
+    _require(selection.get("pass") is (selected is not None), "full selection pass flag mismatch")
+    if selected is not None:
+        _require(budgets[-1] == selected, "full selection continued after the first adequate tier")
+    elif final:
+        _require(budgets == eligible, "selected-null final catalog does not cover every eligible rung")
+    return copy.deepcopy(dict(selection))
+
+
+def build_full_catalog(
+    *,
+    exp: Path,
+    root: Path,
+    plan: Mapping[str, Any],
+    budgets: Sequence[int],
+    protocol_binding: Mapping[str, Any],
+    status: str,
+    starting_budget: int,
+    smoke_selection_sha256: str,
+    selection: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    """Build schema-2 inventory first; logical selection is an optional edge."""
+
+    _require(status in {"in_progress", "rung_rejected", "selected", "setup_inconclusive"}, "invalid full catalog status")
+    require_full_binding(exp, protocol_binding)
+    inventory = inventory_full_root(root, plan=plan, budgets=budgets)
+    plan_path = exp / "analysis" / "full_shard_plan.json"
+    selection_path = exp / "analysis" / "full_budget_selection.json"
+    selection_ref: dict[str, Any] | None = None
+    selected_budget: int | None = None
+    if selection is not None:
+        _require(selection_path.is_file(), "full selection object exists without its canonical file")
+        selection_ref = {
+            "path": "analysis/full_budget_selection.json",
+            **file_integrity(selection_path),
+        }
+        selected_budget = selection.get("selected_thinking_budget")
+        _require(selected_budget is None or isinstance(selected_budget, int), "invalid selected full budget")
+    selected_entries = [
+        entry
+        for entry in inventory["completed_shards"]
+        if selected_budget is not None and int(entry["budget"]) == selected_budget
+    ]
+    selected_tier = None if selected_budget is None else {
+        "thinking_budget": selected_budget,
+        "relative_path": f"think_{selected_budget}",
+        "logical_promotion_only": True,
+        "repository_raw_copy": None,
+    }
+    canonical_root = str(root.resolve(strict=root.exists()))
+    return {
+        "schema_version": FULL_CATALOG_SCHEMA_VERSION,
+        "experiment_id": exp.name,
+        "status": status,
+        "canonical_external_root": canonical_root,
+        "protocol_binding": copy.deepcopy(dict(protocol_binding)),
+        "shard_plan": {
+            "path": "analysis/full_shard_plan.json",
+            **file_integrity(plan_path),
+            "content_sha256": plan_sha256(plan),
+        },
+        "starting_thinking_budget": starting_budget,
+        "passed_smoke_selection": {
+            "path": "analysis/smoke_budget_selection.json",
+            "sha256": smoke_selection_sha256,
+        },
+        "budget_selection": selection_ref,
+        "selected_tier": selected_tier,
+        "arm_order": [str(arm) for arm in plan["arm_order"]],
+        **inventory,
+        "selected_shards": selected_entries,
+    }
 
 
 def aggregate_runner_summaries(summaries: Sequence[Mapping[str, Any]]) -> dict[str, Any]:

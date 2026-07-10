@@ -57,6 +57,7 @@ scientific_smoke:
   external_root: /workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/scientific_smoke_v1
 full_run:
   external_root: /workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/full
+  catalog_schema: 2
   triplets: 40
   base_shards: 20
   base_tasks_per_shard: 6

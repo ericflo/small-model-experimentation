@@ -1,0 +1,142 @@
+{
+  "demonstrations": [
+    {
+      "id": "train-0125",
+      "io": [
+        {
+          "input": [
+            11,
+            4,
+            15,
+            2,
+            15
+          ],
+          "output": [
+            0,
+            0,
+            6,
+            4,
+            13
+          ]
+        },
+        {
+          "input": [
+            4,
+            13,
+            4,
+            3,
+            8
+          ],
+          "output": [
+            10,
+            6,
+            15,
+            5,
+            6
+          ]
+        }
+      ],
+      "program": [
+        "ADD1",
+        "ZIGZAG",
+        "ROTL",
+        "SWAP",
+        "ADD1"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0338",
+      "io": [
+        {
+          "input": [
+            13,
+            3,
+            10,
+            14,
+            2
+          ],
+          "output": [
+            11,
+            9,
+            4,
+            3,
+            6
+          ]
+        },
+        {
+          "input": [
+            11,
+            8,
+            12,
+            0,
+            11
+          ],
+          "output": [
+            0,
+            5,
+            5,
+            7,
+            16
+          ]
+        }
+      ],
+      "program": [
+        "SWAP",
+        "MUL2",
+        "ZIGZAG",
+        "REV"
+      ],
+      "split": "train",
+      "verified": true
+    },
+    {
+      "id": "train-0553",
+      "io": [
+        {
+          "input": [
+            14,
+            10,
+            0,
+            10,
+            12
+          ],
+          "output": [
+            0,
+            14,
+            9,
+            0,
+            16
+          ]
+        },
+        {
+          "input": [
+            9,
+            1,
+            16,
+            0,
+            16
+          ],
+          "output": [
+            13,
+            0,
+            8,
+            13,
+            2
+          ]
+        }
+      ],
+      "program": [
+        "ZIGZAG",
+        "ROTL",
+        "DIFF",
+        "MUL2",
+        "MUL2"
+      ],
+      "split": "train",
+      "verified": true
+    }
+  ],
+  "schema_version": 1
+}

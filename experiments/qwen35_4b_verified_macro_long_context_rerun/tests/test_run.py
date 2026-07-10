@@ -1072,7 +1072,7 @@ class ArtifactTests(unittest.TestCase):
 
     def test_model_free_migration_is_staged_idempotent_and_removes_only_after_verify(self) -> None:
         config = run.load_config()
-        record = {"id": "task::base"}
+        records = [{"id": f"task-{index}::base"} for index in range(12)]
         budget = 32768
         reserve = budget + 2 + 512
         sampling = types.SimpleNamespace(
@@ -1083,18 +1083,19 @@ class ArtifactTests(unittest.TestCase):
             "pass": True,
             "max_model_len": 65536,
             "generation_reserve_tokens": reserve,
-            "n_records": 1,
+            "n_records": 12,
             "min_prompt_tokens": 5,
             "max_prompt_tokens": 5,
             "max_prompt_plus_reserve_tokens": reserve + 5,
             "records": [
                 {
-                    "id": "task::base",
+                    "id": record["id"],
                     "input_record_sha256": run._sha256_value(record),
-                    "rendered_prompt_sha256": "a" * 64,
+                    "rendered_prompt_sha256": f"{index + 1:064x}",
                     "prompt_tokens": 5,
                     "prompt_plus_reserve_tokens": reserve + 5,
                 }
+                for index, record in enumerate(records)
             ],
         }
         spec = {
@@ -1102,7 +1103,7 @@ class ArtifactTests(unittest.TestCase):
             "budget": budget,
             "arm": "base",
             "k": 12,
-            "records": [record],
+            "records": records,
             "sampling": sampling,
         }
         with tempfile.TemporaryDirectory() as directory:
@@ -1115,11 +1116,14 @@ class ArtifactTests(unittest.TestCase):
                 / "base.preflight.json"
             )
             run._atomic_json(local, preflight)
+            empty_probe_dir = root / "runs" / "smoke_budget_probes"
+            empty_probe_dir.mkdir(parents=True)
             external = root / "external"
             with (
                 mock.patch.object(run, "RUNS", root / "runs"),
                 mock.patch.object(run, "ANALYSIS", root / "analysis"),
                 mock.patch.object(run, "_scientific_external_root", return_value=external),
+                mock.patch.object(run, "_full_external_root", return_value=root / "full"),
                 mock.patch.object(
                     run,
                     "_scientific_protocol_binding",
@@ -1140,11 +1144,175 @@ class ArtifactTests(unittest.TestCase):
                 self.assertTrue(
                     (root / "analysis" / "scientific_smoke_artifact_catalog.json").is_file()
                 )
+                # Simulate interruption after one canonical local namespace was
+                # removed; an empty remaining namespace must still be cleanable.
+                run.shutil.rmtree(root / "runs" / "smoke_tiers")
                 second = run.migrate_scientific_artifacts(config, remove_local=True)
                 self.assertEqual(second["status"], "already_installed_and_verified")
                 self.assertTrue(second["local_removed"])
                 self.assertFalse((root / "runs" / "smoke_tiers").exists())
+                self.assertFalse(empty_probe_dir.exists())
                 self.assertTrue(external.is_dir())
+
+    def test_remaining_local_catalog_may_be_an_exact_external_subset(self) -> None:
+        preflight = {
+            "relative_path": "smoke_tiers/think_32768/base.preflight.json",
+            "bytes": 10,
+            "sha256": "a" * 64,
+        }
+        identity = {
+            "id": "matrix/think_32768/base",
+            "relative_prefix": "smoke_tiers/think_32768/base",
+            "role": "complete_matrix_arm",
+            "tier_mode": "complete_k12_matrix",
+            "thinking_budget": 32768,
+            "arm": "base",
+            "k": 12,
+            "n_records": 12,
+        }
+        local = {
+            "protocol_binding": {"binding_sha256": "b" * 64},
+            "entries": [
+                {
+                    **identity,
+                    "status": "preflight_only",
+                    "files": {"preflight": preflight},
+                }
+            ],
+        }
+        external = {
+            "protocol_binding": local["protocol_binding"],
+            "entries": [
+                {
+                    **identity,
+                    "status": "complete",
+                    "files": {
+                        "preflight": preflight,
+                        "rows": {"sha256": "c" * 64},
+                        "metadata": {"sha256": "d" * 64},
+                    },
+                    "receipt": {"sha256": "e" * 64},
+                },
+                {
+                    **identity,
+                    "id": "matrix/think_49152/base",
+                    "relative_prefix": "smoke_tiers/think_49152/base",
+                    "thinking_budget": 49152,
+                    "status": "preflight_only",
+                    "files": {"preflight": {"sha256": "f" * 64}},
+                },
+            ],
+        }
+        run._require_scientific_catalog_subset(local, external)
+        corrupted = copy.deepcopy(local)
+        corrupted["entries"][0]["files"]["preflight"]["sha256"] = "0" * 64
+        with self.assertRaisesRegex(ValueError, "not byte-identical"):
+            run._require_scientific_catalog_subset(corrupted, external)
+
+    def test_stale_catalog_reconciles_only_receipt_checkpoint_advancement(self) -> None:
+        protocol = {"binding_sha256": "a" * 64}
+        identity = {
+            "id": "matrix/think_32768/base",
+            "relative_prefix": "smoke_tiers/think_32768/base",
+            "role": "complete_matrix_arm",
+            "tier_mode": "complete_k12_matrix",
+            "thinking_budget": 32768,
+            "arm": "base",
+            "k": 12,
+            "n_records": 12,
+        }
+        preflight = {"relative_path": "x", "bytes": 1, "sha256": "b" * 64}
+        checkpoint = {
+            "schema_version": 2,
+            "experiment_id": run.scientific_store.EXPERIMENT_ID,
+            "storage": {"default_root": "x"},
+            "checksum_scheme": "fixture",
+            "protocol_binding": protocol,
+            "selected": None,
+            "entries": [
+                {
+                    **identity,
+                    "status": "preflight_only",
+                    "files": {"preflight": preflight},
+                }
+            ],
+            "tree": {"sha256": "c" * 64},
+        }
+        rebuilt = copy.deepcopy(checkpoint)
+        rebuilt["entries"][0] = {
+            **identity,
+            "status": "complete",
+            "files": {
+                "preflight": preflight,
+                "rows": {"sha256": "d" * 64},
+                "metadata": {"sha256": "e" * 64},
+            },
+            "receipt": {"sha256": "f" * 64},
+        }
+        rebuilt["tree"] = {"sha256": "0" * 64}
+        config = run.load_config()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            catalog_path = root / "catalog.json"
+            run._atomic_json(catalog_path, checkpoint)
+            with (
+                mock.patch.object(run, "ANALYSIS", root),
+                mock.patch.object(run, "_scientific_catalog_path", return_value=catalog_path),
+                mock.patch.object(run, "_scientific_external_root", return_value=root / "external"),
+                mock.patch.object(run, "_scientific_protocol_binding", return_value=protocol),
+                mock.patch.object(
+                    run.scientific_store,
+                    "verify_catalog",
+                    side_effect=[
+                        run.scientific_store.ScientificArtifactError("stale"),
+                        rebuilt,
+                    ],
+                ),
+                mock.patch.object(
+                    run.scientific_store, "build_catalog", return_value=rebuilt
+                ) as build,
+                mock.patch.object(run.scientific_store, "write_catalog") as write,
+            ):
+                self.assertEqual(
+                    run._verify_scientific_catalog(config, reconcile=True), rebuilt
+                )
+            build.assert_called_once()
+            write.assert_called_once_with(catalog_path, rebuilt)
+
+            drifted = copy.deepcopy(checkpoint)
+            drifted["protocol_binding"] = {"binding_sha256": "9" * 64}
+            run._atomic_json(catalog_path, drifted)
+            with (
+                mock.patch.object(run, "_scientific_catalog_path", return_value=catalog_path),
+                mock.patch.object(run, "_scientific_protocol_binding", return_value=protocol),
+                mock.patch.object(run.scientific_store, "verify_catalog") as verify,
+                mock.patch.object(run.scientific_store, "write_catalog") as write,
+            ):
+                with self.assertRaisesRegex(ValueError, "cannot be reconciled"):
+                    run._verify_scientific_catalog(config, reconcile=True)
+            verify.assert_not_called()
+            write.assert_not_called()
+
+            run._atomic_json(catalog_path, checkpoint)
+            with (
+                mock.patch.object(run, "_scientific_catalog_path", return_value=catalog_path),
+                mock.patch.object(run, "_scientific_external_root", return_value=root / "external"),
+                mock.patch.object(run, "_scientific_protocol_binding", return_value=protocol),
+                mock.patch.object(
+                    run.scientific_store,
+                    "verify_catalog",
+                    side_effect=run.scientific_store.ScientificArtifactError("stale"),
+                ),
+                mock.patch.object(
+                    run.scientific_store,
+                    "build_catalog",
+                    side_effect=run.scientific_store.ScientificArtifactError("partial bundle"),
+                ),
+                mock.patch.object(run.scientific_store, "write_catalog") as write,
+            ):
+                with self.assertRaisesRegex(ValueError, "partial bundle"):
+                    run._verify_scientific_catalog(config, reconcile=True)
+            write.assert_not_called()
 
     def test_migration_rejects_temporary_guard_without_installing_it(self) -> None:
         config = run.load_config()
@@ -1173,6 +1341,7 @@ class ArtifactTests(unittest.TestCase):
                 mock.patch.object(run, "RUNS", root / "runs"),
                 mock.patch.object(run, "ANALYSIS", root / "analysis"),
                 mock.patch.object(run, "_scientific_external_root", return_value=external),
+                mock.patch.object(run, "_full_external_root", return_value=root / "full"),
                 mock.patch.object(
                     run,
                     "_scientific_protocol_binding",

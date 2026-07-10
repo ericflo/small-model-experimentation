@@ -1,0 +1,202 @@
+{
+  "lower_tiers_excluded_from_scoring": true,
+  "pass": false,
+  "probes_excluded_from_promotion_scoring_and_prefix_pooling": true,
+  "run": "smoke",
+  "schema_version": 1,
+  "scientific_probe_k": 4,
+  "selected_thinking_budget": null,
+  "selection_uses_decoded_or_scored_content": false,
+  "selection_uses_output_content": false,
+  "selection_uses_token_identity_for_periodicity": true,
+  "tiers": [
+    {
+      "adequate": false,
+      "arms": {
+        "base": {
+          "status": "skipped"
+        },
+        "designed_ceiling": {
+          "status": "skipped"
+        }
+      },
+      "budget": 49152,
+      "complete": false,
+      "scientific_probe": {
+        "arm": "base",
+        "artifacts": {
+          "meta": "b2f141e2723eb831b159344c3283a5c3ac249760efd493c1e0fc180e71866077",
+          "preflight": "0827590ca763b395ba6e69314f9a11381f886d25ad6c8586adb535be027c382c",
+          "receipt": "61da6f616365bf080e97f341bd0c2305b889998c4d161c61e63d06e5dfb5923c",
+          "rows": "9765b18d26f1f828ddd14c75319d6c9029930b8edf6cca97b3d7e56c093315f1"
+        },
+        "budget": 49152,
+        "k": 4,
+        "records": 12,
+        "role": "termination_only_budget_probe",
+        "status": "complete",
+        "termination": {
+          "adequate": false,
+          "answer_limit_contact_rate": 0.125,
+          "answer_limit_contacts": 6,
+          "answer_max_tokens": 512,
+          "answer_restarts_after_natural_close": 0,
+          "forced_interventions": 48,
+          "period_tokens": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            10,
+            10,
+            14,
+            20,
+            31,
+            84,
+            143,
+            234,
+            243,
+            299,
+            303,
+            307,
+            455,
+            498,
+            505,
+            510,
+            548,
+            564,
+            624,
+            663,
+            693,
+            710,
+            771,
+            797,
+            992,
+            1066,
+            1089,
+            1195,
+            1264,
+            1291,
+            1437,
+            1663,
+            1909
+          ],
+          "periodic_loop_contacts": 38,
+          "periodic_loop_rate": 0.7916666666666666,
+          "reasoning_boundary_contacts": 48,
+          "samples": 48,
+          "schema_version": 1,
+          "selection_uses_decoded_or_scored_content": false,
+          "selection_uses_token_identity_for_periodicity": true,
+          "stage1_length_finishes": 48,
+          "thinking_budget": 49152,
+          "thresholds": {
+            "answer_limit_contact_rate_below": 0.05,
+            "periodic_loop_rate_at_most": 0.25,
+            "unresolved_cap_contact_rate_below": 0.05
+          },
+          "unresolved_cap_contact_rate": 0.20833333333333334,
+          "unresolved_cap_contacts": 10
+        }
+      },
+      "status": "probe_only_rejected",
+      "tier_mode": "termination_probe_only"
+    },
+    {
+      "adequate": false,
+      "arms": {
+        "base": {
+          "status": "skipped"
+        },
+        "designed_ceiling": {
+          "status": "skipped"
+        }
+      },
+      "budget": 61440,
+      "complete": false,
+      "scientific_probe": {
+        "arm": "base",
+        "artifacts": {
+          "meta": "23b381cf8c0af2e4d622acfdd8bed67d213e10cc601399313a7c2b5967b6af2e",
+          "preflight": "b4135ff9181e9247df8445484c48cf1be81d9529adf8bc4ca62432de5797cede",
+          "receipt": "8f00535a773e347ec4f90a48eb6b00960935d7010c3500af7ccdf57fedd6f2e1",
+          "rows": "f51c3d747bf48272b0302287e0236dfdbc816b2cd44b202a12ad0b9aa10247b0"
+        },
+        "budget": 61440,
+        "k": 4,
+        "records": 12,
+        "role": "termination_only_budget_probe",
+        "status": "complete",
+        "termination": {
+          "adequate": false,
+          "answer_limit_contact_rate": 0.08333333333333333,
+          "answer_limit_contacts": 4,
+          "answer_max_tokens": 512,
+          "answer_restarts_after_natural_close": 0,
+          "forced_interventions": 48,
+          "period_tokens": [
+            3,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            31,
+            32,
+            35,
+            37,
+            65,
+            74,
+            97,
+            100,
+            118,
+            120,
+            163,
+            173,
+            190,
+            202,
+            265,
+            266,
+            275,
+            341,
+            347,
+            374,
+            398,
+            409,
+            457,
+            510,
+            519,
+            530,
+            700,
+            824,
+            869,
+            1269,
+            1881
+          ],
+          "periodic_loop_contacts": 40,
+          "periodic_loop_rate": 0.8333333333333334,
+          "reasoning_boundary_contacts": 48,
+          "samples": 48,
+          "schema_version": 1,
+          "selection_uses_decoded_or_scored_content": false,
+          "selection_uses_token_identity_for_periodicity": true,
+          "stage1_length_finishes": 48,
+          "thinking_budget": 61440,
+          "thresholds": {
+            "answer_limit_contact_rate_below": 0.05,
+            "periodic_loop_rate_at_most": 0.25,
+            "unresolved_cap_contact_rate_below": 0.05
+          },
+          "unresolved_cap_contact_rate": 0.16666666666666666,
+          "unresolved_cap_contacts": 8
+        }
+      },
+      "status": "probe_only_rejected",
+      "tier_mode": "termination_probe_only"
+    }
+  ]
+}

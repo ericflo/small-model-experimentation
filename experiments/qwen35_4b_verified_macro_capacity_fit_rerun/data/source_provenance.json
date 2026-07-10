@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_capacity_fit_rerun",
+  "immediate_parent": {
+    "experiment_id": "qwen35_4b_verified_macro_long_context_rerun",
+    "commit": "d22d67636f1694d49100176aaf10c4b7e83beb51"
+  },
+  "byte_identical_inherited_files": {
+    "data/demonstrations.json": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf",
+    "data/libraries.json": "a2ae3663753a3a0d0c9614a5d7c1d250506c74fd7879e11e99b66f5c1e43f865",
+    "data/tasks.json": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073",
+    "src/macro_domain.py": "3a59b931faf42a6731ad73e31f9e8cdedf44c29423db4d8645b4e50a66ab21a7",
+    "src/model_harness.py": "a43fb0e76f65819e5d1048f965e74c06409da870e77c7ce46f6df247257fa552",
+    "src/vllm_runner.py": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782"
+  },
+  "prompt_manifest": {
+    "path": "data/prompt_manifest.json",
+    "sha256": "f453b1ade590b3374be868dff2e8e7333e2d6e6044f6db9bf26dd033de98277f",
+    "source": "content-blind ordered prompt identities from predecessor base@32768 and designed_ceiling@16384 preflights",
+    "contains_model_outputs": false
+  },
+  "model_output_artifacts_imported": [],
+  "predecessor_diagnostics": {
+    "budgets": [16384, 32768, 49152],
+    "max_num_seqs": 64,
+    "decision_eligible": false,
+    "may_be_pooled_promoted_or_scored": false,
+    "required_for_this_experiment": false
+  }
+}

@@ -177,6 +177,99 @@ canonical local tier/probe/promotion directories. Model-free tests cover idempot
 removal, guard rejection, protocol mutation, analyzer verification-before-parse, logical promotion,
 and fresh-clone preparation. No migration or inference was performed as part of this implementation.
 
-Append the deterministic calibration rungs, heldout interface attempt, smoke matrix, escalation,
-and full matrix here with their exact config, artifact paths, cap/truncation rates, selected rung,
-wall time, and branch decision before interpreting task metrics.
+## Fail-early full-run audit hardening
+
+Before any train-only Qwen proposal, full prompt, or full artifact existed, froze and implemented
+`reports/preregistration_amendment_11.md`. Scientific migration, smoke, and full now share one
+persistent nonblocking sibling `.full.lock` before frozen-data verification, smoke replay,
+proposal work, model construction, or artifact-root/catalog mutation. Its model-free preflight rejects local full JSONL, symlinks, unknown
+tree entries, malformed finals, partial Qwen ensembles, and stale exact bindings. The only valid
+full arm boundaries are the nine registered non-Qwen arms or all fifteen arms after the exactly
+eight-entry Qwen-ranked library and five matched Qwen controls exist.
+
+Full resume is now two-pass: it validates every existing final in the active rung, including
+downstream arms, before generating any missing shard. Every cache hit and generation is checked
+against the current inference-critical protocol identity; Git commit/dirty remain audit provenance
+but package/lock, GPU/CUDA/Python/vLLM environment, model, runner, adapter, sampling, engine,
+termination-token, and RNG fields remain strict. Operational failures propagate without silently
+escalating the reasoning budget.
+
+The schema-2 full catalog is inventory-first and exists before selection. It checkpoints startup
+reconciliation, each committed rename, selection updates, rejected rungs, and final selected or
+selected-null setup-inconclusive states. It binds exact bytes for config, complete hidden/probe
+tasks, post-proposal libraries, demonstrations, manifest/provenance, passed interface and smoke
+evidence, and all construction/scoring sources. Offline analysis verifies this graph and the
+registered contiguous-prefix selection proof before reading raw rows, then recomputes every
+selected arm's termination evidence before task scoring. Added adversarial model-free coverage for
+hidden-label mutation, selection-order/bound failures, duplicate invocation, stale/unknown/symlink
+state, two-pass zero-generation failure, operational-error non-escalation, and exact 9/15-arm
+geometry. No inference or scientific artifact was created or modified during this implementation.
+
+The final orchestration audit also made local cleanup subset-safe and catalog recovery monotonic.
+An interrupted cleanup may resume when every remaining local bundle is byte-identical to a subset
+of the external inventory, including a preflight that has since completed externally. Under the
+shared lock, a stale catalog may reconcile only an existing preflight-only entry advancing to an
+exact receipt-valid completion with unchanged protocol/source and preflight bytes. New bundles,
+modified files, partial rows/metadata, source drift, or selection-semantic drift still fail closed.
+
+## Scientific cache migration and amendment replay
+
+After the old process exited, removed one byte-identical notebook checkpoint and migrated the
+complete base@16k/base@32k bundles plus the genuine designed@16k preflight-only state through the
+model-free two-pass path. The canonical external tree initially contained 9 files and 92,301,251
+bytes with tree SHA-256 `fdba92ffc046c7710e72bb6a772f253c7c5a059027a4110f49018e00a189b38d`.
+Both row hashes matched their source audits (`f4d243db...` at 16k and `6f3c6036...` at 32k), both
+receipts reverified, and the second pass removed the entire local `runs/smoke_tiers/` namespace.
+
+The amendment-7/9 replay then rejected complete base@32,768 from content-blind finish/count
+metadata plus the preregistered token-ID periodicity test. All
+144 samples used the full reasoning allowance and required forced intervention; there were no
+earlier-close answer restarts. Eighty-one tails were exact periodic loops, 63 contacts remained
+unresolved (43.75%), and 37 fresh answers hit the 512-token limit (25.69%). The arm sampled
+4,739,527 tokens in 5,971.182 seconds (793.73 tokens/s). Base alone irreversibly rejected the rung,
+so designed@32k was never generated or inspected. No decoded output, parser result, task score,
+hidden grade, or oracle field informed the decision.
+
+The frozen amendment-6 branch therefore started the all-12-record, non-scored K=4 base probe at
+think@49,152 through vLLM. Probe rows are receipt-bound outside the matrix namespace and are
+ineligible for selection, scoring, promotion, or prefix pooling. Its termination result remains in
+progress; a probe pass would authorize a fresh K=12 base/designed matrix at 49,152, while a probe
+failure would advance only the same termination-only probe to 61,440.
+
+## Pre-result capacity-fit scheduler branch
+
+While the max-seqs-64 K=4 base probe at think@49,152 was still inside vLLM and before its receipt or
+termination result existed, froze `reports/preregistration_amendment_12.md`. Engine-start evidence
+had already measured 995,328 KV-cache tokens, and the installed vLLM scheduler source confirms that
+decode-time cache exhaustion preempts a request by freeing its blocks and resetting its computed
+prefix to zero when prefix caching is disabled. The registered long-rung sequence envelopes admit
+only 19 concurrent sequences at 49k and 15 at 61k; max-seqs 64 therefore permits avoidable full
+recomputation.
+
+Armed a receipt watcher that stops the current process group only after the 49k probe commits its
+last-written receipt. The completed max-seqs-64 probe will remain verbatim but is now irrevocably a
+non-scored, non-selectable `scheduler_overcommitted` diagnostic. It cannot authorize a matrix or a
+61k call. Fresh capacity-fit selection moves to the independent
+`qwen35_4b_verified_macro_capacity_fit_rerun`, with max-seqs 19 at 49k and 15 at 61k, a new external
+namespace, and fresh K=4 rows before any same-protocol K=12 base/designed matrix. No active probe
+token, decoded output, parser result, or score informed this branch.
+
+## Scheduler-overcommitted 49k diagnostic completion
+
+The receipt watcher stopped the old process group immediately after the max-seqs-64 K=4 probe at
+think@49,152 committed its last-written receipt, before it could validate/advance into another model
+call. Model-free catalog reconciliation verified the complete 13-file external tree at 123,389,281
+bytes and SHA-256 `add7cc9ef14f1a47b9cd23fd645cfbf65cbe1347c3e5dd2130d82c9a70d79612`.
+
+Content-blind replay found 48/48 stage-1 length finishes, forced interventions, and reasoning-boundary
+contacts; 34 were exact periodic loops, 14 remained unresolved, and 13 stage-2 answers reached 512
+tokens. The call sampled 2,366,620 tokens in 4,035.356 seconds (586.47 tokens/s), continuing the
+throughput decline from 1,118 tok/s at 16k and 794 tok/s at 32k. It failed all three termination
+gates, but its eligibility had already been revoked before the receipt: with block size 528, 48
+admitted worst-case contexts require 2,433,024 cache tokens against the measured 995,328-token cache,
+and vLLM recomputes evicted prefixes when prefix caching is off.
+
+No decoded output, parser status, visible/hidden score, or candidate correctness was inspected.
+The reconciled receipt remains external and the compact audit is
+`analysis/scientific_smoke_49k_scheduler_overcommit_audit.json`. After verification, the stopped old
+engine was terminated and released the GPU; no 61k/max-seqs-64 call or K=12 matrix began.

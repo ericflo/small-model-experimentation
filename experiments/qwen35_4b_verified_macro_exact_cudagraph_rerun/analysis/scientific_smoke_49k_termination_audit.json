@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_exact_cudagraph_rerun",
+  "audit_scope": "content-blind termination, live-capacity metadata, and resolved CUDA-graph geometry only",
+  "decoded_or_scored_content_inspected": false,
+  "artifact_root": "/workspace/large_artifacts/qwen35_4b_verified_macro_exact_cudagraph_rerun/scientific_smoke_v1",
+  "bundle": {
+    "relative_prefix": "smoke_budget_probes/think_49152/base",
+    "role": "termination_probe",
+    "thinking_budget": 49152,
+    "k": 4,
+    "n_records": 12,
+    "n_completions": 48,
+    "receipt": {
+      "bytes": 17992,
+      "sha256": "61da6f616365bf080e97f341bd0c2305b889998c4d161c61e63d06e5dfb5923c"
+    },
+    "files": {
+      "preflight": {
+        "bytes": 7641,
+        "sha256": "0827590ca763b395ba6e69314f9a11381f886d25ad6c8586adb535be027c382c"
+      },
+      "rows": {
+        "bytes": 30617193,
+        "sha256": "9765b18d26f1f828ddd14c75319d6c9029930b8edf6cca97b3d7e56c093315f1"
+      },
+      "metadata": {
+        "bytes": 10336,
+        "sha256": "b2f141e2723eb831b159344c3283a5c3ac249760efd493c1e0fc180e71866077"
+      }
+    },
+    "receipt_verification": "passed",
+    "catalog_verification": {
+      "passed": true,
+      "state_at_audit": [
+        "probe/think_49152/base:complete"
+      ],
+      "selected": null,
+      "external_tree_at_audit": {
+        "files": 4,
+        "bytes": 30653162,
+        "sha256": "654d44119fc46fe83428c154680ee502073c00022ccb9cdb0922c1896ca20685"
+      }
+    }
+  },
+  "capacity_fit": {
+    "pass": true,
+    "max_num_seqs": 19,
+    "live_kv_cache_tokens": 996864,
+    "block_size_tokens": 528,
+    "rounded_tokens_per_sequence": 50688,
+    "required_cache_tokens": 963072,
+    "cache_margin_tokens": 33792
+  },
+  "cudagraph_resolution": {
+    "pass": true,
+    "decode_mode": "FULL",
+    "has_full_cudagraphs": true,
+    "requested_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      19
+    ],
+    "resolved_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      19
+    ],
+    "active_width_covered": true
+  },
+  "termination": {
+    "adequate": false,
+    "samples": 48,
+    "stage1_length_finishes": 48,
+    "forced_interventions": 48,
+    "reasoning_boundary_contacts": 48,
+    "answer_restarts_after_natural_close": 0,
+    "unresolved_cap_contacts": 10,
+    "unresolved_cap_contact_rate": 0.20833333333333334,
+    "periodic_loop_contacts": 38,
+    "periodic_loop_rate": 0.7916666666666666,
+    "period_tokens": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      10,
+      10,
+      14,
+      20,
+      31,
+      84,
+      143,
+      234,
+      243,
+      299,
+      303,
+      307,
+      455,
+      498,
+      505,
+      510,
+      548,
+      564,
+      624,
+      663,
+      693,
+      710,
+      771,
+      797,
+      992,
+      1066,
+      1089,
+      1195,
+      1264,
+      1291,
+      1437,
+      1663,
+      1909
+    ],
+    "answer_limit_contacts": 6,
+    "answer_limit_contact_rate": 0.125,
+    "thresholds": {
+      "unresolved_cap_contact_rate_below": 0.05,
+      "periodic_loop_rate_at_most": 0.25,
+      "answer_limit_contact_rate_below": 0.05
+    },
+    "selection_uses_decoded_or_scored_content": false,
+    "selection_uses_token_identity_for_periodicity": true
+  },
+  "generation": {
+    "sampled_tokens": 2363163,
+    "generation_seconds": 4809.081014,
+    "sampled_tokens_per_second": 491.395964,
+    "late_jit_warnings_included_in_generation_seconds": true
+  },
+  "throughput_comparison": {
+    "implicit_capture_capacity_fit_tokens_per_second": 471.753824,
+    "exact_capture_tokens_per_second": 491.395964,
+    "exact_capture_fraction_faster_than_implicit": 0.041636,
+    "overcommitted_max_num_seqs_64_tokens_per_second": 586.471154,
+    "exact_capture_fraction_slower_than_overcommitted": 0.162114,
+    "interpretation": "Exact width-19 graph coverage recovered 4.16% sampled-token throughput versus the otherwise closest implicit-capture capacity-fit probe, but remained 16.21% slower than the invalidly overcommitted max-seqs-64 diagnostic. These cross-protocol timings are descriptive because scheduling can change sampled trajectories."
+  },
+  "decision": {
+    "rung": "rejected",
+    "reason": "The 49,152-token K=4 probe failed all three registered termination thresholds.",
+    "next_action": "The separately fresh 61,440-token probe was completed and also rejected; see scientific_smoke_61k_termination_audit.json. Stop this ladder.",
+    "macro_claim": "none",
+    "semantic_analysis_authorized": false
+  }
+}

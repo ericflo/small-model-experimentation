@@ -1964,22 +1964,11 @@ def _write_per_task_csv(
 def _expected_full_arm_order(
     inference: Mapping[str, Any], libraries: Mapping[str, Any]
 ) -> list[str]:
-    configured = inference.get("arms")
-    _require(isinstance(configured, list), "config inference.arms must be a list")
-    order: list[str] = []
-    for raw_arm in configured:
-        arm = str(raw_arm)
-        if arm in libraries and arm not in order:
-            order.append(arm)
-        if arm == "qwen_ranked":
-            order.extend(
-                name
-                for name in sorted(libraries)
-                if name.startswith("qwen_random_") and name not in order
-            )
-    order.extend(name for name in sorted(libraries) if name not in order)
-    _require(bool(order) and order[0] == "base", "full arm order must begin with base")
-    return order
+    del inference
+    try:
+        return full_store.validate_full_arm_set(libraries)
+    except full_store.FullArtifactError as exc:
+        raise ValueError(str(exc)) from exc
 
 
 def _scientific_external_root(exp: Path, config: Mapping[str, Any]) -> Path:
@@ -2016,6 +2005,12 @@ def _verify_smoke_artifact_catalog(
     raw_arms = inference.get("smoke_arms")
     _require(isinstance(raw_arms, list), "config smoke_arms must be a list")
     arm_order = [str(arm) for arm in raw_arms]
+    scientific_store.validate_selection(
+        selection_path,
+        catalog,
+        budget_ladder=inference.get("thinking_budget_ladder", []),
+        arms=arm_order,
+    )
     budget, prefixes = scientific_store.selected_bundle_prefixes(catalog, arm_order)
     return {
         "root": root,
@@ -2037,7 +2032,7 @@ def _verify_full_artifact_catalog(
     tasks: Mapping[str, Mapping[str, Any]],
     libraries: Mapping[str, Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Verify the catalog, plan, selection, and every referenced receipt."""
+    """Verify Amendment 11 catalog/binding/selection before the first raw read."""
 
     inference = config.get("inference")
     full_run = config.get("full_run")
@@ -2046,64 +2041,30 @@ def _verify_full_artifact_catalog(
     raw_root = full_run.get("external_root")
     _require(isinstance(raw_root, str) and raw_root.startswith("/"), "full external root invalid")
     root = Path(raw_root)
-    _require(root.is_dir(), f"canonical full external root is missing: {root}")
-    resolved_root = root.resolve(strict=True)
-
-    # Amendment 8 forbids a repository-local promoted copy.  Diagnostic smoke
-    # rows remain local, but full raw rows must exist only under ``root``.
-    legacy_run_dir = exp / "runs" / "full"
-    if legacy_run_dir.exists():
-        _require(
-            not any(legacy_run_dir.rglob("*.jsonl")),
-            f"repository-local full raw rows violate logical promotion: {legacy_run_dir}",
-        )
+    _require(root.is_dir() and not root.is_symlink(), f"canonical full root is unsafe or missing: {root}")
+    full_store.reject_repository_local_full_raw(exp / "runs" / "full")
 
     catalog_path = exp / "analysis" / "full_artifact_catalog.json"
     catalog = _read_json(catalog_path)
     _require(isinstance(catalog, dict), "full artifact catalog must be an object")
-    _require(
-        catalog.get("schema_version") == full_store.FULL_ARTIFACT_SCHEMA_VERSION,
-        "full artifact catalog schema mismatch",
-    )
+    _require(catalog.get("schema_version") == full_store.FULL_CATALOG_SCHEMA_VERSION, "full artifact catalog schema mismatch")
     _require(catalog.get("experiment_id") == exp.name, "full artifact catalog experiment mismatch")
+    _require(catalog.get("status") == "selected", "full catalog is not logically selected for scoring")
+    binding = full_store.build_full_binding(exp)
+    _require(catalog.get("protocol_binding") == binding, "full protocol/evaluation byte binding drift")
+    _require(catalog.get("canonical_external_root") == str(root.resolve(strict=True)), "full catalog root mismatch")
+    interface_gate = _read_json(exp / "analysis" / "interface_gate.json")
+    smoke_verdict = _read_json(exp / "analysis" / "smoke_verdict.json")
     _require(
-        catalog.get("canonical_external_root") == str(resolved_root),
-        "full artifact catalog root mismatch",
+        isinstance(interface_gate, Mapping) and interface_gate.get("pass") is True,
+        "full catalog binds an interface gate that did not pass",
+    )
+    smoke_gate = smoke_verdict.get("smoke_gate") if isinstance(smoke_verdict, Mapping) else None
+    _require(
+        isinstance(smoke_gate, Mapping) and smoke_gate.get("pass") is True,
+        "full catalog binds a smoke verdict that did not pass",
     )
 
-    plan_ref = catalog.get("shard_plan")
-    selection_ref = catalog.get("budget_selection")
-    _require(isinstance(plan_ref, Mapping), "full artifact catalog lacks shard plan reference")
-    _require(isinstance(selection_ref, Mapping), "full artifact catalog lacks selection reference")
-    _require(plan_ref.get("path") == "analysis/full_shard_plan.json", "catalog shard plan path drifted")
-    _require(
-        selection_ref.get("path") == "analysis/full_budget_selection.json",
-        "catalog budget selection path drifted",
-    )
-    plan_path = exp / str(plan_ref["path"])
-    selection_path = exp / str(selection_ref["path"])
-    _require(
-        plan_ref.get("sha256") == full_store.file_integrity(plan_path)["sha256"],
-        "catalog shard plan file hash mismatch",
-    )
-    _require(
-        selection_ref.get("sha256") == full_store.file_integrity(selection_path)["sha256"],
-        "catalog budget selection file hash mismatch",
-    )
-    plan = _read_json(plan_path)
-    selection = _read_json(selection_path)
-    _require(isinstance(plan, dict), "full shard plan must be an object")
-    _require(isinstance(selection, dict), "full budget selection must be an object")
-    plan_hash = full_store.plan_sha256(plan)
-    _require(plan_ref.get("content_sha256") == plan_hash, "catalog shard plan content hash mismatch")
-    _require(selection.get("pass") is True, "full budget selection did not pass")
-    _require(selection.get("shard_plan_sha256") == plan_hash, "selection shard plan hash mismatch")
-    _require(
-        selection.get("canonical_external_root") == str(resolved_root),
-        "selection external root mismatch",
-    )
-    selected_budget = selection.get("selected_thinking_budget")
-    _require(isinstance(selected_budget, int), "full selection lacks selected thinking budget")
     arm_order = _expected_full_arm_order(inference, libraries)
     full_tasks = [
         {"id": task["id"], "split": task["split"]}
@@ -2116,80 +2077,108 @@ def _verify_full_artifact_catalog(
         base_k=int(inference["base_max_k"]),
         macro_k=int(inference["macro_k"]),
     )
-    _require(plan == expected_plan, "full shard plan differs from frozen tasks/arms/K")
-    _require(catalog.get("arm_order") == arm_order, "full artifact catalog arm order mismatch")
-    selected_tier = catalog.get("selected_tier")
-    _require(isinstance(selected_tier, Mapping), "full artifact catalog lacks selected tier")
-    _require(selected_tier.get("thinking_budget") == selected_budget, "catalog selected budget mismatch")
+    plan_path = exp / "analysis" / "full_shard_plan.json"
+    plan = _read_json(plan_path)
+    _require(isinstance(plan, dict) and plan == expected_plan, "full shard plan differs from frozen tasks/arms/K")
+    plan_ref = catalog.get("shard_plan")
+    _require(isinstance(plan_ref, Mapping), "full catalog lacks shard plan reference")
+    _require(plan_ref.get("path") == "analysis/full_shard_plan.json", "full plan reference path drifted")
+    integrity = full_store.file_integrity(plan_path)
+    _require(plan_ref.get("sha256") == integrity["sha256"] and plan_ref.get("bytes") == integrity["bytes"], "full plan reference integrity drifted")
+    _require(plan_ref.get("content_sha256") == full_store.plan_sha256(plan), "full plan content hash drifted")
+    _require(catalog.get("arm_order") == arm_order, "full catalog arm order mismatch")
+
+    smoke_path = exp / "analysis" / "smoke_budget_selection.json"
+    smoke_hash = full_store.file_integrity(smoke_path)["sha256"]
+    smoke_selection = _read_json(smoke_path)
+    _require(isinstance(smoke_selection, Mapping) and smoke_selection.get("pass") is True, "full analysis requires passed smoke selection")
+    starting_budget = smoke_selection.get("selected_thinking_budget")
+    _require(isinstance(starting_budget, int), "passed smoke selection lacks a budget")
+    _require(catalog.get("starting_thinking_budget") == starting_budget, "full catalog starting budget mismatch")
     _require(
-        selected_tier.get("relative_path") == f"think_{selected_budget}",
-        "catalog selected tier pointer mismatch",
+        catalog.get("passed_smoke_selection")
+        == {"path": "analysis/smoke_budget_selection.json", "sha256": smoke_hash},
+        "full catalog passed-smoke binding drift",
     )
-    _require(selected_tier.get("logical_promotion_only") is True, "full tier was not logically promoted")
-    _require(selected_tier.get("repository_raw_copy") is None, "catalog records a forbidden raw copy")
 
-    expected_completed: set[tuple[int, str, int]] = set()
-    tiers = selection.get("tiers")
-    _require(isinstance(tiers, list), "full selection lacks tiers")
-    for tier in tiers:
-        _require(isinstance(tier, Mapping), "full selection tier must be an object")
-        budget = _integer(tier.get("budget"), where="full tier budget", minimum=1)
-        tier_arms = tier.get("arms")
-        _require(isinstance(tier_arms, Mapping), "full selection tier lacks arms")
-        for arm, arm_record in tier_arms.items():
-            _require(str(arm) in arm_order, f"full selection contains unknown arm {arm}")
-            _require(isinstance(arm_record, Mapping), f"full selection arm {arm} invalid")
-            shard_records = arm_record.get("shards", [])
-            _require(isinstance(shard_records, list), f"full selection arm {arm} shards invalid")
-            for shard_record in shard_records:
-                _require(isinstance(shard_record, Mapping), "full selection shard invalid")
-                if shard_record.get("status") == "complete":
-                    expected_completed.add((budget, str(arm), int(shard_record["shard_index"])))
+    selection_path = exp / "analysis" / "full_budget_selection.json"
+    selection = _read_json(selection_path)
+    _require(isinstance(selection, dict), "full budget selection must be an object")
+    selection_integrity = full_store.file_integrity(selection_path)
+    _require(
+        catalog.get("budget_selection")
+        == {"path": "analysis/full_budget_selection.json", **selection_integrity},
+        "full catalog selection reference drift",
+    )
+    full_store.validate_budget_selection(
+        selection,
+        plan=plan,
+        ladder=[int(value) for value in inference["thinking_budget_ladder"]],
+        full_run=full_run,
+        expected_starting_budget=starting_budget,
+        expected_smoke_selection_sha256=smoke_hash,
+        final=True,
+    )
+    _require(selection.get("pass") is True, "full budget selection did not pass")
+    _require(selection.get("shard_plan_sha256") == full_store.plan_sha256(plan), "full selection plan hash mismatch")
+    _require(selection.get("canonical_external_root") == str(root.resolve(strict=True)), "full selection root mismatch")
+    selected_budget = selection.get("selected_thinking_budget")
+    _require(isinstance(selected_budget, int), "full selection lacks selected budget")
+    selected_tier = catalog.get("selected_tier")
+    _require(
+        selected_tier
+        == {
+            "thinking_budget": selected_budget,
+            "relative_path": f"think_{selected_budget}",
+            "logical_promotion_only": True,
+            "repository_raw_copy": None,
+        },
+        "full catalog selected-tier pointer drift",
+    )
 
-    raw_completed = catalog.get("completed_shards")
-    raw_selected = catalog.get("selected_shards")
-    _require(isinstance(raw_completed, list), "full catalog completed_shards must be a list")
-    _require(isinstance(raw_selected, list), "full catalog selected_shards must be a list")
-    catalog_keys: set[tuple[int, str, int]] = set()
-    rebuilt_entries: list[dict[str, Any]] = []
-    identity_by_arm_tier: dict[tuple[int, str], Mapping[str, Any]] = {}
-    for entry in raw_completed:
-        _require(isinstance(entry, Mapping), "full catalog shard entry must be an object")
-        budget = _integer(entry.get("budget"), where="catalog shard budget", minimum=1)
-        arm = _string(entry.get("arm"), where="catalog shard arm")
-        shard_index = _integer(entry.get("shard_index"), where="catalog shard index")
-        key = (budget, arm, shard_index)
-        _require(key not in catalog_keys, f"duplicate full catalog shard {key}")
-        catalog_keys.add(key)
-        _require(key in expected_completed, f"catalog contains unregistered completed shard {key}")
-        spec = full_store.shard_spec(plan, arm, shard_index)
-        canonical_dir = full_store.shard_directory(
-            root, budget=budget, arm=arm, shard_index=shard_index
+    inventory = full_store.inventory_full_root(
+        root,
+        plan=plan,
+        budgets=[int(value) for value in inference["thinking_budget_ladder"]],
+    )
+    _require(catalog.get("completed_shards") == inventory["completed_shards"], "full catalog completed inventory drift")
+    _require(catalog.get("temporary_shards") == inventory["temporary_shards"], "full catalog temporary inventory drift")
+    expected_selected = [
+        entry for entry in inventory["completed_shards"] if int(entry["budget"]) == selected_budget
+    ]
+    expected_keys = {
+        (arm, index)
+        for arm in arm_order
+        for index in range(int(plan["arms"][arm]["shard_count"]))
+    }
+    actual_keys = {(str(entry["arm"]), int(entry["shard_index"])) for entry in expected_selected}
+    _require(actual_keys == expected_keys, "selected full tier is incomplete")
+    _require(catalog.get("selected_shards") == expected_selected, "full catalog selected inventory drift")
+
+    common_protocol: dict[str, Any] | None = None
+    expected_engine = json.loads(
+        json.dumps(
+            dataclasses.asdict(
+                harness.EngineConfig(
+                    max_model_len=int(inference["max_model_len"]),
+                    max_num_seqs=int(inference["max_num_seqs"]),
+                    max_num_batched_tokens=int(inference["max_num_batched_tokens"]),
+                )
+            ),
+            sort_keys=True,
+            default=str,
         )
-        relative_path = entry.get("relative_path")
-        _require(isinstance(relative_path, str), f"catalog shard {key} lacks relative path")
-        supplied_dir = root / relative_path
-        _require(
-            supplied_dir.resolve(strict=True) == canonical_dir.resolve(strict=True),
-            f"catalog shard {key} path is not canonical",
-        )
-        identity_key = (budget, arm)
-        receipt = full_store.validate_shard_directory(
-            supplied_dir,
-            root=root,
-            shard_plan_sha256=plan_hash,
-            budget=budget,
-            arm=arm,
-            shard_index=shard_index,
-            task_ids=spec["task_ids"],
-            k=int(spec["k"]),
-            expected_identity=identity_by_arm_tier.get(identity_key),
-        )
-        identity = receipt["identity"]
+    )
+    expected_runner_hash = hashlib.sha256((exp / "src" / "vllm_runner.py").read_bytes()).hexdigest()
+    for entry in expected_selected:
+        arm = str(entry["arm"])
+        receipt = full_store.read_json(root / str(entry["relative_path"]) / full_store.RECEIPT_FILE)
+        _require(isinstance(receipt, Mapping), "selected full receipt must be an object")
+        identity = full_store.receipt_protocol_identity(receipt)
         expected_sampling_object = harness.SamplingConfig(
             thinking="budget",
-            thinking_budget=budget,
-            n=int(spec["k"]),
+            thinking_budget=selected_budget,
+            n=int(plan["arms"][arm]["k"]),
             max_tokens=int(inference["answer_max_tokens"]),
             answer_max_tokens=int(inference["answer_max_tokens"]),
             temperature=float(inference["temperature"]),
@@ -2197,66 +2186,26 @@ def _verify_full_artifact_catalog(
             top_k=int(inference["top_k"]),
             run_seed=int(config["seeds"]["vllm_solver"]),
         )
-        expected_sampling = json.loads(
-            json.dumps(dataclasses.asdict(expected_sampling_object), sort_keys=True)
-        )
-        expected_engine = json.loads(
-            json.dumps(
-                dataclasses.asdict(
-                    harness.EngineConfig(
-                        max_model_len=int(inference["max_model_len"]),
-                        max_num_seqs=int(inference["max_num_seqs"]),
-                        max_num_batched_tokens=int(inference["max_num_batched_tokens"]),
-                    )
-                ),
-                sort_keys=True,
-                default=str,
-            )
-        )
-        _require(identity.get("model") == harness.REQUIRED_MODEL_ID, f"catalog shard {key} model mismatch")
-        _require(identity.get("model_revision") == harness.MODEL_REVISION, f"catalog shard {key} revision mismatch")
-        _require(
-            identity.get("schema_version") == local_vllm.RUNNER_SCHEMA_VERSION,
-            f"catalog shard {key} runner schema mismatch",
-        )
-        _require(
-            identity.get("runner_sha256")
-            == hashlib.sha256((exp / "src" / "vllm_runner.py").read_bytes()).hexdigest(),
-            f"catalog shard {key} runner hash mismatch",
-        )
-        _require(identity.get("adapter") is None, f"catalog shard {key} unexpectedly used an adapter")
-        _require(identity.get("sampling") == expected_sampling, f"catalog shard {key} sampling mismatch")
-        _require(
-            identity.get("resolved_sampling") == expected_sampling_object.resolved_sampling(),
-            f"catalog shard {key} resolved sampling mismatch",
-        )
-        _require(identity.get("engine") == expected_engine, f"catalog shard {key} engine mismatch")
-        identity_by_arm_tier.setdefault(identity_key, receipt["identity"])
-        rebuilt = full_store.catalog_shard_entry(root, supplied_dir, receipt)
-        _require(dict(entry) == rebuilt, f"catalog shard integrity entry drifted: {key}")
-        rebuilt_entries.append(rebuilt)
-    _require(catalog_keys == expected_completed, "catalog omits a completed full receipt")
+        expected_sampling = json.loads(json.dumps(dataclasses.asdict(expected_sampling_object), sort_keys=True))
+        _require(identity.get("model") == harness.REQUIRED_MODEL_ID, "selected full receipt model mismatch")
+        _require(identity.get("model_revision") == harness.MODEL_REVISION, "selected full receipt revision mismatch")
+        _require(identity.get("schema_version") == local_vllm.RUNNER_SCHEMA_VERSION, "selected full receipt runner schema mismatch")
+        _require(identity.get("runner_sha256") == expected_runner_hash, "selected full receipt runner hash mismatch")
+        _require(identity.get("adapter") is None, "selected full receipt unexpectedly used an adapter")
+        _require(identity.get("sampling") == expected_sampling, "selected full receipt sampling mismatch")
+        _require(identity.get("resolved_sampling") == expected_sampling_object.resolved_sampling(), "selected full receipt resolved sampling mismatch")
+        _require(identity.get("engine") == expected_engine, "selected full receipt engine mismatch")
+        normalized = copy.deepcopy(dict(identity))
+        normalized.pop("sampling", None)
+        normalized.pop("resolved_sampling", None)
+        if common_protocol is None:
+            common_protocol = normalized
+        else:
+            _require(normalized == common_protocol, "selected full receipts differ in non-sampling protocol")
 
-    expected_selected_keys = {
-        (selected_budget, arm, index)
-        for arm in arm_order
-        for index in range(int(plan["arms"][arm]["shard_count"]))
-    }
-    selected_entries = [
-        entry for entry in rebuilt_entries if int(entry["budget"]) == selected_budget
-    ]
-    selected_keys = {
-        (int(entry["budget"]), str(entry["arm"]), int(entry["shard_index"]))
-        for entry in selected_entries
-    }
-    _require(selected_keys == expected_selected_keys, "selected full tier is incomplete")
-    _require(
-        [dict(entry) for entry in raw_selected]
-        == sorted(
-            selected_entries,
-            key=lambda row: (arm_order.index(str(row["arm"])), int(row["shard_index"])),
-        ),
-        "catalog selected_shards is not the exact logical selected tier",
+    tiers = selection["tiers"]
+    selected_record = next(
+        tier for tier in tiers if int(tier["budget"]) == selected_budget
     )
     return {
         "root": root,
@@ -2264,7 +2213,8 @@ def _verify_full_artifact_catalog(
         "selection": selection,
         "catalog": catalog,
         "selected_budget": selected_budget,
-        "selected_entries": selected_entries,
+        "selected_entries": expected_selected,
+        "selected_tier_record": selected_record,
         "arm_order": arm_order,
     }
 
@@ -2288,6 +2238,74 @@ def _load_full_arm_artifacts(
         _require(isinstance(summary, dict), f"full shard metadata must be an object: {shard_dir}")
         summaries.append(summary)
     return rows, full_store.aggregate_runner_summaries(summaries)
+
+
+def _recompute_full_termination(
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    budget: int,
+    answer_cap: int,
+    decision: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Recompute selection evidence from token/finish metadata before scoring."""
+
+    counts = {
+        "samples": 0,
+        "cap_contacts": 0,
+        "unresolved_cap_contacts": 0,
+        "periodic_loop_contacts": 0,
+        "answer_limit_contacts": 0,
+        "stage2_truncations": 0,
+    }
+    settings = _loop_settings(decision)
+    for row in rows:
+        outputs = row.get("outputs")
+        _require(isinstance(outputs, list) and bool(outputs), "full row lacks outputs")
+        for output in outputs:
+            _require(isinstance(output, Mapping), "full output must be an object")
+            thinking = _integer(output.get("n_thinking_tokens"), where="full n_thinking_tokens")
+            answer = _integer(output.get("n_answer_tokens"), where="full n_answer_tokens")
+            _require(thinking <= budget, "full output exceeds selected thinking budget")
+            forced = output.get("forced_close")
+            truncated = output.get("truncated")
+            finish = output.get("finish_reason")
+            _require(isinstance(forced, bool), "full output forced_close must be bool")
+            _require(isinstance(truncated, bool), "full output truncated must be bool")
+            _require(isinstance(finish, str), "full output finish_reason must be string")
+            _require(truncated == (finish == "length"), "full output truncation/finish mismatch")
+            cap_contact = forced or thinking + 1 >= budget
+            loop = _periodic_loop_classification(
+                output,
+                cap_contact=cap_contact,
+                thinking_budget=budget,
+                settings=settings,
+            )
+            answer_contact = truncated or finish == "length" or answer >= answer_cap
+            counts["samples"] += 1
+            counts["cap_contacts"] += int(cap_contact)
+            counts["periodic_loop_contacts"] += int(loop["periodic_loop"])
+            counts["unresolved_cap_contacts"] += int(loop["unresolved_cap_contact"])
+            counts["answer_limit_contacts"] += int(answer_contact)
+            counts["stage2_truncations"] += int(truncated or finish == "length")
+    samples = counts["samples"]
+    _require(samples > 0, "cannot recompute termination from zero outputs")
+    unresolved_rate = counts["unresolved_cap_contacts"] / samples
+    answer_rate = counts["answer_limit_contacts"] / samples
+    loop_rate = counts["periodic_loop_contacts"] / samples
+    return {
+        **counts,
+        "cap_contact_rate": counts["cap_contacts"] / samples,
+        "unresolved_cap_contact_rate": unresolved_rate,
+        "periodic_loop_rate": loop_rate,
+        "answer_limit_contact_rate": answer_rate,
+        "stage2_truncation_rate": counts["stage2_truncations"] / samples,
+        "adequate": (
+            unresolved_rate < float(decision["budget_max_cap_contact"])
+            and answer_rate < float(decision["budget_max_answer_truncation"])
+            and loop_rate <= float(decision["loop_max_rate"])
+        ),
+        "selection_uses_output_content": False,
+    }
 
 
 def _compact_full_task(task: Mapping[str, Any]) -> dict[str, Any]:
@@ -2457,6 +2475,26 @@ def analyze_experiment(
             isinstance(summary.get("sampling"), dict),
             f"{where} lacks vLLM sampling metadata",
         )
+        if run == "full":
+            _require(full_context is not None, "internal full catalog context missing")
+            recomputed_termination = _recompute_full_termination(
+                rows,
+                budget=int(full_context["selected_budget"]),
+                answer_cap=int(inference["answer_max_tokens"]),
+                decision=decision,
+            )
+            tier_arms = full_context["selected_tier_record"].get("arms")
+            _require(isinstance(tier_arms, Mapping), "selected full tier lacks arms")
+            arm_selection = tier_arms.get(arm)
+            _require(isinstance(arm_selection, Mapping), f"selected full tier lacks arm {arm}")
+            _require(
+                arm_selection.get("termination") == recomputed_termination,
+                f"selected full arm {arm} termination evidence does not recompute",
+            )
+            _require(
+                recomputed_termination["adequate"] is True,
+                f"selected full arm {arm} is termination-inadequate",
+            )
         arms[arm] = analyze_arm_rows(
             arm=arm,
             rows=rows,
