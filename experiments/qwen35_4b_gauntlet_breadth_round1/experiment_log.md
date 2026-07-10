@@ -136,3 +136,25 @@ Created as a new experiment scaffold (program: agentic_breadth_installation).
   C50 updated. Round 3 (configs/round3.yaml: fresh seed namespace, mass
   shifted to L2-L3, L3 episodes opened, harvest with the round-2 merged
   model, train from base on the rounds-union) launches next.
+
+## 2026-07-10 (cont.) — round 3: frontier opens at harvest, blackbox does NOT compound
+
+- Round-3 harvest with the round-2 merged model transformed yields: the
+  previously-unharvestable stallwright went 0/160 correct -> 48/60 at L1
+  (answering via the trained commit-from-truncated-chain behavior);
+  glyphgate L1 2/80 -> 60/60. Dataset: 2,276 new examples (825 atom /
+  477 recovery / 974 episode turns), all 10 families represented.
+- Round-3 adapter (trained from BASE on the 3,201-example rounds-union;
+  bs1/ga16 after a transient 'device not ready' CUDA fault — the same fault
+  class that required --max-batch 12 on medium benches):
+  quick +0.2854 (seed 52007) and +0.2271 (52008) vs round-2's
+  +0.2229/+0.2938; medium +0.2637 (52009) vs +0.3237 (52006); gym-internal
+  mean 0.701 -> 0.721 (+0.019; glyphgate +0.089, gatepost +0.129, but
+  held-out spindle -0.124).
+- VERDICT: the install is a one-time STEP CHANGE from the recipe
+  (emission-seam repair + breadth), holding a stable +0.22..+0.32 plateau
+  across five paired events — but same-recipe expert iteration RE-SATURATES
+  (C11's coverage-boundedness reappears at the recipe frontier). Next
+  levers: difficulty escalation (L3-L4 mass, harder generators, longer
+  horizons) and the pre-registered ablations, not more same-recipe rounds.
+  C50 updated.

@@ -145,11 +145,21 @@ execution-verified samples.
   weighted loss moved the blackbox instrument where 849 at full weight moved
   nothing.
 
+## Round 3 addendum — iteration re-saturates
+
+Re-harvesting with the round-2 model opened the frontier at the data level
+(stallwright 0/160 → 48/60 correct at L1; glyphgate L1 2/80 → 60/60; 2,276
+new examples, all families represented) — but blackbox gains did NOT
+compound: quick +0.285/+0.227 (seeds 52007/52008) vs round-2's
++0.223/+0.294; medium +0.264 (seed 52009) vs +0.324; gym-internal +0.019.
+The install is a one-time step change from the recipe, stable at
++0.22..+0.32 across five paired events; same-recipe expert iteration
+re-saturates (C11's coverage-boundedness, one level up).
+
 ## Next Experiments
 
-- Round 3: re-harvest with the round-2 model (expert iteration proper) —
-  does the frontier move (glyphgate/loomfix/stallwright), does iteration
-  compound, does menagerie keep responding?
+- Difficulty escalation as the frontier lever (L3–L4 mass, harder gym
+  generators, longer horizons) — same-recipe rounds are exhausted.
 - Recovery-arm-only ablation to split emission-seam repair from axis
   competence; breadth-vs-matched-dose single-family ablation (is breadth
   causal for the held-out-family transfer?).
