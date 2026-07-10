@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForImageTextToText, AutoTokenizer
 
 from vllm_runner import MODEL_ID, MODEL_REVISION
 
@@ -25,7 +25,14 @@ class HFAnswerPotentialScorer:
             use_fast=True,
             local_files_only=local_files_only,
         )
-        self.model = AutoModelForCausalLM.from_pretrained(
+        # Qwen3.5-4B is packaged with the multimodal wrapper config even when
+        # used text-only.  AutoModelForCausalLM currently maps that outer
+        # config to Qwen3_5ForCausalLM and then passes the wrong (outer)
+        # config object, which lacks vocab_size.  The image-text auto class
+        # selects Qwen3_5ForConditionalGeneration, whose text-only forward is
+        # exactly the checkpoint's native path and accepts input_ids without
+        # any image inputs.
+        self.model = AutoModelForImageTextToText.from_pretrained(
             MODEL_ID,
             revision=MODEL_REVISION,
             trust_remote_code=True,

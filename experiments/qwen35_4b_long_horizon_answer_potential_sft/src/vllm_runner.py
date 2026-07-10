@@ -358,11 +358,20 @@ class EngineConfig:
     enable_prefix_caching: bool = False
     enforce_eager: bool = False
     adapter: Path | None = None
+    model_override: Path | None = None
     cudagraph_capture_sizes: tuple[int, ...] | None = None
 
     def validate(self) -> None:
         if self.max_model_len < 256:
             raise ValueError("max_model_len must be at least 256")
+        if self.adapter is not None and self.model_override is not None:
+            raise ValueError("adapter and model_override are mutually exclusive")
+        if self.model_override is not None and not (
+            Path(self.model_override).expanduser() / "config.json"
+        ).is_file():
+            raise ValueError(
+                f"model_override has no config.json: {self.model_override}"
+            )
         if not 0.1 <= self.gpu_memory_utilization < 1.0:
             raise ValueError("gpu_memory_utilization must be in [0.1, 1.0)")
         if self.max_num_seqs < 1 or self.max_num_batched_tokens < 1:
@@ -637,16 +646,24 @@ class VLLMRunner:
         # depend on vLLM's chat endpoint or reasoning parser.
         from transformers import AutoConfig, AutoTokenizer
 
+        if config.model_override is not None:
+            model_source = str(Path(config.model_override).expanduser().resolve())
+            source_kwargs: dict[str, Any] = {}
+        else:
+            model_source = MODEL_ID
+            source_kwargs = {"revision": MODEL_REVISION}
+        self.model_source = model_source
         self.tokenizer = AutoTokenizer.from_pretrained(
-            MODEL_ID,
-            revision=MODEL_REVISION,
+            model_source,
             trust_remote_code=True,
             use_fast=True,
+            **source_kwargs,
         )
         model_config = AutoConfig.from_pretrained(
-            MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True
+            model_source, trust_remote_code=True, **source_kwargs
         )
-        self.hf_eos_id = int(model_config.text_config.eos_token_id)
+        text_config = getattr(model_config, "text_config", model_config)
+        self.hf_eos_id = int(text_config.eos_token_id)
         if self.hf_eos_id != 248044:
             raise RuntimeError(
                 f"Qwen3.5 model EOS changed from 248044 to {self.hf_eos_id}; audit termination"
@@ -673,9 +690,12 @@ class VLLMRunner:
         )
 
         engine_args: dict[str, Any] = {
-            "model": MODEL_ID,
-            "revision": MODEL_REVISION,
-            "tokenizer_revision": MODEL_REVISION,
+            "model": model_source,
+            **(
+                {"revision": MODEL_REVISION, "tokenizer_revision": MODEL_REVISION}
+                if config.model_override is None
+                else {}
+            ),
             "trust_remote_code": True,
             "dtype": "bfloat16",
             "tensor_parallel_size": 1,
@@ -683,7 +703,11 @@ class VLLMRunner:
             "gpu_memory_utilization": config.gpu_memory_utilization,
             "max_num_seqs": config.max_num_seqs,
             "max_num_batched_tokens": config.max_num_batched_tokens,
-            "language_model_only": True,
+            **(
+                {"language_model_only": True}
+                if hasattr(model_config, "text_config")
+                else {}
+            ),
             "enable_prefix_caching": config.enable_prefix_caching,
             "mamba_cache_mode": "align" if config.enable_prefix_caching else "none",
             "enforce_eager": config.enforce_eager,
@@ -1433,6 +1457,7 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="allow raw prompts whose think-channel suffix does not match --thinking",
     )
     parser.add_argument("--adapter", type=Path)
+    parser.add_argument("--model-override", type=Path)
     parser.add_argument("--max-model-len", type=int, default=16_384)
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.90)
     parser.add_argument("--max-num-seqs", type=int, default=128)
@@ -1493,6 +1518,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         enable_prefix_caching=args.enable_prefix_caching,
         enforce_eager=args.enforce_eager,
         adapter=args.adapter,
+        model_override=args.model_override,
     )
     sampling = SamplingConfig(
         thinking=args.thinking,

@@ -13,6 +13,7 @@ sys.path.insert(0, str(SRC))
 from model_ops import (  # noqa: E402
     _extract_observed_logprob,
     _logsumexp,
+    _loop_diagnostic,
     answer_mention,
     make_foreign_controls,
     make_token_shuffled_controls,
@@ -63,6 +64,19 @@ class ModelOperationHelperTests(unittest.TestCase):
     def test_answer_mentions_use_boundaries(self) -> None:
         self.assertEqual(answer_mention("we get 42 exactly", "42"), 7)
         self.assertIsNone(answer_mention("we get 142 exactly", "42"))
+
+    def test_loop_diagnostic_requires_an_exact_periodic_suffix(self) -> None:
+        coherent = []
+        for index in range(100):
+            coherent.extend([1, 2, 3, 1000 + index])
+        self.assertGreaterEqual(_loop_diagnostic(coherent)["max_trigram_count"], 8)
+        self.assertFalse(_loop_diagnostic(coherent)["loop_flag"])
+
+        periodic = list(range(80)) + ([7, 8, 9, 10] * 20)
+        result = _loop_diagnostic(periodic)
+        self.assertTrue(result["loop_flag"])
+        self.assertEqual(result["periodic_suffix_period"], 4)
+        self.assertGreaterEqual(result["periodic_suffix_tokens"], 64)
 
 
 if __name__ == "__main__":

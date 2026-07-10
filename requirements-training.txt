@@ -1,0 +1,9 @@
+# Separate Transformers/QLoRA environment. Install with:
+# uv pip install --python .venv/bin/python --torch-backend=cu129 -r requirements-training.txt
+torch==2.11.0
+transformers==5.13.0
+peft==0.19.1
+bitsandbytes==0.49.2
+accelerate==1.14.0
+pyyaml==6.0.3
+safetensors==0.8.0

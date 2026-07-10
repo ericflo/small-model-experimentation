@@ -49,13 +49,41 @@ def _chunks(values: Sequence[Any], size: int) -> Iterable[Sequence[Any]]:
 
 
 def _loop_diagnostic(token_ids: Sequence[int]) -> dict[str, Any]:
-    if len(token_ids) < 9:
-        return {"max_trigram_count": 1, "loop_flag": False}
+    """Detect an exact periodic suffix without penalizing long coherent prose.
+
+    A global repeated-trigram count is useful as a descriptive statistic, but
+    it is not a loop detector once traces are thousands of tokens long: common
+    phrases naturally recur many times.  Generation loops manifest as a long
+    exact suffix whose tokens equal the tokens one period earlier.  Requiring
+    four repeats and at least 64 periodic tokens makes that distinction
+    explicit and handles a context contact in the middle of a repeated block.
+    """
+    if len(token_ids) < 3:
+        return {
+            "max_trigram_count": 1,
+            "periodic_suffix_period": None,
+            "periodic_suffix_tokens": 0,
+            "loop_flag": False,
+        }
     counts = Counter(tuple(token_ids[index : index + 3]) for index in range(len(token_ids) - 2))
     maximum = max(counts.values(), default=1)
+    best_period: int | None = None
+    best_span = 0
+    for period in range(1, min(256, len(token_ids) // 4) + 1):
+        equal_run = 0
+        for index in range(len(token_ids) - 1, period - 1, -1):
+            if token_ids[index] != token_ids[index - period]:
+                break
+            equal_run += 1
+        span = equal_run + period
+        if equal_run >= 3 * period and span >= 64 and span > best_span:
+            best_period = period
+            best_span = span
     return {
         "max_trigram_count": maximum,
-        "loop_flag": maximum >= 8,
+        "periodic_suffix_period": best_period,
+        "periodic_suffix_tokens": best_span,
+        "loop_flag": best_period is not None,
     }
 
 
@@ -428,6 +456,160 @@ class AnswerPotentialModel:
                 "max_tokens": max_tokens,
                 "capacity_fit": self.capacity_receipt(
                     largest_reservation=largest, logical_sequences=len(pending)
+                ),
+            },
+        )
+
+    def generate_pivot_branches(
+        self,
+        items: Sequence[Mapping[str, Any]],
+        plans: Sequence[Mapping[str, Any]],
+        *,
+        n: int,
+        total_allowance: int,
+        run_seed: int,
+        temperature: float,
+        top_p: float,
+        top_k: int,
+    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+        """Preserve each registered pivot prefix and sample fresh suffixes.
+
+        ``total_allowance`` bounds the complete thought, not merely the new
+        suffix.  A branch that does not emit ``</think>`` remains an allowance
+        contact and is handled by the same continuation path as independent
+        traces.
+        """
+        from vllm import SamplingParams
+
+        started = time.perf_counter()
+        item_by_id = {str(item["id"]): item for item in items}
+        prompts: list[dict[str, list[int]]] = []
+        params: list[Any] = []
+        active_plans: list[Mapping[str, Any]] = []
+        base_prompt_ids: list[list[int]] = []
+        largest = 0
+        for plan in plans:
+            task_id = str(plan["task_id"])
+            item = item_by_id[task_id]
+            _, prompt_ids = self.thinking_prompt(item)
+            prefix_ids = [int(value) for value in plan["prefix_token_ids"]]
+            suffix_allowance = min(
+                total_allowance - len(prefix_ids),
+                self.engine_config.max_model_len - len(prompt_ids) - len(prefix_ids),
+            )
+            if suffix_allowance < 1:
+                raise RuntimeError(
+                    f"pivot for {task_id} leaves no suffix allowance: "
+                    f"prefix={len(prefix_ids)}, total={total_allowance}"
+                )
+            full_prompt = [*prompt_ids, *prefix_ids]
+            prompts.append({"prompt_token_ids": full_prompt})
+            params.append(
+                SamplingParams(
+                    n=n,
+                    temperature=temperature,
+                    top_p=top_p,
+                    top_k=top_k,
+                    seed=_stable_seed(run_seed, task_id, -1, "pivot_branch"),
+                    max_tokens=suffix_allowance,
+                    ignore_eos=True,
+                    stop_token_ids=[self.runner.think_close_id, self.runner.hf_eos_id],
+                    include_stop_str_in_output=True,
+                    detokenize=True,
+                    skip_special_tokens=False,
+                    logprobs=0,
+                    flat_logprobs=True,
+                )
+            )
+            active_plans.append(plan)
+            base_prompt_ids.append(prompt_ids)
+            largest = max(largest, len(full_prompt) + suffix_allowance)
+
+        outputs = self.runner.llm.generate(
+            prompts,
+            params,
+            use_tqdm=False,
+            lora_request=self.runner.lora_request,
+        )
+        rows: list[dict[str, Any]] = []
+        for plan, prompt_ids, request_output in zip(
+            active_plans, base_prompt_ids, outputs
+        ):
+            task_id = str(plan["task_id"])
+            item = item_by_id[task_id]
+            prefix_ids = [int(value) for value in plan["prefix_token_ids"]]
+            seen: set[tuple[int, ...]] = set()
+            parent_seed = _stable_seed(run_seed, task_id, -1, "pivot_branch")
+            for completion in request_output.outputs:
+                sample_index = int(completion.index)
+                sampled = [int(value) for value in completion.token_ids]
+                trimmed = list(self.runner._trim_hf_eos(sampled))  # noqa: SLF001
+                natural_close = self.runner.think_close_id in trimmed or (
+                    getattr(completion, "stop_reason", None)
+                    == self.runner.think_close_id
+                )
+                suffix = (
+                    trimmed[: trimmed.index(self.runner.think_close_id)]
+                    if self.runner.think_close_id in trimmed
+                    else trimmed
+                )
+                combined = [*prefix_ids, *suffix]
+                key = tuple(combined)
+                duplicate = key in seen
+                seen.add(key)
+                suffix_prior = getattr(completion, "cumulative_logprob", None)
+                rows.append(
+                    {
+                        "trace_id": f"{task_id}::pivot_branch::t{sample_index:03d}",
+                        "task_id": task_id,
+                        "family": item["family"],
+                        "level": item["level"],
+                        "sample_index": sample_index,
+                        "source_kind": "pivot_branch",
+                        "root_trace_id": plan["root_trace_id"],
+                        "pivot_token_index": len(prefix_ids),
+                        "parent_seed": parent_seed,
+                        "effective_seed": parent_seed + sample_index,
+                        "token_ids": combined,
+                        "text": self.runner._decode(combined),  # noqa: SLF001
+                        "n_tokens": len(combined),
+                        "n_sampled_tokens": len(sampled),
+                        "n_preserved_tokens": len(prefix_ids),
+                        "n_suffix_tokens": len(suffix),
+                        "natural_close": natural_close,
+                        "forced_close_required": not natural_close,
+                        "finish_reason": getattr(completion, "finish_reason", None),
+                        "stop_reason": getattr(completion, "stop_reason", None),
+                        # This is the conditional suffix prior.  It is not
+                        # misrepresented as a full-trace prior.
+                        "suffix_prior_logprob_sum": suffix_prior,
+                        "suffix_prior_logprob_mean": (
+                            float(suffix_prior) / len(sampled)
+                            if suffix_prior is not None and sampled
+                            else None
+                        ),
+                        "prior_logprob_sum": None,
+                        "prior_logprob_mean": None,
+                        "exact_duplicate_within_task": duplicate,
+                        **_loop_diagnostic(combined),
+                    }
+                )
+                self._logical_counts["branch_preserved_prefill_tokens"] += len(
+                    prefix_ids
+                )
+                self._logical_counts["thought_prompt_tokens"] += len(prompt_ids)
+                self._logical_counts["thought_sampled_tokens"] += len(sampled)
+
+        return rows, self.metadata(
+            operation="potential_guided_pivot_branching",
+            started=started,
+            extra={
+                "tasks": len(active_plans),
+                "suffixes_per_task": n,
+                "total_allowance": total_allowance,
+                "capacity_fit": self.capacity_receipt(
+                    largest_reservation=largest,
+                    logical_sequences=len(active_plans) * n,
                 ),
             },
         )

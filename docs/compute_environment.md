@@ -11,8 +11,12 @@ environment or model changes.
   core stack is vLLM **0.24.0+cu129**, torch **2.11.0+cu129**, and transformers **5.13.0**. CUDA 12
   minor-version compatibility works on this driver: a CUDA allocation and full Qwen3.5 load/generate
   smoke both passed. Install the complete pinned graph from `requirements-vllm.lock.txt`.
-- There is not yet a shared Transformers training `.venv` on this fresh pod. Create it separately
-  from `.venv-vllm`; vLLM pins Torch and should not be allowed to rewrite the training stack.
+- The separate Transformers training environment is **`.venv`** (gitignored), created with `uv` from
+  `requirements-training.txt`. Its current core stack is torch **2.11.0+cu129**, transformers
+  **5.13.0**, PEFT **0.19.1**, bitsandbytes **0.49.2**, and accelerate **1.14.0**. Rebuild it with
+  `uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python --torch-backend=cu129
+  -r requirements-training.txt`. Keep it separate from `.venv-vllm`; vLLM pins Torch and should not
+  be allowed to rewrite the training stack.
 - The Transformers throughput, OOM, and training measurements later in this document came from the
   previous single **RTX 4090 (24 GB), WSL** environment. They remain recovery/reference evidence, not
   measurements of this RunPod.
