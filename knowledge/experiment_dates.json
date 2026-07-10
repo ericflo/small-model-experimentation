@@ -500,6 +500,14 @@
    ],
    "caveat": "Same foofah dates-as-data risk (none actually present); metadata.yaml generated_on 2026-07-01 is sweep."
   },
+  "qwen35_4b_gauntlet_breadth_round1": {
+   "start": "2026-07-09",
+   "end": "2026-07-10",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_generator_verifier_gap": {
    "start": "2026-06-29",
    "end": "2026-06-30",

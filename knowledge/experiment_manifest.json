@@ -2025,6 +2025,47 @@
   },
   {
     "file_counts": {
+      ".gz": 28,
+      ".json": 19,
+      ".jsonl": 3,
+      ".md": 6,
+      ".py": 25,
+      ".yaml": 4
+    },
+    "id": "qwen35_4b_gauntlet_breadth_round1",
+    "path": "experiments/qwen35_4b_gauntlet_breadth_round1",
+    "primary_readme": "experiments/qwen35_4b_gauntlet_breadth_round1/README.md",
+    "primary_report": "experiments/qwen35_4b_gauntlet_breadth_round1/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Build a 12-family firewall-clean agentic gym (atoms + multi-turn episodes, machine-checkable verifiers), harvest Qwen3.5-4B's own verified thinking episodes, think-channel QLoRA SFT, and test whether substrate breadth installs general capability \u2014 measured blackbox on menagerie quick/medium/slow fresh seeds against the 0.112/0.146/0.138 baselines.",
+    "tags": [
+      "abi",
+      "lora",
+      "small-model",
+      "verification"
+    ],
+    "title": "Gauntlet round 1: breadth-first agentic expert iteration",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src"
+    ],
+    "total_files": 85,
+    "total_size_bytes": 19406698
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 2,
       ".log": 1,

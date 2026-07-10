@@ -1,949 +1,973 @@
 {
-  "schema_version": 1,
-  "candidate_programs": [
-    {
-      "id": "multimodal_and_embodied_small_models",
-      "title": "Multimodal And Embodied Small Models",
-      "focus": "Test whether structured execution and evidence-selection patterns survive when inputs include images, UI state, audio, or physical observations."
-    },
-    {
-      "id": "data_generation_and_synthetic_curriculum_design",
-      "title": "Data Generation And Synthetic Curriculum Design",
-      "focus": "Learn which synthetic curricula create transfer rather than benchmark-specific competence."
-    },
-    {
-      "id": "small_model_collaboration",
-      "title": "Small-Model Collaboration",
-      "focus": "Measure whether multiple specialized small models outperform one single-policy small model under fixed budget."
-    },
-    {
-      "id": "on_device_and_latency_constrained_agents",
-      "title": "On-Device And Latency-Constrained Agents",
-      "focus": "Find mechanisms that preserve gains under strict inference, memory, latency, and tool-call ceilings."
-    },
-    {
-      "id": "human_agent_research_interfaces",
-      "title": "Human-Agent Research Interfaces",
-      "focus": "Build interfaces that help people and agents inspect, branch, and critique experiment evidence quickly."
-    }
-  ],
-  "proposals": [
-    {
-      "id": "visible_abstention_selector_benchmark",
-      "title": "Visible Abstention Selector Benchmark",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "medium",
-      "programs": [
-        "evidence_conditioned_selection",
-        "reliability_and_safety"
-      ],
-      "question": "Can a selector improve precision without hiding failures behind an unreported commit-rate drop?",
-      "hypothesis": "Explicit abstention labels and coverage reporting will separate useful evidence selection from silent cherry-picking.",
-      "minimal_protocol": "Build one shared candidate pool with visible-only features, train selector variants, and report precision, recall, coverage, and selected accuracy by family.",
-      "success_signal": "A visible-only selector beats first-visible, shortest-visible, and random-order baselines at matched coverage.",
-      "failure_signal": "Accuracy gains disappear when coverage is matched or family-held-out evaluation is applied.",
-      "expected_artifacts": [
-        "candidate_pool_manifest",
-        "selector_metrics",
-        "abstention_slices",
-        "report"
-      ],
-      "next_step": "Run idea intake against selector and oracle-ceiling anchor experiments.",
-      "avoid": "Do not use hidden expected answers as features or training labels unless clearly reported as an oracle ceiling.",
-      "source": "research_programs/evidence_conditioned_selection/backlog.md"
-    },
-    {
-      "id": "expected_output_free_counterexample_tests",
-      "title": "Expected-Output-Free Counterexample Tests",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "medium",
-      "programs": [
-        "active_evidence_acquisition",
-        "reliability_and_safety"
-      ],
-      "question": "Can acquired tests distinguish candidates without requiring hidden expected outputs?",
-      "hypothesis": "Agreement, invariants, metamorphic checks, and execution consistency can improve selection while preserving deployability.",
-      "minimal_protocol": "Generate candidate-specific tests with no hidden answer key, compare by invariants and cross-candidate agreement, then evaluate selected outputs only after commit.",
-      "success_signal": "Selection improves over random acquisition and fixed-order acquisition under the same evidence budget.",
-      "failure_signal": "The method helps only when hidden answers or task-specific leaks enter the evidence loop.",
-      "expected_artifacts": [
-        "test_generation_manifest",
-        "evidence_budget_table",
-        "hidden_boundary_note",
-        "report"
-      ],
-      "next_step": "Start from active counterexample and model-in-loop counterexample experiments.",
-      "avoid": "Do not treat post-hoc oracle scoring as deployable evidence.",
-      "source": "research_programs/active_evidence_acquisition/backlog.md"
-    },
-    {
-      "id": "independent_consensus_vs_selector_pool",
-      "title": "Independent Consensus Versus Selector Pool",
-      "status": "ready-for-intake",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "evidence_conditioned_selection",
-        "algorithmic_memory_and_retrieval"
-      ],
-      "question": "When does independent implementation consensus beat a trained selector on the same candidate pool?",
-      "hypothesis": "Consensus helps when failures are uncorrelated, while learned selectors help when visible evidence is structured but sparse.",
-      "minimal_protocol": "Create matched candidate pools with independent generation, learned selector scores, and consensus scores; evaluate under family holdouts.",
-      "success_signal": "The comparison identifies regimes where consensus, selection, or hybrid routing dominates.",
-      "failure_signal": "Consensus gains vanish after controlling for extra samples or shared prompt artifacts.",
-      "expected_artifacts": [
-        "matched_candidate_pool",
-        "consensus_metrics",
-        "selector_metrics",
-        "routing_table"
-      ],
-      "next_step": "Use existing independent retrieval and counterexample selection anchors as prior evidence.",
-      "avoid": "Do not compare methods with unequal sample budgets.",
-      "source": "knowledge/research_roadmap.md"
-    },
-    {
-      "id": "deployable_gap_scorecards",
-      "title": "Deployable Gap Scorecards",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "small",
-      "programs": [
-        "evidence_conditioned_selection",
-        "reliability_and_safety"
-      ],
-      "question": "Which oracle-ceiling results remain promising after visible-only constraints are made explicit?",
-      "hypothesis": "A standard scorecard will reveal reusable mechanisms and retire variants that depend on non-deployable evidence.",
-      "minimal_protocol": "Select high-impact oracle-ceiling experiments, annotate evidence visibility, baselines, artifact location, and deployable follow-up.",
-      "success_signal": "Every reviewed ceiling result has a clear keep, rerun, or retire decision.",
-      "failure_signal": "Scorecards cannot distinguish mechanism promise from hidden-label dependence.",
-      "expected_artifacts": [
-        "scorecard_table",
-        "claim_updates",
-        "decision_record"
-      ],
-      "next_step": "Seed from selector, code ABI, and coverage-gate reports.",
-      "avoid": "Do not rewrite old results as deployable when they were explicitly oracle-bounded.",
-      "source": "research_programs/evidence_conditioned_selection/backlog.md"
-    },
-    {
-      "id": "typed_vs_latent_vs_text_compiler_suite",
-      "title": "Typed Versus Latent Versus Text Compiler Suite",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "large",
-      "programs": [
-        "structured_execution_and_compilers",
-        "benchmark_generalization"
-      ],
-      "question": "Which structured representation causes generalization: typed bytecode, latent slots, text programs, or execution feedback?",
-      "hypothesis": "Typed state helps most under compositional shifts, while latent state helps only when supervision and task families align.",
-      "minimal_protocol": "Run direct text, typed bytecode, latent slot, and execution-feedback variants on one shared suite with length, family, and paraphrase shifts.",
-      "success_signal": "At least one representation has a reproducible advantage across non-IID splits and matched budget.",
-      "failure_signal": "All gains collapse under shared splits or shuffled/corrupted state controls.",
-      "expected_artifacts": [
-        "shared_suite_manifest",
-        "representation_configs",
-        "shift_metrics",
-        "report"
-      ],
-      "next_step": "Use compiler, latent executor, and structured slot anchors to define the suite.",
-      "avoid": "Do not compare representations on different task mixes or budgets.",
-      "source": "research_programs/structured_execution_and_compilers/backlog.md"
-    },
-    {
-      "id": "compiler_shift_replication_grid",
-      "title": "Compiler Shift Replication Grid",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "medium",
-      "programs": [
-        "structured_execution_and_compilers",
-        "benchmark_generalization"
-      ],
-      "question": "Which compiler-style gains survive seed, length, operator, and paraphrase shifts?",
-      "hypothesis": "Some strong results are robust to seed changes but brittle to family and paraphrase shifts.",
-      "minimal_protocol": "Replicate top compiler-style experiments across a small grid of seeds and shifts with identical reporting.",
-      "success_signal": "The grid identifies stable effects and brittle effects without requiring a new mechanism.",
-      "failure_signal": "Replication variance overwhelms claimed mechanism differences.",
-      "expected_artifacts": [
-        "replication_manifest",
-        "shift_taxonomy",
-        "metrics_grid",
-        "report"
-      ],
-      "next_step": "Pick three anchor experiments from the compiler program scorecard.",
-      "avoid": "Do not add a new model variant until the shift grid is defined.",
-      "source": "research_programs/benchmark_generalization/backlog.md"
-    },
-    {
-      "id": "supervision_causality_ablation",
-      "title": "Supervision Causality Ablation",
-      "status": "ready-for-intake",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "structured_execution_and_compilers",
-        "interpretability_and_diagnostics"
-      ],
-      "question": "Is the lift from state-prefix supervision, final-answer supervision, program-token supervision, or data filtering?",
-      "hypothesis": "State supervision contributes only when state variables map cleanly to task factors.",
-      "minimal_protocol": "Run matched ablations with final-answer only, state-prefix, program-token, shuffled-state, and corrupted-state supervision.",
-      "success_signal": "A named supervision source survives shuffled and corrupted controls.",
-      "failure_signal": "Lift tracks data filtering or token budget rather than the intended representation.",
-      "expected_artifacts": [
-        "ablation_configs",
-        "control_metrics",
-        "diagnostic_slices",
-        "report"
-      ],
-      "next_step": "Start from structured slot and dense supervision ladder anchors.",
-      "avoid": "Do not infer causality from a single no-control training run.",
-      "source": "research_programs/structured_execution_and_compilers/backlog.md"
-    },
-    {
-      "id": "memory_mode_comparison_suite",
-      "title": "Memory Mode Comparison Suite",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "medium",
-      "programs": [
-        "algorithmic_memory_and_retrieval",
-        "benchmark_generalization"
-      ],
-      "question": "Which memory use is actually useful: prompt context, constraints, tests, candidates, or failure cases?",
-      "hypothesis": "Memory is most useful when converted into constraints or tests rather than appended as context.",
-      "minimal_protocol": "Retrieve the same source items, transform them into multiple memory modes, and evaluate on matched held-out families.",
-      "success_signal": "Constraint or test memory beats prompt memory, corrupted retrieval, and no-memory baselines.",
-      "failure_signal": "All memory modes underperform direct inference or rely on same-family leakage.",
-      "expected_artifacts": [
-        "memory_schema",
-        "retrieval_manifest",
-        "mode_metrics",
-        "report"
-      ],
-      "next_step": "Use independent retrieval and feature-factorized rule experiments as anchors.",
-      "avoid": "Do not treat larger prompts as a free budget increase.",
-      "source": "research_programs/algorithmic_memory_and_retrieval/backlog.md"
-    },
-    {
-      "id": "constraint_memory_counterexample_generator",
-      "title": "Constraint Memory Counterexample Generator",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "algorithmic_memory_and_retrieval",
-        "active_evidence_acquisition"
-      ],
-      "question": "Can retrieved failures become counterexample generators instead of answer hints?",
-      "hypothesis": "Failure-case memory can create discriminating tests while reducing direct-answer contamination.",
-      "minimal_protocol": "Retrieve similar verified failures, extract constraints, generate candidate-specific counterexamples, and evaluate selection impact.",
-      "success_signal": "Generated counterexamples improve selection under visible-only constraints.",
-      "failure_signal": "Counterexamples are either redundant with public tests or leak hidden labels.",
-      "expected_artifacts": [
-        "failure_memory_bank",
-        "generated_tests",
-        "selection_metrics",
-        "report"
-      ],
-      "next_step": "Run related-work discovery for counterexample memory and active acquisition.",
-      "avoid": "Do not copy expected outputs from retrieved examples into the new task.",
-      "source": "research_programs/algorithmic_memory_and_retrieval/backlog.md"
-    },
-    {
-      "id": "operator_card_schema_probe",
-      "title": "Operator Card Schema Probe",
-      "status": "ready-for-intake",
-      "priority": "P1",
-      "effort": "small",
-      "programs": [
-        "operator_and_skill_inventories",
-        "collective_experimentation_infrastructure"
-      ],
-      "question": "What operator-card fields make inventories reusable across experiments?",
-      "hypothesis": "Examples, invariants, aliases, failure modes, and type signatures are enough for shortlisting and debugging.",
-      "minimal_protocol": "Define a small card schema, encode one existing operator bank, and test retrieval and shortlisting against a baseline bank.",
-      "success_signal": "Cards improve diagnosis or top-k operator retrieval without increasing manual ambiguity.",
-      "failure_signal": "The schema is too heavy or fails to support held-out operator lookup.",
-      "expected_artifacts": [
-        "operator_card_schema",
-        "encoded_bank",
-        "retrieval_metrics",
-        "report"
-      ],
-      "next_step": "Sample operator inventory experiments and extract common fields.",
-      "avoid": "Do not create a schema that only fits one existing task family.",
-      "source": "research_programs/operator_and_skill_inventories/backlog.md"
-    },
-    {
-      "id": "operator_bank_shortlister_scaling",
-      "title": "Operator Bank Shortlister Scaling",
-      "status": "ready-for-intake",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "operator_and_skill_inventories",
-        "evidence_conditioned_selection"
-      ],
-      "question": "Can a shortlister preserve selected accuracy as operator banks grow?",
-      "hypothesis": "A learned top-k shortlister will beat random and heuristic search when trained with held-out primitive families.",
-      "minimal_protocol": "Scale bank size, train top-k shortlisters, compare full-search oracle, random shortlister, and closed-vocabulary baselines.",
-      "success_signal": "Top-k cost falls while deployable selected accuracy stays above heuristic baselines.",
-      "failure_signal": "Coverage rises but selected accuracy drops without a reliable selection plan.",
-      "expected_artifacts": [
-        "operator_bank_manifest",
-        "shortlister_configs",
-        "cost_accuracy_curve",
-        "report"
-      ],
-      "next_step": "Use inventory shortlister and scaling-stress experiments as anchors.",
-      "avoid": "Do not report coverage without selected accuracy and search cost.",
-      "source": "research_programs/operator_and_skill_inventories/backlog.md"
-    },
-    {
-      "id": "active_disambiguation_type_collision",
-      "title": "Active Disambiguation For Type-Colliding Operators",
-      "status": "program-seed",
-      "priority": "P2",
-      "effort": "medium",
-      "programs": [
-        "operator_and_skill_inventories",
-        "active_evidence_acquisition"
-      ],
-      "question": "Can active probes separate operators that share type signatures but differ semantically?",
-      "hypothesis": "A few targeted examples can disambiguate type-colliding operators better than passive shortlist scores.",
-      "minimal_protocol": "Construct operator pairs with shared signatures, ask an acquisition policy for distinguishing probes, and evaluate downstream operator choice.",
-      "success_signal": "Targeted probes improve operator selection per evidence token over random probes.",
-      "failure_signal": "Disambiguation requires hidden outputs or more budget than full search.",
-      "expected_artifacts": [
-        "collision_bank",
-        "probe_manifest",
-        "selection_metrics",
-        "report"
-      ],
-      "next_step": "Identify collisions from current operator inventory runs.",
-      "avoid": "Do not count probes that reveal the hidden target operator directly.",
-      "source": "research_programs/operator_and_skill_inventories/backlog.md"
-    },
-    {
-      "id": "acquisition_policy_comparison_pool",
-      "title": "Acquisition Policy Comparison Pool",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "medium",
-      "programs": [
-        "active_evidence_acquisition",
-        "process_control_and_tool_use"
-      ],
-      "question": "Which acquisition rule wins when uncertainty, disagreement, information gain, and learned policies share one pool?",
-      "hypothesis": "Learned policies help only when trained on features that transfer across task families.",
-      "minimal_protocol": "Build one acquisition pool and run random, diversity, disagreement, information gain, and learned policies with fixed budgets.",
-      "success_signal": "A policy improves selection quality per unit evidence across at least two families.",
-      "failure_signal": "The best policy changes unpredictably across families or loses to fixed-order acquisition.",
-      "expected_artifacts": [
-        "acquisition_pool",
-        "policy_configs",
-        "budget_curve",
-        "report"
-      ],
-      "next_step": "Derive pool features from active trace policy and adaptive evidence budget experiments.",
-      "avoid": "Do not compare policies on different candidate or evidence pools.",
-      "source": "research_programs/active_evidence_acquisition/backlog.md"
-    },
-    {
-      "id": "family_aware_evidence_policy",
-      "title": "Family-Aware Evidence Policy",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "active_evidence_acquisition",
-        "benchmark_generalization"
-      ],
-      "question": "Can acquisition policies adapt to date/time, numeric, table, and code task families without overfitting?",
-      "hypothesis": "Family-aware features improve evidence value, but only when family labels are coarse and deployable.",
-      "minimal_protocol": "Train policy variants with no family, coarse family, and oracle family features; evaluate on held-out family mixtures.",
-      "success_signal": "Coarse deployable family features improve budget-normalized selection over no-family controls.",
-      "failure_signal": "Only oracle family labels help or performance collapses on held-out families.",
-      "expected_artifacts": [
-        "family_feature_manifest",
-        "heldout_metrics",
-        "budget_table",
-        "report"
-      ],
-      "next_step": "Use current active evidence experiments to define feature families.",
-      "avoid": "Do not use benchmark split identity as a deployable feature.",
-      "source": "research_programs/active_evidence_acquisition/backlog.md"
-    },
-    {
-      "id": "stop_more_controller_visible_labels",
-      "title": "STOP/MORE Controller With Visible Labels",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "medium",
-      "programs": [
-        "process_control_and_tool_use",
-        "evidence_conditioned_selection"
-      ],
-      "question": "Can a controller decide when to gather more evidence using only visible training labels?",
-      "hypothesis": "A STOP/MORE policy can beat fixed-budget and always-continue heuristics when trained on deployable features.",
-      "minimal_protocol": "Define tool-state features, train STOP/MORE policies without hidden correctness labels at decision time, and compare against fixed budgets.",
-      "success_signal": "The learned controller improves selected accuracy per cost under matched evidence constraints.",
-      "failure_signal": "The controller only wins by using hidden labels or by silently spending more budget.",
-      "expected_artifacts": [
-        "tool_state_schema",
-        "controller_configs",
-        "cost_accuracy_curve",
-        "report"
-      ],
-      "next_step": "Anchor on adaptive tool controller and adaptive evidence budget policy experiments.",
-      "avoid": "Do not let hidden evaluation correctness enter runtime state.",
-      "source": "research_programs/process_control_and_tool_use/backlog.md"
-    },
-    {
-      "id": "noisy_tool_controller_stress",
-      "title": "Noisy Tool Controller Stress Test",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "process_control_and_tool_use",
-        "reliability_and_safety"
-      ],
-      "question": "Do process policies still help when tools are flaky, delayed, or misleading?",
-      "hypothesis": "Robust controllers should learn when to distrust or repeat tool evidence, not just call tools more often.",
-      "minimal_protocol": "Inject controlled tool noise, latency, and misleading examples into an existing tool loop and compare learned, heuristic, and oracle policies.",
-      "success_signal": "A controller preserves accuracy-cost tradeoffs under noise better than fixed and always-tool baselines.",
-      "failure_signal": "The policy overuses noisy tools or transfers poorly across noise regimes.",
-      "expected_artifacts": [
-        "noise_manifest",
-        "tool_state_logs",
-        "robustness_metrics",
-        "report"
-      ],
-      "next_step": "Use process-control experiments with explicit tool states as anchors.",
-      "avoid": "Do not evaluate only on clean tools after training with noise.",
-      "source": "research_programs/process_control_and_tool_use/backlog.md"
-    },
-    {
-      "id": "posttraining_method_shared_substrate",
-      "title": "Posttraining Method Shared Substrate",
-      "status": "ready-for-intake",
-      "priority": "P0",
-      "effort": "large",
-      "programs": [
-        "posttraining_and_adaptation",
-        "benchmark_generalization"
-      ],
-      "question": "How do SFT, DPO, process distillation, and DAgger compare on one candidate/evidence substrate?",
-      "hypothesis": "Method ranking changes when all methods share data, model, budget, controls, and held-out families.",
-      "minimal_protocol": "Prepare one substrate, train method variants with frozen and shuffled-label controls, and evaluate on IID plus held-out splits.",
-      "success_signal": "One method shows a robust advantage over frozen, shuffled, and weak-baseline controls.",
-      "failure_signal": "All gains are explained by data selection, extra tokens, or weak baselines.",
-      "expected_artifacts": [
-        "training_manifest",
-        "artifact_manifest",
-        "method_configs",
-        "heldout_metrics",
-        "report"
-      ],
-      "next_step": "Use DPO, DAgger, and distillation experiments to define shared data.",
-      "avoid": "Do not check adapters or model checkpoints into git.",
-      "source": "research_programs/posttraining_and_adaptation/backlog.md"
-    },
-    {
-      "id": "hard_negative_training_transfer",
-      "title": "Hard Negative Training Transfer",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "posttraining_and_adaptation",
-        "reliability_and_safety"
-      ],
-      "question": "Does training on hard negatives improve real selection, or does it overfit visible failure artifacts?",
-      "hypothesis": "Hard-negative training helps only when negatives represent held-out families and not just surface artifacts.",
-      "minimal_protocol": "Train with mined hard negatives, shuffled negatives, and random negatives; evaluate coverage, selected accuracy, and false positives on held-out families.",
-      "success_signal": "Mined negatives reduce false positives without lowering recall or transfer.",
-      "failure_signal": "The model learns benchmark-specific artifacts and fails held-out negative families.",
-      "expected_artifacts": [
-        "negative_manifest",
-        "training_configs",
-        "false_positive_slices",
-        "report"
-      ],
-      "next_step": "Start from offline hard-negative and constrained coverage DPO anchors.",
-      "avoid": "Do not report aggregate accuracy without false-positive slices.",
-      "source": "research_programs/posttraining_and_adaptation/backlog.md"
-    },
-    {
-      "id": "adapter_free_repro_manifest_audit",
-      "title": "Adapter-Free Reproducibility Manifest Audit",
-      "status": "infrastructure",
-      "priority": "P0",
-      "effort": "small",
-      "programs": [
-        "posttraining_and_adaptation",
-        "reliability_and_safety"
-      ],
-      "question": "Can every trained-run experiment be audited without committing adapters or checkpoints?",
-      "hypothesis": "A standardized manifest is enough to preserve provenance while keeping large artifacts external.",
-      "minimal_protocol": "Audit experiments with training outputs, require external artifact pointers, model IDs, data hashes, and reproduction notes.",
-      "success_signal": "All trained-run folders either have manifests or explicit no-large-artifact notes.",
-      "failure_signal": "Important trained outputs cannot be located or reproduced without local private files.",
-      "expected_artifacts": [
-        "artifact_manifest_updates",
-        "audit_table",
-        "quality_gate_update"
-      ],
-      "next_step": "Use artifact manifest index and readiness matrix to prioritize missing manifests.",
-      "avoid": "Do not add model weights, adapters, or checkpoints to git.",
-      "source": "research_programs/posttraining_and_adaptation/backlog.md"
-    },
-    {
-      "id": "diagnostics_failure_slicing_template",
-      "title": "Diagnostics Failure-Slicing Template",
-      "status": "ready-for-intake",
-      "priority": "P1",
-      "effort": "small",
-      "programs": [
-        "interpretability_and_diagnostics",
-        "collective_experimentation_infrastructure"
-      ],
-      "question": "Which failure slices should every major experiment report before influencing strategy?",
-      "hypothesis": "A small standard slice set will change follow-up decisions more often than ad hoc diagnostics.",
-      "minimal_protocol": "Define slices by operator, family, length, parse status, evidence state, and artifact boundary; apply to three anchor reports.",
-      "success_signal": "The slices reveal at least one concrete branch, stop, or rerun decision per anchor.",
-      "failure_signal": "Slices are descriptive but do not change any experiment decision.",
-      "expected_artifacts": [
-        "diagnostic_template",
-        "slice_tables",
-        "decision_notes",
-        "report"
-      ],
-      "next_step": "Apply to one compiler, one selector, and one posttraining anchor.",
-      "avoid": "Do not add diagnostics without a decision they can change.",
-      "source": "research_programs/interpretability_and_diagnostics/backlog.md"
-    },
-    {
-      "id": "pressure_diagnostic_preflight",
-      "title": "Pressure Diagnostic Preflight",
-      "status": "program-seed",
-      "priority": "P2",
-      "effort": "medium",
-      "programs": [
-        "interpretability_and_diagnostics",
-        "process_control_and_tool_use"
-      ],
-      "question": "Can cheap token-pressure and execution-pressure probes predict when an expensive run is worth doing?",
-      "hypothesis": "Preflight probes can detect capacity or tool-pressure failures before full training or large sweeps.",
-      "minimal_protocol": "Run tiny diagnostic probes on candidate mechanisms, compare their signals with later full-run results, and estimate decision precision.",
-      "success_signal": "Preflight results correctly predict stop or proceed decisions on multiple mechanisms.",
-      "failure_signal": "Preflight signals have no relation to full-run outcomes.",
-      "expected_artifacts": [
-        "preflight_probe_suite",
-        "prediction_table",
-        "decision_metrics",
-        "report"
-      ],
-      "next_step": "Use token-pressure and tool-control experiments as anchors.",
-      "avoid": "Do not treat preflight as evidence for final claims without full evaluation.",
-      "source": "research_programs/interpretability_and_diagnostics/backlog.md"
-    },
-    {
-      "id": "hidden_label_boundary_linter",
-      "title": "Hidden-Label Boundary Linter",
-      "status": "infrastructure",
-      "priority": "P0",
-      "effort": "small",
-      "programs": [
-        "reliability_and_safety",
-        "collective_experimentation_infrastructure"
-      ],
-      "question": "Can repository checks force every new result to label oracle-only and deployable evidence boundaries?",
-      "hypothesis": "A lightweight text and metadata linter can prevent hidden-label confusion without slowing pilots.",
-      "minimal_protocol": "Add a required report section or metadata field, scan new experiments, and document accepted boundary labels.",
-      "success_signal": "New experiments fail validation when hidden-label boundary documentation is missing.",
-      "failure_signal": "The rule creates noisy failures or misses obvious oracle/deployable ambiguity.",
-      "expected_artifacts": [
-        "validation_rule",
-        "template_update",
-        "boundary_docs"
-      ],
-      "next_step": "Prototype against high-impact selector and oracle-ceiling reports.",
-      "avoid": "Do not require heavy formal proof for early pilots.",
-      "source": "research_programs/reliability_and_safety/backlog.md"
-    },
-    {
-      "id": "reproducibility_scorecards_high_impact",
-      "title": "Reproducibility Scorecards For High-Impact Experiments",
-      "status": "infrastructure",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "reliability_and_safety",
-        "collective_experimentation_infrastructure"
-      ],
-      "question": "Which high-impact experiments are reproducible enough to guide future programs?",
-      "hypothesis": "A scorecard over seeds, data, commands, artifacts, and boundary labels will prioritize curation work.",
-      "minimal_protocol": "Score top anchor experiments from claims and program scorecards, then add curation tasks for missing pieces.",
-      "success_signal": "Each high-impact anchor has a reproducibility grade and concrete repair task.",
-      "failure_signal": "Scorecards duplicate the readiness matrix without adding decision value.",
-      "expected_artifacts": [
-        "scorecard_schema",
-        "anchor_scores",
-        "curation_backlog"
-      ],
-      "next_step": "Use experiment readiness and claim evidence counts to select anchors.",
-      "avoid": "Do not block exploratory work on full reproducibility unless it is used as shared evidence.",
-      "source": "research_programs/reliability_and_safety/backlog.md"
-    },
-    {
-      "id": "agent_evidence_navigation_test",
-      "title": "Agent Evidence Navigation Test",
-      "status": "infrastructure",
-      "priority": "P0",
-      "effort": "small",
-      "programs": [
-        "collective_experimentation_infrastructure"
-      ],
-      "question": "Can a new agent find relevant prior evidence faster using repository indexes than by raw search alone?",
-      "hypothesis": "Program indexes, claims, readiness, and related-work search reduce duplicate proposals and improve anchor selection.",
-      "minimal_protocol": "Give agents held-out rough ideas, compare raw rg search against documented discovery workflow, and score anchor quality and time.",
-      "success_signal": "The documented workflow finds better anchors with lower duplicate rate.",
-      "failure_signal": "Agents ignore or cannot use the generated knowledge surfaces.",
-      "expected_artifacts": [
-        "navigation_tasks",
-        "agent_logs",
-        "duplicate_rate_metrics",
-        "report"
-      ],
-      "next_step": "Use existing discovery workflow and related-work CLI.",
-      "avoid": "Do not evaluate only on ideas already named in file titles.",
-      "source": "research_programs/collective_experimentation_infrastructure/backlog.md"
-    },
-    {
-      "id": "proposal_deduplication_audit",
-      "title": "Proposal Deduplication Audit",
-      "status": "infrastructure",
-      "priority": "P1",
-      "effort": "small",
-      "programs": [
-        "collective_experimentation_infrastructure",
-        "reliability_and_safety"
-      ],
-      "question": "Can the repo detect repeated experiment ideas before they become new runs?",
-      "hypothesis": "A sample-based audit against catalog, claims, and future queue will catch most near duplicates.",
-      "minimal_protocol": "Sample proposed ideas, run related-work search, compare against human duplicate judgments, and update intake requirements.",
-      "success_signal": "The audit catches near duplicates without suppressing genuinely new variants.",
-      "failure_signal": "Duplicate warnings are too noisy or miss obvious repeated ideas.",
-      "expected_artifacts": [
-        "dedupe_cases",
-        "related_search_metrics",
-        "intake_update"
-      ],
-      "next_step": "Generate cases from future queue items and recent scaffolded ideas.",
-      "avoid": "Do not equate shared topic tags with duplicate mechanisms.",
-      "source": "research_programs/collective_experimentation_infrastructure/backlog.md"
-    },
-    {
-      "id": "multimodal_visual_table_transform_probe",
-      "title": "Multimodal Visual Table Transform Probe",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "multimodal_and_embodied_small_models",
-        "structured_execution_and_compilers"
-      ],
-      "question": "Do executable intermediates help small models transform visual table inputs?",
-      "hypothesis": "Structured intermediate programs will transfer better than direct vision-language answers on held-out visual table layouts.",
-      "minimal_protocol": "Adapt one table-transform task to image-rendered tables, compare direct answer, extracted structure, and executable intermediate variants.",
-      "success_signal": "Executable intermediates improve held-out layout accuracy without manual table extraction leakage.",
-      "failure_signal": "The gain depends entirely on an external OCR or parser oracle.",
-      "expected_artifacts": [
-        "visual_table_dataset",
-        "extraction_boundary_note",
-        "shift_metrics",
-        "report"
-      ],
-      "next_step": "Run intake using Foofah and table-transform anchors.",
-      "avoid": "Do not hide vision parsing errors by evaluating only on gold extracted tables.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "ui_state_tool_execution_probe",
-      "title": "UI State Tool Execution Probe",
-      "status": "program-seed",
-      "priority": "P2",
-      "effort": "medium",
-      "programs": [
-        "multimodal_and_embodied_small_models",
-        "process_control_and_tool_use"
-      ],
-      "question": "Can process-control policies transfer from text/table tools to UI-state observations?",
-      "hypothesis": "Tool-state schemas can represent UI observations and action history with only small extensions.",
-      "minimal_protocol": "Create a tiny UI-state task suite, map observations into the existing tool-state schema, and compare heuristic versus learned controllers.",
-      "success_signal": "The controller transfers basic STOP/MORE or repair behavior to UI tasks under a fixed budget.",
-      "failure_signal": "UI state requires a new representation that invalidates the current process-control schema.",
-      "expected_artifacts": [
-        "ui_task_suite",
-        "tool_state_mapping",
-        "controller_metrics",
-        "report"
-      ],
-      "next_step": "Prototype with static UI states before live browser control.",
-      "avoid": "Do not start with unconstrained open-web tasks.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "synthetic_curriculum_transfer_bakeoff",
-      "title": "Synthetic Curriculum Transfer Bakeoff",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "data_generation_and_synthetic_curriculum_design",
-        "benchmark_generalization"
-      ],
-      "question": "Which synthetic curriculum source transfers best: human-designed, model-generated, or failure-mined?",
-      "hypothesis": "Failure-mined curricula transfer better than broad model-generated curricula when held-out primitives are explicit.",
-      "minimal_protocol": "Generate three curriculum sources for one held-out primitive suite and compare transfer under matched data volume and model budget.",
-      "success_signal": "One curriculum source improves held-out performance without hurting direct baselines.",
-      "failure_signal": "Curriculum gains are IID-only or disappear under matched difficulty.",
-      "expected_artifacts": [
-        "curriculum_manifest",
-        "data_generation_config",
-        "transfer_metrics",
-        "report"
-      ],
-      "next_step": "Reuse bridge, recombination, and held-out primitive split patterns.",
-      "avoid": "Do not judge curricula only on training or IID validation.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "failure_mined_curriculum_generator",
-      "title": "Failure-Mined Curriculum Generator",
-      "status": "program-seed",
-      "priority": "P2",
-      "effort": "medium",
-      "programs": [
-        "data_generation_and_synthetic_curriculum_design",
-        "reliability_and_safety"
-      ],
-      "question": "Can failure slices automatically generate new training cases that reduce repeated errors?",
-      "hypothesis": "Failure-mined cases help when tied to a falsifiable slice and held-out control, not when used as unfiltered augmentation.",
-      "minimal_protocol": "Mine common failure slices, generate synthetic cases, train or prompt with them, and evaluate on untouched held-out failures.",
-      "success_signal": "The targeted slice improves without creating new false positives elsewhere.",
-      "failure_signal": "Generated cases overfit surface patterns or degrade unrelated slices.",
-      "expected_artifacts": [
-        "failure_slice_manifest",
-        "generated_case_manifest",
-        "before_after_slices",
-        "report"
-      ],
-      "next_step": "Start with diagnostic failure-slicing template once available.",
-      "avoid": "Do not train on evaluation failures without a clean holdout.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "multi_model_role_ensemble_pool",
-      "title": "Multi-Model Role Ensemble Pool",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "small_model_collaboration",
-        "evidence_conditioned_selection"
-      ],
-      "question": "Can generator, verifier, critic, and evidence-acquirer roles outperform a single small-model policy under fixed total budget?",
-      "hypothesis": "Role specialization helps only when roles contribute non-redundant evidence and share a strict cost accounting.",
-      "minimal_protocol": "Assign roles on one candidate pool, compare single-policy, homogeneous ensemble, role ensemble, and oracle routing at equal cost.",
-      "success_signal": "Role ensembles improve selected accuracy or coverage at matched budget.",
-      "failure_signal": "All gains come from extra samples or correlated role outputs.",
-      "expected_artifacts": [
-        "role_prompt_manifest",
-        "budget_accounting",
-        "ensemble_metrics",
-        "report"
-      ],
-      "next_step": "Use consensus and selector anchors to define the shared pool.",
-      "avoid": "Do not compare a multi-role system to a weaker single-model budget.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "committee_verifier_critic_loop",
-      "title": "Committee Verifier-Critic Loop",
-      "status": "program-seed",
-      "priority": "P2",
-      "effort": "medium",
-      "programs": [
-        "small_model_collaboration",
-        "process_control_and_tool_use"
-      ],
-      "question": "Can a committee decide when critique or verification is worth another step?",
-      "hypothesis": "A small committee can learn budget-aware escalation better than fixed critique rounds.",
-      "minimal_protocol": "Run fixed-round, single-controller, and committee-controller loops on identical pools with explicit action costs.",
-      "success_signal": "Committee control beats fixed rounds and single-controller baselines on accuracy per cost.",
-      "failure_signal": "Committee discussion increases cost without improving commit quality.",
-      "expected_artifacts": [
-        "committee_logs",
-        "action_cost_table",
-        "controller_metrics",
-        "report"
-      ],
-      "next_step": "Start from STOP/MORE controller and consensus experiments.",
-      "avoid": "Do not evaluate with unlimited debate rounds.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "latency_ceiling_selector_rerun",
-      "title": "Latency-Ceiling Selector Rerun",
-      "status": "program-seed",
-      "priority": "P1",
-      "effort": "small",
-      "programs": [
-        "on_device_and_latency_constrained_agents",
-        "process_control_and_tool_use"
-      ],
-      "question": "Which selector or tool-control gains survive strict latency, token, and call ceilings?",
-      "hypothesis": "Some evidence mechanisms remain useful when converted into early-exit and small-k policies.",
-      "minimal_protocol": "Rerun one selector/tool-control experiment with strict latency, token, and tool-call budgets plus early-exit policies.",
-      "success_signal": "A constrained policy retains a meaningful fraction of the unconstrained gain over simple baselines.",
-      "failure_signal": "The method collapses when evidence budget is capped or action latency is counted.",
-      "expected_artifacts": [
-        "latency_budget_manifest",
-        "early_exit_metrics",
-        "cost_accuracy_curve",
-        "report"
-      ],
-      "next_step": "Pick an existing adaptive controller with a clear smoke path.",
-      "avoid": "Do not ignore preprocessing or tool-call latency.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "compressed_memory_budget_probe",
-      "title": "Compressed Memory Budget Probe",
-      "status": "program-seed",
-      "priority": "P2",
-      "effort": "medium",
-      "programs": [
-        "on_device_and_latency_constrained_agents",
-        "algorithmic_memory_and_retrieval"
-      ],
-      "question": "Can memory remain useful when context and storage are severely compressed?",
-      "hypothesis": "Constraint and test memories compress better than raw examples.",
-      "minimal_protocol": "Compare raw-example, summary, constraint, and test-memory compression under fixed context and storage ceilings.",
-      "success_signal": "Compressed constraint or test memory beats no-memory and raw-summary controls.",
-      "failure_signal": "Compression removes the signal that made memory useful.",
-      "expected_artifacts": [
-        "compression_manifest",
-        "memory_mode_metrics",
-        "latency_table",
-        "report"
-      ],
-      "next_step": "Use memory mode comparison suite once its schema exists.",
-      "avoid": "Do not count retrieval time as free.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "static_research_navigation_dashboard",
-      "title": "Static Research Navigation Dashboard",
-      "status": "infrastructure",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "human_agent_research_interfaces",
-        "collective_experimentation_infrastructure"
-      ],
-      "question": "Can a static dashboard help humans and agents choose better next experiments than Markdown indexes alone?",
-      "hypothesis": "A dashboard over programs, claims, readiness, artifacts, and future queue will reduce search time and duplicate proposals.",
-      "minimal_protocol": "Build a static generated dashboard from existing CSV/JSON indexes and evaluate it with navigation tasks.",
-      "success_signal": "Users or agents find higher-quality anchors faster than with raw Markdown navigation.",
-      "failure_signal": "The dashboard duplicates existing docs without changing decisions.",
-      "expected_artifacts": [
-        "static_dashboard",
-        "navigation_eval",
-        "report"
-      ],
-      "next_step": "Start with generated data files already produced by make catalog.",
-      "avoid": "Do not require a server or external service for core navigation.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "evidence_branching_ui_probe",
-      "title": "Evidence Branching UI Probe",
-      "status": "program-seed",
-      "priority": "P2",
-      "effort": "medium",
-      "programs": [
-        "human_agent_research_interfaces",
-        "collective_experimentation_infrastructure"
-      ],
-      "question": "What interface lets a researcher branch from one result into controls, replications, or new programs fastest?",
-      "hypothesis": "Branch choices improve when claims, readiness gaps, related experiments, and program backlogs are visible in one workflow.",
-      "minimal_protocol": "Prototype a static branching view for a small set of anchor experiments and compare branch quality with the current docs workflow.",
-      "success_signal": "Branch proposals cite more relevant evidence and fewer near duplicates.",
-      "failure_signal": "The interface adds navigation overhead without improving proposal quality.",
-      "expected_artifacts": [
-        "branching_view",
-        "proposal_quality_rubric",
-        "navigation_logs",
-        "report"
-      ],
-      "next_step": "Use high-impact claim evidence as the first anchor set.",
-      "avoid": "Do not build an interface before defining the branch-quality rubric.",
-      "source": "knowledge/future_program_seeds.md"
-    },
-    {
-      "id": "thinking_budget_controller",
-      "title": "Learned Thinking-Budget Controller",
-      "status": "ready-for-intake",
-      "priority": "P1",
-      "effort": "medium",
-      "programs": [
-        "test_time_reasoning_budget",
-        "process_control_and_tool_use"
-      ],
-      "question": "Can a deployable controller allocate the thinking-token budget better than the fixed ~1024 optimum, given thinking has an overthinking cost?",
-      "hypothesis": "A visible-signal STOP/MORE policy over thinking tokens can match or beat a fixed budget at lower mean cost by spending more thinking only on hard inputs.",
-      "minimal_protocol": "Reuse the thinking_budget_scaling MBPP harness; learn or threshold a per-task budget from visible features; compare deployable accuracy-vs-mean-thinking-tokens against fixed budgets and unbudgeted.",
-      "success_signal": "Controller Pareto-dominates fixed budgets on deployable accuracy vs mean thinking tokens, beating a length/difficulty-blind baseline.",
-      "failure_signal": "No improvement over the best fixed budget once mean token cost is matched.",
-      "expected_artifacts": [
-        "budget_policy",
-        "accuracy_vs_tokens_pareto",
-        "report"
-      ],
-      "next_step": "Anchor on qwen35_4b_thinking_budget_scaling and the evidence-budget controller experiments.",
-      "avoid": "Do not let the controller read hidden test outcomes; budget decisions must use visible information only.",
-      "source": "research_programs/test_time_reasoning_budget/backlog.md"
-    },
-    {
-      "id": "thinking_content_vs_compute_control",
-      "title": "Thinking Content vs Compute (Stronger Control)",
-      "status": "ready-for-intake",
-      "priority": "P1",
-      "effort": "small",
-      "programs": [
-        "test_time_reasoning_budget",
-        "interpretability_and_diagnostics"
-      ],
-      "question": "How much of the native-thinking gain is coherent reasoning versus compute + scaffold + token-presence?",
-      "hypothesis": "Substituting a different task's thinking (removing token-presence, not just order) will collapse more of the gain than shuffling, isolating the genuine-reasoning share.",
-      "minimal_protocol": "On the thinking_budget_scaling substrate, add controls: shuffled-thinking (token order), foreign-task thinking (token-presence removed), and matched-compute no-think; compare deployable accuracy at matched budgets.",
-      "success_signal": "A clear ordering real > foreign > shuffled > no_think that quantifies the reasoning vs compute/scaffold split.",
-      "failure_signal": "Foreign-task thinking matches real thinking, i.e. the gain is essentially compute + scaffold, not reasoning.",
-      "expected_artifacts": [
-        "control_conditions",
-        "decomposition_table",
-        "report"
-      ],
-      "next_step": "Extend qwen35_4b_thinking_budget_scaling controls with foreign-task thinking.",
-      "avoid": "Do not infer a content effect from a single budget; sweep and report noise.",
-      "source": "research_programs/test_time_reasoning_budget/backlog.md"
-    }
-  ]
+ "schema_version": 1,
+ "candidate_programs": [
+  {
+   "id": "multimodal_and_embodied_small_models",
+   "title": "Multimodal And Embodied Small Models",
+   "focus": "Test whether structured execution and evidence-selection patterns survive when inputs include images, UI state, audio, or physical observations."
+  },
+  {
+   "id": "data_generation_and_synthetic_curriculum_design",
+   "title": "Data Generation And Synthetic Curriculum Design",
+   "focus": "Learn which synthetic curricula create transfer rather than benchmark-specific competence."
+  },
+  {
+   "id": "small_model_collaboration",
+   "title": "Small-Model Collaboration",
+   "focus": "Measure whether multiple specialized small models outperform one single-policy small model under fixed budget."
+  },
+  {
+   "id": "on_device_and_latency_constrained_agents",
+   "title": "On-Device And Latency-Constrained Agents",
+   "focus": "Find mechanisms that preserve gains under strict inference, memory, latency, and tool-call ceilings."
+  },
+  {
+   "id": "human_agent_research_interfaces",
+   "title": "Human-Agent Research Interfaces",
+   "focus": "Build interfaces that help people and agents inspect, branch, and critique experiment evidence quickly."
+  }
+ ],
+ "proposals": [
+  {
+   "id": "visible_abstention_selector_benchmark",
+   "title": "Visible Abstention Selector Benchmark",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "medium",
+   "programs": [
+    "evidence_conditioned_selection",
+    "reliability_and_safety"
+   ],
+   "question": "Can a selector improve precision without hiding failures behind an unreported commit-rate drop?",
+   "hypothesis": "Explicit abstention labels and coverage reporting will separate useful evidence selection from silent cherry-picking.",
+   "minimal_protocol": "Build one shared candidate pool with visible-only features, train selector variants, and report precision, recall, coverage, and selected accuracy by family.",
+   "success_signal": "A visible-only selector beats first-visible, shortest-visible, and random-order baselines at matched coverage.",
+   "failure_signal": "Accuracy gains disappear when coverage is matched or family-held-out evaluation is applied.",
+   "expected_artifacts": [
+    "candidate_pool_manifest",
+    "selector_metrics",
+    "abstention_slices",
+    "report"
+   ],
+   "next_step": "Run idea intake against selector and oracle-ceiling anchor experiments.",
+   "avoid": "Do not use hidden expected answers as features or training labels unless clearly reported as an oracle ceiling.",
+   "source": "research_programs/evidence_conditioned_selection/backlog.md"
+  },
+  {
+   "id": "expected_output_free_counterexample_tests",
+   "title": "Expected-Output-Free Counterexample Tests",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "medium",
+   "programs": [
+    "active_evidence_acquisition",
+    "reliability_and_safety"
+   ],
+   "question": "Can acquired tests distinguish candidates without requiring hidden expected outputs?",
+   "hypothesis": "Agreement, invariants, metamorphic checks, and execution consistency can improve selection while preserving deployability.",
+   "minimal_protocol": "Generate candidate-specific tests with no hidden answer key, compare by invariants and cross-candidate agreement, then evaluate selected outputs only after commit.",
+   "success_signal": "Selection improves over random acquisition and fixed-order acquisition under the same evidence budget.",
+   "failure_signal": "The method helps only when hidden answers or task-specific leaks enter the evidence loop.",
+   "expected_artifacts": [
+    "test_generation_manifest",
+    "evidence_budget_table",
+    "hidden_boundary_note",
+    "report"
+   ],
+   "next_step": "Start from active counterexample and model-in-loop counterexample experiments.",
+   "avoid": "Do not treat post-hoc oracle scoring as deployable evidence.",
+   "source": "research_programs/active_evidence_acquisition/backlog.md"
+  },
+  {
+   "id": "independent_consensus_vs_selector_pool",
+   "title": "Independent Consensus Versus Selector Pool",
+   "status": "ready-for-intake",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "evidence_conditioned_selection",
+    "algorithmic_memory_and_retrieval"
+   ],
+   "question": "When does independent implementation consensus beat a trained selector on the same candidate pool?",
+   "hypothesis": "Consensus helps when failures are uncorrelated, while learned selectors help when visible evidence is structured but sparse.",
+   "minimal_protocol": "Create matched candidate pools with independent generation, learned selector scores, and consensus scores; evaluate under family holdouts.",
+   "success_signal": "The comparison identifies regimes where consensus, selection, or hybrid routing dominates.",
+   "failure_signal": "Consensus gains vanish after controlling for extra samples or shared prompt artifacts.",
+   "expected_artifacts": [
+    "matched_candidate_pool",
+    "consensus_metrics",
+    "selector_metrics",
+    "routing_table"
+   ],
+   "next_step": "Use existing independent retrieval and counterexample selection anchors as prior evidence.",
+   "avoid": "Do not compare methods with unequal sample budgets.",
+   "source": "knowledge/research_roadmap.md"
+  },
+  {
+   "id": "deployable_gap_scorecards",
+   "title": "Deployable Gap Scorecards",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "small",
+   "programs": [
+    "evidence_conditioned_selection",
+    "reliability_and_safety"
+   ],
+   "question": "Which oracle-ceiling results remain promising after visible-only constraints are made explicit?",
+   "hypothesis": "A standard scorecard will reveal reusable mechanisms and retire variants that depend on non-deployable evidence.",
+   "minimal_protocol": "Select high-impact oracle-ceiling experiments, annotate evidence visibility, baselines, artifact location, and deployable follow-up.",
+   "success_signal": "Every reviewed ceiling result has a clear keep, rerun, or retire decision.",
+   "failure_signal": "Scorecards cannot distinguish mechanism promise from hidden-label dependence.",
+   "expected_artifacts": [
+    "scorecard_table",
+    "claim_updates",
+    "decision_record"
+   ],
+   "next_step": "Seed from selector, code ABI, and coverage-gate reports.",
+   "avoid": "Do not rewrite old results as deployable when they were explicitly oracle-bounded.",
+   "source": "research_programs/evidence_conditioned_selection/backlog.md"
+  },
+  {
+   "id": "typed_vs_latent_vs_text_compiler_suite",
+   "title": "Typed Versus Latent Versus Text Compiler Suite",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "large",
+   "programs": [
+    "structured_execution_and_compilers",
+    "benchmark_generalization"
+   ],
+   "question": "Which structured representation causes generalization: typed bytecode, latent slots, text programs, or execution feedback?",
+   "hypothesis": "Typed state helps most under compositional shifts, while latent state helps only when supervision and task families align.",
+   "minimal_protocol": "Run direct text, typed bytecode, latent slot, and execution-feedback variants on one shared suite with length, family, and paraphrase shifts.",
+   "success_signal": "At least one representation has a reproducible advantage across non-IID splits and matched budget.",
+   "failure_signal": "All gains collapse under shared splits or shuffled/corrupted state controls.",
+   "expected_artifacts": [
+    "shared_suite_manifest",
+    "representation_configs",
+    "shift_metrics",
+    "report"
+   ],
+   "next_step": "Use compiler, latent executor, and structured slot anchors to define the suite.",
+   "avoid": "Do not compare representations on different task mixes or budgets.",
+   "source": "research_programs/structured_execution_and_compilers/backlog.md"
+  },
+  {
+   "id": "compiler_shift_replication_grid",
+   "title": "Compiler Shift Replication Grid",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "medium",
+   "programs": [
+    "structured_execution_and_compilers",
+    "benchmark_generalization"
+   ],
+   "question": "Which compiler-style gains survive seed, length, operator, and paraphrase shifts?",
+   "hypothesis": "Some strong results are robust to seed changes but brittle to family and paraphrase shifts.",
+   "minimal_protocol": "Replicate top compiler-style experiments across a small grid of seeds and shifts with identical reporting.",
+   "success_signal": "The grid identifies stable effects and brittle effects without requiring a new mechanism.",
+   "failure_signal": "Replication variance overwhelms claimed mechanism differences.",
+   "expected_artifacts": [
+    "replication_manifest",
+    "shift_taxonomy",
+    "metrics_grid",
+    "report"
+   ],
+   "next_step": "Pick three anchor experiments from the compiler program scorecard.",
+   "avoid": "Do not add a new model variant until the shift grid is defined.",
+   "source": "research_programs/benchmark_generalization/backlog.md"
+  },
+  {
+   "id": "supervision_causality_ablation",
+   "title": "Supervision Causality Ablation",
+   "status": "ready-for-intake",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "structured_execution_and_compilers",
+    "interpretability_and_diagnostics"
+   ],
+   "question": "Is the lift from state-prefix supervision, final-answer supervision, program-token supervision, or data filtering?",
+   "hypothesis": "State supervision contributes only when state variables map cleanly to task factors.",
+   "minimal_protocol": "Run matched ablations with final-answer only, state-prefix, program-token, shuffled-state, and corrupted-state supervision.",
+   "success_signal": "A named supervision source survives shuffled and corrupted controls.",
+   "failure_signal": "Lift tracks data filtering or token budget rather than the intended representation.",
+   "expected_artifacts": [
+    "ablation_configs",
+    "control_metrics",
+    "diagnostic_slices",
+    "report"
+   ],
+   "next_step": "Start from structured slot and dense supervision ladder anchors.",
+   "avoid": "Do not infer causality from a single no-control training run.",
+   "source": "research_programs/structured_execution_and_compilers/backlog.md"
+  },
+  {
+   "id": "memory_mode_comparison_suite",
+   "title": "Memory Mode Comparison Suite",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "medium",
+   "programs": [
+    "algorithmic_memory_and_retrieval",
+    "benchmark_generalization"
+   ],
+   "question": "Which memory use is actually useful: prompt context, constraints, tests, candidates, or failure cases?",
+   "hypothesis": "Memory is most useful when converted into constraints or tests rather than appended as context.",
+   "minimal_protocol": "Retrieve the same source items, transform them into multiple memory modes, and evaluate on matched held-out families.",
+   "success_signal": "Constraint or test memory beats prompt memory, corrupted retrieval, and no-memory baselines.",
+   "failure_signal": "All memory modes underperform direct inference or rely on same-family leakage.",
+   "expected_artifacts": [
+    "memory_schema",
+    "retrieval_manifest",
+    "mode_metrics",
+    "report"
+   ],
+   "next_step": "Use independent retrieval and feature-factorized rule experiments as anchors.",
+   "avoid": "Do not treat larger prompts as a free budget increase.",
+   "source": "research_programs/algorithmic_memory_and_retrieval/backlog.md"
+  },
+  {
+   "id": "constraint_memory_counterexample_generator",
+   "title": "Constraint Memory Counterexample Generator",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "algorithmic_memory_and_retrieval",
+    "active_evidence_acquisition"
+   ],
+   "question": "Can retrieved failures become counterexample generators instead of answer hints?",
+   "hypothesis": "Failure-case memory can create discriminating tests while reducing direct-answer contamination.",
+   "minimal_protocol": "Retrieve similar verified failures, extract constraints, generate candidate-specific counterexamples, and evaluate selection impact.",
+   "success_signal": "Generated counterexamples improve selection under visible-only constraints.",
+   "failure_signal": "Counterexamples are either redundant with public tests or leak hidden labels.",
+   "expected_artifacts": [
+    "failure_memory_bank",
+    "generated_tests",
+    "selection_metrics",
+    "report"
+   ],
+   "next_step": "Run related-work discovery for counterexample memory and active acquisition.",
+   "avoid": "Do not copy expected outputs from retrieved examples into the new task.",
+   "source": "research_programs/algorithmic_memory_and_retrieval/backlog.md"
+  },
+  {
+   "id": "operator_card_schema_probe",
+   "title": "Operator Card Schema Probe",
+   "status": "ready-for-intake",
+   "priority": "P1",
+   "effort": "small",
+   "programs": [
+    "operator_and_skill_inventories",
+    "collective_experimentation_infrastructure"
+   ],
+   "question": "What operator-card fields make inventories reusable across experiments?",
+   "hypothesis": "Examples, invariants, aliases, failure modes, and type signatures are enough for shortlisting and debugging.",
+   "minimal_protocol": "Define a small card schema, encode one existing operator bank, and test retrieval and shortlisting against a baseline bank.",
+   "success_signal": "Cards improve diagnosis or top-k operator retrieval without increasing manual ambiguity.",
+   "failure_signal": "The schema is too heavy or fails to support held-out operator lookup.",
+   "expected_artifacts": [
+    "operator_card_schema",
+    "encoded_bank",
+    "retrieval_metrics",
+    "report"
+   ],
+   "next_step": "Sample operator inventory experiments and extract common fields.",
+   "avoid": "Do not create a schema that only fits one existing task family.",
+   "source": "research_programs/operator_and_skill_inventories/backlog.md"
+  },
+  {
+   "id": "operator_bank_shortlister_scaling",
+   "title": "Operator Bank Shortlister Scaling",
+   "status": "ready-for-intake",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "operator_and_skill_inventories",
+    "evidence_conditioned_selection"
+   ],
+   "question": "Can a shortlister preserve selected accuracy as operator banks grow?",
+   "hypothesis": "A learned top-k shortlister will beat random and heuristic search when trained with held-out primitive families.",
+   "minimal_protocol": "Scale bank size, train top-k shortlisters, compare full-search oracle, random shortlister, and closed-vocabulary baselines.",
+   "success_signal": "Top-k cost falls while deployable selected accuracy stays above heuristic baselines.",
+   "failure_signal": "Coverage rises but selected accuracy drops without a reliable selection plan.",
+   "expected_artifacts": [
+    "operator_bank_manifest",
+    "shortlister_configs",
+    "cost_accuracy_curve",
+    "report"
+   ],
+   "next_step": "Use inventory shortlister and scaling-stress experiments as anchors.",
+   "avoid": "Do not report coverage without selected accuracy and search cost.",
+   "source": "research_programs/operator_and_skill_inventories/backlog.md"
+  },
+  {
+   "id": "active_disambiguation_type_collision",
+   "title": "Active Disambiguation For Type-Colliding Operators",
+   "status": "program-seed",
+   "priority": "P2",
+   "effort": "medium",
+   "programs": [
+    "operator_and_skill_inventories",
+    "active_evidence_acquisition"
+   ],
+   "question": "Can active probes separate operators that share type signatures but differ semantically?",
+   "hypothesis": "A few targeted examples can disambiguate type-colliding operators better than passive shortlist scores.",
+   "minimal_protocol": "Construct operator pairs with shared signatures, ask an acquisition policy for distinguishing probes, and evaluate downstream operator choice.",
+   "success_signal": "Targeted probes improve operator selection per evidence token over random probes.",
+   "failure_signal": "Disambiguation requires hidden outputs or more budget than full search.",
+   "expected_artifacts": [
+    "collision_bank",
+    "probe_manifest",
+    "selection_metrics",
+    "report"
+   ],
+   "next_step": "Identify collisions from current operator inventory runs.",
+   "avoid": "Do not count probes that reveal the hidden target operator directly.",
+   "source": "research_programs/operator_and_skill_inventories/backlog.md"
+  },
+  {
+   "id": "acquisition_policy_comparison_pool",
+   "title": "Acquisition Policy Comparison Pool",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "medium",
+   "programs": [
+    "active_evidence_acquisition",
+    "process_control_and_tool_use"
+   ],
+   "question": "Which acquisition rule wins when uncertainty, disagreement, information gain, and learned policies share one pool?",
+   "hypothesis": "Learned policies help only when trained on features that transfer across task families.",
+   "minimal_protocol": "Build one acquisition pool and run random, diversity, disagreement, information gain, and learned policies with fixed budgets.",
+   "success_signal": "A policy improves selection quality per unit evidence across at least two families.",
+   "failure_signal": "The best policy changes unpredictably across families or loses to fixed-order acquisition.",
+   "expected_artifacts": [
+    "acquisition_pool",
+    "policy_configs",
+    "budget_curve",
+    "report"
+   ],
+   "next_step": "Derive pool features from active trace policy and adaptive evidence budget experiments.",
+   "avoid": "Do not compare policies on different candidate or evidence pools.",
+   "source": "research_programs/active_evidence_acquisition/backlog.md"
+  },
+  {
+   "id": "family_aware_evidence_policy",
+   "title": "Family-Aware Evidence Policy",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "active_evidence_acquisition",
+    "benchmark_generalization"
+   ],
+   "question": "Can acquisition policies adapt to date/time, numeric, table, and code task families without overfitting?",
+   "hypothesis": "Family-aware features improve evidence value, but only when family labels are coarse and deployable.",
+   "minimal_protocol": "Train policy variants with no family, coarse family, and oracle family features; evaluate on held-out family mixtures.",
+   "success_signal": "Coarse deployable family features improve budget-normalized selection over no-family controls.",
+   "failure_signal": "Only oracle family labels help or performance collapses on held-out families.",
+   "expected_artifacts": [
+    "family_feature_manifest",
+    "heldout_metrics",
+    "budget_table",
+    "report"
+   ],
+   "next_step": "Use current active evidence experiments to define feature families.",
+   "avoid": "Do not use benchmark split identity as a deployable feature.",
+   "source": "research_programs/active_evidence_acquisition/backlog.md"
+  },
+  {
+   "id": "stop_more_controller_visible_labels",
+   "title": "STOP/MORE Controller With Visible Labels",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "medium",
+   "programs": [
+    "process_control_and_tool_use",
+    "evidence_conditioned_selection"
+   ],
+   "question": "Can a controller decide when to gather more evidence using only visible training labels?",
+   "hypothesis": "A STOP/MORE policy can beat fixed-budget and always-continue heuristics when trained on deployable features.",
+   "minimal_protocol": "Define tool-state features, train STOP/MORE policies without hidden correctness labels at decision time, and compare against fixed budgets.",
+   "success_signal": "The learned controller improves selected accuracy per cost under matched evidence constraints.",
+   "failure_signal": "The controller only wins by using hidden labels or by silently spending more budget.",
+   "expected_artifacts": [
+    "tool_state_schema",
+    "controller_configs",
+    "cost_accuracy_curve",
+    "report"
+   ],
+   "next_step": "Anchor on adaptive tool controller and adaptive evidence budget policy experiments.",
+   "avoid": "Do not let hidden evaluation correctness enter runtime state.",
+   "source": "research_programs/process_control_and_tool_use/backlog.md"
+  },
+  {
+   "id": "noisy_tool_controller_stress",
+   "title": "Noisy Tool Controller Stress Test",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "process_control_and_tool_use",
+    "reliability_and_safety"
+   ],
+   "question": "Do process policies still help when tools are flaky, delayed, or misleading?",
+   "hypothesis": "Robust controllers should learn when to distrust or repeat tool evidence, not just call tools more often.",
+   "minimal_protocol": "Inject controlled tool noise, latency, and misleading examples into an existing tool loop and compare learned, heuristic, and oracle policies.",
+   "success_signal": "A controller preserves accuracy-cost tradeoffs under noise better than fixed and always-tool baselines.",
+   "failure_signal": "The policy overuses noisy tools or transfers poorly across noise regimes.",
+   "expected_artifacts": [
+    "noise_manifest",
+    "tool_state_logs",
+    "robustness_metrics",
+    "report"
+   ],
+   "next_step": "Use process-control experiments with explicit tool states as anchors.",
+   "avoid": "Do not evaluate only on clean tools after training with noise.",
+   "source": "research_programs/process_control_and_tool_use/backlog.md"
+  },
+  {
+   "id": "posttraining_method_shared_substrate",
+   "title": "Posttraining Method Shared Substrate",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "large",
+   "programs": [
+    "posttraining_and_adaptation",
+    "benchmark_generalization"
+   ],
+   "question": "How do SFT, DPO, process distillation, and DAgger compare on one candidate/evidence substrate?",
+   "hypothesis": "Method ranking changes when all methods share data, model, budget, controls, and held-out families.",
+   "minimal_protocol": "Prepare one substrate, train method variants with frozen and shuffled-label controls, and evaluate on IID plus held-out splits.",
+   "success_signal": "One method shows a robust advantage over frozen, shuffled, and weak-baseline controls.",
+   "failure_signal": "All gains are explained by data selection, extra tokens, or weak baselines.",
+   "expected_artifacts": [
+    "training_manifest",
+    "artifact_manifest",
+    "method_configs",
+    "heldout_metrics",
+    "report"
+   ],
+   "next_step": "Use DPO, DAgger, and distillation experiments to define shared data.",
+   "avoid": "Do not check adapters or model checkpoints into git.",
+   "source": "research_programs/posttraining_and_adaptation/backlog.md"
+  },
+  {
+   "id": "hard_negative_training_transfer",
+   "title": "Hard Negative Training Transfer",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "posttraining_and_adaptation",
+    "reliability_and_safety"
+   ],
+   "question": "Does training on hard negatives improve real selection, or does it overfit visible failure artifacts?",
+   "hypothesis": "Hard-negative training helps only when negatives represent held-out families and not just surface artifacts.",
+   "minimal_protocol": "Train with mined hard negatives, shuffled negatives, and random negatives; evaluate coverage, selected accuracy, and false positives on held-out families.",
+   "success_signal": "Mined negatives reduce false positives without lowering recall or transfer.",
+   "failure_signal": "The model learns benchmark-specific artifacts and fails held-out negative families.",
+   "expected_artifacts": [
+    "negative_manifest",
+    "training_configs",
+    "false_positive_slices",
+    "report"
+   ],
+   "next_step": "Start from offline hard-negative and constrained coverage DPO anchors.",
+   "avoid": "Do not report aggregate accuracy without false-positive slices.",
+   "source": "research_programs/posttraining_and_adaptation/backlog.md"
+  },
+  {
+   "id": "adapter_free_repro_manifest_audit",
+   "title": "Adapter-Free Reproducibility Manifest Audit",
+   "status": "infrastructure",
+   "priority": "P0",
+   "effort": "small",
+   "programs": [
+    "posttraining_and_adaptation",
+    "reliability_and_safety"
+   ],
+   "question": "Can every trained-run experiment be audited without committing adapters or checkpoints?",
+   "hypothesis": "A standardized manifest is enough to preserve provenance while keeping large artifacts external.",
+   "minimal_protocol": "Audit experiments with training outputs, require external artifact pointers, model IDs, data hashes, and reproduction notes.",
+   "success_signal": "All trained-run folders either have manifests or explicit no-large-artifact notes.",
+   "failure_signal": "Important trained outputs cannot be located or reproduced without local private files.",
+   "expected_artifacts": [
+    "artifact_manifest_updates",
+    "audit_table",
+    "quality_gate_update"
+   ],
+   "next_step": "Use artifact manifest index and readiness matrix to prioritize missing manifests.",
+   "avoid": "Do not add model weights, adapters, or checkpoints to git.",
+   "source": "research_programs/posttraining_and_adaptation/backlog.md"
+  },
+  {
+   "id": "diagnostics_failure_slicing_template",
+   "title": "Diagnostics Failure-Slicing Template",
+   "status": "ready-for-intake",
+   "priority": "P1",
+   "effort": "small",
+   "programs": [
+    "interpretability_and_diagnostics",
+    "collective_experimentation_infrastructure"
+   ],
+   "question": "Which failure slices should every major experiment report before influencing strategy?",
+   "hypothesis": "A small standard slice set will change follow-up decisions more often than ad hoc diagnostics.",
+   "minimal_protocol": "Define slices by operator, family, length, parse status, evidence state, and artifact boundary; apply to three anchor reports.",
+   "success_signal": "The slices reveal at least one concrete branch, stop, or rerun decision per anchor.",
+   "failure_signal": "Slices are descriptive but do not change any experiment decision.",
+   "expected_artifacts": [
+    "diagnostic_template",
+    "slice_tables",
+    "decision_notes",
+    "report"
+   ],
+   "next_step": "Apply to one compiler, one selector, and one posttraining anchor.",
+   "avoid": "Do not add diagnostics without a decision they can change.",
+   "source": "research_programs/interpretability_and_diagnostics/backlog.md"
+  },
+  {
+   "id": "pressure_diagnostic_preflight",
+   "title": "Pressure Diagnostic Preflight",
+   "status": "program-seed",
+   "priority": "P2",
+   "effort": "medium",
+   "programs": [
+    "interpretability_and_diagnostics",
+    "process_control_and_tool_use"
+   ],
+   "question": "Can cheap token-pressure and execution-pressure probes predict when an expensive run is worth doing?",
+   "hypothesis": "Preflight probes can detect capacity or tool-pressure failures before full training or large sweeps.",
+   "minimal_protocol": "Run tiny diagnostic probes on candidate mechanisms, compare their signals with later full-run results, and estimate decision precision.",
+   "success_signal": "Preflight results correctly predict stop or proceed decisions on multiple mechanisms.",
+   "failure_signal": "Preflight signals have no relation to full-run outcomes.",
+   "expected_artifacts": [
+    "preflight_probe_suite",
+    "prediction_table",
+    "decision_metrics",
+    "report"
+   ],
+   "next_step": "Use token-pressure and tool-control experiments as anchors.",
+   "avoid": "Do not treat preflight as evidence for final claims without full evaluation.",
+   "source": "research_programs/interpretability_and_diagnostics/backlog.md"
+  },
+  {
+   "id": "hidden_label_boundary_linter",
+   "title": "Hidden-Label Boundary Linter",
+   "status": "infrastructure",
+   "priority": "P0",
+   "effort": "small",
+   "programs": [
+    "reliability_and_safety",
+    "collective_experimentation_infrastructure"
+   ],
+   "question": "Can repository checks force every new result to label oracle-only and deployable evidence boundaries?",
+   "hypothesis": "A lightweight text and metadata linter can prevent hidden-label confusion without slowing pilots.",
+   "minimal_protocol": "Add a required report section or metadata field, scan new experiments, and document accepted boundary labels.",
+   "success_signal": "New experiments fail validation when hidden-label boundary documentation is missing.",
+   "failure_signal": "The rule creates noisy failures or misses obvious oracle/deployable ambiguity.",
+   "expected_artifacts": [
+    "validation_rule",
+    "template_update",
+    "boundary_docs"
+   ],
+   "next_step": "Prototype against high-impact selector and oracle-ceiling reports.",
+   "avoid": "Do not require heavy formal proof for early pilots.",
+   "source": "research_programs/reliability_and_safety/backlog.md"
+  },
+  {
+   "id": "reproducibility_scorecards_high_impact",
+   "title": "Reproducibility Scorecards For High-Impact Experiments",
+   "status": "infrastructure",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "reliability_and_safety",
+    "collective_experimentation_infrastructure"
+   ],
+   "question": "Which high-impact experiments are reproducible enough to guide future programs?",
+   "hypothesis": "A scorecard over seeds, data, commands, artifacts, and boundary labels will prioritize curation work.",
+   "minimal_protocol": "Score top anchor experiments from claims and program scorecards, then add curation tasks for missing pieces.",
+   "success_signal": "Each high-impact anchor has a reproducibility grade and concrete repair task.",
+   "failure_signal": "Scorecards duplicate the readiness matrix without adding decision value.",
+   "expected_artifacts": [
+    "scorecard_schema",
+    "anchor_scores",
+    "curation_backlog"
+   ],
+   "next_step": "Use experiment readiness and claim evidence counts to select anchors.",
+   "avoid": "Do not block exploratory work on full reproducibility unless it is used as shared evidence.",
+   "source": "research_programs/reliability_and_safety/backlog.md"
+  },
+  {
+   "id": "agent_evidence_navigation_test",
+   "title": "Agent Evidence Navigation Test",
+   "status": "infrastructure",
+   "priority": "P0",
+   "effort": "small",
+   "programs": [
+    "collective_experimentation_infrastructure"
+   ],
+   "question": "Can a new agent find relevant prior evidence faster using repository indexes than by raw search alone?",
+   "hypothesis": "Program indexes, claims, readiness, and related-work search reduce duplicate proposals and improve anchor selection.",
+   "minimal_protocol": "Give agents held-out rough ideas, compare raw rg search against documented discovery workflow, and score anchor quality and time.",
+   "success_signal": "The documented workflow finds better anchors with lower duplicate rate.",
+   "failure_signal": "Agents ignore or cannot use the generated knowledge surfaces.",
+   "expected_artifacts": [
+    "navigation_tasks",
+    "agent_logs",
+    "duplicate_rate_metrics",
+    "report"
+   ],
+   "next_step": "Use existing discovery workflow and related-work CLI.",
+   "avoid": "Do not evaluate only on ideas already named in file titles.",
+   "source": "research_programs/collective_experimentation_infrastructure/backlog.md"
+  },
+  {
+   "id": "proposal_deduplication_audit",
+   "title": "Proposal Deduplication Audit",
+   "status": "infrastructure",
+   "priority": "P1",
+   "effort": "small",
+   "programs": [
+    "collective_experimentation_infrastructure",
+    "reliability_and_safety"
+   ],
+   "question": "Can the repo detect repeated experiment ideas before they become new runs?",
+   "hypothesis": "A sample-based audit against catalog, claims, and future queue will catch most near duplicates.",
+   "minimal_protocol": "Sample proposed ideas, run related-work search, compare against human duplicate judgments, and update intake requirements.",
+   "success_signal": "The audit catches near duplicates without suppressing genuinely new variants.",
+   "failure_signal": "Duplicate warnings are too noisy or miss obvious repeated ideas.",
+   "expected_artifacts": [
+    "dedupe_cases",
+    "related_search_metrics",
+    "intake_update"
+   ],
+   "next_step": "Generate cases from future queue items and recent scaffolded ideas.",
+   "avoid": "Do not equate shared topic tags with duplicate mechanisms.",
+   "source": "research_programs/collective_experimentation_infrastructure/backlog.md"
+  },
+  {
+   "id": "multimodal_visual_table_transform_probe",
+   "title": "Multimodal Visual Table Transform Probe",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "multimodal_and_embodied_small_models",
+    "structured_execution_and_compilers"
+   ],
+   "question": "Do executable intermediates help small models transform visual table inputs?",
+   "hypothesis": "Structured intermediate programs will transfer better than direct vision-language answers on held-out visual table layouts.",
+   "minimal_protocol": "Adapt one table-transform task to image-rendered tables, compare direct answer, extracted structure, and executable intermediate variants.",
+   "success_signal": "Executable intermediates improve held-out layout accuracy without manual table extraction leakage.",
+   "failure_signal": "The gain depends entirely on an external OCR or parser oracle.",
+   "expected_artifacts": [
+    "visual_table_dataset",
+    "extraction_boundary_note",
+    "shift_metrics",
+    "report"
+   ],
+   "next_step": "Run intake using Foofah and table-transform anchors.",
+   "avoid": "Do not hide vision parsing errors by evaluating only on gold extracted tables.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "ui_state_tool_execution_probe",
+   "title": "UI State Tool Execution Probe",
+   "status": "program-seed",
+   "priority": "P2",
+   "effort": "medium",
+   "programs": [
+    "multimodal_and_embodied_small_models",
+    "process_control_and_tool_use"
+   ],
+   "question": "Can process-control policies transfer from text/table tools to UI-state observations?",
+   "hypothesis": "Tool-state schemas can represent UI observations and action history with only small extensions.",
+   "minimal_protocol": "Create a tiny UI-state task suite, map observations into the existing tool-state schema, and compare heuristic versus learned controllers.",
+   "success_signal": "The controller transfers basic STOP/MORE or repair behavior to UI tasks under a fixed budget.",
+   "failure_signal": "UI state requires a new representation that invalidates the current process-control schema.",
+   "expected_artifacts": [
+    "ui_task_suite",
+    "tool_state_mapping",
+    "controller_metrics",
+    "report"
+   ],
+   "next_step": "Prototype with static UI states before live browser control.",
+   "avoid": "Do not start with unconstrained open-web tasks.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "synthetic_curriculum_transfer_bakeoff",
+   "title": "Synthetic Curriculum Transfer Bakeoff",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "data_generation_and_synthetic_curriculum_design",
+    "benchmark_generalization"
+   ],
+   "question": "Which synthetic curriculum source transfers best: human-designed, model-generated, or failure-mined?",
+   "hypothesis": "Failure-mined curricula transfer better than broad model-generated curricula when held-out primitives are explicit.",
+   "minimal_protocol": "Generate three curriculum sources for one held-out primitive suite and compare transfer under matched data volume and model budget.",
+   "success_signal": "One curriculum source improves held-out performance without hurting direct baselines.",
+   "failure_signal": "Curriculum gains are IID-only or disappear under matched difficulty.",
+   "expected_artifacts": [
+    "curriculum_manifest",
+    "data_generation_config",
+    "transfer_metrics",
+    "report"
+   ],
+   "next_step": "Reuse bridge, recombination, and held-out primitive split patterns.",
+   "avoid": "Do not judge curricula only on training or IID validation.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "failure_mined_curriculum_generator",
+   "title": "Failure-Mined Curriculum Generator",
+   "status": "program-seed",
+   "priority": "P2",
+   "effort": "medium",
+   "programs": [
+    "data_generation_and_synthetic_curriculum_design",
+    "reliability_and_safety"
+   ],
+   "question": "Can failure slices automatically generate new training cases that reduce repeated errors?",
+   "hypothesis": "Failure-mined cases help when tied to a falsifiable slice and held-out control, not when used as unfiltered augmentation.",
+   "minimal_protocol": "Mine common failure slices, generate synthetic cases, train or prompt with them, and evaluate on untouched held-out failures.",
+   "success_signal": "The targeted slice improves without creating new false positives elsewhere.",
+   "failure_signal": "Generated cases overfit surface patterns or degrade unrelated slices.",
+   "expected_artifacts": [
+    "failure_slice_manifest",
+    "generated_case_manifest",
+    "before_after_slices",
+    "report"
+   ],
+   "next_step": "Start with diagnostic failure-slicing template once available.",
+   "avoid": "Do not train on evaluation failures without a clean holdout.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "multi_model_role_ensemble_pool",
+   "title": "Multi-Model Role Ensemble Pool",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "small_model_collaboration",
+    "evidence_conditioned_selection"
+   ],
+   "question": "Can generator, verifier, critic, and evidence-acquirer roles outperform a single small-model policy under fixed total budget?",
+   "hypothesis": "Role specialization helps only when roles contribute non-redundant evidence and share a strict cost accounting.",
+   "minimal_protocol": "Assign roles on one candidate pool, compare single-policy, homogeneous ensemble, role ensemble, and oracle routing at equal cost.",
+   "success_signal": "Role ensembles improve selected accuracy or coverage at matched budget.",
+   "failure_signal": "All gains come from extra samples or correlated role outputs.",
+   "expected_artifacts": [
+    "role_prompt_manifest",
+    "budget_accounting",
+    "ensemble_metrics",
+    "report"
+   ],
+   "next_step": "Use consensus and selector anchors to define the shared pool.",
+   "avoid": "Do not compare a multi-role system to a weaker single-model budget.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "committee_verifier_critic_loop",
+   "title": "Committee Verifier-Critic Loop",
+   "status": "program-seed",
+   "priority": "P2",
+   "effort": "medium",
+   "programs": [
+    "small_model_collaboration",
+    "process_control_and_tool_use"
+   ],
+   "question": "Can a committee decide when critique or verification is worth another step?",
+   "hypothesis": "A small committee can learn budget-aware escalation better than fixed critique rounds.",
+   "minimal_protocol": "Run fixed-round, single-controller, and committee-controller loops on identical pools with explicit action costs.",
+   "success_signal": "Committee control beats fixed rounds and single-controller baselines on accuracy per cost.",
+   "failure_signal": "Committee discussion increases cost without improving commit quality.",
+   "expected_artifacts": [
+    "committee_logs",
+    "action_cost_table",
+    "controller_metrics",
+    "report"
+   ],
+   "next_step": "Start from STOP/MORE controller and consensus experiments.",
+   "avoid": "Do not evaluate with unlimited debate rounds.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "latency_ceiling_selector_rerun",
+   "title": "Latency-Ceiling Selector Rerun",
+   "status": "program-seed",
+   "priority": "P1",
+   "effort": "small",
+   "programs": [
+    "on_device_and_latency_constrained_agents",
+    "process_control_and_tool_use"
+   ],
+   "question": "Which selector or tool-control gains survive strict latency, token, and call ceilings?",
+   "hypothesis": "Some evidence mechanisms remain useful when converted into early-exit and small-k policies.",
+   "minimal_protocol": "Rerun one selector/tool-control experiment with strict latency, token, and tool-call budgets plus early-exit policies.",
+   "success_signal": "A constrained policy retains a meaningful fraction of the unconstrained gain over simple baselines.",
+   "failure_signal": "The method collapses when evidence budget is capped or action latency is counted.",
+   "expected_artifacts": [
+    "latency_budget_manifest",
+    "early_exit_metrics",
+    "cost_accuracy_curve",
+    "report"
+   ],
+   "next_step": "Pick an existing adaptive controller with a clear smoke path.",
+   "avoid": "Do not ignore preprocessing or tool-call latency.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "compressed_memory_budget_probe",
+   "title": "Compressed Memory Budget Probe",
+   "status": "program-seed",
+   "priority": "P2",
+   "effort": "medium",
+   "programs": [
+    "on_device_and_latency_constrained_agents",
+    "algorithmic_memory_and_retrieval"
+   ],
+   "question": "Can memory remain useful when context and storage are severely compressed?",
+   "hypothesis": "Constraint and test memories compress better than raw examples.",
+   "minimal_protocol": "Compare raw-example, summary, constraint, and test-memory compression under fixed context and storage ceilings.",
+   "success_signal": "Compressed constraint or test memory beats no-memory and raw-summary controls.",
+   "failure_signal": "Compression removes the signal that made memory useful.",
+   "expected_artifacts": [
+    "compression_manifest",
+    "memory_mode_metrics",
+    "latency_table",
+    "report"
+   ],
+   "next_step": "Use memory mode comparison suite once its schema exists.",
+   "avoid": "Do not count retrieval time as free.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "static_research_navigation_dashboard",
+   "title": "Static Research Navigation Dashboard",
+   "status": "infrastructure",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "human_agent_research_interfaces",
+    "collective_experimentation_infrastructure"
+   ],
+   "question": "Can a static dashboard help humans and agents choose better next experiments than Markdown indexes alone?",
+   "hypothesis": "A dashboard over programs, claims, readiness, artifacts, and future queue will reduce search time and duplicate proposals.",
+   "minimal_protocol": "Build a static generated dashboard from existing CSV/JSON indexes and evaluate it with navigation tasks.",
+   "success_signal": "Users or agents find higher-quality anchors faster than with raw Markdown navigation.",
+   "failure_signal": "The dashboard duplicates existing docs without changing decisions.",
+   "expected_artifacts": [
+    "static_dashboard",
+    "navigation_eval",
+    "report"
+   ],
+   "next_step": "Start with generated data files already produced by make catalog.",
+   "avoid": "Do not require a server or external service for core navigation.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "evidence_branching_ui_probe",
+   "title": "Evidence Branching UI Probe",
+   "status": "program-seed",
+   "priority": "P2",
+   "effort": "medium",
+   "programs": [
+    "human_agent_research_interfaces",
+    "collective_experimentation_infrastructure"
+   ],
+   "question": "What interface lets a researcher branch from one result into controls, replications, or new programs fastest?",
+   "hypothesis": "Branch choices improve when claims, readiness gaps, related experiments, and program backlogs are visible in one workflow.",
+   "minimal_protocol": "Prototype a static branching view for a small set of anchor experiments and compare branch quality with the current docs workflow.",
+   "success_signal": "Branch proposals cite more relevant evidence and fewer near duplicates.",
+   "failure_signal": "The interface adds navigation overhead without improving proposal quality.",
+   "expected_artifacts": [
+    "branching_view",
+    "proposal_quality_rubric",
+    "navigation_logs",
+    "report"
+   ],
+   "next_step": "Use high-impact claim evidence as the first anchor set.",
+   "avoid": "Do not build an interface before defining the branch-quality rubric.",
+   "source": "knowledge/future_program_seeds.md"
+  },
+  {
+   "id": "thinking_budget_controller",
+   "title": "Learned Thinking-Budget Controller",
+   "status": "ready-for-intake",
+   "priority": "P1",
+   "effort": "medium",
+   "programs": [
+    "test_time_reasoning_budget",
+    "process_control_and_tool_use"
+   ],
+   "question": "Can a deployable controller allocate the thinking-token budget better than the fixed ~1024 optimum, given thinking has an overthinking cost?",
+   "hypothesis": "A visible-signal STOP/MORE policy over thinking tokens can match or beat a fixed budget at lower mean cost by spending more thinking only on hard inputs.",
+   "minimal_protocol": "Reuse the thinking_budget_scaling MBPP harness; learn or threshold a per-task budget from visible features; compare deployable accuracy-vs-mean-thinking-tokens against fixed budgets and unbudgeted.",
+   "success_signal": "Controller Pareto-dominates fixed budgets on deployable accuracy vs mean thinking tokens, beating a length/difficulty-blind baseline.",
+   "failure_signal": "No improvement over the best fixed budget once mean token cost is matched.",
+   "expected_artifacts": [
+    "budget_policy",
+    "accuracy_vs_tokens_pareto",
+    "report"
+   ],
+   "next_step": "Anchor on qwen35_4b_thinking_budget_scaling and the evidence-budget controller experiments.",
+   "avoid": "Do not let the controller read hidden test outcomes; budget decisions must use visible information only.",
+   "source": "research_programs/test_time_reasoning_budget/backlog.md"
+  },
+  {
+   "id": "thinking_content_vs_compute_control",
+   "title": "Thinking Content vs Compute (Stronger Control)",
+   "status": "ready-for-intake",
+   "priority": "P1",
+   "effort": "small",
+   "programs": [
+    "test_time_reasoning_budget",
+    "interpretability_and_diagnostics"
+   ],
+   "question": "How much of the native-thinking gain is coherent reasoning versus compute + scaffold + token-presence?",
+   "hypothesis": "Substituting a different task's thinking (removing token-presence, not just order) will collapse more of the gain than shuffling, isolating the genuine-reasoning share.",
+   "minimal_protocol": "On the thinking_budget_scaling substrate, add controls: shuffled-thinking (token order), foreign-task thinking (token-presence removed), and matched-compute no-think; compare deployable accuracy at matched budgets.",
+   "success_signal": "A clear ordering real > foreign > shuffled > no_think that quantifies the reasoning vs compute/scaffold split.",
+   "failure_signal": "Foreign-task thinking matches real thinking, i.e. the gain is essentially compute + scaffold, not reasoning.",
+   "expected_artifacts": [
+    "control_conditions",
+    "decomposition_table",
+    "report"
+   ],
+   "next_step": "Extend qwen35_4b_thinking_budget_scaling controls with foreign-task thinking.",
+   "avoid": "Do not infer a content effect from a single budget; sweep and report noise.",
+   "source": "research_programs/test_time_reasoning_budget/backlog.md"
+  },
+  {
+   "id": "gauntlet_round3_expert_iteration",
+   "title": "Gauntlet Round 3: Does Expert Iteration Compound On The Blackbox Instrument?",
+   "status": "ready-for-intake",
+   "priority": "P0",
+   "effort": "medium",
+   "programs": [
+    "agentic_breadth_installation",
+    "posttraining_and_adaptation"
+   ],
+   "question": "Re-harvesting the gym with the round-2 model: does the frontier open (glyphgate/loomfix/stallwright), does menagerie keep responding, and does iteration compound or re-saturate (C11 said coverage-bounded; the frontier moved in round 2)?",
+   "hypothesis": "The round-2 model's collapsed truncation cascade raises harvest yield everywhere, opening the three starved families and buying a second menagerie step; compounding will be smaller than round 2's jump because the emission-seam repair is one-time.",
+   "minimal_protocol": "Fast-profile re-harvest with the round-2 merged model (same seeds namespace, K=2), rebuild SFT with the round-2 recipe (recovery arm + weighted loss), train round-3 adapter from BASE on the union data, then paired quick events on two fresh seeds via the HF backend plus the recovery-arm-only and breadth-vs-matched-dose ablations.",
+   "success_signal": "Round-3 harvest keepers in glyphgate/loomfix/stallwright at 3x round-1 levels; menagerie quick delta over base grows beyond round 2's +0.22/+0.29 mean on fresh paired seeds.",
+   "failure_signal": "Yield rises but menagerie plateaus (emission-seam repair was the whole effect) or gym-internal gains stop transferring (locality reappears above the protocol layer).",
+   "expected_artifacts": [
+    "round-3 harvest yield tables",
+    "paired menagerie quick/medium events",
+    "ablation table separating recovery-arm from breadth effects"
+   ],
+   "next_step": "Run the fast-profile re-harvest with the round-2 merged model once the fla-kernel medium-tier fault on the host is triaged.",
+   "avoid": "Never evaluate adapters through vLLM runtime LoRA (C49); never mix HF-backend and vLLM-backend scores; keep menagerie seeds fresh per event.",
+   "source": "experiments/qwen35_4b_gauntlet_breadth_round1/reports/report.md"
+  }
+ ]
 }

@@ -2,15 +2,15 @@
 
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
-- Programs: 12
-- Experiments: 202
+- Programs: 13
+- Experiments: 200
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 146
+- Assigned experiments: 144
 
 ### Seed Evidence
 
@@ -63,6 +63,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_foofah_program_repair_agent` (track-z): [README](../experiments/qwen35_4b_foofah_program_repair_agent/README.md)
 - `qwen35_4b_foofah_program_strategy_portfolio` (track-z): [README](../experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md)
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
@@ -95,10 +96,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
-- `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
-- `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
@@ -174,7 +172,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 70
+- Assigned experiments: 68
 
 ### Seed Evidence
 
@@ -201,6 +199,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
+- `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
@@ -225,10 +224,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
-- `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
-- `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
@@ -261,7 +257,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 Choose or synthesize the next visible example, probe, test, or trace that collapses uncertainty.
 
 - Charter: [active_evidence_acquisition](../research_programs/active_evidence_acquisition/charter.md)
-- Assigned experiments: 13
+- Assigned experiments: 12
 
 ### Seed Evidence
 
@@ -278,7 +274,6 @@ Choose or synthesize the next visible example, probe, test, or trace that collap
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
 - `qwen_active_example_acquisition` (track-y): [README](../experiments/qwen_active_example_acquisition/README.md)
 - `qwen_learned_active_interrogation` (track-y): [README](../experiments/qwen_learned_active_interrogation/README.md)
@@ -336,7 +331,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 Grow, search, shortlist, compose, and stress-test reusable operator and skill banks.
 
 - Charter: [operator_and_skill_inventories](../research_programs/operator_and_skill_inventories/charter.md)
-- Assigned experiments: 11
+- Assigned experiments: 8
 
 ### Seed Evidence
 
@@ -353,10 +348,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 - `qwen35_4b_operator_inventory_search_pilot` (track-z): [README](../experiments/qwen35_4b_operator_inventory_search_pilot/README.md)
 - `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
-- `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
-- `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen_recurrent_vm_repair_policy` (track-y): [README](../experiments/qwen_recurrent_vm_repair_policy/README.md)
 
 ## Posttraining And Adaptation
@@ -364,7 +356,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 55
+- Assigned experiments: 56
 
 ### Seed Evidence
 
@@ -387,6 +379,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
+- `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
 - `qwen35_4b_inventory_shortlister_training` (track-z): [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
 - `qwen35_4b_learn_from_failures` (new): [README](../experiments/qwen35_4b_learn_from_failures/README.md)
@@ -481,7 +474,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 94
+- Assigned experiments: 93
 
 ### Seed Evidence
 
@@ -537,7 +530,6 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
 - `qwen_active_example_acquisition` (track-y): [README](../experiments/qwen_active_example_acquisition/README.md)
 - `qwen_batched_transduction_consistency` (track-y): [README](../experiments/qwen_batched_transduction_consistency/README.md)
@@ -592,7 +584,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 52
+- Assigned experiments: 50
 
 ### Seed Evidence
 
@@ -608,6 +600,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
@@ -628,10 +621,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
-- `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
-- `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
@@ -661,7 +651,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 55
+- Assigned experiments: 53
 
 ### Seed Evidence
 
@@ -680,6 +670,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
+- `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
@@ -699,10 +690,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)
-- `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
-- `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_verifier_selector_showdown` (new): [README](../experiments/qwen35_4b_verifier_selector_showdown/README.md)
@@ -752,7 +740,7 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 8
+- Assigned experiments: 5
 
 ### Assigned Experiments
 
@@ -761,9 +749,17 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_thinking_content_vs_compute` (new): [README](../experiments/qwen35_4b_thinking_content_vs_compute/README.md)
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
-- `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
-- `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
-- `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
+
+## Agentic Breadth Installation
+
+Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
+
+- Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
+- Assigned experiments: 1
+
+### Assigned Experiments
+
+- `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 
 ## Program Review Needed
 

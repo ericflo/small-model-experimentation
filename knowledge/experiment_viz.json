@@ -1972,7 +1972,7 @@
      "x_label": "program length",
      "y_label": "probe belief target mass",
      "y_format": "percent100",
-     "note": "A frozen post-hoc probe recovers far more belief information from the recurrent state, but even it decays fast \u2014 no high-fidelity belief machine.",
+     "note": "A frozen post-hoc probe recovers far more belief information from the recurrent state, but even it decays fast — no high-fidelity belief machine.",
      "source": "analysis/summary.md (controls table, from runs/*/metrics_final.csv); report table",
      "headline": false
     },
@@ -2703,7 +2703,7 @@
       "A",
       "B",
       "A + B (mod 31)",
-      "A \u2212 B (mod 31)"
+      "A − B (mod 31)"
      ],
      "x_label": "Query type",
      "y_label": "Top-1 accuracy on support (K = L = 24)",
@@ -4348,7 +4348,7 @@
      "y_label": "repair after first failure @1",
      "y_format": "percent01",
      "x_label": "condition",
-     "note": "Repair-conditioned adapters solve 100% of same-family bugs but 0% of unseen families \u2014 template memorization, not transferable repair.",
+     "note": "Repair-conditioned adapters solve 100% of same-family bugs but 0% of unseen families — template memorization, not transferable repair.",
      "source": "reports/v2_*_iid_results.json and reports/v2_*_family_holdout_results.json (summary.repair_after_first_failure@1)",
      "headline": true
     },
@@ -4384,7 +4384,7 @@
      "y_label": "repair after first failure @1",
      "y_format": "percent01",
      "x_label": "condition",
-     "note": "The coder model recovers only 3/27 held-out repairs with traces vs 2/27 without \u2014 one success above the no-trace control, too weak to credit traces.",
+     "note": "The coder model recovers only 3/27 held-out repairs with traces vs 2/27 without — one success above the no-trace control, too weak to credit traces.",
      "source": "reports/coder_v2_*_iid_results.json and reports/coder_v2_*_family_holdout_results.json (summary.repair_after_first_failure@1)",
      "headline": false
     },
@@ -4423,7 +4423,7 @@
      "y_label": "rate on held-out families (n=27)",
      "y_format": "percent01",
      "x_label": "prompt mode",
-     "note": "Every prompt ablation repairs 0/27 held-out bugs even when most patches apply cleanly \u2014 execution traces show no causal benefit.",
+     "note": "Every prompt ablation repairs 0/27 held-out bugs even when most patches apply cleanly — execution traces show no causal benefit.",
      "source": "reports/execution_conditioned_repair_paper.md (table: v2 Trace Adapter on v2 Held-Out Families)",
      "headline": false
     },
@@ -4492,7 +4492,7 @@
      "y_label": "Rate on 27 held-out-family episodes",
      "y_format": "percent01",
      "x_label": "Condition",
-     "note": "Every applied trace-adapter patch on held-out families passes the visible test but fails hidden tests \u2014 overfitting, not repair.",
+     "note": "Every applied trace-adapter patch on held-out families passes the visible test but fails hidden tests — overfitting, not repair.",
      "source": "report table (reports/execution_conditioned_repair_paper.md, v2 held-out-family results)",
      "headline": false
     },
@@ -4531,7 +4531,7 @@
      "y_label": "Rate on 27 held-out-family episodes",
      "y_format": "percent01",
      "x_label": "Condition",
-     "note": "At temperature 0.2 with 3 samples per episode, patches still apply but repair@3 is 0 for every condition \u2014 more samples buy nothing.",
+     "note": "At temperature 0.2 with 3 samples per episode, patches still apply but repair@3 is 0 for every condition — more samples buy nothing.",
      "source": "report table (reports/execution_conditioned_repair_paper.md, v2 held-out-family best-of-3 results)",
      "headline": false
     },
@@ -4917,7 +4917,7 @@
      ],
      "y_label": "repair@1",
      "y_format": "percent01",
-     "note": "Each coverage recipe masters its own distribution, but all three land at ~20-23% on held-out recombinations \u2014 mixing buys no extra transfer.",
+     "note": "Each coverage recipe masters its own distribution, but all three land at ~20-23% on held-out recombinations — mixing buys no extra transfer.",
      "source": "reports/final_results.csv",
      "x_label": "evaluation split",
      "headline": true
@@ -5365,7 +5365,7 @@
        ]
       }
      ],
-     "note": "Mass stays near baseline until K reaches program length, then jumps to 87-98% \u2014 the executor signature, generalizing past training lengths.",
+     "note": "Mass stays near baseline until K reaches program length, then jumps to 87-98% — the executor signature, generalizing past training lengths.",
      "source": "experiments/joint_register_executor/analysis/final_metrics_long.csv (run main_belief_joint_mod31)",
      "headline": false
     },
@@ -7281,7 +7281,7 @@
        ]
       }
      ],
-     "note": "Accuracy stays near chance until K reaches program length L, then jumps above 96% \u2014 the signature of step-by-step latent execution.",
+     "note": "Accuracy stays near chance until K reaches program length L, then jumps above 96% — the signature of step-by-step latent execution.",
      "source": "analysis/summary.md (Final Metrics By Run, Joint recurrent p=31, query A; runs/main_joint_mod31/metrics_step01000.csv)",
      "headline": false
     },
@@ -7910,7 +7910,7 @@
        ]
       }
      ],
-     "note": "The SFT controller hits fixed-budget-10 accuracy (92.5%) with 4.81 probes, near the oracle's 4.22 \u2014 above the fixed-budget Pareto curve.",
+     "note": "The SFT controller hits fixed-budget-10 accuracy (92.5%) with 4.81 probes, near the oracle's 4.22 — above the fixed-budget Pareto curve.",
      "source": "experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/summary_overall.csv",
      "headline": true
     },
@@ -8430,7 +8430,7 @@
      "x_label": "ABI rung",
      "y_label": "Tasks solved (% of 160 MBPP)",
      "y_format": "percent100",
-     "note": "The final reusable ABI can express 134/160 tasks, but naive first-visible selection only gets 95/160 \u2014 a coverage gate, not a solver.",
+     "note": "The final reusable ABI can express 134/160 tasks, but naive first-visible selection only gets 95/160 — a coverage gate, not a solver.",
      "source": "README table; reports/coverage_summary_initial.json, coverage_summary_expanded.json, coverage_summary_final.json",
      "headline": true
     },
@@ -8494,7 +8494,7 @@
      "x_label": "ABI rung",
      "y_label": "Tasks fooled by the one visible test (%)",
      "y_format": "percent100",
-     "note": "Richer ABIs cut single-visible-test false passes from 58% to 9%, but per-candidate hidden-wrong pressure stays near 80% \u2014 verification is still required.",
+     "note": "Richer ABIs cut single-visible-test false passes from 58% to 9%, but per-candidate hidden-wrong pressure stays near 80% — verification is still required.",
      "source": "report table (reports/final_report.md); reports/coverage_summary_*.json",
      "headline": false
     },
@@ -9026,7 +9026,7 @@
      "x_label": "monolithic eval metric",
      "y_label": "solve rate",
      "y_format": "percent01",
-     "note": "QLoRA-SFT on 327 search-harvested solutions (no teacher) lifts pass@5 +0.11 and depth-3 pass@5 4x \u2014 the frontier extension M4 could not achieve.",
+     "note": "QLoRA-SFT on 327 search-harvested solutions (no teacher) lifts pass@5 +0.11 and depth-3 pass@5 4x — the frontier extension M4 could not achieve.",
      "source": "runs/eval_frozen.json, runs/eval_trained.json, runs/eval_trained2.json",
      "headline": false
     },
@@ -9304,7 +9304,7 @@
        ]
       }
      ],
-     "x_label": "task cell (composition depth \u00d7 destructive-op count)",
+     "x_label": "task cell (composition depth × destructive-op count)",
      "y_label": "pass@4 (hidden-graded)",
      "y_format": "percent01",
      "note": "The compositional wall is 100% identification, 0% execution: plan-given stays 0.90-1.00 through depth 4; seeing intermediates barely helps.",
@@ -9407,7 +9407,7 @@
      "x_label": "verified composition depth (ops)",
      "y_label": "pass@6 (n=25/cell, hidden-graded)",
      "y_format": "percent01",
-     "note": "On collapse-free tasks the wall is at depth 2, not 3, and information-destroying ops barely matter \u2014 refuting the destruction hypothesis.",
+     "note": "On collapse-free tasks the wall is at depth 2, not 3, and information-destroying ops barely matter — refuting the destruction hypothesis.",
      "source": "experiments/qwen35_4b_depth_wall_anatomy/runs/grid_analysis.json",
      "headline": false
     },
@@ -9446,7 +9446,7 @@
        ]
       }
      ],
-     "x_label": "task cell (composition depth \u00d7 destructive-op count)",
+     "x_label": "task cell (composition depth × destructive-op count)",
      "y_label": "rate",
      "y_format": "percent01",
      "note": "The deficit is multi-step mental simulation: isolated depth-1 identification runs at 0.88, yet composed contexts drag it down and verification nears chance (0.5).",
@@ -9472,7 +9472,7 @@
      "x_label": "task type",
      "y_label": "solve rate",
      "y_format": "percent01",
-     "note": "40% of nominal depth-3 tasks were behaviorally shallower; every recorded monolithic depth-3 solve rode on them \u2014 true depth-3 monolithic solves were 0.",
+     "note": "40% of nominal depth-3 tasks were behaviorally shallower; every recorded monolithic depth-3 solve rode on them — true depth-3 monolithic solves were 0.",
      "source": "report table (reports/report.md, Phase 0)",
      "headline": false
     }
@@ -10625,7 +10625,7 @@
      ],
      "y_label": "exact-match accuracy (50 held-out cases)",
      "y_format": "percent01",
-     "note": "The dev-selected consensus_2 policy gains modestly (42%\u219248%); the predeclared first-visible selector nearly reaches the 58% oracle.",
+     "note": "The dev-selected consensus_2 policy gains modestly (42%→48%); the predeclared first-visible selector nearly reaches the 58% oracle.",
      "source": "reports/test_summary.json",
      "headline": true
     },
@@ -11044,7 +11044,7 @@
      "x_label": "stage",
      "y_label": "Hidden all-pass rate",
      "y_format": "percent100",
-     "note": "On synthetic corrupted GraphIR, repair jumps 3.3% to 26.7% \u2014 the skill is real but does not transfer to the model's own construction errors.",
+     "note": "On synthetic corrupted GraphIR, repair jumps 3.3% to 26.7% — the skill is real but does not transfer to the model's own construction errors.",
      "source": "report table (Repair Diagnostic), reports/qwen35_4b_graphir_self_repair_report.md",
      "headline": false
     },
@@ -11140,7 +11140,7 @@
      "x_label": "stopping policy",
      "y_label": "rate on 12 eval tasks",
      "y_format": "percent01",
-     "note": "A correct candidate exists for every task (100% coverage), yet no probe-spending policy lifts selection above 16.7% \u2014 a clean negative.",
+     "note": "A correct candidate exists for every task (100% coverage), yet no probe-spending policy lifts selection above 16.7% — a clean negative.",
      "source": "reports/summary_overall.csv",
      "headline": true
     },
@@ -12469,7 +12469,7 @@
      ],
      "y_label": "hidden-test accuracy",
      "y_format": "percent01",
-     "note": "The REPL loop at ~4 generations sits on or below the independent-sampling curve \u2014 sampling is the stronger use of the same compute.",
+     "note": "The REPL loop at ~4 generations sits on or below the independent-sampling curve — sampling is the stronger use of the same compute.",
      "source": "runs/repl_summary.json (sample_more_selected_curve, arm acc/mean_gens)",
      "headline": false
     },
@@ -12498,7 +12498,7 @@
      ],
      "y_label": "accuracy on held-out fresh tasks",
      "y_format": "percent01",
-     "note": "QLoRA-SFT on the model's own 189 verified solutions lifts deployable single-shot +0.095 (~2.2 SE, +42%) with pass@5 rising \u2014 no diversity collapse.",
+     "note": "QLoRA-SFT on the model's own 189 verified solutions lifts deployable single-shot +0.095 (~2.2 SE, +42%) with pass@5 rising — no diversity collapse.",
      "source": "report table (M3, reports/report.md)",
      "headline": false
     },
@@ -12573,7 +12573,7 @@
      ],
      "y_label": "held-out accuracy",
      "y_format": "percent01",
-     "note": "Self-training compounds over rounds (+47% greedy@1) with no collapse, but plateaus and never cracks the depth-3 frontier \u2014 coverage-bounded.",
+     "note": "Self-training compounds over rounds (+47% greedy@1) with no collapse, but plateaus and never cracks the depth-3 frontier — coverage-bounded.",
      "source": "runs/ei_summary.json (matches report M4 table)",
      "headline": false
     }
@@ -13450,7 +13450,7 @@
      "y_label": "hidden-all success @ budget 3",
      "y_format": "percent100",
      "x_label": "policy",
-     "note": "pair_compare_gate looks unsolvable to learned policies but reaches 73.8% with full-pool oracle probing \u2014 the environment has the needed probes.",
+     "note": "pair_compare_gate looks unsolvable to learned policies but reaches 73.8% with full-pool oracle probing — the environment has the needed probes.",
      "source": "report table (Regime Split section of reports/qwen35_4b_oracle_probe_synthesis_mdp_report.md)",
      "headline": false
     }
@@ -13659,7 +13659,7 @@
      "y_label": "hidden-all solve rate @ budget 3",
      "y_format": "percent100",
      "x_label": "output regime",
-     "note": "Training helps where probes are informative; the compare-gate regime is identifiability-bounded \u2014 even the oracle reaches only 9.4%.",
+     "note": "Training helps where probes are informative; the compare-gate regime is identifiability-bounded — even the oracle reaches only 9.4%.",
      "source": "report table",
      "headline": false
     }
@@ -13671,11 +13671,11 @@
      "title": "Coherence advantage of real thinking grows with budget",
      "kind": "line",
      "x_label": "thinking budget (tokens)",
-     "y_label": "pass-rate gap (real \u2212 shuffle)",
+     "y_label": "pass-rate gap (real − shuffle)",
      "y_format": "percent01",
      "series": [
       {
-       "label": "real \u2212 shuffle",
+       "label": "real − shuffle",
        "points": [
         [
          512,
@@ -14653,7 +14653,7 @@
        ]
       }
      ],
-     "note": "Exact-match falls from 0.96 at depth 1 to 0.30 at depth 4 \u2014 far below the 0.8 kill bar \u2014 so the keystone-repair experiment proceeds.",
+     "note": "Exact-match falls from 0.96 at depth 1 to 0.30 at depth 4 — far below the 0.8 kill bar — so the keystone-repair experiment proceeds.",
      "source": "experiment_log.md",
      "headline": true
     },
@@ -14782,7 +14782,7 @@
        ]
       }
      ],
-     "note": "Retention drops 0.92 to 0.66 to 0.52 per step \u2014 no clean single-rate geometric decay, so failure is not one constant per-step error.",
+     "note": "Retention drops 0.92 to 0.66 to 0.52 per step — no clean single-rate geometric decay, so failure is not one constant per-step error.",
      "source": "experiment_log.md",
      "headline": false
     }
@@ -20810,7 +20810,7 @@
      "x_label": "arm",
      "y_label": "Execution accuracy",
      "y_format": "percent01",
-     "note": "At held-out depth 6, finite-state constrained decoding reaches 75% execution vs 60% free \u2014 resampling to validity only gets 62.5%.",
+     "note": "At held-out depth 6, finite-state constrained decoding reaches 75% execution vs 60% free — resampling to validity only gets 62.5%.",
      "source": "report table (reports/qwen_constrained_abi_parser_report.md); matches analysis/summary_by_arm.csv",
      "headline": true
     },
@@ -21868,7 +21868,7 @@
      "y_label": "full-task exact match",
      "y_format": "percent01",
      "x_label": "condition",
-     "note": "The adapter learns to read the support examples: 25%\u219292% held-out and 23%\u219257% public, and it collapses when support is shuffled or removed.",
+     "note": "The adapter learns to read the support examples: 25%→92% held-out and 23%→57% public, and it collapses when support is shuffled or removed.",
      "source": "runs/main_v2/summary.csv",
      "headline": true
     },
@@ -21984,10 +21984,10 @@
      "y_label": "Full-task exact match",
      "y_format": "percent01",
      "categories": [
-      "Synthetic held-out \u2014 pilot_v1",
-      "Synthetic held-out \u2014 main_v2",
-      "Public PROSE \u2014 pilot_v1",
-      "Public PROSE \u2014 main_v2"
+      "Synthetic held-out — pilot_v1",
+      "Synthetic held-out — main_v2",
+      "Public PROSE — pilot_v1",
+      "Public PROSE — main_v2"
      ],
      "series": [
       {
@@ -22049,7 +22049,7 @@
      "x_label": "training arm",
      "y_label": "Full-task exact match",
      "y_format": "percent100",
-     "note": "Synthetic ICL-style LoRA tuning triples public accuracy, but the ordinary and shuffled-label controls match it \u2014 the counterfactual ingredient isn't isolated.",
+     "note": "Synthetic ICL-style LoRA tuning triples public accuracy, but the ordinary and shuffled-label controls match it — the counterfactual ingredient isn't isolated.",
      "source": "reports/qwen_counterfactual_icl_public_multiseed_report.md table (analysis/aggregate_summary.csv)",
      "headline": true
     },
@@ -22090,7 +22090,7 @@
      "x_label": "support condition at eval",
      "y_label": "Full-task exact match (public PROSE)",
      "y_format": "percent100",
-     "note": "Corrupting or removing support examples collapses performance, so adapters do read the examples \u2014 but shuffled-label training still yields high shuffled-support accuracy.",
+     "note": "Corrupting or removing support examples collapses performance, so adapters do read the examples — but shuffled-label training still yields high shuffled-support accuracy.",
      "source": "reports/qwen_counterfactual_icl_public_multiseed_report.md table (analysis/aggregate_summary.csv)",
      "headline": false
     },
@@ -24146,7 +24146,7 @@
      "x_label": "invisible recurrent steps K at evaluation",
      "y_label": "accuracy",
      "y_format": "percent01",
-     "note": "On the strongest checkpoint (step 200), K=0 beats every K>0 budget on both splits at n=250 \u2014 the hoped-for K-scaling is absent.",
+     "note": "On the strongest checkpoint (step 200), K=0 beats every K>0 budget on both splits at n=250 — the hoped-for K-scaling is absent.",
      "source": "experiments/qwen_fastweight_hook/analysis/large_retests_long.csv",
      "headline": true
     },
@@ -24182,7 +24182,7 @@
      "x_label": "split and evaluation size",
      "y_label": "accuracy",
      "y_format": "percent01",
-     "note": "The +4-5pp recurrence advantage seen in small checkpoint sweeps reverses on larger retests \u2014 the apparent gains were sampling noise.",
+     "note": "The +4-5pp recurrence advantage seen in small checkpoint sweeps reverses on larger retests — the apparent gains were sampling noise.",
      "source": "experiments/qwen_fastweight_hook/analysis/training_accuracy_long.csv; experiments/qwen_fastweight_hook/analysis/large_retests_long.csv",
      "headline": false
     },
@@ -24664,7 +24664,7 @@
      "x_label": "training arm",
      "y_label": "false STOP rate (learned mode)",
      "y_format": "percent100",
-     "note": "GRPO reduced false STOPs but shifted errors to invalid slot edits; DPO doubled false STOPs \u2014 both signs of broken action/STOP calibration.",
+     "note": "GRPO reduced false STOPs but shifted errors to invalid slot edits; DPO doubled false STOPs — both signs of broken action/STOP calibration.",
      "source": "reports/qwen_fuyu_vm_grpo_echo_report.md (Headline Metrics table)",
      "headline": false
     },
@@ -26019,7 +26019,7 @@
      "x_label": "Training phase (main run)",
      "y_label": "Answer-search accuracy",
      "y_format": "percent01",
-     "note": "VM-ECHO lifts search on 3 of 4 splits (hard comp 47.7%\u219251.6%) but full supervision reaches 86-95%, far above any distill phase.",
+     "note": "VM-ECHO lifts search on 3 of 4 splits (hard comp 47.7%→51.6%) but full supervision reaches 86-95%, far above any distill phase.",
      "source": "experiments/qwen_inpolicy_vm_echo_distillation/analysis/all_metrics.csv",
      "headline": false
     }
@@ -26706,7 +26706,7 @@
        ]
       }
      ],
-     "note": "Oracle accuracy never exceeds 4.7%, so the beams contained no correct programs \u2014 the failure was candidate generation, not selection.",
+     "note": "Oracle accuracy never exceeds 4.7%, so the beams contained no correct programs — the failure was candidate generation, not selection.",
      "source": "reports/aggregate_final_metrics.csv (pilot_latent_beam4_s160 rows)",
      "headline": false
     },
@@ -26742,7 +26742,7 @@
        ]
       }
      ],
-     "note": "Paired training raised standard-24 trace prefixes from 49% to 85% yet dropped paraphrase-24 answers from 69% to 3% \u2014 no net win.",
+     "note": "Paired training raised standard-24 trace prefixes from 49% to 85% yet dropped paraphrase-24 answers from 69% to 3% — no net win.",
      "source": "reports/aggregate_final_metrics.csv (len24 rows for pilot_single_compiler_len24_unpaired_s600 and main_single_compiler_len24_paired_s750)",
      "headline": false
     },
@@ -29814,7 +29814,7 @@
      "x_label": "evaluation split",
      "y_label": "accuracy",
      "y_format": "percent01",
-     "note": "The beam contains a correct program 73-84% of the time, but top-1 selection lags by 16-29pp \u2014 the reranking gap remains.",
+     "note": "The beam contains a correct program 73-84% of the time, but top-1 selection lags by 16-29pp — the reranking gap remains.",
      "source": "analysis/final_metrics.csv (main_prefix_state_verifier_s512, beam_verifier_w2 rows)",
      "headline": false
     },
@@ -30643,7 +30643,7 @@
        ]
       }
      ],
-     "note": "Qwen's misses concentrate in DateTime tasks (50% exact) \u2014 the same family where the frozen ABI is weakest.",
+     "note": "Qwen's misses concentrate in DateTime tasks (50% exact) — the same family where the frozen ABI is weakest.",
      "source": "experiments/qwen_public_prose_abi_gate/analysis/qwen_direct_summary.csv",
      "headline": false
     },
@@ -30668,7 +30668,7 @@
        ]
       }
      ],
-     "note": "Growing the search space ~500x from core to concat lifts coverage only 12.6% to 19.1% \u2014 enumeration size is not the bottleneck.",
+     "note": "Growing the search space ~500x from core to concat lifts coverage only 12.6% to 19.1% — enumeration size is not the bottleneck.",
      "source": "experiments/qwen_public_prose_abi_gate/analysis/overall_summary.csv",
      "headline": false
     }
@@ -31101,7 +31101,7 @@
      "y_label": "accuracy",
      "y_format": "percent100",
      "x_label": "selector",
-     "note": "The best non-oracle selector beats no-repair by only 7pp (51.4% vs 44.4%), capturing 15% of the oracle gap \u2014 reading works, but weakly.",
+     "note": "The best non-oracle selector beats no-repair by only 7pp (51.4% vs 44.4%), capturing 15% of the oracle gap — reading works, but weakly.",
      "source": "report table (Standard L24 Gate), reports/qwen_readable_candidate_verifier_report.md",
      "headline": true
     },
@@ -31132,7 +31132,7 @@
      "y_label": "accuracy on standard split",
      "y_format": "percent100",
      "x_label": "information given to the frozen reader",
-     "note": "Adding claimed values and execution traces makes the frozen reader worse, collapsing from 50% to near 0% \u2014 extra text distracts, not informs.",
+     "note": "Adding claimed values and execution traces makes the frozen reader worse, collapsing from 50% to near 0% — extra text distracts, not informs.",
      "source": "report table (Standard L24 Gate), reports/qwen_readable_candidate_verifier_report.md",
      "headline": false
     },
@@ -36126,7 +36126,7 @@
      "x_label": "training arm",
      "y_label": "full-task exact match",
      "y_format": "percent01",
-     "note": "Contrastive training nearly matches CE accuracy with real supports but collapses to ~7% when supports are corrupted \u2014 it actually reads them.",
+     "note": "Contrastive training nearly matches CE accuracy with real supports but collapses to ~7% when supports are corrupted — it actually reads them.",
      "source": "experiments/qwen_support_contrastive_meta_icl/analysis/aggregate_summary.csv (public_prose split)",
      "headline": true
     },
@@ -36377,7 +36377,7 @@
      "x_label": "selection arm",
      "y_label": "mean exact executor accuracy (%)",
      "y_format": "percent100",
-     "note": "Both learned critics collapse to no-repair (44.8%) while an answer oracle over the same candidates reaches 91.1% \u2014 selection, not coverage, fails.",
+     "note": "Both learned critics collapse to no-repair (44.8%) while an answer oracle over the same candidates reaches 91.1% — selection, not coverage, fails.",
      "source": "report table (reports/qwen_tail_repair_stability_critic_report.md, Stability Gate and Split Results tables)",
      "headline": true
     },
@@ -36461,7 +36461,7 @@
      "x_label": "length-24 evaluation split",
      "y_label": "fraction of groups (%)",
      "y_format": "percent100",
-     "note": "Local tail edits contain a correct-answer fix for about 90% or more of groups on every split \u2014 roughly double base accuracy on all but the paraphrase split.",
+     "note": "Local tail edits contain a correct-answer fix for about 90% or more of groups on every split — roughly double base accuracy on all but the paraphrase split.",
      "source": "report table (reports/qwen_tail_repair_stability_critic_report.md, Candidate Coverage table)",
      "headline": false
     },
@@ -36997,7 +36997,7 @@
        ]
       }
      ],
-     "note": "Procedure arms degrade gradually with depth (63% at depth 6) while direct answering collapses to 0% \u2014 a compiler, not a self-executor.",
+     "note": "Procedure arms degrade gradually with depth (63% at depth 6) while direct answering collapses to 0% — a compiler, not a self-executor.",
      "source": "report table (reports/qwen_trace_procedure_depth_stress_report.md); same data in analysis/summary_by_arm.csv",
      "headline": true
     },
@@ -37051,7 +37051,7 @@
        ]
       }
      ],
-     "note": "At depth 6 the emitted procedure runs correctly 58% of the time while the model's own final answer is right 0% \u2014 compilation beats self-execution.",
+     "note": "At depth 6 the emitted procedure runs correctly 58% of the time while the model's own final answer is right 0% — compilation beats self-execution.",
      "source": "report table (reports/qwen_trace_procedure_depth_stress_report.md), trace_stack_final rows: exec_accuracy_mean vs final_accuracy_mean",
      "headline": false
     },
@@ -37595,7 +37595,7 @@
      "x_label": "retrieval condition",
      "y_label": "Same-family retrieval rate",
      "y_format": "percent01",
-     "note": "The retriever worked (77.5% same-family vs 20% random), so the null result is not a retrieval failure \u2014 the skill cards just didn't help.",
+     "note": "The retriever worked (77.5% same-family vs 20% random), so the null result is not a retrieval failure — the skill cards just didn't help.",
      "source": "analysis/retrieval_summary.csv",
      "headline": false
     },
@@ -39968,7 +39968,7 @@
      "y_label": "repair@1",
      "y_format": "percent01",
      "x_label": "trace given at inference",
-     "note": "Removing or shuffling the trace at inference drops the trace-SFT model from 100% to 0% \u2014 the trace content, not the format, carries the answer.",
+     "note": "Removing or shuffling the trace at inference drops the trace-SFT model from 100% to 0% — the trace content, not the format, carries the answer.",
      "source": "experiments/trace_keyed_symbol_repair/reports/final_core_results.csv; experiments/trace_keyed_symbol_repair/reports/final_ablation_results.csv",
      "headline": false
     },
@@ -40136,7 +40136,7 @@
     {
      "headline": true,
      "kind": "line",
-     "title": "Transcription is a model-level LAW: \u22481.0 in every family",
+     "title": "Transcription is a model-level LAW: ≈1.0 in every family",
      "series": [
       {
        "label": "list",
@@ -40203,9 +40203,9 @@
       }
      ],
      "x_label": "composition depth",
-     "y_label": "plan\u2192code accuracy",
+     "y_label": "plan→code accuracy",
      "y_format": "percent01",
-     "note": "Plan-given execution is near-perfect across three unrelated substrates \u2014 the fixed 4B is a universal reliable compiler."
+     "note": "Plan-given execution is near-perfect across three unrelated substrates — the fixed 4B is a universal reliable compiler."
     },
     {
      "kind": "line",
@@ -40278,7 +40278,7 @@
      "x_label": "composition depth",
      "y_label": "mental-simulation accuracy",
      "y_format": "percent01",
-     "note": "Register (compact 3-int state) simulates robustly; list decays; a mutating char string is floored \u2014 simulation fidelity is set by the state representation, not depth."
+     "note": "Register (compact 3-int state) simulates robustly; list decays; a mutating char string is floored — simulation fidelity is set by the state representation, not depth."
     },
     {
      "kind": "line",
@@ -40349,9 +40349,9 @@
       }
      ],
      "x_label": "composition depth",
-     "y_label": "bare identification (I/O\u2192code)",
+     "y_label": "bare identification (I/O→code)",
      "y_format": "percent01",
-     "note": "Identifying a novel composition collapses toward chance with depth everywhere \u2014 'the model executes what it cannot invent' is model-level."
+     "note": "Identifying a novel composition collapses toward chance with depth everywhere — 'the model executes what it cannot invent' is model-level."
     }
    ]
   },
@@ -40407,11 +40407,11 @@
      ],
      "y_label": "solved (hidden-graded)",
      "y_format": "percent01",
-     "note": "Whenever the correct program is sampled, an 8-example execute-filter, the model's own verifier, and even a random pick among consistent candidates all recover it \u2014 selection loss is 0. The wall is coverage, not selection."
+     "note": "Whenever the correct program is sampled, an 8-example execute-filter, the model's own verifier, and even a random pick among consistent candidates all recover it — selection loss is 0. The wall is coverage, not selection."
     },
     {
      "kind": "bar",
-     "title": "Same on the register machine \u2014 selectors = coverage ceiling",
+     "title": "Same on the register machine — selectors = coverage ceiling",
      "categories": [
       "depth 1",
       "depth 2",
@@ -40458,7 +40458,7 @@
      ],
      "y_label": "solved (hidden-graded)",
      "y_format": "percent01",
-     "note": "Single-shot undersells 2\u20135\u00d7; sample+filter recovers it \u2014 but that IS sample-more."
+     "note": "Single-shot undersells 2–5×; sample+filter recovers it — but that IS sample-more."
     },
     {
      "kind": "line",
@@ -40616,7 +40616,7 @@
      "x_label": "k (samples)",
      "y_label": "coverage (any correct)",
      "y_format": "percent01",
-     "note": "Register stays sample-accessible deeper than list (smaller 12-op menu \u2192 sampled more often), mechanistically explaining C16's register identification floor as coverage-driven."
+     "note": "Register stays sample-accessible deeper than list (smaller 12-op menu → sampled more often), mechanistically explaining C16's register identification floor as coverage-driven."
     }
    ]
   },
@@ -40672,7 +40672,7 @@
      ],
      "y_label": "solved (held-out, hidden-graded)",
      "y_format": "percent01",
-     "note": "Depth 1: banking pulls coverage into the single-shot (0.60\u21920.80), ceiling flat = concentration. Depth 2: the coverage ceiling itself rises 0.15\u21920.45 (3\u00d7) on held-out tasks = expansion, proposing compositions the base never sampled."
+     "note": "Depth 1: banking pulls coverage into the single-shot (0.60→0.80), ceiling flat = concentration. Depth 2: the coverage ceiling itself rises 0.15→0.45 (3×) on held-out tasks = expansion, proposing compositions the base never sampled."
     },
     {
      "kind": "line",
@@ -40820,7 +40820,7 @@
      "x_label": "k (samples)",
      "y_label": "coverage@k (depth 2)",
      "y_format": "percent01",
-     "note": "The banked model proposes correct depth-2 compositions the base never sampled \u2014 unique-program count even drops, so banking moved the proposal mass onto correct compositions (C17's lever)."
+     "note": "The banked model proposes correct depth-2 compositions the base never sampled — unique-program count even drops, so banking moved the proposal mass onto correct compositions (C17's lever)."
     }
    ]
   },
@@ -40871,7 +40871,7 @@
      ],
      "y_label": "2AFC accuracy / parse rate",
      "y_format": "percent01",
-     "note": "An explicit simulate-both-compare procedure lifts base 2AFC to 0.83. The weight-installed SIM module reaches 0.95 parse-conditional (it genuinely composes in-context) but format capture (parse 0.53) hijacks the output channel half the time, crushing deployable accuracy to 0.51 \u2014 capability = module x interface x procedure."
+     "note": "An explicit simulate-both-compare procedure lifts base 2AFC to 0.83. The weight-installed SIM module reaches 0.95 parse-conditional (it genuinely composes in-context) but format capture (parse 0.53) hijacks the output channel half the time, crushing deployable accuracy to 0.51 — capability = module x interface x procedure."
     },
     {
      "headline": false,
@@ -40892,7 +40892,7 @@
      ],
      "y_label": "bare identification",
      "y_format": "percent01",
-     "note": "Neither a procedure, worked demos, nor a working simulator moves generation \u2014 proposal cannot be assembled in-context from forward primitives."
+     "note": "Neither a procedure, worked demos, nor a working simulator moves generation — proposal cannot be assembled in-context from forward primitives."
     }
    ]
   },
@@ -40958,7 +40958,7 @@
      ],
      "y_label": "K=8 rollout accuracy",
      "y_format": "percent01",
-     "note": "The recurrent model-VM edit loop lifts a 10% blank baseline to 43.1% average and beats native Qwen by 6.2%. ECHO (also training on VM observation tokens) reached 36.2% (-6.9% vs action-only) despite far lower observation CE \u2014 modeling the textual VM state does not optimize the action policy. The oracle teacher (73.8%) marks the remaining policy gap."
+     "note": "The recurrent model-VM edit loop lifts a 10% blank baseline to 43.1% average and beats native Qwen by 6.2%. ECHO (also training on VM observation tokens) reached 36.2% (-6.9% vs action-only) despite far lower observation CE — modeling the textual VM state does not optimize the action policy. The oracle teacher (73.8%) marks the remaining policy gap."
     }
    ]
   },
@@ -41454,21 +41454,21 @@
        ]
       },
       {
-       "label": "steer \u2192 TRUE first-op",
+       "label": "steer → TRUE first-op",
        "values": [
         0.36,
         0.173
        ]
       },
       {
-       "label": "steer \u2192 wrong op",
+       "label": "steer → wrong op",
        "values": [
         0.32,
         0.113
        ]
       },
       {
-       "label": "steer \u2192 random",
+       "label": "steer → random",
        "values": [
         0.353,
         0.147
@@ -41485,7 +41485,7 @@
      "title": "Depth-2 naming vs steering coefficient (all conditions flat/overlapping)",
      "series": [
       {
-       "label": "steer \u2192 TRUE",
+       "label": "steer → TRUE",
        "points": [
         [
          2.0,
@@ -41514,7 +41514,7 @@
        ]
       },
       {
-       "label": "steer \u2192 wrong",
+       "label": "steer → wrong",
        "points": [
         [
          2.0,
@@ -41543,7 +41543,7 @@
        ]
       },
       {
-       "label": "steer \u2192 random",
+       "label": "steer → random",
        "points": [
         [
          2.0,
@@ -44720,11 +44720,17 @@
      "series": [
       {
        "label": "records with any exact optimal output",
-       "values": [2, 1]
+       "values": [
+        2,
+        1
+       ]
       },
       {
        "label": "records required to pass",
-       "values": [3, 3]
+       "values": [
+        3,
+        3
+       ]
       }
      ],
      "y_label": "Records (4 tested per attempt)",
@@ -44741,11 +44747,17 @@
      "series": [
       {
        "label": "strictly parsed samples",
-       "values": [4, 16]
+       "values": [
+        4,
+        16
+       ]
       },
       {
        "label": "answer-truncated samples",
-       "values": [12, 0]
+       "values": [
+        12,
+        0
+       ]
       }
      ],
      "y_label": "Samples (16 generated per attempt)",
@@ -44754,161 +44766,104 @@
     }
    ]
   },
-  "qwen35_4b_verified_macro_long_context_rerun": {
+  "qwen35_4b_gauntlet_breadth_round1": {
    "charts": [
     {
      "headline": true,
      "kind": "bar",
-     "title": "Longer caps changed the failure mode, not evidence eligibility",
+     "title": "First install ever to move the blackbox benchmark: menagerie quick, paired base-vs-trained on two fresh seeds",
      "categories": [
-      "fresh base think@16k",
-      "fresh base think@32k",
-      "diagnostic base think@49k"
+      "seed 52004",
+      "seed 52005"
      ],
      "series": [
       {
-       "label": "unresolved cap contacts",
-       "values": [0.9097222222222222, 0.4375, 0.2916666666666667]
+       "label": "base model",
+       "values": [
+        0.1396,
+        0.1521
+       ]
       },
       {
-       "label": "exact periodic loops",
-       "values": [0.09027777777777778, 0.5625, 0.7083333333333334]
-      },
-      {
-       "label": "answer-limit contacts",
-       "values": [0.4166666666666667, 0.2569444444444444, 0.2708333333333333]
+       "label": "after breadth training (round 2)",
+       "values": [
+        0.3625,
+        0.4458
+       ]
       }
      ],
-     "y_label": "Share of samples",
-     "y_format": "percent01",
-     "note": "Every sample at all three allowances reached the reasoning boundary. The 16k and 32k rungs were rejected before scoring. Amendment 12 made the max-seqs-64 49k probe diagnostic-only before its receipt because worst-case demand exceeded KV capacity; no decoded output or score was inspected.",
-     "source": "analysis/scientific_smoke_16k_termination_audit.json; analysis/scientific_smoke_32k_termination_audit.json; analysis/scientific_smoke_49k_scheduler_overcommit_audit.json"
+     "y_label": "menagerie quick aggregate (HF backend, deterministic, same seed per pair)",
+     "note": "Pre-registered success bar was +0.03; measured deltas are +0.223 and +0.294. Both arms share seed, tier, backend, and decoding; the HF parity backend is deterministic, so paired deltas carry no decode noise.",
+     "source": "runs/menagerie_log.jsonl; reports/report.md (Results)"
     },
     {
      "kind": "bar",
-     "title": "Long-context reasoning cleared every supplied-plan record",
+     "title": "Training transferred to gym families the model never practiced",
      "categories": [
-      "think@16k interface"
+      "trained families (mean of 10)",
+      "brinework (held out)",
+      "spindle (held out)",
+      "stallwright (zero training examples)"
      ],
      "series": [
       {
-       "label": "records with an exact rewrite",
-       "values": [16]
+       "label": "base",
+       "values": [
+        0.195,
+        0.07,
+        0.187,
+        0.0
+       ]
       },
       {
-       "label": "records required to pass",
-       "values": [12]
+       "label": "after round 2",
+       "values": [
+        0.712,
+        0.61,
+        0.795,
+        0.395
+       ]
       }
      ],
-     "y_label": "Records (16 tested)",
-     "y_format": "number",
-     "note": "The supplied-plan K=4 gate passed at the record level. This repairs the parent's apparent low-budget interface failure but does not establish fresh induction value.",
-     "source": "analysis/interface_gate.json"
-    }
-   ]
-  },
-  "qwen35_4b_verified_macro_capacity_fit_rerun": {
-   "charts": [
-    {
-     "headline": true,
-     "kind": "bar",
-     "title": "Capacity fitting moves worst-case demand below live KV capacity",
-     "categories": [
-      "predecessor max-seqs 64",
-      "capacity-fit max-seqs 19"
-     ],
-     "series": [
-      {
-       "label": "block-rounded worst-case demand",
-       "values": [2433024, 963072]
-      },
-      {
-       "label": "measured live KV capacity",
-       "values": [995328, 997888]
-      }
-     ],
-     "y_label": "KV-cache tokens",
-     "y_format": "number",
-     "note": "The predecessor's 48 logical sequences could demand 2.43M tokens from a 995,328-token cache. The completed fresh K=4 probe used max-seqs 19; with 528-token blocks and a 50,688-token rounded worst sequence, it required 963,072 of 997,888 live tokens, leaving 34,816. The strict capacity-fit run was nevertheless 19.6% slower than the old max-seqs-64 diagnostic, so cache-safe concurrency is not automatically throughput-optimal.",
-     "source": "../qwen35_4b_verified_macro_long_context_rerun/analysis/scientific_smoke_49k_scheduler_overcommit_audit.json; analysis/scientific_smoke_49k_termination_audit.json"
+     "y_label": "gym greedy@1 mean (deployed think budget 1024, held-out item seeds)",
+     "note": "Held-out families improved as much as trained ones — the substrate-locality pattern from earlier claims (C43/C45/C48) does not extend to this breadth + emission-seam recipe.",
+     "source": "runs/eval_gym_base/scores.json vs runs/eval_gym_round2_merged/scores.json"
     },
     {
      "kind": "bar",
-     "title": "Capacity fitting did not clear the 49k termination boundary",
+     "title": "The mechanism: unparseable answers collapsed after emission-seam training",
      "categories": [
-      "unresolved boundary contacts",
-      "exact periodic loops",
-      "answer-limit contacts"
+      "caravan",
+      "kilnrite",
+      "runeward",
+      "loomfix",
+      "spindle (held out)"
      ],
      "series": [
       {
-       "label": "observed share",
-       "values": [0.22916666666666666, 0.7708333333333334, 0.1875]
+       "label": "base: items with no parseable ANSWER (of 100)",
+       "values": [
+        98,
+        93,
+        97,
+        99,
+        100
+       ]
       },
       {
-       "label": "registered maximum",
-       "values": [0.05, 0.25, 0.05]
+       "label": "round 2",
+       "values": [
+        8,
+        0,
+        0,
+        2,
+        3
+       ]
       }
      ],
-     "y_label": "Share of 48 samples",
-     "y_format": "percent01",
-     "note": "All 48 samples contacted the reasoning boundary. The fresh 49k rung failed all three content-blind thresholds. Its 61k successor was stopped before a receipt after the implicit CUDA-graph list proved not to cover active width 15; it left no reusable rows. No decoded output or score was inspected, so this is not a macro result.",
-     "source": "analysis/scientific_smoke_49k_termination_audit.json"
-    }
-   ]
-  },
-  "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
-   "charts": [
-    {
-     "headline": true,
-     "kind": "bar",
-     "title": "Explicit graph lists cover every registered active width",
-     "categories": [
-      "implicit 49k",
-      "exact 49k",
-      "implicit 61k",
-      "exact 61k"
-     ],
-     "series": [
-      {
-       "label": "active batch width",
-       "values": [19, 19, 15, 15]
-      },
-      {
-       "label": "largest resolved CUDA graph",
-       "values": [16, 19, 8, 15]
-      }
-     ],
-     "y_label": "Decode sequences",
-     "y_format": "number",
-     "note": "Pinned vLLM's implicit sparse lists missed active widths 17-19 at 49k and 9-15 at 61k. Explicit lists resolved exactly through widths 19 and 15 in both completed fresh probes. The 61k run also fit 950,400 required KV tokens below 997,888 live tokens.",
-     "source": "../qwen35_4b_verified_macro_capacity_fit_rerun/analysis/scientific_smoke_49k_termination_audit.json; analysis/scientific_smoke_49k_termination_audit.json; analysis/scientific_smoke_61k_termination_audit.json"
-    },
-    {
-     "kind": "bar",
-     "title": "More context increased loops without clearing termination",
-     "categories": [
-      "exact 49k",
-      "exact 61k"
-     ],
-     "series": [
-      {
-       "label": "unresolved boundary contacts",
-       "values": [0.20833333333333334, 0.16666666666666666]
-      },
-      {
-       "label": "exact periodic loops",
-       "values": [0.7916666666666666, 0.8333333333333334]
-      },
-      {
-       "label": "answer-limit contacts",
-       "values": [0.125, 0.08333333333333333]
-      }
-     ],
-     "y_label": "Share of 48 samples",
-     "y_format": "percent01",
-     "note": "At 49k, the fresh K=4 probe recorded 38 loops, 10 unresolved contacts, and 6 answer-limit contacts; at terminal 61k it recorded 40, 8, and 4. Registered maxima for unresolved, loops, and answer-limit shares are 5%, 25%, and 5% respectively, so both rungs failed every threshold. The terminal selector is pass=false with no selected budget; no decoded or scored content was inspected.",
-     "source": "analysis/scientific_smoke_49k_termination_audit.json; analysis/scientific_smoke_61k_termination_audit.json; analysis/smoke_budget_selection.json"
+     "y_label": "parse failures per 100 held-out atoms",
+     "note": "The base model consumes any thinking budget, gets force-closed, then restarts a verbose explanation and never emits the answer line. Round 2 trained commit-from-truncated-chain behavior using the model's own correct-after-cut samples.",
+     "source": "runs/eval_gym_base/scores.json vs runs/eval_gym_round2_merged/scores.json"
     }
    ]
   }

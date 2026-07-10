@@ -1,0 +1,79 @@
+# FAST exploration profile — the default loop shape (user directive
+# 2026-07-09: iteration speed is the research budget; menagerie quick is a
+# 44-second instrument and must be consulted every round).
+#
+# Round cycle target: <= ~2 h wall = small harvest (~80 min) + train
+# (~15 min) + menagerie quick base-vs-adapter on one fresh seed (~4 min).
+# The full profile (configs/default.yaml) is reserved for decision rounds
+# after fast rounds identify a working recipe; claims follow the
+# pre-registered decision rule in reports/gym_design.md.
+
+round: 1
+artifacts_dir: large_artifacts/qwen35_4b_gauntlet_breadth_round1
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+
+harvest:
+  run_seed: 41001
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  think_budget: 2048            # default; overridden per family below
+  # Smoke2 finding: these families need 4096 to close thinking naturally;
+  # the rest close well at 2048 (burrowmaze 0.88, ferrier 0.92, ...).
+  think_budget_by_family:
+    glyphgate: 4096
+    loomfix: 4096
+    stallwright: 4096
+    kilnrite: 4096
+    caravan: 4096
+    foundry_ledger: 4096
+  episode_think_budget: 2048
+  answer_max_tokens: 192
+  atoms:
+    families: [caravan, foundry_ledger, stallwright, runeward, kilnrite, glyphgate, loomfix, ferrier, burrowmaze, gatepost]
+    gen_seed: 11001
+    k: 2
+    per_level: {1: 40, 2: 40}   # L3+ reserved for full-profile rounds
+  episodes:
+    families: [kilnrite, glyphgate, loomfix, ferrier, burrowmaze, gatepost]
+    seed_base: 21000
+    k: 2
+    per_level: {1: 16, 2: 16}
+
+sft:
+  out: data/sft_round1_fast.jsonl
+  max_think_tokens: 2000
+  max_answer_tokens: 96
+  max_per_item: 2
+  max_rollouts_per_episode: 2
+  family_cap: 400
+  # NOTE: with K=2 the lucky-guess gate (domain<5 needs >=3 correct) simply
+  # excludes small-domain items — acceptable for fast rounds.
+
+train:
+  adapter_out: large_artifacts/qwen35_4b_gauntlet_breadth_round1/adapters/round1_fast
+  epochs: 2.0
+  lr: 2.0e-4
+  rank: 32
+  alpha: 64
+  grad_accum: 8
+  batch_size: 2
+  max_length: 3072
+  seed: 42
+
+eval_gym:
+  gen_seed: 90001
+  atoms_per_level: 25
+  episodes_per_level: 8
+  episode_levels: [1, 2, 3]
+  think_budget: 1024
+  answer_max_tokens: 96
+
+menagerie:
+  tier: quick
+  think: default

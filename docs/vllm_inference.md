@@ -155,10 +155,32 @@ Adapter execution must still pass a behavior/parity gate after an adapter is res
 on a fresh machine. A successful base-model smoke does not prove that an arbitrary adapter's module
 mapping is correct.
 
+**WARNING — verified silent no-op (2026-07-10).** vLLM 0.24 runtime LoRA does
+NOT apply Qwen3.5-4B adapters trained with PEFT on `AutoModelForCausalLM`: an
+in-process probe (one engine, same prompts, greedy, `lora_request` on vs off)
+produced token-identical outputs, and two *different* trained rank-32 adapters
+produced byte-identical outputs across 1,200 eval generations. Mechanism: the
+adapter names its tensors `base_model.model.model.layers.*` while the served
+composite checkpoint keeps its text stack under `model.language_model.layers.*`;
+vLLM's LoRA weight mapping matches nothing and raises no error. The earlier
+"plumbing-only" test below could never catch this: a ZERO adapter is expected
+to produce base-identical outputs whether or not it is applied. The required
+gate for any adapter arm is therefore an ON-vs-OFF behavioral diff with a REAL
+trained adapter (identical outputs = fail), e.g.
+`experiments/qwen35_4b_gauntlet_breadth_round1`'s `lora_probe3` pattern.
+
+Until the mapping is fixed, deploy installs as **merged composite
+checkpoints**: `experiments/qwen35_4b_gauntlet_breadth_round1/scripts/merge_adapter.py`
+merges LoRA deltas into the full composite by explicit name mapping
+(W += B·A·α/r on `model.language_model.layers.*`), and the result loads via
+`--model-id` (menagerie) or the experiment runner's `model_override`. Note a
+text-only `merge_and_unload` checkpoint does NOT load (vLLM's Qwen3.5 class
+requires the composite config); merge into the composite.
+
 The current host has passed a plumbing-only LoRA test: a generated zero rank-8 adapter loaded through
-vLLM and gave 4/4 token-identical greedy outputs versus the base model. This proves the text-backbone
-module mapping and runtime request path load; it does not replace the required rank-32 behavioral
-gate for a real repository adapter.
+vLLM and gave 4/4 token-identical greedy outputs versus the base model. This proves the runtime
+request path loads; per the warning above it does NOT prove weight application, and the same host
+subsequently failed the on-vs-off gate with a real adapter.
 
 ## Defaults and tuning
 

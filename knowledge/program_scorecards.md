@@ -106,8 +106,26 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Test-Time Reasoning Budget
 
 - Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
-- Current read: native thinking is a real deployable lever (MBPP greedy +15pp, claim C9), and the completed filler/shuffle/foreign controls show that its gain comes from coherent relevant content rather than free compute. Budget remains workload-specific and non-monotonic: a visible-test controller saves tokens but does not beat the best fixed budget, while fresh verified-macro induction outgrew allowances that were adequate for supplied plans.
-- Best next experiment: a learned STOP/MORE controller with richer visible signals versus fixed budgets at matched mean tokens, replicated on a fresh procedural workload whose budget is calibrated on the actual task class.
-- Strong anchors: `qwen35_4b_thinking_budget_scaling`, `qwen35_4b_thinking_budget_controller`, `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_verified_macro_long_context_rerun`.
-- Avoid repeating: interpreting cap-bound rows as failures, transferring a budget between workload classes without a termination gate, or reporting a thinking-budget win without filler/shuffle/foreign controls and the overthinking decline.
-- Evidence that advances the program: a controller that Pareto-beats strong fixed budgets on contamination-controlled tasks, or a content-blind workload calibration rule that survives task-class shift without censoring the scored comparison.
+- Current read: the corpus disabled native thinking everywhere; turning it on is a real deployable lever (MBPP greedy +15pp, claim C9), but a budget to control (overthinking hurts) and partly a compute/scaffold effect rather than reasoning.
+- Best next experiment: a deployable STOP/MORE controller over the thinking budget vs the fixed ~1024 optimum at matched mean tokens; and a stronger content control (substitute a different task's thinking).
+- Strong anchors: `qwen35_4b_thinking_budget_scaling`, `qwen_python_shaped_silent_executor`, `qwen35_4b_adaptive_evidence_budget_policy`.
+- Avoid repeating: reporting a thinking-budget win without a shuffled/foreign-thinking control or without the overthinking decline; claiming an exact optimal budget from single-seed gaps.
+- Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.
+
+## Agentic Breadth Installation
+
+- Program: [charter](../research_programs/agentic_breadth_installation/charter.md)
+- Current read: the first blackbox-arbitrated install in the corpus — breadth-first expert iteration on a firewall-clean 12-family gym moved menagerie quick +0.223/+0.294 on two fresh paired seeds (HF backend, deterministic; claims C49/C50), with gym-internal transfer to never-trained families (+0.54/+0.61); the C43/C45/C48 locality laws do not extend to this regime, and the causal lever was gradient placement at the answer-emission seam (recovery arm + weighted loss), not dose.
+- Best next experiment: round-3 re-harvest with the round-2 model (queued: `gauntlet_round3_expert_iteration`) plus the recovery-arm-only and breadth-vs-matched-dose ablations that split emission-seam repair from axis competence.
+- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`.
+- Avoid repeating: evaluating adapters through vLLM runtime LoRA (C49 silent no-op — on-vs-off gate mandatory); training full-weight on the model's own verbatim naturally-closed chains (near-self-distillation); filtering training data to naturally-closed chains only (excludes the deployment-critical force-closed state); comparing HF-backend and vLLM-backend menagerie scores.
+- Evidence that advances the program: compounding menagerie deltas across iteration rounds on fresh paired seeds; ablations attributing the delta between protocol-emission repair and axis competence; medium/slow-tier confirmations once the host fla-kernel fault is resolved.
+
+## Agentic Breadth Installation
+
+- Program: [charter](../research_programs/agentic_breadth_installation/charter.md)
+- Current read: the first blackbox-arbitrated install in the corpus — breadth-first expert iteration on a firewall-clean 12-family gym moved menagerie quick +0.223/+0.294 on two fresh paired seeds (HF backend, deterministic; claims C49/C50), with gym-internal transfer to never-trained families (+0.54/+0.61); the C43/C45/C48 locality laws do not extend to this regime, and the causal lever was gradient placement at the answer-emission seam (recovery arm + weighted loss), not dose.
+- Best next experiment: round-3 re-harvest with the round-2 model (queued: `gauntlet_round3_expert_iteration`) plus the recovery-arm-only and breadth-vs-matched-dose ablations that split emission-seam repair from axis competence.
+- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`.
+- Avoid repeating: evaluating adapters through vLLM runtime LoRA (C49 silent no-op — on-vs-off gate mandatory); training full-weight on the model's own verbatim naturally-closed chains (near-self-distillation); filtering training data to naturally-closed chains only (excludes the deployment-critical force-closed state); comparing HF-backend and vLLM-backend menagerie scores.
+- Evidence that advances the program: compounding menagerie deltas across iteration rounds on fresh paired seeds; ablations attributing the delta between protocol-emission repair and axis competence; medium/slow-tier confirmations once the host fla-kernel fault is resolved.

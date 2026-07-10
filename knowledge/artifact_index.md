@@ -19,37 +19,38 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Directory | Experiments |
 | --- | ---: |
-| `reports/` | 202 |
-| `src/` | 190 |
+| `reports/` | 200 |
+| `src/` | 188 |
 | `runs/` | 136 |
-| `analysis/` | 128 |
-| `scripts/` | 111 |
-| `configs/` | 108 |
-| `data/` | 99 |
+| `analysis/` | 125 |
+| `scripts/` | 109 |
+| `configs/` | 106 |
+| `data/` | 97 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `figures/` | 10 |
-| `tests/` | 4 |
 | `archive/` | 1 |
 | `suite_logs/` | 1 |
+| `tests/` | 1 |
 
 ## File Extensions
 
 | Extension | Files |
 | --- | ---: |
 | `.csv` | 2135 |
-| `.json` | 2134 |
-| `.py` | 1067 |
+| `.json` | 2107 |
+| `.py` | 1058 |
 | `.png` | 848 |
-| `.md` | 841 |
-| `.jsonl` | 613 |
+| `.md` | 813 |
+| `.jsonl` | 614 |
 | `.log` | 527 |
-| `.yaml` | 299 |
+| `.yaml` | 294 |
 | `.html` | 90 |
+| `.gz` | 28 |
 | `.sh` | 19 |
 | `.txt` | 5 |
-| `[none]` | 2 |
 | `.npy` | 1 |
+| `[none]` | 1 |
 
 ## Largest Files
 
@@ -65,7 +66,6 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 7.5 | `experiments/qwen35_4b_learned_active_trace_policy/data/seed/dsl_train.jsonl` |
 | 7.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_ceiling.json` |
 | 7.3 | `experiments/qwen35_4b_learned_active_trace_policy/reports/policy_rows.json` |
-| 7.1 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/interface/think_16384/designed_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_ceiling.jsonl` |
 | 6.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_support.json` |
@@ -76,7 +76,6 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 5.7 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/final_records.jsonl` |
 | 5.6 | `experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_eval_examples.jsonl` |
 | 5.6 | `experiments/qwen35_4b_learned_active_trace_policy/data/base_anchor/dsl_train_static60_base.jsonl` |
-| 5.5 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/budget_calibration/think_16384/calibration.jsonl` |
 | 5.4 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/selective_records.jsonl` |
 | 5.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/base_anchor/dsl_train_static80_base.jsonl` |
 | 4.8 | `experiments/qwen35_4b_joint_shortlister_ladder/data/train_pairs.jsonl` |
@@ -85,3 +84,5 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 4.6 | `experiments/qwen35_4b_oracle_probe_synthesis_mdp/reports/all_eval_records.json` |
 | 4.5 | `experiments/qwen35_4b_adaptive_evidence_budget_policy/data/train_budget_states.jsonl` |
 | 4.2 | `experiments/qwen35_4b_foofah_strategy_discovery_live/data/test_baseline_records.jsonl` |
+| 4.2 | `experiments/qwen35_4b_foofah_program_strategy_portfolio/reports/test_records.jsonl` |
+| 4.2 | `experiments/qwen35_4b_foofah_adaptive_program_budget_router/data/test_records.jsonl` |

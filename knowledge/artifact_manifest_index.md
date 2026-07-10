@@ -2,19 +2,19 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 174
-- Manifest files: 476
+- Experiments with manifests: 172
+- Manifest files: 470
 
 ## Manifest Types
 
 | Type | Files |
 | --- | ---: |
 | `checkpoint` | 83 |
-| `dataset` | 132 |
+| `dataset` | 130 |
 | `large-artifact` | 50 |
-| `other` | 63 |
+| `other` | 61 |
 | `run-data` | 101 |
-| `standard-artifact` | 47 |
+| `standard-artifact` | 45 |
 
 ## Manifests
 
@@ -101,6 +101,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_foofah_program_ensemble_consensus` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_program_ensemble_consensus/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_program_repair_agent` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_program_repair_agent/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_selective_program_fallback` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_selective_program_fallback/large_artifacts_manifest.md) |
+| `qwen35_4b_gauntlet_breadth_round1` | `standard-artifact` | [manifest](../experiments/qwen35_4b_gauntlet_breadth_round1/reports/artifact_manifest.yaml) |
 | `qwen35_4b_generator_verifier_gap` | `standard-artifact` | [manifest](../experiments/qwen35_4b_generator_verifier_gap/reports/artifact_manifest.yaml) |
 | `qwen35_4b_graphir_self_repair` | `dataset` | [manifest](../experiments/qwen35_4b_graphir_self_repair/data/dataset_manifest.json) |
 | `qwen35_4b_graphir_self_repair` | `large-artifact` | [manifest](../experiments/qwen35_4b_graphir_self_repair/large_artifacts_manifest.md) |
@@ -243,16 +244,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_verified_algorithm_retrieval_adaptation` | `large-artifact` | [manifest](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/large_artifacts_manifest.md) |
 | `qwen35_4b_verified_edit_closure` | `dataset` | [manifest](../experiments/qwen35_4b_verified_edit_closure/data/dataset_manifest.json) |
 | `qwen35_4b_verified_edit_closure` | `large-artifact` | [manifest](../experiments/qwen35_4b_verified_edit_closure/large_artifacts_manifest.md) |
-| `qwen35_4b_verified_macro_capacity_fit_rerun` | `other` | [manifest](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/data/prompt_manifest.json) |
-| `qwen35_4b_verified_macro_capacity_fit_rerun` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/reports/artifact_manifest.yaml) |
-| `qwen35_4b_verified_macro_exact_cudagraph_rerun` | `other` | [manifest](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/data/prompt_manifest.json) |
-| `qwen35_4b_verified_macro_exact_cudagraph_rerun` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verified_macro_invention` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_invention/data/dataset_manifest.json) |
 | `qwen35_4b_verified_macro_invention` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/dataset_manifest.json) |
 | `qwen35_4b_verified_macro_invention` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verified_macro_invention/reports/artifact_manifest.yaml) |
-| `qwen35_4b_verified_macro_long_context_rerun` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_long_context_rerun/data/dataset_manifest.json) |
-| `qwen35_4b_verified_macro_long_context_rerun` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_long_context_rerun/data/smoke_v1_frozen/dataset_manifest.json) |
-| `qwen35_4b_verified_macro_long_context_rerun` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verified_macro_long_context_rerun/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verifier_free_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verifier_free_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_heldout_records.manifest.json) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_train_records.manifest.json) |

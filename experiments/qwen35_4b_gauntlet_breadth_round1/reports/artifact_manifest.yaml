@@ -1,0 +1,27 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_gauntlet_breadth_round1"
+external_artifacts:
+  - name: "round-1 QLoRA think-channel adapter"
+    storage: "large_artifacts/qwen35_4b_gauntlet_breadth_round1/adapters/round1"
+    required_for: "adapter arms of eval_gym.py and bench.py"
+    checksum: ""
+    regenerate: >-
+      .venv-vllm/bin/python scripts/harvest.py --stage both &&
+      python3 scripts/build_sft.py &&
+      .venv/bin/python scripts/train_think.py
+      --out ../../large_artifacts/qwen35_4b_gauntlet_breadth_round1/adapters/round1
+omitted_artifacts:
+  - path: "runs/harvest_round1/"
+    reason: "gzipped harvest row files are large and fully regenerable from seeds in configs/default.yaml"
+  - path: "runs/eval_gym_*/atom_rows.jsonl.gz"
+    reason: "per-item generation dumps; regenerable; scores.json is committed"
+reproducibility:
+  smoke_command: "python3 scripts/run.py --smoke"
+  full_command: "see README Run section (staged pipeline; single-tenant GPU)"
+  required_external_artifacts: []
+notes: >-
+  Menagerie evaluation events append aggregate-only records to
+  runs/menagerie_log.jsonl; per-run JSONs stay under runs/menagerie/ and
+  contain only score-level fields (no transcripts; --debug-artifacts is never
+  used). Seeds are never reused across events.

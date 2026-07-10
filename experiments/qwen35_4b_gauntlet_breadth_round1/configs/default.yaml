@@ -1,0 +1,69 @@
+# Gauntlet round 1 configuration.
+#
+# Seeds are namespaced: harvest item/episode seeds, gym-eval seeds, and
+# menagerie seeds are all disjoint. Menagerie seeds are chosen fresh per
+# evaluation event and recorded in runs/menagerie_log.jsonl (never reused).
+
+round: 1
+artifacts_dir: large_artifacts/qwen35_4b_gauntlet_breadth_round1
+
+engine:
+  max_model_len: 16384        # matches the proven menagerie baseline engine shape;
+                              # leaves headroom for L4 episode histories + 4096 think budgets
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 64            # vLLM auto-clamps if Mamba cache blocks run short
+  max_num_batched_tokens: 16384
+
+harvest:
+  run_seed: 41001
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  # Smoke finding (runs/harvest_smoke): at think 2048 the model SOLVES hard-family
+  # items in-think but gets force-closed while double-checking, then the stage-2
+  # answer restarts an explanation and truncates before ANSWER. 4096 lets chains
+  # close naturally; the SFT filter still keeps only terse deployable shapes.
+  think_budget: 4096
+  episode_think_budget: 2048  # per-turn actions are smaller decisions
+  answer_max_tokens: 192
+  atoms:
+    families: [caravan, foundry_ledger, stallwright, runeward, kilnrite, glyphgate, loomfix, ferrier, burrowmaze, gatepost]
+    gen_seed: 11001           # item-generation seed (train pool)
+    k: 4
+    per_level: {1: 100, 2: 100, 3: 40}
+  episodes:
+    families: [kilnrite, glyphgate, loomfix, ferrier, burrowmaze, gatepost]
+    seed_base: 21000          # episode i uses seed seed_base + i
+    k: 4
+    per_level: {1: 40, 2: 40}
+
+sft:
+  out: data/sft_round1.jsonl
+  max_think_tokens: 2000      # think-economy: prefer-shortest still biases low
+  max_answer_tokens: 96       # deployable terse-answer shape only
+  max_per_item: 2             # at most 2 verified samples per atom item (shortest thinking first)
+  max_rollouts_per_episode: 2 # cap near-identical successful rollouts of one instance
+  family_cap: 900             # per-family cap, trimmed by (level, kind) round-robin
+
+train:
+  adapter_out: large_artifacts/qwen35_4b_gauntlet_breadth_round1/adapters/round1
+  epochs: 2.0
+  lr: 2.0e-4
+  rank: 32
+  alpha: 64
+  grad_accum: 8
+  batch_size: 2
+  max_length: 3072
+  seed: 42
+
+eval_gym:
+  gen_seed: 90001             # held-out generation seed (disjoint from harvest)
+  atoms_per_level: 25         # L1-L4, all 12 families (incl. held-out brinework/spindle)
+  episodes_per_level: 8       # L1-L3, episode families (incl. held-out spindle)
+  episode_levels: [1, 2, 3]
+  think_budget: 1024          # matches the deployed quick-tier regime
+  answer_max_tokens: 96
+
+menagerie:
+  tier: quick
+  think: default              # tier budgets, thinking on, greedy — the deployment default

@@ -4,8 +4,8 @@ Generated from `knowledge/future_experiment_queue.json`. Edit the JSON source, n
 
 This queue is intentionally broader than the imported prototype corpus. It is a launchpad for future experiments, candidate programs, infrastructure work, and falsifiable probes.
 
-- Proposals: 37
-- Existing research programs covered: 12 / 12
+- Proposals: 38
+- Existing research programs covered: 13 / 13
 - Candidate program lines: 5
 
 ## Status Counts
@@ -14,13 +14,13 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 | --- | ---: |
 | `infrastructure` | 6 |
 | `program-seed` | 15 |
-| `ready-for-intake` | 16 |
+| `ready-for-intake` | 17 |
 
 ## Priority Counts
 
 | Priority | Proposals |
 | --- | ---: |
-| `P0` | 12 |
+| `P0` | 13 |
 | `P1` | 18 |
 | `P2` | 7 |
 
@@ -102,10 +102,11 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 
 ### Posttraining And Adaptation
 
-- Proposals: 3
+- Proposals: 4
 
 - `posttraining_method_shared_substrate` (`P0`, `ready-for-intake`): How do SFT, DPO, process distillation, and DAgger compare on one candidate/evidence substrate?
 - `adapter_free_repro_manifest_audit` (`P0`, `infrastructure`): Can every trained-run experiment be audited without committing adapters or checkpoints?
+- `gauntlet_round3_expert_iteration` (`P0`, `ready-for-intake`): Re-harvesting the gym with the round-2 model: does the frontier open (glyphgate/loomfix/stallwright), does menagerie keep responding, and does iteration compound or re-saturate (C11 said coverage-bounded; the frontier moved in round 2)?
 - `hard_negative_training_transfer` (`P1`, `program-seed`): Does training on hard negatives improve real selection, or does it overfit visible failure artifacts?
 
 ### Process Control And Tool Use
@@ -175,6 +176,12 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 
 - `thinking_budget_controller` (`P1`, `ready-for-intake`): Can a deployable controller allocate the thinking-token budget better than the fixed ~1024 optimum, given thinking has an overthinking cost?
 - `thinking_content_vs_compute_control` (`P1`, `ready-for-intake`): How much of the native-thinking gain is coherent reasoning versus compute + scaffold + token-presence?
+
+### Agentic Breadth Installation
+
+- Proposals: 1
+
+- `gauntlet_round3_expert_iteration` (`P0`, `ready-for-intake`): Re-harvesting the gym with the round-2 model: does the frontier open (glyphgate/loomfix/stallwright), does menagerie keep responding, and does iteration compound or re-saturate (C11 said coverage-bounded; the frontier moved in round 2)?
 
 ### Data Generation And Synthetic Curriculum Design
 
@@ -252,3 +259,4 @@ This queue is intentionally broader than the imported prototype corpus. It is a 
 | P2 | program-seed | medium | `evidence_branching_ui_probe` | `human_agent_research_interfaces`, [Collective Experimentation Infrastructure](../research_programs/collective_experimentation_infrastructure/charter.md) | What interface lets a researcher branch from one result into controls, replications, or new programs fastest? | Use high-impact claim evidence as the first anchor set. | [source](../knowledge/future_program_seeds.md) |
 | P1 | ready-for-intake | medium | `thinking_budget_controller` | [Test-Time Reasoning Budget](../research_programs/test_time_reasoning_budget/charter.md), [Process Control And Tool Use](../research_programs/process_control_and_tool_use/charter.md) | Can a deployable controller allocate the thinking-token budget better than the fixed ~1024 optimum, given thinking has an overthinking cost? | Anchor on qwen35_4b_thinking_budget_scaling and the evidence-budget controller experiments. | [source](../research_programs/test_time_reasoning_budget/backlog.md) |
 | P1 | ready-for-intake | small | `thinking_content_vs_compute_control` | [Test-Time Reasoning Budget](../research_programs/test_time_reasoning_budget/charter.md), [Interpretability And Diagnostics](../research_programs/interpretability_and_diagnostics/charter.md) | How much of the native-thinking gain is coherent reasoning versus compute + scaffold + token-presence? | Extend qwen35_4b_thinking_budget_scaling controls with foreign-task thinking. | [source](../research_programs/test_time_reasoning_budget/backlog.md) |
+| P0 | ready-for-intake | medium | `gauntlet_round3_expert_iteration` | [Agentic Breadth Installation](../research_programs/agentic_breadth_installation/charter.md), [Posttraining And Adaptation](../research_programs/posttraining_and_adaptation/charter.md) | Re-harvesting the gym with the round-2 model: does the frontier open (glyphgate/loomfix/stallwright), does menagerie keep responding, and does iteration compound or re-saturate (C11 said coverage-bounded; the frontier moved in round 2)? | Run the fast-profile re-harvest with the round-2 merged model once the fla-kernel medium-tier fault on the host is triaged. | [source](../experiments/qwen35_4b_gauntlet_breadth_round1/reports/report.md) |

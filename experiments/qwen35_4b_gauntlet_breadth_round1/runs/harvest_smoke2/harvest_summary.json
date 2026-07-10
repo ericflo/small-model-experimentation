@@ -1,0 +1,355 @@
+{
+  "config": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_gauntlet_breadth_round1/configs/default.yaml",
+  "smoke": true,
+  "adapter": null,
+  "atoms": {
+    "items": 120,
+    "k": 2,
+    "seconds": 520.3,
+    "yield": {
+      "burrowmaze-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 7,
+        "natural_close": 7,
+        "correct_and_closed": 7,
+        "items_with_keeper": 4
+      },
+      "burrowmaze-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 8,
+        "natural_close": 8,
+        "correct_and_closed": 8,
+        "items_with_keeper": 4
+      },
+      "burrowmaze-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 6,
+        "natural_close": 6,
+        "correct_and_closed": 6,
+        "items_with_keeper": 3
+      },
+      "caravan-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 8,
+        "natural_close": 8,
+        "correct_and_closed": 8,
+        "items_with_keeper": 4
+      },
+      "caravan-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 2,
+        "natural_close": 2,
+        "correct_and_closed": 2,
+        "items_with_keeper": 2
+      },
+      "caravan-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 3,
+        "natural_close": 3,
+        "correct_and_closed": 2,
+        "items_with_keeper": 2
+      },
+      "ferrier-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 8,
+        "natural_close": 8,
+        "correct_and_closed": 8,
+        "items_with_keeper": 4
+      },
+      "ferrier-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 8,
+        "natural_close": 8,
+        "correct_and_closed": 8,
+        "items_with_keeper": 4
+      },
+      "ferrier-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 5,
+        "natural_close": 6,
+        "correct_and_closed": 4,
+        "items_with_keeper": 3
+      },
+      "foundry_ledger-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 8,
+        "natural_close": 8,
+        "correct_and_closed": 8,
+        "items_with_keeper": 4
+      },
+      "foundry_ledger-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 0,
+        "natural_close": 0,
+        "correct_and_closed": 0,
+        "items_with_keeper": 0
+      },
+      "foundry_ledger-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 3,
+        "natural_close": 1,
+        "correct_and_closed": 1,
+        "items_with_keeper": 1
+      },
+      "gatepost-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 6,
+        "natural_close": 7,
+        "correct_and_closed": 5,
+        "items_with_keeper": 3
+      },
+      "gatepost-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 8,
+        "natural_close": 6,
+        "correct_and_closed": 6,
+        "items_with_keeper": 4
+      },
+      "gatepost-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 6,
+        "natural_close": 4,
+        "correct_and_closed": 4,
+        "items_with_keeper": 2
+      },
+      "glyphgate-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 1,
+        "natural_close": 1,
+        "correct_and_closed": 1,
+        "items_with_keeper": 1
+      },
+      "glyphgate-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 1,
+        "natural_close": 2,
+        "correct_and_closed": 1,
+        "items_with_keeper": 1
+      },
+      "glyphgate-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 0,
+        "natural_close": 0,
+        "correct_and_closed": 0,
+        "items_with_keeper": 0
+      },
+      "kilnrite-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 3,
+        "natural_close": 3,
+        "correct_and_closed": 3,
+        "items_with_keeper": 2
+      },
+      "kilnrite-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 4,
+        "natural_close": 3,
+        "correct_and_closed": 3,
+        "items_with_keeper": 2
+      },
+      "kilnrite-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 2,
+        "natural_close": 2,
+        "correct_and_closed": 2,
+        "items_with_keeper": 2
+      },
+      "loomfix-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 0,
+        "natural_close": 0,
+        "correct_and_closed": 0,
+        "items_with_keeper": 0
+      },
+      "loomfix-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 0,
+        "natural_close": 0,
+        "correct_and_closed": 0,
+        "items_with_keeper": 0
+      },
+      "loomfix-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 2,
+        "natural_close": 2,
+        "correct_and_closed": 2,
+        "items_with_keeper": 1
+      },
+      "runeward-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 7,
+        "natural_close": 7,
+        "correct_and_closed": 7,
+        "items_with_keeper": 4
+      },
+      "runeward-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 5,
+        "natural_close": 7,
+        "correct_and_closed": 5,
+        "items_with_keeper": 3
+      },
+      "runeward-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 3,
+        "natural_close": 4,
+        "correct_and_closed": 3,
+        "items_with_keeper": 2
+      },
+      "stallwright-L1": {
+        "items": 4,
+        "samples": 8,
+        "correct": 0,
+        "natural_close": 0,
+        "correct_and_closed": 0,
+        "items_with_keeper": 0
+      },
+      "stallwright-L2": {
+        "items": 4,
+        "samples": 8,
+        "correct": 0,
+        "natural_close": 0,
+        "correct_and_closed": 0,
+        "items_with_keeper": 0
+      },
+      "stallwright-L3": {
+        "items": 4,
+        "samples": 8,
+        "correct": 0,
+        "natural_close": 0,
+        "correct_and_closed": 0,
+        "items_with_keeper": 0
+      }
+    }
+  },
+  "episodes": {
+    "specs": 36,
+    "k": 2,
+    "seconds": 364.1,
+    "yield": {
+      "burrowmaze-L1": {
+        "rollouts": 6,
+        "success": 3,
+        "turns_sum": 20,
+        "forced_close_turns": 16,
+        "total_turns": 20,
+        "mean_score": 0.5
+      },
+      "burrowmaze-L2": {
+        "rollouts": 6,
+        "success": 0,
+        "turns_sum": 36,
+        "forced_close_turns": 28,
+        "total_turns": 36,
+        "mean_score": 0.0
+      },
+      "ferrier-L1": {
+        "rollouts": 6,
+        "success": 6,
+        "turns_sum": 6,
+        "forced_close_turns": 0,
+        "total_turns": 6,
+        "mean_score": 1.0
+      },
+      "ferrier-L2": {
+        "rollouts": 6,
+        "success": 6,
+        "turns_sum": 20,
+        "forced_close_turns": 1,
+        "total_turns": 20,
+        "mean_score": 1.0
+      },
+      "gatepost-L1": {
+        "rollouts": 6,
+        "success": 4,
+        "turns_sum": 16,
+        "forced_close_turns": 10,
+        "total_turns": 16,
+        "mean_score": 0.6667
+      },
+      "gatepost-L2": {
+        "rollouts": 6,
+        "success": 4,
+        "turns_sum": 15,
+        "forced_close_turns": 12,
+        "total_turns": 15,
+        "mean_score": 0.6667
+      },
+      "glyphgate-L1": {
+        "rollouts": 6,
+        "success": 3,
+        "turns_sum": 20,
+        "forced_close_turns": 14,
+        "total_turns": 20,
+        "mean_score": 0.5
+      },
+      "glyphgate-L2": {
+        "rollouts": 6,
+        "success": 6,
+        "turns_sum": 23,
+        "forced_close_turns": 15,
+        "total_turns": 23,
+        "mean_score": 1.0
+      },
+      "kilnrite-L1": {
+        "rollouts": 6,
+        "success": 3,
+        "turns_sum": 24,
+        "forced_close_turns": 13,
+        "total_turns": 24,
+        "mean_score": 0.875
+      },
+      "kilnrite-L2": {
+        "rollouts": 6,
+        "success": 5,
+        "turns_sum": 33,
+        "forced_close_turns": 18,
+        "total_turns": 33,
+        "mean_score": 0.9667
+      },
+      "loomfix-L1": {
+        "rollouts": 6,
+        "success": 5,
+        "turns_sum": 19,
+        "forced_close_turns": 11,
+        "total_turns": 19,
+        "mean_score": 0.8333
+      },
+      "loomfix-L2": {
+        "rollouts": 6,
+        "success": 0,
+        "turns_sum": 36,
+        "forced_close_turns": 27,
+        "total_turns": 36,
+        "mean_score": 0.0
+      }
+    }
+  }
+}

@@ -2,31 +2,32 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 48
+- Claims: 50
 
 ## Status Counts
 
 | Status | Claims |
 | --- | ---: |
-| Confirmed | 6 |
+| Confirmed | 7 |
 | Negative | 1 |
 | Open | 2 |
-| Promising | 39 |
+| Promising | 40 |
 
 ## Program Counts
 
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
+| `agentic_breadth_installation` | 2 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 11 |
+| `benchmark_generalization` | 12 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 8 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 23 |
+| `posttraining_and_adaptation` | 24 |
 | `process_control_and_tool_use` | 3 |
-| `reliability_and_safety` | 4 |
+| `reliability_and_safety` | 5 |
 | `structured_execution_and_compilers` | 29 |
 | `test_time_reasoning_budget` | 5 |
 
@@ -1158,3 +1159,510 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not deploy a trained-strategy adapter outside its training substrate (c45_zero: zero transfer, active interference).
 - Do not calibrate a reproduction gate from a neighboring claim's headline; use the source experiment's committed artifact number (the 0.95-vs-0.905 gate stop).
 - Do not train procedure traces into the answer channel; the think-channel recipe is what preserved d1 competence (0.85->0.85) where C43's answer-only SFT collapsed it.
+
+## C49: INSTRUMENT HAZARD: vLLM 0.24 runtime LoRA is a SILENT NO-OP for Qwen3.5-4B PEFT adapters -- every vLLM adapter arm measures the base model; deploy installs as merged composite checkpoints and gate every adapter arm with an on-vs-off behavioral diff
+
+- Status: `Confirmed`
+- Programs: `agentic_breadth_installation`, `reliability_and_safety`
+- Summary: Experiment qwen35_4b_gauntlet_breadth_round1. Discovery chain: two DIFFERENT trained rank-32 adapters produced byte-identical generations on 1,200 gym-eval items (sha-identical row files); an in-process probe (one vLLM engine, same prompt token ids, greedy, lora_request passed vs None) produced token-identical outputs. Mechanism: PEFT adapters trained on AutoModelForCausalLM name tensors base_model.model.model.layers.*, while the served composite checkpoint keeps its text stack under model.language_model.layers.* (hybrid Qwen3.5 with language_model_only); vLLM's LoRA weight mapping matches nothing and raises no error or warning. The repo's prior 'plumbing-only' zero-adapter test could not detect this by construction (a zero adapter is EXPECTED to match base whether or not it is applied). Consequences: all vLLM-backend adapter arms to date measured the base model -- including menagerie --adapter runs (same vLLM path; behaviorally consistent: vLLM adapter events read flat inside the same-seed null spread while HF-backend adapter events on the same install read +0.22). Fixes shipped: merge_adapter.py merges LoRA deltas into the FULL COMPOSITE checkpoint by explicit name mapping (W += B.A*alpha/r onto model.language_model.layers.*; a text-only merge_and_unload checkpoint does NOT load, vLLM's Qwen3.5 class requires the composite config); experiment runner gains model_override; menagerie's HF parity backend (--backend qwen) applies PEFT correctly and is the interim adapter-evaluation path (within-backend paired comparisons only). Related instrument bug: menagerie --model-id rejects local checkpoint paths via a string-prefix one-model guard although its README documents checkpoint runs.
+- Implication: Read logits/behavior, and VERIFY THE SEAM: any adapter evaluation through vLLM must first pass an on-vs-off diff with the real adapter (identical outputs = the arm is invalid). Until the name-mapping is fixed, vLLM-deployed installs go through merged composite checkpoints; menagerie adapter arms go through --backend qwen. All pre-2026-07-10 vLLM adapter results in any experiment are suspect.
+
+### Evidence
+
+- [`qwen35_4b_gauntlet_breadth_round1`](../../experiments/qwen35_4b_gauntlet_breadth_round1/reports/report.md)
+
+### Next Tests
+
+- Patch or upstream the vLLM LoRA name-mapping for hybrid Qwen3.5 (or add a translation shim rewriting adapter keys at load) and re-verify with the on-off probe
+- Menagerie maintainer decisions: --adapter arm should hard-fail or warn when zero LoRA tensors map; --model-id guard should accept local merged checkpoints of the pinned base (README already documents checkpoint runs)
+- Add the on-vs-off adapter gate to validate_repository or a pre-eval smoke so no future experiment can silently measure base
+
+### Avoid
+
+- N
+- e
+- v
+- e
+- r
+-  
+- v
+- a
+- l
+- i
+- d
+- a
+- t
+- e
+-  
+- L
+- o
+- R
+- A
+-  
+- p
+- l
+- u
+- m
+- b
+- i
+- n
+- g
+-  
+- w
+- i
+- t
+- h
+-  
+- a
+-  
+- z
+- e
+- r
+- o
+-  
+- a
+- d
+- a
+- p
+- t
+- e
+- r
+- ;
+-  
+- n
+- e
+- v
+- e
+- r
+-  
+- t
+- r
+- u
+- s
+- t
+-  
+- w
+- a
+- l
+- l
+- -
+- t
+- i
+- m
+- e
+-  
+- d
+- i
+- f
+- f
+- e
+- r
+- e
+- n
+- c
+- e
+- s
+-  
+- a
+- s
+-  
+- e
+- v
+- i
+- d
+- e
+- n
+- c
+- e
+-  
+- a
+- n
+-  
+- a
+- d
+- a
+- p
+- t
+- e
+- r
+-  
+- l
+- o
+- a
+- d
+- e
+- d
+- ;
+-  
+- n
+- e
+- v
+- e
+- r
+-  
+- c
+- o
+- m
+- p
+- a
+- r
+- e
+-  
+- H
+- F
+- -
+- b
+- a
+- c
+- k
+- e
+- n
+- d
+-  
+- s
+- c
+- o
+- r
+- e
+- s
+-  
+- w
+- i
+- t
+- h
+-  
+- v
+- L
+- L
+- M
+- -
+- b
+- a
+- c
+- k
+- e
+- n
+- d
+-  
+- s
+- c
+- o
+- r
+- e
+- s
+- .
+
+## C50: Breadth-first expert iteration on a firewall-clean gym INSTALLS SUBSTRATE-GENERAL agentic competence: +0.22/+0.29 on blackbox menagerie quick (paired, deterministic) and +0.52 gym-wide including never-trained families -- the locality laws (C43/C45/C48) do not extend to this regime, and the causal lever was gradient placement at the answer-emission seam, not dose
+
+- Status: `Promising`
+- Programs: `agentic_breadth_installation`, `posttraining_and_adaptation`, `benchmark_generalization`
+- Summary: Experiment qwen35_4b_gauntlet_breadth_round1. Built a 12-family procedurally-generated agentic gym (10 trained + 2 held out; atoms with final-line ANSWER scoring + lockstep multi-turn episodes; machine-checkable verifiers; content invented under the benchmark firewall against public axis descriptions only). Fast loop: ~80-min harvest (K=2, L1-L2, family-adaptive think budgets 2048/4096) -> verified-sample SFT build -> ~40-min think-channel QLoRA r32/a64 -> menagerie quick base-vs-install on a fresh seed. Round 1 (849 naturally-closed verified examples, full think-channel loss) installed NOTHING measurable: training a model on its own verbatim chains is near-self-distillation (loss 0.27->0.20), and the deployment-critical post-force-close state was excluded by the naturally-closed-only filter. Round 2 (same harvest, 925 examples) added (a) terse-target canonicalization (own verified value as 'ANSWER: x'), (b) a forced-close RECOVERY arm (76 correct-after-cut samples; truncated chain as pure context, loss weight 0), (c) per-token loss weights prompt 0/think 0.2/answer+action 1.0. RESULTS (deployed greedy, think 1024): gym mean 0.184->0.701 (+0.518); parse failures collapse (caravan 98->8/100); HELD-OUT never-trained families brinework +0.540 and spindle +0.608; harvest-starved stallwright (zero training examples) 0.000->0.395 by pure transfer. BLACKBOX (menagerie quick, HF parity backend both arms, paired by fresh seed, deterministic): base 0.1396 -> 0.3625 (+0.2229, seed 52004) and 0.1521 -> 0.4458 (+0.2938, seed 52005) vs a pre-registered +0.03 bar; per-family deltas concentrate on trained axes (chronicle +0.750, siftstack +0.625, toolsmith +0.354 to 1.000, mirage +0.250) while untrained/starved axes stay flat or dip (menders 0, sirens 0, stockade -0.125) -- the transfer-not-leakage signature. Mechanism read: the binding deployed constraint was the truncation cascade at the answer-emission seam (consume any budget -> force-close -> verbose restart -> no parseable answer); training the model on its own verified outputs to conclude within budget and to COMMIT from a truncated chain removes the constraint substrate-generally. Null-calibration bycatch: same-seed vLLM quick base-vs-base spread is ~0.034 aggregate (3x the published cross-backend 0.011); single vLLM quick arms only detect large effects.
+- Implication: The deployable recipe for general agentic uplift on the fixed 4B: harvest own verified episodes at generous think budgets across MANY diverse substrates, canonicalize targets to the terse deployable shape, include forced-close recovery states as context-only examples, and concentrate loss on the emission seam (think 0.2/answer 1.0). Breadth transfers: axis-matched supervision lifts blackbox families the gym never saw content from. Signal placement beats dose.
+
+### Evidence
+
+- [`qwen35_4b_gauntlet_breadth_round1`](../../experiments/qwen35_4b_gauntlet_breadth_round1/reports/report.md)
+
+### Next Tests
+
+- Medium/slow-tier confirmation events (medium blocked twice on an fla-kernel 'device not ready' fault under the HF backend at L3/L4 lengths -- environment issue to resolve)
+- Round 3 expert iteration: re-harvest with the round-2 model -- do glyphgate/loomfix/stallwright frontiers open, does menagerie keep responding, does iteration compound (C11 said coverage-bounded; the frontier moved here)
+- Recovery-arm-only ablation (emission-seam repair vs axis competence split); breadth-vs-matched-dose single-family ablation (is breadth causal for held-out-family transfer?)
+- Re-measure the locality laws (C43/C45/C48) under the weighted-loss + recovery-arm recipe: were they laws about the recipe rather than the model?
+
+### Avoid
+
+- D
+- o
+-  
+- n
+- o
+- t
+-  
+- t
+- r
+- a
+- i
+- n
+-  
+- f
+- u
+- l
+- l
+- -
+- w
+- e
+- i
+- g
+- h
+- t
+-  
+- o
+- n
+-  
+- t
+- h
+- e
+-  
+- m
+- o
+- d
+- e
+- l
+- '
+- s
+-  
+- o
+- w
+- n
+-  
+- v
+- e
+- r
+- b
+- a
+- t
+- i
+- m
+-  
+- t
+- h
+- i
+- n
+- k
+- i
+- n
+- g
+-  
+- a
+- n
+- d
+-  
+- e
+- x
+- p
+- e
+- c
+- t
+-  
+- b
+- e
+- h
+- a
+- v
+- i
+- o
+- r
+-  
+- c
+- h
+- a
+- n
+- g
+- e
+-  
+- (
+- n
+- e
+- a
+- r
+- -
+- s
+- e
+- l
+- f
+- -
+- d
+- i
+- s
+- t
+- i
+- l
+- l
+- a
+- t
+- i
+- o
+- n
+- )
+- ;
+-  
+- d
+- o
+-  
+- n
+- o
+- t
+-  
+- f
+- i
+- l
+- t
+- e
+- r
+-  
+- t
+- r
+- a
+- i
+- n
+- i
+- n
+- g
+-  
+- d
+- a
+- t
+- a
+-  
+- t
+- o
+-  
+- n
+- a
+- t
+- u
+- r
+- a
+- l
+- l
+- y
+- -
+- c
+- l
+- o
+- s
+- e
+- d
+-  
+- c
+- h
+- a
+- i
+- n
+- s
+-  
+- o
+- n
+- l
+- y
+-  
+- (
+- i
+- t
+-  
+- e
+- x
+- c
+- l
+- u
+- d
+- e
+- s
+-  
+- t
+- h
+- e
+-  
+- d
+- e
+- p
+- l
+- o
+- y
+- m
+- e
+- n
+- t
+- -
+- c
+- r
+- i
+- t
+- i
+- c
+- a
+- l
+-  
+- f
+- o
+- r
+- c
+- e
+- -
+- c
+- l
+- o
+- s
+- e
+- d
+-  
+- s
+- t
+- a
+- t
+- e
+- )
+- ;
+-  
+- d
+- o
+-  
+- n
+- o
+- t
+-  
+- c
+- l
+- a
+- i
+- m
+-  
+- m
+- e
+- n
+- a
+- g
+- e
+- r
+- i
+- e
+-  
+- m
+- o
+- v
+- e
+- m
+- e
+- n
+- t
+-  
+- f
+- r
+- o
+- m
+-  
+- v
+- L
+- L
+- M
+-  
+- a
+- d
+- a
+- p
+- t
+- e
+- r
+-  
+- a
+- r
+- m
+- s
+-  
+- (
+- C
+- 4
+- 9
+- )
+- .

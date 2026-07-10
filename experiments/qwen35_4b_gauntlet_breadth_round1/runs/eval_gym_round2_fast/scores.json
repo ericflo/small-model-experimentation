@@ -1,0 +1,423 @@
+{
+  "tag": "round2_fast",
+  "adapter": "../../large_artifacts/qwen35_4b_gauntlet_breadth_round1/adapters/round2_fast",
+  "gen_seed": 90001,
+  "think_budget": 1024,
+  "seconds": 1244.5,
+  "cells": {
+    "brinework/atom/L1": {
+      "n": 25,
+      "mean": 0.12,
+      "parse_fail": 21,
+      "forced_close": 22
+    },
+    "brinework/atom/L2": {
+      "n": 25,
+      "mean": 0.16,
+      "parse_fail": 20,
+      "forced_close": 24
+    },
+    "brinework/atom/L3": {
+      "n": 25,
+      "mean": 0.08,
+      "parse_fail": 23,
+      "forced_close": 25
+    },
+    "brinework/atom/L4": {
+      "n": 25,
+      "mean": 0.04,
+      "parse_fail": 24,
+      "forced_close": 25
+    },
+    "burrowmaze/atom/L1": {
+      "n": 25,
+      "mean": 0.56,
+      "parse_fail": 11,
+      "forced_close": 10
+    },
+    "burrowmaze/atom/L2": {
+      "n": 25,
+      "mean": 0.28,
+      "parse_fail": 18,
+      "forced_close": 19
+    },
+    "burrowmaze/atom/L3": {
+      "n": 25,
+      "mean": 0.24,
+      "parse_fail": 19,
+      "forced_close": 20
+    },
+    "burrowmaze/atom/L4": {
+      "n": 25,
+      "mean": 0.12,
+      "parse_fail": 22,
+      "forced_close": 24
+    },
+    "burrowmaze/episode/L1": {
+      "n": 8,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "burrowmaze/episode/L2": {
+      "n": 8,
+      "mean": 0.125,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "burrowmaze/episode/L3": {
+      "n": 8,
+      "mean": 0.25,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "caravan/atom/L1": {
+      "n": 25,
+      "mean": 0.08,
+      "parse_fail": 23,
+      "forced_close": 20
+    },
+    "caravan/atom/L2": {
+      "n": 25,
+      "mean": 0.12,
+      "parse_fail": 22,
+      "forced_close": 22
+    },
+    "caravan/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "caravan/atom/L4": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "ferrier/atom/L1": {
+      "n": 25,
+      "mean": 0.72,
+      "parse_fail": 7,
+      "forced_close": 12
+    },
+    "ferrier/atom/L2": {
+      "n": 25,
+      "mean": 0.44,
+      "parse_fail": 12,
+      "forced_close": 16
+    },
+    "ferrier/atom/L3": {
+      "n": 25,
+      "mean": 0.32,
+      "parse_fail": 17,
+      "forced_close": 24
+    },
+    "ferrier/atom/L4": {
+      "n": 25,
+      "mean": 0.16,
+      "parse_fail": 21,
+      "forced_close": 25
+    },
+    "ferrier/episode/L1": {
+      "n": 8,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "ferrier/episode/L2": {
+      "n": 8,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "ferrier/episode/L3": {
+      "n": 8,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 2
+    },
+    "foundry_ledger/atom/L1": {
+      "n": 25,
+      "mean": 0.6,
+      "parse_fail": 10,
+      "forced_close": 12
+    },
+    "foundry_ledger/atom/L2": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "foundry_ledger/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "foundry_ledger/atom/L4": {
+      "n": 25,
+      "mean": 0.04,
+      "parse_fail": 24,
+      "forced_close": 24
+    },
+    "gatepost/atom/L1": {
+      "n": 25,
+      "mean": 0.64,
+      "parse_fail": 7,
+      "forced_close": 22
+    },
+    "gatepost/atom/L2": {
+      "n": 25,
+      "mean": 0.52,
+      "parse_fail": 4,
+      "forced_close": 23
+    },
+    "gatepost/atom/L3": {
+      "n": 25,
+      "mean": 0.44,
+      "parse_fail": 12,
+      "forced_close": 24
+    },
+    "gatepost/atom/L4": {
+      "n": 25,
+      "mean": 0.32,
+      "parse_fail": 15,
+      "forced_close": 24
+    },
+    "gatepost/episode/L1": {
+      "n": 8,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "gatepost/episode/L2": {
+      "n": 8,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "gatepost/episode/L3": {
+      "n": 8,
+      "mean": 0.75,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "glyphgate/atom/L1": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "glyphgate/atom/L2": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "glyphgate/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "glyphgate/atom/L4": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "glyphgate/episode/L1": {
+      "n": 8,
+      "mean": 0.75,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "glyphgate/episode/L2": {
+      "n": 8,
+      "mean": 0.875,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "glyphgate/episode/L3": {
+      "n": 8,
+      "mean": 0.75,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "kilnrite/atom/L1": {
+      "n": 25,
+      "mean": 0.12,
+      "parse_fail": 22,
+      "forced_close": 24
+    },
+    "kilnrite/atom/L2": {
+      "n": 25,
+      "mean": 0.08,
+      "parse_fail": 22,
+      "forced_close": 25
+    },
+    "kilnrite/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 24,
+      "forced_close": 25
+    },
+    "kilnrite/atom/L4": {
+      "n": 25,
+      "mean": 0.04,
+      "parse_fail": 24,
+      "forced_close": 25
+    },
+    "kilnrite/episode/L1": {
+      "n": 8,
+      "mean": 0.5938,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "kilnrite/episode/L2": {
+      "n": 8,
+      "mean": 0.925,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "kilnrite/episode/L3": {
+      "n": 8,
+      "mean": 0.7679,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "loomfix/atom/L1": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "loomfix/atom/L2": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "loomfix/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "loomfix/atom/L4": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "loomfix/episode/L1": {
+      "n": 8,
+      "mean": 0.1875,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "loomfix/episode/L2": {
+      "n": 8,
+      "mean": 0.375,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "loomfix/episode/L3": {
+      "n": 8,
+      "mean": 0.125,
+      "parse_fail": 0,
+      "forced_close": 8
+    },
+    "runeward/atom/L1": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 21
+    },
+    "runeward/atom/L2": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "runeward/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "runeward/atom/L4": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "spindle/atom/L1": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "spindle/atom/L2": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "spindle/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "spindle/atom/L4": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "spindle/episode/L1": {
+      "n": 8,
+      "mean": 0.9583,
+      "parse_fail": 0,
+      "forced_close": 5
+    },
+    "spindle/episode/L2": {
+      "n": 8,
+      "mean": 0.9688,
+      "parse_fail": 0,
+      "forced_close": 7
+    },
+    "spindle/episode/L3": {
+      "n": 8,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 5
+    },
+    "stallwright/atom/L1": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "stallwright/atom/L2": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "stallwright/atom/L3": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    },
+    "stallwright/atom/L4": {
+      "n": 25,
+      "mean": 0.0,
+      "parse_fail": 25,
+      "forced_close": 25
+    }
+  }
+}

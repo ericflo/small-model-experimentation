@@ -1,0 +1,367 @@
+{
+  "config": "configs/fast.yaml",
+  "smoke": false,
+  "adapter": null,
+  "atoms": {
+    "k": 2,
+    "families": {
+      "caravan": {
+        "items": 80,
+        "seconds": 227.2,
+        "yield": {
+          "caravan-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 68,
+            "natural_close": 71,
+            "correct_and_closed": 68,
+            "items_with_keeper": 36
+          },
+          "caravan-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 37,
+            "natural_close": 48,
+            "correct_and_closed": 36,
+            "items_with_keeper": 24
+          }
+        }
+      },
+      "foundry_ledger": {
+        "items": 80,
+        "seconds": 277.2,
+        "yield": {
+          "foundry_ledger-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 80,
+            "natural_close": 80,
+            "correct_and_closed": 80,
+            "items_with_keeper": 40
+          },
+          "foundry_ledger-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 20,
+            "natural_close": 21,
+            "correct_and_closed": 19,
+            "items_with_keeper": 11
+          }
+        }
+      },
+      "stallwright": {
+        "items": 80,
+        "seconds": 462.0,
+        "yield": {
+          "stallwright-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 0,
+            "natural_close": 0,
+            "correct_and_closed": 0,
+            "items_with_keeper": 0
+          },
+          "stallwright-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 0,
+            "natural_close": 0,
+            "correct_and_closed": 0,
+            "items_with_keeper": 0
+          }
+        }
+      },
+      "runeward": {
+        "items": 80,
+        "seconds": 212.1,
+        "yield": {
+          "runeward-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 22,
+            "natural_close": 27,
+            "correct_and_closed": 22,
+            "items_with_keeper": 18
+          },
+          "runeward-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 9,
+            "natural_close": 20,
+            "correct_and_closed": 8,
+            "items_with_keeper": 8
+          }
+        }
+      },
+      "kilnrite": {
+        "items": 80,
+        "seconds": 438.6,
+        "yield": {
+          "kilnrite-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 28,
+            "natural_close": 30,
+            "correct_and_closed": 25,
+            "items_with_keeper": 18
+          },
+          "kilnrite-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 15,
+            "natural_close": 14,
+            "correct_and_closed": 11,
+            "items_with_keeper": 10
+          }
+        }
+      },
+      "glyphgate": {
+        "items": 80,
+        "seconds": 487.4,
+        "yield": {
+          "glyphgate-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 2,
+            "natural_close": 6,
+            "correct_and_closed": 2,
+            "items_with_keeper": 2
+          },
+          "glyphgate-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 3,
+            "natural_close": 13,
+            "correct_and_closed": 3,
+            "items_with_keeper": 3
+          }
+        }
+      },
+      "loomfix": {
+        "items": 80,
+        "seconds": 488.9,
+        "yield": {
+          "loomfix-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 4,
+            "natural_close": 5,
+            "correct_and_closed": 4,
+            "items_with_keeper": 3
+          },
+          "loomfix-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 3,
+            "natural_close": 5,
+            "correct_and_closed": 3,
+            "items_with_keeper": 3
+          }
+        }
+      },
+      "ferrier": {
+        "items": 80,
+        "seconds": 149.7,
+        "yield": {
+          "ferrier-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 73,
+            "natural_close": 59,
+            "correct_and_closed": 58,
+            "items_with_keeper": 38
+          },
+          "ferrier-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 75,
+            "natural_close": 64,
+            "correct_and_closed": 63,
+            "items_with_keeper": 38
+          }
+        }
+      },
+      "burrowmaze": {
+        "items": 80,
+        "seconds": 160.1,
+        "yield": {
+          "burrowmaze-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 65,
+            "natural_close": 58,
+            "correct_and_closed": 57,
+            "items_with_keeper": 31
+          },
+          "burrowmaze-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 48,
+            "natural_close": 43,
+            "correct_and_closed": 41,
+            "items_with_keeper": 23
+          }
+        }
+      },
+      "gatepost": {
+        "items": 80,
+        "seconds": 176.3,
+        "yield": {
+          "gatepost-L1": {
+            "items": 40,
+            "samples": 80,
+            "correct": 68,
+            "natural_close": 52,
+            "correct_and_closed": 43,
+            "items_with_keeper": 29
+          },
+          "gatepost-L2": {
+            "items": 40,
+            "samples": 80,
+            "correct": 58,
+            "natural_close": 48,
+            "correct_and_closed": 38,
+            "items_with_keeper": 28
+          }
+        }
+      }
+    }
+  },
+  "episodes": {
+    "k": 2,
+    "families": {
+      "kilnrite": {
+        "specs": 32,
+        "seconds": 369.5,
+        "yield": {
+          "kilnrite-L1": {
+            "rollouts": 32,
+            "success": 25,
+            "turns_sum": 128,
+            "forced_close_turns": 58,
+            "total_turns": 128,
+            "mean_score": 0.9453
+          },
+          "kilnrite-L2": {
+            "rollouts": 32,
+            "success": 20,
+            "turns_sum": 176,
+            "forced_close_turns": 107,
+            "total_turns": 176,
+            "mean_score": 0.8625
+          }
+        }
+      },
+      "glyphgate": {
+        "specs": 32,
+        "seconds": 339.2,
+        "yield": {
+          "glyphgate-L1": {
+            "rollouts": 32,
+            "success": 25,
+            "turns_sum": 112,
+            "forced_close_turns": 81,
+            "total_turns": 112,
+            "mean_score": 0.7812
+          },
+          "glyphgate-L2": {
+            "rollouts": 32,
+            "success": 31,
+            "turns_sum": 123,
+            "forced_close_turns": 70,
+            "total_turns": 123,
+            "mean_score": 0.9688
+          }
+        }
+      },
+      "loomfix": {
+        "specs": 32,
+        "seconds": 384.3,
+        "yield": {
+          "loomfix-L1": {
+            "rollouts": 32,
+            "success": 14,
+            "turns_sum": 108,
+            "forced_close_turns": 80,
+            "total_turns": 108,
+            "mean_score": 0.4531
+          },
+          "loomfix-L2": {
+            "rollouts": 32,
+            "success": 14,
+            "turns_sum": 157,
+            "forced_close_turns": 106,
+            "total_turns": 157,
+            "mean_score": 0.4688
+          }
+        }
+      },
+      "ferrier": {
+        "specs": 32,
+        "seconds": 102.7,
+        "yield": {
+          "ferrier-L1": {
+            "rollouts": 32,
+            "success": 32,
+            "turns_sum": 33,
+            "forced_close_turns": 2,
+            "total_turns": 33,
+            "mean_score": 1.0
+          },
+          "ferrier-L2": {
+            "rollouts": 32,
+            "success": 32,
+            "turns_sum": 98,
+            "forced_close_turns": 7,
+            "total_turns": 98,
+            "mean_score": 1.0
+          }
+        }
+      },
+      "burrowmaze": {
+        "specs": 32,
+        "seconds": 409.6,
+        "yield": {
+          "burrowmaze-L1": {
+            "rollouts": 32,
+            "success": 10,
+            "turns_sum": 116,
+            "forced_close_turns": 101,
+            "total_turns": 116,
+            "mean_score": 0.3125
+          },
+          "burrowmaze-L2": {
+            "rollouts": 32,
+            "success": 7,
+            "turns_sum": 179,
+            "forced_close_turns": 139,
+            "total_turns": 179,
+            "mean_score": 0.2188
+          }
+        }
+      },
+      "gatepost": {
+        "specs": 32,
+        "seconds": 208.7,
+        "yield": {
+          "gatepost-L1": {
+            "rollouts": 32,
+            "success": 27,
+            "turns_sum": 79,
+            "forced_close_turns": 51,
+            "total_turns": 79,
+            "mean_score": 0.8438
+          },
+          "gatepost-L2": {
+            "rollouts": 32,
+            "success": 22,
+            "turns_sum": 73,
+            "forced_close_turns": 54,
+            "total_turns": 73,
+            "mean_score": 0.6875
+          }
+        }
+      }
+    }
+  }
+}

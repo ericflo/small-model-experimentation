@@ -1,0 +1,68 @@
+{
+  "total": 925,
+  "families": {
+    "burrowmaze": {
+      "candidates": 99,
+      "kept": 99,
+      "atoms": 81,
+      "episode_turns": 9,
+      "mean_think_tokens": 1133.3
+    },
+    "caravan": {
+      "candidates": 70,
+      "kept": 70,
+      "atoms": 69,
+      "episode_turns": 0,
+      "mean_think_tokens": 1216.2
+    },
+    "ferrier": {
+      "candidates": 265,
+      "kept": 265,
+      "atoms": 121,
+      "episode_turns": 119,
+      "mean_think_tokens": 917.1
+    },
+    "foundry_ledger": {
+      "candidates": 88,
+      "kept": 88,
+      "atoms": 87,
+      "episode_turns": 0,
+      "mean_think_tokens": 1086.2
+    },
+    "gatepost": {
+      "candidates": 155,
+      "kept": 155,
+      "atoms": 77,
+      "episode_turns": 40,
+      "mean_think_tokens": 1424.3
+    },
+    "glyphgate": {
+      "candidates": 74,
+      "kept": 74,
+      "atoms": 0,
+      "episode_turns": 74,
+      "mean_think_tokens": 676.8
+    },
+    "kilnrite": {
+      "candidates": 113,
+      "kept": 113,
+      "atoms": 1,
+      "episode_turns": 110,
+      "mean_think_tokens": 697.6
+    },
+    "loomfix": {
+      "candidates": 32,
+      "kept": 32,
+      "atoms": 2,
+      "episode_turns": 30,
+      "mean_think_tokens": 846.8
+    },
+    "runeward": {
+      "candidates": 29,
+      "kept": 29,
+      "atoms": 29,
+      "episode_turns": 0,
+      "mean_think_tokens": 1339.8
+    }
+  }
+}
