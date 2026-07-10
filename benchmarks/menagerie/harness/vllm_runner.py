@@ -14,6 +14,15 @@
 
 import hashlib
 import os
+import sys as _sys
+
+# Prepend this interpreter's bin dir to PATH (mirrors the template runner):
+# FlashInfer's JIT resolves the venv-bundled `ninja` from PATH, and the host
+# has no build toolchain of its own.
+_PYTHON_BIN = os.path.dirname(os.path.abspath(_sys.executable))
+if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
+    os.environ["PATH"] = _PYTHON_BIN + os.pathsep + os.environ.get("PATH", "")
+
 _no_flashinfer = os.environ.get("MENAGERIE_VLLM_NO_FLASHINFER")
 if _no_flashinfer and _no_flashinfer.lower() not in {"0", "false", "no", "off"}:
     os.environ["VLLM_USE_FLASHINFER_SAMPLER"] = "0"
