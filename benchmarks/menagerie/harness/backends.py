@@ -295,7 +295,12 @@ class QwenVllmBackend:
     the HF `qwen` backend, so scores are comparable.
     """
 
-    VENV_PYTHON = "/home/ericflo/Development/smx-menagerie/.venv-vllm/bin/python"
+    # Resolved from the repo root so the backend works in any checkout/worktree;
+    # override with MENAGERIE_VLLM_PYTHON for a venv kept elsewhere.
+    VENV_PYTHON = os.environ.get(
+        "MENAGERIE_VLLM_PYTHON",
+        str(Path(__file__).resolve().parents[3] / ".venv-vllm" / "bin" / "python"),
+    )
 
     def __init__(
         self,
@@ -322,7 +327,8 @@ class QwenVllmBackend:
         }
         runner = str(Path(__file__).resolve().parent / "vllm_runner.py")
         env = dict(os.environ)
-        env["VLLM_USE_FLASHINFER_SAMPLER"] = "0"
+        # FlashInfer stays enabled (precompiled cubins in the pinned stack); the
+        # runner honors MENAGERIE_VLLM_NO_FLASHINFER=1 as the opt-out.
         env["MENAGERIE_VLLM_MODEL"] = model_id
         env.setdefault("MENAGERIE_VLLM_BUDGET", "two_phase")
         env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
@@ -330,7 +336,10 @@ class QwenVllmBackend:
             env["MENAGERIE_VLLM_ADAPTER"] = str(adapter)
         if not Path(self.VENV_PYTHON).exists():
             raise RuntimeError(
-                "vLLM venv not found at /home/ericflo/Development/smx-menagerie/.venv-vllm. Build it with: uv venv --python 3.12 .venv-vllm && uv pip sync --python .venv-vllm/bin/python --torch-backend=cu129 requirements-vllm.lock.txt (see docs/vllm_inference.md), or fall back to --backend qwen (HF backend, slower)."
+                f"vLLM venv not found at {self.VENV_PYTHON}. From the repo root, build it with: "
+                "uv venv --python 3.12 .venv-vllm && uv pip sync --python .venv-vllm/bin/python "
+                "--torch-backend=cu129 requirements-vllm.lock.txt (see docs/vllm_inference.md); "
+                "or set MENAGERIE_VLLM_PYTHON, or fall back to --backend qwen (HF, slower)."
             )
         self.proc = subprocess.Popen(
             [self.VENV_PYTHON, runner],
