@@ -3,10 +3,11 @@
 ## Status
 
 Design frozen and committed before any GPU-scale run; implementation and the four-trace GPU smoke are
-complete, while G0 calibration has not yet run. The full pre-registration is in
-[`reports/preregistration.md`](reports/preregistration.md), and the adversarial design review is in
-[`reports/design_review.md`](reports/design_review.md). The first repository commit containing this
-directory is the permanent pre-run design boundary.
+complete, while G0 calibration has not yet run. The first repository commit containing this directory
+is the permanent pre-run design boundary.
+
+The full plan is in [`reports/preregistration.md`](reports/preregistration.md), and the adversarial
+review is in [`reports/design_review.md`](reports/design_review.md).
 
 ## Research Program
 

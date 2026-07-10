@@ -775,7 +775,7 @@
       "test_time_reasoning_budget"
     ],
     "source_track": "new",
-    "summary": "Design frozen and committed before any GPU-scale run; implementation and the four-trace GPU smoke are complete, while G0 calibration has not yet run. The full pre-registration is in [`reports/preregistration.md`](reports/preregistration.md), and the adversarial design review is in [`reports/design_review.md`](reports/design_review.md). The first repository commit containing this directory is the permanent pre-run design boundary.",
+    "summary": "Design frozen and committed before any GPU-scale run; implementation and the four-trace GPU smoke are complete, while G0 calibration has not yet run. The first repository commit containing this directory is the permanent pre-run design boundary.",
     "tags": [
       "small-model"
     ],
@@ -790,7 +790,7 @@
       "tests"
     ],
     "total_files": 50,
-    "total_size_bytes": 2095321
+    "total_size_bytes": 2095115
   },
   {
     "file_counts": {
