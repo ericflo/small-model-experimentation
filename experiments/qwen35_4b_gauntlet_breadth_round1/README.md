@@ -88,17 +88,62 @@ python3 scripts/bench.py --seed <fresh> --tier quick --arms base adapter \
 
 ## Results
 
-Fill this after the run. Separate deployable evidence from oracle/hidden evaluation.
+Deployable evidence (greedy, think-mode, deployed budgets, bare model — no
+scaffolding anywhere):
+
+- **Menagerie, six paired events, two backends** (each event = base and
+  install on the same fresh seed; HF backend is deterministic, the vLLM
+  event uses the merged checkpoint): quick 0.140→0.363 (+0.223, seed 52004),
+  0.152→0.446 (+0.294, 52005), 0.115→0.400 (+0.285, 52007), 0.152→0.379
+  (+0.227, 52008), 0.150→0.424 (+0.274, 52010, vLLM/merged); medium
+  0.122→0.445 (+0.324, 52006) and 0.161→0.424 (+0.264, 52009) with EVERY
+  family positive at medium. Pre-registered decision rule met on all legs:
+  verdict POSITIVE.
+- **Gym-internal** (held-out item seeds): mean 0.184→0.701 (+0.518),
+  including the two never-trained held-out families (brinework +0.540,
+  spindle +0.608) and zero-training-data stallwright (+0.395). Parse
+  failures collapsed (caravan 98→8 of 100).
+- **Round 3 (expert iteration)**: re-harvest with the round-2 model opened
+  the starved frontiers at the data level (stallwright 0/160→48/60 correct)
+  but blackbox deltas did NOT compound (quick +0.285/+0.227 vs round-2's
+  +0.223/+0.294; medium +0.264 vs +0.324) — the install is a one-time recipe
+  step change; same-recipe iteration re-saturates.
+- **Round-1 null (mechanism)**: full-weight SFT on the model's own verified
+  naturally-closed chains installed nothing (near-self-distillation); the
+  working round-2 recipe added terse-target canonicalization, forced-close
+  recovery examples, and emission-seam loss weighting.
+
+Oracle/hidden evidence is confined to instrument validation: gym oracle
+policies certify the graders; no oracle output, benchmark content, or
+external model enters training. Instrument finding C49 (Confirmed): vLLM
+runtime LoRA silently no-ops on Qwen3.5-4B PEFT adapters — all valid
+comparisons above are paired within-backend, and the harness now gates
+adapter application on-vs-off. Full tables: `reports/report.md`.
 
 ## Interpretation
 
-What changed after this result? What is now more likely, less likely, or still unknown?
+The binding deployed constraint at these difficulty levels was the
+truncation cascade at the answer-emission seam (consume any think budget →
+force-close → verbose restart → no parseable answer). Training the model on
+its own verified outputs to conclude and to commit from a truncated chain
+removes that constraint substrate-generally — across the gym families it
+never saw and across the blackbox instrument. More likely now: breadth +
+strict verifiers + emission-seam gradient placement installs general agentic
+competence (the C43/C45/C48 locality laws do not extend to this regime).
+Less likely: dose or same-recipe iteration as further levers (round 3
+re-saturated). Still unknown: how much of the delta is protocol-emission
+repair vs axis competence (recovery-arm-only ablation queued), whether
+breadth is causal for held-out transfer (breadth-vs-dose ablation queued),
+and whether difficulty escalation reopens the frontier.
 
 ## Knowledgebase Update
 
-- Program evidence updated:
-- Program backlog updated:
-- Claim ledger updated:
+- Program evidence updated: `research_programs/agentic_breadth_installation/evidence.md`
+- Program backlog updated: `research_programs/agentic_breadth_installation/backlog.md`
+  (+ queue proposal `gauntlet_round3_expert_iteration`, executed)
+- Claim ledger updated: C49 (Confirmed — vLLM LoRA silent no-op + shipped
+  instrument gate) and C50 (Promising — breadth install moves the blackbox;
+  round-3 re-saturation scoped); `knowledge/synthesis.md` executive read #13
 
 ## Artifacts
 

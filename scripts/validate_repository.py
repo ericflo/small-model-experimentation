@@ -422,6 +422,40 @@ def validate_no_wall_clock_stamps(errors: list[str]) -> None:
                     )
 
 
+# Scaffold-template filler prose. Any of these surviving in an experiment's
+# README or reports means a section was never filled in after the run — and
+# the site publishes README/report text verbatim (a placeholder shipped to
+# the site on 2026-07-10 despite full results living in reports/report.md).
+# Model diligence does not scale; this gate does. Keep in sync with
+# templates/experiment/.
+TEMPLATE_PLACEHOLDER_PHRASES = (
+    "Fill this after the run.",
+    "What specific uncertainty does this experiment resolve?",
+    "State the mechanism you expect to work and why it should beat the baseline.",
+    "What changed after this result? What is now more likely, less likely, or still unknown?",
+    "Update this before reporting results.",
+    "Update `artifact_manifest.yaml` before considering this result complete.",
+)
+
+
+def validate_no_template_placeholders(errors: list[str]) -> None:
+    for exp in sorted(EXPERIMENTS.iterdir()):
+        if not exp.is_dir():
+            continue
+        candidates = [exp / "README.md", *sorted((exp / "reports").glob("*.md"))]
+        for path in candidates:
+            if not path.exists():
+                continue
+            text = path.read_text(encoding="utf-8", errors="replace")
+            for phrase in TEMPLATE_PLACEHOLDER_PHRASES:
+                if phrase in text:
+                    fail(
+                        errors,
+                        f"scaffold placeholder still present in {rel(path)}: {phrase!r} — "
+                        "fill the section in (the site publishes this text verbatim)",
+                    )
+
+
 def validate() -> int:
     errors: list[str] = []
 
@@ -671,6 +705,7 @@ def validate() -> int:
     validate_root_readme(errors)
     validate_benchmark_firewall(errors)
     validate_no_wall_clock_stamps(errors)
+    validate_no_template_placeholders(errors)
 
     gitattributes = ROOT / ".gitattributes"
     if not gitattributes.exists():

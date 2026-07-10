@@ -67,6 +67,12 @@ gate failures:
     remove the stamp rather than re-dating the files.
   - **Stale fixpoint** — `make catalog` must run twice; the manifest reaches a fixpoint on
     the second pass.
+  - **Scaffold placeholders** — `make validate` fails if template filler prose ("Fill this
+    after the run.", "What changed after this result? ...", etc.) survives in an
+    experiment's `README.md` or `reports/*.md`. The site publishes those files verbatim,
+    and on 2026-07-10 a placeholder Results section shipped to the site while the real
+    results sat in `reports/report.md` — fill the README sections, don't rely on
+    remembering to.
   - To debug a red run: `gh run view <id> --log-failed` and read the embedded `diff --git`.
 - **`validate` fails on files that aren't tracked.** The validator scans the *working tree*
   (pycache dirs, `*.pyc`, Zone.Identifier files, >100 MB files) — the offender doesn't need
