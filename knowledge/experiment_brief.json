@@ -1334,6 +1334,44 @@
     }
    ]
   },
+  "qwen35_4b_answer_potential_trace_sft": {
+   "verdict_tag": "Plumbing is ready; the real test remains",
+   "concept_primer": "Before trusting a measuring stick, compare it with an independent one. This project first checks whether two implementations assign nearly the same score to a known answer after the same written reasoning.",
+   "plain_question": "Can answer scores identify the model's most useful self-written reasoning, so those examples teach it better than ordinary success filtering?",
+   "plain_answer": "Not yet. The four-trace smoke run and independent score cross-check passed, but the main ranking and training tests have not run. This is a verified launch state, not evidence that the method improves answers.",
+   "why_it_matters": "The setup can now fail cheaply if the proposed score does not predict fresh answer success. That protects the much larger data collection and training run from being launched on a broken measurement.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Frozen procedural problems",
+     "value": "1,264",
+     "sub": "across calibration, training, and three unseen evaluation splits"
+    },
+    {
+     "label": "Real-model smoke traces",
+     "value": "4 / 4",
+     "sub": "produced finite answer scores"
+    },
+    {
+     "label": "Independent score difference",
+     "value": "0.060 vs 0.15",
+     "sub": "observed nats per token versus the pre-set plumbing limit"
+    },
+    {
+     "label": "Local implementation checks",
+     "value": "25 / 25",
+     "sub": "passed before the main run"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Independent answer-score cross-check passes",
+     "chart_read": "The two bars show the largest observed disagreement between implementations and the pre-set allowed limit. Lower is better, and the observed bar must remain below the limit bar.",
+     "chart_takeaway": "The observed bar is under half the allowed height, so the score-reading machinery is accurate enough to launch the main test."
+    }
+   ]
+  },
   "qwen35_4b_balanced_discriminative_bridge": {
    "verdict_tag": "Hand-picking hard examples backfired",
    "concept_primer": "Think of teaching someone to fix broken code by handing them a few practice problems first. The question: does an even, balanced practice set teach better, or a set hand-picked to be the trickiest?",
@@ -1634,6 +1672,60 @@
      "chart_takeaway": "The single-block bar towers over the rest—94 of 134 tasks need just one piece, so genuine multi-block assembly covers only 40 tasks."
     }
    ]
+  },
+  "qwen35_4b_code_confidence": {
+   "verdict_tag": "Confidence works on real code -- read the judge token, not the average",
+   "concept_primer": "Earlier experiments showed this small model 'knows when it will fail' on a toy digit task: the probability it assigns its own answer predicts whether the answer is right. But real code has no single answer token -- a solution is hundreds of tokens long. This experiment asks which program-level confidence signal, if any, carries that same self-knowledge.",
+   "plain_question": "Can the model's own confidence pick its best code attempt and know when to abstain -- without running any tests?",
+   "plain_answer": "Yes -- but only if you read the RIGHT confidence. Averaging how 'fluent' the model felt while writing the code is too diluted to be useful. What works: show the model its own code and ask 'is this correct, A or B?', then read the probability it puts on 'A' (one cheap forward pass, no test execution). On MBPP, picking the sample that maximizes that judge-token probability beats majority voting across samples. Actually running even one test still beats every confidence trick -- confidence is for when you have no tests to run, or for abstaining/routing before spending more compute.",
+   "why_it_matters": "This is a free reliability lever for real code generation: no training, no external checker -- just the model's own logits. It generalizes the project's metacognition findings off the toy substrate and sharpens the recipe for long code outputs: concentrate the model's self-knowledge into a single judgment token and read THAT. Sample several tries, self-judge each, keep the most confident, abstain when even the best looks doubtful.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "pick-1-of-8 accuracy: P(True) self-judge vs majority vote vs random",
+     "value": "0.76 vs 0.72 vs 0.70"
+    },
+    {
+     "label": "run-the-visible-test selection (execution still king) / oracle",
+     "value": "0.82 / 0.84"
+    },
+    {
+     "label": "abstention: accuracy on the top-third most-confident (vs unfiltered)",
+     "value": "~0.95 (vs 0.70)"
+    },
+    {
+     "label": "within-problem AUROC: P(True) vs code-length surface baseline",
+     "value": "0.74 vs 0.55"
+    }
+   ],
+   "charts": []
+  },
+  "qwen35_4b_confidence_guided_compute": {
+   "verdict_tag": "Trust the confident sample, not the common one",
+   "concept_primer": "A common way to boost a model is to sample many answers and take a majority vote ('sample-more'). This asks whether the model's own internal confidence can do better -- picking which of its many tries to trust, and knowing when trying more is hopeless.",
+   "plain_question": "Can the model's own confidence make 'sample many answers' actually pay off -- and tell you when it won't?",
+   "plain_answer": "Yes, in two ways. First, the standard trick -- sample a dozen answers and take the majority vote -- does NOTHING for this model: accuracy stays flat no matter how many you draw, because on hard problems the model confidently repeats the SAME wrong answer. But if you instead pick the single answer the model was most confident in (readable straight from its output probabilities, no checking required), accuracy climbs from 0.47 to 0.62 and keeps rising with more samples. The reason: when the model actually works out the right answer it is confident about it, so the most-confident try beats the most-common try. Second, that same confidence tells you when sampling is futile -- it flags the problems the model simply can't do, so you can skip them (or hand them off) and be right ~100% of the time on the ones you keep.",
+   "why_it_matters": "It's a free, verifier-free way to get more out of a small model's test-time compute. Don't majority-vote its samples -- pick its most-confident sample, and abstain on the ones where even its best guess is low-confidence. Both signals come straight from the model's output probabilities, no extra model and no answer-checking needed.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "majority vote (self-consistency)",
+     "value": "0.48 (flat)"
+    },
+    {
+     "label": "pick most-confident sample",
+     "value": "0.62"
+    },
+    {
+     "label": "best possible (oracle)",
+     "value": "0.83"
+    },
+    {
+     "label": "predicting solvability for abstention (AUROC)",
+     "value": "0.83"
+    }
+   ],
+   "charts": []
   },
   "qwen35_4b_constrained_coverage_dpo": {
    "verdict_tag": "Cheaper nudge, but more tries still wins",
@@ -2248,6 +2340,33 @@
     }
    ]
   },
+  "qwen35_4b_error_localization": {
+   "verdict_tag": "Its confidence dips right where it slips",
+   "concept_primer": "When a model reasons in several steps and gets the answer wrong, a useful thing would be to know WHICH step went wrong -- so you can redo just that step instead of the whole chain. This tests whether the model's own confidence pinpoints the failing step.",
+   "plain_question": "When the model makes an error partway through a multi-step calculation, does its confidence reveal WHICH step went wrong?",
+   "plain_answer": "Yes. As the model works step by step, we can read how confident it is in each step from its output probabilities. When it makes a slip, its confidence dips -- and the dip lands exactly on the step where it first went wrong (high just before, lowest right at the error, recovering after). We had to be careful: the model's confidence naturally rises over the course of a chain, so we removed that trend first; the pinpointing survives. When the model slips exactly once, reading its confidence finds the bad step about 56% of the time -- roughly triple random guessing and well above guessing from step-position alone -- so you can redo just from there instead of the whole chain (cheaper). The one limit: if the model slips several times in a chain, its confidence flags a bad step (76% of the time) but not always the FIRST one.",
+   "why_it_matters": "It extends the earlier finding (the model knows when it's wrong, in its output probabilities) from single answers to multi-step reasoning, and makes it actionable: read the per-step confidence to find and re-try just the failing step -- targeted repair instead of redoing everything. Combined with the confidence-select result, it suggests a cheap self-repair loop for a small model, with no verifier and no execution.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "localizes the slip (single-slip chains, position-controlled)",
+     "value": "0.56"
+    },
+    {
+     "label": "guessing from step-position alone",
+     "value": "0.36"
+    },
+    {
+     "label": "random (1/depth)",
+     "value": "0.19"
+    },
+    {
+     "label": "targeted-repair cost vs redo-all",
+     "value": "3.8 vs 5.6 steps"
+    }
+   ],
+   "charts": []
+  },
   "qwen35_4b_executable_program_posttraining": {
    "verdict_tag": "Runnable-fix training transfers, but needs worked steps",
    "concept_primer": "Instead of describing a fix in words, the model is trained to rewrite the broken formula as a runnable mini-program the computer then checks by actually running it on real cases.",
@@ -2770,6 +2889,13 @@
     }
    ]
   },
+  "qwen35_4b_gauntlet_breadth_round1": {
+   "verdict_tag": "Broad self-practice moved the held-out benchmark",
+   "concept_primer": "We built a private training playground of twelve invented task worlds — tracking caravan cargo, probing hidden glyph machines, fixing tiny programs, navigating burrows — each with an automatic grader. The model practiced on its own verified successes from ten of the worlds, and we tested it on the two worlds it never practiced plus a completely separate held-out benchmark it has never seen any content from.",
+   "plain_question": "Does practicing many different agent-style tasks at once teach the model something general, or does each skill stay stuck to the task it was learned on, as every earlier experiment found?",
+   "plain_answer": "It generalizes — once the training signal points at the right spot. Practicing on its own correct answers verbatim changed nothing. The winning tweak taught the model to finish thinking and commit to a short final answer, even when its reasoning gets cut off mid-thought. Playground scores nearly quadrupled, the two never-practiced worlds improved just as much, and the held-out benchmark jumped from about 0.14 to 0.36-0.45 on two fresh test sets — roughly seven times the success bar we pre-registered. A separate hard-won lesson: our fast evaluation engine had been silently ignoring the trained weights, so two whole rounds initially looked like failures when the measurement itself was broken.",
+   "why_it_matters": "This is the first time any training method in this project has been shown to improve the blackbox benchmark at all, and it breaks the running rule that installed skills never transfer. It also establishes the working recipe — practice broadly, grade strictly, and concentrate learning on the moment of commitment — plus a permanent warning to verify that trained weights are actually loaded before trusting any evaluation."
+  },
   "qwen35_4b_generator_verifier_gap": {
    "verdict_tag": "Self-checking works, but only when it thinks",
    "concept_primer": "Think of a student who writes a coding answer, then proofreads their own attempts to spot which one is actually right—without running the code. This is the model grading its own work.",
@@ -2898,6 +3024,94 @@
      "chart_takeaway": "The trained model's short bar shows it learned to stop early and save sample runs, yet since accuracy never changes, that saving buys nothing useful."
     }
    ]
+  },
+  "qwen35_4b_humaneval_code_confidence": {
+   "verdict_tag": "The HumanEval rerun confirms the judge-token signal",
+   "concept_primer": "The MBPP code experiment found that the model can score its own code if we ask a yes/no correctness question and read the probability of the yes answer. This rerun checks the same idea on HumanEval, with no public tests available.",
+   "plain_question": "When there are no tests to run, can the model still pick its best HumanEval code attempt by judging its own code?",
+   "plain_answer": "Yes. Across all 164 HumanEval tasks, the model picked better code when it used the one-token 'this is correct' score than when it picked a random sample or trusted the average probability of the whole code completion. The best possible pick among the 8 samples was 0.87; the self-judge reached 0.84, close to that ceiling, without running tests.",
+   "why_it_matters": "This separates the deployment rule from the benchmark: when tests exist, run them. When tests are missing, use the model's own one-token correctness score to choose among samples or decide whether to route the problem elsewhere.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "pick-1-of-8: P(True) vs mean-logprob vs random",
+     "value": "0.84 vs 0.79 vs 0.77"
+    },
+    {
+     "label": "best possible pick among 8",
+     "value": "0.87"
+    },
+    {
+     "label": "within-problem AUROC: P(True) vs code length",
+     "value": "0.78 vs 0.57"
+    },
+    {
+     "label": "greedy solvability prediction: P(True) vs mean-logprob",
+     "value": "0.86 vs 0.73"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Choosing one HumanEval sample without running tests",
+     "chart_read": "Each bar shows how often a selector chose a correct program from 8 attempts. Taller is better. The oracle bar is the best possible choice if you already knew which attempts passed.",
+     "chart_takeaway": "The one-token self-judge score beats the other no-test selectors and lands close to the best possible pick among the 8 attempts."
+    }
+   ]
+  },
+  "qwen35_4b_hypothesize_verify_wall": {
+   "verdict_tag": "Teaching the model how to search does not break the depth wall",
+   "concept_primer": "Two earlier findings pointed in opposite directions. One: the model cannot invent the multi-step structure of an unfamiliar transformation (its oldest, most replicated failure). Two: the model CAN be taught a general 'guess, check against the examples, revise' routine that works on a held-out puzzle family. This experiment forces the two findings to fight: teach the routine on the exact substrates where the structure failure lives, and see if the failure moves.",
+   "plain_question": "If we teach the model a systematic guess-and-check search routine, can it finally figure out three-step transformations it has never been able to crack?",
+   "plain_answer": "No -- and the way it fails is the insight. The model learned the routine perfectly: on two-step transformations (the depth it practiced on), its success at proposing the right structure DOUBLED (0.37 to 0.70 on lists), with flawless formatting and no loss of old skills. But on three-step transformations -- one step deeper than its practice -- it gained nothing at all. The routine also does not travel: the earlier experiment's trained adapter, re-verified as working on its own puzzles, scored near zero here and even hurt performance. Teaching HOW to search only helps at the depth where the search was practiced.",
+   "why_it_matters": "It pins down what the model's hardest limit actually is: not a missing method, but depth itself. Answers, data variety, and now explicit search procedures all fail to carry the model one composition step past its training. Practical rule: use procedure-training to consolidate depths the model can already touch, and use external brute-force search for anything deeper.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "two-step structure proposal after procedure training (lists)",
+     "value": "0.37 -> 0.70"
+    },
+    {
+     "label": "three-step (one deeper than practice), all three arms vs base",
+     "value": "all n.s. (base 0.05)"
+    },
+    {
+     "label": "old-skill retention after training",
+     "value": "0.85 -> 0.85 (zero forgetting)"
+    },
+    {
+     "label": "prior adapter transferred to new substrate",
+     "value": "0.37 -> 0.00 (active interference)"
+    }
+   ]
+  },
+  "qwen35_4b_icl_retrieval_vs_induction": {
+   "verdict_tag": "It recognizes rules, it doesn't invent them",
+   "concept_primer": "In-context learning is the headline trick of modern AI: show a model a few examples and it 'figures out' the pattern. But is it truly inferring a new rule, or just recognizing a rule it already knows? This experiment separates the two.",
+   "plain_question": "When the model 'learns' a rule from a few examples, is it genuinely inferring a new rule, or just recognizing a familiar one?",
+   "plain_answer": "Just recognizing familiar ones. Given examples of 'move forward k steps' in the normal 0-9 number order, the model figures out the rule about half the time. Given the SAME kind of rule but in a scrambled, unfamiliar order, it drops to chance -- it cannot infer it from any number of examples. Yet when you simply TELL it that scrambled rule instead of making it guess, it applies it almost perfectly (97%). So the model can run an unfamiliar rule flawlessly; it just can't DISCOVER one from examples. Its 'in-context learning' is recognizing structure it already knows, not inventing new structure.",
+   "why_it_matters": "This explains the whole research arc in one line: the model is an executor and retriever of familiar structure, not an inventor of new structure. It reframes what 'in-context learning' buys you -- point the model at a pattern it already knows (it will recognize and apply it), but don't expect it to reverse-engineer a genuinely novel pattern from examples, no matter how many you provide. More examples don't help; they slightly hurt.",
+   "why_it_matters_short": "ICL recognizes familiar rules; it can't invent new ones.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "EXECUTE a novel rule (told it)",
+     "value": "0.97"
+    },
+    {
+     "label": "INDUCE a novel rule (from examples)",
+     "value": "0.12"
+    },
+    {
+     "label": "INDUCE a familiar rule (from examples)",
+     "value": "0.45"
+    },
+    {
+     "label": "chance",
+     "value": "0.10"
+    }
+   ],
+   "charts": []
   },
   "qwen35_4b_independent_code_abi_coverage_gate": {
    "verdict_tag": "Fixed toolkit misses most new tasks",
@@ -3089,6 +3303,60 @@
      "chart_takeaway": "The line plateaus in a mid-range band rather than near zero, matching a model that learned the answer format but not how to read the codebook."
     }
    ]
+  },
+  "qwen35_4b_language_proposal_wall": {
+   "verdict_tag": "It reasons but doesn't figure out rules",
+   "concept_primer": "There are two skills in multi-step reasoning: FOLLOWING a rule you're given, and FIGURING OUT a hidden rule from examples. A companion experiment showed this small model follows rules in plain English almost perfectly. This one tests the second skill: can it infer a hidden rule from examples?",
+   "plain_question": "In plain language, can the model FIGURE OUT a hidden multi-step rule from examples (not just follow one it's told)?",
+   "plain_answer": "Barely. Told the rule explicitly, it applies it correctly ~86% of the time. But asked to infer the same kind of hidden rule from worked examples, it is at chance (0%) in a single pass -- it cannot figure out even a one-step rule. Letting it think out loud only gets it to ~50% on the easiest case, and its reasoning is on the right track but error-prone. So the model can EXECUTE a rule it's handed but cannot reliably DISCOVER one -- in plain language just as in code.",
+   "why_it_matters": "Together with the companion result, this pins down exactly what the model can and can't do. Following steps (execution) is easy and gets easier in natural language. Discovering the rule (induction) is hard everywhere -- language doesn't rescue it. For practitioners: give the model the procedure to run; don't expect it to reverse-engineer the procedure from examples. This is the one limitation that holds even in the model's native domain.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "apply a GIVEN rule (1 step)",
+     "value": "0.86"
+    },
+    {
+     "label": "INFER a hidden rule (1 step, single pass)",
+     "value": "0.00"
+    },
+    {
+     "label": "INFER a hidden rule (1 step, thinking)",
+     "value": "0.50"
+    },
+    {
+     "label": "following a rule in language (companion, C37)",
+     "value": "0.99"
+    }
+   ],
+   "charts": []
+  },
+  "qwen35_4b_language_reasoning_wall": {
+   "verdict_tag": "The reasoning wall is formal, not linguistic",
+   "concept_primer": "The model fails at chaining 3+ steps of a hand-built symbolic operation (a 'compositional wall' this project mapped in depth). But it is a language model. This asks whether the same 3-step wall appears when the identical chaining task is posed in plain English instead of formal code.",
+   "plain_question": "Does the model's 3-step 'compositional wall' also appear when the same multi-step chain is presented as natural-language reasoning instead of formal code?",
+   "plain_answer": "No. Asked to follow a chain of made-up facts ('Kel is directly followed by Vor') three steps in plain English, the model is right ~99% of the time -- and still ~100% with a totally made-up relation word, so it is the language framing, not a memorized meaning, that carries it. That is the exact depth where formal composition collapses. So the 'wall' is a property of the formal/code modality, not of the model's ability to reason step-by-step. A striking side effect: handing the model the same facts as a Python dictionary makes it dump the dictionary back as code instead of reasoning -- the surface form decides whether it reasons or codes.",
+   "why_it_matters": "The whole project spent 36 findings proving this small model is bad at deep composition -- but that was measured only on formal symbolic tasks. In its native domain, plain language, the same model chains 3-4 reasoning steps almost perfectly. For practitioners: present a multi-step task in natural language, not as code/data structures, to elicit the model's reasoning rather than trigger a code-dump. And it relocates the research question -- the barrier is formal-symbol manipulation, not step-count.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "linguistic reasoning, 3 steps (no-think)",
+     "value": "0.99"
+    },
+    {
+     "label": "made-up-relation control, 3 steps",
+     "value": "1.00"
+    },
+    {
+     "label": "formal composition wall (this project)",
+     "value": "depth 3"
+    },
+    {
+     "label": "formal-dict, 1 step (triggers code-mode)",
+     "value": "0.03"
+    }
+   ],
+   "charts": []
   },
   "qwen35_4b_latent_composition_probe": {
    "verdict_tag": "Hidden answer only for simple problems",
@@ -3313,6 +3581,60 @@
      "chart_takeaway": "Always-running code needs 12 programs plus 18 fixes, while the trained decider reaches the identical score with 6 programs and no fixes — a large cost cut for equal accuracy."
     }
    ]
+  },
+  "qwen35_4b_meta_induction": {
+   "verdict_tag": "General rule-finding IS teachable -- as reasoning",
+   "concept_primer": "The model's core weakness (established across this project) is INDUCTION: figuring out a hidden rule from a few examples. This asks the biggest question -- can you TRAIN that missing skill into the fixed model so it works on rules it never saw?",
+   "plain_question": "Can fine-tuning teach the small model the general skill of figuring out a hidden rule from examples -- lifting its central limitation?",
+   "plain_answer": "Yes, if you teach it the right way. Training the model to answer directly barely works and wrecks its other skills. Training it to REASON through a hidden shift step by step lets it solve new shift puzzles perfectly -- but only shifts. The breakthrough: teach a GENERAL 'try each possibility and check which fits the examples' strategy across several DIFFERENT rule types, and the model then solves a rule type it was NEVER trained on just as well (91%, matching the trained types). So the model can genuinely learn general rule-finding -- but it lives entirely in its step-by-step reasoning: the SAME trained model is back at chance if forced to answer in one shot. Its central weakness is not missing knowledge, but an inability to run the computation in a single pass -- and a general reasoning strategy overcomes it generally.",
+   "why_it_matters": "This is the most constructive result of the whole project: the model's central limitation -- it can't figure out hidden rules -- can be TRAINED AWAY, generally, by teaching a general hypothesize-and-verify strategy as chain-of-thought across diverse examples. The practical recipe: teach the general STRATEGY (not one specific rule) across varied cases, and always run it with room to reason step by step. Never fine-tune it to answer in one shot -- that forces the computation somewhere it cannot live and destroys skills it already had.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "held-out rule family (never trained), via reasoning",
+     "value": "0.91"
+    },
+    {
+     "label": "trained rule families, via reasoning",
+     "value": "0.88-0.96"
+    },
+    {
+     "label": "single hand-coded rule -> out-of-family (C44)",
+     "value": "0.13"
+    },
+    {
+     "label": "same model forced to answer in one step (C44)",
+     "value": "0.01"
+    }
+   ],
+   "charts": []
+  },
+  "qwen35_4b_metacognitive_boundary": {
+   "verdict_tag": "It knows in its logits, not its words",
+   "concept_primer": "A useful AI should know when it doesn't know -- so it can flag a guess instead of confidently making something up. This tests whether the model can tell, on tasks where we KNOW in advance which ones it can and can't do, whether it is about to be right or wrong.",
+   "plain_question": "Does the model know when it is about to fail -- and if so, can it tell you?",
+   "plain_answer": "It knows, but it can't tell you. When you look at the model's internal probability on the answer it gives, that number tracks its actual accuracy almost perfectly, and it predicts which specific problems it will get right about as well as a near-perfect detector -- far better than guessing from the surface of the problem. But when you simply ASK the model 'is your answer correct?' or 'how confident are you?', its answer is useless: it says it's confident about equally on the problems it aces and the ones it fails (and its verbal confidence is a flat 100 every time). So the model's uncertainty is real and readable -- but it lives in its output probabilities, not in anything it can say.",
+   "why_it_matters": "This is directly deployable and it unearths a genuinely useful hidden capability. If you want a small model to flag its own likely mistakes (to abstain, ask for help, or route to a bigger model), read its answer-token probability -- NOT its self-reported confidence, which is worthless. Filtering by that internal signal lifts accuracy on the problems it chooses to attempt from 23% to nearly 100%. The practical rule: trust the model's math (logits), never its self-assessment (words).",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "implicit P(answer) predicts correctness (AUROC)",
+     "value": "0.95"
+    },
+    {
+     "label": "guessing from surface features (AUROC)",
+     "value": "0.61"
+    },
+    {
+     "label": "explicit 'is my answer right?' (AUROC)",
+     "value": "0.46"
+    },
+    {
+     "label": "accuracy on attempted after abstaining",
+     "value": "0.23 -> ~1.0"
+    }
+   ],
+   "charts": []
   },
   "qwen35_4b_model_in_loop_counterexamples": {
    "verdict_tag": "Fancier case-picking did not beat simple",
@@ -3786,6 +4108,39 @@
      "chart_plain_title": "Five kinds of pre-answer thinking compared across thinking-room sizes",
      "chart_read": "Each line is one kind of thinking the model does before answering, plotted as room increases left to right; height is how often the code passed. Genuine reasoning sits on top, a foreign task's thinking at the bottom; higher is better.",
      "chart_takeaway": "Genuine thinking stays far above scrambled words, blank filler and no-thinking (which cluster together), while foreign thinking sits near the floor, so coherent reasoning alone carries the gain."
+    }
+   ]
+  },
+  "qwen35_4b_partial_structure_search": {
+   "verdict_tag": "The perfect pruning signal existed, but the model could not read it",
+   "concept_primer": "Imagine a maze with more than a million complete routes. A perfect map can keep only four promising routes at each step. This test asks whether the small model can imitate that map by judging unfinished routes.",
+   "plain_question": "Can the fixed small model recognize which unfinished program routes can still reach the right answer well enough to prune the search?",
+   "plain_answer": "No for this route description. The perfect checker reduced more than a million complete routes to four and kept a solution every time, but the model's thinking-based scores ranked sibling routes about as well as chance. A cheaper immediate score was slightly better, yet still far below the launch requirement. The planned full search and training follow-up were stopped.",
+   "why_it_matters": "A useful hidden signal is not automatically a usable model signal. Measuring rankings within the same problem prevented a misleading overall score from triggering a large, expensive search. It also showed that exact depth-five search already finishes quickly on this task family, so learned pruning must clear a real cost bar.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Perfect-checker development paths",
+     "value": "12 / 12",
+     "sub": "four retained leaves instead of 1,048,576; 262,144x compression"
+    },
+    {
+     "label": "Thinking route ranking",
+     "value": "50.6%",
+     "sub": "chance within each problem; cheaper immediate scoring reached 55.6%"
+    },
+    {
+     "label": "Exact depth-five reference",
+     "value": "112 seconds",
+     "sub": "60/60 pools contained a solution; visible-only choice succeeded on 56/60"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Ranking unfinished routes within each problem",
+     "chart_read": "For each method, the first bar measures whether viable routes rank above dead routes within the same problem; 50% is chance. The second bar measures how many viable children survive when only four are kept; taller is better.",
+     "chart_takeaway": "Thinking sits at chance and retains fewer viable children than the cheaper immediate score. Since neither clears the pre-set requirement, the experiment correctly stops before full search."
     }
    ]
   },
@@ -5082,6 +5437,208 @@
      "chart_plain_title": "Trade-off between tasks helped and tasks harmed by edits",
      "chart_read": "Each group is an acceptance rule; the taller bar counts tasks improved and the shorter bar counts tasks made worse, out of 120. More improved and fewer harmed is better.",
      "chart_takeaway": "The strictest rule, accepting an edit only when it passes every example test, roughly halves the harmed tasks while keeping most of the improvements."
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_capacity_fit_rerun": {
+   "verdict_tag": "The cache-fit 49k rung failed; implicit-capture 61k stopped pre-receipt",
+   "concept_primer": "Long-context batching needs two limits to agree: how long each sequence may become and how many such sequences the scheduler may keep active. A generous per-sequence allowance can still thrash if their combined block-rounded KV-cache demand exceeds the live cache.",
+   "plain_question": "Does fresh verified-macro induction terminate cleanly when vLLM concurrency is fitted to the live KV cache instead of retaining max-seqs 64 from a shorter-context setup?",
+   "plain_answer": "The fresh base-only K=4 probe at think@49,152 fit its live KV cache but still failed the content-blind termination gate. All 48 samples contacted the reasoning boundary: token-ID periodicity found 37 loops, 11 contacts remained unresolved, and 9 answers reached their limit. No decoded or scored content was inspected. The 61k attempt was stopped before a receipt after an audit found that vLLM's implicit sparse graph list covered only through width 8 rather than max-seqs 15; it left no reusable rows. Long-rung escalation moved to a separate exact-capture experiment.",
+   "why_it_matters": "This separates cache validity from graph coverage, throughput, and the research hypothesis. Max-seqs 19 fit the cache, yet the run was 19.6% slower than the predecessor's overcommitted max-seqs-64 diagnostic; the implicit capture lists also missed active widths 17-19 and 9-15. Cache-safe concurrency is necessary but not automatically throughput-optimal, and a failed termination probe remains a provisioning boundary rather than evidence against verified macros.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "49k termination",
+     "value": "11 unresolved / 37 loops",
+     "sub": "all 48 contacted the boundary; 9 answers hit 512"
+    },
+    {
+     "label": "Capacity-fit demand",
+     "value": "963,072 tokens",
+     "sub": "of 997,888 live tokens; 34,816 headroom"
+    },
+    {
+     "label": "Capacity-fit throughput",
+     "value": "471.754 tokens/s",
+     "sub": "19.6% below the old max-seqs-64 diagnostic"
+    },
+    {
+     "label": "61k implicit-capture attempt",
+     "value": "stopped pre-receipt",
+     "sub": "resolved graph maximum 8 vs active width 15; no reusable rows"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Capacity fitting moves worst-case demand below live KV capacity",
+     "chart_read": "For each scheduler setup, the dark bar is block-rounded worst-case cache demand and the comparison bar is measured live cache capacity. Demand above capacity implies eviction and recomputation risk; demand below capacity has explicit headroom.",
+     "chart_takeaway": "The predecessor could admit 48 long sequences demanding 2.43M cache tokens from about 995k. The completed 49k rerun capped concurrency at 19 and fit 963,072 tokens into 997,888, validating its geometry even though its termination gate failed."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Capacity fitting did not clear the 49k termination boundary",
+     "chart_read": "Bars show the shares of the 48 fresh K=4 samples classified as unresolved boundary contacts, exact periodic loops, and answer-limit contacts. Each is compared with its registered maximum.",
+     "chart_takeaway": "The cache-fit run still failed every termination threshold. Its 61k successor stopped before a receipt after the implicit graph geometry proved incomplete; no decoded or scored content was inspected."
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
+   "verdict_tag": "Exact runtime gates passed; the terminal context ladder still failed",
+   "concept_primer": "CUDA graphs accelerate repeated decode batch shapes, but asking vLLM for a maximum does not guarantee its implicit sparse capture list includes that active width. This follow-up freezes and verifies the exact graph-size list alongside live KV-cache capacity.",
+   "plain_question": "Does explicitly capturing every registered active batch width repair the long-context vLLM envelope enough for fresh verified-macro induction to clear its content-blind termination gate?",
+   "plain_answer": "Exact graph and cache resolution worked at both long rungs, but neither fresh K=4 probe terminated adequately. At 49k, all 48 samples reached the boundary: 38 exact loops, 10 unresolved contacts, and 6 answer-limit contacts at 491.396 sampled tokens/s. At terminal 61k, the counts were 40, 8, and 4 at 397.688 sampled tokens/s despite FULL graph coverage and 47,488 cache tokens of headroom. The selector ended pass=false with no selected budget. No K=12 arm, semantic analysis, or macro claim was authorized, and no decoded or scored content was inspected.",
+   "why_it_matters": "Binding live cache geometry and the resolved compilation configuration repaired the inference envelope but isolated a genuine termination problem: more context shifted a small number of unresolved and answer contacts into exact loops without clearing any registered gate, while throughput fell. The next study should stop increasing context and preregister one symmetric loop-control mechanism while preserving the unresolved-contact and answer-limit gates.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Exact-capture 49k termination",
+     "value": "10 unresolved / 38 loops",
+     "sub": "all 48 contacted the boundary; 6 answers hit 512"
+    },
+    {
+     "label": "Exact graph resolution",
+     "value": "[1, 2, 4, 8, 16, 19]",
+     "sub": "requested and resolved lists match; active width 19 covered"
+    },
+    {
+     "label": "Exact-capture throughput",
+     "value": "491.396 tokens/s",
+     "sub": "2,363,163 tokens in 4,809.081 seconds; descriptive +4.16%"
+    },
+    {
+     "label": "Terminal exact-capture 61k",
+     "value": "8 unresolved / 40 loops",
+     "sub": "4 answers hit 512; 397.688 tokens/s; pass=false"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Explicit graph lists cover every registered active width",
+     "chart_read": "Each group compares the scheduler's active batch width with vLLM's largest resolved full-decode graph. The implicit configurations stop short; the explicit configurations match exactly. Both exact groups are completed fresh probes.",
+     "chart_takeaway": "The follow-up repaired the compilation-envelope defect at both long rungs, so the terminal failure cannot be attributed to missing active-width graph coverage."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "More context increased loops without clearing termination",
+     "chart_read": "For each completed fresh K=4 probe, bars show the shares of 48 samples classified as unresolved boundary contacts, exact periodic loops, and answer-limit contacts. The registered maxima are 5%, 25%, and 5% respectively.",
+     "chart_takeaway": "The 61k probe slightly reduced unresolved and answer-limit contacts but increased the already-dominant loop share. The terminal selector therefore remained pass=false with no selected budget."
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_invention": {
+   "verdict_tag": "Original shortcut test was budget-censored",
+   "concept_primer": "Imagine replacing a repeated two-step instruction with a short nickname. Before asking whether those nicknames help solve new puzzles, we first handed the model the full correct instruction list and checked whether it could rewrite that list faithfully.",
+   "plain_question": "Can the model reliably rewrite a supplied five-step plan using exact named shortcuts?",
+   "plain_answer": "This original run could not answer. Its reasoning-enabled attempts hit their token limits, while turning reasoning off fixed formatting but changed the computation being tested. A dedicated long-context follow-up later rewrote all 16 separate supplied plans exactly at least once, showing that this stop was a setup limit rather than a durable shortcut-interface failure.",
+   "why_it_matters": "A well-formatted tool call is not necessarily correct, but a token-capped one is not clean negative evidence either. Test a new action language on known plans, provision the real workload, and separate resource exhaustion from semantic failure before judging harder tasks.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Original task-smoke answers cut off",
+     "value": "607 / 1,440",
+     "sub": "the first smoke used too little reasoning room"
+    },
+    {
+     "label": "No-think outputs formatted and using shortcuts",
+     "value": "16 / 16",
+     "sub": "formatting alone looked perfect"
+    },
+    {
+     "label": "Supplied plans rewritten exactly at least once",
+     "value": "1 / 4",
+     "sub": "below the required 3 of 4"
+    },
+    {
+     "label": "Failed no-think samples that grew past the limit",
+     "value": "13 / 13",
+     "sub": "extra nicknames changed the supplied plan"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The original low-budget rewrites stayed below the pass line",
+     "chart_read": "Each group shows one interface attempt. The dark bar counts supplied plans with at least one exact rewrite; the comparison bar marks the three-of-four requirement.",
+     "chart_takeaway": "Neither original attempt reached the pass line, so this run correctly stopped; a later long-context follow-up showed the budgeted interface itself was recoverable."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "No-think repaired formatting inside the original setup",
+     "chart_read": "Bars count well-formatted and cut-off outputs among 16 tries. Turning reasoning off moves every output into the well-formatted bar and removes the cut-off bar.",
+     "chart_takeaway": "Perfect formatting did not make those no-think rewrites faithful, but the condition was not equivalent to adequately budgeted reasoning."
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_long_context_rerun": {
+   "verdict_tag": "The shortcut interface works; the terminal context ladder selected nothing",
+   "concept_primer": "A verified macro is a short nickname for an exact multi-step action. This study first separates two questions: can the model write the right nickname when the full plan is supplied, and does having those nicknames help it discover a plan for a new puzzle?",
+   "plain_question": "Once the model has enough room to reason, can exact reusable shortcuts improve new-puzzle accuracy beyond spending the same generation budget on more ordinary attempts?",
+   "plain_answer": "We still cannot answer the new-puzzle question. The corrected supplied-plan check passed on all 16 records, but fresh induction reached the reasoning boundary at every registered allowance. The terminal exact-capture 61k K=4 probe passed FULL-graph and live-KV gates yet still produced 40 exact loops, 8 unresolved contacts, and 4 answer-limit contacts among 48 samples. The selector ended pass=false with no selected budget. No K=12 matrix, semantic analysis, or macro claim was authorized, and no decoded or scored content was inspected.",
+   "why_it_matters": "Reaching a generation limit is missing evidence, and increasing the token cap without fitting scheduler concurrency can add recomputation rather than usable reasoning. This ladder now also shows that fitting cache and graph geometry does not guarantee useful termination. Stop increasing context, gate termination before reading accuracy, and test any loop intervention symmetrically in a fresh preregistered experiment while retaining the unresolved-contact and answer-limit gates.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Supplied plans rewritten exactly at least once",
+     "value": "16 / 16",
+     "sub": "the corrected record-level interface passed"
+    },
+    {
+     "label": "Diagnostic 49k termination",
+     "value": "14 unresolved / 34 loops",
+     "sub": "all 48 samples force-closed; 13 answers hit 512"
+    },
+    {
+     "label": "Diagnostic generation",
+     "value": "2,366,620 tokens",
+     "sub": "4,035.356 seconds, or 586.47 tokens/s"
+    },
+    {
+     "label": "Overcommitted cache demand",
+     "value": "2,433,024 vs 995,328",
+     "sub": "eligibility was revoked before the receipt"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Longer caps changed the failure mode, not evidence eligibility",
+     "chart_read": "Each group is a base-only termination run. Bars show the shares of samples left unresolved, classified as exact periodic loops, and reaching the answer limit; lower is better. The 16k and 32k groups have 144 samples each, while the diagnostic 49k probe has 48.",
+     "chart_takeaway": "Every sample at every allowance reached the reasoning boundary. The 49k max-seqs-64 probe had already been made diagnostic-only because its scheduler geometry overcommitted KV cache, so none of these rows is a macro-quality result."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Enough reasoning made exact shortcut rewrites usable",
+     "chart_read": "The dark bar counts supplied plans rewritten exactly at least once across four attempts; the comparison bar is the pre-set pass requirement.",
+     "chart_takeaway": "All 16 plans cleared the 12-plan requirement, repairing the original low-budget interface diagnosis."
+    }
+   ]
+  },
+  "qwen35_4b_verifier_free_banking": {
+   "verdict_tag": "Confidence can judge, but cannot feed the training loop",
+   "concept_primer": "Earlier work built a self-training loop: the model solves practice tasks, a code-runner checks which solutions are right, and the model is fine-tuned on its own verified wins. Separately, the model can score its own answers by reading the probability of a one-token 'this is correct' verdict. This experiment asks whether that self-score can replace the code-runner inside the training loop, which would let self-training work in domains where nothing can be executed.",
+   "plain_question": "Can the model's own confidence score replace the code-runner that filters its practice solutions before fine-tuning?",
+   "plain_answer": "No for training, yes for judging. First, the instant one-token score cannot even tell right from wrong solutions here unless the model thinks step-by-step before scoring (instant: coin-flip; with thinking: strong). Second, even with the strong thinking-based filter, fine-tuning on confidence-picked solutions helped exactly as little as fine-tuning on unfiltered ones -- only the code-runner-verified set taught anything, and even its gain was small because 70 examples is simply too few. The good news: the judge itself is not damaged by self-training -- a model fine-tuned on its own approved answers still ranks right above wrong just as well, though its raw scores drift upward on its own mistakes.",
+   "why_it_matters": "It locates exactly where a real verifier is irreplaceable: filtering training data. For picking answers at inference time, the model's own (thinking-based) score works and even survives repeated self-training if you keep the top-ranked answers rather than everything above a fixed score cutoff, which silently rots as scores inflate.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "instant vs thinking self-score, telling right from wrong within a task (AUROC)",
+     "value": "0.47 (chance) vs 0.85"
+    },
+    {
+     "label": "depth-2 single-shot after fine-tuning: verified vs confidence-picked vs unfiltered data",
+     "value": "0.24 vs 0.12 vs 0.12 (base 0.08)"
+    },
+    {
+     "label": "judge quality after self-training on its own approvals (fixed candidates)",
+     "value": "0.872 -> 0.883 (intact)"
+    },
+    {
+     "label": "score inflation on its own wrong answers after self-training",
+     "value": "0.09 -> 0.20 (doubled)"
     }
    ]
   },
@@ -10289,525 +10846,6 @@
      "chart_plain_title": "Give the model enough room to write the whole fix",
      "chart_read": "Two setups differ only in how much output length the model is allowed. Bars show whether the edit is usable and whether it fixes the code, on a small pilot. Taller is better. The tight-limit setup is flat; the roomier one fills up.",
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
-    }
-   ]
-  },
-  "qwen35_4b_language_reasoning_wall": {
-   "verdict_tag": "The reasoning wall is formal, not linguistic",
-   "concept_primer": "The model fails at chaining 3+ steps of a hand-built symbolic operation (a 'compositional wall' this project mapped in depth). But it is a language model. This asks whether the same 3-step wall appears when the identical chaining task is posed in plain English instead of formal code.",
-   "plain_question": "Does the model's 3-step 'compositional wall' also appear when the same multi-step chain is presented as natural-language reasoning instead of formal code?",
-   "plain_answer": "No. Asked to follow a chain of made-up facts ('Kel is directly followed by Vor') three steps in plain English, the model is right ~99% of the time -- and still ~100% with a totally made-up relation word, so it is the language framing, not a memorized meaning, that carries it. That is the exact depth where formal composition collapses. So the 'wall' is a property of the formal/code modality, not of the model's ability to reason step-by-step. A striking side effect: handing the model the same facts as a Python dictionary makes it dump the dictionary back as code instead of reasoning -- the surface form decides whether it reasons or codes.",
-   "why_it_matters": "The whole project spent 36 findings proving this small model is bad at deep composition -- but that was measured only on formal symbolic tasks. In its native domain, plain language, the same model chains 3-4 reasoning steps almost perfectly. For practitioners: present a multi-step task in natural language, not as code/data structures, to elicit the model's reasoning rather than trigger a code-dump. And it relocates the research question -- the barrier is formal-symbol manipulation, not step-count.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "linguistic reasoning, 3 steps (no-think)",
-     "value": "0.99"
-    },
-    {
-     "label": "made-up-relation control, 3 steps",
-     "value": "1.00"
-    },
-    {
-     "label": "formal composition wall (this project)",
-     "value": "depth 3"
-    },
-    {
-     "label": "formal-dict, 1 step (triggers code-mode)",
-     "value": "0.03"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_language_proposal_wall": {
-   "verdict_tag": "It reasons but doesn't figure out rules",
-   "concept_primer": "There are two skills in multi-step reasoning: FOLLOWING a rule you're given, and FIGURING OUT a hidden rule from examples. A companion experiment showed this small model follows rules in plain English almost perfectly. This one tests the second skill: can it infer a hidden rule from examples?",
-   "plain_question": "In plain language, can the model FIGURE OUT a hidden multi-step rule from examples (not just follow one it's told)?",
-   "plain_answer": "Barely. Told the rule explicitly, it applies it correctly ~86% of the time. But asked to infer the same kind of hidden rule from worked examples, it is at chance (0%) in a single pass -- it cannot figure out even a one-step rule. Letting it think out loud only gets it to ~50% on the easiest case, and its reasoning is on the right track but error-prone. So the model can EXECUTE a rule it's handed but cannot reliably DISCOVER one -- in plain language just as in code.",
-   "why_it_matters": "Together with the companion result, this pins down exactly what the model can and can't do. Following steps (execution) is easy and gets easier in natural language. Discovering the rule (induction) is hard everywhere -- language doesn't rescue it. For practitioners: give the model the procedure to run; don't expect it to reverse-engineer the procedure from examples. This is the one limitation that holds even in the model's native domain.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "apply a GIVEN rule (1 step)",
-     "value": "0.86"
-    },
-    {
-     "label": "INFER a hidden rule (1 step, single pass)",
-     "value": "0.00"
-    },
-    {
-     "label": "INFER a hidden rule (1 step, thinking)",
-     "value": "0.50"
-    },
-    {
-     "label": "following a rule in language (companion, C37)",
-     "value": "0.99"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_icl_retrieval_vs_induction": {
-   "verdict_tag": "It recognizes rules, it doesn't invent them",
-   "concept_primer": "In-context learning is the headline trick of modern AI: show a model a few examples and it 'figures out' the pattern. But is it truly inferring a new rule, or just recognizing a rule it already knows? This experiment separates the two.",
-   "plain_question": "When the model 'learns' a rule from a few examples, is it genuinely inferring a new rule, or just recognizing a familiar one?",
-   "plain_answer": "Just recognizing familiar ones. Given examples of 'move forward k steps' in the normal 0-9 number order, the model figures out the rule about half the time. Given the SAME kind of rule but in a scrambled, unfamiliar order, it drops to chance -- it cannot infer it from any number of examples. Yet when you simply TELL it that scrambled rule instead of making it guess, it applies it almost perfectly (97%). So the model can run an unfamiliar rule flawlessly; it just can't DISCOVER one from examples. Its 'in-context learning' is recognizing structure it already knows, not inventing new structure.",
-   "why_it_matters": "This explains the whole research arc in one line: the model is an executor and retriever of familiar structure, not an inventor of new structure. It reframes what 'in-context learning' buys you -- point the model at a pattern it already knows (it will recognize and apply it), but don't expect it to reverse-engineer a genuinely novel pattern from examples, no matter how many you provide. More examples don't help; they slightly hurt.",
-   "why_it_matters_short": "ICL recognizes familiar rules; it can't invent new ones.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "EXECUTE a novel rule (told it)",
-     "value": "0.97"
-    },
-    {
-     "label": "INDUCE a novel rule (from examples)",
-     "value": "0.12"
-    },
-    {
-     "label": "INDUCE a familiar rule (from examples)",
-     "value": "0.45"
-    },
-    {
-     "label": "chance",
-     "value": "0.10"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_metacognitive_boundary": {
-   "verdict_tag": "It knows in its logits, not its words",
-   "concept_primer": "A useful AI should know when it doesn't know -- so it can flag a guess instead of confidently making something up. This tests whether the model can tell, on tasks where we KNOW in advance which ones it can and can't do, whether it is about to be right or wrong.",
-   "plain_question": "Does the model know when it is about to fail -- and if so, can it tell you?",
-   "plain_answer": "It knows, but it can't tell you. When you look at the model's internal probability on the answer it gives, that number tracks its actual accuracy almost perfectly, and it predicts which specific problems it will get right about as well as a near-perfect detector -- far better than guessing from the surface of the problem. But when you simply ASK the model 'is your answer correct?' or 'how confident are you?', its answer is useless: it says it's confident about equally on the problems it aces and the ones it fails (and its verbal confidence is a flat 100 every time). So the model's uncertainty is real and readable -- but it lives in its output probabilities, not in anything it can say.",
-   "why_it_matters": "This is directly deployable and it unearths a genuinely useful hidden capability. If you want a small model to flag its own likely mistakes (to abstain, ask for help, or route to a bigger model), read its answer-token probability -- NOT its self-reported confidence, which is worthless. Filtering by that internal signal lifts accuracy on the problems it chooses to attempt from 23% to nearly 100%. The practical rule: trust the model's math (logits), never its self-assessment (words).",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "implicit P(answer) predicts correctness (AUROC)",
-     "value": "0.95"
-    },
-    {
-     "label": "guessing from surface features (AUROC)",
-     "value": "0.61"
-    },
-    {
-     "label": "explicit 'is my answer right?' (AUROC)",
-     "value": "0.46"
-    },
-    {
-     "label": "accuracy on attempted after abstaining",
-     "value": "0.23 -> ~1.0"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_confidence_guided_compute": {
-   "verdict_tag": "Trust the confident sample, not the common one",
-   "concept_primer": "A common way to boost a model is to sample many answers and take a majority vote ('sample-more'). This asks whether the model's own internal confidence can do better -- picking which of its many tries to trust, and knowing when trying more is hopeless.",
-   "plain_question": "Can the model's own confidence make 'sample many answers' actually pay off -- and tell you when it won't?",
-   "plain_answer": "Yes, in two ways. First, the standard trick -- sample a dozen answers and take the majority vote -- does NOTHING for this model: accuracy stays flat no matter how many you draw, because on hard problems the model confidently repeats the SAME wrong answer. But if you instead pick the single answer the model was most confident in (readable straight from its output probabilities, no checking required), accuracy climbs from 0.47 to 0.62 and keeps rising with more samples. The reason: when the model actually works out the right answer it is confident about it, so the most-confident try beats the most-common try. Second, that same confidence tells you when sampling is futile -- it flags the problems the model simply can't do, so you can skip them (or hand them off) and be right ~100% of the time on the ones you keep.",
-   "why_it_matters": "It's a free, verifier-free way to get more out of a small model's test-time compute. Don't majority-vote its samples -- pick its most-confident sample, and abstain on the ones where even its best guess is low-confidence. Both signals come straight from the model's output probabilities, no extra model and no answer-checking needed.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "majority vote (self-consistency)",
-     "value": "0.48 (flat)"
-    },
-    {
-     "label": "pick most-confident sample",
-     "value": "0.62"
-    },
-    {
-     "label": "best possible (oracle)",
-     "value": "0.83"
-    },
-    {
-     "label": "predicting solvability for abstention (AUROC)",
-     "value": "0.83"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_error_localization": {
-   "verdict_tag": "Its confidence dips right where it slips",
-   "concept_primer": "When a model reasons in several steps and gets the answer wrong, a useful thing would be to know WHICH step went wrong -- so you can redo just that step instead of the whole chain. This tests whether the model's own confidence pinpoints the failing step.",
-   "plain_question": "When the model makes an error partway through a multi-step calculation, does its confidence reveal WHICH step went wrong?",
-   "plain_answer": "Yes. As the model works step by step, we can read how confident it is in each step from its output probabilities. When it makes a slip, its confidence dips -- and the dip lands exactly on the step where it first went wrong (high just before, lowest right at the error, recovering after). We had to be careful: the model's confidence naturally rises over the course of a chain, so we removed that trend first; the pinpointing survives. When the model slips exactly once, reading its confidence finds the bad step about 56% of the time -- roughly triple random guessing and well above guessing from step-position alone -- so you can redo just from there instead of the whole chain (cheaper). The one limit: if the model slips several times in a chain, its confidence flags a bad step (76% of the time) but not always the FIRST one.",
-   "why_it_matters": "It extends the earlier finding (the model knows when it's wrong, in its output probabilities) from single answers to multi-step reasoning, and makes it actionable: read the per-step confidence to find and re-try just the failing step -- targeted repair instead of redoing everything. Combined with the confidence-select result, it suggests a cheap self-repair loop for a small model, with no verifier and no execution.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "localizes the slip (single-slip chains, position-controlled)",
-     "value": "0.56"
-    },
-    {
-     "label": "guessing from step-position alone",
-     "value": "0.36"
-    },
-    {
-     "label": "random (1/depth)",
-     "value": "0.19"
-    },
-    {
-     "label": "targeted-repair cost vs redo-all",
-     "value": "3.8 vs 5.6 steps"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_meta_induction": {
-   "verdict_tag": "General rule-finding IS teachable -- as reasoning",
-   "concept_primer": "The model's core weakness (established across this project) is INDUCTION: figuring out a hidden rule from a few examples. This asks the biggest question -- can you TRAIN that missing skill into the fixed model so it works on rules it never saw?",
-   "plain_question": "Can fine-tuning teach the small model the general skill of figuring out a hidden rule from examples -- lifting its central limitation?",
-   "plain_answer": "Yes, if you teach it the right way. Training the model to answer directly barely works and wrecks its other skills. Training it to REASON through a hidden shift step by step lets it solve new shift puzzles perfectly -- but only shifts. The breakthrough: teach a GENERAL 'try each possibility and check which fits the examples' strategy across several DIFFERENT rule types, and the model then solves a rule type it was NEVER trained on just as well (91%, matching the trained types). So the model can genuinely learn general rule-finding -- but it lives entirely in its step-by-step reasoning: the SAME trained model is back at chance if forced to answer in one shot. Its central weakness is not missing knowledge, but an inability to run the computation in a single pass -- and a general reasoning strategy overcomes it generally.",
-   "why_it_matters": "This is the most constructive result of the whole project: the model's central limitation -- it can't figure out hidden rules -- can be TRAINED AWAY, generally, by teaching a general hypothesize-and-verify strategy as chain-of-thought across diverse examples. The practical recipe: teach the general STRATEGY (not one specific rule) across varied cases, and always run it with room to reason step by step. Never fine-tune it to answer in one shot -- that forces the computation somewhere it cannot live and destroys skills it already had.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "held-out rule family (never trained), via reasoning",
-     "value": "0.91"
-    },
-    {
-     "label": "trained rule families, via reasoning",
-     "value": "0.88-0.96"
-    },
-    {
-     "label": "single hand-coded rule -> out-of-family (C44)",
-     "value": "0.13"
-    },
-    {
-     "label": "same model forced to answer in one step (C44)",
-     "value": "0.01"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_code_confidence": {
-   "verdict_tag": "Confidence works on real code -- read the judge token, not the average",
-   "concept_primer": "Earlier experiments showed this small model 'knows when it will fail' on a toy digit task: the probability it assigns its own answer predicts whether the answer is right. But real code has no single answer token -- a solution is hundreds of tokens long. This experiment asks which program-level confidence signal, if any, carries that same self-knowledge.",
-   "plain_question": "Can the model's own confidence pick its best code attempt and know when to abstain -- without running any tests?",
-   "plain_answer": "Yes -- but only if you read the RIGHT confidence. Averaging how 'fluent' the model felt while writing the code is too diluted to be useful. What works: show the model its own code and ask 'is this correct, A or B?', then read the probability it puts on 'A' (one cheap forward pass, no test execution). On MBPP, picking the sample that maximizes that judge-token probability beats majority voting across samples. Actually running even one test still beats every confidence trick -- confidence is for when you have no tests to run, or for abstaining/routing before spending more compute.",
-   "why_it_matters": "This is a free reliability lever for real code generation: no training, no external checker -- just the model's own logits. It generalizes the project's metacognition findings off the toy substrate and sharpens the recipe for long code outputs: concentrate the model's self-knowledge into a single judgment token and read THAT. Sample several tries, self-judge each, keep the most confident, abstain when even the best looks doubtful.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "pick-1-of-8 accuracy: P(True) self-judge vs majority vote vs random",
-     "value": "0.76 vs 0.72 vs 0.70"
-    },
-    {
-     "label": "run-the-visible-test selection (execution still king) / oracle",
-     "value": "0.82 / 0.84"
-    },
-    {
-     "label": "abstention: accuracy on the top-third most-confident (vs unfiltered)",
-     "value": "~0.95 (vs 0.70)"
-    },
-    {
-     "label": "within-problem AUROC: P(True) vs code-length surface baseline",
-     "value": "0.74 vs 0.55"
-    }
-   ],
-   "charts": []
-  },
-  "qwen35_4b_humaneval_code_confidence": {
-   "verdict_tag": "The HumanEval rerun confirms the judge-token signal",
-   "concept_primer": "The MBPP code experiment found that the model can score its own code if we ask a yes/no correctness question and read the probability of the yes answer. This rerun checks the same idea on HumanEval, with no public tests available.",
-   "plain_question": "When there are no tests to run, can the model still pick its best HumanEval code attempt by judging its own code?",
-   "plain_answer": "Yes. Across all 164 HumanEval tasks, the model picked better code when it used the one-token 'this is correct' score than when it picked a random sample or trusted the average probability of the whole code completion. The best possible pick among the 8 samples was 0.87; the self-judge reached 0.84, close to that ceiling, without running tests.",
-   "why_it_matters": "This separates the deployment rule from the benchmark: when tests exist, run them. When tests are missing, use the model's own one-token correctness score to choose among samples or decide whether to route the problem elsewhere.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "pick-1-of-8: P(True) vs mean-logprob vs random",
-     "value": "0.84 vs 0.79 vs 0.77"
-    },
-    {
-     "label": "best possible pick among 8",
-     "value": "0.87"
-    },
-    {
-     "label": "within-problem AUROC: P(True) vs code length",
-     "value": "0.78 vs 0.57"
-    },
-    {
-     "label": "greedy solvability prediction: P(True) vs mean-logprob",
-     "value": "0.86 vs 0.73"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Choosing one HumanEval sample without running tests",
-     "chart_read": "Each bar shows how often a selector chose a correct program from 8 attempts. Taller is better. The oracle bar is the best possible choice if you already knew which attempts passed.",
-     "chart_takeaway": "The one-token self-judge score beats the other no-test selectors and lands close to the best possible pick among the 8 attempts."
-    }
-   ]
-  },
-  "qwen35_4b_verifier_free_banking": {
-   "verdict_tag": "Confidence can judge, but cannot feed the training loop",
-   "concept_primer": "Earlier work built a self-training loop: the model solves practice tasks, a code-runner checks which solutions are right, and the model is fine-tuned on its own verified wins. Separately, the model can score its own answers by reading the probability of a one-token 'this is correct' verdict. This experiment asks whether that self-score can replace the code-runner inside the training loop, which would let self-training work in domains where nothing can be executed.",
-   "plain_question": "Can the model's own confidence score replace the code-runner that filters its practice solutions before fine-tuning?",
-   "plain_answer": "No for training, yes for judging. First, the instant one-token score cannot even tell right from wrong solutions here unless the model thinks step-by-step before scoring (instant: coin-flip; with thinking: strong). Second, even with the strong thinking-based filter, fine-tuning on confidence-picked solutions helped exactly as little as fine-tuning on unfiltered ones -- only the code-runner-verified set taught anything, and even its gain was small because 70 examples is simply too few. The good news: the judge itself is not damaged by self-training -- a model fine-tuned on its own approved answers still ranks right above wrong just as well, though its raw scores drift upward on its own mistakes.",
-   "why_it_matters": "It locates exactly where a real verifier is irreplaceable: filtering training data. For picking answers at inference time, the model's own (thinking-based) score works and even survives repeated self-training if you keep the top-ranked answers rather than everything above a fixed score cutoff, which silently rots as scores inflate.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "instant vs thinking self-score, telling right from wrong within a task (AUROC)",
-     "value": "0.47 (chance) vs 0.85"
-    },
-    {
-     "label": "depth-2 single-shot after fine-tuning: verified vs confidence-picked vs unfiltered data",
-     "value": "0.24 vs 0.12 vs 0.12 (base 0.08)"
-    },
-    {
-     "label": "judge quality after self-training on its own approvals (fixed candidates)",
-     "value": "0.872 -> 0.883 (intact)"
-    },
-    {
-     "label": "score inflation on its own wrong answers after self-training",
-     "value": "0.09 -> 0.20 (doubled)"
-    }
-   ]
-  },
-  "qwen35_4b_hypothesize_verify_wall": {
-   "verdict_tag": "Teaching the model how to search does not break the depth wall",
-   "concept_primer": "Two earlier findings pointed in opposite directions. One: the model cannot invent the multi-step structure of an unfamiliar transformation (its oldest, most replicated failure). Two: the model CAN be taught a general 'guess, check against the examples, revise' routine that works on a held-out puzzle family. This experiment forces the two findings to fight: teach the routine on the exact substrates where the structure failure lives, and see if the failure moves.",
-   "plain_question": "If we teach the model a systematic guess-and-check search routine, can it finally figure out three-step transformations it has never been able to crack?",
-   "plain_answer": "No -- and the way it fails is the insight. The model learned the routine perfectly: on two-step transformations (the depth it practiced on), its success at proposing the right structure DOUBLED (0.37 to 0.70 on lists), with flawless formatting and no loss of old skills. But on three-step transformations -- one step deeper than its practice -- it gained nothing at all. The routine also does not travel: the earlier experiment's trained adapter, re-verified as working on its own puzzles, scored near zero here and even hurt performance. Teaching HOW to search only helps at the depth where the search was practiced.",
-   "why_it_matters": "It pins down what the model's hardest limit actually is: not a missing method, but depth itself. Answers, data variety, and now explicit search procedures all fail to carry the model one composition step past its training. Practical rule: use procedure-training to consolidate depths the model can already touch, and use external brute-force search for anything deeper.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "two-step structure proposal after procedure training (lists)",
-     "value": "0.37 -> 0.70"
-    },
-    {
-     "label": "three-step (one deeper than practice), all three arms vs base",
-     "value": "all n.s. (base 0.05)"
-    },
-    {
-     "label": "old-skill retention after training",
-     "value": "0.85 -> 0.85 (zero forgetting)"
-    },
-    {
-     "label": "prior adapter transferred to new substrate",
-     "value": "0.37 -> 0.00 (active interference)"
-    }
-   ]
-  },
-  "qwen35_4b_verified_macro_invention": {
-   "verdict_tag": "Original shortcut test was budget-censored",
-   "concept_primer": "Imagine replacing a repeated two-step instruction with a short nickname. Before asking whether those nicknames help solve new puzzles, we first handed the model the full correct instruction list and checked whether it could rewrite that list faithfully.",
-   "plain_question": "Can the model reliably rewrite a supplied five-step plan using exact named shortcuts?",
-   "plain_answer": "This original run could not answer. Its reasoning-enabled attempts hit their token limits, while turning reasoning off fixed formatting but changed the computation being tested. A dedicated long-context follow-up later rewrote all 16 separate supplied plans exactly at least once, showing that this stop was a setup limit rather than a durable shortcut-interface failure.",
-   "why_it_matters": "A well-formatted tool call is not necessarily correct, but a token-capped one is not clean negative evidence either. Test a new action language on known plans, provision the real workload, and separate resource exhaustion from semantic failure before judging harder tasks.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Original task-smoke answers cut off",
-     "value": "607 / 1,440",
-     "sub": "the first smoke used too little reasoning room"
-    },
-    {
-     "label": "No-think outputs formatted and using shortcuts",
-     "value": "16 / 16",
-     "sub": "formatting alone looked perfect"
-    },
-    {
-     "label": "Supplied plans rewritten exactly at least once",
-     "value": "1 / 4",
-     "sub": "below the required 3 of 4"
-    },
-    {
-     "label": "Failed no-think samples that grew past the limit",
-     "value": "13 / 13",
-     "sub": "extra nicknames changed the supplied plan"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The original low-budget rewrites stayed below the pass line",
-     "chart_read": "Each group shows one interface attempt. The dark bar counts supplied plans with at least one exact rewrite; the comparison bar marks the three-of-four requirement.",
-     "chart_takeaway": "Neither original attempt reached the pass line, so this run correctly stopped; a later long-context follow-up showed the budgeted interface itself was recoverable."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "No-think repaired formatting inside the original setup",
-     "chart_read": "Bars count well-formatted and cut-off outputs among 16 tries. Turning reasoning off moves every output into the well-formatted bar and removes the cut-off bar.",
-     "chart_takeaway": "Perfect formatting did not make those no-think rewrites faithful, but the condition was not equivalent to adequately budgeted reasoning."
-    }
-   ]
-  },
-  "qwen35_4b_verified_macro_long_context_rerun": {
-   "verdict_tag": "The shortcut interface works; the terminal context ladder selected nothing",
-   "concept_primer": "A verified macro is a short nickname for an exact multi-step action. This study first separates two questions: can the model write the right nickname when the full plan is supplied, and does having those nicknames help it discover a plan for a new puzzle?",
-   "plain_question": "Once the model has enough room to reason, can exact reusable shortcuts improve new-puzzle accuracy beyond spending the same generation budget on more ordinary attempts?",
-   "plain_answer": "We still cannot answer the new-puzzle question. The corrected supplied-plan check passed on all 16 records, but fresh induction reached the reasoning boundary at every registered allowance. The terminal exact-capture 61k K=4 probe passed FULL-graph and live-KV gates yet still produced 40 exact loops, 8 unresolved contacts, and 4 answer-limit contacts among 48 samples. The selector ended pass=false with no selected budget. No K=12 matrix, semantic analysis, or macro claim was authorized, and no decoded or scored content was inspected.",
-   "why_it_matters": "Reaching a generation limit is missing evidence, and increasing the token cap without fitting scheduler concurrency can add recomputation rather than usable reasoning. This ladder now also shows that fitting cache and graph geometry does not guarantee useful termination. Stop increasing context, gate termination before reading accuracy, and test any loop intervention symmetrically in a fresh preregistered experiment while retaining the unresolved-contact and answer-limit gates.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Supplied plans rewritten exactly at least once",
-     "value": "16 / 16",
-     "sub": "the corrected record-level interface passed"
-    },
-    {
-     "label": "Diagnostic 49k termination",
-     "value": "14 unresolved / 34 loops",
-     "sub": "all 48 samples force-closed; 13 answers hit 512"
-    },
-    {
-     "label": "Diagnostic generation",
-     "value": "2,366,620 tokens",
-     "sub": "4,035.356 seconds, or 586.47 tokens/s"
-    },
-    {
-     "label": "Overcommitted cache demand",
-     "value": "2,433,024 vs 995,328",
-     "sub": "eligibility was revoked before the receipt"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Longer caps changed the failure mode, not evidence eligibility",
-     "chart_read": "Each group is a base-only termination run. Bars show the shares of samples left unresolved, classified as exact periodic loops, and reaching the answer limit; lower is better. The 16k and 32k groups have 144 samples each, while the diagnostic 49k probe has 48.",
-     "chart_takeaway": "Every sample at every allowance reached the reasoning boundary. The 49k max-seqs-64 probe had already been made diagnostic-only because its scheduler geometry overcommitted KV cache, so none of these rows is a macro-quality result."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Enough reasoning made exact shortcut rewrites usable",
-     "chart_read": "The dark bar counts supplied plans rewritten exactly at least once across four attempts; the comparison bar is the pre-set pass requirement.",
-     "chart_takeaway": "All 16 plans cleared the 12-plan requirement, repairing the original low-budget interface diagnosis."
-    }
-   ]
-  },
-  "qwen35_4b_verified_macro_capacity_fit_rerun": {
-   "verdict_tag": "The cache-fit 49k rung failed; implicit-capture 61k stopped pre-receipt",
-   "concept_primer": "Long-context batching needs two limits to agree: how long each sequence may become and how many such sequences the scheduler may keep active. A generous per-sequence allowance can still thrash if their combined block-rounded KV-cache demand exceeds the live cache.",
-   "plain_question": "Does fresh verified-macro induction terminate cleanly when vLLM concurrency is fitted to the live KV cache instead of retaining max-seqs 64 from a shorter-context setup?",
-   "plain_answer": "The fresh base-only K=4 probe at think@49,152 fit its live KV cache but still failed the content-blind termination gate. All 48 samples contacted the reasoning boundary: token-ID periodicity found 37 loops, 11 contacts remained unresolved, and 9 answers reached their limit. No decoded or scored content was inspected. The 61k attempt was stopped before a receipt after an audit found that vLLM's implicit sparse graph list covered only through width 8 rather than max-seqs 15; it left no reusable rows. Long-rung escalation moved to a separate exact-capture experiment.",
-   "why_it_matters": "This separates cache validity from graph coverage, throughput, and the research hypothesis. Max-seqs 19 fit the cache, yet the run was 19.6% slower than the predecessor's overcommitted max-seqs-64 diagnostic; the implicit capture lists also missed active widths 17-19 and 9-15. Cache-safe concurrency is necessary but not automatically throughput-optimal, and a failed termination probe remains a provisioning boundary rather than evidence against verified macros.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "49k termination",
-     "value": "11 unresolved / 37 loops",
-     "sub": "all 48 contacted the boundary; 9 answers hit 512"
-    },
-    {
-     "label": "Capacity-fit demand",
-     "value": "963,072 tokens",
-     "sub": "of 997,888 live tokens; 34,816 headroom"
-    },
-    {
-     "label": "Capacity-fit throughput",
-     "value": "471.754 tokens/s",
-     "sub": "19.6% below the old max-seqs-64 diagnostic"
-    },
-    {
-     "label": "61k implicit-capture attempt",
-     "value": "stopped pre-receipt",
-     "sub": "resolved graph maximum 8 vs active width 15; no reusable rows"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Capacity fitting moves worst-case demand below live KV capacity",
-     "chart_read": "For each scheduler setup, the dark bar is block-rounded worst-case cache demand and the comparison bar is measured live cache capacity. Demand above capacity implies eviction and recomputation risk; demand below capacity has explicit headroom.",
-     "chart_takeaway": "The predecessor could admit 48 long sequences demanding 2.43M cache tokens from about 995k. The completed 49k rerun capped concurrency at 19 and fit 963,072 tokens into 997,888, validating its geometry even though its termination gate failed."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Capacity fitting did not clear the 49k termination boundary",
-     "chart_read": "Bars show the shares of the 48 fresh K=4 samples classified as unresolved boundary contacts, exact periodic loops, and answer-limit contacts. Each is compared with its registered maximum.",
-     "chart_takeaway": "The cache-fit run still failed every termination threshold. Its 61k successor stopped before a receipt after the implicit graph geometry proved incomplete; no decoded or scored content was inspected."
-    }
-   ]
-  },
-  "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
-   "verdict_tag": "Exact runtime gates passed; the terminal context ladder still failed",
-   "concept_primer": "CUDA graphs accelerate repeated decode batch shapes, but asking vLLM for a maximum does not guarantee its implicit sparse capture list includes that active width. This follow-up freezes and verifies the exact graph-size list alongside live KV-cache capacity.",
-   "plain_question": "Does explicitly capturing every registered active batch width repair the long-context vLLM envelope enough for fresh verified-macro induction to clear its content-blind termination gate?",
-   "plain_answer": "Exact graph and cache resolution worked at both long rungs, but neither fresh K=4 probe terminated adequately. At 49k, all 48 samples reached the boundary: 38 exact loops, 10 unresolved contacts, and 6 answer-limit contacts at 491.396 sampled tokens/s. At terminal 61k, the counts were 40, 8, and 4 at 397.688 sampled tokens/s despite FULL graph coverage and 47,488 cache tokens of headroom. The selector ended pass=false with no selected budget. No K=12 arm, semantic analysis, or macro claim was authorized, and no decoded or scored content was inspected.",
-   "why_it_matters": "Binding live cache geometry and the resolved compilation configuration repaired the inference envelope but isolated a genuine termination problem: more context shifted a small number of unresolved and answer contacts into exact loops without clearing any registered gate, while throughput fell. The next study should stop increasing context and preregister one symmetric loop-control mechanism while preserving the unresolved-contact and answer-limit gates.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Exact-capture 49k termination",
-     "value": "10 unresolved / 38 loops",
-     "sub": "all 48 contacted the boundary; 6 answers hit 512"
-    },
-    {
-     "label": "Exact graph resolution",
-     "value": "[1, 2, 4, 8, 16, 19]",
-     "sub": "requested and resolved lists match; active width 19 covered"
-    },
-    {
-     "label": "Exact-capture throughput",
-     "value": "491.396 tokens/s",
-     "sub": "2,363,163 tokens in 4,809.081 seconds; descriptive +4.16%"
-    },
-    {
-     "label": "Terminal exact-capture 61k",
-     "value": "8 unresolved / 40 loops",
-     "sub": "4 answers hit 512; 397.688 tokens/s; pass=false"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Explicit graph lists cover every registered active width",
-     "chart_read": "Each group compares the scheduler's active batch width with vLLM's largest resolved full-decode graph. The implicit configurations stop short; the explicit configurations match exactly. Both exact groups are completed fresh probes.",
-     "chart_takeaway": "The follow-up repaired the compilation-envelope defect at both long rungs, so the terminal failure cannot be attributed to missing active-width graph coverage."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "More context increased loops without clearing termination",
-     "chart_read": "For each completed fresh K=4 probe, bars show the shares of 48 samples classified as unresolved boundary contacts, exact periodic loops, and answer-limit contacts. The registered maxima are 5%, 25%, and 5% respectively.",
-     "chart_takeaway": "The 61k probe slightly reduced unresolved and answer-limit contacts but increased the already-dominant loop share. The terminal selector therefore remained pass=false with no selected budget."
-    }
-   ]
-  },
-  "qwen35_4b_gauntlet_breadth_round1": {
-   "verdict_tag": "Broad self-practice moved the held-out benchmark",
-   "concept_primer": "We built a private training playground of twelve invented task worlds — tracking caravan cargo, probing hidden glyph machines, fixing tiny programs, navigating burrows — each with an automatic grader. The model practiced on its own verified successes from ten of the worlds, and we tested it on the two worlds it never practiced plus a completely separate held-out benchmark it has never seen any content from.",
-   "plain_question": "Does practicing many different agent-style tasks at once teach the model something general, or does each skill stay stuck to the task it was learned on, as every earlier experiment found?",
-   "plain_answer": "It generalizes — once the training signal points at the right spot. Practicing on its own correct answers verbatim changed nothing. The winning tweak taught the model to finish thinking and commit to a short final answer, even when its reasoning gets cut off mid-thought. Playground scores nearly quadrupled, the two never-practiced worlds improved just as much, and the held-out benchmark jumped from about 0.14 to 0.36-0.45 on two fresh test sets — roughly seven times the success bar we pre-registered. A separate hard-won lesson: our fast evaluation engine had been silently ignoring the trained weights, so two whole rounds initially looked like failures when the measurement itself was broken.",
-   "why_it_matters": "This is the first time any training method in this project has been shown to improve the blackbox benchmark at all, and it breaks the running rule that installed skills never transfer. It also establishes the working recipe — practice broadly, grade strictly, and concentrate learning on the moment of commitment — plus a permanent warning to verify that trained weights are actually loaded before trusting any evaluation."
-  },
-  "qwen35_4b_partial_structure_search": {
-   "verdict_tag": "The perfect pruning signal existed, but the model could not read it",
-   "concept_primer": "Imagine a maze with more than a million complete routes. A perfect map can keep only four promising routes at each step. This test asks whether the small model can imitate that map by judging unfinished routes.",
-   "plain_question": "Can the fixed small model recognize which unfinished program routes can still reach the right answer well enough to prune the search?",
-   "plain_answer": "No for this route description. The perfect checker reduced more than a million complete routes to four and kept a solution every time, but the model's thinking-based scores ranked sibling routes about as well as chance. A cheaper immediate score was slightly better, yet still far below the launch requirement. The planned full search and training follow-up were stopped.",
-   "why_it_matters": "A useful hidden signal is not automatically a usable model signal. Measuring rankings within the same problem prevented a misleading overall score from triggering a large, expensive search. It also showed that exact depth-five search already finishes quickly on this task family, so learned pruning must clear a real cost bar.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Perfect-checker development paths",
-     "value": "12 / 12",
-     "sub": "four retained leaves instead of 1,048,576; 262,144x compression"
-    },
-    {
-     "label": "Thinking route ranking",
-     "value": "50.6%",
-     "sub": "chance within each problem; cheaper immediate scoring reached 55.6%"
-    },
-    {
-     "label": "Exact depth-five reference",
-     "value": "112 seconds",
-     "sub": "60/60 pools contained a solution; visible-only choice succeeded on 56/60"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Ranking unfinished routes within each problem",
-     "chart_read": "For each method, the first bar measures whether viable routes rank above dead routes within the same problem; 50% is chance. The second bar measures how many viable children survive when only four are kept; taller is better.",
-     "chart_takeaway": "Thinking sits at chance and retains fewer viable children than the cheaper immediate score. Since neither clears the pre-set requirement, the experiment correctly stops before full search."
     }
    ]
   }

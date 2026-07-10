@@ -205,6 +205,14 @@
    ],
    "caveat": "date equals the corpus-import day (commit 42c23ac 2026-06-28 12:34 -0700), so flagged medium; no time-of-day evidence to prove it preceded import"
   },
+  "qwen35_4b_answer_potential_trace_sft": {
+   "start": "2026-07-10",
+   "end": "2026-07-10",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_balanced_discriminative_bridge": {
    "start": "2026-06-27",
    "end": "2026-06-27",
