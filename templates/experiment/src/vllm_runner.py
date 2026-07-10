@@ -21,7 +21,12 @@ Scientific invariants:
   are never inherited.
 * Budgeted thinking defaults to the repository's historical two-stage
   force-close protocol, not vLLM's semantically different native budget.
-* Seeds are stable under input reordering and are recorded per sample/stage.
+* ``answer_max_tokens`` directly caps forced continuations; consumers that need
+  a stage-independent allowance must gate natural ``n_answer_tokens`` too.
+* Seed derivation is stable under input reordering and recorded per sample/stage;
+  pre-Hopper sampled tokens are not batch-order invariant.
+* vLLM asynchronous scheduling is disabled so the scheduler mode is explicit.
+  This does not make pre-Hopper execution batch-invariant.
 * vLLM and Transformers samples are not RNG-identical.  Never mix backends
   between experimental arms or matched-compute baselines.
 """
@@ -64,7 +69,7 @@ if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-RUNNER_SCHEMA_VERSION = 2
+RUNNER_SCHEMA_VERSION = 3
 
 _MAMBA_CACHE_BLOCKS_RE = re.compile(
     r"max_num_seqs\b.*?(?:exceeds?|greater\s+than|larger\s+than|more\s+than)"
@@ -501,6 +506,11 @@ class VLLMRunner:
             "generation_config": "vllm",
             "max_logprobs": 20,
             "seed": 0,
+            # vLLM 0.24 auto-enables async scheduling.  Keep the simpler
+            # synchronous mode explicit for offline research.  On pre-Hopper
+            # GPUs, fixed request seeds still do not imply batch-invariant or
+            # cross-budget prefix-identical samples.
+            "async_scheduling": False,
         }
         if self.adapter_info is not None:
             engine_args.update(

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "infrastructure_failure_excluded",
+  "scheduler_mode": "vllm_0.24_auto_async",
+  "scientific_prompts_used": false,
+  "comparisons": [
+    {
+      "lower_budget": 2048,
+      "higher_budget": 4096,
+      "samples": 64,
+      "prefix_matches": 64,
+      "prefix_mismatches": 0
+    },
+    {
+      "lower_budget": 4096,
+      "higher_budget": 8192,
+      "samples": 64,
+      "prefix_matches": 32,
+      "prefix_mismatches": 32,
+      "mismatched_record_ids": [
+        "budget-calibration-02::designed_ceiling",
+        "budget-calibration-03::designed_ceiling"
+      ]
+    }
+  ],
+  "termination": {
+    "think_2048": {"cap_contacts": 64, "samples": 64, "answer_truncations": 15},
+    "think_4096": {"cap_contacts": 64, "samples": 64, "answer_truncations": 4},
+    "think_8192": {"cap_contacts": 12, "samples": 64, "answer_truncations": 1}
+  },
+  "artifact_sha256": {
+    "think_2048_jsonl": "e1407aeb45fd11da284c21aed992c6bd0b4c1d2edfe4b07e4a961197faa85888",
+    "think_4096_jsonl": "57141763740a6c8758769c6c96af1e2413e0aaea4f924c8243585b6fb8826118",
+    "think_8192_jsonl": "f17c9eda566542a754dc4feae502a40477ab5632cdfda2329957e8d46b3ee597",
+    "runner": "022f956ca5185fb67d5913b21465d1e465f6a1fee09067846731c87718d4527c"
+  },
+  "resolution": "Disable async_scheduling in the copied and template vLLM runner, bump the runner schema, and rerun every calibration tier from scratch."
+}

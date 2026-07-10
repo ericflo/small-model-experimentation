@@ -1,0 +1,537 @@
+{
+  "budget_tiers": [
+    {
+      "artifacts": {
+        "meta": "eafe07d748afa4c7e953b28f5df85d19df99dc5a6db643725c1c3395b2236fdf",
+        "preflight": "44ea85120ec5b3c84f868e02b37bf2c8a14610f1655b2e9b03eea514c7565cf1",
+        "rows": "40af94c61e796f997786de478375040b42b78af8149f0dbc072c02839bc76a1e"
+      },
+      "budget": 16384,
+      "prefix_audit_vs_previous_tier": null,
+      "termination": {
+        "adequate": true,
+        "answer_headroom_pass": true,
+        "answer_max_tokens": 512,
+        "answer_truncated_samples": [],
+        "answer_truncation_rate": 0.0,
+        "answer_truncations": 0,
+        "cap_contact_rate": 0.1875,
+        "cap_contact_samples": [
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-04::designed_ceiling",
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-05::designed_ceiling",
+            "sample_index": 0,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-06::designed_ceiling",
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-08::designed_ceiling",
+            "sample_index": 3,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-09::designed_ceiling",
+            "sample_index": 3,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-10::designed_ceiling",
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-11::designed_ceiling",
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-12::designed_ceiling",
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-13::designed_ceiling",
+            "sample_index": 3,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-14::designed_ceiling",
+            "sample_index": 0,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-14::designed_ceiling",
+            "sample_index": 1,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-15::designed_ceiling",
+            "sample_index": 1,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          }
+        ],
+        "cap_contacts": 12,
+        "headroom_required": false,
+        "loop_rate_pass": true,
+        "p99_answer_tokens": 18,
+        "p99_naturally_closed_thinking_tokens": 12054,
+        "p99_thinking_tokens": 16384,
+        "periodic_loop_contacts": 12,
+        "periodic_loop_rate": 0.1875,
+        "periodic_loop_samples": [
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-04::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 86,
+            "periodic_loop": true,
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-05::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 28,
+            "periodic_loop": true,
+            "sample_index": 0,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-06::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 26,
+            "periodic_loop": true,
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-08::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 66,
+            "periodic_loop": true,
+            "sample_index": 3,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-09::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 25,
+            "periodic_loop": true,
+            "sample_index": 3,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-10::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 34,
+            "periodic_loop": true,
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-11::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 13,
+            "periodic_loop": true,
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-12::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 248,
+            "periodic_loop": true,
+            "sample_index": 2,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-13::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 28,
+            "periodic_loop": true,
+            "sample_index": 3,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-14::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 38,
+            "periodic_loop": true,
+            "sample_index": 0,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-14::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 26,
+            "periodic_loop": true,
+            "sample_index": 1,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "interface-long-context-heldout-15::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 41,
+            "periodic_loop": true,
+            "sample_index": 1,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          }
+        ],
+        "raw_thinking_headroom_pass": false,
+        "samples": 64,
+        "selection_uses_output_content": false,
+        "thinking_budget": 16384,
+        "thinking_headroom_pass": true,
+        "unresolved_cap_contact_rate": 0.0,
+        "unresolved_cap_contact_samples": [],
+        "unresolved_cap_contacts": 0
+      }
+    }
+  ],
+  "eval_data_used": false,
+  "metrics": {
+    "macro_using_samples": 63,
+    "records": 16,
+    "samples": 64,
+    "successful_record_ids": [
+      "interface-long-context-heldout-00::designed_ceiling",
+      "interface-long-context-heldout-01::designed_ceiling",
+      "interface-long-context-heldout-02::designed_ceiling",
+      "interface-long-context-heldout-03::designed_ceiling",
+      "interface-long-context-heldout-04::designed_ceiling",
+      "interface-long-context-heldout-05::designed_ceiling",
+      "interface-long-context-heldout-06::designed_ceiling",
+      "interface-long-context-heldout-07::designed_ceiling",
+      "interface-long-context-heldout-08::designed_ceiling",
+      "interface-long-context-heldout-09::designed_ceiling",
+      "interface-long-context-heldout-10::designed_ceiling",
+      "interface-long-context-heldout-11::designed_ceiling",
+      "interface-long-context-heldout-12::designed_ceiling",
+      "interface-long-context-heldout-13::designed_ceiling",
+      "interface-long-context-heldout-14::designed_ceiling",
+      "interface-long-context-heldout-15::designed_ceiling"
+    ],
+    "successful_records": 16,
+    "termination": {
+      "adequate": true,
+      "answer_headroom_pass": true,
+      "answer_max_tokens": 512,
+      "answer_truncated_samples": [],
+      "answer_truncation_rate": 0.0,
+      "answer_truncations": 0,
+      "cap_contact_rate": 0.1875,
+      "cap_contact_samples": [
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-04::designed_ceiling",
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-05::designed_ceiling",
+          "sample_index": 0,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-06::designed_ceiling",
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-08::designed_ceiling",
+          "sample_index": 3,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-09::designed_ceiling",
+          "sample_index": 3,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-10::designed_ceiling",
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-11::designed_ceiling",
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-12::designed_ceiling",
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-13::designed_ceiling",
+          "sample_index": 3,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-14::designed_ceiling",
+          "sample_index": 0,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-14::designed_ceiling",
+          "sample_index": 1,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-15::designed_ceiling",
+          "sample_index": 1,
+          "stage1_finish_reason": "length",
+          "thinking_tokens": 16384
+        }
+      ],
+      "cap_contacts": 12,
+      "headroom_required": false,
+      "loop_rate_pass": true,
+      "p99_answer_tokens": 18,
+      "p99_naturally_closed_thinking_tokens": 12054,
+      "p99_thinking_tokens": 16384,
+      "periodic_loop_contacts": 12,
+      "periodic_loop_rate": 0.1875,
+      "periodic_loop_samples": [
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-04::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 86,
+          "periodic_loop": true,
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-05::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 28,
+          "periodic_loop": true,
+          "sample_index": 0,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-06::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 26,
+          "periodic_loop": true,
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-08::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 66,
+          "periodic_loop": true,
+          "sample_index": 3,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-09::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 25,
+          "periodic_loop": true,
+          "sample_index": 3,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-10::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 34,
+          "periodic_loop": true,
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-11::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 13,
+          "periodic_loop": true,
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-12::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 248,
+          "periodic_loop": true,
+          "sample_index": 2,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-13::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 28,
+          "periodic_loop": true,
+          "sample_index": 3,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-14::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 38,
+          "periodic_loop": true,
+          "sample_index": 0,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-14::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 26,
+          "periodic_loop": true,
+          "sample_index": 1,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        },
+        {
+          "forced_close": true,
+          "id": "interface-long-context-heldout-15::designed_ceiling",
+          "match_rate": 1.0,
+          "period_tokens": 41,
+          "periodic_loop": true,
+          "sample_index": 1,
+          "stage1_finish_reason": "length",
+          "tail_tokens": 8192,
+          "thinking_tokens": 16384
+        }
+      ],
+      "raw_thinking_headroom_pass": false,
+      "samples": 64,
+      "selection_uses_output_content": false,
+      "thinking_budget": 16384,
+      "thinking_headroom_pass": true,
+      "unresolved_cap_contact_rate": 0.0,
+      "unresolved_cap_contact_samples": [],
+      "unresolved_cap_contacts": 0
+    },
+    "valid_samples": 63
+  },
+  "pass": true,
+  "requirements": {
+    "successful_records": 12,
+    "termination_adequate": true
+  },
+  "schema_version": 1,
+  "selected_thinking_budget": 16384,
+  "thinking": "budget"
+}

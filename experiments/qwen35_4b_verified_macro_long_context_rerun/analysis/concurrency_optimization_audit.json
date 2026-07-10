@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "pre_score_compute_optimization",
+  "content_or_correctness_inspected": false,
+  "calibration_think_16384": {
+    "samples": 64,
+    "naturally_closed_samples": 55,
+    "periodic_loop_samples": 9,
+    "unresolved_cap_samples": 0,
+    "answer_truncations": 0,
+    "p99_naturally_closed_thinking_tokens": 12564,
+    "headroom_fraction": 0.766846
+  },
+  "heldout_interface_think_32768": {
+    "records_covered": 16,
+    "records": 16,
+    "valid_samples": 64,
+    "periodic_loop_samples": 9,
+    "unresolved_cap_samples": 0,
+    "answer_truncations": 0
+  },
+  "aborted_smoke": {
+    "arm": "base",
+    "thinking_budget": 32768,
+    "elapsed_decode_minutes_approx": 22,
+    "rows_returned": 0,
+    "outputs_inspected": 0
+  },
+  "engine": {
+    "kv_cache_tokens": 995328,
+    "old_max_num_seqs": 32,
+    "new_max_num_seqs": 64,
+    "max_model_len": 65536
+  },
+  "artifact_sha256": {
+    "think_16384_calibration": "08023e1fa379c6a9d9844e2f203224979bac9ab65c8b382d3980611d6362ff08",
+    "think_32768_interface": "9174057fd2881766eff067455944c49ae73feefc2906ae9230286e156375fc41",
+    "aborted_base_preflight": "6c9c059202989781d1c4910bc1f4c56accec1d79cd82f3ef11e72c0c2a8df1a8"
+  },
+  "resolution": "Confirm think@16384 at max_num_seqs=64 before rerunning heldout interface and the complete smoke matrix."
+}

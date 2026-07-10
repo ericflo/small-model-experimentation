@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "prefix_gate_invalidated",
+  "scheduler_mode": "vllm_0.24_async_scheduling_false",
+  "scientific_prompts_used": false,
+  "comparison": {
+    "lower_budget": 2048,
+    "higher_budget": 4096,
+    "samples": 64,
+    "prefix_matches": 32,
+    "prefix_mismatches": 32,
+    "mismatched_record_ids": [
+      "budget-calibration-02::designed_ceiling",
+      "budget-calibration-03::designed_ceiling"
+    ]
+  },
+  "termination": {
+    "think_2048": {"cap_contacts": 64, "samples": 64, "answer_truncations": 16},
+    "think_4096": {"cap_contacts": 61, "samples": 64, "answer_truncations": 5}
+  },
+  "artifact_sha256": {
+    "think_2048_jsonl": "33036f75d2c90694910cf2c40fed72ba8fc2ff6f9f74ab2e98e870ac53a6e646",
+    "think_4096_jsonl": "5558d2cda0a62f6945ce6477f3fa09b45b4858927f374b32287e23ec16fac0ec",
+    "runner": "fd9972bdcb3a9e8b9841b45ed8e2849017a6e80b601e924817cdaaa5144b8782"
+  },
+  "resolution": "Retain prefix comparison as a diagnostic only. Select tiers solely from frozen termination metadata as originally intended."
+}

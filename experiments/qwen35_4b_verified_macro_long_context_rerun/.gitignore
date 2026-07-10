@@ -1,0 +1,9 @@
+# Scientific smoke rows are canonical in the receipt-verified external store.
+/runs/smoke_tiers/
+/runs/smoke_budget_probes/
+/runs/smoke/
+
+# Standard local debris.
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/

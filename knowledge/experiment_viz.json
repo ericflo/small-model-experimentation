@@ -44753,6 +44753,55 @@
      "source": "reports/report.md (Results); analysis/interface_v3_audit.json"
     }
    ]
+  },
+  "qwen35_4b_verified_macro_long_context_rerun": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Fresh induction outgrew a 16k budget that passed setup checks",
+     "categories": [
+      "plan-given calibration",
+      "plan-given interface",
+      "fresh induction base"
+     ],
+     "series": [
+      {
+       "label": "cap contact without exact-repeat tail",
+       "values": [0.046875, 0.0, 0.9097222222222222]
+      },
+      {
+       "label": "answer cutoff",
+       "values": [0.0, 0.0, 0.4166666666666667]
+      }
+     ],
+     "y_label": "Share of samples",
+     "y_format": "percent01",
+     "note": "All three workloads used think@16,384. The fresh-task row was rejected before scoring and escalated; reaching the generation limit is setup evidence, not a negative macro result.",
+     "source": "analysis/budget_selection.json; analysis/interface_gate.json; analysis/scientific_smoke_16k_termination_audit.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Long-context reasoning cleared every supplied-plan record",
+     "categories": [
+      "think@16k interface"
+     ],
+     "series": [
+      {
+       "label": "records with an exact rewrite",
+       "values": [16]
+      },
+      {
+       "label": "records required to pass",
+       "values": [12]
+      }
+     ],
+     "y_label": "Records (16 tested)",
+     "y_format": "number",
+     "note": "The supplied-plan K=4 gate passed at the record level. This repairs the parent's apparent low-budget interface failure but does not establish fresh induction value.",
+     "source": "analysis/interface_gate.json"
+    }
+   ]
   }
  }
 }

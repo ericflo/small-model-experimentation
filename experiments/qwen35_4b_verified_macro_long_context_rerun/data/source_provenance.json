@@ -1,0 +1,92 @@
+{
+  "copied_files": [
+    {
+      "path": "data/construction_corpus.json",
+      "sha256": "b32a6608923bd6068069432efa3856bd6fb29068681e7cc34b03d4a72e891e94",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/construction_corpus.json"
+    },
+    {
+      "path": "data/cpu_gate.json",
+      "sha256": "4372a1e268ab718f66e8f7dd2fb3946e39ab1bed2e42a7581911c5db180fa08b",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/cpu_gate.json"
+    },
+    {
+      "path": "data/dataset_manifest.json",
+      "sha256": "bc58c4d5aab11a0ce6542668a42af7840202ff67b4b9f40167c7d32c3e99a51f",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/dataset_manifest.json"
+    },
+    {
+      "path": "data/demonstrations.json",
+      "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/demonstrations.json"
+    },
+    {
+      "path": "data/libraries.json",
+      "sha256": "a2ae3663753a3a0d0c9614a5d7c1d250506c74fd7879e11e99b66f5c1e43f865",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/libraries.json"
+    },
+    {
+      "path": "data/proposal_view.json",
+      "sha256": "206343ac2d643edc94b237b01a5bf5cb9e134e8b1f56affa672eaedc6fc2e011",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/proposal_view.json"
+    },
+    {
+      "path": "data/tasks.json",
+      "sha256": "82fbbd57e26fd392aa8f30ec6f26d370dc08dd78b3279bed6ee2e2174aea5073",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/tasks.json"
+    },
+    {
+      "path": "data/smoke_v1_frozen/construction_corpus.json",
+      "sha256": "b32a6608923bd6068069432efa3856bd6fb29068681e7cc34b03d4a72e891e94",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/construction_corpus.json"
+    },
+    {
+      "path": "data/smoke_v1_frozen/cpu_gate.json",
+      "sha256": "a0f35b2bf5b9df221c0651fa0c7519bb5986f7482deb4a2874f89bb31fb698f1",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/cpu_gate.json"
+    },
+    {
+      "path": "data/smoke_v1_frozen/dataset_manifest.json",
+      "sha256": "23a41cd96909c7bd01e3692ad2145d088db837505772ca53eb381ffca6065312",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/dataset_manifest.json"
+    },
+    {
+      "path": "data/smoke_v1_frozen/demonstrations.json",
+      "sha256": "1531b2722c5dc64530cbafda3e20a3de8a52ab537e50dc35ee4ec50a9fae06cf",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/demonstrations.json"
+    },
+    {
+      "path": "data/smoke_v1_frozen/libraries.json",
+      "sha256": "a2ae3663753a3a0d0c9614a5d7c1d250506c74fd7879e11e99b66f5c1e43f865",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/libraries.json"
+    },
+    {
+      "path": "data/smoke_v1_frozen/proposal_view.json",
+      "sha256": "206343ac2d643edc94b237b01a5bf5cb9e134e8b1f56affa672eaedc6fc2e011",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/proposal_view.json"
+    },
+    {
+      "path": "data/smoke_v1_frozen/tasks.json",
+      "sha256": "85f684a4ce709f10baca39c8a67b4c7b07d42e24fd13990c955a2c769fc4aa75",
+      "source_path": "experiments/qwen35_4b_verified_macro_invention/data/smoke_v1_frozen/tasks.json"
+    }
+  ],
+  "copy_verification": "byte_identical",
+  "created_on": "2026-07-09",
+  "excluded_parent_artifacts": [
+    "runs/",
+    "analysis/",
+    "archive/"
+  ],
+  "freshness_boundary": {
+    "full_evaluation_prompted_in_parent": false,
+    "full_evaluation_sha256": "16838c0b8b85b105023b72e3459035b78bcf20bf5f3e28f00ed7c93311680c24",
+    "historical_smoke_v1_prompted_in_parent": true,
+    "v2_smoke_prompted_in_parent": false,
+    "v2_smoke_sha256": "cf2467a05bd11d279e692c30a64a0a3508a9ccde7bc2979ba6f6addb4a3ff5db"
+  },
+  "notes": "Scientific inputs are inherited exactly so this follow-up changes the inference envelope rather than the substrate. Parent outputs are not part of this result.",
+  "schema_version": 1,
+  "source_commit": "1c8c5bbb81d2a67618891597205ceb2f40f498d8",
+  "source_experiment": "qwen35_4b_verified_macro_invention"
+}

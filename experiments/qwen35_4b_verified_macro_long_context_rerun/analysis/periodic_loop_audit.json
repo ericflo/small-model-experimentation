@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "status": "train_only_setup_diagnosis",
+  "scientific_prompts_used": false,
+  "thinking_budget": 32768,
+  "samples": 64,
+  "naturally_closed_samples": 55,
+  "periodic_loop_samples": 9,
+  "unresolved_cap_samples": 0,
+  "answer_truncations": 0,
+  "max_naturally_closed_thinking_tokens": 12564,
+  "periodic_tail": {
+    "tail_tokens": 8192,
+    "maximum_period_tokens": 2048,
+    "minimum_match_rate": 0.99,
+    "observed_match_rates": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+    "observed_period_tokens": [66, 31, 5, 30, 32, 26, 232, 19, 318]
+  },
+  "artifact_sha256": {
+    "rows": "e6041f9cc9e223842f860d61198e6b98e7844ebfb13662f1840334c0e4be6254",
+    "meta": "cea713eb8e30579a88c418cdb012ee9de4f8d404a6464828f74113de16e0c024"
+  },
+  "resolution": "Use think@32768. Treat only automatically proven periodic-tail contacts as loop termination; every other cap contact remains unresolved censoring."
+}

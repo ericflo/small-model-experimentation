@@ -1,0 +1,97 @@
+# Frozen follow-up protocol. The task/library artifacts are copied byte-for-byte
+# from parent commit 1c8c5bbb81d2a67618891597205ceb2f40f498d8.
+model: Qwen/Qwen3.5-4B
+seeds:
+  data: 20260709
+  smoke_v2: 20260710
+  proposal_view: 417
+  macro_random: 991
+  macro_random_draws: [991, 992, 993, 994, 995]
+  qwen_random_draws: [1091, 1092, 1093, 1094, 1095]
+  vllm_calibration: 1601
+  vllm_proposal: 1701
+  vllm_solver: 2701
+data:
+  smoke_attempt: 2
+  train_programs: 800
+  proposal_view_programs: 150
+  solver_demonstrations: 3
+  demonstration_io_examples: 2
+  smoke_tasks_per_split: 6
+  full_reuse_tasks: 80
+  full_no_reuse_tasks: 40
+  visible_examples: 8
+  hidden_examples: 8
+  probe_inputs: 8
+  eval_base_depths: [5]
+macros:
+  count: 8
+  min_expansion: 2
+  max_expansion: 3
+  min_train_support: 3
+inference:
+  backend: vllm
+  thinking: budget
+  thinking_budget_ladder: [16384, 32768, 49152, 61440]
+  answer_max_tokens: 512
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  macro_k: 12
+  base_max_k: 24
+  scientific_probe_k: 4
+  proposal_n: 16
+  calibration_k: 16
+  smoke_arms: [base, designed_ceiling]
+  interface_k: 4
+  arms: [base, mined, mined_hint, qwen_ranked, random_0, random_1, random_2, random_3, random_4, designed_ceiling]
+  max_model_len: 65536
+  max_num_seqs: 64
+  max_num_batched_tokens: 32768
+context_envelope:
+  proposal_record_sha256: df4735015e69149acba33eab02156ed56252ddb512a7bc669efc99b3a1c51e7d
+  proposal_max_prompt_tokens: 3478
+  forced_close_tokens: 2
+  minimum_headroom_tokens: 104
+scientific_smoke:
+  external_root: /workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/scientific_smoke_v1
+full_run:
+  external_root: /workspace/large_artifacts/qwen35_4b_verified_macro_long_context_rerun/full
+  triplets: 40
+  base_shards: 20
+  base_tasks_per_shard: 6
+  macro_shards: 10
+  macro_tasks_per_shard: 12
+  completions_per_shard: 144
+  base_early_unresolved: 144
+  base_early_answer_limit: 144
+  base_early_periodic_loops: 721
+  macro_early_unresolved: 72
+  macro_early_answer_limit: 72
+  macro_early_periodic_loops: 361
+decision:
+  primary_min_delta: 0.10
+  callable_vs_hint_min_delta: 0.05
+  mined_vs_random_min_delta: 0.05
+  qwen_vs_random_min_delta: 0.05
+  qwen_within_mined: 0.05
+  qwen_required_verified_macros: 8
+  qwen_min_exclusive_correct: 2
+  bootstrap_repetitions: 10000
+  bootstrap_seed: 8102
+  smoke_min_parse_rate: 0.50
+  smoke_matched_k: 12
+  smoke_min_macro_tasks: 2
+  smoke_max_answer_truncation: 0.05
+  budget_max_cap_contact: 0.05
+  budget_max_answer_truncation: 0.05
+  budget_p99_thinking_fraction: 0.80
+  budget_p99_answer_fraction: 0.50
+  loop_override_min_budget: 16384
+  loop_tail_tokens: 8192
+  loop_max_period_tokens: 2048
+  loop_min_match_rate: 0.99
+  loop_max_rate: 0.25
+  interface_records: 16
+  interface_min_successful_records: 12
+  scored_max_cap_contact: 0.05

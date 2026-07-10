@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_verified_macro_long_context_rerun",
+  "inspection_boundary": {
+    "fresh_smoke_or_full_text_inspected": false,
+    "basis": "completed train-only calibration/interface runner counts, frozen task/arm/K counts, and file sizes"
+  },
+  "completed_16k_reference_workloads": {
+    "calibration": {
+      "completions": 64,
+      "sampled_tokens": 452847,
+      "mean_sampled_tokens_per_completion": 7075.734375,
+      "generation_seconds": 368.52119938097894,
+      "sampled_tokens_per_second": 1228.8221159614882
+    },
+    "interface": {
+      "completions": 64,
+      "sampled_tokens": 557517,
+      "mean_sampled_tokens_per_completion": 8711.203125,
+      "generation_seconds": 429.5095323044807,
+      "sampled_tokens_per_second": 1298.0317270462217,
+      "rows_bytes": 7447632
+    }
+  },
+  "frozen_full_matrix": {
+    "tasks": 120,
+    "reuse_tasks": 80,
+    "no_reuse_tasks": 40,
+    "base_completions": 2880,
+    "completions_without_qwen_library": 14400,
+    "arms_without_qwen_library": 9,
+    "completions_with_qwen_library": 23040,
+    "arms_with_qwen_library": 15
+  },
+  "projection_at_16k_reference_distribution": {
+    "without_qwen_library": {
+      "sampled_tokens_low": 101890575,
+      "sampled_tokens_high": 125441325,
+      "generation_hours_low": 21.80450362673775,
+      "generation_hours_high": 28.35627064925974
+    },
+    "with_qwen_library": {
+      "sampled_tokens_low": 163024920,
+      "sampled_tokens_high": 200706120,
+      "generation_hours_low": 34.88720580278039,
+      "generation_hours_high": 45.37003303881559
+    },
+    "scope_warning": "These are pre-smoke 16k reference projections, not bounds. A selected 32k-or-higher scientific protocol can cost materially more."
+  },
+  "artifact_projection": {
+    "observed_interface_rows_bytes_per_completion": 116369.25,
+    "raw_15_arm_tier_bytes_at_observed_density": 2681147520,
+    "copy_promotion_would_duplicate_selected_tier": true,
+    "decision": "full raw rows must be sharded, resumable, canonical in external storage, and represented in git by checksummed manifests plus compact derived results"
+  }
+}

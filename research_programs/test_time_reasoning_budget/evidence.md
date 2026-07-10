@@ -26,6 +26,9 @@
   (per-layer linear probes on answer-token activations) — the interpretability/internal-signal angle.
 - [`qwen35_4b_thinking_content_vs_compute`](../../experiments/qwen35_4b_thinking_content_vs_compute/reports/report.md)
   (foreign-task-thinking ladder) — the decisive content control.
+- [`qwen35_4b_verified_macro_long_context_rerun`](../../experiments/qwen35_4b_verified_macro_long_context_rerun/)
+  (contamination-free procedural macro induction) — a workload-shift stress test for budget
+  calibration and anti-censoring, still in progress.
 
 ## Confirmed Claims
 
@@ -51,6 +54,14 @@
   task's thinking) before claiming the gain is "reasoning."
 - The exact optimum (1024) and the never-solved-bucket effect (3/9 tasks) rest on small n /
   single-seed; treat as suggestive, not pinned.
+- **Reasoning budgets do not automatically transfer across workload classes within one
+  substrate.** In the
+  verified-macro follow-up, a train-only plan-given calibration selected think@16,384 and a
+  disjoint plan-given interface passed 16/16 records with zero unresolved caps. The fresh induction
+  base at the identical budget then contacted the cap in 144/144 samples; only 13 were exact loops,
+  leaving 131/144 unresolved and 60 answer-stage truncations. This is setup evidence, not a task
+  result: calibrate on the actual workload class, gate termination before correctness, and escalate
+  rather than interpreting a cap-bound score.
 - **The model uses thinking as CONTENT (separability probe + foreign control).** Linear probes show
   correctness is moderately decodable from the answer-token activation (AUC 0.64–0.76). The
   foreign-task-thinking ladder is decisive: splicing a *different* task's thinking collapses accuracy to

@@ -1,0 +1,123 @@
+{
+  "eval_data_used": false,
+  "pass": true,
+  "records": 4,
+  "samples_per_record": 16,
+  "schema_version": 1,
+  "selected_thinking_budget": 16384,
+  "selection_rule": "smallest rung passing cap, truncation, and token-headroom metadata gates",
+  "selection_uses_output_content": false,
+  "tiers": [
+    {
+      "artifacts": {
+        "meta": "a2b62877840ad590e68629b9a807fc51118055db8160a0e9f1aa63627e9bf52a",
+        "preflight": "e8148474a29a9525b85edf9ca83a05ecab8b3d889663c0e9b16a08ccba857942",
+        "rows": "d13ca30c8f9550b17c9d455d0a459024424a58f996e9472d323556c4318f49df"
+      },
+      "budget": 16384,
+      "metrics": {
+        "adequate": true,
+        "answer_headroom_pass": true,
+        "answer_max_tokens": 512,
+        "answer_truncated_samples": [],
+        "answer_truncation_rate": 0.0,
+        "answer_truncations": 0,
+        "cap_contact_rate": 0.0625,
+        "cap_contact_samples": [
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "sample_index": 1,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "sample_index": 5,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "sample_index": 6,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "sample_index": 13,
+            "stage1_finish_reason": "length",
+            "thinking_tokens": 16384
+          }
+        ],
+        "cap_contacts": 4,
+        "headroom_required": true,
+        "loop_rate_pass": true,
+        "p99_answer_tokens": 17,
+        "p99_naturally_closed_thinking_tokens": 11629,
+        "p99_thinking_tokens": 16384,
+        "periodic_loop_contacts": 1,
+        "periodic_loop_rate": 0.015625,
+        "periodic_loop_samples": [
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "match_rate": 1.0,
+            "period_tokens": 92,
+            "periodic_loop": true,
+            "sample_index": 1,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          }
+        ],
+        "raw_thinking_headroom_pass": false,
+        "samples": 64,
+        "selection_uses_output_content": false,
+        "thinking_budget": 16384,
+        "thinking_headroom_pass": true,
+        "unresolved_cap_contact_rate": 0.046875,
+        "unresolved_cap_contact_samples": [
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "match_rate": null,
+            "period_tokens": null,
+            "periodic_loop": false,
+            "sample_index": 5,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "match_rate": null,
+            "period_tokens": null,
+            "periodic_loop": false,
+            "sample_index": 6,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          },
+          {
+            "forced_close": true,
+            "id": "budget-calibration-02::designed_ceiling",
+            "match_rate": null,
+            "period_tokens": null,
+            "periodic_loop": false,
+            "sample_index": 13,
+            "stage1_finish_reason": "length",
+            "tail_tokens": 8192,
+            "thinking_tokens": 16384
+          }
+        ],
+        "unresolved_cap_contacts": 3
+      },
+      "prefix_audit_vs_previous_tier": null
+    }
+  ]
+}

@@ -8,6 +8,15 @@ outputs valid, macro-using, and non-truncated, but only 1/4 records reproduced t
 exactly. The registered stop rule fired before any fresh induction prompt. This experiment is
 closed with the verified-macro hypothesis unresolved and no claim-ledger update.
 
+## Follow-up context (2026-07-10)
+
+The additive long-context follow-up
+[`qwen35_4b_verified_macro_long_context_rerun`](../../qwen35_4b_verified_macro_long_context_rerun/)
+later passed a disjoint 16-record plan-given gate at think@16,384: every record had at least one
+exact macro-using rewrite, with no unresolved cap contact or answer truncation. The historical
+numbers below are unchanged. Their proper scope is the two original low-compute interfaces, not a
+general inability to place verified aliases.
+
 ## Research Program Fit
 
 The question remains attached to `operator_and_skill_inventories`, with secondary relevance to

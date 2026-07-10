@@ -3,6 +3,13 @@
 **Status:** stopped after the final task-independent interface gate failed. No fresh induction
 smoke or full evaluation was run; the verified-macro hypothesis remains unresolved.
 
+**2026-07-10 follow-up:** the separate
+[`qwen35_4b_verified_macro_long_context_rerun`](../qwen35_4b_verified_macro_long_context_rerun/)
+later cleared a broader, disjoint plan-given interface gate on 16/16 records under adequately
+budgeted vLLM inference. This directory's historical outputs and reported numbers remain unchanged;
+the additive forward link does not rewrite its registered low-budget stop. That stop should not be
+read as a durable model-level shortcut-interface failure.
+
 ## Research program
 
 - Primary: `operator_and_skill_inventories`

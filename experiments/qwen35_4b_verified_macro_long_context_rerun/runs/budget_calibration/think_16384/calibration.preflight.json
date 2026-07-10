@@ -1,0 +1,40 @@
+{
+  "generation_reserve_tokens": 16898,
+  "max_model_len": 65536,
+  "max_prompt_plus_reserve_tokens": 17113,
+  "max_prompt_tokens": 215,
+  "min_prompt_tokens": 212,
+  "n_records": 4,
+  "pass": true,
+  "records": [
+    {
+      "id": "budget-calibration-00::designed_ceiling",
+      "input_record_sha256": "89fbfcf34de1375714b66551f7da3cca106f5a293789a03fb01d8ff62d8ca916",
+      "prompt_plus_reserve_tokens": 17113,
+      "prompt_tokens": 215,
+      "rendered_prompt_sha256": "4a8ee30e44edd1518253c1f7594ffce3dc434a6b37008bf06fc09b1aad925148"
+    },
+    {
+      "id": "budget-calibration-01::designed_ceiling",
+      "input_record_sha256": "8ab75686fcd95cac5a31196ac137d882370a7633b2813771c5b32c86fd49a3ba",
+      "prompt_plus_reserve_tokens": 17111,
+      "prompt_tokens": 213,
+      "rendered_prompt_sha256": "41fbd31f6031acdea9bb4f1c19369046a42644075a19d294dbc6c12a4544f58a"
+    },
+    {
+      "id": "budget-calibration-02::designed_ceiling",
+      "input_record_sha256": "8c462e0479d712a2db9b4473ad598f152f85b649d877478509588dd4df453fc3",
+      "prompt_plus_reserve_tokens": 17112,
+      "prompt_tokens": 214,
+      "rendered_prompt_sha256": "ffe0ca6b09d2f957c92880b78afebe817597b0205ce18f93d330604cfb8d6ed2"
+    },
+    {
+      "id": "budget-calibration-03::designed_ceiling",
+      "input_record_sha256": "eeeac83ef37e126493296eeb493cb72a65155f7d085183c74a47fdb547cf2916",
+      "prompt_plus_reserve_tokens": 17110,
+      "prompt_tokens": 212,
+      "rendered_prompt_sha256": "4dfed5714b40b198609ca268e2847063b2c1d875524478411487c663aa07e321"
+    }
+  ],
+  "schema_version": 1
+}

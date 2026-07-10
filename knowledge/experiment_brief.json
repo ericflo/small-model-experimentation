@@ -10596,12 +10596,12 @@
    ]
   },
   "qwen35_4b_verified_macro_invention": {
-   "verdict_tag": "Named shortcuts failed their interface check",
+   "verdict_tag": "Original shortcut test was budget-censored",
    "concept_primer": "Imagine replacing a repeated two-step instruction with a short nickname. Before asking whether those nicknames help solve new puzzles, we first handed the model the full correct instruction list and checked whether it could rewrite that list faithfully.",
    "plain_question": "Can the model reliably rewrite a supplied five-step plan using exact named shortcuts?",
-   "plain_answer": "No. Letting it reason caused most answers to run out of space. Turning reasoning off fixed the formatting completely, but only one of four supplied plans had even one fully correct rewrite. The model often chose the right first nickname and then added unrelated nicknames that changed the plan.",
-   "why_it_matters": "A well-formatted tool call is not necessarily a correct tool call. Test a new action language on plans whose answers are already known before spending compute on whether that language helps solve harder problems.",
-   "verdict_tone": "negative",
+   "plain_answer": "This original run could not answer. Its reasoning-enabled attempts hit their token limits, while turning reasoning off fixed formatting but changed the computation being tested. A dedicated long-context follow-up later rewrote all 16 held-out supplied plans exactly at least once, showing that this stop was a setup limit rather than a durable shortcut-interface failure.",
+   "why_it_matters": "A well-formatted tool call is not necessarily correct, but a token-capped one is not clean negative evidence either. Test a new action language on known plans, provision the real workload, and separate resource exhaustion from semantic failure before judging harder tasks.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
      "label": "Original task-smoke answers cut off",
@@ -10627,15 +10627,59 @@
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Exact rewrites stayed below the pass line",
+     "chart_plain_title": "The original low-budget rewrites stayed below the pass line",
      "chart_read": "Each group shows one interface attempt. The dark bar counts supplied plans with at least one exact rewrite; the comparison bar marks the three-of-four requirement.",
-     "chart_takeaway": "Neither reasoning mode reached the pass line, so the harder shortcut experiment never started."
+     "chart_takeaway": "Neither original attempt reached the pass line, so this run correctly stopped; a later long-context follow-up showed the budgeted interface itself was recoverable."
     },
     {
      "index": 1,
-     "chart_plain_title": "Formatting was repaired, correctness was not",
+     "chart_plain_title": "No-think repaired formatting inside the original setup",
      "chart_read": "Bars count well-formatted and cut-off outputs among 16 tries. Turning reasoning off moves every output into the well-formatted bar and removes the cut-off bar.",
-     "chart_takeaway": "Perfect formatting did not make the rewrites faithful: the separate exact checker still rejected most of them."
+     "chart_takeaway": "Perfect formatting did not make those no-think rewrites faithful, but the condition was not equivalent to adequately budgeted reasoning."
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_long_context_rerun": {
+   "verdict_tag": "Longer reasoning repaired the shortcut interface",
+   "concept_primer": "A verified macro is a short nickname for an exact multi-step action. This study first separates two questions: can the model write the right nickname when the full plan is supplied, and does having those nicknames help it discover a plan for a new puzzle?",
+   "plain_question": "Once the model has enough room to reason, can exact reusable shortcuts improve new-puzzle accuracy beyond spending the same generation budget on more ordinary attempts?",
+   "plain_answer": "We cannot answer the new-puzzle question yet. The corrected supplied-plan check passed on all 16 records, so the old interface stop was not a durable limitation. But the first fresh-puzzle arm outgrew the same 16k reasoning allowance: 131 of 144 attempts hit the reasoning limit without an exact-repeat tail, and 60 answers were cut off. Those rows were discarded before scoring, and the vLLM run is escalating to a larger registered allowance.",
+   "why_it_matters": "Reaching a generation limit is missing evidence, not task failure. Calibrate on the real workload, check reasoning and answer cutoffs before reading accuracy, and keep shortcuts and the more-sampling baseline on one shared inference envelope.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Supplied plans rewritten exactly at least once",
+     "value": "16 / 16",
+     "sub": "the corrected record-level interface passed"
+    },
+    {
+     "label": "Non-loop reasoning-limit contacts: setup to fresh",
+     "value": "4.7% -> 91.0%",
+     "sub": "the setup check did not transfer to induction"
+    },
+    {
+     "label": "Fresh-arm answers cut off",
+     "value": "60 / 144",
+     "sub": "the 16k rung was excluded before scoring"
+    },
+    {
+     "label": "Measured vLLM generation rate",
+     "value": "1,118 tok/s",
+     "sub": "2.39M sampled tokens in the rejected arm"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Setup checks underestimated fresh puzzles' reasoning needs",
+     "chart_read": "Each group is a 16k workload. Bars show reasoning-limit contacts not classified as exact-repeat tails and answers that reached their final limit; lower is better.",
+     "chart_takeaway": "The plan-given checks were adequately provisioned, but fresh induction had 91% non-loop cap contacts and 42% answer cutoffs, so none of that rung's scores counted."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Enough reasoning made exact shortcut rewrites usable",
+     "chart_read": "The dark bar counts supplied plans rewritten exactly at least once across four attempts; the comparison bar is the pre-set pass requirement.",
+     "chart_takeaway": "All 16 plans cleared the 12-plan requirement, repairing the original low-budget interface diagnosis."
     }
    ]
   }

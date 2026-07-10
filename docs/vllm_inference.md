@@ -117,10 +117,17 @@ throughput.
 - `--thinking natural --max-tokens N` lets the model close its reasoning naturally within `N` total
   generated tokens.
 - `--thinking budget --thinking-budget B --answer-max-tokens A` reproduces the repository's
-  historical two-stage protocol: sample up to `B` reasoning tokens, inject the exact
-  `</think>\n\n` token sequence when necessary, then generate an answer capped at `A` tokens.
+  historical force-close protocol: the first call may naturally close reasoning and answer within
+  `B` sampled tokens; otherwise the runner injects the exact `</think>\n\n` sequence and generates
+  a continuation capped at `A` tokens.
 - `--shuffle-thinking` deterministically shuffles the retained reasoning tokens before the forced
   close. It exists only for the established content-control experiment.
+
+Runner schema 3 directly enforces `A` only on the forced continuation. A naturally closed first
+call can contain `A` or more answer tokens while ending normally. Any experiment claiming a shared
+answer allowance must conservatively classify `n_answer_tokens >= A` as an answer-limit contact (in
+addition to a stage-two `length` finish) and reject/escalate that tier. Do not infer a nonbinding
+answer allowance from `truncated=false` alone.
 
 Do not substitute vLLM's native `thinking_token_budget` for an existing two-stage result. It has
 different semantics and runner-version constraints. Treat it as a separate intervention if added.
@@ -189,6 +196,21 @@ RTX 4090):
 Tune `--max-model-len`, `--max-num-seqs`, and `--max-num-batched-tokens` on the real workload. Record
 the chosen values from the metadata sidecar. Throughput measurements must exclude model-load time but
 include both stages and every sampled token for budgeted thinking.
+
+### Reproducibility boundary on Ada
+
+On fixed hardware and software, explicit request seeds and `async_scheduling=False` make an
+otherwise fixed vLLM call reproducible, but they do not make different batch shapes or token budgets
+common-random-number continuations on the RTX 6000 Ada. In a long-context calibration, changing only
+`max_tokens` changed 32/64 sampled prefixes after the first `max_num_seqs=32` scheduling wave; the
+same boundary effect occurred with asynchronous scheduling both enabled and disabled. vLLM's true
+batch-invariant mode requires NVIDIA compute capability 9.0 or newer, while Ada is 8.9.
+
+Treat prompt order, shard membership, `n`, token budget, scheduler mode, and concurrency as part of
+the inference protocol. Freeze and checksum a prespecified sharding/batch plan; do not treat rows
+from different shapes as token-paired or replay-equivalent, and never combine them opportunistically.
+A prespecified mixture of fixed shards remains one valid protocol, and a completed tier remains a
+valid independent protocol; neither is a common-random-number continuation of another shape.
 
 ## Scientific parity rules
 

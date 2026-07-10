@@ -192,3 +192,12 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
 - **vLLM coverage boundary:** bulk generation and the two-stage thinking protocol are now validated.
   Keep Transformers for activations, training, and arbitrary forward passes; validate LoRA and any
   log-probability readout separately before migrating a result-bearing harness.
+- **Do not require cross-budget token-prefix identity from vLLM on Ada.** In both observed
+  verified-macro comparisons, changing only `max_tokens` produced 32/64 prefix mismatches confined
+  to requests admitted after a mixed-termination first `max_num_seqs=32` scheduling wave. This
+  happened with vLLM 0.24 asynchronous scheduling both enabled *and disabled*. vLLM's true
+  batch-invariant mode (`VLLM_BATCH_INVARIANT=1`) requires compute capability >=9.0 and is therefore
+  unavailable on the RTX 6000 Ada (8.9). Keep explicit seeds and freeze every tier, but treat
+  different budgets/batch compositions as independent reproducible protocols rather than common-
+  random-number continuations. The shared runner disables async scheduling and records that choice,
+  but this simplifies scheduling; it does not make pre-Hopper inference batch-invariant.
