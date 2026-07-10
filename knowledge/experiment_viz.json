@@ -8100,6 +8100,33 @@
     }
    ]
   },
+  "qwen35_4b_answer_potential_trace_sft": {
+   "charts": [
+    {
+     "title": "Pre-calibration likelihood plumbing parity",
+     "kind": "bar",
+     "categories": [
+      "observed max delta",
+      "frozen tolerance"
+     ],
+     "series": [
+      {
+       "label": "absolute mean nats per answer token",
+       "values": [
+        0.05981588363647461,
+        0.15
+       ]
+      }
+     ],
+     "x_label": "HF/vLLM plumbing diagnostic",
+     "y_label": "Absolute likelihood difference (nats/token)",
+     "y_format": "number",
+     "note": "The targeted vLLM readout passed the plumbing-only HF parity tolerance. These four smoke rows are not scientific evidence for the trace selector.",
+     "source": "experiments/qwen35_4b_answer_potential_trace_sft/runs/smoke/hf_parity.json",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_balanced_discriminative_bridge": {
    "charts": [
     {

@@ -1,6 +1,6 @@
 # Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
 schema_version: 1
-experiment_id: qwen35_4b_answer_potential_trace_sft
+experiment_id: "qwen35_4b_answer_potential_trace_sft"
 external_artifacts:
   - name: trained QLoRA adapters and merged composite checkpoints
     storage: /workspace/large_artifacts/qwen35_4b_answer_potential_trace_sft
