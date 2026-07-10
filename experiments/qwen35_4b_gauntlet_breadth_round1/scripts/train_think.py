@@ -92,7 +92,10 @@ class Collator:
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--train", type=Path, default=EXP / "data" / "sft_round1.jsonl")
+    ap.add_argument("--train", type=Path, nargs="+",
+                    default=[EXP / "data" / "sft_round1.jsonl"],
+                    help="one or more SFT JSONL files (later rounds train from "
+                         "BASE on the union of all rounds' data)")
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--epochs", type=float, default=2.0)
     ap.add_argument("--lr", type=float, default=2e-4)
@@ -108,7 +111,9 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
 
-    recs = [json.loads(l) for l in args.train.read_text().splitlines() if l.strip()]
+    recs = []
+    for train_path in args.train:
+        recs += [json.loads(l) for l in train_path.read_text().splitlines() if l.strip()]
     random.Random(args.seed).shuffle(recs)
     if args.smoke:
         recs = recs[:8]

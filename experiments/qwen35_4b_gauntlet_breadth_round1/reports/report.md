@@ -79,7 +79,14 @@ no decode noise; fresh seed per event, aggregate scores only):
 |---|---|---:|---:|---:|
 | seed 52004 | quick | 0.1396 | 0.3625 | **+0.2229** |
 | seed 52005 | quick | 0.1521 | 0.4458 | **+0.2938** |
-| seed 52006 | medium | (see experiment_log / menagerie_log for the confirmed values) | | |
+| seed 52006 | medium | 0.1217 | 0.4453 | **+0.3237** |
+
+Medium (multi-turn episodes + L3/L4 atoms) confirms with EVERY family
+positive, including axes flat on quick: mirage +0.600, siftstack +0.700,
+chronicle +0.700, toolsmith +0.383, lockpick +0.200, sirens +0.200,
+warren +0.200, menders +0.100, rites +0.100, stockade +0.053. The
+pre-registered three-leg decision rule (two positive quick seeds with mean
+≥ +0.03; medium ≥ +0.02) is met at 8–16× its bars: verdict POSITIVE.
 
 Per-family quick deltas (seed 52004): chronicle +0.750, siftstack +0.625,
 toolsmith +0.354 (→1.000), mirage +0.250, lockpick/rites/warren +0.125,

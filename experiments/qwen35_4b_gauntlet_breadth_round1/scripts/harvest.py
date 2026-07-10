@@ -84,7 +84,9 @@ def main() -> int:
     parser.add_argument("--stage", choices=["atoms", "episodes", "both"], default="both")
     parser.add_argument("--out-dir", type=Path, default=None)
     parser.add_argument("--adapter", type=str, default=None,
-                        help="harvest with a LoRA adapter (later rounds)")
+                        help="DEPRECATED for vLLM: runtime LoRA no-ops on Qwen3.5-4B (C49); use --merged")
+    parser.add_argument("--merged", type=str, default=None,
+                        help="harvest with a merged composite checkpoint (later rounds)")
     parser.add_argument("--smoke", action="store_true", help="tiny counts, fast shakeout")
     args = parser.parse_args()
 
@@ -107,8 +109,10 @@ def main() -> int:
         for name, budget in (harvest_cfg.get("think_budget_by_family") or {}).items()
     }
 
-    runner = harness.make_runner(config["engine"], adapter=args.adapter)
-    summary: dict = {"config": str(args.config), "smoke": args.smoke, "adapter": args.adapter}
+    runner = harness.make_runner(config["engine"], adapter=args.adapter,
+                                 model_override=args.merged)
+    summary: dict = {"config": str(args.config), "smoke": args.smoke,
+                     "adapter": args.adapter, "merged": args.merged}
 
     if args.stage in ("atoms", "both"):
         atoms_cfg = harvest_cfg["atoms"]

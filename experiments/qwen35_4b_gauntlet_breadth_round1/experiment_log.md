@@ -128,3 +128,11 @@ Created as a new experiment scaffold (program: agentic_breadth_installation).
   sirens 0, stockade -0.125) — the signature of genuine transfer, not
   leakage. Replication (quick seed 52005) + medium confirmation (seed 52006)
   running per the decision rule.
+- Replication landed: quick seed 52005 base 0.1521 -> adapter 0.4458
+  (+0.2938). MEDIUM CONFIRMED (seed 52006, --max-batch 12 dodged the
+  fla-kernel fault): base 0.1217 -> adapter 0.4453 (+0.3237), EVERY family
+  positive incl. mirage +0.600, siftstack +0.700, chronicle +0.700,
+  lockpick +0.200. Decision rule met on all three legs: VERDICT POSITIVE.
+  C50 updated. Round 3 (configs/round3.yaml: fresh seed namespace, mass
+  shifted to L2-L3, L3 episodes opened, harvest with the round-2 merged
+  model, train from base on the rounds-union) launches next.
