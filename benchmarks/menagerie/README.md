@@ -135,6 +135,12 @@ Qwen runs use tier thinking budgets by default. Add `--no-think` only for an
 explicit no-thinking reference run, or `--think-budget N` to override both atom
 and episode budgets.
 
+Adapter runs are gated: the vLLM backend refuses to score an adapter whose
+LoRA has no effect on outputs (an on-vs-off greedy probe at engine start;
+claim C49 documents the silent no-op this catches). Prefer merged full
+checkpoints via `--model-id` (config-verified against the pinned Qwen3.5-4B
+architecture), or `--backend qwen` for HF/PEFT adapter application.
+
 Checkpoint run:
 
 ```bash

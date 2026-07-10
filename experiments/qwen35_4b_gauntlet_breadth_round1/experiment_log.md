@@ -158,3 +158,17 @@ Created as a new experiment scaffold (program: agentic_breadth_installation).
   levers: difficulty escalation (L3-L4 mass, harder generators, longer
   horizons) and the pre-registered ablations, not more same-recipe rounds.
   C50 updated.
+
+## 2026-07-10 (cont.) — menagerie maintenance (user-authorized) + cross-backend replication
+
+- Fixed the two instrument issues from C49 (user-authorized harness edits;
+  families/ never read): (a) run.py --model-id now accepts local checkpoint
+  directories config-verified against the pinned Qwen3.5-4B architecture
+  (model_type + hidden/layers/vocab fingerprint), matching the documented
+  checkpoint-run interface; (b) the vLLM backend now runs an on-vs-off LoRA
+  application probe at engine start and ABORTS with a C49 message when the
+  adapter has no effect (verified live: the round-2 adapter trips the gate
+  with the correct remediation text; suite bench-validate stays green).
+- First VALID vLLM-backend paired event (quick, seed 52010, merged round-3
+  checkpoint via --model-id): base 0.1500 -> 0.4235, +0.2735 —
+  cross-backend replication of the HF-measured install (+0.223..+0.294).

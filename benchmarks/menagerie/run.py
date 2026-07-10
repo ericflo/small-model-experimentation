@@ -42,14 +42,46 @@ EST_TOKENS_PER_TURN = 250
 VLLM_MAX_MODEL_LEN = 16384  # Must match the harness/vllm_runner.py default.
 
 
-def validate_model_id(model_id: str) -> None:
-    """Enforce the repository's one-model rule for Menagerie runs."""
+# Structural fingerprint of the pinned base. A local checkpoint (e.g. a
+# merged install of the one model) must match ALL of these to run; the
+# one-model rule is about the model, not the path string.
+PINNED_MODEL_TYPES = {"qwen3_5", "qwen3_5_text"}
+PINNED_TEXT_SHAPE = {"hidden_size": 2560, "num_hidden_layers": 32, "vocab_size": 248320}
 
-    if not model_id.startswith(ALLOWED_MODEL_ID_PREFIX):
-        raise ValueError(
-            "--model-id violates the repo one-model rule in AGENTS.md Non-Negotiables: "
-            "only Qwen/Qwen3.5-4B or revision variants starting with Qwen/Qwen3.5-4B are allowed"
+
+def validate_model_id(model_id: str) -> None:
+    """Enforce the repository's one-model rule for Menagerie runs.
+
+    Accepted: the pinned hub id (or revision variants of it), OR a local
+    checkpoint directory whose config proves it is a Qwen3.5-4B-shaped model
+    (documented checkpoint-run support: merged installs and training
+    checkpoints of the one model).
+    """
+
+    if model_id.startswith(ALLOWED_MODEL_ID_PREFIX):
+        return
+    config_path = os.path.join(model_id, "config.json")
+    if os.path.isdir(model_id) and os.path.isfile(config_path):
+        with open(config_path, "r", encoding="utf-8") as handle:
+            config = json.load(handle)
+        text_config = config.get("text_config", config)
+        shape_ok = all(
+            text_config.get(key) == value for key, value in PINNED_TEXT_SHAPE.items()
         )
+        if config.get("model_type") in PINNED_MODEL_TYPES and shape_ok:
+            return
+        observed = {key: text_config.get(key) for key in PINNED_TEXT_SHAPE}
+        raise ValueError(
+            "--model-id local checkpoint does not match the pinned Qwen3.5-4B "
+            f"architecture (model_type {config.get('model_type')!r}, text shape "
+            f"{observed}); the repo one-model rule allows only Qwen3.5-4B and "
+            "checkpoints derived from it"
+        )
+    raise ValueError(
+        "--model-id violates the repo one-model rule in AGENTS.md Non-Negotiables: "
+        "only Qwen/Qwen3.5-4B, revision variants starting with Qwen/Qwen3.5-4B, or a "
+        "local Qwen3.5-4B-derived checkpoint directory (config-verified) are allowed"
+    )
 
 
 def score_only_per_item(item: dict) -> dict:

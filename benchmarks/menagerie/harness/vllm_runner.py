@@ -85,6 +85,39 @@ def _load_llm(method, adapter_info=None):
             ) from exc
 
 
+def _assert_lora_applies(llm, tok, lora_request):
+    """Refuse to run if the LoRA has no effect on outputs (claim C49).
+
+    vLLM has silently skipped Qwen3.5-4B PEFT adapters whose tensor names
+    (base_model.model.model.layers.*) never match the served composite's
+    module tree (model.language_model.layers.*): no error, no warning, and
+    every 'adapter' score is actually the base model. A zero-effect adapter
+    cannot be distinguished from an unapplied one by any downstream check,
+    so gate at the seam: one short greedy generation with and without the
+    lora_request must differ somewhere; token-identical outputs abort the
+    run. Deterministic single-prompt greedy decode makes this probe exact.
+    """
+    from vllm import SamplingParams
+    from vllm.inputs import TokensPrompt
+
+    rendered = tok.apply_chat_template(
+        [{"role": "user", "content": "List the first eight prime numbers."}],
+        tokenize=False, add_generation_prompt=True,
+    )
+    probe_ids = tok(rendered, add_special_tokens=False).input_ids
+    params = SamplingParams(temperature=0.0, max_tokens=32, seed=0)
+    prompt = [TokensPrompt(prompt_token_ids=[int(t) for t in probe_ids])]
+    with_lora = llm.generate(prompt, params, use_tqdm=False, lora_request=lora_request)
+    without = llm.generate(prompt, params, use_tqdm=False, lora_request=None)
+    if list(with_lora[0].outputs[0].token_ids) == list(without[0].outputs[0].token_ids):
+        raise RuntimeError(
+            "adapter application gate failed: greedy outputs are token-identical with and "
+            "without the LoRA request, so vLLM is not applying this adapter (known silent "
+            "no-op for Qwen3.5-4B PEFT adapters; claim C49). Evaluate the install as a "
+            "merged full checkpoint via --model-id, or use --backend qwen (HF/PEFT)."
+        )
+
+
 def _job_lora_request(job, lora_request, adapter_path):
     if not job.get("adapter"):
         return None
@@ -314,6 +347,8 @@ def main():
         os.environ.get("MENAGERIE_VLLM_MODEL", "Qwen/Qwen3.5-4B"),
         trust_remote_code=True,
     )
+    if lora_request is not None:
+        _assert_lora_applies(llm, tok, lora_request)
     close_ids = tok("</think>\n\n", add_special_tokens=False).input_ids
     eos_ids = set()
     if getattr(tok, "eos_token_id", None) is not None:
