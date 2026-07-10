@@ -2,6 +2,12 @@
 
 ## Next Experiments
 
+- Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
+  needed; record wall time, memory, physical transitions, coverage, and selector success.
+- If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized
+  prefix outputs, per-example target residuals) behind the same within-task AUROC and recall@beam gate.
+- Repair the demonstrated visible-only selector gap over exact solver pools (60/60 coverage versus 56/60
+  selected) with frozen stability/simplicity/unlabeled-probe rules.
 - Replicate the strongest structural compiler results across seeds, lengths, and operator mixes.
 - Run a direct-text-program versus typed-bytecode versus latent-slot comparison on one shared task suite.
 - Add adversarial paraphrase and compositional splits where direct prompt cues fail.
@@ -18,3 +24,6 @@
 ## Stop Conditions
 
 Retire a variant when it improves train or IID accuracy but cannot survive harder length/family/paraphrase splits after two controlled attempts.
+
+Type-only absolute P(viable) at think@256 is retired as a search controller unless a materially richer state
+or interface first clears calibration; pooled AUROC alone must not reopen it.

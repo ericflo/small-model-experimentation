@@ -1,0 +1,190 @@
+{
+ "beam_width": 2,
+ "input_sha256": {
+  "calibration_candidates": "afa6fc356103d8e1039c35c2af5568bd96268cc302c01025624141bc54638f16",
+  "calibration_verdict": "b651b308886294a912861523d0404815245327f154bea43931682d4e7b23c493",
+  "config": "edd5f82cc030d5d54ff2b5e85e528b7737fbb6496f984bd4b7d12fde4f34f838",
+  "data_audit": "5cc918bc2fe590e900c8ee661a55059731a2d93acb394a328af858914f2ccf90",
+  "experiment_common": "7c237b7ad6bf0c3076d1d6a00a5624131722c4fb5ba2a1408e732d5ed6aad54e",
+  "families": "99a39589e06a7c86079cf86d4ee6530ad9a34e7c18e1fcfce08f82ae7427d93a",
+  "full_brute": "2ab5f959ae006d495562f337942900e643527bbd7f043c40fd81ce9d66102533",
+  "model_scoring": "e2128983bd606a22844823e4e1d60ab6452a37ba703d78ed89e3bc7ff08adc3c",
+  "oracle_gate": "77ec2262468bc9e7a36a4d322da3eadaeff6fc5ea82829d99cbf523fc5552dc9",
+  "oracles": "5eb740ae4aa9c06e8a5b54c2efd8be87e72b178602c04a115e7d0c08177f3d65",
+  "run_search": "9dbf250645b750890ee294d844a437ac98fd751ca03e9669045783f8a1ef21b7",
+  "search_core": "c0ec4e4d5411b7627dbad8588f0de74559d68740130858eb61861d945e89677d",
+  "tasks": "b51f1385c0802bd0650d61bc079f2d4d3cba16b880e179f5a6fc6b96c943c34f",
+  "vllm_runner": "33ec31a547ce7767a37ad53b760ac8e6596f2ef0963f486805abeac3f8ed36ba"
+ },
+ "method": "surface",
+ "rows": [
+  {
+   "attempted_complete_skeletons": 2,
+   "completed_skeletons": 2,
+   "evaluation_wall_seconds": 0.006222445517778397,
+   "expanded_prefix_nodes": 144,
+   "fill_cap": 256,
+   "fill_cap_used": 36,
+   "interpreter_accounting": {
+    "case_pipeline_executions": 288,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 1440
+   },
+   "layers": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 2,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 3,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 4,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 5,
+     "retained": 2
+    }
+   ],
+   "leaves": [
+    [
+     "add_k",
+     "mul_k",
+     "running_sum",
+     "square",
+     "adjacent_diff"
+    ],
+    [
+     "add_k",
+     "mul_k",
+     "running_sum",
+     "square",
+     "negate"
+    ]
+   ],
+   "method": "surface",
+   "planned_complete_skeletons": 2,
+   "pool_hidden_coverage": false,
+   "selected_hidden_success": false,
+   "selected_pipeline": null,
+   "selector": {
+    "abstained": true,
+    "candidate_count": 0,
+    "signature_groups": 0
+   },
+   "shard": 0,
+   "task_id": "primary-d5-0000",
+   "task_index": 0,
+   "task_wall_seconds": 0.006439547054469585,
+   "visible_overfit_candidates": 0,
+   "visible_passing_concrete_candidates": 0
+  },
+  {
+   "attempted_complete_skeletons": 2,
+   "completed_skeletons": 2,
+   "evaluation_wall_seconds": 0.006268566474318504,
+   "expanded_prefix_nodes": 144,
+   "fill_cap": 256,
+   "fill_cap_used": 36,
+   "interpreter_accounting": {
+    "case_pipeline_executions": 288,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 1440
+   },
+   "layers": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 2,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 3,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 4,
+     "retained": 2
+    },
+    {
+     "expanded": 32,
+     "layer": 5,
+     "retained": 2
+    }
+   ],
+   "leaves": [
+    [
+     "add_k",
+     "mul_k",
+     "running_sum",
+     "square",
+     "adjacent_diff"
+    ],
+    [
+     "add_k",
+     "mul_k",
+     "running_sum",
+     "square",
+     "negate"
+    ]
+   ],
+   "method": "surface",
+   "planned_complete_skeletons": 2,
+   "pool_hidden_coverage": false,
+   "selected_hidden_success": false,
+   "selected_pipeline": null,
+   "selector": {
+    "abstained": true,
+    "candidate_count": 0,
+    "signature_groups": 0
+   },
+   "shard": 1,
+   "task_id": "primary-d5-0001",
+   "task_index": 1,
+   "task_wall_seconds": 0.006466338410973549,
+   "visible_overfit_candidates": 0,
+   "visible_passing_concrete_candidates": 0
+  }
+ ],
+ "schema_version": 1,
+ "settings": {
+  "backend": "vllm",
+  "beam_width": 2,
+  "model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "parameter_fill_cap_per_task": 256,
+  "run_seed": 1801,
+  "thinking_budget": 32
+ },
+ "summary": {
+  "attempted_complete_skeletons": 4,
+  "expanded_prefix_nodes": 288,
+  "parameter_fills_attempted": 72,
+  "planned_complete_skeletons": 4,
+  "sum_evaluation_wall_seconds": 0.012491011992096901,
+  "sum_task_wall_seconds": 0.012905885465443134,
+  "task_count": 2
+ },
+ "task_ids": [
+  "primary-d5-0000",
+  "primary-d5-0001"
+ ],
+ "wall_seconds": 0.012907816097140312
+}

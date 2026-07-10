@@ -1,0 +1,1420 @@
+{
+ "beam_width": 4,
+ "classification": "G1_unreadable_partial_state",
+ "gate": "actionable_partial_structure_recognition",
+ "gate_checks": {
+  "auroc_lift_lcb": false,
+  "auroc_lift_point": false,
+  "macro_auroc_lcb": false,
+  "macro_auroc_point": false,
+  "recall_lift_lcb": false,
+  "recall_lift_point": false
+ },
+ "metrics": {
+  "nextop": {
+   "best_live_rank": {
+    "ci_high": 7.707185019841268,
+    "ci_low": 6.234718501984126,
+    "estimate": 6.983184523809523,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.2872290426587301,
+    "ci_low": 0.17358444940476192,
+    "estimate": 0.22839781746031748,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "macro_auroc": {
+    "ci_high": 0.5437923561449874,
+    "ci_low": 0.46474390754672035,
+    "estimate": 0.5036495776354728,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "pooled_auroc_diagnostic": 0.5214402467884758
+  },
+  "nothink": {
+   "best_live_rank": {
+    "ci_high": 7.18322048611111,
+    "ci_low": 5.8816443452380955,
+    "estimate": 6.527232142857144,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.3554575892857142,
+    "ci_low": 0.251437251984127,
+    "estimate": 0.3031498015873016,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "macro_auroc": {
+    "ci_high": 0.5941857582314344,
+    "ci_low": 0.5159039722849043,
+    "estimate": 0.5556273839439984,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "pooled_auroc_diagnostic": 0.5802208821592498
+  },
+  "random": {
+   "best_live_rank": {
+    "ci_high": 7.45883060515873,
+    "ci_low": 6.445979662698413,
+    "estimate": 6.952579365079365,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.30823660714285717,
+    "ci_low": 0.21914558531746034,
+    "estimate": 0.2627480158730159,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "macro_auroc": {
+    "ci_high": 0.5356814611179622,
+    "ci_low": 0.47765112207166277,
+    "estimate": 0.5058407500552705,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "pooled_auroc_diagnostic": 0.4977464243432232
+  },
+  "surface": {
+   "best_live_rank": {
+    "ci_high": 8.120792410714285,
+    "ci_low": 6.618921130952382,
+    "estimate": 7.370039682539683,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.3395343501984127,
+    "ci_low": 0.21621961805555553,
+    "estimate": 0.27780257936507935,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "macro_auroc": {
+    "ci_high": 0.5534554295052464,
+    "ci_low": 0.48498958799685854,
+    "estimate": 0.5190213903708779,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "pooled_auroc_diagnostic": 0.5361185217091446
+  },
+  "thinking": {
+   "best_live_rank": {
+    "ci_high": 7.689574652777776,
+    "ci_low": 6.521121031746032,
+    "estimate": 7.101934523809525,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.2987109375,
+    "ci_low": 0.20223214285714286,
+    "estimate": 0.2506696428571428,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "macro_auroc": {
+    "ci_high": 0.5434581428192307,
+    "ci_low": 0.47036138443796427,
+    "estimate": 0.5064432265726517,
+    "n_tasks": 48,
+    "reps": 10000
+   },
+   "pooled_auroc_diagnostic": 0.5573586512282781
+  }
+ },
+ "n_candidates": 7200,
+ "n_tasks": 48,
+ "passed": false,
+ "per_task": {
+  "nextop": {
+   "calibration-d4-0000": {
+    "best_live_rank": 7.428571428571429,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.4844260409477801
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 5.714285714285714,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.6121348056130664
+   },
+   "calibration-d4-0002": {
+    "best_live_rank": 7.714285714285714,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.36117724867724865
+   },
+   "calibration-d4-0003": {
+    "best_live_rank": 5.2,
+    "live_recall_at_beam": 0.2,
+    "macro_auroc": 0.6723702664796634
+   },
+   "calibration-d4-0004": {
+    "best_live_rank": 8.428571428571429,
+    "live_recall_at_beam": 0.047619047619047616,
+    "macro_auroc": 0.3935692186703309
+   },
+   "calibration-d4-0005": {
+    "best_live_rank": 9.0,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.3190418679549114
+   },
+   "calibration-d4-0006": {
+    "best_live_rank": 7.0,
+    "live_recall_at_beam": 0.09523809523809523,
+    "macro_auroc": 0.5161054361509366
+   },
+   "calibration-d4-0007": {
+    "best_live_rank": 9.75,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.3989247311827957
+   },
+   "calibration-d4-0008": {
+    "best_live_rank": 9.428571428571429,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.3637298188928624
+   },
+   "calibration-d4-0009": {
+    "best_live_rank": 5.285714285714286,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.5253968253968254
+   },
+   "calibration-d4-0010": {
+    "best_live_rank": 6.571428571428571,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.46871392496392494
+   },
+   "calibration-d4-0011": {
+    "best_live_rank": 13.0,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.23440860215053763
+   },
+   "calibration-d4-0012": {
+    "best_live_rank": 5.0,
+    "live_recall_at_beam": 0.4761904761904762,
+    "macro_auroc": 0.5839761008918618
+   },
+   "calibration-d4-0013": {
+    "best_live_rank": 11.428571428571429,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.27338681849551416
+   },
+   "calibration-d4-0014": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.5232997653513958
+   },
+   "calibration-d4-0015": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.4761904761904762,
+    "macro_auroc": 0.5340247388481084
+   },
+   "calibration-d4-0016": {
+    "best_live_rank": 8.142857142857142,
+    "live_recall_at_beam": 0.11904761904761904,
+    "macro_auroc": 0.42305022454794955
+   },
+   "calibration-d4-0017": {
+    "best_live_rank": 9.166666666666666,
+    "live_recall_at_beam": 0.3333333333333333,
+    "macro_auroc": 0.3978260869565217
+   },
+   "calibration-d4-0018": {
+    "best_live_rank": 8.285714285714286,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.3960362554112554
+   },
+   "calibration-d4-0019": {
+    "best_live_rank": 7.571428571428571,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.49326718973458106
+   },
+   "calibration-d4-0020": {
+    "best_live_rank": 5.714285714285714,
+    "live_recall_at_beam": 0.19047619047619047,
+    "macro_auroc": 0.49342712861418625
+   },
+   "calibration-d4-0021": {
+    "best_live_rank": 11.4,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.30238429172510517
+   },
+   "calibration-d4-0022": {
+    "best_live_rank": 11.25,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.32526881720430106
+   },
+   "calibration-d4-0023": {
+    "best_live_rank": 8.714285714285714,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.4400466230629274
+   },
+   "calibration-d4-0024": {
+    "best_live_rank": 4.142857142857143,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.704399585921325
+   },
+   "calibration-d4-0025": {
+    "best_live_rank": 5.6,
+    "live_recall_at_beam": 0.2,
+    "macro_auroc": 0.6462833099579243
+   },
+   "calibration-d4-0026": {
+    "best_live_rank": 7.285714285714286,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.5124703346170737
+   },
+   "calibration-d4-0027": {
+    "best_live_rank": 5.571428571428571,
+    "live_recall_at_beam": 0.047619047619047616,
+    "macro_auroc": 0.6148460703061309
+   },
+   "calibration-d4-0028": {
+    "best_live_rank": 10.6,
+    "live_recall_at_beam": 0.2,
+    "macro_auroc": 0.42147615708274894
+   },
+   "calibration-d4-0029": {
+    "best_live_rank": 2.2857142857142856,
+    "live_recall_at_beam": 0.7380952380952381,
+    "macro_auroc": 0.705665937323546
+   },
+   "calibration-d4-0030": {
+    "best_live_rank": 6.5,
+    "live_recall_at_beam": 0.4166666666666667,
+    "macro_auroc": 0.5198872785829307
+   },
+   "calibration-d4-0031": {
+    "best_live_rank": 8.571428571428571,
+    "live_recall_at_beam": 0.047619047619047616,
+    "macro_auroc": 0.40000151236248305
+   },
+   "calibration-d4-0032": {
+    "best_live_rank": 3.7142857142857144,
+    "live_recall_at_beam": 0.2738095238095238,
+    "macro_auroc": 0.5580200294874208
+   },
+   "calibration-d4-0033": {
+    "best_live_rank": 10.285714285714286,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.34782608695652173
+   },
+   "calibration-d4-0034": {
+    "best_live_rank": 9.5,
+    "live_recall_at_beam": 0.125,
+    "macro_auroc": 0.38373655913978494
+   },
+   "calibration-d4-0035": {
+    "best_live_rank": 9.571428571428571,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.34401598803772715
+   },
+   "calibration-d4-0036": {
+    "best_live_rank": 9.0,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.40217391304347827
+   },
+   "calibration-d4-0037": {
+    "best_live_rank": 6.0,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.6532258064516129
+   },
+   "calibration-d4-0038": {
+    "best_live_rank": 3.857142857142857,
+    "live_recall_at_beam": 0.5714285714285714,
+    "macro_auroc": 0.7165930788213397
+   },
+   "calibration-d4-0039": {
+    "best_live_rank": 4.857142857142857,
+    "live_recall_at_beam": 0.08333333333333333,
+    "macro_auroc": 0.5850042778253092
+   },
+   "calibration-d4-0040": {
+    "best_live_rank": 2.0,
+    "live_recall_at_beam": 0.8333333333333334,
+    "macro_auroc": 0.842481884057971
+   },
+   "calibration-d4-0041": {
+    "best_live_rank": 8.75,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.46344086021505376
+   },
+   "calibration-d4-0042": {
+    "best_live_rank": 4.333333333333333,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.6807971014492754
+   },
+   "calibration-d4-0043": {
+    "best_live_rank": 5.857142857142857,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.5068567402806533
+   },
+   "calibration-d4-0044": {
+    "best_live_rank": 2.5714285714285716,
+    "live_recall_at_beam": 0.5714285714285714,
+    "macro_auroc": 0.799683484137478
+   },
+   "calibration-d4-0045": {
+    "best_live_rank": 3.857142857142857,
+    "live_recall_at_beam": 0.2619047619047619,
+    "macro_auroc": 0.6501270468661773
+   },
+   "calibration-d4-0046": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.33333333333333337,
+    "macro_auroc": 0.5151248145181411
+   },
+   "calibration-d4-0047": {
+    "best_live_rank": 4.285714285714286,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.6650490411359977
+   }
+  },
+  "nothink": {
+   "calibration-d4-0000": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.724104267310789
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 8.714285714285714,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.4409362778927996
+   },
+   "calibration-d4-0002": {
+    "best_live_rank": 6.142857142857143,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.5018432252127905
+   },
+   "calibration-d4-0003": {
+    "best_live_rank": 6.6,
+    "live_recall_at_beam": 0.3,
+    "macro_auroc": 0.6811564983637214
+   },
+   "calibration-d4-0004": {
+    "best_live_rank": 6.0,
+    "live_recall_at_beam": 0.23809523809523808,
+    "macro_auroc": 0.4816036227563022
+   },
+   "calibration-d4-0005": {
+    "best_live_rank": 8.857142857142858,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.4265384172992869
+   },
+   "calibration-d4-0006": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.4761904761904762,
+    "macro_auroc": 0.4099934032188835
+   },
+   "calibration-d4-0007": {
+    "best_live_rank": 6.5,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.571505376344086
+   },
+   "calibration-d4-0008": {
+    "best_live_rank": 5.714285714285714,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.5537858528347659
+   },
+   "calibration-d4-0009": {
+    "best_live_rank": 6.142857142857143,
+    "live_recall_at_beam": 0.3,
+    "macro_auroc": 0.40137235449735453
+   },
+   "calibration-d4-0010": {
+    "best_live_rank": 10.142857142857142,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.35524297059623144
+   },
+   "calibration-d4-0011": {
+    "best_live_rank": 8.5,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.42795698924731185
+   },
+   "calibration-d4-0012": {
+    "best_live_rank": 2.4285714285714284,
+    "live_recall_at_beam": 0.7619047619047619,
+    "macro_auroc": 0.6817524992117383
+   },
+   "calibration-d4-0013": {
+    "best_live_rank": 6.714285714285714,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.5550767770876467
+   },
+   "calibration-d4-0014": {
+    "best_live_rank": 3.5714285714285716,
+    "live_recall_at_beam": 0.5476190476190477,
+    "macro_auroc": 0.7868545227920227
+   },
+   "calibration-d4-0015": {
+    "best_live_rank": 4.571428571428571,
+    "live_recall_at_beam": 0.40476190476190477,
+    "macro_auroc": 0.7263331098249577
+   },
+   "calibration-d4-0016": {
+    "best_live_rank": 4.142857142857143,
+    "live_recall_at_beam": 0.3095238095238095,
+    "macro_auroc": 0.7214237292030518
+   },
+   "calibration-d4-0017": {
+    "best_live_rank": 7.666666666666667,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.5869565217391305
+   },
+   "calibration-d4-0018": {
+    "best_live_rank": 3.2857142857142856,
+    "live_recall_at_beam": 0.7142857142857143,
+    "macro_auroc": 0.7632420870192609
+   },
+   "calibration-d4-0019": {
+    "best_live_rank": 6.285714285714286,
+    "live_recall_at_beam": 0.23809523809523808,
+    "macro_auroc": 0.5146582181908269
+   },
+   "calibration-d4-0020": {
+    "best_live_rank": 4.571428571428571,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.6338037500828199
+   },
+   "calibration-d4-0021": {
+    "best_live_rank": 6.4,
+    "live_recall_at_beam": 0.3,
+    "macro_auroc": 0.5583479429640018
+   },
+   "calibration-d4-0022": {
+    "best_live_rank": 11.25,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.35080645161290325
+   },
+   "calibration-d4-0023": {
+    "best_live_rank": 6.428571428571429,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.5617815055315055
+   },
+   "calibration-d4-0024": {
+    "best_live_rank": 5.714285714285714,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.6443006671267542
+   },
+   "calibration-d4-0025": {
+    "best_live_rank": 3.8,
+    "live_recall_at_beam": 0.6,
+    "macro_auroc": 0.6120967741935484
+   },
+   "calibration-d4-0026": {
+    "best_live_rank": 2.5714285714285716,
+    "live_recall_at_beam": 0.5952380952380952,
+    "macro_auroc": 0.7391600297850298
+   },
+   "calibration-d4-0027": {
+    "best_live_rank": 2.5714285714285716,
+    "live_recall_at_beam": 0.5476190476190476,
+    "macro_auroc": 0.8443654415090209
+   },
+   "calibration-d4-0028": {
+    "best_live_rank": 8.4,
+    "live_recall_at_beam": 0.2,
+    "macro_auroc": 0.5705557503506311
+   },
+   "calibration-d4-0029": {
+    "best_live_rank": 4.857142857142857,
+    "live_recall_at_beam": 0.40476190476190477,
+    "macro_auroc": 0.634277068040655
+   },
+   "calibration-d4-0030": {
+    "best_live_rank": 6.666666666666667,
+    "live_recall_at_beam": 0.4166666666666667,
+    "macro_auroc": 0.5696960547504025
+   },
+   "calibration-d4-0031": {
+    "best_live_rank": 7.0,
+    "live_recall_at_beam": 0.16666666666666666,
+    "macro_auroc": 0.42223795799377195
+   },
+   "calibration-d4-0032": {
+    "best_live_rank": 9.571428571428571,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.3065554614467658
+   },
+   "calibration-d4-0033": {
+    "best_live_rank": 9.428571428571429,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.5394021739130435
+   },
+   "calibration-d4-0034": {
+    "best_live_rank": 7.75,
+    "live_recall_at_beam": 0.125,
+    "macro_auroc": 0.6063844086021505
+   },
+   "calibration-d4-0035": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.6080227743271222
+   },
+   "calibration-d4-0036": {
+    "best_live_rank": 10.285714285714286,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.34375
+   },
+   "calibration-d4-0037": {
+    "best_live_rank": 13.25,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.23306451612903226
+   },
+   "calibration-d4-0038": {
+    "best_live_rank": 6.285714285714286,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.7049373784428132
+   },
+   "calibration-d4-0039": {
+    "best_live_rank": 7.714285714285714,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.3437958569910036
+   },
+   "calibration-d4-0040": {
+    "best_live_rank": 3.8333333333333335,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.769927536231884
+   },
+   "calibration-d4-0041": {
+    "best_live_rank": 9.5,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.5150537634408602
+   },
+   "calibration-d4-0042": {
+    "best_live_rank": 8.333333333333334,
+    "live_recall_at_beam": 0.4166666666666667,
+    "macro_auroc": 0.44356884057971013
+   },
+   "calibration-d4-0043": {
+    "best_live_rank": 5.428571428571429,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.5628508166551645
+   },
+   "calibration-d4-0044": {
+    "best_live_rank": 6.142857142857143,
+    "live_recall_at_beam": 0.3333333333333333,
+    "macro_auroc": 0.5634178239840525
+   },
+   "calibration-d4-0045": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.2619047619047619,
+    "macro_auroc": 0.6092647162619989
+   },
+   "calibration-d4-0046": {
+    "best_live_rank": 6.428571428571429,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.5667982137932845
+   },
+   "calibration-d4-0047": {
+    "best_live_rank": 7.0,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.4995540339290339
+   }
+  },
+  "random": {
+   "calibration-d4-0000": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.6350902921555095
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 8.857142857142858,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.3668018173452956
+   },
+   "calibration-d4-0002": {
+    "best_live_rank": 7.142857142857143,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.4968685300207039
+   },
+   "calibration-d4-0003": {
+    "best_live_rank": 9.8,
+    "live_recall_at_beam": 0.3,
+    "macro_auroc": 0.2931276297335203
+   },
+   "calibration-d4-0004": {
+    "best_live_rank": 3.7142857142857144,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.6753191084839214
+   },
+   "calibration-d4-0005": {
+    "best_live_rank": 5.0,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.6396624108580631
+   },
+   "calibration-d4-0006": {
+    "best_live_rank": 7.857142857142857,
+    "live_recall_at_beam": 0.047619047619047616,
+    "macro_auroc": 0.43565038068324213
+   },
+   "calibration-d4-0007": {
+    "best_live_rank": 9.25,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.42473118279569894
+   },
+   "calibration-d4-0008": {
+    "best_live_rank": 8.0,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.4845845227638706
+   },
+   "calibration-d4-0009": {
+    "best_live_rank": 6.714285714285714,
+    "live_recall_at_beam": 0.1285714285714286,
+    "macro_auroc": 0.4318121693121693
+   },
+   "calibration-d4-0010": {
+    "best_live_rank": 7.714285714285714,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.4199030940878767
+   },
+   "calibration-d4-0011": {
+    "best_live_rank": 6.75,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.5951612903225807
+   },
+   "calibration-d4-0012": {
+    "best_live_rank": 7.571428571428571,
+    "live_recall_at_beam": 0.2619047619047619,
+    "macro_auroc": 0.4586778107158542
+   },
+   "calibration-d4-0013": {
+    "best_live_rank": 7.857142857142857,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.5280710835058662
+   },
+   "calibration-d4-0014": {
+    "best_live_rank": 7.285714285714286,
+    "live_recall_at_beam": 0.09523809523809523,
+    "macro_auroc": 0.5041563559226603
+   },
+   "calibration-d4-0015": {
+    "best_live_rank": 5.857142857142857,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.6322787267080745
+   },
+   "calibration-d4-0016": {
+    "best_live_rank": 5.0,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.5491417360445419
+   },
+   "calibration-d4-0017": {
+    "best_live_rank": 9.5,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.4315217391304348
+   },
+   "calibration-d4-0018": {
+    "best_live_rank": 4.142857142857143,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.626769506660811
+   },
+   "calibration-d4-0019": {
+    "best_live_rank": 8.714285714285714,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.36628379671857936
+   },
+   "calibration-d4-0020": {
+    "best_live_rank": 5.285714285714286,
+    "live_recall_at_beam": 0.3095238095238095,
+    "macro_auroc": 0.5625525365919704
+   },
+   "calibration-d4-0021": {
+    "best_live_rank": 8.0,
+    "live_recall_at_beam": 0.2,
+    "macro_auroc": 0.5255843852267414
+   },
+   "calibration-d4-0022": {
+    "best_live_rank": 7.25,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.5333333333333333
+   },
+   "calibration-d4-0023": {
+    "best_live_rank": 6.857142857142857,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.4620808891189326
+   },
+   "calibration-d4-0024": {
+    "best_live_rank": 5.714285714285714,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.5868875086266391
+   },
+   "calibration-d4-0025": {
+    "best_live_rank": 9.0,
+    "live_recall_at_beam": 0.1,
+    "macro_auroc": 0.3955236091631604
+   },
+   "calibration-d4-0026": {
+    "best_live_rank": 7.285714285714286,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.442752426719818
+   },
+   "calibration-d4-0027": {
+    "best_live_rank": 4.0,
+    "live_recall_at_beam": 0.5714285714285714,
+    "macro_auroc": 0.7813141133666918
+   },
+   "calibration-d4-0028": {
+    "best_live_rank": 7.4,
+    "live_recall_at_beam": 0.3,
+    "macro_auroc": 0.4560191678354371
+   },
+   "calibration-d4-0029": {
+    "best_live_rank": 8.0,
+    "live_recall_at_beam": 0.19047619047619047,
+    "macro_auroc": 0.4918654714850367
+   },
+   "calibration-d4-0030": {
+    "best_live_rank": 6.666666666666667,
+    "live_recall_at_beam": 0.5833333333333334,
+    "macro_auroc": 0.55835346215781
+   },
+   "calibration-d4-0031": {
+    "best_live_rank": 6.142857142857143,
+    "live_recall_at_beam": 0.19047619047619047,
+    "macro_auroc": 0.44029977905104295
+   },
+   "calibration-d4-0032": {
+    "best_live_rank": 3.2857142857142856,
+    "live_recall_at_beam": 0.4880952380952381,
+    "macro_auroc": 0.6346814417466591
+   },
+   "calibration-d4-0033": {
+    "best_live_rank": 9.428571428571429,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.40993788819875776
+   },
+   "calibration-d4-0034": {
+    "best_live_rank": 5.0,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.7102150537634409
+   },
+   "calibration-d4-0035": {
+    "best_live_rank": 5.428571428571429,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.526357257878997
+   },
+   "calibration-d4-0036": {
+    "best_live_rank": 8.857142857142858,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.4557453416149068
+   },
+   "calibration-d4-0037": {
+    "best_live_rank": 7.75,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.6161290322580646
+   },
+   "calibration-d4-0038": {
+    "best_live_rank": 4.0,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.6879272800468452
+   },
+   "calibration-d4-0039": {
+    "best_live_rank": 5.571428571428571,
+    "live_recall_at_beam": 0.2261904761904762,
+    "macro_auroc": 0.4254903295221799
+   },
+   "calibration-d4-0040": {
+    "best_live_rank": 10.0,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.39390096618357484
+   },
+   "calibration-d4-0041": {
+    "best_live_rank": 9.5,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.3989247311827957
+   },
+   "calibration-d4-0042": {
+    "best_live_rank": 8.0,
+    "live_recall_at_beam": 0.16666666666666666,
+    "macro_auroc": 0.49565217391304345
+   },
+   "calibration-d4-0043": {
+    "best_live_rank": 7.857142857142857,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.373001495284104
+   },
+   "calibration-d4-0044": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.33333333333333337,
+    "macro_auroc": 0.4847889102059981
+   },
+   "calibration-d4-0045": {
+    "best_live_rank": 8.714285714285714,
+    "live_recall_at_beam": 0.09523809523809523,
+    "macro_auroc": 0.44233483907396953
+   },
+   "calibration-d4-0046": {
+    "best_live_rank": 5.285714285714286,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.47982080482712436
+   },
+   "calibration-d4-0047": {
+    "best_live_rank": 6.857142857142857,
+    "live_recall_at_beam": 0.16666666666666666,
+    "macro_auroc": 0.5132685903066339
+   }
+  },
+  "surface": {
+   "calibration-d4-0000": {
+    "best_live_rank": 6.285714285714286,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.5090766620657925
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 6.571428571428571,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.474000747642052
+   },
+   "calibration-d4-0002": {
+    "best_live_rank": 8.142857142857142,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.3887508626639061
+   },
+   "calibration-d4-0003": {
+    "best_live_rank": 11.2,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.4252220663861617
+   },
+   "calibration-d4-0004": {
+    "best_live_rank": 5.428571428571429,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.6504620627471993
+   },
+   "calibration-d4-0005": {
+    "best_live_rank": 12.428571428571429,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.4377012882447665
+   },
+   "calibration-d4-0006": {
+    "best_live_rank": 2.7142857142857144,
+    "live_recall_at_beam": 0.4523809523809524,
+    "macro_auroc": 0.6655532798101049
+   },
+   "calibration-d4-0007": {
+    "best_live_rank": 10.25,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.3064516129032258
+   },
+   "calibration-d4-0008": {
+    "best_live_rank": 13.0,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.3981491938013677
+   },
+   "calibration-d4-0009": {
+    "best_live_rank": 4.142857142857143,
+    "live_recall_at_beam": 0.37857142857142856,
+    "macro_auroc": 0.7147900132275132
+   },
+   "calibration-d4-0010": {
+    "best_live_rank": 9.428571428571429,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.5368787512809252
+   },
+   "calibration-d4-0011": {
+    "best_live_rank": 5.0,
+    "live_recall_at_beam": 0.75,
+    "macro_auroc": 0.8099462365591398
+   },
+   "calibration-d4-0012": {
+    "best_live_rank": 4.0,
+    "live_recall_at_beam": 0.5476190476190477,
+    "macro_auroc": 0.6293626235881671
+   },
+   "calibration-d4-0013": {
+    "best_live_rank": 6.571428571428571,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.5502818035426731
+   },
+   "calibration-d4-0014": {
+    "best_live_rank": 4.285714285714286,
+    "live_recall_at_beam": 0.40476190476190477,
+    "macro_auroc": 0.642872724598268
+   },
+   "calibration-d4-0015": {
+    "best_live_rank": 5.285714285714286,
+    "live_recall_at_beam": 0.40476190476190477,
+    "macro_auroc": 0.5109842603049125
+   },
+   "calibration-d4-0016": {
+    "best_live_rank": 7.857142857142857,
+    "live_recall_at_beam": 0.2619047619047619,
+    "macro_auroc": 0.5154094388927554
+   },
+   "calibration-d4-0017": {
+    "best_live_rank": 12.5,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.30778985507246376
+   },
+   "calibration-d4-0018": {
+    "best_live_rank": 4.142857142857143,
+    "live_recall_at_beam": 0.6428571428571429,
+    "macro_auroc": 0.6617423915657611
+   },
+   "calibration-d4-0019": {
+    "best_live_rank": 6.142857142857143,
+    "live_recall_at_beam": 0.33333333333333337,
+    "macro_auroc": 0.5244513839622535
+   },
+   "calibration-d4-0020": {
+    "best_live_rank": 5.285714285714286,
+    "live_recall_at_beam": 0.40476190476190477,
+    "macro_auroc": 0.46377337320208906
+   },
+   "calibration-d4-0021": {
+    "best_live_rank": 7.0,
+    "live_recall_at_beam": 0.4,
+    "macro_auroc": 0.5901823281907433
+   },
+   "calibration-d4-0022": {
+    "best_live_rank": 9.0,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.5540322580645162
+   },
+   "calibration-d4-0023": {
+    "best_live_rank": 10.0,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.4584056141121359
+   },
+   "calibration-d4-0024": {
+    "best_live_rank": 9.714285714285714,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.3317733494363929
+   },
+   "calibration-d4-0025": {
+    "best_live_rank": 5.8,
+    "live_recall_at_beam": 0.3,
+    "macro_auroc": 0.5498568256194484
+   },
+   "calibration-d4-0026": {
+    "best_live_rank": 4.857142857142857,
+    "live_recall_at_beam": 0.19047619047619047,
+    "macro_auroc": 0.5703660419693029
+   },
+   "calibration-d4-0027": {
+    "best_live_rank": 4.285714285714286,
+    "live_recall_at_beam": 0.38095238095238093,
+    "macro_auroc": 0.655932493900138
+   },
+   "calibration-d4-0028": {
+    "best_live_rank": 10.0,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.5107176250584385
+   },
+   "calibration-d4-0029": {
+    "best_live_rank": 3.0,
+    "live_recall_at_beam": 0.6666666666666667,
+    "macro_auroc": 0.5497291431394692
+   },
+   "calibration-d4-0030": {
+    "best_live_rank": 8.5,
+    "live_recall_at_beam": 0.3333333333333333,
+    "macro_auroc": 0.5146135265700483
+   },
+   "calibration-d4-0031": {
+    "best_live_rank": 9.142857142857142,
+    "live_recall_at_beam": 0.11904761904761904,
+    "macro_auroc": 0.4098872497760263
+   },
+   "calibration-d4-0032": {
+    "best_live_rank": 5.571428571428571,
+    "live_recall_at_beam": 0.4047619047619047,
+    "macro_auroc": 0.6513656557814167
+   },
+   "calibration-d4-0033": {
+    "best_live_rank": 3.142857142857143,
+    "live_recall_at_beam": 0.9285714285714286,
+    "macro_auroc": 0.7843555900621118
+   },
+   "calibration-d4-0034": {
+    "best_live_rank": 10.75,
+    "live_recall_at_beam": 0.125,
+    "macro_auroc": 0.3215725806451613
+   },
+   "calibration-d4-0035": {
+    "best_live_rank": 7.857142857142857,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.5228002070393375
+   },
+   "calibration-d4-0036": {
+    "best_live_rank": 8.285714285714286,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.41187888198757766
+   },
+   "calibration-d4-0037": {
+    "best_live_rank": 7.75,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.6438172043010753
+   },
+   "calibration-d4-0038": {
+    "best_live_rank": 8.285714285714286,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.44318234100842796
+   },
+   "calibration-d4-0039": {
+    "best_live_rank": 10.0,
+    "live_recall_at_beam": 0.11904761904761904,
+    "macro_auroc": 0.45850055741360085
+   },
+   "calibration-d4-0040": {
+    "best_live_rank": 8.333333333333334,
+    "live_recall_at_beam": 0.16666666666666666,
+    "macro_auroc": 0.3142914653784219
+   },
+   "calibration-d4-0041": {
+    "best_live_rank": 9.75,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.4798387096774194
+   },
+   "calibration-d4-0042": {
+    "best_live_rank": 8.5,
+    "live_recall_at_beam": 0.08333333333333333,
+    "macro_auroc": 0.35389492753623186
+   },
+   "calibration-d4-0043": {
+    "best_live_rank": 4.857142857142857,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.6306748907292385
+   },
+   "calibration-d4-0044": {
+    "best_live_rank": 8.285714285714286,
+    "live_recall_at_beam": 0.09523809523809523,
+    "macro_auroc": 0.4071784645343796
+   },
+   "calibration-d4-0045": {
+    "best_live_rank": 7.142857142857143,
+    "live_recall_at_beam": 0.38095238095238093,
+    "macro_auroc": 0.5240374435347261
+   },
+   "calibration-d4-0046": {
+    "best_live_rank": 9.285714285714286,
+    "live_recall_at_beam": 0.2619047619047619,
+    "macro_auroc": 0.5524291557784985
+   },
+   "calibration-d4-0047": {
+    "best_live_rank": 4.0,
+    "live_recall_at_beam": 0.4761904761904762,
+    "macro_auroc": 0.5940615744963571
+   }
+  },
+  "thinking": {
+   "calibration-d4-0000": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.5714285714285714,
+    "macro_auroc": 0.7396552219921786
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 7.428571428571429,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.5834627329192547
+   },
+   "calibration-d4-0002": {
+    "best_live_rank": 9.571428571428571,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.3209469174143087
+   },
+   "calibration-d4-0003": {
+    "best_live_rank": 10.4,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.38920348293595136
+   },
+   "calibration-d4-0004": {
+    "best_live_rank": 7.714285714285714,
+    "live_recall_at_beam": 0.19047619047619047,
+    "macro_auroc": 0.45305850106153445
+   },
+   "calibration-d4-0005": {
+    "best_live_rank": 8.857142857142858,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.41657896250287557
+   },
+   "calibration-d4-0006": {
+    "best_live_rank": 7.428571428571429,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.29385343479125076
+   },
+   "calibration-d4-0007": {
+    "best_live_rank": 10.0,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.40456989247311825
+   },
+   "calibration-d4-0008": {
+    "best_live_rank": 8.571428571428571,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.409041926772905
+   },
+   "calibration-d4-0009": {
+    "best_live_rank": 9.285714285714286,
+    "live_recall_at_beam": 0.09999999999999999,
+    "macro_auroc": 0.2605654761904762
+   },
+   "calibration-d4-0010": {
+    "best_live_rank": 8.0,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.4047062890812891
+   },
+   "calibration-d4-0011": {
+    "best_live_rank": 9.75,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.36693548387096775
+   },
+   "calibration-d4-0012": {
+    "best_live_rank": 4.428571428571429,
+    "live_recall_at_beam": 0.4761904761904762,
+    "macro_auroc": 0.5862654379638075
+   },
+   "calibration-d4-0013": {
+    "best_live_rank": 5.571428571428571,
+    "live_recall_at_beam": 0.21428571428571427,
+    "macro_auroc": 0.6266764435242697
+   },
+   "calibration-d4-0014": {
+    "best_live_rank": 4.571428571428571,
+    "live_recall_at_beam": 0.5714285714285714,
+    "macro_auroc": 0.6135711912885826
+   },
+   "calibration-d4-0015": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.38095238095238093,
+    "macro_auroc": 0.658985036702428
+   },
+   "calibration-d4-0016": {
+    "best_live_rank": 7.142857142857143,
+    "live_recall_at_beam": 0.33333333333333337,
+    "macro_auroc": 0.4344468126666054
+   },
+   "calibration-d4-0017": {
+    "best_live_rank": 7.333333333333333,
+    "live_recall_at_beam": 0.16666666666666666,
+    "macro_auroc": 0.5337862318840579
+   },
+   "calibration-d4-0018": {
+    "best_live_rank": 5.428571428571429,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.6543814503732982
+   },
+   "calibration-d4-0019": {
+    "best_live_rank": 6.857142857142857,
+    "live_recall_at_beam": 0.2619047619047619,
+    "macro_auroc": 0.5434543842831886
+   },
+   "calibration-d4-0020": {
+    "best_live_rank": 7.142857142857143,
+    "live_recall_at_beam": 0.047619047619047616,
+    "macro_auroc": 0.4808786970060984
+   },
+   "calibration-d4-0021": {
+    "best_live_rank": 7.4,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.5994360682561944
+   },
+   "calibration-d4-0022": {
+    "best_live_rank": 9.5,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.4588709677419355
+   },
+   "calibration-d4-0023": {
+    "best_live_rank": 6.857142857142857,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.5183715062111801
+   },
+   "calibration-d4-0024": {
+    "best_live_rank": 8.714285714285714,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.4294714745801702
+   },
+   "calibration-d4-0025": {
+    "best_live_rank": 4.0,
+    "live_recall_at_beam": 0.3,
+    "macro_auroc": 0.6358228143992519
+   },
+   "calibration-d4-0026": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.4523809523809524,
+    "macro_auroc": 0.6129387520691868
+   },
+   "calibration-d4-0027": {
+    "best_live_rank": 5.142857142857143,
+    "live_recall_at_beam": 0.38095238095238093,
+    "macro_auroc": 0.642168644980829
+   },
+   "calibration-d4-0028": {
+    "best_live_rank": 7.2,
+    "live_recall_at_beam": 0.4,
+    "macro_auroc": 0.5549234455352969
+   },
+   "calibration-d4-0029": {
+    "best_live_rank": 4.0,
+    "live_recall_at_beam": 0.4523809523809524,
+    "macro_auroc": 0.7263419325239978
+   },
+   "calibration-d4-0030": {
+    "best_live_rank": 10.833333333333334,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.29739331723027373
+   },
+   "calibration-d4-0031": {
+    "best_live_rank": 5.857142857142857,
+    "live_recall_at_beam": 0.3095238095238095,
+    "macro_auroc": 0.44878877769423775
+   },
+   "calibration-d4-0032": {
+    "best_live_rank": 4.142857142857143,
+    "live_recall_at_beam": 0.3095238095238095,
+    "macro_auroc": 0.5224072048120961
+   },
+   "calibration-d4-0033": {
+    "best_live_rank": 6.285714285714286,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.6312111801242236
+   },
+   "calibration-d4-0034": {
+    "best_live_rank": 6.5,
+    "live_recall_at_beam": 0.375,
+    "macro_auroc": 0.657258064516129
+   },
+   "calibration-d4-0035": {
+    "best_live_rank": 10.0,
+    "live_recall_at_beam": 0.07142857142857142,
+    "macro_auroc": 0.3495197837589142
+   },
+   "calibration-d4-0036": {
+    "best_live_rank": 12.285714285714286,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.23000776397515527
+   },
+   "calibration-d4-0037": {
+    "best_live_rank": 8.5,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.5005376344086021
+   },
+   "calibration-d4-0038": {
+    "best_live_rank": 5.285714285714286,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.6211359192337453
+   },
+   "calibration-d4-0039": {
+    "best_live_rank": 7.142857142857143,
+    "live_recall_at_beam": 0.08333333333333333,
+    "macro_auroc": 0.4329705283762412
+   },
+   "calibration-d4-0040": {
+    "best_live_rank": 8.5,
+    "live_recall_at_beam": 0.16666666666666666,
+    "macro_auroc": 0.3338667471819646
+   },
+   "calibration-d4-0041": {
+    "best_live_rank": 9.0,
+    "live_recall_at_beam": 0.25,
+    "macro_auroc": 0.4185483870967742
+   },
+   "calibration-d4-0042": {
+    "best_live_rank": 5.833333333333333,
+    "live_recall_at_beam": 0.4166666666666667,
+    "macro_auroc": 0.5933876811594203
+   },
+   "calibration-d4-0043": {
+    "best_live_rank": 7.857142857142857,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.41510668276972623
+   },
+   "calibration-d4-0044": {
+    "best_live_rank": 6.0,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.5691463109878175
+   },
+   "calibration-d4-0045": {
+    "best_live_rank": 6.0,
+    "live_recall_at_beam": 0.38095238095238093,
+    "macro_auroc": 0.5998685417843026
+   },
+   "calibration-d4-0046": {
+    "best_live_rank": 2.7142857142857144,
+    "live_recall_at_beam": 0.5476190476190477,
+    "macro_auroc": 0.7609472049689441
+   },
+   "calibration-d4-0047": {
+    "best_live_rank": 5.285714285714286,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.5738035314122271
+   }
+  }
+ },
+ "schema_version": 1,
+ "smoke": false,
+ "source_artifacts": {
+  "data/calibration_candidates.jsonl": {
+   "sha256": "37e03e2a8a861ac47ece0bd4faaa41690cc2e0fa760d7b8c518c918a146c50f5"
+  },
+  "runs/calibration_model_receipt.json": {
+   "sha256": "6a2e05c2ccb35a607a5f59a3ea298d626f21abce39d0bc92dc8bcb4f95f5b495"
+  },
+  "runs/calibration_nextop.jsonl": {
+   "sha256": "20d2d75e7a6c7bb90e1977723392067d3b89230f8502bb26b8dc234e712d7c5f"
+  },
+  "runs/calibration_nothink.jsonl": {
+   "sha256": "468cd973d62e53b5bd7c87583992f293cd59012656540781bd7131f419bf4f30"
+  },
+  "runs/calibration_task_shuffled.jsonl": {
+   "sha256": "bfa1309958790a58fb46bb6bc508b5da70b96cb6b01f19df616f4927e7952330"
+  },
+  "runs/calibration_thinking.jsonl": {
+   "sha256": "15a2c30b5c20a072e54461e5e16ad8ce771fa3e377cd11b6ce76e11894566541"
+  }
+ },
+ "strongest_auc_baseline": "nothink",
+ "strongest_recall_baseline": "nothink",
+ "task_shuffle_canary": {
+  "n_candidates": 1200,
+  "n_tasks": 8,
+  "original_macro_auroc": {
+   "ci_high": 0.5512256532067837,
+   "ci_low": 0.3652553643415549,
+   "estimate": 0.45016614326130905,
+   "n_tasks": 8,
+   "reps": 10000
+  },
+  "original_minus_shuffled": {
+   "ci_high": 0.08986450248757948,
+   "ci_low": -0.14582833746772156,
+   "estimate": -0.025360848875355224,
+   "n_tasks": 8,
+   "reps": 10000
+  },
+  "task_shuffled_macro_auroc": {
+   "ci_high": 0.5585101871191142,
+   "ci_low": 0.40512706248526964,
+   "estimate": 0.4755269921366643,
+   "n_tasks": 8,
+   "reps": 10000
+  }
+ },
+ "thinking_auc_difference": {
+  "ci_high": -0.009503187082277601,
+  "ci_low": -0.08973016391992075,
+  "estimate": -0.04918415737134662,
+  "n_tasks": 48,
+  "reps": 10000
+ },
+ "thinking_forced_close_rate": 1.0,
+ "thinking_recall_difference": {
+  "ci_high": 0.007142857142857141,
+  "ci_low": -0.11046874999999999,
+  "estimate": -0.05248015873015873,
+  "n_tasks": 48,
+  "reps": 10000
+ },
+ "thresholds": {
+  "min_auroc_lift": 0.05,
+  "min_macro_auroc": 0.65,
+  "min_macro_auroc_lcb": 0.5,
+  "min_recall_at_beam_lift": 0.1
+ }
+}

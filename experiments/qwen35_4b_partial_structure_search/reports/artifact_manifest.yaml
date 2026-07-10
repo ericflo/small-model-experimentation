@@ -1,0 +1,32 @@
+schema_version: 1
+experiment_id: "qwen35_4b_partial_structure_search"
+external_artifacts:
+  - name: "full thinking viability raw trace"
+    storage: "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_thinking.raw.jsonl"
+    required_for: "token-level inspection only; compact scores and aggregate accounting are tracked in git"
+    checksum: "sha256:c18f1505318def01d1b12e96eba57d551063ff747ccc5d88bf796ba77c2b0914"
+    regenerate: ".venv-vllm/bin/python experiments/qwen35_4b_partial_structure_search/scripts/run_calibration.py --recompute; then python3 experiments/qwen35_4b_partial_structure_search/scripts/compact_calibration_outputs.py"
+  - name: "full no-think viability raw trace"
+    storage: "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_nothink.raw.jsonl"
+    required_for: "token-level inspection only; compact scores and aggregate accounting are tracked in git"
+    checksum: "sha256:7172e7cce43a48153247d965c8f2f2b24c6e46608a6371c031af7ef272e155d0"
+    regenerate: ".venv-vllm/bin/python experiments/qwen35_4b_partial_structure_search/scripts/run_calibration.py --recompute; then python3 experiments/qwen35_4b_partial_structure_search/scripts/compact_calibration_outputs.py"
+  - name: "full next-operation raw trace"
+    storage: "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_nextop.raw.jsonl"
+    required_for: "targeted-logprob inspection only; compact A--P probabilities are tracked in git"
+    checksum: "sha256:ca8a28cdbaf72d21c570de8549f1e1814b8cf77d3e0002684876eea45c81713a"
+    regenerate: ".venv-vllm/bin/python experiments/qwen35_4b_partial_structure_search/scripts/run_calibration.py --recompute; then python3 experiments/qwen35_4b_partial_structure_search/scripts/compact_calibration_outputs.py"
+  - name: "task-shuffled thinking raw trace"
+    storage: "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_task_shuffled.raw.jsonl"
+    required_for: "token-level canary inspection only; compact scores and aggregate accounting are tracked in git"
+    checksum: "sha256:1be073a03242135ea72c5e16a16033a0321ba2cc2a8c5fdcd021ed77993bbc1e"
+    regenerate: ".venv-vllm/bin/python experiments/qwen35_4b_partial_structure_search/scripts/run_calibration.py --recompute; then python3 experiments/qwen35_4b_partial_structure_search/scripts/compact_calibration_outputs.py"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: ".venv-vllm/bin/python experiments/qwen35_4b_partial_structure_search/scripts/run.py --smoke --workers 4"
+  full_command: ".venv-vllm/bin/python experiments/qwen35_4b_partial_structure_search/scripts/run.py --workers 8"
+  required_external_artifacts: []
+notes: >-
+  Compact calibration scores, exact data/oracle tables, gate verdicts, model receipt, analysis summary, and
+  full-brute result are tracked. External raw traces are not required to reproduce the reported statistics.
+  The full orchestrator intentionally stops after the failed recognition gate and does not run primary search.

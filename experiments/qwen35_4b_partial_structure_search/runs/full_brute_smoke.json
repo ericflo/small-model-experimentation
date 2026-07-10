@@ -1,0 +1,533 @@
+{
+ "aggregate_accounting": {
+  "behavior_states_inserted": 650990,
+  "case_operation_applications": 5827696,
+  "full_skeletons_yielded": 0,
+  "invalid_vector_transitions": 4484,
+  "parameter_fills_yielded": 0,
+  "prefix_rows_emitted": 0,
+  "pruning_case_candidate_pipelines": 66020,
+  "successful_concrete_pipelines": 15,
+  "successful_type_skeletons": 15,
+  "transition_requests": 5496704,
+  "validation_case_operation_applications": 330992,
+  "validation_pipelines_checked": 66020,
+  "vector_transitions_computed": 5496704
+ },
+ "baseline": "full_brute",
+ "depths": [
+  5
+ ],
+ "exact": true,
+ "hidden_used_for_search_or_selection": false,
+ "label_probe_used_for_search_or_selection": false,
+ "label_source_splits": [
+  "visible"
+ ],
+ "logical_accounting": {
+  "concrete_parameterized_leaves": 67108864,
+  "type_skeleton_leaves": 2097152
+ },
+ "parallel_wall_seconds": 9.316448180936277,
+ "path_coverage_rate": 1.0,
+ "rows": [
+  {
+   "accounting": {
+    "behavior_states_inserted": 351209,
+    "case_operation_applications": 2937359,
+    "full_skeletons_yielded": 0,
+    "invalid_vector_transitions": 2454,
+    "parameter_fills_yielded": 0,
+    "prefix_rows_emitted": 0,
+    "pruning_case_candidate_pipelines": 1021,
+    "successful_concrete_pipelines": 12,
+    "successful_type_skeletons": 12,
+    "transition_requests": 2931584,
+    "validation_case_operation_applications": 5775,
+    "validation_pipelines_checked": 1021,
+    "vector_transitions_computed": 2931584
+   },
+   "baseline": "full_brute",
+   "depth": 5,
+   "exact": true,
+   "hidden_successful_pipeline_count": 8,
+   "hidden_used_for_search_or_selection": false,
+   "label_probe_used_for_search_or_selection": false,
+   "label_source_splits": [
+    "visible"
+   ],
+   "logical_search_space": {
+    "concrete_operations": 32,
+    "concrete_parameterized_leaves": 33554432,
+    "operation_types": 16,
+    "type_prefix_nodes_including_root": 1118481,
+    "type_skeleton_leaves": 1048576
+   },
+   "path_coverage_hidden": true,
+   "quotient_rule": "identical output on the frozen first visible input; deterministic suffix congruence; all successful concrete paths backtracked",
+   "schema_version": 1,
+   "search_algorithm": "exact_first_visible_case_behavioral_state_quotient",
+   "selected_hidden_success": true,
+   "selected_ops": [
+    "sort_asc",
+    "drop_k(3)",
+    "dedup_adjacent",
+    "reverse",
+    "rotate_k(2)"
+   ],
+   "selected_pipeline": [
+    [
+     "sort_asc",
+     null
+    ],
+    [
+     "drop_k",
+     3
+    ],
+    [
+     "dedup_adjacent",
+     null
+    ],
+    [
+     "reverse",
+     null
+    ],
+    [
+     "rotate_k",
+     2
+    ]
+   ],
+   "selector": {
+    "abstained": false,
+    "candidate_count": 12,
+    "plurality_size": 8,
+    "signature_groups": 3
+   },
+   "task_id": "primary-d5-0000",
+   "visible_successful_pipeline_count": 12,
+   "visible_successful_pipelines": [
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "unique_stable",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "dedup_adjacent",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ],
+     [
+      "unique_stable",
+      null
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ],
+     [
+      "dedup_adjacent",
+      null
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "sort_desc",
+      null
+     ],
+     [
+      "unique_stable",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "sort_desc",
+      null
+     ],
+     [
+      "dedup_adjacent",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "sort_desc",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ],
+     [
+      "unique_stable",
+      null
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "sort_desc",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ],
+     [
+      "dedup_adjacent",
+      null
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "unique_stable",
+      null
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "unique_stable",
+      null
+     ],
+     [
+      "sort_desc",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "dedup_adjacent",
+      null
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ],
+    [
+     [
+      "sort_asc",
+      null
+     ],
+     [
+      "drop_k",
+      3
+     ],
+     [
+      "dedup_adjacent",
+      null
+     ],
+     [
+      "sort_desc",
+      null
+     ],
+     [
+      "rotate_k",
+      2
+     ]
+    ]
+   ],
+   "visible_successful_type_skeleton_count": 12,
+   "wall_seconds": 9.280572379007936
+  },
+  {
+   "accounting": {
+    "behavior_states_inserted": 299781,
+    "case_operation_applications": 2890337,
+    "full_skeletons_yielded": 0,
+    "invalid_vector_transitions": 2030,
+    "parameter_fills_yielded": 0,
+    "prefix_rows_emitted": 0,
+    "pruning_case_candidate_pipelines": 64999,
+    "successful_concrete_pipelines": 3,
+    "successful_type_skeletons": 3,
+    "transition_requests": 2565120,
+    "validation_case_operation_applications": 325217,
+    "validation_pipelines_checked": 64999,
+    "vector_transitions_computed": 2565120
+   },
+   "baseline": "full_brute",
+   "depth": 5,
+   "exact": true,
+   "hidden_successful_pipeline_count": 3,
+   "hidden_used_for_search_or_selection": false,
+   "label_probe_used_for_search_or_selection": false,
+   "label_source_splits": [
+    "visible"
+   ],
+   "logical_search_space": {
+    "concrete_operations": 32,
+    "concrete_parameterized_leaves": 33554432,
+    "operation_types": 16,
+    "type_prefix_nodes_including_root": 1118481,
+    "type_skeleton_leaves": 1048576
+   },
+   "path_coverage_hidden": true,
+   "quotient_rule": "identical output on the frozen first visible input; deterministic suffix congruence; all successful concrete paths backtracked",
+   "schema_version": 1,
+   "search_algorithm": "exact_first_visible_case_behavioral_state_quotient",
+   "selected_hidden_success": true,
+   "selected_ops": [
+    "adjacent_diff",
+    "running_sum",
+    "mod_k(3)",
+    "reverse",
+    "drop_k(1)"
+   ],
+   "selected_pipeline": [
+    [
+     "adjacent_diff",
+     null
+    ],
+    [
+     "running_sum",
+     null
+    ],
+    [
+     "mod_k",
+     3
+    ],
+    [
+     "reverse",
+     null
+    ],
+    [
+     "drop_k",
+     1
+    ]
+   ],
+   "selector": {
+    "abstained": false,
+    "candidate_count": 3,
+    "plurality_size": 3,
+    "signature_groups": 1
+   },
+   "task_id": "primary-d5-0001",
+   "visible_successful_pipeline_count": 3,
+   "visible_successful_pipelines": [
+    [
+     [
+      "adjacent_diff",
+      null
+     ],
+     [
+      "running_sum",
+      null
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "mod_k",
+      3
+     ],
+     [
+      "drop_k",
+      1
+     ]
+    ],
+    [
+     [
+      "adjacent_diff",
+      null
+     ],
+     [
+      "running_sum",
+      null
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "drop_k",
+      1
+     ],
+     [
+      "mod_k",
+      3
+     ]
+    ],
+    [
+     [
+      "adjacent_diff",
+      null
+     ],
+     [
+      "running_sum",
+      null
+     ],
+     [
+      "mod_k",
+      3
+     ],
+     [
+      "reverse",
+      null
+     ],
+     [
+      "drop_k",
+      1
+     ]
+    ]
+   ],
+   "visible_successful_type_skeleton_count": 3,
+   "wall_seconds": 9.086415155790746
+  }
+ ],
+ "schema_version": 1,
+ "selected_hidden_success_rate": 1.0,
+ "selector": "experiment_common.consensus_select",
+ "smoke": true,
+ "split": "primary",
+ "sum_task_wall_seconds": 18.36698753479868,
+ "task_count": 2,
+ "task_source": "/workspace/small-model-experimentation/experiments/qwen35_4b_partial_structure_search/data/primary_tasks_smoke.jsonl",
+ "task_source_sha256": "b51f1385c0802bd0650d61bc079f2d4d3cba16b880e179f5a6fc6b96c943c34f",
+ "workers": 4
+}

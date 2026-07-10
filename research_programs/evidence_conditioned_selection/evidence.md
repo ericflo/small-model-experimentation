@@ -9,6 +9,14 @@
 
 ## Key Result
 
+- [qwen35_4b_partial_structure_search](../../experiments/qwen35_4b_partial_structure_search/reports/report.md)
+  adds a hard negative boundary to confidence-based control. On 7,200 unfinished type-prefix children,
+  thinking P(viable) had pooled AUROC 0.557 but task-macro AUROC 0.506 and recall@4 0.251; task-shuffled visible
+  evidence was no worse. No-think was modestly stronger (0.556 AUROC, 0.303 recall) but still below the frozen
+  actionability threshold. Thus C10/C46-style confidence selection does not transfer automatically from
+  completed candidates to existential partial reachability. Search controllers must be evaluated within task
+  and at the actual retained beam, and should expose residual evidence rather than only symbolic prefix names.
+
 - [qwen35_4b_generator_verifier_gap](../../experiments/qwen35_4b_generator_verifier_gap/reports/report.md)
   (claim C10): the C2 wall is **plumbing, not capability**. A frozen 4B's black-box self-verification is
   weak/yes-biased with no-think (AUROC 0.77) but strong with thinking (AUROC 0.93); its own zero-training,
@@ -43,3 +51,8 @@ should (a) benchmark against the thinking-verifier before building trained selec
 thinking as a verification lever (not only generation), and (c) still report oracle coverage only as a
 diagnostic with the deployable decision rule as the main object. Top follow-up: wire the thinking-verifier
 into a controller (vs/with the visible test) and measure the deployable accuracy-vs-token Pareto.
+
+The partial-structure result narrows that optimism: confidence is useful when correctness is readable from a
+completed candidate, but an existential unfinished-state judgment can collapse to task difficulty. Any
+controller follow-up must report task-macro discrimination, sibling recall at the deployed beam, a task-
+shuffled evidence canary, and prefill-inclusive compute—not just pooled AUROC.

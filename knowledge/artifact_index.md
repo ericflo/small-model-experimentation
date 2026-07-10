@@ -19,17 +19,17 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Directory | Experiments |
 | --- | ---: |
-| `reports/` | 203 |
-| `src/` | 191 |
-| `runs/` | 137 |
-| `analysis/` | 128 |
-| `scripts/` | 112 |
-| `configs/` | 109 |
-| `data/` | 100 |
+| `reports/` | 204 |
+| `src/` | 192 |
+| `runs/` | 138 |
+| `analysis/` | 129 |
+| `scripts/` | 113 |
+| `configs/` | 110 |
+| `data/` | 101 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `figures/` | 10 |
-| `tests/` | 4 |
+| `tests/` | 5 |
 | `archive/` | 1 |
 | `suite_logs/` | 1 |
 
@@ -37,14 +37,14 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2166 |
+| `.json` | 2192 |
 | `.csv` | 2135 |
-| `.py` | 1092 |
+| `.py` | 1123 |
+| `.md` | 853 |
 | `.png` | 848 |
-| `.md` | 847 |
-| `.jsonl` | 617 |
+| `.jsonl` | 645 |
 | `.log` | 527 |
-| `.yaml` | 304 |
+| `.yaml` | 307 |
 | `.html` | 90 |
 | `.gz` | 46 |
 | `.sh` | 19 |
@@ -57,6 +57,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | Size MB | File |
 | ---: | --- |
 | 14.1 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/policy_rows.json` |
+| 11.9 | `experiments/qwen35_4b_partial_structure_search/data/calibration_candidates.jsonl` |
 | 10.7 | `experiments/qwen35_4b_gauntlet_breadth_round1/data/sft_round3_fast.jsonl` |
 | 10.4 | `experiments/qwen35_4b_reliability_exec_opsd_audit/data/exec_token_pressure_scores.jsonl` |
 | 8.5 | `experiments/qwen35_4b_learned_active_trace_policy/data/static_bridge_80/dsl_train.jsonl` |
@@ -81,8 +82,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 5.5 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/budget_calibration/think_16384/calibration.jsonl` |
 | 5.4 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/selective_records.jsonl` |
 | 5.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/base_anchor/dsl_train_static80_base.jsonl` |
+| 4.9 | `experiments/qwen35_4b_partial_structure_search/runs/calibration_task_shuffled_smoke.jsonl` |
+| 4.9 | `experiments/qwen35_4b_partial_structure_search/runs/calibration_thinking_smoke.jsonl` |
 | 4.8 | `experiments/qwen35_4b_joint_shortlister_ladder/data/train_pairs.jsonl` |
 | 4.7 | `experiments/qwen35_4b_joint_shortlister_ladder/data/train_records.jsonl` |
-| 4.7 | `experiments/rule_family_diversity_scaling/data/repair_all.jsonl` |
-| 4.6 | `experiments/qwen35_4b_oracle_probe_synthesis_mdp/reports/all_eval_records.json` |
-| 4.5 | `experiments/qwen35_4b_adaptive_evidence_budget_policy/data/train_budget_states.jsonl` |

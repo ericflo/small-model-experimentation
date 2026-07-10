@@ -1,0 +1,3135 @@
+{
+ "development_hidden_used_for_gate": true,
+ "evaluated_splits": [
+  "calibration",
+  "development"
+ ],
+ "gate": "oracle_state_usefulness",
+ "gate_basis_split": "development",
+ "hidden_used_for_labels": false,
+ "passed": true,
+ "primary_artifacts_loaded": false,
+ "primary_hidden_used_for_gate": false,
+ "rows": [
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 56,
+    "parameter_fills_attempted": 4,
+    "primitive_applications": 224
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 3
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 3,
+    "plurality_size": 3,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0000",
+   "visible_label_candidate_count": 3
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 770,
+    "parameter_fills_attempted": 55,
+    "primitive_applications": 3080
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 3
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 3,
+    "plurality_size": 3,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0001",
+   "visible_label_candidate_count": 3
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2016
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0002",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 210,
+    "parameter_fills_attempted": 15,
+    "primitive_applications": 840
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0003",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 672,
+    "parameter_fills_attempted": 48,
+    "primitive_applications": 2688
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0004",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 9072,
+    "parameter_fills_attempted": 648,
+    "primitive_applications": 36288
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 8,
+    "plurality_size": 8,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0005",
+   "visible_label_candidate_count": 8
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2016
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0006",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 154,
+    "parameter_fills_attempted": 11,
+    "primitive_applications": 616
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 1
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 1,
+    "plurality_size": 1,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0007",
+   "visible_label_candidate_count": 1
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 1512,
+    "parameter_fills_attempted": 108,
+    "primitive_applications": 6048
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 12,
+    "plurality_size": 12,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0008",
+   "visible_label_candidate_count": 12
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 2646,
+    "parameter_fills_attempted": 189,
+    "primitive_applications": 10584
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": false,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": false,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 8,
+    "plurality_size": 8,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0009",
+   "visible_label_candidate_count": 8
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 1512,
+    "parameter_fills_attempted": 108,
+    "primitive_applications": 6048
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 8,
+    "plurality_size": 8,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0010",
+   "visible_label_candidate_count": 8
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 238,
+    "parameter_fills_attempted": 17,
+    "primitive_applications": 952
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 1
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 1,
+    "plurality_size": 1,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0011",
+   "visible_label_candidate_count": 1
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 8,
+    "plurality_size": 8,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0012",
+   "visible_label_candidate_count": 8
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2016
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0013",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0014",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0015",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2016
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 7,
+    "plurality_size": 7,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0016",
+   "visible_label_candidate_count": 7
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 602,
+    "parameter_fills_attempted": 43,
+    "primitive_applications": 2408
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0017",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 6,
+    "plurality_size": 6,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0018",
+   "visible_label_candidate_count": 6
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0019",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 224,
+    "parameter_fills_attempted": 16,
+    "primitive_applications": 896
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0020",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 350,
+    "parameter_fills_attempted": 25,
+    "primitive_applications": 1400
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0021",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 238,
+    "parameter_fills_attempted": 17,
+    "primitive_applications": 952
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 1
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 1,
+    "plurality_size": 1,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0022",
+   "visible_label_candidate_count": 1
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 3024,
+    "parameter_fills_attempted": 216,
+    "primitive_applications": 12096
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0023",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 1008,
+    "parameter_fills_attempted": 72,
+    "primitive_applications": 4032
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0024",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 126,
+    "parameter_fills_attempted": 9,
+    "primitive_applications": 504
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0025",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2016
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0026",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 6,
+    "plurality_size": 6,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0027",
+   "visible_label_candidate_count": 6
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 350,
+    "parameter_fills_attempted": 25,
+    "primitive_applications": 1400
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0028",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 336,
+    "parameter_fills_attempted": 24,
+    "primitive_applications": 1344
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0029",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 1148,
+    "parameter_fills_attempted": 82,
+    "primitive_applications": 4592
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 3
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 6,
+    "plurality_size": 6,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0030",
+   "visible_label_candidate_count": 6
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 4032,
+    "parameter_fills_attempted": 288,
+    "primitive_applications": 16128
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0031",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 12096,
+    "parameter_fills_attempted": 864,
+    "primitive_applications": 48384
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0032",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 602,
+    "parameter_fills_attempted": 43,
+    "primitive_applications": 2408
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0033",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 182,
+    "parameter_fills_attempted": 13,
+    "primitive_applications": 728
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0034",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2016
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 7,
+    "plurality_size": 7,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0035",
+   "visible_label_candidate_count": 7
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 182,
+    "parameter_fills_attempted": 13,
+    "primitive_applications": 728
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0036",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 238,
+    "parameter_fills_attempted": 17,
+    "primitive_applications": 952
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 1
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 1,
+    "plurality_size": 1,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0037",
+   "visible_label_candidate_count": 1
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0038",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 672,
+    "parameter_fills_attempted": 48,
+    "primitive_applications": 2688
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0039",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 140,
+    "parameter_fills_attempted": 10,
+    "primitive_applications": 560
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 3
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 3,
+    "plurality_size": 3,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0040",
+   "visible_label_candidate_count": 3
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 154,
+    "parameter_fills_attempted": 11,
+    "primitive_applications": 616
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 1
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 1,
+    "plurality_size": 1,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0041",
+   "visible_label_candidate_count": 1
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 182,
+    "parameter_fills_attempted": 13,
+    "primitive_applications": 728
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 2
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 2,
+    "plurality_size": 2,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0042",
+   "visible_label_candidate_count": 2
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0043",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 672
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0044",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 1008,
+    "parameter_fills_attempted": 72,
+    "primitive_applications": 4032
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0045",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 2016,
+    "parameter_fills_attempted": 144,
+    "primitive_applications": 8064
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 7,
+    "plurality_size": 7,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0046",
+   "visible_label_candidate_count": 7
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 4032,
+    "parameter_fills_attempted": 288,
+    "primitive_applications": 16128
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0047",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 1260,
+    "parameter_fills_attempted": 90,
+    "primitive_applications": 6300
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0000",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 1008,
+    "parameter_fills_attempted": 72,
+    "primitive_applications": 5040
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0001",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 1008,
+    "parameter_fills_attempted": 72,
+    "primitive_applications": 5040
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0002",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 840
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 1
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 1,
+    "plurality_size": 1,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0003",
+   "visible_label_candidate_count": 1
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 1148,
+    "parameter_fills_attempted": 82,
+    "primitive_applications": 5740
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 3
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 3,
+    "plurality_size": 3,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0004",
+   "visible_label_candidate_count": 3
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 154,
+    "parameter_fills_attempted": 11,
+    "primitive_applications": 770
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 1
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 1,
+    "plurality_size": 1,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0005",
+   "visible_label_candidate_count": 1
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 1008,
+    "parameter_fills_attempted": 72,
+    "primitive_applications": 5040
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0006",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2520
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0007",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 9072,
+    "parameter_fills_attempted": 648,
+    "primitive_applications": 45360
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 12,
+    "plurality_size": 12,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0008",
+   "visible_label_candidate_count": 12
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 168,
+    "parameter_fills_attempted": 12,
+    "primitive_applications": 840
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0009",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 504,
+    "parameter_fills_attempted": 36,
+    "primitive_applications": 2520
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 8,
+    "plurality_size": 8,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0010",
+   "visible_label_candidate_count": 8
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 336,
+    "parameter_fills_attempted": 24,
+    "primitive_applications": 1680
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 1
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0011",
+   "visible_label_candidate_count": 4
+  }
+ ],
+ "schema_version": 2,
+ "source_artifacts": {
+  "data/calibration_oracle.jsonl": {
+   "sha256": "341c5459bba564428cbef3c81a9ed9494d08cdb4e562a7034de8cb17ea75b252"
+  },
+  "data/calibration_tasks.jsonl": {
+   "sha256": "8a513ff9ce4eb00c6f5892ca212ccf260c6a1f7cf7e02a575519a26cbffa142b"
+  },
+  "data/development_oracle.jsonl": {
+   "sha256": "9a7c27af8462641ee7da357a320c831452acf209bc96e50cd42a19f17d69c1ca"
+  },
+  "data/development_tasks.jsonl": {
+   "sha256": "91841df5f31bf2e060124398497c42fbd52a6a9f5738cdee836758b05a52c2be"
+  }
+ },
+ "splits": {
+  "calibration": {
+   "live_density_by_length": {
+    "1": 0.12760416666666666,
+    "2": 0.015055338541666666,
+    "3": 0.0014750162760416667,
+    "4": 9.282430013020833e-05
+   },
+   "mean_compression": 16384.0,
+   "mean_oracle_wall_seconds": 1.354446560648891,
+   "n": 48,
+   "path_rate": 0.9791666666666666,
+   "selected_rate": 0.9791666666666666
+  },
+  "development": {
+   "live_density_by_length": {
+    "1": 0.11979166666666667,
+    "2": 0.013997395833333334,
+    "3": 0.0013224283854166667,
+    "4": 0.000118255615234375,
+    "5": 7.788340250651041e-06
+   },
+   "mean_compression": 262144.0,
+   "mean_oracle_wall_seconds": 13.776590572282052,
+   "n": 12,
+   "path_rate": 1.0,
+   "selected_rate": 1.0
+  }
+ },
+ "thresholds": {
+  "min_completed_skeleton_compression": 10.0,
+  "min_hidden_path_rate": 0.9
+ }
+}

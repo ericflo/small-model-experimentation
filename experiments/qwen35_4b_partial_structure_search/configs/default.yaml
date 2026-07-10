@@ -1,0 +1,67 @@
+# Frozen pre-registration. Change only before any result-bearing model scoring; record changes in experiment_log.md.
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  backend: vllm
+
+task:
+  family: list
+  operation_types: 16
+  visible_examples: 8
+  label_probe_examples: 6
+  hidden_examples: 6
+  calibration_depth: 4
+  calibration_n: 48
+  calibration_seed: 8101
+  oracle_development_n: 12
+  oracle_development_seed: 9001
+  primary_depth: 5
+  primary_n: 60
+  primary_seed: 9101
+  primary_shards: 2
+  smoke_n: 2
+
+oracle_gate:
+  min_hidden_path_rate: 0.90
+  min_completed_skeleton_compression: 10.0
+
+judge:
+  thinking_budget: 256
+  beam_width: 4
+  run_seed: 1701
+  max_model_len: 4096
+  max_num_seqs: 32
+  gpu_memory_utilization: 0.90
+
+calibration:
+  live_parents_per_task_per_slot: 2
+  dead_parents_per_task_per_slot: 1
+  min_macro_auroc: 0.65
+  min_macro_auroc_lcb: 0.50
+  min_auroc_lift: 0.05
+  min_recall_at_beam_lift: 0.10
+  bootstrap_reps: 10000
+  shuffle_canary_tasks: 8
+
+search:
+  max_depth: 5
+  beam_width: 4
+  # One frozen pool serves two deterministic-prefix baselines: sampled-token matched and
+  # total-logical-model-token matched. K=320 cannot cover the latter in the worst case.
+  direct_sample_pool_k: 512
+  direct_sample_max_tokens: 96
+  parameter_fill_cap_per_task: 4096
+  meaningful_accuracy_lift: 0.10
+  bootstrap_reps: 10000
+
+controls:
+  - thinking_ptrue
+  - no_think_ptrue
+  - next_op_likelihood
+  - shuffled_thinking_scores
+  - uniform_seeded_beam
+  - surface_model
+  - budget_truncated_brute
+  - full_brute
+  - oracle_live
+  - direct_sample_more

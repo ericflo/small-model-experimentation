@@ -1,6 +1,6 @@
 {
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
- "extracted_on": "2026-07-02",
+ "extracted_on": "2026-07-10",
  "experiments": {
   "adaptive_cognitive_kernel": {
    "charts": [
@@ -45071,6 +45071,36 @@
      "y_format": "percent01",
      "note": "At 49k, the fresh K=4 probe recorded 38 loops, 10 unresolved contacts, and 6 answer-limit contacts; at terminal 61k it recorded 40, 8, and 4. Registered maxima for unresolved, loops, and answer-limit shares are 5%, 25%, and 5% respectively, so both rungs failed every threshold. The terminal selector is pass=false with no selected budget; no decoded or scored content was inspected.",
      "source": "analysis/scientific_smoke_49k_termination_audit.json; analysis/scientific_smoke_61k_termination_audit.json; analysis/smoke_budget_selection.json"
+    }
+   ]
+  },
+  "qwen35_4b_partial_structure_search": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Type-prefix viability was not readable enough to guide search",
+     "categories": [
+      "Thinking",
+      "No-think",
+      "Next-op",
+      "Surface",
+      "Random"
+     ],
+     "series": [
+      {
+       "label": "macro within-task AUROC",
+       "values": [50.6443, 55.5627, 50.365, 51.9021, 50.5841]
+      },
+      {
+       "label": "live-child recall at beam 4",
+       "values": [25.067, 30.315, 22.8398, 27.7803, 26.2748]
+      }
+     ],
+     "y_label": "Score",
+     "y_format": "percent100",
+     "note": "Thinking viability was at chance within task and below no-think on both discrimination and the deployed retention metric. The preregistered gate stopped full search and banking. The exact oracle still compressed completed depth-5 leaves 262,144x on 12/12 development tasks, showing that the state was useful in principle but not readable through this model interface.",
+     "source": "analysis/summary.json"
     }
    ]
   }

@@ -2597,7 +2597,7 @@
       "src"
     ],
     "total_files": 28,
-    "total_size_bytes": 375021
+    "total_size_bytes": 375241
   },
   {
     "file_counts": {
@@ -3194,6 +3194,44 @@
   },
   {
     "file_counts": {
+      ".json": 26,
+      ".jsonl": 28,
+      ".md": 6,
+      ".py": 31,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_partial_structure_search",
+    "path": "experiments/qwen35_4b_partial_structure_search",
+    "primary_readme": "experiments/qwen35_4b_partial_structure_search/README.md",
+    "primary_report": "experiments/qwen35_4b_partial_structure_search/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Can Qwen3.5-4B recognize completable partial program skeletons well enough to prune depth-5 search and beat matched-compute sampling and unguided expansion?",
+    "tags": [
+      "execution",
+      "small-model",
+      "table-transform"
+    ],
+    "title": "Qwen3.5-4B Partial-Structure Recognition-Guided Search",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 94,
+    "total_size_bytes": 41555980
+  },
+  {
+    "file_counts": {
       ".json": 14,
       ".jsonl": 9,
       ".log": 13,
@@ -3729,7 +3767,7 @@
       "src"
     ],
     "total_files": 23,
-    "total_size_bytes": 302158
+    "total_size_bytes": 302094
   },
   {
     "file_counts": {

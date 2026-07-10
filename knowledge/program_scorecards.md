@@ -7,19 +7,19 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Structured Execution And Compilers
 
 - Program: [charter](../research_programs/structured_execution_and_compilers/charter.md)
-- Current read: structured intermediates are one of the strongest seed signals, but representation and supervision effects are still entangled.
-- Best next experiment: compare direct text, typed bytecode, latent slots, and stateful executors on one shared task suite with identical splits.
-- Strong anchors: `qwen_structural_latent_compiler_expansion`, `qwen_typed_bytecode_expert_iteration`, `latent_executor`.
-- Avoid repeating: another isolated positive compiler run without a direct-output baseline and harder held-out split.
+- Current read: structured intermediates remain strong, but type-only partial viability is oracle-useful and model-unreadable; exact depth-5 list-DSL search is also cheaper than projected.
+- Best next experiment: measure the exact depth-6 resource crossover, then test residualized partial states only if learned pruning is actually needed.
+- Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_crosssubstrate_structure`, `qwen35_4b_structure_search_scaling`.
+- Avoid repeating: another type-only P(viable) judge, pooled-AUROC launch, or model-guided search without measured brute wall time.
 - Evidence that advances the program: causal ablation showing which intermediate structure transfers across family, length, or paraphrase shifts.
 
 ## Evidence-Conditioned Selection
 
 - Program: [charter](../research_programs/evidence_conditioned_selection/charter.md)
-- Current read: candidate pools often contain correct outputs, but visible evidence is not yet strong enough to commit reliably.
-- Best next experiment: build an abstaining visible-only selector benchmark with precision, recall, coverage, and hidden-oracle gap reported separately.
-- Strong anchors: `qwen35_4b_retrieval_adapt_verify_scale`, `qwen35_4b_foofah_program_ensemble_consensus`, `qwen35_4b_independent_retrieval_consensus`.
-- Avoid repeating: claiming a selector improved accuracy when it only lowered commit rate or used hidden labels.
+- Current read: confidence can rank completed candidates, but existential partial reachability is not automatically readable; pooled scores can be pure task-difficulty signal.
+- Best next experiment: close the exact-pool visible-selector gap, then test residualized listwise sibling selection behind task-macro and recall@beam gates.
+- Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_generator_verifier_gap`, `qwen35_4b_code_confidence`.
+- Avoid repeating: pooled-AUROC confidence claims, type-only partial judges, or accuracy gains that hide abstention/commit-rate changes.
 - Evidence that advances the program: deployable selection gains under family-held-out candidate pools and adversarial visible examples.
 
 ## Active Evidence Acquisition

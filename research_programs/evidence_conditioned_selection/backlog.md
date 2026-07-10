@@ -2,6 +2,10 @@
 
 ## Next Experiments
 
+- Test listwise sibling selection only after enriching partial states with feasible-domain and residual
+  evidence; gate it against random, surface, no-think, and task-shuffled controls before any search run.
+- Compare visible-only stability/simplicity selectors on exact solver pools to close the observed 60/60
+  coverage versus 56/60 selected gap without model confidence.
 - Train visible-only selectors on candidate pools with explicit false-pass labels held out by family.
 - Compare public-test augmentation, generated counterexamples, consensus, and code/verifier reranking on the same pool.
 - Build an abstaining selector benchmark that reports precision, recall, and coverage separately.
@@ -18,3 +22,6 @@
 ## Stop Conditions
 
 Do not continue selector variants that improve selected accuracy only by silently reducing commit rate. Precision, recall, and abstention must be visible.
+
+Do not promote partial-state confidence from pooled AUROC: it must clear within-task discrimination and the
+deployed recall@beam gate. Type-only independent P(viable) is stopped until the state changes materially.

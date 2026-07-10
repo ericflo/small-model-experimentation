@@ -1,0 +1,47 @@
+{
+ "artifacts": [
+  {
+   "compact_path": "runs/calibration_thinking.jsonl",
+   "compact_sha256": "15a2c30b5c20a072e54461e5e16ad8ce771fa3e377cd11b6ce76e11894566541",
+   "compact_size_bytes": 2249635,
+   "external_raw_path": "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_thinking.raw.jsonl",
+   "raw_sha256": "c18f1505318def01d1b12e96eba57d551063ff747ccc5d88bf796ba77c2b0914",
+   "raw_size_bytes": 110639758,
+   "row_count": 7200,
+   "tag": "thinking"
+  },
+  {
+   "compact_path": "runs/calibration_nothink.jsonl",
+   "compact_sha256": "468cd973d62e53b5bd7c87583992f293cd59012656540781bd7131f419bf4f30",
+   "compact_size_bytes": 2207338,
+   "external_raw_path": "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_nothink.raw.jsonl",
+   "raw_sha256": "7172e7cce43a48153247d965c8f2f2b24c6e46608a6371c031af7ef272e155d0",
+   "raw_size_bytes": 43940086,
+   "row_count": 7200,
+   "tag": "nothink"
+  },
+  {
+   "compact_path": "runs/calibration_nextop.jsonl",
+   "compact_sha256": "20d2d75e7a6c7bb90e1977723392067d3b89230f8502bb26b8dc234e712d7c5f",
+   "compact_size_bytes": 364386,
+   "external_raw_path": "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_nextop.raw.jsonl",
+   "raw_sha256": "ca8a28cdbaf72d21c570de8549f1e1814b8cf77d3e0002684876eea45c81713a",
+   "raw_size_bytes": 4061100,
+   "row_count": 450,
+   "tag": "nextop"
+  },
+  {
+   "compact_path": "runs/calibration_task_shuffled.jsonl",
+   "compact_sha256": "bfa1309958790a58fb46bb6bc508b5da70b96cb6b01f19df616f4927e7952330",
+   "compact_size_bytes": 509371,
+   "external_raw_path": "large_artifacts/qwen35_4b_partial_structure_search/calibration/calibration_task_shuffled.raw.jsonl",
+   "raw_sha256": "1be073a03242135ea72c5e16a16033a0321ba2cc2a8c5fdcd021ed77993bbc1e",
+   "raw_size_bytes": 18535407,
+   "row_count": 1200,
+   "tag": "task_shuffled"
+  }
+ ],
+ "operation": "external_raw_archive_with_analysis_complete_compact_replacement",
+ "receipt_before_compaction_sha256": "da9042fd28c83d82793ff014a5d9e09276ae9ccd7c500aee852376e683a3f89b",
+ "schema_version": 1
+}

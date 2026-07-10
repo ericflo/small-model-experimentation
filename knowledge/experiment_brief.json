@@ -10777,6 +10777,39 @@
    "plain_question": "Does practicing many different agent-style tasks at once teach the model something general, or does each skill stay stuck to the task it was learned on, as every earlier experiment found?",
    "plain_answer": "It generalizes — once the training signal points at the right spot. Practicing on its own correct answers verbatim changed nothing. The winning tweak taught the model to finish thinking and commit to a short final answer, even when its reasoning gets cut off mid-thought. Playground scores nearly quadrupled, the two never-practiced worlds improved just as much, and the held-out benchmark jumped from about 0.14 to 0.36-0.45 on two fresh test sets — roughly seven times the success bar we pre-registered. A separate hard-won lesson: our fast evaluation engine had been silently ignoring the trained weights, so two whole rounds initially looked like failures when the measurement itself was broken.",
    "why_it_matters": "This is the first time any training method in this project has been shown to improve the blackbox benchmark at all, and it breaks the running rule that installed skills never transfer. It also establishes the working recipe — practice broadly, grade strictly, and concentrate learning on the moment of commitment — plus a permanent warning to verify that trained weights are actually loaded before trusting any evaluation."
+  },
+  "qwen35_4b_partial_structure_search": {
+   "verdict_tag": "The perfect pruning signal existed, but the model could not read it",
+   "concept_primer": "Imagine a maze with more than a million complete routes. A perfect map can keep only four promising routes at each step. This test asks whether the small model can imitate that map by judging unfinished routes.",
+   "plain_question": "Can the fixed small model recognize which unfinished program routes can still reach the right answer well enough to prune the search?",
+   "plain_answer": "No for this route description. The perfect checker reduced more than a million complete routes to four and kept a solution every time, but the model's thinking-based scores ranked sibling routes about as well as chance. A cheaper immediate score was slightly better, yet still far below the launch requirement. The planned full search and training follow-up were stopped.",
+   "why_it_matters": "A useful hidden signal is not automatically a usable model signal. Measuring rankings within the same problem prevented a misleading overall score from triggering a large, expensive search. It also showed that exact depth-five search already finishes quickly on this task family, so learned pruning must clear a real cost bar.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Perfect-checker development paths",
+     "value": "12 / 12",
+     "sub": "four retained leaves instead of 1,048,576; 262,144x compression"
+    },
+    {
+     "label": "Thinking route ranking",
+     "value": "50.6%",
+     "sub": "chance within each problem; cheaper immediate scoring reached 55.6%"
+    },
+    {
+     "label": "Exact depth-five reference",
+     "value": "112 seconds",
+     "sub": "60/60 pools contained a solution; visible-only choice succeeded on 56/60"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Ranking unfinished routes within each problem",
+     "chart_read": "For each method, the first bar measures whether viable routes rank above dead routes within the same problem; 50% is chance. The second bar measures how many viable children survive when only four are kept; taller is better.",
+     "chart_takeaway": "Thinking sits at chance and retains fewer viable children than the cheaper immediate score. Since neither clears the pre-set requirement, the experiment correctly stops before full search."
+    }
+   ]
   }
  }
 }

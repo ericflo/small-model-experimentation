@@ -1,0 +1,148 @@
+{
+ "audit": "task_oracle_data_integrity",
+ "behavioral_disjointness": {
+  "cross_split_collision_groups": [],
+  "definition": "target-pipeline outputs on the frozen common probe bank",
+  "unique_signatures": 6,
+  "within_split_duplicate_groups": []
+ },
+ "common_probe_bank": {
+  "count": 64,
+  "seed": 20260710,
+  "sha256": "71df5a618e5237c4645ec6749a74c3dccf43985368bb65c6dc5eaa56537b0412",
+  "structured_prefix_count": 8
+ },
+ "errors": [],
+ "exact_depth_receipts": {
+  "case_operation_applications": 25919487,
+  "expected": 6,
+  "recomputed": 6,
+  "seen_cap": null,
+  "transitions_considered": 1296192
+ },
+ "hidden_label_boundary": {
+  "hidden_cases_used_for_oracle_labels": false,
+  "required_label_source_splits": [
+   "visible",
+   "label_probe"
+  ]
+ },
+ "passed": true,
+ "schema_version": 1,
+ "smoke": true,
+ "source_artifacts": {
+  "data/calibration_oracle_smoke.jsonl": {
+   "sha256": "4258279291e6799da952aea5fe5a80472e564416e25a382ca0d4e63326fbdcf5"
+  },
+  "data/calibration_tasks_smoke.jsonl": {
+   "sha256": "a0fbd48d739cb6e75184c9f222c078b5865ded9cc1849a1727545352a474dc76"
+  },
+  "data/development_oracle_smoke.jsonl": {
+   "sha256": "806571c5c0aa6ef438d1012ca9485170115b2896e5bca186b2daca2e93fe56ab"
+  },
+  "data/development_tasks_smoke.jsonl": {
+   "sha256": "247b3305fbca2f5835eef8335a2c73ab0a664666f93f769d2b87485acbe6779a"
+  },
+  "data/primary_oracle_smoke.jsonl": {
+   "sha256": "5eb740ae4aa9c06e8a5b54c2efd8be87e72b178602c04a115e7d0c08177f3d65"
+  },
+  "data/primary_tasks_smoke.jsonl": {
+   "sha256": "b51f1385c0802bd0650d61bc079f2d4d3cba16b880e179f5a6fc6b96c943c34f"
+  }
+ },
+ "splits": {
+  "calibration": {
+   "duplicate_oracle_ids": [],
+   "duplicate_task_ids": [],
+   "oracle_count": 2,
+   "semantic_success_rows_checked": 6,
+   "task_count": 2,
+   "task_oracle_ids_equal_and_ordered": true
+  },
+  "development": {
+   "duplicate_oracle_ids": [],
+   "duplicate_task_ids": [],
+   "oracle_count": 2,
+   "semantic_success_rows_checked": 22,
+   "task_count": 2,
+   "task_oracle_ids_equal_and_ordered": true
+  },
+  "primary": {
+   "duplicate_oracle_ids": [],
+   "duplicate_task_ids": [],
+   "oracle_count": 2,
+   "semantic_success_rows_checked": 11,
+   "task_count": 2,
+   "task_oracle_ids_equal_and_ordered": true
+  }
+ },
+ "task_oracle_pairs_checked": 6,
+ "task_rows": [
+  {
+   "common_behavior_signature_sha256": "06510bc55f14cc43c74d0527c5ed37d8aafc6ea05d89fd72a12ab89416d7fd59",
+   "depth": 4,
+   "errors": [],
+   "exact_receipt_recomputed": true,
+   "recomputed_case_operation_applications": 408941,
+   "recomputed_transitions_considered": 20448,
+   "split": "calibration",
+   "task_id": "calibration-d4-0000",
+   "undefined_common_probe_outputs": 0
+  },
+  {
+   "common_behavior_signature_sha256": "b586ab7ab380ec437bf6815cb80139ad2a4306bb3cc6de00007602ae405c15cb",
+   "depth": 4,
+   "errors": [],
+   "exact_receipt_recomputed": true,
+   "recomputed_case_operation_applications": 409583,
+   "recomputed_transitions_considered": 20480,
+   "split": "calibration",
+   "task_id": "calibration-d4-0001",
+   "undefined_common_probe_outputs": 0
+  },
+  {
+   "common_behavior_signature_sha256": "9435e22afd1e88bcd7d145d4ec64efa862e86dc6719186687300960588420989",
+   "depth": 5,
+   "errors": [],
+   "exact_receipt_recomputed": true,
+   "recomputed_case_operation_applications": 6282434,
+   "recomputed_transitions_considered": 314176,
+   "split": "development",
+   "task_id": "development-d5-0000",
+   "undefined_common_probe_outputs": 0
+  },
+  {
+   "common_behavior_signature_sha256": "5a766ebeb3761c77a812a9821c14d4fab16d517e6a8c6326cd4a92883c26d6f1",
+   "depth": 5,
+   "errors": [],
+   "exact_receipt_recomputed": true,
+   "recomputed_case_operation_applications": 6284415,
+   "recomputed_transitions_considered": 314272,
+   "split": "development",
+   "task_id": "development-d5-0001",
+   "undefined_common_probe_outputs": 0
+  },
+  {
+   "common_behavior_signature_sha256": "c942597b512fa09d1cdd218fb3d6959ead432a95e1b3280cb7666d096615d888",
+   "depth": 5,
+   "errors": [],
+   "exact_receipt_recomputed": true,
+   "recomputed_case_operation_applications": 6290148,
+   "recomputed_transitions_considered": 314560,
+   "split": "primary",
+   "task_id": "primary-d5-0000",
+   "undefined_common_probe_outputs": 0
+  },
+  {
+   "common_behavior_signature_sha256": "67162c58887e757eb13a8d67d329b01af469840e85b3cdfa589a20748fe2fd3a",
+   "depth": 5,
+   "errors": [],
+   "exact_receipt_recomputed": true,
+   "recomputed_case_operation_applications": 6243966,
+   "recomputed_transitions_considered": 312256,
+   "split": "primary",
+   "task_id": "primary-d5-0001",
+   "undefined_common_probe_outputs": 0
+  }
+ ]
+}

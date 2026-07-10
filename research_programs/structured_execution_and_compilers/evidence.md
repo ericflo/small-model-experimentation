@@ -10,9 +10,19 @@
 
 ## Key Result
 
+- [qwen35_4b_partial_structure_search](../../experiments/qwen35_4b_partial_structure_search/reports/report.md)
+  (unclaimed while ledger re-grade is open): **type-only partial viability is oracle-useful but model-unreadable.**
+  A width-4 exact live-prefix beam retained a hidden solver on 12/12 dedicated depth-5 development tasks at
+  262,144x completed-leaf compression. Frozen Qwen3.5-4B thinking P(viable), however, was chance within task
+  on 7,200 depth-4 children (AUROC 0.506, CI 0.470--0.543; recall@4 0.251) and significantly below no-think
+  AUROC (delta -0.049, CI -0.090 to -0.010). Pooled AUROC 0.557 was a task-difficulty mirage; wrong-task
+  visible examples were no worse. The gate correctly stopped depth-5 model search and banking. Separately,
+  exact visible-only depth-5 brute covered 60/60 and selected 56/60 in 112 seconds on eight CPU workers, so
+  the next question is the real depth-6 resource crossover, then a residualized rather than type-only state.
+
 - [qwen35_4b_crosssubstrate_structure](../../experiments/qwen35_4b_crosssubstrate_structure/reports/report.md) (claim C36): the recent structure findings are MODEL-LEVEL LAWS. C32 (wall-is-structure) + C34 (brute-search dominates) replicate on STRING (char edits) + REGISTER (int machine) + LIST: base ~0, structure-cov = concrete-cov, oracle-skelfill 1.0, random low, brute-deploy ~1.0 on all three. The fixed 4B is a value-computer not a deep-structure-proposer, across substrates.
 
-- [qwen35_4b_structure_search_scaling](../../experiments/qwen35_4b_structure_search_scaling/reports/report.md) (claim C35): the model's structure NEVER beats brute-force search. At depth-4 banking's structure-cov collapses to 0.10 (vs 0.51 at depth-3) while brute-full deploy stays 0.967 (vs 0.975) -- scissors widens. Banking's structure degrades with depth faster than brute's exponential cost grows intractable. Closes C32->C33->C34->C35: with an interpreter, the tool dominates the weights.
+- [qwen35_4b_structure_search_scaling](../../experiments/qwen35_4b_structure_search_scaling/reports/report.md) (claim C35, re-graded): brute-full deploy stays 0.967 at depth 4 (vs 0.975 at depth 3), while the tested banked models' structure coverage is 0.10 and 0.51. The banked comparison crosses non-dose-matched models, so it is not a causal depth curve. Brute dominates the measured list-DSL cells through depth 4; depth 5 was projected, not tested, and is the open model-guided-search regime.
 
 - qwen35_4b_banking_installs_structure phase 2 (claim C34): end-to-end bank+value-fill deploy. bank-fill deploys 0.463 (= banked structure-cov, confirms C33) BUT brute-force structure enumeration + value-fill + execution-consensus deploys 0.975 (near-solves depth-3) WITHOUT the model. With the interpreter, free structure-search dominates; banking's structure is forward-pass-only. Extends C17 (selection free) to structure-search. Scope: brute wins because the 4096-skeleton space is enumerable.
 
@@ -35,20 +45,13 @@
   required; test-time compute alone can't elicit it*. Reconciles with C23 (base think single-shot depth-3 = 0).
   Design hardened by an adversarial review. Limits: closed-set ranking, n=40, budgets ≤ 2048.
 - [qwen35_4b_latent_decomposition](../../experiments/qwen35_4b_latent_decomposition/reports/report.md)
-  (claim C25): **"be your own tool-search" — the fixed model has depth-1 recognition but NO lookahead; banking
-  improves next-op ranking at lookahead distance** *(a lift I earlier termed "planning"; the honest measured
-  quantity is improved next-op ranking, a behavioral transfer, not a demonstrated internal search mechanism)*.
-  Can the fixed 4B climb depth by ranking the next DSL op step-by-step? (1)
-  **Lookahead wall:** base per-step next-op top-1 = 0.013/0.062/0.237 at step 1/2/3 (goal 3/2/1 ops away; chance
-  0.031) — at/below chance for planning the first move. So base as its own search guide is **worse than random**
-  (coverage 0.013 vs 0.025 vs brute 0.287 @ matched budget). (2) I predicted banking (C24) would be *monolithic
-  compilation* — **refuted**: banking lifts every step including lookahead, dose-dependently (step1
-  0.013→0.125→0.138, step3 0.237→0.463→0.550 for base/640/1280). Banking installs **transferable planning**. (3)
-  This upgrades the guide 0.013→0.225 (~17×), competitive with brute at low budget. (4) Control: random+pruning
-  only 0.037 (pruning alone isn't the solver). Pivoted mid-experiment after an adversarial review (verdict
-  *flawed*) revealed the original "is depth-3 latent" framing was unfair + redundant with C12; adopted all
-  fixes (visible-only termination, brute honesty bar, min-depth-verified, pruning ablation). Limits: closed-set
-  ranking easier than generation, single seed/beam.
+  (claim C25, re-graded): the base next-op ranker is at/below chance only for the first move three operations
+  from the goal; step 2 is weakly above chance and terminal recognition is stronger. Base-guided versus random
+  search solved 1/80 versus 2/80 tasks, so the defensible conclusion is “no better than random,” not “worse.”
+  Banking improved step-wise rankings and low-budget search (18/80 banked versus 2/80 random and 1/80 base),
+  roughly matching brute's 23/80. The dose trend is supported at steps 2–3, not at step 1 (10/80 versus 11/80
+  for the two banked doses). This is a closed-menu behavioral guidance lift, not demonstrated internal planning;
+  one beam and single adapter seeds bound it.
 - [qwen35_4b_depth_scaling_controls](../../experiments/qwen35_4b_depth_scaling_controls/reports/report.md)
   (claim C24): **three follow-ups to C23 — no saturation, the gain is data-diversity, and the recipe repeats
   one rung deeper.** (1) The depth-3 dose curve does NOT saturate through 1280 tool-pairs (1156 distinct

@@ -1,0 +1,270 @@
+{
+ "beam_width": 4,
+ "classification": "G2_readable_but_nonactionable",
+ "gate": "actionable_partial_structure_recognition",
+ "gate_checks": {
+  "auroc_lift_lcb": true,
+  "auroc_lift_point": true,
+  "macro_auroc_lcb": true,
+  "macro_auroc_point": true,
+  "recall_lift_lcb": true,
+  "recall_lift_point": false
+ },
+ "metrics": {
+  "nextop": {
+   "best_live_rank": {
+    "ci_high": 7.428571428571429,
+    "ci_low": 5.714285714285714,
+    "estimate": 6.571428571428571,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.35714285714285715,
+    "ci_low": 0.0,
+    "estimate": 0.17857142857142858,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "macro_auroc": {
+    "ci_high": 0.6121348056130664,
+    "ci_low": 0.4844260409477801,
+    "estimate": 0.5482804232804233,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "pooled_auroc_diagnostic": 0.5421265636497424
+  },
+  "nothink": {
+   "best_live_rank": {
+    "ci_high": 8.714285714285714,
+    "ci_low": 4.714285714285714,
+    "estimate": 6.7142857142857135,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.42857142857142855,
+    "ci_low": 0.14285714285714285,
+    "estimate": 0.2857142857142857,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "macro_auroc": {
+    "ci_high": 0.724104267310789,
+    "ci_low": 0.4409362778927996,
+    "estimate": 0.5825202726017943,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "pooled_auroc_diagnostic": 0.5951066961000736
+  },
+  "random": {
+   "best_live_rank": {
+    "ci_high": 8.857142857142858,
+    "ci_low": 4.714285714285714,
+    "estimate": 6.7857142857142865,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.5,
+    "ci_low": 0.2857142857142857,
+    "estimate": 0.39285714285714285,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "macro_auroc": {
+    "ci_high": 0.6350902921555095,
+    "ci_low": 0.3668018173452956,
+    "estimate": 0.5009460547504025,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "pooled_auroc_diagnostic": 0.4793966151582046
+  },
+  "surface": {
+   "best_live_rank": {
+    "ci_high": 9.285714285714286,
+    "ci_low": 6.714285714285714,
+    "estimate": 8.0,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.35714285714285715,
+    "ci_low": 0.0,
+    "estimate": 0.17857142857142858,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "macro_auroc": {
+    "ci_high": 0.44935300207039336,
+    "ci_low": 0.4412008281573499,
+    "estimate": 0.44527691511387163,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "pooled_auroc_diagnostic": 0.5086460632818248
+  },
+  "thinking": {
+   "best_live_rank": {
+    "ci_high": 7.428571428571429,
+    "ci_low": 4.714285714285714,
+    "estimate": 6.071428571428571,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "live_recall_at_beam": {
+    "ci_high": 0.5714285714285714,
+    "ci_low": 0.35714285714285715,
+    "estimate": 0.4642857142857143,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "macro_auroc": {
+    "ci_high": 0.7396552219921786,
+    "ci_low": 0.5834627329192547,
+    "estimate": 0.6615589774557167,
+    "n_tasks": 2,
+    "reps": 500
+   },
+   "pooled_auroc_diagnostic": 0.6394407652685798
+  }
+ },
+ "n_candidates": 320,
+ "n_tasks": 2,
+ "passed": false,
+ "per_task": {
+  "nextop": {
+   "calibration-d4-0000": {
+    "best_live_rank": 7.428571428571429,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.4844260409477801
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 5.714285714285714,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.6121348056130664
+   }
+  },
+  "nothink": {
+   "calibration-d4-0000": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.42857142857142855,
+    "macro_auroc": 0.724104267310789
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 8.714285714285714,
+    "live_recall_at_beam": 0.14285714285714285,
+    "macro_auroc": 0.4409362778927996
+   }
+  },
+  "random": {
+   "calibration-d4-0000": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.5,
+    "macro_auroc": 0.6350902921555095
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 8.857142857142858,
+    "live_recall_at_beam": 0.2857142857142857,
+    "macro_auroc": 0.3668018173452956
+   }
+  },
+  "surface": {
+   "calibration-d4-0000": {
+    "best_live_rank": 6.714285714285714,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.4412008281573499
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 9.285714285714286,
+    "live_recall_at_beam": 0.0,
+    "macro_auroc": 0.44935300207039336
+   }
+  },
+  "thinking": {
+   "calibration-d4-0000": {
+    "best_live_rank": 4.714285714285714,
+    "live_recall_at_beam": 0.5714285714285714,
+    "macro_auroc": 0.7396552219921786
+   },
+   "calibration-d4-0001": {
+    "best_live_rank": 7.428571428571429,
+    "live_recall_at_beam": 0.35714285714285715,
+    "macro_auroc": 0.5834627329192547
+   }
+  }
+ },
+ "schema_version": 1,
+ "smoke": true,
+ "source_artifacts": {
+  "data/calibration_candidates_smoke.jsonl": {
+   "sha256": "afa6fc356103d8e1039c35c2af5568bd96268cc302c01025624141bc54638f16"
+  },
+  "runs/calibration_model_receipt_smoke.json": {
+   "sha256": "af33471041bc8c1834d556d409dec8acd1f8e8794dee50717968c3473374292f"
+  },
+  "runs/calibration_nextop_smoke.jsonl": {
+   "sha256": "6d5378c0e802056f4598caa77747e2eece0600a9ed83a3b1671e4f6554925e8a"
+  },
+  "runs/calibration_nothink_smoke.jsonl": {
+   "sha256": "971d2fa0169117f894c8cb8ce5cf61bcb3e69c0e66e2d9a74736658b3f711c9c"
+  },
+  "runs/calibration_task_shuffled_smoke.jsonl": {
+   "sha256": "ad5d7c1daf311c1bec0a799acbe1cda6574bf6f7bae29f5b0cd81d66f9357262"
+  },
+  "runs/calibration_thinking_smoke.jsonl": {
+   "sha256": "4f87f010c8b53b6f4688cac75433e0921aebeac932fb67b02f54813f371f0e10"
+  }
+ },
+ "strongest_auc_baseline": "nothink",
+ "strongest_recall_baseline": "random",
+ "task_shuffle_canary": {
+  "n_candidates": 320,
+  "n_tasks": 2,
+  "original_macro_auroc": {
+   "ci_high": 0.7396552219921786,
+   "ci_low": 0.5834627329192547,
+   "estimate": 0.6615589774557167,
+   "n_tasks": 2,
+   "reps": 500
+  },
+  "original_minus_shuffled": {
+   "ci_high": 0.24964199447895108,
+   "ci_low": 0.1559840119622728,
+   "estimate": 0.20281300322061194,
+   "n_tasks": 2,
+   "reps": 500
+  },
+  "task_shuffled_macro_auroc": {
+   "ci_high": 0.4900132275132275,
+   "ci_low": 0.42747872095698186,
+   "estimate": 0.45874597423510466,
+   "n_tasks": 2,
+   "reps": 500
+  }
+ },
+ "thinking_auc_difference": {
+  "ci_high": 0.14252645502645506,
+  "ci_low": 0.015550954681389562,
+  "estimate": 0.07903870485392231,
+  "n_tasks": 2,
+  "reps": 500
+ },
+ "thinking_forced_close_rate": 1.0,
+ "thinking_recall_difference": {
+  "ci_high": 0.07142857142857145,
+  "ci_low": 0.0714285714285714,
+  "estimate": 0.07142857142857142,
+  "n_tasks": 2,
+  "reps": 500
+ },
+ "thresholds": {
+  "min_auroc_lift": 0.05,
+  "min_macro_auroc": 0.65,
+  "min_macro_auroc_lcb": 0.5,
+  "min_recall_at_beam_lift": 0.1
+ }
+}

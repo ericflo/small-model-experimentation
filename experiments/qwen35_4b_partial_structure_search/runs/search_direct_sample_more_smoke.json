@@ -1,0 +1,885 @@
+{
+ "input_sha256": {
+  "calibration_candidates": "afa6fc356103d8e1039c35c2af5568bd96268cc302c01025624141bc54638f16",
+  "calibration_verdict": "b651b308886294a912861523d0404815245327f154bea43931682d4e7b23c493",
+  "config": "edd5f82cc030d5d54ff2b5e85e528b7737fbb6496f984bd4b7d12fde4f34f838",
+  "data_audit": "5cc918bc2fe590e900c8ee661a55059731a2d93acb394a328af858914f2ccf90",
+  "experiment_common": "7c237b7ad6bf0c3076d1d6a00a5624131722c4fb5ba2a1408e732d5ed6aad54e",
+  "families": "99a39589e06a7c86079cf86d4ee6530ad9a34e7c18e1fcfce08f82ae7427d93a",
+  "full_brute": "2ab5f959ae006d495562f337942900e643527bbd7f043c40fd81ce9d66102533",
+  "model_scoring": "e2128983bd606a22844823e4e1d60ab6452a37ba703d78ed89e3bc7ff08adc3c",
+  "oracle_gate": "77ec2262468bc9e7a36a4d322da3eadaeff6fc5ea82829d99cbf523fc5552dc9",
+  "oracles": "5eb740ae4aa9c06e8a5b54c2efd8be87e72b178602c04a115e7d0c08177f3d65",
+  "run_search": "9dbf250645b750890ee294d844a437ac98fd751ca03e9669045783f8a1ef21b7",
+  "search_core": "c0ec4e4d5411b7627dbad8588f0de74559d68740130858eb61861d945e89677d",
+  "tasks": "b51f1385c0802bd0650d61bc079f2d4d3cba16b880e179f5a6fc6b96c943c34f",
+  "vllm_runner": "33ec31a547ce7767a37ad53b760ac8e6596f2ef0963f486805abeac3f8ed36ba"
+ },
+ "match_basis": "sampled_tokens",
+ "matching_rule": "per-task deterministic sample-index prefix under the corresponding thinking-search logical-token cap",
+ "method": "direct_sample_more",
+ "pool_k": 256,
+ "rows": [
+  {
+   "attempted_complete_skeletons": 35,
+   "completed_skeletons": 51,
+   "evaluation_wall_seconds": 0.044680326245725155,
+   "fill_cap": 256,
+   "fill_cap_used": 256,
+   "gross_pool_model_accounting": {
+    "completions": 512,
+    "injected_prompt_tokens": 512,
+    "prefill_tokens": 237568,
+    "requests": 512,
+    "retained_thinking_tokens": 8192,
+    "sampled_tokens": 19338,
+    "total_model_tokens": 256906
+   },
+   "interpreter_accounting": {
+    "case_pipeline_executions": 2048,
+    "parameter_fills_attempted": 256,
+    "primitive_applications": 10240
+   },
+   "leaves": [
+    [
+     "dedup_adjacent",
+     "reverse",
+     "sort_asc",
+     "take_k",
+     "sort_desc"
+    ],
+    [
+     "sort_desc",
+     "dedup_adjacent",
+     "sort_asc",
+     "take_k",
+     "rotate_k"
+    ],
+    [
+     "sort_desc",
+     "dedup_adjacent",
+     "take_k",
+     "mul_k",
+     "sort_asc"
+    ],
+    [
+     "dedup_adjacent",
+     "sort_asc",
+     "take_k",
+     "drop_k",
+     "sort_desc"
+    ],
+    [
+     "sort_desc",
+     "drop_k",
+     "sort_asc",
+     "unique_stable",
+     "negate"
+    ],
+    [
+     "unique_stable",
+     "sort_asc",
+     "drop_k",
+     "negate",
+     "sort_desc"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "sort_asc",
+     "dedup_adjacent",
+     "abs_all",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "sort_asc",
+     "unique_stable",
+     "take_k",
+     "reverse",
+     "sort_desc"
+    ],
+    [
+     "sort_desc",
+     "dedup_adjacent",
+     "sort_asc",
+     "take_k",
+     "negate"
+    ],
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "abs_all",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "take_k",
+     "reverse",
+     "dedup_adjacent",
+     "unique_stable"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "take_k",
+     "sort_asc",
+     "drop_k"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "unique_stable",
+     "dedup_adjacent",
+     "drop_k"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "unique_stable",
+     "add_k",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "reverse",
+     "unique_stable",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "reverse",
+     "drop_k",
+     "take_k"
+    ],
+    [
+     "sort_asc",
+     "reverse",
+     "dedup_adjacent",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "reverse",
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "dedup_adjacent"
+    ],
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "dedup_adjacent",
+     "abs_all"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "reverse",
+     "abs_all",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "abs_all",
+     "unique_stable",
+     "dedup_adjacent",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "sort_asc",
+     "negate",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "abs_all",
+     "unique_stable",
+     "sort_asc",
+     "drop_k"
+    ],
+    [
+     "dedup_adjacent",
+     "sort_desc",
+     "take_k",
+     "sort_asc",
+     "drop_k"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "unique_stable",
+     "abs_all",
+     "sort_desc"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "dedup_adjacent",
+     "sort_asc"
+    ],
+    [
+     "sort_asc",
+     "take_k",
+     "sort_desc",
+     "reverse",
+     "dedup_adjacent"
+    ],
+    [
+     "sort_asc",
+     "negate",
+     "take_k",
+     "sort_desc",
+     "drop_k"
+    ],
+    [
+     "sort_desc",
+     "reverse",
+     "unique_stable",
+     "abs_all",
+     "take_k"
+    ],
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "reverse",
+     "sort_asc",
+     "drop_k",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "abs_all",
+     "unique_stable",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "unique_stable",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "take_k",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "dedup_adjacent",
+     "sort_asc",
+     "unique_stable",
+     "sort_desc",
+     "negate"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "sort_asc",
+     "dedup_adjacent",
+     "reverse"
+    ],
+    [
+     "sort_asc",
+     "take_k",
+     "sort_desc",
+     "dedup_adjacent",
+     "abs_all"
+    ],
+    [
+     "sort_desc",
+     "dedup_adjacent",
+     "reverse",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "take_k",
+     "sort_asc",
+     "take_k",
+     "sort_desc"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "sort_asc",
+     "take_k",
+     "dedup_adjacent"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "take_k",
+     "drop_k",
+     "sort_desc"
+    ],
+    [
+     "sort_asc",
+     "take_k",
+     "sort_desc",
+     "dedup_adjacent",
+     "sort_asc"
+    ],
+    [
+     "sort_desc",
+     "take_k",
+     "sort_asc",
+     "dedup_adjacent",
+     "rotate_k"
+    ],
+    [
+     "sort_desc",
+     "unique_stable",
+     "abs_all",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "sort_desc",
+     "dedup_adjacent",
+     "take_k",
+     "sort_asc",
+     "drop_k"
+    ],
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "dedup_adjacent",
+     "drop_k"
+    ],
+    [
+     "sort_asc",
+     "take_k",
+     "reverse",
+     "sort_asc",
+     "drop_k"
+    ],
+    [
+     "sort_asc",
+     "unique_stable",
+     "drop_k",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "sort_asc",
+     "take_k",
+     "reverse",
+     "sort_desc",
+     "unique_stable"
+    ],
+    [
+     "sort_desc",
+     "dedup_adjacent",
+     "reverse",
+     "abs_all",
+     "take_k"
+    ]
+   ],
+   "match_basis": "sampled_tokens",
+   "matched_completions": 62,
+   "matched_tokens": 4697,
+   "method": "direct_sample_more",
+   "next_excluded_sample_cost": 62,
+   "parse_rate": 0.8548387096774194,
+   "planned_complete_skeletons": 51,
+   "pool_capacity_tokens": 19338,
+   "pool_completions": 256,
+   "pool_exhausted_before_cap": false,
+   "pool_hidden_coverage": false,
+   "retained_model_accounting": {
+    "completions": 124,
+    "injected_prompt_tokens": 124,
+    "prefill_tokens": 57536,
+    "requests": 124,
+    "retained_thinking_tokens": 1984,
+    "sampled_tokens": 4697,
+    "total_model_tokens": 62233
+   },
+   "sample_pool_k": 256,
+   "selected_hidden_success": false,
+   "selected_pipeline": null,
+   "selector": {
+    "abstained": true,
+    "candidate_count": 0,
+    "signature_groups": 0
+   },
+   "shard": 0,
+   "task_id": "primary-d5-0000",
+   "task_index": 0,
+   "token_cap_from_thinking_search": 4752,
+   "unique_parsed_skeletons": 51,
+   "unspent_token_budget": 55,
+   "visible_overfit_candidates": 0,
+   "visible_passing_concrete_candidates": 0
+  },
+  {
+   "attempted_complete_skeletons": 35,
+   "completed_skeletons": 53,
+   "evaluation_wall_seconds": 0.04244303051382303,
+   "fill_cap": 256,
+   "fill_cap_used": 256,
+   "gross_pool_model_accounting": {
+    "completions": 512,
+    "injected_prompt_tokens": 512,
+    "prefill_tokens": 248832,
+    "requests": 512,
+    "retained_thinking_tokens": 8192,
+    "sampled_tokens": 19242,
+    "total_model_tokens": 268074
+   },
+   "interpreter_accounting": {
+    "case_pipeline_executions": 2048,
+    "parameter_fills_attempted": 256,
+    "primitive_applications": 10240
+   },
+   "leaves": [
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "drop_k",
+     "sort_asc"
+    ],
+    [
+     "abs_all",
+     "running_sum",
+     "drop_k",
+     "take_k",
+     "sort_asc"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "unique_stable",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "dedup_adjacent",
+     "drop_k",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "dedup_adjacent",
+     "drop_k"
+    ],
+    [
+     "negate",
+     "sort_asc",
+     "dedup_adjacent",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "drop_k",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "dedup_adjacent",
+     "running_sum",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "dedup_adjacent",
+     "running_sum",
+     "take_k",
+     "sort_asc"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "abs_all",
+     "dedup_adjacent",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "unique_stable",
+     "sort_asc",
+     "mul_k",
+     "take_k"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "unique_stable",
+     "dedup_adjacent",
+     "abs_all"
+    ],
+    [
+     "abs_all",
+     "unique_stable",
+     "sort_asc",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "unique_stable",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "sort_desc",
+     "dedup_adjacent",
+     "negate",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "sort_desc",
+     "dedup_adjacent",
+     "mul_k",
+     "take_k"
+    ],
+    [
+     "reverse",
+     "dedup_adjacent",
+     "abs_all",
+     "take_k",
+     "sort_asc"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "unique_stable",
+     "take_k",
+     "sort_asc"
+    ],
+    [
+     "reverse",
+     "abs_all",
+     "dedup_adjacent",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "dedup_adjacent",
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "negate"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "unique_stable",
+     "dedup_adjacent",
+     "running_sum"
+    ],
+    [
+     "abs_all",
+     "unique_stable",
+     "sort_asc",
+     "dedup_adjacent",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "unique_stable",
+     "drop_k",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "running_sum",
+     "sort_asc",
+     "dedup_adjacent",
+     "take_k"
+    ],
+    [
+     "sort_asc",
+     "abs_all",
+     "dedup_adjacent",
+     "running_sum",
+     "take_k"
+    ],
+    [
+     "dedup_adjacent",
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "dedup_adjacent",
+     "sort_asc",
+     "sort_desc",
+     "take_k"
+    ],
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "dedup_adjacent",
+     "abs_all"
+    ],
+    [
+     "dedup_adjacent",
+     "abs_all",
+     "add_k",
+     "take_k",
+     "sort_asc"
+    ],
+    [
+     "unique_stable",
+     "negate",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "reverse",
+     "dedup_adjacent",
+     "running_sum",
+     "sort_asc",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "sort_desc",
+     "dedup_adjacent"
+    ],
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "negate",
+     "sort_asc"
+    ],
+    [
+     "reverse",
+     "sort_asc",
+     "dedup_adjacent",
+     "abs_all",
+     "take_k"
+    ],
+    [
+     "unique_stable",
+     "sort_asc",
+     "add_k",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "sort_asc",
+     "negate",
+     "sort_desc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "dedup_adjacent",
+     "running_sum",
+     "take_k"
+    ],
+    [
+     "dedup_adjacent",
+     "abs_all",
+     "negate",
+     "sort_asc",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "dedup_adjacent",
+     "take_k",
+     "sort_desc"
+    ],
+    [
+     "abs_all",
+     "sort_desc",
+     "dedup_adjacent",
+     "running_sum",
+     "take_k"
+    ],
+    [
+     "reverse",
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "sort_desc",
+     "reverse",
+     "unique_stable",
+     "dedup_adjacent",
+     "abs_all"
+    ],
+    [
+     "abs_all",
+     "unique_stable",
+     "dedup_adjacent",
+     "running_sum",
+     "mod_k"
+    ],
+    [
+     "abs_all",
+     "sort_desc",
+     "dedup_adjacent",
+     "take_k",
+     "negate"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "dedup_adjacent",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "dedup_adjacent",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "unique_stable",
+     "sort_asc",
+     "dedup_adjacent",
+     "drop_k"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "sort_desc",
+     "unique_stable"
+    ],
+    [
+     "abs_all",
+     "sort_asc",
+     "unique_stable",
+     "running_sum",
+     "take_k"
+    ],
+    [
+     "negate",
+     "abs_all",
+     "sort_asc",
+     "take_k",
+     "drop_k"
+    ],
+    [
+     "reverse",
+     "sort_desc",
+     "unique_stable",
+     "abs_all",
+     "take_k"
+    ],
+    [
+     "abs_all",
+     "running_sum",
+     "take_k",
+     "unique_stable",
+     "sort_asc"
+    ],
+    [
+     "reverse",
+     "abs_all",
+     "sort_asc",
+     "dedup_adjacent",
+     "take_k"
+    ]
+   ],
+   "match_basis": "sampled_tokens",
+   "matched_completions": 64,
+   "matched_tokens": 4692,
+   "method": "direct_sample_more",
+   "next_excluded_sample_cost": 61,
+   "parse_rate": 0.90625,
+   "planned_complete_skeletons": 53,
+   "pool_capacity_tokens": 19242,
+   "pool_completions": 256,
+   "pool_exhausted_before_cap": false,
+   "pool_hidden_coverage": false,
+   "retained_model_accounting": {
+    "completions": 128,
+    "injected_prompt_tokens": 128,
+    "prefill_tokens": 62208,
+    "requests": 128,
+    "retained_thinking_tokens": 2048,
+    "sampled_tokens": 4692,
+    "total_model_tokens": 66900
+   },
+   "sample_pool_k": 256,
+   "selected_hidden_success": false,
+   "selected_pipeline": null,
+   "selector": {
+    "abstained": true,
+    "candidate_count": 0,
+    "signature_groups": 0
+   },
+   "shard": 1,
+   "task_id": "primary-d5-0001",
+   "task_index": 1,
+   "token_cap_from_thinking_search": 4752,
+   "unique_parsed_skeletons": 53,
+   "unspent_token_budget": 60,
+   "visible_overfit_candidates": 0,
+   "visible_passing_concrete_candidates": 0
+  }
+ ],
+ "schema_version": 2,
+ "settings": {
+  "backend": "vllm",
+  "beam_width": 2,
+  "model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "parameter_fill_cap_per_task": 256,
+  "run_seed": 1801,
+  "thinking_budget": 32
+ },
+ "task_ids": [
+  "primary-d5-0000",
+  "primary-d5-0001"
+ ],
+ "thinking_budget": 32
+}

@@ -1,0 +1,275 @@
+{
+ "development_hidden_used_for_gate": true,
+ "evaluated_splits": [
+  "calibration",
+  "development"
+ ],
+ "gate": "oracle_state_usefulness",
+ "gate_basis_split": "development",
+ "hidden_used_for_labels": false,
+ "passed": true,
+ "primary_artifacts_loaded": false,
+ "primary_hidden_used_for_gate": false,
+ "rows": [
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 56,
+    "parameter_fills_attempted": 4,
+    "primitive_applications": 224
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 3
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 3,
+    "plurality_size": 3,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0000",
+   "visible_label_candidate_count": 3
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 16384.0,
+   "completed_skeletons": 4,
+   "depth": 4,
+   "expanded_prefix_nodes": 208,
+   "fill_accounting": {
+    "case_pipeline_executions": 770,
+    "parameter_fills_attempted": 55,
+    "primitive_applications": 3080
+   },
+   "full_completed_skeletons": 65536,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 2
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 3
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 3,
+    "plurality_size": 3,
+    "signature_groups": 1
+   },
+   "split": "calibration",
+   "task_id": "calibration-d4-0001",
+   "visible_label_candidate_count": 3
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 1260,
+    "parameter_fills_attempted": 90,
+    "primitive_applications": 6300
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 3
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0000",
+   "visible_label_candidate_count": 4
+  },
+  {
+   "beam_width": 4,
+   "completed_skeleton_compression": 262144.0,
+   "completed_skeletons": 4,
+   "depth": 5,
+   "expanded_prefix_nodes": 272,
+   "fill_accounting": {
+    "case_pipeline_executions": 1008,
+    "parameter_fills_attempted": 72,
+    "primitive_applications": 5040
+   },
+   "full_completed_skeletons": 1048576,
+   "path_coverage_hidden": true,
+   "per_layer": [
+    {
+     "expanded": 16,
+     "layer": 1,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 2,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 3,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 4,
+     "retained": 4,
+     "retained_live": 4
+    },
+    {
+     "expanded": 64,
+     "layer": 5,
+     "retained": 4,
+     "retained_live": 4
+    }
+   ],
+   "selected_hidden_success": true,
+   "selector": {
+    "abstained": false,
+    "candidate_count": 4,
+    "plurality_size": 4,
+    "signature_groups": 1
+   },
+   "split": "development",
+   "task_id": "development-d5-0001",
+   "visible_label_candidate_count": 4
+  }
+ ],
+ "schema_version": 2,
+ "source_artifacts": {
+  "data/calibration_oracle_smoke.jsonl": {
+   "sha256": "4258279291e6799da952aea5fe5a80472e564416e25a382ca0d4e63326fbdcf5"
+  },
+  "data/calibration_tasks_smoke.jsonl": {
+   "sha256": "a0fbd48d739cb6e75184c9f222c078b5865ded9cc1849a1727545352a474dc76"
+  },
+  "data/development_oracle_smoke.jsonl": {
+   "sha256": "806571c5c0aa6ef438d1012ca9485170115b2896e5bca186b2daca2e93fe56ab"
+  },
+  "data/development_tasks_smoke.jsonl": {
+   "sha256": "247b3305fbca2f5835eef8335a2c73ab0a664666f93f769d2b87485acbe6779a"
+  }
+ },
+ "splits": {
+  "calibration": {
+   "live_density_by_length": {
+    "1": 0.125,
+    "2": 0.009765625,
+    "3": 0.000732421875,
+    "4": 4.57763671875e-05
+   },
+   "mean_compression": 16384.0,
+   "mean_oracle_wall_seconds": 1.168710071593523,
+   "n": 2,
+   "path_rate": 1.0,
+   "selected_rate": 1.0
+  },
+  "development": {
+   "live_density_by_length": {
+    "1": 0.21875,
+    "2": 0.03125,
+    "3": 0.00244140625,
+    "4": 0.0001678466796875,
+    "5": 1.049041748046875e-05
+   },
+   "mean_compression": 262144.0,
+   "mean_oracle_wall_seconds": 12.91558230901137,
+   "n": 2,
+   "path_rate": 1.0,
+   "selected_rate": 1.0
+  }
+ },
+ "thresholds": {
+  "min_completed_skeleton_compression": 10.0,
+  "min_hidden_path_rate": 0.9
+ }
+}
