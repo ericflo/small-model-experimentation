@@ -121,11 +121,3 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 - Avoid repeating: evaluating adapters through vLLM runtime LoRA (C49 silent no-op — on-vs-off gate mandatory); training full-weight on the model's own verbatim naturally-closed chains (near-self-distillation); filtering training data to naturally-closed chains only (excludes the deployment-critical force-closed state); comparing HF-backend and vLLM-backend menagerie scores.
 - Evidence that advances the program: compounding menagerie deltas across iteration rounds on fresh paired seeds; ablations attributing the delta between protocol-emission repair and axis competence; medium/slow-tier confirmations once the host fla-kernel fault is resolved.
 
-## Agentic Breadth Installation
-
-- Program: [charter](../research_programs/agentic_breadth_installation/charter.md)
-- Current read: the first blackbox-arbitrated install in the corpus — breadth-first expert iteration on a firewall-clean 12-family gym moved menagerie quick +0.223/+0.294 on two fresh paired seeds (HF backend, deterministic; claims C49/C50), with gym-internal transfer to never-trained families (+0.54/+0.61); the C43/C45/C48 locality laws do not extend to this regime, and the causal lever was gradient placement at the answer-emission seam (recovery arm + weighted loss), not dose.
-- Best next experiment: round-3 re-harvest with the round-2 model (queued: `gauntlet_round3_expert_iteration`) plus the recovery-arm-only and breadth-vs-matched-dose ablations that split emission-seam repair from axis competence.
-- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`.
-- Avoid repeating: evaluating adapters through vLLM runtime LoRA (C49 silent no-op — on-vs-off gate mandatory); training full-weight on the model's own verbatim naturally-closed chains (near-self-distillation); filtering training data to naturally-closed chains only (excludes the deployment-critical force-closed state); comparing HF-backend and vLLM-backend menagerie scores.
-- Evidence that advances the program: compounding menagerie deltas across iteration rounds on fresh paired seeds; ablations attributing the delta between protocol-emission repair and axis competence; medium/slow-tier confirmations once the host fla-kernel fault is resolved.

@@ -44866,6 +44866,213 @@
      "source": "runs/eval_gym_base/scores.json vs runs/eval_gym_round2_merged/scores.json"
     }
    ]
+  },
+  "qwen35_4b_verified_macro_long_context_rerun": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Longer caps changed the failure mode, not evidence eligibility",
+     "categories": [
+      "fresh base think@16k",
+      "fresh base think@32k",
+      "diagnostic base think@49k"
+     ],
+     "series": [
+      {
+       "label": "unresolved cap contacts",
+       "values": [
+        0.9097222222222222,
+        0.4375,
+        0.2916666666666667
+       ]
+      },
+      {
+       "label": "exact periodic loops",
+       "values": [
+        0.09027777777777778,
+        0.5625,
+        0.7083333333333334
+       ]
+      },
+      {
+       "label": "answer-limit contacts",
+       "values": [
+        0.4166666666666667,
+        0.2569444444444444,
+        0.2708333333333333
+       ]
+      }
+     ],
+     "y_label": "Share of samples",
+     "y_format": "percent01",
+     "note": "Every sample at all three allowances reached the reasoning boundary. The 16k and 32k rungs were rejected before scoring. Amendment 12 made the max-seqs-64 49k probe diagnostic-only before its receipt because worst-case demand exceeded KV capacity; no decoded output or score was inspected.",
+     "source": "analysis/scientific_smoke_16k_termination_audit.json; analysis/scientific_smoke_32k_termination_audit.json; analysis/scientific_smoke_49k_scheduler_overcommit_audit.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Long-context reasoning cleared every supplied-plan record",
+     "categories": [
+      "think@16k interface"
+     ],
+     "series": [
+      {
+       "label": "records with an exact rewrite",
+       "values": [
+        16
+       ]
+      },
+      {
+       "label": "records required to pass",
+       "values": [
+        12
+       ]
+      }
+     ],
+     "y_label": "Records (16 tested)",
+     "y_format": "number",
+     "note": "The supplied-plan K=4 gate passed at the record level. This repairs the parent's apparent low-budget interface failure but does not establish fresh induction value.",
+     "source": "analysis/interface_gate.json"
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_capacity_fit_rerun": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Capacity fitting moves worst-case demand below live KV capacity",
+     "categories": [
+      "predecessor max-seqs 64",
+      "capacity-fit max-seqs 19"
+     ],
+     "series": [
+      {
+       "label": "block-rounded worst-case demand",
+       "values": [
+        2433024,
+        963072
+       ]
+      },
+      {
+       "label": "measured live KV capacity",
+       "values": [
+        995328,
+        997888
+       ]
+      }
+     ],
+     "y_label": "KV-cache tokens",
+     "y_format": "number",
+     "note": "The predecessor's 48 logical sequences could demand 2.43M tokens from a 995,328-token cache. The completed fresh K=4 probe used max-seqs 19; with 528-token blocks and a 50,688-token rounded worst sequence, it required 963,072 of 997,888 live tokens, leaving 34,816. The strict capacity-fit run was nevertheless 19.6% slower than the old max-seqs-64 diagnostic, so cache-safe concurrency is not automatically throughput-optimal.",
+     "source": "../qwen35_4b_verified_macro_long_context_rerun/analysis/scientific_smoke_49k_scheduler_overcommit_audit.json; analysis/scientific_smoke_49k_termination_audit.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Capacity fitting did not clear the 49k termination boundary",
+     "categories": [
+      "unresolved boundary contacts",
+      "exact periodic loops",
+      "answer-limit contacts"
+     ],
+     "series": [
+      {
+       "label": "observed share",
+       "values": [
+        0.22916666666666666,
+        0.7708333333333334,
+        0.1875
+       ]
+      },
+      {
+       "label": "registered maximum",
+       "values": [
+        0.05,
+        0.25,
+        0.05
+       ]
+      }
+     ],
+     "y_label": "Share of 48 samples",
+     "y_format": "percent01",
+     "note": "All 48 samples contacted the reasoning boundary. The fresh 49k rung failed all three content-blind thresholds. Its 61k successor was stopped before a receipt after the implicit CUDA-graph list proved not to cover active width 15; it left no reusable rows. No decoded output or score was inspected, so this is not a macro result.",
+     "source": "analysis/scientific_smoke_49k_termination_audit.json"
+    }
+   ]
+  },
+  "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Explicit graph lists cover every registered active width",
+     "categories": [
+      "implicit 49k",
+      "exact 49k",
+      "implicit 61k",
+      "exact 61k"
+     ],
+     "series": [
+      {
+       "label": "active batch width",
+       "values": [
+        19,
+        19,
+        15,
+        15
+       ]
+      },
+      {
+       "label": "largest resolved CUDA graph",
+       "values": [
+        16,
+        19,
+        8,
+        15
+       ]
+      }
+     ],
+     "y_label": "Decode sequences",
+     "y_format": "number",
+     "note": "Pinned vLLM's implicit sparse lists missed active widths 17-19 at 49k and 9-15 at 61k. Explicit lists resolved exactly through widths 19 and 15 in both completed fresh probes. The 61k run also fit 950,400 required KV tokens below 997,888 live tokens.",
+     "source": "../qwen35_4b_verified_macro_capacity_fit_rerun/analysis/scientific_smoke_49k_termination_audit.json; analysis/scientific_smoke_49k_termination_audit.json; analysis/scientific_smoke_61k_termination_audit.json"
+    },
+    {
+     "kind": "bar",
+     "title": "More context increased loops without clearing termination",
+     "categories": [
+      "exact 49k",
+      "exact 61k"
+     ],
+     "series": [
+      {
+       "label": "unresolved boundary contacts",
+       "values": [
+        0.20833333333333334,
+        0.16666666666666666
+       ]
+      },
+      {
+       "label": "exact periodic loops",
+       "values": [
+        0.7916666666666666,
+        0.8333333333333334
+       ]
+      },
+      {
+       "label": "answer-limit contacts",
+       "values": [
+        0.125,
+        0.08333333333333333
+       ]
+      }
+     ],
+     "y_label": "Share of 48 samples",
+     "y_format": "percent01",
+     "note": "At 49k, the fresh K=4 probe recorded 38 loops, 10 unresolved contacts, and 6 answer-limit contacts; at terminal 61k it recorded 40, 8, and 4. Registered maxima for unresolved, loops, and answer-limit shares are 5%, 25%, and 5% respectively, so both rungs failed every threshold. The terminal selector is pass=false with no selected budget; no decoded or scored content was inspected.",
+     "source": "analysis/scientific_smoke_49k_termination_audit.json; analysis/scientific_smoke_61k_termination_audit.json; analysis/smoke_budget_selection.json"
+    }
+   ]
   }
  }
 }
