@@ -1,0 +1,18 @@
+{
+  "current_head": "6f97f0cef248cca861e9416ed38bdc2f53b8b616",
+  "design_commit": "6f97f0cef248cca861e9416ed38bdc2f53b8b616",
+  "design_is_ancestor": true,
+  "expected_sha256": {
+    "design_review": "306768c0a44f3560971351cc2eae9909d645025c65120075b055c84179b05aac",
+    "preregistration": "7a6eae9bea043836ae9ac9cd5e2deaa8871059d1874c5ea811b76184cf5c5d98",
+    "readme": "623a9f0fc0be6fccf95a768895a0f7f234785205a9d0beb36a16ae732b106c2b"
+  },
+  "observed_sha256": {
+    "design_review": "306768c0a44f3560971351cc2eae9909d645025c65120075b055c84179b05aac",
+    "preregistration": "7a6eae9bea043836ae9ac9cd5e2deaa8871059d1874c5ea811b76184cf5c5d98",
+    "readme": "623a9f0fc0be6fccf95a768895a0f7f234785205a9d0beb36a16ae732b106c2b"
+  },
+  "passed": true,
+  "schema_version": 1,
+  "scientific_gpu_work_preceded_by_design_commit": true
+}

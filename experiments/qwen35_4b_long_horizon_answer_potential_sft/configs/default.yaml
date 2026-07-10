@@ -1,8 +1,10 @@
 schema_version: 1
 experiment_id: qwen35_4b_long_horizon_answer_potential_sft
 design_boundary:
-  commit: PENDING_FIRST_DESIGN_COMMIT
-  note: populated in the next pre-GPU receipt commit
+  commit: 6f97f0cef248cca861e9416ed38bdc2f53b8b616
+  readme_sha256: 623a9f0fc0be6fccf95a768895a0f7f234785205a9d0beb36a16ae732b106c2b
+  preregistration_sha256: 7a6eae9bea043836ae9ac9cd5e2deaa8871059d1874c5ea811b76184cf5c5d98
+  design_review_sha256: 306768c0a44f3560971351cc2eae9909d645025c65120075b055c84179b05aac
 model:
   id: Qwen/Qwen3.5-4B
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
