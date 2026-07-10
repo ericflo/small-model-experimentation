@@ -2,10 +2,11 @@
 
 ## Status
 
-Design frozen before any GPU-scale run. The full pre-registration is in
+Design frozen and committed before any GPU-scale run; implementation and the four-trace GPU smoke are
+complete, while G0 calibration has not yet run. The full pre-registration is in
 [`reports/preregistration.md`](reports/preregistration.md), and the adversarial design review is in
 [`reports/design_review.md`](reports/design_review.md). The first repository commit containing this
-directory is the immutable pre-run design boundary.
+directory is the permanent pre-run design boundary.
 
 ## Research Program
 
@@ -109,8 +110,10 @@ into a registered early-close target.
 ## Answer-Potential Score
 
 Render the exact thinking-channel prefix plus the sampled thought, the exact `</think>\n\nANSWER: `
-boundary, and the canonical answer content. Use vLLM prompt log-probabilities to gather only the
-observed answer-token log-probabilities. Exclude the fixed boundary and terminal token.
+boundary, and the canonical answer content. Gather only the observed answer-token conditional
+log-probabilities. The pre-result operational amendment in the preregistration records why the
+implementation uses vLLM's exact targeted next-token readout instead of its pathological
+all-prompt-position API. Exclude the fixed boundary and terminal token.
 
 For each trace store:
 
@@ -256,19 +259,19 @@ amortization curve.
 CPU and tiny GPU smoke:
 
 ```bash
-python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --smoke
+.venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --smoke
 ```
 
 Calibration gate:
 
 ```bash
-python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage calibrate
+.venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage calibrate
 ```
 
 Full gated pipeline:
 
 ```bash
-python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage full
+.venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage full
 ```
 
 The orchestrator must refuse `--stage full` without a committed design-boundary receipt and a

@@ -11,10 +11,12 @@ omitted_artifacts:
   - path: runs/full_raw_token_rows/
     reason: large raw N=128 token pools may be externalized after compact scored rows and checksums are preserved
 reproducibility:
-  smoke_command: python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --smoke
-  full_command: python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage full
+  smoke_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --smoke
+  parity_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/parity_check.py
+  full_command: .venv-vllm/bin/python experiments/qwen35_4b_answer_potential_trace_sft/scripts/run.py --stage full
   required_external_artifacts: []
 notes: >-
-  The design commit precedes GPU-scale work. Compact gates, score tables, selected datasets,
+  The design commit precedes GPU-scale work. The interrupted first smoke and corrected smoke are
+  documented in the preregistration and experiment log. Compact gates, score tables, selected datasets,
   evaluation summaries, and verdicts remain in git. Adapter/merged-checkpoint paths and SHA256
   values are filled after training; no model binary is placed in the repository tree.

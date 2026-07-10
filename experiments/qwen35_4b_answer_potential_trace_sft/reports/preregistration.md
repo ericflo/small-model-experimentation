@@ -173,3 +173,19 @@ oracle pass@k ceiling. Training/curation costs are separate and amortized over d
 
 Anything not meeting a named rule is scoped descriptively. The report must preserve failed arms,
 gates, and amendments.
+
+## Pre-result Operational Amendment — 2026-07-10
+
+The first four-trace GPU smoke (no scientific result observed) found that vLLM 0.24's
+`prompt_logprobs=0` implementation computes and reports the full-vocabulary rank of the observed
+token at every prompt position. On this host that launched a pathological 248k-vocabulary reduction
+compile even though ranks and non-answer prompt positions are unused.
+
+The scorer therefore uses vLLM's exact targeted `logprob_token_ids` next-token readout at each
+teacher-forced answer prefix. For answer tokens `y_t`, it queries the raw model log-probability of
+`y_t` after the exact prefix `r(x,z), y_<t`; the sampled token is not forced or used. These values
+factor to the same registered `sum_t log p(y_t | r(x,z), y_<t)` as prompt log-probabilities. A local,
+scoped sampler hook skips only the unused rank of the independently sampled token; it does not alter
+logits, target probabilities, prompts, sampled thoughts, or answer rollouts. The receipt records the
+targeted request and repeated-prefix forward-token cost. All compared score conditions use this one
+readout, and the planned HF plumbing parity check remains required.

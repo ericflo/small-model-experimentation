@@ -759,6 +759,41 @@
   },
   {
     "file_counts": {
+      ".json": 4,
+      ".jsonl": 8,
+      ".md": 7,
+      ".py": 28,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_answer_potential_trace_sft",
+    "path": "experiments/qwen35_4b_answer_potential_trace_sft",
+    "primary_readme": "experiments/qwen35_4b_answer_potential_trace_sft/README.md",
+    "primary_report": "experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "Design frozen and committed before any GPU-scale run; implementation and the four-trace GPU smoke are complete, while G0 calibration has not yet run. The full pre-registration is in [`reports/preregistration.md`](reports/preregistration.md), and the adversarial design review is in [`reports/design_review.md`](reports/design_review.md). The first repository commit containing this directory is the permanent pre-run design boundary.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Answer-Potential Trace SFT",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 50,
+    "total_size_bytes": 2095319
+  },
+  {
+    "file_counts": {
       ".json": 18,
       ".jsonl": 12,
       ".log": 21,

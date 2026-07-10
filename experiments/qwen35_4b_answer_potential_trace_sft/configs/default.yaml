@@ -1,5 +1,9 @@
 schema_version: 1
 experiment_id: qwen35_4b_answer_potential_trace_sft
+design_boundary:
+  commit: 3441dd230e530a832957457acc7371df3fc5672b
+  preregistration_sha256: 183cd4ac78ac5cf2b6474d3235566815352e4a806928fd9e96f771d89bc436a1
+  readme_sha256: fbdc02d851d75b3e4b1f3399280654d76a03615aad197def28084a35a9cb4874
 model:
   id: Qwen/Qwen3.5-4B
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
@@ -9,6 +13,7 @@ engine:
   gpu_memory_utilization: 0.85
   max_num_seqs: 64
   max_num_batched_tokens: 16384
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32, 64]
   async_scheduling: false
   prefix_caching: false
 
@@ -30,6 +35,8 @@ sampling:
   calibration_rollouts_per_trace: 8
   run_seed: 61117
   continuation_seed: 61171
+  control_seed: 61231
+  format_variant_boundary: "</think>\nANSWER: "
 
 scorer_gate:
   within_task_auroc_min: 0.65

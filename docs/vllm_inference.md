@@ -184,6 +184,22 @@ subsequently failed the on-vs-off gate with a real adapter.
 
 ## Defaults and tuning
 
+### Targeted likelihood readout footgun
+
+In vLLM 0.24, `prompt_logprobs=0` is not a cheap "observed token only" operation. It computes logits
+for every requested prompt position and calls `batched_count_greater_than` over the full padded
+vocabulary to report each observed token's rank. On Qwen3.5-4B (248k padded vocabulary), the first
+use can trigger a long reduction-kernel compile even when the consumer discards every rank and all
+but a short suffix.
+
+For a short teacher-forced suffix, use exact targeted next-token readouts instead: inject each prior
+target token into the next prompt prefix and request the next target with `logprob_token_ids`. Count
+every repeated prefill. This still computes the raw conditional log-probability; do not constrain or
+force the sampled token, because grammar/allowed-token masking can change the normalized
+distribution. If rank is scientifically irrelevant, a pinned experiment-local hook may skip only
+the sampled-token rank reduction, but must preserve raw target log-probabilities, carry its own parity
+test, and record the hook in the run receipt.
+
 The template starts with conservative research defaults:
 
 - bf16, tensor parallel 1, text-only `language_model_only=True`;

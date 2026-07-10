@@ -1,0 +1,70 @@
+{
+  "hf_backend": "transformers_bf16_sdpa",
+  "max_abs_mean_token_delta": 0.05981588363647461,
+  "model": "Qwen/Qwen3.5-4B",
+  "n": 4,
+  "passed": true,
+  "purpose": "plumbing_only_no_scientific_rows",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "rows": [
+    {
+      "abs_mean_token_delta": 0.04607200622558594,
+      "answer_token_ids": [
+        20
+      ],
+      "hf_ll_sum": -3.084606170654297,
+      "hf_token_logprobs": [
+        -3.084606170654297
+      ],
+      "sum_delta_hf_minus_vllm": -0.04607200622558594,
+      "trace_id": "caravan-L1-s61001-0000::t000",
+      "vllm_ll_sum": -3.038534164428711,
+      "vllm_token_logprobs": null
+    },
+    {
+      "abs_mean_token_delta": 0.05981588363647461,
+      "answer_token_ids": [
+        20
+      ],
+      "hf_ll_sum": -3.0951781272888184,
+      "hf_token_logprobs": [
+        -3.0951781272888184
+      ],
+      "sum_delta_hf_minus_vllm": -0.05981588363647461,
+      "trace_id": "caravan-L1-s61001-0000::t001",
+      "vllm_ll_sum": -3.0353622436523438,
+      "vllm_token_logprobs": null
+    },
+    {
+      "abs_mean_token_delta": 4.4226646423339844e-05,
+      "answer_token_ids": [
+        17
+      ],
+      "hf_ll_sum": -1.5114907026290894,
+      "hf_token_logprobs": [
+        -1.5114907026290894
+      ],
+      "sum_delta_hf_minus_vllm": -4.4226646423339844e-05,
+      "trace_id": "caravan-L1-s61001-0001::t000",
+      "vllm_ll_sum": -1.511446475982666,
+      "vllm_token_logprobs": null
+    },
+    {
+      "abs_mean_token_delta": 1.1444091796875e-05,
+      "answer_token_ids": [
+        17
+      ],
+      "hf_ll_sum": -1.55356764793396,
+      "hf_token_logprobs": [
+        -1.55356764793396
+      ],
+      "sum_delta_hf_minus_vllm": -1.1444091796875e-05,
+      "trace_id": "caravan-L1-s61001-0001::t001",
+      "vllm_ll_sum": -1.553556203842163,
+      "vllm_token_logprobs": null
+    }
+  ],
+  "schema_version": 1,
+  "threshold": 0.15,
+  "vllm_backend": "vllm_bf16_targeted_logprob_token_ids"
+}
