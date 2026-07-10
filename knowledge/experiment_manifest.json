@@ -2840,6 +2840,37 @@
   },
   {
     "file_counts": {
+      ".md": 7,
+      ".py": 3,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_long_horizon_answer_potential_sft",
+    "path": "experiments/qwen35_4b_long_horizon_answer_potential_sft",
+    "primary_readme": "experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md",
+    "primary_report": "experiments/qwen35_4b_long_horizon_answer_potential_sft/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "Design frozen before scientific GPU work. This follow-up is intentionally not a larger replay of C51: it removes the operative 512-token cutoff, requires naturally closed thoughts, scales the pool to about 95,000 candidate traces, banks complete traces before any compression, and runs the SFT comparison even if calibration shows only modest predictive signal.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Long-Horizon Answer-Potential SFT",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 13,
+    "total_size_bytes": 113387
+  },
+  {
+    "file_counts": {
       ".json": 26,
       ".jsonl": 9,
       ".log": 13,

@@ -546,6 +546,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_learn_from_failures` (new): [README](../experiments/qwen35_4b_learn_from_failures/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_meta_induction` (new): [README](../experiments/qwen35_4b_meta_induction/README.md)
 - `qwen35_4b_metacognitive_boundary` (new): [README](../experiments/qwen35_4b_metacognitive_boundary/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)

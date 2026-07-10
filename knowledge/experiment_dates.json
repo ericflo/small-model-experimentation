@@ -681,6 +681,14 @@
    ],
    "caveat": "date equals import day; verified it is a tier-1 dated log heading plus matching seed, not a sweep artifact"
   },
+  "qwen35_4b_long_horizon_answer_potential_sft": {
+   "start": "2026-07-10",
+   "end": "2026-07-10",
+   "confidence": "high",
+   "sources": [
+    "dated design record and post-import git history"
+   ]
+  },
   "qwen35_4b_meta_induction": {
    "start": "2026-07-07",
    "end": "2026-07-07",

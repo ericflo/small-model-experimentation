@@ -1,0 +1,29 @@
+schema_version: 1
+experiment_id: "qwen35_4b_long_horizon_answer_potential_sft"
+external_root: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft
+external_artifacts:
+  - name: raw generation, score, rollout, and branch shards
+    storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/pools
+    required_for: exact selector reconstruction and alternate diagnostics
+    checksum: populated per shard in runs/artifact_index.json
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage harvest
+  - name: QLoRA adapters
+    storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/adapters
+    required_for: trained-arm reproduction
+    checksum: populated after training
+    regenerate: experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/train_all.sh
+  - name: merged composite checkpoints
+    storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/merged
+    required_for: vLLM trained-arm evaluation
+    checksum: populated after merge
+    regenerate: experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/merge_all.sh
+omitted_artifacts:
+  - path: raw token-level candidate shards
+    reason: planned pool is hundreds of MB to GB; compact checksummed selection datasets remain in git
+reproducibility:
+  smoke_command: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage smoke
+  full_command: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage full
+  required_external_artifacts: []
+notes: >-
+  Design is committed before scientific GPU work. Raw shards are atomic and restartable. No adapter or
+  merged model is placed in the repository tree.

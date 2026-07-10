@@ -44198,6 +44198,36 @@
     }
    ]
   },
+  "qwen35_4b_long_horizon_answer_potential_sft": {
+   "charts": [
+    {
+     "title": "Preregistered candidate scale: censored pilot versus long-horizon follow-up",
+     "kind": "bar",
+     "categories": [
+      "C51 scorer run",
+      "new calibration",
+      "new full pool"
+     ],
+     "series": [
+      {
+       "label": "candidate thoughts",
+       "values": [
+        2048,
+        8640,
+        95040
+       ]
+      }
+     ],
+     "x_label": "Experiment stage",
+     "y_label": "Candidate thoughts (log scale)",
+     "y_format": "integer",
+     "y_scale": "log",
+     "note": "Pre-run design chart: the new pool uses natural close with a 12,288-token allowance and does not stop before SFT for a modest calibration effect.",
+     "source": "experiments/qwen35_4b_long_horizon_answer_potential_sft/configs/default.yaml and README.md",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_meta_induction": {
    "charts": [
     {

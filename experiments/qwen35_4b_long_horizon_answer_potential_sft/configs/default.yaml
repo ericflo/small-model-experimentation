@@ -1,0 +1,104 @@
+schema_version: 1
+experiment_id: qwen35_4b_long_horizon_answer_potential_sft
+design_boundary:
+  commit: PENDING_FIRST_DESIGN_COMMIT
+  note: populated in the next pre-GPU receipt commit
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.90
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32]
+  async_scheduling: false
+  prefix_caching: false
+
+splits:
+  families: [burrowmaze, caravan, ferrier, foundry_ledger, gatepost, glyphgate, kilnrite, loomfix, runeward]
+  termination_pilot: {seed: 71001, per_family_level: 1, levels: [1, 2, 3]}
+  calibration: {seed: 72001, per_family_level: 5, levels: [1, 2, 3]}
+  train: {seed: 73001, per_family_level: 40, levels: [1, 2, 3]}
+  iid_eval: {seed: 74001, per_family_level: 20, levels: [1, 2, 3]}
+  hard_eval: {seed: 75001, per_family_level: 20, levels: [4]}
+  held_family_eval: {seed: 76001, per_family_level: 30, levels: [1, 2, 3], families: [brinework, spindle]}
+  rendering_eval: {seed: 77001, per_family_level: 20, levels: [1, 2, 3, 4], families: [stallwright]}
+
+sampling:
+  pilot_n: 4
+  calibration_n: 64
+  train_independent_n: 64
+  train_branch_n: 16
+  temperature: 1.0
+  top_p: 0.95
+  top_k: 20
+  natural_close_allowance: 12288
+  nonloop_continuation_tokens: 2048
+  answer_max_tokens: 96
+  calibration_rollouts_per_trace: 4
+  train_rollouts_per_trace: 1
+  run_seed: 71117
+  branch_seed: 71141
+  continuation_seed: 71171
+  control_seed: 71231
+  logprobs: 0
+
+scoring:
+  backend: transformers_bf16_sdpa
+  vllm_parity_rows: 32
+  max_abs_mean_token_delta: 0.15
+  batch_size: 1
+  answer_only_primary: true
+  joint_close_answer_secondary: true
+  bootstrap_resamples: 10000
+  bootstrap_seed: 71991
+
+branch:
+  roots_per_task: 1
+  suffixes_per_root: 16
+  max_checkpoints: 8
+  minimum_positive_jump_per_answer_token: 0.05
+  fallback_fraction: 0.50
+
+selector:
+  top_candidates: 12
+  max_per_task: 2
+  near_best_nats_per_answer_token: 0.25
+  trigram_duplicate_jaccard: 0.90
+  minimum_natural_per_task: 2
+  max_train_length: 16000
+
+sft:
+  arms: [empty, random_natural, success_rft, answer_potential, joint_potential, potential_shuffle]
+  epochs: 2.0
+  learning_rate: 2.0e-4
+  rank: 32
+  alpha: 64
+  dropout: 0.05
+  batch_size: 1
+  gradient_accumulation: 16
+  max_length: 16000
+  weight_prompt: 0.0
+  weight_think: 0.5
+  weight_close_answer: 1.0
+  screen_seed: 42
+  replication_seed: 43
+  replication_delta_min: 0.03
+
+evaluation:
+  natural_max_tokens: 12288
+  sampled_k: 8
+  sampling_temperature: 0.6
+  sampling_top_p: 0.95
+  sampling_top_k: 20
+  seeds: [74917, 74971]
+  bootstrap_resamples: 10000
+  bootstrap_seed: 74991
+  positive_delta: 0.03
+  noninferiority_delta: -0.02
+
+artifacts:
+  external_root: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft
+  raw_shard_max_rows: 256

@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 210
+- Experiments: 211
 
 ## Structured Execution And Compilers
 
@@ -180,7 +180,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 74
+- Assigned experiments: 75
 
 ### Seed Evidence
 
@@ -217,6 +217,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
 - `qwen35_4b_independent_retrieval_consensus` (track-z): [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
+- `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
 - `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
 - `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
@@ -375,7 +376,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 61
+- Assigned experiments: 62
 
 ### Seed Evidence
 
@@ -406,6 +407,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_learn_from_failures` (new): [README](../experiments/qwen35_4b_learn_from_failures/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_meta_induction` (new): [README](../experiments/qwen35_4b_meta_induction/README.md)
 - `qwen35_4b_neurosymbolic_repl_substrate` (new): [README](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md)
 - `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
@@ -779,11 +781,12 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 11
+- Assigned experiments: 12
 
 ### Assigned Experiments
 
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
+- `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_overthinking_content_ladder` (new): [README](../experiments/qwen35_4b_overthinking_content_ladder/README.md)
 - `qwen35_4b_think_ftpo_round1` (new): [README](../experiments/qwen35_4b_think_ftpo_round1/README.md)
 - `qwen35_4b_think_ftpo_round2` (new): [README](../experiments/qwen35_4b_think_ftpo_round2/README.md)

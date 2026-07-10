@@ -3588,6 +3588,44 @@
     }
    ]
   },
+  "qwen35_4b_long_horizon_answer_potential_sft": {
+   "verdict_tag": "A much larger natural-reasoning test is frozen and ready",
+   "concept_primer": "Instead of rewarding only answers that happened to come out right once, score each complete reasoning trace by how strongly it makes the known correct answer follow. Then teach the model from the strongest and most structurally different traces.",
+   "plain_question": "If the model gets enough room to finish its reasoning, can answer likelihood find full strategies worth teaching back to it better than ordinary success filtering?",
+   "plain_answer": "Not yet: this is the preregistered launch state. The new test removes the earlier 512-token cutoff, plans roughly 95,000 naturally closing candidates, preserves full strategies before compression, and will run all six training arms even if the preliminary ranking signal is only modest.",
+   "why_it_matters": "The prior experiment saw genuine ranking signal but almost never let a thought finish. This design tests the actual learning claim instead of treating a censored scorer check as the final answer.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Natural-thinking allowance",
+     "value": "12,288 vs 512 tokens",
+     "sub": "with continuation for rare non-loop contacts"
+    },
+    {
+     "label": "Planned candidate thoughts",
+     "value": "95,040",
+     "sub": "independent and pivot-branched traces across fresh tasks"
+    },
+    {
+     "label": "Controlled training arms",
+     "value": "6",
+     "sub": "answer-only, random, success-filtered, two potential scores, and shuffled"
+    },
+    {
+     "label": "Pre-training effectiveness stops",
+     "value": "0",
+     "sub": "the full seed-42 SFT matrix is the claim test"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The follow-up is dozens of times larger than the censored pilot",
+     "chart_read": "The bars compare the earlier 2,048-trace scorer run with the new calibration and full planned pool. Height is candidate thoughts, shown on a logarithmic scale because the increase is large.",
+     "chart_takeaway": "The new design moves from a small forced-close diagnostic to a roughly 95,000-trace natural-close training test."
+    }
+   ]
+  },
   "qwen35_4b_meta_induction": {
    "verdict_tag": "General rule-finding IS teachable -- as reasoning",
    "concept_primer": "The model's core weakness (established across this project) is INDUCTION: figuring out a hidden rule from a few examples. This asks the biggest question -- can you TRAIN that missing skill into the fixed model so it works on rules it never saw?",
